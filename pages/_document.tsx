@@ -30,7 +30,21 @@ class MyDocument extends Document {
     render() {
         return (
             <Html>
-                <Head />
+                <Head>
+                    <link rel="preconnect" href="https://fonts.googleapis.com" />
+                    <link rel="preconnect" href="https://fonts.gstatic.com" />
+                    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@200&display=swap" rel="stylesheet" />
+                    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@800&display=swap" rel="stylesheet" />
+                    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400&display=swap" rel="stylesheet" />
+                    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@650&display=swap" rel="stylesheet" />
+                    {/* <link rel="icon" href="/favicon.ico" /> */}
+                    <meta
+                        name="description"
+                        content="Idleon Efficiency Website"
+                    />
+                    <meta name="og:title" content="Idleon Efficiency" />
+                    <meta name="twitter:card" content="summary_large_image" />
+                </Head>
                 <body>
                     <Main />
                     <NextScript />

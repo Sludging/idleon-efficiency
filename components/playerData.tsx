@@ -36,7 +36,7 @@ export default function PlayerData() {
                                     <Text>Current Monster / Map = {player.currentMonster} / {player.currentMap}</Text>
                                     {
                                         player.starSigns.map((sign, index) => {
-                                            return <Text>Sign {index} = {sign}</Text>
+                                            return <Text key={`sign-${index}`}>Sign {index} = {sign}</Text>
                                         })
                                     }
                                     <Text>STR = {player.stats.strength}</Text>
