@@ -21,17 +21,16 @@ export default function Layout({
 }: {
     children: React.ReactNode
 }) {
-    const user = useContext(AuthContext);
+    const authData = useContext(AuthContext);
+    const user = authData?.user;
     const idleonData = useContext(AppContext);
     return (
         <Container>
             <Header background="light-4" pad="medium" height="xsmall">
                 <Box justify="between" direction="row" gap="medium" width="100%">
                     <Text>Last Updated: {idleonData.getLastUpdated()}</Text>
-                    {user && user.isAnonymous ?
-                        <Button>Login</Button>
-                        : <Text>Logged in as: {user?.displayName}</Text>
-                    }
+                    {user && <Text>Logged in as: {user?.displayName}</Text>}
+                    {!user && <Button onClick={authData?.loginFunction}>Login</Button>}
                 </Box>
             </Header>
             <main>{children}</main>

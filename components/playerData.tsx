@@ -60,7 +60,7 @@ export default function PlayerData() {
                                         {
                                             [...Array(8)].map((_, toolsIndex) => {
                                                 if (player.gear.tools[toolsIndex].display_name == "Blank") {
-                                                    return (<Box width="50px" height="50px" />);
+                                                    return (<Box key={`player_${index}_equip_${toolsIndex}`} width="50px" height="50px" />);
                                                 }
                                                 return (<Box key={`player_${index}_equip_${toolsIndex}`} title={player.gear.tools[toolsIndex].display_name || ""} className={`icons icons-${player.gear.tools[toolsIndex].raw_name}_x1`} />)
                                             })
@@ -70,7 +70,7 @@ export default function PlayerData() {
                                         {
                                             [...Array(8)].map((_, foodIndex) => {
                                                 if (player.gear.food[foodIndex].display_name == "Blank") {
-                                                    return (<Box width="50px" height="50px" />);
+                                                    return (<Box key={`player_${index}_equip_${foodIndex}`} width="50px" height="50px" />);
                                                 }
                                                 return (<Box key={`player_${index}_equip_${foodIndex}`} title={player.gear.food[foodIndex].display_name || ""} className={`icons icons-${player.gear.food[foodIndex].raw_name}_x1`} />)
                                             })
