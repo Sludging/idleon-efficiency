@@ -1,0 +1,26 @@
+.container {
+    max-width: 1200px;
+    padding: 0 20px;
+    margin: 0 auto;
+  }
+  
+  .header {
+    display: flex;
+    padding: 40px 0;
+  }
+  
+  .backToHome {
+    margin-bottom: 2rem;
+    text-align:center;
+  }
+
+  .logo a {
+    border-bottom: 0;
+    color: #222f3e;
+    font-weight: 700;
+    font-size: calc(1rem + 0.15vw);
+  }
+
+  .logo a:hover {
+    text-decoration: none;
+  }

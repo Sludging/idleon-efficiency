@@ -1,0 +1,779 @@
+.cards {
+    background-image: url(spritesheet.png);
+    background-repeat: no-repeat;
+    display: block;
+}
+
+.cards-CardSet0 {
+    width: 28px;
+    height: 36px;
+    background-position: -1px -1px;
+}
+
+.cards-CardSet1 {
+    width: 28px;
+    height: 36px;
+    background-position: -31px -1px;
+}
+
+.cards-CardSet2 {
+    width: 28px;
+    height: 36px;
+    background-position: -61px -1px;
+}
+
+.cards-CardSet25 {
+    width: 28px;
+    height: 36px;
+    background-position: -91px -1px;
+}
+
+.cards-CardSet26 {
+    width: 28px;
+    height: 36px;
+    background-position: -121px -1px;
+}
+
+.cards-CardSet3 {
+    width: 28px;
+    height: 36px;
+    background-position: -151px -1px;
+}
+
+.cards-CardSet4 {
+    width: 28px;
+    height: 36px;
+    background-position: -181px -1px;
+}
+
+.cards-CardSet5 {
+    width: 28px;
+    height: 36px;
+    background-position: -211px -1px;
+}
+
+.cards-CardsA0 {
+    width: 28px;
+    height: 36px;
+    background-position: -241px -1px;
+}
+
+.cards-CardsA1 {
+    width: 28px;
+    height: 36px;
+    background-position: -271px -1px;
+}
+
+.cards-CardsA10 {
+    width: 28px;
+    height: 36px;
+    background-position: -301px -1px;
+}
+
+.cards-CardsA11 {
+    width: 28px;
+    height: 36px;
+    background-position: -331px -1px;
+}
+
+.cards-CardsA12 {
+    width: 28px;
+    height: 36px;
+    background-position: -1px -39px;
+}
+
+.cards-CardsA13 {
+    width: 28px;
+    height: 36px;
+    background-position: -31px -39px;
+}
+
+.cards-CardsA14 {
+    width: 28px;
+    height: 36px;
+    background-position: -61px -39px;
+}
+
+.cards-CardsA15 {
+    width: 28px;
+    height: 36px;
+    background-position: -91px -39px;
+}
+
+.cards-CardsA16 {
+    width: 28px;
+    height: 36px;
+    background-position: -121px -39px;
+}
+
+.cards-CardsA2 {
+    width: 28px;
+    height: 36px;
+    background-position: -151px -39px;
+}
+
+.cards-CardsA3 {
+    width: 28px;
+    height: 36px;
+    background-position: -181px -39px;
+}
+
+.cards-CardsA4 {
+    width: 28px;
+    height: 36px;
+    background-position: -211px -39px;
+}
+
+.cards-CardsA5 {
+    width: 28px;
+    height: 36px;
+    background-position: -241px -39px;
+}
+
+.cards-CardsA6 {
+    width: 28px;
+    height: 36px;
+    background-position: -271px -39px;
+}
+
+.cards-CardsA7 {
+    width: 28px;
+    height: 36px;
+    background-position: -301px -39px;
+}
+
+.cards-CardsA8 {
+    width: 28px;
+    height: 36px;
+    background-position: -331px -39px;
+}
+
+.cards-CardsA9 {
+    width: 28px;
+    height: 36px;
+    background-position: -1px -77px;
+}
+
+.cards-CardsB1 {
+    width: 28px;
+    height: 36px;
+    background-position: -31px -77px;
+}
+
+.cards-CardsB10 {
+    width: 28px;
+    height: 36px;
+    background-position: -61px -77px;
+}
+
+.cards-CardsB11 {
+    width: 28px;
+    height: 36px;
+    background-position: -91px -77px;
+}
+
+.cards-CardsB12 {
+    width: 28px;
+    height: 36px;
+    background-position: -121px -77px;
+}
+
+.cards-CardsB13 {
+    width: 28px;
+    height: 36px;
+    background-position: -151px -77px;
+}
+
+.cards-CardsB14 {
+    width: 28px;
+    height: 36px;
+    background-position: -181px -77px;
+}
+
+.cards-CardsB2 {
+    width: 28px;
+    height: 36px;
+    background-position: -211px -77px;
+}
+
+.cards-CardsB3 {
+    width: 28px;
+    height: 36px;
+    background-position: -241px -77px;
+}
+
+.cards-CardsB4 {
+    width: 28px;
+    height: 36px;
+    background-position: -271px -77px;
+}
+
+.cards-CardsB5 {
+    width: 28px;
+    height: 36px;
+    background-position: -301px -77px;
+}
+
+.cards-CardsB6 {
+    width: 28px;
+    height: 36px;
+    background-position: -331px -77px;
+}
+
+.cards-CardsB7 {
+    width: 28px;
+    height: 36px;
+    background-position: -1px -115px;
+}
+
+.cards-CardsB8 {
+    width: 28px;
+    height: 36px;
+    background-position: -31px -115px;
+}
+
+.cards-CardsB9 {
+    width: 28px;
+    height: 36px;
+    background-position: -61px -115px;
+}
+
+.cards-CardsBlank {
+    width: 28px;
+    height: 36px;
+    background-position: -91px -115px;
+}
+
+.cards-CardsC1 {
+    width: 28px;
+    height: 36px;
+    background-position: -121px -115px;
+}
+
+.cards-CardsC10 {
+    width: 28px;
+    height: 36px;
+    background-position: -151px -115px;
+}
+
+.cards-CardsC11 {
+    width: 28px;
+    height: 36px;
+    background-position: -181px -115px;
+}
+
+.cards-CardsC12 {
+    width: 28px;
+    height: 36px;
+    background-position: -211px -115px;
+}
+
+.cards-CardsC13 {
+    width: 28px;
+    height: 36px;
+    background-position: -241px -115px;
+}
+
+.cards-CardsC14 {
+    width: 28px;
+    height: 36px;
+    background-position: -271px -115px;
+}
+
+.cards-CardsC15 {
+    width: 28px;
+    height: 36px;
+    background-position: -301px -115px;
+}
+
+.cards-CardsC16 {
+    width: 28px;
+    height: 36px;
+    background-position: -331px -115px;
+}
+
+.cards-CardsC2 {
+    width: 28px;
+    height: 36px;
+    background-position: -1px -153px;
+}
+
+.cards-CardsC3 {
+    width: 28px;
+    height: 36px;
+    background-position: -31px -153px;
+}
+
+.cards-CardsC4 {
+    width: 28px;
+    height: 36px;
+    background-position: -61px -153px;
+}
+
+.cards-CardsC5 {
+    width: 28px;
+    height: 36px;
+    background-position: -91px -153px;
+}
+
+.cards-CardsC6 {
+    width: 28px;
+    height: 36px;
+    background-position: -121px -153px;
+}
+
+.cards-CardsC7 {
+    width: 28px;
+    height: 36px;
+    background-position: -151px -153px;
+}
+
+.cards-CardsC8 {
+    width: 28px;
+    height: 36px;
+    background-position: -181px -153px;
+}
+
+.cards-CardsC9 {
+    width: 28px;
+    height: 36px;
+    background-position: -211px -153px;
+}
+
+.cards-CardsD1 {
+    width: 28px;
+    height: 36px;
+    background-position: -241px -153px;
+}
+
+.cards-CardsD10 {
+    width: 28px;
+    height: 36px;
+    background-position: -271px -153px;
+}
+
+.cards-CardsD11 {
+    width: 28px;
+    height: 36px;
+    background-position: -301px -153px;
+}
+
+.cards-CardsD12 {
+    width: 28px;
+    height: 36px;
+    background-position: -331px -153px;
+}
+
+.cards-CardsD13 {
+    width: 28px;
+    height: 36px;
+    background-position: -1px -191px;
+}
+
+.cards-CardsD14 {
+    width: 28px;
+    height: 36px;
+    background-position: -31px -191px;
+}
+
+.cards-CardsD15 {
+    width: 28px;
+    height: 36px;
+    background-position: -61px -191px;
+}
+
+.cards-CardsD16 {
+    width: 28px;
+    height: 36px;
+    background-position: -91px -191px;
+}
+
+.cards-CardsD17 {
+    width: 28px;
+    height: 36px;
+    background-position: -121px -191px;
+}
+
+.cards-CardsD18 {
+    width: 28px;
+    height: 36px;
+    background-position: -151px -191px;
+}
+
+.cards-CardsD19 {
+    width: 28px;
+    height: 36px;
+    background-position: -181px -191px;
+}
+
+.cards-CardsD2 {
+    width: 28px;
+    height: 36px;
+    background-position: -211px -191px;
+}
+
+.cards-CardsD20 {
+    width: 28px;
+    height: 36px;
+    background-position: -241px -191px;
+}
+
+.cards-CardsD21 {
+    width: 28px;
+    height: 36px;
+    background-position: -271px -191px;
+}
+
+.cards-CardsD3 {
+    width: 28px;
+    height: 36px;
+    background-position: -301px -191px;
+}
+
+.cards-CardsD4 {
+    width: 28px;
+    height: 36px;
+    background-position: -331px -191px;
+}
+
+.cards-CardsD5 {
+    width: 28px;
+    height: 36px;
+    background-position: -1px -229px;
+}
+
+.cards-CardsD6 {
+    width: 28px;
+    height: 36px;
+    background-position: -31px -229px;
+}
+
+.cards-CardsD7 {
+    width: 28px;
+    height: 36px;
+    background-position: -61px -229px;
+}
+
+.cards-CardsD8 {
+    width: 28px;
+    height: 36px;
+    background-position: -91px -229px;
+}
+
+.cards-CardsD9 {
+    width: 28px;
+    height: 36px;
+    background-position: -121px -229px;
+}
+
+.cards-CardsE0 {
+    width: 28px;
+    height: 36px;
+    background-position: -151px -229px;
+}
+
+.cards-CardsE1 {
+    width: 28px;
+    height: 36px;
+    background-position: -181px -229px;
+}
+
+.cards-CardsE10 {
+    width: 28px;
+    height: 36px;
+    background-position: -211px -229px;
+}
+
+.cards-CardsE11 {
+    width: 28px;
+    height: 36px;
+    background-position: -241px -229px;
+}
+
+.cards-CardsE12 {
+    width: 28px;
+    height: 36px;
+    background-position: -271px -229px;
+}
+
+.cards-CardsE13 {
+    width: 28px;
+    height: 36px;
+    background-position: -301px -229px;
+}
+
+.cards-CardsE14 {
+    width: 28px;
+    height: 36px;
+    background-position: -331px -229px;
+}
+
+.cards-CardsE15 {
+    width: 28px;
+    height: 36px;
+    background-position: -1px -267px;
+}
+
+.cards-CardsE2 {
+    width: 28px;
+    height: 36px;
+    background-position: -31px -267px;
+}
+
+.cards-CardsE3 {
+    width: 28px;
+    height: 36px;
+    background-position: -61px -267px;
+}
+
+.cards-CardsE4 {
+    width: 28px;
+    height: 36px;
+    background-position: -91px -267px;
+}
+
+.cards-CardsE5 {
+    width: 28px;
+    height: 36px;
+    background-position: -121px -267px;
+}
+
+.cards-CardsE6 {
+    width: 28px;
+    height: 36px;
+    background-position: -151px -267px;
+}
+
+.cards-CardsE7 {
+    width: 28px;
+    height: 36px;
+    background-position: -181px -267px;
+}
+
+.cards-CardsE8 {
+    width: 28px;
+    height: 36px;
+    background-position: -211px -267px;
+}
+
+.cards-CardsE9 {
+    width: 28px;
+    height: 36px;
+    background-position: -241px -267px;
+}
+
+.cards-CardsF1 {
+    width: 28px;
+    height: 36px;
+    background-position: -271px -267px;
+}
+
+.cards-CardsF10 {
+    width: 28px;
+    height: 36px;
+    background-position: -301px -267px;
+}
+
+.cards-CardsF11 {
+    width: 28px;
+    height: 36px;
+    background-position: -331px -267px;
+}
+
+.cards-CardsF2 {
+    width: 28px;
+    height: 36px;
+    background-position: -1px -305px;
+}
+
+.cards-CardsF3 {
+    width: 28px;
+    height: 36px;
+    background-position: -31px -305px;
+}
+
+.cards-CardsF4 {
+    width: 28px;
+    height: 36px;
+    background-position: -61px -305px;
+}
+
+.cards-CardsF5 {
+    width: 28px;
+    height: 36px;
+    background-position: -91px -305px;
+}
+
+.cards-CardsF6 {
+    width: 28px;
+    height: 36px;
+    background-position: -121px -305px;
+}
+
+.cards-CardsF7 {
+    width: 28px;
+    height: 36px;
+    background-position: -151px -305px;
+}
+
+.cards-CardsF8 {
+    width: 28px;
+    height: 36px;
+    background-position: -181px -305px;
+}
+
+.cards-CardsF9 {
+    width: 28px;
+    height: 36px;
+    background-position: -211px -305px;
+}
+
+.cards-CardsY0 {
+    width: 28px;
+    height: 36px;
+    background-position: -241px -305px;
+}
+
+.cards-CardsY1 {
+    width: 28px;
+    height: 36px;
+    background-position: -271px -305px;
+}
+
+.cards-CardsY10 {
+    width: 28px;
+    height: 36px;
+    background-position: -301px -305px;
+}
+
+.cards-CardsY11 {
+    width: 28px;
+    height: 36px;
+    background-position: -331px -305px;
+}
+
+.cards-CardsY12 {
+    width: 28px;
+    height: 36px;
+    background-position: -1px -343px;
+}
+
+.cards-CardsY13 {
+    width: 28px;
+    height: 36px;
+    background-position: -31px -343px;
+}
+
+.cards-CardsY2 {
+    width: 28px;
+    height: 36px;
+    background-position: -61px -343px;
+}
+
+.cards-CardsY3 {
+    width: 28px;
+    height: 36px;
+    background-position: -91px -343px;
+}
+
+.cards-CardsY4 {
+    width: 28px;
+    height: 36px;
+    background-position: -121px -343px;
+}
+
+.cards-CardsY5 {
+    width: 28px;
+    height: 36px;
+    background-position: -151px -343px;
+}
+
+.cards-CardsY6 {
+    width: 28px;
+    height: 36px;
+    background-position: -181px -343px;
+}
+
+.cards-CardsY7 {
+    width: 28px;
+    height: 36px;
+    background-position: -211px -343px;
+}
+
+.cards-CardsY8 {
+    width: 28px;
+    height: 36px;
+    background-position: -241px -343px;
+}
+
+.cards-CardsY9 {
+    width: 28px;
+    height: 36px;
+    background-position: -271px -343px;
+}
+
+.cards-CardsZ0 {
+    width: 28px;
+    height: 36px;
+    background-position: -301px -343px;
+}
+
+.cards-CardsZ1 {
+    width: 28px;
+    height: 36px;
+    background-position: -331px -343px;
+}
+
+.cards-CardsZ2 {
+    width: 28px;
+    height: 36px;
+    background-position: -361px -1px;
+}
+
+.cards-CardsZ3 {
+    width: 28px;
+    height: 36px;
+    background-position: -361px -39px;
+}
+
+.cards-CardsZ4 {
+    width: 28px;
+    height: 36px;
+    background-position: -361px -77px;
+}
+
+.cards-CardsZ5 {
+    width: 28px;
+    height: 36px;
+    background-position: -361px -115px;
+}
+
+.cards-CardsZ6 {
+    width: 28px;
+    height: 36px;
+    background-position: -361px -153px;
+}
+
+.cards-CardsZ7 {
+    width: 28px;
+    height: 36px;
+    background-position: -361px -191px;
+}
+
+.cards-CardsZ8 {
+    width: 28px;
+    height: 36px;
+    background-position: -361px -229px;
+}
+
+.cards-CardsZ9 {
+    width: 28px;
+    height: 36px;
+    background-position: -361px -267px;
+}
+
+.cards-CardsZZ {
+    width: 28px;
+    height: 36px;
+    background-position: -361px -305px;
+}

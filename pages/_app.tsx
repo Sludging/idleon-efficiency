@@ -1,7 +1,29 @@
-import '../styles/globals.css'
 import type { AppProps } from 'next/app'
+import { dark, Grommet } from 'grommet';
+import { deepMerge } from 'grommet/utils';
+import { AuthProvider } from '../data/firebase/authContext';
+import { AppProvider } from '../data/appContext';
+import '../public/icons/assets/sheets/36x36-icons.css';
+
+const customTheme = deepMerge(dark, {
+  tab: {
+    active: {
+      background: 'dark-1',
+      color: 'accent-1',
+    },
+    color: 'grey'
+  }
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <Grommet theme={customTheme} full>
+      <AuthProvider>
+        <AppProvider>
+          <Component {...pageProps} />
+        </AppProvider>
+      </AuthProvider>
+    </Grommet>
+  )
 }
 export default MyApp
