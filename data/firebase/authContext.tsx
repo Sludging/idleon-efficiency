@@ -5,7 +5,7 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 interface AuthData {
     user: User | null
-    loginFunction: (event: React.MouseEvent<HTMLButtonElement>) => void
+    loginFunction: Function
 }
 
 export const AuthContext = React.createContext<AuthData | null>(null);
@@ -21,7 +21,7 @@ export const getAuthData = (): AuthData => {
 export const AuthProvider: React.FC<{}> = (props) => {
     const [user, setUser] = useState<User | null>(null);
 
-    const loginUser = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const loginUser = () => {
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
         signInWithPopup(auth, provider)

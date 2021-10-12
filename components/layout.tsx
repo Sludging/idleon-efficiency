@@ -24,13 +24,19 @@ export default function Layout({
     const authData = useContext(AuthContext);
     const user = authData?.user;
     const idleonData = useContext(AppContext);
+
+    const onLoginClick = (loginFunction: Function | undefined) => {
+        if (loginFunction) {
+            loginFunction();
+        }
+    }
     return (
         <Container>
             <Header background="light-4" pad="medium" height="xsmall">
                 <Box justify="between" direction="row" gap="medium" width="100%">
                     <Text>Last Updated: {idleonData.getLastUpdated()}</Text>
                     {user && <Text>Logged in as: {user?.displayName}</Text>}
-                    {!user && <Button onClick={authData?.loginFunction}>Login</Button>}
+                    {!user && <Button onClick={() => onLoginClick(authData?.loginFunction)}>Login</Button>}
                 </Box>
             </Header>
             <main>{children}</main>
