@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { getAuth, User } from 'firebase/auth';
 import app from "./config";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup, signInAnonymously, signOut } from "firebase/auth";
 
 interface AuthData {
     user: User | null
     loginFunction: Function
+    logoutFunction: Function
 }
 
 export const AuthContext = React.createContext<AuthData | null>(null);
@@ -34,6 +35,19 @@ export const AuthProvider: React.FC<{}> = (props) => {
             });
     }
 
+    const logout = () => {
+        const auth = getAuth(app);
+        signOut(auth)
+            .then((result) => {
+                console.log(result);
+            }).catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode, errorMessage);
+            });
+    }
+
+
     useEffect(() => {
         const auth = getAuth(app);
         auth.onAuthStateChanged(res => {
@@ -46,7 +60,8 @@ export const AuthProvider: React.FC<{}> = (props) => {
     return (
         <AuthContext.Provider value={{
             user: user,
-            loginFunction: loginUser
+            loginFunction: loginUser,
+            logoutFunction: logout
         }}>
             {props.children}
         </AuthContext.Provider>
