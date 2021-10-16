@@ -30,7 +30,7 @@ export class PlayerStats {
 
 export class Item {
     raw_name: string;
-    raw_item_data: Any;
+    raw_item_data: any;
     icon: string;
     location: number;
     type: string;
@@ -137,11 +137,12 @@ export default function parsePlayer(rawData: Array<rawPlayerData>, playerNames: 
             currentPlayer.currentMap = mapsMap.get(rawPlayerData.currentMap.toString())?.replace(/_/g, " ") || "New Map?";
         }
         if (rawPlayerData.starSigns) {
-            currentPlayer.starSigns = rawPlayerData.starSigns.map((sign: number) => {
-                const signData = starSignMap.get(sign.toString());
-                if (signData) {
-                    return `${signData.name.replace(/_/g, " ")} | ${signData.description.replace(/_/g, " ")}`;
+            currentPlayer.starSigns = rawPlayerData.starSigns.map((sign: string) => {
+                const signData = starSignMap.get(sign);
+                if (!signData) {
+                    return "";
                 }
+                return `${signData.name.replace(/_/g, " ")} | ${signData.description.replace(/_/g, " ")}`;
             });
             // Remove empty sign, need to handle this better in the future. 
             // This is due to the array ending with a trailing ',' before the split.
