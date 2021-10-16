@@ -50,10 +50,10 @@ export default function parseAlchemy(cauldronData: Array<Map<string, number>>) {
     cauldronData.forEach((rawData, index) => {
         if (index < 4) {
             let cauldron = new Cauldron(cauldronsIndexMapping[index], cauldronsTextMapping[index]);
-            const bubbleNames = new Map(Object.entries(cauldronMapping.get(cauldronsIndexMapping[index])));
+            const bubbleNames = new Map(Object.entries(cauldronMapping.get(cauldronsIndexMapping[index]) || []));
             Object.entries(rawData).forEach(([bubble_number, level], _) => {
                 if (bubble_number !== "length" && bubbleNames?.get(bubble_number)) {
-                    const bubble = new Bubble(bubbleNames?.get(bubble_number), cauldron.short_name, bubble_number, level);
+                    const bubble = new Bubble(bubbleNames?.get(bubble_number) || "Unknown", cauldron.short_name, bubble_number, level);
                     cauldron.bubbles.push(bubble);
                 }
             });

@@ -59,7 +59,7 @@ export default function AlchemyData() {
                 })
             }
             {
-                !alchemyData && <Text>We don't have data!</Text>
+                !alchemyData && <Text>Not ready yet</Text>
             }
         </Grid>
     )

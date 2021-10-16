@@ -16,7 +16,7 @@ function StampDisplay({ raw_name, index, value }: { raw_name: string, index: num
     }
 
     return (
-        <Box key={`tab_${index}_${raw_name}`} background="grey">
+        <Box key={`stamp_${index}_${raw_name}`} background="grey">
             <Stack anchor="bottom-right">
                 <Box className={getCardClass()} />
                 <Box pad={{ horizontal: 'medium' }}>
@@ -36,7 +36,7 @@ function StampTab({ tab, index }: { tab: Stamp[], index: number }) {
                     tab.map((stamp: Stamp) => {
                         if (stamp != undefined) {
                             return (
-                                <StampDisplay raw_name={stamp.raw_name} value={stamp.value} index={index} />
+                                <StampDisplay key={`tab_${index}_${stamp.raw_name}`} raw_name={stamp.raw_name} value={stamp.value} index={index} />
                             )
                         }
                     })

@@ -9,7 +9,7 @@ import PlayerData from '../components/playerData';
 import Layout from '../components/layout';
 import { AppContext } from '../data/appContext';
 
-import { Tab, Tabs } from 'grommet';
+import { Tab, Tabs, Box, Text } from 'grommet';
 
 
 const Home: NextPage = () => {
@@ -40,6 +40,9 @@ const Home: NextPage = () => {
           <Tab title="Players">
             <PlayerData />
           </Tab>
+        <Tab title="Statues">
+          <Box><Text>Nothing here yet!</Text></Box>
+        </Tab>
         </Tabs>
       }
     </Layout>

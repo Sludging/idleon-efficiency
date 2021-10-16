@@ -37,7 +37,7 @@ Known paths:
 
 export const AppProvider: React.FC<{}> = (props) => {
   const [state, setState] = useState(new IdleonData(new Map(), ""));
-  const user = useContext(AuthContext);
+  const user = useContext(AuthContext)?.user || undefined;
   const [db, setDB] = useState<Firestore | undefined>(undefined)
   const [realDB, setRealDB] = useState<Database | undefined>(undefined)
   const [charNames, setCharNames] = useState<Array<string>>([]);
@@ -53,7 +53,7 @@ export const AppProvider: React.FC<{}> = (props) => {
             console.log("No data available");
           }
         }).catch((error) => {
-          console.error(error);
+          console.log(error);
         });
       }
 

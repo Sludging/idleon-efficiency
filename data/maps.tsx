@@ -876,7 +876,7 @@ const filteredLootyItems = {
 };
 
 const stampsMap = new Map(Object.entries({
-    "combat": {
+    "combat": new Map(Object.entries({
         "0": {
             "name": "Sword_Stamp",
             "rawName": "StampA1"
@@ -1017,8 +1017,8 @@ const stampsMap = new Map(Object.entries({
             "name": "FILLER",
             "rawName": "StampA35"
         }
-    },
-    "skills": {
+    })),
+    "skills": new Map(Object.entries({
         "0": {
             "name": "Pickaxe_Stamp",
             "rawName": "StampB1"
@@ -1163,8 +1163,8 @@ const stampsMap = new Map(Object.entries({
             "name": "Banked_Pts_Stamp",
             "rawName": "StampB36"
         }
-    },
-    "misc": {
+    })),
+    "misc": new Map(Object.entries({
         "0": {
             "name": "Questin_Stamp",
             "rawName": "StampC1"
@@ -1245,7 +1245,7 @@ const stampsMap = new Map(Object.entries({
             "name": "Biblio_Stamp",
             "rawName": "StampC20"
         }
-    }
+    }))
 }));
 
 const maxCarryCap = {
