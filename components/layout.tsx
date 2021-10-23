@@ -53,14 +53,23 @@ export default function Layout({
                         <Layer
                             onEsc={() => setShowLayer(false)}
                             onClickOutside={() => setShowLayer(false)}
+                        modal={true}
+                        position="center"
+
+
                         >
-                            <Button label="Google Login" onClick={() => onButtonClick(authData?.loginFunction)} />
+                        <Box pad="medium" gap="small" width="medium" background="grey">
+                            <Button label="Google Login" color="black" onClick={() => onButtonClick(authData?.loginFunction)} />
+                            <Box align="center" flex="grow" pad="small">
+                                <Text>or</Text>
+                            </Box>
                             <TextInput
-                                placeholder="type here"
+                                placeholder="ID Token"
                                 value={value}
                                 onChange={event => setValue(event.target.value)}
                             />
-                            <Button label="Handle Token" onClick={() => onButtonClick(authData?.tokenFunction, value)} />
+                            <Button label="Handle Token" color="black" onClick={() => onButtonClick(authData?.tokenFunction, value)} />
+                        </Box>
                         </Layer>
                     }
                 </Box>
