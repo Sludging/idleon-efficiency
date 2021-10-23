@@ -40,6 +40,7 @@ export default function Layout({
                 toCall();
             }
         }
+        setShowLayer(false);
     }
 
     return (
