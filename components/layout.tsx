@@ -60,7 +60,7 @@ export default function Layout({
 
                         >
                         <Box pad="medium" gap="small" width="medium" background="grey">
-                            <Button label="Google Login" color="black" onClick={() => onButtonClick(authData?.loginFunction)} />
+                            <Button disabled label="Google Login" color="black" onClick={() => onButtonClick(authData?.loginFunction)} />
                             <Box align="center" flex="grow" pad="small">
                                 <Text>or</Text>
                             </Box>
