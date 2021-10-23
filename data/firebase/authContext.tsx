@@ -61,6 +61,7 @@ export const AuthProvider: React.FC<{}> = (props) => {
                 const errorMessage = error.message;
                 console.log(errorCode, errorMessage);
             });
+        location.reload();
     }
 
 
