@@ -8,13 +8,22 @@ import {
 import styled from 'styled-components'
 
 import { Alchemy, Cauldron } from '../data/domain/alchemy';
+import { lavaFunc } from '../data/utility';
 import { useEffect, useState, useContext } from 'react';
 import { AppContext } from '../data/appContext'
-import styles from './alchemyData.module.css';
 
 const CapitalizedH3 = styled.h3`
     text-transform: capitalize
 `
+
+function handleToolBubbles(titleText: string, bubbleName: string) {
+    switch (bubbleName) {
+        case "Stronk Tools": return titleText.replace("$", "Pickaxes and Fishing Rods");
+        case "Sanic Tools": return titleText.replace("$", "Catching Nets");
+        case "Le Brain Tools": return titleText.replace("$", "Hatchets");
+        default: return titleText;
+    }
+}
 
 function CauldronDisplay({ cauldron }: { cauldron: Cauldron }) {
     return (
@@ -24,10 +33,13 @@ function CauldronDisplay({ cauldron }: { cauldron: Cauldron }) {
             </Box>
             {
                 Object.entries(cauldron.bubbles).map(([_, bubble], index) => {
+                    const bubbleBonus = lavaFunc(bubble.func, bubble.level, bubble.x1, bubble.x2)
+                    let titleText = bubble.description.replace(/{/g, bubbleBonus.toString());
+                    titleText = handleToolBubbles(titleText, bubble.name);
                     return (
                         <Box direction="row" align="center" key={`cauldron_${index}_${bubble.name}`} background="grey">
                             <Stack anchor="bottom-right">
-                                <Box className={`${styles.alchemy} ${styles[bubble.class_name]}`} />
+                                <Box className={bubble.class_name} title={titleText} />
                                 <Box>
                                     <Text size="medium">{bubble.level}</Text>
                                 </Box>

@@ -3,7 +3,8 @@ import { dark, Grommet } from 'grommet';
 import { deepMerge } from 'grommet/utils';
 import { AuthProvider } from '../data/firebase/authContext';
 import { AppProvider } from '../data/appContext';
-import '../public/icons/assets/sheets/36x36-icons.css';
+import '../public/icons/assets/sheets/spritesheet_36x36.css';
+import '../public/icons/assets/sheets/spritesheet_70x70.css';
 
 const customTheme = deepMerge(dark, {
   tab: {
