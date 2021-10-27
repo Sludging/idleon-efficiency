@@ -48,7 +48,7 @@ export default function Layout({
             <Header background="light-4" pad="medium" height="xsmall">
                 <Box justify="between" direction="row" gap="medium" width="100%">
                     <Text>Last Updated: {idleonData.getLastUpdated()}</Text>
-                    {user && <React.Fragment><Text>Logged in as: {user?.displayName}</Text><Button onClick={() => onButtonClick(authData?.logoutFunction)}>Logout</Button></React.Fragment>}
+                    {user && <React.Fragment><Button onClick={() => onButtonClick(authData?.logoutFunction)}>Logout</Button></React.Fragment>}
                     {!user && <Button onClick={() => setShowLayer(true)}>Login</Button>}
                     {showLayer &&
                         <Layer

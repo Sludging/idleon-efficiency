@@ -1,38 +1,150 @@
-import { stampsMap } from '../maps';
+import StampData from "../../components/stampData";
 
-export const stampNameArray = [
-    "combat",
-    "skills",
-    "misc"
-]
+interface StampData {
+    effect: string; // todo: ENUM
+    function: string; // todo: ENUM
+    x1: number;
+    x2: number;
+    upgradeInterval: number;
+    material: string;
+    startV: number;
+    mCostExp: number;
+    startingCost: number;
+    cCostExp: number;
+    i10: number;
+    upgradeText: string;
+    i12: number;
+}
 
 export class Stamp {
     raw_name: string;
     name: string;
-    value: number;
+    value: number = 0;
     icon: string;
+    type: string; // todo: enum
+    bonus: string;
+    data: StampData;
 
 
-    constructor(name: string, raw_name: string, value: number) {
+    constructor(name: string, raw_name: string, type: string, bonus: string, data: StampData) {
         this.raw_name = raw_name;
-        this.value = value;
         this.icon = `/icons/assets/data/${raw_name}.png`;
         this.name = name.replace("_", " ");
+        this.type = type;
+        this.bonus = bonus;
+        this.data = data;
     }
 }
 
-export default function parseStamps(stampsData: Array<any>) {
-    const parsedData = stampsData.map((tab, index) => {
-        return Object.entries(tab).map(([key, value]) => {
-            if (key.toLowerCase() !== "length") {
-                const tab_name = stampNameArray[index];
-                const tab_data = stampsMap.get(tab_name);
-                const stamp_info = tab_data?.get(key);
-                if (stamp_info) {
-                    return new Stamp(stamp_info.name.replace("_", " "), stamp_info.rawName, value as number);
-                }
+const initStamps = (): Stamp[][] => {
+    let combat_stamp = new Array<Stamp>()
+    combat_stamp.push(new Stamp("Sword Stamp", "StampA1", "Combat Stamp", " Base Damage", JSON.parse('{"effect": "BaseDmg", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 5, "material": "Grasslands1", "startV": 20, "mCostExp": 5, "startingCost": 50, "cCostExp": 1.3, "i10": 0, "upgradeText": "{} Base Damage", "i12": 3}')))
+    combat_stamp.push(new Stamp("Heart Stamp", "StampA2", "Combat Stamp", " Base HP", JSON.parse('{"effect": "BaseHP", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 5, "material": "OakTree", "startV": 25, "mCostExp": 7, "startingCost": 50, "cCostExp": 1.3, "i10": 0, "upgradeText": "{} Base HP", "i12": 3}')))
+    combat_stamp.push(new Stamp("Mana Stamp", "StampA3", "Combat Stamp", " Base MP", JSON.parse('{"effect": "BaseMP", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 5, "material": "Copper", "startV": 25, "mCostExp": 7, "startingCost": 50, "cCostExp": 1.3, "i10": 0, "upgradeText": "{} Base MP", "i12": 0}')))
+    combat_stamp.push(new Stamp("Tomahawk Stamp", "StampA4", "Combat Stamp", "% Total Damage", JSON.parse('{"effect": "PctDmg", "function": "decay", "x1": 6, "x2": 40, "upgradeInterval": 4, "material": "CopperBar", "startV": 15, "mCostExp": 6, "startingCost": 50, "cCostExp": 1.3, "i10": 0, "upgradeText": "{}% Total Damage", "i12": 3}')))
+    combat_stamp.push(new Stamp("Target Stamp", "StampA5", "Combat Stamp", " Base Accuracy", JSON.parse('{"effect": "BaseAcc", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 5, "material": "CraftMat1", "startV": 25, "mCostExp": 6, "startingCost": 50, "cCostExp": 1.3, "i10": 0, "upgradeText": "{} Base Accuracy", "i12": 3}')))
+    combat_stamp.push(new Stamp("Shield Stamp", "StampA6", "Combat Stamp", " Base Defence", JSON.parse('{"effect": "BaseDef", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 5, "material": "Iron", "startV": 50, "mCostExp": 7, "startingCost": 50, "cCostExp": 1.3, "i10": 0, "upgradeText": "{} Base Defence", "i12": 3}')))
+    combat_stamp.push(new Stamp("Longsword Stamp", "StampA7", "Combat Stamp", " Base Damage", JSON.parse('{"effect": "BaseDmg", "function": "add", "x1": 2, "x2": 0, "upgradeInterval": 4, "material": "Grasslands3", "startV": 50, "mCostExp": 6, "startingCost": 50, "cCostExp": 1.3, "i10": 0, "upgradeText": "{} Base Damage", "i12": 6}')))
+    combat_stamp.push(new Stamp("Kapow Stamp", "StampA8", "Combat Stamp", "% Critical Damage", JSON.parse('{"effect": "CritDmg", "function": "decay", "x1": 8, "x2": 40, "upgradeInterval": 3, "material": "CraftMat5", "startV": 50, "mCostExp": 6, "startingCost": 50, "cCostExp": 1.3, "i10": 0, "upgradeText": "{}% Critical Damage", "i12": 6}')))
+    combat_stamp.push(new Stamp("Fist Stamp", "StampA9", "Combat Stamp", " STR", JSON.parse('{"effect": "BaseSTR", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 2, "material": "BirchTree", "startV": 50, "mCostExp": 7, "startingCost": 50, "cCostExp": 1.3, "i10": 0, "upgradeText": "{} STR", "i12": 3}')))
+    combat_stamp.push(new Stamp("Battleaxe Stamp", "StampA10", "Combat Stamp", "% Total Damage", JSON.parse('{"effect": "PctDmg", "function": "decay", "x1": 10, "x2": 40, "upgradeInterval": 4, "material": "Leaf1", "startV": 25, "mCostExp": 4, "startingCost": 50, "cCostExp": 1.3, "i10": 0, "upgradeText": "{}% Total Damage", "i12": 5}')))
+    combat_stamp.push(new Stamp("Agile Stamp", "StampA11", "Combat Stamp", " AGI", JSON.parse('{"effect": "BaseAGI", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 2, "material": "EquipmentToolsHatchet3", "startV": 1, "mCostExp": 4, "startingCost": 50, "cCostExp": 1.3, "i10": 0, "upgradeText": "{} AGI", "i12": 0}')))
+    combat_stamp.push(new Stamp("Vitality Stamp", "StampA12", "Combat Stamp", " Base HP", JSON.parse('{"effect": "BaseHP", "function": "add", "x1": 2, "x2": 0, "upgradeInterval": 4, "material": "Jungle2", "startV": 25, "mCostExp": 6, "startingCost": 50, "cCostExp": 1.3, "i10": 0, "upgradeText": "{} Base HP", "i12": 6}')))
+    combat_stamp.push(new Stamp("Book Stamp", "StampA13", "Combat Stamp", " WIS", JSON.parse('{"effect": "BaseWIS", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 2, "material": "IronBar", "startV": 20, "mCostExp": 5, "startingCost": 50, "cCostExp": 1.35, "i10": 0, "upgradeText": "{} WIS", "i12": 3}')))
+    combat_stamp.push(new Stamp("Manamoar Stamp", "StampA14", "Combat Stamp", " Base MP", JSON.parse('{"effect": "BaseMP", "function": "add", "x1": 2, "x2": 0, "upgradeInterval": 3, "material": "Forest1", "startV": 25, "mCostExp": 6, "startingCost": 75, "cCostExp": 1.32, "i10": 0, "upgradeText": "{} Base MP", "i12": 2}')))
+    combat_stamp.push(new Stamp("Clover Stamp", "StampA15", "Combat Stamp", " LUK", JSON.parse('{"effect": "BaseLUK", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 2, "material": "EquipmentShirts12", "startV": 1, "mCostExp": 2, "startingCost": 300, "cCostExp": 1.38, "i10": 0, "upgradeText": "{} LUK", "i12": 6}')))
+    combat_stamp.push(new Stamp("Scimitar Stamp", "StampA16", "Combat Stamp", " Base Damage", JSON.parse('{"effect": "BaseDmg", "function": "add", "x1": 3, "x2": 0, "upgradeInterval": 4, "material": "Fish1", "startV": 75, "mCostExp": 7, "startingCost": 2000, "cCostExp": 1.33, "i10": 0, "upgradeText": "{} Base Damage", "i12": 0}')))
+    combat_stamp.push(new Stamp("Bullseye Stamp", "StampA17", "Combat Stamp", " Base Accuracy", JSON.parse('{"effect": "BaseAcc", "function": "add", "x1": 2, "x2": 0, "upgradeInterval": 5, "material": "Bug3", "startV": 100, "mCostExp": 10, "startingCost": 5000, "cCostExp": 1.36, "i10": 0, "upgradeText": "{} Base Accuracy", "i12": 0}')))
+    combat_stamp.push(new Stamp("Feather Stamp", "StampA18", "Combat Stamp", " Base Move Speed", JSON.parse('{"effect": "PctMoveSpd", "function": "decay", "x1": 5, "x2": 50, "upgradeInterval": 5, "material": "DesertB1", "startV": 25, "mCostExp": 6, "startingCost": 2500, "cCostExp": 1.3, "i10": 0, "upgradeText": "{} Base Move Speed", "i12": 0}')))
+    combat_stamp.push(new Stamp("Polearm Stamp", "StampA19", "Combat Stamp", "% Total Damage", JSON.parse('{"effect": "PctDmg", "function": "decay", "x1": 16, "x2": 40, "upgradeInterval": 6, "material": "TestObj7", "startV": 1, "mCostExp": 2, "startingCost": 3000, "cCostExp": 1.3, "i10": 0, "upgradeText": "{}% Total Damage", "i12": 0}')))
+    combat_stamp.push(new Stamp("Violence Stamp", "StampA20", "Combat Stamp", " STR", JSON.parse('{"effect": "BaseSTR", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 3, "material": "Dementia", "startV": 10, "mCostExp": 7, "startingCost": 10000, "cCostExp": 1.3, "i10": 0, "upgradeText": "{} STR", "i12": 0}')))
+    combat_stamp.push(new Stamp("Buckler Stamp", "StampA21", "Combat Stamp", " Base Defence", JSON.parse('{"effect": "BaseDef", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 7, "material": "PlatBar", "startV": 25, "mCostExp": 6, "startingCost": 2200, "cCostExp": 1.305, "i10": 0, "upgradeText": "{} Base Defence", "i12": 0}')))
+    combat_stamp.push(new Stamp("FILLER", "StampA22", "Combat Stamp", " Base Defence", JSON.parse('{"effect": "BaseDef", "function": "add", "x1": 30, "x2": 0, "upgradeInterval": 10, "material": "Copper", "startV": 25, "mCostExp": 6, "startingCost": 50, "cCostExp": 1.3, "i10": 0, "upgradeText": "{} Base Defence", "i12": 0}')))
+    combat_stamp.push(new Stamp("Sukka Foo", "StampA23", "Combat Stamp", "% Boss Damage", JSON.parse('{"effect": "BossDmg", "function": "decay", "x1": 24, "x2": 60, "upgradeInterval": 10, "material": "Quest17", "startV": 3, "mCostExp": 5, "startingCost": 10000, "cCostExp": 1.34, "i10": 0, "upgradeText": "{}% Boss Damage", "i12": 0}')))
+    combat_stamp.push(new Stamp("Arcane Stamp", "StampA24", "Combat Stamp", " Base WIS", JSON.parse('{"effect": "BaseWIS", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 3, "material": "GoldBar", "startV": 50, "mCostExp": 7, "startingCost": 1550, "cCostExp": 1.36, "i10": 0, "upgradeText": "{} Base WIS", "i12": 0}')))
+    combat_stamp.push(new Stamp("FILLER", "StampA25", "Combat Stamp", " Base Defence", JSON.parse('{"effect": "BaseDef", "function": "add", "x1": 30, "x2": 0, "upgradeInterval": 10, "material": "Copper", "startV": 25, "mCostExp": 6, "startingCost": 5000, "cCostExp": 1.3, "i10": 0, "upgradeText": "{} Base Defence", "i12": 0}')))
+    combat_stamp.push(new Stamp("Steve Sword", "StampA26", "Combat Stamp", "% Total Damage", JSON.parse('{"effect": "PctDmg", "function": "decay", "x1": 20, "x2": 60, "upgradeInterval": 10, "material": "Bug4", "startV": 150, "mCostExp": 5, "startingCost": 10000, "cCostExp": 1.32, "i10": 0, "upgradeText": "{}% Total Damage", "i12": 0}')))
+    combat_stamp.push(new Stamp("Blover Stamp", "StampA27", "Combat Stamp", " Base LUK", JSON.parse('{"effect": "BaseLUK", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 4, "material": "Fish3", "startV": 100, "mCostExp": 7, "startingCost": 25000, "cCostExp": 1.39, "i10": 0, "upgradeText": "{} Base LUK", "i12": 0}')))
+    combat_stamp.push(new Stamp("Stat Graph Stamp", "StampA28", "Combat Stamp", " All Stats", JSON.parse('{"effect": "BaseAllStat", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 2, "material": "StoneZ1", "startV": 2, "mCostExp": 2, "startingCost": 2000, "cCostExp": 1.36, "i10": 0, "upgradeText": "{} All Stats", "i12": 0}')))
+    combat_stamp.push(new Stamp("FILLER", "StampA29", "Combat Stamp", " Base Defence", JSON.parse('{"effect": "BaseDef", "function": "add", "x1": 30, "x2": 0, "upgradeInterval": 10, "material": "Copper", "startV": 25, "mCostExp": 6, "startingCost": 50, "cCostExp": 1.3, "i10": 0, "upgradeText": "{} Base Defence", "i12": 0}')))
+    combat_stamp.push(new Stamp("FILLER", "StampA30", "Combat Stamp", " Base Defence", JSON.parse('{"effect": "BaseDef", "function": "add", "x1": 30, "x2": 0, "upgradeInterval": 10, "material": "Copper", "startV": 25, "mCostExp": 6, "startingCost": 50, "cCostExp": 1.3, "i10": 0, "upgradeText": "{} Base Defence", "i12": 0}')))
+    combat_stamp.push(new Stamp("FILLER", "StampA31", "Combat Stamp", " Base Defence", JSON.parse('{"effect": "BaseDef", "function": "add", "x1": 30, "x2": 0, "upgradeInterval": 10, "material": "Copper", "startV": 25, "mCostExp": 6, "startingCost": 50, "cCostExp": 1.3, "i10": 0, "upgradeText": "{} Base Defence", "i12": 0}')))
+    combat_stamp.push(new Stamp("FILLER", "StampA32", "Combat Stamp", " Base Defence", JSON.parse('{"effect": "BaseDef", "function": "add", "x1": 30, "x2": 0, "upgradeInterval": 10, "material": "Copper", "startV": 25, "mCostExp": 6, "startingCost": 50, "cCostExp": 1.3, "i10": 0, "upgradeText": "{} Base Defence", "i12": 0}')))
+    combat_stamp.push(new Stamp("FILLER", "StampA33", "Combat Stamp", " Base Defence", JSON.parse('{"effect": "BaseDef", "function": "add", "x1": 30, "x2": 0, "upgradeInterval": 10, "material": "Copper", "startV": 25, "mCostExp": 6, "startingCost": 50, "cCostExp": 1.3, "i10": 0, "upgradeText": "{} Base Defence", "i12": 0}')))
+    combat_stamp.push(new Stamp("FILLER", "StampA34", "Combat Stamp", " Base Defence", JSON.parse('{"effect": "BaseDef", "function": "add", "x1": 30, "x2": 0, "upgradeInterval": 10, "material": "Copper", "startV": 25, "mCostExp": 6, "startingCost": 50, "cCostExp": 1.3, "i10": 0, "upgradeText": "{} Base Defence", "i12": 0}')))
+    combat_stamp.push(new Stamp("FILLER", "StampA35", "Combat Stamp", " Base Defence", JSON.parse('{"effect": "BaseDef", "function": "add", "x1": 30, "x2": 0, "upgradeInterval": 10, "material": "Copper", "startV": 25, "mCostExp": 6, "startingCost": 50, "cCostExp": 1.3, "i10": 0, "upgradeText": "{} Base Defence", "i12": 0}')))
+
+    let skills_stamp = new Array<Stamp>()
+    skills_stamp.push(new Stamp("Pickaxe Stamp", "StampB1", "Skills Stamp", " Mining Efficiency", JSON.parse('{"effect": "BaseMinEff", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 10, "material": "OakTree", "startV": 25, "mCostExp": 7, "startingCost": 50, "cCostExp": 1.3, "i10": 1, "upgradeText": "{} Mining Efficiency", "i12": 0}')))
+    skills_stamp.push(new Stamp("Hatchet Stamp", "StampB2", "Skills Stamp", " Choppin Efficiency", JSON.parse('{"effect": "BaseChopEff", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 10, "material": "CraftMat1", "startV": 25, "mCostExp": 6, "startingCost": 50, "cCostExp": 1.3, "i10": 3, "upgradeText": "{} Choppin Efficiency", "i12": 0}')))
+    skills_stamp.push(new Stamp("Anvil Zoomer Stamp", "StampB3", "Skills Stamp", "% Anvil Production Spd", JSON.parse('{"effect": "AnvilPAspd", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 5, "material": "Copper", "startV": 25, "mCostExp": 6, "startingCost": 50, "cCostExp": 1.3, "i10": 2, "upgradeText": "{}% Anvil Production Spd", "i12": 0}')))
+    skills_stamp.push(new Stamp("Lil' Mining Baggy Stamp", "StampB4", "Skills Stamp", " Mining Carry Cap", JSON.parse('{"effect": "MinCap", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 10, "material": "JungleTree", "startV": 25, "mCostExp": 6, "startingCost": 50, "cCostExp": 1.3, "i10": 1, "upgradeText": "{} Mining Carry Cap", "i12": 0}')))
+    skills_stamp.push(new Stamp("Twin Ores Stamp", "StampB5", "Skills Stamp", "% Multi Ore Chance", JSON.parse('{"effect": "DoubleMin", "function": "decay", "x1": 15, "x2": 40, "upgradeInterval": 5, "material": "EquipmentHats3", "startV": 1, "mCostExp": 3, "startingCost": 10000, "cCostExp": 1.3, "i10": 1, "upgradeText": "{}% Multi Ore Chance", "i12": 0}')))
+    skills_stamp.push(new Stamp("Choppin' Bag Stamp", "StampB6", "Skills Stamp", " Choppin Carry Cap", JSON.parse('{"effect": "ChopCap", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 10, "material": "Jungle3", "startV": 25, "mCostExp": 6, "startingCost": 50, "cCostExp": 1.3, "i10": 3, "upgradeText": "{} Choppin Carry Cap", "i12": 0}')))
+    skills_stamp.push(new Stamp("Duplogs Stamp", "StampB7", "Skills Stamp", "% Multi Log Chance", JSON.parse('{"effect": "DoubleChop", "function": "decay", "x1": 15, "x2": 40, "upgradeInterval": 5, "material": "EquipmentHats20", "startV": 1, "mCostExp": 3, "startingCost": 20000, "cCostExp": 1.3, "i10": 3, "upgradeText": "{}% Multi Log Chance", "i12": 0}')))
+    skills_stamp.push(new Stamp("Matty Bag Stamp", "StampB8", "Skills Stamp", " Material Carry Cap", JSON.parse('{"effect": "MatCap", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 10, "material": "MaxCapBagM2", "startV": 1, "mCostExp": 2, "startingCost": 50, "cCostExp": 1.3, "i10": 2, "upgradeText": "{} Material Carry Cap", "i12": 0}')))
+    skills_stamp.push(new Stamp("Smart Dirt Stamp", "StampB9", "Skills Stamp", "% Mining Exp", JSON.parse('{"effect": "MinExp", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 5, "material": "Forest2", "startV": 25, "mCostExp": 6, "startingCost": 80, "cCostExp": 1.35, "i10": 1, "upgradeText": "{}% Mining Exp", "i12": 0}')))
+    skills_stamp.push(new Stamp("Cool Diggy Tool Stamp", "StampB10", "Skills Stamp", " Mining Efficiency", JSON.parse('{"effect": "BaseMinEff", "function": "add", "x1": 2, "x2": 0, "upgradeInterval": 10, "material": "EquipmentToolsHatchet1", "startV": 1, "mCostExp": 2, "startingCost": 35000, "cCostExp": 1.4, "i10": -1, "upgradeText": "{} Mining Efficiency", "i12": 0}')))
+    skills_stamp.push(new Stamp("High IQ Lumber Stamp", "StampB11", "Skills Stamp", "% Choppin Exp", JSON.parse('{"effect": "ChopExp", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 5, "material": "Forest3", "startV": 25, "mCostExp": 6, "startingCost": 80, "cCostExp": 1.35, "i10": 3, "upgradeText": "{}% Choppin Exp", "i12": 0}')))
+    skills_stamp.push(new Stamp("Swag Swingy Tool Stamp", "StampB12", "Skills Stamp", " Choppin Efficiency", JSON.parse('{"effect": "BaseChopEff", "function": "add", "x1": 2, "x2": 0, "upgradeInterval": 10, "material": "EquipmentTools2", "startV": 1, "mCostExp": 2, "startingCost": 50000, "cCostExp": 1.36, "i10": 3, "upgradeText": "{} Choppin Efficiency", "i12": 0}')))
+    skills_stamp.push(new Stamp("Alch Go Brrr Stamp", "StampB13", "Skills Stamp", "% Alch Speed", JSON.parse('{"effect": "AlchSpd", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 4, "material": "ForestTree", "startV": 40, "mCostExp": 6, "startingCost": 800, "cCostExp": 1.29, "i10": -1, "upgradeText": "{}% Alch Speed", "i12": 0}')))
+    skills_stamp.push(new Stamp("Brainstew Stamps", "StampB14", "Skills Stamp", "% Alch Exp", JSON.parse('{"effect": "AlchExp", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 5, "material": "Gold", "startV": 40, "mCostExp": 6, "startingCost": 1250, "cCostExp": 1.28, "i10": 5, "upgradeText": "{}% Alch Exp", "i12": 0}')))
+    skills_stamp.push(new Stamp("Drippy Drop Stamp", "StampB15", "Skills Stamp", "% Liquid Spd", JSON.parse('{"effect": "LiquidSpd", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 5, "material": "DesertA1", "startV": 60, "mCostExp": 6, "startingCost": 1000, "cCostExp": 1.3, "i10": -1, "upgradeText": "{}% Liquid Spd", "i12": 0}')))
+    skills_stamp.push(new Stamp("Droplots Stamp", "StampB16", "Skills Stamp", " Liquid Cap", JSON.parse('{"effect": "LiquidCap", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 2, "material": "Fish4", "startV": 25, "mCostExp": 4, "startingCost": 2500, "cCostExp": 1.3, "i10": -1, "upgradeText": "{} Liquid Cap", "i12": 0}')))
+    skills_stamp.push(new Stamp("Fishing Rod Stamp", "StampB17", "Skills Stamp", " Fishing Efficiency", JSON.parse('{"effect": "BaseFishEff", "function": "add", "x1": 2, "x2": 0, "upgradeInterval": 5, "material": "Bug1", "startV": 50, "mCostExp": 6, "startingCost": 1000, "cCostExp": 1.32, "i10": 4, "upgradeText": "{} Fishing Efficiency", "i12": 0}')))
+    skills_stamp.push(new Stamp("Fishhead Stamp", "StampB18", "Skills Stamp", "% Fishing Exp", JSON.parse('{"effect": "FishExp", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 5, "material": "DesertA2", "startV": 55, "mCostExp": 9, "startingCost": 1500, "cCostExp": 1.33, "i10": 4, "upgradeText": "{}% Fishing Exp", "i12": 0}')))
+    skills_stamp.push(new Stamp("Catch Net Stamp", "StampB19", "Skills Stamp", " Catching Efficiency", JSON.parse('{"effect": "BaseCatchEff", "function": "add", "x1": 2, "x2": 0, "upgradeInterval": 5, "material": "Fish1", "startV": 50, "mCostExp": 6, "startingCost": 1000, "cCostExp": 1.3, "i10": 6, "upgradeText": "{} Catching Efficiency", "i12": 0}')))
+    skills_stamp.push(new Stamp("Fly Intel Stamp", "StampB20", "Skills Stamp", "% Catching Exp", JSON.parse('{"effect": "CatchExp", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 5, "material": "DesertA3", "startV": 40, "mCostExp": 10, "startingCost": 1500, "cCostExp": 1.33, "i10": 6, "upgradeText": "{}% Catching Exp", "i12": 0}')))
+    skills_stamp.push(new Stamp("Bag o Heads Stamp", "StampB21", "Skills Stamp", "% Fish Carry Cap", JSON.parse('{"effect": "FishCap", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 8, "material": "Bug2", "startV": 35, "mCostExp": 7, "startingCost": 1000, "cCostExp": 1.3, "i10": 4, "upgradeText": "{}% Fish Carry Cap", "i12": 0}')))
+    skills_stamp.push(new Stamp("Holy Mackerel Stamp", "StampB22", "Skills Stamp", "% Multifish Chance", JSON.parse('{"effect": "DoubleFish", "function": "decay", "x1": 20, "x2": 40, "upgradeInterval": 5, "material": "Plat", "startV": 30, "mCostExp": 6, "startingCost": 1500, "cCostExp": 1.3, "i10": 4, "upgradeText": "{}% Multifish Chance", "i12": 0}')))
+    skills_stamp.push(new Stamp("Bugsack Stamp", "StampB23", "Skills Stamp", "% Bug Carry Cap", JSON.parse('{"effect": "CatchCap", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 8, "material": "Fish2", "startV": 35, "mCostExp": 7, "startingCost": 1000, "cCostExp": 1.3, "i10": 6, "upgradeText": "{}% Bug Carry Cap", "i12": 0}')))
+    skills_stamp.push(new Stamp("Buzz Buzz Stamp", "StampB24", "Skills Stamp", "% Multibug Chance", JSON.parse('{"effect": "DoubleCatch", "function": "decay", "x1": 20, "x2": 40, "upgradeInterval": 5, "material": "ToiletTree", "startV": 45, "mCostExp": 6, "startingCost": 1500, "cCostExp": 1.3, "i10": 6, "upgradeText": "{}% Multibug Chance", "i12": 0}')))
+    skills_stamp.push(new Stamp("Hidey Box Stamp", "StampB25", "Skills Stamp", " Trapping Efficiency", JSON.parse('{"effect": "TrappingEff", "function": "add", "x1": 2, "x2": 0, "upgradeInterval": 10, "material": "Critter2", "startV": 100, "mCostExp": 5, "startingCost": 7500, "cCostExp": 1.3, "i10": 7, "upgradeText": "{} Trapping Efficiency", "i12": 0}')))
+    skills_stamp.push(new Stamp("Purp Froge Stamp", "StampB26", "Skills Stamp", "% Shiny Chance", JSON.parse('{"effect": "ShinyChance", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 5, "material": "Critter3", "startV": 125, "mCostExp": 6, "startingCost": 10000, "cCostExp": 1.3, "i10": 7, "upgradeText": "{}% Shiny Chance", "i12": 0}')))
+    skills_stamp.push(new Stamp("Spikemouth Stamp", "StampB27", "Skills Stamp", "% Trapping Exp", JSON.parse('{"effect": "TrappingExp", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 3, "material": "Critter4", "startV": 150, "mCostExp": 6, "startingCost": 12500, "cCostExp": 1.3, "i10": 7, "upgradeText": "{}% Trapping Exp", "i12": 0}')))
+    skills_stamp.push(new Stamp("Shiny Crab Stamp", "StampB28", "Skills Stamp", "% Shiny Chance", JSON.parse('{"effect": "ShinyChance", "function": "add", "x1": 2, "x2": 0, "upgradeInterval": 3, "material": "Critter5", "startV": 200, "mCostExp": 7, "startingCost": 15000, "cCostExp": 1.3, "i10": 7, "upgradeText": "{}% Shiny Chance", "i12": 0}')))
+    skills_stamp.push(new Stamp("Gear Stamp", "StampB29", "Skills Stamp", "% Building Spd", JSON.parse('{"effect": "BuildProd", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 3, "material": "SnowB1", "startV": 100, "mCostExp": 5, "startingCost": 10000, "cCostExp": 1.3, "i10": 8, "upgradeText": "{}% Building Spd", "i12": 0}')))
+    skills_stamp.push(new Stamp("Stample Stamp", "StampB30", "Skills Stamp", "% Sample Size", JSON.parse('{"effect": "SampleRate", "function": "decay", "x1": 4, "x2": 30, "upgradeInterval": 4, "material": "SnowA1", "startV": 100, "mCostExp": 6, "startingCost": 10000, "cCostExp": 1.3, "i10": 0, "upgradeText": "{}% Sample Size", "i12": 0}')))
+    skills_stamp.push(new Stamp("Saw Stamp", "StampB31", "Skills Stamp", "% Construction Exp", JSON.parse('{"effect": "ConstructionExp", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 3, "material": "DementiaBar", "startV": 20, "mCostExp": 5, "startingCost": 15000, "cCostExp": 1.3, "i10": 8, "upgradeText": "{}% Construction Exp", "i12": 0}')))
+    skills_stamp.push(new Stamp("Amplestample Stamp", "StampB32", "Skills Stamp", "% Sample Size", JSON.parse('{"effect": "SampleRate", "function": "decay", "x1": 5, "x2": 30, "upgradeInterval": 4, "material": "Bug5", "startV": 200, "mCostExp": 11, "startingCost": 25000, "cCostExp": 1.3, "i10": 0, "upgradeText": "{}% Sample Size", "i12": 0}')))
+    skills_stamp.push(new Stamp("SpoOoky Stamp", "StampB33", "Skills Stamp", " Worship Efficiency", JSON.parse('{"effect": "WorshipEff", "function": "add", "x1": 2, "x2": 0, "upgradeInterval": 10, "material": "Soul1", "startV": 45, "mCostExp": 6, "startingCost": 7500, "cCostExp": 1.3, "i10": 9, "upgradeText": "{} Worship Efficiency", "i12": 0}')))
+    skills_stamp.push(new Stamp("Flowin Stamp", "StampB34", "Skills Stamp", "% Charging Speed", JSON.parse('{"effect": "WorshipCharge", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 2, "material": "Refinery1", "startV": 2, "mCostExp": 5, "startingCost": 15000, "cCostExp": 1.3, "i10": 9, "upgradeText": "{}% Charging Speed", "i12": 0}')))
+    skills_stamp.push(new Stamp("Prayday Stamp", "StampB35", "Skills Stamp", "% Max Charge", JSON.parse('{"effect": "WorshipMax", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 2, "material": "SnowB4", "startV": 150, "mCostExp": 6, "startingCost": 10000, "cCostExp": 1.3, "i10": 9, "upgradeText": "{}% Max Charge", "i12": 0}')))
+    skills_stamp.push(new Stamp("Banked Pts Stamp", "StampB36", "Skills Stamp", " Starting TD Pts", JSON.parse('{"effect": "WorshipPTS", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 6, "material": "Soul2", "startV": 100, "mCostExp": 3, "startingCost": 6000, "cCostExp": 1.3, "i10": 9, "upgradeText": "{} Starting TD Pts", "i12": 0}')))
+
+    let misc_stamp = new Array<Stamp>()
+    misc_stamp.push(new Stamp("Questin Stamp", "StampC1", "Misc Stamp", "% Quest EXP", JSON.parse('{"effect": "QuestExp", "function": "decay", "x1": 70, "x2": 50, "upgradeInterval": 10, "material": "Jungle1", "startV": 30, "mCostExp": 6, "startingCost": 500, "cCostExp": 1.32, "i10": 0, "upgradeText": "{}% Quest EXP", "i12": 3}')))
+    misc_stamp.push(new Stamp("Mason Jar Stamp", "StampC2", "Misc Stamp", "% All Carry Cap", JSON.parse('{"effect": "AllCarryCap", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 4, "material": "DesertA1b", "startV": 1, "mCostExp": 3, "startingCost": 4000, "cCostExp": 1.28, "i10": 0, "upgradeText": "{}% All Carry Cap", "i12": 3}')))
+    misc_stamp.push(new Stamp("Crystallin", "StampC3", "Misc Stamp", "% Spawn Chance", JSON.parse('{"effect": "CrySpawn", "function": "decay", "x1": 110, "x2": 50, "upgradeInterval": 10, "material": "CraftMat6", "startV": 35, "mCostExp": 8, "startingCost": 800, "cCostExp": 1.31, "i10": 0, "upgradeText": "{}% Spawn Chance", "i12": 3}')))
+    misc_stamp.push(new Stamp("Arcade Ball Stamp", "StampC4", "Misc Stamp", " Base HP", JSON.parse('{"effect": "ArcadeBallz", "function": "decay", "x1": 50, "x2": 100, "upgradeInterval": 10, "material": "Copper", "startV": 30, "mCostExp": 6, "startingCost": 1500, "cCostExp": 1.33, "i10": 0, "upgradeText": "{} Base HP", "i12": 3}')))
+    misc_stamp.push(new Stamp("Gold Ball Stamp", "StampC5", "Misc Stamp", "% HP Food Effect", JSON.parse('{"effect": "GoldBallz", "function": "decay", "x1": 40, "x2": 100, "upgradeInterval": 10, "material": "Fish1", "startV": 50, "mCostExp": 6.5, "startingCost": 1000, "cCostExp": 1.33, "i10": 0, "upgradeText": "{}% HP Food Effect", "i12": 3}')))
+    misc_stamp.push(new Stamp("Potion Stamp", "StampC6", "Misc Stamp", "% Boost Food Effect", JSON.parse('{"effect": "BFood", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 5, "material": "FoodMining1", "startV": 50, "mCostExp": 8, "startingCost": 1500, "cCostExp": 1.305, "i10": 0, "upgradeText": "{}% Boost Food Effect", "i12": 3}')))
+    misc_stamp.push(new Stamp("Golden Apple Stamp", "StampC7", "Misc Stamp", "% Gold Food Effect", JSON.parse('{"effect": "GFood", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 4, "material": "FoodG4", "startV": 2, "mCostExp": 4, "startingCost": 3000, "cCostExp": 1.3, "i10": 0, "upgradeText": "{}% Gold Food Effect", "i12": 3}')))
+    misc_stamp.push(new Stamp("Ball Timer Stamp", "StampC8", "Misc Stamp", "hr Max Claim Time", JSON.parse('{"effect": "ArcadeTimeMax", "function": "decay", "x1": 12, "x2": 30, "upgradeInterval": 5, "material": "OakTree", "startV": 100, "mCostExp": 15, "startingCost": 1000, "cCostExp": 1.32, "i10": 0, "upgradeText": "{}hr Max Claim Time", "i12": 3}')))
+    misc_stamp.push(new Stamp("Card Stamp", "StampC9", "Misc Stamp", "% Card Drop Rate", JSON.parse('{"effect": "CardDrop", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 10, "material": "DesertB2", "startV": 25, "mCostExp": 6, "startingCost": 1200, "cCostExp": 1.31, "i10": 0, "upgradeText": "{}% Card Drop Rate", "i12": 3}')))
+    misc_stamp.push(new Stamp("Blank", "StampC10", "Misc Stamp", " Base HP", JSON.parse('{"effect": "BaseDmg", "function": "add", "x1": 30, "x2": 0, "upgradeInterval": 10, "material": "Copper", "startV": 25, "mCostExp": 6, "startingCost": 50, "cCostExp": 1.3, "i10": 0, "upgradeText": "{} Base HP", "i12": 3}')))
+    misc_stamp.push(new Stamp("Blank", "StampC11", "Misc Stamp", " Base HP", JSON.parse('{"effect": "BaseDmg", "function": "add", "x1": 30, "x2": 0, "upgradeInterval": 10, "material": "Copper", "startV": 25, "mCostExp": 6, "startingCost": 50, "cCostExp": 1.3, "i10": 0, "upgradeText": "{} Base HP", "i12": 3}')))
+    misc_stamp.push(new Stamp("Blank", "StampC12", "Misc Stamp", " Base HP", JSON.parse('{"effect": "BaseDmg", "function": "add", "x1": 30, "x2": 0, "upgradeInterval": 10, "material": "Copper", "startV": 25, "mCostExp": 6, "startingCost": 50, "cCostExp": 1.3, "i10": 0, "upgradeText": "{} Base HP", "i12": 3}')))
+    misc_stamp.push(new Stamp("Talent I Stamp", "StampC13", "Misc Stamp", " Talent 1 Pts", JSON.parse('{"effect": "Talent1", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 2, "material": "Grasslands2", "startV": 50, "mCostExp": 10, "startingCost": 2000, "cCostExp": 1.4, "i10": 0, "upgradeText": "{} Talent 1 Pts", "i12": 3}')))
+    misc_stamp.push(new Stamp("Talent II Stamp", "StampC14", "Misc Stamp", " Talent 2 Pts", JSON.parse('{"effect": "Talent2", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 2, "material": "DesertB3", "startV": 200, "mCostExp": 8, "startingCost": 4000, "cCostExp": 1.35, "i10": 0, "upgradeText": "{} Talent 2 Pts", "i12": 3}')))
+    misc_stamp.push(new Stamp("Talent III Stamp", "StampC15", "Misc Stamp", " Talent 3 Pts", JSON.parse('{"effect": "Talent3", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 2, "material": "Leaf3", "startV": 20, "mCostExp": 4, "startingCost": 40000, "cCostExp": 1.35, "i10": 0, "upgradeText": "{} Talent 3 Pts", "i12": 3}')))
+    misc_stamp.push(new Stamp("Talent IV Stamp", "StampC16", "Misc Stamp", " Talent 4 Pts", JSON.parse('{"effect": "Talent4", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 2, "material": "Copper", "startV": 25, "mCostExp": 6, "startingCost": 50, "cCostExp": 1.3, "i10": 0, "upgradeText": "{} Talent 4 Pts", "i12": 3}')))
+    misc_stamp.push(new Stamp("Talent V Stamp", "StampC17", "Misc Stamp", " Talent 5 Pts", JSON.parse('{"effect": "Talent5", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 2, "material": "Copper", "startV": 25, "mCostExp": 6, "startingCost": 50, "cCostExp": 1.3, "i10": 0, "upgradeText": "{} Talent 5 Pts", "i12": 3}')))
+    misc_stamp.push(new Stamp("Talent S Stamp", "StampC18", "Misc Stamp", " Star Talent Pts", JSON.parse('{"effect": "TalentS", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 2, "material": "Leaf2", "startV": 20, "mCostExp": 4, "startingCost": 50, "cCostExp": 1.3, "i10": 0, "upgradeText": "{} Star Talent Pts", "i12": 3}')))
+    misc_stamp.push(new Stamp("Multikill Stamp", "StampC19", "Misc Stamp", "% Base Overkill", JSON.parse('{"effect": "Overkill", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 2, "material": "Grasslands1", "startV": 100, "mCostExp": 3, "startingCost": 10000, "cCostExp": 1.3, "i10": 0, "upgradeText": "{}% Base Overkill", "i12": 3}')))
+    misc_stamp.push(new Stamp("Biblio Stamp", "StampC20", "Misc Stamp", "% Faster Books", JSON.parse('{"effect": "BookSpd", "function": "add", "x1": 1, "x2": 0, "upgradeInterval": 2, "material": "SaharanFoal", "startV": 125, "mCostExp": 5, "startingCost": 12500, "cCostExp": 1.3, "i10": 0, "upgradeText": "{}% Faster Books", "i12": 3}')))
+
+    return [combat_stamp, skills_stamp, misc_stamp]
+}
+
+export default function parseStamps(rawData: Array<any>) {
+    const stampData = initStamps(); // Initialize stamp array with all pre-populated data
+    rawData.forEach((tab, index) => { // for each tab in the cloud save
+        return Object.entries(tab).map(([key, value]) => { // for each stamp in the current tab
+            if (key.toLowerCase() !== "length") {  // ignroe length at the end
+                stampData[index][parseInt(key)].value = value as number; // update our pre-populated data with the stamp level
             }
         })
     })
-    return parsedData;
+    return stampData;
 }
