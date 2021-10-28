@@ -16,7 +16,7 @@ export default function CoinsDisplay(props: CoinProps) {
             {
                 Array.from(props.coinMap).map(([coin, value]) => {
                     return (
-                        <Box direction="row" gap="xsmall">
+                        <Box key={`coin-${coin.valueOf()}`} direction="row" gap="xsmall">
                             <Box className={`icons-21 icons-Coins${coin.valueOf()}`} />
                             <Text>{value}</Text>
                         </Box>
