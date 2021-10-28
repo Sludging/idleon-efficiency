@@ -5,6 +5,7 @@ import { AuthProvider } from '../data/firebase/authContext';
 import { AppProvider } from '../data/appContext';
 import '../public/icons/assets/sheets/spritesheet_36x36.css';
 import '../public/icons/assets/sheets/spritesheet_70x70.css';
+import '../public/icons/assets/sheets/spritesheet_21x21.css';
 
 const customTheme = deepMerge(dark, {
   tab: {
