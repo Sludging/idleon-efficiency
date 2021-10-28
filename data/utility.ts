@@ -32,3 +32,40 @@ export const lavaFunc = (func: string, level: number, x1: number, x2: number) =>
     }
     return round(result);
 }
+
+export enum Coins {
+    Copper = 1,
+    Silver = 2,
+    Gold = 3,
+    Platinum = 4,
+    Dementia = 5,
+    Void = 6,
+    Lustre = 7,
+    Starfire = 8,
+    Dreadlo = 9,
+    Godshard = 10
+
+}
+
+export const getCoinsArray = (coins: number): Map<Coins, number> => {
+    var n = coins;
+    var ret = new Map<Coins, number>();
+    var i = 18;
+    do {
+        var expo = Math.pow(10, i);
+        if (n > expo) {
+            var num = Math.floor(n / expo);
+            ret.set(Math.round(i / 2), num);
+            n = n % expo;
+        }
+        i -= 2;
+    } while (i >= 0);
+
+    return ret;
+}
+
+/*
+Things to remember:
+* Class icons = ClassIcon<x>.png / 38x36
+* Coins = Coins<x>.png / 21x21
+*/
