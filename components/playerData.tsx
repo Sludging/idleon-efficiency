@@ -4,11 +4,12 @@ import {
     Tabs,
     Tab
 } from 'grommet'
-import Image from 'next/image';
 import { useState, useEffect, useContext } from 'react';
 import { AppContext } from '../data/appContext'
 
 import { Player } from '../data/domain/player';
+import { getCoinsArray } from '../data/utility';
+import CoinsDisplay from './coinsDisplay';
 
 export default function PlayerData() {
     const [playerData, setPlayerData] = useState<Array<Player>>();
@@ -29,6 +30,7 @@ export default function PlayerData() {
             <Tabs activeIndex={index} onActive={onActive}>
                 {
                     playerData?.map((player, index) => {
+                        const coinMap = getCoinsArray(player.money);
                         return (
                             <Tab key={`player_${player.playerID}`} title={`${player.playerName ? player.playerName : `Character ${player.playerID}`}`}>
                                 <Box>
@@ -43,7 +45,7 @@ export default function PlayerData() {
                                     <Text>AGI = {player.stats.agility}</Text>
                                     <Text>WIS = {player.stats.wisdom}</Text>
                                     <Text>LUK = {player.stats.luck}</Text>
-                                    <Text>Money = {player.money.toString().split(/(?=(?:..)*$)/)}</Text>
+                                    <Text>Money = </Text><CoinsDisplay coinMap={coinMap} />
                                 </Box>
                                 <Box direction="row-responsive">
                                     <Box key={`player_${index}_equip`}>
