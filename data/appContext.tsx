@@ -25,7 +25,14 @@ class IdleonData {
 
   public getLastUpdated = () => {
     if (this.lastUpdated) {
-      return `${this.lastUpdated.toLocaleDateString()} ${this.lastUpdated.toLocaleTimeString()}`
+      const resolvedFormat = Intl.DateTimeFormat().resolvedOptions();
+      const options: Intl.DateTimeFormatOptions = {
+        year: "numeric", month: "numeric", day: "numeric",
+        hour: "numeric", minute: "numeric", second: "numeric",
+        hour12: resolvedFormat.hour12,
+        timeZone: resolvedFormat.timeZone
+      };
+      return Intl.DateTimeFormat(resolvedFormat.locale, options).format(this.lastUpdated);
     }
 
     return "";
