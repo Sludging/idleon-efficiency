@@ -25,13 +25,13 @@ function StampDisplay({ stamp, index }: { stamp: Stamp, index: number }) {
     }
 
     function TipContent({ stamp }: { stamp: Stamp }) {
-        const goldCost = stamp.data.startingCost * Math.pow(stamp.data.cCostExp - (stamp.value / (stamp.value + 5 * stamp.data.upgradeInterval)) * 0.25, stamp.value * (10 / stamp.data.upgradeInterval));
-        const materialCost = stamp.data.startV * Math.pow(stamp.data.mCostExp, Math.pow(Math.round(stamp.value / stamp.data.upgradeInterval) - 1, 0.8));
-        const bonus = lavaFunc(stamp.data.function, stamp.value, stamp.data.x1, stamp.data.x2).toString() + stamp.bonus;
+        const goldCost = stamp.data.startingCost * Math.pow(stamp.data.cCostExp - (stamp.level / (stamp.level + 5 * stamp.data.upgradeInterval)) * 0.25, stamp.level * (10 / stamp.data.upgradeInterval));
+        const materialCost = stamp.data.startV * Math.pow(stamp.data.mCostExp, Math.pow(Math.round(stamp.level / stamp.data.upgradeInterval) - 1, 0.8));
+        const bonus = lavaFunc(stamp.data.function, stamp.level, stamp.data.x1, stamp.data.x2).toString() + stamp.bonus;
         const mainText = stamp.name == "FILLER" ? "Nothing to see here! Filler content." : bonus;
         const coinMap = getCoinsArray(goldCost);
 
-        if (stamp.value == 0) {
+        if (stamp.level == 0) {
             return <></>
         }
         return (
@@ -47,8 +47,8 @@ function StampDisplay({ stamp, index }: { stamp: Stamp, index: number }) {
                     <Text weight="bold">{stamp.name}</Text>
                     <Text>--------------------------</Text>
                     <Text weight="bold">Boost: {mainText}</Text>
-                    {stamp.value % stamp.data.upgradeInterval != 0 && <Text weight="bold">Cost: <CoinsDisplay coinMap={coinMap} /></Text>}
-                    {stamp.value % stamp.data.upgradeInterval == 0 && <Box direction="row" align="center"><Text weight="bold">Material Cost: {nFormatter(Math.round(materialCost), 1)}</Text><Box style={{ width: "36px", height: "36px", backgroundPosition: "0 calc(var(--row) * -36px)" }} className={`icons icons-${stamp.data.material}_x1`} /></Box>}
+                    {stamp.level < stamp.maxLevel && <Text weight="bold">Cost: <CoinsDisplay coinMap={coinMap} /></Text>}
+                    {stamp.level == stamp.maxLevel && <Box direction="row" align="center"><Text weight="bold">Material Cost: {nFormatter(Math.round(materialCost), 1)}</Text><Box style={{ width: "36px", height: "36px", backgroundPosition: "0 calc(var(--row) * -36px)" }} className={`icons icons-${stamp.data.material}_x1`} /></Box>}
                 </Box>
             </Box>
         )
@@ -65,10 +65,10 @@ function StampDisplay({ stamp, index }: { stamp: Stamp, index: number }) {
                     dropProps={{ align: { left: 'right' } }}
                 >
                     {/* Do the opacity thing in styled components? */}
-                    <Box style={{ opacity: stamp.value > 0 ? 1 : 0.2 }} className={getCardClass()} />
+                    <Box style={{ opacity: stamp.level > 0 ? 1 : 0.2 }} className={getCardClass()} />
                 </Tip>
                 <Box pad={{ horizontal: 'large' }}>
-                    <Text size="medium">{stamp.value}</Text>
+                    <Text size="medium">{stamp.level}</Text>
                 </Box>
             </Stack>
         </Box>

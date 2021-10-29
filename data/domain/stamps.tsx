@@ -19,7 +19,8 @@ interface StampData {
 export class Stamp {
     raw_name: string;
     name: string;
-    value: number = 0;
+    level: number = 0;
+    maxLevel: number = 0;
     icon: string;
     type: string; // todo: enum
     bonus: string;
@@ -140,12 +141,13 @@ const initStamps = (): Stamp[][] => {
     return [combat_stamp, skills_stamp, misc_stamp]
 }
 
-export default function parseStamps(rawData: Array<any>) {
+export default function parseStamps(rawData: Array<any>, maxData: Array<any>) {
     const stampData = initStamps(); // Initialize stamp array with all pre-populated data
     rawData.forEach((tab, index) => { // for each tab in the cloud save
         Object.entries(tab).map(([key, value]) => { // for each stamp in the current tab
             if (key.toLowerCase() !== "length") {  // ignroe length at the end
-                stampData[index][parseInt(key)].value = value as number; // update our pre-populated data with the stamp level
+                stampData[index][parseInt(key)].level = value as number; // update our pre-populated data with the stamp level
+                stampData[index][parseInt(key)].maxLevel = maxData[index][key] as number;
             }
         })
     })
