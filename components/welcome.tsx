@@ -1,9 +1,7 @@
 import {
-    Container,
     Box,
     Heading,
     Text,
-    Grid,
     Anchor,
     Paragraph
 } from 'grommet'
