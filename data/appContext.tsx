@@ -12,9 +12,9 @@ import parseAlchemy from './domain/alchemy';
 
 class IdleonData {
   private data: Map<string, any>
-  private lastUpdated: string
+  private lastUpdated?: Date
 
-  constructor(data: Map<string, any>, lastUpdated: string) {
+  constructor(data: Map<string, any>, lastUpdated?: Date) {
     this.data = data;
     this.lastUpdated = lastUpdated;
   }
@@ -24,11 +24,22 @@ class IdleonData {
   }
 
   public getLastUpdated = () => {
-    return this.lastUpdated;
+    if (this.lastUpdated) {
+      const resolvedFormat = Intl.DateTimeFormat().resolvedOptions();
+      const options: Intl.DateTimeFormatOptions = {
+        year: "numeric", month: "numeric", day: "numeric",
+        hour: "numeric", minute: "numeric", second: "numeric",
+        hour12: resolvedFormat.hour12,
+        timeZone: resolvedFormat.timeZone
+      };
+      return Intl.DateTimeFormat(resolvedFormat.locale, options).format(this.lastUpdated);
+    }
+
+    return "";
   }
 }
 
-export const AppContext = React.createContext<IdleonData>(new IdleonData(new Map(), ""));
+export const AppContext = React.createContext<IdleonData>(new IdleonData(new Map(), undefined));
 
 /* 
 Known paths:
@@ -36,7 +47,7 @@ Known paths:
 */
 
 export const AppProvider: React.FC<{}> = (props) => {
-  const [state, setState] = useState(new IdleonData(new Map(), ""));
+  const [state, setState] = useState(new IdleonData(new Map(), undefined));
   const user = useContext(AuthContext)?.user || undefined;
   const [db, setDB] = useState<Firestore | undefined>(undefined)
   const [realDB, setRealDB] = useState<Database | undefined>(undefined)
@@ -81,9 +92,7 @@ export const AppProvider: React.FC<{}> = (props) => {
           }), charNames))
           accountData.set("playerNames", charNames);
           accountData.set("alchemy", parseAlchemy(doc.get("CauldronInfo")))
-          const currentDate = new Date().toISOString().split('T')[0];
-          const currentTime = new Date().toISOString().split('T')[1].split('.')[0];
-          const newData = new IdleonData(accountData, `${currentDate} ${currentTime}`);
+          const newData = new IdleonData(accountData, new Date());
           setState(newData);
         });
     }
