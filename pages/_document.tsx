@@ -37,6 +37,7 @@ class MyDocument extends Document {
                     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@800&display=swap" rel="stylesheet" />
                     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400&display=swap" rel="stylesheet" />
                     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@650&display=swap" rel="stylesheet" />
+                    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
                     {/* <link rel="icon" href="/favicon.ico" /> */}
                     <meta
                         name="description"

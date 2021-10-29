@@ -12,9 +12,9 @@ import parseAlchemy from './domain/alchemy';
 
 class IdleonData {
   private data: Map<string, any>
-  private lastUpdated: string
+  private lastUpdated?: Date
 
-  constructor(data: Map<string, any>, lastUpdated: string) {
+  constructor(data: Map<string, any>, lastUpdated?: Date) {
     this.data = data;
     this.lastUpdated = lastUpdated;
   }
@@ -24,11 +24,15 @@ class IdleonData {
   }
 
   public getLastUpdated = () => {
-    return this.lastUpdated;
+    if (this.lastUpdated) {
+      return `${this.lastUpdated.toLocaleDateString()} ${this.lastUpdated.toLocaleTimeString()}`
+    }
+
+    return "";
   }
 }
 
-export const AppContext = React.createContext<IdleonData>(new IdleonData(new Map(), ""));
+export const AppContext = React.createContext<IdleonData>(new IdleonData(new Map(), undefined));
 
 /* 
 Known paths:
@@ -81,9 +85,7 @@ export const AppProvider: React.FC<{}> = (props) => {
           }), charNames))
           accountData.set("playerNames", charNames);
           accountData.set("alchemy", parseAlchemy(doc.get("CauldronInfo")))
-          const currentDate = new Date().toISOString().split('T')[0];
-          const currentTime = new Date().toISOString().split('T')[1].split('.')[0];
-          const newData = new IdleonData(accountData, `${currentDate} ${currentTime}`);
+          const newData = new IdleonData(accountData, new Date());
           setState(newData);
         });
     }
