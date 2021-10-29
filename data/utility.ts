@@ -75,7 +75,7 @@ export const getCoinsArray = (coins: number): Map<Coins, number> => {
         var expo = Math.pow(10, i);
         if (n > expo) {
             var num = Math.floor(n / expo);
-            ret.set(Math.round(i / 2), num);
+            ret.set(Math.round(i / 2) + 1, num);
             n = n % expo;
         }
         i -= 2;
