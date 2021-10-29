@@ -50,11 +50,11 @@ export default function Welcome() {
                     <Paragraph fill size="medium">
                         Running this code will open up a pop-up to login to Legends of Idleon through Google, click your usual user name.
 
-                        After the pop-up is closed you will see a long string in the console.Don't share that string with anyone!!!
+                        After the pop-up is closed you will see a long string in the console. Don&apos;t share that string with anyone!!!
 
-                        Copy the string and press the 'Login' button at the top right
+                        Copy the string and press the &apos;Login&apos; button at the top right
 
-                        Input the value into the text input and press the 'Handle Token' button.
+                        Input the value into the text input and press the &apos;Handle Token&apos; button.
 
                         You should now see a page with all your stamps!
                     </Paragraph>

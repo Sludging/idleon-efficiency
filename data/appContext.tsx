@@ -47,7 +47,7 @@ Known paths:
 */
 
 export const AppProvider: React.FC<{}> = (props) => {
-  const [state, setState] = useState(new IdleonData(new Map(), ""));
+  const [state, setState] = useState(new IdleonData(new Map(), undefined));
   const user = useContext(AuthContext)?.user || undefined;
   const [db, setDB] = useState<Firestore | undefined>(undefined)
   const [realDB, setRealDB] = useState<Database | undefined>(undefined)
