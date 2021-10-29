@@ -40,7 +40,6 @@ export const AuthProvider: React.FC<{}> = (props) => {
     const loginThroughToken = (id_token: string) => {
         const auth = getAuth(app);
         const credential = GoogleAuthProvider.credential(id_token, null);
-        console.log(credential);
         signInWithCredential(auth, credential)
             .then((result) => {
                 setUser(result.user);
