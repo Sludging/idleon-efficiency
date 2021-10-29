@@ -1,6 +1,7 @@
 import {
     Box,
     Grid,
+    Heading,
     Stack,
     Text,
     Tip
@@ -9,8 +10,9 @@ import {
 import { Stamp } from '../data/domain/stamps';
 import { useEffect, useState, useContext } from 'react';
 import { AppContext } from '../data/appContext';
-import { lavaFunc, getCoinsArray } from '../data/utility'
+import { lavaFunc, getCoinsArray, nFormatter } from '../data/utility'
 import CoinsDisplay from "./coinsDisplay";
+import { stampsMap } from "../data/maps";
 
 function StampDisplay({ stamp, index }: { stamp: Stamp, index: number }) {
     const getCardClass = () => {
@@ -42,9 +44,11 @@ function StampDisplay({ stamp, index }: { stamp: Stamp, index: number }) {
                     />
                 </svg>
                 <Box pad="small" gap="small" background="white">
+                    <Text weight="bold">{stamp.name}</Text>
+                    <Text>--------------------------</Text>
                     <Text weight="bold">Boost: {mainText}</Text>
                     {stamp.value % stamp.data.upgradeInterval != 0 && <Text weight="bold">Cost: <CoinsDisplay coinMap={coinMap} /></Text>}
-                    {stamp.value % stamp.data.upgradeInterval == 0 && <Box direction="row" align="center"><Text weight="bold">Material Cost: {Math.round(materialCost).toString()}</Text><Box style={{ width: "36px", height: "36px", backgroundPosition: "0 calc(var(--row) * -36px)" }} className={`icons icons-${stamp.data.material}_x1`} /></Box>}
+                    {stamp.value % stamp.data.upgradeInterval == 0 && <Box direction="row" align="center"><Text weight="bold">Material Cost: {nFormatter(Math.round(materialCost), 1)}</Text><Box style={{ width: "36px", height: "36px", backgroundPosition: "0 calc(var(--row) * -36px)" }} className={`icons icons-${stamp.data.material}_x1`} /></Box>}
                 </Box>
             </Box>
         )
@@ -52,7 +56,7 @@ function StampDisplay({ stamp, index }: { stamp: Stamp, index: number }) {
 
     return (
         <Box key={`stamp_${index}_${stamp.raw_name}`} background="grey">
-            <Stack anchor="bottom-right">
+            <Stack anchor="bottom-left" alignSelf="center">
                 <Tip
                     plain
                     content={
@@ -63,7 +67,7 @@ function StampDisplay({ stamp, index }: { stamp: Stamp, index: number }) {
                     {/* Do the opacity thing in styled components? */}
                     <Box style={{ opacity: stamp.value > 0 ? 1 : 0.2 }} className={getCardClass()} />
                 </Tip>
-                <Box pad={{ horizontal: 'medium' }}>
+                <Box pad={{ horizontal: 'large' }}>
                     <Text size="medium">{stamp.value}</Text>
                 </Box>
             </Stack>
