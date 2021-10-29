@@ -72,7 +72,7 @@ export const AppProvider: React.FC<{}> = (props) => {
         { includeMetadataChanges: true }, (doc) => {
           let accountData = new Map();
           //console.log(doc.data());
-          accountData.set("stamps", parseStamps(doc.get("StampLv")));
+          accountData.set("stamps", parseStamps(doc.get("StampLv"), doc.get("StampLvM")));
           const parsedTraps = parseTraps([...Array(9)].map((_, i) => {
             return doc.get(`PldTraps_${i}`)
           }));
