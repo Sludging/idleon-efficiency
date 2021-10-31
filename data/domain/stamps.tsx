@@ -1,4 +1,5 @@
 import StampData from "../../components/stampData";
+import { lavaFunc } from '../utility'
 
 interface StampData {
     effect: string; // todo: ENUM
@@ -34,6 +35,22 @@ export class Stamp {
         this.type = type;
         this.bonus = bonus;
         this.data = data;
+    }
+
+    getGoldCost = (): number => {
+        return this.data.startingCost * Math.pow(this.data.cCostExp - (this.level / (this.level + 5 * this.data.upgradeInterval)) * 0.25, this.level * (10 / this.data.upgradeInterval));
+    }
+
+    getMaterialCost = (): number => {
+        return this.data.startV * Math.pow(this.data.mCostExp, Math.pow(Math.round(this.level / this.data.upgradeInterval) - 1, 0.8));
+    }
+
+    getBonusText = (): string => {
+        return lavaFunc(this.data.function, this.level, this.data.x1, this.data.x2).toString() + this.bonus;
+    }
+
+    isMaxLevel = (): boolean => {
+        return this.level == this.maxLevel;
     }
 }
 

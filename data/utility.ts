@@ -101,4 +101,8 @@ Things to remember:
 * Trapping = ClassIcons48
 * Construction = ClassIcons49
 * Worship = ClassIcons50
+* Lv0_1
+
+* Exp0_6 = current XP (first index = level, rest = skills)
+* Add system for crystl spawn chance per character.
 */

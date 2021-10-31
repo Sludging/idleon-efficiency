@@ -2,14 +2,71 @@ import {
     Box,
     Text,
     Tabs,
-    Tab
+    Tab,
+    Grid,
+    Stack
 } from 'grommet'
 import { useState, useEffect, useContext } from 'react';
 import { AppContext } from '../data/appContext'
 
-import { Player } from '../data/domain/player';
+import { Player, SkillsIndex } from '../data/domain/player';
 import { getCoinsArray } from '../data/utility';
 import CoinsDisplay from './coinsDisplay';
+
+interface SkillProps {
+    skillsMap: Map<SkillsIndex, number>
+    skillsRank: Map<SkillsIndex, number>
+}
+
+function nth(n: number) { return `${n}${["st", "nd", "rd"][((n + 90) % 100 - 10) % 10 - 1] || "th"}` }
+
+function ShowSkills(props: SkillProps) {
+    const getSkillClass = (skill: SkillsIndex) => {
+        switch (skill) {
+            case SkillsIndex.Mining: return `icons-38 icons-ClassIcons42`;
+            case SkillsIndex.Smithing: return `icons-38 icons-ClassIcons43`;
+            case SkillsIndex.Chopping: return `icons-38 icons-ClassIcons44`;
+            case SkillsIndex.Fishing: return `icons-38 icons-ClassIcons45`;
+            case SkillsIndex.Alchemy: return `icons-38 icons-ClassIcons46`;
+            case SkillsIndex.Catching: return `icons-38 icons-ClassIcons47`;
+            case SkillsIndex.Trapping: return `icons-38 icons-ClassIcons48`;
+            case SkillsIndex.Construction: return `icons-38 icons-ClassIcons49`;
+            case SkillsIndex.Worship: return `icons-38 icons-ClassIcons50`;
+            default: return '';
+        }
+    }
+
+    return (
+        <Grid
+            rows={['1/3', '1/3', '1/3']}
+            columns={['1/3', '1/3', '1/3']}
+            areas={[
+                ['mining', 'fishing', 'trapping'],
+                ['smithing', 'alchemy', 'construction'],
+                ['chopping', 'catching', 'worship'],
+            ]}
+        >
+            {
+                Array.from(props.skillsMap).map(([skillIndex, skillLevel]) => {
+                    const skillRank = props.skillsRank.get(skillIndex);
+                    return (
+                        <Box key={`skill_${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} gridArea={`${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`}>
+                            <Stack anchor="bottom-left" alignSelf="center" >
+                                <Box className={getSkillClass(skillIndex)} />
+                                <Box pad={{ horizontal: 'large' }}>
+                                    <Text size="medium">{skillLevel}</Text>
+                                </Box>
+                                <Box pad={{ horizontal: 'xlarge' }}>
+                                    {skillRank != undefined && <Text>{nth(skillRank + 1)}</Text>}
+                                </Box>
+                            </Stack>
+
+                        </Box>)
+                })
+            }
+        </Grid >
+    );
+}
 
 export default function PlayerData() {
     const [playerData, setPlayerData] = useState<Array<Player>>();
@@ -33,7 +90,7 @@ export default function PlayerData() {
                         const coinMap = getCoinsArray(player.money);
                         return (
                             <Tab key={`player_${player.playerID}`} title={`${player.playerName ? player.playerName : `Character ${player.playerID}`}`}>
-                                <Box>
+                                <Box pad="medium" gap="small">
                                     <Text>Class / Level = {player.class} / {player.level}</Text>
                                     <Text>Current Monster / Map = {player.currentMonster} / {player.currentMap}</Text>
                                     {
@@ -46,8 +103,11 @@ export default function PlayerData() {
                                     <Text>WIS = {player.stats.wisdom}</Text>
                                     <Text>LUK = {player.stats.luck}</Text>
                                     <Text>Money = </Text><CoinsDisplay coinMap={coinMap} />
+                                    <Box pad="medium">
+                                        <ShowSkills skillsMap={player.skills} skillsRank={player.skillsRank} />
+                                    </Box>
                                 </Box>
-                                <Box direction="row-responsive">
+                                <Box direction="row-responsive" pad="medium">
                                     <Box key={`player_${index}_equip`}>
                                         {
                                             [...Array(8)].map((_, equipIndex) => {

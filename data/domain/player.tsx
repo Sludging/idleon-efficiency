@@ -9,7 +9,8 @@ export interface rawPlayerData {
     afkTarget: number
     currentMap: number
     starSigns: Array<string>
-    money: number
+    money: number,
+    skills: Array<number>
 }
 
 export class PlayerStats {
@@ -31,7 +32,6 @@ export class PlayerStats {
 export class Item {
     raw_name: string;
     raw_item_data: any;
-    icon: string;
     location: number;
     type: string;
     display_name: string;
@@ -39,7 +39,6 @@ export class Item {
     constructor(raw_name: string, location: number, type: string) {
         this.raw_name = raw_name;
         this.raw_item_data = itemMap.get(raw_name);
-        this.icon = `/icons/assets/data/${raw_name}.png`;
         this.location = location;
         this.type = type;
         this.display_name = this.raw_item_data?.displayName.replace(/_/g, " ") || "Unknown";
@@ -76,6 +75,18 @@ export class PlayerEquipment {
     }
 }
 
+export enum SkillsIndex {
+    Mining = 1,
+    Smithing = 2,
+    Chopping = 3,
+    Fishing = 4,
+    Alchemy = 5,
+    Catching = 6,
+    Trapping = 7,
+    Construction = 8,
+    Worship = 9
+}
+
 export class Player {
     playerID: number;
     playerName: string;
@@ -87,10 +98,14 @@ export class Player {
     currentMap: string = "Blank";
     starSigns: Array<string> = [];
     money: number = 0;
+    skills: Map<SkillsIndex, number>;
+    skillsRank: Map<SkillsIndex, number>;
 
     constructor(playerID: number, playerName: string) {
         this.playerID = playerID;
         this.playerName = playerName;
+        this.skills = new Map<SkillsIndex, number>();
+        this.skillsRank = new Map<SkillsIndex, number>();
     }
 }
 
@@ -119,6 +134,7 @@ function parseEquipment(rawPlayerData: rawPlayerData) {
 }
 
 export default function parsePlayer(rawData: Array<rawPlayerData>, playerNames: Array<string>) {
+    const allSkillsMap: Map<SkillsIndex, Array<number>> = new Map<SkillsIndex, Array<number>>();
     const parsedData = rawData.map((rawPlayerData, index) => {
         if (!playerNames) {
             console.log("Player Names is missing!");
@@ -151,7 +167,31 @@ export default function parsePlayer(rawData: Array<rawPlayerData>, playerNames: 
         if (rawPlayerData.money) {
             currentPlayer.money = rawPlayerData.money;
         }
+        rawPlayerData.skills.forEach((skillLevel, skillIndex) => {
+            // Only get the indexes we care about
+            if (skillIndex in SkillsIndex) {
+                // update the player skill level
+                currentPlayer.skills.set(skillIndex as SkillsIndex, skillLevel);
+                // record skill levels across all players in a map
+                if (!allSkillsMap.has(skillIndex)) {
+                    allSkillsMap.set(skillIndex, []);
+                }
+                allSkillsMap.get(skillIndex)?.push(skillLevel);
+            }
+        })
         return currentPlayer;
     });
+
+    // identify player ranking in each skill
+    parsedData.forEach((player) => {
+        for (const [skillIndex, skillLevel] of player.skills) {
+            const sortedList = allSkillsMap.get(skillIndex)?.sort((a, b) => b - a);
+            if (sortedList) {
+                const skillRank = sortedList.indexOf(skillLevel);
+                player.skillsRank.set(skillIndex, skillRank);
+            }
+        }
+    })
+
     return parsedData;
 }
