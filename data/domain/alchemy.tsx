@@ -1,6 +1,6 @@
 import { lavaFunc } from '../utility'
 
-const calcBubbleMatCost = (bubbleLvl: number, baseCost: number, isLiquid: boolean, cauldCostReduxLvl: number = 0, undevelopedCostsBubbleLevel: number = 0, bubbleCostVialLvl: number = 0, bubbleBargainLvl: number = 0, bubbleMultClassLvl: number = 0, shopBargainBought: number = 0): number => {
+const calcBubbleMatCost = (bubbleLvl: number, baseCost: number, isLiquid: boolean, cauldCostReduxLvl: number = 0, undevelopedCostsBubbleLevel: number = 0, bubbleCostVialLvl: number = 0, bubbleBargainLvl: number = 0, bubbleMultClassLvl: number = 0, shopBargainBought: number = 0, hasAchivement: boolean): number => {
     if (isLiquid) {
         return baseCost + Math.floor(bubbleLvl / 20);
     } else {
@@ -19,7 +19,7 @@ const calcBubbleMatCost = (bubbleLvl: number, baseCost: number, isLiquid: boolea
         );
         const shopBargainBoost = Math.max(0.1, Math.pow(0.75, shopBargainBought));
         // for any material besides liquid
-        return Math.round(first * cauldCostReduxBoost * bubbleBargainBoost * bubbleCostBubbleBoost * shopBargainBoost);
+        return Math.round(first * cauldCostReduxBoost * bubbleBargainBoost * bubbleCostBubbleBoost * shopBargainBoost * (hasAchivement ? 0.9 : 1));
     }
 }
 
@@ -58,10 +58,10 @@ export class Bubble {
         this.requirements = requirements;
     }
 
-    getMaterialCost = (cauldCostReduxLvl: number = 0, undevelopedCostsBubbleLevel: number = 0, bubbleCostVialLvl: number = 0, bubbleBargainLvl: number = 0, bubbleMultClassLvl: number = 0, shopBargainBought: number = 0): Map<string, number> => {
+    getMaterialCost = (cauldCostReduxLvl: number = 0, undevelopedCostsBubbleLevel: number = 0, bubbleCostVialLvl: number = 0, bubbleBargainLvl: number = 0, bubbleMultClassLvl: number = 0, shopBargainBought: number = 0, hasAchivement: boolean = false): Map<string, number> => {
         let toReturn = new Map<string, number>();
         this.requirements.forEach((req) => {
-            toReturn.set(req.item, calcBubbleMatCost(this.level, req.quantity, req.item.includes("Liquid"), cauldCostReduxLvl, undevelopedCostsBubbleLevel, bubbleCostVialLvl, bubbleBargainLvl, bubbleMultClassLvl, shopBargainBought))
+            toReturn.set(req.item, calcBubbleMatCost(this.level, req.quantity, req.item.includes("Liquid"), cauldCostReduxLvl, undevelopedCostsBubbleLevel, bubbleCostVialLvl, bubbleBargainLvl, bubbleMultClassLvl, shopBargainBought, hasAchivement))
         })
         return toReturn;
     }
@@ -141,6 +141,10 @@ export class Alchemy {
         }
 
         return 0;
+    }
+
+    hasAchivement = (): boolean => {
+        return this.cauldrons[CauldronIndex.HighIQ].bubbles[13].level > 50;
     }
 }
 
