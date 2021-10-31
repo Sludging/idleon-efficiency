@@ -10,9 +10,8 @@ import {
 import { Stamp } from '../data/domain/stamps';
 import { useEffect, useState, useContext } from 'react';
 import { AppContext } from '../data/appContext';
-import { lavaFunc, getCoinsArray, nFormatter } from '../data/utility'
+import { getCoinsArray, nFormatter } from '../data/utility'
 import CoinsDisplay from "./coinsDisplay";
-import { stampsMap } from "../data/maps";
 
 function StampDisplay({ stamp, index }: { stamp: Stamp, index: number }) {
     const getCardClass = () => {
@@ -24,45 +23,49 @@ function StampDisplay({ stamp, index }: { stamp: Stamp, index: number }) {
         return `icons ${className}`;
     }
 
-    function TipContent({ stamp }: { stamp: Stamp }) {
-        const goldCost = stamp.data.startingCost * Math.pow(stamp.data.cCostExp - (stamp.level / (stamp.level + 5 * stamp.data.upgradeInterval)) * 0.25, stamp.level * (10 / stamp.data.upgradeInterval));
-        const materialCost = stamp.data.startV * Math.pow(stamp.data.mCostExp, Math.pow(Math.round(stamp.level / stamp.data.upgradeInterval) - 1, 0.8));
-        const bonus = lavaFunc(stamp.data.function, stamp.level, stamp.data.x1, stamp.data.x2).toString() + stamp.bonus;
-        const mainText = stamp.name == "FILLER" ? "Nothing to see here! Filler content." : bonus;
-        const coinMap = getCoinsArray(goldCost);
-
+    function TipContent({ stamp, faceLeft }: { stamp: Stamp, faceLeft: boolean }) {
         if (stamp.level == 0) {
             return <></>
         }
         return (
             <Box direction="row" align="center">
-                <svg viewBox="0 0 22 22" version="1.1" width="22px" height="22px">
-                    <polygon
-                        fill="white"
-                        points="6 2 18 12 6 22"
-                        transform="matrix(-1 0 0 1 30 0)"
-                    />
-                </svg>
+                {!faceLeft &&
+                    <svg viewBox="0 0 22 22" version="1.1" width="22px" height="22px">
+                        <polygon
+                            fill="white"
+                            points="6 2 18 12 6 22"
+                            transform="matrix(-1 0 0 1 30 0)"
+                        />
+                    </svg>
+                }
                 <Box pad="small" gap="small" background="white">
                     <Text weight="bold">{stamp.name}</Text>
                     <Text>--------------------------</Text>
-                    <Text weight="bold">Boost: {mainText}</Text>
-                    {stamp.level < stamp.maxLevel && <Text weight="bold">Cost: <CoinsDisplay coinMap={coinMap} /></Text>}
-                    {stamp.level == stamp.maxLevel && <Box direction="row" align="center"><Text weight="bold">Material Cost: {nFormatter(Math.round(materialCost), 1)}</Text><Box style={{ width: "36px", height: "36px", backgroundPosition: "0 calc(var(--row) * -36px)" }} className={`icons icons-${stamp.data.material}_x1`} /></Box>}
+                    <Text size="small">Bonus: {stamp.getBonusText()}</Text>
+                    {!stamp.isMaxLevel() && <Box direction="row" gap="small"><Text size="small">Cost: </Text><CoinsDisplay coinMap={getCoinsArray(stamp.getGoldCost())} /></Box>}
+                    {stamp.isMaxLevel() && <Box direction="row" align="center"><Text size="small">Material Cost: {nFormatter(Math.round(stamp.getMaterialCost()), 1)}</Text><Box style={{ width: "36px", height: "36px", backgroundPosition: "0 calc(var(--row) * -36px)" }} className={`icons icons-${stamp.data.material}_x1`} /></Box>}
                 </Box>
+                {faceLeft &&
+                    <svg viewBox="0 0 22 22" version="1.1" width="22px" height="22px">
+                        <polygon
+                            fill="white"
+                            points="0 2 12 12 0 22"
+                        />
+                    </svg>
+                }
             </Box>
         )
     }
 
     return (
-        <Box key={`stamp_${index}_${stamp.raw_name}`} background="grey">
+        <Box key={`stamp_${index}_${stamp.raw_name}`}>
             <Stack anchor="bottom-left" alignSelf="center">
                 <Tip
                     plain
                     content={
-                        <TipContent stamp={stamp} />
+                        <TipContent stamp={stamp} faceLeft={stamp.type == "Misc Stamp"} />
                     }
-                    dropProps={{ align: { left: 'right' } }}
+                    dropProps={{ align: stamp.type == "Misc Stamp" ? { right: 'left' } : { left: 'right' } }}
                 >
                     {/* Do the opacity thing in styled components? */}
                     <Box style={{ opacity: stamp.level > 0 ? 1 : 0.2 }} className={getCardClass()} />
@@ -78,9 +81,9 @@ function StampDisplay({ stamp, index }: { stamp: Stamp, index: number }) {
 function StampTab({ tab, index }: { tab: Stamp[], index: number }) {
     return (
         <Box>
-            <h3>Tab #{index}</h3>
-            <Box background="grey">
-                <Grid columns="1/4" gap="none" >
+            <h3>{tab[0].type}</h3>
+            <Box background="grey" fill>
+                <Grid columns="1/4" gap="none">
                     {
                         tab.map((stamp: Stamp) => {
                             if (stamp != undefined) {

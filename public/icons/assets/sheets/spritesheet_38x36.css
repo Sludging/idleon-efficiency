@@ -1,0 +1,78 @@
+.icons-38 {
+            background-image: url(spritesheet_38x36.png);
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 38px;
+            height: 36px;
+            background-size: cover;
+            background-position: 0 calc(var(--row) * -36px)
+        }
+        .icons-ClassIcons0 { --row: 0; }
+.icons-ClassIcons1 { --row: 1; }
+.icons-ClassIcons10 { --row: 2; }
+.icons-ClassIcons11 { --row: 3; }
+.icons-ClassIcons12 { --row: 4; }
+.icons-ClassIcons13 { --row: 5; }
+.icons-ClassIcons14 { --row: 6; }
+.icons-ClassIcons15 { --row: 7; }
+.icons-ClassIcons16 { --row: 8; }
+.icons-ClassIcons17 { --row: 9; }
+.icons-ClassIcons18 { --row: 10; }
+.icons-ClassIcons19 { --row: 11; }
+.icons-ClassIcons2 { --row: 12; }
+.icons-ClassIcons20 { --row: 13; }
+.icons-ClassIcons21 { --row: 14; }
+.icons-ClassIcons22 { --row: 15; }
+.icons-ClassIcons23 { --row: 16; }
+.icons-ClassIcons24 { --row: 17; }
+.icons-ClassIcons25 { --row: 18; }
+.icons-ClassIcons26 { --row: 19; }
+.icons-ClassIcons27 { --row: 20; }
+.icons-ClassIcons28 { --row: 21; }
+.icons-ClassIcons29 { --row: 22; }
+.icons-ClassIcons3 { --row: 23; }
+.icons-ClassIcons30 { --row: 24; }
+.icons-ClassIcons31 { --row: 25; }
+.icons-ClassIcons32 { --row: 26; }
+.icons-ClassIcons33 { --row: 27; }
+.icons-ClassIcons34 { --row: 28; }
+.icons-ClassIcons35 { --row: 29; }
+.icons-ClassIcons36 { --row: 30; }
+.icons-ClassIcons37 { --row: 31; }
+.icons-ClassIcons38 { --row: 32; }
+.icons-ClassIcons39 { --row: 33; }
+.icons-ClassIcons4 { --row: 34; }
+.icons-ClassIcons40 { --row: 35; }
+.icons-ClassIcons41 { --row: 36; }
+.icons-ClassIcons42 { --row: 37; }
+.icons-ClassIcons43 { --row: 38; }
+.icons-ClassIcons44 { --row: 39; }
+.icons-ClassIcons45 { --row: 40; }
+.icons-ClassIcons46 { --row: 41; }
+.icons-ClassIcons47 { --row: 42; }
+.icons-ClassIcons48 { --row: 43; }
+.icons-ClassIcons49 { --row: 44; }
+.icons-ClassIcons5 { --row: 45; }
+.icons-ClassIcons50 { --row: 46; }
+.icons-ClassIcons51 { --row: 47; }
+.icons-ClassIcons52 { --row: 48; }
+.icons-ClassIcons53 { --row: 49; }
+.icons-ClassIcons54 { --row: 50; }
+.icons-ClassIcons55 { --row: 51; }
+.icons-ClassIcons56 { --row: 52; }
+.icons-ClassIcons57 { --row: 53; }
+.icons-ClassIcons58 { --row: 54; }
+.icons-ClassIcons59 { --row: 55; }
+.icons-ClassIcons6 { --row: 56; }
+.icons-ClassIcons60 { --row: 57; }
+.icons-ClassIcons61 { --row: 58; }
+.icons-ClassIcons62 { --row: 59; }
+.icons-ClassIcons63 { --row: 60; }
+.icons-ClassIcons64 { --row: 61; }
+.icons-ClassIcons65 { --row: 62; }
+.icons-ClassIcons7 { --row: 63; }
+.icons-ClassIcons8 { --row: 64; }
+.icons-ClassIcons9 { --row: 65; }
+.icons-ClassIconsF { --row: 66; }
+.icons-ClassIconsM { --row: 67; }
+.icons-ClassIconsQmark { --row: 68; }
