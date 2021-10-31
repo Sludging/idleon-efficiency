@@ -1,0 +1,14 @@
+.icons-23 {
+            background-image: url(spritesheet_23x27.png);
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 23px;
+            height: 27px;
+            background-size: cover;
+            background-position: 0 calc(var(--row) * -27px)
+        }
+        .icons-Coins10 { --row: 0; }
+.icons-Coins6 { --row: 1; }
+.icons-Coins7 { --row: 2; }
+.icons-Coins8 { --row: 3; }
+.icons-Coins9 { --row: 4; }

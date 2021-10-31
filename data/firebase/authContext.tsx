@@ -5,6 +5,7 @@ import { GoogleAuthProvider, signInWithPopup, signInWithCredential, signOut } fr
 
 interface AuthData {
     user: User | null
+    isLoading: boolean
     loginFunction: Function
     logoutFunction: Function
     tokenFunction: Function
@@ -22,6 +23,7 @@ export const getAuthData = (): AuthData => {
 
 export const AuthProvider: React.FC<{}> = (props) => {
     const [user, setUser] = useState<User | null>(null);
+    const [loading, setLoading] = useState(true);
 
     const loginUser = () => {
         const auth = getAuth(app);
@@ -60,22 +62,27 @@ export const AuthProvider: React.FC<{}> = (props) => {
                 const errorMessage = error.message;
                 console.log(errorCode, errorMessage);
             });
-        location.reload();
     }
 
 
     useEffect(() => {
+        setLoading(true);
         const auth = getAuth(app);
         auth.onAuthStateChanged(res => {
             if (res) {
                 setUser(res);
             }
+            else {
+                setUser(null);
+            }
+            setLoading(false);
         })
-    }, []);
+    }, [user]);
 
     return (
         <AuthContext.Provider value={{
             user: user,
+            isLoading: loading,
             loginFunction: loginUser,
             logoutFunction: logout,
             tokenFunction: loginThroughToken

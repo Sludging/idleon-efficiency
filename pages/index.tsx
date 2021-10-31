@@ -5,6 +5,7 @@ import StampData from '../components/stampData';
 import TrapData from '../components/trapData';
 import AlchemyData from '../components/alchemyData';
 import PlayerData from '../components/playerData';
+import JsonData from '../components/jsonData';
 
 import Layout from '../components/layout';
 import { AppContext } from '../data/appContext';
@@ -42,6 +43,9 @@ const Home: NextPage = () => {
           </Tab>
         <Tab title="Statues">
           <Box><Text>Nothing here yet!</Text></Box>
+        </Tab>
+        <Tab title="Raw Data">
+          <JsonData />
         </Tab>
         </Tabs>
       }
