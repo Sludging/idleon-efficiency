@@ -32,7 +32,6 @@ export class PlayerStats {
 export class Item {
     raw_name: string;
     raw_item_data: any;
-    icon: string;
     location: number;
     type: string;
     display_name: string;
@@ -177,7 +176,7 @@ export default function parsePlayer(rawData: Array<rawPlayerData>, playerNames: 
                 if (!allSkillsMap.has(skillIndex)) {
                     allSkillsMap.set(skillIndex, []);
                 }
-                allSkillsMap.get(skillIndex).push(skillLevel);
+                allSkillsMap.get(skillIndex)?.push(skillLevel);
             }
         })
         return currentPlayer;
@@ -186,9 +185,11 @@ export default function parsePlayer(rawData: Array<rawPlayerData>, playerNames: 
     // identify player ranking in each skill
     parsedData.forEach((player) => {
         for (const [skillIndex, skillLevel] of player.skills) {
-            const sortedList = allSkillsMap.get(skillIndex).sort((a, b) => b - a);
-            const skillRank = sortedList.indexOf(skillLevel);
-            player.skillsRank.set(skillIndex, skillRank);
+            const sortedList = allSkillsMap.get(skillIndex)?.sort((a, b) => b - a);
+            if (sortedList) {
+                const skillRank = sortedList.indexOf(skillLevel);
+                player.skillsRank.set(skillIndex, skillRank);
+            }
         }
     })
 
