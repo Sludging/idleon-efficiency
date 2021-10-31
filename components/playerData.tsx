@@ -48,15 +48,16 @@ function ShowSkills(props: SkillProps) {
         >
             {
                 Array.from(props.skillsMap).map(([skillIndex, skillLevel]) => {
+                    const skillRank = props.skillsRank.get(skillIndex);
                     return (
-                        <Box gridArea={`${SkillsIndex[skillIndex].toLowerCase() | 'Unknown'}`}>
+                        <Box key={`skill_${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} gridArea={`${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`}>
                             <Stack anchor="bottom-left" alignSelf="center" >
                                 <Box className={getSkillClass(skillIndex)} />
                                 <Box pad={{ horizontal: 'large' }}>
                                     <Text size="medium">{skillLevel}</Text>
                                 </Box>
                                 <Box pad={{ horizontal: 'xlarge' }}>
-                                    <Text>{nth(props.skillsRank.get(skillIndex) + 1)}</Text>
+                                    {skillRank != undefined && <Text>{nth(skillRank + 1)}</Text>}
                                 </Box>
                             </Stack>
 

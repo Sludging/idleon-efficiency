@@ -275,7 +275,7 @@ const handleCauldron = (cauldronData: Map<string, number>, index: number, alchem
 
     for (let boost in CauldronBoostIndex) {
         // ignore the keys from the enum
-        if (isNaN(boost)) {
+        if (isNaN(parseInt(boost))) {
             continue;
         }
         alchemy.cauldrons[index].boostLevels[boost] = boostLevels[(index * 4) + parseInt(boost.toString())];
@@ -283,16 +283,16 @@ const handleCauldron = (cauldronData: Map<string, number>, index: number, alchem
 }
 
 const handleVial = (vialData: Map<string, number>, alchemy: Alchemy) => {
-    Object.entries(vialData).forEach(([vial, level], _) => {
+    for (let [vial, level] of Object.entries(vialData)) {
         if (vial !== "length" && parseInt(vial) < alchemy.vials.length) {
             try {
-                alchemy.vials[vial].level = level;
+                alchemy.vials[parseInt(vial)].level = level;
             }
             catch (e) {
                 console.log(`Failed on vial ${vial}`, e)
             }
         }
-    });
+    };
 }
 
 export default function parseAlchemy(alchemyData: Array<Map<string, number>>, boostLevels: Array<number>) {
