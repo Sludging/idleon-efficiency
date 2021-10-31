@@ -87,11 +87,13 @@ export const AppProvider: React.FC<{}> = (props) => {
               afkTarget: doc.get(`AFKtarget_${i}`),
               currentMap: doc.get(`CurrentMap_${i}`),
               starSigns: doc.get(`PVtStarSign_${i}`).split(','),
-              money: doc.get(`Money_${i}`)
+              money: doc.get(`Money_${i}`),
+              skills: doc.get(`Lv0_${i}`)
             }
           }), charNames))
           accountData.set("playerNames", charNames);
-          accountData.set("alchemy", parseAlchemy(doc.get("CauldronInfo")))
+          accountData.set("alchemy", parseAlchemy(doc.get("CauldronInfo"), doc.get("CauldUpgLVs")));
+          accountData.set("rawData", doc.data());
           const newData = new IdleonData(accountData, new Date());
           setState(newData);
         });

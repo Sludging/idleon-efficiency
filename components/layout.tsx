@@ -34,6 +34,7 @@ export default function Layout({
     const [user, setUser] = useState<User | undefined | null>(null);
     const [lastUpdated, setLastUpdated] = useState<string>("");
     const [value, setValue] = useState('');
+    const [loading, setLoading] = useState(true);
 
     const onButtonClick = (toCall: Function | undefined, value?: string) => {
         if (toCall) {
@@ -50,6 +51,7 @@ export default function Layout({
     useEffect(() => {
         setUser(authData?.user);
         setLastUpdated(idleonData.getLastUpdated())
+        setLoading(authData ? authData.isLoading : true);
     }, [authData, idleonData])
 
     return (
@@ -82,8 +84,9 @@ export default function Layout({
                     </Layer>
                 }
             </Header>
-            {user && <Main overflow='true'>{children}</Main>}
-            {!user && <Main><Welcome /></Main>}
+            {loading && <Box pad="large" fill align="center"><Text size="large">Loading Data</Text></Box>}
+            {!loading && user && <Main overflow='true'>{children}</Main>}
+            {!loading && !user && <Main><Welcome /></Main>}
         </Container>
     )
 }
