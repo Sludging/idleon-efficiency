@@ -125,46 +125,46 @@ export default function AlchemyData() {
     const [undevelopedCostsBubbleLevel, setUndevelopedCostsBubbleLevel] = useState<number>(0);
     const [barleyBrewVialLevel, setBarleyBrewVialLevel] = useState<number>(0);
     const [hasAlchemyAchievement, setHasAlchemyAchievement] = useState<boolean>(false);
-    const [discountLevel, setDiscountLevel] = useState<string>('');
+    const [discountLevel, setDiscountLevel] = useState<string>('0');
     const [classMulti, setClassMulti] = useState(false);
 
     const idleonData = useContext(AppContext);
     const bargainOptions = [
         {
             label: 'No discount',
-            value: 0,
+            value: '0',
         },
         {
             label: '25%',
-            value: 1,
+            value: '1',
         },
         {
             label: '43.75%',
-            value: 2,
+            value: '2',
         },
         {
             label: '57.81%',
-            value: 3,
+            value: '3',
         },
         {
             label: '68.36%',
-            value: 4,
+            value: '4',
         },
         {
             label: '76.27%',
-            value: 5,
+            value: '5',
         },
         {
             label: '82.20%',
-            value: 6,
+            value: '6',
         },
         {
             label: '86.65%',
-            value: 7,
+            value: '7',
         },
         {
             label: '90%',
-            value: 8,
+            value: '8',
         },
     ];
 
@@ -188,7 +188,6 @@ export default function AlchemyData() {
                     onChange={(event) => setClassMulti(event.target.checked)}
                 />
                 <Select
-                    placeholder="Shop discount"
                     labelKey="label"
                     valueKey={{ key: 'value', reduce: true }}
                     value={discountLevel}
