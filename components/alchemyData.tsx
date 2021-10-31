@@ -3,7 +3,9 @@ import {
     Grid,
     Stack,
     Text,
-    Tip
+    Tip,
+    CheckBox,
+    Select
 } from "grommet"
 import styled from 'styled-components'
 
@@ -16,20 +18,37 @@ const CapitalizedH3 = styled.h3`
     text-transform: capitalize
 `
 
-function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVialLevel }: { cauldron: Cauldron, undevelopedCostsBubbleLevel: number, barleyBrewVialLevel: number }) {
+interface DisplayProps {
+    cauldron: Cauldron,
+    undevelopedCostsBubbleLevel: number,
+    barleyBrewVialLevel: number,
+    hasAchivement: boolean,
+    discountLevel: number,
+    classMultiOn: boolean
+}
+
+function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVialLevel, hasAchivement, discountLevel, classMultiOn }: DisplayProps) {
 
     const [bargainBubbleLevel, setBargainBubbleLevel] = useState(0);
+    const [classMultiBubbleLevel, setClassMultiBubbleLevel] = useState(0);
     const [cauldronCostLevel, setCauldronCostLevel] = useState(0);
 
     useEffect(() => {
         setBargainBubbleLevel(cauldron.bubbles[14].level);
+        if (classMultiOn && cauldron.short_name != "Y") {
+            setClassMultiBubbleLevel(cauldron.bubbles[1].level)
+        }
+        else {
+            setClassMultiBubbleLevel(0);
+        }
         setCauldronCostLevel(cauldron.boostLevels[CauldronBoostIndex.Cost]);
-    }, [cauldron])
+    }, [cauldron, classMultiOn, discountLevel])
 
     function TipContent({ bubble, faceLeft }: { bubble: Bubble, faceLeft: boolean }) {
         if (bubble.level == 0) {
             return <></>
         }
+        const materialCosts: Map<string, number> = bubble.getMaterialCost(cauldronCostLevel, undevelopedCostsBubbleLevel, barleyBrewVialLevel, bargainBubbleLevel, classMultiBubbleLevel, discountLevel, hasAchivement);
         return (
             <Box direction="row" align="center" width={{ max: 'medium' }}>
                 {!faceLeft &&
@@ -46,7 +65,7 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
                     <Text>--------------------------</Text>
                     <Text size="small">Bonus: {bubble.getBonusText()}</Text>
                     {
-                        Array.from(bubble.getMaterialCost(cauldronCostLevel, undevelopedCostsBubbleLevel, barleyBrewVialLevel, bargainBubbleLevel)).map(([item, cost]) => {
+                        Array.from(materialCosts).map(([item, cost]) => {
                             return (
                                 <Box key={`${bubble.name}_${item}`} direction="row" align="center" ><Text size="small">Material Cost: {nFormatter(Math.round(cost), 2)}</Text><Box style={{ width: "36px", height: "36px", backgroundPosition: "0 calc(var(--row) * -36px)" }} className={`icons icons-${item}_x1`} /></Box>
                             )
@@ -105,7 +124,49 @@ export default function AlchemyData() {
     const [alchemyData, setAlchemyData] = useState<Alchemy>();
     const [undevelopedCostsBubbleLevel, setUndevelopedCostsBubbleLevel] = useState<number>(0);
     const [barleyBrewVialLevel, setBarleyBrewVialLevel] = useState<number>(0);
+    const [hasAlchemyAchievement, setHasAlchemyAchievement] = useState<boolean>(false);
+    const [discountLevel, setDiscountLevel] = useState<string>('');
+    const [classMulti, setClassMulti] = useState(false);
+
     const idleonData = useContext(AppContext);
+    const bargainOptions = [
+        {
+            label: 'No discount',
+            value: 0,
+        },
+        {
+            label: '25%',
+            value: 1,
+        },
+        {
+            label: '43.75%',
+            value: 2,
+        },
+        {
+            label: '57.81%',
+            value: 3,
+        },
+        {
+            label: '68.36%',
+            value: 4,
+        },
+        {
+            label: '76.27%',
+            value: 5,
+        },
+        {
+            label: '82.20%',
+            value: 6,
+        },
+        {
+            label: '86.65%',
+            value: 7,
+        },
+        {
+            label: '90%',
+            value: 8,
+        },
+    ];
 
     useEffect(() => {
         if (idleonData) {
@@ -115,18 +176,36 @@ export default function AlchemyData() {
             // get undeveloped costs bubble level
             setUndevelopedCostsBubbleLevel(alchemyData?.getUndevelopedCostsBubbleLevel() ?? 0);
             setBarleyBrewVialLevel(alchemyData?.getBarleyBrewVialLevel() ?? 0);
+            setHasAlchemyAchievement(alchemyData?.hasAchivement() ?? false);
         }
     }, [idleonData, alchemyData])
     return (
-        <Grid columns="1/4">
-            {
-                alchemyData && Object.entries(alchemyData.cauldrons).map(([_, cauldron], index) => {
-                    return (<CauldronDisplay key={`tab_${index}`} cauldron={cauldron} undevelopedCostsBubbleLevel={undevelopedCostsBubbleLevel} barleyBrewVialLevel={barleyBrewVialLevel} />)
-                })
-            }
-            {
-                !alchemyData && <Text>Not ready yet</Text>
-            }
-        </Grid>
+        <Box >
+            <Box gap="medium" pad="medium" align="start">
+                <CheckBox
+                    checked={classMulti}
+                    label="Class multiplier bonus?"
+                    onChange={(event) => setClassMulti(event.target.checked)}
+                />
+                <Select
+                    placeholder="Shop discount"
+                    labelKey="label"
+                    valueKey={{ key: 'value', reduce: true }}
+                    value={discountLevel}
+                    options={bargainOptions}
+                    onChange={({ value: nextValue }) => setDiscountLevel(nextValue)}
+                />
+            </Box>
+            <Grid columns="1/4">
+                {
+                    alchemyData && Object.entries(alchemyData.cauldrons).map(([_, cauldron], index) => {
+                        return (<CauldronDisplay key={`tab_${index}`} cauldron={cauldron} undevelopedCostsBubbleLevel={undevelopedCostsBubbleLevel} barleyBrewVialLevel={barleyBrewVialLevel} hasAchivement={hasAlchemyAchievement} discountLevel={parseInt(discountLevel)} classMultiOn={classMulti} />)
+                    })
+                }
+                {
+                    !alchemyData && <Text>Not ready yet</Text>
+                }
+            </Grid>
+        </Box>
     )
 }
