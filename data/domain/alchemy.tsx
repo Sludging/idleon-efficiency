@@ -19,6 +19,7 @@ export const AlchemyConst = {
     VialIndex: 4,
     UnderdevelopedCosts: 6,
     BarleyBrew: 9,
+    BlueFlav: 18,
     SmartBoi: 13,
     CauldronCount: 4
 };
