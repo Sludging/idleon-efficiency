@@ -22,12 +22,12 @@ interface DisplayProps {
     cauldron: Cauldron,
     undevelopedCostsBubbleLevel: number,
     barleyBrewVialLevel: number,
-    hasAchivement: boolean,
+    hasAchievement: boolean,
     discountLevel: number,
-    classMultiOn: boolean
+    classMultiBonus: boolean
 }
 
-function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVialLevel, hasAchivement, discountLevel, classMultiOn }: DisplayProps) {
+function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVialLevel, hasAchievement, discountLevel, classMultiBonus }: DisplayProps) {
 
     const [bargainBubbleLevel, setBargainBubbleLevel] = useState(0);
     const [classMultiBubbleLevel, setClassMultiBubbleLevel] = useState(0);
@@ -35,20 +35,20 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
 
     useEffect(() => {
         setBargainBubbleLevel(cauldron.bubbles[14].level);
-        if (classMultiOn && cauldron.short_name != "Y") {
+        if (classMultiBonus && cauldron.short_name != "Y") {
             setClassMultiBubbleLevel(cauldron.bubbles[1].level)
         }
         else {
             setClassMultiBubbleLevel(0);
         }
         setCauldronCostLevel(cauldron.boostLevels[CauldronBoostIndex.Cost]);
-    }, [cauldron, classMultiOn, discountLevel])
+    }, [cauldron, classMultiBonus, discountLevel])
 
     function TipContent({ bubble, faceLeft }: { bubble: Bubble, faceLeft: boolean }) {
         if (bubble.level == 0) {
             return <></>
         }
-        const materialCosts: Map<string, number> = bubble.getMaterialCost(cauldronCostLevel, undevelopedCostsBubbleLevel, barleyBrewVialLevel, bargainBubbleLevel, classMultiBubbleLevel, discountLevel, hasAchivement);
+        const materialCosts: Map<string, number> = bubble.getMaterialCost(cauldronCostLevel, undevelopedCostsBubbleLevel, barleyBrewVialLevel, bargainBubbleLevel, classMultiBubbleLevel, discountLevel, hasAchievement);
         return (
             <Box direction="row" align="center" width={{ max: 'medium' }}>
                 {!faceLeft &&
@@ -176,7 +176,7 @@ export default function AlchemyData() {
             // get undeveloped costs bubble level
             setUndevelopedCostsBubbleLevel(alchemyData?.getUndevelopedCostsBubbleLevel() ?? 0);
             setBarleyBrewVialLevel(alchemyData?.getBarleyBrewVialLevel() ?? 0);
-            setHasAlchemyAchievement(alchemyData?.hasAchivement() ?? false);
+            setHasAlchemyAchievement(alchemyData?.hasAchievement() ?? false);
         }
     }, [idleonData, alchemyData])
     return (
@@ -198,7 +198,7 @@ export default function AlchemyData() {
             <Grid columns="1/4">
                 {
                     alchemyData && Object.entries(alchemyData.cauldrons).map(([_, cauldron], index) => {
-                        return (<CauldronDisplay key={`tab_${index}`} cauldron={cauldron} undevelopedCostsBubbleLevel={undevelopedCostsBubbleLevel} barleyBrewVialLevel={barleyBrewVialLevel} hasAchivement={hasAlchemyAchievement} discountLevel={parseInt(discountLevel)} classMultiOn={classMulti} />)
+                        return (<CauldronDisplay key={`tab_${index}`} cauldron={cauldron} undevelopedCostsBubbleLevel={undevelopedCostsBubbleLevel} barleyBrewVialLevel={barleyBrewVialLevel} hasAchievement={hasAlchemyAchievement} discountLevel={parseInt(discountLevel)} classMultiBonus={classMulti} />)
                     })
                 }
                 {
