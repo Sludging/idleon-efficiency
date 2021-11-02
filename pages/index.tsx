@@ -10,7 +10,7 @@ import JsonData from '../components/jsonData';
 import Layout from '../components/layout';
 import { AppContext } from '../data/appContext';
 
-import { Tab, Tabs, Box, Text } from 'grommet';
+import { Tab, Tabs } from 'grommet';
 
 
 const Home: NextPage = () => {
@@ -40,9 +40,6 @@ const Home: NextPage = () => {
           </Tab>
           <Tab title="Players">
             <PlayerData />
-          </Tab>
-        <Tab title="Statues">
-          <Box><Text>Nothing here yet!</Text></Box>
         </Tab>
         <Tab title="Raw Data">
           <JsonData />
