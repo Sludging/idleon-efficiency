@@ -46,7 +46,7 @@ function PlayerTraps(props: PlayerTrapProps) {
                     // <TableCell><Box title={trap.critterName} className={`icons icons-${trap.critterName}_x1`} /></TableCell>
                     // <TableCell>{fancyTimeFormat(trap.trapDuration)}</TableCell>
                     return (
-                        <Box style={{ background: trap.isReady() ? 'red' : 'none' }} align="center" width="75px">
+                        <Box key={`trap_${index}`} style={{ background: trap.isReady() ? 'red' : 'none' }} align="center" width="75px">
                             <Box title={trap.critterName} className={`icons icons-${trap.critterName}_x1`} />
                             <Text textAlign='center' size="xsmall">{formatTime(trap.trapDuration - trap.timeSincePut)}</Text>
                         </Box>
