@@ -151,9 +151,9 @@ function PlayerTab({ player }: PlayerTabProps) {
             <Tab key={`player_${player.playerID}_statues`} title="Statues">
                 <Box pad="medium" gap="xsmall">
                     {
-                        playerStatues ? playerStatues.statues.map((statue, _) => {
+                        playerStatues ? playerStatues.statues.map((statue, index) => {
                             return (
-                                <Box direction="row" gap="medium">
+                                <Box key={`statue_${index}`} direction="row" gap="medium">
                                     <Box className={statue.getClassName()} title={statue.displayName} />
                                     <Text alignSelf="center">Level: {statue.level}</Text>
                                     <Text alignSelf="center">/</Text>
