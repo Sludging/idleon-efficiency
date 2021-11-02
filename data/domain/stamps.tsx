@@ -37,12 +37,17 @@ export class Stamp {
         this.data = data;
     }
 
-    getGoldCost = (): number => {
-        return this.data.startingCost * Math.pow(this.data.cCostExp - (this.level / (this.level + 5 * this.data.upgradeInterval)) * 0.25, this.level * (10 / this.data.upgradeInterval));
+    getGoldCost = (hasBribe: boolean = false, blueFlavPercent: number = 0): number => {
+        const goldCost = this.data.startingCost * Math.pow(this.data.cCostExp - (this.level / (this.level + 5 * this.data.upgradeInterval)) * 0.25, this.level * (10 / this.data.upgradeInterval)) * (1 - blueFlavPercent);
+        if (hasBribe) {
+            //TODO: Make this math less... hard coded?
+            return goldCost * 0.92;
+        }
+        return goldCost
     }
 
-    getMaterialCost = (): number => {
-        return this.data.startV * Math.pow(this.data.mCostExp, Math.pow(Math.round(this.level / this.data.upgradeInterval) - 1, 0.8));
+    getMaterialCost = (blueFlavPercent: number = 0): number => {
+        return this.data.startV * Math.pow(this.data.mCostExp, Math.pow(Math.round(this.level / this.data.upgradeInterval) - 1, 0.8)) * (1 - blueFlavPercent);
     }
 
     getBonusText = (): string => {

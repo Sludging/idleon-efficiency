@@ -10,6 +10,7 @@ import parseStamps from './domain/stamps';
 import parseStatues from './domain/statues';
 import parsePlayer from './domain/player';
 import parseAlchemy from './domain/alchemy';
+import parseBribes from './domain/bribes';
 
 class IdleonData {
   private data: Map<string, any>
@@ -103,6 +104,7 @@ export const AppProvider: React.FC<{}> = (props) => {
           accountData.set("playerNames", charNames);
           // CauldronP2W (obviously named)
           accountData.set("alchemy", parseAlchemy(doc.get("CauldronInfo"), doc.get("CauldUpgLVs")));
+          accountData.set("bribes", parseBribes(doc.get("BribeStatus")));
           accountData.set("rawData", doc.data());
           // BribeStatus for bribes
           // CYWorldTeleports (if I ever care to show it)

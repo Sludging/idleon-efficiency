@@ -1,7 +1,6 @@
 import {
     Box,
     Grid,
-    Heading,
     Stack,
     Text,
     Tip
@@ -10,10 +9,12 @@ import {
 import { Stamp } from '../data/domain/stamps';
 import { useEffect, useState, useContext } from 'react';
 import { AppContext } from '../data/appContext';
-import { getCoinsArray, nFormatter } from '../data/utility'
+import { getCoinsArray, lavaFunc, nFormatter } from '../data/utility'
 import CoinsDisplay from "./coinsDisplay";
+import { Alchemy, AlchemyConst } from "../data/domain/alchemy";
+import { Bribe, BribeConst } from "../data/domain/bribes";
 
-function StampDisplay({ stamp, index }: { stamp: Stamp, index: number }) {
+function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stamp, index: number, blueFlavPercent: number, hasBribe: boolean }) {
     const getCardClass = () => {
         let className = `icons-${stamp.raw_name}_x1`;
         if (stamp.raw_name == "StampC5")
@@ -42,8 +43,8 @@ function StampDisplay({ stamp, index }: { stamp: Stamp, index: number }) {
                     <Text weight="bold">{stamp.name}</Text>
                     <Text>--------------------------</Text>
                     <Text size="small">Bonus: {stamp.getBonusText()}</Text>
-                    {!stamp.isMaxLevel() && <Box direction="row" gap="small"><Text size="small">Cost: </Text><CoinsDisplay coinMap={getCoinsArray(stamp.getGoldCost())} /></Box>}
-                    {stamp.isMaxLevel() && <Box direction="row" align="center"><Text size="small">Material Cost: {nFormatter(Math.round(stamp.getMaterialCost()), 1)}</Text><Box style={{ width: "36px", height: "36px", backgroundPosition: "0 calc(var(--row) * -36px)" }} className={`icons icons-${stamp.data.material}_x1`} /></Box>}
+                    {!stamp.isMaxLevel() && <Box direction="row" gap="small"><Text size="small">Cost: </Text><CoinsDisplay coinMap={getCoinsArray(stamp.getGoldCost(hasBribe, blueFlavPercent))} /></Box>}
+                    {stamp.isMaxLevel() && <Box direction="row" align="center"><Text size="small">Material Cost: {nFormatter(Math.round(stamp.getMaterialCost(blueFlavPercent)), 1)}</Text><Box style={{ width: "36px", height: "36px", backgroundPosition: "0 calc(var(--row) * -36px)" }} className={`icons icons-${stamp.data.material}_x1`} /></Box>}
                 </Box>
                 {faceLeft &&
                     <svg viewBox="0 0 22 22" version="1.1" width="22px" height="22px">
@@ -78,7 +79,7 @@ function StampDisplay({ stamp, index }: { stamp: Stamp, index: number }) {
     )
 }
 
-function StampTab({ tab, index }: { tab: Stamp[], index: number }) {
+function StampTab({ tab, index, blueFlavPercent, hasBribe }: { tab: Stamp[], index: number, blueFlavPercent: number, hasBribe: boolean }) {
     return (
         <Box>
             <h3>{tab[0].type}</h3>
@@ -88,7 +89,7 @@ function StampTab({ tab, index }: { tab: Stamp[], index: number }) {
                         tab.map((stamp: Stamp) => {
                             if (stamp != undefined) {
                                 return (
-                                    <StampDisplay key={`tab_${index}_${stamp.raw_name}`} stamp={stamp} index={index} />
+                                    <StampDisplay key={`tab_${index}_${stamp.raw_name}`} stamp={stamp} index={index} blueFlavPercent={blueFlavPercent} hasBribe={hasBribe} />
                                 )
                             }
                         })
@@ -101,19 +102,29 @@ function StampTab({ tab, index }: { tab: Stamp[], index: number }) {
 
 export default function StampData() {
     const [stampData, setStampData] = useState<Stamp[][]>();
+    const [hasBribe, setHasBribe] = useState<boolean>(false);
+    const [blueFlavPercent, setBlueFlavPercent] = useState<number>(0);
     const idleonData = useContext(AppContext);
 
     useEffect(() => {
         if (idleonData) {
             const theData = idleonData.getData();
             setStampData(theData.get("stamps"));
+
+            const alchemy = theData.get("alchemy") as Alchemy;
+            const blueFlavVial = alchemy.vials[AlchemyConst.BlueFlav];
+            const blueFlavPower = lavaFunc(blueFlavVial.func, blueFlavVial.level, blueFlavVial.x1, blueFlavVial.x2);
+            setBlueFlavPercent(blueFlavPower / 100); // divide by 100 to get the %.
+
+            const bribes = theData.get("bribes") as Bribe[];
+            setHasBribe(bribes[BribeConst.StampBribe].purchased);
         }
     }, [idleonData])
     return (
         <Grid columns="1/3" gap="medium">
             {
                 stampData && stampData.map((tab, index) => {
-                    return (<StampTab key={`tab_${index}`} tab={tab} index={index} />)
+                    return (<StampTab key={`tab_${index}`} tab={tab} index={index} blueFlavPercent={blueFlavPercent} hasBribe={hasBribe} />)
                 })
             }
         </Grid>
