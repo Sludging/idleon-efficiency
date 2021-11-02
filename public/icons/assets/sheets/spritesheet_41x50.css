@@ -1,0 +1,47 @@
+.icons-4150 {
+            background-image: url(spritesheet_41x50.png);
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 41px;
+            height: 50px;
+            background-size: cover;
+            background-position: 0 calc(var(--row) * -50px)
+        }
+        .icons-Statue1 { --row: 0; }
+.icons-Statue10 { --row: 1; }
+.icons-Statue11 { --row: 2; }
+.icons-Statue12 { --row: 3; }
+.icons-Statue13 { --row: 4; }
+.icons-Statue14 { --row: 5; }
+.icons-Statue15 { --row: 6; }
+.icons-Statue16 { --row: 7; }
+.icons-Statue17 { --row: 8; }
+.icons-Statue18 { --row: 9; }
+.icons-Statue19 { --row: 10; }
+.icons-Statue2 { --row: 11; }
+.icons-Statue3 { --row: 12; }
+.icons-Statue4 { --row: 13; }
+.icons-Statue5 { --row: 14; }
+.icons-Statue6 { --row: 15; }
+.icons-Statue7 { --row: 16; }
+.icons-Statue8 { --row: 17; }
+.icons-Statue9 { --row: 18; }
+.icons-StatueG1 { --row: 19; }
+.icons-StatueG10 { --row: 20; }
+.icons-StatueG11 { --row: 21; }
+.icons-StatueG12 { --row: 22; }
+.icons-StatueG13 { --row: 23; }
+.icons-StatueG14 { --row: 24; }
+.icons-StatueG15 { --row: 25; }
+.icons-StatueG16 { --row: 26; }
+.icons-StatueG17 { --row: 27; }
+.icons-StatueG18 { --row: 28; }
+.icons-StatueG19 { --row: 29; }
+.icons-StatueG2 { --row: 30; }
+.icons-StatueG3 { --row: 31; }
+.icons-StatueG4 { --row: 32; }
+.icons-StatueG5 { --row: 33; }
+.icons-StatueG6 { --row: 34; }
+.icons-StatueG7 { --row: 35; }
+.icons-StatueG8 { --row: 36; }
+.icons-StatueG9 { --row: 37; }
