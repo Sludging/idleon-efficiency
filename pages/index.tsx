@@ -11,6 +11,7 @@ import Layout from '../components/layout';
 import { AppContext } from '../data/appContext';
 
 import { Tab, Tabs } from 'grommet';
+import BribeData from '../components/bribeData';
 
 
 const Home: NextPage = () => {
@@ -40,6 +41,9 @@ const Home: NextPage = () => {
           </Tab>
           <Tab title="Players">
             <PlayerData />
+        </Tab>
+        <Tab title="Bribes">
+          <BribeData />
         </Tab>
         <Tab title="Raw Data">
           <JsonData />
