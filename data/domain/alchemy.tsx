@@ -1,6 +1,32 @@
 import { lavaFunc } from '../utility'
 
-const calcBubbleMatCost = (bubbleLvl: number, baseCost: number, isLiquid: boolean, cauldCostReduxLvl: number = 0, undevelopedCostsBubbleLevel: number = 0, bubbleCostVialLvl: number = 0, bubbleBargainLvl: number = 0, bubbleMultClassLvl: number = 0, shopBargainBought: number = 0, hasAchivement: boolean): number => {
+export enum CauldronIndex {
+    Power = 0,
+    Quicc = 1,
+    HighIQ = 2,
+    Kazam = 3
+}
+
+export enum CauldronBoostIndex {
+    Speed = 0,
+    Luck = 1,
+    Cost = 2,
+    Extra = 3
+}
+
+export const AlchemyConst = {
+    OrangeBargain: 14,
+    VialIndex: 4,
+    UnderdevelopedCosts: 6,
+    BarleyBrew: 9,
+    BlueFlav: 18,
+    SmartBoi: 13,
+    CauldronCount: 4
+};
+
+export const VialIndex = 4;
+
+const calcBubbleMatCost = (bubbleLvl: number, baseCost: number, isLiquid: boolean, cauldCostReduxLvl: number = 0, undevelopedCostsBubbleLevel: number = 0, bubbleCostVialLvl: number = 0, bubbleBargainLvl: number = 0, bubbleMultClassLvl: number = 0, shopBargainBought: number = 0, hasAchievement: boolean): number => {
     if (isLiquid) {
         return baseCost + Math.floor(bubbleLvl / 20);
     } else {
@@ -19,7 +45,7 @@ const calcBubbleMatCost = (bubbleLvl: number, baseCost: number, isLiquid: boolea
         );
         const shopBargainBoost = Math.max(0.1, Math.pow(0.75, shopBargainBought));
         // for any material besides liquid
-        return Math.round(first * cauldCostReduxBoost * bubbleBargainBoost * bubbleCostBubbleBoost * shopBargainBoost * (hasAchivement ? 0.9 : 1));
+        return Math.round(first * cauldCostReduxBoost * bubbleBargainBoost * bubbleCostBubbleBoost * shopBargainBoost * (hasAchievement ? 0.9 : 1));
     }
 }
 
@@ -58,10 +84,10 @@ export class Bubble {
         this.requirements = requirements;
     }
 
-    getMaterialCost = (cauldCostReduxLvl: number = 0, undevelopedCostsBubbleLevel: number = 0, bubbleCostVialLvl: number = 0, bubbleBargainLvl: number = 0, bubbleMultClassLvl: number = 0, shopBargainBought: number = 0, hasAchivement: boolean = false): Map<string, number> => {
+    getMaterialCost = (cauldCostReduxLvl: number = 0, undevelopedCostsBubbleLevel: number = 0, bubbleCostVialLvl: number = 0, bubbleBargainLvl: number = 0, bubbleMultClassLvl: number = 0, shopBargainBought: number = 0, hasAchievement: boolean = false): Map<string, number> => {
         let toReturn = new Map<string, number>();
         this.requirements.forEach((req) => {
-            toReturn.set(req.item, calcBubbleMatCost(this.level, req.quantity, req.item.includes("Liquid"), cauldCostReduxLvl, undevelopedCostsBubbleLevel, bubbleCostVialLvl, bubbleBargainLvl, bubbleMultClassLvl, shopBargainBought, hasAchivement))
+            toReturn.set(req.item, calcBubbleMatCost(this.level, req.quantity, req.item.includes("Liquid"), cauldCostReduxLvl, undevelopedCostsBubbleLevel, bubbleCostVialLvl, bubbleBargainLvl, bubbleMultClassLvl, shopBargainBought, hasAchievement))
         })
         return toReturn;
     }
@@ -73,22 +99,6 @@ export class Bubble {
     }
 
 }
-
-export enum CauldronIndex {
-    Power = 0,
-    Quicc = 1,
-    HighIQ = 2,
-    Kazam = 3
-}
-
-export enum CauldronBoostIndex {
-    Speed = 0,
-    Luck = 1,
-    Cost = 2,
-    Extra = 3
-}
-
-export const VialIndex = 4;
 
 export class Cauldron {
     name: string;
@@ -126,10 +136,9 @@ export class Alchemy {
     cauldrons: Array<Cauldron> = [];
     vials: Array<Vial> = [];
 
-    // #TODO: Do away with magic indexes
     getUndevelopedCostsBubbleLevel = (): number => {
         if (this.cauldrons.length > 0) {
-            return this.cauldrons[3].bubbles[6].level;
+            return this.cauldrons[CauldronIndex.Quicc].bubbles[AlchemyConst.UnderdevelopedCosts].level;
         }
 
         return 0;
@@ -137,14 +146,14 @@ export class Alchemy {
 
     getBarleyBrewVialLevel = (): number => {
         if (this.vials.length > 0) {
-            return this.vials[9].level;
+            return this.vials[AlchemyConst.BarleyBrew].level;
         }
 
         return 0;
     }
 
-    hasAchivement = (): boolean => {
-        return this.cauldrons[CauldronIndex.HighIQ].bubbles[13].level > 50;
+    hasAchievement = (): boolean => {
+        return this.cauldrons[CauldronIndex.HighIQ].bubbles[AlchemyConst.SmartBoi].level > 50;
     }
 }
 
@@ -282,7 +291,7 @@ const handleCauldron = (cauldronData: Map<string, number>, index: number, alchem
         if (isNaN(parseInt(boost))) {
             continue;
         }
-        alchemy.cauldrons[index].boostLevels[boost] = boostLevels[(index * 4) + parseInt(boost.toString())];
+        alchemy.cauldrons[index].boostLevels[boost] = boostLevels[(index * AlchemyConst.CauldronCount) + parseInt(boost.toString())];
     }
 }
 
@@ -307,7 +316,7 @@ export default function parseAlchemy(alchemyData: Array<Map<string, number>>, bo
             handleCauldron(indexData, index, alchemy, boostLevels)
         }
         // Handle vials if 5th array of data
-        if (index == VialIndex) {
+        if (index == AlchemyConst.VialIndex) {
             handleVial(indexData, alchemy);
         }
     })

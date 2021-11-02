@@ -7,8 +7,10 @@ import { getDatabase, Database, ref, get, child, goOnline } from 'firebase/datab
 
 import parseTraps from './domain/traps';
 import parseStamps from './domain/stamps';
+import parseStatues from './domain/statues';
 import parsePlayer from './domain/player';
 import parseAlchemy from './domain/alchemy';
+import parseBribes from './domain/bribes';
 
 class IdleonData {
   private data: Map<string, any>
@@ -77,6 +79,14 @@ export const AppProvider: React.FC<{}> = (props) => {
             return doc.get(`PldTraps_${i}`)
           }));
           accountData.set("traps", parsedTraps);
+          const parsedStatues = parseStatues([...Array(9)].map((_, i) => {
+            return JSON.parse(doc.get(`StatueLevels_${i}`))
+          }), JSON.parse(doc.get(`StuG`)));
+          accountData.set("statues", parsedStatues);
+          // AttackLoadout_0 (obviously named)
+          // POu_4 (Post office per player)
+          // CardEquip_0
+          // Prayers_0
           accountData.set("players", parsePlayer([...Array(9)].map((_, i) => {
             return {
               equipment: doc.get(`EquipOrder_${i}`),
@@ -92,8 +102,22 @@ export const AppProvider: React.FC<{}> = (props) => {
             }
           }), charNames))
           accountData.set("playerNames", charNames);
+          // CauldronP2W (obviously named)
           accountData.set("alchemy", parseAlchemy(doc.get("CauldronInfo"), doc.get("CauldUpgLVs")));
+          accountData.set("bribes", parseBribes(doc.get("BribeStatus")));
           accountData.set("rawData", doc.data());
+          // BribeStatus for bribes
+          // CYWorldTeleports (if I ever care to show it)
+          // SaltLick
+          // CogO
+          // ChestOrder
+          // CYSilverPens
+          // DungUpg
+          // Guild
+          // Print
+          // ForgeLV
+          // ForgeItemOrder
+          // PrayOwned
           const newData = new IdleonData(accountData, new Date());
           setState(newData);
         });
