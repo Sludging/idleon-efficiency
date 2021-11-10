@@ -4,14 +4,22 @@ import {
     Tabs,
     Tab,
     Grid,
-    Stack
+    Stack,
+    Tip
 } from 'grommet'
 import { useState, useEffect, useContext } from 'react';
 import { AppContext } from '../data/appContext'
+import { GemStore } from '../data/domain/gemPurchases';
+import { Guild } from '../data/domain/guild';
 
 import { Player, SkillsIndex } from '../data/domain/player';
+import { ClassIndex, ClassTalentMap, GetTalentArray } from '../data/domain/talents';
+import { CapacityConst } from '../data/domain/capacity';
+import { Alchemy, AlchemyConst, CauldronIndex } from "../data/domain/alchemy";
+import { Stamp } from '../data/domain/stamps';
 import { PlayerStatues } from '../data/domain/statues';
-import { Coins, getCoinsArray } from '../data/utility';
+
+import { Coins, getCoinsArray, lavaFunc } from '../data/utility';
 import CoinsDisplay from './coinsDisplay';
 
 interface SkillProps {
@@ -77,6 +85,22 @@ function PlayerTab({ player }: PlayerTabProps) {
     const [playerStatues, setPlayerStatues] = useState<PlayerStatues | undefined>(undefined);
     const [index, setIndex] = useState<number>(0);
     const [playerCoins, setPlayerCoins] = useState<Map<Coins, number>>(new Map());
+    const [gemStore, setGemStore] = useState<GemStore | undefined>(undefined);
+    const [stampData, setStampData] = useState<Stamp[][] | undefined>(undefined);
+    const [guild, setGuild] = useState<Guild | undefined>(undefined);
+
+
+    // capacity related numbers
+    const [allCapBonus, setAllCapBonus] = useState<number>(0);
+    const [extraBagsTalentBonus, setExtraBagsTalentBonus] = useState<number>(0);
+    const [telekineticStorageBonus, setTelekineticStorageBonus] = useState<number>(0);
+    const [guildCarryBonus, setGuildCarryBonus] = useState<number>(0);
+    const [anvilCostDiscount, setAnvilCostDiscount] = useState<number>(0);
+    const [zergPrayerBonus, setZergPrayerBonus] = useState<number>(0); // TODO: GET REAL NUMBER
+    const [ruckSackPrayerBonus, setRuckSackPrayerBonus] = useState<number>(0); // TODO: GET REAL NUMBER
+    const [carryCapShrineBonus, setCarryCapShrineBonus] = useState<number>(0); // TODO: GET REAL NUMBER
+    const [starSignExtraCap, setStarSignExtraCap] = useState<number>(0); // TODO: GET REAL NUMBER
+
 
     const idleonData = useContext(AppContext);
 
@@ -86,9 +110,37 @@ function PlayerTab({ player }: PlayerTabProps) {
         if (idleonData) {
             const theData = idleonData.getData();
             setPlayerStatues(theData.get("statues")[player.playerID]);
+            setGemStore(theData.get("gems"));
+            setStampData(theData.get("stamps"));
+            setGuild(theData.get("guild"));
+            const alchemy = theData.get("alchemy") as Alchemy;
+            const anvilnomicsBubble = alchemy.cauldrons[CauldronIndex.Quicc].bubbles[AlchemyConst.Anvilnomics];
+            const anvilnomicsBonus = lavaFunc(anvilnomicsBubble.func, anvilnomicsBubble.level, anvilnomicsBubble.x1, anvilnomicsBubble.x2, false);
+            if (player.getBaseClass() == ClassIndex.Archer) {
+                const greenCauldronBonusBubble = alchemy.cauldrons[CauldronIndex.Quicc].bubbles[AlchemyConst.CauldronBonusBubbleIndex];
+                const classBonus = lavaFunc(greenCauldronBonusBubble.func, greenCauldronBonusBubble.level, greenCauldronBonusBubble.x1, greenCauldronBonusBubble.x2, false);
+                setAnvilCostDiscount(anvilnomicsBonus * classBonus);
+            }
+            else {
+                setAnvilCostDiscount(anvilnomicsBonus);
+            }
+            if (guild) {
+                setGuildCarryBonus(lavaFunc(guild.guildBonuses[2].func, guild.guildBonuses[2].level, guild.guildBonuses[2].x1, guild.guildBonuses[2].x2));
+            }
+            if (player.talents) {
+                const telekineticStorageTalent = player.talents.find(x => x.skillIndex == CapacityConst.TelekineticStorageSkillIndex);
+                if (telekineticStorageTalent) {
+                    setTelekineticStorageBonus(lavaFunc(telekineticStorageTalent.funcX, telekineticStorageTalent.level, telekineticStorageTalent.x1, telekineticStorageTalent.x2));
+                }
+                const extraBagsTalent = player.talents.find(x => x.skillIndex == CapacityConst.ExtraBagsSkillIndex);
+                if (extraBagsTalent) {
+                    setExtraBagsTalentBonus(lavaFunc(extraBagsTalent.funcX, extraBagsTalent.level, extraBagsTalent.x1, extraBagsTalent.x2));
+                }
+            }
+            setAllCapBonus(player.capacity.getAllCapsBonus(guildCarryBonus, telekineticStorageBonus, carryCapShrineBonus, zergPrayerBonus, ruckSackPrayerBonus));
             setPlayerCoins(getCoinsArray(player.money));
         }
-    }, [idleonData, player]);
+    }, [idleonData, player, allCapBonus, extraBagsTalentBonus, telekineticStorageBonus, guildCarryBonus, anvilCostDiscount]);
 
     return (
         <Tabs activeIndex={index} onActive={onActive}>
@@ -162,6 +214,169 @@ function PlayerTab({ player }: PlayerTabProps) {
                             )
                         }) : <></>
                     }
+                </Box>
+            </Tab>
+            <Tab key={`player_${player.playerID}_anvil`} title="Anvil - WIP">
+                <Box pad="small" gap="small">
+                    <Box direction="column">
+                        <Text>Available Points: {player.anvil.availablePoints}</Text>
+                        <Text>Points from coins: {player.anvil.pointsFromCoins}</Text>
+                        <Box direction="row">
+                            <Text>Next Point Cost: </Text>
+                            <CoinsDisplay coinMap={getCoinsArray(player.anvil.getCoinCost(anvilCostDiscount))} />
+                        </Box>
+                        <Box direction="row">
+                            <Text>Total Point Cost: </Text>
+                            <CoinsDisplay coinMap={getCoinsArray(player.anvil.getTotalCoinCost(anvilCostDiscount))} />
+                        </Box>
+                        <Text>Points from mats: {player.anvil.pointsFromMats}</Text>
+                        <Text>Points spend into XP: {player.anvil.xpPoints}</Text>
+                        <Text>Points spend into Speed: {player.anvil.speedPoints}</Text>
+                        <Text>Capacity: {player.anvil.getCapacity(player.capacity.getMaterialCapacity(allCapBonus, stampData ? stampData[1][7].getBonus(player.skills.get(SkillsIndex.Smithing)) : 0, gemStore?.purchases.find(x => x.no == 58)?.pucrhased ?? 0, stampData ? stampData[2][1].getBonus() : 0, extraBagsTalentBonus, starSignExtraCap))} ({player.anvil.capPoints})</Text>
+                        {player.anvil.currentlySelect.indexOf(-1) > -1 && <Text>UNUSED PRODUCTION</Text>}
+                    </Box>
+                    <Box gap="small">
+                        {
+                            player.anvil.production.filter((x, index) => x.displayName != "Filler" && player.anvil.currentlySelect.indexOf(index) > -1).map((anvilItem, index) => {
+                                return (
+                                    <Box key={`player_${player.playerID}_anvil_${index}`} direction="row" align="center">
+                                        <Box className={`icons icons-${anvilItem.internalName}_x1`} />
+                                        <Text>{anvilItem.displayName} - {anvilItem.currentAmount} - {anvilItem.currentXP} - {anvilItem.currentProgress} - {anvilItem.totalProduced}</Text>
+                                    </Box>
+                                )
+                            })
+                        }
+                    </Box>
+                </Box>
+            </Tab>
+            <Tab key={`player_${player.playerID}_carry`} title="Carry Capacity - WIP">
+                <Box pad="small" gap="small">
+                    <Box>
+                        <Text>Guild Bonus: {guild && lavaFunc(guild.guildBonuses[2].func, guild.guildBonuses[2].level, guild.guildBonuses[2].x1, guild.guildBonuses[2].x2)} </Text>
+                        <Text>Gem Capacity Bought: {gemStore?.purchases.find(x => x.no == 58)?.pucrhased} - {gemStore?.purchases.find(x => x.no == 58)?.desc}</Text>
+                        <Text>Monster Mats Stamp: {stampData && stampData[1][7].getBonusText()}</Text>
+                        <Text>All Cap Stamp: {stampData && stampData[2][1].getBonusText()} - {stampData && stampData[2][1].level}</Text>
+                        <Text>All Carry Cap Math: {allCapBonus}</Text>
+                        <Text>Material Cap Math: {player.capacity.getMaterialCapacity(allCapBonus, stampData ? stampData[1][7].getBonus(player.skills.get(SkillsIndex.Smithing)) : 0, gemStore?.purchases.find(x => x.no == 58)?.pucrhased ?? 0, stampData ? stampData[2][1].getBonus() : 0, extraBagsTalentBonus, starSignExtraCap)}</Text>
+                        <Text>Anvil Cap Guess: {player.anvil.getCapacity(player.capacity.getMaterialCapacity(allCapBonus, stampData ? stampData[1][7].getBonus(player.skills.get(SkillsIndex.Smithing)) : 0, gemStore?.purchases.find(x => x.no == 58)?.pucrhased ?? 0, stampData ? stampData[2][1].getBonus() : 0, extraBagsTalentBonus, starSignExtraCap))} </Text>
+                    </Box>
+                    <Box gap="small">
+                        <Text>Ore: {player.capacity.mining}</Text>
+                        <Text>Fish: {player.capacity.fishing}</Text>
+                        <Text>Materials: {player.capacity.monsterMats}</Text>
+                        <Text>Bugs: {player.capacity.bugs}</Text>
+                        <Text>Logs: {player.capacity.chopping}</Text>
+                        <Text>Souls: {player.capacity.souls}</Text>
+                        <Text>Critters: {player.capacity.critters}</Text>
+                        <Text>Food: {player.capacity.food}</Text>
+                    </Box>
+                </Box>
+            </Tab>
+            <Tab key={`player_${player.playerID}_talents`} title="Talents - WIP">
+                <Box pad="small" gap="medium">
+                    {
+                        ClassTalentMap[ClassIndex[player.class.replace(/ /g, "_") as keyof typeof ClassIndex]].concat(["Special Talent 1", "Special Talent 2"]).map((talentPage, _) => {
+                            return (
+                                <Box align="center" gap="medium">
+                                    <Text>{talentPage}</Text>
+                                    <Grid columns={{
+                                        count: 5,
+                                        size: 'auto',
+                                    }} fill>
+                                        {
+                                            GetTalentArray(talentPage).map((originalTalent, index) => {
+                                                const talent = player.talents.find(x => x.skillIndex == originalTalent.skillIndex);
+                                                if (talent) {
+                                                    const talentXBonus = lavaFunc(talent.funcX, talent.level, talent.x1, talent.x2, true);
+                                                    const talentYBonus = lavaFunc(talent.funcY, talent.level, talent.y1, talent.y2, true)
+                                                    return (
+                                                        <Box pad="xxsmall" key={`player_${player.playerID}_talents_${index}`} direction="row">
+                                                            <Tip
+                                                                plain
+                                                                content={
+                                                                    <Box pad="small" gap="small" background="white" style={{ display: talent.level > 0 ? 'normal' : 'none' }}>
+                                                                        <Text weight="bold">{talent.name}</Text>
+                                                                        <Text>--------------------------</Text>
+                                                                        {
+                                                                            talent.description.includes("}") ?
+                                                                                <Text>{talent.description.replace("{", talentXBonus.toString()).replace("}", talentYBonus.toString())}</Text>
+                                                                                : <Text>{talent.description.replace("{", talentXBonus.toString())}</Text>
+                                                                        }
+                                                                    </Box>
+                                                                }
+                                                                dropProps={{ align: { top: 'bottom' } }}
+                                                            >
+                                                                <Box style={{ opacity: talent.maxLevel > 0 ? 1 : 0.2 }} className={`icon-56 icons-UISkillIcon${talent.skillIndex}`} title={talent.name} />
+                                                            </Tip>
+                                                            <Text>{talent.level} / {talent.maxLevel}</Text>
+                                                        </Box>
+                                                    )
+                                                }
+                                                return <></>
+                                            })
+                                        }
+                                    </Grid>
+                                </Box>
+                            )
+                        })
+                    }
+                </Box>
+            </Tab>
+            <Tab key={`player_${player.playerID}_postoffice`} title="Post Office - WIP">
+                <Box pad="small" gap="small">
+                    <Grid columns="1/4">
+                        {
+                            player.postOffice.map((box, index) => {
+                                return (
+                                    <Box fill>
+                                        <Stack anchor="bottom-right" alignSelf="center" key={`player_${player.playerID}_postoffice_${index}`}>
+                                            <Tip
+                                                plain
+                                                content={
+                                                    <Box pad="small" gap="small" background="white" style={{ display: box.level > 0 ? 'normal' : 'none' }}>
+                                                        <Text weight="bold">{box.name}</Text>
+                                                        <Text>--------------------------</Text>
+                                                        {
+                                                            box.bonuses.map((bonus, bIndex) => {
+                                                                let level = box.level;
+                                                                let maxLevel = 400
+                                                                if (bIndex == 1) {
+                                                                    level = box.level - 25;
+                                                                    maxLevel = 375;
+                                                                }
+                                                                if (bIndex == 2) {
+                                                                    level = box.level - 100;
+                                                                    maxLevel = 300;
+                                                                }
+                                                                if (level < 0) return <></>
+                                                                const bonusValue = lavaFunc(bonus.func, level, bonus.x1, bonus.x2, true);
+                                                                const maxValue = lavaFunc(bonus.func, maxLevel, bonus.x1, bonus.x2, true);
+                                                                return (
+                                                                    <Box key={`player_${player.playerID}_postoffice_${index}_${bIndex}`} direction="row" gap="small">
+                                                                        <Text>{`${bonusValue} ${bonus.bonus}`}</Text>
+                                                                        <Text>{level < 400 && `(Max value is ${maxValue} at 400 boxes)`}</Text>
+                                                                    </Box>
+                                                                )
+                                                            })
+                                                        }
+                                                    </Box>
+                                                }
+                                                dropProps={{ align: { top: 'bottom' } }}
+                                            >
+                                                {/* Do the opacity thing in styled components? */}
+                                                <Box>
+                                                    <Box style={{ opacity: box.level > 0 ? 1 : 0.3 }} className={`icons-88 icons-UIboxUpg${index}`} />
+                                                </Box>
+                                            </Tip>
+                                            <Box background="black">
+                                                <Text>{box.level}</Text>
+                                            </Box>
+                                        </Stack>
+                                    </Box>
+                                )
+                            })
+                        }
+                    </Grid>
                 </Box>
             </Tab>
         </Tabs>
