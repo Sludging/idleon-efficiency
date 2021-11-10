@@ -2,7 +2,7 @@ const round = (num: number) => {
     return Math.round((num + Number.EPSILON) * 100) / 100;
 }
 
-export const lavaFunc = (func: string, level: number, x1: number, x2: number) => {
+export const lavaFunc = (func: string, level: number, x1: number, x2: number, roundResult: boolean = false) => {
     var result = 0;
     switch (func) {
         case 'add':
@@ -30,7 +30,10 @@ export const lavaFunc = (func: string, level: number, x1: number, x2: number) =>
         default:
             result = 0;
     }
-    return round(result);
+    if (roundResult) {
+        return round(result);
+    }
+    return result;
 }
 
 export enum Coins {
