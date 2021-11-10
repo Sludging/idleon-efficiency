@@ -11,6 +11,10 @@ import parseStatues from './domain/statues';
 import parsePlayer from './domain/player';
 import parseAlchemy from './domain/alchemy';
 import parseBribes from './domain/bribes';
+import parseGuild from './domain/guild';
+import parseGems from './domain/gemPurchases';
+
+// {message: "as", gid: "4gqdfHIzsN1Mz2nxjYSs"}
 
 class IdleonData {
   private data: Map<string, any>
@@ -73,7 +77,6 @@ export const AppProvider: React.FC<{}> = (props) => {
       const unsub = onSnapshot(doc(db, "_data", user.uid),
         { includeMetadataChanges: true }, (doc) => {
           let accountData = new Map();
-          //console.log(doc.data());
           accountData.set("stamps", parseStamps(doc.get("StampLv"), doc.get("StampLvM")));
           const parsedTraps = parseTraps([...Array(9)].map((_, i) => {
             return doc.get(`PldTraps_${i}`)
@@ -84,7 +87,7 @@ export const AppProvider: React.FC<{}> = (props) => {
           }), JSON.parse(doc.get(`StuG`)));
           accountData.set("statues", parsedStatues);
           // AttackLoadout_0 (obviously named)
-          // POu_4 (Post office per player)
+          // POu_4 (Post office per player) (UIboxUpg0 - for box images)
           // CardEquip_0
           // Prayers_0
           accountData.set("players", parsePlayer([...Array(9)].map((_, i) => {
@@ -98,15 +101,28 @@ export const AppProvider: React.FC<{}> = (props) => {
               currentMap: doc.get(`CurrentMap_${i}`),
               starSigns: doc.get(`PVtStarSign_${i}`).split(','),
               money: doc.get(`Money_${i}`),
-              skills: doc.get(`Lv0_${i}`)
+              skills: doc.get(`Lv0_${i}`),
+              anvilProduction: doc.get(`AnvilPA_${i}`),
+              anvilStats: doc.get(`AnvilPAstats_${i}`),
+              anvilSelected: doc.get(`AnvilPAselect_${i}`),
+              maxCarryCap: doc.get(`MaxCarryCap_${i}`),
+              prayers: doc.get(`Prayers_${i}`),
+              postOffice: JSON.parse(doc.get(`POu_${i}`)),
+              timeAway: doc.get(`PTimeAway_${i}`),
+              playerStuff: doc.get(`PlayerStuff_${i}`),
+              attackLoadout: doc.get(`AttackLoadout_${i}`),
+              equippedCards: doc.get(`CardEquip_${i}`),
+              talentLevels: JSON.parse(doc.get(`SL_${i}`)),
+              talentMaxLevels: JSON.parse(doc.get(`SM_${i}`))
             }
           }), charNames))
           accountData.set("playerNames", charNames);
           // CauldronP2W (obviously named)
           accountData.set("alchemy", parseAlchemy(doc.get("CauldronInfo"), doc.get("CauldUpgLVs")));
           accountData.set("bribes", parseBribes(doc.get("BribeStatus")));
+          accountData.set("guild", parseGuild(JSON.parse(doc.get("Guild"))));
+          accountData.set("gems", parseGems(JSON.parse(doc.get('GemItemsPurchased'))));
           accountData.set("rawData", doc.data());
-          // BribeStatus for bribes
           // CYWorldTeleports (if I ever care to show it)
           // SaltLick
           // CogO
@@ -118,6 +134,8 @@ export const AppProvider: React.FC<{}> = (props) => {
           // ForgeLV
           // ForgeItemOrder
           // PrayOwned
+          // PlayerStuff_2 - for current charge + other things I think
+          // _customBlock_AnvilProduceStats for the rest
           const newData = new IdleonData(accountData, new Date());
           setState(newData);
         });

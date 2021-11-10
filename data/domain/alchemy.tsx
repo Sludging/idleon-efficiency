@@ -18,10 +18,12 @@ export const AlchemyConst = {
     OrangeBargain: 14,
     VialIndex: 4,
     UnderdevelopedCosts: 6,
+    Anvilnomics: 4,
     BarleyBrew: 9,
     BlueFlav: 18,
     SmartBoi: 13,
-    CauldronCount: 4
+    CauldronCount: 4,
+    CauldronBonusBubbleIndex: 1
 };
 
 export const VialIndex = 4;
@@ -93,7 +95,7 @@ export class Bubble {
     }
 
     getBonusText = (): string => {
-        const bubbleBonus = lavaFunc(this.func, this.level, this.x1, this.x2)
+        const bubbleBonus = lavaFunc(this.func, this.level, this.x1, this.x2, true)
         let titleText = this.description.replace(/{/g, bubbleBonus.toString());
         return handleToolBubbles(titleText, this.name);
     }

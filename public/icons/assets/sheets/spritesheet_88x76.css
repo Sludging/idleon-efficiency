@@ -1,0 +1,32 @@
+.icons-88 {
+            background-image: url(spritesheet_88x76.png);
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 88px;
+            height: 76px;
+            background-size: cover;
+            background-position: 0 calc(var(--row) * -76px)
+        }
+        .icons-UIboxUpg0 { --row: 0; }
+.icons-UIboxUpg1 { --row: 1; }
+.icons-UIboxUpg10 { --row: 2; }
+.icons-UIboxUpg11 { --row: 3; }
+.icons-UIboxUpg12 { --row: 4; }
+.icons-UIboxUpg13 { --row: 5; }
+.icons-UIboxUpg14 { --row: 6; }
+.icons-UIboxUpg15 { --row: 7; }
+.icons-UIboxUpg16 { --row: 8; }
+.icons-UIboxUpg17 { --row: 9; }
+.icons-UIboxUpg18 { --row: 10; }
+.icons-UIboxUpg19 { --row: 11; }
+.icons-UIboxUpg2 { --row: 12; }
+.icons-UIboxUpg20 { --row: 13; }
+.icons-UIboxUpg21 { --row: 14; }
+.icons-UIboxUpg22 { --row: 15; }
+.icons-UIboxUpg3 { --row: 16; }
+.icons-UIboxUpg4 { --row: 17; }
+.icons-UIboxUpg5 { --row: 18; }
+.icons-UIboxUpg6 { --row: 19; }
+.icons-UIboxUpg7 { --row: 20; }
+.icons-UIboxUpg8 { --row: 21; }
+.icons-UIboxUpg9 { --row: 22; }

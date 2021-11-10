@@ -42,10 +42,10 @@ const Home: NextPage = () => {
           <Tab title="Players">
             <PlayerData />
         </Tab>
-        <Tab title="Bribes">
+        <Tab title="Bribes - WIP">
           <BribeData />
         </Tab>
-        <Tab title="Raw Data">
+        <Tab title="Raw Data - No Styling">
           <JsonData />
         </Tab>
         </Tabs>
