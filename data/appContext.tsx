@@ -107,14 +107,13 @@ export const AppProvider: React.FC<{}> = (props) => {
               anvilSelected: doc.get(`AnvilPAselect_${i}`),
               maxCarryCap: doc.get(`MaxCarryCap_${i}`),
               prayers: doc.get(`Prayers_${i}`),
-              postOffice: doc.get(`POu_${i}`),
+              postOffice: JSON.parse(doc.get(`POu_${i}`)),
               timeAway: doc.get(`PTimeAway_${i}`),
               playerStuff: doc.get(`PlayerStuff_${i}`),
               attackLoadout: doc.get(`AttackLoadout_${i}`),
               equippedCards: doc.get(`CardEquip_${i}`),
               talentLevels: JSON.parse(doc.get(`SL_${i}`)),
-              talentMaxLevels: JSON.parse(doc.get(`SM_${i}`)),
-              postOffice: JSON.parse(doc.get(`POu_${i}`))
+              talentMaxLevels: JSON.parse(doc.get(`SM_${i}`))
             }
           }), charNames))
           accountData.set("playerNames", charNames);

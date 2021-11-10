@@ -19,14 +19,13 @@ export interface rawPlayerData {
     anvilSelected: Array<number>
     maxCarryCap: string
     prayers: number[] // NOT MAPPED YET
-    postOffice: number[] // NOT MAPPED YET
+    postOffice: number[]
     timeAway: number // NOT MAPPED YET
     playerStuff: number[] // NOT MAPPED YET
     attackLoadout: number[][] // NOT MAPPED YET
     equippedCards: string[] // NOT MAPPED YET
     talentLevels: Record<string, number>
     talentMaxLevels: Record<string, number>
-    postOffice: number[]
 }
 
 export class PlayerStats {

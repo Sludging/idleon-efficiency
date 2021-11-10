@@ -140,7 +140,7 @@ function PlayerTab({ player }: PlayerTabProps) {
             setAllCapBonus(player.capacity.getAllCapsBonus(guildCarryBonus, telekineticStorageBonus, carryCapShrineBonus, zergPrayerBonus, ruckSackPrayerBonus));
             setPlayerCoins(getCoinsArray(player.money));
         }
-    }, [idleonData, player, allCapBonus, extraBagsTalentBonus, telekineticStorageBonus, guildCarryBonus, anvilCostDiscount]);
+    }, [idleonData, player, allCapBonus, extraBagsTalentBonus, telekineticStorageBonus, guildCarryBonus, anvilCostDiscount, carryCapShrineBonus, guild, ruckSackPrayerBonus, zergPrayerBonus]);
 
     return (
         <Tabs activeIndex={index} onActive={onActive}>
@@ -277,7 +277,7 @@ function PlayerTab({ player }: PlayerTabProps) {
                     {
                         ClassTalentMap[ClassIndex[player.class.replace(/ /g, "_") as keyof typeof ClassIndex]].concat(["Special Talent 1", "Special Talent 2"]).map((talentPage, _) => {
                             return (
-                                <Box align="center" gap="medium">
+                                <Box key={`player_${player.playerID}_talents_${talentPage}`} align="center" gap="medium">
                                     <Text>{talentPage}</Text>
                                     <Grid columns={{
                                         count: 5,
@@ -328,7 +328,7 @@ function PlayerTab({ player }: PlayerTabProps) {
                         {
                             player.postOffice.map((box, index) => {
                                 return (
-                                    <Box fill>
+                                    <Box key={`player_${player.playerID}_postoffice_${index}`} fill>
                                         <Stack anchor="bottom-right" alignSelf="center" key={`player_${player.playerID}_postoffice_${index}`}>
                                             <Tip
                                                 plain
