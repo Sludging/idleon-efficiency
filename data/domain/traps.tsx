@@ -20,11 +20,16 @@ export class Trap {
 
 export default function parseTraps(allTraps: Array<any>) {
     const parsedData = allTraps.map((playerArray, pIndex) => {
-        const parsedPlayerData: Array<any> = JSON.parse(playerArray);
-        const filteredTraps = parsedPlayerData.filter(trapData => trapData[0] != -1);
-        return filteredTraps.map(trapData => {
-            return new Trap(pIndex, trapData)
-        });
+        try {
+            const parsedPlayerData: Array<any> = JSON.parse(playerArray);
+            const filteredTraps = parsedPlayerData.filter(trapData => trapData[0] != -1);
+            return filteredTraps.map(trapData => {
+                return new Trap(pIndex, trapData)
+            });
+        }
+        catch {
+            return [];
+        }
     });
     return parsedData;
 }
