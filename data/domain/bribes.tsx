@@ -42,11 +42,11 @@ const initBribes = () => {
     ];
 }
 
-export default function parseBribes(bribesData: boolean[]) {
+export default function parseBribes(bribesData: number[]) {
     let bribeArray = initBribes();
     bribesData.forEach((bribe, index) => {
         if (index < bribeArray.length) { // ignore future values
-            bribeArray[index].status = bribe;
+            bribeArray[index].status = bribe as BribeStatus;
         }
     })
 
