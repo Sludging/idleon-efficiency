@@ -50,8 +50,8 @@ export class Stamp {
         return this.data.startV * Math.pow(this.data.mCostExp, Math.pow(Math.round(this.level / this.data.upgradeInterval) - 1, 0.8)) * (1 - blueFlavPercent);
     }
 
-    getBonusText = (): string => {
-        return lavaFunc(this.data.function, this.level, this.data.x1, this.data.x2, true).toString() + this.bonus;
+    getBonusText = (skillLevel: number = 0): string => {
+        return this.getBonus(skillLevel).toString() + this.bonus;
     }
 
     getBonus = (skillLevel: number = 0): number => {
