@@ -455,11 +455,13 @@ export default function parsePlayer(rawData: Array<rawPlayerData>, playerNames: 
 
     // identify player ranking in each skill
     parsedData.forEach((player) => {
-        for (const [skillIndex, skillLevel] of player.skills) {
-            const sortedList = allSkillsMap.get(skillIndex)?.sort((a, b) => b - a);
-            if (sortedList) {
-                const skillRank = sortedList.indexOf(skillLevel);
-                player.skillsRank.set(skillIndex, skillRank);
+        if (player) {
+            for (const [skillIndex, skillLevel] of player.skills) {
+                const sortedList = allSkillsMap.get(skillIndex)?.sort((a, b) => b - a);
+                if (sortedList) {
+                    const skillRank = sortedList.indexOf(skillLevel);
+                    player.skillsRank.set(skillIndex, skillRank);
+                }
             }
         }
     })

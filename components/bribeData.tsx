@@ -24,7 +24,7 @@ export default function BribeData() {
                     bribeData.filter(x => x.name != "Filler" && x.status != BribeStatus.Locked).map((bribe, index) => {
                         return (<Box key={`bribe_${index}`} direction="row" gap="large">
                             <Text>{bribe.description}</Text>
-                            <Text>{bribe.purchased ? "Purchased!" : "Go buy this!"}</Text>
+                            <Text>{bribe.status == BribeStatus.Purchased ? "Purchased!" : "Go buy this!"}</Text>
                         </Box>)
                     })
                     : <></>
