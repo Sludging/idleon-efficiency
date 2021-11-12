@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@sentry/nextjs": "^6.14.3",
     "@types/styled-components": "^5.1.14",
     "firebase": "^9.0.2",
     "firebaseui": "^5.0.0",
