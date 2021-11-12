@@ -69,6 +69,14 @@ export default function TrapData() {
             setPlayerNames(theData.get("playerNames"))
         }
     }, [idleonData]);
+
+    if (playerTraps.filter(x => playerNames[x[0]?.playerID] != undefined).length == 0) {
+        return (
+            <Box align="center" pad="medium">
+                <Heading level='3'>Come back when you unlocked this!</Heading>
+            </Box>
+        )
+    }
     return (
         <Box align="center" pad="large">
             <Heading level='1'>Traps</Heading>
@@ -82,10 +90,10 @@ export default function TrapData() {
                     </TableHeader>
                     <TableBody>
                         {
-                            playerTraps.map((trapsData, index) => {
+                            playerTraps.filter(x => playerNames[x[0]?.playerID] != undefined).map((trapsData, index) => {
                                 return (
                                     <TableRow key={`traps_${index}`}>
-                                        <TableCell>{playerNames[trapsData[0]?.playerID] || "Unknown"}</TableCell>
+                                        <TableCell>{playerNames[trapsData[0]?.playerID]}</TableCell>
                                         <TableCell>
                                             <PlayerTraps traps={trapsData} />
                                         </TableCell>

@@ -5,7 +5,7 @@ import {
 
 import { useEffect, useState, useContext } from 'react';
 import { AppContext } from '../data/appContext';
-import { Bribe } from "../data/domain/bribes";
+import { Bribe, BribeStatus } from "../data/domain/bribes";
 
 export default function BribeData() {
     const [bribeData, setBribeData] = useState<Bribe[]>();
@@ -18,13 +18,13 @@ export default function BribeData() {
         }
     }, [idleonData])
     return (
-        <Box gap="small" pad="medium">
+        <Box gap="small" pad="xlarge">
             {
                 bribeData ?
-                    bribeData.filter(x => x.name != "Filler").map((bribe, index) => {
-                        return (<Box key={`bribe_${index}`} direction="row" gap="medium">
+                    bribeData.filter(x => x.name != "Filler" && x.status != BribeStatus.Locked).map((bribe, index) => {
+                        return (<Box key={`bribe_${index}`} direction="row" gap="large">
                             <Text>{bribe.description}</Text>
-                            <Text>{bribe.purchased ? "Purchased!" : "Nope!"}</Text>
+                            <Text>{bribe.purchased ? "Purchased!" : "Go buy this!"}</Text>
                         </Box>)
                     })
                     : <></>

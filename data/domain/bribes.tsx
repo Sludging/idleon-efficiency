@@ -2,8 +2,14 @@ export const BribeConst = {
     StampBribe: 0
 };
 
+export enum BribeStatus {
+    Purchased = 1,
+    Available = 0,
+    Locked = -1
+}
+
 export class Bribe {
-    public purchased: boolean = false;
+    public status: BribeStatus = BribeStatus.Locked;
 
     constructor(public name: string, public description: string, public cost: number, public type: string, public bonus: string, public value: number) { }
 }
@@ -40,7 +46,7 @@ export default function parseBribes(bribesData: boolean[]) {
     let bribeArray = initBribes();
     bribesData.forEach((bribe, index) => {
         if (index < bribeArray.length) { // ignore future values
-            bribeArray[index].purchased = bribe;
+            bribeArray[index].status = bribe;
         }
     })
 
