@@ -3,6 +3,7 @@ import {
     Grid,
     Stack,
     Text,
+    Heading,
     Tip
 } from "grommet"
 
@@ -12,7 +13,7 @@ import { AppContext } from '../data/appContext';
 import { getCoinsArray, lavaFunc, nFormatter } from '../data/utility'
 import CoinsDisplay from "./coinsDisplay";
 import { Alchemy, AlchemyConst } from "../data/domain/alchemy";
-import { Bribe, BribeConst } from "../data/domain/bribes";
+import { Bribe, BribeConst, BribeStatus } from "../data/domain/bribes";
 
 function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stamp, index: number, blueFlavPercent: number, hasBribe: boolean }) {
     const getCardClass = () => {
@@ -102,7 +103,7 @@ function StampTab({ tab, index, blueFlavPercent, hasBribe }: { tab: Stamp[], ind
 
 export default function StampData() {
     const [stampData, setStampData] = useState<Stamp[][]>();
-    const [hasBribe, setHasBribe] = useState<boolean>(false);
+    const [hasBribe, setHasBribe] = useState<BribeStatus>(BribeStatus.Available);
     const [blueFlavPercent, setBlueFlavPercent] = useState<number>(0);
     const idleonData = useContext(AppContext);
 
@@ -117,14 +118,22 @@ export default function StampData() {
             setBlueFlavPercent(blueFlavPower / 100); // divide by 100 to get the %.
 
             const bribes = theData.get("bribes") as Bribe[];
-            setHasBribe(bribes[BribeConst.StampBribe].purchased);
+            setHasBribe(bribes[BribeConst.StampBribe].status);
         }
-    }, [idleonData])
+    }, [idleonData, stampData])
+
+    if (stampData && stampData.flatMap(tab => tab).filter(stamp => stamp.level > 0).length == 0) {
+        return (
+            <Box align="center" pad="medium">
+                <Heading level='3'>Come back when you unlocked this!</Heading>
+            </Box>
+        )
+    }
     return (
         <Grid columns="1/3" gap="medium">
             {
                 stampData && stampData.map((tab, index) => {
-                    return (<StampTab key={`tab_${index}`} tab={tab} index={index} blueFlavPercent={blueFlavPercent} hasBribe={hasBribe} />)
+                    return (<StampTab key={`tab_${index}`} tab={tab} index={index} blueFlavPercent={blueFlavPercent} hasBribe={hasBribe == BribeStatus.Purchased} />)
                 })
             }
         </Grid>

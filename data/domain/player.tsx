@@ -5,8 +5,8 @@ import { ClassIndex, Talent, ClassTalentMap, GetTalentArray } from './talents';
 
 export interface rawPlayerData {
     equipment: Array<Map<string, string>>
-    equipmentStoneData: Map<string, Map<string, number>>
-    toolsStoneData: Map<string, Map<string, number>>
+    equipmentStoneData: Map<string, Map<string, number>> // NOT HANDLED
+    toolsStoneData: Map<string, Map<string, number>> // NOT HANDLED
     stats: Array<number>
     classNumber: number
     afkTarget: number
@@ -19,13 +19,13 @@ export interface rawPlayerData {
     anvilSelected: Array<number>
     maxCarryCap: string
     prayers: number[] // NOT MAPPED YET
-    postOffice: number[]
+    postOffice: string
     timeAway: number // NOT MAPPED YET
     playerStuff: number[] // NOT MAPPED YET
     attackLoadout: number[][] // NOT MAPPED YET
     equippedCards: string[] // NOT MAPPED YET
-    talentLevels: Record<string, number>
-    talentMaxLevels: Record<string, number>
+    talentLevels: string
+    talentMaxLevels: string
 }
 
 export class PlayerStats {
@@ -347,13 +347,16 @@ export default function parsePlayer(rawData: Array<rawPlayerData>, playerNames: 
         if (!playerNames) {
             console.log("Player Names is missing!");
         }
+        if (!rawPlayerData.classNumber) { // Temp handling of uncreated players, maybe we can detect this better.
+            return undefined;
+        }
         let currentPlayer = new Player(index, playerNames ? playerNames[index] : "");
         currentPlayer.gear = parseEquipment(rawPlayerData);
-        currentPlayer.stats.setStats(rawPlayerData.stats);
-        currentPlayer.level = rawPlayerData.stats[4];
-        if (rawPlayerData.classNumber) {
-            currentPlayer.class = ClassIndex[rawPlayerData.classNumber]?.replace(/_/g, " ") || "New Class?";
+        if (rawPlayerData.stats) {
+            currentPlayer.stats.setStats(rawPlayerData.stats);
+            currentPlayer.level = rawPlayerData.stats[4];
         }
+        currentPlayer.class = ClassIndex[rawPlayerData.classNumber]?.replace(/_/g, " ") || "New Class?";
         if (rawPlayerData.afkTarget) {
             currentPlayer.currentMonster = monstersMap.get(rawPlayerData.afkTarget.toString())?.replace(/_/g, " ") || "New Monster?";
         }
@@ -375,18 +378,20 @@ export default function parsePlayer(rawData: Array<rawPlayerData>, playerNames: 
         if (rawPlayerData.money) {
             currentPlayer.money = rawPlayerData.money;
         }
-        rawPlayerData.skills.forEach((skillLevel, skillIndex) => {
-            // Only get the indexes we care about
-            if (skillIndex in SkillsIndex) {
-                // update the player skill level
-                currentPlayer.skills.set(skillIndex as SkillsIndex, skillLevel);
-                // record skill levels across all players in a map
-                if (!allSkillsMap.has(skillIndex)) {
-                    allSkillsMap.set(skillIndex, []);
+        if (rawPlayerData.skills) {
+            rawPlayerData.skills.forEach((skillLevel, skillIndex) => {
+                // Only get the indexes we care about
+                if (skillIndex in SkillsIndex) {
+                    // update the player skill level
+                    currentPlayer.skills.set(skillIndex as SkillsIndex, skillLevel);
+                    // record skill levels across all players in a map
+                    if (!allSkillsMap.has(skillIndex)) {
+                        allSkillsMap.set(skillIndex, []);
+                    }
+                    allSkillsMap.get(skillIndex)?.push(skillLevel);
                 }
-                allSkillsMap.get(skillIndex)?.push(skillLevel);
-            }
-        })
+            })
+        }
 
         if (rawPlayerData.anvilProduction) {
             currentPlayer.anvil.production.forEach((item, index) => {
@@ -418,34 +423,45 @@ export default function parsePlayer(rawData: Array<rawPlayerData>, playerNames: 
 
         if (rawPlayerData.talentLevels && rawPlayerData.talentMaxLevels) {
             // NEED TO CLEAN THIS UP SO MUCH!
-            const classIndex: ClassIndex = rawPlayerData.classNumber as ClassIndex;
-            const talentPageNames: string[] = ClassTalentMap[classIndex].concat(Array(5).fill("Blank").map((_, i) => `Special Talent ${i + 1}`))
-            talentPageNames.forEach((page: string) => {
-                currentPlayer.talents = currentPlayer.talents.concat(GetTalentArray(page));
-            })
+            try {
+                const jsonTalents = JSON.parse(rawPlayerData.talentLevels);
+                const jsonMaxTalents = JSON.parse(rawPlayerData.talentMaxLevels);
+                const classIndex: ClassIndex = rawPlayerData.classNumber as ClassIndex;
+                const talentPageNames: string[] = ClassTalentMap[classIndex].concat(Array(5).fill("Blank").map((_, i) => `Special Talent ${i + 1}`))
+                talentPageNames.forEach((page: string) => {
+                    currentPlayer.talents = currentPlayer.talents.concat(GetTalentArray(page));
+                })
 
-            currentPlayer.talents.forEach((talent) => {
-                talent.level = rawPlayerData.talentLevels[talent.skillIndex] ?? 0;
-                talent.maxLevel = rawPlayerData.talentMaxLevels[talent.skillIndex] ?? 0;
-            })
+                currentPlayer.talents.forEach((talent) => {
+                    talent.level = jsonTalents[talent.skillIndex] ?? 0;
+                    talent.maxLevel = jsonMaxTalents[talent.skillIndex] ?? 0;
+                })
+            }
+            catch { } // silently absorb
         }
 
         if (rawPlayerData.postOffice) {
-            currentPlayer.postOffice.forEach((box, index) => {
-                box.level = rawPlayerData.postOffice[index];
-            })
+            try {
+                const jsonPostOffice = JSON.parse(rawPlayerData.postOffice);
+                currentPlayer.postOffice.forEach((box, index) => {
+                    box.level = jsonPostOffice[index];
+                })
+            }
+            catch { } // silently absorb
         }
 
         return currentPlayer;
-    });
+    }).filter(x => x != undefined);
 
     // identify player ranking in each skill
     parsedData.forEach((player) => {
-        for (const [skillIndex, skillLevel] of player.skills) {
-            const sortedList = allSkillsMap.get(skillIndex)?.sort((a, b) => b - a);
-            if (sortedList) {
-                const skillRank = sortedList.indexOf(skillLevel);
-                player.skillsRank.set(skillIndex, skillRank);
+        if (player) {
+            for (const [skillIndex, skillLevel] of player.skills) {
+                const sortedList = allSkillsMap.get(skillIndex)?.sort((a, b) => b - a);
+                if (sortedList) {
+                    const skillRank = sortedList.indexOf(skillLevel);
+                    player.skillsRank.set(skillIndex, skillRank);
+                }
             }
         }
     })

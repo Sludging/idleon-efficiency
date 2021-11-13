@@ -26,7 +26,7 @@ export default function Welcome() {
                 </Text>
                 <Text>Inside the DevTools console copy paste the following code:</Text>
                 <pre className="prettyprint">
-                    <Box background="rgb(245 245 245)">
+                    <Box background="rgb(245 245 245)" style={{ color: 'black' }}>
                         <code className="language-javascript">{`
                         var app = firebase.initializeApp({
                             apiKey: "AIzaSyAU62kOE6xhSrFqoXQPv6_WHxYilmoUxDk",
