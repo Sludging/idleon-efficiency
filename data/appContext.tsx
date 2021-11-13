@@ -82,10 +82,15 @@ export const AppProvider: React.FC<{}> = (props) => {
             return doc.get(`PldTraps_${i}`)
           }));
           accountData.set("traps", parsedTraps);
-          const parsedStatues = parseStatues([...Array(9)].map((_, i) => {
-            return JSON.parse(doc.get(`StatueLevels_${i}`))
-          }), JSON.parse(doc.get(`StuG`)));
-          accountData.set("statues", parsedStatues);
+          try {
+            const parsedStatues = parseStatues([...Array(9)].map((_, i) => {
+              return JSON.parse(doc.get(`StatueLevels_${i}`))
+            }), JSON.parse(doc.get(`StuG`)));
+            accountData.set("statues", parsedStatues);
+          }
+          catch {
+            accountData.set("statues", []);
+          }
           // AttackLoadout_0 (obviously named)
           // POu_4 (Post office per player) (UIboxUpg0 - for box images)
           // CardEquip_0
@@ -93,13 +98,13 @@ export const AppProvider: React.FC<{}> = (props) => {
           accountData.set("players", parsePlayer([...Array(9)].map((_, i) => {
             return {
               equipment: doc.get(`EquipOrder_${i}`),
-              equipmentStoneData: JSON.parse(doc.get(`EMm0_${i}`)),
-              toolsStoneData: JSON.parse(doc.get(`EMm1_${i}`)),
+              equipmentStoneData: doc.get(`EMm0_${i}`),
+              toolsStoneData: doc.get(`EMm1_${i}`),
               stats: doc.get(`PVStatList_${i}`),
               classNumber: doc.get(`CharacterClass_${i}`),
               afkTarget: doc.get(`AFKtarget_${i}`),
               currentMap: doc.get(`CurrentMap_${i}`),
-              starSigns: doc.get(`PVtStarSign_${i}`).split(','),
+              starSigns: doc.get(`PVtStarSign_${i}`)?.split(',') ?? [],
               money: doc.get(`Money_${i}`),
               skills: doc.get(`Lv0_${i}`),
               anvilProduction: doc.get(`AnvilPA_${i}`),
@@ -107,13 +112,13 @@ export const AppProvider: React.FC<{}> = (props) => {
               anvilSelected: doc.get(`AnvilPAselect_${i}`),
               maxCarryCap: doc.get(`MaxCarryCap_${i}`),
               prayers: doc.get(`Prayers_${i}`),
-              postOffice: JSON.parse(doc.get(`POu_${i}`)),
+              postOffice: doc.get(`POu_${i}`),
               timeAway: doc.get(`PTimeAway_${i}`),
               playerStuff: doc.get(`PlayerStuff_${i}`),
               attackLoadout: doc.get(`AttackLoadout_${i}`),
               equippedCards: doc.get(`CardEquip_${i}`),
-              talentLevels: JSON.parse(doc.get(`SL_${i}`)),
-              talentMaxLevels: JSON.parse(doc.get(`SM_${i}`))
+              talentLevels: doc.get(`SL_${i}`),
+              talentMaxLevels: doc.get(`SM_${i}`)
             }
           }), charNames))
           accountData.set("playerNames", charNames);

@@ -50,16 +50,16 @@ export class Stamp {
         return this.data.startV * Math.pow(this.data.mCostExp, Math.pow(Math.round(this.level / this.data.upgradeInterval) - 1, 0.8)) * (1 - blueFlavPercent);
     }
 
-    getBonusText = (): string => {
-        return lavaFunc(this.data.function, this.level, this.data.x1, this.data.x2, true).toString() + this.bonus;
+    getBonusText = (skillLevel: number = 0): string => {
+        return this.getBonus(skillLevel, true).toString() + this.bonus;
     }
 
-    getBonus = (skillLevel: number = 0): number => {
+    getBonus = (skillLevel: number = 0, round = false): number => {
         if (skillLevel > 0 && skillLevel < this.level) {
             const reducedLevel = Math.floor(3 + Math.pow(this.level - 3, 0.25) * Math.pow(skillLevel, 0.75));
             return lavaFunc(this.data.function, reducedLevel, this.data.x1, this.data.x2);
         }
-        return lavaFunc(this.data.function, this.level, this.data.x1, this.data.x2);
+        return lavaFunc(this.data.function, this.level, this.data.x1, this.data.x2, round);
     }
 
     isMaxLevel = (): boolean => {

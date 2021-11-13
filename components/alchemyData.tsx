@@ -5,7 +5,8 @@ import {
     Text,
     Tip,
     CheckBox,
-    Select
+    Select,
+    Heading
 } from "grommet"
 import styled from 'styled-components'
 
@@ -179,6 +180,15 @@ export default function AlchemyData() {
             setHasAlchemyAchievement(alchemyData?.hasAchievement() ?? false);
         }
     }, [idleonData, alchemyData])
+
+    if (alchemyData && alchemyData.cauldrons.flatMap(cauldron => cauldron.bubbles).filter(bubble => bubble.level > 0).length == 0) {
+        return (
+            <Box align="center" pad="medium">
+                <Heading level='3'>Come back when you unlocked this!</Heading>
+            </Box>
+        )
+    }
+
     return (
         <Box >
             <Box gap="medium" pad="medium" align="start">

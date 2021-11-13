@@ -35,3 +35,19 @@ yarn-error.log*
 
 # local images
 .icons-backup
+data/icons/assets/**/*.png
+*.py
+icons.*
+image-generator.js
+sample_data.json
+Z.js
+*.txt
+*:Zone.Identifier
+__pycache__
+.venv
+sprites
+**/backup
+get_id_token.js
+yarn.lock
+.vscode
+model_generation

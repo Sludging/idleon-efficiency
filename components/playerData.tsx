@@ -254,8 +254,8 @@ function PlayerTab({ player }: PlayerTabProps) {
                     <Box>
                         <Text>Guild Bonus: {guild && lavaFunc(guild.guildBonuses[2].func, guild.guildBonuses[2].level, guild.guildBonuses[2].x1, guild.guildBonuses[2].x2)} </Text>
                         <Text>Gem Capacity Bought: {gemStore?.purchases.find(x => x.no == 58)?.pucrhased} - {gemStore?.purchases.find(x => x.no == 58)?.desc}</Text>
-                        <Text>Monster Mats Stamp: {stampData && stampData[1][7].getBonusText()}</Text>
-                        <Text>All Cap Stamp: {stampData && stampData[2][1].getBonusText()} - {stampData && stampData[2][1].level}</Text>
+                        <Text>Monster Mats Stamp: {stampData && stampData[1][7].getBonusText(player.skills.get(SkillsIndex.Smithing))}</Text>
+                        <Text>All Cap Stamp: {stampData && stampData[2][1].getBonusText(player.skills.get(SkillsIndex.Smithing))} - {stampData && stampData[2][1].level}</Text>
                         <Text>All Carry Cap Math: {allCapBonus}</Text>
                         <Text>Material Cap Math: {player.capacity.getMaterialCapacity(allCapBonus, stampData ? stampData[1][7].getBonus(player.skills.get(SkillsIndex.Smithing)) : 0, gemStore?.purchases.find(x => x.no == 58)?.pucrhased ?? 0, stampData ? stampData[2][1].getBonus() : 0, extraBagsTalentBonus, starSignExtraCap)}</Text>
                         <Text>Anvil Cap Guess: {player.anvil.getCapacity(player.capacity.getMaterialCapacity(allCapBonus, stampData ? stampData[1][7].getBonus(player.skills.get(SkillsIndex.Smithing)) : 0, gemStore?.purchases.find(x => x.no == 58)?.pucrhased ?? 0, stampData ? stampData[2][1].getBonus() : 0, extraBagsTalentBonus, starSignExtraCap))} </Text>
