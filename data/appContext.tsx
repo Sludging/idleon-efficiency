@@ -147,7 +147,7 @@ export const AppProvider: React.FC<{}> = (props) => {
           sendEvent({
             action: "handle_snapshot",
             category: "engagement",
-            label: "user.uid",
+            label: user.uid,
             value: 1,
           });
           setState(newData);
