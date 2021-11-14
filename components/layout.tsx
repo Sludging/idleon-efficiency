@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import Head from 'next/head'
 import Script from 'next/script'
 
 import {
@@ -81,9 +80,7 @@ export default function Layout({
 
     return (
         <Container>
-            <Head>
-                <Script strategy="afterInteractive" key="adsense" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8031377824465559" crossOrigin="anonymous"></Script>
-            </Head>
+            <Script strategy="afterInteractive" key="adsense" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8031377824465559" crossOrigin="anonymous"></Script>
             <Header background="light-4" pad="medium" height="xsmall">
                 <Text>Idleon Efficiency</Text>
                 {user && <Box direction="row" gap="xlarge"><Text>Last Updated: {lastUpdated}</Text><Button onClick={() => onButtonClick(authData?.logoutFunction)}>Logout</Button></Box>}
