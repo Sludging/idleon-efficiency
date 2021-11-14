@@ -172,7 +172,7 @@ function PlayerTab({ player }: PlayerTabProps) {
                         {
                             [...Array(8)].map((_, equipIndex) => {
                                 if (player.gear.equipment[equipIndex].display_name == "Blank") {
-                                    return (<Box width="50px" height="50px" />);
+                                    return (<Box key={`blank_${equipIndex}`} width="50px" height="50px" />);
                                 }
                                 return (<Box key={`player_${index}_equip_${equipIndex}`} title={player.gear.equipment[equipIndex].display_name || ""} className={`icons icons-${player.gear.equipment[equipIndex].raw_name}_x1`} />)
                             })
@@ -409,7 +409,7 @@ export default function PlayerData() {
                                 </Box>
                             </Tab>
                         )
-                    })
+                    }) ?? <></>
                 }
             </Tabs>
         </Box>

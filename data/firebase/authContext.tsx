@@ -3,6 +3,8 @@ import { getAuth, User } from 'firebase/auth';
 import app from "./config";
 import { GoogleAuthProvider, signInWithPopup, signInWithCredential, signOut } from "firebase/auth";
 
+import { sendEvent, loginEvent } from '../../lib/gtag';
+
 interface AuthData {
     user: User | null
     isLoading: boolean
@@ -32,6 +34,7 @@ export const AuthProvider: React.FC<{}> = (props) => {
             .then((result) => {
                 const credential = GoogleAuthProvider.credentialFromResult(result);
                 setUser(result.user);
+                loginEvent("GOGGLE");
             }).catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
@@ -45,6 +48,7 @@ export const AuthProvider: React.FC<{}> = (props) => {
         signInWithCredential(auth, credential)
             .then((result) => {
                 setUser(result.user);
+                loginEvent("TOKEN");
             }).catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
@@ -57,6 +61,11 @@ export const AuthProvider: React.FC<{}> = (props) => {
         signOut(auth)
             .then((result) => {
                 console.log(result);
+                sendEvent({
+                    action: "logout",
+                    category: "engagement",
+                    value: 1,
+                });
             }).catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;

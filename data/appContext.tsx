@@ -5,6 +5,8 @@ import { useContext } from 'react';
 import { AuthContext } from './firebase/authContext';
 import { getDatabase, Database, ref, get, child, goOnline } from 'firebase/database';
 
+import { sendEvent } from '../lib/gtag';
+
 import parseTraps from './domain/traps';
 import parseStamps from './domain/stamps';
 import parseStatues from './domain/statues';
@@ -14,7 +16,7 @@ import parseBribes from './domain/bribes';
 import parseGuild from './domain/guild';
 import parseGems from './domain/gemPurchases';
 
-// {message: "as", gid: "4gqdfHIzsN1Mz2nxjYSs"}
+
 
 class IdleonData {
   private data: Map<string, any>
@@ -142,6 +144,12 @@ export const AppProvider: React.FC<{}> = (props) => {
           // PlayerStuff_2 - for current charge + other things I think
           // _customBlock_AnvilProduceStats for the rest
           const newData = new IdleonData(accountData, new Date());
+          sendEvent({
+            action: "handle_snapshot",
+            category: "engagement",
+            label: "user.uid",
+            value: 1,
+          });
           setState(newData);
         });
     }
