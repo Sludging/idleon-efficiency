@@ -80,7 +80,7 @@ export default function Layout({
 
     return (
         <Container>
-            <Script strategy="afterInteractive" key="adsense" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8031377824465559" crossOrigin="anonymous"></Script>
+            <Script async key="adsense" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8031377824465559" crossOrigin="anonymous"></Script>
             <Header background="light-4" pad="medium" height="xsmall">
                 <Text>Idleon Efficiency</Text>
                 {user && <Box direction="row" gap="xlarge"><Text>Last Updated: {lastUpdated}</Text><Button onClick={() => onButtonClick(authData?.logoutFunction)}>Logout</Button></Box>}
