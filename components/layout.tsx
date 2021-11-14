@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import Head from 'next/head'
+import Script from 'next/script'
 
 import {
     Header,
@@ -16,11 +18,34 @@ import { AuthContext } from '../data/firebase/authContext'
 import Welcome from './welcome'
 import { User } from '@firebase/auth'
 
+declare const window: Window &
+    typeof globalThis & {
+        adsbygoogle: any
+    }
+
 const Container = styled.section`
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
 `
+
+function FooterAd() {
+    useEffect(() => {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+    }, [])
+
+    return (
+        <Box fill>
+            <ins className="adsbygoogle"
+                style={{ display: "block" }}
+                data-ad-client="ca-pub-8031377824465559"
+                data-ad-slot="7806485670"
+                data-ad-format="auto"
+                data-adtest="on"
+                data-full-width-responsive="true"></ins>
+        </Box>
+    )
+}
 
 export default function Layout({
     children
@@ -56,6 +81,9 @@ export default function Layout({
 
     return (
         <Container>
+            <Head>
+                <Script strategy="afterInteractive" key="adsense" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8031377824465559" crossOrigin="anonymous"></Script>
+            </Head>
             <Header background="light-4" pad="medium" height="xsmall">
                 <Text>Idleon Efficiency</Text>
                 {user && <Box direction="row" gap="xlarge"><Text>Last Updated: {lastUpdated}</Text><Button onClick={() => onButtonClick(authData?.logoutFunction)}>Logout</Button></Box>}
@@ -85,7 +113,7 @@ export default function Layout({
                 }
             </Header>
             {loading && <Box pad="large" fill align="center"><Text size="large">Loading Data</Text></Box>}
-            {!loading && user && <Main overflow='true'>{children}</Main>}
+            {!loading && user && <Main overflow='true'>{children}<FooterAd /></Main>}
             {!loading && !user && <Main><Welcome /></Main>}
         </Container>
     )
