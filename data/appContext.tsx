@@ -97,6 +97,8 @@ export const AppProvider: React.FC<{}> = (props) => {
           // POu_4 (Post office per player) (UIboxUpg0 - for box images)
           // CardEquip_0
           // Prayers_0
+          const timeAway = JSON.parse(doc.get('TimeAway'));
+          const cauldronBubbles: string[][] = JSON.parse(doc.get('CauldronBubbles'));
           accountData.set("players", parsePlayer([...Array(9)].map((_, i) => {
             return {
               equipment: doc.get(`EquipOrder_${i}`),
@@ -120,15 +122,17 @@ export const AppProvider: React.FC<{}> = (props) => {
               attackLoadout: doc.get(`AttackLoadout_${i}`),
               equippedCards: doc.get(`CardEquip_${i}`),
               talentLevels: doc.get(`SL_${i}`),
-              talentMaxLevels: doc.get(`SM_${i}`)
+              talentMaxLevels: doc.get(`SM_${i}`),
+              activeBubbles: cauldronBubbles[i] ?? []
             }
-          }), charNames))
+          }), timeAway, charNames))
           accountData.set("playerNames", charNames);
           // CauldronP2W (obviously named)
           accountData.set("alchemy", parseAlchemy(doc.get("CauldronInfo"), doc.get("CauldUpgLVs")));
           accountData.set("bribes", parseBribes(doc.get("BribeStatus")));
           accountData.set("guild", parseGuild(JSON.parse(doc.get("Guild"))));
           accountData.set("gems", parseGems(JSON.parse(doc.get('GemItemsPurchased'))));
+          accountData.set("timeAway", timeAway);
           accountData.set("rawData", doc.data());
           // CYWorldTeleports (if I ever care to show it)
           // SaltLick

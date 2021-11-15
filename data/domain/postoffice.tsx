@@ -1,8 +1,28 @@
-interface BoxBonus {
-    bonus: string
-    x1: number
-    x2: number
-    func: string
+import { lavaFunc } from '../utility'
+
+export const PostOfficeConst = {
+    BlacksmithBoxIndex: 5,
+    MaxBoxLevel: 400
+}
+
+export class BoxBonus {
+    constructor(public bonus: string, public x1: number, public x2: number, public func: string) { }
+
+    getBonus = (level: number, index: number, round = false): number => {
+        let bonusLevel = level;
+        if (index == 1) {
+            bonusLevel -= 25;
+        }
+        if (index == 2) {
+            bonusLevel -= 100;
+        }
+
+        return lavaFunc(this.func, bonusLevel, this.x1, this.x2, round);
+    }
+
+    getBonusText = (level: number, index: number): string => {
+        return `${this.getBonus(level, index, true)} ${this.bonus}`;
+    }
 }
 
 export class Box {
@@ -13,17 +33,17 @@ export class Box {
 
 export const initPostOffice = () => {
     return [
-        new Box("Civil War Memory Box", JSON.parse('[{"bonus": "Base Damage", "x1": 1, "x2": 0, "func": "add"}, {"bonus": "% Fight AFK Gains", "x1": 13, "x2": 200, "func": "decay"}, {"bonus": "% Critical Chance", "x1": 10, "x2": 200, "func": "decay"}]')),
-        new Box("Locally Sourced Organs", JSON.parse('[{"bonus": "Base Max HP", "x1": 1, "x2": 2, "func": "intervalAdd"}, {"bonus": "% Max HP", "x1": 0.1, "x2": 0, "func": "add"}, {"bonus": "% Self-Heal Per Min", "x1": 25, "x2": 200, "func": "decay"}]')),
-        new Box("Magician Starterpack", JSON.parse('[{"bonus": "Base Max MP", "x1": 1, "x2": 3, "func": "intervalAdd"}, {"bonus": "% Max MP", "x1": 0.1, "x2": 0, "func": "add"}, {"bonus": "% Faster Cooldowns", "x1": 17, "x2": 200, "func": "decay"}]')),
-        new Box("Box of Unwanted Stats", JSON.parse('[{"bonus": "Base Accuracy", "x1": 0.25, "x2": 0, "func": "add"}, {"bonus": "Base Defence", "x1": 0.3, "x2": 0, "func": "add"}, {"bonus": "% Monster EXP", "x1": 29, "x2": 170, "func": "decay"}]')),
-        new Box("Dwarven Supplies", JSON.parse('[{"bonus": "% Mining Efficiency", "x1": 50, "x2": 200, "func": "decay"}, {"bonus": "% Prowess Effect", "x1": 40, "x2": 150, "func": "decay"}, {"bonus": "% Mining AFK Gain", "x1": 15, "x2": 175, "func": "decay"}]')),
-        new Box("Blacksmith Box", JSON.parse('[{"bonus": "% Smithing EXP", "x1": 50, "x2": 200, "func": "decay"}, {"bonus": "% Production Speed", "x1": 75, "x2": 200, "func": "decay"}, {"bonus": "% to Craft +1 Slot", "x1": 30, "x2": 150, "func": "decay"}]')),
-        new Box("Taped Up Timber", JSON.parse('[{"bonus": "% Choppin Efficiency", "x1": 50, "x2": 200, "func": "decay"}, {"bonus": "% Prowess Effect", "x1": 40, "x2": 150, "func": "decay"}, {"bonus": "% Choppin AFK Gain", "x1": 15, "x2": 175, "func": "decay"}]')),
-        new Box("Carepack From Mum", JSON.parse('[{"bonus": "% Not Consume Food", "x1": 23, "x2": 200, "func": "decay"}, {"bonus": "% Health Food Effect", "x1": 30, "x2": 200, "func": "decay"}, {"bonus": "% Power Food Effect", "x1": 30, "x2": 200, "func": "decay"}]')),
-        new Box("Sealed Fishheads", JSON.parse('[{"bonus": "% Fishin Efficiency", "x1": 50, "x2": 200, "func": "decay"}, {"bonus": "% Prowess Effect", "x1": 40, "x2": 150, "func": "decay"}, {"bonus": "% Fishin AFK Gain", "x1": 15, "x2": 175, "func": "decay"}]')),
-        new Box("Potion Package", JSON.parse('[{"bonus": "% Brewing Speed", "x1": 70, "x2": 200, "func": "decay"}, {"bonus": "% Alchemy EXP", "x1": 60, "x2": 150, "func": "decay"}, {"bonus": "Cranium Cook Time", "x1": 0.1, "x2": 0, "func": "add"}]')),
-        new Box("Bug Hunting Supplies", JSON.parse('[{"bonus": "% Catchin Efficiency", "x1": 50, "x2": 200, "func": "decay"}, {"bonus": "% Prowess Effect", "x1": 40, "x2": 150, "func": "decay"}, {"bonus": "% Catchin AFK Gain", "x1": 15, "x2": 175, "func": "decay"}]')),
-        new Box("Non Predatory Loot Box", JSON.parse('[{"bonus": "% Drop Rarity", "x1": 50, "x2": 200, "func": "decay"}, {"bonus": "LUK", "x1": 0.25, "x2": 0, "func": "add"}, {"bonus": "% Crystal Mob Spawn", "x1": 65, "x2": 200, "func": "decay"}]')),
+        new Box("Civil War Memory Box", [new BoxBonus("Base Damage", 1, 0, "add"), new BoxBonus("% Fight AFK Gains", 13, 200, "decay"), new BoxBonus("% Critical Chance", 10, 200, "decay")]),
+        new Box("Locally Sourced Organs", [new BoxBonus("Base Max HP", 1, 2, "intervalAdd"), new BoxBonus("% Max HP", 0.1, 0, "add"), new BoxBonus("% Self-Heal Per Min", 25, 200, "decay")]),
+        new Box("Magician Starterpack", [new BoxBonus("Base Max MP", 1, 3, "intervalAdd"), new BoxBonus("% Max MP", 0.1, 0, "add"), new BoxBonus("% Faster Cooldowns", 17, 200, "decay")]),
+        new Box("Box of Unwanted Stats", [new BoxBonus("Base Accuracy", 0.25, 0, "add"), new BoxBonus("Base Defence", 0.3, 0, "add"), new BoxBonus("% Monster EXP", 29, 170, "decay")]),
+        new Box("Dwarven Supplies", [new BoxBonus("% Mining Efficiency", 50, 200, "decay"), new BoxBonus("% Prowess Effect", 40, 150, "decay"), new BoxBonus("% Mining AFK Gain", 15, 175, "decay")]),
+        new Box("Blacksmith Box", [new BoxBonus("% Smithing EXP", 50, 200, "decay"), new BoxBonus("% Production Speed", 75, 200, "decay"), new BoxBonus("% to Craft +1 Slot", 30, 150, "decay")]),
+        new Box("Taped Up Timber", [new BoxBonus("% Choppin Efficiency", 50, 200, "decay"), new BoxBonus("% Prowess Effect", 40, 150, "decay"), new BoxBonus("% Choppin AFK Gain", 15, 175, "decay")]),
+        new Box("Carepack From Mum", [new BoxBonus("% Not Consume Food", 23, 200, "decay"), new BoxBonus("% Health Food Effect", 30, 200, "decay"), new BoxBonus("% Power Food Effect", 30, 200, "decay")]),
+        new Box("Sealed Fishheads", [new BoxBonus("% Fishin Efficiency", 50, 200, "decay"), new BoxBonus("% Prowess Effect", 40, 150, "decay"), new BoxBonus("% Fishin AFK Gain", 15, 175, "decay")]),
+        new Box("Potion Package", [new BoxBonus("% Brewing Speed", 70, 200, "decay"), new BoxBonus("% Alchemy EXP", 60, 150, "decay"), new BoxBonus("Cranium Cook Time", 0.1, 0, "add")]),
+        new Box("Bug Hunting Supplies", [new BoxBonus("% Catchin Efficiency", 50, 200, "decay"), new BoxBonus("% Prowess Effect", 40, 150, "decay"), new BoxBonus("% Catchin AFK Gain", 15, 175, "decay")]),
+        new Box("Non Predatory Loot Box", [new BoxBonus("% Drop Rarity", 50, 200, "decay"), new BoxBonus("LUK", 0.25, 0, "add"), new BoxBonus("% Crystal Mob Spawn", 65, 200, "decay")]),
     ];
 }
