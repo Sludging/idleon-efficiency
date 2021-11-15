@@ -15,6 +15,7 @@ import parseAlchemy from './domain/alchemy';
 import parseBribes from './domain/bribes';
 import parseGuild from './domain/guild';
 import parseGems from './domain/gemPurchases';
+import parseAchievements from './domain/achievements';
 
 
 
@@ -132,6 +133,7 @@ export const AppProvider: React.FC<{}> = (props) => {
           accountData.set("bribes", parseBribes(doc.get("BribeStatus")));
           accountData.set("guild", parseGuild(JSON.parse(doc.get("Guild"))));
           accountData.set("gems", parseGems(JSON.parse(doc.get('GemItemsPurchased'))));
+          accountData.set("achievements", parseAchievements(JSON.parse(doc.get('AchieveReg'))))
           accountData.set("timeAway", timeAway);
           accountData.set("rawData", doc.data());
           // CYWorldTeleports (if I ever care to show it)
