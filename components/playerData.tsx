@@ -122,10 +122,10 @@ function PlayerTab({ player }: PlayerTabProps) {
             setGuild(theData.get("guild"));
             const alchemy = theData.get("alchemy") as Alchemy;
             const anvilnomicsBubble = alchemy.cauldrons[CauldronIndex.Quicc].bubbles[AlchemyConst.Anvilnomics];
-            const anvilnomicsBonus = lavaFunc(anvilnomicsBubble.func, anvilnomicsBubble.level, anvilnomicsBubble.x1, anvilnomicsBubble.x2, false);
+            const anvilnomicsBonus = lavaFunc(anvilnomicsBubble.func, anvilnomicsBubble.level, anvilnomicsBubble.x1, anvilnomicsBubble.x2);
             if (player.getBaseClass() == ClassIndex.Archer) {
                 const greenCauldronBonusBubble = alchemy.cauldrons[CauldronIndex.Quicc].bubbles[AlchemyConst.CauldronBonusBubbleIndex];
-                const classBonus = lavaFunc(greenCauldronBonusBubble.func, greenCauldronBonusBubble.level, greenCauldronBonusBubble.x1, greenCauldronBonusBubble.x2, false);
+                const classBonus = lavaFunc(greenCauldronBonusBubble.func, greenCauldronBonusBubble.level, greenCauldronBonusBubble.x1, greenCauldronBonusBubble.x2);
                 setAnvilCostDiscount(anvilnomicsBonus * classBonus);
             }
             else {
@@ -153,6 +153,7 @@ function PlayerTab({ player }: PlayerTabProps) {
                     setExtraBagsTalentBonus(lavaFunc(extraBagsTalent.funcX, extraBagsTalent.level, extraBagsTalent.x1, extraBagsTalent.x2));
                 }
             }
+
             // ANVIL SPEED MATH;
             const anvilZoomerBonus = stampData ? stampData[1][2].getBonus(player.skills.get(SkillsIndex.Smithing)) : 0;
             const blackSmithBox = player.postOffice[PostOfficeConst.BlacksmithBoxIndex];
@@ -171,7 +172,7 @@ function PlayerTab({ player }: PlayerTabProps) {
             setAllCapBonus(player.capacity.getAllCapsBonus(guildCarryBonus, telekineticStorageBonus, carryCapShrineBonus, zergPrayerBonus, ruckSackPrayerBonus));
             setPlayerCoins(getCoinsArray(player.money));
         }
-    }, [idleonData, player, allCapBonus, extraBagsTalentBonus, telekineticStorageBonus, guildCarryBonus, anvilCostDiscount, carryCapShrineBonus, guild, ruckSackPrayerBonus, zergPrayerBonus, anvilSpeed]);
+    }, [idleonData, player, allCapBonus, extraBagsTalentBonus, telekineticStorageBonus, guildCarryBonus, anvilCostDiscount, carryCapShrineBonus, guild, ruckSackPrayerBonus, zergPrayerBonus, anvilSpeed, activeBubbles, playerStatues, stampData]);
 
     return (
         <Tabs activeIndex={index} onActive={onActive}>

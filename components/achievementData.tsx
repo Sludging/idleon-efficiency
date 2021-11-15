@@ -38,7 +38,7 @@ export default function AchievementData() {
             <Tabs activeIndex={index} onActive={onActive}>
                 {['A', 'B', 'C'].map((letter) => {
                     return (
-                        <Tab title={LetterToWorldNumber(letter)}>
+                        <Tab key={letter} title={LetterToWorldNumber(letter)}>
                             <Grid columns={{
                                 count: letter == 'C' ? 9 : letter == 'B' ? 10 : 11,
                                 size: 'auto',
@@ -46,7 +46,6 @@ export default function AchievementData() {
                                 {achievementData ? achievementData.filter(x => x.name != "FILLERZZZ ACH" && x.worldLetter == letter && x.visualIndex != -1).sort((a, b) => a.visualIndex - b.visualIndex).map((achievement, index) => {
                                     return (
                                         <Box pad="small" key={`achievement_${index}`} direction="row" gap="large">
-
                                             <Tip
                                                 plain
                                                 content={
