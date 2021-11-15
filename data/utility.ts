@@ -1,4 +1,4 @@
-const round = (num: number) => {
+export const round = (num: number) => {
     return Math.round((num + Number.EPSILON) * 100) / 100;
 }
 
@@ -109,3 +109,34 @@ Things to remember:
 * Exp0_6 = current XP (first index = level, rest = skills)
 * Add system for crystl spawn chance per character.
 */
+
+export const formatTime = (input: number) => {
+    const formatter = new Intl.RelativeTimeFormat('en');
+    const ranges: Record<string, number> = {
+        years: 3600 * 24 * 365,
+        months: 3600 * 24 * 30,
+        weeks: 3600 * 24 * 7,
+        days: 3600 * 24,
+        hours: 3600,
+        minutes: 60,
+        seconds: 1
+    };
+    for (let key in ranges) {
+        if (ranges[key] < Math.abs(input)) {
+            const delta = input / ranges[key];
+            return formatter.format(Math.round(delta), key as Intl.RelativeTimeFormatUnit);
+        }
+    }
+}
+
+export const toTime = (fromSeconds: number) => {
+    let days = 0;
+    let hour = Math.floor(fromSeconds / 3600);
+    if (hour > 24) {
+        days = Math.floor(hour / 24);
+        hour -= days * 24;
+    }
+    const minutes = Math.floor(fromSeconds % 3600 / 60);
+    const seconds = Math.floor(fromSeconds % 3600 % 60);
+    return `${days > 0 ? `${days}days` : ''} ${hour}hr ${minutes}min ${seconds}sec`;
+}
