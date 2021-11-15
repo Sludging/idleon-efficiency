@@ -15,11 +15,12 @@ import { Guild } from '../data/domain/guild';
 import { Player, SkillsIndex } from '../data/domain/player';
 import { ClassIndex, ClassTalentMap, GetTalentArray } from '../data/domain/talents';
 import { CapacityConst } from '../data/domain/capacity';
-import { Alchemy, AlchemyConst, CauldronIndex } from "../data/domain/alchemy";
+import { Alchemy, AlchemyConst, CauldronIndex, Bubble } from "../data/domain/alchemy";
 import { Stamp } from '../data/domain/stamps';
-import { PlayerStatues } from '../data/domain/statues';
+import { PlayerStatues, StatueConst } from '../data/domain/statues';
+import { PostOfficeConst } from '../data/domain/postoffice'
 
-import { Coins, getCoinsArray, lavaFunc } from '../data/utility';
+import { Coins, getCoinsArray, lavaFunc, toTime } from '../data/utility';
 import CoinsDisplay from './coinsDisplay';
 
 interface SkillProps {
@@ -100,11 +101,17 @@ function PlayerTab({ player }: PlayerTabProps) {
     const [ruckSackPrayerBonus, setRuckSackPrayerBonus] = useState<number>(0); // TODO: GET REAL NUMBER
     const [carryCapShrineBonus, setCarryCapShrineBonus] = useState<number>(0); // TODO: GET REAL NUMBER
     const [starSignExtraCap, setStarSignExtraCap] = useState<number>(0); // TODO: GET REAL NUMBER
+    const [activeBubbles, setActiveBubbles] = useState<Bubble[]>([]);
+    const [anvilSpeed, setAnvilSpeed] = useState<number>(0);
 
-
+    const hammerName = "Hammer Hammer";
     const idleonData = useContext(AppContext);
 
     const onActive = (nextIndex: number) => setIndex(nextIndex);
+
+    function notUndefined<T>(x: T | undefined): x is T {
+        return x !== undefined;
+    }
 
     useEffect(() => {
         if (idleonData) {
@@ -127,6 +134,15 @@ function PlayerTab({ player }: PlayerTabProps) {
             if (guild) {
                 setGuildCarryBonus(lavaFunc(guild.guildBonuses[2].func, guild.guildBonuses[2].level, guild.guildBonuses[2].x1, guild.guildBonuses[2].x2));
             }
+            if (player.activeBubbles.length > 0) {
+                const bubbleArray: Bubble[] = player.activeBubbles.map((bubbleString, _) => {
+                    const activeBubble = alchemy.getActiveBubble(bubbleString);
+                    if (activeBubble) {
+                        return activeBubble;
+                    }
+                }).filter(notUndefined);
+                setActiveBubbles(bubbleArray);
+            }
             if (player.talents) {
                 const telekineticStorageTalent = player.talents.find(x => x.skillIndex == CapacityConst.TelekineticStorageSkillIndex);
                 if (telekineticStorageTalent) {
@@ -137,10 +153,25 @@ function PlayerTab({ player }: PlayerTabProps) {
                     setExtraBagsTalentBonus(lavaFunc(extraBagsTalent.funcX, extraBagsTalent.level, extraBagsTalent.x1, extraBagsTalent.x2));
                 }
             }
+            // ANVIL SPEED MATH;
+            const anvilZoomerBonus = stampData ? stampData[1][2].getBonus(player.skills.get(SkillsIndex.Smithing)) : 0;
+            const blackSmithBox = player.postOffice[PostOfficeConst.BlacksmithBoxIndex];
+            const postOfficeBonus = blackSmithBox.level > 0 ? blackSmithBox.bonuses[1].getBonus(blackSmithBox.level, 1) : 0;
+            const hammerHammerBonus = activeBubbles ? activeBubbles.find(x => x.name == hammerName)?.getBonus() ?? 0 : 0;
+            const anvilStatueBonus = playerStatues ? playerStatues.statues[StatueConst.AnvilIndex].getBonus() : 0;
+            const starSignBonus = player.starSigns.find(x => x.name == "Bob_Build_Guy")?.getBonus("Speed in Town") ?? 0;
+            let talentTownSpeedBonus: number = 0;
+            if (player.getBaseClass() == ClassIndex.Archer) {
+                const townSkillSpeedTalent = player.talents.find(x => x.skillIndex == 269);
+                if (townSkillSpeedTalent) {
+                    talentTownSpeedBonus = lavaFunc(townSkillSpeedTalent.funcX, townSkillSpeedTalent.level, townSkillSpeedTalent.x1, townSkillSpeedTalent.x2)
+                }
+            }
+            setAnvilSpeed(3600 * player.anvil.getSpeed(player.stats.agility, anvilZoomerBonus, postOfficeBonus, hammerHammerBonus, anvilStatueBonus, starSignBonus, talentTownSpeedBonus))
             setAllCapBonus(player.capacity.getAllCapsBonus(guildCarryBonus, telekineticStorageBonus, carryCapShrineBonus, zergPrayerBonus, ruckSackPrayerBonus));
             setPlayerCoins(getCoinsArray(player.money));
         }
-    }, [idleonData, player, allCapBonus, extraBagsTalentBonus, telekineticStorageBonus, guildCarryBonus, anvilCostDiscount, carryCapShrineBonus, guild, ruckSackPrayerBonus, zergPrayerBonus]);
+    }, [idleonData, player, allCapBonus, extraBagsTalentBonus, telekineticStorageBonus, guildCarryBonus, anvilCostDiscount, carryCapShrineBonus, guild, ruckSackPrayerBonus, zergPrayerBonus, anvilSpeed]);
 
     return (
         <Tabs activeIndex={index} onActive={onActive}>
@@ -150,15 +181,34 @@ function PlayerTab({ player }: PlayerTabProps) {
                     <Text>Current Monster / Map = {player.currentMonster} / {player.currentMap}</Text>
                     {
                         player.starSigns.map((sign, index) => {
-                            return <Text key={`sign-${index}`}>Sign {index} = {sign}</Text>
+                            return <Text key={`sign-${index}`}>Sign {index} = {sign.getText()}</Text>
                         })
                     }
+                    <Text>{player.afkFor} Seconds</Text>
+                    <Text>Away Since = {toTime(player.afkFor)}</Text>
                     <Text>STR = {player.stats.strength}</Text>
                     <Text>AGI = {player.stats.agility}</Text>
                     <Text>WIS = {player.stats.wisdom}</Text>
                     <Text>LUK = {player.stats.luck}</Text>
                     <Text>Money = </Text><CoinsDisplay coinMap={playerCoins} />
-
+                    <Box>
+                        <Text>Active Bubbles:</Text>
+                        {
+                            activeBubbles.map((bubble, bubbleIndex) => {
+                                return (
+                                    <Box direction="row" align="center" key={bubbleIndex} fill gap="medium">
+                                        <Stack anchor="bottom-right" alignSelf="center">
+                                            <Box className={bubble.class_name} />
+                                            <Box >
+                                                <Text size="medium">{bubble.level}</Text>
+                                            </Box>
+                                        </Stack>
+                                        <Text size="medium">{bubble.name}</Text>
+                                    </Box>
+                                )
+                            })
+                        }
+                    </Box>
                 </Box>
             </Tab>
             <Tab key={`player_${player.playerID}_skills`} title="Skills">
@@ -209,7 +259,7 @@ function PlayerTab({ player }: PlayerTabProps) {
                                     <Box className={statue.getClassName()} title={statue.displayName} />
                                     <Text alignSelf="center">Level: {statue.level}</Text>
                                     <Text alignSelf="center">/</Text>
-                                    <Text alignSelf="center">Bonus: {statue.getBonusText().toLocaleString()} {statue.bonus}</Text>
+                                    <Text alignSelf="center">Bonus: {statue.getBonus()} {statue.bonus}</Text>
                                 </Box>
                             )
                         }) : <></>
@@ -232,16 +282,26 @@ function PlayerTab({ player }: PlayerTabProps) {
                         <Text>Points from mats: {player.anvil.pointsFromMats}</Text>
                         <Text>Points spend into XP: {player.anvil.xpPoints}</Text>
                         <Text>Points spend into Speed: {player.anvil.speedPoints}</Text>
+                        <Text>Anvil Speed Guess: {anvilSpeed}</Text>
                         <Text>Capacity: {player.anvil.getCapacity(player.capacity.getMaterialCapacity(allCapBonus, stampData ? stampData[1][7].getBonus(player.skills.get(SkillsIndex.Smithing)) : 0, gemStore?.purchases.find(x => x.no == 58)?.pucrhased ?? 0, stampData ? stampData[2][1].getBonus() : 0, extraBagsTalentBonus, starSignExtraCap))} ({player.anvil.capPoints})</Text>
                         {player.anvil.currentlySelect.indexOf(-1) > -1 && <Text>UNUSED PRODUCTION</Text>}
                     </Box>
                     <Box gap="small">
                         {
-                            player.anvil.production.filter((x, index) => x.displayName != "Filler" && player.anvil.currentlySelect.indexOf(index) > -1).map((anvilItem, index) => {
+                            player.anvil.production.filter((x) => x.displayName != "Filler" && (x?.hammers ?? 0) > 0).map((anvilItem, index) => {
+                                const productionCap = player.anvil.getCapacity(player.capacity.getMaterialCapacity(allCapBonus, stampData ? stampData[1][7].getBonus(player.skills.get(SkillsIndex.Smithing)) : 0, gemStore?.purchases.find(x => x.no == 58)?.pucrhased ?? 0, stampData ? stampData[2][1].getBonus() : 0, extraBagsTalentBonus, starSignExtraCap))
+                                const futureProduction = Math.round(anvilItem.currentAmount + ((anvilItem.currentProgress + (player.afkFor * anvilSpeed / 3600)) / anvilItem.time) * (anvilItem.hammers ?? 0));
+                                const percentOfCap = Math.round(futureProduction / productionCap * 100);
+                                const timeTillCap = ((productionCap - futureProduction) / (anvilSpeed / 3600 / anvilItem.time * (anvilItem.hammers ?? 0)));
                                 return (
-                                    <Box key={`player_${player.playerID}_anvil_${index}`} direction="row" align="center">
+                                    <Box key={`player_${player.playerID}_anvil_${index}`} direction="column" align="center">
                                         <Box className={`icons icons-${anvilItem.internalName}_x1`} />
-                                        <Text>{anvilItem.displayName} - {anvilItem.currentAmount} - {anvilItem.currentXP} - {anvilItem.currentProgress} - {anvilItem.totalProduced}</Text>
+                                        <Text>Number of Hammers = {anvilItem.hammers}</Text>
+                                        <Text>Current amount = {anvilItem.currentAmount}</Text>
+                                        <Text>Future Amount Guess = {futureProduction} / {productionCap} ( {percentOfCap}% of cap) {percentOfCap > 80 ? "| GO CLAIM!" : ""}</Text>
+                                        <Text>Time till cap = {toTime(timeTillCap)}</Text>
+                                        <Text>Production Per Hour (per hammer) = {Math.round(anvilSpeed / anvilItem.time)} </Text>
+                                        {/* <Text>{anvilItem.displayName} - {anvilItem.currentAmount} - {anvilItem.currentXP} - {anvilItem.currentProgress} - {anvilItem.totalProduced}</Text> */}
                                     </Box>
                                 )
                             })
@@ -259,6 +319,7 @@ function PlayerTab({ player }: PlayerTabProps) {
                         <Text>All Carry Cap Math: {allCapBonus}</Text>
                         <Text>Material Cap Math: {player.capacity.getMaterialCapacity(allCapBonus, stampData ? stampData[1][7].getBonus(player.skills.get(SkillsIndex.Smithing)) : 0, gemStore?.purchases.find(x => x.no == 58)?.pucrhased ?? 0, stampData ? stampData[2][1].getBonus() : 0, extraBagsTalentBonus, starSignExtraCap)}</Text>
                         <Text>Anvil Cap Guess: {player.anvil.getCapacity(player.capacity.getMaterialCapacity(allCapBonus, stampData ? stampData[1][7].getBonus(player.skills.get(SkillsIndex.Smithing)) : 0, gemStore?.purchases.find(x => x.no == 58)?.pucrhased ?? 0, stampData ? stampData[2][1].getBonus() : 0, extraBagsTalentBonus, starSignExtraCap))} </Text>
+
                     </Box>
                     <Box gap="small">
                         <Text>Ore: {player.capacity.mining}</Text>
@@ -338,23 +399,10 @@ function PlayerTab({ player }: PlayerTabProps) {
                                                         <Text>--------------------------</Text>
                                                         {
                                                             box.bonuses.map((bonus, bIndex) => {
-                                                                let level = box.level;
-                                                                let maxLevel = 400
-                                                                if (bIndex == 1) {
-                                                                    level = box.level - 25;
-                                                                    maxLevel = 375;
-                                                                }
-                                                                if (bIndex == 2) {
-                                                                    level = box.level - 100;
-                                                                    maxLevel = 300;
-                                                                }
-                                                                if (level < 0) return <></>
-                                                                const bonusValue = lavaFunc(bonus.func, level, bonus.x1, bonus.x2, true);
-                                                                const maxValue = lavaFunc(bonus.func, maxLevel, bonus.x1, bonus.x2, true);
                                                                 return (
                                                                     <Box key={`player_${player.playerID}_postoffice_${index}_${bIndex}`} direction="row" gap="small">
-                                                                        <Text>{`${bonusValue} ${bonus.bonus}`}</Text>
-                                                                        <Text>{level < 400 && `(Max value is ${maxValue} at 400 boxes)`}</Text>
+                                                                        <Text>{bonus.getBonusText(box.level, bIndex)}</Text>
+                                                                        <Text>{box.level < 400 && `(Max value is ${bonus.getBonus(PostOfficeConst.MaxBoxLevel, bIndex, true)} at 400 boxes)`}</Text>
                                                                     </Box>
                                                                 )
                                                             })

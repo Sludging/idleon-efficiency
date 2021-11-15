@@ -37,10 +37,9 @@ function FooterAd() {
         <Box fill>
             <ins className="adsbygoogle"
                 style={{ display: "block" }}
-                data-ad-client="ca-pub-8031377824465559"
-                data-ad-slot="7806485670"
+                data-ad-client="ca-pub-9755300710945447"
+                data-ad-slot="3258534874"
                 data-ad-format="auto"
-                data-adtest="on"
                 data-full-width-responsive="true"></ins>
         </Box>
     )
@@ -80,7 +79,7 @@ export default function Layout({
 
     return (
         <Container>
-            <Script async key="adsense" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8031377824465559" crossOrigin="anonymous"></Script>
+            <Script async key="adsense" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9755300710945447" crossOrigin="anonymous"></Script>
             <Header background="light-4" pad="medium" height="xsmall">
                 <Text>Idleon Efficiency</Text>
                 {user && <Box direction="row" gap="xlarge"><Text>Last Updated: {lastUpdated}</Text><Button onClick={() => onButtonClick(authData?.logoutFunction)}>Logout</Button></Box>}

@@ -1,5 +1,6 @@
-import { itemMap, monstersMap, mapsMap, starSignMap } from "../maps";
+import { itemMap, monstersMap, mapsMap } from "../maps";
 import { Capacity } from './capacity';
+import { StarSignMap, StarSign } from './starsigns';
 import { Box, initPostOffice } from './postoffice';
 import { ClassIndex, Talent, ClassTalentMap, GetTalentArray } from './talents';
 
@@ -11,7 +12,7 @@ export interface rawPlayerData {
     classNumber: number
     afkTarget: number
     currentMap: number
-    starSigns: Array<string>
+    starSigns: Array<number>
     money: number
     skills: Array<number>
     anvilProduction: Array<Array<number>>
@@ -26,6 +27,7 @@ export interface rawPlayerData {
     equippedCards: string[] // NOT MAPPED YET
     talentLevels: string
     talentMaxLevels: string
+    activeBubbles: string[]
 }
 
 export class PlayerStats {
@@ -160,8 +162,9 @@ interface AnvilProduct {
 
     currentAmount: number
     currentXP: number
-    currentProgress: number // maybe not?
-    totalProduced: number // I'm taking a wild guess
+    currentProgress: number
+    totalProduced: number
+    hammers?: number
 }
 
 const range = (start: number, end: number) => {
@@ -202,34 +205,10 @@ export class Anvil {
         return Math.round(bagCapacity * (2 + 0.1 * this.capPoints));
     }
 
-    getSpeed = (agilitySpeedBonus: number = 0, statueBonus: number = 0) => {
-        // if ("ProdSpdBonus" == t) {
-        //     t = r._customBlock_StampBonusOfTypeX("AnvilPAspd");
-        //     var n = b.engine.getGameAttribute("AnvilPAstats")[4];
-        //     n = parsenum(n);
-        //     var s = b.engine.getGameAttribute("DNSM");
-        //     (s = null != d.BoxRewards ? s.getReserved("BoxRewards") : s.h.BoxRewards),
-        //         (s = 1 + ((parsenum(s) = null != d.ProdSpd ? s.getReserved("ProdSpd") : s.h.ProdSpd) + H._customBlock_ArbitraryCode("StatueBonusGiven11")) / 100);
-        //     var a = b.engine.getGameAttribute("DNSM");
-        //     return (
-        //         (a = null != d.AlchBubbles ? a.getReserved("AlchBubbles") : a.h.AlchBubbles),
-        //         (1 + (t + 2 * n) / 100) * s * (1 + (parsenum(a) = null != d.AnvilACTIVE ? a.getReserved("AnvilACTIVE") : a.h.AnvilACTIVE) / 100) * K._customBlock_AnvilProduceStats("ProdSpdBonusFromAGI")
-        //     );
-        // }
-        // if ("ProdSpdBonusFromAGI" == t)
-        //     return (
-        //         1000 > H._customBlock_TotalStats("AGI")
-        //             ? ((t = b.engine.getGameAttribute("DNSM")), (n = (Math.pow(H._customBlock_TotalStats("AGI") + 1, 0.37) - 1) / 40))
-        //             : ((t = b.engine.getGameAttribute("DNSM")), (n = ((H._customBlock_TotalStats("AGI") - 1000) / (H._customBlock_TotalStats("AGI") + 2500)) * 0.5 + 0.255)),
-        //         null != d.ProdAGIspd ? t.setReserved("ProdAGIspd", n) : (t.h.ProdAGIspd = n),
-        //         (t = b.engine.getGameAttribute("DNSM")),
-        //         (n = b.engine.getGameAttribute("DNSM")),
-        //         (n = 2 * (parsenum(n) = null != d.ProdAGIspd ? n.getReserved("ProdAGIspd") : n.h.ProdAGIspd)),
-        //         null != d.ProdAGIspd ? t.setReserved("ProdAGIspd", n) : (t.h.ProdAGIspd = n),
-        //         (t = b.engine.getGameAttribute("DNSM")),
-        //         1 + (parsenum(t) = null != d.ProdAGIspd ? t.getReserved("ProdAGIspd") : t.h.ProdAGIspd)
-        //     );
-
+    getSpeed = (agility: number = 0, stampBonus: number = 0, poBoxBonus: number = 0, hammerHammerBonus: number = 0, statueBonus: number = 0, starSignTownSpeed: number = 0, talentTownSpeed: number = 0) => {
+        const boxAndStatueMath = 1 + ((poBoxBonus + statueBonus) / 100);
+        const agilityBonus = this.getSpeedBonusFromAgility(agility);
+        return (1 + (stampBonus + 2 * this.speedPoints) / 100) * boxAndStatueMath * (1 + (hammerHammerBonus / 100)) * agilityBonus * (1 + (starSignTownSpeed + talentTownSpeed) / 100);
     }
 
     getSpeedBonusFromAgility = (agility: number = 0): number => {
@@ -237,7 +216,7 @@ export class Anvil {
         if (agility > 1000) {
             base = ((agility - 1000) / (agility + 2500)) * 0.5 + 0.255;
         }
-        return base * 2 + 1;
+        return (base * 2) + 1;
     }
 
     getCoinCost = (alchemyCostReduction: number, pointsBought: number = this.pointsFromCoins) => {
@@ -264,7 +243,7 @@ export class Player {
     class: string = "Blank";
     currentMonster: string = "Blank";
     currentMap: string = "Blank";
-    starSigns: Array<string> = [];
+    starSigns: StarSign[] = [];
     money: number = 0;
     skills: Map<SkillsIndex, number>;
     skillsRank: Map<SkillsIndex, number>;
@@ -272,6 +251,8 @@ export class Player {
     capacity: Capacity = new Capacity();
     talents: Talent[] = [];
     postOffice: Box[] = initPostOffice();
+    activeBubbles: string[] = [];
+    afkFor: number = 0;
 
     constructor(playerID: number, playerName: string) {
         this.playerID = playerID;
@@ -341,7 +322,7 @@ function parseEquipment(rawPlayerData: rawPlayerData) {
     return currentPlayer;
 }
 
-export default function parsePlayer(rawData: Array<rawPlayerData>, playerNames: Array<string>) {
+export default function parsePlayer(rawData: Array<rawPlayerData>, timeAway: Record<string, number>, playerNames: Array<string>) {
     const allSkillsMap: Map<SkillsIndex, Array<number>> = new Map<SkillsIndex, Array<number>>();
     const parsedData = rawData.map((rawPlayerData, index) => {
         if (!playerNames) {
@@ -364,16 +345,9 @@ export default function parsePlayer(rawData: Array<rawPlayerData>, playerNames: 
             currentPlayer.currentMap = mapsMap.get(rawPlayerData.currentMap.toString())?.replace(/_/g, " ") || "New Map?";
         }
         if (rawPlayerData.starSigns) {
-            currentPlayer.starSigns = rawPlayerData.starSigns.map((sign: string) => {
-                const signData = starSignMap.get(sign);
-                if (!signData) {
-                    return "";
-                }
-                return `${signData.name.replace(/_/g, " ")} | ${signData.description.replace(/_/g, " ")}`;
-            });
-            // Remove empty sign, need to handle this better in the future. 
-            // This is due to the array ending with a trailing ',' before the split.
-            currentPlayer.starSigns = currentPlayer.starSigns.filter((sign) => { if (sign) return sign; });
+            currentPlayer.starSigns = rawPlayerData.starSigns.map((sign: number) => {
+                return StarSignMap[sign];
+            }).filter(x => x != undefined);
         }
         if (rawPlayerData.money) {
             currentPlayer.money = rawPlayerData.money;
@@ -400,6 +374,7 @@ export default function parsePlayer(rawData: Array<rawPlayerData>, playerNames: 
                 item.currentXP = rawPlayerData.anvilProduction[index][1];
                 item.currentProgress = rawPlayerData.anvilProduction[index][2];
                 item.totalProduced = rawPlayerData.anvilProduction[index][3];
+                item.hammers = rawPlayerData.anvilSelected.filter(x => x == index).length;
             })
         }
 
@@ -448,6 +423,14 @@ export default function parsePlayer(rawData: Array<rawPlayerData>, playerNames: 
                 })
             }
             catch { } // silently absorb
+        }
+
+        if (rawPlayerData.activeBubbles) {
+            currentPlayer.activeBubbles = rawPlayerData.activeBubbles;
+        }
+
+        if (timeAway && rawPlayerData.timeAway) {
+            currentPlayer.afkFor = timeAway['Player'] - (rawPlayerData.timeAway * 1000);
         }
 
         return currentPlayer;

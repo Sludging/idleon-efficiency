@@ -1,6 +1,7 @@
-const StatueConst = {
+export const StatueConst = {
     LevelIndex: 0,
-    ProgressIndex: 1
+    ProgressIndex: 1,
+    AnvilIndex: 11
 }
 
 interface StatuesData {
@@ -27,7 +28,7 @@ export class Statue {
         return 0;
     }
 
-    getBonusText = (): number => {
+    getBonus = (): number => {
         return this.level * this.statueData.bonus;
     }
 
