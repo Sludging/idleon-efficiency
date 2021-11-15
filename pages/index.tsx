@@ -12,7 +12,7 @@ import { AppContext } from '../data/appContext';
 
 import { Tab, Tabs } from 'grommet';
 import BribeData from '../components/bribeData';
-
+import AchievementData from '../components/achievementData';
 
 const Home: NextPage = () => {
   const idleonData = useContext(AppContext);
@@ -44,6 +44,9 @@ const Home: NextPage = () => {
         </Tab>
         <Tab title="Bribes - WIP">
           <BribeData />
+        </Tab>
+        <Tab title="Achievements - WIP">
+          <AchievementData />
         </Tab>
         <Tab title="Raw Data - No Styling">
           <JsonData />
