@@ -19,6 +19,7 @@ export const AlchemyConst = {
     VialIndex: 4,
     UnderdevelopedCosts: 6,
     Anvilnomics: 4,
+    HammerHammer: 2,
     BarleyBrew: 9,
     BlueFlav: 18,
     SmartBoi: 13,
@@ -94,9 +95,12 @@ export class Bubble {
         return toReturn;
     }
 
+    getBonus = (round: boolean = false): number => {
+        return lavaFunc(this.func, this.level, this.x1, this.x2, round);
+    }
+
     getBonusText = (): string => {
-        const bubbleBonus = lavaFunc(this.func, this.level, this.x1, this.x2, true)
-        let titleText = this.description.replace(/{/g, bubbleBonus.toString());
+        let titleText = this.description.replace(/{/g, this.getBonus(true).toString());
         return handleToolBubbles(titleText, this.name);
     }
 
@@ -156,6 +160,15 @@ export class Alchemy {
 
     hasAchievement = (): boolean => {
         return this.cauldrons[CauldronIndex.HighIQ].bubbles[AlchemyConst.SmartBoi].level > 50;
+    }
+
+    getActiveBubble = (bubbleString: string) => {
+        switch (bubbleString[0]) {
+            case "_": return this.cauldrons[CauldronIndex.Power].bubbles[parseInt(bubbleString.slice(1))]
+            case "a": return this.cauldrons[CauldronIndex.Quicc].bubbles[parseInt(bubbleString.slice(1))]
+            case "b": return this.cauldrons[CauldronIndex.HighIQ].bubbles[parseInt(bubbleString.slice(1))]
+            case "c": return this.cauldrons[CauldronIndex.Kazam].bubbles[parseInt(bubbleString.slice(1))]
+        }
     }
 }
 
