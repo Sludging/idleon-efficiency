@@ -1,3 +1,7 @@
+export const AchievementConst = {
+    SmartBoiIndex: 108
+}
+
 export class Achievement {
     completed: boolean = false;
     currentCount: number = 0;

@@ -51,7 +51,7 @@ export const StarSignMap: Record<number, StarSign> = {
     25: new StarSign("The_OG_Skiller", [{ text: "Carry Cap", bonus: 5, percent: true }, { text: "Skill AFK gain", bonus: 1, percent: true }, { text: "All Skill Prowess", bonus: 2, percent: true }]),
     26: new StarSign("Grim_Reaper", [{ text: "Mob Respawn rate", bonus: 2, percent: true }]),
     27: new StarSign("The_Fallen_Titan", [{ text: "Boss Damage", bonus: 3, percent: true }, { text: "Crit Chance", bonus: 4, percent: true }]),
-    28: new StarSign("The_Forsaken", [{ text: "Total HP", bonus: -80, percent: true }, { text: "Defence", bonus: -50, percent: true }, { text: "Total HP", bonus: -80, percent: true }, { text: "Fight AFK Gain", bonus: 6, percent: true }]),
+    28: new StarSign("The_Forsaken", [{ text: "Total HP", bonus: -80, percent: true }, { text: "Defence", bonus: -50, percent: true }, { text: "Fight AFK Gain", bonus: 6, percent: true }]),
     29: new StarSign("Mr_No_Sleep", [{ text: "AFK Gain", bonus: -6, percent: true }, { text: "Carry Cap", bonus: 30, percent: true }]),
     30: new StarSign("Sir_Savvy", [{ text: "Skill EXP gain", bonus: 3, percent: true }]),
     31: new StarSign("All_Rounder", [{ text: "All Stats", bonus: 4, percent: false }]),

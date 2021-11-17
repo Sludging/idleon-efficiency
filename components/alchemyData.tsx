@@ -11,6 +11,7 @@ import {
 import styled from 'styled-components'
 
 import { Alchemy, Cauldron, Bubble, CauldronBoostIndex } from '../data/domain/alchemy';
+import { AchievementConst } from '../data/domain/achievements'
 import { useEffect, useState, useContext } from 'react';
 import { AppContext } from '../data/appContext'
 import { nFormatter } from '../data/utility'
@@ -43,7 +44,7 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
             setClassMultiBubbleLevel(0);
         }
         setCauldronCostLevel(cauldron.boostLevels[CauldronBoostIndex.Cost]);
-    }, [cauldron, classMultiBonus, discountLevel])
+    })
 
     function TipContent({ bubble, faceLeft }: { bubble: Bubble, faceLeft: boolean }) {
         if (bubble.level == 0) {
@@ -173,13 +174,13 @@ export default function AlchemyData() {
         if (idleonData) {
             const theData = idleonData.getData();
             setAlchemyData(theData.get("alchemy"));
-
+            const achievementsInfo = theData.get("achievements");
             // get undeveloped costs bubble level
             setUndevelopedCostsBubbleLevel(alchemyData?.getUndevelopedCostsBubbleLevel() ?? 0);
             setBarleyBrewVialLevel(alchemyData?.getBarleyBrewVialLevel() ?? 0);
-            setHasAlchemyAchievement(alchemyData?.hasAchievement() ?? false);
+            setHasAlchemyAchievement(achievementsInfo[AchievementConst.SmartBoiIndex].completed ?? false); // TODO: Change this to actual achievement info
         }
-    }, [idleonData, alchemyData])
+    }, [idleonData, alchemyData, hasAlchemyAchievement])
 
     if (alchemyData && alchemyData.cauldrons.flatMap(cauldron => cauldron.bubbles).filter(bubble => bubble.level > 0).length == 0) {
         return (
