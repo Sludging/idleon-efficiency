@@ -144,7 +144,7 @@ export class Alchemy {
 
     getUndevelopedCostsBubbleLevel = (): number => {
         if (this.cauldrons.length > 0) {
-            return this.cauldrons[CauldronIndex.Quicc].bubbles[AlchemyConst.UnderdevelopedCosts].level;
+            return this.cauldrons[CauldronIndex.Kazam].bubbles[AlchemyConst.UnderdevelopedCosts].level;
         }
 
         return 0;
