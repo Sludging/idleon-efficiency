@@ -2,7 +2,10 @@ import { itemMap, monstersMap, mapsMap } from "../maps";
 import { Capacity } from './capacity';
 import { StarSignMap, StarSign } from './starsigns';
 import { Box, initPostOffice } from './postoffice';
+import { Worship } from './worship';
 import { ClassIndex, Talent, ClassTalentMap, GetTalentArray } from './talents';
+import { CardInfo } from "./cards";
+import { notUndefined } from '../utility';
 
 export interface rawPlayerData {
     equipment: Array<Map<string, string>>
@@ -22,12 +25,14 @@ export interface rawPlayerData {
     prayers: number[] // NOT MAPPED YET
     postOffice: string
     timeAway: number // NOT MAPPED YET
-    playerStuff: number[] // NOT MAPPED YET
+    playerStuff: string // NOT MAPPED YET
     attackLoadout: number[][] // NOT MAPPED YET
-    equippedCards: string[] // NOT MAPPED YET
+    equippedCards: string[]
+    currentCardSet: string
     talentLevels: string
     talentMaxLevels: string
     activeBubbles: string[]
+    activeBuffs: Record<number, number>[]
 }
 
 export class PlayerStats {
@@ -251,8 +256,11 @@ export class Player {
     capacity: Capacity = new Capacity();
     talents: Talent[] = [];
     postOffice: Box[] = initPostOffice();
-    activeBubbles: string[] = [];
+    activeBubblesString: string[] = [];
     afkFor: number = 0;
+    worship: Worship = new Worship();
+    cardInfo: CardInfo | undefined = undefined; // TODO: Do BETTER!
+    activeBuffs: Talent[] = [];
 
     constructor(playerID: number, playerName: string) {
         this.playerID = playerID;
@@ -322,7 +330,7 @@ function parseEquipment(rawPlayerData: rawPlayerData) {
     return currentPlayer;
 }
 
-export default function parsePlayer(rawData: Array<rawPlayerData>, timeAway: Record<string, number>, playerNames: Array<string>) {
+export default function parsePlayer(rawData: Array<rawPlayerData>, timeAway: Record<string, number>, playerNames: Array<string>, cards: Record<string, number>) {
     const allSkillsMap: Map<SkillsIndex, Array<number>> = new Map<SkillsIndex, Array<number>>();
     const parsedData = rawData.map((rawPlayerData, index) => {
         if (!playerNames) {
@@ -426,15 +434,31 @@ export default function parsePlayer(rawData: Array<rawPlayerData>, timeAway: Rec
         }
 
         if (rawPlayerData.activeBubbles) {
-            currentPlayer.activeBubbles = rawPlayerData.activeBubbles;
+            currentPlayer.activeBubblesString = rawPlayerData.activeBubbles;
         }
 
         if (timeAway && rawPlayerData.timeAway) {
             currentPlayer.afkFor = timeAway['Player'] - (rawPlayerData.timeAway * 1000);
         }
 
+        if (rawPlayerData.playerStuff) {
+            const jsonStuff = JSON.parse(rawPlayerData.playerStuff);
+            // 0 worship charge, 1 talent preset , 2 card preset?
+            currentPlayer.worship.currentCharge = jsonStuff[0];
+        }
+
+        if (rawPlayerData.equippedCards && rawPlayerData.currentCardSet && cards) {
+            currentPlayer.cardInfo = new CardInfo(cards, JSON.parse(rawPlayerData.currentCardSet), rawPlayerData.equippedCards);
+        }
+
+        if (rawPlayerData.activeBuffs) {
+            currentPlayer.activeBuffs = rawPlayerData.activeBuffs.map((buff) => {
+                return currentPlayer.talents.find(x => x.skillIndex == buff[0]);
+            }).filter(notUndefined)
+        }
+
         return currentPlayer;
-    }).filter(x => x != undefined);
+    }).filter(notUndefined);
 
     // identify player ranking in each skill
     parsedData.forEach((player) => {
