@@ -44,7 +44,7 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
             setClassMultiBubbleLevel(0);
         }
         setCauldronCostLevel(cauldron.boostLevels[CauldronBoostIndex.Cost]);
-    })
+    }, [cauldron.bubbles, cauldron.short_name, cauldron.boostLevels, classMultiBonus, undevelopedCostsBubbleLevel, barleyBrewVialLevel, hasAchievement, discountLevel])
 
     function TipContent({ bubble, faceLeft }: { bubble: Bubble, faceLeft: boolean }) {
         if (bubble.level == 0) {

@@ -100,7 +100,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
         const talentChargeBonus = player.activeBuffs.find(x => x.skillIndex == TalentConst.ChargeSiphonIndex)?.getBonus(false, true) ?? 0;
 
         return player.worship.getMaxCharge(player.gear.tools[5].raw_name, maxChargeCardBonus, talentChargeBonus, praydayStamp.getBonus(worshipLevel), gospelLeaderBonus, worshipLevel, popeBonus);
-    }, [player, activeBubbles]);
+    }, [player, activeBubbles, idleonData]);
 
     const chargeRate = useMemo(() => {
         const theData = idleonData.getData();
@@ -113,7 +113,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
         const talentBonus = chargeSpeedTalent?.getBonus() ?? 0;
         const chargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "F11")?.getBonus() ?? 0;
         return player.worship.getChargeRate(player.gear.tools[5].raw_name, worshipLevel, popeBonus, chargeCardBonus, flowinStamp.getBonus(worshipLevel), talentBonus);
-    }, [player, activeBubbles]);
+    }, [player, activeBubbles, idleonData]);
 
     return (
         <Grid columns="1/2" fill>
@@ -173,7 +173,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                 <Box direction="row">
                     {player.activeBuffs.map((buff, index) =>
                     (
-                        <Box title={buff.getBonusText()} className={buff.getClass()} />
+                        <Box key={index} title={buff.getBonusText()} className={buff.getClass()} />
                     )
                     )}
                 </Box>
