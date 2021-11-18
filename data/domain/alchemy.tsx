@@ -23,6 +23,8 @@ export const AlchemyConst = {
     BarleyBrew: 9,
     BlueFlav: 18,
     SmartBoi: 13,
+    GospelLeader: 12,
+    CallMePope: 11,
     CauldronCount: 4,
     CauldronBonusBubbleIndex: 1
 };

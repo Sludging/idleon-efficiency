@@ -140,3 +140,7 @@ export const toTime = (fromSeconds: number) => {
     const seconds = Math.floor(fromSeconds % 3600 % 60);
     return `${days > 0 ? `${days}days` : ''} ${hour}hr ${minutes}min ${seconds}sec`;
 }
+
+export function notUndefined<T>(x: T | undefined): x is T {
+    return x !== undefined;
+}
