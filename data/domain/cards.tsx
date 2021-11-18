@@ -25,7 +25,7 @@ export class Card {
     }
 
     getBonusText = (): string => {
-        return this.effect.replace("+", this.getBonus());
+        return this.effect.replace("+", this.getBonus().toString());
     }
 
     getBorderClass = (): string => {
