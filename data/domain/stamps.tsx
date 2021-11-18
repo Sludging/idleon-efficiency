@@ -1,6 +1,17 @@
 import StampData from "../../components/stampData";
 import { lavaFunc } from '../utility'
 
+export enum StampTab {
+    Combat = 0,
+    Skill = 1,
+    Misc = 2
+}
+
+export const StampConsts = {
+    PraydayIndex: 34,
+    FlowinIndex: 33
+}
+
 interface StampData {
     effect: string; // todo: ENUM
     function: string; // todo: ENUM

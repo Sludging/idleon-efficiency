@@ -18,6 +18,8 @@ import '../public/icons/assets/sheets/spritesheet_41x50.css';
 import '../public/icons/assets/sheets/spritesheet_56x56.css';
 import '../public/icons/assets/sheets/spritesheet_88x76.css';
 import '../public/icons/assets/sheets/spritesheet_43x43.css';
+import '../public/icons/assets/sheets/spritesheet_28x36.css';
+import '../public/icons/assets/sheets/spritesheet_31x43.css';
 
 const customTheme = deepMerge(dark, {
   tab: {

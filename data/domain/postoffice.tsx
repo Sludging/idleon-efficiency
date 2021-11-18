@@ -1,5 +1,11 @@
 import { lavaFunc } from '../utility'
 
+// PostOfficeInfo0 - The current deliverables
+// PostOfficeInfo1 - streak / shield info
+// PostOfficeInfo2 - rewards?
+
+// CYDeliveryBoxComplete + CYDeliveryBoxMisc + CYDeliveryBoxStreak
+
 export const PostOfficeConst = {
     BlacksmithBoxIndex: 5,
     MaxBoxLevel: 400

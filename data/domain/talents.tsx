@@ -1,3 +1,10 @@
+import { lavaFunc } from "../utility";
+
+export const TalentConst = {
+    NearbyOutletIndex: 478,
+    ChargeSiphonIndex: 475
+}
+
 export class Talent {
     public name: string;
     public description: string;
@@ -24,6 +31,27 @@ export class Talent {
         this.funcY = funcY;
         this.lvlUpText = lvlUpText;
         this.skillIndex = skillIndex;
+    }
+
+    getBonus = (round: boolean = false, yBonus = false) => {
+        if (yBonus) {
+            return lavaFunc(this.funcY, this.level, this.y1, this.y2, round);
+        }
+        return lavaFunc(this.funcX, this.level, this.x1, this.x2, round);
+    }
+
+    getBonusText = (): string => {
+        const xBonus = this.getBonus(true);
+        const yBonus = this.getBonus(true, true);
+        if (this.description.includes("}")) {
+            return this.description.replace("{", xBonus.toString()).replace("}", yBonus.toString());
+        }
+
+        return this.description.replace("{", xBonus.toString());
+    }
+
+    getClass = (): string => {
+        return `icon-56 icons-UISkillIcon${this.skillIndex}`;
     }
 }
 

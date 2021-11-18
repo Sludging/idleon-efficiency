@@ -100,6 +100,7 @@ export const AppProvider: React.FC<{}> = (props) => {
           // Prayers_0
           const timeAway = JSON.parse(doc.get('TimeAway'));
           const cauldronBubbles: string[][] = JSON.parse(doc.get('CauldronBubbles'));
+          const cards: Record<string, number> = JSON.parse(doc.get('Cards0'));
           accountData.set("players", parsePlayer([...Array(9)].map((_, i) => {
             return {
               equipment: doc.get(`EquipOrder_${i}`),
@@ -122,11 +123,13 @@ export const AppProvider: React.FC<{}> = (props) => {
               playerStuff: doc.get(`PlayerStuff_${i}`),
               attackLoadout: doc.get(`AttackLoadout_${i}`),
               equippedCards: doc.get(`CardEquip_${i}`),
+              currentCardSet: doc.get(`CSetEq_${i}`),
               talentLevels: doc.get(`SL_${i}`),
               talentMaxLevels: doc.get(`SM_${i}`),
+              activeBuffs: doc.get(`BuffsActive_${i}`),
               activeBubbles: cauldronBubbles[i] ?? []
             }
-          }), timeAway, charNames))
+          }), timeAway, charNames, cards))
           accountData.set("playerNames", charNames);
           // CauldronP2W (obviously named)
           accountData.set("alchemy", parseAlchemy(doc.get("CauldronInfo"), doc.get("CauldUpgLVs")));

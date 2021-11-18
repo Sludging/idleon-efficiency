@@ -7,20 +7,20 @@ import {
     Stack,
     Tip
 } from 'grommet'
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useMemo } from 'react';
 import { AppContext } from '../data/appContext'
 import { GemStore } from '../data/domain/gemPurchases';
 import { Guild } from '../data/domain/guild';
 
 import { Player, SkillsIndex } from '../data/domain/player';
-import { ClassIndex, ClassTalentMap, GetTalentArray } from '../data/domain/talents';
+import { ClassIndex, ClassTalentMap, GetTalentArray, TalentConst } from '../data/domain/talents';
 import { CapacityConst } from '../data/domain/capacity';
 import { Alchemy, AlchemyConst, CauldronIndex, Bubble } from "../data/domain/alchemy";
-import { Stamp } from '../data/domain/stamps';
+import { Stamp, StampTab, StampConsts } from '../data/domain/stamps';
 import { PlayerStatues, StatueConst } from '../data/domain/statues';
 import { PostOfficeConst } from '../data/domain/postoffice'
 
-import { Coins, getCoinsArray, lavaFunc, toTime } from '../data/utility';
+import { getCoinsArray, lavaFunc, toTime, notUndefined } from '../data/utility';
 import CoinsDisplay from './coinsDisplay';
 
 interface SkillProps {
@@ -78,6 +78,110 @@ function ShowSkills(props: SkillProps) {
     );
 }
 
+function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: Bubble[] }) {
+    const idleonData = useContext(AppContext);
+
+    const playerCoins = useMemo(() => getCoinsArray(player.money), [player]);
+    const maxCharge = useMemo(() => {
+        const theData = idleonData.getData();
+        const alchemy = theData.get("alchemy") as Alchemy;
+        const stamps = theData.get("stamps") as Stamp[][];
+
+        const worshipLevel = player.skills.get(SkillsIndex.Worship);
+        const praydayStamp = stamps[StampTab.Skill][StampConsts.PraydayIndex];
+        let gospelLeaderBonus = alchemy.cauldrons[CauldronIndex.HighIQ].bubbles[AlchemyConst.GospelLeader].getBonus();
+        let popeBonus = activeBubbles.find(x => x.name == "Call Me Pope")?.getBonus() ?? 0;
+
+        if (player.getBaseClass() == ClassIndex.Mage) {
+            const classMultiBonus = alchemy.cauldrons[CauldronIndex.HighIQ].bubbles[1].getBonus();
+            gospelLeaderBonus *= classMultiBonus;
+        }
+        const maxChargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "F10")?.getBonus() ?? 0;
+        const talentChargeBonus = player.activeBuffs.find(x => x.skillIndex == TalentConst.ChargeSiphonIndex)?.getBonus(false, true) ?? 0;
+
+        return player.worship.getMaxCharge(player.gear.tools[5].raw_name, maxChargeCardBonus, talentChargeBonus, praydayStamp.getBonus(worshipLevel), gospelLeaderBonus, worshipLevel, popeBonus);
+    }, [player, activeBubbles, idleonData]);
+
+    const chargeRate = useMemo(() => {
+        const theData = idleonData.getData();
+        const stamps = theData.get("stamps") as Stamp[][];
+
+        let popeBonus = activeBubbles.find(x => x.name == "Call Me Pope")?.getBonus() ?? 0;
+        const flowinStamp = stamps[StampTab.Skill][StampConsts.FlowinIndex];
+        const worshipLevel = player.skills.get(SkillsIndex.Worship);
+        const chargeSpeedTalent = player.talents.find(x => x.skillIndex == TalentConst.NearbyOutletIndex);
+        const talentBonus = chargeSpeedTalent?.getBonus() ?? 0;
+        const chargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "F11")?.getBonus() ?? 0;
+        return player.worship.getChargeRate(player.gear.tools[5].raw_name, worshipLevel, popeBonus, chargeCardBonus, flowinStamp.getBonus(worshipLevel), talentBonus);
+    }, [player, activeBubbles, idleonData]);
+
+    return (
+        <Grid columns="1/2" fill>
+            <Box pad="medium" gap="small">
+                <Text size="small">Class / Level = {player.class} / {player.level}</Text>
+                <Text size="small">Current Monster / Map = {player.currentMonster} / {player.currentMap}</Text>
+                {
+                    player.starSigns.map((sign, index) => {
+                        return <Text size="small" key={`sign-${index}`}>Sign {index} = {sign.getText()}</Text>
+                    })
+                }
+                <Text size="small">Away Since = {toTime(player.afkFor)}</Text>
+                <Text size="small">STR = {player.stats.strength}</Text>
+                <Text size="small">AGI = {player.stats.agility}</Text>
+                <Text size="small">WIS = {player.stats.wisdom}</Text>
+                <Text size="small">Charge Rate = {Math.round(chargeRate * 24)}% / day</Text>
+                <Text size="small">Estimated Charge = {Math.round(player.worship.getEstimatedCharge(chargeRate, maxCharge, player.afkFor))}/{maxCharge}%</Text>
+                <Box direction="row" gap="small">
+                    <Text size="small">Money =</Text>
+                    <CoinsDisplay coinMap={playerCoins} />
+                </Box>
+                <Box>
+                    <Text>Active Bubbles:</Text>
+                    {
+                        activeBubbles.map((bubble, bubbleIndex) => {
+                            return (
+                                <Box direction="row" align="center" key={bubbleIndex} fill gap="medium">
+                                    <Stack anchor="bottom-right" alignSelf="center">
+                                        <Box className={bubble.class_name} />
+                                        <Box >
+                                            <Text size="medium">{bubble.level}</Text>
+                                        </Box>
+                                    </Stack>
+                                    <Text size="medium">{bubble.name}</Text>
+                                </Box>
+                            )
+                        })
+                    }
+                </Box>
+            </Box>
+            <Box pad="medium" gap="medium" fill>
+                <Text>Equipped Cards:</Text>
+                <Grid columns="1/4" gap="small" width={"200px"}>
+                    {
+                        player.cardInfo ? player.cardInfo.equippedCards.map((card, index) => {
+                            return (
+                                <Stack key={index}>
+                                    <Box className={card.getClass()} />
+                                    <Box title={card.getBonusText()} key={`border_${index}`} className={card.getBorderClass()} />
+                                </Stack>
+                            )
+                        }) : <Text>No cards equipped</Text>
+                    }
+                </Grid>
+                <Text size="small">Card Set = {player.cardInfo?.getCardSetText() ?? ""}</Text>
+                <Text>Active Buffs:</Text>
+                <Box direction="row">
+                    {player.activeBuffs.map((buff, index) =>
+                    (
+                        <Box key={index} title={buff.getBonusText()} className={buff.getClass()} />
+                    )
+                    )}
+                </Box>
+            </Box>
+        </Grid>
+    )
+}
+
 interface PlayerTabProps {
     player: Player
 }
@@ -85,10 +189,10 @@ interface PlayerTabProps {
 function PlayerTab({ player }: PlayerTabProps) {
     const [playerStatues, setPlayerStatues] = useState<PlayerStatues | undefined>(undefined);
     const [index, setIndex] = useState<number>(0);
-    const [playerCoins, setPlayerCoins] = useState<Map<Coins, number>>(new Map());
     const [gemStore, setGemStore] = useState<GemStore | undefined>(undefined);
     const [stampData, setStampData] = useState<Stamp[][] | undefined>(undefined);
     const [guild, setGuild] = useState<Guild | undefined>(undefined);
+    const [activeBubbles, setActiveBubbles] = useState<Bubble[]>([]);
 
 
     // capacity related numbers
@@ -101,17 +205,12 @@ function PlayerTab({ player }: PlayerTabProps) {
     const [ruckSackPrayerBonus, setRuckSackPrayerBonus] = useState<number>(0); // TODO: GET REAL NUMBER
     const [carryCapShrineBonus, setCarryCapShrineBonus] = useState<number>(0); // TODO: GET REAL NUMBER
     const [starSignExtraCap, setStarSignExtraCap] = useState<number>(0); // TODO: GET REAL NUMBER
-    const [activeBubbles, setActiveBubbles] = useState<Bubble[]>([]);
     const [anvilSpeed, setAnvilSpeed] = useState<number>(0);
 
     const hammerName = "Hammer Hammer";
     const idleonData = useContext(AppContext);
 
     const onActive = (nextIndex: number) => setIndex(nextIndex);
-
-    function notUndefined<T>(x: T | undefined): x is T {
-        return x !== undefined;
-    }
 
     useEffect(() => {
         if (idleonData) {
@@ -134,15 +233,6 @@ function PlayerTab({ player }: PlayerTabProps) {
             if (guild) {
                 setGuildCarryBonus(lavaFunc(guild.guildBonuses[2].func, guild.guildBonuses[2].level, guild.guildBonuses[2].x1, guild.guildBonuses[2].x2));
             }
-            if (player.activeBubbles.length > 0) {
-                const bubbleArray: Bubble[] = player.activeBubbles.map((bubbleString, _) => {
-                    const activeBubble = alchemy.getActiveBubble(bubbleString);
-                    if (activeBubble) {
-                        return activeBubble;
-                    }
-                }).filter(notUndefined);
-                setActiveBubbles(bubbleArray);
-            }
             if (player.talents) {
                 const telekineticStorageTalent = player.talents.find(x => x.skillIndex == CapacityConst.TelekineticStorageSkillIndex);
                 if (telekineticStorageTalent) {
@@ -152,6 +242,15 @@ function PlayerTab({ player }: PlayerTabProps) {
                 if (extraBagsTalent) {
                     setExtraBagsTalentBonus(lavaFunc(extraBagsTalent.funcX, extraBagsTalent.level, extraBagsTalent.x1, extraBagsTalent.x2));
                 }
+            }
+            if (player.activeBubblesString.length > 0) {
+                const bubbleArray: Bubble[] = player.activeBubblesString.map((bubbleString, _) => {
+                    const activeBubble = alchemy.getActiveBubble(bubbleString);
+                    if (activeBubble) {
+                        return activeBubble;
+                    }
+                }).filter(notUndefined);
+                setActiveBubbles(bubbleArray);
             }
 
             // ANVIL SPEED MATH;
@@ -170,47 +269,13 @@ function PlayerTab({ player }: PlayerTabProps) {
             }
             setAnvilSpeed(3600 * player.anvil.getSpeed(player.stats.agility, anvilZoomerBonus, postOfficeBonus, hammerHammerBonus, anvilStatueBonus, starSignBonus, talentTownSpeedBonus))
             setAllCapBonus(player.capacity.getAllCapsBonus(guildCarryBonus, telekineticStorageBonus, carryCapShrineBonus, zergPrayerBonus, ruckSackPrayerBonus));
-            setPlayerCoins(getCoinsArray(player.money));
         }
-    }, [idleonData, player, allCapBonus, extraBagsTalentBonus, telekineticStorageBonus, guildCarryBonus, anvilCostDiscount, carryCapShrineBonus, guild, ruckSackPrayerBonus, zergPrayerBonus, anvilSpeed, activeBubbles, playerStatues, stampData]);
+    }, [idleonData, player, guild, playerStatues, stampData]);
 
     return (
         <Tabs activeIndex={index} onActive={onActive}>
             <Tab key={`player_${player.playerID}_random`} title="Random Stats">
-                <Box pad="medium" gap="small">
-                    <Text>Class / Level = {player.class} / {player.level}</Text>
-                    <Text>Current Monster / Map = {player.currentMonster} / {player.currentMap}</Text>
-                    {
-                        player.starSigns.map((sign, index) => {
-                            return <Text key={`sign-${index}`}>Sign {index} = {sign.getText()}</Text>
-                        })
-                    }
-                    <Text>{player.afkFor} Seconds</Text>
-                    <Text>Away Since = {toTime(player.afkFor)}</Text>
-                    <Text>STR = {player.stats.strength}</Text>
-                    <Text>AGI = {player.stats.agility}</Text>
-                    <Text>WIS = {player.stats.wisdom}</Text>
-                    <Text>LUK = {player.stats.luck}</Text>
-                    <Text>Money = </Text><CoinsDisplay coinMap={playerCoins} />
-                    <Box>
-                        <Text>Active Bubbles:</Text>
-                        {
-                            activeBubbles.map((bubble, bubbleIndex) => {
-                                return (
-                                    <Box direction="row" align="center" key={bubbleIndex} fill gap="medium">
-                                        <Stack anchor="bottom-right" alignSelf="center">
-                                            <Box className={bubble.class_name} />
-                                            <Box >
-                                                <Text size="medium">{bubble.level}</Text>
-                                            </Box>
-                                        </Stack>
-                                        <Text size="medium">{bubble.name}</Text>
-                                    </Box>
-                                )
-                            })
-                        }
-                    </Box>
-                </Box>
+                <MiscStats player={player} activeBubbles={activeBubbles} />
             </Tab>
             <Tab key={`player_${player.playerID}_skills`} title="Skills">
                 <Box pad="medium">
@@ -291,7 +356,7 @@ function PlayerTab({ player }: PlayerTabProps) {
                         {
                             player.anvil.production.filter((x) => x.displayName != "Filler" && (x?.hammers ?? 0) > 0).map((anvilItem, index) => {
                                 const productionCap = player.anvil.getCapacity(player.capacity.getMaterialCapacity(allCapBonus, stampData ? stampData[1][7].getBonus(player.skills.get(SkillsIndex.Smithing)) : 0, gemStore?.purchases.find(x => x.no == 58)?.pucrhased ?? 0, stampData ? stampData[2][1].getBonus() : 0, extraBagsTalentBonus, starSignExtraCap))
-                                const futureProduction = Math.round(anvilItem.currentAmount + ((anvilItem.currentProgress + (player.afkFor * anvilSpeed / 3600)) / anvilItem.time) * (anvilItem.hammers ?? 0));
+                                const futureProduction = Math.min(Math.round(anvilItem.currentAmount + ((anvilItem.currentProgress + (player.afkFor * anvilSpeed / 3600)) / anvilItem.time) * (anvilItem.hammers ?? 0)), productionCap);
                                 const percentOfCap = Math.round(futureProduction / productionCap * 100);
                                 const timeTillCap = ((productionCap - futureProduction) / (anvilSpeed / 3600 / anvilItem.time * (anvilItem.hammers ?? 0)));
                                 return (
@@ -349,8 +414,6 @@ function PlayerTab({ player }: PlayerTabProps) {
                                             GetTalentArray(talentPage).map((originalTalent, index) => {
                                                 const talent = player.talents.find(x => x.skillIndex == originalTalent.skillIndex);
                                                 if (talent) {
-                                                    const talentXBonus = lavaFunc(talent.funcX, talent.level, talent.x1, talent.x2, true);
-                                                    const talentYBonus = lavaFunc(talent.funcY, talent.level, talent.y1, talent.y2, true)
                                                     return (
                                                         <Box pad="xxsmall" key={`player_${player.playerID}_talents_${index}`} direction="row">
                                                             <Tip
@@ -359,16 +422,12 @@ function PlayerTab({ player }: PlayerTabProps) {
                                                                     <Box pad="small" gap="small" background="white" style={{ display: talent.level > 0 ? 'normal' : 'none' }}>
                                                                         <Text weight="bold">{talent.name}</Text>
                                                                         <Text>--------------------------</Text>
-                                                                        {
-                                                                            talent.description.includes("}") ?
-                                                                                <Text>{talent.description.replace("{", talentXBonus.toString()).replace("}", talentYBonus.toString())}</Text>
-                                                                                : <Text>{talent.description.replace("{", talentXBonus.toString())}</Text>
-                                                                        }
+                                                                        <Text>{talent.getBonusText()}</Text>
                                                                     </Box>
                                                                 }
                                                                 dropProps={{ align: { top: 'bottom' } }}
                                                             >
-                                                                <Box style={{ opacity: talent.maxLevel > 0 ? 1 : 0.2 }} className={`icon-56 icons-UISkillIcon${talent.skillIndex}`} title={talent.name} />
+                                                                <Box style={{ opacity: talent.maxLevel > 0 ? 1 : 0.2 }} className={talent.getClass()} title={talent.name} />
                                                             </Tip>
                                                             <Text>{talent.level} / {talent.maxLevel}</Text>
                                                         </Box>
