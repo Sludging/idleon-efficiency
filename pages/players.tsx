@@ -271,7 +271,7 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
             return anvilnomicsBonus * classBonus;
         }
         return anvilnomicsBonus;
-    }, [player])
+    }, [idleonData, player])
 
     const anvilSpeed = useMemo(() => {
         // ANVIL SPEED MATH;
@@ -291,7 +291,7 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
             }
         }
         return (3600 * player.anvil.getSpeed(player.stats.agility, anvilZoomerBonus, postOfficeBonus, hammerHammerBonus, anvilStatueBonus, starSignBonus, talentTownSpeedBonus));
-    }, [player])
+    }, [idleonData, activeBubbles, playerStatues, player])
 
     const allCapBonus = useMemo(() => {
         const theData = idleonData.getData();
@@ -316,12 +316,12 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
 
         return player.capacity.getAllCapsBonus(guildCarryBonus, telekineticStorageBonus, carryCapShrineBonus, zergPrayerBonus, ruckSackPrayerBonus);
 
-    }, [player])
+    }, [idleonData, player])
 
     const anvilCapcity = useMemo(() => {
         const theData = idleonData.getData();
         const stampData = theData.get("stamps");
-        const gemStore = theData.get("gems");
+        const gemStore = theData.get("gems") as GemStore;
 
         let extraBagsTalentBonus: number = 0;
         let starSignExtraCap: number = 0; // TODO!
@@ -333,7 +333,7 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
             }
         }
         return player.anvil.getCapacity(player.capacity.getMaterialCapacity(allCapBonus, stampData ? stampData[1][7].getBonus(player.skills.get(SkillsIndex.Smithing)) : 0, gemStore?.purchases.find(x => x.no == 58)?.pucrhased ?? 0, stampData ? stampData[2][1].getBonus() : 0, extraBagsTalentBonus, starSignExtraCap));
-    }, [player, allCapBonus])
+    }, [idleonData, player, allCapBonus])
 
     return (
         <Box pad="medium" gap="small">
@@ -411,7 +411,7 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
 
         return player.capacity.getAllCapsBonus(guildCarryBonus, telekineticStorageBonus, carryCapShrineBonus, zergPrayerBonus, ruckSackPrayerBonus);
 
-    }, [player])
+    }, [idleonData, player])
 
     const guildBonus = useMemo(() => {
         const theData = idleonData.getData();
@@ -421,22 +421,22 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
             return lavaFunc(guild.guildBonuses[2].func, guild.guildBonuses[2].level, guild.guildBonuses[2].x1, guild.guildBonuses[2].x2);
         }
         return 0;
-    }, [player])
+    }, [idleonData])
 
     const gemCapBought = useMemo(() => {
         const theData = idleonData.getData();
-        const gemStore = theData.get("gems");
+        const gemStore = theData.get("gems") as GemStore;
 
         if (gemStore) {
             return gemStore?.purchases.find(x => x.no == 58)?.pucrhased;
         }
         return 0;
-    }, [player])
+    }, [idleonData])
 
     const monsterCarryCap = useMemo(() => {
         const theData = idleonData.getData();
         const stampData = theData.get("stamps");
-        const gemStore = theData.get("gems");
+        const gemStore = theData.get("gems") as GemStore;
 
         let extraBagsTalentBonus: number = 0;
         let starSignExtraCap: number = 0; // TODO!
@@ -449,7 +449,7 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
         }
 
         return player.capacity.getMaterialCapacity(allCapBonus, stampData ? stampData[1][7].getBonus(player.skills.get(SkillsIndex.Smithing)) : 0, gemStore?.purchases.find(x => x.no == 58)?.pucrhased ?? 0, stampData ? stampData[2][1].getBonus() : 0, extraBagsTalentBonus, starSignExtraCap)
-    }, [player, allCapBonus])
+    }, [idleonData, player, allCapBonus])
     return (
         <Box pad="medium" gap="small">
             <Text size='medium'>Carry Capacity</Text>

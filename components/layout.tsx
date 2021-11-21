@@ -125,14 +125,12 @@ export default function Layout({
             margin={{ horizontal: "auto" }}
             height={{ min: "100%" }}
         >
-            <Head>
-                <Script async key="adsense" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9755300710945447" crossOrigin="anonymous"></Script>
-            </Head>
+            <Script async key="adsense" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9755300710945447" crossOrigin="anonymous"></Script>
             <Header background="dark-1" height="56px" border={{ color: "white-1", side: "bottom" }}>
                 <Box width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} direction="row" justify='between' align="center" pad="small" fill>
-                    <Link href={"/"}>
+                    <Link passHref href={"/"}>
                         <Box>
-                            <PointerImage src="/logo.svg" height="21px" width="171px" />
+                            <PointerImage alt="Logo" src="/logo.svg" height="21px" width="171px" />
                         </Box>
                     </Link>
                     {user && <Box direction="row" gap="xlarge" pad="medium"><Text color="accent-3" size="small">Last Updated: {lastUpdated}</Text><Button onClick={() => onButtonClick(authData?.logoutFunction)}>Logout</Button></Box>}
@@ -166,13 +164,13 @@ export default function Layout({
                     <Box height={{ min: "56px", max: "56px" }} background="dark-1" border={{ side: 'bottom', color: 'white-1' }} style={{ boxShadow: "-7px 8px 16px 0 rgba(0,0,0,0.17)" }}>
                         <Box width={{ max: '1440px' }} align="center" margin={{ left: 'auto', right: 'auto' }} >
                             <Nav direction="row">
-                                <Link href={`/stamps`}><NavButton className={router.pathname == `/stamps` ? 'active' : ''} color="accent-2">Stamps</NavButton></Link>
-                                <Link href={`/alchemy`}><NavButton className={router.pathname == `/alchemy` ? 'active' : ''} color="accent-2">Alchemy</NavButton></Link>
-                                <Link href={`/traps`}><NavButton className={router.pathname == `/traps` ? 'active' : ''} color="accent-2">Traps</NavButton></Link>
-                                <Link href={`/players`}><NavButton className={router.pathname == `/players` ? 'active' : ''} color="accent-2">Players</NavButton></Link>
-                                <Link href={`/bribes`}><NavButton className={router.pathname == `/bribes` ? 'active' : ''} color="accent-2">Bribes - WIP</NavButton></Link>
-                                <Link href={`/achievements`}><NavButton className={router.pathname == `/achievements` ? 'active' : ''} color="accent-2">Achievements - WIP</NavButton></Link>
-                                <Link href={`/raw-data`}><NavButton className={router.pathname == `/raw-data` ? 'active' : ''} color="accent-2">Raw Data - No Styling</NavButton></Link>
+                            <Link href={`/stamps`}><NavButton className={router.pathname == `/stamps` ? 'active' : ''} color="accent-2">Stamps</NavButton></Link>
+                            <Link href={`/alchemy`}><NavButton className={router.pathname == `/alchemy` ? 'active' : ''} color="accent-2">Alchemy</NavButton></Link>
+                            <Link href={`/traps`}><NavButton className={router.pathname == `/traps` ? 'active' : ''} color="accent-2">Traps</NavButton></Link>
+                            <Link href={`/players`}><NavButton className={router.pathname == `/players` ? 'active' : ''} color="accent-2">Players</NavButton></Link>
+                            <Link href={`/bribes`}><NavButton className={router.pathname == `/bribes` ? 'active' : ''} color="accent-2">Bribes - WIP</NavButton></Link>
+                            <Link href={`/achievements`}><NavButton className={router.pathname == `/achievements` ? 'active' : ''} color="accent-2">Achievements - WIP</NavButton></Link>
+                            <Link href={`/raw-data`}><NavButton className={router.pathname == `/raw-data` ? 'active' : ''} color="accent-2">Raw Data - No Styling</NavButton></Link>
                             </Nav>
                         </Box>
                     </Box>
@@ -186,7 +184,7 @@ export default function Layout({
             </Main>
             <Footer height={{ min: "82px" }} background="dark-1">
                 <Box width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} direction="row" justify='between' fill="horizontal" align="center" pad="small">
-                    <Image src="/logo.svg" height="21px" width="171px" />
+                    <Image alt="Logo" src="/logo.svg" height="21px" width="171px" />
                     <Text>Sludger.6559</Text>
                 </Box>
             </Footer>
