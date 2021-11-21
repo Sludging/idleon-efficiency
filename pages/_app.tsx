@@ -1,4 +1,7 @@
 import type { AppProps, NextWebVitalsMetric } from 'next/app'
+import { css } from 'styled-components';
+
+import { useEffect } from 'react';
 import { dark, Grommet } from 'grommet';
 import { deepMerge } from 'grommet/utils';
 import { AuthProvider } from '../data/firebase/authContext';
@@ -6,6 +9,7 @@ import { AppProvider } from '../data/appContext';
 
 import Script from 'next/script'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 import { handleWebVitals } from '../lib/gtag';
 
@@ -20,33 +24,72 @@ import '../public/icons/assets/sheets/spritesheet_88x76.css';
 import '../public/icons/assets/sheets/spritesheet_43x43.css';
 import '../public/icons/assets/sheets/spritesheet_28x36.css';
 import '../public/icons/assets/sheets/spritesheet_31x43.css';
+import Layout from '../components/layout';
 
 const customTheme = deepMerge(dark, {
+  global: {
+    font: {
+      family: "Rubik",
+      size: "14px"
+    },
+    colors: {
+      "brand": "#0376E3",
+      "accent-1": "#FF3E82",
+      "accent-2": "#BEC2CC",
+      "accent-3": "#6B747F",
+      "accent-4": "#22252B",
+      "dark-1": "#1E2127",
+      "dark-2": "#1B1D24",
+      "background": "#1B1D24",
+      "white-1": "#30333A",
+    }
+  },
+  button: {
+    border: {
+      radius: undefined,
+    },
+  },
   tab: {
     active: {
       background: 'dark-1',
-      color: 'accent-1',
+      color: 'brand',
     },
-    color: 'grey'
-  }
+    border: {
+      side: "bottom",
+      color: "none",
+      active: {
+        color: "brand"
+      }
+    },
+    color: 'accent-2',
+    extend: ({ }) => css`
+      font-size: 16px;
+    `,
+  },
 });
 
-function MyApp({ Component, pageProps }: AppProps) {
-  // const router = useRouter()
+declare const window: Window &
+  typeof globalThis & {
+    gtag: any
+  }
 
-  // useEffect(() => {
-  //   const handleRouteChange = (url: string) => {
-  //     if (typeof window.gtag !== 'undefined') {
-  //       window.gtag('config', "G-RDM3GQEGMB", {
-  //         page_path: url,
-  //       })
-  //     }
-  //   }
-  //   router.events.on('routeChangeComplete', handleRouteChange)
-  //   return () => {
-  //     router.events.off('routeChangeComplete', handleRouteChange)
-  //   }
-  // }, [router.events])
+function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter()
+
+  useEffect(() => {
+    const handleRouteChange = (url: string) => {
+      if (typeof window.gtag !== 'undefined') {
+        window.gtag('config', "G-RDM3GQEGMB", {
+          page_path: url,
+        })
+      }
+    }
+    router.events.on('routeChangeComplete', handleRouteChange)
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+
+  }, [router.events])
 
   return (
     <>
@@ -75,7 +118,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Grommet theme={customTheme} full>
         <AuthProvider>
           <AppProvider>
-            <Component {...pageProps} />
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
           </AppProvider>
         </AuthProvider>
       </Grommet>

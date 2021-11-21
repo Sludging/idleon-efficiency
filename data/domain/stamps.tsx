@@ -1,4 +1,3 @@
-import StampData from "../../components/stampData";
 import { lavaFunc } from '../utility'
 
 export enum StampTab {
@@ -187,13 +186,15 @@ const initStamps = (): Stamp[][] => {
 
 export default function parseStamps(rawData: Array<any>, maxData: Array<any>) {
     const stampData = initStamps(); // Initialize stamp array with all pre-populated data
-    rawData.forEach((tab, index) => { // for each tab in the cloud save
-        Object.entries(tab).map(([key, value]) => { // for each stamp in the current tab
-            if (key.toLowerCase() !== "length") {  // ignroe length at the end
-                stampData[index][parseInt(key)].level = value as number; // update our pre-populated data with the stamp level
-                stampData[index][parseInt(key)].maxLevel = maxData[index][key] as number;
-            }
+    if (rawData) {
+        rawData.forEach((tab, index) => { // for each tab in the cloud save
+            Object.entries(tab).map(([key, value]) => { // for each stamp in the current tab
+                if (key.toLowerCase() !== "length") {  // ignroe length at the end
+                    stampData[index][parseInt(key)].level = value as number; // update our pre-populated data with the stamp level
+                    stampData[index][parseInt(key)].maxLevel = maxData[index][key] as number;
+                }
+            })
         })
-    })
+    }
     return stampData;
 }
