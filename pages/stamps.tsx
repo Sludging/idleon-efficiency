@@ -11,9 +11,14 @@ import { Stamp } from '../data/domain/stamps';
 import { useEffect, useState, useContext } from 'react';
 import { AppContext } from '../data/appContext';
 import { getCoinsArray, lavaFunc, nFormatter } from '../data/utility'
-import CoinsDisplay from "./coinsDisplay";
+import CoinsDisplay from "../components/coinsDisplay";
 import { Alchemy, AlchemyConst } from "../data/domain/alchemy";
 import { Bribe, BribeConst, BribeStatus } from "../data/domain/bribes";
+import styled from 'styled-components'
+
+const ShadowBox = styled(Box)`
+    box-shadow: -7px 8px 16px 0 rgba(0,0,0,0.17)
+`
 
 function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stamp, index: number, blueFlavPercent: number, hasBribe: boolean }) {
     const getCardClass = () => {
@@ -84,7 +89,7 @@ function StampTab({ tab, index, blueFlavPercent, hasBribe }: { tab: Stamp[], ind
     return (
         <Box>
             <h3>{tab[0].type}</h3>
-            <Box background="grey" fill>
+            <Box fill>
                 <Grid columns="1/4" gap="none">
                     {
                         tab.map((stamp: Stamp) => {
@@ -101,14 +106,14 @@ function StampTab({ tab, index, blueFlavPercent, hasBribe }: { tab: Stamp[], ind
     )
 }
 
-export default function StampData() {
+function Stamps() {
     const [stampData, setStampData] = useState<Stamp[][]>();
     const [hasBribe, setHasBribe] = useState<BribeStatus>(BribeStatus.Available);
     const [blueFlavPercent, setBlueFlavPercent] = useState<number>(0);
     const idleonData = useContext(AppContext);
 
     useEffect(() => {
-        if (idleonData) {
+        if (idleonData.getData().size > 0) {
             const theData = idleonData.getData();
             setStampData(theData.get("stamps"));
 
@@ -130,12 +135,19 @@ export default function StampData() {
         )
     }
     return (
-        <Grid columns="1/3" gap="medium">
-            {
-                stampData && stampData.map((tab, index) => {
-                    return (<StampTab key={`tab_${index}`} tab={tab} index={index} blueFlavPercent={blueFlavPercent} hasBribe={hasBribe == BribeStatus.Purchased} />)
-                })
-            }
-        </Grid>
+        <Box>
+            <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Stamps</Heading>
+            <ShadowBox flex={false} background="dark-1" pad="small">
+                <Grid columns="1/3" gap="medium">
+                    {
+                        stampData && stampData.map((tab, index) => {
+                            return (<StampTab key={`tab_${index}`} tab={tab} index={index} blueFlavPercent={blueFlavPercent} hasBribe={hasBribe == BribeStatus.Purchased} />)
+                        })
+                    }
+                </Grid>
+            </ShadowBox>
+        </Box>
     )
 }
+
+export default Stamps;

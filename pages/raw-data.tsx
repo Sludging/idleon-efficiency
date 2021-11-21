@@ -10,7 +10,7 @@ import { useState, useEffect, useContext } from 'react';
 import { AppContext } from '../data/appContext'
 
 
-export default function JsonData() {
+function RawData() {
     const [rawData, setRawData] = useState<any>();
 
     const idleonData = useContext(AppContext);
@@ -22,8 +22,10 @@ export default function JsonData() {
         }
     }, [idleonData]);
     return (
-        <Box align="center" pad="large" >
+        <Box align="center">
             <pre style={{ maxWidth: "800px" }}>{JSON.stringify(rawData, null, 2)}</pre>
         </Box>
     )
 }
+
+export default RawData;

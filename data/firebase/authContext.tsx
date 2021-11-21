@@ -4,6 +4,7 @@ import app from "./config";
 import { GoogleAuthProvider, signInWithPopup, signInWithCredential, signOut } from "firebase/auth";
 
 import { sendEvent, loginEvent } from '../../lib/gtag';
+import { useRouter } from "next/dist/client/router";
 
 interface AuthData {
     user: User | null
@@ -26,6 +27,7 @@ export const getAuthData = (): AuthData => {
 export const AuthProvider: React.FC<{}> = (props) => {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
+    const router = useRouter();
 
     const loginUser = () => {
         const auth = getAuth(app);
@@ -60,12 +62,12 @@ export const AuthProvider: React.FC<{}> = (props) => {
         const auth = getAuth(app);
         signOut(auth)
             .then((result) => {
-                console.log(result);
                 sendEvent({
                     action: "logout",
                     category: "engagement",
                     value: 1,
                 });
+                router.push('/');
             }).catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
