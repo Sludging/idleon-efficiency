@@ -14,7 +14,7 @@ import ShadowBox from './base/ShadowBox';
 import { MouseEventHandler } from 'hoist-non-react-statics/node_modules/@types/react';
 
 
-function SpecialButton({ isActive, text, clickHandler, step }: { isActive: boolean, text: string | Box, clickHandler: MouseEventHandler, step: number }) {
+function SpecialButton({ isActive, text, clickHandler, step }: { isActive: boolean, text: string | React.ReactNode, clickHandler: MouseEventHandler, step: number }) {
     return (
         <Button fill="horizontal" plain active={isActive} onClick={clickHandler} gap="medium">
             <Box background={isActive ? 'accent-4' : 'dark-2'} pad={{ left: 'medium', right: 'small', top: 'small', bottom: 'small' }} gap="small">
@@ -130,11 +130,11 @@ export default function Welcome() {
                                     `}
                                         </Box>
                                     </pre>}
-                                    {index == 2 && <Image src={'/idleon-website.png'} />}
-                                    {index == 3 && <Image src={'/dev-tools.png'} />}
-                                    {index == 4 && <Image src={'/popup.png'} />}
-                                    {index == 5 && <Image src={'/long-string.png'} />}
-                                    {index == 6 && <Image src={'/login.png'} />}
+                                {index == 2 && <Image alt="idleon-website" src={'/idleon-website.png'} />}
+                                {index == 3 && <Image alt="dev-tools" src={'/dev-tools.png'} />}
+                                {index == 4 && <Image alt="popup" src={'/popup.png'} />}
+                                {index == 5 && <Image alt="long-string" src={'/long-string.png'} />}
+                                {index == 6 && <Image alt="login" src={'/login.png'} />}
                                 </Box>
                             </Grid>
                         </Box>
@@ -146,7 +146,7 @@ export default function Welcome() {
                 <Box width={{ max: '1440px' }} align="center" pad="small" fill margin={{ left: 'auto', right: 'auto' }}>
                     <Grid columns={["2/3", "1/3"]} fill>
                         <Box>
-                            <Image src={'/feature1.png'} />
+                            <Image alt="feature1" src={'/feature1.png'} />
                         </Box>
                         <Box direction="row" gap="medium" pad="large" align="center">
                             <Box gap="small">
@@ -163,17 +163,17 @@ export default function Welcome() {
                             </Box>
                         </Box>
                         <Box>
-                            <Image src={'/feature2.png'} />
+                            <Image alt="feature2" src={'/feature2.png'} />
                         </Box>
                     </Grid>
                     <Grid columns={["2/3", "1/3"]} fill>
                         <Box>
-                            <Image src={'/feature3.png'} />
+                            <Image alt="feature3" src={'/feature3.png'} />
                         </Box>
                         <Box direction="row" gap="medium" pad="large" align="center">
                             <Box gap="small">
                                 <Text size="xlarge">Achievement Tracker</Text>
-                                <Text size="small">Easily track your achievements, and see progress on ones you've yet to complete.</Text>
+                                <Text size="small">Easily track your achievements, and see progress on ones you&apos;ve yet to complete.</Text>
                             </Box>
                         </Box>
                     </Grid>
