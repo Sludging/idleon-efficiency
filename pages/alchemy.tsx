@@ -10,7 +10,7 @@ import {
 } from "grommet"
 import styled from 'styled-components'
 
-import { Alchemy, Cauldron, Bubble, CauldronBoostIndex } from '../data/domain/alchemy';
+import { Alchemy as AlchemyData, Cauldron, Bubble, CauldronBoostIndex } from '../data/domain/alchemy';
 import { AchievementConst } from '../data/domain/achievements'
 import { useEffect, useState, useContext } from 'react';
 import { AppContext } from '../data/appContext'
@@ -18,6 +18,10 @@ import { nFormatter } from '../data/utility'
 
 const CapitalizedH3 = styled.h3`
     text-transform: capitalize
+`
+
+const ShadowBox = styled(Box)`
+    box-shadow: -7px 8px 16px 0 rgba(0,0,0,0.17)
 `
 
 interface DisplayProps {
@@ -89,41 +93,41 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
 
 
     return (
-        <Box >
+        <Box>
             <Box align="center">
                 <CapitalizedH3>{cauldron.name}</CapitalizedH3>
             </Box>
-            <Box background="grey" fill align="center">
-            {
-                Object.entries(cauldron.bubbles).map(([_, bubble], index) => {
+            <Box align="center">
+                {
+                    Object.entries(cauldron.bubbles).map(([_, bubble], index) => {
 
-                    return (
-                        <Box direction="row" align="center" key={`cauldron_${index}_${bubble.name}`}>
-                            <Stack anchor="bottom-right" alignSelf="center">
-                                <Tip
-                                    plain
-                                    content={
-                                        <TipContent bubble={bubble} faceLeft={cauldron.short_name == "Y"} />
-                                    }
-                                    dropProps={{ align: cauldron.short_name == "Y" ? { right: 'left' } : { left: 'right' } }}
-                                >
-                                    <Box style={{ opacity: bubble.level > 0 ? 1 : 0.2 }} className={bubble.class_name} />
-                                </Tip>
-                                <Box>
-                                    <Text size="medium">{bubble.level}</Text>
-                                </Box>
-                            </Stack>
-                        </Box>
-                    )
-                })
-            }
+                        return (
+                            <Box direction="row" align="center" key={`cauldron_${index}_${bubble.name}`}>
+                                <Stack anchor="bottom-right" alignSelf="center">
+                                    <Tip
+                                        plain
+                                        content={
+                                            <TipContent bubble={bubble} faceLeft={cauldron.short_name == "Y"} />
+                                        }
+                                        dropProps={{ align: cauldron.short_name == "Y" ? { right: 'left' } : { left: 'right' } }}
+                                    >
+                                        <Box style={{ opacity: bubble.level > 0 ? 1 : 0.2 }} className={bubble.class_name} />
+                                    </Tip>
+                                    <Box>
+                                        <Text size="medium">{bubble.level}</Text>
+                                    </Box>
+                                </Stack>
+                            </Box>
+                        )
+                    })
+                }
             </Box>
         </Box>
     )
 }
 
-export default function AlchemyData() {
-    const [alchemyData, setAlchemyData] = useState<Alchemy>();
+function Alchemy() {
+    const [alchemyData, setAlchemyData] = useState<AlchemyData>();
     const [undevelopedCostsBubbleLevel, setUndevelopedCostsBubbleLevel] = useState<number>(0);
     const [barleyBrewVialLevel, setBarleyBrewVialLevel] = useState<number>(0);
     const [hasAlchemyAchievement, setHasAlchemyAchievement] = useState<boolean>(false);
@@ -171,7 +175,7 @@ export default function AlchemyData() {
     ];
 
     useEffect(() => {
-        if (idleonData) {
+        if (idleonData.getData().size > 0) {
             const theData = idleonData.getData();
             setAlchemyData(theData.get("alchemy"));
             const achievementsInfo = theData.get("achievements");
@@ -191,8 +195,9 @@ export default function AlchemyData() {
     }
 
     return (
-        <Box >
-            <Box gap="medium" pad="medium" align="start">
+        <Box gap="large">
+            <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Alchemy</Heading>
+            <Box gap="large" align="center" direction="row">
                 <CheckBox
                     checked={classMulti}
                     label="Class multiplier bonus?"
@@ -206,16 +211,20 @@ export default function AlchemyData() {
                     onChange={({ value: nextValue }) => setDiscountLevel(nextValue)}
                 />
             </Box>
-            <Grid columns="1/4">
-                {
-                    alchemyData && Object.entries(alchemyData.cauldrons).map(([_, cauldron], index) => {
-                        return (<CauldronDisplay key={`tab_${index}`} cauldron={cauldron} undevelopedCostsBubbleLevel={undevelopedCostsBubbleLevel} barleyBrewVialLevel={barleyBrewVialLevel} hasAchievement={hasAlchemyAchievement} discountLevel={parseInt(discountLevel)} classMultiBonus={classMulti} />)
-                    })
-                }
-                {
-                    !alchemyData && <Text>Not ready yet</Text>
-                }
-            </Grid>
+            <ShadowBox background="dark-1" flex={false} pad={{ bottom: 'small' }}>
+                <Grid columns="1/4">
+                    {
+                        alchemyData && Object.entries(alchemyData.cauldrons).map(([_, cauldron], index) => {
+                            return (<CauldronDisplay key={`tab_${index}`} cauldron={cauldron} undevelopedCostsBubbleLevel={undevelopedCostsBubbleLevel} barleyBrewVialLevel={barleyBrewVialLevel} hasAchievement={hasAlchemyAchievement} discountLevel={parseInt(discountLevel)} classMultiBonus={classMulti} />)
+                        })
+                    }
+                    {
+                        !alchemyData && <Text>Not ready yet</Text>
+                    }
+                </Grid>
+            </ShadowBox>
         </Box>
     )
 }
+
+export default Alchemy;
