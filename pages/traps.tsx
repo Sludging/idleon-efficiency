@@ -12,6 +12,7 @@ import { useState, useEffect, useContext } from 'react';
 import { AppContext } from '../data/appContext'
 
 import { Trap } from '../data/domain/traps';
+import ShadowBox from '../components/base/ShadowBox';
 
 interface PlayerTrapProps {
     traps: Array<Trap>
@@ -42,9 +43,6 @@ function PlayerTraps(props: PlayerTrapProps) {
         <Box direction="row" gap="medium" align="center">
             {
                 props.traps.map((trap, index) => {
-                    // <TableCell style={{ background: trap.isReady() ? 'red' : 'none' }}>{fancyTimeFormat(trap.timeSincePut)}</TableCell>
-                    // <TableCell><Box title={trap.critterName} className={`icons icons-${trap.critterName}_x1`} /></TableCell>
-                    // <TableCell>{fancyTimeFormat(trap.trapDuration)}</TableCell>
                     return (
                         <Box key={`trap_${index}`} style={{ background: trap.isReady() ? 'red' : 'none' }} align="center" width="75px">
                             <Box title={`Total Duration: ${formatTime(trap.trapDuration)?.replace("in ", "") ?? ""}`} className={`icons icons-${trap.critterName}_x1`} />
@@ -57,7 +55,7 @@ function PlayerTraps(props: PlayerTrapProps) {
     )
 }
 
-export default function TrapData() {
+function Traps() {
     const [playerTraps, setPlayerTraps] = useState<Array<Array<Trap>>>(Array<Array<Trap>>());
     const [playerNames, setPlayerNames] = useState<Array<string>>([]);
     const idleonData = useContext(AppContext);
@@ -70,7 +68,7 @@ export default function TrapData() {
         }
     }, [idleonData]);
 
-    if (playerTraps.filter(x => playerNames[x[0]?.playerID] != undefined).length == 0) {
+    if (!playerTraps || playerTraps.filter(x => playerNames[x[0]?.playerID] != undefined).length == 0) {
         return (
             <Box align="center" pad="medium">
                 <Heading level='3'>Come back when you unlocked this!</Heading>
@@ -78,14 +76,14 @@ export default function TrapData() {
         )
     }
     return (
-        <Box align="center" pad="large">
-            <Heading level='1'>Traps</Heading>
-            {
+        <Box>
+            <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Traps</Heading>
+            <ShadowBox background="dark-1" pad="large">
                 <Table>
                     <TableHeader>
                         <TableRow>
                             <TableCell >Player Name</TableCell >
-                            <TableCell >Traps (Time remaining)</TableCell >
+                            <TableCell >Traps</TableCell >
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -103,7 +101,9 @@ export default function TrapData() {
                         }
                     </TableBody>
                 </Table>
-            }
+            </ShadowBox>
         </Box>
     )
 }
+
+export default Traps;

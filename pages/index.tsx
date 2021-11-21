@@ -1,59 +1,38 @@
 import type { NextPage } from 'next'
-import { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
+import Link from 'next/link';
 
-import StampData from '../components/stampData';
-import TrapData from '../components/trapData';
-import AlchemyData from '../components/alchemyData';
-import PlayerData from '../components/playerData';
-import JsonData from '../components/jsonData';
-
-import Layout from '../components/layout';
 import { AppContext } from '../data/appContext';
+import { AuthContext } from '../data/firebase/authContext'
+import { User } from '@firebase/auth'
 
-import { Tab, Tabs } from 'grommet';
-import BribeData from '../components/bribeData';
-import AchievementData from '../components/achievementData';
+import { Box, Text, Nav, Anchor } from 'grommet';
+import Welcome from '../components/welcome';
 
 const Home: NextPage = () => {
   const idleonData = useContext(AppContext);
-  const [gameData, setGameData] = useState<Map<string, any>>(new Map());
+  const authData = useContext(AuthContext);
+
   const [index, setIndex] = useState<number>(0);
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<User | undefined | null>(null);
 
   const onActive = (nextIndex: number) => setIndex(nextIndex);
 
   useEffect(() => {
-    setGameData(idleonData.getData());
-  }, [idleonData])
+    setUser(authData?.user);
+    setLoading(authData ? authData.isLoading : true);
+  }, [idleonData, authData])
 
   return (
-    <Layout>
-      {gameData.size > 0 &&
-
-        <Tabs activeIndex={index} onActive={onActive}>
-          <Tab title="Stamps">
-            <StampData />
-          </Tab>
-          <Tab title="Alchemy">
-            <AlchemyData />
-          </Tab>
-          <Tab title="Traps">
-            <TrapData />
-          </Tab>
-          <Tab title="Players">
-            <PlayerData />
-        </Tab>
-        <Tab title="Bribes - WIP">
-          <BribeData />
-        </Tab>
-        <Tab title="Achievements - WIP">
-          <AchievementData />
-        </Tab>
-        <Tab title="Raw Data - No Styling">
-          <JsonData />
-        </Tab>
-        </Tabs>
+    <React.Fragment>
+      {loading ?
+        <Box pad="large" fill align="center">
+          <Text size="large">Loading Data</Text>
+        </Box>
+        : <Welcome />
       }
-    </Layout>
+    </React.Fragment>
   )
 }
 
