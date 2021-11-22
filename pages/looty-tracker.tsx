@@ -33,7 +33,7 @@ function LootyTracker() {
             const missingItems = itemsToShow.filter(x => lootyInfo.find(y => y == x) == undefined)
             setMissing(missingItems);
         }
-    }, [idleonData, filteredLootyItems, lootyInfo]);
+    }, [idleonData, allItems]);
     return (
         <Box gap="small">
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Looty Tracker</Heading>
