@@ -170,6 +170,7 @@ export default function Layout({
                             <Link href={`/players`}><NavButton className={router.pathname == `/players` ? 'active' : ''} color="accent-2">Players</NavButton></Link>
                             <Link href={`/bribes`}><NavButton className={router.pathname == `/bribes` ? 'active' : ''} color="accent-2">Bribes - WIP</NavButton></Link>
                             <Link href={`/achievements`}><NavButton className={router.pathname == `/achievements` ? 'active' : ''} color="accent-2">Achievements - WIP</NavButton></Link>
+                            <Link href={`/looty-tracker`}><NavButton className={router.pathname == `/looty-tracker` ? 'active' : ''} color="accent-2">Looty Tracker - WIP</NavButton></Link>
                             <Link href={`/raw-data`}><NavButton className={router.pathname == `/raw-data` ? 'active' : ''} color="accent-2">Raw Data - No Styling</NavButton></Link>
                             </Nav>
                         </Box>

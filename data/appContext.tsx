@@ -138,6 +138,7 @@ export const AppProvider: React.FC<{}> = (props) => {
           accountData.set("gems", parseGems(JSON.parse(doc.get('GemItemsPurchased'))));
           accountData.set("achievements", parseAchievements(JSON.parse(doc.get('AchieveReg'))))
           accountData.set("timeAway", timeAway);
+          accountData.set("lootyData", JSON.parse(doc.get("Cards1")));
           accountData.set("rawData", doc.data());
           // CYWorldTeleports (if I ever care to show it)
           // SaltLick
