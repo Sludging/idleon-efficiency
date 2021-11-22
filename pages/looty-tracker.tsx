@@ -21,22 +21,21 @@ function LootyTracker() {
         const lootyData = idleonData.getData().get("lootyData") as string[];
         // filter out any item that isn't a real item, and mark that as the looted items.
         if (lootyData) {
-            setLootyInfo(lootyData.filter(x => Object.keys(allItems).find(y => y == x) != undefined));
+            setLootyInfo(lootyData.filter(x => Object.keys(allItems).findIndex(y => y == x) >= 0));
         }
 
         // Only keep actually lootable items.
-        let itemsToShow = Object.keys(allItems).filter(x => x.indexOf('Card') < 0 && x.indexOf('Gem') < 0 && filteredLootyItems.find(y => y == x) == undefined)
+        let itemsToShow = Object.keys(allItems).filter(x => x.indexOf('Card') < 0 && x.indexOf('Gem') < 0 && filteredLootyItems.findIndex(y => y == x) == -1)
         setAvailableItems(itemsToShow);
 
         // filter found
-        if (lootyData) {
-            const missingItems = itemsToShow.filter(x => lootyInfo.find(y => y == x) == undefined)
-            setMissing(missingItems);
-        }
+        const missingItems = itemsToShow.filter(x => lootyInfo.findIndex(y => y == x) == -1)
+        setMissing(missingItems);
     }, [idleonData, allItems]);
     return (
         <Box gap="small">
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Looty Tracker</Heading>
+            <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>THIS IS VERY INACCURATE AT THE MOMENT - Actively worked on to make it better!</Heading>
             <Box direction="row" gap="medium">
                 <Text>Total Items = {availableItems.length}</Text>
                 <Text>Already looted = {lootyInfo.length}</Text>
