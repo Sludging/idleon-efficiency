@@ -2,6 +2,10 @@ export const allItems = { "DungCredits2": "Dungeon Credits Flurbo Edition", "Cas
 
 export const filteredLootyItems = [
     'StampA1',
+    'DungWeaponSword1',
+    'DungWeaponWand1',
+    'FishingRod1',
+    'atchingNet1',
     'StampA2',
     'StampB1',
     'StampB2',
