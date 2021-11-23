@@ -10,6 +10,7 @@ import { AppContext } from '../data/appContext'
 import { LootyInfo } from '../data/domain/lootyTracker';
 
 const getRegex = () => { return /Cards(\w)(\d+)/g };
+const getEnhancerRegex = () => { return /DungEnhancer(\d+)/g };
 
 function LootyTracker() {
     const [lootyInfo, setlootyInfo] = useState<LootyInfo>();
@@ -18,8 +19,14 @@ function LootyTracker() {
     const idleonData = useContext(AppContext);
 
     const getClass = (rawName: string) => {
+        if (getEnhancerRegex().exec(rawName)) {
+            return `icons-3434 icons-${rawName}_x1`;
+        }
+        if (rawName == "StampC5") {
+            return `icons icons-${rawName}`;
+        }
         if (getRegex().exec(rawName)) {
-            return `icons-2836 icons-${rawName}`
+            return `icons-2836 icons-${rawName}`;
         }
         return `icons icons-${rawName}_x1`;
     }
@@ -68,7 +75,9 @@ function LootyTracker() {
                         }
                         {
                         onlyMissing && lootyInfo.missing.map(([rawName, displayName], index) => (
-                            <Box title={displayName} style={getStyle(rawName)} key={index} className={getClass(rawName)} />
+                            <Box key={index}>
+                                <Box title={displayName} style={getStyle(rawName)}  className={getClass(rawName)} />
+                            </Box>
                         ))
                     }
                     {
