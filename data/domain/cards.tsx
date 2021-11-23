@@ -175,14 +175,16 @@ export interface CardSet {
 export class CardInfo {
     cards: Card[] = cardsInit();
     equippedCards: Card[] = [];
-    cardSet: CardSet = { text: '', bonus: 0 };
+    cardSet: CardSet = { text: 'You don\'t have one equipped!', bonus: 0 };
 
     constructor(cardData: Record<string, number>, cardSetData: Map<string, number>, equippedCardsData: string[]) {
         const cardSetInfo = Object.entries(cardSetData)[0];
-        this.cardSet = {
-            text: cardSetInfo[0],
-            bonus: cardSetInfo[1]
-        };
+        if (cardSetInfo) {
+            this.cardSet = {
+                text: cardSetInfo[0],
+                bonus: cardSetInfo[1]
+            };
+        }
         equippedCardsData.forEach((card) => {
             const theCard = this.cards.find(x => x.name == card);
             if (theCard) {
