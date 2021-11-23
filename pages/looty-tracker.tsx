@@ -40,7 +40,7 @@ function LootyTracker() {
         <Box gap="medium">
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Looty Tracker</Heading>
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>THIS IS VERY INACCURATE AT THE MOMENT - Actively worked on to make it better!</Heading>
-            <Text size="large">If you see an icon that on hover says 'FILLER' or icon looks like alien logs, ignore it for now.</Text>
+            <Text size="large">If you see an item that on hover says &apos;FILLER&apos; or a red &apos;MISSING ICON&apos;, ignore it for now.</Text>
             <Box direction="row" gap="medium">
                 {/* <Text>Total Items = {lootyInfo?.obtainable.length}</Text> */}
                 <Text>Already lootyed = {lootyInfo?.obtained.length}</Text>
