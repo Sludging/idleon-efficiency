@@ -16,6 +16,7 @@ import parseBribes from './domain/bribes';
 import parseGuild from './domain/guild';
 import parseGems from './domain/gemPurchases';
 import parseAchievements from './domain/achievements';
+import parseLooty from './domain/lootyTracker';
 
 
 
@@ -138,7 +139,7 @@ export const AppProvider: React.FC<{}> = (props) => {
           accountData.set("gems", parseGems(JSON.parse(doc.get('GemItemsPurchased'))));
           accountData.set("achievements", parseAchievements(JSON.parse(doc.get('AchieveReg'))))
           accountData.set("timeAway", timeAway);
-          accountData.set("lootyData", JSON.parse(doc.get("Cards1")));
+          accountData.set("lootyData", parseLooty(JSON.parse(doc.get("Cards1"))));
           accountData.set("rawData", doc.data());
           // CYWorldTeleports (if I ever care to show it)
           // SaltLick
