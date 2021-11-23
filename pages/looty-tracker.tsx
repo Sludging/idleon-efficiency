@@ -75,8 +75,8 @@ function LootyTracker() {
                         }
                         {
                         onlyMissing && lootyInfo.missing.map(([rawName, displayName], index) => (
-                            <Box>
-                            <Box title={displayName} style={getStyle(rawName)} key={index} className={getClass(rawName)} />
+                            <Box key={index}>
+                                <Box title={displayName} style={getStyle(rawName)}  className={getClass(rawName)} />
                             </Box>
                         ))
                     }
