@@ -24,6 +24,7 @@ import '../public/icons/assets/sheets/spritesheet_88x76.css';
 import '../public/icons/assets/sheets/spritesheet_43x43.css';
 import '../public/icons/assets/sheets/spritesheet_28x36.css';
 import '../public/icons/assets/sheets/spritesheet_31x43.css';
+import '../public/icons/assets/sheets/spritesheet_34x34.css';
 import Layout from '../components/layout';
 
 const customTheme = deepMerge(dark, {
