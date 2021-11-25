@@ -193,7 +193,7 @@ export default function Layout({
                             <Nav direction="row">
                                 {
                                     navItems.map(({link, label}) => (
-                                        <Link href={link}><NavButton className={router.pathname == link ? 'active' : ''} color="accent-2">{label}</NavButton></Link>
+                                        <Link key={`link_${label}`} href={link}><NavButton className={router.pathname == link ? 'active' : ''} color="accent-2">{label}</NavButton></Link>
                                     ))
                                 }
                             </Nav>
@@ -211,7 +211,7 @@ export default function Layout({
                 <Box width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} direction="row" justify='between' fill="horizontal" align="center" pad="small">
                     <Image alt="Logo" src="/logo.svg" height="21px" width="171px" />
                     <Box direction="row" gap="small" pad="small">
-                        <Image src={"/discord-logo.svg"} height="21px" width="21px"/>
+                        <Image alt="discord_logo" src={"/discord-logo.svg"} height="21px" width="21px"/>
                         <Anchor color="white" target="_blank" href="https://discord.gg/zDb5sbR3">Idleon Efficiency</Anchor>
                     </Box>
                 </Box>

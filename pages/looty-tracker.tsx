@@ -50,7 +50,7 @@ function LootyTracker() {
     return (
         <Box gap="medium">
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Looty Tracker</Heading>
-            <Text size="large">This is fairly accurate, but missing might show items that can't be obtained.</Text>
+            <Text size="large">This is fairly accurate, but missing might show items that can&apos;t be obtained.</Text>
             <Box direction="row" gap="medium">
                 <Text>Already lootyed = {lootyInfo?.obtained.length}</Text>
                 <Text>Missing = {lootyInfo?.missing.length}</Text>
@@ -72,15 +72,15 @@ function LootyTracker() {
                     <Grid columns={{ size: "36px" }} gap="small">
                         {
                         !onlyMissing && !onlyLooted && lootyInfo.obtainable.map(([rawName, displayName], index) => (
-                            <Box width={{max: getWidth(rawName)}} >
-                                <Box title={displayName} key={index} style={{opacity : lootyInfo.isLooted(rawName) ? 1 : 0.5}}  className={getClass(rawName)} />
+                            <Box key={index} width={{max: getWidth(rawName)}} >
+                                <Box title={displayName} style={{opacity : lootyInfo.isLooted(rawName) ? 1 : 0.5}}  className={getClass(rawName)} />
                             </Box>
                             ))
                         }
                         {
                         onlyMissing && lootyInfo.missing.map(([rawName, displayName], index) => (
                             <Box width={{max: getWidth(rawName)}} key={index}>
-                                <Box title={displayName}  className={getClass(rawName)} />
+                                <Box title={displayName} className={getClass(rawName)} />
                             </Box>
                         ))
                     }
