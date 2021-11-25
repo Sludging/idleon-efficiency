@@ -1,12 +1,14 @@
 .icons-2836 {
-            background-image: url(spritesheet_28x36.png);
-            background-repeat: no-repeat;
-            display: inline-block;
-            width: 28px;
-            height: 36px;
-            background-size: cover;
-            background-position: 0 calc(var(--row) * -36px)
-        }
+    background-image: url(spritesheet_28x36.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 128.57142857142858%;
+    height: 0;
+    background-size: cover;
+    background-position: 0 calc(var(--row) * 0.684931506849315%)
+}
+.icons-2836:not(.icons-CardSet0):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
         .icons-CardSet0 { --row: 0; }
 .icons-CardSet1 { --row: 1; }
 .icons-CardSet2 { --row: 2; }

@@ -8,7 +8,9 @@ import {
     Tip,
     Heading,
     ThemeContext,
-    Button
+    Button,
+    ResponsiveContext,
+    Select
 } from 'grommet'
 import { useState, useEffect, useContext, useMemo } from 'react';
 import { AppContext } from '../data/appContext'
@@ -23,7 +25,7 @@ import { Stamp, StampTab, StampConsts } from '../data/domain/stamps';
 import { PlayerStatues, StatueConst } from '../data/domain/statues';
 import { PostOfficeConst } from '../data/domain/postoffice'
 
-import { getCoinsArray, lavaFunc, toTime, notUndefined } from '../data/utility';
+import { getCoinsArray, lavaFunc, toTime, notUndefined, round } from '../data/utility';
 import CoinsDisplay from '../components/coinsDisplay';
 import { css } from 'styled-components'
 import ShadowBox from '../components/base/ShadowBox';
@@ -40,21 +42,21 @@ function nth(n: number) { return `${n}${["st", "nd", "rd"][((n + 90) % 100 - 10)
 function ShowSkills(props: SkillProps) {
     const getSkillClass = (skill: SkillsIndex) => {
         switch (skill) {
-            case SkillsIndex.Mining: return `icons-38 icons-ClassIcons42`;
-            case SkillsIndex.Smithing: return `icons-38 icons-ClassIcons43`;
-            case SkillsIndex.Chopping: return `icons-38 icons-ClassIcons44`;
-            case SkillsIndex.Fishing: return `icons-38 icons-ClassIcons45`;
-            case SkillsIndex.Alchemy: return `icons-38 icons-ClassIcons46`;
-            case SkillsIndex.Catching: return `icons-38 icons-ClassIcons47`;
-            case SkillsIndex.Trapping: return `icons-38 icons-ClassIcons48`;
-            case SkillsIndex.Construction: return `icons-38 icons-ClassIcons49`;
-            case SkillsIndex.Worship: return `icons-38 icons-ClassIcons50`;
+            case SkillsIndex.Mining: return `icons-3836 icons-ClassIcons42`;
+            case SkillsIndex.Smithing: return `icons-3836 icons-ClassIcons43`;
+            case SkillsIndex.Chopping: return `icons-3836 icons-ClassIcons44`;
+            case SkillsIndex.Fishing: return `icons-3836 icons-ClassIcons45`;
+            case SkillsIndex.Alchemy: return `icons-3836 icons-ClassIcons46`;
+            case SkillsIndex.Catching: return `icons-3836 icons-ClassIcons47`;
+            case SkillsIndex.Trapping: return `icons-3836 icons-ClassIcons48`;
+            case SkillsIndex.Construction: return `icons-3836 icons-ClassIcons49`;
+            case SkillsIndex.Worship: return `icons-3836 icons-ClassIcons50`;
             default: return '';
         }
     }
 
     return (
-        <Box pad="medium">
+        <Box pad={{left: "large", top: "medium"}} gap="medium">
             <Text size='medium'>Skills</Text>
             <Grid
                 rows={['1/3', '1/3', '1/3']}
@@ -64,22 +66,22 @@ function ShowSkills(props: SkillProps) {
                     ['smithing', 'alchemy', 'construction'],
                     ['chopping', 'catching', 'worship'],
                 ]}
+                gap={{row: "xsmall"}}
             >
                 {
                     Array.from(props.skillsMap).map(([skillIndex, skillLevel]) => {
                         const skillRank = props.skillsRank.get(skillIndex);
                         return (
-                            <Box key={`skill_${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} gridArea={`${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`}>
-                                <Stack anchor="bottom-left" alignSelf="center" >
+                            <Box key={`skill_${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} gridArea={`${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} direction="row" gap="medium">
+                                <Box fill align="center" width={{max: '36px'}}>
                                     <Box className={getSkillClass(skillIndex)} />
-                                    <Box pad={{ horizontal: 'large' }}>
-                                        <Text size="medium">{skillLevel}</Text>
-                                    </Box>
-                                    <Box pad={{ horizontal: 'xlarge' }}>
-                                        {skillRank != undefined && <Text>{nth(skillRank + 1)}</Text>}
-                                    </Box>
-                                </Stack>
-
+                                </Box>
+                                <Box>
+                                    <Text size="medium">{skillLevel}</Text>
+                                </Box>
+                                <Box>
+                                    {skillRank != undefined && <Text>{nth(skillRank + 1)}</Text>}
+                                </Box>
                             </Box>)
                     })
                 }
@@ -90,6 +92,7 @@ function ShowSkills(props: SkillProps) {
 
 function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: Bubble[] }) {
     const idleonData = useContext(AppContext);
+    const size = useContext(ResponsiveContext)
 
     const playerCoins = useMemo(() => getCoinsArray(player.money), [player]);
     const maxCharge = useMemo(() => {
@@ -128,7 +131,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
     return (
         <Box pad="medium">
             <Text size='medium'>Random Stats</Text>
-            <Grid columns="1/2" fill>
+            <Grid columns={ size == "small" ? '100%' : ['50%','50%']} fill>
                 <Box pad="medium" gap="small">
                     <Text size="small">Class / Level = {player.class} / {player.level}</Text>
                     <Text size="small">Current Monster / Map = {player.currentMonster} / {player.currentMap}</Text>
@@ -141,6 +144,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     <Text size="small">STR = {player.stats.strength}</Text>
                     <Text size="small">AGI = {player.stats.agility}</Text>
                     <Text size="small">WIS = {player.stats.wisdom}</Text>
+                    <Text size="small">LUK = {player.stats.luck}</Text>
                     <Text size="small">Charge Rate = {Math.round(chargeRate * 24)}% / day</Text>
                     <Text size="small">Estimated Charge = {Math.round(player.worship.getEstimatedCharge(chargeRate, maxCharge, player.afkFor))}/{maxCharge}%</Text>
                     <Box direction="row" gap="small">
@@ -153,13 +157,14 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                             activeBubbles.map((bubble, bubbleIndex) => {
                                 return (
                                     <Box direction="row" align="center" key={bubbleIndex} fill gap="medium">
-                                        <Stack anchor="bottom-right" alignSelf="center">
-                                            <Box className={bubble.class_name} />
+                                            <Text size="medium">{bubble.name}</Text>
+                                            <Box align="center" width={{max: '50px'}} fill>
+                                                <Box className={bubble.class_name} />
+                                            </Box>
                                             <Box >
                                                 <Text size="medium">{bubble.level}</Text>
                                             </Box>
-                                        </Stack>
-                                        <Text size="medium">{bubble.name}</Text>
+                                            
                                     </Box>
                                 )
                             })
@@ -168,13 +173,17 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                 </Box>
                 <Box pad="medium" gap="medium" fill>
                     <Text>Equipped Cards:</Text>
-                    <Grid columns="1/4" gap="small" width={"200px"}>
+                    <Grid columns={["25%", "25%", "25%", "25%"]} width={{max: '200px'}} gap={{row: "small"}}>
                         {
                             player.cardInfo ? player.cardInfo.equippedCards.map((card, index) => {
                                 return (
                                     <Stack key={index}>
-                                        <Box className={card.getClass()} />
-                                        <Box title={card.getBonusText()} key={`border_${index}`} className={card.getBorderClass()} />
+                                        <Box align="center" fill width={{min: '28px', max: '28px'}} height={{min: '36px', max: '36px'}}>
+                                            <Box height={{min: '36px', max: '36px'}} className={card.getClass()} />
+                                        </Box>
+                                        <Box align="center" width={{max: '31px', min: '31px'}} height={{min: '43px', max: '43px'}}>
+                                            <Box height={{min: '43px', max: '43px'}} title={card.getBonusText()} key={`border_${index}`} className={card.getBorderClass()} />
+                                        </Box>
                                     </Stack>
                                 )
                             }) : <Text>No cards equipped</Text>
@@ -185,7 +194,9 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     <Box direction="row">
                         {player.activeBuffs.map((buff, index) =>
                         (
-                            <Box key={index} title={buff.getBonusText()} className={buff.getClass()} />
+                            <Box key={index} width="50px" align="center">
+                                <Box title={buff.getBonusText()} className={buff.getClass()} />
+                            </Box>
                         )
                         )}
                     </Box>
@@ -200,14 +211,17 @@ function EquipmentDisplay({ player }: { player: Player }) {
     return (
         <Box pad="medium">
             <Text size='medium'>Equipment</Text>
-            <Box direction="row-responsive">
+            <Box direction="row" gap="small">
                 <Box direction="column" key={`player_${player.playerID}_equip`}>
                     {
                         [...Array(8)].map((_, equipIndex) => {
                             if (player.gear.equipment[equipIndex].display_name == "Blank") {
                                 return (<Box key={`blank_${equipIndex}`} width="50px" height="50px" />);
                             }
-                            return (<Box key={`player_${player.playerID}_equip_${equipIndex}`} title={player.gear.equipment[equipIndex].display_name || ""} className={`icons icons-${player.gear.equipment[equipIndex].raw_name}_x1`} />)
+                            return (
+                                <Box key={`player_${player.playerID}_equip_${equipIndex}`} width={{max: '50px', min: '50px'}} align="center">
+                                    <Box title={player.gear.equipment[equipIndex].display_name || ""} className={`icons-3636 icons-${player.gear.equipment[equipIndex].raw_name}_x1`} />
+                                </Box>)
                         })
                     }
                 </Box>
@@ -217,7 +231,10 @@ function EquipmentDisplay({ player }: { player: Player }) {
                             if (player.gear.tools[toolsIndex].display_name == "Blank") {
                                 return (<Box key={`player_${player.playerID}_equip_${toolsIndex}`} width="50px" height="50px" />);
                             }
-                            return (<Box key={`player_${player.playerID}_equip_${toolsIndex}`} title={player.gear.tools[toolsIndex].display_name || ""} className={`icons icons-${player.gear.tools[toolsIndex].raw_name}_x1`} />)
+                            return (
+                                <Box key={`player_${player.playerID}_equip_${toolsIndex}`}  width={{max: '50px', min: '50px'}} align="center">
+                            <Box title={player.gear.tools[toolsIndex].display_name || ""} className={`icons-3636 icons-${player.gear.tools[toolsIndex].raw_name}_x1`} />
+                            </Box>)
                         })
                     }
                 </Box>
@@ -227,7 +244,9 @@ function EquipmentDisplay({ player }: { player: Player }) {
                             if (player.gear.food[foodIndex].display_name == "Blank") {
                                 return (<Box key={`player_${player.playerID}_equip_${foodIndex}`} width="50px" height="50px" />);
                             }
-                            return (<Box key={`player_${player.playerID}_equip_${foodIndex}`} title={player.gear.food[foodIndex].display_name || ""} className={`icons icons-${player.gear.food[foodIndex].raw_name}_x1`} />)
+                            return (<Box key={`player_${player.playerID}_equip_${foodIndex}`} width={{max: '50px', min: '50px'}} align="center">
+                                <Box title={player.gear.food[foodIndex].display_name || ""} className={`icons-3636 icons-${player.gear.food[foodIndex].raw_name}_x1`} />
+                                </Box>)
                         })
                     }
                 </Box>
@@ -244,10 +263,12 @@ function StatuesDisplay({ playerStatues }: { playerStatues: PlayerStatues | unde
                 playerStatues ? playerStatues.statues.map((statue, index) => {
                     return (
                         <Box key={`statue_${index}`} direction="row" gap="medium">
-                            <Box className={statue.getClassName()} title={statue.displayName} />
+                            <Box width={{max: '41px', min: '41px'}} height={{max: '50px', min: '50px'}}>
+                                <Box width={{max: '41px', min: '41px'}} height={{max: '50px', min: '50px'}} className={statue.getClassName()} title={statue.displayName} />
+                            </Box>
                             <Text alignSelf="center">Level: {statue.level}</Text>
                             <Text alignSelf="center">/</Text>
-                            <Text alignSelf="center">Bonus: {statue.getBonus()} {statue.bonus}</Text>
+                            <Text alignSelf="center">Bonus: {round(statue.getBonus())} {statue.bonus}</Text>
                         </Box>
                     )
                 }) : <></>
@@ -352,7 +373,7 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
                 <Text size="small">Points from mats: {player.anvil.pointsFromMats}</Text>
                 <Text size="small">Points spend into XP: {player.anvil.xpPoints}</Text>
                 <Text size="small">Points spend into Speed: {player.anvil.speedPoints}</Text>
-                <Text size="small">Anvil Speed Guess: {Math.round(anvilSpeed)}</Text>
+                <Text size="small">Anvil Speed Guess: {round(anvilSpeed)}</Text>
                 <Text size="small">Capacity: {anvilCapcity} ({player.anvil.capPoints})</Text>
                 {player.anvil.currentlySelect.indexOf(-1) > -1 && <Text>UNUSED PRODUCTION</Text>}
             </Box>
@@ -364,7 +385,9 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
                         const timeTillCap = ((anvilCapcity - futureProduction) / (anvilSpeed / 3600 / anvilItem.time * (anvilItem.hammers ?? 0)));
                         return (
                             <Box key={`player_${player.playerID}_anvil_${index}`} direction="column" align="center">
-                                <Box className={`icons icons-${anvilItem.internalName}_x1`} />
+                                <Box width={{min: '50px', max: '50px'}}>
+                                    <Box className={`icons-3636 icons-${anvilItem.internalName}_x1`} />
+                                </Box>
                                 <Text size="small">Number of Hammers = {anvilItem.hammers}</Text>
                                 <Text size="small">Current amount = {anvilItem.currentAmount}</Text>
                                 <Text size="small">Future Amount Guess = {futureProduction} / {anvilCapcity} ( {percentOfCap}% of cap) {percentOfCap > 80 ? "| GO CLAIM!" : ""}</Text>
@@ -472,6 +495,7 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
 }
 
 function TalentDisplay({ player }: { player: Player }) {
+    const size = useContext(ResponsiveContext);
     return (
         <Box pad="medium" gap="medium">
             <Text size='medium'>Talents</Text>
@@ -480,31 +504,34 @@ function TalentDisplay({ player }: { player: Player }) {
                     return (
                         <Box key={`player_${player.playerID}_talents_${talentPage}`} align="center" gap="medium">
                             <Text>{talentPage}</Text>
-                            <Grid columns={{
-                                count: 5,
-                                size: 'auto',
-                            }} fill>
+                            <Grid columns={{count: 'fit', size: size == "small" ? '50%' : "20%"}} fill>
                                 {
                                     GetTalentArray(talentPage).map((originalTalent, index) => {
                                         const talent = player.talents.find(x => x.skillIndex == originalTalent.skillIndex);
                                         if (talent) {
                                             return (
-                                                <Box pad="xxsmall" key={`player_${player.playerID}_talents_${index}`} direction="row">
                                                     <Tip
                                                         plain
                                                         content={
                                                             <Box pad="small" gap="small" background="white" style={{ display: talent.level > 0 ? 'normal' : 'none' }}>
-                                                                <Text weight="bold">{talent.name}</Text>
-                                                                <Text>--------------------------</Text>
+                                                                <Text size={size == "small" ? 'small' : ''} weight="bold">{talent.name} ({talent.level}/{talent.maxLevel})</Text>
+                                                                <hr style={{ width: "100%"}} />
                                                                 <Text>{talent.getBonusText()}</Text>
                                                             </Box>
                                                         }
                                                         dropProps={{ align: { top: 'bottom' } }}
-                                                    >
-                                                        <Box style={{ opacity: talent.maxLevel > 0 ? 1 : 0.2 }} className={talent.getClass()} title={talent.name} />
+                                                    >  
+                                                    <Box pad="xxsmall" key={`player_${player.playerID}_talents_${index}`} direction="row" gap="xxsmall">
+                                                        <Box width="50px" align="center">
+                                                            <Box style={{ opacity: talent.level > 0 ? 1 : 0.2 }} className={talent.getClass()} title={talent.name} />
+                                                        </Box>
+                                                        <Box direction="row" gap="xxsmall">
+                                                            <Text>{talent.level} </Text>
+                                                            <Text>/</Text>
+                                                            <Text>{talent.maxLevel}</Text> 
+                                                        </Box>
+                                                    </Box>
                                                     </Tip>
-                                                    <Text>{talent.level} / {talent.maxLevel}</Text>
-                                                </Box>
                                             )
                                         }
                                         return <></>
@@ -520,21 +547,21 @@ function TalentDisplay({ player }: { player: Player }) {
 }
 
 function PostOfficeDisplay({ player }: { player: Player }) {
+    const size = useContext(ResponsiveContext);
     return (
-        <Box pad="small" gap="small">
+        <Box pad="medium" gap="small" fill>
             <Text size='medium'>Post Office</Text>
-            <Grid columns="1/4">
+            <Grid columns={{ count: size == "small" ? 2 : 4, size: "auto"}} gap="none">
                 {
                     player.postOffice.map((box, index) => {
                         return (
                             <Box key={`player_${player.playerID}_postoffice_${index}`} fill>
-                                <Stack anchor="bottom-right" alignSelf="center" key={`player_${player.playerID}_postoffice_${index}`}>
                                     <Tip
                                         plain
                                         content={
                                             <Box pad="small" gap="small" background="white" style={{ display: box.level > 0 ? 'normal' : 'none' }}>
-                                                <Text weight="bold">{box.name}</Text>
-                                                <Text>--------------------------</Text>
+                                                <Text size={size == "small" ? 'small' : ''} weight="bold">{box.name} ({box.level})</Text>
+                                                <hr style={{ width: "100%"}} />
                                                 {
                                                     box.bonuses.map((bonus, bIndex) => {
                                                         return (
@@ -550,14 +577,16 @@ function PostOfficeDisplay({ player }: { player: Player }) {
                                         dropProps={{ align: { top: 'bottom' } }}
                                     >
                                         {/* Do the opacity thing in styled components? */}
-                                        <Box>
-                                            <Box style={{ opacity: box.level > 0 ? 1 : 0.3 }} className={`icons-88 icons-UIboxUpg${index}`} />
-                                        </Box>
-                                    </Tip>
-                                    <Box background="black">
+                                        <Box align="center" fill direction="row" gap="small">
+                                            <Box width={{max: '88px' }} fill>
+                                                <Box style={{ opacity: box.level > 0 ? 1 : 0.3 }} className={`icons-8876 icons-UIboxUpg${index}`} />
+                                            </Box>
+                                            <Box background="black">
                                         <Text>{box.level}</Text>
                                     </Box>
-                                </Stack>
+                                        </Box>
+                                        
+                                    </Tip>
                             </Box>
                         )
                     })
@@ -576,7 +605,7 @@ function SpecialButton({ isActive, text, clickHandler }: { isActive: boolean, te
     return (
         <Button fill="horizontal" plain active={isActive} onClick={clickHandler} gap="medium">
             <Box background={isActive ? 'accent-4' : 'dark-2'} pad={{ left: 'medium', right: 'small', top: 'xsmall', bottom: 'xsmall' }} direction="row" justify="between" align="center" gap="small" height="40px">
-                <Text color='accent-2' size="14px" weight={isActive ? 'bold' : 'normal'}>{text}</Text>
+                <Text color='accent-2' size="small" weight={isActive ? 'bold' : 'normal'}>{text}</Text>
                 {isActive && <Next size="small" />}
             </Box>
         </Button>
@@ -610,7 +639,7 @@ function PlayerTab({ player }: PlayerTabProps) {
 
     return (
         <ShadowBox flex={false}>
-            <Grid rows="1" columns={['1/4', '3/4']}>
+            <Grid rows="1" columns={['25%', '75%']}>
                 <Box pad="medium" height="100%" >
                     <SpecialButton isActive={index == 1} clickHandler={() => onActive(1)} text={"Random Stats"} />
                     <SpecialButton isActive={index == 2} clickHandler={() => onActive(2)} text={"Skills"} />
@@ -684,9 +713,10 @@ const CustomTabTitle = ({ label, isActive }: { label: string, isActive: boolean 
 );
 
 function Players() {
-    const [playerData, setPlayerData] = useState<Array<Player>>();
+    const [playerData, setPlayerData] = useState<Player[]>();
     const [index, setIndex] = useState<number>(0);
-
+    const [activePlayer, setActivePlayer] = useState<string>('');
+    const size = useContext(ResponsiveContext);
     const idleonData = useContext(AppContext);
 
     const onActive = (nextIndex: number) => setIndex(nextIndex);
@@ -695,11 +725,40 @@ function Players() {
         if (idleonData) {
             const theData = idleonData.getData();
             setPlayerData(theData.get("players"));
+            if (playerData && activePlayer === '') {
+                const firstPlayer = playerData[0];
+                setActivePlayer(firstPlayer.playerID.toString() ?? '');
+            }
         }
-    }, [idleonData]);
+    }, [idleonData, activePlayer, playerData]);
     return (
         <Box>
             <ThemeContext.Extend value={customTabs}>
+                { size == "small" ? 
+                <Box>
+                    <Select
+                        labelKey="label"
+                        valueKey={{ key: 'value', reduce: true }}
+                        value={activePlayer}
+                        options={playerData?.map((player) => { return { label: player.playerName, value: player.playerID }}) ?? ["Loading Players"]}
+                        onChange={({ value: nextValue }) => setActivePlayer(nextValue)}
+                    />
+                    <Box pad={{ right: 'large', left: 'large' }} width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} fill>
+                        <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Players</Heading>
+                        <Box pad="small">
+                            {
+                                playerData?.filter(player => player.playerID.toString() == activePlayer).map((player, playerIndex) => {
+                                    return (
+                                    <Box key={player.playerID} pad="small">
+                                            <PlayerTab player={player} />
+                                        </Box>
+                                    )
+                                })
+                            }
+                        </Box>
+                    </Box>
+                </Box>
+                :
                 <Tabs activeIndex={index} onActive={onActive}>
                     {
                         playerData?.map((player, playerIndex) => {
@@ -716,6 +775,7 @@ function Players() {
                         }) ?? <></>
                     }
                 </Tabs>
+                }
             </ThemeContext.Extend>
         </Box>
     )

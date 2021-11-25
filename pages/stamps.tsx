@@ -4,7 +4,8 @@ import {
     Stack,
     Text,
     Heading,
-    Tip
+    Tip,
+    ResponsiveContext
 } from "grommet"
 
 import { Stamp } from '../data/domain/stamps';
@@ -21,13 +22,14 @@ const ShadowBox = styled(Box)`
 `
 
 function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stamp, index: number, blueFlavPercent: number, hasBribe: boolean }) {
+    const size = useContext(ResponsiveContext)
     const getCardClass = () => {
         let className = `icons-${stamp.raw_name}_x1`;
         if (stamp.raw_name == "StampC5")
             className = `icons-${stamp.raw_name}`; // StampC5 isn't properly sized for some reason.
         if (stamp.raw_name == "StampA35")
             className = "icons-StampA34_x1"; // StampA35 doesn't have an image for some reason.
-        return `icons ${className}`;
+        return `icons-3636 ${className}`;
     }
 
     function TipContent({ stamp, faceLeft }: { stamp: Stamp, faceLeft: boolean }) {
@@ -35,8 +37,8 @@ function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stam
             return <></>
         }
         return (
-            <Box direction="row" align="center">
-                {!faceLeft &&
+            <Box direction="row" align="center" overflow="hidden">
+                {!faceLeft && size != "small" &&
                     <svg viewBox="0 0 22 22" version="1.1" width="22px" height="22px">
                         <polygon
                             fill="white"
@@ -44,15 +46,15 @@ function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stam
                             transform="matrix(-1 0 0 1 30 0)"
                         />
                     </svg>
-                }
+            }
                 <Box pad="small" gap="small" background="white">
-                    <Text weight="bold">{stamp.name}</Text>
-                    <Text>--------------------------</Text>
+                    <Text size={size == "small" ? 'small' : ''} weight="bold">{stamp.name} ({stamp.level})</Text>
+                    <hr style={{ width: "100%"}} />
                     <Text size="small">Bonus: {stamp.getBonusText()}</Text>
                     {!stamp.isMaxLevel() && <Box direction="row" gap="small"><Text size="small">Cost: </Text><CoinsDisplay coinMap={getCoinsArray(stamp.getGoldCost(hasBribe, blueFlavPercent))} /></Box>}
-                    {stamp.isMaxLevel() && <Box direction="row" align="center"><Text size="small">Material Cost: {nFormatter(Math.round(stamp.getMaterialCost(blueFlavPercent)), 1)}</Text><Box style={{ width: "36px", height: "36px", backgroundPosition: "0 calc(var(--row) * -36px)" }} className={`icons icons-${stamp.data.material}_x1`} /></Box>}
+                    {stamp.isMaxLevel() && <Box direction="row" align="center"><Text size="small">Material Cost: {nFormatter(Math.round(stamp.getMaterialCost(blueFlavPercent)), 1)}</Text><Box align="center" width={{max: '36px'}} fill><Box className={`icons-3636 icons-${stamp.data.material}_x1`} /></Box></Box>}
                 </Box>
-                {faceLeft &&
+                {faceLeft && size != "small" &&
                     <svg viewBox="0 0 22 22" version="1.1" width="22px" height="22px">
                         <polygon
                             fill="white"
@@ -66,21 +68,23 @@ function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stam
 
     return (
         <Box key={`stamp_${index}_${stamp.raw_name}`}>
-            <Stack anchor="bottom-left" alignSelf="center">
                 <Tip
                     plain
                     content={
                         <TipContent stamp={stamp} faceLeft={stamp.type == "Misc Stamp"} />
                     }
-                    dropProps={{ align: stamp.type == "Misc Stamp" ? { right: 'left' } : { left: 'right' } }}
+                    dropProps={{ align: size == "small" ? { top: 'bottom' } : stamp.type == "Misc Stamp" ? { right: 'left' } : { left: 'right' } }}
                 >
                     {/* Do the opacity thing in styled components? */}
-                    <Box style={{ opacity: stamp.level > 0 ? 1 : 0.2 }} className={getCardClass()} />
+                    <Box direction="row" fill align="center">
+                        <Box align="center" width={{max: '50px'}} fill>
+                            <Box style={{ opacity: stamp.level > 0 ? 1 : 0.2 }} className={getCardClass()}/>
+                        </Box>
+                        <Box>
+                            <Text size="medium">{stamp.level}</Text>
+                        </Box>
+                    </Box>
                 </Tip>
-                <Box pad={{ horizontal: 'large' }}>
-                    <Text size="medium">{stamp.level}</Text>
-                </Box>
-            </Stack>
         </Box>
     )
 }
@@ -90,7 +94,7 @@ function StampTab({ tab, index, blueFlavPercent, hasBribe }: { tab: Stamp[], ind
         <Box>
             <h3>{tab[0].type}</h3>
             <Box fill>
-                <Grid columns="1/4" gap="none">
+                <Grid columns={{ count: 4, size: "auto"}} gap="none">
                     {
                         tab.map((stamp: Stamp) => {
                             if (stamp != undefined) {
@@ -138,7 +142,7 @@ function Stamps() {
         <Box>
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Stamps</Heading>
             <ShadowBox flex={false} background="dark-1" pad="small">
-                <Grid columns="1/3" gap="medium">
+                <Grid columns={{ size: '300px'}} gap="medium">
                     {
                         stampData && stampData.map((tab, index) => {
                             return (<StampTab key={`tab_${index}`} tab={tab} index={index} blueFlavPercent={blueFlavPercent} hasBribe={hasBribe == BribeStatus.Purchased} />)
