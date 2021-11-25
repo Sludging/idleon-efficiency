@@ -1,12 +1,14 @@
-.icons-70 {
-            background-image: url(spritesheet_70x70.png);
-            background-repeat: no-repeat;
-            display: inline-block;
-            width: 70px;
-            height: 70px;
-            background-size: cover;
-            background-position: 0 calc(var(--row) * -70px)
-        }
+.icons-7070 {
+    background-image: url(spritesheet_70x70.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 100.0%;
+    height: 0;
+    background-size: cover;
+    background-position: 0 calc(var(--row) * 1.3513513513513513%)
+}
+.icons-7070:not(.icons-aUpgradesG0):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
         .icons-aUpgradesG0 { --row: 0; }
 .icons-aUpgradesG1 { --row: 1; }
 .icons-aUpgradesG10 { --row: 2; }

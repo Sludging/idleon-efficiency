@@ -6,7 +6,8 @@ import {
     Tabs,
     Tab,
     Tip,
-    Heading
+    Heading,
+    ResponsiveContext
 } from "grommet"
 
 import { useEffect, useState, useContext } from 'react';
@@ -18,6 +19,7 @@ function Achievements() {
     const [achievementData, setAchievementData] = useState<Achievement[]>();
     const idleonData = useContext(AppContext);
     const [index, setIndex] = useState<number>(0);
+    const size = useContext(ResponsiveContext)
 
     const onActive = (nextIndex: number) => setIndex(nextIndex);
     const LetterToWorldNumber = (letter: string) => {
@@ -54,8 +56,8 @@ function Achievements() {
                                                     plain
                                                     content={
                                                         <Box pad="small" gap="small" background="white" width={{ max: 'medium' }}>
-                                                            <Text weight="bold">{achievement.name}</Text>
-                                                            <Text>--------------------------</Text>
+                                                            <Text size={size == "small" ? 'small' : ''} weight="bold">{achievement.name}</Text>
+                                                            <hr style={{ width: "100%"}} />
                                                             {!achievement.completed && achievement.quantity > 1 && <Text>Progress: {achievement.currentCount}/{achievement.quantity}</Text>}
                                                             <Text>Requirement: {achievement.desc}</Text>
                                                             <Text>Reward: {achievement.reward}</Text>
@@ -63,9 +65,11 @@ function Achievements() {
                                                     }
                                                     dropProps={{ align: { top: 'bottom' } }}
                                                 >
-                                                    <Stack>
-                                                        <Box style={{ opacity: achievement.completed ? 1 : 0.3 }} className={achievement.iconClass} />
-                                                        {!achievement.completed && achievement.quantity > 1 && <Text>{achievement.currentCount}/{achievement.quantity}</Text>}
+                                                    <Stack fill>
+                                                        <Box width={{max: '43px'}}>
+                                                            <Box style={{ opacity: achievement.completed ? 1 : 0.3 }} className={achievement.iconClass} />
+                                                        </Box>
+                                                        {!achievement.completed && achievement.quantity > 1 && size != "small" && <Text>{achievement.currentCount}/{achievement.quantity}</Text>}
                                                     </Stack>
                                                 </Tip>
 

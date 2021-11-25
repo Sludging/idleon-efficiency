@@ -80,7 +80,7 @@ export class Bubble {
     class_name: string;
 
     constructor(name: string, icon_prefix: string, bubble_number: string, x1: number, x2: number, func: string, description: string, requirements: Array<Item>) {
-        this.class_name = `icons-70 icons-aUpgrades${icon_prefix}${bubble_number}`;
+        this.class_name = `icons-7070 icons-aUpgrades${icon_prefix}${bubble_number}`;
         this.name = name.replace(/_/g, " ");
         this.x1 = x1;
         this.x2 = x2;

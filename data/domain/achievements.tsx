@@ -465,7 +465,7 @@ export default function parseAchievements(achiData: number[]) {
         achievement.arrayIndex = index + 1;
         achievement.visualIndex = achievOrdering[reminder].indexOf(index - (70 * reminder));
         achievement.worldLetter = letter;
-        achievement.iconClass = `icons-43 icons-TaskAch${achievement.worldLetter}${achievement.arrayIndex - (70 * reminder)}`
+        achievement.iconClass = `icons-4343 icons-TaskAch${achievement.worldLetter}${achievement.arrayIndex - (70 * reminder)}`
         if (!achievement.completed) {
             achievement.currentCount = achiData[index];
         }
