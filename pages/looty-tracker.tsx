@@ -8,6 +8,7 @@ import {
 import { useState, useEffect, useContext } from 'react';
 import { AppContext } from '../data/appContext'
 import { LootyInfo } from '../data/domain/lootyTracker';
+import { NextSeo } from 'next-seo';
 
 const getRegex = () => { return /Cards(\w)(\d+)/g };
 const getEnhancerRegex = () => { return /DungEnhancer(\d+)/g };
@@ -49,6 +50,7 @@ function LootyTracker() {
     }, [idleonData]);
     return (
         <Box gap="medium">
+            <NextSeo title="Looty Tracker" />
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Looty Tracker</Heading>
             <Text size="large">This is fairly accurate, but missing might show items that can&apos;t be obtained.</Text>
             <Box direction="row" gap="medium">
