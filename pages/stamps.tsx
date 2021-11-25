@@ -16,6 +16,7 @@ import CoinsDisplay from "../components/coinsDisplay";
 import { Alchemy, AlchemyConst } from "../data/domain/alchemy";
 import { Bribe, BribeConst, BribeStatus } from "../data/domain/bribes";
 import styled from 'styled-components'
+import { NextSeo } from 'next-seo';
 
 const ShadowBox = styled(Box)`
     box-shadow: -7px 8px 16px 0 rgba(0,0,0,0.17)
@@ -140,6 +141,7 @@ function Stamps() {
     }
     return (
         <Box>
+            <NextSeo title="Stamps" />
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Stamps</Heading>
             <ShadowBox flex={false} background="dark-1" pad="small">
                 <Grid columns={{ size: '300px'}} gap="medium">

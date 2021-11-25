@@ -27,6 +27,9 @@ import '../public/icons/assets/sheets/spritesheet_31x43.css';
 import '../public/icons/assets/sheets/spritesheet_34x34.css';
 import Layout from '../components/layout';
 
+import { DefaultSeo } from 'next-seo';
+import SEO from '../next-seo.config';
+
 const customTheme = deepMerge(dark, {
   global: {
     font: {
@@ -120,6 +123,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <AuthProvider>
           <AppProvider>
             <Layout>
+            <DefaultSeo {...SEO} />
               <Component {...pageProps} />
             </Layout>
           </AppProvider>

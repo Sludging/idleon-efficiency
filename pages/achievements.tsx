@@ -14,6 +14,7 @@ import { useEffect, useState, useContext } from 'react';
 import ShadowBox from "../components/base/ShadowBox";
 import { AppContext } from '../data/appContext';
 import { Achievement } from '../data/domain/achievements';
+import { NextSeo } from 'next-seo';
 
 function Achievements() {
     const [achievementData, setAchievementData] = useState<Achievement[]>();
@@ -39,6 +40,7 @@ function Achievements() {
     }, [idleonData])
     return (
         <Box>
+            <NextSeo title="Achievements" />
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Achievements</Heading>
             <ShadowBox background="dark-1" pad="medium">
                 <Tabs activeIndex={index} onActive={onActive}>

@@ -16,6 +16,7 @@ import { AchievementConst } from '../data/domain/achievements'
 import { useEffect, useState, useContext } from 'react';
 import { AppContext } from '../data/appContext'
 import { nFormatter } from '../data/utility'
+import { NextSeo } from 'next-seo';
 
 const CapitalizedH3 = styled.h3`
     text-transform: capitalize
@@ -198,6 +199,8 @@ function Alchemy() {
     }
 
     return (
+        <>
+            <NextSeo title="Alchemy" />
         <Box gap="large" fill>
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Alchemy</Heading>
             <Box gap="large" align="center" direction="row">
@@ -227,6 +230,7 @@ function Alchemy() {
                 </Grid>
             </ShadowBox>
         </Box>
+        </>
     )
 }
 
