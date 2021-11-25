@@ -6,7 +6,8 @@ import {
     TextInput,
     Button,
     Layer,
-    Image
+    Image,
+    ResponsiveContext
 } from 'grommet'
 import { useEffect, useContext, useState } from 'react';
 import { AuthContext } from '../data/firebase/authContext'
@@ -30,6 +31,8 @@ export default function Welcome() {
     const [value, setValue] = useState('');
     const [showLayer, setShowLayer] = useState(false);
     const [index, setIndex] = useState<number>(1);
+
+    const size = useContext(ResponsiveContext);
 
     const onActive = (nextIndex: number) => setIndex(nextIndex);
     const onButtonClick = (toCall: Function | undefined, value?: string) => {
@@ -60,8 +63,8 @@ export default function Welcome() {
                 <Box margin={{ left: 'auto', right: 'auto' }}>
                     <Grid columns="1/2" fill pad="xlarge">
                         <Box pad="small" gap="small">
-                            <Text size="52px">Welcome to Idleon Efficiency</Text>
-                            <Text size="27px">Aimed to provide players of the game Legends of Idleon with tools to become more efficient</Text>
+                            <Text size={ size == "small" ? "32px" : "52px"}>Welcome to Idleon Efficiency</Text>
+                            <Text size={ size == "small" ? "18px" : "27px"}>Aimed to provide players of the game Legends of Idleon with tools to become more efficient</Text>
                         </Box>
                         <Box></Box>
                     </Grid>
@@ -69,7 +72,12 @@ export default function Welcome() {
                 <Box width={{ max: '1440px' }} pad="large" fill margin={{ left: 'auto', right: 'auto' }} style={{ position: 'relative', top: '150px' }} >
                     {!authData?.isLoading && !authData?.user &&
                         <ShadowBox pad="large" background="dark-2" fill margin={{ left: 'auto', right: 'auto' }}>
-
+                            { size == "small" ? 
+                                <Box gap="medium" pad="small">
+                                    <Text size="large">This website is not designed for mobile.</Text>
+                                    <Text size="medium">Go check it out on desktop!</Text>
+                                </Box>
+                            : 
                             <Grid columns="1/2" fill pad={{ left: "large" }}>
                                 <Box gap="medium">
                                     <Text size="32px">Sign in to Idleon Efficiency</Text>
@@ -85,6 +93,7 @@ export default function Welcome() {
                                     <Button gap="large" primary color="brand" label="Login" onClick={() => onButtonClick(authData?.tokenFunction, value)} />
                                 </Box>
                             </Grid>
+                            }
                         </ShadowBox>
                     }
                 </Box>
@@ -141,7 +150,7 @@ export default function Welcome() {
                     </Layer>
                 }
                 <Box width={{ max: '1440px' }} align="center" pad="small" fill margin={{ left: 'auto', right: 'auto' }}>
-                    <Text size="38px">Awesome Features</Text>
+                    <Text size={ size == "small" ? "26px" : "38px"}>Awesome Features</Text>
                 </Box>
                 <Box width={{ max: '1440px' }} align="center" pad="small" fill margin={{ left: 'auto', right: 'auto' }}>
                     <Grid columns={["2/3", "1/3"]} fill>
@@ -150,16 +159,16 @@ export default function Welcome() {
                         </Box>
                         <Box direction="row" gap="medium" pad="large" align="center">
                             <Box gap="small">
-                                <Text size="xlarge">Easily see your stamps</Text>
-                                <Text size="small">Keep tracks of your stamps and know exactly how much the next level will cost.</Text>
+                                <Text size={ size == "small" ? "medium" : "xlarge"}>Easily see your stamps</Text>
+                                <Text size={ size == "small" ? "xsmall" : "small"}>Keep tracks of your stamps and know exactly how much the next level will cost.</Text>
                             </Box>
                         </Box>
                     </Grid>
                     <Grid columns={["1/3", "2/3"]} fill>
                         <Box direction="row" gap="medium" pad="large" align="center">
                             <Box gap="small">
-                                <Text size="xlarge">All your players - in one spot.</Text>
-                                <Text size="small">See equipment, cards, anvil information and much more!</Text>
+                                <Text size={ size == "small" ? "medium" : "xlarge"}>All your players - in one spot.</Text>
+                                <Text size={ size == "small" ? "xsmall" : "small"}>See equipment, cards, anvil information and much more!</Text>
                             </Box>
                         </Box>
                         <Box>
@@ -172,8 +181,8 @@ export default function Welcome() {
                         </Box>
                         <Box direction="row" gap="medium" pad="large" align="center">
                             <Box gap="small">
-                                <Text size="xlarge">Achievement Tracker</Text>
-                                <Text size="small">Easily track your achievements, and see progress on ones you&apos;ve yet to complete.</Text>
+                                <Text size={ size == "small" ? "medium" : "xlarge"}>Achievement Tracker</Text>
+                                <Text size={ size == "small" ? "xsmall" : "small"}>Easily track your achievements, and see progress on ones you&apos;ve yet to complete.</Text>
                             </Box>
                         </Box>
                     </Grid>

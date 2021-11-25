@@ -23,22 +23,26 @@ function LootyTracker() {
             return `icons-3434 icons-${rawName}_x1`;
         }
         if (rawName == "StampC5") {
-            return `icons icons-${rawName}`;
+            return `icons-3636 icons-${rawName}`;
         }
         if (getRegex().exec(rawName)) {
             return `icons-2836 icons-${rawName}`;
         }
-        return `icons icons-${rawName}_x1`;
+        return `icons-3636 icons-${rawName}_x1`;
     }
 
-    const getStyle = (rawName: string, opacity: number = 1) => {
-        if (getRegex().exec(rawName)) {
-            return { opacity: opacity };
+    const getWidth = (rawName: string) => {
+        if (getEnhancerRegex().exec(rawName)) {
+            return `34px`;
         }
-
-        return { width: "36px", height: "36px", backgroundPosition: "0 calc(var(--row) * -36px)", opacity: opacity }
+        if (rawName == "StampC5") {
+            return `36px`;
+        }
+        if (getRegex().exec(rawName)) {
+            return `28px`;
+        }
+        return `36px`;
     }
-
     useEffect(() => {
         setlootyInfo(idleonData.getData().get("lootyData") as LootyInfo);
 
@@ -46,10 +50,8 @@ function LootyTracker() {
     return (
         <Box gap="medium">
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Looty Tracker</Heading>
-            <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>THIS IS VERY INACCURATE AT THE MOMENT - Actively worked on to make it better!</Heading>
-            <Text size="large">If you see an item that on hover says &apos;FILLER&apos; or a red &apos;MISSING ICON&apos;, ignore it for now.</Text>
+            <Text size="large">This is fairly accurate, but missing might show items that can&apos;t be obtained.</Text>
             <Box direction="row" gap="medium">
-                {/* <Text>Total Items = {lootyInfo?.obtainable.length}</Text> */}
                 <Text>Already lootyed = {lootyInfo?.obtained.length}</Text>
                 <Text>Missing = {lootyInfo?.missing.length}</Text>
             </Box>
@@ -70,19 +72,23 @@ function LootyTracker() {
                     <Grid columns={{ size: "36px" }} gap="small">
                         {
                         !onlyMissing && !onlyLooted && lootyInfo.obtainable.map(([rawName, displayName], index) => (
-                            <Box title={displayName} style={getStyle(rawName, lootyInfo.isLooted(rawName) ? 1 : 0.5)} key={index} className={getClass(rawName)} />
+                            <Box key={index} width={{max: getWidth(rawName)}} >
+                                <Box title={displayName} style={{opacity : lootyInfo.isLooted(rawName) ? 1 : 0.5}}  className={getClass(rawName)} />
+                            </Box>
                             ))
                         }
                         {
                         onlyMissing && lootyInfo.missing.map(([rawName, displayName], index) => (
-                            <Box key={index}>
-                                <Box title={displayName} style={getStyle(rawName)}  className={getClass(rawName)} />
+                            <Box width={{max: getWidth(rawName)}} key={index}>
+                                <Box title={displayName} className={getClass(rawName)} />
                             </Box>
                         ))
                     }
                     {
                         onlyLooted && lootyInfo.obtained.map(([rawName, displayName], index) => (
-                            <Box title={displayName} style={getStyle(rawName)} key={index} className={getClass(rawName)} />
+                            <Box width={{max: getWidth(rawName)}} key={index}>
+                                <Box title={displayName} className={getClass(rawName)} />
+                            </Box>
                             ))
                         }
                     </Grid>

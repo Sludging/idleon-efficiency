@@ -6,7 +6,9 @@ import {
     TableBody,
     TableCell,
     Heading,
-    Text
+    Text,
+    Grid,
+    ResponsiveContext
 } from 'grommet'
 import { useState, useEffect, useContext } from 'react';
 import { AppContext } from '../data/appContext'
@@ -19,7 +21,7 @@ interface PlayerTrapProps {
 }
 
 function PlayerTraps(props: PlayerTrapProps) {
-
+    const size = useContext(ResponsiveContext)
     const formatTime = (input: number) => {
         const formatter = new Intl.RelativeTimeFormat('en');
         const ranges: Record<string, number> = {
@@ -40,18 +42,20 @@ function PlayerTraps(props: PlayerTrapProps) {
     }
 
     return (
-        <Box direction="row" gap="medium" align="center">
+        <Grid columns={{count: 6, size: ["50px", "16.666666666666666666666666666667%"]}} gap="small" justify="start">
             {
                 props.traps.map((trap, index) => {
                     return (
-                        <Box key={`trap_${index}`} style={{ background: trap.isReady() ? 'red' : 'none' }} align="center" width="75px">
-                            <Box title={`Total Duration: ${formatTime(trap.trapDuration)?.replace("in ", "") ?? ""}`} className={`icons icons-${trap.critterName}_x1`} />
+                        <Box key={`trap_${index}`} style={{ background: trap.isReady() ? 'red' : 'none' }} align="center">
+                            <Box width={{max: size == "small" ? '30px': '50px'}} >
+                                <Box title={`Total Duration: ${formatTime(trap.trapDuration)?.replace("in ", "") ?? ""}`} className={`icons-3636 icons-${trap.critterName}_x1`} />
+                            </Box>
                             <Text textAlign='center' size="xsmall">{formatTime(trap.trapDuration - trap.timeSincePut)}</Text>
                         </Box>
                     )
                 })
             }
-        </Box>
+        </Grid>
     )
 }
 

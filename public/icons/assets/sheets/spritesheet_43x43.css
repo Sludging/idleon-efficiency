@@ -1,12 +1,14 @@
-.icons-43 {
-            background-image: url(spritesheet_43x43.png);
-            background-repeat: no-repeat;
-            display: inline-block;
-            width: 43px;
-            height: 43px;
-            background-size: cover;
-            background-position: 0 calc(var(--row) * -43px)
-        }
+.icons-4343 {
+    background-image: url(spritesheet_43x43.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 100.0%;
+    height: 0;
+    background-size: cover;
+    background-position: 0 calc(var(--row) * 0.5102040816326531%)
+}
+.icons-4343:not(.icons-TaskAchA1):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
         .icons-TaskAchA1 { --row: 0; }
 .icons-TaskAchA10 { --row: 1; }
 .icons-TaskAchA11 { --row: 2; }

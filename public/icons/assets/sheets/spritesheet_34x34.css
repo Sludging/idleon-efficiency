@@ -1,15 +1,15 @@
 .icons-3434 {
-            background-image: url(spritesheet_34x34.png);
-            background-repeat: no-repeat;
-            display: inline-block;
-            width: 34px;
-            height: 34px;
-            background-size: cover;
-            background-position: 0 calc(var(--row) * -34px)
-        }
-
+    background-image: url(spritesheet_34x34.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 100.0%;
+    height: 0;
+    background-size: cover;
+    background-position: 0 calc(var(--row) * 0.7352941176470589%)
+}
 .icons-3434:not(.icons-DungEnhancer0_x1):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
-.icons-DungEnhancer0_x1 { --row: 0; }
+        .icons-DungEnhancer0_x1 { --row: 0; }
 .icons-DungEnhancer1_x1 { --row: 1; }
 .icons-DungEnhancer2_x1 { --row: 2; }
 .icons-DungEqsSel0 { --row: 3; }
