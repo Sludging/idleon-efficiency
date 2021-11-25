@@ -30,6 +30,7 @@ import CoinsDisplay from '../components/coinsDisplay';
 import { css } from 'styled-components'
 import ShadowBox from '../components/base/ShadowBox';
 import { Next } from 'grommet-icons';
+import { NextSeo } from 'next-seo';
 import { MouseEventHandler } from 'hoist-non-react-statics/node_modules/@types/react';
 
 interface SkillProps {
@@ -733,6 +734,7 @@ function Players() {
     }, [idleonData, activePlayer, playerData]);
     return (
         <Box>
+            <NextSeo title="Players" />
             <ThemeContext.Extend value={customTabs}>
                 { size == "small" ? 
                 <Box>
