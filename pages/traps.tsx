@@ -12,6 +12,7 @@ import {
 } from 'grommet'
 import { useState, useEffect, useContext } from 'react';
 import { AppContext } from '../data/appContext'
+import { NextSeo } from 'next-seo';
 
 import { Trap } from '../data/domain/traps';
 import ShadowBox from '../components/base/ShadowBox';
@@ -81,6 +82,7 @@ function Traps() {
     }
     return (
         <Box>
+            <NextSeo title="Traps" />
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Traps</Heading>
             <ShadowBox background="dark-1" pad="large">
                 <Table>

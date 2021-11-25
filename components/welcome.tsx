@@ -13,7 +13,7 @@ import { useEffect, useContext, useState } from 'react';
 import { AuthContext } from '../data/firebase/authContext'
 import ShadowBox from './base/ShadowBox';
 import { MouseEventHandler } from 'hoist-non-react-statics/node_modules/@types/react';
-
+import { NextSeo } from 'next-seo';
 
 function SpecialButton({ isActive, text, clickHandler, step }: { isActive: boolean, text: string | React.ReactNode, clickHandler: MouseEventHandler, step: number }) {
     return (
@@ -59,6 +59,7 @@ export default function Welcome() {
     });
     return (
         <Box>
+            <NextSeo title="Boost your efficiency in Legends of Idleon!" />
             <Box fill align="center" gap="medium" height={{ min: '627px' }} background="brand">
                 <Box margin={{ left: 'auto', right: 'auto' }}>
                     <Grid columns="1/2" fill pad="xlarge">
