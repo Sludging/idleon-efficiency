@@ -219,8 +219,8 @@ function EquipmentDisplay({ player }: { player: Player }) {
                                 return (<Box key={`blank_${equipIndex}`} width="50px" height="50px" />);
                             }
                             return (
-                                <Box width={{max: '50px', min: '50px'}} align="center">
-                                    <Box key={`player_${player.playerID}_equip_${equipIndex}`} title={player.gear.equipment[equipIndex].display_name || ""} className={`icons-3636 icons-${player.gear.equipment[equipIndex].raw_name}_x1`} />
+                                <Box key={`player_${player.playerID}_equip_${equipIndex}`} width={{max: '50px', min: '50px'}} align="center">
+                                    <Box title={player.gear.equipment[equipIndex].display_name || ""} className={`icons-3636 icons-${player.gear.equipment[equipIndex].raw_name}_x1`} />
                                 </Box>)
                         })
                     }
@@ -232,8 +232,8 @@ function EquipmentDisplay({ player }: { player: Player }) {
                                 return (<Box key={`player_${player.playerID}_equip_${toolsIndex}`} width="50px" height="50px" />);
                             }
                             return (
-                                <Box width={{max: '50px', min: '50px'}} align="center">
-                            <Box key={`player_${player.playerID}_equip_${toolsIndex}`} title={player.gear.tools[toolsIndex].display_name || ""} className={`icons-3636 icons-${player.gear.tools[toolsIndex].raw_name}_x1`} />
+                                <Box key={`player_${player.playerID}_equip_${toolsIndex}`}  width={{max: '50px', min: '50px'}} align="center">
+                            <Box title={player.gear.tools[toolsIndex].display_name || ""} className={`icons-3636 icons-${player.gear.tools[toolsIndex].raw_name}_x1`} />
                             </Box>)
                         })
                     }
@@ -244,8 +244,8 @@ function EquipmentDisplay({ player }: { player: Player }) {
                             if (player.gear.food[foodIndex].display_name == "Blank") {
                                 return (<Box key={`player_${player.playerID}_equip_${foodIndex}`} width="50px" height="50px" />);
                             }
-                            return (<Box width={{max: '50px', min: '50px'}} align="center">
-                                <Box key={`player_${player.playerID}_equip_${foodIndex}`} title={player.gear.food[foodIndex].display_name || ""} className={`icons-3636 icons-${player.gear.food[foodIndex].raw_name}_x1`} />
+                            return (<Box key={`player_${player.playerID}_equip_${foodIndex}`} width={{max: '50px', min: '50px'}} align="center">
+                                <Box title={player.gear.food[foodIndex].display_name || ""} className={`icons-3636 icons-${player.gear.food[foodIndex].raw_name}_x1`} />
                                 </Box>)
                         })
                     }
@@ -730,7 +730,7 @@ function Players() {
                 setActivePlayer(firstPlayer.playerID.toString() ?? '');
             }
         }
-    }, [idleonData]);
+    }, [idleonData, activePlayer, playerData]);
     return (
         <Box>
             <ThemeContext.Extend value={customTabs}>
@@ -749,7 +749,7 @@ function Players() {
                             {
                                 playerData?.filter(player => player.playerID.toString() == activePlayer).map((player, playerIndex) => {
                                     return (
-                                    <Box pad="small">
+                                    <Box key={player.playerID} pad="small">
                                             <PlayerTab player={player} />
                                         </Box>
                                     )
