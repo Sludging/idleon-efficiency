@@ -117,7 +117,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         }}
       />
       <Head>
-        <title>Idleon Efficiency</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet" />
       </Head>
       <Grommet theme={customTheme} full>
         <AuthProvider>
