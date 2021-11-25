@@ -6,7 +6,8 @@ import {
     Tip,
     CheckBox,
     Select,
-    Heading
+    Heading,
+    ResponsiveContext
 } from "grommet"
 import styled from 'styled-components'
 
@@ -34,7 +35,7 @@ interface DisplayProps {
 }
 
 function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVialLevel, hasAchievement, discountLevel, classMultiBonus }: DisplayProps) {
-
+    const size = useContext(ResponsiveContext)
     const [bargainBubbleLevel, setBargainBubbleLevel] = useState(0);
     const [classMultiBubbleLevel, setClassMultiBubbleLevel] = useState(0);
     const [cauldronCostLevel, setCauldronCostLevel] = useState(0);
@@ -67,13 +68,13 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
                     </svg>
                 }
                 <Box pad="small" gap="small" background="white">
-                    <Text weight="bold">{bubble.name}</Text>
-                    <Text>--------------------------</Text>
+                    <Text size={size == "small" ? 'small' : ''} weight="bold">{bubble.name} ({bubble.level})</Text>
+                    <hr style={{ width: "100%"}} />
                     <Text size="small">Bonus: {bubble.getBonusText()}</Text>
                     {
                         Array.from(materialCosts).map(([item, cost]) => {
                             return (
-                                <Box key={`${bubble.name}_${item}`} direction="row" align="center" ><Text size="small">Material Cost: {nFormatter(Math.round(cost), 2)}</Text><Box style={{ width: "36px", height: "36px", backgroundPosition: "0 calc(var(--row) * -36px)" }} className={`icons icons-${item}_x1`} /></Box>
+                                <Box key={`${bubble.name}_${item}`} direction="row" align="center" ><Text size="small">Material Cost: {nFormatter(Math.round(cost), 2)}</Text><Box align="center" width={{max: '36px'}} fill><Box className={`icons-3636 icons-${item}_x1`} /></Box></Box>
                             )
                         })
                     }
@@ -93,7 +94,7 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
 
 
     return (
-        <Box>
+        <Box align="center">
             <Box align="center">
                 <CapitalizedH3>{cauldron.name}</CapitalizedH3>
             </Box>
@@ -102,21 +103,23 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
                     Object.entries(cauldron.bubbles).map(([_, bubble], index) => {
 
                         return (
-                            <Box direction="row" align="center" key={`cauldron_${index}_${bubble.name}`}>
-                                <Stack anchor="bottom-right" alignSelf="center">
+                            <Box key={`cauldron_${index}_${bubble.name}`}>
                                     <Tip
                                         plain
                                         content={
                                             <TipContent bubble={bubble} faceLeft={cauldron.short_name == "Y"} />
                                         }
-                                        dropProps={{ align: cauldron.short_name == "Y" ? { right: 'left' } : { left: 'right' } }}
+                                        dropProps={{ align: size == "small" ? { top: 'bottom' } : cauldron.short_name == "Y" ? { right: 'left' } : { left: 'right' } }}
                                     >
-                                        <Box style={{ opacity: bubble.level > 0 ? 1 : 0.2 }} className={bubble.class_name} />
+                                        <Box direction="row" fill align="center">
+                                            <Box align="center" width={{min: '70px', max: '70px'}} fill>
+                                                <Box style={{ opacity: bubble.level > 0 ? 1 : 0.2 }} className={bubble.class_name} />
+                                            </Box>
+                                            <Box>
+                                                <Text size="medium">{bubble.level}</Text>
+                                            </Box>
+                                        </Box>
                                     </Tip>
-                                    <Box>
-                                        <Text size="medium">{bubble.level}</Text>
-                                    </Box>
-                                </Stack>
                             </Box>
                         )
                     })
@@ -195,7 +198,7 @@ function Alchemy() {
     }
 
     return (
-        <Box gap="large">
+        <Box gap="large" fill>
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Alchemy</Heading>
             <Box gap="large" align="center" direction="row">
                 <CheckBox

@@ -1,12 +1,14 @@
-.icons-23 {
-            background-image: url(spritesheet_23x27.png);
-            background-repeat: no-repeat;
-            display: inline-block;
-            width: 23px;
-            height: 27px;
-            background-size: cover;
-            background-position: 0 calc(var(--row) * -27px)
-        }
+.icons-2327 {
+    background-image: url(spritesheet_23x27.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 117.3913043478261%;
+    height: 0;
+    background-size: cover;
+    background-position: 0 calc(var(--row) * 25.0%)
+}
+.icons-2327:not(.icons-Coins10):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
         .icons-Coins10 { --row: 0; }
 .icons-Coins6 { --row: 1; }
 .icons-Coins7 { --row: 2; }

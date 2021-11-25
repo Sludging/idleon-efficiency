@@ -1,7 +1,6 @@
 import React from 'react'
 import Script from 'next/script'
 import Image from 'next/image';
-import Head from 'next/head';
 import Link from 'next/link';
 import styled from 'styled-components'
 import {
@@ -14,12 +13,17 @@ import {
     TextInput,
     Nav,
     Footer,
+    Anchor,
+    ResponsiveContext,
+    Menu
 } from "grommet"
 import { useContext, useState, useEffect } from 'react'
 import { AppContext } from '../data/appContext'
 import { AuthContext } from '../data/firebase/authContext'
 import { User } from '@firebase/auth'
 import { useRouter } from 'next/dist/client/router';
+
+import { Menu as MenuIcon } from 'grommet-icons';
 
 declare const window: Window &
     typeof globalThis & {
@@ -75,6 +79,7 @@ export default function Layout({
 }) {
     const authData = useContext(AuthContext);
     const idleonData = useContext(AppContext);
+    const size = useContext(ResponsiveContext);
     const router = useRouter();
 
     const [showLayer, setShowLayer] = useState(false);
@@ -82,6 +87,17 @@ export default function Layout({
     const [lastUpdated, setLastUpdated] = useState<string>("");
     const [value, setValue] = useState('');
     const [loading, setLoading] = useState(true);
+
+    const navItems = [
+        { link: "/stamps", label: "Stamps"},
+        { link: "/alchemy", label: "Alchemy"},
+        { link: "/traps", label: "Traps"},
+        { link: "/players", label: "Players"},
+        // { link: "/bribes", label: "Bribes - WIP"},
+        { link: "/achievements", label: "Achievements"},
+        { link: "/looty-tracker", label: "Looty Tracker"},
+        { link: "/raw-data", label: "Raw Data"},
+    ]
 
     const onButtonClick = (toCall: Function | undefined, value?: string) => {
         try {
@@ -160,21 +176,29 @@ export default function Layout({
                 </Box>
             </Header>
             <Main>
-                {user &&
+                {user && (size === 'small' ?
+                        <Box justify="end">
+                            <Menu
+                                a11yTitle="Navigation Menu"
+                                dropProps={{ align: { top: 'bottom', right: 'right' } }}
+                                icon={<MenuIcon color="brand" />}
+                                dropBackground="dark-1"
+                                margin="small"
+                                items={navItems.map(({link, label}) => { return { label: <Link href={link}><Box className={router.pathname == link ? 'active' : ''} color="accent-2">{label}</Box></Link>}})}
+                            />
+                        </Box>
+                    :
                     <Box height={{ min: "56px", max: "56px" }} background="dark-1" border={{ side: 'bottom', color: 'white-1' }} style={{ boxShadow: "-7px 8px 16px 0 rgba(0,0,0,0.17)" }}>
                         <Box width={{ max: '1440px' }} align="center" margin={{ left: 'auto', right: 'auto' }} >
                             <Nav direction="row">
-                            <Link href={`/stamps`}><NavButton className={router.pathname == `/stamps` ? 'active' : ''} color="accent-2">Stamps</NavButton></Link>
-                            <Link href={`/alchemy`}><NavButton className={router.pathname == `/alchemy` ? 'active' : ''} color="accent-2">Alchemy</NavButton></Link>
-                            <Link href={`/traps`}><NavButton className={router.pathname == `/traps` ? 'active' : ''} color="accent-2">Traps</NavButton></Link>
-                            <Link href={`/players`}><NavButton className={router.pathname == `/players` ? 'active' : ''} color="accent-2">Players</NavButton></Link>
-                            <Link href={`/bribes`}><NavButton className={router.pathname == `/bribes` ? 'active' : ''} color="accent-2">Bribes - WIP</NavButton></Link>
-                            <Link href={`/achievements`}><NavButton className={router.pathname == `/achievements` ? 'active' : ''} color="accent-2">Achievements - WIP</NavButton></Link>
-                            <Link href={`/looty-tracker`}><NavButton className={router.pathname == `/looty-tracker` ? 'active' : ''} color="accent-2">Looty Tracker - WIP</NavButton></Link>
-                            <Link href={`/raw-data`}><NavButton className={router.pathname == `/raw-data` ? 'active' : ''} color="accent-2">Raw Data - No Styling</NavButton></Link>
+                                {
+                                    navItems.map(({link, label}) => (
+                                        <Link href={link}><NavButton className={router.pathname == link ? 'active' : ''} color="accent-2">{label}</NavButton></Link>
+                                    ))
+                                }
                             </Nav>
                         </Box>
-                    </Box>
+                    </Box>)
                 }
                 <Box width={{ max: (router.pathname != '/players' && router.pathname != '/') ? '1440px' : '' }} margin={{ left: 'auto', right: 'auto' }} fill="horizontal">
                     <Box pad={{ right: (router.pathname != '/players' && router.pathname != '/') ? 'large' : '', left: (router.pathname != '/players' && router.pathname != '/') ? 'large' : '', bottom: 'medium' }}>
@@ -186,7 +210,10 @@ export default function Layout({
             <Footer height={{ min: "82px" }} background="dark-1">
                 <Box width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} direction="row" justify='between' fill="horizontal" align="center" pad="small">
                     <Image alt="Logo" src="/logo.svg" height="21px" width="171px" />
-                    <Text>Sludger.6559</Text>
+                    <Box direction="row" gap="small" pad="small">
+                        <Image src={"/discord-logo.svg"} height="21px" width="21px"/>
+                        <Anchor color="white" target="_blank" href="https://discord.gg/zDb5sbR3">Idleon Efficiency</Anchor>
+                    </Box>
                 </Box>
             </Footer>
         </Box>

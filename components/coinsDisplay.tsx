@@ -14,18 +14,20 @@ export default function CoinsDisplay(props: CoinProps) {
 
     const getCoinClass = (coin: Coins) => {
         if (coin.valueOf() > 5) {
-            return `icons-23 icons-Coins${coin.valueOf()}`
+            return `icons-2327 icons-Coins${coin.valueOf()}`
         }
-        return `icons-21 icons-Coins${coin.valueOf()}`
+        return `icons-2121 icons-Coins${coin.valueOf()}`
     }
 
     return (
-        <Box direction="row" gap="xsmall">
+        <Box direction="row-responsive" gap="xsmall">
             {
                 Array.from(props.coinMap).map(([coin, value]) => {
                     return (
                         <Box key={`coin-${coin.valueOf()}`} direction="row" gap="xsmall">
-                            <Box className={getCoinClass(coin)} />
+                            <Box width={{max: '23px', min: '21px'}} fill>
+                                <Box className={getCoinClass(coin)} />
+                            </Box>
                             <Text>{value}</Text>
                         </Box>
                     )

@@ -51,7 +51,7 @@ export class Talent {
     }
 
     getClass = (): string => {
-        return `icon-56 icons-UISkillIcon${this.skillIndex}`;
+        return `icons-5656 icons-UISkillIcon${this.skillIndex}`;
     }
 }
 
