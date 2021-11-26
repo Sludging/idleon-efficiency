@@ -1,3 +1,5 @@
+import { Player } from './player';
+
 export const StatueConst = {
     LevelIndex: 0,
     ProgressIndex: 1,
@@ -28,8 +30,39 @@ export class Statue {
         return 0;
     }
 
-    getBonus = (): number => {
-        return this.level * this.statueData.bonus;
+    getBonus = (player: Player | undefined = undefined): number => {
+        let talentBonus = 1;
+
+        // Calculate statue bonus based on talents
+        if (player) {
+            switch (this.displayName) {
+                case "Power Statue":
+                case "Mining Statue":
+                case "Defence Statue":
+                case "Oceanman Statue":
+                    talentBonus += (player.talents.find(x => x.skillIndex == 112 || x.skillIndex == 127)?.getBonus() ?? 0) / 100;
+                    break;
+                case "Speed Statue":
+                case "Anvil Statue":
+                case "Bullseye Statue":
+                case "Ol Reliable Statue":
+                    talentBonus += (player.talents.find(x => x.skillIndex == 307 || x.skillIndex == 292)?.getBonus() ?? 0) / 100;
+                    break;
+                case "Exp Statue":
+                case "Lumberbob Statue":
+                case "Beholder Statue":
+                case "Cauldron Statue":
+                    talentBonus += (player.talents.find(x => x.skillIndex == 472 || x.skillIndex == 487)?.getBonus() ?? 0) / 100;
+                    break;
+                case "EhExPee Statue":
+                case "Kapow Statue":
+                case "Feasty Statue":
+                    talentBonus += (player.talents.find(x => x.skillIndex == 37)?.getBonus() ?? 0) / 100;
+                    break;
+                default: talentBonus = 1;   
+            }
+        }
+        return this.level * this.statueData.bonus * talentBonus;
     }
 
     getClassName = (): string => {
