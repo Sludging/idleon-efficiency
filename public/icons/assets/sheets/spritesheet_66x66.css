@@ -1,0 +1,46 @@
+.icons-6666 {
+    background-image: url(spritesheet_66x66.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 100.0%;
+    height: 0;
+    background-size: cover;
+    background-position: 0 calc(var(--row) * 2.9411764705882355%)
+}
+.icons-6666:not(.icons-ConLoadout0):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
+        .icons-ConLoadout0 { --row: 0; }
+.icons-ConLoadout1 { --row: 1; }
+.icons-ConTowerB0 { --row: 2; }
+.icons-ConTowerB1 { --row: 3; }
+.icons-ConTowerB10 { --row: 4; }
+.icons-ConTowerB11 { --row: 5; }
+.icons-ConTowerB12 { --row: 6; }
+.icons-ConTowerB13 { --row: 7; }
+.icons-ConTowerB14 { --row: 8; }
+.icons-ConTowerB15 { --row: 9; }
+.icons-ConTowerB16 { --row: 10; }
+.icons-ConTowerB17 { --row: 11; }
+.icons-ConTowerB18 { --row: 12; }
+.icons-ConTowerB19 { --row: 13; }
+.icons-ConTowerB2 { --row: 14; }
+.icons-ConTowerB20 { --row: 15; }
+.icons-ConTowerB21 { --row: 16; }
+.icons-ConTowerB22 { --row: 17; }
+.icons-ConTowerB23 { --row: 18; }
+.icons-ConTowerB24 { --row: 19; }
+.icons-ConTowerB25 { --row: 20; }
+.icons-ConTowerB26 { --row: 21; }
+.icons-ConTowerB27 { --row: 22; }
+.icons-ConTowerB28 { --row: 23; }
+.icons-ConTowerB29 { --row: 24; }
+.icons-ConTowerB3 { --row: 25; }
+.icons-ConTowerB4 { --row: 26; }
+.icons-ConTowerB5 { --row: 27; }
+.icons-ConTowerB6 { --row: 28; }
+.icons-ConTowerB7 { --row: 29; }
+.icons-ConTowerB8 { --row: 30; }
+.icons-ConTowerB9 { --row: 31; }
+.icons-TaskAchBorder1 { --row: 32; }
+.icons-TaskAchBorder2 { --row: 33; }
+.icons-TaskAchBorder3 { --row: 34; }
