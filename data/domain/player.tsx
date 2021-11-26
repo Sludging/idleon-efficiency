@@ -213,7 +213,7 @@ export class Anvil {
     getSpeed = (agility: number = 0, stampBonus: number = 0, poBoxBonus: number = 0, hammerHammerBonus: number = 0, statueBonus: number = 0, starSignTownSpeed: number = 0, talentTownSpeed: number = 0) => {
         const boxAndStatueMath = 1 + ((poBoxBonus + statueBonus) / 100);
         const agilityBonus = this.getSpeedBonusFromAgility(agility);
-        return (1 + (stampBonus + 2 * this.speedPoints) / 100) * boxAndStatueMath * (1 + (hammerHammerBonus / 100)) * agilityBonus * (1 + (starSignTownSpeed + talentTownSpeed) / 100);
+        return (1 + (stampBonus + (2 * this.speedPoints)) / 100) * boxAndStatueMath * (1 + (hammerHammerBonus / 100)) * agilityBonus * (1 + (starSignTownSpeed + talentTownSpeed) / 100);
     }
 
     getSpeedBonusFromAgility = (agility: number = 0): number => {
@@ -248,6 +248,7 @@ export class Player {
     class: string = "Blank";
     currentMonster: string = "Blank";
     currentMap: string = "Blank";
+    currentMapId: number = 0;
     starSigns: StarSign[] = [];
     money: number = 0;
     skills: Map<SkillsIndex, number>;
@@ -351,6 +352,7 @@ export default function parsePlayer(rawData: Array<rawPlayerData>, timeAway: Rec
         }
         if (rawPlayerData.currentMap) {
             currentPlayer.currentMap = mapsMap.get(rawPlayerData.currentMap.toString())?.replace(/_/g, " ") || "New Map?";
+            currentPlayer.currentMapId = rawPlayerData.currentMap;
         }
         if (rawPlayerData.starSigns) {
             currentPlayer.starSigns = rawPlayerData.starSigns.map((sign: number) => {

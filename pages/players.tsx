@@ -22,13 +22,15 @@ import { ClassIndex, ClassTalentMap, GetTalentArray, TalentConst } from '../data
 import { CapacityConst } from '../data/domain/capacity';
 import { Alchemy, AlchemyConst, CauldronIndex, Bubble } from "../data/domain/alchemy";
 import { Stamp, StampTab, StampConsts } from '../data/domain/stamps';
+import { Shrine, ShrineConstants } from '../data/domain/shrines';
 import { PlayerStatues, StatueConst } from '../data/domain/statues';
 import { PostOfficeConst, PostOfficeExtra } from '../data/domain/postoffice'
 
-import { getCoinsArray, lavaFunc, toTime, notUndefined, round } from '../data/utility';
+import { getCoinsArray, lavaFunc, toTime, notUndefined, round, nFormatter } from '../data/utility';
 import CoinsDisplay from '../components/coinsDisplay';
 import { css } from 'styled-components'
 import ShadowBox from '../components/base/ShadowBox';
+import TipDisplay, {TipDirection} from '../components/base/TipDisplay';
 import { Next } from 'grommet-icons';
 import { NextSeo } from 'next-seo';
 import { MouseEventHandler } from 'hoist-non-react-statics/node_modules/@types/react';
@@ -129,6 +131,12 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
         return player.worship.getChargeRate(player.gear.tools[5].raw_name, worshipLevel, popeBonus, chargeCardBonus, flowinStamp.getBonus(worshipLevel), talentBonus);
     }, [player, activeBubbles, idleonData]);
 
+    const activeShrines = useMemo(() => {
+        const theData = idleonData.getData();
+        const shrines = theData.get("shrines") as Shrine[];
+        return shrines.filter((shrine) => shrine.currentMap == player.currentMapId);
+    }, [idleonData, player]);
+
     return (
         <Box pad="medium">
             <Text size='medium'>Random Stats</Text>
@@ -154,22 +162,28 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     </Box>
                     <Box>
                         <Text>Active Bubbles:</Text>
+                        <Box direction="row" gap="medium">
                         {
+                            
                             activeBubbles.map((bubble, bubbleIndex) => {
                                 return (
-                                    <Box direction="row" align="center" key={bubbleIndex} fill gap="medium">
-                                            <Text size="medium">{bubble.name}</Text>
-                                            <Box align="center" width={{max: '50px'}} fill>
+                                    <Box key={bubbleIndex} width={{max: 'medium'}}>
+                                        <TipDisplay
+                                            heading={`${bubble.name} (${bubble.level})`}
+                                            body={bubble.getBonusText()}
+                                            size={size}
+                                            direction={TipDirection.Down}
+                                            maxWidth="large"
+                                        >
+                                            <Box width={{min: '50px', max: '50px'}}>
                                                 <Box className={bubble.class_name} />
                                             </Box>
-                                            <Box >
-                                                <Text size="medium">{bubble.level}</Text>
-                                            </Box>
-                                            
+                                        </TipDisplay>
                                     </Box>
                                 )
                             })
                         }
+                        </Box>
                     </Box>
                 </Box>
                 <Box pad="medium" gap="medium" fill>
@@ -178,29 +192,80 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                         {
                             player.cardInfo ? player.cardInfo.equippedCards.map((card, index) => {
                                 return (
-                                    <Stack key={index}>
-                                        <Box align="center" fill width={{min: '28px', max: '28px'}} height={{min: '36px', max: '36px'}}>
-                                            <Box height={{min: '36px', max: '36px'}} className={card.getClass()} />
-                                        </Box>
-                                        <Box align="center" width={{max: '31px', min: '31px'}} height={{min: '43px', max: '43px'}}>
-                                            <Box height={{min: '43px', max: '43px'}} title={card.getBonusText()} key={`border_${index}`} className={card.getBorderClass()} />
-                                        </Box>
-                                    </Stack>
+                                    <Box key={index}>
+                                        <TipDisplay
+                                            heading={`${card.displayName}`}
+                                            body={card.getBonusText()}
+                                            size={size}
+                                            direction={TipDirection.Down}
+                                        >
+                                            <Stack key={index}>
+                                                <Box align="center" fill width={{min: '28px', max: '28px'}} height={{min: '36px', max: '36px'}}>
+                                                    <Box height={{min: '36px', max: '36px'}} className={card.getClass()} />
+                                                </Box>
+                                                <Box align="center" width={{max: '31px', min: '31px'}} height={{min: '43px', max: '43px'}}>
+                                                    <Box height={{min: '43px', max: '43px'}} key={`border_${index}`} className={card.getBorderClass()} />
+                                                </Box>
+                                            </Stack>
+                                        </TipDisplay>
+                                    </Box>
                                 )
                             }) : <Text>No cards equipped</Text>
                         }
                     </Grid>
                     <Text size="small">Card Set = {player.cardInfo?.getCardSetText() ?? ""}</Text>
-                    <Text>Active Buffs:</Text>
-                    <Box direction="row">
-                        {player.activeBuffs.map((buff, index) =>
-                        (
-                            <Box key={index} width="50px" align="center">
-                                <Box title={buff.getBonusText()} className={buff.getClass()} />
+                    {
+                        player.activeBuffs.length > 0 &&
+                        <Box gap="small">
+                            <Text>Active Buffs:</Text>
+                            <Box direction="row">
+                                {player.activeBuffs.map((buff, index) =>
+                                (
+                                    <Box key={index}>
+                                        <TipDisplay
+                                            heading={`${buff.name} (${buff.level})`}
+                                            body={buff.getBonusText()}
+                                            size={size}
+                                            direction={TipDirection.Down}
+                                        >
+                                            <Box width={{min: '50px', max: '50px'}}>
+                                                <Box className={buff.getClass()} />
+                                            </Box>
+                                        </TipDisplay>
+                                    </Box>
+                                )
+                                )}
                             </Box>
-                        )
-                        )}
-                    </Box>
+                        </Box>
+                    }
+                    {
+                        activeShrines.length > 0 &&
+                        <Box gap="small">
+                            <Text>Active Shrines:</Text>
+                            <Box direction="row" wrap gap="small">
+                                {
+                                activeShrines.map((shrine, index) => {
+                                    const cardBonus = player.cardInfo?.equippedCards.find(x => x.id == "Z9")?.getBonus() ?? 0;
+                                    return (
+                                        <Box key={index}>
+                                            <TipDisplay
+                                                heading={`${shrine.name} (${shrine.level})`}
+                                                body={shrine.getBonusText(player.currentMapId, cardBonus)}
+                                                size={size}
+                                                direction={TipDirection.Down}
+                                            >
+                                                <Box width={{min: '50px', max: '50px'}}>
+                                                    <Box className={shrine.getClass()} />
+                                                </Box>
+                                            </TipDisplay>
+                                        </Box>
+                                    )
+                                })
+                                
+                                }
+                            </Box>
+                        </Box>
+                    }
                 </Box>
             </Grid>
         </Box>
@@ -305,37 +370,25 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
         const hammerHammerBonus = activeBubbles ? activeBubbles.find(x => x.name == hammerName)?.getBonus() ?? 0 : 0;
         const anvilStatueBonus = playerStatues ? playerStatues.statues[StatueConst.AnvilIndex].getBonus(player) : 0;
         const starSignBonus = player.starSigns.reduce((sum, sign) => sum += sign.getBonus("Speed in Town"), 0);
-        let talentTownSpeedBonus: number = 0;
-        if (player.getBaseClass() == ClassIndex.Archer) {
-            const townSkillSpeedTalent = player.talents.find(x => x.skillIndex == 269);
-            if (townSkillSpeedTalent) {
-                talentTownSpeedBonus = lavaFunc(townSkillSpeedTalent.funcX, townSkillSpeedTalent.level, townSkillSpeedTalent.x1, townSkillSpeedTalent.x2)
-            }
-        }
+        const talentTownSpeedBonus = player.talents.find(x => x.skillIndex == 269)?.getBonus() ?? 0;
+
         return (3600 * player.anvil.getSpeed(player.stats.agility, anvilZoomerBonus, postOfficeBonus, hammerHammerBonus, anvilStatueBonus, starSignBonus, talentTownSpeedBonus));
     }, [idleonData, activeBubbles, playerStatues, player])
 
     const allCapBonus = useMemo(() => {
         const theData = idleonData.getData();
         const guild = theData.get("guild");
+        const shrines = theData.get("shrines");
 
         let guildCarryBonus: number = 0;
-        let telekineticStorageBonus: number = 0;
-        let carryCapShrineBonus: number = 0; // TODO!
         let zergPrayerBonus: number = 0; // TODO!
         let ruckSackPrayerBonus: number = 0; // TODO!
 
         if (guild) {
             guildCarryBonus = lavaFunc(guild.guildBonuses[2].func, guild.guildBonuses[2].level, guild.guildBonuses[2].x1, guild.guildBonuses[2].x2);
         }
-
-        if (player.talents) {
-            const telekineticStorageTalent = player.talents.find(x => x.skillIndex == CapacityConst.TelekineticStorageSkillIndex);
-            if (telekineticStorageTalent) {
-                telekineticStorageBonus = lavaFunc(telekineticStorageTalent.funcX, telekineticStorageTalent.level, telekineticStorageTalent.x1, telekineticStorageTalent.x2);
-            }
-        }
-
+        const telekineticStorageBonus = player.talents.find(x => x.skillIndex == CapacityConst.TelekineticStorageSkillIndex)?.getBonus() ?? 0;
+        const carryCapShrineBonus = shrines[ShrineConstants.CarryShrine].getBonus(player.currentMapId);
         return player.capacity.getAllCapsBonus(guildCarryBonus, telekineticStorageBonus, carryCapShrineBonus, zergPrayerBonus, ruckSackPrayerBonus);
 
     }, [idleonData, player])
@@ -345,14 +398,7 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
         const stampData = theData.get("stamps");
         const gemStore = theData.get("gems") as GemStore;
 
-        let extraBagsTalentBonus: number = 0;
-
-        if (player.talents) {
-            const extraBagsTalent = player.talents.find(x => x.skillIndex == CapacityConst.ExtraBagsSkillIndex);
-            if (extraBagsTalent) {
-                extraBagsTalentBonus = lavaFunc(extraBagsTalent.funcX, extraBagsTalent.level, extraBagsTalent.x1, extraBagsTalent.x2);
-            }
-        }
+        const extraBagsTalentBonus = player.talents.find(x => x.skillIndex == CapacityConst.ExtraBagsSkillIndex)?.getBonus() ?? 0;
         const starSignExtraCap = player.starSigns.reduce((sum, sign) => sum += sign.getBonus("Carry Cap"), 0);
         return player.anvil.getCapacity(player.capacity.getMaterialCapacity(allCapBonus, stampData ? stampData[1][7].getBonus(player.skills.get(SkillsIndex.Smithing)) : 0, gemStore?.purchases.find(x => x.no == 58)?.pucrhased ?? 0, stampData ? stampData[2][1].getBonus() : 0, extraBagsTalentBonus, starSignExtraCap));
     }, [idleonData, player, allCapBonus])
@@ -394,6 +440,7 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
                                 <Text size="small">Future Amount Guess = {futureProduction} / {anvilCapcity} ( {percentOfCap}% of cap) {percentOfCap > 80 ? "| GO CLAIM!" : ""}</Text>
                                 <Text size="small">Time till cap = {toTime(timeTillCap)}</Text>
                                 <Text size="small">Production Per Hour (per hammer) = {Math.round(anvilSpeed / anvilItem.time)} </Text>
+                                <Text size="small">Total Produced of this item = {nFormatter(Math.round(anvilItem.totalProduced),2)}</Text>
                                 {/* <Text>{anvilItem.displayName} - {anvilItem.currentAmount} - {anvilItem.currentXP} - {anvilItem.currentProgress} - {anvilItem.totalProduced}</Text> */}
                             </Box>
                         )
@@ -410,29 +457,18 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
     const allCapBonus = useMemo(() => {
         const theData = idleonData.getData();
         const guild = theData.get("guild");
+        const shrines = theData.get("shrines");
 
         let guildCarryBonus: number = 0;
-        let telekineticStorageBonus: number = 0;
-        let extraBagsTalentBonus: number = 0;
-        let carryCapShrineBonus: number = 0; // TODO!
         let zergPrayerBonus: number = 0; // TODO!
         let ruckSackPrayerBonus: number = 0; // TODO!
 
         if (guild) {
             guildCarryBonus = lavaFunc(guild.guildBonuses[2].func, guild.guildBonuses[2].level, guild.guildBonuses[2].x1, guild.guildBonuses[2].x2);
         }
-
-        if (player.talents) {
-            const telekineticStorageTalent = player.talents.find(x => x.skillIndex == CapacityConst.TelekineticStorageSkillIndex);
-            if (telekineticStorageTalent) {
-                telekineticStorageBonus = lavaFunc(telekineticStorageTalent.funcX, telekineticStorageTalent.level, telekineticStorageTalent.x1, telekineticStorageTalent.x2);
-            }
-            const extraBagsTalent = player.talents.find(x => x.skillIndex == CapacityConst.ExtraBagsSkillIndex);
-            if (extraBagsTalent) {
-                extraBagsTalentBonus = lavaFunc(extraBagsTalent.funcX, extraBagsTalent.level, extraBagsTalent.x1, extraBagsTalent.x2);
-            }
-        }
-
+        
+        const telekineticStorageBonus = player.talents.find(x => x.skillIndex == CapacityConst.TelekineticStorageSkillIndex)?.getBonus() ?? 0;
+        const carryCapShrineBonus = shrines[ShrineConstants.CarryShrine].getBonus(player.currentMapId);
         return player.capacity.getAllCapsBonus(guildCarryBonus, telekineticStorageBonus, carryCapShrineBonus, zergPrayerBonus, ruckSackPrayerBonus);
 
     }, [idleonData, player])
@@ -462,14 +498,7 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
         const stampData = theData.get("stamps");
         const gemStore = theData.get("gems") as GemStore;
 
-        let extraBagsTalentBonus: number = 0;
-
-        if (player.talents) {
-            const extraBagsTalent = player.talents.find(x => x.skillIndex == CapacityConst.ExtraBagsSkillIndex);
-            if (extraBagsTalent) {
-                extraBagsTalentBonus = lavaFunc(extraBagsTalent.funcX, extraBagsTalent.level, extraBagsTalent.x1, extraBagsTalent.x2);
-            }
-        }
+        const extraBagsTalentBonus = player.talents.find(x => x.skillIndex == CapacityConst.ExtraBagsSkillIndex)?.getBonus() ?? 0;
         const starSignExtraCap = player.starSigns.reduce((sum, sign) => sum += sign.getBonus("Carry Cap"), 0);
         return player.capacity.getMaterialCapacity(allCapBonus, stampData ? stampData[1][7].getBonus(player.skills.get(SkillsIndex.Smithing)) : 0, gemStore?.purchases.find(x => x.no == 58)?.pucrhased ?? 0, stampData ? stampData[2][1].getBonus() : 0, extraBagsTalentBonus, starSignExtraCap)
     }, [idleonData, player, allCapBonus])
