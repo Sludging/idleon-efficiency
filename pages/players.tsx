@@ -242,7 +242,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                         activeShrines.length > 0 &&
                         <Box gap="small">
                             <Text>Active Shrines:</Text>
-                            <Box direction="row" gap="medium">
+                            <Box direction="row" wrap gap="small">
                                 {
                                 activeShrines.map((shrine, index) => {
                                     const cardBonus = player.cardInfo?.equippedCards.find(x => x.id == "Z9")?.getBonus() ?? 0;
