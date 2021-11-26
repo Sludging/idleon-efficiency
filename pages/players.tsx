@@ -623,7 +623,11 @@ function PlayerTab({ player }: PlayerTabProps) {
     const [playerStatues, setPlayerStatues] = useState<PlayerStatues | undefined>(undefined);
     const [index, setIndex] = useState<number>(1);
     const [activeBubbles, setActiveBubbles] = useState<Bubble[]>([]);
-    const [poExtra, setPoExtra] = useState<PostOfficeExtra>({});
+    const [poExtra, setPoExtra] = useState<PostOfficeExtra>({
+        misc: 0,
+        complete: 0,
+        streak: 0
+    });
 
     const idleonData = useContext(AppContext);
     const onActive = (nextIndex: number) => setIndex(nextIndex);
