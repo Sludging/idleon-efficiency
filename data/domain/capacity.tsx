@@ -182,7 +182,7 @@ export class Capacity {
         // );
         return (
             (1 + (guildBonus + telekineticStorageBonus) / 100) *
-            (1 + shrineBonus / 100) *
+            (1 + (shrineBonus / 100)) *
             Math.max(1 - zergPrayer / 100, 0.4) *
             (1 + ruckSackPrayer / 100)
         );

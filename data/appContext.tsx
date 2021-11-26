@@ -17,6 +17,7 @@ import parseGuild from './domain/guild';
 import parseGems from './domain/gemPurchases';
 import parseAchievements from './domain/achievements';
 import parseLooty from './domain/lootyTracker';
+import parseShrines from './domain/shrines';
 
 
 
@@ -145,6 +146,7 @@ export const AppProvider: React.FC<{}> = (props) => {
             complete: doc.get("CYDeliveryBoxComplete"),
             misc: doc.get("CYDeliveryBoxMisc"),
           });
+          accountData.set("shrines", parseShrines(JSON.parse(doc.get("Shrine"))));
           // CYWorldTeleports (if I ever care to show it)
           // SaltLick
           // CogO
