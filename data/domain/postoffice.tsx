@@ -11,6 +11,12 @@ export const PostOfficeConst = {
     MaxBoxLevel: 400
 }
 
+export interface PostOfficeExtra {
+    complete: number,
+    misc: number,
+    streak: number
+}
+
 export class BoxBonus {
     constructor(public bonus: string, public x1: number, public x2: number, public func: string) { }
 

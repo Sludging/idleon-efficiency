@@ -124,8 +124,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Grommet theme={customTheme} full>
         <AuthProvider>
           <AppProvider>
-            <Layout>
             <DefaultSeo {...SEO} />
+            <Layout>
               <Component {...pageProps} />
             </Layout>
           </AppProvider>
