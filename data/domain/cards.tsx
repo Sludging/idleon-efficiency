@@ -1,7 +1,13 @@
+import { monstersMap } from "../maps";
+
 export class Card {
     count: number = 0;
+    displayName: string;
 
-    constructor(public name: string, public id: string, public category: string, public perTier: number, public effect: string, public bonus: number, public order: number) { }
+    constructor(public name: string, public id: string, public category: string, public perTier: number, public effect: string, public bonus: number, public order: number) 
+    { 
+        this.displayName = monstersMap.get(name)?.replace(/_/g, " ") || "New Monster?";
+    }
 
 
     getClass = (): string => {

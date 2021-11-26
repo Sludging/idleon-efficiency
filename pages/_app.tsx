@@ -25,6 +25,7 @@ import '../public/icons/assets/sheets/spritesheet_43x43.css';
 import '../public/icons/assets/sheets/spritesheet_28x36.css';
 import '../public/icons/assets/sheets/spritesheet_31x43.css';
 import '../public/icons/assets/sheets/spritesheet_34x34.css';
+import '../public/icons/assets/sheets/spritesheet_66x66.css';
 import Layout from '../components/layout';
 
 import { DefaultSeo } from 'next-seo';

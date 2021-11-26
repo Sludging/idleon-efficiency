@@ -26,10 +26,11 @@ import { Shrine, ShrineConstants } from '../data/domain/shrines';
 import { PlayerStatues, StatueConst } from '../data/domain/statues';
 import { PostOfficeConst, PostOfficeExtra } from '../data/domain/postoffice'
 
-import { getCoinsArray, lavaFunc, toTime, notUndefined, round } from '../data/utility';
+import { getCoinsArray, lavaFunc, toTime, notUndefined, round, nFormatter } from '../data/utility';
 import CoinsDisplay from '../components/coinsDisplay';
 import { css } from 'styled-components'
 import ShadowBox from '../components/base/ShadowBox';
+import TipDisplay, {TipDirection} from '../components/base/TipDisplay';
 import { Next } from 'grommet-icons';
 import { NextSeo } from 'next-seo';
 import { MouseEventHandler } from 'hoist-non-react-statics/node_modules/@types/react';
@@ -161,22 +162,28 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     </Box>
                     <Box>
                         <Text>Active Bubbles:</Text>
+                        <Box direction="row" gap="medium">
                         {
+                            
                             activeBubbles.map((bubble, bubbleIndex) => {
                                 return (
-                                    <Box direction="row" align="center" key={bubbleIndex} fill gap="medium">
-                                            <Text size="medium">{bubble.name}</Text>
-                                            <Box align="center" width={{max: '50px'}} fill>
+                                    <Box key={bubbleIndex} width={{max: 'medium'}}>
+                                        <TipDisplay
+                                            heading={`${bubble.name} (${bubble.level})`}
+                                            body={bubble.getBonusText()}
+                                            size={size}
+                                            direction={TipDirection.Down}
+                                            maxWidth="large"
+                                        >
+                                            <Box width={{min: '50px', max: '50px'}}>
                                                 <Box className={bubble.class_name} />
                                             </Box>
-                                            <Box >
-                                                <Text size="medium">{bubble.level}</Text>
-                                            </Box>
-                                            
+                                        </TipDisplay>
                                     </Box>
                                 )
                             })
                         }
+                        </Box>
                     </Box>
                 </Box>
                 <Box pad="medium" gap="medium" fill>
@@ -185,14 +192,23 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                         {
                             player.cardInfo ? player.cardInfo.equippedCards.map((card, index) => {
                                 return (
-                                    <Stack key={index}>
-                                        <Box align="center" fill width={{min: '28px', max: '28px'}} height={{min: '36px', max: '36px'}}>
-                                            <Box height={{min: '36px', max: '36px'}} className={card.getClass()} />
-                                        </Box>
-                                        <Box align="center" width={{max: '31px', min: '31px'}} height={{min: '43px', max: '43px'}}>
-                                            <Box height={{min: '43px', max: '43px'}} title={card.getBonusText()} key={`border_${index}`} className={card.getBorderClass()} />
-                                        </Box>
-                                    </Stack>
+                                    <Box key={index}>
+                                        <TipDisplay
+                                            heading={`${card.displayName}`}
+                                            body={card.getBonusText()}
+                                            size={size}
+                                            direction={TipDirection.Down}
+                                        >
+                                            <Stack key={index}>
+                                                <Box align="center" fill width={{min: '28px', max: '28px'}} height={{min: '36px', max: '36px'}}>
+                                                    <Box height={{min: '36px', max: '36px'}} className={card.getClass()} />
+                                                </Box>
+                                                <Box align="center" width={{max: '31px', min: '31px'}} height={{min: '43px', max: '43px'}}>
+                                                    <Box height={{min: '43px', max: '43px'}} key={`border_${index}`} className={card.getBorderClass()} />
+                                                </Box>
+                                            </Stack>
+                                        </TipDisplay>
+                                    </Box>
                                 )
                             }) : <Text>No cards equipped</Text>
                         }
@@ -200,13 +216,22 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     <Text size="small">Card Set = {player.cardInfo?.getCardSetText() ?? ""}</Text>
                     {
                         player.activeBuffs.length > 0 &&
-                        <Box>
+                        <Box gap="small">
                             <Text>Active Buffs:</Text>
                             <Box direction="row">
                                 {player.activeBuffs.map((buff, index) =>
                                 (
-                                    <Box key={index} width="50px" align="center">
-                                        <Box title={buff.getBonusText()} className={buff.getClass()} />
+                                    <Box key={index}>
+                                        <TipDisplay
+                                            heading={`${buff.name} (${buff.level})`}
+                                            body={buff.getBonusText()}
+                                            size={size}
+                                            direction={TipDirection.Down}
+                                        >
+                                            <Box width={{min: '50px', max: '50px'}}>
+                                                <Box className={buff.getClass()} />
+                                            </Box>
+                                        </TipDisplay>
                                     </Box>
                                 )
                                 )}
@@ -215,16 +240,27 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     }
                     {
                         activeShrines.length > 0 &&
-                        <Box gap="medium">
+                        <Box gap="small">
                             <Text>Active Shrines:</Text>
-                            <Box>
+                            <Box direction="row" gap="medium">
                                 {
-                                activeShrines.map((shrine, index) =>
-                                (
-                                    <Box key={index}>
-                                        <Text>{shrine.name} = {shrine.getBonus()}</Text>
-                                    </Box>
-                                ))
+                                activeShrines.map((shrine, index) => {
+                                    const cardBonus = player.cardInfo?.equippedCards.find(x => x.id == "Z9")?.getBonus() ?? 0;
+                                    return (
+                                        <Box key={index}>
+                                            <TipDisplay
+                                                heading={`${shrine.name} (${shrine.level})`}
+                                                body={shrine.getBonusText(player.currentMapId, cardBonus)}
+                                                size={size}
+                                                direction={TipDirection.Down}
+                                            >
+                                                <Box width={{min: '50px', max: '50px'}}>
+                                                    <Box className={shrine.getClass()} />
+                                                </Box>
+                                            </TipDisplay>
+                                        </Box>
+                                    )
+                                })
                                 
                                 }
                             </Box>
@@ -404,7 +440,7 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
                                 <Text size="small">Future Amount Guess = {futureProduction} / {anvilCapcity} ( {percentOfCap}% of cap) {percentOfCap > 80 ? "| GO CLAIM!" : ""}</Text>
                                 <Text size="small">Time till cap = {toTime(timeTillCap)}</Text>
                                 <Text size="small">Production Per Hour (per hammer) = {Math.round(anvilSpeed / anvilItem.time)} </Text>
-                                <Text size="small">Total Produced of this item = {Math.round(anvilItem.totalProduced)}</Text>
+                                <Text size="small">Total Produced of this item = {nFormatter(Math.round(anvilItem.totalProduced),2)}</Text>
                                 {/* <Text>{anvilItem.displayName} - {anvilItem.currentAmount} - {anvilItem.currentXP} - {anvilItem.currentProgress} - {anvilItem.totalProduced}</Text> */}
                             </Box>
                         )
