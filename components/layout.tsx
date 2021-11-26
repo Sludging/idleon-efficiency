@@ -22,10 +22,8 @@ import { AppContext } from '../data/appContext'
 import { AuthContext } from '../data/firebase/authContext'
 import { User } from '@firebase/auth'
 import { useRouter } from 'next/dist/client/router';
-import { NextSeo } from 'next-seo';
 
 import { Menu as MenuIcon } from 'grommet-icons';
-import SEO from '../next-seo.config';
 
 declare const window: Window &
     typeof globalThis & {
@@ -129,7 +127,6 @@ export default function Layout({
     if (loading) {
         return (
             <Box pad="large" fill align="center">
-                <NextSeo {...SEO} />
                 <Text size="large">Loading Data</Text>
             </Box>);
     }

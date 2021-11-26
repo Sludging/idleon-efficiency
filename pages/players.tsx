@@ -23,7 +23,7 @@ import { CapacityConst } from '../data/domain/capacity';
 import { Alchemy, AlchemyConst, CauldronIndex, Bubble } from "../data/domain/alchemy";
 import { Stamp, StampTab, StampConsts } from '../data/domain/stamps';
 import { PlayerStatues, StatueConst } from '../data/domain/statues';
-import { PostOfficeConst } from '../data/domain/postoffice'
+import { PostOfficeConst, PostOfficeExtra } from '../data/domain/postoffice'
 
 import { getCoinsArray, lavaFunc, toTime, notUndefined, round } from '../data/utility';
 import CoinsDisplay from '../components/coinsDisplay';
@@ -256,7 +256,7 @@ function EquipmentDisplay({ player }: { player: Player }) {
     )
 }
 
-function StatuesDisplay({ playerStatues }: { playerStatues: PlayerStatues | undefined }) {
+function StatuesDisplay({ playerStatues, player }: { playerStatues: PlayerStatues | undefined, player: Player }) {
     return (
         <Box pad="medium" gap="xsmall">
             <Text size='medium'>Statues</Text>
@@ -269,7 +269,7 @@ function StatuesDisplay({ playerStatues }: { playerStatues: PlayerStatues | unde
                             </Box>
                             <Text alignSelf="center">Level: {statue.level}</Text>
                             <Text alignSelf="center">/</Text>
-                            <Text alignSelf="center">Bonus: {round(statue.getBonus())} {statue.bonus}</Text>
+                            <Text alignSelf="center">Bonus: {round(statue.getBonus(player))} {statue.bonus}</Text>
                         </Box>
                     )
                 }) : <></>
@@ -303,8 +303,8 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
         const blackSmithBox = player.postOffice[PostOfficeConst.BlacksmithBoxIndex];
         const postOfficeBonus = blackSmithBox.level > 0 ? blackSmithBox.bonuses[1].getBonus(blackSmithBox.level, 1) : 0;
         const hammerHammerBonus = activeBubbles ? activeBubbles.find(x => x.name == hammerName)?.getBonus() ?? 0 : 0;
-        const anvilStatueBonus = playerStatues ? playerStatues.statues[StatueConst.AnvilIndex].getBonus() : 0;
-        const starSignBonus = player.starSigns.find(x => x.name == "Bob_Build_Guy")?.getBonus("Speed in Town") ?? 0;
+        const anvilStatueBonus = playerStatues ? playerStatues.statues[StatueConst.AnvilIndex].getBonus(player) : 0;
+        const starSignBonus = player.starSigns.reduce((sum, sign) => sum += sign.getBonus("Speed in Town"), 0);
         let talentTownSpeedBonus: number = 0;
         if (player.getBaseClass() == ClassIndex.Archer) {
             const townSkillSpeedTalent = player.talents.find(x => x.skillIndex == 269);
@@ -346,7 +346,6 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
         const gemStore = theData.get("gems") as GemStore;
 
         let extraBagsTalentBonus: number = 0;
-        let starSignExtraCap: number = 0; // TODO!
 
         if (player.talents) {
             const extraBagsTalent = player.talents.find(x => x.skillIndex == CapacityConst.ExtraBagsSkillIndex);
@@ -354,6 +353,7 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
                 extraBagsTalentBonus = lavaFunc(extraBagsTalent.funcX, extraBagsTalent.level, extraBagsTalent.x1, extraBagsTalent.x2);
             }
         }
+        const starSignExtraCap = player.starSigns.reduce((sum, sign) => sum += sign.getBonus("Carry Cap"), 0);
         return player.anvil.getCapacity(player.capacity.getMaterialCapacity(allCapBonus, stampData ? stampData[1][7].getBonus(player.skills.get(SkillsIndex.Smithing)) : 0, gemStore?.purchases.find(x => x.no == 58)?.pucrhased ?? 0, stampData ? stampData[2][1].getBonus() : 0, extraBagsTalentBonus, starSignExtraCap));
     }, [idleonData, player, allCapBonus])
 
@@ -463,7 +463,6 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
         const gemStore = theData.get("gems") as GemStore;
 
         let extraBagsTalentBonus: number = 0;
-        let starSignExtraCap: number = 0; // TODO!
 
         if (player.talents) {
             const extraBagsTalent = player.talents.find(x => x.skillIndex == CapacityConst.ExtraBagsSkillIndex);
@@ -471,7 +470,7 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
                 extraBagsTalentBonus = lavaFunc(extraBagsTalent.funcX, extraBagsTalent.level, extraBagsTalent.x1, extraBagsTalent.x2);
             }
         }
-
+        const starSignExtraCap = player.starSigns.reduce((sum, sign) => sum += sign.getBonus("Carry Cap"), 0);
         return player.capacity.getMaterialCapacity(allCapBonus, stampData ? stampData[1][7].getBonus(player.skills.get(SkillsIndex.Smithing)) : 0, gemStore?.purchases.find(x => x.no == 58)?.pucrhased ?? 0, stampData ? stampData[2][1].getBonus() : 0, extraBagsTalentBonus, starSignExtraCap)
     }, [idleonData, player, allCapBonus])
     return (
@@ -547,11 +546,18 @@ function TalentDisplay({ player }: { player: Player }) {
     )
 }
 
-function PostOfficeDisplay({ player }: { player: Player }) {
+function PostOfficeDisplay({ player, extra }: { player: Player, extra: PostOfficeExtra }) {
     const size = useContext(ResponsiveContext);
+
+    const unSpentPoints = useMemo(() => {
+        const totalSpent = player.postOffice.reduce((sum, box) => sum += box.level, 0);
+        return extra.misc + extra.streak + extra.complete - totalSpent;
+    }, [player, extra]);
+
     return (
         <Box pad="medium" gap="small" fill>
             <Text size='medium'>Post Office</Text>
+            <Text size='small'>Unspent: {unSpentPoints}</Text>
             <Grid columns={{ count: size == "small" ? 2 : 4, size: "auto"}} gap="none">
                 {
                     player.postOffice.map((box, index) => {
@@ -617,6 +623,7 @@ function PlayerTab({ player }: PlayerTabProps) {
     const [playerStatues, setPlayerStatues] = useState<PlayerStatues | undefined>(undefined);
     const [index, setIndex] = useState<number>(1);
     const [activeBubbles, setActiveBubbles] = useState<Bubble[]>([]);
+    const [poExtra, setPoExtra] = useState<PostOfficeExtra>({});
 
     const idleonData = useContext(AppContext);
     const onActive = (nextIndex: number) => setIndex(nextIndex);
@@ -635,6 +642,7 @@ function PlayerTab({ player }: PlayerTabProps) {
                 }).filter(notUndefined);
                 setActiveBubbles(bubbleArray);
             }
+            setPoExtra(theData.get("POExtra"));
         }
     }, [idleonData, player]);
 
@@ -655,11 +663,11 @@ function PlayerTab({ player }: PlayerTabProps) {
                     {index == 1 && <MiscStats player={player} activeBubbles={activeBubbles} />}
                     {index == 2 && <ShowSkills skillsMap={player.skills} skillsRank={player.skillsRank} />}
                     {index == 3 && <EquipmentDisplay player={player} />}
-                    {index == 4 && <StatuesDisplay playerStatues={playerStatues} />}
+                    {index == 4 && <StatuesDisplay playerStatues={playerStatues} player={player} />}
                     {index == 5 && <AnvilDisplay player={player} activeBubbles={activeBubbles} playerStatues={playerStatues} />}
                     {index == 6 && <CarryCapacityDisplay player={player} />}
                     {index == 7 && <TalentDisplay player={player} />}
-                    {index == 8 && <PostOfficeDisplay player={player} />}
+                    {index == 8 && <PostOfficeDisplay player={player} extra={poExtra} />}
                 </Box>
             </Grid>
         </ShadowBox>

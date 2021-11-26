@@ -96,7 +96,6 @@ export const AppProvider: React.FC<{}> = (props) => {
             accountData.set("statues", []);
           }
           // AttackLoadout_0 (obviously named)
-          // POu_4 (Post office per player) (UIboxUpg0 - for box images)
           // CardEquip_0
           // Prayers_0
           const timeAway = JSON.parse(doc.get('TimeAway'));
@@ -141,6 +140,11 @@ export const AppProvider: React.FC<{}> = (props) => {
           accountData.set("timeAway", timeAway);
           accountData.set("lootyData", parseLooty(JSON.parse(doc.get("Cards1"))));
           accountData.set("rawData", doc.data());
+          accountData.set("POExtra", {
+            streak: doc.get("CYDeliveryBoxStreak"),
+            complete: doc.get("CYDeliveryBoxComplete"),
+            misc: doc.get("CYDeliveryBoxMisc"),
+          });
           // CYWorldTeleports (if I ever care to show it)
           // SaltLick
           // CogO
