@@ -726,9 +726,6 @@ const customTabs = {
         `
     },
     tabs: {
-        gap: {
-            horizontal: 'none'
-        },
         extend: ({ theme }: { theme: any }) => css`
             max-width: 100%;
             min-width: 100%;

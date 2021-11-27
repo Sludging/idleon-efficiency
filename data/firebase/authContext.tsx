@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getAuth, User } from 'firebase/auth';
 import app from "./config";
-import { GoogleAuthProvider, signInWithPopup, signInWithCredential, signOut } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup, signInWithCredential, signOut, EmailAuthProvider } from "firebase/auth";
 
 import { sendEvent, loginEvent } from '../../lib/gtag';
 import { useRouter } from "next/dist/client/router";
@@ -12,6 +12,7 @@ interface AuthData {
     loginFunction: Function
     logoutFunction: Function
     tokenFunction: Function
+    emailLoginFunction: Function
 }
 
 export const AuthContext = React.createContext<AuthData | null>(null);
@@ -58,6 +59,20 @@ export const AuthProvider: React.FC<{}> = (props) => {
             });
     }
 
+    const loginThroughEmailPassword = (email: string, password: string) => {
+        const auth = getAuth(app);
+        const credential = EmailAuthProvider.credential(email, password);
+        signInWithCredential(auth, credential)
+            .then((result) => {
+                setUser(result.user);
+                loginEvent("EMAIL");
+            }).catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode, errorMessage);
+            });
+    }
+
     const logout = () => {
         const auth = getAuth(app);
         signOut(auth)
@@ -95,6 +110,7 @@ export const AuthProvider: React.FC<{}> = (props) => {
             user: user,
             isLoading: loading,
             loginFunction: loginUser,
+            emailLoginFunction: loginThroughEmailPassword,
             logoutFunction: logout,
             tokenFunction: loginThroughToken
         }}>

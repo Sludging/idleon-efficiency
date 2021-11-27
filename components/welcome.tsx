@@ -29,16 +29,21 @@ function SpecialButton({ isActive, text, clickHandler, step }: { isActive: boole
 export default function Welcome() {
     const authData = useContext(AuthContext);
     const [value, setValue] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [showLayer, setShowLayer] = useState(false);
     const [index, setIndex] = useState<number>(1);
 
     const size = useContext(ResponsiveContext);
 
     const onActive = (nextIndex: number) => setIndex(nextIndex);
-    const onButtonClick = (toCall: Function | undefined, value?: string) => {
+    const onButtonClick = (toCall: Function | undefined, value?: string, value2?: string) => {
         try {
             if (toCall) {
-                if (value) {
+                if (value2) {
+                    toCall(value, value2);
+                }
+                else if (value) {
                     toCall(value);
                 }
                 else {
@@ -92,6 +97,19 @@ export default function Welcome() {
                                         onChange={event => setValue(event.target.value)}
                                     />
                                     <Button gap="large" primary color="brand" label="Login" onClick={() => onButtonClick(authData?.tokenFunction, value)} />
+                                </Box>
+                                <Box direction="row" fill pad="large" gap="small">
+                                    <TextInput
+                                        placeholder="Enter Email"
+                                        value={email}
+                                        onChange={event => setEmail(event.target.value)}
+                                    />
+                                    <TextInput
+                                        placeholder="Enter Password"
+                                        value={password}
+                                        onChange={event => setPassword(event.target.value)}
+                                    />
+                                    <Button gap="large" primary color="brand" label="Login" onClick={() => onButtonClick(authData?.emailLoginFunction, email, password)} />
                                 </Box>
                             </Grid>
                             }
