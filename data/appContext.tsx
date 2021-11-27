@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { doc, initializeFirestore, onSnapshot, Firestore } from 'firebase/firestore';
+import { doc, initializeFirestore, onSnapshot, Firestore, DocumentSnapshot as Document } from 'firebase/firestore';
 import { getApp } from 'firebase/app';
 import { useContext } from 'react';
 import { AuthContext } from './firebase/authContext';
-import { getDatabase, Database, ref, get, child, goOnline, Document } from 'firebase/database';
+import { getDatabase, Database, ref, get, child, goOnline } from 'firebase/database';
 
 import { sendEvent } from '../lib/gtag';
 
