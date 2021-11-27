@@ -101,8 +101,7 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
             </Box>
             <Box align="center">
                 {
-                    Object.entries(cauldron.bubbles).map(([_, bubble], index) => {
-
+                    Object.entries(cauldron.bubbles).filter(([_, bubble]) => bubble.level > 0).map(([_, bubble], index) => {
                         return (
                             <Box key={`cauldron_${index}_${bubble.name}`}>
                                     <Tip
@@ -186,7 +185,9 @@ function Alchemy() {
             // get undeveloped costs bubble level
             setUndevelopedCostsBubbleLevel(alchemyData?.getUndevelopedCostsBubbleLevel() ?? 0);
             setBarleyBrewVialLevel(alchemyData?.getBarleyBrewVialLevel() ?? 0);
-            setHasAlchemyAchievement(achievementsInfo[AchievementConst.SmartBoiIndex].completed ?? false); // TODO: Change this to actual achievement info
+            if (achievementsInfo) {
+                setHasAlchemyAchievement(achievementsInfo[AchievementConst.SmartBoiIndex].completed ?? false);
+            }
         }
     }, [idleonData, alchemyData, hasAlchemyAchievement])
 
