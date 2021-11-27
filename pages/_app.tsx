@@ -35,9 +35,10 @@ const customTheme = deepMerge(dark, {
   global: {
     font: {
       family: "Rubik",
-      size: "14px"
+      size: "14px",
     },
     colors: {
+      "text": "#efefef",
       "brand": "#0376E3",
       "accent-1": "#FF3E82",
       "accent-2": "#BEC2CC",
@@ -47,12 +48,21 @@ const customTheme = deepMerge(dark, {
       "dark-2": "#1B1D24",
       "background": "#1B1D24",
       "white-1": "#30333A",
+      "placeholder": "#96979a"
     }
+  },
+  formField: {
+    border: undefined
   },
   button: {
     border: {
       radius: undefined,
     },
+    primary: {
+      extend: ({}) => css`
+        font-size: 16px;
+      `
+    }
   },
   tab: {
     active: {

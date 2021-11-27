@@ -7,13 +7,23 @@ import {
     Button,
     Layer,
     Image,
+    FormField,
     ResponsiveContext
 } from 'grommet'
+import styled from 'styled-components'
 import { useEffect, useContext, useState } from 'react';
 import { AuthContext } from '../data/firebase/authContext'
 import ShadowBox from './base/ShadowBox';
 import { MouseEventHandler } from 'hoist-non-react-statics/node_modules/@types/react';
 import { NextSeo } from 'next-seo';
+
+const VerticalLine = styled.hr`
+    border: 0;
+    margin: 0;
+    border-left: 1px solid #30333A;
+    height: 100%; 
+    float: left;
+`
 
 function SpecialButton({ isActive, text, clickHandler, step }: { isActive: boolean, text: string | React.ReactNode, clickHandler: MouseEventHandler, step: number }) {
     return (
@@ -33,6 +43,7 @@ export default function Welcome() {
     const [password, setPassword] = useState('');
     const [showLayer, setShowLayer] = useState(false);
     const [index, setIndex] = useState<number>(1);
+    const [error, setError] = useState<string>('');
 
     const size = useContext(ResponsiveContext);
 
@@ -41,10 +52,10 @@ export default function Welcome() {
         try {
             if (toCall) {
                 if (value2) {
-                    toCall(value, value2);
+                    toCall(value, value2, handleError);
                 }
                 else if (value) {
-                    toCall(value);
+                    toCall(value, handleError);
                 }
                 else {
                     toCall();
@@ -59,13 +70,27 @@ export default function Welcome() {
         }
     }
 
+    const handleError = (code: string) => {
+        switch(code) {
+            case "auth/invalid-credential":
+                setError("The inputed token is invalid, please try again");
+                break;
+            case "auth/invalid-email":
+                setError("Invalid username and email, please try again");
+                break;
+            default:
+                setError("Something went wrong, please try again");
+                break;
+        }
+    }
+
 
     useEffect(() => {
     });
     return (
         <Box>
             <NextSeo title="Boost your efficiency in Legends of Idleon!" />
-            <Box fill align="center" gap="medium" height={{ min: '627px' }} background="brand">
+            <Box fill align="center" gap="medium" height={{ min: '571px', max: '571px' }} background="brand">
                 <Box margin={{ left: 'auto', right: 'auto' }}>
                     <Grid columns="1/2" fill pad="xlarge">
                         <Box pad="small" gap="small">
@@ -77,28 +102,38 @@ export default function Welcome() {
                 </Box>
                 <Box width={{ max: '1440px' }} pad="large" fill margin={{ left: 'auto', right: 'auto' }} style={{ position: 'relative', top: '150px' }} >
                     {!authData?.isLoading && !authData?.user &&
-                        <ShadowBox pad="large" background="dark-2" fill margin={{ left: 'auto', right: 'auto' }}>
+                        <ShadowBox pad="large" background="dark-2" fill margin={{ left: 'auto', right: 'auto' }} flex={false}>
                             { size == "small" ? 
                                 <Box gap="medium" pad="small">
                                     <Text size="large">This website is not designed for mobile.</Text>
                                     <Text size="medium">Go check it out on desktop!</Text>
                                 </Box>
                             : 
-                            <Grid columns="1/2" fill pad={{ left: "large" }}>
-                                <Box gap="medium">
-                                    <Text size="32px">Sign in to Idleon Efficiency</Text>
-                                    <Text size="xsmall">This only needs to be done once!</Text>
+                            <Box>
+                            <Grid columns={["45%","10%","45%"]} pad={{ left: "large" }}>
+                                <Box gap="medium" alignSelf="center" pad={{left: 'medium', right: 'medium'}}>
+                                    <Text size="24px">Sign in with token</Text>
+                                    <Text size="xsmall">Use this if you signed into Legends of Idleon using google</Text>
+                                    <Box direction="row">
+                                        <TextInput
+                                            placeholder="Enter Token"
+                                            value={value}
+                                            onChange={event => setValue(event.target.value)}
+                                        />
+                                        <Button style={{color: "white"}} primary color="accent-1" label="Login" onClick={() => onButtonClick(authData?.tokenFunction, value)} />
+                                    </Box>
                                     <Anchor onClick={() => setShowLayer(true)} color="brand">Learn how to get your token</Anchor>
                                 </Box>
-                                <Box direction="row" fill pad="large" gap="small">
-                                    <TextInput
-                                        placeholder="Enter Token"
-                                        value={value}
-                                        onChange={event => setValue(event.target.value)}
-                                    />
-                                    <Button gap="large" primary color="brand" label="Login" onClick={() => onButtonClick(authData?.tokenFunction, value)} />
+                                <Box align="center">
+                                    <VerticalLine />
+                                    <Box margin={{bottom: 'medium', top: 'small'}} align="center">
+                                        <Text>Or</Text>
+                                    </Box>
+                                    <VerticalLine />
                                 </Box>
-                                <Box direction="row" fill pad="large" gap="small">
+                                <Box gap="small" pad={{left: 'large', right: 'large'}}>
+                                    <Text size="24px">Sign in with email</Text>
+                                    <Text size="xsmall">Use this if you signed into Legends of Idleon using email</Text>
                                     <TextInput
                                         placeholder="Enter Email"
                                         value={email}
@@ -109,15 +144,22 @@ export default function Welcome() {
                                         value={password}
                                         onChange={event => setPassword(event.target.value)}
                                     />
-                                    <Button gap="large" primary color="brand" label="Login" onClick={() => onButtonClick(authData?.emailLoginFunction, email, password)} />
+                                    <Button primary color="brand" label="Login" onClick={() => onButtonClick(authData?.emailLoginFunction, email, password)} />
                                 </Box>
                             </Grid>
+                            {
+                                error != '' && 
+                                <Box pad={{ top: "medium"}} align="center">
+                                    <FormField error={<Text color="accent-1">{error}</Text>}/>
+                                </Box>
+                            }
+                            </Box>
                             }
                         </ShadowBox>
                     }
                 </Box>
             </Box>
-            <Box height="150px"></Box>
+            <Box height="300px"></Box>
             <Box>
                 {showLayer &&
                     <Layer

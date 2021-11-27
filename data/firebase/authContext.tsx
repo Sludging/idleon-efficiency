@@ -45,7 +45,7 @@ export const AuthProvider: React.FC<{}> = (props) => {
             });
     }
 
-    const loginThroughToken = (id_token: string) => {
+    const loginThroughToken = (id_token: string, callback?: Function) => {
         const auth = getAuth(app);
         const credential = GoogleAuthProvider.credential(id_token, null);
         signInWithCredential(auth, credential)
@@ -55,11 +55,14 @@ export const AuthProvider: React.FC<{}> = (props) => {
             }).catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
+                if (callback) {
+                    callback(errorCode);
+                }
+                console.debug(errorCode, errorMessage);
             });
     }
 
-    const loginThroughEmailPassword = (email: string, password: string) => {
+    const loginThroughEmailPassword = (email: string, password: string, callback?: Function) => {
         const auth = getAuth(app);
         const credential = EmailAuthProvider.credential(email, password);
         signInWithCredential(auth, credential)
@@ -69,7 +72,10 @@ export const AuthProvider: React.FC<{}> = (props) => {
             }).catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
+                if (callback) {
+                    callback(errorCode);
+                }
+                console.debug(errorCode, errorMessage);
             });
     }
 
