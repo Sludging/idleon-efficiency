@@ -123,12 +123,16 @@ function Stamps() {
             setStampData(theData.get("stamps"));
 
             const alchemy = theData.get("alchemy") as Alchemy;
-            const blueFlavVial = alchemy.vials[AlchemyConst.BlueFlav];
-            const blueFlavPower = lavaFunc(blueFlavVial.func, blueFlavVial.level, blueFlavVial.x1, blueFlavVial.x2);
-            setBlueFlavPercent(blueFlavPower / 100); // divide by 100 to get the %.
+            const blueFlavVial = alchemy?.vials[AlchemyConst.BlueFlav];
+            if (blueFlavVial) {
+                const blueFlavPower = lavaFunc(blueFlavVial.func, blueFlavVial.level, blueFlavVial.x1, blueFlavVial.x2);
+                setBlueFlavPercent(blueFlavPower / 100); // divide by 100 to get the %.
+            }
 
             const bribes = theData.get("bribes") as Bribe[];
-            setHasBribe(bribes[BribeConst.StampBribe].status);
+            if (bribes) {
+                setHasBribe(bribes[BribeConst.StampBribe].status);
+            }
         }
     }, [idleonData, stampData])
 
