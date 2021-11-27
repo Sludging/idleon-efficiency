@@ -664,7 +664,10 @@ function PlayerTab({ player }: PlayerTabProps) {
     useEffect(() => {
         if (idleonData) {
             const theData = idleonData.getData();
-            setPlayerStatues(theData.get("statues")[player.playerID]);
+            const statues = theData.get("statues");
+            if (statues) {
+                setPlayerStatues(statues[player.playerID]);
+            }
             const alchemy = theData.get("alchemy") as Alchemy;
             if (player.activeBubblesString.length > 0) {
                 const bubbleArray: Bubble[] = player.activeBubblesString.map((bubbleString, _) => {
