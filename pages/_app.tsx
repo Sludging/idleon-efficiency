@@ -35,9 +35,13 @@ const customTheme = deepMerge(dark, {
   global: {
     font: {
       family: "Rubik",
-      size: "14px"
+      size: "14px",
     },
     colors: {
+      text: {
+        dark: "#efefef",
+        light: '#444444'
+      },
       "brand": "#0376E3",
       "accent-1": "#FF3E82",
       "accent-2": "#BEC2CC",
@@ -47,12 +51,21 @@ const customTheme = deepMerge(dark, {
       "dark-2": "#1B1D24",
       "background": "#1B1D24",
       "white-1": "#30333A",
+      "placeholder": "#96979a"
     }
+  },
+  formField: {
+    border: undefined
   },
   button: {
     border: {
       radius: undefined,
     },
+    primary: {
+      extend: ({}) => css`
+        font-size: 16px;
+      `
+    }
   },
   tab: {
     active: {
@@ -120,7 +133,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet" />
       </Head>
       <Grommet theme={customTheme} full>
         <AuthProvider>

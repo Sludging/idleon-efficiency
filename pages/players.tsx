@@ -134,7 +134,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
     const activeShrines = useMemo(() => {
         const theData = idleonData.getData();
         const shrines = theData.get("shrines") as Shrine[];
-        return shrines.filter((shrine) => shrine.currentMap == player.currentMapId);
+        return shrines.filter((shrine) => shrine.currentMap == player.currentMapId && shrine.level > 0);
     }, [idleonData, player]);
 
     return (
@@ -664,7 +664,10 @@ function PlayerTab({ player }: PlayerTabProps) {
     useEffect(() => {
         if (idleonData) {
             const theData = idleonData.getData();
-            setPlayerStatues(theData.get("statues")[player.playerID]);
+            const statues = theData.get("statues");
+            if (statues) {
+                setPlayerStatues(statues[player.playerID]);
+            }
             const alchemy = theData.get("alchemy") as Alchemy;
             if (player.activeBubblesString.length > 0) {
                 const bubbleArray: Bubble[] = player.activeBubblesString.map((bubbleString, _) => {
@@ -726,9 +729,6 @@ const customTabs = {
         `
     },
     tabs: {
-        gap: {
-            horizontal: 'none'
-        },
         extend: ({ theme }: { theme: any }) => css`
             max-width: 100%;
             min-width: 100%;
