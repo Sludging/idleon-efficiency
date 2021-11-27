@@ -101,8 +101,7 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
             </Box>
             <Box align="center">
                 {
-                    Object.entries(cauldron.bubbles).map(([_, bubble], index) => {
-
+                    Object.entries(cauldron.bubbles).filter(([_, bubble]) => bubble.level > 0).map(([_, bubble], index) => {
                         return (
                             <Box key={`cauldron_${index}_${bubble.name}`}>
                                     <Tip
