@@ -134,7 +134,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
     const activeShrines = useMemo(() => {
         const theData = idleonData.getData();
         const shrines = theData.get("shrines") as Shrine[];
-        return shrines.filter((shrine) => shrine.currentMap == player.currentMapId);
+        return shrines.filter((shrine) => shrine.currentMap == player.currentMapId && shrine.level > 0);
     }, [idleonData, player]);
 
     return (
