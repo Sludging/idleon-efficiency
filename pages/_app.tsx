@@ -38,7 +38,10 @@ const customTheme = deepMerge(dark, {
       size: "14px",
     },
     colors: {
-      "text": "#efefef",
+      text: {
+        dark: "#efefef",
+        light: '#444444'
+      },
       "brand": "#0376E3",
       "accent-1": "#FF3E82",
       "accent-2": "#BEC2CC",
