@@ -539,6 +539,7 @@ function TalentDisplay({ player }: { player: Player }) {
                                         const talent = player.talents.find(x => x.skillIndex == originalTalent.skillIndex);
                                         if (talent) {
                                             return (
+                                                <Box key={index}>
                                                     <Tip
                                                         plain
                                                         content={
@@ -550,17 +551,18 @@ function TalentDisplay({ player }: { player: Player }) {
                                                         }
                                                         dropProps={{ align: { top: 'bottom' } }}
                                                     >  
-                                                    <Box pad="xxsmall" key={`player_${player.playerID}_talents_${index}`} direction="row" gap="xxsmall">
-                                                        <Box width="50px" align="center">
-                                                            <Box style={{ opacity: talent.level > 0 ? 1 : 0.2 }} className={talent.getClass()} title={talent.name} />
+                                                        <Box pad="xxsmall" key={`player_${player.playerID}_talents_${index}`} direction="row" gap="xxsmall">
+                                                            <Box width="50px" align="center">
+                                                                <Box style={{ opacity: talent.level > 0 ? 1 : 0.2 }} className={talent.getClass()} title={talent.name} />
+                                                            </Box>
+                                                            <Box direction="row" gap="xxsmall">
+                                                                <Text>{talent.level} </Text>
+                                                                <Text>/</Text>
+                                                                <Text>{talent.maxLevel}</Text> 
+                                                            </Box>
                                                         </Box>
-                                                        <Box direction="row" gap="xxsmall">
-                                                            <Text>{talent.level} </Text>
-                                                            <Text>/</Text>
-                                                            <Text>{talent.maxLevel}</Text> 
-                                                        </Box>
-                                                    </Box>
                                                     </Tip>
+                                                </Box>
                                             )
                                         }
                                         return <></>
@@ -767,7 +769,7 @@ function Players() {
         if (idleonData) {
             const theData = idleonData.getData();
             setPlayerData(theData.get("players"));
-            if (playerData && activePlayer === '') {
+            if (playerData && playerData.length > 0 && activePlayer === '') {
                 const firstPlayer = playerData[0];
                 setActivePlayer(firstPlayer.playerID.toString() ?? '');
             }

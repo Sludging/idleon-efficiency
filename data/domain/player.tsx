@@ -1,3 +1,5 @@
+import { DocumentSnapshot as Document } from "@firebase/firestore";
+
 import { itemMap, monstersMap, mapsMap } from "../maps";
 import { Capacity } from './capacity';
 import { StarSignMap, StarSign } from './starsigns';
@@ -6,34 +8,6 @@ import { Worship } from './worship';
 import { ClassIndex, Talent, ClassTalentMap, GetTalentArray } from './talents';
 import { CardInfo } from "./cards";
 import { notUndefined } from '../utility';
-
-export interface rawPlayerData {
-    equipment: Array<Map<string, string>>
-    equipmentStoneData: Map<string, Map<string, number>> // NOT HANDLED
-    toolsStoneData: Map<string, Map<string, number>> // NOT HANDLED
-    stats: Array<number>
-    classNumber: number
-    afkTarget: number
-    currentMap: number
-    starSigns: Array<number>
-    money: number
-    skills: Array<number>
-    anvilProduction: Array<Array<number>>
-    anvilStats: Array<number>
-    anvilSelected: Array<number>
-    maxCarryCap: string
-    prayers: number[] // NOT MAPPED YET
-    postOffice: string
-    timeAway: number // NOT MAPPED YET
-    playerStuff: string // NOT MAPPED YET
-    attackLoadout: number[][] // NOT MAPPED YET
-    equippedCards: string[]
-    currentCardSet: string
-    talentLevels: string
-    talentMaxLevels: string
-    activeBubbles: string[]
-    activeBuffs: Record<number, number>[]
-}
 
 export class PlayerStats {
     strength: number = 0;
@@ -246,6 +220,7 @@ export class Player {
     stats: PlayerStats = new PlayerStats();
     level: number = 0;
     class: string = "Blank";
+    classId: ClassIndex = ClassIndex.Beginner;
     currentMonster: string = "Blank";
     currentMap: string = "Blank";
     currentMapId: number = 0;
@@ -307,162 +282,179 @@ export class Player {
     }
 }
 
+const functionArray: Function[] = [
+    (doc: Document, player: Player) => parseEquipment(doc.get(`EquipOrder_${player.playerID}`), player),
+    (doc: Document, player: Player) => parseStats(doc.get(`PVStatList_${player.playerID}`), player),
+    (doc: Document, player: Player) => { 
+        player.class = ClassIndex[doc.get(`CharacterClass_${player.playerID}`)]?.replace(/_/g, " ") || "New Class?";
+        player.classId = doc.get(`CharacterClass_${player.playerID}`) as ClassIndex;
+    },
+    (doc: Document, player: Player) => { player.currentMonster = monstersMap.get(doc.get(`AFKtarget_${player.playerID}`))?.replace(/_/g, " ") || "New Monster?"; },
+    (doc: Document, player: Player) => parseMap(doc.get(`CurrentMap_${player.playerID}`), player),
+    (doc: Document, player: Player) => parseStarSigns(doc.get(`PVtStarSign_${player.playerID}`), player),
+    (doc: Document, player: Player) => parseStarSigns(doc.get(`PVtStarSign_${player.playerID}`), player),
+    (doc: Document, player: Player) => { player.money = doc.get(`Money_${player.playerID}`) },
+    (doc: Document, player: Player) => parseSkills(doc.get(`Lv0_${player.playerID}`), player),
+    (doc: Document, player: Player) => parseAnvil(
+        doc.get(`AnvilPA_${player.playerID}`),
+        doc.get(`AnvilPAstats_${player.playerID}`),
+        doc.get(`AnvilPAselect_${player.playerID}`),
+        player
+    ),
+    (doc: Document, player: Player) => { player.capacity = new Capacity(JSON.parse(doc.get(`MaxCarryCap_${player.playerID}`))) },
+    (doc: Document, player: Player) => parseTalents(
+        doc.get(`SL_${player.playerID}`),
+        doc.get(`SM_${player.playerID}`),
+        player
+    ),
+    (doc: Document, player: Player) => parsePostOffice(doc.get(`POu_${player.playerID}`), player),
+    (doc: Document, player: Player) => { player.activeBubblesString = (JSON.parse(doc.get('CauldronBubbles')) as string[][])[player.playerID] },
+    (doc: Document, player: Player) => { 
+        const timeAway = JSON.parse(doc.get('TimeAway'));
+        player.afkFor = timeAway['Player'] - (doc.get(`PTimeAway_${player.playerID}`) * 1000);
+    },
+    (doc: Document, player: Player) => { 
+        const jsonStuff = JSON.parse(doc.get(`PlayerStuff_${player.playerID}`));
+        player.worship.currentCharge = jsonStuff[0];
+    },
+    (doc: Document, player: Player) => { 
+        const currentCardSet = JSON.parse(doc.get(`CSetEq_${player.playerID}`));
+        const equippedCards = doc.get(`CardEquip_${player.playerID}`) as string[];
+        const cards = JSON.parse(doc.get('Cards0'));
+        player.cardInfo = new CardInfo(cards, currentCardSet, equippedCards);
+    },
+    (doc: Document, player: Player) => { 
+        const activeBuffs = doc.get(`BuffsActive_${player.playerID}`) as Record<number, number>[];
+        player.activeBuffs = activeBuffs.map((buff) => {
+            return player.talents.find(x => x.skillIndex == buff[0]);
+        }).filter(notUndefined)
+    }
+];
 
-function parseEquipment(rawPlayerData: rawPlayerData) {
-    let currentPlayer = new PlayerEquipment();
-    rawPlayerData.equipment?.forEach((data, equipIndex) => {
+const parsePostOffice = (postOffice: string, player: Player) => {
+    const jsonPostOffice = JSON.parse(postOffice);
+    player.postOffice.forEach((box, index) => {
+        box.level = jsonPostOffice[index];
+    });
+}
+
+const parseTalents = (talentLevels: string, talentMaxLevels: string, player: Player) => {
+    const jsonTalents = JSON.parse(talentLevels);
+    const jsonMaxTalents = JSON.parse(talentMaxLevels);
+
+    const talentPageNames: string[] = ClassTalentMap[player.classId].concat(Array(5).fill("Blank").map((_, i) => `Special Talent ${i + 1}`))
+    talentPageNames.forEach((page: string) => {
+        player.talents = player.talents.concat(GetTalentArray(page));
+    })
+
+    player.talents.forEach((talent) => {
+        talent.level = jsonTalents[talent.skillIndex] ?? 0;
+        talent.maxLevel = jsonMaxTalents[talent.skillIndex] ?? 0;
+    })
+}
+
+const parseAnvil = (anvilProduction: number[][], anvilStats: number[], anvilSelected: number[], player: Player) => {
+    // TODO: Get rid of magic indexes
+    player.anvil.production.forEach((item, index) => {
+        item.currentAmount = anvilProduction[index][0];
+        item.currentXP = anvilProduction[index][1];
+        item.currentProgress = anvilProduction[index][2];
+        item.totalProduced = anvilProduction[index][3];
+        item.hammers = anvilSelected.filter(x => x == index).length;
+    })
+
+    player.anvil.availablePoints = anvilStats[0];
+    player.anvil.pointsFromCoins = anvilStats[1];
+    player.anvil.pointsFromMats = anvilStats[2];
+    player.anvil.xpPoints = anvilStats[3];
+    player.anvil.speedPoints = anvilStats[4];
+    player.anvil.capPoints = anvilStats[5];
+
+    player.anvil.currentlySelect = anvilSelected;
+}
+
+const parseSkills = (skills: Array<number>, player: Player) => {
+    skills.forEach((skillLevel, skillIndex) => {
+        // Only get the indexes we care about
+        if (skillIndex in SkillsIndex) {
+            // update the player skill level
+            player.skills.set(skillIndex as SkillsIndex, skillLevel);
+        }
+    })
+}
+
+const parseStarSigns = (starSigns: string, player: Player) => {
+    player.starSigns = starSigns.split(',').map((sign) => {
+        const asNumber: number = Number(sign);
+        if (!isNaN(asNumber)) {
+            return StarSignMap[asNumber];
+        }
+    }).filter(notUndefined);
+}
+
+const parseMap = (currentMap: number, player: Player) => {
+    player.currentMapId = currentMap;
+    player.currentMap = mapsMap.get(currentMap.toString())?.replace(/_/g, " ") || "New Map?";
+}
+
+const parseStats = (stats: Array<number>, player: Player) => {
+    player.stats.setStats(stats);
+    player.level = stats[4];
+}
+
+const parseEquipment = (equipment: Array<Map<string, string>>, player: Player) => {
+    let playerEquipment = new PlayerEquipment();
+    equipment?.forEach((data, equipIndex) => {
         if (equipIndex == 0) { // armor 
             Object.entries(data).forEach(([location, name], _) => {
-                currentPlayer.equipment.push(new Equipment(name, parseInt(location), "armor"));
+                playerEquipment.equipment.push(new Equipment(name, parseInt(location), "armor"));
             })
         }
         if (equipIndex == 1) { // tools
             Object.entries(data).forEach(([location, name], _) => {
-                currentPlayer.tools.push(new Tool(name, parseInt(location), "tools"));
+                playerEquipment.tools.push(new Tool(name, parseInt(location), "tools"));
             })
         }
         if (equipIndex == 2) { // food
             Object.entries(data).forEach(([location, name], _) => {
-                currentPlayer.food.push(new Food(name, parseInt(location), "food"));
+                playerEquipment.food.push(new Food(name, parseInt(location), "food"));
             })
         }
     });
 
-    return currentPlayer;
+    player.gear = playerEquipment;
 }
 
-export default function parsePlayer(rawData: Array<rawPlayerData>, timeAway: Record<string, number>, playerNames: Array<string>, cards: Record<string, number>) {
-    const allSkillsMap: Map<SkillsIndex, Array<number>> = new Map<SkillsIndex, Array<number>>();
-    const parsedData = rawData.map((rawPlayerData, index) => {
-        if (!playerNames) {
-            console.log("Player Names is missing!");
-        }
-        if (!rawPlayerData.classNumber) { // Temp handling of uncreated players, maybe we can detect this better.
-            return undefined;
-        }
-        let currentPlayer = new Player(index, playerNames ? playerNames[index] : "");
-        currentPlayer.gear = parseEquipment(rawPlayerData);
-        if (rawPlayerData.stats) {
-            currentPlayer.stats.setStats(rawPlayerData.stats);
-            currentPlayer.level = rawPlayerData.stats[4];
-        }
-        currentPlayer.class = ClassIndex[rawPlayerData.classNumber]?.replace(/_/g, " ") || "New Class?";
-        if (rawPlayerData.afkTarget) {
-            currentPlayer.currentMonster = monstersMap.get(rawPlayerData.afkTarget.toString())?.replace(/_/g, " ") || "New Monster?";
-        }
-        if (rawPlayerData.currentMap) {
-            currentPlayer.currentMap = mapsMap.get(rawPlayerData.currentMap.toString())?.replace(/_/g, " ") || "New Map?";
-            currentPlayer.currentMapId = rawPlayerData.currentMap;
-        }
-        if (rawPlayerData.starSigns) {
-            currentPlayer.starSigns = rawPlayerData.starSigns.map((sign: number) => {
-                return StarSignMap[sign];
-            }).filter(x => x != undefined);
-        }
-        if (rawPlayerData.money) {
-            currentPlayer.money = rawPlayerData.money;
-        }
-        if (rawPlayerData.skills) {
-            rawPlayerData.skills.forEach((skillLevel, skillIndex) => {
-                // Only get the indexes we care about
-                if (skillIndex in SkillsIndex) {
-                    // update the player skill level
-                    currentPlayer.skills.set(skillIndex as SkillsIndex, skillLevel);
-                    // record skill levels across all players in a map
-                    if (!allSkillsMap.has(skillIndex)) {
-                        allSkillsMap.set(skillIndex, []);
-                    }
-                    allSkillsMap.get(skillIndex)?.push(skillLevel);
-                }
-            })
-        }
+export default function parsePlayers(doc: Document, accountData: Map<string, any>) {
+    const playerNames = accountData.get("playerNames") as string[];
+    let parsedData = playerNames.map((playerName, index) => {
+        let player = new Player(index, playerName);
 
-        if (rawPlayerData.anvilProduction) {
-            currentPlayer.anvil.production.forEach((item, index) => {
-                // TODO: Get rid of magic index
-                item.currentAmount = rawPlayerData.anvilProduction[index][0];
-                item.currentXP = rawPlayerData.anvilProduction[index][1];
-                item.currentProgress = rawPlayerData.anvilProduction[index][2];
-                item.totalProduced = rawPlayerData.anvilProduction[index][3];
-                item.hammers = rawPlayerData.anvilSelected.filter(x => x == index).length;
-            })
-        }
-
-        if (rawPlayerData.anvilStats) {
-            // TODO: Get rid of magic index
-            currentPlayer.anvil.availablePoints = rawPlayerData.anvilStats[0];
-            currentPlayer.anvil.pointsFromCoins = rawPlayerData.anvilStats[1];
-            currentPlayer.anvil.pointsFromMats = rawPlayerData.anvilStats[2];
-            currentPlayer.anvil.xpPoints = rawPlayerData.anvilStats[3];
-            currentPlayer.anvil.speedPoints = rawPlayerData.anvilStats[4];
-            currentPlayer.anvil.capPoints = rawPlayerData.anvilStats[5];
-        }
-
-        if (rawPlayerData.anvilSelected) {
-            currentPlayer.anvil.currentlySelect = rawPlayerData.anvilSelected;
-        }
-
-        if (rawPlayerData.maxCarryCap) {
-            currentPlayer.capacity = new Capacity(JSON.parse(rawPlayerData.maxCarryCap));
-        }
-
-        if (rawPlayerData.talentLevels && rawPlayerData.talentMaxLevels) {
-            // NEED TO CLEAN THIS UP SO MUCH!
+        functionArray.forEach((toExecute) => {
             try {
-                const jsonTalents = JSON.parse(rawPlayerData.talentLevels);
-                const jsonMaxTalents = JSON.parse(rawPlayerData.talentMaxLevels);
-                const classIndex: ClassIndex = rawPlayerData.classNumber as ClassIndex;
-                const talentPageNames: string[] = ClassTalentMap[classIndex].concat(Array(5).fill("Blank").map((_, i) => `Special Talent ${i + 1}`))
-                talentPageNames.forEach((page: string) => {
-                    currentPlayer.talents = currentPlayer.talents.concat(GetTalentArray(page));
-                })
-
-                currentPlayer.talents.forEach((talent) => {
-                    talent.level = jsonTalents[talent.skillIndex] ?? 0;
-                    talent.maxLevel = jsonMaxTalents[talent.skillIndex] ?? 0;
-                })
+                toExecute(doc, player);
             }
-            catch { } // silently absorb
-        }
-
-        if (rawPlayerData.postOffice) {
-            try {
-                const jsonPostOffice = JSON.parse(rawPlayerData.postOffice);
-                currentPlayer.postOffice.forEach((box, index) => {
-                    box.level = jsonPostOffice[index];
-                })
+            catch (e) {
+                console.log("Something went wrong parsing some player data");
+                console.debug(e);
             }
-            catch { } // silently absorb
-        }
+        });
 
-        if (rawPlayerData.activeBubbles) {
-            currentPlayer.activeBubblesString = rawPlayerData.activeBubbles;
-        }
-
-        if (timeAway && rawPlayerData.timeAway) {
-            currentPlayer.afkFor = timeAway['Player'] - (rawPlayerData.timeAway * 1000);
-        }
-
-        if (rawPlayerData.playerStuff) {
-            const jsonStuff = JSON.parse(rawPlayerData.playerStuff);
-            // 0 worship charge, 1 talent preset , 2 card preset?
-            currentPlayer.worship.currentCharge = jsonStuff[0];
-        }
-
-        if (rawPlayerData.equippedCards && rawPlayerData.currentCardSet && cards) {
-            currentPlayer.cardInfo = new CardInfo(cards, JSON.parse(rawPlayerData.currentCardSet), rawPlayerData.equippedCards);
-        }
-
-        if (rawPlayerData.activeBuffs) {
-            currentPlayer.activeBuffs = rawPlayerData.activeBuffs.map((buff) => {
-                return currentPlayer.talents.find(x => x.skillIndex == buff[0]);
-            }).filter(notUndefined)
-        }
-
-        return currentPlayer;
-    }).filter(notUndefined);
+        return player;
+    });
 
     // identify player ranking in each skill
+    const allSkillsMap: Map<SkillsIndex, Array<number>> = new Map<SkillsIndex, Array<number>>();
+    
+    // record skill levels across all players in a map
+    parsedData.forEach((player) => {
+        player.skills.forEach((skillLevel, skillIndex) => {
+            if (!allSkillsMap.has(skillIndex)) {
+                allSkillsMap.set(skillIndex, []);
+            }
+            allSkillsMap.get(skillIndex)?.push(skillLevel);
+        });
+    });
     parsedData.forEach((player) => {
         if (player) {
             for (const [skillIndex, skillLevel] of player.skills) {
