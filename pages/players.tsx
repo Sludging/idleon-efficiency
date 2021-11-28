@@ -10,7 +10,8 @@ import {
     ThemeContext,
     Button,
     ResponsiveContext,
-    Select
+    Select,
+    Meter
 } from 'grommet'
 import { useState, useEffect, useContext, useMemo } from 'react';
 import { AppContext } from '../data/appContext'
@@ -131,6 +132,10 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
         return player.worship.getChargeRate(player.gear.tools[5].raw_name, worshipLevel, popeBonus, chargeCardBonus, flowinStamp.getBonus(worshipLevel), talentBonus);
     }, [player, activeBubbles, idleonData]);
 
+    const estimatedCharge = useMemo(() => {
+        return Math.round(player.worship.getEstimatedCharge(chargeRate, maxCharge, player.afkFor));
+    }, [player, maxCharge, chargeRate]);
+
     const activeShrines = useMemo(() => {
         const theData = idleonData.getData();
         const shrines = theData.get("shrines") as Shrine[];
@@ -155,7 +160,28 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     <Text size="small">WIS = {player.stats.wisdom}</Text>
                     <Text size="small">LUK = {player.stats.luck}</Text>
                     <Text size="small">Charge Rate = {Math.round(chargeRate * 24)}% / day</Text>
-                    <Text size="small">Estimated Charge = {Math.round(player.worship.getEstimatedCharge(chargeRate, maxCharge, player.afkFor))}/{maxCharge}%</Text>
+                    <Text size="small">Current Charge = </Text>
+                    <Box direction="row" gap="small">
+                        <Stack>
+                            <Meter 
+                                size="small" 
+                                type="bar" 
+                                background="accent-3" 
+                                color="brand" 
+                                values={ [
+                                    {
+                                        value: estimatedCharge,
+                                        label: 'current',
+                                        color: 'brand'
+                                    } 
+                                ]}
+                                max={maxCharge} />
+                            <Box align="center" pad="xxsmall">
+                                <Text size="small">{estimatedCharge.toString()} ({(estimatedCharge / maxCharge * 100).toPrecision(2)}%)</Text>
+                            </Box>
+                        </Stack>
+                        <Text>{maxCharge}</Text>
+                    </Box>
                     <Box direction="row" gap="small">
                         <Text size="small">Money =</Text>
                         <CoinsDisplay coinMap={playerCoins} />
@@ -436,8 +462,27 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
                                     <Box className={`icons-3636 icons-${anvilItem.internalName}_x1`} />
                                 </Box>
                                 <Text size="small">Number of Hammers = {anvilItem.hammers}</Text>
-                                <Text size="small">Current amount = {anvilItem.currentAmount}</Text>
-                                <Text size="small">Future Amount Guess = {futureProduction} / {anvilCapcity} ( {percentOfCap}% of cap) {percentOfCap > 80 ? "| GO CLAIM!" : ""}</Text>
+                                <Box direction="row" gap="small">
+                                    <Stack>
+                                        <Meter 
+                                            size="small" 
+                                            type="bar" 
+                                            background="accent-3" 
+                                            color="brand" 
+                                            values={ [
+                                                {
+                                                    value: futureProduction,
+                                                    label: 'current',
+                                                    color: 'brand'
+                                                } 
+                                            ]}
+                                            max={anvilCapcity} />
+                                        <Box align="center" pad="xxsmall">
+                                            <Text size="small">{futureProduction.toString()} ({(percentOfCap)}%)</Text>
+                                        </Box>
+                                    </Stack>
+                                    <Text>Cap: {anvilCapcity}</Text>
+                                </Box>
                                 <Text size="small">Time till cap = {toTime(timeTillCap)}</Text>
                                 <Text size="small">Production Per Hour (per hammer) = {Math.round(anvilSpeed / anvilItem.time)} </Text>
                                 <Text size="small">Total Produced of this item = {nFormatter(Math.round(anvilItem.totalProduced),2)}</Text>
@@ -539,6 +584,7 @@ function TalentDisplay({ player }: { player: Player }) {
                                         const talent = player.talents.find(x => x.skillIndex == originalTalent.skillIndex);
                                         if (talent) {
                                             return (
+                                                <Box key={index}>
                                                     <Tip
                                                         plain
                                                         content={
@@ -550,17 +596,18 @@ function TalentDisplay({ player }: { player: Player }) {
                                                         }
                                                         dropProps={{ align: { top: 'bottom' } }}
                                                     >  
-                                                    <Box pad="xxsmall" key={`player_${player.playerID}_talents_${index}`} direction="row" gap="xxsmall">
-                                                        <Box width="50px" align="center">
-                                                            <Box style={{ opacity: talent.level > 0 ? 1 : 0.2 }} className={talent.getClass()} title={talent.name} />
+                                                        <Box pad="xxsmall" key={`player_${player.playerID}_talents_${index}`} direction="row" gap="xxsmall">
+                                                            <Box width="50px" align="center">
+                                                                <Box style={{ opacity: talent.level > 0 ? 1 : 0.2 }} className={talent.getClass()} title={talent.name} />
+                                                            </Box>
+                                                            <Box direction="row" gap="xxsmall">
+                                                                <Text>{talent.level} </Text>
+                                                                <Text>/</Text>
+                                                                <Text>{talent.maxLevel}</Text> 
+                                                            </Box>
                                                         </Box>
-                                                        <Box direction="row" gap="xxsmall">
-                                                            <Text>{talent.level} </Text>
-                                                            <Text>/</Text>
-                                                            <Text>{talent.maxLevel}</Text> 
-                                                        </Box>
-                                                    </Box>
                                                     </Tip>
+                                                </Box>
                                             )
                                         }
                                         return <></>
@@ -767,7 +814,7 @@ function Players() {
         if (idleonData) {
             const theData = idleonData.getData();
             setPlayerData(theData.get("players"));
-            if (playerData && activePlayer === '') {
+            if (playerData && playerData.length > 0 && activePlayer === '') {
                 const firstPlayer = playerData[0];
                 setActivePlayer(firstPlayer.playerID.toString() ?? '');
             }
