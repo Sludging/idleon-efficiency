@@ -10,7 +10,7 @@ import { sendEvent } from '../lib/gtag';
 import parseTraps from './domain/traps';
 import parseStamps from './domain/stamps';
 import parseStatues from './domain/statues';
-import parsePlayer from './domain/player';
+import parsePlayers from './domain/player';
 import parseAlchemy from './domain/alchemy';
 import parseBribes from './domain/bribes';
 import parseGuild from './domain/guild';
@@ -63,36 +63,7 @@ const keyFunctionMap: Record<string, Function> = {
   "timeAway": (doc: Document) => JSON.parse(doc.get('TimeAway')),
   "cauldronBubbles": (doc: Document) => JSON.parse(doc.get('CauldronBubbles')),
   "cards": (doc: Document) => JSON.parse(doc.get('Cards0')),
-  // Refactor this to handle all the individual pieces inside parsePlayers maybe?
-  "players": (doc: Document, accountData: Map<string, any>) => parsePlayer([...Array(9)].map((_, i) => {
-    return {
-      equipment: doc.get(`EquipOrder_${i}`),
-      equipmentStoneData: doc.get(`EMm0_${i}`),
-      toolsStoneData: doc.get(`EMm1_${i}`),
-      stats: doc.get(`PVStatList_${i}`),
-      classNumber: doc.get(`CharacterClass_${i}`),
-      afkTarget: doc.get(`AFKtarget_${i}`),
-      currentMap: doc.get(`CurrentMap_${i}`),
-      starSigns: doc.get(`PVtStarSign_${i}`)?.split(',') ?? [],
-      money: doc.get(`Money_${i}`),
-      skills: doc.get(`Lv0_${i}`),
-      anvilProduction: doc.get(`AnvilPA_${i}`),
-      anvilStats: doc.get(`AnvilPAstats_${i}`),
-      anvilSelected: doc.get(`AnvilPAselect_${i}`),
-      maxCarryCap: doc.get(`MaxCarryCap_${i}`),
-      prayers: doc.get(`Prayers_${i}`),
-      postOffice: doc.get(`POu_${i}`),
-      timeAway: doc.get(`PTimeAway_${i}`),
-      playerStuff: doc.get(`PlayerStuff_${i}`),
-      attackLoadout: doc.get(`AttackLoadout_${i}`),
-      equippedCards: doc.get(`CardEquip_${i}`),
-      currentCardSet: doc.get(`CSetEq_${i}`),
-      talentLevels: doc.get(`SL_${i}`),
-      talentMaxLevels: doc.get(`SM_${i}`),
-      activeBuffs: doc.get(`BuffsActive_${i}`),
-      activeBubbles: (accountData.get("cauldronBubbles") as string[][])[i] ?? []
-    }
-  }), accountData.get("timeAway"), accountData.get("playerNames"), accountData.get("cards") as Record<string, number>),
+  "players": (doc: Document, accountData: Map<string, any>) => parsePlayers(doc, accountData),
   "alchemy": (doc: Document) => parseAlchemy(doc.get("CauldronInfo"), doc.get("CauldUpgLVs")),
   "bribes": (doc: Document) => parseBribes(doc.get("BribeStatus")),
   "guild": (doc: Document) => parseGuild(JSON.parse(doc.get("Guild"))),
