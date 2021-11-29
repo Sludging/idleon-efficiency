@@ -33,12 +33,12 @@ const initBribes = () => {
         new Bribe("Taxidermied Cog Pouches", "+4 Cog Inventory slots.", 750000, "world3", "CogInve", 4),
         new Bribe("Guild VIP Fraud", "Logging in each day now contributes 20 GP to your guild, instead of the normal 10.", 400000, "afk", "BonusType", 10),
         new Bribe("Library Double Agent", "+4 minimum Lv for all Talent Books from the library, so you get more of the goood stuff.", 9156348, "world3", "BonusType", 4),
-        new Bribe("Filler", "You now get +2 Map Teleports every 24 hours, and caps at 6 before you need to login.", 300000, "pigbank", "BonusType", -1),
-        new Bribe("Filler", "+2 daily pachinko balls for the Arcade. It's not open yet, consider this a preorder.", 725000, "pigbank", "BonusType", -1),
-        new Bribe("Filler", "Unlock the 2nd Alchemy Bubble slot, for ALL players.", 2500000, "pigbank", "BonusType", -1),
-        new Bribe("Filler", "+4 Cog Inventory slots.", 1000000, "pigbank", "BonusType", -1),
-        new Bribe("Filler", "Logging in each day now contributes 20 GP to your guild, instead of the normal 10.", 400000, "afk", "BonusType", -1),
-        new Bribe("Filler", "+4 minimum Lv for all Talent Books from the library, so you get more of the goood stuff.", 9156348, "pigbank", "BonusType", -1),
+        new Bribe("Photoshopped Dmg Range", "Boosts Total Damage by +2%.", 100000000, "pigbank", "TotalDmg", 2),
+        new Bribe("Glitched Acc Formula", "Boosts Total Accuracy by +2%", 300000000.0, "pigbank", "TotalAcc", 2),
+        new Bribe("Firewalled Defence", "Boosts Total Defence by +2%", 700000000.0, "pigbank", "TotalDef", 2),
+        new Bribe("Bottomless Bags", "Boosts Carry Capacity by +5%", 1200000000.0, "pigbank", "CarryCap", 5),
+        new Bribe("AFKeylogging", "Boosts Skill AFK Gains Rate by +2%.", 20000000000.0, "afk", "SkillAFK", 2),
+        new Bribe("Guild GP Hack", "Logging in each day now contributes 30 GP to your guild, instead of 20.", 2500000000.0, "afk", "Guild2", 10),
     ];
 }
 
