@@ -7,6 +7,9 @@ const { withSentryConfig } = require('@sentry/nextjs');
 
 const moduleExports = {
   reactStrictMode: true,
+  images: {
+    domains: ['cdn.buymeacoffee.com'],
+  },
 };
 
 const sentryWebpackPluginOptions = {
