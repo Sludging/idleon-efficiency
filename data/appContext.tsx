@@ -18,6 +18,7 @@ import parseGems from './domain/gemPurchases';
 import parseAchievements from './domain/achievements';
 import parseLooty from './domain/lootyTracker';
 import parseShrines from './domain/shrines';
+import { initAllItems, Item } from './domain/items';
 
 
 
@@ -69,7 +70,7 @@ const keyFunctionMap: Record<string, Function> = {
   "guild": (doc: Document) => parseGuild(JSON.parse(doc.get("Guild"))),
   "gems": (doc: Document) => parseGems(JSON.parse(doc.get('GemItemsPurchased'))),
   "achievements": (doc: Document) => parseAchievements(JSON.parse(doc.get('AchieveReg'))),
-  "lootyData": (doc: Document) => parseLooty(JSON.parse(doc.get("Cards1"))),
+  "lootyData": (doc: Document, allItems: Item[]) => parseLooty(JSON.parse(doc.get("Cards1")), allItems),
   "rawData": (doc: Document) => doc.data(),
   "POExtra": (doc: Document) => { 
     return {
@@ -87,6 +88,9 @@ export const AppProvider: React.FC<{}> = (props) => {
   const [db, setDB] = useState<Firestore | undefined>(undefined)
   const [realDB, setRealDB] = useState<Database | undefined>(undefined)
   const [charNames, setCharNames] = useState<Array<string>>([]);
+  
+  const allItems = initAllItems();
+
   const getAccountData = async () => {
     if (db?.type == "firestore" && user) {
       if (charNames.length == 0 && realDB) {
@@ -111,6 +115,9 @@ export const AppProvider: React.FC<{}> = (props) => {
             try {
               if (key == "players") {
                 accountData.set(key, toExecute(doc, accountData));
+              }
+              else if (key == "lootyData") {
+                accountData.set(key, toExecute(doc, allItems));
               }
               else {
                 accountData.set(key, toExecute(doc));
