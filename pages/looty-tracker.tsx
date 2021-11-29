@@ -9,6 +9,7 @@ import { useState, useEffect, useContext } from 'react';
 import { AppContext } from '../data/appContext'
 import { LootyInfo } from '../data/domain/lootyTracker';
 import { NextSeo } from 'next-seo';
+import TipDisplay, { TipDirection } from '../components/base/TipDisplay';
 
 const getRegex = () => { return /Cards(\w)(\d+)/g };
 const getEnhancerRegex = () => { return /DungEnhancer(\d+)/g };
@@ -73,24 +74,34 @@ function LootyTracker() {
                 {lootyInfo &&
                     <Grid columns={{ size: "36px" }} gap="small">
                         {
-                        !onlyMissing && !onlyLooted && lootyInfo.obtainable.map(([rawName, displayName], index) => (
-                            <Box key={index} width={{max: getWidth(rawName)}} >
-                                <Box title={displayName} style={{opacity : lootyInfo.isLooted(rawName) ? 1 : 0.5}}  className={getClass(rawName)} />
-                            </Box>
+                            !onlyMissing && !onlyLooted && lootyInfo.obtainable.map((item, index) => (
+                                <Box key={index} width={{ max: getWidth(item.internalName) }} >
+                                    <Box title={item.displayName} style={{ opacity: lootyInfo.isLooted(item.internalName) ? 1 : 0.5 }} className={getClass(item.internalName)} />
+                                </Box>
                             ))
                         }
                         {
-                        onlyMissing && lootyInfo.missing.map(([rawName, displayName], index) => (
-                            <Box width={{max: getWidth(rawName)}} key={index}>
-                                <Box title={displayName} className={getClass(rawName)} />
-                            </Box>
-                        ))
-                    }
-                    {
-                        onlyLooted && lootyInfo.obtained.map(([rawName, displayName], index) => (
-                            <Box width={{max: getWidth(rawName)}} key={index}>
-                                <Box title={displayName} className={getClass(rawName)} />
-                            </Box>
+                            onlyMissing && lootyInfo.missing.map((item, index) => (
+                                <Box key={index}>
+                                    <TipDisplay
+                                        heading={`${item.displayName} (${item.type})`}
+                                        body={item.getDrops()}
+                                        size={"large"}
+                                        direction={TipDirection.Down}
+                                        maxWidth="large"
+                                    >
+                                        <Box width={{ max: getWidth(item.internalName) }}>
+                                            <Box title={item.displayName} className={getClass(item.internalName)} />
+                                        </Box>
+                                    </TipDisplay>
+                                </Box>
+                            ))
+                        }
+                        {
+                            onlyLooted && lootyInfo.obtained.map((item, index) => (
+                                <Box width={{ max: getWidth(item.internalName) }} key={index}>
+                                    <Box title={item.displayName} className={getClass(item.internalName)} />
+                                </Box>
                             ))
                         }
                     </Grid>

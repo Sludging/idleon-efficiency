@@ -1,25 +1,24 @@
-import { getAllItems, filteredLootyItems, filteredMissingItems } from './items'
+import { Item, filteredLootyItems, filteredMissingItems } from './items'
 
 export class LootyInfo {
-    obtained: [string, string][] = []
-    missing: [string, string][] = []
-    obtainable: [string, string][] = []
+    obtained: Item[] = []
+    missing: Item[] = []
+    obtainable: Item[] = []
 
     isLooted = (rawName: string): boolean => {
-        return this.obtained.find(([obtainedRaw, _]) => obtainedRaw == rawName) != null;
+        return this.obtained.find((item) => item.internalName == rawName) != null;
     }
 }
 
-export default function parseLooty(lootedInfo: string[]) {
-    const allItems = getAllItems();
+export default function parseLooty(lootedInfo: string[], allItems: Item[]) {
     let toReturn = new LootyInfo();
-    toReturn.obtainable = Object.entries(allItems).filter(([raw_name, _]) => !filteredLootyItems.includes(raw_name));
-    toReturn.obtained = lootedInfo.filter(looted => !filteredLootyItems.includes(looted)).map(looted => [looted, allItems[looted] ?? "Unknown Name"]);
-    toReturn.missing = toReturn.obtainable.filter(([rawName, _]) => toReturn.obtained.find(([obtainedRaw, _]) => obtainedRaw == rawName) == undefined && !filteredMissingItems.includes(rawName));
+    toReturn.obtainable = allItems.filter((item) => !filteredLootyItems.includes(item.internalName));
+    toReturn.obtained = lootedInfo.filter(looted => !filteredLootyItems.includes(looted)).map(looted => allItems.find((item) => item.internalName == looted) ?? new Item({ internalName: looted, displayName: "Unknown Name"}));
+    toReturn.missing = toReturn.obtainable.filter((item) => toReturn.obtained.find((item2) => item.internalName == item2.internalName) == undefined && !filteredMissingItems.includes(item.internalName));
 
-    toReturn.obtainable.sort(([rawName1, displayName1], [rawName2, displayName2]) => rawName1 < rawName2 ? -1 : 1);
-    toReturn.obtained.sort(([rawName1, displayName1], [rawName2, displayName2]) => rawName1 < rawName2 ? -1 : 1);
-    toReturn.missing.sort(([rawName1, displayName1], [rawName2, displayName2]) => rawName1 < rawName2 ? -1 : 1);
+    toReturn.obtainable.sort((item1, item2) => item1.internalName < item2.internalName ? -1 : 1);
+    toReturn.obtained.sort((item1, item2) => item1.internalName < item2.internalName ? -1 : 1);
+    toReturn.missing.sort((item1, item2) => item1.internalName < item2.internalName ? -1 : 1);
 
     return toReturn;
 }
