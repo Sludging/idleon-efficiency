@@ -26,8 +26,6 @@ function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stam
     const size = useContext(ResponsiveContext)
     const getCardClass = () => {
         let className = `icons-${stamp.raw_name}_x1`;
-        if (stamp.raw_name == "StampC5")
-            className = `icons-${stamp.raw_name}`; // StampC5 isn't properly sized for some reason.
         if (stamp.raw_name == "StampA35")
             className = "icons-StampA34_x1"; // StampA35 doesn't have an image for some reason.
         return `icons-3636 ${className}`;

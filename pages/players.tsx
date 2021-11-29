@@ -636,19 +636,19 @@ function PostOfficeDisplay({ player, extra }: { player: Player, extra: PostOffic
             <Text size='small'>Unspent: {unSpentPoints}</Text>
             <Grid columns={{ count: size == "small" ? 2 : 4, size: "auto"}} gap="none">
                 {
-                    player.postOffice.map((box, index) => {
+                    player.postOffice.filter((box) => box.name != "Filler").map((box) => {
                         return (
-                            <Box key={`player_${player.playerID}_postoffice_${index}`} fill>
+                            <Box key={`player_${player.playerID}_postoffice_${box.index}`} fill>
                                     <Tip
                                         plain
                                         content={
-                                            <Box pad="small" gap="small" background="white" style={{ display: box.level > 0 ? 'normal' : 'none' }}>
+                                            <Box pad="small" gap="small" background="white">
                                                 <Text size={size == "small" ? 'small' : ''} weight="bold">{box.name} ({box.level})</Text>
                                                 <hr style={{ width: "100%"}} />
                                                 {
                                                     box.bonuses.map((bonus, bIndex) => {
                                                         return (
-                                                            <Box key={`player_${player.playerID}_postoffice_${index}_${bIndex}`} direction="row" gap="small">
+                                                            <Box key={`player_${player.playerID}_postoffice_${box.index}_${bIndex}`} direction="row" gap="small">
                                                                 <Text>{bonus.getBonusText(box.level, bIndex)}</Text>
                                                                 <Text>{box.level < 400 && `(Max value is ${bonus.getBonus(PostOfficeConst.MaxBoxLevel, bIndex, true)} at 400 boxes)`}</Text>
                                                             </Box>
@@ -662,7 +662,7 @@ function PostOfficeDisplay({ player, extra }: { player: Player, extra: PostOffic
                                         {/* Do the opacity thing in styled components? */}
                                         <Box align="center" fill direction="row" gap="small">
                                             <Box width={{max: '88px' }} fill>
-                                                <Box style={{ opacity: box.level > 0 ? 1 : 0.3 }} className={`icons-8876 icons-UIboxUpg${index}`} />
+                                                <Box style={{ opacity: box.level > 0 ? 1 : 0.3 }} className={box.getClass()} />
                                             </Box>
                                             <Box background="black">
                                         <Text>{box.level}</Text>
