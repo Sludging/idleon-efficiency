@@ -292,7 +292,6 @@ const functionArray: Function[] = [
     (doc: Document, player: Player) => { player.currentMonster = monstersMap.get(doc.get(`AFKtarget_${player.playerID}`))?.replace(/_/g, " ") || "New Monster?"; },
     (doc: Document, player: Player) => parseMap(doc.get(`CurrentMap_${player.playerID}`), player),
     (doc: Document, player: Player) => parseStarSigns(doc.get(`PVtStarSign_${player.playerID}`), player),
-    (doc: Document, player: Player) => parseStarSigns(doc.get(`PVtStarSign_${player.playerID}`), player),
     (doc: Document, player: Player) => { player.money = doc.get(`Money_${player.playerID}`) },
     (doc: Document, player: Player) => parseSkills(doc.get(`Lv0_${player.playerID}`), player),
     (doc: Document, player: Player) => parseAnvil(
@@ -385,9 +384,8 @@ const parseSkills = (skills: Array<number>, player: Player) => {
 
 const parseStarSigns = (starSigns: string, player: Player) => {
     player.starSigns = starSigns.split(',').map((sign) => {
-        const asNumber: number = Number(sign);
-        if (!isNaN(asNumber)) {
-            return StarSignMap[asNumber];
+        if (sign) {
+            return StarSignMap[Number(sign)];
         }
     }).filter(notUndefined);
 }

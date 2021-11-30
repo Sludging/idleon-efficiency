@@ -1,0 +1,34 @@
+.icons-9680 {
+    background-image: url(spritesheet_96x80.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 83.33333333333334%;
+    height: 0;
+    background-size: cover;
+    background-position: 0 calc(var(--row) * 4.545454545454546%)
+}
+.icons-9680:not(.icons-UIboxUpg1):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
+        .icons-UIboxUpg1 { --row: 0; }
+.icons-UIboxUpg10 { --row: 1; }
+.icons-UIboxUpg11 { --row: 2; }
+.icons-UIboxUpg12 { --row: 3; }
+.icons-UIboxUpg13 { --row: 4; }
+.icons-UIboxUpg14 { --row: 5; }
+.icons-UIboxUpg15 { --row: 6; }
+.icons-UIboxUpg16 { --row: 7; }
+.icons-UIboxUpg17 { --row: 8; }
+.icons-UIboxUpg18 { --row: 9; }
+.icons-UIboxUpg19 { --row: 10; }
+.icons-UIboxUpg2 { --row: 11; }
+.icons-UIboxUpg20 { --row: 12; }
+.icons-UIboxUpg21 { --row: 13; }
+.icons-UIboxUpg22 { --row: 14; }
+.icons-UIboxUpg23 { --row: 15; }
+.icons-UIboxUpg3 { --row: 16; }
+.icons-UIboxUpg4 { --row: 17; }
+.icons-UIboxUpg5 { --row: 18; }
+.icons-UIboxUpg6 { --row: 19; }
+.icons-UIboxUpg7 { --row: 20; }
+.icons-UIboxUpg8 { --row: 21; }
+.icons-UIboxUpg9 { --row: 22; }
