@@ -48,7 +48,7 @@ function Achievements() {
                         return (
                             <Tab key={letter} title={LetterToWorldNumber(letter)}>
                                 <Grid columns={{
-                                    count: letter == 'C' ? 9 : letter == 'B' ? 10 : 11,
+                                    count: letter == 'C' ? 10 : letter == 'B' ? 11 : 11,
                                     size: 'auto',
                                 }} fill>
                                     {achievementData ? achievementData.filter(x => x.name != "FILLERZZZ ACH" && x.worldLetter == letter && x.visualIndex != -1).sort((a, b) => a.visualIndex - b.visualIndex).map((achievement, index) => {

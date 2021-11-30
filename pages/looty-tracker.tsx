@@ -24,9 +24,6 @@ function LootyTracker() {
         if (getEnhancerRegex().exec(rawName)) {
             return `icons-3434 icons-${rawName}_x1`;
         }
-        if (rawName == "StampC5") {
-            return `icons-3636 icons-${rawName}`;
-        }
         if (getRegex().exec(rawName)) {
             return `icons-2836 icons-${rawName}`;
         }

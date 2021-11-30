@@ -142,6 +142,7 @@ export default function Welcome() {
                                     <TextInput
                                         placeholder="Enter Password"
                                         value={password}
+                                        type='password'
                                         onChange={event => setPassword(event.target.value)}
                                     />
                                     <Button primary color="brand" label="Login" onClick={() => onButtonClick(authData?.emailLoginFunction, email, password)} />
