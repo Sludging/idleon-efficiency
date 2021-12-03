@@ -66,7 +66,7 @@ function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stam
     }
 
     return (
-        <Box key={`stamp_${index}_${stamp.raw_name}`}>
+        <Box pad="small" border={{color: 'grey-1'}} key={`stamp_${index}_${stamp.raw_name}`}>
                 <Tip
                     plain
                     content={
@@ -90,7 +90,7 @@ function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stam
 
 function StampTab({ tab, index, blueFlavPercent, hasBribe }: { tab: Stamp[], index: number, blueFlavPercent: number, hasBribe: boolean }) {
     return (
-        <Box>
+        <Box pad="medium">
             <h3>{tab[0].type}</h3>
             <Box fill>
                 <Grid columns={{ count: 4, size: "auto"}} gap="none">
