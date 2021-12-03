@@ -89,7 +89,7 @@ function StorageDisplay() {
                         if (chestItemsToShow.filter(x => (typeFilter == "None" ? x.getArchType() : x.type) == type).length == 0) {
                             return undefined;
                         }
-                        return (<ShadowBox background="dark-1" pad="medium" gap="small">
+                        return (<ShadowBox key={type} background="dark-1" pad="medium" gap="small">
                             <Text>{type}</Text>
                             <Box direction="row" wrap>
                             {

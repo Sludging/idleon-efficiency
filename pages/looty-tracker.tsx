@@ -43,7 +43,7 @@ function ItemSourcesDisplay({ sources, dropInfo }: { sources: ItemSources, dropI
                         ))
                     }
                 </Box> :
-                <>I don't know yet</>
+                <>I don&apos;t know yet</>
             }
         </Box>
     )
