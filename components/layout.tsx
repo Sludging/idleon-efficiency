@@ -93,6 +93,7 @@ export default function Layout({
         { link: "/alchemy", label: "Alchemy"},
         { link: "/traps", label: "Traps"},
         { link: "/players", label: "Players"},
+        { link: "/storage", label: "Storage"},
         // { link: "/bribes", label: "Bribes - WIP"},
         { link: "/achievements", label: "Achievements"},
         { link: "/looty-tracker", label: "Looty Tracker"},

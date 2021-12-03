@@ -31,10 +31,12 @@ import { getCoinsArray, lavaFunc, toTime, notUndefined, round, nFormatter } from
 import CoinsDisplay from '../components/coinsDisplay';
 import { css } from 'styled-components'
 import ShadowBox from '../components/base/ShadowBox';
-import TipDisplay, {TipDirection} from '../components/base/TipDisplay';
+import TipDisplay, { TipDirection } from '../components/base/TipDisplay';
 import { Next } from 'grommet-icons';
 import { NextSeo } from 'next-seo';
 import { MouseEventHandler } from 'hoist-non-react-statics/node_modules/@types/react';
+import { Item, ItemStat } from '../data/domain/items';
+import { Storage } from '../data/domain/storage';
 
 interface SkillProps {
     skillsMap: Map<SkillsIndex, number>
@@ -60,7 +62,7 @@ function ShowSkills(props: SkillProps) {
     }
 
     return (
-        <Box pad={{left: "large", top: "medium"}} gap="medium">
+        <Box pad={{ left: "large", top: "medium" }} gap="medium">
             <Text size='medium'>Skills</Text>
             <Grid
                 rows={['1/3', '1/3', '1/3']}
@@ -70,14 +72,14 @@ function ShowSkills(props: SkillProps) {
                     ['smithing', 'alchemy', 'construction'],
                     ['chopping', 'catching', 'worship'],
                 ]}
-                gap={{row: "xsmall"}}
+                gap={{ row: "xsmall" }}
             >
                 {
                     Array.from(props.skillsMap).map(([skillIndex, skillLevel]) => {
                         const skillRank = props.skillsRank.get(skillIndex);
                         return (
                             <Box key={`skill_${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} gridArea={`${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} direction="row" gap="medium">
-                                <Box fill align="center" width={{max: '36px'}}>
+                                <Box fill align="center" width={{ max: '36px' }}>
                                     <Box className={getSkillClass(skillIndex)} />
                                 </Box>
                                 <Box>
@@ -115,8 +117,10 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
         }
         const maxChargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "F10")?.getBonus() ?? 0;
         const talentChargeBonus = player.activeBuffs.find(x => x.skillIndex == TalentConst.ChargeSiphonIndex)?.getBonus(false, true) ?? 0;
-
-        return player.worship.getMaxCharge(player.gear.tools[5].raw_name, maxChargeCardBonus, talentChargeBonus, praydayStamp.getBonus(worshipLevel), gospelLeaderBonus, worshipLevel, popeBonus);
+        if (!player.gear.tools[5]) {
+            return 0;
+        }
+        return player.worship.getMaxCharge(player.gear.tools[5].internalName, maxChargeCardBonus, talentChargeBonus, praydayStamp.getBonus(worshipLevel), gospelLeaderBonus, worshipLevel, popeBonus);
     }, [player, activeBubbles, idleonData]);
 
     const chargeRate = useMemo(() => {
@@ -129,7 +133,10 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
         const chargeSpeedTalent = player.talents.find(x => x.skillIndex == TalentConst.NearbyOutletIndex);
         const talentBonus = chargeSpeedTalent?.getBonus() ?? 0;
         const chargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "F11")?.getBonus() ?? 0;
-        return player.worship.getChargeRate(player.gear.tools[5].raw_name, worshipLevel, popeBonus, chargeCardBonus, flowinStamp.getBonus(worshipLevel), talentBonus);
+        if (!player.gear.tools[5]) {
+            return 0;
+        }
+        return player.worship.getChargeRate(player.gear.tools[5].internalName, worshipLevel, popeBonus, chargeCardBonus, flowinStamp.getBonus(worshipLevel), talentBonus);
     }, [player, activeBubbles, idleonData]);
 
     const estimatedCharge = useMemo(() => {
@@ -145,7 +152,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
     return (
         <Box pad="medium">
             <Text size='medium'>Random Stats</Text>
-            <Grid columns={ size == "small" ? '100%' : ['50%','50%']} fill>
+            <Grid columns={size == "small" ? '100%' : ['50%', '50%']} fill>
                 <Box pad="medium" gap="small">
                     <Text size="small">Class / Level = {player.class} / {player.level}</Text>
                     <Text size="small">Current Monster / Map = {player.currentMonster} / {player.currentMap}</Text>
@@ -163,21 +170,21 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     <Text size="small">Current Charge = </Text>
                     <Box direction="row" gap="small">
                         <Stack>
-                            <Meter 
-                                size="small" 
-                                type="bar" 
-                                background="accent-3" 
-                                color="brand" 
-                                values={ [
+                            <Meter
+                                size="small"
+                                type="bar"
+                                background="accent-3"
+                                color="brand"
+                                values={[
                                     {
                                         value: estimatedCharge,
                                         label: 'current',
                                         color: 'brand'
-                                    } 
+                                    }
                                 ]}
                                 max={maxCharge} />
                             <Box align="center" pad="xxsmall">
-                                <Text size="small">{estimatedCharge.toString()} ({(estimatedCharge / maxCharge * 100).toPrecision(2)}%)</Text>
+                                <Text size="small">{estimatedCharge.toString()} ({(estimatedCharge / maxCharge * 100).toPrecision(3)}%)</Text>
                             </Box>
                         </Stack>
                         <Text>{maxCharge}</Text>
@@ -189,32 +196,32 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     <Box>
                         <Text>Active Bubbles:</Text>
                         <Box direction="row" gap="medium">
-                        {
-                            
-                            activeBubbles.map((bubble, bubbleIndex) => {
-                                return (
-                                    <Box key={bubbleIndex} width={{max: 'medium'}}>
-                                        <TipDisplay
-                                            heading={`${bubble.name} (${bubble.level})`}
-                                            body={bubble.getBonusText()}
-                                            size={size}
-                                            direction={TipDirection.Down}
-                                            maxWidth="large"
-                                        >
-                                            <Box width={{min: '50px', max: '50px'}}>
-                                                <Box className={bubble.class_name} />
-                                            </Box>
-                                        </TipDisplay>
-                                    </Box>
-                                )
-                            })
-                        }
+                            {
+
+                                activeBubbles.map((bubble, bubbleIndex) => {
+                                    return (
+                                        <Box key={bubbleIndex} width={{ max: 'medium' }}>
+                                            <TipDisplay
+                                                heading={`${bubble.name} (${bubble.level})`}
+                                                body={bubble.getBonusText()}
+                                                size={size}
+                                                direction={TipDirection.Down}
+                                                maxWidth="large"
+                                            >
+                                                <Box width={{ min: '50px', max: '50px' }}>
+                                                    <Box className={bubble.class_name} />
+                                                </Box>
+                                            </TipDisplay>
+                                        </Box>
+                                    )
+                                })
+                            }
                         </Box>
                     </Box>
                 </Box>
                 <Box pad="medium" gap="medium" fill>
                     <Text>Equipped Cards:</Text>
-                    <Grid columns={["25%", "25%", "25%", "25%"]} width={{max: '200px'}} gap={{row: "small"}}>
+                    <Grid columns={["25%", "25%", "25%", "25%"]} width={{ max: '200px' }} gap={{ row: "small" }}>
                         {
                             player.cardInfo ? player.cardInfo.equippedCards.map((card, index) => {
                                 return (
@@ -226,11 +233,11 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                                             direction={TipDirection.Down}
                                         >
                                             <Stack key={index}>
-                                                <Box align="center" fill width={{min: '28px', max: '28px'}} height={{min: '36px', max: '36px'}}>
-                                                    <Box height={{min: '36px', max: '36px'}} className={card.getClass()} />
+                                                <Box align="center" fill width={{ min: '28px', max: '28px' }} height={{ min: '36px', max: '36px' }}>
+                                                    <Box height={{ min: '36px', max: '36px' }} className={card.getClass()} />
                                                 </Box>
-                                                <Box align="center" width={{max: '31px', min: '31px'}} height={{min: '43px', max: '43px'}}>
-                                                    <Box height={{min: '43px', max: '43px'}} key={`border_${index}`} className={card.getBorderClass()} />
+                                                <Box align="center" width={{ max: '31px', min: '31px' }} height={{ min: '43px', max: '43px' }}>
+                                                    <Box height={{ min: '43px', max: '43px' }} key={`border_${index}`} className={card.getBorderClass()} />
                                                 </Box>
                                             </Stack>
                                         </TipDisplay>
@@ -254,7 +261,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                                             size={size}
                                             direction={TipDirection.Down}
                                         >
-                                            <Box width={{min: '50px', max: '50px'}}>
+                                            <Box width={{ min: '50px', max: '50px' }}>
                                                 <Box className={buff.getClass()} />
                                             </Box>
                                         </TipDisplay>
@@ -270,24 +277,24 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                             <Text>Active Shrines:</Text>
                             <Box direction="row" wrap gap="small">
                                 {
-                                activeShrines.map((shrine, index) => {
-                                    const cardBonus = player.cardInfo?.equippedCards.find(x => x.id == "Z9")?.getBonus() ?? 0;
-                                    return (
-                                        <Box key={index}>
-                                            <TipDisplay
-                                                heading={`${shrine.name} (${shrine.level})`}
-                                                body={shrine.getBonusText(player.currentMapId, cardBonus)}
-                                                size={size}
-                                                direction={TipDirection.Down}
-                                            >
-                                                <Box width={{min: '50px', max: '50px'}}>
-                                                    <Box className={shrine.getClass()} />
-                                                </Box>
-                                            </TipDisplay>
-                                        </Box>
-                                    )
-                                })
-                                
+                                    activeShrines.map((shrine, index) => {
+                                        const cardBonus = player.cardInfo?.equippedCards.find(x => x.id == "Z9")?.getBonus() ?? 0;
+                                        return (
+                                            <Box key={index}>
+                                                <TipDisplay
+                                                    heading={`${shrine.name} (${shrine.level})`}
+                                                    body={shrine.getBonusText(player.currentMapId, cardBonus)}
+                                                    size={size}
+                                                    direction={TipDirection.Down}
+                                                >
+                                                    <Box width={{ min: '50px', max: '50px' }}>
+                                                        <Box className={shrine.getClass()} />
+                                                    </Box>
+                                                </TipDisplay>
+                                            </Box>
+                                        )
+                                    })
+
                                 }
                             </Box>
                         </Box>
@@ -298,49 +305,101 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
     )
 }
 
+function ItemDisplay({ item, size }: { item: Item | undefined, size?: string }) {
+    
+    const statsDisplay = (stats: ItemStat[], description: string) => {
+        if (description) {
+            return <Text>{description}</Text>
+        }
+
+        return stats.filter((stat) => stat.shouldDisplay()).map(x => <Text>{x.getDisplay()}</Text>);
+    }
+
+
+    if (!item) {
+        return (<Box height="50px" width="50px"/>)
+    }
+
+    return (
+        <TipDisplay
+            heading={`${item.displayName} (${item.type})`}
+            body={<Box>{statsDisplay(item.itemStats, item.description)}<Text size="xsmall">*A work in progress, therefore not always accurate.</Text></Box>}
+            size={"large"}
+            direction={TipDirection.Down}
+            maxWidth="large"
+        >
+            <Box>
+            { item.count > 0 ? 
+
+                <Box direction="row" align="center">
+                    <Box width={{ max: size ? size : '50px', min: size ? size : '50px' }} align="center">
+                        <Box className={item.getClass()} />
+                    </Box>
+                    <Box>   
+                        <Text>{item.count}</Text>
+                    </Box>
+                </Box>
+            : <Box width={{ max: '50px', min: '50px' }} align="center">
+                <Box className={item.getClass()} />
+            </Box>
+            }
+            </Box>
+        </TipDisplay>
+    )
+}
+
 
 function EquipmentDisplay({ player }: { player: Player }) {
     return (
         <Box pad="medium">
-            <Text size='medium'>Equipment</Text>
-            <Box direction="row" gap="small">
-                <Box direction="column" key={`player_${player.playerID}_equip`}>
+            <Box direction="row" gap="medium" wrap>
+                <Box gap="small">
+                <Text size='medium'>Equipment</Text>
+                <Grid columns={{count: 2, size:"50px"}} key={`player_${player.playerID}_equip`}>
                     {
-                        [...Array(8)].map((_, equipIndex) => {
-                            if (player.gear.equipment[equipIndex].display_name == "Blank") {
-                                return (<Box key={`blank_${equipIndex}`} width="50px" height="50px" />);
-                            }
-                            return (
-                                <Box key={`player_${player.playerID}_equip_${equipIndex}`} width={{max: '50px', min: '50px'}} align="center">
-                                    <Box title={player.gear.equipment[equipIndex].display_name || ""} className={`icons-3636 icons-${player.gear.equipment[equipIndex].raw_name}_x1`} />
-                                </Box>)
-                        })
+                        player.gear.equipment.slice(0,8).map((equip, index) => (
+                            <Box pad="xsmall" border={{color: 'grey-1' }} key={index}>
+                                <ItemDisplay item={equip} />
+                            </Box>
+                        ))
                     }
+                </Grid>
                 </Box>
-                <Box direction="column" key={`player_${player.playerID}_tools`}>
+                <Box gap="small">
+                <Text size='medium'>Specials</Text>
+                <Grid columns={{count: 2, size:"50px"}} key={`player_${player.playerID}_special`}>
                     {
-                        [...Array(8)].map((_, toolsIndex) => {
-                            if (player.gear.tools[toolsIndex].display_name == "Blank") {
-                                return (<Box key={`player_${player.playerID}_equip_${toolsIndex}`} width="50px" height="50px" />);
-                            }
-                            return (
-                                <Box key={`player_${player.playerID}_equip_${toolsIndex}`}  width={{max: '50px', min: '50px'}} align="center">
-                            <Box title={player.gear.tools[toolsIndex].display_name || ""} className={`icons-3636 icons-${player.gear.tools[toolsIndex].raw_name}_x1`} />
-                            </Box>)
-                        })
+                        player.gear.equipment.slice(8,16).map((equip, index) => (
+                            <Box pad="xsmall" border={{color: 'grey-1' }} key={index}>
+                                <ItemDisplay item={equip} />
+                            </Box>
+                        ))
                     }
+                </Grid>
                 </Box>
-                <Box direction="column" key={`player_${player.playerID}_food`}>
+                <Box gap="small">
+                <Text size='medium'>Tools</Text>
+                <Grid columns={{count: 2, size:"50px"}} key={`player_${player.playerID}_tools`}>
                     {
-                        [...Array(8)].map((_, foodIndex) => {
-                            if (player.gear.food[foodIndex].display_name == "Blank") {
-                                return (<Box key={`player_${player.playerID}_equip_${foodIndex}`} width="50px" height="50px" />);
-                            }
-                            return (<Box key={`player_${player.playerID}_equip_${foodIndex}`} width={{max: '50px', min: '50px'}} align="center">
-                                <Box title={player.gear.food[foodIndex].display_name || ""} className={`icons-3636 icons-${player.gear.food[foodIndex].raw_name}_x1`} />
-                                </Box>)
-                        })
+                        player.gear.tools.slice(0,8).map((equip, index) => (
+                            <Box pad="xsmall" border={{color: 'grey-1' }} key={index}>
+                                <ItemDisplay item={equip} />
+                            </Box>
+                        ))
                     }
+                </Grid>
+                </Box>
+                <Box gap="small">
+                <Text size='medium'>Food</Text>
+                <Grid columns={{count: 2, size:"50px"}} key={`player_${player.playerID}_food`}>
+                    {
+                        player.gear.food.slice(0,8).map((equip, index) => (
+                            <Box pad="xsmall" border={{color: 'grey-1' }} key={index}>
+                                <ItemDisplay item={equip} />
+                            </Box>
+                        ))
+                    }
+                </Grid>
                 </Box>
             </Box>
         </Box>
@@ -355,8 +414,8 @@ function StatuesDisplay({ playerStatues, player }: { playerStatues: PlayerStatue
                 playerStatues ? playerStatues.statues.map((statue, index) => {
                     return (
                         <Box key={`statue_${index}`} direction="row" gap="medium">
-                            <Box width={{max: '41px', min: '41px'}} height={{max: '50px', min: '50px'}}>
-                                <Box width={{max: '41px', min: '41px'}} height={{max: '50px', min: '50px'}} className={statue.getClassName()} title={statue.displayName} />
+                            <Box width={{ max: '41px', min: '41px' }} height={{ max: '50px', min: '50px' }}>
+                                <Box width={{ max: '41px', min: '41px' }} height={{ max: '50px', min: '50px' }} className={statue.getClassName()} title={statue.displayName} />
                             </Box>
                             <Text alignSelf="center">Level: {statue.level}</Text>
                             <Text alignSelf="center">/</Text>
@@ -458,23 +517,23 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
                         const timeTillCap = ((anvilCapcity - futureProduction) / (anvilSpeed / 3600 / anvilItem.time * (anvilItem.hammers ?? 0)));
                         return (
                             <Box key={`player_${player.playerID}_anvil_${index}`} direction="column" align="center">
-                                <Box width={{min: '50px', max: '50px'}}>
+                                <Box width={{ min: '50px', max: '50px' }}>
                                     <Box className={`icons-3636 icons-${anvilItem.internalName}_x1`} />
                                 </Box>
                                 <Text size="small">Number of Hammers = {anvilItem.hammers}</Text>
                                 <Box direction="row" gap="small">
                                     <Stack>
-                                        <Meter 
-                                            size="small" 
-                                            type="bar" 
-                                            background="accent-3" 
-                                            color="brand" 
-                                            values={ [
+                                        <Meter
+                                            size="small"
+                                            type="bar"
+                                            background="accent-3"
+                                            color="brand"
+                                            values={[
                                                 {
                                                     value: futureProduction,
                                                     label: 'current',
                                                     color: 'brand'
-                                                } 
+                                                }
                                             ]}
                                             max={anvilCapcity} />
                                         <Box align="center" pad="xxsmall">
@@ -485,7 +544,7 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
                                 </Box>
                                 <Text size="small">Time till cap = {toTime(timeTillCap)}</Text>
                                 <Text size="small">Production Per Hour (per hammer) = {Math.round(anvilSpeed / anvilItem.time)} </Text>
-                                <Text size="small">Total Produced of this item = {nFormatter(Math.round(anvilItem.totalProduced),2)}</Text>
+                                <Text size="small">Total Produced of this item = {nFormatter(Math.round(anvilItem.totalProduced), 2)}</Text>
                                 {/* <Text>{anvilItem.displayName} - {anvilItem.currentAmount} - {anvilItem.currentXP} - {anvilItem.currentProgress} - {anvilItem.totalProduced}</Text> */}
                             </Box>
                         )
@@ -511,7 +570,7 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
         if (guild) {
             guildCarryBonus = lavaFunc(guild.guildBonuses[2].func, guild.guildBonuses[2].level, guild.guildBonuses[2].x1, guild.guildBonuses[2].x2);
         }
-        
+
         const telekineticStorageBonus = player.talents.find(x => x.skillIndex == CapacityConst.TelekineticStorageSkillIndex)?.getBonus() ?? 0;
         const carryCapShrineBonus = shrines[ShrineConstants.CarryShrine].getBonus(player.currentMapId);
         return player.capacity.getAllCapsBonus(guildCarryBonus, telekineticStorageBonus, carryCapShrineBonus, zergPrayerBonus, ruckSackPrayerBonus);
@@ -578,7 +637,7 @@ function TalentDisplay({ player }: { player: Player }) {
                     return (
                         <Box key={`player_${player.playerID}_talents_${talentPage}`} align="center" gap="medium">
                             <Text>{talentPage}</Text>
-                            <Grid columns={{count: 'fit', size: size == "small" ? '50%' : "20%"}} fill>
+                            <Grid columns={{ count: 'fit', size: size == "small" ? '50%' : "20%" }} fill>
                                 {
                                     GetTalentArray(talentPage).map((originalTalent, index) => {
                                         const talent = player.talents.find(x => x.skillIndex == originalTalent.skillIndex);
@@ -590,12 +649,12 @@ function TalentDisplay({ player }: { player: Player }) {
                                                         content={
                                                             <Box pad="small" gap="small" background="white" style={{ display: talent.level > 0 ? 'normal' : 'none' }}>
                                                                 <Text size={size == "small" ? 'small' : ''} weight="bold">{talent.name} ({talent.level}/{talent.maxLevel})</Text>
-                                                                <hr style={{ width: "100%"}} />
+                                                                <hr style={{ width: "100%" }} />
                                                                 <Text>{talent.getBonusText()}</Text>
                                                             </Box>
                                                         }
                                                         dropProps={{ align: { top: 'bottom' } }}
-                                                    >  
+                                                    >
                                                         <Box pad="xxsmall" key={`player_${player.playerID}_talents_${index}`} direction="row" gap="xxsmall">
                                                             <Box width="50px" align="center">
                                                                 <Box style={{ opacity: talent.level > 0 ? 1 : 0.2 }} className={talent.getClass()} title={talent.name} />
@@ -603,7 +662,7 @@ function TalentDisplay({ player }: { player: Player }) {
                                                             <Box direction="row" gap="xxsmall">
                                                                 <Text>{talent.level} </Text>
                                                                 <Text>/</Text>
-                                                                <Text>{talent.maxLevel}</Text> 
+                                                                <Text>{talent.maxLevel}</Text>
                                                             </Box>
                                                         </Box>
                                                     </Tip>
@@ -634,42 +693,42 @@ function PostOfficeDisplay({ player, extra }: { player: Player, extra: PostOffic
         <Box pad="medium" gap="small" fill>
             <Text size='medium'>Post Office</Text>
             <Text size='small'>Unspent: {unSpentPoints}</Text>
-            <Grid columns={{ count: size == "small" ? 2 : 4, size: "auto"}} gap="none">
+            <Grid columns={{ count: size == "small" ? 2 : 4, size: "auto" }} gap="none">
                 {
                     player.postOffice.filter((box) => box.name != "Filler").map((box) => {
                         return (
                             <Box key={`player_${player.playerID}_postoffice_${box.index}`} fill>
-                                    <Tip
-                                        plain
-                                        content={
-                                            <Box pad="small" gap="small" background="white">
-                                                <Text size={size == "small" ? 'small' : ''} weight="bold">{box.name} ({box.level})</Text>
-                                                <hr style={{ width: "100%"}} />
-                                                {
-                                                    box.bonuses.map((bonus, bIndex) => {
-                                                        return (
-                                                            <Box key={`player_${player.playerID}_postoffice_${box.index}_${bIndex}`} direction="row" gap="small">
-                                                                <Text>{bonus.getBonusText(box.level, bIndex)}</Text>
-                                                                <Text>{box.level < 400 && `(Max value is ${bonus.getBonus(PostOfficeConst.MaxBoxLevel, bIndex, true)} at 400 boxes)`}</Text>
-                                                            </Box>
-                                                        )
-                                                    })
-                                                }
-                                            </Box>
-                                        }
-                                        dropProps={{ align: { top: 'bottom' } }}
-                                    >
-                                        {/* Do the opacity thing in styled components? */}
-                                        <Box align="center" fill direction="row" gap="small">
-                                            <Box width={{max: '88px' }} fill>
-                                                <Box style={{ opacity: box.level > 0 ? 1 : 0.3 }} className={box.getClass()} />
-                                            </Box>
-                                            <Box background="black">
-                                        <Text>{box.level}</Text>
-                                    </Box>
+                                <Tip
+                                    plain
+                                    content={
+                                        <Box pad="small" gap="small" background="white">
+                                            <Text size={size == "small" ? 'small' : ''} weight="bold">{box.name} ({box.level})</Text>
+                                            <hr style={{ width: "100%" }} />
+                                            {
+                                                box.bonuses.map((bonus, bIndex) => {
+                                                    return (
+                                                        <Box key={`player_${player.playerID}_postoffice_${box.index}_${bIndex}`} direction="row" gap="small">
+                                                            <Text>{bonus.getBonusText(box.level, bIndex)}</Text>
+                                                            <Text>{box.level < 400 && `(Max value is ${bonus.getBonus(PostOfficeConst.MaxBoxLevel, bIndex, true)} at 400 boxes)`}</Text>
+                                                        </Box>
+                                                    )
+                                                })
+                                            }
                                         </Box>
-                                        
-                                    </Tip>
+                                    }
+                                    dropProps={{ align: { top: 'bottom' } }}
+                                >
+                                    {/* Do the opacity thing in styled components? */}
+                                    <Box align="center" fill direction="row" gap="small">
+                                        <Box width={{ max: '88px' }} fill>
+                                            <Box style={{ opacity: box.level > 0 ? 1 : 0.3 }} className={box.getClass()} />
+                                        </Box>
+                                        <Box background="black">
+                                            <Text>{box.level}</Text>
+                                        </Box>
+                                    </Box>
+
+                                </Tip>
                             </Box>
                         )
                     })
@@ -678,6 +737,50 @@ function PostOfficeDisplay({ player, extra }: { player: Player, extra: PostOffic
         </Box>
     )
 }
+
+function InventoryDisplay({ player }: { player: Player }) {
+    const [playerInventory, setPlayerInventory] = useState<Item[]>([]);
+    const size = useContext(ResponsiveContext);
+    const idleonData = useContext(AppContext);
+
+    useEffect(() => {
+        const theData = idleonData.getData();
+        const storage = theData.get("storage") as Storage;
+        setPlayerInventory(storage.playerStorage[player.playerID]);
+    }, [idleonData, player])
+
+    const emptySlots = useMemo(() => {
+        return playerInventory?.filter((item) => item.internalName == "Blank").length ?? 0;
+    }, [playerInventory]);
+
+    const lockedSlots = useMemo(() => {
+        return playerInventory?.filter((item) => item.internalName == "LockedInvSpace").length ?? 0;
+    }, [playerInventory]);
+
+    const itemsToShow = useMemo(() => {
+        return playerInventory?.filter((item) => item.internalName != "LockedInvSpace" && item.internalName != "Blank") ?? [];
+    }, [playerInventory]);
+
+    return (
+        <Box pad="medium" gap="small" fill>
+            <Text size='medium'>Inventory</Text>
+            <Box direction="row" gap="medium">
+                <Text size='small'>Empty Slots: {emptySlots}</Text>
+                <Text size='small'>Locked Slots: {lockedSlots}</Text>
+            </Box>
+            <Box direction="row" wrap>
+            {
+                itemsToShow.map((item, index) => (
+                    <Box key={index} border={{color: 'grey-1' }}  background="accent-4" width={{max: '100px', min: '100px'}} align="center">
+                        <ItemDisplay item={item} size="36px" />
+                    </Box>
+                ))
+                }
+            </Box>
+        </Box>
+    )
+}
+
 
 interface PlayerTabProps {
     player: Player
@@ -741,6 +844,7 @@ function PlayerTab({ player }: PlayerTabProps) {
                     <SpecialButton isActive={index == 6} clickHandler={() => onActive(6)} text={"Carry Capacity - WIP"} />
                     <SpecialButton isActive={index == 7} clickHandler={() => onActive(7)} text={"Talents"} />
                     <SpecialButton isActive={index == 8} clickHandler={() => onActive(8)} text={"Post Office"} />
+                    <SpecialButton isActive={index == 9} clickHandler={() => onActive(9)} text={"Inventory"} />
                 </Box>
                 <Box fill background="dark-1">
                     {index == 1 && <MiscStats player={player} activeBubbles={activeBubbles} />}
@@ -751,6 +855,7 @@ function PlayerTab({ player }: PlayerTabProps) {
                     {index == 6 && <CarryCapacityDisplay player={player} />}
                     {index == 7 && <TalentDisplay player={player} />}
                     {index == 8 && <PostOfficeDisplay player={player} extra={poExtra} />}
+                    {index == 9 && <InventoryDisplay player={player} />}
                 </Box>
             </Grid>
         </ShadowBox>
@@ -824,47 +929,47 @@ function Players() {
         <Box>
             <NextSeo title="Players" />
             <ThemeContext.Extend value={customTabs}>
-                { size == "small" ? 
-                <Box>
-                    <Select
-                        labelKey="label"
-                        valueKey={{ key: 'value', reduce: true }}
-                        value={activePlayer}
-                        options={playerData?.map((player) => { return { label: player.playerName, value: player.playerID }}) ?? ["Loading Players"]}
-                        onChange={({ value: nextValue }) => setActivePlayer(nextValue)}
-                    />
-                    <Box pad={{ right: 'large', left: 'large' }} width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} fill>
-                        <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Players</Heading>
-                        <Box pad="small">
-                            {
-                                playerData?.filter(player => player.playerID.toString() == activePlayer).map((player, playerIndex) => {
-                                    return (
-                                    <Box key={player.playerID} pad="small">
-                                            <PlayerTab player={player} />
-                                        </Box>
-                                    )
-                                })
-                            }
+                {size == "small" ?
+                    <Box>
+                        <Select
+                            labelKey="label"
+                            valueKey={{ key: 'value', reduce: true }}
+                            value={activePlayer}
+                            options={playerData?.map((player) => { return { label: player.playerName, value: player.playerID } }) ?? ["Loading Players"]}
+                            onChange={({ value: nextValue }) => setActivePlayer(nextValue)}
+                        />
+                        <Box pad={{ right: 'large', left: 'large' }} width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} fill>
+                            <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Players</Heading>
+                            <Box pad="small">
+                                {
+                                    playerData?.filter(player => player.playerID.toString() == activePlayer).map((player, playerIndex) => {
+                                        return (
+                                            <Box key={player.playerID} pad="small">
+                                                <PlayerTab player={player} />
+                                            </Box>
+                                        )
+                                    })
+                                }
+                            </Box>
                         </Box>
                     </Box>
-                </Box>
-                :
-                <Tabs activeIndex={index} onActive={onActive}>
-                    {
-                        playerData?.map((player, playerIndex) => {
-                            return (
-                                <Tab key={`player_${player.playerID}`} title={<CustomTabTitle isActive={index == playerIndex} label={`${player.playerName ? player.playerName : `Character ${player.playerID}`}`} />}>
-                                    <Box pad={{ right: 'large', left: 'large' }} width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} fill>
-                                        <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Players</Heading>
-                                        <Box pad="small">
-                                            <PlayerTab player={player} />
+                    :
+                    <Tabs activeIndex={index} onActive={onActive}>
+                        {
+                            playerData?.map((player, playerIndex) => {
+                                return (
+                                    <Tab key={`player_${player.playerID}`} title={<CustomTabTitle isActive={index == playerIndex} label={`${player.playerName ? player.playerName : `Character ${player.playerID}`}`} />}>
+                                        <Box pad={{ right: 'large', left: 'large' }} width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} fill>
+                                            <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Players</Heading>
+                                            <Box pad="small">
+                                                <PlayerTab player={player} />
+                                            </Box>
                                         </Box>
-                                    </Box>
-                                </Tab>
-                            )
-                        }) ?? <></>
-                    }
-                </Tabs>
+                                    </Tab>
+                                )
+                            }) ?? <></>
+                        }
+                    </Tabs>
                 }
             </ThemeContext.Extend>
         </Box>
