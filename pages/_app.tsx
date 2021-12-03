@@ -49,6 +49,7 @@ const customTheme = deepMerge(dark, {
       "accent-2": "#BEC2CC",
       "accent-3": "#6B747F",
       "accent-4": "#22252B",
+      "grey-1": "#30333A",
       "dark-1": "#1E2127",
       "dark-2": "#1B1D24",
       "background": "#1B1D24",

@@ -18,6 +18,8 @@ import parseGems from './domain/gemPurchases';
 import parseAchievements from './domain/achievements';
 import parseLooty from './domain/lootyTracker';
 import parseShrines from './domain/shrines';
+import { initAllItems, Item } from './domain/items';
+import parseStorage from './domain/storage';
 
 
 
@@ -63,13 +65,13 @@ const keyFunctionMap: Record<string, Function> = {
   "timeAway": (doc: Document) => JSON.parse(doc.get('TimeAway')),
   "cauldronBubbles": (doc: Document) => JSON.parse(doc.get('CauldronBubbles')),
   "cards": (doc: Document) => JSON.parse(doc.get('Cards0')),
-  "players": (doc: Document, accountData: Map<string, any>) => parsePlayers(doc, accountData),
+  "players": (doc: Document, accountData: Map<string, any>, allItems: Item[]) => parsePlayers(doc, accountData, allItems),
   "alchemy": (doc: Document) => parseAlchemy(doc.get("CauldronInfo"), doc.get("CauldUpgLVs")),
   "bribes": (doc: Document) => parseBribes(doc.get("BribeStatus")),
   "guild": (doc: Document) => parseGuild(JSON.parse(doc.get("Guild"))),
   "gems": (doc: Document) => parseGems(JSON.parse(doc.get('GemItemsPurchased'))),
   "achievements": (doc: Document) => parseAchievements(JSON.parse(doc.get('AchieveReg'))),
-  "lootyData": (doc: Document) => parseLooty(JSON.parse(doc.get("Cards1"))),
+  "lootyData": (doc: Document, allItems: Item[]) => parseLooty(JSON.parse(doc.get("Cards1")), allItems),
   "rawData": (doc: Document) => doc.data(),
   "POExtra": (doc: Document) => { 
     return {
@@ -77,7 +79,8 @@ const keyFunctionMap: Record<string, Function> = {
       complete: doc.get("CYDeliveryBoxComplete"),
       misc: doc.get("CYDeliveryBoxMisc"),
   }},
-  "shrines": (doc: Document) => parseShrines(JSON.parse(doc.get("Shrine")))
+  "shrines": (doc: Document) => parseShrines(JSON.parse(doc.get("Shrine"))),
+  "storage": (doc: Document,  accountData: Map<string, any>, allItems: Item[]) => parseStorage(doc, accountData.get("playerNames"), allItems),
 }
 
 
@@ -87,6 +90,9 @@ export const AppProvider: React.FC<{}> = (props) => {
   const [db, setDB] = useState<Firestore | undefined>(undefined)
   const [realDB, setRealDB] = useState<Database | undefined>(undefined)
   const [charNames, setCharNames] = useState<Array<string>>([]);
+  
+  const allItems = initAllItems();
+
   const getAccountData = async () => {
     if (db?.type == "firestore" && user) {
       if (charNames.length == 0 && realDB) {
@@ -109,8 +115,11 @@ export const AppProvider: React.FC<{}> = (props) => {
           accountData.set("playerNames", charNames);
           Object.entries(keyFunctionMap).forEach(([key, toExecute]) => {
             try {
-              if (key == "players") {
-                accountData.set(key, toExecute(doc, accountData));
+              if (key == "players" || key == "storage") {
+                accountData.set(key, toExecute(doc, accountData, allItems));
+              }
+              else if (key == "lootyData" ) {
+                accountData.set(key, toExecute(doc, allItems));
               }
               else {
                 accountData.set(key, toExecute(doc));
