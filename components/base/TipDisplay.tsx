@@ -14,7 +14,7 @@ export enum TipDirection {
 
 export interface TipProps {
     heading: string
-    body: string
+    body: string | React.ReactNode
     children: React.ReactNode
     size: string
     direction: TipDirection

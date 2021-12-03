@@ -5,13 +5,49 @@ import {
     Heading,
     CheckBox
 } from 'grommet'
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useMemo } from 'react';
 import { AppContext } from '../data/appContext'
 import { LootyInfo } from '../data/domain/lootyTracker';
+import { ItemSources, ItemSource, DropInfo } from '../data/domain/items';
 import { NextSeo } from 'next-seo';
+import TipDisplay, { TipDirection } from '../components/base/TipDisplay';
 
 const getRegex = () => { return /Cards(\w)(\d+)/g };
 const getEnhancerRegex = () => { return /DungEnhancer(\d+)/g };
+
+
+function ItemSourcesDisplay({ sources, dropInfo }: { sources: ItemSources, dropInfo: DropInfo}) {
+
+    const possibleSources = useMemo(() => { 
+        if (!sources) {
+            return []
+        }
+
+        const fromSources = sources.sources.map(x => x.txtName);
+        const fromRecipe = sources.recipeFrom.map(x => x.txtName);
+        const fromQuests = sources.questAss.map(x => x.txtName);
+        return Array.from(new Set([...fromSources, ...fromRecipe, ...fromQuests]));
+    }, [sources]);
+
+
+    return (
+        <Box>
+            <Text size="medium">Obtain From:</Text>
+            {
+                possibleSources.length > 0 ? 
+                <Box>
+                    
+                    {
+                        possibleSources.map((source, index) => (
+                            <Text size="small" key={index}>{source}</Text>
+                        ))
+                    }
+                </Box> :
+                <>I don&apos;t know yet</>
+            }
+        </Box>
+    )
+}
 
 function LootyTracker() {
     const [lootyInfo, setlootyInfo] = useState<LootyInfo>();
@@ -70,24 +106,34 @@ function LootyTracker() {
                 {lootyInfo &&
                     <Grid columns={{ size: "36px" }} gap="small">
                         {
-                        !onlyMissing && !onlyLooted && lootyInfo.obtainable.map(([rawName, displayName], index) => (
-                            <Box key={index} width={{max: getWidth(rawName)}} >
-                                <Box title={displayName} style={{opacity : lootyInfo.isLooted(rawName) ? 1 : 0.5}}  className={getClass(rawName)} />
-                            </Box>
+                            !onlyMissing && !onlyLooted && lootyInfo.obtainable.map((item, index) => (
+                                <Box key={index} width={{ max: getWidth(item.internalName) }} >
+                                    <Box style={{ opacity: lootyInfo.isLooted(item.internalName) ? 1 : 0.5 }} className={getClass(item.internalName)} />
+                                </Box>
                             ))
                         }
                         {
-                        onlyMissing && lootyInfo.missing.map(([rawName, displayName], index) => (
-                            <Box width={{max: getWidth(rawName)}} key={index}>
-                                <Box title={displayName} className={getClass(rawName)} />
-                            </Box>
-                        ))
-                    }
-                    {
-                        onlyLooted && lootyInfo.obtained.map(([rawName, displayName], index) => (
-                            <Box width={{max: getWidth(rawName)}} key={index}>
-                                <Box title={displayName} className={getClass(rawName)} />
-                            </Box>
+                            onlyMissing && lootyInfo.missing.map((item, index) => (
+                                <Box key={index}>
+                                    <TipDisplay
+                                        heading={`${item.displayName} (${item.type})`}
+                                        body={<ItemSourcesDisplay sources={item.sources} dropInfo={item.dropInfo} />}
+                                        size={"large"}
+                                        direction={TipDirection.Down}
+                                        maxWidth="large"
+                                    >
+                                        <Box width={{ max: getWidth(item.internalName) }}>
+                                            <Box className={getClass(item.internalName)} />
+                                        </Box>
+                                    </TipDisplay>
+                                </Box>
+                            ))
+                        }
+                        {
+                            onlyLooted && lootyInfo.obtained.map((item, index) => (
+                                <Box width={{ max: getWidth(item.internalName) }} key={index}>
+                                    <Box className={getClass(item.internalName)} />
+                                </Box>
                             ))
                         }
                     </Grid>

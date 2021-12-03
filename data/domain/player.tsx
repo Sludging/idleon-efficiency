@@ -7,6 +7,7 @@ import { Box, initPostOffice } from './postoffice';
 import { Worship } from './worship';
 import { ClassIndex, Talent, ClassTalentMap, GetTalentArray } from './talents';
 import { CardInfo } from "./cards";
+import { Item, Equipment, Food, Tool, StoneProps } from "./items";
 import { notUndefined } from '../utility';
 
 export class PlayerStats {
@@ -25,44 +26,10 @@ export class PlayerStats {
     }
 }
 
-export class Item {
-    raw_name: string;
-    raw_item_data: any;
-    location: number;
-    type: string;
-    display_name: string;
-
-    constructor(raw_name: string, location: number, type: string) {
-        this.raw_name = raw_name;
-        this.raw_item_data = itemMap.get(raw_name);
-        this.location = location;
-        this.type = type;
-        this.display_name = this.raw_item_data?.displayName.replace(/_/g, " ") || "Unknown";
-    }
-}
-
-export class Equipment extends Item {
-    constructor(raw_name: string, location: number, type: string) {
-        super(raw_name, location, type);
-    }
-}
-
-export class Tool extends Item {
-    constructor(raw_name: string, location: number, type: string) {
-        super(raw_name, location, type);
-    }
-}
-
-export class Food extends Item {
-    constructor(raw_name: string, location: number, type: string) {
-        super(raw_name, location, type);
-    }
-}
-
 export class PlayerEquipment {
-    equipment: Array<Item>;
-    tools: Array<Item>;
-    food: Array<Item>;
+    equipment: Array<Item | undefined>;
+    tools: Array<Item | undefined>;
+    food: Array<Item | undefined>;
 
     constructor() {
         this.equipment = [];
@@ -282,53 +249,53 @@ export class Player {
     }
 }
 
-const functionArray: Function[] = [
-    (doc: Document, player: Player) => parseEquipment(doc.get(`EquipOrder_${player.playerID}`), player),
-    (doc: Document, player: Player) => parseStats(doc.get(`PVStatList_${player.playerID}`), player),
-    (doc: Document, player: Player) => { 
+const keyFunctionMap: Record<string, Function> = {
+    "equipment": (doc: Document, player: Player, allItems: Item[]) => parseEquipment(doc.get(`EquipOrder_${player.playerID}`), doc.get(`EquipQTY_${player.playerID}`), JSON.parse(doc.get(`EMm0_${player.playerID}`)), JSON.parse(doc.get(`EMm1_${player.playerID}`)), player, allItems),
+    "stats": (doc: Document, player: Player) => parseStats(doc.get(`PVStatList_${player.playerID}`), player),
+    "class": (doc: Document, player: Player) => {
         player.class = ClassIndex[doc.get(`CharacterClass_${player.playerID}`)]?.replace(/_/g, " ") || "New Class?";
         player.classId = doc.get(`CharacterClass_${player.playerID}`) as ClassIndex;
     },
-    (doc: Document, player: Player) => { player.currentMonster = monstersMap.get(doc.get(`AFKtarget_${player.playerID}`))?.replace(/_/g, " ") || "New Monster?"; },
-    (doc: Document, player: Player) => parseMap(doc.get(`CurrentMap_${player.playerID}`), player),
-    (doc: Document, player: Player) => parseStarSigns(doc.get(`PVtStarSign_${player.playerID}`), player),
-    (doc: Document, player: Player) => { player.money = doc.get(`Money_${player.playerID}`) },
-    (doc: Document, player: Player) => parseSkills(doc.get(`Lv0_${player.playerID}`), player),
-    (doc: Document, player: Player) => parseAnvil(
+    "monster": (doc: Document, player: Player) => { player.currentMonster = monstersMap.get(doc.get(`AFKtarget_${player.playerID}`))?.replace(/_/g, " ") || "New Monster?"; },
+    "map": (doc: Document, player: Player) => parseMap(doc.get(`CurrentMap_${player.playerID}`), player),
+    "starsigns": (doc: Document, player: Player) => parseStarSigns(doc.get(`PVtStarSign_${player.playerID}`), player),
+    "money": (doc: Document, player: Player) => { player.money = doc.get(`Money_${player.playerID}`) },
+    "skills": (doc: Document, player: Player) => parseSkills(doc.get(`Lv0_${player.playerID}`), player),
+    "anvil": (doc: Document, player: Player) => parseAnvil(
         doc.get(`AnvilPA_${player.playerID}`),
         doc.get(`AnvilPAstats_${player.playerID}`),
         doc.get(`AnvilPAselect_${player.playerID}`),
         player
     ),
-    (doc: Document, player: Player) => { player.capacity = new Capacity(JSON.parse(doc.get(`MaxCarryCap_${player.playerID}`))) },
-    (doc: Document, player: Player) => parseTalents(
+    "capacity": (doc: Document, player: Player) => { player.capacity = new Capacity(JSON.parse(doc.get(`MaxCarryCap_${player.playerID}`))) },
+    "talents": (doc: Document, player: Player) => parseTalents(
         doc.get(`SL_${player.playerID}`),
         doc.get(`SM_${player.playerID}`),
         player
     ),
-    (doc: Document, player: Player) => parsePostOffice(doc.get(`POu_${player.playerID}`), player),
-    (doc: Document, player: Player) => { player.activeBubblesString = (JSON.parse(doc.get('CauldronBubbles')) as string[][])[player.playerID] },
-    (doc: Document, player: Player) => { 
+    "postoffice": (doc: Document, player: Player) => parsePostOffice(doc.get(`POu_${player.playerID}`), player),
+    "activeBubbles": (doc: Document, player: Player) => { player.activeBubblesString = (JSON.parse(doc.get('CauldronBubbles')) as string[][])[player.playerID] },
+    "timeaway": (doc: Document, player: Player) => {
         const timeAway = JSON.parse(doc.get('TimeAway'));
         player.afkFor = timeAway['Player'] - (doc.get(`PTimeAway_${player.playerID}`) * 1000);
     },
-    (doc: Document, player: Player) => { 
+    "playerstuff": (doc: Document, player: Player) => {
         const jsonStuff = JSON.parse(doc.get(`PlayerStuff_${player.playerID}`));
         player.worship.currentCharge = jsonStuff[0];
     },
-    (doc: Document, player: Player) => { 
+    "cards": (doc: Document, player: Player) => {
         const currentCardSet = JSON.parse(doc.get(`CSetEq_${player.playerID}`));
         const equippedCards = doc.get(`CardEquip_${player.playerID}`) as string[];
         const cards = JSON.parse(doc.get('Cards0'));
         player.cardInfo = new CardInfo(cards, currentCardSet, equippedCards);
     },
-    (doc: Document, player: Player) => { 
+    "activebuffs": (doc: Document, player: Player) => {
         const activeBuffs = doc.get(`BuffsActive_${player.playerID}`) as Record<number, number>[];
         player.activeBuffs = activeBuffs.map((buff) => {
             return player.talents.find(x => x.skillIndex == buff[0]);
         }).filter(notUndefined)
     }
-];
+};
 
 const parsePostOffice = (postOffice: string, player: Player) => {
     const jsonPostOffice = JSON.parse(postOffice);
@@ -400,22 +367,42 @@ const parseStats = (stats: Array<number>, player: Player) => {
     player.level = stats[4];
 }
 
-const parseEquipment = (equipment: Array<Map<string, string>>, player: Player) => {
+const parseEquipment = (
+        equipment: Array<Record<number, string>>,
+        equipCount: Array<Record<number, number>>,
+        equipStones: Record<number, StoneProps>,
+        toolStones: Record<number, StoneProps>,
+        player: Player,
+        allItems: Item[]
+    ) => {
     let playerEquipment = new PlayerEquipment();
     equipment?.forEach((data, equipIndex) => {
         if (equipIndex == 0) { // armor 
             Object.entries(data).forEach(([location, name], _) => {
-                playerEquipment.equipment.push(new Equipment(name, parseInt(location), "armor"));
+                let theItem = allItems.find((item) => item.internalName == name)?.duplicate();
+                if (theItem) {
+                    theItem.addStone(equipStones[Number(location)])
+                }
+                playerEquipment.equipment.push(theItem);
             })
         }
         if (equipIndex == 1) { // tools
             Object.entries(data).forEach(([location, name], _) => {
-                playerEquipment.tools.push(new Tool(name, parseInt(location), "tools"));
+                let theItem = allItems.find((item) => item.internalName == name)?.duplicate();
+                if (theItem) {
+                    theItem.addStone(toolStones[Number(location)])
+                }
+                playerEquipment.tools.push(theItem);
+
             })
         }
         if (equipIndex == 2) { // food
             Object.entries(data).forEach(([location, name], _) => {
-                playerEquipment.food.push(new Food(name, parseInt(location), "food"));
+                const item = allItems.find((item) => item.internalName == name)?.duplicate();
+                if (item) {
+                    item.count = equipCount[equipIndex][Number(location)];
+                }
+                playerEquipment.food.push(item);
             })
         }
     });
@@ -423,17 +410,22 @@ const parseEquipment = (equipment: Array<Map<string, string>>, player: Player) =
     player.gear = playerEquipment;
 }
 
-export default function parsePlayers(doc: Document, accountData: Map<string, any>) {
+export default function parsePlayers(doc: Document, accountData: Map<string, any>, allItems: Item[]) {
     const playerNames = accountData.get("playerNames") as string[];
     let parsedData = playerNames.map((playerName, index) => {
         let player = new Player(index, playerName);
 
-        functionArray.forEach((toExecute) => {
+        Object.entries(keyFunctionMap).forEach(([key, toExecute]) => {
             try {
-                toExecute(doc, player);
+                if (key == "equipment") {
+                    toExecute(doc, player, allItems);
+                }
+                else {
+                    toExecute(doc, player);
+                }
             }
             catch (e) {
-                console.log("Something went wrong parsing some player data");
+                console.log(`Something went wrong parsing ${key}`);
                 console.debug(e);
             }
         });
@@ -443,7 +435,7 @@ export default function parsePlayers(doc: Document, accountData: Map<string, any
 
     // identify player ranking in each skill
     const allSkillsMap: Map<SkillsIndex, Array<number>> = new Map<SkillsIndex, Array<number>>();
-    
+
     // record skill levels across all players in a map
     parsedData.forEach((player) => {
         player.skills.forEach((skillLevel, skillIndex) => {
