@@ -312,7 +312,7 @@ function ItemDisplay({ item, size }: { item: Item | undefined, size?: string }) 
             return <Text>{description}</Text>
         }
 
-        return stats.filter((stat) => stat.shouldDisplay()).map(x => <Text>{x.getDisplay()}</Text>);
+        return stats.filter((stat) => stat.shouldDisplay()).map((x,index) => <Text key={index}>{x.getDisplay()}</Text>);
     }
 
 
