@@ -51,3 +51,6 @@ get_id_token.js
 yarn.lock
 .vscode
 model_generation
+quest
+# Sentry
+.sentryclirc

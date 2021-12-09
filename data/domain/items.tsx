@@ -179,7 +179,25 @@ export const filteredLootyItems = [
     "EquipmentRingsChat5",
     "EquipmentRingsChat6",
     "EquipmentRingsChat8",
-    "EquipmentRingsChat9"
+    "EquipmentRingsChat9",
+
+    // Personal list! need to keep around manually!
+    "GemP11",
+    "GemP12",
+    "GemP13",
+    "GemP14",
+    "GemP15",
+    'Fish5', // NEED TO REVISIT WHEN RELEASE
+    'Fish6', // NEED TO REVISIT WHEN RELEASE
+    'Fish7', // NEED TO REVISIT WHEN RELEASE
+    'Fish8', // NEED TO REVISIT WHEN RELEASE
+    'Soul5', // NEED TO REVISIT WHEN RELEASE
+    'Soul6', // NEED TO REVISIT WHEN RELEASE
+    'EquipmentSmithingTabs5',
+    'EquipmentSmithingTabs6',
+    'EquipmentSmithingTabs7',
+    'EquipmentSmithingTabs8',
+    'DungWeaponBow1'
 ];
 
 export interface DropSource {

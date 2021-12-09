@@ -61,6 +61,7 @@ function Achievements() {
                                                             <Text size={size == "small" ? 'small' : ''} weight="bold">{achievement.name}</Text>
                                                             <hr style={{ width: "100%"}} />
                                                             {!achievement.completed && achievement.quantity > 1 && <Text>Progress: {achievement.currentCount}/{achievement.quantity}</Text>}
+                                                            {!achievement.completed && achievement.currentCount > 1 && <Text>Progress: {achievement.currentCount}</Text>}
                                                             <Text>Requirement: {achievement.desc}</Text>
                                                             <Text>Reward: {achievement.reward}</Text>
                                                         </Box>
@@ -72,6 +73,7 @@ function Achievements() {
                                                             <Box style={{ opacity: achievement.completed ? 1 : 0.3 }} className={achievement.iconClass} />
                                                         </Box>
                                                         {!achievement.completed && achievement.quantity > 1 && size != "small" && <Text>{achievement.currentCount}/{achievement.quantity}</Text>}
+                                                        {!achievement.completed && achievement.currentCount > 1 && size != "small" && <Text>{achievement.currentCount}</Text>}
                                                     </Stack>
                                                 </Tip>
 

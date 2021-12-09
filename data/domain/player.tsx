@@ -244,7 +244,23 @@ export class Player {
             case ClassIndex.Bubonic_Conjuror:
             case ClassIndex.Arcane_Cultist:
                 return ClassIndex.Mage;
-            default: return ClassIndex.Beginner; // Is this really the best, default?
+            default: return ClassIndex.Beginner; // Is this really the best default?
+        }
+    }
+
+    getPlayerLetter = () => {
+        switch (this.playerID) {
+            case 0: return "_";
+            case 1: return "a";
+            case 2: return "b";
+            case 3: return "c";
+            case 4: return "d";
+            case 5: return "e";
+            case 6: return "f";
+            case 7: return "g";
+            case 8: return "h";
+            case 9: return "i";
+            default: return '';
         }
     }
 }

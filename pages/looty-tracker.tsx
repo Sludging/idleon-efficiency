@@ -62,15 +62,20 @@ function LootyTracker() {
         if (getRegex().exec(rawName)) {
             return `icons-2836 icons-${rawName}`;
         }
+        // Cons dem for some reason has capital x.
+        if (rawName == "ObolPinkCons") {
+            return `icons-3636 icons-${rawName}_X1`;    
+        }
+        // 35 doesn't have an image for some reason.
+        if (rawName == "StampA35") {
+            return `icons-3636 icons-StampA34_x1`;    
+        }
         return `icons-3636 icons-${rawName}_x1`;
     }
 
     const getWidth = (rawName: string) => {
         if (getEnhancerRegex().exec(rawName)) {
             return `34px`;
-        }
-        if (rawName == "StampC5") {
-            return `36px`;
         }
         if (getRegex().exec(rawName)) {
             return `28px`;
@@ -107,7 +112,7 @@ function LootyTracker() {
                     <Grid columns={{ size: "36px" }} gap="small">
                         {
                             !onlyMissing && !onlyLooted && lootyInfo.obtainable.map((item, index) => (
-                                <Box key={index} width={{ max: getWidth(item.internalName) }} >
+                                <Box title={item.displayName} key={index} width={{ max: getWidth(item.internalName) }} >
                                     <Box style={{ opacity: lootyInfo.isLooted(item.internalName) ? 1 : 0.5 }} className={getClass(item.internalName)} />
                                 </Box>
                             ))
@@ -131,7 +136,7 @@ function LootyTracker() {
                         }
                         {
                             onlyLooted && lootyInfo.obtained.map((item, index) => (
-                                <Box width={{ max: getWidth(item.internalName) }} key={index}>
+                                <Box title={item.displayName} width={{ max: getWidth(item.internalName) }} key={index}>
                                     <Box className={getClass(item.internalName)} />
                                 </Box>
                             ))
