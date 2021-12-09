@@ -20,6 +20,7 @@ import parseLooty from './domain/lootyTracker';
 import parseShrines from './domain/shrines';
 import { initAllItems, Item } from './domain/items';
 import parseStorage from './domain/storage';
+import parseQuests from './domain/quests';
 
 
 
@@ -70,7 +71,7 @@ const keyFunctionMap: Record<string, Function> = {
   "bribes": (doc: Document) => parseBribes(doc.get("BribeStatus")),
   "guild": (doc: Document) => parseGuild(JSON.parse(doc.get("Guild"))),
   "gems": (doc: Document) => parseGems(JSON.parse(doc.get('GemItemsPurchased'))),
-  "achievements": (doc: Document) => parseAchievements(JSON.parse(doc.get('AchieveReg'))),
+  "achievements": (doc: Document) => parseAchievements(JSON.parse(doc.get('AchieveReg')), JSON.parse(doc.get('SteamAchieve'))),
   "lootyData": (doc: Document, allItems: Item[]) => parseLooty(JSON.parse(doc.get("Cards1")), allItems),
   "rawData": (doc: Document) => doc.data(),
   "POExtra": (doc: Document) => { 
@@ -81,6 +82,8 @@ const keyFunctionMap: Record<string, Function> = {
   }},
   "shrines": (doc: Document) => parseShrines(JSON.parse(doc.get("Shrine"))),
   "storage": (doc: Document,  accountData: Map<string, any>, allItems: Item[]) => parseStorage(doc, accountData.get("playerNames"), allItems),
+  "constellations": (doc: Document) => JSON.parse(doc.get("SSprog")),
+  "quests": (doc: Document, accountData: Map<string, any>, allItems: Item[]) => parseQuests(doc, accountData, allItems),
 }
 
 
@@ -115,7 +118,7 @@ export const AppProvider: React.FC<{}> = (props) => {
           accountData.set("playerNames", charNames);
           Object.entries(keyFunctionMap).forEach(([key, toExecute]) => {
             try {
-              if (key == "players" || key == "storage") {
+              if (key == "players" || key == "storage" || key == "quests") {
                 accountData.set(key, toExecute(doc, accountData, allItems));
               }
               else if (key == "lootyData" ) {

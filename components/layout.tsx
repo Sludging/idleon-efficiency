@@ -51,27 +51,6 @@ const PointerImage = styled(Image)`
     cursor: pointer;
 `
 
-function FooterAd() {
-    useEffect(() => {
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
-
-        return () => {
-            (window.adsbygoogle = window.adsbygoogle || []).length = 0;
-        }
-    })
-
-    return (
-        <Box>
-            <ins className="adsbygoogle"
-                style={{ display: "block" }}
-                data-ad-client="ca-pub-9755300710945447"
-                data-ad-slot="3258534874"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
-        </Box>
-    )
-}
-
 export default function Layout({
     children
 }: {
@@ -96,6 +75,8 @@ export default function Layout({
         { link: "/storage", label: "Storage"},
         // { link: "/bribes", label: "Bribes - WIP"},
         { link: "/achievements", label: "Achievements"},
+        { link: "/constellations", label: "Constellations"},
+        { link: "/quests", label: "Quests"},
         { link: "/looty-tracker", label: "Looty Tracker"},
         { link: "/raw-data", label: "Raw Data"},
     ]
@@ -142,7 +123,6 @@ export default function Layout({
             margin={{ horizontal: "auto" }}
             height={{ min: "100%" }}
         >
-            <Script async key="adsense" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9755300710945447" crossOrigin="anonymous"></Script>
             <Header background="dark-1" height="56px" border={{ color: "white-1", side: "bottom" }}>
                 <Box width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} direction="row" justify='between' align="center" pad="small" fill>
                     <Link passHref href={"/"}>
@@ -206,7 +186,12 @@ export default function Layout({
                         {children}
                     </Box>
                 </Box>
-                {/* <FooterAd /> */}
+                <Box height={{min: '90px', max: '90px' }}>
+                    <script type="text/javascript" src="https://pppbr.com/bnr.php?section=Footer&pub=876959&format=728x90&ga=g"></script>
+                    <noscript>
+                        <Anchor href="https://yllix.com/publishers/876959" target="_blank"><Image src="//ylx-aff.advertica-cdn.com/pub/728x90.png" style={{border: "none", margin:0, padding:0, verticalAlign: "baseline"}} alt="ylliX - Online Advertising Network" /></Anchor>
+                    </noscript>
+                </Box>
             </Main>
             <Footer height={{ min: "82px" }} background="dark-1">
                 <Box width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} direction="row" justify='between' fill="horizontal" align="center" pad="small">
@@ -215,7 +200,7 @@ export default function Layout({
                         <Anchor href="https://www.buymeacoffee.com/sludger" target="_blank"><Image src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me A Coffee" height="40px" width="150px" /></Anchor>
                         <Box direction="row" gap="small" pad="small" justify="end">
                             <Image alt="discord_logo" src={"/discord-logo.svg"} height="21px" width="21px"/>
-                            <Anchor color="white" target="_blank" href="https://discord.gg/zDb5sbR3">Idleon Efficiency</Anchor>
+                            <Anchor color="white" target="_blank" href="https://discord.gg/AfsyBkSd2q">Idleon Efficiency</Anchor>
                         </Box>
                     </Box>
                 </Box>
