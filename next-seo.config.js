@@ -20,7 +20,7 @@ export default {
   additionalMetaTags: 
     [
       {
-        property: 'propeller',
+        name: 'propeller',
         content: '212136656dc025f7fb532bc66fd47bf8'
       }
     ]
