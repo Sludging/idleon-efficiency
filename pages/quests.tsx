@@ -85,24 +85,24 @@ function QuestInformation({ info }: { info: NpcQuest}) {
             <Text weight="bold">Requirements:{ info.ConsumeItems ? " (Consumed on delivery)" : ""}</Text>
             { info.Type == "ItemsAndSpaceRequired" && 
                 info.ItemReq?.map((item, index) => (
-                        <Text key={index} size="small">Collect {item.displayName}: {item.quantity}</Text>
+                        <Text key={`req_${index}`} size="small">Collect {item.displayName}: {item.quantity}</Text>
                 ))
             }
             { 
               info.Type == "Custom" && 
                 info.CustomArray?.map((data, index) => (
-                    <Text key={index} size="small">{data.desc} {data.finalV}</Text>
+                    <Text key={`req_${index}`} size="small">{data.desc} {data.finalV}</Text>
                 ))
             }
             <Text weight="bold">Rewards:</Text>
             {
                 info.Rewards?.map((item, index) => {
                     if (item.item == "TalentBook1" || item.item?.includes("Recipe")) {
-                        return (<Text key={index} size="small">Talent Book or Recipe</Text>)
+                        return (<Text key={`reward_${index}`} size="small">Talent Book or Recipe</Text>)
                     }
                     if (item.item) {
                         return (
-                            <Box key={index} direction="row" gap="small" align="center">
+                            <Box key={`reward_${index}`} direction="row" gap="small" align="center">
                                 <Box width={{max: '36px', min: '36px'}}>
                                     <Box className={item.className} />
                                 </Box>
@@ -112,13 +112,13 @@ function QuestInformation({ info }: { info: NpcQuest}) {
                     }
                     if (item.type == "Class" || item.type == "Smithing" || item.type == "Choppin" || item.type == "Mining") {
                         return (
-                            <Text key={index}>{item.amount} {item.type} Exp</Text>
+                            <Text key={`reward_${index}`}>{item.amount} {item.type} Exp</Text>
                         )
                     }
                     if (item.coins) {
-                        return (<CoinsDisplay key={index} coinMap={getCoinsArray(item.coins)} />)
+                        return (<CoinsDisplay key={`reward_${index}`} coinMap={getCoinsArray(item.coins)} />)
                     }
-                    return (<Text key={index}>{item.type} | {item.coins} | {item.amount}</Text>)
+                    return (<Text key={`reward_${index}`}>{item.type} | {item.coins} | {item.amount}</Text>)
                 })
             }
             <Text size="xsmall">*A work in progress, therefore not always accurate.</Text>
@@ -245,7 +245,7 @@ function Quests() {
                                 npcsToShow.map(([_, npc], npcIndex) => {
                                     if (npcIndex + 1 == index) {
                                         return (
-                                            <NPCQuests npc={npc} playerInfo={playerData ?? []} playerQuestData={questsData?.playerData ?? {}} />
+                                            <NPCQuests key={npcIndex} npc={npc} playerInfo={playerData ?? []} playerQuestData={questsData?.playerData ?? {}} />
                                         )
                                     }
                                 })
