@@ -9,7 +9,7 @@
     background-position: 0 calc(var(--row) * 1.4705882352941178%)
 }
 .icons-3836:not(.icons-ClassIcons0):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
-        .icons-ClassIcons0 { --row: 0; }
+            .icons-ClassIcons0 { --row: 0; }
 .icons-ClassIcons1 { --row: 1; }
 .icons-ClassIcons10 { --row: 2; }
 .icons-ClassIcons11 { --row: 3; }
