@@ -28,6 +28,8 @@ import '../public/icons/assets/sheets/spritesheet_34x34.css';
 import '../public/icons/assets/sheets/spritesheet_66x66.css';
 import '../public/icons/assets/sheets/spritesheet_96x80.css';
 import '../public/icons/assets/sheets/spritesheet_43x44.css';
+import '../public/icons/assets/sheets/spritesheet_50x50.css';
+import '../public/icons/assets/sheets/spritesheet_constellations.css';
 import Layout from '../components/layout';
 
 import { DefaultSeo } from 'next-seo';
@@ -49,7 +51,11 @@ const customTheme = deepMerge(dark, {
       "accent-2": "#BEC2CC",
       "accent-3": "#6B747F",
       "accent-4": "#22252B",
+      "green-1": "#668e29",
+      "orange-1": "#cb4b0f",
       "grey-1": "#30333A",
+      "grey-2": "#828D99",
+      "grey-3": "#4C4F54",
       "dark-1": "#1E2127",
       "dark-2": "#1B1D24",
       "background": "#1B1D24",

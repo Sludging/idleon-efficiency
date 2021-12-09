@@ -1,0 +1,29 @@
+.icons-9880 {
+    background-image: url(spritesheet_98x80.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 81.63265306122449%;
+    height: 0;
+    background-size: cover;
+    background-position: 0 calc(var(--row) * 5.882352941176471%)
+}
+.icons-9880:not(.icons-aShopItems0):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
+            .icons-aShopItems0 { --row: 0; }
+.icons-aShopItems1 { --row: 1; }
+.icons-aShopItems10 { --row: 2; }
+.icons-aShopItems11 { --row: 3; }
+.icons-aShopItems12 { --row: 4; }
+.icons-aShopItems13 { --row: 5; }
+.icons-aShopItems14 { --row: 6; }
+.icons-aShopItems15 { --row: 7; }
+.icons-aShopItems16 { --row: 8; }
+.icons-aShopItems17 { --row: 9; }
+.icons-aShopItems2 { --row: 10; }
+.icons-aShopItems3 { --row: 11; }
+.icons-aShopItems4 { --row: 12; }
+.icons-aShopItems5 { --row: 13; }
+.icons-aShopItems6 { --row: 14; }
+.icons-aShopItems7 { --row: 15; }
+.icons-aShopItems8 { --row: 16; }
+.icons-aShopItems9 { --row: 17; }
