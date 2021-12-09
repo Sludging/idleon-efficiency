@@ -186,12 +186,6 @@ export default function Layout({
                         {children}
                     </Box>
                 </Box>
-                <Box height={{min: '90px', max: '90px' }}>
-                    <script type="text/javascript" src="https://pppbr.com/bnr.php?section=Footer&pub=876959&format=728x90&ga=g"></script>
-                    <noscript>
-                        <Anchor href="https://yllix.com/publishers/876959" target="_blank"><Image src="//ylx-aff.advertica-cdn.com/pub/728x90.png" style={{border: "none", margin:0, padding:0, verticalAlign: "baseline"}} alt="ylliX - Online Advertising Network" /></Anchor>
-                    </noscript>
-                </Box>
             </Main>
             <Footer height={{ min: "82px" }} background="dark-1">
                 <Box width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} direction="row" justify='between' fill="horizontal" align="center" pad="small">
