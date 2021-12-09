@@ -83,7 +83,7 @@ function Constellations() {
                                                     <Box pad="large" gap="small" border={{ side: 'right', color: "white-1" }}>
                                                         <Box direction="row" gap="small">
                                                             <Box pad="xsmall">
-                                                                <Image src="icons/custom/map.svg" />
+                                                                <Image src="icons/custom/map.svg" alt="Map Icon"/>
                                                             </Box>
                                                             <Box>
                                                                 <Text>{data.area}</Text>
@@ -92,7 +92,7 @@ function Constellations() {
                                                         </Box>
                                                         <Box direction="row" gap="small">
                                                             <Box pad="xsmall">
-                                                                <Image src="icons/custom/user.svg" />
+                                                                <Image src="icons/custom/user.svg" alt="User Icon"/>
                                                             </Box>
                                                             <Box>
                                                                 <Text>{data.requirement.split("@")[0]}</Text>
@@ -101,7 +101,7 @@ function Constellations() {
                                                         </Box>
                                                         <Box direction="row" gap="small">
                                                             <Box pad="xsmall">
-                                                                <Image src="icons/custom/points.svg" />
+                                                                <Image src="icons/custom/points.svg" alt="Points Icon"/>
                                                             </Box>
                                                             <Box>
                                                                 <Text>{data.starChartPoints}</Text>

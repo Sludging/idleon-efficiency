@@ -84,25 +84,25 @@ function QuestInformation({ info }: { info: NpcQuest}) {
         <Box gap="small">
             <Text weight="bold">Requirements:{ info.ConsumeItems ? " (Consumed on delivery)" : ""}</Text>
             { info.Type == "ItemsAndSpaceRequired" && 
-                info.ItemReq?.map((item) => (
-                        <Text size="small">Collect {item.displayName}: {item.quantity}</Text>
+                info.ItemReq?.map((item, index) => (
+                        <Text key={index} size="small">Collect {item.displayName}: {item.quantity}</Text>
                 ))
             }
             { 
               info.Type == "Custom" && 
-                info.CustomArray?.map((data) => (
-                    <Text size="small">{data.desc} {data.finalV}</Text>
+                info.CustomArray?.map((data, index) => (
+                    <Text key={index} size="small">{data.desc} {data.finalV}</Text>
                 ))
             }
             <Text weight="bold">Rewards:</Text>
             {
-                info.Rewards?.map((item) => {
+                info.Rewards?.map((item, index) => {
                     if (item.item == "TalentBook1" || item.item?.includes("Recipe")) {
-                        return (<Text size="small">Talent Book or Recipe</Text>)
+                        return (<Text key={index} size="small">Talent Book or Recipe</Text>)
                     }
                     if (item.item) {
                         return (
-                            <Box direction="row" gap="small" align="center">
+                            <Box key={index} direction="row" gap="small" align="center">
                                 <Box width={{max: '36px', min: '36px'}}>
                                     <Box className={item.className} />
                                 </Box>
@@ -112,13 +112,13 @@ function QuestInformation({ info }: { info: NpcQuest}) {
                     }
                     if (item.type == "Class" || item.type == "Smithing" || item.type == "Choppin" || item.type == "Mining") {
                         return (
-                            <Text>{item.amount} {item.type} Exp</Text>
+                            <Text key={index}>{item.amount} {item.type} Exp</Text>
                         )
                     }
                     if (item.coins) {
-                        return (<CoinsDisplay coinMap={getCoinsArray(item.coins)} />)
+                        return (<CoinsDisplay key={index} coinMap={getCoinsArray(item.coins)} />)
                     }
-                    return (<Text>{item.type} | {item.coins} | {item.amount}</Text>)
+                    return (<Text key={index}>{item.type} | {item.coins} | {item.amount}</Text>)
                 })
             }
             <Text size="xsmall">*A work in progress, therefore not always accurate.</Text>
@@ -137,8 +137,8 @@ function NPCQuests({ npc, playerInfo, playerQuestData }: { npc: NPC, playerInfo:
                 <Text size="medium">{npc.name}</Text>
             </Box>
             <Box pad={{ left: 'large' }}>
-                {Object.entries(npc.data.quests).map(([_, info]) => (
-                    <Box pad={{ top: 'small', bottom: 'small' }} border={{ side: 'bottom', color: 'white-1' }}>
+                {Object.entries(npc.data.quests).map(([_, info], index) => (
+                    <Box key={index} pad={{ top: 'small', bottom: 'small' }} border={{ side: 'bottom', color: 'white-1' }}>
                         <TipDisplay
                             heading={`${info.Name} (Difficulity: ${info.Difficulty})`}
                             body={<QuestInformation info={info} />}
@@ -209,7 +209,7 @@ function Quests() {
         }
 
         return filtered.sort(([name1], [name2]) => name1 > name2 ? 1 : -1);
-    }, [questsData, activeWorld])
+    }, [questsData, activeWorld, badNPCNames])
 
     useEffect(() => {
         if (idleonData) {
@@ -235,7 +235,7 @@ function Quests() {
                             {
                                 npcsToShow.map(([name, _], npcIndex) => {
                                     return (
-                                        <SpecialButton isActive={index == npcIndex + 1} clickHandler={() => onActive(npcIndex + 1)} text={name} />
+                                        <SpecialButton key={npcIndex} isActive={index == npcIndex + 1} clickHandler={() => onActive(npcIndex + 1)} text={name} />
                                     )
                                 })
                             }

@@ -627,7 +627,6 @@ export default function parseAchievements(achiData: number[], steamData: number[
             const steamIndex = AchSteam2Reg.indexOf(achievement.index);
             if (steamIndex > -1) {
                 achievement.currentCount = Math.max(achiData[index], steamData[steamIndex]);
-                console.log(achievement);
             }
             else {
                 achievement.currentCount = achiData[index];
