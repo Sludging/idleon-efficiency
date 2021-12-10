@@ -57,11 +57,19 @@ function CharacterBox({ playerName, playerClass, status }: { playerName: string,
     )
 }
 
-function SpecialButton({ isActive, text, clickHandler }: { isActive: boolean, text: string, clickHandler: MouseEventHandler }) {
+function SpecialButton({ isActive, text, icon, clickHandler }: { isActive: boolean, text: string, icon?: string, clickHandler: MouseEventHandler }) {
     return (
         <Button fill="horizontal" plain active={isActive} onClick={clickHandler} gap="medium">
             <Box background={isActive ? 'accent-4' : 'dark-2'} pad={{ left: 'medium', right: 'small', top: 'xsmall', bottom: 'xsmall' }} direction="row" justify="between" align="center" gap="small" height="40px">
-                <Text color='accent-2' size="small" weight={isActive ? 'bold' : 'normal'}>{text}</Text>
+                <Box direction="row" gap="small" align="center">
+                    {
+                        icon && 
+                        <Box width={{max: '30px', min: '30px'}}>
+                            <Box className={icon} />
+                        </Box>
+                    }
+                    <Text color='accent-2' size="small" weight={isActive ? 'bold' : 'normal'}>{text}</Text>
+                </Box>
                 {isActive && <Next size="small" />}
             </Box>
         </Button>
@@ -233,9 +241,9 @@ function Quests() {
                     <Grid rows="1" columns={size == "small" ? ['40%', '60%'] : ['25%', '75%']}>
                         <Box pad="medium" height="100%" >
                             {
-                                npcsToShow.map(([name, _], npcIndex) => {
+                                npcsToShow.map(([name, info], npcIndex) => {
                                     return (
-                                        <SpecialButton key={npcIndex} isActive={index == npcIndex + 1} clickHandler={() => onActive(npcIndex + 1)} text={name} />
+                                        <SpecialButton icon={info.getClass()} key={npcIndex} isActive={index == npcIndex + 1} clickHandler={() => onActive(npcIndex + 1)} text={name} />
                                     )
                                 })
                             }

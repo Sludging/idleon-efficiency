@@ -204,6 +204,7 @@ export class Player {
     worship: Worship = new Worship();
     cardInfo: CardInfo | undefined = undefined; // TODO: Do BETTER!
     activeBuffs: Talent[] = [];
+    activePrayers: number[] = [];
 
     constructor(playerID: number, playerName: string) {
         this.playerID = playerID;
@@ -310,7 +311,11 @@ const keyFunctionMap: Record<string, Function> = {
         player.activeBuffs = activeBuffs.map((buff) => {
             return player.talents.find(x => x.skillIndex == buff[0]);
         }).filter(notUndefined)
-    }
+    },
+    "activePrayers": (doc: Document, player: Player) => {
+        const activePrayers = JSON.parse(doc.get(`Prayers_${player.playerID}`)) as number[];
+        player.activePrayers = activePrayers.filter((prayer) => prayer != -1);
+    },
 };
 
 const parsePostOffice = (postOffice: string, player: Player) => {
