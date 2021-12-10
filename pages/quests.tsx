@@ -154,7 +154,7 @@ function NPCQuests({ npc, playerInfo, playerQuestData }: { npc: NPC, playerInfo:
                                 {
                                     playerInfo.map((player, index) => {
                                         let questStatus = CharacterBoxStatus.Disabled;
-                                        switch (playerQuestData[player.playerID][info.QuestName.replace(/ /, "_")]) {
+                                        switch (playerQuestData[player.playerID][info.QuestName.replace(/ /g, "_")]) {
                                             case 1:
                                                 questStatus = CharacterBoxStatus.Complete;
                                                 break;
