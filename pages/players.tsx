@@ -37,6 +37,7 @@ import { NextSeo } from 'next-seo';
 import { MouseEventHandler } from 'hoist-non-react-statics/node_modules/@types/react';
 import { Item, ItemStat } from '../data/domain/items';
 import { Storage } from '../data/domain/storage';
+import { Prayer } from '../data/domain/prayers';
 
 interface SkillProps {
     skillsMap: Map<SkillsIndex, number>
@@ -147,6 +148,12 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
         const theData = idleonData.getData();
         const shrines = theData.get("shrines") as Shrine[];
         return shrines.filter((shrine) => shrine.currentMap == player.currentMapId && shrine.level > 0);
+    }, [idleonData, player]);
+
+    const activePrayers = useMemo(() => {
+        const theData = idleonData.getData();
+        const prayers = theData.get("prayers") as Prayer[];
+        return player.activePrayers.map((prayerIndex) => prayers[prayerIndex]);
     }, [idleonData, player]);
 
     return (
@@ -289,6 +296,38 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                                                 >
                                                     <Box width={{ min: '50px', max: '50px' }}>
                                                         <Box className={shrine.getClass()} />
+                                                    </Box>
+                                                </TipDisplay>
+                                            </Box>
+                                        )
+                                    })
+
+                                }
+                            </Box>
+                        </Box>
+                    }
+                    {
+                        activePrayers.length > 0 &&
+                        <Box gap="small">
+                            <Text>Active Prayers:</Text>
+                            <Box direction="row" wrap gap="small">
+                                {
+                                    activePrayers.map((prayer, index) => {
+                                        return (
+                                            <Box key={index}>
+                                                <TipDisplay
+                                                    heading={`${prayer.name} (${prayer.level})`}
+                                                    body={
+                                                        <Box>
+                                                            <Text>Bonus: {prayer.getBonusText()}</Text>
+                                                            <Text>Curse: {prayer.getCurseText()}</Text>
+                                                        </Box>
+                                                    }
+                                                    size={size}
+                                                    direction={TipDirection.Down}
+                                                >
+                                                    <Box width={{ min: '50px', max: '50px' }}>
+                                                        <Box className={prayer.getClass()} />
                                                     </Box>
                                                 </TipDisplay>
                                             </Box>
