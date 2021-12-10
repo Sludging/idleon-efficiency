@@ -1,0 +1,37 @@
+.icons-7878 {
+    background-image: url(spritesheet_78x78.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 100.0%;
+    height: 0;
+    background-size: cover;
+    background-position: 0 calc(var(--row) * 4.0%)
+}
+.icons-7878:not(.icons-Prayer0):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
+            .icons-Prayer0 { --row: 0; }
+.icons-Prayer1 { --row: 1; }
+.icons-Prayer10 { --row: 2; }
+.icons-Prayer11 { --row: 3; }
+.icons-Prayer12 { --row: 4; }
+.icons-Prayer13 { --row: 5; }
+.icons-Prayer14 { --row: 6; }
+.icons-Prayer15 { --row: 7; }
+.icons-Prayer16 { --row: 8; }
+.icons-Prayer17 { --row: 9; }
+.icons-Prayer18 { --row: 10; }
+.icons-Prayer19 { --row: 11; }
+.icons-Prayer2 { --row: 12; }
+.icons-Prayer20 { --row: 13; }
+.icons-Prayer21 { --row: 14; }
+.icons-Prayer22 { --row: 15; }
+.icons-Prayer23 { --row: 16; }
+.icons-Prayer24 { --row: 17; }
+.icons-Prayer3 { --row: 18; }
+.icons-Prayer4 { --row: 19; }
+.icons-Prayer5 { --row: 20; }
+.icons-Prayer6 { --row: 21; }
+.icons-Prayer7 { --row: 22; }
+.icons-Prayer8 { --row: 23; }
+.icons-Prayer9 { --row: 24; }
+.icons-PrayerNone { --row: 25; }
