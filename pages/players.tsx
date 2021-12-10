@@ -156,6 +156,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
         if (prayers) {
             return player.activePrayers.map((prayerIndex) => prayers[prayerIndex]);
         }
+        return [];
     }, [idleonData, player]);
 
     return (
