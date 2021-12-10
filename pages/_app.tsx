@@ -139,6 +139,16 @@ function MyApp({ Component, pageProps }: AppProps) {
             `,
         }}
       />
+      <Script
+            key="prop-ads"
+            id="prop-ads"
+            strategy="afterInteractive"        
+            dangerouslySetInnerHTML={{
+                __html: `
+                (function(d,z,s){s.src='//'+d+'/400/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('agaenteitor.com',4718182,document.createElement('script'))
+            `,
+            }}
+        />
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
