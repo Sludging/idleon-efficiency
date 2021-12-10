@@ -23,7 +23,7 @@ export class StarSign {
 }
 
 export class Constellation {
-    constructor(public name: string, public area: string, public x: number, public y: number, public num1: number, public num2: number, public num3: number, public num4: number, public requirement: string, public starChartPoints: number) { }
+    constructor(public name: string, public area: string, public x: number, public y: number, public num1: number, public num2: number, public num3: number, public starChartPoints: number, public requirement: string, public type: number) { }
 }
 
 export const StarSignMap: Record<number, StarSign> = {

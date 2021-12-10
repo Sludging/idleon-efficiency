@@ -153,7 +153,9 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
     const activePrayers = useMemo(() => {
         const theData = idleonData.getData();
         const prayers = theData.get("prayers") as Prayer[];
-        return player.activePrayers.map((prayerIndex) => prayers[prayerIndex]);
+        if (prayers) {
+            return player.activePrayers.map((prayerIndex) => prayers[prayerIndex]);
+        }
     }, [idleonData, player]);
 
     return (
