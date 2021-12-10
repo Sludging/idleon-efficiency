@@ -21,6 +21,7 @@ import parseShrines from './domain/shrines';
 import { initAllItems, Item } from './domain/items';
 import parseStorage from './domain/storage';
 import parseQuests from './domain/quests';
+import parsePrayers from './domain/prayers';
 
 
 
@@ -84,6 +85,7 @@ const keyFunctionMap: Record<string, Function> = {
   "storage": (doc: Document,  accountData: Map<string, any>, allItems: Item[]) => parseStorage(doc, accountData.get("playerNames"), allItems),
   "constellations": (doc: Document) => JSON.parse(doc.get("SSprog")),
   "quests": (doc: Document, accountData: Map<string, any>, allItems: Item[]) => parseQuests(doc, accountData, allItems),
+  "prayers": (doc: Document) => parsePrayers(JSON.parse(doc.get("PrayOwned"))),
 }
 
 
