@@ -159,6 +159,29 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
         return [];
     }, [idleonData, player]);
 
+    const crystalSpawnChance = useMemo(() => {
+        const theData = idleonData.getData();
+        const stamps = theData.get("stamps") as Stamp[][];
+
+        let crystalSpawnStamp = 0;
+        if (stamps) {
+            crystalSpawnStamp = stamps[StampTab.Misc][StampConsts.CrystallinIndex].getBonus();
+        }
+        
+        const cardBonus = player.cardInfo?.equippedCards.find((card) => card.name == "poopSmall")?.getBonus() ?? 0;
+        const crystalSpawnTalentBonus = player.talents.find(x => x.skillIndex == TalentConst.CrystalSpawnIndex)?.getBonus() ?? 0;
+        const crystalForDaysTalentBonus = player.talents.find(x => x.skillIndex == TalentConst.CrystalForDaysIndex)?.getBonus() ?? 0;
+
+        let postOfficeBonus = 0;
+        if (player.postOffice) {
+            const nonPredatoryBox = player.postOffice[PostOfficeConst.NonPredatoryBoxIndex];
+            postOfficeBonus = nonPredatoryBox.level > 0 ? nonPredatoryBox.bonuses[2].getBonus(nonPredatoryBox.level, 2) : 0;
+        }
+
+        return 0.0005 * (1 + crystalSpawnTalentBonus / 100) * (1 + postOfficeBonus / 100) * (1 + crystalForDaysTalentBonus / 100) 
+        * (1 + crystalSpawnStamp / 100) * (1 + cardBonus / 100); 
+    }, [idleonData, player])
+
     return (
         <Box pad="medium">
             <Text size='medium'>Random Stats</Text>
@@ -176,6 +199,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     <Text size="small">AGI = {player.stats.agility}</Text>
                     <Text size="small">WIS = {player.stats.wisdom}</Text>
                     <Text size="small">LUK = {player.stats.luck}</Text>
+                    <Text size="small">Crystal Spawn Chance = 1 in {Math.floor(1 / crystalSpawnChance)}</Text>
                     <Text size="small">Charge Rate = {Math.round(chargeRate * 24)}% / day</Text>
                     <Text size="small">Current Charge = </Text>
                     <Box direction="row" gap="small">
@@ -522,12 +546,25 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
 
     const anvilCapcity = useMemo(() => {
         const theData = idleonData.getData();
-        const stampData = theData.get("stamps");
+        const stampData = theData.get("stamps") as Stamp[][];
         const gemStore = theData.get("gems") as GemStore;
 
+        const allStamps = stampData.flatMap((tab) => [...tab]);
+        const allCapStampBonus = allStamps.find((stamp) => stamp.raw_name == CapacityConst.AllCarryStamp)?.getBonus(player.skills.get(SkillsIndex.Smithing)) ?? 0;
+        const gemCapacityBonus = gemStore?.purchases.find(x => x.no == 58)?.pucrhased ?? 0;
         const extraBagsTalentBonus = player.talents.find(x => x.skillIndex == CapacityConst.ExtraBagsSkillIndex)?.getBonus() ?? 0;
         const starSignExtraCap = player.starSigns.reduce((sum, sign) => sum += sign.getBonus("Carry Cap"), 0);
-        return player.anvil.getCapacity(player.capacity.getMaterialCapacity(allCapBonus, stampData ? stampData[1][7].getBonus(player.skills.get(SkillsIndex.Smithing)) : 0, gemStore?.purchases.find(x => x.no == 58)?.pucrhased ?? 0, stampData ? stampData[2][1].getBonus() : 0, extraBagsTalentBonus, starSignExtraCap));
+
+        const capProps = {
+            allCapBonuses: allCapBonus,
+            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.MaterialCapStamp)?.getBonus(player.skills.get(SkillsIndex.Smithing)) ?? 0, 
+            gemsCapacityBought: gemCapacityBonus, 
+            stampAllCapBonus: allCapStampBonus, 
+            extraBagsLevel: extraBagsTalentBonus, 
+            starSignExtraCap: starSignExtraCap
+        }
+
+        return player.anvil.getCapacity(player.capacity.bags.find(x => x.name == "bCraft")?.getCapacity(capProps) ?? 0);
     }, [idleonData, player, allCapBonus])
 
     return (
@@ -639,32 +676,106 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
         return 0;
     }, [idleonData])
 
-    const monsterCarryCap = useMemo(() => {
+    const capBonuses = useMemo(() => {
         const theData = idleonData.getData();
-        const stampData = theData.get("stamps");
+        const stampData = theData.get("stamps") as Stamp[][];
         const gemStore = theData.get("gems") as GemStore;
 
         const extraBagsTalentBonus = player.talents.find(x => x.skillIndex == CapacityConst.ExtraBagsSkillIndex)?.getBonus() ?? 0;
         const starSignExtraCap = player.starSigns.reduce((sum, sign) => sum += sign.getBonus("Carry Cap"), 0);
-        return player.capacity.getMaterialCapacity(allCapBonus, stampData ? stampData[1][7].getBonus(player.skills.get(SkillsIndex.Smithing)) : 0, gemStore?.purchases.find(x => x.no == 58)?.pucrhased ?? 0, stampData ? stampData[2][1].getBonus() : 0, extraBagsTalentBonus, starSignExtraCap)
+
+        const allStamps = stampData.flatMap((tab) => [...tab]);
+        const allCapStampBonus = allStamps.find((stamp) => stamp.raw_name == CapacityConst.AllCarryStamp)?.getBonus(player.skills.get(SkillsIndex.Smithing)) ?? 0;
+        const gemCapacityBonus = gemStore?.purchases.find(x => x.no == 58)?.pucrhased ?? 0;
+
+        const toReturn = new Map();
+        toReturn.set("Mining", {
+            allCapBonuses: allCapBonus,
+            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.MiningCapStamp)?.getBonus(player.skills.get(SkillsIndex.Mining)) ?? 0, 
+            gemsCapacityBought: gemCapacityBonus, 
+            stampAllCapBonus: allCapStampBonus, 
+            extraBagsLevel: extraBagsTalentBonus, 
+            starSignExtraCap: starSignExtraCap
+        });
+        toReturn.set("Chopping", {
+            allCapBonuses: allCapBonus,
+            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.ChoppingCapStamp)?.getBonus(player.skills.get(SkillsIndex.Chopping)) ?? 0, 
+            gemsCapacityBought: gemCapacityBonus, 
+            stampAllCapBonus: allCapStampBonus, 
+            extraBagsLevel: extraBagsTalentBonus, 
+            starSignExtraCap: starSignExtraCap
+        });
+        toReturn.set("Souls", {
+            allCapBonuses: allCapBonus,
+            stampMatCapBonus: 0, 
+            gemsCapacityBought: gemCapacityBonus, 
+            stampAllCapBonus: allCapStampBonus, 
+            extraBagsLevel: extraBagsTalentBonus, 
+            starSignExtraCap: starSignExtraCap
+        });
+        toReturn.set("Fishing", {
+            allCapBonuses: allCapBonus,
+            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.FishCapStamp)?.getBonus(player.skills.get(SkillsIndex.Fishing)) ?? 0, 
+            gemsCapacityBought: gemCapacityBonus, 
+            stampAllCapBonus: allCapStampBonus, 
+            extraBagsLevel: extraBagsTalentBonus, 
+            starSignExtraCap: starSignExtraCap
+        });
+        toReturn.set("Foods", {
+            allCapBonuses: allCapBonus,
+            stampMatCapBonus: 0, 
+            gemsCapacityBought: gemCapacityBonus, 
+            stampAllCapBonus: allCapStampBonus, 
+            extraBagsLevel: extraBagsTalentBonus, 
+            starSignExtraCap: starSignExtraCap
+        });
+        toReturn.set("bCraft", {
+            allCapBonuses: allCapBonus,
+            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.MaterialCapStamp)?.getBonus(player.skills.get(SkillsIndex.Smithing)) ?? 0, 
+            gemsCapacityBought: gemCapacityBonus, 
+            stampAllCapBonus: allCapStampBonus, 
+            extraBagsLevel: extraBagsTalentBonus, 
+            starSignExtraCap: starSignExtraCap
+        });
+        toReturn.set("Bugs", {
+            allCapBonuses: allCapBonus,
+            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.BugCapStamp)?.getBonus(player.skills.get(SkillsIndex.Catching)) ?? 0, 
+            gemsCapacityBought: gemCapacityBonus, 
+            stampAllCapBonus: allCapStampBonus, 
+            extraBagsLevel: extraBagsTalentBonus, 
+            starSignExtraCap: starSignExtraCap
+        });
+        toReturn.set("Critters", {
+            allCapBonuses: allCapBonus,
+            stampMatCapBonus: 0, 
+            gemsCapacityBought: gemCapacityBonus, 
+            stampAllCapBonus: allCapStampBonus, 
+            extraBagsLevel: extraBagsTalentBonus, 
+            starSignExtraCap: starSignExtraCap
+        });
+
+        return toReturn;
     }, [idleonData, player, allCapBonus])
+
     return (
         <Box pad="medium" gap="small">
             <Text size='medium'>Carry Capacity</Text>
             <Box>
-                <Text>Guild Bonus: {guildBonus} </Text>
-                <Text>Gem Capacity Bought: {gemCapBought}</Text>
+                <Text size="small">Guild Bonus: {guildBonus} </Text>
+                <Text size="small">Gem Capacity Bought: {gemCapBought}</Text>
             </Box>
-            <Box gap="small">
-                <Text>Ore: {player.capacity.mining}</Text>
-                <Text>Fish: {player.capacity.fishing}</Text>
-                <Text>Materials: {monsterCarryCap}</Text>
-                <Text>Bugs: {player.capacity.bugs}</Text>
-                <Text>Logs: {player.capacity.chopping}</Text>
-                <Text>Souls: {player.capacity.souls}</Text>
-                <Text>Critters: {player.capacity.critters}</Text>
-                <Text>Food: {player.capacity.food}</Text>
-            </Box>
+            <Grid columns="1/3" gap="small" pad="small">
+                {
+                    player.capacity.bags.filter((bag) => bag.displayName != undefined).map((bag, index) => (
+                        <Box align="center" key={index} gap="small">
+                            <Box width={{max: '50px', min: '50px'}}>
+                                <Box className={bag.getClass()} />
+                            </Box>
+                            <Text size="small">{bag.displayName}: {Intl.NumberFormat().format(bag.getCapacity(capBonuses.get(bag.name)))}</Text>
+                        </Box>
+                    ))
+                }
+            </Grid>
         </Box>
     )
 }
@@ -882,8 +993,8 @@ function PlayerTab({ player }: PlayerTabProps) {
                     <SpecialButton isActive={index == 2} clickHandler={() => onActive(2)} text={"Skills"} />
                     <SpecialButton isActive={index == 3} clickHandler={() => onActive(3)} text={"Equipment"} />
                     <SpecialButton isActive={index == 4} clickHandler={() => onActive(4)} text={"Statues"} />
-                    <SpecialButton isActive={index == 5} clickHandler={() => onActive(5)} text={"Anvil - WIP"} />
-                    <SpecialButton isActive={index == 6} clickHandler={() => onActive(6)} text={"Carry Capacity - WIP"} />
+                    <SpecialButton isActive={index == 5} clickHandler={() => onActive(5)} text={"Anvil"} />
+                    <SpecialButton isActive={index == 6} clickHandler={() => onActive(6)} text={"Carry Capacity"} />
                     <SpecialButton isActive={index == 7} clickHandler={() => onActive(7)} text={"Talents"} />
                     <SpecialButton isActive={index == 8} clickHandler={() => onActive(8)} text={"Post Office"} />
                     <SpecialButton isActive={index == 9} clickHandler={() => onActive(9)} text={"Inventory"} />

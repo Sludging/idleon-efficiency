@@ -2,7 +2,9 @@ import { lavaFunc } from "../utility";
 
 export const TalentConst = {
     NearbyOutletIndex: 478,
-    ChargeSiphonIndex: 475
+    ChargeSiphonIndex: 475,
+    CrystalSpawnIndex: 26,
+    CrystalForDaysIndex: 619
 }
 
 export class Talent {

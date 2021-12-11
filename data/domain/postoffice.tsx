@@ -8,7 +8,8 @@ import { lavaFunc } from '../utility'
 
 export const PostOfficeConst = {
     BlacksmithBoxIndex: 5,
-    MaxBoxLevel: 400
+    MaxBoxLevel: 400,
+    NonPredatoryBoxIndex: 11
 }
 
 export interface PostOfficeExtra {
