@@ -71,7 +71,7 @@ function Constellations() {
                             <Tab key={letter} title={LetterToWorldNumber(letter)}>
                                 {
                                     Object.entries(ConstellationMap).filter(([_, data]) => data.name.includes(letter)).map(([location, data]) => {
-                                        const isComplete = constellationData && constellationData[Number(location)][1] == "1";
+                                        const isComplete = constellationData && constellationData.length > (Number(location)) && constellationData[Number(location)][1] == "1";
                                         return (
                                             <Box border={{ color: "white-1", side: "bottom" }} key={location} gap="medium" pad="large">
                                                 <Grid columns={["10%", "30%", "60%"]}>
@@ -114,7 +114,7 @@ function Constellations() {
                                                         <Grid columns={{ size: '120px' }} gap="small">
                                                             {
                                                                 playerData?.map((player, index) => {
-                                                                    const isComplete = constellationData && constellationData[Number(location)][0].includes(player.getPlayerLetter());
+                                                                    const isComplete = constellationData && constellationData.length > (Number(location)) && constellationData[Number(location)][0].includes(player.getPlayerLetter());
                                                                     return (
                                                                         <CharacterBox key={index} playerName={player.playerName} playerClass={player.classId} status={isComplete ? CharacterBoxStatus.Complete : CharacterBoxStatus.Disabled} />
                                                                     )
