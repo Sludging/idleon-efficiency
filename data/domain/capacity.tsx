@@ -98,10 +98,233 @@
 //         : 2;
 // }),
 
+import { SkillsIndex } from "./player";
+
 export const CapacityConst = {
     TelekineticStorageSkillIndex: 634,
-    ExtraBagsSkillIndex: 78
+    ExtraBagsSkillIndex: 78,
+    MiningCapStamp: "StampB4",
+    ChoppingCapStamp: "StampB6",
+    MaterialCapStamp: "StampB8",
+    FishCapStamp: "StampB21",
+    BugCapStamp: "StampB23",
+    AllCarryStamp: "StampC2"
 };
+
+const capacityToBagMapping: Record<string, Record<number, string>> = {
+    "bCraft": {
+        10: "bCraft",
+        25: "MaxCapBagM1",
+        50: "MaxCapBagM2",
+        100: "MaxCapBagM3",
+        250: "MaxCapBagM4",
+        500: "MaxCapBagM5",
+        1000: "MaxCapBagM6",
+        2000: "MaxCapBagM7",
+        5000: "MaxCapBag",
+        10000: "MaxCapBag",
+        25000: "MaxCapBag",
+        50000: "MaxCapBag",
+        100000: "MaxCapBag",
+        250000: "MaxCapBag",
+        500000: "MaxCapBag",
+        1000000: "MaxCapBag",
+    },
+    "Foods": {
+        10: "Foods",
+        25: "MaxCapBag6",
+        50: "MaxCapBag8",
+        100: "MaxCapBag10",
+        250: "MaxCapBagF3",
+        500: "MaxCapBagF4",
+        1000: "MaxCapBagF5",
+        2000: "MaxCapBagF6",
+        5000: "MaxCapBag",
+        10000: "MaxCapBag",
+        25000: "MaxCapBag",
+        50000: "MaxCapBag",
+        100000: "MaxCapBag",
+        250000: "MaxCapBag",
+        500000: "MaxCapBag",
+        1000000: "MaxCapBag",
+    },
+    "Mining": {
+        10: "Mining",
+        25: "MaxCapBagT2",
+        50: "MaxCapBag1",
+        100: "MaxCapBag2",
+        250: "MaxCapBag3",
+        500: "MaxCapBag4",
+        1000: "MaxCapBag5",
+        2000: "MaxCapBagMi6",
+        5000: "MaxCapBag",
+        10000: "MaxCapBag",
+        25000: "MaxCapBag",
+        50000: "MaxCapBag",
+        100000: "MaxCapBag",
+        250000: "MaxCapBag",
+        500000: "MaxCapBag",
+        1000000: "MaxCapBag",
+    },
+    "Chopping": {
+        10: "Chopping",
+        25: "MaxCapBagT1",
+        50: "MaxCapBag7",
+        100: "MaxCapBag9",
+        250: "MaxCapBagT3",
+        500: "MaxCapBagT4",
+        1000: "MaxCapBagT5",
+        2000: "MaxCapBagT6",
+        5000: "MaxCapBag",
+        10000: "MaxCapBag",
+        25000: "MaxCapBag",
+        50000: "MaxCapBag",
+        100000: "MaxCapBag",
+        250000: "MaxCapBag",
+        500000: "MaxCapBag",
+        1000000: "MaxCapBag",
+    },
+    "Fishing": {
+        10: "Fishing",
+        25: "MaxCapBagFi0",
+        50: "MaxCapBagFi1",
+        100: "MaxCapBagFi2",
+        250: "MaxCapBagFi3",
+        500: "MaxCapBagFi4",
+        1000: "MaxCapBagFi5",
+        2000: "MaxCapBagFi6",
+        5000: "MaxCapBag",
+        10000: "MaxCapBag",
+        25000: "MaxCapBag",
+        50000: "MaxCapBag",
+        100000: "MaxCapBag",
+        250000: "MaxCapBag",
+        500000: "MaxCapBag",
+        1000000: "MaxCapBag",
+    },
+    "Bugs": {
+        10: "Bugs",
+        25: "MaxCapBagB0",
+        50: "MaxCapBagB1",
+        100: "MaxCapBagB2",
+        250: "MaxCapBagB3",
+        500: "MaxCapBagB4",
+        1000: "MaxCapBagB5",
+        2000: "MaxCapBagB6",
+        5000: "MaxCapBag",
+        10000: "MaxCapBag",
+        25000: "MaxCapBag",
+        50000: "MaxCapBag",
+        100000: "MaxCapBag",
+        250000: "MaxCapBag",
+        500000: "MaxCapBag",
+        1000000: "MaxCapBag",
+    },
+    "Critters": {
+        10: "Critters",
+        25: "Blank",
+        50: "MaxCapBagTr0",
+        100: "MaxCapBagTr1",
+        250: "MaxCapBagTr2",
+        500: "MaxCapBagTr3",
+        1000: "MaxCapBagTr4",
+        2000: "MaxCapBagTr5",
+        5000: "MaxCapBag",
+        10000: "MaxCapBag",
+        25000: "MaxCapBag",
+        50000: "MaxCapBag",
+        100000: "MaxCapBag",
+        250000: "MaxCapBag",
+        500000: "MaxCapBag",
+        1000000: "MaxCapBag",
+    },
+    "Souls": {
+        10: "Souls",
+        25: "Blank",
+        50: "MaxCapBagS0",
+        100: "MaxCapBagS1",
+        250: "MaxCapBagS2",
+        500: "MaxCapBagS3",
+        1000: "MaxCapBagS4",
+        2000: "MaxCapBagS5",
+        5000: "MaxCapBag",
+        10000: "MaxCapBag",
+        25000: "MaxCapBag",
+        50000: "MaxCapBag",
+        100000: "MaxCapBag",
+        250000: "MaxCapBag",
+        500000: "MaxCapBag",
+        1000000: "MaxCapBag",
+    },
+}
+
+interface CapacityProps {
+    allCapBonuses: number,
+    stampMatCapBonus: number, 
+    gemsCapacityBought: number, 
+    stampAllCapBonus: number, 
+    extraBagsLevel: number, 
+    starSignExtraCap: number
+}
+
+
+class Bag {
+    constructor(public name: string, public capacity: number, public displayName?: string, public skill?: SkillsIndex, ) { }
+
+    getClass = () => {
+        if (Object.keys(capacityToBagMapping).includes(this.name)) {
+            const bagName = capacityToBagMapping[this.name][this.capacity];
+            if (bagName == "Blank" || bagName == this.name) {
+                return `icons-3636 icons-MaxCapBagNone`;
+            }
+            return `icons-3636 icons-${bagName}_x1`;
+        }
+        return "";
+    }
+
+    getCapacity = (props: CapacityProps) => {
+        if (this.name == "bCraft") {
+            return this.getMaterialCapacity(props.allCapBonuses, props.stampMatCapBonus, props.gemsCapacityBought, props.stampAllCapBonus, props.extraBagsLevel, props.starSignExtraCap);
+        }
+
+        if (this.skill != undefined || this.name == "Foods") {
+            return this.getSkillCapacity(props.allCapBonuses, props.gemsCapacityBought, props.stampMatCapBonus, props.stampAllCapBonus, props.starSignExtraCap)
+        }
+        
+        return this.capacity;
+    }
+
+    
+    private getSkillCapacity = (allCapBonuses: number = 0, gemCarryCap: number = 0, skillCapstamp: number = 0, allCapStamp: number = 0, starSign: number = 0) => {
+        return Math.floor(
+            this.capacity *
+            (1 + (25 * gemCarryCap) / 100) *
+            (1 + skillCapstamp / 100 ) *
+            (1 + (allCapStamp + starSign) / 100) *
+            allCapBonuses
+        );
+    }
+
+    private getMaterialCapacity = (allCapBonuses: number = 0, stampMatCapBonus: number, gemsCapacityBought: number, stampAllCapBonus: number, extraBagsLevel: number, starSignExtraCap: number) => {
+
+        //         ? ((t = b.engine.getGameAttribute("MaxCarryCap")),
+        //           (t = parsenum(t) = null != d.bCraft ? t.getReserved("bCraft") : t.h.bCraft),
+        //           (n = 1 + r._customBlock_StampBonusOfTypeX("MatCap") / 100),
+        //           (s = parsenum(s) = b.engine.getGameAttribute("GemItemsPurchased")[58]),
+        //           (a = r._customBlock_StampBonusOfTypeX("AllCarryCap")),
+        //           (A = b.engine.getGameAttribute("DNSM")),
+        //           (A = null != d.StarSigns ? A.getReserved("StarSigns") : A.h.StarSigns),
+        //           (A = null != d.CarryCap ? A.getReserved("CarryCap") : A.h.CarryCap),
+        //           Math.floor(t * n * (1 + (25 * s) / 100) * (1 + (a + parsenum(A)) / 100) * (1 + r._customBlock_GetTalentNumber(1, 78) / 100) * H._customBlock_MaxCapacity("AllCapBonuses")))
+
+        const stampMatCapMath = (1 + stampMatCapBonus / 100);
+        const gemPurchaseMath = (1 + (25 * gemsCapacityBought) / 100);
+        const additionalCapMath = (1 + (stampAllCapBonus + starSignExtraCap) / 100); // ignoring star sign
+        const talentBonusMath = (1 + extraBagsLevel / 100);
+        const bCraftCap = this.capacity;
+        return Math.floor(bCraftCap * stampMatCapMath * gemPurchaseMath * additionalCapMath * talentBonusMath * allCapBonuses);
+    }
+}
 
 interface BagCapacity {
     Mining: number
@@ -118,24 +341,21 @@ interface BagCapacity {
 }
 
 export class Capacity {
-    mining: number = 0;
-    chopping: number = 0;
-    fishing: number = 0;
-    monsterMats: number = 0;
-    bugs: number = 0;
-    souls: number = 0;
-    critters: number = 0;
-    food: number = 0;
+    bags: Bag[];
 
     constructor(bags?: BagCapacity) {
-        this.mining = bags?.Mining ?? 0;
-        this.chopping = bags?.Chopping ?? 0;
-        this.fishing = bags?.Fishing ?? 0;
-        this.souls = bags?.Souls ?? 0;
-        this.monsterMats = bags?.bCraft ?? 0;
-        this.bugs = bags?.Bugs ?? 0;
-        this.critters = bags?.Critters ?? 0;
-        this.food = bags?.Foods ?? 0;
+        this.bags = [];
+        this.bags.push(new Bag("Mining", bags?.Mining ?? 0, "Mining", SkillsIndex.Mining));
+        this.bags.push(new Bag("Chopping", bags?.Chopping ?? 0, "Chopping", SkillsIndex.Chopping));
+        this.bags.push(new Bag("Souls", bags?.Souls ?? 0, "Souls", SkillsIndex.Worship));
+        this.bags.push(new Bag("Quests", bags?.Quests ?? 0));
+        this.bags.push(new Bag("Fishing", bags?.Fishing ?? 0, "Fishing", SkillsIndex.Fishing));
+        this.bags.push(new Bag("fillerz", bags?.fillerz ?? 0));
+        this.bags.push(new Bag("Critters", bags?.Critters ?? 0, "Critters", SkillsIndex.Trapping));
+        this.bags.push(new Bag("Foods", bags?.Foods ?? 0, "Foods"));
+        this.bags.push(new Bag("bCraft", bags?.bCraft ?? 0, "Materials"));
+        this.bags.push(new Bag("Bugs", bags?.Bugs ?? 0, "Bugs", SkillsIndex.Catching));
+        this.bags.push(new Bag("Statues", bags?.Statues ?? 0));
     }
 
     getMiningCapacity = () => {
@@ -152,26 +372,6 @@ export class Capacity {
         //         );
     }
 
-    getMaterialCapacity = (allCapBonuses: number = 0, stampMatCapBonus: number, gemsCapacityBought: number, stampAllCapBonus: number, extraBagsLevel: number, starSignExtraCap: number) => {
-
-        //         ? ((t = b.engine.getGameAttribute("MaxCarryCap")),
-        //           (t = parsenum(t) = null != d.bCraft ? t.getReserved("bCraft") : t.h.bCraft),
-        //           (n = 1 + r._customBlock_StampBonusOfTypeX("MatCap") / 100),
-        //           (s = parsenum(s) = b.engine.getGameAttribute("GemItemsPurchased")[58]),
-        //           (a = r._customBlock_StampBonusOfTypeX("AllCarryCap")),
-        //           (A = b.engine.getGameAttribute("DNSM")),
-        //           (A = null != d.StarSigns ? A.getReserved("StarSigns") : A.h.StarSigns),
-        //           (A = null != d.CarryCap ? A.getReserved("CarryCap") : A.h.CarryCap),
-        //           Math.floor(t * n * (1 + (25 * s) / 100) * (1 + (a + parsenum(A)) / 100) * (1 + r._customBlock_GetTalentNumber(1, 78) / 100) * H._customBlock_MaxCapacity("AllCapBonuses")))
-
-        const stampMatCapMath = (1 + stampMatCapBonus / 100);
-        const gemPurchaseMath = (1 + (25 * gemsCapacityBought) / 100);
-        const additionalCapMath = (1 + (stampAllCapBonus + starSignExtraCap) / 100); // ignoring star sign
-        const talentBonusMath = (1 + extraBagsLevel / 100);
-        return Math.floor(this.monsterMats * stampMatCapMath * gemPurchaseMath * additionalCapMath * talentBonusMath * allCapBonuses);
-
-    }
-
     getAllCapsBonus = (guildBonus: number = 0, telekineticStorageBonus: number = 0, shrineBonus: number = 0, zergPrayer: number = 0, ruckSackPrayer: number = 0) => {
         // if ("AllCapBonuses" == t)
         // return (
@@ -185,16 +385,6 @@ export class Capacity {
             (1 + (shrineBonus / 100)) *
             Math.max(1 - zergPrayer / 100, 0.4) *
             (1 + ruckSackPrayer / 100)
-        );
-    }
-
-    getFishCapacity = (allCapBonuses: number = 0, fishCarryCap: number = 0, gemCarryCap: number = 0, fishCapStamp: number = 0, allCapStamp: number = 0, starSign: number = 0) => {
-        return Math.floor(
-            fishCarryCap *
-            (1 + (25 * gemCarryCap) / 100) *
-            fishCapStamp *
-            (1 + (allCapStamp + starSign) / 100) *
-            allCapBonuses
         );
     }
 }
