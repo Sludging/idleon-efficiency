@@ -177,7 +177,9 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
             const nonPredatoryBox = player.postOffice[PostOfficeConst.NonPredatoryBoxIndex];
             postOfficeBonus = nonPredatoryBox.level > 0 ? nonPredatoryBox.bonuses[2].getBonus(nonPredatoryBox.level, 2) : 0;
         }
-
+        console.log(crystalSpawnTalentBonus, postOfficeBonus, crystalForDaysTalentBonus, crystalSpawnStamp, cardBonus);
+        console.log(0.0005 * (1 + crystalSpawnTalentBonus / 100) * (1 + postOfficeBonus / 100) * (1 + crystalForDaysTalentBonus / 100) 
+        * (1 + crystalSpawnStamp / 100) * (1 + cardBonus / 100));
         return 0.0005 * (1 + crystalSpawnTalentBonus / 100) * (1 + postOfficeBonus / 100) * (1 + crystalForDaysTalentBonus / 100) 
         * (1 + crystalSpawnStamp / 100) * (1 + cardBonus / 100); 
     }, [idleonData, player])

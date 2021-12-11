@@ -22,15 +22,16 @@ export class BoxBonus {
     constructor(public bonus: string, public x1: number, public x2: number, public func: string) { }
 
     getBonus = (level: number, index: number, round = false): number => {
-        if (level == 0) {
-            return 0;
-        }
         let bonusLevel = level;
         if (index == 1) {
             bonusLevel -= 25;
         }
         if (index == 2) {
             bonusLevel -= 100;
+        }
+
+        if (bonusLevel <= 0) {
+            return 0;
         }
 
         return lavaFunc(this.func, bonusLevel, this.x1, this.x2, round);
