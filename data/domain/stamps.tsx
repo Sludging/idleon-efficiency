@@ -8,7 +8,8 @@ export enum StampTab {
 
 export const StampConsts = {
     PraydayIndex: 34,
-    FlowinIndex: 33
+    FlowinIndex: 33,
+    CrystallinIndex: 2,
 }
 
 interface StampData {
