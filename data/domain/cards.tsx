@@ -174,6 +174,7 @@ const cardsInit = () => {
         new Card("crabcakeB", "Y10", "Event", 4, "+% Total Drop Rate", 3, 3),
         new Card("SummerEvent1", "Y11", "Event", 8, "+% Fishing Away Gains", 1, 1),
         new Card("SummerEvent2", "Y12", "Event", 8, "+% Catching EXP", 4, 4),
+        new Card("xmasEvent3", "Y14", "Event", 1, "+% Defence from Equipment", 3, 3),
     ];
 }
 
