@@ -205,6 +205,7 @@ export class Player {
     cardInfo: CardInfo | undefined = undefined; // TODO: Do BETTER!
     activeBuffs: Talent[] = [];
     activePrayers: number[] = [];
+    cooldown: Map<Talent, number> = new Map();
 
     constructor(playerID: number, playerName: string) {
         this.playerID = playerID;
@@ -315,6 +316,15 @@ const keyFunctionMap: Record<string, Function> = {
     "activePrayers": (doc: Document, player: Player) => {
         const activePrayers = JSON.parse(doc.get(`Prayers_${player.playerID}`)) as number[];
         player.activePrayers = activePrayers.filter((prayer) => prayer != -1);
+    },
+    "cooldowns": (doc: Document, player: Player) => {
+        const talentCooldowns = JSON.parse(doc.get(`AtkCD_${player.playerID}`)) as Record<string, number>;
+        Object.entries(talentCooldowns).forEach(([talentId, cooldown]) => {
+            const talent = player.talents.find((talent) => talent.skillIndex == parseInt(talentId));
+            if (talent) {
+                player.cooldown.set(talent, cooldown);
+            }
+        });
     },
 };
 

@@ -11,11 +11,12 @@ import {
     ResponsiveContext
 } from 'grommet'
 import { useState, useEffect, useContext } from 'react';
-import { AppContext } from '../data/appContext'
+import { AppContext } from '../../data/appContext'
 import { NextSeo } from 'next-seo';
 
-import { Trap } from '../data/domain/traps';
-import ShadowBox from '../components/base/ShadowBox';
+import { Trap } from '../../data/domain/traps';
+import ShadowBox from '../../components/base/ShadowBox';
+import { Player, SkillsIndex } from '../../data/domain/player';
 
 interface PlayerTrapProps {
     traps: Array<Trap>
@@ -63,13 +64,15 @@ function PlayerTraps(props: PlayerTrapProps) {
 function Traps() {
     const [playerTraps, setPlayerTraps] = useState<Array<Array<Trap>>>(Array<Array<Trap>>());
     const [playerNames, setPlayerNames] = useState<Array<string>>([]);
+    const [playerData, setPlayerData] = useState<Player[]>();
     const idleonData = useContext(AppContext);
 
     useEffect(() => {
         if (idleonData) {
             const theData = idleonData.getData();
             setPlayerTraps(theData.get("traps"));
-            setPlayerNames(theData.get("playerNames"))
+            setPlayerNames(theData.get("playerNames"));
+            setPlayerData(theData.get("players"));
         }
     }, [idleonData]);
 
@@ -89,15 +92,19 @@ function Traps() {
                     <TableHeader>
                         <TableRow>
                             <TableCell >Player Name</TableCell >
+                            <TableCell >Box Set</TableCell >
                             <TableCell >Traps</TableCell >
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         {
                             playerTraps.filter(x => playerNames[x[0]?.playerID] != undefined).map((trapsData, index) => {
+                                const boxSet = playerData?.find((player) => player.playerID == trapsData[0]?.playerID)?.gear.tools.find((tool) => tool?.type == "Trap Box Set");
+                                const skillLevel = playerData?.find((player) => player.playerID == trapsData[0]?.playerID)?.skills.get(SkillsIndex.Trapping);
                                 return (
                                     <TableRow key={`traps_${index}`}>
-                                        <TableCell>{playerNames[trapsData[0]?.playerID]}</TableCell>
+                                        <TableCell><Box><Text size="small">{playerNames[trapsData[0]?.playerID]}</Text><Text title={"Trapping level"} size="small">(Level: {skillLevel})</Text></Box></TableCell>
+                                        <TableCell><Box title={boxSet?.displayName} width={{max: '50px', min: '50px'}}><Box className={boxSet?.getClass()} /></Box></TableCell>
                                         <TableCell>
                                             <PlayerTraps traps={trapsData} />
                                         </TableCell>

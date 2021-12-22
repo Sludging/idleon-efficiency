@@ -10,12 +10,12 @@ import {
 } from "grommet"
 
 import { useEffect, useState, useContext } from 'react';
-import ShadowBox from "../components/base/ShadowBox";
-import { AppContext } from '../data/appContext';
-import { ConstellationMap } from '../data/domain/starsigns';
+import ShadowBox from "../../components/base/ShadowBox";
+import { AppContext } from '../../data/appContext';
+import { ConstellationMap } from '../../data/domain/starsigns';
 import { NextSeo } from 'next-seo';
-import { ClassIndex } from "../data/domain/talents";
-import { Player } from "../data/domain/player";
+import { ClassIndex } from "../../data/domain/talents";
+import { Player } from "../../data/domain/player";
 
 enum CharacterBoxStatus {
     Complete,

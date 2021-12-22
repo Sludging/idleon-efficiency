@@ -38,6 +38,7 @@ import { MouseEventHandler } from 'hoist-non-react-statics/node_modules/@types/r
 import { Item, ItemStat } from '../data/domain/items';
 import { Storage } from '../data/domain/storage';
 import { Prayer } from '../data/domain/prayers';
+import { TimeDown, TimeUp } from '../components/base/TimeDisplay';
 
 interface SkillProps {
     skillsMap: Map<SkillsIndex, number>
@@ -177,9 +178,6 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
             const nonPredatoryBox = player.postOffice[PostOfficeConst.NonPredatoryBoxIndex];
             postOfficeBonus = nonPredatoryBox.level > 0 ? nonPredatoryBox.bonuses[2].getBonus(nonPredatoryBox.level, 2) : 0;
         }
-        console.log(crystalSpawnTalentBonus, postOfficeBonus, crystalForDaysTalentBonus, crystalSpawnStamp, cardBonus);
-        console.log(0.0005 * (1 + crystalSpawnTalentBonus / 100) * (1 + postOfficeBonus / 100) * (1 + crystalForDaysTalentBonus / 100) 
-        * (1 + crystalSpawnStamp / 100) * (1 + cardBonus / 100));
         return 0.0005 * (1 + crystalSpawnTalentBonus / 100) * (1 + postOfficeBonus / 100) * (1 + crystalForDaysTalentBonus / 100) 
         * (1 + crystalSpawnStamp / 100) * (1 + cardBonus / 100); 
     }, [idleonData, player])
@@ -196,7 +194,10 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                             return <Text size="small" key={`sign-${index}`}>Sign {index} = {sign.getText()}</Text>
                         })
                     }
-                    <Text size="small">Away Since = {toTime(player.afkFor)}</Text>
+                    <Box direction="row" gap="xsmall">
+                        <Text size="small">Away Since =</Text>
+                        {player.afkFor == 0 ? "Active" : <TimeUp addSeconds={player.afkFor} lastUpdated={idleonData.getLastUpdated(true) as Date} /> }
+                    </Box>
                     <Text size="small">STR = {player.stats.strength}</Text>
                     <Text size="small">AGI = {player.stats.agility}</Text>
                     <Text size="small">WIS = {player.stats.wisdom}</Text>
@@ -623,7 +624,10 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
                                     </Stack>
                                     <Text>Cap: {anvilCapcity}</Text>
                                 </Box>
-                                <Text size="small">Time till cap = {toTime(timeTillCap)}</Text>
+                                <Box direction="row" gap="xsmall">
+                                    <Text size="small">Time till cap =</Text>
+                                    <TimeDown addSeconds={timeTillCap} lastUpdated={idleonData.getLastUpdated(true) as Date}/>
+                                </Box>
                                 <Text size="small">Production Per Hour (per hammer) = {Math.round(anvilSpeed / anvilItem.time)} </Text>
                                 <Text size="small">Total Produced of this item = {nFormatter(Math.round(anvilItem.totalProduced), 2)}</Text>
                                 {/* <Text>{anvilItem.displayName} - {anvilItem.currentAmount} - {anvilItem.currentXP} - {anvilItem.currentProgress} - {anvilItem.totalProduced}</Text> */}
