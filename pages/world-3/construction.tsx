@@ -157,7 +157,6 @@ function RefineryDisplay() {
                 {squireInfo && squireInfo.map((squire, index) => {
                     const [refineryTalent, cooldown] = [...squire.cooldown.entries()].filter(([talent, cooldown]) => talent.skillIndex == 130)?.pop() as [Talent, number];
                     const realCD = cooldown - squire.afkFor;
-                    console.log(cooldown, lastUpdated);
                     return (
                         <ShadowBox key={index} background="dark-1" pad="medium" align="center" margin={{ right: 'large', bottom: 'small' }}>
                             <Box gap="small">
@@ -172,7 +171,7 @@ function RefineryDisplay() {
                                         <Box className={refineryTalent.getClass()} />
                                     </Box>
                                     {realCD > 0 && <TimeDown size={TimeDisplaySize.Small} lastUpdated={lastUpdated} addSeconds={realCD} resetToSeconds={72000} />}
-                                    {realCD == 0 && <Text>Skill is ready!</Text>}
+                                    {realCD <= 0 && <Text>Skill is ready!</Text>}
                                 </Box>
                             </Box>
                         </ShadowBox>
