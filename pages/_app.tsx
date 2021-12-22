@@ -30,6 +30,7 @@ import '../public/icons/assets/sheets/spritesheet_96x80.css';
 import '../public/icons/assets/sheets/spritesheet_43x44.css';
 import '../public/icons/assets/sheets/spritesheet_50x50.css';
 import '../public/icons/assets/sheets/spritesheet_78x78.css';
+import '../public/icons/assets/sheets/spritesheet_20x25.css';
 import '../public/icons/assets/sheets/spritesheet_constellations.css';
 import Layout from '../components/layout';
 
@@ -41,6 +42,11 @@ const customTheme = deepMerge(dark, {
     font: {
       family: "Rubik",
       size: "14px",
+    },
+    elevation: {
+      dark: {
+        navigation: '-7px 8px 16px 0 rgba(0,0,0,0.17)',
+      }
     },
     colors: {
       text: {

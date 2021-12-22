@@ -1,0 +1,28 @@
+.icons-2025 {
+    background-image: url(spritesheet_20x25.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 125.0%;
+    height: 0;
+    background-size: cover;
+    background-position: 0 calc(var(--row) * 6.25%)
+}
+.icons-2025:not(.icons-StatusSkull0):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
+            .icons-StatusSkull0 { --row: 0; }
+.icons-StatusSkull1 { --row: 1; }
+.icons-StatusSkull10 { --row: 2; }
+.icons-StatusSkull11 { --row: 3; }
+.icons-StatusSkull12 { --row: 4; }
+.icons-StatusSkull13 { --row: 5; }
+.icons-StatusSkull14 { --row: 6; }
+.icons-StatusSkull15 { --row: 7; }
+.icons-StatusSkull16 { --row: 8; }
+.icons-StatusSkull2 { --row: 9; }
+.icons-StatusSkull3 { --row: 10; }
+.icons-StatusSkull4 { --row: 11; }
+.icons-StatusSkull5 { --row: 12; }
+.icons-StatusSkull6 { --row: 13; }
+.icons-StatusSkull7 { --row: 14; }
+.icons-StatusSkull8 { --row: 15; }
+.icons-StatusSkull9 { --row: 16; }

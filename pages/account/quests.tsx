@@ -8,17 +8,17 @@ import {
 } from "grommet"
 
 import { useEffect, useState, useContext, useMemo } from 'react';
-import ShadowBox from "../components/base/ShadowBox";
-import { AppContext } from '../data/appContext';
+import ShadowBox from "../../components/base/ShadowBox";
+import { AppContext } from '../../data/appContext';
 import { NextSeo } from 'next-seo';
-import { ClassIndex } from "../data/domain/talents";
-import { Player } from "../data/domain/player";
-import { NPC, Quests as QuestInfo, NpcQuest } from "../data/domain/quests";
+import { ClassIndex } from "../../data/domain/talents";
+import { Player } from "../../data/domain/player";
+import { NPC, Quests as QuestInfo, NpcQuest } from "../../data/domain/quests";
 import { Next } from 'grommet-icons';
 import { MouseEventHandler } from "hoist-non-react-statics/node_modules/@types/react";
-import TipDisplay, { TipDirection } from "../components/base/TipDisplay";
-import CoinsDisplay from "../components/coinsDisplay";
-import { getCoinsArray } from "../data/utility";
+import TipDisplay, { TipDirection } from "../../components/base/TipDisplay";
+import CoinsDisplay from "../../components/coinsDisplay";
+import { getCoinsArray } from "../../data/utility";
 
 enum CharacterBoxStatus {
     Complete,
@@ -148,7 +148,7 @@ function NPCQuests({ npc, playerInfo, playerQuestData }: { npc: NPC, playerInfo:
                 {Object.entries(npc.data.quests).map(([_, info], index) => (
                     <Box key={index} pad={{ top: 'small', bottom: 'small' }} border={{ side: 'bottom', color: 'white-1' }}>
                         <TipDisplay
-                            heading={`${info.Name} (Difficulity: ${info.Difficulty})`}
+                            heading={`${info.Name} (Difficulty: ${info.Difficulty})`}
                             body={<QuestInformation info={info} />}
                             size={"large"}
                             direction={TipDirection.Down}
@@ -197,14 +197,13 @@ function Quests() {
     const idleonData = useContext(AppContext);
     const size = useContext(ResponsiveContext)
 
-    const badNPCNames = [
-        "Secretkeeper",
-        "Game Message",
-        "Unmade Character",
-        "FillerNPC"
-    ]
-
     const npcsToShow = useMemo(() => {
+        const badNPCNames = [
+            "Secretkeeper",
+            "Game Message",
+            "Unmade Character",
+            "FillerNPC"
+        ]
         // base filter
         let filtered = Object.entries(questsData?.npcData ?? {}).filter(([name, info]) => !badNPCNames.includes(name) && Object.entries(info.data.quests).length > 0);
 
@@ -217,7 +216,7 @@ function Quests() {
         }
 
         return filtered.sort(([name1], [name2]) => name1 > name2 ? 1 : -1);
-    }, [questsData, activeWorld, badNPCNames])
+    }, [questsData, activeWorld])
 
     useEffect(() => {
         if (idleonData) {

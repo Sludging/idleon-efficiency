@@ -6,11 +6,11 @@ import {
     CheckBox
 } from 'grommet'
 import { useState, useEffect, useContext, useMemo } from 'react';
-import { AppContext } from '../data/appContext'
-import { LootyInfo } from '../data/domain/lootyTracker';
-import { ItemSources, ItemSource, DropInfo } from '../data/domain/items';
+import { AppContext } from '../../data/appContext'
+import { LootyInfo } from '../../data/domain/lootyTracker';
+import { ItemSources, DropInfo } from '../../data/domain/items';
 import { NextSeo } from 'next-seo';
-import TipDisplay, { TipDirection } from '../components/base/TipDisplay';
+import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 
 const getRegex = () => { return /Cards(\w)(\d+)/g };
 const getEnhancerRegex = () => { return /DungEnhancer(\d+)/g };
