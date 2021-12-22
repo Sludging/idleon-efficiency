@@ -43,7 +43,7 @@ export class SaltLick {
 
     getBonusText = (bonusIndex: number) => {
         const bonus = this.bonuses[bonusIndex];
-        return bonus.desc.replace("{", this.getBonus(bonusIndex).toString());
+        return bonus.desc.replace("{", this.getBonus(bonusIndex, true).toString());
     }
 }
 
