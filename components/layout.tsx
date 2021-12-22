@@ -216,7 +216,13 @@ export default function Layout({
                                 icon={<MenuIcon color="brand" />}
                                 dropBackground="dark-1"
                                 margin="small"
-                                items={navItems.map(({link, label}) => { return { pad: 'large', label: <Link href={link}><Box className={router.pathname == link ? 'active' : ''} color="accent-2">{label}</Box></Link>}})}
+                                items={navItems.flatMap(({link, label, subLinks}) => { 
+                                    if (subLinks)  {
+                                        return subLinks.map(({ subLink, label}) => {
+                                            return { pad: 'large', label: <Link href={link+subLink}><Box className={router.pathname == link+subLink ? 'active' : ''} color="accent-2">{label}</Box></Link>}
+                                        })
+                                    }
+                                    return { pad: 'large', label: <Link href={link}><Box className={router.pathname == link ? 'active' : ''} color="accent-2">{label}</Box></Link>}})}
                             />
                         </Box>
                     :
