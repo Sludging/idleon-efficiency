@@ -307,13 +307,17 @@ function RefineryDisplay() {
 
 function SaltLickDisplay() {
     const [saltLickData, setSaltLickData] = useState<SaltLick>();
+    const [refineryData, setRefineryData] = useState<Refinery>();
     const [itemData, setItemData] = useState<Item[]>();
+    const [storage, setStorage] = useState<Storage>();
     const idleonData = useContext(AppContext);
 
     useEffect(() => {
         if (idleonData) {
             const theData = idleonData.getData();
             setItemData(theData.get("itemsData"));
+            setStorage(theData.get("storage"));
+            setRefineryData(theData.get("refinery"));
             setSaltLickData(theData.get("saltLick"));
         }
     }, [idleonData]);
@@ -332,23 +336,28 @@ function SaltLickDisplay() {
                 saltLickData && saltLickData.bonuses.map((bonus, index) => {
                     const saltItem = itemData?.find((item) => item.internalName == bonus.item);
                     if (saltItem) {
+                        let countInStorage = storage?.chest.find(item => item.internalName == saltItem.internalName)?.count ?? 0
+                        // If salt item, check refinery storage as well
+                        if (saltItem.internalName.includes("Refinery")) {
+                            countInStorage += refineryData?.storage.find(salt => salt.name == saltItem.internalName)?.quantity ?? 0;
+                        }
+                        const costToMax = saltLickData.getCostToMax(index);
                         return (
                             <ShadowBox key={index} background="dark-1" pad="medium" gap="xlarge" direction="row" align="center" justify="between">
-                                <Grid columns={["35%", "20%", "20%", "20%"]} fill gap="small" align="center">
+                                <Grid columns={["35%", "10%", "20%", "15%", "15%"]} fill gap="small" align="center">
                                     <TextAndLabel textSize='small' text={saltLickData.getBonusText(index)} label="Bonus" />
                                     <TextAndLabel text={`${bonus.level} / ${bonus.maxLevel}`} label="Level" />
                                     <Box direction="row" align="center">
-                                        <TextAndLabel text={nFormatter(saltLickData.getCost(index), 2)} label="Next Level costs" />
-                                        <Box title={saltItem.displayName} width={{ max: '50px', min: '50px' }}>
+                                        <Box title={saltItem.displayName} width={{ max: '50px', min: '50px' }} margin={{right: 'small'}}>
                                             <Box className={saltItem.getClass()} />
                                         </Box>
+                                        <TextAndLabel text={nFormatter(saltLickData.getCost(index), 2)} label="Next Level costs" />
+                                        
                                     </Box>
                                     <Box direction="row" align="center">
-                                        <TextAndLabel text={nFormatter(saltLickData.getCostToMax(index), 2)} label="Cost to max" />
-                                        <Box title={saltItem.displayName} width={{ max: '50px', min: '50px' }}>
-                                            <Box className={saltItem.getClass()} />
-                                        </Box>
+                                        <TextAndLabel text={nFormatter(costToMax, 2)} label="Cost to max" />
                                     </Box>
+                                    <TextAndLabel textColor={costToMax > countInStorage ? 'accent-1' : ''} text={nFormatter(countInStorage, 2)} label="In Storage" />
                                 </Grid>
                             </ShadowBox>
                         )
@@ -383,18 +392,17 @@ function PrinterDisplay() {
             </Box>
         )
     }
-    console.log(printerData);
     return (
         <ShadowBox background="dark-1" gap="small">
             {
                 printerData && printerData.playerInfo.map((playerInfo, index) => {
                     return (
-                        <Box key={index} direction="row" align="center" gap="medium" pad={{ horizontal: "large", vertical: "small" }} border={{ color: 'grey-1', side: 'bottom' }}>
+                        <Grid key={index} columns={{ count: 5, size: 'auto' }} align="center" gap="medium" pad={{ horizontal: "large", vertical: "small" }} border={{ color: 'grey-1', side: 'bottom' }}>
                             <Text>{playerData && playerData[index] && playerData[index].playerName}</Text>
                             {
                                 playerInfo.samples.map((sample, sampleIndex) => {
                                     if (sample.item == "Blank") {
-                                        return <></>
+                                        return <>Empty</>
                                     }
                                     const sampleItem = itemData?.find((item) => item.internalName == sample.item);
                                     const activeItem = playerInfo.active.find((activeItem) => activeItem.item == sample.item);
@@ -405,24 +413,24 @@ function PrinterDisplay() {
                                                     <Box className={sampleItem?.getClass()} />
                                                 </Box>
                                                 <Box direction="row" align="center" gap="small">
-                                                    {activeItem && (activeItem?.quantity ?? 0) < sample.quantity &&
-                                                        <TipDisplay
-                                                            heading='Active lower than sample'
-                                                            body={<Box><Text>You have a sample of {nFormatter(sample.quantity, 2)} but only printing {nFormatter(activeItem.quantity, 2)}.</Text><Text>Go update your printing!</Text></Box>}
-                                                            size='large'
-                                                            direction={TipDirection.Down}
-                                                        >
-                                                            <StatusWarning size="15px" color="accent-1" />
-                                                        </TipDisplay>
-                                                    }
                                                     <Text color={activeItem ? 'green-1' : ''} size="small">{nFormatter(sample.quantity, 2)}</Text>
                                                 </Box>
                                             </Box>
+                                            {activeItem && (activeItem?.quantity ?? 0) < sample.quantity &&
+                                                <TipDisplay
+                                                    heading='Active lower than sample'
+                                                    body={<Box><Text>You have a sample of {nFormatter(sample.quantity, 2)} but only printing {nFormatter(activeItem.quantity, 2)}.</Text><Text>Go update your printing!</Text></Box>}
+                                                    size='large'
+                                                    direction={TipDirection.Down}
+                                                >
+                                                    <StatusWarning size="medium" color="accent-1" />
+                                                </TipDisplay>
+                                            }
                                         </Box>
                                     )
                                 })
                             }
-                        </Box>
+                        </Grid>
                     )
                 }
                 )
