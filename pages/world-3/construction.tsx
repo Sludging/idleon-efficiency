@@ -90,11 +90,11 @@ function RefineryDisplay() {
                         const talentCD = (1 - cdReduction / 100) * 72000 // TODO: Get rid of magic numbers and names
 
                         // calculate how much time we can save using squire skill on CD.
-                        const timePerSquireSkilluse = (squire.talents.find(talent => talent.skillIndex == 130)?.getBonus(false, false, true) ?? 0) * cycleInfo[Math.floor(index / 3)].time                            
-                        
+                        const timePerSquireSkilluse = (squire.talents.find(talent => talent.skillIndex == 130)?.getBonus(false, false, true) ?? 0) * cycleInfo[Math.floor(index / 3)].time
+
                         // Calculate how much time we save every time we use the squire skill.
                         timeSaved += timeSquireCanImpact / talentCD * timePerSquireSkilluse;
-                        
+
                     })
 
                     // This can happen when the CD is longer than the actual time to rank up, so ignore it.
@@ -154,51 +154,50 @@ function RefineryDisplay() {
                         )
                     })
                 }
-                {squireInfo &&
-                    <ShadowBox background="dark-1" pad="medium" align="center" margin={{ right: 'large', bottom: 'small' }}>
-                        {
-                            squireInfo.map((squire, index) => {
-                                const [refineryTalent, cooldown] = [...squire.cooldown.entries()].filter(([talent, cooldown]) => talent.skillIndex == 130)?.pop() as [Talent, number];
-                                return (
-                                    <Box key={index} gap="small">
-                                        <Box direction="row">
-                                            <Box width={{ min: "30px", max: '30px' }} margin={{ right: 'small' }}>
-                                                <Box className={`icons-3836 icons-ClassIcons${squire.classId.valueOf()}`} />
-                                            </Box>
-                                            <Text>{squire.playerName}</Text>
-                                        </Box>
-                                        <Box direction="row" gap="small">
-                                            <Box style={{ opacity: cooldown == 0 ? 1 : 0.5 }} width={{ max: '36px', min: '36px' }}>
-                                                <Box className={refineryTalent.getClass()} />
-                                            </Box>
-                                            {cooldown > 0 && <TimeDown size={TimeDisplaySize.Small} lastUpdated={lastUpdated} addSeconds={cooldown} resetToSeconds={90000} />}
-                                            {cooldown == 0 && <Text>Skill is ready!</Text>}
-                                        </Box>
+                {squireInfo && squireInfo.map((squire, index) => {
+                    const [refineryTalent, cooldown] = [...squire.cooldown.entries()].filter(([talent, cooldown]) => talent.skillIndex == 130)?.pop() as [Talent, number];
+                    const realCD = cooldown - squire.afkFor;
+                    console.log(cooldown, lastUpdated);
+                    return (
+                        <ShadowBox key={index} background="dark-1" pad="medium" align="center" margin={{ right: 'large', bottom: 'small' }}>
+                            <Box gap="small">
+                                <Box direction="row">
+                                    <Box width={{ min: "30px", max: '30px' }} margin={{ right: 'small' }}>
+                                        <Box className={`icons-3836 icons-ClassIcons${squire.classId.valueOf()}`} />
                                     </Box>
-                                )
-                            })
-                        }
-                    </ShadowBox>
+                                    <Text>{squire.playerName}</Text>
+                                </Box>
+                                <Box direction="row" gap="small">
+                                    <Box style={{ opacity: cooldown == 0 ? 1 : 0.5 }} width={{ max: '36px', min: '36px' }}>
+                                        <Box className={refineryTalent.getClass()} />
+                                    </Box>
+                                    {realCD > 0 && <TimeDown size={TimeDisplaySize.Small} lastUpdated={lastUpdated} addSeconds={realCD} resetToSeconds={72000} />}
+                                    {realCD == 0 && <Text>Skill is ready!</Text>}
+                                </Box>
+                            </Box>
+                        </ShadowBox>
+                    )
+                })
                 }
             </Box>
             <CheckBox
                 checked={squirePowha}
                 label={<Box direction="row" align="center">
-                        <Text margin={{right: 'xsmall'}} size="small">Squire Power</Text>
-                        <TipDisplay 
-                            body={<Box gap="xsmall">
-                                <Text>This will make the following assumptions and calculate their impact on the time to rank-up:</Text>
-                                <Text>* Assume perfect use of squire skill on CD (if you got more than one squire, they are assumed to be in perfect sync.)</Text>
-                                <Text>* This is assuming the highest possible level for the squire skill based on your max talent level.</Text>
-                            </Box>}
-                            size="small"
-                            heading='Squire Power!'
-                            maxWidth='medium'
-                            direction={TipDirection.Down}
-                        >
-                            <CircleInformation size="small" />
-                        </TipDisplay>
-                    </Box>}
+                    <Text margin={{ right: 'xsmall' }} size="small">Squire Power</Text>
+                    <TipDisplay
+                        body={<Box gap="xsmall">
+                            <Text>This will make the following assumptions and calculate their impact on the time to rank-up:</Text>
+                            <Text>* Assume perfect use of squire skill on CD (if you got more than one squire, they are assumed to be in perfect sync.)</Text>
+                            <Text>* This is assuming the highest possible level for the squire skill based on your max talent level.</Text>
+                        </Box>}
+                        size="small"
+                        heading='Squire Power!'
+                        maxWidth='medium'
+                        direction={TipDirection.Down}
+                    >
+                        <CircleInformation size="small" />
+                    </TipDisplay>
+                </Box>}
                 onChange={(event) => setSquirePowha(event.target.checked)}
             />
             <Text>This is WIP - fuel times don&apos;t account for printer or auto refine salt generation.</Text>
@@ -215,7 +214,7 @@ function RefineryDisplay() {
                     const fuelTime = info.getFuelTime(storageItems, [], index <= saltMeritLevel) * cycleInfo[Math.floor(index / 3)].time;
                     const timeToNextRank = info.getTimeToNextRank(cycleInfo[Math.floor(index / 3)].time);
 
-                    
+
                     if (saltItem) {
                         return (
                             <ShadowBox key={index} background="dark-1">
