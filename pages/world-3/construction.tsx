@@ -130,6 +130,14 @@ function RefineryDisplay() {
         }
     }, [idleonData, refineryData]);
 
+    if (!refineryData || Object.entries(refineryData.salts).filter(([name, saltInfo]) => saltInfo.progress > 0).length == 0) {
+        return (
+            <Box align="center" pad="medium">
+                <Heading level='3'>Come back when you unlocked this!</Heading>
+            </Box>
+        )
+    }
+
     return (
         <Box gap="medium">
             <Box direction="row" wrap justify="center">
@@ -311,6 +319,14 @@ function SaltLickDisplay() {
         }
     }, [idleonData]);
 
+    if (!saltLickData || saltLickData.bonuses.filter(bonus => bonus.level ?? 0 > 0).length == 0) {
+        return (
+            <Box align="center" pad="medium">
+                <Heading level='3'>Come back when you unlocked this!</Heading>
+            </Box>
+        )
+    }
+
     return (
         <Box gap="medium">
             {
@@ -361,6 +377,14 @@ function PrinterDisplay() {
         }
     }, [idleonData]);
 
+    if (!printerData || printerData.playerInfo.filter(player => player.samples.filter(sample => sample.item != "Blank").length > 0).length == 0) {
+        return (
+            <Box align="center" pad="medium">
+                <Heading level='3'>Come back when you unlocked this!</Heading>
+            </Box>
+        )
+    }
+    console.log(printerData);
     return (
         <ShadowBox background="dark-1" gap="small">
             {
@@ -457,6 +481,14 @@ function DeathnoteDisplay() {
         }
     }, [idleonData]);
 
+    if (!deathnoteData) {
+        return (
+            <Box align="center" pad="medium">
+                <Heading level='3'>Come back when you unlocked this!</Heading>
+            </Box>
+        )
+    }
+
     return (
         <Grid columns="1/3">
             {
@@ -494,13 +526,6 @@ function Construction() {
         }
     }, [idleonData]);
 
-    // if (!playerTraps || playerTraps.filter(x => playerNames[x[0]?.playerID] != undefined).length == 0) {
-    //     return (
-    //         <Box align="center" pad="medium">
-    //             <Heading level='3'>Come back when you unlocked this!</Heading>
-    //         </Box>
-    //     )
-    // }
     return (
         <Box>
             <NextSeo title="Construction" />
