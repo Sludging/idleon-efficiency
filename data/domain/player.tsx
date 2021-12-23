@@ -295,7 +295,17 @@ const keyFunctionMap: Record<string, Function> = {
     "activeBubbles": (doc: Document, player: Player) => { player.activeBubblesString = (JSON.parse(doc.get('CauldronBubbles')) as string[][])[player.playerID] },
     "timeaway": (doc: Document, player: Player) => {
         const timeAway = JSON.parse(doc.get('TimeAway'));
-        player.afkFor = timeAway['Player'] - (doc.get(`PTimeAway_${player.playerID}`) * 1000);
+        const time = new Date()
+        const gapFromLastSave = (time.getTime() / 1000) - timeAway['Player'];
+        // If less than 5 mintues from last time save was updated, just rely on save data
+        if (gapFromLastSave < 60 * 5) {
+            player.afkFor = timeAway['Player'] - (doc.get(`PTimeAway_${player.playerID}`) * 1000);
+        }
+        else {
+            // otherwise try and guess the AFK time based by adding the time gap from now and last save time;
+            player.afkFor = (timeAway['Player'] - (doc.get(`PTimeAway_${player.playerID}`) * 1000)) + gapFromLastSave;
+        }
+        
     },
     "playerstuff": (doc: Document, player: Player) => {
         const jsonStuff = JSON.parse(doc.get(`PlayerStuff_${player.playerID}`));
