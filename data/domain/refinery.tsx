@@ -108,8 +108,12 @@ export class SaltStatus {
     }
 
     getTimeToNextRank = (cycleTime: number) => {
+        return this.getCyclesTillNextRank() * cycleTime;
+    }
+
+    getCyclesTillNextRank = () => {
         const remainingProgress = this.getCap() - this.progress;
-        return Math.ceil(remainingProgress / this.getPowerPerCycle()) * cycleTime;
+        return Math.ceil(remainingProgress / this.getPowerPerCycle())
     }
 
     getFuelTime = (itemsInStorage: Item[], itemsInPrinter: Item[], taskBought: boolean = false) => {
