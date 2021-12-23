@@ -347,11 +347,11 @@ function SaltLickDisplay() {
                                     <TextAndLabel textSize='small' text={saltLickData.getBonusText(index)} label="Bonus" />
                                     <TextAndLabel text={`${bonus.level} / ${bonus.maxLevel}`} label="Level" />
                                     <Box direction="row" align="center">
-                                        <Box title={saltItem.displayName} width={{ max: '50px', min: '50px' }} margin={{right: 'small'}}>
+                                        <Box title={saltItem.displayName} width={{ max: '50px', min: '50px' }} margin={{ right: 'small' }}>
                                             <Box className={saltItem.getClass()} />
                                         </Box>
                                         <TextAndLabel text={nFormatter(saltLickData.getCost(index), 2)} label="Next Level costs" />
-                                        
+
                                     </Box>
                                     <Box direction="row" align="center">
                                         <TextAndLabel text={nFormatter(costToMax, 2)} label="Cost to max" />
@@ -384,6 +384,11 @@ function PrinterDisplay() {
         }
     }, [idleonData]);
 
+    const masteroInfo = useMemo(() => {
+        const masteroes = playerData?.filter(player => player.classId == ClassIndex.Maestro);
+        return masteroes;
+    }, [playerData])
+
     if (!printerData || printerData.playerInfo.filter(player => player.samples.filter(sample => sample.item != "Blank").length > 0).length == 0) {
         return (
             <Box align="center" pad="medium">
@@ -392,49 +397,77 @@ function PrinterDisplay() {
         )
     }
     return (
-        <ShadowBox background="dark-1" gap="small">
-            {
-                printerData && printerData.playerInfo.map((playerInfo, index) => {
+        <Box gap="medium">
+            <Box direction="row" wrap justify="center">
+                {masteroInfo && masteroInfo.map((mastero, index) => {
+                    const [printerTalent, cooldown] = [...mastero.cooldown.entries()].filter(([talent, cooldown]) => talent.skillIndex == 32)?.pop() as [Talent, number];
+                    const realCD = cooldown - mastero.afkFor;
                     return (
-                        <Grid key={index} columns={{ count: 5, size: 'auto' }} align="center" gap="medium" pad={{ horizontal: "large", vertical: "small" }} border={{ color: 'grey-1', side: 'bottom' }}>
-                            <Text>{playerData && playerData[index] && playerData[index].playerName}</Text>
-                            {
-                                playerInfo.samples.map((sample, sampleIndex) => {
-                                    if (sample.item == "Blank") {
-                                        return <>Empty</>
-                                    }
-                                    const sampleItem = itemData?.find((item) => item.internalName == sample.item);
-                                    const activeItem = playerInfo.active.find((activeItem) => activeItem.item == sample.item);
-                                    return (
-                                        <Box key={sampleIndex} direction="row" align="center">
-                                            <Box pad="small" gap="small" align="center">
-                                                <Box width={{ max: '36px', min: '36px' }}>
-                                                    <Box className={sampleItem?.getClass()} />
+                        <ShadowBox key={index} background="dark-1" pad="medium" align="center" margin={{ right: 'large', bottom: 'small' }}>
+                            <Box gap="small">
+                                <Box direction="row">
+                                    <Box width={{ min: "30px", max: '30px' }} margin={{ right: 'small' }}>
+                                        <Box className={`icons-3836 icons-ClassIcons${mastero.classId.valueOf()}`} />
+                                    </Box>
+                                    <Text>{mastero.playerName}</Text>
+                                </Box>
+                                <Box direction="row" gap="small">
+                                    <Box style={{ opacity: cooldown == 0 ? 1 : 0.5 }} width={{ max: '36px', min: '36px' }}>
+                                        <Box className={printerTalent.getClass()} />
+                                    </Box>
+                                    {realCD > 0 && <TimeDown size={TimeDisplaySize.Small} lastUpdated={idleonData.getLastUpdated(true) as Date} addSeconds={realCD} resetToSeconds={72000} />}
+                                    {realCD <= 0 && <Text>Skill is ready!</Text>}
+                                </Box>
+                            </Box>
+                        </ShadowBox>
+                    )
+                })
+                }
+            </Box>
+            <ShadowBox background="dark-1" gap="small">
+                {
+                    printerData && printerData.playerInfo.map((playerInfo, index) => {
+                        return (
+                            <Grid key={index} columns={{ count: 5, size: 'auto' }} align="center" gap="medium" pad={{ horizontal: "large", vertical: "small" }} border={{ color: 'grey-1', side: 'bottom' }}>
+                                <Text>{playerData && playerData[index] && playerData[index].playerName}</Text>
+                                {
+                                    playerInfo.samples.map((sample, sampleIndex) => {
+                                        if (sample.item == "Blank") {
+                                            return <Box>Empty</Box>
+                                        }
+                                        const sampleItem = itemData?.find((item) => item.internalName == sample.item);
+                                        const activeItem = playerInfo.active.find((activeItem) => activeItem.item == sample.item);
+                                        return (
+                                            <Box key={sampleIndex} direction="row" align="center">
+                                                <Box pad="small" gap="small" align="center">
+                                                    <Box width={{ max: '36px', min: '36px' }}>
+                                                        <Box className={sampleItem?.getClass()} />
+                                                    </Box>
+                                                    <Box direction="row" align="center" gap="small">
+                                                        <Text color={activeItem ? 'green-1' : ''} size="small">{nFormatter(sample.quantity, 2)}</Text>
+                                                    </Box>
                                                 </Box>
-                                                <Box direction="row" align="center" gap="small">
-                                                    <Text color={activeItem ? 'green-1' : ''} size="small">{nFormatter(sample.quantity, 2)}</Text>
-                                                </Box>
+                                                {activeItem && (activeItem?.quantity ?? 0) < sample.quantity &&
+                                                    <TipDisplay
+                                                        heading='Active lower than sample'
+                                                        body={<Box><Text>You have a sample of {nFormatter(sample.quantity, 2)} but only printing {nFormatter(activeItem.quantity, 2)}.</Text><Text>Go update your printing!</Text></Box>}
+                                                        size='large'
+                                                        direction={TipDirection.Down}
+                                                    >
+                                                        <StatusWarning size="medium" color="accent-1" />
+                                                    </TipDisplay>
+                                                }
                                             </Box>
-                                            {activeItem && (activeItem?.quantity ?? 0) < sample.quantity &&
-                                                <TipDisplay
-                                                    heading='Active lower than sample'
-                                                    body={<Box><Text>You have a sample of {nFormatter(sample.quantity, 2)} but only printing {nFormatter(activeItem.quantity, 2)}.</Text><Text>Go update your printing!</Text></Box>}
-                                                    size='large'
-                                                    direction={TipDirection.Down}
-                                                >
-                                                    <StatusWarning size="medium" color="accent-1" />
-                                                </TipDisplay>
-                                            }
-                                        </Box>
-                                    )
-                                })
-                            }
-                        </Grid>
+                                        )
+                                    })
+                                }
+                            </Grid>
+                        )
+                    }
                     )
                 }
-                )
-            }
-        </ShadowBox>
+            </ShadowBox>
+        </Box>
     )
 
 }
