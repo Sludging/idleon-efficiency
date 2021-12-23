@@ -217,7 +217,7 @@ function RefineryDisplay() {
                     if (saltItem) {
                         return (
                             <ShadowBox key={index} background="dark-1">
-                                <Grid columns={size == "small" ? ["50%", "50%"] : ["15%", "20%", "30%", "35%"]}>
+                                <Grid columns={size == "small" ? ["50%", "50%"] : ["15%", "20%", "25%", "20%", "20%"]}>
                                     <Box key={index} direction="row" gap="medium" align="center" background="dark-2" pad="medium" justify="center" fill>
                                         <Box align="center">
                                             <Box title={saltItem.displayName} width={{ max: '75px', min: '75px' }}>
@@ -267,8 +267,8 @@ function RefineryDisplay() {
                                         </Box>
                                     </Box>
                                     <Box pad="medium">
-                                        <Box wrap align="start" gap="small">
-                                            <Text size="small">Cost</Text>
+                                        <Box wrap align="start" gap="small" border={{ color: 'grey-1', side: 'right', size: '3px' }} fill>
+                                            <Text size="small">Cost per cycle</Text>
                                             <Box gap="xsmall">
                                                 {
                                                     info.baseCost && info.baseCost.map((costData, index) => {
@@ -283,7 +283,34 @@ function RefineryDisplay() {
                                                                     </Box>
                                                                     <Box direction="row" gap="xsmall" align="center">
                                                                         <Text size="small">{itemCost}</Text>
-                                                                        <Text color={storageQuantity < itemCost ? 'accent-1' : ''} size="small">({nFormatter(storageQuantity, 2)})</Text>
+                                                                    </Box>
+                                                                </Box>
+                                                            )
+                                                        }
+                                                    })
+                                                }
+                                            </Box>
+                                        </Box>
+                                    </Box>
+                                    <Box pad="medium">
+                                        <Box wrap align="start" gap="small">
+                                            <Text size="small">Cost to rank up</Text>
+                                            <Box gap="xsmall">
+                                                {
+                                                    info.baseCost && info.baseCost.map((costData, index) => {
+                                                        const costItem = itemData?.find((item) => item.internalName == costData.item);
+                                                        const itemCost = costData.quantity * info.getCostMulti(costData.item.includes("Refinery"), index <= saltMeritLevel);
+                                                        const storageQuantity = storageItems.find(x => x.internalName == costData.item)?.count ?? 0;
+                                                        const resourceCostToMax = info.getCyclesTillNextRank() * itemCost;
+                                                        if (costItem) {
+                                                            return (
+                                                                <Box key={index} direction="row" align="center">
+                                                                    <Box title={costItem?.displayName} width={{ max: '30px', min: '30px' }}>
+                                                                        <Box className={costItem?.getClass()} />
+                                                                    </Box>
+                                                                    <Box direction="row" gap="xsmall" align="center">
+                                                                        <Text color={storageQuantity < resourceCostToMax ? 'accent-1' : '' } size="small">{nFormatter(resourceCostToMax, 2)}</Text>
+                                                                        <Text size="small">({nFormatter(storageQuantity, 2)})</Text>
                                                                     </Box>
                                                                 </Box>
                                                             )
@@ -415,7 +442,7 @@ function PrinterDisplay() {
                                     <Box style={{ opacity: cooldown == 0 ? 1 : 0.5 }} width={{ max: '36px', min: '36px' }}>
                                         <Box className={printerTalent.getClass()} />
                                     </Box>
-                                    {realCD > 0 && <TimeDown size={TimeDisplaySize.Small} lastUpdated={idleonData.getLastUpdated(true) as Date} addSeconds={realCD} resetToSeconds={72000} />}
+                                    {realCD > 0 && <TimeDown size={TimeDisplaySize.Small} lastUpdated={idleonData.getLastUpdated(true) as Date} addSeconds={realCD} resetToSeconds={82000} />}
                                     {realCD <= 0 && <Text>Skill is ready!</Text>}
                                 </Box>
                             </Box>
