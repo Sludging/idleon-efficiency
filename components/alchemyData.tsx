@@ -178,7 +178,7 @@ export default function AlchemyData() {
             // get undeveloped costs bubble level
             setUndevelopedCostsBubbleLevel(alchemyData?.getUndevelopedCostsBubbleLevel() ?? 0);
             setBarleyBrewVialLevel(alchemyData?.getBarleyBrewVialLevel() ?? 0);
-            setHasAlchemyAchievement(achievementsInfo[AchievementConst.SmartBoiIndex].completed ?? false); // TODO: Change this to actual achievement info
+            setHasAlchemyAchievement(achievementsInfo[AchievementConst.SmartBoiIndex].completed ?? false);
         }
     }, [idleonData, alchemyData, hasAlchemyAchievement])
 

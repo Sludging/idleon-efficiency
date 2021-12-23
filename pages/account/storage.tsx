@@ -6,11 +6,11 @@ import {
     Select
 } from "grommet"
 import { useEffect, useState, useContext, useMemo } from 'react';
-import { AppContext } from '../data/appContext';
+import { AppContext } from '../../data/appContext';
 import { NextSeo } from 'next-seo';
-import ShadowBox from "../components/base/ShadowBox";
-import { Storage } from "../data/domain/storage";
-import { nFormatter, notUndefined } from "../data/utility";
+import ShadowBox from "../../components/base/ShadowBox";
+import { Storage } from "../../data/domain/storage";
+import { nFormatter, notUndefined } from "../../data/utility";
 
 function StorageDisplay() {
     const [storage, setStorage] = useState<Storage>();

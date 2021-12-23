@@ -22,6 +22,11 @@ import { initAllItems, Item } from './domain/items';
 import parseStorage from './domain/storage';
 import parseQuests from './domain/quests';
 import parsePrayers from './domain/prayers';
+import parseRefinery from './domain/refinery';
+import parseSaltLick from './domain/saltLick';
+import parsePrinter from './domain/printer';
+import parseDeathnote from './domain/deathnote';
+import parseTaskboard from './domain/tasks';
 
 
 
@@ -38,7 +43,10 @@ class IdleonData {
     return this.data;
   }
 
-  public getLastUpdated = () => {
+  public getLastUpdated = (raw: boolean = false) => {
+    if (raw) {
+      return this.lastUpdated;
+    }
     if (this.lastUpdated) {
       const resolvedFormat = Intl.DateTimeFormat().resolvedOptions();
       const options: Intl.DateTimeFormatOptions = {
@@ -86,6 +94,11 @@ const keyFunctionMap: Record<string, Function> = {
   "constellations": (doc: Document) => JSON.parse(doc.get("SSprog")),
   "quests": (doc: Document, accountData: Map<string, any>, allItems: Item[]) => parseQuests(doc, accountData, allItems),
   "prayers": (doc: Document) => parsePrayers(JSON.parse(doc.get("PrayOwned"))),
+  "refinery": (doc: Document) => parseRefinery(JSON.parse(doc.get("Refinery"))),
+  "saltLick": (doc: Document) => parseSaltLick(JSON.parse(doc.get("SaltLick"))),
+  "printer": (doc: Document) => parsePrinter(JSON.parse(doc.get("Print"))),
+  "deathnote": (doc: Document) => parseDeathnote([...Array(9)].map((_, i) => { return doc.get(`KLA_${i}`) })),
+  "taskboard": (doc: Document) => parseTaskboard(JSON.parse(doc.get(`TaskZZ0`)), JSON.parse(doc.get(`TaskZZ1`)), JSON.parse(doc.get(`TaskZZ2`)), JSON.parse(doc.get(`TaskZZ3`)), doc.get(`TaskZZ4`), doc.get(`TaskZZ5`)),
 }
 
 
@@ -118,6 +131,7 @@ export const AppProvider: React.FC<{}> = (props) => {
         { includeMetadataChanges: true }, (doc) => {
           let accountData = new Map();
           accountData.set("playerNames", charNames);
+          accountData.set("itemsData", allItems);
           Object.entries(keyFunctionMap).forEach(([key, toExecute]) => {
             try {
               if (key == "players" || key == "storage" || key == "quests") {
@@ -136,21 +150,14 @@ export const AppProvider: React.FC<{}> = (props) => {
               accountData.set(key, undefined);
             }
           });
-          // AttackLoadout_0 (obviously named)
-          // CardEquip_0
-          // Prayers_0
           // CauldronP2W (obviously named)
           // CYWorldTeleports (if I ever care to show it)
-          // SaltLick
           // CogO
-          // ChestOrder
           // CYSilverPens
           // DungUpg
           // Guild
-          // Print
           // ForgeLV
           // ForgeItemOrder
-          // PrayOwned
           // PlayerStuff_2 - for current charge + other things I think
           // _customBlock_AnvilProduceStats for the rest
           const newData = new IdleonData(accountData, new Date());

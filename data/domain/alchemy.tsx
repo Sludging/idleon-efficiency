@@ -138,6 +138,10 @@ export class Vial {
         this.description = description;
         this.requirements = requirements;
     }
+
+    getBonus = (round: boolean = false): number => {
+        return lavaFunc(this.func, this.level, this.x1, this.x2, round);
+    }
 }
 
 export class Alchemy {

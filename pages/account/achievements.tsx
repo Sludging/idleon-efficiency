@@ -11,9 +11,9 @@ import {
 } from "grommet"
 
 import { useEffect, useState, useContext } from 'react';
-import ShadowBox from "../components/base/ShadowBox";
-import { AppContext } from '../data/appContext';
-import { Achievement } from '../data/domain/achievements';
+import ShadowBox from "../../components/base/ShadowBox";
+import { AppContext } from '../../data/appContext';
+import { Achievement } from '../../data/domain/achievements';
 import { NextSeo } from 'next-seo';
 
 function Achievements() {

@@ -55,7 +55,7 @@ export const nFormatter = (num: number, digits: number) => {
         { value: 1, symbol: "" },
         { value: 1E3, symbol: "k" },
         { value: 1E6, symbol: "M" },
-        { value: 1E9, symbol: "G" },
+        { value: 1E9, symbol: "B" },
         { value: 1E12, symbol: "T" },
         { value: 1E15, symbol: "P" },
         { value: 1E18, symbol: "E" }
@@ -138,9 +138,25 @@ export const toTime = (fromSeconds: number) => {
     }
     const minutes = Math.floor(fromSeconds % 3600 / 60);
     const seconds = Math.floor(fromSeconds % 3600 % 60);
-    return `${days > 0 ? `${days}days` : ''} ${hour}hr ${minutes}min ${seconds}sec`;
+    return `${days > 0 ? `${days}days` : ''} ${hour}hr ${days == 0 ? `${minutes}min ${seconds}sec` : ""}`;
 }
 
 export function notUndefined<T>(x: T | undefined): x is T {
     return x !== undefined;
+}
+
+/**
+ * Groups all items in an array of objects `T` where the value of property `K` is the same
+ * @param array Items to group
+ * @param key Key of `T` to group by
+ */
+ export function GroupBy<T, K extends keyof T>(array: T[], key: K) {
+	let map = new Map<T[K], T[]>();
+	array.forEach(item => {
+		let itemKey = item[key];
+		if (!map.has(itemKey)) {
+			map.set(itemKey, array.filter(i => i[key] === item[key]));
+		}
+	});
+	return map;
 }
