@@ -35,11 +35,12 @@ export class Talent {
         this.skillIndex = skillIndex;
     }
 
-    getBonus = (round: boolean = false, yBonus = false) => {
+    getBonus = (round: boolean = false, yBonus: boolean = false, maxBonus: boolean = false) => {
+        const level = maxBonus ? this.maxLevel : this.level
         if (yBonus) {
-            return lavaFunc(this.funcY, this.level, this.y1, this.y2, round);
+            return lavaFunc(this.funcY, level, this.y1, this.y2, round);
         }
-        return lavaFunc(this.funcX, this.level, this.x1, this.x2, round);
+        return lavaFunc(this.funcX, level, this.x1, this.x2, round);
     }
 
     getBonusText = (): string => {

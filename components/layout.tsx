@@ -1,5 +1,4 @@
 import React from 'react'
-import Script from 'next/script'
 import Image from 'next/image';
 import Link from 'next/link';
 import styled from 'styled-components'
@@ -14,6 +13,7 @@ import {
     Nav,
     Footer,
     Anchor,
+    ThemeContext,
     ResponsiveContext,
     Menu
 } from "grommet"
@@ -23,7 +23,7 @@ import { AuthContext } from '../data/firebase/authContext'
 import { User } from '@firebase/auth'
 import { useRouter } from 'next/dist/client/router';
 
-import { Menu as MenuIcon } from 'grommet-icons';
+import { FormDown, Menu as MenuIcon } from 'grommet-icons';
 
 declare const window: Window &
     typeof globalThis & {
@@ -33,7 +33,34 @@ declare const window: Window &
 const NavButton = styled(Button)`
     color: ${props => props.color};
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 500;
+    height: 56px;
+    margin-top: auto;
+    margin-bottom: auto;
+
+    border: ${props => props.style?.border};
+
+    &:hover {
+        color: #0376E3;
+    }
+    &.active {
+        border-bottom: 2px solid #0376E3;
+        color: #0376E3;
+    }
+`
+
+const NavMenu = styled(Menu)`
+    color: ${props => props.color};
+
+    span {
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    div {
+        padding: 0px;
+    }
+
     height: 56px;
     margin-top: auto;
     margin-bottom: auto;
@@ -50,6 +77,24 @@ const NavButton = styled(Button)`
 const PointerImage = styled(Image)`
     cursor: pointer;
 `
+
+const customNavDrop = {
+    button: {
+        size: {
+            small: {
+                pad:  {
+                    verical: '200px'
+                }
+            },
+            medium: {
+                pad:  {
+                    verical: '200px'
+                }
+            }
+        }
+    }
+}
+
 
 export default function Layout({
     children
@@ -70,14 +115,20 @@ export default function Layout({
     const navItems = [
         { link: "/stamps", label: "Stamps"},
         { link: "/alchemy", label: "Alchemy"},
-        { link: "/traps", label: "Traps"},
+        { link: "/world-3", label: "World 3", subLinks: [
+            { subLink: "/construction", label: "Construction"},
+            { subLink: "/worship", label: "Worship"},
+            { subLink: "/trapping", label: "Trapping"},
+        ]},
         { link: "/players", label: "Players"},
-        { link: "/storage", label: "Storage"},
         // { link: "/bribes", label: "Bribes - WIP"},
-        { link: "/achievements", label: "Achievements"},
-        { link: "/constellations", label: "Constellations"},
-        { link: "/quests", label: "Quests"},
-        { link: "/looty-tracker", label: "Looty Tracker"},
+        { link: "/account", label: "Account Wide", subLinks: [
+            { subLink: "/achievements", label: "Achievements"},
+            { subLink: "/constellations", label: "Constellations"},
+            { subLink: "/quests", label: "Quests"},
+            { subLink: "/looty-tracker", label: "Looty Tracker"},
+            { subLink: "/storage", label: "Storage"},
+        ]},
         { link: "/raw-data", label: "Raw Data"},
     ]
 
@@ -102,7 +153,7 @@ export default function Layout({
 
     useEffect(() => {
         setUser(authData?.user);
-        setLastUpdated(idleonData.getLastUpdated())
+        setLastUpdated(idleonData.getLastUpdated() as string)
         setLoading(authData ? authData.isLoading : true);
     }, [authData, idleonData])
 
@@ -161,23 +212,52 @@ export default function Layout({
                         <Box justify="end">
                             <Menu
                                 a11yTitle="Navigation Menu"
-                                dropProps={{ align: { top: 'bottom', right: 'right' } }}
+                                dropProps={{ align: { top: 'bottom', right: 'right' } }}   
                                 icon={<MenuIcon color="brand" />}
                                 dropBackground="dark-1"
                                 margin="small"
-                                items={navItems.map(({link, label}) => { return { label: <Link href={link}><Box className={router.pathname == link ? 'active' : ''} color="accent-2">{label}</Box></Link>}})}
+                                items={navItems.flatMap(({link, label, subLinks}) => { 
+                                    if (subLinks)  {
+                                        return subLinks.map(({ subLink, label}) => {
+                                            return { pad: 'large', label: <Link href={link+subLink}><Box className={router.pathname == link+subLink ? 'active' : ''} color="accent-2">{label}</Box></Link>}
+                                        })
+                                    }
+                                    return { pad: 'large', label: <Link href={link}><Box className={router.pathname == link ? 'active' : ''} color="accent-2">{label}</Box></Link>}})}
                             />
                         </Box>
                     :
-                    <Box height={{ min: "56px", max: "56px" }} background="dark-1" border={{ side: 'bottom', color: 'white-1' }} style={{ boxShadow: "-7px 8px 16px 0 rgba(0,0,0,0.17)" }}>
+                    <Box height={{ min: "56px", max: "56px" }} background="dark-1" border={{ side: 'bottom', color: 'white-1' }} elevation='navigation'>
                         <Box width={{ max: '1440px' }} align="center" margin={{ left: 'auto', right: 'auto' }} >
-                            <Nav direction="row">
-                                {
-                                    navItems.map(({link, label}) => (
-                                        <Link key={`link_${label}`} href={link}><NavButton className={router.pathname == link ? 'active' : ''} color="accent-2">{label}</NavButton></Link>
-                                    ))
-                                }
-                            </Nav>
+                            <ThemeContext.Extend value={customNavDrop}>
+                                <Nav direction="row">
+                                    {
+                                        navItems.map(({link, label, subLinks}) => {
+                                            if (subLinks) {
+                                                return (
+                                                    <NavMenu
+                                                    key={`link_${label}`} 
+                                                    dropBackground="dark-1"
+                                                    dropProps={{ align: { top: 'bottom' },  elevation: 'navigation' }}
+                                                    items={subLinks.map(({ subLink, label}) => (
+                                                        { 
+                                                            label: <Text size="small">{label}</Text>,
+                                                            onClick: () => { router.push(link + subLink)},
+                                                        }
+                                                        
+                                                    ))} 
+                                                    icon={<FormDown size="medium" color="accent-1"/>}
+                                                    label={label}
+                                                    className={router.pathname.includes(link) ? 'active' : ''} color="accent-2" />
+                                                )
+                                            }
+                                            
+                                            return (
+                                                <Link key={`link_${label}`} href={link}><NavButton className={router.pathname == link ? 'active' : ''} color="accent-2">{label}</NavButton></Link>
+                                            )
+                                        })
+                                    }
+                                </Nav>
+                            </ThemeContext.Extend>
                         </Box>
                     </Box>)
                 }
