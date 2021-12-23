@@ -196,7 +196,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     }
                     <Box direction="row" gap="xsmall">
                         <Text size="small">Away Since =</Text>
-                        {player.afkFor == 0 ? "Active" : <TimeUp addSeconds={player.afkFor} lastUpdated={idleonData.getLastUpdated(true) as Date} /> }
+                        {player.afkFor < 100 ? "Active" : <TimeUp addSeconds={player.afkFor} lastUpdated={idleonData.getLastUpdated(true) as Date} /> }
                     </Box>
                     <Text size="small">STR = {player.stats.strength}</Text>
                     <Text size="small">AGI = {player.stats.agility}</Text>
