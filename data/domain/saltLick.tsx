@@ -1,3 +1,5 @@
+import { round } from '../utility';
+
 interface BonusInfo {
     item: string
     desc: string
@@ -18,8 +20,11 @@ export class SaltLick {
 
     constructor() {}
 
-    getBonus = (bonusIndex: number, round: boolean = false) => {
+    getBonus = (bonusIndex: number, roundResult: boolean = false) => {
         const bonus = this.bonuses[bonusIndex];
+        if (roundResult) {
+            return round(bonus.baseBonus * (bonus.level ?? 0))
+        }
         return bonus.baseBonus * (bonus.level ?? 0);
     }
 
@@ -34,7 +39,7 @@ export class SaltLick {
     getCostToMax = (bonusIndex: number) => {
         const bonus = this.bonuses[bonusIndex];
         let totalCost = 0;
-        range((bonus.level ?? 0) + 1, bonus.maxLevel).forEach((level, _) => {
+        range((bonus.level ?? 0), bonus.maxLevel).forEach((level, _) => {
             totalCost += this.getCost(bonusIndex, level);
         });
 
