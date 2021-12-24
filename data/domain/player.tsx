@@ -1,5 +1,3 @@
-import { DocumentSnapshot as Document } from "@firebase/firestore";
-
 import { itemMap, monstersMap, mapsMap } from "../maps";
 import { Capacity } from './capacity';
 import { StarSignMap, StarSign } from './starsigns';
@@ -9,6 +7,7 @@ import { ClassIndex, Talent, ClassTalentMap, GetTalentArray } from './talents';
 import { CardInfo } from "./cards";
 import { Item, Equipment, Food, Tool, StoneProps } from "./items";
 import { notUndefined } from '../utility';
+import { Cloudsave } from "./cloudsave";
 
 export class PlayerStats {
     strength: number = 0;
@@ -268,32 +267,32 @@ export class Player {
 }
 
 const keyFunctionMap: Record<string, Function> = {
-    "equipment": (doc: Document, player: Player, allItems: Item[]) => parseEquipment(doc.get(`EquipOrder_${player.playerID}`), doc.get(`EquipQTY_${player.playerID}`), JSON.parse(doc.get(`EMm0_${player.playerID}`)), JSON.parse(doc.get(`EMm1_${player.playerID}`)), player, allItems),
-    "stats": (doc: Document, player: Player) => parseStats(doc.get(`PVStatList_${player.playerID}`), player),
-    "class": (doc: Document, player: Player) => {
+    "equipment": (doc: Cloudsave, player: Player, allItems: Item[]) => parseEquipment(doc.get(`EquipOrder_${player.playerID}`), doc.get(`EquipQTY_${player.playerID}`), JSON.parse(doc.get(`EMm0_${player.playerID}`)), JSON.parse(doc.get(`EMm1_${player.playerID}`)), player, allItems),
+    "stats": (doc: Cloudsave, player: Player) => parseStats(doc.get(`PVStatList_${player.playerID}`), player),
+    "class": (doc: Cloudsave, player: Player) => {
         player.class = ClassIndex[doc.get(`CharacterClass_${player.playerID}`)]?.replace(/_/g, " ") || "New Class?";
         player.classId = doc.get(`CharacterClass_${player.playerID}`) as ClassIndex;
     },
-    "monster": (doc: Document, player: Player) => { player.currentMonster = monstersMap.get(doc.get(`AFKtarget_${player.playerID}`))?.replace(/_/g, " ") || "New Monster?"; },
-    "map": (doc: Document, player: Player) => parseMap(doc.get(`CurrentMap_${player.playerID}`), player),
-    "starsigns": (doc: Document, player: Player) => parseStarSigns(doc.get(`PVtStarSign_${player.playerID}`), player),
-    "money": (doc: Document, player: Player) => { player.money = doc.get(`Money_${player.playerID}`) },
-    "skills": (doc: Document, player: Player) => parseSkills(doc.get(`Lv0_${player.playerID}`), player),
-    "anvil": (doc: Document, player: Player) => parseAnvil(
+    "monster": (doc: Cloudsave, player: Player) => { player.currentMonster = monstersMap.get(doc.get(`AFKtarget_${player.playerID}`))?.replace(/_/g, " ") || "New Monster?"; },
+    "map": (doc: Cloudsave, player: Player) => parseMap(doc.get(`CurrentMap_${player.playerID}`), player),
+    "starsigns": (doc: Cloudsave, player: Player) => parseStarSigns(doc.get(`PVtStarSign_${player.playerID}`), player),
+    "money": (doc: Cloudsave, player: Player) => { player.money = doc.get(`Money_${player.playerID}`) },
+    "skills": (doc: Cloudsave, player: Player) => parseSkills(doc.get(`Lv0_${player.playerID}`), player),
+    "anvil": (doc: Cloudsave, player: Player) => parseAnvil(
         doc.get(`AnvilPA_${player.playerID}`),
         doc.get(`AnvilPAstats_${player.playerID}`),
         doc.get(`AnvilPAselect_${player.playerID}`),
         player
     ),
-    "capacity": (doc: Document, player: Player) => { player.capacity = new Capacity(JSON.parse(doc.get(`MaxCarryCap_${player.playerID}`))) },
-    "talents": (doc: Document, player: Player) => parseTalents(
+    "capacity": (doc: Cloudsave, player: Player) => { player.capacity = new Capacity(JSON.parse(doc.get(`MaxCarryCap_${player.playerID}`))) },
+    "talents": (doc: Cloudsave, player: Player) => parseTalents(
         doc.get(`SL_${player.playerID}`),
         doc.get(`SM_${player.playerID}`),
         player
     ),
-    "postoffice": (doc: Document, player: Player) => parsePostOffice(doc.get(`POu_${player.playerID}`), player),
-    "activeBubbles": (doc: Document, player: Player) => { player.activeBubblesString = (JSON.parse(doc.get('CauldronBubbles')) as string[][])[player.playerID] },
-    "timeaway": (doc: Document, player: Player) => {
+    "postoffice": (doc: Cloudsave, player: Player) => parsePostOffice(doc.get(`POu_${player.playerID}`), player),
+    "activeBubbles": (doc: Cloudsave, player: Player) => { player.activeBubblesString = (JSON.parse(doc.get('CauldronBubbles')) as string[][])[player.playerID] },
+    "timeaway": (doc: Cloudsave, player: Player) => {
         const timeAway = JSON.parse(doc.get('TimeAway'));
         const time = new Date()
         const gapFromLastSave = (time.getTime() / 1000) - timeAway['Player'];
@@ -307,27 +306,27 @@ const keyFunctionMap: Record<string, Function> = {
         }
         
     },
-    "playerstuff": (doc: Document, player: Player) => {
+    "playerstuff": (doc: Cloudsave, player: Player) => {
         const jsonStuff = JSON.parse(doc.get(`PlayerStuff_${player.playerID}`));
         player.worship.currentCharge = jsonStuff[0];
     },
-    "cards": (doc: Document, player: Player) => {
+    "cards": (doc: Cloudsave, player: Player) => {
         const currentCardSet = JSON.parse(doc.get(`CSetEq_${player.playerID}`));
         const equippedCards = doc.get(`CardEquip_${player.playerID}`) as string[];
         const cards = JSON.parse(doc.get('Cards0'));
         player.cardInfo = new CardInfo(cards, currentCardSet, equippedCards);
     },
-    "activebuffs": (doc: Document, player: Player) => {
+    "activebuffs": (doc: Cloudsave, player: Player) => {
         const activeBuffs = doc.get(`BuffsActive_${player.playerID}`) as Record<number, number>[];
         player.activeBuffs = activeBuffs.map((buff) => {
             return player.talents.find(x => x.skillIndex == buff[0]);
         }).filter(notUndefined)
     },
-    "activePrayers": (doc: Document, player: Player) => {
+    "activePrayers": (doc: Cloudsave, player: Player) => {
         const activePrayers = JSON.parse(doc.get(`Prayers_${player.playerID}`)) as number[];
         player.activePrayers = activePrayers.filter((prayer) => prayer != -1);
     },
-    "cooldowns": (doc: Document, player: Player) => {
+    "cooldowns": (doc: Cloudsave, player: Player) => {
         const talentCooldowns = JSON.parse(doc.get(`AtkCD_${player.playerID}`)) as Record<string, number>;
         Object.entries(talentCooldowns).forEach(([talentId, cooldown]) => {
             const talent = player.talents.find((talent) => talent.skillIndex == parseInt(talentId));
@@ -451,7 +450,7 @@ const parseEquipment = (
     player.gear = playerEquipment;
 }
 
-export default function parsePlayers(doc: Document, accountData: Map<string, any>, allItems: Item[]) {
+export default function parsePlayers(doc: Cloudsave, accountData: Map<string, any>, allItems: Item[]) {
     const playerNames = accountData.get("playerNames") as string[];
     let parsedData = playerNames.map((playerName, index) => {
         let player = new Player(index, playerName);

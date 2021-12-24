@@ -1,4 +1,4 @@
-import { DocumentSnapshot } from "@firebase/firestore";
+import { Cloudsave } from "./cloudsave";
 import { Item, StoneProps } from "./items";
 
 export class Storage {
@@ -6,7 +6,7 @@ export class Storage {
     playerStorage: Item[][] = [];
 }
 
-export default function parseStorage(doc: DocumentSnapshot, playerNames: string[], allItems: Item[]) {
+export default function parseStorage(doc: Cloudsave, playerNames: string[], allItems: Item[]) {
     const chestOrder: string[] = doc.get("ChestOrder");
     const chestQuantity: number[] = doc.get("ChestQuantity");
     

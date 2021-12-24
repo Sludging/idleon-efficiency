@@ -9,6 +9,7 @@ import { useRouter } from "next/dist/client/router";
 interface AuthData {
     user: User | null
     isLoading: boolean
+    isDemo: boolean
     loginFunction: Function
     logoutFunction: Function
     tokenFunction: Function
@@ -28,6 +29,7 @@ export const getAuthData = (): AuthData => {
 export const AuthProvider: React.FC<{}> = (props) => {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
+    const [isDemo, setIsDemo] = useState(false);
     const router = useRouter();
 
     const loginUser = () => {
@@ -63,37 +65,46 @@ export const AuthProvider: React.FC<{}> = (props) => {
     }
 
     const loginThroughEmailPassword = (email: string, password: string, callback?: Function) => {
-        const auth = getAuth(app);
-        const credential = EmailAuthProvider.credential(email, password);
-        signInWithCredential(auth, credential)
-            .then((result) => {
-                setUser(result.user);
-                loginEvent("EMAIL");
-            }).catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                if (callback) {
-                    callback(errorCode);
-                }
-                console.debug(errorCode, errorMessage);
-            });
+        if (email == "demo" && password == "demo") {
+            setIsDemo(true);
+            loginEvent("DEMO");
+        }
+        else {
+            const auth = getAuth(app);
+            const credential = EmailAuthProvider.credential(email, password);
+            signInWithCredential(auth, credential)
+                .then((result) => {
+                    setUser(result.user);
+                    loginEvent("EMAIL");
+                }).catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    if (callback) {
+                        callback(errorCode);
+                    }
+                    console.debug(errorCode, errorMessage);
+                });
+        }
     }
 
     const logout = () => {
         const auth = getAuth(app);
-        signOut(auth)
-            .then((result) => {
-                sendEvent({
-                    action: "logout",
-                    category: "engagement",
-                    value: 1,
+        if (user) {
+            signOut(auth)
+                .then((result) => {
+                    sendEvent({
+                        action: "logout",
+                        category: "engagement",
+                        value: 1,
+                    });
+                    router.push('/');
+                }).catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.log(errorCode, errorMessage);
                 });
-                router.push('/');
-            }).catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
-            });
+        }
+        setIsDemo(false);
     }
 
 
@@ -108,13 +119,18 @@ export const AuthProvider: React.FC<{}> = (props) => {
                 setUser(null);
             }
             setLoading(false);
-        })
-    }, [user]);
+        });
+        if (isDemo) {
+            setUser(null);
+            setLoading(false);
+        }
+    }, [user, isDemo]);
 
     return (
         <AuthContext.Provider value={{
             user: user,
             isLoading: loading,
+            isDemo: isDemo,
             loginFunction: loginUser,
             emailLoginFunction: loginThroughEmailPassword,
             logoutFunction: logout,
