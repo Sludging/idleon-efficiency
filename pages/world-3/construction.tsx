@@ -167,7 +167,7 @@ function RefineryDisplay() {
                                     <Text>{squire.playerName}</Text>
                                 </Box>
                                 <Box direction="row" gap="small">
-                                    <Box style={{ opacity: cooldown == 0 ? 1 : 0.5 }} width={{ max: '36px', min: '36px' }}>
+                                    <Box style={{ opacity: realCD <= 0 ? 1 : 0.5 }} width={{ max: '36px', min: '36px' }}>
                                         <Box className={refineryTalent.getClass()} />
                                     </Box>
                                     {realCD > 0 && <TimeDown size={TimeDisplaySize.Small} lastUpdated={lastUpdated} addSeconds={realCD} resetToSeconds={72000} />}
@@ -439,7 +439,7 @@ function PrinterDisplay() {
                                     <Text>{mastero.playerName}</Text>
                                 </Box>
                                 <Box direction="row" gap="small">
-                                    <Box style={{ opacity: cooldown == 0 ? 1 : 0.5 }} width={{ max: '36px', min: '36px' }}>
+                                    <Box style={{ opacity: realCD <= 0 ? 1 : 0.5 }} width={{ max: '36px', min: '36px' }}>
                                         <Box className={printerTalent.getClass()} />
                                     </Box>
                                     {realCD > 0 && <TimeDown size={TimeDisplaySize.Small} lastUpdated={idleonData.getLastUpdated(true) as Date} addSeconds={realCD} resetToSeconds={82000} />}
