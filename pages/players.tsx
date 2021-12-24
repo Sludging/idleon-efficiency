@@ -312,12 +312,12 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                         activeShrines.length > 0 &&
                         <Box gap="small">
                             <Text>Active Shrines:</Text>
-                            <Box direction="row" wrap gap="small">
+                            <Box direction="row" wrap>
                                 {
                                     activeShrines.map((shrine, index) => {
                                         const cardBonus = player.cardInfo?.equippedCards.find(x => x.id == "Z9")?.getBonus() ?? 0;
                                         return (
-                                            <Box key={index}>
+                                            <Box key={index} margin={{right: 'small', bottom: 'small'}}>
                                                 <TipDisplay
                                                     heading={`${shrine.name} (${shrine.level})`}
                                                     body={shrine.getBonusText(player.currentMapId, cardBonus)}

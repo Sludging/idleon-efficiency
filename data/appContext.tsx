@@ -27,6 +27,7 @@ import parseSaltLick from './domain/saltLick';
 import parsePrinter from './domain/printer';
 import parseDeathnote from './domain/deathnote';
 import parseTaskboard from './domain/tasks';
+import { Cloudsave, cloudsaveConverter } from './domain/cloudsave';
 
 
 
@@ -69,46 +70,48 @@ Known paths:
 1. _uid/${user.uid} = character names
 */
 const keyFunctionMap: Record<string, Function> = {
-  "stamps": (doc: Document) => parseStamps(doc.get("StampLv"), doc.get("StampLvM")),
-  "traps": (doc: Document) => parseTraps([...Array(9)].map((_, i) => { return doc.get(`PldTraps_${i}`) })),
-  "statues": (doc: Document) => parseStatues([...Array(9)].map((_, i) => { return JSON.parse(doc.get(`StatueLevels_${i}`)) }), JSON.parse(doc.get(`StuG`))),
-  "timeAway": (doc: Document) => JSON.parse(doc.get('TimeAway')),
-  "cauldronBubbles": (doc: Document) => JSON.parse(doc.get('CauldronBubbles')),
-  "cards": (doc: Document) => JSON.parse(doc.get('Cards0')),
-  "players": (doc: Document, accountData: Map<string, any>, allItems: Item[]) => parsePlayers(doc, accountData, allItems),
-  "alchemy": (doc: Document) => parseAlchemy(doc.get("CauldronInfo"), doc.get("CauldUpgLVs")),
-  "bribes": (doc: Document) => parseBribes(doc.get("BribeStatus")),
-  "guild": (doc: Document) => parseGuild(JSON.parse(doc.get("Guild"))),
-  "gems": (doc: Document) => parseGems(JSON.parse(doc.get('GemItemsPurchased'))),
-  "achievements": (doc: Document) => parseAchievements(JSON.parse(doc.get('AchieveReg')), JSON.parse(doc.get('SteamAchieve'))),
-  "lootyData": (doc: Document, allItems: Item[]) => parseLooty(JSON.parse(doc.get("Cards1")), allItems),
-  "rawData": (doc: Document) => doc.data(),
-  "POExtra": (doc: Document) => { 
+  "stamps": (doc: Cloudsave, charCount: number) => parseStamps(doc.get("StampLv"), doc.get("StampLvM")),
+  "traps": (doc: Cloudsave, charCount: number) => parseTraps([...Array(charCount)].map((_, i) => { return doc.get(`PldTraps_${i}`) })),
+  "statues": (doc: Cloudsave, charCount: number) => parseStatues([...Array(charCount)].map((_, i) => { try { return JSON.parse(doc.get(`StatueLevels_${i}`)) } catch (e) { console.log("Statues", i, doc.get(`StatueLevels_${i}`)); throw e } }), JSON.parse(doc.get(`StuG`))),
+  "timeAway": (doc: Cloudsave, charCount: number) => JSON.parse(doc.get('TimeAway')),
+  "cauldronBubbles": (doc: Cloudsave, charCount: number) => doc.get('CauldronBubbles'),
+  "cards": (doc: Cloudsave, charCount: number) => doc.get('Cards0'),
+  "players": (doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], charCount: number) => parsePlayers(doc, accountData, allItems),
+  "alchemy": (doc: Cloudsave, charCount: number) => parseAlchemy(doc.get("CauldronInfo"), doc.get("CauldUpgLVs")),
+  "bribes": (doc: Cloudsave, charCount: number) => parseBribes(doc.get("BribeStatus")),
+  "guild": (doc: Cloudsave, charCount: number) => parseGuild(JSON.parse(doc.get("Guild"))),
+  "gems": (doc: Cloudsave, charCount: number) => parseGems(JSON.parse(doc.get('GemItemsPurchased'))),
+  "achievements": (doc: Cloudsave, charCount: number) => parseAchievements(JSON.parse(doc.get('AchieveReg')), JSON.parse(doc.get('SteamAchieve'))),
+  "lootyData": (doc: Cloudsave, allItems: Item[], charCount: number) => parseLooty(JSON.parse(doc.get("Cards1")), allItems),
+  "rawData": (doc: Cloudsave, charCount: number) => doc.toJSON(),
+  "POExtra": (doc: Cloudsave, charCount: number) => {
     return {
       streak: doc.get("CYDeliveryBoxStreak"),
       complete: doc.get("CYDeliveryBoxComplete"),
       misc: doc.get("CYDeliveryBoxMisc"),
-  }},
-  "shrines": (doc: Document) => parseShrines(JSON.parse(doc.get("Shrine"))),
-  "storage": (doc: Document,  accountData: Map<string, any>, allItems: Item[]) => parseStorage(doc, accountData.get("playerNames"), allItems),
-  "constellations": (doc: Document) => JSON.parse(doc.get("SSprog")),
-  "quests": (doc: Document, accountData: Map<string, any>, allItems: Item[]) => parseQuests(doc, accountData, allItems),
-  "prayers": (doc: Document) => parsePrayers(JSON.parse(doc.get("PrayOwned"))),
-  "refinery": (doc: Document) => parseRefinery(JSON.parse(doc.get("Refinery"))),
-  "saltLick": (doc: Document) => parseSaltLick(JSON.parse(doc.get("SaltLick"))),
-  "printer": (doc: Document) => parsePrinter(JSON.parse(doc.get("Print"))),
-  "deathnote": (doc: Document) => parseDeathnote([...Array(9)].map((_, i) => { return doc.get(`KLA_${i}`) })),
-  "taskboard": (doc: Document) => parseTaskboard(JSON.parse(doc.get(`TaskZZ0`)), JSON.parse(doc.get(`TaskZZ1`)), JSON.parse(doc.get(`TaskZZ2`)), JSON.parse(doc.get(`TaskZZ3`)), doc.get(`TaskZZ4`), doc.get(`TaskZZ5`)),
+    }
+  },
+  "shrines": (doc: Cloudsave, charCount: number) => parseShrines(JSON.parse(doc.get("Shrine"))),
+  "storage": (doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], charCount: number) => parseStorage(doc, accountData.get("playerNames"), allItems),
+  "constellations": (doc: Cloudsave, charCount: number) => JSON.parse(doc.get("SSprog")),
+  "quests": (doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], charCount: number) => parseQuests(doc, accountData, allItems),
+  "prayers": (doc: Cloudsave, charCount: number) => parsePrayers(JSON.parse(doc.get("PrayOwned"))),
+  "refinery": (doc: Cloudsave, charCount: number) => parseRefinery(JSON.parse(doc.get("Refinery"))),
+  "saltLick": (doc: Cloudsave, charCount: number) => parseSaltLick(JSON.parse(doc.get("SaltLick"))),
+  "printer": (doc: Cloudsave, charCount: number) => parsePrinter(JSON.parse(doc.get("Print")), charCount),
+  "deathnote": (doc: Cloudsave, charCount: number) => parseDeathnote([...Array(charCount)].map((_, i) => { return doc.get(`KLA_${i}`) })),
+  "taskboard": (doc: Cloudsave, charCount: number) => parseTaskboard(JSON.parse(doc.get(`TaskZZ0`)), JSON.parse(doc.get(`TaskZZ1`)), JSON.parse(doc.get(`TaskZZ2`)), JSON.parse(doc.get(`TaskZZ3`)), doc.get(`TaskZZ4`), doc.get(`TaskZZ5`)),
 }
 
 
 export const AppProvider: React.FC<{}> = (props) => {
   const [state, setState] = useState(new IdleonData(new Map(), undefined));
-  const user = useContext(AuthContext)?.user || undefined;
+  const authContext = useContext(AuthContext);
+  const user = authContext?.user;
   const [db, setDB] = useState<Firestore | undefined>(undefined)
   const [realDB, setRealDB] = useState<Database | undefined>(undefined)
   const [charNames, setCharNames] = useState<Array<string>>([]);
-  
+
   const allItems = initAllItems();
 
   const getAccountData = async () => {
@@ -127,50 +130,80 @@ export const AppProvider: React.FC<{}> = (props) => {
         });
       }
 
-      const unsub = onSnapshot(doc(db, "_data", user.uid),
+      const unsub = onSnapshot(doc(db, "_data", user.uid).withConverter(cloudsaveConverter),
         { includeMetadataChanges: true }, (doc) => {
-          let accountData = new Map();
-          accountData.set("playerNames", charNames);
-          accountData.set("itemsData", allItems);
-          Object.entries(keyFunctionMap).forEach(([key, toExecute]) => {
-            try {
-              if (key == "players" || key == "storage" || key == "quests") {
-                accountData.set(key, toExecute(doc, accountData, allItems));
-              }
-              else if (key == "lootyData" ) {
-                accountData.set(key, toExecute(doc, allItems));
-              }
-              else {
-                accountData.set(key, toExecute(doc));
-              }
-            }
-            catch (e) {
-              console.debug(e);
-              console.log(`Failed parsing ${key}`);
-              accountData.set(key, undefined);
-            }
-          });
-          // CauldronP2W (obviously named)
-          // CYWorldTeleports (if I ever care to show it)
-          // CogO
-          // CYSilverPens
-          // DungUpg
-          // Guild
-          // ForgeLV
-          // ForgeItemOrder
-          // PlayerStuff_2 - for current charge + other things I think
-          // _customBlock_AnvilProduceStats for the rest
-          const newData = new IdleonData(accountData, new Date());
-          sendEvent({
-            action: "handle_snapshot",
-            category: "engagement",
-            label: user.uid,
-            value: 1,
-          });
-          setState(newData);
+          if (doc.exists()) {
+            const cloudsave = doc.data();
+            updateIdleonData(cloudsave, charNames);
+            sendEvent({
+              action: "handle_snapshot",
+              category: "engagement",
+              label: user.uid,
+              value: 1,
+            });
+          }
         });
     }
   }
+
+  const updateIdleonData = (data: Cloudsave, charNames: string[], isDemo: boolean = false) => {
+    let accountData = new Map();
+    accountData.set("playerNames", charNames);
+    accountData.set("itemsData", allItems);
+    Object.entries(keyFunctionMap).forEach(([key, toExecute]) => {
+      try {
+        if (key == "players" || key == "storage" || key == "quests") {
+          accountData.set(key, toExecute(data, accountData, allItems, charNames.length));
+        }
+        else if (key == "lootyData") {
+          accountData.set(key, toExecute(data, allItems, charNames.length));
+        }
+        else {
+          accountData.set(key, toExecute(data, charNames.length));
+        }
+      }
+      catch (e) {
+        console.debug(e);
+        console.log(`Failed parsing ${key}`);
+        accountData.set(key, undefined);
+      }
+    });
+    // CauldronP2W (obviously named)
+    // CYWorldTeleports (if I ever care to show it)
+    // CogO
+    // CYSilverPens
+    // DungUpg
+    // Guild
+    // ForgeLV
+    // ForgeItemOrder
+    // PlayerStuff_2 - for current charge + other things I think
+    // _customBlock_AnvilProduceStats for the rest
+    if (isDemo) {
+      const saveGlobalTime = JSON.parse(data.get("TimeAway"))["GlobalTime"] as number;
+      const newData = new IdleonData(accountData, new Date(saveGlobalTime * 1000));
+      setState(newData);
+    }
+    else {
+      const newData = new IdleonData(accountData, new Date());
+      setState(newData);
+    }
+  }
+
+  const handleStaticData = async () => {
+    const res = await fetch('/api/demo');
+    const jsonData = await res.json();
+    const cloudsave = Cloudsave.fromJSON(jsonData as Map<string, any>)
+    const charNames = cloudsave.fakePlayerNames();
+    updateIdleonData(cloudsave, charNames, true);
+    sendEvent({
+      action: "handle_demo",
+      category: "engagement",
+      label: "demo",
+      value: 1,
+    });
+  }
+
+
 
   useEffect(() => {
     const app = getApp();
@@ -180,10 +213,13 @@ export const AppProvider: React.FC<{}> = (props) => {
     if (!realDB) {
       setRealDB(getDatabase(app));
     }
-    if (user) {
+    if (authContext?.isDemo) {
+      handleStaticData();
+    }
+    else if (user) {
       getAccountData();
     }
-  }, [user, db, charNames]);
+  }, [user, db, charNames, authContext]);
 
   return (
     <AppContext.Provider value={state}>

@@ -1,4 +1,4 @@
-import { DocumentSnapshot } from "@firebase/firestore";
+import { Cloudsave } from "./cloudsave";
 import { Item } from "./items";
 
 export interface NpcInfo {
@@ -159,7 +159,7 @@ export class Quests {
     playerData: Record<number, Record<string, number>> = {}
 }
 
-export default function parseQuests(doc: DocumentSnapshot, accountData: Map<string, any>, allItems: Item[]) {
+export default function parseQuests(doc: Cloudsave, accountData: Map<string, any>, allItems: Item[]) {
     const questsData = new Quests();
 
     Object.entries(questsData.npcData).flatMap(([_,npc]) => Object.entries(npc.data.quests)).forEach(([_, quest]) => {

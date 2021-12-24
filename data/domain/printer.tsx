@@ -9,10 +9,10 @@ export class Printer {
     playerInfo: PlayerInfo[] = [];
 }
 
-export default function parsePrinter(rawData: any[]) {
+export default function parsePrinter(rawData: any[], charCount: number) {
     const toReturn = new Printer();
     if (rawData) {
-        [...Array(9)].forEach((_, playerIndex) => {
+        [...Array(charCount)].forEach((_, playerIndex) => {
             const samples: {item: string, quantity: number}[] = [];
             [...Array(4)].forEach((_, sampleIndex) => {
                 samples.push({ item: rawData[5 + (sampleIndex * 2) + (playerIndex * 14)], quantity: rawData[6 + (sampleIndex * 2) + (playerIndex * 14)]})

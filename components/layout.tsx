@@ -20,7 +20,6 @@ import {
 import { useContext, useState, useEffect } from 'react'
 import { AppContext } from '../data/appContext'
 import { AuthContext } from '../data/firebase/authContext'
-import { User } from '@firebase/auth'
 import { useRouter } from 'next/dist/client/router';
 
 import { FormDown, Menu as MenuIcon } from 'grommet-icons';
@@ -107,7 +106,7 @@ export default function Layout({
     const router = useRouter();
 
     const [showLayer, setShowLayer] = useState(false);
-    const [user, setUser] = useState<User | undefined | null>(null);
+    const [validState, setValidState] = useState<boolean>(false);
     const [lastUpdated, setLastUpdated] = useState<string>("");
     const [value, setValue] = useState('');
     const [loading, setLoading] = useState(true);
@@ -152,7 +151,12 @@ export default function Layout({
     }
 
     useEffect(() => {
-        setUser(authData?.user);
+        if (authData?.user || authData?.isDemo) {
+            setValidState(true);
+        }
+        else {
+            setValidState(false);
+        }
         setLastUpdated(idleonData.getLastUpdated() as string)
         setLoading(authData ? authData.isLoading : true);
     }, [authData, idleonData])
@@ -164,7 +168,7 @@ export default function Layout({
             </Box>);
     }
 
-    if (!user && !loading && router.pathname != "/") {
+    if (!loading && !validState && router.pathname != "/") {
         router.push('/');
     }
 
@@ -181,7 +185,7 @@ export default function Layout({
                             <PointerImage alt="Logo" src="/logo.svg" height="21px" width="171px" />
                         </Box>
                     </Link>
-                    {user && <Box direction="row" gap="xlarge" pad="medium"><Text color="accent-3" size="small">Last Updated: {lastUpdated}</Text><Button onClick={() => onButtonClick(authData?.logoutFunction)}>Logout</Button></Box>}
+                    {validState && <Box direction="row" gap="xlarge" pad="medium"><Text color="accent-3" size="small">Last Updated: {lastUpdated}</Text><Button onClick={() => onButtonClick(authData?.logoutFunction)}>Logout</Button></Box>}
                 {showLayer &&
                     <Layer
                         onEsc={() => setShowLayer(false)}
@@ -208,7 +212,7 @@ export default function Layout({
                 </Box>
             </Header>
             <Main>
-                {user && (size === 'small' ?
+                {validState && (size === 'small' ?
                         <Box justify="end">
                             <Menu
                                 a11yTitle="Navigation Menu"
