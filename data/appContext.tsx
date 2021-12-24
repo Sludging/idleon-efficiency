@@ -146,7 +146,7 @@ export const AppProvider: React.FC<{}> = (props) => {
     }
   }
 
-  const updateIdleonData = (data: Cloudsave, charNames: string[]) => {
+  const updateIdleonData = (data: Cloudsave, charNames: string[], isDemo: boolean = false) => {
     let accountData = new Map();
     accountData.set("playerNames", charNames);
     accountData.set("itemsData", allItems);
@@ -178,9 +178,15 @@ export const AppProvider: React.FC<{}> = (props) => {
     // ForgeItemOrder
     // PlayerStuff_2 - for current charge + other things I think
     // _customBlock_AnvilProduceStats for the rest
-    const saveGlobalTime = JSON.parse(data.get("TimeAway"))["GlobalTime"] as number;
-    const newData = new IdleonData(accountData, new Date(saveGlobalTime * 1000));
-    setState(newData);
+    if (isDemo) {
+      const saveGlobalTime = JSON.parse(data.get("TimeAway"))["GlobalTime"] as number;
+      const newData = new IdleonData(accountData, new Date(saveGlobalTime * 1000));
+      setState(newData);
+    }
+    else {
+      const newData = new IdleonData(accountData, new Date());
+      setState(newData);
+    }
   }
 
   const handleStaticData = async () => {
@@ -188,7 +194,7 @@ export const AppProvider: React.FC<{}> = (props) => {
     const jsonData = await res.json();
     const cloudsave = Cloudsave.fromJSON(jsonData as Map<string, any>)
     const charNames = cloudsave.fakePlayerNames();
-    updateIdleonData(cloudsave, charNames);
+    updateIdleonData(cloudsave, charNames, true);
     sendEvent({
       action: "handle_demo",
       category: "engagement",
