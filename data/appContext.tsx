@@ -28,6 +28,8 @@ import parsePrinter from './domain/printer';
 import parseDeathnote from './domain/deathnote';
 import parseTaskboard from './domain/tasks';
 import { Cloudsave, cloudsaveConverter } from './domain/cloudsave';
+import parseWorship from './domain/worship';
+import parseConstruction from './domain/construction';
 
 
 
@@ -101,6 +103,8 @@ const keyFunctionMap: Record<string, Function> = {
   "printer": (doc: Cloudsave, charCount: number) => parsePrinter(JSON.parse(doc.get("Print")), charCount),
   "deathnote": (doc: Cloudsave, charCount: number) => parseDeathnote([...Array(charCount)].map((_, i) => { return doc.get(`KLA_${i}`) })),
   "taskboard": (doc: Cloudsave, charCount: number) => parseTaskboard(JSON.parse(doc.get(`TaskZZ0`)), JSON.parse(doc.get(`TaskZZ1`)), JSON.parse(doc.get(`TaskZZ2`)), JSON.parse(doc.get(`TaskZZ3`)), doc.get(`TaskZZ4`), doc.get(`TaskZZ5`)),
+  "worship": (doc: Cloudsave, accountData: Map<string, any>, charCount: number) => parseWorship(JSON.parse(doc.get("TotemInfo")), accountData),
+  "construction": (doc: Cloudsave, charCount: number) => parseConstruction(JSON.parse(doc.get("Tower"))),
 }
 
 
@@ -154,6 +158,9 @@ export const AppProvider: React.FC<{}> = (props) => {
       try {
         if (key == "players" || key == "storage" || key == "quests") {
           accountData.set(key, toExecute(data, accountData, allItems, charNames.length));
+        }
+        else if (key == "worship") {
+          accountData.set(key, toExecute(data, accountData, charNames.length));
         }
         else if (key == "lootyData") {
           accountData.set(key, toExecute(data, allItems, charNames.length));

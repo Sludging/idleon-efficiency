@@ -39,6 +39,7 @@ import { Item, ItemStat } from '../data/domain/items';
 import { Storage } from '../data/domain/storage';
 import { Prayer } from '../data/domain/prayers';
 import { TimeDown, TimeUp } from '../components/base/TimeDisplay';
+import { Worship } from '../data/domain/worship';
 
 interface SkillProps {
     skillsMap: Map<SkillsIndex, number>
@@ -102,49 +103,9 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
     const idleonData = useContext(AppContext);
     const size = useContext(ResponsiveContext)
 
+    const worship = idleonData.getData().get("worship") as Worship;
+
     const playerCoins = useMemo(() => getCoinsArray(player.money), [player]);
-    const maxCharge = useMemo(() => {
-        const theData = idleonData.getData();
-        const alchemy = theData.get("alchemy") as Alchemy;
-        const stamps = theData.get("stamps") as Stamp[][];
-
-        const worshipLevel = player.skills.get(SkillsIndex.Worship);
-        const praydayStamp = stamps[StampTab.Skill][StampConsts.PraydayIndex];
-        let gospelLeaderBonus = alchemy.cauldrons[CauldronIndex.HighIQ].bubbles[AlchemyConst.GospelLeader].getBonus();
-        let popeBonus = activeBubbles.find(x => x.name == "Call Me Pope")?.getBonus() ?? 0;
-
-        if (player.getBaseClass() == ClassIndex.Mage) {
-            const classMultiBonus = alchemy.cauldrons[CauldronIndex.HighIQ].bubbles[1].getBonus();
-            gospelLeaderBonus *= classMultiBonus;
-        }
-        const maxChargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "F10")?.getBonus() ?? 0;
-        const talentChargeBonus = player.activeBuffs.find(x => x.skillIndex == TalentConst.ChargeSiphonIndex)?.getBonus(false, true) ?? 0;
-        if (!player.gear.tools[5]) {
-            return 0;
-        }
-        return player.worship.getMaxCharge(player.gear.tools[5].internalName, maxChargeCardBonus, talentChargeBonus, praydayStamp.getBonus(worshipLevel), gospelLeaderBonus, worshipLevel, popeBonus);
-    }, [player, activeBubbles, idleonData]);
-
-    const chargeRate = useMemo(() => {
-        const theData = idleonData.getData();
-        const stamps = theData.get("stamps") as Stamp[][];
-
-        let popeBonus = activeBubbles.find(x => x.name == "Call Me Pope")?.getBonus() ?? 0;
-        const flowinStamp = stamps[StampTab.Skill][StampConsts.FlowinIndex];
-        const worshipLevel = player.skills.get(SkillsIndex.Worship);
-        const chargeSpeedTalent = player.talents.find(x => x.skillIndex == TalentConst.NearbyOutletIndex);
-        const talentBonus = chargeSpeedTalent?.getBonus() ?? 0;
-        const chargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "F11")?.getBonus() ?? 0;
-        if (!player.gear.tools[5]) {
-            return 0;
-        }
-        return player.worship.getChargeRate(player.gear.tools[5].internalName, worshipLevel, popeBonus, chargeCardBonus, flowinStamp.getBonus(worshipLevel), talentBonus);
-    }, [player, activeBubbles, idleonData]);
-
-    const estimatedCharge = useMemo(() => {
-        return Math.round(player.worship.getEstimatedCharge(chargeRate, maxCharge, player.afkFor));
-    }, [player, maxCharge, chargeRate]);
-
     const activeShrines = useMemo(() => {
         const theData = idleonData.getData();
         const shrines = theData.get("shrines") as Shrine[];
@@ -159,6 +120,18 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
         }
         return [];
     }, [idleonData, player]);
+
+    const playerWorshipInfo = useMemo(() => {
+        const chargeRate = worship?.playerData[player.playerID]?.chargeRate ?? 0;
+        const maxCharge = worship?.playerData[player.playerID]?.maxCharge ?? 0;
+        const estimatedCharge = worship?.playerData[player.playerID]?.estimatedCharge ?? 0;
+
+        return {
+            chargeRate: chargeRate,
+            maxCharge: maxCharge,
+            estimatedCharge: estimatedCharge,
+        }
+    }, [worship, player])
 
     const crystalSpawnChance = useMemo(() => {
         const theData = idleonData.getData();
@@ -203,7 +176,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     <Text size="small">WIS = {player.stats.wisdom}</Text>
                     <Text size="small">LUK = {player.stats.luck}</Text>
                     <Text size="small">Crystal Spawn Chance = 1 in {Math.floor(1 / crystalSpawnChance)}</Text>
-                    <Text size="small">Charge Rate = {Math.round(chargeRate * 24)}% / day</Text>
+                    <Text size="small">Charge Rate = {Math.round(playerWorshipInfo.chargeRate * 24)}% / day</Text>
                     <Text size="small">Current Charge = </Text>
                     <Box direction="row" gap="small">
                         <Stack>
@@ -214,17 +187,17 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                                 color="brand"
                                 values={[
                                     {
-                                        value: estimatedCharge,
+                                        value: playerWorshipInfo.estimatedCharge,
                                         label: 'current',
                                         color: 'brand'
                                     }
                                 ]}
-                                max={maxCharge} />
+                                max={playerWorshipInfo.maxCharge} />
                             <Box align="center" pad="xxsmall">
-                                <Text size="small">{estimatedCharge.toString()} ({(estimatedCharge / maxCharge * 100).toPrecision(3)}%)</Text>
+                                <Text size="small">{playerWorshipInfo.estimatedCharge.toString()} ({(playerWorshipInfo.estimatedCharge / playerWorshipInfo.maxCharge * 100).toPrecision(3)}%)</Text>
                             </Box>
                         </Stack>
-                        <Text>{maxCharge}</Text>
+                        <Text>{playerWorshipInfo.maxCharge}</Text>
                     </Box>
                     <Box direction="row" gap="small">
                         <Text size="small">Money =</Text>
