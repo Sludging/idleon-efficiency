@@ -56,7 +56,7 @@ function ChargeDisplay() {
         }
 
         return undefined;
-    }, [worship])
+    }, [worship, bestWizard])
 
     if (!playerData || !worship || worship.playerData.filter(player => player.currentCharge > 0).length == 0) {
         return (
