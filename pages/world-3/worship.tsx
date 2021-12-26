@@ -70,7 +70,7 @@ function ChargeDisplay() {
         <Box gap="medium" align="center">
             {totalChargeInfo && bestWizard &&
             <Box>
-                <Text size="xsmall">* This is ignoring the wizard's charge, since you can just .. use it.</Text>
+                <Text size="xsmall">* This is ignoring the wizard&apos;s charge, since you can just .. use it.</Text>
                 <ShadowBox background="dark-1" pad="medium" gap="large" direction="row" wrap>
                     <ComponentAndLabel
                         label="Best Wizard"
