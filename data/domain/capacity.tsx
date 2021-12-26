@@ -100,6 +100,47 @@
 
 import { SkillsIndex } from "./player";
 
+
+export const playerInventoryBagMapping = [
+    ["0", "1", "InvBag1"],
+    ["1", "1", "InvBag2"],
+    ["2", "1", "InvBag3"],
+    ["3", "1", "InvBag4"],
+    ["4", "1", "InvBag5"],
+    ["5", "1", "InvBag6"],
+    ["6", "1", "InvBag7"],
+    ["7", "1", "InvBag8"],
+    ["8", "0", "InvBag9"],
+    ["9", "0", "InvBag10"],
+    ["10", "0", "InvBag11"],
+    ["11", "0", "InvBag12"],
+    ["12", "0", "InvBag13"],
+    ["13", "0", "InvBag14"],
+    ["14", "0", "InvBag15"],
+    ["15", "0", "InvBag16"],
+    ["16", "0", "InvBag17"],
+    ["17", "0", "InvBag18"],
+    ["18", "0", "InvBag19"],
+    ["19", "0", "InvBag20"],
+    ["20", "1", "InvBag21"],
+    ["21", "1", "InvBag22"],
+    ["22", "1", "InvBag23"],
+    ["23", "1", "InvBag24"],
+    ["24", "1", "InvBag25"],
+    ["25", "1", "InvBag26"],
+    ["100", "1", "InvBag100"],
+    ["101", "1", "InvBag101"],
+    ["110", "1", "InvBag110"],
+    ["102", "1", "InvBag102"],
+    ["103", "1", "InvBag103"],
+    ["109", "1", "InvBag109"],
+    ["104", "1", "InvBag104"],
+    ["105", "1", "InvBag105"],
+    ["106", "1", "InvBag106"],
+    ["107", "1", "InvBag107"],
+    ["108", "0", "InvBag108"],
+];
+
 export const CapacityConst = {
     TelekineticStorageSkillIndex: 634,
     ExtraBagsSkillIndex: 78,

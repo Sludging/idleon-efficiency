@@ -75,6 +75,7 @@ interface PlayerWorshipData {
     estimatedCharge: number
     chargeRate: number
     maxCharge: number
+    playerID: number
 }
 
 export class Worship {
@@ -136,6 +137,7 @@ export default function parseWorship(totemInfo: number[][], accountData: Map<str
             chargeRate: chargeRate,
             currentCharge: round(player.currentCharge),
             estimatedCharge: round(Worship.getEstimatedCharge(player.currentCharge, chargeRate, maxCharge, player.afkFor)),
+            playerID: player.playerID
         })
     });
 
