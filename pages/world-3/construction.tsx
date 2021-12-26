@@ -82,8 +82,7 @@ function RefineryDisplay() {
                     // Figure out the squire with the longest CD, simplify the math.
                     const maxSquireCD = Math.max(...squireInfo.map(squire => [...squire.cooldown.entries()].filter(([talent, cooldown]) => talent.skillIndex == 130).pop()?.[1] ?? 0));
                     // The squire skill can only be used after the cd, so ignore that portion.
-                    const timeSquireCanImpact = timeToNextRank - maxSquireCD;
-
+                    let timeSquireCanImpact = timeToNextRank - maxSquireCD;
 
                     let timeSaved = 0;
                     // Do the math for each squire.
@@ -95,10 +94,11 @@ function RefineryDisplay() {
 
                         // calculate how much time we can save using squire skill on CD.
                         const timePerSquireSkilluse = (squire.talents.find(talent => talent.skillIndex == 130)?.getBonus(false, false, true) ?? 0) * cycleInfo[Math.floor(index / 3)].time
-
-                        // Calculate how much time we save every time we use the squire skill.
-                        timeSaved += timeSquireCanImpact / talentCD * timePerSquireSkilluse;
-
+                        while (timeSquireCanImpact > talentCD) {
+                            // Calculate how much time we save every time we use the squire skill.
+                            timeSaved += timePerSquireSkilluse;
+                            timeSquireCanImpact -= talentCD + timePerSquireSkilluse;
+                        }
                     })
 
                     // This can happen when the CD is longer than the actual time to rank up, so ignore it.
