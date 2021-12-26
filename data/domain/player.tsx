@@ -205,6 +205,7 @@ export class Player {
     activeBuffs: Talent[] = [];
     activePrayers: number[] = [];
     cooldown: Map<Talent, number> = new Map();
+    invBagsUsed: Record<string, number> = {};
 
     constructor(playerID: number, playerName: string) {
         this.playerID = playerID;
@@ -334,6 +335,10 @@ const keyFunctionMap: Record<string, Function> = {
                 player.cooldown.set(talent, cooldown);
             }
         });
+    },
+    "invBagsUsed": (doc: Cloudsave, player: Player) => {
+        const bagsUsed = JSON.parse(doc.get(`InvBagsUsed_${player.playerID}`)) as Record<string, number>;
+        player.invBagsUsed = bagsUsed;
     },
 };
 

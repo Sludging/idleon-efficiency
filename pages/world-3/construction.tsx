@@ -707,13 +707,13 @@ function BuildingsDisplay() {
                                     />
                                     { building.nextLevelUnlocked || building.level == building.maxLvl ? 
                                         <TextAndLabel 
-                                        label="XP"
+                                        label="Build Req"
                                         textSize="small"
                                         text={"Maxed"}
                                         margin={{right: 'large', bottom: 'small'}}
                                     /> :
                                     <TextAndLabel 
-                                        label="XP"
+                                        label="Build Req"
                                         textSize="small"
                                         text={`${nFormatter(building.currentXP, 2)}/${nFormatter(building.getBuildCost(), 2)}`}
                                         margin={{right: 'large', bottom: 'small'}}

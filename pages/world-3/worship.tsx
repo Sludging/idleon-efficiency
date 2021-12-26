@@ -43,8 +43,8 @@ function ChargeDisplay() {
 
     const totalChargeInfo = useMemo(() => {
         if (worship && bestWizard) {
-            const totalCurrentCharge = worship.playerData.reduce((sum, player) => sum += player.estimatedCharge, 0) ?? 0;
-            const totalChargeRate = worship.playerData.reduce((sum, player) => sum += player.chargeRate, 0) ?? 0;
+            const totalCurrentCharge = worship.playerData.filter(player => player.playerID != bestWizard.playerID).reduce((sum, player) => sum += player.estimatedCharge, 0) ?? 0;
+            const totalChargeRate = worship.playerData.filter(player => player.playerID != bestWizard.playerID).reduce((sum, player) => sum += player.chargeRate, 0) ?? 0;
             const maxCharge = worship.playerData[bestWizard.playerID].maxCharge + (bestWizard.talents.find(talent => talent.skillIndex == 475)?.getBonus(false, true, true) ?? 0);
             const overFlowIn = (maxCharge - totalCurrentCharge) / (totalChargeRate / 60 / 60);
             return {
@@ -68,7 +68,9 @@ function ChargeDisplay() {
 
     return (
         <Box gap="medium" align="center">
-                        {totalChargeInfo && bestWizard &&
+            {totalChargeInfo && bestWizard &&
+            <Box>
+                <Text size="xsmall">* This is ignoring the wizard's charge, since you can just .. use it.</Text>
                 <ShadowBox background="dark-1" pad="medium" gap="large" direction="row" wrap>
                     <ComponentAndLabel
                         label="Best Wizard"
@@ -113,10 +115,11 @@ function ChargeDisplay() {
                         component={
                             totalChargeInfo.overFlowTime > 0 ?
                                 <TimeDown size={TimeDisplaySize.Small} lastUpdated={idleonData.getLastUpdated(true) as Date} addSeconds={totalChargeInfo.overFlowTime} />
-                                : <Text>Overflowing, you are losing charge!</Text>
+                                : <Text>Overflowing, you are wasting charge!</Text>
                         }
                     />
                 </ShadowBox>
+            </Box>
             }
             <Box direction="row" wrap justify="center">
                 {playerData && playerData.map((player, index) => {
