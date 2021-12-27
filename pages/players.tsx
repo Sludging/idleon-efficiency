@@ -16,11 +16,10 @@ import {
 import { useState, useEffect, useContext, useMemo } from 'react';
 import { AppContext } from '../data/appContext'
 import { GemStore } from '../data/domain/gemPurchases';
-import { Guild } from '../data/domain/guild';
 
 import { Player, SkillsIndex } from '../data/domain/player';
 import { ClassIndex, ClassTalentMap, GetTalentArray, TalentConst } from '../data/domain/talents';
-import { CapacityConst } from '../data/domain/capacity';
+import { CapacityConst, playerInventoryBagMapping } from '../data/domain/capacity';
 import { Alchemy, AlchemyConst, CauldronIndex, Bubble } from "../data/domain/alchemy";
 import { Stamp, StampTab, StampConsts } from '../data/domain/stamps';
 import { Shrine, ShrineConstants } from '../data/domain/shrines';
@@ -35,10 +34,45 @@ import TipDisplay, { TipDirection } from '../components/base/TipDisplay';
 import { Next } from 'grommet-icons';
 import { NextSeo } from 'next-seo';
 import { MouseEventHandler } from 'hoist-non-react-statics/node_modules/@types/react';
-import { Item, ItemStat } from '../data/domain/items';
+import { Item, ItemStat, DropInfo, ItemSources } from '../data/domain/items';
 import { Storage } from '../data/domain/storage';
 import { Prayer } from '../data/domain/prayers';
 import { TimeDown, TimeUp } from '../components/base/TimeDisplay';
+import { Worship } from '../data/domain/worship';
+
+
+function ItemSourcesDisplay({ sources, dropInfo }: { sources: ItemSources, dropInfo: DropInfo }) {
+
+    const possibleSources = useMemo(() => {
+        if (!sources) {
+            return []
+        }
+
+        const fromSources = sources.sources.map(x => x.txtName);
+        const fromRecipe = sources.recipeFrom.map(x => x.txtName);
+        const fromQuests = sources.questAss.map(x => x.txtName);
+        return Array.from(new Set([...fromSources, ...fromRecipe, ...fromQuests]));
+    }, [sources]);
+
+
+    return (
+        <Box>
+            <Text size="medium">Obtain From:</Text>
+            {
+                possibleSources.length > 0 ?
+                    <Box>
+
+                        {
+                            possibleSources.map((source, index) => (
+                                <Text size="small" key={index}>{source}</Text>
+                            ))
+                        }
+                    </Box> :
+                    <>I don&apos;t know yet</>
+            }
+        </Box>
+    )
+}
 
 interface SkillProps {
     skillsMap: Map<SkillsIndex, number>
@@ -102,49 +136,8 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
     const idleonData = useContext(AppContext);
     const size = useContext(ResponsiveContext)
 
+    const worship = idleonData.getData().get("worship") as Worship;
     const playerCoins = useMemo(() => getCoinsArray(player.money), [player]);
-    const maxCharge = useMemo(() => {
-        const theData = idleonData.getData();
-        const alchemy = theData.get("alchemy") as Alchemy;
-        const stamps = theData.get("stamps") as Stamp[][];
-
-        const worshipLevel = player.skills.get(SkillsIndex.Worship);
-        const praydayStamp = stamps[StampTab.Skill][StampConsts.PraydayIndex];
-        let gospelLeaderBonus = alchemy.cauldrons[CauldronIndex.HighIQ].bubbles[AlchemyConst.GospelLeader].getBonus();
-        let popeBonus = activeBubbles.find(x => x.name == "Call Me Pope")?.getBonus() ?? 0;
-
-        if (player.getBaseClass() == ClassIndex.Mage) {
-            const classMultiBonus = alchemy.cauldrons[CauldronIndex.HighIQ].bubbles[1].getBonus();
-            gospelLeaderBonus *= classMultiBonus;
-        }
-        const maxChargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "F10")?.getBonus() ?? 0;
-        const talentChargeBonus = player.activeBuffs.find(x => x.skillIndex == TalentConst.ChargeSiphonIndex)?.getBonus(false, true) ?? 0;
-        if (!player.gear.tools[5]) {
-            return 0;
-        }
-        return player.worship.getMaxCharge(player.gear.tools[5].internalName, maxChargeCardBonus, talentChargeBonus, praydayStamp.getBonus(worshipLevel), gospelLeaderBonus, worshipLevel, popeBonus);
-    }, [player, activeBubbles, idleonData]);
-
-    const chargeRate = useMemo(() => {
-        const theData = idleonData.getData();
-        const stamps = theData.get("stamps") as Stamp[][];
-
-        let popeBonus = activeBubbles.find(x => x.name == "Call Me Pope")?.getBonus() ?? 0;
-        const flowinStamp = stamps[StampTab.Skill][StampConsts.FlowinIndex];
-        const worshipLevel = player.skills.get(SkillsIndex.Worship);
-        const chargeSpeedTalent = player.talents.find(x => x.skillIndex == TalentConst.NearbyOutletIndex);
-        const talentBonus = chargeSpeedTalent?.getBonus() ?? 0;
-        const chargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "F11")?.getBonus() ?? 0;
-        if (!player.gear.tools[5]) {
-            return 0;
-        }
-        return player.worship.getChargeRate(player.gear.tools[5].internalName, worshipLevel, popeBonus, chargeCardBonus, flowinStamp.getBonus(worshipLevel), talentBonus);
-    }, [player, activeBubbles, idleonData]);
-
-    const estimatedCharge = useMemo(() => {
-        return Math.round(player.worship.getEstimatedCharge(chargeRate, maxCharge, player.afkFor));
-    }, [player, maxCharge, chargeRate]);
-
     const activeShrines = useMemo(() => {
         const theData = idleonData.getData();
         const shrines = theData.get("shrines") as Shrine[];
@@ -160,6 +153,18 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
         return [];
     }, [idleonData, player]);
 
+    const playerWorshipInfo = useMemo(() => {
+        const chargeRate = worship?.playerData[player.playerID]?.chargeRate ?? 0;
+        const maxCharge = worship?.playerData[player.playerID]?.maxCharge ?? 0;
+        const estimatedCharge = worship?.playerData[player.playerID]?.estimatedCharge ?? 0;
+
+        return {
+            chargeRate: chargeRate,
+            maxCharge: maxCharge,
+            estimatedCharge: estimatedCharge,
+        }
+    }, [worship, player])
+
     const crystalSpawnChance = useMemo(() => {
         const theData = idleonData.getData();
         const stamps = theData.get("stamps") as Stamp[][];
@@ -168,7 +173,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
         if (stamps) {
             crystalSpawnStamp = stamps[StampTab.Misc][StampConsts.CrystallinIndex].getBonus();
         }
-        
+
         const cardBonus = player.cardInfo?.equippedCards.find((card) => card.name == "poopSmall")?.getBonus() ?? 0;
         const crystalSpawnTalentBonus = player.talents.find(x => x.skillIndex == TalentConst.CrystalSpawnIndex)?.getBonus() ?? 0;
         const crystalForDaysTalentBonus = player.talents.find(x => x.skillIndex == TalentConst.CrystalForDaysIndex)?.getBonus() ?? 0;
@@ -178,8 +183,8 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
             const nonPredatoryBox = player.postOffice[PostOfficeConst.NonPredatoryBoxIndex];
             postOfficeBonus = nonPredatoryBox.level > 0 ? nonPredatoryBox.bonuses[2].getBonus(nonPredatoryBox.level, 2) : 0;
         }
-        return 0.0005 * (1 + crystalSpawnTalentBonus / 100) * (1 + postOfficeBonus / 100) * (1 + crystalForDaysTalentBonus / 100) 
-        * (1 + crystalSpawnStamp / 100) * (1 + cardBonus / 100); 
+        return 0.0005 * (1 + crystalSpawnTalentBonus / 100) * (1 + postOfficeBonus / 100) * (1 + crystalForDaysTalentBonus / 100)
+            * (1 + crystalSpawnStamp / 100) * (1 + cardBonus / 100);
     }, [idleonData, player])
 
     return (
@@ -196,14 +201,14 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     }
                     <Box direction="row" gap="xsmall">
                         <Text size="small">Away Since =</Text>
-                        {player.afkFor < 100 ? "Active" : <TimeUp addSeconds={player.afkFor} lastUpdated={idleonData.getLastUpdated(true) as Date} /> }
+                        {player.afkFor < 100 ? "Active" : <TimeUp addSeconds={player.afkFor} lastUpdated={idleonData.getLastUpdated(true) as Date} />}
                     </Box>
                     <Text size="small">STR = {player.stats.strength}</Text>
                     <Text size="small">AGI = {player.stats.agility}</Text>
                     <Text size="small">WIS = {player.stats.wisdom}</Text>
                     <Text size="small">LUK = {player.stats.luck}</Text>
                     <Text size="small">Crystal Spawn Chance = 1 in {Math.floor(1 / crystalSpawnChance)}</Text>
-                    <Text size="small">Charge Rate = {Math.round(chargeRate * 24)}% / day</Text>
+                    <Text size="small">Charge Rate = {Math.round(playerWorshipInfo.chargeRate * 24)}% / day</Text>
                     <Text size="small">Current Charge = </Text>
                     <Box direction="row" gap="small">
                         <Stack>
@@ -214,17 +219,17 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                                 color="brand"
                                 values={[
                                     {
-                                        value: estimatedCharge,
+                                        value: playerWorshipInfo.estimatedCharge,
                                         label: 'current',
                                         color: 'brand'
                                     }
                                 ]}
-                                max={maxCharge} />
+                                max={playerWorshipInfo.maxCharge} />
                             <Box align="center" pad="xxsmall">
-                                <Text size="small">{estimatedCharge.toString()} ({(estimatedCharge / maxCharge * 100).toPrecision(3)}%)</Text>
+                                <Text size="small">{playerWorshipInfo.estimatedCharge.toString()} ({(playerWorshipInfo.estimatedCharge / playerWorshipInfo.maxCharge * 100).toPrecision(3)}%)</Text>
                             </Box>
                         </Stack>
-                        <Text>{maxCharge}</Text>
+                        <Text>{playerWorshipInfo.maxCharge}</Text>
                     </Box>
                     <Box direction="row" gap="small">
                         <Text size="small">Money =</Text>
@@ -317,7 +322,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                                     activeShrines.map((shrine, index) => {
                                         const cardBonus = player.cardInfo?.equippedCards.find(x => x.id == "Z9")?.getBonus() ?? 0;
                                         return (
-                                            <Box key={index} margin={{right: 'small', bottom: 'small'}}>
+                                            <Box key={index} margin={{ right: 'small', bottom: 'small' }}>
                                                 <TipDisplay
                                                     heading={`${shrine.name} (${shrine.level})`}
                                                     body={shrine.getBonusText(player.currentMapId, cardBonus)}
@@ -375,18 +380,18 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
 }
 
 function ItemDisplay({ item, size }: { item: Item | undefined, size?: string }) {
-    
+
     const statsDisplay = (stats: ItemStat[], description: string) => {
         if (description) {
             return <Text>{description}</Text>
         }
 
-        return stats.filter((stat) => stat.shouldDisplay()).map((x,index) => <Text key={index}>{x.getDisplay()}</Text>);
+        return stats.filter((stat) => stat.shouldDisplay()).map((x, index) => <Text key={index}>{x.getDisplay()}</Text>);
     }
 
 
     if (!item) {
-        return (<Box height="50px" width="50px"/>)
+        return (<Box height="50px" width="50px" />)
     }
 
     return (
@@ -398,20 +403,20 @@ function ItemDisplay({ item, size }: { item: Item | undefined, size?: string }) 
             maxWidth="large"
         >
             <Box>
-            { item.count > 0 ? 
+                {item.count > 0 ?
 
-                <Box direction="row" align="center">
-                    <Box width={{ max: size ? size : '50px', min: size ? size : '50px' }} align="center">
+                    <Box direction="row" align="center">
+                        <Box width={{ max: size ? size : '50px', min: size ? size : '50px' }} align="center">
+                            <Box className={item.getClass()} />
+                        </Box>
+                        <Box>
+                            <Text>{item.count}</Text>
+                        </Box>
+                    </Box>
+                    : <Box width={{ max: '50px', min: '50px' }} align="center">
                         <Box className={item.getClass()} />
                     </Box>
-                    <Box>   
-                        <Text>{item.count}</Text>
-                    </Box>
-                </Box>
-            : <Box width={{ max: '50px', min: '50px' }} align="center">
-                <Box className={item.getClass()} />
-            </Box>
-            }
+                }
             </Box>
         </TipDisplay>
     )
@@ -423,52 +428,52 @@ function EquipmentDisplay({ player }: { player: Player }) {
         <Box pad="medium">
             <Box direction="row" gap="medium" wrap>
                 <Box gap="small">
-                <Text size='medium'>Equipment</Text>
-                <Grid columns={{count: 2, size:"50px"}} key={`player_${player.playerID}_equip`}>
-                    {
-                        player.gear.equipment.slice(0,8).map((equip, index) => (
-                            <Box pad="xsmall" border={{color: 'grey-1' }} key={index}>
-                                <ItemDisplay item={equip} />
-                            </Box>
-                        ))
-                    }
-                </Grid>
+                    <Text size='medium'>Equipment</Text>
+                    <Grid columns={{ count: 2, size: "50px" }} key={`player_${player.playerID}_equip`}>
+                        {
+                            player.gear.equipment.slice(0, 8).map((equip, index) => (
+                                <Box pad="xsmall" border={{ color: 'grey-1' }} key={index}>
+                                    <ItemDisplay item={equip} />
+                                </Box>
+                            ))
+                        }
+                    </Grid>
                 </Box>
                 <Box gap="small">
-                <Text size='medium'>Specials</Text>
-                <Grid columns={{count: 2, size:"50px"}} key={`player_${player.playerID}_special`}>
-                    {
-                        player.gear.equipment.slice(8,16).map((equip, index) => (
-                            <Box pad="xsmall" border={{color: 'grey-1' }} key={index}>
-                                <ItemDisplay item={equip} />
-                            </Box>
-                        ))
-                    }
-                </Grid>
+                    <Text size='medium'>Specials</Text>
+                    <Grid columns={{ count: 2, size: "50px" }} key={`player_${player.playerID}_special`}>
+                        {
+                            player.gear.equipment.slice(8, 16).map((equip, index) => (
+                                <Box pad="xsmall" border={{ color: 'grey-1' }} key={index}>
+                                    <ItemDisplay item={equip} />
+                                </Box>
+                            ))
+                        }
+                    </Grid>
                 </Box>
                 <Box gap="small">
-                <Text size='medium'>Tools</Text>
-                <Grid columns={{count: 2, size:"50px"}} key={`player_${player.playerID}_tools`}>
-                    {
-                        player.gear.tools.slice(0,8).map((equip, index) => (
-                            <Box pad="xsmall" border={{color: 'grey-1' }} key={index}>
-                                <ItemDisplay item={equip} />
-                            </Box>
-                        ))
-                    }
-                </Grid>
+                    <Text size='medium'>Tools</Text>
+                    <Grid columns={{ count: 2, size: "50px" }} key={`player_${player.playerID}_tools`}>
+                        {
+                            player.gear.tools.slice(0, 8).map((equip, index) => (
+                                <Box pad="xsmall" border={{ color: 'grey-1' }} key={index}>
+                                    <ItemDisplay item={equip} />
+                                </Box>
+                            ))
+                        }
+                    </Grid>
                 </Box>
                 <Box gap="small">
-                <Text size='medium'>Food</Text>
-                <Grid columns={{count: 2, size:"50px"}} key={`player_${player.playerID}_food`}>
-                    {
-                        player.gear.food.slice(0,8).map((equip, index) => (
-                            <Box pad="xsmall" border={{color: 'grey-1' }} key={index}>
-                                <ItemDisplay item={equip} />
-                            </Box>
-                        ))
-                    }
-                </Grid>
+                    <Text size='medium'>Food</Text>
+                    <Grid columns={{ count: 2, size: "50px" }} key={`player_${player.playerID}_food`}>
+                        {
+                            player.gear.food.slice(0, 8).map((equip, index) => (
+                                <Box pad="xsmall" border={{ color: 'grey-1' }} key={index}>
+                                    <ItemDisplay item={equip} />
+                                </Box>
+                            ))
+                        }
+                    </Grid>
                 </Box>
             </Box>
         </Box>
@@ -560,10 +565,10 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
 
         const capProps = {
             allCapBonuses: allCapBonus,
-            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.MaterialCapStamp)?.getBonus(player.skills.get(SkillsIndex.Smithing)) ?? 0, 
-            gemsCapacityBought: gemCapacityBonus, 
-            stampAllCapBonus: allCapStampBonus, 
-            extraBagsLevel: extraBagsTalentBonus, 
+            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.MaterialCapStamp)?.getBonus(player.skills.get(SkillsIndex.Smithing)) ?? 0,
+            gemsCapacityBought: gemCapacityBonus,
+            stampAllCapBonus: allCapStampBonus,
+            extraBagsLevel: extraBagsTalentBonus,
             starSignExtraCap: starSignExtraCap
         }
 
@@ -626,7 +631,7 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
                                 </Box>
                                 <Box direction="row" gap="xsmall">
                                     <Text size="small">Time till cap =</Text>
-                                    <TimeDown addSeconds={timeTillCap} lastUpdated={idleonData.getLastUpdated(true) as Date}/>
+                                    <TimeDown addSeconds={timeTillCap} lastUpdated={idleonData.getLastUpdated(true) as Date} />
                                 </Box>
                                 <Text size="small">Production Per Hour (per hammer) = {Math.round(anvilSpeed / anvilItem.time)} </Text>
                                 <Text size="small">Total Produced of this item = {nFormatter(Math.round(anvilItem.totalProduced), 2)}</Text>
@@ -697,66 +702,66 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
         const toReturn = new Map();
         toReturn.set("Mining", {
             allCapBonuses: allCapBonus,
-            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.MiningCapStamp)?.getBonus(player.skills.get(SkillsIndex.Mining)) ?? 0, 
-            gemsCapacityBought: gemCapacityBonus, 
-            stampAllCapBonus: allCapStampBonus, 
-            extraBagsLevel: extraBagsTalentBonus, 
+            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.MiningCapStamp)?.getBonus(player.skills.get(SkillsIndex.Mining)) ?? 0,
+            gemsCapacityBought: gemCapacityBonus,
+            stampAllCapBonus: allCapStampBonus,
+            extraBagsLevel: extraBagsTalentBonus,
             starSignExtraCap: starSignExtraCap
         });
         toReturn.set("Chopping", {
             allCapBonuses: allCapBonus,
-            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.ChoppingCapStamp)?.getBonus(player.skills.get(SkillsIndex.Chopping)) ?? 0, 
-            gemsCapacityBought: gemCapacityBonus, 
-            stampAllCapBonus: allCapStampBonus, 
-            extraBagsLevel: extraBagsTalentBonus, 
+            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.ChoppingCapStamp)?.getBonus(player.skills.get(SkillsIndex.Chopping)) ?? 0,
+            gemsCapacityBought: gemCapacityBonus,
+            stampAllCapBonus: allCapStampBonus,
+            extraBagsLevel: extraBagsTalentBonus,
             starSignExtraCap: starSignExtraCap
         });
         toReturn.set("Souls", {
             allCapBonuses: allCapBonus,
-            stampMatCapBonus: 0, 
-            gemsCapacityBought: gemCapacityBonus, 
-            stampAllCapBonus: allCapStampBonus, 
-            extraBagsLevel: extraBagsTalentBonus, 
+            stampMatCapBonus: 0,
+            gemsCapacityBought: gemCapacityBonus,
+            stampAllCapBonus: allCapStampBonus,
+            extraBagsLevel: extraBagsTalentBonus,
             starSignExtraCap: starSignExtraCap
         });
         toReturn.set("Fishing", {
             allCapBonuses: allCapBonus,
-            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.FishCapStamp)?.getBonus(player.skills.get(SkillsIndex.Fishing)) ?? 0, 
-            gemsCapacityBought: gemCapacityBonus, 
-            stampAllCapBonus: allCapStampBonus, 
-            extraBagsLevel: extraBagsTalentBonus, 
+            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.FishCapStamp)?.getBonus(player.skills.get(SkillsIndex.Fishing)) ?? 0,
+            gemsCapacityBought: gemCapacityBonus,
+            stampAllCapBonus: allCapStampBonus,
+            extraBagsLevel: extraBagsTalentBonus,
             starSignExtraCap: starSignExtraCap
         });
         toReturn.set("Foods", {
             allCapBonuses: allCapBonus,
-            stampMatCapBonus: 0, 
-            gemsCapacityBought: gemCapacityBonus, 
-            stampAllCapBonus: allCapStampBonus, 
-            extraBagsLevel: extraBagsTalentBonus, 
+            stampMatCapBonus: 0,
+            gemsCapacityBought: gemCapacityBonus,
+            stampAllCapBonus: allCapStampBonus,
+            extraBagsLevel: extraBagsTalentBonus,
             starSignExtraCap: starSignExtraCap
         });
         toReturn.set("bCraft", {
             allCapBonuses: allCapBonus,
-            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.MaterialCapStamp)?.getBonus(player.skills.get(SkillsIndex.Smithing)) ?? 0, 
-            gemsCapacityBought: gemCapacityBonus, 
-            stampAllCapBonus: allCapStampBonus, 
-            extraBagsLevel: extraBagsTalentBonus, 
+            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.MaterialCapStamp)?.getBonus(player.skills.get(SkillsIndex.Smithing)) ?? 0,
+            gemsCapacityBought: gemCapacityBonus,
+            stampAllCapBonus: allCapStampBonus,
+            extraBagsLevel: extraBagsTalentBonus,
             starSignExtraCap: starSignExtraCap
         });
         toReturn.set("Bugs", {
             allCapBonuses: allCapBonus,
-            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.BugCapStamp)?.getBonus(player.skills.get(SkillsIndex.Catching)) ?? 0, 
-            gemsCapacityBought: gemCapacityBonus, 
-            stampAllCapBonus: allCapStampBonus, 
-            extraBagsLevel: extraBagsTalentBonus, 
+            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.BugCapStamp)?.getBonus(player.skills.get(SkillsIndex.Catching)) ?? 0,
+            gemsCapacityBought: gemCapacityBonus,
+            stampAllCapBonus: allCapStampBonus,
+            extraBagsLevel: extraBagsTalentBonus,
             starSignExtraCap: starSignExtraCap
         });
         toReturn.set("Critters", {
             allCapBonuses: allCapBonus,
-            stampMatCapBonus: 0, 
-            gemsCapacityBought: gemCapacityBonus, 
-            stampAllCapBonus: allCapStampBonus, 
-            extraBagsLevel: extraBagsTalentBonus, 
+            stampMatCapBonus: 0,
+            gemsCapacityBought: gemCapacityBonus,
+            stampAllCapBonus: allCapStampBonus,
+            extraBagsLevel: extraBagsTalentBonus,
             starSignExtraCap: starSignExtraCap
         });
 
@@ -774,7 +779,7 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
                 {
                     player.capacity.bags.filter((bag) => bag.displayName != undefined).map((bag, index) => (
                         <Box align="center" key={index} gap="small">
-                            <Box width={{max: '50px', min: '50px'}}>
+                            <Box width={{ max: '50px', min: '50px' }}>
                                 <Box className={bag.getClass()} />
                             </Box>
                             <Text size="small">{bag.displayName}: {Intl.NumberFormat().format(bag.getCapacity(capBonuses.get(bag.name)))}</Text>
@@ -901,6 +906,7 @@ function InventoryDisplay({ player }: { player: Player }) {
     const [playerInventory, setPlayerInventory] = useState<Item[]>([]);
     const size = useContext(ResponsiveContext);
     const idleonData = useContext(AppContext);
+    const allItems = idleonData.getData().get("itemsData") as Item[];
 
     useEffect(() => {
         const theData = idleonData.getData();
@@ -921,20 +927,55 @@ function InventoryDisplay({ player }: { player: Player }) {
     }, [playerInventory]);
 
     return (
-        <Box pad="medium" gap="small" fill>
+        <Box pad="medium" gap="medium" fill>
             <Text size='medium'>Inventory</Text>
-            <Box direction="row" gap="medium">
+            <Box direction="row" wrap>
+                {
+                    itemsToShow.map((item, index) => (
+                        <Box key={index} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} align="center">
+                            <ItemDisplay item={item} size="36px" />
+                        </Box>
+                    ))
+                }
+            </Box>
+            <Box>
                 <Text size='small'>Empty Slots: {emptySlots}</Text>
                 <Text size='small'>Locked Slots: {lockedSlots}</Text>
-            </Box>
-            <Box direction="row" wrap>
-            {
-                itemsToShow.map((item, index) => (
-                    <Box key={index} border={{color: 'grey-1' }}  background="accent-4" width={{max: '100px', min: '100px'}} align="center">
-                        <ItemDisplay item={item} size="36px" />
-                    </Box>
-                ))
-                }
+                <Box direction="row" wrap>
+                    {
+                        playerInventoryBagMapping.map((playerInvItem, index) => {
+                            if (playerInvItem[1] == "0") {
+                                return;
+                            } 
+
+                            const opacity = Object.keys(player.invBagsUsed).find(bagNumber => bagNumber == playerInvItem[0]) ? 1 : 0.2;
+                            const bagItem = allItems.find(item => item.internalName == playerInvItem[2]);
+                            if (bagItem) {
+                                return (
+                                    <Box key={index} margin={{ right: 'small', bottom: 'small' }}>
+                                        {opacity == 1 ?
+                                            <Box style={{ opacity: opacity }} width={{ max: '36px', min: '36px' }}>
+                                                <Box className={bagItem.getClass()} />
+                                            </Box>
+                                            :
+                                            <TipDisplay
+                                                heading={`${bagItem.displayName} (${bagItem.type})`}
+                                                body={<ItemSourcesDisplay sources={bagItem.sources} dropInfo={bagItem.dropInfo} />}
+                                                size={"large"}
+                                                direction={TipDirection.Down}
+                                                maxWidth="large"
+                                            >
+                                                <Box style={{ opacity: opacity }} width={{ max: '36px', min: '36px' }}>
+                                                    <Box className={bagItem.getClass()} />
+                                                </Box>
+                                            </TipDisplay>
+                                        }
+                                    </Box>
+                                )
+                            }
+                        })
+                    }
+                </Box>
             </Box>
         </Box>
     )

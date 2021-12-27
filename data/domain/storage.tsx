@@ -4,9 +4,10 @@ import { Item, StoneProps } from "./items";
 export class Storage {
     chest: Item[] = []
     playerStorage: Item[][] = [];
+    storageChestsUsed: Record<string, number> = {}
 }
 
-export default function parseStorage(doc: Cloudsave, playerNames: string[], allItems: Item[]) {
+export default function parseStorage(doc: Cloudsave, playerNames: string[], allItems: Item[], storageInvUsed: Record<string, number>) {
     const chestOrder: string[] = doc.get("ChestOrder");
     const chestQuantity: number[] = doc.get("ChestQuantity");
     
@@ -35,5 +36,7 @@ export default function parseStorage(doc: Cloudsave, playerNames: string[], allI
 
         storage.playerStorage.push(playerInventory);
     });
+
+    storage.storageChestsUsed = storageInvUsed;
     return storage;
 }

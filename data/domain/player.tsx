@@ -200,11 +200,12 @@ export class Player {
     postOffice: Box[] = initPostOffice();
     activeBubblesString: string[] = [];
     afkFor: number = 0;
-    worship: Worship = new Worship();
+    currentCharge: number = 0;
     cardInfo: CardInfo | undefined = undefined; // TODO: Do BETTER!
     activeBuffs: Talent[] = [];
     activePrayers: number[] = [];
     cooldown: Map<Talent, number> = new Map();
+    invBagsUsed: Record<string, number> = {};
 
     constructor(playerID: number, playerName: string) {
         this.playerID = playerID;
@@ -308,7 +309,7 @@ const keyFunctionMap: Record<string, Function> = {
     },
     "playerstuff": (doc: Cloudsave, player: Player) => {
         const jsonStuff = JSON.parse(doc.get(`PlayerStuff_${player.playerID}`));
-        player.worship.currentCharge = jsonStuff[0];
+        player.currentCharge = jsonStuff[0];
     },
     "cards": (doc: Cloudsave, player: Player) => {
         const currentCardSet = JSON.parse(doc.get(`CSetEq_${player.playerID}`));
@@ -334,6 +335,10 @@ const keyFunctionMap: Record<string, Function> = {
                 player.cooldown.set(talent, cooldown);
             }
         });
+    },
+    "invBagsUsed": (doc: Cloudsave, player: Player) => {
+        const bagsUsed = JSON.parse(doc.get(`InvBagsUsed_${player.playerID}`)) as Record<string, number>;
+        player.invBagsUsed = bagsUsed;
     },
 };
 
