@@ -28,6 +28,10 @@ import { EnemyInfo } from '../../data/domain/enemies';
 import TextAndLabel from '../../components/base/TextAndLabel';
 import { ClassIndex, Talent } from '../../data/domain/talents';
 import { TaskBoard } from '../../data/domain/tasks';
+import { Shrine } from '../../data/domain/shrines';
+import { MapInfo } from '../../data/domain/maps';
+import { Building } from '../../data/domain/buildings';
+import { Construction as ConstructionData } from '../../data/domain/construction';
 
 
 function RefineryDisplay() {
@@ -78,8 +82,7 @@ function RefineryDisplay() {
                     // Figure out the squire with the longest CD, simplify the math.
                     const maxSquireCD = Math.max(...squireInfo.map(squire => [...squire.cooldown.entries()].filter(([talent, cooldown]) => talent.skillIndex == 130).pop()?.[1] ?? 0));
                     // The squire skill can only be used after the cd, so ignore that portion.
-                    const timeSquireCanImpact = timeToNextRank - maxSquireCD;
-
+                    let timeSquireCanImpact = timeToNextRank - maxSquireCD;
 
                     let timeSaved = 0;
                     // Do the math for each squire.
@@ -91,10 +94,11 @@ function RefineryDisplay() {
 
                         // calculate how much time we can save using squire skill on CD.
                         const timePerSquireSkilluse = (squire.talents.find(talent => talent.skillIndex == 130)?.getBonus(false, false, true) ?? 0) * cycleInfo[Math.floor(index / 3)].time
-
-                        // Calculate how much time we save every time we use the squire skill.
-                        timeSaved += timeSquireCanImpact / talentCD * timePerSquireSkilluse;
-
+                        while (timeSquireCanImpact > talentCD) {
+                            // Calculate how much time we save every time we use the squire skill.
+                            timeSaved += timePerSquireSkilluse;
+                            timeSquireCanImpact -= talentCD + timePerSquireSkilluse;
+                        }
                     })
 
                     // This can happen when the CD is longer than the actual time to rank up, so ignore it.
@@ -582,6 +586,176 @@ function DeathnoteDisplay() {
 
 }
 
+function ShrinesDisplay() {
+    const [playerData, setPlayerData] = useState<Player[]>();
+    const [shrineData, setShrineData] = useState<Shrine[]>([]);
+    const idleonData = useContext(AppContext);
+
+    useEffect(() => {
+        if (idleonData) {
+            const theData = idleonData.getData();
+            setShrineData(theData.get("shrines"));
+            setPlayerData(theData.get("players"));
+        }
+    }, [idleonData]);
+
+    if (!shrineData || shrineData.filter(shrine => shrine.level > 0).length == 0) {
+        return (
+            <Box align="center" pad="medium">
+                <Heading level='3'>Come back when you unlocked this!</Heading>
+            </Box>
+        )
+    }
+    return (
+        <Box gap="medium" pad="large">
+            <TextAndLabel 
+                label="Total Levels"
+                text={shrineData.reduce((sum, shrine) => sum += shrine.level, 0).toString()}
+            />
+            <Box direction="row" wrap justify="start">
+                {shrineData && shrineData.filter(shrine => shrine.level > 0).map((shrine, index) => {
+                    return (
+                        <ShadowBox key={index} background="dark-1" pad="medium" align="start" margin={{ right: 'large', bottom: 'small' }} width="medium">
+                            <Box gap="small">
+                                <Box direction="row">
+                                    <Box width={{ min: "30px", max: '30px' }} margin={{ right: 'small' }}>
+                                        <Box className={shrine.getClass()} />
+                                    </Box>
+                                    <Text>{shrine.name}</Text>
+                                </Box>
+                                <Box direction="row" wrap justify='between'>
+                                    <TextAndLabel 
+                                        label="Level"
+                                        text={shrine.level.toString()}
+                                        margin={{right: 'large', bottom: 'small'}}
+                                    />
+                                    <TextAndLabel 
+                                        label="Current Map"
+                                        text={MapInfo.find(map => map.id == shrine.currentMap)?.area ?? ""}
+                                        margin={{right: 'large', bottom: 'small'}}
+                                    />
+                                    <TextAndLabel 
+                                        label="Hours"
+                                        text={`${Math.round(shrine.accumulatedHours)}/${Math.round(shrine.getHourRequirement())}`}
+                                        margin={{right: 'large', bottom: 'small'}}
+                                    />
+                                    <TextAndLabel 
+                                        label="Bonus (without card)"
+                                        text={`${Math.round(shrine.getBonus(shrine.currentMap, 0))}%`}
+                                        margin={{right: 'large', bottom: 'small'}}
+                                    />
+                                </Box>
+                            </Box>
+                        </ShadowBox>
+                    )
+                })
+                }
+            </Box>
+        </Box>
+    )
+
+}
+
+function BuildingsDisplay() {
+    const [constructionData, setConstructionData] = useState<ConstructionData>();
+    const [itemData, setItemData] = useState<Item[]>();
+    const idleonData = useContext(AppContext);
+    const size = useContext(ResponsiveContext);
+
+    useEffect(() => {
+        if (idleonData) {
+            const theData = idleonData.getData();
+            setItemData(theData.get("itemsData"));
+            setConstructionData(theData.get("construction"));
+        }
+    }, [idleonData]);
+
+    const costCruncher = useMemo(() => {
+        return constructionData?.buildings.find(building => building.index == 5) as Building;
+    }, [constructionData])
+
+    if (!constructionData || constructionData.buildings.filter(building => building.level > 0).length == 0) {
+        return (
+            <Box align="center" pad="medium">
+                <Heading level='3'>Come back when you unlocked this!</Heading>
+            </Box>
+        )
+    }
+    return (
+        <Box gap="medium" pad="large">
+            <TextAndLabel 
+                label="Total Levels"
+                text={constructionData.buildings.reduce((sum, building) => sum += building.level, 0).toString()}
+            />
+            <Grid columns={size == "small" ? "1" : "1/2"} fill>
+                {constructionData.buildings && constructionData.buildings.filter(building => building.level > 0 || building.currentXP > 0).map((building, index) => {
+                    return (
+                        <ShadowBox key={index} background="dark-1" pad="medium" align="start" margin={{ right: 'large', bottom: 'small' }}>
+                            <Grid columns="1/3" gap="medium" fill>
+                                <Box justify="center">
+                                    <Box width={{ min: "30px", max: '30px' }} margin={{ right: 'small' }}>
+                                        <Box className={building.getClass()} />
+                                    </Box>
+                                    <Text size="small">{building.name}</Text>
+                                </Box>
+                                <Box>
+                                    <TextAndLabel 
+                                        label="Level"
+                                        textSize="small"
+                                        text={`${building.level.toString()}/${building.maxLvl.toString()}`}
+                                        margin={{right: 'large', bottom: 'small'}}
+                                    />
+                                    { building.nextLevelUnlocked || building.level == building.maxLvl ? 
+                                        <TextAndLabel 
+                                        label="Build Req"
+                                        textSize="small"
+                                        text={"Maxed"}
+                                        margin={{right: 'large', bottom: 'small'}}
+                                    /> :
+                                    <TextAndLabel 
+                                        label="Build Req"
+                                        textSize="small"
+                                        text={`${nFormatter(building.currentXP, 2)}/${nFormatter(building.getBuildCost(), 2)}`}
+                                        margin={{right: 'large', bottom: 'small'}}
+                                    />}
+                                </Box>
+                                { building.level != building.maxLvl &&
+                                    <Box>
+                                        <Box wrap align="start" gap="small">
+                                            <Text size="small">Next level costs</Text>
+                                            <Box gap="xsmall">
+                                                {
+                                                    building.lvlUpReq && building.getLevelCosts(building.level,costCruncher).map((costData, index) => {
+                                                        const costItem = itemData?.find((item) => item.internalName == costData.item);
+                                                        if (costItem) {
+                                                            return (
+                                                                <Box key={index} direction="row" align="center">
+                                                                    <Box title={costItem?.displayName} width={{ max: '30px', min: '30px' }}>
+                                                                        <Box className={costItem?.getClass()} />
+                                                                    </Box>
+                                                                    <Box direction="row" gap="xsmall" align="center">
+                                                                        <Text size="small">{nFormatter(costData.quantity, 2)}</Text>
+                                                                    </Box>
+                                                                </Box>
+                                                            )
+                                                        }
+                                                    })
+                                                }
+                                            </Box>
+                                        </Box>
+                                    </Box>
+                                    }
+                            </Grid>
+                        </ShadowBox>
+                    )
+                })
+                }
+            </Grid>
+        </Box>
+    )
+
+}
+
 function Construction() {
     const [activeTab, setActiveTab] = useState<string>("Refinery");
     const idleonData = useContext(AppContext);
@@ -598,7 +772,7 @@ function Construction() {
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Construction</Heading>
             <Box gap="small">
                 <Box align="center" direction="row" justify="center" gap="small">
-                    {["Refinery", "Salt Lick", "Printer", "Death note"].map((tabName, index) => (
+                    {["Refinery", "Salt Lick", "Printer", "Death note", "Shrines", "Buildings"].map((tabName, index) => (
                         <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
                     ))
                     }
@@ -607,6 +781,8 @@ function Construction() {
                 {activeTab == "Salt Lick" && <SaltLickDisplay />}
                 {activeTab == "Printer" && <PrinterDisplay />}
                 {activeTab == "Death note" && <DeathnoteDisplay />}
+                {activeTab == "Shrines" && <ShrinesDisplay />}
+                {activeTab == "Buildings" && <BuildingsDisplay />}
             </Box>
         </Box>
     )

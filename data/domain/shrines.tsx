@@ -28,6 +28,10 @@ export class Shrine {
         return this.boost.split('.')[0].replace(/\+/g, bonus.toString());
     }
 
+    getHourRequirement = () => {
+        return Math.floor(20 * (this.level - 1) + 6 * this.level * Math.pow(1.63, this.level - 1))
+    } 
+
     getClass = () => {
         return `icons-6666 icons-${this.iconName}`;
     }
