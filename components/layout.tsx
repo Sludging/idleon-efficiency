@@ -94,6 +94,11 @@ const customNavDrop = {
     }
 }
 
+const specialRoutes = [
+    "/players",
+    "/account/task-board"
+]
+
 
 export default function Layout({
     children
@@ -122,7 +127,7 @@ export default function Layout({
         { link: "/players", label: "Players"},
         // { link: "/bribes", label: "Bribes - WIP"},
         { link: "/account", label: "Account Wide", subLinks: [
-            { subLink: "/achievements", label: "Achievements"},
+            { subLink: "/task-board", label: "Task Board"},
             { subLink: "/constellations", label: "Constellations"},
             { subLink: "/quests", label: "Quests"},
             { subLink: "/looty-tracker", label: "Looty Tracker"},
@@ -265,8 +270,8 @@ export default function Layout({
                         </Box>
                     </Box>)
                 }
-                <Box width={{ max: (router.pathname != '/players' && router.pathname != '/') ? '1440px' : '' }} margin={{ left: 'auto', right: 'auto' }} fill="horizontal">
-                    <Box pad={{ right: (router.pathname != '/players' && router.pathname != '/') ? 'large' : '', left: (router.pathname != '/players' && router.pathname != '/') ? 'large' : '', bottom: 'medium' }}>
+                <Box width={{ max: (!specialRoutes.includes(router.pathname) && router.pathname != '/') ? '1440px' : '' }} margin={{ left: 'auto', right: 'auto' }} fill="horizontal">
+                    <Box pad={{ right: (!specialRoutes.includes(router.pathname) && router.pathname != '/') ? 'large' : '', left: (!specialRoutes.includes(router.pathname) && router.pathname != '/') ? 'large' : '', bottom: 'medium' }}>
                         {children}
                     </Box>
                 </Box>
