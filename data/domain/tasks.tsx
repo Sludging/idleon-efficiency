@@ -5,7 +5,7 @@
 // (b.engine.getGameAttribute("Tasks")[4] = D.getLoadJsonList("TaskZZ4")),
 // (b.engine.getGameAttribute("Tasks")[5] = D.getLoadJsonList("TaskZZ5"));
 
-import { GroupBy } from "../utility"
+import { GroupBy, nFormatter } from "../utility"
 
 interface TaskInfo {
     name: string
@@ -41,6 +41,31 @@ export class Task {
 
     isDaily = () => {
         return this.descLine2 == "0";
+    }
+
+    getDescription = () => {
+        let numbersIndex = this.level;
+        // This only happens to the first world achievement hunter task, so we need to adjust the index matching by 1.
+        if (this.extraStr == "") {
+            numbersIndex += 1;
+        }
+        let toReturn = this.description;
+        let keyValue = this.numbers[numbersIndex] ?? -1;
+        if (this.level == this.numbers.length) {
+            toReturn = this.descLine2.split("|").slice(-1)[0];
+            keyValue = this.count;
+        }
+        if (toReturn.includes("{")) {
+            toReturn = toReturn.replace(/{/g, nFormatter(keyValue, 2))
+        }
+        if (toReturn.includes("}")) {
+            toReturn = toReturn.replace("}", this.extraStr.split("|")[this.level]);
+        }
+        return toReturn;
+    }
+
+    getLevelClass = () => {
+        return `icons-6040 icons-TaskRank${this.level}`;
     }
 }
 
@@ -182,6 +207,21 @@ export class Merit {
         this.icon = data.icon;
         this.bonusPerLevel = data.bonusPerLevel;
         this.world = data.world;
+    }
+
+    getDescription = () => {
+        let toReplace = this.descLine1;
+        if (this.extraStr != "Blank420q") {
+            toReplace = toReplace.replace("}", this.extraStr.split(" ")[this.level]);
+        }
+        else if (toReplace.includes("{")) {
+            toReplace = toReplace.replace("{", (this.bonusPerLevel * this.level).toString());
+        }
+        return `${toReplace} ${this.descLine2 != "Descline2" ? this.descLine2 : ""}`
+    }
+
+    getClass = () => {
+        return `icons-7272 icons-${this.icon}`;
     }
 }
 
