@@ -23,6 +23,7 @@ import { AuthContext } from '../data/firebase/authContext'
 import { useRouter } from 'next/dist/client/router';
 
 import { FormDown, Menu as MenuIcon } from 'grommet-icons';
+import TextAndLabel from './base/TextAndLabel';
 
 declare const window: Window &
     typeof globalThis & {
@@ -81,12 +82,12 @@ const customNavDrop = {
     button: {
         size: {
             small: {
-                pad:  {
+                pad: {
                     verical: '200px'
                 }
             },
             medium: {
-                pad:  {
+                pad: {
                     verical: '200px'
                 }
             }
@@ -98,6 +99,34 @@ const specialRoutes = [
     "/players",
     "/account/task-board"
 ]
+
+
+function OnHoverNav({ link, label, subLinks }: { link: string, label: string, subLinks: { subLink: string, label: string }[] | undefined }) {
+    const router = useRouter();
+
+    if (subLinks) {
+        return (
+            <NavMenu
+                key={`link_${label}`}
+                dropBackground="dark-1"
+                dropProps={{ align: { top: 'bottom' }, elevation: 'navigation' }}
+                items={subLinks.map(({ subLink, label }) => (
+                    {
+                        label: <Text size="small">{label}</Text>,
+                        onClick: () => { router.push(link + subLink) },
+                    }
+
+                ))}
+                icon={<FormDown size="medium" color="accent-3" />}
+                label={label}
+                className={router.pathname.includes(link) ? 'active' : ''} color="accent-2" />
+        )
+    }
+
+    return (
+        <Link key={`link_${label}`} href={link}><NavButton className={router.pathname == link ? 'active' : ''} color="accent-2">{label}</NavButton></Link>
+    )
+}
 
 
 export default function Layout({
@@ -117,23 +146,27 @@ export default function Layout({
     const [loading, setLoading] = useState(true);
 
     const navItems = [
-        { link: "/stamps", label: "Stamps"},
-        { link: "/alchemy", label: "Alchemy"},
-        { link: "/world-3", label: "World 3", subLinks: [
-            { subLink: "/construction", label: "Construction"},
-            { subLink: "/worship", label: "Worship"},
-            { subLink: "/trapping", label: "Trapping"},
-        ]},
-        { link: "/players", label: "Players"},
+        { link: "/stamps", label: "Stamps" },
+        { link: "/alchemy", label: "Alchemy" },
+        {
+            link: "/world-3", label: "World 3", subLinks: [
+                { subLink: "/construction", label: "Construction" },
+                { subLink: "/worship", label: "Worship" },
+                { subLink: "/trapping", label: "Trapping" },
+            ]
+        },
+        { link: "/players", label: "Players" },
         // { link: "/bribes", label: "Bribes - WIP"},
-        { link: "/account", label: "Account Wide", subLinks: [
-            { subLink: "/task-board", label: "Task Board"},
-            { subLink: "/constellations", label: "Constellations"},
-            { subLink: "/quests", label: "Quests"},
-            { subLink: "/looty-tracker", label: "Looty Tracker"},
-            { subLink: "/storage", label: "Storage"},
-        ]},
-        { link: "/raw-data", label: "Raw Data"},
+        {
+            link: "/account", label: "Account Wide", subLinks: [
+                { subLink: "/task-board", label: "Task Board" },
+                { subLink: "/constellations", label: "Constellations" },
+                { subLink: "/quests", label: "Quests" },
+                { subLink: "/looty-tracker", label: "Looty Tracker" },
+                { subLink: "/storage", label: "Storage" },
+            ]
+        },
+        { link: "/raw-data", label: "Raw Data" },
     ]
 
     const onButtonClick = (toCall: Function | undefined, value?: string) => {
@@ -190,80 +223,58 @@ export default function Layout({
                             <PointerImage alt="Logo" src="/logo.svg" height="21px" width="171px" />
                         </Box>
                     </Link>
-                    {validState && <Box direction="row" gap="xlarge" pad="medium"><Text color="accent-3" size="small">Last Updated: {lastUpdated}</Text><Button onClick={() => onButtonClick(authData?.logoutFunction)}>Logout</Button></Box>}
-                {showLayer &&
-                    <Layer
-                        onEsc={() => setShowLayer(false)}
-                        onClickOutside={() => setShowLayer(false)}
-                        modal={true}
-                        position="center"
+                    {validState && <Box direction="row" gap="xlarge" pad="medium"><TextAndLabel textColor='accent-3' textSize='xsmall' labelSize='xsmall' label='Last Updated' text={lastUpdated} /><Button onClick={() => onButtonClick(authData?.logoutFunction)}>Logout</Button></Box>}
+                    {showLayer &&
+                        <Layer
+                            onEsc={() => setShowLayer(false)}
+                            onClickOutside={() => setShowLayer(false)}
+                            modal={true}
+                            position="center"
 
 
-                >
-                        <Box pad="medium" gap="small" width="medium" background="grey">
-                            <Button disabled label="Google Login" color="black" onClick={() => onButtonClick(authData?.loginFunction)} />
-                            <Box align="center" flex="grow" pad="small">
-                                <Text>or</Text>
+                        >
+                            <Box pad="medium" gap="small" width="medium" background="grey">
+                                <Button disabled label="Google Login" color="black" onClick={() => onButtonClick(authData?.loginFunction)} />
+                                <Box align="center" flex="grow" pad="small">
+                                    <Text>or</Text>
+                                </Box>
+                                <TextInput
+                                    placeholder="ID Token"
+                                    value={value}
+                                    onChange={event => setValue(event.target.value)}
+                                />
+                                <Button label="Handle Token" color="black" onClick={() => onButtonClick(authData?.tokenFunction, value)} />
                             </Box>
-                            <TextInput
-                                placeholder="ID Token"
-                                value={value}
-                                onChange={event => setValue(event.target.value)}
-                            />
-                            <Button label="Handle Token" color="black" onClick={() => onButtonClick(authData?.tokenFunction, value)} />
-                        </Box>
-                    </Layer>
-                }
+                        </Layer>
+                    }
                 </Box>
             </Header>
             <Main>
                 {validState && (size === 'small' ?
-                        <Box justify="end">
-                            <Menu
-                                a11yTitle="Navigation Menu"
-                                dropProps={{ align: { top: 'bottom', right: 'right' } }}   
-                                icon={<MenuIcon color="brand" />}
-                                dropBackground="dark-1"
-                                margin="small"
-                                items={navItems.flatMap(({link, label, subLinks}) => { 
-                                    if (subLinks)  {
-                                        return subLinks.map(({ subLink, label}) => {
-                                            return { pad: 'large', label: <Link href={link+subLink}><Box className={router.pathname == link+subLink ? 'active' : ''} color="accent-2">{label}</Box></Link>}
-                                        })
-                                    }
-                                    return { pad: 'large', label: <Link href={link}><Box className={router.pathname == link ? 'active' : ''} color="accent-2">{label}</Box></Link>}})}
-                            />
-                        </Box>
+                    <Box justify="end">
+                        <Menu
+                            a11yTitle="Navigation Menu"
+                            dropProps={{ align: { top: 'bottom', right: 'right' } }}
+                            icon={<MenuIcon color="brand" />}
+                            dropBackground="dark-1"
+                            margin="small"
+                            items={navItems.flatMap(({ link, label, subLinks }) => {
+                                if (subLinks) {
+                                    return subLinks.map(({ subLink, label }) => {
+                                        return { pad: 'large', label: <Link href={link + subLink}><Box className={router.pathname == link + subLink ? 'active' : ''} color="accent-2">{label}</Box></Link> }
+                                    })
+                                }
+                                return { pad: 'large', label: <Link href={link}><Box className={router.pathname == link ? 'active' : ''} color="accent-2">{label}</Box></Link> }
+                            })}
+                        />
+                    </Box>
                     :
                     <Box height={{ min: "56px", max: "56px" }} background="dark-1" border={{ side: 'bottom', color: 'white-1' }} elevation='navigation'>
                         <Box width={{ max: '1440px' }} align="center" margin={{ left: 'auto', right: 'auto' }} >
                             <ThemeContext.Extend value={customNavDrop}>
                                 <Nav direction="row">
                                     {
-                                        navItems.map(({link, label, subLinks}) => {
-                                            if (subLinks) {
-                                                return (
-                                                    <NavMenu
-                                                    key={`link_${label}`} 
-                                                    dropBackground="dark-1"
-                                                    dropProps={{ align: { top: 'bottom' },  elevation: 'navigation' }}
-                                                    items={subLinks.map(({ subLink, label}) => (
-                                                        { 
-                                                            label: <Text size="small">{label}</Text>,
-                                                            onClick: () => { router.push(link + subLink)},
-                                                        }
-                                                        
-                                                    ))} 
-                                                    icon={<FormDown size="medium" color="accent-1"/>}
-                                                    label={label}
-                                                    className={router.pathname.includes(link) ? 'active' : ''} color="accent-2" />
-                                                )
-                                            }
-                                            
-                                            return (
-                                                <Link key={`link_${label}`} href={link}><NavButton className={router.pathname == link ? 'active' : ''} color="accent-2">{label}</NavButton></Link>
-                                            )
-                                        })
+                                        navItems.map(({ link, label, subLinks }) => (<OnHoverNav link={link} label={label} subLinks={subLinks} />))
                                     }
                                 </Nav>
                             </ThemeContext.Extend>
@@ -282,7 +293,7 @@ export default function Layout({
                     <Box justify="end" direction="row" gap="medium">
                         <Anchor href="https://www.buymeacoffee.com/sludger" target="_blank"><Image src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me A Coffee" height="40px" width="150px" /></Anchor>
                         <Box direction="row" gap="small" pad="small" justify="end">
-                            <Image alt="discord_logo" src={"/discord-logo.svg"} height="21px" width="21px"/>
+                            <Image alt="discord_logo" src={"/discord-logo.svg"} height="21px" width="21px" />
                             <Anchor color="white" target="_blank" href="https://discord.gg/AfsyBkSd2q">Idleon Efficiency</Anchor>
                         </Box>
                     </Box>

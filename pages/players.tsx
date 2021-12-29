@@ -141,7 +141,10 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
     const activeShrines = useMemo(() => {
         const theData = idleonData.getData();
         const shrines = theData.get("shrines") as Shrine[];
-        return shrines.filter((shrine) => shrine.currentMap == player.currentMapId && shrine.level > 0);
+        if (shrines) {
+            return shrines.filter((shrine) => shrine.currentMap == player.currentMapId && shrine.level > 0);
+        }
+        return [];
     }, [idleonData, player]);
 
     const activePrayers = useMemo(() => {
@@ -1071,9 +1074,7 @@ const customTabs = {
         },
         border: undefined,
         pad: {
-            top: 'small',
-            bottom: undefined,
-            horizontal: 'small',
+            vertical: 'small',
         },
         extend: ({ theme }: { theme: any }) => css`
             height: 56px;
@@ -1092,16 +1093,18 @@ const customTabs = {
             extend: ({ theme }: { theme: any }) => css`
                 alignItems: "center";
                 box-shadow: -7px 8px 16px 0 rgba(0,0,0,0.17);
-                height: 56px;
         `,
         }
     }
 }
 
-const CustomTabTitle = ({ label, isActive }: { label: string, isActive: boolean }) => (
-    <Box direction="row" align="center" margin={{ top: "xsmall", bottom: "xsmall" }}>
-        <Text size="small" color={isActive ? 'brand' : 'accent-2'}>
-            {label}
+const CustomTabTitle = ({ player, isActive }: { player: Player, isActive: boolean }) => (
+    <Box direction="row" align="center" margin={{ vertical: 'xsmall'}}>
+        <Box width={{max:'20px', min: '20px'}} margin={{right: 'xsmall'}}>
+            <Box className={player.getClassClass()} />
+        </Box>
+        <Text size="xsmall" color={isActive ? 'brand' : 'accent-2'}>
+            { player.playerName ? player.playerName : `Character ${player.playerID}`}
         </Text>
     </Box>
 );
@@ -1154,11 +1157,11 @@ function Players() {
                         </Box>
                     </Box>
                     :
-                    <Tabs activeIndex={index} onActive={onActive}>
+                    <Tabs activeIndex={index} onActive={onActive} >
                         {
                             playerData?.map((player, playerIndex) => {
                                 return (
-                                    <Tab key={`player_${player.playerID}`} title={<CustomTabTitle isActive={index == playerIndex} label={`${player.playerName ? player.playerName : `Character ${player.playerID}`}`} />}>
+                                    <Tab key={`player_${player.playerID}`} title={<CustomTabTitle isActive={index == playerIndex} player={player} />}>
                                         <Box pad={{ right: 'large', left: 'large' }} width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} fill>
                                             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Players</Heading>
                                             <Box pad="small">
