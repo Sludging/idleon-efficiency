@@ -32,6 +32,7 @@ import { Shrine } from '../../data/domain/shrines';
 import { MapInfo } from '../../data/domain/maps';
 import { Building } from '../../data/domain/buildings';
 import { Construction as ConstructionData } from '../../data/domain/construction';
+import { Card } from '../../data/domain/cards';
 
 
 function RefineryDisplay() {
@@ -587,7 +588,7 @@ function DeathnoteDisplay() {
 }
 
 function ShrinesDisplay() {
-    const [playerData, setPlayerData] = useState<Player[]>();
+    const [cardData, setCardData] = useState<Card[]>();
     const [shrineData, setShrineData] = useState<Shrine[]>([]);
     const idleonData = useContext(AppContext);
 
@@ -595,9 +596,13 @@ function ShrinesDisplay() {
         if (idleonData) {
             const theData = idleonData.getData();
             setShrineData(theData.get("shrines"));
-            setPlayerData(theData.get("players"));
+            setCardData(theData.get("cards"));
         }
     }, [idleonData]);
+
+    const shrineCardBonus = useMemo(() => {
+        return cardData?.find(card => card.name == "Z9")?.getBonus();
+    }, [cardData]);
 
     if (!shrineData || shrineData.filter(shrine => shrine.level > 0).length == 0) {
         return (
@@ -612,10 +617,10 @@ function ShrinesDisplay() {
                 label="Total Levels"
                 text={shrineData.reduce((sum, shrine) => sum += shrine.level, 0).toString()}
             />
-            <Box direction="row" wrap justify="start">
+            <Box>
                 {shrineData && shrineData.filter(shrine => shrine.level > 0).map((shrine, index) => {
                     return (
-                        <ShadowBox key={index} background="dark-1" pad="medium" align="start" margin={{ right: 'large', bottom: 'small' }} width="medium">
+                        <ShadowBox key={index} background="dark-1" pad="medium" margin={{bottom: 'small'}}>
                             <Box gap="small">
                                 <Box direction="row">
                                     <Box width={{ min: "30px", max: '30px' }} margin={{ right: 'small' }}>
@@ -623,26 +628,31 @@ function ShrinesDisplay() {
                                     </Box>
                                     <Text>{shrine.name}</Text>
                                 </Box>
-                                <Box direction="row" wrap justify='between'>
+                                <Box direction="row" justify="between" wrap>
                                     <TextAndLabel 
                                         label="Level"
                                         text={shrine.level.toString()}
-                                        margin={{right: 'large', bottom: 'small'}}
+                                        margin={{right: 'medium', bottom: 'small'}}
                                     />
                                     <TextAndLabel 
                                         label="Current Map"
                                         text={MapInfo.find(map => map.id == shrine.currentMap)?.area ?? ""}
-                                        margin={{right: 'large', bottom: 'small'}}
+                                        margin={{right: 'medium', bottom: 'small'}}
                                     />
                                     <TextAndLabel 
                                         label="Hours"
                                         text={`${Math.round(shrine.accumulatedHours)}/${Math.round(shrine.getHourRequirement())}`}
-                                        margin={{right: 'large', bottom: 'small'}}
+                                        margin={{right: 'medium', bottom: 'small'}}
                                     />
                                     <TextAndLabel 
                                         label="Bonus (without card)"
                                         text={`${Math.round(shrine.getBonus(shrine.currentMap, 0))}%`}
-                                        margin={{right: 'large', bottom: 'small'}}
+                                        margin={{right: 'medium', bottom: 'small'}}
+                                    />
+                                    <TextAndLabel 
+                                        label="Bonus (with card)"
+                                        text={`${Math.round(shrine.getBonus(shrine.currentMap, shrineCardBonus))}%`}
+                                        margin={{right: 'medium', bottom: 'small'}}
                                     />
                                 </Box>
                             </Box>

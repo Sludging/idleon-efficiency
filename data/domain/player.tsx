@@ -265,6 +265,10 @@ export class Player {
             default: return '';
         }
     }
+
+    getClassClass = () => {
+        return `icons-3836 icons-ClassIcons${this.classId.valueOf()}`
+    }
 }
 
 const keyFunctionMap: Record<string, Function> = {

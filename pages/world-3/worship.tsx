@@ -3,6 +3,7 @@ import {
     Grid,
     Heading,
     Meter,
+    ResponsiveContext,
     Stack,
     Text,
     TextInput,
@@ -182,8 +183,11 @@ function ChargeDisplay() {
 function TotemDisplay() {
     const [playerData, setPlayerData] = useState<Player[]>();
     const [efficiency, setEfficiency] = useState<number>(0);
+    const [effFoodBonus, setEffFoodBonus] = useState<number>(0);
     const [worship, setWorshipData] = useState<WorshipDomain>();
     const idleonData = useContext(AppContext);
+
+    const size = useContext(ResponsiveContext);
 
     useEffect(() => {
         if (idleonData) {
@@ -203,21 +207,29 @@ function TotemDisplay() {
 
     return (
         <Box gap="medium">
-            <Box width="large">
+            <Box width="medium" gap="medium" direction="row">
                 <ComponentAndLabel
                     label="Worship Efficiency"
                     component={<Box direction="row" align="center" gap="large"><TextInput
                         value={efficiency}
                         onChange={event => setEfficiency(Number(event.target.value))}
                         type="number"
-                    /><Text size="small">* You need a minimum efficiency of 60, 250, 1000, and 3000 on the respective towers to get bonus souls.</Text></Box>}
+                    /></Box>}
+                />
+                <ComponentAndLabel
+                    label="Worship food effect"
+                    component={<Box direction="row" align="center" gap="large"><TextInput
+                        value={effFoodBonus}
+                        onChange={event => setEffFoodBonus(Number(event.target.value))}
+                        type="number"
+                    /></Box>}
                 />
             </Box>
             <Box>
                 <Text size="xsmall">* Base XP is assuming multiplier of 1x.</Text>
-                <Text size="xsmall">* Souls is not considering food bonuses.</Text>
+                <Text size="xsmall">* You need a minimum efficiency of 60, 250, 1000, and 3000 on the respective towers to get bonus souls.</Text>
             </Box>
-            <Grid columns={{ count: 2, size: 'auto' }}>
+            <Grid columns={{ count: size == "small" ? 1 : 2, size: 'auto' }}>
                 {
                     worship.totemInfo.map((totem, index) => (
                         <ShadowBox key={index} background="dark-1" pad="medium" align="start" margin={{ right: 'large', bottom: 'small' }}>
@@ -226,7 +238,7 @@ function TotemDisplay() {
                                 <TextAndLabel text={totem.map?.area ?? ""} label="Area" />
                                 <TextAndLabel text={totem.maxWave.toString()} label="Max Wave" />
                                 <TextAndLabel text={totem.getExpRewards().toString()} label="Base XP" />
-                                <TextAndLabel text={totem.getSoulRewards(efficiency).toString()} label="Souls" />
+                                <TextAndLabel text={totem.getSoulRewards(efficiency, effFoodBonus).toString()} label="Souls" />
                             </Grid>
                         </ShadowBox>
                     ))
