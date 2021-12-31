@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { doc, initializeFirestore, onSnapshot, Firestore, DocumentSnapshot as Document } from 'firebase/firestore';
+import { doc, initializeFirestore, onSnapshot, Firestore, DocumentSnapshot as Document, getDoc } from 'firebase/firestore';
 import { getApp } from 'firebase/app';
 import { useContext } from 'react';
 import { AuthContext } from './firebase/authContext';
@@ -31,6 +31,7 @@ import { Cloudsave, cloudsaveConverter } from './domain/cloudsave';
 import parseWorship from './domain/worship';
 import parseConstruction from './domain/construction';
 import parseCards from './domain/cards';
+import parseArcade from './domain/arcade';
 
 
 
@@ -106,6 +107,7 @@ const keyFunctionMap: Record<string, Function> = {
   "taskboard": (doc: Cloudsave, charCount: number) => parseTaskboard(JSON.parse(doc.get(`TaskZZ0`)), JSON.parse(doc.get(`TaskZZ1`)), JSON.parse(doc.get(`TaskZZ2`)), JSON.parse(doc.get(`TaskZZ3`)), doc.get(`TaskZZ4`), doc.get(`TaskZZ5`)),
   "worship": (doc: Cloudsave, accountData: Map<string, any>, charCount: number) => parseWorship(JSON.parse(doc.get("TotemInfo")), accountData),
   "construction": (doc: Cloudsave, charCount: number) => parseConstruction(JSON.parse(doc.get("Tower"))),
+  "arcade": (doc: Cloudsave, charCount: number) => parseArcade(JSON.parse(doc.get("ArcadeUpg")), doc.get("OptLacc")),
 }
 
 
@@ -151,7 +153,7 @@ export const AppProvider: React.FC<{}> = (props) => {
     }
   }
 
-  const updateIdleonData = (data: Cloudsave, charNames: string[], isDemo: boolean = false) => {
+  const updateIdleonData = async (data: Cloudsave, charNames: string[], isDemo: boolean = false) => {
     let accountData = new Map();
     accountData.set("playerNames", charNames);
     accountData.set("itemsData", allItems);
@@ -186,6 +188,8 @@ export const AppProvider: React.FC<{}> = (props) => {
     // ForgeItemOrder
     // PlayerStuff_2 - for current charge + other things I think
     // _customBlock_AnvilProduceStats for the rest
+    accountData.set("servervars", await getServerVars())
+
     if (isDemo) {
       const saveGlobalTime = JSON.parse(data.get("TimeAway"))["GlobalTime"] as number;
       const newData = new IdleonData(accountData, new Date(saveGlobalTime * 1000));
@@ -194,6 +198,15 @@ export const AppProvider: React.FC<{}> = (props) => {
     else {
       const newData = new IdleonData(accountData, new Date());
       setState(newData);
+    }
+  }
+
+  const getServerVars = async () => {
+    if (db?.type == "firestore" && user) {
+      const res = await getDoc(doc(db, "_vars", "_vars"));
+      if (res.exists()) {
+        return res.data();
+      }
     }
   }
 
@@ -220,6 +233,7 @@ export const AppProvider: React.FC<{}> = (props) => {
     }
     if (!realDB) {
       setRealDB(getDatabase(app));
+      getServerVars();
     }
     if (authContext?.isDemo) {
       handleStaticData();

@@ -11,7 +11,7 @@ import {
 import { Stamp } from '../data/domain/stamps';
 import { useEffect, useState, useContext } from 'react';
 import { AppContext } from '../data/appContext';
-import { getCoinsArray, lavaFunc, nFormatter } from '../data/utility'
+import { getCoinsArray, lavaFunc, nFormatter, round } from '../data/utility'
 import CoinsDisplay from "../components/coinsDisplay";
 import { Alchemy, AlchemyConst } from "../data/domain/alchemy";
 import { Bribe, BribeConst, BribeStatus } from "../data/domain/bribes";
@@ -51,7 +51,7 @@ function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stam
                     <hr style={{ width: "100%"}} />
                     <Text size="small">Bonus: {stamp.getBonusText()}</Text>
                     {!stamp.isMaxLevel() && <Box direction="row" gap="small"><Text size="small">Cost: </Text><CoinsDisplay coinMap={getCoinsArray(stamp.getGoldCost(hasBribe, blueFlavPercent))} /></Box>}
-                    {stamp.isMaxLevel() && <Box direction="row" align="center"><Text size="small">Material Cost: {nFormatter(Math.round(stamp.getMaterialCost(blueFlavPercent)), 1)}</Text><Box align="center" width={{max: '36px'}} fill><Box className={`icons-3636 icons-${stamp.data.material}_x1`} /></Box></Box>}
+                    {stamp.isMaxLevel() && <Box direction="row" align="center"><Text size="small">Material Cost: {nFormatter(round(stamp.getMaterialCost(blueFlavPercent)), 1)}</Text><Box align="center" width={{max: '36px'}} fill><Box className={`icons-3636 icons-${stamp.data.material}_x1`} /></Box></Box>}
                 </Box>
                 {faceLeft && size != "small" &&
                     <svg viewBox="0 0 22 22" version="1.1" width="22px" height="22px">

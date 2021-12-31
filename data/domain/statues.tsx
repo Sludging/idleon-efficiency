@@ -22,8 +22,13 @@ export class Statue {
 
     constructor(public displayName: string, public internalName: string, public bonus: string, public statueData: StatuesData) {
         const StatueNumberRegex = /EquipmentStatues(\d+)/gm;
-        const regexMatches = StatueNumberRegex.exec(internalName);
-        this.statueNumber = parseInt(regexMatches?.at(1) ?? "0");
+        try {
+            const regexMatches = StatueNumberRegex.exec(internalName);
+            this.statueNumber = parseInt(regexMatches?.at(1) ?? "0");
+        }
+        catch (e) {
+            console.debug("Failed parsing statue number");
+        }
     }
 
     getRequiredForNextLevel = () => {
