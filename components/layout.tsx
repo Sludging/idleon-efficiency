@@ -147,7 +147,12 @@ export default function Layout({
 
     const navItems = [
         { link: "/stamps", label: "Stamps" },
-        { link: "/alchemy", label: "Alchemy" },
+        {
+            link: "/world-2", label: "World 2", subLinks: [
+                { subLink: "/alchemy", label: "Alchemy" },
+                { subLink: "/arcade", label: "Arcade" },
+            ]
+        },
         {
             link: "/world-3", label: "World 3", subLinks: [
                 { subLink: "/construction", label: "Construction" },
@@ -258,13 +263,13 @@ export default function Layout({
                             icon={<MenuIcon color="brand" />}
                             dropBackground="dark-1"
                             margin="small"
-                            items={navItems.flatMap(({ link, label, subLinks }) => {
+                            items={navItems.flatMap(({ link, label, subLinks }, index) => {
                                 if (subLinks) {
                                     return subLinks.map(({ subLink, label }) => {
-                                        return { pad: 'large', label: <Link href={link + subLink}><Box className={router.pathname == link + subLink ? 'active' : ''} color="accent-2">{label}</Box></Link> }
+                                        return { pad: 'large', label: <Link key={index} href={link + subLink}><Box className={router.pathname == link + subLink ? 'active' : ''} color="accent-2">{label}</Box></Link> }
                                     })
                                 }
-                                return { pad: 'large', label: <Link href={link}><Box className={router.pathname == link ? 'active' : ''} color="accent-2">{label}</Box></Link> }
+                                return { pad: 'large', label: <Link key={index} href={link}><Box className={router.pathname == link ? 'active' : ''} color="accent-2">{label}</Box></Link> }
                             })}
                         />
                     </Box>
@@ -274,7 +279,7 @@ export default function Layout({
                             <ThemeContext.Extend value={customNavDrop}>
                                 <Nav direction="row">
                                     {
-                                        navItems.map(({ link, label, subLinks }) => (<OnHoverNav link={link} label={label} subLinks={subLinks} />))
+                                        navItems.map(({ link, label, subLinks }, index) => (<OnHoverNav key={index} link={link} label={label} subLinks={subLinks} />))
                                     }
                                 </Nav>
                             </ThemeContext.Extend>

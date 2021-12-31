@@ -40,6 +40,7 @@ export const AuthProvider: React.FC<{}> = (props) => {
                 const credential = GoogleAuthProvider.credentialFromResult(result);
                 setUser(result.user);
                 loginEvent("GOGGLE");
+                router.push("/stamps");
             }).catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
@@ -54,6 +55,7 @@ export const AuthProvider: React.FC<{}> = (props) => {
             .then((result) => {
                 setUser(result.user);
                 loginEvent("TOKEN");
+                router.push("/stamps");
             }).catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
@@ -68,6 +70,7 @@ export const AuthProvider: React.FC<{}> = (props) => {
         if (email == "demo" && password == "demo") {
             setIsDemo(true);
             loginEvent("DEMO");
+            router.push("/stamps");
         }
         else {
             const auth = getAuth(app);
@@ -76,6 +79,7 @@ export const AuthProvider: React.FC<{}> = (props) => {
                 .then((result) => {
                     setUser(result.user);
                     loginEvent("EMAIL");
+                    router.push("/stamps");
                 }).catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;

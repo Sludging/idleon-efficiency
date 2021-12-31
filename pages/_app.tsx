@@ -33,6 +33,7 @@ import '../public/icons/assets/sheets/spritesheet_78x78.css';
 import '../public/icons/assets/sheets/spritesheet_20x25.css';
 import '../public/icons/assets/sheets/spritesheet_72x72.css';
 import '../public/icons/assets/sheets/spritesheet_60x40.css';
+import '../public/icons/assets/sheets/spritesheet_62x62.css';
 import '../public/icons/assets/sheets/spritesheet_constellations.css';
 import Layout from '../components/layout';
 

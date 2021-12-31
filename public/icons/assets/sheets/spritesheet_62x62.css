@@ -1,0 +1,29 @@
+.icons-6262 {
+    background-image: url(spritesheet_62x62.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 100.0%;
+    height: 0;
+    background-size: cover;
+    background-position: 0 calc(var(--row) * 5.882352941176471%)
+}
+.icons-6262:not(.icons-PachiShopICON0):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
+            .icons-PachiShopICON0 { --row: 0; }
+.icons-PachiShopICON1 { --row: 1; }
+.icons-PachiShopICON10 { --row: 2; }
+.icons-PachiShopICON11 { --row: 3; }
+.icons-PachiShopICON12 { --row: 4; }
+.icons-PachiShopICON13 { --row: 5; }
+.icons-PachiShopICON14 { --row: 6; }
+.icons-PachiShopICON15 { --row: 7; }
+.icons-PachiShopICON16 { --row: 8; }
+.icons-PachiShopICON17 { --row: 9; }
+.icons-PachiShopICON2 { --row: 10; }
+.icons-PachiShopICON3 { --row: 11; }
+.icons-PachiShopICON4 { --row: 12; }
+.icons-PachiShopICON5 { --row: 13; }
+.icons-PachiShopICON6 { --row: 14; }
+.icons-PachiShopICON7 { --row: 15; }
+.icons-PachiShopICON8 { --row: 16; }
+.icons-PachiShopICON9 { --row: 17; }
