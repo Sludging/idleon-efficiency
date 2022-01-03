@@ -782,15 +782,15 @@ function Construction() {
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Construction</Heading>
             <Box gap="small">
                 <Box align="center" direction="row" justify="center" gap="small">
-                    {["Refinery", "Salt Lick", "Printer", "Death note", "Shrines", "Buildings"].map((tabName, index) => (
+                    {["Refinery", "Salt Lick", "3D Printer", "Death Note", "Shrines", "Buildings"].map((tabName, index) => (
                         <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
                     ))
                     }
                 </Box>
                 {activeTab == "Refinery" && <RefineryDisplay />}
                 {activeTab == "Salt Lick" && <SaltLickDisplay />}
-                {activeTab == "Printer" && <PrinterDisplay />}
-                {activeTab == "Death note" && <DeathnoteDisplay />}
+                {activeTab == "3D Printer" && <PrinterDisplay />}
+                {activeTab == "Death Note" && <DeathnoteDisplay />}
                 {activeTab == "Shrines" && <ShrinesDisplay />}
                 {activeTab == "Buildings" && <BuildingsDisplay />}
             </Box>

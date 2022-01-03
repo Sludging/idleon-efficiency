@@ -176,19 +176,15 @@ export function StaticTime({ fromSeconds, color, size = TimeDisplaySize.Small }:
     const [seconds, setSeconds] = useState<number>(0);
 
     useEffect(() => {
-        // reset all current numbers.
-        setDays(0);
-        setHours(0);
-        setMinutes(0);
-        setSeconds(0);
-
         // calculate new numbers.
+        let dayCount = 0;
         let hour = Math.floor(fromSeconds / 3600);
         if (hour > 24) {
-            setDays(Math.floor(hour / 24));
-            hour -= days * 24;
+            dayCount = Math.floor(hour / 24);
+            hour -= dayCount * 24;
         }
         setHours(hour);
+        setDays(dayCount);
         setMinutes(Math.floor(fromSeconds % 3600 / 60));
         setSeconds(Math.floor(fromSeconds % 3600 % 60));
     }, [fromSeconds]);

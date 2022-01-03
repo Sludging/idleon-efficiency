@@ -68,6 +68,8 @@ const customTheme = deepMerge(dark, {
       "grey-3": "#4C4F54",
       "dark-1": "#1E2127",
       "dark-2": "#1B1D24",
+      "aqua": "#c9fffd",
+      "yellow-1": "#ffecc9",
       "background": "#1B1D24",
       "white-1": "#30333A",
       "placeholder": "#96979a"

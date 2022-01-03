@@ -32,6 +32,7 @@ import parseWorship from './domain/worship';
 import parseConstruction from './domain/construction';
 import parseCards from './domain/cards';
 import parseArcade from './domain/arcade';
+import parseObols from './domain/obols';
 
 
 
@@ -108,6 +109,7 @@ const keyFunctionMap: Record<string, Function> = {
   "worship": (doc: Cloudsave, accountData: Map<string, any>, charCount: number) => parseWorship(JSON.parse(doc.get("TotemInfo")), accountData),
   "construction": (doc: Cloudsave, charCount: number) => parseConstruction(JSON.parse(doc.get("Tower"))),
   "arcade": (doc: Cloudsave, charCount: number) => parseArcade(JSON.parse(doc.get("ArcadeUpg")), doc.get("OptLacc")),
+  "obols": (doc: Cloudsave, allItems: Item[], charCount: number) => parseObols(doc, charCount, allItems),
 }
 
 
@@ -165,7 +167,7 @@ export const AppProvider: React.FC<{}> = (props) => {
         else if (key == "worship") {
           accountData.set(key, toExecute(data, accountData, charNames.length));
         }
-        else if (key == "lootyData") {
+        else if (key == "lootyData" || key == "obols") {
           accountData.set(key, toExecute(data, allItems, charNames.length));
         }
         else {
