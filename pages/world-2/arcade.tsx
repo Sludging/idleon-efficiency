@@ -49,7 +49,7 @@ function Arcade() {
             return arcadeData?.getBallsPerSec(achievementData, ballVialBonus, ballMeritLevel, stampBonus);
         }
         return 0;
-    }, [stampData, alchemyData, arcadeData]);
+    }, [stampData, alchemyData, arcadeData, achievementData, taskboardData]);
 
     const maxClaimTime = useMemo(() => {
         if (stampData && arcadeData) { 
