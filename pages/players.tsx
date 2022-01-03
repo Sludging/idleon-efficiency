@@ -39,6 +39,7 @@ import { Storage } from '../data/domain/storage';
 import { Prayer } from '../data/domain/prayers';
 import { TimeDown, TimeUp } from '../components/base/TimeDisplay';
 import { Worship } from '../data/domain/worship';
+import ObolsInfo from '../components/account/task-board/obolsInfo';
 
 
 function ItemSourcesDisplay({ sources, dropInfo }: { sources: ItemSources, dropInfo: DropInfo }) {
@@ -1048,6 +1049,7 @@ function PlayerTab({ player }: PlayerTabProps) {
                     <SpecialButton isActive={index == 7} clickHandler={() => onActive(7)} text={"Talents"} />
                     <SpecialButton isActive={index == 8} clickHandler={() => onActive(8)} text={"Post Office"} />
                     <SpecialButton isActive={index == 9} clickHandler={() => onActive(9)} text={"Inventory"} />
+                    <SpecialButton isActive={index == 10} clickHandler={() => onActive(10)} text={"Obols"} />
                 </Box>
                 <Box fill background="dark-1">
                     {index == 1 && <MiscStats player={player} activeBubbles={activeBubbles} />}
@@ -1059,6 +1061,7 @@ function PlayerTab({ player }: PlayerTabProps) {
                     {index == 7 && <TalentDisplay player={player} />}
                     {index == 8 && <PostOfficeDisplay player={player} extra={poExtra} />}
                     {index == 9 && <InventoryDisplay player={player} />}
+                    {index == 10 && <ObolsInfo playerIndex={player.playerID} title={"Obols"} level={player.level} />}
                 </Box>
             </Grid>
         </ShadowBox>
