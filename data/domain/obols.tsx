@@ -54,7 +54,7 @@ export const obolExtraData: number[][][] = [
     ]
 ];
 
-enum ObolType {
+export enum ObolType {
     Circle = 0,
     Square = 1,
     Hexagon = 2,

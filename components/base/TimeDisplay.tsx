@@ -134,7 +134,7 @@ export function TimeDown({ addSeconds, resetToSeconds, lastUpdated, color, size 
         setTimeout(() => {
             restart(time, true);
         }, 10);
-    }, [addSeconds, lastUpdated, resetToSeconds, color, size, restart])
+    }, [addSeconds, lastUpdated, resetToSeconds, color, size])
 
     return (
         <TimeDisplay seconds={seconds} minutes={minutes} hours={hours} days={days} color={color} size={size} />
@@ -161,7 +161,7 @@ export function TimeUp({ addSeconds, lastUpdated, color, size }: { addSeconds: n
         const timeSinceUpdate = time.getTime() - (lastUpdated?.getTime() ?? 0);
         time.setSeconds(time.getSeconds() + addSeconds + timeSinceUpdate / 1000);
         reset(time, true);
-    }, [addSeconds, lastUpdated, reset])
+    }, [addSeconds, lastUpdated])
 
     return (
         <TimeDisplay seconds={seconds} minutes={minutes} hours={hours} days={days} color={color} size={size} />
