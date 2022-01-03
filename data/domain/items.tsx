@@ -286,7 +286,7 @@ export class ItemStat {
     }
 
     shouldDisplay = (): boolean => {
-        return this.value != 0 || this.stone != 0;
+        return (this.value != 0 || this.stone != 0) && this.getValue() > 0;
     }
 
     getDisplay = () => {
@@ -295,6 +295,10 @@ export class ItemStat {
             return `${this.displayName}: ${this.getValue()}${this.extra.replace(/_/g,' ')}${this.stone != 0 ? ` (${this.stone})` : ''}`
         } 
         return `${this.displayName}: ${this.getValue()}${this.stone != 0 ? ` (${this.stone})` : ''}`
+    }
+
+    duplicate = () => {
+        return new ItemStat(this.displayName, this.stoneName, this.value, this.extra, this.stone);
     }
 }
 
@@ -425,23 +429,12 @@ export class Item {
         }
 
         Object.keys(data).forEach((key) => {
+            // logic is as follows:
+            // 1. Check if the value is a number, and if it's 0 ignore it.
+            // 2. Check if we already have a stat that matches this value, and if so update it to know about the stone modifications
+            // 3. Else if it's a unique value, it's value is larger then 0 and we don't have a stat that matches the stone name, add it as a new value (this is usually keychains).
+
             const asNumber = Number(data[key as keyof StoneProps]);
-            // If this is unique txt, it's actually a text and we have a value for it, add it as a new misc
-            if (key == "UQ1txt" && isNaN(asNumber) && data.UQ1val && data.UQ1val > 0) {
-                this.itemStats.push(new ItemStat("Misc", "UQ1val", data.UQ1val, data.UQ1txt))
-            }
-            if (key == "UQ2txt" && isNaN(asNumber) && data.UQ2val && data.UQ2val > 0) {
-                this.itemStats.push(new ItemStat("Misc", "UQ2val", data.UQ2val, data.UQ2txt))
-            }
-
-            // If we already got a valid uq1txt, we handled it above .. so ignore this value
-            if (key == "UQ1val" && data.UQ1txt && Number(data.UQ1txt) != 0 && data.UQ1txt != '') {
-                return;
-            }
-            if (key == "UQ2val" && data.UQ2txt && Number(data.UQ1txt) != 0 && data.UQ2txt != '') {
-                return;
-            }
-
             // ignore 0 values.
             if (!isNaN(asNumber) && asNumber == 0) {
                 return;
@@ -451,6 +444,15 @@ export class Item {
             if (matchingStat) {
                 matchingStat.stone = asNumber;
             }
+            else {
+                // If this is unique txt, it's actually a text and we have a value for it, add it as a new misc
+                if (key == "UQ1txt" && isNaN(asNumber) && data.UQ1val && data.UQ1val > 0 && this.itemStats.find((stat) => stat.stoneName == "UQ1val") == undefined) {
+                    this.itemStats.push(new ItemStat("Misc", "Nothing", data.UQ1val, data.UQ1txt))
+                }
+                if (key == "UQ2txt" && isNaN(asNumber) && data.UQ2val && data.UQ2val > 0 && this.itemStats.find((stat) => stat.stoneName == "UQ2val") == undefined) {
+                    this.itemStats.push(new ItemStat("Misc", "Nothing", data.UQ2val, data.UQ2txt))
+                }
+            }   
         })
     }
 

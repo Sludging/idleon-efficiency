@@ -169,6 +169,7 @@ export default function Layout({
                 { subLink: "/quests", label: "Quests" },
                 { subLink: "/looty-tracker", label: "Looty Tracker" },
                 { subLink: "/storage", label: "Storage" },
+                { subLink: "/obols", label: "Obols" },
             ]
         },
         { link: "/raw-data", label: "Raw Data" },

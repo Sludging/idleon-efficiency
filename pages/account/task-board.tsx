@@ -1,85 +1,30 @@
 import {
     Box,
     Text,
-    Grid,
-    Stack,
     Tabs,
     Tab,
-    Tip,
     Heading,
-    ResponsiveContext,
     ThemeContext
 } from "grommet"
 
-import { useEffect, useState, useContext, useMemo } from 'react';
-import ShadowBox from "../../components/base/ShadowBox";
-import { AppContext } from '../../data/appContext';
+import { useState } from 'react';
 import { NextSeo } from 'next-seo';
 import TabButton from "../../components/base/TabButton";
-import { TaskBoard as TaskboardData } from "../../data/domain/tasks";
-import TextAndLabel from "../../components/base/TextAndLabel";
-import { nFormatter } from "../../data/utility";
 import { css } from "styled-components";
 import Tasks from "../../components/account/task-board/tasks";
 import Achivements from "../../components/account/task-board/achievements";
 import Merits from "../../components/account/task-board/merits";
-
-const customTabs = {
-    tab: {
-        active: {
-            color: 'brand',
-            background: 'none',
-            border: undefined,
-        },
-        border: undefined,
-        pad: {
-            top: 'small',
-            bottom: undefined,
-            horizontal: 'small',
-        },
-        extend: ({ theme }: { theme: any }) => css`
-            height: 56px;
-            weight: 'none';
-        `
-    },
-    tabs: {
-        extend: ({ theme }: { theme: any }) => css`
-            max-width: 100%;
-            min-width: 100%;
-            margin-left: auto;
-            margin-right: auto;
-        `,
-        header: {
-            background: 'dark-2',
-            extend: ({ theme }: { theme: any }) => css`
-                alignItems: "center";
-                box-shadow: -7px 8px 16px 0 rgba(0,0,0,0.17);
-                height: 56px;
-        `,
-        }
-    }
-}
-
-const CustomTabTitle = ({ label, isActive }: { label: string, isActive: boolean }) => (
-    <Box direction="row" align="center" margin={{ top: "xsmall", bottom: "xsmall" }}>
-        <Text size="small" color={isActive ? 'brand' : 'accent-2'}>
-            {label}
-        </Text>
-    </Box>
-);
+import { customTabsTheme, CustomTabTitle } from "../../components/base/CustomTabs";
 
 function TaskBoard() {
     const [subTab, setSubTab] = useState<string>("Tasks");
     const [index, setIndex] = useState<number>(0);
-    const idleonData = useContext(AppContext);
-    const size = useContext(ResponsiveContext)
-
     const onActive = (nextIndex: number) => setIndex(nextIndex);
     
     return (
         <Box>
             <NextSeo title="Task Board" />
-            <ThemeContext.Extend value={customTabs}>
+            <ThemeContext.Extend value={customTabsTheme}>
                 <Tabs activeIndex={index} onActive={onActive}>
                     {
                         ["Blunder Hills", "Yum-Yum Desert", "Frostbite Tundra"].map((world, worldIndex) => {
