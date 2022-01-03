@@ -65,14 +65,21 @@ export class Obol {
     type: ObolType
     lvlReq: number
     locked: boolean
-    constructor(public item: Item, public position: number, isPlayer: boolean) {
-        if (isPlayer) {
-            this.type = obolExtraData[0][position][2]
-            this.lvlReq = obolExtraData[0][position][3]
+    constructor(public item: Item, public position: number, isPlayer: boolean, type?: ObolType) {
+        // If we don't already know the type in advance, figure it out from game data.
+        if (type == undefined) {
+            if (isPlayer) {
+                this.type = obolExtraData[0][position][2]
+                this.lvlReq = obolExtraData[0][position][3]
+            }
+            else {
+                this.type = obolExtraData[1][position][2]
+                this.lvlReq = obolExtraData[1][position][3]
+            }
         }
         else {
-            this.type = obolExtraData[1][position][2]
-            this.lvlReq = obolExtraData[1][position][3]
+            this.lvlReq = -1;
+            this.type = type;
         }
         this.locked = item.internalName.includes("Locked")
     }
@@ -114,6 +121,7 @@ export class ObolsData {
     familyObols: Obol[] = [];
     familyStats: ObolStats = new ObolStats();
     upgradeTab: Obol[] = [];
+    inventory: Map<ObolType,Obol[]> = new Map();
 }
 
 export default function parseObols(doc: Cloudsave, charCount: number, allItems: Item[]) {
@@ -149,6 +157,18 @@ export default function parseObols(doc: Cloudsave, charCount: number, allItems: 
         toReturn.familyObols.push(new Obol(itemInfo, obolIndex, false))
         itemInfo.itemStats.forEach(stat => {
             toReturn.familyStats.addStat(stat);
+        })
+    });
+
+    const inventory = doc.get(`ObolInvOr`) as Record<string, string>[];
+    inventory.forEach((typeInventory, index) => {
+        toReturn.inventory.set(index as ObolType, []);
+        [...Object.entries(typeInventory)].forEach(([key, obol], obolIndex) => {
+            if (key == "length") {  // ignore the length key, we don't care.
+                return;
+            }
+            let itemInfo = allItems.find(item => item.internalName == obol)?.duplicate() ?? new Item({internalName: obol, displayName: obol});
+            toReturn.inventory.get(index)?.push(new Obol(itemInfo, -1, false, index as ObolType));
         })
     });
     return toReturn;
