@@ -31,12 +31,6 @@ function ObolsInfo({ playerIndex, title, level }: { playerIndex: number, title: 
     }
 
     const SingleStat = ({ stat, familyStat }: { stat: ItemStat | undefined, familyStat: ItemStat | undefined }) => {
-        if (!stat && !familyStat) {
-            return <Box>Something went wrong.</Box>
-        }
-
-
-
         const hasPercent = useMemo(() => {
             if (stat) {
                 return stat.extra == '' ? stat.displayName.includes("%") : stat.extra.includes("%")
@@ -63,6 +57,9 @@ function ObolsInfo({ playerIndex, title, level }: { playerIndex: number, title: 
             return (stat?.getValue() ?? 0) + (familyStat?.getValue() ?? 0);
         }, [stat, familyStat]);
 
+        if (!stat && !familyStat) {
+            return <Box>Something went wrong.</Box>
+        }
 
         return (
             <ComponentAndLabel
@@ -84,7 +81,7 @@ function ObolsInfo({ playerIndex, title, level }: { playerIndex: number, title: 
     useEffect(() => {
         const theData = idleonData.getData();
         setObolsData(theData.get("obols"));
-    }, [playerIndex])
+    }, [playerIndex, idleonData])
 
     return (
         <Box pad="medium" gap="small">
@@ -175,17 +172,17 @@ function Obols() {
             <ShadowBox flex={false}>
                 <Grid rows="1" columns={['25%', '75%']}>
                     <Box pad="medium" height="100%">
-                        <LeftNavButton isActive={index == -1} clickHandler={() => onActive(-1)} text={"Family"} />
+                        <LeftNavButton key={-1} isActive={index == -1} clickHandler={() => onActive(-1)} text={"Family"} />
                         {
                             playerData?.map((player, playerIndex) => {
                                 return (
-                                    <LeftNavButton isActive={index == playerIndex} clickHandler={() => onActive(playerIndex)} text={player.playerName} iconClass={player.getClassClass()} />
+                                    <LeftNavButton key={playerIndex} isActive={index == playerIndex} clickHandler={() => onActive(playerIndex)} text={player.playerName} iconClass={player.getClassClass()} />
                                 )
                             })
                         }
                     </Box>
                     <Box fill background="dark-1">
-                        <ObolsInfo playerIndex={index} title={index == -1 ? "Family" : playerData && playerData.length > index && playerData[index].playerName ? playerData[index].playerName : "Unknown"} level={index == -1 ? playerData?.reduce((sum, player) => sum += player.level, 0) : playerData && playerData.length > index && playerData[index].level ? playerData[index].level : 0} />
+                        <ObolsInfo playerIndex={index} title={index == -1 ? "Family" : playerData && playerData.length > index && playerData[index].playerName ? playerData[index].playerName : "Unknown"} level={index == -1 ? playerData?.reduce((sum, player) => sum += player.level, 0) ?? 0 : playerData && playerData.length > index && playerData[index].level ? playerData[index].level : 0} />
                     </Box>
                 </Grid>
             </ShadowBox>
