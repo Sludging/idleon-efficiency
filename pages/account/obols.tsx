@@ -41,7 +41,7 @@ function ObolInventory() {
                 obolsData && [...obolsData.inventory].map(([type, obols], index) => (
                     <Box key={index} pad="small" gap="small" border={index + 1 < obolsData.inventory.size ? {side: 'bottom', color: 'grey-1', size: '2px'} : undefined}>
                         <Text size="medium">{ObolType[type]}</Text>
-                        <Box direction="row">
+                        <Box direction="row" wrap>
                             {
                                 obols.filter(obol => !obol.locked && obol.item.internalName != "Blank").sort((obol1, obol2) => obol1.getRarity() > obol2.getRarity() ? -1 : 1).map((obol, obolIndex) => {
                                     return (

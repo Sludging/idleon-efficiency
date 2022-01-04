@@ -89,7 +89,7 @@ function ObolsInfo({ playerIndex, title, level }: { playerIndex: number, title: 
         <Box pad="medium" gap="small">
             <Text size="large">{title}</Text>
             <Box pad="small" gap="small">
-                <Box direction="row">
+                <Box direction="row" wrap>
                     {
                         (playerIndex == -1 ? obolsData?.familyObols : obolsData?.playerObols[playerIndex])?.filter(obol => !obol.locked && obol.item.internalName != "Blank").sort((obol1, obol2) => obol1.getRarity() > obol2.getRarity() ? -1 : 1).map((obol, obolIndex) => {
                             return (
