@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { doc, initializeFirestore, onSnapshot, Firestore, DocumentSnapshot as Document } from 'firebase/firestore';
+import { doc, initializeFirestore, onSnapshot, Firestore, DocumentSnapshot as Document, getDoc } from 'firebase/firestore';
 import { getApp } from 'firebase/app';
 import { useContext } from 'react';
 import { AuthContext } from './firebase/authContext';
@@ -30,6 +30,9 @@ import parseTaskboard from './domain/tasks';
 import { Cloudsave, cloudsaveConverter } from './domain/cloudsave';
 import parseWorship from './domain/worship';
 import parseConstruction from './domain/construction';
+import parseCards from './domain/cards';
+import parseArcade from './domain/arcade';
+import parseObols from './domain/obols';
 
 
 
@@ -77,7 +80,7 @@ const keyFunctionMap: Record<string, Function> = {
   "statues": (doc: Cloudsave, charCount: number) => parseStatues([...Array(charCount)].map((_, i) => { try { return JSON.parse(doc.get(`StatueLevels_${i}`)) } catch (e) { console.log("Statues", i, doc.get(`StatueLevels_${i}`)); throw e } }), JSON.parse(doc.get(`StuG`))),
   "timeAway": (doc: Cloudsave, charCount: number) => JSON.parse(doc.get('TimeAway')),
   "cauldronBubbles": (doc: Cloudsave, charCount: number) => doc.get('CauldronBubbles'),
-  "cards": (doc: Cloudsave, charCount: number) => doc.get('Cards0'),
+  "cards": (doc: Cloudsave, charCount: number) => parseCards(doc.get('Cards0')),
   "players": (doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], charCount: number) => parsePlayers(doc, accountData, allItems),
   "alchemy": (doc: Cloudsave, charCount: number) => parseAlchemy(doc.get("CauldronInfo"), doc.get("CauldUpgLVs")),
   "bribes": (doc: Cloudsave, charCount: number) => parseBribes(doc.get("BribeStatus")),
@@ -105,6 +108,8 @@ const keyFunctionMap: Record<string, Function> = {
   "taskboard": (doc: Cloudsave, charCount: number) => parseTaskboard(JSON.parse(doc.get(`TaskZZ0`)), JSON.parse(doc.get(`TaskZZ1`)), JSON.parse(doc.get(`TaskZZ2`)), JSON.parse(doc.get(`TaskZZ3`)), doc.get(`TaskZZ4`), doc.get(`TaskZZ5`)),
   "worship": (doc: Cloudsave, accountData: Map<string, any>, charCount: number) => parseWorship(JSON.parse(doc.get("TotemInfo")), accountData),
   "construction": (doc: Cloudsave, charCount: number) => parseConstruction(JSON.parse(doc.get("Tower"))),
+  "arcade": (doc: Cloudsave, charCount: number) => parseArcade(JSON.parse(doc.get("ArcadeUpg")), doc.get("OptLacc")),
+  "obols": (doc: Cloudsave, allItems: Item[], charCount: number) => parseObols(doc, charCount, allItems),
 }
 
 
@@ -150,7 +155,7 @@ export const AppProvider: React.FC<{}> = (props) => {
     }
   }
 
-  const updateIdleonData = (data: Cloudsave, charNames: string[], isDemo: boolean = false) => {
+  const updateIdleonData = async (data: Cloudsave, charNames: string[], isDemo: boolean = false) => {
     let accountData = new Map();
     accountData.set("playerNames", charNames);
     accountData.set("itemsData", allItems);
@@ -162,7 +167,7 @@ export const AppProvider: React.FC<{}> = (props) => {
         else if (key == "worship") {
           accountData.set(key, toExecute(data, accountData, charNames.length));
         }
-        else if (key == "lootyData") {
+        else if (key == "lootyData" || key == "obols") {
           accountData.set(key, toExecute(data, allItems, charNames.length));
         }
         else {
@@ -185,6 +190,8 @@ export const AppProvider: React.FC<{}> = (props) => {
     // ForgeItemOrder
     // PlayerStuff_2 - for current charge + other things I think
     // _customBlock_AnvilProduceStats for the rest
+    accountData.set("servervars", await getServerVars())
+
     if (isDemo) {
       const saveGlobalTime = JSON.parse(data.get("TimeAway"))["GlobalTime"] as number;
       const newData = new IdleonData(accountData, new Date(saveGlobalTime * 1000));
@@ -193,6 +200,15 @@ export const AppProvider: React.FC<{}> = (props) => {
     else {
       const newData = new IdleonData(accountData, new Date());
       setState(newData);
+    }
+  }
+
+  const getServerVars = async () => {
+    if (db?.type == "firestore" && user) {
+      const res = await getDoc(doc(db, "_vars", "_vars"));
+      if (res.exists()) {
+        return res.data();
+      }
     }
   }
 
@@ -219,6 +235,7 @@ export const AppProvider: React.FC<{}> = (props) => {
     }
     if (!realDB) {
       setRealDB(getDatabase(app));
+      getServerVars();
     }
     if (authContext?.isDemo) {
       handleStaticData();

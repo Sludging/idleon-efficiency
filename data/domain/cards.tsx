@@ -1,4 +1,4 @@
-import { monstersMap } from "../maps";
+import { EnemyInfo } from "./enemies";
 
 export class Card {
     count: number = 0;
@@ -6,7 +6,7 @@ export class Card {
 
     constructor(public name: string, public id: string, public category: string, public perTier: number, public effect: string, public bonus: number, public order: number) 
     { 
-        this.displayName = monstersMap.get(name)?.replace(/_/g, " ") || "New Monster?";
+        this.displayName = EnemyInfo.find(enemy => enemy.details.internalName == name)?.details.Name || "New Monster?";
     }
 
 
@@ -211,4 +211,14 @@ export class CardInfo {
     getCardSetText = (): string => {
         return this.cardSet.text.replace(/_/g, " ").replace("{", this.cardSet.bonus.toString());
     }
+}
+
+export default function parseCards(cardData: Record<string, number>) {
+    const cards = cardsInit();
+
+    cards.forEach(card => {
+        card.count = cardData[card.name];
+    })
+
+    return cards;
 }

@@ -31,6 +31,9 @@ import '../public/icons/assets/sheets/spritesheet_43x44.css';
 import '../public/icons/assets/sheets/spritesheet_50x50.css';
 import '../public/icons/assets/sheets/spritesheet_78x78.css';
 import '../public/icons/assets/sheets/spritesheet_20x25.css';
+import '../public/icons/assets/sheets/spritesheet_72x72.css';
+import '../public/icons/assets/sheets/spritesheet_60x40.css';
+import '../public/icons/assets/sheets/spritesheet_62x62.css';
 import '../public/icons/assets/sheets/spritesheet_constellations.css';
 import Layout from '../components/layout';
 
@@ -65,6 +68,8 @@ const customTheme = deepMerge(dark, {
       "grey-3": "#4C4F54",
       "dark-1": "#1E2127",
       "dark-2": "#1B1D24",
+      "aqua": "#c9fffd",
+      "yellow-1": "#ffecc9",
       "background": "#1B1D24",
       "white-1": "#30333A",
       "placeholder": "#96979a"

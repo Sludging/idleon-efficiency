@@ -200,6 +200,7 @@ export const filteredLootyItems = [
     'DungWeaponBow1'
 ];
 
+
 export interface DropSource {
     source: string
     quantity: number
@@ -286,7 +287,7 @@ export class ItemStat {
     }
 
     shouldDisplay = (): boolean => {
-        return this.value != 0 || this.stone != 0;
+        return (this.value != 0 || this.stone != 0) && this.getValue() > 0;
     }
 
     getDisplay = () => {
@@ -296,9 +297,15 @@ export class ItemStat {
         } 
         return `${this.displayName}: ${this.getValue()}${this.stone != 0 ? ` (${this.stone})` : ''}`
     }
+
+    duplicate = () => {
+        return new ItemStat(this.displayName, this.stoneName, this.value, this.extra, this.stone);
+    }
 }
 
 const getMiscStatRegex = () => { return /(\d+)(.*)/g };
+const getRegex = () => { return /Cards(\w)(\d+)/g };
+const getEnhancerRegex = () => { return /DungEnhancer(\d+)/g };
 
 export class Item {
     internalName: string;
@@ -416,7 +423,21 @@ export class Item {
     }
 
     getClass = () => {
-        return `icons-3636 icons-${this.internalName}_x1`
+        if (getEnhancerRegex().exec(this.internalName)) {
+            return `icons-3434 icons-${this.internalName}_x1`;
+        }
+        if (getRegex().exec(this.internalName)) {
+            return `icons-2836 icons-${this.internalName}`;
+        }
+        // Cons dem for some reason has capital x.
+        if (this.internalName == "ObolPinkCons") {
+            return `icons-3636 icons-${this.internalName}_X1`;    
+        }
+        // 35 doesn't have an image for some reason.
+        if (this.internalName == "StampA35") {
+            return `icons-3636 icons-StampA34_x1`;    
+        }
+        return `icons-3636 icons-${this.internalName}_x1`;
     }
 
     addStone = (data: StoneProps) => {
@@ -425,23 +446,12 @@ export class Item {
         }
 
         Object.keys(data).forEach((key) => {
+            // logic is as follows:
+            // 1. Check if the value is a number, and if it's 0 ignore it.
+            // 2. Check if we already have a stat that matches this value, and if so update it to know about the stone modifications
+            // 3. Else if it's a unique value, it's value is larger then 0 and we don't have a stat that matches the stone name, add it as a new value (this is usually keychains).
+
             const asNumber = Number(data[key as keyof StoneProps]);
-            // If this is unique txt, it's actually a text and we have a value for it, add it as a new misc
-            if (key == "UQ1txt" && isNaN(asNumber) && data.UQ1val && data.UQ1val > 0) {
-                this.itemStats.push(new ItemStat("Misc", "UQ1val", data.UQ1val, data.UQ1txt))
-            }
-            if (key == "UQ2txt" && isNaN(asNumber) && data.UQ2val && data.UQ2val > 0) {
-                this.itemStats.push(new ItemStat("Misc", "UQ2val", data.UQ2val, data.UQ2txt))
-            }
-
-            // If we already got a valid uq1txt, we handled it above .. so ignore this value
-            if (key == "UQ1val" && data.UQ1txt && Number(data.UQ1txt) != 0 && data.UQ1txt != '') {
-                return;
-            }
-            if (key == "UQ2val" && data.UQ2txt && Number(data.UQ1txt) != 0 && data.UQ2txt != '') {
-                return;
-            }
-
             // ignore 0 values.
             if (!isNaN(asNumber) && asNumber == 0) {
                 return;
@@ -451,6 +461,15 @@ export class Item {
             if (matchingStat) {
                 matchingStat.stone = asNumber;
             }
+            else {
+                // If this is unique txt, it's actually a text and we have a value for it, add it as a new misc
+                if (key == "UQ1txt" && isNaN(asNumber) && data.UQ1val && data.UQ1val > 0 && this.itemStats.find((stat) => stat.stoneName == "UQ1val") == undefined) {
+                    this.itemStats.push(new ItemStat("Misc", "Nothing", data.UQ1val, data.UQ1txt))
+                }
+                if (key == "UQ2txt" && isNaN(asNumber) && data.UQ2val && data.UQ2val > 0 && this.itemStats.find((stat) => stat.stoneName == "UQ2val") == undefined) {
+                    this.itemStats.push(new ItemStat("Misc", "Nothing", data.UQ2val, data.UQ2txt))
+                }
+            }   
         })
     }
 

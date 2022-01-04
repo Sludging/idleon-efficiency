@@ -1,0 +1,22 @@
+.icons-6040 {
+    background-image: url(spritesheet_60x40.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 66.66666666666666%;
+    height: 0;
+    background-size: cover;
+    background-position: 0 calc(var(--row) * 10.0%)
+}
+.icons-6040:not(.icons-TaskRank0):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
+            .icons-TaskRank0 { --row: 0; }
+.icons-TaskRank1 { --row: 1; }
+.icons-TaskRank10 { --row: 2; }
+.icons-TaskRank2 { --row: 3; }
+.icons-TaskRank3 { --row: 4; }
+.icons-TaskRank4 { --row: 5; }
+.icons-TaskRank5 { --row: 6; }
+.icons-TaskRank6 { --row: 7; }
+.icons-TaskRank7 { --row: 8; }
+.icons-TaskRank8 { --row: 9; }
+.icons-TaskRank9 { --row: 10; }
