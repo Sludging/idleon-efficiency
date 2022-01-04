@@ -39,6 +39,7 @@ import { Storage } from '../data/domain/storage';
 import { Prayer } from '../data/domain/prayers';
 import { TimeDown, TimeUp } from '../components/base/TimeDisplay';
 import { Worship } from '../data/domain/worship';
+import ObolsInfo from '../components/account/task-board/obolsInfo';
 
 
 function ItemSourcesDisplay({ sources, dropInfo }: { sources: ItemSources, dropInfo: DropInfo }) {
@@ -141,7 +142,10 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
     const activeShrines = useMemo(() => {
         const theData = idleonData.getData();
         const shrines = theData.get("shrines") as Shrine[];
-        return shrines.filter((shrine) => shrine.currentMap == player.currentMapId && shrine.level > 0);
+        if (shrines) {
+            return shrines.filter((shrine) => shrine.currentMap == player.currentMapId && shrine.level > 0);
+        }
+        return [];
     }, [idleonData, player]);
 
     const activePrayers = useMemo(() => {
@@ -1045,6 +1049,7 @@ function PlayerTab({ player }: PlayerTabProps) {
                     <SpecialButton isActive={index == 7} clickHandler={() => onActive(7)} text={"Talents"} />
                     <SpecialButton isActive={index == 8} clickHandler={() => onActive(8)} text={"Post Office"} />
                     <SpecialButton isActive={index == 9} clickHandler={() => onActive(9)} text={"Inventory"} />
+                    <SpecialButton isActive={index == 10} clickHandler={() => onActive(10)} text={"Obols"} />
                 </Box>
                 <Box fill background="dark-1">
                     {index == 1 && <MiscStats player={player} activeBubbles={activeBubbles} />}
@@ -1056,6 +1061,7 @@ function PlayerTab({ player }: PlayerTabProps) {
                     {index == 7 && <TalentDisplay player={player} />}
                     {index == 8 && <PostOfficeDisplay player={player} extra={poExtra} />}
                     {index == 9 && <InventoryDisplay player={player} />}
+                    {index == 10 && <ObolsInfo playerIndex={player.playerID} title={"Obols"} level={player.level} />}
                 </Box>
             </Grid>
         </ShadowBox>
@@ -1071,9 +1077,7 @@ const customTabs = {
         },
         border: undefined,
         pad: {
-            top: 'small',
-            bottom: undefined,
-            horizontal: 'small',
+            vertical: 'small',
         },
         extend: ({ theme }: { theme: any }) => css`
             height: 56px;
@@ -1092,16 +1096,18 @@ const customTabs = {
             extend: ({ theme }: { theme: any }) => css`
                 alignItems: "center";
                 box-shadow: -7px 8px 16px 0 rgba(0,0,0,0.17);
-                height: 56px;
         `,
         }
     }
 }
 
-const CustomTabTitle = ({ label, isActive }: { label: string, isActive: boolean }) => (
-    <Box direction="row" align="center" margin={{ top: "xsmall", bottom: "xsmall" }}>
-        <Text size="small" color={isActive ? 'brand' : 'accent-2'}>
-            {label}
+const CustomTabTitle = ({ player, isActive }: { player: Player, isActive: boolean }) => (
+    <Box direction="row" align="center" margin={{ vertical: 'xsmall'}}>
+        <Box width={{max:'20px', min: '20px'}} margin={{right: 'xsmall'}}>
+            <Box className={player.getClassClass()} />
+        </Box>
+        <Text size="xsmall" color={isActive ? 'brand' : 'accent-2'}>
+            { player.playerName ? player.playerName : `Character ${player.playerID}`}
         </Text>
     </Box>
 );
@@ -1154,11 +1160,11 @@ function Players() {
                         </Box>
                     </Box>
                     :
-                    <Tabs activeIndex={index} onActive={onActive}>
+                    <Tabs activeIndex={index} onActive={onActive} >
                         {
                             playerData?.map((player, playerIndex) => {
                                 return (
-                                    <Tab key={`player_${player.playerID}`} title={<CustomTabTitle isActive={index == playerIndex} label={`${player.playerName ? player.playerName : `Character ${player.playerID}`}`} />}>
+                                    <Tab key={`player_${player.playerID}`} title={<CustomTabTitle isActive={index == playerIndex} player={player} />}>
                                         <Box pad={{ right: 'large', left: 'large' }} width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} fill>
                                             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Players</Heading>
                                             <Box pad="small">

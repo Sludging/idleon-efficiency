@@ -265,11 +265,15 @@ export class Player {
             default: return '';
         }
     }
+
+    getClassClass = () => {
+        return `icons-3836 icons-ClassIcons${this.classId.valueOf()}`
+    }
 }
 
 const keyFunctionMap: Record<string, Function> = {
     "equipment": (doc: Cloudsave, player: Player, allItems: Item[]) => parseEquipment(doc.get(`EquipOrder_${player.playerID}`), doc.get(`EquipQTY_${player.playerID}`), JSON.parse(doc.get(`EMm0_${player.playerID}`)), JSON.parse(doc.get(`EMm1_${player.playerID}`)), player, allItems),
-    "stats": (doc: Cloudsave, player: Player) => parseStats(doc.get(`PVStatList_${player.playerID}`), player),
+    "stats": (doc: Cloudsave, player: Player) => parseStats(doc.get(`PVStatList_${player.playerID}`), doc.get(`Lv0_${player.playerID}`), player),
     "class": (doc: Cloudsave, player: Player) => {
         player.class = ClassIndex[doc.get(`CharacterClass_${player.playerID}`)]?.replace(/_/g, " ") || "New Class?";
         player.classId = doc.get(`CharacterClass_${player.playerID}`) as ClassIndex;
@@ -407,9 +411,9 @@ const parseMap = (currentMap: number, player: Player) => {
     player.currentMap = mapsMap.get(currentMap.toString())?.replace(/_/g, " ") || "New Map?";
 }
 
-const parseStats = (stats: Array<number>, player: Player) => {
+const parseStats = (stats: number[], lvZero: number[], player: Player) => {
     player.stats.setStats(stats);
-    player.level = stats[4];
+    player.level = lvZero[0];
 }
 
 const parseEquipment = (

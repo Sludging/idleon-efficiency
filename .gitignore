@@ -55,3 +55,6 @@ model_generation
 quest
 # Sentry
 .sentryclirc
+
+!public/**
+*.py

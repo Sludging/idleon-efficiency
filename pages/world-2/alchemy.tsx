@@ -11,11 +11,11 @@ import {
 } from "grommet"
 import styled from 'styled-components'
 
-import { Alchemy as AlchemyData, Cauldron, Bubble, CauldronBoostIndex } from '../data/domain/alchemy';
-import { AchievementConst } from '../data/domain/achievements'
+import { Alchemy as AlchemyData, Cauldron, Bubble, CauldronBoostIndex } from '../../data/domain/alchemy';
+import { AchievementConst } from '../../data/domain/achievements'
 import { useEffect, useState, useContext } from 'react';
-import { AppContext } from '../data/appContext'
-import { nFormatter } from '../data/utility'
+import { AppContext } from '../../data/appContext'
+import { nFormatter, round } from '../../data/utility'
 import { NextSeo } from 'next-seo';
 
 const CapitalizedH3 = styled.h3`
@@ -75,7 +75,7 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
                     {
                         Array.from(materialCosts).map(([item, cost]) => {
                             return (
-                                <Box key={`${bubble.name}_${item}`} direction="row" align="center" ><Text size="small">Material Cost: {nFormatter(Math.round(cost), 2)}</Text><Box align="center" width={{max: '36px'}} fill><Box className={`icons-3636 icons-${item}_x1`} /></Box></Box>
+                                <Box key={`${bubble.name}_${item}`} direction="row" align="center" ><Text size="small">Material Cost: {nFormatter(round(cost), 1)}</Text><Box align="center" width={{max: '36px'}} fill><Box className={`icons-3636 icons-${item}_x1`} /></Box></Box>
                             )
                         })
                     }
