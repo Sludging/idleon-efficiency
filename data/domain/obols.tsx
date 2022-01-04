@@ -162,12 +162,17 @@ export default function parseObols(doc: Cloudsave, charCount: number, allItems: 
 
     const inventory = doc.get(`ObolInvOr`) as Record<string, string>[];
     inventory.forEach((typeInventory, index) => {
+        const tabModifications = JSON.parse(doc.get(`ObolInvMAP_${index}`)) as Record<string, string>[];
+        console.log(index, tabModifications);
         toReturn.inventory.set(index as ObolType, []);
         [...Object.entries(typeInventory)].forEach(([key, obol], obolIndex) => {
             if (key == "length") {  // ignore the length key, we don't care.
                 return;
             }
             let itemInfo = allItems.find(item => item.internalName == obol)?.duplicate() ?? new Item({internalName: obol, displayName: obol});
+            if (!obol.includes("Locked") && obol != "Blank" && Object.keys(tabModifications).includes(obolIndex.toString())) {
+                itemInfo.addStone(tabModifications[obolIndex]);
+            }
             toReturn.inventory.get(index)?.push(new Obol(itemInfo, -1, false, index as ObolType));
         })
     });
