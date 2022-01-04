@@ -163,7 +163,6 @@ export default function parseObols(doc: Cloudsave, charCount: number, allItems: 
     const inventory = doc.get(`ObolInvOr`) as Record<string, string>[];
     inventory.forEach((typeInventory, index) => {
         const tabModifications = JSON.parse(doc.get(`ObolInvMAP_${index}`)) as Record<string, string>[];
-        console.log(index, tabModifications);
         toReturn.inventory.set(index as ObolType, []);
         [...Object.entries(typeInventory)].forEach(([key, obol], obolIndex) => {
             if (key == "length") {  // ignore the length key, we don't care.
