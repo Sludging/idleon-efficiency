@@ -116,7 +116,7 @@ function ObolsInfo({ playerIndex, title, level }: { playerIndex: number, title: 
                 { nextUnlock &&
                     <TextAndLabel
                         label={"Next Unlock"}
-                        text={`${ObolType[nextUnlock.type]} slot at level ${nextUnlock.lvlReq} (${nextUnlock.lvlReq - level} more levels)`}
+                        text={`${ObolType[nextUnlock.type]} slot at level ${nextUnlock.lvlReq} (${nextUnlock.lvlReq - level} more level${nextUnlock.lvlReq - level > 1 ? 's' : ''})`}
                     />
                 }
             </Box>
