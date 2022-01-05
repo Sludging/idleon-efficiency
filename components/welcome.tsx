@@ -72,7 +72,7 @@ export default function Welcome() {
     }
 
     const handleError = (code: string) => {
-        switch(code) {
+        switch (code) {
             case "auth/invalid-credential":
                 setError("The inputed token is invalid, please try again");
                 break;
@@ -95,8 +95,8 @@ export default function Welcome() {
                 <Box margin={{ left: 'auto', right: 'auto' }}>
                     <Grid columns="1/2" fill pad="xlarge">
                         <Box pad="small" gap="small">
-                            <Text size={ size == "small" ? "32px" : "52px"}>Welcome to Idleon Efficiency</Text>
-                            <Text size={ size == "small" ? "18px" : "27px"}>Aimed to provide players of the game Legends of Idleon with tools to become more efficient</Text>
+                            <Text size={size == "small" ? "32px" : "52px"}>Welcome to Idleon Efficiency</Text>
+                            <Text size={size == "small" ? "18px" : "27px"}>Aimed to provide players of the game Legends of Idleon with tools to become more efficient</Text>
                         </Box>
                         <Box></Box>
                     </Grid>
@@ -104,51 +104,45 @@ export default function Welcome() {
                 <Box width={{ max: '1440px' }} pad="large" fill margin={{ left: 'auto', right: 'auto' }} style={{ position: 'relative', top: '150px' }} >
                     {!authData?.isLoading && !authData?.user &&
                         <ShadowBox pad="large" background="dark-2" fill margin={{ left: 'auto', right: 'auto' }} flex={false}>
-                            { size == "small" ? 
-                                <Box gap="medium" pad="small">
-                                    <Text size="large">This website is not designed for mobile.</Text>
-                                    <Text size="medium">Go check it out on desktop!</Text>
-                                </Box>
-                            : 
                             <Box>
-                            <Grid columns={["45%","10%","45%"]} pad={{ left: "large" }}>
-                                <Box gap="medium" alignSelf="center" pad={{left: 'medium', right: 'medium'}}>
-                                    <Text size="24px">Sign in with token</Text>
-                                    <Text size="xsmall">Use this if you signed into Legends of Idleon using google</Text>
-                                    <Button style={{color: "white"}} primary color="accent-1" label="Google Login" onClick={() => setShowLayer(true)} />
-                                </Box>
-                                <Box align="center">
-                                    <VerticalLine />
-                                    <Box margin={{bottom: 'medium', top: 'small'}} align="center">
-                                        <Text>Or</Text>
+                                <Grid columns={size == "small" ? ["100%"] : ["45%", "10%", "45%"]} pad={{ left: "large"}}>
+                                    <Box gap="medium" alignSelf="center" pad={{ left: 'medium', right: 'medium', bottom: size == "small" ? 'xlarge' : undefined}} border={size == "small" ? {size: '2px', color: 'grey-1', side: 'bottom'} : undefined}>
+                                        <Text size="24px">Sign in with token</Text>
+                                        <Text size="xsmall">Use this if you signed into Legends of Idleon using google</Text>
+                                        <Button style={{ color: "white" }} primary color="accent-1" label="Google Login" onClick={() => setShowLayer(true)} />
                                     </Box>
-                                    <VerticalLine />
-                                </Box>
-                                <Box gap="small" pad={{left: 'large', right: 'large'}}>
-                                    <Text size="24px">Sign in with email</Text>
-                                    <Text size="xsmall">Use this if you signed into Legends of Idleon using email</Text>
-                                    <TextInput
-                                        placeholder="Enter Email"
-                                        value={email}
-                                        onChange={event => setEmail(event.target.value)}
-                                    />
-                                    <TextInput
-                                        placeholder="Enter Password"
-                                        value={password}
-                                        type='password'
-                                        onChange={event => setPassword(event.target.value)}
-                                    />
-                                    <Button primary color="brand" label="Login" onClick={() => onButtonClick(authData?.emailLoginFunction, email, password)} />
-                                </Box>
-                            </Grid>
-                            {
-                                error != '' && 
-                                <Box pad={{ top: "medium"}} align="center">
-                                    <FormField error={<Text color="accent-1">{error}</Text>}/>
-                                </Box>
-                            }
+                                    {size != "small" && <Box align="center">
+                                        <VerticalLine />
+                                        <Box margin={{ bottom: 'medium', top: 'small' }} align="center">
+                                            <Text>Or</Text>
+                                        </Box>
+                                        <VerticalLine />
+                                    </Box>
+                                    }
+                                    <Box gap="small" pad={{ left: 'large', right: 'large', top: size == "small" ? 'medium' : undefined}}>
+                                        <Text size="24px">Sign in with email</Text>
+                                        <Text size="xsmall">Use this if you signed into Legends of Idleon using email</Text>
+                                        <TextInput
+                                            placeholder="Enter Email"
+                                            value={email}
+                                            onChange={event => setEmail(event.target.value)}
+                                        />
+                                        <TextInput
+                                            placeholder="Enter Password"
+                                            value={password}
+                                            type='password'
+                                            onChange={event => setPassword(event.target.value)}
+                                        />
+                                        <Button primary color="brand" label="Login" onClick={() => onButtonClick(authData?.emailLoginFunction, email, password)} />
+                                    </Box>
+                                </Grid>
+                                {
+                                    error != '' &&
+                                    <Box pad={{ top: "medium" }} align="center">
+                                        <FormField error={<Text color="accent-1">{error}</Text>} />
+                                    </Box>
+                                }
                             </Box>
-                            }
                         </ShadowBox>
                     }
                 </Box>
@@ -166,7 +160,7 @@ export default function Welcome() {
                     </Layer>
                 }
                 <Box width={{ max: '1440px' }} align="center" pad="small" fill margin={{ left: 'auto', right: 'auto' }}>
-                    <Text size={ size == "small" ? "26px" : "38px"}>Awesome Features</Text>
+                    <Text size={size == "small" ? "26px" : "38px"}>Awesome Features</Text>
                 </Box>
                 <Box width={{ max: '1440px' }} align="center" pad="small" fill margin={{ left: 'auto', right: 'auto' }}>
                     <Grid columns={["2/3", "1/3"]} fill>
@@ -175,16 +169,16 @@ export default function Welcome() {
                         </Box>
                         <Box direction="row" gap="medium" pad="large" align="center">
                             <Box gap="small">
-                                <Text size={ size == "small" ? "medium" : "xlarge"}>Easily see your stamps</Text>
-                                <Text size={ size == "small" ? "xsmall" : "small"}>Keep tracks of your stamps and know exactly how much the next level will cost.</Text>
+                                <Text size={size == "small" ? "medium" : "xlarge"}>Easily see your stamps</Text>
+                                <Text size={size == "small" ? "xsmall" : "small"}>Keep tracks of your stamps and know exactly how much the next level will cost.</Text>
                             </Box>
                         </Box>
                     </Grid>
                     <Grid columns={["1/3", "2/3"]} fill>
                         <Box direction="row" gap="medium" pad="large" align="center">
                             <Box gap="small">
-                                <Text size={ size == "small" ? "medium" : "xlarge"}>All your players - in one spot.</Text>
-                                <Text size={ size == "small" ? "xsmall" : "small"}>See equipment, cards, anvil information and much more!</Text>
+                                <Text size={size == "small" ? "medium" : "xlarge"}>All your players - in one spot.</Text>
+                                <Text size={size == "small" ? "xsmall" : "small"}>See equipment, cards, anvil information and much more!</Text>
                             </Box>
                         </Box>
                         <Box>
@@ -197,8 +191,8 @@ export default function Welcome() {
                         </Box>
                         <Box direction="row" gap="medium" pad="large" align="center">
                             <Box gap="small">
-                                <Text size={ size == "small" ? "medium" : "xlarge"}>Achievement Tracker</Text>
-                                <Text size={ size == "small" ? "xsmall" : "small"}>Easily track your achievements, and see progress on ones you&apos;ve yet to complete.</Text>
+                                <Text size={size == "small" ? "medium" : "xlarge"}>Achievement Tracker</Text>
+                                <Text size={size == "small" ? "xsmall" : "small"}>Easily track your achievements, and see progress on ones you&apos;ve yet to complete.</Text>
                             </Box>
                         </Box>
                     </Grid>
