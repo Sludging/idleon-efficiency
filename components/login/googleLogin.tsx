@@ -1,5 +1,5 @@
 import { Anchor, Box, Text } from "grommet";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GoogleDeviceLogin } from "../../data/domain/login/googleDeviceLogin";
 import { AuthContext } from "../../data/firebase/authContext";
 import ShadowBox from "../base/ShadowBox";
@@ -21,7 +21,7 @@ export default function GoogleLogin () {
         }
     }
 
-    const checkResult = async (retryCount: number, code: string) => {
+    const checkResult = async (code: string) => {
         if (retryCounter >= 60) {
             setError("Reached maximum number of retries, please refresh the page and try again.");
             return;
@@ -43,7 +43,7 @@ export default function GoogleLogin () {
             getCode();
         }
         else {
-            checkResult(retryCounter, deviceCode)
+            checkResult(deviceCode)
             .then((res) => {
                 if (!res) {
                     setTimeout(() => setRetryCounter(retryCounter + 1), 5000);
@@ -57,7 +57,7 @@ export default function GoogleLogin () {
         <ShadowBox background="dark-1" pad="large" gap="small">
             { !code ? <Text>Getting code from google, please wait.</Text>
             : <Text>Please go to <Anchor href={verificationUrl} target="_blank" title={verificationUrl}>{verificationUrl}</Anchor> and use the code {code}</Text>}
-            { deviceCode && <Text>Waiting for authentication to complete, retried: {retryCounter} times.</Text>}
+            { !error && deviceCode && <Text>Waiting for authentication to complete, retried: {retryCounter} times.</Text>}
             { error && <Text>{error}</Text>}
         </ShadowBox>
     )
