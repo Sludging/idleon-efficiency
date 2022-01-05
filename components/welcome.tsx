@@ -16,6 +16,7 @@ import { AuthContext } from '../data/firebase/authContext'
 import ShadowBox from './base/ShadowBox';
 import { MouseEventHandler } from 'hoist-non-react-statics/node_modules/@types/react';
 import { NextSeo } from 'next-seo';
+import GoogleLogin from './login/googleLogin';
 
 const VerticalLine = styled.hr`
     border: 0;
@@ -114,15 +115,7 @@ export default function Welcome() {
                                 <Box gap="medium" alignSelf="center" pad={{left: 'medium', right: 'medium'}}>
                                     <Text size="24px">Sign in with token</Text>
                                     <Text size="xsmall">Use this if you signed into Legends of Idleon using google</Text>
-                                    <Box direction="row">
-                                        <TextInput
-                                            placeholder="Enter Token"
-                                            value={value}
-                                            onChange={event => setValue(event.target.value)}
-                                        />
-                                        <Button style={{color: "white"}} primary color="accent-1" label="Login" onClick={() => onButtonClick(authData?.tokenFunction, value)} />
-                                    </Box>
-                                    <Anchor onClick={() => setShowLayer(true)} color="brand">Learn how to get your token</Anchor>
+                                    <Button style={{color: "white"}} primary color="accent-1" label="Google Login" onClick={() => setShowLayer(true)} />
                                 </Box>
                                 <Box align="center">
                                     <VerticalLine />
@@ -169,46 +162,7 @@ export default function Welcome() {
                         modal={true}
                         position="center"
                     >
-                        <Box pad="medium" gap="medium" width="xxlarge" background="dark-2">
-                            <Text size="32px">How to get your token</Text>
-                            <Grid rows="1" columns={["1/3", "2/3"]}>
-                                <Box height="100%" fill >
-                                    <SpecialButton isActive={index == 1} clickHandler={() => onActive(1)} step={1} text={"Copy the code"} />
-                                    <SpecialButton isActive={index == 2} clickHandler={() => onActive(2)} step={2} text={<Box gap="small" direction="row">Go to Legends of Idleon <Anchor target="_blank" href="https://www.legendsofidleon.com/ytGl5oc/"><Text style={{ textDecoration: 'underline' }} color='accent-2' size="18px">website</Text></Anchor></Box>} />
-                                    <SpecialButton isActive={index == 3} clickHandler={() => onActive(3)} step={3} text={"Open DevTools and paste the code from Step 1."} />
-                                    <SpecialButton isActive={index == 4} clickHandler={() => onActive(4)} step={4} text={"Login through the pop-up."} />
-                                    <SpecialButton isActive={index == 5} clickHandler={() => onActive(5)} step={5} text={"Copy the long string from the console."} />
-                                    <SpecialButton isActive={index == 6} clickHandler={() => onActive(6)} step={6} text={"Paste the string into the box and click Login."} />
-                                </Box>
-                                <Box fill background="dark-1">
-                                    {index == 1 && <pre>
-                                        <Box align="start" background="rgb(245 245 245)" style={{ color: 'black' }}>
-                                            {`
-        var app = firebase.initializeApp({
-            apiKey: "AIzaSyAU62kOE6xhSrFqoXQPv6_WHxYilmoUxDk",
-            authDomain: "idlemmo.firebaseapp.com",
-            databaseURL: "idlemmo.firebaseio.com",
-            projectId: "idlemmo",
-        }, "idleon");
-
-        var provider = new firebase.auth.GoogleAuthProvider()
-        app.auth().signInWithPopup(provider)
-        .then((result) => {
-            var user = result.user;
-            var credential = result.credential;
-            console.log(credential["idToken"]);
-        })
-                                    `}
-                                        </Box>
-                                    </pre>}
-                                {index == 2 && <Image alt="idleon-website" src={'/idleon-website.png'} />}
-                                {index == 3 && <Image alt="dev-tools" src={'/dev-tools.png'} />}
-                                {index == 4 && <Image alt="popup" src={'/popup.png'} />}
-                                {index == 5 && <Image alt="long-string" src={'/long-string.png'} />}
-                                {index == 6 && <Image alt="login" src={'/login.png'} />}
-                                </Box>
-                            </Grid>
-                        </Box>
+                        <GoogleLogin />
                     </Layer>
                 }
                 <Box width={{ max: '1440px' }} align="center" pad="small" fill margin={{ left: 'auto', right: 'auto' }}>
