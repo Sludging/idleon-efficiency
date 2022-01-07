@@ -58,7 +58,8 @@ export class Stamp {
     }
 
     getMaterialCost = (blueFlavPercent: number = 0): number => {
-        return Math.floor(this.data.startV * Math.pow(this.data.mCostExp, Math.pow(Math.round(this.level / this.data.upgradeInterval) - 1, 0.8)) * Math.max(0.1, 1 - blueFlavPercent));
+        const baseCost = this.data.startV * Math.pow(this.data.mCostExp, Math.pow(Math.round(this.level / this.data.upgradeInterval) - 1, 0.8));
+        return Math.floor(baseCost) * Math.max(0.1, 1 - blueFlavPercent);
     }
 
     getBonusText = (skillLevel: number = 0): string => {
