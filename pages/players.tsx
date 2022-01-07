@@ -41,6 +41,7 @@ import { TimeDown, TimeUp } from '../components/base/TimeDisplay';
 import { Worship } from '../data/domain/worship';
 import ObolsInfo from '../components/account/task-board/obolsInfo';
 import TextAndLabel, { ComponentAndLabel } from '../components/base/TextAndLabel';
+import { Bribe, BribeStatus } from '../data/domain/bribes';
 
 
 function ItemSourcesDisplay({ sources, dropInfo }: { sources: ItemSources, dropInfo: DropInfo }) {
@@ -547,6 +548,7 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
         const theData = idleonData.getData();
         const guild = theData.get("guild");
         const shrines = theData.get("shrines");
+        const bribes = theData.get("bribes") as Bribe[];
 
         let guildCarryBonus: number = 0;
         let zergPrayerBonus: number = 0; // TODO!
@@ -556,8 +558,10 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
             guildCarryBonus = lavaFunc(guild.guildBonuses[2].func, guild.guildBonuses[2].level, guild.guildBonuses[2].x1, guild.guildBonuses[2].x2);
         }
         const telekineticStorageBonus = player.talents.find(x => x.skillIndex == CapacityConst.TelekineticStorageSkillIndex)?.getBonus() ?? 0;
-        const carryCapShrineBonus = shrines[ShrineConstants.CarryShrine].getBonus(player.currentMapId);
-        return player.capacity.getAllCapsBonus(guildCarryBonus, telekineticStorageBonus, carryCapShrineBonus, zergPrayerBonus, ruckSackPrayerBonus);
+        const cardBonus = player.cardInfo?.equippedCards.find(x => x.id == "Z9")?.getBonus() ?? 0;
+        const carryCapShrineBonus = shrines[ShrineConstants.CarryShrine].getBonus(player.currentMapId, cardBonus);
+        const bribeCapBonus = bribes.find(bribe => bribe.name == "Bottomless Bags")?.status == BribeStatus.Purchased ? 5 : 0;
+        return player.capacity.getAllCapsBonus(guildCarryBonus, telekineticStorageBonus, carryCapShrineBonus, zergPrayerBonus, ruckSackPrayerBonus, bribeCapBonus);
 
     }, [idleonData, player])
 
@@ -676,6 +680,7 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
         const theData = idleonData.getData();
         const guild = theData.get("guild");
         const shrines = theData.get("shrines");
+        const bribes = theData.get("bribes") as Bribe[];
 
         let guildCarryBonus: number = 0;
         let zergPrayerBonus: number = 0; // TODO!
@@ -686,8 +691,10 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
         }
 
         const telekineticStorageBonus = player.talents.find(x => x.skillIndex == CapacityConst.TelekineticStorageSkillIndex)?.getBonus() ?? 0;
-        const carryCapShrineBonus = shrines[ShrineConstants.CarryShrine].getBonus(player.currentMapId);
-        return player.capacity.getAllCapsBonus(guildCarryBonus, telekineticStorageBonus, carryCapShrineBonus, zergPrayerBonus, ruckSackPrayerBonus);
+        const cardBonus = player.cardInfo?.equippedCards.find(x => x.id == "Z9")?.getBonus() ?? 0;
+        const carryCapShrineBonus = shrines[ShrineConstants.CarryShrine].getBonus(player.currentMapId, cardBonus);
+        const bribeCapBonus = bribes.find(bribe => bribe.name == "Bottomless Bags")?.status == BribeStatus.Purchased ? 5 : 0;
+        return player.capacity.getAllCapsBonus(guildCarryBonus, telekineticStorageBonus, carryCapShrineBonus, zergPrayerBonus, ruckSackPrayerBonus, bribeCapBonus);
 
     }, [idleonData, player])
 
