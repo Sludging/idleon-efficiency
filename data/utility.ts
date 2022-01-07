@@ -50,7 +50,15 @@ export enum Coins {
 
 }
 
-export const nFormatter = (num: number, digits: number) => {
+export const nFormatter = (num: number, digits?: number) => {
+    if (!digits) {
+        if (num < 10000) {
+            digits = 2;
+        }
+        else {
+            digits = 1;
+        }
+    }
     var si = [
         { value: 1, symbol: "" },
         { value: 1E3, symbol: "k" },

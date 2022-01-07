@@ -169,10 +169,30 @@ export class Anvil {
         return Math.round(baseCost * (1 + pointsBought / 100) * Math.max(0.1, 1 - alchemyCostReduction / 100));
     }
 
+    getMonsterMatCost = (alchemyCostReduction: number, pointsBought: number = this.pointsFromMats) => {
+        if (pointsBought >= 200) {
+            return Math.round((Math.pow(pointsBought + 1, 1.5) + pointsBought) * Math.max(0.1, 1 - alchemyCostReduction / 100));
+        }
+        // TODO: Handle before sharpshell!
+        return 0;
+    }
+
     getTotalCoinCost = (alchemyCostReduction: number, pointsBought: number = this.pointsFromCoins) => {
         let totalCost = 0;
         range(0, pointsBought).forEach((_, point) => {
             totalCost += this.getCoinCost(alchemyCostReduction, point);
+        });
+
+        return totalCost;
+    }
+
+    getTotalSharpshells = (alchemyCostReduction: number) => {
+        if (this.pointsFromMats < 200) {
+            return 0
+        }
+        let totalCost = 0;
+        range(200, this.pointsFromMats).forEach((point, _) => {
+            totalCost += this.getMonsterMatCost(alchemyCostReduction, point);
         });
 
         return totalCost;

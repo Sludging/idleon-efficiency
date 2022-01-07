@@ -437,7 +437,7 @@ export class Item {
         if (this.internalName == "StampA35") {
             return `icons-3636 icons-StampA34_x1`;    
         }
-        return `icons-3636 icons-${this.internalName}_x1`;
+        return `icons-7272 icons-${this.internalName}`;
     }
 
     addStone = (data: StoneProps) => {
