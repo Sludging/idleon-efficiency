@@ -360,7 +360,7 @@ class Bag {
 
         const stampMatCapMath = (1 + stampMatCapBonus / 100);
         const gemPurchaseMath = (1 + (25 * gemsCapacityBought) / 100);
-        const additionalCapMath = (1 + (stampAllCapBonus + starSignExtraCap) / 100); // ignoring star sign
+        const additionalCapMath = (1 + (stampAllCapBonus + starSignExtraCap) / 100);
         const talentBonusMath = (1 + extraBagsLevel / 100);
         const bCraftCap = this.capacity;
         return Math.floor(bCraftCap * stampMatCapMath * gemPurchaseMath * additionalCapMath * talentBonusMath * allCapBonuses);
