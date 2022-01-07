@@ -1,0 +1,26 @@
+.icons-104120 {
+    background-image: url(spritesheet_104x120.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 115.38461538461537%;
+    height: 0;
+    background-size: cover;
+    background-position: 0 calc(var(--row) * 7.142857142857143%)
+}
+.icons-104120:not(.icons-B3P12):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
+            .icons-B3P12 { --row: 0; }
+.icons-B3P12b { --row: 1; }
+.icons-aVials0 { --row: 2; }
+.icons-aVials1 { --row: 3; }
+.icons-aVials10 { --row: 4; }
+.icons-aVials11 { --row: 5; }
+.icons-aVials12 { --row: 6; }
+.icons-aVials2 { --row: 7; }
+.icons-aVials3 { --row: 8; }
+.icons-aVials4 { --row: 9; }
+.icons-aVials5 { --row: 10; }
+.icons-aVials6 { --row: 11; }
+.icons-aVials7 { --row: 12; }
+.icons-aVials8 { --row: 13; }
+.icons-aVials9 { --row: 14; }

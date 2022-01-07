@@ -82,7 +82,7 @@ const keyFunctionMap: Record<string, Function> = {
   "cauldronBubbles": (doc: Cloudsave, charCount: number) => doc.get('CauldronBubbles'),
   "cards": (doc: Cloudsave, charCount: number) => parseCards(doc.get('Cards0')),
   "players": (doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], charCount: number) => parsePlayers(doc, accountData, allItems),
-  "alchemy": (doc: Cloudsave, charCount: number) => parseAlchemy(doc.get("CauldronInfo"), doc.get("CauldUpgLVs")),
+  "alchemy": (doc: Cloudsave, allItems: Item[], charCount: number) => parseAlchemy(doc.get("CauldronInfo"), doc.get("CauldUpgLVs"), allItems),
   "bribes": (doc: Cloudsave, charCount: number) => parseBribes(doc.get("BribeStatus")),
   "guild": (doc: Cloudsave, charCount: number) => parseGuild(JSON.parse(doc.get("Guild"))),
   "gems": (doc: Cloudsave, charCount: number) => parseGems(JSON.parse(doc.get('GemItemsPurchased'))),
@@ -167,7 +167,7 @@ export const AppProvider: React.FC<{}> = (props) => {
         else if (key == "worship") {
           accountData.set(key, toExecute(data, accountData, charNames.length));
         }
-        else if (key == "lootyData" || key == "obols") {
+        else if (key == "lootyData" || key == "obols" || key == "alchemy") {
           accountData.set(key, toExecute(data, allItems, charNames.length));
         }
         else {

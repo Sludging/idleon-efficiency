@@ -11,12 +11,15 @@ import {
 } from "grommet"
 import styled from 'styled-components'
 
-import { Alchemy as AlchemyData, Cauldron, Bubble, CauldronBoostIndex } from '../../data/domain/alchemy';
+import { Alchemy as AlchemyData, Cauldron, Bubble, CauldronBoostIndex, Vial } from '../../data/domain/alchemy';
 import { AchievementConst } from '../../data/domain/achievements'
 import { useEffect, useState, useContext } from 'react';
 import { AppContext } from '../../data/appContext'
 import { nFormatter, round } from '../../data/utility'
 import { NextSeo } from 'next-seo';
+import TabButton from "../../components/base/TabButton";
+import { Item } from "../../data/domain/items";
+import TipDisplay, { TipDirection } from "../../components/base/TipDisplay";
 
 const CapitalizedH3 = styled.h3`
     text-transform: capitalize
@@ -56,7 +59,7 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
         if (bubble.level == 0) {
             return <></>
         }
-        const materialCosts: Map<string, number> = bubble.getMaterialCost(cauldronCostLevel, undevelopedCostsBubbleLevel, barleyBrewVialLevel, bargainBubbleLevel, classMultiBubbleLevel, discountLevel, hasAchievement);
+        const materialCosts: Map<Item, number> = bubble.getMaterialCost(cauldronCostLevel, undevelopedCostsBubbleLevel, barleyBrewVialLevel, bargainBubbleLevel, classMultiBubbleLevel, discountLevel, hasAchievement);
         return (
             <Box direction="row" align="center" width={{ max: 'medium' }}>
                 {!faceLeft &&
@@ -70,12 +73,12 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
                 }
                 <Box pad="small" gap="small" background="white">
                     <Text size={size == "small" ? 'small' : ''} weight="bold">{bubble.name} ({bubble.level})</Text>
-                    <hr style={{ width: "100%"}} />
+                    <hr style={{ width: "100%" }} />
                     <Text size="small">Bonus: {bubble.getBonusText()}</Text>
                     {
                         Array.from(materialCosts).map(([item, cost]) => {
                             return (
-                                <Box key={`${bubble.name}_${item}`} direction="row" align="center" ><Text size="small">Material Cost: {nFormatter(round(cost), 1)}</Text><Box align="center" width={{max: '36px'}} fill><Box className={`icons-3636 icons-${item}_x1`} /></Box></Box>
+                                <Box key={`${bubble.name}_${item.internalName}`} direction="row" align="center" ><Text size="small">Material Cost: {nFormatter(round(cost), 1)}</Text><Box align="center" width={{ max: '36px' }} fill><Box className={item.getClass()} /></Box></Box>
                             )
                         })
                     }
@@ -104,22 +107,22 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
                     Object.entries(cauldron.bubbles).filter(([_, bubble]) => bubble.level > 0).map(([_, bubble], index) => {
                         return (
                             <Box key={`cauldron_${index}_${bubble.name}`}>
-                                    <Tip
-                                        plain
-                                        content={
-                                            <TipContent bubble={bubble} faceLeft={cauldron.short_name == "Y"} />
-                                        }
-                                        dropProps={{ align: size == "small" ? { top: 'bottom' } : cauldron.short_name == "Y" ? { right: 'left' } : { left: 'right' } }}
-                                    >
-                                        <Box direction="row" fill align="center">
-                                            <Box align="center" width={{min: '70px', max: '70px'}} fill>
-                                                <Box style={{ opacity: bubble.level > 0 ? 1 : 0.2 }} className={bubble.class_name} />
-                                            </Box>
-                                            <Box>
-                                                <Text size="medium">{bubble.level}</Text>
-                                            </Box>
+                                <Tip
+                                    plain
+                                    content={
+                                        <TipContent bubble={bubble} faceLeft={cauldron.short_name == "Y"} />
+                                    }
+                                    dropProps={{ align: size == "small" ? { top: 'bottom' } : cauldron.short_name == "Y" ? { right: 'left' } : { left: 'right' } }}
+                                >
+                                    <Box direction="row" fill align="center">
+                                        <Box align="center" width={{ min: '70px', max: '70px' }} fill>
+                                            <Box style={{ opacity: bubble.level > 0 ? 1 : 0.2 }} className={bubble.class_name} />
                                         </Box>
-                                    </Tip>
+                                        <Box>
+                                            <Text size="medium">{bubble.level}</Text>
+                                        </Box>
+                                    </Box>
+                                </Tip>
                             </Box>
                         )
                     })
@@ -129,15 +132,81 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
     )
 }
 
-function Alchemy() {
+function VialTipInfo({ vial }: { vial: Vial }) {
+    if (vial.level == 0) {
+        return (
+            <Box>
+                <Text size="small">Bonus: {vial.getBonusText()}</Text>
+                <Text size="small">You need to roll at least a {vial.getNumberToRoll()} to unlock this vial</Text>
+                
+            </Box>
+        )
+    }
+
+    return (
+        <Box>
+            <Text size="small">Bonus: {vial.getBonusText()}</Text>
+            {
+                Array.from(vial.getMaterialCost()).map(([item, cost], index) => {
+                    return (
+                        <Box key={index} direction="row" align="center" ><Text size="small">Material Cost: {nFormatter(round(cost), 1)}</Text><Box align="center" width={{ max: '36px' }} fill><Box className={item.getClass()} /></Box></Box>
+                    )
+                })
+            }
+        </Box>
+    )
+}
+
+function VialsDisplay() {
     const [alchemyData, setAlchemyData] = useState<AlchemyData>();
-    const [undevelopedCostsBubbleLevel, setUndevelopedCostsBubbleLevel] = useState<number>(0);
-    const [barleyBrewVialLevel, setBarleyBrewVialLevel] = useState<number>(0);
+    const idleonData = useContext(AppContext);
+
+    useEffect(() => {
+        if (idleonData.getData().size > 0) {
+            const theData = idleonData.getData();
+            setAlchemyData(theData.get("alchemy"));
+        }
+    }, [idleonData]);
+
+    return (
+        <ShadowBox background="dark-1" pad="medium">
+            <Box direction="row" wrap>
+                {
+                    alchemyData?.vials.map((vial, index) => (
+                        <Box key={index} width={{ max: '104px', min: '104px' }} height={{ max: '120px', min: '120px' }}>
+                            <TipDisplay
+                                body={<VialTipInfo vial={vial} />}
+                                heading={vial.name}
+                                direction={TipDirection.Down}
+                                size="medium"
+                            >
+                                <Stack anchor='center' margin={{ right: 'small' }}>
+                                    <Box width={{ max: '104px', min: '104px' }} height={{ max: '120px', min: '120px' }}>
+                                        <Box className={vial.getVialClass()} />
+                                    </Box>
+                                    <Box width={{ max: '72x', min: '72x' }} >
+                                        <Box className={vial.getClass()} />
+                                    </Box>
+                                </Stack>
+                            </TipDisplay>
+                        </Box>
+                    ))
+                }
+            </Box>
+        </ShadowBox>
+    )
+}
+
+function BubblesDisplay() {
+    const [alchemyData, setAlchemyData] = useState<AlchemyData>();
     const [hasAlchemyAchievement, setHasAlchemyAchievement] = useState<boolean>(false);
     const [discountLevel, setDiscountLevel] = useState<string>('0');
     const [classMulti, setClassMulti] = useState(false);
+    const [undevelopedCostsBubbleLevel, setUndevelopedCostsBubbleLevel] = useState<number>(0);
+    const [barleyBrewVialLevel, setBarleyBrewVialLevel] = useState<number>(0);
 
     const idleonData = useContext(AppContext);
+
     const bargainOptions = [
         {
             label: 'No discount',
@@ -200,11 +269,8 @@ function Alchemy() {
     }
 
     return (
-        <>
-            <NextSeo title="Alchemy" />
-        <Box gap="large" fill>
-            <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Alchemy</Heading>
-            <Box gap="large" align="center" direction="row">
+        <ShadowBox background="dark-1" flex={false} pad={{ bottom: 'small' }}>
+            <Box gap="large" align="center" direction="row" pad="medium">
                 <CheckBox
                     checked={classMulti}
                     label="Class multiplier bonus?"
@@ -218,20 +284,37 @@ function Alchemy() {
                     onChange={({ value: nextValue }) => setDiscountLevel(nextValue)}
                 />
             </Box>
-            <ShadowBox background="dark-1" flex={false} pad={{ bottom: 'small' }}>
-                <Grid columns="1/4">
-                    {
-                        alchemyData && Object.entries(alchemyData.cauldrons).map(([_, cauldron], index) => {
-                            return (<CauldronDisplay key={`tab_${index}`} cauldron={cauldron} undevelopedCostsBubbleLevel={undevelopedCostsBubbleLevel} barleyBrewVialLevel={barleyBrewVialLevel} hasAchievement={hasAlchemyAchievement} discountLevel={parseInt(discountLevel)} classMultiBonus={classMulti} />)
-                        })
+            <Grid columns="1/4">
+                {
+                    alchemyData && Object.entries(alchemyData.cauldrons).map(([_, cauldron], index) => {
+                        return (<CauldronDisplay key={`tab_${index}`} cauldron={cauldron} undevelopedCostsBubbleLevel={undevelopedCostsBubbleLevel} barleyBrewVialLevel={barleyBrewVialLevel} hasAchievement={hasAlchemyAchievement} discountLevel={parseInt(discountLevel)} classMultiBonus={classMulti} />)
+                    })
+                }
+                {
+                    !alchemyData && <Text>Not ready yet</Text>
+                }
+            </Grid>
+        </ShadowBox>)
+}
+
+function Alchemy() {
+    const [activeTab, setActiveTab] = useState<string>("Bubbles");
+
+    return (
+        <Box>
+            <NextSeo title="Alchemy" />
+            <Box>
+                <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Alchemy</Heading>
+                <Box align="center" direction="row" justify="center" gap="small" margin={{ bottom: 'small' }}>
+                    {["Bubbles", "Vials"].map((tabName, index) => (
+                        <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
+                    ))
                     }
-                    {
-                        !alchemyData && <Text>Not ready yet</Text>
-                    }
-                </Grid>
-            </ShadowBox>
+                </Box>
+                {activeTab == "Bubbles" && <BubblesDisplay />}
+                {activeTab == "Vials" && <VialsDisplay />}
+            </Box>
         </Box>
-        </>
     )
 }
 

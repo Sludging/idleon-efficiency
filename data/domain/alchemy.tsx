@@ -1,4 +1,5 @@
 import { lavaFunc } from '../utility'
+import { Item } from './items';
 
 export enum CauldronIndex {
     Power = 0,
@@ -30,6 +31,9 @@ export const AlchemyConst = {
 };
 
 export const VialIndex = 4;
+
+const vialPercentages = "99 90 80 70 60 60 40 50 40 35 30 25 17 16 13 9 13 10 7 11 1 25 25 20 20 15 14 13 5 12 10 9 7 5 4 3 3 2 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1".split(" ").map((value) => parseInt(value));
+const vialCostPerLevel = [0, 100, 1000, 2500, 10000, 50000, 100000, 500000, 1000001, 5000000, 25000000, 100000000, 1000000000, 50000000000];
 
 const calcBubbleMatCost = (bubbleLvl: number, baseCost: number, isLiquid: boolean, cauldCostReduxLvl: number = 0, undevelopedCostsBubbleLevel: number = 0, bubbleCostVialLvl: number = 0, bubbleBargainLvl: number = 0, bubbleMultClassLvl: number = 0, shopBargainBought: number = 0, hasAchievement: boolean): number => {
     if (isLiquid) {
@@ -63,36 +67,32 @@ function handleToolBubbles(titleText: string, bubbleName: string) {
     }
 }
 
-interface Item {
-    item: string;
-    quantity: number;
-}
-
 export class Bubble {
     name: string;
     x1: number;
     x2: number;
     func: string;
     description: string;
+    rawRequirements: {item: string, quantity: number}[];
     requirements: Array<Item> = [];
 
     level: number = 0;
     class_name: string;
 
-    constructor(name: string, icon_prefix: string, bubble_number: string, x1: number, x2: number, func: string, description: string, requirements: Array<Item>) {
+    constructor(name: string, icon_prefix: string, bubble_number: string, x1: number, x2: number, func: string, description: string, requirements: Array<{item: string, quantity: number}>) {
         this.class_name = `icons-7070 icons-aUpgrades${icon_prefix}${bubble_number}`;
         this.name = name.replace(/_/g, " ");
         this.x1 = x1;
         this.x2 = x2;
         this.func = func;
         this.description = description;
-        this.requirements = requirements;
+        this.rawRequirements = requirements;
     }
 
-    getMaterialCost = (cauldCostReduxLvl: number = 0, undevelopedCostsBubbleLevel: number = 0, bubbleCostVialLvl: number = 0, bubbleBargainLvl: number = 0, bubbleMultClassLvl: number = 0, shopBargainBought: number = 0, hasAchievement: boolean = false): Map<string, number> => {
-        let toReturn = new Map<string, number>();
+    getMaterialCost = (cauldCostReduxLvl: number = 0, undevelopedCostsBubbleLevel: number = 0, bubbleCostVialLvl: number = 0, bubbleBargainLvl: number = 0, bubbleMultClassLvl: number = 0, shopBargainBought: number = 0, hasAchievement: boolean = false): Map<Item, number> => {
+        let toReturn = new Map<Item, number>();
         this.requirements.forEach((req) => {
-            toReturn.set(req.item, calcBubbleMatCost(this.level, req.quantity, req.item.includes("Liquid"), cauldCostReduxLvl, undevelopedCostsBubbleLevel, bubbleCostVialLvl, bubbleBargainLvl, bubbleMultClassLvl, shopBargainBought, hasAchievement))
+            toReturn.set(req, calcBubbleMatCost(this.level, req.count, req.internalName.includes("Liquid"), cauldCostReduxLvl, undevelopedCostsBubbleLevel, bubbleCostVialLvl, bubbleBargainLvl, bubbleMultClassLvl, shopBargainBought, hasAchievement))
         })
         return toReturn;
     }
@@ -126,21 +126,57 @@ export class Vial {
     x2: number;
     func: string;
     description: string;
+    rawRequirements: {item: string, quantity: number}[];
     requirements: Array<Item> = [];
 
     level: number = 0;
 
-    constructor(name: string, x1: number, x2: number, func: string, description: string, requirements: Array<Item>) {
+    constructor(public vialIndex: number, name: string, x1: number, x2: number, func: string, description: string, requirements: Array<{item: string, quantity: number}>) {
         this.name = name.replace(/_/g, " ");
         this.x1 = x1;
         this.x2 = x2;
         this.func = func;
         this.description = description;
-        this.requirements = requirements;
+        this.rawRequirements = requirements;
     }
 
     getBonus = (round: boolean = false): number => {
         return lavaFunc(this.func, this.level, this.x1, this.x2, round);
+    }
+
+    getBonusText = (): string => {
+        return this.description.replace(/{/g, this.getBonus(true).toString());
+
+    }
+
+    getClass = () => {
+        const costItem = this.requirements.find(item => !item.internalName.includes("Liquid"));
+        if (costItem) {
+            return costItem.getClass();
+        }
+
+        return "";
+    }
+
+    getVialClass = () => {
+        return `icons-104120 icons-aVials${this.level}`
+    }
+
+    getNumberToRoll = () => {
+        return 100 - vialPercentages[this.vialIndex];
+    }
+
+    getMaterialCost = (): Map<Item, number> => {
+        let toReturn = new Map<Item, number>();
+        this.requirements.forEach((req) => {
+            if (req.internalName.includes("Liquid")) {
+                toReturn.set(req, 3 * this.level)
+            }
+            else {
+                toReturn.set(req, vialCostPerLevel[this.level]);
+            }
+        })
+        return toReturn;
     }
 }
 
@@ -249,48 +285,48 @@ const initAlchemy = () => {
     alchemy.cauldrons.push(high_iq_cauldron);
     alchemy.cauldrons.push(kazam_cauldron);
 
-    alchemy.vials.push(new Vial("Copper Corona", 3, 0, "add", "Orange bubble cauldron brew speed is increased by +{%", JSON.parse('[{"item": "Copper", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Sippy Splinters", 3, 0, "add", "Green bubble cauldron brew speed is increased by +{%", JSON.parse('[{"item": "OakTree", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Mushroom Soup", 3, 0, "add", "Yellow cauldron brew speed is increased by +{%", JSON.parse('[{"item": "Grasslands1", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Spool Sprite", 3, 0, "add", "Purple cauldron brew speed is increased by +{%", JSON.parse('[{"item": "CraftMat1", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Barium Mixture", 3, 0, "add", "+{ Water Droplet max capacity. Thats the 1st liquid type in Alchemy, btw.", JSON.parse('[{"item": "CopperBar", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Dieter Drink", 1, 0, "add", "Monsters drop +{% more money.", JSON.parse('[{"item": "Grasslands3", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Skinny 0 Cal", 2.5, 0, "add", "+{% chance to get double points when depositing statues. So like... if you deposit one statue, it might count as one! Or two.", JSON.parse('[{"item": "Jungle2", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Thumb Pow", 1, 0, "add", "When converting Skill EXP into Class EXP using the 'EXP CONVERTER' star talent, you'll get {% more Class EXP than you usually do.", JSON.parse('[{"item": "CraftMat5", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Jungle Juice", 1, 0, "add", "+{% liquid regen rate for all liquid cauldrons. Yes, even the secret one!", JSON.parse('[{"item": "JungleTree", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Barley Brew", 1, 0, "add", "Alchemy bubble upgrade costs are {% lower for all bubbles! Even the giraffe bubbles that look strangely like elephants!", JSON.parse('[{"item": "IronBar", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Anearful", 2, 0, "add", "+{% Card drop rate. Even works offline, just like it always has! What do you mean this used to say something different...?", JSON.parse('[{"item": "Forest1", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Tea With Pea", 3, 0, "add", "+{ Liquid Nitrogen max capacity. Thats the 2nd liquid type in Alchemy, btw.", JSON.parse('[{"item": "ToiletTree", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Gold Guzzle", 1, 0, "add", "+{% Shop sell price.", JSON.parse('[{"item": "Gold", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Ramificoction", 1, 0, "add", "+{ Talent Points for Tab 1. Shout out to that 1 person who'll make it this far without knowing what talents are, you're my hero!", JSON.parse('[{"item": "Forest3", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Seawater", 1, 0, "add", "+{% chance for 1 kill to count for 2 when trying to open new portals, but only while actively playing. One, two, buckle my shoe.", JSON.parse('[{"item": "Fish1", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Tail Time", 0.5, 0, "add", "+{ Weapon Power. This is gonna be OP in later worlds I can already tell.", JSON.parse('[{"item": "Sewers2", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Fly In My Drink", 3, 0, "add", "Eww go get me another one, I can't drink this! ...what, why are you looking at me like that? OH right, uh, this gives +{ base Accuracy.", JSON.parse('[{"item": "Bug1", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Mimicraught", 1, 0, "add", "+{% EXP from monsters. Sorry, I know this is a lame bonus. Send me an email if you want me change it to +{% NPC dialogue talking speed.", JSON.parse('[{"item": "DesertA2", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Blue Flav", 30, 7, "decay", "-{% material cost for stamps. You know how it's hard to increase stamps max levels? Well this kinda makes that a bit less factual!", JSON.parse('[{"item": "Plat", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Slug Slurp", 2, 0, "add", "+{ Post Office Box Points for every character, and easily the best bonus in the game. A box will never abandon you!", JSON.parse('[{"item": "Fish2", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Pickle Jar", 50, 0, "add", "+{% Nothing. Absolutely nothing, now and forever. It's a darn pickle, what were you expecting?", JSON.parse('[{"item": "BobJoePickle", "quantity": -1}, {"item": "Liquid2", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Fur Refresher", 2, 0, "add", "+{% higher Shiny Critter chance. This is a multiplier, so +1% from this vial means 1.01x, so 5% shiny chance would go to 5.05%.", JSON.parse('[{"item": "SnowA1", "quantity": -1}, {"item": "Liquid2", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Sippy Soul", 1, 0, "add", "+{ Talent Points for Tab 2.", JSON.parse('[{"item": "Soul1", "quantity": -1}, {"item": "Liquid2", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Crab Juice", 4, 0, "add", "+{ Starting points in Worship Tower Defence. Of course, a true balloon monkey wouldn't accept handouts like this.", JSON.parse('[{"item": "Critter2", "quantity": -1}, {"item": "Liquid2", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Void Vial", 1, 0, "add", "+{% Mining Efficiency.", JSON.parse('[{"item": "Void", "quantity": -1}, {"item": "Liquid2", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Red Malt", 1, 0, "add", "+{% Refinery Cycle Speed. I just want to see you squirm a bit more as you decide where to spend your precious salts hahahaha!!", JSON.parse('[{"item": "Refinery1", "quantity": -1}, {"item": "Liquid2", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Ew Gross Gross", 1, 0, "add", "+{% Catching Efficiency.", JSON.parse('[{"item": "Bug5", "quantity": -1}, {"item": "Liquid2", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("The Spanish Sahara", 1, 0, "add", "+{% Choppin Efficiency.", JSON.parse('[{"item": "SaharanFoal", "quantity": -1}, {"item": "Liquid2", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Poison Tincture", 3, 0, "add", "Eagle Eye Trap-O-Vision gives +{% more critters. It will always give less than if you manually collected the traps though.", JSON.parse('[{"item": "Critter1A", "quantity": -1}, {"item": "Liquid2", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Etruscan Lager", 1, 0, "add", "+{% Fishing Efficiency.", JSON.parse('[{"item": "SnowB2", "quantity": -1}, {"item": "Liquid2", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Chonker Chug", 1, 0, "add", "+{% Talent Book Library checkout speed.", JSON.parse('[{"item": "Soul2", "quantity": -1}, {"item": "Liquid2", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Bubonic Burp", 1, 0, "add", "+{ Cog Inventory spaces. DONT PANIC!!! I KNOW HOW ALARMING IT IS THAT A VIAL FINALLY GIVES A USEFUL BONUS FOR ONCE, BUT STAY CALM!", JSON.parse('[{"item": "Critter4", "quantity": -1}, {"item": "Liquid3", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Visible Ink", 1, 0, "add", "+{% Construction Exp gain.", JSON.parse('[{"item": "SnowB3", "quantity": -1}, {"item": "Liquid3", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Orange Malt", 5, 0, "add", "+{% higher Shiny Critter chance. This stacks with the shiny chance from the Fur Refresher vial. You see, they have the same shaped vial.", JSON.parse('[{"item": "Refinery2", "quantity": -1}, {"item": "Liquid3", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Snow Slurry", 0.5, 0, "add", "+{% Printer sample size. My my there are a lot of these 'sample size' bonuses in the game... too many...", JSON.parse('[{"item": "SnowB5", "quantity": -1}, {"item": "Liquid3", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Slowergy Drink", 1, 0, "add", "+{% Base Multikill per Multikill Tier for all worlds. Stack them skulls!", JSON.parse('[{"item": "Soul4", "quantity": -1}, {"item": "Liquid3", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Sippy Cup", 1, 0, "add", "+{% Cog production speed.", JSON.parse('[{"item": "SnowC1", "quantity": -1}, {"item": "Liquid3", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Bunny Brew", 1, 0, "add", "+{ Talent Points for Tab 3.", JSON.parse('[{"item": "Critter7", "quantity": -1}, {"item": "Liquid3", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("40-40 Purity", 1, 0, "add", "+{ Trench Seawater max capacity. Thats the 3rd liquid type in Alchemy, btw.", JSON.parse('[{"item": "SnowC4", "quantity": -1}, {"item": "Liquid3", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Spook Pint", 1, 0, "add", "+{% base Giant Monster spawn rate.", JSON.parse('[{"item": "Soul6", "quantity": -1}, {"item": "Liquid3", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Goosey Glug", 1, 0, "add", "+{ base critter per trap. This is a sHONKingly good bonus, the only one of its kind!", JSON.parse('[{"item": "Critter9", "quantity": -1}, {"item": "Liquid3", "quantity": -1}]')))
-    alchemy.vials.push(new Vial("Ball Pickle Jar", 25, 0, "add", "+{% arcade ball gain rate, and those are balls blessed by Balljoepickle himself, so you know they're extra lucky!", JSON.parse('[{"item": "BallJoePickle", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
+alchemy.vials.push(new Vial(0,"Copper Corona", 3, 0, "add", "Orange bubble cauldron brew speed is increased by +{%", JSON.parse('[{"item": "Copper", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
+alchemy.vials.push(new Vial(1,"Sippy Splinters", 3, 0, "add", "Green bubble cauldron brew speed is increased by +{%", JSON.parse('[{"item": "OakTree", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
+alchemy.vials.push(new Vial(2,"Mushroom Soup", 3, 0, "add", "Yellow cauldron brew speed is increased by +{%", JSON.parse('[{"item": "Grasslands1", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
+alchemy.vials.push(new Vial(3,"Spool Sprite", 3, 0, "add", "Purple cauldron brew speed is increased by +{%", JSON.parse('[{"item": "CraftMat1", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
+alchemy.vials.push(new Vial(4,"Barium Mixture", 3, 0, "add", "+{ Water Droplet max capacity. Thats the 1st liquid type in Alchemy, btw.", JSON.parse('[{"item": "CopperBar", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
+alchemy.vials.push(new Vial(5,"Dieter Drink", 1, 0, "add", "Monsters drop +{% more money.", JSON.parse('[{"item": "Grasslands3", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
+alchemy.vials.push(new Vial(6,"Skinny 0 Cal", 2.5, 0, "add", "+{% chance to get double points when depositing statues. So like... if you deposit one statue, it might count as one! Or two.", JSON.parse('[{"item": "Jungle2", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
+alchemy.vials.push(new Vial(7,"Thumb Pow", 1, 0, "add", "When converting Skill EXP into Class EXP using the 'EXP CONVERTER' star talent, you'll get {% more Class EXP than you usually do.", JSON.parse('[{"item": "CraftMat5", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
+alchemy.vials.push(new Vial(8,"Jungle Juice", 1, 0, "add", "+{% liquid regen rate for all liquid cauldrons. Yes, even the secret one!", JSON.parse('[{"item": "JungleTree", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
+alchemy.vials.push(new Vial(9,"Barley Brew", 1, 0, "add", "Alchemy bubble upgrade costs are {% lower for all bubbles! Even the giraffe bubbles that look strangely like elephants!", JSON.parse('[{"item": "IronBar", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
+alchemy.vials.push(new Vial(10,"Anearful", 2, 0, "add", "+{% Card drop rate. Even works offline, just like it always has! What do you mean this used to say something different...?", JSON.parse('[{"item": "Forest1", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
+alchemy.vials.push(new Vial(11,"Tea With Pea", 3, 0, "add", "+{ Liquid Nitrogen max capacity. Thats the 2nd liquid type in Alchemy, btw.", JSON.parse('[{"item": "ToiletTree", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
+alchemy.vials.push(new Vial(12,"Gold Guzzle", 1, 0, "add", "+{% Shop sell price.", JSON.parse('[{"item": "Gold", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
+alchemy.vials.push(new Vial(13,"Ramificoction", 1, 0, "add", "+{ Talent Points for Tab 1. Shout out to that 1 person who'll make it this far without knowing what talents are, you're my hero!", JSON.parse('[{"item": "Forest3", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
+alchemy.vials.push(new Vial(14,"Seawater", 1, 0, "add", "+{% chance for 1 kill to count for 2 when trying to open new portals, but only while actively playing. One, two, buckle my shoe.", JSON.parse('[{"item": "Fish1", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
+alchemy.vials.push(new Vial(15,"Tail Time", 0.5, 0, "add", "+{ Weapon Power. This is gonna be OP in later worlds I can already tell.", JSON.parse('[{"item": "Sewers2", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
+alchemy.vials.push(new Vial(16,"Fly In My Drink", 3, 0, "add", "Eww go get me another one, I can't drink this! ...what, why are you looking at me like that? OH right, uh, this gives +{ base Accuracy.", JSON.parse('[{"item": "Bug1", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
+alchemy.vials.push(new Vial(17,"Mimicraught", 1, 0, "add", "+{% EXP from monsters. Sorry, I know this is a lame bonus. Send me an email if you want me change it to +{% NPC dialogue talking speed.", JSON.parse('[{"item": "DesertA2", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
+alchemy.vials.push(new Vial(18,"Blue Flav", 30, 7, "decay", "-{% material cost for stamps. You know how it's hard to increase stamps max levels? Well this kinda makes that a bit less factual!", JSON.parse('[{"item": "Plat", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
+alchemy.vials.push(new Vial(19,"Slug Slurp", 2, 0, "add", "+{ Post Office Box Points for every character, and easily the best bonus in the game. A box will never abandon you!", JSON.parse('[{"item": "Fish2", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
+alchemy.vials.push(new Vial(20,"Pickle Jar", 50, 0, "add", "+{% Nothing. Absolutely nothing, now and forever. It's a darn pickle, what were you expecting?", JSON.parse('[{"item": "BobJoePickle", "quantity": -1}, {"item": "Liquid2", "quantity": -1}]')))
+alchemy.vials.push(new Vial(21,"Fur Refresher", 2, 0, "add", "+{% higher Shiny Critter chance. This is a multiplier, so +1% from this vial means 1.01x, so 5% shiny chance would go to 5.05%.", JSON.parse('[{"item": "SnowA1", "quantity": -1}, {"item": "Liquid2", "quantity": -1}]')))
+alchemy.vials.push(new Vial(22,"Sippy Soul", 1, 0, "add", "+{ Talent Points for Tab 2.", JSON.parse('[{"item": "Soul1", "quantity": -1}, {"item": "Liquid2", "quantity": -1}]')))
+alchemy.vials.push(new Vial(23,"Crab Juice", 4, 0, "add", "+{ Starting points in Worship Tower Defence. Of course, a true balloon monkey wouldn't accept handouts like this.", JSON.parse('[{"item": "Critter2", "quantity": -1}, {"item": "Liquid2", "quantity": -1}]')))
+alchemy.vials.push(new Vial(24,"Void Vial", 1, 0, "add", "+{% Mining Efficiency.", JSON.parse('[{"item": "Void", "quantity": -1}, {"item": "Liquid2", "quantity": -1}]')))
+alchemy.vials.push(new Vial(25,"Red Malt", 1, 0, "add", "+{% Refinery Cycle Speed. I just want to see you squirm a bit more as you decide where to spend your precious salts hahahaha!!", JSON.parse('[{"item": "Refinery1", "quantity": -1}, {"item": "Liquid2", "quantity": -1}]')))
+alchemy.vials.push(new Vial(26,"Ew Gross Gross", 1, 0, "add", "+{% Catching Efficiency.", JSON.parse('[{"item": "Bug5", "quantity": -1}, {"item": "Liquid2", "quantity": -1}]')))
+alchemy.vials.push(new Vial(27,"The Spanish Sahara", 1, 0, "add", "+{% Choppin Efficiency.", JSON.parse('[{"item": "SaharanFoal", "quantity": -1}, {"item": "Liquid2", "quantity": -1}]')))
+alchemy.vials.push(new Vial(28,"Poison Tincture", 3, 0, "add", "Eagle Eye Trap-O-Vision gives +{% more critters. It will always give less than if you manually collected the traps though.", JSON.parse('[{"item": "Critter1A", "quantity": -1}, {"item": "Liquid2", "quantity": -1}]')))
+alchemy.vials.push(new Vial(29,"Etruscan Lager", 1, 0, "add", "+{% Fishing Efficiency.", JSON.parse('[{"item": "SnowB2", "quantity": -1}, {"item": "Liquid2", "quantity": -1}]')))
+alchemy.vials.push(new Vial(30,"Chonker Chug", 1, 0, "add", "+{% Talent Book Library checkout speed.", JSON.parse('[{"item": "Soul2", "quantity": -1}, {"item": "Liquid2", "quantity": -1}]')))
+alchemy.vials.push(new Vial(31,"Bubonic Burp", 1, 0, "add", "+{ Cog Inventory spaces. DONT PANIC!!! I KNOW HOW ALARMING IT IS THAT A VIAL FINALLY GIVES A USEFUL BONUS FOR ONCE, BUT STAY CALM!", JSON.parse('[{"item": "Critter4", "quantity": -1}, {"item": "Liquid3", "quantity": -1}]')))
+alchemy.vials.push(new Vial(32,"Visible Ink", 1, 0, "add", "+{% Construction Exp gain.", JSON.parse('[{"item": "SnowB3", "quantity": -1}, {"item": "Liquid3", "quantity": -1}]')))
+alchemy.vials.push(new Vial(33,"Orange Malt", 5, 0, "add", "+{% higher Shiny Critter chance. This stacks with the shiny chance from the Fur Refresher vial. You see, they have the same shaped vial.", JSON.parse('[{"item": "Refinery2", "quantity": -1}, {"item": "Liquid3", "quantity": -1}]')))
+alchemy.vials.push(new Vial(34,"Snow Slurry", 0.5, 0, "add", "+{% Printer sample size. My my there are a lot of these 'sample size' bonuses in the game... too many...", JSON.parse('[{"item": "SnowB5", "quantity": -1}, {"item": "Liquid3", "quantity": -1}]')))
+alchemy.vials.push(new Vial(35,"Slowergy Drink", 1, 0, "add", "+{% Base Multikill per Multikill Tier for all worlds. Stack them skulls!", JSON.parse('[{"item": "Soul4", "quantity": -1}, {"item": "Liquid3", "quantity": -1}]')))
+alchemy.vials.push(new Vial(36,"Sippy Cup", 1, 0, "add", "+{% Cog production speed.", JSON.parse('[{"item": "SnowC1", "quantity": -1}, {"item": "Liquid3", "quantity": -1}]')))
+alchemy.vials.push(new Vial(37,"Bunny Brew", 1, 0, "add", "+{ Talent Points for Tab 3.", JSON.parse('[{"item": "Critter7", "quantity": -1}, {"item": "Liquid3", "quantity": -1}]')))
+alchemy.vials.push(new Vial(38,"40-40 Purity", 1, 0, "add", "+{ Trench Seawater max capacity. Thats the 3rd liquid type in Alchemy, btw.", JSON.parse('[{"item": "SnowC4", "quantity": -1}, {"item": "Liquid3", "quantity": -1}]')))
+alchemy.vials.push(new Vial(39,"Spook Pint", 1, 0, "add", "+{% base Giant Monster spawn rate.", JSON.parse('[{"item": "Soul6", "quantity": -1}, {"item": "Liquid3", "quantity": -1}]')))
+alchemy.vials.push(new Vial(40,"Goosey Glug", 1, 0, "add", "+{ base critter per trap. This is a sHONKingly good bonus, the only one of its kind!", JSON.parse('[{"item": "Critter9", "quantity": -1}, {"item": "Liquid3", "quantity": -1}]')))
+alchemy.vials.push(new Vial(41,"Ball Pickle Jar", 25, 0, "add", "+{% arcade ball gain rate, and those are balls blessed by Balljoepickle himself, so you know they're extra lucky!", JSON.parse('[{"item": "BallJoePickle", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
 
     return alchemy;
 }
@@ -329,7 +365,25 @@ const handleVial = (vialData: Map<string, number>, alchemy: Alchemy) => {
     };
 }
 
-export default function parseAlchemy(alchemyData: Array<Map<string, number>>, boostLevels: Array<number>) {
+const convertToItemClass = (alchemy: Alchemy, allItems: Item[]) => {
+    alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).forEach(bubble => {
+        bubble.rawRequirements.forEach(req => {
+            const reqItem = allItems.find(item => item.internalName == req.item)?.duplicate() ?? new Item({displayName: req.item, internalName: req.item});
+            reqItem.count = req.quantity;
+            bubble.requirements.push(reqItem);
+        })
+    })
+
+    alchemy.vials.forEach(vial => {
+        vial.rawRequirements.forEach(req => {
+            const reqItem = allItems.find(item => item.internalName == req.item)?.duplicate() ?? new Item({displayName: req.item, internalName: req.item});
+            reqItem.count = req.quantity;
+            vial.requirements.push(reqItem);
+        })
+    })
+}
+
+export default function parseAlchemy(alchemyData: Array<Map<string, number>>, boostLevels: Array<number>, allItems: Item[]) {
     var alchemy = initAlchemy();
     alchemyData.forEach((indexData, index) => {
         // Handle cauldrons if the first 4 arrays of data
@@ -341,5 +395,7 @@ export default function parseAlchemy(alchemyData: Array<Map<string, number>>, bo
             handleVial(indexData, alchemy);
         }
     })
+
+    convertToItemClass(alchemy, allItems);
     return alchemy;
 }

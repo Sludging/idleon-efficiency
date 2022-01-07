@@ -40,6 +40,7 @@ import { Prayer } from '../data/domain/prayers';
 import { TimeDown, TimeUp } from '../components/base/TimeDisplay';
 import { Worship } from '../data/domain/worship';
 import ObolsInfo from '../components/account/task-board/obolsInfo';
+import TextAndLabel, { ComponentAndLabel } from '../components/base/TextAndLabel';
 
 
 function ItemSourcesDisplay({ sources, dropInfo }: { sources: ItemSources, dropInfo: DropInfo }) {
@@ -272,21 +273,22 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                             player.cardInfo ? player.cardInfo.equippedCards.map((card, index) => {
                                 return (
                                     <Box key={index}>
-                                        <TipDisplay
-                                            heading={`${card.displayName}`}
-                                            body={card.getBonusText()}
-                                            size={size}
-                                            direction={TipDirection.Down}
-                                        >
-                                            <Stack key={index}>
-                                                <Box align="center" fill width={{ min: '28px', max: '28px' }} height={{ min: '36px', max: '36px' }}>
-                                                    <Box height={{ min: '36px', max: '36px' }} className={card.getClass()} />
-                                                </Box>
+                                        <Stack key={index}>
+                                            <Box align="center" fill width={{ min: '28px', max: '28px' }} height={{ min: '36px', max: '36px' }}>
+                                                <Box height={{ min: '36px', max: '36px' }} className={card.getClass()} />
+                                            </Box>
+                                            <TipDisplay
+                                                heading={`${card.displayName}`}
+                                                body={card.getBonusText()}
+                                                size={size}
+                                                direction={TipDirection.Down}
+                                            >
                                                 <Box align="center" width={{ max: '31px', min: '31px' }} height={{ min: '43px', max: '43px' }}>
                                                     <Box height={{ min: '43px', max: '43px' }} key={`border_${index}`} className={card.getBorderClass()} />
                                                 </Box>
-                                            </Stack>
-                                        </TipDisplay>
+                                            </TipDisplay>
+                                        </Stack>
+
                                     </Box>
                                 )
                             }) : <Text>No cards equipped</Text>
@@ -510,6 +512,9 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
     const idleonData = useContext(AppContext);
     const hammerName = "Hammer Hammer";
 
+    const allItems = idleonData.getData().get("itemsData") as Item[];
+    const sharpShells = allItems.find(item => item.displayName == "Shrapshell");
+
     const anvilCostDiscount = useMemo(() => {
         const theData = idleonData.getData();
         const alchemy = theData.get("alchemy") as Alchemy;
@@ -585,14 +590,29 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
             <Box direction="column">
                 <Text size="small">Available Points: {player.anvil.availablePoints}</Text>
                 <Text size="small">Points from coins: {player.anvil.pointsFromCoins}</Text>
-                <Box direction="row">
-                    <Text size="small">Next Point Cost: </Text>
-                    <CoinsDisplay coinMap={getCoinsArray(player.anvil.getCoinCost(anvilCostDiscount))} />
-                </Box>
-                <Box direction="row">
-                    <Text size="small">Total Point Cost: </Text>
-                    <CoinsDisplay coinMap={getCoinsArray(player.anvil.getTotalCoinCost(anvilCostDiscount))} />
-                </Box>
+                <ComponentAndLabel
+                    label={"Next Point Cost"}
+                    component={<CoinsDisplay coinMap={getCoinsArray(player.anvil.getCoinCost(anvilCostDiscount))} />}
+                />
+                <ComponentAndLabel
+                    label={"Total Point Cost"}
+                    component={<CoinsDisplay coinMap={getCoinsArray(player.anvil.getTotalCoinCost(anvilCostDiscount))} />}
+                />
+                <ComponentAndLabel
+                    label={"Total Sharpshells Cost"}
+                    component={
+                        <Box direction="row" align="center">
+                            <Text>{nFormatter(player.anvil.getTotalSharpshells(anvilCostDiscount))}</Text>
+                            <Box width={{max: '25px', min: '25px'}}>
+                                <Box className={sharpShells?.getClass()} />
+                            </Box>
+                        </Box>
+                    }
+                />
+                <TextAndLabel
+                    label={"Next Material Point Cost"}
+                    text={nFormatter(player.anvil.getMonsterMatCost(anvilCostDiscount))}
+                />
                 <Text size="small">Points from mats: {player.anvil.pointsFromMats}</Text>
                 <Text size="small">Points spend into XP: {player.anvil.xpPoints}</Text>
                 <Text size="small">Points spend into Speed: {player.anvil.speedPoints}</Text>
@@ -700,7 +720,7 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
         const starSignExtraCap = player.starSigns.reduce((sum, sign) => sum += sign.getBonus("Carry Cap"), 0);
 
         const allStamps = stampData.flatMap((tab) => [...tab]);
-        const allCapStampBonus = allStamps.find((stamp) => stamp.raw_name == CapacityConst.AllCarryStamp)?.getBonus(player.skills.get(SkillsIndex.Smithing)) ?? 0;
+        const allCapStampBonus = allStamps.find((stamp) => stamp.raw_name == CapacityConst.AllCarryStamp)?.getBonus() ?? 0;
         const gemCapacityBonus = gemStore?.purchases.find(x => x.no == 58)?.pucrhased ?? 0;
 
         const toReturn = new Map();
@@ -950,7 +970,7 @@ function InventoryDisplay({ player }: { player: Player }) {
                         playerInventoryBagMapping.map((playerInvItem, index) => {
                             if (playerInvItem[1] == "0") {
                                 return;
-                            } 
+                            }
 
                             const opacity = Object.keys(player.invBagsUsed).find(bagNumber => bagNumber == playerInvItem[0]) ? 1 : 0.2;
                             const bagItem = allItems.find(item => item.internalName == playerInvItem[2]);
@@ -1102,12 +1122,12 @@ const customTabs = {
 }
 
 const CustomTabTitle = ({ player, isActive }: { player: Player, isActive: boolean }) => (
-    <Box direction="row" align="center" margin={{ vertical: 'xsmall'}}>
-        <Box width={{max:'20px', min: '20px'}} margin={{right: 'xsmall'}}>
+    <Box direction="row" align="center" margin={{ vertical: 'xsmall' }}>
+        <Box width={{ max: '20px', min: '20px' }} margin={{ right: 'xsmall' }}>
             <Box className={player.getClassClass()} />
         </Box>
         <Text size="xsmall" color={isActive ? 'brand' : 'accent-2'}>
-            { player.playerName ? player.playerName : `Character ${player.playerID}`}
+            {player.playerName ? player.playerName : `Character ${player.playerID}`}
         </Text>
     </Box>
 );

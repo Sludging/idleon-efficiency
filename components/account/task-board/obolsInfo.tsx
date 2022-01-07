@@ -74,10 +74,12 @@ function ObolsInfo({ playerIndex, title, level }: { playerIndex: number, title: 
         }
 
         // If we haven't loaded data yet or for some reason index is wrong, just say undefined.
-        if (!obolsData || playerIndex > obolsData.playerObols.length) {
+        try {
+            return obolsData?.playerObols[playerIndex].filter(obol => obol.locked).sort((obol1, obol2) => obol1.lvlReq > obol2.lvlReq ? -1 : 1).pop();
+        }
+        catch {
             return undefined;
         }
-        return obolsData?.playerObols[playerIndex].filter(obol => obol.locked).sort((obol1, obol2) => obol1.lvlReq > obol2.lvlReq ? -1 : 1).pop();
     }, [playerIndex, obolsData]);
 
     useEffect(() => {
@@ -85,35 +87,43 @@ function ObolsInfo({ playerIndex, title, level }: { playerIndex: number, title: 
         setObolsData(theData.get("obols"));
     }, [playerIndex, idleonData])
 
+    if (!obolsData || obolsData.playerObols.length == 0) {
+        return (
+            <></>
+        )
+    }
+
     return (
         <Box pad="medium" gap="small">
             <Text size="large">{title}</Text>
             <Box pad="small" gap="small">
                 <Box direction="row" wrap>
                     {
-                        (playerIndex == -1 ? obolsData?.familyObols : obolsData?.playerObols[playerIndex])?.filter(obol => !obol.locked && obol.item.internalName != "Blank").sort((obol1, obol2) => obol1.getRarity() > obol2.getRarity() ? -1 : 1).map((obol, obolIndex) => {
-                            return (
-                                <TipDisplay
-                                    key={obolIndex}
-                                    heading={`${obol.item.displayName} (${obol.item.type})`}
-                                    body={<Box>{statsDisplay(obol.item.itemStats, obol.item.description)}<Text size="xsmall">*A work in progress, therefore not always accurate.</Text></Box>}
-                                    size={"large"}
-                                    direction={TipDirection.Down}
-                                    maxWidth="large"
-                                >
-                                    <Box width={{ max: '36px', min: '36px' }}>
-                                        <Box className={obol.item.getClass()} />
-                                    </Box>
-                                </TipDisplay>
-                            )
-                        })
+                        (playerIndex == -1 ? obolsData?.familyObols : obolsData?.playerObols[playerIndex])?.filter(obol => !obol.locked && obol.item.internalName != "Blank")
+                            .sort((obol1, obol2) => obol1.getRarity() == obol2.getRarity() ? obol1.type > obol2.type ? -1 : 1 : obol1.getRarity() > obol2.getRarity() ? -1 : 1)
+                            .map((obol, obolIndex) => {
+                                return (
+                                    <TipDisplay
+                                        key={obolIndex}
+                                        heading={`${obol.item.displayName} (${obol.item.type})`}
+                                        body={<Box>{statsDisplay(obol.item.itemStats, obol.item.description)}<Text size="xsmall">*A work in progress, therefore not always accurate.</Text></Box>}
+                                        size={"large"}
+                                        direction={TipDirection.Down}
+                                        maxWidth="large"
+                                    >
+                                        <Box width={{ max: '36px', min: '36px' }}>
+                                            <Box className={obol.item.getClass()} />
+                                        </Box>
+                                    </TipDisplay>
+                                )
+                            })
                     }
                 </Box>
                 <TextAndLabel
                     label={"Empty Slots"}
                     text={(playerIndex == -1 ? obolsData?.familyObols : obolsData?.playerObols[playerIndex])?.filter(obol => obol.item.internalName == "Blank").length.toString() ?? "0"}
                 />
-                { nextUnlock &&
+                {nextUnlock &&
                     <TextAndLabel
                         label={"Next Unlock"}
                         text={`${ObolType[nextUnlock.type]} slot at level ${nextUnlock.lvlReq} (${nextUnlock.lvlReq - level} more level${nextUnlock.lvlReq - level > 1 ? 's' : ''})`}
@@ -123,14 +133,14 @@ function ObolsInfo({ playerIndex, title, level }: { playerIndex: number, title: 
             <Text size="large">Bonuses</Text>
             <Box direction="row" pad="small" wrap>
                 {
-                    playerIndex == -1 ? obolsData?.familyStats.stats.filter(stat => stat.getValue() > 0).map((stat, statIndex) => {
+                    playerIndex == -1 ? obolsData?.familyStats?.stats.filter(stat => stat.getValue() > 0).map((stat, statIndex) => {
                         return (
                             <Box key={statIndex} margin={{ right: 'large', bottom: 'medium' }}>
                                 <SingleStat stat={undefined} familyStat={stat} />
                             </Box>
                         )
                     })
-                        : obolsData?.playerStats[playerIndex].stats.filter(stat => stat.getValue() > 0).map((stat, statIndex) => {
+                        : obolsData?.playerStats[playerIndex]?.stats.filter(stat => stat.getValue() > 0).map((stat, statIndex) => {
                             const matchingFamilyStat = obolsData.familyStats.stats.find(famStat => stat.extra == '' ? famStat.displayName == stat.displayName : stat.extra == famStat.extra && famStat.getValue() > 0);
                             return (
                                 <Box key={statIndex} margin={{ right: 'large', bottom: 'medium' }}>
