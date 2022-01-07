@@ -80,7 +80,7 @@ const keyFunctionMap: Record<string, Function> = {
   "statues": (doc: Cloudsave, charCount: number) => parseStatues([...Array(charCount)].map((_, i) => { try { return JSON.parse(doc.get(`StatueLevels_${i}`)) } catch (e) { console.log("Statues", i, doc.get(`StatueLevels_${i}`)); throw e } }), JSON.parse(doc.get(`StuG`))),
   "timeAway": (doc: Cloudsave, charCount: number) => JSON.parse(doc.get('TimeAway')),
   "cauldronBubbles": (doc: Cloudsave, charCount: number) => doc.get('CauldronBubbles'),
-  "cards": (doc: Cloudsave, charCount: number) => parseCards(doc.get('Cards0')),
+  "cards": (doc: Cloudsave, charCount: number) => parseCards(JSON.parse(doc.get('Cards0'))),
   "players": (doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], charCount: number) => parsePlayers(doc, accountData, allItems),
   "alchemy": (doc: Cloudsave, allItems: Item[], charCount: number) => parseAlchemy(doc.get("CauldronInfo"), doc.get("CauldUpgLVs"), allItems),
   "bribes": (doc: Cloudsave, charCount: number) => parseBribes(doc.get("BribeStatus")),
