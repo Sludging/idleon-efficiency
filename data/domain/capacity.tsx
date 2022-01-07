@@ -413,7 +413,7 @@ export class Capacity {
         //         );
     }
 
-    getAllCapsBonus = (guildBonus: number = 0, telekineticStorageBonus: number = 0, shrineBonus: number = 0, zergPrayer: number = 0, ruckSackPrayer: number = 0) => {
+    getAllCapsBonus = (guildBonus: number = 0, telekineticStorageBonus: number = 0, shrineBonus: number = 0, zergPrayer: number = 0, ruckSackPrayer: number = 0, bribeCapBonus: number = 0) => {
         // if ("AllCapBonuses" == t)
         // return (
         //     (1 + (F._customBlock_GuildBonuses(2) + r._customBlock_GetTalentNumber(1, 634)) / 100) *
@@ -424,6 +424,7 @@ export class Capacity {
         return (
             (1 + (guildBonus + telekineticStorageBonus) / 100) *
             (1 + (shrineBonus / 100)) *
+            (1 + (bribeCapBonus / 100)) *
             Math.max(1 - zergPrayer / 100, 0.4) *
             (1 + ruckSackPrayer / 100)
         );
