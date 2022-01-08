@@ -147,7 +147,7 @@ function RefineryDisplay() {
                     let continueSalt = true;
                     while (continueSalt) {
                         continueSalt = false;
-                        squireInfo?.sort((squire1, squire2) => squire1.getCurrentCooldown(130) - squireOffSets[squire1.playerID] <  squire2.getCurrentCooldown(130) - squireOffSets[squire2.playerID] ? 1 : -1)
+                        squireInfo?.sort((squire1, squire2) => squire1.getCurrentCooldown(130) - squireOffSets[squire1.playerID] <  squire2.getCurrentCooldown(130) - squireOffSets[squire2.playerID] ? -1 : 1)
                         .forEach(squire => {
                             [continueSalt, timeSaved] = squireAbility(squire, index, timeToNextRank, timeSaved, squireOffSets);
                             const manaBox = squire.postOffice.find(box => box.name == "Magician Starterpack");
