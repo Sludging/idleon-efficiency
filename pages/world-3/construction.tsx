@@ -86,14 +86,12 @@ function RefineryDisplay() {
                     let timeToNextRank = info.getTimeToNextRank(cycleInfo[Math.floor(index / 3)].time);
                     while (timeToNextRank > 0) {
                         const nextCDTime = Math.min(...currentCooldowns.map(cooldowns => cooldowns[1]));
-                        console.log(salt, nextCDTime);
                         if (timeToNextRank > nextCDTime) {
                             totalWait += nextCDTime;
                             timeToNextRank -= nextCDTime;
                             currentCooldowns.forEach(([squire, _], squireIndex, originalArray) => {
                                 originalArray[squireIndex][1] -= nextCDTime; // adjust the actual array data
                                 if (originalArray[squireIndex][1] == 0) {
-                                    //console.log(`${salt} - ${squire.playerName} used his skill!`);
                                     const manaBox = squire.postOffice.find(box => box.name == "Magician Starterpack");
                                     const cdReduction = manaBox?.bonuses[2].getBonus(manaBox.level, 2) ?? 0; 
                                     originalArray[squireIndex][1] = Math.floor(1 - cdReduction / 100) * 72000;
