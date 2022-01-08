@@ -662,7 +662,7 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
                                     <TimeDown addSeconds={timeTillCap} lastUpdated={idleonData.getLastUpdated(true) as Date} />
                                 </Box>
                                 <Text size="small">Production Per Hour (per hammer) = {Math.round(anvilSpeed / anvilItem.time)} </Text>
-                                <Text size="small">Total Produced of this item = {nFormatter(Math.round(anvilItem.totalProduced), 2)}</Text>
+                                <Text size="small">Total Produced of this item = {nFormatter(Math.round(anvilItem.totalProduced))}</Text>
                                 {/* <Text>{anvilItem.displayName} - {anvilItem.currentAmount} - {anvilItem.currentXP} - {anvilItem.currentProgress} - {anvilItem.totalProduced}</Text> */}
                             </Box>
                         )

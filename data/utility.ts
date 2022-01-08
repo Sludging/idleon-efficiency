@@ -55,13 +55,13 @@ export const nFormatter = (num: number, type?: string) => {
         switch(type) {
             case "Whole": {
                 switch (true) {
-                    case num < 10000: return Math.floor(num).toString();
+                    case num < 10000: return `${Math.floor(num).toString()}`;
                     case num < 1000000: return `${Math.floor(num / 1000)}K`
                     case num < 10000000: return `${Math.floor(num / 100000) / 10}M`
                     case num < 1000000000: return `${Math.floor(num / 1000000)}M`
                     case num < 10000000000: return `${Math.floor(num / 100000000) / 10}B`
                     case num >= 10000000000: return `${Math.floor(num / 1000000000)}B`
-                    default: return num;
+                    default: return `${num}`;
                 }
             }
             case "MultiplierInfo": {
@@ -90,7 +90,7 @@ export const nFormatter = (num: number, type?: string) => {
         case num < 10000000000000000: return `${Math.ceil(num / 1000000000000)}T`
         case num < 10000000000000000000: return `${Math.ceil(num / 1000000000000000)}Q`
         case num >= 10000000000000000000: return `${Math.ceil(num / 1000000000000000000)}QQ`
-        default: return num;
+        default: return `${num}`;
     }
 }
 

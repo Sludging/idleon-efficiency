@@ -38,7 +38,7 @@ function Tasks({ worldIndex }: { worldIndex: number }) {
                         <Box width="medium">
                             <TextAndLabel textSize="xsmall" labelSize="small" text={task.getDescription()} label="Description" />
                         </Box>
-                        <TextAndLabel text={nFormatter(task.count, 2)} label="Current value" />
+                        <TextAndLabel text={nFormatter(task.count)} label="Current value" />
                     </ShadowBox>
                 ))
             }
