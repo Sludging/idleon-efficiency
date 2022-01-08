@@ -50,32 +50,48 @@ export enum Coins {
 
 }
 
-export const nFormatter = (num: number, digits?: number) => {
-    if (!digits) {
-        if (num < 10000) {
-            digits = 2;
-        }
-        else {
-            digits = 1;
-        }
-    }
-    var si = [
-        { value: 1, symbol: "" },
-        { value: 1E3, symbol: "k" },
-        { value: 1E6, symbol: "M" },
-        { value: 1E9, symbol: "B" },
-        { value: 1E12, symbol: "T" },
-        { value: 1E15, symbol: "P" },
-        { value: 1E18, symbol: "E" }
-    ];
-    var rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
-    var i;
-    for (i = si.length - 1; i > 0; i--) {
-        if (num >= si[i].value) {
-            break;
+export const nFormatter = (num: number, type?: string) => {
+    if (type) {
+        switch(type) {
+            case "Whole": {
+                switch (true) {
+                    case num < 10000: return Math.floor(num).toString();
+                    case num < 1000000: return `${Math.floor(num / 1000)}K`
+                    case num < 10000000: return `${Math.floor(num / 100000) / 10}M`
+                    case num < 1000000000: return `${Math.floor(num / 1000000)}M`
+                    case num < 10000000000: return `${Math.floor(num / 100000000) / 10}B`
+                    case num >= 10000000000: return `${Math.floor(num / 1000000000)}B`
+                    default: return num;
+                }
+            }
+            case "MultiplierInfo": {
+                switch (true) {
+                    case 0 == (10 * num) % 10: return `${Math.round(num)}.00#`
+                    case 0 == (100 * num) % 10: return `${Math.round(10 * num) / 10}0#`
+                    default: return `${Math.round(100 * num) / 100}#`
+                }
+            }        
         }
     }
-    return (num / si[i].value).toFixed(digits).replace(rx, "$1") + si[i].symbol;
+    switch (true) {
+        case num < 100 && type == "Small" && num < 1: return `${Math.round(100 * num) / 100}`
+        case num < 100 && type == "Small" && num >= 1: return `${Math.round(10 * num) / 10}`
+        case num < 100 && type == "Smaller" && num < 10: return `${Math.round(100 * num) / 100}`
+        case num < 100 && type == "Smaller" && num >= 10: return `${Math.round(10 * num) / 10}`
+        case num < 100: return `${Math.floor(num)}`
+        case num < 1000: return `${Math.floor(num)}`
+        case num < 10000: return `${Math.ceil(num / 10) / 100}K`
+        case num < 100000: return `${Math.ceil(num / 100) / 10}K`
+        case num < 1000000: return `${Math.ceil(num / 1000) / 1}K`
+        case num < 10000000: return `${Math.ceil(num / 10000) / 100}M`
+        case num < 100000000: return `${Math.ceil(num / 100000) / 10}M`
+        case num < 10000000000: return `${Math.ceil(num / 1000000) / 1}M`
+        case num < 10000000000000: return `${Math.ceil(num / 1000000000)}B`
+        case num < 10000000000000000: return `${Math.ceil(num / 1000000000000)}T`
+        case num < 10000000000000000000: return `${Math.ceil(num / 1000000000000000)}Q`
+        case num >= 10000000000000000000: return `${Math.ceil(num / 1000000000000000000)}QQ`
+        default: return num;
+    }
 }
 
 export const getCoinsArray = (coins: number): Map<Coins, number> => {
