@@ -118,7 +118,7 @@ function RefineryDisplay() {
         }
 
         const theSlowPilihpMethod = () => {
-            const useSquireAbility = (squire: Player, saltIndex: number, timeToNextRank: number, timeSaved: number, squireOffSets: Record<number, number>) => {
+            const squireAbility = (squire: Player, saltIndex: number, timeToNextRank: number, timeSaved: number, squireOffSets: Record<number, number>) => {
                 let didSomething = false;
                 let squireImpactTime = timeToNextRank - timeSaved;
                 let talentCD = squire.getCurrentCooldown(130) - squireOffSets[squire.playerID];
@@ -135,6 +135,7 @@ function RefineryDisplay() {
 
                 return [didSomething, timeSaved] as [boolean, number];
             }
+            
             const toReturn: number[] = [];
             if (refineryData?.salts) {
                 Object.entries(refineryData.salts).forEach(([salt, info], index) => {
@@ -148,14 +149,14 @@ function RefineryDisplay() {
                         continueSalt = false;
                         squireInfo?.sort((squire1, squire2) => squire1.getCurrentCooldown(130) - squireOffSets[squire1.playerID] <  squire2.getCurrentCooldown(130) - squireOffSets[squire2.playerID] ? 1 : -1)
                         .forEach(squire => {
-                            [continueSalt, timeSaved] = useSquireAbility(squire, index, timeToNextRank, timeSaved, squireOffSets);
+                            [continueSalt, timeSaved] = squireAbility(squire, index, timeToNextRank, timeSaved, squireOffSets);
                             const manaBox = squire.postOffice.find(box => box.name == "Magician Starterpack");
                             const cdReduction = manaBox?.bonuses[2].getBonus(manaBox.level, 2) ?? 0; 
                             let talentMaxCD = Math.floor(1 - cdReduction / 100) * 72000;
                             squireOffSets[squire.playerID] += (72000 - talentMaxCD);
 
                             if (squireOffSets[squire.playerID] > talentMaxCD) {
-                                [continueSalt, timeSaved] = useSquireAbility(squire, index, timeToNextRank, timeSaved, squireOffSets);
+                                [continueSalt, timeSaved] = squireAbility(squire, index, timeToNextRank, timeSaved, squireOffSets);
                                 squireOffSets[squire.playerID] -= talentMaxCD;
                             }
                         })
@@ -396,8 +397,8 @@ function RefineryDisplay() {
                                                                         <Box className={costItem?.getClass()} />
                                                                     </Box>
                                                                     <Box direction="row" gap="xsmall" align="center">
-                                                                        <Text color={storageQuantity < resourceCostToMax ? 'accent-1' : '' } size="small">{nFormatter(resourceCostToMax, 2)}</Text>
-                                                                        <Text size="small">({nFormatter(storageQuantity, 2)})</Text>
+                                                                        <Text color={storageQuantity < resourceCostToMax ? 'accent-1' : '' } size="small">{nFormatter(resourceCostToMax)}</Text>
+                                                                        <Text size="small">({nFormatter(storageQuantity)})</Text>
                                                                     </Box>
                                                                 </Box>
                                                             )
@@ -464,13 +465,13 @@ function SaltLickDisplay() {
                                         <Box title={saltItem.displayName} width={{ max: '50px', min: '50px' }} margin={{ right: 'small' }}>
                                             <Box className={saltItem.getClass()} />
                                         </Box>
-                                        <TextAndLabel text={nFormatter(saltLickData.getCost(index), 2)} label="Next Level costs" />
+                                        <TextAndLabel text={nFormatter(saltLickData.getCost(index))} label="Next Level costs" />
 
                                     </Box>
                                     <Box direction="row" align="center">
-                                        <TextAndLabel text={nFormatter(costToMax, 2)} label="Cost to max" />
+                                        <TextAndLabel text={nFormatter(costToMax)} label="Cost to max" />
                                     </Box>
-                                    <TextAndLabel textColor={costToMax > countInStorage ? 'accent-1' : ''} text={nFormatter(countInStorage, 2)} label="In Storage" />
+                                    <TextAndLabel textColor={costToMax > countInStorage ? 'accent-1' : ''} text={nFormatter(countInStorage)} label="In Storage" />
                                 </Grid>
                             </ShadowBox>
                         )
@@ -558,13 +559,13 @@ function PrinterDisplay() {
                                                         <Box className={sampleItem?.getClass()} />
                                                     </Box>
                                                     <Box direction="row" align="center" gap="small">
-                                                        <Text color={activeItem ? 'green-1' : ''} size="small">{nFormatter(sample.quantity, 2)}</Text>
+                                                        <Text color={activeItem ? 'green-1' : ''} size="small">{nFormatter(sample.quantity)}</Text>
                                                     </Box>
                                                 </Box>
                                                 {activeItem && (activeItem?.quantity ?? 0) < sample.quantity &&
                                                     <TipDisplay
                                                         heading='Active lower than sample'
-                                                        body={<Box><Text>You have a sample of {nFormatter(sample.quantity, 2)} but only printing {nFormatter(activeItem.quantity, 2)}.</Text><Text>Go update your printing!</Text></Box>}
+                                                        body={<Box><Text>You have a sample of {nFormatter(sample.quantity)} but only printing {nFormatter(activeItem.quantity)}.</Text><Text>Go update your printing!</Text></Box>}
                                                         size='large'
                                                         direction={TipDirection.Down}
                                                     >
@@ -656,7 +657,7 @@ function DeathnoteDisplay() {
                                             <Box className={deathnoteData?.getRankClass(deathnoteData?.getDeathnoteRank(killCount))} />
                                         </Box>
                                         <Text size="small">{mobName}</Text>
-                                        <Text size="small">{nFormatter(killCount, 2)}</Text>
+                                        <Text size="small">{nFormatter(killCount)}</Text>
                                     </Box>
                                 ))
                             }
@@ -807,7 +808,7 @@ function BuildingsDisplay() {
                                     <TextAndLabel 
                                         label="Build Req"
                                         textSize="small"
-                                        text={`${nFormatter(building.currentXP, 2)}/${nFormatter(building.getBuildCost(), 2)}`}
+                                        text={`${nFormatter(building.currentXP)}/${nFormatter(building.getBuildCost())}`}
                                         margin={{right: 'large', bottom: 'small'}}
                                     />}
                                 </Box>
@@ -826,7 +827,7 @@ function BuildingsDisplay() {
                                                                         <Box className={costItem?.getClass()} />
                                                                     </Box>
                                                                     <Box direction="row" gap="xsmall" align="center">
-                                                                        <Text size="small">{nFormatter(costData.quantity, 2)}</Text>
+                                                                        <Text size="small">{nFormatter(costData.quantity)}</Text>
                                                                     </Box>
                                                                 </Box>
                                                             )

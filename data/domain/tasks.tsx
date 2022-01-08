@@ -56,7 +56,7 @@ export class Task {
             keyValue = this.count;
         }
         if (toReturn.includes("{")) {
-            toReturn = toReturn.replace(/{/g, nFormatter(keyValue, 2))
+            toReturn = toReturn.replace(/{/g, nFormatter(keyValue))
         }
         if (toReturn.includes("}")) {
             toReturn = toReturn.replace("}", this.extraStr.split("|")[this.level]);

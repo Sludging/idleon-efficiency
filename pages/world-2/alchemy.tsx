@@ -78,7 +78,7 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
                     {
                         Array.from(materialCosts).map(([item, cost]) => {
                             return (
-                                <Box key={`${bubble.name}_${item.internalName}`} direction="row" align="center" ><Text size="small">Material Cost: {nFormatter(round(cost), 1)}</Text><Box align="center" width={{ max: '36px' }} fill><Box className={item.getClass()} /></Box></Box>
+                                <Box key={`${bubble.name}_${item.internalName}`} direction="row" align="center" ><Text size="small">Material Cost: {nFormatter(round(cost))}</Text><Box align="center" width={{ max: '36px' }} fill><Box className={item.getClass()} /></Box></Box>
                             )
                         })
                     }
@@ -149,7 +149,7 @@ function VialTipInfo({ vial }: { vial: Vial }) {
             {
                 Array.from(vial.getMaterialCost()).map(([item, cost], index) => {
                     return (
-                        <Box key={index} direction="row" align="center" ><Text size="small">Material Cost: {nFormatter(round(cost), 1)}</Text><Box align="center" width={{ max: '36px' }} fill><Box className={item.getClass()} /></Box></Box>
+                        <Box key={index} direction="row" align="center" ><Text size="small">Material Cost: {nFormatter(round(cost))}</Text><Box align="center" width={{ max: '36px' }} fill><Box className={item.getClass()} /></Box></Box>
                     )
                 })
             }
