@@ -45,6 +45,7 @@ function RefineryDisplay() {
     const [taskboardData, setTaskboardData] = useState<TaskBoard>();
     const [lastUpdated, setLastUpdated] = useState<Date | undefined>();
     const [squirePowha, setSquirePowha] = useState<boolean>(false);
+    const [squirePowha2, setSquirePowha2] = useState<boolean>(false);
     const idleonData = useContext(AppContext);
     const size = useContext(ResponsiveContext);
 
@@ -73,47 +74,109 @@ function RefineryDisplay() {
     }, [playerData])
 
     const squireTimeSave = useMemo(() => {
-        const toReturn: number[] = [];
-        if (refineryData?.salts) {
-            Object.entries(refineryData.salts).forEach(([salt, info], index) => {
-                // Perfect squire use math
-                // (time to rank)-((time to rank -squire cd )/(72k-mana p.o))x (squire cycles x cycle speed) 
-                if (squireInfo) {
-                    const timeToNextRank = info.getTimeToNextRank(cycleInfo[Math.floor(index / 3)].time);
-                    // Figure out the squire with the longest CD, simplify the math.
-                    const maxSquireCD = Math.max(...squireInfo.map(squire => [...squire.cooldown.entries()].filter(([talent, cooldown]) => talent.skillIndex == 130).pop()?.[1] ?? 0));
-                    // The squire skill can only be used after the cd, so ignore that portion.
-                    let timeSquireCanImpact = timeToNextRank - maxSquireCD;
+        const theSlowRockMethod = () => {
+            const toReturn: number[] = [];
+            if (refineryData?.salts) {
+                Object.entries(refineryData.salts).forEach(([salt, info], index) => {
+                    const currentCooldowns: [Player, number][] = [];
+                    squireInfo && squireInfo.forEach(squire => {
+                        currentCooldowns.push([squire, squire.getCurrentCooldown(130)]);
+                    });
+                    let totalWait = 0;
+                    let timeToNextRank = info.getTimeToNextRank(cycleInfo[Math.floor(index / 3)].time);
+                    while (timeToNextRank > 0) {
+                        const nextCDTime = Math.min(...currentCooldowns.map(cooldowns => cooldowns[1]));
+                        console.log(salt, nextCDTime);
+                        if (timeToNextRank > nextCDTime) {
+                            totalWait += nextCDTime;
+                            timeToNextRank -= nextCDTime;
+                            currentCooldowns.forEach(([squire, _], squireIndex, originalArray) => {
+                                originalArray[squireIndex][1] -= nextCDTime; // adjust the actual array data
+                                if (originalArray[squireIndex][1] == 0) {
+                                    //console.log(`${salt} - ${squire.playerName} used his skill!`);
+                                    const manaBox = squire.postOffice.find(box => box.name == "Magician Starterpack");
+                                    const cdReduction = manaBox?.bonuses[2].getBonus(manaBox.level, 2) ?? 0; 
+                                    originalArray[squireIndex][1] = Math.floor(1 - cdReduction / 100) * 72000;
 
-                    let timeSaved = 0;
-                    // Do the math for each squire.
-                    squireInfo.forEach(squire => {
-                        // Find the mana box and get the CD reduction impact.
-                        const manaBox = squire.postOffice.find(box => box.name == "Magician Starterpack");
-                        const cdReduction = manaBox?.bonuses[2].getBonus(manaBox.level, 2) ?? 0;
-                        const talentCD = (1 - cdReduction / 100) * 72000 // TODO: Get rid of magic numbers and names
-
-                        // calculate how much time we can save using squire skill on CD.
-                        const timePerSquireSkilluse = (squire.talents.find(talent => talent.skillIndex == 130)?.getBonus(false, false, true) ?? 0) * cycleInfo[Math.floor(index / 3)].time
-                        while (timeSquireCanImpact > talentCD) {
-                            // Calculate how much time we save every time we use the squire skill.
-                            timeSaved += timePerSquireSkilluse;
-                            timeSquireCanImpact -= talentCD + timePerSquireSkilluse;
+                                    const timePerSquireSkilluse = (squire.talents.find(talent => talent.skillIndex == 130)?.getBonus(false, false, true) ?? 0) * cycleInfo[Math.floor(index / 3)].time
+                                    timeToNextRank -= timePerSquireSkilluse;
+                                    if (timeToNextRank < 0) {
+                                        timeToNextRank = 0;
+                                    }
+                                }
+                            })
                         }
-                    })
-
-                    // This can happen when the CD is longer than the actual time to rank up, so ignore it.
-                    if (timeSaved < 0) {
-                        toReturn.push(0);
+                        else {
+                            totalWait += timeToNextRank
+                            timeToNextRank = 0;
+                        }
                     }
-                    else {
-                        toReturn.push(timeSaved);
-                    }
-                }
-            })
+                    toReturn.push(totalWait);
+                })
+            }
+            return toReturn;
         }
-        return toReturn;
-    }, [squireInfo, refineryData, cycleInfo])
+
+        const theSlowPilihpMethod = () => {
+            const useSquireAbility = (squire: Player, saltIndex: number, timeToNextRank: number, timeSaved: number, squireOffSets: Record<number, number>) => {
+                let didSomething = false;
+                let squireImpactTime = timeToNextRank - timeSaved;
+                let talentCD = squire.getCurrentCooldown(130) - squireOffSets[squire.playerID];
+                const timePerSquireSkilluse = (squire.talents.find(talent => talent.skillIndex == 130)?.getBonus(false, false, true) ?? 0) * cycleInfo[Math.floor(saltIndex / 3)].time
+
+                if (squireImpactTime > talentCD) {
+                    timeSaved += timePerSquireSkilluse;
+                    squireImpactTime -= (talentCD + timePerSquireSkilluse)
+                    if (squireImpactTime < 0) {
+                        timeSaved += squireImpactTime;
+                    }
+                    didSomething = true;
+                }
+
+                return [didSomething, timeSaved] as [boolean, number];
+            }
+            const toReturn: number[] = [];
+            if (refineryData?.salts) {
+                Object.entries(refineryData.salts).forEach(([salt, info], index) => {
+                    const squireOffSets: Record<number, number> = {}
+                    squireInfo?.forEach(squire => squireOffSets[squire.playerID] = 0);
+                    let timeToNextRank = info.getTimeToNextRank(cycleInfo[Math.floor(index / 3)].time);
+                    let timeSaved = 0;
+
+                    let continueSalt = true;
+                    while (continueSalt) {
+                        continueSalt = false;
+                        squireInfo?.sort((squire1, squire2) => squire1.getCurrentCooldown(130) - squireOffSets[squire1.playerID] <  squire2.getCurrentCooldown(130) - squireOffSets[squire2.playerID] ? 1 : -1)
+                        .forEach(squire => {
+                            [continueSalt, timeSaved] = useSquireAbility(squire, index, timeToNextRank, timeSaved, squireOffSets);
+                            const manaBox = squire.postOffice.find(box => box.name == "Magician Starterpack");
+                            const cdReduction = manaBox?.bonuses[2].getBonus(manaBox.level, 2) ?? 0; 
+                            let talentMaxCD = Math.floor(1 - cdReduction / 100) * 72000;
+                            squireOffSets[squire.playerID] += (72000 - talentMaxCD);
+
+                            if (squireOffSets[squire.playerID] > talentMaxCD) {
+                                [continueSalt, timeSaved] = useSquireAbility(squire, index, timeToNextRank, timeSaved, squireOffSets);
+                                squireOffSets[squire.playerID] -= talentMaxCD;
+                            }
+                        })
+                        timeToNextRank -= 72000;
+                    }
+                    toReturn.push(timeSaved);
+                })
+            }
+            return toReturn;
+        }
+        if (squirePowha) {
+            return theSlowPilihpMethod();
+        }
+        if (squirePowha2) {
+            return theSlowRockMethod();
+        }
+        
+
+        return [];
+
+    }, [squireInfo, refineryData, cycleInfo, squirePowha, squirePowha2])
 
     const saltMeritLevel = useMemo(() => {
         const saltMerit = taskboardData?.merits.find(merit => merit.descLine1 == "Refinery Salt Costs don't scale beyond");
@@ -187,7 +250,7 @@ function RefineryDisplay() {
             <CheckBox
                 checked={squirePowha}
                 label={<Box direction="row" align="center">
-                    <Text margin={{ right: 'xsmall' }} size="small">Squire Power</Text>
+                    <Text margin={{ right: 'xsmall' }} size="small">Squire Power - PilihpMethod</Text>
                     <TipDisplay
                         body={<Box gap="xsmall">
                             <Text>This will make the following assumptions and calculate their impact on the time to rank-up:</Text>
@@ -202,7 +265,27 @@ function RefineryDisplay() {
                         <CircleInformation size="small" />
                     </TipDisplay>
                 </Box>}
-                onChange={(event) => setSquirePowha(event.target.checked)}
+                onChange={(event) => { setSquirePowha(event.target.checked); setSquirePowha2(false)}}
+            />
+            <CheckBox
+                checked={squirePowha2}
+                label={<Box direction="row" align="center">
+                    <Text margin={{ right: 'xsmall' }} size="small">Squire Power - RockMethod</Text>
+                    <TipDisplay
+                        body={<Box gap="xsmall">
+                            <Text>This will make the following assumptions and calculate their impact on the time to rank-up:</Text>
+                            <Text>* Assume perfect use of squire skill on CD (if you got more than one squire, they are assumed to be in perfect sync.)</Text>
+                            <Text>* This is assuming the highest possible level for the squire skill based on your max talent level.</Text>
+                        </Box>}
+                        size="small"
+                        heading='Squire Power!'
+                        maxWidth='medium'
+                        direction={TipDirection.Down}
+                    >
+                        <CircleInformation size="small" />
+                    </TipDisplay>
+                </Box>}
+                onChange={(event) => { setSquirePowha2(event.target.checked); setSquirePowha(false)}}
             />
             <Text>This is WIP - fuel times don&apos;t account for printer or auto refine salt generation.</Text>
             {
@@ -217,7 +300,6 @@ function RefineryDisplay() {
                     });
                     const fuelTime = info.getFuelTime(storageItems, [], index <= saltMeritLevel) * cycleInfo[Math.floor(index / 3)].time;
                     const timeToNextRank = info.getTimeToNextRank(cycleInfo[Math.floor(index / 3)].time);
-
 
                     if (saltItem) {
                         return (
@@ -241,7 +323,7 @@ function RefineryDisplay() {
                                                     <Box>
                                                         <Text color="accent-2" size="small">Rank up in</Text>
                                                         <Box>
-                                                            {info.active && fuelTime > 0 ? <TimeDown size={size == "medium" ? TimeDisplaySize.Medium : TimeDisplaySize.Large} addSeconds={squirePowha ? timeToNextRank - squireTimeSave[index] : timeToNextRank} lastUpdated={lastUpdated} /> : <Text color="accent-1" size="small">Not active</Text>}
+                                                            {info.active && fuelTime > 0 ? <TimeDown size={size == "medium" ? TimeDisplaySize.Medium : TimeDisplaySize.Large} addSeconds={squirePowha ? timeToNextRank - squireTimeSave[index] : squirePowha2 ? squireTimeSave[index] : timeToNextRank} lastUpdated={lastUpdated} /> : <Text color="accent-1" size="small">Not active</Text>}
                                                         </Box>
                                                     </Box>
                                                     :
@@ -601,7 +683,7 @@ function ShrinesDisplay() {
     }, [idleonData]);
 
     const shrineCardBonus = useMemo(() => {
-        return cardData?.find(card => card.name == "Z9")?.getBonus();
+        return cardData?.find(card => card.id == "Z9")?.getBonus();
     }, [cardData]);
 
     if (!shrineData || shrineData.filter(shrine => shrine.level > 0).length == 0) {
@@ -768,13 +850,6 @@ function BuildingsDisplay() {
 
 function Construction() {
     const [activeTab, setActiveTab] = useState<string>("Refinery");
-    const idleonData = useContext(AppContext);
-
-    useEffect(() => {
-        if (idleonData) {
-            const theData = idleonData.getData();
-        }
-    }, [idleonData]);
 
     return (
         <Box>
