@@ -289,6 +289,14 @@ export class Player {
     getClassClass = () => {
         return `icons-3836 icons-ClassIcons${this.classId.valueOf()}`
     }
+
+    getCurrentCooldown = (skillIndex: number) => {
+        const skillCooldown = [...this.cooldown.entries()].filter(([talent, cooldown]) => talent.skillIndex == 130).pop()
+        if (skillCooldown) {
+            return Math.max(0, skillCooldown[1] - this.afkFor);
+        }
+        return 0;
+    }
 }
 
 const keyFunctionMap: Record<string, Function> = {
