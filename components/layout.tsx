@@ -195,7 +195,7 @@ export default function Layout({
     }
 
     useEffect(() => {
-        if (authData?.user || authData?.isDemo) {
+        if (authData?.user || authData?.publicProfile) {
             setValidState(true);
         }
         else {
