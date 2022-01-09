@@ -369,7 +369,7 @@ function SaltLickDisplay() {
     return (
         <Box>
             <Box margin={{bottom: 'small'}}>
-                <Text size="small">* Green text 'In Storage' means you can afford the next level.</Text>
+                <Text size="small">* Green text &apos;In Storage&apos; means you can afford the next level.</Text>
             </Box>
             {
                 saltLickData && saltLickData.bonuses.map((bonus, index) => {
