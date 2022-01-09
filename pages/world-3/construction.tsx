@@ -45,7 +45,6 @@ function RefineryDisplay() {
     const [taskboardData, setTaskboardData] = useState<TaskBoard>();
     const [lastUpdated, setLastUpdated] = useState<Date | undefined>();
     const [squirePowha, setSquirePowha] = useState<boolean>(false);
-    const [squirePowha2, setSquirePowha2] = useState<boolean>(false);
     const idleonData = useContext(AppContext);
     const size = useContext(ResponsiveContext);
 
@@ -114,68 +113,14 @@ function RefineryDisplay() {
             }
             return toReturn;
         }
-
-        const theSlowPilihpMethod = () => {
-            const squireAbility = (squire: Player, saltIndex: number, timeToNextRank: number, timeSaved: number, squireOffSets: Record<number, number>) => {
-                let didSomething = false;
-                let squireImpactTime = timeToNextRank - timeSaved;
-                let talentCD = squire.getCurrentCooldown(130) - squireOffSets[squire.playerID];
-                const timePerSquireSkilluse = (squire.talents.find(talent => talent.skillIndex == 130)?.getBonus(false, false, true) ?? 0) * cycleInfo[Math.floor(saltIndex / 3)].time
-
-                if (squireImpactTime > talentCD) {
-                    timeSaved += timePerSquireSkilluse;
-                    squireImpactTime -= (talentCD + timePerSquireSkilluse)
-                    if (squireImpactTime < 0) {
-                        timeSaved += squireImpactTime;
-                    }
-                    didSomething = true;
-                }
-
-                return [didSomething, timeSaved] as [boolean, number];
-            }
-            
-            const toReturn: number[] = [];
-            if (refineryData?.salts) {
-                Object.entries(refineryData.salts).forEach(([salt, info], index) => {
-                    const squireOffSets: Record<number, number> = {}
-                    squireInfo?.forEach(squire => squireOffSets[squire.playerID] = 0);
-                    let timeToNextRank = info.getTimeToNextRank(cycleInfo[Math.floor(index / 3)].time);
-                    let timeSaved = 0;
-
-                    let continueSalt = true;
-                    while (continueSalt) {
-                        continueSalt = false;
-                        squireInfo?.sort((squire1, squire2) => squire1.getCurrentCooldown(130) - squireOffSets[squire1.playerID] <  squire2.getCurrentCooldown(130) - squireOffSets[squire2.playerID] ? -1 : 1)
-                        .forEach(squire => {
-                            [continueSalt, timeSaved] = squireAbility(squire, index, timeToNextRank, timeSaved, squireOffSets);
-                            const manaBox = squire.postOffice.find(box => box.name == "Magician Starterpack");
-                            const cdReduction = manaBox?.bonuses[2].getBonus(manaBox.level, 2) ?? 0; 
-                            let talentMaxCD = Math.floor(1 - cdReduction / 100) * 72000;
-                            squireOffSets[squire.playerID] += (72000 - talentMaxCD);
-
-                            if (squireOffSets[squire.playerID] > talentMaxCD) {
-                                [continueSalt, timeSaved] = squireAbility(squire, index, timeToNextRank, timeSaved, squireOffSets);
-                                squireOffSets[squire.playerID] -= talentMaxCD;
-                            }
-                        })
-                        timeToNextRank -= 72000;
-                    }
-                    toReturn.push(timeSaved);
-                })
-            }
-            return toReturn;
-        }
         if (squirePowha) {
-            return theSlowPilihpMethod();
-        }
-        if (squirePowha2) {
             return theSlowRockMethod();
         }
         
 
         return [];
 
-    }, [squireInfo, refineryData, cycleInfo, squirePowha, squirePowha2])
+    }, [squireInfo, refineryData, cycleInfo, squirePowha])
 
     const saltMeritLevel = useMemo(() => {
         const saltMerit = taskboardData?.merits.find(merit => merit.descLine1 == "Refinery Salt Costs don't scale beyond");
@@ -249,11 +194,11 @@ function RefineryDisplay() {
             <CheckBox
                 checked={squirePowha}
                 label={<Box direction="row" align="center">
-                    <Text margin={{ right: 'xsmall' }} size="small">Squire Power - PilihpMethod</Text>
+                    <Text margin={{ right: 'xsmall' }} size="small">Squire Power</Text>
                     <TipDisplay
                         body={<Box gap="xsmall">
                             <Text>This will make the following assumptions and calculate their impact on the time to rank-up:</Text>
-                            <Text>* Assume perfect use of squire skill on CD (if you got more than one squire, they are assumed to be in perfect sync.)</Text>
+                            <Text>* Assume perfect use of squire skill on CD.</Text>
                             <Text>* This is assuming the highest possible level for the squire skill based on your max talent level.</Text>
                         </Box>}
                         size="small"
@@ -264,27 +209,7 @@ function RefineryDisplay() {
                         <CircleInformation size="small" />
                     </TipDisplay>
                 </Box>}
-                onChange={(event) => { setSquirePowha(event.target.checked); setSquirePowha2(false)}}
-            />
-            <CheckBox
-                checked={squirePowha2}
-                label={<Box direction="row" align="center">
-                    <Text margin={{ right: 'xsmall' }} size="small">Squire Power - RockMethod</Text>
-                    <TipDisplay
-                        body={<Box gap="xsmall">
-                            <Text>This will make the following assumptions and calculate their impact on the time to rank-up:</Text>
-                            <Text>* Assume perfect use of squire skill on CD (if you got more than one squire, they are assumed to be in perfect sync.)</Text>
-                            <Text>* This is assuming the highest possible level for the squire skill based on your max talent level.</Text>
-                        </Box>}
-                        size="small"
-                        heading='Squire Power!'
-                        maxWidth='medium'
-                        direction={TipDirection.Down}
-                    >
-                        <CircleInformation size="small" />
-                    </TipDisplay>
-                </Box>}
-                onChange={(event) => { setSquirePowha2(event.target.checked); setSquirePowha(false)}}
+                onChange={(event) => setSquirePowha(event.target.checked)}
             />
             <Text>This is WIP - fuel times don&apos;t account for printer or auto refine salt generation.</Text>
             {
@@ -322,7 +247,7 @@ function RefineryDisplay() {
                                                     <Box>
                                                         <Text color="accent-2" size="small">Rank up in</Text>
                                                         <Box>
-                                                            {info.active && fuelTime > 0 ? <TimeDown size={size == "medium" ? TimeDisplaySize.Medium : TimeDisplaySize.Large} addSeconds={squirePowha ? timeToNextRank - squireTimeSave[index] : squirePowha2 ? squireTimeSave[index] : timeToNextRank} lastUpdated={lastUpdated} /> : <Text color="accent-1" size="small">Not active</Text>}
+                                                            {info.active && fuelTime > 0 ? <TimeDown size={size == "medium" ? TimeDisplaySize.Medium : TimeDisplaySize.Large} addSeconds={squirePowha ? squireTimeSave[index] : timeToNextRank} lastUpdated={lastUpdated} /> : <Text color="accent-1" size="small">Not active</Text>}
                                                         </Box>
                                                     </Box>
                                                     :
@@ -360,7 +285,6 @@ function RefineryDisplay() {
                                                     info.baseCost && info.baseCost.map((costData, index) => {
                                                         const costItem = itemData?.find((item) => item.internalName == costData.item);
                                                         const itemCost = costData.quantity * info.getCostMulti(costData.item.includes("Refinery"), index <= saltMeritLevel);
-                                                        const storageQuantity = storageItems.find(x => x.internalName == costData.item)?.count ?? 0;
                                                         if (costItem) {
                                                             return (
                                                                 <Box key={index} direction="row" align="center">
@@ -443,7 +367,10 @@ function SaltLickDisplay() {
     }
 
     return (
-        <Box gap="medium">
+        <Box>
+            <Box margin={{bottom: 'small'}}>
+                <Text size="small">* Green text 'In Storage' means you can afford the next level.</Text>
+            </Box>
             {
                 saltLickData && saltLickData.bonuses.map((bonus, index) => {
                     const saltItem = itemData?.find((item) => item.internalName == bonus.item);
@@ -454,8 +381,9 @@ function SaltLickDisplay() {
                             countInStorage += refineryData?.storage.find(salt => salt.name == saltItem.internalName)?.quantity ?? 0;
                         }
                         const costToMax = saltLickData.getCostToMax(index);
+                        const costToNextLevel = saltLickData.getCost(index);
                         return (
-                            <ShadowBox key={index} background="dark-1" pad="medium" gap="xlarge" direction="row" align="center" justify="between">
+                            <ShadowBox key={index} background="dark-1" pad="medium" direction="row" align="center" justify="between" margin={{bottom: 'small'}}>
                                 <Grid columns={["35%", "10%", "20%", "15%", "15%"]} fill gap="small" align="center">
                                     <TextAndLabel textSize='small' text={saltLickData.getBonusText(index)} label="Bonus" />
                                     <TextAndLabel text={`${bonus.level} / ${bonus.maxLevel}`} label="Level" />
@@ -463,13 +391,13 @@ function SaltLickDisplay() {
                                         <Box title={saltItem.displayName} width={{ max: '50px', min: '50px' }} margin={{ right: 'small' }}>
                                             <Box className={saltItem.getClass()} />
                                         </Box>
-                                        <TextAndLabel text={nFormatter(saltLickData.getCost(index))} label="Next Level costs" />
+                                        <TextAndLabel text={nFormatter(costToNextLevel)} label="Next Level costs" />
 
                                     </Box>
                                     <Box direction="row" align="center">
                                         <TextAndLabel text={nFormatter(costToMax)} label="Cost to max" />
                                     </Box>
-                                    <TextAndLabel textColor={costToMax > countInStorage ? 'accent-1' : ''} text={nFormatter(countInStorage)} label="In Storage" />
+                                    <TextAndLabel textColor={costToNextLevel > countInStorage ? 'accent-1' : 'green-1'} text={nFormatter(countInStorage)} label="In Storage" />
                                 </Grid>
                             </ShadowBox>
                         )
@@ -536,6 +464,9 @@ function PrinterDisplay() {
                     )
                 })
                 }
+            </Box>
+            <Box>
+                <Text size="small">* Green text indicates your active sample.</Text>
             </Box>
             <ShadowBox background="dark-1" gap="small">
                 {
