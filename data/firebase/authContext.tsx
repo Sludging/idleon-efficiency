@@ -8,12 +8,19 @@ import { useRouter } from "next/dist/client/router";
 
 interface AuthData {
     user: User | null
+    publicProfile: PublicData | null,
     isLoading: boolean
-    isDemo: boolean
     loginFunction: Function
     logoutFunction: Function
     tokenFunction: Function
     emailLoginFunction: Function
+    handlePublicProfile: Function
+}
+
+interface PublicData {
+    data: Map<string, any>
+    charNames: string[]
+    profile: string
 }
 
 export const AuthContext = React.createContext<AuthData | null>(null);
@@ -28,8 +35,8 @@ export const getAuthData = (): AuthData => {
 
 export const AuthProvider: React.FC<{}> = (props) => {
     const [user, setUser] = useState<User | null>(null);
+    const [publicProfile, setPublicProfile] = useState<PublicData | null>(null);
     const [loading, setLoading] = useState(true);
-    const [isDemo, setIsDemo] = useState(false);
     const router = useRouter();
 
     const loginUser = () => {
@@ -67,28 +74,21 @@ export const AuthProvider: React.FC<{}> = (props) => {
     }
 
     const loginThroughEmailPassword = (email: string, password: string, callback?: Function) => {
-        if (email == "demo" && password == "demo") {
-            setIsDemo(true);
-            loginEvent("DEMO");
-            router.push("/stamps");
-        }
-        else {
-            const auth = getAuth(app);
-            const credential = EmailAuthProvider.credential(email, password);
-            signInWithCredential(auth, credential)
-                .then((result) => {
-                    setUser(result.user);
-                    loginEvent("EMAIL");
-                    router.push("/stamps");
-                }).catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    if (callback) {
-                        callback(errorCode);
-                    }
-                    console.debug(errorCode, errorMessage);
-                });
-        }
+        const auth = getAuth(app);
+        const credential = EmailAuthProvider.credential(email, password);
+        signInWithCredential(auth, credential)
+            .then((result) => {
+                setUser(result.user);
+                loginEvent("EMAIL");
+                router.push("/stamps");
+            }).catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                if (callback) {
+                    callback(errorCode);
+                }
+                console.debug(errorCode, errorMessage);
+            });
     }
 
     const logout = () => {
@@ -108,37 +108,45 @@ export const AuthProvider: React.FC<{}> = (props) => {
                     console.log(errorCode, errorMessage);
                 });
         }
-        setIsDemo(false);
     }
 
+    const handlePublicProfile = (profile: string, profileData: Map<string, any>, charNames: string[]) => {
+        setPublicProfile({
+            charNames: charNames,
+            data: profileData,
+            profile: profile
+        });
+    }
 
     useEffect(() => {
         setLoading(true);
-        const auth = getAuth(app);
-        auth.onAuthStateChanged(res => {
-            if (res) {
-                setUser(res);
-            }
-            else {
-                setUser(null);
-            }
-            setLoading(false);
-        });
-        if (isDemo) {
-            setUser(null);
+        if (publicProfile) {
             setLoading(false);
         }
-    }, [user, isDemo]);
+        else {
+            const auth = getAuth(app);
+            auth.onAuthStateChanged(res => {
+                if (res) {
+                    setUser(res);
+                }
+                else {
+                    setUser(null);
+                }
+                setLoading(false);
+            });
+        }
+    }, [publicProfile, user]);
 
     return (
         <AuthContext.Provider value={{
             user: user,
+            publicProfile: publicProfile,
             isLoading: loading,
-            isDemo: isDemo,
             loginFunction: loginUser,
             emailLoginFunction: loginThroughEmailPassword,
             logoutFunction: logout,
-            tokenFunction: loginThroughToken
+            tokenFunction: loginThroughToken,
+            handlePublicProfile: handlePublicProfile
         }}>
             {props.children}
         </AuthContext.Provider>

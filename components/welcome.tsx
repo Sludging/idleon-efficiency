@@ -39,16 +39,14 @@ function SpecialButton({ isActive, text, clickHandler, step }: { isActive: boole
 
 export default function Welcome() {
     const authData = useContext(AuthContext);
-    const [value, setValue] = useState('');
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showLayer, setShowLayer] = useState(false);
-    const [index, setIndex] = useState<number>(1);
     const [error, setError] = useState<string>('');
 
     const size = useContext(ResponsiveContext);
 
-    const onActive = (nextIndex: number) => setIndex(nextIndex);
     const onButtonClick = (toCall: Function | undefined, value?: string, value2?: string) => {
         try {
             if (toCall) {
@@ -87,7 +85,8 @@ export default function Welcome() {
 
 
     useEffect(() => {
-    });
+        setIsLoading(authData?.isLoading ?? true);
+    }, [authData]);
     return (
         <Box>
             <NextSeo title="Boost your efficiency in Legends of Idleon!" />
@@ -102,7 +101,7 @@ export default function Welcome() {
                     </Grid>
                 </Box>
                 <Box width={{ max: '1440px' }} pad="large" fill margin={{ left: 'auto', right: 'auto' }} style={{ position: 'relative', top: '150px' }} >
-                    {!authData?.isLoading && !authData?.user &&
+                    {!isLoading && !authData?.user &&
                         <ShadowBox pad="large" background="dark-2" fill margin={{ left: 'auto', right: 'auto' }} flex={false}>
                             <Box>
                                 <Grid columns={size == "small" ? ["100%"] : ["45%", "10%", "45%"]} pad={{ left: "large"}}>

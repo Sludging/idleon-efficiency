@@ -117,6 +117,7 @@ export const AppProvider: React.FC<{}> = (props) => {
   const [state, setState] = useState(new IdleonData(new Map(), undefined));
   const authContext = useContext(AuthContext);
   const user = authContext?.user;
+  const publicProfile = authContext?.publicProfile;
   const [db, setDB] = useState<Firestore | undefined>(undefined)
   const [realDB, setRealDB] = useState<Database | undefined>(undefined)
   const [charNames, setCharNames] = useState<Array<string>>([]);
@@ -155,7 +156,7 @@ export const AppProvider: React.FC<{}> = (props) => {
     }
   }
 
-  const updateIdleonData = async (data: Cloudsave, charNames: string[], isDemo: boolean = false) => {
+  const updateIdleonData = async (data: Cloudsave, charNames: string[], isStatic: boolean = false) => {
     let accountData = new Map();
     accountData.set("playerNames", charNames);
     accountData.set("itemsData", allItems);
@@ -192,7 +193,7 @@ export const AppProvider: React.FC<{}> = (props) => {
     // _customBlock_AnvilProduceStats for the rest
     accountData.set("servervars", await getServerVars())
 
-    if (isDemo) {
+    if (isStatic) {
       const saveGlobalTime = JSON.parse(data.get("TimeAway"))["GlobalTime"] as number;
       const newData = new IdleonData(accountData, new Date(saveGlobalTime * 1000));
       setState(newData);
@@ -212,19 +213,17 @@ export const AppProvider: React.FC<{}> = (props) => {
     }
   }
 
-  const handleStaticData = async () => {
-    const res = await fetch('/api/demo');
-    const jsonData = await res.json();
+  const handleStaticData = async (jsonData: Map<string, any>, charNames: string[], profile: string) => {
     const cloudsave = Cloudsave.fromJSON(jsonData as Map<string, any>)
-    const charNames = cloudsave.fakePlayerNames();
     updateIdleonData(cloudsave, charNames, true);
     sendEvent({
-      action: "handle_demo",
+      action: "handle_static",
       category: "engagement",
-      label: "demo",
+      label: profile,
       value: 1,
     });
   }
+
 
 
 
@@ -237,13 +236,15 @@ export const AppProvider: React.FC<{}> = (props) => {
       setRealDB(getDatabase(app));
       getServerVars();
     }
-    if (authContext?.isDemo) {
-      handleStaticData();
+    else if (publicProfile) {
+      console.log("Doing static data!");
+      handleStaticData(publicProfile.data, publicProfile.charNames, publicProfile.profile);
     }
-    else if (user) {
+    else if (user && state.getData().size == 0) {
+      console.log("Doing live data!");
       getAccountData();
     }
-  }, [user, db, charNames, authContext]);
+  }, [publicProfile, user, db, charNames, authContext]);
 
   return (
     <AppContext.Provider value={state}>
