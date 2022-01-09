@@ -20,7 +20,7 @@ export class Shrine {
             return 0;
         }
 
-        return this.initialBonus + ((this.level - 1) * this.increment) * (1 + cardBonus / 100);
+        return (this.initialBonus + ((this.level - 1) * this.increment)) * (1 + cardBonus / 100);
     }
 
     getBonusText = (map: number | undefined = undefined, cardBonus: number = 0) => {

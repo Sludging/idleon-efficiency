@@ -73,47 +73,54 @@ function RefineryDisplay() {
     }, [playerData])
 
     const squireTimeSave = useMemo(() => {
-        const toReturn: number[] = [];
-        if (refineryData?.salts) {
-            Object.entries(refineryData.salts).forEach(([salt, info], index) => {
-                // Perfect squire use math
-                // (time to rank)-((time to rank -squire cd )/(72k-mana p.o))x (squire cycles x cycle speed) 
-                if (squireInfo) {
-                    const timeToNextRank = info.getTimeToNextRank(cycleInfo[Math.floor(index / 3)].time);
-                    // Figure out the squire with the longest CD, simplify the math.
-                    const maxSquireCD = Math.max(...squireInfo.map(squire => [...squire.cooldown.entries()].filter(([talent, cooldown]) => talent.skillIndex == 130).pop()?.[1] ?? 0));
-                    // The squire skill can only be used after the cd, so ignore that portion.
-                    let timeSquireCanImpact = timeToNextRank - maxSquireCD;
+        const theSlowRockMethod = () => {
+            const toReturn: number[] = [];
+            if (refineryData?.salts) {
+                Object.entries(refineryData.salts).forEach(([salt, info], index) => {
+                    const currentCooldowns: [Player, number][] = [];
+                    squireInfo && squireInfo.forEach(squire => {
+                        currentCooldowns.push([squire, squire.getCurrentCooldown(130)]);
+                    });
+                    let totalWait = 0;
+                    let timeToNextRank = info.getTimeToNextRank(cycleInfo[Math.floor(index / 3)].time);
+                    while (timeToNextRank > 0) {
+                        const nextCDTime = Math.min(...currentCooldowns.map(cooldowns => cooldowns[1]));
+                        if (timeToNextRank > nextCDTime) {
+                            totalWait += nextCDTime;
+                            timeToNextRank -= nextCDTime;
+                            currentCooldowns.forEach(([squire, _], squireIndex, originalArray) => {
+                                originalArray[squireIndex][1] -= nextCDTime; // adjust the actual array data
+                                if (originalArray[squireIndex][1] == 0) {
+                                    const manaBox = squire.postOffice.find(box => box.name == "Magician Starterpack");
+                                    const cdReduction = manaBox?.bonuses[2].getBonus(manaBox.level, 2) ?? 0; 
+                                    originalArray[squireIndex][1] = Math.floor(1 - cdReduction / 100) * 72000;
 
-                    let timeSaved = 0;
-                    // Do the math for each squire.
-                    squireInfo.forEach(squire => {
-                        // Find the mana box and get the CD reduction impact.
-                        const manaBox = squire.postOffice.find(box => box.name == "Magician Starterpack");
-                        const cdReduction = manaBox?.bonuses[2].getBonus(manaBox.level, 2) ?? 0;
-                        const talentCD = (1 - cdReduction / 100) * 72000 // TODO: Get rid of magic numbers and names
-
-                        // calculate how much time we can save using squire skill on CD.
-                        const timePerSquireSkilluse = (squire.talents.find(talent => talent.skillIndex == 130)?.getBonus(false, false, true) ?? 0) * cycleInfo[Math.floor(index / 3)].time
-                        while (timeSquireCanImpact > talentCD) {
-                            // Calculate how much time we save every time we use the squire skill.
-                            timeSaved += timePerSquireSkilluse;
-                            timeSquireCanImpact -= talentCD + timePerSquireSkilluse;
+                                    const timePerSquireSkilluse = (squire.talents.find(talent => talent.skillIndex == 130)?.getBonus(false, false, true) ?? 0) * cycleInfo[Math.floor(index / 3)].time
+                                    timeToNextRank -= timePerSquireSkilluse;
+                                    if (timeToNextRank < 0) {
+                                        timeToNextRank = 0;
+                                    }
+                                }
+                            })
                         }
-                    })
-
-                    // This can happen when the CD is longer than the actual time to rank up, so ignore it.
-                    if (timeSaved < 0) {
-                        toReturn.push(0);
+                        else {
+                            totalWait += timeToNextRank
+                            timeToNextRank = 0;
+                        }
                     }
-                    else {
-                        toReturn.push(timeSaved);
-                    }
-                }
-            })
+                    toReturn.push(totalWait);
+                })
+            }
+            return toReturn;
         }
-        return toReturn;
-    }, [squireInfo, refineryData, cycleInfo])
+        if (squirePowha) {
+            return theSlowRockMethod();
+        }
+        
+
+        return [];
+
+    }, [squireInfo, refineryData, cycleInfo, squirePowha])
 
     const saltMeritLevel = useMemo(() => {
         const saltMerit = taskboardData?.merits.find(merit => merit.descLine1 == "Refinery Salt Costs don't scale beyond");
@@ -191,7 +198,7 @@ function RefineryDisplay() {
                     <TipDisplay
                         body={<Box gap="xsmall">
                             <Text>This will make the following assumptions and calculate their impact on the time to rank-up:</Text>
-                            <Text>* Assume perfect use of squire skill on CD (if you got more than one squire, they are assumed to be in perfect sync.)</Text>
+                            <Text>* Assume perfect use of squire skill on CD.</Text>
                             <Text>* This is assuming the highest possible level for the squire skill based on your max talent level.</Text>
                         </Box>}
                         size="small"
@@ -218,7 +225,6 @@ function RefineryDisplay() {
                     const fuelTime = info.getFuelTime(storageItems, [], index <= saltMeritLevel) * cycleInfo[Math.floor(index / 3)].time;
                     const timeToNextRank = info.getTimeToNextRank(cycleInfo[Math.floor(index / 3)].time);
 
-
                     if (saltItem) {
                         return (
                             <ShadowBox key={index} background="dark-1">
@@ -241,7 +247,7 @@ function RefineryDisplay() {
                                                     <Box>
                                                         <Text color="accent-2" size="small">Rank up in</Text>
                                                         <Box>
-                                                            {info.active && fuelTime > 0 ? <TimeDown size={size == "medium" ? TimeDisplaySize.Medium : TimeDisplaySize.Large} addSeconds={squirePowha ? timeToNextRank - squireTimeSave[index] : timeToNextRank} lastUpdated={lastUpdated} /> : <Text color="accent-1" size="small">Not active</Text>}
+                                                            {info.active && fuelTime > 0 ? <TimeDown size={size == "medium" ? TimeDisplaySize.Medium : TimeDisplaySize.Large} addSeconds={squirePowha ? squireTimeSave[index] : timeToNextRank} lastUpdated={lastUpdated} /> : <Text color="accent-1" size="small">Not active</Text>}
                                                         </Box>
                                                     </Box>
                                                     :
@@ -279,7 +285,6 @@ function RefineryDisplay() {
                                                     info.baseCost && info.baseCost.map((costData, index) => {
                                                         const costItem = itemData?.find((item) => item.internalName == costData.item);
                                                         const itemCost = costData.quantity * info.getCostMulti(costData.item.includes("Refinery"), index <= saltMeritLevel);
-                                                        const storageQuantity = storageItems.find(x => x.internalName == costData.item)?.count ?? 0;
                                                         if (costItem) {
                                                             return (
                                                                 <Box key={index} direction="row" align="center">
@@ -314,8 +319,8 @@ function RefineryDisplay() {
                                                                         <Box className={costItem?.getClass()} />
                                                                     </Box>
                                                                     <Box direction="row" gap="xsmall" align="center">
-                                                                        <Text color={storageQuantity < resourceCostToMax ? 'accent-1' : '' } size="small">{nFormatter(resourceCostToMax, 2)}</Text>
-                                                                        <Text size="small">({nFormatter(storageQuantity, 2)})</Text>
+                                                                        <Text color={storageQuantity < resourceCostToMax ? 'accent-1' : '' } size="small">{nFormatter(resourceCostToMax)}</Text>
+                                                                        <Text size="small">({nFormatter(storageQuantity)})</Text>
                                                                     </Box>
                                                                 </Box>
                                                             )
@@ -362,7 +367,10 @@ function SaltLickDisplay() {
     }
 
     return (
-        <Box gap="medium">
+        <Box>
+            <Box margin={{bottom: 'small'}}>
+                <Text size="small">* Green text &apos;In Storage&apos; means you can afford the next level.</Text>
+            </Box>
             {
                 saltLickData && saltLickData.bonuses.map((bonus, index) => {
                     const saltItem = itemData?.find((item) => item.internalName == bonus.item);
@@ -373,8 +381,9 @@ function SaltLickDisplay() {
                             countInStorage += refineryData?.storage.find(salt => salt.name == saltItem.internalName)?.quantity ?? 0;
                         }
                         const costToMax = saltLickData.getCostToMax(index);
+                        const costToNextLevel = saltLickData.getCost(index);
                         return (
-                            <ShadowBox key={index} background="dark-1" pad="medium" gap="xlarge" direction="row" align="center" justify="between">
+                            <ShadowBox key={index} background="dark-1" pad="medium" direction="row" align="center" justify="between" margin={{bottom: 'small'}}>
                                 <Grid columns={["35%", "10%", "20%", "15%", "15%"]} fill gap="small" align="center">
                                     <TextAndLabel textSize='small' text={saltLickData.getBonusText(index)} label="Bonus" />
                                     <TextAndLabel text={`${bonus.level} / ${bonus.maxLevel}`} label="Level" />
@@ -382,13 +391,13 @@ function SaltLickDisplay() {
                                         <Box title={saltItem.displayName} width={{ max: '50px', min: '50px' }} margin={{ right: 'small' }}>
                                             <Box className={saltItem.getClass()} />
                                         </Box>
-                                        <TextAndLabel text={nFormatter(saltLickData.getCost(index), 2)} label="Next Level costs" />
+                                        <TextAndLabel text={nFormatter(costToNextLevel)} label="Next Level costs" />
 
                                     </Box>
                                     <Box direction="row" align="center">
-                                        <TextAndLabel text={nFormatter(costToMax, 2)} label="Cost to max" />
+                                        <TextAndLabel text={nFormatter(costToMax)} label="Cost to max" />
                                     </Box>
-                                    <TextAndLabel textColor={costToMax > countInStorage ? 'accent-1' : ''} text={nFormatter(countInStorage, 2)} label="In Storage" />
+                                    <TextAndLabel textColor={costToNextLevel > countInStorage ? 'accent-1' : 'green-1'} text={nFormatter(countInStorage)} label="In Storage" />
                                 </Grid>
                             </ShadowBox>
                         )
@@ -456,6 +465,9 @@ function PrinterDisplay() {
                 })
                 }
             </Box>
+            <Box>
+                <Text size="small">* Green text indicates your active sample.</Text>
+            </Box>
             <ShadowBox background="dark-1" gap="small">
                 {
                     printerData && printerData.playerInfo.map((playerInfo, index) => {
@@ -476,13 +488,13 @@ function PrinterDisplay() {
                                                         <Box className={sampleItem?.getClass()} />
                                                     </Box>
                                                     <Box direction="row" align="center" gap="small">
-                                                        <Text color={activeItem ? 'green-1' : ''} size="small">{nFormatter(sample.quantity, 2)}</Text>
+                                                        <Text color={activeItem ? 'green-1' : ''} size="small">{nFormatter(sample.quantity)}</Text>
                                                     </Box>
                                                 </Box>
                                                 {activeItem && (activeItem?.quantity ?? 0) < sample.quantity &&
                                                     <TipDisplay
                                                         heading='Active lower than sample'
-                                                        body={<Box><Text>You have a sample of {nFormatter(sample.quantity, 2)} but only printing {nFormatter(activeItem.quantity, 2)}.</Text><Text>Go update your printing!</Text></Box>}
+                                                        body={<Box><Text>You have a sample of {nFormatter(sample.quantity)} but only printing {nFormatter(activeItem.quantity)}.</Text><Text>Go update your printing!</Text></Box>}
                                                         size='large'
                                                         direction={TipDirection.Down}
                                                     >
@@ -574,7 +586,7 @@ function DeathnoteDisplay() {
                                             <Box className={deathnoteData?.getRankClass(deathnoteData?.getDeathnoteRank(killCount))} />
                                         </Box>
                                         <Text size="small">{mobName}</Text>
-                                        <Text size="small">{nFormatter(killCount, 2)}</Text>
+                                        <Text size="small">{nFormatter(killCount)}</Text>
                                     </Box>
                                 ))
                             }
@@ -601,7 +613,7 @@ function ShrinesDisplay() {
     }, [idleonData]);
 
     const shrineCardBonus = useMemo(() => {
-        return cardData?.find(card => card.name == "Z9")?.getBonus();
+        return cardData?.find(card => card.id == "Z9")?.getBonus();
     }, [cardData]);
 
     if (!shrineData || shrineData.filter(shrine => shrine.level > 0).length == 0) {
@@ -725,7 +737,7 @@ function BuildingsDisplay() {
                                     <TextAndLabel 
                                         label="Build Req"
                                         textSize="small"
-                                        text={`${nFormatter(building.currentXP, 2)}/${nFormatter(building.getBuildCost(), 2)}`}
+                                        text={`${nFormatter(building.currentXP)}/${nFormatter(building.getBuildCost())}`}
                                         margin={{right: 'large', bottom: 'small'}}
                                     />}
                                 </Box>
@@ -744,7 +756,7 @@ function BuildingsDisplay() {
                                                                         <Box className={costItem?.getClass()} />
                                                                     </Box>
                                                                     <Box direction="row" gap="xsmall" align="center">
-                                                                        <Text size="small">{nFormatter(costData.quantity, 2)}</Text>
+                                                                        <Text size="small">{nFormatter(costData.quantity)}</Text>
                                                                     </Box>
                                                                 </Box>
                                                             )
@@ -768,13 +780,6 @@ function BuildingsDisplay() {
 
 function Construction() {
     const [activeTab, setActiveTab] = useState<string>("Refinery");
-    const idleonData = useContext(AppContext);
-
-    useEffect(() => {
-        if (idleonData) {
-            const theData = idleonData.getData();
-        }
-    }, [idleonData]);
 
     return (
         <Box>

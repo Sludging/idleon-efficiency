@@ -306,6 +306,7 @@ export class ItemStat {
 const getMiscStatRegex = () => { return /(\d+)(.*)/g };
 const getRegex = () => { return /Cards(\w)(\d+)/g };
 const getEnhancerRegex = () => { return /DungEnhancer(\d+)/g };
+const liquidRegex = () => { return /Liquid(\d+)/g };
 
 export class Item {
     internalName: string;
@@ -429,6 +430,9 @@ export class Item {
         if (getRegex().exec(this.internalName)) {
             return `icons-2836 icons-${this.internalName}`;
         }
+        if (liquidRegex().exec(this.internalName)) {
+            return `icons-3636 icons-${this.internalName}_x1`;
+        }
         // Cons dem for some reason has capital x.
         if (this.internalName == "ObolPinkCons") {
             return `icons-3636 icons-${this.internalName}_X1`;    
@@ -437,7 +441,7 @@ export class Item {
         if (this.internalName == "StampA35") {
             return `icons-3636 icons-StampA34_x1`;    
         }
-        return `icons-3636 icons-${this.internalName}_x1`;
+        return `icons-7272 icons-${this.internalName}`;
     }
 
     addStone = (data: StoneProps) => {
