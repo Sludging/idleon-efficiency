@@ -26,6 +26,9 @@ export class Card {
     }
 
     getBonus = (): number => {
+        if (this.count == 0) { 
+            return 0;
+        }
         const stars = this.getStars();
         return this.bonus * (stars + 1);
     }
@@ -217,7 +220,7 @@ export default function parseCards(cardData: Record<string, number>) {
     const cards = cardsInit();
 
     cards.forEach(card => {
-        card.count = cardData[card.name];
+        card.count = cardData[card.name] ?? 0;
     })
 
     return cards;

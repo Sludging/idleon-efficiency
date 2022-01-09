@@ -25,14 +25,24 @@ function ObolInventory() {
         if (description) {
             return <Text>{description}</Text>
         }
-
-        return stats.filter((stat) => stat.shouldDisplay()).map((x, index) => <Text key={index}>{x.getDisplay()}</Text>);
+        try {
+            return stats.filter((stat) => stat.shouldDisplay()).map((x, index) => <Text key={index}>{x.getDisplay()}</Text>);
+        }
+        catch {
+            return <></>
+        }
     }
 
     useEffect(() => {
         const theData = idleonData.getData();
         setObolsData(theData.get("obols"));
     }, [idleonData])
+
+    if (!obolsData || obolsData.playerObols.length == 0) {
+        return (
+            <></>
+        )
+    }
 
     return (
         <Box pad="medium" gap="small">
@@ -43,7 +53,9 @@ function ObolInventory() {
                         <Text size="medium">{ObolType[type]}</Text>
                         <Box direction="row" wrap>
                             {
-                                obols.filter(obol => !obol.locked && obol.item.internalName != "Blank").sort((obol1, obol2) => obol1.getRarity() > obol2.getRarity() ? -1 : 1).map((obol, obolIndex) => {
+                                obols.filter(obol => !obol.locked && obol.item.internalName != "Blank")
+                                .sort((obol1, obol2) =>  obol1.getRarity() == obol2.getRarity() ? obol1.type > obol2.type ? -1 : 1 : obol1.getRarity() > obol2.getRarity() ? -1 : 1)
+                                .map((obol, obolIndex) => {
                                     return (
                                         <TipDisplay
                                             key={obolIndex}
