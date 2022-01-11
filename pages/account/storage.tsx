@@ -99,7 +99,7 @@ function StorageDisplay() {
                                             <Box width={{max: '36px', min: '36px'}}>
                                                 <Box className={item.getClass()} />
                                             </Box>
-                                            <Text size="small">{nFormatter(item.count, 2)}</Text>
+                                            <Text size="small">{nFormatter(item.count)}</Text>
                                         </Box>
                                     </Box>
                                 ))
@@ -118,7 +118,7 @@ function StorageDisplay() {
                                         <Box width={{max: '36px', min: '36px'}}>
                                             <Box className={item.getClass()} />
                                         </Box>
-                                        <Text size="small">{nFormatter(item.count, 2)}</Text>
+                                        <Text size="small">{nFormatter(item.count)}</Text>
                                     </Box>
                                 </Box>
                             ))
