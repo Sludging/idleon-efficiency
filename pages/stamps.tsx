@@ -50,8 +50,8 @@ function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stam
                     <Text size={size == "small" ? 'small' : ''} weight="bold">{stamp.name} ({stamp.level})</Text>
                     <hr style={{ width: "100%"}} />
                     <Text size="small">Bonus: {stamp.getBonusText()}</Text>
-                    {!stamp.isMaxLevel() && <Box direction="row" gap="small"><Text size="small">Cost: </Text><CoinsDisplay coinMap={getCoinsArray(stamp.getGoldCost(hasBribe, blueFlavPercent))} /></Box>}
-                    {stamp.isMaxLevel() && <Box direction="row" align="center"><Text size="small">Material Cost: {nFormatter(round(stamp.getMaterialCost(blueFlavPercent)), 1)}</Text><Box align="center" width={{max: '36px'}} fill><Box className={`icons-3636 icons-${stamp.data.material}_x1`} /></Box></Box>}
+                    {stamp.isMaxLevel() && <Box direction="row" align="center"><Text size="small">Material Cost: {nFormatter(stamp.getMaterialCost(blueFlavPercent))}</Text><Box width={{max: '36px', min: '36px'}} fill><Box className={`icons-7272 icons-${stamp.data.material}`} /></Box></Box>}
+                    <Box direction="row" gap="small"><Text size="small">Cost: </Text><CoinsDisplay coinMap={getCoinsArray(stamp.getGoldCost(hasBribe, blueFlavPercent))} /></Box>
                 </Box>
                 {faceLeft && size != "small" &&
                     <svg viewBox="0 0 22 22" version="1.1" width="22px" height="22px">
@@ -121,11 +121,8 @@ function Stamps() {
             setStampData(theData.get("stamps"));
 
             const alchemy = theData.get("alchemy") as Alchemy;
-            const blueFlavVial = alchemy?.vials[AlchemyConst.BlueFlav];
-            if (blueFlavVial) {
-                const blueFlavPower = lavaFunc(blueFlavVial.func, blueFlavVial.level, blueFlavVial.x1, blueFlavVial.x2);
-                setBlueFlavPercent(blueFlavPower / 100); // divide by 100 to get the %.
-            }
+            const blueFlavPower = alchemy?.vials[AlchemyConst.BlueFlav].getBonus() ?? 0;
+            setBlueFlavPercent(blueFlavPower / 100); // divide by 100 to get the %.
 
             const bribes = theData.get("bribes") as Bribe[];
             if (bribes) {

@@ -15,6 +15,7 @@ import { AchievementConst } from '../data/domain/achievements'
 import { useEffect, useState, useContext } from 'react';
 import { AppContext } from '../data/appContext'
 import { nFormatter } from '../data/utility'
+import { Item } from "../data/domain/items";
 
 const CapitalizedH3 = styled.h3`
     text-transform: capitalize
@@ -50,7 +51,7 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
         if (bubble.level == 0) {
             return <></>
         }
-        const materialCosts: Map<string, number> = bubble.getMaterialCost(cauldronCostLevel, undevelopedCostsBubbleLevel, barleyBrewVialLevel, bargainBubbleLevel, classMultiBubbleLevel, discountLevel, hasAchievement);
+        const materialCosts: Map<Item, number> = bubble.getMaterialCost(cauldronCostLevel, undevelopedCostsBubbleLevel, barleyBrewVialLevel, bargainBubbleLevel, classMultiBubbleLevel, discountLevel, hasAchievement);
         return (
             <Box direction="row" align="center" width={{ max: 'medium' }}>
                 {!faceLeft &&
@@ -69,7 +70,7 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
                     {
                         Array.from(materialCosts).map(([item, cost]) => {
                             return (
-                                <Box key={`${bubble.name}_${item}`} direction="row" align="center" ><Text size="small">Material Cost: {nFormatter(Math.round(cost), 2)}</Text><Box className={`icons-3636 icons-${item}_x1`} /></Box>
+                                <Box key={`${bubble.name}_${item}`} direction="row" align="center" ><Text size="small">Material Cost: {nFormatter(Math.round(cost))}</Text><Box className={`icons-3636 icons-${item}_x1`} /></Box>
                             )
                         })
                     }
