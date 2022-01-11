@@ -8,19 +8,11 @@ import { useRouter } from "next/dist/client/router";
 
 interface AuthData {
     user: User | null
-    publicProfile: PublicData | null,
     isLoading: boolean
     loginFunction: Function
     logoutFunction: Function
     tokenFunction: Function
     emailLoginFunction: Function
-    handlePublicProfile: Function
-}
-
-interface PublicData {
-    data: Map<string, any>
-    charNames: string[]
-    profile: string
 }
 
 export const AuthContext = React.createContext<AuthData | null>(null);
@@ -35,7 +27,6 @@ export const getAuthData = (): AuthData => {
 
 export const AuthProvider: React.FC<{}> = (props) => {
     const [user, setUser] = useState<User | null>(null);
-    const [publicProfile, setPublicProfile] = useState<PublicData | null>(null);
     const [loading, setLoading] = useState(true);
     const router = useRouter();
 
@@ -110,43 +101,28 @@ export const AuthProvider: React.FC<{}> = (props) => {
         }
     }
 
-    const handlePublicProfile = (profile: string, profileData: Map<string, any>, charNames: string[]) => {
-        setPublicProfile({
-            charNames: charNames,
-            data: profileData,
-            profile: profile
-        });
-    }
-
     useEffect(() => {
         setLoading(true);
-        if (publicProfile) {
+        const auth = getAuth(app);
+        auth.onAuthStateChanged(res => {
+            if (res) {
+                setUser(res);
+            }
+            else {
+                setUser(null);
+            }
             setLoading(false);
-        }
-        else {
-            const auth = getAuth(app);
-            auth.onAuthStateChanged(res => {
-                if (res) {
-                    setUser(res);
-                }
-                else {
-                    setUser(null);
-                }
-                setLoading(false);
-            });
-        }
-    }, [publicProfile, user]);
+        });
+    }, [user]);
 
     return (
         <AuthContext.Provider value={{
             user: user,
-            publicProfile: publicProfile,
             isLoading: loading,
             loginFunction: loginUser,
             emailLoginFunction: loginThroughEmailPassword,
             logoutFunction: logout,
             tokenFunction: loginThroughToken,
-            handlePublicProfile: handlePublicProfile
         }}>
             {props.children}
         </AuthContext.Provider>
