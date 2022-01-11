@@ -114,6 +114,11 @@ declare const window: Window &
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
+  let domain = "";
+  if (typeof window !== "undefined") {
+    var locationSplit = window.location.host.split('.');
+    domain = locationSplit[0] === "www" || locationSplit[0] === "localhost:3000" ? "" : locationSplit[0];
+  }
 
   useEffect(() => {
     const handleRouteChange = (url: string) => {
@@ -127,7 +132,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange)
     }
-
   }, [router.events])
 
   return (
@@ -157,7 +161,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <Grommet theme={customTheme} full>
         <AuthProvider>
-          <AppProvider>
+          <AppProvider domain={domain}>
             <DefaultSeo {...SEO} />
             <Layout>
               <Component {...pageProps} />

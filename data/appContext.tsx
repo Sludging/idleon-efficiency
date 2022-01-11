@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactChild } from 'react';
 import { doc, initializeFirestore, onSnapshot, Firestore, DocumentSnapshot as Document, getDoc } from 'firebase/firestore';
 import { getApp } from 'firebase/app';
 import { useContext } from 'react';
@@ -33,6 +33,7 @@ import parseConstruction from './domain/construction';
 import parseCards from './domain/cards';
 import parseArcade from './domain/arcade';
 import parseObols from './domain/obols';
+import { FirestoreData } from './firebase/data';
 
 
 
@@ -113,48 +114,12 @@ const keyFunctionMap: Record<string, Function> = {
 }
 
 
-export const AppProvider: React.FC<{}> = (props) => {
+export const AppProvider: React.FC<{domain: string, children?: React.ReactNode}> = ({ domain, children }) => {
   const [state, setState] = useState(new IdleonData(new Map(), undefined));
+  const [fireStore, setFireStore] = useState<FirestoreData | undefined>(undefined);
   const authContext = useContext(AuthContext);
   const user = authContext?.user;
-  const publicProfile = authContext?.publicProfile;
-  const [db, setDB] = useState<Firestore | undefined>(undefined)
-  const [realDB, setRealDB] = useState<Database | undefined>(undefined)
-  const [charNames, setCharNames] = useState<Array<string>>([]);
-
   const allItems = initAllItems();
-
-  const getAccountData = async () => {
-    if (db?.type == "firestore" && user) {
-      if (charNames.length == 0 && realDB) {
-        goOnline(realDB);
-        const dbRef = ref(realDB);
-        get(child(dbRef, `_uid/${user.uid}`)).then((snapshot) => {
-          if (snapshot.exists()) {
-            setCharNames(snapshot.val());
-          } else {
-            console.log("No data available");
-          }
-        }).catch((error) => {
-          console.log(error);
-        });
-      }
-
-      const unsub = onSnapshot(doc(db, "_data", user.uid).withConverter(cloudsaveConverter),
-        { includeMetadataChanges: true }, (doc) => {
-          if (doc.exists()) {
-            const cloudsave = doc.data();
-            updateIdleonData(cloudsave, charNames);
-            sendEvent({
-              action: "handle_snapshot",
-              category: "engagement",
-              label: user.uid,
-              value: 1,
-            });
-          }
-        });
-    }
-  }
 
   const updateIdleonData = async (data: Cloudsave, charNames: string[], isStatic: boolean = false) => {
     let accountData = new Map();
@@ -191,7 +156,6 @@ export const AppProvider: React.FC<{}> = (props) => {
     // ForgeItemOrder
     // PlayerStuff_2 - for current charge + other things I think
     // _customBlock_AnvilProduceStats for the rest
-    accountData.set("servervars", await getServerVars())
 
     if (isStatic) {
       const saveGlobalTime = JSON.parse(data.get("TimeAway"))["GlobalTime"] as number;
@@ -201,15 +165,6 @@ export const AppProvider: React.FC<{}> = (props) => {
     else {
       const newData = new IdleonData(accountData, new Date());
       setState(newData);
-    }
-  }
-
-  const getServerVars = async () => {
-    if (db?.type == "firestore" && user) {
-      const res = await getDoc(doc(db, "_vars", "_vars"));
-      if (res.exists()) {
-        return res.data();
-      }
     }
   }
 
@@ -225,30 +180,21 @@ export const AppProvider: React.FC<{}> = (props) => {
   }
 
 
-
-
   useEffect(() => {
     const app = getApp();
-    if (!db) {
-      setDB(initializeFirestore(app, {}));
-    }
-    if (!realDB) {
-      setRealDB(getDatabase(app));
-      getServerVars();
-    }
-    else if (publicProfile) {
+    if (!domain && !fireStore && user) {
+      console.log("Setting up new firestore" , user);
+      setFireStore(new FirestoreData(user.uid, app, updateIdleonData));
+    } 
+    else if (domain) {
       console.log("Doing static data!");
-      handleStaticData(publicProfile.data, publicProfile.charNames, publicProfile.profile);
+      // TODO: Actually handle static data!
     }
-    else if (user && state.getData().size == 0) {
-      console.log("Doing live data!");
-      getAccountData();
-    }
-  }, [publicProfile, user, db, charNames, authContext]);
+  }, [domain, user, authContext]);
 
   return (
     <AppContext.Provider value={state}>
-      {props.children}
+      {children}
     </AppContext.Provider>
   );
 };
