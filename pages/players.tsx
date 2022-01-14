@@ -42,6 +42,8 @@ import { Worship } from '../data/domain/worship';
 import ObolsInfo from '../components/account/task-board/obolsInfo';
 import TextAndLabel, { ComponentAndLabel } from '../components/base/TextAndLabel';
 import { Bribe, BribeStatus } from '../data/domain/bribes';
+import { Skilling } from '../data/domain/skilling';
+import { SaltLick } from '../data/domain/saltLick';
 
 
 function ItemSourcesDisplay({ sources, dropInfo }: { sources: ItemSources, dropInfo: DropInfo }) {
@@ -136,28 +138,28 @@ function ShowSkills(props: SkillProps) {
 }
 
 function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: Bubble[] }) {
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext)
 
-    const worship = idleonData.getData().get("worship") as Worship;
+    const worship = appContext.data.getData().get("worship") as Worship;
     const playerCoins = useMemo(() => getCoinsArray(player.money), [player]);
     const activeShrines = useMemo(() => {
-        const theData = idleonData.getData();
+        const theData = appContext.data.getData();
         const shrines = theData.get("shrines") as Shrine[];
         if (shrines) {
             return shrines.filter((shrine) => shrine.currentMap == player.currentMapId && shrine.level > 0);
         }
         return [];
-    }, [idleonData, player]);
+    }, [appContext, player]);
 
     const activePrayers = useMemo(() => {
-        const theData = idleonData.getData();
+        const theData = appContext.data.getData();
         const prayers = theData.get("prayers") as Prayer[];
         if (prayers) {
             return player.activePrayers.map((prayerIndex) => prayers[prayerIndex]);
         }
         return [];
-    }, [idleonData, player]);
+    }, [appContext, player]);
 
     const playerWorshipInfo = useMemo(() => {
         const chargeRate = worship?.playerData[player.playerID]?.chargeRate ?? 0;
@@ -172,7 +174,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
     }, [worship, player])
 
     const crystalSpawnChance = useMemo(() => {
-        const theData = idleonData.getData();
+        const theData = appContext.data.getData();
         const stamps = theData.get("stamps") as Stamp[][];
 
         let crystalSpawnStamp = 0;
@@ -191,7 +193,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
         }
         return 0.0005 * (1 + crystalSpawnTalentBonus / 100) * (1 + postOfficeBonus / 100) * (1 + crystalForDaysTalentBonus / 100)
             * (1 + crystalSpawnStamp / 100) * (1 + cardBonus / 100);
-    }, [idleonData, player])
+    }, [appContext, player])
 
     return (
         <Box pad="medium">
@@ -207,7 +209,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     }
                     <Box direction="row" gap="xsmall">
                         <Text size="small">Away Since =</Text>
-                        {player.afkFor < 100 ? "Active" : <TimeUp addSeconds={player.afkFor} lastUpdated={idleonData.getLastUpdated(true) as Date} />}
+                        {player.afkFor < 100 ? "Active" : <TimeUp addSeconds={player.afkFor} lastUpdated={appContext.data.getLastUpdated(true) as Date} />}
                     </Box>
                     <Text size="small">STR = {player.stats.strength}</Text>
                     <Text size="small">AGI = {player.stats.agility}</Text>
@@ -510,14 +512,14 @@ function StatuesDisplay({ playerStatues, player }: { playerStatues: PlayerStatue
 }
 
 function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player, activeBubbles: Bubble[], playerStatues: PlayerStatues | undefined }) {
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
     const hammerName = "Hammer Hammer";
 
-    const allItems = idleonData.getData().get("itemsData") as Item[];
+    const allItems = appContext.data.getData().get("itemsData") as Item[];
     const sharpShells = allItems.find(item => item.displayName == "Shrapshell");
 
     const anvilCostDiscount = useMemo(() => {
-        const theData = idleonData.getData();
+        const theData = appContext.data.getData();
         const alchemy = theData.get("alchemy") as Alchemy;
         const anvilnomicsBubble = alchemy.cauldrons[CauldronIndex.Quicc].bubbles[AlchemyConst.Anvilnomics];
         const anvilnomicsBonus = lavaFunc(anvilnomicsBubble.func, anvilnomicsBubble.level, anvilnomicsBubble.x1, anvilnomicsBubble.x2);
@@ -527,11 +529,11 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
             return anvilnomicsBonus * classBonus;
         }
         return anvilnomicsBonus;
-    }, [idleonData, player])
+    }, [appContext, player])
 
     const anvilSpeed = useMemo(() => {
         // ANVIL SPEED MATH;
-        const theData = idleonData.getData();
+        const theData = appContext.data.getData();
         const stampData = theData.get("stamps");
         const anvilZoomerBonus = stampData ? stampData[1][2].getBonus(player.skills.get(SkillsIndex.Smithing)) : 0;
         const blackSmithBox = player.postOffice[PostOfficeConst.BlacksmithBoxIndex];
@@ -542,10 +544,26 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
         const talentTownSpeedBonus = player.talents.find(x => x.skillIndex == 269)?.getBonus() ?? 0;
 
         return (3600 * player.anvil.getSpeed(player.stats.agility, anvilZoomerBonus, postOfficeBonus, hammerHammerBonus, anvilStatueBonus, starSignBonus, talentTownSpeedBonus));
-    }, [idleonData, activeBubbles, playerStatues, player])
+    }, [appContext, activeBubbles, playerStatues, player])
+
+    const anvilXP = useMemo(() => {
+        const theData = appContext.data.getData();
+        const shrines = theData.get("shrines") as Shrine[];
+        const prayers = theData.get("prayers") as Prayer[];
+        const saltLick = theData.get("saltLick") as SaltLick;
+
+        if (shrines && prayers && saltLick && playerStatues) {
+            const saltLickBonus = saltLick.getBonus(3);
+            const dungeonBonus = lavaFunc("decay", 10, 45, 100); // TODO: Actual dungeon data!
+            const allSkillXP = Skilling.getAllSkillXP(player, shrines, playerStatues, prayers, saltLickBonus, dungeonBonus);
+            const xpMulti = player.anvil.getXPMulti(player, allSkillXP);
+            return (100 * (player.anvil.getXP(xpMulti) - 1));
+        }
+        return 0;
+    }, [appContext, player, playerStatues])
 
     const allCapBonus = useMemo(() => {
-        const theData = idleonData.getData();
+        const theData = appContext.data.getData();
         const guild = theData.get("guild");
         const shrines = theData.get("shrines");
         const bribes = theData.get("bribes") as Bribe[];
@@ -563,10 +581,10 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
         const bribeCapBonus = bribes.find(bribe => bribe.name == "Bottomless Bags")?.status == BribeStatus.Purchased ? 5 : 0;
         return player.capacity.getAllCapsBonus(guildCarryBonus, telekineticStorageBonus, carryCapShrineBonus, zergPrayerBonus, ruckSackPrayerBonus, bribeCapBonus);
 
-    }, [idleonData, player])
+    }, [appContext, player])
 
     const anvilCapcity = useMemo(() => {
-        const theData = idleonData.getData();
+        const theData = appContext.data.getData();
         const stampData = theData.get("stamps") as Stamp[][];
         const gemStore = theData.get("gems") as GemStore;
 
@@ -586,12 +604,12 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
         }
 
         return player.anvil.getCapacity(player.capacity.bags.find(x => x.name == "bCraft")?.getCapacity(capProps) ?? 0);
-    }, [idleonData, player, allCapBonus])
+    }, [appContext, player, allCapBonus])
 
     return (
         <Box pad="medium" gap="small">
             <Text size='medium'>Anvil</Text>
-            <Box direction="column">
+            <Box gap="small" pad="small">
                 <Text size="small">Available Points: {player.anvil.availablePoints}</Text>
                 <Text size="small">Points from coins: {player.anvil.pointsFromCoins}</Text>
                 <ComponentAndLabel
@@ -602,12 +620,13 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
                     label={"Total Point Cost"}
                     component={<CoinsDisplay coinMap={getCoinsArray(player.anvil.getTotalCoinCost(anvilCostDiscount))} />}
                 />
+                <Text size="small">Points from mats: {player.anvil.pointsFromMats}</Text>
                 <ComponentAndLabel
                     label={"Total Sharpshells Cost"}
                     component={
                         <Box direction="row" align="center">
                             <Text>{nFormatter(player.anvil.getTotalSharpshells(anvilCostDiscount))}</Text>
-                            <Box width={{max: '25px', min: '25px'}}>
+                            <Box width={{ max: '25px', min: '25px' }}>
                                 <Box className={sharpShells?.getClass()} />
                             </Box>
                         </Box>
@@ -617,11 +636,27 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
                     label={"Next Material Point Cost"}
                     text={nFormatter(player.anvil.getMonsterMatCost(anvilCostDiscount))}
                 />
-                <Text size="small">Points from mats: {player.anvil.pointsFromMats}</Text>
-                <Text size="small">Points spend into XP: {player.anvil.xpPoints}</Text>
-                <Text size="small">Points spend into Speed: {player.anvil.speedPoints}</Text>
-                <Text size="small">Anvil Speed Guess: {round(anvilSpeed)}</Text>
-                <Text size="small">Capacity: {anvilCapcity} ({player.anvil.capPoints})</Text>
+                <Box direction="row">
+                    <Box margin={{right: 'small'}} border={{side: 'right', color: 'grey-1', size: '2px'}}>
+                        <TextAndLabel
+                            label="XP"
+                            text={`${nFormatter(anvilXP, "Big")}% (${player.anvil.xpPoints})`}
+                            margin={{right: 'small'}}
+                        />
+                    </Box>
+                    <Box margin={{right: 'small'}} border={{side: 'right', color: 'grey-1', size: '2px'}}>
+                    <TextAndLabel
+                        label="Speed"
+                        text={`${nFormatter(anvilSpeed)} (${player.anvil.speedPoints})`}
+                        margin={{right: 'small'}}
+                    />
+                    </Box>
+                    <TextAndLabel
+                        label="Capacity"
+                        text={`${anvilCapcity} (${player.anvil.capPoints})`}
+                        margin={{right: 'small'}}
+                    />
+                </Box>
                 {player.anvil.currentlySelect.indexOf(-1) > -1 && <Text>UNUSED PRODUCTION</Text>}
             </Box>
             <Box gap="small">
@@ -659,7 +694,7 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
                                 </Box>
                                 <Box direction="row" gap="xsmall">
                                     <Text size="small">Time till cap =</Text>
-                                    <TimeDown addSeconds={timeTillCap} lastUpdated={idleonData.getLastUpdated(true) as Date} />
+                                    <TimeDown addSeconds={timeTillCap} lastUpdated={appContext.data.getLastUpdated(true) as Date} />
                                 </Box>
                                 <Text size="small">Production Per Hour (per hammer) = {Math.round(anvilSpeed / anvilItem.time)} </Text>
                                 <Text size="small">Total Produced of this item = {nFormatter(Math.round(anvilItem.totalProduced))}</Text>
@@ -674,10 +709,10 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
 }
 
 function CarryCapacityDisplay({ player }: { player: Player }) {
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
 
     const allCapBonus = useMemo(() => {
-        const theData = idleonData.getData();
+        const theData = appContext.data.getData();
         const guild = theData.get("guild");
         const shrines = theData.get("shrines");
         const bribes = theData.get("bribes") as Bribe[];
@@ -696,30 +731,30 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
         const bribeCapBonus = bribes.find(bribe => bribe.name == "Bottomless Bags")?.status == BribeStatus.Purchased ? 5 : 0;
         return player.capacity.getAllCapsBonus(guildCarryBonus, telekineticStorageBonus, carryCapShrineBonus, zergPrayerBonus, ruckSackPrayerBonus, bribeCapBonus);
 
-    }, [idleonData, player])
+    }, [appContext, player])
 
     const guildBonus = useMemo(() => {
-        const theData = idleonData.getData();
+        const theData = appContext.data.getData();
         const guild = theData.get("guild");
 
         if (guild) {
             return lavaFunc(guild.guildBonuses[2].func, guild.guildBonuses[2].level, guild.guildBonuses[2].x1, guild.guildBonuses[2].x2);
         }
         return 0;
-    }, [idleonData])
+    }, [appContext])
 
     const gemCapBought = useMemo(() => {
-        const theData = idleonData.getData();
+        const theData = appContext.data.getData();
         const gemStore = theData.get("gems") as GemStore;
 
         if (gemStore) {
             return gemStore?.purchases.find(x => x.no == 58)?.pucrhased;
         }
         return 0;
-    }, [idleonData])
+    }, [appContext])
 
     const capBonuses = useMemo(() => {
-        const theData = idleonData.getData();
+        const theData = appContext.data.getData();
         const stampData = theData.get("stamps") as Stamp[][];
         const gemStore = theData.get("gems") as GemStore;
 
@@ -729,7 +764,6 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
         const allStamps = stampData.flatMap((tab) => [...tab]);
         const allCapStampBonus = allStamps.find((stamp) => stamp.raw_name == CapacityConst.AllCarryStamp)?.getBonus() ?? 0;
         const gemCapacityBonus = gemStore?.purchases.find(x => x.no == 58)?.pucrhased ?? 0;
-
         const toReturn = new Map();
         toReturn.set("Mining", {
             allCapBonuses: allCapBonus,
@@ -797,7 +831,7 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
         });
 
         return toReturn;
-    }, [idleonData, player, allCapBonus])
+    }, [appContext, player, allCapBonus])
 
     return (
         <Box pad="medium" gap="small">
@@ -936,14 +970,14 @@ function PostOfficeDisplay({ player, extra }: { player: Player, extra: PostOffic
 function InventoryDisplay({ player }: { player: Player }) {
     const [playerInventory, setPlayerInventory] = useState<Item[]>([]);
     const size = useContext(ResponsiveContext);
-    const idleonData = useContext(AppContext);
-    const allItems = idleonData.getData().get("itemsData") as Item[];
+    const appContext = useContext(AppContext);
+    const allItems = appContext.data.getData().get("itemsData") as Item[];
 
     useEffect(() => {
-        const theData = idleonData.getData();
+        const theData = appContext.data.getData();
         const storage = theData.get("storage") as Storage;
         setPlayerInventory(storage.playerStorage[player.playerID]);
-    }, [idleonData, player])
+    }, [appContext, player])
 
     const emptySlots = useMemo(() => {
         return playerInventory?.filter((item) => item.internalName == "Blank").length ?? 0;
@@ -1039,12 +1073,12 @@ function PlayerTab({ player }: PlayerTabProps) {
         streak: 0
     });
 
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
     const onActive = (nextIndex: number) => setIndex(nextIndex);
 
     useEffect(() => {
-        if (idleonData) {
-            const theData = idleonData.getData();
+        if (appContext) {
+            const theData = appContext.data.getData();
             const statues = theData.get("statues");
             if (statues) {
                 setPlayerStatues(statues[player.playerID]);
@@ -1061,7 +1095,7 @@ function PlayerTab({ player }: PlayerTabProps) {
             }
             setPoExtra(theData.get("POExtra"));
         }
-    }, [idleonData, player]);
+    }, [appContext, player]);
 
     return (
         <ShadowBox flex={false}>
@@ -1144,20 +1178,20 @@ function Players() {
     const [index, setIndex] = useState<number>(0);
     const [activePlayer, setActivePlayer] = useState<string>('');
     const size = useContext(ResponsiveContext);
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
 
     const onActive = (nextIndex: number) => setIndex(nextIndex);
 
     useEffect(() => {
-        if (idleonData) {
-            const theData = idleonData.getData();
+        if (appContext) {
+            const theData = appContext.data.getData();
             setPlayerData(theData.get("players"));
             if (playerData && playerData.length > 0 && activePlayer === '') {
                 const firstPlayer = playerData[0];
                 setActivePlayer(firstPlayer.playerID.toString() ?? '');
             }
         }
-    }, [idleonData, activePlayer, playerData]);
+    }, [appContext, activePlayer, playerData]);
     return (
         <Box>
             <NextSeo title="Players" />

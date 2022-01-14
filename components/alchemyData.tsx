@@ -131,7 +131,7 @@ export default function AlchemyData() {
     const [discountLevel, setDiscountLevel] = useState<string>('0');
     const [classMulti, setClassMulti] = useState(false);
 
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
     const bargainOptions = [
         {
             label: 'No discount',
@@ -172,8 +172,8 @@ export default function AlchemyData() {
     ];
 
     useEffect(() => {
-        if (idleonData) {
-            const theData = idleonData.getData();
+        if (appContext) {
+            const theData = appContext.data.getData();
             setAlchemyData(theData.get("alchemy"));
             const achievementsInfo = theData.get("achievements");
             // get undeveloped costs bubble level
@@ -181,7 +181,7 @@ export default function AlchemyData() {
             setBarleyBrewVialLevel(alchemyData?.getBarleyBrewVialLevel() ?? 0);
             setHasAlchemyAchievement(achievementsInfo[AchievementConst.SmartBoiIndex].completed ?? false);
         }
-    }, [idleonData, alchemyData, hasAlchemyAchievement])
+    }, [appContext, alchemyData, hasAlchemyAchievement])
 
     if (alchemyData && alchemyData.cauldrons.flatMap(cauldron => cauldron.bubbles).filter(bubble => bubble.level > 0).length == 0) {
         return (

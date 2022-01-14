@@ -8,7 +8,7 @@ import TextAndLabel from "../../base/TextAndLabel";
 
 function Tasks({ worldIndex }: { worldIndex: number }) {
     const [taskboardData, setTaskboardData] = useState<TaskBoard>();
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
 
     const tasksToShow = useMemo(() => {
         if (taskboardData) {
@@ -18,11 +18,11 @@ function Tasks({ worldIndex }: { worldIndex: number }) {
     }, [taskboardData, worldIndex])
 
     useEffect(() => {
-        if (idleonData) {
-            const theData = idleonData.getData();
+        if (appContext) {
+            const theData = appContext.data.getData();
             setTaskboardData(theData.get("taskboard"));
         }
-    }, [idleonData])
+    }, [appContext])
 
     return (
         <Grid columns={{ count: 3, size: 'auto' }} pad="small" gap="small">

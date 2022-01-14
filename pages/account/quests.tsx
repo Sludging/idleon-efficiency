@@ -194,7 +194,7 @@ function Quests() {
     const [index, setIndex] = useState<number>(1);
     const [activeWorld, setActiveWorld] = useState<string>("Blunder Hills");
     const onActive = (nextIndex: number) => setIndex(nextIndex);
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext)
 
     const npcsToShow = useMemo(() => {
@@ -219,12 +219,12 @@ function Quests() {
     }, [questsData, activeWorld])
 
     useEffect(() => {
-        if (idleonData) {
-            const theData = idleonData.getData();
+        if (appContext) {
+            const theData = appContext.data.getData();
             setPlayerData(theData.get("players"));
             setQuestData(theData.get("quests"));
         }
-    }, [idleonData])
+    }, [appContext])
     return (
         <Box>
             <NextSeo title="Quests" />

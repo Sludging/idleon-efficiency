@@ -13,14 +13,14 @@ import { NextSeo } from 'next-seo';
 function RawData() {
     const [rawData, setRawData] = useState<any>();
 
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
 
     useEffect(() => {
-        if (idleonData) {
-            const theData = idleonData.getData();
+        if (appContext) {
+            const theData = appContext.data.getData();
             setRawData(theData.get("rawData"));
         }
-    }, [idleonData]);
+    }, [appContext]);
     return (
         <Box align="center">
             <NextSeo title="Raw Data" />

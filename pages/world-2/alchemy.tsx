@@ -159,14 +159,14 @@ function VialTipInfo({ vial }: { vial: Vial }) {
 
 function VialsDisplay() {
     const [alchemyData, setAlchemyData] = useState<AlchemyData>();
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
 
     useEffect(() => {
-        if (idleonData.getData().size > 0) {
-            const theData = idleonData.getData();
+        if (appContext.data.getData().size > 0) {
+            const theData = appContext.data.getData();
             setAlchemyData(theData.get("alchemy"));
         }
-    }, [idleonData]);
+    }, [appContext]);
 
     return (
         <ShadowBox background="dark-1" pad="medium">
@@ -205,7 +205,7 @@ function BubblesDisplay() {
     const [undevelopedCostsBubbleLevel, setUndevelopedCostsBubbleLevel] = useState<number>(0);
     const [barleyBrewVialLevel, setBarleyBrewVialLevel] = useState<number>(0);
 
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
 
     const bargainOptions = [
         {
@@ -247,8 +247,8 @@ function BubblesDisplay() {
     ];
 
     useEffect(() => {
-        if (idleonData.getData().size > 0) {
-            const theData = idleonData.getData();
+        if (appContext.data.getData().size > 0) {
+            const theData = appContext.data.getData();
             setAlchemyData(theData.get("alchemy"));
             const achievementsInfo = theData.get("achievements");
             // get undeveloped costs bubble level
@@ -258,7 +258,7 @@ function BubblesDisplay() {
                 setHasAlchemyAchievement(achievementsInfo[AchievementConst.SmartBoiIndex].completed ?? false);
             }
         }
-    }, [idleonData, alchemyData, hasAlchemyAchievement])
+    }, [appContext, alchemyData, hasAlchemyAchievement])
 
     if (alchemyData && alchemyData.cauldrons.flatMap(cauldron => cauldron.bubbles).filter(bubble => bubble.level > 0).length == 0) {
         return (

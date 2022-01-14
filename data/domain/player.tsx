@@ -1,10 +1,10 @@
 import { itemMap, monstersMap, mapsMap } from "../maps";
 import { Capacity } from './capacity';
 import { StarSignMap, StarSign } from './starsigns';
-import { Box, initPostOffice } from './postoffice';
+import { Box, initPostOffice, PostOfficeConst } from './postoffice';
 import { Worship } from './worship';
 import { ClassIndex, Talent, ClassTalentMap, GetTalentArray } from './talents';
-import { CardInfo } from "./cards";
+import { Card, CardInfo } from "./cards";
 import { Item, Equipment, Food, Tool, StoneProps } from "./items";
 import { notUndefined } from '../utility';
 import { Cloudsave } from "./cloudsave";
@@ -154,6 +154,60 @@ export class Anvil {
         const boxAndStatueMath = 1 + ((poBoxBonus + statueBonus) / 100);
         const agilityBonus = this.getSpeedBonusFromAgility(agility);
         return (1 + (stampBonus + (2 * this.speedPoints)) / 100) * boxAndStatueMath * (1 + (hammerHammerBonus / 100)) * agilityBonus * (1 + (starSignTownSpeed + talentTownSpeed) / 100);
+    }
+
+    // if ("SmithingEXPmulti" == t) {
+    //     var Ys = b.engine.getGameAttribute("DNSM"),
+    //         Hs = null != d.TotStatSkMAP ? Ys.getReserved("TotStatSkMAP") : Ys.h.TotStatSkMAP,
+    //         Js = 1 + (r._customBlock_GetTalentNumber(1, 265) + (r._customBlock_StampBonusOfTypeX("SmithExp") + r._customBlock_GetTalentNumber(1, 75))) / 100,
+    //         js = 1 + U._customBlock_CardBonusREAL(49) / 100,
+    //         qs = b.engine.getGameAttribute("DNSM"),
+    //         Ks = null != d.BoxRewards ? qs.getReserved("BoxRewards") : qs.h.BoxRewards,
+    //         $s = null != d.SmithExp ? Ks.getReserved("SmithExp") : Ks.h.SmithExp,
+    //         ea = parsenum($s),
+    //         ta = F._customBlock_SkillStats("AllSkillxpz"),
+    //         na = b.engine.getGameAttribute("DNSM"),
+    //         sa = null != d.CalcTalentMAP ? na.getReserved("CalcTalentMAP") : na.h.CalcTalentMAP,
+    //         aa = (null != d[42] ? sa.getReserved("42") : sa.h[42])[1],
+    //         Aa = Math.max(0.1, Js * js * (1 + ea / 100) + (ta + parsenum(aa)) / 100);
+    //     null != d[t] ? Hs.setReserved(t, Aa) : (Hs.h[t] = Aa);
+    //     var ra = b.engine.getGameAttribute("DNSM"),
+    //         la = null != d.TotStatSkMAP ? ra.getReserved("TotStatSkMAP") : ra.h.TotStatSkMAP;
+    //     return null != d[t] ? la.getReserved(t) : la.h[t];
+    // }
+    getXPMulti = (player: Player, allSkillsXP: number) => {
+        const focusedSoulBonus = player.talents.find(talent => talent.skillIndex == 265)?.getBonus() ?? 0;
+        const stampBonus = 0; // TODO: Real look up, but currently stamp isn't obtainable.
+        const happyDudeBonus = player.talents.find(talent => talent.skillIndex == 75)?.getBonus() ?? 0;
+        const math1 = 1 + ((focusedSoulBonus + stampBonus + happyDudeBonus) / 100);
+        const smithingCardBonus = 1 + Card.GetTotalBonusForId(player.cardInfo?.equippedCards ?? [], 49) / 100;
+        const blackSmithBox = player.postOffice[PostOfficeConst.BlacksmithBoxIndex];
+        const postOfficeBonus = blackSmithBox.level > 0 ? blackSmithBox.bonuses[0].getBonus(blackSmithBox.level, 0) : 0;
+        const masteroXPBuff = 0; // TODO: Actual mastero math!
+
+        return Math.max(0.1, math1 * smithingCardBonus * (1 + (postOfficeBonus / 100)) + (allSkillsXP + masteroXPBuff) / 100);
+    }
+
+    // return (
+    //     (t = b.engine.getGameAttribute("DNSM")),
+    //     (n = (1 + (3 * (parsenum(n) = b.engine.getGameAttribute("AnvilPAstats")[3])) / 100) * F._customBlock_SkillStats("SmithingEXPmulti")),
+    //     null != d.AnvilPAxpDN ? t.setReserved("AnvilPAxpDN", n) : (t.h.AnvilPAxpDN = n),
+    //     (t = b.engine.getGameAttribute("DNSM")),
+    //     20 > (parsenum(t) = null != d.AnvilPAxpDN ? t.getReserved("AnvilPAxpDN") : t.h.AnvilPAxpDN)
+    //         ? ((t = b.engine.getGameAttribute("DNSM")), null != d.AnvilPAxpDN ? t.getReserved("AnvilPAxpDN") : t.h.AnvilPAxpDN)
+    //         : ((t = b.engine.getGameAttribute("DNSM")),
+    //           (t = parsenum(t) = null != d.AnvilPAxpDN ? t.getReserved("AnvilPAxpDN") : t.h.AnvilPAxpDN),
+    //           (n = b.engine.getGameAttribute("DNSM")),
+    //           (n = null != d.AnvilPAxpDN ? n.getReserved("AnvilPAxpDN") : n.h.AnvilPAxpDN),
+    //           Math.min(20 + ((t - 20) / (parsenum(n) - 20 + 70)) * 50, 75))
+    // );
+    getXP = (xpMulti: number) => {
+        const baseMath = (1 + (3 * (this.xpPoints / 100))) * xpMulti;
+        if (baseMath < 20) {
+            return baseMath;
+        }
+
+        return Math.min(20 + ((baseMath - 20) / (baseMath - 20 + 70) * 50), 75);
     }
 
     getSpeedBonusFromAgility = (agility: number = 0): number => {

@@ -7,7 +7,7 @@ import TextAndLabel from "../../base/TextAndLabel";
 
 function Merits({ worldIndex }: { worldIndex: number }) {
     const [taskboardData, setTaskboardData] = useState<TaskBoard>();
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
 
     const meritsToShow = useMemo(() => {
         if (taskboardData) {
@@ -17,11 +17,11 @@ function Merits({ worldIndex }: { worldIndex: number }) {
     }, [taskboardData, worldIndex])
 
     useEffect(() => {
-        if (idleonData) {
-            const theData = idleonData.getData();
+        if (appContext) {
+            const theData = appContext.data.getData();
             setTaskboardData(theData.get("taskboard"));
         }
-    }, [idleonData])
+    }, [appContext])
 
     return (
         <Grid columns={{ count: 3, size: 'auto' }} pad="small" gap="small">

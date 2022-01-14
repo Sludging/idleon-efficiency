@@ -53,7 +53,7 @@ function LootyTracker() {
     const [lootyInfo, setlootyInfo] = useState<LootyInfo>();
     const [onlyMissing, setOnlyMissing] = useState<boolean>(false);
     const [onlyLooted, setOnlyLooted] = useState<boolean>(false);
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
 
     const getClass = (rawName: string) => {
         if (getEnhancerRegex().exec(rawName)) {
@@ -83,9 +83,9 @@ function LootyTracker() {
         return `36px`;
     }
     useEffect(() => {
-        setlootyInfo(idleonData.getData().get("lootyData") as LootyInfo);
+        setlootyInfo(appContext.data.getData().get("lootyData") as LootyInfo);
 
-    }, [idleonData]);
+    }, [appContext]);
     return (
         <Box gap="medium">
             <NextSeo title="Looty Tracker" />
