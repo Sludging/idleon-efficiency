@@ -10,7 +10,7 @@ const env = process.env.NEXT_PUBLIC_APP_STAGE == "dev" ? "local" : process.env.N
 Sentry.init({
   dsn: SENTRY_DSN || 'https://fe096af1343748868cf936d102c23468@o504353.ingest.sentry.io/6062110',
   // Adjust this value in production, or use tracesSampler for greater control
-  tracesSampleRate: 0.2,
+  tracesSampleRate: 0,
   environment: env
   // ...
   // Note: if you want to override the automatic release value, do not set a
