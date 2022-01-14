@@ -3,8 +3,8 @@ import { IdleonStorage } from "../firebase/storage";
 export const fetcher = async (windowLocation: string, oldDomain: string): Promise<{ data: Map<string, any> | undefined, charNames: string[] | undefined, domain: string }> => {
     let urlDomain = "";
     if (windowLocation != "") {
-        let locationSplit = window.location.host.split('.');
-        urlDomain = locationSplit[0] === "www" || locationSplit[0] === process.env.NEXT_PUBLIC_ROOT_URL ? "" : locationSplit[0]
+        const baseURL = process.env.NEXT_PUBLIC_VERCEL_URL || process.env.NEXT_PUBLIC_ROOT_URL || "localhost:3000";
+        urlDomain = window.location.host.replace(baseURL, "").replace('.', '');
     }
     if (urlDomain != oldDomain && urlDomain != "") {
         if (process.env.NEXT_PUBLIC_APP_STAGE == "dev") {
@@ -27,9 +27,8 @@ export const fetcher = async (windowLocation: string, oldDomain: string): Promis
         }
         else {
             try {
-                console.log("Calling cloud storage");
+                console.log("Calling cloud storage for profile " + urlDomain);
                 const jsonData = await IdleonStorage.downloadProfile(urlDomain);
-                console.log("Got this data");
                 if (jsonData) {
                     return {
                         data: jsonData as Map<string, any>,
