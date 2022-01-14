@@ -22,15 +22,15 @@ import { Worship as WorshipDomain } from '../../data/domain/worship';
 function ChargeDisplay() {
     const [playerData, setPlayerData] = useState<Player[]>();
     const [worship, setWorshipData] = useState<WorshipDomain>();
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
 
     useEffect(() => {
-        if (idleonData) {
-            const theData = idleonData.getData();
+        if (appContext) {
+            const theData = appContext.data.getData();
             setPlayerData(theData.get("players"));
             setWorshipData(theData.get("worship"))
         }
-    }, [idleonData]);
+    }, [appContext]);
 
 
     const bestWizard = useMemo(() => {
@@ -115,7 +115,7 @@ function ChargeDisplay() {
                         label="Time till overflow"
                         component={
                             totalChargeInfo.overFlowTime > 0 ?
-                                <TimeDown size={TimeDisplaySize.Small} lastUpdated={idleonData.getLastUpdated(true) as Date} addSeconds={totalChargeInfo.overFlowTime} />
+                                <TimeDown size={TimeDisplaySize.Small} lastUpdated={appContext.data.getLastUpdated(true) as Date} addSeconds={totalChargeInfo.overFlowTime} />
                                 : <Text>Overflowing, you are wasting charge!</Text>
                         }
                     />
@@ -166,7 +166,7 @@ function ChargeDisplay() {
                                     label="Time till full"
                                     component={
                                         timeToFull > 0 ?
-                                            <TimeDown size={TimeDisplaySize.Small} lastUpdated={idleonData.getLastUpdated(true) as Date} addSeconds={timeToFull} />
+                                            <TimeDown size={TimeDisplaySize.Small} lastUpdated={appContext.data.getLastUpdated(true) as Date} addSeconds={timeToFull} />
                                             : <Text>Charge is full!</Text>
                                     }
                                 />
@@ -185,17 +185,17 @@ function TotemDisplay() {
     const [efficiency, setEfficiency] = useState<number>(0);
     const [effFoodBonus, setEffFoodBonus] = useState<number>(0);
     const [worship, setWorshipData] = useState<WorshipDomain>();
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
 
     const size = useContext(ResponsiveContext);
 
     useEffect(() => {
-        if (idleonData) {
-            const theData = idleonData.getData();
+        if (appContext) {
+            const theData = appContext.data.getData();
             setPlayerData(theData.get("players"));
             setWorshipData(theData.get("worship"))
         }
-    }, [idleonData]);
+    }, [appContext]);
 
     if (!playerData || !worship || worship.totemInfo.filter(totem => totem.maxWave > 0).length == 0) {
         return (

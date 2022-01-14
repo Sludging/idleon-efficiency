@@ -113,11 +113,11 @@ function Stamps() {
     const [stampData, setStampData] = useState<Stamp[][]>();
     const [hasBribe, setHasBribe] = useState<BribeStatus>(BribeStatus.Available);
     const [blueFlavPercent, setBlueFlavPercent] = useState<number>(0);
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
 
     useEffect(() => {
-        if (idleonData.getData().size > 0) {
-            const theData = idleonData.getData();
+        if (appContext.data.getData().size > 0) {
+            const theData = appContext.data.getData();
             setStampData(theData.get("stamps"));
 
             const alchemy = theData.get("alchemy") as Alchemy;
@@ -129,7 +129,7 @@ function Stamps() {
                 setHasBribe(bribes[BribeConst.StampBribe].status);
             }
         }
-    }, [idleonData, stampData])
+    }, [appContext, stampData])
 
     if (stampData && stampData.flatMap(tab => tab).filter(stamp => stamp.level > 0).length == 0) {
         return (

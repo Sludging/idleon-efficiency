@@ -25,6 +25,10 @@
     "**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "assets",
+    "model_generation",
+    "*.js",
+    "*.lua"
   ]
 }

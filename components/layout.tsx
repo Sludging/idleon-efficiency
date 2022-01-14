@@ -18,7 +18,7 @@ import {
     Menu
 } from "grommet"
 import { useContext, useState, useEffect } from 'react'
-import { AppContext } from '../data/appContext'
+import { AppContext, AppStatus } from '../data/appContext'
 import { AuthContext } from '../data/firebase/authContext'
 import { useRouter } from 'next/dist/client/router';
 
@@ -135,7 +135,7 @@ export default function Layout({
     children: React.ReactNode
 }) {
     const authData = useContext(AuthContext);
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
     const router = useRouter();
 
@@ -195,15 +195,15 @@ export default function Layout({
     }
 
     useEffect(() => {
-        if (authData?.user || authData?.publicProfile) {
+        if (appContext.status == AppStatus.LiveData || appContext.status == AppStatus.StaticData) {
             setValidState(true);
         }
         else {
             setValidState(false);
         }
-        setLastUpdated(idleonData.getLastUpdated() as string)
+        setLastUpdated(appContext.data.getLastUpdated() as string)
         setLoading(authData ? authData.isLoading : true);
-    }, [authData, idleonData])
+    }, [authData, appContext])
 
     if (loading) {
         return (
@@ -229,7 +229,19 @@ export default function Layout({
                             <PointerImage alt="Logo" src="/logo.svg" height="21px" width="171px" />
                         </Box>
                     </Link>
-                    {validState && <Box direction="row" gap="xlarge" pad="medium"><TextAndLabel textColor='accent-3' textSize='xsmall' labelSize='xsmall' label='Last Updated' text={lastUpdated} /><Button onClick={() => onButtonClick(authData?.logoutFunction)}>Logout</Button></Box>}
+                    {validState &&
+                        <Box direction="row" gap="xlarge" pad="medium">
+                            <TextAndLabel textColor='accent-3' textSize='xsmall' labelSize='xsmall' label='Last Updated' text={lastUpdated} />
+                            {
+                                appContext.status == AppStatus.LiveData &&
+                                <Button onClick={() => onButtonClick(authData?.logoutFunction)}>Logout</Button>
+                            }
+                            {   
+                                appContext.status == AppStatus.StaticData && 
+                                <TextAndLabel textColor='accent-3' textSize='xsmall' labelSize='xsmall' label="Public Profile" text={appContext.profile} />
+                            }
+                        </Box>
+                    }
                     {showLayer &&
                         <Layer
                             onEsc={() => setShowLayer(false)}

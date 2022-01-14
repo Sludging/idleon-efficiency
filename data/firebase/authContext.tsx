@@ -25,9 +25,9 @@ export const getAuthData = (): AuthData => {
     return contextState;
 };
 
-export const AuthProvider: React.FC<{}> = (props) => {
+export const AuthProvider: React.FC<{appLoading: boolean, data: {data: Map<string, any>, charNames: string[]} | undefined, domain: string, children?: React.ReactNode}> = ({ appLoading, data, domain, children }) => {
     const [user, setUser] = useState<User | null>(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(appLoading);
     const router = useRouter();
 
     const loginUser = () => {
@@ -102,18 +102,23 @@ export const AuthProvider: React.FC<{}> = (props) => {
     }
 
     useEffect(() => {
-        setLoading(true);
-        const auth = getAuth(app);
-        auth.onAuthStateChanged(res => {
-            if (res) {
-                setUser(res);
-            }
-            else {
-                setUser(null);
-            }
+        if (!appLoading && domain == "") {
+            setLoading(true);
+            const auth = getAuth(app);
+            auth.onAuthStateChanged(res => {
+                if (res) {
+                    setUser(res);
+                }
+                else {
+                    setUser(null);
+                }
+                setLoading(false);
+            });
+        }
+        else if (domain != "") {
             setLoading(false);
-        });
-    }, [user]);
+        }
+    }, [user, appLoading, domain]);
 
     return (
         <AuthContext.Provider value={{
@@ -124,7 +129,7 @@ export const AuthProvider: React.FC<{}> = (props) => {
             logoutFunction: logout,
             tokenFunction: loginThroughToken,
         }}>
-            {props.children}
+            {children}
         </AuthContext.Provider>
     );
 };
