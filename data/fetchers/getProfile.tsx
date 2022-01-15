@@ -1,4 +1,4 @@
-import { IdleonStorage } from "../firebase/storage";
+import { ProfileStorage } from "../storage/profiles";
 
 export const fetcher = async (windowLocation: string, oldDomain: string): Promise<{ data: Map<string, any> | undefined, charNames: string[] | undefined, domain: string }> => {
     let urlDomain = "";
@@ -29,7 +29,7 @@ export const fetcher = async (windowLocation: string, oldDomain: string): Promis
         else {
             try {
                 console.log("Calling cloud storage for profile " + urlDomain);
-                const jsonData = await IdleonStorage.downloadProfile(urlDomain);
+                const jsonData = await ProfileStorage.downloadProfile(urlDomain);
                 if (jsonData) {
                     return {
                         data: jsonData as Map<string, any>,
