@@ -31,9 +31,10 @@ export const fetcher = async (windowLocation: string, oldDomain: string): Promis
                 console.log("Calling cloud storage for profile " + urlDomain);
                 const jsonData = await ProfileStorage.downloadProfile(urlDomain);
                 if (jsonData) {
+                    const playerNames = jsonData["playerNames"] ?? [...Array(9)].map((number, index) => `Player_${index}`)
                     return {
                         data: jsonData as Map<string, any>,
-                        charNames: [...Array(9)].map((number, index) => `Player_${index}`),
+                        charNames: playerNames,
                         domain: urlDomain
                     }
                 }
