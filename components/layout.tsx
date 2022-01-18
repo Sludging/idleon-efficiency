@@ -7,23 +7,24 @@ import {
     Text,
     Button,
     Box,
-    Layer,
     Main,
-    TextInput,
     Nav,
     Footer,
     Anchor,
     ThemeContext,
     ResponsiveContext,
-    Menu
+    Menu,
+    Avatar,
+    DropButton
 } from "grommet"
 import { useContext, useState, useEffect } from 'react'
 import { AppContext, AppStatus } from '../data/appContext'
 import { AuthContext } from '../data/firebase/authContext'
 import { useRouter } from 'next/dist/client/router';
 
-import { FormDown, Menu as MenuIcon } from 'grommet-icons';
+import { CaretDownFill, DocumentUser, Down, FormDown, Logout, Menu as MenuIcon, User } from 'grommet-icons';
 import TextAndLabel from './base/TextAndLabel';
+import ShadowBox from './base/ShadowBox';
 
 declare const window: Window &
     typeof globalThis & {
@@ -139,10 +140,9 @@ export default function Layout({
     const size = useContext(ResponsiveContext);
     const router = useRouter();
 
-    const [showLayer, setShowLayer] = useState(false);
     const [validState, setValidState] = useState<boolean>(false);
     const [lastUpdated, setLastUpdated] = useState<string>("");
-    const [value, setValue] = useState('');
+    const [profileDropDownOpen, setProfileDropDownOpen] = useState<boolean>(false);
     const [loading, setLoading] = useState(true);
 
     const navItems = [
@@ -189,9 +189,6 @@ export default function Layout({
         catch (e) {
             console.log(e);
         }
-        finally {
-            setShowLayer(false);
-        }
     }
 
     useEffect(() => {
@@ -234,36 +231,48 @@ export default function Layout({
                             <TextAndLabel textColor='accent-3' textSize='xsmall' labelSize='xsmall' label='Last Updated' text={lastUpdated} />
                             {
                                 appContext.status == AppStatus.LiveData &&
-                                <Button onClick={() => onButtonClick(authData?.logoutFunction)}>Logout</Button>
+                                <Box direction="row">
+                                    <DropButton
+                                        plain={true}
+                                        label={
+                                            <Avatar direction='row'>
+                                                <User color="accent-3" />
+                                                <CaretDownFill size="small" />
+                                            </Avatar>
+                                        }
+                                        open={profileDropDownOpen}
+                                        title='Manage Profile'
+                                        dropAlign={{ top: 'bottom', right: 'right' }}
+                                        dropProps={{
+                                            plain: true,
+                                            elevation: 'navigation',
+                                            background: 'dark-2',
+                                            round: "small",
+                                            onClickOutside: () => setProfileDropDownOpen(false),
+                                            onEsc: () => setProfileDropDownOpen(false),
+                                        }}
+                                        onClick={() => setProfileDropDownOpen(true)}
+                                        dropContent={
+                                            <Box width="small" border={{ color: 'grey-1' }} round="small">
+                                                <Link href={'/profile/upload'}>
+                                                    <Button onClick={() => setProfileDropDownOpen(false)} hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2">
+                                                        <Box pad="small">Public Profile</Box>
+                                                    </Button>
+                                                </Link>
+                                                <Box border={{ color: 'grey-1' }} fill />
+                                                <Button hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2" onClick={() => { onButtonClick(authData?.logoutFunction); setProfileDropDownOpen(false)}}>
+                                                    <Box pad="small">Sign Out</Box>
+                                                </Button>
+                                            </Box>
+                                        }
+                                    />
+                                </Box>
                             }
-                            {   
-                                appContext.status == AppStatus.StaticData && 
+                            {
+                                appContext.status == AppStatus.StaticData &&
                                 <TextAndLabel textColor='accent-3' textSize='xsmall' labelSize='xsmall' label="Public Profile" text={appContext.profile} />
                             }
                         </Box>
-                    }
-                    {showLayer &&
-                        <Layer
-                            onEsc={() => setShowLayer(false)}
-                            onClickOutside={() => setShowLayer(false)}
-                            modal={true}
-                            position="center"
-
-
-                        >
-                            <Box pad="medium" gap="small" width="medium" background="grey">
-                                <Button disabled label="Google Login" color="black" onClick={() => onButtonClick(authData?.loginFunction)} />
-                                <Box align="center" flex="grow" pad="small">
-                                    <Text>or</Text>
-                                </Box>
-                                <TextInput
-                                    placeholder="ID Token"
-                                    value={value}
-                                    onChange={event => setValue(event.target.value)}
-                                />
-                                <Button label="Handle Token" color="black" onClick={() => onButtonClick(authData?.tokenFunction, value)} />
-                            </Box>
-                        </Layer>
                     }
                 </Box>
             </Header>

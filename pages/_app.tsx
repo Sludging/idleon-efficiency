@@ -52,6 +52,7 @@ const customTheme = deepMerge(dark, {
     elevation: {
       dark: {
         navigation: '-7px 8px 16px 0 rgba(0,0,0,0.17)',
+        dropdown: 'rgb(1, 4, 9) 0px 8px 24px 0px',
       }
     },
     colors: {
@@ -76,6 +77,19 @@ const customTheme = deepMerge(dark, {
       "background": "#1B1D24",
       "white-1": "#30333A",
       "placeholder": "#96979a"
+    }
+  },
+  notification: {
+    toast: {
+      container: {
+        elevation: 'navigation',
+        width: 'large',
+        background: 'dark-2',
+        pad: 'medium',
+        border: {
+          color: 'grey-1'
+        }
+      }
     }
   },
   formField: {
