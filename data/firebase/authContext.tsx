@@ -9,7 +9,6 @@ import { useRouter } from "next/dist/client/router";
 interface AuthData {
     user: User | null
     isLoading: boolean
-    loginFunction: Function
     logoutFunction: Function
     tokenFunction: Function
     emailLoginFunction: Function
@@ -29,22 +28,6 @@ export const AuthProvider: React.FC<{appLoading: boolean, data: {data: Map<strin
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(appLoading);
     const router = useRouter();
-
-    const loginUser = () => {
-        const auth = getAuth(app);
-        const provider = new GoogleAuthProvider();
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                const credential = GoogleAuthProvider.credentialFromResult(result);
-                setUser(result.user);
-                loginEvent("GOGGLE");
-                router.push("/stamps");
-            }).catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
-            });
-    }
 
     const loginThroughToken = (id_token: string, callback?: Function) => {
         const auth = getAuth(app);
@@ -124,7 +107,6 @@ export const AuthProvider: React.FC<{appLoading: boolean, data: {data: Map<strin
         <AuthContext.Provider value={{
             user: user,
             isLoading: loading,
-            loginFunction: loginUser,
             emailLoginFunction: loginThroughEmailPassword,
             logoutFunction: logout,
             tokenFunction: loginThroughToken,
