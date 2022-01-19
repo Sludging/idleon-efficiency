@@ -8,7 +8,8 @@ import {
     Layer,
     Image,
     FormField,
-    ResponsiveContext
+    ResponsiveContext,
+    Heading
 } from 'grommet'
 import styled from 'styled-components'
 import { useEffect, useContext, useState } from 'react';
@@ -17,6 +18,7 @@ import ShadowBox from './base/ShadowBox';
 import { MouseEventHandler } from 'hoist-non-react-statics/node_modules/@types/react';
 import { NextSeo } from 'next-seo';
 import GoogleLogin from './login/googleLogin';
+import { AppContext, AppStatus } from '../data/appContext';
 
 const VerticalLine = styled.hr`
     border: 0;
@@ -39,16 +41,15 @@ function SpecialButton({ isActive, text, clickHandler, step }: { isActive: boole
 
 export default function Welcome() {
     const authData = useContext(AuthContext);
-    const [value, setValue] = useState('');
+    const appContext = useContext(AppContext);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showLayer, setShowLayer] = useState(false);
-    const [index, setIndex] = useState<number>(1);
     const [error, setError] = useState<string>('');
 
     const size = useContext(ResponsiveContext);
 
-    const onActive = (nextIndex: number) => setIndex(nextIndex);
     const onButtonClick = (toCall: Function | undefined, value?: string, value2?: string) => {
         try {
             if (toCall) {
@@ -87,7 +88,8 @@ export default function Welcome() {
 
 
     useEffect(() => {
-    });
+        setIsLoading(authData?.isLoading ?? true);
+    }, [authData]);
     return (
         <Box>
             <NextSeo title="Boost your efficiency in Legends of Idleon!" />
@@ -102,7 +104,7 @@ export default function Welcome() {
                     </Grid>
                 </Box>
                 <Box width={{ max: '1440px' }} pad="large" fill margin={{ left: 'auto', right: 'auto' }} style={{ position: 'relative', top: '150px' }} >
-                    {!authData?.isLoading && !authData?.user &&
+                    {!isLoading && !authData?.user && appContext.status != AppStatus.StaticData &&
                         <ShadowBox pad="large" background="dark-2" fill margin={{ left: 'auto', right: 'auto' }} flex={false}>
                             <Box>
                                 <Grid columns={size == "small" ? ["100%"] : ["45%", "10%", "45%"]} pad={{ left: "large"}}>
@@ -142,6 +144,21 @@ export default function Welcome() {
                                         <FormField error={<Text color="accent-1">{error}</Text>} />
                                     </Box>
                                 }
+                            </Box>
+                        </ShadowBox>
+                    }
+                    {
+                        appContext.status == AppStatus.StaticData && 
+                        <ShadowBox pad="large" background="dark-2" fill margin={{ left: 'auto', right: 'auto' }} flex={false} align='center'>
+                            <Box gap="medium">
+                                <Box direction="row" gap='xsmall'>
+                                    <Text size='large'>You are viewing the public profile of:</Text>
+                                    <Text size='large' color="accent-1">{appContext.profile}</Text>
+                                </Box>
+                                <Box gap="small" align="center">
+                                    <Text size="large">Try it for yourself!</Text>
+                                    <Text>Head over to <Anchor href='https://www.idleonefficiency.com' target='_blank'>https://www.idleonefficiency.com</Anchor></Text>
+                                </Box>
                             </Box>
                         </ShadowBox>
                     }

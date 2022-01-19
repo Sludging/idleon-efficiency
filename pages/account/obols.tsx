@@ -19,7 +19,7 @@ import { ItemStat } from "../../data/domain/items";
 
 function ObolInventory() {
     const [obolsData, setObolsData] = useState<ObolsData>();
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
 
     const statsDisplay = (stats: ItemStat[], description: string) => {
         if (description) {
@@ -34,9 +34,9 @@ function ObolInventory() {
     }
 
     useEffect(() => {
-        const theData = idleonData.getData();
+        const theData = appContext.data.getData();
         setObolsData(theData.get("obols"));
-    }, [idleonData])
+    }, [appContext])
 
     if (!obolsData || obolsData.playerObols.length == 0) {
         return (
@@ -92,17 +92,17 @@ function ObolInventory() {
 
 function Obols() {
     const [playerData, setPlayerData] = useState<Player[]>();
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
 
     const [index, setIndex] = useState<number>(-1);
     const onActive = (nextIndex: number) => setIndex(nextIndex);
 
     useEffect(() => {
-        if (idleonData) {
-            const theData = idleonData.getData();
+        if (appContext) {
+            const theData = appContext.data.getData();
             setPlayerData(theData.get("players"));
         }
-    }, [idleonData])
+    }, [appContext])
     return (
         <Box>
             <NextSeo title="Obols" />

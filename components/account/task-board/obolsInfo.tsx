@@ -8,7 +8,7 @@ import TipDisplay, { TipDirection } from "../../base/TipDisplay";
 
 function ObolsInfo({ playerIndex, title, level }: { playerIndex: number, title: string, level: number }) {
     const [obolsData, setObolsData] = useState<ObolsData>();
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
 
 
     const statsDisplay = (stats: ItemStat[], description: string) => {
@@ -83,9 +83,9 @@ function ObolsInfo({ playerIndex, title, level }: { playerIndex: number, title: 
     }, [playerIndex, obolsData]);
 
     useEffect(() => {
-        const theData = idleonData.getData();
+        const theData = appContext.data.getData();
         setObolsData(theData.get("obols"));
-    }, [playerIndex, idleonData])
+    }, [playerIndex, appContext])
 
     if (!obolsData || obolsData.playerObols.length == 0) {
         return (

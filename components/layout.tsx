@@ -7,23 +7,24 @@ import {
     Text,
     Button,
     Box,
-    Layer,
     Main,
-    TextInput,
     Nav,
     Footer,
     Anchor,
     ThemeContext,
     ResponsiveContext,
-    Menu
+    Menu,
+    Avatar,
+    DropButton
 } from "grommet"
 import { useContext, useState, useEffect } from 'react'
-import { AppContext } from '../data/appContext'
+import { AppContext, AppStatus } from '../data/appContext'
 import { AuthContext } from '../data/firebase/authContext'
 import { useRouter } from 'next/dist/client/router';
 
-import { FormDown, Menu as MenuIcon } from 'grommet-icons';
+import { CaretDownFill, DocumentUser, Down, FormDown, Logout, Menu as MenuIcon, User } from 'grommet-icons';
 import TextAndLabel from './base/TextAndLabel';
+import ShadowBox from './base/ShadowBox';
 
 declare const window: Window &
     typeof globalThis & {
@@ -135,14 +136,13 @@ export default function Layout({
     children: React.ReactNode
 }) {
     const authData = useContext(AuthContext);
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
     const router = useRouter();
 
-    const [showLayer, setShowLayer] = useState(false);
     const [validState, setValidState] = useState<boolean>(false);
     const [lastUpdated, setLastUpdated] = useState<string>("");
-    const [value, setValue] = useState('');
+    const [profileDropDownOpen, setProfileDropDownOpen] = useState<boolean>(false);
     const [loading, setLoading] = useState(true);
 
     const navItems = [
@@ -189,21 +189,18 @@ export default function Layout({
         catch (e) {
             console.log(e);
         }
-        finally {
-            setShowLayer(false);
-        }
     }
 
     useEffect(() => {
-        if (authData?.user || authData?.isDemo) {
+        if (appContext.status == AppStatus.LiveData || appContext.status == AppStatus.StaticData) {
             setValidState(true);
         }
         else {
             setValidState(false);
         }
-        setLastUpdated(idleonData.getLastUpdated() as string)
+        setLastUpdated(appContext.data.getLastUpdated() as string)
         setLoading(authData ? authData.isLoading : true);
-    }, [authData, idleonData])
+    }, [authData, appContext])
 
     if (loading) {
         return (
@@ -229,29 +226,53 @@ export default function Layout({
                             <PointerImage alt="Logo" src="/logo.svg" height="21px" width="171px" />
                         </Box>
                     </Link>
-                    {validState && <Box direction="row" gap="xlarge" pad="medium"><TextAndLabel textColor='accent-3' textSize='xsmall' labelSize='xsmall' label='Last Updated' text={lastUpdated} /><Button onClick={() => onButtonClick(authData?.logoutFunction)}>Logout</Button></Box>}
-                    {showLayer &&
-                        <Layer
-                            onEsc={() => setShowLayer(false)}
-                            onClickOutside={() => setShowLayer(false)}
-                            modal={true}
-                            position="center"
-
-
-                        >
-                            <Box pad="medium" gap="small" width="medium" background="grey">
-                                <Button disabled label="Google Login" color="black" onClick={() => onButtonClick(authData?.loginFunction)} />
-                                <Box align="center" flex="grow" pad="small">
-                                    <Text>or</Text>
+                    {validState &&
+                        <Box direction="row" gap="xlarge" pad="medium">
+                            <TextAndLabel textColor='accent-3' textSize='xsmall' labelSize='xsmall' label='Last Updated' text={lastUpdated} />
+                            {
+                                appContext.status == AppStatus.LiveData &&
+                                <Box direction="row">
+                                    <DropButton
+                                        plain={true}
+                                        label={
+                                            <Avatar direction='row'>
+                                                <User color="accent-3" />
+                                                <CaretDownFill size="small" />
+                                            </Avatar>
+                                        }
+                                        open={profileDropDownOpen}
+                                        title='Manage Profile'
+                                        dropAlign={{ top: 'bottom', right: 'right' }}
+                                        dropProps={{
+                                            plain: true,
+                                            elevation: 'navigation',
+                                            background: 'dark-2',
+                                            round: "small",
+                                            onClickOutside: () => setProfileDropDownOpen(false),
+                                            onEsc: () => setProfileDropDownOpen(false),
+                                        }}
+                                        onClick={() => setProfileDropDownOpen(true)}
+                                        dropContent={
+                                            <Box width="small" border={{ color: 'grey-1' }} round="small">
+                                                <Link href={'/profile/upload'}>
+                                                    <Button onClick={() => setProfileDropDownOpen(false)} hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2">
+                                                        <Box pad="small">Public Profile</Box>
+                                                    </Button>
+                                                </Link>
+                                                <Box border={{ color: 'grey-1' }} fill />
+                                                <Button hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2" onClick={() => { onButtonClick(authData?.logoutFunction); setProfileDropDownOpen(false)}}>
+                                                    <Box pad="small">Sign Out</Box>
+                                                </Button>
+                                            </Box>
+                                        }
+                                    />
                                 </Box>
-                                <TextInput
-                                    placeholder="ID Token"
-                                    value={value}
-                                    onChange={event => setValue(event.target.value)}
-                                />
-                                <Button label="Handle Token" color="black" onClick={() => onButtonClick(authData?.tokenFunction, value)} />
-                            </Box>
-                        </Layer>
+                            }
+                            {
+                                appContext.status == AppStatus.StaticData &&
+                                <TextAndLabel textColor='accent-3' textSize='xsmall' labelSize='xsmall' label="Public Profile" text={appContext.profile} />
+                            }
+                        </Box>
                     }
                 </Box>
             </Header>

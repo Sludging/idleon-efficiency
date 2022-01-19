@@ -45,7 +45,7 @@ function RefineryDisplay() {
     const [taskboardData, setTaskboardData] = useState<TaskBoard>();
     const [lastUpdated, setLastUpdated] = useState<Date | undefined>();
     const [squirePowha, setSquirePowha] = useState<boolean>(false);
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
 
     const cycleInfo = useMemo(() => {
@@ -129,9 +129,9 @@ function RefineryDisplay() {
     }, [taskboardData]);
 
     useEffect(() => {
-        if (idleonData) {
-            const theData = idleonData.getData();
-            setLastUpdated(idleonData.getLastUpdated(true) as Date);
+        if (appContext) {
+            const theData = appContext.data.getData();
+            setLastUpdated(appContext.data.getLastUpdated(true) as Date);
             setRefineryData(theData.get("refinery"));
             setItemData(theData.get("itemsData"));
             setStorage(theData.get("storage"));
@@ -140,7 +140,7 @@ function RefineryDisplay() {
             setPlayerData(theData.get("players"));
             setTaskboardData(theData.get("taskboard"));
         }
-    }, [idleonData, refineryData]);
+    }, [appContext, refineryData]);
 
     if (!refineryData || Object.entries(refineryData.salts).filter(([name, saltInfo]) => saltInfo.progress > 0).length == 0) {
         return (
@@ -346,17 +346,17 @@ function SaltLickDisplay() {
     const [refineryData, setRefineryData] = useState<Refinery>();
     const [itemData, setItemData] = useState<Item[]>();
     const [storage, setStorage] = useState<Storage>();
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
 
     useEffect(() => {
-        if (idleonData) {
-            const theData = idleonData.getData();
+        if (appContext) {
+            const theData = appContext.data.getData();
             setItemData(theData.get("itemsData"));
             setStorage(theData.get("storage"));
             setRefineryData(theData.get("refinery"));
             setSaltLickData(theData.get("saltLick"));
         }
-    }, [idleonData]);
+    }, [appContext]);
 
     if (!saltLickData || saltLickData.bonuses.filter(bonus => bonus.level ?? 0 > 0).length == 0) {
         return (
@@ -414,16 +414,16 @@ function PrinterDisplay() {
     const [playerData, setPlayerData] = useState<Player[]>();
     const [printerData, setPrinterData] = useState<Printer>();
     const [itemData, setItemData] = useState<Item[]>();
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
 
     useEffect(() => {
-        if (idleonData) {
-            const theData = idleonData.getData();
+        if (appContext) {
+            const theData = appContext.data.getData();
             setItemData(theData.get("itemsData"));
             setPrinterData(theData.get("printer"));
             setPlayerData(theData.get("players"));
         }
-    }, [idleonData]);
+    }, [appContext]);
 
     const masteroInfo = useMemo(() => {
         const masteroes = playerData?.filter(player => player.classId == ClassIndex.Maestro);
@@ -456,7 +456,7 @@ function PrinterDisplay() {
                                     <Box style={{ opacity: realCD <= 0 ? 1 : 0.5 }} width={{ max: '36px', min: '36px' }}>
                                         <Box className={printerTalent.getClass()} />
                                     </Box>
-                                    {realCD > 0 && <TimeDown size={TimeDisplaySize.Small} lastUpdated={idleonData.getLastUpdated(true) as Date} addSeconds={realCD} resetToSeconds={82000} />}
+                                    {realCD > 0 && <TimeDown size={TimeDisplaySize.Small} lastUpdated={appContext.data.getLastUpdated(true) as Date} addSeconds={realCD} resetToSeconds={82000} />}
                                     {realCD <= 0 && <Text>Skill is ready!</Text>}
                                 </Box>
                             </Box>
@@ -519,7 +519,7 @@ function PrinterDisplay() {
 function DeathnoteDisplay() {
     const [playerData, setPlayerData] = useState<Player[]>();
     const [deathnoteData, setDeathnoteData] = useState<Deathnote>();
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
 
     const monsterInfo = EnemyInfo;
 
@@ -557,12 +557,12 @@ function DeathnoteDisplay() {
     }, [deathNoteByWorld, deathnoteData])
 
     useEffect(() => {
-        if (idleonData) {
-            const theData = idleonData.getData();
+        if (appContext) {
+            const theData = appContext.data.getData();
             setDeathnoteData(theData.get("deathnote"));
             setPlayerData(theData.get("players"));
         }
-    }, [idleonData]);
+    }, [appContext]);
 
     if (!deathnoteData) {
         return (
@@ -602,15 +602,15 @@ function DeathnoteDisplay() {
 function ShrinesDisplay() {
     const [cardData, setCardData] = useState<Card[]>();
     const [shrineData, setShrineData] = useState<Shrine[]>([]);
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
 
     useEffect(() => {
-        if (idleonData) {
-            const theData = idleonData.getData();
+        if (appContext) {
+            const theData = appContext.data.getData();
             setShrineData(theData.get("shrines"));
             setCardData(theData.get("cards"));
         }
-    }, [idleonData]);
+    }, [appContext]);
 
     const shrineCardBonus = useMemo(() => {
         return cardData?.find(card => card.id == "Z9")?.getBonus();
@@ -681,16 +681,16 @@ function ShrinesDisplay() {
 function BuildingsDisplay() {
     const [constructionData, setConstructionData] = useState<ConstructionData>();
     const [itemData, setItemData] = useState<Item[]>();
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
 
     useEffect(() => {
-        if (idleonData) {
-            const theData = idleonData.getData();
+        if (appContext) {
+            const theData = appContext.data.getData();
             setItemData(theData.get("itemsData"));
             setConstructionData(theData.get("construction"));
         }
-    }, [idleonData]);
+    }, [appContext]);
 
     const costCruncher = useMemo(() => {
         return constructionData?.buildings.find(building => building.index == 5) as Building;

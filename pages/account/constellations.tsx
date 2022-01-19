@@ -40,7 +40,7 @@ function Constellations() {
     const [playerData, setPlayerData] = useState<Player[]>();
     const [constellationData, setConstellationData] = useState<string[][]>();
     const [index, setIndex] = useState<number>(0);
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext)
 
     const onActive = (nextIndex: number) => setIndex(nextIndex);
@@ -54,12 +54,12 @@ function Constellations() {
     }
 
     useEffect(() => {
-        if (idleonData) {
-            const theData = idleonData.getData();
+        if (appContext) {
+            const theData = appContext.data.getData();
             setPlayerData(theData.get("players"));
             setConstellationData(theData.get("constellations"));
         }
-    }, [idleonData])
+    }, [appContext])
     return (
         <Box>
             <NextSeo title="Constellations" />

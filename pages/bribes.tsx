@@ -11,14 +11,14 @@ import { Bribe, BribeStatus } from "../data/domain/bribes";
 
 function Bribes() {
     const [bribeData, setBribeData] = useState<Bribe[]>();
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
 
     useEffect(() => {
-        if (idleonData) {
-            const theData = idleonData.getData();
+        if (appContext) {
+            const theData = appContext.data.getData();
             setBribeData(theData.get("bribes"));
         }
-    }, [idleonData])
+    }, [appContext])
     return (
         <Box gap="small">
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Bribes</Heading>

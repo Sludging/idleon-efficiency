@@ -17,14 +17,14 @@ function StorageDisplay() {
     const [typeFilter, setTypeFilter] = useState<string>('None');
     const [subTypeFilter, setSubTypeFilter] = useState<string>('None');
     const [grouped, setGrouped] = useState<boolean>(false);
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
 
     useEffect(() => {
-        if (idleonData.getData().size > 0) {
-            const theData = idleonData.getData();
+        if (appContext.data.getData().size > 0) {
+            const theData = appContext.data.getData();
             setStorage(theData.get("storage"));
         }
-    }, [idleonData])
+    }, [appContext])
 
     const chestItemsToShow = useMemo(() => {
         let filteredItems = storage?.chest.filter((item) => item.internalName != "LockedInvSpace" && item.internalName != "Blank") ?? [];

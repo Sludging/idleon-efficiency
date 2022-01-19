@@ -7,7 +7,7 @@ import ShadowBox from "../../base/ShadowBox";
 function Achivements({ worldIndex }: { worldIndex: number }) {
     const [achievementData, setAchievementData] = useState<Achievement[]>();
     const [worldLetter, setWorldLetter] = useState<string>('A');
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext)
 
     const achievementsToShow = useMemo(() => {
@@ -18,8 +18,8 @@ function Achivements({ worldIndex }: { worldIndex: number }) {
     }, [achievementData, worldLetter])
 
     useEffect(() => {
-        if (idleonData) {
-            const theData = idleonData.getData();
+        if (appContext) {
+            const theData = appContext.data.getData();
             setAchievementData(theData.get("achievements"));
             if (worldIndex == 0) {
                 setWorldLetter('A');
@@ -31,7 +31,7 @@ function Achivements({ worldIndex }: { worldIndex: number }) {
                 setWorldLetter('C');
             }
         }
-    }, [idleonData, worldIndex])
+    }, [appContext, worldIndex])
 
     return (
         <ShadowBox background="dark-1" pad="medium">
