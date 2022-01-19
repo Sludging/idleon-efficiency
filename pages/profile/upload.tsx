@@ -79,7 +79,7 @@ function UploadProfile() {
 
     if (!authContext?.user) {
         <Box align="center" pad="medium">
-            <Heading level='3'>Go Away, you aren't logged in.</Heading>
+            <Heading level='3'>Go Away, you aren&apos;t logged in.</Heading>
         </Box>
     }
 
