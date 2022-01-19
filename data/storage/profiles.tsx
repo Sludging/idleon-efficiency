@@ -9,7 +9,7 @@ export class ProfileStorage {
         this._Initialize = () => { } // prevent any additional calls to initialize.
     }
 
-    private static gemKeys: string[] = ["GemsOwned", "ServerGemsReceived", "BundlesReceived", "GemsPacksPurchased", "GemItemsPurchased", "ServerGems", "CYGems"];
+    private static gemKeys: string[] = ["GemsOwned", "ServerGemsReceived", "BundlesReceived", "GemsPacksPurchased", "ServerGems", "CYGems"];
     private static cleanGemData = async (data: Map<string, any>) => {
         let toRemove = ProfileStorage.gemKeys;
         if (data.has("BundlesReceived")) {
