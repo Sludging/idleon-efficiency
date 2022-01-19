@@ -43,5 +43,5 @@ export const fetcher = async (windowLocation: string, oldDomain: string): Promis
         }
     }
 
-    return { data: new Map(), charNames: undefined, domain: urlDomain };
+    return { data: new Map(), charNames: undefined, domain: "" };
 }
