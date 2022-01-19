@@ -5,7 +5,6 @@ export const fetcher = async (windowLocation: string, oldDomain: string): Promis
     if (windowLocation != "") {
         const baseURL = process.env.NEXT_PUBLIC_ROOT_URL || process.env.NEXT_PUBLIC_VERCEL_URL || "localhost:3000";
         urlDomain = window.location.host.replace(baseURL, "").replace('.', '');
-        console.log("Fetcher", windowLocation, baseURL, urlDomain);
     }
     if (urlDomain != oldDomain && urlDomain != "" && urlDomain != "www") {
         if (process.env.NEXT_PUBLIC_APP_STAGE == "dev") {
@@ -44,5 +43,5 @@ export const fetcher = async (windowLocation: string, oldDomain: string): Promis
         }
     }
 
-    return { data: new Map(), charNames: undefined, domain: urlDomain };
+    return { data: new Map(), charNames: undefined, domain: "" };
 }
