@@ -69,12 +69,13 @@ export const AppProvider: React.FC<{appLoading: boolean, data: {data: Map<string
   }
 
   useEffect(() => {
+    console.log("[APP]", domain, appLoading);
     const app = getApp();
     if (!domain && !fireStore && user) {
       setFireStore(new FirestoreData(user.uid, app, handleLiveData));
       setAppStatus(AppStatus.LiveData);
     } 
-    else if (domain) {
+    else if (domain && domain != "") {
       if (!data || data.data.size == 0) {
         setAppStatus(AppStatus.InvalidProfile);
       }
