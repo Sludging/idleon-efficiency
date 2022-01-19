@@ -93,8 +93,7 @@ function RefineryDisplay() {
                                 if (originalArray[squireIndex][1] == 0) {
                                     const manaBox = squire.postOffice.find(box => box.name == "Magician Starterpack");
                                     const cdReduction = manaBox?.bonuses[2].getBonus(manaBox.level, 2) ?? 0; 
-                                    originalArray[squireIndex][1] = Math.floor(1 - cdReduction / 100) * 72000;
-
+                                    originalArray[squireIndex][1] = Math.floor((1 - cdReduction / 100) * 72000);
                                     const timePerSquireSkilluse = (squire.talents.find(talent => talent.skillIndex == 130)?.getBonus(false, false, true) ?? 0) * cycleInfo[Math.floor(index / 3)].time
                                     timeToNextRank -= timePerSquireSkilluse;
                                     if (timeToNextRank < 0) {
