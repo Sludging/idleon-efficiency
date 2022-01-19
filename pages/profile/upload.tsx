@@ -137,7 +137,7 @@ function UploadProfile() {
                                     It will also remove information about bundles you purchased.
                                 </Paragraph>
                                 <Text size="xsmall">* This will not remove premium items, so they will still be visible on looty and other places.</Text>
-                                <Text size="xsmall">* This will not remove gem store data, as that's important for some maths like capacity.</Text>
+                                <Text size="xsmall">* This will not remove gem store data, as that&apos;s important for some maths like capacity.</Text>
                             </Box>}
                             size="small"
                             heading='What will be removed?'
