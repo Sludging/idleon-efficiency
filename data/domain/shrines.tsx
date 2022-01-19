@@ -1,7 +1,8 @@
 export const ShrineConstants = {
     DmgShrine: 0,
     HpDefShrine: 1,
-    CarryShrine: 3
+    CarryShrine: 3,
+    ExpShrine: 5
 }
 
 export class Shrine {

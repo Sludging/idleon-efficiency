@@ -65,16 +65,16 @@ function Traps() {
     const [playerTraps, setPlayerTraps] = useState<Array<Array<Trap>>>(Array<Array<Trap>>());
     const [playerNames, setPlayerNames] = useState<Array<string>>([]);
     const [playerData, setPlayerData] = useState<Player[]>();
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
 
     useEffect(() => {
-        if (idleonData) {
-            const theData = idleonData.getData();
+        if (appContext) {
+            const theData = appContext.data.getData();
             setPlayerTraps(theData.get("traps"));
             setPlayerNames(theData.get("playerNames"));
             setPlayerData(theData.get("players"));
         }
-    }, [idleonData]);
+    }, [appContext]);
 
     if (!playerTraps || playerTraps.filter(x => playerNames[x[0]?.playerID] != undefined).length == 0) {
         return (

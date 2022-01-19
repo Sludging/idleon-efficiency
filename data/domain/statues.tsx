@@ -3,7 +3,8 @@ import { Player } from './player';
 export const StatueConst = {
     LevelIndex: 0,
     ProgressIndex: 1,
-    AnvilIndex: 11
+    AnvilIndex: 11,
+    SkillXpIndex: 17
 }
 
 interface StatuesData {

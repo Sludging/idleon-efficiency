@@ -23,11 +23,11 @@ export class Prayer {
     }
 
     getBonus = (): number => {
-        return this.x1 + (this.x1 * (this.level - 1)) / 10;
+        return Math.round(this.x1 * Math.max(1, 1 + (this.level - 1) / 10));
     }
 
     getCurse = (): number => {
-        return this.x2 + (this.x1 * (this.level - 1)) / 10;
+        return Math.round(this.x2 * Math.max(1, 1 + (this.level - 1) / 10));
     }
 
     getBonusText = (): string => {

@@ -1,7 +1,7 @@
 import type { AppProps, NextWebVitalsMetric } from 'next/app'
 import { css } from 'styled-components';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { dark, Grommet } from 'grommet';
 import { deepMerge } from 'grommet/utils';
 import { AuthProvider } from '../data/firebase/authContext';
@@ -40,6 +40,8 @@ import Layout from '../components/layout';
 
 import { DefaultSeo } from 'next-seo';
 import SEO from '../next-seo.config';
+import useSWR from 'swr';
+import { fetcher } from '../data/fetchers/getProfile';
 
 const customTheme = deepMerge(dark, {
   global: {
@@ -50,6 +52,7 @@ const customTheme = deepMerge(dark, {
     elevation: {
       dark: {
         navigation: '-7px 8px 16px 0 rgba(0,0,0,0.17)',
+        dropdown: 'rgb(1, 4, 9) 0px 8px 24px 0px',
       }
     },
     colors: {
@@ -76,6 +79,19 @@ const customTheme = deepMerge(dark, {
       "placeholder": "#96979a"
     }
   },
+  notification: {
+    toast: {
+      container: {
+        elevation: 'navigation',
+        width: 'large',
+        background: 'dark-2',
+        pad: 'medium',
+        border: {
+          color: 'grey-1'
+        }
+      }
+    }
+  },
   formField: {
     border: undefined
   },
@@ -84,7 +100,7 @@ const customTheme = deepMerge(dark, {
       radius: undefined,
     },
     primary: {
-      extend: ({}) => css`
+      extend: ({ }) => css`
         font-size: 16px;
       `
     }
@@ -114,9 +130,35 @@ declare const window: Window &
   }
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [domain, setDomain] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
+  const [publicData, setPublicData] = useState<{ data: Map<string, any>, charNames: string[] } | undefined>(undefined);
   const router = useRouter()
 
+  const { data, error } = useSWR(publicData == undefined ? { windowLocation: typeof window !== "undefined" ? window.location.host : "", oldDomain: domain } : null, fetcher, {
+    shouldRetryOnError: false,
+    dedupingInterval: 5000,
+    refreshInterval: 1000 * 60 * 30 // every 30 minutes
+  });
+
   useEffect(() => {
+    // If no response yet, mark as loading.
+    if (!data && !error) {
+      setLoading(true);
+    }
+    // If we have a response, track the domain name and mark loading as finished.
+    if (data) {
+      setDomain(data.domain);
+      setLoading(false);
+    }
+
+    // If we got a valid response, handle static data.
+    if (data && !error) {
+      if (data.data && data.charNames) {
+        setPublicData(data as { data: Map<string, any>, charNames: string[] });
+      }
+    }
+
     const handleRouteChange = (url: string) => {
       if (typeof window.gtag !== 'undefined') {
         window.gtag('config', "G-RDM3GQEGMB", {
@@ -128,8 +170,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange)
     }
-
-  }, [router.events])
+  }, [router.events, data, error])
 
   return (
     <>
@@ -157,8 +198,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="preconnect" href="https://fonts.gstatic.com" />
       </Head>
       <Grommet theme={customTheme} full>
-        <AuthProvider>
-          <AppProvider>
+        <AuthProvider appLoading={loading} data={publicData} domain={domain}>
+          <AppProvider appLoading={loading} data={publicData} domain={domain}>
             <DefaultSeo {...SEO} />
             <Layout>
               <Component {...pageProps} />

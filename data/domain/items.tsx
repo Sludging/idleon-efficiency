@@ -423,6 +423,19 @@ export class Item {
         })
     }
 
+    getMiscBonus = (type: string) => {
+        let bonusTotal = 0;
+        if (this.miscUp1.toLowerCase().includes(type.toLowerCase())) {
+            bonusTotal += this.itemStats.find(stat => stat.stoneName == "UQ1val")?.getValue() ?? 0;
+        }
+
+        if (this.miscUp2.toLowerCase().includes(type.toLowerCase())) {
+            bonusTotal += this.itemStats.find(stat => stat.stoneName == "UQ2val")?.getValue() ?? 0;
+        }
+
+        return bonusTotal;
+    }
+
     getClass = () => {
         if (getEnhancerRegex().exec(this.internalName)) {
             return `icons-3434 icons-${this.internalName}_x1`;

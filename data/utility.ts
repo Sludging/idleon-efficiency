@@ -153,6 +153,17 @@ export const formatTime = (input: number) => {
     }
 }
 
+export const dateToIntString = (input: Date) => {
+    const resolvedFormat = Intl.DateTimeFormat().resolvedOptions();
+    const options: Intl.DateTimeFormatOptions = {
+        year: "numeric", month: "numeric", day: "numeric",
+        hour: "numeric", minute: "numeric", second: "numeric",
+        hour12: resolvedFormat.hour12,
+        timeZone: resolvedFormat.timeZone
+    };
+    return Intl.DateTimeFormat(resolvedFormat.locale, options).format(input);
+}
+
 export const toTime = (fromSeconds: number) => {
     let days = 0;
     let hour = Math.floor(fromSeconds / 3600);

@@ -22,20 +22,20 @@ function Arcade() {
     const [alchemyData, setAlchemyData] = useState<Alchemy>();
     const [taskboardData, setTaskboardData] = useState<TaskBoard>();
     const [serverVars, setServerVars] = useState<Record<string, any>>({})
-    const idleonData = useContext(AppContext);
+    const appContext = useContext(AppContext);
 
     useEffect(() => {
-        const theData = idleonData.getData();
+        const theData = appContext.data.getData();
         setArcadeData(theData.get("arcade"));
         setStampData(theData.get("stamps"));
         setAlchemyData(theData.get("alchemy"));
         setAchievementData(theData.get("achievements"));
         setServerVars(theData.get("servervars"));
         setTaskboardData(theData.get("taskboard"));
-    }, [idleonData])
+    }, [appContext])
 
     const activeArcadeBonuses = useMemo(() => {
-        if (serverVars) {
+        if (serverVars && Object.keys(serverVars).includes("ArcadeBonuses")) {
             return serverVars["ArcadeBonuses"] as number[];
         }
         return [];
@@ -60,12 +60,12 @@ function Arcade() {
     }, [stampData, arcadeData]);
 
     const ballsToClaim = useMemo(() => {
-        const timeAwayData = idleonData.getData().get("timeAway");
+        const timeAwayData = appContext.data.getData().get("timeAway");
         if (timeAwayData) {
             return Math.floor(Math.min(timeAwayData["GlobalTime"] - timeAwayData["Arcade"], maxClaimTime) / Math.max(ballsPerSecond, 1800));
         }
         return 0;
-    }, [idleonData, maxClaimTime, ballsPerSecond]);
+    }, [appContext, maxClaimTime, ballsPerSecond]);
 
     const goldenBallStampBonus = useMemo(() => {
         if (stampData) {
@@ -93,7 +93,7 @@ function Arcade() {
                             return (
                                 <ShadowBox background="dark-1" key={index} direction="row">
                                     <Box justify="start" direction="row" fill border={index != arcadeData.bonuses.length - 1 ? {side: 'bottom', color: 'accent-3', size: '1px'} : undefined} pad="medium">
-                                        <Box style={{ opacity: activeArcadeBonuses.includes(bonus.index) ? 1 : 0.3 }} width={{ max: '62px', min: '62px' }} margin={{ right: 'medium' }}>
+                                        <Box style={{ opacity: activeArcadeBonuses?.includes(bonus.index) || activeArcadeBonuses.length == 0 ? 1 : 0.3 }} width={{ max: '62px', min: '62px' }} margin={{ right: 'medium' }}>
                                             <Box className={bonus.getClass()} />
                                         </Box>
                                         <TextAndLabel labelSize='small' textSize='xsmall' text={bonus.getBonusText()} label="Effect" margin={{ right: 'medium' }} />

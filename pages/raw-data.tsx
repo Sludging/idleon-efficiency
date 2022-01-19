@@ -1,26 +1,21 @@
 import {
     Box,
-    Text,
-    Tabs,
-    Tab,
-    Grid,
-    Stack
 } from 'grommet'
 import { useState, useEffect, useContext } from 'react';
 import { AppContext } from '../data/appContext'
 import { NextSeo } from 'next-seo';
+import { AuthContext } from '../data/firebase/authContext';
 
 function RawData() {
     const [rawData, setRawData] = useState<any>();
-
-    const idleonData = useContext(AppContext);
-
+    const appContext = useContext(AppContext);
+    
     useEffect(() => {
-        if (idleonData) {
-            const theData = idleonData.getData();
+        if (appContext) {
+            const theData = appContext.data.getData();
             setRawData(theData.get("rawData"));
         }
-    }, [idleonData]);
+    }, [appContext]);
     return (
         <Box align="center">
             <NextSeo title="Raw Data" />

@@ -9,8 +9,6 @@ import { useRouter } from "next/dist/client/router";
 interface AuthData {
     user: User | null
     isLoading: boolean
-    isDemo: boolean
-    loginFunction: Function
     logoutFunction: Function
     tokenFunction: Function
     emailLoginFunction: Function
@@ -26,27 +24,10 @@ export const getAuthData = (): AuthData => {
     return contextState;
 };
 
-export const AuthProvider: React.FC<{}> = (props) => {
+export const AuthProvider: React.FC<{appLoading: boolean, data: {data: Map<string, any>, charNames: string[]} | undefined, domain: string, children?: React.ReactNode}> = ({ appLoading, data, domain, children }) => {
     const [user, setUser] = useState<User | null>(null);
-    const [loading, setLoading] = useState(true);
-    const [isDemo, setIsDemo] = useState(false);
+    const [loading, setLoading] = useState(appLoading);
     const router = useRouter();
-
-    const loginUser = () => {
-        const auth = getAuth(app);
-        const provider = new GoogleAuthProvider();
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                const credential = GoogleAuthProvider.credentialFromResult(result);
-                setUser(result.user);
-                loginEvent("GOGGLE");
-                router.push("/stamps");
-            }).catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
-            });
-    }
 
     const loginThroughToken = (id_token: string, callback?: Function) => {
         const auth = getAuth(app);
@@ -67,28 +48,21 @@ export const AuthProvider: React.FC<{}> = (props) => {
     }
 
     const loginThroughEmailPassword = (email: string, password: string, callback?: Function) => {
-        if (email == "demo" && password == "demo") {
-            setIsDemo(true);
-            loginEvent("DEMO");
-            router.push("/stamps");
-        }
-        else {
-            const auth = getAuth(app);
-            const credential = EmailAuthProvider.credential(email, password);
-            signInWithCredential(auth, credential)
-                .then((result) => {
-                    setUser(result.user);
-                    loginEvent("EMAIL");
-                    router.push("/stamps");
-                }).catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    if (callback) {
-                        callback(errorCode);
-                    }
-                    console.debug(errorCode, errorMessage);
-                });
-        }
+        const auth = getAuth(app);
+        const credential = EmailAuthProvider.credential(email, password);
+        signInWithCredential(auth, credential)
+            .then((result) => {
+                setUser(result.user);
+                loginEvent("EMAIL");
+                router.push("/stamps");
+            }).catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                if (callback) {
+                    callback(errorCode);
+                }
+                console.debug(errorCode, errorMessage);
+            });
     }
 
     const logout = () => {
@@ -108,39 +82,36 @@ export const AuthProvider: React.FC<{}> = (props) => {
                     console.log(errorCode, errorMessage);
                 });
         }
-        setIsDemo(false);
     }
 
-
     useEffect(() => {
-        setLoading(true);
-        const auth = getAuth(app);
-        auth.onAuthStateChanged(res => {
-            if (res) {
-                setUser(res);
-            }
-            else {
-                setUser(null);
-            }
-            setLoading(false);
-        });
-        if (isDemo) {
-            setUser(null);
+        if (!appLoading && domain == "") {
+            setLoading(true);
+            const auth = getAuth(app);
+            auth.onAuthStateChanged(res => {
+                if (res) {
+                    setUser(res);
+                }
+                else {
+                    setUser(null);
+                }
+                setLoading(false);
+            });
+        }
+        else if (domain != "") {
             setLoading(false);
         }
-    }, [user, isDemo]);
+    }, [user, appLoading, domain]);
 
     return (
         <AuthContext.Provider value={{
             user: user,
             isLoading: loading,
-            isDemo: isDemo,
-            loginFunction: loginUser,
             emailLoginFunction: loginThroughEmailPassword,
             logoutFunction: logout,
-            tokenFunction: loginThroughToken
+            tokenFunction: loginThroughToken,
         }}>
-            {props.children}
+            {children}
         </AuthContext.Provider>
     );
 };
