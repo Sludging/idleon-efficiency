@@ -56,7 +56,7 @@ function UploadProfile() {
             const uploadRes = await ProfileStorage.uploadProfile(appContext.data, user, !uploadSensitiveData);
             let message = "";
             if (uploadRes.success) {
-                localStorage.setItem("last_profile_upload", new Date().toISOString());
+                localStorage.setItem(`${user.uid}/last_profile_upload`, new Date().toISOString());
                 message = `Successfully uploaded the profile`;
                 setToastStatus('normal');
             }
@@ -71,11 +71,14 @@ function UploadProfile() {
     }
 
     useEffect(() => {
-        const localDate = localStorage.getItem("last_profile_upload");
-        if (localDate) {
-            setLastUpload(new Date(localDate));
+        const user = authContext?.user;
+        if (user) {
+            const localDate = localStorage.getItem(`${user.uid}/last_profile_upload`);
+            if (localDate) {
+                setLastUpload(new Date(localDate));
+            }
         }
-    }, [appContext, authContext])
+    }, [appContext, authContext, showToast])
 
     if (!authContext?.user) {
         <Box align="center" pad="medium">
