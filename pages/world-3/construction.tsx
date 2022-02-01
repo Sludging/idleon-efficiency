@@ -54,16 +54,17 @@ function RefineryDisplay() {
         }
         const vialBonus = alchemyData?.vials.find((vial) => vial.description.includes("Refinery Cycle Speed"))?.getBonus() ?? 0;
         const saltLickBonus = saltLickData?.getBonus(2) ?? 0;
+        const secondsSinceUpdate = (new Date().getTime() - (lastUpdated?.getTime() ?? 0)) / 1000;
+        
         const toReturn = [
-            { name: "Combustion", time: Math.ceil((900 * Math.pow(4, 0)) / (1 + ((vialBonus + saltLickBonus)) / 100)), timePast: refineryData.timePastCombustion }
+            { name: "Combustion", time: Math.ceil((900 * Math.pow(4, 0)) / (1 + ((vialBonus + saltLickBonus)) / 100)), timePast: refineryData.timePastCombustion + secondsSinceUpdate }
         ];
 
         if (Object.keys(refineryData.salts).length > 3) {
             toReturn.push(
-                { name: "Synthesis ", time: Math.ceil((900 * Math.pow(4, 1)) / (1 + ((vialBonus + saltLickBonus)) / 100)), timePast: refineryData.timePastSynthesis }
+                { name: "Synthesis ", time: Math.ceil((900 * Math.pow(4, 1)) / (1 + ((vialBonus + saltLickBonus)) / 100)), timePast: refineryData.timePastSynthesis + secondsSinceUpdate }
             );
         }
-
         return toReturn;
     }, [refineryData, saltLickData, alchemyData]);
 
@@ -158,7 +159,7 @@ function RefineryDisplay() {
                             <ShadowBox margin={{ right: 'large', bottom: 'small' }} background="dark-1" key={index} gap="xsmall" pad="medium" align="center">
                                 <TextAndLabel center textSize='xsmall' labelSize='medium' text='Next cycle in' label={cycle.name} />
                                 <Box>
-                                    <TimeDown addSeconds={cycle.time - cycle.timePast} lastUpdated={lastUpdated} resetToSeconds={cycle.time} />
+                                    <TimeDown addSeconds={cycle.time - cycle.timePast} resetToSeconds={cycle.time} />
                                 </Box>
                                 <Text margin={{ top: 'small' }} color="accent-3" size="12px">* Might be off by a few seconds.</Text>
                             </ShadowBox>
@@ -181,7 +182,7 @@ function RefineryDisplay() {
                                     <Box style={{ opacity: realCD <= 0 ? 1 : 0.5 }} width={{ max: '36px', min: '36px' }}>
                                         <Box className={refineryTalent.getClass()} />
                                     </Box>
-                                    {realCD > 0 && <TimeDown size={TimeDisplaySize.Small} lastUpdated={lastUpdated} addSeconds={realCD} resetToSeconds={72000} />}
+                                    {realCD > 0 && <TimeDown size={TimeDisplaySize.Small} addSeconds={realCD} resetToSeconds={72000} />}
                                     {realCD <= 0 && <Text>Skill is ready!</Text>}
                                 </Box>
                             </Box>
@@ -221,8 +222,9 @@ function RefineryDisplay() {
                         const inChestStorage = storage?.chest.find((item) => item.internalName == storageItem.internalName)
                         storageItem.count = (inSaltStorage?.quantity ?? 0) + (inChestStorage?.count ?? 0);
                     });
-                    const fuelTime = info.getFuelTime(storageItems, [], index <= saltMeritLevel) * cycleInfo[Math.floor(index / 3)].time;
-                    const timeToNextRank = info.getTimeToNextRank(cycleInfo[Math.floor(index / 3)].time);
+                    const secondsSinceUpdate = (new Date().getTime() - (lastUpdated?.getTime() ?? 0)) / 1000;
+                    const fuelTime = info.getFuelTime(storageItems, [], index <= saltMeritLevel) * cycleInfo[Math.floor(index / 3)].time - secondsSinceUpdate;
+                    const timeToNextRank = info.getTimeToNextRank(cycleInfo[Math.floor(index / 3)].time) - secondsSinceUpdate;
 
                     if (saltItem) {
                         return (
@@ -246,7 +248,7 @@ function RefineryDisplay() {
                                                     <Box>
                                                         <Text color="accent-2" size="small">Rank up in</Text>
                                                         <Box>
-                                                            {info.active && fuelTime > 0 ? <TimeDown size={size == "medium" ? TimeDisplaySize.Medium : TimeDisplaySize.Large} addSeconds={squirePowha ? squireTimeSave[index] : timeToNextRank} lastUpdated={lastUpdated} /> : <Text color="accent-1" size="small">Not active</Text>}
+                                                            {info.active && fuelTime > 0 ? <TimeDown size={size == "medium" ? TimeDisplaySize.Medium : TimeDisplaySize.Large} addSeconds={squirePowha ? squireTimeSave[index] : timeToNextRank} /> : <Text color="accent-1" size="small">Not active</Text>}
                                                         </Box>
                                                     </Box>
                                                     :
@@ -269,7 +271,7 @@ function RefineryDisplay() {
                                             <Box>
                                                 <Text color="accent-2" size="small">Fuel</Text>
                                                 {fuelTime > 0 && (info.active ?
-                                                    <TimeDown color={fuelTime > timeToNextRank ? 'green-1' : 'accent-1'} addSeconds={fuelTime} lastUpdated={lastUpdated} />
+                                                    <TimeDown color={fuelTime > timeToNextRank ? 'green-1' : 'accent-1'} addSeconds={fuelTime} />
                                                     : <StaticTime color={fuelTime > timeToNextRank ? 'green-1' : 'accent-1'} fromSeconds={fuelTime} />
                                                 )}
                                                 {fuelTime == 0 && <Text color="accent-1" size="small">Empty</Text>}
@@ -455,7 +457,7 @@ function PrinterDisplay() {
                                     <Box style={{ opacity: realCD <= 0 ? 1 : 0.5 }} width={{ max: '36px', min: '36px' }}>
                                         <Box className={printerTalent.getClass()} />
                                     </Box>
-                                    {realCD > 0 && <TimeDown size={TimeDisplaySize.Small} lastUpdated={appContext.data.getLastUpdated(true) as Date} addSeconds={realCD} resetToSeconds={82000} />}
+                                    {realCD > 0 && <TimeDown size={TimeDisplaySize.Small} addSeconds={realCD} resetToSeconds={82000} />}
                                     {realCD <= 0 && <Text>Skill is ready!</Text>}
                                 </Box>
                             </Box>

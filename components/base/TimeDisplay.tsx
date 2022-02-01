@@ -99,7 +99,7 @@ function TimeDisplay({ seconds, minutes, hours, days, color, size = TimeDisplayS
     )
 }
 
-export function TimeDown({ addSeconds, resetToSeconds, lastUpdated, color, size }: { addSeconds: number, resetToSeconds?: number, lastUpdated?: Date, color?: string, size?: TimeDisplaySize }) {
+export function TimeDown({ addSeconds, resetToSeconds, color, size }: { addSeconds: number, resetToSeconds?: number, color?: string, size?: TimeDisplaySize }) {
     function resetTimer(seconds?: number) {
         if (seconds) {
             const time = new Date();
@@ -112,8 +112,7 @@ export function TimeDown({ addSeconds, resetToSeconds, lastUpdated, color, size 
 
     const time = new Date();
     // figure out how much time has passed since we updated
-    const timeSinceUpdate = time.getTime() - (lastUpdated?.getTime() ?? 0);
-    time.setTime(time.getTime() + (addSeconds * 1000) - timeSinceUpdate);
+    time.setTime(time.getTime() + (addSeconds * 1000));
 
 
     const {
@@ -129,23 +128,21 @@ export function TimeDown({ addSeconds, resetToSeconds, lastUpdated, color, size 
     useEffect(() => {
         const time = new Date();
         // figure out how much time has passed since we updated
-        const timeSinceUpdate = time.getTime() - (lastUpdated?.getTime() ?? 0);
-        time.setTime(time.getTime() + (addSeconds * 1000) - timeSinceUpdate);
+        time.setTime(time.getTime() + (addSeconds * 1000));
         setTimeout(() => {
             restart(time, true);
         }, 10);
-    }, [addSeconds, lastUpdated, resetToSeconds, color, size])
+    }, [addSeconds, resetToSeconds, color, size])
 
     return (
         <TimeDisplay seconds={seconds} minutes={minutes} hours={hours} days={days} color={color} size={size} />
     )
 }
 
-export function TimeUp({ addSeconds, lastUpdated, color, size }: { addSeconds: number, lastUpdated?: Date, color?: string, size?: TimeDisplaySize }) {
+export function TimeUp({ addSeconds, color, size }: { addSeconds: number, color?: string, size?: TimeDisplaySize }) {
     const time = new Date();
     // figure out how much time has passed since we updated
-    const timeSinceUpdate = time.getTime() - (lastUpdated?.getTime() ?? 0);
-    time.setSeconds(time.getSeconds() + addSeconds + timeSinceUpdate / 1000);
+    time.setSeconds(time.getSeconds() + addSeconds);
 
     const {
         seconds,
@@ -158,10 +155,9 @@ export function TimeUp({ addSeconds, lastUpdated, color, size }: { addSeconds: n
     useEffect(() => {
         const time = new Date();
         // figure out how much time has passed since we updated
-        const timeSinceUpdate = time.getTime() - (lastUpdated?.getTime() ?? 0);
-        time.setSeconds(time.getSeconds() + addSeconds + timeSinceUpdate / 1000);
+        time.setSeconds(time.getSeconds() + addSeconds);
         reset(time, true);
-    }, [addSeconds, lastUpdated])
+    }, [addSeconds])
 
     return (
         <TimeDisplay seconds={seconds} minutes={minutes} hours={hours} days={days} color={color} size={size} />

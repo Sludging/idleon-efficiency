@@ -15,7 +15,8 @@ const specialSize: string[] = [
 ];
 
 export const AchievementConst = {
-    SmartBoiIndex: 108
+    SmartBoiIndex: 108,
+    GoldFood: 37
 }
 
 export class Achievement {

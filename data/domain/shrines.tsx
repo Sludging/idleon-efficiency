@@ -13,7 +13,7 @@ export class Shrine {
     constructor(public name: string, public boost: string, public initialBonus: number, public increment: number, public iconName: string) {}
 
     getBonus = (map: number | undefined = undefined, cardBonus: number = 0) => {
-        if (map && map != this.currentMap) {
+        if (map != undefined && map != this.currentMap) {
             return 0;
         }
 
