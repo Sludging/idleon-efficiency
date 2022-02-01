@@ -166,7 +166,7 @@ function ChargeDisplay() {
                                     label="Time till full"
                                     component={
                                         timeToFull > 0 ?
-                                            <TimeDown size={TimeDisplaySize.Small} lastUpdated={appContext.data.getLastUpdated(true) as Date} addSeconds={timeToFull} />
+                                            <TimeDown size={TimeDisplaySize.Small} addSeconds={timeToFull} />
                                             : <Text>Charge is full!</Text>
                                     }
                                 />
