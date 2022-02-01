@@ -82,8 +82,8 @@ function DungeonPassives() {
                     <Box pad="medium">
                         <Heading level="4">Dungeon</Heading>
                         {
-                            dungeonData.passives.get(PassiveType.Dungeon)?.map(passive => (
-                                <ShadowBox background="dark-1" margin={{ bottom: 'small' }}>
+                            dungeonData.passives.get(PassiveType.Dungeon)?.map((passive, index) => (
+                                <ShadowBox background="dark-1" margin={{ bottom: 'small' }} key={index}>
                                     <Grid columns={["25%", "40%", "35%"]} key={`dungeon_${passive.index}`} pad="small" fill gap="small">
                                         <TextAndLabel
                                             label="Level"
@@ -109,8 +109,8 @@ function DungeonPassives() {
                     <Box pad="medium">
                         <Heading level="4">Flurbo</Heading>
                         {
-                            dungeonData.passives.get(PassiveType.Flurbo)?.map(passive => (
-                                <ShadowBox background="dark-1" margin={{ bottom: 'small' }}>
+                            dungeonData.passives.get(PassiveType.Flurbo)?.map((passive, index) => (
+                                <ShadowBox background="dark-1" margin={{ bottom: 'small' }} key={index}>
                                     <Grid columns={["25%", "40%", "35%"]} key={`dungeon_${passive.index}`} pad="small" fill gap="small">
                                         <TextAndLabel
                                             label="Level"

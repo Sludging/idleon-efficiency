@@ -198,6 +198,15 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
             * (1 + crystalSpawnStamp / 100) * (1 + cardBonus / 100);
     }, [appContext, player])
 
+    
+    const secondsSinceUpdate = useMemo(() => {
+        const lastUpdated = appContext.data.getLastUpdated(true) as Date | undefined;
+        if (lastUpdated) {
+            return (new Date().getTime() - lastUpdated.getTime()) / 1000;
+        }
+        return 0;
+    }, [appContext]);
+
     return (
         <Box pad="medium">
             <Text size='medium'>Random Stats</Text>
@@ -212,7 +221,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     }
                     <Box direction="row" gap="xsmall">
                         <Text size="small">Away Since =</Text>
-                        {player.afkFor < 100 ? "Active" : <TimeUp addSeconds={player.afkFor} lastUpdated={appContext.data.getLastUpdated(true) as Date} />}
+                        {player.afkFor < 100 ? "Active" : <TimeUp addSeconds={player.afkFor + secondsSinceUpdate} />}
                     </Box>
                     <Text size="small">STR = {player.stats.strength}</Text>
                     <Text size="small">AGI = {player.stats.agility}</Text>
