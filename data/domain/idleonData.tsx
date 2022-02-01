@@ -1,7 +1,7 @@
 import parseTraps from './traps';
 import parseStamps from './stamps';
 import parseStatues from './statues';
-import parsePlayers from './player';
+import parsePlayers, { Player } from './player';
 import parseAlchemy from './alchemy';
 import parseBribes from './bribes';
 import parseGuild from './guild';
@@ -24,6 +24,8 @@ import parseConstruction from './construction';
 import parseCards from './cards';
 import parseArcade from './arcade';
 import parseObols from './obols';
+import { parseFamily } from './family';
+import { parseDungeons } from './dungeons';
 
 export class IdleonData {
     private data: Map<string, any>
@@ -93,6 +95,11 @@ const keyFunctionMap: Record<string, Function> = {
     "construction": (doc: Cloudsave, charCount: number) => parseConstruction(JSON.parse(doc.get("Tower"))),
     "arcade": (doc: Cloudsave, charCount: number) => parseArcade(JSON.parse(doc.get("ArcadeUpg")), doc.get("OptLacc")),
     "obols": (doc: Cloudsave, allItems: Item[], charCount: number) => parseObols(doc, charCount, allItems),
+    "dungeons": (doc: Cloudsave, charCount: number) => parseDungeons(JSON.parse(doc.get("DungUpg")), doc.get("OptLacc")),
+}
+
+const postProcessingMap: Record<string, Function> = {
+    "family": (doc: Cloudsave, accountData: Map<string, any>) => parseFamily(accountData.get("players") as Player[]),
 }
 
 export const updateIdleonData = async (data: Cloudsave, charNames: string[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
@@ -118,6 +125,18 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], all
         catch (e) {
             console.debug(e);
             console.log(`Failed parsing ${key}`);
+            accountData.set(key, undefined);
+        }
+    })
+
+    // Do post parse processing.
+    Object.entries(postProcessingMap).forEach(([key, toExecute]) => {
+        try {
+            accountData.set(key, toExecute(data, accountData));
+        }
+        catch (e) {
+            console.debug(e);
+            console.log(`Failed post-processing ${key}`);
             accountData.set(key, undefined);
         }
     })

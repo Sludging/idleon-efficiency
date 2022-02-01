@@ -27,8 +27,8 @@ export class PlayerStats {
 
 export class PlayerEquipment {
     equipment: Array<Item | undefined>;
-    tools: Array<Item | undefined>;
-    food: Array<Item | undefined>;
+    tools: Array<Tool | undefined>;
+    food: Array<Food | undefined>;
 
     constructor() {
         this.equipment = [];
@@ -345,11 +345,16 @@ export class Player {
     }
 
     getCurrentCooldown = (skillIndex: number) => {
-        const skillCooldown = [...this.cooldown.entries()].filter(([talent, cooldown]) => talent.skillIndex == 130).pop()
+        const skillCooldown = [...this.cooldown.entries()].filter(([talent, cooldown]) => talent.skillIndex == skillIndex).pop()
         if (skillCooldown) {
             return Math.max(0, skillCooldown[1] - this.afkFor);
         }
         return 0;
+    }
+
+    getGoldFoodMulti = (familyBonus: number = 0, goldFoodStampBonus: number = 0, achievement: boolean) => {
+        const gearBonus = this.gear.equipment.reduce((sum, gear) => sum += gear?.getMiscBonus("Gold Food Effect") ?? 0, 0);
+        return Math.max(familyBonus, 1) + (gearBonus + ((this.talents.find(skill => skill.skillIndex == 99)?.getBonus() ?? 0) + (goldFoodStampBonus + (achievement ? 5 : 0)))) / 100;
     }
 }
 
@@ -529,7 +534,7 @@ const parseEquipment = (
         }
         if (equipIndex == 2) { // food
             Object.entries(data).forEach(([location, name], _) => {
-                const item = allItems.find((item) => item.internalName == name)?.duplicate();
+                const item = allItems.find(item => item.internalName == name)?.duplicate() as Food | undefined;
                 if (item) {
                     item.count = equipCount[equipIndex][Number(location)];
                 }

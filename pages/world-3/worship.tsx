@@ -115,7 +115,7 @@ function ChargeDisplay() {
                         label="Time till overflow"
                         component={
                             totalChargeInfo.overFlowTime > 0 ?
-                                <TimeDown size={TimeDisplaySize.Small} lastUpdated={appContext.data.getLastUpdated(true) as Date} addSeconds={totalChargeInfo.overFlowTime} />
+                                <TimeDown size={TimeDisplaySize.Small} addSeconds={totalChargeInfo.overFlowTime} />
                                 : <Text>Overflowing, you are wasting charge!</Text>
                         }
                     />
@@ -237,7 +237,7 @@ function TotemDisplay() {
                                 <TextAndLabel text={totem.name} label="Name" />
                                 <TextAndLabel text={totem.map?.area ?? ""} label="Area" />
                                 <TextAndLabel text={totem.maxWave.toString()} label="Max Wave" />
-                                <TextAndLabel text={totem.getExpRewards().toString()} label="Base XP" />
+                                <TextAndLabel text={Math.floor(totem.getExpRewards() / totem.getChargeCost()).toString()} label="XP Per Charge" />
                                 <TextAndLabel text={totem.getSoulRewards(efficiency, effFoodBonus).toString()} label="Souls" />
                             </Grid>
                         </ShadowBox>

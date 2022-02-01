@@ -44,6 +44,9 @@ import TextAndLabel, { ComponentAndLabel } from '../components/base/TextAndLabel
 import { Bribe, BribeStatus } from '../data/domain/bribes';
 import { Skilling } from '../data/domain/skilling';
 import { SaltLick } from '../data/domain/saltLick';
+import { Family } from '../data/domain/family';
+import { Achievement, AchievementConst } from '../data/domain/achievements';
+import { Dungeons, PassiveType } from '../data/domain/dungeons';
 
 
 function ItemSourcesDisplay({ sources, dropInfo }: { sources: ItemSources, dropInfo: DropInfo }) {
@@ -551,11 +554,17 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
         const shrines = theData.get("shrines") as Shrine[];
         const prayers = theData.get("prayers") as Prayer[];
         const saltLick = theData.get("saltLick") as SaltLick;
+        const family = theData.get("family") as Family;
+        const stampData = theData.get("stamps") as Stamp[][];
+        const achievementsInfo = theData.get("achievements") as Achievement[];
+        const dungeonsData = theData.get("dungeons") as Dungeons;
 
-        if (shrines && prayers && saltLick && playerStatues) {
+        if (shrines && prayers && saltLick && playerStatues && family && stampData && achievementsInfo) {
             const saltLickBonus = saltLick.getBonus(3);
-            const dungeonBonus = lavaFunc("decay", 10, 45, 100); // TODO: Actual dungeon data!
-            const allSkillXP = Skilling.getAllSkillXP(player, shrines, playerStatues, prayers, saltLickBonus, dungeonBonus);
+            const dungeonBonus = (dungeonsData.passives.get(PassiveType.Flurbo) ?? [])[2]?.getBonus() ?? 0; // Lava is looking at the wrong bonus.
+            const goldFoodStampBonus = stampData.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC7")?.getBonus() ?? 0;
+            const goldFoodAchievement = achievementsInfo[AchievementConst.GoldFood].completed;
+            const allSkillXP = Skilling.getAllSkillXP(player, shrines, playerStatues, prayers, saltLickBonus, dungeonBonus, family, goldFoodStampBonus, goldFoodAchievement);
             const xpMulti = player.anvil.getXPMulti(player, allSkillXP);
             return (100 * (player.anvil.getXP(xpMulti) - 1));
         }
@@ -695,7 +704,7 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
                                 </Box>
                                 <Box direction="row" gap="xsmall">
                                     <Text size="small">Time till cap =</Text>
-                                    <TimeDown addSeconds={timeTillCap} lastUpdated={appContext.data.getLastUpdated(true) as Date} />
+                                    <TimeDown addSeconds={timeTillCap} />
                                 </Box>
                                 <Text size="small">Production Per Hour (per hammer) = {Math.round(anvilSpeed / anvilItem.time)} </Text>
                                 <Text size="small">Total Produced of this item = {nFormatter(Math.round(anvilItem.totalProduced))}</Text>

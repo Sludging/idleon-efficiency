@@ -1,0 +1,68 @@
+.icons-5151 {
+    background-image: url(spritesheet_51x51.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 100.0%;
+    height: 0;
+    background-size: cover;
+    background-position: 0 calc(var(--row) * 1.7857142857142858%)
+}
+.icons-5151:not(.icons-DungStatLock):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
+            .icons-DungStatLock { --row: 0; }
+.icons-DungTraitA0 { --row: 1; }
+.icons-DungTraitA1 { --row: 2; }
+.icons-DungTraitA10 { --row: 3; }
+.icons-DungTraitA11 { --row: 4; }
+.icons-DungTraitA12 { --row: 5; }
+.icons-DungTraitA13 { --row: 6; }
+.icons-DungTraitA14 { --row: 7; }
+.icons-DungTraitA15 { --row: 8; }
+.icons-DungTraitA16 { --row: 9; }
+.icons-DungTraitA17 { --row: 10; }
+.icons-DungTraitA18 { --row: 11; }
+.icons-DungTraitA19 { --row: 12; }
+.icons-DungTraitA2 { --row: 13; }
+.icons-DungTraitA20 { --row: 14; }
+.icons-DungTraitA21 { --row: 15; }
+.icons-DungTraitA22 { --row: 16; }
+.icons-DungTraitA23 { --row: 17; }
+.icons-DungTraitA24 { --row: 18; }
+.icons-DungTraitA25 { --row: 19; }
+.icons-DungTraitA26 { --row: 20; }
+.icons-DungTraitA27 { --row: 21; }
+.icons-DungTraitA3 { --row: 22; }
+.icons-DungTraitA4 { --row: 23; }
+.icons-DungTraitA5 { --row: 24; }
+.icons-DungTraitA6 { --row: 25; }
+.icons-DungTraitA7 { --row: 26; }
+.icons-DungTraitA8 { --row: 27; }
+.icons-DungTraitA9 { --row: 28; }
+.icons-DungTraitB0 { --row: 29; }
+.icons-DungTraitB1 { --row: 30; }
+.icons-DungTraitB10 { --row: 31; }
+.icons-DungTraitB11 { --row: 32; }
+.icons-DungTraitB12 { --row: 33; }
+.icons-DungTraitB13 { --row: 34; }
+.icons-DungTraitB14 { --row: 35; }
+.icons-DungTraitB15 { --row: 36; }
+.icons-DungTraitB16 { --row: 37; }
+.icons-DungTraitB17 { --row: 38; }
+.icons-DungTraitB18 { --row: 39; }
+.icons-DungTraitB19 { --row: 40; }
+.icons-DungTraitB2 { --row: 41; }
+.icons-DungTraitB20 { --row: 42; }
+.icons-DungTraitB21 { --row: 43; }
+.icons-DungTraitB22 { --row: 44; }
+.icons-DungTraitB23 { --row: 45; }
+.icons-DungTraitB24 { --row: 46; }
+.icons-DungTraitB25 { --row: 47; }
+.icons-DungTraitB26 { --row: 48; }
+.icons-DungTraitB27 { --row: 49; }
+.icons-DungTraitB3 { --row: 50; }
+.icons-DungTraitB4 { --row: 51; }
+.icons-DungTraitB5 { --row: 52; }
+.icons-DungTraitB6 { --row: 53; }
+.icons-DungTraitB7 { --row: 54; }
+.icons-DungTraitB8 { --row: 55; }
+.icons-DungTraitB9 { --row: 56; }

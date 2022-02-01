@@ -70,6 +70,11 @@ function UploadProfile() {
         }
     }
 
+    const timeSinceLastUpload = useMemo(() => {
+        const time = new Date();
+        return time.getTime() - (lastUpload?.getTime() ?? 0);
+    }, [lastUpload]);
+
     useEffect(() => {
         const user = authContext?.user;
         if (user) {
@@ -120,7 +125,7 @@ function UploadProfile() {
                         <ComponentAndLabel
                             label={"Time till your next upload"}
                             component={
-                                <TimeDown lastUpdated={lastUpload} addSeconds={14400} />
+                                <TimeDown addSeconds={14400 - (timeSinceLastUpload / 1000)} />
                             }
                         />
                     </Box>
