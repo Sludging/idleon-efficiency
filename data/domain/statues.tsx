@@ -44,7 +44,7 @@ export class Statue {
             switch (this.displayName) {
                 case "Power Statue":
                 case "Mining Statue":
-                case "Defence Statue":
+                case "Thicc Skin Statue":
                 case "Oceanman Statue":
                     talentBonus += (player.talents.find(x => x.skillIndex == 112 || x.skillIndex == 127)?.getBonus() ?? 0) / 100;
                     break;
@@ -54,14 +54,14 @@ export class Statue {
                 case "Ol Reliable Statue":
                     talentBonus += (player.talents.find(x => x.skillIndex == 307 || x.skillIndex == 292)?.getBonus() ?? 0) / 100;
                     break;
-                case "Exp Statue":
+                case "Exp Book Statue":
                 case "Lumberbob Statue":
                 case "Beholder Statue":
                 case "Cauldron Statue":
                     talentBonus += (player.talents.find(x => x.skillIndex == 472 || x.skillIndex == 487)?.getBonus() ?? 0) / 100;
                     break;
                 case "EhExPee Statue":
-                case "Kapow Statue":
+                case "Kachow Statue":
                 case "Feasty Statue":
                     talentBonus += (player.talents.find(x => x.skillIndex == 37)?.getBonus() ?? 0) / 100;
                     break;

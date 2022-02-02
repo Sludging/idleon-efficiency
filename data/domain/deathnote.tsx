@@ -31,6 +31,19 @@ export class Deathnote {
         }
     }
 
+    getNextRankReq = (rank: number) => {
+        switch (rank) {
+            case 0: return 25000;
+            case 1: return 100000;
+            case 2: return 250000;
+            case 3: return 500000;
+            case 4: return 1000000;
+            case 5: return 5000000;
+            case 7: return 100000000;
+            default: return 0;
+        }
+    }
+
     getRankClass = (rank: number) => {
         if (rank == 0) { 
             return '';

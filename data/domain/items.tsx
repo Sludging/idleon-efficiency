@@ -1,3 +1,5 @@
+import { lavaLog, round } from "../utility";
+
 export const filteredMissingItems = [
     'CardsC13',
     'CardsC14',
@@ -53,7 +55,6 @@ export const filteredMissingItems = [
     'StampC13',
     'StampC16',
     'StampC17',
-    'StonePremWIS',
     'TestObj10',
     'TestObj14',
     'TestObj15',
@@ -247,6 +248,7 @@ interface ItemProps {
     dropLocations?: DropInfo,
     itemSources?: ItemSources,
     description?: string
+    goldenFoodData?: { effect: string, amount: number }
 }
 
 export interface StoneProps {
@@ -596,8 +598,61 @@ export class Tool extends Item {
 }
 
 export class Food extends Item {
+    goldenFood: { effect: string, amount: number } | undefined
     constructor(data: ItemProps) {
         super(data);
+        if (data.goldenFoodData) {
+            this.goldenFood = {
+                effect: data.goldenFoodData.effect,
+                amount: data.goldenFoodData.amount
+            }
+        }
+    }
+
+    goldFoodBonus = (stack: number, goldFoodMulti: number = 0) => {
+        if (!this.goldenFood) {
+            return 0;
+        }
+
+        return round(this.goldenFood.amount * goldFoodMulti * 0.05 * lavaLog(1 + stack)*(1 + lavaLog(1 + stack)/2.14));
+    }
+
+    getBonusText = (stack: number, goldFoodMulti: number = 0) => {
+        if (!this.goldenFood) {
+            return "";
+        }
+
+        return this.goldenFood.effect.replace(/\[/, this.goldFoodBonus(stack, goldFoodMulti).toFixed(1));
+    }
+
+    duplicate = () => {
+        return new Food({
+            internalName: this.internalName,
+            displayName: this.displayName,
+            sellPrice: this.sellPrice,
+            typeGen: this.typeGen,
+            Type: this.type,
+            lvReqToCraft: this.lvReqToCraft,
+            lvReqToEquip: this.lvReqToEquip,
+            Class: this.allowedClass,
+            Weapon_Power: this.weaponPower,
+            STR: this.str,
+            AGI: this.agi,
+            WIS: this.wis,
+            LUK: this.luk,
+            Defence: this.defence,
+            miscUp1: this.miscUp1,
+            miscUp2: this.miscUp2,
+            Upgrade_Slots_Left: this.upgradeSlots,
+            Skill: this.skill,
+            Skill_Power: this.skillPower,
+            Speed: this.speed,
+            Reach: this.reach,
+            dropLocations: this.dropInfo,
+            itemSources: this.sources,
+            description: this.description,
+            goldenFoodData: this.goldenFood
+        });
     }
 }
 

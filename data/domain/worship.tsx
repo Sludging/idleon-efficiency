@@ -64,6 +64,10 @@ export class Totem {
 
     }
 
+    getChargeCost = () => {
+        return Number(worshipBaseInfo[this.index][6]);
+    }
+
     getSoulRewards = (efficiency: number = 0, foodBonus: number = 0) => {
         return Math.floor(5 * (1 + (this.getEfficiencyBonus(efficiency) / 100)) * this.getWaveMultiplier() * ( 1 + (foodBonus / 100)))
     }

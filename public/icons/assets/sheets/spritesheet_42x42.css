@@ -1,0 +1,62 @@
+.icons-4242 {
+    background-image: url(spritesheet_42x42.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 100.0%;
+    height: 0;
+    background-size: cover;
+    background-position: 0 calc(var(--row) * 2.0%)
+}
+.icons-4242:not(.icons-DungItems0):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
+            .icons-DungItems0 { --row: 0; }
+.icons-DungItems1 { --row: 1; }
+.icons-DungItems10 { --row: 2; }
+.icons-DungItems11 { --row: 3; }
+.icons-DungItems12 { --row: 4; }
+.icons-DungItems13 { --row: 5; }
+.icons-DungItems14 { --row: 6; }
+.icons-DungItems15 { --row: 7; }
+.icons-DungItems16 { --row: 8; }
+.icons-DungItems17 { --row: 9; }
+.icons-DungItems18 { --row: 10; }
+.icons-DungItems19 { --row: 11; }
+.icons-DungItems2 { --row: 12; }
+.icons-DungItems20 { --row: 13; }
+.icons-DungItems21 { --row: 14; }
+.icons-DungItems22 { --row: 15; }
+.icons-DungItems23 { --row: 16; }
+.icons-DungItems24 { --row: 17; }
+.icons-DungItems25 { --row: 18; }
+.icons-DungItems26 { --row: 19; }
+.icons-DungItems27 { --row: 20; }
+.icons-DungItems28 { --row: 21; }
+.icons-DungItems29 { --row: 22; }
+.icons-DungItems3 { --row: 23; }
+.icons-DungItems30 { --row: 24; }
+.icons-DungItems31 { --row: 25; }
+.icons-DungItems32 { --row: 26; }
+.icons-DungItems33 { --row: 27; }
+.icons-DungItems34 { --row: 28; }
+.icons-DungItems35 { --row: 29; }
+.icons-DungItems36 { --row: 30; }
+.icons-DungItems37 { --row: 31; }
+.icons-DungItems38 { --row: 32; }
+.icons-DungItems39 { --row: 33; }
+.icons-DungItems4 { --row: 34; }
+.icons-DungItems40 { --row: 35; }
+.icons-DungItems41 { --row: 36; }
+.icons-DungItems42 { --row: 37; }
+.icons-DungItems43 { --row: 38; }
+.icons-DungItems44 { --row: 39; }
+.icons-DungItems45 { --row: 40; }
+.icons-DungItems46 { --row: 41; }
+.icons-DungItems47 { --row: 42; }
+.icons-DungItems48 { --row: 43; }
+.icons-DungItems5 { --row: 44; }
+.icons-DungItems6 { --row: 45; }
+.icons-DungItems7 { --row: 46; }
+.icons-DungItems8 { --row: 47; }
+.icons-DungItems9 { --row: 48; }
+.icons-Mgpushb { --row: 49; }
+.icons-PrintSlot { --row: 50; }
