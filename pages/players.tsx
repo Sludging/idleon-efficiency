@@ -34,7 +34,7 @@ import TipDisplay, { TipDirection } from '../components/base/TipDisplay';
 import { Next } from 'grommet-icons';
 import { NextSeo } from 'next-seo';
 import { MouseEventHandler } from 'hoist-non-react-statics/node_modules/@types/react';
-import { Item, ItemStat, DropInfo, ItemSources } from '../data/domain/items';
+import { Item, ItemStat, DropInfo, ItemSources, Food } from '../data/domain/items';
 import { Storage } from '../data/domain/storage';
 import { Prayer } from '../data/domain/prayers';
 import { TimeDown, TimeUp } from '../components/base/TimeDisplay';
@@ -44,6 +44,9 @@ import TextAndLabel, { ComponentAndLabel } from '../components/base/TextAndLabel
 import { Bribe, BribeStatus } from '../data/domain/bribes';
 import { Skilling } from '../data/domain/skilling';
 import { SaltLick } from '../data/domain/saltLick';
+import { Family } from '../data/domain/family';
+import { Achievement, AchievementConst } from '../data/domain/achievements';
+import { Dungeons, PassiveType } from '../data/domain/dungeons';
 
 
 function ItemSourcesDisplay({ sources, dropInfo }: { sources: ItemSources, dropInfo: DropInfo }) {
@@ -195,6 +198,15 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
             * (1 + crystalSpawnStamp / 100) * (1 + cardBonus / 100);
     }, [appContext, player])
 
+    
+    const secondsSinceUpdate = useMemo(() => {
+        const lastUpdated = appContext.data.getLastUpdated(true) as Date | undefined;
+        if (lastUpdated) {
+            return (new Date().getTime() - lastUpdated.getTime()) / 1000;
+        }
+        return 0;
+    }, [appContext]);
+
     return (
         <Box pad="medium">
             <Text size='medium'>Random Stats</Text>
@@ -209,7 +221,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     }
                     <Box direction="row" gap="xsmall">
                         <Text size="small">Away Since =</Text>
-                        {player.afkFor < 100 ? "Active" : <TimeUp addSeconds={player.afkFor} lastUpdated={appContext.data.getLastUpdated(true) as Date} />}
+                        {player.afkFor < 100 ? "Active" : <TimeUp addSeconds={player.afkFor + secondsSinceUpdate} />}
                     </Box>
                     <Text size="small">STR = {player.stats.strength}</Text>
                     <Text size="small">AGI = {player.stats.agility}</Text>
@@ -388,9 +400,12 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
     )
 }
 
-function ItemDisplay({ item, size }: { item: Item | undefined, size?: string }) {
+function ItemDisplay({ item, size, goldFoodMulti }: { item: Item | undefined, size?: string, goldFoodMulti?: number }) {
 
     const statsDisplay = (stats: ItemStat[], description: string) => {
+        if ((item as Food).goldenFood != undefined) {
+            return <Text>{(item as Food).getBonusText(item?.count ?? 0, goldFoodMulti)}</Text>
+        }
         if (description) {
             return <Text>{description}</Text>
         }
@@ -433,6 +448,17 @@ function ItemDisplay({ item, size }: { item: Item | undefined, size?: string }) 
 
 
 function EquipmentDisplay({ player }: { player: Player }) {
+    const appContext = useContext(AppContext);
+    const theData = appContext.data.getData();
+    const family = theData.get("family") as Family;
+    const stampData = theData.get("stamps") as Stamp[][];
+    const achievementsInfo = theData.get("achievements") as Achievement[];
+
+    const goldFoodStampBonus = stampData.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC7")?.getBonus() ?? 0;
+    const goldFoodAchievement = achievementsInfo[AchievementConst.GoldFood].completed;
+    const goldFoodMulti = player.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus() ?? 0, goldFoodStampBonus, goldFoodAchievement);
+
+
     return (
         <Box pad="medium">
             <Box direction="row" gap="medium" wrap>
@@ -478,7 +504,7 @@ function EquipmentDisplay({ player }: { player: Player }) {
                         {
                             player.gear.food.slice(0, 8).map((equip, index) => (
                                 <Box pad="xsmall" border={{ color: 'grey-1' }} key={index}>
-                                    <ItemDisplay item={equip} />
+                                    <ItemDisplay item={equip} goldFoodMulti={goldFoodMulti} />
                                 </Box>
                             ))
                         }
@@ -551,11 +577,17 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
         const shrines = theData.get("shrines") as Shrine[];
         const prayers = theData.get("prayers") as Prayer[];
         const saltLick = theData.get("saltLick") as SaltLick;
+        const family = theData.get("family") as Family;
+        const stampData = theData.get("stamps") as Stamp[][];
+        const achievementsInfo = theData.get("achievements") as Achievement[];
+        const dungeonsData = theData.get("dungeons") as Dungeons;
 
-        if (shrines && prayers && saltLick && playerStatues) {
+        if (shrines && prayers && saltLick && playerStatues && family && stampData && achievementsInfo) {
             const saltLickBonus = saltLick.getBonus(3);
-            const dungeonBonus = lavaFunc("decay", 10, 45, 100); // TODO: Actual dungeon data!
-            const allSkillXP = Skilling.getAllSkillXP(player, shrines, playerStatues, prayers, saltLickBonus, dungeonBonus);
+            const dungeonBonus = (dungeonsData.passives.get(PassiveType.Flurbo) ?? [])[2]?.getBonus() ?? 0; // Lava is looking at the wrong bonus.
+            const goldFoodStampBonus = stampData.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC7")?.getBonus() ?? 0;
+            const goldFoodAchievement = achievementsInfo[AchievementConst.GoldFood].completed;
+            const allSkillXP = Skilling.getAllSkillXP(player, shrines, playerStatues, prayers, saltLickBonus, dungeonBonus, family, goldFoodStampBonus, goldFoodAchievement);
             const xpMulti = player.anvil.getXPMulti(player, allSkillXP);
             return (100 * (player.anvil.getXP(xpMulti) - 1));
         }
@@ -657,7 +689,6 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
                         margin={{right: 'small'}}
                     />
                 </Box>
-                <Text size="xsmall">* XP isn&apos;t accurate yet, will be improved on.</Text>
                 {player.anvil.currentlySelect.indexOf(-1) > -1 && <Text>UNUSED PRODUCTION</Text>}
             </Box>
             <Box gap="small">
@@ -695,7 +726,7 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
                                 </Box>
                                 <Box direction="row" gap="xsmall">
                                     <Text size="small">Time till cap =</Text>
-                                    <TimeDown addSeconds={timeTillCap} lastUpdated={appContext.data.getLastUpdated(true) as Date} />
+                                    <TimeDown addSeconds={timeTillCap} />
                                 </Box>
                                 <Text size="small">Production Per Hour (per hammer) = {Math.round(anvilSpeed / anvilItem.time)} </Text>
                                 <Text size="small">Total Produced of this item = {nFormatter(Math.round(anvilItem.totalProduced))}</Text>

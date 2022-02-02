@@ -22,9 +22,8 @@ import { AppContext, AppStatus } from '../data/appContext'
 import { AuthContext } from '../data/firebase/authContext'
 import { useRouter } from 'next/dist/client/router';
 
-import { CaretDownFill, DocumentUser, Down, FormDown, Logout, Menu as MenuIcon, User } from 'grommet-icons';
+import { CaretDownFill, FormDown, Menu as MenuIcon, User } from 'grommet-icons';
 import TextAndLabel from './base/TextAndLabel';
-import ShadowBox from './base/ShadowBox';
 
 declare const window: Window &
     typeof globalThis & {
@@ -170,6 +169,7 @@ export default function Layout({
                 { subLink: "/looty-tracker", label: "Looty Tracker" },
                 { subLink: "/storage", label: "Storage" },
                 { subLink: "/obols", label: "Obols" },
+                { subLink: "/dungeons", label: "Dungeons" },
             ]
         },
         { link: "/raw-data", label: "Raw Data" },

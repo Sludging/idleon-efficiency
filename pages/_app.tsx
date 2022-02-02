@@ -35,6 +35,8 @@ import '../public/icons/assets/sheets/spritesheet_72x72.css';
 import '../public/icons/assets/sheets/spritesheet_60x40.css';
 import '../public/icons/assets/sheets/spritesheet_62x62.css';
 import '../public/icons/assets/sheets/spritesheet_104x120.css';
+import '../public/icons/assets/sheets/spritesheet_42x42.css';
+import '../public/icons/assets/sheets/spritesheet_51x51.css';
 import '../public/icons/assets/sheets/spritesheet_constellations.css';
 import Layout from '../components/layout';
 
@@ -76,7 +78,12 @@ const customTheme = deepMerge(dark, {
       "yellow-1": "#ffecc9",
       "background": "#1B1D24",
       "white-1": "#30333A",
-      "placeholder": "#96979a"
+      "placeholder": "#96979a",
+      "Common": "#d5d5d5",
+      "Uncommon": "#7be08e",
+      "Rare": "#7897d5",
+      "Epic": "#bc93ff",
+      "Legendary": "#e49c5f",
     }
   },
   notification: {
