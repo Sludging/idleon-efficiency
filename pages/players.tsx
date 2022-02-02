@@ -675,7 +675,6 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
                         margin={{right: 'small'}}
                     />
                 </Box>
-                <Text size="xsmall">* XP isn&apos;t accurate yet, will be improved on.</Text>
                 {player.anvil.currentlySelect.indexOf(-1) > -1 && <Text>UNUSED PRODUCTION</Text>}
             </Box>
             <Box gap="small">

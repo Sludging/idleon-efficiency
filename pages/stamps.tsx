@@ -17,6 +17,9 @@ import { Alchemy, AlchemyConst } from "../data/domain/alchemy";
 import { Bribe, BribeConst, BribeStatus } from "../data/domain/bribes";
 import styled from 'styled-components'
 import { NextSeo } from 'next-seo';
+import { Item } from "../data/domain/items";
+import ItemSourcesDisplay from "../components/base/ItemSourceDisplay";
+import TipDisplay, { TipDirection } from "../components/base/TipDisplay";
 
 const ShadowBox = styled(Box)`
     box-shadow: -7px 8px 16px 0 rgba(0,0,0,0.17)
@@ -24,6 +27,11 @@ const ShadowBox = styled(Box)`
 
 function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stamp, index: number, blueFlavPercent: number, hasBribe: boolean }) {
     const size = useContext(ResponsiveContext)
+    const appContext = useContext(AppContext);
+    const theData = appContext.data.getData();
+    const allItems = theData.get("itemsData") as Item[];
+    const stampItem = allItems.find(item => item.internalName == stamp.raw_name);
+
     const getCardClass = () => {
         let className = `icons-${stamp.raw_name}_x1`;
         if (stamp.raw_name == "StampA35")
@@ -33,46 +41,32 @@ function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stam
 
     function TipContent({ stamp, faceLeft }: { stamp: Stamp, faceLeft: boolean }) {
         if (stamp.level == 0) {
-            return <></>
+            if (stampItem && stampItem.sources.sources.length > 0) {
+                return <ItemSourcesDisplay sources={stampItem.sources} dropInfo={stampItem.dropInfo} />
+            }
+            else {
+                return <Box>Unobtainable</Box>
+            }
         }
         return (
-            <Box direction="row" align="center" overflow="hidden">
-                {!faceLeft && size != "small" &&
-                    <svg viewBox="0 0 22 22" version="1.1" width="22px" height="22px">
-                        <polygon
-                            fill="white"
-                            points="6 2 18 12 6 22"
-                            transform="matrix(-1 0 0 1 30 0)"
-                        />
-                    </svg>
-            }
-                <Box pad="small" gap="small" background="white">
-                    <Text size={size == "small" ? 'small' : ''} weight="bold">{stamp.name} ({stamp.level})</Text>
-                    <hr style={{ width: "100%"}} />
-                    <Text size="small">Bonus: {stamp.getBonusText()}</Text>
-                    {stamp.isMaxLevel() && <Box direction="row" align="center"><Text size="small">Material Cost: {nFormatter(stamp.getMaterialCost(blueFlavPercent))}</Text><Box width={{max: '36px', min: '36px'}} fill><Box className={`icons-7272 icons-${stamp.data.material}`} /></Box></Box>}
-                    <Box direction="row" gap="small"><Text size="small">Cost: </Text><CoinsDisplay coinMap={getCoinsArray(stamp.getGoldCost(hasBribe, blueFlavPercent))} /></Box>
-                </Box>
-                {faceLeft && size != "small" &&
-                    <svg viewBox="0 0 22 22" version="1.1" width="22px" height="22px">
-                        <polygon
-                            fill="white"
-                            points="0 2 12 12 0 22"
-                        />
-                    </svg>
-                }
+            <Box gap="small">
+                <Text size="small">Bonus: {stamp.getBonusText()}</Text>
+                {stamp.isMaxLevel() && <Box direction="row" align="center"><Text size="small">Material Cost: {nFormatter(stamp.getMaterialCost(blueFlavPercent))}</Text><Box width={{max: '36px', min: '36px'}} fill><Box className={`icons-7272 icons-${stamp.data.material}`} /></Box></Box>}
+                <Box direction="row" gap="small"><Text size="small">Cost: </Text><CoinsDisplay coinMap={getCoinsArray(stamp.getGoldCost(hasBribe, blueFlavPercent))} /></Box>
             </Box>
         )
     }
 
     return (
         <Box pad="small" border={{color: 'grey-1'}} key={`stamp_${index}_${stamp.raw_name}`}>
-                <Tip
-                    plain
-                    content={
+                <TipDisplay
+                    body={
                         <TipContent stamp={stamp} faceLeft={stamp.type == "Misc Stamp"} />
                     }
-                    dropProps={{ align: size == "small" ? { top: 'bottom' } : stamp.type == "Misc Stamp" ? { right: 'left' } : { left: 'right' } }}
+                    heading={`${stamp.name} (${stamp.level})`}
+                    direction={ size == "small" ? TipDirection.Down : stamp.type == "Misc Stamp" ? TipDirection.Left : TipDirection.Right }
+                    size="medium"
+                    visibility={stamp.name == "Blank" || stamp.name == "FILLER" ? 'none' : undefined}
                 >
                     {/* Do the opacity thing in styled components? */}
                     <Box direction="row" fill align="center">
@@ -83,7 +77,7 @@ function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stam
                             <Text size="medium">{stamp.level}</Text>
                         </Box>
                     </Box>
-                </Tip>
+                </TipDisplay>
         </Box>
     )
 }

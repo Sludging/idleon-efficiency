@@ -19,9 +19,10 @@ export interface TipProps {
     size: string
     direction: TipDirection
     maxWidth?: string
+    visibility?: string
 }
 
-export default function TipDisplay({ heading, body, children, size, direction, maxWidth = ''}: TipProps) {
+export default function TipDisplay({ heading, body, children, size, direction, maxWidth = '', visibility = 'inherit'}: TipProps) {
     let dropAlignment = {};
     switch (direction) {
         case TipDirection.Down:
@@ -42,7 +43,7 @@ export default function TipDisplay({ heading, body, children, size, direction, m
         <Tip
             plain
             content={
-                <Box pad="small" gap="small" background="white" width={{max: maxWidth}}>
+                <Box pad="small" gap="small" background="white" width={{max: maxWidth}} style={{display: visibility}}>
                     <Text size={size == "small" ? 'small' : ''} weight="bold">{heading}</Text>
                     <hr style={{ width: "100%"}} />
                     <Text>{body}</Text>
