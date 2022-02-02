@@ -617,6 +617,14 @@ export class Food extends Item {
         return round(this.goldenFood.amount * goldFoodMulti * 0.05 * lavaLog(1 + stack)*(1 + lavaLog(1 + stack)/2.14));
     }
 
+    getBonusText = (stack: number, goldFoodMulti: number = 0) => {
+        if (!this.goldenFood) {
+            return "";
+        }
+
+        return this.goldenFood.effect.replace(/\[/, this.goldFoodBonus(stack, goldFoodMulti).toFixed(1));
+    }
+
     duplicate = () => {
         return new Food({
             internalName: this.internalName,
