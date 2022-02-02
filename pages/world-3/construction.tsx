@@ -4,7 +4,8 @@ import {
     Text,
     Grid,
     ResponsiveContext,
-    CheckBox
+    CheckBox,
+    Meter
 } from 'grommet'
 import { useEffect, useContext, useState, useMemo } from 'react';
 import { AppContext } from '../../data/appContext'
@@ -55,7 +56,7 @@ function RefineryDisplay() {
         const vialBonus = alchemyData?.vials.find((vial) => vial.description.includes("Refinery Cycle Speed"))?.getBonus() ?? 0;
         const saltLickBonus = saltLickData?.getBonus(2) ?? 0;
         const secondsSinceUpdate = (new Date().getTime() - (lastUpdated?.getTime() ?? 0)) / 1000;
-        
+
         const toReturn = [
             { name: "Combustion", time: Math.ceil((900 * Math.pow(4, 0)) / (1 + ((vialBonus + saltLickBonus)) / 100)), timePast: refineryData.timePastCombustion + secondsSinceUpdate }
         ];
@@ -93,7 +94,7 @@ function RefineryDisplay() {
                                 originalArray[squireIndex][1] -= nextCDTime; // adjust the actual array data
                                 if (originalArray[squireIndex][1] == 0) {
                                     const manaBox = squire.postOffice.find(box => box.name == "Magician Starterpack");
-                                    const cdReduction = manaBox?.bonuses[2].getBonus(manaBox.level, 2) ?? 0; 
+                                    const cdReduction = manaBox?.bonuses[2].getBonus(manaBox.level, 2) ?? 0;
                                     originalArray[squireIndex][1] = Math.floor((1 - cdReduction / 100) * 72000);
                                     const timePerSquireSkilluse = (squire.talents.find(talent => talent.skillIndex == 130)?.getBonus(false, false, true) ?? 0) * cycleInfo[Math.floor(index / 3)].time
                                     timeToNextRank -= timePerSquireSkilluse;
@@ -116,7 +117,7 @@ function RefineryDisplay() {
         if (squirePowha) {
             return theSlowRockMethod();
         }
-        
+
 
         return [];
 
@@ -320,7 +321,7 @@ function RefineryDisplay() {
                                                                         <Box className={costItem?.getClass()} />
                                                                     </Box>
                                                                     <Box direction="row" gap="xsmall" align="center">
-                                                                        <Text color={storageQuantity < resourceCostToMax ? 'accent-1' : '' } size="small">{nFormatter(resourceCostToMax)}</Text>
+                                                                        <Text color={storageQuantity < resourceCostToMax ? 'accent-1' : ''} size="small">{nFormatter(resourceCostToMax)}</Text>
                                                                         <Text size="small">({nFormatter(storageQuantity)})</Text>
                                                                     </Box>
                                                                 </Box>
@@ -369,7 +370,7 @@ function SaltLickDisplay() {
 
     return (
         <Box>
-            <Box margin={{bottom: 'small'}}>
+            <Box margin={{ bottom: 'small' }}>
                 <Text size="small">* Green text &apos;In Storage&apos; means you can afford the next level.</Text>
             </Box>
             {
@@ -384,7 +385,7 @@ function SaltLickDisplay() {
                         const costToMax = saltLickData.getCostToMax(index);
                         const costToNextLevel = saltLickData.getCost(index);
                         return (
-                            <ShadowBox key={index} background="dark-1" pad="medium" direction="row" align="center" justify="between" margin={{bottom: 'small'}}>
+                            <ShadowBox key={index} background="dark-1" pad="medium" direction="row" align="center" justify="between" margin={{ bottom: 'small' }}>
                                 <Grid columns={["35%", "10%", "20%", "15%", "15%"]} fill gap="small" align="center">
                                     <TextAndLabel textSize='small' text={saltLickData.getBonusText(index)} label="Bonus" />
                                     <TextAndLabel text={`${bonus.level} / ${bonus.maxLevel}`} label="Level" />
@@ -581,15 +582,41 @@ function DeathnoteDisplay() {
                         <ShadowBox background="dark-1" key={index} gap="medium" pad="medium">
                             <Text>{worldName} (Bonus {worldTierInfo[index]}%)</Text>
                             {
-                                [...deathnoteMobs.entries()].map(([mobName, killCount], mobIndex) => (
-                                    <Box key={mobIndex} direction="row" gap="small" align="center" border={deathnoteMobs.size != mobIndex + 1 ? { side: 'bottom', color: 'grey-1', size: '2px' } : undefined} pad={{ bottom: "small" }}>
-                                        <Box width={{ max: '20px', min: '20px' }}>
-                                            <Box className={deathnoteData?.getRankClass(deathnoteData?.getDeathnoteRank(killCount))} />
+                                [...deathnoteMobs.entries()].map(([mobName, killCount], mobIndex) => {
+                                    const deathnoteRank = deathnoteData?.getDeathnoteRank(killCount);
+                                    const nextKillReq = deathnoteData?.getNextRankReq(deathnoteRank);
+                                    return (
+                                        <Box key={mobIndex} gap="small" border={deathnoteMobs.size != mobIndex + 1 ? { side: 'bottom', color: 'grey-1', size: '2px' } : undefined} pad={{ bottom: "small" }}>
+                                            <Box direction="row" align="center" gap="small">
+                                                <Box width={{ max: '20px', min: '20px' }}>
+                                                    <Box className={deathnoteData?.getRankClass(deathnoteRank)} />
+                                                </Box>
+                                                <Box gap="small">
+                                                <Text size="xsmall">{mobName}</Text>
+                                                <Meter
+                                                    size="small"
+                                                    thickness='2px'
+                                                    type="bar"
+                                                    background="grey-1"
+                                                    color="brand"
+                                                    values={[
+                                                        {
+                                                            value: killCount,
+                                                            label: 'current',
+                                                            color: 'brand'
+                                                        }
+                                                    ]}
+                                                    max={deathnoteData?.getNextRankReq(deathnoteRank)} />
+                                                <Box direction="row" justify="between">
+                                                    <Text size="xsmall">{nFormatter(killCount)}</Text>
+                                                    <Text size="small">{nFormatter(deathnoteData?.getNextRankReq(deathnoteRank))}</Text>
+                                                </Box>
+                                            </Box>
+                                                
+                                            </Box>
                                         </Box>
-                                        <Text size="small">{mobName}</Text>
-                                        <Text size="small">{nFormatter(killCount)}</Text>
-                                    </Box>
-                                ))
+                                    )
+                                })
                             }
                         </ShadowBox>
                     )
@@ -626,14 +653,14 @@ function ShrinesDisplay() {
     }
     return (
         <Box gap="medium" pad="large">
-            <TextAndLabel 
+            <TextAndLabel
                 label="Total Levels"
                 text={shrineData.reduce((sum, shrine) => sum += shrine.level, 0).toString()}
             />
             <Box>
                 {shrineData && shrineData.filter(shrine => shrine.level > 0).map((shrine, index) => {
                     return (
-                        <ShadowBox key={index} background="dark-1" pad="medium" margin={{bottom: 'small'}}>
+                        <ShadowBox key={index} background="dark-1" pad="medium" margin={{ bottom: 'small' }}>
                             <Box gap="small">
                                 <Box direction="row">
                                     <Box width={{ min: "30px", max: '30px' }} margin={{ right: 'small' }}>
@@ -642,30 +669,30 @@ function ShrinesDisplay() {
                                     <Text>{shrine.name}</Text>
                                 </Box>
                                 <Box direction="row" justify="between" wrap>
-                                    <TextAndLabel 
+                                    <TextAndLabel
                                         label="Level"
                                         text={shrine.level.toString()}
-                                        margin={{right: 'medium', bottom: 'small'}}
+                                        margin={{ right: 'medium', bottom: 'small' }}
                                     />
-                                    <TextAndLabel 
+                                    <TextAndLabel
                                         label="Current Map"
                                         text={MapInfo.find(map => map.id == shrine.currentMap)?.area ?? ""}
-                                        margin={{right: 'medium', bottom: 'small'}}
+                                        margin={{ right: 'medium', bottom: 'small' }}
                                     />
-                                    <TextAndLabel 
+                                    <TextAndLabel
                                         label="Hours"
                                         text={`${Math.round(shrine.accumulatedHours)}/${Math.round(shrine.getHourRequirement())}`}
-                                        margin={{right: 'medium', bottom: 'small'}}
+                                        margin={{ right: 'medium', bottom: 'small' }}
                                     />
-                                    <TextAndLabel 
+                                    <TextAndLabel
                                         label="Bonus (without card)"
                                         text={`${Math.round(shrine.getBonus(shrine.currentMap, 0))}%`}
-                                        margin={{right: 'medium', bottom: 'small'}}
+                                        margin={{ right: 'medium', bottom: 'small' }}
                                     />
-                                    <TextAndLabel 
+                                    <TextAndLabel
                                         label="Bonus (with card)"
                                         text={`${Math.round(shrine.getBonus(shrine.currentMap, shrineCardBonus))}%`}
-                                        margin={{right: 'medium', bottom: 'small'}}
+                                        margin={{ right: 'medium', bottom: 'small' }}
                                     />
                                 </Box>
                             </Box>
@@ -706,7 +733,7 @@ function BuildingsDisplay() {
     }
     return (
         <Box gap="medium" pad="large">
-            <TextAndLabel 
+            <TextAndLabel
                 label="Total Levels"
                 text={constructionData.buildings.reduce((sum, building) => sum += building.level, 0).toString()}
             />
@@ -722,33 +749,33 @@ function BuildingsDisplay() {
                                     <Text size="small">{building.name}</Text>
                                 </Box>
                                 <Box>
-                                    <TextAndLabel 
+                                    <TextAndLabel
                                         label="Level"
                                         textSize="small"
                                         text={`${building.level.toString()}/${building.maxLvl.toString()}`}
-                                        margin={{right: 'large', bottom: 'small'}}
+                                        margin={{ right: 'large', bottom: 'small' }}
                                     />
-                                    { building.nextLevelUnlocked || building.level == building.maxLvl ? 
-                                        <TextAndLabel 
-                                        label="Build Req"
-                                        textSize="small"
-                                        text={"Maxed"}
-                                        margin={{right: 'large', bottom: 'small'}}
-                                    /> :
-                                    <TextAndLabel 
-                                        label="Build Req"
-                                        textSize="small"
-                                        text={`${nFormatter(building.currentXP)}/${nFormatter(building.getBuildCost())}`}
-                                        margin={{right: 'large', bottom: 'small'}}
-                                    />}
+                                    {building.nextLevelUnlocked || building.level == building.maxLvl ?
+                                        <TextAndLabel
+                                            label="Build Req"
+                                            textSize="small"
+                                            text={"Maxed"}
+                                            margin={{ right: 'large', bottom: 'small' }}
+                                        /> :
+                                        <TextAndLabel
+                                            label="Build Req"
+                                            textSize="small"
+                                            text={`${nFormatter(building.currentXP)}/${nFormatter(building.getBuildCost())}`}
+                                            margin={{ right: 'large', bottom: 'small' }}
+                                        />}
                                 </Box>
-                                { building.level != building.maxLvl &&
+                                {building.level != building.maxLvl &&
                                     <Box>
                                         <Box wrap align="start" gap="small">
                                             <Text size="small">Next level costs</Text>
                                             <Box gap="xsmall">
                                                 {
-                                                    building.lvlUpReq && building.getLevelCosts(building.level,costCruncher).map((costData, index) => {
+                                                    building.lvlUpReq && building.getLevelCosts(building.level, costCruncher).map((costData, index) => {
                                                         const costItem = itemData?.find((item) => item.internalName == costData.item);
                                                         if (costItem) {
                                                             return (
@@ -767,7 +794,7 @@ function BuildingsDisplay() {
                                             </Box>
                                         </Box>
                                     </Box>
-                                    }
+                                }
                             </Grid>
                         </ShadowBox>
                     )

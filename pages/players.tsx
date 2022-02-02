@@ -34,7 +34,7 @@ import TipDisplay, { TipDirection } from '../components/base/TipDisplay';
 import { Next } from 'grommet-icons';
 import { NextSeo } from 'next-seo';
 import { MouseEventHandler } from 'hoist-non-react-statics/node_modules/@types/react';
-import { Item, ItemStat, DropInfo, ItemSources } from '../data/domain/items';
+import { Item, ItemStat, DropInfo, ItemSources, Food } from '../data/domain/items';
 import { Storage } from '../data/domain/storage';
 import { Prayer } from '../data/domain/prayers';
 import { TimeDown, TimeUp } from '../components/base/TimeDisplay';
@@ -400,9 +400,12 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
     )
 }
 
-function ItemDisplay({ item, size }: { item: Item | undefined, size?: string }) {
+function ItemDisplay({ item, size, goldFoodMulti }: { item: Item | undefined, size?: string, goldFoodMulti?: number }) {
 
     const statsDisplay = (stats: ItemStat[], description: string) => {
+        if ((item as Food).goldenFood != undefined) {
+            return <Text>{(item as Food).getBonusText(item?.count ?? 0, goldFoodMulti)}</Text>
+        }
         if (description) {
             return <Text>{description}</Text>
         }
@@ -445,6 +448,17 @@ function ItemDisplay({ item, size }: { item: Item | undefined, size?: string }) 
 
 
 function EquipmentDisplay({ player }: { player: Player }) {
+    const appContext = useContext(AppContext);
+    const theData = appContext.data.getData();
+    const family = theData.get("family") as Family;
+    const stampData = theData.get("stamps") as Stamp[][];
+    const achievementsInfo = theData.get("achievements") as Achievement[];
+
+    const goldFoodStampBonus = stampData.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC7")?.getBonus() ?? 0;
+    const goldFoodAchievement = achievementsInfo[AchievementConst.GoldFood].completed;
+    const goldFoodMulti = player.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus() ?? 0, goldFoodStampBonus, goldFoodAchievement);
+
+
     return (
         <Box pad="medium">
             <Box direction="row" gap="medium" wrap>
@@ -490,7 +504,7 @@ function EquipmentDisplay({ player }: { player: Player }) {
                         {
                             player.gear.food.slice(0, 8).map((equip, index) => (
                                 <Box pad="xsmall" border={{ color: 'grey-1' }} key={index}>
-                                    <ItemDisplay item={equip} />
+                                    <ItemDisplay item={equip} goldFoodMulti={goldFoodMulti} />
                                 </Box>
                             ))
                         }
