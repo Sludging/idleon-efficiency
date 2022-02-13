@@ -1,15 +1,25 @@
 
+export enum TrapSet {
+    Cardboard = 0,
+    Silkskin = 1,
+    Wooden = 2,
+    Natural = 3,
+    Steel = 4
+}
+
 export class Trap {
     playerID: number;
     critterName: string;
     timeSincePut: number;
     trapDuration: number;
+    trapType: TrapSet;
 
     constructor(playerID: number, trapArray: Array<any>) {
         this.playerID = playerID;
         this.critterName = trapArray[3];
         this.timeSincePut = trapArray[2];
         this.trapDuration = trapArray[6];
+        this.trapType = trapArray[5];
     }
 
     isReady = () => {
