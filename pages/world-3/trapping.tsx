@@ -100,7 +100,7 @@ function Traps() {
                         {
                             playerTraps.filter(x => playerNames[x[0]?.playerID] != undefined).map((trapsData, index) => {
                                 const boxSet = playerData?.find((player) => player.playerID == trapsData[0]?.playerID)?.gear.tools.find((tool) => tool?.type == "Trap Box Set");
-                                const skillLevel = playerData?.find((player) => player.playerID == trapsData[0]?.playerID)?.skills.get(SkillsIndex.Trapping);
+                                const skillLevel = playerData?.find((player) => player.playerID == trapsData[0]?.playerID)?.skills.get(SkillsIndex.Trapping)?.level;
                                 return (
                                     <TableRow key={`traps_${index}`}>
                                         <TableCell><Box><Text size="small">{playerNames[trapsData[0]?.playerID]}</Text><Text title={"Trapping level"} size="small">(Level: {skillLevel})</Text></Box></TableCell>
