@@ -253,20 +253,26 @@ export class Anvil {
     }
 }
 
+export class SkillData {
+    constructor(public level: number, public currentXP: number, public xpReq: number) {}
+}
+
 export class Player {
     playerID: number;
     playerName: string;
     gear: PlayerEquipment = new PlayerEquipment();
     stats: PlayerStats = new PlayerStats();
-    level: number = 0;
-    class: string = "Blank";
-    classId: ClassIndex = ClassIndex.Beginner;
+    level: number = 0; // combine to one "class" class
+    class: string = "Blank"; // combine to one "class" class
+    classId: ClassIndex = ClassIndex.Beginner; // combine to one "class" class
+    classExp: number = 0;
+    classExpReq: number = 0;
     currentMonster: string = "Blank";
     currentMap: string = "Blank";
     currentMapId: number = 0;
     starSigns: StarSign[] = [];
     money: number = 0;
-    skills: Map<SkillsIndex, number>;
+    skills: Map<SkillsIndex, SkillData>;
     skillsRank: Map<SkillsIndex, number>;
     anvil: Anvil = new Anvil();
     capacity: Capacity = new Capacity();
@@ -284,7 +290,7 @@ export class Player {
     constructor(playerID: number, playerName: string) {
         this.playerID = playerID;
         this.playerName = playerName;
-        this.skills = new Map<SkillsIndex, number>();
+        this.skills = new Map<SkillsIndex, SkillData>();
         this.skillsRank = new Map<SkillsIndex, number>();
     }
 
@@ -360,7 +366,7 @@ export class Player {
 
 const keyFunctionMap: Record<string, Function> = {
     "equipment": (doc: Cloudsave, player: Player, allItems: Item[]) => parseEquipment(doc.get(`EquipOrder_${player.playerID}`), doc.get(`EquipQTY_${player.playerID}`), JSON.parse(doc.get(`EMm0_${player.playerID}`)), JSON.parse(doc.get(`EMm1_${player.playerID}`)), player, allItems),
-    "stats": (doc: Cloudsave, player: Player) => parseStats(doc.get(`PVStatList_${player.playerID}`), doc.get(`Lv0_${player.playerID}`), player),
+    "stats": (doc: Cloudsave, player: Player) => parseStats(doc.get(`PVStatList_${player.playerID}`), doc.get(`Lv0_${player.playerID}`), doc.get(`Exp0_${player.playerID}`), doc.get(`ExpReq0_${player.playerID}`), player),
     "class": (doc: Cloudsave, player: Player) => {
         player.class = ClassIndex[doc.get(`CharacterClass_${player.playerID}`)]?.replace(/_/g, " ") || "New Class?";
         player.classId = doc.get(`CharacterClass_${player.playerID}`) as ClassIndex;
@@ -369,7 +375,7 @@ const keyFunctionMap: Record<string, Function> = {
     "map": (doc: Cloudsave, player: Player) => parseMap(doc.get(`CurrentMap_${player.playerID}`), player),
     "starsigns": (doc: Cloudsave, player: Player) => parseStarSigns(doc.get(`PVtStarSign_${player.playerID}`), player),
     "money": (doc: Cloudsave, player: Player) => { player.money = doc.get(`Money_${player.playerID}`) },
-    "skills": (doc: Cloudsave, player: Player) => parseSkills(doc.get(`Lv0_${player.playerID}`), player),
+    "skills": (doc: Cloudsave, player: Player) => parseSkills(doc.get(`Lv0_${player.playerID}`), doc.get(`Exp0_${player.playerID}`), doc.get(`ExpReq0_${player.playerID}`), player),
     "anvil": (doc: Cloudsave, player: Player) => parseAnvil(
         doc.get(`AnvilPA_${player.playerID}`),
         doc.get(`AnvilPAstats_${player.playerID}`),
@@ -475,12 +481,12 @@ const parseAnvil = (anvilProduction: number[][], anvilStats: number[], anvilSele
     player.anvil.currentlySelect = anvilSelected;
 }
 
-const parseSkills = (skills: Array<number>, player: Player) => {
+const parseSkills = (skills: Array<number>, skillXP: Array<number>, skillXPReqs: Array<number>, player: Player) => {
     skills.forEach((skillLevel, skillIndex) => {
         // Only get the indexes we care about
         if (skillIndex in SkillsIndex) {
             // update the player skill level
-            player.skills.set(skillIndex as SkillsIndex, skillLevel);
+            player.skills.set(skillIndex as SkillsIndex, new SkillData(skillLevel, skillXP[skillIndex], skillXPReqs[skillIndex]));
         }
     })
 }
@@ -498,9 +504,11 @@ const parseMap = (currentMap: number, player: Player) => {
     player.currentMap = mapsMap.get(currentMap.toString())?.replace(/_/g, " ") || "New Map?";
 }
 
-const parseStats = (stats: number[], lvZero: number[], player: Player) => {
+const parseStats = (stats: number[], lvZero: number[], skillXP: Array<number>, skillXPReqs: Array<number>, player: Player) => {
     player.stats.setStats(stats);
     player.level = lvZero[0];
+    player.classExp = skillXP[0];
+    player.classExpReq = skillXPReqs[0];
 }
 
 const parseEquipment = (
@@ -574,19 +582,19 @@ export default function parsePlayers(doc: Cloudsave, accountData: Map<string, an
 
     // record skill levels across all players in a map
     parsedData.forEach((player) => {
-        player.skills.forEach((skillLevel, skillIndex) => {
+        player.skills.forEach((skill, skillIndex) => {
             if (!allSkillsMap.has(skillIndex)) {
                 allSkillsMap.set(skillIndex, []);
             }
-            allSkillsMap.get(skillIndex)?.push(skillLevel);
+            allSkillsMap.get(skillIndex)?.push(skill.level);
         });
     });
     parsedData.forEach((player) => {
         if (player) {
-            for (const [skillIndex, skillLevel] of player.skills) {
+            for (const [skillIndex, skill] of player.skills) {
                 const sortedList = allSkillsMap.get(skillIndex)?.sort((a, b) => b - a);
                 if (sortedList) {
-                    const skillRank = sortedList.indexOf(skillLevel);
+                    const skillRank = sortedList.indexOf(skill.level);
                     player.skillsRank.set(skillIndex, skillRank);
                 }
             }

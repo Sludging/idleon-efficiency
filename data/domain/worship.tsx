@@ -114,7 +114,7 @@ export default function parseWorship(totemInfo: number[][], accountData: Map<str
     const stamps = accountData.get("stamps") as Stamp[][];
 
     players.forEach(player => {
-        const worshipLevel = player.skills.get(SkillsIndex.Worship);
+        const worshipLevel = player.skills.get(SkillsIndex.Worship)?.level;
         const praydayStamp = stamps[StampTab.Skill][StampConsts.PraydayIndex];
         let gospelLeaderBonus = alchemy.cauldrons[CauldronIndex.HighIQ].bubbles[AlchemyConst.GospelLeader].getBonus();
         let popeBonus = getActiveBubbles(alchemy, player.activeBubblesString).find(x => x.name == "Call Me Pope")?.getBonus() ?? 0;
