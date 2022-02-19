@@ -14,9 +14,10 @@ import { useState, useEffect, useContext } from 'react';
 import { AppContext } from '../../data/appContext'
 import { NextSeo } from 'next-seo';
 
-import { Trap } from '../../data/domain/traps';
+import { Trap, TrapSet } from '../../data/domain/traps';
 import ShadowBox from '../../components/base/ShadowBox';
 import { Player, SkillsIndex } from '../../data/domain/player';
+import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 
 interface PlayerTrapProps {
     traps: Array<Trap>
@@ -49,10 +50,22 @@ function PlayerTraps(props: PlayerTrapProps) {
                 props.traps.map((trap, index) => {
                     return (
                         <Box key={`trap_${index}`} style={{ background: trap.isReady() ? 'red' : 'none' }} align="center">
-                            <Box width={{max: size == "small" ? '30px': '50px'}} >
-                                <Box title={`Total Duration: ${formatTime(trap.trapDuration)?.replace("in ", "") ?? ""}`} className={`icons-3636 icons-${trap.critterName}_x1`} />
-                            </Box>
+                            <TipDisplay
+                                body={
+                                    <Box>
+                                        <Text>Trap Type: {TrapSet[trap.trapType]}</Text>
+                                        <Text>Original Duration: {formatTime(trap.trapDuration)?.replace("in ", "") ?? ""}</Text>
+                                    </Box>
+                                }
+                                size='medium'
+                                direction={TipDirection.Down}
+                                heading='Trap Info'>
+                                <Box width={{max: size == "small" ? '30px': '50px'}} >
+                                    <Box className={`icons-3636 icons-${trap.critterName}_x1`} />
+                                </Box>
+                            </TipDisplay>
                             <Text textAlign='center' size="xsmall">{formatTime(trap.trapDuration - trap.timeSincePut)}</Text>
+                            
                         </Box>
                     )
                 })
@@ -100,7 +113,7 @@ function Traps() {
                         {
                             playerTraps.filter(x => playerNames[x[0]?.playerID] != undefined).map((trapsData, index) => {
                                 const boxSet = playerData?.find((player) => player.playerID == trapsData[0]?.playerID)?.gear.tools.find((tool) => tool?.type == "Trap Box Set");
-                                const skillLevel = playerData?.find((player) => player.playerID == trapsData[0]?.playerID)?.skills.get(SkillsIndex.Trapping);
+                            const skillLevel = playerData?.find((player) => player.playerID == trapsData[0]?.playerID)?.skills.get(SkillsIndex.Trapping)?.level;
                                 return (
                                     <TableRow key={`traps_${index}`}>
                                         <TableCell><Box><Text size="small">{playerNames[trapsData[0]?.playerID]}</Text><Text title={"Trapping level"} size="small">(Level: {skillLevel})</Text></Box></TableCell>

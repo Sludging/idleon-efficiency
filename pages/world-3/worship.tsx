@@ -158,7 +158,7 @@ function ChargeDisplay() {
                                 <Box direction="row" justify="between">
                                     <ComponentAndLabel
                                         label="Level"
-                                        component={<Box direction="row"><Text>{player.skills.get(SkillsIndex.Worship)?.toString() ?? "0"}</Text><Box width={{ max: '25px', min: '25px' }}><Box title={player.gear.tools[5]?.displayName} className={player.gear.tools[5]?.getClass()} /></Box> </Box>}
+                                        component={<Box direction="row"><Text>{player.skills.get(SkillsIndex.Worship)?.level.toString() ?? "0"}</Text><Box width={{ max: '25px', min: '25px' }}><Box title={player.gear.tools[5]?.displayName} className={player.gear.tools[5]?.getClass()} /></Box> </Box>}
                                     />
                                     <TextAndLabel label="Charge rate" text={`${Math.round(worship.playerData[index].chargeRate * 24)}% / day`} />
                                 </Box>

@@ -100,10 +100,10 @@ export class Worship {
         return base * Math.max(1, popeRate) * (1 + (cardBonus + stampBonus) / 100) * Math.max(talentBonus, 1)
     }
 
-    static getMaxCharge = (skullInternalName: string, cardBonus: number = 0, buffBonus: number = 0, stampBonus: number = 0, alchemyBonus: number = 0, worshipLevel: number = 0, popeRate: number = 0) => {
+    static getMaxCharge = (skullInternalName: string, cardBonus: number = 0, buffBonus: number = 0, stampBonus: number = 0, alchemyBonus: number = 0, worshipLevel: number = 0, popeRate: number = 0, postofficeBonus: number = 0) => {
         const skullChargeBonus = SkullChargeMap[skullInternalName];
         const base = buffBonus + (stampBonus + alchemyBonus * Math.floor(worshipLevel / 10));
-        return Math.floor(Math.max(50, cardBonus + (base + skullChargeBonus * Math.max(popeRate, 1))));
+        return Math.floor(Math.max(50, cardBonus + postofficeBonus + (base + skullChargeBonus * Math.max(popeRate, 1))));
     }
 }
 
@@ -114,7 +114,7 @@ export default function parseWorship(totemInfo: number[][], accountData: Map<str
     const stamps = accountData.get("stamps") as Stamp[][];
 
     players.forEach(player => {
-        const worshipLevel = player.skills.get(SkillsIndex.Worship);
+        const worshipLevel = player.skills.get(SkillsIndex.Worship)?.level;
         const praydayStamp = stamps[StampTab.Skill][StampConsts.PraydayIndex];
         let gospelLeaderBonus = alchemy.cauldrons[CauldronIndex.HighIQ].bubbles[AlchemyConst.GospelLeader].getBonus();
         let popeBonus = getActiveBubbles(alchemy, player.activeBubblesString).find(x => x.name == "Call Me Pope")?.getBonus() ?? 0;
@@ -127,7 +127,8 @@ export default function parseWorship(totemInfo: number[][], accountData: Map<str
         // max charge
         const maxChargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "F10")?.getBonus() ?? 0;
         const talentChargeBonus = player.activeBuffs.find(x => x.skillIndex == TalentConst.ChargeSiphonIndex)?.getBonus(false, true) ?? 0;
-        const maxCharge = player.gear.tools[5] ? Worship.getMaxCharge(player.gear.tools[5].internalName, maxChargeCardBonus, talentChargeBonus, praydayStamp.getBonus(worshipLevel), gospelLeaderBonus, worshipLevel, popeBonus) : 0;
+        const postOfficeBonus = player.postOffice[18].bonuses[1].getBonus(player.postOffice[18].level, 1);
+        const maxCharge = player.gear.tools[5] ? Worship.getMaxCharge(player.gear.tools[5].internalName, maxChargeCardBonus, talentChargeBonus, praydayStamp.getBonus(worshipLevel), gospelLeaderBonus, worshipLevel, popeBonus, postOfficeBonus) : 0;
 
         // charge rate
         const flowinStamp = stamps[StampTab.Skill][StampConsts.FlowinIndex];
