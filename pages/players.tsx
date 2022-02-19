@@ -17,7 +17,7 @@ import { useState, useEffect, useContext, useMemo } from 'react';
 import { AppContext } from '../data/appContext'
 import { GemStore } from '../data/domain/gemPurchases';
 
-import { Player, SkillsIndex } from '../data/domain/player';
+import { Player, SkillData, SkillsIndex } from '../data/domain/player';
 import { ClassIndex, ClassTalentMap, GetTalentArray, TalentConst } from '../data/domain/talents';
 import { CapacityConst, playerInventoryBagMapping } from '../data/domain/capacity';
 import { Alchemy, AlchemyConst, CauldronIndex, Bubble } from "../data/domain/alchemy";
@@ -83,7 +83,7 @@ function ItemSourcesDisplay({ sources, dropInfo }: { sources: ItemSources, dropI
 }
 
 interface SkillProps {
-    skillsMap: Map<SkillsIndex, number>
+    skillsMap: Map<SkillsIndex, SkillData>
     skillsRank: Map<SkillsIndex, number>
 }
 
@@ -116,21 +116,41 @@ function ShowSkills(props: SkillProps) {
                     ['smithing', 'alchemy', 'construction'],
                     ['chopping', 'catching', 'worship'],
                 ]}
-                gap={{ row: "xsmall" }}
+                gap={{ row: "small" }}
             >
                 {
-                    Array.from(props.skillsMap).map(([skillIndex, skillLevel]) => {
+                    Array.from(props.skillsMap).map(([skillIndex, skill]) => {
                         const skillRank = props.skillsRank.get(skillIndex);
                         return (
                             <Box key={`skill_${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} gridArea={`${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} direction="row" gap="medium">
-                                <Box fill align="center" width={{ max: '36px' }}>
-                                    <Box className={getSkillClass(skillIndex)} />
-                                </Box>
-                                <Box>
-                                    <Text size="medium">{skillLevel}</Text>
-                                </Box>
-                                <Box>
-                                    {skillRank != undefined && <Text>{nth(skillRank + 1)}</Text>}
+                                <Box direction="row" align="center" gap="small">
+                                    <Box width={{ max: '36px', min: '36px' }}>
+                                        <Box className={getSkillClass(skillIndex)} />
+                                    </Box>
+                                    <Box gap="small">
+                                        <Box direction="row" gap="small">
+                                            <Text size="small">{skill.level}</Text>
+                                            {skillRank != undefined && <Text size="small">(Ranked {nth(skillRank + 1)})</Text>}
+                                        </Box>
+                                        <Meter
+                                            size="small"
+                                            thickness='2px'
+                                            type="bar"
+                                            background="grey-1"
+                                            color="brand"
+                                            values={[
+                                                {
+                                                    value: skill.currentXP,
+                                                    label: 'current',
+                                                    color: 'brand'
+                                                }
+                                            ]}
+                                            max={skill.xpReq} />
+                                        <Box direction="row" justify="between">
+                                            <Text size="xsmall">{nFormatter(skill.currentXP)}</Text>
+                                            <Text size="xsmall">{nFormatter(skill.xpReq)}</Text>
+                                        </Box>
+                                    </Box>
                                 </Box>
                             </Box>)
                     })
@@ -198,7 +218,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
             * (1 + crystalSpawnStamp / 100) * (1 + cardBonus / 100);
     }, [appContext, player])
 
-    
+
     const secondsSinceUpdate = useMemo(() => {
         const lastUpdated = appContext.data.getLastUpdated(true) as Date | undefined;
         if (lastUpdated) {
@@ -212,7 +232,34 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
             <Text size='medium'>Random Stats</Text>
             <Grid columns={size == "small" ? '100%' : ['50%', '50%']} fill>
                 <Box pad="medium" gap="small">
-                    <Text size="small">Class / Level = {player.class} / {player.level}</Text>
+                    <Box direction="row" align="center" gap="small">
+                        <Box width={{ max: '36px', min: '36px' }} title={player.class}>
+                            <Box className={player.getClassClass()} />
+                        </Box>
+                        <Box gap="small">
+                            <Box direction="row" gap="small">
+                                <Text size="small">{player.level}</Text>
+                            </Box>
+                            <Meter
+                            size="small"
+                            thickness='2px'
+                            type="bar"
+                            background="grey-1"
+                            color="brand"
+                            values={[
+                                {
+                                    value: player.classExp,
+                                    label: 'current',
+                                    color: 'brand'
+                                }
+                            ]}
+                            max={player.classExpReq} />
+                        <Box direction="row" justify="between">
+                            <Text size="xsmall">{nFormatter(player.classExp, "Whole")}</Text>
+                            <Text size="xsmall">{nFormatter(player.classExpReq, "Whole")}</Text>
+                        </Box>
+                        </Box>
+                    </Box>
                     <Text size="small">Current Monster / Map = {player.currentMonster} / {player.currentMap}</Text>
                     {
                         player.starSigns.map((sign, index) => {
@@ -561,7 +608,7 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
         // ANVIL SPEED MATH;
         const theData = appContext.data.getData();
         const stampData = theData.get("stamps");
-        const anvilZoomerBonus = stampData ? stampData[1][2].getBonus(player.skills.get(SkillsIndex.Smithing)) : 0;
+        const anvilZoomerBonus = stampData ? stampData[1][2].getBonus(player.skills.get(SkillsIndex.Smithing)?.level) : 0;
         const blackSmithBox = player.postOffice[PostOfficeConst.BlacksmithBoxIndex];
         const postOfficeBonus = blackSmithBox.level > 0 ? blackSmithBox.bonuses[1].getBonus(blackSmithBox.level, 1) : 0;
         const hammerHammerBonus = activeBubbles ? activeBubbles.find(x => x.name == hammerName)?.getBonus() ?? 0 : 0;
@@ -621,14 +668,14 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
         const gemStore = theData.get("gems") as GemStore;
 
         const allStamps = stampData.flatMap((tab) => [...tab]);
-        const allCapStampBonus = allStamps.find((stamp) => stamp.raw_name == CapacityConst.AllCarryStamp)?.getBonus(player.skills.get(SkillsIndex.Smithing)) ?? 0;
+        const allCapStampBonus = allStamps.find((stamp) => stamp.raw_name == CapacityConst.AllCarryStamp)?.getBonus(player.skills.get(SkillsIndex.Smithing)?.level) ?? 0;
         const gemCapacityBonus = gemStore?.purchases.find(x => x.no == 58)?.pucrhased ?? 0;
         const extraBagsTalentBonus = player.talents.find(x => x.skillIndex == CapacityConst.ExtraBagsSkillIndex)?.getBonus() ?? 0;
         const starSignExtraCap = player.starSigns.reduce((sum, sign) => sum += sign.getBonus("Carry Cap"), 0);
 
         const capProps = {
             allCapBonuses: allCapBonus,
-            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.MaterialCapStamp)?.getBonus(player.skills.get(SkillsIndex.Smithing)) ?? 0,
+            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.MaterialCapStamp)?.getBonus(player.skills.get(SkillsIndex.Smithing)?.level) ?? 0,
             gemsCapacityBought: gemCapacityBonus,
             stampAllCapBonus: allCapStampBonus,
             extraBagsLevel: extraBagsTalentBonus,
@@ -669,24 +716,24 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
                     text={nFormatter(player.anvil.getMonsterMatCost(anvilCostDiscount))}
                 />
                 <Box direction="row">
-                    <Box margin={{right: 'small'}} border={{side: 'right', color: 'grey-1', size: '2px'}}>
+                    <Box margin={{ right: 'small' }} border={{ side: 'right', color: 'grey-1', size: '2px' }}>
                         <TextAndLabel
                             label="XP"
                             text={`${nFormatter(anvilXP, "Big")}% (${player.anvil.xpPoints})`}
-                            margin={{right: 'small'}}
+                            margin={{ right: 'small' }}
                         />
                     </Box>
-                    <Box margin={{right: 'small'}} border={{side: 'right', color: 'grey-1', size: '2px'}}>
-                    <TextAndLabel
-                        label="Speed"
-                        text={`${nFormatter(anvilSpeed)} (${player.anvil.speedPoints})`}
-                        margin={{right: 'small'}}
-                    />
+                    <Box margin={{ right: 'small' }} border={{ side: 'right', color: 'grey-1', size: '2px' }}>
+                        <TextAndLabel
+                            label="Speed"
+                            text={`${nFormatter(anvilSpeed)} (${player.anvil.speedPoints})`}
+                            margin={{ right: 'small' }}
+                        />
                     </Box>
                     <TextAndLabel
                         label="Capacity"
                         text={`${anvilCapcity} (${player.anvil.capPoints})`}
-                        margin={{right: 'small'}}
+                        margin={{ right: 'small' }}
                     />
                 </Box>
                 {player.anvil.currentlySelect.indexOf(-1) > -1 && <Text>UNUSED PRODUCTION</Text>}
@@ -799,7 +846,7 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
         const toReturn = new Map();
         toReturn.set("Mining", {
             allCapBonuses: allCapBonus,
-            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.MiningCapStamp)?.getBonus(player.skills.get(SkillsIndex.Mining)) ?? 0,
+            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.MiningCapStamp)?.getBonus(player.skills.get(SkillsIndex.Mining)?.level) ?? 0,
             gemsCapacityBought: gemCapacityBonus,
             stampAllCapBonus: allCapStampBonus,
             extraBagsLevel: extraBagsTalentBonus,
@@ -807,7 +854,7 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
         });
         toReturn.set("Chopping", {
             allCapBonuses: allCapBonus,
-            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.ChoppingCapStamp)?.getBonus(player.skills.get(SkillsIndex.Chopping)) ?? 0,
+            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.ChoppingCapStamp)?.getBonus(player.skills.get(SkillsIndex.Chopping)?.level) ?? 0,
             gemsCapacityBought: gemCapacityBonus,
             stampAllCapBonus: allCapStampBonus,
             extraBagsLevel: extraBagsTalentBonus,
@@ -823,7 +870,7 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
         });
         toReturn.set("Fishing", {
             allCapBonuses: allCapBonus,
-            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.FishCapStamp)?.getBonus(player.skills.get(SkillsIndex.Fishing)) ?? 0,
+            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.FishCapStamp)?.getBonus(player.skills.get(SkillsIndex.Fishing)?.level) ?? 0,
             gemsCapacityBought: gemCapacityBonus,
             stampAllCapBonus: allCapStampBonus,
             extraBagsLevel: extraBagsTalentBonus,
@@ -839,7 +886,7 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
         });
         toReturn.set("bCraft", {
             allCapBonuses: allCapBonus,
-            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.MaterialCapStamp)?.getBonus(player.skills.get(SkillsIndex.Smithing)) ?? 0,
+            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.MaterialCapStamp)?.getBonus(player.skills.get(SkillsIndex.Smithing)?.level) ?? 0,
             gemsCapacityBought: gemCapacityBonus,
             stampAllCapBonus: allCapStampBonus,
             extraBagsLevel: extraBagsTalentBonus,
@@ -847,7 +894,7 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
         });
         toReturn.set("Bugs", {
             allCapBonuses: allCapBonus,
-            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.BugCapStamp)?.getBonus(player.skills.get(SkillsIndex.Catching)) ?? 0,
+            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.BugCapStamp)?.getBonus(player.skills.get(SkillsIndex.Catching)?.level) ?? 0,
             gemsCapacityBought: gemCapacityBonus,
             stampAllCapBonus: allCapStampBonus,
             extraBagsLevel: extraBagsTalentBonus,
