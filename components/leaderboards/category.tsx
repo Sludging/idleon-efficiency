@@ -23,11 +23,11 @@ const Category = ({ data, currentUser }: { data: CategoryData, currentUser: stri
             <Box gap="xsmall">
             {
                 topTen.map(([profile, score], index) => (
-                    <Position key={index} position={index + 1} profile={profile} value={score} type={categoryInfo.type} background={userPosition && index == userPosition ? "brand" : "blue-1" } />
+                    <Position key={index} position={index + 1} profile={profile} value={score} type={categoryInfo.type} background={userPosition != undefined && index == userPosition ? "brand" : "blue-1" } />
                 ))
             }
             {
-                userEntry && userPosition && userPosition > 10 && <Position key={"user"} position={userPosition + 1} profile={userEntry[0]} value={userEntry[1]} type={categoryInfo.type} background="brand" />
+                userEntry && userPosition != undefined && userPosition > 10 && <Position key={"user"} position={userPosition + 1} profile={userEntry[0]} value={userEntry[1]} type={categoryInfo.type} background="brand" />
             }
             </Box>
         </Box>
