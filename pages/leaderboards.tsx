@@ -48,7 +48,7 @@ const Leaderboards = ({ leaderboards } : { leaderboards: LeaderboardsData }) => 
                         <Grid columns={size == "small" ? "1" : "1/3"} pad="medium" gap="small">
                         {
                             leaderboards.data.map((category, index) => (
-                                <Category key={index} data={category} currentUser="koneko_toujou" />
+                                <Category key={index} data={category} currentUser={currentUser} />
                             ))
                         }
                         </Grid>
