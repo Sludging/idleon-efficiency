@@ -1,4 +1,4 @@
-import { Anchor, Box, Footer, Grid, Header, Main, ResponsiveContext } from "grommet"
+import { Anchor, Box, Footer, Grid, Header, Heading, Main, ResponsiveContext, Text } from "grommet"
 import Image from "next/image";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
@@ -45,6 +45,13 @@ const Leaderboards = ({ leaderboards } : { leaderboards: LeaderboardsData }) => 
             <Main>
                 <Box width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} fill="horizontal">
                     <Box pad={{ right: 'large', left: 'large', bottom: 'medium' }}>
+                        <Box fill align="center" margin={{bottom: 'small'}}>
+                            <Heading margin={{bottom: 'small'}} level="1">Leaderboards</Heading>
+                            {/* <Box justify="start">
+                                <Text color="grey-2">Total profiles: 0</Text>
+                                <Text color="grey-2">Profiles updated in the last 7 days: 0</Text>
+                            </Box> */}
+                        </Box>
                         <Grid columns={size == "small" ? "1" : "1/3"} pad="medium" gap="small">
                         {
                             leaderboards.data.map((category, index) => (
@@ -81,7 +88,7 @@ export async function getStaticProps() {
       props: {
         leaderboards,
       },
-      revalidate: 21600,
+      revalidate: 1800,
     }
   }
 

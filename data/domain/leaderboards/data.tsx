@@ -1,6 +1,7 @@
 export enum CategoryType {
     Number,
-    Money
+    Money,
+    Percent
 }
 
 interface DisplayInfo {
@@ -12,12 +13,12 @@ interface DisplayInfo {
 export const TitleMap: Map<string, DisplayInfo> = new Map(Object.entries({
     "TotalMoney": {
         title: "Current Money",
-        icon: "icons-3636 icons-GemP1_x1",
+        icon: "icons-2327 icons-Coins10",
         type: CategoryType.Money
     },
     "HighestLevel": {
-        title: "Highest Level",
-        icon: "icons-3636 icons-GemP1_x1",
+        title: "Highest Characeter Level",
+        icon: "icons-3541 icons-Mface46",
         type: CategoryType.Number
     },
     "GrindTime": {
@@ -128,7 +129,7 @@ export const TitleMap: Map<string, DisplayInfo> = new Map(Object.entries({
     "TotalChargeRate": {
         title: "Total Charge Rate",
         icon: "icons-5656 icons-UISkillIcon475", 
-        type: CategoryType.Number
+        type: CategoryType.Percent
     },
     "TotalPostOffice": {
         title: "Post Office Orders Completed",

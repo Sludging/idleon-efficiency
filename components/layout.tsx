@@ -24,6 +24,9 @@ import { useRouter } from 'next/dist/client/router';
 
 import { CaretDownFill, FormDown, Menu as MenuIcon, User } from 'grommet-icons';
 import TextAndLabel from './base/TextAndLabel';
+import Icon from './leaderboards/icon';
+import Discord from '../lib/discord';
+import IconLink from './base/IconLink';
 
 declare const window: Window &
     typeof globalThis & {
@@ -260,7 +263,7 @@ export default function Layout({
                                                     </Button>
                                                 </Link>
                                                 <Box border={{ color: 'grey-1' }} fill />
-                                                <Button hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2" onClick={() => { onButtonClick(authData?.logoutFunction); setProfileDropDownOpen(false)}}>
+                                                <Button hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2" onClick={() => { onButtonClick(authData?.logoutFunction); setProfileDropDownOpen(false) }}>
                                                     <Box pad="small">Sign Out</Box>
                                                 </Button>
                                             </Box>
@@ -316,13 +319,19 @@ export default function Layout({
             </Main>
             <Footer height={{ min: "82px" }} background="dark-1">
                 <Box width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} direction="row" justify='between' fill="horizontal" align="center" pad="small">
-                    <Image alt="Logo" src="/logo.svg" height="21px" width="171px" />
+                    <Box direction="row" gap="medium" align="center">
+                        <Box margin={{right: 'medium'}}>
+                            <Image alt="Logo" src="/logo.svg" height="21px" width="171px" />
+                        </Box>
+                        <IconLink icon={Icon} href="/leaderboards" text="Leaderboards" />
+                        <Box align="center" pad="small">
+                            <Text size="12px" color="grey-2">|</Text>
+                        </Box>
+                        <IconLink icon={Discord} href="https://discord.gg/AfsyBkSd2q" text="Idleon Efficiency" />
+                    </Box>
                     <Box justify="end" direction="row" gap="medium">
                         <Anchor href="https://www.buymeacoffee.com/sludger" target="_blank"><Image src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me A Coffee" height="40px" width="150px" /></Anchor>
-                        <Box direction="row" gap="small" pad="small" justify="end">
-                            <Image alt="discord_logo" src={"/discord-logo.svg"} height="21px" width="21px" />
-                            <Anchor color="white" target="_blank" href="https://discord.gg/AfsyBkSd2q">Idleon Efficiency</Anchor>
-                        </Box>
+                        
                     </Box>
                 </Box>
             </Footer>
