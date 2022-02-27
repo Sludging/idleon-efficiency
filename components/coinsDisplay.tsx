@@ -8,6 +8,8 @@ import { Coins } from '../data/utility';
 
 interface CoinProps {
     coinMap: Map<Coins, number>
+    maxCoins?: number
+    regularRow?: boolean
 }
 
 export default function CoinsDisplay(props: CoinProps) {
@@ -20,17 +22,19 @@ export default function CoinsDisplay(props: CoinProps) {
     }
 
     return (
-        <Box direction="row-responsive" gap="xsmall">
+        <Box direction={props.regularRow ? "row" : "row-responsive"}  gap="xsmall">
             {
-                Array.from(props.coinMap).map(([coin, value]) => {
-                    return (
-                        <Box key={`coin-${coin.valueOf()}`} direction="row" gap="xsmall">
-                            <Box width={{max: '23px', min: '21px'}} fill>
-                                <Box className={getCoinClass(coin)} />
+                Array.from(props.coinMap).map(([coin, value], index) => {
+                    if (!props.maxCoins || index < props.maxCoins) {
+                        return (
+                            <Box key={`coin-${coin.valueOf()}`} direction="row" gap="xsmall">
+                                <Box width={{ max: '23px', min: '21px' }} fill>
+                                    <Box className={getCoinClass(coin)} />
+                                </Box>
+                                <Text>{value}</Text>
                             </Box>
-                            <Text>{value}</Text>
-                        </Box>
-                    )
+                        )
+                    }
                 })
             }
         </Box>
