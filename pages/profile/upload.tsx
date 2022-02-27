@@ -13,7 +13,7 @@ import {
 import { useState, useEffect, useContext, useMemo } from 'react';
 import { AppContext } from '../../data/appContext'
 import { NextSeo } from 'next-seo';
-import { ProfileStorage } from '../../data/storage/profiles';
+import { ProfileUploader } from '../../data/storage/profiles';
 import { AuthContext } from '../../data/firebase/authContext';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 import { CircleInformation } from 'grommet-icons';
@@ -53,7 +53,8 @@ function UploadProfile() {
         const user = authContext?.user;
         if (user) {
             setUploading(true);
-            const uploadRes = await ProfileStorage.uploadProfile(appContext.data, user, !uploadSensitiveData);
+            const uploader = new ProfileUploader();
+            const uploadRes = await uploader.uploadProfile(appContext.data, user, !uploadSensitiveData);
             let message = "";
             if (uploadRes.success) {
                 localStorage.setItem(`${user.uid}/last_profile_upload`, new Date().toISOString());
