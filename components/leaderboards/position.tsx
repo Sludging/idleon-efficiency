@@ -36,7 +36,7 @@ const Position = ({ position, profile, value, type = CategoryType.Number, backgr
                 </Anchor>
             </Box>
             {type == CategoryType.Money && <CoinsDisplay coinMap={getCoinsArray(value)} maxCoins={3} regularRow={true} />}
-            {type == CategoryType.Number && <Text>{nFormatter(value, "Whole")}</Text>}
+            {(type == CategoryType.Number || type == CategoryType.Percent) && <Text>{nFormatter(value, "Whole")}{type == CategoryType.Percent ? "%" : ""}</Text>}
         </Box>
     )
 }

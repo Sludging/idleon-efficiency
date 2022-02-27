@@ -92,6 +92,9 @@ export class Obol {
             case this.item.internalName.includes("Platinum"): return 3;
             case this.item.internalName.includes("Pink"): return 4;
             case this.item.internalName.includes("Void"): return 5;
+            case this.item.internalName.includes("Granite"): return 6;
+            case this.item.internalName.includes("Skeletal"): return 7;
+            case this.item.internalName.includes("Frozen"): return 8;
             default: return -1;
         }
     }
