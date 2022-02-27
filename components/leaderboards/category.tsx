@@ -27,7 +27,7 @@ const Category = ({ data, currentUser }: { data: CategoryData, currentUser: stri
                 ))
             }
             {
-                userEntry && userPosition != undefined && userPosition > 10 && <Position key={"user"} position={userPosition + 1} profile={userEntry[0]} value={userEntry[1]} type={categoryInfo.type} background="brand" />
+                userEntry && userPosition != undefined && userPosition > 9 && <Position key={"user"} position={userPosition + 1} profile={userEntry[0]} value={userEntry[1]} type={categoryInfo.type} background="brand" />
             }
             </Box>
         </Box>
