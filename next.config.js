@@ -7,7 +7,13 @@ const { withSentryConfig } = require('@sentry/nextjs');
 
 const moduleExports = {
   reactStrictMode: true,
+  compiler: {
+    // ssr and displayName are configured by default
+    styledComponents: true,
+  },
   images: {
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     domains: ['cdn.buymeacoffee.com'],
   },
 };

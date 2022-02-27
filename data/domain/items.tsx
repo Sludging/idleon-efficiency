@@ -527,7 +527,6 @@ export class Item {
             case 'Fish':
             case 'Barrel':
             case 'Refinery Salts':
-            case 'Office Pen':
             case 'Monster Drop':
                 return "Materials";
             case 'Health Food':
@@ -543,6 +542,7 @@ export class Item {
             case 'Upgrade':
             case 'Boss Key':
             case 'Inventory G':
+            case 'Office Pen':
                 return "Consumable";
             case 'Gem':
             case 'Anvil Expansion':
