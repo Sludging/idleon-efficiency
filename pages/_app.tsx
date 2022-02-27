@@ -38,6 +38,7 @@ import '../public/icons/assets/sheets/spritesheet_104x120.css';
 import '../public/icons/assets/sheets/spritesheet_42x42.css';
 import '../public/icons/assets/sheets/spritesheet_51x51.css';
 import '../public/icons/assets/sheets/spritesheet_constellations.css';
+import '../public/icons/assets/sheets/spritesheet_colosseums.css';
 import Layout from '../components/layout';
 
 import { DefaultSeo } from 'next-seo';
@@ -84,6 +85,8 @@ const customTheme = deepMerge(dark, {
       "Rare": "#7897d5",
       "Epic": "#bc93ff",
       "Legendary": "#e49c5f",
+      "blue-1": "#19243A",
+      "blue-2": "#283F70",
     }
   },
   notification: {
@@ -208,9 +211,14 @@ function MyApp({ Component, pageProps }: AppProps) {
         <AuthProvider appLoading={loading} data={publicData} domain={domain}>
           <AppProvider appLoading={loading} data={publicData} domain={domain}>
             <DefaultSeo {...SEO} />
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
+            {
+              router.pathname.includes("leaderboards") ?
+                <Component {...pageProps} />
+              :
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            }
           </AppProvider>
         </AuthProvider>
       </Grommet>

@@ -1,4 +1,4 @@
-import { ProfileStorage } from "../storage/profiles";
+import { ProfileDownloader } from "../storage/profiles";
 
 export const fetcher = async (windowLocation: string, oldDomain: string): Promise<{ data: Map<string, any> | undefined, charNames: string[] | undefined, domain: string }> => {
     let urlDomain = "";
@@ -26,7 +26,8 @@ export const fetcher = async (windowLocation: string, oldDomain: string): Promis
         }
         else {
             try {
-                const jsonData = await ProfileStorage.downloadProfile(urlDomain);
+                const downloader = new ProfileDownloader();
+                const jsonData = await downloader.downloadProfile(urlDomain);
                 if (jsonData) {
                     const playerNames = jsonData["playerNames"] ?? [...Array(9)].map((number, index) => `Player_${index}`)
                     return {

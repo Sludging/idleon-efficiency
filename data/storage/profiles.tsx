@@ -3,15 +3,14 @@ import { IdleonData } from "../domain/idleonData";
 
 const cdn_location: string = 'https://cdn.idleonefficiency.com'
 const api_location: string = "https://api.idleonefficiency.com/publish-profile"
+//const dev_location: string = "https://9eqcjtmya2.execute-api.us-east-1.amazonaws.com/dev/publish-profile";
 
-export class ProfileStorage {
-    static _Initialize() {
-        this._Initialize = () => { } // prevent any additional calls to initialize.
-    }
-
-    private static gemKeys: string[] = ["GemsOwned", "ServerGemsReceived", "BundlesReceived", "GemsPacksPurchased", "ServerGems", "CYGems"];
-    private static cleanGemData = async (data: Map<string, any>) => {
-        let toRemove = ProfileStorage.gemKeys;
+export class ProfileUploader {
+    constructor() {}
+    
+    private gemKeys: string[] = ["GemsOwned", "ServerGemsReceived", "BundlesReceived", "GemsPacksPurchased", "ServerGems", "CYGems"];
+    private cleanGemData = async (data: Map<string, any>) => {
+        let toRemove = this.gemKeys;
         if (data.has("BundlesReceived")) {
             toRemove.push(...Object.keys(JSON.parse(data.get("BundlesReceived"))))
         }
@@ -23,7 +22,7 @@ export class ProfileStorage {
         return data;
     }
 
-    static uploadProfile = async (data: IdleonData, user: User, removeGemData: boolean = true) => {
+    uploadProfile = async (data: IdleonData, user: User, removeGemData: boolean = true) => {
         try {
             const theData = data.getData();
             // Convert raw JSON to map so it's easier to clean.
@@ -58,8 +57,12 @@ export class ProfileStorage {
             return { success: false, message: "Unknown error."};
         }
     }
+}
 
-    static downloadProfile = async (profile: string) => {
+export class ProfileDownloader {
+    constructor() {}
+
+    downloadProfile = async (profile: string) => {
         try {
             const res = await fetch(`${cdn_location}/profiles/${profile}.json`);
             if (res.ok) {
@@ -73,5 +76,3 @@ export class ProfileStorage {
         }
     }
 }
-
-ProfileStorage._Initialize();

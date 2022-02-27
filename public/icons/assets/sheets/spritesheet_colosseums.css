@@ -1,0 +1,14 @@
+.icons-colosseums {
+background-image: url(spritesheet_colosseums.png);
+background-repeat: no-repeat;
+display: inline-block;
+width: 100%;
+padding-bottom: 100%;
+height: 0;
+background-size: cover;
+background-position: 0 calc(var(--row) * 33.333333333333336%)
+}
+.icons-colosseums1 { --row: 0; }
+.icons-colosseums2 { --row: 1; }
+.icons-colosseums3 { --row: 2; }
+.icons-colosseums4 { --row: 3; }
