@@ -17,7 +17,7 @@ export const TitleMap: Map<string, DisplayInfo> = new Map(Object.entries({
         type: CategoryType.Money
     },
     "HighestLevel": {
-        title: "Highest Characeter Level",
+        title: "Highest Character Level",
         icon: "icons-3541 icons-Mface46",
         type: CategoryType.Number
     },
