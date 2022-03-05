@@ -1,5 +1,6 @@
 import { Anchor, Box, Stack, Text } from "grommet"
 import { useState } from "react";
+import { Dungeons } from "../../data/domain/dungeons";
 import { CategoryType } from "../../data/domain/leaderboards/data";
 import { getCoinsArray, nFormatter } from "../../data/utility";
 import CoinsDisplay from "../coinsDisplay";
@@ -9,6 +10,11 @@ const Position = ({ position, profile, value, type = CategoryType.Number, backgr
     const [backgroundColor, setBackgroundColor] = useState<string>(background);
     const [starFill, setStarFill] = useState<string>("#283F70");
     const [positionColor, setPositionColor] = useState<string>("white");
+
+    let dungeonRank = undefined;
+    if (type == CategoryType.Dungeon) {
+        dungeonRank = Dungeons.getDungeonRank(value);
+    }
 
     const onMouseEnter = () => {
         setBackgroundColor("blue-2");
@@ -37,6 +43,15 @@ const Position = ({ position, profile, value, type = CategoryType.Number, backgr
             </Box>
             {type == CategoryType.Money && <CoinsDisplay coinMap={getCoinsArray(value)} maxCoins={3} regularRow={true} />}
             {(type == CategoryType.Number || type == CategoryType.Percent) && <Text>{nFormatter(value, "Whole")}{type == CategoryType.Percent ? "%" : ""}</Text>}
+            {
+                dungeonRank &&
+                <Box direction="row" gap="small">
+                    <Text>{nFormatter(value, "Whole")}</Text>
+                    <Box title={dungeonRank.toString()} width={{ max: '20px' }} >
+                        <Box className={Dungeons.getDungeonRankClass(dungeonRank)} />
+                    </Box>
+                </Box>
+            }
         </Box>
     )
 }

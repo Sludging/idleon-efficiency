@@ -93,7 +93,7 @@ const Leaderboards = ({ leaderboards }: { leaderboards: LeaderboardsData }) => {
                         </Box> */}
                         <Grid columns={size == "small" ? "1" : "1/3"} pad="medium" gap="small">
                             {
-                                leaderboards.data.sort((category1, category2) => (TitleMap.get(category1.Category)?.group ?? "ZZZZ") > (TitleMap.get(category2.Category)?.group ?? "ZZZZ") ? -1 : 1).map((category, index) => (
+                                leaderboards.data.map((category, index) => (
                                     <Category key={index} data={category} currentUser={currentUser} />
                                 ))
                             }
@@ -121,11 +121,21 @@ export async function getStaticProps() {
     // Call an external API endpoint to get posts.
     // You can use any data fetching library
     const res = await fetch('https://api.idleonefficiency.com/leaderboards')
-    const leaderboards = await res.json()
+    const leaderboards = await res.json() as LeaderboardsData;
+
+    const isLocal = process.env.NEXT_PUBLIC_ROOT_URL == "localhost:3000";
+    if (isLocal) {
+        leaderboards.data = leaderboards.data
+            .sort((category1, category2) => (TitleMap.get(category1.Category)?.group ?? 9999) > (TitleMap.get(category2.Category)?.group ?? 9999) ? -1 : 1)
+    }
+    else {
+        leaderboards.data = leaderboards.data.filter(category => TitleMap.get(category.Category) != undefined)
+            .sort((category1, category2) => (TitleMap.get(category1.Category)?.group ?? 9999) > (TitleMap.get(category2.Category)?.group ?? 9999) ? -1 : 1)
+    }
 
     return {
         props: {
-            leaderboards,
+            leaderboards
         },
         revalidate: 1800,
     }

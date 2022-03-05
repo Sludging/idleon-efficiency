@@ -1,7 +1,8 @@
 export enum CategoryType {
     Number,
     Money,
-    Percent
+    Percent,
+    Dungeon
 }
 
 export enum CategoryGroup {
@@ -197,6 +198,24 @@ export const TitleMap: Map<string, DisplayInfo> = new Map(Object.entries({
     "Family": {
         title: "Family Level",
         icon: "icons-7272 icons-TaskSb5", 
+        type: CategoryType.Number,
+        group: CategoryGroup.Totals
+    },
+    "CurrentDungeonXP": {
+        title: "Dungeon XP (and rank)",
+        icon: "icons-1620 icons-Dung_Rank61", 
+        type: CategoryType.Dungeon,
+        group: CategoryGroup.Highscore
+    },
+    "TotalBuildingLevels": {
+        title: "Total Building Levels",
+        icon: "icons-4343 icons-TaskAchC31", 
+        type: CategoryType.Number,
+        group: CategoryGroup.Totals
+    },
+    "TotalStatueLevels": {
+        title: "Total Statue Levels",
+        icon: "icons-4150 icons-StatueG1", 
         type: CategoryType.Number,
         group: CategoryGroup.Totals
     },
