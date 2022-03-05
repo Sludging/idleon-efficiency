@@ -46,7 +46,9 @@ const Leaderboards = ({ leaderboards }: { leaderboards: LeaderboardsData }) => {
                         </Box>
                     </Link>
                     <Box pad="medium">
-                        <TextAndLabel textColor='accent-3' textSize='xsmall' labelSize='xsmall' label='Last Updated' text={dateToText(categoryUpdateTime)} />
+                        {categoryUpdateTime instanceof Date && !isNaN(categoryUpdateTime.getTime()) &&
+                            <TextAndLabel textColor='accent-3' textSize='xsmall' labelSize='xsmall' label='Last Updated' text={dateToText(categoryUpdateTime)} />
+                        }
                     </Box>
                 </Box>
             </Header>
@@ -56,24 +58,26 @@ const Leaderboards = ({ leaderboards }: { leaderboards: LeaderboardsData }) => {
                         <Box fill align="center" margin={{ bottom: 'small' }}>
                             <Heading margin={{ bottom: 'small' }} level="1">Leaderboards</Heading>
                         </Box>
-                        <Box pad={{ horizontal: "medium" }} fill direction="row" justify="between" gap="small">
-                            <ShadowBox background="dark-1" pad="medium" fill>
-                                <TextAndLabel
-                                    labelSize="xsmall"
-                                    textSize="xxlarge"
-                                    label="Total Profiles"
-                                    text={leaderboards.metadata.TotalProfiles.toString()}
-                                />
-                            </ShadowBox>
-                            <ShadowBox background="dark-1" pad="medium" fill>
-                                <TextAndLabel
-                                    labelSize="xsmall"
-                                    textSize="xxlarge"
-                                    label="Updated in the last week"
-                                    text={leaderboards.metadata.UpdatedRecently.toString()}
-                                />
-                            </ShadowBox>
-                        </Box>
+                        {leaderboards.metadata &&
+                            <Box pad={{ horizontal: "medium" }} fill direction="row" justify="between" gap="small">
+                                <ShadowBox background="dark-1" pad="medium" fill>
+                                    <TextAndLabel
+                                        labelSize="xsmall"
+                                        textSize="xxlarge"
+                                        label="Total Profiles"
+                                        text={leaderboards.metadata.TotalProfiles.toString()}
+                                    />
+                                </ShadowBox>
+                                <ShadowBox background="dark-1" pad="medium" fill>
+                                    <TextAndLabel
+                                        labelSize="xsmall"
+                                        textSize="xxlarge"
+                                        label="Updated in the last week"
+                                        text={leaderboards.metadata.UpdatedRecently.toString()}
+                                    />
+                                </ShadowBox>
+                            </Box>
+                        }
                         {/* <Box direction="row" pad="medium" gap="medium">
                             {
                                 Object.keys(CategoryGroup).map((group, index) => {
