@@ -303,6 +303,22 @@ export class Dungeons {
     boostedcount: number = 0;
     credits: number = 0;
     flurbos: number = 0;
+
+    public static getDungeonRank = (dungeonXP: number) => {
+        const rank = Number(dungeonLevels.reduce((rank, req, index, _) => 
+        {
+            if (dungeonXP > Number(req)) { 
+                rank = index.toString()
+            }
+            return rank;
+        }, "0")) + 1;
+    
+        return rank;
+    }
+
+    public static getDungeonRankClass = (dungeonRank: number) => {
+        return `icons-1620 icons-Dung_Rank${dungeonRank}`;
+    }
 }
 
 export const parseDungeons = (upgrades: number[][], optList: number[]) => {

@@ -38,6 +38,7 @@ import '../public/icons/assets/sheets/spritesheet_104x120.css';
 import '../public/icons/assets/sheets/spritesheet_42x42.css';
 import '../public/icons/assets/sheets/spritesheet_51x51.css';
 import '../public/icons/assets/sheets/spritesheet_35x41.css';
+import '../public/icons/assets/sheets/spritesheet_16x20.css';
 import '../public/icons/assets/sheets/spritesheet_constellations.css';
 import '../public/icons/assets/sheets/spritesheet_colosseums.css';
 import Layout from '../components/layout';
