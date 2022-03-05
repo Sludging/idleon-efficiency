@@ -54,6 +54,17 @@ export enum Coins {
 
 }
 
+export const dateToText = (date: Date): string => {
+    const resolvedFormat = Intl.DateTimeFormat().resolvedOptions();
+    const options: Intl.DateTimeFormatOptions = {
+        year: "numeric", month: "numeric", day: "numeric",
+        hour: "numeric", minute: "numeric", second: "numeric",
+        hour12: resolvedFormat.hour12,
+        timeZone: resolvedFormat.timeZone
+    };
+    return Intl.DateTimeFormat(resolvedFormat.locale, options).format(date)
+} 
+
 export const nFormatter = (num: number, type?: string) => {
     if (type) {
         switch(type) {

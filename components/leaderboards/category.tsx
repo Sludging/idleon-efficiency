@@ -1,11 +1,15 @@
 import { Box, Text } from "grommet"
-import { CategoryData, CategoryType, TitleMap } from "../../data/domain/leaderboards/data"
+import { CategoryData, TitleMap } from "../../data/domain/leaderboards/data"
 import Position from "./position";
 
 const Category = ({ data, currentUser }: { data: CategoryData, currentUser: string | undefined }) => {
     const sortedEntries = Array.from(Object.entries(data.Entries)).sort(([profile1, score1], [profile2, score2]) => score1 > score2 ? -1 : 1)
     const topTen = sortedEntries.slice(0, 10);
-    const categoryInfo = TitleMap.get(data.Category) ?? { title: data.Category, type: CategoryType.Number, icon: "icons-3636 icons-GemP16_x1" };
+    const categoryInfo = TitleMap.get(data.Category); // ?? { title: data.Category, type: CategoryType.Number, icon: "icons-3636 icons-GemP16_x1" };
+    if (!categoryInfo) {
+        console.debug("Skipping", data.Category);
+        return <></>;
+    }
     let userEntry = undefined;
     let userPosition: number | undefined = undefined;
     if (currentUser) {
