@@ -1,0 +1,73 @@
+.icons-1620 {
+    background-image: url(spritesheet_16x20.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 125.0%;
+    height: 0;
+    background-size: cover;
+    background-position: 0 calc(var(--row) * 1.639344262295082%)
+}
+.icons-1620:not(.icons-Dung_Rank0):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
+            .icons-Dung_Rank0 { --row: 0; }
+.icons-Dung_Rank1 { --row: 1; }
+.icons-Dung_Rank10 { --row: 2; }
+.icons-Dung_Rank11 { --row: 3; }
+.icons-Dung_Rank12 { --row: 4; }
+.icons-Dung_Rank13 { --row: 5; }
+.icons-Dung_Rank14 { --row: 6; }
+.icons-Dung_Rank15 { --row: 7; }
+.icons-Dung_Rank16 { --row: 8; }
+.icons-Dung_Rank17 { --row: 9; }
+.icons-Dung_Rank18 { --row: 10; }
+.icons-Dung_Rank19 { --row: 11; }
+.icons-Dung_Rank2 { --row: 12; }
+.icons-Dung_Rank20 { --row: 13; }
+.icons-Dung_Rank21 { --row: 14; }
+.icons-Dung_Rank22 { --row: 15; }
+.icons-Dung_Rank23 { --row: 16; }
+.icons-Dung_Rank24 { --row: 17; }
+.icons-Dung_Rank25 { --row: 18; }
+.icons-Dung_Rank26 { --row: 19; }
+.icons-Dung_Rank27 { --row: 20; }
+.icons-Dung_Rank28 { --row: 21; }
+.icons-Dung_Rank29 { --row: 22; }
+.icons-Dung_Rank3 { --row: 23; }
+.icons-Dung_Rank30 { --row: 24; }
+.icons-Dung_Rank31 { --row: 25; }
+.icons-Dung_Rank32 { --row: 26; }
+.icons-Dung_Rank33 { --row: 27; }
+.icons-Dung_Rank34 { --row: 28; }
+.icons-Dung_Rank35 { --row: 29; }
+.icons-Dung_Rank36 { --row: 30; }
+.icons-Dung_Rank37 { --row: 31; }
+.icons-Dung_Rank38 { --row: 32; }
+.icons-Dung_Rank39 { --row: 33; }
+.icons-Dung_Rank4 { --row: 34; }
+.icons-Dung_Rank40 { --row: 35; }
+.icons-Dung_Rank41 { --row: 36; }
+.icons-Dung_Rank42 { --row: 37; }
+.icons-Dung_Rank43 { --row: 38; }
+.icons-Dung_Rank44 { --row: 39; }
+.icons-Dung_Rank45 { --row: 40; }
+.icons-Dung_Rank46 { --row: 41; }
+.icons-Dung_Rank47 { --row: 42; }
+.icons-Dung_Rank48 { --row: 43; }
+.icons-Dung_Rank49 { --row: 44; }
+.icons-Dung_Rank5 { --row: 45; }
+.icons-Dung_Rank50 { --row: 46; }
+.icons-Dung_Rank51 { --row: 47; }
+.icons-Dung_Rank52 { --row: 48; }
+.icons-Dung_Rank53 { --row: 49; }
+.icons-Dung_Rank54 { --row: 50; }
+.icons-Dung_Rank55 { --row: 51; }
+.icons-Dung_Rank56 { --row: 52; }
+.icons-Dung_Rank57 { --row: 53; }
+.icons-Dung_Rank58 { --row: 54; }
+.icons-Dung_Rank59 { --row: 55; }
+.icons-Dung_Rank6 { --row: 56; }
+.icons-Dung_Rank60 { --row: 57; }
+.icons-Dung_Rank61 { --row: 58; }
+.icons-Dung_Rank7 { --row: 59; }
+.icons-Dung_Rank8 { --row: 60; }
+.icons-Dung_Rank9 { --row: 61; }
