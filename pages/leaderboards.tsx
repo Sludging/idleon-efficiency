@@ -1,4 +1,4 @@
-import { Anchor, Box, Footer, Grid, Header, Heading, Main, ResponsiveContext } from "grommet"
+import { Anchor, Box, Button, Footer, Grid, Header, Heading, Main, ResponsiveContext, Text } from "grommet"
 import Image from "next/image";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
@@ -7,7 +7,7 @@ import ShadowBox from "../components/base/ShadowBox";
 import TextAndLabel from "../components/base/TextAndLabel";
 import Category from "../components/leaderboards/category";
 import { AppContext, AppStatus } from "../data/appContext";
-import { LeaderboardsData, TitleMap } from "../data/domain/leaderboards/data";
+import { CategoryData, CategoryGroup, LeaderboardsData, TitleMap } from "../data/domain/leaderboards/data";
 import { Player } from "../data/domain/player";
 import { dateToText } from "../data/utility";
 
@@ -17,10 +17,22 @@ const PointerImage = styled(Image)`
 
 const Leaderboards = ({ leaderboards }: { leaderboards: LeaderboardsData }) => {
     const [currentUser, setCurrentUser] = useState<string | undefined>(undefined);
+    const [activeCategory, setActiveCategory] = useState<CategoryGroup | undefined>(undefined);
+    const [filteredCategories, setFilteredCategories] = useState<CategoryData[] | undefined>(undefined);
     const size = useContext(ResponsiveContext);
     const appContext = useContext(AppContext);
 
     const categoryUpdateTime = new Date(leaderboards.data[0].UpdatedAt);
+
+    const handleCategoryFilter = (group: CategoryGroup) => {
+        if (activeCategory != undefined && activeCategory == group) {
+            setActiveCategory(undefined);
+            setFilteredCategories(undefined);
+        }
+        else {
+            setActiveCategory(group)
+        }
+    }
 
     useEffect(() => {
         if (appContext.status == AppStatus.LiveData) {
@@ -30,7 +42,11 @@ const Leaderboards = ({ leaderboards }: { leaderboards: LeaderboardsData }) => {
                 setCurrentUser(playerData[0].playerName.toLowerCase());
             }
         }
-    }, [appContext]);
+
+        if (activeCategory != undefined) {
+            setFilteredCategories(leaderboards.data.filter(category => TitleMap.get(category.Category)?.group == activeCategory))
+        }
+    }, [appContext, activeCategory]);
 
     return (
         <Box
@@ -78,22 +94,25 @@ const Leaderboards = ({ leaderboards }: { leaderboards: LeaderboardsData }) => {
                                 </ShadowBox>
                             </Box>
                         }
-                        {/* <Box direction="row" pad="medium" gap="medium">
+                        <Box direction="row" pad="medium" gap="medium" justify='center'>
                             {
                                 Object.keys(CategoryGroup).map((group, index) => {
                                     if (isNaN(parseInt(group))) {
+                                        const asEnum = CategoryGroup[group as keyof typeof CategoryGroup];
                                         return (
-                                            <Box key={index}>
-                                                <Button style={{ color: "white" }} primary color="brand" label={group} />
-                                            </Box>
+                                            <Button key={index} plain onClick={() => handleCategoryFilter(asEnum)}>
+                                                <Box border={{ color: asEnum == activeCategory ? 'white' : 'grey-1', size: '2px' }} round="50px" align="center" pad={{ vertical: '10px', horizontal: '20px' }}>
+                                                    <Text size="16px">{group}</Text>
+                                                </Box>
+                                            </Button>
                                         )
                                     }
                                 })
                             }
-                        </Box> */}
+                        </Box>
                         <Grid columns={size == "small" ? "1" : "1/3"} pad="medium" gap="small">
                             {
-                                leaderboards.data.map((category, index) => (
+                                (filteredCategories ? filteredCategories : leaderboards.data).map((category, index) => (
                                     <Category key={index} data={category} currentUser={currentUser} />
                                 ))
                             }
