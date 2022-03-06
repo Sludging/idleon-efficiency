@@ -1,0 +1,63 @@
+.icons-3541 {
+    background-image: url(spritesheet_35x41.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 117.14285714285715%;
+    height: 0;
+    background-size: cover;
+    background-position: 0 calc(var(--row) * 1.9607843137254901%)
+}
+.icons-3541:not(.icons-Mface1):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
+            .icons-Mface1 { --row: 0; }
+.icons-Mface10 { --row: 1; }
+.icons-Mface11 { --row: 2; }
+.icons-Mface12 { --row: 3; }
+.icons-Mface13 { --row: 4; }
+.icons-Mface14 { --row: 5; }
+.icons-Mface15 { --row: 6; }
+.icons-Mface16 { --row: 7; }
+.icons-Mface17 { --row: 8; }
+.icons-Mface18 { --row: 9; }
+.icons-Mface19 { --row: 10; }
+.icons-Mface2 { --row: 11; }
+.icons-Mface20 { --row: 12; }
+.icons-Mface21 { --row: 13; }
+.icons-Mface22 { --row: 14; }
+.icons-Mface23 { --row: 15; }
+.icons-Mface24 { --row: 16; }
+.icons-Mface25 { --row: 17; }
+.icons-Mface26 { --row: 18; }
+.icons-Mface27 { --row: 19; }
+.icons-Mface28 { --row: 20; }
+.icons-Mface29 { --row: 21; }
+.icons-Mface3 { --row: 22; }
+.icons-Mface30 { --row: 23; }
+.icons-Mface31 { --row: 24; }
+.icons-Mface32 { --row: 25; }
+.icons-Mface33 { --row: 26; }
+.icons-Mface34 { --row: 27; }
+.icons-Mface35 { --row: 28; }
+.icons-Mface36 { --row: 29; }
+.icons-Mface37 { --row: 30; }
+.icons-Mface38 { --row: 31; }
+.icons-Mface39 { --row: 32; }
+.icons-Mface4 { --row: 33; }
+.icons-Mface40 { --row: 34; }
+.icons-Mface41 { --row: 35; }
+.icons-Mface42 { --row: 36; }
+.icons-Mface43 { --row: 37; }
+.icons-Mface44 { --row: 38; }
+.icons-Mface45 { --row: 39; }
+.icons-Mface46 { --row: 40; }
+.icons-Mface47 { --row: 41; }
+.icons-Mface48 { --row: 42; }
+.icons-Mface49 { --row: 43; }
+.icons-Mface5 { --row: 44; }
+.icons-Mface50 { --row: 45; }
+.icons-Mface51 { --row: 46; }
+.icons-Mface52 { --row: 47; }
+.icons-Mface6 { --row: 48; }
+.icons-Mface7 { --row: 49; }
+.icons-Mface8 { --row: 50; }
+.icons-Mface9 { --row: 51; }
