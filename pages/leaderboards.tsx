@@ -96,7 +96,7 @@ const Leaderboards = ({ leaderboards }: { leaderboards: LeaderboardsData }) => {
                         }
                         <Box direction="row" pad="medium" gap="medium" justify='center'>
                             {
-                                Object.keys(CategoryGroup).map((group, index) => {
+                                Object.keys(CategoryGroup).reverse().map((group, index) => {
                                     if (isNaN(parseInt(group))) {
                                         const asEnum = CategoryGroup[group as keyof typeof CategoryGroup];
                                         return (
