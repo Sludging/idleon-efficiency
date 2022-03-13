@@ -1,25 +1,23 @@
 import {
     Box,
     Grid,
-    Stack,
     Text,
     Heading,
-    Tip,
     ResponsiveContext
 } from "grommet"
 
-import { Stamp } from '../data/domain/stamps';
+import { Stamp } from '../../data/domain/stamps';
 import { useEffect, useState, useContext } from 'react';
-import { AppContext } from '../data/appContext';
-import { getCoinsArray, lavaFunc, nFormatter, round } from '../data/utility'
-import CoinsDisplay from "../components/coinsDisplay";
-import { Alchemy, AlchemyConst } from "../data/domain/alchemy";
-import { Bribe, BribeConst, BribeStatus } from "../data/domain/bribes";
+import { AppContext } from '../../data/appContext';
+import { getCoinsArray, nFormatter } from '../../data/utility'
+import CoinsDisplay from "../../components/coinsDisplay";
+import { Alchemy, AlchemyConst } from "../../data/domain/alchemy";
+import { Bribe, BribeConst, BribeStatus } from "../../data/domain/bribes";
 import styled from 'styled-components'
 import { NextSeo } from 'next-seo';
-import { Item } from "../data/domain/items";
-import ItemSourcesDisplay from "../components/base/ItemSourceDisplay";
-import TipDisplay, { TipDirection } from "../components/base/TipDisplay";
+import { Item } from "../../data/domain/items";
+import ItemSourcesDisplay from "../../components/base/ItemSourceDisplay";
+import TipDisplay, { TipDirection } from "../../components/base/TipDisplay";
 
 const ShadowBox = styled(Box)`
     box-shadow: -7px 8px 16px 0 rgba(0,0,0,0.17)
