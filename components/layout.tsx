@@ -148,7 +148,12 @@ export default function Layout({
     const [loading, setLoading] = useState(true);
 
     const navItems = [
-        { link: "/stamps", label: "Stamps" },
+        {
+            link: "/world-1", label: "World 1", subLinks: [
+                { subLink: "/stamps", label: "Stamps" },
+                { subLink: "/forge", label: "Forge" },
+            ]
+        },
         {
             link: "/world-2", label: "World 2", subLinks: [
                 { subLink: "/alchemy", label: "Alchemy" },

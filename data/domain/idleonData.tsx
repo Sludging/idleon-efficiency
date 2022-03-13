@@ -26,6 +26,7 @@ import parseArcade from './arcade';
 import parseObols from './obols';
 import { parseFamily } from './family';
 import { parseDungeons } from './dungeons';
+import { parseForge, updateForge } from './forge';
 
 export class IdleonData {
     private data: Map<string, any>
@@ -96,10 +97,12 @@ const keyFunctionMap: Record<string, Function> = {
     "arcade": (doc: Cloudsave, charCount: number) => parseArcade(JSON.parse(doc.get("ArcadeUpg")), doc.get("OptLacc")),
     "obols": (doc: Cloudsave, allItems: Item[], charCount: number) => parseObols(doc, charCount, allItems),
     "dungeons": (doc: Cloudsave, charCount: number) => parseDungeons(JSON.parse(doc.get("DungUpg")), doc.get("OptLacc")),
+    "forge": (doc: Cloudsave, allItems: Item[], charCount: number) => parseForge(doc.get("ForgeItemQty"), doc.get("ForgeIntProg"), doc.get("ForgeItemOrder"), doc.get("ForgeLV"), allItems),
 }
 
 const postProcessingMap: Record<string, Function> = {
     "family": (doc: Cloudsave, accountData: Map<string, any>) => parseFamily(accountData.get("players") as Player[]),
+    "forge": (doc: Cloudsave, accountData: Map<string, any>) => updateForge(accountData.get("forge"), accountData.get("gems")),
 }
 
 export const updateIdleonData = async (data: Cloudsave, charNames: string[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
@@ -115,7 +118,7 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], all
             else if (key == "worship") {
                 accountData.set(key, toExecute(data, accountData, charNames.length));
             }
-            else if (key == "lootyData" || key == "obols" || key == "alchemy") {
+            else if (key == "lootyData" || key == "obols" || key == "alchemy" || key == "forge") {
                 accountData.set(key, toExecute(data, allItems, charNames.length));
             }
             else {
