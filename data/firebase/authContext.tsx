@@ -36,7 +36,7 @@ export const AuthProvider: React.FC<{appLoading: boolean, data: {data: Map<strin
             .then((result) => {
                 setUser(result.user);
                 loginEvent("TOKEN");
-                router.push("/stamps");
+                router.push("/world-1/stamps");
             }).catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
@@ -54,7 +54,7 @@ export const AuthProvider: React.FC<{appLoading: boolean, data: {data: Map<strin
             .then((result) => {
                 setUser(result.user);
                 loginEvent("EMAIL");
-                router.push("/stamps");
+                router.push("/world-1/stamps");
             }).catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
