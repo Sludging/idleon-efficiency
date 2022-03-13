@@ -71,12 +71,15 @@ function Forge() {
             <NextSeo title="Forge" />
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Forge</Heading>
             <Box direction="row">
-                <ShadowBox margin={{ right: 'large', bottom: 'small' }} background="dark-1" gap="xsmall" pad="medium" align="center" width="medium">
-                    <ComponentAndLabel
-                        label="Cost to max all upgrades"
-                        component={<CoinsDisplay coinMap={getCoinsArray(totalCost)} maxCoins={3} />}
-                    />
-                </ShadowBox>
+                {
+                    totalCost > 0 &&
+                    <ShadowBox margin={{ right: 'large', bottom: 'small' }} background="dark-1" gap="xsmall" pad="medium" align="center" width="medium">
+                        <ComponentAndLabel
+                            label="Cost to max all upgrades"
+                            component={<CoinsDisplay coinMap={getCoinsArray(totalCost)} maxCoins={3} />}
+                        />
+                    </ShadowBox>
+                }
                 <ShadowBox margin={{ right: 'large', bottom: 'small' }} background="dark-1" gap="xsmall" pad="medium" align="center" width="medium">
                     <ComponentAndLabel
                         label="Need to refill in"
@@ -145,11 +148,11 @@ function Forge() {
                                         <ForgeItem item={slot.oils} title="Oils" />
                                         <ForgeItem item={slot.bars} title="Bars" />
                                         <Box gap="xsmall">
-                                        <ComponentAndLabel
-                                            label="Time Till Empty"
-                                            component={<TimeDown addSeconds={timeTillEmpty} size={TimeDisplaySize.Medium} />}
-                                        />
-                                        <Text size="10px">* Not fully accurate with oils yet.</Text>
+                                            <ComponentAndLabel
+                                                label="Time Till Empty"
+                                                component={<TimeDown addSeconds={timeTillEmpty} size={TimeDisplaySize.Medium} />}
+                                            />
+                                            <Text size="10px">* Not fully accurate with oils yet.</Text>
                                         </Box>
                                     </ShadowBox>
                                 )
