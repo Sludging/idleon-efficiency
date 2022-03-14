@@ -6,7 +6,7 @@
     padding-bottom: 117.14285714285715%;
     height: 0;
     background-size: cover;
-    background-position: 0 calc(var(--row) * 1.9607843137254901%)
+    background-position: 0 calc(var(--row) * 1.5625%)
 }
 .icons-3541:not(.icons-Mface1):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
             .icons-Mface1 { --row: 0; }
@@ -57,7 +57,20 @@
 .icons-Mface50 { --row: 45; }
 .icons-Mface51 { --row: 46; }
 .icons-Mface52 { --row: 47; }
-.icons-Mface6 { --row: 48; }
-.icons-Mface7 { --row: 49; }
-.icons-Mface8 { --row: 50; }
-.icons-Mface9 { --row: 51; }
+.icons-Mface53 { --row: 48; }
+.icons-Mface54 { --row: 49; }
+.icons-Mface55 { --row: 50; }
+.icons-Mface56 { --row: 51; }
+.icons-Mface57 { --row: 52; }
+.icons-Mface58 { --row: 53; }
+.icons-Mface59 { --row: 54; }
+.icons-Mface6 { --row: 55; }
+.icons-Mface60 { --row: 56; }
+.icons-Mface61 { --row: 57; }
+.icons-Mface62 { --row: 58; }
+.icons-Mface63 { --row: 59; }
+.icons-Mface64 { --row: 60; }
+.icons-Mface65 { --row: 61; }
+.icons-Mface7 { --row: 62; }
+.icons-Mface8 { --row: 63; }
+.icons-Mface9 { --row: 64; }

@@ -190,8 +190,13 @@ export default function parseStamps(rawData: Array<any>, maxData: Array<any>) {
         rawData.forEach((tab, index) => { // for each tab in the cloud save
             Object.entries(tab).map(([key, value]) => { // for each stamp in the current tab
                 if (key.toLowerCase() !== "length") {  // ignroe length at the end
-                    stampData[index][parseInt(key)].level = value as number; // update our pre-populated data with the stamp level
-                    stampData[index][parseInt(key)].maxLevel = maxData[index][key] as number;
+                    try {
+                        stampData[index][parseInt(key)].level = value as number; // update our pre-populated data with the stamp level
+                        stampData[index][parseInt(key)].maxLevel = maxData[index][key] as number;
+                    }
+                    catch (e) {
+                        console.debug("Unable to set level for stamp", key);
+                    }
                 }
             })
         })
