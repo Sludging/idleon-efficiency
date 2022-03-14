@@ -49,6 +49,7 @@ function Constellations() {
             case 'A': return 'World 1';
             case 'B': return 'World 2';
             case 'C': return 'World 3';
+            case 'D': return 'World 4';
             default: return 'Unknown World';
         }
     }
@@ -66,7 +67,7 @@ function Constellations() {
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Constellations</Heading>
             <ShadowBox background="dark-1" pad="small" gap="small">
                 <Tabs activeIndex={index} onActive={onActive}>
-                    {['A', 'B', 'C'].map((letter) => {
+                    {['A', 'B', 'C', 'D'].map((letter) => {
                         return (
                             <Tab key={letter} title={LetterToWorldNumber(letter)}>
                                 {

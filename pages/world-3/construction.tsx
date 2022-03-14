@@ -522,6 +522,7 @@ function DeathnoteDisplay() {
     const [playerData, setPlayerData] = useState<Player[]>();
     const [deathnoteData, setDeathnoteData] = useState<Deathnote>();
     const appContext = useContext(AppContext);
+    const size = useContext(ResponsiveContext);
 
     const monsterInfo = EnemyInfo;
 
@@ -575,12 +576,12 @@ function DeathnoteDisplay() {
     }
 
     return (
-        <Grid columns="1/3">
+        <Grid columns={size == "small" ? "1" : "1/4"}>
             {
                 deathNoteByWorld && [...deathNoteByWorld.entries()].map(([worldName, deathnoteMobs], index) => {
                     return (
-                        <ShadowBox background="dark-1" key={index} gap="medium" pad="medium">
-                            <Text>{worldName} (Bonus {worldTierInfo[index]}%)</Text>
+                        <ShadowBox background="dark-1" key={index} gap="medium" pad="medium" margin={{right: 'small', bottom: 'large'}}>
+                            <Text size="medium">{worldName} (Bonus {worldTierInfo[index]}%)</Text>
                             {
                                 [...deathnoteMobs.entries()].map(([mobName, killCount], mobIndex) => {
                                     const deathnoteRank = deathnoteData?.getDeathnoteRank(killCount);
