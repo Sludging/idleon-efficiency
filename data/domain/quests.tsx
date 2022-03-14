@@ -40,7 +40,7 @@ export interface NpcQuest {
     Rewards: QuestItemInfo[]
     QuestName: string
     Difficulty: number
-    note: Record<string, string>
+    note: string//Record<string, string>
     ItemReq?: QuestItemInfo[]
     CustomType?: string
     CustomArray?: QuestReqs[]

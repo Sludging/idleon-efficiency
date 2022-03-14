@@ -34,7 +34,7 @@ export interface EnemyDrops {
 
 export interface EnemyData {
     details: EnemyDetails
-    drops: EnemyDrops[]
+    drops: EnemyDrops[] | null
     mapData: MapData | null
 
     // TODO: Can we ignore these?
