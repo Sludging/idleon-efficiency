@@ -101,6 +101,10 @@ function ShowSkills(props: SkillProps) {
             case SkillsIndex.Trapping: return `icons-3836 icons-ClassIcons48`;
             case SkillsIndex.Construction: return `icons-3836 icons-ClassIcons49`;
             case SkillsIndex.Worship: return `icons-3836 icons-ClassIcons50`;
+            case SkillsIndex.Cooking: return `icons-3836 icons-ClassIcons51`;
+            case SkillsIndex.Breeding: return `icons-3836 icons-ClassIcons52`;
+            case SkillsIndex.Intellect: return `icons-3836 icons-ClassIcons53`;
+
             default: return '';
         }
     }
@@ -109,20 +113,19 @@ function ShowSkills(props: SkillProps) {
         <Box pad={{ left: "large", top: "medium" }} gap="medium">
             <Text size='medium'>Skills</Text>
             <Grid
-                rows={['1/3', '1/3', '1/3']}
-                columns={['1/3', '1/3', '1/3']}
+                columns={['33%', '33%', '33%']}
                 areas={[
                     ['mining', 'fishing', 'trapping'],
                     ['smithing', 'alchemy', 'construction'],
                     ['chopping', 'catching', 'worship'],
+                    ['cooking', 'breeding', 'intellect'],
                 ]}
-                gap={{ row: "small" }}
             >
                 {
                     Array.from(props.skillsMap).map(([skillIndex, skill]) => {
                         const skillRank = props.skillsRank.get(skillIndex);
                         return (
-                            <Box key={`skill_${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} gridArea={`${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} direction="row" gap="medium">
+                            <Box key={`skill_${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} gridArea={`${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} direction="row" gap="medium" margin={{right: 'small', bottom: 'medium'}}>
                                 <Box direction="row" align="center" gap="small">
                                     <Box width={{ max: '36px', min: '36px' }}>
                                         <Box className={getSkillClass(skillIndex)} />
@@ -241,23 +244,23 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                                 <Text size="small">{player.level}</Text>
                             </Box>
                             <Meter
-                            size="small"
-                            thickness='2px'
-                            type="bar"
-                            background="grey-1"
-                            color="brand"
-                            values={[
-                                {
-                                    value: player.classExp,
-                                    label: 'current',
-                                    color: 'brand'
-                                }
-                            ]}
-                            max={player.classExpReq} />
-                        <Box direction="row" justify="between">
-                            <Text size="xsmall">{nFormatter(player.classExp, "Whole")}</Text>
-                            <Text size="xsmall">{nFormatter(player.classExpReq, "Whole")}</Text>
-                        </Box>
+                                size="small"
+                                thickness='2px'
+                                type="bar"
+                                background="grey-1"
+                                color="brand"
+                                values={[
+                                    {
+                                        value: player.classExp,
+                                        label: 'current',
+                                        color: 'brand'
+                                    }
+                                ]}
+                                max={player.classExpReq} />
+                            <Box direction="row" justify="between">
+                                <Text size="xsmall">{nFormatter(player.classExp, "Whole")}</Text>
+                                <Text size="xsmall">{nFormatter(player.classExpReq, "Whole")}</Text>
+                            </Box>
                         </Box>
                     </Box>
                     <Text size="small">Current Monster / Map = {player.currentMonster} / {player.currentMap}</Text>
