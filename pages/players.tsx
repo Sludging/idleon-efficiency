@@ -34,7 +34,7 @@ import TipDisplay, { TipDirection } from '../components/base/TipDisplay';
 import { Next } from 'grommet-icons';
 import { NextSeo } from 'next-seo';
 import { MouseEventHandler } from 'hoist-non-react-statics/node_modules/@types/react';
-import { Item, ItemStat, DropInfo, ItemSources, Food } from '../data/domain/items';
+import { Item, ItemStat, ItemSources, Food, DropSource } from '../data/domain/items';
 import { Storage } from '../data/domain/storage';
 import { Prayer } from '../data/domain/prayers';
 import { TimeDown, TimeUp } from '../components/base/TimeDisplay';
@@ -49,7 +49,7 @@ import { Achievement, AchievementConst } from '../data/domain/achievements';
 import { Dungeons, PassiveType } from '../data/domain/dungeons';
 
 
-function ItemSourcesDisplay({ sources, dropInfo }: { sources: ItemSources, dropInfo: DropInfo }) {
+function ItemSourcesDisplay({ sources, dropInfo }: { sources: ItemSources, dropInfo: DropSource[]}) {
 
     const possibleSources = useMemo(() => {
         if (!sources) {

@@ -8,7 +8,7 @@ import {
 import { useState, useEffect, useContext, useMemo } from 'react';
 import { AppContext } from '../../data/appContext'
 import { LootyInfo } from '../../data/domain/lootyTracker';
-import { ItemSources, DropInfo } from '../../data/domain/items';
+import { ItemSources } from '../../data/domain/items';
 import { NextSeo } from 'next-seo';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 
@@ -16,7 +16,7 @@ const getRegex = () => { return /Cards(\w)(\d+)/g };
 const getEnhancerRegex = () => { return /DungEnhancer(\d+)/g };
 
 
-function ItemSourcesDisplay({ sources, dropInfo }: { sources: ItemSources, dropInfo: DropInfo}) {
+function ItemSourcesDisplay({ sources }: { sources: ItemSources}) {
 
     const possibleSources = useMemo(() => { 
         if (!sources) {
@@ -122,7 +122,7 @@ function LootyTracker() {
                                 <Box key={index}>
                                     <TipDisplay
                                         heading={`${item.displayName} (${item.type})`}
-                                        body={<ItemSourcesDisplay sources={item.sources} dropInfo={item.dropInfo} />}
+                                        body={<ItemSourcesDisplay sources={item.sources} />}
                                         size={"large"}
                                         direction={TipDirection.Down}
                                         maxWidth="large"
