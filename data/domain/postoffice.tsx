@@ -72,9 +72,12 @@ export const initPostOffice = () => {
         new Box(12, "Deaths Storage Unit", [new BoxBonus("Weapon Power", 22, 200, "decay"), new BoxBonus("% Basic Atk Speed", 15, 150, "decay"), new BoxBonus("% Total Damage", 15, 200, "decay")]),
         new Box(13, "Utilitarian Capsule", [new BoxBonus("% Printer Sample Size", 5, 200, "decay"), new BoxBonus("% Multikill per Tier", 15, 200, "decay"), new BoxBonus("% Cash from Mobs", 39, 200, "decay")]),
         new Box(14, "Lazzzy Lootcrate", [new BoxBonus("% 2X AFK XP chance", 30, 200, "decay"), new BoxBonus("% AFK exp if 36hr+", 35, 200, "decay"), new BoxBonus("% AFK Cash if 36hr+", 35, 200, "decay")]),
-        new Box(15, "Filler", [new BoxBonus("Nothing", 50, 200, "decay"), new BoxBonus("Nothing", 0.25, 0, "add"), new BoxBonus("Nothing", 65, 200, "decay")]),
+        new Box(15, "Science Spare Parts", [new BoxBonus("Lab Efficiency", 4, 0, "add"), new BoxBonus("% Lab EXP gain", 40, 150, "decay"), new BoxBonus("Base LUK", 30, 200, "decay")]),
         new Box(16, "Trapping Lockbox", [new BoxBonus("% Trapping Efficiency", 50, 200, "decay"), new BoxBonus("% Trapping EXP", 50, 200, "decay"), new BoxBonus("% Critters Trapped", 45, 200, "decay")]),
         new Box(17, "Construction Container", [new BoxBonus("% Base Build Rate", 0.25, 0, "add"), new BoxBonus("% Shrine Charge Rate", 75, 200, "decay"), new BoxBonus("% Construction EXP", 0.5, 0, "add")]),
         new Box(18, "Crate of the Creator", [new BoxBonus("% Worship Efficiency", 50, 200, "decay"), new BoxBonus("% Max Charge", 200, 200, "decay"), new BoxBonus("Starting Worship Pts", 90, 200, "decay")]),
+        new Box(19, "Chefs Essentials", [new BoxBonus("Cooking Efficiency", 4, 0, "add"), new BoxBonus("% Cooking EXP gain", 60, 200, "decay"), new BoxBonus("% for 2x Ladle Drop", 88, 200, "decay")]),
+        new Box(20, "Myriad Crate", [new BoxBonus("Base All Stat", 40, 200, "decay"), new BoxBonus("Base All Efficiency", 100, 200, "decay"), new BoxBonus("% All Skills exp", 30, 200, "decay")]),
+        new Box(21, "Filler", [new BoxBonus("Nothing", 50, 200, "decay"), new BoxBonus("Nothing", 0.25, 0, "add"), new BoxBonus("Nothing", 65, 200, "decay")]),
     ];
 }

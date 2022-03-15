@@ -8,6 +8,8 @@ import { Card, CardInfo } from "./cards";
 import { Item, Equipment, Food, Tool, StoneProps } from "./items";
 import { notUndefined } from '../utility';
 import { Cloudsave } from "./cloudsave";
+import { EnemyInfo } from "./enemies";
+import { MapInfo } from "./maps";
 
 export class PlayerStats {
     strength: number = 0;
@@ -46,7 +48,10 @@ export enum SkillsIndex {
     Catching = 6,
     Trapping = 7,
     Construction = 8,
-    Worship = 9
+    Worship = 9,
+    Cooking = 10,
+    Breeding = 11,
+    Intellect = 12,
 }
 
 
@@ -81,20 +86,20 @@ export enum SkillsIndex {
 
 const initCrafts = (): AnvilProduct[] => {
     return [
-        { displayName: "Thread", internalName: "CraftMat1", time: 100, levelReq: 1, exp: 5, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
-        { displayName: "Trusty Nails", internalName: "CraftMat5", time: 250, levelReq: 5, exp: 8, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
-        { displayName: "Boring Brick", internalName: "CraftMat6", time: 500, levelReq: 12, exp: 14, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
-        { displayName: "Chain Link", internalName: "CraftMat7", time: 1000, levelReq: 18, exp: 25, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
-        { displayName: "Leather Hide", internalName: "CraftMat9", time: 2000, levelReq: 25, exp: 40, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
-        { displayName: "Pinion Spur", internalName: "CraftMat8", time: 5000, levelReq: 32, exp: 80, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
-        { displayName: "Lugi Bracket", internalName: "CraftMat10", time: 12500, levelReq: 40, exp: 160, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
-        { displayName: "Filler", internalName: "CraftMat11", time: 25000, levelReq: 50, exp: 200, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
-        { displayName: "Filler", internalName: "CraftMat12", time: 40000, levelReq: 60, exp: 350, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
-        { displayName: "Filler", internalName: "CraftMat13", time: 60000, levelReq: 70, exp: 500, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
-        { displayName: "Filler", internalName: "CraftMat14", time: 90000, levelReq: 80, exp: 700, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
-        { displayName: "Filler", internalName: "CraftMat15", time: 120000, levelReq: 90, exp: 1000, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
-        { displayName: "Filler", internalName: "CraftMat16", time: 160000, levelReq: 100, exp: 1300, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
-        { displayName: "Filler", internalName: "CraftMat17", time: 250000, levelReq: 110, exp: 2000, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 }
+        { displayName: "Thread", internalName: "CraftMat1", time: 100, levelReq: 1, exp: 6, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
+        { displayName: "Trusty Nails", internalName: "CraftMat5", time: 200, levelReq: 5, exp: 10, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
+        { displayName: "Boring Brick", internalName: "CraftMat6", time: 350, levelReq: 12, exp: 16, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
+        { displayName: "Chain Link", internalName: "CraftMat7", time: 700, levelReq: 17, exp: 25, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
+        { displayName: "Leather Hide", internalName: "CraftMat9", time: 1200, levelReq: 25, exp: 35, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
+        { displayName: "Pinion Spur", internalName: "CraftMat8", time: 2000, levelReq: 30, exp: 50, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
+        { displayName: "Lugi Bracket", internalName: "CraftMat10", time: 3000, levelReq: 35, exp: 65, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
+        { displayName: "Purple Screw", internalName: "CraftMat11", time: 4000, levelReq: 43, exp: 75, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
+        { displayName: "Thingymabob", internalName: "CraftMat12", time: 6000, levelReq: 50, exp: 90, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
+        { displayName: "Tangled Cords", internalName: "CraftMat13", time: 8500, levelReq: 60, exp: 110, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
+        { displayName: "PVC Pipe", internalName: "CraftMat14", time: 12000, levelReq: 70, exp: 140, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
+        { displayName: "Filler", internalName: "CraftMat15", time: 120000, levelReq: 999, exp: 1000, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
+        { displayName: "Filler", internalName: "CraftMat16", time: 160000, levelReq: 999, exp: 1300, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
+        { displayName: "Filler", internalName: "CraftMat17", time: 250000, levelReq: 999, exp: 2000, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 }
     ];
 }
 
@@ -371,7 +376,7 @@ const keyFunctionMap: Record<string, Function> = {
         player.class = ClassIndex[doc.get(`CharacterClass_${player.playerID}`)]?.replace(/_/g, " ") || "New Class?";
         player.classId = doc.get(`CharacterClass_${player.playerID}`) as ClassIndex;
     },
-    "monster": (doc: Cloudsave, player: Player) => { player.currentMonster = monstersMap.get(doc.get(`AFKtarget_${player.playerID}`))?.replace(/_/g, " ") || "New Monster?"; },
+    "monster": (doc: Cloudsave, player: Player) => { player.currentMonster = EnemyInfo.find(enemy => enemy.details.internalName == doc.get(`AFKtarget_${player.playerID}`))?.details.Name || doc.get(`AFKtarget_${player.playerID}`); },
     "map": (doc: Cloudsave, player: Player) => parseMap(doc.get(`CurrentMap_${player.playerID}`), player),
     "starsigns": (doc: Cloudsave, player: Player) => parseStarSigns(doc.get(`PVtStarSign_${player.playerID}`), player),
     "money": (doc: Cloudsave, player: Player) => { player.money = doc.get(`Money_${player.playerID}`) },
@@ -501,7 +506,7 @@ const parseStarSigns = (starSigns: string, player: Player) => {
 
 const parseMap = (currentMap: number, player: Player) => {
     player.currentMapId = currentMap;
-    player.currentMap = mapsMap.get(currentMap.toString())?.replace(/_/g, " ") || "New Map?";
+    player.currentMap = MapInfo.find(map => map.id == currentMap)?.area || "New Map?";
 }
 
 const parseStats = (stats: number[], lvZero: number[], skillXP: Array<number>, skillXPReqs: Array<number>, player: Player) => {
@@ -522,29 +527,38 @@ const parseEquipment = (
     let playerEquipment = new PlayerEquipment();
     equipment?.forEach((data, equipIndex) => {
         if (equipIndex == 0) { // armor 
-            Object.entries(data).forEach(([location, name], _) => {
+            Object.entries(data).filter(([location, _]) => location != "length").forEach(([location, name], _) => {
                 let theItem = allItems.find((item) => item.internalName == name)?.duplicate();
                 if (theItem) {
                     theItem.addStone(equipStones[Number(location)])
+                }
+                else if (name != "Blank") {
+                    console.log("Armor not found", name, location);
                 }
                 playerEquipment.equipment.push(theItem);
             })
         }
         if (equipIndex == 1) { // tools
-            Object.entries(data).forEach(([location, name], _) => {
+            Object.entries(data).filter(([location, _]) => location != "length").forEach(([location, name], _) => {
                 let theItem = allItems.find((item) => item.internalName == name)?.duplicate();
                 if (theItem) {
                     theItem.addStone(toolStones[Number(location)])
+                }
+                else if (name != "Blank"){
+                    console.log("Tool not found", name, location);
                 }
                 playerEquipment.tools.push(theItem);
 
             })
         }
         if (equipIndex == 2) { // food
-            Object.entries(data).forEach(([location, name], _) => {
+            Object.entries(data).filter(([location, _]) => location != "length").forEach(([location, name], _) => {
                 const item = allItems.find(item => item.internalName == name)?.duplicate() as Food | undefined;
                 if (item) {
                     item.count = equipCount[equipIndex][Number(location)];
+                }
+                else if (name != "Blank") {
+                    console.log("Food not found", name, location);
                 }
                 playerEquipment.food.push(item);
             })
