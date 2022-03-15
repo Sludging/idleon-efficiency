@@ -1,8 +1,8 @@
 import { Text, Box } from "grommet";
 import { useMemo } from "react";
-import { DropInfo, ItemSources } from "../../data/domain/items";
+import { ItemSources } from "../../data/domain/items";
 
-export default function ItemSourcesDisplay({ sources, dropInfo }: { sources: ItemSources, dropInfo: DropInfo}) {
+export default function ItemSourcesDisplay({ sources }: { sources: ItemSources}) {
 
     const possibleSources = useMemo(() => { 
         if (!sources) {

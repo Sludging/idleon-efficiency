@@ -40,7 +40,7 @@ function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stam
     function TipContent({ stamp, faceLeft }: { stamp: Stamp, faceLeft: boolean }) {
         if (stamp.level == 0) {
             if (stampItem && stampItem.sources.sources.length > 0) {
-                return <ItemSourcesDisplay sources={stampItem.sources} dropInfo={stampItem.dropInfo} />
+                return <ItemSourcesDisplay sources={stampItem.sources} />
             }
             else {
                 return <Box>Unobtainable</Box>
@@ -87,7 +87,7 @@ function StampTab({ tab, index, blueFlavPercent, hasBribe }: { tab: Stamp[], ind
             <Box fill>
                 <Grid columns={{ count: 4, size: "auto"}} gap="none">
                     {
-                        tab.map((stamp: Stamp) => {
+                        tab.filter(stamp => stamp.name != "FILLER").map((stamp: Stamp) => {
                             if (stamp != undefined) {
                                 return (
                                     <StampDisplay key={`tab_${index}_${stamp.raw_name}`} stamp={stamp} index={index} blueFlavPercent={blueFlavPercent} hasBribe={hasBribe} />

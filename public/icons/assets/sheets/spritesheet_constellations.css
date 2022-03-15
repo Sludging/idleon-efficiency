@@ -6,7 +6,7 @@ width: 100%;
 padding-bottom: 100%;
 height: 0;
 background-size: cover;
-background-position: 0 calc(var(--row) * 1.408450704225352%)
+background-position: 0 calc(var(--row) * 1.1235955056179776%)
 }
 .icons-constellationA1 { --row: 0; }
 .icons-constellationA1_done { --row: 1; }
@@ -75,8 +75,26 @@ background-position: 0 calc(var(--row) * 1.408450704225352%)
 .icons-constellationC10 { --row: 64; }
 .icons-constellationC10_done { --row: 65; }
 .icons-constellationC11 { --row: 66; }
-.icons-constellationC11_done { --row: 67; }
-.icons-constellationC12 { --row: 68; }
-.icons-constellationC12_done { --row: 69; }
-.icons-constellationC13 { --row: 70; }
-.icons-constellationC13_done { --row: 71; }
+.icons-constellationD0_done { --row: 67; }
+.icons-constellationD1 { --row: 68; }
+.icons-constellationD1_done { --row: 69; }
+.icons-constellationD2 { --row: 70; }
+.icons-constellationD2_done { --row: 71; }
+.icons-constellationD3 { --row: 72; }
+.icons-constellationD3_done { --row: 73; }
+.icons-constellationD4 { --row: 74; }
+.icons-constellationD4_done { --row: 75; }
+.icons-constellationD5 { --row: 76; }
+.icons-constellationD5_done { --row: 77; }
+.icons-constellationD6 { --row: 78; }
+.icons-constellationD6_done { --row: 79; }
+.icons-constellationD7 { --row: 80; }
+.icons-constellationD7_done { --row: 81; }
+.icons-constellationD8 { --row: 82; }
+.icons-constellationD8_done { --row: 83; }
+.icons-constellationD9 { --row: 84; }
+.icons-constellationD9_done { --row: 85; }
+.icons-constellationD10 { --row: 86; }
+.icons-constellationD10_done { --row: 87; }
+.icons-constellationD11 { --row: 88; }
+.icons-constellationD11_done { --row: 89; }
