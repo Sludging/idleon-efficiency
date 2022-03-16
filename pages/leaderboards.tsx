@@ -144,6 +144,7 @@ export async function getStaticProps() {
 
     const isLocal = process.env.NEXT_PUBLIC_ROOT_URL == "localhost:3000";
     if (isLocal) {
+        console.log("Local data!")
         leaderboards.data = leaderboards.data
             .sort((category1, category2) => (TitleMap.get(category1.Category)?.group ?? 9999) > (TitleMap.get(category2.Category)?.group ?? 9999) ? -1 : 1)
     }

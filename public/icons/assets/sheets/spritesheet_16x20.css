@@ -9,7 +9,7 @@
     background-position: 0 calc(var(--row) * 1.639344262295082%)
 }
 .icons-1620:not(.icons-Dung_Rank0):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
-            .icons-Dung_Rank0 { --row: 0; }
+.icons-Dung_Rank0 { --row: 0; }
 .icons-Dung_Rank1 { --row: 1; }
 .icons-Dung_Rank10 { --row: 2; }
 .icons-Dung_Rank11 { --row: 3; }

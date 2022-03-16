@@ -9,7 +9,7 @@
     background-position: 0 calc(var(--row) * 8.333333333333334%)
 }
 .icons-4344:not(.icons-TaskAchA58):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
-            .icons-TaskAchA58 { --row: 0; }
+.icons-TaskAchA58 { --row: 0; }
 .icons-TaskAchA59 { --row: 1; }
 .icons-TaskAchA60 { --row: 2; }
 .icons-TaskAchA61 { --row: 3; }

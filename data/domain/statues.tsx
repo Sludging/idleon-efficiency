@@ -25,7 +25,9 @@ export class Statue {
         const StatueNumberRegex = /EquipmentStatues(\d+)/gm;
         try {
             const regexMatches = StatueNumberRegex.exec(internalName);
-            this.statueNumber = parseInt(regexMatches?.at(1) ?? "0");
+            if (regexMatches) {
+                this.statueNumber = parseInt(regexMatches[1]);
+            }
         }
         catch (e) {
             console.debug("Failed parsing statue number");

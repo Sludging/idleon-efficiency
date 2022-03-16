@@ -9,7 +9,7 @@
     background-position: 0 calc(var(--row) * 1.5625%)
 }
 .icons-3541:not(.icons-Mface1):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
-            .icons-Mface1 { --row: 0; }
+.icons-Mface1 { --row: 0; }
 .icons-Mface10 { --row: 1; }
 .icons-Mface11 { --row: 2; }
 .icons-Mface12 { --row: 3; }

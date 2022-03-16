@@ -9,7 +9,7 @@
     background-position: 0 calc(var(--row) * 0.12224938875305623%)
 }
 .icons-5656:not(.icons-AtkCdBG):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
-            .icons-AtkCdBG { --row: 0; }
+.icons-AtkCdBG { --row: 0; }
 .icons-AtkCdBgNO { --row: 1; }
 .icons-DungTalent { --row: 2; }
 .icons-Gbonus0 { --row: 3; }
