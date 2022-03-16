@@ -944,7 +944,7 @@ function TalentDisplay({ player }: { player: Player }) {
         <Box pad="medium" gap="medium">
             <Text size='medium'>Talents</Text>
             {
-                ClassTalentMap[ClassIndex[player.class.replace(/ /g, "_") as keyof typeof ClassIndex]].concat(["Special Talent 1", "Special Talent 2"]).map((talentPage, _) => {
+                ClassTalentMap[ClassIndex[player.class.replace(/ /g, "_") as keyof typeof ClassIndex]].concat(["Special Talent 1", "Special Talent 2", "Special Talent 3"]).map((talentPage, _) => {
                     return (
                         <Box key={`player_${player.playerID}_talents_${talentPage}`} align="center" gap="medium">
                             <Text>{talentPage}</Text>
