@@ -9,7 +9,7 @@
     background-position: 0 calc(var(--row) * 0.06345177664974619%)
 }
 .icons-7272:not(.icons-AlienTree):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
-            .icons-AlienTree { --row: 0; }
+.icons-AlienTree { --row: 0; }
 .icons-AlienTreetutorial { --row: 1; }
 .icons-BabaYagaETC { --row: 2; }
 .icons-BadgeD1 { --row: 3; }

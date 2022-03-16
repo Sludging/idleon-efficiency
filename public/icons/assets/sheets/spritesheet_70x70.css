@@ -9,7 +9,7 @@
     background-position: 0 calc(var(--row) * 1.2658227848101267%)
 }
 .icons-7070:not(.icons-aUpgradesG0):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
-            .icons-aUpgradesG0 { --row: 0; }
+.icons-aUpgradesG0 { --row: 0; }
 .icons-aUpgradesG1 { --row: 1; }
 .icons-aUpgradesG10 { --row: 2; }
 .icons-aUpgradesG11 { --row: 3; }

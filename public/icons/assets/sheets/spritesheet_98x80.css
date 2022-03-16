@@ -9,7 +9,7 @@
     background-position: 0 calc(var(--row) * 5.882352941176471%)
 }
 .icons-9880:not(.icons-aShopItems0):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
-            .icons-aShopItems0 { --row: 0; }
+.icons-aShopItems0 { --row: 0; }
 .icons-aShopItems1 { --row: 1; }
 .icons-aShopItems10 { --row: 2; }
 .icons-aShopItems11 { --row: 3; }

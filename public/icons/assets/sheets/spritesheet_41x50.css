@@ -9,7 +9,7 @@
     background-position: 0 calc(var(--row) * 2.7027027027027026%)
 }
 .icons-4150:not(.icons-Statue1):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
-            .icons-Statue1 { --row: 0; }
+.icons-Statue1 { --row: 0; }
 .icons-Statue10 { --row: 1; }
 .icons-Statue11 { --row: 2; }
 .icons-Statue12 { --row: 3; }

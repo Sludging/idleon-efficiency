@@ -154,7 +154,7 @@ export const TitleMap: Map<string, DisplayInfo> = new Map(Object.entries({
     },
     "Stamps": {
         title: "Total Stamps Levels",
-        icon: "icons-3636 icons-StampA34_x1", 
+        icon: "icons-3636 icons-StampA32_x1", 
         type: CategoryType.Number,
         group: CategoryGroup.Totals
     },
@@ -218,6 +218,36 @@ export const TitleMap: Map<string, DisplayInfo> = new Map(Object.entries({
         icon: "icons-4150 icons-StatueG1", 
         type: CategoryType.Number,
         group: CategoryGroup.Totals
+    },
+    "ArenaWave": {
+        title: "Pet Arena Round",
+        icon: "icons-5050 icons-PetBullet11", 
+        type: CategoryType.Number,
+        group: CategoryGroup.Highscore
+    },
+    "BreedingLevel": {
+        title: "Breeding Level",
+        icon: "icons-3836 icons-ClassIcons52", 
+        type: CategoryType.Number,
+        group: CategoryGroup.Skills
+    },
+    "CookingLevel": {
+        title: "Cooking Level",
+        icon: "icons-3836 icons-ClassIcons51", 
+        type: CategoryType.Number,
+        group: CategoryGroup.Skills
+    },
+    "LabLevel": {
+        title: "Lab Level",
+        icon: "icons-3836 icons-ClassIcons53", 
+        type: CategoryType.Number,
+        group: CategoryGroup.Skills
+    },
+    "W4Colo": {
+        title: "Astro Colosseum - Highscore",
+        icon: "icons-colosseums icons-colosseums4", 
+        type: CategoryType.Number,
+        group: CategoryGroup.Highscore
     },
 }));
 

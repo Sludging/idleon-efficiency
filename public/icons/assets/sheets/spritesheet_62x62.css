@@ -9,7 +9,7 @@
     background-position: 0 calc(var(--row) * 5.882352941176471%)
 }
 .icons-6262:not(.icons-PachiShopICON0):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
-            .icons-PachiShopICON0 { --row: 0; }
+.icons-PachiShopICON0 { --row: 0; }
 .icons-PachiShopICON1 { --row: 1; }
 .icons-PachiShopICON10 { --row: 2; }
 .icons-PachiShopICON11 { --row: 3; }
