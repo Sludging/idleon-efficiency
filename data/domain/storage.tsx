@@ -5,6 +5,7 @@ export class Storage {
     chest: Item[] = []
     playerStorage: Item[][] = [];
     storageChestsUsed: Record<string, number> = {}
+    money: number = 0;
 }
 
 export default function parseStorage(doc: Cloudsave, playerNames: string[], allItems: Item[], storageInvUsed: Record<string, number>) {
@@ -38,5 +39,6 @@ export default function parseStorage(doc: Cloudsave, playerNames: string[], allI
     });
 
     storage.storageChestsUsed = storageInvUsed;
+    storage.money = doc.get("MoneyBANK");
     return storage;
 }

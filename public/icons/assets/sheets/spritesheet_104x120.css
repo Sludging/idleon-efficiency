@@ -9,7 +9,7 @@
     background-position: 0 calc(var(--row) * 7.142857142857143%)
 }
 .icons-104120:not(.icons-B3P12):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
-            .icons-B3P12 { --row: 0; }
+.icons-B3P12 { --row: 0; }
 .icons-B3P12b { --row: 1; }
 .icons-aVials0 { --row: 2; }
 .icons-aVials1 { --row: 3; }

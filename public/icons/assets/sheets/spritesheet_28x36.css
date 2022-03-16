@@ -9,7 +9,7 @@
     background-position: 0 calc(var(--row) * 0.5555555555555556%)
 }
 .icons-2836:not(.icons-CardSet0):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
-            .icons-CardSet0 { --row: 0; }
+.icons-CardSet0 { --row: 0; }
 .icons-CardSet1 { --row: 1; }
 .icons-CardSet2 { --row: 2; }
 .icons-CardSet25 { --row: 3; }

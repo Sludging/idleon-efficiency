@@ -9,7 +9,7 @@
     background-position: 0 calc(var(--row) * 10.0%)
 }
 .icons-6040:not(.icons-TaskRank0):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
-            .icons-TaskRank0 { --row: 0; }
+.icons-TaskRank0 { --row: 0; }
 .icons-TaskRank1 { --row: 1; }
 .icons-TaskRank10 { --row: 2; }
 .icons-TaskRank2 { --row: 3; }

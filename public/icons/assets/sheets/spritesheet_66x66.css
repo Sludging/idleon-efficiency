@@ -9,7 +9,7 @@
     background-position: 0 calc(var(--row) * 1.8867924528301887%)
 }
 .icons-6666:not(.icons-ConLoadout0):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
-            .icons-ConLoadout0 { --row: 0; }
+.icons-ConLoadout0 { --row: 0; }
 .icons-ConLoadout1 { --row: 1; }
 .icons-ConLoadout2 { --row: 2; }
 .icons-ConTowerB0 { --row: 3; }

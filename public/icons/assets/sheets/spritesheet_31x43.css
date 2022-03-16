@@ -9,7 +9,7 @@
     background-position: 0 calc(var(--row) * 25.0%)
 }
 .icons-3143:not(.icons-CardsBorder1):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
-            .icons-CardsBorder1 { --row: 0; }
+.icons-CardsBorder1 { --row: 0; }
 .icons-CardsBorder2 { --row: 1; }
 .icons-CardsBorder3 { --row: 2; }
 .icons-CardsBorder4 { --row: 3; }

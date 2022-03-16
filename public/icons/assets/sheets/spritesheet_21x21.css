@@ -9,7 +9,7 @@
     background-position: 0 calc(var(--row) * 25.0%)
 }
 .icons-2121:not(.icons-Coins1):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
-            .icons-Coins1 { --row: 0; }
+.icons-Coins1 { --row: 0; }
 .icons-Coins2 { --row: 1; }
 .icons-Coins3 { --row: 2; }
 .icons-Coins4 { --row: 3; }
