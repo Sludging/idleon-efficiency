@@ -9,7 +9,7 @@
     background-position: 0 calc(var(--row) * 4.0%)
 }
 .icons-7878:not(.icons-Prayer0):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
-            .icons-Prayer0 { --row: 0; }
+.icons-Prayer0 { --row: 0; }
 .icons-Prayer1 { --row: 1; }
 .icons-Prayer10 { --row: 2; }
 .icons-Prayer11 { --row: 3; }

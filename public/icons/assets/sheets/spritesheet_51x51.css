@@ -9,7 +9,7 @@
     background-position: 0 calc(var(--row) * 1.7857142857142858%)
 }
 .icons-5151:not(.icons-DungStatLock):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
-            .icons-DungStatLock { --row: 0; }
+.icons-DungStatLock { --row: 0; }
 .icons-DungTraitA0 { --row: 1; }
 .icons-DungTraitA1 { --row: 2; }
 .icons-DungTraitA10 { --row: 3; }
