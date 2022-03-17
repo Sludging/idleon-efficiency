@@ -19,7 +19,9 @@ const SkullChargeMap: Record<string, number> = {
     "WorshipSkull2": 200,
     "WorshipSkull3": 400,
     "WorshipSkull4": 750,
-    "WorshipSkull5": 1250
+    "WorshipSkull5": 1250,
+    "WorshipSkull6": 1750,
+    "WorshipSkull7": 2500
 }
 
 const SkullSpeedMap: Record<string, number> = {
@@ -27,18 +29,21 @@ const SkullSpeedMap: Record<string, number> = {
     "WorshipSkull2": 5,
     "WorshipSkull3": 5,
     "WorshipSkull4": 6,
-    "WorshipSkull5": 7
+    "WorshipSkull5": 7,
+    "WorshipSkull6": 7,
+    "WorshipSkull7": 8
 }
 
-const totemNames: string[] = "Goblin_Gorefest Wakawaka_War Acorn_Assault Frosty_Firefight Tower_Defence_5 Tower_Defence_6".split(" ");
-const totemMapIds: number[] = [26, 63, 30, 107];
+const totemNames: string[] = "Goblin_Gorefest Wakawaka_War Acorn_Assault Frosty_Firefight Clash_of_Cans Tower_Defence_6".split(" ");
+const totemMapIds: number[] = [26, 63, 30, 107, 155];
 
 const worshipBaseInfo: string[][] = ["4 130 goblinG 0 170 570 25 60 1".split(" "),
 "7 70 moonman 21 42 357 40 250 10".split(" "),
-"15 40 acorn 38 655 200 60 1000 30".split(" "),
-"35 190 snowball 56 42 357 100 3000 45".split(" "),
-"3 130 goblinG 74 42 357 200 8000 60".split(" "),
-"3 130 goblinG 91 42 357 300 25000 75".split(" ")]
+"13 40 acorn 38 655 200 60 1000 30".split(" "),
+"25 190 snowball 56 42 357 90 3000 45".split(" "),
+"40 300 w4b2 74 2 493 120 8000 60".split(" "),
+"70 130 goblinG 91 42 357 300 25000 75".split(" ")
+]
 
 export class Totem {
     constructor(public name: string, public map: MapData | undefined, public maxWave: number, public index: number) { }
@@ -147,9 +152,10 @@ export default function parseWorship(totemInfo: number[][], accountData: Map<str
     });
 
     // hard coded info, maybe better way?
-    worship.totemInfo.push(new Totem(totemNames[0].replace(/_/, " "), MapInfo.find(map => map.id == totemMapIds[0]), totemInfo[0][0], 0));
-    worship.totemInfo.push(new Totem(totemNames[1].replace(/_/, " "), MapInfo.find(map => map.id == totemMapIds[1]), totemInfo[0][1], 1));
-    worship.totemInfo.push(new Totem(totemNames[2].replace(/_/, " "), MapInfo.find(map => map.id == totemMapIds[2]), totemInfo[0][2], 2));
-    worship.totemInfo.push(new Totem(totemNames[3].replace(/_/, " "), MapInfo.find(map => map.id == totemMapIds[3]), totemInfo[0][3], 3));
+    worship.totemInfo.push(new Totem(totemNames[0].replace(/_/g, " "), MapInfo.find(map => map.id == totemMapIds[0]), totemInfo[0][0], 0));
+    worship.totemInfo.push(new Totem(totemNames[1].replace(/_/g, " "), MapInfo.find(map => map.id == totemMapIds[1]), totemInfo[0][1], 1));
+    worship.totemInfo.push(new Totem(totemNames[2].replace(/_/g, " "), MapInfo.find(map => map.id == totemMapIds[2]), totemInfo[0][2], 2));
+    worship.totemInfo.push(new Totem(totemNames[3].replace(/_/g, " "), MapInfo.find(map => map.id == totemMapIds[3]), totemInfo[0][3], 3));
+    worship.totemInfo.push(new Totem(totemNames[4].replace(/_/g, " "), MapInfo.find(map => map.id == totemMapIds[4]), totemInfo[0][4], 4));
     return worship;
 }
