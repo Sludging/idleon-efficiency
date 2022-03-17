@@ -1,8 +1,11 @@
+import { round } from '../utility';
+
 export const ShrineConstants = {
     DmgShrine: 0,
     HpDefShrine: 1,
     CarryShrine: 3,
-    ExpShrine: 5
+    ExpShrine: 5,
+    CrystalShrine: 6
 }
 
 export class Shrine {
@@ -26,7 +29,7 @@ export class Shrine {
 
     getBonusText = (map: number | undefined = undefined, cardBonus: number = 0) => {
         const bonus = this.getBonus(map, cardBonus);
-        return this.boost.split('.')[0].replace(/\+/g, bonus.toString());
+        return this.boost.split('.')[0].replace(/\+/g, round(bonus).toString());
     }
 
     getHourRequirement = () => {
