@@ -1,4 +1,5 @@
 import { lavaFunc } from '../utility'
+import { Lab } from './lab';
 
 export enum StampTab {
     Combat = 0,
@@ -38,7 +39,7 @@ export class Stamp {
     bonus: string;
     data: StampData;
 
-
+    multiplier: number = 1;
     constructor(name: string, raw_name: string, type: string, bonus: string, data: StampData) {
         this.raw_name = raw_name;
         this.icon = `/icons/assets/data/${raw_name}.png`;
@@ -72,9 +73,9 @@ export class Stamp {
         const reducedLevel = Math.floor(lvlDiff * this.data.upgradeInterval / 10);
         // only second tab gets reduced level math and only if the reduced level is lower than stamp level.
         if (skillLevel > 0 && reducedLevel < this.level && this.raw_name.includes("B")) {
-            return lavaFunc(this.data.function, reducedLevel, this.data.x1, this.data.x2, round);
+            return lavaFunc(this.data.function, reducedLevel, this.data.x1, this.data.x2, round) * this.multiplier;
         }
-        return lavaFunc(this.data.function, this.level, this.data.x1, this.data.x2, round);
+        return lavaFunc(this.data.function, this.level, this.data.x1, this.data.x2, round) * this.multiplier;
     }
 
     isMaxLevel = (): boolean => {
@@ -209,4 +210,18 @@ export default function parseStamps(rawData: Array<any>, maxData: Array<any>) {
         })
     }
     return stampData;
+}
+
+export function updateStamps(data: Map<string, any>) {
+    const stamps = data.get("stamps") as Stamp[][];
+    const lab = data.get("lab") as Lab;
+
+    if (lab.bonuses.find(bonus => bonus.name == "Certified Stamp Book")?.active ?? false) {
+        const allButMisc = stamps.flatMap(tab => tab).filter(stamp => stamp.type != "Misc Stamp");
+        allButMisc.forEach(stamp => {
+            stamp.multiplier = 2;
+        })
+    }
+
+    return stamps;
 }

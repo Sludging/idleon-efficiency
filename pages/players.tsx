@@ -47,6 +47,7 @@ import { SaltLick } from '../data/domain/saltLick';
 import { Family } from '../data/domain/family';
 import { Achievement, AchievementConst } from '../data/domain/achievements';
 import { Dungeons, PassiveType } from '../data/domain/dungeons';
+import { MapInfo } from '../data/domain/maps';
 
 
 function ItemSourcesDisplay({ sources, dropInfo }: { sources: ItemSources, dropInfo: DropSource[]}) {
@@ -271,6 +272,16 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                         </Box>
                     </Box>
                     <Text size="small">Current Monster / Map = {player.currentMonster} / {player.currentMap}</Text>
+                    {
+                        player.killInfo.has(player.currentMapId) && 
+                        <Text size="small">
+                            Portal Requirement: {nFormatter(player.killInfo.get(player.currentMapId) ?? 0)} / [{MapInfo.find(map => map.id == player.currentMapId)?.portalRequirements.map(req => nFormatter(req))}]
+                        </Text>
+                    }
+                    {
+                        player.classId == ClassIndex.Barbarian && 
+                        <Text size="small">Zow count: {Object.entries(player.killInfo).filter(([_, count]) => count > 100000).length}</Text>
+                    }
                     {
                         player.starSigns.map((sign, index) => {
                             return <Text size="small" key={`sign-${index}`}>Sign {index} = {sign.getText()}</Text>

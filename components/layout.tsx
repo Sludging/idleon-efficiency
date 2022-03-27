@@ -167,6 +167,13 @@ export default function Layout({
                 { subLink: "/trapping", label: "Trapping" },
             ]
         },
+        {
+            link: "/world-4", label: "World 4", subLinks: [
+                { subLink: "/cooking", label: "Cooking" },
+                { subLink: "/lab", label: "Lab" },
+                { subLink: "/breeding", label: "Breeding" },
+            ]
+        },
         { link: "/players", label: "Players" },
         // { link: "/bribes", label: "Bribes - WIP"},
         {

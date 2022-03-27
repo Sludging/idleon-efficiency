@@ -60,7 +60,7 @@ export const dateToText = (date: Date): string => {
         year: "numeric", month: "numeric", day: "numeric",
         hour: "numeric", minute: "numeric", second: "numeric",
         hour12: resolvedFormat.hour12,
-        timeZone: resolvedFormat.timeZone
+        timeZone: resolvedFormat.timeZone,
     };
     return Intl.DateTimeFormat(resolvedFormat.locale, options).format(date)
 } 
