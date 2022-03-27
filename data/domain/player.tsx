@@ -10,6 +10,7 @@ import { notUndefined } from '../utility';
 import { Cloudsave } from "./cloudsave";
 import { EnemyInfo } from "./enemies";
 import { MapInfo } from "./maps";
+import { Chip } from "./lab";
 
 export class PlayerStats {
     strength: number = 0;
@@ -262,6 +263,12 @@ export class SkillData {
     constructor(public level: number, public currentXP: number, public xpReq: number) {}
 }
 
+interface LabInfo {
+    lineWidth: number
+    supped: boolean
+    chips: Chip[]
+}
+
 export class Player {
     playerID: number;
     playerName: string;
@@ -291,6 +298,12 @@ export class Player {
     activePrayers: number[] = [];
     cooldown: Map<Talent, number> = new Map();
     invBagsUsed: Record<string, number> = {};
+    labInfo: LabInfo = { 
+        lineWidth: 0,
+        supped: false,
+        chips: [],
+    };
+    killInfo: Map<number, number> = new Map();
 
     constructor(playerID: number, playerName: string) {
         this.playerID = playerID;

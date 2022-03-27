@@ -34,6 +34,7 @@ import { MapInfo } from '../../data/domain/maps';
 import { Building } from '../../data/domain/buildings';
 import { Construction as ConstructionData } from '../../data/domain/construction';
 import { Card } from '../../data/domain/cards';
+import { Lab } from '../../data/domain/lab';
 
 
 function RefineryDisplay() {
@@ -49,21 +50,31 @@ function RefineryDisplay() {
     const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
 
+    // if ("CycleInitialTime" == t)
+    //                             return (
+    //                                 (s = 900 * Math.pow(4, Math.floor(s))),
+    //                                 (t = b.engine.getGameAttribute("DNSM")),
+    //                                 (t = null != d.AlchVials ? t.getReserved("AlchVials") : t.h.AlchVials),
+    //                                 (t = null != d.RefSpd ? t.getReserved("RefSpd") : t.h.RefSpd),
+    //                                 Math.ceil(s / ((1 + (parsenum(t) + w._customBlock_SaltLick(2)) / 100) * Math.max(1, w._customBlock_MainframeBonus(2))))
+    //                             );
     const cycleInfo = useMemo(() => {
         if (!refineryData) {
             return [];
         }
+        const lab = appContext.data.getData().get("lab") as Lab;
+        const labCycleBonus = lab.bonuses.find(bonus => bonus.name == "Gilded Cyclical Tubing")?.active ?? false ? 3 : 1;
         const vialBonus = alchemyData?.vials.find((vial) => vial.description.includes("Refinery Cycle Speed"))?.getBonus() ?? 0;
         const saltLickBonus = saltLickData?.getBonus(2) ?? 0;
         const secondsSinceUpdate = (new Date().getTime() - (lastUpdated?.getTime() ?? 0)) / 1000;
 
         const toReturn = [
-            { name: "Combustion", time: Math.ceil((900 * Math.pow(4, 0)) / (1 + ((vialBonus + saltLickBonus)) / 100)), timePast: refineryData.timePastCombustion + secondsSinceUpdate }
+            { name: "Combustion", time: Math.ceil((900 * Math.pow(4, 0)) / ((1 + (vialBonus + saltLickBonus) / 100) * labCycleBonus)), timePast: refineryData.timePastCombustion + secondsSinceUpdate }
         ];
 
         if (Object.keys(refineryData.salts).length > 3) {
             toReturn.push(
-                { name: "Synthesis ", time: Math.ceil((900 * Math.pow(4, 1)) / (1 + ((vialBonus + saltLickBonus)) / 100)), timePast: refineryData.timePastSynthesis + secondsSinceUpdate }
+                { name: "Synthesis ", time: Math.ceil((900 * Math.pow(4, 0)) / ((1 + (vialBonus + saltLickBonus) / 100) * labCycleBonus)), timePast: refineryData.timePastSynthesis + secondsSinceUpdate }
             );
         }
         return toReturn;
@@ -275,7 +286,7 @@ function RefineryDisplay() {
                                                     <TimeDown color={fuelTime > timeToNextRank ? 'green-1' : 'accent-1'} addSeconds={fuelTime} />
                                                     : <StaticTime color={fuelTime > timeToNextRank ? 'green-1' : 'accent-1'} fromSeconds={fuelTime} />
                                                 )}
-                                                {fuelTime == 0 && <Text color="accent-1" size="small">Empty</Text>}
+                                                {fuelTime <= 0 && <Text color="accent-1" size="small">Empty</Text>}
                                             </Box>
                                         </Box>
                                     </Box>
@@ -739,9 +750,9 @@ function BuildingsDisplay() {
                 text={constructionData.buildings.reduce((sum, building) => sum += building.level, 0).toString()}
             />
             <Grid columns={size == "small" ? "1" : "1/2"} fill>
-                {constructionData.buildings && constructionData.buildings.filter(building => building.level > 0 || building.currentXP > 0).map((building, index) => {
+                {constructionData.buildings && constructionData.buildings.map((building, index) => {
                     return (
-                        <ShadowBox key={index} background="dark-1" pad="medium" align="start" margin={{ right: 'large', bottom: 'small' }}>
+                        <ShadowBox style={{opacity: building.level > 0 ? 1 : 0.5}} key={index} background="dark-1" pad="medium" align="start" margin={{ right: 'large', bottom: 'small' }}>
                             <Grid columns="1/3" gap="medium" fill>
                                 <Box justify="center">
                                     <Box width={{ min: "30px", max: '30px' }} margin={{ right: 'small' }}>
@@ -756,7 +767,7 @@ function BuildingsDisplay() {
                                         text={`${building.level.toString()}/${building.maxLvl.toString()}`}
                                         margin={{ right: 'large', bottom: 'small' }}
                                     />
-                                    {building.nextLevelUnlocked || building.level == building.maxLvl ?
+                                    {building.nextLevelUnlocked || building.level == building.maxLvl || building.currentXP > building.getBuildCost() ?
                                         <TextAndLabel
                                             label="Build Req"
                                             textSize="small"

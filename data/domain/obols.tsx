@@ -1,4 +1,5 @@
 import { Cloudsave } from "./cloudsave";
+import { safeJsonParse } from "./idleonData";
 import { Item, ItemStat, StoneProps } from "./items";
 
 
@@ -132,7 +133,7 @@ export default function parseObols(doc: Cloudsave, charCount: number, allItems: 
 
     [...Array(charCount)].forEach((_, playerIndex) => {
         const playerObols = doc.get(`ObolEqO0_${playerIndex}`) as string[];
-        const playerObolsMods = JSON.parse(doc.get(`ObolEqMAP_${playerIndex}`)) as Record<number, StoneProps>;
+        const playerObolsMods = safeJsonParse(doc, `ObolEqMAP_${playerIndex}`, {}) as Record<number, StoneProps>;
         const playerObolArray: Obol[] = [];
         const playerStats = new ObolStats();
         playerObols.forEach((obol, obolIndex) => {
@@ -151,7 +152,7 @@ export default function parseObols(doc: Cloudsave, charCount: number, allItems: 
     })
 
     const familyObols = doc.get(`ObolEqO1`) as string[];
-    const familyObolsMods = JSON.parse(doc.get('ObolEqMAPz1')) as Record<number, StoneProps>;
+    const familyObolsMods = safeJsonParse(doc, 'ObolEqMAPz1', {}) as Record<number, StoneProps>;
     familyObols.forEach((obol, obolIndex) => {
         let itemInfo = allItems.find(item => item.internalName == obol)?.duplicate() ?? new Item({internalName: obol, displayName: obol});
         if (!obol.includes("Locked") && obol != "Blank" && Object.keys(familyObolsMods).includes(obolIndex.toString())) {
@@ -165,7 +166,7 @@ export default function parseObols(doc: Cloudsave, charCount: number, allItems: 
 
     const inventory = doc.get(`ObolInvOr`) as Record<string, string>[];
     inventory.forEach((typeInventory, index) => {
-        const tabModifications = JSON.parse(doc.get(`ObolInvMAP_${index}`)) as Record<string, string>[];
+        const tabModifications = safeJsonParse(doc, `ObolInvMAP_${index}`, {}) as Record<string, string>[];
         toReturn.inventory.set(index as ObolType, []);
         [...Object.entries(typeInventory)].forEach(([key, obol], obolIndex) => {
             if (key == "length") {  // ignore the length key, we don't care.

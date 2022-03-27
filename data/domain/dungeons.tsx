@@ -333,6 +333,11 @@ export const parseDungeons = (upgrades: number[][], optList: number[]) => {
     //     [2,0,0,0,0,0,0,14], // flurbo upgrades
     //     [1,1,0,0,0,1,1,0,0,0]
     // ]
+
+    // handle bad data, TODO better way.
+    if (upgrades.length < 2) {
+        return dungeons;
+    }
     dungeons.items.forEach((item, index) => {
         if (index < upgrades[0].length) {
             item.level = upgrades[0][index];

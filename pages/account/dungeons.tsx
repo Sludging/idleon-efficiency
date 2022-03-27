@@ -5,14 +5,15 @@ import {
     Text,
 } from "grommet"
 
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { NextSeo } from 'next-seo';
 import TabButton from "../../components/base/TabButton";
 import { AppContext } from "../../data/appContext";
 import { dungeonLevels, Dungeons, DungeonSetInfo, PassiveType } from "../../data/domain/dungeons";
 import TipDisplay, { TipDirection } from "../../components/base/TipDisplay";
 import ShadowBox from "../../components/base/ShadowBox";
-import TextAndLabel from "../../components/base/TextAndLabel";
+import TextAndLabel, { ComponentAndLabel } from "../../components/base/TextAndLabel";
+import { dateToText } from "../../data/utility";
 
 function DungeonItems() {
     const [dungeonData, setDungeonData] = useState<Dungeons | undefined>(undefined);
@@ -173,7 +174,7 @@ function DungeonTraits() {
                                                         size="medium"
                                                         body={trait.bonus}
                                                         heading={trait.setName}
-                                                        >
+                                                    >
                                                         <Box width={{ max: '51px', min: '25px' }}>
                                                             <Box className={trait.getClass()} />
                                                         </Box>
@@ -198,12 +199,40 @@ function DungeonTraits() {
 function DungeonsDisplay() {
     const [dungeonData, setDungeonData] = useState<Dungeons | undefined>(undefined);
     const [subTab, setSubTab] = useState<string>("Items");
+    const [serverVars, setServerVars] = useState<Record<string, any>>({})
     const appContext = useContext(AppContext);
     const idleonData = appContext.data.getData();
 
+    const nextHappyHour = useMemo(() => {
+        if (serverVars && Object.keys(serverVars).includes("HappyHours")) {
+            console.log("Server Vars", serverVars["HappyHours"]);
+            const happyHours = serverVars["HappyHours"] as number[];
+            let lastThursday = new Date();
+            while (lastThursday.getDay() != 4) {
+                lastThursday.setSeconds(lastThursday.getSeconds() - 86400);
+            }
+            lastThursday.setHours(0);
+            lastThursday.setMinutes(0);
+            lastThursday.setSeconds(0);
+
+            // Convert from currnet timezone to UTC to do the offset.
+            lastThursday = new Date(lastThursday.getTime() - lastThursday.getTimezoneOffset() * 60 * 1000);
+            for (let index = 0; index < happyHours.length; index++) {
+                const nextHour = happyHours[index];
+                if (nextHour) {
+                    const happyHourTime = new Date(lastThursday.getTime() + nextHour * 1000);
+                    if (happyHourTime > new Date()) {
+                        return new Date(happyHourTime.getTime() - 3600 * 1000);
+                    }
+                }
+            }
+        }
+        return undefined;
+    }, [serverVars]);
 
     useEffect(() => {
         setDungeonData(idleonData.get("dungeons") as Dungeons);
+        setServerVars(idleonData.get("servervars"));
     }, [idleonData]);
 
     return (
@@ -216,22 +245,29 @@ function DungeonsDisplay() {
                         <TextAndLabel
                             text={`${dungeonData.rank} (${dungeonData.xp}/${dungeonLevels[dungeonData.rank]})`}
                             label="Rank"
-                            margin={{right: 'medium'}}
+                            margin={{ right: 'medium' }}
                         />
                         <TextAndLabel
                             text={dungeonData.boostedcount.toString()}
                             label="Boosted Runs"
-                            margin={{right: 'medium'}}
+                            margin={{ right: 'medium' }}
                         />
                         <TextAndLabel
                             text={dungeonData.credits.toString()}
                             label="Credits"
-                            margin={{right: 'medium'}}
+                            margin={{ right: 'medium' }}
                         />
                         <TextAndLabel
                             text={dungeonData.flurbos.toString()}
                             label="Flurbos"
+                            margin={{ right: 'medium' }}
                         />
+                        {nextHappyHour &&
+                            <TextAndLabel
+                                label="Next Happy Hour"
+                                text={dateToText(nextHappyHour)}
+                            />
+                        }
                     </Box>
                 }
                 <Box align="center" direction="row" justify="center" gap="small" margin={{ bottom: 'medium' }}>
