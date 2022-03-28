@@ -174,7 +174,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
         const theData = appContext.data.getData();
         const shrines = theData.get("shrines") as Shrine[];
         if (shrines) {
-            return shrines.filter((shrine) => shrine.currentMap == player.currentMapId && shrine.level > 0);
+            return shrines.filter((shrine) => shrine.isShrineActive(player.currentMapId) && shrine.level > 0);
         }
         return [];
     }, [appContext, player]);

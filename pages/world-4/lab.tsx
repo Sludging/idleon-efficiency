@@ -1,11 +1,13 @@
 import {
     Box,
+    Grid,
     Heading,
     Text,
 } from 'grommet'
 import { NextSeo } from 'next-seo';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import ShadowBox from '../../components/base/ShadowBox';
+import TabButton from '../../components/base/TabButton';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 import { AppContext } from '../../data/appContext';
 import { Lab as LabDomain } from '../../data/domain/lab';
@@ -34,18 +36,18 @@ function CharacterBox({ player, lineWidth, supped = false }: { player: Player, l
         </Box>
     )
 
-    if (player.labInfo.chips.length > 0) {
+    if (player.labInfo.chips.filter(slot => slot.chip != undefined).length > 0) {
         return (
             <TipDisplay
                 body={
                     <Box gap="small">
                         {
-                            player.labInfo.chips.map((chip, index) => (
+                            player.labInfo.chips.filter(slot => slot.chip != undefined).map((slot, index) => (
                                 <Box key={index} direction="row" gap="small">
-                                    <Box width={{max: '42px'}}>
-                                        <Box className={chip.getClass()} />
+                                    <Box width={{ max: '42px' }}>
+                                        <Box className={slot.chip?.getClass()} />
                                     </Box>
-                                    <Text>{chip.data.description}</Text>
+                                    <Text>{slot.chip?.data.description}</Text>
                                 </Box>
                             ))
                         }
@@ -54,8 +56,8 @@ function CharacterBox({ player, lineWidth, supped = false }: { player: Player, l
                 direction={TipDirection.Down}
                 heading='Chips'
                 size='small'
-                >
-                { theBox}
+            >
+                {theBox}
             </TipDisplay>
         )
     }
@@ -63,7 +65,7 @@ function CharacterBox({ player, lineWidth, supped = false }: { player: Player, l
     return theBox;
 }
 
-function Lab() {
+function MainframeDisplay() {
     const [lab, setLab] = useState<LabDomain>();
     const appContext = useContext(AppContext);
 
@@ -74,10 +76,12 @@ function Lab() {
         }
     }, [appContext]);
 
+    if (!lab) {
+        return <Box>Loading</Box>;
+    }
+
     return (
         <Box>
-            <NextSeo title="Lab" />
-            <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Lab</Heading>
             <Box pad="small">
                 <Text>Players in tubes</Text>
                 <Box pad={{ top: "small", bottom: "small" }} fill direction="row" wrap>
@@ -104,8 +108,8 @@ function Lab() {
                                     maxWidth='large'
                                     heading={bonus.name}
                                 >
-                                    <ShadowBox background="dark-1" pad="small" key={index} margin={{ right: 'small', bottom: 'small' }}>
-                                        <Box width={{ max: '64px' }} title={bonus.name} style={{ opacity: bonus.active ? 1 : 0.5 }}>
+                                    <ShadowBox background="dark-1" pad="small" key={index} margin={{ right: 'small', bottom: 'small' }} border={bonus.active ? { side: 'all', size: '2px', color: 'green-1' } : undefined}>
+                                        <Box width={{ max: '64px' }} title={bonus.name}>
                                             <Box className={bonus.getClass()} />
                                         </Box>
                                     </ShadowBox>
@@ -129,8 +133,8 @@ function Lab() {
                                     maxWidth='large'
                                     heading={jewel.data.name}
                                 >
-                                    <ShadowBox background="dark-1" pad="small" margin={{ right: 'small', bottom: 'small' }} border={jewel.available ? { side: 'all', size: '2px', color: 'green-1' } : undefined} >
-                                        <Box width={{ max: '64px' }} title={jewel.data.name} style={{ opacity: jewel.active ? 1 : 0.5 }}>
+                                    <ShadowBox background="dark-1" pad="small" margin={{ right: 'small', bottom: 'small' }} border={jewel.active ? { side: 'all', size: '2px', color: 'green-1' } : undefined} >
+                                        <Box width={{ max: '64px' }} title={jewel.data.name} style={{ opacity: jewel.available ? 1 : 0.5, filter: jewel.available ? 'grayscale(0)' : 'grayscale(70%)' }}>
                                             <Box className={jewel.getClass()} />
                                         </Box>
                                     </ShadowBox>
@@ -140,6 +144,105 @@ function Lab() {
                     }
                 </Box>
             </Box>
+        </Box>
+    )
+}
+
+function ChipDisplay() {
+    const [lab, setLab] = useState<LabDomain>();
+    const [playersData, setPlayersData] = useState<Player[]>([]);
+    const appContext = useContext(AppContext);
+
+    useEffect(() => {
+        if (appContext) {
+            const theData = appContext.data.getData();
+            setLab(theData.get("lab"));
+            setPlayersData(theData.get("players"));
+        }
+    }, [appContext]);
+
+    if (!lab) {
+        return <Box>Loading</Box>;
+    }
+
+    return (
+        <Box>
+            <Box pad={{ top: "small", bottom: "small" }}>
+                <Grid columns={{ size: '120px' }}>
+                    {
+                        Object.entries(lab.playerChips).map(([playerNumber, chips], index) => {
+                            const playerId = parseInt(playerNumber);
+                            const player = playersData[playerId];
+                            return (
+                                <ShadowBox background="dark-1" pad="small" key={index} margin={{ right: 'small', bottom: 'small' }} align="center" gap="small">
+                                    <Box direction="row">
+                                        <Box width={{ min: "20px", max: '20px' }}>
+                                            <Box className={`icons-3836 icons-ClassIcons${player.classId.valueOf()}`} />
+                                        </Box>
+                                        <Box margin={{ right: 'small' }} align="center">
+                                            <Text size="xsmall" truncate={true}>{player.playerName}</Text>
+                                        </Box>
+                                    </Box>
+                                    <Box>
+                                        {
+                                            player.labInfo.chips.map((slot, index) => (
+                                                <Box key={index} direction="row" gap="small" border={{ color: 'grey-1', side: 'all', size: '2px' }}>
+                                                    {
+                                                        slot.chip ?
+                                                            <Box width={{ max: '42px', min: '42px' }} height={{ max: '42px', min: '42px' }}>
+                                                                <Box className={slot.chip?.getClass()} />
+                                                            </Box> :
+                                                            <Box width={{ max: '42px', min: '42px' }} height={{ max: '42px', min: '42px' }} align="center">
+                                                                {
+                                                                    (player.skills.get(SkillsIndex.Intellect)?.level ?? 0) < slot.lvlReq && <Text size="xsmall">Lv {slot.lvlReq}</Text>
+                                                                }
+                                                                
+                                                            </Box>
+                                                    }
+                                                </Box>
+                                            ))
+                                        }
+                                    </Box>
+                                </ShadowBox>
+                            )
+                        })
+                    }
+                </Grid>
+            </Box>
+            <Box pad={{ top: "small", bottom: "small" }}>
+                <Text>Chip Repository</Text>
+                <Grid columns={{size: 'auto', count: 7}}>
+                {
+                    lab.chips.map((chip, index) => (
+                        <Box style={{opacity: chip.count == -1 ? 0.5 : 1}} key={index} border={{ color: 'grey-1', side: 'all', size: '2px' }} align="center" justify='center' direction="row">
+                            <Box width={{ max: '42px', min: '42px' }} height={{ max: '42px', min: '42px' }}>
+                                <Box className={chip.getClass()} />
+                            </Box>
+                            <Text>{chip.count == -1 ? 0 : chip.count}</Text>
+                        </Box>
+                    ))
+                }
+                </Grid>
+            </Box>
+        </Box>
+    )
+}
+
+function Lab() {
+    const [activeTab, setActiveTab] = useState<string>("Mainframe");
+
+    return (
+        <Box>
+            <NextSeo title="Lab" />
+            <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Lab</Heading>
+            <Box align="center" direction="row" justify="center" gap="small">
+                {["Mainframe", "Console"].map((tabName, index) => (
+                    <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
+                ))
+                }
+            </Box>
+            {activeTab == "Mainframe" && <MainframeDisplay />}
+            {activeTab == "Console" && <ChipDisplay />}
         </Box>
     )
 }

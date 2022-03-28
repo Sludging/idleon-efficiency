@@ -4,6 +4,8 @@ import { Cooking } from "./cooking"
 import { GemStore } from "./gemPurchases"
 import { Player, SkillsIndex } from "./player"
 
+export const chipSlotReq = [5, 10, 15, 25, 35, 50, 75];
+
 export interface MainframeData {
     no: number
     x: number
@@ -85,6 +87,8 @@ export class Jewel {
     available: boolean = false;
     active: boolean = false;
 
+    bonusMultiplier: number = 1;
+
     constructor(public index: number, public data: JewelData) { }
 
     getClass = () => {
@@ -92,7 +96,7 @@ export class Jewel {
     }
 
     getBonus = () => {
-        return this.data.x1;
+        return this.data.x1 * this.bonusMultiplier;
     }
 
     getBonusText = () => {
@@ -212,7 +216,7 @@ export class Lab {
                 baseWidth *= (1 + (this.jewels[5].getBonus() / 100));
             }
         }
-        const playerChipBonus = player.labInfo.chips.find(chip => chip.index == 6)?.getBonus() ?? 0;
+        const playerChipBonus = player.labInfo.chips.filter(slot => slot.chip && slot.chip.index == 6).pop()?.chip?.getBonus() ?? 0;
         const bonusWidth = inGemTube ? 30 : 0;
         return Math.floor((baseWidth + (pxMealBonus + Math.min(passiveCardBonus, 50)))
             * (1 + ((linePctMealBonus + playerChipBonus + (20 * petArenaBonus) + bonusWidth) / 100))
@@ -243,6 +247,14 @@ export const parseLab = (labData: number[][]) => {
         lab.playerChips[index] = playerChips.filter(chip => chip != -1).map(chip => lab.chips[chip]);
     });
 
+    labData[15].forEach((chipCount, index) => {
+        if (index < lab.chips.length) {
+            lab.chips[index].count = chipCount;
+            const usedCount = Object.values(lab.playerChips).flatMap(chips => chips).reduce((sum, chip) => sum += (chip.index == lab.chips[index].index) ? 1 : 0, 0);
+            lab.chips[index].count -= usedCount;
+        }
+    })
+
     return lab;
 }
 
@@ -257,8 +269,12 @@ export const updateLab = (data: Map<string, any>) => {
     // Append chip info to the players.
     Object.entries(lab.playerChips).forEach(([playerIndex, chips]) => {
         const index = parseInt(playerIndex);
-        playerData[index].labInfo.chips = chips;
+        chips.forEach((chip, chipIndex) => {
+            playerData[index].labInfo.chips[chipIndex].chip = chip;
+        })
     })
+
+    // 1. Check if mainframe boost jewel is available, if so assume active.
 
     // Figures out which players are in tubes and if they are supped
     const playersInLab = [...playerData].filter(player => player.currentMonster == "Laboratory").sort((player1, player2) => player1.playerID > player2.playerID ? 1 : -1);
@@ -276,52 +292,47 @@ export const updateLab = (data: Map<string, any>) => {
     }
     lab.playersInTubes = playersInLab;
 
-    // Figure out which players are in a valid chain for bonus math
+    const connectedPlayers: Player[] = [];
+    // Find Source
     if (lab.playersInTubes.length > 0) {
-        const sortedPlayers = [...lab.playersInTubes].sort((player1, player2) => lab.playerCords[player1.playerID].x < lab.playerCords[player2.playerID].x ? -1 : 1)
-        const firstPlayerCords = lab.playerCords[sortedPlayers[0].playerID];
-        const inRangeOfPrims = lab.getDistance(43, 229, firstPlayerCords.x, firstPlayerCords.y) < sortedPlayers[0].labInfo.lineWidth;
-
-        const finalChain = [];
-        if (inRangeOfPrims) {
-            let nextIndex = 1;
-            finalChain.push(sortedPlayers[0]);
-            while (nextIndex < sortedPlayers.length) {
-                const nextPlayerCords = lab.playerCords[sortedPlayers[nextIndex].playerID];
-                const prevPlayerCords = lab.playerCords[finalChain[finalChain.length - 1].playerID];
-                const inRange = lab.getDistance(nextPlayerCords.x, nextPlayerCords.y, prevPlayerCords.x, prevPlayerCords.y) < sortedPlayers[nextIndex].labInfo.lineWidth
-                    || lab.getDistance(nextPlayerCords.x, nextPlayerCords.y, prevPlayerCords.x, prevPlayerCords.y) < finalChain[finalChain.length - 1].labInfo.lineWidth;
-                if (inRange) {
-                    finalChain.push(sortedPlayers[nextIndex]);
-                    nextIndex += 1;
-                }
-                else {
-                    break;
-                }
+        for (let playerIndex = 0 ; playerIndex < lab.playersInTubes.length ; playerIndex++) {
+            const player = lab.playersInTubes[playerIndex];
+            const playerCords = lab.playerCords[player.playerID];
+            if (lab.getDistance(43, 229, playerCords.x, playerCords.y) < player.labInfo.lineWidth) {
+                connectedPlayers.push(player);
+                break;
             }
         }
-        lab.playersInChain = finalChain;
     }
 
-    // Figure out which jewels are active or not.
-    lab.jewels.filter(jewel => jewel.available).forEach(jewel => {
-        lab.playersInChain.forEach(player => {
+    // Loop the things
+    for (let chainIndex = 0 ; chainIndex < lab.playersInTubes.length ; chainIndex++) {
+        if (connectedPlayers.length > chainIndex) {
+            const player = connectedPlayers[chainIndex];
             const playerCords = lab.playerCords[player.playerID];
-            if (lab.getDistance(jewel.data.x, jewel.data.y, playerCords.x, playerCords.y) < jewel.getRange()) {
-                jewel.active = true;
-            }
-        });
-    })
+            lab.playersInTubes.forEach(tubePlayer => {
+                const tubePlayerCoords = lab.playerCords[tubePlayer.playerID];
+                const inRange = lab.getDistance(playerCords.x, playerCords.y, tubePlayerCoords.x, tubePlayerCoords.y) < tubePlayer.labInfo.lineWidth;
+                if (!connectedPlayers.includes(tubePlayer) && inRange) {
+                    connectedPlayers.push(tubePlayer);
+                }
+            })
 
-    // Figure out which bonuses are active or not.
-    lab.bonuses.forEach(bonus => {
-        lab.playersInChain.forEach(player => {
-            const playerCords = lab.playerCords[player.playerID];
-            if (lab.getDistance(bonus.x, bonus.y, playerCords.x, playerCords.y) < bonus.getRange()) {
-                bonus.active = true;
-            }
-        });
-    })
+            lab.bonuses.filter(bonus => !bonus.active).forEach(bonus => {
+                const inRange = lab.getDistance(playerCords.x, playerCords.y, bonus.x, bonus.y) < bonus.getRange();
+                if (inRange) {
+                    bonus.active = true;
+                }
+            });
+
+            lab.jewels.filter(jewel => jewel.available && !jewel.active).forEach(jewel => {
+                const inRange = lab.getDistance(playerCords.x, playerCords.y, jewel.data.x, jewel.data.y) < jewel.getRange();
+                if (inRange) {
+                    jewel.active = true;
+                }
+            });
+        }
+    }
 
     return lab;
 }

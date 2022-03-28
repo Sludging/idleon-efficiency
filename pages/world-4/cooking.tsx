@@ -82,7 +82,7 @@ function KitchenDisplay({ kitchen, cooking }: { kitchen: Kitchen, cooking: Cooki
                     <Box gap="small" align="center" direction="row">
                         {
                             kitchen.activeRecipe.map((spice, index) => (
-                                <Box key={`spice_${index}`} width={{ max: '36px' }}>
+                                <Box key={`spice_${index}`} width={{ max: '25px', min: '25px' }}>
                                     <Box className={`icons-3636 icons-CookingSpice${spice}`} />
                                 </Box>
                             ))
