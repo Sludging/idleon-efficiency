@@ -10,7 +10,7 @@ import { notUndefined } from '../utility';
 import { Cloudsave } from "./cloudsave";
 import { EnemyInfo } from "./enemies";
 import { MapInfo } from "./maps";
-import { Chip } from "./lab";
+import { Chip, chipSlotReq } from "./lab";
 
 export class PlayerStats {
     strength: number = 0;
@@ -263,10 +263,14 @@ export class SkillData {
     constructor(public level: number, public currentXP: number, public xpReq: number) {}
 }
 
+export class ChipSlot {
+    constructor(public chip: Chip | undefined, public lvlReq: number) {}
+}
+
 interface LabInfo {
     lineWidth: number
     supped: boolean
-    chips: Chip[]
+    chips: ChipSlot[]
 }
 
 export class Player {
@@ -301,7 +305,7 @@ export class Player {
     labInfo: LabInfo = { 
         lineWidth: 0,
         supped: false,
-        chips: [],
+        chips: [...Array(chipSlotReq.length)].map((_, index) => new ChipSlot(undefined, chipSlotReq[index])),
     };
     killInfo: Map<number, number> = new Map();
 

@@ -1,4 +1,5 @@
 import { round } from '../utility';
+import { Lab } from './lab';
 
 export const ShrineConstants = {
     DmgShrine: 0,
@@ -13,14 +14,28 @@ export class Shrine {
     level: number = 0;
     accumulatedHours: number = 0;
 
+    worldTour: boolean = false;    
     constructor(public name: string, public boost: string, public initialBonus: number, public increment: number, public iconName: string) {}
 
-    getBonus = (map: number | undefined = undefined, cardBonus: number = 0) => {
-        if (map != undefined && map != this.currentMap) {
-            return 0;
+    isShrineActive = (map: number | undefined = undefined) => {
+        // if map is valid, and we are on the same map, shrine is active.
+        if (map != undefined &&  map == this.currentMap) {
+            return true;
         }
 
-        if (this.level == 0) {
+        // if map is valid and world tour is active, check if shrine in the same world.
+        
+        if (map != undefined && this.worldTour) {
+            const playerWorld = Math.floor(map / 50);
+            const shrineWorld = Math.floor(this.currentMap / 50);
+            return playerWorld == shrineWorld;
+        }
+
+        return false;
+    }
+
+    getBonus = (map: number | undefined = undefined, cardBonus: number = 0) => {
+        if (!this.isShrineActive(map)) {
             return 0;
         }
 
@@ -65,4 +80,13 @@ export default function parseShrines(rawData: Array<Array<number>>) {
         });
     }
     return shrineData;
+}
+
+export const updateShrines = (data: Map<string, any>) => {
+    const shrines = data.get("shrines") as Shrine[];
+    const lab = data.get("lab") as Lab;
+
+    const worldTour = lab.bonuses.find(bonus => bonus.name == "Shrine World Tour")?.active ?? false;
+    shrines.forEach(shrine => shrine.worldTour = worldTour);
+    return shrines;
 }

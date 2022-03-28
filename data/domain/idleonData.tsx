@@ -8,7 +8,7 @@ import parseGuild from './guild';
 import parseGems from './gemPurchases';
 import parseAchievements from './achievements';
 import parseLooty from './lootyTracker';
-import parseShrines from './shrines';
+import parseShrines, { updateShrines } from './shrines';
 import { initAllItems, Item } from './items';
 import parseStorage from './storage';
 import parseQuests from './quests';
@@ -126,6 +126,7 @@ const postProcessingMap: Record<string, Function> = {
     "cooking": (doc: Cloudsave, accountData: Map<string, any>) => updateCooking(accountData),
     "deathnote": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnote(accountData),
     "breeding": (doc: Cloudsave, accountData: Map<string, any>) => updateBreeding(accountData),
+    "shrines": (doc: Cloudsave, accountData: Map<string, any>) => updateShrines(accountData),
 }
 
 export const updateIdleonData = async (data: Cloudsave, charNames: string[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
