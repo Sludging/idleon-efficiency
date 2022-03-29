@@ -273,6 +273,7 @@ function Breeding() {
         <Box>
             <NextSeo title="Breeding" />
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Breeding</Heading>
+            <Text size="xsmall">* This is a work in progress, there could some bugs and minor inaccuracies.</Text>
             <Box pad="small">
                 <EggDisplay />
             </Box>

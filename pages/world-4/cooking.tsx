@@ -155,6 +155,7 @@ function Cooking() {
         <Box>
             <NextSeo title="Cooking" />
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Cooking</Heading>
+            <Text size="xsmall">* This is a work in progress, there could some bugs and minor inaccuracies.</Text>
             <Box margin={{ bottom: 'medium' }} gap="small">
                 <Text>Spices</Text>
                 <Box direction="row" wrap>
