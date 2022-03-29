@@ -237,6 +237,7 @@ function Lab() {
         <Box>
             <NextSeo title="Lab" />
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Lab</Heading>
+            <Text size="xsmall">* This is a work in progress, there could some bugs and minor inaccuracies.</Text>
             <Box align="center" direction="row" justify="center" gap="small">
                 {["Mainframe", "Console"].map((tabName, index) => (
                     <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
