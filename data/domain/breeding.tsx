@@ -3,6 +3,7 @@ import { Alchemy } from "./alchemy";
 import { Cooking } from "./cooking";
 import { ImageData } from "./imageData";
 import { Lab } from "./lab";
+import { Player, SkillsIndex } from "./player";
 
 export const waveReqs = "2 5 8 12 15 20 25 35 50 65 80 100 125 150 175 200".split(" ").map(value => parseInt(value));
 
@@ -302,6 +303,8 @@ export class Breeding {
     timeTillEgg: number = 0;
     totalEggTime: number = 0;
 
+    skillLevel: number = 0;
+
     hasBonus = (bonusNumber: number) => {
         if (bonusNumber > waveReqs.length) {
             return false;
@@ -313,26 +316,16 @@ export class Breeding {
         this.totalEggTime = 7200 / (1 + (labBonus + (mealBonus + alchemyBonus)) / 100);
     }
 
-    // if (3600 < T - parsenum(U)) {
-    //     var _ = w._customBlock_Breeding("TotalTimeForEgg", "0", 0, 0),
-    //         M = b.engine.getGameAttribute("OptionsListAccount")[87],
-    //         V = parsenum(M);
-    //     s._DT = Math.ceil(((_ - V) / 3600) * 10) / 10 + "@Hr";
-    // } else {
-    //     var B = w._customBlock_Breeding("TotalTimeForEgg", "0", 0, 0),
-    //         O = b.engine.getGameAttribute("OptionsListAccount")[87];
-    //     if (60 < B - parsenum(O)) {
-    //         var X = w._customBlock_Breeding("TotalTimeForEgg", "0", 0, 0),
-    //             L = b.engine.getGameAttribute("OptionsListAccount")[87],
-    //             Q = parsenum(L);
-    //         s._DT = Math.ceil((X - Q) / 60) + "@Min";
-    //     } else {
-    //         var W = w._customBlock_Breeding("TotalTimeForEgg", "0", 0, 0),
-    //             Y = b.engine.getGameAttribute("OptionsListAccount")[87],
-    //             Z = parsenum(Y);
-    //         s._DT = Math.ceil(W - Z) + "@Sec";
-    //     }
-    // }
+    getStatRange = () => {
+        let baseMath = Math.pow(4 * this.skillLevel + Math.pow(this.skillLevel / 2, 3), 0.85);
+        const eggRarity = this.eggs[0].rarity > 0 ? this.eggs[0].rarity : 1;
+        const maxRange = Math.max(0.1, 1 - ((eggRarity + 4) / 12) * 0.9);
+        console.log(baseMath, eggRarity, maxRange);
+        baseMath *= (1 + eggRarity / 8);
+        const maxStat = baseMath * (Math.min(1.2 + this.skillLevel / 12, 4) * Math.pow(2.71828, -10 * 0) + 1);
+        const minStat = baseMath * (Math.min(1.2 + this.skillLevel / 12, 4) * Math.pow(2.71828, -10 * maxRange) + 1);
+        return [minStat, maxStat];
+    }
 }
 
 export const petArenaBonuses = [
@@ -429,11 +422,15 @@ export const updateBreeding = (data: Map<string, any>) => {
     const alchemy = data.get("alchemy") as Alchemy;
     const lab = data.get("lab") as Lab;
     const cooking = data.get("cooking") as Cooking;
+    const players = data.get("players") as Player[];
 
     const alchemyEggTimeBonus = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).find(bubble => bubble.name == "Egg Ink")?.getBonus() ?? 0;
     const mealEggTimeBonus = cooking.meals.filter(meal => meal.bonusKey == "TimeEgg").reduce((sum, meal) => sum += meal.getBonus(), 0);
     const mainframeBonus = lab.jewels.find(jewel => jewel.active && jewel.data.description == "Reduces egg incubation time")?.getBonus() ?? 0;
     breeding.setTimeForEgg(mainframeBonus, mealEggTimeBonus, alchemyEggTimeBonus);
+
+    // Breeding level is universal, so just get it from the first player.
+    breeding.skillLevel = players[0].skills.get(SkillsIndex.Breeding)?.level ?? 0;
 
     return breeding;
 }
