@@ -1,0 +1,26 @@
+.icons-6464 {
+    background-image: url(spritesheet_64x64.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 100.0%;
+    height: 0;
+    background-size: cover;
+    background-position: 0 calc(var(--row) * 7.142857142857143%)
+}
+.icons-6464:not(.icons-ArrowHM):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
+.icons-ArrowHM { --row: 0; }
+.icons-ItemWeaponGoldspear { --row: 1; }
+.icons-LabBonus0 { --row: 2; }
+.icons-LabBonus1 { --row: 3; }
+.icons-LabBonus10 { --row: 4; }
+.icons-LabBonus11 { --row: 5; }
+.icons-LabBonus2 { --row: 6; }
+.icons-LabBonus3 { --row: 7; }
+.icons-LabBonus4 { --row: 8; }
+.icons-LabBonus5 { --row: 9; }
+.icons-LabBonus6 { --row: 10; }
+.icons-LabBonus7 { --row: 11; }
+.icons-LabBonus8 { --row: 12; }
+.icons-LabBonus9 { --row: 13; }
+.icons-Shadow { --row: 14; }

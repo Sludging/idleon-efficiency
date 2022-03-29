@@ -1,4 +1,5 @@
 import { MapInfo } from "./maps";
+import { Player } from "./player";
 
 const deathNoteMobOrder = [
     "mushG mushR frogG beanG slimeG snakeG carrotO goblinG plank frogBIG poopSmall ratB branch acorn mushW".split(" "),
@@ -54,15 +55,21 @@ export class Deathnote {
     }
 }
 
-export default function parseDeathnote(rawData: string[]) {
+export default function updateDeathnote(accountData: Map<string, any>) {
     const deathNote = new Deathnote();
+    const doc = new Map<string, any>(Object.entries(accountData.get("rawData")));
+    const playerData = accountData.get("players") as Player[];
+    const charCount = playerData.length;
 
-    rawData.forEach((playerData) => {
-        const jsonData = JSON.parse(playerData) as number[][];
+    const rawData = [...Array(charCount)].map((_, i) => { return doc.get(`KLA_${i}`) })
+    rawData.forEach((playerKillData, index) => {
+        const jsonData = JSON.parse(playerKillData) as number[][];
         jsonData.forEach((mapInfo, mapIndex) => {
             const mapData = MapInfo.find(map => map.id == mapIndex);
             if (mapData && mapData.enemy && deathNote.mobKillCount.has(mapData.enemy)) {
-                deathNote.mobKillCount.get(mapData.enemy)?.push(mapData.portalRequirements[0] - mapInfo[0]); //do we really only care about 0?
+                const killCount = mapData.portalRequirements[0] - mapInfo[0];
+                deathNote.mobKillCount.get(mapData.enemy)?.push(killCount); //do we really only care about 0?
+                playerData[index].killInfo.set(mapData.id, killCount);
             }
         });
     })           

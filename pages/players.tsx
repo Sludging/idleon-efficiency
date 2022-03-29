@@ -47,6 +47,7 @@ import { SaltLick } from '../data/domain/saltLick';
 import { Family } from '../data/domain/family';
 import { Achievement, AchievementConst } from '../data/domain/achievements';
 import { Dungeons, PassiveType } from '../data/domain/dungeons';
+import { MapInfo } from '../data/domain/maps';
 
 
 function ItemSourcesDisplay({ sources, dropInfo }: { sources: ItemSources, dropInfo: DropSource[]}) {
@@ -173,7 +174,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
         const theData = appContext.data.getData();
         const shrines = theData.get("shrines") as Shrine[];
         if (shrines) {
-            return shrines.filter((shrine) => shrine.currentMap == player.currentMapId && shrine.level > 0);
+            return shrines.filter((shrine) => shrine.isShrineActive(player.currentMapId) && shrine.level > 0);
         }
         return [];
     }, [appContext, player]);
@@ -202,13 +203,16 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
     const crystalSpawnChance = useMemo(() => {
         const theData = appContext.data.getData();
         const stamps = theData.get("stamps") as Stamp[][];
-
+        const shrines = theData.get("shrines") as Shrine[];
+        
         let crystalSpawnStamp = 0;
         if (stamps) {
             crystalSpawnStamp = stamps[StampTab.Misc][StampConsts.CrystallinIndex].getBonus();
         }
 
-        const cardBonus = player.cardInfo?.equippedCards.find((card) => card.name == "poopSmall")?.getBonus() ?? 0;
+        const shrineCardBonus = player.cardInfo?.equippedCards.find((card) => card.id == "Z9")?.getBonus() ?? 0;
+        const shrineBonus = shrines[ShrineConstants.CrystalShrine].getBonus(player.currentMapId, shrineCardBonus);
+        const cardBonus = player.cardInfo?.equippedCards.filter((card) => card.effect.includes("Crystal Mob Spawn Chance")).reduce((sum, card) => sum += card.getBonus(), 0) ?? 0;
         const crystalSpawnTalentBonus = player.talents.find(x => x.skillIndex == TalentConst.CrystalSpawnIndex)?.getBonus() ?? 0;
         const crystalForDaysTalentBonus = player.talents.find(x => x.skillIndex == TalentConst.CrystalForDaysIndex)?.getBonus() ?? 0;
 
@@ -217,8 +221,12 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
             const nonPredatoryBox = player.postOffice[PostOfficeConst.NonPredatoryBoxIndex];
             postOfficeBonus = nonPredatoryBox.level > 0 ? nonPredatoryBox.bonuses[2].getBonus(nonPredatoryBox.level, 2) : 0;
         }
-        return 0.0005 * (1 + crystalSpawnTalentBonus / 100) * (1 + postOfficeBonus / 100) * (1 + crystalForDaysTalentBonus / 100)
-            * (1 + crystalSpawnStamp / 100) * (1 + cardBonus / 100);
+        return 0.0005 * 
+        (1 + crystalSpawnTalentBonus / 100) * 
+        (1 + (postOfficeBonus + shrineBonus) / 100) * 
+        (1 + crystalForDaysTalentBonus / 100) * 
+        (1 + crystalSpawnStamp / 100) * 
+        (1 + cardBonus / 100);
     }, [appContext, player])
 
 
@@ -264,6 +272,16 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                         </Box>
                     </Box>
                     <Text size="small">Current Monster / Map = {player.currentMonster} / {player.currentMap}</Text>
+                    {
+                        player.killInfo.has(player.currentMapId) && 
+                        <Text size="small">
+                            Portal Requirement: {nFormatter(player.killInfo.get(player.currentMapId) ?? 0)} / [{MapInfo.find(map => map.id == player.currentMapId)?.portalRequirements.map(req => nFormatter(req))}]
+                        </Text>
+                    }
+                    {
+                        player.classId == ClassIndex.Barbarian && 
+                        <Text size="small">Zow count: {Object.entries(player.killInfo).filter(([_, count]) => count > 100000).length}</Text>
+                    }
                     {
                         player.starSigns.map((sign, index) => {
                             return <Text size="small" key={`sign-${index}`}>Sign {index} = {sign.getText()}</Text>

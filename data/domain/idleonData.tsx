@@ -1,14 +1,14 @@
 import parseTraps from './traps';
-import parseStamps from './stamps';
+import parseStamps, { updateStamps } from './stamps';
 import parseStatues from './statues';
 import parsePlayers, { Player } from './player';
-import parseAlchemy from './alchemy';
+import parseAlchemy, { updateAlchemy } from './alchemy';
 import parseBribes from './bribes';
 import parseGuild from './guild';
 import parseGems from './gemPurchases';
 import parseAchievements from './achievements';
 import parseLooty from './lootyTracker';
-import parseShrines from './shrines';
+import parseShrines, { updateShrines } from './shrines';
 import { initAllItems, Item } from './items';
 import parseStorage from './storage';
 import parseQuests from './quests';
@@ -16,7 +16,7 @@ import parsePrayers from './prayers';
 import parseRefinery from './refinery';
 import parseSaltLick from './saltLick';
 import parsePrinter from './printer';
-import parseDeathnote from './deathnote';
+import updateDeathnote from './deathnote';
 import parseTaskboard from './tasks';
 import { Cloudsave } from './cloudsave';
 import parseWorship from './worship';
@@ -27,6 +27,20 @@ import parseObols from './obols';
 import { parseFamily } from './family';
 import { parseDungeons } from './dungeons';
 import { parseForge, updateForge } from './forge';
+import { parseCooking, updateCooking } from './cooking';
+import { parseLab, updateLab } from './lab';
+import { parseBreeding, updateBreeding } from './breeding';
+
+
+export const safeJsonParse = <T, >(doc: Cloudsave, key: string, emptyValue: T): T => {
+    try {
+        return JSON.parse(doc.get(key))
+    }
+    catch (e) {
+        console.debug(key, doc.get(key))
+    }
+    return emptyValue;
+}
 
 export class IdleonData {
     private data: Map<string, any>
@@ -60,10 +74,11 @@ export class IdleonData {
     }
 }
 
+
 const keyFunctionMap: Record<string, Function> = {
     "stamps": (doc: Cloudsave, charCount: number) => parseStamps(doc.get("StampLv"), doc.get("StampLvM")),
     "traps": (doc: Cloudsave, charCount: number) => parseTraps([...Array(charCount)].map((_, i) => { return doc.get(`PldTraps_${i}`) })),
-    "statues": (doc: Cloudsave, charCount: number) => parseStatues([...Array(charCount)].map((_, i) => { try { return JSON.parse(doc.get(`StatueLevels_${i}`)) } catch (e) { console.log("Statues", i, doc.get(`StatueLevels_${i}`)); throw e } }), JSON.parse(doc.get(`StuG`))),
+    "statues": (doc: Cloudsave, charCount: number) => parseStatues([...Array(charCount)].map((_, i) => safeJsonParse(doc, `StatueLevels_${i}`, [])), safeJsonParse(doc, `StuG`, [])),
     "timeAway": (doc: Cloudsave, charCount: number) => JSON.parse(doc.get('TimeAway')),
     "cauldronBubbles": (doc: Cloudsave, charCount: number) => doc.get('CauldronBubbles'),
     "cards": (doc: Cloudsave, charCount: number) => parseCards(JSON.parse(doc.get('Cards0'))),
@@ -72,7 +87,7 @@ const keyFunctionMap: Record<string, Function> = {
     "bribes": (doc: Cloudsave, charCount: number) => parseBribes(doc.get("BribeStatus")),
     "guild": (doc: Cloudsave, charCount: number) => parseGuild(JSON.parse(doc.get("Guild"))),
     "gems": (doc: Cloudsave, charCount: number) => parseGems(JSON.parse(doc.get('GemItemsPurchased'))),
-    "achievements": (doc: Cloudsave, charCount: number) => parseAchievements(JSON.parse(doc.get('AchieveReg')), JSON.parse(doc.get('SteamAchieve'))),
+    "achievements": (doc: Cloudsave, charCount: number) => parseAchievements(safeJsonParse(doc, 'AchieveReg', []), safeJsonParse(doc, 'SteamAchieve', [])),
     "lootyData": (doc: Cloudsave, allItems: Item[], charCount: number) => parseLooty(JSON.parse(doc.get("Cards1")), allItems),
     "rawData": (doc: Cloudsave, charCount: number) => doc.toJSON(),
     "POExtra": (doc: Cloudsave, charCount: number) => {
@@ -90,19 +105,29 @@ const keyFunctionMap: Record<string, Function> = {
     "refinery": (doc: Cloudsave, charCount: number) => parseRefinery(JSON.parse(doc.get("Refinery"))),
     "saltLick": (doc: Cloudsave, charCount: number) => parseSaltLick(JSON.parse(doc.get("SaltLick"))),
     "printer": (doc: Cloudsave, charCount: number) => parsePrinter(JSON.parse(doc.get("Print")), charCount),
-    "deathnote": (doc: Cloudsave, charCount: number) => parseDeathnote([...Array(charCount)].map((_, i) => { return doc.get(`KLA_${i}`) })),
     "taskboard": (doc: Cloudsave, charCount: number) => parseTaskboard(JSON.parse(doc.get(`TaskZZ0`)), JSON.parse(doc.get(`TaskZZ1`)), JSON.parse(doc.get(`TaskZZ2`)), JSON.parse(doc.get(`TaskZZ3`)), doc.get(`TaskZZ4`), doc.get(`TaskZZ5`)),
     "worship": (doc: Cloudsave, accountData: Map<string, any>, charCount: number) => parseWorship(JSON.parse(doc.get("TotemInfo")), accountData),
     "construction": (doc: Cloudsave, charCount: number) => parseConstruction(JSON.parse(doc.get("Tower"))),
-    "arcade": (doc: Cloudsave, charCount: number) => parseArcade(JSON.parse(doc.get("ArcadeUpg")), doc.get("OptLacc")),
+    "arcade": (doc: Cloudsave, charCount: number) => parseArcade(safeJsonParse(doc, "ArcadeUpg", []), doc.get("OptLacc")),
     "obols": (doc: Cloudsave, allItems: Item[], charCount: number) => parseObols(doc, charCount, allItems),
-    "dungeons": (doc: Cloudsave, charCount: number) => parseDungeons(JSON.parse(doc.get("DungUpg")), doc.get("OptLacc")),
+    "dungeons": (doc: Cloudsave, charCount: number) => parseDungeons(safeJsonParse(doc, "DungUpg", []), doc.get("OptLacc")),
     "forge": (doc: Cloudsave, allItems: Item[], charCount: number) => parseForge(doc.get("ForgeItemQty"), doc.get("ForgeIntProg"), doc.get("ForgeItemOrder"), doc.get("ForgeLV"), allItems),
+    "cooking": (doc: Cloudsave, charCount: number) => parseCooking(safeJsonParse(doc, "Cooking", []), safeJsonParse(doc, "Meals", [])),
+    "lab": (doc: Cloudsave, charCount: number) => parseLab(safeJsonParse(doc, "Lab", [])),
+    "breeding": (doc: Cloudsave, charCount: number) => parseBreeding(safeJsonParse(doc, "PetsStored", []), safeJsonParse(doc, "Pets", []), doc.get("OptLacc"), safeJsonParse(doc, "Territory", []), safeJsonParse(doc, "Breeding", [])),
 }
 
+// ORDER IS IMPORTANT!
 const postProcessingMap: Record<string, Function> = {
+    "lab": (doc: Cloudsave, accountData: Map<string, any>) => updateLab(accountData),
+    "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStamps(accountData),
+    "alchemy": (doc: Cloudsave, accountData: Map<string, any>) => updateAlchemy(accountData),
     "family": (doc: Cloudsave, accountData: Map<string, any>) => parseFamily(accountData.get("players") as Player[]),
     "forge": (doc: Cloudsave, accountData: Map<string, any>) => updateForge(accountData.get("forge"), accountData.get("gems")),
+    "cooking": (doc: Cloudsave, accountData: Map<string, any>) => updateCooking(accountData),
+    "deathnote": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnote(accountData),
+    "breeding": (doc: Cloudsave, accountData: Map<string, any>) => updateBreeding(accountData),
+    "shrines": (doc: Cloudsave, accountData: Map<string, any>) => updateShrines(accountData),
 }
 
 export const updateIdleonData = async (data: Cloudsave, charNames: string[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {

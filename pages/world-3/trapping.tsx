@@ -45,7 +45,7 @@ function PlayerTraps(props: PlayerTrapProps) {
     }
 
     return (
-        <Grid columns={{count: 6, size: ["50px", "16.666666666666666666666666666667%"]}} gap="small" justify="start">
+        <Grid columns={{count: 8, size: ["50px", "12.5%"]}} gap="small" justify="start">
             {
                 props.traps.map((trap, index) => {
                     return (

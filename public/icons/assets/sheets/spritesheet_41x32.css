@@ -1,0 +1,71 @@
+.icons-4132 {
+    background-image: url(spritesheet_41x32.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 78.04878048780488%;
+    height: 0;
+    background-size: cover;
+    background-position: 0 calc(var(--row) * 1.694915254237288%)
+}
+.icons-4132:not(.icons-CookingM0):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
+.icons-CookingM0 { --row: 0; }
+.icons-CookingM1 { --row: 1; }
+.icons-CookingM10 { --row: 2; }
+.icons-CookingM11 { --row: 3; }
+.icons-CookingM12 { --row: 4; }
+.icons-CookingM13 { --row: 5; }
+.icons-CookingM14 { --row: 6; }
+.icons-CookingM15 { --row: 7; }
+.icons-CookingM16 { --row: 8; }
+.icons-CookingM17 { --row: 9; }
+.icons-CookingM18 { --row: 10; }
+.icons-CookingM19 { --row: 11; }
+.icons-CookingM2 { --row: 12; }
+.icons-CookingM20 { --row: 13; }
+.icons-CookingM21 { --row: 14; }
+.icons-CookingM22 { --row: 15; }
+.icons-CookingM23 { --row: 16; }
+.icons-CookingM24 { --row: 17; }
+.icons-CookingM25 { --row: 18; }
+.icons-CookingM26 { --row: 19; }
+.icons-CookingM27 { --row: 20; }
+.icons-CookingM28 { --row: 21; }
+.icons-CookingM29 { --row: 22; }
+.icons-CookingM3 { --row: 23; }
+.icons-CookingM30 { --row: 24; }
+.icons-CookingM31 { --row: 25; }
+.icons-CookingM32 { --row: 26; }
+.icons-CookingM33 { --row: 27; }
+.icons-CookingM34 { --row: 28; }
+.icons-CookingM35 { --row: 29; }
+.icons-CookingM36 { --row: 30; }
+.icons-CookingM37 { --row: 31; }
+.icons-CookingM38 { --row: 32; }
+.icons-CookingM39 { --row: 33; }
+.icons-CookingM4 { --row: 34; }
+.icons-CookingM40 { --row: 35; }
+.icons-CookingM41 { --row: 36; }
+.icons-CookingM42 { --row: 37; }
+.icons-CookingM43 { --row: 38; }
+.icons-CookingM44 { --row: 39; }
+.icons-CookingM45 { --row: 40; }
+.icons-CookingM46 { --row: 41; }
+.icons-CookingM47 { --row: 42; }
+.icons-CookingM48 { --row: 43; }
+.icons-CookingM49 { --row: 44; }
+.icons-CookingM5 { --row: 45; }
+.icons-CookingM50 { --row: 46; }
+.icons-CookingM51 { --row: 47; }
+.icons-CookingM52 { --row: 48; }
+.icons-CookingM53 { --row: 49; }
+.icons-CookingM54 { --row: 50; }
+.icons-CookingM55 { --row: 51; }
+.icons-CookingM56 { --row: 52; }
+.icons-CookingM57 { --row: 53; }
+.icons-CookingM58 { --row: 54; }
+.icons-CookingM59 { --row: 55; }
+.icons-CookingM6 { --row: 56; }
+.icons-CookingM7 { --row: 57; }
+.icons-CookingM8 { --row: 58; }
+.icons-CookingM9 { --row: 59; }
