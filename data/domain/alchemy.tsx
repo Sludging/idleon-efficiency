@@ -1,5 +1,6 @@
 import { lavaFunc } from '../utility'
 import { Item } from './items';
+import { Lab } from './lab';
 
 export enum CauldronIndex {
     Power = 0,
@@ -130,6 +131,7 @@ export class Vial {
     requirements: Array<Item> = [];
 
     level: number = 0;
+    bonusMulitplier: number = 1;
 
     constructor(public vialIndex: number, name: string, x1: number, x2: number, func: string, description: string, requirements: Array<{ item: string, quantity: number }>) {
         this.name = name.replace(/_/g, " ");
@@ -141,7 +143,7 @@ export class Vial {
     }
 
     getBonus = (round: boolean = false): number => {
-        return lavaFunc(this.func, this.level, this.x1, this.x2, round);
+        return lavaFunc(this.func, this.level, this.x1, this.x2, round) * this.bonusMulitplier;
     }
 
     getBonusText = (): string => {
@@ -425,5 +427,16 @@ export default function parseAlchemy(alchemyData: Array<Map<string, number>>, bo
     })
 
     convertToItemClass(alchemy, allItems);
+    return alchemy;
+}
+
+export function updateAlchemy(data: Map<string, any>) {
+    const alchemy = data.get("alchemy") as Alchemy;
+    const lab = data.get("lab") as Lab;
+
+    if (lab.bonuses.find(bonus => bonus.name == "My 1st Chemistry Set")?.active ?? false) {
+        alchemy.vials.forEach(vial => vial.bonusMulitplier = 2)
+    }
+
     return alchemy;
 }

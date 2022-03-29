@@ -192,7 +192,7 @@ function Cooking() {
                                             label="Next Level"
                                             textSize='small'
                                             textColor={meal.count > meal.getMealLevelCost() ? 'green-1' : 'accent-1'}
-                                            text={`${Math.floor(meal.count)}/${Math.ceil(meal.getMealLevelCost()).toString()}`}
+                                            text={`${nFormatter(Math.floor(meal.count))}/${nFormatter(Math.ceil(meal.getMealLevelCost()))}`}
                                         />
                                     </Box>
                                 }
