@@ -401,8 +401,7 @@ export const updateCooking = (data: Map<string, any>) => {
         kitchen.luckUpgradecost = kitchen.getSpiceUpgradeCost(kitchenCosts, mealKitchenCosts, arenaBonusActive, UpgradeType.Luck);
     })
 
-    // TODO: When jewel 14 is actually factored in, change this.
-    const jewelMealBonus = mainframe.jewels[14].active ? mainframe.jewels[14].getBonus() : 1; // TODO: Remove hardcoding
+    const jewelMealBonus = mainframe.jewels[16].active ? mainframe.jewels[16].getBonus() : 1; // TODO: Remove hardcoding
     cooking.meals.forEach(meal => meal.mainframeBonus = jewelMealBonus);
 
     return cooking;

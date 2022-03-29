@@ -214,7 +214,7 @@ function EggDisplay() {
         if (gemStore && breeding) {
             const eggCapacityUpgrade = gemStore.purchases.find(purchase => purchase.itemName == "Royal Egg Cap")?.pucrhased ?? 0;
             const breedingUpgradeLevel = breeding?.upgrade.find(upgrade => upgrade.data.upgradeName == "Egg Capacity")?.level ?? 0;
-            return eggCapacityUpgrade + breedingUpgradeLevel;
+            return 3 + eggCapacityUpgrade + breedingUpgradeLevel;
         }
         return 0;
     }, [breeding, appContext]);
@@ -256,6 +256,12 @@ function EggDisplay() {
                 }
                 </Box>
                 <ComponentAndLabel label="Next Egg In" component={<TimeDown addSeconds={breeding.totalEggTime - breeding.timeTillEgg} />} />
+                {
+                    breeding.getStatRange().map((stat, index) => (
+                        <TextAndLabel label={index == 0 ? "Min Stat" : "Max Stat"} text={nFormatter(stat)} key={index} />
+                    ))
+                }
+                
             </Box>
         </Box>
     )

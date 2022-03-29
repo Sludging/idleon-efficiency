@@ -100,7 +100,7 @@ export class Jewel {
     }
 
     getBonusText = () => {
-        return `${this.data.effect.replace(/}/g, this.getBonus().toString())}${this.bonusMultiplier > 1 ? ` (${this.bonusMultiplier}x multiplier from mainframe bonus)` : undefined}` ;
+        return `${this.data.effect.replace(/}/g, this.getBonus().toString())}${this.bonusMultiplier > 1 ? ` (${this.bonusMultiplier}x multiplier from mainframe bonus)` : undefined}`;
     }
 
     getRange = (connectionBonus: number = 0) => {
@@ -258,6 +258,69 @@ export const parseLab = (labData: number[][]) => {
     return lab;
 }
 
+const _calculatePlayersLineWidth = (lab: Lab, cooking: Cooking, breeding: Breeding, cards: Card[], gemStore: GemStore) => {
+    const jewelMultiplier = (lab.bonuses.find(bonus => bonus.index == 8)?.active ?? false) ? 1.5 : 1;
+    const mealBonus = lab.jewels.filter(jewel => jewel.active && jewel.index == 16).reduce((sum, jewel) => sum += jewel.getBonus(jewelMultiplier), 0)
+    if (lab.playersInTubes.length > 0) {
+        const pxMealBonus = cooking?.meals.filter(meal => meal.bonusKey == "PxLine").reduce((sum, meal) => sum += meal.getBonus(false, mealBonus), 0) ?? 0;
+        const linePctMealBonus = cooking?.meals.filter(meal => meal.bonusKey == "LinePct").reduce((sum, meal) => sum += meal.getBonus(false, mealBonus), 0) ?? 0;
+        const passiveCardBonus = cards?.filter(card => card.effect.includes("Line Width")).reduce((sum, card) => sum += card.getBonus(), 0) ?? 0;
+        const petArenaBonus = breeding.hasBonus(13) ? 20 : 0;
+        const gemTubes = (gemStore?.purchases.find(purchase => purchase.no == 123)?.pucrhased ?? 0) * 2;
+
+        lab.playersInTubes.forEach((player, index) => {
+            player.labInfo.lineWidth = lab?.getPlayerLinewidth(player, pxMealBonus, linePctMealBonus, passiveCardBonus, petArenaBonus, index < gemTubes) ?? 0;
+            player.labInfo.supped = index < gemTubes;
+        });
+    }
+}
+
+const _findPrismSource = (lab: Lab) => {
+    for (let playerIndex = 0; playerIndex < lab.playersInTubes.length; playerIndex++) {
+        const player = lab.playersInTubes[playerIndex];
+        const playerCords = lab.playerCords[player.playerID];
+        if (lab.getDistance(43, 229, playerCords.x, playerCords.y) < player.labInfo.lineWidth) {
+            return player
+        }
+    }
+    return undefined;
+}
+
+const _calculatePlayerImpact = (connectedPlayers: Player[], chainIndex: number, lab: Lab) => {
+    const jewelMultiplier = (lab.bonuses.find(bonus => bonus.index == 8)?.active ?? false) ? 1.5 : 1;
+    const connectionRangeBonus = lab.jewels.filter(jewel => jewel.active && jewel.index == 9).reduce((sum, jewel) => sum += jewel.getBonus(jewelMultiplier), 0)
+        
+    const player = connectedPlayers[chainIndex];
+    const playerCords = lab.playerCords[player.playerID];
+    let hasImpact = false
+    lab.playersInTubes.forEach(tubePlayer => {
+        const tubePlayerCoords = lab.playerCords[tubePlayer.playerID];
+        const inRange = lab.getDistance(playerCords.x, playerCords.y, tubePlayerCoords.x, tubePlayerCoords.y) < tubePlayer.labInfo.lineWidth;
+        if (!connectedPlayers.includes(tubePlayer) && inRange) {
+            connectedPlayers.push(tubePlayer);
+            hasImpact = true;
+        }
+    })
+
+    lab.bonuses.filter(bonus => !bonus.active).forEach(bonus => {
+        const inRange = lab.getDistance(playerCords.x, playerCords.y, bonus.x, bonus.y) < bonus.getRange(connectionRangeBonus);
+        if (inRange) {
+            bonus.active = true;
+            hasImpact = true;
+        }
+    });
+
+    lab.jewels.filter(jewel => jewel.available && !jewel.active).forEach(jewel => {
+        const inRange = lab.getDistance(playerCords.x, playerCords.y, jewel.data.x, jewel.data.y) < jewel.getRange(connectionRangeBonus);
+        if (inRange) {
+            jewel.active = true;
+            hasImpact = true;
+        }
+    });
+
+    return hasImpact;
+}
+
 export const updateLab = (data: Map<string, any>) => {
     const lab = data.get("lab") as Lab;
     const playerData = data.get("players") as Player[];
@@ -284,73 +347,58 @@ export const updateLab = (data: Map<string, any>) => {
     const playersInLab = [...playerData].filter(player => player.currentMonster == "Laboratory").sort((player1, player2) => player1.playerID > player2.playerID ? 1 : -1);
     lab.playersInTubes = playersInLab;
 
+    // fake active jewel 16
+
     let loopAgain = true;
     let counter = 0;
     const connectedPlayers: Player[] = [];
     while (loopAgain) {
         loopAgain = false;
         counter += 1;
-        // Figure out if there are any multipliers / active bonuses that affect connectivity.
-        const jewelMultiplier = (lab.bonuses.find(bonus => bonus.index == 8)?.active ?? false) ? 1.5 : 1;
-        const mealBonus = lab.jewels.filter(jewel => jewel.active && jewel.index == 16).reduce((sum, jewel) => sum += jewel.getBonus(jewelMultiplier), 0)
-        const connectionRangeBonus = lab.jewels.filter(jewel => jewel.active && jewel.index == 9).reduce((sum, jewel) => sum += jewel.getBonus(jewelMultiplier), 0)
         // calculate line widths
-        if (lab.playersInTubes.length > 0) {
-            const pxMealBonus = cooking?.meals.filter(meal => meal.bonusKey == "PxLine").reduce((sum, meal) => sum += meal.getBonus(false, mealBonus), 0) ?? 0;
-            const linePctMealBonus = cooking?.meals.filter(meal => meal.bonusKey == "LinePct").reduce((sum, meal) => sum += meal.getBonus(false, mealBonus), 0) ?? 0;
-            const passiveCardBonus = cards?.filter(card => card.effect.includes("Line Width")).reduce((sum, card) => sum += card.getBonus(), 0) ?? 0;
-            const petArenaBonus = breeding.hasBonus(13) ? 20 : 0;
-            const gemTubes = (gemStore?.purchases.find(purchase => purchase.no == 123)?.pucrhased ?? 0) * 2;
-
-            lab.playersInTubes.forEach((player, index) => {
-                player.labInfo.lineWidth = lab?.getPlayerLinewidth(player, pxMealBonus, linePctMealBonus, passiveCardBonus, petArenaBonus, index < gemTubes) ?? 0;
-                player.labInfo.supped = index < gemTubes;
-            });
-        }
+        _calculatePlayersLineWidth(lab, cooking, breeding, cards, gemStore);
 
         // If we have players in lab, and no chain, try and find the player connected to prism.
         if (lab.playersInTubes.length > 0 && connectedPlayers.length == 0) {
-            for (let playerIndex = 0; playerIndex < lab.playersInTubes.length; playerIndex++) {
-                const player = lab.playersInTubes[playerIndex];
-                const playerCords = lab.playerCords[player.playerID];
-                if (lab.getDistance(43, 229, playerCords.x, playerCords.y) < player.labInfo.lineWidth) {
-                    connectedPlayers.push(player);
-                    break;
-                }
+            const prismPlayer = _findPrismSource(lab);
+            if (prismPlayer) {
+                connectedPlayers.push(prismPlayer);
             }
         }
 
         // Loop the things
         for (let chainIndex = 0; chainIndex < lab.playersInTubes.length; chainIndex++) {
             if (connectedPlayers.length > chainIndex) {
-                const player = connectedPlayers[chainIndex];
-                const playerCords = lab.playerCords[player.playerID];
-                lab.playersInTubes.forEach(tubePlayer => {
-                    const tubePlayerCoords = lab.playerCords[tubePlayer.playerID];
-                    const inRange = lab.getDistance(playerCords.x, playerCords.y, tubePlayerCoords.x, tubePlayerCoords.y) < tubePlayer.labInfo.lineWidth;
-                    if (!connectedPlayers.includes(tubePlayer) && inRange) {
-                        connectedPlayers.push(tubePlayer);
-                        loopAgain = true;
-                    }
-                })
-
-                lab.bonuses.filter(bonus => !bonus.active).forEach(bonus => {
-                    const inRange = lab.getDistance(playerCords.x, playerCords.y, bonus.x, bonus.y) < bonus.getRange(connectionRangeBonus);
-                    if (inRange) {
-                        bonus.active = true;
-                        loopAgain = true;
-                    }
-                });
-
-                lab.jewels.filter(jewel => jewel.available && !jewel.active).forEach(jewel => {
-                    const inRange = lab.getDistance(playerCords.x, playerCords.y, jewel.data.x, jewel.data.y) < jewel.getRange(connectionRangeBonus);
-                    if (inRange) {
-                        jewel.active = true;
-                        loopAgain = true;
-                    }
-                });
+                loopAgain = _calculatePlayerImpact(connectedPlayers, chainIndex, lab);
             }
         }
+    }
+
+    if (lab.jewels[16].available) {
+        // fake 16 is active to avoid odd scenarios
+        lab.jewels[16].active = true;
+
+        _calculatePlayersLineWidth(lab, cooking, breeding, cards, gemStore);
+        // deactivate after we updated all the widths.
+        lab.jewels[16].active = false;
+
+        // If we have players in lab, and no chain, try and find the player connected to prism.
+        if (lab.playersInTubes.length > 0 && connectedPlayers.length == 0) {
+            const prismPlayer = _findPrismSource(lab);
+            if (prismPlayer) {
+                connectedPlayers.push(prismPlayer);
+            }
+        }
+
+        // Loop the things
+        for (let chainIndex = 0; chainIndex < lab.playersInTubes.length; chainIndex++) {
+            if (connectedPlayers.length > chainIndex) {
+                loopAgain = _calculatePlayerImpact(connectedPlayers, chainIndex, lab);
+            }
+        }
+
+        // Redo line width maths in case the jewel didn't get re-enabled.
+        _calculatePlayersLineWidth(lab, cooking, breeding, cards, gemStore);
     }
 
     const jewelMultiplier = (lab.bonuses.find(bonus => bonus.index == 8)?.active ?? false) ? 1.5 : 1;

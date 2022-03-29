@@ -94,6 +94,7 @@ function MainframeDisplay() {
                     }
                 </Box>
             </Box>
+            <Text size="xsmall">* Green border means active, low opacity means not obtained yet.</Text>
             <Box pad="small" gap="small">
                 <Text>Bonuses</Text>
                 <Box gap="small" direction="row" wrap>
@@ -119,6 +120,7 @@ function MainframeDisplay() {
                     }
                 </Box>
             </Box>
+
             <Box pad="small" gap="small">
                 <Text>Jewels</Text>
                 <Box gap="small" direction="row" wrap>
@@ -196,7 +198,7 @@ function ChipDisplay() {
                                                                 {
                                                                     (player.skills.get(SkillsIndex.Intellect)?.level ?? 0) < slot.lvlReq && <Text size="xsmall">Lv {slot.lvlReq}</Text>
                                                                 }
-                                                                
+
                                                             </Box>
                                                     }
                                                 </Box>
@@ -211,17 +213,17 @@ function ChipDisplay() {
             </Box>
             <Box pad={{ top: "small", bottom: "small" }}>
                 <Text>Chip Repository</Text>
-                <Grid columns={{size: 'auto', count: 7}}>
-                {
-                    lab.chips.map((chip, index) => (
-                        <Box style={{opacity: chip.count == -1 ? 0.5 : 1}} key={index} border={{ color: 'grey-1', side: 'all', size: '2px' }} align="center" justify='center' direction="row">
-                            <Box width={{ max: '42px', min: '42px' }} height={{ max: '42px', min: '42px' }}>
-                                <Box className={chip.getClass()} />
+                <Grid columns={{ size: 'auto', count: 7 }}>
+                    {
+                        lab.chips.map((chip, index) => (
+                            <Box style={{ opacity: chip.count == -1 ? 0.5 : 1 }} key={index} border={{ color: 'grey-1', side: 'all', size: '2px' }} align="center" justify='center' direction="row">
+                                <Box width={{ max: '42px', min: '42px' }} height={{ max: '42px', min: '42px' }}>
+                                    <Box className={chip.getClass()} />
+                                </Box>
+                                <Text>{chip.count == -1 ? 0 : chip.count}</Text>
                             </Box>
-                            <Text>{chip.count == -1 ? 0 : chip.count}</Text>
-                        </Box>
-                    ))
-                }
+                        ))
+                    }
                 </Grid>
             </Box>
         </Box>
