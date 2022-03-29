@@ -10,6 +10,7 @@ import { notUndefined } from '../utility';
 import { Cloudsave } from "./cloudsave";
 import { EnemyInfo } from "./enemies";
 import { MapInfo } from "./maps";
+import { Chip, chipSlotReq } from "./lab";
 
 export class PlayerStats {
     strength: number = 0;
@@ -262,6 +263,16 @@ export class SkillData {
     constructor(public level: number, public currentXP: number, public xpReq: number) {}
 }
 
+export class ChipSlot {
+    constructor(public chip: Chip | undefined, public lvlReq: number) {}
+}
+
+interface LabInfo {
+    lineWidth: number
+    supped: boolean
+    chips: ChipSlot[]
+}
+
 export class Player {
     playerID: number;
     playerName: string;
@@ -291,6 +302,12 @@ export class Player {
     activePrayers: number[] = [];
     cooldown: Map<Talent, number> = new Map();
     invBagsUsed: Record<string, number> = {};
+    labInfo: LabInfo = { 
+        lineWidth: 0,
+        supped: false,
+        chips: [...Array(chipSlotReq.length)].map((_, index) => new ChipSlot(undefined, chipSlotReq[index])),
+    };
+    killInfo: Map<number, number> = new Map();
 
     constructor(playerID: number, playerName: string) {
         this.playerID = playerID;

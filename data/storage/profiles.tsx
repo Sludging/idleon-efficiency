@@ -64,7 +64,9 @@ export class ProfileDownloader {
 
     downloadProfile = async (profile: string) => {
         try {
-            const res = await fetch(`${cdn_location}/profiles/${profile}.json`);
+            const res = await fetch(`${cdn_location}/profiles/${profile}.json`, {
+                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            });
             if (res.ok) {
                 const jsonData = await res.json();
                 return jsonData;
