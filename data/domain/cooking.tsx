@@ -1,4 +1,4 @@
-import { round } from "../utility"
+import { nFormatter, round } from "../utility"
 import { Alchemy } from "./alchemy";
 import { Breeding } from "./breeding";
 import { Card } from "./cards";
@@ -55,6 +55,8 @@ export class Meal {
     discoveryTime: number = 0;
     discoveryChance: number = 0;
 
+    mainframeBonus: number = 1;
+
     constructor(public mealIndex: number, data: MealInfo) {
         this.name = data.name;
         this.cookReq = data.x1;
@@ -68,14 +70,13 @@ export class Meal {
         return `icons-4132 icons-CookingM${this.mealIndex}`;
     }
 
-    getBonus = (roundResult: boolean = false) => {
-        const mainFrameBonus = 1; // TODO: Actual mainframe bonus!
-        const finalMath = mainFrameBonus * this.level * this.x2;
+    getBonus = (roundResult: boolean = false, mainFrameBonus: number = this.mainframeBonus) => {
+        const finalMath = (1 + mainFrameBonus / 100) * this.level * this.x2;
         return roundResult ? round(finalMath) : finalMath;
     }
 
     getBonusText = () => {
-        return this.bonusText.replace(/{/g, this.getBonus(true).toString());
+        return this.bonusText.replace(/{/g, nFormatter(this.getBonus(true)));
     }
 
     getMealLevelCost = () => {
@@ -399,6 +400,10 @@ export const updateCooking = (data: Map<string, any>) => {
         kitchen.fireUpgradeCost = kitchen.getSpiceUpgradeCost(kitchenCosts, mealKitchenCosts, arenaBonusActive, UpgradeType.Fire);
         kitchen.luckUpgradecost = kitchen.getSpiceUpgradeCost(kitchenCosts, mealKitchenCosts, arenaBonusActive, UpgradeType.Luck);
     })
+
+    // TODO: When jewel 14 is actually factored in, change this.
+    const jewelMealBonus = mainframe.jewels[14].active ? mainframe.jewels[14].getBonus() : 1; // TODO: Remove hardcoding
+    cooking.meals.forEach(meal => meal.mainframeBonus = jewelMealBonus);
 
     return cooking;
 }

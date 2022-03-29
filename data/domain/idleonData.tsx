@@ -2,7 +2,7 @@ import parseTraps from './traps';
 import parseStamps, { updateStamps } from './stamps';
 import parseStatues from './statues';
 import parsePlayers, { Player } from './player';
-import parseAlchemy from './alchemy';
+import parseAlchemy, { updateAlchemy } from './alchemy';
 import parseBribes from './bribes';
 import parseGuild from './guild';
 import parseGems from './gemPurchases';
@@ -121,6 +121,7 @@ const keyFunctionMap: Record<string, Function> = {
 const postProcessingMap: Record<string, Function> = {
     "lab": (doc: Cloudsave, accountData: Map<string, any>) => updateLab(accountData),
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStamps(accountData),
+    "alchemy": (doc: Cloudsave, accountData: Map<string, any>) => updateAlchemy(accountData),
     "family": (doc: Cloudsave, accountData: Map<string, any>) => parseFamily(accountData.get("players") as Player[]),
     "forge": (doc: Cloudsave, accountData: Map<string, any>) => updateForge(accountData.get("forge"), accountData.get("gems")),
     "cooking": (doc: Cloudsave, accountData: Map<string, any>) => updateCooking(accountData),
