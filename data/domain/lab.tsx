@@ -100,7 +100,7 @@ export class Jewel {
     }
 
     getBonusText = () => {
-        return `${this.data.effect.replace(/}/g, this.getBonus().toString())}${this.bonusMultiplier > 1 ? ` (${this.bonusMultiplier}x multiplier from mainframe bonus)` : undefined}`;
+        return `${this.data.effect.replace(/}/g, this.getBonus().toString())}${this.bonusMultiplier > 1 ? ` (${this.bonusMultiplier}x multiplier from mainframe bonus)` : ""}`;
     }
 
     getRange = (connectionBonus: number = 0) => {
@@ -157,7 +157,7 @@ export class Chip {
     }
 
     getBonusText = () => {
-        return this.data.description.replace(/{/g, this.getBonus().toString());
+        return this.data.bonus.replace(/{/g, this.getBonus().toString());
     }
 }
 
