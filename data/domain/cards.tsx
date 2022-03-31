@@ -5,7 +5,7 @@ export class Card {
     count: number = 0;
     displayName: string;
 
-    constructor(public index: number, public name: string, public id: string, public category: string, public perTier: number, public effect: string, public bonus: number, public order: number) {
+    constructor(public index: number, public name: string, public id: string, public category: string, public perTier: number, public effect: string, public bonus: number, public order: number, public chipBoost: number = 1) {
         this.displayName = EnemyInfo.find(enemy => enemy.details.internalName == name)?.details.Name || "New Monster?";
     }
 
@@ -32,7 +32,7 @@ export class Card {
             return 0;
         }
         const stars = this.getStars();
-        return this.bonus * (stars + 1);
+        return this.bonus * (stars + 1) * this.chipBoost;
     }
 
     getBonusText = (): string => {
@@ -237,6 +237,9 @@ export class CardInfo {
             const theCard = this.cards.find(x => x.name == card);
             if (theCard) {
                 this.equippedCards.push(theCard);
+            }
+            else {
+                this.equippedCards.push(new Card(-1, "Empty", "Empty", "Empty", -1, "Empty", -1, -1))
             }
         });
 
