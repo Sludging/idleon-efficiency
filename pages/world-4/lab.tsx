@@ -191,9 +191,15 @@ function ChipDisplay() {
                                                 <Box key={index} direction="row" gap="small" border={{ color: 'grey-1', side: 'all', size: '2px' }}>
                                                     {
                                                         slot.chip ?
-                                                            <Box width={{ max: '42px', min: '42px' }} height={{ max: '42px', min: '42px' }}>
-                                                                <Box className={slot.chip?.getClass()} />
-                                                            </Box> :
+                                                            <TipDisplay
+                                                                heading={slot.chip.data.name}
+                                                                body={slot.chip.getBonusText()}
+                                                                direction={TipDirection.Down}
+                                                                size='small'>
+                                                                <Box width={{ max: '42px', min: '42px' }} height={{ max: '42px', min: '42px' }}>
+                                                                    <Box className={slot.chip?.getClass()} />
+                                                                </Box>
+                                                            </TipDisplay> :
                                                             <Box width={{ max: '42px', min: '42px' }} height={{ max: '42px', min: '42px' }} align="center">
                                                                 {
                                                                     (player.skills.get(SkillsIndex.Intellect)?.level ?? 0) < slot.lvlReq && <Text size="xsmall">Lv {slot.lvlReq}</Text>
@@ -216,12 +222,31 @@ function ChipDisplay() {
                 <Grid columns={{ size: 'auto', count: 7 }}>
                     {
                         lab.chips.map((chip, index) => (
-                            <Box style={{ opacity: chip.count == -1 ? 0.5 : 1 }} key={index} border={{ color: 'grey-1', side: 'all', size: '2px' }} align="center" justify='center' direction="row">
-                                <Box width={{ max: '42px', min: '42px' }} height={{ max: '42px', min: '42px' }}>
-                                    <Box className={chip.getClass()} />
+                            <TipDisplay 
+                                key={index}
+                                heading={chip.data.name}
+                                // body={
+                                //     <Box gap="small">
+                                //         Bonus: {chip.getBonusText()}
+                                //         <Text weight='bold'>Cost:</Text>
+                                //         {
+                                //             chip.data.requirements.map((req, index) => (
+                                //                 <Text key={index}>{req.item}: {req.quantity}</Text>
+                                //             ))
+                                //         }
+                                //     </Box>}
+                                body={chip.getBonusText()}
+                                direction={TipDirection.Up}
+                                size='medium'
+                                
+                            >
+                                <Box style={{ opacity: chip.count == -1 ? 0.5 : 1 }}  border={{ color: 'grey-1', side: 'all', size: '2px' }} align="center" justify='center' direction="row">
+                                    <Box width={{ max: '42px', min: '42px' }} height={{ max: '42px', min: '42px' }}>
+                                        <Box className={chip.getClass()} />
+                                    </Box>
+                                    <Text>{chip.count == -1 ? 0 : chip.count}</Text>
                                 </Box>
-                                <Text>{chip.count == -1 ? 0 : chip.count}</Text>
-                            </Box>
+                            </TipDisplay>
                         ))
                     }
                 </Grid>

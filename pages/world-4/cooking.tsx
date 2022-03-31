@@ -73,7 +73,7 @@ function KitchenDisplay({ kitchen, cooking }: { kitchen: Kitchen, cooking: Cooki
                     <Box width={{ max: '41px', min: '41px' }}>
                         <Box className={cooking.meals[kitchen.activeMeal].getClass()} />
                     </Box>
-                    <Text size="small">{nFormatter(kitchen.mealSpeed / cooking.meals[kitchen.activeMeal].cookReq)} per hour.</Text>
+                    <Text size="small">{nFormatter(kitchen.mealSpeed / cooking.meals[kitchen.activeMeal].cookReq, "Smaller")} per hour.</Text>
                 </Box>
             }
             {
