@@ -104,6 +104,10 @@ export class Jewel {
     }
 
     getRange = (connectionBonus: number = 0) => {
+        // 1.52 change: Pyrite Rhombol no longer affects itself.
+        if (this.index == 9) {
+            return 80;
+        }
         return 80 * (1 + connectionBonus / 100);
     }
 }
@@ -210,7 +214,7 @@ export class Lab {
         const labSkillLevel = player.skills.get(SkillsIndex.Intellect)?.level ?? 0;
         let baseWidth = 50 + (2 * labSkillLevel);
 
-        if (this.jewels[5].active) {
+        if (this.jewels[5].available) {
             const playerCords = this.playerCords[player.playerID];
             if (this.getDistance(this.jewels[5].data.x, this.jewels[5].data.y, playerCords.x, playerCords.y) < 150) {
                 baseWidth *= (1 + (this.jewels[5].getBonus() / 100));
