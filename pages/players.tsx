@@ -1152,7 +1152,10 @@ function ZowInfo({ player }: { player: Player }) {
         if (area.includes("Grandfrog's") || area.includes("Igloo")) {
             return true;
         }
-        if (["Efaunt's Tomb", "The Roots", "Mummy Memorial", "Gravel Tomb", "Heaty Hole", "End Of The Road", "Z"].includes(area)) {
+        if (["TutorialA", "TutorialB", "TutorialC", "TutorialD", "JungleX", "MininggF", "How Did u get here", "Miningg1", "Miningg2", "Outer World Town", "The Untraveled Octopath",
+            "Spike Surprise", "YumYum Grotto", "Salty Shores", "Faraway Piers", "Filler", "Deepwater Docks", "Bandit Bob's Hideout", "Frostbite Towndra",
+            "Tunnels Entrance", "Trappers Folley", "Freefall Caverns", "The Ol' Straightaway", "Slip Slidy Ledges", "Echoing Egress", 
+            "Blunder Hills", "JungleZ", "PlayerSelect", "Efaunt's Tomb", "The Roots", "Mummy Memorial", "Gravel Tomb", "Heaty Hole", "End Of The Road", "Z", "Eycicles's Nest", "The Office"].includes(area)) {
             return true;
         }
         return false;
@@ -1180,7 +1183,7 @@ function ZowInfo({ player }: { player: Player }) {
                             return (
                                 <Box key={index} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} align="center" pad="small">
                                     {enemyData &&
-                                        <Box width={{max: '35px'}}>
+                                        <Box title={mapData?.area} width={{max: '35px'}}>
                                             <Box className={enemyData.getClass()} />
                                         </Box>
                                     }
