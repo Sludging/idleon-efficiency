@@ -14,7 +14,7 @@ export default function parsePrinter(rawData: any[], charCount: number) {
     if (rawData) {
         [...Array(charCount)].forEach((_, playerIndex) => {
             const samples: {item: string, quantity: number}[] = [];
-            [...Array(4)].forEach((_, sampleIndex) => {
+            [...Array(5)].forEach((_, sampleIndex) => {
                 samples.push({ item: rawData[5 + (sampleIndex * 2) + (playerIndex * 14)], quantity: rawData[6 + (sampleIndex * 2) + (playerIndex * 14)]})
             })
 
