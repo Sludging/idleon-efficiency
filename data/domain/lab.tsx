@@ -1,5 +1,5 @@
 import { Breeding } from "./breeding"
-import { Card } from "./cards"
+import { Card, CardInfo } from "./cards"
 import { Cooking } from "./cooking"
 import { GemStore } from "./gemPurchases"
 import { Player, SkillsIndex } from "./player"
@@ -335,6 +335,13 @@ export const updateLab = (data: Map<string, any>) => {
         chips.forEach((chip, chipIndex) => {
             playerData[index].labInfo.chips[chipIndex].chip = chip;
         })
+        // Update card boost, kinda ugly here but easiest solution for now.
+        if (chips.filter(chip => chip.data.name == "Omega Nanochip").length > 0 && playerData[index].cardInfo) {
+            (playerData[index].cardInfo as CardInfo).equippedCards[0].chipBoost = 2;
+        }
+        if (chips.filter(chip => chip.data.name == "Omega Motherboard").length > 0 && playerData[index].cardInfo) {
+            (playerData[index].cardInfo as CardInfo).equippedCards[7].chipBoost = 2;
+        }
     })
 
     // Things to care about:

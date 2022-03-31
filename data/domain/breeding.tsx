@@ -320,7 +320,6 @@ export class Breeding {
         let baseMath = Math.pow(4 * this.skillLevel + Math.pow(this.skillLevel / 2, 3), 0.85);
         const eggRarity = this.eggs[0].rarity > 0 ? this.eggs[0].rarity : 1;
         const maxRange = Math.max(0.1, 1 - ((eggRarity + 4) / 12) * 0.9);
-        console.log(baseMath, eggRarity, maxRange);
         baseMath *= (1 + eggRarity / 8);
         const maxStat = baseMath * (Math.min(1.2 + this.skillLevel / 12, 4) * Math.pow(2.71828, -10 * 0) + 1);
         const minStat = baseMath * (Math.min(1.2 + this.skillLevel / 12, 4) * Math.pow(2.71828, -10 * maxRange) + 1);

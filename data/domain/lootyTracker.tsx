@@ -20,7 +20,6 @@ export default function parseLooty(lootedInfo: string[], allItems: Item[]) {
     toReturn.obtained.sort((item1, item2) => item1.internalName < item2.internalName ? -1 : 1);
     toReturn.missing.sort((item1, item2) => item1.internalName < item2.internalName ? -1 : 1);
 
-    console.log(toReturn.obtained.map(item => item.internalName));
     return toReturn;
 }
 

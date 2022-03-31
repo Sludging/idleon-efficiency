@@ -353,7 +353,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     <Text>Equipped Cards:</Text>
                     <Grid columns={["25%", "25%", "25%", "25%"]} width={{ max: '200px' }} gap={{ row: "small" }}>
                         {
-                            player.cardInfo ? player.cardInfo.equippedCards.map((card, index) => {
+                            player.cardInfo ? player.cardInfo.equippedCards.filter(card => card.name != "Empty").map((card, index) => {
                                 return (
                                     <Box key={index}>
                                         <Stack key={index}>
