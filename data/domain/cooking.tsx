@@ -32,8 +32,8 @@ function* combinations<T>(arr: T[], r: number) {
 
 export interface MealInfo {
     name: string,
-    x1: number,
-    x2: number,
+    cookingReq: number,
+    bonusQty: number,
     bonusText: string,
     description: string,
     bonusKey: string
@@ -42,7 +42,7 @@ export interface MealInfo {
 export class Meal {
     name: string
     cookReq: number
-    x2: number
+    bonusQty: number
     bonusText: string
     description: string
     bonusKey: string
@@ -59,8 +59,8 @@ export class Meal {
 
     constructor(public mealIndex: number, data: MealInfo) {
         this.name = data.name;
-        this.cookReq = data.x1;
-        this.x2 = data.x2;
+        this.cookReq = data.cookingReq;
+        this.bonusQty = data.bonusQty;
         this.bonusText = data.bonusText;
         this.description = data.description;
         this.bonusKey = data.bonusKey;
@@ -71,7 +71,7 @@ export class Meal {
     }
 
     getBonus = (roundResult: boolean = false, mainFrameBonus: number = this.mainframeBonus) => {
-        const finalMath = (1 + mainFrameBonus / 100) * this.level * this.x2;
+        const finalMath = (1 + mainFrameBonus / 100) * this.level * this.bonusQty;
         return roundResult ? round(finalMath) : finalMath;
     }
 
@@ -89,66 +89,66 @@ export class Meal {
 
 const initMeals = () => {
     return [
-        new Meal(0, { "name": "Turkey a la Thank", "x1": 10, "x2": 2, "bonusText": "+{% Total Damage", "description": "Do I smell gratitude? Oh, no that's colonialization...", "bonusKey": "TotDmg" }),
-        new Meal(1, { "name": "Egg", "x1": 15, "x2": 5, "bonusText": "+{% Meal Cooking Speed", "description": "It's just an egg.", "bonusKey": "Mcook" }),
-        new Meal(2, { "name": "Salad", "x1": 25, "x2": 3, "bonusText": "+{% Cash from Monsters", "description": "Yea uhm, could I get a burger, but hold the meat and buns?", "bonusKey": "Cash" }),
-        new Meal(3, { "name": "Pie", "x1": 40, "x2": 5, "bonusText": "+{% New Recipe Cooking Speed", "description": "Cartoon characters with a fear of levitation HATE the smell of this!", "bonusKey": "Rcook" }),
-        new Meal(4, { "name": "Frenk Fries", "x1": 60, "x2": 5, "bonusText": "+{% New Pet Breeding Odds", "description": "You're breeding pets in outer space, don't be shocked that there's no France!", "bonusKey": "Npet" }),
-        new Meal(5, { "name": "Spaghetti", "x1": 90, "x2": 4, "bonusText": "+{% Breeding EXP", "description": "Mama mia mahhh spaghettiiiiiiii!", "bonusKey": "BrExp" }),
-        new Meal(6, { "name": "Corn", "x1": 125, "x2": 2, "bonusText": "+{% Skill Efficiency", "description": "To think the government is subsidizing this... its bonus is terrible!!!", "bonusKey": "Seff" }),
-        new Meal(7, { "name": "Garlic Bread", "x1": 175, "x2": 4, "bonusText": "+{% VIP Library Membership", "description": "The letter H ain't lookin' so good after eating a few of these...", "bonusKey": "VIP" }),
-        new Meal(8, { "name": "Garlicless Bread", "x1": 250, "x2": 2, "bonusText": "+{% Lab EXP", "description": "Many revolutions in the world originate from an increase in the price of bread", "bonusKey": "Lexp" }),
-        new Meal(9, { "name": "Pizza", "x1": 350, "x2": 9, "bonusText": "+{% New Pet Breeding Odds", "description": "Mama mia mahhh piiiiiiiizzza!!! Wait I already did that joke, replace this one", "bonusKey": "Npet" }),
-        new Meal(10, { "name": "Apple", "x1": 500, "x2": 5, "bonusText": "+{ Base DEF", "description": "Aw jeez Richard, I sure am hungry for apples!", "bonusKey": "Def" }),
-        new Meal(11, { "name": "Pancakes", "x1": 700, "x2": 2, "bonusText": "+{Px Line Width in Lab Mainframe", "description": "Ohhh, they're called 'pan'cakes because they're like cakes made in a pan haha", "bonusKey": "PxLine" }),
-        new Meal(12, { "name": "Corndog", "x1": 1000, "x2": 12, "bonusText": "+{% Meal Cooking Speed", "description": "Ohhh, they're called 'corn'dogs because... wait, why are they called corndogs?", "bonusKey": "Mcook" }),
-        new Meal(13, { "name": "Cabbage", "x1": 1400, "x2": 5, "bonusText": "+{% All Cooking Spd per 10 upgrade Lvs", "description": "This is a MONUMENTALLY IMPORTANT vegetable, as well as upgrade.", "bonusKey": "KitchenEff" }),
-        new Meal(14, { "name": "Potato Pea Pastry", "x1": 2000, "x2": 1, "bonusText": "+{% Lower Egg Incubator Time", "description": "Yuhhhh it's that Triple P threat! Look out for them P's bro!", "bonusKey": "TimeEgg" }),
-        new Meal(15, { "name": "Dango", "x1": 3000, "x2": 2, "bonusText": "+{% Lower Kitchen Upgrade Costs", "description": "Look, I'm not sure what these are either, just go with it.", "bonusKey": "KitchC" }),
-        new Meal(16, { "name": "Sourish Fish", "x1": 4000, "x2": 4, "bonusText": "+{% VIP Library Membership", "description": "Shhh stop saying they're sweet, you're gonna get me in trouble!", "bonusKey": "VIP" }),
-        new Meal(17, { "name": "Octoplop", "x1": 5000, "x2": 2, "bonusText": "+{% Total Damage", "description": "They really did just plop an octopus on a plate and call it a day.", "bonusKey": "TotDmg" }),
-        new Meal(18, { "name": "Croissant", "x1": 8000, "x2": 1, "bonusText": "+{% Pet Fighting Damage", "description": "Carl loves these!", "bonusKey": "PetDmg" }),
-        new Meal(19, { "name": "Canopy", "x1": 12500, "x2": 10, "bonusText": "+{% New Recipe Cooking Speed", "description": "...oh, you said 'Can of Pea's. You know, that does make a lot more sense.", "bonusKey": "Rcook" }),
-        new Meal(20, { "name": "Cannoli", "x1": 20000, "x2": 1, "bonusText": "+{% Points earned in Tower Defence", "description": "Ain't got no joke for this one, it's existence is enough of a joke.", "bonusKey": "TDpts" }),
-        new Meal(21, { "name": "Cheese", "x1": 35000, "x2": 5, "bonusText": "+{% Cooking EXP", "description": "Sourced organically, straight from the moon!", "bonusKey": "CookExp" }),
-        new Meal(22, { "name": "Sawdust", "x1": 50000, "x2": 5, "bonusText": "+{% Lab EXP", "description": "'Id rather starve than eat that' - Angie, 2021", "bonusKey": "Lexp" }),
-        new Meal(23, { "name": "Eggplant", "x1": 75000, "x2": 5, "bonusText": "+{% Pet Breedability Speed in Fenceyard", "description": "Idk what you Zoomers are up to with those eggplant emojis, but I don't like it...", "bonusKey": "Breed" }),
-        new Meal(24, { "name": "Cheesy Bread", "x1": 110000, "x2": 1, "bonusText": "+{% Total Accuracy", "description": "Another bread meal? Wow so unoriginal, I'm glad I already left a 1 star rating.", "bonusKey": "TotAcc" }),
-        new Meal(25, { "name": "Wild Boar", "x1": 200000, "x2": 2, "bonusText": "+{Px Line Width in Lab Mainframe", "description": "It's not really wild anymore is it, it looks kinda dead and roasted.", "bonusKey": "PxLine" }),
-        new Meal(26, { "name": "Donut", "x1": 300000, "x2": 15, "bonusText": "+{% New Pet Breeding Odds", "description": "Mmmmm... doooooooonut...", "bonusKey": "Npet" }),
-        new Meal(27, { "name": "Riceball", "x1": 500000, "x2": 3, "bonusText": "+{% Skill Efficiency", "description": "Dude it's just a ball of rice, like what do you want me to say about it?", "bonusKey": "Seff" }),
-        new Meal(28, { "name": "Cauliflower", "x1": 750000, "x2": 1, "bonusText": "+{% Basic Atk Speed", "description": "The white part is called Curd. Welp, time to recategorize this as an educational game!", "bonusKey": "AtkSpd" }),
-        new Meal(29, { "name": "Durian Fruit", "x1": 1000000, "x2": 6, "bonusText": "+{% Lower Kitchen Upgrade costs", "description": "This must have been in the room when Kurt said it smelled like 'teen spirit'...", "bonusKey": "KitchC" }),
-        new Meal(30, { "name": "Orange", "x1": 1500000, "x2": 3, "bonusText": "+{% VIP Library Membership", "description": "The true arch-nemesis of rappers and poets alike.", "bonusKey": "VIP" }),
-        new Meal(31, { "name": "Bunt Cake", "x1": 3000000, "x2": 7, "bonusText": "+{% Cash from Monsters", "description": "Bunt cake more like Punt cake because I'm kicking this trash straight to the garbage.", "bonusKey": "Cash" }),
-        new Meal(32, { "name": "Chocolate Truffle", "x1": 5000000, "x2": 25, "bonusText": "+{% New Pet Breeding Odds", "description": "I mean it's got a bite taken out of it, pretty gross.", "bonusKey": "Npet" }),
-        new Meal(33, { "name": "Leek", "x1": 8000000, "x2": 2, "bonusText": "+{% skilling prowess", "description": "Leek! More importantly, prowess lowers the efficiency needed when AFK bar is orange.", "bonusKey": "Sprow" }),
-        new Meal(34, { "name": "Fortune Cookie", "x1": 12000000, "x2": 4, "bonusText": "+{% Faster Library checkout Speed", "description": "It reads: 'Salvation lies not within enjoying video games, but from gitting gud at them'", "bonusKey": "Lib" }),
-        new Meal(35, { "name": "Pretzel", "x1": 20000000, "x2": 7, "bonusText": "+{% Lab EXP", "description": "I love pretzels, people really be sleepin' on the versatility they bring to the table!", "bonusKey": "Lexp" }),
-        new Meal(36, { "name": "Sea Urchin", "x1": 30000000, "x2": 1, "bonusText": "+{% Critters from traps", "description": "At least one person reading this has eating one of these. Oh, it's you? Good for you.", "bonusKey": "Critter" }),
-        new Meal(37, { "name": "Mashed Potato", "x1": 40000000, "x2": 6, "bonusText": "+{% Cooking EXP", "description": "This nutritious meal reminds me of the Mashed Potato monster from IdleOn, the video game!", "bonusKey": "CookExp" }),
-        new Meal(38, { "name": "Mutton", "x1": 90000000, "x2": 1, "bonusText": "+{% Crit Chance", "description": "Yeap I tell you hwat Bobby, this is a real man's meal right here!", "bonusKey": "Crit" }),
-        new Meal(39, { "name": "Wedding Cake", "x1": 13500000, "x2": 2, "bonusText": "+{% Pet Fighting Damage", "description": "Imagine getting married lol so cringe haha am I right??!?! High-five, fellow kids!", "bonusKey": "PetDmg" }),
-        new Meal(40, { "name": "Eel", "x1": 20000000, "x2": 1, "bonusText": "+{% Line Width in Lab Mainframe", "description": "The younger sibling of the Loch Ness Monster. He's real, but no one really cares.", "bonusKey": "LinePct" }),
-        new Meal(41, { "name": "Whipped Cocoa", "x1": 30000000, "x2": 4, "bonusText": "+{% Skill Efficiency", "description": "Why is this being served on a plate? Was the cup not good enough for you??", "bonusKey": "Seff" }),
-        new Meal(42, { "name": "Onion", "x1": 50000000, "x2": 3, "bonusText": "+{% Total Damage", "description": "No, I'm not crying, this onion is just stimulating the lachrymal glands in my eyes.", "bonusKey": "TotDmg" }),
-        new Meal(43, { "name": "Soda", "x1": 70000000, "x2": 20, "bonusText": "+{% Meal Cooking Speed", "description": "Yea those red marks are grill marks, our chef doesn't know what he's doing.", "bonusKey": "Mcook" }),
-        new Meal(44, { "name": "Sushi Roll", "x1": 90000000, "x2": 7, "bonusText": "+{% VIP Library Membership", "description": "For something called a 'sushi roll', it isn't moving around very much.", "bonusKey": "VIP" }),
-        new Meal(45, { "name": "Buncha Banana", "x1": 125000000, "x2": 4, "bonusText": "+{ Max LVs for TP Pete Star Talent", "description": "Straight from the island of Karjama! Or something like that, starts with a K at least.", "bonusKey": "TPpete" }),
-        new Meal(46, { "name": "Pumpkin", "x1": 170000000, "x2": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "According to the author of the Iliad, its value should peak right around January...", "bonusKey": "non" }),
-        new Meal(47, { "name": "Cotton Candy", "x1": 400000000, "x2": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "The most exquisite of fairground cuisine!", "bonusKey": "non" }),
-        new Meal(48, { "name": "Massive Fig", "x1": 600000000, "x2": 3, "bonusText": "+{% Total Damage", "description": "This thing has gotta weigh at least 30!", "bonusKey": "non" }),
-        new Meal(49, { "name": "Turkey a la Thank", "x1": 5000000000, "x2": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
-        new Meal(50, { "name": "Turkey a la Thank", "x1": 5000000000, "x2": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
-        new Meal(51, { "name": "Turkey a la Thank", "x1": 5000000000, "x2": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
-        new Meal(52, { "name": "Turkey a la Thank", "x1": 5000000000, "x2": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
-        new Meal(53, { "name": "Turkey a la Thank", "x1": 5000000000, "x2": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
-        new Meal(54, { "name": "Turkey a la Thank", "x1": 5000000000, "x2": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
-        new Meal(55, { "name": "Turkey a la Thank", "x1": 5000000000, "x2": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
-        new Meal(56, { "name": "Turkey a la Thank", "x1": 5000000000, "x2": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
-        new Meal(57, { "name": "Turkey a la Thank", "x1": 5000000000, "x2": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
-        new Meal(58, { "name": "Turkey a la Thank", "x1": 5000000000, "x2": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
-        new Meal(59, { "name": "Turkey a la Thank", "x1": 5000000000, "x2": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
+        new Meal(0, { "name": "Turkey a la Thank", "cookingReq": 10, "bonusQty": 2, "bonusText": "+{% Total Damage", "description": "Do I smell gratitude? Oh, no that's colonialization...", "bonusKey": "TotDmg" }),
+        new Meal(1, { "name": "Egg", "cookingReq": 15, "bonusQty": 5, "bonusText": "+{% Meal Cooking Speed", "description": "It's just an egg.", "bonusKey": "Mcook" }),
+        new Meal(2, { "name": "Salad", "cookingReq": 25, "bonusQty": 3, "bonusText": "+{% Cash from Monsters", "description": "Yea uhm, could I get a burger, but hold the meat and buns?", "bonusKey": "Cash" }),
+        new Meal(3, { "name": "Pie", "cookingReq": 40, "bonusQty": 5, "bonusText": "+{% New Recipe Cooking Speed", "description": "Cartoon characters with a fear of levitation HATE the smell of this!", "bonusKey": "Rcook" }),
+        new Meal(4, { "name": "Frenk Fries", "cookingReq": 60, "bonusQty": 5, "bonusText": "+{% New Pet Breeding Odds", "description": "You're breeding pets in outer space, don't be shocked that there's no France!", "bonusKey": "Npet" }),
+        new Meal(5, { "name": "Spaghetti", "cookingReq": 90, "bonusQty": 4, "bonusText": "+{% Breeding EXP", "description": "Your mom made this. It's her spaghetti.", "bonusKey": "BrExp" }),
+        new Meal(6, { "name": "Corn", "cookingReq": 125, "bonusQty": 2, "bonusText": "+{% Skill Efficiency", "description": "To think the government is subsidizing this... its bonus is terrible!!!", "bonusKey": "Seff" }),
+        new Meal(7, { "name": "Garlic Bread", "cookingReq": 175, "bonusQty": 4, "bonusText": "+{% VIP Library Membership", "description": "The letter H ain't lookin' so good after eating a few of these...", "bonusKey": "VIP" }),
+        new Meal(8, { "name": "Garlicless Bread", "cookingReq": 250, "bonusQty": 2, "bonusText": "+{% Lab EXP", "description": "Many revolutions in the world originate from an increase in the price of bread", "bonusKey": "Lexp" }),
+        new Meal(9, { "name": "Pizza", "cookingReq": 350, "bonusQty": 9, "bonusText": "+{% New Pet Breeding Odds", "description": "Mama mia mahhh piiiiiiiizzza!!! Wait I already did that joke, replace this one", "bonusKey": "Npet" }),
+        new Meal(10, { "name": "Apple", "cookingReq": 500, "bonusQty": 5, "bonusText": "+{ Base DEF", "description": "Aw jeez Richard, I sure am hungry for apples!", "bonusKey": "Def" }),
+        new Meal(11, { "name": "Pancakes", "cookingReq": 700, "bonusQty": 2, "bonusText": "+{Px Line Width in Lab Mainframe", "description": "Ohhh, they're called 'pan'cakes because they're like cakes made in a pan haha", "bonusKey": "PxLine" }),
+        new Meal(12, { "name": "Corndog", "cookingReq": 1000, "bonusQty": 12, "bonusText": "+{% Meal Cooking Speed", "description": "Ohhh, they're called 'corn'dogs because... wait, why are they called corndogs?", "bonusKey": "Mcook" }),
+        new Meal(13, { "name": "Cabbage", "cookingReq": 1400, "bonusQty": 5, "bonusText": "+{% All Cooking Spd per 10 upgrade Lvs", "description": "This is a MONUMENTALLY IMPORTANT vegetable, as well as upgrade.", "bonusKey": "KitchenEff" }),
+        new Meal(14, { "name": "Potato Pea Pastry", "cookingReq": 2000, "bonusQty": 1, "bonusText": "+{% Lower Egg Incubator Time", "description": "Yuhhhh it's that Triple P threat! Look out for them P's bro!", "bonusKey": "TimeEgg" }),
+        new Meal(15, { "name": "Dango", "cookingReq": 3000, "bonusQty": 2, "bonusText": "+{% Lower Kitchen Upgrade Costs", "description": "Look, I'm not sure what these are either, just go with it.", "bonusKey": "KitchC" }),
+        new Meal(16, { "name": "Sourish Fish", "cookingReq": 4000, "bonusQty": 4, "bonusText": "+{% VIP Library Membership", "description": "Shhh stop saying they're sweet, you're gonna get me in trouble!", "bonusKey": "VIP" }),
+        new Meal(17, { "name": "Octoplop", "cookingReq": 5000, "bonusQty": 2, "bonusText": "+{% Total Damage", "description": "They really did just plop an octopus on a plate and call it a day.", "bonusKey": "TotDmg" }),
+        new Meal(18, { "name": "Croissant", "cookingReq": 8000, "bonusQty": 1, "bonusText": "+{% Pet Fighting Damage", "description": "Carl loves these!", "bonusKey": "PetDmg" }),
+        new Meal(19, { "name": "Canopy", "cookingReq": 12500, "bonusQty": 10, "bonusText": "+{% New Recipe Cooking Speed", "description": "...oh, you said 'Can of Pea's. You know, that does make a lot more sense.", "bonusKey": "Rcook" }),
+        new Meal(20, { "name": "Cannoli", "cookingReq": 20000, "bonusQty": 1, "bonusText": "+{% Points earned in Tower Defence", "description": "Ain't got no joke for this one, it's existence is enough of a joke.", "bonusKey": "TDpts" }),
+        new Meal(21, { "name": "Cheese", "cookingReq": 35000, "bonusQty": 5, "bonusText": "+{% Cooking EXP", "description": "Sourced organically, straight from the moon!", "bonusKey": "CookExp" }),
+        new Meal(22, { "name": "Sawdust", "cookingReq": 50000, "bonusQty": 5, "bonusText": "+{% Lab EXP", "description": "'Id rather starve than eat that' - Angie, 2021", "bonusKey": "Lexp" }),
+        new Meal(23, { "name": "Eggplant", "cookingReq": 75000, "bonusQty": 5, "bonusText": "+{% Pet Breedability Speed in Fenceyard", "description": "Idk what you Zoomers are up to with those eggplant emojis, but I don't like it...", "bonusKey": "Breed" }),
+        new Meal(24, { "name": "Cheesy Bread", "cookingReq": 110000, "bonusQty": 1, "bonusText": "+{% Total Accuracy", "description": "Another bread meal? Wow so unoriginal, I'm glad I already left a 1 star rating.", "bonusKey": "TotAcc" }),
+        new Meal(25, { "name": "Wild Boar", "cookingReq": 200000, "bonusQty": 2, "bonusText": "+{Px Line Width in Lab Mainframe", "description": "It's not really wild anymore is it, it looks kinda dead and roasted.", "bonusKey": "PxLine" }),
+        new Meal(26, { "name": "Donut", "cookingReq": 300000, "bonusQty": 15, "bonusText": "+{% New Pet Breeding Odds", "description": "Mmmmm... doooooooonut...", "bonusKey": "Npet" }),
+        new Meal(27, { "name": "Riceball", "cookingReq": 500000, "bonusQty": 3, "bonusText": "+{% Skill Efficiency", "description": "Dude it's just a ball of rice, like what do you want me to say about it?", "bonusKey": "Seff" }),
+        new Meal(28, { "name": "Cauliflower", "cookingReq": 750000, "bonusQty": 1, "bonusText": "+{% Basic Atk Speed", "description": "The white part is called Curd. Welp, time to recategorize this as an educational game!", "bonusKey": "AtkSpd" }),
+        new Meal(29, { "name": "Durian Fruit", "cookingReq": 1000000, "bonusQty": 6, "bonusText": "+{% Lower Kitchen Upgrade costs", "description": "This must have been in the room when Kurt said it smelled like 'teen spirit'...", "bonusKey": "KitchC" }),
+        new Meal(30, { "name": "Orange", "cookingReq": 1500000, "bonusQty": 3, "bonusText": "+{% VIP Library Membership", "description": "The true arch-nemesis of rappers and poets alike.", "bonusKey": "VIP" }),
+        new Meal(31, { "name": "Bunt Cake", "cookingReq": 3000000, "bonusQty": 7, "bonusText": "+{% Cash from Monsters", "description": "Bunt cake more like Punt cake because I'm kicking this trash straight to the garbage.", "bonusKey": "Cash" }),
+        new Meal(32, { "name": "Chocolate Truffle", "cookingReq": 5000000, "bonusQty": 25, "bonusText": "+{% New Pet Breeding Odds", "description": "I mean it's got a bite taken out of it, pretty gross.", "bonusKey": "Npet" }),
+        new Meal(33, { "name": "Leek", "cookingReq": 8000000, "bonusQty": 2, "bonusText": "+{% skilling prowess", "description": "Leek! More importantly, prowess lowers the efficiency needed when AFK bar is orange.", "bonusKey": "Sprow" }),
+        new Meal(34, { "name": "Fortune Cookie", "cookingReq": 12000000, "bonusQty": 4, "bonusText": "+{% Faster Library checkout Speed", "description": "It reads: 'Salvation lies not within enjoying video games, but from gitting gud at them'", "bonusKey": "Lib" }),
+        new Meal(35, { "name": "Pretzel", "cookingReq": 20000000, "bonusQty": 7, "bonusText": "+{% Lab EXP", "description": "I love pretzels, people really be sleepin' on the versatility they bring to the table!", "bonusKey": "Lexp" }),
+        new Meal(36, { "name": "Sea Urchin", "cookingReq": 30000000, "bonusQty": 1, "bonusText": "+{% Critters from traps", "description": "At least one person reading this has eating one of these. Oh, it's you? Good for you.", "bonusKey": "Critter" }),
+        new Meal(37, { "name": "Mashed Potato", "cookingReq": 40000000, "bonusQty": 6, "bonusText": "+{% Cooking EXP", "description": "This nutritious meal reminds me of the Mashed Potato monster from IdleOn, the video game!", "bonusKey": "CookExp" }),
+        new Meal(38, { "name": "Mutton", "cookingReq": 90000000, "bonusQty": 1, "bonusText": "+{% Crit Chance", "description": "Yeap I tell you hwat Bobby, this is a real man's meal right here!", "bonusKey": "Crit" }),
+        new Meal(39, { "name": "Wedding Cake", "cookingReq": 13500000, "bonusQty": 2, "bonusText": "+{% Pet Fighting Damage", "description": "Imagine getting married lol so cringe haha am I right??!?! High-five, fellow kids!", "bonusKey": "PetDmg" }),
+        new Meal(40, { "name": "Eel", "cookingReq": 20000000, "bonusQty": 1, "bonusText": "+{% Line Width in Lab Mainframe", "description": "The younger sibling of the Loch Ness Monster. He's real, but no one really cares.", "bonusKey": "LinePct" }),
+        new Meal(41, { "name": "Whipped Cocoa", "cookingReq": 30000000, "bonusQty": 4, "bonusText": "+{% Skill Efficiency", "description": "Why is this being served on a plate? Was the cup not good enough for you??", "bonusKey": "Seff" }),
+        new Meal(42, { "name": "Onion", "cookingReq": 50000000, "bonusQty": 3, "bonusText": "+{% Total Damage", "description": "No, I'm not crying, this onion is just stimulating the lachrymal glands in my eyes.", "bonusKey": "TotDmg" }),
+        new Meal(43, { "name": "Soda", "cookingReq": 70000000, "bonusQty": 20, "bonusText": "+{% Meal Cooking Speed", "description": "Yea those red marks are grill marks, our chef doesn't know what he's doing.", "bonusKey": "Mcook" }),
+        new Meal(44, { "name": "Sushi Roll", "cookingReq": 90000000, "bonusQty": 7, "bonusText": "+{% VIP Library Membership", "description": "For something called a 'sushi roll', it isn't moving around very much.", "bonusKey": "VIP" }),
+        new Meal(45, { "name": "Buncha Banana", "cookingReq": 125000000, "bonusQty": 4, "bonusText": "+{ Max LVs for TP Pete Star Talent", "description": "Straight from the island of Karjama! Or something like that, starts with a K at least.", "bonusKey": "TPpete" }),
+        new Meal(46, { "name": "Pumpkin", "cookingReq": 170000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "According to the author of the Iliad, its value should peak right around January...", "bonusKey": "non" }),
+        new Meal(47, { "name": "Cotton Candy", "cookingReq": 400000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "The most exquisite of fairground cuisine!", "bonusKey": "non" }),
+        new Meal(48, { "name": "Massive Fig", "cookingReq": 600000000, "bonusQty": 3, "bonusText": "+{% Total Damage", "description": "This thing has gotta weigh at least 30!", "bonusKey": "non" }),
+        new Meal(49, { "name": "Turkey a la Thank", "cookingReq": 5000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
+        new Meal(50, { "name": "Turkey a la Thank", "cookingReq": 5000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
+        new Meal(51, { "name": "Turkey a la Thank", "cookingReq": 5000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
+        new Meal(52, { "name": "Turkey a la Thank", "cookingReq": 5000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
+        new Meal(53, { "name": "Turkey a la Thank", "cookingReq": 5000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
+        new Meal(54, { "name": "Turkey a la Thank", "cookingReq": 5000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
+        new Meal(55, { "name": "Turkey a la Thank", "cookingReq": 5000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
+        new Meal(56, { "name": "Turkey a la Thank", "cookingReq": 5000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
+        new Meal(57, { "name": "Turkey a la Thank", "cookingReq": 5000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
+        new Meal(58, { "name": "Turkey a la Thank", "cookingReq": 5000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
+        new Meal(59, { "name": "Turkey a la Thank", "cookingReq": 5000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
     ]
 }
 
@@ -315,7 +315,7 @@ const populateDiscovery = (cooking: Cooking) => {
             possibleMeals.slice(0, 5).forEach((meal, index) => {
                 if (meal < 49) {
                     let realLuck = mealLuckValues[index];
-                    for (let reverseIndex = possibleMeals.length ; reverseIndex > index ; reverseIndex--) {
+                    for (let reverseIndex = possibleMeals.length; reverseIndex > index; reverseIndex--) {
                         realLuck *= (1 - mealLuckValues[reverseIndex]);
                     }
                     const luckTime = time / realLuck;
