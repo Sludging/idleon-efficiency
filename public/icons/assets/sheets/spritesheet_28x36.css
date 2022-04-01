@@ -6,7 +6,7 @@
     padding-bottom: 128.57142857142858%;
     height: 0;
     background-size: cover;
-    background-position: 0 calc(var(--row) * 0.5555555555555556%)
+    background-position: 0 calc(var(--row) * 0.5494505494505495%)
 }
 .icons-2836:not(.icons-CardSet0):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
 .icons-CardSet0 { --row: 0; }
@@ -181,12 +181,14 @@
 .icons-CardsZ1 { --row: 169; }
 .icons-CardsZ10 { --row: 170; }
 .icons-CardsZ11 { --row: 171; }
-.icons-CardsZ2 { --row: 172; }
-.icons-CardsZ3 { --row: 173; }
-.icons-CardsZ4 { --row: 174; }
-.icons-CardsZ5 { --row: 175; }
-.icons-CardsZ6 { --row: 176; }
-.icons-CardsZ7 { --row: 177; }
-.icons-CardsZ8 { --row: 178; }
-.icons-CardsZ9 { --row: 179; }
-.icons-CardsZZ { --row: 180; }
+.icons-CardsZ12 { --row: 172; }
+.icons-CardsZ13 { --row: 173; }
+.icons-CardsZ2 { --row: 174; }
+.icons-CardsZ3 { --row: 175; }
+.icons-CardsZ4 { --row: 176; }
+.icons-CardsZ5 { --row: 177; }
+.icons-CardsZ6 { --row: 178; }
+.icons-CardsZ7 { --row: 179; }
+.icons-CardsZ8 { --row: 180; }
+.icons-CardsZ9 { --row: 181; }
+.icons-CardsZZ { --row: 182; }

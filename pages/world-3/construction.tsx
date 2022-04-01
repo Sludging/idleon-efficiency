@@ -485,7 +485,7 @@ function PrinterDisplay() {
                 {
                     printerData && printerData.playerInfo.map((playerInfo, index) => {
                         return (
-                            <Grid key={index} columns={{ count: 5, size: 'auto' }} align="center" gap="medium" pad={{ horizontal: "large", vertical: "small" }} border={{ color: 'grey-1', side: 'bottom' }}>
+                            <Grid key={index} columns={{ count: 6, size: 'auto' }} align="center" gap="medium" pad={{ horizontal: "large", vertical: "small" }} border={{ color: 'grey-1', side: 'bottom' }}>
                                 <Text>{playerData && playerData[index] && playerData[index].playerName}</Text>
                                 {
                                     playerInfo.samples.map((sample, sampleIndex) => {

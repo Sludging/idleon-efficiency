@@ -73,7 +73,7 @@ function KitchenDisplay({ kitchen, cooking }: { kitchen: Kitchen, cooking: Cooki
                     <Box width={{ max: '41px', min: '41px' }}>
                         <Box className={cooking.meals[kitchen.activeMeal].getClass()} />
                     </Box>
-                    <Text size="small">{nFormatter(kitchen.mealSpeed / cooking.meals[kitchen.activeMeal].cookReq)} per hour.</Text>
+                    <Text size="small">{nFormatter(kitchen.mealSpeed / cooking.meals[kitchen.activeMeal].cookReq, "Smaller")} per hour.</Text>
                 </Box>
             }
             {
@@ -205,7 +205,8 @@ function Cooking() {
                                                 <Box>
                                                     <Text>Bonus: {meal.getBonusText()}</Text>
                                                     {/* <Text>Time: {meal.discoveryTime}</Text> */}
-                                                    <Text>Chance: {meal.discoveryChance * 100}%</Text>
+                                                    <Text>Chance: {nFormatter(meal.discoveryChance * 100, "Smaller")}%</Text>
+                                                    <Text size="xsmall">* Chance is based on your first kitchen luck stat.</Text>
                                                 </Box>
                                             }
                                             direction={TipDirection.Down}

@@ -9,7 +9,7 @@ export const waveReqs = "2 5 8 12 15 20 25 35 50 65 80 100 125 150 175 200".spli
 
 interface PeteGeneData {
     name: string
-    x1: number
+    abilityType: string
     x2: number
     lowerLetter: string
     upperLetter: string
@@ -23,30 +23,30 @@ export class PetGene {
 
 const initPetGenes = () => {
     return [
-        new PetGene({ "name": "Fighter", "x1": 0, "x2": 5, "lowerLetter": "a", "upperLetter": "A", "description": "Throws a Rusty Sword, which deals 200% Damage", "combatDescription": "When in combat, all pets on team deal 1.10x Damage" }),
-        new PetGene({ "name": "Defender", "x1": 0, "x2": 8, "lowerLetter": "b", "upperLetter": "B", "description": "Throws an Armored Shield, which gives 100% block chance to pets it passes over, and deals 50% Damage", "combatDescription": "When in combat, all pets have +12% Block Chance" }),
-        new PetGene({ "name": "Forager", "x1": 1, "x2": 12, "lowerLetter": "c", "upperLetter": "C", "description": "Heals all pets by 25% HP", "combatDescription": "When foraging, this pet contributes 2x Foraging Speed" }),
-        new PetGene({ "name": "Fleeter", "x1": 1, "x2": 13, "lowerLetter": "d", "upperLetter": "D", "description": "Boosts ability recharge rate for all pets by +30% for 8 sec. Doesn't boost other Fleeter pets though.", "combatDescription": "When foraging, all pets contribute 1.30x more Foraging Speed" }),
-        new PetGene({ "name": "Breeder", "x1": 2, "x2": 15, "lowerLetter": "e", "upperLetter": "E", "description": "Every 1 sec, heal whatever pet you are holding down on for 5% HP. On PC, you just need you mouse over the pet. On Phones, your finger must be on the pet. This Lasts 10 seconds.", "combatDescription": "When in Fence Yard, increases Breedability Multiplier of this pet species" }),
-        new PetGene({ "name": "Special", "x1": 3, "x2": 15, "lowerLetter": "f", "upperLetter": "F", "description": "Summons shootings stars which double the damage of all attacks they touch.", "combatDescription": "When in Fence Yard, increases Special Passive of this pet species over time" }),
-        new PetGene({ "name": "Mercenary", "x1": 0, "x2": 4, "lowerLetter": "g", "upperLetter": "G", "description": "Throws 2-3 small daggers which deal 150% Damage", "combatDescription": "When foraging, this pet contributes 2x Fight Power" }),
-        new PetGene({ "name": "Boomer", "x1": 0, "x2": 7, "lowerLetter": "h", "upperLetter": "H", "description": "Throws a boomerang, which deals 60% Damage and has an 80% chance to bounce", "combatDescription": "When in combat, the pet in front of this one has ability reset to 30%" }),
-        new PetGene({ "name": "Sniper", "x1": 0, "x2": 9, "lowerLetter": "i", "upperLetter": "I", "description": "Fires a bullet at farthest enemy. 200% Damage, +30% Crit chance, 4x Crit DMG", "combatDescription": "When in combat, all pets have +25% Crit DMG" }),
-        new PetGene({ "name": "Amplifier", "x1": 0, "x2": 10, "lowerLetter": "j", "upperLetter": "J", "description": "Summons a spiral, which deals 100% Damage, and +50% more Damage for each attack that moves through it", "combatDescription": "When in combat, all pets have +10% Crit Chance" }),
-        new PetGene({ "name": "Tsar", "x1": 0, "x2": 25, "lowerLetter": "k", "upperLetter": "K", "description": "Drop da bomba...", "combatDescription": "When foraging, the pets in the territory above and below contribute 1.50x Fight Power" }),
-        new PetGene({ "name": "Rattler", "x1": 0, "x2": 4, "lowerLetter": "l", "upperLetter": "L", "description": "Throws 5 bones. Bones deal 5% Damage, +1% more damage for each bone ever thrown", "combatDescription": "When in combat, this pet's Basic Attack is now a Bone instead of a Fist" }),
-        new PetGene({ "name": "Cursory", "x1": 0, "x2": 3, "lowerLetter": "m", "upperLetter": "M", "description": "Shoots a Cursed Skull, which deals 50% Damage, and makes all future attacks deal +5% more dmg", "combatDescription": "When in combat, pets in front and behind this one deal 1.50x Damage" }),
-        new PetGene({ "name": "Fastidious", "x1": 1, "x2": 10, "lowerLetter": "n", "upperLetter": "N", "description": "Pemanently gives all pets +1% Crit Chance, +5% Crit DMG, and +2% ability regen speed", "combatDescription": "When foraging," }),
-        new PetGene({ "name": "Flashy", "x1": 1, "x2": 18, "lowerLetter": "o", "upperLetter": "O", "description": "Duplicates all friendly attacks instantly, almost like magic!", "combatDescription": "When foraging, all pets contribute 1.50x more Foraging Speed if there are no Combat Pets in team" }),
-        new PetGene({ "name": "Opticular", "x1": 1, "x2": 7, "lowerLetter": "p", "upperLetter": "P", "description": "Permanently boosts the Crit Chance of all pets. Only recharges when an attack Critical Hits", "combatDescription": "When foraging, this pet contributes 3x Foraging Speed if it has the largest Number on the team" }),
-        new PetGene({ "name": "Monolithic", "x1": 1, "x2": 20, "lowerLetter": "q", "upperLetter": "Q", "description": "Freezes time for 6 seconds. During this, pet continue to shoot Basic Attacks and regenerate abilities", "combatDescription": "When foraging, the requirement to fill the reward bar goes up less every time it is filled" }),
-        new PetGene({ "name": "Alchemic", "x1": 1, "x2": 9, "lowerLetter": "r", "upperLetter": "R", "description": "Turns all friend attacks into Cursed Skulls", "combatDescription": "When foraging, there is a 50% chance for 2 spices when filling the reward bar" }),
-        new PetGene({ "name": "Badumdum", "x1": 1, "x2": 7, "lowerLetter": "s", "upperLetter": "S", "description": "Permanently boost the Basic Attack speed of all pets. Only recharges when a Basic Attack hits", "combatDescription": "When foraging, the pets in the territory above and below contribute 1.20x Foraging Speed" }),
-        new PetGene({ "name": "Defstone", "x1": 0, "x2": 5, "lowerLetter": "t", "upperLetter": "T", "description": "Shoots rocks bases on the total number of blocks by your team. Resets block amount when activated", "combatDescription": "When in combat, all pets have +50% HP" }),
-        new PetGene({ "name": "Targeter", "x1": 1, "x2": 8, "lowerLetter": "u", "upperLetter": "U", "description": "The next non Basic Attack fired will deal x2.50 Damage.", "combatDescription": "When foraging, this pet contributes 5x Foraging Speed if the pet above this one is also a Targeter" }),
-        new PetGene({ "name": "Looter", "x1": 1, "x2": 4, "lowerLetter": "v", "upperLetter": "V", "description": "Activates a random ability, selected from all the abilites across all pets you've ever had", "combatDescription": "When foraging, there is a small chance to find extra spices when filling the reward bar many times before claiming" }),
-        new PetGene({ "name": "Refiller", "x1": 1, "x2": 30, "lowerLetter": "w", "upperLetter": "W", "description": "For 6 seconds, every non Basic Attack that hits a monster refills a random ability on the team by 5%", "combatDescription": "When in combat, all abilites start at +25% filled" }),
-        new PetGene({ "name": "Eggshell", "x1": 1, "x2": 12, "lowerLetter": "x", "upperLetter": "X", "description": "For 10 seconds, every critical hit boosts the block chance of all pets by 1%", "combatDescription": "When in Fence Yard, randomly lays eggs which can be picked up and will appear in your incubator" }),
+        new PetGene({ "name": "Fighter", "abilityType": "Red", "x2": 5, "lowerLetter": "a", "upperLetter": "A", "description": "Throws a Rusty Sword, which deals 200% Damage", "combatDescription": "When in combat, all pets on team deal 1.10x Damage" }),
+        new PetGene({ "name": "Defender", "abilityType": "Red", "x2": 10, "lowerLetter": "b", "upperLetter": "B", "description": "Throws an Armored Shield, which gives 90% block chance to pets it passes over, and deals 50% Damage", "combatDescription": "When in combat, all pets have +12% Block Chance" }),
+        new PetGene({ "name": "Forager", "abilityType": "Green", "x2": 12, "lowerLetter": "c", "upperLetter": "C", "description": "Heals all pets by 25% HP", "combatDescription": "When foraging, this pet contributes 2x Foraging Speed" }),
+        new PetGene({ "name": "Fleeter", "abilityType": "Green", "x2": 13, "lowerLetter": "d", "upperLetter": "D", "description": "Boosts ability recharge rate for all pets by +30% for 8 sec. Doesn't boost other Fleeter pets though.", "combatDescription": "When foraging, all pets contribute 1.30x more Foraging Speed" }),
+        new PetGene({ "name": "Breeder", "abilityType": "Special", "x2": 15, "lowerLetter": "e", "upperLetter": "E", "description": "Every 1 sec, heal whatever pet you are holding down on for 5% HP. On PC, you just need you mouse over the pet. On Phones, your finger must be on the pet. This Lasts 10 seconds.", "combatDescription": "When in Fence Yard, increases Breedability Multiplier of this pet species" }),
+        new PetGene({ "name": "Special", "abilityType": "Unsure", "x2": 15, "lowerLetter": "f", "upperLetter": "F", "description": "Summons shootings stars which double the damage of all attacks they touch.", "combatDescription": "When in Fence Yard, increases Special Passive of this pet species over time" }),
+        new PetGene({ "name": "Mercenary", "abilityType": "Red", "x2": 4, "lowerLetter": "g", "upperLetter": "G", "description": "Throws 2-3 small daggers which deal 150% Damage", "combatDescription": "When foraging, this pet contributes 2x Fight Power" }),
+        new PetGene({ "name": "Boomer", "abilityType": "Red", "x2": 7, "lowerLetter": "h", "upperLetter": "H", "description": "Throws a boomerang, which deals 60% Damage and has an 80% chance to bounce", "combatDescription": "When in combat, the pet in front of this one has ability reset to 30%" }),
+        new PetGene({ "name": "Sniper", "abilityType": "Red", "x2": 9, "lowerLetter": "i", "upperLetter": "I", "description": "Fires a bullet at farthest enemy. 200% Damage, +30% Crit chance, 4x Crit DMG", "combatDescription": "When in combat, all pets have +25% Crit DMG" }),
+        new PetGene({ "name": "Amplifier", "abilityType": "Red", "x2": 10, "lowerLetter": "j", "upperLetter": "J", "description": "Summons a spiral, which deals 100% Damage, and +50% more Damage for each attack that moves through it", "combatDescription": "When in combat, all pets have +10% Crit Chance" }),
+        new PetGene({ "name": "Tsar", "abilityType": "Red", "x2": 25, "lowerLetter": "k", "upperLetter": "K", "description": "Drop da bomba...", "combatDescription": "When foraging, the pets in the territory above and below contribute 1.50x Fight Power" }),
+        new PetGene({ "name": "Rattler", "abilityType": "Red", "x2": 4, "lowerLetter": "l", "upperLetter": "L", "description": "Throws 5 bones. Bones deal 5% Damage, +1% more damage for each bone ever thrown", "combatDescription": "When in combat, this pet's Basic Attack is now a Bone instead of a Fist" }),
+        new PetGene({ "name": "Cursory", "abilityType": "Red", "x2": 3, "lowerLetter": "m", "upperLetter": "M", "description": "Shoots a Cursed Skull, which deals 50% Damage, and makes all future attacks deal +5% more dmg", "combatDescription": "When in combat, pets in front and behind this one deal 1.50x Damage" }),
+        new PetGene({ "name": "Fastidious", "abilityType": "Green", "x2": 10, "lowerLetter": "n", "upperLetter": "N", "description": "Pemanently gives all pets +1% Crit Chance, +5% Crit DMG, and +2% ability regen speed. After 20 stacks, additional stacks give less bonus.", "combatDescription": "When foraging," }),
+        new PetGene({ "name": "Flashy", "abilityType": "Green", "x2": 18, "lowerLetter": "o", "upperLetter": "O", "description": "Duplicates all friendly attacks instantly, almost like magic!", "combatDescription": "When foraging, all pets contribute 1.50x more Foraging Speed if there are no Combat Pets in team" }),
+        new PetGene({ "name": "Opticular", "abilityType": "Green", "x2": 7, "lowerLetter": "p", "upperLetter": "P", "description": "Permanently boosts the Crit Chance of all pets. Only recharges when an attack Critical Hits", "combatDescription": "When foraging, this pet contributes 3x Foraging Speed if it has the largest Number on the team" }),
+        new PetGene({ "name": "Monolithic", "abilityType": "Green", "x2": 20, "lowerLetter": "q", "upperLetter": "Q", "description": "Freezes time for 6 seconds. During this, pet continue to shoot Basic Attacks and regenerate abilities", "combatDescription": "When foraging, the requirement to fill the reward bar goes up less every time it is filled" }),
+        new PetGene({ "name": "Alchemic", "abilityType": "Green", "x2": 9, "lowerLetter": "r", "upperLetter": "R", "description": "Turns all friend attacks into Cursed Skulls", "combatDescription": "When foraging, there is a 50% chance for 2 spices when filling the reward bar" }),
+        new PetGene({ "name": "Badumdum", "abilityType": "Green", "x2": 7, "lowerLetter": "s", "upperLetter": "S", "description": "Permanently boost the Basic Attack speed of all pets. Only recharges when a Basic Attack hits", "combatDescription": "When foraging, the pets in the territory above and below contribute 1.20x Foraging Speed" }),
+        new PetGene({ "name": "Defstone", "abilityType": "Red", "x2": 5, "lowerLetter": "t", "upperLetter": "T", "description": "Shoots rocks bases on the total number of blocks by your team. Resets block amount when activated", "combatDescription": "When in combat, all pets have +50% HP" }),
+        new PetGene({ "name": "Targeter", "abilityType": "Green", "x2": 8, "lowerLetter": "u", "upperLetter": "U", "description": "The next non Basic Attack fired will deal x2.50 Damage.", "combatDescription": "When foraging, this pet contributes 5x Foraging Speed if the pet above this one is also a Targeter" }),
+        new PetGene({ "name": "Looter", "abilityType": "Green", "x2": 4, "lowerLetter": "v", "upperLetter": "V", "description": "Activates a random ability, selected from all the abilites across all pets you've ever had", "combatDescription": "When foraging, there is a small chance to find extra spices when filling the reward bar many times before claiming" }),
+        new PetGene({ "name": "Refiller", "abilityType": "Green", "x2": 30, "lowerLetter": "w", "upperLetter": "W", "description": "For 6 seconds, every non Basic Attack that hits a monster refills a random ability on the team by 5%", "combatDescription": "When in combat, all abilites start at +25% filled" }),
+        new PetGene({ "name": "Eggshell", "abilityType": "Green", "x2": 12, "lowerLetter": "x", "upperLetter": "X", "description": "For 10 seconds, every critical hit boosts the block chance of all pets by 1%", "combatDescription": "When in Fence Yard, randomly lays eggs which can be picked up and will appear in your incubator" }),
     ]
 }
 
@@ -79,19 +79,19 @@ export class PetUpgrade {
             };
         }
         return {
-            location: `PetUpg${this.index-1}`,
+            location: `PetUpg${this.index - 1}`,
             height: 96,
             width: 133
         }
     }
 
     getBonus = () => {
-        switch(this.index) {
-            case 0: 
+        switch (this.index) {
+            case 0:
             case 2:
             case 4:
                 return this.level;
-            case 1: 
+            case 1:
                 return this.level * 4;
             case 3:
                 return this.level * 25;
@@ -145,9 +145,9 @@ const initPetUpgrades = () => {
 
 interface TerritoryData {
     img: string
-    spiceForage: number
+    trekReq: number
     fightPower: number
-    forCostUP: number
+    enemyAttack: number
     battleName: string
     filler1: string
     filler2: string
@@ -155,13 +155,13 @@ interface TerritoryData {
     enemies: {
         id: string
         health: number
-        x1: number
-        x2: number
+        colour: number
+        size: number
     }[]
 }
 
 export class Pet {
-    constructor(public name: string, public gene: PetGene, public power: number) {}
+    constructor(public name: string, public gene: PetGene, public power: number) { }
 }
 
 export class Territory {
@@ -172,12 +172,12 @@ export class Territory {
 
     unlocked: boolean = false;
 
-    constructor(public index: number, public data: TerritoryData) {}
+    constructor(public index: number, public data: TerritoryData) { }
 
     getTrekReq = () => {
         const monolithicPets = 0; // TODO: actually check
         const baseMath = 1 + 0.02 / (monolithicPets / 5 + 1);
-        return (this.data.spiceForage + this.currentSpices) * Math.pow(baseMath, this.currentSpices);
+        return (this.data.trekReq + this.currentSpices) * Math.pow(baseMath, this.currentSpices);
     }
 
     getTrekHr = () => {
@@ -260,30 +260,30 @@ export class Territory {
 
 const initTerritory = () => {
     return [
-        new Territory(0, { "img": "PetFightBG0.png", "spiceForage": 5, "fightPower": 0, "forCostUP": 1, "battleName": "The Grass Gang", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "mushG", "health": 10, "x1": 0, "x2": 200 }, { "id": "frogG", "health": 30, "x1": 0, "x2": 300 }, { "id": "beanG", "health": 50, "x1": 0, "x2": 300 }, { "id": "Mob4", "health": -1, "x1": -1, "x2": -1 }, { "id": "Mob5", "health": -1, "x1": -1, "x2": -1 }] }),
-        new Territory(1, { "img": "5bg.png", "spiceForage": 20, "fightPower": 5, "forCostUP": 3, "battleName": "The Carrot Crew", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "carrotO", "health": 20, "x1": 0, "x2": 300 }, { "id": "carrotO", "health": 50, "x1": 0, "x2": 300 }, { "id": "carrotO", "health": 70, "x1": 0, "x2": 300 }, { "id": "carrotO", "health": 150, "x1": 0, "x2": 300 }, { "id": "Mob5", "health": -1, "x1": -1, "x2": -1 }] }),
-        new Territory(2, { "img": "10bg.png", "spiceForage": 100, "fightPower": 20, "forCostUP": 12, "battleName": "Big Boy Plank and the Gs", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "goblinG", "health": 200, "x1": 0, "x2": 200 }, { "id": "goblinG", "health": 200, "x1": 0, "x2": 200 }, { "id": "plank", "health": 500, "x1": 0, "x2": 400 }, { "id": "Mob4", "health": -1, "x1": -1, "x2": -1 }, { "id": "Mob5", "health": -1, "x1": -1, "x2": -1 }] }),
-        new Territory(3, { "img": "4bg.png", "spiceForage": 250, "fightPower": 50, "forCostUP": 20, "battleName": "Branchial Heirarchy", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "branch", "health": 100, "x1": 0, "x2": 100 }, { "id": "branch", "health": 300, "x1": 348, "x2": 200 }, { "id": "branch", "health": 600, "x1": 336, "x2": 300 }, { "id": "branch", "health": 1200, "x1": 324, "x2": 400 }, { "id": "Mob5", "health": -1, "x1": -1, "x2": -1 }] }),
-        new Territory(4, { "img": "1bg.png", "spiceForage": 1000, "fightPower": 100, "forCostUP": 35, "battleName": "Dr. Def, phD MD", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "poopBig", "health": 5000, "x1": 0, "x2": 300 }, { "id": "poopBig", "health": 10, "x1": 0, "x2": 100 }, { "id": "Mob3", "health": -1, "x1": -1, "x2": -1 }, { "id": "Mob4", "health": -1, "x1": -1, "x2": -1 }, { "id": "Mob5", "health": -1, "x1": -1, "x2": -1 }] }),
-        new Territory(5, { "img": "9bg.png", "spiceForage": 2000, "fightPower": 250, "forCostUP": 70, "battleName": "Confetti Cake Brigade", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "crabcake", "health": 200, "x1": 0, "x2": 300 }, { "id": "crabcake", "health": 800, "x1": 70, "x2": 300 }, { "id": "crabcake", "health": 2000, "x1": 140, "x2": 300 }, { "id": "crabcake", "health": 3000, "x1": 210, "x2": 300 }, { "id": "crabcake", "health": 6000, "x1": 280, "x2": 300 }] }),
-        new Territory(6, { "img": "PetFightBG4.png", "spiceForage": 5000, "fightPower": 600, "forCostUP": 150, "battleName": "The Giant Grumblo", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "rocky", "health": 40000, "x1": 15, "x2": 600 }, { "id": "Mob2", "health": -1, "x1": -1, "x2": -1 }, { "id": "Mob3", "health": -1, "x1": -1, "x2": -1 }, { "id": "Mob4", "health": -1, "x1": -1, "x2": -1 }, { "id": "Mob5", "health": -1, "x1": -1, "x2": -1 }] }),
-        new Territory(7, { "img": "14bg.png", "spiceForage": 12500, "fightPower": 1100, "forCostUP": 300, "battleName": "The Beach Boys", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "coconut", "health": 10000, "x1": 200, "x2": 200 }, { "id": "coconut", "health": 50000, "x1": 300, "x2": 300 }, { "id": "potato", "health": 10000, "x1": 200, "x2": 200 }, { "id": "potato", "health": 50000, "x1": 300, "x2": 300 }, { "id": "Mob5", "health": -1, "x1": -1, "x2": -1 }] }),
-        new Territory(8, { "img": "PetFightBG1.png", "spiceForage": 25000, "fightPower": 1750, "forCostUP": 600, "battleName": "The Sands of Time", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "babaHour", "health": 120000, "x1": 0, "x2": 300 }, { "id": "sandgiant", "health": 10000, "x1": 0, "x2": 100 }, { "id": "sandgiant", "health": 10000, "x1": 0, "x2": 100 }, { "id": "Mob4", "health": -1, "x1": -1, "x2": -1 }, { "id": "Mob5", "health": -1, "x1": 0, "x2": -1 }] }),
-        new Territory(9, { "img": "20bg.png", "spiceForage": 50000, "fightPower": 3000, "forCostUP": 1500, "battleName": "The Dungeoneering Duo", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "babaMummy", "health": 200000, "x1": 0, "x2": 200 }, { "id": "snakeZ", "health": 500000, "x1": 0, "x2": 200 }, { "id": "Mob3", "health": -1, "x1": -1, "x2": -1 }, { "id": "Mob4", "health": -1, "x1": -1, "x2": -1 }, { "id": "Mob5", "health": -1, "x1": -1, "x2": -1 }] }),
-        new Territory(10, { "img": "PetFightBG2.png", "spiceForage": 100000, "fightPower": 5000, "forCostUP": 5000, "battleName": "The Stray Flock", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "sheep", "health": 200000, "x1": 0, "x2": 100 }, { "id": "sheep", "health": 600000, "x1": 0, "x2": 200 }, { "id": "sheep", "health": 200000, "x1": 0, "x2": 100 }, { "id": "sheep", "health": 600000, "x1": 0, "x2": 200 }, { "id": "sheep", "health": 200000, "x1": 0, "x2": 100 }] }),
-        new Territory(11, { "img": "PetFightBG3.png", "spiceForage": 300000, "fightPower": 10000, "forCostUP": 20000, "battleName": "The Permafrost Brothers", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "bloque", "health": 1200000, "x1": 30, "x2": 400 }, { "id": "snowball", "health": 1200000, "x1": 50, "x2": 400 }, { "id": "Mob3", "health": -1, "x1": -1, "x2": -1 }, { "id": "Mob4", "health": -1, "x1": -1, "x2": -1 }, { "id": "Mob5", "health": -1, "x1": -1, "x2": -1 }] }),
-        new Territory(12, { "img": "18bg.png", "spiceForage": 1000000, "fightPower": 25000, "forCostUP": 50000, "battleName": "The Coolest Beats", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "speaker", "health": 2000000, "x1": 0, "x2": 200 }, { "id": "speaker", "health": 2000000, "x1": 0, "x2": 200 }, { "id": "iceknight", "health": 6000000, "x1": 0, "x2": 200 }, { "id": "Mob4", "health": -1, "x1": -1, "x2": -1 }, { "id": "Mob5", "health": -1, "x1": -1, "x2": -1 }] }),
-        new Territory(13, { "img": "17bg.png", "spiceForage": 2000000, "fightPower": 40000, "forCostUP": 100000, "battleName": "The Cursed Shepherd Boy", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "ram", "health": 3000000, "x1": 0, "x2": 100 }, { "id": "ram", "health": 6000000, "x1": 0, "x2": 200 }, { "id": "skele2", "health": 15000000, "x1": 0, "x2": 300 }, { "id": "ram", "health": 6000000, "x1": 0, "x2": 200 }, { "id": "ram", "health": 3000000, "x1": 0, "x2": 100 }] }),
-        new Territory(14, { "img": "PetFightBGz.png", "spiceForage": 5000000, "fightPower": 77000, "forCostUP": 1, "battleName": "BRuh", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "shovelR", "health": 50, "x1": 0, "x2": 200 }, { "id": "shovelR", "health": 50, "x1": 0, "x2": 200 }, { "id": "shovelR", "health": 125, "x1": 0, "x2": 300 }, { "id": "Mob4", "health": -1, "x1": -1, "x2": -1 }, { "id": "Mob5", "health": -1, "x1": -1, "x2": -1 }] }),
-        new Territory(15, { "img": "8bg.png", "spiceForage": 4000000, "fightPower": 100000, "forCostUP": 200000, "battleName": "The Blue Jeans Group", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "demonP", "health": 20000000, "x1": 330, "x2": 200 }, { "id": "demonP", "health": 20000000, "x1": 300, "x2": 200 }, { "id": "demonP", "health": 20000000, "x1": 270, "x2": 200 }, { "id": "demonP", "health": 20000000, "x1": 250, "x2": 200 }, { "id": "Mob5", "health": -1, "x1": -1, "x2": -1 }] }),
-        new Territory(16, { "img": "21bg.png", "spiceForage": 7500000, "fightPower": 175000, "forCostUP": 300000, "battleName": "Fissure Wurm", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "w4b5", "health": 100000000, "x1": 0, "x2": 500 }, { "id": "Mob2", "health": -1, "x1": -1, "x2": -1 }, { "id": "Mob3", "health": -1, "x1": -1, "x2": -1 }, { "id": "Mob4", "health": -1, "x1": -1, "x2": -1 }, { "id": "Mob5", "health": -1, "x1": -1, "x2": -1 }] }),
-        new Territory(17, { "img": "22bg.png", "spiceForage": 10000000, "fightPower": 300000, "forCostUP": 400000, "battleName": "Calamity Clammies", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "w4c1", "health": 250000000, "x1": 120, "x2": 400 }, { "id": "w4c1", "health": 250000000, "x1": 240, "x2": 500 }, { "id": "Mob3", "health": -1, "x1": -1, "x2": -1 }, { "id": "Mob4", "health": -1, "x1": -1, "x2": -1 }, { "id": "Mob5", "health": -1, "x1": -1, "x2": -1 }] }),
-        new Territory(18, { "img": "22bg.png", "spiceForage": 10000000, "fightPower": 300000, "forCostUP": 500000, "battleName": "FILLER FILLER FILLER", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "w4c1", "health": 250000000, "x1": 120, "x2": 400 }, { "id": "w4c1", "health": 250000000, "x1": 240, "x2": 500 }, { "id": "Mob3", "health": -1, "x1": -1, "x2": -1 }, { "id": "Mob4", "health": -1, "x1": -1, "x2": -1 }, { "id": "Mob5", "health": -1, "x1": -1, "x2": -1 }] }),
+        new Territory(0, { "img": "PetFightBG0.png", "trekReq": 5, "fightPower": 0, "enemyAttack": 1, "battleName": "The Grass Gang", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "mushG", "health": 10, "colour": 0, "size": 200 }, { "id": "frogG", "health": 30, "colour": 0, "size": 300 }, { "id": "beanG", "health": 50, "colour": 0, "size": 300 }, { "id": "Mob4", "health": -1, "colour": -1, "size": -1 }, { "id": "Mob5", "health": -1, "colour": -1, "size": -1 }] }),
+        new Territory(1, { "img": "5bg.png", "trekReq": 20, "fightPower": 5, "enemyAttack": 3, "battleName": "The Carrot Crew", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "carrotO", "health": 20, "colour": 0, "size": 300 }, { "id": "carrotO", "health": 50, "colour": 0, "size": 300 }, { "id": "carrotO", "health": 70, "colour": 0, "size": 300 }, { "id": "carrotO", "health": 150, "colour": 0, "size": 300 }, { "id": "Mob5", "health": -1, "colour": -1, "size": -1 }] }),
+        new Territory(2, { "img": "10bg.png", "trekReq": 100, "fightPower": 20, "enemyAttack": 12, "battleName": "Big Boy Plank and the Gs", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "goblinG", "health": 200, "colour": 0, "size": 200 }, { "id": "goblinG", "health": 200, "colour": 0, "size": 200 }, { "id": "plank", "health": 500, "colour": 0, "size": 400 }, { "id": "Mob4", "health": -1, "colour": -1, "size": -1 }, { "id": "Mob5", "health": -1, "colour": -1, "size": -1 }] }),
+        new Territory(3, { "img": "4bg.png", "trekReq": 250, "fightPower": 50, "enemyAttack": 20, "battleName": "Branchial Heirarchy", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "branch", "health": 100, "colour": 0, "size": 100 }, { "id": "branch", "health": 300, "colour": 348, "size": 200 }, { "id": "branch", "health": 600, "colour": 336, "size": 300 }, { "id": "branch", "health": 1200, "colour": 324, "size": 400 }, { "id": "Mob5", "health": -1, "colour": -1, "size": -1 }] }),
+        new Territory(4, { "img": "1bg.png", "trekReq": 1000, "fightPower": 100, "enemyAttack": 35, "battleName": "Dr. Def, phD MD", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "poopBig", "health": 5000, "colour": 0, "size": 300 }, { "id": "poopBig", "health": 10, "colour": 0, "size": 100 }, { "id": "Mob3", "health": -1, "colour": -1, "size": -1 }, { "id": "Mob4", "health": -1, "colour": -1, "size": -1 }, { "id": "Mob5", "health": -1, "colour": -1, "size": -1 }] }),
+        new Territory(5, { "img": "9bg.png", "trekReq": 2000, "fightPower": 250, "enemyAttack": 70, "battleName": "Confetti Cake Brigade", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "crabcake", "health": 200, "colour": 0, "size": 300 }, { "id": "crabcake", "health": 800, "colour": 70, "size": 300 }, { "id": "crabcake", "health": 2000, "colour": 140, "size": 300 }, { "id": "crabcake", "health": 3000, "colour": 210, "size": 300 }, { "id": "crabcake", "health": 6000, "colour": 280, "size": 300 }] }),
+        new Territory(6, { "img": "PetFightBG4.png", "trekReq": 5000, "fightPower": 600, "enemyAttack": 150, "battleName": "The Giant Grumblo", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "rocky", "health": 40000, "colour": 15, "size": 600 }, { "id": "Mob2", "health": -1, "colour": -1, "size": -1 }, { "id": "Mob3", "health": -1, "colour": -1, "size": -1 }, { "id": "Mob4", "health": -1, "colour": -1, "size": -1 }, { "id": "Mob5", "health": -1, "colour": -1, "size": -1 }] }),
+        new Territory(7, { "img": "14bg.png", "trekReq": 12500, "fightPower": 1100, "enemyAttack": 300, "battleName": "The Beach Boys", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "coconut", "health": 10000, "colour": 200, "size": 200 }, { "id": "coconut", "health": 50000, "colour": 300, "size": 300 }, { "id": "potato", "health": 10000, "colour": 200, "size": 200 }, { "id": "potato", "health": 50000, "colour": 300, "size": 300 }, { "id": "Mob5", "health": -1, "colour": -1, "size": -1 }] }),
+        new Territory(8, { "img": "PetFightBG1.png", "trekReq": 25000, "fightPower": 1750, "enemyAttack": 600, "battleName": "The Sands of Time", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "babaHour", "health": 140000, "colour": 0, "size": 300 }, { "id": "sandgiant", "health": 10000, "colour": 0, "size": 100 }, { "id": "sandgiant", "health": 10000, "colour": 0, "size": 100 }, { "id": "Mob4", "health": -1, "colour": -1, "size": -1 }, { "id": "Mob5", "health": -1, "colour": 0, "size": -1 }] }),
+        new Territory(9, { "img": "20bg.png", "trekReq": 50000, "fightPower": 3000, "enemyAttack": 1500, "battleName": "The Dungeoneering Duo", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "babaMummy", "health": 200000, "colour": 0, "size": 200 }, { "id": "snakeZ", "health": 500000, "colour": 0, "size": 200 }, { "id": "Mob3", "health": -1, "colour": -1, "size": -1 }, { "id": "Mob4", "health": -1, "colour": -1, "size": -1 }, { "id": "Mob5", "health": -1, "colour": -1, "size": -1 }] }),
+        new Territory(10, { "img": "PetFightBG2.png", "trekReq": 100000, "fightPower": 5000, "enemyAttack": 5000, "battleName": "The Stray Flock", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "sheep", "health": 200000, "colour": 0, "size": 100 }, { "id": "sheep", "health": 600000, "colour": 0, "size": 200 }, { "id": "sheep", "health": 200000, "colour": 0, "size": 100 }, { "id": "sheep", "health": 600000, "colour": 0, "size": 200 }, { "id": "sheep", "health": 200000, "colour": 0, "size": 100 }] }),
+        new Territory(11, { "img": "PetFightBG3.png", "trekReq": 300000, "fightPower": 10000, "enemyAttack": 20000, "battleName": "The Permafrost Brothers", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "bloque", "health": 1200000, "colour": 30, "size": 400 }, { "id": "snowball", "health": 1200000, "colour": 50, "size": 400 }, { "id": "Mob3", "health": -1, "colour": -1, "size": -1 }, { "id": "Mob4", "health": -1, "colour": -1, "size": -1 }, { "id": "Mob5", "health": -1, "colour": -1, "size": -1 }] }),
+        new Territory(12, { "img": "18bg.png", "trekReq": 1000000, "fightPower": 25000, "enemyAttack": 50000, "battleName": "The Coolest Beats", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "speaker", "health": 2000000, "colour": 0, "size": 200 }, { "id": "speaker", "health": 2000000, "colour": 0, "size": 200 }, { "id": "iceknight", "health": 6000000, "colour": 0, "size": 200 }, { "id": "Mob4", "health": -1, "colour": -1, "size": -1 }, { "id": "Mob5", "health": -1, "colour": -1, "size": -1 }] }),
+        new Territory(13, { "img": "17bg.png", "trekReq": 2000000, "fightPower": 40000, "enemyAttack": 100000, "battleName": "The Cursed Shepherd Boy", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "ram", "health": 3000000, "colour": 0, "size": 100 }, { "id": "ram", "health": 6000000, "colour": 0, "size": 200 }, { "id": "skele2", "health": 15000000, "colour": 0, "size": 300 }, { "id": "ram", "health": 6000000, "colour": 0, "size": 200 }, { "id": "ram", "health": 3000000, "colour": 0, "size": 100 }] }),
+        new Territory(14, { "img": "PetFightBGz.png", "trekReq": 5000000, "fightPower": 77000, "enemyAttack": 1, "battleName": "BRuh", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "shovelR", "health": 50, "colour": 0, "size": 200 }, { "id": "shovelR", "health": 50, "colour": 0, "size": 200 }, { "id": "shovelR", "health": 125, "colour": 0, "size": 300 }, { "id": "Mob4", "health": -1, "colour": -1, "size": -1 }, { "id": "Mob5", "health": -1, "colour": -1, "size": -1 }] }),
+        new Territory(15, { "img": "8bg.png", "trekReq": 4000000, "fightPower": 100000, "enemyAttack": 200000, "battleName": "The Blue Jeans Group", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "demonP", "health": 20000000, "colour": 330, "size": 200 }, { "id": "demonP", "health": 20000000, "colour": 300, "size": 200 }, { "id": "demonP", "health": 20000000, "colour": 270, "size": 200 }, { "id": "demonP", "health": 20000000, "colour": 250, "size": 200 }, { "id": "Mob5", "health": -1, "colour": -1, "size": -1 }] }),
+        new Territory(16, { "img": "21bg.png", "trekReq": 7500000, "fightPower": 175000, "enemyAttack": 300000, "battleName": "Fissure Wurm", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "w4b5", "health": 100000000, "colour": 0, "size": 500 }, { "id": "Mob2", "health": -1, "colour": -1, "size": -1 }, { "id": "Mob3", "health": -1, "colour": -1, "size": -1 }, { "id": "Mob4", "health": -1, "colour": -1, "size": -1 }, { "id": "Mob5", "health": -1, "colour": -1, "size": -1 }] }),
+        new Territory(17, { "img": "22bg.png", "trekReq": 10000000, "fightPower": 300000, "enemyAttack": 400000, "battleName": "Calamity Clammies", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "w4c1", "health": 250000000, "colour": 120, "size": 400 }, { "id": "w4c1", "health": 250000000, "colour": 240, "size": 500 }, { "id": "Mob3", "health": -1, "colour": -1, "size": -1 }, { "id": "Mob4", "health": -1, "colour": -1, "size": -1 }, { "id": "Mob5", "health": -1, "colour": -1, "size": -1 }] }),
+        new Territory(18, { "img": "22bg.png", "trekReq": 10000000, "fightPower": 300000, "enemyAttack": 500000, "battleName": "FILLER FILLER FILLER", "filler1": "Filler", "filler2": "Filler", "filler3": "Filler", "enemies": [{ "id": "w4c1", "health": 250000000, "colour": 120, "size": 400 }, { "id": "w4c1", "health": 250000000, "colour": 240, "size": 500 }, { "id": "Mob3", "health": -1, "colour": -1, "size": -1 }, { "id": "Mob4", "health": -1, "colour": -1, "size": -1 }, { "id": "Mob5", "health": -1, "colour": -1, "size": -1 }] }),
     ]
 }
 
 export class Egg {
-    constructor(public rarity: number) {}
+    constructor(public rarity: number) { }
 
     getImageData = (): ImageData => {
         return {
@@ -320,7 +320,6 @@ export class Breeding {
         let baseMath = Math.pow(4 * this.skillLevel + Math.pow(this.skillLevel / 2, 3), 0.85);
         const eggRarity = this.eggs[0].rarity > 0 ? this.eggs[0].rarity : 1;
         const maxRange = Math.max(0.1, 1 - ((eggRarity + 4) / 12) * 0.9);
-        console.log(baseMath, eggRarity, maxRange);
         baseMath *= (1 + eggRarity / 8);
         const maxStat = baseMath * (Math.min(1.2 + this.skillLevel / 12, 4) * Math.pow(2.71828, -10 * 0) + 1);
         const minStat = baseMath * (Math.min(1.2 + this.skillLevel / 12, 4) * Math.pow(2.71828, -10 * maxRange) + 1);

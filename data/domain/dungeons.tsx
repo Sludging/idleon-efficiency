@@ -200,7 +200,7 @@ export const DungeonSetInfo = {
 export class DungeonTrait {
     active: boolean = false;
 
-    constructor(public index: number, public setName: string, public bonus: string) {}
+    constructor(public index: number, public setName: string, public bonus: string) { }
 
     getClass = () => {
         return `icons-5151 icons-DungTrait${this.active ? 'A' : 'B'}${this.index}`;
@@ -242,13 +242,13 @@ const initDungeonTraits = () => {
 
 const initDungeonItems = () => {
     return [
-        new DungeonItem(0, { "name": "Helping Heart", "bonus": "maxHp", "increment": 0.2, "rarity": "Common", "desc": "Increases your max HP by +{", "lvlText": "Next Lv: +{ Max HP", "baseValue": 2, "maxLevel": 10, "achieve": "", "world": "Blunder Hills" }),
+        new DungeonItem(0, { "name": "Helping Heart", "bonus": "maxHp", "increment": 0.2, "rarity": "Common", "desc": "Increases your max HP by +{", "lvlText": "Next Lv: +{ Max HP", "baseValue": 3, "maxLevel": 10, "achieve": "", "world": "Blunder Hills" }),
         new DungeonItem(1, { "name": "Rusty Blade", "bonus": "baseDmg2", "increment": 0.2, "rarity": "Common", "desc": "Increases your base damage by +{", "lvlText": "Next Lv: +{ Base DMG", "baseValue": 3, "maxLevel": 10, "achieve": "", "world": "Blunder Hills" }),
         new DungeonItem(2, { "name": "Mana Crystal", "bonus": "maxMp", "increment": 0.2, "rarity": "Common", "desc": "Increases your max MP by +{", "lvlText": "Next Lv: +{ Max MP", "baseValue": 2, "maxLevel": 10, "achieve": "", "world": "Blunder Hills" }),
         new DungeonItem(3, { "name": "Sandulls", "bonus": "MoveSpeed", "increment": 0.1, "rarity": "Common", "desc": "Increases your Move Speed by +{%", "lvlText": "Next Lv: +{% Move speed", "baseValue": 2.5, "maxLevel": 10, "achieve": "", "world": "Blunder Hills" }),
-        new DungeonItem(4, { "name": "Pan Lid", "bonus": "BlockChance", "increment": 0.1, "rarity": "Common", "desc": "Increases your Block Chance by +{%. I Guess pan lids are effective shields!", "lvlText": "Next Lv: +{% Block chance", "baseValue": 2, "maxLevel": 10, "achieve": "", "world": "Blunder Hills" }),
-        new DungeonItem(5, { "name": "Rabbit Paw", "bonus": "DropRarity", "increment": 0.2, "rarity": "Common", "desc": "Increases your Drop Rate by +{%", "lvlText": "Next Lv: +{% Drop rate", "baseValue": 3, "maxLevel": 8, "achieve": "", "world": "Blunder Hills" }),
-        new DungeonItem(6, { "name": "Tax Ledger", "bonus": "monsterCash", "increment": 1, "rarity": "Common", "desc": "Monsters drop +{% more Cash to spend at NPC shop.", "lvlText": "Next Lv: +{% Cash dropped", "baseValue": 8, "maxLevel": 8, "achieve": "", "world": "Blunder Hills" }),
+        new DungeonItem(4, { "name": "Pan Lid", "bonus": "BlockChance", "increment": 0.1, "rarity": "Common", "desc": "Increases your Block Chance by +{%. I Guess pan lids are effective shields!", "lvlText": "Next Lv: +{% Block chance", "baseValue": 3, "maxLevel": 10, "achieve": "", "world": "Blunder Hills" }),
+        new DungeonItem(5, { "name": "Rabbit Paw", "bonus": "DropRarity", "increment": 0.2, "rarity": "Common", "desc": "Increases your Drop Rate by +{%", "lvlText": "Next Lv: +{% Drop rate", "baseValue": 5, "maxLevel": 8, "achieve": "", "world": "Blunder Hills" }),
+        new DungeonItem(6, { "name": "Tax Ledger", "bonus": "monsterCash", "increment": 1, "rarity": "Common", "desc": "Monsters drop +{% more Cash to spend at NPC shop.", "lvlText": "Next Lv: +{% Cash dropped", "baseValue": 14, "maxLevel": 8, "achieve": "", "world": "Blunder Hills" }),
         new DungeonItem(7, { "name": "Big Ol Belly", "bonus": "foodEff", "increment": 1.5, "rarity": "Common", "desc": "Food heals is +{% more effective, and immediately drops 2 food items!", "lvlText": "Next Lv: +{% Food effect", "baseValue": 20, "maxLevel": 10, "achieve": "", "world": "Blunder Hills" }),
         new DungeonItem(8, { "name": "Decaf Latte", "bonus": "skillSpd", "increment": 2, "rarity": "Common", "desc": "Skilling speed is +{% faster. Things like mining, fishing, and other skill actions.", "lvlText": "Next Lv: +{% Skill speed", "baseValue": 25, "maxLevel": 8, "achieve": "", "world": "Blunder Hills" }),
         new DungeonItem(9, { "name": "Sharp Eye", "bonus": "critChance", "increment": 0.5, "rarity": "Common", "desc": "Increases critical hit chance by +{%. Critical hits are epic!", "lvlText": "Next Lv: +{% Crit chance", "baseValue": 3, "maxLevel": 6, "achieve": "", "world": "Blunder Hills" }),
@@ -262,34 +262,34 @@ const initDungeonItems = () => {
         new DungeonItem(17, { "name": "Golden Dice", "bonus": "diceMoney", "increment": 5, "rarity": "Common", "desc": "Gives you a chance to get an additional Loot Dice based on how much Cash you have at the end.", "lvlText": "Next Lv: +{% extra dice chance based on Cash.", "baseValue": 10, "maxLevel": 5, "achieve": "2 Tons of Iron", "world": "Blunder Hills" }),
         new DungeonItem(18, { "name": "Plump Dice", "bonus": "diceHP", "increment": 5, "rarity": "Common", "desc": "Gives you a chance to get an additional Loot Dice based on how much HP you have at the end.", "lvlText": "Next Lv: +{% extra dice chance based on HP.", "baseValue": 10, "maxLevel": 5, "achieve": "Croakin' Froge", "world": "Frostbite Tundra" }),
         new DungeonItem(19, { "name": "Recycler", "bonus": "nothing", "increment": 0.5, "rarity": "Common", "desc": "Drops a new RNG item to pick up. {% chance to drop an additional RNG item.", "lvlText": "Next Lv: +{% chance for extra item", "baseValue": 5, "maxLevel": 30, "achieve": "Specializational!", "world": "Yum Yum Desert" }),
-        new DungeonItem(20, { "name": "Sucker Punch", "bonus": "critDmg", "increment": 3, "rarity": "Uncommon", "desc": "Increases Critical Damage by +{%", "lvlText": "Next Lv: +{% Crit Dmg", "baseValue": 25, "maxLevel": 5, "achieve": "", "world": "Blunder Hills" }),
-        new DungeonItem(21, { "name": "Thorny Rose", "bonus": "maxHp", "increment": 1, "rarity": "Uncommon", "desc": "+{ Max HP, but take 6 damage. This can be lethal, watch out!", "lvlText": "Next Lv: +{ max HP", "baseValue": 10, "maxLevel": 5, "achieve": "", "world": "Blunder Hills" }),
+        new DungeonItem(20, { "name": "Sucker Punch", "bonus": "critDmg", "increment": 3, "rarity": "Uncommon", "desc": "Increases Critical Damage by +{%", "lvlText": "Next Lv: +{% Crit Dmg", "baseValue": 30, "maxLevel": 5, "achieve": "", "world": "Blunder Hills" }),
+        new DungeonItem(21, { "name": "Thorny Rose", "bonus": "maxHp", "increment": 1, "rarity": "Uncommon", "desc": "+{ Max HP, but take 6 damage. This can be lethal, watch out!", "lvlText": "Next Lv: +{ max HP", "baseValue": 13, "maxLevel": 5, "achieve": "", "world": "Blunder Hills" }),
         new DungeonItem(22, { "name": "Battery", "bonus": "abilityCD", "increment": 1, "rarity": "Uncommon", "desc": "Attack abilities cooldown +{% faster.", "lvlText": "Next Lv: +{% cooldown reduction.", "baseValue": 25, "maxLevel": 5, "achieve": "", "world": "Blunder Hills" }),
         new DungeonItem(23, { "name": "Liars Craps", "bonus": "DRandHP", "increment": 1, "rarity": "Uncommon", "desc": "+{% drop rate, -{% Max HP.", "lvlText": "Next Lv: +{% DR, -{% Max HP", "baseValue": 15, "maxLevel": 5, "achieve": "", "world": "Blunder Hills" }),
         new DungeonItem(24, { "name": "Blood Vial", "bonus": "hpMissingDmg", "increment": 2, "rarity": "Uncommon", "desc": "+2% Dmg every 1% HP missing, up to {%. Having more of this item only increases max cap.", "lvlText": "Next Lv: +{% Max Cap", "baseValue": 30, "maxLevel": 5, "achieve": "Colosseum Contender", "world": "Blunder Hills" }),
         new DungeonItem(25, { "name": "Fashion Sense", "bonus": "rareEquips", "increment": 2, "rarity": "Uncommon", "desc": "Equipment drops being of a higher rarity will happen +{% more often.", "lvlText": "Next Lv: +{% rare equip chance", "baseValue": 25, "maxLevel": 8, "achieve": "Careful, it's Sharp!", "world": "Yum Yum Desert" }),
         new DungeonItem(26, { "name": "Can of Varnish", "bonus": "baseDmgPLUS", "increment": 2, "rarity": "Uncommon", "desc": "Rusty Blades gives +{% more base DMG. Also comes with 1 Rusty Blade, what a deal!", "lvlText": "Next Lv: +{% higher dmg bonus from Rusty Blades", "baseValue": 30, "maxLevel": 6, "achieve": "Bigtime Bloacher", "world": "Yum Yum Desert" }),
         new DungeonItem(27, { "name": "Spare Change", "bonus": "cashFloor", "increment": 5, "rarity": "Uncommon", "desc": "Every 30 seconds, if you're standing still, you'll notice some cash on the floor!", "lvlText": "Next Lv: +{% Cash Found", "baseValue": 50, "maxLevel": 6, "achieve": "Wode Together", "world": "Blunder Hills" }),
-        new DungeonItem(28, { "name": "Sneaky Cap", "bonus": "sneakCR", "increment": 0.1, "rarity": "Uncommon", "desc": "For every minute you go undamaged, +{% crit chance, up to +30%.", "lvlText": "Next Lv: +{% crit chance per minute", "baseValue": 2, "maxLevel": 5, "achieve": "Well Learned", "world": "Yum Yum Desert" }),
-        new DungeonItem(29, { "name": "Ninja Smoke", "bonus": "invuln", "increment": 0.1, "rarity": "Uncommon", "desc": "+{ sec of invincibility time whenever you get hit.", "lvlText": "Next Lv: +{ seconds", "baseValue": 1.5, "maxLevel": 10, "achieve": "Hammer Bub", "world": "Yum Yum Desert" }),
-        new DungeonItem(30, { "name": "Tortoise Shell", "bonus": "blockStack", "increment": 0.2, "rarity": "Uncommon", "desc": "Each time you get hit, +0.1% block chance, up to a max of +{%", "lvlText": "Next Lv: +{% max cap", "baseValue": 5, "maxLevel": 5, "achieve": "Jellyfish Jelly", "world": "Yum Yum Desert" }),
+        new DungeonItem(28, { "name": "Sneaky Cap", "bonus": "sneakCR", "increment": 0.1, "rarity": "Uncommon", "desc": "For every minute you go undamaged, +{% crit chance, up to +30%.", "lvlText": "Next Lv: +{% crit chance per minute", "baseValue": 10, "maxLevel": 5, "achieve": "Well Learned", "world": "Yum Yum Desert" }),
+        new DungeonItem(29, { "name": "Ninja Smoke", "bonus": "invuln", "increment": 0.1, "rarity": "Uncommon", "desc": "+{ sec of invincibility time whenever you get hit.", "lvlText": "Next Lv: +{ seconds", "baseValue": 2, "maxLevel": 10, "achieve": "Hammer Bub", "world": "Yum Yum Desert" }),
+        new DungeonItem(30, { "name": "Tortoise Shell", "bonus": "blockStack", "increment": 0.2, "rarity": "Uncommon", "desc": "Each time you get hit, +0.3% block chance, up to a max of +{%", "lvlText": "Next Lv: +{% max cap", "baseValue": 6, "maxLevel": 5, "achieve": "Jellyfish Jelly", "world": "Yum Yum Desert" }),
         new DungeonItem(31, { "name": "Vampire Fangs", "bonus": "healKill", "increment": 2.5, "rarity": "Uncommon", "desc": "Whenever you kill a monster, {% chance to heal +1 HP.", "lvlText": "Next Lv: {% chance to heal on kill", "baseValue": 50, "maxLevel": 8, "achieve": "Right to Bear Iron", "world": "Blunder Hills" }),
-        new DungeonItem(32, { "name": "Dead Book", "bonus": "dmgCritSpdU", "increment": 0.05, "rarity": "Rare", "desc": "+{% Dmg and Crit chance for each monster type you defeat, even before getting this.", "lvlText": "Next Lv: +{% Dmg and Crit chance.", "baseValue": 0.5, "maxLevel": 5, "achieve": "", "world": "Blunder Hills" }),
-        new DungeonItem(33, { "name": "Armadillo", "bonus": "hpDmgArma", "increment": 0.1, "rarity": "Rare", "desc": "+{ base damage for every 10 Max HP you have. Also gives 2 Helping Hearts, because he loves u!", "lvlText": "Next Lv: +{ Base DMG per 10 Max HP.", "baseValue": 1, "maxLevel": 5, "achieve": "", "world": "Blunder Hills" }),
+        new DungeonItem(32, { "name": "Dead Book", "bonus": "dmgCritSpdU", "increment": 0.05, "rarity": "Rare", "desc": "+{% Dmg and Crit chance for each monster type you defeat, even before getting this.", "lvlText": "Next Lv: +{% Dmg and Crit chance.", "baseValue": 0.6, "maxLevel": 5, "achieve": "", "world": "Blunder Hills" }),
+        new DungeonItem(33, { "name": "Armadillo", "bonus": "hpDmgArma", "increment": 0.1, "rarity": "Rare", "desc": "+{ base damage for every 10 Max HP you have. Also gives 2 Helping Hearts, because he loves u!", "lvlText": "Next Lv: +{ Base DMG per 10 Max HP.", "baseValue": 3, "maxLevel": 5, "achieve": "", "world": "Blunder Hills" }),
         new DungeonItem(34, { "name": "Spiky Spine", "bonus": "retaliate", "increment": 5, "rarity": "Rare", "desc": "Whenever you get hit, deal {% damage to that monster. If you block, deal a critical hit.", "lvlText": "Next Lv: +{% retaliation dmg", "baseValue": 120, "maxLevel": 6, "achieve": "Blunder Skull", "world": "Frostbite Tundra" }),
         new DungeonItem(35, { "name": "Single Cut", "bonus": "dmgTakenU", "increment": 0.2, "rarity": "Rare", "desc": "Take 10 dmg, and gain +{% dmg. Also, 90% chance this item will drop on the floor again.", "lvlText": "Next Lv: +{% damage.", "baseValue": 6, "maxLevel": 5, "achieve": "Vial Noob", "world": "Yum Yum Desert" }),
         new DungeonItem(36, { "name": "RNG Voucher", "bonus": "enhanceSellRNG", "increment": 1, "rarity": "Rare", "desc": "Selling any enhancer has a {% chance to drop an RNG item of 1 choice.", "lvlText": "Next Lv: +{% chance", "baseValue": 10, "maxLevel": 5, "achieve": "Souped Up Salts", "world": "Frostbite Tundra" }),
-        new DungeonItem(37, { "name": "", "bonus": "", "increment": 5, "rarity": "Rare", "desc": "", "lvlText": "Next Lv: +{ max HP.", "baseValue": 10, "maxLevel": 5, "achieve": "Unobtainable", "world": "Frostbite Tundra" }),
-        new DungeonItem(38, { "name": "", "bonus": "", "increment": 5, "rarity": "Rare", "desc": "", "lvlText": "Next Lv: +{ max HP.", "baseValue": 10, "maxLevel": 5, "achieve": "Unobtainable", "world": "Frostbite Tundra" }),
-        new DungeonItem(39, { "name": "", "bonus": "", "increment": 5, "rarity": "Rare", "desc": "", "lvlText": "Next Lv: +{ max HP.", "baseValue": 10, "maxLevel": 5, "achieve": "Unobtainable", "world": "Frostbite Tundra" }),
+        new DungeonItem(37, { "name": "", "bonus": "", "increment": 5, "rarity": "Rare", "desc": "", "lvlText": "Next Lv: +{ max HP.", "baseValue": 10, "maxLevel": 5, "achieve": "Unobtainable", "world": "Hyperion Nebula" }),
+        new DungeonItem(38, { "name": "", "bonus": "", "increment": 5, "rarity": "Rare", "desc": "", "lvlText": "Next Lv: +{ max HP.", "baseValue": 10, "maxLevel": 5, "achieve": "Unobtainable", "world": "Hyperion Nebula" }),
+        new DungeonItem(39, { "name": "", "bonus": "", "increment": 5, "rarity": "Rare", "desc": "", "lvlText": "Next Lv: +{ max HP.", "baseValue": 10, "maxLevel": 5, "achieve": "Unobtainable", "world": "Hyperion Nebula" }),
         new DungeonItem(40, { "name": "Angelite", "bonus": "reviveU", "increment": 1, "rarity": "Epic", "desc": "If you die, use up this item and revive instantly without losing 2 RNG items. Also +{% drop Rate.", "lvlText": "Next Lv: +{% drop rate.", "baseValue": 20, "maxLevel": 5, "achieve": "Smirky Souls", "world": "Frostbite Tundra" }),
         new DungeonItem(41, { "name": "Genesis Sphere", "bonus": "greyGenesisU", "increment": 0.3, "rarity": "Epic", "desc": "Choosing a Grey rarity RNG item has a {% chance to drop a new grey RNG item, up to 60%", "lvlText": "Next Lv: +{% chance for genesis.", "baseValue": 18.5, "maxLevel": 5, "achieve": "Good Times Roll", "world": "Frostbite Tundra" }),
         new DungeonItem(42, { "name": "Shattered Mirror", "bonus": "doubleAbility", "increment": 1, "rarity": "Epic", "desc": "Whenever you cast an attack ability, {% chance to cast it again shorty after for no mana cost.", "lvlText": "Next Lv: +{% recast chance", "baseValue": 25, "maxLevel": 5, "achieve": "Efaunt Trumped", "world": "Yum Yum Desert" }),
         new DungeonItem(43, { "name": "Transmogrifier Box", "bonus": "Nothing", "increment": 1, "rarity": "Epic", "desc": "Lose all Grey RNG items that you have just 1 of, and get a new one for each one you lost.", "lvlText": "Next Lv: +{ more ZAP!", "baseValue": 1, "maxLevel": 5, "achieve": "Vial Connoisseur", "world": "Yum Yum Desert" }),
-        new DungeonItem(44, { "name": "", "bonus": "", "increment": 5, "rarity": "Epic", "desc": "", "lvlText": "Next Lv: +{ max HP.", "baseValue": 10, "maxLevel": 5, "achieve": "Unobtainable", "world": "Frostbite Tundra" }),
+        new DungeonItem(44, { "name": "", "bonus": "", "increment": 5, "rarity": "Epic", "desc": "", "lvlText": "Next Lv: +{ max HP.", "baseValue": 10, "maxLevel": 5, "achieve": "Unobtainable", "world": "Hyperion Nebula" }),
         new DungeonItem(45, { "name": "Horn of the Foal", "bonus": "critGodU", "increment": 15, "rarity": "Legendary", "desc": "+15% Crit Chance, +{% Crit Dmg, and -60% max HP. Oh, and Non Crits deal no damage.", "lvlText": "Next Lv: +{% crit dmg, all else equal.", "baseValue": 600, "maxLevel": 10, "achieve": "House Flipper", "world": "Blunder Hills" }),
-        new DungeonItem(46, { "name": "Stone of the Bulwark", "bonus": "defGodU", "increment": 10, "rarity": "Legendary", "desc": "-85% attack speed and mana regen. +25% Block chance and +{% damage.", "lvlText": "Next Lv: +{% damage, all else equal.", "baseValue": 300, "maxLevel": 10, "achieve": "I Sawed...", "world": "Frostbite Tundra" }),
-        new DungeonItem(47, { "name": "", "bonus": "", "increment": 5, "rarity": "Legendary", "desc": "", "lvlText": "Next Lv: +{ max HP.", "baseValue": 10, "maxLevel": 5, "achieve": "Unobtainable", "world": "Frostbite Tundra" }),
+        new DungeonItem(46, { "name": "Stone of the Bulwark", "bonus": "defGodU", "increment": 10, "rarity": "Legendary", "desc": "-85% attack speed and mana regen. +30% Block chance and +{% damage.", "lvlText": "Next Lv: +{% damage, all else equal.", "baseValue": 500, "maxLevel": 10, "achieve": "I Sawed...", "world": "Frostbite Tundra" }),
+        new DungeonItem(47, { "name": "", "bonus": "", "increment": 5, "rarity": "Legendary", "desc": "", "lvlText": "Next Lv: +{ max HP.", "baseValue": 10, "maxLevel": 5, "achieve": "Unobtainable", "world": "Hyperion Nebula" }),
     ]
 }
 
@@ -305,14 +305,13 @@ export class Dungeons {
     flurbos: number = 0;
 
     public static getDungeonRank = (dungeonXP: number) => {
-        const rank = Number(dungeonLevels.reduce((rank, req, index, _) => 
-        {
-            if (dungeonXP > Number(req)) { 
+        const rank = Number(dungeonLevels.reduce((rank, req, index, _) => {
+            if (dungeonXP > Number(req)) {
                 rank = index.toString()
             }
             return rank;
         }, "0")) + 1;
-    
+
         return rank;
     }
 
@@ -360,14 +359,13 @@ export const parseDungeons = (upgrades: number[][], optList: number[]) => {
     });
 
 
-    dungeons.xp = optList[71] 
-    dungeons.rank = Number(dungeonLevels.reduce((rank, req, index, _) => 
-        {
-            if (optList[71] > Number(req)) { 
-                rank = index.toString()
-            }
-            return rank;
-        }, "0")) + 1;
+    dungeons.xp = optList[71]
+    dungeons.rank = Number(dungeonLevels.reduce((rank, req, index, _) => {
+        if (optList[71] > Number(req)) {
+            rank = index.toString()
+        }
+        return rank;
+    }, "0")) + 1;
 
     dungeons.flurbos = optList[73];
     dungeons.credits = optList[72];

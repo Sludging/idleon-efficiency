@@ -48,9 +48,10 @@ import { Family } from '../data/domain/family';
 import { Achievement, AchievementConst } from '../data/domain/achievements';
 import { Dungeons, PassiveType } from '../data/domain/dungeons';
 import { MapInfo } from '../data/domain/maps';
+import { EnemyInfo } from '../data/domain/enemies';
 
 
-function ItemSourcesDisplay({ sources, dropInfo }: { sources: ItemSources, dropInfo: DropSource[]}) {
+function ItemSourcesDisplay({ sources, dropInfo }: { sources: ItemSources, dropInfo: DropSource[] }) {
 
     const possibleSources = useMemo(() => {
         if (!sources) {
@@ -126,7 +127,7 @@ function ShowSkills(props: SkillProps) {
                     Array.from(props.skillsMap).map(([skillIndex, skill]) => {
                         const skillRank = props.skillsRank.get(skillIndex);
                         return (
-                            <Box key={`skill_${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} gridArea={`${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} direction="row" gap="medium" margin={{right: 'small', bottom: 'medium'}}>
+                            <Box key={`skill_${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} gridArea={`${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} direction="row" gap="medium" margin={{ right: 'small', bottom: 'medium' }}>
                                 <Box direction="row" align="center" gap="small">
                                     <Box width={{ max: '36px', min: '36px' }}>
                                         <Box className={getSkillClass(skillIndex)} />
@@ -204,7 +205,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
         const theData = appContext.data.getData();
         const stamps = theData.get("stamps") as Stamp[][];
         const shrines = theData.get("shrines") as Shrine[];
-        
+
         let crystalSpawnStamp = 0;
         if (stamps) {
             crystalSpawnStamp = stamps[StampTab.Misc][StampConsts.CrystallinIndex].getBonus();
@@ -221,12 +222,13 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
             const nonPredatoryBox = player.postOffice[PostOfficeConst.NonPredatoryBoxIndex];
             postOfficeBonus = nonPredatoryBox.level > 0 ? nonPredatoryBox.bonuses[2].getBonus(nonPredatoryBox.level, 2) : 0;
         }
-        return 0.0005 * 
-        (1 + crystalSpawnTalentBonus / 100) * 
-        (1 + (postOfficeBonus + shrineBonus) / 100) * 
-        (1 + crystalForDaysTalentBonus / 100) * 
-        (1 + crystalSpawnStamp / 100) * 
-        (1 + cardBonus / 100);
+
+        return 5e-4 *
+            (1 + crystalSpawnTalentBonus / 100) *
+            (1 + (postOfficeBonus + shrineBonus) / 100) *
+            (1 + crystalForDaysTalentBonus / 100) *
+            (1 + crystalSpawnStamp / 100) *
+            (1 + cardBonus / 100);
     }, [appContext, player])
 
 
@@ -273,14 +275,11 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     </Box>
                     <Text size="small">Current Monster / Map = {player.currentMonster} / {player.currentMap}</Text>
                     {
-                        player.killInfo.has(player.currentMapId) && 
+                        player.killInfo.has(player.currentMapId) &&
+                        (MapInfo.find(map => map.id == player.currentMapId)?.portalRequirements ?? []).reduce((sum, req) => sum += req, 0) > 0 &&
                         <Text size="small">
                             Portal Requirement: {nFormatter(player.killInfo.get(player.currentMapId) ?? 0)} / [{MapInfo.find(map => map.id == player.currentMapId)?.portalRequirements.map(req => nFormatter(req))}]
                         </Text>
-                    }
-                    {
-                        player.classId == ClassIndex.Barbarian && 
-                        <Text size="small">Zow count: {Object.entries(player.killInfo).filter(([_, count]) => count > 100000).length}</Text>
                     }
                     {
                         player.starSigns.map((sign, index) => {
@@ -353,7 +352,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     <Text>Equipped Cards:</Text>
                     <Grid columns={["25%", "25%", "25%", "25%"]} width={{ max: '200px' }} gap={{ row: "small" }}>
                         {
-                            player.cardInfo ? player.cardInfo.equippedCards.map((card, index) => {
+                            player.cardInfo ? player.cardInfo.equippedCards.filter(card => card.name != "Empty").map((card, index) => {
                                 return (
                                     <Box key={index}>
                                         <Stack key={index}>
@@ -1146,6 +1145,60 @@ function InventoryDisplay({ player }: { player: Player }) {
     )
 }
 
+function ZowInfo({ player }: { player: Player }) {
+    const ignoreArea = (area: string) => {
+        if (area.includes("Colosseum")) {
+            return true;
+        }
+        if (area.includes("Grandfrog's") || area.includes("Igloo")) {
+            return true;
+        }
+        if (["TutorialA", "TutorialB", "TutorialC", "TutorialD", "JungleX", "MininggF", "How Did u get here", "Miningg1", "Miningg2", "Outer World Town", "The Untraveled Octopath",
+            "Spike Surprise", "YumYum Grotto", "Salty Shores", "Faraway Piers", "Filler", "Deepwater Docks", "Bandit Bob's Hideout", "Frostbite Towndra",
+            "Tunnels Entrance", "Trappers Folley", "Freefall Caverns", "The Ol' Straightaway", "Slip Slidy Ledges", "Echoing Egress", 
+            "Blunder Hills", "JungleZ", "PlayerSelect", "Efaunt's Tomb", "The Roots", "Mummy Memorial", "Gravel Tomb", "Heaty Hole", "End Of The Road", "Z", "Eycicles's Nest", "The Office"].includes(area)) {
+            return true;
+        }
+        return false;
+    }
+    const zowCount = Array.from(player.killInfo.entries()).filter(([_, count]) => count > 100000).length;
+    const toZow = Array.from(player.killInfo.entries()).map(([mapId, count]) => {
+        const mapData = MapInfo.find(map => map.id == mapId);
+        if (mapData?.enemy === undefined || count > 100000 || ignoreArea(mapData.area) || mapData.area == "Z") {
+            return null;
+        }
+        return [mapId, count]
+    });
+
+    return (
+        <Box pad="medium" gap="medium" fill>
+            <Text size='medium'>Zow Info</Text>
+            <Text>Current zow count: {zowCount}</Text>
+            <Heading level="3" margin={{bottom: '1px', top: '1px'}} >To be zowed:</Heading>
+            <Box direction="row" wrap>
+                {
+                    toZow.map((data, index) => {
+                        if (data) {
+                            const mapData = MapInfo.find(map => map.id == data[0]);
+                            const enemyData = EnemyInfo.find(enemy => enemy.details.internalName == mapData?.enemy);
+                            return (
+                                <Box key={index} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} align="center" pad="small">
+                                    {enemyData &&
+                                        <Box title={mapData?.area} width={{max: '35px'}}>
+                                            <Box className={enemyData.getClass()} />
+                                        </Box>
+                                    }
+                                    <Text>{nFormatter(data[1])}</Text>
+                                </Box>
+                            )
+                        }
+                    })
+                }
+            </Box>
+        </Box>
+    )
+}
+
 
 interface PlayerTabProps {
     player: Player
@@ -1195,6 +1248,9 @@ function PlayerTab({ player }: PlayerTabProps) {
             }
             setPoExtra(theData.get("POExtra"));
         }
+        if (player.classId != ClassIndex.Barbarian && index == 11) {
+            setIndex(1);
+        }
     }, [appContext, player]);
 
     return (
@@ -1211,6 +1267,10 @@ function PlayerTab({ player }: PlayerTabProps) {
                     <SpecialButton isActive={index == 8} clickHandler={() => onActive(8)} text={"Post Office"} />
                     <SpecialButton isActive={index == 9} clickHandler={() => onActive(9)} text={"Inventory"} />
                     <SpecialButton isActive={index == 10} clickHandler={() => onActive(10)} text={"Obols"} />
+                    {
+                        player.classId == ClassIndex.Barbarian &&
+                        <SpecialButton isActive={index == 11} clickHandler={() => onActive(11)} text={"Zow"} />
+                    }
                 </Box>
                 <Box fill background="dark-1">
                     {index == 1 && <MiscStats player={player} activeBubbles={activeBubbles} />}
@@ -1223,6 +1283,7 @@ function PlayerTab({ player }: PlayerTabProps) {
                     {index == 8 && <PostOfficeDisplay player={player} extra={poExtra} />}
                     {index == 9 && <InventoryDisplay player={player} />}
                     {index == 10 && <ObolsInfo playerIndex={player.playerID} title={"Obols"} level={player.level} />}
+                    {index == 11 && <ZowInfo player={player} />}
                 </Box>
             </Grid>
         </ShadowBox>
