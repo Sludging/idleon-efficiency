@@ -205,7 +205,6 @@ function DungeonsDisplay() {
 
     const nextHappyHour = useMemo(() => {
         if (serverVars && Object.keys(serverVars).includes("HappyHours")) {
-            console.log("Server Vars", serverVars["HappyHours"]);
             const happyHours = serverVars["HappyHours"] as number[];
             let lastThursday = new Date();
             while (lastThursday.getDay() != 4) {
