@@ -314,11 +314,15 @@ const populateDiscovery = (cooking: Cooking) => {
             const time = cooking.getRecipeTime(possibleMeals);
             possibleMeals.slice(0, 5).forEach((meal, index) => {
                 if (meal < 49) {
-                    const luckTime = time / mealLuckValues[index]
+                    let realLuck = mealLuckValues[index];
+                    for (let reverseIndex = possibleMeals.length ; reverseIndex > index ; reverseIndex--) {
+                        realLuck *= (1 - mealLuckValues[reverseIndex]);
+                    }
+                    const luckTime = time / realLuck;
                     if (luckTime < outputlucktime[meal]) {
-                        outputlucktime[meal] = luckTime
-                        cooking.meals[meal].discoveryTime = time
-                        cooking.meals[meal].discoveryChance = mealLuckValues[index]
+                        outputlucktime[meal] = luckTime;
+                        cooking.meals[meal].discoveryTime = time;
+                        cooking.meals[meal].discoveryChance = realLuck * cooking.kitchens[0].recipeLuck;
                         cooking.meals[meal].optimalSpices = combination.map(value => spiceValues.indexOf(value));
                     }
                 }
@@ -342,8 +346,6 @@ export const parseCooking = (cookingData: number[][], mealsData: number[][]) => 
     }
 
     cooking.spices = mealsData[3];
-    populateDiscovery(cooking);
-
     cookingData.forEach((kitchen, index) => {
         if (index > cooking.kitchens.length) {
             return;
@@ -403,6 +405,8 @@ export const updateCooking = (data: Map<string, any>) => {
 
     const jewelMealBonus = mainframe.jewels[16].active ? mainframe.jewels[16].getBonus() : 1; // TODO: Remove hardcoding
     cooking.meals.forEach(meal => meal.mainframeBonus = jewelMealBonus);
+
+    populateDiscovery(cooking);
 
     return cooking;
 }
