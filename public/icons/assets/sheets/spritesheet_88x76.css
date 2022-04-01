@@ -9,7 +9,7 @@
     background-position: 0 calc(var(--row) * 4.545454545454546%)
 }
 .icons-8876:not(.icons-UIboxUpg0):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
-        .icons-UIboxUpg0 { --row: 0; }
+.icons-UIboxUpg0 { --row: 0; }
 .icons-UIboxUpg1 { --row: 1; }
 .icons-UIboxUpg10 { --row: 2; }
 .icons-UIboxUpg11 { --row: 3; }
