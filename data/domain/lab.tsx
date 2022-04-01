@@ -76,7 +76,7 @@ interface JewelData {
     effect: string
     description: string
     name: string
-    x1: number
+    bonusGiven: number
     requirements: {
         item: string
         quantity: number
@@ -96,7 +96,7 @@ export class Jewel {
     }
 
     getBonus = (bonusMultiplier: number = this.bonusMultiplier) => {
-        return this.data.x1 * bonusMultiplier;
+        return this.data.bonusGiven * bonusMultiplier;
     }
 
     getBonusText = () => {
