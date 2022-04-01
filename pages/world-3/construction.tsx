@@ -174,6 +174,7 @@ function RefineryDisplay() {
                                     <TimeDown addSeconds={cycle.time - cycle.timePast} resetToSeconds={cycle.time} />
                                 </Box>
                                 <Text margin={{ top: 'small' }} color="accent-3" size="12px">* Might be off by a few seconds.</Text>
+                                <Text color="accent-3" size="12px">Max cycle is: {toTime(cycle.time)}</Text>
                             </ShadowBox>
                         )
                     })
