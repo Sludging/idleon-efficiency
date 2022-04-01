@@ -205,7 +205,8 @@ function Cooking() {
                                                 <Box>
                                                     <Text>Bonus: {meal.getBonusText()}</Text>
                                                     {/* <Text>Time: {meal.discoveryTime}</Text> */}
-                                                    <Text>Chance: {meal.discoveryChance * 100}%</Text>
+                                                    <Text>Chance: {nFormatter(meal.discoveryChance * 100, "Smaller")}%</Text>
+                                                    <Text size="xsmall">* Chance is based on your first kitchen luck stat.</Text>
                                                 </Box>
                                             }
                                             direction={TipDirection.Down}
