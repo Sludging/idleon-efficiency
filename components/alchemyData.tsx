@@ -35,9 +35,13 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
     const [bargainBubbleLevel, setBargainBubbleLevel] = useState(0);
     const [classMultiBubbleLevel, setClassMultiBubbleLevel] = useState(0);
     const [cauldronCostLevel, setCauldronCostLevel] = useState(0);
+    const [newMultiBubbleLevel, setNewMultiBubbleLevel] = useState(0);
 
     useEffect(() => {
         setBargainBubbleLevel(cauldron.bubbles[14].level);
+        if (cauldron.short_name != "Y") {
+            setNewMultiBubbleLevel(cauldron.bubbles[16].level);
+        }
         if (classMultiBonus && cauldron.short_name != "Y") {
             setClassMultiBubbleLevel(cauldron.bubbles[1].level)
         }
@@ -51,7 +55,7 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
         if (bubble.level == 0) {
             return <></>
         }
-        const materialCosts: Map<Item, number> = bubble.getMaterialCost(cauldronCostLevel, undevelopedCostsBubbleLevel, barleyBrewVialLevel, bargainBubbleLevel, classMultiBubbleLevel, discountLevel, hasAchievement);
+        const materialCosts: Map<Item, number> = bubble.getMaterialCost(cauldronCostLevel, undevelopedCostsBubbleLevel, barleyBrewVialLevel, bargainBubbleLevel, classMultiBubbleLevel, discountLevel, hasAchievement, newMultiBubbleLevel);
         return (
             <Box direction="row" align="center" width={{ max: 'medium' }}>
                 {!faceLeft &&

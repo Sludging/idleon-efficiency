@@ -312,17 +312,18 @@ const populateDiscovery = (cooking: Cooking) => {
         for (let combination of possibleCombinations) {
             const possibleMeals = cooking.getMealsFromSpiceValues(combination);
             const time = cooking.getRecipeTime(possibleMeals);
+            const firstKitchenLuck = cooking.kitchens[0].recipeLuck
             possibleMeals.slice(0, 5).forEach((meal, index) => {
                 if (meal < 49) {
                     let realLuck = mealLuckValues[index];
                     for (let reverseIndex = possibleMeals.length; reverseIndex > index; reverseIndex--) {
-                        realLuck *= (1 - mealLuckValues[reverseIndex]);
+                        realLuck *= (1 - (mealLuckValues[reverseIndex] * firstKitchenLuck));
                     }
                     const luckTime = time / realLuck;
                     if (luckTime < outputlucktime[meal]) {
                         outputlucktime[meal] = luckTime;
                         cooking.meals[meal].discoveryTime = time;
-                        cooking.meals[meal].discoveryChance = realLuck * cooking.kitchens[0].recipeLuck;
+                        cooking.meals[meal].discoveryChance = realLuck * firstKitchenLuck;
                         cooking.meals[meal].optimalSpices = combination.map(value => spiceValues.indexOf(value));
                     }
                 }
