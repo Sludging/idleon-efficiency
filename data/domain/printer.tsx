@@ -1,5 +1,3 @@
-import { Item } from "./items";
-
 interface PlayerInfo {
     samples: {item: string, quantity: number}[]
     active: {item: string, quantity: number}[]

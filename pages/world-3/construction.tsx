@@ -5,7 +5,12 @@ import {
     Grid,
     ResponsiveContext,
     CheckBox,
-    Meter
+    Meter,
+    Table,
+    TableHeader,
+    TableRow,
+    TableCell,
+    TableBody
 } from 'grommet'
 import { useEffect, useContext, useState, useMemo } from 'react';
 import { AppContext } from '../../data/appContext'
@@ -22,7 +27,7 @@ import { Alchemy } from '../../data/domain/alchemy';
 import { StaticTime, TimeDisplaySize, TimeDown } from '../../components/base/TimeDisplay';
 import { Printer } from '../../data/domain/printer';
 import { Player } from '../../data/domain/player';
-import { CircleInformation, StatusWarning } from 'grommet-icons';
+import { CircleInformation, StatusWarning, Trash } from 'grommet-icons';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 import { Deathnote } from '../../data/domain/deathnote';
 import { EnemyInfo } from '../../data/domain/enemies';
@@ -424,6 +429,36 @@ function SaltLickDisplay() {
 
 }
 
+function SampleBox({ sample, activeItem, itemData }: { sample: { item: string, quantity: number }, activeItem: { item: string, quantity: number } | undefined, itemData: Item[] | undefined }) {
+    const sampleItem = itemData?.find((item) => item.internalName == sample.item);
+    return (
+        <Box border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} height={{ min: '82px', max: '82px' }}>
+            {sample.item == "Blank" ?
+                <Box align="center"  width={{ max: '100px', min: '100px' }} height={{ min: '82px', max: '82px' }} justify='center'>
+                    <Text size="xsmall" color="accent-3">Empty</Text>
+                </Box> :
+                <Box pad={{ vertical: 'small' }} align="center">
+                    <Box width={{ max: '36px', min: '36px' }}>
+                        <Box className={sampleItem?.getClass()} />
+                    </Box>
+                    <Text color={activeItem ? 'green-1' : ''} size="small">{nFormatter(sample.quantity)}</Text>
+                </Box>
+            }
+            {activeItem && (activeItem?.quantity ?? 0) < sample.quantity &&
+                <TipDisplay
+                    heading='Active lower than sample'
+                    body={<Box><Text>You have a sample of {nFormatter(sample.quantity)} but only printing {nFormatter(activeItem.quantity)}.</Text><Text>Go update your printing!</Text></Box>}
+                    size='large'
+                    direction={TipDirection.Down}
+                >
+                    <StatusWarning size="medium" color="accent-1" />
+                </TipDisplay>
+            }
+        </Box>
+    )
+
+}
+
 function PrinterDisplay() {
     const [playerData, setPlayerData] = useState<Player[]>();
     const [printerData, setPrinterData] = useState<Printer>();
@@ -479,51 +514,50 @@ function PrinterDisplay() {
                 })
                 }
             </Box>
-            <Box>
-                <Text size="small">* Green text indicates your active sample.</Text>
-            </Box>
-            <ShadowBox background="dark-1" gap="small">
-                {
-                    printerData && printerData.playerInfo.map((playerInfo, index) => {
-                        return (
-                            <Grid key={index} columns={{ count: 6, size: 'auto' }} align="center" gap="medium" pad={{ horizontal: "large", vertical: "small" }} border={{ color: 'grey-1', side: 'bottom' }}>
-                                <Text>{playerData && playerData[index] && playerData[index].playerName}</Text>
-                                {
-                                    playerInfo.samples.map((sample, sampleIndex) => {
-                                        if (sample.item == "Blank") {
-                                            return <Box>Empty</Box>
-                                        }
-                                        const sampleItem = itemData?.find((item) => item.internalName == sample.item);
-                                        const activeItem = playerInfo.active.find((activeItem) => activeItem.item == sample.item);
-                                        return (
-                                            <Box key={`sample_${sampleIndex}`} direction="row" align="center">
-                                                <Box pad="small" gap="small" align="center">
-                                                    <Box width={{ max: '36px', min: '36px' }}>
-                                                        <Box className={sampleItem?.getClass()} />
-                                                    </Box>
-                                                    <Box direction="row" align="center" gap="small">
-                                                        <Text color={activeItem ? 'green-1' : ''} size="small">{nFormatter(sample.quantity)}</Text>
-                                                    </Box>
-                                                </Box>
-                                                {activeItem && (activeItem?.quantity ?? 0) < sample.quantity &&
-                                                    <TipDisplay
-                                                        heading='Active lower than sample'
-                                                        body={<Box><Text>You have a sample of {nFormatter(sample.quantity)} but only printing {nFormatter(activeItem.quantity)}.</Text><Text>Go update your printing!</Text></Box>}
-                                                        size='large'
-                                                        direction={TipDirection.Down}
-                                                    >
-                                                        <StatusWarning size="medium" color="accent-1" />
-                                                    </TipDisplay>
+            <ShadowBox background="dark-1" pad="large">
+                <Table>
+                    <TableHeader>
+                        <TableRow>
+                            <TableCell>Player Name</TableCell >
+                            <TableCell>Samples</TableCell >
+                            <TableCell>Printing</TableCell >
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {
+                            printerData.playerInfo.map((playerInfo, index) => {
+                                return (
+                                    <TableRow key={`player_${index}`}>
+                                        <TableCell>{playerData && playerData[index] && playerData[index].playerName}</TableCell>
+                                        <TableCell>
+                                            <Box direction="row">
+                                                {
+                                                    playerInfo.samples.map((sample, sampleIndex) => {
+                                                        const activeItem = playerInfo.active.find((activeItem) => activeItem.item == sample.item);
+                                                        return (
+                                                            <SampleBox key={`sample_${sampleIndex}`} activeItem={activeItem} sample={sample} itemData={itemData} />
+                                                        )
+                                                    })
                                                 }
                                             </Box>
-                                        )
-                                    })
-                                }
-                            </Grid>
-                        )
-                    }
-                    )
-                }
+                                        </TableCell>
+                                        <TableCell>
+                                            <Box direction="row">
+                                                {
+                                                    playerInfo.active.map((sample, sampleIndex) => {
+                                                        return (
+                                                            <SampleBox key={`active_${sampleIndex}`} activeItem={undefined} sample={sample} itemData={itemData} />
+                                                        )
+                                                    })
+                                                }
+                                            </Box>
+                                        </TableCell>
+                                    </TableRow>
+                                )
+                            })
+                        }
+                    </TableBody>
+                </Table>
             </ShadowBox>
         </Box>
     )
@@ -592,7 +626,7 @@ function DeathnoteDisplay() {
             {
                 deathNoteByWorld && [...deathNoteByWorld.entries()].map(([worldName, deathnoteMobs], index) => {
                     return (
-                        <ShadowBox background="dark-1" key={index} gap="medium" pad="medium" margin={{right: 'small', bottom: 'large'}}>
+                        <ShadowBox background="dark-1" key={index} gap="medium" pad="medium" margin={{ right: 'small', bottom: 'large' }}>
                             <Text size="medium">{worldName} (Bonus {worldTierInfo[index]}%)</Text>
                             {
                                 [...deathnoteMobs.entries()].map(([mobName, killCount], mobIndex) => {
@@ -605,27 +639,27 @@ function DeathnoteDisplay() {
                                                     <Box className={deathnoteData?.getRankClass(deathnoteRank)} />
                                                 </Box>
                                                 <Box gap="small">
-                                                <Text size="xsmall">{mobName}</Text>
-                                                <Meter
-                                                    size="small"
-                                                    thickness='2px'
-                                                    type="bar"
-                                                    background="grey-1"
-                                                    color="brand"
-                                                    values={[
-                                                        {
-                                                            value: killCount,
-                                                            label: 'current',
-                                                            color: 'brand'
-                                                        }
-                                                    ]}
-                                                    max={deathnoteData?.getNextRankReq(deathnoteRank)} />
-                                                <Box direction="row" justify="between">
-                                                    <Text size="xsmall">{nFormatter(killCount)}</Text>
-                                                    <Text size="small">{nFormatter(deathnoteData?.getNextRankReq(deathnoteRank))}</Text>
+                                                    <Text size="xsmall">{mobName}</Text>
+                                                    <Meter
+                                                        size="small"
+                                                        thickness='2px'
+                                                        type="bar"
+                                                        background="grey-1"
+                                                        color="brand"
+                                                        values={[
+                                                            {
+                                                                value: killCount,
+                                                                label: 'current',
+                                                                color: 'brand'
+                                                            }
+                                                        ]}
+                                                        max={deathnoteData?.getNextRankReq(deathnoteRank)} />
+                                                    <Box direction="row" justify="between">
+                                                        <Text size="xsmall">{nFormatter(killCount)}</Text>
+                                                        <Text size="small">{nFormatter(deathnoteData?.getNextRankReq(deathnoteRank))}</Text>
+                                                    </Box>
                                                 </Box>
-                                            </Box>
-                                                
+
                                             </Box>
                                         </Box>
                                     )
@@ -753,7 +787,7 @@ function BuildingsDisplay() {
             <Grid columns={size == "small" ? "1" : "1/2"} fill>
                 {constructionData.buildings && constructionData.buildings.map((building, index) => {
                     return (
-                        <ShadowBox style={{opacity: building.level > 0 ? 1 : 0.5}} key={index} background="dark-1" pad="medium" align="start" margin={{ right: 'large', bottom: 'small' }}>
+                        <ShadowBox style={{ opacity: building.level > 0 ? 1 : 0.5 }} key={index} background="dark-1" pad="medium" align="start" margin={{ right: 'large', bottom: 'small' }}>
                             <Grid columns="1/3" gap="medium" fill>
                                 <Box justify="center">
                                     <Box width={{ min: "30px", max: '30px' }} margin={{ right: 'small' }}>
