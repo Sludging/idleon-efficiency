@@ -293,7 +293,7 @@ function BubblesDisplay() {
                 />
                 <Box direction="row" align="center">
                     <Ascending color="Legendary" size="large" />
-                    <Text size="xsmall">Indicates bubbles that will level from "No Bubble Left Behind" lab bonus</Text>
+                    <Text size="xsmall">Indicates bubbles that will level from &quot;No Bubble Left Behind&quot; lab bonus</Text>
                 </Box>
                 
             </Box>
