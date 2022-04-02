@@ -36,22 +36,25 @@ export const VialIndex = 4;
 const vialPercentages = "99 90 80 70 60 60 40 50 40 35 30 25 17 16 13 9 13 10 7 11 1 25 25 20 20 15 14 13 5 12 10 9 7 5 4 3 3 2 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1".split(" ").map((value) => parseInt(value));
 const vialCostPerLevel = [0, 100, 1000, 2500, 10000, 50000, 100000, 500000, 1000001, 5000000, 25000000, 100000000, 1000000000, 50000000000];
 
-const calcBubbleMatCost = (bubbleLvl: number, baseCost: number, isLiquid: boolean, cauldCostReduxLvl: number = 0, undevelopedCostsBubbleLevel: number = 0, bubbleCostVialLvl: number = 0, bubbleBargainLvl: number = 0, bubbleMultClassLvl: number = 0, shopBargainBought: number = 0, hasAchievement: boolean): number => {
+const calcBubbleMatCost = (bubbleLvl: number, bubbleIndex: number, baseCost: number, isLiquid: boolean, cauldCostReduxLvl: number = 0, undevelopedCostsBubbleLevel: number = 0, bubbleCostVialLvl: number = 0, bubbleBargainLvl: number = 0, bubbleMultClassLvl: number = 0, shopBargainBought: number = 0, hasAchievement: boolean, bubbleNewMultiLevel: number = 0, vialMultiplier: number = 1): number => {
     if (isLiquid) {
         return baseCost + Math.floor(bubbleLvl / 20);
     } else {
-        const first = baseCost * Math.pow(1.35 - (0.3 * bubbleLvl) / (50 + bubbleLvl), bubbleLvl);
+        const first = bubbleIndex < 14 ? 
+            baseCost * Math.pow(1.35 - (0.3 * bubbleLvl) / (50 + bubbleLvl), bubbleLvl) : 
+            baseCost * Math.pow(1.37 - (0.28 * bubbleLvl) / (60 + bubbleLvl), bubbleLvl);
+
         const cauldCostReduxBoost = Math.max(
             0.1,
             1 - (Math.round(10 * lavaFunc("decay", cauldCostReduxLvl, 90, 100)) / 10) / 100
         );
         const bubbleCostBubbleBoost = Math.max(
             0.05,
-            1 - (lavaFunc("decay", undevelopedCostsBubbleLevel, 40, 70) + lavaFunc("add", bubbleCostVialLvl, 1, 0)) / 100
+            1 - (lavaFunc("decay", undevelopedCostsBubbleLevel, 40, 70) + (lavaFunc("add", bubbleCostVialLvl, 1, 0) * vialMultiplier)) / 100
         );
         const bubbleBargainBoost = Math.max(
             0.05,
-            1 - (lavaFunc("decay", bubbleBargainLvl, 40, 12) / 100) * lavaFunc("decayMulti", bubbleMultClassLvl, 2, 50)
+            1 - (lavaFunc("decay", bubbleBargainLvl, 40, 12) / 100) * lavaFunc("decayMulti", bubbleMultClassLvl, 2, 50) * lavaFunc("decayMulti", bubbleNewMultiLevel, 1.4, 30)
         );
         const shopBargainBoost = Math.max(0.1, Math.pow(0.75, shopBargainBought));
         // for any material besides liquid
@@ -79,6 +82,8 @@ export class Bubble {
 
     level: number = 0;
     class_name: string;
+    labUpgrade: boolean = false;
+    bubbleIndex: number
 
     constructor(name: string, icon_prefix: string, bubble_number: string, x1: number, x2: number, func: string, description: string, requirements: Array<{ item: string, quantity: number }>) {
         this.class_name = `icons-7070 icons-aUpgrades${icon_prefix}${bubble_number}`;
@@ -88,12 +93,13 @@ export class Bubble {
         this.func = func;
         this.description = description;
         this.rawRequirements = requirements;
+        this.bubbleIndex = parseInt(bubble_number);
     }
 
-    getMaterialCost = (cauldCostReduxLvl: number = 0, undevelopedCostsBubbleLevel: number = 0, bubbleCostVialLvl: number = 0, bubbleBargainLvl: number = 0, bubbleMultClassLvl: number = 0, shopBargainBought: number = 0, hasAchievement: boolean = false): Map<Item, number> => {
+    getMaterialCost = (cauldCostReduxLvl: number = 0, undevelopedCostsBubbleLevel: number = 0, bubbleCostVialLvl: number = 0, bubbleBargainLvl: number = 0, bubbleMultClassLvl: number = 0, shopBargainBought: number = 0, hasAchievement: boolean = false, bubbleNewMultiLevel: number = 0, vialMultiplier: number = 1): Map<Item, number> => {
         let toReturn = new Map<Item, number>();
         this.requirements.forEach((req) => {
-            toReturn.set(req, calcBubbleMatCost(this.level, req.count, req.internalName.includes("Liquid"), cauldCostReduxLvl, undevelopedCostsBubbleLevel, bubbleCostVialLvl, bubbleBargainLvl, bubbleMultClassLvl, shopBargainBought, hasAchievement))
+            toReturn.set(req, calcBubbleMatCost(this.level, this.bubbleIndex, req.count, req.internalName.includes("Liquid"), cauldCostReduxLvl, undevelopedCostsBubbleLevel, bubbleCostVialLvl, bubbleBargainLvl, bubbleMultClassLvl, shopBargainBought, hasAchievement, bubbleNewMultiLevel, vialMultiplier))
         })
         return toReturn;
     }
@@ -436,6 +442,15 @@ export function updateAlchemy(data: Map<string, any>) {
 
     if (lab.bonuses.find(bonus => bonus.name == "My 1st Chemistry Set")?.active ?? false) {
         alchemy.vials.forEach(vial => vial.bonusMulitplier = 2)
+    }
+
+    if (lab.bonuses.find(bonus => bonus.name == "No Bubble Left Behind")?.active) {
+        let bubblesToUpgrade = 3;
+        if (lab.jewels.find(jewel => jewel.data.name == "Pyrite Rhinestone")?.active) {
+            bubblesToUpgrade += 1;
+        }
+        const sortedBubbles = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles.slice(0, 15).filter(bubble => bubble.level > 5)).sort((bubble1, bubble2) => bubble1.level < bubble2.level ? -1 : 1);
+        sortedBubbles.slice(0, bubblesToUpgrade).forEach(bubble => bubble.labUpgrade = true);
     }
 
     return alchemy;

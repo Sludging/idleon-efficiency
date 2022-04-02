@@ -20,6 +20,7 @@ import { NextSeo } from 'next-seo';
 import TabButton from "../../components/base/TabButton";
 import { Item } from "../../data/domain/items";
 import TipDisplay, { TipDirection } from "../../components/base/TipDisplay";
+import { Ascending } from "grommet-icons";
 
 const CapitalizedH3 = styled.h3`
     text-transform: capitalize
@@ -36,16 +37,21 @@ interface DisplayProps {
     hasAchievement: boolean,
     discountLevel: number,
     classMultiBonus: boolean
+    vialMultiplier: number
 }
 
-function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVialLevel, hasAchievement, discountLevel, classMultiBonus }: DisplayProps) {
+function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVialLevel, hasAchievement, discountLevel, classMultiBonus, vialMultiplier = 1}: DisplayProps) {
     const size = useContext(ResponsiveContext)
     const [bargainBubbleLevel, setBargainBubbleLevel] = useState(0);
     const [classMultiBubbleLevel, setClassMultiBubbleLevel] = useState(0);
     const [cauldronCostLevel, setCauldronCostLevel] = useState(0);
+    const [newMultiBubbleLevel, setNewMultiBubbleLevel] = useState(0);
 
     useEffect(() => {
         setBargainBubbleLevel(cauldron.bubbles[14].level);
+        if (cauldron.short_name != "Y") {
+            setNewMultiBubbleLevel(cauldron.bubbles[16].level);
+        }
         if (classMultiBonus && cauldron.short_name != "Y") {
             setClassMultiBubbleLevel(cauldron.bubbles[1].level)
         }
@@ -59,7 +65,7 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
         if (bubble.level == 0) {
             return <></>
         }
-        const materialCosts: Map<Item, number> = bubble.getMaterialCost(cauldronCostLevel, undevelopedCostsBubbleLevel, barleyBrewVialLevel, bargainBubbleLevel, classMultiBubbleLevel, discountLevel, hasAchievement);
+        const materialCosts: Map<Item, number> = bubble.getMaterialCost(cauldronCostLevel, undevelopedCostsBubbleLevel, barleyBrewVialLevel, bargainBubbleLevel, classMultiBubbleLevel, discountLevel, hasAchievement, newMultiBubbleLevel, vialMultiplier);
         return (
             <Box direction="row" align="center" width={{ max: 'medium' }}>
                 {!faceLeft &&
@@ -102,7 +108,7 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
             <Box align="center">
                 <CapitalizedH3>{cauldron.name}</CapitalizedH3>
             </Box>
-            <Box align="center">
+            <Box>
                 {
                     Object.entries(cauldron.bubbles).map(([_, bubble], index) => {
                         return (
@@ -115,12 +121,15 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
                                     dropProps={{ align: size == "small" ? { top: 'bottom' } : cauldron.short_name == "Y" ? { right: 'left' } : { left: 'right' } }}
                                 >
                                     <Box direction="row" fill align="center">
-                                        <Box align="center" width={{ min: '70px', max: '70px' }} fill>
+                                        <Box align="center" width={{ min: '70px', max: '70px' }} fill >
                                             <Box style={{ opacity: bubble.level > 0 ? 1 : 0.2 }} className={bubble.class_name} />
                                         </Box>
-                                        <Box>
+                                        <Box direction="row" gap="xsmall" align="center">
                                             <Text size="medium">{bubble.level}</Text>
                                         </Box>
+                                        {
+                                            bubble.labUpgrade && <Ascending color="Legendary" size="large" />
+                                        }
                                     </Box>
                                 </Tip>
                             </Box>
@@ -138,7 +147,7 @@ function VialTipInfo({ vial }: { vial: Vial }) {
             <Box>
                 <Text size="small">Bonus: {vial.getBonusText()}</Text>
                 <Text size="small">You need to roll at least a {vial.getNumberToRoll()} to unlock this vial</Text>
-                
+
             </Box>
         )
     }
@@ -204,6 +213,7 @@ function BubblesDisplay() {
     const [classMulti, setClassMulti] = useState(false);
     const [undevelopedCostsBubbleLevel, setUndevelopedCostsBubbleLevel] = useState<number>(0);
     const [barleyBrewVialLevel, setBarleyBrewVialLevel] = useState<number>(0);
+    const [vialMultiplier, setVialMulitplier] = useState<number>(1);
 
     const appContext = useContext(AppContext);
 
@@ -254,6 +264,7 @@ function BubblesDisplay() {
             // get undeveloped costs bubble level
             setUndevelopedCostsBubbleLevel(alchemyData?.getUndevelopedCostsBubbleLevel() ?? 0);
             setBarleyBrewVialLevel(alchemyData?.getBarleyBrewVialLevel() ?? 0);
+            setVialMulitplier(alchemyData?.vials[0].bonusMulitplier ?? 1);
             if (achievementsInfo) {
                 setHasAlchemyAchievement(achievementsInfo[AchievementConst.SmartBoiIndex].completed ?? false);
             }
@@ -283,11 +294,16 @@ function BubblesDisplay() {
                     options={bargainOptions}
                     onChange={({ value: nextValue }) => setDiscountLevel(nextValue)}
                 />
+                <Box direction="row" align="center">
+                    <Ascending color="Legendary" size="large" />
+                    <Text size="xsmall">Indicates bubbles that will level from &quot;No Bubble Left Behind&quot; lab bonus</Text>
+                </Box>
+                
             </Box>
             <Grid columns="1/4">
                 {
                     alchemyData && Object.entries(alchemyData.cauldrons).map(([_, cauldron], index) => {
-                        return (<CauldronDisplay key={`tab_${index}`} cauldron={cauldron} undevelopedCostsBubbleLevel={undevelopedCostsBubbleLevel} barleyBrewVialLevel={barleyBrewVialLevel} hasAchievement={hasAlchemyAchievement} discountLevel={parseInt(discountLevel)} classMultiBonus={classMulti} />)
+                        return (<CauldronDisplay key={`tab_${index}`} cauldron={cauldron} undevelopedCostsBubbleLevel={undevelopedCostsBubbleLevel} barleyBrewVialLevel={barleyBrewVialLevel} hasAchievement={hasAlchemyAchievement} discountLevel={parseInt(discountLevel)} classMultiBonus={classMulti} vialMultiplier={vialMultiplier} />)
                     })
                 }
                 {

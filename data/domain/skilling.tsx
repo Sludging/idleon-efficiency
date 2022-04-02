@@ -1,31 +1,30 @@
 import { Card } from "./cards";
 import { Family } from "./family";
 import { Food } from "./items";
-import { Player } from "./player";
+import { Player, SkillsIndex } from "./player";
 import { Prayer } from "./prayers";
 import { ShrineConstants, Shrine } from "./shrines";
 import { PlayerStatues, StatueConst } from "./statues";
 import { ClassIndex } from "./talents";
 
 export class Skilling {
-    // if ("AllSkillxpz" == t) {
-    //     var o = b.engine.getGameAttribute("DNSM"),
-    //         u = null != d.StarSigns ? o.getReserved("StarSigns") : o.h.StarSigns,
-    //         c = null != d.SkillEXP ? u.getReserved("SkillEXP") : u.h.SkillEXP;
-    //     return (
-    //         parsenum(c) +
-    //         (U._customBlock_CardBonusREAL(50) +
-    //             I._customBlock_GoldFoodBonuses("SkillExp") +
-    //             (C._customBlock_CardSetBonuses(0, "3") +
-    //                 C._customBlock_Shrine(5) +
-    //                 F._customBlock_ArbitraryCode("StatueBonusGiven17") +
-    //                 (C._customBlock_prayersReal(2, 0) -
-    //                     C._customBlock_prayersReal(1, 1) -
-    //                     C._customBlock_prayersReal(9, 1) +
-    //                     (U._customBlock_EtcBonuses("27") + (F._customBlock_GetBuffBonuses(40, 1) + (C._customBlock_SaltLick(3) + C._customBlock_FlurboShop(2)))))))
-    //     );
-    // }
+    static getXPReq = (skill: SkillsIndex, level: number) => {
+        switch(skill) {
+            case SkillsIndex.Smithing:
+                return (15 + Math.pow(level, 2) + 13 * level) * Math.pow(1.225 - Math.min(0.114, (0.135 * level) / (level + 50)), level) - 26;
+            case SkillsIndex.Construction:
+                if (level < 71) {
+                    return ((10 + Math.pow(level, 2.81) + 4 * level) * Math.pow(1.117 - (0.135 * level) / (level + 5), level) - 6) * (1 + Math.pow(level, 1.72) / 300);
+                }
+                return (((10 + Math.pow(level, 2.81) + 4 * level) * Math.pow(1.003, level) - 6) / 2.35) * (1 + Math.pow(level, 1.72) / 300);
+            case SkillsIndex.Worship:
+                return (15 + Math.pow(level, 1.3) + 6 * level) * Math.pow(1.17 - Math.min(0.07, (0.135 * level) / (level + 50)), level) - 26;
+            default:
+                return (15 + Math.pow(level, 2) + 15 * level) * Math.pow(1.225 - Math.min(0.18, (0.135 * level) / (level + 50)), level) - 30;
+        }
+    }
 
+    // if ("AllSkillxpz" == t) {
     static getAllSkillXP = (player: Player, shrines: Shrine[], playerStatues: PlayerStatues, prayers: Prayer[], saltLickBonus: number = 0, dungeonBonus: number = 0, family: Family, goldFoodStampBonus: number = 0, goldFoodAchievement: boolean = false) => {
         const skillingCardBonus = Card.GetTotalBonusForId(player.cardInfo?.equippedCards ?? [], 50);
         const goldenFoodBonus = player.gear.food.filter(food => food && food.goldenFood != undefined && food.description.includes("Skill EXP"))
