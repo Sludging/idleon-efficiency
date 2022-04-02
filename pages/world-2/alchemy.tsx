@@ -37,9 +37,10 @@ interface DisplayProps {
     hasAchievement: boolean,
     discountLevel: number,
     classMultiBonus: boolean
+    vialMultiplier: number
 }
 
-function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVialLevel, hasAchievement, discountLevel, classMultiBonus }: DisplayProps) {
+function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVialLevel, hasAchievement, discountLevel, classMultiBonus, vialMultiplier = 1}: DisplayProps) {
     const size = useContext(ResponsiveContext)
     const [bargainBubbleLevel, setBargainBubbleLevel] = useState(0);
     const [classMultiBubbleLevel, setClassMultiBubbleLevel] = useState(0);
@@ -64,7 +65,7 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
         if (bubble.level == 0) {
             return <></>
         }
-        const materialCosts: Map<Item, number> = bubble.getMaterialCost(cauldronCostLevel, undevelopedCostsBubbleLevel, barleyBrewVialLevel, bargainBubbleLevel, classMultiBubbleLevel, discountLevel, hasAchievement, newMultiBubbleLevel);
+        const materialCosts: Map<Item, number> = bubble.getMaterialCost(cauldronCostLevel, undevelopedCostsBubbleLevel, barleyBrewVialLevel, bargainBubbleLevel, classMultiBubbleLevel, discountLevel, hasAchievement, newMultiBubbleLevel, vialMultiplier);
         return (
             <Box direction="row" align="center" width={{ max: 'medium' }}>
                 {!faceLeft &&
@@ -212,6 +213,7 @@ function BubblesDisplay() {
     const [classMulti, setClassMulti] = useState(false);
     const [undevelopedCostsBubbleLevel, setUndevelopedCostsBubbleLevel] = useState<number>(0);
     const [barleyBrewVialLevel, setBarleyBrewVialLevel] = useState<number>(0);
+    const [vialMultiplier, setVialMulitplier] = useState<number>(1);
 
     const appContext = useContext(AppContext);
 
@@ -262,6 +264,7 @@ function BubblesDisplay() {
             // get undeveloped costs bubble level
             setUndevelopedCostsBubbleLevel(alchemyData?.getUndevelopedCostsBubbleLevel() ?? 0);
             setBarleyBrewVialLevel(alchemyData?.getBarleyBrewVialLevel() ?? 0);
+            setVialMulitplier(alchemyData?.vials[0].bonusMulitplier ?? 1);
             if (achievementsInfo) {
                 setHasAlchemyAchievement(achievementsInfo[AchievementConst.SmartBoiIndex].completed ?? false);
             }
@@ -300,7 +303,7 @@ function BubblesDisplay() {
             <Grid columns="1/4">
                 {
                     alchemyData && Object.entries(alchemyData.cauldrons).map(([_, cauldron], index) => {
-                        return (<CauldronDisplay key={`tab_${index}`} cauldron={cauldron} undevelopedCostsBubbleLevel={undevelopedCostsBubbleLevel} barleyBrewVialLevel={barleyBrewVialLevel} hasAchievement={hasAlchemyAchievement} discountLevel={parseInt(discountLevel)} classMultiBonus={classMulti} />)
+                        return (<CauldronDisplay key={`tab_${index}`} cauldron={cauldron} undevelopedCostsBubbleLevel={undevelopedCostsBubbleLevel} barleyBrewVialLevel={barleyBrewVialLevel} hasAchievement={hasAlchemyAchievement} discountLevel={parseInt(discountLevel)} classMultiBonus={classMulti} vialMultiplier={vialMultiplier} />)
                     })
                 }
                 {
