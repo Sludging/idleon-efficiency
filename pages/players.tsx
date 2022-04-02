@@ -87,6 +87,7 @@ function ItemSourcesDisplay({ sources, dropInfo }: { sources: ItemSources, dropI
 interface SkillProps {
     skillsMap: Map<SkillsIndex, SkillData>
     skillsRank: Map<SkillsIndex, number>
+    player: Player
 }
 
 function nth(n: number) { return `${n}${["st", "nd", "rd"][((n + 90) % 100 - 10) % 10 - 1] || "th"}` }
@@ -161,6 +162,41 @@ function ShowSkills(props: SkillProps) {
                     })
                 }
             </Grid >
+            {
+                props.player.classId == ClassIndex.Maestro &&
+                <Box gap="small">
+                    <Text>Current crystal cooldown reductions: (max is {props.player.talents.find(talent => talent.skillIndex == 41)?.getBonus()}%)</Text>
+                    <Box direction="row" wrap>
+                        {
+                            Array.from(props.skillsMap).map(([skillIndex, skill]) => {
+                                // Crystal cooldown only affects the first 9 skills
+                                let crystalReduction: number | undefined = undefined;
+                                if (skillIndex < 10) {
+                                    const skillXpReq = Skilling.getXPReq(skillIndex, skill.level);
+                                    crystalReduction = (1 - (skill.xpReq / skillXpReq)) * 100;
+                                    if (crystalReduction > 0) {
+                                        return (
+                                            <Box key={`ccd_${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} direction="row" gap="medium" margin={{ right: 'small', bottom: 'medium' }}>
+                                                <Box direction="row" align="center" gap="small">
+                                                    <Box width={{ max: '36px', min: '36px' }}>
+                                                        <Box className={getSkillClass(skillIndex)} />
+                                                    </Box>
+                                                    <Box gap="small">
+                                                        <Box direction="row" gap="small">
+                                                            <Text size="small">{nFormatter(crystalReduction, "Smaller")}%</Text>
+                                                        </Box>
+                                                    </Box>
+                                                </Box>
+                                            </Box>
+                                        )
+                                    }
+                                }
+                                return null;
+                            })
+                        }
+                    </Box>
+                </Box>
+            }
         </Box>
     );
 }
@@ -1155,7 +1191,7 @@ function ZowInfo({ player }: { player: Player }) {
         }
         if (["TutorialA", "TutorialB", "TutorialC", "TutorialD", "JungleX", "MininggF", "How Did u get here", "Miningg1", "Miningg2", "Outer World Town", "The Untraveled Octopath",
             "Spike Surprise", "YumYum Grotto", "Salty Shores", "Faraway Piers", "Filler", "Deepwater Docks", "Bandit Bob's Hideout", "Frostbite Towndra",
-            "Tunnels Entrance", "Trappers Folley", "Freefall Caverns", "The Ol' Straightaway", "Slip Slidy Ledges", "Echoing Egress", 
+            "Tunnels Entrance", "Trappers Folley", "Freefall Caverns", "The Ol' Straightaway", "Slip Slidy Ledges", "Echoing Egress",
             "Blunder Hills", "JungleZ", "PlayerSelect", "Efaunt's Tomb", "The Roots", "Mummy Memorial", "Gravel Tomb", "Heaty Hole", "End Of The Road", "Z", "Eycicles's Nest", "The Office"].includes(area)) {
             return true;
         }
@@ -1174,7 +1210,7 @@ function ZowInfo({ player }: { player: Player }) {
         <Box pad="medium" gap="medium" fill>
             <Text size='medium'>Zow Info</Text>
             <Text>Current zow count: {zowCount}</Text>
-            <Heading level="3" margin={{bottom: '1px', top: '1px'}} >To be zowed:</Heading>
+            <Heading level="3" margin={{ bottom: '1px', top: '1px' }} >To be zowed:</Heading>
             <Box direction="row" wrap>
                 {
                     toZow.map((data, index) => {
@@ -1184,7 +1220,7 @@ function ZowInfo({ player }: { player: Player }) {
                             return (
                                 <Box key={index} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} align="center" pad="small">
                                     {enemyData &&
-                                        <Box title={mapData?.area} width={{max: '35px'}}>
+                                        <Box title={mapData?.area} width={{ max: '35px' }}>
                                             <Box className={enemyData.getClass()} />
                                         </Box>
                                     }
@@ -1274,7 +1310,7 @@ function PlayerTab({ player }: PlayerTabProps) {
                 </Box>
                 <Box fill background="dark-1">
                     {index == 1 && <MiscStats player={player} activeBubbles={activeBubbles} />}
-                    {index == 2 && <ShowSkills skillsMap={player.skills} skillsRank={player.skillsRank} />}
+                    {index == 2 && <ShowSkills skillsMap={player.skills} skillsRank={player.skillsRank} player={player}  />}
                     {index == 3 && <EquipmentDisplay player={player} />}
                     {index == 4 && <StatuesDisplay playerStatues={playerStatues} player={player} />}
                     {index == 5 && <AnvilDisplay player={player} activeBubbles={activeBubbles} playerStatues={playerStatues} />}
