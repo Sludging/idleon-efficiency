@@ -74,7 +74,7 @@ function RefineryDisplay() {
 
         if (Object.keys(refineryData.salts).length > 3) {
             toReturn.push(
-                { name: "Synthesis ", time: Math.ceil((900 * Math.pow(4, 0)) / ((1 + (vialBonus + saltLickBonus) / 100) * labCycleBonus)), timePast: refineryData.timePastSynthesis + secondsSinceUpdate }
+                { name: "Synthesis ", time: Math.ceil((900 * Math.pow(4, 1)) / ((1 + (vialBonus + saltLickBonus) / 100) * labCycleBonus)), timePast: refineryData.timePastSynthesis + secondsSinceUpdate }
             );
         }
         return toReturn;
@@ -496,7 +496,7 @@ function PrinterDisplay() {
                                         const sampleItem = itemData?.find((item) => item.internalName == sample.item);
                                         const activeItem = playerInfo.active.find((activeItem) => activeItem.item == sample.item);
                                         return (
-                                            <Box key={sampleIndex} direction="row" align="center">
+                                            <Box key={`sample_${sampleIndex}`} direction="row" align="center">
                                                 <Box pad="small" gap="small" align="center">
                                                     <Box width={{ max: '36px', min: '36px' }}>
                                                         <Box className={sampleItem?.getClass()} />
