@@ -49,6 +49,7 @@ import { Achievement, AchievementConst } from '../data/domain/achievements';
 import { Dungeons, PassiveType } from '../data/domain/dungeons';
 import { MapInfo } from '../data/domain/maps';
 import { EnemyInfo } from '../data/domain/enemies';
+import Stat from '../components/base/Stat';
 
 
 function ItemSourcesDisplay({ sources, dropInfo }: { sources: ItemSources, dropInfo: DropSource[] }) {
@@ -331,6 +332,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     <Text size="small">WIS = {player.stats.wisdom}</Text>
                     <Text size="small">LUK = {player.stats.luck}</Text>
                     <Text size="small">Crystal Spawn Chance = 1 in {Math.floor(1 / crystalSpawnChance)}</Text>
+                    <Stat stat={player.doubleClaimChance} />
                     <Text size="small">Charge Rate = {Math.round(playerWorshipInfo.chargeRate * 24)}% / day</Text>
                     <Text size="small">Current Charge = </Text>
                     <Box direction="row" gap="small">

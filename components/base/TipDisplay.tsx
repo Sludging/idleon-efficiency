@@ -51,7 +51,7 @@ export default function TipDisplay({ heading, body, children, size, direction, m
             }
             dropProps={{ align: dropAlignment }}
         >  
-            {children}
+            <span>{children}</span>
         </Tip>
     )
 }

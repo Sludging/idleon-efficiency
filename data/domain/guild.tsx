@@ -1,3 +1,5 @@
+import { lavaFunc } from "../utility"
+
 export const GuildConstants = {
     BonusIndex: 0
 }
@@ -42,6 +44,10 @@ export class GuildBonus {
         this.reqLevel = data.reqLevel;
         this.gpBaseCost = data.gpBaseCost;
         this.gpIncrease = data.gpIncrease;
+    }
+
+    getBonus = () => {
+        return lavaFunc(this.func, this.level, this.x1, this.x2);
     }
 }
 
