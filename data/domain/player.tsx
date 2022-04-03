@@ -11,6 +11,10 @@ import { Cloudsave } from "./cloudsave";
 import { EnemyInfo } from "./enemies";
 import { MapInfo } from "./maps";
 import { Chip, chipSlotReq } from "./lab";
+import { Alchemy } from "./alchemy";
+import { Guild } from "./guild";
+import { Bribe } from "./bribes";
+import { Stat } from "./base/stat";
 
 export class PlayerStats {
     strength: number = 0;
@@ -309,6 +313,9 @@ export class Player {
     };
     killInfo: Map<number, number> = new Map();
 
+    // Stats
+    doubleClaimChance: Stat = new Stat("Double XP Chance", "%");
+
     constructor(playerID: number, playerName: string) {
         this.playerID = playerID;
         this.playerName = playerName;
@@ -383,6 +390,20 @@ export class Player {
     getGoldFoodMulti = (familyBonus: number = 0, goldFoodStampBonus: number = 0, achievement: boolean) => {
         const gearBonus = this.gear.equipment.reduce((sum, gear) => sum += gear?.getMiscBonus("Gold Food Effect") ?? 0, 0);
         return Math.max(familyBonus, 1) + (gearBonus + ((this.talents.find(skill => skill.skillIndex == 99)?.getBonus() ?? 0) + (goldFoodStampBonus + (achievement ? 5 : 0)))) / 100;
+    }
+
+    setDoubleClaimChance = (bubbleBonus: number, bribeBonus: number, guildBonus: number) => {
+        const cardBonus = Card.GetTotalBonusForId(this.cardInfo?.equippedCards ?? [], 47);
+        const lazyCrateBox = this.postOffice.find(box => box.name == "Lazzzy Lootcrate");
+        const boxBonus = lazyCrateBox?.bonuses[0].getBonus(lazyCrateBox.level, 0) ?? 0;
+
+        this.doubleClaimChance.value = Math.min(75, bubbleBonus + bribeBonus + guildBonus + Math.min(cardBonus, 20) + boxBonus);
+        this.doubleClaimChance.sources.push({ name: "Card", value: cardBonus });
+        this.doubleClaimChance.sources.push({ name: "Post Office", value: boxBonus });
+        this.doubleClaimChance.sources.push({ name: "Alchemy Bubble", value: bubbleBonus });
+        this.doubleClaimChance.sources.push({ name: "Bribe", value: bribeBonus });
+        this.doubleClaimChance.sources.push({ name: "Guild", value: guildBonus });
+        this.doubleClaimChance.max = 75;
     }
 }
 
@@ -633,4 +654,22 @@ export default function parsePlayers(doc: Cloudsave, accountData: Map<string, an
     })
 
     return parsedData;
+}
+
+export const updatePlayers = (data: Map<string, any>) => {
+    const players = data.get("players") as Player[];
+
+    const alchemy = data.get("alchemy") as Alchemy;
+    const guild = data.get("guild") as Guild;
+    const bribes = data.get("bribes") as Bribe[];
+
+    // Double claim chance.
+    const doubleChanceBubbleBonus = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).find(bubble => bubble.name == "Afk Expexp")?.getBonus() ?? 0;
+    const doubleChanceGuildBonus = guild.guildBonuses.find(bonus => bonus.name == "Anotha One")?.getBonus() ?? 0;
+    const doubleChanceBribeBonus = bribes.find(bribe => bribe.bonus == "AfkDoubleEXP")?.value ?? 0;
+    players.forEach(player => {
+        player.setDoubleClaimChance(doubleChanceBubbleBonus, doubleChanceBribeBonus, doubleChanceGuildBonus);
+    })
+
+    return players;
 }

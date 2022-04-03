@@ -1,7 +1,7 @@
 import parseTraps from './traps';
 import parseStamps, { updateStamps } from './stamps';
 import parseStatues from './statues';
-import parsePlayers, { Player } from './player';
+import parsePlayers, { Player, updatePlayers } from './player';
 import parseAlchemy, { updateAlchemy } from './alchemy';
 import parseBribes from './bribes';
 import parseGuild from './guild';
@@ -128,6 +128,7 @@ const postProcessingMap: Record<string, Function> = {
     "deathnote": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnote(accountData),
     "breeding": (doc: Cloudsave, accountData: Map<string, any>) => updateBreeding(accountData),
     "shrines": (doc: Cloudsave, accountData: Map<string, any>) => updateShrines(accountData),
+    "players": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayers(accountData),
 }
 
 export const updateIdleonData = async (data: Cloudsave, charNames: string[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
