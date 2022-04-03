@@ -55,6 +55,14 @@ function PlayerTraps(props: PlayerTrapProps) {
                                     <Box>
                                         <Text>Trap Type: {TrapSet[trap.trapType]}</Text>
                                         <Text>Original Duration: {formatTime(trap.trapDuration)?.replace("in ", "") ?? ""}</Text>
+                                        {
+                                            trap.getBenefits().map((bonus, index) => (
+                                                <Box key={`bonus_${index}`}>
+                                                    <Text>{bonus}</Text>
+                                                </Box>
+                                            ))
+                                        }
+                                        
                                     </Box>
                                 }
                                 size='medium'
