@@ -70,13 +70,13 @@ export class Meal {
         return `icons-4132 icons-CookingM${this.mealIndex}`;
     }
 
-    getBonus = (roundResult: boolean = false, mainFrameBonus: number = this.mainframeBonus) => {
-        const finalMath = (1 + mainFrameBonus / 100) * this.level * this.bonusQty;
+    getBonus = (roundResult: boolean = false, mainFrameBonus: number = this.mainframeBonus, level: number = this.level) => {
+        const finalMath = (1 + mainFrameBonus / 100) * level * this.bonusQty;
         return roundResult ? round(finalMath) : finalMath;
     }
 
-    getBonusText = () => {
-        return this.bonusText.replace(/{/g, nFormatter(this.getBonus(true)));
+    getBonusText = (level: number = this.level) => {
+        return this.bonusText.replace(/{/g, nFormatter(this.getBonus(true, this.mainframeBonus, level)));
     }
 
     getMealLevelCost = () => {
