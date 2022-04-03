@@ -304,6 +304,7 @@ export class Breeding {
     totalEggTime: number = 0;
 
     skillLevel: number = 0;
+    deadCells: number = 0;
 
     hasBonus = (bonusNumber: number) => {
         if (bonusNumber > waveReqs.length) {
@@ -318,7 +319,7 @@ export class Breeding {
 
     getStatRange = () => {
         let baseMath = Math.pow(4 * this.skillLevel + Math.pow(this.skillLevel / 2, 3), 0.85);
-        const eggRarity = this.eggs[0].rarity > 0 ? this.eggs[0].rarity : 1;
+        const eggRarity = Math.min(1, Math.max(...this.eggs.map(egg => egg.rarity)));
         const maxRange = Math.max(0.1, 1 - ((eggRarity + 4) / 12) * 0.9);
         baseMath *= (1 + eggRarity / 8);
         const maxStat = baseMath * (Math.min(1.2 + this.skillLevel / 12, 4) * Math.pow(2.71828, -10 * 0) + 1);
@@ -412,6 +413,8 @@ export const parseBreeding = (petsStored: any[][], pets: any[][], optionsList: a
             })
         }
     })
+
+    breeding.deadCells = breedingData[3][8];
 
     return breeding;
 }

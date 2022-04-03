@@ -91,15 +91,18 @@ function PetUpgradeDisplay() {
         if (cooking && breeding) {
             return breeding.upgrade.map(upgrade => {
                 const meal = upgrade.data.x1 != -1 ? cooking.meals[upgrade.data.x1] : undefined
+                const mealCost = meal ? upgrade.getCost(1) : -1;
                 return [{
                     image: "PetDeadCell",
                     name: "Pet Dead Cell",
-                    cost: upgrade.getCost(0)
+                    cost: upgrade.getCost(0),
+                    canAfford: breeding.deadCells >= upgrade.getCost(0)
                 },
                 {
                     class: meal?.getClass(),
                     name: meal?.name,
-                    cost: meal ? upgrade.getCost(1) : -1
+                    cost: mealCost,
+                    canAfford: (meal?.count ?? 0) > mealCost
                 }
                 ]
             });
@@ -147,7 +150,7 @@ function PetUpgradeDisplay() {
                                             <IconImage data={{ location: cost.image, height: 33, width: 33 }} />
                                         }
                                         {
-                                            cost.cost > 0 && <Text size="small">{nFormatter(cost.cost)}</Text>
+                                            cost.cost > 0 && <Text color={cost.canAfford ? 'green-1' : ''} size="small">{nFormatter(cost.cost)}</Text>
                                         }
                                     </Box>
                                 ))
@@ -261,6 +264,12 @@ function EggDisplay() {
                         <TextAndLabel label={index == 0 ? "Min Stat" : "Max Stat"} text={nFormatter(stat)} key={index} />
                     ))
                 }
+                <ComponentAndLabel label="Dead Cells" component={
+                    <Box direction="row" gap="small" align="center"> 
+                        <IconImage data={{ location: 'PetDeadCell', height: 33, width: 33 }} />
+                        <Text>{nFormatter(breeding.deadCells)}</Text>
+                    </Box>
+                } />
                 
             </Box>
         </Box>
