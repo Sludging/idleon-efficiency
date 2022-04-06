@@ -152,7 +152,7 @@ export class Refinery {
 
 export default function parseRefinery(rawData: any[][]) {
     const toReturn = new Refinery();
-    if (rawData) {
+    if (rawData.length > 0) {
         const unlockedSalts = rawData[0][0];
         toReturn.timePastCombustion = rawData[0][1];
         toReturn.timePastSynthesis = rawData[0][2];

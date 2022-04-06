@@ -166,7 +166,7 @@ function ShowSkills(props: SkillProps) {
             {
                 props.player.classId == ClassIndex.Maestro &&
                 <Box gap="small">
-                    <Text>Current crystal cooldown reductions: (max is {props.player.talents.find(talent => talent.skillIndex == 41)?.getBonus()}%)</Text>
+                    <Text>Current crystal cooldown reductions: (max is {nFormatter(props.player.talents.find(talent => talent.skillIndex == 41)?.getBonus() ?? 0, "Smaller")}%)</Text>
                     <Box direction="row" wrap>
                         {
                             Array.from(props.skillsMap).map(([skillIndex, skill]) => {
@@ -333,6 +333,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     <Text size="small">LUK = {player.stats.luck}</Text>
                     <Text size="small">Crystal Spawn Chance = 1 in {Math.floor(1 / crystalSpawnChance)}</Text>
                     <Stat stat={player.doubleClaimChance} />
+                    <Stat stat={player.monsterCash} />
                     <Text size="small">Charge Rate = {Math.round(playerWorshipInfo.chargeRate * 24)}% / day</Text>
                     <Text size="small">Current Charge = </Text>
                     <Box direction="row" gap="small">

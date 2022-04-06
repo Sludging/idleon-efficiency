@@ -30,6 +30,7 @@ import { parseForge, updateForge } from './forge';
 import { parseCooking, updateCooking } from './cooking';
 import { parseLab, updateLab } from './lab';
 import { parseBreeding, updateBreeding } from './breeding';
+import { notUndefined } from '../utility';
 
 
 export const safeJsonParse = <T, >(doc: Cloudsave, key: string, emptyValue: T): T => {
@@ -37,7 +38,7 @@ export const safeJsonParse = <T, >(doc: Cloudsave, key: string, emptyValue: T): 
         return JSON.parse(doc.get(key))
     }
     catch (e) {
-        console.debug(key, doc.get(key))
+        //console.debug(key, doc.get(key))
     }
     return emptyValue;
 }
@@ -81,8 +82,9 @@ const keyFunctionMap: Record<string, Function> = {
     "statues": (doc: Cloudsave, charCount: number) => parseStatues([...Array(charCount)].map((_, i) => safeJsonParse(doc, `StatueLevels_${i}`, [])), safeJsonParse(doc, `StuG`, [])),
     "timeAway": (doc: Cloudsave, charCount: number) => JSON.parse(doc.get('TimeAway')),
     "cauldronBubbles": (doc: Cloudsave, charCount: number) => doc.get('CauldronBubbles'),
+    "prayers": (doc: Cloudsave, charCount: number) => parsePrayers(safeJsonParse(doc, "PrayOwned", [])),
     "cards": (doc: Cloudsave, charCount: number) => parseCards(JSON.parse(doc.get('Cards0'))),
-    "players": (doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], charCount: number) => parsePlayers(doc, accountData, allItems),
+    "players": (doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], charCount: number) => parsePlayers(doc, accountData, allItems, charCount),
     "alchemy": (doc: Cloudsave, allItems: Item[], charCount: number) => parseAlchemy(doc.get("CauldronInfo"), doc.get("CauldUpgLVs"), allItems),
     "bribes": (doc: Cloudsave, charCount: number) => parseBribes(doc.get("BribeStatus")),
     "guild": (doc: Cloudsave, charCount: number) => parseGuild(JSON.parse(doc.get("Guild"))),
@@ -97,17 +99,16 @@ const keyFunctionMap: Record<string, Function> = {
             misc: doc.get("CYDeliveryBoxMisc"),
         }
     },
-    "shrines": (doc: Cloudsave, charCount: number) => parseShrines(JSON.parse(doc.get("Shrine"))),
+    "shrines": (doc: Cloudsave, charCount: number) => parseShrines(safeJsonParse(doc, "Shrine", [])),
     "storage": (doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], charCount: number) => parseStorage(doc, accountData.get("playerNames"), allItems, JSON.parse(doc.get("InvStorageUsed"))),
     "constellations": (doc: Cloudsave, charCount: number) => JSON.parse(doc.get("SSprog")),
-    "quests": (doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], charCount: number) => parseQuests(doc, accountData, allItems),
-    "prayers": (doc: Cloudsave, charCount: number) => parsePrayers(JSON.parse(doc.get("PrayOwned"))),
-    "refinery": (doc: Cloudsave, charCount: number) => parseRefinery(JSON.parse(doc.get("Refinery"))),
-    "saltLick": (doc: Cloudsave, charCount: number) => parseSaltLick(JSON.parse(doc.get("SaltLick"))),
-    "printer": (doc: Cloudsave, charCount: number) => parsePrinter(JSON.parse(doc.get("Print")), charCount),
+    "quests": (doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], charCount: number) => parseQuests(doc, accountData, allItems, charCount),
+    "refinery": (doc: Cloudsave, charCount: number) => parseRefinery(safeJsonParse(doc, "Refinery", [])),
+    "saltLick": (doc: Cloudsave, charCount: number) => parseSaltLick(safeJsonParse(doc, "SaltLick", [])),
+    "printer": (doc: Cloudsave, charCount: number) => parsePrinter(safeJsonParse(doc, "Print", []), charCount),
     "taskboard": (doc: Cloudsave, charCount: number) => parseTaskboard(JSON.parse(doc.get(`TaskZZ0`)), JSON.parse(doc.get(`TaskZZ1`)), JSON.parse(doc.get(`TaskZZ2`)), JSON.parse(doc.get(`TaskZZ3`)), doc.get(`TaskZZ4`), doc.get(`TaskZZ5`)),
-    "worship": (doc: Cloudsave, accountData: Map<string, any>, charCount: number) => parseWorship(JSON.parse(doc.get("TotemInfo")), accountData),
-    "construction": (doc: Cloudsave, charCount: number) => parseConstruction(JSON.parse(doc.get("Tower"))),
+    "worship": (doc: Cloudsave, accountData: Map<string, any>, charCount: number) => parseWorship(safeJsonParse(doc,"TotemInfo", []), accountData),
+    "construction": (doc: Cloudsave, charCount: number) => parseConstruction(safeJsonParse(doc, "Tower", [])),
     "arcade": (doc: Cloudsave, charCount: number) => parseArcade(safeJsonParse(doc, "ArcadeUpg", []), doc.get("OptLacc")),
     "obols": (doc: Cloudsave, allItems: Item[], charCount: number) => parseObols(doc, charCount, allItems),
     "dungeons": (doc: Cloudsave, charCount: number) => parseDungeons(safeJsonParse(doc, "DungUpg", []), doc.get("OptLacc")),
@@ -136,19 +137,21 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], all
     accountData.set("playerNames", charNames);
     accountData.set("itemsData", allItems);
     accountData.set("servervars", serverVars);
+
+    const validCharCount = [...Array(charNames.length)].map((_, i) => data.get(`Lv0_${i}`) as number[]).filter(notUndefined).length;
     Object.entries(keyFunctionMap).forEach(([key, toExecute]) => {
         try {
             if (key == "players" || key == "storage" || key == "quests") {
-                accountData.set(key, toExecute(data, accountData, allItems, charNames.length));
+                accountData.set(key, toExecute(data, accountData, allItems, validCharCount));
             }
             else if (key == "worship") {
-                accountData.set(key, toExecute(data, accountData, charNames.length));
+                accountData.set(key, toExecute(data, accountData, validCharCount));
             }
             else if (key == "lootyData" || key == "obols" || key == "alchemy" || key == "forge") {
-                accountData.set(key, toExecute(data, allItems, charNames.length));
+                accountData.set(key, toExecute(data, allItems, validCharCount));
             }
             else {
-                accountData.set(key, toExecute(data, charNames.length));
+                accountData.set(key, toExecute(data, validCharCount));
             }
         }
         catch (e) {

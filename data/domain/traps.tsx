@@ -1,10 +1,13 @@
+import { Item } from "./items";
 
 export enum TrapSet {
     Cardboard = 0,
     Silkskin = 1,
     Wooden = 2,
     Natural = 3,
-    Steel = 4
+    Steel = 4,
+    Meaty = 5,
+    Royal = 6,
 }
 
 const trapBoxInfo = [
@@ -62,9 +65,11 @@ export class Trap {
     timeSincePut: number;
     trapDuration: number;
     trapType: TrapSet;
+    placed: boolean;
 
     constructor(playerID: number, trapArray: Array<any>) {
         this.playerID = playerID;
+        this.placed = trapArray[0] != -1;
         this.critterName = trapArray[3];
         this.timeSincePut = trapArray[2];
         this.trapDuration = trapArray[6];
@@ -75,11 +80,24 @@ export class Trap {
         return this.timeSincePut >= this.trapDuration;
     }
 
+    static getMaxTraps = (trap: Item | undefined) => {
+        if (trap == undefined) {
+            return 1;
+        }
+        switch (trap.internalName) {
+            case "TrapBoxSet1": return 2;
+            case "TrapBoxSet2": return 2;
+            case "TrapBoxSet3": return 3;
+            case "TrapBoxSet4": return 4;
+            case "TrapBoxSet5": return 5;
+            case "TrapBoxSet6": return 6;
+            case "TrapBoxSet7": return 7;
+            default: return 1;
+        }
+    }
+
     getBenefits = () => {
         const boxData = trapBoxInfo[this.trapType].find(info => Math.round(info[0]) == Math.round(this.trapDuration));
-        if (this.playerID == 5) {
-            console.log(this.playerID, this.trapType, this.trapDuration, boxData);
-        }
         if (boxData) {
             if (boxData[3] == 0) {
                 return [`x${Math.round(boxData[1] * 10) / 10} Qty`, `x${Math.round(boxData[2] * 10) / 10} Exp`]
@@ -98,7 +116,7 @@ export default function parseTraps(allTraps: Array<any>) {
     const parsedData = allTraps.map((playerArray, pIndex) => {
         try {
             const parsedPlayerData: Array<any> = JSON.parse(playerArray);
-            const filteredTraps = parsedPlayerData.filter(trapData => trapData[0] != -1);
+            const filteredTraps = parsedPlayerData//.filter(trapData => trapData[0] != -1);
             return filteredTraps.map(trapData => {
                 return new Trap(pIndex, trapData)
             });

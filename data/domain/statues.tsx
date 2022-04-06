@@ -67,7 +67,7 @@ export class Statue {
                 case "Feasty Statue":
                     talentBonus += (player.talents.find(x => x.skillIndex == 37)?.getBonus() ?? 0) / 100;
                     break;
-                default: talentBonus = 1;   
+                default: talentBonus = 1;
             }
         }
         return this.level * this.statueData.bonus * talentBonus;
@@ -112,9 +112,13 @@ export default function parseStatues(allStatues: Array<Array<Array<number>>>, go
     const parsedData = [...Array(allStatues.length)].map((_, pIndex) => { // for each player we have data for
         const playerStatues = new PlayerStatues(pIndex);
         playerStatues.statues.forEach((statue, statueIndex) => {
-            statue.level = allStatues[pIndex][statueIndex][StatueConst.LevelIndex];
-            statue.progress = allStatues[pIndex][statueIndex][StatueConst.ProgressIndex];
-            statue.isGold = goldStatues[statueIndex];
+            if (allStatues[pIndex].length > statueIndex) {
+                statue.level = allStatues[pIndex][statueIndex][StatueConst.LevelIndex];
+                statue.progress = allStatues[pIndex][statueIndex][StatueConst.ProgressIndex];
+                if (goldStatues.length > statueIndex) {
+                    statue.isGold = goldStatues[statueIndex];
+                }
+            }
         })
 
         return playerStatues;
