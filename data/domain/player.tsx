@@ -10,11 +10,19 @@ import { notUndefined } from '../utility';
 import { Cloudsave } from "./cloudsave";
 import { EnemyInfo } from "./enemies";
 import { MapInfo } from "./maps";
-import { Chip, chipSlotReq } from "./lab";
+import { Chip, chipSlotReq, Lab } from "./lab";
 import { Alchemy } from "./alchemy";
 import { Guild } from "./guild";
 import { Bribe } from "./bribes";
 import { Stat } from "./base/stat";
+import { Family } from "./family";
+import { Prayer } from "./prayers";
+import { Cooking } from "./cooking";
+import { Breeding } from "./breeding";
+import { Dungeons, PassiveType } from "./dungeons";
+import { Stamp } from "./stamps";
+import { Achievement, AchievementConst } from "./achievements";
+import { safeJsonParse } from "./idleonData";
 
 export class PlayerStats {
     strength: number = 0;
@@ -264,11 +272,11 @@ export class Anvil {
 }
 
 export class SkillData {
-    constructor(public level: number, public currentXP: number, public xpReq: number) {}
+    constructor(public level: number, public currentXP: number, public xpReq: number) { }
 }
 
 export class ChipSlot {
-    constructor(public chip: Chip | undefined, public lvlReq: number) {}
+    constructor(public chip: Chip | undefined, public lvlReq: number) { }
 }
 
 interface LabInfo {
@@ -306,7 +314,7 @@ export class Player {
     activePrayers: number[] = [];
     cooldown: Map<Talent, number> = new Map();
     invBagsUsed: Record<string, number> = {};
-    labInfo: LabInfo = { 
+    labInfo: LabInfo = {
         lineWidth: 0,
         supped: false,
         chips: [...Array(chipSlotReq.length)].map((_, index) => new ChipSlot(undefined, chipSlotReq[index])),
@@ -315,6 +323,7 @@ export class Player {
 
     // Stats
     doubleClaimChance: Stat = new Stat("Double XP Chance", "%");
+    monsterCash: Stat = new Stat("Monster Cash", "x");
 
     constructor(playerID: number, playerName: string) {
         this.playerID = playerID;
@@ -405,6 +414,52 @@ export class Player {
         this.doubleClaimChance.sources.push({ name: "Guild", value: guildBonus });
         this.doubleClaimChance.max = 75;
     }
+
+    setMonsterCash = (strBubbleBonus: number, wisBubbleBonus: number, agiBubbleBonus: number, mealBonus: number,
+        petArenaBonus1: number, petArenaBonus2: number, labBonus: number, vialBonus: number,
+        dungeonBonus: number, guildBonus: number, family: Family, goldFoodStampBonus: number, goldFoodAchievement: boolean, prayers: Prayer[]) => {
+        const gearBonus = this.gear.equipment.reduce((sum, gear) => sum += gear?.getMiscBonus("Money") ?? 0, 0);
+        const goldenFoodBonus = this.gear.food.filter(food => food && food.goldenFood != undefined && food.description.includes("Boosts coins dropped"))
+            .reduce((sum, food) => sum += (food as Food).goldFoodBonus(food?.count ?? 0, this.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus() ?? 0, goldFoodStampBonus, goldFoodAchievement)), 0);
+        const cardBonus = Card.GetTotalBonusForId(this.cardInfo?.equippedCards ?? [], 11);
+        const poBox = this.postOffice.find(box => box.index == 13);
+        const boxBonus = poBox?.bonuses[2].getBonus(poBox.level, 2) ?? 0;
+        const prayerBonus = this.activePrayers.filter(prayer => prayer == 8) ? (this.activePrayers.map(prayer => prayers.find(actual => actual.index == prayer && prayer == 8)?.getBonus() ?? 0)[0]) : 0;
+
+        const bubbleAtrributeMath = (strBubbleBonus * Math.floor(this.stats.strength / 250))
+            + (agiBubbleBonus * Math.floor(this.stats.agility / 250))
+            + (wisBubbleBonus * Math.floor(this.stats.wisdom / 250))
+        const baseMath = (1 + (bubbleAtrributeMath / 100)) *
+            (1 + mealBonus / 100) *
+            (1 + (petArenaBonus1 * 0.5) + petArenaBonus2) *
+            (1 + labBonus / 100) *
+            (1 + prayerBonus / 100)
+
+        const currentWorldBonus = 1 + Math.floor(this.currentMapId / 50);
+        this.monsterCash.value = baseMath *
+            (1 + (vialBonus + gearBonus + cardBonus + (this.talents.find(talent => talent.skillIndex == 22)?.getBonus() ?? 0)
+                + dungeonBonus + boxBonus + (guildBonus * currentWorldBonus) +
+                (this.talents.find(talent => talent.skillIndex == 643)?.getBonus() ?? 0) +
+                (this.talents.find(talent => talent.skillIndex == 644)?.getBonus() ?? 0) +
+                goldenFoodBonus) / 100);
+
+        this.monsterCash.sources.push({ name: "Equipment", value: gearBonus });
+        this.monsterCash.sources.push({ name: "Gold Food", value: goldenFoodBonus });
+        this.monsterCash.sources.push({ name: "Card", value: cardBonus });
+        this.monsterCash.sources.push({ name: "Post Office", value: boxBonus });
+        this.monsterCash.sources.push({ name: "Prayer", value: prayerBonus });
+        this.monsterCash.sources.push({ name: "Alchemy Bubbles (STR/AGI/WIS)", value: bubbleAtrributeMath });
+        this.monsterCash.sources.push({ name: "Vial", value: vialBonus });
+        this.monsterCash.sources.push({ name: "Meals", value: mealBonus });
+        this.monsterCash.sources.push({ name: "Pet Arena", value: ((petArenaBonus1 * 0.5) + petArenaBonus2) * 100 });
+        this.monsterCash.sources.push({ name: "Guild + World bonus", value: (guildBonus * currentWorldBonus) });
+        this.monsterCash.sources.push({ name: "Lab Bonus", value: labBonus });
+        this.monsterCash.sources.push({ name: "Dungeons Bonus", value: dungeonBonus });
+        this.monsterCash.sources.push({
+            name: "Talents", value: (this.talents.find(talent => talent.skillIndex == 643)?.getBonus() ?? 0) +
+                (this.talents.find(talent => talent.skillIndex == 644)?.getBonus() ?? 0) + (this.talents.find(talent => talent.skillIndex == 22)?.getBonus() ?? 0)
+        });
+    }
 }
 
 const keyFunctionMap: Record<string, Function> = {
@@ -445,10 +500,10 @@ const keyFunctionMap: Record<string, Function> = {
             // otherwise try and guess the AFK time based by adding the time gap from now and last save time;
             player.afkFor = (timeAway['Player'] - (doc.get(`PTimeAway_${player.playerID}`) * 1000)) + gapFromLastSave;
         }
-        
+
     },
     "playerstuff": (doc: Cloudsave, player: Player) => {
-        const jsonStuff = JSON.parse(doc.get(`PlayerStuff_${player.playerID}`));
+        const jsonStuff = safeJsonParse(doc, `PlayerStuff_${player.playerID}`, []);
         player.currentCharge = jsonStuff[0];
     },
     "cards": (doc: Cloudsave, player: Player) => {
@@ -464,7 +519,7 @@ const keyFunctionMap: Record<string, Function> = {
         }).filter(notUndefined)
     },
     "activePrayers": (doc: Cloudsave, player: Player) => {
-        const activePrayers = JSON.parse(doc.get(`Prayers_${player.playerID}`)) as number[];
+        const activePrayers = safeJsonParse(doc, `Prayers_${player.playerID}`, []) as number[];
         player.activePrayers = activePrayers.filter((prayer) => prayer != -1);
     },
     "cooldowns": (doc: Cloudsave, player: Player) => {
@@ -555,13 +610,13 @@ const parseStats = (stats: number[], lvZero: number[], skillXP: Array<number>, s
 }
 
 const parseEquipment = (
-        equipment: Array<Record<number, string>>,
-        equipCount: Array<Record<number, number>>,
-        equipStones: Record<number, StoneProps>,
-        toolStones: Record<number, StoneProps>,
-        player: Player,
-        allItems: Item[]
-    ) => {
+    equipment: Array<Record<number, string>>,
+    equipCount: Array<Record<number, number>>,
+    equipStones: Record<number, StoneProps>,
+    toolStones: Record<number, StoneProps>,
+    player: Player,
+    allItems: Item[]
+) => {
     let playerEquipment = new PlayerEquipment();
     equipment?.forEach((data, equipIndex) => {
         if (equipIndex == 0) { // armor 
@@ -582,7 +637,7 @@ const parseEquipment = (
                 if (theItem) {
                     theItem.addStone(toolStones[Number(location)])
                 }
-                else if (name != "Blank"){
+                else if (name != "Blank") {
                     console.log("Tool not found", name, location);
                 }
                 playerEquipment.tools.push(theItem);
@@ -606,9 +661,9 @@ const parseEquipment = (
     player.gear = playerEquipment;
 }
 
-export default function parsePlayers(doc: Cloudsave, accountData: Map<string, any>, allItems: Item[]) {
+export default function parsePlayers(doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], validCharCount: number) {
     const playerNames = accountData.get("playerNames") as string[];
-    let parsedData = playerNames.map((playerName, index) => {
+    let parsedData = playerNames.slice(0, validCharCount).map((playerName, index) => {
         let player = new Player(index, playerName);
 
         Object.entries(keyFunctionMap).forEach(([key, toExecute]) => {
@@ -662,6 +717,12 @@ export const updatePlayers = (data: Map<string, any>) => {
     const alchemy = data.get("alchemy") as Alchemy;
     const guild = data.get("guild") as Guild;
     const bribes = data.get("bribes") as Bribe[];
+    const cooking = data.get("cooking") as Cooking;
+    const breeding = data.get("breeding") as Breeding;
+    const lab = data.get("lab") as Lab;
+    const dungeons = data.get("dungeons") as Dungeons;
+    const stamps = data.get("stamps") as Stamp[][];
+    const achievementsInfo = data.get("achievements") as Achievement[];
 
     // Double claim chance.
     const doubleChanceBubbleBonus = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).find(bubble => bubble.name == "Afk Expexp")?.getBonus() ?? 0;
@@ -671,5 +732,169 @@ export const updatePlayers = (data: Map<string, any>) => {
         player.setDoubleClaimChance(doubleChanceBubbleBonus, doubleChanceBribeBonus, doubleChanceGuildBonus);
     })
 
+    // Monster Cash.
+    const strBubbleBonus = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).find(bubble => bubble.name == "Penny Of Strength")?.getBonus() ?? 0;
+    const wisBubbleBonus = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).find(bubble => bubble.name == "Dollar Of Agility")?.getBonus() ?? 0;
+    const agiBubbleBonus = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).find(bubble => bubble.name == "Nickel Of Wisdom")?.getBonus() ?? 0;
+    const mealBonus = cooking.meals.filter(meal => meal.bonusKey == "Cash").reduce((sum, meal) => sum += meal.getBonus() ?? 0, 0);
+    const petArenaBonus1 = breeding.hasBonus(5) ? 1 : 0;
+    const petArenaBonus2 = breeding.hasBonus(14) ? 1 : 0;
+    const labBonus = 0; // Need to do this properly. //lab.bonuses.find(bonus => bonus.index == 9).
+    const vialBonus = alchemy.vials.find(vial => vial.name == "Dieter Drink")?.getBonus() ?? 0;
+    const dungeonBonus = dungeons.passives.get(PassiveType.Flurbo)?.find(bonus => bonus.effect == "Monster Cash")?.getBonus() ?? 0;
+    const guildBonus = guild.guildBonuses.find(bonus => bonus.index == 8)?.getBonus() ?? 0;
+    const family = data.get("family") as Family;
+    const goldFoodStampBonus = stamps.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC7")?.getBonus() ?? 0;
+    const goldFoodAchievement = achievementsInfo[AchievementConst.GoldFood].completed;
+    const prayers = data.get("prayers") as Prayer[];
+    players.forEach(player => {
+        player.setMonsterCash(strBubbleBonus, wisBubbleBonus, agiBubbleBonus, mealBonus,
+            petArenaBonus1, petArenaBonus2, labBonus, vialBonus,
+            dungeonBonus, guildBonus, family, goldFoodStampBonus, goldFoodAchievement, prayers);
+    })
+
     return players;
 }
+
+
+// if ("FoodNOTconsume" == n) {
+//     var Ki = 90 + 5 * w._customBlock_MainframeBonus(108),
+//         $i = b.engine.getGameAttribute("DNSM"),
+//         eo = null != d.AlchBubbles ? $i.getReserved("AlchBubbles") : $i.h.AlchBubbles,
+//         to = null != d.nonFoodACTIVE ? eo.getReserved("nonFoodACTIVE") : eo.h.nonFoodACTIVE,
+//         no = Math.min(Ki, 98 + Math.min(parsenum(to), 1)),
+//         so = Math.max(1, w._customBlock_MainframeBonus(108)),
+//         ao = t._customBlock_GetTalentNumber(1, 458),
+//         Ao = b.engine.getGameAttribute("DNSM"),
+//         ro = null != d.BoxRewards ? Ao.getReserved("BoxRewards") : Ao.h.BoxRewards,
+//         lo = null != d.NonConsume ? ro.getReserved("NonConsume") : ro.h.NonConsume,
+//         io = parsenum(lo),
+//         oo = N._customBlock_CardBonusREAL(16),
+//         uo = b.engine.getGameAttribute("DNSM"),
+//         go = null != d.StarSigns ? uo.getReserved("StarSigns") : uo.h.StarSigns,
+//         mo = null != d.NoConsumeFood ? go.getReserved("NoConsumeFood") : go.h.NoConsumeFood,
+//         co = parsenum(mo),
+//         po = b.engine.getGameAttribute("DNSM"),
+//         ho = null != d.AlchBubbles ? po.getReserved("AlchBubbles") : po.h.AlchBubbles,
+//         bo = null != d.nonFoodACTIVE ? ho.getReserved("nonFoodACTIVE") : ho.h.nonFoodACTIVE;
+//     return Math.min(no, so * (ao + (io + (oo + co + parsenum(bo)))));
+// }
+// if ("MonsterCash" == n) {
+//     var fo = b.engine.getGameAttribute("DNSM"),
+//         yo = null != d.AlchBubbles ? fo.getReserved("AlchBubbles") : fo.h.AlchBubbles,
+//         Ro = null != d.CashSTR ? yo.getReserved("CashSTR") : yo.h.CashSTR,
+//         vo = parsenum(Ro) * Math.floor(H._customBlock_TotalStats("STR") / 250),
+//         Fo = b.engine.getGameAttribute("DNSM"),
+//         No = null != d.AlchBubbles ? Fo.getReserved("AlchBubbles") : Fo.h.AlchBubbles,
+//         Io = null != d.CashAGI ? No.getReserved("CashAGI") : No.h.CashAGI,
+//         Do = parsenum(Io) * Math.floor(H._customBlock_TotalStats("AGI") / 250),
+//         Eo = b.engine.getGameAttribute("DNSM"),
+//         So = null != d.AlchBubbles ? Eo.getReserved("AlchBubbles") : Eo.h.AlchBubbles,
+//         Go = null != d.CashWIS ? So.getReserved("CashWIS") : So.h.CashWIS,
+//         To =
+//             (1 + (vo + (Do + parsenum(Go) * Math.floor(H._customBlock_TotalStats("WIS") / 250))) / 100) *
+//             (1 + C._customBlock_MealBonus("Cash") / 100) *
+//             (1 + (0.5 * w._customBlock_Breeding("PetArenaBonus", "0", 5, 0) + w._customBlock_Breeding("PetArenaBonus", "0", 14, 0))) *
+//             (1 + w._customBlock_MainframeBonus(9) / 100) *
+//             (1 + w._customBlock_prayersReal(8, 0) / 100),
+//         Uo = b.engine.getGameAttribute("DNSM"),
+//         _o = null != d.AlchVials ? Uo.getReserved("AlchVials") : Uo.h.AlchVials,
+//         Mo = null != d.MonsterCash ? _o.getReserved("MonsterCash") : _o.h.MonsterCash,
+//         Vo = parsenum(Mo),
+//         Co = N._customBlock_EtcBonuses("3"),
+//         Po = N._customBlock_CardBonusREAL(11),
+//         Bo = t._customBlock_GetTalentNumber(1, 22),
+//         Oo = w._customBlock_FlurboShop(4),
+//         xo = b.engine.getGameAttribute("DNSM"),
+//         ko = null != d.BoxRewards ? xo.getReserved("BoxRewards") : xo.h.BoxRewards,
+//         wo = null != d["13c"] ? ko.getReserved("13c") : ko.h["13c"];
+//     return (
+//         To *
+//         (1 +
+//             (Vo +
+//                 (Co +
+//                     (Po +
+//                         (Bo +
+//                             (Oo +
+//                                 (parsenum(wo) +
+//                                     (w._customBlock_GuildBonuses(8) * (1 + Math.floor(b.engine.getGameAttribute("CurrentMap") / 50)) +
+//                                         (t._customBlock_TalentCalc(643) + (t._customBlock_TalentCalc(644) + C._customBlock_GoldFoodBonuses("MonsterCash")))))))))) /
+//                 100)
+//     );
+// }
+// if ("KillPerKill" == n) {
+//     if (1 == H._customBlock_RunCodeOfTypeXforThingY("OverkillStuffs", "3")) {
+//         var Xo = Math.max(1, w._customBlock_MainframeBonus(4)),
+//             zo = t._customBlock_GetTalentNumber(1, 109),
+//             Lo = w._customBlock_WorkbenchStuff("MultiKillTOTAL", 0, 0),
+//             Qo = b.engine.getGameAttribute("DNSM"),
+//             Wo = null != d.AlchBubbles ? Qo.getReserved("AlchBubbles") : Qo.h.AlchBubbles,
+//             Yo = null != d.kpkACTIVE ? Wo.getReserved("kpkACTIVE") : Wo.h.kpkACTIVE;
+//         return Xo * (1 + (zo + (Lo + (parsenum(Yo) + w._customBlock_prayersReal(13, 0)))) / 100);
+//     }
+//     var Zo = Math.max(1, w._customBlock_MainframeBonus(4)),
+//         Ho = t._customBlock_GetTalentNumber(1, 109),
+//         Jo = b.engine.getGameAttribute("DNSM"),
+//         jo = null != d.AlchBubbles ? Jo.getReserved("AlchBubbles") : Jo.h.AlchBubbles,
+//         qo = null != d.kpkACTIVE ? jo.getReserved("kpkACTIVE") : jo.h.kpkACTIVE;
+//     return Zo * (1 + (Ho + (parsenum(qo) + w._customBlock_prayersReal(13, 0))) / 100);
+// }
+// if ("CrystalSpawn" == n) {
+//     var Ko = 1 + t._customBlock_GetTalentNumber(1, 26) / 100,
+//         $o = b.engine.getGameAttribute("DNSM"),
+//         eu = null != d.BoxRewards ? $o.getReserved("BoxRewards") : $o.h.BoxRewards,
+//         tu = null != d.CrystalSpawn ? eu.getReserved("CrystalSpawn") : eu.h.CrystalSpawn;
+//     return (
+//         5e-4 *
+//         Ko *
+//         (1 + (parsenum(tu) + w._customBlock_Shrine(6)) / 100) *
+//         (1 + t._customBlock_GetTalentNumber(1, 619) / 100) *
+//         (1 + t._customBlock_StampBonusOfTypeX("CrySpawn") / 100) *
+//         (1 + N._customBlock_CardBonusREAL(14) / 100)
+//     );
+// }
+// if ("GiantMob" == n) {
+//     if (5 < w._customBlock_prayersReal(5, 0)) {
+//         var nu = b.engine.getGameAttribute("OptionsListAccount")[57];
+//         if (5 > parsenum(nu)) {
+//             var su = b.engine.getGameAttribute("OptionsListAccount")[57],
+//                 au = 1 / ((100 + 50 * Math.pow(parsenum(su) + 1, 2)) * (1 + w._customBlock_prayersReal(18, 1) / 100)),
+//                 Au = w._customBlock_Shrine(6),
+//                 ru = b.engine.getGameAttribute("DNSM"),
+//                 lu = null != d.AlchVials ? ru.getReserved("AlchVials") : ru.h.AlchVials,
+//                 iu = null != d.GiantMob ? lu.getReserved("GiantMob") : lu.h.GiantMob;
+//             return au * (1 + (Au + parsenum(iu)) / 100);
+//         }
+//         var ou = b.engine.getGameAttribute("OptionsListAccount")[57],
+//             uu = 2 * Math.pow(parsenum(ou) + 1, 1.95) * (1 + w._customBlock_prayersReal(18, 1) / 100),
+//             gu = b.engine.getGameAttribute("OptionsListAccount")[57],
+//             mu = parsenum(gu),
+//             du = b.engine.getGameAttribute("OptionsListAccount")[57],
+//             cu = 1 / (uu * Math.pow(mu + 1, 1.5 + parsenum(du) / 15)),
+//             pu = w._customBlock_Shrine(6),
+//             hu = b.engine.getGameAttribute("DNSM"),
+//             bu = null != d.AlchVials ? hu.getReserved("AlchVials") : hu.h.AlchVials,
+//             fu = null != d.GiantMob ? bu.getReserved("GiantMob") : bu.h.GiantMob;
+//         return cu * (1 + (pu + parsenum(fu)) / 100);
+//     }
+//     return 0;
+// }
+// if ("CardChanceMulti" == n) {
+//     var rm = C._customBlock_GetBribeBonus("10"),
+//         lm = b.engine.getGameAttribute("DNSM"),
+//         im = null != d.StarSigns ? lm.getReserved("StarSigns") : lm.h.StarSigns,
+//         om = null != d.pctCardDrop ? im.getReserved("pctCardDrop") : im.h.pctCardDrop,
+//         um = parsenum(om) + N._customBlock_CardBonusREAL(12),
+//         gm = b.engine.getGameAttribute("DNSM"),
+//         mm = null != d.AlchVials ? gm.getReserved("AlchVials") : gm.h.AlchVials,
+//         dm = null != d.CardDrop ? mm.getReserved("CardDrop") : mm.h.CardDrop,
+//         cm = parsenum(dm),
+//         pm = t._customBlock_StampBonusOfTypeX("CardDrop"),
+//         hm = t._customBlock_GetTalentNumber(1, 28),
+//         bm = w._customBlock_GuildBonuses(12),
+//         fm = N._customBlock_EtcBonuses("26"),
+//         ym = b.engine.getGameAttribute("DNSM"),
+//         Rm = null != d.AlchBubbles ? ym.getReserved("AlchBubbles") : ym.h.AlchBubbles,
+//         vm = null != d.CardDropz ? Rm.getReserved("CardDropz") : Rm.h.CardDropz;
+//     return 1.2 + ((rm + (um + cm + (pm + (hm + (bm + (fm + parsenum(vm))))))) / 100) * (1 + t._customBlock_GetTalentNumber(1, 628) / 100);
+// }
