@@ -315,7 +315,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                         player.killInfo.has(player.currentMapId) &&
                         (MapInfo.find(map => map.id == player.currentMapId)?.portalRequirements ?? []).reduce((sum, req) => sum += req, 0) > 0 &&
                         <Text size="small">
-                            Portal Requirement: {nFormatter(player.killInfo.get(player.currentMapId) ?? 0)} / [{MapInfo.find(map => map.id == player.currentMapId)?.portalRequirements.map(req => nFormatter(req))}]
+                            Portal Requirement: {nFormatter(player.killInfo.get(player.currentMapId) ?? 0)} / [{MapInfo.find(map => map.id == player.currentMapId)?.portalRequirements.map(req => nFormatter(req)).join(',')}]
                         </Text>
                     }
                     {
@@ -687,14 +687,18 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
         const stampData = theData.get("stamps") as Stamp[][];
         const achievementsInfo = theData.get("achievements") as Achievement[];
         const dungeonsData = theData.get("dungeons") as Dungeons;
+        const players = theData.get("players") as Player[];
 
-        if (shrines && prayers && saltLick && playerStatues && family && stampData && achievementsInfo) {
+        if (shrines && prayers && saltLick && playerStatues && family && stampData && achievementsInfo && players) {
             const saltLickBonus = saltLick.getBonus(3);
             const dungeonBonus = (dungeonsData.passives.get(PassiveType.Flurbo) ?? [])[2]?.getBonus() ?? 0; // Lava is looking at the wrong bonus.
             const goldFoodStampBonus = stampData.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC7")?.getBonus() ?? 0;
             const goldFoodAchievement = achievementsInfo[AchievementConst.GoldFood].completed;
             const allSkillXP = Skilling.getAllSkillXP(player, shrines, playerStatues, prayers, saltLickBonus, dungeonBonus, family, goldFoodStampBonus, goldFoodAchievement);
-            const xpMulti = player.anvil.getXPMulti(player, allSkillXP);
+
+            // todo handle more then 1 mman somehow.
+            const mmanBonus = players.find(player => player.classId == ClassIndex.Maestro)?.talents.find(talent => talent.skillIndex == 42)?.getBonus() ?? 0;
+            const xpMulti = player.anvil.getXPMulti(player, allSkillXP, mmanBonus);
             return (100 * (player.anvil.getXP(xpMulti) - 1));
         }
         return 0;
