@@ -1,4 +1,3 @@
-import { math } from "polished";
 import { lavaFunc, range } from "../utility"
 import { Achievement } from "./achievements";
 
