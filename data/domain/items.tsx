@@ -409,12 +409,16 @@ export class Item {
 
     getMiscBonus = (type: string) => {
         let bonusTotal = 0;
+        // This is a keychain .. I think.
+        if (this.itemStats.filter(stat => stat.stoneName == "Nothing").length > 0) {
+            return this.itemStats.filter(stat => stat.extra.toLowerCase().includes(type.toLowerCase())).reduce((total, stat) => total += stat.getValue(), 0);
+        }
         if (this.miscUp1.toLowerCase().includes(type.toLowerCase())) {
             bonusTotal += this.itemStats.find(stat => stat.stoneName == "UQ1val")?.getValue() ?? 0;
         }
 
         if (this.miscUp2.toLowerCase().includes(type.toLowerCase())) {
-            bonusTotal += this.itemStats.find(stat => stat.stoneName == "UQ2val")?.getValue() ?? 0;
+            bonusTotal += this.itemStats.find(stat => stat.stoneName == "UQ2val" || stat.extra.toLowerCase().includes(type.toLowerCase()))?.getValue() ?? 0;
         }
 
         return bonusTotal;
