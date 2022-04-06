@@ -13,7 +13,7 @@ import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 import CoinsDisplay from '../../components/coinsDisplay';
 import { AppContext } from '../../data/appContext';
 import { Cooking as CookingDomain, Kitchen, KitchenStatus, UpgradeType } from '../../data/domain/cooking';
-import { getCoinsArray, nFormatter } from '../../data/utility';
+import { getCoinsArray, nFormatter, toTime } from '../../data/utility';
 
 
 function KitchenUpgrade({ title, level, spiceIndex, cost, costColor }: { title: string, level: number, spiceIndex: number, cost: number, costColor: string }) {
@@ -217,7 +217,8 @@ function Cooking() {
                                                     <Text>Bonus: {meal.getBonusText()}</Text>
                                                     {/* <Text>Time: {meal.discoveryTime}</Text> */}
                                                     <Text>Chance: {nFormatter(meal.discoveryChance * 100, "Smaller")}%</Text>
-                                                    <Text size="xsmall">* Chance is based on your first kitchen luck stat.</Text>
+                                                    <Text>Time: {toTime(meal.discoveryTime)}</Text>
+                                                    <Text size="xsmall">* Chance/Time is based on your first kitchen luck stat.</Text>
                                                 </Box>
                                             }
                                             direction={TipDirection.Down}
