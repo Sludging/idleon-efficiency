@@ -193,7 +193,7 @@ export class Anvil {
     //         la = null != d.TotStatSkMAP ? ra.getReserved("TotStatSkMAP") : ra.h.TotStatSkMAP;
     //     return null != d[t] ? la.getReserved(t) : la.h[t];
     // }
-    getXPMulti = (player: Player, allSkillsXP: number) => {
+    getXPMulti = (player: Player, allSkillsXP: number, mmanBonus: number) => {
         const focusedSoulBonus = player.talents.find(talent => talent.skillIndex == 265)?.getBonus() ?? 0;
         const stampBonus = 0; // TODO: Real look up, but currently stamp isn't obtainable.
         const happyDudeBonus = player.talents.find(talent => talent.skillIndex == 75)?.getBonus() ?? 0;
@@ -201,9 +201,8 @@ export class Anvil {
         const smithingCardBonus = 1 + Card.GetTotalBonusForId(player.cardInfo?.equippedCards ?? [], 49) / 100;
         const blackSmithBox = player.postOffice[PostOfficeConst.BlacksmithBoxIndex];
         const postOfficeBonus = blackSmithBox.level > 0 ? blackSmithBox.bonuses[0].getBonus(blackSmithBox.level, 0) : 0;
-        const masteroXPBuff = 0; // TODO: Actual mastero math!
 
-        return Math.max(0.1, math1 * smithingCardBonus * (1 + (postOfficeBonus / 100)) + (allSkillsXP + masteroXPBuff) / 100);
+        return Math.max(0.1, math1 * smithingCardBonus * (1 + (postOfficeBonus / 100)) + (allSkillsXP + mmanBonus) / 100);
     }
 
     // return (
@@ -231,7 +230,7 @@ export class Anvil {
     getSpeedBonusFromAgility = (agility: number = 0): number => {
         let base: number = (Math.pow(agility + 1, 0.37) - 1) / 40;
         if (agility > 1000) {
-            base = ((agility - 1000) / (agility + 2500)) * 0.5 + 0.255;
+            base = ((agility - 1000) / (agility + 2500)) * 0.5 + 0.297;
         }
         return (base * 2) + 1;
     }

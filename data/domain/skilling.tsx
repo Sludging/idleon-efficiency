@@ -33,12 +33,15 @@ export class Skilling {
         const chizCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "Z9")?.getBonus() ?? 0
         const shrineBonus = shrines[ShrineConstants.ExpShrine].getBonus(player.currentMapId, chizCardBonus);
         const statueBonus = playerStatues.statues[StatueConst.SkillXpIndex].getBonus(player);
-        const prayerIncrease = prayers.find(prayer => prayer.index == 2 && player.activePrayers.includes(prayer.index))?.getBonus() ?? 0;
+        const prayerIncrease = prayers.filter(prayer => [2, 17].includes(prayer.index) && player.activePrayers.includes(prayer.index)).reduce((sum, prayer) => sum += prayer.getBonus(), 0) ?? 0;
         const prayerDecrease = prayers.filter(prayer => [1, 9].includes(prayer.index) && player.activePrayers.includes(prayer.index)).reduce((sum, prayer) => sum += prayer.getCurse(), 0) ?? 0;
         const masteroBuff = player.activeBuffs.find(talent => talent.skillIndex == 40)?.getBonus() ?? 0;
         const equipmentBonus = player.gear.equipment.reduce((sum, item) => sum += item?.getMiscBonus("Skill Exp") ?? 0, 0);
         const starSignBonus = player.starSigns.reduce((sum, sign) => sum += sign.getBonus("Skill EXP gain"), 0);
 
-        return starSignBonus + (skillingCardBonus + goldenFoodBonus) + (cardSetBonus + shrineBonus + statueBonus + (prayerIncrease - prayerDecrease + (equipmentBonus + (masteroBuff + (saltLickBonus + dungeonBonus)))));
+        const myriadBox = player.postOffice.find(box => box.index == 20)
+        const poBonus = myriadBox?.bonuses[2].getBonus(myriadBox.level, 2) ?? 0;
+
+        return starSignBonus + (skillingCardBonus + goldenFoodBonus) + (cardSetBonus + shrineBonus + statueBonus + (prayerIncrease - prayerDecrease + (equipmentBonus + (masteroBuff + (saltLickBonus + dungeonBonus + poBonus)))));
     }
 }
