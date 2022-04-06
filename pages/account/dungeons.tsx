@@ -46,7 +46,7 @@ function DungeonItems() {
                                 size="Medium"
                                 direction={TipDirection.Down}
                             >
-                                <Box key={index} border={{ size: '2px', color: item.rarity }} align="center">
+                                <Box key={index} border={{ size: '2px', color: item.rarity }} align="center" fill>
                                     <Box style={{ opacity: item.level != -1 ? 1 : 0.3 }} width={{ max: '42px', min: '42px' }}>
                                         <Box className={item.getClass()} />
                                     </Box>
@@ -225,6 +225,27 @@ function DungeonsDisplay() {
                     }
                 }
             }
+
+            // Nothing this week, show for next week
+            let nextThursday = new Date();
+            while (nextThursday.getDay() != 4) {
+                nextThursday.setSeconds(nextThursday.getSeconds() + 86400);
+            }
+            nextThursday.setHours(0);
+            nextThursday.setMinutes(0);
+            nextThursday.setSeconds(0);
+
+            // Convert from currnet timezone to UTC to do the offset.
+            nextThursday = new Date(nextThursday.getTime() - nextThursday.getTimezoneOffset() * 60 * 1000);
+            for (let index = 0; index < happyHours.length; index++) {
+                const nextHour = happyHours[index];
+                if (nextHour) {
+                    const happyHourTime = new Date(nextThursday.getTime() + nextHour * 1000);
+                    if (happyHourTime > new Date()) {
+                        return new Date(happyHourTime.getTime() - 3600 * 1000);
+                    }
+                }
+            }
         }
         return undefined;
     }, [serverVars]);
@@ -264,7 +285,8 @@ function DungeonsDisplay() {
                         {nextHappyHour &&
                             <TextAndLabel
                                 label="Next Happy Hour"
-                                text={dateToText(nextHappyHour)}
+                                textSize="small"
+                                text={`${dateToText(nextHappyHour)} (* Lava can change this at any time)`}
                             />
                         }
                     </Box>
