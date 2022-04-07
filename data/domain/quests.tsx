@@ -166,7 +166,7 @@ export class Quests {
     playerData: Record<number, Record<string, number>> = {}
 }
 
-export default function parseQuests(doc: Cloudsave, accountData: Map<string, any>, allItems: Item[]) {
+export default function parseQuests(doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], validCharCount: number) {
     const questsData = new Quests();
 
     Object.entries(questsData.npcData).flatMap(([_, npc]) => Object.entries(npc.data.quests)).forEach(([_, quest]) => {
@@ -187,7 +187,7 @@ export default function parseQuests(doc: Cloudsave, accountData: Map<string, any
     })
 
     const playerNames = accountData.get("playerNames") as string[];
-    playerNames.forEach((_, index) => {
+    playerNames.slice(0, validCharCount).forEach((_, index) => {
         questsData.playerData[index] = JSON.parse(doc.get(`QuestComplete_${index}`)) as Record<string, number>
     });
 

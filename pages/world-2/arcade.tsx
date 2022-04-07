@@ -80,8 +80,8 @@ function Arcade() {
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Arcade</Heading>
             <Box gap="small">
                 <Box direction="row">
-                    <TextAndLabel text={arcadeData?.balls.toString() ?? "0"} label="Silver balls" margin={{ right: 'medium' }} />
-                    <TextAndLabel text={arcadeData?.goldBalls.toString() ?? "0"} label="Gold balls" margin={{ right: 'medium' }}/>
+                    <TextAndLabel text={arcadeData?.balls?.toString() ?? "0"} label="Silver balls" margin={{ right: 'medium' }} />
+                    <TextAndLabel text={arcadeData?.goldBalls?.toString() ?? "0"} label="Gold balls" margin={{ right: 'medium' }}/>
                     <ComponentAndLabel component={<StaticTime fromSeconds={ballsPerSecond} size={TimeDisplaySize.Small} /> } label="Time per ball" margin={{ right: 'medium' }}/>
                     <ComponentAndLabel component={<StaticTime fromSeconds={maxClaimTime} size={TimeDisplaySize.Small} /> } label="Max Claim time" margin={{ right: 'medium' }}/>
                     <TextAndLabel text={`${ballsToClaim?.toString() ?? "0"}/${Math.floor(maxClaimTime/ballsPerSecond)}`} label="Balls to claim" />

@@ -21,6 +21,7 @@ import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 
 interface PlayerTrapProps {
     traps: Array<Trap>
+    maxTraps: number
 }
 
 function PlayerTraps(props: PlayerTrapProps) {
@@ -45,27 +46,44 @@ function PlayerTraps(props: PlayerTrapProps) {
     }
 
     return (
-        <Grid columns={{count: 8, size: ["50px", "12.5%"]}} gap="small" justify="start">
+        <Grid columns={{ count: 8, size: ["50px", "12.5%"] }} gap="small" justify="start">
             {
                 props.traps.map((trap, index) => {
+                    if (!trap.placed && index >= props.maxTraps) {
+                        return null
+                    }
                     return (
-                        <Box key={`trap_${index}`} style={{ background: trap.isReady() ? 'red' : 'none' }} align="center">
-                            <TipDisplay
-                                body={
-                                    <Box>
-                                        <Text>Trap Type: {TrapSet[trap.trapType]}</Text>
-                                        <Text>Original Duration: {formatTime(trap.trapDuration)?.replace("in ", "") ?? ""}</Text>
-                                    </Box>
-                                }
-                                size='medium'
-                                direction={TipDirection.Down}
-                                heading='Trap Info'>
-                                <Box width={{max: size == "small" ? '30px': '50px'}} >
-                                    <Box className={`icons-3636 icons-${trap.critterName}_x1`} />
+                        <Box key={index} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} height={{ min: '82px', max: '82px' }}>
+                            {!trap.placed ?
+                                <Box border={{ color: 'orange-1' }} align="center" width={{ max: '100px', min: '100px' }} height={{ min: '82px', max: '82px' }} justify='center'>
+                                    <Text size="xsmall" color="accent-3">Empty</Text>
+                                </Box> :
+                                <Box key={`trap_${index}`} style={{ background: trap.isReady() ? 'red' : 'none' }} align="center" fill>
+                                    <TipDisplay
+                                        body={
+                                            <Box>
+                                                <Text>Trap Type: {TrapSet[trap.trapType]}</Text>
+                                                <Text>Original Duration: {formatTime(trap.trapDuration)?.replace("in ", "") ?? ""}</Text>
+                                                {
+                                                    trap.getBenefits().map((bonus, index) => (
+                                                        <Box key={`bonus_${index}`}>
+                                                            <Text>{bonus}</Text>
+                                                        </Box>
+                                                    ))
+                                                }
+
+                                            </Box>
+                                        }
+                                        size='medium'
+                                        direction={TipDirection.Down}
+                                        heading='Trap Info'>
+                                        <Box width={{ max: size == "small" ? '30px' : '50px' }} >
+                                            <Box className={`icons-3636 icons-${trap.critterName}_x1`} />
+                                        </Box>
+                                    </TipDisplay>
+                                    <Text textAlign='center' size="xsmall">{formatTime(trap.trapDuration - trap.timeSincePut)}</Text>
                                 </Box>
-                            </TipDisplay>
-                            <Text textAlign='center' size="xsmall">{formatTime(trap.trapDuration - trap.timeSincePut)}</Text>
-                            
+                            }
                         </Box>
                     )
                 })
@@ -104,22 +122,23 @@ function Traps() {
                 <Table>
                     <TableHeader>
                         <TableRow>
-                            <TableCell >Player Name</TableCell >
-                            <TableCell >Box Set</TableCell >
-                            <TableCell >Traps</TableCell >
+                            <TableCell>Player Name</TableCell >
+                            <TableCell>Box Set</TableCell >
+                            <TableCell>Traps</TableCell >
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         {
                             playerTraps.filter(x => playerNames[x[0]?.playerID] != undefined).map((trapsData, index) => {
                                 const boxSet = playerData?.find((player) => player.playerID == trapsData[0]?.playerID)?.gear.tools.find((tool) => tool?.type == "Trap Box Set");
-                            const skillLevel = playerData?.find((player) => player.playerID == trapsData[0]?.playerID)?.skills.get(SkillsIndex.Trapping)?.level;
+                                const skillLevel = playerData?.find((player) => player.playerID == trapsData[0]?.playerID)?.skills.get(SkillsIndex.Trapping)?.level;
+                                const maxTraps = Trap.getMaxTraps(boxSet);
                                 return (
                                     <TableRow key={`traps_${index}`}>
                                         <TableCell><Box><Text size="small">{playerNames[trapsData[0]?.playerID]}</Text><Text title={"Trapping level"} size="small">(Level: {skillLevel})</Text></Box></TableCell>
-                                        <TableCell><Box title={boxSet?.displayName} width={{max: '50px', min: '50px'}}><Box className={boxSet?.getClass()} /></Box></TableCell>
+                                        <TableCell><Box title={boxSet?.displayName} width={{ max: '50px', min: '50px' }}><Box className={boxSet?.getClass()} /></Box></TableCell>
                                         <TableCell>
-                                            <PlayerTraps traps={trapsData} />
+                                            <PlayerTraps traps={trapsData} maxTraps={maxTraps+1} />
                                         </TableCell>
                                     </TableRow>
                                 )

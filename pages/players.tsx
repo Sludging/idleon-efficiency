@@ -49,6 +49,7 @@ import { Achievement, AchievementConst } from '../data/domain/achievements';
 import { Dungeons, PassiveType } from '../data/domain/dungeons';
 import { MapInfo } from '../data/domain/maps';
 import { EnemyInfo } from '../data/domain/enemies';
+import Stat from '../components/base/Stat';
 
 
 function ItemSourcesDisplay({ sources, dropInfo }: { sources: ItemSources, dropInfo: DropSource[] }) {
@@ -165,7 +166,7 @@ function ShowSkills(props: SkillProps) {
             {
                 props.player.classId == ClassIndex.Maestro &&
                 <Box gap="small">
-                    <Text>Current crystal cooldown reductions: (max is {props.player.talents.find(talent => talent.skillIndex == 41)?.getBonus()}%)</Text>
+                    <Text>Current crystal cooldown reductions: (max is {nFormatter(props.player.talents.find(talent => talent.skillIndex == 41)?.getBonus() ?? 0, "Smaller")}%)</Text>
                     <Box direction="row" wrap>
                         {
                             Array.from(props.skillsMap).map(([skillIndex, skill]) => {
@@ -229,7 +230,6 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
         const chargeRate = worship?.playerData[player.playerID]?.chargeRate ?? 0;
         const maxCharge = worship?.playerData[player.playerID]?.maxCharge ?? 0;
         const estimatedCharge = worship?.playerData[player.playerID]?.estimatedCharge ?? 0;
-
         return {
             chargeRate: chargeRate,
             maxCharge: maxCharge,
@@ -314,7 +314,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                         player.killInfo.has(player.currentMapId) &&
                         (MapInfo.find(map => map.id == player.currentMapId)?.portalRequirements ?? []).reduce((sum, req) => sum += req, 0) > 0 &&
                         <Text size="small">
-                            Portal Requirement: {nFormatter(player.killInfo.get(player.currentMapId) ?? 0)} / [{MapInfo.find(map => map.id == player.currentMapId)?.portalRequirements.map(req => nFormatter(req))}]
+                            Portal Requirement: {nFormatter(player.killInfo.get(player.currentMapId) ?? 0)} / [{MapInfo.find(map => map.id == player.currentMapId)?.portalRequirements.map(req => nFormatter(req)).join(' | ')}]
                         </Text>
                     }
                     {
@@ -331,29 +331,35 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     <Text size="small">WIS = {player.stats.wisdom}</Text>
                     <Text size="small">LUK = {player.stats.luck}</Text>
                     <Text size="small">Crystal Spawn Chance = 1 in {Math.floor(1 / crystalSpawnChance)}</Text>
-                    <Text size="small">Charge Rate = {Math.round(playerWorshipInfo.chargeRate * 24)}% / day</Text>
-                    <Text size="small">Current Charge = </Text>
-                    <Box direction="row" gap="small">
-                        <Stack>
-                            <Meter
-                                size="small"
-                                type="bar"
-                                background="accent-3"
-                                color="brand"
-                                values={[
-                                    {
-                                        value: playerWorshipInfo.estimatedCharge,
-                                        label: 'current',
-                                        color: 'brand'
-                                    }
-                                ]}
-                                max={playerWorshipInfo.maxCharge} />
-                            <Box align="center" pad="xxsmall">
-                                <Text size="small">{playerWorshipInfo.estimatedCharge.toString()} ({(playerWorshipInfo.estimatedCharge / playerWorshipInfo.maxCharge * 100).toPrecision(3)}%)</Text>
+                    <Stat stat={player.doubleClaimChance} />
+                    <Stat stat={player.monsterCash} />
+                    {playerWorshipInfo.maxCharge > 0 &&
+                        <Box>
+                            <Text size="small">Charge Rate = {Math.round(playerWorshipInfo.chargeRate * 24)}% / day</Text>
+                            <Text size="small">Current Charge = </Text>
+                            <Box direction="row" gap="small">
+                                <Stack>
+                                    <Meter
+                                        size="small"
+                                        type="bar"
+                                        background="accent-3"
+                                        color="brand"
+                                        values={[
+                                            {
+                                                value: playerWorshipInfo.estimatedCharge,
+                                                label: 'current',
+                                                color: 'brand'
+                                            }
+                                        ]}
+                                        max={playerWorshipInfo.maxCharge} />
+                                    <Box align="center" pad="xxsmall">
+                                        <Text size="small">{playerWorshipInfo.estimatedCharge.toString()} ({(playerWorshipInfo.estimatedCharge / playerWorshipInfo.maxCharge * 100).toPrecision(3)}%)</Text>
+                                    </Box>
+                                </Stack>
+                                <Text>{playerWorshipInfo.maxCharge}</Text>
                             </Box>
-                        </Stack>
-                        <Text>{playerWorshipInfo.maxCharge}</Text>
-                    </Box>
+                        </Box>
+                    }
                     <Box direction="row" gap="small">
                         <Text size="small">Money =</Text>
                         <CoinsDisplay coinMap={playerCoins} />
@@ -684,14 +690,18 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
         const stampData = theData.get("stamps") as Stamp[][];
         const achievementsInfo = theData.get("achievements") as Achievement[];
         const dungeonsData = theData.get("dungeons") as Dungeons;
+        const players = theData.get("players") as Player[];
 
-        if (shrines && prayers && saltLick && playerStatues && family && stampData && achievementsInfo) {
+        if (shrines && prayers && saltLick && playerStatues && family && stampData && achievementsInfo && players) {
             const saltLickBonus = saltLick.getBonus(3);
             const dungeonBonus = (dungeonsData.passives.get(PassiveType.Flurbo) ?? [])[2]?.getBonus() ?? 0; // Lava is looking at the wrong bonus.
             const goldFoodStampBonus = stampData.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC7")?.getBonus() ?? 0;
             const goldFoodAchievement = achievementsInfo[AchievementConst.GoldFood].completed;
             const allSkillXP = Skilling.getAllSkillXP(player, shrines, playerStatues, prayers, saltLickBonus, dungeonBonus, family, goldFoodStampBonus, goldFoodAchievement);
-            const xpMulti = player.anvil.getXPMulti(player, allSkillXP);
+
+            // todo handle more then 1 mman somehow.
+            const mmanBonus = players.find(player => player.classId == ClassIndex.Maestro)?.talents.find(talent => talent.skillIndex == 42)?.getBonus() ?? 0;
+            const xpMulti = player.anvil.getXPMulti(player, allSkillXP, mmanBonus);
             return (100 * (player.anvil.getXP(xpMulti) - 1));
         }
         return 0;
@@ -1310,7 +1320,7 @@ function PlayerTab({ player }: PlayerTabProps) {
                 </Box>
                 <Box fill background="dark-1">
                     {index == 1 && <MiscStats player={player} activeBubbles={activeBubbles} />}
-                    {index == 2 && <ShowSkills skillsMap={player.skills} skillsRank={player.skillsRank} player={player}  />}
+                    {index == 2 && <ShowSkills skillsMap={player.skills} skillsRank={player.skillsRank} player={player} />}
                     {index == 3 && <EquipmentDisplay player={player} />}
                     {index == 4 && <StatuesDisplay playerStatues={playerStatues} player={player} />}
                     {index == 5 && <AnvilDisplay player={player} activeBubbles={activeBubbles} playerStatues={playerStatues} />}

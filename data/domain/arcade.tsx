@@ -1,4 +1,3 @@
-import { math } from "polished";
 import { lavaFunc, range } from "../utility"
 import { Achievement } from "./achievements";
 
@@ -101,15 +100,15 @@ const initArcadeBonuses = (): ArcadeBonus[] => {
         new ArcadeBonus({ "effect": "+{% AFK Gains Rate", "x1": 4, "x2": 100, "func": "decay", "type": "%", "lvlUpText": "+{% Rate", "index": 6 }),
         new ArcadeBonus({ "effect": "+{ Cap for all Liquids", "x1": 25, "x2": 100, "func": "decay", "type": "%", "lvlUpText": "+{ Cap", "index": 7 }),
         new ArcadeBonus({ "effect": "+{% Multikill per Tier", "x1": 10, "x2": 100, "func": "decay", "type": "%", "lvlUpText": "+{% Multikill", "index": 8 }),
-        new ArcadeBonus({ "effect": "+{% Catching EXP gain", "x1": 10, "x2": 100, "func": "decay", "type": "%", "lvlUpText": "+{% Catch EXP", "index": 9 }),
-        new ArcadeBonus({ "effect": "+{% Cash from Mobs", "x1": 10, "x2": 100, "func": "decay", "type": "%", "lvlUpText": "+{% Cash", "index": 10 }),
-        new ArcadeBonus({ "effect": "+{% Cash from Mobs", "x1": 20, "x2": 100, "func": "decay", "type": "%", "lvlUpText": "+{% Cash", "index": 11 }),
-        new ArcadeBonus({ "effect": "+{% Class EXP gain", "x1": 16, "x2": 100, "func": "decay", "type": "%", "lvlUpText": "+{% EXP", "index": 12 }),
+        new ArcadeBonus({ "effect": "+{% Catching EXP gain", "x1": 50, "x2": 100, "func": "decay", "type": "%", "lvlUpText": "+{% Catch EXP", "index": 9 }),
+        new ArcadeBonus({ "effect": "+{% Cash from Mobs", "x1": 20, "x2": 100, "func": "decay", "type": "%", "lvlUpText": "+{% Cash", "index": 10 }),
+        new ArcadeBonus({ "effect": "+{% Cash from Mobs", "x1": 30, "x2": 100, "func": "decay", "type": "%", "lvlUpText": "+{% Cash", "index": 11 }),
+        new ArcadeBonus({ "effect": "+{% Class EXP gain", "x1": 20, "x2": 100, "func": "decay", "type": "%", "lvlUpText": "+{% EXP", "index": 12 }),
         new ArcadeBonus({ "effect": "+{% Shiny Chance", "x1": 100, "x2": 100, "func": "decay", "type": "%", "lvlUpText": "+{% Chance", "index": 13 }),
-        new ArcadeBonus({ "effect": "+{% Trapping Effic.", "x1": 50, "x2": 100, "func": "decay", "type": "%", "lvlUpText": "+{% Efficiency", "index": 14 }),
-        new ArcadeBonus({ "effect": "+{% Worship Effic.", "x1": 50, "x2": 100, "func": "decay", "type": "%", "lvlUpText": "+{% Efficiency", "index": 15 }),
-        new ArcadeBonus({ "effect": "+{ Tab 1 Talent Pt", "x1": 1, "x2": 10, "func": "intervalAdd", "type": "%", "lvlUpText": "+{ Talent Pt", "index": 16 }),
-        new ArcadeBonus({ "effect": "+{% Total Damage", "x1": 10, "x2": 100, "func": "decay", "type": "%", "lvlUpText": "+{% Dmg", "index": 17 }),
+        new ArcadeBonus({ "effect": "+{% Trapping EXP", "x1": 50, "x2": 100, "func": "decay", "type": "%", "lvlUpText": "+{% Trap EXP", "index": 14 }),
+        new ArcadeBonus({ "effect": "+{ Starting TD Pts", "x1": 1, "x2": 0, "func": "add", "type": "", "lvlUpText": "+{ Worship Pts", "index": 15 }),
+        new ArcadeBonus({ "effect": "+{ Tab 1 Talent Pt", "x1": 1, "x2": 10, "func": "intervalAdd", "type": "", "lvlUpText": "+{ Talent Pt", "index": 16 }),
+        new ArcadeBonus({ "effect": "+{ Weapon Power", "x1": 0.07, "x2": 0, "func": "add", "type": "", "lvlUpText": "+{ Wep POW", "index": 17 }),
     ]
 }
 
