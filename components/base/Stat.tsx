@@ -11,7 +11,7 @@ export default function Stat({ stat }: { stat: StatDomain }) {
             body={
                 <Box>
                     {stat.sources.map((source, index) => (
-                        <Text key={index}>{source.name}: {nFormatter(source.value, "Smaller")}</Text>
+                        <Text size="small" key={index}>{source.name}: {nFormatter(source.value, "Smaller")}</Text>
                     ))}
                 </Box>
             }
