@@ -23,6 +23,7 @@ import { Dungeons, PassiveType } from "./dungeons";
 import { Stamp } from "./stamps";
 import { Achievement, AchievementConst } from "./achievements";
 import { safeJsonParse } from "./idleonData";
+import { Arcade } from "./arcade";
 
 export class PlayerStats {
     strength: number = 0;
@@ -415,8 +416,8 @@ export class Player {
     }
 
     setMonsterCash = (strBubbleBonus: number, wisBubbleBonus: number, agiBubbleBonus: number, mealBonus: number,
-        petArenaBonus1: number, petArenaBonus2: number, labBonus: number, vialBonus: number,
-        dungeonBonus: number, guildBonus: number, family: Family, goldFoodStampBonus: number, goldFoodAchievement: boolean, prayers: Prayer[]) => {
+        petArenaBonus1: number, petArenaBonus2: number, labBonus: number, vialBonus: number, dungeonBonus: number, guildBonus: number, 
+        family: Family, goldFoodStampBonus: number, goldFoodAchievement: boolean, prayers: Prayer[], arcadeBonus: number) => {
         const gearBonus = this.gear.equipment.reduce((sum, gear) => sum += gear?.getMiscBonus("Money") ?? 0, 0);
         const goldenFoodBonus = this.gear.food.filter(food => food && food.goldenFood != undefined && food.description.includes("Boosts coins dropped"))
             .reduce((sum, food) => sum += (food as Food).goldFoodBonus(food?.count ?? 0, this.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus() ?? 0, goldFoodStampBonus, goldFoodAchievement)), 0);
@@ -436,7 +437,7 @@ export class Player {
         const currentWorldBonus = 1 + Math.floor(this.currentMapId / 50);
         this.monsterCash.value = baseMath *
             (1 + (vialBonus + gearBonus + cardBonus + (this.talents.find(talent => talent.skillIndex == 22)?.getBonus() ?? 0)
-                + dungeonBonus + boxBonus + (guildBonus * currentWorldBonus) +
+                + dungeonBonus + arcadeBonus + boxBonus + (guildBonus * currentWorldBonus) +
                 (this.talents.find(talent => talent.skillIndex == 643)?.getBonus() ?? 0) +
                 (this.talents.find(talent => talent.skillIndex == 644)?.getBonus() ?? 0) +
                 goldenFoodBonus) / 100);
@@ -453,6 +454,7 @@ export class Player {
         this.monsterCash.sources.push({ name: "Guild + World bonus", value: (guildBonus * currentWorldBonus) });
         this.monsterCash.sources.push({ name: "Lab Bonus", value: labBonus });
         this.monsterCash.sources.push({ name: "Dungeons Bonus", value: dungeonBonus });
+        this.monsterCash.sources.push({ name: "Arcade", value: arcadeBonus });
         this.monsterCash.sources.push({
             name: "Talents", value: (this.talents.find(talent => talent.skillIndex == 643)?.getBonus() ?? 0) +
                 (this.talents.find(talent => talent.skillIndex == 644)?.getBonus() ?? 0) + (this.talents.find(talent => talent.skillIndex == 22)?.getBonus() ?? 0)
@@ -723,6 +725,7 @@ export const updatePlayers = (data: Map<string, any>) => {
     const dungeons = data.get("dungeons") as Dungeons;
     const stamps = data.get("stamps") as Stamp[][];
     const achievementsInfo = data.get("achievements") as Achievement[];
+    const arcade = data.get("arcade") as Arcade;
 
     // Double claim chance.
     const doubleChanceBubbleBonus = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).find(bubble => bubble.name == "Afk Expexp")?.getBonus() ?? 0;
@@ -747,10 +750,11 @@ export const updatePlayers = (data: Map<string, any>) => {
     const goldFoodStampBonus = stamps.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC7")?.getBonus() ?? 0;
     const goldFoodAchievement = achievementsInfo[AchievementConst.GoldFood].completed;
     const prayers = data.get("prayers") as Prayer[];
+    const arcadeBonus = arcade.bonuses.filter(bonus => [10,11].includes(bonus.index)).reduce((sum, bonus) => sum += bonus.getBonus(), 0);
     players.forEach(player => {
         player.setMonsterCash(strBubbleBonus, wisBubbleBonus, agiBubbleBonus, mealBonus,
             petArenaBonus1, petArenaBonus2, labBonus, vialBonus,
-            dungeonBonus, guildBonus, family, goldFoodStampBonus, goldFoodAchievement, prayers);
+            dungeonBonus, guildBonus, family, goldFoodStampBonus, goldFoodAchievement, prayers, arcadeBonus);
     })
 
     return players;
