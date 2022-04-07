@@ -70,13 +70,13 @@ export class Meal {
         return `icons-4132 icons-CookingM${this.mealIndex}`;
     }
 
-    getBonus = (roundResult: boolean = false, mainFrameBonus: number = this.mainframeBonus) => {
-        const finalMath = (1 + mainFrameBonus / 100) * this.level * this.bonusQty;
+    getBonus = (roundResult: boolean = false, mainFrameBonus: number = this.mainframeBonus, level: number = this.level) => {
+        const finalMath = (1 + mainFrameBonus / 100) * level * this.bonusQty;
         return roundResult ? round(finalMath) : finalMath;
     }
 
-    getBonusText = () => {
-        return this.bonusText.replace(/{/g, nFormatter(this.getBonus(true)));
+    getBonusText = (level: number = this.level) => {
+        return this.bonusText.replace(/{/g, nFormatter(this.getBonus(true, this.mainframeBonus, level)));
     }
 
     getMealLevelCost = () => {
@@ -137,7 +137,7 @@ const initMeals = () => {
         new Meal(45, { "name": "Buncha Banana", "cookingReq": 125000000, "bonusQty": 4, "bonusText": "+{ Max LVs for TP Pete Star Talent", "description": "Straight from the island of Karjama! Or something like that, starts with a K at least.", "bonusKey": "TPpete" }),
         new Meal(46, { "name": "Pumpkin", "cookingReq": 170000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "According to the author of the Iliad, its value should peak right around January...", "bonusKey": "non" }),
         new Meal(47, { "name": "Cotton Candy", "cookingReq": 400000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "The most exquisite of fairground cuisine!", "bonusKey": "non" }),
-        new Meal(48, { "name": "Massive Fig", "cookingReq": 600000000, "bonusQty": 3, "bonusText": "+{% Total Damage", "description": "This thing has gotta weigh at least 30!", "bonusKey": "non" }),
+        new Meal(48, { "name": "Massive Fig", "cookingReq": 700000000, "bonusQty": 3, "bonusText": "+{% Total Damage", "description": "This thing has gotta weigh at least 30!", "bonusKey": "non" }),
         new Meal(49, { "name": "Turkey a la Thank", "cookingReq": 5000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
         new Meal(50, { "name": "Turkey a la Thank", "cookingReq": 5000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
         new Meal(51, { "name": "Turkey a la Thank", "cookingReq": 5000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
@@ -250,23 +250,24 @@ export class Cooking {
 
     getMealsFromSpiceValues = (valueOfSpices: number[]): number[] => {
         const possibleMeals: number[] = [];
-        // the sum of spice indexes is a possible meal.
-        const sum = valueOfSpices.reduce((sum, value) => sum += spiceValues.indexOf(value), 0);
-        possibleMeals.push(sum);
-
         // Each spice value is also a possible meal.
         valueOfSpices.forEach(value => {
             if (!possibleMeals.includes(value)) {
                 possibleMeals.push(value);
             }
         });
+        // the sum of spice indexes is a possible meal.
+        const sum = valueOfSpices.reduce((sum, value) => sum += spiceValues.indexOf(value), 0);
+        if (!spiceValues.includes(sum)) {
+            possibleMeals.push(sum);
+        }
 
         // if we have 3 or more spices, add sum - 1.
-        if (valueOfSpices.length > 2 && !possibleMeals.includes(sum - 1)) {
+        if (valueOfSpices.length > 2 && !possibleMeals.includes(sum - 1) && !spiceValues.includes(sum - 1)) {
             possibleMeals.push(sum - 1);
         }
         // if we have more than one spice, add sum + 1.
-        if (valueOfSpices.length > 1 && !possibleMeals.includes(sum + 1)) {
+        if (valueOfSpices.length > 1 && !possibleMeals.includes(sum + 1) && !spiceValues.includes(sum + 1)) {
             possibleMeals.push(sum + 1);
         }
 
@@ -312,8 +313,9 @@ const populateDiscovery = (cooking: Cooking) => {
         for (let combination of possibleCombinations) {
             const possibleMeals = cooking.getMealsFromSpiceValues(combination);
             const time = cooking.getRecipeTime(possibleMeals);
-            const firstKitchenLuck = cooking.kitchens[0].recipeLuck
-            possibleMeals.slice(0, 5).forEach((meal, index) => {
+            const firstKitchenLuck = cooking.kitchens[0].recipeLuck;
+            const firstKitchenFire = cooking.kitchens[0].fireSpeed;
+            possibleMeals.slice(0, 6).forEach((meal, index) => {
                 if (meal < 49) {
                     let realLuck = mealLuckValues[index];
                     for (let reverseIndex = possibleMeals.length; reverseIndex > index; reverseIndex--) {
@@ -322,7 +324,7 @@ const populateDiscovery = (cooking: Cooking) => {
                     const luckTime = time / realLuck;
                     if (luckTime < outputlucktime[meal]) {
                         outputlucktime[meal] = luckTime;
-                        cooking.meals[meal].discoveryTime = time;
+                        cooking.meals[meal].discoveryTime = time / (firstKitchenFire / 3600);
                         cooking.meals[meal].discoveryChance = realLuck * firstKitchenLuck;
                         cooking.meals[meal].optimalSpices = combination.map(value => spiceValues.indexOf(value));
                     }
