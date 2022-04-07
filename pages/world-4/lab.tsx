@@ -174,6 +174,9 @@ function ChipDisplay() {
                     {
                         Object.entries(lab.playerChips).map(([playerNumber, chips], index) => {
                             const playerId = parseInt(playerNumber);
+                            if (playerId >= playersData.length) {
+                                return null;
+                            }
                             const player = playersData[playerId];
                             return (
                                 <ShadowBox background="dark-1" pad="small" key={index} margin={{ right: 'small', bottom: 'small' }} align="center" gap="small">
