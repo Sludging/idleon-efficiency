@@ -250,23 +250,24 @@ export class Cooking {
 
     getMealsFromSpiceValues = (valueOfSpices: number[]): number[] => {
         const possibleMeals: number[] = [];
-        // the sum of spice indexes is a possible meal.
-        const sum = valueOfSpices.reduce((sum, value) => sum += spiceValues.indexOf(value), 0);
-        possibleMeals.push(sum);
-
         // Each spice value is also a possible meal.
         valueOfSpices.forEach(value => {
             if (!possibleMeals.includes(value)) {
                 possibleMeals.push(value);
             }
         });
+        // the sum of spice indexes is a possible meal.
+        const sum = valueOfSpices.reduce((sum, value) => sum += spiceValues.indexOf(value), 0);
+        if (!spiceValues.includes(sum)) {
+            possibleMeals.push(sum);
+        }
 
         // if we have 3 or more spices, add sum - 1.
-        if (valueOfSpices.length > 2 && !possibleMeals.includes(sum - 1)) {
+        if (valueOfSpices.length > 2 && !possibleMeals.includes(sum - 1) && !spiceValues.includes(sum - 1)) {
             possibleMeals.push(sum - 1);
         }
         // if we have more than one spice, add sum + 1.
-        if (valueOfSpices.length > 1 && !possibleMeals.includes(sum + 1)) {
+        if (valueOfSpices.length > 1 && !possibleMeals.includes(sum + 1) && !spiceValues.includes(sum + 1)) {
             possibleMeals.push(sum + 1);
         }
 
@@ -314,7 +315,7 @@ const populateDiscovery = (cooking: Cooking) => {
             const time = cooking.getRecipeTime(possibleMeals);
             const firstKitchenLuck = cooking.kitchens[0].recipeLuck;
             const firstKitchenFire = cooking.kitchens[0].fireSpeed;
-            possibleMeals.slice(0, 5).forEach((meal, index) => {
+            possibleMeals.slice(0, 6).forEach((meal, index) => {
                 if (meal < 49) {
                     let realLuck = mealLuckValues[index];
                     for (let reverseIndex = possibleMeals.length; reverseIndex > index; reverseIndex--) {

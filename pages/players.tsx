@@ -230,7 +230,6 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
         const chargeRate = worship?.playerData[player.playerID]?.chargeRate ?? 0;
         const maxCharge = worship?.playerData[player.playerID]?.maxCharge ?? 0;
         const estimatedCharge = worship?.playerData[player.playerID]?.estimatedCharge ?? 0;
-
         return {
             chargeRate: chargeRate,
             maxCharge: maxCharge,
@@ -315,7 +314,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                         player.killInfo.has(player.currentMapId) &&
                         (MapInfo.find(map => map.id == player.currentMapId)?.portalRequirements ?? []).reduce((sum, req) => sum += req, 0) > 0 &&
                         <Text size="small">
-                            Portal Requirement: {nFormatter(player.killInfo.get(player.currentMapId) ?? 0)} / [{MapInfo.find(map => map.id == player.currentMapId)?.portalRequirements.map(req => nFormatter(req)).join(',')}]
+                            Portal Requirement: {nFormatter(player.killInfo.get(player.currentMapId) ?? 0)} / [{MapInfo.find(map => map.id == player.currentMapId)?.portalRequirements.map(req => nFormatter(req)).join(' | ')}]
                         </Text>
                     }
                     {
@@ -334,29 +333,33 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     <Text size="small">Crystal Spawn Chance = 1 in {Math.floor(1 / crystalSpawnChance)}</Text>
                     <Stat stat={player.doubleClaimChance} />
                     <Stat stat={player.monsterCash} />
-                    <Text size="small">Charge Rate = {Math.round(playerWorshipInfo.chargeRate * 24)}% / day</Text>
-                    <Text size="small">Current Charge = </Text>
-                    <Box direction="row" gap="small">
-                        <Stack>
-                            <Meter
-                                size="small"
-                                type="bar"
-                                background="accent-3"
-                                color="brand"
-                                values={[
-                                    {
-                                        value: playerWorshipInfo.estimatedCharge,
-                                        label: 'current',
-                                        color: 'brand'
-                                    }
-                                ]}
-                                max={playerWorshipInfo.maxCharge} />
-                            <Box align="center" pad="xxsmall">
-                                <Text size="small">{playerWorshipInfo.estimatedCharge.toString()} ({(playerWorshipInfo.estimatedCharge / playerWorshipInfo.maxCharge * 100).toPrecision(3)}%)</Text>
+                    {playerWorshipInfo.maxCharge > 0 &&
+                        <Box>
+                            <Text size="small">Charge Rate = {Math.round(playerWorshipInfo.chargeRate * 24)}% / day</Text>
+                            <Text size="small">Current Charge = </Text>
+                            <Box direction="row" gap="small">
+                                <Stack>
+                                    <Meter
+                                        size="small"
+                                        type="bar"
+                                        background="accent-3"
+                                        color="brand"
+                                        values={[
+                                            {
+                                                value: playerWorshipInfo.estimatedCharge,
+                                                label: 'current',
+                                                color: 'brand'
+                                            }
+                                        ]}
+                                        max={playerWorshipInfo.maxCharge} />
+                                    <Box align="center" pad="xxsmall">
+                                        <Text size="small">{playerWorshipInfo.estimatedCharge.toString()} ({(playerWorshipInfo.estimatedCharge / playerWorshipInfo.maxCharge * 100).toPrecision(3)}%)</Text>
+                                    </Box>
+                                </Stack>
+                                <Text>{playerWorshipInfo.maxCharge}</Text>
                             </Box>
-                        </Stack>
-                        <Text>{playerWorshipInfo.maxCharge}</Text>
-                    </Box>
+                        </Box>
+                    }
                     <Box direction="row" gap="small">
                         <Text size="small">Money =</Text>
                         <CoinsDisplay coinMap={playerCoins} />
@@ -1317,7 +1320,7 @@ function PlayerTab({ player }: PlayerTabProps) {
                 </Box>
                 <Box fill background="dark-1">
                     {index == 1 && <MiscStats player={player} activeBubbles={activeBubbles} />}
-                    {index == 2 && <ShowSkills skillsMap={player.skills} skillsRank={player.skillsRank} player={player}  />}
+                    {index == 2 && <ShowSkills skillsMap={player.skills} skillsRank={player.skillsRank} player={player} />}
                     {index == 3 && <EquipmentDisplay player={player} />}
                     {index == 4 && <StatuesDisplay playerStatues={playerStatues} player={player} />}
                     {index == 5 && <AnvilDisplay player={player} activeBubbles={activeBubbles} playerStatues={playerStatues} />}

@@ -142,7 +142,6 @@ export default function parseWorship(totemInfo: number[][], accountData: Map<str
             const talentBonus = chargeSpeedTalent?.getBonus() ?? 0;
             const chargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "F11")?.getBonus() ?? 0;
             const chargeRate = player.gear.tools[5] ? Worship.getChargeRate(player.gear.tools[5].internalName, worshipLevel, popeBonus, chargeCardBonus, flowinStamp.getBonus(worshipLevel), talentBonus) : 0;
-
             worship.playerData.push({
                 maxCharge: maxCharge,
                 chargeRate: chargeRate,
