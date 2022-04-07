@@ -423,8 +423,8 @@ export class Player {
         const cardBonus = Card.GetTotalBonusForId(this.cardInfo?.equippedCards ?? [], 11);
         const poBox = this.postOffice.find(box => box.index == 13);
         const boxBonus = poBox?.bonuses[2].getBonus(poBox.level, 2) ?? 0;
-        const prayerBonus = this.activePrayers.filter(prayer => prayer == 8) ? (this.activePrayers.map(prayer => prayers.find(actual => actual.index == prayer && prayer == 8)?.getBonus() ?? 0)[0]) : 0;
-
+        const prayerBonus = this.activePrayers.filter(prayer => prayer == 8).length > 0 ? (this.activePrayers.map(prayer => prayers.find(actual => actual.index == prayer && prayer == 8)?.getBonus() ?? 0)[0]) : 0;
+        
         const bubbleAtrributeMath = (strBubbleBonus * Math.floor(this.stats.strength / 250))
             + (agiBubbleBonus * Math.floor(this.stats.agility / 250))
             + (wisBubbleBonus * Math.floor(this.stats.wisdom / 250))
@@ -433,7 +433,6 @@ export class Player {
             (1 + (petArenaBonus1 * 0.5) + petArenaBonus2) *
             (1 + labBonus / 100) *
             (1 + prayerBonus / 100)
-
         const currentWorldBonus = 1 + Math.floor(this.currentMapId / 50);
         this.monsterCash.value = baseMath *
             (1 + (vialBonus + gearBonus + cardBonus + (this.talents.find(talent => talent.skillIndex == 22)?.getBonus() ?? 0)
@@ -503,7 +502,9 @@ const keyFunctionMap: Record<string, Function> = {
     },
     "playerstuff": (doc: Cloudsave, player: Player) => {
         const jsonStuff = safeJsonParse(doc, `PlayerStuff_${player.playerID}`, []);
-        player.currentCharge = jsonStuff[0];
+        if (jsonStuff.length > 0) {
+            player.currentCharge = jsonStuff[0];
+        }
     },
     "cards": (doc: Cloudsave, player: Player) => {
         const currentCardSet = JSON.parse(doc.get(`CSetEq_${player.playerID}`));

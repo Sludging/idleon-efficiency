@@ -432,7 +432,7 @@ function SaltLickDisplay() {
 function SampleBox({ sample, activeItem, itemData }: { sample: { item: string, quantity: number }, activeItem: { item: string, quantity: number } | undefined, itemData: Item[] | undefined }) {
     const sampleItem = itemData?.find((item) => item.internalName == sample.item);
     return (
-        <Box border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} height={{ min: '82px', max: '82px' }}>
+        <Box border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} height={{ min: '82px', max: '82px' }} direction="row" align="center" justify="center">
             {sample.item == "Blank" || !sample.item ?
                 <Box align="center"  width={{ max: '100px', min: '100px' }} height={{ min: '82px', max: '82px' }} justify='center'>
                     <Text size="xsmall" color="accent-3">Empty</Text>
