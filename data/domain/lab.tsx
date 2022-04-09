@@ -220,7 +220,7 @@ export class Lab {
                 baseWidth *= (1 + (this.jewels[5].getBonus() / 100));
             }
         }
-        const playerChipBonus = player.labInfo.chips.filter(slot => slot.chip && slot.chip.index == 6).pop()?.chip?.getBonus() ?? 0;
+        const playerChipBonus = player.labInfo.chips.filter(slot => slot.chip && slot.chip.index == 6).reduce((sum, slot) => sum += slot.chip?.getBonus() ?? 0, 0);
         const bonusWidth = inGemTube ? 30 : 0;
         return Math.floor((baseWidth + (pxMealBonus + Math.min(passiveCardBonus, 50)))
             * (1 + ((linePctMealBonus + playerChipBonus + (20 * petArenaBonus) + bonusWidth) / 100))
