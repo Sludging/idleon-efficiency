@@ -24,6 +24,7 @@ import { Stamp } from "./stamps";
 import { Achievement, AchievementConst } from "./achievements";
 import { safeJsonParse } from "./idleonData";
 import { Arcade } from "./arcade";
+import { ObolsData, ObolStats } from "./obols";
 
 export class PlayerStats {
     strength: number = 0;
@@ -320,7 +321,7 @@ export class Player {
         chips: [...Array(chipSlotReq.length)].map((_, index) => new ChipSlot(undefined, chipSlotReq[index])),
     };
     killInfo: Map<number, number> = new Map();
-
+    obolStats: ObolStats[] = [];
     // Stats
     doubleClaimChance: Stat = new Stat("Double XP Chance", "%");
     monsterCash: Stat = new Stat("Monster Cash", "x");
@@ -418,7 +419,8 @@ export class Player {
     setMonsterCash = (strBubbleBonus: number, wisBubbleBonus: number, agiBubbleBonus: number, mealBonus: number,
         petArenaBonus1: number, petArenaBonus2: number, labBonus: number, vialBonus: number, dungeonBonus: number, guildBonus: number, 
         family: Family, goldFoodStampBonus: number, goldFoodAchievement: boolean, prayers: Prayer[], arcadeBonus: number) => {
-        const gearBonus = this.gear.equipment.reduce((sum, gear) => sum += gear?.getMiscBonus("Money") ?? 0, 0);
+        let gearBonus = this.gear.equipment.reduce((sum, gear) => sum += gear?.getMiscBonus("Money") ?? 0, 0);
+        gearBonus = this.obolStats.flatMap(stat => stat.stats).filter(stat => stat.extra.includes("Money")).reduce((sum, stat) => sum += stat.getValue(), gearBonus);
         const goldenFoodBonus = this.gear.food.filter(food => food && food.goldenFood != undefined && food.description.includes("Boosts coins dropped"))
             .reduce((sum, food) => sum += (food as Food).goldFoodBonus(food?.count ?? 0, this.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus() ?? 0, goldFoodStampBonus, goldFoodAchievement)), 0);
         const cardBonus = Card.GetTotalBonusForId(this.cardInfo?.equippedCards ?? [], 11);
@@ -715,6 +717,27 @@ export default function parsePlayers(doc: Cloudsave, accountData: Map<string, an
 
 export const updatePlayers = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
+    const obols = data.get("obols") as ObolsData;
+
+    // Update player obols info so we can use it in maths
+    players.forEach(player => {
+        obols.playerStats[player.playerID]?.stats.filter(stat => stat.getValue() > 0).forEach(stat => {
+            const matchingFamilyStat = obols.familyStats.stats.find(famStat => stat.extra == '' ? famStat.displayName == stat.displayName : stat.extra == famStat.extra && famStat.getValue() > 0);           
+            const newObolStat = new ObolStats();
+            newObolStat.addStat(stat);
+            if (matchingFamilyStat) {
+                newObolStat.addStat(matchingFamilyStat);
+            }
+            player.obolStats.push(newObolStat);
+        })
+        obols.familyStats.stats.filter(stat => obols.playerStats[player.playerID].stats.find(playerStat => stat.extra == '' ? playerStat.displayName == stat.displayName : stat.extra == playerStat.extra) == undefined)
+            .filter(stat => stat.shouldDisplay() && stat.getValue() > 0)
+            .forEach(stat => {
+                const newObolStat = new ObolStats();
+                newObolStat.addStat(stat);
+                player.obolStats.push(newObolStat);
+            });
+    })
 
     const alchemy = data.get("alchemy") as Alchemy;
     const guild = data.get("guild") as Guild;
