@@ -45,11 +45,11 @@ function KitchenDisplay({ kitchen, cooking }: { kitchen: Kitchen, cooking: Cooki
             <Box>
                 <Grid columns={["60%", "40%"]} gap="small">
                     <Text size="small" color="grey-2">Cooking Speed:</Text>
-                    <Text size="small">{`${nFormatter(kitchen.mealSpeed, "Big")}/hr`}</Text>
+                    <Text size="small">{`${nFormatter(kitchen.mealSpeed, "Smaller")}/hr`}</Text>
                     <Text size="small" color="grey-2">Recipe Fire Speed:</Text>
-                    <Text size="small">{`${nFormatter(kitchen.fireSpeed, "Big")}/hr`}</Text>
+                    <Text size="small">{`${nFormatter(kitchen.fireSpeed, "Smaller")}/hr`}</Text>
                     <Text size="small" color="grey-2">New Recipe Luck:</Text>
-                    <Text size="small">{`${kitchen.recipeLuck.toPrecision(2)}x`}</Text>
+                    <Text size="small">{`${kitchen.recipeLuck.toPrecision(3)}x`}</Text>
                 </Grid>
             </Box>
             <Grid columns="1/3" gap="small">
@@ -179,8 +179,11 @@ function Cooking() {
                     {
                         cooking?.meals.filter(meal => meal.bonusKey != "non" && (meal.level > 0 || meal.optimalSpices.length > 0)).map((meal, index) => (
                             <ShadowBox background="dark-1" key={index} margin={{ right: 'small', bottom: 'small' }} direction="row" pad="small" gap="small" align="center">
-                                <Box width={{ max: '41px', min: '41px' }}>
-                                    <Box className={meal.getClass()} />
+                                <Box direction="row" align="center">
+                                    <Text size="small">{meal.level}</Text>
+                                    <Box width={{ max: '41px', min: '41px' }} margin={{bottom: 'small'}}>
+                                        <Box className={meal.getClass()} />
+                                    </Box>
                                 </Box>
                                 {meal.level > 0 &&
                                     <TipDisplay
