@@ -378,6 +378,9 @@ export const updateCooking = (data: Map<string, any>) => {
     const cards = data.get("cards") as Card[];
     const breeding = data.get("breeding") as Breeding;
 
+    const jewelMealBonus = mainframe.jewels[16].active ? mainframe.jewels[16].getBonus() : 0; // TODO: Remove hardcoding
+    cooking.meals.forEach(meal => meal.mainframeBonus = jewelMealBonus);
+    
     // Meal speed
     const vialBonus = alchemy.vials.filter(vial => vial.description.includes("Meal Cooking Speed")).reduce((sum, vial) => sum += vial.getBonus(), 0);
     const diamonChef = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).find(bubble => bubble.name == "Diamond Chef")?.getBonus() ?? 0;
@@ -407,9 +410,6 @@ export const updateCooking = (data: Map<string, any>) => {
         kitchen.fireUpgradeCost = kitchen.getSpiceUpgradeCost(kitchenCosts, mealKitchenCosts, arenaBonusActive, UpgradeType.Fire);
         kitchen.luckUpgradecost = kitchen.getSpiceUpgradeCost(kitchenCosts, mealKitchenCosts, arenaBonusActive, UpgradeType.Luck);
     })
-
-    const jewelMealBonus = mainframe.jewels[16].active ? mainframe.jewels[16].getBonus() : 0; // TODO: Remove hardcoding
-    cooking.meals.forEach(meal => meal.mainframeBonus = jewelMealBonus);
 
     populateDiscovery(cooking);
 
