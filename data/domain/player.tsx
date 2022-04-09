@@ -765,7 +765,7 @@ export const updatePlayers = (data: Map<string, any>) => {
     const mealBonus = cooking.meals.filter(meal => meal.bonusKey == "Cash").reduce((sum, meal) => sum += meal.getBonus() ?? 0, 0);
     const petArenaBonus1 = breeding.hasBonus(5) ? 1 : 0;
     const petArenaBonus2 = breeding.hasBonus(14) ? 1 : 0;
-    const labBonus = 0; // Need to do this properly. //lab.bonuses.find(bonus => bonus.index == 9).
+    const labBonus = lab.bonuses.find(bonus => bonus.index == 9)?.getBonus() ?? 0;
     const vialBonus = alchemy.vials.find(vial => vial.name == "Dieter Drink")?.getBonus() ?? 0;
     const dungeonBonus = dungeons.passives.get(PassiveType.Flurbo)?.find(bonus => bonus.effect == "Monster Cash")?.getBonus() ?? 0;
     const guildBonus = guild.guildBonuses.find(bonus => bonus.index == 8)?.getBonus() ?? 0;

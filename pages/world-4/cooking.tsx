@@ -79,23 +79,31 @@ function KitchenDisplay({ kitchen, cooking }: { kitchen: Kitchen, cooking: Cooki
                 {
                     kitchen.status == KitchenStatus.Recipe &&
                     <Box gap="medium">
-                        <Box gap="small" align="center" direction="row">
+                        <Box gap="small" align="center">
                             {
-                                kitchen.activeRecipe.map((spice, index) => (
-                                    <Box key={`spice_${index}`} width={{ max: '25px', min: '25px' }}>
-                                        <Box className={`icons-3636 icons-CookingSpice${spice}`} />
-                                    </Box>
-                                ))
+                                <Box direction="row">
+                                    {
+                                        kitchen.activeRecipe.map((spice, index) => (
+                                            <Box key={`spice_${index}`} width={{ max: '36px', min: '36px' }}>
+                                                <Box className={`icons-3636 icons-CookingSpice${spice}`} />
+                                            </Box>
+                                        ))
+                                    }
+                                </Box>
                             }
                             {
-                                possibleMeals.map((meal, index) => (
-                                    <Box title={cooking.meals[meal].name} style={{ opacity: cooking.meals[meal]?.level > 0 ? 1 : 0.5 }} key={`meal_${index}`} width={{ max: '41px', min: '41px' }}>
-                                        <Box className={cooking.meals[meal]?.getClass()} />
-                                    </Box>
-                                ))
+                                <Box direction="row">
+                                    {
+                                        possibleMeals.map((meal, index) => (
+                                            <Box title={cooking.meals[meal].name} style={{ opacity: cooking.meals[meal]?.level > 0 ? 1 : 0.5 }} key={`meal_${index}`} width={{ max: '41px', min: '41px' }}>
+                                                <Box className={cooking.meals[meal]?.getClass()} />
+                                            </Box>
+                                        ))
+                                    }
+                                </Box>
                             }
                         </Box>
-                        <Box justify="between" gap="small" direction="row">
+                        <Box justify="between" gap="small" direction="row" align="center">
                             <Text size="small">Progress: {nFormatter(kitchen.progress)} / {nFormatter(cooking.getRecipeTime(possibleMeals))}</Text>
                             <TimeDown addSeconds={timeToFinish} />
                         </Box>
@@ -181,7 +189,7 @@ function Cooking() {
                             <ShadowBox background="dark-1" key={index} margin={{ right: 'small', bottom: 'small' }} direction="row" pad="small" gap="small" align="center">
                                 <Box direction="row" align="center">
                                     <Text size="small">{meal.level}</Text>
-                                    <Box width={{ max: '41px', min: '41px' }} margin={{bottom: 'small'}}>
+                                    <Box width={{ max: '41px', min: '41px' }} margin={{ bottom: 'small' }}>
                                         <Box className={meal.getClass()} />
                                     </Box>
                                 </Box>
