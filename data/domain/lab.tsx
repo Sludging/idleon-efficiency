@@ -1,8 +1,10 @@
 import { Breeding } from "./breeding"
 import { Card, CardInfo } from "./cards"
 import { Cooking } from "./cooking"
+import { Deathnote } from "./deathnote"
 import { GemStore } from "./gemPurchases"
 import { Player, SkillsIndex } from "./player"
+import { Storage } from "./storage"
 
 export const chipSlotReq = [5, 10, 15, 25, 35, 50, 75];
 
@@ -33,8 +35,8 @@ export class MainframeBonus {
         this.x = data.x;
         this.y = data.y;
         this.range = data.range;
-        this.bonusOn = data.bonusOn;
-        this.bonusOff = data.bonusOff;
+        this.bonusOn = data.bonusOff;
+        this.bonusOff = data.bonusOn;
         this.name = data.name;
         this.description = data.description;
     }
@@ -47,25 +49,63 @@ export class MainframeBonus {
         return this.description.split("@ - @")[0];
     }
 
+    getBonus = () => {
+        return this.bonusOn;
+    }
+
     getRange = (connectionBonus: number = 0) => {
         return 80 * (1 + connectionBonus / 100);
     }
 }
 
+export class AnimalFarmBonus extends MainframeBonus {
+    totalSpecies: number = 0;
+    override getBonusText = () => {
+        return this.description.replace(/{/g, this.getBonus().toString())
+    }
+
+    override getBonus = () => {
+        return this.bonusOn * this.totalSpecies;
+    }
+}
+
+export class FungiFingerBonus extends MainframeBonus {
+    greenMushroomKilled: number = 0;
+    override getBonusText = () => {
+        return this.description.replace(/{/g, this.getBonus().toString())
+    }
+
+    override getBonus = () => {
+        return this.bonusOn * Math.floor(this.greenMushroomKilled / 1e6);
+    }
+}
+
+export class UnadulteratedBankingBonus extends MainframeBonus {
+    greenStacks: number = 0;
+    override getBonusText = () => {
+        return this.description.replace(/{/g, this.getBonus().toString())
+    }
+
+    override getBonus = () => {
+        return this.bonusOn * this.greenStacks;
+    }
+}
+
 const initBonuses = (): MainframeBonus[] => {
     return [
-        new MainframeBonus({ "no": 0, "x": 91, "y": 353, "range": 90, "bonusOn": 0, "bonusOff": 1, "name": "Animal Farm", "description": "+1% Total Damage for every different species you have bred within Pet Breeding. You just need to breed the pet type one time for it to count! @ - @ Total Bonus: {%" }),
+        new AnimalFarmBonus({ "no": 0, "x": 91, "y": 353, "range": 90, "bonusOn": 0, "bonusOff": 1, "name": "Animal Farm", "description": "+1% Total Damage for every different species you have bred within Pet Breeding. You just need to breed the pet type one time for it to count! @ - @ Total Bonus: {%" }),
         new MainframeBonus({ "no": 1, "x": 250, "y": 310, "range": 90, "bonusOn": 1, "bonusOff": 2, "name": "Wired In", "description": "All Uploaded Players print 2x more resources from their section of the 3D Printer. The displayed amount will NOT appear doubled, just to avoid confusion as to what your actual base Sampling Rate is, but it will be displayed in blue." }),
         new MainframeBonus({ "no": 2, "x": 356, "y": 147, "range": 90, "bonusOn": 1, "bonusOff": 3, "name": "Gilded Cyclical Tubing", "description": "All refinery cycles occur 3x faster. Faster cycles means more salts!" }),
+        // TODO: no bubble with the jewel bonus.
         new MainframeBonus({ "no": 3, "x": 450, "y": 220, "range": 90, "bonusOn": 0, "bonusOff": 1, "name": "No Bubble Left Behind", "description": "Every 24 hours, your 3 lowest level Alchemy Bubbles gets +1 Lv. This only applies to bubbles Lv 5 or higher, so it's more like 'your lowest level bubble that is at least level 5'. ALSO, it only works on the first 15 bubbles of each colour!" }),
         new MainframeBonus({ "no": 4, "x": 538, "y": 362, "range": 90, "bonusOn": 1, "bonusOff": 2, "name": "Killer's Brightside", "description": "All monster kills count for 2x more than normal for things like opening portals and Death Note. Doesn't increase resource drops or exp gain." }),
         new MainframeBonus({ "no": 5, "x": 651, "y": 113, "range": 90, "bonusOn": 0, "bonusOff": 1, "name": "Shrine World Tour", "description": "If a shrine is placed within town, instead of in a monster map, it will act as though it is placed in EVERY map in that entire world!" }),
         new MainframeBonus({ "no": 6, "x": 753, "y": 244, "range": 90, "bonusOn": 1, "bonusOff": 5, "name": "Viaduct of the Gods", "description": "All alchemy liquids have x5 higher max capacity. However, you regenerate alchemy liquids -30% slower." }),
         new MainframeBonus({ "no": 7, "x": 824, "y": 377, "range": 90, "bonusOn": 1, "bonusOff": 2, "name": "Certified Stamp Book", "description": "All Stamps, except for MISC tab stamps, give DOUBLE the bonus." }),
         new MainframeBonus({ "no": 8, "x": 917, "y": 326, "range": 90, "bonusOn": 1, "bonusOff": 1.5, "name": "Spelunker Obol", "description": "1.50x higher effects from all active Jewels within the Mainframe." }),
-        new MainframeBonus({ "no": 9, "x": 982, "y": 148, "range": 90, "bonusOn": 0, "bonusOff": 2, "name": "Fungi Finger Pocketer", "description": "+2% extra cash from monsters for every 1 million Green Mushroom kills your account has, which can be viewed at Death Note. @ - @ Total Bonus: {%" }),
+        new FungiFingerBonus({ "no": 9, "x": 982, "y": 148, "range": 90, "bonusOn": 0, "bonusOff": 2, "name": "Fungi Finger Pocketer", "description": "+2% extra cash from monsters for every 1 million Green Mushroom kills your account has, which can be viewed at Death Note. @ - @ Total Bonus: {%" }),
         new MainframeBonus({ "no": 10, "x": 1177, "y": 163, "range": 90, "bonusOn": 1, "bonusOff": 2, "name": "My 1st Chemistry Set", "description": "All Vials in Alchemy give DOUBLE the bonus. The bonus description will reflect this doubling." }),
-        new MainframeBonus({ "no": 11, "x": 1300, "y": 380, "range": 90, "bonusOn": 0, "bonusOff": 2, "name": "Unadulterated Banking Fury", "description": "+2% Total Damage for each 'greened' stack of resources in your bank. A 'greened' stack is one with 10 million or more items. @ - @ Total Bonus: {%" }),
+        new UnadulteratedBankingBonus({ "no": 11, "x": 1300, "y": 380, "range": 90, "bonusOn": 0, "bonusOff": 2, "name": "Unadulterated Banking Fury", "description": "+2% Total Damage for each 'greened' stack of resources in your bank. A 'greened' stack is one with 10 million or more items. @ - @ Total Bonus: {%" }),
     ]
 }
 
@@ -376,6 +416,8 @@ export const updateLab = (data: Map<string, any>) => {
     const cards = data.get("cards") as Card[];
     const gemStore = data.get("gems") as GemStore;
     const breeding = data.get("breeding") as Breeding;
+    const deathnote = data.get("deathnote") as Deathnote;
+    const storage = data.get("storage") as Storage;
 
     // Append chip info to the players.
     Object.entries(lab.playerChips).forEach(([playerIndex, chips]) => {
@@ -464,6 +506,11 @@ export const updateLab = (data: Map<string, any>) => {
     (lab.jewels[10] as PyritePyramiteJewel).numberOfActiveOrange = lab.jewels.filter(jewel => jewel.data.name.includes("Pyrite") && jewel.active).length;
     (lab.jewels[12] as EmeraldNavetteJewel).numberOfActiveGreen = lab.jewels.filter(jewel => jewel.data.name.includes("Emerald") && jewel.active).length;
     (lab.jewels[14] as EmeraldPyramiteJewel).numberOfKitchenLevels = cooking.kitchens.reduce((sum, kitchen) => sum += kitchen.recipeLevels + kitchen.mealLevels + kitchen.luckLevels, 0);
+    console.log(deathnote);
+    // Special Bonus handling
+    (lab.bonuses[0] as AnimalFarmBonus).totalSpecies = 0; // TODO: Actually know how many pets you discovered in breeding.
+    (lab.bonuses[9] as FungiFingerBonus).greenMushroomKilled = deathnote.mobKillCount.get("mushG")?.reduce((sum, killCount) => sum += Math.round(killCount), 0) ?? 0;
+    (lab.bonuses[11] as UnadulteratedBankingBonus).greenStacks = storage.chest.filter(item => item.count >= 1e7).length;
 
     return lab;
 }
