@@ -112,9 +112,53 @@ export class Jewel {
     }
 }
 
+export class PyriteRhombolJewel extends Jewel {
+    override getRange = () => {
+        // 1.52 change: Pyrite Rhombol no longer affects itself.
+        return 80;
+    }
+}
+
+export class AmethystRhinestoneJewel extends Jewel {
+    numberOfActivePurples: number = 0;
+    override getBonus = (bonusMultiplier: number = this.bonusMultiplier) => {
+        const extraMultiplier = this.numberOfActivePurples >= 3 ? 2 : 1;
+        return this.data.bonusGiven * bonusMultiplier * extraMultiplier;
+    }
+}
+
+export class PyritePyramiteJewel extends Jewel {
+    numberOfActiveOrange: number = 0;
+    override getBonus = (bonusMultiplier: number = this.bonusMultiplier) => {
+        const extraMultiplier = this.numberOfActiveOrange >= 4 ? 2 : 1;
+        return this.data.bonusGiven * bonusMultiplier * extraMultiplier;
+    }
+}
+
+export class EmeraldNavetteJewel extends Jewel {
+    numberOfActiveGreen: number = 0;
+    override getBonus = (bonusMultiplier: number = this.bonusMultiplier) => {
+        const extraMultiplier = this.numberOfActiveGreen >= 5 ? 2 : 1;
+        return this.data.bonusGiven * bonusMultiplier * extraMultiplier;
+    }
+}
+
+export class EmeraldPyramiteJewel extends Jewel {
+    numberOfKitchenLevels: number = 0;
+    override getBonus = (bonusMultiplier: number = this.bonusMultiplier) => {
+        const extraMultiplier = Math.ceil((this.numberOfKitchenLevels + 1) / 25);
+        return this.data.bonusGiven * bonusMultiplier * extraMultiplier;
+    }
+
+    override getBonusText = () => {
+        const increaseBy = this.data.bonusGiven * this.bonusMultiplier;
+        return `${this.data.effect.replace(/}/g, increaseBy.toString()).replace(/{/g, this.getBonus().toString()) }${this.bonusMultiplier > 1 ? ` (${this.bonusMultiplier}x multiplier from mainframe bonus)` : ""}`;
+    }
+}
+
 const initJewels = () => {
     return [
-        new Jewel(0, { "x": 68, "y": 134, "range": 90, "effect": "Meal cooking is }x faster. This bonus is applied TWICE if all 3 purple jewels are active.", "description": "Boosts Meal Cooking speed", "requirements": [{ "item": "Quest66", "quantity": 5 }, { "item": "Meal1", "quantity": 2000 }, { "item": "Spice0", "quantity": 200 }], "name": "Amethyst Rhinestone", "bonusGiven": 1.5 }),
+        new AmethystRhinestoneJewel(0, { "x": 68, "y": 134, "range": 90, "effect": "Meal cooking is }x faster. This bonus is applied TWICE if all 3 purple jewels are active.", "description": "Boosts Meal Cooking speed", "requirements": [{ "item": "Quest66", "quantity": 5 }, { "item": "Meal1", "quantity": 2000 }, { "item": "Spice0", "quantity": 200 }], "name": "Amethyst Rhinestone", "bonusGiven": 1.5 }),
         new Jewel(1, { "x": 164, "y": 412, "range": 90, "effect": "'Animal Farm' mainframe bonus gives an additional +}% per species. If Animal Farm is not active, then this does nothing.", "description": "Bolsters 'Animal Farm'", "requirements": [{ "item": "Quest35", "quantity": 5 }, { "item": "Meal3", "quantity": 2000 }, { "item": "Spice1", "quantity": 200 }], "name": "Purple Navette", "bonusGiven": 0.5 }),
         new Jewel(2, { "x": 163, "y": 218, "range": 90, "effect": "All players get +}% Lab EXP gain.", "description": "Boosts Lab EXP gain", "requirements": [{ "item": "Timecandy1", "quantity": 10 }, { "item": "Meal5", "quantity": 2000 }, { "item": "Spice2", "quantity": 200 }], "name": "Purple Rhombol", "bonusGiven": 40 }),
         new Jewel(3, { "x": 246, "y": 110, "range": 90, "effect": "Construction slot 1 is now trimmed up, and has }x building Speed. Also trims slot 2 if all 4 blue jewels are active.", "description": "Trims up a construction slot", "requirements": [{ "item": "Quest15", "quantity": 10 }, { "item": "Meal7", "quantity": 5000 }, { "item": "Spice3", "quantity": 400 }], "name": "Sapphire Rhinestone", "bonusGiven": 3 }),
@@ -123,12 +167,12 @@ const initJewels = () => {
         new Jewel(6, { "x": 490, "y": 112, "range": 90, "effect": "Every 24 hours, the } lowest level Kitchen Upgrades across all owned kitchens gain +1 Lv.", "description": "Automatically levels up kitchens", "requirements": [{ "item": "Quest38", "quantity": 2 }, { "item": "Meal13", "quantity": 5000 }, { "item": "Spice6", "quantity": 400 }], "name": "Sapphire Pyramite", "bonusGiven": 2 }),
         new Jewel(7, { "x": 552, "y": 163, "range": 90, "effect": "'No Bubble Left Behind' mainframe bonus gives +} levels instead of +1, and does so for the lowest 4 bubbles instead of 3.", "description": "Bolsters 'No Bubble Left Behind'", "requirements": [{ "item": "DesertA1b", "quantity": 50 }, { "item": "Meal15", "quantity": 10000 }, { "item": "Spice7", "quantity": 1500 }], "name": "Pyrite Rhinestone", "bonusGiven": 2 }),
         new Jewel(8, { "x": 646, "y": 407, "range": 90, "effect": "All players get }x 'non-consume' chance, and raises the max chance from 90% to 98%, allowing for longer AFK with food.", "description": "Boosts 'non-consume' chance", "requirements": [{ "item": "EquipmentPants19", "quantity": 2 }, { "item": "Meal17", "quantity": 10000 }, { "item": "Spice8", "quantity": 1500 }], "name": "Pyrite Navette", "bonusGiven": 3 }),
-        new Jewel(9, { "x": 696, "y": 319, "range": 90, "effect": "All mainframe bonuses and jewels have a }% larger connection range, except for this jewel. This jewel has an 80px connection range no matter what!", "description": "Boosts mainframe connection range", "requirements": [{ "item": "DesertA3b", "quantity": 50 }, { "item": "Meal19", "quantity": 10000 }, { "item": "Spice9", "quantity": 1500 }], "name": "Pyrite Rhombol", "bonusGiven": 30 }),
-        new Jewel(10, { "x": 847, "y": 105, "range": 90, "effect": "All players deal 1.}x more damage. This bonus is applied TWICE if all 4 Orange Jewels are active.", "description": "Boosts player damage", "requirements": [{ "item": "DesertC2b", "quantity": 50 }, { "item": "Meal21", "quantity": 10000 }, { "item": "Spice10", "quantity": 1500 }], "name": "Pyrite Pyramite", "bonusGiven": 10 }),
+        new PyriteRhombolJewel(9, { "x": 696, "y": 319, "range": 90, "effect": "All mainframe bonuses and jewels have a }% larger connection range, except for this jewel. This jewel has an 80px connection range no matter what!", "description": "Boosts mainframe connection range", "requirements": [{ "item": "DesertA3b", "quantity": 50 }, { "item": "Meal19", "quantity": 10000 }, { "item": "Spice9", "quantity": 1500 }], "name": "Pyrite Rhombol", "bonusGiven": 30 }),
+        new PyritePyramiteJewel(10, { "x": 847, "y": 105, "range": 90, "effect": "All players deal 1.}x more damage. This bonus is applied TWICE if all 4 Orange Jewels are active.", "description": "Boosts player damage", "requirements": [{ "item": "DesertC2b", "quantity": 50 }, { "item": "Meal21", "quantity": 10000 }, { "item": "Spice10", "quantity": 1500 }], "name": "Pyrite Pyramite", "bonusGiven": 10 }),
         new Jewel(11, { "x": 989, "y": 407, "range": 90, "effect": "}% reduced incubation egg time. Mo eggs mo problems tho, fo sho.", "description": "Reduces egg incubation time", "requirements": [{ "item": "BabaYagaETC", "quantity": 1 }, { "item": "Meal23", "quantity": 25000 }, { "item": "Spice11", "quantity": 5000 }], "name": "Emerald Rhinestone", "bonusGiven": 28 }),
-        new Jewel(12, { "x": 1079, "y": 233, "range": 90, "effect": "All players have } higher base efficiency in all skills, and +10% skill action speed. This bonus is applied TWICE if all 5 Green Jewels are active.", "description": "Boosts player efficiency", "requirements": [{ "item": "SnowA2a", "quantity": 80 }, { "item": "Meal25", "quantity": 25000 }, { "item": "Spice12", "quantity": 5000 }], "name": "Emerald Navette", "bonusGiven": 200 }),
+        new EmeraldNavetteJewel(12, { "x": 1079, "y": 233, "range": 90, "effect": "All players have } higher base efficiency in all skills, and +10% skill action speed. This bonus is applied TWICE if all 5 Green Jewels are active.", "description": "Boosts player efficiency", "requirements": [{ "item": "SnowA2a", "quantity": 80 }, { "item": "Meal25", "quantity": 25000 }, { "item": "Spice12", "quantity": 5000 }], "name": "Emerald Navette", "bonusGiven": 200 }),
         new Jewel(13, { "x": 1085, "y": 121, "range": 90, "effect": "'Fungi Finger Pocketer' mainframe bonus gives an additional +}% cash bonus per million mushroom kills", "description": "Bolsters 'Fungi Finger Pocketer'", "requirements": [{ "item": "SnowB2a", "quantity": 120 }, { "item": "Meal27", "quantity": 25000 }, { "item": "Spice13", "quantity": 5000 }], "name": "Emerald Rhombol", "bonusGiven": 1 }),
-        new Jewel(14, { "x": 1167, "y": 390, "range": 90, "effect": "Meal cooking is }% faster for every 25 total upgrade levels across all kitchens. @ Total Bonus: {% speed", "description": "Boosts Meal Cooking speed", "requirements": [{ "item": "SnowC4a", "quantity": 150 }, { "item": "Meal29", "quantity": 25000 }, { "item": "Spice14", "quantity": 5000 }], "name": "Emerald Pyramite", "bonusGiven": 1 }),
+        new EmeraldPyramiteJewel(14, { "x": 1167, "y": 390, "range": 90, "effect": "Meal cooking is }% faster for every 25 total upgrade levels across all kitchens. @ Total Bonus: {% speed", "description": "Boosts Meal Cooking speed", "requirements": [{ "item": "SnowC4a", "quantity": 150 }, { "item": "Meal29", "quantity": 25000 }, { "item": "Spice14", "quantity": 5000 }], "name": "Emerald Pyramite", "bonusGiven": 1 }),
         new Jewel(15, { "x": 1300, "y": 208, "range": 90, "effect": "Special Pets in the Fenceyard level up their Passive Bonuses +}% faster", "description": "Boosts Pet Passive level up rate", "requirements": [{ "item": "GalaxyA2b", "quantity": 200 }, { "item": "Meal31", "quantity": 25000 }, { "item": "Spice15", "quantity": 5000 }], "name": "Emerald Ulthurite", "bonusGiven": 30 }),
         new Jewel(16, { "x": 1365, "y": 100, "range": 90, "effect": "All meal bonuses, as shown in the Dinner Table Menu, actaully give 1.}x higher bonus than what is shown. So if a bonus says +100%, it is actually giving +1}%", "description": "Bolsters meals", "requirements": [{ "item": "GalaxyC1b", "quantity": 300 }, { "item": "Meal33", "quantity": 100000 }, { "item": "Spice15", "quantity": 10000 }], "name": "Black Diamond Rhinestone", "bonusGiven": 16 }),
         new Jewel(17, { "x": 1389, "y": 408, "range": 90, "effect": "'Unadulterated Banking Fury' gives an additional +}% Total Damage per greened stack.", "description": "Bolsters 'Unadulterated Banking Fury'", "requirements": [{ "item": "Critter10A", "quantity": 10000 }, { "item": "Meal35", "quantity": 100000 }, { "item": "Spice16", "quantity": 10000 }], "name": "Black Diamond Ulthurite", "bonusGiven": 1 }),
@@ -414,6 +458,12 @@ export const updateLab = (data: Map<string, any>) => {
 
     const jewelMultiplier = (lab.bonuses.find(bonus => bonus.index == 8)?.active ?? false) ? 1.5 : 1;
     lab.jewels.forEach(jewel => jewel.bonusMultiplier = jewelMultiplier);
+
+    // Special Jewel handling
+    (lab.jewels[0] as AmethystRhinestoneJewel).numberOfActivePurples = lab.jewels.filter(jewel => (jewel.data.name.includes("Amethyst") || jewel.data.name.includes("Purple")) && jewel.active).length;
+    (lab.jewels[10] as PyritePyramiteJewel).numberOfActiveOrange = lab.jewels.filter(jewel => jewel.data.name.includes("Pyrite") && jewel.active).length;
+    (lab.jewels[12] as EmeraldNavetteJewel).numberOfActiveGreen = lab.jewels.filter(jewel => jewel.data.name.includes("Emerald") && jewel.active).length;
+    (lab.jewels[14] as EmeraldPyramiteJewel).numberOfKitchenLevels = cooking.kitchens.reduce((sum, kitchen) => sum += kitchen.recipeLevels + kitchen.mealLevels + kitchen.luckLevels, 0);
 
     return lab;
 }
