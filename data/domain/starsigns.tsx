@@ -5,6 +5,7 @@ interface StarBonus {
 }
 
 export class StarSign {
+    hasChip: boolean = false;
     constructor(public name: string, public bonuses: StarBonus[]) { }
 
     getText = () => {
@@ -16,7 +17,7 @@ export class StarSign {
     getBonus = (bonusType: string) => {
         const bonus = this.bonuses.find((bonus) => bonus.text.toLowerCase().includes(bonusType.toLowerCase()));
         if (bonus) {
-            return bonus.bonus;
+            return this.hasChip ? bonus.bonus * 2 : bonus.bonus;
         }
         return 0;
     }

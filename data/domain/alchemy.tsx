@@ -1,4 +1,5 @@
-import { lavaFunc } from '../utility'
+import { lavaFunc, nFormatter, round } from '../utility'
+import { Cooking } from './cooking';
 import { Item } from './items';
 import { Lab } from './lab';
 
@@ -104,8 +105,8 @@ export class Bubble {
         return toReturn;
     }
 
-    getBonus = (round: boolean = false): number => {
-        return lavaFunc(this.func, this.level, this.x1, this.x2, round);
+    getBonus = (roundResult: boolean = false): number => {
+        return lavaFunc(this.func, this.level, this.x1, this.x2, roundResult);
     }
 
     getBonusText = (): string => {
@@ -113,6 +114,15 @@ export class Bubble {
         return handleToolBubbles(titleText, this.name);
     }
 
+}
+
+export class DiamonChefBubble extends Bubble {
+    diamonMeals: number = 0;
+
+    override getBonus = (roundResult: boolean = false): number => {
+        const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, roundResult);
+        return roundResult ? round(Math.pow(bonus, this.diamonMeals)) : Math.pow(bonus, this.diamonMeals);
+    }
 }
 
 export class Cauldron {
@@ -153,7 +163,7 @@ export class Vial {
     }
 
     getBonusText = (): string => {
-        return this.description.replace(/{/g, this.getBonus(true).toString());
+        return this.description.replace(/{/g, nFormatter(this.getBonus(true), "Smaller"));
 
     }
 
@@ -305,7 +315,7 @@ const initAlchemy = () => {
     kazam_cauldron.bubbles.push(new Bubble("Yellow Bargain", "Y", "14", 40, 12, "decay", "The material costs of ALL yellow bubbles are {% lower.", JSON.parse('[{"item": "Critter6", "quantity": 250}, {"item": "Liquid2", "quantity": 3}]')))
     kazam_cauldron.bubbles.push(new Bubble("Mr Massacre", "Y", "15", 90, 50, "decay", "+{% Multikill per damage tier. Remember, damage tier is shown by the Purple Bar in AFK info, and multikill is bigtime for resources", JSON.parse('[{"item": "Refinery3", "quantity": 8}, {"item": "Liquid3", "quantity": 3}]')))
     kazam_cauldron.bubbles.push(new Bubble("Egg Ink", "Y", "16", 40, 40, "decay", "+{% faster Egg Incubation Time in the Pet Nest. This will be an absolutely VITAL upgrade once you unlock pet egg rarity!", JSON.parse('[{"item": "Spice0", "quantity": 100}, {"item": "Liquid3", "quantity": 4}]')))
-    kazam_cauldron.bubbles.push(new Bubble("Diamond Chef", "Y", "17", 1.6, 40, "decayMulti", "{x faster Meal and Fire Kitchen Speeds for every Meal at Lv 11+. This is when the meal plate goes Diamond, just so you know.", JSON.parse('[{"item": "Spice6", "quantity": 100}, {"item": "Liquid3", "quantity": 4}]')))
+    kazam_cauldron.bubbles.push(new DiamonChefBubble("Diamond Chef", "Y", "17", 0.3, 13, "decayMulti", "{x faster Meal and Fire Kitchen Speeds for every Meal at Lv 11+. This is when the meal plate goes Diamond, just so you know.", JSON.parse('[{"item": "Spice6", "quantity": 100}, {"item": "Liquid3", "quantity": 4}]')))
     kazam_cauldron.bubbles.push(new Bubble("Card Champ", "Y", "18", 100, 40, "decay", "+{% Card Drop Chance for all card types, even Party Dungeon cards!", JSON.parse('[{"item": "Spice9", "quantity": 100}, {"item": "Liquid3", "quantity": 5}]')))
     kazam_cauldron.bubbles.push(new Bubble("Petting The Rift", "Y", "19", 1.5, 60, "decayMulti", "{x New Pet Chance for every gap you traverse in the SpaceTime Rift. The Rift entrance is deep in World 4, far above the 8 armed octodars.", JSON.parse('[{"item": "Critter10", "quantity": 100}, {"item": "Liquid3", "quantity": 5}]')))
     alchemy.vials.push(new Vial(0, "Copper Corona", 3, 0, "add", "Orange bubble cauldron brew speed is increased by +{%", JSON.parse('[{"item": "Copper", "quantity": -1}, {"item": "Liquid1", "quantity": -1}]')))
@@ -439,6 +449,7 @@ export default function parseAlchemy(alchemyData: Array<Map<string, number>>, bo
 export function updateAlchemy(data: Map<string, any>) {
     const alchemy = data.get("alchemy") as Alchemy;
     const lab = data.get("lab") as Lab;
+    const cooking = data.get("cooking") as Cooking;
 
     if (lab.bonuses.find(bonus => bonus.name == "My 1st Chemistry Set")?.active ?? false) {
         alchemy.vials.forEach(vial => vial.bonusMulitplier = 2)
@@ -451,6 +462,11 @@ export function updateAlchemy(data: Map<string, any>) {
         }
         const sortedBubbles = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles.slice(0, 15).filter(bubble => bubble.level > 5)).sort((bubble1, bubble2) => bubble1.level < bubble2.level ? -1 : 1);
         sortedBubbles.slice(0, bubblesToUpgrade).forEach(bubble => bubble.labUpgrade = true);
+    }
+
+    const diamonChefBubble = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).find(bubble => bubble.name == "Diamond Chef") as DiamonChefBubble;
+    if (diamonChefBubble) {
+        diamonChefBubble.diamonMeals = cooking.meals.reduce((sum, meal) => sum += meal.level >= 11 ? 1 : 0, 0);
     }
 
     return alchemy;

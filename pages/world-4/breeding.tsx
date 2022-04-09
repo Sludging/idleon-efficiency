@@ -266,8 +266,8 @@ function EggDisplay() {
                 }
                 <ComponentAndLabel label="Dead Cells" component={
                     <Box direction="row" gap="small" align="center"> 
-                        <IconImage data={{ location: 'PetDeadCell', height: 33, width: 33 }} />
                         <Text>{nFormatter(breeding.deadCells)}</Text>
+                        <IconImage data={{ location: 'PetDeadCell', height: 25, width: 25}} />
                     </Box>
                 } />
                 
