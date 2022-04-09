@@ -303,6 +303,7 @@ export class Breeding {
     timeTillEgg: number = 0;
     totalEggTime: number = 0;
 
+    speciesUnlocks: number[] = [];
     skillLevel: number = 0;
     deadCells: number = 0;
 
@@ -393,6 +394,8 @@ export const parseBreeding = (petsStored: any[][], pets: any[][], optionsList: a
     breedingData[0].forEach(egg => {
         breeding.eggs.push(new Egg(egg));
     });
+
+    breeding.speciesUnlocks = breedingData[1];
 
     breedingData[2].forEach((upgrade, index) => {
         breeding.upgrade[index].level = upgrade;

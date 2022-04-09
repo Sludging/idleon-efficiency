@@ -402,6 +402,26 @@ export class Player {
         return Math.max(familyBonus, 1) + (gearBonus + ((this.talents.find(skill => skill.skillIndex == 99)?.getBonus() ?? 0) + (goldFoodStampBonus + (achievement ? 5 : 0)))) / 100;
     }
 
+    getMiscBonusFromGear = (bonusType: string) => {
+        let gearBonus = 0;
+        this.gear.equipment.forEach((gear, index) => {
+            if (gear) {
+
+                if (index == 3 && this.labInfo.chips.find(chip => chip.chip?.index == 18) != undefined ||  // Pendant
+                    index == 10 && this.labInfo.chips.find(chip => chip.chip?.index == 16) != undefined || // Trophy
+                    index == 9 && this.labInfo.chips.find(chip => chip.chip?.index == 17) != undefined) {  // Upper Keychain
+                    gearBonus += gear.getMiscBonus(bonusType) * 2;
+                }
+                else {
+                    gearBonus += gear.getMiscBonus(bonusType)
+                }
+            }
+        })
+        gearBonus = this.obolStats.flatMap(stat => stat.stats).filter(stat => stat.extra.includes(bonusType)).reduce((sum, stat) => sum += stat.getValue(), gearBonus);
+
+        return gearBonus;
+    }
+
     setDoubleClaimChance = (bubbleBonus: number, bribeBonus: number, guildBonus: number) => {
         const cardBonus = Card.GetTotalBonusForId(this.cardInfo?.equippedCards ?? [], 47);
         const lazyCrateBox = this.postOffice.find(box => box.name == "Lazzzy Lootcrate");
@@ -417,17 +437,16 @@ export class Player {
     }
 
     setMonsterCash = (strBubbleBonus: number, wisBubbleBonus: number, agiBubbleBonus: number, mealBonus: number,
-        petArenaBonus1: number, petArenaBonus2: number, labBonus: number, vialBonus: number, dungeonBonus: number, guildBonus: number, 
+        petArenaBonus1: number, petArenaBonus2: number, labBonus: number, vialBonus: number, dungeonBonus: number, guildBonus: number,
         family: Family, goldFoodStampBonus: number, goldFoodAchievement: boolean, prayers: Prayer[], arcadeBonus: number) => {
-        let gearBonus = this.gear.equipment.reduce((sum, gear) => sum += gear?.getMiscBonus("Money") ?? 0, 0);
-        gearBonus = this.obolStats.flatMap(stat => stat.stats).filter(stat => stat.extra.includes("Money")).reduce((sum, stat) => sum += stat.getValue(), gearBonus);
+        let gearBonus = this.getMiscBonusFromGear("Money");
         const goldenFoodBonus = this.gear.food.filter(food => food && food.goldenFood != undefined && food.description.includes("Boosts coins dropped"))
             .reduce((sum, food) => sum += (food as Food).goldFoodBonus(food?.count ?? 0, this.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus() ?? 0, goldFoodStampBonus, goldFoodAchievement)), 0);
         const cardBonus = Card.GetTotalBonusForId(this.cardInfo?.equippedCards ?? [], 11);
         const poBox = this.postOffice.find(box => box.index == 13);
         const boxBonus = poBox?.bonuses[2].getBonus(poBox.level, 2) ?? 0;
         const prayerBonus = this.activePrayers.filter(prayer => prayer == 8).length > 0 ? (this.activePrayers.map(prayer => prayers.find(actual => actual.index == prayer && prayer == 8)?.getBonus() ?? 0)[0]) : 0;
-        
+
         const bubbleAtrributeMath = (strBubbleBonus * Math.floor(this.stats.strength / 250))
             + (agiBubbleBonus * Math.floor(this.stats.agility / 250))
             + (wisBubbleBonus * Math.floor(this.stats.wisdom / 250))
@@ -722,7 +741,7 @@ export const updatePlayers = (data: Map<string, any>) => {
     // Update player obols info so we can use it in maths
     players.forEach(player => {
         obols.playerStats[player.playerID]?.stats.filter(stat => stat.getValue() > 0).forEach(stat => {
-            const matchingFamilyStat = obols.familyStats.stats.find(famStat => stat.extra == '' ? famStat.displayName == stat.displayName : stat.extra == famStat.extra && famStat.getValue() > 0);           
+            const matchingFamilyStat = obols.familyStats.stats.find(famStat => stat.extra == '' ? famStat.displayName == stat.displayName : stat.extra == famStat.extra && famStat.getValue() > 0);
             const newObolStat = new ObolStats();
             newObolStat.addStat(stat);
             if (matchingFamilyStat) {
@@ -737,6 +756,13 @@ export const updatePlayers = (data: Map<string, any>) => {
                 newObolStat.addStat(stat);
                 player.obolStats.push(newObolStat);
             });
+    })
+
+    // Update star signs if has double starsign chip.
+    players.forEach(player => {
+        if (player.labInfo.chips.find(chip => chip.chip?.index == 15) != undefined) {
+            player.starSigns.forEach(sign => sign.hasChip == true);
+        }
     })
 
     const alchemy = data.get("alchemy") as Alchemy;
@@ -773,7 +799,7 @@ export const updatePlayers = (data: Map<string, any>) => {
     const goldFoodStampBonus = stamps.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC7")?.getBonus() ?? 0;
     const goldFoodAchievement = achievementsInfo[AchievementConst.GoldFood].completed;
     const prayers = data.get("prayers") as Prayer[];
-    const arcadeBonus = arcade.bonuses.filter(bonus => [10,11].includes(bonus.index)).reduce((sum, bonus) => sum += bonus.getBonus(), 0);
+    const arcadeBonus = arcade.bonuses.filter(bonus => [10, 11].includes(bonus.index)).reduce((sum, bonus) => sum += bonus.getBonus(), 0);
     players.forEach(player => {
         player.setMonsterCash(strBubbleBonus, wisBubbleBonus, agiBubbleBonus, mealBonus,
             petArenaBonus1, petArenaBonus2, labBonus, vialBonus,
