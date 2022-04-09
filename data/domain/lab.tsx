@@ -506,9 +506,9 @@ export const updateLab = (data: Map<string, any>) => {
     (lab.jewels[10] as PyritePyramiteJewel).numberOfActiveOrange = lab.jewels.filter(jewel => jewel.data.name.includes("Pyrite") && jewel.active).length;
     (lab.jewels[12] as EmeraldNavetteJewel).numberOfActiveGreen = lab.jewels.filter(jewel => jewel.data.name.includes("Emerald") && jewel.active).length;
     (lab.jewels[14] as EmeraldPyramiteJewel).numberOfKitchenLevels = cooking.kitchens.reduce((sum, kitchen) => sum += kitchen.recipeLevels + kitchen.mealLevels + kitchen.luckLevels, 0);
-    console.log(deathnote);
+
     // Special Bonus handling
-    (lab.bonuses[0] as AnimalFarmBonus).totalSpecies = 0; // TODO: Actually know how many pets you discovered in breeding.
+    (lab.bonuses[0] as AnimalFarmBonus).totalSpecies = breeding.speciesUnlocks.reduce((sum, world) => sum += world, 0);
     (lab.bonuses[9] as FungiFingerBonus).greenMushroomKilled = deathnote.mobKillCount.get("mushG")?.reduce((sum, killCount) => sum += Math.round(killCount), 0) ?? 0;
     (lab.bonuses[11] as UnadulteratedBankingBonus).greenStacks = storage.chest.filter(item => item.count >= 1e7).length;
 
