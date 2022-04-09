@@ -127,20 +127,21 @@ function MainframeDisplay() {
                     {
                         lab && lab.jewels.sort((jewel1, jewel2) => jewel1.data.x < jewel2.data.y ? -1 : 1).map((jewel, index) => {
                             return (
-                                <TipDisplay
-                                    key={index}
-                                    body={jewel.getBonusText()}
-                                    direction={TipDirection.Down}
-                                    size='small'
-                                    maxWidth='large'
-                                    heading={jewel.data.name}
-                                >
-                                    <ShadowBox background="dark-1" pad="small" margin={{ right: 'small', bottom: 'small' }} border={jewel.active ? { side: 'all', size: '2px', color: 'green-1' } : undefined} >
-                                        <Box width={{ max: '64px' }} title={jewel.data.name} style={{ opacity: jewel.available ? 1 : 0.5, filter: jewel.available ? 'grayscale(0)' : 'grayscale(70%)' }}>
-                                            <Box className={jewel.getClass()} />
-                                        </Box>
-                                    </ShadowBox>
-                                </TipDisplay>
+                                <Box key={index} margin={{ right: 'small', bottom: 'small' }} >
+                                    <TipDisplay
+                                        body={jewel.getBonusText()}
+                                        direction={TipDirection.Down}
+                                        size='small'
+                                        maxWidth='large'
+                                        heading={jewel.data.name}
+                                    >
+                                        <ShadowBox background="dark-1" pad="small" border={jewel.active ? { side: 'all', size: '2px', color: 'green-1' } : undefined} >
+                                            <Box width={{ max: '64px' }} title={jewel.data.name} style={{ opacity: jewel.available ? 1 : 0.5, filter: jewel.available ? 'grayscale(0)' : 'grayscale(70%)' }}>
+                                                <Box className={jewel.getClass()} />
+                                            </Box>
+                                        </ShadowBox>
+                                    </TipDisplay>
+                                </Box>
                             )
                         })
                     }
@@ -225,7 +226,7 @@ function ChipDisplay() {
                 <Grid columns={{ size: 'auto', count: 7 }}>
                     {
                         lab.chips.map((chip, index) => (
-                            <TipDisplay 
+                            <TipDisplay
                                 key={index}
                                 heading={chip.data.name}
                                 // body={
@@ -241,9 +242,9 @@ function ChipDisplay() {
                                 body={chip.getBonusText()}
                                 direction={TipDirection.Up}
                                 size='medium'
-                                
+
                             >
-                                <Box style={{ opacity: chip.count == -1 ? 0.5 : 1 }}  border={{ color: 'grey-1', side: 'all', size: '2px' }} align="center" justify='center' direction="row">
+                                <Box style={{ opacity: chip.count == -1 ? 0.5 : 1 }} border={{ color: 'grey-1', side: 'all', size: '2px' }} align="center" justify='center' direction="row">
                                     <Box width={{ max: '42px', min: '42px' }} height={{ max: '42px', min: '42px' }}>
                                         <Box className={chip.getClass()} />
                                     </Box>
