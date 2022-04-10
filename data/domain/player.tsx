@@ -445,7 +445,7 @@ export class Player {
         const cardBonus = Card.GetTotalBonusForId(this.cardInfo?.equippedCards ?? [], 11);
         const poBox = this.postOffice.find(box => box.index == 13);
         const boxBonus = poBox?.bonuses[2].getBonus(poBox.level, 2) ?? 0;
-        const prayerBonus = this.activePrayers.filter(prayer => prayer == 8).length > 0 ? (this.activePrayers.map(prayer => prayers.find(actual => actual.index == prayer && prayer == 8)?.getBonus() ?? 0)[0]) : 0;
+        const prayerBonus = this.activePrayers.filter(prayer => prayer == 8).length > 0 ? (this.activePrayers.filter(prayer => prayer == 8).map(prayer => prayers.find(actual => actual.index == prayer)?.getBonus() ?? 0)[0]) : 0;
 
         const bubbleAtrributeMath = (strBubbleBonus * Math.floor(this.stats.strength / 250))
             + (agiBubbleBonus * Math.floor(this.stats.agility / 250))
@@ -463,17 +463,17 @@ export class Player {
                 (this.talents.find(talent => talent.skillIndex == 644)?.getBonus() ?? 0) +
                 goldenFoodBonus) / 100);
 
+        this.monsterCash.sources.push({ name: "Prayer (*)", value: prayerBonus });
+        this.monsterCash.sources.push({ name: "Alchemy Bubbles (STR/AGI/WIS) (*)", value: bubbleAtrributeMath });
+        this.monsterCash.sources.push({ name: "Meals (*)", value: mealBonus });
+        this.monsterCash.sources.push({ name: "Pet Arena (*)", value: ((petArenaBonus1 * 0.5) + petArenaBonus2) * 100 });
+        this.monsterCash.sources.push({ name: "Lab Bonus (*)", value: labBonus });
         this.monsterCash.sources.push({ name: "Equipment", value: gearBonus });
         this.monsterCash.sources.push({ name: "Gold Food", value: goldenFoodBonus });
         this.monsterCash.sources.push({ name: "Card", value: cardBonus });
-        this.monsterCash.sources.push({ name: "Post Office", value: boxBonus });
-        this.monsterCash.sources.push({ name: "Prayer", value: prayerBonus });
-        this.monsterCash.sources.push({ name: "Alchemy Bubbles (STR/AGI/WIS)", value: bubbleAtrributeMath });
+        this.monsterCash.sources.push({ name: "Post Office", value: boxBonus });   
         this.monsterCash.sources.push({ name: "Vial", value: vialBonus });
-        this.monsterCash.sources.push({ name: "Meals", value: mealBonus });
-        this.monsterCash.sources.push({ name: "Pet Arena", value: ((petArenaBonus1 * 0.5) + petArenaBonus2) * 100 });
         this.monsterCash.sources.push({ name: "Guild + World bonus", value: (guildBonus * currentWorldBonus) });
-        this.monsterCash.sources.push({ name: "Lab Bonus", value: labBonus });
         this.monsterCash.sources.push({ name: "Dungeons Bonus", value: dungeonBonus });
         this.monsterCash.sources.push({ name: "Arcade", value: arcadeBonus });
         this.monsterCash.sources.push({
@@ -791,7 +791,7 @@ export const updatePlayers = (data: Map<string, any>) => {
     const mealBonus = cooking.meals.filter(meal => meal.bonusKey == "Cash").reduce((sum, meal) => sum += meal.getBonus() ?? 0, 0);
     const petArenaBonus1 = breeding.hasBonus(5) ? 1 : 0;
     const petArenaBonus2 = breeding.hasBonus(14) ? 1 : 0;
-    const labBonus = lab.bonuses.find(bonus => bonus.index == 9)?.getBonus() ?? 0;
+    const labBonus = lab.bonuses.find(bonus => bonus.active && bonus.index == 9)?.getBonus() ?? 0;
     const vialBonus = alchemy.vials.find(vial => vial.name == "Dieter Drink")?.getBonus() ?? 0;
     const dungeonBonus = dungeons.passives.get(PassiveType.Flurbo)?.find(bonus => bonus.effect == "Monster Cash")?.getBonus() ?? 0;
     const guildBonus = guild.guildBonuses.find(bonus => bonus.index == 8)?.getBonus() ?? 0;
