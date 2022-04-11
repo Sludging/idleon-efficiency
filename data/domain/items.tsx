@@ -445,6 +445,44 @@ export class Item {
         return `icons-7272 icons-${this.internalName}`;
     }
 
+    getImageData = () => {
+        if (getEnhancerRegex().exec(this.internalName)) {
+            return {
+                height: 34,
+                location: `${this.internalName}_x1`,
+                width: 34
+            };
+        }
+        if (getRegex().exec(this.internalName)) {
+            return {
+                height: 36,
+                location: this.internalName,
+                width: 28
+            };
+        }
+        if (liquidRegex().exec(this.internalName)) {
+            return {
+                height: 36,
+                location: `${this.internalName}_x1`,
+                width: 36
+            };
+        }
+        // Cons dem for some reason has capital x.
+        if (this.internalName == "ObolPinkCons") {
+            return {
+                height: 36,
+                location: `${this.internalName}_X1`,
+                width: 36
+            };
+        }
+
+        return {
+            height: 72,
+            location: `${this.internalName}`,
+            width: 72
+        };
+    }
+
     addStone = (data: StoneProps) => {
         if (data == undefined) {
             return;

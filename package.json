@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_OPTIONS='--inspect' next dev",
+    "dev": "NODE_OPTIONS='--inspect' NODE_EXTRA_CA_CERTS=\"$(cat ./certs/.capath)\" node scripts/create-local-server.js",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "ssl:setup": "node scripts/create-ssl-certs.js"
   },
   "dependencies": {
     "@sentry/nextjs": "^6.14.3",
@@ -27,8 +28,13 @@
   "devDependencies": {
     "@types/react": "17.0.21",
     "babel-plugin-styled-components": "^1.13.2",
+    "chalk": "^5.0.1",
+    "compression": "^1.7.4",
+    "devcert": "^1.2.0",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
+    "express": "^4.17.3",
+    "spdy": "^4.0.2",
     "typescript": "4.4.3"
   }
 }
