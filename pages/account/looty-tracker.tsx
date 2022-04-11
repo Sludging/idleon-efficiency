@@ -11,14 +11,15 @@ import { LootyInfo } from '../../data/domain/lootyTracker';
 import { ItemSources } from '../../data/domain/items';
 import { NextSeo } from 'next-seo';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
+import IconImage from '../../components/base/IconImage';
 
 const getRegex = () => { return /Cards(\w)(\d+)/g };
 const getEnhancerRegex = () => { return /DungEnhancer(\d+)/g };
 
 
-function ItemSourcesDisplay({ sources }: { sources: ItemSources}) {
+function ItemSourcesDisplay({ sources }: { sources: ItemSources }) {
 
-    const possibleSources = useMemo(() => { 
+    const possibleSources = useMemo(() => {
         if (!sources) {
             return []
         }
@@ -34,16 +35,16 @@ function ItemSourcesDisplay({ sources }: { sources: ItemSources}) {
         <Box>
             <Text size="medium">Obtain From:</Text>
             {
-                possibleSources.length > 0 ? 
-                <Box>
-                    
-                    {
-                        possibleSources.map((source, index) => (
-                            <Text size="small" key={index}>{source}</Text>
-                        ))
-                    }
-                </Box> :
-                <>I don&apos;t know yet</>
+                possibleSources.length > 0 ?
+                    <Box>
+
+                        {
+                            possibleSources.map((source, index) => (
+                                <Text size="small" key={index}>{source}</Text>
+                            ))
+                        }
+                    </Box> :
+                    <>I don&apos;t know yet</>
             }
         </Box>
     )
@@ -54,24 +55,6 @@ function LootyTracker() {
     const [onlyMissing, setOnlyMissing] = useState<boolean>(false);
     const [onlyLooted, setOnlyLooted] = useState<boolean>(false);
     const appContext = useContext(AppContext);
-
-    const getClass = (rawName: string) => {
-        if (getEnhancerRegex().exec(rawName)) {
-            return `icons-3434 icons-${rawName}_x1`;
-        }
-        if (getRegex().exec(rawName)) {
-            return `icons-2836 icons-${rawName}`;
-        }
-        // Cons dem for some reason has capital x.
-        if (rawName == "ObolPinkCons") {
-            return `icons-3636 icons-${rawName}_X1`;    
-        }
-        // 35 doesn't have an image for some reason.
-        if (rawName == "StampA35") {
-            return `icons-3636 icons-StampA34_x1`;    
-        }
-        return `icons-3636 icons-${rawName}_x1`;
-    }
 
     const getWidth = (rawName: string) => {
         if (getEnhancerRegex().exec(rawName)) {
@@ -112,8 +95,8 @@ function LootyTracker() {
                     <Grid columns={{ size: "36px" }} gap="small">
                         {
                             !onlyMissing && !onlyLooted && lootyInfo.obtainable.map((item, index) => (
-                                <Box title={item.displayName} key={index} width={{ max: getWidth(item.internalName) }} >
-                                    <Box style={{ opacity: lootyInfo.isLooted(item.internalName) ? 1 : 0.5 }} className={getClass(item.internalName)} />
+                                <Box key={index} style={{ opacity: lootyInfo.isLooted(item.internalName) ? 1 : 0.5 }} width={{ max: getWidth(item.internalName) }}>
+                                    <IconImage data={item.getImageData()} scale={item.getImageData().width > 36 ? 0.5 : 1} />
                                 </Box>
                             ))
                         }
@@ -128,7 +111,7 @@ function LootyTracker() {
                                         maxWidth="large"
                                     >
                                         <Box width={{ max: getWidth(item.internalName) }}>
-                                            <Box className={getClass(item.internalName)} />
+                                            <IconImage data={item.getImageData()} scale={item.getImageData().width > 36 ? 0.5 : 1} />
                                         </Box>
                                     </TipDisplay>
                                 </Box>
@@ -136,8 +119,8 @@ function LootyTracker() {
                         }
                         {
                             onlyLooted && lootyInfo.obtained.map((item, index) => (
-                                <Box title={item.displayName} width={{ max: getWidth(item.internalName) }} key={index}>
-                                    <Box className={getClass(item.internalName)} />
+                                <Box key={index} width={{ max: getWidth(item.internalName) }}>
+                                    <IconImage data={item.getImageData()} scale={item.getImageData().width > 36 ? 0.5 : 1} />
                                 </Box>
                             ))
                         }
