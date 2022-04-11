@@ -98,6 +98,7 @@
 //         : 2;
 // }),
 
+import { ImageData } from "./imageData";
 import { SkillsIndex } from "./player";
 
 
@@ -312,15 +313,27 @@ interface CapacityProps {
 class Bag {
     constructor(public name: string, public capacity: number, public displayName?: string, public skill?: SkillsIndex, ) { }
 
-    getClass = () => {
+    getImageData = (): ImageData => {
         if (Object.keys(capacityToBagMapping).includes(this.name)) {
             const bagName = capacityToBagMapping[this.name][this.capacity];
             if (bagName == "Blank" || bagName == this.name) {
-                return `icons-3636 icons-MaxCapBagNone`;
+                return {
+                    location: 'MaxCapBagNone',
+                    width: 36,
+                    height: 36
+                }
             }
-            return `icons-3636 icons-${bagName}_x1`;
+            return {
+                location: `${bagName}_x1`,
+                width: 36,
+                height: 36
+            }
         }
-        return "";
+        return {
+            location: 'Blank',
+            width: 36,
+            height: 36,
+        };
     }
 
     getCapacity = (props: CapacityProps) => {

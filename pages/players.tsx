@@ -50,6 +50,7 @@ import { Dungeons, PassiveType } from '../data/domain/dungeons';
 import { MapInfo } from '../data/domain/maps';
 import { EnemyInfo } from '../data/domain/enemies';
 import Stat from '../components/base/Stat';
+import IconImage from '../components/base/IconImage';
 
 
 function ItemSourcesDisplay({ sources, dropInfo }: { sources: ItemSources, dropInfo: DropSource[] }) {
@@ -282,8 +283,8 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
             <Grid columns={size == "small" ? '100%' : ['50%', '50%']} fill>
                 <Box pad="medium" gap="small">
                     <Box direction="row" align="center" gap="small">
-                        <Box width={{ max: '36px', min: '36px' }} title={player.class}>
-                            <Box className={player.getClassClass()} />
+                        <Box title={player.class}>
+                            <IconImage data={player.getClassImageData()} />
                         </Box>
                         <Box gap="small">
                             <Box direction="row" gap="small">
@@ -398,8 +399,8 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                                 return (
                                     <Box key={index}>
                                         <Stack key={index}>
-                                            <Box align="center" fill width={{ min: '28px', max: '28px' }} height={{ min: '36px', max: '36px' }}>
-                                                <Box height={{ min: '36px', max: '36px' }} className={card.getClass()} />
+                                            <Box>
+                                                <IconImage data={card.getImageData()} />
                                             </Box>
                                             <TipDisplay
                                                 heading={`${card.displayName}`}
@@ -407,8 +408,8 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                                                 size={size}
                                                 direction={TipDirection.Down}
                                             >
-                                                <Box align="center" width={{ max: '31px', min: '31px' }} height={{ min: '43px', max: '43px' }}>
-                                                    <Box height={{ min: '43px', max: '43px' }} key={`border_${index}`} className={card.getBorderClass()} />
+                                                <Box>
+                                                    <IconImage data={card.getBorderImageData()} />
                                                 </Box>
                                             </TipDisplay>
                                         </Stack>
@@ -433,9 +434,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                                             size={size}
                                             direction={TipDirection.Down}
                                         >
-                                            <Box width={{ min: '50px', max: '50px' }}>
-                                                <Box className={buff.getClass()} />
-                                            </Box>
+                                            <IconImage data={buff.getImageData()} scale={0.8}/>
                                         </TipDisplay>
                                     </Box>
                                 )
@@ -459,9 +458,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                                                     size={size}
                                                     direction={TipDirection.Down}
                                                 >
-                                                    <Box width={{ min: '50px', max: '50px' }}>
-                                                        <Box className={shrine.getClass()} />
-                                                    </Box>
+                                                    <IconImage data={shrine.getImageData()} scale={0.7}/>
                                                 </TipDisplay>
                                             </Box>
                                         )
@@ -492,7 +489,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                                                     direction={TipDirection.Down}
                                                 >
                                                     <Box width={{ min: '50px', max: '50px' }}>
-                                                        <Box className={prayer.getClass()} />
+                                                        <IconImage data={prayer.getImageData()} />
                                                     </Box>
                                                 </TipDisplay>
                                             </Box>
@@ -509,7 +506,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
     )
 }
 
-function ItemDisplay({ item, size, goldFoodMulti }: { item: Item | undefined, size?: string, goldFoodMulti?: number }) {
+function ItemDisplay({ item, size = "50px", goldFoodMulti }: { item: Item | undefined, size?: string, goldFoodMulti?: number }) {
 
     const statsDisplay = (stats: ItemStat[], description: string) => {
         if ((item as Food).goldenFood != undefined) {
@@ -539,15 +536,15 @@ function ItemDisplay({ item, size, goldFoodMulti }: { item: Item | undefined, si
                 {item.count > 0 ?
 
                     <Box direction="row" align="center">
-                        <Box width={{ max: size ? size : '50px', min: size ? size : '50px' }} align="center">
-                            <Box className={item.getClass()} />
+                        <Box width={{ max: size, min: size }} align="center">
+                            <IconImage data={item.getImageData()} scale={ parseInt(size.replace('px', '')) / 36 }/>
                         </Box>
                         <Box>
                             <Text>{item.count}</Text>
                         </Box>
                     </Box>
-                    : <Box width={{ max: '50px', min: '50px' }} align="center">
-                        <Box className={item.getClass()} />
+                    : <Box width={{ max: size, min: size }} align="center">
+                        <IconImage data={item.getImageData()} scale={ parseInt(size.replace('px', '')) / 36 } />
                     </Box>
                 }
             </Box>
@@ -989,8 +986,8 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
                 {
                     player.capacity.bags.filter((bag) => bag.displayName != undefined).map((bag, index) => (
                         <Box align="center" key={index} gap="small">
-                            <Box width={{ max: '50px', min: '50px' }}>
-                                <Box className={bag.getClass()} />
+                            <Box>
+                                <IconImage data={bag.getImageData()} scale={50 / 36 }/>
                             </Box>
                             <Text size="small">{bag.displayName}: {Intl.NumberFormat().format(bag.getCapacity(capBonuses.get(bag.name)))}</Text>
                         </Box>
@@ -1030,8 +1027,8 @@ function TalentDisplay({ player }: { player: Player }) {
                                                         dropProps={{ align: { top: 'bottom' } }}
                                                     >
                                                         <Box pad="xxsmall" key={`player_${player.playerID}_talents_${index}`} direction="row" gap="xxsmall">
-                                                            <Box width="50px" align="center">
-                                                                <Box style={{ opacity: talent.level > 0 ? 1 : 0.2 }} className={talent.getClass()} title={talent.name} />
+                                                            <Box title={talent.name}  style={{ opacity: talent.level > 0 ? 1 : 0.2 }} align="center">
+                                                                <IconImage data={talent.getImageData()} scale={0.8} />
                                                             </Box>
                                                             <Box direction="row" gap="xxsmall">
                                                                 <Text>{talent.level} </Text>
@@ -1067,7 +1064,7 @@ function PostOfficeDisplay({ player, extra }: { player: Player, extra: PostOffic
         <Box pad="medium" gap="small" fill>
             <Text size='medium'>Post Office</Text>
             <Text size='small'>Unspent: {unSpentPoints}</Text>
-            <Grid columns={{ count: size == "small" ? 2 : 4, size: "auto" }} gap="none">
+            <Grid columns={{ count: size == "small" ? 2 : 4, size: "auto" }} gap="xsmall">
                 {
                     player.postOffice.filter((box) => box.name != "Filler").map((box) => {
                         return (
@@ -1094,9 +1091,7 @@ function PostOfficeDisplay({ player, extra }: { player: Player, extra: PostOffic
                                 >
                                     {/* Do the opacity thing in styled components? */}
                                     <Box align="center" fill direction="row" gap="small">
-                                        <Box width={{ max: '88px' }} fill>
-                                            <Box style={{ opacity: box.level > 0 ? 1 : 0.3 }} className={box.getClass()} />
-                                        </Box>
+                                        <IconImage data={box.getImageData()} scale={0.7} />
                                         <Box background="black">
                                             <Text>{box.level}</Text>
                                         </Box>
@@ -1164,8 +1159,8 @@ function InventoryDisplay({ player }: { player: Player }) {
                                 return (
                                     <Box key={index} margin={{ right: 'small', bottom: 'small' }}>
                                         {opacity == 1 ?
-                                            <Box style={{ opacity: opacity }} width={{ max: '36px', min: '36px' }}>
-                                                <Box className={bagItem.getClass()} />
+                                            <Box style={{ opacity: opacity }}>
+                                                <IconImage data={bagItem.getImageData()} />
                                             </Box>
                                             :
                                             <TipDisplay
@@ -1175,8 +1170,8 @@ function InventoryDisplay({ player }: { player: Player }) {
                                                 direction={TipDirection.Down}
                                                 maxWidth="large"
                                             >
-                                                <Box style={{ opacity: opacity }} width={{ max: '36px', min: '36px' }}>
-                                                    <Box className={bagItem.getClass()} />
+                                                <Box style={{ opacity: opacity }}>
+                                                    <IconImage data={bagItem.getImageData()} />
                                                 </Box>
                                             </TipDisplay>
                                         }
@@ -1230,8 +1225,8 @@ function ZowInfo({ player }: { player: Player }) {
                             return (
                                 <Box key={index} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} align="center" pad="small">
                                     {enemyData &&
-                                        <Box title={mapData?.area} width={{ max: '35px' }}>
-                                            <Box className={enemyData.getClass()} />
+                                        <Box title={mapData?.area}>
+                                            <IconImage data={enemyData.getImageData()} />
                                         </Box>
                                     }
                                     <Text>{nFormatter(data[1])}</Text>
@@ -1371,8 +1366,8 @@ const customTabs = {
 
 const CustomTabTitle = ({ player, isActive }: { player: Player, isActive: boolean }) => (
     <Box direction="row" align="center" margin={{ vertical: 'xsmall' }}>
-        <Box width={{ max: '20px', min: '20px' }} margin={{ right: 'xsmall' }}>
-            <Box className={player.getClassClass()} />
+        <Box margin={{ right: 'xsmall' }}>
+            <IconImage data={player.getClassImageData()} scale={0.6}/>
         </Box>
         <Text size="xsmall" color={isActive ? 'brand' : 'accent-2'}>
             {player.playerName ? player.playerName : `Character ${player.playerID}`}

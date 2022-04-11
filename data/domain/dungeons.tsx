@@ -1,4 +1,5 @@
 import { GroupBy, lavaFunc, range } from "../utility"
+import { ImageData } from "./imageData"
 
 export enum PassiveType {
     Dungeon = "Dungeon",
@@ -66,8 +67,12 @@ export class DungeonItem {
         return Math.floor(baseMath * (1 + (rarityNumber + 1) * Math.pow(4, (rarityNumber + 2.348) / 2.348)));
     }
 
-    getClass = () => {
-        return `icons-4242 icons-DungItems${this.index}`;
+    getImageData = (): ImageData => {
+        return {
+            location: `DungItems${this.index}`,
+            width: 42,
+            height: 42
+        }
     }
 
     getBonus = () => {
@@ -202,8 +207,12 @@ export class DungeonTrait {
 
     constructor(public index: number, public setName: string, public bonus: string) { }
 
-    getClass = () => {
-        return `icons-5151 icons-DungTrait${this.active ? 'A' : 'B'}${this.index}`;
+    getImageData = (): ImageData => {
+        return {
+            location: `DungTrait${this.active ? 'A' : 'B'}${this.index}`,
+            width: 51,
+            height: 51
+        }
     }
 }
 

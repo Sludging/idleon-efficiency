@@ -1,5 +1,6 @@
 import { lavaFunc, nFormatter, round } from '../utility'
 import { Cooking } from './cooking';
+import { ImageData } from './imageData';
 import { Item } from './items';
 import { Lab } from './lab';
 
@@ -167,17 +168,25 @@ export class Vial {
 
     }
 
-    getClass = () => {
+    getImageData = (): ImageData => {
         const costItem = this.requirements.find(item => !item.internalName.includes("Liquid"));
         if (costItem) {
-            return costItem.getClass();
+            return costItem.getImageData();
         }
 
-        return "";
+        return {
+            location: 'Blank',
+            width: 36,
+            height: 36
+        };
     }
 
-    getVialClass = () => {
-        return `icons-104120 icons-aVials${this.level}`
+    getBackgroundImageData = (): ImageData => {
+        return {
+            location: `aVials${this.level}`,
+            width: 104,
+            height: 120
+        };
     }
 
     getNumberToRoll = () => {

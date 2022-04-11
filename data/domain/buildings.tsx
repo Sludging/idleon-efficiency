@@ -1,3 +1,5 @@
+import { ImageData } from "./imageData";
+
 // Randolist[13]
 const buildMultiplier = "15 200 2250 12000 25000 60000 100000 50000 15000000 25 700 4500 20000 40000 125000 1250000 500000 35000000 60 1250 6000 27500 70000 200000 2000000 7000000 60000000".split(" ");
 
@@ -40,8 +42,12 @@ export class Building {
         this.index = data.index;
     }
 
-    getClass = () => {
-        return `icons-6666 icons-ConTowerB${this.index}`
+    getImageData = (): ImageData => {
+        return {
+            location: `ConTowerB${this.index}`,
+            height: 66,
+            width: 66
+        }
     }
 
     getBuildCost = (level: number = this.level) => {

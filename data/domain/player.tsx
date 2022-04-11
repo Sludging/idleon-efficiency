@@ -25,6 +25,7 @@ import { Achievement, AchievementConst } from "./achievements";
 import { safeJsonParse } from "./idleonData";
 import { Arcade } from "./arcade";
 import { ObolsData, ObolStats } from "./obols";
+import { ImageData } from "./imageData";
 
 export class PlayerStats {
     strength: number = 0;
@@ -387,6 +388,14 @@ export class Player {
 
     getClassClass = () => {
         return `icons-3836 icons-ClassIcons${this.classId.valueOf()}`
+    }
+
+    getClassImageData = (): ImageData => {
+        return {
+            location: `ClassIcons${this.classId.valueOf()}`,
+            height: 36,
+            width: 38
+        }
     }
 
     getCurrentCooldown = (skillIndex: number) => {

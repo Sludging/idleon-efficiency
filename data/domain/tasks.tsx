@@ -6,6 +6,7 @@
 // (b.engine.getGameAttribute("Tasks")[5] = D.getLoadJsonList("TaskZZ5"));
 
 import { GroupBy, nFormatter } from "../utility"
+import { ImageData } from "./imageData"
 
 interface TaskInfo {
     name: string
@@ -220,8 +221,12 @@ export class Merit {
         return `${toReplace} ${this.descLine2 != "Descline2" ? this.descLine2 : ""}`
     }
 
-    getClass = () => {
-        return `icons-7272 icons-${this.icon}`;
+    getImageData = (): ImageData => {
+        return {
+            location: this.icon,
+            width: 72,
+            height: 72
+        }
     }
 }
 

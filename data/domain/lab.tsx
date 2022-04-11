@@ -3,6 +3,7 @@ import { Card, CardInfo } from "./cards"
 import { Cooking } from "./cooking"
 import { Deathnote } from "./deathnote"
 import { GemStore } from "./gemPurchases"
+import { ImageData } from "./imageData"
 import { Player, SkillsIndex } from "./player"
 import { Storage } from "./storage"
 
@@ -41,8 +42,12 @@ export class MainframeBonus {
         this.description = data.description;
     }
 
-    getClass = () => {
-        return `icons-6464 icons-LabBonus${this.index}`;
+    getImageData = (): ImageData => {
+        return {
+            location: `LabBonus${this.index}`,
+            width: 64,
+            height: 64
+        }
     }
 
     getBonusText = () => {
@@ -129,10 +134,14 @@ export class Jewel {
 
     bonusMultiplier: number = 1;
 
-    constructor(public index: number, public data: JewelData) { }
+    constructor(public index: number, public data: JewelData) { } 
 
-    getClass = () => {
-        return `icons-6666 icons-ConsoleJwl${this.index}`;
+    getImageData = (): ImageData => {
+        return {
+            location: `ConsoleJwl${this.index}`,
+            width: 66,
+            height: 66
+        }
     }
 
     getBonus = (bonusMultiplier: number = this.bonusMultiplier) => {
@@ -236,8 +245,12 @@ export class Chip {
     count: number = 0;
     constructor(public index: number, public data: ChipData) { }
 
-    getClass = () => {
-        return `icons-4242 icons-ConsoleChip${this.index}`;
+    getImageData = (): ImageData => {
+        return {
+            location: `ConsoleChip${this.index}`,
+            width: 42,
+            height: 42
+        }
     }
 
     getBonus = () => {

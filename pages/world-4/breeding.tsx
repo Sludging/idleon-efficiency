@@ -93,13 +93,17 @@ function PetUpgradeDisplay() {
                 const meal = upgrade.data.x1 != -1 ? cooking.meals[upgrade.data.x1] : undefined
                 const mealCost = meal ? upgrade.getCost(1) : -1;
                 return [{
-                    image: "PetDeadCell",
+                    image: { 
+                        location: "PetDeadCell",
+                        width: 33,
+                        height: 33
+                    },
                     name: "Pet Dead Cell",
                     cost: upgrade.getCost(0),
                     canAfford: breeding.deadCells >= upgrade.getCost(0)
                 },
                 {
-                    class: meal?.getClass(),
+                    image: meal?.getImageData(),
                     name: meal?.name,
                     cost: mealCost,
                     canAfford: (meal?.count ?? 0) > mealCost
@@ -140,14 +144,8 @@ function PetUpgradeDisplay() {
                                 upgradeCosts[index].map((cost, index) => (
                                     <Box key={`upg_${index}`} align="center" gap="xsmall">
                                         {
-                                            cost.class &&
-                                            <Box width={{ max: '44px', min: '44px' }}>
-                                                <Box className={cost.class} />
-                                            </Box>
-                                        }
-                                        {
                                             cost.image &&
-                                            <IconImage data={{ location: cost.image, height: 33, width: 33 }} />
+                                            <IconImage data={cost.image} />
                                         }
                                         {
                                             cost.cost > 0 && <Text color={cost.canAfford ? 'green-1' : ''} size="small">{nFormatter(cost.cost)}</Text>

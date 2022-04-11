@@ -1,4 +1,5 @@
 import { lavaFunc } from "../utility";
+import { ImageData } from "./imageData";
 
 export const TalentConst = {
     NearbyOutletIndex: 478,
@@ -53,8 +54,12 @@ export class Talent {
         return this.description.replace("{", xBonus.toString());
     }
 
-    getClass = (): string => {
-        return `icons-5656 icons-UISkillIcon${this.skillIndex}`;
+    getImageData = (): ImageData => {
+        return {
+            location: `UISkillIcon${this.skillIndex}`,
+            width: 56,
+            height: 56
+        }
     }
 }
 

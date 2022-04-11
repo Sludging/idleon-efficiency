@@ -21,6 +21,7 @@ import TabButton from "../../components/base/TabButton";
 import { Item } from "../../data/domain/items";
 import TipDisplay, { TipDirection } from "../../components/base/TipDisplay";
 import { Ascending } from "grommet-icons";
+import IconImage from "../../components/base/IconImage";
 
 const CapitalizedH3 = styled.h3`
     text-transform: capitalize
@@ -40,7 +41,7 @@ interface DisplayProps {
     vialMultiplier: number
 }
 
-function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVialLevel, hasAchievement, discountLevel, classMultiBonus, vialMultiplier = 1}: DisplayProps) {
+function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVialLevel, hasAchievement, discountLevel, classMultiBonus, vialMultiplier = 1 }: DisplayProps) {
     const size = useContext(ResponsiveContext)
     const [bargainBubbleLevel, setBargainBubbleLevel] = useState(0);
     const [classMultiBubbleLevel, setClassMultiBubbleLevel] = useState(0);
@@ -158,7 +159,7 @@ function VialTipInfo({ vial }: { vial: Vial }) {
             {
                 Array.from(vial.getMaterialCost()).map(([item, cost], index) => {
                     return (
-                        <Box key={index} direction="row" align="center" ><Text size="small">Material Cost: {nFormatter(round(cost))}</Text><Box align="center" width={{ max: '36px' }} fill><Box className={item.getClass()} /></Box></Box>
+                        <Box key={index} direction="row" align="center" ><Text size="small">Material Cost: {nFormatter(round(cost))}</Text><IconImage data={item.getImageData()} /></Box>
                     )
                 })
             }
@@ -190,11 +191,11 @@ function VialsDisplay() {
                                 size="medium"
                             >
                                 <Stack anchor='center' margin={{ right: 'small' }}>
-                                    <Box width={{ max: '104px', min: '104px' }} height={{ max: '120px', min: '120px' }}>
-                                        <Box className={vial.getVialClass()} />
+                                    <Box>
+                                        <IconImage data={vial.getBackgroundImageData()} />
                                     </Box>
-                                    <Box width={{ max: '72x', min: '72x' }} >
-                                        <Box className={vial.getClass()} />
+                                    <Box>
+                                        <IconImage data={vial.getImageData()} scale={1.3}/>
                                     </Box>
                                 </Stack>
                             </TipDisplay>
@@ -298,7 +299,7 @@ function BubblesDisplay() {
                     <Ascending color="Legendary" size="large" />
                     <Text size="xsmall">Indicates bubbles that will level from &quot;No Bubble Left Behind&quot; lab bonus</Text>
                 </Box>
-                
+
             </Box>
             <Grid columns="1/4">
                 {
