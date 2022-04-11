@@ -14,7 +14,7 @@ const moduleExports = {
   images: {
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    domains: ['cdn.buymeacoffee.com'],
+    domains: ['cdn.buymeacoffee.com', 'cdn.idleonefficiency.com'],
   },
 };
 
