@@ -27,12 +27,6 @@ export const filteredMissingItems = [
     'Quest8',
     'StampA1',
     'StampA2',
-    'StampA22',
-    'StampA25',
-    'StampA29',
-    'StampA30',
-    'StampA31',
-    'StampA32',
     'StampA33',
     'StampA34',
     'StampA35',
@@ -181,6 +175,14 @@ export const filteredLootyItems = [
     'EquipmentSmithingTabs6',
     'EquipmentSmithingTabs7',
     'EquipmentSmithingTabs8',
+    'StampA33',
+    'StampA34',
+    'StampA35',
+    'DungRNG0',
+    'DungRNG1',
+    'DungRNG2',
+    'DungRNG3',
+    'DungRNG4'
 ];
 
 
