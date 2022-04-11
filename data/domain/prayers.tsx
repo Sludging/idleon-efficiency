@@ -1,3 +1,5 @@
+import { ImageData } from "./imageData";
+
 export class Prayer {
     level: number = 0;
     totalPrayersOwned: number = 0; // PrayOwned
@@ -38,8 +40,12 @@ export class Prayer {
         return this.curseText.replace("{", this.getCurse().toString());
     }
 
-    getClass = (): string => {
-        return `icons-7878 icons-Prayer${this.index}`;
+    getImageData = (): ImageData => {
+        return {
+            location: `Prayer${this.index}`,
+            width: 50,
+            height: 50
+        }
     }
 }
 

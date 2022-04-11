@@ -40,6 +40,7 @@ import { Building } from '../../data/domain/buildings';
 import { Construction as ConstructionData } from '../../data/domain/construction';
 import { Card } from '../../data/domain/cards';
 import { Lab } from '../../data/domain/lab';
+import IconImage from '../../components/base/IconImage';
 
 
 function RefineryDisplay() {
@@ -197,8 +198,8 @@ function RefineryDisplay() {
                                     <Text>{squire.playerName}</Text>
                                 </Box>
                                 <Box direction="row" gap="small">
-                                    <Box style={{ opacity: realCD <= 0 ? 1 : 0.5 }} width={{ max: '36px', min: '36px' }}>
-                                        <Box className={refineryTalent.getClass()} />
+                                    <Box style={{ opacity: realCD <= 0 ? 1 : 0.5 }}>
+                                        <IconImage data={refineryTalent.getImageData()} scale={0.8}/>
                                     </Box>
                                     {realCD > 0 && <TimeDown size={TimeDisplaySize.Small} addSeconds={realCD} resetToSeconds={72000} />}
                                     {realCD <= 0 && <Text>Skill is ready!</Text>}
@@ -502,8 +503,8 @@ function PrinterDisplay() {
                                     <Text>{mastero.playerName}</Text>
                                 </Box>
                                 <Box direction="row" gap="small">
-                                    <Box style={{ opacity: realCD <= 0 ? 1 : 0.5 }} width={{ max: '36px', min: '36px' }}>
-                                        <Box className={printerTalent.getClass()} />
+                                    <Box style={{ opacity: realCD <= 0 ? 1 : 0.5 }}>
+                                        <IconImage data={printerTalent.getImageData()} scale={0.8}/>
                                     </Box>
                                     {realCD > 0 && <TimeDown size={TimeDisplaySize.Small} addSeconds={realCD} resetToSeconds={82000} />}
                                     {realCD <= 0 && <Text>Skill is ready!</Text>}
@@ -709,9 +710,9 @@ function ShrinesDisplay() {
                     return (
                         <ShadowBox key={index} background="dark-1" pad="medium" margin={{ bottom: 'small' }}>
                             <Box gap="small">
-                                <Box direction="row">
-                                    <Box width={{ min: "30px", max: '30px' }} margin={{ right: 'small' }}>
-                                        <Box className={shrine.getClass()} />
+                                <Box direction="row" align="center">
+                                    <Box margin={{ right: 'small' }}>
+                                        <IconImage data={shrine.getImageData()} scale={0.7}/>
                                     </Box>
                                     <Text>{shrine.name}</Text>
                                 </Box>
@@ -790,8 +791,8 @@ function BuildingsDisplay() {
                         <ShadowBox style={{ opacity: building.level > 0 ? 1 : 0.5 }} key={index} background="dark-1" pad="medium" align="start" margin={{ right: 'large', bottom: 'small' }}>
                             <Grid columns="1/3" gap="medium" fill>
                                 <Box justify="center">
-                                    <Box width={{ min: "30px", max: '30px' }} margin={{ right: 'small' }}>
-                                        <Box className={building.getClass()} />
+                                    <Box margin={{ right: 'small' }}>
+                                        <IconImage data={building.getImageData()} />
                                     </Box>
                                     <Text size="small">{building.name}</Text>
                                 </Box>
@@ -827,8 +828,8 @@ function BuildingsDisplay() {
                                                         if (costItem) {
                                                             return (
                                                                 <Box key={index} direction="row" align="center">
-                                                                    <Box title={costItem?.displayName} width={{ max: '30px', min: '30px' }}>
-                                                                        <Box className={costItem?.getClass()} />
+                                                                    <Box title={costItem?.displayName}>
+                                                                        <IconImage data={costItem.getImageData()} />
                                                                     </Box>
                                                                     <Box direction="row" gap="xsmall" align="center">
                                                                         <Text size="small">{nFormatter(costData.quantity)}</Text>

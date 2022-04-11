@@ -3,6 +3,7 @@ import { Alchemy } from "./alchemy";
 import { Breeding } from "./breeding";
 import { Card } from "./cards";
 import { GemStore } from "./gemPurchases";
+import { ImageData } from "./imageData";
 import { Lab } from "./lab";
 import { Stamp } from "./stamps";
 
@@ -66,8 +67,12 @@ export class Meal {
         this.bonusKey = data.bonusKey;
     }
 
-    getClass = () => {
-        return `icons-4132 icons-CookingM${this.mealIndex}`;
+    getImageData = (): ImageData => {
+        return {
+            location: `CookingM${this.mealIndex}`,
+            width: 41,
+            height: 32
+        }
     }
 
     getBonus = (roundResult: boolean = false, mainFrameBonus: number = this.mainframeBonus, level: number = this.level) => {

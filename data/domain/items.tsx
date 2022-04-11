@@ -479,9 +479,9 @@ export class Item {
         }
 
         return {
-            height: 72,
+            height: 36,
             location: `${this.internalName}`,
-            width: 72
+            width: 36
         };
     }
 

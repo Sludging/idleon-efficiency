@@ -1,5 +1,6 @@
 import { IDforCardBonus, IDforCardSETbonus } from "../maps";
 import { EnemyInfo } from "./enemies";
+import { ImageData } from "./imageData";
 
 export class Card {
     count: number = 0;
@@ -9,9 +10,12 @@ export class Card {
         this.displayName = EnemyInfo.find(enemy => enemy.details.internalName == name)?.details.Name || "New Monster?";
     }
 
-
-    getClass = (): string => {
-        return `icons-2836 icons-Cards${this.id}`
+    getImageData = (): ImageData => {
+        return {
+            location: `Cards${this.id}`,
+            width: 28,
+            height: 36
+        }
     }
 
     getStars = (): number => {
@@ -39,8 +43,12 @@ export class Card {
         return this.effect.replace(/{/, this.getBonus().toString());
     }
 
-    getBorderClass = (): string => {
-        return `icons-3143 icons-CardsBorder${this.getStars() + 1}`;
+    getBorderImageData = (): ImageData => {
+        return {
+            location: `CardsBorder${this.getStars() + 1}`,
+            width: 31,
+            height: 43
+        }
     }
 
     static GetTotalBonusForId = (cards: Card[], id: number) => {
