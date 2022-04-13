@@ -6,11 +6,12 @@ import {
 } from 'grommet'
 import { NextSeo } from 'next-seo';
 import { useContext, useEffect, useMemo, useState } from 'react';
+import IconImage from '../../components/base/IconImage';
 import ShadowBox from '../../components/base/ShadowBox';
 import TabButton from '../../components/base/TabButton';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 import { AppContext } from '../../data/appContext';
-import { Lab as LabDomain } from '../../data/domain/lab';
+import { Chip, Lab as LabDomain } from '../../data/domain/lab';
 import { Player, SkillsIndex } from '../../data/domain/player';
 
 function CharacterBox({ player, lineWidth, supped = false }: { player: Player, lineWidth: string, supped?: boolean }) {
@@ -44,9 +45,7 @@ function CharacterBox({ player, lineWidth, supped = false }: { player: Player, l
                         {
                             player.labInfo.chips.filter(slot => slot.chip != undefined).map((slot, index) => (
                                 <Box key={index} direction="row" gap="small">
-                                    <Box width={{ max: '42px' }}>
-                                        <Box className={slot.chip?.getClass()} />
-                                    </Box>
+                                    <IconImage data={(slot.chip as Chip).getImageData()} />
                                     <Text>{slot.chip?.data.description}</Text>
                                 </Box>
                             ))
@@ -110,8 +109,8 @@ function MainframeDisplay() {
                                     heading={bonus.name}
                                 >
                                     <ShadowBox background="dark-1" pad="small" key={index} margin={{ right: 'small', bottom: 'small' }} border={bonus.active ? { side: 'all', size: '2px', color: 'green-1' } : undefined}>
-                                        <Box width={{ max: '64px' }} title={bonus.name}>
-                                            <Box className={bonus.getClass()} />
+                                        <Box title={bonus.name}>
+                                            <IconImage data={bonus.getImageData()} />
                                         </Box>
                                     </ShadowBox>
                                 </TipDisplay>
@@ -136,8 +135,8 @@ function MainframeDisplay() {
                                         heading={jewel.data.name}
                                     >
                                         <ShadowBox background="dark-1" pad="small" border={jewel.active ? { side: 'all', size: '2px', color: 'green-1' } : undefined} >
-                                            <Box width={{ max: '64px' }} title={jewel.data.name} style={{ opacity: jewel.available ? 1 : 0.5, filter: jewel.available ? 'grayscale(0)' : 'grayscale(70%)' }}>
-                                                <Box className={jewel.getClass()} />
+                                            <Box title={jewel.data.name} style={{ opacity: jewel.available ? 1 : 0.5, filter: jewel.available ? 'grayscale(0)' : 'grayscale(70%)' }}>
+                                                <IconImage data={jewel.getImageData()} />
                                             </Box>
                                         </ShadowBox>
                                     </TipDisplay>
@@ -200,9 +199,7 @@ function ChipDisplay() {
                                                                 body={slot.chip.getBonusText()}
                                                                 direction={TipDirection.Down}
                                                                 size='small'>
-                                                                <Box width={{ max: '42px', min: '42px' }} height={{ max: '42px', min: '42px' }}>
-                                                                    <Box className={slot.chip?.getClass()} />
-                                                                </Box>
+                                                                <IconImage data={(slot.chip as Chip).getImageData()} />
                                                             </TipDisplay> :
                                                             <Box width={{ max: '42px', min: '42px' }} height={{ max: '42px', min: '42px' }} align="center">
                                                                 {
@@ -245,9 +242,7 @@ function ChipDisplay() {
 
                             >
                                 <Box style={{ opacity: chip.count == -1 ? 0.5 : 1 }} border={{ color: 'grey-1', side: 'all', size: '2px' }} align="center" justify='center' direction="row">
-                                    <Box width={{ max: '42px', min: '42px' }} height={{ max: '42px', min: '42px' }}>
-                                        <Box className={chip.getClass()} />
-                                    </Box>
+                                    <IconImage data={chip.getImageData()} />
                                     <Text>{chip.count == -1 ? 0 : chip.count}</Text>
                                 </Box>
                             </TipDisplay>

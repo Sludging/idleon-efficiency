@@ -61,7 +61,7 @@ function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stam
                     body={
                         <TipContent stamp={stamp} faceLeft={stamp.type == "Misc Stamp"} />
                     }
-                    heading={`${stamp.name} (${stamp.level})`}
+                    heading={`${stamp.name} (${stamp.level}/${stamp.maxLevel})`}
                     direction={ size == "small" ? TipDirection.Down : stamp.type == "Misc Stamp" ? TipDirection.Left : TipDirection.Right }
                     size="medium"
                     visibility={stamp.name == "Blank" || stamp.name == "FILLER" ? 'none' : undefined}

@@ -1,4 +1,5 @@
 import { round } from '../utility';
+import { ImageData } from './imageData';
 import { Lab } from './lab';
 
 export const ShrineConstants = {
@@ -51,8 +52,12 @@ export class Shrine {
         return Math.floor(20 * (this.level - 1) + 6 * this.level * Math.pow(1.63, this.level - 1))
     }
 
-    getClass = () => {
-        return `icons-6666 icons-${this.iconName}`;
+    getImageData = (): ImageData => {
+        return {
+            location: this.iconName,
+            width: 66,
+            height: 66
+        }
     }
 }
 

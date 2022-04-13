@@ -3,6 +3,7 @@ import { Alchemy } from "./alchemy";
 import { Breeding } from "./breeding";
 import { Card } from "./cards";
 import { GemStore } from "./gemPurchases";
+import { ImageData } from "./imageData";
 import { Lab } from "./lab";
 import { Stamp } from "./stamps";
 
@@ -57,6 +58,11 @@ export class Meal {
 
     mainframeBonus: number = 0;
 
+    // Active cooking values
+    cookingContribution: number = 0;
+    timeToNext: number = 0;
+    timeToDiamond: number = 0;
+
     constructor(public mealIndex: number, data: MealInfo) {
         this.name = data.name;
         this.cookReq = data.cookingReq;
@@ -66,8 +72,12 @@ export class Meal {
         this.bonusKey = data.bonusKey;
     }
 
-    getClass = () => {
-        return `icons-4132 icons-CookingM${this.mealIndex}`;
+    getImageData = (): ImageData => {
+        return {
+            location: `CookingM${this.mealIndex}`,
+            width: 41,
+            height: 32
+        }
     }
 
     getBonus = (roundResult: boolean = false, mainFrameBonus: number = this.mainframeBonus, level: number = this.level) => {
@@ -79,12 +89,19 @@ export class Meal {
         return this.bonusText.replace(/{/g, nFormatter(this.getBonus(true, this.mainframeBonus, level)));
     }
 
-    getMealLevelCost = () => {
-        const baseMath = 10 + (this.level + Math.pow(this.level, 2));
-        return baseMath * Math.pow(1.2 + 0.05 * this.level, this.level);
+    getMealLevelCost = (level: number = this.level) => {
+        const baseMath = 10 + (level + Math.pow(level, 2));
+        return baseMath * Math.pow(1.2 + 0.05 * level, level);
     }
 
+    getCostsTillDiamond = () => {
+        let totalCost = 0;
+        for (let level of range(this.level, 11)) {
+            totalCost += this.getMealLevelCost(level);
+        }
 
+        return totalCost;
+    }
 }
 
 const initMeals = () => {
@@ -409,7 +426,17 @@ export const updateCooking = (data: Map<string, any>) => {
         kitchen.speedUpgradeCost = kitchen.getSpiceUpgradeCost(kitchenCosts, mealKitchenCosts, arenaBonusActive, UpgradeType.Speed);
         kitchen.fireUpgradeCost = kitchen.getSpiceUpgradeCost(kitchenCosts, mealKitchenCosts, arenaBonusActive, UpgradeType.Fire);
         kitchen.luckUpgradecost = kitchen.getSpiceUpgradeCost(kitchenCosts, mealKitchenCosts, arenaBonusActive, UpgradeType.Luck);
+
+        // if actively cooking
+        if (kitchen.activeMeal != -1) {
+            cooking.meals[kitchen.activeMeal].cookingContribution += kitchen.mealSpeed;
+        }
     })
+
+    cooking.meals.filter(meal => meal.cookingContribution > 0).forEach(meal => { 
+        meal.timeToNext = ((meal.getMealLevelCost() - meal.count) * meal.cookReq) / meal.cookingContribution;
+        meal.timeToDiamond = ((meal.getCostsTillDiamond() - meal.count) * meal.cookReq) / meal.cookingContribution
+    });
 
     populateDiscovery(cooking);
 

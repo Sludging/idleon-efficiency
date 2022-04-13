@@ -14,6 +14,7 @@ import { Alchemy } from '../../data/domain/alchemy';
 import { Achievement } from '../../data/domain/achievements';
 import { TaskBoard } from '../../data/domain/tasks';
 import { StaticTime, TimeDisplaySize } from '../../components/base/TimeDisplay';
+import IconImage from '../../components/base/IconImage';
 
 function Arcade() {
     const [arcadeData, setArcadeData] = useState<ArcadeData>();
@@ -93,8 +94,8 @@ function Arcade() {
                             return (
                                 <ShadowBox background="dark-1" key={index} direction="row">
                                     <Box justify="start" direction="row" fill border={index != arcadeData.bonuses.length - 1 ? {side: 'bottom', color: 'accent-3', size: '1px'} : undefined} pad="medium">
-                                        <Box style={{ opacity: activeArcadeBonuses?.includes(bonus.index) || activeArcadeBonuses.length == 0 ? 1 : 0.3 }} width={{ max: '62px', min: '62px' }} margin={{ right: 'medium' }}>
-                                            <Box className={bonus.getClass()} />
+                                        <Box style={{ opacity: activeArcadeBonuses?.includes(bonus.index) || activeArcadeBonuses.length == 0 ? 1 : 0.3 }} margin={{ right: 'medium' }}>
+                                            <IconImage data={bonus.getImageData()} />
                                         </Box>
                                         <TextAndLabel labelSize='small' textSize='xsmall' text={bonus.getBonusText()} label="Effect" margin={{ right: 'medium' }} />
                                         <TextAndLabel labelSize='small' textSize='xsmall' text={`${bonus.level}/100`} label="Level" margin={{ right: 'medium' }} />

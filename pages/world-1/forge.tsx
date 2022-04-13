@@ -16,6 +16,7 @@ import { getCoinsArray, nFormatter } from '../../data/utility';
 import TabButton from '../../components/base/TabButton';
 import { Item } from '../../data/domain/items';
 import { TimeDisplaySize, TimeDown } from '../../components/base/TimeDisplay';
+import IconImage from '../../components/base/IconImage';
 
 function ForgeItem({ item, title }: { item: Item, title: string }) {
     if (item.displayName == "Blank") {
@@ -141,8 +142,8 @@ function Forge() {
                                 const timeTillEmpty = Math.round(slot.ores.count / slot.getOrePerInterval()) * (oreInterval / (4 * slotSpeed))
                                 return (
                                     <ShadowBox background="dark-1" pad={{ vertical: 'medium', horizontal: 'large' }} key={index} margin={{ right: 'medium', bottom: 'medium' }} gap="large" direction="row" fill justify="between" align="center">
-                                        <Box width={{ max: '36px', min: '36px' }} style={{ opacity: slot.brimestone ? 1 : 0.2 }}>
-                                            <Box className='icons-7272 icons-GemP4' />
+                                        <Box style={{ opacity: slot.brimestone ? 1 : 0.2 }}>
+                                            <IconImage data={{location: 'GemP4', height: 36, width: 36}} />
                                         </Box>
                                         <ForgeItem item={slot.ores} title="Ores" />
                                         <ForgeItem item={slot.oils} title="Oils" />

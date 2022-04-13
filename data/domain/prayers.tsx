@@ -1,3 +1,6 @@
+import { range } from "../utility";
+import { ImageData } from "./imageData";
+
 export class Prayer {
     level: number = 0;
     totalPrayersOwned: number = 0; // PrayOwned
@@ -5,21 +8,29 @@ export class Prayer {
         public x1: number, public x2: number, public soul: string, public costMulti: number,
         public towerName: string, public waveReq: number, public maxLevel: number) { }
 
-    getLevelCosts = (): number => {
-        if (this.level == 0) {
+    getLevelCosts = (level: number = this.level): number => {
+        if (level == 0) {
             return 0;
         }
 
-        if (this.level < 6) {
-            return Math.round(this.costMulti * (1 + (4 + (this.index / 25)) * this.level));
-        }
-        let prayerMultiplier = 1.25;
-        if (this.index == 9) {
-            prayerMultiplier = 1.5
+        if (level < 6) {
+            return Math.round(this.costMulti * (1 + (4 + (this.index / 25)) * level));
         }
 
-        const bonus = this.costMulti * (1 + (4 + (this.index / 25)) * this.level) * Math.pow(prayerMultiplier, this.level - 5);
-        return Math.round(Math.min(2000000000, bonus));
+        if (this.index == 9) {
+            return Math.round(Math.min(2e9, this.costMulti * (1 + (2 + (this.index / 20)) * level) * Math.pow(1.3, level - 5)));
+        }
+
+        return Math.round(Math.min(2e9, this.costMulti * (1 + (1 + this.index / 20) * level) * Math.pow(1.12, level - 5)));
+    }
+
+    getCostToMax = () => {
+        let totalCost = 0;
+        range((this.level ?? 0), this.maxLevel).forEach((level, _) => {
+            totalCost += this.getLevelCosts(level);
+        });
+
+        return totalCost;
     }
 
     getBonus = (): number => {
@@ -38,8 +49,12 @@ export class Prayer {
         return this.curseText.replace("{", this.getCurse().toString());
     }
 
-    getClass = (): string => {
-        return `icons-7878 icons-Prayer${this.index}`;
+    getImageData = (): ImageData => {
+        return {
+            location: `Prayer${this.index}`,
+            width: 50,
+            height: 50
+        }
     }
 }
 

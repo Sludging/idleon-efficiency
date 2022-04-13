@@ -123,6 +123,9 @@ export const getCoinsArray = (coins: number): Map<Coins, number> => {
         i -= 2;
     } while (i >= 0);
 
+    if (ret.size == 0) {
+        ret.set(1, 0);
+    }
     return ret;
 }
 

@@ -1,5 +1,6 @@
 import { lavaFunc, range } from "../utility"
 import { Achievement } from "./achievements";
+import { ImageData } from "./imageData";
 
 export const ARCADE_MAX_LEVEL: number = 100
 const achivementsWithBallBonus: number[][] = [[40, 3], [46, 1], [47, 1], [49, 1], [541], [76, 2], [77, 1], [80, 3], [83, 2], [98, 2], [103, 2], [115, 3], [116, 1], [140, 1], [146, 2], [151, 2], [154, 1], [160, 3], [171, 4]];
@@ -43,8 +44,12 @@ export class ArcadeBonus {
         return this.effect.replace(/{/, this.getBonus(true).toString());
     }
 
-    getClass = () => {
-        return `icons-6262 icons-PachiShopICON${this.index}`;
+    getImageData = (): ImageData => {
+        return {
+            location: `PachiShopICON${this.index}`,
+            width: 62,
+            height: 62
+        }
     }
 
     getCost = (stampBonus: number = 0, level: number = this.level) => {
