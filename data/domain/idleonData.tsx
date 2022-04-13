@@ -19,7 +19,7 @@ import parsePrinter from './printer';
 import updateDeathnote from './deathnote';
 import parseTaskboard from './tasks';
 import { Cloudsave } from './cloudsave';
-import parseWorship from './worship';
+import parseWorship, { updateWorship } from './worship';
 import parseConstruction from './construction';
 import parseCards from './cards';
 import parseArcade from './arcade';
@@ -107,7 +107,7 @@ const keyFunctionMap: Record<string, Function> = {
     "saltLick": (doc: Cloudsave, charCount: number) => parseSaltLick(safeJsonParse(doc, "SaltLick", [])),
     "printer": (doc: Cloudsave, charCount: number) => parsePrinter(safeJsonParse(doc, "Print", []), charCount),
     "taskboard": (doc: Cloudsave, charCount: number) => parseTaskboard(JSON.parse(doc.get(`TaskZZ0`)), JSON.parse(doc.get(`TaskZZ1`)), JSON.parse(doc.get(`TaskZZ2`)), JSON.parse(doc.get(`TaskZZ3`)), doc.get(`TaskZZ4`), doc.get(`TaskZZ5`)),
-    "worship": (doc: Cloudsave, accountData: Map<string, any>, charCount: number) => parseWorship(safeJsonParse(doc,"TotemInfo", []), accountData),
+    "worship": (doc: Cloudsave, accountData: Map<string, any>, charCount: number) => parseWorship(safeJsonParse(doc,"TotemInfo", [])),
     "construction": (doc: Cloudsave, charCount: number) => parseConstruction(safeJsonParse(doc, "Tower", [])),
     "arcade": (doc: Cloudsave, charCount: number) => parseArcade(safeJsonParse(doc, "ArcadeUpg", []), doc.get("OptLacc")),
     "obols": (doc: Cloudsave, allItems: Item[], charCount: number) => parseObols(doc, charCount, allItems),
@@ -129,6 +129,7 @@ const postProcessingMap: Record<string, Function> = {
     "cooking": (doc: Cloudsave, accountData: Map<string, any>) => updateCooking(accountData),
     "breeding": (doc: Cloudsave, accountData: Map<string, any>) => updateBreeding(accountData),
     "shrines": (doc: Cloudsave, accountData: Map<string, any>) => updateShrines(accountData),
+    "worship": (doc: Cloudsave, accountData: Map<string, any>) => updateWorship(accountData),
     "players": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayers(accountData),
 }
 
