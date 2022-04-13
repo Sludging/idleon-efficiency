@@ -380,9 +380,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                                                 direction={TipDirection.Down}
                                                 maxWidth="large"
                                             >
-                                                <Box width={{ min: '50px', max: '50px' }}>
-                                                    <Box className={bubble.class_name} />
-                                                </Box>
+                                                <IconImage data={bubble.getImageData()} scale={0.7} />
                                             </TipDisplay>
                                         </Box>
                                     )
