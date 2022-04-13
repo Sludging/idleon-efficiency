@@ -18,6 +18,7 @@ import { NextSeo } from 'next-seo';
 import { Item } from "../../data/domain/items";
 import ItemSourcesDisplay from "../../components/base/ItemSourceDisplay";
 import TipDisplay, { TipDirection } from "../../components/base/TipDisplay";
+import IconImage from "../../components/base/IconImage";
 
 const ShadowBox = styled(Box)`
     box-shadow: -7px 8px 16px 0 rgba(0,0,0,0.17)
@@ -49,7 +50,7 @@ function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stam
         return (
             <Box gap="small">
                 <Text size="small">Bonus: {stamp.getBonusText()}</Text>
-                {stamp.isMaxLevel() && <Box direction="row" align="center"><Text size="small">Material Cost: {nFormatter(stamp.getMaterialCost(blueFlavPercent))}</Text><Box width={{max: '36px', min: '36px'}} fill><Box className={`icons-7272 icons-${stamp.data.material}`} /></Box></Box>}
+                {stamp.isMaxLevel() && <Box direction="row" align="center"><Text size="small">Material Cost: {nFormatter(stamp.getMaterialCost(blueFlavPercent))}</Text><IconImage data={(stamp.materialItem as Item).getImageData()} /></Box>}
                 <Box direction="row" gap="small"><Text size="small">Cost: </Text><CoinsDisplay coinMap={getCoinsArray(stamp.getGoldCost(hasBribe, blueFlavPercent))} /></Box>
             </Box>
         )

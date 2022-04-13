@@ -1,4 +1,5 @@
 import { lavaFunc } from '../utility'
+import { Item } from './items';
 import { Lab } from './lab';
 
 export enum StampTab {
@@ -38,6 +39,8 @@ export class Stamp {
     type: string; // todo: enum
     bonus: string;
     data: StampData;
+
+    materialItem: Item | undefined = undefined;
 
     multiplier: number = 1;
     constructor(name: string, raw_name: string, type: string, bonus: string, data: StampData) {
@@ -192,7 +195,14 @@ const initStamps = (): Stamp[][] => {
     return [combat_stamp, skills_stamp, misc_stamp]
 }
 
-export default function parseStamps(rawData: Array<any>, maxData: Array<any>) {
+const convertToItemClass = (stamps: Stamp[][], allItems: Item[]) => {
+    stamps.flatMap(tab => tab).forEach(stamp => {
+        const matItem = allItems.find(item => item.internalName == stamp.data.material)?.duplicate() ?? new Item({ displayName: stamp.data.material, internalName: stamp.data.material });
+        stamp.materialItem = matItem;
+    });
+}
+
+export default function parseStamps(rawData: Array<any>, maxData: Array<any>, allItems: Item[]) {
     const stampData = initStamps(); // Initialize stamp array with all pre-populated data
     if (rawData) {
         rawData.forEach((tab, index) => { // for each tab in the cloud save
@@ -209,6 +219,8 @@ export default function parseStamps(rawData: Array<any>, maxData: Array<any>) {
             })
         })
     }
+    convertToItemClass(stampData, allItems);
+
     return stampData;
 }
 
