@@ -51,9 +51,7 @@ function TerritoryDisplay() {
                             <TextAndLabel textSize='small' label="Name" text={territory.data.battleName} />
                             <ComponentAndLabel label="Current Spices" component={
                                 <Box direction="row" gap="small" align="center">
-                                    <Box width={{ max: '36px' }}>
-                                        <Box className={`icons-3636 icons-CookingSpice${index}`} />
-                                    </Box>
+                                    <IconImage data={{location:`CookingSpice${index}`, height: 36, width: 36 }} />
                                     <Text>{nFormatter(territory.currentSpices)}</Text>
                                 </Box>
                             } />

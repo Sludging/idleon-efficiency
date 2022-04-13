@@ -1,3 +1,4 @@
+import { ImageData } from "./imageData";
 import { MapInfo } from "./maps";
 import { Player } from "./player";
 
@@ -46,12 +47,20 @@ export class Deathnote {
         }
     }
 
-    getRankClass = (rank: number) => {
+    getRankImageData = (rank: number): ImageData => {
         if (rank == 0) { 
-            return '';
+            return {
+                location: 'Blank',
+                height: 25,
+                width: 20
+            };
         }
         const iconNumber = rank - 1 - Math.floor(rank / 7) - 2 * Math.floor(rank / 10);
-        return `icons-2025 icons-StatusSkull${iconNumber}`;
+        return {
+            location: `StatusSkull${iconNumber}`,
+            height: 25,
+            width: 20
+        };
     }
 }
 

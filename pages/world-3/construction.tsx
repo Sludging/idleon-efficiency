@@ -636,9 +636,7 @@ function DeathnoteDisplay() {
                                     return (
                                         <Box key={mobIndex} gap="small" border={deathnoteMobs.size != mobIndex + 1 ? { side: 'bottom', color: 'grey-1', size: '2px' } : undefined} pad={{ bottom: "small" }}>
                                             <Box direction="row" align="center" gap="small">
-                                                <Box width={{ max: '20px', min: '20px' }}>
-                                                    <Box className={deathnoteData?.getRankClass(deathnoteRank)} />
-                                                </Box>
+                                                <IconImage data={deathnoteData.getRankImageData(deathnoteRank)} />
                                                 <Box gap="small">
                                                     <Text size="xsmall">{mobName}</Text>
                                                     <Meter

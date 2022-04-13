@@ -122,11 +122,11 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
                                     dropProps={{ align: size == "small" ? { top: 'bottom' } : cauldron.short_name == "Y" ? { right: 'left' } : { left: 'right' } }}
                                 >
                                     <Box direction="row" fill align="center">
-                                        <Box align="center" width={{ min: '70px', max: '70px' }} fill >
-                                            <Box style={{ opacity: bubble.level > 0 ? 1 : 0.2 }} className={bubble.class_name} />
+                                        <Box style={{ opacity: bubble.level > 0 ? 1 : 0.2 }}>
+                                            <IconImage data={bubble.getImageData()} scale={0.8} />
                                         </Box>
                                         <Box direction="row" gap="xsmall" align="center">
-                                            <Text size="medium">{bubble.level}</Text>
+                                            <Text size="small">{bubble.level}</Text>
                                         </Box>
                                         {
                                             bubble.labUpgrade && <Ascending color="Legendary" size="large" />
