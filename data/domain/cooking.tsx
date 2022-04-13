@@ -96,7 +96,7 @@ export class Meal {
 
     getCostsTillDiamond = () => {
         let totalCost = 0;
-        for (let level of range(this.level, 11)) {
+        for (let level of range(this.level, 10)) {
             totalCost += this.getMealLevelCost(level);
         }
 
