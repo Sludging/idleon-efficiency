@@ -11,6 +11,7 @@ import { NextSeo } from 'next-seo';
 import ShadowBox from "../../components/base/ShadowBox";
 import { Storage } from "../../data/domain/storage";
 import { nFormatter, notUndefined } from "../../data/utility";
+import IconImage from "../../components/base/IconImage";
 
 function StorageDisplay() {
     const [storage, setStorage] = useState<Storage>();
@@ -96,8 +97,8 @@ function StorageDisplay() {
                                 chestItemsToShow.filter(x => (typeFilter == "None" ? x.getArchType() : x.type) == type).map((item, index) => (
                                     <Box key={index} border={{color: 'grey-1' }}  background="accent-4" width={{max: '100px', min: '100px'}} align="center">
                                         <Box direction="row" pad={{vertical: 'small'}} align="center">
-                                            <Box width={{max: '36px', min: '36px'}}>
-                                                <Box className={item.getClass()} />
+                                            <Box>
+                                                <IconImage data={item.getImageData()} scale={item.getImageData().width > 36 ? 0.5 : 1}/>
                                             </Box>
                                             <Text size="small">{nFormatter(item.count)}</Text>
                                         </Box>
@@ -115,8 +116,8 @@ function StorageDisplay() {
                             chestItemsToShow.map((item, index) => (
                                 <Box key={index} border={{color: 'grey-1' }}  background="accent-4" width={{max: '100px', min: '100px'}} align="center">
                                     <Box direction="row" pad={{vertical: 'small'}} align="center">
-                                        <Box width={{max: '36px', min: '36px'}}>
-                                            <Box className={item.getClass()} />
+                                        <Box>
+                                            <IconImage data={item.getImageData()} scale={item.getImageData().width > 36 ? 0.5 : 1} />
                                         </Box>
                                         <Text size="small">{nFormatter(item.count)}</Text>
                                     </Box>

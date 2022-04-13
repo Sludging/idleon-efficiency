@@ -1,18 +1,4 @@
-const specialSize: string[] = [
-    "TaskAchA58",
-    "TaskAchA59",
-    "TaskAchA60",
-    "TaskAchA61",
-    "TaskAchA62",
-    "TaskAchA63",
-    "TaskAchA64",
-    "TaskAchA65",
-    "TaskAchA66",
-    "TaskAchA67",
-    "TaskAchA68",
-    "TaskAchA69",
-    "TaskAchA70"
-];
+import { ImageData } from "./imageData";
 
 export const AchievementConst = {
     SmartBoiIndex: 108,
@@ -25,7 +11,16 @@ export class Achievement {
     arrayIndex: number = 0;
     visualIndex: number = 0;
     worldLetter: string = 'A';
+    baseName: string = '';
     iconClass: string = '';
+
+    getImageData = (): ImageData => {
+        return {
+            location: this.baseName,
+            height: 43,
+            width: 43
+        }
+    }
 
     constructor(public index: number, public name: string, public quantity: number, public desc: string, public reward: string) { }
 }
@@ -617,13 +612,8 @@ export default function parseAchievements(achiData: number[], steamData: number[
         achievement.visualIndex = achievOrdering[reminder].indexOf(index - (70 * reminder));
         achievement.worldLetter = letter;
 
-        const baseName = `TaskAch${achievement.worldLetter}${achievement.arrayIndex - (70 * reminder)}`
-        if (specialSize.includes(baseName)) {
-            achievement.iconClass = `icons-4344 icons-${baseName}`;
-        }
-        else {
-            achievement.iconClass = `icons-4343 icons-${baseName}`;
-        }
+        achievement.baseName = `TaskAch${achievement.worldLetter}${achievement.arrayIndex - (70 * reminder)}`
+        
         if (!achievement.completed) {
             const steamIndex = AchSteam2Reg.indexOf(achievement.index);
             if (steamIndex > -1) {

@@ -3,6 +3,7 @@ import { Card, CardInfo } from "./cards"
 import { Cooking } from "./cooking"
 import { Deathnote } from "./deathnote"
 import { GemStore } from "./gemPurchases"
+import { ImageData } from "./imageData"
 import { Player, SkillsIndex } from "./player"
 import { Storage } from "./storage"
 
@@ -41,8 +42,12 @@ export class MainframeBonus {
         this.description = data.description;
     }
 
-    getClass = () => {
-        return `icons-6464 icons-LabBonus${this.index}`;
+    getImageData = (): ImageData => {
+        return {
+            location: `LabBonus${this.index}`,
+            width: 64,
+            height: 64
+        }
     }
 
     getBonusText = () => {
@@ -50,7 +55,7 @@ export class MainframeBonus {
     }
 
     getBonus = () => {
-        return this.bonusOn;
+        return this.active ? this.bonusOn : this.bonusOff;
     }
 
     getRange = (connectionBonus: number = 0) => {
@@ -91,6 +96,12 @@ export class UnadulteratedBankingBonus extends MainframeBonus {
     }
 }
 
+export class ViralConnectionBonus extends MainframeBonus {
+    override getRange = () => {
+        return 80;
+    }
+}
+
 const initBonuses = (): MainframeBonus[] => {
     return [
         new AnimalFarmBonus({ "no": 0, "x": 91, "y": 353, "range": 90, "bonusOn": 0, "bonusOff": 1, "name": "Animal Farm", "description": "+1% Total Damage for every different species you have bred within Pet Breeding. You just need to breed the pet type one time for it to count! @ - @ Total Bonus: {%" }),
@@ -99,13 +110,15 @@ const initBonuses = (): MainframeBonus[] => {
         // TODO: no bubble with the jewel bonus.
         new MainframeBonus({ "no": 3, "x": 450, "y": 220, "range": 90, "bonusOn": 0, "bonusOff": 1, "name": "No Bubble Left Behind", "description": "Every 24 hours, your 3 lowest level Alchemy Bubbles gets +1 Lv. This only applies to bubbles Lv 5 or higher, so it's more like 'your lowest level bubble that is at least level 5'. ALSO, it only works on the first 15 bubbles of each colour!" }),
         new MainframeBonus({ "no": 4, "x": 538, "y": 362, "range": 90, "bonusOn": 1, "bonusOff": 2, "name": "Killer's Brightside", "description": "All monster kills count for 2x more than normal for things like opening portals and Death Note. Doesn't increase resource drops or exp gain." }),
-        new MainframeBonus({ "no": 5, "x": 651, "y": 113, "range": 90, "bonusOn": 0, "bonusOff": 1, "name": "Shrine World Tour", "description": "If a shrine is placed within town, instead of in a monster map, it will act as though it is placed in EVERY map in that entire world!" }),
-        new MainframeBonus({ "no": 6, "x": 753, "y": 244, "range": 90, "bonusOn": 1, "bonusOff": 5, "name": "Viaduct of the Gods", "description": "All alchemy liquids have x5 higher max capacity. However, you regenerate alchemy liquids -30% slower." }),
+        new MainframeBonus({ "no": 5, "x": 651, "y": 200, "range": 90, "bonusOn": 0, "bonusOff": 1, "name": "Shrine World Tour", "description": "If a shrine is placed within town, instead of in a monster map, it will act as though it is placed in EVERY map in that entire world!" }),
+        new MainframeBonus({ "no": 6, "x": 753, "y": 113, "range": 90, "bonusOn": 1, "bonusOff": 5, "name": "Viaduct of the Gods", "description": "All alchemy liquids have x5 higher max capacity. However, you regenerate alchemy liquids -30% slower." }),
         new MainframeBonus({ "no": 7, "x": 824, "y": 377, "range": 90, "bonusOn": 1, "bonusOff": 2, "name": "Certified Stamp Book", "description": "All Stamps, except for MISC tab stamps, give DOUBLE the bonus." }),
         new MainframeBonus({ "no": 8, "x": 917, "y": 326, "range": 90, "bonusOn": 1, "bonusOff": 1.5, "name": "Spelunker Obol", "description": "1.50x higher effects from all active Jewels within the Mainframe." }),
         new FungiFingerBonus({ "no": 9, "x": 982, "y": 148, "range": 90, "bonusOn": 0, "bonusOff": 2, "name": "Fungi Finger Pocketer", "description": "+2% extra cash from monsters for every 1 million Green Mushroom kills your account has, which can be viewed at Death Note. @ - @ Total Bonus: {%" }),
         new MainframeBonus({ "no": 10, "x": 1177, "y": 163, "range": 90, "bonusOn": 1, "bonusOff": 2, "name": "My 1st Chemistry Set", "description": "All Vials in Alchemy give DOUBLE the bonus. The bonus description will reflect this doubling." }),
         new UnadulteratedBankingBonus({ "no": 11, "x": 1300, "y": 380, "range": 90, "bonusOn": 0, "bonusOff": 2, "name": "Unadulterated Banking Fury", "description": "+2% Total Damage for each 'greened' stack of resources in your bank. A 'greened' stack is one with 10 million or more items. @ - @ Total Bonus: {%" }),
+        new MainframeBonus({ "no": 12, "x": 400, "y": 390, "range": 90, "bonusOn": 0, "bonusOff": 1, "name": "Sigils of Olden Alchemy", "description": "Allows you to level up Alchemy Sigils by assigning players in alchemy, at a base rate of 1 sigil xp per hour. @ Sigils can be leveled up just twice: Once to unlock their bonus, and once more to boost their bonus. Their bonuses are passive, and apply to all characters always." }),
+        new ViralConnectionBonus({ "no": 13, "x": 1430, "y": 265, "range": 90, "bonusOn": 0, "bonusOff": 50, "name": "Viral Connection", "description": "All mainframe bonuses and jewels have a 50% larger connection range, unless it states otherwise. @ This bonus always has a 80px connection range no matter what!" }),
     ]
 }
 
@@ -131,8 +144,12 @@ export class Jewel {
 
     constructor(public index: number, public data: JewelData) { }
 
-    getClass = () => {
-        return `icons-6666 icons-ConsoleJwl${this.index}`;
+    getImageData = (): ImageData => {
+        return {
+            location: `ConsoleJwl${this.index}`,
+            width: 66,
+            height: 66
+        }
     }
 
     getBonus = (bonusMultiplier: number = this.bonusMultiplier) => {
@@ -144,10 +161,6 @@ export class Jewel {
     }
 
     getRange = (connectionBonus: number = 0) => {
-        // 1.52 change: Pyrite Rhombol no longer affects itself.
-        if (this.index == 9) {
-            return 80;
-        }
         return 80 * (1 + connectionBonus / 100);
     }
 }
@@ -192,7 +205,7 @@ export class EmeraldPyramiteJewel extends Jewel {
 
     override getBonusText = () => {
         const increaseBy = this.data.bonusGiven * this.bonusMultiplier;
-        return `${this.data.effect.replace(/}/g, increaseBy.toString()).replace(/{/g, this.getBonus().toString()) }${this.bonusMultiplier > 1 ? ` (${this.bonusMultiplier}x multiplier from mainframe bonus)` : ""}`;
+        return `${this.data.effect.replace(/}/g, increaseBy.toString()).replace(/{/g, this.getBonus().toString())}${this.bonusMultiplier > 1 ? ` (${this.bonusMultiplier}x multiplier from mainframe bonus)` : ""}`;
     }
 }
 
@@ -236,8 +249,12 @@ export class Chip {
     count: number = 0;
     constructor(public index: number, public data: ChipData) { }
 
-    getClass = () => {
-        return `icons-4242 icons-ConsoleChip${this.index}`;
+    getImageData = (): ImageData => {
+        return {
+            location: `ConsoleChip${this.index}`,
+            width: 42,
+            height: 42
+        }
     }
 
     getBonus = () => {
@@ -376,7 +393,10 @@ const _findPrismSource = (lab: Lab) => {
 
 const _calculatePlayerImpact = (connectedPlayers: Player[], chainIndex: number, lab: Lab) => {
     const jewelMultiplier = (lab.bonuses.find(bonus => bonus.index == 8)?.active ?? false) ? 1.5 : 1;
-    const connectionRangeBonus = lab.jewels.filter(jewel => jewel.active && jewel.index == 9).reduce((sum, jewel) => sum += jewel.getBonus(jewelMultiplier), 0)
+    const jewelconnectionRangeBonus = lab.jewels.filter(jewel => jewel.active && jewel.index == 9).reduce((sum, jewel) => sum += jewel.getBonus(jewelMultiplier), 0)
+    const bonusConnectionRangeBonus = lab.bonuses[13].getBonus();
+
+    const connectionRangeBonus = jewelconnectionRangeBonus + bonusConnectionRangeBonus;
 
     const player = connectedPlayers[chainIndex];
     const playerCords = lab.playerCords[player.playerID];
@@ -444,14 +464,10 @@ export const updateLab = (data: Map<string, any>) => {
     const playersInLab = [...playerData].filter(player => player.currentMonster == "Laboratory").sort((player1, player2) => player1.playerID > player2.playerID ? 1 : -1);
     lab.playersInTubes = playersInLab;
 
-    // fake active jewel 16
-
     let loopAgain = true;
-    let counter = 0;
     const connectedPlayers: Player[] = [];
     while (loopAgain) {
         loopAgain = false;
-        counter += 1;
         // calculate line widths
         _calculatePlayersLineWidth(lab, cooking, breeding, cards, gemStore);
 

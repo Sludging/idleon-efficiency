@@ -2,6 +2,7 @@ import { Box, Grid, Text } from "grommet";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { AppContext } from "../../../data/appContext";
 import { TaskBoard } from "../../../data/domain/tasks";
+import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
 import TextAndLabel from "../../base/TextAndLabel";
 
@@ -28,10 +29,8 @@ function Merits({ worldIndex }: { worldIndex: number }) {
             {
                 meritsToShow.map((merit, index) => (
                     <ShadowBox key={index} background="dark-1" pad="medium" gap="small">
-                        <Box direction="row" gap="small">
-                            <Box width={{ max: '36px', min: '36px' }}>
-                                <Box className={merit.getClass()} />
-                            </Box>
+                        <Box direction="row" gap="large" align="center">
+                            <IconImage data={merit.getImageData()} scale={0.5} />
                             <Text size="small">{merit.getDescription()}</Text>
                         </Box>
                         <Box direction="row" gap="medium">

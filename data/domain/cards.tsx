@@ -1,5 +1,6 @@
 import { IDforCardBonus, IDforCardSETbonus } from "../maps";
 import { EnemyInfo } from "./enemies";
+import { ImageData } from "./imageData";
 
 export class Card {
     count: number = 0;
@@ -9,9 +10,12 @@ export class Card {
         this.displayName = EnemyInfo.find(enemy => enemy.details.internalName == name)?.details.Name || "New Monster?";
     }
 
-
-    getClass = (): string => {
-        return `icons-2836 icons-Cards${this.id}`
+    getImageData = (): ImageData => {
+        return {
+            location: `Cards${this.id}`,
+            width: 28,
+            height: 36
+        }
     }
 
     getStars = (): number => {
@@ -39,8 +43,12 @@ export class Card {
         return this.effect.replace(/{/, this.getBonus().toString());
     }
 
-    getBorderClass = (): string => {
-        return `icons-3143 icons-CardsBorder${this.getStars() + 1}`;
+    getBorderImageData = (): ImageData => {
+        return {
+            location: `CardsBorder${this.getStars() + 1}`,
+            width: 31,
+            height: 43
+        }
     }
 
     static GetTotalBonusForId = (cards: Card[], id: number) => {
@@ -67,7 +75,7 @@ const cardsInit = () => {
         new Card(14, "Crystal0", "A14", "Blunder Hills", 3, "+{% Total Drop Rate", 5, 5),
         new Card(15, "mushW", "A16", "Blunder Hills", 10, "+{% Total Accuracy", 5, 5),
         new Card(16, "jarSand", "B1", "Yum Yum Desert", 10, "+{% EXP Conversion from Talent", 12, 12),
-        new Card(17, "mimicA", "B2", "Yum Yum Desert", 10, "+{% Total Drop Rate", 3, 3),
+        new Card(17, "mimicA", "B2", "Yum Yum Desert", 10, "+{% Total Drop Rate", 2, 2),
         new Card(18, "crabcake", "B3", "Yum Yum Desert", 10, "+{% To not consume Food", 5, 5),
         new Card(19, "coconut", "B4", "Yum Yum Desert", 10, "+{ Base AGI", 5, 5),
         new Card(20, "sandcastle", "B5", "Yum Yum Desert", 10, "+{% Total Accuracy", 4, 4),
@@ -119,7 +127,7 @@ const cardsInit = () => {
         new Card(66, "thermostat", "E7", "Frostbite Tundra", 15, "+{% Critical Damage", 4, 4),
         new Card(67, "glass", "E8", "Frostbite Tundra", 17, "+{ Base LUK", 7, 7),
         new Card(68, "snakeB", "E9", "Frostbite Tundra", 17, "+{% MP regen rate", 5, 5),
-        new Card(69, "speaker", "E10", "Frostbite Tundra", 17, "+{% Total Drop Rate", 3, 3),
+        new Card(69, "speaker", "E10", "Frostbite Tundra", 17, "+{% Total Drop Rate", 3.5, 3.5),
         new Card(70, "eye", "E11", "Frostbite Tundra", 17, "+{% Total Accuracy", 5, 5),
         new Card(71, "ram", "E14", "Frostbite Tundra", 20, "+{ Weapon Power", 2, 2),
         new Card(72, "skele", "E12", "Frostbite Tundra", 15, "+{% Critical Chance", 1, 1),

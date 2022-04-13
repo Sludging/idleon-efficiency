@@ -12,8 +12,9 @@ import { AppContext } from "../../data/appContext";
 import { dungeonLevels, Dungeons, DungeonSetInfo, PassiveType } from "../../data/domain/dungeons";
 import TipDisplay, { TipDirection } from "../../components/base/TipDisplay";
 import ShadowBox from "../../components/base/ShadowBox";
-import TextAndLabel, { ComponentAndLabel } from "../../components/base/TextAndLabel";
+import TextAndLabel from "../../components/base/TextAndLabel";
 import { dateToText } from "../../data/utility";
+import IconImage from "../../components/base/IconImage";
 
 function DungeonItems() {
     const [dungeonData, setDungeonData] = useState<Dungeons | undefined>(undefined);
@@ -47,8 +48,8 @@ function DungeonItems() {
                                 direction={TipDirection.Down}
                             >
                                 <Box key={index} border={{ size: '2px', color: item.rarity }} align="center" fill>
-                                    <Box style={{ opacity: item.level != -1 ? 1 : 0.3 }} width={{ max: '42px', min: '42px' }}>
-                                        <Box className={item.getClass()} />
+                                    <Box style={{ opacity: item.level != -1 ? 1 : 0.3 }}>
+                                        <IconImage data={item.getImageData()} />
                                     </Box>
                                     {item.level != -1 && <Text>{item.level}/{item.maxLevel}</Text>}
                                 </Box>
@@ -175,9 +176,7 @@ function DungeonTraits() {
                                                         body={trait.bonus}
                                                         heading={trait.setName}
                                                     >
-                                                        <Box width={{ max: '51px', min: '25px' }}>
-                                                            <Box className={trait.getClass()} />
-                                                        </Box>
+                                                        <IconImage data={trait.getImageData()} />
                                                     </TipDisplay>
                                                 </Box>
                                             ))

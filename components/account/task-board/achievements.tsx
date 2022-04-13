@@ -2,6 +2,7 @@ import { Box, Grid, ResponsiveContext, Stack, Text, Tip } from "grommet";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { AppContext } from "../../../data/appContext";
 import { Achievement } from "../../../data/domain/achievements";
+import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
 
 function Achivements({ worldIndex }: { worldIndex: number }) {
@@ -57,8 +58,8 @@ function Achivements({ worldIndex }: { worldIndex: number }) {
                                 dropProps={{ align: { top: 'bottom' } }}
                             >
                                 <Stack fill>
-                                    <Box style={{ opacity: achievement.completed ? 1 : 0.3 }} width={{ max: '43px' }}>
-                                        <Box className={achievement.iconClass} />
+                                    <Box style={{ opacity: achievement.completed ? 1 : 0.3 }}>
+                                        <IconImage data={achievement.getImageData()} />
                                     </Box>
                                     {!achievement.completed && achievement.quantity > 1 && size != "small" && <Text>{achievement.currentCount}/{achievement.quantity}</Text>}
                                     {!achievement.completed && achievement.currentCount > 1 && size != "small" && <Text>{achievement.currentCount}</Text>}

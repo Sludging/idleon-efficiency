@@ -1,4 +1,5 @@
 import { lavaFunc } from '../utility'
+import { ImageData } from './imageData';
 
 // PostOfficeInfo0 - The current deliverables
 // PostOfficeInfo1 - streak / shield info
@@ -47,11 +48,12 @@ export class Box {
 
     constructor(public index: number, public name: string, public bonuses: BoxBonus[]) { }
 
-    getClass = () => {
-        if (this.index == 0) {
-            return `icons-8876 icons-UIboxUpg${this.index}`
+    getImageData = (): ImageData => {
+        return {
+            location: `UIboxUpg${this.index}`,
+            width: this.index == 0 ? 88 : 96,
+            height: this.index == 0 ? 76 : 80
         }
-        return `icons-9680 icons-UIboxUpg${this.index}`
     }
 }
 

@@ -112,13 +112,27 @@ export class Worship {
     }
 }
 
-export default function parseWorship(totemInfo: number[][], accountData: Map<string, any>) {
+export default function parseWorship(totemInfo: number[][]) {
     const worship = new Worship();
-    const players = accountData.get("players") as Player[];
-    const alchemy = accountData.get("alchemy") as Alchemy;
-    const stamps = accountData.get("stamps") as Stamp[][];
 
     if (totemInfo.length > 0) {
+        // hard coded info, maybe better way?
+        worship.totemInfo.push(new Totem(totemNames[0].replace(/_/g, " "), MapInfo.find(map => map.id == totemMapIds[0]), totemInfo[0][0], 0));
+        worship.totemInfo.push(new Totem(totemNames[1].replace(/_/g, " "), MapInfo.find(map => map.id == totemMapIds[1]), totemInfo[0][1], 1));
+        worship.totemInfo.push(new Totem(totemNames[2].replace(/_/g, " "), MapInfo.find(map => map.id == totemMapIds[2]), totemInfo[0][2], 2));
+        worship.totemInfo.push(new Totem(totemNames[3].replace(/_/g, " "), MapInfo.find(map => map.id == totemMapIds[3]), totemInfo[0][3], 3));
+        worship.totemInfo.push(new Totem(totemNames[4].replace(/_/g, " "), MapInfo.find(map => map.id == totemMapIds[4]), totemInfo[0][4], 4));
+    }
+    return worship;
+}
+
+export const updateWorship = (data: Map<string, any>) => {
+    const worship = data.get("worship") as Worship;
+    const players = data.get("players") as Player[];
+    const alchemy = data.get("alchemy") as Alchemy;
+    const stamps = data.get("stamps") as Stamp[][];
+
+    if (worship.totemInfo.length > 0) {
         players.forEach(player => {
             const worshipLevel = player.skills.get(SkillsIndex.Worship)?.level;
             const praydayStamp = stamps[StampTab.Skill][StampConsts.PraydayIndex];
@@ -150,13 +164,6 @@ export default function parseWorship(totemInfo: number[][], accountData: Map<str
                 playerID: player.playerID
             })
         });
-
-        // hard coded info, maybe better way?
-        worship.totemInfo.push(new Totem(totemNames[0].replace(/_/g, " "), MapInfo.find(map => map.id == totemMapIds[0]), totemInfo[0][0], 0));
-        worship.totemInfo.push(new Totem(totemNames[1].replace(/_/g, " "), MapInfo.find(map => map.id == totemMapIds[1]), totemInfo[0][1], 1));
-        worship.totemInfo.push(new Totem(totemNames[2].replace(/_/g, " "), MapInfo.find(map => map.id == totemMapIds[2]), totemInfo[0][2], 2));
-        worship.totemInfo.push(new Totem(totemNames[3].replace(/_/g, " "), MapInfo.find(map => map.id == totemMapIds[3]), totemInfo[0][3], 3));
-        worship.totemInfo.push(new Totem(totemNames[4].replace(/_/g, " "), MapInfo.find(map => map.id == totemMapIds[4]), totemInfo[0][4], 4));
     }
     return worship;
 }

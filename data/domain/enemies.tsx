@@ -48,15 +48,11 @@ export class EnemyData {
         this.bossData = bossData;
     }
 
-    getClass = () => {
-        return `icons-3541 icons-Mface${this.details.MonsterFace}`;
-    }
-
     getImageData = (): ImageData => {
         return {
-            location: this.details.internalName.toLowerCase(),
-            height: 100,
-            width: 100
+            location: `Mface${this.details.MonsterFace}`,
+            height: 41,
+            width: 35
         }
     }
 }

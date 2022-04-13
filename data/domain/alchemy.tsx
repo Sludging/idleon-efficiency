@@ -1,5 +1,6 @@
 import { lavaFunc, nFormatter, round } from '../utility'
 import { Cooking } from './cooking';
+import { ImageData } from './imageData';
 import { Item } from './items';
 import { Lab } from './lab';
 
@@ -82,12 +83,12 @@ export class Bubble {
     requirements: Array<Item> = [];
 
     level: number = 0;
-    class_name: string;
     labUpgrade: boolean = false;
     bubbleIndex: number
 
+    iconPrefix: string
+
     constructor(name: string, icon_prefix: string, bubble_number: string, x1: number, x2: number, func: string, description: string, requirements: Array<{ item: string, quantity: number }>) {
-        this.class_name = `icons-7070 icons-aUpgrades${icon_prefix}${bubble_number}`;
         this.name = name.replace(/_/g, " ");
         this.x1 = x1;
         this.x2 = x2;
@@ -95,6 +96,15 @@ export class Bubble {
         this.description = description;
         this.rawRequirements = requirements;
         this.bubbleIndex = parseInt(bubble_number);
+        this.iconPrefix = icon_prefix;
+    }
+
+    getImageData = (): ImageData => {
+        return {
+            location: `aUpgrades${this.iconPrefix}${this.bubbleIndex}`,
+            height: 70,
+            width: 70
+        }
     }
 
     getMaterialCost = (cauldCostReduxLvl: number = 0, undevelopedCostsBubbleLevel: number = 0, bubbleCostVialLvl: number = 0, bubbleBargainLvl: number = 0, bubbleMultClassLvl: number = 0, shopBargainBought: number = 0, hasAchievement: boolean = false, bubbleNewMultiLevel: number = 0, vialMultiplier: number = 1): Map<Item, number> => {
@@ -167,17 +177,25 @@ export class Vial {
 
     }
 
-    getClass = () => {
+    getImageData = (): ImageData => {
         const costItem = this.requirements.find(item => !item.internalName.includes("Liquid"));
         if (costItem) {
-            return costItem.getClass();
+            return costItem.getImageData();
         }
 
-        return "";
+        return {
+            location: 'Blank',
+            width: 36,
+            height: 36
+        };
     }
 
-    getVialClass = () => {
-        return `icons-104120 icons-aVials${this.level}`
+    getBackgroundImageData = (): ImageData => {
+        return {
+            location: `aVials${this.level}`,
+            width: 104,
+            height: 120
+        };
     }
 
     getNumberToRoll = () => {

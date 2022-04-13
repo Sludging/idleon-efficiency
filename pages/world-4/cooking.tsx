@@ -6,6 +6,7 @@ import {
 } from 'grommet'
 import { NextSeo } from 'next-seo';
 import { useContext, useEffect, useMemo, useState } from 'react';
+import IconImage from '../../components/base/IconImage';
 import ShadowBox from '../../components/base/ShadowBox';
 import TextAndLabel from '../../components/base/TextAndLabel';
 import { TimeDown } from '../../components/base/TimeDisplay';
@@ -70,8 +71,8 @@ function KitchenDisplay({ kitchen, cooking }: { kitchen: Kitchen, cooking: Cooki
                 {
                     kitchen.status == KitchenStatus.Meal &&
                     <Box direction="row" gap="small" align="end">
-                        <Box width={{ max: '41px', min: '41px' }}>
-                            <Box className={cooking.meals[kitchen.activeMeal].getClass()} />
+                        <Box>
+                            <IconImage data={cooking.meals[kitchen.activeMeal].getImageData()} />
                         </Box>
                         <Text size="small">{nFormatter(kitchen.mealSpeed / cooking.meals[kitchen.activeMeal].cookReq, "Smaller")} per hour.</Text>
                     </Box>
@@ -84,8 +85,12 @@ function KitchenDisplay({ kitchen, cooking }: { kitchen: Kitchen, cooking: Cooki
                                 <Box direction="row">
                                     {
                                         kitchen.activeRecipe.map((spice, index) => (
-                                            <Box key={`spice_${index}`} width={{ max: '36px', min: '36px' }}>
-                                                <Box className={`icons-3636 icons-CookingSpice${spice}`} />
+                                            <Box key={`spice_${index}`}>
+                                                <IconImage data={{
+                                                    location: `CookingSpice${spice}`,
+                                                    width: 36,
+                                                    height: 36
+                                                }} />
                                             </Box>
                                         ))
                                     }
@@ -95,8 +100,8 @@ function KitchenDisplay({ kitchen, cooking }: { kitchen: Kitchen, cooking: Cooki
                                 <Box direction="row">
                                     {
                                         possibleMeals.map((meal, index) => (
-                                            <Box title={cooking.meals[meal].name} style={{ opacity: cooking.meals[meal]?.level > 0 ? 1 : 0.5 }} key={`meal_${index}`} width={{ max: '41px', min: '41px' }}>
-                                                <Box className={cooking.meals[meal]?.getClass()} />
+                                            <Box title={cooking.meals[meal].name} style={{ opacity: cooking.meals[meal]?.level > 0 ? 1 : 0.5 }} key={`meal_${index}`}>
+                                                <IconImage data={cooking.meals[meal]?.getImageData()} />
                                             </Box>
                                         ))
                                     }
@@ -171,9 +176,11 @@ function Cooking() {
                         cooking?.spices.filter(spice => spice > 0).map((spice, index) => (
                             <Box key={index} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} align="center">
                                 <Box direction="row" pad={{ vertical: 'small' }} align="center">
-                                    <Box width={{ max: '36px', min: '36px' }}>
-                                        <Box className={`icons-3636 icons-CookingSpice${index}`} />
-                                    </Box>
+                                    <IconImage data={{
+                                        location: `CookingSpice${index}`,
+                                        width: 36,
+                                        height: 36
+                                    }} />
                                     <Text size="small">{nFormatter(spice)}</Text>
                                 </Box>
                             </Box>
@@ -189,8 +196,8 @@ function Cooking() {
                             <ShadowBox background="dark-1" key={index} margin={{ right: 'small', bottom: 'small' }} direction="row" pad="small" gap="small" align="center">
                                 <Box direction="row" align="center">
                                     <Text size="small">{meal.level}</Text>
-                                    <Box width={{ max: '41px', min: '41px' }} margin={{ bottom: 'small' }}>
-                                        <Box className={meal.getClass()} />
+                                    <Box margin={{ bottom: 'small' }}>
+                                        <IconImage data={meal.getImageData()} />
                                     </Box>
                                 </Box>
                                 {meal.level > 0 &&
@@ -199,6 +206,13 @@ function Cooking() {
                                         body={
                                             <Box>
                                                 <Text>Next level bonus: {meal.getBonusText(meal.level + 1)}</Text>
+                                                {meal.cookingContribution > 0 &&
+                                                    <Box>
+                                                        <Text>Cooking speed: {nFormatter(meal.cookingContribution, "Smaller")}</Text>
+                                                        { meal.timeToNext > 0 && <Text>Time to next level: {toTime(meal.timeToNext * 3600)}</Text>}
+                                                        { meal.timeToDiamond > 0 && <Text>Time to Diamond: {toTime(meal.timeToDiamond * 3600)}</Text>}
+                                                    </Box>
+                                                }
                                             </Box>
                                         }
                                         direction={TipDirection.Down}
@@ -238,9 +252,11 @@ function Cooking() {
                                             <Box direction="row">
                                                 {
                                                     meal.optimalSpices.map((spice, index) => (
-                                                        <Box key={index} width={{ max: '36px', min: '36px' }}>
-                                                            <Box className={`icons-3636 icons-CookingSpice${spice}`} />
-                                                        </Box>
+                                                        <IconImage key={index} data={{
+                                                            location: `CookingSpice${spice}`,
+                                                            width: 36,
+                                                            height: 36
+                                                        }} />
                                                     ))
                                                 }
                                             </Box>
