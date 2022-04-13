@@ -77,7 +77,7 @@ export class IdleonData {
 
 
 const keyFunctionMap: Record<string, Function> = {
-    "stamps": (doc: Cloudsave, charCount: number) => parseStamps(doc.get("StampLv"), doc.get("StampLvM")),
+    "stamps": (doc: Cloudsave, allItems: Item[], charCount: number) => parseStamps(doc.get("StampLv"), doc.get("StampLvM"), allItems),
     "traps": (doc: Cloudsave, charCount: number) => parseTraps([...Array(charCount)].map((_, i) => { return doc.get(`PldTraps_${i}`) })),
     "statues": (doc: Cloudsave, charCount: number) => parseStatues([...Array(charCount)].map((_, i) => safeJsonParse(doc, `StatueLevels_${i}`, [])), safeJsonParse(doc, `StuG`, [])),
     "timeAway": (doc: Cloudsave, charCount: number) => JSON.parse(doc.get('TimeAway')),
@@ -148,7 +148,7 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], all
             else if (key == "worship") {
                 accountData.set(key, toExecute(data, accountData, validCharCount));
             }
-            else if (key == "lootyData" || key == "obols" || key == "alchemy" || key == "forge") {
+            else if (key == "lootyData" || key == "obols" || key == "alchemy" || key == "forge" || key == "stamps") {
                 accountData.set(key, toExecute(data, allItems, validCharCount));
             }
             else {

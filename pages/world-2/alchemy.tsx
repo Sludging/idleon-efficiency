@@ -85,7 +85,7 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
                     {
                         Array.from(materialCosts).map(([item, cost]) => {
                             return (
-                                <Box key={`${bubble.name}_${item.internalName}`} direction="row" align="center" ><Text size="small">Material Cost: {nFormatter(round(cost))}</Text><Box align="center" width={{ max: '36px' }} fill><Box className={item.getClass()} /></Box></Box>
+                                <Box key={`${bubble.name}_${item.internalName}`} direction="row" align="center" ><Text size="small">Material Cost: {nFormatter(round(cost))}</Text><IconImage data={item.getImageData()} /></Box>
                             )
                         })
                     }
