@@ -206,6 +206,13 @@ function Cooking() {
                                         body={
                                             <Box>
                                                 <Text>Next level bonus: {meal.getBonusText(meal.level + 1)}</Text>
+                                                {meal.cookingContribution > 0 &&
+                                                    <Box>
+                                                        <Text>Cooking speed: {nFormatter(meal.cookingContribution, "Smaller")}</Text>
+                                                        { meal.timeToNext > 0 && <Text>Time to next level: {toTime(meal.timeToNext * 3600)}</Text>}
+                                                        { meal.timeToDiamond > 0 && <Text>Time to Diamond: {toTime(meal.timeToDiamond * 3600)}</Text>}
+                                                    </Box>
+                                                }
                                             </Box>
                                         }
                                         direction={TipDirection.Down}
