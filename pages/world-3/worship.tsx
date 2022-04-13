@@ -18,6 +18,9 @@ import ShadowBox from '../../components/base/ShadowBox';
 import { TimeDisplaySize, TimeDown } from '../../components/base/TimeDisplay';
 import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import { Worship as WorshipDomain } from '../../data/domain/worship';
+import { Prayer } from '../../data/domain/prayers';
+import { GroupBy, nFormatter } from '../../data/utility';
+import IconImage from '../../components/base/IconImage';
 
 function ChargeDisplay() {
     const [playerData, setPlayerData] = useState<Player[]>();
@@ -70,57 +73,57 @@ function ChargeDisplay() {
     return (
         <Box gap="medium" align="center">
             {totalChargeInfo && bestWizard &&
-            <Box>
-                <Text size="xsmall">* This is ignoring the wizard&apos;s charge, since you can just .. use it.</Text>
-                <ShadowBox background="dark-1" pad="medium" gap="large" direction="row" wrap>
-                    <ComponentAndLabel
-                        label="Best Wizard"
-                        component={
-                            <Box direction="row">
-                                <Box width={{ min: "30px", max: '30px' }} margin={{ right: 'small' }}>
-                                    <Box className={`icons-3836 icons-ClassIcons${bestWizard.classId.valueOf()}`} />
-                                </Box>
-                                <Text>{bestWizard.playerName}</Text>
-                            </Box>
-                        }
-                    />
-                    <ComponentAndLabel
-                        label="Charge with Charge Syphon"
-                        component={
-                            <Box direction="row" gap="small">
-                                <Stack>
-                                    <Meter
-                                        size="small"
-                                        type="bar"
-                                        background="accent-3"
-                                        color="brand"
-                                        values={[
-                                            {
-                                                value: Math.round(totalChargeInfo.charge),
-                                                label: 'Current total charge',
-                                                color: 'brand'
-                                            }
-                                        ]}
-                                        max={totalChargeInfo.maxCharge} />
-                                    <Box align="center" pad="xxsmall">
-                                        <Text size="small">{Math.round(totalChargeInfo.charge).toString()} ({(totalChargeInfo.charge / totalChargeInfo.maxCharge * 100).toPrecision(3)}%)</Text>
+                <Box>
+                    <Text size="xsmall">* This is ignoring the wizard&apos;s charge, since you can just .. use it.</Text>
+                    <ShadowBox background="dark-1" pad="medium" gap="large" direction="row" wrap>
+                        <ComponentAndLabel
+                            label="Best Wizard"
+                            component={
+                                <Box direction="row">
+                                    <Box width={{ min: "30px", max: '30px' }} margin={{ right: 'small' }}>
+                                        <Box className={`icons-3836 icons-ClassIcons${bestWizard.classId.valueOf()}`} />
                                     </Box>
-                                </Stack>
-                                <Text>{totalChargeInfo.maxCharge}</Text>
-                            </Box>
-                        }
-                    />
-                    <TextAndLabel label="Total Charge rate" text={`${Math.round(totalChargeInfo.rate * 24)}% / day`} />
-                    <ComponentAndLabel
-                        label="Time till overflow"
-                        component={
-                            totalChargeInfo.overFlowTime > 0 ?
-                                <TimeDown size={TimeDisplaySize.Small} addSeconds={totalChargeInfo.overFlowTime} />
-                                : <Text>Overflowing, you are wasting charge!</Text>
-                        }
-                    />
-                </ShadowBox>
-            </Box>
+                                    <Text>{bestWizard.playerName}</Text>
+                                </Box>
+                            }
+                        />
+                        <ComponentAndLabel
+                            label="Charge with Charge Syphon"
+                            component={
+                                <Box direction="row" gap="small">
+                                    <Stack>
+                                        <Meter
+                                            size="small"
+                                            type="bar"
+                                            background="accent-3"
+                                            color="brand"
+                                            values={[
+                                                {
+                                                    value: Math.round(totalChargeInfo.charge),
+                                                    label: 'Current total charge',
+                                                    color: 'brand'
+                                                }
+                                            ]}
+                                            max={totalChargeInfo.maxCharge} />
+                                        <Box align="center" pad="xxsmall">
+                                            <Text size="small">{Math.round(totalChargeInfo.charge).toString()} ({(totalChargeInfo.charge / totalChargeInfo.maxCharge * 100).toPrecision(3)}%)</Text>
+                                        </Box>
+                                    </Stack>
+                                    <Text>{totalChargeInfo.maxCharge}</Text>
+                                </Box>
+                            }
+                        />
+                        <TextAndLabel label="Total Charge rate" text={`${Math.round(totalChargeInfo.rate * 24)}% / day`} />
+                        <ComponentAndLabel
+                            label="Time till overflow"
+                            component={
+                                totalChargeInfo.overFlowTime > 0 ?
+                                    <TimeDown size={TimeDisplaySize.Small} addSeconds={totalChargeInfo.overFlowTime} />
+                                    : <Text>Overflowing, you are wasting charge!</Text>
+                            }
+                        />
+                    </ShadowBox>
+                </Box>
             }
             <Box direction="row" wrap justify="center">
                 {playerData && playerData.map((player, index) => {
@@ -249,6 +252,59 @@ function TotemDisplay() {
 
 }
 
+function PrayerDisplay() {
+    const [prayers, setPrayers] = useState<Prayer[]>([]);
+    const appContext = useContext(AppContext);
+
+    const size = useContext(ResponsiveContext);
+
+    useEffect(() => {
+        if (appContext) {
+            const theData = appContext.data.getData();
+            setPrayers(theData.get("prayers"));
+        }
+    }, [appContext]);
+
+    if (prayers.length == 0) {
+        return (
+            <Box align="center" pad="medium">
+                <Heading level='3'>Come back when you unlocked this!</Heading>
+            </Box>
+        )
+    }
+
+    return (
+        <Box gap="medium">
+            {
+                Array.from(GroupBy(prayers.filter(prayer => prayer.name != "Some Prayer Name0"), "towerName").entries()).map(([tower, prayers], index) => (
+                    <Box key={index} gap="small">
+                        <Text>{tower}</Text>
+                        {
+                            prayers.map((prayer, index) => (
+                                <ShadowBox key={`prayer_${index}`} background="dark-1" pad="medium" align="start" margin={{ right: 'large', bottom: 'small' }}>
+                                    <Grid columns={{ count: 7, size: 'auto' }} gap={{ column: 'medium' }} fill>
+                                        <IconImage data={prayer.getImageData()} />
+                                        <TextAndLabel text={prayer.name} label="Name" />
+                                        <TextAndLabel text={`${prayer.level.toString()}/${prayer.maxLevel.toString()}`} label="Level" />
+                                        <TextAndLabel text={prayer.getBonusText()} label="Bonus" />
+                                        <TextAndLabel text={prayer.getCurseText()} label="Curse" />
+                                        { prayer.level == prayer.maxLevel && <Box align="center" justify="center"><Text color="green-1" size="large">Maxed!</Text></Box>}
+                                        { prayer.level == 0 && <TextAndLabel text={prayer.waveReq.toString()} label="Wave Req" /> }
+                                        { prayer.level > 0 && prayer.level != prayer.maxLevel && <TextAndLabel text={nFormatter(prayer.getLevelCosts(), "Smaller")} label="Cost to next" /> }
+                                        { prayer.level > 0 && prayer.level != prayer.maxLevel && <TextAndLabel text={nFormatter(prayer.getCostToMax(), "Smaller")} label="Cost to max" /> }
+                                        
+                                    </Grid>
+                                </ShadowBox>
+                            ))
+                        }
+                    </Box>
+                ))
+            }
+        </Box>
+    )
+
+}
+
 function Worship() {
     const [activeTab, setActiveTab] = useState<string>("Charge");
 
@@ -258,13 +314,14 @@ function Worship() {
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Worship</Heading>
             <Box gap="small">
                 <Box align="center" direction="row" justify="center" gap="small">
-                    {["Charge", "Totems"].map((tabName, index) => (
+                    {["Charge", "Totems", "Prayers"].map((tabName, index) => (
                         <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
                     ))
                     }
                 </Box>
                 {activeTab == "Charge" && <ChargeDisplay />}
                 {activeTab == "Totems" && <TotemDisplay />}
+                {activeTab == "Prayers" && <PrayerDisplay />}
             </Box>
         </Box>
     )
