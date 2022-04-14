@@ -3,6 +3,7 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import { AppContext } from "../../../data/appContext";
 import { ItemStat } from "../../../data/domain/items";
 import { ObolsData, ObolType } from "../../../data/domain/obols";
+import IconImage from "../../base/IconImage";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
 import TipDisplay, { TipDirection } from "../../base/TipDisplay";
 
@@ -111,9 +112,7 @@ function ObolsInfo({ playerIndex, title, level }: { playerIndex: number, title: 
                                         direction={TipDirection.Down}
                                         maxWidth="large"
                                     >
-                                        <Box width={{ max: '36px', min: '36px' }}>
-                                            <Box className={obol.item.getClass()} />
-                                        </Box>
+                                        <IconImage data={obol.item.getImageData()} />
                                     </TipDisplay>
                                 )
                             })

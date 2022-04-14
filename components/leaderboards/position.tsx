@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Dungeons } from "../../data/domain/dungeons";
 import { CategoryType } from "../../data/domain/leaderboards/data";
 import { getCoinsArray, nFormatter } from "../../data/utility";
+import IconImage from "../base/IconImage";
 import CoinsDisplay from "../coinsDisplay";
 import Star from "./star";
 
@@ -47,8 +48,8 @@ const Position = ({ position, profile, value, type = CategoryType.Number, backgr
                 dungeonRank &&
                 <Box direction="row" gap="small">
                     <Text>{nFormatter(value, "Whole")}</Text>
-                    <Box title={dungeonRank.toString()} width={{ max: '20px' }} >
-                        <Box className={Dungeons.getDungeonRankClass(dungeonRank)} />
+                    <Box title={dungeonRank.toString()}>
+                        <IconImage data={Dungeons.getDungeonImageData(dungeonRank)} />
                     </Box>
                 </Box>
             }

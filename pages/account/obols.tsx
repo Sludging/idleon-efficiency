@@ -16,6 +16,7 @@ import { ObolsData, ObolType } from "../../data/domain/obols";
 import TextAndLabel from "../../components/base/TextAndLabel";
 import TipDisplay, { TipDirection } from "../../components/base/TipDisplay";
 import { ItemStat } from "../../data/domain/items";
+import IconImage from "../../components/base/IconImage";
 
 function ObolInventory() {
     const [obolsData, setObolsData] = useState<ObolsData>();
@@ -65,9 +66,7 @@ function ObolInventory() {
                                             direction={TipDirection.Down}
                                             maxWidth="large"
                                         >
-                                            <Box width={{ max: '36px', min: '36px' }}>
-                                                <Box className={obol.item.getClass()} />
-                                            </Box>
+                                            <IconImage data={obol.item.getImageData()} />
                                         </TipDisplay>
                                     )
                                 })
@@ -115,7 +114,7 @@ function Obols() {
                         {
                             playerData?.map((player, playerIndex) => {
                                 return (
-                                    <LeftNavButton key={playerIndex} isActive={index == playerIndex} clickHandler={() => onActive(playerIndex)} text={player.playerName} iconClass={player.getClassClass()} />
+                                    <LeftNavButton key={playerIndex} isActive={index == playerIndex} clickHandler={() => onActive(playerIndex)} text={player.playerName} iconImageData={player.getClassImageData()} />
                                 )
                             })
                         }

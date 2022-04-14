@@ -124,7 +124,7 @@ function MainframeDisplay() {
                 <Text>Jewels</Text>
                 <Box gap="small" direction="row" wrap>
                     {
-                        lab && lab.jewels.sort((jewel1, jewel2) => jewel1.data.x < jewel2.data.y ? -1 : 1).map((jewel, index) => {
+                        lab && lab.jewels.sort((jewel1, jewel2) => jewel1.data.x < jewel2.data.x ? -1 : 1).map((jewel, index) => {
                             return (
                                 <Box key={index} margin={{ right: 'small', bottom: 'small' }} >
                                     <TipDisplay

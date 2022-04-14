@@ -65,8 +65,12 @@ export class Task {
         return toReturn;
     }
 
-    getLevelClass = () => {
-        return `icons-6040 icons-TaskRank${this.level}`;
+    getLevelImageData = (): ImageData => {
+        return {
+            location: `TaskRank${this.level}`,
+            height: 40,
+            width: 60
+        }
     }
 }
 
