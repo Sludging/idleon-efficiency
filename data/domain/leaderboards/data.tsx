@@ -1,3 +1,5 @@
+import { ImageData } from "../imageData";
+
 export enum CategoryType {
     Number,
     Money,
@@ -14,7 +16,8 @@ export enum CategoryGroup {
 
 interface DisplayInfo {
     title: string,
-    icon: string,
+    icon?: string,
+    imageData?: ImageData,
     type: CategoryType
     group: CategoryGroup
 }
@@ -22,170 +25,274 @@ interface DisplayInfo {
 export const TitleMap: Map<string, DisplayInfo> = new Map(Object.entries({
     "TotalMoney": {
         title: "Current Money",
-        icon: "icons-2327 icons-Coins10",
+        imageData: {
+            location: "Coins10",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Money,
         group: CategoryGroup.Totals
     },
     "HighestLevel": {
         title: "Highest Character Level",
-        icon: "icons-3541 icons-Mface46",
+        imageData: {
+            location: "Mface46",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Highscore
     },
     "GrindTime": {
         title: "Grind Time",
-        icon: "icons-7070 icons-aUpgradesY8",
+        imageData: {
+            location: "aUpgradesY8",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Highscore
     },
     "Alchemy": {
         title: "Total Bubbles",
-        icon: "icons-5656 icons-UISkillIcon492",
+        imageData: {
+            location: "UISkillIcon492",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Totals
     },
     "AlchemyLevel": {
         title: "Alchemy Level",
-        icon: "icons-3836 icons-ClassIcons46",
+        imageData: {
+            location: "ClassIcons46",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Skills
     },
     "AnvilSpeed": {
         title: "Combined Anvil Speed",
-        icon: "icons-5656 icons-UISkillIcon269",
+        imageData: {
+            location: "UISkillIcon269",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Highscore
     },
     "CatchingLevel": {
         title: "Catching Level",
-        icon: "icons-3836 icons-ClassIcons47", 
+        imageData: {
+            location: "ClassIcons47",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Skills
     },
     "ChoppingLevel": {
         title: "Chopping Level",
-        icon: "icons-3836 icons-ClassIcons44", 
+        imageData: {
+            location: "ClassIcons44",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Skills
     },
     "ConstLevel": {
         title: "Construction Level",
-        icon: "icons-3836 icons-ClassIcons49", 
+        imageData: {
+            location: "ClassIcons49",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Skills
     },
     "FishingLevel": {
         title: "Fishing Level",
-        icon: "icons-3836 icons-ClassIcons45", 
+        imageData: {
+            location: "ClassIcons45",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Skills
     },
     "SmithingLevel": {
         title: "Smithing Level",
-        icon: "icons-3836 icons-ClassIcons43", 
+        imageData: {
+            location: "ClassIcons43",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Skills
     },
     "MiningLevel": {
         title: "Mining Level",
-        icon: "icons-3836 icons-ClassIcons42", 
+        imageData: {
+            location: "ClassIcons42",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Skills
     },
     "TrappingLevel": {
         title: "Trapping Level",
-        icon: "icons-3836 icons-ClassIcons48", 
+        imageData: {
+            location: "ClassIcons48",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Skills
     },
     "WorshipLevel": {
         title: "Worship Level",
-        icon: "icons-3836 icons-ClassIcons50", 
+        imageData: {
+            location: "ClassIcons50",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Skills
     },
     "CopperSample": {
         title: "Copper Sample",
-        icon: "icons-3636 icons-Copper_x1", 
+        imageData: {
+            location: "Copper",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Samples
     },
     "FliesSample": {
         title: "Flies Sample",
-        icon: "icons-3636 icons-Bug1_x1", 
+        imageData: {
+            location: "Bug1",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Samples
     },
     "GoldenFishSample": {
         title: "Golden Fish Sample",
-        icon: "icons-3636 icons-Fish1_x1", 
+        imageData: {
+            location: "Fish1",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Samples
     },
     "OakSample": {
         title: "Oak Sample",
-        icon: "icons-3636 icons-OakTree_x1", 
+        imageData: {
+            location: "OakTree",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Samples
     },
     "SporeSample": {
         title: "Spore Sample",
-        icon: "icons-3636 icons-Grasslands1_x1", 
+        imageData: {
+            location: "Grasslands1",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Samples
     },
     "TotalPrinted": {
         title: "Total Printed",
-        icon: "icons-5656 icons-UISkillIcon32", 
+        imageData: {
+            location: "UISkillIcon32",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Totals
     },
     "LootyCount": {
         title: "Items Lootyed",
-        icon: "icons-5656 icons-UISkillIcon305", 
+        imageData: {
+            location: "UISkillIcon305",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Highscore
     },
     "HighestDamage": {
         title: "Most Damage (in 1 hit)",
-        icon: "icons-3636 icons-FoodG2_x1", 
+        imageData: {
+            location: "FoodG2",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Highscore
     },
     "Stamps": {
         title: "Total Stamps Levels",
-        icon: "icons-3636 icons-StampA32_x1", 
+        imageData: {
+            location: "StampA32",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Totals
     },
     "TotalChargeRate": {
         title: "Total Charge Rate",
-        icon: "icons-5656 icons-UISkillIcon475", 
+        imageData: {
+            location: "UISkillIcon475",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Percent,
         group: CategoryGroup.Totals
     },
     "TotalPostOffice": {
         title: "Post Office Orders Completed",
-        icon: "icons-3636 icons-SilverPen_x1", 
+        imageData: {
+            location: "SilverPen",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Totals
     },
     "TotalSalts": {
         title: "Salts Refined",
-        icon: "icons-5656 icons-UISkillIcon131", 
+        imageData: {
+            location: "UISkillIcon131",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Totals
     },
 
     "W1Colo": {
         title: "Dewdrop Colosseum - Highscore",
-        icon: "icons-colosseums icons-colosseums1", 
+        icon: "icons-colosseums icons-colosseums1",
         type: CategoryType.Number,
         group: CategoryGroup.Highscore
     },
     "W2Colo": {
         title: "Sandstone Colosseum - Highscore",
-        icon: "icons-colosseums icons-colosseums2", 
+        icon: "icons-colosseums icons-colosseums2",
         type: CategoryType.Number,
         group: CategoryGroup.Highscore
     },
@@ -197,49 +304,81 @@ export const TitleMap: Map<string, DisplayInfo> = new Map(Object.entries({
     },
     "Family": {
         title: "Family Level",
-        icon: "icons-7272 icons-TaskSb5", 
+        imageData: {
+            location: "TaskSb5",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Totals
     },
     "CurrentDungeonXP": {
         title: "Dungeon XP (and rank)",
-        icon: "icons-1620 icons-Dung_Rank61", 
+        imageData: {
+            location: "Dung_Rank61",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Dungeon,
         group: CategoryGroup.Highscore
     },
     "TotalBuildingLevels": {
         title: "Total Building Levels",
-        icon: "icons-4343 icons-TaskAchC31", 
+        imageData: {
+            location: "TaskAchC31",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Totals
     },
     "TotalStatueLevels": {
         title: "Total Statue Levels",
-        icon: "icons-4150 icons-StatueG1", 
+        imageData: {
+            location: "StatueG1",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Totals
     },
     "ArenaWave": {
         title: "Pet Arena Round",
-        icon: "icons-5050 icons-PetBullet11", 
+        imageData: {
+            location: "PetBullet11",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Highscore
     },
     "BreedingLevel": {
         title: "Breeding Level",
-        icon: "icons-3836 icons-ClassIcons52", 
+        imageData: {
+            location: "ClassIcons52",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Skills
     },
     "CookingLevel": {
         title: "Cooking Level",
-        icon: "icons-3836 icons-ClassIcons51", 
+        imageData: {
+            location: "ClassIcons51",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Skills
     },
     "LabLevel": {
         title: "Lab Level",
-        icon: "icons-3836 icons-ClassIcons53", 
+        imageData: {
+            location: "ClassIcons53",
+            height: 32,
+            width: 32
+        },
         type: CategoryType.Number,
         group: CategoryGroup.Skills
     },
