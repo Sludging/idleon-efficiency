@@ -1,3 +1,4 @@
+import { ImageData } from './imageData';
 import { Player } from './player';
 
 export const StatueConst = {
@@ -73,8 +74,12 @@ export class Statue {
         return this.level * this.statueData.bonus * talentBonus;
     }
 
-    getClassName = (): string => {
-        return `icons-4150 icons-Statue${this.isGold ? "G" : ""}${this.statueNumber}`;
+    getImageData = (): ImageData => {
+        return {
+            location: `Statue${this.isGold ? "G" : ""}${this.statueNumber}`,
+            height: 50,
+            width: 41
+        }
     }
 }
 

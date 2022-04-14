@@ -9,7 +9,6 @@ import {
 } from 'grommet'
 import { NextSeo } from 'next-seo';
 import { useContext, useEffect, useMemo, useState } from 'react';
-import { customTabsTheme, CustomTabTitle } from '../../components/base/CustomTabs';
 import IconImage from '../../components/base/IconImage';
 import ShadowBox from '../../components/base/ShadowBox';
 import TabButton from '../../components/base/TabButton';

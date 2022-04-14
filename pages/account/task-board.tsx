@@ -10,7 +10,6 @@ import {
 import { useState } from 'react';
 import { NextSeo } from 'next-seo';
 import TabButton from "../../components/base/TabButton";
-import { css } from "styled-components";
 import Tasks from "../../components/account/task-board/tasks";
 import Achivements from "../../components/account/task-board/achievements";
 import Merits from "../../components/account/task-board/merits";

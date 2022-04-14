@@ -324,8 +324,12 @@ export class Dungeons {
         return rank;
     }
 
-    public static getDungeonRankClass = (dungeonRank: number) => {
-        return `icons-1620 icons-Dung_Rank${dungeonRank}`;
+    public static getDungeonImageData = (dungeonRank: number): ImageData => {
+        return {
+            location: `Dung_Rank${dungeonRank}`,
+            height: 20,
+            width: 16
+        }
     }
 }
 

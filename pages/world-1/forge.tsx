@@ -34,9 +34,8 @@ function ForgeItem({ item, title }: { item: Item, title: string }) {
                 <ComponentAndLabel
                     label={title}
                     component={
-                        <Box direction="row" align="center"><Box width={{ max: '36px', min: '36px' }}>
-                            <Box className={item.getClass()} />
-                        </Box>
+                        <Box direction="row" align="center">
+                            <IconImage data={item.getImageData()} />
                             <Text size="small">{nFormatter(item.count)}</Text>
                         </Box>
                     }
