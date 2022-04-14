@@ -3,6 +3,7 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import { AppContext } from "../../../data/appContext";
 import { TaskBoard } from "../../../data/domain/tasks";
 import { nFormatter } from "../../../data/utility";
+import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
 import TextAndLabel from "../../base/TextAndLabel";
 
@@ -30,9 +31,7 @@ function Tasks({ worldIndex }: { worldIndex: number }) {
                 tasksToShow.map((task, index) => (
                     <ShadowBox key={index} background="dark-1" pad="medium" gap="small">
                         <Box direction="row" align="center">
-                            <Box width={{max: '60px', min: '60px'}}>
-                                <Box className={task.getLevelClass()} />
-                            </Box>
+                            <IconImage data={task.getLevelImageData()} />
                             <Text size="small">{task.name} ({task.level.toString()} / {task.numbers.length})</Text>
                         </Box>
                         <Box width="medium">

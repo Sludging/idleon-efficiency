@@ -251,8 +251,8 @@ function RefineryDisplay() {
                                 <Grid columns={size == "small" ? ["50%", "50%"] : ["15%", "20%", "25%", "20%", "20%"]}>
                                     <Box key={index} direction="row" gap="medium" align="center" background="dark-2" pad="medium" justify="center" fill>
                                         <Box align="center">
-                                            <Box title={saltItem.displayName} width={{ max: '75px', min: '75px' }}>
-                                                <Box className={saltItem.getClass()} />
+                                            <Box title={saltItem.displayName}>
+                                                <IconImage data={saltItem.getImageData()} scale={2} />
                                             </Box>
                                             <Box align="center">
                                                 <Text size="large">{info.rank}</Text>
@@ -305,11 +305,11 @@ function RefineryDisplay() {
                                                     info.baseCost && info.baseCost.map((costData, index) => {
                                                         const costItem = itemData?.find((item) => item.internalName == costData.item);
                                                         const itemCost = costData.quantity * info.getCostMulti(costData.item.includes("Refinery"), index <= saltMeritLevel);
-                                                        if (costItem) {
+                                                        if (costItem != undefined) {
                                                             return (
                                                                 <Box key={index} direction="row" align="center">
-                                                                    <Box title={costItem?.displayName} width={{ max: '30px', min: '30px' }}>
-                                                                        <Box className={costItem?.getClass()} />
+                                                                    <Box title={costItem.displayName}>
+                                                                        <IconImage data={costItem.getImageData()} scale={0.8} />
                                                                     </Box>
                                                                     <Box direction="row" gap="xsmall" align="center">
                                                                         <Text size="small">{itemCost}</Text>
@@ -332,11 +332,11 @@ function RefineryDisplay() {
                                                         const itemCost = costData.quantity * info.getCostMulti(costData.item.includes("Refinery"), index <= saltMeritLevel);
                                                         const storageQuantity = storageItems.find(x => x.internalName == costData.item)?.count ?? 0;
                                                         const resourceCostToMax = info.getCyclesTillNextRank() * itemCost;
-                                                        if (costItem) {
+                                                        if (costItem != undefined) {
                                                             return (
                                                                 <Box key={index} direction="row" align="center">
-                                                                    <Box title={costItem?.displayName} width={{ max: '30px', min: '30px' }}>
-                                                                        <Box className={costItem?.getClass()} />
+                                                                    <Box title={costItem.displayName}>
+                                                                        <IconImage data={costItem.getImageData()} scale={0.8}/>
                                                                     </Box>
                                                                     <Box direction="row" gap="xsmall" align="center">
                                                                         <Text color={storageQuantity < resourceCostToMax ? 'accent-1' : ''} size="small">{nFormatter(resourceCostToMax)}</Text>
@@ -408,8 +408,8 @@ function SaltLickDisplay() {
                                     <TextAndLabel textSize='small' text={saltLickData.getBonusText(index)} label="Bonus" />
                                     <TextAndLabel text={`${bonus.level} / ${bonus.maxLevel}`} label="Level" />
                                     <Box direction="row" align="center">
-                                        <Box title={saltItem.displayName} width={{ max: '50px', min: '50px' }} margin={{ right: 'small' }}>
-                                            <Box className={saltItem.getClass()} />
+                                        <Box title={saltItem.displayName} margin={{ right: 'small' }}>
+                                            <IconImage data={saltItem.getImageData()} />
                                         </Box>
                                         <TextAndLabel text={nFormatter(costToNextLevel)} label="Next Level costs" />
 
@@ -439,9 +439,7 @@ function SampleBox({ sample, activeItem, itemData }: { sample: { item: string, q
                     <Text size="xsmall" color="accent-3">Empty</Text>
                 </Box> :
                 <Box pad={{ vertical: 'small' }} align="center">
-                    <Box width={{ max: '36px', min: '36px' }}>
-                        <Box className={sampleItem?.getClass()} />
-                    </Box>
+                    <IconImage data={(sampleItem as Item).getImageData()} />
                     <Text color={activeItem ? 'green-1' : ''} size="small">{nFormatter(sample.quantity)}</Text>
                 </Box>
             }

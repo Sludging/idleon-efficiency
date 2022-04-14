@@ -627,8 +627,8 @@ function StatuesDisplay({ playerStatues, player }: { playerStatues: PlayerStatue
                 playerStatues ? playerStatues.statues.map((statue, index) => {
                     return (
                         <Box key={`statue_${index}`} direction="row" gap="medium">
-                            <Box width={{ max: '41px', min: '41px' }} height={{ max: '50px', min: '50px' }}>
-                                <Box width={{ max: '41px', min: '41px' }} height={{ max: '50px', min: '50px' }} className={statue.getClassName()} title={statue.displayName} />
+                            <Box title={statue.displayName}>
+                                <IconImage data={statue.getImageData()} scale={0.8} />
                             </Box>
                             <Text alignSelf="center">Level: {statue.level}</Text>
                             <Text alignSelf="center">/</Text>
