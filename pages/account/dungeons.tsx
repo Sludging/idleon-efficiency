@@ -12,7 +12,7 @@ import { AppContext } from "../../data/appContext";
 import { dungeonLevels, Dungeons, DungeonSetInfo, PassiveType } from "../../data/domain/dungeons";
 import TipDisplay, { TipDirection } from "../../components/base/TipDisplay";
 import ShadowBox from "../../components/base/ShadowBox";
-import TextAndLabel from "../../components/base/TextAndLabel";
+import TextAndLabel, { ComponentAndLabel } from "../../components/base/TextAndLabel";
 import { dateToText } from "../../data/utility";
 import IconImage from "../../components/base/IconImage";
 
@@ -261,8 +261,13 @@ function DungeonsDisplay() {
             <Box pad="small">
                 {dungeonData &&
                     <Box direction="row">
-                        <TextAndLabel
-                            text={`${dungeonData.rank} (${dungeonData.xp}/${dungeonLevels[dungeonData.rank]})`}
+                        <ComponentAndLabel
+                            component={
+                                <Box direction="row" gap="xsmall" align="center">
+                                    <IconImage data={Dungeons.getDungeonImageData(dungeonData.rank)} />
+                                    <Text>{dungeonData.rank} ({dungeonData.xp}/{dungeonLevels[dungeonData.rank]})</Text>
+                                </Box>
+                            }
                             label="Rank"
                             margin={{ right: 'medium' }}
                         />

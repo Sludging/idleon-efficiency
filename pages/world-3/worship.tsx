@@ -161,7 +161,17 @@ function ChargeDisplay() {
                                 <Box direction="row" justify="between">
                                     <ComponentAndLabel
                                         label="Level"
-                                        component={<Box direction="row"><Text>{player.skills.get(SkillsIndex.Worship)?.level.toString() ?? "0"}</Text><Box width={{ max: '25px', min: '25px' }}><Box title={player.gear.tools[5]?.displayName} className={player.gear.tools[5]?.getClass()} /></Box> </Box>}
+                                        component={
+                                            <Box direction="row">
+                                                <Text>{player.skills.get(SkillsIndex.Worship)?.level.toString() ?? "0"}</Text>
+                                                {
+                                                    player.gear.tools[5] != undefined &&
+                                                    <Box title={player.gear.tools[5].displayName}>
+                                                        <IconImage data={player.gear.tools[5].getImageData()} scale={0.7} />
+                                                    </Box>
+                                                }
+                                            </Box>
+                                        }
                                     />
                                     <TextAndLabel label="Charge rate" text={`${Math.round(worship.playerData[index].chargeRate * 24)}% / day`} />
                                 </Box>
@@ -288,11 +298,11 @@ function PrayerDisplay() {
                                         <TextAndLabel text={`${prayer.level.toString()}/${prayer.maxLevel.toString()}`} label="Level" />
                                         <TextAndLabel text={prayer.getBonusText()} label="Bonus" />
                                         <TextAndLabel text={prayer.getCurseText()} label="Curse" />
-                                        { prayer.level == prayer.maxLevel && <Box align="center" justify="center"><Text color="green-1" size="large">Maxed!</Text></Box>}
-                                        { prayer.level == 0 && <TextAndLabel text={prayer.waveReq.toString()} label="Wave Req" /> }
-                                        { prayer.level > 0 && prayer.level != prayer.maxLevel && <TextAndLabel text={nFormatter(prayer.getLevelCosts(), "Smaller")} label="Cost to next" /> }
-                                        { prayer.level > 0 && prayer.level != prayer.maxLevel && <TextAndLabel text={nFormatter(prayer.getCostToMax(), "Smaller")} label="Cost to max" /> }
-                                        
+                                        {prayer.level == prayer.maxLevel && <Box align="center" justify="center"><Text color="green-1" size="large">Maxed!</Text></Box>}
+                                        {prayer.level == 0 && <TextAndLabel text={prayer.waveReq.toString()} label="Wave Req" />}
+                                        {prayer.level > 0 && prayer.level != prayer.maxLevel && <TextAndLabel text={nFormatter(prayer.getLevelCosts(), "Smaller")} label="Cost to next" />}
+                                        {prayer.level > 0 && prayer.level != prayer.maxLevel && <TextAndLabel text={nFormatter(prayer.getCostToMax(), "Smaller")} label="Cost to max" />}
+
                                     </Grid>
                                 </ShadowBox>
                             ))
