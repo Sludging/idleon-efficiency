@@ -6,7 +6,7 @@
     padding-bottom: 100.0%;
     height: 0;
     background-size: cover;
-    background-position: 0 calc(var(--row) * 1.1627906976744187%)
+    background-position: 0 calc(var(--row) * 1.1494252873563218%)
 }
 .icons-5050:not(.icons-PetBullet0):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
 .icons-PetBullet0 { --row: 0; }
@@ -68,31 +68,32 @@
 .icons-meel { --row: 56; }
 .icons-mr_pigibank { --row: 57; }
 .icons-mutton { --row: 58; }
-.icons-obol_altar { --row: 59; }
-.icons-oinkin { --row: 60; }
-.icons-papua_piggea { --row: 61; }
-.icons-picnic_stowaway { --row: 62; }
-.icons-postboy_pablob { --row: 63; }
-.icons-promotheus { --row: 64; }
-.icons-rocklyte { --row: 65; }
-.icons-scripticus { --row: 66; }
-.icons-scubidew { --row: 67; }
-.icons-shuvelle { --row: 68; }
-.icons-snake_jar { --row: 69; }
-.icons-snouts { --row: 70; }
-.icons-speccius { --row: 71; }
-.icons-sprout { --row: 72; }
-.icons-stiltzcho { --row: 73; }
-.icons-telescope { --row: 74; }
-.icons-tiki_chief { --row: 75; }
-.icons-toadstall { --row: 76; }
-.icons-town_marble { --row: 77; }
-.icons-tp_pete { --row: 78; }
-.icons-typhoon { --row: 79; }
-.icons-walupiggy { --row: 80; }
-.icons-wellington { --row: 81; }
-.icons-whattso { --row: 82; }
-.icons-woodsman { --row: 83; }
-.icons-worldo { --row: 84; }
-.icons-xxx_cattleprod_xxx { --row: 85; }
-.icons-yondergreen { --row: 86; }
+.icons-nebula_neddy { --row: 59; }
+.icons-obol_altar { --row: 60; }
+.icons-oinkin { --row: 61; }
+.icons-papua_piggea { --row: 62; }
+.icons-picnic_stowaway { --row: 63; }
+.icons-postboy_pablob { --row: 64; }
+.icons-promotheus { --row: 65; }
+.icons-rocklyte { --row: 66; }
+.icons-scripticus { --row: 67; }
+.icons-scubidew { --row: 68; }
+.icons-shuvelle { --row: 69; }
+.icons-snake_jar { --row: 70; }
+.icons-snouts { --row: 71; }
+.icons-speccius { --row: 72; }
+.icons-sprout { --row: 73; }
+.icons-stiltzcho { --row: 74; }
+.icons-telescope { --row: 75; }
+.icons-tiki_chief { --row: 76; }
+.icons-toadstall { --row: 77; }
+.icons-town_marble { --row: 78; }
+.icons-tp_pete { --row: 79; }
+.icons-typhoon { --row: 80; }
+.icons-walupiggy { --row: 81; }
+.icons-wellington { --row: 82; }
+.icons-whattso { --row: 83; }
+.icons-woodsman { --row: 84; }
+.icons-worldo { --row: 85; }
+.icons-xxx_cattleprod_xxx { --row: 86; }
+.icons-yondergreen { --row: 87; }

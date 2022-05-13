@@ -145,27 +145,27 @@ const initMeals = () => {
         new Meal(36, { "name": "Sea Urchin", "cookingReq": 30000000, "bonusQty": 1, "bonusText": "+{% Critters from traps", "description": "At least one person reading this has eating one of these. Oh, it's you? Good for you.", "bonusKey": "Critter" }),
         new Meal(37, { "name": "Mashed Potato", "cookingReq": 40000000, "bonusQty": 6, "bonusText": "+{% Cooking EXP", "description": "This nutritious meal reminds me of the Mashed Potato monster from IdleOn, the video game!", "bonusKey": "CookExp" }),
         new Meal(38, { "name": "Mutton", "cookingReq": 90000000, "bonusQty": 1, "bonusText": "+{% Crit Chance", "description": "Yeap I tell you hwat Bobby, this is a real man's meal right here!", "bonusKey": "Crit" }),
-        new Meal(39, { "name": "Wedding Cake", "cookingReq": 13500000, "bonusQty": 2, "bonusText": "+{% Pet Fighting Damage", "description": "Imagine getting married lol so cringe haha am I right??!?! High-five, fellow kids!", "bonusKey": "PetDmg" }),
-        new Meal(40, { "name": "Eel", "cookingReq": 20000000, "bonusQty": 1, "bonusText": "+{% Line Width in Lab Mainframe", "description": "The younger sibling of the Loch Ness Monster. He's real, but no one really cares.", "bonusKey": "LinePct" }),
-        new Meal(41, { "name": "Whipped Cocoa", "cookingReq": 30000000, "bonusQty": 4, "bonusText": "+{% Skill Efficiency", "description": "Why is this being served on a plate? Was the cup not good enough for you??", "bonusKey": "Seff" }),
-        new Meal(42, { "name": "Onion", "cookingReq": 50000000, "bonusQty": 3, "bonusText": "+{% Total Damage", "description": "No, I'm not crying, this onion is just stimulating the lachrymal glands in my eyes.", "bonusKey": "TotDmg" }),
-        new Meal(43, { "name": "Soda", "cookingReq": 70000000, "bonusQty": 20, "bonusText": "+{% Meal Cooking Speed", "description": "Yea those red marks are grill marks, our chef doesn't know what he's doing.", "bonusKey": "Mcook" }),
-        new Meal(44, { "name": "Sushi Roll", "cookingReq": 90000000, "bonusQty": 7, "bonusText": "+{% VIP Library Membership", "description": "For something called a 'sushi roll', it isn't moving around very much.", "bonusKey": "VIP" }),
-        new Meal(45, { "name": "Buncha Banana", "cookingReq": 125000000, "bonusQty": 4, "bonusText": "+{ Max LVs for TP Pete Star Talent", "description": "Straight from the island of Karjama! Or something like that, starts with a K at least.", "bonusKey": "TPpete" }),
-        new Meal(46, { "name": "Pumpkin", "cookingReq": 170000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "According to the author of the Iliad, its value should peak right around January...", "bonusKey": "non" }),
-        new Meal(47, { "name": "Cotton Candy", "cookingReq": 400000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "The most exquisite of fairground cuisine!", "bonusKey": "non" }),
-        new Meal(48, { "name": "Massive Fig", "cookingReq": 700000000, "bonusQty": 3, "bonusText": "+{% Total Damage", "description": "This thing has gotta weigh at least 30!", "bonusKey": "non" }),
-        new Meal(49, { "name": "Turkey a la Thank", "cookingReq": 5000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
-        new Meal(50, { "name": "Turkey a la Thank", "cookingReq": 5000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
-        new Meal(51, { "name": "Turkey a la Thank", "cookingReq": 5000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
-        new Meal(52, { "name": "Turkey a la Thank", "cookingReq": 5000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
-        new Meal(53, { "name": "Turkey a la Thank", "cookingReq": 5000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
-        new Meal(54, { "name": "Turkey a la Thank", "cookingReq": 5000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
-        new Meal(55, { "name": "Turkey a la Thank", "cookingReq": 5000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
-        new Meal(56, { "name": "Turkey a la Thank", "cookingReq": 5000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
-        new Meal(57, { "name": "Turkey a la Thank", "cookingReq": 5000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
-        new Meal(58, { "name": "Turkey a la Thank", "cookingReq": 5000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
-        new Meal(59, { "name": "Turkey a la Thank", "cookingReq": 5000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),        
+        new Meal(39, { "name": "Wedding Cake", "cookingReq": 135000000, "bonusQty": 2, "bonusText": "+{% Pet Fighting Damage", "description": "Imagine getting married lol so cringe haha am I right??!?! High-five, fellow kids!", "bonusKey": "PetDmg" }),
+        new Meal(40, { "name": "Eel", "cookingReq": 200000000, "bonusQty": 1, "bonusText": "+{% Line Width in Lab Mainframe", "description": "The younger sibling of the Loch Ness Monster. He's real, but no one really cares.", "bonusKey": "LinePct" }),
+        new Meal(41, { "name": "Whipped Cocoa", "cookingReq": 300000000, "bonusQty": 4, "bonusText": "+{% Skill Efficiency", "description": "Why is this being served on a plate? Was the cup not good enough for you??", "bonusKey": "Seff" }),
+        new Meal(42, { "name": "Onion", "cookingReq": 500000000, "bonusQty": 3, "bonusText": "+{% Total Damage", "description": "No, I'm not crying, this onion is just stimulating the lachrymal glands in my eyes.", "bonusKey": "TotDmg" }),
+        new Meal(43, { "name": "Soda", "cookingReq": 700000000, "bonusQty": 20, "bonusText": "+{% Meal Cooking Speed", "description": "Yea those red marks are grill marks, our chef doesn't know what he's doing.", "bonusKey": "Mcook" }),
+        new Meal(44, { "name": "Sushi Roll", "cookingReq": 900000000, "bonusQty": 7, "bonusText": "+{% VIP Library Membership", "description": "For something called a 'sushi roll', it isn't moving around very much.", "bonusKey": "VIP" }),
+        new Meal(45, { "name": "Buncha Banana", "cookingReq": 1250000000, "bonusQty": 4, "bonusText": "+{ Max LVs for TP Pete Star Talent", "description": "Straight from the island of Karjama! Or something like that, starts with a K at least.", "bonusKey": "TPpete" }),
+        new Meal(46, { "name": "Pumpkin", "cookingReq": 1700000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "According to the author of the Iliad, its value should peak right around January...", "bonusKey": "non" }),
+        new Meal(47, { "name": "Cotton Candy", "cookingReq": 4000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "The most exquisite of fairground cuisine!", "bonusKey": "non" }),
+        new Meal(48, { "name": "Massive Fig", "cookingReq": 7000000000, "bonusQty": 3, "bonusText": "+{% Total Damage", "description": "This thing has gotta weigh at least 30!", "bonusKey": "non" }),
+        new Meal(49, { "name": "Turkey a la Thank", "cookingReq": 50000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
+        new Meal(50, { "name": "Turkey a la Thank", "cookingReq": 50000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
+        new Meal(51, { "name": "Turkey a la Thank", "cookingReq": 50000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
+        new Meal(52, { "name": "Turkey a la Thank", "cookingReq": 50000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
+        new Meal(53, { "name": "Turkey a la Thank", "cookingReq": 50000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
+        new Meal(54, { "name": "Turkey a la Thank", "cookingReq": 50000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
+        new Meal(55, { "name": "Turkey a la Thank", "cookingReq": 50000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
+        new Meal(56, { "name": "Turkey a la Thank", "cookingReq": 50000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
+        new Meal(57, { "name": "Turkey a la Thank", "cookingReq": 50000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
+        new Meal(58, { "name": "Turkey a la Thank", "cookingReq": 50000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
+        new Meal(59, { "name": "Turkey a la Thank", "cookingReq": 50000000000, "bonusQty": 2, "bonusText": "+{% EXP from World 1 Mobs", "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.", "bonusKey": "non" }),
     ]
 }
 
@@ -205,7 +205,7 @@ export class Kitchen {
 
     getMealSpeed = (vialBonus: number, stampBonus: number, mealCookBonus: number, jewelBonus: number, cardBonus: number, kitchenEffBonus: number, jewelBonus2: number, diamonChef: number) => {
         const baseMath = 10 * (1 + (this.richelin ? 2 : 0)) * Math.max(1, diamonChef);
-        const bonusMath = (1 + (stampBonus + Math.max(0,jewelBonus2)) / 100) * (1 + mealCookBonus / 100) * Math.max(1, jewelBonus);
+        const bonusMath = (1 + (stampBonus + Math.max(0, jewelBonus2)) / 100) * (1 + mealCookBonus / 100) * Math.max(1, jewelBonus);
         const cardImpact = 1 + Math.min(cardBonus, 50) / 100;
         return baseMath *
             (1 + this.mealLevels / 10) *
@@ -399,7 +399,7 @@ export const updateCooking = (data: Map<string, any>) => {
 
     const jewelMealBonus = mainframe.jewels[16].active ? mainframe.jewels[16].getBonus() : 0; // TODO: Remove hardcoding
     cooking.meals.forEach(meal => meal.mainframeBonus = jewelMealBonus);
-    
+
     // Meal speed
     const vialBonus = alchemy.vials.filter(vial => vial.description.includes("Meal Cooking Speed")).reduce((sum, vial) => sum += vial.getBonus(), 0);
     const diamonChef = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).find(bubble => bubble.name == "Diamond Chef")?.getBonus() ?? 0;
@@ -435,7 +435,7 @@ export const updateCooking = (data: Map<string, any>) => {
         }
     })
 
-    cooking.meals.filter(meal => meal.cookingContribution > 0).forEach(meal => { 
+    cooking.meals.filter(meal => meal.cookingContribution > 0).forEach(meal => {
         meal.timeToNext = ((meal.getMealLevelCost() - meal.count) * meal.cookReq) / meal.cookingContribution;
         meal.timeToDiamond = ((meal.getCostsTillDiamond() - meal.count) * meal.cookReq) / meal.cookingContribution
     });

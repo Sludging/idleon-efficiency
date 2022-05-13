@@ -148,7 +148,7 @@ export const GetTalentArray = (page: string): Talent[] => {
             new Talent(JSON.parse('{"name": "Two Punch Man", "description": "Regular punches do +{% more damage and also hit a 2nd time for }% damage", "x1": 0.6, "x2": 0, "funcX": "add", "y1": 25, "y2": 3, "funcY": "intervalAdd", "lvlUpText": "+{% Dmg & +}% 2Nd Dmg", "skillIndex": 18, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Gimme Gimme", "description": "Monsters have a {% chance to drop 2x loot for } Minutes", "x1": 80, "x2": 60, "funcX": "decay", "y1": 3, "y2": 20, "funcY": "intervalAdd", "lvlUpText": "+{% Chance & +} Minutes", "skillIndex": 19, "activeData": {"name": "Gimme Gimme", "K": 1, "D": 1, "s": 1, "cooldown": 120, "castTime": 0.45, "manaCost": 5, "inputReq": 0, "AFKrange": 125, "AFKtype": "buff", "AFKactivity": 0}}')),
             new Talent(JSON.parse('{"name": "Lucky Hit", "description": "LUK\'s effect on Damage is increased by {%", "x1": 0.4, "x2": 0, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Effect", "skillIndex": 20, "activeData": null}')),
-            new Talent(JSON.parse('{"name": "F\'Luk\'Ey Fabrics", "description": "All Equipment gives {% more LUK than what\'s listed", "x1": 100, "x2": 250, "funcX": "decay", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% More Luk From Equips", "skillIndex": 21, "activeData": null}')),
+            new Talent(JSON.parse('{"name": "F\'luk\'ey Fabrics", "description": "All Equipment gives {% more LUK than what\'s listed", "x1": 100, "x2": 250, "funcX": "decay", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% More Luk From Equips", "skillIndex": 21, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Chaching!", "description": "Straight up cash, yo. +{% more to be exact.", "x1": 50, "x2": 100, "funcX": "decay", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Mo Money", "skillIndex": 22, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Lucky Horseshoe", "description": "+{ base LUK", "x1": 1, "x2": 0, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{ Luk", "skillIndex": 23, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Curse Of Mr Looty Booty", "description": "+{% Drop rate, and -}% Total Damage. Cmon, do it! Or are u too scared?", "x1": 70, "x2": 100, "funcX": "decay", "y1": 120, "y2": 100, "funcY": "decay", "lvlUpText": "+{% Drop & -}% Dmg", "skillIndex": 24, "activeData": null}')),
@@ -175,8 +175,10 @@ export const GetTalentArray = (page: string): Talent[] => {
             new Talent(JSON.parse('{"name": "Right Hand Of Action", "description": "+{% Skill Efficiency for your other characters, if their Skill LV is lower than Maestro\'s.", "x1": 150, "x2": 100, "funcX": "decay", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Skill Eff To Family", "skillIndex": 43, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Jman Was Better", "description": "+{ Talent Points for the \'Journeyman\' tab. Maestro not worth the wait, eh?", "x1": 1, "x2": 0, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+1 Journeyman Point", "skillIndex": 44, "activeData": null}')),
         ];
-        case "Virtuoso": return [];
-        case "Infinilyte": return [];
+        case "Virtuoso": return [
+        ];
+        case "Infinilyte": return [
+        ];
         case "Rage Basics": return [
             new Talent(JSON.parse('{"name": "Health Booster", "description": "Increases Max HP by {", "x1": 1, "x2": 0.15, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{ Hp", "skillIndex": 0, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Mana Booster", "description": "Increases Max MP by {", "x1": 1, "x2": 0.1, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{ Mp", "skillIndex": 1, "activeData": null}')),
@@ -201,7 +203,7 @@ export const GetTalentArray = (page: string): Talent[] => {
             new Talent(JSON.parse('{"name": "Double Strike", "description": "Basic Attacks with Warrior Weapons have a {% chance to hit twice", "x1": 110, "x2": 50, "funcX": "decay", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "{% Double Hit Chance", "skillIndex": 93, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Firmly Grasp It", "description": "Temporarily boosts base STR by { for } minutes", "x1": 15, "x2": 1, "funcX": "bigBase", "y1": 2, "y2": 4, "funcY": "intervalAdd", "lvlUpText": "+{ Str & +} Mins", "skillIndex": 94, "activeData": {"name": "Firmly Grasp It", "K": 1, "D": 1, "s": 1, "cooldown": 30, "castTime": 1.5, "manaCost": 5, "inputReq": 0, "AFKrange": 1, "AFKtype": "buff", "AFKactivity": -1}}')),
             new Talent(JSON.parse('{"name": "Strength In Numbers", "description": "STR\'s effect on both Damage and HP is increased by {%", "x1": 0.75, "x2": 0, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Effect", "skillIndex": 95, "activeData": null}')),
-            new Talent(JSON.parse('{"name": "\'Str\'Ess Tested Garb", "description": "All Equipment gives {% more STR than what\'s listed", "x1": 200, "x2": 250, "funcX": "decay", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% More Str From Equips", "skillIndex": 96, "activeData": null}')),
+            new Talent(JSON.parse('{"name": "\'str\'ess Tested Garb", "description": "All Equipment gives {% more STR than what\'s listed", "x1": 200, "x2": 250, "funcX": "decay", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% More Str From Equips", "skillIndex": 96, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Carry A Big Stick", "description": "The effect Weapon Power has on Damage Dealt is increased by {%", "x1": 1, "x2": 0, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Weapon Power Effect", "skillIndex": 97, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Absolute Unit", "description": "+{ base STR", "x1": 1, "x2": 0, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{ Str", "skillIndex": 98, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Haungry For Gold", "description": "Golden Food bonuses are increased by {%", "x1": 55, "x2": 80, "funcX": "decay", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Bonus", "skillIndex": 99, "activeData": null}')),
@@ -225,7 +227,7 @@ export const GetTalentArray = (page: string): Talent[] => {
             new Talent(JSON.parse('{"name": "Worming Undercover", "description": "{% chance", "x1": -1, "x2": -1, "funcX": "9.3", "y1": 0.7, "y2": -1, "funcY": "_", "lvlUpText": "", "skillIndex": 115, "activeData": {"name": "Worming Undercover", "K": 1, "D": 1.4, "s": 1, "cooldown": 15, "castTime": 1.5, "manaCost": 15, "inputReq": 0, "AFKrange": 1, "AFKtype": "buff", "AFKactivity": 4}}')),
             new Talent(JSON.parse('{"name": "Bobbin\' Bobbers", "description": "+{% Minigame reward, and +1 Fishing Power per pt of your Highscore, up to +}", "x1": 12, "x2": 3, "funcX": "bigBase", "y1": 5, "y2": 3, "funcY": "intervalAdd", "lvlUpText": "+{% Reward & +} Cap", "skillIndex": 116, "activeData": null}')),
             new Talent(JSON.parse('{"name": "All Fish Diet", "description": "+{% Fishing EXP, since like, fish is brain food and so it makes sense that... eh forget it.", "x1": 1.5, "x2": 0, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+1.5% Fishing Exp", "skillIndex": 117, "activeData": null}')),
-            new Talent(JSON.parse('{"name": "Catching Some Zzz\'S", "description": "+{% Away Gains for Fishing only. Just fishing. It totally doesn\'t boost anything else!", "x1": 20, "x2": 60, "funcX": "decay", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Fishing Away Gains", "skillIndex": 118, "activeData": null}')),
+            new Talent(JSON.parse('{"name": "Catching Some Zzz\'s", "description": "+{% Away Gains for Fishing only. Just fishing. It totally doesn\'t boost anything else!", "x1": 20, "x2": 60, "funcX": "decay", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Fishing Away Gains", "skillIndex": 118, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Back To Basics", "description": "+{ Talent Points for the \'Warrior\' talent tab, and +10 dmg to these Talents\' feelings!", "x1": 1, "x2": 0, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+1 Talent Pt", "skillIndex": 119, "activeData": null}')),
         ];
         case "Squire": return [
@@ -245,11 +247,16 @@ export const GetTalentArray = (page: string): Talent[] => {
             new Talent(JSON.parse('{"name": "Super Samples", "description": "+{% Sample Size when taking Samples for the 3d printer.", "x1": 9, "x2": 75, "funcX": "decay", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Sample Size", "skillIndex": 133, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Back To Basics", "description": "+{ Talent Points for the \'Warrior\' talent tab, and +10 dmg to these Talents\' feelings!", "x1": 1, "x2": 0, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+1 Talent Pt", "skillIndex": 119, "activeData": null}')),
         ];
-        case "Blood Berserker": return [];
-        case "Death Bringer": return [];
-        case "Divine Knight": return [];
-        case "Royal Guardian": return [];
-        case "Filler": return [];
+        case "Blood Berserker": return [
+        ];
+        case "Death Bringer": return [
+        ];
+        case "Divine Knight": return [
+        ];
+        case "Royal Guardian": return [
+        ];
+        case "Filler": return [
+        ];
         case "Calm Basics": return [
             new Talent(JSON.parse('{"name": "Health Booster", "description": "Increases Max HP by {", "x1": 1, "x2": 0.15, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{ Hp", "skillIndex": 0, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Mana Booster", "description": "Increases Max MP by {", "x1": 1, "x2": 0.1, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{ Mp", "skillIndex": 1, "activeData": null}')),
@@ -274,7 +281,7 @@ export const GetTalentArray = (page: string): Talent[] => {
             new Talent(JSON.parse('{"name": "Strafe", "description": "Temporarily boosts Movement Speed by {% for } minutes", "x1": 5, "x2": 0.3, "funcX": "bigBase", "y1": 2, "y2": 15, "funcY": "intervalAdd", "lvlUpText": "+{% Speed % +} Mins", "skillIndex": 273, "activeData": {"name": "Strafe", "K": 1, "D": 1, "s": 1.2, "cooldown": 30, "castTime": 0.45, "manaCost": 5, "inputReq": 0, "AFKrange": 1, "AFKtype": "buff", "AFKactivity": -1}}')),
             new Talent(JSON.parse('{"name": "Have Another!", "description": "Basic Attacks have a {% chance to fire 1 additional arrow", "x1": 120, "x2": 40, "funcX": "decay", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Chance", "skillIndex": 274, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Veins Of The Infernal", "description": "Increases Damage Dealt by {% every 10 Smithing Levels", "x1": 50, "x2": 60, "funcX": "decay", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Damage", "skillIndex": 284, "activeData": null}')),
-            new Talent(JSON.parse('{"name": "Garb Of Un\'Agi\'Ng Quality", "description": "All Equipment gives {% more AGI than what\'s listed", "x1": 1.5, "x2": 0, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% More Agi From Equips", "skillIndex": 276, "activeData": null}')),
+            new Talent(JSON.parse('{"name": "Garb Of Un\'agi\'ng Quality", "description": "All Equipment gives {% more AGI than what\'s listed", "x1": 1.5, "x2": 0, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% More Agi From Equips", "skillIndex": 276, "activeData": null}')),
             new Talent(JSON.parse('{"name": "High Polymer Limbs", "description": "The effect Weapon Power has on Damage Dealt is increased by {%", "x1": 1, "x2": 0, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Weapon Power Effect", "skillIndex": 277, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Sanic Speed", "description": "+{ base AGI", "x1": 1, "x2": 0, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{ Agi", "skillIndex": 278, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Robbinghood", "description": "Monster drop rarity increased by {%", "x1": 40, "x2": 65, "funcX": "decay", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Rarity", "skillIndex": 279, "activeData": null}')),
@@ -295,7 +302,7 @@ export const GetTalentArray = (page: string): Talent[] => {
             new Talent(JSON.parse('{"name": "Shwifty Statues", "description": "\'Speed\', \'Anvil\', and \'Ol Reliable\' statues give +{% more bonus", "x1": 100, "x2": 50, "funcX": "decay", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Higher Bonuses", "skillIndex": 292, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Agi Again", "description": "+{ Max Talent Level for \'Quickness Boots\'", "x1": 1, "x2": 0, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{ Max Lv", "skillIndex": 293, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Velocity Vessels", "description": "Each Lv of \'Archer or Bust\' Bubble raises max Lv of \'Featherweight\', up to +{", "x1": 1, "x2": 0, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{ Max Lv Cap", "skillIndex": 294, "activeData": null}')),
-            new Talent(JSON.parse('{"name": "Teleki\'Net\'Ic Logs", "description": "+{% Catching Efficiency for every power of 10 Oak Logs in the storage chest", "x1": 20, "x2": 70, "funcX": "decay", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Efficiency", "skillIndex": 295, "activeData": null}')),
+            new Talent(JSON.parse('{"name": "Teleki\'net\'ic Logs", "description": "+{% Catching Efficiency for every power of 10 Oak Logs in the storage chest", "x1": 20, "x2": 70, "funcX": "decay", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Efficiency", "skillIndex": 295, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Briar Patch Runner", "description": "AGI has a +{% larger effect on Catching Efficiency than normal", "x1": 0.5, "x2": 0, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Effect", "skillIndex": 296, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Bug Enthusiast", "description": "+{% Catching EXP. You\'re one step closer to figuring out how butter can fly!", "x1": 1.5, "x2": 0, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Catching Exp", "skillIndex": 297, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Sunset On The Hives", "description": "+{% Away Gain for Catching Hint:Useful for when you idle on catching!", "x1": 20, "x2": 60, "funcX": "decay", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Away Gains", "skillIndex": 298, "activeData": null}')),
@@ -321,9 +328,12 @@ export const GetTalentArray = (page: string): Talent[] => {
         case "Siege Breaker": return [
             new Talent(JSON.parse('{"name": "Ballista", "description": "Ballista bitch", "x1": 400, "x2": 25, "funcX": "bigBase", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "", "skillIndex": 315, "activeData": {"name": "Ballista", "K": 1, "D": 1.4, "s": 1, "cooldown": 45, "castTime": 0.45, "manaCost": 500, "inputReq": 1, "AFKrange": 1, "AFKtype": "target", "AFKactivity": 0}}')),
         ];
-        case "Mayheim": return [];
-        case "Wind Walker": return [];
-        case "Beast Master": return [];
+        case "Mayheim": return [
+        ];
+        case "Wind Walker": return [
+        ];
+        case "Beast Master": return [
+        ];
         case "Savvy Basics": return [
             new Talent(JSON.parse('{"name": "Health Booster", "description": "Increases Max HP by {", "x1": 1, "x2": 0.15, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{ Hp", "skillIndex": 0, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Mana Booster", "description": "Increases Max MP by {", "x1": 1, "x2": 0.1, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{ Mp", "skillIndex": 1, "activeData": null}')),
@@ -339,16 +349,16 @@ export const GetTalentArray = (page: string): Talent[] => {
             new Talent(JSON.parse('{"name": "Overclocked Energy", "description": "Damage dealt is increased by {% for every power of 10 Max MP you have", "x1": 150, "x2": 80, "funcX": "decay", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Damage", "skillIndex": 446, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Farsight", "description": "Increases Crit Chance by {% and Crit Dmg by }%", "x1": 17, "x2": 45, "funcX": "decay", "y1": 33, "y2": 45, "funcY": "decay", "lvlUpText": "+{% Chance, +}% Dmg", "skillIndex": 447, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Idle Casting", "description": "AFK Gains Rate for Fighting is increased by {%", "x1": 20, "x2": 50, "funcX": "decay", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Afk Gains Rate", "skillIndex": 448, "activeData": null}')),
-            new Talent(JSON.parse('{"name": "Active Afk\'Er", "description": "AFK Gains Rate for all Specialized Skills is increased by {%", "x1": 20, "x2": 40, "funcX": "decay", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Afk Gains Rate", "skillIndex": 449, "activeData": null}')),
+            new Talent(JSON.parse('{"name": "Active Afk\'er", "description": "AFK Gains Rate for all Specialized Skills is increased by {%", "x1": 20, "x2": 40, "funcX": "decay", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Afk Gains Rate", "skillIndex": 449, "activeData": null}')),
         ];
         case "Mage": return [
             new Talent(JSON.parse('{"name": "Energy Bolt", "description": "Your next basic attack strikes the Targeted Enemy for {% Damage", "x1": 160, "x2": 2, "funcX": "bigBase", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Damage", "skillIndex": 450, "activeData": {"name": "Energy Bolt", "K": 1, "D": 1.21, "s": 1, "cooldown": 8, "castTime": 1.1, "manaCost": 9, "inputReq": 2, "AFKrange": 1, "AFKtype": "auto", "AFKactivity": 0}}')),
             new Talent(JSON.parse('{"name": "Mini Fireball", "description": "Shoots a fireball that explodes on impact, dealing {% damage", "x1": 120, "x2": 1, "funcX": "bigBase", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Damage", "skillIndex": 451, "activeData": {"name": "Mini Fireball", "K": 1.05, "D": 1.2, "s": 1.1, "cooldown": 10, "castTime": 0.85, "manaCost": 12, "inputReq": 0, "AFKrange": 270, "AFKtype": "line", "AFKactivity": 0}}')),
             new Talent(JSON.parse('{"name": "Mana Overdrive", "description": "Increase max MP by {%", "x1": 0.5, "x2": 0.02, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Mp", "skillIndex": 452, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Teleport", "description": "Move forward instantly by a distance of { Pixels", "x1": 25, "x2": 1, "funcX": "bigBase", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+1 Pixel Moved", "skillIndex": 453, "activeData": {"name": "Teleport", "K": 1, "D": 1, "s": 1.3, "cooldown": 1, "castTime": 0.5, "manaCost": 5, "inputReq": 0, "AFKrange": 1, "AFKtype": "auto", "AFKactivity": -1}}')),
-            new Talent(JSON.parse('{"name": "You\'Re Next", "description": "Basic attacks have a {% chance to Mark enemies, who then take }% more damage", "x1": 110, "x2": 70, "funcX": "decay", "y1": 25, "y2": 0.5, "funcY": "bigBase", "lvlUpText": "+{% Chance & +}% Dmg", "skillIndex": 454, "activeData": null}')),
+            new Talent(JSON.parse('{"name": "You\'re Next", "description": "Basic attacks have a {% chance to Mark enemies, who then take }% more damage", "x1": 110, "x2": 70, "funcX": "decay", "y1": 25, "y2": 0.5, "funcY": "bigBase", "lvlUpText": "+{% Chance & +}% Dmg", "skillIndex": 454, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Knowledge Is Power", "description": "The effect your WIS stat has on Damage is increased by {%", "x1": 1.5, "x2": 0, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Effect", "skillIndex": 455, "activeData": null}')),
-            new Talent(JSON.parse('{"name": "Unt\'Wis\'Ted Robes", "description": "All Equipment gives {% more WIS than what\'s listed", "x1": 1.5, "x2": 0, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% More Wis From Equips", "skillIndex": 456, "activeData": null}')),
+            new Talent(JSON.parse('{"name": "Unt\'wis\'ted Robes", "description": "All Equipment gives {% more WIS than what\'s listed", "x1": 1.5, "x2": 0, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% More Wis From Equips", "skillIndex": 456, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Power Overwhelming", "description": "The effect Weapon Power has on Damage Dealt is increased by {%", "x1": 1.2, "x2": 0, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Weapon Power Effect", "skillIndex": 457, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Free Meal", "description": "{% Chance for food to not be consumed when it otherwise would be", "x1": 53, "x2": 40, "funcX": "decay", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Non-Consume Chance", "skillIndex": 458, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Individual Insight", "description": "+{ base WIS", "x1": 1, "x2": 0, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{ Wis", "skillIndex": 459, "activeData": null}')),
@@ -392,10 +402,14 @@ export const GetTalentArray = (page: string): Talent[] => {
             new Talent(JSON.parse('{"name": "Sharing Some Smarts", "description": "All characters in the same cauldron as this one gain +{% more Alch EXP.", "x1": 1, "x2": 0, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Alch Exp", "skillIndex": 493, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Earlier Education", "description": "+{ Talent Points for the \'Mage\' talent tab. What, these talent\'s aint good \'nuff for ya?", "x1": 1, "x2": 0, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+1 Talent Pt", "skillIndex": 494, "activeData": null}')),
         ];
-        case "Elemental Sorcerer": return [];
-        case "Spiritual Monk": return [];
-        case "Bubonic Conjuror": return [];
-        case "Arcane Cultist": return [];
+        case "Elemental Sorcerer": return [
+        ];
+        case "Spiritual Monk": return [
+        ];
+        case "Bubonic Conjuror": return [
+        ];
+        case "Arcane Cultist": return [
+        ];
         case "Special Talent 1": return [
             new Talent(JSON.parse('{"name": "Bored To Death", "description": "Reduces the Respawn Timer to { sec. This will boost AFK Survival Percent!", "x1": 600, "x2": 2, "funcX": "reduce", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "{ Sec Respawn", "skillIndex": 615, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Beginner Best Class", "description": "+1 Base Weapon Power every 10 Lvs of your best Beginner. Caps at +{.", "x1": 1, "x2": 0, "funcX": "add", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{ Weapon Pow Cap", "skillIndex": 616, "activeData": null}')),
@@ -432,9 +446,12 @@ export const GetTalentArray = (page: string): Talent[] => {
             new Talent(JSON.parse('{"name": "Coins For Charon", "description": "+{% cash per Multikill Damage Tier, as shown by the purple multiplier in AFK Info", "x1": 25, "x2": 75, "funcX": "decay", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Cash Per Tier", "skillIndex": 643, "activeData": null}')),
             new Talent(JSON.parse('{"name": "American Tipper", "description": "+{% Cash per 10 Levels of your Cooking Skill. This one isn\'t additive with any other bonus!", "x1": 80, "x2": 100, "funcX": "decay", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Cash", "skillIndex": 644, "activeData": null}')),
             new Talent(JSON.parse('{"name": "Overaccurate Crit", "description": "+{% Crit Chance for every Power of 10 accuracy above 100% Hit Chance.", "x1": 8, "x2": 70, "funcX": "decay", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Crit Chance", "skillIndex": 645, "activeData": null}')),
+            new Talent(JSON.parse('{"name": "Spice Spillage", "description": "+{% chance to claim all pet spices when claiming 1hr+ AFK gains.", "x1": 200, "x2": 100, "funcX": "decay", "y1": 0, "y2": 0, "funcY": "txt", "lvlUpText": "+{% Chance", "skillIndex": 651, "activeData": null}')),
         ];
-        case "Special Talent 4": return [];
-        case "Special Talent 5": return [];
+        case "Special Talent 4": return [
+        ];
+        case "Special Talent 5": return [
+        ];
         default: return [];
     }
 };

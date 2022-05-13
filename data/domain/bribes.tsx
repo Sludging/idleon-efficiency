@@ -30,7 +30,7 @@ const initBribes = () => {
         new Bribe(11, "Fake Teleport Tickets", "Get +2 Map Teleport every 24 hours. Caps at 6, so being gone for 4 days only gives 6 tele.", 99000, "pigbank", "FreeTeleport", 3),
         new Bribe(12, "The Art of the Steal", "Unlocks the next set of 7 Bribes to be purchased.", 200000, "pigbank", "BribeExpansion", -1),
         new Bribe(13, "Counterfeit Telepassports", "You now get +4 Map Teleports every 24 hours, and caps at 12 before you need to login.", 300000, "pigbank", "FreeTeleport2", 2),
-        new Bribe(14, "Weighted Marbles", "+10% arcade balls recharge rate. You'll be drowning in balls in no time!", 725000, "world3", "ArcadeBallz", 2),
+        new Bribe(14, "Weighted Marbles", "+10% arcade balls recharge rate. You'll be drowning in balls in no time!", 725000, "world3", "ArcadeBallz", 10),
         new Bribe(15, "Changing the Code", "Unlock the 2nd Alchemy Bubble slot for ALL players. Don't go tellin' Lava 'bout this one...", 1500000, "pigbank", "BubbleSlot", 1),
         new Bribe(16, "Taxidermied Cog Pouches", "+4 Cog Inventory slots.", 750000, "world3", "CogInve", 4),
         new Bribe(17, "Guild VIP Fraud", "Logging in each day now contributes 20 GP to your guild, instead of the normal 10.", 400000, "afk", "BonusType", 10),

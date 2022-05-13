@@ -6,7 +6,7 @@
     padding-bottom: 100.0%;
     height: 0;
     background-size: cover;
-    background-position: 0 calc(var(--row) * 1.8867924528301887%)
+    background-position: 0 calc(var(--row) * 1.8518518518518519%)
 }
 .icons-6666:not(.icons-ConLoadout0):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
 .icons-ConLoadout0 { --row: 0; }
@@ -63,3 +63,4 @@
 .icons-TaskAchBorder1 { --row: 51; }
 .icons-TaskAchBorder2 { --row: 52; }
 .icons-TaskAchBorder3 { --row: 53; }
+.icons-TaskAchBorder4 { --row: 54; }
