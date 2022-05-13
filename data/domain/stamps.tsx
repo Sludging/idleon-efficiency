@@ -1,4 +1,4 @@
-import { lavaFunc } from '../utility'
+import { lavaFunc, range } from '../utility'
 import { Item } from './items';
 import { Lab } from './lab';
 
@@ -52,13 +52,17 @@ export class Stamp {
         this.data = data;
     }
 
-    getGoldCost = (hasBribe: boolean = false, blueFlavPercent: number = 0): number => {
-        const goldCost = this.data.startingCost * Math.pow(this.data.cCostExp - (this.level / (this.level + 5 * this.data.upgradeInterval)) * 0.25, this.level * (10 / this.data.upgradeInterval)) * Math.max(0.1, 1 - blueFlavPercent);
+    getGoldCost = (hasBribe: boolean = false, blueFlavPercent: number = 0, level: number = this.level): number => {
+        const goldCost = this.data.startingCost * Math.pow(this.data.cCostExp - (level / (level + 5 * this.data.upgradeInterval)) * 0.25, level * (10 / this.data.upgradeInterval)) * Math.max(0.1, 1 - blueFlavPercent);
         if (hasBribe) {
             //TODO: Make this math less... hard coded?
             return goldCost * 0.92;
         }
         return goldCost
+    }
+
+    getGoldCostToMax = (hasBribe: boolean = false, blueFlavPercent: number = 0): number => {
+        return range(this.level, this.maxLevel).reduce((sum, level) => sum += this.getGoldCost(hasBribe, blueFlavPercent, level), 0);
     }
 
     getMaterialCost = (blueFlavPercent: number = 0): number => {
