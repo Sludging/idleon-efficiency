@@ -87,7 +87,7 @@ function PetUpgradeDisplay() {
         const cooking = appContext.data.getData().get("cooking") as Cooking;
         if (cooking && breeding) {
             return breeding.upgrade.map(upgrade => {
-                const meal = upgrade.data.x1 != -1 ? cooking.meals[upgrade.data.x1] : undefined
+                const meal = upgrade.data.cost != -1 ? cooking.meals[upgrade.data.cost] : undefined
                 const mealCost = meal ? upgrade.getCost(1) : -1;
                 return [{
                     image: { 
