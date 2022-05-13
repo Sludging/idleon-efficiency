@@ -6,7 +6,7 @@
     padding-bottom: 128.57142857142858%;
     height: 0;
     background-size: cover;
-    background-position: 0 calc(var(--row) * 0.5494505494505495%)
+    background-position: 0 calc(var(--row) * 0.5347593582887701%)
 }
 .icons-2836:not(.icons-CardSet0):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
 .icons-CardSet0 { --row: 0; }
@@ -155,40 +155,45 @@
 .icons-CardsX19 { --row: 143; }
 .icons-CardsX2 { --row: 144; }
 .icons-CardsX20 { --row: 145; }
-.icons-CardsX3 { --row: 146; }
-.icons-CardsX4 { --row: 147; }
-.icons-CardsX5 { --row: 148; }
-.icons-CardsX6 { --row: 149; }
-.icons-CardsX7 { --row: 150; }
-.icons-CardsX8 { --row: 151; }
-.icons-CardsX9 { --row: 152; }
-.icons-CardsY0 { --row: 153; }
-.icons-CardsY1 { --row: 154; }
-.icons-CardsY10 { --row: 155; }
-.icons-CardsY11 { --row: 156; }
-.icons-CardsY12 { --row: 157; }
-.icons-CardsY13 { --row: 158; }
-.icons-CardsY14 { --row: 159; }
-.icons-CardsY2 { --row: 160; }
-.icons-CardsY3 { --row: 161; }
-.icons-CardsY4 { --row: 162; }
-.icons-CardsY5 { --row: 163; }
-.icons-CardsY6 { --row: 164; }
-.icons-CardsY7 { --row: 165; }
-.icons-CardsY8 { --row: 166; }
-.icons-CardsY9 { --row: 167; }
-.icons-CardsZ0 { --row: 168; }
-.icons-CardsZ1 { --row: 169; }
-.icons-CardsZ10 { --row: 170; }
-.icons-CardsZ11 { --row: 171; }
-.icons-CardsZ12 { --row: 172; }
-.icons-CardsZ13 { --row: 173; }
-.icons-CardsZ2 { --row: 174; }
-.icons-CardsZ3 { --row: 175; }
-.icons-CardsZ4 { --row: 176; }
-.icons-CardsZ5 { --row: 177; }
-.icons-CardsZ6 { --row: 178; }
-.icons-CardsZ7 { --row: 179; }
-.icons-CardsZ8 { --row: 180; }
-.icons-CardsZ9 { --row: 181; }
-.icons-CardsZZ { --row: 182; }
+.icons-CardsX21 { --row: 146; }
+.icons-CardsX22 { --row: 147; }
+.icons-CardsX3 { --row: 148; }
+.icons-CardsX4 { --row: 149; }
+.icons-CardsX5 { --row: 150; }
+.icons-CardsX6 { --row: 151; }
+.icons-CardsX7 { --row: 152; }
+.icons-CardsX8 { --row: 153; }
+.icons-CardsX9 { --row: 154; }
+.icons-CardsY0 { --row: 155; }
+.icons-CardsY1 { --row: 156; }
+.icons-CardsY10 { --row: 157; }
+.icons-CardsY11 { --row: 158; }
+.icons-CardsY12 { --row: 159; }
+.icons-CardsY13 { --row: 160; }
+.icons-CardsY14 { --row: 161; }
+.icons-CardsY2 { --row: 162; }
+.icons-CardsY3 { --row: 163; }
+.icons-CardsY4 { --row: 164; }
+.icons-CardsY5 { --row: 165; }
+.icons-CardsY6 { --row: 166; }
+.icons-CardsY7 { --row: 167; }
+.icons-CardsY8 { --row: 168; }
+.icons-CardsY9 { --row: 169; }
+.icons-CardsZ0 { --row: 170; }
+.icons-CardsZ1 { --row: 171; }
+.icons-CardsZ10 { --row: 172; }
+.icons-CardsZ11 { --row: 173; }
+.icons-CardsZ12 { --row: 174; }
+.icons-CardsZ13 { --row: 175; }
+.icons-CardsZ14 { --row: 176; }
+.icons-CardsZ15 { --row: 177; }
+.icons-CardsZ16 { --row: 178; }
+.icons-CardsZ2 { --row: 179; }
+.icons-CardsZ3 { --row: 180; }
+.icons-CardsZ4 { --row: 181; }
+.icons-CardsZ5 { --row: 182; }
+.icons-CardsZ6 { --row: 183; }
+.icons-CardsZ7 { --row: 184; }
+.icons-CardsZ8 { --row: 185; }
+.icons-CardsZ9 { --row: 186; }
+.icons-CardsZZ { --row: 187; }
