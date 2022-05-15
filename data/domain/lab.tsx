@@ -6,6 +6,7 @@ import { GemStore } from "./gemPurchases"
 import { ImageData } from "./imageData"
 import { Player, SkillsIndex } from "./player"
 import { Storage } from "./storage"
+import { TaskBoard } from "./tasks"
 
 export const chipSlotReq = [5, 10, 15, 25, 35, 50, 75];
 
@@ -58,8 +59,8 @@ export class MainframeBonus {
         return this.active ? this.bonusOn : this.bonusOff;
     }
 
-    getRange = (connectionBonus: number = 0) => {
-        return 80 * (1 + connectionBonus / 100);
+    getRange = (connectionBonus: number = 0, meritConnectionBonus: number = 0) => {
+        return Math.floor((80 * (1 + connectionBonus / 100)) + meritConnectionBonus);
     }
 }
 
@@ -166,8 +167,8 @@ export class Jewel {
         return `${this.data.effect.replace(/}/g, this.getBonus().toString())}${this.bonusMultiplier > 1 ? ` (${this.bonusMultiplier}x multiplier from mainframe bonus)` : ""}`;
     }
 
-    getRange = (connectionBonus: number = 0) => {
-        return 80 * (1 + connectionBonus / 100);
+    getRange = (connectionBonus: number = 0, meritConnectionBonus: number = 0) => {
+        return Math.floor((80 * (1 + connectionBonus / 100)) + meritConnectionBonus);
     }
 }
 
@@ -397,7 +398,7 @@ const _findPrismSource = (lab: Lab) => {
     return undefined;
 }
 
-const _calculatePlayerImpact = (connectedPlayers: Player[], chainIndex: number, lab: Lab) => {
+const _calculatePlayerImpact = (connectedPlayers: Player[], chainIndex: number, lab: Lab, meritConnectionBonus: number) => {
     const jewelMultiplier = (lab.bonuses.find(bonus => bonus.index == 8)?.active ?? false) ? 1.5 : 1;
     const jewelconnectionRangeBonus = lab.jewels.filter(jewel => jewel.active && jewel.index == 9).reduce((sum, jewel) => sum += jewel.getBonus(jewelMultiplier), 0)
     const bonusConnectionRangeBonus = lab.bonuses[13].getBonus();
@@ -417,7 +418,7 @@ const _calculatePlayerImpact = (connectedPlayers: Player[], chainIndex: number, 
     })
 
     lab.bonuses.filter(bonus => !bonus.active).forEach(bonus => {
-        const inRange = lab.getDistance(playerCords.x, playerCords.y, bonus.x, bonus.y) < bonus.getRange(connectionRangeBonus);
+        const inRange = lab.getDistance(playerCords.x, playerCords.y, bonus.x, bonus.y) < bonus.getRange(connectionRangeBonus, meritConnectionBonus);
         if (inRange) {
             bonus.active = true;
             hasImpact = true;
@@ -425,7 +426,7 @@ const _calculatePlayerImpact = (connectedPlayers: Player[], chainIndex: number, 
     });
 
     lab.jewels.filter(jewel => jewel.available && !jewel.active).forEach(jewel => {
-        const inRange = lab.getDistance(playerCords.x, playerCords.y, jewel.data.x, jewel.data.y) < jewel.getRange(connectionRangeBonus);
+        const inRange = lab.getDistance(playerCords.x, playerCords.y, jewel.data.x, jewel.data.y) < jewel.getRange(connectionRangeBonus, meritConnectionBonus);
         if (inRange) {
             jewel.active = true;
             hasImpact = true;
@@ -444,6 +445,7 @@ export const updateLab = (data: Map<string, any>) => {
     const breeding = data.get("breeding") as Breeding;
     const deathnote = data.get("deathnote") as Deathnote;
     const storage = data.get("storage") as Storage;
+    const taskBoard = data.get("taskboard") as TaskBoard;
 
     // Append chip info to the players.
     Object.entries(lab.playerChips).forEach(([playerIndex, chips]) => {
@@ -470,6 +472,13 @@ export const updateLab = (data: Map<string, any>) => {
     const playersInLab = [...playerData].filter(player => player.currentMonster == "Laboratory").sort((player1, player2) => player1.playerID > player2.playerID ? 1 : -1);
     lab.playersInTubes = playersInLab;
 
+    // figure out w4 merit extra connection range;
+    const connectionMerit = taskBoard.merits.find(merit => merit.descLine1.includes("connection range in the Lab"));
+    let meritConnectionBonus = 0;
+    if (connectionMerit) {
+        meritConnectionBonus = connectionMerit.bonusPerLevel * connectionMerit.level;
+    }
+
     let loopAgain = true;
     const connectedPlayers: Player[] = [];
     while (loopAgain) {
@@ -488,7 +497,7 @@ export const updateLab = (data: Map<string, any>) => {
         // Loop the things
         for (let chainIndex = 0; chainIndex < lab.playersInTubes.length; chainIndex++) {
             if (connectedPlayers.length > chainIndex) {
-                loopAgain = _calculatePlayerImpact(connectedPlayers, chainIndex, lab);
+                loopAgain = _calculatePlayerImpact(connectedPlayers, chainIndex, lab, meritConnectionBonus);
             }
         }
     }
@@ -512,7 +521,7 @@ export const updateLab = (data: Map<string, any>) => {
         // Loop the things
         for (let chainIndex = 0; chainIndex < lab.playersInTubes.length; chainIndex++) {
             if (connectedPlayers.length > chainIndex) {
-                loopAgain = _calculatePlayerImpact(connectedPlayers, chainIndex, lab);
+                loopAgain = _calculatePlayerImpact(connectedPlayers, chainIndex, lab, meritConnectionBonus);
             }
         }
 
