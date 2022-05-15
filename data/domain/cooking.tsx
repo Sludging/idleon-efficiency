@@ -1,4 +1,5 @@
 import { nFormatter, round } from "../utility"
+import { Achievement } from "./achievements";
 import { Alchemy } from "./alchemy";
 import { Breeding } from "./breeding";
 import { Card } from "./cards";
@@ -203,15 +204,15 @@ export class Kitchen {
 
     constructor(public index: number) { }
 
-    getMealSpeed = (vialBonus: number, stampBonus: number, mealCookBonus: number, jewelBonus: number, cardBonus: number, kitchenEffBonus: number, jewelBonus2: number, diamonChef: number) => {
+    getMealSpeed = (vialBonus: number, stampBonus: number, mealCookBonus: number, jewelBonus: number, cardBonus: number, kitchenEffBonus: number, jewelBonus2: number, diamonChef: number, achieve225: boolean, achieve224: boolean) => {
         const baseMath = 10 * (1 + (this.richelin ? 2 : 0)) * Math.max(1, diamonChef);
         const bonusMath = (1 + (stampBonus + Math.max(0, jewelBonus2)) / 100) * (1 + mealCookBonus / 100) * Math.max(1, jewelBonus);
-        const cardImpact = 1 + Math.min(cardBonus, 50) / 100;
+        const cardAndAchiImpact = 1 + (Math.min(cardBonus, 50) + (20 * (achieve225 ? 1 : 0)) + 10 * (achieve224 ? 1 : 0)) / 100 ;
         return baseMath *
             (1 + this.mealLevels / 10) *
             (1 + vialBonus / 100) *
             bonusMath *
-            cardImpact *
+            cardAndAchiImpact *
             (1 + (kitchenEffBonus * Math.floor((this.mealLevels + (this.recipeLevels + this.luckLevels)) / 10)) / 100);
     }
 
@@ -396,6 +397,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const mainframe = data.get("lab") as Lab;
     const cards = data.get("cards") as Card[];
     const breeding = data.get("breeding") as Breeding;
+    const achievements = data.get("achievements") as Achievement[];
 
     const jewelMealBonus = mainframe.jewels[16].active ? mainframe.jewels[16].getBonus() : 0; // TODO: Remove hardcoding
     cooking.meals.forEach(meal => meal.mainframeBonus = jewelMealBonus);
@@ -421,7 +423,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const arenaBonusActive = breeding.hasBonus(7);
 
     cooking.kitchens.forEach(kitchen => {
-        kitchen.mealSpeed = kitchen.getMealSpeed(vialBonus, stampBonus, mealSpeedBonus, jewelBonus, cardBonus, kitchenEfficientBonus, jewelBonus2, diamonChef);
+        kitchen.mealSpeed = kitchen.getMealSpeed(vialBonus, stampBonus, mealSpeedBonus, jewelBonus, cardBonus, kitchenEfficientBonus, jewelBonus2, diamonChef, achievements.find(achi => achi.index == 225)?.completed ?? false, achievements.find(achi => achi.index == 224)?.completed ?? false);
         kitchen.fireSpeed = kitchen.getFireSpeed(fireVialBonus, fireStampBonus, fireSpeedMealBonus, cardBonus, kitchenEfficientBonus, diamonChef);
         kitchen.recipeLuck = kitchen.getLuck();
 
