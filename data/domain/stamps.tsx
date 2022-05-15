@@ -79,7 +79,7 @@ export class Stamp {
         const lvlDiff = 3 + (normalLevel - 3) * Math.pow(skillLevel / (normalLevel - 3), 0.75)
         const reducedLevel = Math.floor(lvlDiff * this.data.upgradeInterval / 10);
         // only second tab gets reduced level math and only if the reduced level is lower than stamp level.
-        if (skillLevel > 0 && reducedLevel < this.level && this.raw_name.includes("B")) {
+        if (skillLevel > 0 && reducedLevel < this.level && this.data.i10 > 0) {
             return lavaFunc(this.data.function, reducedLevel, this.data.x1, this.data.x2, round) * this.multiplier;
         }
         return lavaFunc(this.data.function, this.level, this.data.x1, this.data.x2, round) * this.multiplier;
