@@ -77,12 +77,13 @@ export class AnimalFarmBonus extends MainframeBonus {
 
 export class FungiFingerBonus extends MainframeBonus {
     greenMushroomKilled: number = 0;
+    jewelBoost: number = 0;
     override getBonusText = () => {
         return this.description.replace(/{/g, this.getBonus().toString())
     }
 
     override getBonus = () => {
-        return this.bonusOn * Math.floor(this.greenMushroomKilled / 1e6);
+        return (this.bonusOn + this.jewelBoost) * Math.floor(this.greenMushroomKilled / 1e6);
     }
 }
 
@@ -370,7 +371,7 @@ export const parseLab = (labData: number[][]) => {
     return lab;
 }
 
-const _calculatePlayersLineWidth = (lab: Lab, cooking: Cooking, breeding: Breeding, cards: Card[], gemStore: GemStore) => {
+const _calculatePlayersLineWidth = (lab: Lab, cooking: Cooking, breeding: Breeding, cards: Card[], gemStore: GemStore, meritConnectionBonus: number) => {
     const jewelMultiplier = (lab.bonuses.find(bonus => bonus.index == 8)?.active ?? false) ? 1.5 : 1;
     const mealBonus = lab.jewels.filter(jewel => jewel.active && jewel.index == 16).reduce((sum, jewel) => sum += jewel.getBonus(jewelMultiplier), 0)
     if (lab.playersInTubes.length > 0) {
@@ -381,7 +382,7 @@ const _calculatePlayersLineWidth = (lab: Lab, cooking: Cooking, breeding: Breedi
         const gemTubes = (gemStore?.purchases.find(purchase => purchase.no == 123)?.pucrhased ?? 0) * 2;
 
         lab.playersInTubes.forEach((player, index) => {
-            player.labInfo.lineWidth = lab?.getPlayerLinewidth(player, pxMealBonus, linePctMealBonus, passiveCardBonus, petArenaBonus, index < gemTubes) ?? 0;
+            player.labInfo.lineWidth = lab?.getPlayerLinewidth(player, pxMealBonus, linePctMealBonus, passiveCardBonus, petArenaBonus, index < gemTubes) + meritConnectionBonus ?? 0;
             player.labInfo.supped = index < gemTubes;
         });
     }
@@ -484,7 +485,7 @@ export const updateLab = (data: Map<string, any>) => {
     while (loopAgain) {
         loopAgain = false;
         // calculate line widths
-        _calculatePlayersLineWidth(lab, cooking, breeding, cards, gemStore);
+        _calculatePlayersLineWidth(lab, cooking, breeding, cards, gemStore, meritConnectionBonus);
 
         // If we have players in lab, and no chain, try and find the player connected to prism.
         if (lab.playersInTubes.length > 0 && connectedPlayers.length == 0) {
@@ -506,7 +507,7 @@ export const updateLab = (data: Map<string, any>) => {
         // fake 16 is active to avoid odd scenarios
         lab.jewels[16].active = true;
 
-        _calculatePlayersLineWidth(lab, cooking, breeding, cards, gemStore);
+        _calculatePlayersLineWidth(lab, cooking, breeding, cards, gemStore, meritConnectionBonus);
         // deactivate after we updated all the widths.
         lab.jewels[16].active = false;
 
@@ -526,7 +527,7 @@ export const updateLab = (data: Map<string, any>) => {
         }
 
         // Redo line width maths in case the jewel didn't get re-enabled.
-        _calculatePlayersLineWidth(lab, cooking, breeding, cards, gemStore);
+        _calculatePlayersLineWidth(lab, cooking, breeding, cards, gemStore, meritConnectionBonus);
     }
 
     const jewelMultiplier = (lab.bonuses.find(bonus => bonus.index == 8)?.active ?? false) ? 1.5 : 1;
@@ -540,8 +541,15 @@ export const updateLab = (data: Map<string, any>) => {
 
     // Special Bonus handling
     (lab.bonuses[0] as AnimalFarmBonus).totalSpecies = breeding.speciesUnlocks.reduce((sum, world) => sum += world, 0);
+    
     (lab.bonuses[9] as FungiFingerBonus).greenMushroomKilled = deathnote.mobKillCount.get("mushG")?.reduce((sum, killCount) => sum += Math.round(killCount), 0) ?? 0;
+    // Emerald Rhombol
+    if (lab.jewels[13].active) {
+        (lab.bonuses[9] as FungiFingerBonus).jewelBoost = lab.jewels[13].getBonus()
+    
+    }
     (lab.bonuses[11] as UnadulteratedBankingBonus).greenStacks = storage.chest.filter(item => item.count >= 1e7).length;
+    
 
     return lab;
 }
