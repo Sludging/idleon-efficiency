@@ -207,7 +207,7 @@ export class Kitchen {
     getMealSpeed = (vialBonus: number, stampBonus: number, mealCookBonus: number, jewelBonus: number, cardBonus: number, kitchenEffBonus: number, jewelBonus2: number, diamonChef: number, achieve225: boolean, achieve224: boolean) => {
         const baseMath = 10 * (1 + (this.richelin ? 2 : 0)) * Math.max(1, diamonChef);
         const bonusMath = (1 + (stampBonus + Math.max(0, jewelBonus2)) / 100) * (1 + mealCookBonus / 100) * Math.max(1, jewelBonus);
-        const cardAndAchiImpact = 1 + (Math.min(cardBonus, 50) + (20 * (achieve225 ? 1 : 0)) + 10 * (achieve224 ? 1 : 0)) / 100 ;
+        const cardAndAchiImpact = 1 + (Math.min(cardBonus, 50) + (20 * (achieve225 ? 1 : 0)) + (10 * (achieve224 ? 1 : 0))) / 100 ;
         return baseMath *
             (1 + this.mealLevels / 10) *
             (1 + vialBonus / 100) *
