@@ -6,7 +6,7 @@
     padding-bottom: 100.0%;
     height: 0;
     background-size: cover;
-    background-position: 0 calc(var(--row) * 7.142857142857143%)
+    background-position: 0 calc(var(--row) * 6.25%)
 }
 .icons-6464:not(.icons-ArrowHM):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
 .icons-ArrowHM { --row: 0; }
@@ -15,12 +15,14 @@
 .icons-LabBonus1 { --row: 3; }
 .icons-LabBonus10 { --row: 4; }
 .icons-LabBonus11 { --row: 5; }
-.icons-LabBonus2 { --row: 6; }
-.icons-LabBonus3 { --row: 7; }
-.icons-LabBonus4 { --row: 8; }
-.icons-LabBonus5 { --row: 9; }
-.icons-LabBonus6 { --row: 10; }
-.icons-LabBonus7 { --row: 11; }
-.icons-LabBonus8 { --row: 12; }
-.icons-LabBonus9 { --row: 13; }
-.icons-Shadow { --row: 14; }
+.icons-LabBonus12 { --row: 6; }
+.icons-LabBonus13 { --row: 7; }
+.icons-LabBonus2 { --row: 8; }
+.icons-LabBonus3 { --row: 9; }
+.icons-LabBonus4 { --row: 10; }
+.icons-LabBonus5 { --row: 11; }
+.icons-LabBonus6 { --row: 12; }
+.icons-LabBonus7 { --row: 13; }
+.icons-LabBonus8 { --row: 14; }
+.icons-LabBonus9 { --row: 15; }
+.icons-Shadow { --row: 16; }

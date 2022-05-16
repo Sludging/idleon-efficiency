@@ -6,7 +6,7 @@
     padding-bottom: 100.0%;
     height: 0;
     background-size: cover;
-    background-position: 0 calc(var(--row) * 0.5102040816326531%)
+    background-position: 0 calc(var(--row) * 0.37593984962406013%)
 }
 .icons-4343:not(.icons-TaskAchA1):after{content:'MISSING ICON';font-size:12px; line-height: 1em; background:red;color:#fff;height:100%;opacity:calc(1 - var(--row));}
 .icons-TaskAchA1 { --row: 0; }
@@ -206,3 +206,73 @@
 .icons-TaskAchC70 { --row: 194; }
 .icons-TaskAchC8 { --row: 195; }
 .icons-TaskAchC9 { --row: 196; }
+.icons-TaskAchD1 { --row: 197; }
+.icons-TaskAchD10 { --row: 198; }
+.icons-TaskAchD11 { --row: 199; }
+.icons-TaskAchD12 { --row: 200; }
+.icons-TaskAchD13 { --row: 201; }
+.icons-TaskAchD14 { --row: 202; }
+.icons-TaskAchD15 { --row: 203; }
+.icons-TaskAchD16 { --row: 204; }
+.icons-TaskAchD17 { --row: 205; }
+.icons-TaskAchD18 { --row: 206; }
+.icons-TaskAchD19 { --row: 207; }
+.icons-TaskAchD2 { --row: 208; }
+.icons-TaskAchD20 { --row: 209; }
+.icons-TaskAchD21 { --row: 210; }
+.icons-TaskAchD22 { --row: 211; }
+.icons-TaskAchD23 { --row: 212; }
+.icons-TaskAchD24 { --row: 213; }
+.icons-TaskAchD25 { --row: 214; }
+.icons-TaskAchD26 { --row: 215; }
+.icons-TaskAchD27 { --row: 216; }
+.icons-TaskAchD28 { --row: 217; }
+.icons-TaskAchD29 { --row: 218; }
+.icons-TaskAchD3 { --row: 219; }
+.icons-TaskAchD30 { --row: 220; }
+.icons-TaskAchD31 { --row: 221; }
+.icons-TaskAchD32 { --row: 222; }
+.icons-TaskAchD33 { --row: 223; }
+.icons-TaskAchD34 { --row: 224; }
+.icons-TaskAchD35 { --row: 225; }
+.icons-TaskAchD36 { --row: 226; }
+.icons-TaskAchD37 { --row: 227; }
+.icons-TaskAchD38 { --row: 228; }
+.icons-TaskAchD39 { --row: 229; }
+.icons-TaskAchD4 { --row: 230; }
+.icons-TaskAchD40 { --row: 231; }
+.icons-TaskAchD41 { --row: 232; }
+.icons-TaskAchD42 { --row: 233; }
+.icons-TaskAchD43 { --row: 234; }
+.icons-TaskAchD44 { --row: 235; }
+.icons-TaskAchD45 { --row: 236; }
+.icons-TaskAchD46 { --row: 237; }
+.icons-TaskAchD47 { --row: 238; }
+.icons-TaskAchD48 { --row: 239; }
+.icons-TaskAchD49 { --row: 240; }
+.icons-TaskAchD5 { --row: 241; }
+.icons-TaskAchD50 { --row: 242; }
+.icons-TaskAchD51 { --row: 243; }
+.icons-TaskAchD52 { --row: 244; }
+.icons-TaskAchD53 { --row: 245; }
+.icons-TaskAchD54 { --row: 246; }
+.icons-TaskAchD55 { --row: 247; }
+.icons-TaskAchD56 { --row: 248; }
+.icons-TaskAchD57 { --row: 249; }
+.icons-TaskAchD58 { --row: 250; }
+.icons-TaskAchD59 { --row: 251; }
+.icons-TaskAchD6 { --row: 252; }
+.icons-TaskAchD60 { --row: 253; }
+.icons-TaskAchD61 { --row: 254; }
+.icons-TaskAchD62 { --row: 255; }
+.icons-TaskAchD63 { --row: 256; }
+.icons-TaskAchD64 { --row: 257; }
+.icons-TaskAchD65 { --row: 258; }
+.icons-TaskAchD66 { --row: 259; }
+.icons-TaskAchD67 { --row: 260; }
+.icons-TaskAchD68 { --row: 261; }
+.icons-TaskAchD69 { --row: 262; }
+.icons-TaskAchD7 { --row: 263; }
+.icons-TaskAchD70 { --row: 264; }
+.icons-TaskAchD8 { --row: 265; }
+.icons-TaskAchD9 { --row: 266; }

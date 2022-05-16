@@ -71,7 +71,7 @@ const initShrines = () => {
         new Shrine("Summereading Shrine", "Boosts ALL Exp Gain of players on this map by +%. @ AFK Time to next Lv: @", 6, 1, "ConTowerB23"),
         new Shrine("Crescent Shrine", "Boosts Crystal and Giant Spawn chance on this map by +%. @ AFK Time to next Lv: @", 50, 10, "ConTowerB24"),
         new Shrine("Undead Shrine", "Boosts Respawn Rate of monsters on this map by +%. @ AFK Time to next Lv: @", 5, 1, "ConTowerB25"),
-        new Shrine("Primordial Shrine", "Boosts AFK Gain Rate on this map by +%, up to 80% total. @ AFK Time to next Lv: @", 1, 0.1, "ConTowerB26"),
+        new Shrine("Primordial Shrine", "Boosts AFK Gain Rate on this map by +%, up to 150% tot. @ AFK Time to next Lv: @", 1, 0.1, "ConTowerB26"),
     ];
 }
 

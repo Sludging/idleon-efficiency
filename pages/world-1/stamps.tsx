@@ -52,6 +52,7 @@ function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stam
                 <Text size="small">Bonus: {stamp.getBonusText()}</Text>
                 {stamp.isMaxLevel() && <Box direction="row" align="center"><Text size="small">Material Cost: {nFormatter(stamp.getMaterialCost(blueFlavPercent))}</Text><IconImage data={(stamp.materialItem as Item).getImageData()} /></Box>}
                 <Box direction="row" gap="small"><Text size="small">Cost: </Text><CoinsDisplay coinMap={getCoinsArray(stamp.getGoldCost(hasBribe, blueFlavPercent))} /></Box>
+                { !stamp.isMaxLevel() && <Box direction="row" gap="small"><Text size="small">Cost to max: </Text><CoinsDisplay coinMap={getCoinsArray(stamp.getGoldCostToMax(hasBribe, blueFlavPercent))} /></Box> }
             </Box>
         )
     }

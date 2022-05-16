@@ -363,7 +363,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     }
                     <Box direction="row" gap="small">
                         <Text size="small">Money =</Text>
-                        <CoinsDisplay coinMap={playerCoins} />
+                        <CoinsDisplay coinMap={playerCoins} maxCoins={3} />
                     </Box>
                     <Box>
                         <Text>Active Bubbles:</Text>

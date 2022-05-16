@@ -1,4 +1,4 @@
-import { lavaFunc } from '../utility'
+import { lavaFunc, range } from '../utility'
 import { Item } from './items';
 import { Lab } from './lab';
 
@@ -52,13 +52,17 @@ export class Stamp {
         this.data = data;
     }
 
-    getGoldCost = (hasBribe: boolean = false, blueFlavPercent: number = 0): number => {
-        const goldCost = this.data.startingCost * Math.pow(this.data.cCostExp - (this.level / (this.level + 5 * this.data.upgradeInterval)) * 0.25, this.level * (10 / this.data.upgradeInterval)) * Math.max(0.1, 1 - blueFlavPercent);
+    getGoldCost = (hasBribe: boolean = false, blueFlavPercent: number = 0, level: number = this.level): number => {
+        const goldCost = this.data.startingCost * Math.pow(this.data.cCostExp - (level / (level + 5 * this.data.upgradeInterval)) * 0.25, level * (10 / this.data.upgradeInterval)) * Math.max(0.1, 1 - blueFlavPercent);
         if (hasBribe) {
             //TODO: Make this math less... hard coded?
             return goldCost * 0.92;
         }
         return goldCost
+    }
+
+    getGoldCostToMax = (hasBribe: boolean = false, blueFlavPercent: number = 0): number => {
+        return range(this.level, this.maxLevel).reduce((sum, level) => sum += this.getGoldCost(hasBribe, blueFlavPercent, level), 0);
     }
 
     getMaterialCost = (blueFlavPercent: number = 0): number => {
@@ -75,7 +79,7 @@ export class Stamp {
         const lvlDiff = 3 + (normalLevel - 3) * Math.pow(skillLevel / (normalLevel - 3), 0.75)
         const reducedLevel = Math.floor(lvlDiff * this.data.upgradeInterval / 10);
         // only second tab gets reduced level math and only if the reduced level is lower than stamp level.
-        if (skillLevel > 0 && reducedLevel < this.level && this.raw_name.includes("B")) {
+        if (skillLevel > 0 && reducedLevel < this.level && this.data.i10 > 0) {
             return lavaFunc(this.data.function, reducedLevel, this.data.x1, this.data.x2, round) * this.multiplier;
         }
         return lavaFunc(this.data.function, this.level, this.data.x1, this.data.x2, round) * this.multiplier;

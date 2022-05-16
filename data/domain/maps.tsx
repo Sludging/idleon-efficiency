@@ -9,7 +9,7 @@ export interface MapData {
 export const MapInfo: MapData[] = [
     {"area": "Blunder Hills", "world": "Blunder Hills", "id": 0, "portalRequirements": [1, 0], "enemy": "Nothing"},
     {"area": "Spore Meadows", "world": "Blunder Hills", "id": 1, "portalRequirements": [20], "enemy": "mushG"},
-    {"area": "Froggy Fields", "world": "Blunder Hills", "id": 2, "portalRequirements": [70], "enemy": "frogG"},
+    {"area": "Froggy Fields", "world": "Blunder Hills", "id": 2, "portalRequirements": [30], "enemy": "frogG"},
     {"area": "JungleZ", "world": "Blunder Hills", "id": 3, "portalRequirements": [150, 10], "enemy": "JungleZ"},
     {"area": "PlayerSelect", "world": "Blunder Hills", "id": 4, "portalRequirements": [150], "enemy": "Nothing"},
     {"area": "PlayerSelect", "world": "Blunder Hills", "id": 5, "portalRequirements": [150], "enemy": "Nothing"},
@@ -21,7 +21,7 @@ export const MapInfo: MapData[] = [
     {"area": "Echoing Egress", "world": "Blunder Hills", "id": 11, "portalRequirements": [50, 60], "enemy": "Void"},
     {"area": "Slip Slidy Ledges", "world": "Blunder Hills", "id": 12, "portalRequirements": [60], "enemy": "Starfire"},
     {"area": "The Base Of The Bark", "world": "Blunder Hills", "id": 13, "portalRequirements": [2500, 50000], "enemy": "branch"},
-    {"area": "Valley Of The Beans", "world": "Blunder Hills", "id": 14, "portalRequirements": [150, 1500], "enemy": "beanG"},
+    {"area": "Valley Of The Beans", "world": "Blunder Hills", "id": 14, "portalRequirements": [80, 1500], "enemy": "beanG"},
     {"area": "Rats Nest", "world": "Blunder Hills", "id": 15, "portalRequirements": [35000], "enemy": "ratB"},
     {"area": "Jungle Perimeter", "world": "Blunder Hills", "id": 16, "portalRequirements": [200, 3000], "enemy": "slimeG"},
     {"area": "Birch Enclave", "world": "Blunder Hills", "id": 17, "portalRequirements": [0], "enemy": "mushR"},
