@@ -173,7 +173,7 @@ function Cooking() {
                 <Text>Spices</Text>
                 <Box direction="row" wrap>
                     {
-                        cooking?.spices.filter(spice => spice > 0).map((spice, index) => (
+                        cooking?.spices.filter(spice => spice > -1).map((spice, index) => (
                             <Box key={index} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} align="center">
                                 <Box direction="row" pad={{ vertical: 'small' }} align="center">
                                     <IconImage data={{
@@ -192,7 +192,7 @@ function Cooking() {
                 <Text>Meals</Text>
                 <Grid columns="1/3">
                     {
-                        cooking?.meals.filter(meal => meal.bonusKey != "non" && (meal.level > 0 || meal.optimalSpices.length > 0)).map((meal, index) => (
+                        cooking?.meals.filter(meal => (meal.level > 0 || meal.optimalSpices.length > 0)).map((meal, index) => (
                             <ShadowBox background="dark-1" key={index} margin={{ right: 'small', bottom: 'small' }} direction="row" pad="small" gap="small" align="center">
                                 <Box direction="row" align="center">
                                     <Text size="small">{meal.level}</Text>
