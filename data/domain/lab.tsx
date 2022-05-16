@@ -6,6 +6,7 @@ import { GemStore } from "./gemPurchases"
 import { ImageData } from "./imageData"
 import { Player, SkillsIndex } from "./player"
 import { Storage } from "./storage"
+import { TaskBoard } from "./tasks"
 
 export const chipSlotReq = [5, 10, 15, 25, 35, 50, 75];
 
@@ -58,8 +59,8 @@ export class MainframeBonus {
         return this.active ? this.bonusOn : this.bonusOff;
     }
 
-    getRange = (connectionBonus: number = 0) => {
-        return 80 * (1 + connectionBonus / 100);
+    getRange = (connectionBonus: number = 0, meritConnectionBonus: number = 0) => {
+        return Math.floor((80 * (1 + connectionBonus / 100)) + meritConnectionBonus);
     }
 }
 
@@ -76,12 +77,13 @@ export class AnimalFarmBonus extends MainframeBonus {
 
 export class FungiFingerBonus extends MainframeBonus {
     greenMushroomKilled: number = 0;
+    jewelBoost: number = 0;
     override getBonusText = () => {
         return this.description.replace(/{/g, this.getBonus().toString())
     }
 
     override getBonus = () => {
-        return this.bonusOn * Math.floor(this.greenMushroomKilled / 1e6);
+        return (this.bonusOn + this.jewelBoost) * Math.floor(this.greenMushroomKilled / 1e6);
     }
 }
 
@@ -102,6 +104,12 @@ export class ViralConnectionBonus extends MainframeBonus {
     }
 }
 
+export class SpelunkerObolBonus extends MainframeBonus {
+    override getRange = () => {
+        return 80;
+    }
+}
+
 const initBonuses = (): MainframeBonus[] => {
     return [
         new AnimalFarmBonus({ "no": 0, "x": 91, "y": 353, "range": 90, "bonusOn": 0, "bonusOff": 1, "name": "Animal Farm", "description": "+1% Total Damage for every different species you have bred within Pet Breeding. You just need to breed the pet type one time for it to count! @ - @ Total Bonus: {%" }),
@@ -113,8 +121,8 @@ const initBonuses = (): MainframeBonus[] => {
         new MainframeBonus({ "no": 5, "x": 651, "y": 200, "range": 90, "bonusOn": 0, "bonusOff": 1, "name": "Shrine World Tour", "description": "If a shrine is placed within town, instead of in a monster map, it will act as though it is placed in EVERY map in that entire world!" }),
         new MainframeBonus({ "no": 6, "x": 753, "y": 113, "range": 90, "bonusOn": 1, "bonusOff": 5, "name": "Viaduct of the Gods", "description": "All alchemy liquids have x5 higher max capacity. However, you regenerate alchemy liquids -30% slower." }),
         new MainframeBonus({ "no": 7, "x": 824, "y": 377, "range": 90, "bonusOn": 1, "bonusOff": 2, "name": "Certified Stamp Book", "description": "All Stamps, except for MISC tab stamps, give DOUBLE the bonus." }),
-        new MainframeBonus({ "no": 8, "x": 917, "y": 326, "range": 90, "bonusOn": 1, "bonusOff": 1.5, "name": "Spelunker Obol", "description": "1.50x higher effects from all active Jewels within the Mainframe." }),
-        new FungiFingerBonus({ "no": 9, "x": 982, "y": 148, "range": 90, "bonusOn": 0, "bonusOff": 2, "name": "Fungi Finger Pocketer", "description": "+2% extra cash from monsters for every 1 million Green Mushroom kills your account has, which can be viewed at Death Note. @ - @ Total Bonus: {%" }),
+        new SpelunkerObolBonus({ "no": 8, "x": 945, "y": 326, "range": 90, "bonusOn": 1, "bonusOff": 1.5, "name": "Spelunker Obol", "description": "1.50x higher effects from all active Jewels within the Mainframe, and gives you +50% rememberance of the game Idle Skilling. @ This bonus always has a 80px connection range no matter what!" }),
+        new FungiFingerBonus({ "no": 9, "x": 990, "y": 148, "range": 90, "bonusOn": 0, "bonusOff": 2, "name": "Fungi Finger Pocketer", "description": "+2% extra cash from monsters for every 1 million Green Mushroom kills your account has, which can be viewed at Death Note. @ - @ Total Bonus: {%" }),
         new MainframeBonus({ "no": 10, "x": 1177, "y": 163, "range": 90, "bonusOn": 1, "bonusOff": 2, "name": "My 1st Chemistry Set", "description": "All Vials in Alchemy give DOUBLE the bonus. The bonus description will reflect this doubling." }),
         new UnadulteratedBankingBonus({ "no": 11, "x": 1300, "y": 380, "range": 90, "bonusOn": 0, "bonusOff": 2, "name": "Unadulterated Banking Fury", "description": "+2% Total Damage for each 'greened' stack of resources in your bank. A 'greened' stack is one with 10 million or more items. @ - @ Total Bonus: {%" }),
         new MainframeBonus({ "no": 12, "x": 400, "y": 390, "range": 90, "bonusOn": 0, "bonusOff": 1, "name": "Sigils of Olden Alchemy", "description": "Allows you to level up Alchemy Sigils by assigning players in alchemy, at a base rate of 1 sigil xp per hour. @ Sigils can be leveled up just twice: Once to unlock their bonus, and once more to boost their bonus. Their bonuses are passive, and apply to all characters always." }),
@@ -160,8 +168,8 @@ export class Jewel {
         return `${this.data.effect.replace(/}/g, this.getBonus().toString())}${this.bonusMultiplier > 1 ? ` (${this.bonusMultiplier}x multiplier from mainframe bonus)` : ""}`;
     }
 
-    getRange = (connectionBonus: number = 0) => {
-        return 80 * (1 + connectionBonus / 100);
+    getRange = (connectionBonus: number = 0, meritConnectionBonus: number = 0) => {
+        return Math.floor((80 * (1 + connectionBonus / 100)) + meritConnectionBonus);
     }
 }
 
@@ -211,7 +219,7 @@ export class EmeraldPyramiteJewel extends Jewel {
 
 const initJewels = () => {
     return [
-        new AmethystRhinestoneJewel(0, { "x": 68, "y": 134, "range": 90, "effect": "Meal cooking is }x faster. This bonus is applied TWICE if all 3 purple jewels are active.", "description": "Boosts Meal Cooking speed", "requirements": [{ "item": "Quest66", "quantity": 5 }, { "item": "Meal1", "quantity": 2000 }, { "item": "Spice0", "quantity": 200 }], "name": "Amethyst Rhinestone", "bonusGiven": 1.5 }),
+        new AmethystRhinestoneJewel(0, { "x": 76, "y": 134, "range": 90, "effect": "Meal cooking is }x faster. This bonus is applied TWICE if all 3 purple jewels are active.", "description": "Boosts Meal Cooking speed", "requirements": [{ "item": "Quest66", "quantity": 5 }, { "item": "Meal1", "quantity": 2000 }, { "item": "Spice0", "quantity": 200 }], "name": "Amethyst Rhinestone", "bonusGiven": 1.5 }),
         new Jewel(1, { "x": 164, "y": 412, "range": 90, "effect": "'Animal Farm' mainframe bonus gives an additional +}% per species. If Animal Farm is not active, then this does nothing.", "description": "Bolsters 'Animal Farm'", "requirements": [{ "item": "Quest35", "quantity": 5 }, { "item": "Meal3", "quantity": 2000 }, { "item": "Spice1", "quantity": 200 }], "name": "Purple Navette", "bonusGiven": 0.5 }),
         new Jewel(2, { "x": 163, "y": 218, "range": 90, "effect": "All players get +}% Lab EXP gain.", "description": "Boosts Lab EXP gain", "requirements": [{ "item": "Timecandy1", "quantity": 10 }, { "item": "Meal5", "quantity": 2000 }, { "item": "Spice2", "quantity": 200 }], "name": "Purple Rhombol", "bonusGiven": 40 }),
         new Jewel(3, { "x": 246, "y": 110, "range": 90, "effect": "Construction slot 1 is now trimmed up, and has }x building Speed. Also trims slot 2 if all 4 blue jewels are active.", "description": "Trims up a construction slot", "requirements": [{ "item": "Quest15", "quantity": 10 }, { "item": "Meal7", "quantity": 5000 }, { "item": "Spice3", "quantity": 400 }], "name": "Sapphire Rhinestone", "bonusGiven": 3 }),
@@ -220,9 +228,9 @@ const initJewels = () => {
         new Jewel(6, { "x": 490, "y": 112, "range": 90, "effect": "Every 24 hours, the } lowest level Kitchen Upgrades across all owned kitchens gain +1 Lv.", "description": "Automatically levels up kitchens", "requirements": [{ "item": "Quest38", "quantity": 2 }, { "item": "Meal13", "quantity": 5000 }, { "item": "Spice6", "quantity": 400 }], "name": "Sapphire Pyramite", "bonusGiven": 2 }),
         new Jewel(7, { "x": 552, "y": 163, "range": 90, "effect": "'No Bubble Left Behind' mainframe bonus gives +} levels instead of +1, and does so for the lowest 4 bubbles instead of 3.", "description": "Bolsters 'No Bubble Left Behind'", "requirements": [{ "item": "DesertA1b", "quantity": 50 }, { "item": "Meal15", "quantity": 10000 }, { "item": "Spice7", "quantity": 1500 }], "name": "Pyrite Rhinestone", "bonusGiven": 2 }),
         new Jewel(8, { "x": 646, "y": 407, "range": 90, "effect": "All players get }x 'non-consume' chance, and raises the max chance from 90% to 98%, allowing for longer AFK with food.", "description": "Boosts 'non-consume' chance", "requirements": [{ "item": "EquipmentPants19", "quantity": 2 }, { "item": "Meal17", "quantity": 10000 }, { "item": "Spice8", "quantity": 1500 }], "name": "Pyrite Navette", "bonusGiven": 3 }),
-        new PyriteRhombolJewel(9, { "x": 696, "y": 319, "range": 90, "effect": "All mainframe bonuses and jewels have a }% larger connection range, except for this jewel. This jewel has an 80px connection range no matter what!", "description": "Boosts mainframe connection range", "requirements": [{ "item": "DesertA3b", "quantity": 50 }, { "item": "Meal19", "quantity": 10000 }, { "item": "Spice9", "quantity": 1500 }], "name": "Pyrite Rhombol", "bonusGiven": 30 }),
+        new PyriteRhombolJewel(9, { "x": 680, "y": 319, "range": 90, "effect": "All mainframe bonuses and jewels have a }% larger connection range, except for this jewel. This jewel has an 80px connection range no matter what!", "description": "Boosts mainframe connection range", "requirements": [{ "item": "DesertA3b", "quantity": 50 }, { "item": "Meal19", "quantity": 10000 }, { "item": "Spice9", "quantity": 1500 }], "name": "Pyrite Rhombol", "bonusGiven": 30 }),
         new PyritePyramiteJewel(10, { "x": 847, "y": 105, "range": 90, "effect": "All players deal 1.}x more damage. This bonus is applied TWICE if all 4 Orange Jewels are active.", "description": "Boosts player damage", "requirements": [{ "item": "DesertC2b", "quantity": 50 }, { "item": "Meal21", "quantity": 10000 }, { "item": "Spice10", "quantity": 1500 }], "name": "Pyrite Pyramite", "bonusGiven": 10 }),
-        new Jewel(11, { "x": 989, "y": 407, "range": 90, "effect": "}% reduced incubation egg time. Mo eggs mo problems tho, fo sho.", "description": "Reduces egg incubation time", "requirements": [{ "item": "BabaYagaETC", "quantity": 1 }, { "item": "Meal23", "quantity": 25000 }, { "item": "Spice11", "quantity": 5000 }], "name": "Emerald Rhinestone", "bonusGiven": 28 }),
+        new Jewel(11, { "x": 998, "y": 404, "range": 90, "effect": "}% reduced incubation egg time. Mo eggs mo problems tho, fo sho.", "description": "Reduces egg incubation time", "requirements": [{ "item": "BabaYagaETC", "quantity": 1 }, { "item": "Meal23", "quantity": 25000 }, { "item": "Spice11", "quantity": 5000 }], "name": "Emerald Rhinestone", "bonusGiven": 28 }),
         new EmeraldNavetteJewel(12, { "x": 1079, "y": 233, "range": 90, "effect": "All players have } higher base efficiency in all skills, and +10% skill action speed. This bonus is applied TWICE if all 5 Green Jewels are active.", "description": "Boosts player efficiency", "requirements": [{ "item": "SnowA2a", "quantity": 80 }, { "item": "Meal25", "quantity": 25000 }, { "item": "Spice12", "quantity": 5000 }], "name": "Emerald Navette", "bonusGiven": 200 }),
         new Jewel(13, { "x": 1085, "y": 121, "range": 90, "effect": "'Fungi Finger Pocketer' mainframe bonus gives an additional +}% cash bonus per million mushroom kills", "description": "Bolsters 'Fungi Finger Pocketer'", "requirements": [{ "item": "SnowB2a", "quantity": 120 }, { "item": "Meal27", "quantity": 25000 }, { "item": "Spice13", "quantity": 5000 }], "name": "Emerald Rhombol", "bonusGiven": 1 }),
         new EmeraldPyramiteJewel(14, { "x": 1167, "y": 390, "range": 90, "effect": "Meal cooking is }% faster for every 25 total upgrade levels across all kitchens. @ Total Bonus: {% speed", "description": "Boosts Meal Cooking speed", "requirements": [{ "item": "SnowC4a", "quantity": 150 }, { "item": "Meal29", "quantity": 25000 }, { "item": "Spice14", "quantity": 5000 }], "name": "Emerald Pyramite", "bonusGiven": 1 }),
@@ -363,7 +371,7 @@ export const parseLab = (labData: number[][]) => {
     return lab;
 }
 
-const _calculatePlayersLineWidth = (lab: Lab, cooking: Cooking, breeding: Breeding, cards: Card[], gemStore: GemStore) => {
+const _calculatePlayersLineWidth = (lab: Lab, cooking: Cooking, breeding: Breeding, cards: Card[], gemStore: GemStore, meritConnectionBonus: number) => {
     const jewelMultiplier = (lab.bonuses.find(bonus => bonus.index == 8)?.active ?? false) ? 1.5 : 1;
     const mealBonus = lab.jewels.filter(jewel => jewel.active && jewel.index == 16).reduce((sum, jewel) => sum += jewel.getBonus(jewelMultiplier), 0)
     if (lab.playersInTubes.length > 0) {
@@ -374,7 +382,7 @@ const _calculatePlayersLineWidth = (lab: Lab, cooking: Cooking, breeding: Breedi
         const gemTubes = (gemStore?.purchases.find(purchase => purchase.no == 123)?.pucrhased ?? 0) * 2;
 
         lab.playersInTubes.forEach((player, index) => {
-            player.labInfo.lineWidth = lab?.getPlayerLinewidth(player, pxMealBonus, linePctMealBonus, passiveCardBonus, petArenaBonus, index < gemTubes) ?? 0;
+            player.labInfo.lineWidth = lab?.getPlayerLinewidth(player, pxMealBonus, linePctMealBonus, passiveCardBonus, petArenaBonus, index < gemTubes) + meritConnectionBonus ?? 0;
             player.labInfo.supped = index < gemTubes;
         });
     }
@@ -391,7 +399,7 @@ const _findPrismSource = (lab: Lab) => {
     return undefined;
 }
 
-const _calculatePlayerImpact = (connectedPlayers: Player[], chainIndex: number, lab: Lab) => {
+const _calculatePlayerImpact = (connectedPlayers: Player[], chainIndex: number, lab: Lab, meritConnectionBonus: number) => {
     const jewelMultiplier = (lab.bonuses.find(bonus => bonus.index == 8)?.active ?? false) ? 1.5 : 1;
     const jewelconnectionRangeBonus = lab.jewels.filter(jewel => jewel.active && jewel.index == 9).reduce((sum, jewel) => sum += jewel.getBonus(jewelMultiplier), 0)
     const bonusConnectionRangeBonus = lab.bonuses[13].getBonus();
@@ -411,7 +419,7 @@ const _calculatePlayerImpact = (connectedPlayers: Player[], chainIndex: number, 
     })
 
     lab.bonuses.filter(bonus => !bonus.active).forEach(bonus => {
-        const inRange = lab.getDistance(playerCords.x, playerCords.y, bonus.x, bonus.y) < bonus.getRange(connectionRangeBonus);
+        const inRange = lab.getDistance(playerCords.x, playerCords.y, bonus.x, bonus.y) < bonus.getRange(connectionRangeBonus, meritConnectionBonus);
         if (inRange) {
             bonus.active = true;
             hasImpact = true;
@@ -419,7 +427,7 @@ const _calculatePlayerImpact = (connectedPlayers: Player[], chainIndex: number, 
     });
 
     lab.jewels.filter(jewel => jewel.available && !jewel.active).forEach(jewel => {
-        const inRange = lab.getDistance(playerCords.x, playerCords.y, jewel.data.x, jewel.data.y) < jewel.getRange(connectionRangeBonus);
+        const inRange = lab.getDistance(playerCords.x, playerCords.y, jewel.data.x, jewel.data.y) < jewel.getRange(connectionRangeBonus, meritConnectionBonus);
         if (inRange) {
             jewel.active = true;
             hasImpact = true;
@@ -438,6 +446,7 @@ export const updateLab = (data: Map<string, any>) => {
     const breeding = data.get("breeding") as Breeding;
     const deathnote = data.get("deathnote") as Deathnote;
     const storage = data.get("storage") as Storage;
+    const taskBoard = data.get("taskboard") as TaskBoard;
 
     // Append chip info to the players.
     Object.entries(lab.playerChips).forEach(([playerIndex, chips]) => {
@@ -464,12 +473,19 @@ export const updateLab = (data: Map<string, any>) => {
     const playersInLab = [...playerData].filter(player => player.currentMonster == "Laboratory").sort((player1, player2) => player1.playerID > player2.playerID ? 1 : -1);
     lab.playersInTubes = playersInLab;
 
+    // figure out w4 merit extra connection range;
+    const connectionMerit = taskBoard.merits.find(merit => merit.descLine1.includes("connection range in the Lab"));
+    let meritConnectionBonus = 0;
+    if (connectionMerit) {
+        meritConnectionBonus = connectionMerit.bonusPerLevel * connectionMerit.level;
+    }
+
     let loopAgain = true;
     const connectedPlayers: Player[] = [];
     while (loopAgain) {
         loopAgain = false;
         // calculate line widths
-        _calculatePlayersLineWidth(lab, cooking, breeding, cards, gemStore);
+        _calculatePlayersLineWidth(lab, cooking, breeding, cards, gemStore, meritConnectionBonus);
 
         // If we have players in lab, and no chain, try and find the player connected to prism.
         if (lab.playersInTubes.length > 0 && connectedPlayers.length == 0) {
@@ -482,7 +498,7 @@ export const updateLab = (data: Map<string, any>) => {
         // Loop the things
         for (let chainIndex = 0; chainIndex < lab.playersInTubes.length; chainIndex++) {
             if (connectedPlayers.length > chainIndex) {
-                loopAgain = _calculatePlayerImpact(connectedPlayers, chainIndex, lab);
+                loopAgain = _calculatePlayerImpact(connectedPlayers, chainIndex, lab, meritConnectionBonus);
             }
         }
     }
@@ -491,7 +507,7 @@ export const updateLab = (data: Map<string, any>) => {
         // fake 16 is active to avoid odd scenarios
         lab.jewels[16].active = true;
 
-        _calculatePlayersLineWidth(lab, cooking, breeding, cards, gemStore);
+        _calculatePlayersLineWidth(lab, cooking, breeding, cards, gemStore, meritConnectionBonus);
         // deactivate after we updated all the widths.
         lab.jewels[16].active = false;
 
@@ -506,12 +522,12 @@ export const updateLab = (data: Map<string, any>) => {
         // Loop the things
         for (let chainIndex = 0; chainIndex < lab.playersInTubes.length; chainIndex++) {
             if (connectedPlayers.length > chainIndex) {
-                loopAgain = _calculatePlayerImpact(connectedPlayers, chainIndex, lab);
+                loopAgain = _calculatePlayerImpact(connectedPlayers, chainIndex, lab, meritConnectionBonus);
             }
         }
 
         // Redo line width maths in case the jewel didn't get re-enabled.
-        _calculatePlayersLineWidth(lab, cooking, breeding, cards, gemStore);
+        _calculatePlayersLineWidth(lab, cooking, breeding, cards, gemStore, meritConnectionBonus);
     }
 
     const jewelMultiplier = (lab.bonuses.find(bonus => bonus.index == 8)?.active ?? false) ? 1.5 : 1;
@@ -525,8 +541,15 @@ export const updateLab = (data: Map<string, any>) => {
 
     // Special Bonus handling
     (lab.bonuses[0] as AnimalFarmBonus).totalSpecies = breeding.speciesUnlocks.reduce((sum, world) => sum += world, 0);
+    
     (lab.bonuses[9] as FungiFingerBonus).greenMushroomKilled = deathnote.mobKillCount.get("mushG")?.reduce((sum, killCount) => sum += Math.round(killCount), 0) ?? 0;
+    // Emerald Rhombol
+    if (lab.jewels[13].active) {
+        (lab.bonuses[9] as FungiFingerBonus).jewelBoost = lab.jewels[13].getBonus()
+    
+    }
     (lab.bonuses[11] as UnadulteratedBankingBonus).greenStacks = storage.chest.filter(item => item.count >= 1e7).length;
+    
 
     return lab;
 }
