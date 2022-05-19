@@ -63,6 +63,8 @@ export class Meal {
     cookingContribution: number = 0;
     timeToNext: number = 0;
     timeToDiamond: number = 0;
+    timeToPurple: number = 0;
+    timeToVoid: number = 0;
 
     constructor(public mealIndex: number, data: MealInfo) {
         this.name = data.name;
@@ -100,7 +102,22 @@ export class Meal {
         for (let level of range(this.level, 10)) {
             totalCost += this.getMealLevelCost(level);
         }
+        return totalCost;
+    }
 
+    getCostsTillPurple = () => {
+        let totalCost = 0;
+        for (let level of range(this.level, 15)) {
+            totalCost += this.getMealLevelCost(level);
+        }
+        return totalCost;
+    }
+
+    getCostsTillVoid = () => {
+        let totalCost = 0;
+        for (let level of range(this.level, 21)) {
+            totalCost += this.getMealLevelCost(level);
+        }
         return totalCost;
     }
 }
@@ -422,6 +439,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const mealKitchenCosts = cooking?.meals.filter(meal => meal.bonusKey == "KitchC").reduce((sum, meal) => sum += meal.getBonus(), 0);
     const arenaBonusActive = breeding.hasBonus(7);
 
+    let totalContribution = 0;
     cooking.kitchens.forEach(kitchen => {
         kitchen.mealSpeed = kitchen.getMealSpeed(vialBonus, stampBonus, mealSpeedBonus, jewelBonus, cardBonus, kitchenEfficientBonus, jewelBonus2, diamonChef, achievements.find(achi => achi.index == 225)?.completed ?? false, achievements.find(achi => achi.index == 224)?.completed ?? false);
         kitchen.fireSpeed = kitchen.getFireSpeed(fireVialBonus, fireStampBonus, fireSpeedMealBonus, cardBonus, kitchenEfficientBonus, diamonChef);
@@ -434,12 +452,18 @@ export const updateCooking = (data: Map<string, any>) => {
         // if actively cooking
         if (kitchen.activeMeal != -1) {
             cooking.meals[kitchen.activeMeal].cookingContribution += kitchen.mealSpeed;
+            totalContribution += kitchen.mealSpeed;
         }
     })
 
     cooking.meals.filter(meal => meal.cookingContribution > 0).forEach(meal => {
         meal.timeToNext = ((meal.getMealLevelCost() - meal.count) * meal.cookReq) / meal.cookingContribution;
-        meal.timeToDiamond = ((meal.getCostsTillDiamond() - meal.count) * meal.cookReq) / meal.cookingContribution
+    });
+
+    cooking.meals.forEach(meal => {
+        meal.timeToDiamond = ((meal.getCostsTillDiamond() - meal.count) * meal.cookReq) / totalContribution;
+        meal.timeToPurple = ((meal.getCostsTillPurple() - meal.count) * meal.cookReq) / totalContribution;
+        meal.timeToVoid = ((meal.getCostsTillVoid() - meal.count) * meal.cookReq) / totalContribution;
     });
 
     populateDiscovery(cooking);
