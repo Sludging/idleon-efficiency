@@ -62,7 +62,8 @@ export class Stamp {
     }
 
     getGoldCostToMax = (hasBribe: boolean = false, blueFlavPercent: number = 0): number => {
-        return range(this.level, this.maxLevel).reduce((sum, level) => sum += this.getGoldCost(hasBribe, blueFlavPercent, level), 0);
+        const maxLevel = this.level == this.maxLevel ? this.level + this.data.upgradeInterval : this.maxLevel
+        return range(this.level, maxLevel).reduce((sum, level) => sum += this.getGoldCost(hasBribe, blueFlavPercent, level), 0);
     }
 
     getMaterialCost = (blueFlavPercent: number = 0): number => {

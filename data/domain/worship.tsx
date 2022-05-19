@@ -21,8 +21,10 @@ const SkullChargeMap: Record<string, number> = {
     "WorshipSkull4": 750,
     "WorshipSkull5": 1250,
     "WorshipSkull6": 1750,
-    "WorshipSkull7": 2500
+    "WorshipSkull7": 2500,
+    "WorshipSkull8": 1000,
 }
+
 
 const SkullSpeedMap: Record<string, number> = {
     "WorshipSkull1": 4,
@@ -31,7 +33,8 @@ const SkullSpeedMap: Record<string, number> = {
     "WorshipSkull4": 6,
     "WorshipSkull5": 7,
     "WorshipSkull6": 7,
-    "WorshipSkull7": 8
+    "WorshipSkull7": 8,
+    "WorshipSkull8": 2,
 }
 
 const totemNames: string[] = "Goblin_Gorefest Wakawaka_War Acorn_Assault Frosty_Firefight Clash_of_Cans Tower_Defence_6".split(" ");
