@@ -464,6 +464,12 @@ export const updateCooking = (data: Map<string, any>) => {
         meal.timeToDiamond = ((meal.getCostsTillDiamond() - meal.count) * meal.cookReq) / totalContribution;
         meal.timeToPurple = ((meal.getCostsTillPurple() - meal.count) * meal.cookReq) / totalContribution;
         meal.timeToVoid = ((meal.getCostsTillVoid() - meal.count) * meal.cookReq) / totalContribution;
+
+        // If this meal isn't being actively cooked, show time to next level using all kitchens.
+        if (meal.cookingContribution == 0) {
+            meal.timeToNext = ((meal.getMealLevelCost() - meal.count) * meal.cookReq) / totalContribution;
+        }
+        
     });
 
     populateDiscovery(cooking);
