@@ -1,3 +1,5 @@
+import { Lab } from "./lab";
+
 interface PlayerInfo {
     samples: {item: string, quantity: number}[]
     active: {item: string, quantity: number}[]
@@ -25,4 +27,18 @@ export default function parsePrinter(rawData: any[], charCount: number) {
         })
     }
     return toReturn;
+}
+
+export const updatePrinter = (data: Map<string, any>) => {
+    const printer = data.get("printer") as Printer;
+    const lab = data.get("lab") as Lab;
+
+    // if double printer
+    if (lab.bonuses[1].active) {
+        lab.playersInTubes.forEach(player => {
+            printer.playerInfo[player.playerID].active.forEach(sample => sample.quantity = sample.quantity * 2);
+        })
+    }
+
+    return printer;
 }

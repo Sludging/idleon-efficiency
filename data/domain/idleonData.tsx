@@ -15,7 +15,7 @@ import parseQuests from './quests';
 import parsePrayers from './prayers';
 import parseRefinery from './refinery';
 import parseSaltLick from './saltLick';
-import parsePrinter from './printer';
+import parsePrinter, { updatePrinter } from './printer';
 import updateDeathnote from './deathnote';
 import parseTaskboard from './tasks';
 import { Cloudsave } from './cloudsave';
@@ -31,6 +31,7 @@ import { parseCooking, updateCooking } from './cooking';
 import { parseLab, updateLab } from './lab';
 import { parseBreeding, updateBreeding } from './breeding';
 import { notUndefined } from '../utility';
+import parseSigils from './sigils';
 
 
 export const safeJsonParse = <T, >(doc: Cloudsave, key: string, emptyValue: T): T => {
@@ -116,6 +117,7 @@ const keyFunctionMap: Record<string, Function> = {
     "cooking": (doc: Cloudsave, charCount: number) => parseCooking(safeJsonParse(doc, "Cooking", []), safeJsonParse(doc, "Meals", [])),
     "lab": (doc: Cloudsave, charCount: number) => parseLab(safeJsonParse(doc, "Lab", [])),
     "breeding": (doc: Cloudsave, charCount: number) => parseBreeding(safeJsonParse(doc, "PetsStored", []), safeJsonParse(doc, "Pets", []), doc.get("OptLacc"), safeJsonParse(doc, "Territory", []), safeJsonParse(doc, "Breeding", [])),
+    "sigils": (doc: Cloudsave, charCount: number) => parseSigils(safeJsonParse(doc, "CauldronP2W", [])),
 }
 
 // ORDER IS IMPORTANT!
@@ -131,6 +133,7 @@ const postProcessingMap: Record<string, Function> = {
     "shrines": (doc: Cloudsave, accountData: Map<string, any>) => updateShrines(accountData),
     "worship": (doc: Cloudsave, accountData: Map<string, any>) => updateWorship(accountData),
     "players": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayers(accountData),
+    "printer": (doc: Cloudsave, accountData: Map<string, any>) => updatePrinter(accountData),
 }
 
 export const updateIdleonData = async (data: Cloudsave, charNames: string[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
