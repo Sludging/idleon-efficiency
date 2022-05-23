@@ -53,17 +53,10 @@ function RefineryDisplay() {
     const [taskboardData, setTaskboardData] = useState<TaskBoard>();
     const [lastUpdated, setLastUpdated] = useState<Date | undefined>();
     const [squirePowha, setSquirePowha] = useState<boolean>(false);
+    const [printer, setPrinter] = useState<Printer>();
     const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
 
-    // if ("CycleInitialTime" == t)
-    //                             return (
-    //                                 (s = 900 * Math.pow(4, Math.floor(s))),
-    //                                 (t = b.engine.getGameAttribute("DNSM")),
-    //                                 (t = null != d.AlchVials ? t.getReserved("AlchVials") : t.h.AlchVials),
-    //                                 (t = null != d.RefSpd ? t.getReserved("RefSpd") : t.h.RefSpd),
-    //                                 Math.ceil(s / ((1 + (parsenum(t) + w._customBlock_SaltLick(2)) / 100) * Math.max(1, w._customBlock_MainframeBonus(2))))
-    //                             );
     const cycleInfo = useMemo(() => {
         if (!refineryData) {
             return [];
@@ -157,8 +150,14 @@ function RefineryDisplay() {
             setAlchemyData(theData.get("alchemy"));
             setPlayerData(theData.get("players"));
             setTaskboardData(theData.get("taskboard"));
+            setPrinter(theData.get("printer"));
         }
     }, [appContext, refineryData]);
+
+    const getSample = (allSamples: { item: string, quantity: number }[], item: string) => {
+        const itemSamples = allSamples.filter(sample => sample.item == item).map(sample => sample.quantity);
+        return itemSamples.reduce((sum, sample) => sum += sample, 0);
+    }
 
     if (!refineryData || Object.entries(refineryData.salts).filter(([name, saltInfo]) => saltInfo.progress > 0).length == 0) {
         return (
@@ -199,7 +198,7 @@ function RefineryDisplay() {
                                 </Box>
                                 <Box direction="row" gap="small">
                                     <Box style={{ opacity: realCD <= 0 ? 1 : 0.5 }}>
-                                        <IconImage data={refineryTalent.getImageData()} scale={0.8}/>
+                                        <IconImage data={refineryTalent.getImageData()} scale={0.8} />
                                     </Box>
                                     {realCD > 0 && <TimeDown size={TimeDisplaySize.Small} addSeconds={realCD} resetToSeconds={72000} />}
                                     {realCD <= 0 && <Text>Skill is ready!</Text>}
@@ -299,21 +298,41 @@ function RefineryDisplay() {
                                     </Box>
                                     <Box pad="medium">
                                         <Box wrap align="start" gap="small" border={{ color: 'grey-1', side: 'right', size: '3px' }} fill>
-                                            <Text size="small">Cost per cycle</Text>
+                                            <Text size="small">Cost per hour</Text>
                                             <Box gap="xsmall">
                                                 {
                                                     info.baseCost && info.baseCost.map((costData, index) => {
                                                         const costItem = itemData?.find((item) => item.internalName == costData.item);
                                                         const itemCost = costData.quantity * info.getCostMulti(costData.item.includes("Refinery"), index <= saltMeritLevel);
+                                                        const cyclesPerHour = Math.ceil(3600 / cycleInfo[Math.floor(index / 3)].time);
+                                                        const isSalt = costItem?.internalName.includes("Refinery");
+                                                        let currentPrinting = 0;
+                                                        if (printer) {
+                                                            currentPrinting = getSample(printer?.playerInfo.flatMap(player => player.active), costData.item);
+                                                        }
                                                         if (costItem != undefined) {
                                                             return (
                                                                 <Box key={index} direction="row" align="center">
                                                                     <Box title={costItem.displayName}>
                                                                         <IconImage data={costItem.getImageData()} scale={0.8} />
                                                                     </Box>
-                                                                    <Box direction="row" gap="xsmall" align="center">
-                                                                        <Text size="small">{itemCost}</Text>
-                                                                    </Box>
+                                                                    {
+                                                                        isSalt ?
+                                                                            <Box direction="row" gap="xsmall" align="center">
+                                                                                <Text size="small">{nFormatter(itemCost * cyclesPerHour, "Smaller")}</Text>
+                                                                            </Box>
+                                                                            :
+                                                                            <TipDisplay
+                                                                                heading='Printing'
+                                                                                body={`Currently printing ${nFormatter(currentPrinting, "Smaller")}`}
+                                                                                direction={TipDirection.Left}
+                                                                                size="Small"
+                                                                            >
+                                                                                <Box direction="row" gap="xsmall" align="center">
+                                                                                    <Text color={currentPrinting > itemCost * cyclesPerHour ? 'green-1' : 'red'} size="small">{nFormatter(itemCost * cyclesPerHour, "Smaller")}</Text>
+                                                                                </Box>
+                                                                            </TipDisplay>
+                                                                    }
                                                                 </Box>
                                                             )
                                                         }
@@ -336,7 +355,7 @@ function RefineryDisplay() {
                                                             return (
                                                                 <Box key={index} direction="row" align="center">
                                                                     <Box title={costItem.displayName}>
-                                                                        <IconImage data={costItem.getImageData()} scale={0.8}/>
+                                                                        <IconImage data={costItem.getImageData()} scale={0.8} />
                                                                     </Box>
                                                                     <Box direction="row" gap="xsmall" align="center">
                                                                         <Text color={storageQuantity < resourceCostToMax ? 'accent-1' : ''} size="small">{nFormatter(resourceCostToMax)}</Text>
@@ -435,7 +454,7 @@ function SampleBox({ sample, activeItem, itemData }: { sample: { item: string, q
     return (
         <Box border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} height={{ min: '82px', max: '82px' }} direction="row" align="center" justify="center">
             {sample.item == "Blank" || !sample.item ?
-                <Box align="center"  width={{ max: '100px', min: '100px' }} height={{ min: '82px', max: '82px' }} justify='center'>
+                <Box align="center" width={{ max: '100px', min: '100px' }} height={{ min: '82px', max: '82px' }} justify='center'>
                     <Text size="xsmall" color="accent-3">Empty</Text>
                 </Box> :
                 <Box pad={{ vertical: 'small' }} align="center">
@@ -502,7 +521,7 @@ function PrinterDisplay() {
                                 </Box>
                                 <Box direction="row" gap="small">
                                     <Box style={{ opacity: realCD <= 0 ? 1 : 0.5 }}>
-                                        <IconImage data={printerTalent.getImageData()} scale={0.8}/>
+                                        <IconImage data={printerTalent.getImageData()} scale={0.8} />
                                     </Box>
                                     {realCD > 0 && <TimeDown size={TimeDisplaySize.Small} addSeconds={realCD} resetToSeconds={82000} />}
                                     {realCD <= 0 && <Text>Skill is ready!</Text>}
@@ -708,7 +727,7 @@ function ShrinesDisplay() {
                             <Box gap="small">
                                 <Box direction="row" align="center">
                                     <Box margin={{ right: 'small' }}>
-                                        <IconImage data={shrine.getImageData()} scale={0.7}/>
+                                        <IconImage data={shrine.getImageData()} scale={0.7} />
                                     </Box>
                                     <Text>{shrine.name}</Text>
                                 </Box>
