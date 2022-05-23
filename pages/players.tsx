@@ -114,16 +114,19 @@ function ShowSkills(props: SkillProps) {
         }
     }
 
+    const ccdMax = useMemo(() => {
+        return props.player.talents.find(talent => talent.skillIndex == 41)?.getBonus() ?? 0
+    }, [props])
+
     return (
         <Box pad={{ left: "large", top: "medium" }} gap="medium">
             <Text size='medium'>Skills</Text>
             <Grid
-                columns={['33%', '33%', '33%']}
+                columns={['25%', '25%', '25%', '25%']}
                 areas={[
-                    ['mining', 'fishing', 'trapping'],
-                    ['smithing', 'alchemy', 'construction'],
-                    ['chopping', 'catching', 'worship'],
-                    ['cooking', 'breeding', 'intellect'],
+                    ['mining', 'fishing', 'trapping', 'cooking'],
+                    ['smithing', 'alchemy', 'construction', 'breeding'],
+                    ['chopping', 'catching', 'worship', 'intellect'],
                 ]}
             >
                 {
@@ -132,13 +135,13 @@ function ShowSkills(props: SkillProps) {
                         return (
                             <Box key={`skill_${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} gridArea={`${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} direction="row" gap="medium" margin={{ right: 'small', bottom: 'medium' }}>
                                 <Box direction="row" align="center" gap="small">
-                                    <Box width={{ max: '36px', min: '36px' }}>
+                                    <Box width={{ max: '30px', min: '30px' }}>
                                         <Box className={getSkillClass(skillIndex)} />
                                     </Box>
                                     <Box gap="small">
                                         <Box direction="row" gap="small">
                                             <Text size="small">{skill.level}</Text>
-                                            {skillRank != undefined && <Text size="small">(Ranked {nth(skillRank + 1)})</Text>}
+                                            {skillRank != undefined && <Text size="xsmall">(Ranked {nth(skillRank + 1)})</Text>}
                                         </Box>
                                         <Meter
                                             size="small"
@@ -167,7 +170,7 @@ function ShowSkills(props: SkillProps) {
             {
                 props.player.classId == ClassIndex.Maestro &&
                 <Box gap="small">
-                    <Text>Current crystal cooldown reductions: (max is {nFormatter(props.player.talents.find(talent => talent.skillIndex == 41)?.getBonus() ?? 0, "Smaller")}%)</Text>
+                    <Text>Current crystal cooldown reductions: (max is {nFormatter(ccdMax, "Smaller")}%)</Text>
                     <Box direction="row" wrap>
                         {
                             Array.from(props.skillsMap).map(([skillIndex, skill]) => {
@@ -178,14 +181,14 @@ function ShowSkills(props: SkillProps) {
                                     crystalReduction = (1 - (skill.xpReq / skillXpReq)) * 100;
                                     if (crystalReduction > 0) {
                                         return (
-                                            <Box key={`ccd_${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} direction="row" gap="medium" margin={{ right: 'small', bottom: 'medium' }}>
+                                            <Box key={`ccd_${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} direction="row" gap="medium" margin={{ right: 'small', bottom: 'small' }}>
                                                 <Box direction="row" align="center" gap="small">
                                                     <Box width={{ max: '36px', min: '36px' }}>
                                                         <Box className={getSkillClass(skillIndex)} />
                                                     </Box>
                                                     <Box gap="small">
                                                         <Box direction="row" gap="small">
-                                                            <Text size="small">{nFormatter(crystalReduction, "Smaller")}%</Text>
+                                                            <Text color={ ccdMax == crystalReduction ? 'green' : ''} size="small">{nFormatter(crystalReduction, "Smaller")}%</Text>
                                                         </Box>
                                                     </Box>
                                                 </Box>
@@ -197,6 +200,7 @@ function ShowSkills(props: SkillProps) {
                             })
                         }
                     </Box>
+                    <Text size="xsmall">* Green color means the reduction is maxed.</Text>
                 </Box>
             }
         </Box>
