@@ -80,7 +80,8 @@ function RefineryDisplay() {
     }, [refineryData, saltLickData, alchemyData]);
 
     const squireInfo = useMemo(() => {
-        const squires = playerData?.filter(player => player.classId == ClassIndex.Squire);
+        const squires = playerData?.filter(player => (player.classId == ClassIndex.Squire || player.classId == ClassIndex.Divine_Knight));
+        console.log("SQUIRES", squires)
         return squires;
     }, [playerData])
 

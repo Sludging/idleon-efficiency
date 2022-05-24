@@ -2,6 +2,8 @@ import { GroupBy, lavaFunc, round } from "../utility";
 import { Player } from "./player";
 import { ClassIndex } from "./talents";
 
+
+
 export const familyBonusMapping = [
     "NO_FAMILY_BONUS _ _ txt _ _ txt".split(" "),
     "NO_FAMILY_BONUS 0 0 add _ _ txt".split(" "),
@@ -13,9 +15,9 @@ export const familyBonusMapping = [
     "+{_TOTAL_STR 1 5 intervalAdd _ _ txt".split(" "),
     "+{_WEAPON_POWER 25 100 decay _ _ txt".split(" "),
     "+{%_TOTAL_HP 40 100 decay _ _ txt".split(" "),
-    "BLOOD_BERSERKER _ _ txt _ _ txt".split(" "),
+    "+{%_TOTAL_DAMAGE 20 180 decay _ _ txt".split(" "),
     "DEATH_BRINGER _ _ txt _ _ txt".split(" "),
-    "DIVINE_KNIGHT _ _ txt _ _ txt".split(" "),
+    "+{%_WORLD_5_STUFF 25 100 decay _ _ txt".split(" "),
     "ROYAL_GUARDIAN _ _ txt _ _ txt".split(" "),
     "FILLER _ _ txt _ _ txt".split(" "),
     "FILLER _ _ txt _ _ txt".split(" "),
@@ -25,10 +27,10 @@ export const familyBonusMapping = [
     "+{_TOTAL_AGI 1 5 intervalAdd _ _ txt".split(" "),
     "+{%_EXP_WHEN_FIGHT|MONSTERS_ACTIVELY 38 100 decay _ _ txt".split(" "),
     "+{%_EFFICIENCY|FOR_ALL_SKILLS 30 100 decay _ _ txt".split(" "),
-    "SIEGE_BREAKER _ _ txt _ _ txt".split(" "),
-    "MAYHEIM _ _ txt _ _ txt".split(" "),
-    "WIND_WALKER _ _ txt _ _ txt".split(" "),
-    "BEAST_MASTER _ _ txt _ _ txt".split(" "),
+    "+{%_WORLD_5_STUFF 25 100 decay _ _ txt".split(" "),
+    "MAYHEIM 25 100 decay _ _ txt".split(" "),
+    "WIND_WALKER 25 100 decay _ _ txt".split(" "),
+    "+{%_ALL_SKILL|AFK_GAINS 5 180 decay _ _ txt".split(" "),
     "FILLER _ _ txt _ _ txt".split(" "),
     "FILLER _ _ txt _ _ txt".split(" "),
     "FILLER _ _ txt _ _ txt".split(" "),
@@ -37,14 +39,14 @@ export const familyBonusMapping = [
     "+{_TOTAL_WIS 1 5 intervalAdd _ _ txt".split(" "),
     "+{_STAR_TAB|TALENT_POINTS 1 6 intervalAdd _ _ txt".split(" "),
     "{#@HIGHER_BONUSES|FROM_GOLDEN_FOODS 0.4 100 decayMulti _ _ txt".split(" "),
-    "ELEMENTAL_SORCERER _ _ txt _ _ txt".split(" "),
-    "SPIRITUAL_MONK _ _ txt _ _ txt".split(" "),
-    "BUBONIC_CONJUROR _ _ txt _ _ txt".split(" "),
-    "ARCANE_CULTIST _ _ txt _ _ txt".split(" "),
+    "+{%_WORLD_5_STUFF 25 100 decay _ _ txt".split(" "),
+    "SPIRITUAL_MONK 25 100 decay _ _ txt".split(" "),
+    "+{%_ALL_STAT.|STR,_AGI,_WIS,_LUK. 5 180 decay _ _ txt".split(" "),
+    "ARCANE_CULTIST 25 100 decay _ _ txt".split(" "),
     "FILLER _ _ txt _ _ txt".split(" "),
     "FILLER _ _ txt _ _ txt".split(" "),
     "FILLER _ _ txt _ _ txt".split(" "),
-    "FILLER _ _ txt _ _ txt".split(" "),
+    "FILLER _ _ txt _ _ txt".split(" ")
 ];
 
 export const classAccountBonus = [
@@ -89,7 +91,7 @@ export const classAccountBonus = [
     ["FILLER", "129"],
     ["FILLER", "129"],
     ["FILLER", "129"],
-    ["FILLER", "129"],
+    ["FILLER", "129"]
 ];
 
 export const FamilyBonusRelations: Record<ClassIndex, ClassIndex[]> = {
@@ -101,28 +103,28 @@ export const FamilyBonusRelations: Record<ClassIndex, ClassIndex[]> = {
     [ClassIndex.Warrior]: [],
     [ClassIndex.Barbarian]: [ClassIndex.Warrior],
     [ClassIndex.Squire]: [ClassIndex.Warrior],
-    [ClassIndex.Blood_Berserker]: [],
+    [ClassIndex.Blood_Berserker]: [ClassIndex.Warrior, ClassIndex.Barbarian],
     [ClassIndex.Death_Bringer]: [],
-    [ClassIndex.Divine_Knight]: [],
+    [ClassIndex.Divine_Knight]: [ClassIndex.Warrior, ClassIndex.Squire],
     [ClassIndex.Royal_Guardian]: [],
     [ClassIndex.Archer]: [],
     [ClassIndex.Bowman]: [ClassIndex.Archer],
     [ClassIndex.Hunter]: [ClassIndex.Archer],
-    [ClassIndex.Siege_Breaker]: [],
+    [ClassIndex.Siege_Breaker]: [ClassIndex.Archer, ClassIndex.Bowman],
     [ClassIndex.Mayheim]: [],
     [ClassIndex.Wind_Walker]: [],
-    [ClassIndex.Beast_Master]: [],
+    [ClassIndex.Beast_Master]: [ClassIndex.Archer, ClassIndex.Hunter],
     [ClassIndex.Mage]: [],
     [ClassIndex.Shaman]: [ClassIndex.Mage],
     [ClassIndex.Wizard]: [ClassIndex.Mage],
-    [ClassIndex.Elemental_Sorcerer]: [],
+    [ClassIndex.Elemental_Sorcerer]: [ClassIndex.Mage, ClassIndex.Wizard],
     [ClassIndex.Spiritual_Monk]: [],
-    [ClassIndex.Bubonic_Conjuror]: [],
+    [ClassIndex.Bubonic_Conjuror]:  [ClassIndex.Mage, ClassIndex.Shaman],
     [ClassIndex.Arcane_Cultist]: [],
 }
 
 export class FamilyBonus {
-    constructor(public bonus: string, public value: number) {}
+    constructor(public bonus: string, public value: number) { }
 
     getBonusText = (rounding: boolean = true) => {
         return this.bonus.replace(/_/g, " ").replace("|", " ").replace("#@", "x ").replace(/{/g, this.getBonus(rounding).toString());
