@@ -210,9 +210,10 @@ function Cooking() {
                                                     {meal.cookingContribution > 0 && <Text>Cooking speed: {nFormatter(meal.cookingContribution, "Smaller")}</Text>}
                                                     {meal.timeToNext > 0 && <Text>Time to next level: {toTime(meal.timeToNext * 3600)}</Text>}
                                                     {meal.timeToDiamond > 0 && <Text>Time to Diamond: {toTime(meal.timeToDiamond * 3600)}</Text>}
-                                                    {meal.timeToPurple > 0 && <Text>Time to Purple: {toTime(meal.timeToPurple * 3600)}</Text>}
-                                                    {meal.timeToVoid > 0 && <Text>Time to Void: {toTime(meal.timeToVoid * 3600)}</Text>}
+                                                    {meal.timeToDiamond <= 0 && meal.timeToPurple > 0 && <Text>Time to Purple: {toTime(meal.timeToPurple * 3600)}</Text>}
+                                                    {meal.timeToPurple <= 0 && meal.timeToVoid > 0 && <Text>Time to Void: {toTime(meal.timeToVoid * 3600)}</Text>}
                                                 </Box>
+                                                <Text size="xsmall">* The time is calculated assuming all kitchens are cooking the same meal.</Text>
                                             </Box>
                                         }
                                         direction={TipDirection.Down}
