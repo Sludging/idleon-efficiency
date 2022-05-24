@@ -1213,10 +1213,21 @@ function ZowInfo({ player }: { player: Player }) {
         return [mapId, count]
     });
 
+    const chowCount = Array.from(player.killInfo.entries()).filter(([_, count]) => count > 1000000).length;
+    const toChow = Array.from(player.killInfo.entries()).map(([mapId, count]) => {
+        const mapData = MapInfo.find(map => map.id == mapId);
+        if (mapData?.enemy === undefined || count > 1000000 || ignoreArea(mapData.area) || mapData.area == "Z") {
+            return null;
+        }
+        return [mapId, count]
+    });
+
     return (
         <Box pad="medium" gap="medium" fill>
-            <Text size='medium'>Zow Info</Text>
+            <Box direction="row" gap="small">
             <Text>Current zow count: {zowCount}</Text>
+            <Text>Current chow count: {chowCount}</Text>
+            </Box>
             <Heading level="3" margin={{ bottom: '1px', top: '1px' }} >To be zowed:</Heading>
             <Box direction="row" wrap>
                 {
@@ -1225,7 +1236,29 @@ function ZowInfo({ player }: { player: Player }) {
                             const mapData = MapInfo.find(map => map.id == data[0]);
                             const enemyData = EnemyInfo.find(enemy => enemy.details.internalName == mapData?.enemy);
                             return (
-                                <Box key={index} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} align="center" pad="small">
+                                <Box key={index} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '75px', min: '75px' }} align="center" pad="small">
+                                    {enemyData &&
+                                        <Box title={mapData?.area}>
+                                            <IconImage data={enemyData.getImageData()} />
+                                        </Box>
+                                    }
+                                    <Text>{nFormatter(data[1])}</Text>
+                                </Box>
+                            )
+                        }
+                    })
+                }
+            </Box>
+            
+            <Heading level="3" margin={{ bottom: '1px', top: '1px' }} >To be chowed:</Heading>
+            <Box direction="row" wrap>
+                {
+                    toChow.map((data, index) => {
+                        if (data) {
+                            const mapData = MapInfo.find(map => map.id == data[0]);
+                            const enemyData = EnemyInfo.find(enemy => enemy.details.internalName == mapData?.enemy);
+                            return (
+                                <Box key={index} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '75px', min: '75px' }} align="center" pad="small">
                                     {enemyData &&
                                         <Box title={mapData?.area}>
                                             <IconImage data={enemyData.getImageData()} />
@@ -1291,7 +1324,7 @@ function PlayerTab({ player }: PlayerTabProps) {
             }
             setPoExtra(theData.get("POExtra"));
         }
-        if (player.classId != ClassIndex.Barbarian && index == 11) {
+        if ((player.classId != ClassIndex.Barbarian && player.classId != ClassIndex.Blood_Berserker) && index == 11) {
             setIndex(1);
         }
     }, [appContext, player]);
@@ -1311,7 +1344,7 @@ function PlayerTab({ player }: PlayerTabProps) {
                     <SpecialButton isActive={index == 9} clickHandler={() => onActive(9)} text={"Inventory"} />
                     <SpecialButton isActive={index == 10} clickHandler={() => onActive(10)} text={"Obols"} />
                     {
-                        player.classId == ClassIndex.Barbarian &&
+                        (player.classId == ClassIndex.Barbarian || player.classId == ClassIndex.Blood_Berserker) &&
                         <SpecialButton isActive={index == 11} clickHandler={() => onActive(11)} text={"Zow"} />
                     }
                 </Box>
