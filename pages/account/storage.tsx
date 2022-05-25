@@ -100,7 +100,7 @@ function StorageDisplay() {
                                             <Box>
                                                 <IconImage data={item.getImageData()} scale={item.getImageData().width > 36 ? 0.5 : 1}/>
                                             </Box>
-                                            <Text size="small">{nFormatter(item.count)}</Text>
+                                            <Text color={item.count > 1e7 ? 'green-1' : ''} size="small">{nFormatter(item.count)}</Text>
                                         </Box>
                                     </Box>
                                 ))
@@ -119,7 +119,7 @@ function StorageDisplay() {
                                         <Box>
                                             <IconImage data={item.getImageData()} scale={item.getImageData().width > 36 ? 0.5 : 1} />
                                         </Box>
-                                        <Text size="small">{nFormatter(item.count)}</Text>
+                                        <Text color={item.count > 1e7 ? 'green-1' : ''} size="small">{nFormatter(item.count)}</Text>
                                     </Box>
                                 </Box>
                             ))
