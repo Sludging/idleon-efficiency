@@ -81,7 +81,6 @@ function RefineryDisplay() {
 
     const squireInfo = useMemo(() => {
         const squires = playerData?.filter(player => (player.classId == ClassIndex.Squire || player.classId == ClassIndex.Divine_Knight));
-        console.log("SQUIRES", squires)
         return squires;
     }, [playerData])
 
@@ -249,7 +248,7 @@ function RefineryDisplay() {
                         return (
                             <ShadowBox key={index} background="dark-1">
                                 <Grid columns={size == "small" ? ["50%", "50%"] : ["15%", "20%", "25%", "20%", "20%"]}>
-                                    <Box key={index} direction="row" gap="medium" align="center" background="dark-2" pad="medium" justify="center" fill>
+                                    <Box direction="row" gap="medium" align="center" background="dark-2" pad="medium" justify="center" fill>
                                         <Box align="center">
                                             <Box title={saltItem.displayName}>
                                                 <IconImage data={saltItem.getImageData()} scale={2} />
@@ -302,7 +301,7 @@ function RefineryDisplay() {
                                             <Text size="small">Cost per hour</Text>
                                             <Box gap="xsmall">
                                                 {
-                                                    info.baseCost && info.baseCost.map((costData, index) => {
+                                                    info.baseCost && info.baseCost.map((costData, costIndex) => {
                                                         const costItem = itemData?.find((item) => item.internalName == costData.item);
                                                         const itemCost = costData.quantity * info.getCostMulti(costData.item.includes("Refinery"), index <= saltMeritLevel);
                                                         const cyclesPerHour = Math.ceil(3600 / cycleInfo[Math.floor(index / 3)].time);
@@ -313,7 +312,7 @@ function RefineryDisplay() {
                                                         }
                                                         if (costItem != undefined) {
                                                             return (
-                                                                <Box key={index} direction="row" align="center">
+                                                                <Box key={costIndex} direction="row" align="center">
                                                                     <Box title={costItem.displayName}>
                                                                         <IconImage data={costItem.getImageData()} scale={0.8} />
                                                                     </Box>
@@ -347,14 +346,14 @@ function RefineryDisplay() {
                                             <Text size="small">Cost to rank up</Text>
                                             <Box gap="xsmall">
                                                 {
-                                                    info.baseCost && info.baseCost.map((costData, index) => {
+                                                    info.baseCost && info.baseCost.map((costData, costIndex) => {
                                                         const costItem = itemData?.find((item) => item.internalName == costData.item);
                                                         const itemCost = costData.quantity * info.getCostMulti(costData.item.includes("Refinery"), index <= saltMeritLevel);
                                                         const storageQuantity = storageItems.find(x => x.internalName == costData.item)?.count ?? 0;
                                                         const resourceCostToMax = info.getCyclesTillNextRank() * itemCost;
                                                         if (costItem != undefined) {
                                                             return (
-                                                                <Box key={index} direction="row" align="center">
+                                                                <Box key={costIndex} direction="row" align="center">
                                                                     <Box title={costItem.displayName}>
                                                                         <IconImage data={costItem.getImageData()} scale={0.8} />
                                                                     </Box>
