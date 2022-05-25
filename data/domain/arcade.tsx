@@ -3,7 +3,32 @@ import { Achievement } from "./achievements";
 import { ImageData } from "./imageData";
 
 export const ARCADE_MAX_LEVEL: number = 100
-const achivementsWithBallBonus: number[][] = [[40, 3], [46, 1], [47, 1], [49, 1], [541], [76, 2], [77, 1], [80, 3], [83, 2], [98, 2], [103, 2], [115, 3], [116, 1], [140, 1], [146, 2], [151, 2], [154, 1], [160, 3], [171, 4]];
+const achivementsWithBallBonus: number[][] = [
+    [40, 3],
+    [46, 1],
+    [47, 1],
+    [49, 1],
+    [54, 1],
+    [76, 2],
+    [77, 1],
+    [80, 3],
+    [83, 2],
+    [98, 2],
+    [103, 2],
+    [115, 3],
+    [116, 1],
+    [140, 1],
+    [146, 2],
+    [151, 2],
+    [154, 1],
+    [160, 3],
+    [171, 4],
+    [213, 3],
+    [227, 2],
+    [229, 2],
+    [232, 2],
+    [234, 2]
+]
 
 interface ArcadeBonusInfo {
     effect: string

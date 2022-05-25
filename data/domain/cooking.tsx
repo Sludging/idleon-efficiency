@@ -66,6 +66,9 @@ export class Meal {
     timeToPurple: number = 0;
     timeToVoid: number = 0;
 
+    // Void plate achivement
+    reducedCostToUpgrade: boolean = false;
+
     constructor(public mealIndex: number, data: MealInfo) {
         this.name = data.name;
         this.cookReq = data.cookingReq;
@@ -93,7 +96,8 @@ export class Meal {
     }
 
     getMealLevelCost = (level: number = this.level) => {
-        const baseMath = 10 + (level + Math.pow(level, 2));
+        const reductionMultipier = this.reducedCostToUpgrade ? 1 / 1.1 : 1;
+        const baseMath = reductionMultipier * (10 + (level + Math.pow(level, 2)));
         return baseMath * Math.pow(1.2 + 0.05 * level, level);
     }
 
@@ -417,7 +421,11 @@ export const updateCooking = (data: Map<string, any>) => {
     const achievements = data.get("achievements") as Achievement[];
 
     const jewelMealBonus = mainframe.jewels[16].active ? mainframe.jewels[16].getBonus() : 0; // TODO: Remove hardcoding
-    cooking.meals.forEach(meal => meal.mainframeBonus = jewelMealBonus);
+    const voidPlateAchiev = achievements[233].completed;
+    cooking.meals.forEach(meal => {
+        meal.mainframeBonus = jewelMealBonus
+        meal.reducedCostToUpgrade = voidPlateAchiev;
+    });
 
     // Meal speed
     const vialBonus = alchemy.vials.filter(vial => vial.description.includes("Meal Cooking Speed")).reduce((sum, vial) => sum += vial.getBonus(), 0);
@@ -441,7 +449,7 @@ export const updateCooking = (data: Map<string, any>) => {
 
     let totalContribution = 0;
     cooking.kitchens.forEach(kitchen => {
-        kitchen.mealSpeed = kitchen.getMealSpeed(vialBonus, stampBonus, mealSpeedBonus, jewelBonus, cardBonus, kitchenEfficientBonus, jewelBonus2, diamonChef, achievements.find(achi => achi.index == 225)?.completed ?? false, achievements.find(achi => achi.index == 224)?.completed ?? false);
+        kitchen.mealSpeed = kitchen.getMealSpeed(vialBonus, stampBonus, mealSpeedBonus, jewelBonus, cardBonus, kitchenEfficientBonus, jewelBonus2, diamonChef, achievements[225].completed, achievements[224].completed);
         kitchen.fireSpeed = kitchen.getFireSpeed(fireVialBonus, fireStampBonus, fireSpeedMealBonus, cardBonus, kitchenEfficientBonus, diamonChef);
         kitchen.recipeLuck = kitchen.getLuck();
 
