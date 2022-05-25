@@ -19,6 +19,7 @@ import { Breeding as BreedingDomain, petArenaBonuses, waveReqs } from '../../dat
 import { Cooking } from '../../data/domain/cooking';
 import { EnemyInfo } from '../../data/domain/enemies';
 import { GemStore } from '../../data/domain/gemPurchases';
+import { TaskBoard } from '../../data/domain/tasks';
 import { nFormatter } from '../../data/utility';
 
 function TerritoryDisplay() {
@@ -208,11 +209,13 @@ function EggDisplay() {
     const capacity = useMemo(() => {
         const theData = appContext.data.getData();
         const gemStore = theData.get("gems") as GemStore;
+        const taskBoard = theData.get("taskboard") as TaskBoard;
 
         if (gemStore && breeding) {
             const eggCapacityUpgrade = gemStore.purchases.find(purchase => purchase.itemName == "Royal Egg Cap")?.pucrhased ?? 0;
             const breedingUpgradeLevel = breeding?.upgrade.find(upgrade => upgrade.data.upgradeName == "Egg Capacity")?.level ?? 0;
-            return 3 + eggCapacityUpgrade + breedingUpgradeLevel;
+            const eggMerit = taskBoard.merits.find(merit => merit.descLine1.includes("egg capacity in the Nest"));
+            return 3 + eggCapacityUpgrade + breedingUpgradeLevel + (eggMerit ? eggMerit.level * eggMerit.bonusPerLevel : 0);
         }
         return 0;
     }, [breeding, appContext]);

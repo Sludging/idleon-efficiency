@@ -1,4 +1,5 @@
 import { nFormatter } from "../utility";
+import { Achievement } from "./achievements";
 import { Alchemy } from "./alchemy";
 import { Cooking } from "./cooking";
 import { ImageData } from "./imageData";
@@ -314,8 +315,8 @@ export class Breeding {
         return this.arenaWave >= waveReqs[bonusNumber];
     }
 
-    setTimeForEgg = (labBonus: number, mealBonus: number, alchemyBonus: number) => {
-        this.totalEggTime = 7200 / (1 + (labBonus + (mealBonus + alchemyBonus)) / 100);
+    setTimeForEgg = (labBonus: number, mealBonus: number, alchemyBonus: number, achivementBonus: number) => {
+        this.totalEggTime = 7200 / (1 + (labBonus + (mealBonus + alchemyBonus + achivementBonus)) / 100);
     }
 
     getStatRange = () => {
@@ -428,11 +429,13 @@ export const updateBreeding = (data: Map<string, any>) => {
     const lab = data.get("lab") as Lab;
     const cooking = data.get("cooking") as Cooking;
     const players = data.get("players") as Player[];
+    const achievements = data.get("achievements") as Achievement[];
 
     const alchemyEggTimeBonus = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).find(bubble => bubble.name == "Egg Ink")?.getBonus() ?? 0;
     const mealEggTimeBonus = cooking.meals.filter(meal => meal.bonusKey == "TimeEgg").reduce((sum, meal) => sum += meal.getBonus(), 0);
     const mainframeBonus = lab.jewels.find(jewel => jewel.active && jewel.data.description == "Reduces egg incubation time")?.getBonus() ?? 0;
-    breeding.setTimeForEgg(mainframeBonus, mealEggTimeBonus, alchemyEggTimeBonus);
+    const achivementEggBonus = achievements[220].completed ? 10 : 0;
+    breeding.setTimeForEgg(mainframeBonus, mealEggTimeBonus, alchemyEggTimeBonus, achivementEggBonus);
 
     // Breeding level is universal, so just get it from the first player.
     breeding.skillLevel = players[0].skills.get(SkillsIndex.Breeding)?.level ?? 0;
