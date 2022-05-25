@@ -234,6 +234,11 @@ function EggDisplay() {
             </Box>
         )
     }
+
+    if (breeding.territory.filter(territory => territory.unlocked).length == 0) {
+        return null;
+    }
+
     return (
         <Box gap="small">
             <Text size="xsmall">* New eggs will only show up after the cloud save updates.</Text>
@@ -241,10 +246,13 @@ function EggDisplay() {
                 <Box direction="row" align="center">
                 {
                     [...Array(capacity)].map((_, index) => {
+                        if (breeding.eggs.length < index) {
+                            return;
+                        }
                         return (
                             <Box key={`egg_${index}`} border={{ color: 'grey-1', side: 'all', size: '2px' }} align="center">
                                 {
-                                    breeding.eggs[index].rarity > 0 ?
+                                    breeding.eggs[index]?.rarity ?? 0 > 0 ?
                                     <Box key={index}>
                                         <IconImage data={breeding.eggs[index].getImageData()} />
                                     </Box>
