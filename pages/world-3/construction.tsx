@@ -160,7 +160,7 @@ function RefineryDisplay() {
         return itemSamples.reduce((sum, sample) => sum += sample, 0);
     }
 
-    if (!refineryData || Object.entries(refineryData.salts).filter(([name, saltInfo]) => saltInfo.progress > 0).length == 0) {
+    if (!refineryData || Object.entries(refineryData.salts).filter(([name, saltInfo]) => saltInfo.rank > 0).length == 0) {
         return (
             <Box align="center" pad="medium">
                 <Heading level='3'>Come back when you unlocked this!</Heading>
