@@ -14,7 +14,7 @@ export default function parseStorage(doc: Cloudsave, playerNames: string[], allI
     
     const storage = new Storage();
     chestOrder.forEach((item, index) => {
-        const itemData = allItems.find(x => x.internalName == item)?.duplicate() ?? new Item({ internalName: item, displayName: item, Type: "Misc"});
+        const itemData = allItems.find(x => x.internalName == item)?.duplicate() ?? Item.emptyItem(item);
         itemData.count = chestQuantity[index];
         storage.chest.push(itemData);
     });
@@ -25,7 +25,7 @@ export default function parseStorage(doc: Cloudsave, playerNames: string[], allI
         const inventoryQuantity: number[] = doc.get(`ItemQTY_${index}`);
         const stoneData: Record<number,StoneProps> = JSON.parse(doc.get(`IMm_${index}`)); 
         inventoryOrder.forEach((item, index) => {
-            const itemData = allItems.find(x => x.internalName == item)?.duplicate() ?? new Item({ internalName: item, displayName: item, Type: "Misc"});
+            const itemData = allItems.find(x => x.internalName == item)?.duplicate() ?? Item.emptyItem(item);
             itemData.count = inventoryQuantity[index];
             playerInventory.push(itemData);
         });

@@ -1,7 +1,8 @@
-import { Building, initBuildings } from "./buildings";
+import { Building } from "./buildings";
+import { initBuildingRepo } from "./data/BuildingRepo";
 
 export class Construction {
-    buildings: Building[] = initBuildings();
+    buildings: Building[];
     buildingSlots: number[] = [-1,-1,-1,-1,-1,-1,-1,-1];
     cogProgress: { name: string, progress: number}[] = [
         { name: "Nooby", progress: 0},
@@ -9,6 +10,10 @@ export class Construction {
         { name: "Superb", progress: 0},
         { name: "Ultimate", progress: 0},
     ];
+
+    constructor() {
+        this.buildings = Building.fromBase(initBuildingRepo());
+    }
 }
 
 export default function parseConstruction(towerData: number[]) {

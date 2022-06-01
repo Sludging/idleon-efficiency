@@ -356,7 +356,7 @@ export const parseLab = (labData: number[][]) => {
     })
 
     // Figure out what chips players have.
-    labData.slice(1, 10).forEach((playerChips, index) => {
+    labData.slice(1, 11).forEach((playerChips, index) => {
         lab.playerChips[index] = playerChips.filter(chip => chip != -1).map(chip => lab.chips[chip]);
     });
 
@@ -377,7 +377,7 @@ const _calculatePlayersLineWidth = (lab: Lab, cooking: Cooking, breeding: Breedi
     if (lab.playersInTubes.length > 0) {
         const pxMealBonus = cooking?.meals.filter(meal => meal.bonusKey == "PxLine").reduce((sum, meal) => sum += meal.getBonus(false, mealBonus), 0) ?? 0;
         const linePctMealBonus = cooking?.meals.filter(meal => meal.bonusKey == "LinePct").reduce((sum, meal) => sum += meal.getBonus(false, mealBonus), 0) ?? 0;
-        const passiveCardBonus = cards?.filter(card => card.effect.includes("Line Width")).reduce((sum, card) => sum += card.getBonus(), 0) ?? 0;
+        const passiveCardBonus = cards?.filter(card => card.data.effect.includes("Line Width")).reduce((sum, card) => sum += card.getBonus(), 0) ?? 0;
         const petArenaBonus = breeding.hasBonus(13) ? 20 : 0;
         const gemTubes = (gemStore?.purchases.find(purchase => purchase.no == 123)?.pucrhased ?? 0) * 2;
 

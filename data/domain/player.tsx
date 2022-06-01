@@ -499,7 +499,7 @@ const keyFunctionMap: Record<string, Function> = {
         player.class = ClassIndex[doc.get(`CharacterClass_${player.playerID}`)]?.replace(/_/g, " ") || "New Class?";
         player.classId = doc.get(`CharacterClass_${player.playerID}`) as ClassIndex;
     },
-    "monster": (doc: Cloudsave, player: Player) => { player.currentMonster = EnemyInfo.find(enemy => enemy.details.internalName == doc.get(`AFKtarget_${player.playerID}`))?.details.Name || doc.get(`AFKtarget_${player.playerID}`); },
+    "monster": (doc: Cloudsave, player: Player) => { player.currentMonster = EnemyInfo.find(enemy => enemy.id == doc.get(`AFKtarget_${player.playerID}`))?.details.Name || doc.get(`AFKtarget_${player.playerID}`); },
     "map": (doc: Cloudsave, player: Player) => parseMap(doc.get(`CurrentMap_${player.playerID}`), player),
     "starsigns": (doc: Cloudsave, player: Player) => parseStarSigns(doc.get(`PVtStarSign_${player.playerID}`), player),
     "money": (doc: Cloudsave, player: Player) => { player.money = doc.get(`Money_${player.playerID}`) },
@@ -631,7 +631,7 @@ const parseStarSigns = (starSigns: string, player: Player) => {
 
 const parseMap = (currentMap: number, player: Player) => {
     player.currentMapId = currentMap;
-    player.currentMap = MapInfo.find(map => map.id == currentMap)?.area || "New Map?";
+    player.currentMap = MapInfo[currentMap].data.map.name;
 }
 
 const parseStats = (stats: number[], lvZero: number[], skillXP: Array<number>, skillXPReqs: Array<number>, player: Player) => {
