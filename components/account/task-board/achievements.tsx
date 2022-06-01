@@ -13,7 +13,7 @@ function Achivements({ worldIndex }: { worldIndex: number }) {
 
     const achievementsToShow = useMemo(() => {
         if (achievementData) {
-            return achievementData.filter(x => x.name != "FILLERZZZ ACH" && x.worldLetter == worldLetter && x.visualIndex != -1).sort((a, b) => a.visualIndex - b.visualIndex);
+            return achievementData.filter(x => x.data.name != "FILLERZZZ ACH" && x.worldLetter == worldLetter && x.visualIndex != -1).sort((a, b) => a.visualIndex - b.visualIndex);
         }
         return [];
     }, [achievementData, worldLetter])
@@ -44,33 +44,35 @@ function Achivements({ worldIndex }: { worldIndex: number }) {
                 size: 'auto',
             }} fill>
                 {
-                    achievementsToShow.map((achievement, index) => (
-                        <Box pad="small" key={`achievement_${index}`} direction="row" gap="large">
-                            <Tip
-                                plain
-                                content={
-                                    <Box pad="small" gap="small" background="white" width={{ max: 'medium' }}>
-                                        <Text size={size == "small" ? 'small' : ''} weight="bold">{achievement.name}</Text>
-                                        <hr style={{ width: "100%" }} />
-                                        {!achievement.completed && achievement.quantity > 1 && <Text>Progress: {achievement.currentCount}/{achievement.quantity}</Text>}
-                                        {!achievement.completed && achievement.currentCount > 1 && <Text>Progress: {achievement.currentCount}</Text>}
-                                        <Text>Requirement: {achievement.desc}</Text>
-                                        <Text>Reward: {achievement.reward}</Text>
-                                    </Box>
-                                }
-                                dropProps={{ align: { top: 'bottom' } }}
-                            >
-                                <Stack fill>
-                                    <Box style={{ opacity: achievement.completed ? 1 : 0.3 }}>
-                                        <IconImage data={achievement.getImageData()} />
-                                    </Box>
-                                    {!achievement.completed && achievement.quantity > 1 && size != "small" && <Text>{achievement.currentCount}/{achievement.quantity}</Text>}
-                                    {!achievement.completed && achievement.currentCount > 1 && size != "small" && <Text>{achievement.currentCount}</Text>}
-                                </Stack>
-                            </Tip>
+                    achievementsToShow.map((achievement, index) => {
+                        return (
+                            <Box pad="small" key={`achievement_${index}`} direction="row" gap="large">
+                                <Tip
+                                    plain
+                                    content={
+                                        <Box pad="small" gap="small" background="white" width={{ max: 'medium' }}>
+                                            <Text size={size == "small" ? 'small' : ''} weight="bold">{achievement.data.name}</Text>
+                                            <hr style={{ width: "100%" }} />
+                                            {!achievement.completed && achievement.data.qty > 1 && <Text>Progress: {achievement.currentCount}/{achievement.data.qty}</Text>}
+                                            {!achievement.completed && achievement.currentCount > 1 && <Text>Progress: {achievement.currentCount}</Text>}
+                                            <Text>Requirement: {achievement.data.desc}</Text>
+                                            <Text>Reward: {achievement.data.rewards}</Text>
+                                        </Box>
+                                    }
+                                    dropProps={{ align: { top: 'bottom' } }}
+                                >
+                                    <Stack fill>
+                                        <Box style={{ opacity: achievement.completed ? 1 : 0.3 }}>
+                                            <IconImage data={achievement.getImageData()} />
+                                        </Box>
+                                        {!achievement.completed && achievement.data.qty > 1 && size != "small" && <Text>{achievement.currentCount}/{achievement.data.qty}</Text>}
+                                        {!achievement.completed && achievement.currentCount > 1 && size != "small" && <Text>{achievement.currentCount}</Text>}
+                                    </Stack>
+                                </Tip>
 
-                        </Box>
-                    ))
+                            </Box>
+                        )
+                    })
                 }
             </Grid>
         </ShadowBox>
