@@ -135,11 +135,12 @@ export const playerInventoryBagMapping = [
     ["102", "1", "InvBag102"],
     ["103", "1", "InvBag103"],
     ["109", "1", "InvBag109"],
+    ["111", "1", "InvBag111"],
     ["104", "1", "InvBag104"],
     ["105", "1", "InvBag105"],
     ["106", "1", "InvBag106"],
     ["107", "1", "InvBag107"],
-    ["108", "0", "InvBag108"],
+    ["108", "1", "InvBag108"]
 ];
 
 export const CapacityConst = {
@@ -302,16 +303,16 @@ const capacityToBagMapping: Record<string, Record<number, string>> = {
 
 interface CapacityProps {
     allCapBonuses: number,
-    stampMatCapBonus: number, 
-    gemsCapacityBought: number, 
-    stampAllCapBonus: number, 
-    extraBagsLevel: number, 
+    stampMatCapBonus: number,
+    gemsCapacityBought: number,
+    stampAllCapBonus: number,
+    extraBagsLevel: number,
     starSignExtraCap: number
 }
 
 
 class Bag {
-    constructor(public name: string, public capacity: number, public displayName?: string, public skill?: SkillsIndex, ) { }
+    constructor(public name: string, public capacity: number, public displayName?: string, public skill?: SkillsIndex,) { }
 
     getImageData = (): ImageData => {
         if (Object.keys(capacityToBagMapping).includes(this.name)) {
@@ -344,16 +345,16 @@ class Bag {
         if (this.skill != undefined || this.name == "Foods") {
             return this.getSkillCapacity(props.allCapBonuses, props.gemsCapacityBought, props.stampMatCapBonus, props.stampAllCapBonus, props.starSignExtraCap)
         }
-        
+
         return this.capacity;
     }
 
-    
+
     private getSkillCapacity = (allCapBonuses: number = 0, gemCarryCap: number = 0, skillCapstamp: number = 0, allCapStamp: number = 0, starSign: number = 0) => {
         return Math.floor(
             this.capacity *
             (1 + (25 * gemCarryCap) / 100) *
-            (1 + skillCapstamp / 100 ) *
+            (1 + skillCapstamp / 100) *
             (1 + (allCapStamp + starSign) / 100) *
             allCapBonuses
         );

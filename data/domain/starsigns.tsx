@@ -1,3 +1,5 @@
+import { ConstellationBase, initConstellationsRepo } from "./data/ConstellationsRepo";
+
 interface StarBonus {
     text: string,
     bonus: number
@@ -24,7 +26,11 @@ export class StarSign {
 }
 
 export class Constellation {
-    constructor(public name: string, public area: string, public x: number, public y: number, public num1: number, public num2: number, public num3: number, public starChartPoints: number, public requirement: string, public type: number) { }
+    constructor(public index: number, public name: string, public area: string, public x: number, public y: number, public num1: number, public num2: number, public num3: number, public starChartPoints: number, public requirement: string, public type: number) { }
+
+    static fromBase = (data: ConstellationBase[]) => {
+        return data.map(constellation => new Constellation(constellation.index, constellation.data.name, constellation.data.area, constellation.data.x, constellation.data.y, constellation.data.num1, constellation.data.num2, constellation.data.num3, constellation.data.starChartPoints, constellation.data.requirement, constellation.data.type))
+    }
 }
 
 export const StarSignMap: Record<number, StarSign> = {
@@ -94,49 +100,4 @@ export const StarSignMap: Record<number, StarSign> = {
     63: new StarSign("Fillerz29", [{ text: "", bonus: 0, percent: false }]),
 }
 
-export const ConstellationMap: Record<number, Constellation> = {
-    0: new Constellation("A-1", "Blunder Hills", 908, 21, 30, 99, 4, 3, "Reach Lv 30 on four players @ Progress:{/}", 1),
-    1: new Constellation("A-2", "Where the Branches End", 827, 343, 1, 99, 1, 3, "AFK here for 1+ hours. @ Progress:{/}", 3),
-    2: new Constellation("A-3", "Valley Of The Beans", 575, 1186, 0, 99, 4, 3, "Reach this star on 4 players @ Progress:{/}", 0),
-    3: new Constellation("A-4", "Tucked Away", 387, 835, 0, 99, 3, 4, "Reach this star on 3 players @ Progress:{/}", 0),
-    4: new Constellation("A-5", "The Office", 296, 446, 0, 99, 3, 5, "Defeat Dr. Defecaus on 3 players @ Progress:{/}", 4),
-    5: new Constellation("A-6", "Freefall Caverns", 653, 236, 18, 30, 1, 3, "Reach this star as any Archer Class @ Progress:{/}", 0),
-    6: new Constellation("A-7", "Winding Willows", 707, 651, 24, 99, 2, 3, "AFK here for 24+ hours on 2 players @ Progress:{/}", 3),
-    7: new Constellation("A-8", "Dewdrop Colosseum", 882, 459, 0, 99, 3, 4, "Clear the colosseum on 3 players @ Progress:{/}", 4),
-    8: new Constellation("A-9", "End Of The Road", 1183, 571, 20, 99, 3, 5, "Defeat Amarok in under 20 seconds on 3 players @ Progress:{/}", 4),
-    9: new Constellation("A-10", "Echoing Egress", 125, 758, 31, 43, 1, 4, "Reach this star as any Mage Class @ Progress:{/}", 0),
-    10: new Constellation("Filler", "", 0, 0, 0, 0, 0, 0, "", 0),
-    11: new Constellation("Filler", "", 0, 0, 0, 0, 0, 0, "", 0),
-    12: new Constellation("B-1", "The Mimic Hole", 16, 876, 0, 99, 3, 4, "Reach this star on 3 players @ Progress:{/}", 0),
-    13: new Constellation("B-2", "Faraway Piers", 490, 367, 31, 43, 1, 4, "Reach this star as any Mage Class @ Progress:{/}", 0),
-    14: new Constellation("B-3", "The Grandioso Canyon", 1011, 432, 36, 99, 3, 4, "AFK here for 36+ hours on 3 players @ Progress:{/}", 3),
-    15: new Constellation("B-4", "Slamabam Straightaway", 1790, 443, 0, 99, 4, 5, "Reach this star on 4 players @ Progress:{/}", 0),
-    16: new Constellation("B-5", "Sandstone Colosseum", 134, 209, 0, 99, 4, 3, "Clear the colosseum on 4 players @ Progress:{/}", 4),
-    17: new Constellation("B-6", "Efaunt's Tomb", 210, 443, 0, 99, 1, 5, "Defeat Efaunt as any Beginner Class @ Progress:{/}", 4),
-    18: new Constellation("B-7", "Up Up Down Down", 958, 55, 48, 99, 3, 3, "AFK here for 48+ hours on 3 players @ Progress:{/}", 3),
-    19: new Constellation("B-8", "YumYum Grotto", 11, 451, 65, 99, 4, 4, "Reach Lv 65 on four players @ Progress:{/}", 1),
-    20: new Constellation("Filler", "", 0, 0, 0, 0, 0, 0, "", 0),
-    21: new Constellation("Filler", "", 0, 0, 0, 0, 0, 0, "", 0),
-    22: new Constellation("Filler", "", 0, 0, 0, 0, 0, 0, "", 0),
-    23: new Constellation("C-1", "Frostbite Towndra", 13, 244, 90, 99, 6, 6, "Reach Lv 90 on 6 players @ Progress:{/}", 1),
-    24: new Constellation("C-2", "Steep Sheep Ledge", 898, 698, 0, 99, 4, 4, "Defeat a sheepie barehanded on four players @ Progress:{/}", 4),
-    25: new Constellation("C-3", "Trappers Folley", 183, 368, 0, 99, 5, 4, "Reach Lv 15 trapping on five players @ Progress:{/}", 4),
-    26: new Constellation("C-4", "Refrigeration Station", 78, 450, 60, 99, 3, 4, "AFK for 60+ hrs on 3 players @ Progress:{/}", 3),
-    27: new Constellation("C-5", "Rollin' Tundra", 1643, 439, 11, 99, 4, 5, "Reach wave 11 on 4 players @ Progress:{/}", 4),
-    28: new Constellation("C-6", "Thermonuclear Climb", 843, 1010, 11, 99, 9, 5, "AFK for 11+ hrs on 9 players @ Progress:{/}", 3),
-    29: new Constellation("C-7", "Crystal Basecamp", 1488, 283, 0, 99, 6, 6, "Reach this star on 6 players @ Progress:{/}", 0),
-    30: new Constellation("C-8", "Hell Hath Frozen Over", 923, 303, 0, 99, 4, 5, "Kill a bloodbone on 4 players @ Progress:{/}", 4),
-    31: new Constellation("Filler", "", 0, 0, 0, 0, 0, 0, "", 0),
-    32: new Constellation("Filler", "", 0, 0, 0, 0, 0, 0, "", 0),
-    33: new Constellation("Filler", "", 0, 0, 0, 0, 0, 0, "", 0),
-    34: new Constellation("D-1", "Outer World Town", 42, 107, 120, 99, 8, 5, "Reach Lv 120 on 8 players @ Progress:{/}", 1),
-    35: new Constellation("D-2", "Spaceway Raceway", 29, 426, 0, 99, 3, 3, "Defeat all mushrooms before any respawn on 3 players @ Progress:{/}", 4),
-    36: new Constellation("D-3", "Donut Drive-In", 470, 633, 0, 99, 4, 4, "Reach Lv 15 Cooking on 4 players @ Progress:{/}", 4),
-    37: new Constellation("D-4", "Wurm Highway", 335, 606, 0, 99, 3, 4, "Reach this star on 3 players @ Progress:{/}", 0),
-    38: new Constellation("D-5", "Cocoa Tunnel", 940, 322, 0, 99, 4, 3, "Defeat all choccies before any respawn on 4 players @ Progress:{/}", 4),
-    39: new Constellation("D-6", "Standstill Plains", 1427, 178, 0, 99, 4, 3, "Reach this star on 4 players @ Progress:{/}", 0),
-    40: new Constellation("D-7", "Shelled Shores", 322, 434, 0, 99, 4, 3, "Hit a megacrit on a Clammy on 4 players @ Progress:{/}", 4),
-    41: new Constellation("Filler", "", 0, 0, 0, 0, 0, 0, "", 0),
-    42: new Constellation("Filler", "", 0, 0, 0, 0, 0, 0, "", 0),
-    43: new Constellation("Filler", "", 0, 0, 0, 0, 0, 0, "", 0),
-}
+export const ConstellationMap = Constellation.fromBase(initConstellationsRepo());
