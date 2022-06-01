@@ -22,6 +22,8 @@ import { Item } from "../../data/domain/items";
 import TipDisplay, { TipDirection } from "../../components/base/TipDisplay";
 import { Ascending } from "grommet-icons";
 import IconImage from "../../components/base/IconImage";
+import { Sigils } from "../../data/domain/sigils";
+import TextAndLabel from "../../components/base/TextAndLabel";
 
 const CapitalizedH3 = styled.h3`
     text-transform: capitalize
@@ -207,6 +209,43 @@ function VialsDisplay() {
     )
 }
 
+function SigilsDisplay() {
+    const [sigilData, setSigilData] = useState<Sigils>();
+    const appContext = useContext(AppContext);
+
+    useEffect(() => {
+        if (appContext.data.getData().size > 0) {
+            const theData = appContext.data.getData();
+            setSigilData(theData.get("sigils"));
+        }
+    }, [appContext]);
+
+    return (
+        <Box pad="medium">
+            <Grid columns="1/3">
+                {
+                    sigilData?.sigils.map((sigil, index) => {
+                        const isMaxed = sigil.progress > sigil.data.boostCost;
+                        const reqLimit = sigil.progress > sigil.data.unlockCost ? sigil.data.boostCost : sigil.data.unlockCost;
+                        return (
+                            <ShadowBox background="dark-1" key={index} margin={{right: 'small', bottom: 'small'}} gap="medium" align="start" pad="small">
+                                <IconImage data={sigil.getImageData()} />
+                                <Box direction="row" gap="medium">
+                                    <TextAndLabel textSize="xsmall" label="Name" text={sigil.data.name} />
+                                    <TextAndLabel textSize="xsmall" label="Description" text={sigil.data.desc} />
+                                </Box>
+                                {
+                                    !isMaxed && <TextAndLabel label="Progress" text={`${nFormatter(sigil.progress, "Smaller")}/${nFormatter(reqLimit, "Smaller")}`} />
+                                }
+                            </ShadowBox>
+                        )
+                    })
+                }
+            </Grid>
+        </Box>
+    )
+}
+
 function BubblesDisplay() {
     const [alchemyData, setAlchemyData] = useState<AlchemyData>();
     const [hasAlchemyAchievement, setHasAlchemyAchievement] = useState<boolean>(false);
@@ -323,13 +362,14 @@ function Alchemy() {
             <Box>
                 <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Alchemy</Heading>
                 <Box align="center" direction="row" justify="center" gap="small" margin={{ bottom: 'small' }}>
-                    {["Bubbles", "Vials"].map((tabName, index) => (
+                    {["Bubbles", "Vials", "Sigils"].map((tabName, index) => (
                         <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
                     ))
                     }
                 </Box>
                 {activeTab == "Bubbles" && <BubblesDisplay />}
                 {activeTab == "Vials" && <VialsDisplay />}
+                {activeTab == "Sigils" && <SigilsDisplay />}
             </Box>
         </Box>
     )

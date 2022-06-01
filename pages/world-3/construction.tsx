@@ -412,7 +412,7 @@ function SaltLickDisplay() {
             </Box>
             {
                 saltLickData && saltLickData.bonuses.map((bonus, index) => {
-                    const saltItem = itemData?.find((item) => item.internalName == bonus.item);
+                    const saltItem = itemData?.find((item) => item.internalName == bonus.data.item);
                     if (saltItem) {
                         let countInStorage = storage?.chest.find(item => item.internalName == saltItem.internalName)?.count ?? 0
                         // If salt item, check refinery storage as well
@@ -425,7 +425,7 @@ function SaltLickDisplay() {
                             <ShadowBox key={index} background="dark-1" pad="medium" direction="row" align="center" justify="between" margin={{ bottom: 'small' }}>
                                 <Grid columns={["35%", "10%", "20%", "15%", "15%"]} fill gap="small" align="center">
                                     <TextAndLabel textSize='small' text={saltLickData.getBonusText(index)} label="Bonus" />
-                                    <TextAndLabel text={`${bonus.level} / ${bonus.maxLevel}`} label="Level" />
+                                    <TextAndLabel text={`${bonus.level} / ${bonus.data.maxLevel}`} label="Level" />
                                     <Box direction="row" align="center">
                                         <Box title={saltItem.displayName} margin={{ right: 'small' }}>
                                             <IconImage data={saltItem.getImageData()} />
@@ -583,7 +583,6 @@ function PrinterDisplay() {
 }
 
 function DeathnoteDisplay() {
-    const [playerData, setPlayerData] = useState<Player[]>();
     const [deathnoteData, setDeathnoteData] = useState<Deathnote>();
     const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
@@ -597,7 +596,7 @@ function DeathnoteDisplay() {
         }
 
         deathnoteData.mobKillCount.forEach((killArray, mobName) => {
-            const monsterData = monsterInfo.find((monster) => monster.details.internalName == mobName);
+            const monsterData = monsterInfo.find((monster) => monster.id == mobName);
             const killCount = killArray.reduce((sum, killCount) => sum += Math.round(killCount), 0);
             if (monsterData?.mapData?.world) {
                 if (!toReturn.has(monsterData.mapData.world)) {
@@ -627,7 +626,6 @@ function DeathnoteDisplay() {
         if (appContext) {
             const theData = appContext.data.getData();
             setDeathnoteData(theData.get("deathnote"));
-            setPlayerData(theData.get("players"));
         }
     }, [appContext]);
 
@@ -649,7 +647,6 @@ function DeathnoteDisplay() {
                             {
                                 [...deathnoteMobs.entries()].map(([mobName, killCount], mobIndex) => {
                                     const deathnoteRank = deathnoteData?.getDeathnoteRank(killCount);
-                                    const nextKillReq = deathnoteData?.getNextRankReq(deathnoteRank);
                                     return (
                                         <Box key={mobIndex} gap="small" border={deathnoteMobs.size != mobIndex + 1 ? { side: 'bottom', color: 'grey-1', size: '2px' } : undefined} pad={{ bottom: "small" }}>
                                             <Box direction="row" align="center" gap="small">
@@ -739,7 +736,7 @@ function ShrinesDisplay() {
                                     />
                                     <TextAndLabel
                                         label="Current Map"
-                                        text={MapInfo.find(map => map.id == shrine.currentMap)?.area ?? ""}
+                                        text={MapInfo[shrine.currentMap].data.map.name}
                                         margin={{ right: 'medium', bottom: 'small' }}
                                     />
                                     <TextAndLabel

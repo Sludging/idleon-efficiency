@@ -59,13 +59,9 @@ function TerritoryDisplay() {
                             <Box>
                                 {
                                     territory.pets.map((pet, index) => {
-                                        const enemy = EnemyInfo.find(enemy => enemy.details.internalName == pet.name);
+                                        const enemy = EnemyInfo.find(enemy => enemy.id == pet.name);
                                         return (
                                             <Box key={`pet_${index}`} direction="row" gap="small">
-                                                {/* {enemy &&
-                                            <IconImage data={enemy?.getImageData()} scale={0.5} />
-                                        } */}
-
                                                 <Text size="xsmall">{enemy?.details.Name} | {pet.gene.data.name} | {nFormatter(pet.power)}</Text>
                                             </Box>
                                         )

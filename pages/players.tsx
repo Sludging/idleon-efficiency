@@ -51,18 +51,20 @@ import { MapInfo } from '../data/domain/maps';
 import { EnemyInfo } from '../data/domain/enemies';
 import Stat from '../components/base/Stat';
 import IconImage from '../components/base/IconImage';
+import { SourcesModel } from '../data/domain/model/sourcesModel';
 
 
-function ItemSourcesDisplay({ sources, dropInfo }: { sources: ItemSources, dropInfo: DropSource[] }) {
+function ItemSourcesDisplay({ sources, dropInfo }: { sources: SourcesModel, dropInfo: DropSource[] }) {
 
     const possibleSources = useMemo(() => {
         if (!sources) {
             return []
         }
 
-        const fromSources = sources.sources.map(x => x.txtName);
-        const fromRecipe = sources.recipeFrom.map(x => x.txtName);
-        const fromQuests = sources.questAss.map(x => x.txtName);
+
+        const fromSources = sources.sources ? sources.sources.map(x => x.txtName) : [];
+        const fromRecipe = sources.recipeFrom ? sources.recipeFrom.map(x => x.txtName) : [];
+        const fromQuests = sources.questAss ? sources.questAss.map(x => x.txtName) : [];
         return Array.from(new Set([...fromSources, ...fromRecipe, ...fromQuests]));
     }, [sources]);
 
@@ -254,7 +256,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
 
         const shrineCardBonus = player.cardInfo?.equippedCards.find((card) => card.id == "Z9")?.getBonus() ?? 0;
         const shrineBonus = shrines[ShrineConstants.CrystalShrine].getBonus(player.currentMapId, shrineCardBonus);
-        const cardBonus = player.cardInfo?.equippedCards.filter((card) => card.effect.includes("Crystal Mob Spawn Chance")).reduce((sum, card) => sum += card.getBonus(), 0) ?? 0;
+        const cardBonus = player.cardInfo?.equippedCards.filter((card) => card.data.effect.includes("Crystal Mob Spawn Chance")).reduce((sum, card) => sum += card.getBonus(), 0) ?? 0;
         const crystalSpawnTalentBonus = player.talents.find(x => x.skillIndex == TalentConst.CrystalSpawnIndex)?.getBonus() ?? 0;
         const crystalForDaysTalentBonus = player.talents.find(x => x.skillIndex == TalentConst.CrystalForDaysIndex)?.getBonus() ?? 0;
 
@@ -317,9 +319,9 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     <Text size="small">Current Monster / Map = {player.currentMonster} / {player.currentMap}</Text>
                     {
                         player.killInfo.has(player.currentMapId) &&
-                        (MapInfo.find(map => map.id == player.currentMapId)?.portalRequirements ?? []).reduce((sum, req) => sum += req, 0) > 0 &&
+                        (MapInfo[player.currentMapId].data.portalRequirements ?? []).reduce((sum, req) => sum += req, 0) > 0 &&
                         <Text size="small">
-                            Portal Requirement: {nFormatter(player.killInfo.get(player.currentMapId) ?? 0)} / [{MapInfo.find(map => map.id == player.currentMapId)?.portalRequirements.map(req => nFormatter(req)).join(' | ')}]
+                            Portal Requirement: {nFormatter(player.killInfo.get(player.currentMapId) ?? 0)} / [{MapInfo[player.currentMapId].data.portalRequirements.map(req => nFormatter(req)).join(' | ')}]
                         </Text>
                     }
                     {
@@ -397,7 +399,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     <Text>Equipped Cards:</Text>
                     <Grid columns={["25%", "25%", "25%", "25%"]} width={{ max: '200px' }} gap={{ row: "small" }}>
                         {
-                            player.cardInfo ? player.cardInfo.equippedCards.filter(card => card.name != "Empty").map((card, index) => {
+                            player.cardInfo ? player.cardInfo.equippedCards.filter(card => card.id != "Empty").map((card, index) => {
                                 return (
                                     <Box key={index}>
                                         <Stack key={index}>
@@ -480,7 +482,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                                         return (
                                             <Box key={index}>
                                                 <TipDisplay
-                                                    heading={`${prayer.name} (${prayer.level})`}
+                                                    heading={`${prayer.data.name} (${prayer.level})`}
                                                     body={
                                                         <Box>
                                                             <Text>Bonus: {prayer.getBonusText()}</Text>
@@ -636,7 +638,7 @@ function StatuesDisplay({ playerStatues, player }: { playerStatues: PlayerStatue
                             </Box>
                             <Text alignSelf="center">Level: {statue.level}</Text>
                             <Text alignSelf="center">/</Text>
-                            <Text alignSelf="center">Bonus: {round(statue.getBonus(player))} {statue.bonus}</Text>
+                            <Text alignSelf="center">{statue.getBonusText(player)}</Text>
                         </Box>
                     )
                 }) : <></>
@@ -1196,7 +1198,7 @@ function ZowInfo({ player }: { player: Player }) {
         if (area.includes("Grandfrog's") || area.includes("Igloo")) {
             return true;
         }
-        if (["TutorialA", "TutorialB", "TutorialC", "TutorialD", "JungleX", "MininggF", "How Did u get here", "Miningg1", "Miningg2", "Outer World Town", "The Untraveled Octopath",
+        if (["TutorialA", "TutorialB", "TutorialC", "TutorialD", "JungleX", "MininggF", "How Did u get here", "Miningg1", "Miningg2", "Outer World Town",
             "Spike Surprise", "YumYum Grotto", "Salty Shores", "Faraway Piers", "Filler", "Deepwater Docks", "Bandit Bob's Hideout", "Frostbite Towndra",
             "Tunnels Entrance", "Trappers Folley", "Freefall Caverns", "The Ol' Straightaway", "Slip Slidy Ledges", "Echoing Egress",
             "Blunder Hills", "JungleZ", "PlayerSelect", "Efaunt's Tomb", "The Roots", "Mummy Memorial", "Gravel Tomb", "Heaty Hole", "End Of The Road", "Z", "Eycicles's Nest", "The Office"].includes(area)) {
@@ -1206,8 +1208,8 @@ function ZowInfo({ player }: { player: Player }) {
     }
     const zowCount = Array.from(player.killInfo.entries()).filter(([_, count]) => count > 100000).length;
     const toZow = Array.from(player.killInfo.entries()).map(([mapId, count]) => {
-        const mapData = MapInfo.find(map => map.id == mapId);
-        if (mapData?.enemy === undefined || count > 100000 || ignoreArea(mapData.area) || mapData.area == "Z") {
+        const mapData = MapInfo[mapId];
+        if (mapData.data.enemy === undefined || count > 100000 || ignoreArea(mapData.data.map.name) || mapData.data.map.name == "Z") {
             return null;
         }
         return [mapId, count]
@@ -1215,8 +1217,8 @@ function ZowInfo({ player }: { player: Player }) {
 
     const chowCount = Array.from(player.killInfo.entries()).filter(([_, count]) => count > 1000000).length;
     const toChow = Array.from(player.killInfo.entries()).map(([mapId, count]) => {
-        const mapData = MapInfo.find(map => map.id == mapId);
-        if (mapData?.enemy === undefined || count > 1000000 || ignoreArea(mapData.area) || mapData.area == "Z") {
+        const mapData = MapInfo[mapId];
+        if (mapData.data.enemy === undefined || count > 1000000 || ignoreArea(mapData.data.map.name) || mapData.data.map.name == "Z") {
             return null;
         }
         return [mapId, count]
@@ -1233,12 +1235,12 @@ function ZowInfo({ player }: { player: Player }) {
                 {
                     toZow.map((data, index) => {
                         if (data) {
-                            const mapData = MapInfo.find(map => map.id == data[0]);
-                            const enemyData = EnemyInfo.find(enemy => enemy.details.internalName == mapData?.enemy);
+                            const mapData = MapInfo[data[0]];
+                            const enemyData = EnemyInfo.find(enemy => enemy.id == mapData.data.enemy);
                             return (
                                 <Box key={index} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '75px', min: '75px' }} align="center" pad="small">
                                     {enemyData &&
-                                        <Box title={mapData?.area}>
+                                        <Box title={mapData.data.map.name}>
                                             <IconImage data={enemyData.getImageData()} />
                                         </Box>
                                     }
@@ -1255,12 +1257,12 @@ function ZowInfo({ player }: { player: Player }) {
                 {
                     toChow.map((data, index) => {
                         if (data) {
-                            const mapData = MapInfo.find(map => map.id == data[0]);
-                            const enemyData = EnemyInfo.find(enemy => enemy.details.internalName == mapData?.enemy);
+                            const mapData = MapInfo[data[0]];
+                            const enemyData = EnemyInfo.find(enemy => enemy.id == mapData.data.enemy);
                             return (
                                 <Box key={index} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '75px', min: '75px' }} align="center" pad="small">
                                     {enemyData &&
-                                        <Box title={mapData?.area}>
+                                        <Box title={mapData.data.map.name}>
                                             <IconImage data={enemyData.getImageData()} />
                                         </Box>
                                     }

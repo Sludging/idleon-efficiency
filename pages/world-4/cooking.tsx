@@ -194,76 +194,72 @@ function Cooking() {
                     {
                         cooking?.meals.filter(meal => (meal.level > 0 || meal.optimalSpices.length > 0)).map((meal, index) => (
                             <ShadowBox background="dark-1" key={index} margin={{ right: 'small', bottom: 'small' }} direction="row" pad="small" gap="small" align="center">
-                                <Box direction="row" align="center">
-                                    <Text size="small">{meal.level}</Text>
-                                    <Box margin={{ bottom: 'small' }}>
-                                        <IconImage data={meal.getImageData()} />
-                                    </Box>
-                                </Box>
-                                {meal.level > 0 &&
-                                    <TipDisplay
-                                        heading={meal.name}
-                                        body={
-                                            <Box>
-                                                <Text>Next level bonus: {meal.getBonusText(meal.level + 1)}</Text>
-                                                <Box>
-                                                    {meal.cookingContribution > 0 && <Text>Cooking speed: {nFormatter(meal.cookingContribution, "Smaller")}</Text>}
-                                                    {meal.timeToNext > 0 && <Text>Time to next level: {toTime(meal.timeToNext * 3600)}</Text>}
-                                                    {meal.timeToDiamond > 0 && <Text>Time to Diamond: {toTime(meal.timeToDiamond * 3600)}</Text>}
-                                                    {meal.timeToDiamond <= 0 && meal.timeToPurple > 0 && <Text>Time to Purple: {toTime(meal.timeToPurple * 3600)}</Text>}
-                                                    {meal.timeToPurple <= 0 && meal.timeToVoid > 0 && <Text>Time to Void: {toTime(meal.timeToVoid * 3600)}</Text>}
-                                                </Box>
-                                                <Text size="xsmall">* The time is calculated assuming all kitchens are cooking the same meal.</Text>
-                                            </Box>
-                                        }
-                                        direction={TipDirection.Down}
-                                        size='small'
-                                    >
-                                        <Box direction="row" gap="small" justify="between" fill>
-                                            <TextAndLabel
-                                                label="Bonus"
-                                                textSize='small'
-                                                text={meal.getBonusText()}
-                                            />
-                                            <TextAndLabel
-                                                label="Next Level"
-                                                textSize='small'
-                                                textColor={meal.count > meal.getMealLevelCost() ? 'green-1' : 'accent-1'}
-                                                text={`${nFormatter(Math.floor(meal.count))}/${nFormatter(Math.ceil(meal.getMealLevelCost()))}`}
-                                            />
+                                <Box direction="row" align='center' fill>
+                                    <Box direction="row" align="center" margin={{right: 'small'}}>
+                                        <Text size="small">{meal.level}</Text>
+                                        <Box margin={{ bottom: 'small' }}>
+                                            <IconImage data={meal.getImageData()} />
                                         </Box>
-                                    </TipDisplay>
-                                }
-                                {meal.level == 0 &&
-                                    <Box>
+                                    </Box>
+                                    <Box fill>
                                         <TipDisplay
                                             heading={meal.name}
                                             body={
-                                                <Box>
-                                                    <Text>Bonus: {meal.getBonusText()}</Text>
-                                                    {/* <Text>Time: {meal.discoveryTime}</Text> */}
-                                                    <Text>Chance: {nFormatter(meal.discoveryChance * 100, "Smaller")}%</Text>
-                                                    <Text>Time: {toTime(meal.discoveryTime)}</Text>
-                                                    <Text size="xsmall">* Chance/Time is based on your first kitchen luck stat.</Text>
-                                                </Box>
+                                                meal.level > 0 ?
+                                                    <Box>
+                                                        <Text>Next level bonus: {meal.getBonusText(meal.level + 1)}</Text>
+                                                        <Box>
+                                                            {meal.cookingContribution > 0 && <Text>Cooking speed: {nFormatter(meal.cookingContribution, "Smaller")}</Text>}
+                                                            {meal.timeToNext > 0 && <Text>Time to next level: {toTime(meal.timeToNext * 3600)}</Text>}
+                                                            {meal.timeToDiamond > 0 && <Text>Time to Diamond: {toTime(meal.timeToDiamond * 3600)}</Text>}
+                                                            {meal.timeToDiamond <= 0 && meal.timeToPurple > 0 && <Text>Time to Purple: {toTime(meal.timeToPurple * 3600)}</Text>}
+                                                            {meal.timeToPurple <= 0 && meal.timeToVoid > 0 && <Text>Time to Void: {toTime(meal.timeToVoid * 3600)}</Text>}
+                                                        </Box>
+                                                        <Text size="xsmall">* The time is calculated assuming all kitchens are cooking the same meal.</Text>
+                                                    </Box> :
+                                                    <Box>
+                                                        <Text>Bonus: {meal.getBonusText()}</Text>
+                                                        <Text>Chance: {nFormatter(meal.discoveryChance * 100, "Smaller")}%</Text>
+                                                        <Text>Time: {toTime(meal.discoveryTime)}</Text>
+                                                        <Text size="xsmall">* Chance/Time is based on your first kitchen luck stat.</Text>
+                                                    </Box>
                                             }
                                             direction={TipDirection.Down}
                                             size='small'
                                         >
-                                            <Box direction="row">
-                                                {
-                                                    meal.optimalSpices.map((spice, index) => (
-                                                        <IconImage key={index} data={{
-                                                            location: `CookingSpice${spice}`,
-                                                            width: 36,
-                                                            height: 36
-                                                        }} />
-                                                    ))
-                                                }
-                                            </Box>
+                                            {
+                                                meal.level > 0 ?
+                                                    <Box direction="row" fill justify="between">
+                                                        <TextAndLabel
+                                                            label="Bonus"
+                                                            textSize='xsmall'
+                                                            text={meal.getBonusText()}
+                                                            margin={{ right: 'small' }}
+                                                        />
+                                                        <TextAndLabel
+                                                            label="Next Level"
+                                                            textSize='xsmall'
+                                                            right
+                                                            textColor={meal.count > meal.getMealLevelCost() ? 'green-1' : 'accent-1'}
+                                                            text={`${nFormatter(Math.floor(meal.count))}/${nFormatter(Math.ceil(meal.getMealLevelCost()))}`}
+                                                        />
+                                                    </Box> :
+                                                    <Box direction="row">
+                                                        {
+                                                            meal.optimalSpices.map((spice, index) => (
+                                                                <IconImage key={index} data={{
+                                                                    location: `CookingSpice${spice}`,
+                                                                    width: 36,
+                                                                    height: 36
+                                                                }} />
+                                                            ))
+                                                        }
+                                                    </Box>
+                                            }
+
                                         </TipDisplay>
                                     </Box>
-                                }
+                                </Box>
                             </ShadowBox>
                         ))
                     }
