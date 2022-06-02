@@ -12,7 +12,7 @@ import {
     TableCell,
     TableBody
 } from 'grommet'
-import { useEffect, useContext, useState, useMemo } from 'react';
+import React, { useEffect, useContext, useState, useMemo } from 'react';
 import { AppContext } from '../../data/appContext'
 import { NextSeo } from 'next-seo';
 
@@ -426,17 +426,22 @@ function SaltLickDisplay() {
                                 <Grid columns={["35%", "10%", "20%", "15%", "15%"]} fill gap="small" align="center">
                                     <TextAndLabel textSize='small' text={saltLickData.getBonusText(index)} label="Bonus" />
                                     <TextAndLabel text={`${bonus.level} / ${bonus.data.maxLevel}`} label="Level" />
-                                    <Box direction="row" align="center">
-                                        <Box title={saltItem.displayName} margin={{ right: 'small' }}>
-                                            <IconImage data={saltItem.getImageData()} />
-                                        </Box>
-                                        <TextAndLabel text={nFormatter(costToNextLevel)} label="Next Level costs" />
+                                    {bonus.level < bonus.data.maxLevel ?
+                                        <React.Fragment>
+                                            <Box direction="row" align="center">
+                                                <Box title={saltItem.displayName} margin={{ right: 'small' }}>
+                                                    <IconImage data={saltItem.getImageData()} />
+                                                </Box>
+                                                <TextAndLabel text={nFormatter(costToNextLevel)} label="Next Level costs" />
 
-                                    </Box>
-                                    <Box direction="row" align="center">
-                                        <TextAndLabel text={nFormatter(costToMax)} label="Cost to max" />
-                                    </Box>
-                                    <TextAndLabel textColor={costToNextLevel > countInStorage ? 'accent-1' : 'green-1'} text={nFormatter(countInStorage)} label="In Storage" />
+                                            </Box>
+                                            <Box direction="row" align="center">
+                                                <TextAndLabel text={nFormatter(costToMax)} label="Cost to max" />
+                                            </Box>
+                                            <TextAndLabel textColor={costToNextLevel > countInStorage ? 'accent-1' : 'green-1'} text={nFormatter(countInStorage)} label="In Storage" />
+                                        </React.Fragment> :
+                                        <Box align="center" justify="center"><Text color="green-1" size="large">Maxed!</Text></Box>
+                                    }
                                 </Grid>
                             </ShadowBox>
                         )
