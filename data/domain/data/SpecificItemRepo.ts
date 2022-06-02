@@ -35,7 +35,7 @@ export class BaseItemBase { constructor(public id: string, public data: BaseItem
 
 export const initSpecificItemRepo = () => {
     return [    
-        new DescItemBase("DungCredits2", <DescItemModel>{
+        new BaseItemBase("DungCredits2", <DescItemModel>{
                 "internalName": "DungCredits2",
                 "displayName": "Dungeon Credits Flurbo Edition",
                 "sellPrice": 1,
@@ -43,7 +43,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Currency",
                 "description": "Woah! I thought they stopped printing Flurbo credits years ago, these are super rare! Hold down to add these to your account. "
             }),
-        new DescItemBase("Cash", <DescItemModel>{
+        new BaseItemBase("Cash", <DescItemModel>{
                 "internalName": "Cash",
                 "displayName": "Cash",
                 "sellPrice": 1,
@@ -51,7 +51,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Item",
                 "description": "Dolla dolla bills yall! The big G! The golden cheddar! The pasta! "
             }),
-        new DescItemBase("XP", <DescItemModel>{
+        new BaseItemBase("XP", <DescItemModel>{
                 "internalName": "XP",
                 "displayName": "Experience",
                 "sellPrice": 1,
@@ -59,7 +59,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Currency",
                 "description": "Bruh "
             }),
-        new DescItemBase("XPskill", <DescItemModel>{
+        new BaseItemBase("XPskill", <DescItemModel>{
                 "internalName": "XPskill",
                 "displayName": "Skill Experience",
                 "sellPrice": 1,
@@ -67,7 +67,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Currency",
                 "description": "Bruh "
             }),
-        new DescItemBase("DungEnhancer0", <DescItemModel>{
+        new BaseItemBase("DungEnhancer0", <DescItemModel>{
                 "internalName": "DungEnhancer0",
                 "displayName": "Weapon Enhancer",
                 "sellPrice": 1,
@@ -75,7 +75,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Currency",
                 "description": "Gives your dungeon weapon a random enhancement, replacing the old one if already enhanced. "
             }),
-        new DescItemBase("DungEnhancer1", <DescItemModel>{
+        new BaseItemBase("DungEnhancer1", <DescItemModel>{
                 "internalName": "DungEnhancer1",
                 "displayName": "Armor Enhancer",
                 "sellPrice": 1,
@@ -83,7 +83,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Currency",
                 "description": "Gives one piece of your dungeon armor a random enhancement, replacing the old one if already enhanced. "
             }),
-        new DescItemBase("DungEnhancer2", <DescItemModel>{
+        new BaseItemBase("DungEnhancer2", <DescItemModel>{
                 "internalName": "DungEnhancer2",
                 "displayName": "Jewelry Enhancer",
                 "sellPrice": 1,
@@ -91,7 +91,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Currency",
                 "description": "Gives one piece of your dungeon jewelry a random enhancement, replacing the old one if already enhanced. "
             }),
-        new DescItemBase("DungRNG0", <DescItemModel>{
+        new BaseItemBase("DungRNG0", <DescItemModel>{
                 "internalName": "DungRNG0",
                 "displayName": "Uncommon RNG Item",
                 "sellPrice": 1,
@@ -99,7 +99,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "What",
                 "description": "Lol "
             }),
-        new DescItemBase("DungRNG1", <DescItemModel>{
+        new BaseItemBase("DungRNG1", <DescItemModel>{
                 "internalName": "DungRNG1",
                 "displayName": "Uncommon RNG Item",
                 "sellPrice": 1,
@@ -107,7 +107,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "What",
                 "description": "Lol "
             }),
-        new DescItemBase("DungRNG2", <DescItemModel>{
+        new BaseItemBase("DungRNG2", <DescItemModel>{
                 "internalName": "DungRNG2",
                 "displayName": "Uncommon RNG Item",
                 "sellPrice": 1,
@@ -115,7 +115,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "What",
                 "description": "Lol "
             }),
-        new DescItemBase("DungRNG3", <DescItemModel>{
+        new BaseItemBase("DungRNG3", <DescItemModel>{
                 "internalName": "DungRNG3",
                 "displayName": "Uncommon RNG Item",
                 "sellPrice": 1,
@@ -123,7 +123,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "What",
                 "description": "Lol "
             }),
-        new DescItemBase("DungRNG4", <DescItemModel>{
+        new BaseItemBase("DungRNG4", <DescItemModel>{
                 "internalName": "DungRNG4",
                 "displayName": "Uncommon RNG Item",
                 "sellPrice": 1,
@@ -131,7 +131,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "What",
                 "description": "Lol "
             }),
-        new DescItemBase("DungeonA1", <DescItemModel>{
+        new BaseItemBase("DungeonA1", <DescItemModel>{
                 "internalName": "DungeonA1",
                 "displayName": "Poisoned Leg",
                 "sellPrice": 1,
@@ -139,7 +139,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Item",
                 "description": "Yep, that leg is poisoned alright... you can tell because it's purple, and purple is gross. "
             }),
-        new DescItemBase("DungeonA2", <DescItemModel>{
+        new BaseItemBase("DungeonA2", <DescItemModel>{
                 "internalName": "DungeonA2",
                 "displayName": "Minced Bluebeef",
                 "sellPrice": 1,
@@ -147,7 +147,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Item",
                 "description": "Bon Appetit! "
             }),
-        new DescItemBase("DungeonA3", <DescItemModel>{
+        new BaseItemBase("DungeonA3", <DescItemModel>{
                 "internalName": "DungeonA3",
                 "displayName": "Bloated Cyst",
                 "sellPrice": 1,
@@ -155,7 +155,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Item",
                 "description": "It's filled with fluid. Non potable fluid, unless you like to live danerously. "
             }),
-        new DescItemBase("DungeonA4", <DescItemModel>{
+        new BaseItemBase("DungeonA4", <DescItemModel>{
                 "internalName": "DungeonA4",
                 "displayName": "Floppy Gizard",
                 "sellPrice": 1,
@@ -163,7 +163,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Item",
                 "description": "It jiggles like it's nobody's business! "
             }),
-        new DescItemBase("DungeonA5", <DescItemModel>{
+        new BaseItemBase("DungeonA5", <DescItemModel>{
                 "internalName": "DungeonA5",
                 "displayName": "Molted Tail",
                 "sellPrice": 1,
@@ -171,7 +171,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Item",
                 "description": "I guess these frogs shed their tails, like how snakes shed skin, or how humans shed friendships "
             }),
-        new DescItemBase("DungeonA6", <DescItemModel>{
+        new BaseItemBase("DungeonA6", <DescItemModel>{
                 "internalName": "DungeonA6",
                 "displayName": "Decomposing Skull",
                 "sellPrice": 1,
@@ -179,7 +179,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Item",
                 "description": "The skin is so loose, you could probably strip it right off. "
             }),
-        new DescItemBase("DungeonA7", <DescItemModel>{
+        new BaseItemBase("DungeonA7", <DescItemModel>{
                 "internalName": "DungeonA7",
                 "displayName": "Giant Frog Eye",
                 "sellPrice": 1,
@@ -187,7 +187,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Item",
                 "description": "So that's where his missing eyeball went... "
             }),
-        new DescItemBase("DungeonA8", <DescItemModel>{
+        new BaseItemBase("DungeonA8", <DescItemModel>{
                 "internalName": "DungeonA8",
                 "displayName": "Eldritch Ripcage",
                 "sellPrice": 1,
@@ -195,7 +195,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Item",
                 "description": "Huh... that vertebrae is lookin' kinda sus... "
             }),
-        new DescItemBase("Copper", <OreItemModel>{
+        new BaseItemBase("Copper", <OreItemModel>{
                 "internalName": "Copper",
                 "displayName": "Copper Ore",
                 "sellPrice": 3,
@@ -203,7 +203,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Ore",
                 "description": "Smelt down 2 Ores into 1 Bar at the Forge. Smelting will take 100 Seconds per Bar using Forge Slot 1. "
             }),
-        new DescItemBase("Iron", <OreItemModel>{
+        new BaseItemBase("Iron", <OreItemModel>{
                 "internalName": "Iron",
                 "displayName": "Iron Ore",
                 "sellPrice": 7,
@@ -211,7 +211,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Ore",
                 "description": "Smelt down 4 Ores into 1 Bar at the Forge. Smelting will take 400 Seconds per Bar using Forge Slot 1. "
             }),
-        new DescItemBase("Gold", <OreItemModel>{
+        new BaseItemBase("Gold", <OreItemModel>{
                 "internalName": "Gold",
                 "displayName": "Gold Ore",
                 "sellPrice": 13,
@@ -219,7 +219,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Ore",
                 "description": "Smelt down 7 Ores into 1 Bar at the Forge. Smelting will take 1000 Seconds per Bar using Forge Slot 1. "
             }),
-        new DescItemBase("Plat", <OreItemModel>{
+        new BaseItemBase("Plat", <OreItemModel>{
                 "internalName": "Plat",
                 "displayName": "Platinum Ore",
                 "sellPrice": 20,
@@ -227,7 +227,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Ore",
                 "description": "Smelt down 16 Ores into 1 Bar at the Forge. Smelting will take 2200 Seconds per Bar using Forge Slot 1. "
             }),
-        new DescItemBase("Dementia", <OreItemModel>{
+        new BaseItemBase("Dementia", <OreItemModel>{
                 "internalName": "Dementia",
                 "displayName": "Dementia Ore",
                 "sellPrice": 35,
@@ -235,7 +235,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Ore",
                 "description": "Smelt down 40 Ores into 1 Bar at the Forge. Smelting will take 3500 Seconds per Bar using Forge Slot 1. "
             }),
-        new DescItemBase("Void", <OreItemModel>{
+        new BaseItemBase("Void", <OreItemModel>{
                 "internalName": "Void",
                 "displayName": "Void Ore",
                 "sellPrice": 48,
@@ -243,7 +243,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Ore",
                 "description": "Smelt down 100 Ores into 1 Bar at the Forge. Smelting will take 6000 Seconds per Bar using Forge Slot 1. "
             }),
-        new DescItemBase("Lustre", <OreItemModel>{
+        new BaseItemBase("Lustre", <OreItemModel>{
                 "internalName": "Lustre",
                 "displayName": "Lustre Ore",
                 "sellPrice": 60,
@@ -251,7 +251,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Ore",
                 "description": "Smelt down 250 Ores into 1 Bar at the Forge. Smelting will take 12500 Seconds per Bar using Forge Slot 1. "
             }),
-        new DescItemBase("Starfire", <OreItemModel>{
+        new BaseItemBase("Starfire", <OreItemModel>{
                 "internalName": "Starfire",
                 "displayName": "Starfire Ore",
                 "sellPrice": 100,
@@ -259,7 +259,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Ore",
                 "description": "Smelt down 500 Ores into 1 Bar at the Forge. Smelting will take 25000 Seconds per Bar using Forge Slot 1. "
             }),
-        new DescItemBase("Dreadlo", <OreItemModel>{
+        new BaseItemBase("Dreadlo", <OreItemModel>{
                 "internalName": "Dreadlo",
                 "displayName": "Dreadlo Ore",
                 "sellPrice": 130,
@@ -267,7 +267,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Ore",
                 "description": "Smelt down 1000 Ores into 1 Bar at the Forge. Smelting will take 100 Seconds per Bar using Forge Slot 1. "
             }),
-        new DescItemBase("Godshard", <OreItemModel>{
+        new BaseItemBase("Godshard", <OreItemModel>{
                 "internalName": "Godshard",
                 "displayName": "Godshard Ore",
                 "sellPrice": 250,
@@ -275,77 +275,77 @@ export const initSpecificItemRepo = () => {
                 "Type": "Ore",
                 "description": "Smelt down 5000 Ores into 1 Bar at the Forge. Smelting will take 100 Seconds per Bar using Forge Slot 1. "
             }),
-        new DescItemBase("CopperBar", <BaseItemModel>{
+        new BaseItemBase("CopperBar", <BaseItemModel>{
                 "internalName": "CopperBar",
                 "displayName": "Copper Bar",
                 "sellPrice": 7,
                 "typeGen": TypeGenEnum.bBar,
                 "Type": "Bar"
             }),
-        new DescItemBase("IronBar", <BaseItemModel>{
+        new BaseItemBase("IronBar", <BaseItemModel>{
                 "internalName": "IronBar",
                 "displayName": "Iron Bar",
                 "sellPrice": 32,
                 "typeGen": TypeGenEnum.bBar,
                 "Type": "Bar"
             }),
-        new DescItemBase("GoldBar", <BaseItemModel>{
+        new BaseItemBase("GoldBar", <BaseItemModel>{
                 "internalName": "GoldBar",
                 "displayName": "Gold Bar",
                 "sellPrice": 115,
                 "typeGen": TypeGenEnum.bBar,
                 "Type": "Bar"
             }),
-        new DescItemBase("PlatBar", <BaseItemModel>{
+        new BaseItemBase("PlatBar", <BaseItemModel>{
                 "internalName": "PlatBar",
                 "displayName": "Platinum Bar",
                 "sellPrice": 460,
                 "typeGen": TypeGenEnum.bBar,
                 "Type": "Bar"
             }),
-        new DescItemBase("DementiaBar", <BaseItemModel>{
+        new BaseItemBase("DementiaBar", <BaseItemModel>{
                 "internalName": "DementiaBar",
                 "displayName": "Dementia Bar",
                 "sellPrice": 1500,
                 "typeGen": TypeGenEnum.bBar,
                 "Type": "Bar"
             }),
-        new DescItemBase("VoidBar", <BaseItemModel>{
+        new BaseItemBase("VoidBar", <BaseItemModel>{
                 "internalName": "VoidBar",
                 "displayName": "Void Bar",
                 "sellPrice": 6200,
                 "typeGen": TypeGenEnum.bBar,
                 "Type": "Bar"
             }),
-        new DescItemBase("LustreBar", <BaseItemModel>{
+        new BaseItemBase("LustreBar", <BaseItemModel>{
                 "internalName": "LustreBar",
                 "displayName": "Lustre Bar",
                 "sellPrice": 12500,
                 "typeGen": TypeGenEnum.bBar,
                 "Type": "Bar"
             }),
-        new DescItemBase("StarfireBar", <BaseItemModel>{
+        new BaseItemBase("StarfireBar", <BaseItemModel>{
                 "internalName": "StarfireBar",
                 "displayName": "Starfire Bar",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.bBar,
                 "Type": "Bar"
             }),
-        new DescItemBase("DreadloBar", <BaseItemModel>{
+        new BaseItemBase("DreadloBar", <BaseItemModel>{
                 "internalName": "DreadloBar",
                 "displayName": "Dreadlo Bar",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.bBar,
                 "Type": "Bar"
             }),
-        new DescItemBase("GodshardBar", <BaseItemModel>{
+        new BaseItemBase("GodshardBar", <BaseItemModel>{
                 "internalName": "GodshardBar",
                 "displayName": "Godshard Bar",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.bBar,
                 "Type": "Bar"
             }),
-        new DescItemBase("OilBarrel1", <ACItemModel>{
+        new BaseItemBase("OilBarrel1", <ACItemModel>{
                 "internalName": "OilBarrel1",
                 "displayName": "Crude Oil",
                 "sellPrice": 8,
@@ -353,7 +353,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Barrel",
                 "description": "Increases Forging Speed by 15% for the Forge Slot it's in. 75% chance to be consumed when a bar is forged. "
             }),
-        new DescItemBase("OilBarrel2", <ACItemModel>{
+        new BaseItemBase("OilBarrel2", <ACItemModel>{
                 "internalName": "OilBarrel2",
                 "displayName": "Toxic Sludge",
                 "sellPrice": 20,
@@ -361,7 +361,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Barrel",
                 "description": "Increases Extra Bar chance by 20% for the Slot it's in. 60% chance to be consumed when a bar is forged. "
             }),
-        new DescItemBase("OilBarrel3", <ACItemModel>{
+        new BaseItemBase("OilBarrel3", <ACItemModel>{
                 "internalName": "OilBarrel3",
                 "displayName": "Radioactive Waste",
                 "sellPrice": 50,
@@ -369,7 +369,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Barrel",
                 "description": "Increases Forging Speed by 30% for the Forge Slot it's in. 30% chance to be consumed when a bar is forged. "
             }),
-        new DescItemBase("OilBarrel4", <ACItemModel>{
+        new BaseItemBase("OilBarrel4", <ACItemModel>{
                 "internalName": "OilBarrel4",
                 "displayName": "Glumlee's Special Tutorial Oil",
                 "sellPrice": 350,
@@ -377,7 +377,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Barrel",
                 "description": "Increases Forging Speed by 999% for the Forge Slot it's in. 200% chance to be consumed when a bar is forged. "
             }),
-        new DescItemBase("OilBarrel5", <ACItemModel>{
+        new BaseItemBase("OilBarrel5", <ACItemModel>{
                 "internalName": "OilBarrel5",
                 "displayName": "Eco Friendly Oil",
                 "sellPrice": 350,
@@ -385,112 +385,112 @@ export const initSpecificItemRepo = () => {
                 "Type": "Barrel",
                 "description": "Increases Forging Speed by 10% for the Forge Slot it's in. 30% chance to be consumed when a bar is forged. "
             }),
-        new DescItemBase("OakTree", <BaseItemModel>{
+        new BaseItemBase("OakTree", <BaseItemModel>{
                 "internalName": "OakTree",
                 "displayName": "Oak Logs",
                 "sellPrice": 2,
                 "typeGen": TypeGenEnum.bLog,
                 "Type": "Log"
             }),
-        new DescItemBase("BirchTree", <BaseItemModel>{
+        new BaseItemBase("BirchTree", <BaseItemModel>{
                 "internalName": "BirchTree",
                 "displayName": "Bleach Logs",
                 "sellPrice": 3,
                 "typeGen": TypeGenEnum.bLog,
                 "Type": "Log"
             }),
-        new DescItemBase("JungleTree", <BaseItemModel>{
+        new BaseItemBase("JungleTree", <BaseItemModel>{
                 "internalName": "JungleTree",
                 "displayName": "Jungle Logs",
                 "sellPrice": 6,
                 "typeGen": TypeGenEnum.bLog,
                 "Type": "Log"
             }),
-        new DescItemBase("ForestTree", <BaseItemModel>{
+        new BaseItemBase("ForestTree", <BaseItemModel>{
                 "internalName": "ForestTree",
                 "displayName": "Forest Fibres",
                 "sellPrice": 10,
                 "typeGen": TypeGenEnum.bLog,
                 "Type": "Log"
             }),
-        new DescItemBase("ToiletTree", <BaseItemModel>{
+        new BaseItemBase("ToiletTree", <BaseItemModel>{
                 "internalName": "ToiletTree",
                 "displayName": "Potty Rolls",
                 "sellPrice": 15,
                 "typeGen": TypeGenEnum.bLog,
                 "Type": "Log"
             }),
-        new DescItemBase("PalmTree", <BaseItemModel>{
+        new BaseItemBase("PalmTree", <BaseItemModel>{
                 "internalName": "PalmTree",
                 "displayName": "Tropilogs",
                 "sellPrice": 20,
                 "typeGen": TypeGenEnum.bLog,
                 "Type": "Log"
             }),
-        new DescItemBase("StumpTree", <BaseItemModel>{
+        new BaseItemBase("StumpTree", <BaseItemModel>{
                 "internalName": "StumpTree",
                 "displayName": "Veiny Logs",
                 "sellPrice": 25,
                 "typeGen": TypeGenEnum.bLog,
                 "Type": "Log"
             }),
-        new DescItemBase("SaharanFoal", <BaseItemModel>{
+        new BaseItemBase("SaharanFoal", <BaseItemModel>{
                 "internalName": "SaharanFoal",
                 "displayName": "Tundra Logs",
                 "sellPrice": 30,
                 "typeGen": TypeGenEnum.bLog,
                 "Type": "Log"
             }),
-        new DescItemBase("Tree7", <BaseItemModel>{
+        new BaseItemBase("Tree7", <BaseItemModel>{
                 "internalName": "Tree7",
                 "displayName": "Wispy Lumber",
                 "sellPrice": 40,
                 "typeGen": TypeGenEnum.bLog,
                 "Type": "Log"
             }),
-        new DescItemBase("AlienTree", <BaseItemModel>{
+        new BaseItemBase("AlienTree", <BaseItemModel>{
                 "internalName": "AlienTree",
                 "displayName": "Alien Hive Chunk",
                 "sellPrice": 55,
                 "typeGen": TypeGenEnum.bLog,
                 "Type": "Log"
             }),
-        new DescItemBase("Tree8", <BaseItemModel>{
+        new BaseItemBase("Tree8", <BaseItemModel>{
                 "internalName": "Tree8",
                 "displayName": "Cubed Logs",
                 "sellPrice": 80,
                 "typeGen": TypeGenEnum.bLog,
                 "Type": "Log"
             }),
-        new DescItemBase("Leaf1", <BaseItemModel>{
+        new BaseItemBase("Leaf1", <BaseItemModel>{
                 "internalName": "Leaf1",
                 "displayName": "Grass Leaf",
                 "sellPrice": 4,
                 "typeGen": TypeGenEnum.bLeaf,
                 "Type": "Leaf"
             }),
-        new DescItemBase("Leaf2", <BaseItemModel>{
+        new BaseItemBase("Leaf2", <BaseItemModel>{
                 "internalName": "Leaf2",
                 "displayName": "Twisty Leaf",
                 "sellPrice": 50,
                 "typeGen": TypeGenEnum.bLeaf,
                 "Type": "Leaf"
             }),
-        new DescItemBase("Leaf3", <BaseItemModel>{
+        new BaseItemBase("Leaf3", <BaseItemModel>{
                 "internalName": "Leaf3",
                 "displayName": "Arctic Leaf",
                 "sellPrice": 100,
                 "typeGen": TypeGenEnum.bLeaf,
                 "Type": "Leaf"
             }),
-        new DescItemBase("Leaf4", <BaseItemModel>{
+        new BaseItemBase("Leaf4", <BaseItemModel>{
                 "internalName": "Leaf4",
                 "displayName": "Galactic Leaf",
                 "sellPrice": 100,
                 "typeGen": TypeGenEnum.bLeaf,
                 "Type": "Leaf"
             }),
-        new DescItemBase("FillerMaterial", <DescItemModel>{
+        new BaseItemBase("FillerMaterial", <DescItemModel>{
                 "internalName": "FillerMaterial",
                 "displayName": "Not Yet",
                 "sellPrice": 4,
@@ -498,7 +498,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Fish",
                 "description": "Sorry gamer, but this material isn't in the game yet! You'll have to wait for the next update to get it. "
             }),
-        new DescItemBase("Fish1", <DescItemModel>{
+        new BaseItemBase("Fish1", <DescItemModel>{
                 "internalName": "Fish1",
                 "displayName": "Goldfish",
                 "sellPrice": 4,
@@ -506,7 +506,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Fish",
                 "description": "It's not a snack, and it certainly doesn't smile back... for copyright reasons! "
             }),
-        new DescItemBase("Fish2", <DescItemModel>{
+        new BaseItemBase("Fish2", <DescItemModel>{
                 "internalName": "Fish2",
                 "displayName": "Hermit Can",
                 "sellPrice": 11,
@@ -514,7 +514,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Fish",
                 "description": "The branding on the soda can must have gotten washed off by some kind of liquidy, wavey substance. Oh, right. "
             }),
-        new DescItemBase("Fish3", <DescItemModel>{
+        new BaseItemBase("Fish3", <DescItemModel>{
                 "internalName": "Fish3",
                 "displayName": "Jellyfish",
                 "sellPrice": 14,
@@ -522,7 +522,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Fish",
                 "description": "Don't let it sting you, unless you're into getting tinkled on by random beach-goers. "
             }),
-        new DescItemBase("Fish4", <DescItemModel>{
+        new BaseItemBase("Fish4", <DescItemModel>{
                 "internalName": "Fish4",
                 "displayName": "Bloach",
                 "sellPrice": 18,
@@ -530,7 +530,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Fish",
                 "description": "The result of putting Blood and Leech into a bad pokemon generator. "
             }),
-        new DescItemBase("Fish5", <DescItemModel>{
+        new BaseItemBase("Fish5", <DescItemModel>{
                 "internalName": "Fish5",
                 "displayName": "Skelefish",
                 "sellPrice": 5,
@@ -538,7 +538,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Fish",
                 "description": "Wow! Tapping on it's ribs really does make a xylophone noise! "
             }),
-        new DescItemBase("Fish6", <DescItemModel>{
+        new BaseItemBase("Fish6", <DescItemModel>{
                 "internalName": "Fish6",
                 "displayName": "Sand Shark",
                 "sellPrice": 5,
@@ -546,7 +546,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Fish",
                 "description": "It's not actually made of sand, not even in this universe. "
             }),
-        new DescItemBase("Fish7", <DescItemModel>{
+        new BaseItemBase("Fish7", <DescItemModel>{
                 "internalName": "Fish7",
                 "displayName": "Manta Ray",
                 "sellPrice": 5,
@@ -554,7 +554,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Fish",
                 "description": "Watch out for that stinger! It's called a 'stinger', but it will leave more of a deathy feeling than a stinging one. "
             }),
-        new DescItemBase("Fish8", <DescItemModel>{
+        new BaseItemBase("Fish8", <DescItemModel>{
                 "internalName": "Fish8",
                 "displayName": "Kraken",
                 "sellPrice": 5,
@@ -562,7 +562,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Fish",
                 "description": "The tentacles writhe around as it plots it's next move toward bringing an end to this plane of existence. "
             }),
-        new DescItemBase("Bug1", <DescItemModel>{
+        new BaseItemBase("Bug1", <DescItemModel>{
                 "internalName": "Bug1",
                 "displayName": "Fly",
                 "sellPrice": 3,
@@ -570,7 +570,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Bug",
                 "description": "I don't know whyyyy she swallowed a flyyy, perhaps she'll cry from being perpetually made fun of in the form of a nursey rhyme just because she made one bad decision... er, die! "
             }),
-        new DescItemBase("Bug2", <DescItemModel>{
+        new BaseItemBase("Bug2", <DescItemModel>{
                 "internalName": "Bug2",
                 "displayName": "Butterfly",
                 "sellPrice": 9,
@@ -578,7 +578,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Bug",
                 "description": "Butter Fly? Get it??? Sorry... I promise I wont make this kind of joke again "
             }),
-        new DescItemBase("Bug3", <DescItemModel>{
+        new BaseItemBase("Bug3", <DescItemModel>{
                 "internalName": "Bug3",
                 "displayName": "Sentient Cereal",
                 "sellPrice": 15,
@@ -586,7 +586,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Bug",
                 "description": "Honestly, I was shocked too at first when I learned that cereal in real life was harvested from Cereal Bugs. Seriously, look it up! Most cereal before 1960 were made from harvested Cereal Bug Nests! "
             }),
-        new DescItemBase("Bug4", <DescItemModel>{
+        new BaseItemBase("Bug4", <DescItemModel>{
                 "internalName": "Bug4",
                 "displayName": "Fruitfly",
                 "sellPrice": 20,
@@ -594,7 +594,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Bug",
                 "description": "Hahaha I had my fingers crossed! "
             }),
-        new DescItemBase("Bug5", <DescItemModel>{
+        new BaseItemBase("Bug5", <DescItemModel>{
                 "internalName": "Bug5",
                 "displayName": "Mosquisnow",
                 "sellPrice": 32,
@@ -602,7 +602,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Bug",
                 "description": "I'm so tired of all these blood sucking vermin in IdleOn... and these mosquisnow bugs are annoying too! "
             }),
-        new DescItemBase("Bug6", <DescItemModel>{
+        new BaseItemBase("Bug6", <DescItemModel>{
                 "internalName": "Bug6",
                 "displayName": "Flycicle",
                 "sellPrice": 40,
@@ -610,7 +610,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Bug",
                 "description": "Ok these bugs are really not making any sense anymore. "
             }),
-        new DescItemBase("Bug7", <DescItemModel>{
+        new BaseItemBase("Bug7", <DescItemModel>{
                 "internalName": "Bug7",
                 "displayName": "Worker Bee",
                 "sellPrice": 70,
@@ -618,7 +618,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Bug",
                 "description": "It's a bee and it's working. As per the Worker Bee Union Act of 35e4, I am barred from making any pun or joke about them. "
             }),
-        new DescItemBase("Bug8", <DescItemModel>{
+        new BaseItemBase("Bug8", <DescItemModel>{
                 "internalName": "Bug8",
                 "displayName": "Fairy",
                 "sellPrice": 120,
@@ -626,7 +626,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Bug",
                 "description": "It glows with the joy of a being that knows it's not real, but continues to exist anyway. "
             }),
-        new DescItemBase("Critter1", <DescItemModel>{
+        new BaseItemBase("Critter1", <DescItemModel>{
                 "internalName": "Critter1",
                 "displayName": "Froge",
                 "sellPrice": 3,
@@ -634,7 +634,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Critter",
                 "description": "The living embodiment of the classic cryptocurrency 'Frogecoin'. Very ribbit, much green, wow!! "
             }),
-        new DescItemBase("Critter1A", <DescItemModel>{
+        new BaseItemBase("Critter1A", <DescItemModel>{
                 "internalName": "Critter1A",
                 "displayName": "Poison Froge",
                 "sellPrice": 100,
@@ -642,7 +642,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Critter",
                 "description": "Ew, it's the living embodiment of that scam alt-coin crypto ripoff, 'Frogecoin Cash' "
             }),
-        new DescItemBase("Critter2", <DescItemModel>{
+        new BaseItemBase("Critter2", <DescItemModel>{
                 "internalName": "Critter2",
                 "displayName": "Crabbo",
                 "sellPrice": 5,
@@ -650,7 +650,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Critter",
                 "description": "Argg, yer spendin' all me money! "
             }),
-        new DescItemBase("Critter2A", <DescItemModel>{
+        new BaseItemBase("Critter2A", <DescItemModel>{
                 "internalName": "Critter2A",
                 "displayName": "Mutant Crabbo",
                 "sellPrice": 2000,
@@ -658,7 +658,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Critter",
                 "description": "Argghgg, yershpend inall memuh knee!!... Yea, mutants can't speak very well, probably on account of the radiation poisioning and all that. "
             }),
-        new DescItemBase("Critter3", <DescItemModel>{
+        new BaseItemBase("Critter3", <DescItemModel>{
                 "internalName": "Critter3",
                 "displayName": "Scorpie",
                 "sellPrice": 10,
@@ -666,7 +666,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Critter",
                 "description": "This cutie will stab its way into your heart if you aren't careful! No seriosuly, be careful, the bugger pricked my foot the other day and it hurt bad. "
             }),
-        new DescItemBase("Critter3A", <DescItemModel>{
+        new BaseItemBase("Critter3A", <DescItemModel>{
                 "internalName": "Critter3A",
                 "displayName": "Crescent Scorpie",
                 "sellPrice": 10,
@@ -674,7 +674,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Critter",
                 "description": "This chrome coloured scorpion came straight from the future! Fuuuutuuuuureee! FUUTUUURREE!!! SOMEONE DIRECT ME TO THE CAN OPENERRRR!!!! "
             }),
-        new DescItemBase("Critter4", <DescItemModel>{
+        new BaseItemBase("Critter4", <DescItemModel>{
                 "internalName": "Critter4",
                 "displayName": "Mousey",
                 "sellPrice": 15,
@@ -682,7 +682,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Critter",
                 "description": "Adorable!!! Look how cute it's tail is, and that itty bitty nose, and the fact that it's a mouse and not a rat so I don't want to hit it with a broom! "
             }),
-        new DescItemBase("Critter4A", <DescItemModel>{
+        new BaseItemBase("Critter4A", <DescItemModel>{
                 "internalName": "Critter4A",
                 "displayName": "Nakeo Moleo",
                 "sellPrice": 3,
@@ -690,7 +690,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Critter",
                 "description": "This mole ain't got no fur! Ew, gross!! Disgusting even!!! What kind of wretched abomination has skin but no thick layer of fur?? "
             }),
-        new DescItemBase("Critter5", <DescItemModel>{
+        new BaseItemBase("Critter5", <DescItemModel>{
                 "internalName": "Critter5",
                 "displayName": "Owlio",
                 "sellPrice": 23,
@@ -698,7 +698,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Critter",
                 "description": "Hoot hoot! Yea thats all I got for this one. "
             }),
-        new DescItemBase("Critter5A", <DescItemModel>{
+        new BaseItemBase("Critter5A", <DescItemModel>{
                 "internalName": "Critter5A",
                 "displayName": "Minervowl",
                 "sellPrice": 3,
@@ -706,7 +706,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Critter",
                 "description": "It's a more expensive hoot, I guess. I ain't got no jokes for owls, they're too cool. "
             }),
-        new DescItemBase("Critter6", <DescItemModel>{
+        new BaseItemBase("Critter6", <DescItemModel>{
                 "internalName": "Critter6",
                 "displayName": "Pingy",
                 "sellPrice": 35,
@@ -714,7 +714,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Critter",
                 "description": "It's basically just Gunter but with RTX off. "
             }),
-        new DescItemBase("Critter6A", <DescItemModel>{
+        new BaseItemBase("Critter6A", <DescItemModel>{
                 "internalName": "Critter6A",
                 "displayName": "Eternal Lord of  The Undying Ember",
                 "sellPrice": 3,
@@ -722,7 +722,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Critter",
                 "description": "Bow before the destroyer of all that lies outside his domain, the ruler of the 8th dimension and all that it's flame encompasses, the bringer of light to the blind, and darkness to those who recite his title in full. ...ah crap. "
             }),
-        new DescItemBase("Critter7", <DescItemModel>{
+        new BaseItemBase("Critter7", <DescItemModel>{
                 "internalName": "Critter7",
                 "displayName": "Bunny",
                 "sellPrice": 47,
@@ -730,7 +730,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Critter",
                 "description": "It could use a carrot, the lil' guy needs some food! "
             }),
-        new DescItemBase("Critter7A", <DescItemModel>{
+        new BaseItemBase("Critter7A", <DescItemModel>{
                 "internalName": "Critter7A",
                 "displayName": "Purbunni",
                 "sellPrice": 3,
@@ -738,7 +738,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Critter",
                 "description": "The other bunny is brilliant... But I like this one more. "
             }),
-        new DescItemBase("Critter8", <DescItemModel>{
+        new BaseItemBase("Critter8", <DescItemModel>{
                 "internalName": "Critter8",
                 "displayName": "Dung Beat",
                 "sellPrice": 55,
@@ -746,7 +746,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Critter",
                 "description": "You lean closer to the critter, and hear it say 'Dodo tshh do dodo tss dodo tss badabada dodoooo'. So no, that name isn't a typo. "
             }),
-        new DescItemBase("Critter8A", <DescItemModel>{
+        new BaseItemBase("Critter8A", <DescItemModel>{
                 "internalName": "Critter8A",
                 "displayName": "Jade Scarab",
                 "sellPrice": 3,
@@ -754,7 +754,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Critter",
                 "description": "Oh I guess this one is a scarab, not a beetle. You can tell because of the way it is. "
             }),
-        new DescItemBase("Critter9", <DescItemModel>{
+        new BaseItemBase("Critter9", <DescItemModel>{
                 "internalName": "Critter9",
                 "displayName": "Honker",
                 "sellPrice": 80,
@@ -762,7 +762,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Critter",
                 "description": "HONK! HONK! "
             }),
-        new DescItemBase("Critter9A", <DescItemModel>{
+        new BaseItemBase("Critter9A", <DescItemModel>{
                 "internalName": "Critter9A",
                 "displayName": "Diamond Duck",
                 "sellPrice": 3,
@@ -770,7 +770,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Critter",
                 "description": "One of the only beings strong enough to take on the Eternal Lord of the Undying Ember realm. Their battle would be legendary. "
             }),
-        new DescItemBase("Critter10", <DescItemModel>{
+        new BaseItemBase("Critter10", <DescItemModel>{
                 "internalName": "Critter10",
                 "displayName": "Blobfish",
                 "sellPrice": 80,
@@ -778,7 +778,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Critter",
                 "description": "Yo look at dis doooood! "
             }),
-        new DescItemBase("Critter10A", <DescItemModel>{
+        new BaseItemBase("Critter10A", <DescItemModel>{
                 "internalName": "Critter10A",
                 "displayName": "Voodofish",
                 "sellPrice": 3,
@@ -786,7 +786,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Critter",
                 "description": "Yo bro I ain't touchin' that thing ain't no way! "
             }),
-        new DescItemBase("Soul1", <DescItemModel>{
+        new BaseItemBase("Soul1", <DescItemModel>{
                 "internalName": "Soul1",
                 "displayName": "Forest Soul",
                 "sellPrice": 3,
@@ -794,7 +794,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Soul",
                 "description": "The soul moans ooOOOOooOOOoo, because it's the only key on his keyboard that works. "
             }),
-        new DescItemBase("Soul2", <DescItemModel>{
+        new BaseItemBase("Soul2", <DescItemModel>{
                 "internalName": "Soul2",
                 "displayName": "Dune Soul",
                 "sellPrice": 9,
@@ -802,7 +802,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Soul",
                 "description": "Fat chonker this one is! It must be the moonmoon diet these ghosts have, they should start eating some of those fruits for a change! "
             }),
-        new DescItemBase("Soul3", <DescItemModel>{
+        new BaseItemBase("Soul3", <DescItemModel>{
                 "internalName": "Soul3",
                 "displayName": "Rooted Soul",
                 "sellPrice": 20,
@@ -810,7 +810,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Soul",
                 "description": "It's smiling as if it knows something that you don't... "
             }),
-        new DescItemBase("Soul4", <DescItemModel>{
+        new BaseItemBase("Soul4", <DescItemModel>{
                 "internalName": "Soul4",
                 "displayName": "Frigid Soul",
                 "sellPrice": 35,
@@ -818,7 +818,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Soul",
                 "description": "Well, his mom did warn him if that he kept making funny faces that it'd freeze that way! "
             }),
-        new DescItemBase("Soul5", <DescItemModel>{
+        new BaseItemBase("Soul5", <DescItemModel>{
                 "internalName": "Soul5",
                 "displayName": "Squishy Soul",
                 "sellPrice": 50,
@@ -826,7 +826,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Soul",
                 "description": "Don't judge it, you'd be mad too if someone squished YOU into that weirdo lookin' pattern! "
             }),
-        new DescItemBase("Soul6", <DescItemModel>{
+        new BaseItemBase("Soul6", <DescItemModel>{
                 "internalName": "Soul6",
                 "displayName": "Cryo Soul",
                 "sellPrice": 70,
@@ -834,7 +834,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Soul",
                 "description": "The soul moans ooOOOOooOOOoo, because it's the only key on his keyboard that works. "
             }),
-        new DescItemBase("EquipmentHats1", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats1", <ArmourItemModel>{
                 "internalName": "EquipmentHats1",
                 "displayName": "Farmer Brim",
                 "sellPrice": 175,
@@ -855,7 +855,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("TestObj15", <ArmourItemModel>{
+        new BaseItemBase("TestObj15", <ArmourItemModel>{
                 "internalName": "TestObj15",
                 "displayName": "Slime Cap",
                 "sellPrice": 200,
@@ -876,7 +876,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHatsBeg1", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHatsBeg1", <ArmourItemModel>{
                 "internalName": "EquipmentHatsBeg1",
                 "displayName": "Ice Cream Sunday",
                 "sellPrice": 200,
@@ -897,7 +897,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats61", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats61", <ArmourItemModel>{
                 "internalName": "EquipmentHats61",
                 "displayName": "Mark of Member",
                 "sellPrice": 200,
@@ -918,7 +918,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats15", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats15", <ArmourItemModel>{
                 "internalName": "EquipmentHats15",
                 "displayName": "Leather Cap",
                 "sellPrice": 400,
@@ -939,7 +939,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats5", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats5", <ArmourItemModel>{
                 "internalName": "EquipmentHats5",
                 "displayName": "White Headband",
                 "sellPrice": 200,
@@ -960,7 +960,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats6", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats6", <ArmourItemModel>{
                 "internalName": "EquipmentHats6",
                 "displayName": "Green Headband",
                 "sellPrice": 150,
@@ -981,7 +981,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats7", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats7", <ArmourItemModel>{
                 "internalName": "EquipmentHats7",
                 "displayName": "Red Headband",
                 "sellPrice": 200,
@@ -1002,7 +1002,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats8", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats8", <ArmourItemModel>{
                 "internalName": "EquipmentHats8",
                 "displayName": "Purple Tupacband",
                 "sellPrice": 200,
@@ -1023,7 +1023,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats9", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats9", <ArmourItemModel>{
                 "internalName": "EquipmentHats9",
                 "displayName": "Yellow Headband",
                 "sellPrice": 200,
@@ -1044,7 +1044,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats10", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats10", <ArmourItemModel>{
                 "internalName": "EquipmentHats10",
                 "displayName": "Pink Headband",
                 "sellPrice": 200,
@@ -1065,7 +1065,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats11", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats11", <ArmourItemModel>{
                 "internalName": "EquipmentHats11",
                 "displayName": "Grey Beret",
                 "sellPrice": 5,
@@ -1086,7 +1086,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats12", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats12", <ArmourItemModel>{
                 "internalName": "EquipmentHats12",
                 "displayName": "Traffic Cone",
                 "sellPrice": 5,
@@ -1107,7 +1107,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats13", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats13", <ArmourItemModel>{
                 "internalName": "EquipmentHats13",
                 "displayName": "Propeller Cap",
                 "sellPrice": 5,
@@ -1128,7 +1128,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats14", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats14", <ArmourItemModel>{
                 "internalName": "EquipmentHats14",
                 "displayName": "Baseball Hat",
                 "sellPrice": 5,
@@ -1149,7 +1149,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("TestObj14", <ArmourItemModel>{
+        new BaseItemBase("TestObj14", <ArmourItemModel>{
                 "internalName": "TestObj14",
                 "displayName": "Trojan Helmet",
                 "sellPrice": 200,
@@ -1170,7 +1170,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("TestObj16", <ArmourItemModel>{
+        new BaseItemBase("TestObj16", <ArmourItemModel>{
                 "internalName": "TestObj16",
                 "displayName": "Demon Horns",
                 "sellPrice": 200,
@@ -1191,7 +1191,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats4Choppin", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats4Choppin", <ArmourItemModel>{
                 "internalName": "EquipmentHats4Choppin",
                 "displayName": "Stump Prop",
                 "sellPrice": 200,
@@ -1212,7 +1212,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Choppin",
                 "Skill_Power": 5
             }),
-        new DescItemBase("EquipmentHats17", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats17", <ArmourItemModel>{
                 "internalName": "EquipmentHats17",
                 "displayName": "Copper Helmet",
                 "sellPrice": 1000,
@@ -1233,7 +1233,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats18", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats18", <ArmourItemModel>{
                 "internalName": "EquipmentHats18",
                 "displayName": "Iron Helmet",
                 "sellPrice": 5000,
@@ -1254,7 +1254,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats28", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats28", <ArmourItemModel>{
                 "internalName": "EquipmentHats28",
                 "displayName": "Gold Helmet",
                 "sellPrice": 15000,
@@ -1275,7 +1275,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats22", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats22", <ArmourItemModel>{
                 "internalName": "EquipmentHats22",
                 "displayName": "Amarok Helmet",
                 "sellPrice": 100,
@@ -1296,7 +1296,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats19", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats19", <ArmourItemModel>{
                 "internalName": "EquipmentHats19",
                 "displayName": "Platinum Helmet",
                 "sellPrice": 40000,
@@ -1317,7 +1317,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats53", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats53", <ArmourItemModel>{
                 "internalName": "EquipmentHats53",
                 "displayName": "Dementia Helmet",
                 "sellPrice": 1,
@@ -1338,7 +1338,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats52", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats52", <ArmourItemModel>{
                 "internalName": "EquipmentHats52",
                 "displayName": "Efaunt Helmet",
                 "sellPrice": 1,
@@ -1359,7 +1359,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats54", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats54", <ArmourItemModel>{
                 "internalName": "EquipmentHats54",
                 "displayName": "Void Imperium Helmet",
                 "sellPrice": 1,
@@ -1380,7 +1380,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats21", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats21", <ArmourItemModel>{
                 "internalName": "EquipmentHats21",
                 "displayName": "Party Hat",
                 "sellPrice": 1500,
@@ -1401,7 +1401,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats23", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats23", <ArmourItemModel>{
                 "internalName": "EquipmentHats23",
                 "displayName": "Farmer Brimer",
                 "sellPrice": 150,
@@ -1422,7 +1422,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats24", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats24", <ArmourItemModel>{
                 "internalName": "EquipmentHats24",
                 "displayName": "Farmer Brimest",
                 "sellPrice": 400,
@@ -1443,7 +1443,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats25", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats25", <ArmourItemModel>{
                 "internalName": "EquipmentHats25",
                 "displayName": "Bored Beanie",
                 "sellPrice": 500,
@@ -1464,7 +1464,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats2", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats2", <ArmourItemModel>{
                 "internalName": "EquipmentHats2",
                 "displayName": "Royal Turban",
                 "sellPrice": 200,
@@ -1485,7 +1485,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats27", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats27", <ArmourItemModel>{
                 "internalName": "EquipmentHats27",
                 "displayName": "Paper Boat",
                 "sellPrice": 1500,
@@ -1506,7 +1506,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats29", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats29", <ArmourItemModel>{
                 "internalName": "EquipmentHats29",
                 "displayName": "Alien Headband",
                 "sellPrice": 1000,
@@ -1527,7 +1527,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats30", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats30", <ArmourItemModel>{
                 "internalName": "EquipmentHats30",
                 "displayName": "Cowbo Galloneer",
                 "sellPrice": 1500,
@@ -1548,7 +1548,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats39", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats39", <ArmourItemModel>{
                 "internalName": "EquipmentHats39",
                 "displayName": "Grandma Disguise",
                 "sellPrice": 1500,
@@ -1569,7 +1569,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats42", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats42", <ArmourItemModel>{
                 "internalName": "EquipmentHats42",
                 "displayName": "Santa Hat",
                 "sellPrice": 1,
@@ -1590,7 +1590,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats44", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats44", <ArmourItemModel>{
                 "internalName": "EquipmentHats44",
                 "displayName": "Jar",
                 "sellPrice": 1,
@@ -1611,7 +1611,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats51", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats51", <ArmourItemModel>{
                 "internalName": "EquipmentHats51",
                 "displayName": "Big Pretty Bow",
                 "sellPrice": 1,
@@ -1632,7 +1632,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats55", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats55", <ArmourItemModel>{
                 "internalName": "EquipmentHats55",
                 "displayName": "Steam Cap",
                 "sellPrice": 1,
@@ -1653,7 +1653,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats56", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats56", <ArmourItemModel>{
                 "internalName": "EquipmentHats56",
                 "displayName": "Bunny Ears",
                 "sellPrice": 1,
@@ -1674,7 +1674,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats63", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats63", <ArmourItemModel>{
                 "internalName": "EquipmentHats63",
                 "displayName": "Summer Shell",
                 "sellPrice": 1,
@@ -1695,7 +1695,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats64", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats64", <ArmourItemModel>{
                 "internalName": "EquipmentHats64",
                 "displayName": "Nuget Cake Fedora",
                 "sellPrice": 1,
@@ -1716,7 +1716,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats66", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats66", <ArmourItemModel>{
                 "internalName": "EquipmentHats66",
                 "displayName": "Honker Hat",
                 "sellPrice": 1,
@@ -1737,7 +1737,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats67", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats67", <ArmourItemModel>{
                 "internalName": "EquipmentHats67",
                 "displayName": "Acorn Topper",
                 "sellPrice": 1,
@@ -1758,7 +1758,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats20", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats20", <ArmourItemModel>{
                 "internalName": "EquipmentHats20",
                 "displayName": "Militia Helm",
                 "sellPrice": 8500,
@@ -1779,7 +1779,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("TestObj13", <ArmourItemModel>{
+        new BaseItemBase("TestObj13", <ArmourItemModel>{
                 "internalName": "TestObj13",
                 "displayName": "Viking Cap",
                 "sellPrice": 200,
@@ -1800,7 +1800,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats58", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats58", <ArmourItemModel>{
                 "internalName": "EquipmentHats58",
                 "displayName": "Murmillo Helm",
                 "sellPrice": 200,
@@ -1821,7 +1821,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats3", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats3", <ArmourItemModel>{
                 "internalName": "EquipmentHats3",
                 "displayName": "Thief Hood",
                 "sellPrice": 8500,
@@ -1842,7 +1842,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats41", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats41", <ArmourItemModel>{
                 "internalName": "EquipmentHats41",
                 "displayName": "Sleek Coif",
                 "sellPrice": 8500,
@@ -1863,7 +1863,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats59", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats59", <ArmourItemModel>{
                 "internalName": "EquipmentHats59",
                 "displayName": "Conquistador Plume",
                 "sellPrice": 8500,
@@ -1884,7 +1884,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats16", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats16", <ArmourItemModel>{
                 "internalName": "EquipmentHats16",
                 "displayName": "Top Hat",
                 "sellPrice": 8500,
@@ -1905,7 +1905,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats26", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats26", <ArmourItemModel>{
                 "internalName": "EquipmentHats26",
                 "displayName": "Witch Hat",
                 "sellPrice": 800,
@@ -1926,7 +1926,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats60", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats60", <ArmourItemModel>{
                 "internalName": "EquipmentHats60",
                 "displayName": "Adornment of the High Priest",
                 "sellPrice": 800,
@@ -1947,7 +1947,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPunching1", <WeaponItemModel>{
+        new BaseItemBase("EquipmentPunching1", <WeaponItemModel>{
                 "internalName": "EquipmentPunching1",
                 "displayName": "Boxing Gloves",
                 "sellPrice": 1,
@@ -1968,7 +1968,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 55
             }),
-        new DescItemBase("EquipmentPunching2", <WeaponItemModel>{
+        new BaseItemBase("EquipmentPunching2", <WeaponItemModel>{
                 "internalName": "EquipmentPunching2",
                 "displayName": "The Stingers",
                 "sellPrice": 1800,
@@ -1989,7 +1989,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 60
             }),
-        new DescItemBase("EquipmentPunching3", <WeaponItemModel>{
+        new BaseItemBase("EquipmentPunching3", <WeaponItemModel>{
                 "internalName": "EquipmentPunching3",
                 "displayName": "Bandage Wraps",
                 "sellPrice": 7800,
@@ -2010,7 +2010,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 7,
                 "Reach": 65
             }),
-        new DescItemBase("EquipmentPunching4", <WeaponItemModel>{
+        new BaseItemBase("EquipmentPunching4", <WeaponItemModel>{
                 "internalName": "EquipmentPunching4",
                 "displayName": "Uninflated Glove",
                 "sellPrice": 7800,
@@ -2031,7 +2031,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 8,
                 "Reach": 65
             }),
-        new DescItemBase("EquipmentPunching5", <WeaponItemModel>{
+        new BaseItemBase("EquipmentPunching5", <WeaponItemModel>{
                 "internalName": "EquipmentPunching5",
                 "displayName": "Eclectic Ordeal",
                 "sellPrice": 7800,
@@ -2052,7 +2052,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 9,
                 "Reach": 85
             }),
-        new DescItemBase("EquipmentPunching6", <WeaponItemModel>{
+        new BaseItemBase("EquipmentPunching6", <WeaponItemModel>{
                 "internalName": "EquipmentPunching6",
                 "displayName": "Knuckle Sabers",
                 "sellPrice": 7800,
@@ -2073,7 +2073,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 9,
                 "Reach": 85
             }),
-        new DescItemBase("EquipmentPunching7", <WeaponItemModel>{
+        new BaseItemBase("EquipmentPunching7", <WeaponItemModel>{
                 "internalName": "EquipmentPunching7",
                 "displayName": "Diabolical Gauntlet",
                 "sellPrice": 7800,
@@ -2094,7 +2094,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 9,
                 "Reach": 96
             }),
-        new DescItemBase("TestObj1", <WeaponItemModel>{
+        new BaseItemBase("TestObj1", <WeaponItemModel>{
                 "internalName": "TestObj1",
                 "displayName": "Wooden Spear",
                 "sellPrice": 265,
@@ -2115,7 +2115,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 70
             }),
-        new DescItemBase("TestObj7", <WeaponItemModel>{
+        new BaseItemBase("TestObj7", <WeaponItemModel>{
                 "internalName": "TestObj7",
                 "displayName": "Steel Axe",
                 "sellPrice": 5500,
@@ -2136,7 +2136,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 62
             }),
-        new DescItemBase("TestObj3", <WeaponItemModel>{
+        new BaseItemBase("TestObj3", <WeaponItemModel>{
                 "internalName": "TestObj3",
                 "displayName": "Royal Bayonet",
                 "sellPrice": 12530,
@@ -2157,7 +2157,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 95
             }),
-        new DescItemBase("EquipmentSword1", <WeaponItemModel>{
+        new BaseItemBase("EquipmentSword1", <WeaponItemModel>{
                 "internalName": "EquipmentSword1",
                 "displayName": "Enforced Slasher",
                 "sellPrice": 26000,
@@ -2178,7 +2178,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 80
             }),
-        new DescItemBase("EquipmentSword2", <WeaponItemModel>{
+        new BaseItemBase("EquipmentSword2", <WeaponItemModel>{
                 "internalName": "EquipmentSword2",
                 "displayName": "The Ice Breaker",
                 "sellPrice": 26000,
@@ -2199,7 +2199,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 76
             }),
-        new DescItemBase("EquipmentSword3", <WeaponItemModel>{
+        new BaseItemBase("EquipmentSword3", <WeaponItemModel>{
                 "internalName": "EquipmentSword3",
                 "displayName": "Deuscythe",
                 "sellPrice": 26000,
@@ -2220,7 +2220,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 88
             }),
-        new DescItemBase("TestObj4", <WeaponItemModel>{
+        new BaseItemBase("TestObj4", <WeaponItemModel>{
                 "internalName": "TestObj4",
                 "displayName": "Frozen Impaler",
                 "sellPrice": 120,
@@ -2241,7 +2241,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 3,
                 "Reach": 100
             }),
-        new DescItemBase("TestObj5", <WeaponItemModel>{
+        new BaseItemBase("TestObj5", <WeaponItemModel>{
                 "internalName": "TestObj5",
                 "displayName": "Blood Screamer",
                 "sellPrice": 200,
@@ -2262,7 +2262,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 4,
                 "Reach": 84
             }),
-        new DescItemBase("TestObj8", <WeaponItemModel>{
+        new BaseItemBase("TestObj8", <WeaponItemModel>{
                 "internalName": "TestObj8",
                 "displayName": "Flaming Katana",
                 "sellPrice": 200,
@@ -2283,7 +2283,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 7,
                 "Reach": 74
             }),
-        new DescItemBase("TestObj9", <WeaponItemModel>{
+        new BaseItemBase("TestObj9", <WeaponItemModel>{
                 "internalName": "TestObj9",
                 "displayName": "Emerald Eizon",
                 "sellPrice": 200,
@@ -2304,7 +2304,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 7,
                 "Reach": 76
             }),
-        new DescItemBase("TestObj10", <WeaponItemModel>{
+        new BaseItemBase("TestObj10", <WeaponItemModel>{
                 "internalName": "TestObj10",
                 "displayName": "Stalagmite",
                 "sellPrice": 200,
@@ -2325,7 +2325,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 8,
                 "Reach": 78
             }),
-        new DescItemBase("EquipmentWeapons1", <WeaponItemModel>{
+        new BaseItemBase("EquipmentWeapons1", <WeaponItemModel>{
                 "internalName": "EquipmentWeapons1",
                 "displayName": "Iron Sword",
                 "sellPrice": 200,
@@ -2346,7 +2346,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 10,
                 "Reach": 78
             }),
-        new DescItemBase("TestObj2", <WeaponItemModel>{
+        new BaseItemBase("TestObj2", <WeaponItemModel>{
                 "internalName": "TestObj2",
                 "displayName": "Steel Spear",
                 "sellPrice": 223400,
@@ -2367,7 +2367,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 2,
                 "Reach": 90
             }),
-        new DescItemBase("EquipmentBows1", <WeaponItemModel>{
+        new BaseItemBase("EquipmentBows1", <WeaponItemModel>{
                 "internalName": "EquipmentBows1",
                 "displayName": "Wooden Bow",
                 "sellPrice": 275,
@@ -2388,7 +2388,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 150
             }),
-        new DescItemBase("EquipmentBows3", <WeaponItemModel>{
+        new BaseItemBase("EquipmentBows3", <WeaponItemModel>{
                 "internalName": "EquipmentBows3",
                 "displayName": "Birch Longbow",
                 "sellPrice": 1000,
@@ -2409,7 +2409,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 170
             }),
-        new DescItemBase("EquipmentBows4", <WeaponItemModel>{
+        new BaseItemBase("EquipmentBows4", <WeaponItemModel>{
                 "internalName": "EquipmentBows4",
                 "displayName": "Carrot Launcher",
                 "sellPrice": 5000,
@@ -2430,7 +2430,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 2,
                 "Reach": 225
             }),
-        new DescItemBase("EquipmentBows5", <WeaponItemModel>{
+        new BaseItemBase("EquipmentBows5", <WeaponItemModel>{
                 "internalName": "EquipmentBows5",
                 "displayName": "Spiked Menace",
                 "sellPrice": 4000,
@@ -2451,7 +2451,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 175
             }),
-        new DescItemBase("EquipmentBows6", <WeaponItemModel>{
+        new BaseItemBase("EquipmentBows6", <WeaponItemModel>{
                 "internalName": "EquipmentBows6",
                 "displayName": "Pharoah Bow",
                 "sellPrice": 15000,
@@ -2472,7 +2472,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 200
             }),
-        new DescItemBase("EquipmentBows7", <WeaponItemModel>{
+        new BaseItemBase("EquipmentBows7", <WeaponItemModel>{
                 "internalName": "EquipmentBows7",
                 "displayName": "Blizzard Bow",
                 "sellPrice": 15000,
@@ -2493,7 +2493,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 205
             }),
-        new DescItemBase("EquipmentBows8", <WeaponItemModel>{
+        new BaseItemBase("EquipmentBows8", <WeaponItemModel>{
                 "internalName": "EquipmentBows8",
                 "displayName": "Blackhole Bow",
                 "sellPrice": 15000,
@@ -2514,7 +2514,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 7,
                 "Reach": 230
             }),
-        new DescItemBase("EquipmentWands1", <WeaponItemModel>{
+        new BaseItemBase("EquipmentWands1", <WeaponItemModel>{
                 "internalName": "EquipmentWands1",
                 "displayName": "Gnarled Wand",
                 "sellPrice": 20,
@@ -2535,7 +2535,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 115
             }),
-        new DescItemBase("EquipmentWands2", <WeaponItemModel>{
+        new BaseItemBase("EquipmentWands2", <WeaponItemModel>{
                 "internalName": "EquipmentWands2",
                 "displayName": "Quarterstaff",
                 "sellPrice": 4000,
@@ -2556,7 +2556,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 4,
                 "Reach": 120
             }),
-        new DescItemBase("EquipmentWands5", <WeaponItemModel>{
+        new BaseItemBase("EquipmentWands5", <WeaponItemModel>{
                 "internalName": "EquipmentWands5",
                 "displayName": "Starlight",
                 "sellPrice": 10000,
@@ -2577,7 +2577,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 4,
                 "Reach": 145
             }),
-        new DescItemBase("EquipmentWands6", <WeaponItemModel>{
+        new BaseItemBase("EquipmentWands6", <WeaponItemModel>{
                 "internalName": "EquipmentWands6",
                 "displayName": "Crows Nest",
                 "sellPrice": 200,
@@ -2598,7 +2598,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 160
             }),
-        new DescItemBase("EquipmentWands3", <WeaponItemModel>{
+        new BaseItemBase("EquipmentWands3", <WeaponItemModel>{
                 "internalName": "EquipmentWands3",
                 "displayName": "Spriggly Storm",
                 "sellPrice": 200,
@@ -2619,7 +2619,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 155
             }),
-        new DescItemBase("EquipmentWands7", <WeaponItemModel>{
+        new BaseItemBase("EquipmentWands7", <WeaponItemModel>{
                 "internalName": "EquipmentWands7",
                 "displayName": "Grey Gatsby",
                 "sellPrice": 200,
@@ -2640,7 +2640,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 170
             }),
-        new DescItemBase("EquipmentWands4", <WeaponItemModel>{
+        new BaseItemBase("EquipmentWands4", <WeaponItemModel>{
                 "internalName": "EquipmentWands4",
                 "displayName": "Microphone",
                 "sellPrice": 200,
@@ -2661,7 +2661,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 8,
                 "Reach": 160
             }),
-        new DescItemBase("EquipmentShirts1", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts1", <ArmourItemModel>{
                 "internalName": "EquipmentShirts1",
                 "displayName": "Orange Tee",
                 "sellPrice": 200,
@@ -2682,7 +2682,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts2", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts2", <ArmourItemModel>{
                 "internalName": "EquipmentShirts2",
                 "displayName": "Blue Tee",
                 "sellPrice": 250,
@@ -2703,7 +2703,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts16", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts16", <ArmourItemModel>{
                 "internalName": "EquipmentShirts16",
                 "displayName": "Spore Tee",
                 "sellPrice": 125,
@@ -2724,7 +2724,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts3", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts3", <ArmourItemModel>{
                 "internalName": "EquipmentShirts3",
                 "displayName": "Black Tee",
                 "sellPrice": 50,
@@ -2745,7 +2745,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts4", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts4", <ArmourItemModel>{
                 "internalName": "EquipmentShirts4",
                 "displayName": "Tanned Hide",
                 "sellPrice": 200,
@@ -2766,7 +2766,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts7", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts7", <ArmourItemModel>{
                 "internalName": "EquipmentShirts7",
                 "displayName": "Molten Chest",
                 "sellPrice": 200,
@@ -2787,7 +2787,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts8", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts8", <ArmourItemModel>{
                 "internalName": "EquipmentShirts8",
                 "displayName": "REPLACE ME",
                 "sellPrice": 200,
@@ -2808,7 +2808,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts9", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts9", <ArmourItemModel>{
                 "internalName": "EquipmentShirts9",
                 "displayName": "REPLACE ME",
                 "sellPrice": 200,
@@ -2829,7 +2829,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts21", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts21", <ArmourItemModel>{
                 "internalName": "EquipmentShirts21",
                 "displayName": "Tattered Cloth",
                 "sellPrice": 200,
@@ -2850,7 +2850,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts10", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts10", <ArmourItemModel>{
                 "internalName": "EquipmentShirts10",
                 "displayName": "Fur Shirt",
                 "sellPrice": 200,
@@ -2871,7 +2871,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts11", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts11", <ArmourItemModel>{
                 "internalName": "EquipmentShirts11",
                 "displayName": "Copper Platebody",
                 "sellPrice": 1500,
@@ -2892,7 +2892,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts12", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts12", <ArmourItemModel>{
                 "internalName": "EquipmentShirts12",
                 "displayName": "Iron Platebody",
                 "sellPrice": 6000,
@@ -2913,7 +2913,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts13", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts13", <ArmourItemModel>{
                 "internalName": "EquipmentShirts13",
                 "displayName": "Gold Platebody",
                 "sellPrice": 12000,
@@ -2934,7 +2934,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts18", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts18", <ArmourItemModel>{
                 "internalName": "EquipmentShirts18",
                 "displayName": "Amarok Bodyplate",
                 "sellPrice": 200,
@@ -2955,7 +2955,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts14", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts14", <ArmourItemModel>{
                 "internalName": "EquipmentShirts14",
                 "displayName": "Platinum Platbody",
                 "sellPrice": 40000,
@@ -2976,7 +2976,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts15", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts15", <ArmourItemModel>{
                 "internalName": "EquipmentShirts15",
                 "displayName": "Dementia Body",
                 "sellPrice": 200,
@@ -2997,7 +2997,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts26", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts26", <ArmourItemModel>{
                 "internalName": "EquipmentShirts26",
                 "displayName": "Efaunt Ribcage",
                 "sellPrice": 200,
@@ -3018,7 +3018,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts27", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts27", <ArmourItemModel>{
                 "internalName": "EquipmentShirts27",
                 "displayName": "Void Imperium Platebody",
                 "sellPrice": 200,
@@ -3039,7 +3039,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts17", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts17", <ArmourItemModel>{
                 "internalName": "EquipmentShirts17",
                 "displayName": "MCR Tshirt",
                 "sellPrice": 200,
@@ -3060,7 +3060,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts19", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts19", <ArmourItemModel>{
                 "internalName": "EquipmentShirts19",
                 "displayName": "Planktop",
                 "sellPrice": 200,
@@ -3081,7 +3081,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts20", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts20", <ArmourItemModel>{
                 "internalName": "EquipmentShirts20",
                 "displayName": "Hide Shirt",
                 "sellPrice": 200,
@@ -3102,7 +3102,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts24", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts24", <ArmourItemModel>{
                 "internalName": "EquipmentShirts24",
                 "displayName": "Green Tee",
                 "sellPrice": 200,
@@ -3123,7 +3123,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts25", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts25", <ArmourItemModel>{
                 "internalName": "EquipmentShirts25",
                 "displayName": "Purple Tee",
                 "sellPrice": 200,
@@ -3144,7 +3144,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts31", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts31", <ArmourItemModel>{
                 "internalName": "EquipmentShirts31",
                 "displayName": "Member Hoodie",
                 "sellPrice": 200,
@@ -3165,7 +3165,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts5", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts5", <ArmourItemModel>{
                 "internalName": "EquipmentShirts5",
                 "displayName": "Studded Hide",
                 "sellPrice": 200,
@@ -3186,7 +3186,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts23", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts23", <ArmourItemModel>{
                 "internalName": "EquipmentShirts23",
                 "displayName": "Feral Leathering",
                 "sellPrice": 200,
@@ -3207,7 +3207,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts22", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts22", <ArmourItemModel>{
                 "internalName": "EquipmentShirts22",
                 "displayName": "Furled Robes",
                 "sellPrice": 200,
@@ -3228,7 +3228,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts28", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts28", <ArmourItemModel>{
                 "internalName": "EquipmentShirts28",
                 "displayName": "Damascus Plates",
                 "sellPrice": 200,
@@ -3249,7 +3249,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts29", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts29", <ArmourItemModel>{
                 "internalName": "EquipmentShirts29",
                 "displayName": "Evergreen Wraps",
                 "sellPrice": 200,
@@ -3270,7 +3270,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts30", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts30", <ArmourItemModel>{
                 "internalName": "EquipmentShirts30",
                 "displayName": "Elegantine Robes",
                 "sellPrice": 200,
@@ -3291,7 +3291,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPants1", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPants1", <ArmourItemModel>{
                 "internalName": "EquipmentPants1",
                 "displayName": "Torn Jeans",
                 "sellPrice": 650,
@@ -3312,7 +3312,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPants2", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPants2", <ArmourItemModel>{
                 "internalName": "EquipmentPants2",
                 "displayName": "Copper Platelegs",
                 "sellPrice": 3000,
@@ -3333,7 +3333,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPants3", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPants3", <ArmourItemModel>{
                 "internalName": "EquipmentPants3",
                 "displayName": "Iron Platelegs",
                 "sellPrice": 6000,
@@ -3354,7 +3354,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPants4", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPants4", <ArmourItemModel>{
                 "internalName": "EquipmentPants4",
                 "displayName": "Gold Platelegs",
                 "sellPrice": 15000,
@@ -3375,7 +3375,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPants17", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPants17", <ArmourItemModel>{
                 "internalName": "EquipmentPants17",
                 "displayName": "Amarok Hinds",
                 "sellPrice": 200,
@@ -3396,7 +3396,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPants5", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPants5", <ArmourItemModel>{
                 "internalName": "EquipmentPants5",
                 "displayName": "Platinum Shins",
                 "sellPrice": 25000,
@@ -3417,7 +3417,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPants6", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPants6", <ArmourItemModel>{
                 "internalName": "EquipmentPants6",
                 "displayName": "Dementia Shins",
                 "sellPrice": 200,
@@ -3438,7 +3438,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPants20", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPants20", <ArmourItemModel>{
                 "internalName": "EquipmentPants20",
                 "displayName": "Efaunt Hipilium",
                 "sellPrice": 200,
@@ -3459,7 +3459,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPants21", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPants21", <ArmourItemModel>{
                 "internalName": "EquipmentPants21",
                 "displayName": "Void Imperium Shardshins",
                 "sellPrice": 200,
@@ -3480,7 +3480,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPants7", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPants7", <ArmourItemModel>{
                 "internalName": "EquipmentPants7",
                 "displayName": "Gilded Pilates",
                 "sellPrice": 200,
@@ -3501,7 +3501,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPants8", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPants8", <ArmourItemModel>{
                 "internalName": "EquipmentPants8",
                 "displayName": "Twisted Scales",
                 "sellPrice": 200,
@@ -3522,7 +3522,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPants10", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPants10", <ArmourItemModel>{
                 "internalName": "EquipmentPants10",
                 "displayName": "Give Up On Life Pants",
                 "sellPrice": 200,
@@ -3543,7 +3543,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPants11", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPants11", <ArmourItemModel>{
                 "internalName": "EquipmentPants11",
                 "displayName": "Yellow Belt Ninja Pants",
                 "sellPrice": 200,
@@ -3564,7 +3564,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPants12", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPants12", <ArmourItemModel>{
                 "internalName": "EquipmentPants12",
                 "displayName": "Merchantile Pants",
                 "sellPrice": 200,
@@ -3585,7 +3585,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPants13", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPants13", <ArmourItemModel>{
                 "internalName": "EquipmentPants13",
                 "displayName": "Ancient Leggings",
                 "sellPrice": 200,
@@ -3606,7 +3606,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPants14", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPants14", <ArmourItemModel>{
                 "internalName": "EquipmentPants14",
                 "displayName": "Forensic Leggings",
                 "sellPrice": 200,
@@ -3627,7 +3627,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPants15", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPants15", <ArmourItemModel>{
                 "internalName": "EquipmentPants15",
                 "displayName": "Bleached Designer Wode Patch Pants",
                 "sellPrice": 3500,
@@ -3648,7 +3648,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPants16", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPants16", <ArmourItemModel>{
                 "internalName": "EquipmentPants16",
                 "displayName": "Adam's Leaf",
                 "sellPrice": 200,
@@ -3669,7 +3669,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPants18", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPants18", <ArmourItemModel>{
                 "internalName": "EquipmentPants18",
                 "displayName": "Dirty Coal Miner Baggy Soot Pants",
                 "sellPrice": 200,
@@ -3690,7 +3690,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPants19", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPants19", <ArmourItemModel>{
                 "internalName": "EquipmentPants19",
                 "displayName": "Trimmed Rune Platelegs",
                 "sellPrice": 200,
@@ -3711,7 +3711,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPants22", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPants22", <ArmourItemModel>{
                 "internalName": "EquipmentPants22",
                 "displayName": "Fishing Overalls",
                 "sellPrice": 200,
@@ -3732,7 +3732,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPants23", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPants23", <ArmourItemModel>{
                 "internalName": "EquipmentPants23",
                 "displayName": "Bandito Pantaloon",
                 "sellPrice": 200,
@@ -3753,7 +3753,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes1", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes1", <ArmourItemModel>{
                 "internalName": "EquipmentShoes1",
                 "displayName": "Copper Boots",
                 "sellPrice": 1000,
@@ -3774,7 +3774,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes15", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes15", <ArmourItemModel>{
                 "internalName": "EquipmentShoes15",
                 "displayName": "Iron Boots",
                 "sellPrice": 3000,
@@ -3795,7 +3795,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes3", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes3", <ArmourItemModel>{
                 "internalName": "EquipmentShoes3",
                 "displayName": "Gold Boots",
                 "sellPrice": 10000,
@@ -3816,7 +3816,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes20", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes20", <ArmourItemModel>{
                 "internalName": "EquipmentShoes20",
                 "displayName": "Amarok Paws",
                 "sellPrice": 3000,
@@ -3837,7 +3837,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes4", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes4", <ArmourItemModel>{
                 "internalName": "EquipmentShoes4",
                 "displayName": "Platinum Boots",
                 "sellPrice": 20000,
@@ -3858,7 +3858,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes5", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes5", <ArmourItemModel>{
                 "internalName": "EquipmentShoes5",
                 "displayName": "Dementia Boots",
                 "sellPrice": 200,
@@ -3879,7 +3879,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes21", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes21", <ArmourItemModel>{
                 "internalName": "EquipmentShoes21",
                 "displayName": "Efaunts Broken Ankles",
                 "sellPrice": 20,
@@ -3900,7 +3900,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes22", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes22", <ArmourItemModel>{
                 "internalName": "EquipmentShoes22",
                 "displayName": "Void Imperium Kicks",
                 "sellPrice": 200,
@@ -3921,7 +3921,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes6", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes6", <ArmourItemModel>{
                 "internalName": "EquipmentShoes6",
                 "displayName": "Hermes Boots",
                 "sellPrice": 200,
@@ -3942,7 +3942,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes7", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes7", <ArmourItemModel>{
                 "internalName": "EquipmentShoes7",
                 "displayName": "Goo Galoshes",
                 "sellPrice": 500,
@@ -3963,7 +3963,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes8", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes8", <ArmourItemModel>{
                 "internalName": "EquipmentShoes8",
                 "displayName": "Yeti Walkers",
                 "sellPrice": 200,
@@ -3984,7 +3984,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes9", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes9", <ArmourItemModel>{
                 "internalName": "EquipmentShoes9",
                 "displayName": "Flip Flops",
                 "sellPrice": 500,
@@ -4005,7 +4005,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes10", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes10", <ArmourItemModel>{
                 "internalName": "EquipmentShoes10",
                 "displayName": "Flap Flops",
                 "sellPrice": 200,
@@ -4026,7 +4026,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes11", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes11", <ArmourItemModel>{
                 "internalName": "EquipmentShoes11",
                 "displayName": "Floop Flops",
                 "sellPrice": 200,
@@ -4047,7 +4047,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes12", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes12", <ArmourItemModel>{
                 "internalName": "EquipmentShoes12",
                 "displayName": "Flux Flops",
                 "sellPrice": 200,
@@ -4068,7 +4068,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes13", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes13", <ArmourItemModel>{
                 "internalName": "EquipmentShoes13",
                 "displayName": "Gaia Shoes",
                 "sellPrice": 200,
@@ -4089,7 +4089,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes14", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes14", <ArmourItemModel>{
                 "internalName": "EquipmentShoes14",
                 "displayName": "Cauldrunners",
                 "sellPrice": 200,
@@ -4110,7 +4110,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes16", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes16", <ArmourItemModel>{
                 "internalName": "EquipmentShoes16",
                 "displayName": "Cavern Trekkers",
                 "sellPrice": 3000,
@@ -4131,7 +4131,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes17", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes17", <ArmourItemModel>{
                 "internalName": "EquipmentShoes17",
                 "displayName": "Logger Heels",
                 "sellPrice": 3000,
@@ -4152,7 +4152,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes18", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes18", <ArmourItemModel>{
                 "internalName": "EquipmentShoes18",
                 "displayName": "Angler Boots",
                 "sellPrice": 3000,
@@ -4173,7 +4173,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes19", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes19", <ArmourItemModel>{
                 "internalName": "EquipmentShoes19",
                 "displayName": "Bandito Boots",
                 "sellPrice": 3000,
@@ -4194,7 +4194,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes2", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes2", <ArmourItemModel>{
                 "internalName": "EquipmentShoes2",
                 "displayName": "Eyern Boots",
                 "sellPrice": 20,
@@ -4215,7 +4215,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPendant1", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPendant1", <ArmourItemModel>{
                 "internalName": "EquipmentPendant1",
                 "displayName": "Mint Icey",
                 "sellPrice": 420,
@@ -4236,7 +4236,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPendant2", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPendant2", <ArmourItemModel>{
                 "internalName": "EquipmentPendant2",
                 "displayName": "Strawbu Icey",
                 "sellPrice": 420,
@@ -4257,7 +4257,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPendant3", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPendant3", <ArmourItemModel>{
                 "internalName": "EquipmentPendant3",
                 "displayName": "Rok Road Icey",
                 "sellPrice": 420,
@@ -4278,7 +4278,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPendant4", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPendant4", <ArmourItemModel>{
                 "internalName": "EquipmentPendant4",
                 "displayName": "Rainbo Icey",
                 "sellPrice": 420,
@@ -4299,7 +4299,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPendant5", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPendant5", <ArmourItemModel>{
                 "internalName": "EquipmentPendant5",
                 "displayName": "Chocotastic Icey",
                 "sellPrice": 420,
@@ -4320,7 +4320,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPendant6", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPendant6", <ArmourItemModel>{
                 "internalName": "EquipmentPendant6",
                 "displayName": "Blubbery Icey",
                 "sellPrice": 420,
@@ -4341,7 +4341,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPendant7", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPendant7", <ArmourItemModel>{
                 "internalName": "EquipmentPendant7",
                 "displayName": "Lava Icey",
                 "sellPrice": 420,
@@ -4362,7 +4362,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPendant8", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPendant8", <ArmourItemModel>{
                 "internalName": "EquipmentPendant8",
                 "displayName": "Legends Icey",
                 "sellPrice": 27,
@@ -4383,7 +4383,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPendant9", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPendant9", <ArmourItemModel>{
                 "internalName": "EquipmentPendant9",
                 "displayName": "Little Wooden Katana",
                 "sellPrice": 200,
@@ -4404,7 +4404,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPendant10", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPendant10", <ArmourItemModel>{
                 "internalName": "EquipmentPendant10",
                 "displayName": "Sleek Shank",
                 "sellPrice": 400,
@@ -4425,7 +4425,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPendant11", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPendant11", <ArmourItemModel>{
                 "internalName": "EquipmentPendant11",
                 "displayName": "Carrot Horror",
                 "sellPrice": 500,
@@ -4446,7 +4446,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPendant12", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPendant12", <ArmourItemModel>{
                 "internalName": "EquipmentPendant12",
                 "displayName": "Tarantulight",
                 "sellPrice": 6500,
@@ -4467,7 +4467,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPendant13", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPendant13", <ArmourItemModel>{
                 "internalName": "EquipmentPendant13",
                 "displayName": "Quartz Pendant",
                 "sellPrice": 6500,
@@ -4488,7 +4488,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPendant14", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPendant14", <ArmourItemModel>{
                 "internalName": "EquipmentPendant14",
                 "displayName": "Fuscismatia",
                 "sellPrice": 10000,
@@ -4509,7 +4509,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPendant15", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPendant15", <ArmourItemModel>{
                 "internalName": "EquipmentPendant15",
                 "displayName": "Lucky Fish Head",
                 "sellPrice": 6500,
@@ -4530,7 +4530,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPendant16", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPendant16", <ArmourItemModel>{
                 "internalName": "EquipmentPendant16",
                 "displayName": "Strung Bludgeon",
                 "sellPrice": 10000,
@@ -4551,7 +4551,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPendant17", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPendant17", <ArmourItemModel>{
                 "internalName": "EquipmentPendant17",
                 "displayName": "Chaotic Amarok Pendant",
                 "sellPrice": 10000,
@@ -4572,7 +4572,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPendant18", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPendant18", <ArmourItemModel>{
                 "internalName": "EquipmentPendant18",
                 "displayName": "Strung Steamy",
                 "sellPrice": 1,
@@ -4593,7 +4593,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPendant19", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPendant19", <ArmourItemModel>{
                 "internalName": "EquipmentPendant19",
                 "displayName": "Cedar Pendant",
                 "sellPrice": 1,
@@ -4614,7 +4614,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPendant20", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPendant20", <ArmourItemModel>{
                 "internalName": "EquipmentPendant20",
                 "displayName": "Fishhead Pendant",
                 "sellPrice": 1,
@@ -4635,7 +4635,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPendant21", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPendant21", <ArmourItemModel>{
                 "internalName": "EquipmentPendant21",
                 "displayName": "Deathly Cluster Pendant",
                 "sellPrice": 1,
@@ -4656,7 +4656,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPendant22", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPendant22", <ArmourItemModel>{
                 "internalName": "EquipmentPendant22",
                 "displayName": "Hallowed Tail Pendant",
                 "sellPrice": 1,
@@ -4677,7 +4677,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPendant23", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPendant23", <ArmourItemModel>{
                 "internalName": "EquipmentPendant23",
                 "displayName": "Persephones Bouquet",
                 "sellPrice": 1,
@@ -4698,7 +4698,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings1", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings1", <ArmourItemModel>{
                 "internalName": "EquipmentRings1",
                 "displayName": "Gold Ring",
                 "sellPrice": 200,
@@ -4719,7 +4719,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings2", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings2", <ArmourItemModel>{
                 "internalName": "EquipmentRings2",
                 "displayName": "Copper Band",
                 "sellPrice": 200,
@@ -4740,7 +4740,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings3", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings3", <ArmourItemModel>{
                 "internalName": "EquipmentRings3",
                 "displayName": "Steel Band",
                 "sellPrice": 200,
@@ -4761,7 +4761,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings4", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings4", <ArmourItemModel>{
                 "internalName": "EquipmentRings4",
                 "displayName": "Molden Crust",
                 "sellPrice": 200,
@@ -4782,7 +4782,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings5", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings5", <ArmourItemModel>{
                 "internalName": "EquipmentRings5",
                 "displayName": "Toxic Bubbles Band",
                 "sellPrice": 200,
@@ -4803,7 +4803,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings6", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings6", <ArmourItemModel>{
                 "internalName": "EquipmentRings6",
                 "displayName": "Death Wish",
                 "sellPrice": 200,
@@ -4824,7 +4824,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings7", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings7", <ArmourItemModel>{
                 "internalName": "EquipmentRings7",
                 "displayName": "Pugilist Demise",
                 "sellPrice": 4000,
@@ -4845,7 +4845,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings8", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings8", <ArmourItemModel>{
                 "internalName": "EquipmentRings8",
                 "displayName": "The Used Bandaid",
                 "sellPrice": 2500,
@@ -4866,7 +4866,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings9", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings9", <ArmourItemModel>{
                 "internalName": "EquipmentRings9",
                 "displayName": "Chat Ring",
                 "sellPrice": 2500,
@@ -4887,7 +4887,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings10", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings10", <ArmourItemModel>{
                 "internalName": "EquipmentRings10",
                 "displayName": "Spikeweed Ring",
                 "sellPrice": 2500,
@@ -4908,7 +4908,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings11", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings11", <ArmourItemModel>{
                 "internalName": "EquipmentRings11",
                 "displayName": "Defenders Dignity",
                 "sellPrice": 5000,
@@ -4929,7 +4929,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRingsFishing1", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRingsFishing1", <ArmourItemModel>{
                 "internalName": "EquipmentRingsFishing1",
                 "displayName": "Shallow Watering",
                 "sellPrice": 2500,
@@ -4950,7 +4950,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRingsFishing2", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRingsFishing2", <ArmourItemModel>{
                 "internalName": "EquipmentRingsFishing2",
                 "displayName": "Oceanic Ring",
                 "sellPrice": 2500,
@@ -4971,7 +4971,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRingsFishing3", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRingsFishing3", <ArmourItemModel>{
                 "internalName": "EquipmentRingsFishing3",
                 "displayName": "Deepwater Trench Ring",
                 "sellPrice": 2500,
@@ -4992,7 +4992,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings12", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings12", <ArmourItemModel>{
                 "internalName": "EquipmentRings12",
                 "displayName": "Frisbee Ring",
                 "sellPrice": 5000,
@@ -5013,7 +5013,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings13", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings13", <ArmourItemModel>{
                 "internalName": "EquipmentRings13",
                 "displayName": "Silver Stopwatch",
                 "sellPrice": 5000,
@@ -5034,7 +5034,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings14", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings14", <ArmourItemModel>{
                 "internalName": "EquipmentRings14",
                 "displayName": "Dooble Goopi",
                 "sellPrice": 1,
@@ -5055,7 +5055,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings15", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings15", <ArmourItemModel>{
                 "internalName": "EquipmentRings15",
                 "displayName": "Sanic Ring",
                 "sellPrice": 1,
@@ -5076,7 +5076,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings16", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings16", <ArmourItemModel>{
                 "internalName": "EquipmentRings16",
                 "displayName": "Efaunt Trunculus",
                 "sellPrice": 1,
@@ -5097,7 +5097,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings21", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings21", <ArmourItemModel>{
                 "internalName": "EquipmentRings21",
                 "displayName": "Elf Twist Ring",
                 "sellPrice": 1,
@@ -5118,7 +5118,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings20", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings20", <ArmourItemModel>{
                 "internalName": "EquipmentRings20",
                 "displayName": "Rex Ring",
                 "sellPrice": 1,
@@ -5139,7 +5139,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings19", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings19", <ArmourItemModel>{
                 "internalName": "EquipmentRings19",
                 "displayName": "Bejeweled Ring",
                 "sellPrice": 1,
@@ -5160,7 +5160,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings22", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings22", <ArmourItemModel>{
                 "internalName": "EquipmentRings22",
                 "displayName": "Tenacity Ring",
                 "sellPrice": 1,
@@ -5181,7 +5181,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings18", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings18", <ArmourItemModel>{
                 "internalName": "EquipmentRings18",
                 "displayName": "The Emperor's Opal",
                 "sellPrice": 1,
@@ -5202,7 +5202,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRingsChat1", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRingsChat1", <ArmourItemModel>{
                 "internalName": "EquipmentRingsChat1",
                 "displayName": "Love Ring",
                 "sellPrice": 2500,
@@ -5223,7 +5223,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRingsChat2", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRingsChat2", <ArmourItemModel>{
                 "internalName": "EquipmentRingsChat2",
                 "displayName": "Leafy Ring",
                 "sellPrice": 2500,
@@ -5244,7 +5244,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRingsChat3", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRingsChat3", <ArmourItemModel>{
                 "internalName": "EquipmentRingsChat3",
                 "displayName": "Wealth Ring",
                 "sellPrice": 2500,
@@ -5265,7 +5265,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRingsChat4", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRingsChat4", <ArmourItemModel>{
                 "internalName": "EquipmentRingsChat4",
                 "displayName": "Bob Ring",
                 "sellPrice": 2500,
@@ -5286,7 +5286,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRingsChat5", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRingsChat5", <ArmourItemModel>{
                 "internalName": "EquipmentRingsChat5",
                 "displayName": "Bubble Ring",
                 "sellPrice": 2500,
@@ -5307,7 +5307,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRingsChat6", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRingsChat6", <ArmourItemModel>{
                 "internalName": "EquipmentRingsChat6",
                 "displayName": "Cthulu's Ring",
                 "sellPrice": 2500,
@@ -5328,7 +5328,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRingsChat8", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRingsChat8", <ArmourItemModel>{
                 "internalName": "EquipmentRingsChat8",
                 "displayName": "Lava Sez Buy More Gems",
                 "sellPrice": 2500,
@@ -5349,7 +5349,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRingsChat9", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRingsChat9", <ArmourItemModel>{
                 "internalName": "EquipmentRingsChat9",
                 "displayName": "HONK Ring",
                 "sellPrice": 2500,
@@ -5370,7 +5370,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentTools1", <ToolItemModel>{
+        new BaseItemBase("EquipmentTools1", <ToolItemModel>{
                 "internalName": "EquipmentTools1",
                 "displayName": "Junk Pickaxe",
                 "sellPrice": 50,
@@ -5392,7 +5392,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 2,
                 "Speed": 3
             }),
-        new DescItemBase("EquipmentTools2", <ToolItemModel>{
+        new BaseItemBase("EquipmentTools2", <ToolItemModel>{
                 "internalName": "EquipmentTools2",
                 "displayName": "Copper Pickaxe",
                 "sellPrice": 800,
@@ -5414,7 +5414,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 6,
                 "Speed": 3
             }),
-        new DescItemBase("EquipmentTools3", <ToolItemModel>{
+        new BaseItemBase("EquipmentTools3", <ToolItemModel>{
                 "internalName": "EquipmentTools3",
                 "displayName": "Iron Pickaxe",
                 "sellPrice": 5000,
@@ -5436,7 +5436,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 10,
                 "Speed": 4
             }),
-        new DescItemBase("EquipmentTools5", <ToolItemModel>{
+        new BaseItemBase("EquipmentTools5", <ToolItemModel>{
                 "internalName": "EquipmentTools5",
                 "displayName": "Gold Pickaxe",
                 "sellPrice": 10000,
@@ -5458,7 +5458,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 13,
                 "Speed": 4
             }),
-        new DescItemBase("EquipmentTools6", <ToolItemModel>{
+        new BaseItemBase("EquipmentTools6", <ToolItemModel>{
                 "internalName": "EquipmentTools6",
                 "displayName": "Platinum Pickaxe",
                 "sellPrice": 200,
@@ -5480,7 +5480,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 16,
                 "Speed": 4
             }),
-        new DescItemBase("EquipmentTools7", <ToolItemModel>{
+        new BaseItemBase("EquipmentTools7", <ToolItemModel>{
                 "internalName": "EquipmentTools7",
                 "displayName": "Dementia Pickaxe",
                 "sellPrice": 200,
@@ -5502,7 +5502,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 19,
                 "Speed": 5
             }),
-        new DescItemBase("EquipmentTools11", <ToolItemModel>{
+        new BaseItemBase("EquipmentTools11", <ToolItemModel>{
                 "internalName": "EquipmentTools11",
                 "displayName": "Void Imperium Pik",
                 "sellPrice": 200,
@@ -5524,7 +5524,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 24,
                 "Speed": 5
             }),
-        new DescItemBase("EquipmentTools8", <ToolItemModel>{
+        new BaseItemBase("EquipmentTools8", <ToolItemModel>{
                 "internalName": "EquipmentTools8",
                 "displayName": "Lustre Pickaxe",
                 "sellPrice": 200,
@@ -5546,7 +5546,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 30,
                 "Speed": 6
             }),
-        new DescItemBase("EquipmentTools12", <ToolItemModel>{
+        new BaseItemBase("EquipmentTools12", <ToolItemModel>{
                 "internalName": "EquipmentTools12",
                 "displayName": "Starfire Pickaxe",
                 "sellPrice": 200,
@@ -5568,7 +5568,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 35,
                 "Speed": 6
             }),
-        new DescItemBase("EquipmentTools9", <ToolItemModel>{
+        new BaseItemBase("EquipmentTools9", <ToolItemModel>{
                 "internalName": "EquipmentTools9",
                 "displayName": "Dreadlo Pickolo",
                 "sellPrice": 200,
@@ -5590,7 +5590,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 42,
                 "Speed": 7
             }),
-        new DescItemBase("EquipmentTools10", <ToolItemModel>{
+        new BaseItemBase("EquipmentTools10", <ToolItemModel>{
                 "internalName": "EquipmentTools10",
                 "displayName": "Poopy Pickaxe",
                 "sellPrice": 200,
@@ -5612,7 +5612,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 18,
                 "Speed": 2
             }),
-        new DescItemBase("EquipmentToolsHatchet0", <ToolItemModel>{
+        new BaseItemBase("EquipmentToolsHatchet0", <ToolItemModel>{
                 "internalName": "EquipmentToolsHatchet0",
                 "displayName": "Old Hatchet",
                 "sellPrice": 50,
@@ -5634,7 +5634,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 3,
                 "Speed": 3
             }),
-        new DescItemBase("EquipmentToolsHatchet3", <ToolItemModel>{
+        new BaseItemBase("EquipmentToolsHatchet3", <ToolItemModel>{
                 "internalName": "EquipmentToolsHatchet3",
                 "displayName": "Copper Chopper",
                 "sellPrice": 650,
@@ -5656,7 +5656,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 7,
                 "Speed": 3
             }),
-        new DescItemBase("EquipmentToolsHatchet1", <ToolItemModel>{
+        new BaseItemBase("EquipmentToolsHatchet1", <ToolItemModel>{
                 "internalName": "EquipmentToolsHatchet1",
                 "displayName": "Iron Hatchet",
                 "sellPrice": 5000,
@@ -5678,7 +5678,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 10,
                 "Speed": 3
             }),
-        new DescItemBase("EquipmentToolsHatchet2b", <ToolItemModel>{
+        new BaseItemBase("EquipmentToolsHatchet2b", <ToolItemModel>{
                 "internalName": "EquipmentToolsHatchet2b",
                 "displayName": "Stinky Axe",
                 "sellPrice": 10000,
@@ -5700,7 +5700,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 18,
                 "Speed": 2
             }),
-        new DescItemBase("EquipmentToolsHatchet2", <ToolItemModel>{
+        new BaseItemBase("EquipmentToolsHatchet2", <ToolItemModel>{
                 "internalName": "EquipmentToolsHatchet2",
                 "displayName": "Golden Axe",
                 "sellPrice": 12000,
@@ -5722,7 +5722,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 14,
                 "Speed": 4
             }),
-        new DescItemBase("EquipmentToolsHatchet4", <ToolItemModel>{
+        new BaseItemBase("EquipmentToolsHatchet4", <ToolItemModel>{
                 "internalName": "EquipmentToolsHatchet4",
                 "displayName": "Plat Hatchet",
                 "sellPrice": 200,
@@ -5744,7 +5744,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 18,
                 "Speed": 4
             }),
-        new DescItemBase("EquipmentToolsHatchet5", <ToolItemModel>{
+        new BaseItemBase("EquipmentToolsHatchet5", <ToolItemModel>{
                 "internalName": "EquipmentToolsHatchet5",
                 "displayName": "Dementia Dicer",
                 "sellPrice": 200,
@@ -5766,7 +5766,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 23,
                 "Speed": 5
             }),
-        new DescItemBase("EquipmentToolsHatchet7", <ToolItemModel>{
+        new BaseItemBase("EquipmentToolsHatchet7", <ToolItemModel>{
                 "internalName": "EquipmentToolsHatchet7",
                 "displayName": "Void Imperium Axe",
                 "sellPrice": 200,
@@ -5788,7 +5788,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 26,
                 "Speed": 5
             }),
-        new DescItemBase("EquipmentToolsHatchet6", <ToolItemModel>{
+        new BaseItemBase("EquipmentToolsHatchet6", <ToolItemModel>{
                 "internalName": "EquipmentToolsHatchet6",
                 "displayName": "Lustre Logger",
                 "sellPrice": 200,
@@ -5810,7 +5810,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 29,
                 "Speed": 6
             }),
-        new DescItemBase("EquipmentToolsHatchet8", <ToolItemModel>{
+        new BaseItemBase("EquipmentToolsHatchet8", <ToolItemModel>{
                 "internalName": "EquipmentToolsHatchet8",
                 "displayName": "Starfire Hatchet",
                 "sellPrice": 200,
@@ -5832,7 +5832,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 35,
                 "Speed": 6
             }),
-        new DescItemBase("EquipmentToolsHatchet9", <ToolItemModel>{
+        new BaseItemBase("EquipmentToolsHatchet9", <ToolItemModel>{
                 "internalName": "EquipmentToolsHatchet9",
                 "displayName": "Dreadlo Eviscerator",
                 "sellPrice": 200,
@@ -5854,7 +5854,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 40,
                 "Speed": 7
             }),
-        new DescItemBase("EquipmentToolsHatchet10", <ToolItemModel>{
+        new BaseItemBase("EquipmentToolsHatchet10", <ToolItemModel>{
                 "internalName": "EquipmentToolsHatchet10",
                 "displayName": "Annihilator of the Yggdrasil",
                 "sellPrice": 200,
@@ -5876,7 +5876,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 50,
                 "Speed": 8
             }),
-        new DescItemBase("FishingRod1", <ToolItemModel>{
+        new BaseItemBase("FishingRod1", <ToolItemModel>{
                 "internalName": "FishingRod1",
                 "displayName": "Wood Fishing Rod",
                 "sellPrice": 200,
@@ -5898,7 +5898,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 3,
                 "Speed": 3
             }),
-        new DescItemBase("FishingRod2", <ToolItemModel>{
+        new BaseItemBase("FishingRod2", <ToolItemModel>{
                 "internalName": "FishingRod2",
                 "displayName": "Copper Fish Rod",
                 "sellPrice": 500,
@@ -5920,7 +5920,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 8,
                 "Speed": 3
             }),
-        new DescItemBase("FishingRod3", <ToolItemModel>{
+        new BaseItemBase("FishingRod3", <ToolItemModel>{
                 "internalName": "FishingRod3",
                 "displayName": "Iron Fishing Rod",
                 "sellPrice": 2500,
@@ -5942,7 +5942,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 13,
                 "Speed": 4
             }),
-        new DescItemBase("FishingRod4", <ToolItemModel>{
+        new BaseItemBase("FishingRod4", <ToolItemModel>{
                 "internalName": "FishingRod4",
                 "displayName": "Gold Fishing Rod",
                 "sellPrice": 10000,
@@ -5964,7 +5964,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 19,
                 "Speed": 4
             }),
-        new DescItemBase("FishingRod5", <ToolItemModel>{
+        new BaseItemBase("FishingRod5", <ToolItemModel>{
                 "internalName": "FishingRod5",
                 "displayName": "Plat Fishing Rod",
                 "sellPrice": 20000,
@@ -5986,7 +5986,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 25,
                 "Speed": 5
             }),
-        new DescItemBase("FishingRod6", <ToolItemModel>{
+        new BaseItemBase("FishingRod6", <ToolItemModel>{
                 "internalName": "FishingRod6",
                 "displayName": "Dementia Rod for Fishing",
                 "sellPrice": 20000,
@@ -6008,7 +6008,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 30,
                 "Speed": 5
             }),
-        new DescItemBase("FishingRod7", <ToolItemModel>{
+        new BaseItemBase("FishingRod7", <ToolItemModel>{
                 "internalName": "FishingRod7",
                 "displayName": "Void Imperium Rod",
                 "sellPrice": 20000,
@@ -6030,7 +6030,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 36,
                 "Speed": 5
             }),
-        new DescItemBase("FishingRod8", <ToolItemModel>{
+        new BaseItemBase("FishingRod8", <ToolItemModel>{
                 "internalName": "FishingRod8",
                 "displayName": "Lustre Rod",
                 "sellPrice": 20000,
@@ -6052,7 +6052,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 43,
                 "Speed": 6
             }),
-        new DescItemBase("FishingRod9", <ToolItemModel>{
+        new BaseItemBase("FishingRod9", <ToolItemModel>{
                 "internalName": "FishingRod9",
                 "displayName": "Starfire Rod",
                 "sellPrice": 10000,
@@ -6074,7 +6074,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 50,
                 "Speed": 6
             }),
-        new DescItemBase("CatchingNet1", <ToolItemModel>{
+        new BaseItemBase("CatchingNet1", <ToolItemModel>{
                 "internalName": "CatchingNet1",
                 "displayName": "Bug Net",
                 "sellPrice": 100,
@@ -6096,7 +6096,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 4,
                 "Speed": 4
             }),
-        new DescItemBase("CatchingNet2", <ToolItemModel>{
+        new BaseItemBase("CatchingNet2", <ToolItemModel>{
                 "internalName": "CatchingNet2",
                 "displayName": "Copper Netted Net",
                 "sellPrice": 2000,
@@ -6118,7 +6118,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 9,
                 "Speed": 4
             }),
-        new DescItemBase("CatchingNet3", <ToolItemModel>{
+        new BaseItemBase("CatchingNet3", <ToolItemModel>{
                 "internalName": "CatchingNet3",
                 "displayName": "Reinforced Net",
                 "sellPrice": 7500,
@@ -6140,7 +6140,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 14,
                 "Speed": 4
             }),
-        new DescItemBase("CatchingNet4", <ToolItemModel>{
+        new BaseItemBase("CatchingNet4", <ToolItemModel>{
                 "internalName": "CatchingNet4",
                 "displayName": "Golden Net",
                 "sellPrice": 17000,
@@ -6162,7 +6162,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 20,
                 "Speed": 5
             }),
-        new DescItemBase("CatchingNet5", <ToolItemModel>{
+        new BaseItemBase("CatchingNet5", <ToolItemModel>{
                 "internalName": "CatchingNet5",
                 "displayName": "Platinet",
                 "sellPrice": 17000,
@@ -6184,7 +6184,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 26,
                 "Speed": 5
             }),
-        new DescItemBase("CatchingNet6", <ToolItemModel>{
+        new BaseItemBase("CatchingNet6", <ToolItemModel>{
                 "internalName": "CatchingNet6",
                 "displayName": "Dementia Net",
                 "sellPrice": 17000,
@@ -6206,7 +6206,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 31,
                 "Speed": 5
             }),
-        new DescItemBase("CatchingNet7", <ToolItemModel>{
+        new BaseItemBase("CatchingNet7", <ToolItemModel>{
                 "internalName": "CatchingNet7",
                 "displayName": "Void Imperium Net",
                 "sellPrice": 17000,
@@ -6228,7 +6228,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 37,
                 "Speed": 5
             }),
-        new DescItemBase("CatchingNet8", <ToolItemModel>{
+        new BaseItemBase("CatchingNet8", <ToolItemModel>{
                 "internalName": "CatchingNet8",
                 "displayName": "Lustre Netting",
                 "sellPrice": 17000,
@@ -6250,7 +6250,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 45,
                 "Speed": 6
             }),
-        new DescItemBase("CatchingNet9", <ToolItemModel>{
+        new BaseItemBase("CatchingNet9", <ToolItemModel>{
                 "internalName": "CatchingNet9",
                 "displayName": "Starfire Trim Netting",
                 "sellPrice": 17000,
@@ -6272,7 +6272,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 55,
                 "Speed": 6
             }),
-        new DescItemBase("TrapBoxSet1", <TrapBoxItemModel>{
+        new BaseItemBase("TrapBoxSet1", <TrapBoxItemModel>{
                 "internalName": "TrapBoxSet1",
                 "displayName": "Cardboard Traps",
                 "sellPrice": 5000,
@@ -6302,7 +6302,7 @@ export const initSpecificItemRepo = () => {
                     ]
                 }
             }),
-        new DescItemBase("TrapBoxSet2", <TrapBoxItemModel>{
+        new BaseItemBase("TrapBoxSet2", <TrapBoxItemModel>{
                 "internalName": "TrapBoxSet2",
                 "displayName": "Silkskin Traps",
                 "sellPrice": 1,
@@ -6333,7 +6333,7 @@ export const initSpecificItemRepo = () => {
                     ]
                 }
             }),
-        new DescItemBase("TrapBoxSet3", <TrapBoxItemModel>{
+        new BaseItemBase("TrapBoxSet3", <TrapBoxItemModel>{
                 "internalName": "TrapBoxSet3",
                 "displayName": "Wooden Traps",
                 "sellPrice": 2,
@@ -6364,7 +6364,7 @@ export const initSpecificItemRepo = () => {
                     ]
                 }
             }),
-        new DescItemBase("TrapBoxSet4", <TrapBoxItemModel>{
+        new BaseItemBase("TrapBoxSet4", <TrapBoxItemModel>{
                 "internalName": "TrapBoxSet4",
                 "displayName": "Natural Traps",
                 "sellPrice": 3,
@@ -6394,7 +6394,7 @@ export const initSpecificItemRepo = () => {
                     ]
                 }
             }),
-        new DescItemBase("TrapBoxSet5", <TrapBoxItemModel>{
+        new BaseItemBase("TrapBoxSet5", <TrapBoxItemModel>{
                 "internalName": "TrapBoxSet5",
                 "displayName": "Steel Traps",
                 "sellPrice": 4,
@@ -6424,7 +6424,7 @@ export const initSpecificItemRepo = () => {
                     ]
                 }
             }),
-        new DescItemBase("TrapBoxSet6", <TrapBoxItemModel>{
+        new BaseItemBase("TrapBoxSet6", <TrapBoxItemModel>{
                 "internalName": "TrapBoxSet6",
                 "displayName": "Meaty Traps",
                 "sellPrice": 5,
@@ -6454,7 +6454,7 @@ export const initSpecificItemRepo = () => {
                     ]
                 }
             }),
-        new DescItemBase("TrapBoxSet7", <TrapBoxItemModel>{
+        new BaseItemBase("TrapBoxSet7", <TrapBoxItemModel>{
                 "internalName": "TrapBoxSet7",
                 "displayName": "Royal Traps",
                 "sellPrice": 6,
@@ -6486,7 +6486,7 @@ export const initSpecificItemRepo = () => {
                     ]
                 }
             }),
-        new DescItemBase("WorshipSkull1", <SkullItemModel>{
+        new BaseItemBase("WorshipSkull1", <SkullItemModel>{
                 "internalName": "WorshipSkull1",
                 "displayName": "Wax Skull",
                 "sellPrice": 5000,
@@ -6508,7 +6508,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 4,
                 "Speed": 4
             }),
-        new DescItemBase("WorshipSkull2", <SkullItemModel>{
+        new BaseItemBase("WorshipSkull2", <SkullItemModel>{
                 "internalName": "WorshipSkull2",
                 "displayName": "Ceramic Skull",
                 "sellPrice": 100,
@@ -6530,7 +6530,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 8,
                 "Speed": 5
             }),
-        new DescItemBase("WorshipSkull3", <SkullItemModel>{
+        new BaseItemBase("WorshipSkull3", <SkullItemModel>{
                 "internalName": "WorshipSkull3",
                 "displayName": "Horned Skull",
                 "sellPrice": 100,
@@ -6552,7 +6552,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 13,
                 "Speed": 5
             }),
-        new DescItemBase("WorshipSkull4", <SkullItemModel>{
+        new BaseItemBase("WorshipSkull4", <SkullItemModel>{
                 "internalName": "WorshipSkull4",
                 "displayName": "Prickle Skull",
                 "sellPrice": 100,
@@ -6574,7 +6574,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 20,
                 "Speed": 6
             }),
-        new DescItemBase("WorshipSkull5", <SkullItemModel>{
+        new BaseItemBase("WorshipSkull5", <SkullItemModel>{
                 "internalName": "WorshipSkull5",
                 "displayName": "Manifested Skull",
                 "sellPrice": 100,
@@ -6596,7 +6596,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 26,
                 "Speed": 7
             }),
-        new DescItemBase("WorshipSkull6", <SkullItemModel>{
+        new BaseItemBase("WorshipSkull6", <SkullItemModel>{
                 "internalName": "WorshipSkull6",
                 "displayName": "Glauss Skull",
                 "sellPrice": 100,
@@ -6618,7 +6618,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 34,
                 "Speed": 7
             }),
-        new DescItemBase("WorshipSkull7", <SkullItemModel>{
+        new BaseItemBase("WorshipSkull7", <SkullItemModel>{
                 "internalName": "WorshipSkull7",
                 "displayName": "Luciferian Skull",
                 "sellPrice": 100,
@@ -6640,7 +6640,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 45,
                 "Speed": 8
             }),
-        new DescItemBase("FoodHealth1", <ACItemModel>{
+        new BaseItemBase("FoodHealth1", <ACItemModel>{
                 "internalName": "FoodHealth1",
                 "displayName": "Nomwich",
                 "sellPrice": 2,
@@ -6648,7 +6648,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Health Food",
                 "description": "Auto-Used when your health goes below 50%. Restores 20 HP. Has a 30 second Cooldown. "
             }),
-        new DescItemBase("FoodHealth3", <ACItemModel>{
+        new BaseItemBase("FoodHealth3", <ACItemModel>{
                 "internalName": "FoodHealth3",
                 "displayName": "Hot Dog",
                 "sellPrice": 7,
@@ -6656,7 +6656,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Health Food",
                 "description": "Auto-Used when your health goes below 50%. Restores 50 HP. Has a 30 second Cooldown. "
             }),
-        new DescItemBase("FoodHealth2", <ACItemModel>{
+        new BaseItemBase("FoodHealth2", <ACItemModel>{
                 "internalName": "FoodHealth2",
                 "displayName": "Cheezy Pizza",
                 "sellPrice": 20,
@@ -6664,7 +6664,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Health Food",
                 "description": "Auto-Used when your health goes below 50%. Restores 125 HP. Has a 30 second Cooldown. "
             }),
-        new DescItemBase("Peanut", <ACItemModel>{
+        new BaseItemBase("Peanut", <ACItemModel>{
                 "internalName": "Peanut",
                 "displayName": "Peanut",
                 "sellPrice": 12,
@@ -6672,7 +6672,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Health Food",
                 "description": "Auto-Used when your health goes below 75%. Restores 80 HP. Has a 20 second Cooldown. The favorite snack of all bloblytes! "
             }),
-        new DescItemBase("FoodHealth4", <ACItemModel>{
+        new BaseItemBase("FoodHealth4", <ACItemModel>{
                 "internalName": "FoodHealth4",
                 "displayName": "Saucy Weiner",
                 "sellPrice": 120,
@@ -6680,7 +6680,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Health Food",
                 "description": "Auto-Used when your health goes below 50%. Restores 700 HP. Has a 30 second Cooldown. "
             }),
-        new DescItemBase("FoodHealth6", <ACItemModel>{
+        new BaseItemBase("FoodHealth6", <ACItemModel>{
                 "internalName": "FoodHealth6",
                 "displayName": "Kebab Sticks",
                 "sellPrice": 48,
@@ -6688,7 +6688,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Health Food",
                 "description": "Auto-Used when your health goes below 50%. Restores 300 HP. Has a 30 second Cooldown. "
             }),
-        new DescItemBase("FoodHealth7", <ACItemModel>{
+        new BaseItemBase("FoodHealth7", <ACItemModel>{
                 "internalName": "FoodHealth7",
                 "displayName": "Meat Pie",
                 "sellPrice": 80,
@@ -6696,7 +6696,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Health Food",
                 "description": "Auto-Used when your health goes below 50%. Restores 500 HP. Has a 30 second Cooldown. "
             }),
-        new DescItemBase("FoodHealth10", <ACItemModel>{
+        new BaseItemBase("FoodHealth10", <ACItemModel>{
                 "internalName": "FoodHealth10",
                 "displayName": "Mountain Bread",
                 "sellPrice": 140,
@@ -6704,7 +6704,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Health Food",
                 "description": "Auto-Used when your health goes below 50%. Restores 750 HP. Has a 30 second Cooldown. "
             }),
-        new DescItemBase("FoodHealth9", <ACItemModel>{
+        new BaseItemBase("FoodHealth9", <ACItemModel>{
                 "internalName": "FoodHealth9",
                 "displayName": "Yeti Ham",
                 "sellPrice": 190,
@@ -6712,7 +6712,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Health Food",
                 "description": "Auto-Used when your health goes below 60%. Restores 1000 HP. Has a 30 second Cooldown. "
             }),
-        new DescItemBase("FoodHealth11", <ACItemModel>{
+        new BaseItemBase("FoodHealth11", <ACItemModel>{
                 "internalName": "FoodHealth11",
                 "displayName": "Sheepie Dairy",
                 "sellPrice": 310,
@@ -6720,7 +6720,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Health Food",
                 "description": "Auto-Used when your health goes below 50%. Restores 1500 HP. Has a 30 second Cooldown. "
             }),
-        new DescItemBase("FoodHealth13", <ACItemModel>{
+        new BaseItemBase("FoodHealth13", <ACItemModel>{
                 "internalName": "FoodHealth13",
                 "displayName": "Cupcake",
                 "sellPrice": 1500,
@@ -6728,7 +6728,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Health Food",
                 "description": "Auto-Used when your health goes below 70%. Restores 3000 HP. Has a 30 second Cooldown. "
             }),
-        new DescItemBase("FoodHealth12", <ACItemModel>{
+        new BaseItemBase("FoodHealth12", <ACItemModel>{
                 "internalName": "FoodHealth12",
                 "displayName": "Spicy Space Ribs",
                 "sellPrice": 4000,
@@ -6736,7 +6736,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Health Food",
                 "description": "Auto-Used when your health goes below 50%. Restores 6000 HP. Has a 25 second Cooldown. "
             }),
-        new DescItemBase("FoodHealth5", <ACItemModel>{
+        new BaseItemBase("FoodHealth5", <ACItemModel>{
                 "internalName": "FoodHealth5",
                 "displayName": "Cranberry Jam",
                 "sellPrice": 32,
@@ -6744,7 +6744,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Health Food",
                 "description": "Auto-Used when your health goes below 50%. Restores 200 HP. Has a 30 second Cooldown. "
             }),
-        new DescItemBase("FoodHealth8", <ACItemModel>{
+        new BaseItemBase("FoodHealth8", <ACItemModel>{
                 "internalName": "FoodHealth8",
                 "displayName": "Crabby Cake Supreme",
                 "sellPrice": 120,
@@ -6752,7 +6752,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Health Food",
                 "description": "Auto-Used when your health goes below 35%. Restores 700 HP. Has a 60 second Cooldown. "
             }),
-        new DescItemBase("FoodEvent8", <ACItemModel>{
+        new BaseItemBase("FoodEvent8", <ACItemModel>{
                 "internalName": "FoodEvent8",
                 "displayName": "Milk Choco",
                 "sellPrice": 10,
@@ -6760,7 +6760,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Health Food",
                 "description": "Auto-Used when your health goes below 80%. Restores 420 HP. Has a 20 second Cooldown. "
             }),
-        new DescItemBase("Meatloaf", <ACItemModel>{
+        new BaseItemBase("Meatloaf", <ACItemModel>{
                 "internalName": "Meatloaf",
                 "displayName": "Magic Meatloaf",
                 "sellPrice": 300,
@@ -6768,7 +6768,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Health Food",
                 "description": "Auto-Used when your health goes below 30%. Restores 2000 HP. Has a 10 second Cooldown. "
             }),
-        new DescItemBase("FoodPotOr1", <ACItemModel>{
+        new BaseItemBase("FoodPotOr1", <ACItemModel>{
                 "internalName": "FoodPotOr1",
                 "displayName": "Small Strength Potion",
                 "sellPrice": 5,
@@ -6776,7 +6776,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Base Dmg by 10. 15% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodPotOr2", <ACItemModel>{
+        new BaseItemBase("FoodPotOr2", <ACItemModel>{
                 "internalName": "FoodPotOr2",
                 "displayName": "Average Strength Potion",
                 "sellPrice": 25,
@@ -6784,7 +6784,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Base Dmg by 30. 13% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodPotOr3", <ACItemModel>{
+        new BaseItemBase("FoodPotOr3", <ACItemModel>{
                 "internalName": "FoodPotOr3",
                 "displayName": "Decent Strength Potion",
                 "sellPrice": 150,
@@ -6792,7 +6792,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Base Dmg by 100. 10% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodPotOr4", <ACItemModel>{
+        new BaseItemBase("FoodPotOr4", <ACItemModel>{
                 "internalName": "FoodPotOr4",
                 "displayName": "Potent Strength Potion",
                 "sellPrice": 2700,
@@ -6800,7 +6800,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Base Dmg by 250. 8% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodPotRe1", <ACItemModel>{
+        new BaseItemBase("FoodPotRe1", <ACItemModel>{
                 "internalName": "FoodPotRe1",
                 "displayName": "Small Life Potion",
                 "sellPrice": 4,
@@ -6808,7 +6808,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Base HP by 30. 5% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodPotRe2", <ACItemModel>{
+        new BaseItemBase("FoodPotRe2", <ACItemModel>{
                 "internalName": "FoodPotRe2",
                 "displayName": "Average Life Potion",
                 "sellPrice": 30,
@@ -6816,7 +6816,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Base HP by 120. 4% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodPotRe3", <ACItemModel>{
+        new BaseItemBase("FoodPotRe3", <ACItemModel>{
                 "internalName": "FoodPotRe3",
                 "displayName": "Decent Life Potion",
                 "sellPrice": 200,
@@ -6824,7 +6824,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Base HP by 250. 3% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodPotRe4", <ACItemModel>{
+        new BaseItemBase("FoodPotRe4", <ACItemModel>{
                 "internalName": "FoodPotRe4",
                 "displayName": "Potent Life Potion",
                 "sellPrice": 4000,
@@ -6832,7 +6832,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Base HP by 700. 2% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodPotGr1", <ACItemModel>{
+        new BaseItemBase("FoodPotGr1", <ACItemModel>{
                 "internalName": "FoodPotGr1",
                 "displayName": "Small Speed Potion",
                 "sellPrice": 7,
@@ -6840,7 +6840,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Move Spd by 5%. 15% chance to be consumed every 10 meters walked. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodPotGr2", <ACItemModel>{
+        new BaseItemBase("FoodPotGr2", <ACItemModel>{
                 "internalName": "FoodPotGr2",
                 "displayName": "Average Speed Potion",
                 "sellPrice": 60,
@@ -6848,7 +6848,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Move Spd by 10%. 13% chance to be consumed every 10 meters walked. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodPotGr3", <ACItemModel>{
+        new BaseItemBase("FoodPotGr3", <ACItemModel>{
                 "internalName": "FoodPotGr3",
                 "displayName": "Decent Speed Potion",
                 "sellPrice": 400,
@@ -6856,7 +6856,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Move Spd by 15%. 10% chance to be consumed every 10 meters walked. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodPotGr4", <ACItemModel>{
+        new BaseItemBase("FoodPotGr4", <ACItemModel>{
                 "internalName": "FoodPotGr4",
                 "displayName": "Potent Speed Potion",
                 "sellPrice": 8000,
@@ -6864,7 +6864,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Move Spd by 20%. 7% chance to be consumed every 10 meters walked. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodEvent7", <ACItemModel>{
+        new BaseItemBase("FoodEvent7", <ACItemModel>{
                 "internalName": "FoodEvent7",
                 "displayName": "Minto Choco",
                 "sellPrice": 10,
@@ -6872,7 +6872,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Move Spd by 8%. 4% chance to be consumed every 10 meters walked. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodPotMana1", <ACItemModel>{
+        new BaseItemBase("FoodPotMana1", <ACItemModel>{
                 "internalName": "FoodPotMana1",
                 "displayName": "Small Mana Potion",
                 "sellPrice": 5,
@@ -6880,7 +6880,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Boosts Mana Regen Rate by 10% 40% chance to be consumed every 100% Mana Regenerated. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodPotMana2", <ACItemModel>{
+        new BaseItemBase("FoodPotMana2", <ACItemModel>{
                 "internalName": "FoodPotMana2",
                 "displayName": "Average Mana Potion",
                 "sellPrice": 25,
@@ -6888,7 +6888,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Boosts Mana Regen Rate by 17% 35% chance to be consumed every 100% Mana Regenerated. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodPotMana3", <ACItemModel>{
+        new BaseItemBase("FoodPotMana3", <ACItemModel>{
                 "internalName": "FoodPotMana3",
                 "displayName": "Decent Mana Potion",
                 "sellPrice": 175,
@@ -6896,7 +6896,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Boosts Mana Regen Rate by 25% 30% chance to be consumed every 100% Mana Regenerated. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodPotMana4", <ACItemModel>{
+        new BaseItemBase("FoodPotMana4", <ACItemModel>{
                 "internalName": "FoodPotMana4",
                 "displayName": "Potent Mana Potion",
                 "sellPrice": 4500,
@@ -6904,7 +6904,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Boosts Mana Regen Rate by 40% 30% chance to be consumed every 100% Mana Regenerated. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodPotYe1", <ACItemModel>{
+        new BaseItemBase("FoodPotYe1", <ACItemModel>{
                 "internalName": "FoodPotYe1",
                 "displayName": "Small EXP Potion",
                 "sellPrice": 25,
@@ -6912,7 +6912,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Exp Gain by 5% 10% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodPotYe2", <ACItemModel>{
+        new BaseItemBase("FoodPotYe2", <ACItemModel>{
                 "internalName": "FoodPotYe2",
                 "displayName": "Average EXP Potion",
                 "sellPrice": 250,
@@ -6920,7 +6920,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Exp Gain by 10% 8% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodPotYe3", <ACItemModel>{
+        new BaseItemBase("FoodPotYe3", <ACItemModel>{
                 "internalName": "FoodPotYe3",
                 "displayName": "Decent EXP Potion",
                 "sellPrice": 1500,
@@ -6928,7 +6928,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Exp Gain by 15% 6% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodPotYe4", <ACItemModel>{
+        new BaseItemBase("FoodPotYe4", <ACItemModel>{
                 "internalName": "FoodPotYe4",
                 "displayName": "Potent EXP Potion",
                 "sellPrice": 30000,
@@ -6936,7 +6936,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Exp Gain by 20% 3% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodEvent6", <ACItemModel>{
+        new BaseItemBase("FoodEvent6", <ACItemModel>{
                 "internalName": "FoodEvent6",
                 "displayName": "Lemony Choco",
                 "sellPrice": 10,
@@ -6944,7 +6944,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Exp Gain by 10% 6% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("Pearl3", <ACItemModel>{
+        new BaseItemBase("Pearl3", <ACItemModel>{
                 "internalName": "Pearl3",
                 "displayName": "Shiny Pearl",
                 "sellPrice": 10,
@@ -6952,7 +6952,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Exp Gain by 25% 1% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodMining1", <ACItemModel>{
+        new BaseItemBase("FoodMining1", <ACItemModel>{
                 "internalName": "FoodMining1",
                 "displayName": "Icing Ironbite",
                 "sellPrice": 10,
@@ -6960,7 +6960,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Mining Speed by 15% 10% chance to be consumed every time you swing your pickaxe. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodEvent1", <ACItemModel>{
+        new BaseItemBase("FoodEvent1", <ACItemModel>{
                 "internalName": "FoodEvent1",
                 "displayName": "Giftybread Man",
                 "sellPrice": 10,
@@ -6968,7 +6968,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Mining Speed by 25% 3% chance to be consumed every time you swing your pickaxe. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("Pearl2", <ACItemModel>{
+        new BaseItemBase("Pearl2", <ACItemModel>{
                 "internalName": "Pearl2",
                 "displayName": "Stained Pearl",
                 "sellPrice": 10,
@@ -6976,7 +6976,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Mining Speed by 30% 1% chance to be consumed every time you swing your pickaxe. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodChoppin1", <ACItemModel>{
+        new BaseItemBase("FoodChoppin1", <ACItemModel>{
                 "internalName": "FoodChoppin1",
                 "displayName": "Saucy Logfries",
                 "sellPrice": 10,
@@ -6984,7 +6984,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Choppin' Speed by 15% 10% chance to be consumed every time you swing your hatchet. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodEvent2", <ACItemModel>{
+        new BaseItemBase("FoodEvent2", <ACItemModel>{
                 "internalName": "FoodEvent2",
                 "displayName": "Chogg Nog",
                 "sellPrice": 10,
@@ -6992,7 +6992,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Choppin' Speed by 25% 1% chance to be consumed every time you swing your hatchet. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodFish1", <ACItemModel>{
+        new BaseItemBase("FoodFish1", <ACItemModel>{
                 "internalName": "FoodFish1",
                 "displayName": "Slurpin Herm",
                 "sellPrice": 10,
@@ -7000,7 +7000,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Fishing Spd by 20% 10% chance to be consumed every time you reel in a fish. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodEvent3", <ACItemModel>{
+        new BaseItemBase("FoodEvent3", <ACItemModel>{
                 "internalName": "FoodEvent3",
                 "displayName": "Candy Canes",
                 "sellPrice": 10,
@@ -7008,7 +7008,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Fishing Spd by 25% 3% chance to be consumed every time you reel in a fish. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("Pearl1", <ACItemModel>{
+        new BaseItemBase("Pearl1", <ACItemModel>{
                 "internalName": "Pearl1",
                 "displayName": "Aqua Pearl",
                 "sellPrice": 10,
@@ -7016,7 +7016,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Fishing Spd by 30% 1% chance to be consumed every time you reel in a fish. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodCatch1", <ACItemModel>{
+        new BaseItemBase("FoodCatch1", <ACItemModel>{
                 "internalName": "FoodCatch1",
                 "displayName": "Buttered Toasted Butter",
                 "sellPrice": 10,
@@ -7024,7 +7024,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Catching Spd by 20% 10% chance to be consumed every time you swing your net. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodEvent4", <ACItemModel>{
+        new BaseItemBase("FoodEvent4", <ACItemModel>{
                 "internalName": "FoodEvent4",
                 "displayName": "Mistleberries",
                 "sellPrice": 10,
@@ -7032,7 +7032,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Catching Spd by 25% 1% chance to be consumed every time you swing your net. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodTrapping1", <ACItemModel>{
+        new BaseItemBase("FoodTrapping1", <ACItemModel>{
                 "internalName": "FoodTrapping1",
                 "displayName": "Critter Numnums",
                 "sellPrice": 10,
@@ -7040,7 +7040,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Shiny Odds by 25% 125% chance to be consumed every time you open a trap. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodWorship1", <ACItemModel>{
+        new BaseItemBase("FoodWorship1", <ACItemModel>{
                 "internalName": "FoodWorship1",
                 "displayName": "Soulble Gum",
                 "sellPrice": 10,
@@ -7048,7 +7048,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Soul Gain by 25% 125% chance to be consumed every time you Worship. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("Bullet", <ACItemModel>{
+        new BaseItemBase("Bullet", <ACItemModel>{
                 "internalName": "Bullet",
                 "displayName": "Bullet",
                 "sellPrice": 20,
@@ -7056,7 +7056,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Weapon Power by 1. 15% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("BulletB", <ACItemModel>{
+        new BaseItemBase("BulletB", <ACItemModel>{
                 "internalName": "BulletB",
                 "displayName": "FMJ Bullet",
                 "sellPrice": 20,
@@ -7064,7 +7064,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Weapon Power by 2. 12% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("MidnightCookie", <ACItemModel>{
+        new BaseItemBase("MidnightCookie", <ACItemModel>{
                 "internalName": "MidnightCookie",
                 "displayName": "Midnight Cookie",
                 "sellPrice": 300,
@@ -7072,7 +7072,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Weapon Power by 5. 2% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("FoodEvent5", <ACItemModel>{
+        new BaseItemBase("FoodEvent5", <ACItemModel>{
                 "internalName": "FoodEvent5",
                 "displayName": "Cherry Choco",
                 "sellPrice": 10,
@@ -7080,7 +7080,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boost Food",
                 "description": "Increases Weapon Power by 1. 10% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
-        new DescItemBase("PeanutG", <GoldenFoodItemModel>{
+        new BaseItemBase("PeanutG", <GoldenFoodItemModel>{
                 "internalName": "PeanutG",
                 "displayName": "Golden Peanut",
                 "sellPrice": 125,
@@ -7089,7 +7089,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Increases Mining Efficiency. Golden foods are never consumed.",
                 "goldenFoodData": <GoldenFoodDataModel>{"effect": "Increases Mining Efficiency by [%.", "amount": 30}
             }),
-        new DescItemBase("FoodG1", <GoldenFoodItemModel>{
+        new BaseItemBase("FoodG1", <GoldenFoodItemModel>{
                 "internalName": "FoodG1",
                 "displayName": "Golden Jam",
                 "sellPrice": 50,
@@ -7098,7 +7098,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Increases your Max Health. Golden foods are never consumed.",
                 "goldenFoodData": <GoldenFoodDataModel>{"effect": "Increases your Max Health by [%.", "amount": 30}
             }),
-        new DescItemBase("FoodG2", <GoldenFoodItemModel>{
+        new BaseItemBase("FoodG2", <GoldenFoodItemModel>{
                 "internalName": "FoodG2",
                 "displayName": "Golden Kebabs",
                 "sellPrice": 200,
@@ -7107,7 +7107,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Increases Total Damage to all monsters. Golden foods are never consumed.",
                 "goldenFoodData": <GoldenFoodDataModel>{"effect": "Increases Total Damage to all monsters by [%.", "amount": 20}
             }),
-        new DescItemBase("FoodG3", <GoldenFoodItemModel>{
+        new BaseItemBase("FoodG3", <GoldenFoodItemModel>{
                 "internalName": "FoodG3",
                 "displayName": "Golden Meat Pie",
                 "sellPrice": 350,
@@ -7116,7 +7116,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Increases your Total Defence. Golden foods are never consumed",
                 "goldenFoodData": <GoldenFoodDataModel>{"effect": "Increases your Total Defence by [%.", "amount": 30}
             }),
-        new DescItemBase("FoodG4", <GoldenFoodItemModel>{
+        new BaseItemBase("FoodG4", <GoldenFoodItemModel>{
                 "internalName": "FoodG4",
                 "displayName": "Golden Nomwich",
                 "sellPrice": 100,
@@ -7125,7 +7125,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Increases Base Damage Dealt to all monsters. Golden foods are never consumed.",
                 "goldenFoodData": <GoldenFoodDataModel>{"effect": "Increases Base Damage Dealt to all monsters by [.", "amount": 400}
             }),
-        new DescItemBase("FoodG5", <GoldenFoodItemModel>{
+        new BaseItemBase("FoodG5", <GoldenFoodItemModel>{
                 "internalName": "FoodG5",
                 "displayName": "Golden Ham",
                 "sellPrice": 100,
@@ -7134,7 +7134,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Increases Skill EXP earned from all skills. Golden foods are never consumed.",
                 "goldenFoodData": <GoldenFoodDataModel>{"effect": "Increases Skill EXP earned from all skills by [%.", "amount": 18}
             }),
-        new DescItemBase("FoodG6", <GoldenFoodItemModel>{
+        new BaseItemBase("FoodG6", <GoldenFoodItemModel>{
                 "internalName": "FoodG6",
                 "displayName": "Golden Bread",
                 "sellPrice": 100,
@@ -7143,7 +7143,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Boosts coins dropped. Golden foods are never consumed.",
                 "goldenFoodData": <GoldenFoodDataModel>{"effect": "Boosts coins dropped by mobs by [%.", "amount": 30}
             }),
-        new DescItemBase("FoodG7", <GoldenFoodItemModel>{
+        new BaseItemBase("FoodG7", <GoldenFoodItemModel>{
                 "internalName": "FoodG7",
                 "displayName": "Golden Ribs",
                 "sellPrice": 100,
@@ -7152,7 +7152,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Increases Fishing Efficiency. Golden foods are never consumed.",
                 "goldenFoodData": <GoldenFoodDataModel>{"effect": "Increases Fishing Efficiency by [%.", "amount": 40}
             }),
-        new DescItemBase("FoodG8", <GoldenFoodItemModel>{
+        new BaseItemBase("FoodG8", <GoldenFoodItemModel>{
                 "internalName": "FoodG8",
                 "displayName": "Golden Cheese",
                 "sellPrice": 100,
@@ -7161,7 +7161,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Claiming AFK gains levels up shrines [% faster.. Golden foods are never consumed.",
                 "goldenFoodData": <GoldenFoodDataModel>{"effect": "Claiming AFK gains levels up shrines [% faster.", "amount": 20}
             }),
-        new DescItemBase("ButterBar", <GoldenFoodItemModel>{
+        new BaseItemBase("ButterBar", <GoldenFoodItemModel>{
                 "internalName": "ButterBar",
                 "displayName": "Butter Bar",
                 "sellPrice": 1,
@@ -7170,7 +7170,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Increases your Base Accuracy. This is technically golden food!",
                 "goldenFoodData": <GoldenFoodDataModel>{"effect": "Increases your Base Accuracy by [. And tastes great!", "amount": 60}
             }),
-        new DescItemBase("rtt0", <DescItemModel>{
+        new BaseItemBase("rtt0", <DescItemModel>{
                 "internalName": "rtt0",
                 "displayName": "Bottled Town Teleport",
                 "sellPrice": 50,
@@ -7178,7 +7178,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Teleport",
                 "description": "Hold down on this item to be teleported back to Town. "
             }),
-        new DescItemBase("ResetFrag", <DescItemModel>{
+        new BaseItemBase("ResetFrag", <DescItemModel>{
                 "internalName": "ResetFrag",
                 "displayName": "Talent Point Reset Fragment",
                 "sellPrice": 200,
@@ -7186,7 +7186,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Fragment",
                 "description": "Hold down on this item to turn 10 Fragments into 1 Talent Point Reset Potion. You'll need 1 open inventory space for this to work. "
             }),
-        new DescItemBase("ResetCompleted", <DescItemModel>{
+        new BaseItemBase("ResetCompleted", <DescItemModel>{
                 "internalName": "ResetCompleted",
                 "displayName": "Talent Point Reset Potion",
                 "sellPrice": 1,
@@ -7194,7 +7194,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Reset Potion",
                 "description": "Hold down on this item to respec all your Talent Points! Well, except for the Star tab points, there's a different potion for that. "
             }),
-        new DescItemBase("ResetCompletedS", <DescItemModel>{
+        new BaseItemBase("ResetCompletedS", <DescItemModel>{
                 "internalName": "ResetCompletedS",
                 "displayName": "Star Talent Reset Potion",
                 "sellPrice": 1,
@@ -7202,7 +7202,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Reset Potion",
                 "description": "Hold down on this item to refund all your Star Talent Points! Well, except for the Star tab points, there's a different potion for... no wait, this IS the potion for that! "
             }),
-        new DescItemBase("ClassSwap", <DescItemModel>{
+        new BaseItemBase("ClassSwap", <DescItemModel>{
                 "internalName": "ClassSwap",
                 "displayName": "Sub Class Swap Token",
                 "sellPrice": 1,
@@ -7210,7 +7210,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Usable",
                 "description": "Hold down on this item to change sub class within your class. It won't let you change classes, that will be done a different way in the future... "
             }),
-        new DescItemBase("ResetBox", <DescItemModel>{
+        new BaseItemBase("ResetBox", <DescItemModel>{
                 "internalName": "ResetBox",
                 "displayName": "Post Office Box Reseto Magnifico",
                 "sellPrice": 1,
@@ -7218,7 +7218,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Usable",
                 "description": "Hold down to reset all post office upgrades made on this character! You'll get all the Box Points refunded of course, no problemo! "
             }),
-        new DescItemBase("Ht", <DescItemModel>{
+        new BaseItemBase("Ht", <DescItemModel>{
                 "internalName": "Ht",
                 "displayName": "Hat Premiumifier",
                 "sellPrice": 1,
@@ -7226,7 +7226,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Usable",
                 "description": "Drag this onto any normal hat to turn it into a premium hat! Doing so will wipe all it's stats, and give it {1 all stat and 5 Premium Upgrade Slots, just like any other premium hat. "
             }),
-        new DescItemBase("StonePremRestore", <DescItemModel>{
+        new BaseItemBase("StonePremRestore", <DescItemModel>{
                 "internalName": "StonePremRestore",
                 "displayName": "Premium Stone Refunder",
                 "sellPrice": 1,
@@ -7234,7 +7234,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Usable",
                 "description": "Drag this onto any Premium Hat to refund all Premium Stones used on it. You must have at least 4 open inventory spaces to use this btw "
             }),
-        new DescItemBase("ExpBalloon1", <DescItemModel>{
+        new BaseItemBase("ExpBalloon1", <DescItemModel>{
                 "internalName": "ExpBalloon1",
                 "displayName": "Small Experience Balloon",
                 "sellPrice": 1,
@@ -7242,7 +7242,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Exp Balloon",
                 "description": "Hold down to gain EXP in the skill that's displayed in the corner of your screen. If you're in a town, you will gain EXP in the town skill. The amount of EXP you get is based on your skill's Lv. "
             }),
-        new DescItemBase("ExpBalloon2", <DescItemModel>{
+        new BaseItemBase("ExpBalloon2", <DescItemModel>{
                 "internalName": "ExpBalloon2",
                 "displayName": "Medium Experience Balloon",
                 "sellPrice": 1,
@@ -7250,7 +7250,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Exp Balloon",
                 "description": "Hold down to gain EXP in the skill that's displayed in the corner of your screen. If you're in a town, you will gain EXP in the town skill. The amount of EXP you get is based on your skill's Lv. "
             }),
-        new DescItemBase("ExpBalloon3", <DescItemModel>{
+        new BaseItemBase("ExpBalloon3", <DescItemModel>{
                 "internalName": "ExpBalloon3",
                 "displayName": "Large Experience Balloon",
                 "sellPrice": 1,
@@ -7258,7 +7258,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Exp Balloon",
                 "description": "Hold down to gain EXP in the skill that's displayed in the corner of your screen. If you're in a town, you will gain EXP in the town skill. The amount of EXP you get is based on your skill's Lv. "
             }),
-        new DescItemBase("JobApplication", <DescItemModel>{
+        new BaseItemBase("JobApplication", <DescItemModel>{
                 "internalName": "JobApplication",
                 "displayName": "Job Application",
                 "sellPrice": 200,
@@ -7266,7 +7266,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "It's a registration form for the job of Sanitation Comissioner. One of the requirements is being able to pick up dog poop without immediately throwing the bag on the ground afterward. "
             }),
-        new DescItemBase("SmithingHammerChisel", <DescItemModel>{
+        new BaseItemBase("SmithingHammerChisel", <DescItemModel>{
                 "internalName": "SmithingHammerChisel",
                 "displayName": "Sculpting Tools",
                 "sellPrice": 800,
@@ -7274,7 +7274,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "You gotta embrace the marble! You gotta sniff the marble! You gotta lick the marble! You gotta wash the marble! You gotta BE THE MARBLE! "
             }),
-        new DescItemBase("SmithingHammerChisel2", <DescItemModel>{
+        new BaseItemBase("SmithingHammerChisel2", <DescItemModel>{
                 "internalName": "SmithingHammerChisel2",
                 "displayName": "Guilding Tools",
                 "sellPrice": 12500,
@@ -7282,7 +7282,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Drop this on the statue man, and you'll turn him to gold and unlock Golden Statues! "
             }),
-        new DescItemBase("BobJoePickle", <DescItemModel>{
+        new BaseItemBase("BobJoePickle", <DescItemModel>{
                 "internalName": "BobJoePickle",
                 "displayName": "BobJoePickle",
                 "sellPrice": 40000,
@@ -7290,7 +7290,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "He was one of the good ones... Alas he is now just a pickle. Good for scaring a cat though! "
             }),
-        new DescItemBase("BallJoePickle", <DescItemModel>{
+        new BaseItemBase("BallJoePickle", <DescItemModel>{
                 "internalName": "BallJoePickle",
                 "displayName": "BallJoePickle",
                 "sellPrice": 40000,
@@ -7298,7 +7298,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "What have they done to ya BobJoe? "
             }),
-        new DescItemBase("Quest1", <DescItemModel>{
+        new BaseItemBase("Quest1", <DescItemModel>{
                 "internalName": "Quest1",
                 "displayName": "Mining Certificate",
                 "sellPrice": 1,
@@ -7306,7 +7306,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "It's proof that you can mine, and it's even signed by Glumlee himself! It says; 'You passed. Good for you. Ugh' "
             }),
-        new DescItemBase("Crystal1", <DescItemModel>{
+        new BaseItemBase("Crystal1", <DescItemModel>{
                 "internalName": "Crystal1",
                 "displayName": "Desert Topaz",
                 "sellPrice": 1,
@@ -7314,7 +7314,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Restores power to the Desert Portal in the Grasslands Town. "
             }),
-        new DescItemBase("Crystal2", <DescItemModel>{
+        new BaseItemBase("Crystal2", <DescItemModel>{
                 "internalName": "Crystal2",
                 "displayName": "Glacier Quartz",
                 "sellPrice": 1,
@@ -7322,7 +7322,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Restores power to the Glacial Portal in the desert town, allowing travel to World 3! "
             }),
-        new DescItemBase("Crystal3", <DescItemModel>{
+        new BaseItemBase("Crystal3", <DescItemModel>{
                 "internalName": "Crystal3",
                 "displayName": "Galaxial Amethyst",
                 "sellPrice": 1,
@@ -7330,7 +7330,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Restores power to the Galaxy Portal in the glacier town, allowing travel to World 4! "
             }),
-        new DescItemBase("Quest2", <DescItemModel>{
+        new BaseItemBase("Quest2", <DescItemModel>{
                 "internalName": "Quest2",
                 "displayName": "Mining Certificate",
                 "sellPrice": 1,
@@ -7338,7 +7338,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": ""
             }),
-        new DescItemBase("PeanutS", <DescItemModel>{
+        new BaseItemBase("PeanutS", <DescItemModel>{
                 "internalName": "PeanutS",
                 "displayName": "Stone Peanut",
                 "sellPrice": 5000,
@@ -7346,7 +7346,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "It's like a regular peanut, except it's made of stone instead of pea. I bet a Rocklyte would enjoy it! "
             }),
-        new DescItemBase("Quest3", <DescItemModel>{
+        new BaseItemBase("Quest3", <DescItemModel>{
                 "internalName": "Quest3",
                 "displayName": "Ketchup Bottle",
                 "sellPrice": 1,
@@ -7354,7 +7354,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "A tiny ketchup bottle, small enough for a Frog to use. Would go great with some Mustard! "
             }),
-        new DescItemBase("Quest4", <DescItemModel>{
+        new BaseItemBase("Quest4", <DescItemModel>{
                 "internalName": "Quest4",
                 "displayName": "Mustard Bottle",
                 "sellPrice": 1,
@@ -7362,7 +7362,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "A tiny mustard bottle, small enough for a Frog to never use because mustard is gross. Would go great with some Ketchup! "
             }),
-        new DescItemBase("Mayo", <DescItemModel>{
+        new BaseItemBase("Mayo", <DescItemModel>{
                 "internalName": "Mayo",
                 "displayName": "Mayonnaise Bottle",
                 "sellPrice": 1,
@@ -7370,7 +7370,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Trash",
                 "description": "Why did someone bury a bottle of mayo? Wait... why did you go dig it up?? "
             }),
-        new DescItemBase("Trash", <DescItemModel>{
+        new BaseItemBase("Trash", <DescItemModel>{
                 "internalName": "Trash",
                 "displayName": "Broken Weapon",
                 "sellPrice": 1,
@@ -7378,7 +7378,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Trash",
                 "description": "It's totally broken. "
             }),
-        new DescItemBase("Trash2", <DescItemModel>{
+        new BaseItemBase("Trash2", <DescItemModel>{
                 "internalName": "Trash2",
                 "displayName": "Dried Paint Blob",
                 "sellPrice": 1,
@@ -7386,7 +7386,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Trash",
                 "description": "Its all hard and crusty now. "
             }),
-        new DescItemBase("Trash3", <DescItemModel>{
+        new BaseItemBase("Trash3", <DescItemModel>{
                 "internalName": "Trash3",
                 "displayName": "Engraved Bullet",
                 "sellPrice": 1,
@@ -7394,7 +7394,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Trash",
                 "description": "It's a bullet, and it's got your name on it! "
             }),
-        new DescItemBase("Quest5", <DescItemModel>{
+        new BaseItemBase("Quest5", <DescItemModel>{
                 "internalName": "Quest5",
                 "displayName": "Golden Jam (Quest)",
                 "sellPrice": 1,
@@ -7402,7 +7402,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "It's a fake jar filled with springs! The best way to crack a joke with your friends at their expense! "
             }),
-        new DescItemBase("Quest6", <DescItemModel>{
+        new BaseItemBase("Quest6", <DescItemModel>{
                 "internalName": "Quest6",
                 "displayName": "Scouting Report",
                 "sellPrice": 1,
@@ -7410,7 +7410,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "It says a Giant Wolf-like Golem was seen walking with the gem even deeper into the Jungle. Stiltzcho has purposefully smudged his signature so that it's not readable. "
             }),
-        new DescItemBase("Quest7", <DescItemModel>{
+        new BaseItemBase("Quest7", <DescItemModel>{
                 "internalName": "Quest7",
                 "displayName": "Strange Rock",
                 "sellPrice": 1,
@@ -7418,7 +7418,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Looks like the piece of a golem. It even has 'Made In Golemtopia' engraved on the side of it. "
             }),
-        new DescItemBase("Quest8", <DescItemModel>{
+        new BaseItemBase("Quest8", <DescItemModel>{
                 "internalName": "Quest8",
                 "displayName": "Filler bc I messed up",
                 "sellPrice": 1,
@@ -7426,7 +7426,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Filler. "
             }),
-        new DescItemBase("Quest10", <DescItemModel>{
+        new BaseItemBase("Quest10", <DescItemModel>{
                 "internalName": "Quest10",
                 "displayName": "Green Tea",
                 "sellPrice": 1000,
@@ -7434,7 +7434,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "You're playing a game right now with a sub-plot that involves a jar of sand falling in love with a cup of tea. Just thought I'd point that out. "
             }),
-        new DescItemBase("Quest11", <DescItemModel>{
+        new BaseItemBase("Quest11", <DescItemModel>{
                 "internalName": "Quest11",
                 "displayName": "Forest Villas Flyer Thingy",
                 "sellPrice": 1,
@@ -7442,7 +7442,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Solid evidence that it's possible to have a negative crafting level. "
             }),
-        new DescItemBase("Quest12", <DescItemModel>{
+        new BaseItemBase("Quest12", <DescItemModel>{
                 "internalName": "Quest12",
                 "displayName": "Dog Bone",
                 "sellPrice": 7,
@@ -7450,7 +7450,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Dog Bone must have died from a blunt strike to the head, surely that's where he got his Ghost-Name from! Pretty proud of myself for solving this, even if Item Descriptions like me aren't capable of feeling pride! "
             }),
-        new DescItemBase("Quest13", <DescItemModel>{
+        new BaseItemBase("Quest13", <DescItemModel>{
                 "internalName": "Quest13",
                 "displayName": "Empty Box",
                 "sellPrice": 7,
@@ -7458,7 +7458,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "An empty box, the perfect place to put all your Hermit Cans, Megalodon teeth, and pure water... that you don't have anymore haha! "
             }),
-        new DescItemBase("Quest14", <DescItemModel>{
+        new BaseItemBase("Quest14", <DescItemModel>{
                 "internalName": "Quest14",
                 "displayName": "Employment Statistics",
                 "sellPrice": 50,
@@ -7466,7 +7466,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Wait a minute, these stats have misleading Y-axes and invalid sampling methods! Even then, they show no clear evidence for rats stealing jobs! How could anyone possibly believe this data? "
             }),
-        new DescItemBase("Quest15", <DescItemModel>{
+        new BaseItemBase("Quest15", <DescItemModel>{
                 "internalName": "Quest15",
                 "displayName": "Red Frisbee",
                 "sellPrice": 1,
@@ -7474,7 +7474,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Sprout's red frisbee! I hope you didn't get shrunken down by a magic apple on your way up, or your stetchy dog brother might laugh at you! "
             }),
-        new DescItemBase("Quest16", <DescItemModel>{
+        new BaseItemBase("Quest16", <DescItemModel>{
                 "internalName": "Quest16",
                 "displayName": "Broken Mic",
                 "sellPrice": 1,
@@ -7482,7 +7482,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "The guy who carelessly dropped this microphone is a moron, and that's a fact. Boom, mic drop... ah crap. "
             }),
-        new DescItemBase("Quest17", <DescItemModel>{
+        new BaseItemBase("Quest17", <DescItemModel>{
                 "internalName": "Quest17",
                 "displayName": "Amarok Slab",
                 "sellPrice": 250,
@@ -7490,7 +7490,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "A piece of rock from the big bad wolf himself. Careful, it's overflowing with green plasma energy! No wait, that's just some moss. "
             }),
-        new DescItemBase("Quest18", <DescItemModel>{
+        new BaseItemBase("Quest18", <DescItemModel>{
                 "internalName": "Quest18",
                 "displayName": "Loomi's Room Key",
                 "sellPrice": 1,
@@ -7498,7 +7498,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "A key to a door, but there are still more! Why so many? They were on sale for a penny! "
             }),
-        new DescItemBase("Quest19", <DescItemModel>{
+        new BaseItemBase("Quest19", <DescItemModel>{
                 "internalName": "Quest19",
                 "displayName": "Golden Dubloon",
                 "sellPrice": 3500,
@@ -7506,7 +7506,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Avast, land lubber! This coin be property of the YumYum Sea Pirates! Ye best be returning it, lest ye want an underwater funeral, arg! "
             }),
-        new DescItemBase("Quest20", <DescItemModel>{
+        new BaseItemBase("Quest20", <DescItemModel>{
                 "internalName": "Quest20",
                 "displayName": "Signed Arrest Warrant",
                 "sellPrice": 1,
@@ -7514,7 +7514,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "That's weird, Bandit Bob's signature looks an awful lot like yours... "
             }),
-        new DescItemBase("Quest21", <DescItemModel>{
+        new BaseItemBase("Quest21", <DescItemModel>{
                 "internalName": "Quest21",
                 "displayName": "Time Thingy",
                 "sellPrice": 1,
@@ -7522,7 +7522,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Yea yea I know, this quest doesn't really make sense. Although, if you reeeaaally think about it, you'll realize that it still makes no sense... so it's best not to think about it! "
             }),
-        new DescItemBase("Quest22", <DescItemModel>{
+        new BaseItemBase("Quest22", <DescItemModel>{
                 "internalName": "Quest22",
                 "displayName": "Corporatube Sub",
                 "sellPrice": 1,
@@ -7530,7 +7530,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Represents a single subscriber on the Corporatube Video Platform. It You'sed to be called something else, but no one around here remembers. "
             }),
-        new DescItemBase("Quest23", <DescItemModel>{
+        new BaseItemBase("Quest23", <DescItemModel>{
                 "internalName": "Quest23",
                 "displayName": "Instablab Follower",
                 "sellPrice": 1,
@@ -7538,7 +7538,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Represents a single follower on Instablab, who probably sound like this: 'Oh mah gawd Becky, you would not Buh Leeeeve how lame this game I'm playing is. They have a joke about Insta that tooootally isn't funnay, like seriouslayy! "
             }),
-        new DescItemBase("Quest24", <DescItemModel>{
+        new BaseItemBase("Quest24", <DescItemModel>{
                 "internalName": "Quest24",
                 "displayName": "Cloudsound Follower",
                 "sellPrice": 1,
@@ -7546,7 +7546,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Represents a single follower on Cloudsound. This isn't a website, it's literally a giant cloud that emits sound that people enjoy following around. Why, what were YOU thinking this was? "
             }),
-        new DescItemBase("Quest25", <DescItemModel>{
+        new BaseItemBase("Quest25", <DescItemModel>{
                 "internalName": "Quest25",
                 "displayName": "Birthday Card",
                 "sellPrice": 100,
@@ -7554,7 +7554,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "It'll mean more to you when you're older... or may when this game is older and I add a use for this item, can't remember which. "
             }),
-        new DescItemBase("Quest26", <DescItemModel>{
+        new BaseItemBase("Quest26", <DescItemModel>{
                 "internalName": "Quest26",
                 "displayName": "Pre Crime Box",
                 "sellPrice": 100,
@@ -7562,7 +7562,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "The traditional gift given to those about to be victimized. A favorite amongst criminals! "
             }),
-        new DescItemBase("Quest27", <DescItemModel>{
+        new BaseItemBase("Quest27", <DescItemModel>{
                 "internalName": "Quest27",
                 "displayName": "Bag o Nuts",
                 "sellPrice": 100,
@@ -7570,7 +7570,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Mmmmm, these nuts are so yuuuummy! "
             }),
-        new DescItemBase("Quest28", <DescItemModel>{
+        new BaseItemBase("Quest28", <DescItemModel>{
                 "internalName": "Quest28",
                 "displayName": "IOU One Blue Crystal",
                 "sellPrice": 100,
@@ -7578,7 +7578,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Hold down on this IOU, and a Blue Crystal will drop at your feet! "
             }),
-        new DescItemBase("Quest29", <DescItemModel>{
+        new BaseItemBase("Quest29", <DescItemModel>{
                 "internalName": "Quest29",
                 "displayName": "Chaotic Amarok Slab",
                 "sellPrice": 100,
@@ -7586,7 +7586,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "A piece of rock from the bigger badder wolf himself. Careful, it's overflowing with poisonous ooze! No wait, that's just plasma energy... "
             }),
-        new DescItemBase("GoldricP1", <DescItemModel>{
+        new BaseItemBase("GoldricP1", <DescItemModel>{
                 "internalName": "GoldricP1",
                 "displayName": "Casual Confidante",
                 "sellPrice": 100,
@@ -7594,7 +7594,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "It's a painting of a strangely out of place gold bar fellow. They look nervous underneath their outward bravado. "
             }),
-        new DescItemBase("EquipmentSmithingTabs2", <DescItemModel>{
+        new BaseItemBase("EquipmentSmithingTabs2", <DescItemModel>{
                 "internalName": "EquipmentSmithingTabs2",
                 "displayName": "Anvil Tab 2",
                 "sellPrice": 100,
@@ -7602,7 +7602,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Anvil Expansion",
                 "description": "Unlocks the 2nd tab of craftable items for all anvils! "
             }),
-        new DescItemBase("EquipmentSmithingTabs3", <DescItemModel>{
+        new BaseItemBase("EquipmentSmithingTabs3", <DescItemModel>{
                 "internalName": "EquipmentSmithingTabs3",
                 "displayName": "Anvil Tab 3",
                 "sellPrice": 1,
@@ -7610,7 +7610,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Anvil Expansion",
                 "description": "Unlocks the 3rd tab of craftable items for all anvils! "
             }),
-        new DescItemBase("EquipmentSmithingTabs4", <DescItemModel>{
+        new BaseItemBase("EquipmentSmithingTabs4", <DescItemModel>{
                 "internalName": "EquipmentSmithingTabs4",
                 "displayName": "Anvil Tab 4",
                 "sellPrice": 1,
@@ -7618,7 +7618,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Anvil Expansion",
                 "description": "Unlocks the 4th tab of craftable items for all anvils! "
             }),
-        new DescItemBase("EquipmentSmithingTabs5", <DescItemModel>{
+        new BaseItemBase("EquipmentSmithingTabs5", <DescItemModel>{
                 "internalName": "EquipmentSmithingTabs5",
                 "displayName": "Anvil Tab 5",
                 "sellPrice": 1,
@@ -7626,7 +7626,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Anvil Expansion",
                 "description": "Unlocks the 5th tab of craftable items for all anvils! "
             }),
-        new DescItemBase("EquipmentSmithingTabs6", <DescItemModel>{
+        new BaseItemBase("EquipmentSmithingTabs6", <DescItemModel>{
                 "internalName": "EquipmentSmithingTabs6",
                 "displayName": "Anvil Tab 6",
                 "sellPrice": 1,
@@ -7634,7 +7634,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Anvil Expansion",
                 "description": "Unlocks the 6th tab of craftable items for all anvils! "
             }),
-        new DescItemBase("EquipmentSmithingTabs7", <DescItemModel>{
+        new BaseItemBase("EquipmentSmithingTabs7", <DescItemModel>{
                 "internalName": "EquipmentSmithingTabs7",
                 "displayName": "Anvil Tab 7",
                 "sellPrice": 1,
@@ -7642,7 +7642,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Anvil Expansion",
                 "description": "Unlocks the 7th tab of craftable items for all anvils! "
             }),
-        new DescItemBase("EquipmentSmithingTabs8", <DescItemModel>{
+        new BaseItemBase("EquipmentSmithingTabs8", <DescItemModel>{
                 "internalName": "EquipmentSmithingTabs8",
                 "displayName": "Anvil Tab 8",
                 "sellPrice": 1,
@@ -7650,7 +7650,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Anvil Expansion",
                 "description": "Unlocks the 8th tab of craftable items for all anvils! "
             }),
-        new DescItemBase("EquipmentStatues1", <StatueItemModel>{
+        new BaseItemBase("EquipmentStatues1", <StatueItemModel>{
                 "internalName": "EquipmentStatues1",
                 "displayName": "Power Statue",
                 "sellPrice": 10,
@@ -7660,7 +7660,7 @@ export const initSpecificItemRepo = () => {
                 "bonus": "Base Damage",
                 "statueData": <StatueDataModel>{"name": "Power", "effect": "@Base Damage", "dk": 30, "bonus": 3}
             }),
-        new DescItemBase("EquipmentStatues2", <StatueItemModel>{
+        new BaseItemBase("EquipmentStatues2", <StatueItemModel>{
                 "internalName": "EquipmentStatues2",
                 "displayName": "Speed Statue",
                 "sellPrice": 10,
@@ -7670,7 +7670,7 @@ export const initSpecificItemRepo = () => {
                 "bonus": "%Move Speed",
                 "statueData": <StatueDataModel>{"name": "Speed", "effect": "%@Move Speed", "dk": 65, "bonus": 0.1}
             }),
-        new DescItemBase("EquipmentStatues3", <StatueItemModel>{
+        new BaseItemBase("EquipmentStatues3", <StatueItemModel>{
                 "internalName": "EquipmentStatues3",
                 "displayName": "Mining Statue",
                 "sellPrice": 10,
@@ -7680,7 +7680,7 @@ export const initSpecificItemRepo = () => {
                 "bonus": "Mining Power",
                 "statueData": <StatueDataModel>{"name": "Mining", "effect": "@Mining Power", "dk": 280, "bonus": 0.3}
             }),
-        new DescItemBase("EquipmentStatues4", <StatueItemModel>{
+        new BaseItemBase("EquipmentStatues4", <StatueItemModel>{
                 "internalName": "EquipmentStatues4",
                 "displayName": "Feasty Statue",
                 "sellPrice": 10,
@@ -7690,7 +7690,7 @@ export const initSpecificItemRepo = () => {
                 "bonus": "%Food Effect",
                 "statueData": <StatueDataModel>{"name": "Feasty", "effect": "%@Food Effect", "dk": 320, "bonus": 1}
             }),
-        new DescItemBase("EquipmentStatues5", <StatueItemModel>{
+        new BaseItemBase("EquipmentStatues5", <StatueItemModel>{
                 "internalName": "EquipmentStatues5",
                 "displayName": "Health Statue",
                 "sellPrice": 10,
@@ -7700,7 +7700,7 @@ export const initSpecificItemRepo = () => {
                 "bonus": "Base Health",
                 "statueData": <StatueDataModel>{"name": "Health", "effect": "@Base Health", "dk": 0, "bonus": 3}
             }),
-        new DescItemBase("EquipmentStatues6", <StatueItemModel>{
+        new BaseItemBase("EquipmentStatues6", <StatueItemModel>{
                 "internalName": "EquipmentStatues6",
                 "displayName": "Kachow Statue",
                 "sellPrice": 10,
@@ -7710,7 +7710,7 @@ export const initSpecificItemRepo = () => {
                 "bonus": "%Crit Damage",
                 "statueData": <StatueDataModel>{"name": "Kachow", "effect": "%@Crit Damage", "dk": -15, "bonus": 0.4}
             }),
-        new DescItemBase("EquipmentStatues7", <StatueItemModel>{
+        new BaseItemBase("EquipmentStatues7", <StatueItemModel>{
                 "internalName": "EquipmentStatues7",
                 "displayName": "Lumberbob Statue",
                 "sellPrice": 10,
@@ -7720,7 +7720,7 @@ export const initSpecificItemRepo = () => {
                 "bonus": "Choppin Power",
                 "statueData": <StatueDataModel>{"name": "Lumberbob", "effect": "@Choppin Power", "dk": 90, "bonus": 0.3}
             }),
-        new DescItemBase("EquipmentStatues8", <StatueItemModel>{
+        new BaseItemBase("EquipmentStatues8", <StatueItemModel>{
                 "internalName": "EquipmentStatues8",
                 "displayName": "Thicc Skin Statue",
                 "sellPrice": 10,
@@ -7730,7 +7730,7 @@ export const initSpecificItemRepo = () => {
                 "bonus": "Base Defence",
                 "statueData": <StatueDataModel>{"name": "Thicc Skin", "effect": "@Base Defence", "dk": 210, "bonus": 1}
             }),
-        new DescItemBase("EquipmentStatues9", <StatueItemModel>{
+        new BaseItemBase("EquipmentStatues9", <StatueItemModel>{
                 "internalName": "EquipmentStatues9",
                 "displayName": "Oceanman Statue",
                 "sellPrice": 10,
@@ -7740,7 +7740,7 @@ export const initSpecificItemRepo = () => {
                 "bonus": "Fishing Power",
                 "statueData": <StatueDataModel>{"name": "Oceanman", "effect": "@Fishing Power", "dk": 115, "bonus": 0.3}
             }),
-        new DescItemBase("EquipmentStatues10", <StatueItemModel>{
+        new BaseItemBase("EquipmentStatues10", <StatueItemModel>{
                 "internalName": "EquipmentStatues10",
                 "displayName": "Ol Reliable Statue",
                 "sellPrice": 10,
@@ -7750,7 +7750,7 @@ export const initSpecificItemRepo = () => {
                 "bonus": "Catchin Power",
                 "statueData": <StatueDataModel>{"name": "Ol Reliable", "effect": "@Catchin Power", "dk": 45, "bonus": 0.3}
             }),
-        new DescItemBase("EquipmentStatues11", <StatueItemModel>{
+        new BaseItemBase("EquipmentStatues11", <StatueItemModel>{
                 "internalName": "EquipmentStatues11",
                 "displayName": "Exp Book Statue",
                 "sellPrice": 10,
@@ -7760,7 +7760,7 @@ export const initSpecificItemRepo = () => {
                 "bonus": "%Class Exp",
                 "statueData": <StatueDataModel>{"name": "Exp", "effect": "%@Class Exp", "dk": 0, "bonus": 0.1}
             }),
-        new DescItemBase("EquipmentStatues12", <StatueItemModel>{
+        new BaseItemBase("EquipmentStatues12", <StatueItemModel>{
                 "internalName": "EquipmentStatues12",
                 "displayName": "Anvil Statue",
                 "sellPrice": 10,
@@ -7770,7 +7770,7 @@ export const initSpecificItemRepo = () => {
                 "bonus": "%Product Spd",
                 "statueData": <StatueDataModel>{"name": "Anvil", "effect": "%@Product Spd", "dk": 165, "bonus": 0.5}
             }),
-        new DescItemBase("EquipmentStatues13", <StatueItemModel>{
+        new BaseItemBase("EquipmentStatues13", <StatueItemModel>{
                 "internalName": "EquipmentStatues13",
                 "displayName": "Cauldron Statue",
                 "sellPrice": 10,
@@ -7780,7 +7780,7 @@ export const initSpecificItemRepo = () => {
                 "bonus": "%Alchemy Exp",
                 "statueData": <StatueDataModel>{"name": "Cauldron", "effect": "%@Alchemy Exp", "dk": 280, "bonus": 0.5}
             }),
-        new DescItemBase("EquipmentStatues14", <StatueItemModel>{
+        new BaseItemBase("EquipmentStatues14", <StatueItemModel>{
                 "internalName": "EquipmentStatues14",
                 "displayName": "Beholder Statue",
                 "sellPrice": 10,
@@ -7790,7 +7790,7 @@ export const initSpecificItemRepo = () => {
                 "bonus": "%Crit Chance",
                 "statueData": <StatueDataModel>{"name": "Beholder", "effect": "%@Crit Chance", "dk": 300, "bonus": 0.2}
             }),
-        new DescItemBase("EquipmentStatues15", <StatueItemModel>{
+        new BaseItemBase("EquipmentStatues15", <StatueItemModel>{
                 "internalName": "EquipmentStatues15",
                 "displayName": "Bullseye Statue",
                 "sellPrice": 10,
@@ -7800,7 +7800,7 @@ export const initSpecificItemRepo = () => {
                 "bonus": "%Accuracy",
                 "statueData": <StatueDataModel>{"name": "Bullseye", "effect": "%@Accuracy", "dk": 110, "bonus": 0.8}
             }),
-        new DescItemBase("EquipmentStatues16", <StatueItemModel>{
+        new BaseItemBase("EquipmentStatues16", <StatueItemModel>{
                 "internalName": "EquipmentStatues16",
                 "displayName": "Box Statue",
                 "sellPrice": 10,
@@ -7810,7 +7810,7 @@ export const initSpecificItemRepo = () => {
                 "bonus": "Trappin Power",
                 "statueData": <StatueDataModel>{"name": "Box", "effect": "@Trappin Power", "dk": 180, "bonus": 0.3}
             }),
-        new DescItemBase("EquipmentStatues17", <StatueItemModel>{
+        new BaseItemBase("EquipmentStatues17", <StatueItemModel>{
                 "internalName": "EquipmentStatues17",
                 "displayName": "Twosoul Statue",
                 "sellPrice": 10,
@@ -7820,7 +7820,7 @@ export const initSpecificItemRepo = () => {
                 "bonus": "Worship Power",
                 "statueData": <StatueDataModel>{"name": "Twosoul", "effect": "@Worship Power", "dk": 260, "bonus": 0.3}
             }),
-        new DescItemBase("EquipmentStatues18", <StatueItemModel>{
+        new BaseItemBase("EquipmentStatues18", <StatueItemModel>{
                 "internalName": "EquipmentStatues18",
                 "displayName": "EhExPee Statue",
                 "sellPrice": 10,
@@ -7830,7 +7830,7 @@ export const initSpecificItemRepo = () => {
                 "bonus": "%Skill Exp",
                 "statueData": <StatueDataModel>{"name": "Ehexpee", "effect": "%@Skill Exp", "dk": 69, "bonus": 0.1}
             }),
-        new DescItemBase("EquipmentStatues19", <StatueItemModel>{
+        new BaseItemBase("EquipmentStatues19", <StatueItemModel>{
                 "internalName": "EquipmentStatues19",
                 "displayName": "Seesaw Statue",
                 "sellPrice": 10,
@@ -7840,7 +7840,7 @@ export const initSpecificItemRepo = () => {
                 "bonus": "%Cons Exp",
                 "statueData": <StatueDataModel>{"name": "Seesaw", "effect": "%@Cons Exp", "dk": 13, "bonus": 0.5}
             }),
-        new DescItemBase("MaxCapBagT2", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagT2", <CarryBagItemModel>{
                 "internalName": "MaxCapBagT2",
                 "displayName": "Miniature Mining Pouch",
                 "sellPrice": 200,
@@ -7849,7 +7849,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 25: Ores, Bars, Barrels",
                 "level": 3
             }),
-        new DescItemBase("MaxCapBag1", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBag1", <CarryBagItemModel>{
                 "internalName": "MaxCapBag1",
                 "displayName": "Cramped Mining Pouch",
                 "sellPrice": 900,
@@ -7858,7 +7858,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 50: Ores, Bars, Barrels",
                 "level": 10
             }),
-        new DescItemBase("MaxCapBag2", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBag2", <CarryBagItemModel>{
                 "internalName": "MaxCapBag2",
                 "displayName": "Small Mining Pouch",
                 "sellPrice": 13000,
@@ -7867,7 +7867,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 100: Ores, Bars, Barrels",
                 "level": 20
             }),
-        new DescItemBase("MaxCapBag3", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBag3", <CarryBagItemModel>{
                 "internalName": "MaxCapBag3",
                 "displayName": "Average Mining Pouch",
                 "sellPrice": 200,
@@ -7876,7 +7876,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 250: Ores, Bars, Barrels",
                 "level": 30
             }),
-        new DescItemBase("MaxCapBag4", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBag4", <CarryBagItemModel>{
                 "internalName": "MaxCapBag4",
                 "displayName": "Sizable Mining Pouch",
                 "sellPrice": 200,
@@ -7885,7 +7885,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 500: Ores, Bars, Barrels",
                 "level": 40
             }),
-        new DescItemBase("MaxCapBag5", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBag5", <CarryBagItemModel>{
                 "internalName": "MaxCapBag5",
                 "displayName": "Big Mining Pouch",
                 "sellPrice": 200,
@@ -7894,7 +7894,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 1000: Ores, Bars, Barrels",
                 "level": 50
             }),
-        new DescItemBase("MaxCapBagMi6", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagMi6", <CarryBagItemModel>{
                 "internalName": "MaxCapBagMi6",
                 "displayName": "Large Mining Pouch",
                 "sellPrice": 200,
@@ -7903,7 +7903,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 2000: Ores, Bars, Barrels",
                 "level": 70
             }),
-        new DescItemBase("MaxCapBagMi7", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagMi7", <CarryBagItemModel>{
                 "internalName": "MaxCapBagMi7",
                 "displayName": "Massive Mining Pouch",
                 "sellPrice": 200,
@@ -7912,7 +7912,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 5000: Ores, Bars, Barrels",
                 "level": 100
             }),
-        new DescItemBase("MaxCapBagMi8", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagMi8", <CarryBagItemModel>{
                 "internalName": "MaxCapBagMi8",
                 "displayName": "Volumetric Mining Pouch",
                 "sellPrice": 200,
@@ -7921,7 +7921,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 10000: Ores, Bars, Barrels",
                 "level": 125
             }),
-        new DescItemBase("MaxCapBagT1", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagT1", <CarryBagItemModel>{
                 "internalName": "MaxCapBagT1",
                 "displayName": "Miniature Choppin Pouch",
                 "sellPrice": 200,
@@ -7930,7 +7930,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 25: Logs, Leaves",
                 "level": 3
             }),
-        new DescItemBase("MaxCapBag7", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBag7", <CarryBagItemModel>{
                 "internalName": "MaxCapBag7",
                 "displayName": "Cramped Choppin Pouch",
                 "sellPrice": 1400,
@@ -7939,7 +7939,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 50: Logs, Leaves",
                 "level": 10
             }),
-        new DescItemBase("MaxCapBag9", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBag9", <CarryBagItemModel>{
                 "internalName": "MaxCapBag9",
                 "displayName": "Small Choppin Pouch",
                 "sellPrice": 10500,
@@ -7948,7 +7948,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 100: Logs, Leaves",
                 "level": 20
             }),
-        new DescItemBase("MaxCapBagT3", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagT3", <CarryBagItemModel>{
                 "internalName": "MaxCapBagT3",
                 "displayName": "Average Choppin Pouch",
                 "sellPrice": 10500,
@@ -7957,7 +7957,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 250: Logs, Leaves",
                 "level": 30
             }),
-        new DescItemBase("MaxCapBagT4", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagT4", <CarryBagItemModel>{
                 "internalName": "MaxCapBagT4",
                 "displayName": "Sizable Choppin Pouch",
                 "sellPrice": 10500,
@@ -7966,7 +7966,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 500: Logs, Leaves",
                 "level": 40
             }),
-        new DescItemBase("MaxCapBagT5", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagT5", <CarryBagItemModel>{
                 "internalName": "MaxCapBagT5",
                 "displayName": "Big Choppin Pouch",
                 "sellPrice": 10500,
@@ -7975,7 +7975,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 1000: Logs, Leaves",
                 "level": 50
             }),
-        new DescItemBase("MaxCapBagT6", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagT6", <CarryBagItemModel>{
                 "internalName": "MaxCapBagT6",
                 "displayName": "Large Choppin Pouch",
                 "sellPrice": 10500,
@@ -7984,7 +7984,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 2000: Logs, Leaves",
                 "level": 70
             }),
-        new DescItemBase("MaxCapBagT7", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagT7", <CarryBagItemModel>{
                 "internalName": "MaxCapBagT7",
                 "displayName": "Massive Choppin Pouch",
                 "sellPrice": 200,
@@ -7993,7 +7993,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 5000: Logs, Leaves",
                 "level": 100
             }),
-        new DescItemBase("MaxCapBagT8", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagT8", <CarryBagItemModel>{
                 "internalName": "MaxCapBagT8",
                 "displayName": "Volumetric Chopping Pouch",
                 "sellPrice": 200,
@@ -8002,7 +8002,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 10000: Logs, Leaves",
                 "level": 125
             }),
-        new DescItemBase("MaxCapBag6", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBag6", <CarryBagItemModel>{
                 "internalName": "MaxCapBag6",
                 "displayName": "Miniscule Food Pouch",
                 "sellPrice": 200,
@@ -8011,7 +8011,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 25: Health Food, Boost Food, Golden Food",
                 "level": 5
             }),
-        new DescItemBase("MaxCapBag8", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBag8", <CarryBagItemModel>{
                 "internalName": "MaxCapBag8",
                 "displayName": "Cramped Food Pouch",
                 "sellPrice": 5800,
@@ -8020,7 +8020,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 50: Health Food, Boost Food, Golden Food",
                 "level": 10
             }),
-        new DescItemBase("MaxCapBag10", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBag10", <CarryBagItemModel>{
                 "internalName": "MaxCapBag10",
                 "displayName": "Small Food Pouch",
                 "sellPrice": 5800,
@@ -8029,7 +8029,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 100: Health Food, Boost Food, Golden Food",
                 "level": 20
             }),
-        new DescItemBase("MaxCapBagF3", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagF3", <CarryBagItemModel>{
                 "internalName": "MaxCapBagF3",
                 "displayName": "Average Food Pouch",
                 "sellPrice": 5800,
@@ -8038,7 +8038,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 250: Health Food, Boost Food, Golden Food",
                 "level": 30
             }),
-        new DescItemBase("MaxCapBagF4", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagF4", <CarryBagItemModel>{
                 "internalName": "MaxCapBagF4",
                 "displayName": "Sizable Food Pouch",
                 "sellPrice": 5800,
@@ -8047,7 +8047,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 500: Health Food, Boost Food, Golden Food",
                 "level": 40
             }),
-        new DescItemBase("MaxCapBagF5", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagF5", <CarryBagItemModel>{
                 "internalName": "MaxCapBagF5",
                 "displayName": "Big Food Pouch",
                 "sellPrice": 5800,
@@ -8056,7 +8056,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 1000: Health Food, Boost Food, Golden Food",
                 "level": 50
             }),
-        new DescItemBase("MaxCapBagF6", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagF6", <CarryBagItemModel>{
                 "internalName": "MaxCapBagF6",
                 "displayName": "Large Food Pouch",
                 "sellPrice": 5800,
@@ -8065,7 +8065,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 2000: Health Food, Boost Food, Golden Food",
                 "level": 70
             }),
-        new DescItemBase("MaxCapBagF7", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagF7", <CarryBagItemModel>{
                 "internalName": "MaxCapBagF7",
                 "displayName": "Massive Food Pouch",
                 "sellPrice": 200,
@@ -8074,7 +8074,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 5000: Health Food, Boost Food, Golden Food",
                 "level": 100
             }),
-        new DescItemBase("MaxCapBagF8", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagF8", <CarryBagItemModel>{
                 "internalName": "MaxCapBagF8",
                 "displayName": "Volumetric Food Pouch",
                 "sellPrice": 200,
@@ -8083,7 +8083,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 10000: Health Food, Boost Food, Golden Food",
                 "level": 125
             }),
-        new DescItemBase("MaxCapBagM1", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagM1", <CarryBagItemModel>{
                 "internalName": "MaxCapBagM1",
                 "displayName": "Mini Materials Pouch",
                 "sellPrice": 200,
@@ -8092,7 +8092,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 25: Monster Parts, Smithing Production Items",
                 "level": 5
             }),
-        new DescItemBase("MaxCapBagM2", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagM2", <CarryBagItemModel>{
                 "internalName": "MaxCapBagM2",
                 "displayName": "Cramped Material Pouch",
                 "sellPrice": 4200,
@@ -8101,7 +8101,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 50: Monster Parts, Smithing Production Items",
                 "level": 10
             }),
-        new DescItemBase("MaxCapBagM3", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagM3", <CarryBagItemModel>{
                 "internalName": "MaxCapBagM3",
                 "displayName": "Small Material Pouch",
                 "sellPrice": 200,
@@ -8110,7 +8110,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 100: Monster Parts, Smithing Production Items",
                 "level": 20
             }),
-        new DescItemBase("MaxCapBagM4", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagM4", <CarryBagItemModel>{
                 "internalName": "MaxCapBagM4",
                 "displayName": "Average Material Pouch",
                 "sellPrice": 200,
@@ -8119,7 +8119,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 250: Monster Parts, Smithing Production Items",
                 "level": 30
             }),
-        new DescItemBase("MaxCapBagM5", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagM5", <CarryBagItemModel>{
                 "internalName": "MaxCapBagM5",
                 "displayName": "Sizable Materials Pouch",
                 "sellPrice": 200,
@@ -8128,7 +8128,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 500: Monster Parts, Smithing Production Items",
                 "level": 40
             }),
-        new DescItemBase("MaxCapBagM6", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagM6", <CarryBagItemModel>{
                 "internalName": "MaxCapBagM6",
                 "displayName": "Big Materials Pouch",
                 "sellPrice": 200,
@@ -8137,7 +8137,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 1000: Monster Parts, Smithing Production Items",
                 "level": 50
             }),
-        new DescItemBase("MaxCapBagM7", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagM7", <CarryBagItemModel>{
                 "internalName": "MaxCapBagM7",
                 "displayName": "Large Materials Pouch",
                 "sellPrice": 200,
@@ -8146,7 +8146,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 2000: Monster Parts, Smithing Production Items",
                 "level": 70
             }),
-        new DescItemBase("MaxCapBagM8", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagM8", <CarryBagItemModel>{
                 "internalName": "MaxCapBagM8",
                 "displayName": "Massive Materials Pouch",
                 "sellPrice": 200,
@@ -8155,7 +8155,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 5000: Monster Parts, Smithing Production Items",
                 "level": 100
             }),
-        new DescItemBase("MaxCapBagM9", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagM9", <CarryBagItemModel>{
                 "internalName": "MaxCapBagM9",
                 "displayName": "Volumetric Matty Pouch",
                 "sellPrice": 200,
@@ -8164,7 +8164,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 10000: Monster Parts, Smithing Production Items",
                 "level": 125
             }),
-        new DescItemBase("MaxCapBagFi0", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagFi0", <CarryBagItemModel>{
                 "internalName": "MaxCapBagFi0",
                 "displayName": "Miniature Fish Pouch",
                 "sellPrice": 200,
@@ -8173,7 +8173,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 25: Fish",
                 "level": 5
             }),
-        new DescItemBase("MaxCapBagFi1", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagFi1", <CarryBagItemModel>{
                 "internalName": "MaxCapBagFi1",
                 "displayName": "Cramped Fish Pouch",
                 "sellPrice": 200,
@@ -8182,7 +8182,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 50: Fish",
                 "level": 10
             }),
-        new DescItemBase("MaxCapBagFi2", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagFi2", <CarryBagItemModel>{
                 "internalName": "MaxCapBagFi2",
                 "displayName": "Small Fish Pouch",
                 "sellPrice": 200,
@@ -8191,7 +8191,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 100: Fish",
                 "level": 20
             }),
-        new DescItemBase("MaxCapBagFi3", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagFi3", <CarryBagItemModel>{
                 "internalName": "MaxCapBagFi3",
                 "displayName": "Average Fish Pouch",
                 "sellPrice": 200,
@@ -8200,7 +8200,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 250: Fish",
                 "level": 30
             }),
-        new DescItemBase("MaxCapBagFi4", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagFi4", <CarryBagItemModel>{
                 "internalName": "MaxCapBagFi4",
                 "displayName": "Sizable Fish Pouch",
                 "sellPrice": 200,
@@ -8209,7 +8209,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 500: Fish",
                 "level": 40
             }),
-        new DescItemBase("MaxCapBagFi5", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagFi5", <CarryBagItemModel>{
                 "internalName": "MaxCapBagFi5",
                 "displayName": "Big Fish Pouch",
                 "sellPrice": 200,
@@ -8218,7 +8218,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 1000: Fish",
                 "level": 50
             }),
-        new DescItemBase("MaxCapBagFi6", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagFi6", <CarryBagItemModel>{
                 "internalName": "MaxCapBagFi6",
                 "displayName": "Large Fish Pouch",
                 "sellPrice": 200,
@@ -8227,7 +8227,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 2000: Fish",
                 "level": 70
             }),
-        new DescItemBase("MaxCapBagFi7", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagFi7", <CarryBagItemModel>{
                 "internalName": "MaxCapBagFi7",
                 "displayName": "Massive Fish Pouch",
                 "sellPrice": 200,
@@ -8236,7 +8236,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 5000: Fish",
                 "level": 100
             }),
-        new DescItemBase("MaxCapBagFi8", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagFi8", <CarryBagItemModel>{
                 "internalName": "MaxCapBagFi8",
                 "displayName": "Volumetric Fish Pouch",
                 "sellPrice": 200,
@@ -8245,7 +8245,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 10000: Fish",
                 "level": 125
             }),
-        new DescItemBase("MaxCapBagB0", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagB0", <CarryBagItemModel>{
                 "internalName": "MaxCapBagB0",
                 "displayName": "Miniature Bug Pouch",
                 "sellPrice": 200,
@@ -8254,7 +8254,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 25: Bugs",
                 "level": 5
             }),
-        new DescItemBase("MaxCapBagB1", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagB1", <CarryBagItemModel>{
                 "internalName": "MaxCapBagB1",
                 "displayName": "Cramped Bug Pouch",
                 "sellPrice": 200,
@@ -8263,7 +8263,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 50: Bugs",
                 "level": 10
             }),
-        new DescItemBase("MaxCapBagB2", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagB2", <CarryBagItemModel>{
                 "internalName": "MaxCapBagB2",
                 "displayName": "Small Bug Pouch",
                 "sellPrice": 200,
@@ -8272,7 +8272,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 100: Bugs",
                 "level": 20
             }),
-        new DescItemBase("MaxCapBagB3", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagB3", <CarryBagItemModel>{
                 "internalName": "MaxCapBagB3",
                 "displayName": "Average Bug Pouch",
                 "sellPrice": 200,
@@ -8281,7 +8281,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 250: Bugs",
                 "level": 30
             }),
-        new DescItemBase("MaxCapBagB4", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagB4", <CarryBagItemModel>{
                 "internalName": "MaxCapBagB4",
                 "displayName": "Sizable Bug Pouch",
                 "sellPrice": 200,
@@ -8290,7 +8290,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 500: Bugs",
                 "level": 40
             }),
-        new DescItemBase("MaxCapBagB5", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagB5", <CarryBagItemModel>{
                 "internalName": "MaxCapBagB5",
                 "displayName": "Big Bug Pouch",
                 "sellPrice": 200,
@@ -8299,7 +8299,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 1000: Bugs",
                 "level": 50
             }),
-        new DescItemBase("MaxCapBagB6", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagB6", <CarryBagItemModel>{
                 "internalName": "MaxCapBagB6",
                 "displayName": "Large Bug Pouch",
                 "sellPrice": 200,
@@ -8308,7 +8308,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 2000: Bugs",
                 "level": 70
             }),
-        new DescItemBase("MaxCapBagB7", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagB7", <CarryBagItemModel>{
                 "internalName": "MaxCapBagB7",
                 "displayName": "Massive Bug Pouch",
                 "sellPrice": 200,
@@ -8317,7 +8317,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 5000: Bugs",
                 "level": 100
             }),
-        new DescItemBase("MaxCapBagB8", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagB8", <CarryBagItemModel>{
                 "internalName": "MaxCapBagB8",
                 "displayName": "Volumetric Bug Pouch",
                 "sellPrice": 200,
@@ -8326,7 +8326,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 10000: Bugs",
                 "level": 125
             }),
-        new DescItemBase("MaxCapBagTr0", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagTr0", <CarryBagItemModel>{
                 "internalName": "MaxCapBagTr0",
                 "displayName": "Cramped Critter Pouch",
                 "sellPrice": 200,
@@ -8335,7 +8335,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 50: Critters",
                 "level": 15
             }),
-        new DescItemBase("MaxCapBagTr1", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagTr1", <CarryBagItemModel>{
                 "internalName": "MaxCapBagTr1",
                 "displayName": "Small Critter Pouch",
                 "sellPrice": 200,
@@ -8344,7 +8344,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 100: Critters",
                 "level": 25
             }),
-        new DescItemBase("MaxCapBagTr2", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagTr2", <CarryBagItemModel>{
                 "internalName": "MaxCapBagTr2",
                 "displayName": "Average Critter Pouch",
                 "sellPrice": 200,
@@ -8353,7 +8353,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 250: Critters",
                 "level": 35
             }),
-        new DescItemBase("MaxCapBagTr3", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagTr3", <CarryBagItemModel>{
                 "internalName": "MaxCapBagTr3",
                 "displayName": "Sizable Critter Pouch",
                 "sellPrice": 200,
@@ -8362,7 +8362,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 500: Critters",
                 "level": 45
             }),
-        new DescItemBase("MaxCapBagTr4", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagTr4", <CarryBagItemModel>{
                 "internalName": "MaxCapBagTr4",
                 "displayName": "Big Critter Pouch",
                 "sellPrice": 200,
@@ -8371,7 +8371,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 1000: Critters",
                 "level": 55
             }),
-        new DescItemBase("MaxCapBagTr5", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagTr5", <CarryBagItemModel>{
                 "internalName": "MaxCapBagTr5",
                 "displayName": "Large Critter Pouch",
                 "sellPrice": 200,
@@ -8380,7 +8380,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 2000: Critters",
                 "level": 75
             }),
-        new DescItemBase("MaxCapBagTr6", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagTr6", <CarryBagItemModel>{
                 "internalName": "MaxCapBagTr6",
                 "displayName": "Massive Critter Pouch",
                 "sellPrice": 200,
@@ -8389,7 +8389,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 5000: Critters",
                 "level": 100
             }),
-        new DescItemBase("MaxCapBagTr7", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagTr7", <CarryBagItemModel>{
                 "internalName": "MaxCapBagTr7",
                 "displayName": "Volumetric Critta Pouch",
                 "sellPrice": 200,
@@ -8398,7 +8398,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 10000: Critters",
                 "level": 125
             }),
-        new DescItemBase("MaxCapBagS0", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagS0", <CarryBagItemModel>{
                 "internalName": "MaxCapBagS0",
                 "displayName": "Cramped Soul Pouch",
                 "sellPrice": 200,
@@ -8407,7 +8407,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 50: Souls",
                 "level": 15
             }),
-        new DescItemBase("MaxCapBagS1", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagS1", <CarryBagItemModel>{
                 "internalName": "MaxCapBagS1",
                 "displayName": "Small Soul Pouch",
                 "sellPrice": 200,
@@ -8416,7 +8416,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 100: Souls",
                 "level": 25
             }),
-        new DescItemBase("MaxCapBagS2", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagS2", <CarryBagItemModel>{
                 "internalName": "MaxCapBagS2",
                 "displayName": "Average Soul Pouch",
                 "sellPrice": 200,
@@ -8425,7 +8425,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 250: Souls",
                 "level": 35
             }),
-        new DescItemBase("MaxCapBagS3", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagS3", <CarryBagItemModel>{
                 "internalName": "MaxCapBagS3",
                 "displayName": "Sizable Soul Pouch",
                 "sellPrice": 200,
@@ -8434,7 +8434,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 500: Souls",
                 "level": 45
             }),
-        new DescItemBase("MaxCapBagS4", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagS4", <CarryBagItemModel>{
                 "internalName": "MaxCapBagS4",
                 "displayName": "Big Soul Pouch",
                 "sellPrice": 200,
@@ -8443,7 +8443,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 1000: Souls",
                 "level": 55
             }),
-        new DescItemBase("MaxCapBagS5", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagS5", <CarryBagItemModel>{
                 "internalName": "MaxCapBagS5",
                 "displayName": "Large Soul Pouch",
                 "sellPrice": 200,
@@ -8452,7 +8452,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 2000: Souls",
                 "level": 75
             }),
-        new DescItemBase("MaxCapBagS6", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagS6", <CarryBagItemModel>{
                 "internalName": "MaxCapBagS6",
                 "displayName": "Massive Soul Pouch",
                 "sellPrice": 200,
@@ -8461,7 +8461,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 5000: Souls",
                 "level": 100
             }),
-        new DescItemBase("MaxCapBagS7", <CarryBagItemModel>{
+        new BaseItemBase("MaxCapBagS7", <CarryBagItemModel>{
                 "internalName": "MaxCapBagS7",
                 "displayName": "Volumetric Soul Pouch",
                 "sellPrice": 200,
@@ -8470,7 +8470,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 10000: Souls",
                 "level": 125
             }),
-        new DescItemBase("ObolBronze0", <ObolItemModel>{
+        new BaseItemBase("ObolBronze0", <ObolItemModel>{
                 "internalName": "ObolBronze0",
                 "displayName": "Bronze STR Obol",
                 "sellPrice": 1,
@@ -8493,7 +8493,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolBronze1", <ObolItemModel>{
+        new BaseItemBase("ObolBronze1", <ObolItemModel>{
                 "internalName": "ObolBronze1",
                 "displayName": "Bronze AGI Obol",
                 "sellPrice": 1,
@@ -8516,7 +8516,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolBronze2", <ObolItemModel>{
+        new BaseItemBase("ObolBronze2", <ObolItemModel>{
                 "internalName": "ObolBronze2",
                 "displayName": "Bronze WIS Obol",
                 "sellPrice": 1,
@@ -8539,7 +8539,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolBronze3", <ObolItemModel>{
+        new BaseItemBase("ObolBronze3", <ObolItemModel>{
                 "internalName": "ObolBronze3",
                 "displayName": "Bronze LUK Obol",
                 "sellPrice": 1,
@@ -8562,7 +8562,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolSilver0", <ObolItemModel>{
+        new BaseItemBase("ObolSilver0", <ObolItemModel>{
                 "internalName": "ObolSilver0",
                 "displayName": "Silver STR Obol",
                 "sellPrice": 3,
@@ -8585,7 +8585,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolSilver1", <ObolItemModel>{
+        new BaseItemBase("ObolSilver1", <ObolItemModel>{
                 "internalName": "ObolSilver1",
                 "displayName": "Silver AGI Obol",
                 "sellPrice": 3,
@@ -8608,7 +8608,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolSilver2", <ObolItemModel>{
+        new BaseItemBase("ObolSilver2", <ObolItemModel>{
                 "internalName": "ObolSilver2",
                 "displayName": "Silver WIS Obol",
                 "sellPrice": 3,
@@ -8631,7 +8631,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolSilver3", <ObolItemModel>{
+        new BaseItemBase("ObolSilver3", <ObolItemModel>{
                 "internalName": "ObolSilver3",
                 "displayName": "Silver LUK Obol",
                 "sellPrice": 3,
@@ -8654,7 +8654,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolGold0", <ObolItemModel>{
+        new BaseItemBase("ObolGold0", <ObolItemModel>{
                 "internalName": "ObolGold0",
                 "displayName": "Gold STR Obol",
                 "sellPrice": 8,
@@ -8677,7 +8677,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolGold1", <ObolItemModel>{
+        new BaseItemBase("ObolGold1", <ObolItemModel>{
                 "internalName": "ObolGold1",
                 "displayName": "Gold AGI Obol",
                 "sellPrice": 8,
@@ -8700,7 +8700,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolGold2", <ObolItemModel>{
+        new BaseItemBase("ObolGold2", <ObolItemModel>{
                 "internalName": "ObolGold2",
                 "displayName": "Gold WIS Obol",
                 "sellPrice": 8,
@@ -8723,7 +8723,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolGold3", <ObolItemModel>{
+        new BaseItemBase("ObolGold3", <ObolItemModel>{
                 "internalName": "ObolGold3",
                 "displayName": "Gold LUK Obol",
                 "sellPrice": 8,
@@ -8746,7 +8746,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolPlatinum0", <ObolItemModel>{
+        new BaseItemBase("ObolPlatinum0", <ObolItemModel>{
                 "internalName": "ObolPlatinum0",
                 "displayName": "Platinum STR Obol",
                 "sellPrice": 20,
@@ -8769,7 +8769,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolPlatinum1", <ObolItemModel>{
+        new BaseItemBase("ObolPlatinum1", <ObolItemModel>{
                 "internalName": "ObolPlatinum1",
                 "displayName": "Platinum AGI Obol",
                 "sellPrice": 20,
@@ -8792,7 +8792,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolPlatinum2", <ObolItemModel>{
+        new BaseItemBase("ObolPlatinum2", <ObolItemModel>{
                 "internalName": "ObolPlatinum2",
                 "displayName": "Platinum WIS Obol",
                 "sellPrice": 20,
@@ -8815,7 +8815,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolPlatinum3", <ObolItemModel>{
+        new BaseItemBase("ObolPlatinum3", <ObolItemModel>{
                 "internalName": "ObolPlatinum3",
                 "displayName": "Platinum LUK Obol",
                 "sellPrice": 20,
@@ -8838,7 +8838,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolPink0", <ObolItemModel>{
+        new BaseItemBase("ObolPink0", <ObolItemModel>{
                 "internalName": "ObolPink0",
                 "displayName": "Dementia STR Obol",
                 "sellPrice": 50,
@@ -8861,7 +8861,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolPink1", <ObolItemModel>{
+        new BaseItemBase("ObolPink1", <ObolItemModel>{
                 "internalName": "ObolPink1",
                 "displayName": "Dementia AGI Obol",
                 "sellPrice": 50,
@@ -8884,7 +8884,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolPink2", <ObolItemModel>{
+        new BaseItemBase("ObolPink2", <ObolItemModel>{
                 "internalName": "ObolPink2",
                 "displayName": "Dementia WIS Obol",
                 "sellPrice": 50,
@@ -8907,7 +8907,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolPink3", <ObolItemModel>{
+        new BaseItemBase("ObolPink3", <ObolItemModel>{
                 "internalName": "ObolPink3",
                 "displayName": "Dementia LUK Obol",
                 "sellPrice": 50,
@@ -8930,7 +8930,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolBronzeDamage", <ObolItemModel>{
+        new BaseItemBase("ObolBronzeDamage", <ObolItemModel>{
                 "internalName": "ObolBronzeDamage",
                 "displayName": "Bronze Obol of Puny Damage",
                 "sellPrice": 1,
@@ -8953,7 +8953,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolSilverDamage", <ObolItemModel>{
+        new BaseItemBase("ObolSilverDamage", <ObolItemModel>{
                 "internalName": "ObolSilverDamage",
                 "displayName": "Silver Obol of Little Damage",
                 "sellPrice": 3,
@@ -8976,7 +8976,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolGoldDamage", <ObolItemModel>{
+        new BaseItemBase("ObolGoldDamage", <ObolItemModel>{
                 "internalName": "ObolGoldDamage",
                 "displayName": "Golden Obol of Big Boy Damage",
                 "sellPrice": 8,
@@ -8999,7 +8999,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolPlatinumDamage", <ObolItemModel>{
+        new BaseItemBase("ObolPlatinumDamage", <ObolItemModel>{
                 "internalName": "ObolPlatinumDamage",
                 "displayName": "Platinum Obol of Lethal Damage",
                 "sellPrice": 20,
@@ -9022,7 +9022,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolPinkDamage", <ObolItemModel>{
+        new BaseItemBase("ObolPinkDamage", <ObolItemModel>{
                 "internalName": "ObolPinkDamage",
                 "displayName": "Dementia Obol of Infinite Damage",
                 "sellPrice": 50,
@@ -9045,7 +9045,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolPlatinumSpeed", <ObolItemModel>{
+        new BaseItemBase("ObolPlatinumSpeed", <ObolItemModel>{
                 "internalName": "ObolPlatinumSpeed",
                 "displayName": "Platinum Obol of Blinding Speed",
                 "sellPrice": 20,
@@ -9068,7 +9068,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolSilverMoney", <ObolItemModel>{
+        new BaseItemBase("ObolSilverMoney", <ObolItemModel>{
                 "internalName": "ObolSilverMoney",
                 "displayName": "Silver Obol of Pocket Change",
                 "sellPrice": 3,
@@ -9091,7 +9091,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolGoldMoney", <ObolItemModel>{
+        new BaseItemBase("ObolGoldMoney", <ObolItemModel>{
                 "internalName": "ObolGoldMoney",
                 "displayName": "Golden Obol of Plentiful Riches",
                 "sellPrice": 8,
@@ -9114,7 +9114,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolBronzeMining", <ObolItemModel>{
+        new BaseItemBase("ObolBronzeMining", <ObolItemModel>{
                 "internalName": "ObolBronzeMining",
                 "displayName": "Bronze Obol of Small Swings",
                 "sellPrice": 1,
@@ -9137,7 +9137,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Mining",
                 "Skill_Power": 1
             }),
-        new DescItemBase("ObolSilverMining", <ObolItemModel>{
+        new BaseItemBase("ObolSilverMining", <ObolItemModel>{
                 "internalName": "ObolSilverMining",
                 "displayName": "Silver Obol of Moderate Mining",
                 "sellPrice": 3,
@@ -9160,7 +9160,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Mining",
                 "Skill_Power": 2
             }),
-        new DescItemBase("ObolGoldMining", <ObolItemModel>{
+        new BaseItemBase("ObolGoldMining", <ObolItemModel>{
                 "internalName": "ObolGoldMining",
                 "displayName": "Golden Obol of Diligent Digging",
                 "sellPrice": 8,
@@ -9183,7 +9183,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Mining",
                 "Skill_Power": 3
             }),
-        new DescItemBase("ObolPlatinumMining", <ObolItemModel>{
+        new BaseItemBase("ObolPlatinumMining", <ObolItemModel>{
                 "internalName": "ObolPlatinumMining",
                 "displayName": "Platinum Obol of Dwarven Delving",
                 "sellPrice": 20,
@@ -9206,7 +9206,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Mining",
                 "Skill_Power": 4
             }),
-        new DescItemBase("ObolPinkMining", <ObolItemModel>{
+        new BaseItemBase("ObolPinkMining", <ObolItemModel>{
                 "internalName": "ObolPinkMining",
                 "displayName": "Dementia Obol of Magisterial Metals",
                 "sellPrice": 50,
@@ -9229,7 +9229,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Mining",
                 "Skill_Power": 5
             }),
-        new DescItemBase("ObolBronzeChoppin", <ObolItemModel>{
+        new BaseItemBase("ObolBronzeChoppin", <ObolItemModel>{
                 "internalName": "ObolBronzeChoppin",
                 "displayName": "Bronze Obol of Chippin Chops",
                 "sellPrice": 1,
@@ -9252,7 +9252,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Choppin",
                 "Skill_Power": 1
             }),
-        new DescItemBase("ObolSilverChoppin", <ObolItemModel>{
+        new BaseItemBase("ObolSilverChoppin", <ObolItemModel>{
                 "internalName": "ObolSilverChoppin",
                 "displayName": "Silver Obol of Big Bark",
                 "sellPrice": 3,
@@ -9275,7 +9275,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Choppin",
                 "Skill_Power": 2
             }),
-        new DescItemBase("ObolGoldChoppin", <ObolItemModel>{
+        new BaseItemBase("ObolGoldChoppin", <ObolItemModel>{
                 "internalName": "ObolGoldChoppin",
                 "displayName": "Golden Obol of Huge Hackin",
                 "sellPrice": 8,
@@ -9298,7 +9298,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Choppin",
                 "Skill_Power": 3
             }),
-        new DescItemBase("ObolPlatinumChoppin", <ObolItemModel>{
+        new BaseItemBase("ObolPlatinumChoppin", <ObolItemModel>{
                 "internalName": "ObolPlatinumChoppin",
                 "displayName": "Platinum Obol of Lumby Loggo",
                 "sellPrice": 20,
@@ -9321,7 +9321,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Choppin",
                 "Skill_Power": 4
             }),
-        new DescItemBase("ObolPinkChoppin", <ObolItemModel>{
+        new BaseItemBase("ObolPinkChoppin", <ObolItemModel>{
                 "internalName": "ObolPinkChoppin",
                 "displayName": "Dementia Obol of WOWOWOWWO",
                 "sellPrice": 50,
@@ -9344,7 +9344,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Choppin",
                 "Skill_Power": 5
             }),
-        new DescItemBase("ObolBronzeFishing", <ObolItemModel>{
+        new BaseItemBase("ObolBronzeFishing", <ObolItemModel>{
                 "internalName": "ObolBronzeFishing",
                 "displayName": "Bronze Obol of Finite Fish",
                 "sellPrice": 1,
@@ -9367,7 +9367,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Fishing",
                 "Skill_Power": 1
             }),
-        new DescItemBase("ObolSilverFishing", <ObolItemModel>{
+        new BaseItemBase("ObolSilverFishing", <ObolItemModel>{
                 "internalName": "ObolSilverFishing",
                 "displayName": "Silver Obol of Puny Pikes",
                 "sellPrice": 3,
@@ -9390,7 +9390,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Fishing",
                 "Skill_Power": 2
             }),
-        new DescItemBase("ObolGoldFishing", <ObolItemModel>{
+        new BaseItemBase("ObolGoldFishing", <ObolItemModel>{
                 "internalName": "ObolGoldFishing",
                 "displayName": "Golden Obol of Crazy Carp",
                 "sellPrice": 8,
@@ -9413,7 +9413,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Fishing",
                 "Skill_Power": 3
             }),
-        new DescItemBase("ObolPlatinumFishing", <ObolItemModel>{
+        new BaseItemBase("ObolPlatinumFishing", <ObolItemModel>{
                 "internalName": "ObolPlatinumFishing",
                 "displayName": "Platinum Obol of Tremendous Trout",
                 "sellPrice": 20,
@@ -9436,7 +9436,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Fishing",
                 "Skill_Power": 4
             }),
-        new DescItemBase("ObolPinkFishing", <ObolItemModel>{
+        new BaseItemBase("ObolPinkFishing", <ObolItemModel>{
                 "internalName": "ObolPinkFishing",
                 "displayName": "Dementia Obol of Monument Marlins",
                 "sellPrice": 50,
@@ -9459,7 +9459,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Fishing",
                 "Skill_Power": 5
             }),
-        new DescItemBase("ObolBronzeCatching", <ObolItemModel>{
+        new BaseItemBase("ObolBronzeCatching", <ObolItemModel>{
                 "internalName": "ObolBronzeCatching",
                 "displayName": "Bronze Obol of Few Flies",
                 "sellPrice": 1,
@@ -9482,7 +9482,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Catching",
                 "Skill_Power": 1
             }),
-        new DescItemBase("ObolSilverCatching", <ObolItemModel>{
+        new BaseItemBase("ObolSilverCatching", <ObolItemModel>{
                 "internalName": "ObolSilverCatching",
                 "displayName": "Silver Obol of Big Bugs",
                 "sellPrice": 3,
@@ -9505,7 +9505,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Catching",
                 "Skill_Power": 2
             }),
-        new DescItemBase("ObolGoldCatching", <ObolItemModel>{
+        new BaseItemBase("ObolGoldCatching", <ObolItemModel>{
                 "internalName": "ObolGoldCatching",
                 "displayName": "Golden Obol of Insane Insects",
                 "sellPrice": 8,
@@ -9528,7 +9528,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Catching",
                 "Skill_Power": 3
             }),
-        new DescItemBase("ObolPlatinumCatching", <ObolItemModel>{
+        new BaseItemBase("ObolPlatinumCatching", <ObolItemModel>{
                 "internalName": "ObolPlatinumCatching",
                 "displayName": "Platinum Obol of Ample Anthropods",
                 "sellPrice": 20,
@@ -9551,7 +9551,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Catching",
                 "Skill_Power": 4
             }),
-        new DescItemBase("ObolPinkCatching", <ObolItemModel>{
+        new BaseItemBase("ObolPinkCatching", <ObolItemModel>{
                 "internalName": "ObolPinkCatching",
                 "displayName": "Dementia Obol of Colossal Crawlies",
                 "sellPrice": 50,
@@ -9574,7 +9574,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Catching",
                 "Skill_Power": 5
             }),
-        new DescItemBase("ObolSilverLuck", <ObolItemModel>{
+        new BaseItemBase("ObolSilverLuck", <ObolItemModel>{
                 "internalName": "ObolSilverLuck",
                 "displayName": "Silver Obol of Double Sixes",
                 "sellPrice": 3,
@@ -9597,7 +9597,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolGoldLuck", <ObolItemModel>{
+        new BaseItemBase("ObolGoldLuck", <ObolItemModel>{
                 "internalName": "ObolGoldLuck",
                 "displayName": "Golden Obol of Triple Sixes",
                 "sellPrice": 8,
@@ -9620,7 +9620,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolPlatinumLuck", <ObolItemModel>{
+        new BaseItemBase("ObolPlatinumLuck", <ObolItemModel>{
                 "internalName": "ObolPlatinumLuck",
                 "displayName": "Platinum Obol of Yahtzee Sixes",
                 "sellPrice": 20,
@@ -9643,7 +9643,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolPinkLuck", <ObolItemModel>{
+        new BaseItemBase("ObolPinkLuck", <ObolItemModel>{
                 "internalName": "ObolPinkLuck",
                 "displayName": "Dementia Obol of Infinisixes",
                 "sellPrice": 50,
@@ -9666,7 +9666,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolBronzePop", <ObolItemModel>{
+        new BaseItemBase("ObolBronzePop", <ObolItemModel>{
                 "internalName": "ObolBronzePop",
                 "displayName": "Bronze Obol of Pop",
                 "sellPrice": 1,
@@ -9689,7 +9689,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolSilverPop", <ObolItemModel>{
+        new BaseItemBase("ObolSilverPop", <ObolItemModel>{
                 "internalName": "ObolSilverPop",
                 "displayName": "Silver Obol of Pop Pop",
                 "sellPrice": 3,
@@ -9712,7 +9712,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolGoldPop", <ObolItemModel>{
+        new BaseItemBase("ObolGoldPop", <ObolItemModel>{
                 "internalName": "ObolGoldPop",
                 "displayName": "Golden Obol of Poppity Pop",
                 "sellPrice": 8,
@@ -9735,7 +9735,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolPlatinumPop", <ObolItemModel>{
+        new BaseItemBase("ObolPlatinumPop", <ObolItemModel>{
                 "internalName": "ObolPlatinumPop",
                 "displayName": "Platinum Obol of Poppity Poppy",
                 "sellPrice": 20,
@@ -9758,7 +9758,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolPinkPop", <ObolItemModel>{
+        new BaseItemBase("ObolPinkPop", <ObolItemModel>{
                 "internalName": "ObolPinkPop",
                 "displayName": "Dementia Obol of Pop Pop Pop Pop",
                 "sellPrice": 50,
@@ -9781,7 +9781,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolAmarokA", <ObolItemModel>{
+        new BaseItemBase("ObolAmarokA", <ObolItemModel>{
                 "internalName": "ObolAmarokA",
                 "displayName": "Granite Obol of Amarok's Stare",
                 "sellPrice": 20,
@@ -9804,7 +9804,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolEfauntA", <ObolItemModel>{
+        new BaseItemBase("ObolEfauntA", <ObolItemModel>{
                 "internalName": "ObolEfauntA",
                 "displayName": "Skeletal Obol of Efaunt's Gaze",
                 "sellPrice": 20,
@@ -9827,7 +9827,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolChizoarA", <ObolItemModel>{
+        new BaseItemBase("ObolChizoarA", <ObolItemModel>{
                 "internalName": "ObolChizoarA",
                 "displayName": "Frozen Obol of Chizoar's Rage",
                 "sellPrice": 20,
@@ -9850,7 +9850,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolSlush", <ObolItemModel>{
+        new BaseItemBase("ObolSlush", <ObolItemModel>{
                 "internalName": "ObolSlush",
                 "displayName": "Slushy Obol of Much Dilapidation",
                 "sellPrice": 20,
@@ -9873,7 +9873,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolBronzeKill", <ObolItemModel>{
+        new BaseItemBase("ObolBronzeKill", <ObolItemModel>{
                 "internalName": "ObolBronzeKill",
                 "displayName": "Bronze Obol of Multikill",
                 "sellPrice": 1,
@@ -9896,7 +9896,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolSilverKill", <ObolItemModel>{
+        new BaseItemBase("ObolSilverKill", <ObolItemModel>{
                 "internalName": "ObolSilverKill",
                 "displayName": "Silver Obol of Megakill",
                 "sellPrice": 3,
@@ -9919,7 +9919,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolGoldKill", <ObolItemModel>{
+        new BaseItemBase("ObolGoldKill", <ObolItemModel>{
                 "internalName": "ObolGoldKill",
                 "displayName": "Golden Obol of Ultrakill",
                 "sellPrice": 8,
@@ -9942,7 +9942,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolPlatinumKill", <ObolItemModel>{
+        new BaseItemBase("ObolPlatinumKill", <ObolItemModel>{
                 "internalName": "ObolPlatinumKill",
                 "displayName": "Platinum Obol of Killimanjaro",
                 "sellPrice": 20,
@@ -9965,7 +9965,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolPinkKill", <ObolItemModel>{
+        new BaseItemBase("ObolPinkKill", <ObolItemModel>{
                 "internalName": "ObolPinkKill",
                 "displayName": "Dementia Obol of Killionaire",
                 "sellPrice": 50,
@@ -9988,7 +9988,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolBronzeEXP", <ObolItemModel>{
+        new BaseItemBase("ObolBronzeEXP", <ObolItemModel>{
                 "internalName": "ObolBronzeEXP",
                 "displayName": "Bronze Obol of Experience",
                 "sellPrice": 1,
@@ -10011,7 +10011,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolSilverEXP", <ObolItemModel>{
+        new BaseItemBase("ObolSilverEXP", <ObolItemModel>{
                 "internalName": "ObolSilverEXP",
                 "displayName": "Silver Obol of Experience",
                 "sellPrice": 3,
@@ -10034,7 +10034,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolGoldEXP", <ObolItemModel>{
+        new BaseItemBase("ObolGoldEXP", <ObolItemModel>{
                 "internalName": "ObolGoldEXP",
                 "displayName": "Golden Obol of Experience",
                 "sellPrice": 8,
@@ -10057,7 +10057,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolPlatinumEXP", <ObolItemModel>{
+        new BaseItemBase("ObolPlatinumEXP", <ObolItemModel>{
                 "internalName": "ObolPlatinumEXP",
                 "displayName": "Platinum Obol of Experience",
                 "sellPrice": 20,
@@ -10080,7 +10080,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolPinkEXP", <ObolItemModel>{
+        new BaseItemBase("ObolPinkEXP", <ObolItemModel>{
                 "internalName": "ObolPinkEXP",
                 "displayName": "Dementia Obol of Experience",
                 "sellPrice": 50,
@@ -10103,7 +10103,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolBronzeCard", <ObolItemModel>{
+        new BaseItemBase("ObolBronzeCard", <ObolItemModel>{
                 "internalName": "ObolBronzeCard",
                 "displayName": "Bronze Obol of Cards",
                 "sellPrice": 1,
@@ -10126,7 +10126,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolSilverCard", <ObolItemModel>{
+        new BaseItemBase("ObolSilverCard", <ObolItemModel>{
                 "internalName": "ObolSilverCard",
                 "displayName": "Silver Obol of Cards",
                 "sellPrice": 3,
@@ -10149,7 +10149,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolGoldCard", <ObolItemModel>{
+        new BaseItemBase("ObolGoldCard", <ObolItemModel>{
                 "internalName": "ObolGoldCard",
                 "displayName": "Golden Obol of Cards",
                 "sellPrice": 8,
@@ -10172,7 +10172,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolPlatinumCard", <ObolItemModel>{
+        new BaseItemBase("ObolPlatinumCard", <ObolItemModel>{
                 "internalName": "ObolPlatinumCard",
                 "displayName": "Platinum Obol of Cards",
                 "sellPrice": 20,
@@ -10195,7 +10195,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolPinkCard", <ObolItemModel>{
+        new BaseItemBase("ObolPinkCard", <ObolItemModel>{
                 "internalName": "ObolPinkCard",
                 "displayName": "Dementia Obol of Cards",
                 "sellPrice": 50,
@@ -10218,7 +10218,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolBronzeDef", <ObolItemModel>{
+        new BaseItemBase("ObolBronzeDef", <ObolItemModel>{
                 "internalName": "ObolBronzeDef",
                 "displayName": "Bronze Obol of Defence",
                 "sellPrice": 1,
@@ -10241,7 +10241,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolSilverDef", <ObolItemModel>{
+        new BaseItemBase("ObolSilverDef", <ObolItemModel>{
                 "internalName": "ObolSilverDef",
                 "displayName": "Silver Obol of Defence",
                 "sellPrice": 3,
@@ -10264,7 +10264,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolGoldDef", <ObolItemModel>{
+        new BaseItemBase("ObolGoldDef", <ObolItemModel>{
                 "internalName": "ObolGoldDef",
                 "displayName": "Golden Obol of Defence",
                 "sellPrice": 8,
@@ -10287,7 +10287,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolPlatinumDef", <ObolItemModel>{
+        new BaseItemBase("ObolPlatinumDef", <ObolItemModel>{
                 "internalName": "ObolPlatinumDef",
                 "displayName": "Platinum Obol of Defense with an S",
                 "sellPrice": 20,
@@ -10310,7 +10310,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolPinkDef", <ObolItemModel>{
+        new BaseItemBase("ObolPinkDef", <ObolItemModel>{
                 "internalName": "ObolPinkDef",
                 "displayName": "Dementia Obol of Defence",
                 "sellPrice": 50,
@@ -10333,7 +10333,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolBronzeTrapping", <ObolItemModel>{
+        new BaseItemBase("ObolBronzeTrapping", <ObolItemModel>{
                 "internalName": "ObolBronzeTrapping",
                 "displayName": "Bronze Obol of Trapping",
                 "sellPrice": 1,
@@ -10356,7 +10356,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Trapping",
                 "Skill_Power": 1
             }),
-        new DescItemBase("ObolSilverTrapping", <ObolItemModel>{
+        new BaseItemBase("ObolSilverTrapping", <ObolItemModel>{
                 "internalName": "ObolSilverTrapping",
                 "displayName": "Silver Obol of Trapping",
                 "sellPrice": 3,
@@ -10379,7 +10379,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Trapping",
                 "Skill_Power": 2
             }),
-        new DescItemBase("ObolGoldTrapping", <ObolItemModel>{
+        new BaseItemBase("ObolGoldTrapping", <ObolItemModel>{
                 "internalName": "ObolGoldTrapping",
                 "displayName": "Golden Obol of Trapping",
                 "sellPrice": 8,
@@ -10402,7 +10402,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Trapping",
                 "Skill_Power": 3
             }),
-        new DescItemBase("ObolPlatinumTrapping", <ObolItemModel>{
+        new BaseItemBase("ObolPlatinumTrapping", <ObolItemModel>{
                 "internalName": "ObolPlatinumTrapping",
                 "displayName": "Platinum Obol of Trapping",
                 "sellPrice": 20,
@@ -10425,7 +10425,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Trapping",
                 "Skill_Power": 5
             }),
-        new DescItemBase("ObolPinkTrapping", <ObolItemModel>{
+        new BaseItemBase("ObolPinkTrapping", <ObolItemModel>{
                 "internalName": "ObolPinkTrapping",
                 "displayName": "Dementia Obol of Trapping",
                 "sellPrice": 50,
@@ -10448,7 +10448,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Trapping",
                 "Skill_Power": 7
             }),
-        new DescItemBase("ObolBronzeCons", <ObolItemModel>{
+        new BaseItemBase("ObolBronzeCons", <ObolItemModel>{
                 "internalName": "ObolBronzeCons",
                 "displayName": "Bronze Obol of Construction",
                 "sellPrice": 1,
@@ -10471,7 +10471,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolSilverCons", <ObolItemModel>{
+        new BaseItemBase("ObolSilverCons", <ObolItemModel>{
                 "internalName": "ObolSilverCons",
                 "displayName": "Silver Obol of Construction",
                 "sellPrice": 3,
@@ -10494,7 +10494,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolGoldCons", <ObolItemModel>{
+        new BaseItemBase("ObolGoldCons", <ObolItemModel>{
                 "internalName": "ObolGoldCons",
                 "displayName": "Golden Obol of Construction",
                 "sellPrice": 8,
@@ -10517,7 +10517,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolPlatinumCons", <ObolItemModel>{
+        new BaseItemBase("ObolPlatinumCons", <ObolItemModel>{
                 "internalName": "ObolPlatinumCons",
                 "displayName": "Platinum Obol of Construction",
                 "sellPrice": 20,
@@ -10540,7 +10540,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolPinkCons", <ObolItemModel>{
+        new BaseItemBase("ObolPinkCons", <ObolItemModel>{
                 "internalName": "ObolPinkCons",
                 "displayName": "Dementia Obol of Construction",
                 "sellPrice": 50,
@@ -10563,7 +10563,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("ObolBronzeWorship", <ObolItemModel>{
+        new BaseItemBase("ObolBronzeWorship", <ObolItemModel>{
                 "internalName": "ObolBronzeWorship",
                 "displayName": "Bronze Obol of Worship",
                 "sellPrice": 1,
@@ -10586,7 +10586,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Worship",
                 "Skill_Power": 1
             }),
-        new DescItemBase("ObolSilverWorship", <ObolItemModel>{
+        new BaseItemBase("ObolSilverWorship", <ObolItemModel>{
                 "internalName": "ObolSilverWorship",
                 "displayName": "Silver Obol of Worship",
                 "sellPrice": 3,
@@ -10609,7 +10609,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Worship",
                 "Skill_Power": 2
             }),
-        new DescItemBase("ObolGoldWorship", <ObolItemModel>{
+        new BaseItemBase("ObolGoldWorship", <ObolItemModel>{
                 "internalName": "ObolGoldWorship",
                 "displayName": "Golden Obol of Worship",
                 "sellPrice": 8,
@@ -10632,7 +10632,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Worship",
                 "Skill_Power": 3
             }),
-        new DescItemBase("ObolPlatinumWorship", <ObolItemModel>{
+        new BaseItemBase("ObolPlatinumWorship", <ObolItemModel>{
                 "internalName": "ObolPlatinumWorship",
                 "displayName": "Platinum Obol of Worship",
                 "sellPrice": 20,
@@ -10655,7 +10655,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Worship",
                 "Skill_Power": 5
             }),
-        new DescItemBase("ObolPinkWorship", <ObolItemModel>{
+        new BaseItemBase("ObolPinkWorship", <ObolItemModel>{
                 "internalName": "ObolPinkWorship",
                 "displayName": "Dementia Obol of Worship",
                 "sellPrice": 50,
@@ -10678,7 +10678,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "Worship",
                 "Skill_Power": 7
             }),
-        new DescItemBase("StampA1", <StampItemModel>{
+        new BaseItemBase("StampA1", <StampItemModel>{
                 "internalName": "StampA1",
                 "displayName": "Sword Stamp",
                 "sellPrice": 500,
@@ -10703,7 +10703,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 3
                 }
             }),
-        new DescItemBase("StampA2", <StampItemModel>{
+        new BaseItemBase("StampA2", <StampItemModel>{
                 "internalName": "StampA2",
                 "displayName": "Heart Stamp",
                 "sellPrice": 500,
@@ -10728,7 +10728,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 3
                 }
             }),
-        new DescItemBase("StampA3", <StampItemModel>{
+        new BaseItemBase("StampA3", <StampItemModel>{
                 "internalName": "StampA3",
                 "displayName": "Mana Stamp",
                 "sellPrice": 2500,
@@ -10753,7 +10753,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampA4", <StampItemModel>{
+        new BaseItemBase("StampA4", <StampItemModel>{
                 "internalName": "StampA4",
                 "displayName": "Tomahawk Stamp",
                 "sellPrice": 1000,
@@ -10778,7 +10778,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 3
                 }
             }),
-        new DescItemBase("StampA5", <StampItemModel>{
+        new BaseItemBase("StampA5", <StampItemModel>{
                 "internalName": "StampA5",
                 "displayName": "Target Stamp",
                 "sellPrice": 250,
@@ -10803,7 +10803,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 3
                 }
             }),
-        new DescItemBase("StampA6", <StampItemModel>{
+        new BaseItemBase("StampA6", <StampItemModel>{
                 "internalName": "StampA6",
                 "displayName": "Shield Stamp",
                 "sellPrice": 800,
@@ -10828,7 +10828,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 3
                 }
             }),
-        new DescItemBase("StampA7", <StampItemModel>{
+        new BaseItemBase("StampA7", <StampItemModel>{
                 "internalName": "StampA7",
                 "displayName": "Longsword Stamp",
                 "sellPrice": 1000,
@@ -10853,7 +10853,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 6
                 }
             }),
-        new DescItemBase("StampA8", <StampItemModel>{
+        new BaseItemBase("StampA8", <StampItemModel>{
                 "internalName": "StampA8",
                 "displayName": "Kapow Stamp",
                 "sellPrice": 2500,
@@ -10878,7 +10878,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 6
                 }
             }),
-        new DescItemBase("StampA9", <StampItemModel>{
+        new BaseItemBase("StampA9", <StampItemModel>{
                 "internalName": "StampA9",
                 "displayName": "Fist Stamp",
                 "sellPrice": 2500,
@@ -10903,7 +10903,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 3
                 }
             }),
-        new DescItemBase("StampA10", <StampItemModel>{
+        new BaseItemBase("StampA10", <StampItemModel>{
                 "internalName": "StampA10",
                 "displayName": "Battleaxe Stamp",
                 "sellPrice": 2500,
@@ -10928,7 +10928,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 5
                 }
             }),
-        new DescItemBase("StampA11", <StampItemModel>{
+        new BaseItemBase("StampA11", <StampItemModel>{
                 "internalName": "StampA11",
                 "displayName": "Agile Stamp",
                 "sellPrice": 2500,
@@ -10953,7 +10953,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampA12", <StampItemModel>{
+        new BaseItemBase("StampA12", <StampItemModel>{
                 "internalName": "StampA12",
                 "displayName": "Vitality Stamp",
                 "sellPrice": 8000,
@@ -10978,7 +10978,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 6
                 }
             }),
-        new DescItemBase("StampA13", <StampItemModel>{
+        new BaseItemBase("StampA13", <StampItemModel>{
                 "internalName": "StampA13",
                 "displayName": "Book Stamp",
                 "sellPrice": 8000,
@@ -11003,7 +11003,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 3
                 }
             }),
-        new DescItemBase("StampA14", <StampItemModel>{
+        new BaseItemBase("StampA14", <StampItemModel>{
                 "internalName": "StampA14",
                 "displayName": "Manamoar Stamp",
                 "sellPrice": 8000,
@@ -11028,7 +11028,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 2
                 }
             }),
-        new DescItemBase("StampA15", <StampItemModel>{
+        new BaseItemBase("StampA15", <StampItemModel>{
                 "internalName": "StampA15",
                 "displayName": "Clover Stamp",
                 "sellPrice": 12000,
@@ -11053,7 +11053,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 6
                 }
             }),
-        new DescItemBase("StampA16", <StampItemModel>{
+        new BaseItemBase("StampA16", <StampItemModel>{
                 "internalName": "StampA16",
                 "displayName": "Scimitar Stamp",
                 "sellPrice": 4000,
@@ -11078,7 +11078,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampA17", <StampItemModel>{
+        new BaseItemBase("StampA17", <StampItemModel>{
                 "internalName": "StampA17",
                 "displayName": "Bullseye Stamp",
                 "sellPrice": 12500,
@@ -11103,7 +11103,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampA18", <StampItemModel>{
+        new BaseItemBase("StampA18", <StampItemModel>{
                 "internalName": "StampA18",
                 "displayName": "Feather Stamp",
                 "sellPrice": 6000,
@@ -11128,7 +11128,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampA19", <StampItemModel>{
+        new BaseItemBase("StampA19", <StampItemModel>{
                 "internalName": "StampA19",
                 "displayName": "Polearm Stamp",
                 "sellPrice": 7500,
@@ -11153,7 +11153,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampA20", <StampItemModel>{
+        new BaseItemBase("StampA20", <StampItemModel>{
                 "internalName": "StampA20",
                 "displayName": "Violence Stamp",
                 "sellPrice": 25000,
@@ -11178,7 +11178,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampA21", <StampItemModel>{
+        new BaseItemBase("StampA21", <StampItemModel>{
                 "internalName": "StampA21",
                 "displayName": "Buckler Stamp",
                 "sellPrice": 12000,
@@ -11203,7 +11203,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampA22", <StampItemModel>{
+        new BaseItemBase("StampA22", <StampItemModel>{
                 "internalName": "StampA22",
                 "displayName": "Hermes Stamp",
                 "sellPrice": 10000,
@@ -11228,7 +11228,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampA23", <StampItemModel>{
+        new BaseItemBase("StampA23", <StampItemModel>{
                 "internalName": "StampA23",
                 "displayName": "Sukka Foo",
                 "sellPrice": 10000,
@@ -11253,7 +11253,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampA24", <StampItemModel>{
+        new BaseItemBase("StampA24", <StampItemModel>{
                 "internalName": "StampA24",
                 "displayName": "Arcane Stamp",
                 "sellPrice": 6000,
@@ -11278,7 +11278,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampA25", <StampItemModel>{
+        new BaseItemBase("StampA25", <StampItemModel>{
                 "internalName": "StampA25",
                 "displayName": "Avast Yar Stamp",
                 "sellPrice": 1,
@@ -11303,7 +11303,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampA26", <StampItemModel>{
+        new BaseItemBase("StampA26", <StampItemModel>{
                 "internalName": "StampA26",
                 "displayName": "Steve Sword",
                 "sellPrice": 50000,
@@ -11328,7 +11328,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampA27", <StampItemModel>{
+        new BaseItemBase("StampA27", <StampItemModel>{
                 "internalName": "StampA27",
                 "displayName": "Blover Stamp",
                 "sellPrice": 12500,
@@ -11353,7 +11353,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampA28", <StampItemModel>{
+        new BaseItemBase("StampA28", <StampItemModel>{
                 "internalName": "StampA28",
                 "displayName": "Stat Graph Stamp",
                 "sellPrice": 10000,
@@ -11378,7 +11378,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampA29", <StampItemModel>{
+        new BaseItemBase("StampA29", <StampItemModel>{
                 "internalName": "StampA29",
                 "displayName": "Gilded Axe Stamp",
                 "sellPrice": 1,
@@ -11403,7 +11403,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampA30", <StampItemModel>{
+        new BaseItemBase("StampA30", <StampItemModel>{
                 "internalName": "StampA30",
                 "displayName": "Diamond Axe Stamp",
                 "sellPrice": 1,
@@ -11428,7 +11428,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampA31", <StampItemModel>{
+        new BaseItemBase("StampA31", <StampItemModel>{
                 "internalName": "StampA31",
                 "displayName": "Tripleshot Stamp",
                 "sellPrice": 1,
@@ -11453,7 +11453,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampA32", <StampItemModel>{
+        new BaseItemBase("StampA32", <StampItemModel>{
                 "internalName": "StampA32",
                 "displayName": "Blackheart Stamp",
                 "sellPrice": 1,
@@ -11478,7 +11478,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampA33", <StampItemModel>{
+        new BaseItemBase("StampA33", <StampItemModel>{
                 "internalName": "StampA33",
                 "displayName": "FILLER",
                 "sellPrice": 1,
@@ -11503,7 +11503,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampA34", <StampItemModel>{
+        new BaseItemBase("StampA34", <StampItemModel>{
                 "internalName": "StampA34",
                 "displayName": "FILLER",
                 "sellPrice": 1,
@@ -11528,7 +11528,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampA35", <StampItemModel>{
+        new BaseItemBase("StampA35", <StampItemModel>{
                 "internalName": "StampA35",
                 "displayName": "FILLER",
                 "sellPrice": 1,
@@ -11553,7 +11553,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB1", <StampItemModel>{
+        new BaseItemBase("StampB1", <StampItemModel>{
                 "internalName": "StampB1",
                 "displayName": "Pickaxe Stamp",
                 "sellPrice": 500,
@@ -11578,7 +11578,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB2", <StampItemModel>{
+        new BaseItemBase("StampB2", <StampItemModel>{
                 "internalName": "StampB2",
                 "displayName": "Hatchet Stamp",
                 "sellPrice": 1200,
@@ -11603,7 +11603,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB3", <StampItemModel>{
+        new BaseItemBase("StampB3", <StampItemModel>{
                 "internalName": "StampB3",
                 "displayName": "Anvil Zoomer Stamp",
                 "sellPrice": 800,
@@ -11628,7 +11628,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB4", <StampItemModel>{
+        new BaseItemBase("StampB4", <StampItemModel>{
                 "internalName": "StampB4",
                 "displayName": "Lil' Mining Baggy Stamp",
                 "sellPrice": 1000,
@@ -11653,7 +11653,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB5", <StampItemModel>{
+        new BaseItemBase("StampB5", <StampItemModel>{
                 "internalName": "StampB5",
                 "displayName": "Twin Ores Stamp",
                 "sellPrice": 1000,
@@ -11678,7 +11678,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB6", <StampItemModel>{
+        new BaseItemBase("StampB6", <StampItemModel>{
                 "internalName": "StampB6",
                 "displayName": "Choppin' Bag Stamp",
                 "sellPrice": 1000,
@@ -11703,7 +11703,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB7", <StampItemModel>{
+        new BaseItemBase("StampB7", <StampItemModel>{
                 "internalName": "StampB7",
                 "displayName": "Duplogs Stamp",
                 "sellPrice": 1000,
@@ -11728,7 +11728,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB8", <StampItemModel>{
+        new BaseItemBase("StampB8", <StampItemModel>{
                 "internalName": "StampB8",
                 "displayName": "Matty Bag Stamp",
                 "sellPrice": 6700,
@@ -11753,7 +11753,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB9", <StampItemModel>{
+        new BaseItemBase("StampB9", <StampItemModel>{
                 "internalName": "StampB9",
                 "displayName": "Smart Dirt Stamp",
                 "sellPrice": 1500,
@@ -11778,7 +11778,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB10", <StampItemModel>{
+        new BaseItemBase("StampB10", <StampItemModel>{
                 "internalName": "StampB10",
                 "displayName": "Cool Diggy Tool Stamp",
                 "sellPrice": 1000,
@@ -11803,7 +11803,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB11", <StampItemModel>{
+        new BaseItemBase("StampB11", <StampItemModel>{
                 "internalName": "StampB11",
                 "displayName": "High IQ Lumber Stamp",
                 "sellPrice": 1800,
@@ -11828,7 +11828,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB12", <StampItemModel>{
+        new BaseItemBase("StampB12", <StampItemModel>{
                 "internalName": "StampB12",
                 "displayName": "Swag Swingy Tool Stamp",
                 "sellPrice": 2500,
@@ -11853,7 +11853,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB13", <StampItemModel>{
+        new BaseItemBase("StampB13", <StampItemModel>{
                 "internalName": "StampB13",
                 "displayName": "Alch Go Brrr Stamp",
                 "sellPrice": 2000,
@@ -11878,7 +11878,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB14", <StampItemModel>{
+        new BaseItemBase("StampB14", <StampItemModel>{
                 "internalName": "StampB14",
                 "displayName": "Brainstew Stamps",
                 "sellPrice": 2500,
@@ -11903,7 +11903,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB15", <StampItemModel>{
+        new BaseItemBase("StampB15", <StampItemModel>{
                 "internalName": "StampB15",
                 "displayName": "Drippy Drop Stamp",
                 "sellPrice": 2000,
@@ -11928,7 +11928,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB16", <StampItemModel>{
+        new BaseItemBase("StampB16", <StampItemModel>{
                 "internalName": "StampB16",
                 "displayName": "Droplots Stamp",
                 "sellPrice": 5000,
@@ -11953,7 +11953,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB17", <StampItemModel>{
+        new BaseItemBase("StampB17", <StampItemModel>{
                 "internalName": "StampB17",
                 "displayName": "Fishing Rod Stamp",
                 "sellPrice": 2000,
@@ -11978,7 +11978,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB18", <StampItemModel>{
+        new BaseItemBase("StampB18", <StampItemModel>{
                 "internalName": "StampB18",
                 "displayName": "Fishhead Stamp",
                 "sellPrice": 3000,
@@ -12003,7 +12003,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB19", <StampItemModel>{
+        new BaseItemBase("StampB19", <StampItemModel>{
                 "internalName": "StampB19",
                 "displayName": "Catch Net Stamp",
                 "sellPrice": 2000,
@@ -12028,7 +12028,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB20", <StampItemModel>{
+        new BaseItemBase("StampB20", <StampItemModel>{
                 "internalName": "StampB20",
                 "displayName": "Fly Intel Stamp",
                 "sellPrice": 3000,
@@ -12053,7 +12053,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB21", <StampItemModel>{
+        new BaseItemBase("StampB21", <StampItemModel>{
                 "internalName": "StampB21",
                 "displayName": "Bag o Heads Stamp",
                 "sellPrice": 2000,
@@ -12078,7 +12078,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB22", <StampItemModel>{
+        new BaseItemBase("StampB22", <StampItemModel>{
                 "internalName": "StampB22",
                 "displayName": "Holy Mackerel Stamp",
                 "sellPrice": 3000,
@@ -12103,7 +12103,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB23", <StampItemModel>{
+        new BaseItemBase("StampB23", <StampItemModel>{
                 "internalName": "StampB23",
                 "displayName": "Bugsack Stamp",
                 "sellPrice": 3000,
@@ -12128,7 +12128,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB24", <StampItemModel>{
+        new BaseItemBase("StampB24", <StampItemModel>{
                 "internalName": "StampB24",
                 "displayName": "Buzz Buzz Stamp",
                 "sellPrice": 4000,
@@ -12153,7 +12153,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB25", <StampItemModel>{
+        new BaseItemBase("StampB25", <StampItemModel>{
                 "internalName": "StampB25",
                 "displayName": "Hidey Box Stamp",
                 "sellPrice": 4000,
@@ -12178,7 +12178,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB26", <StampItemModel>{
+        new BaseItemBase("StampB26", <StampItemModel>{
                 "internalName": "StampB26",
                 "displayName": "Purp Froge Stamp",
                 "sellPrice": 4000,
@@ -12203,7 +12203,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB27", <StampItemModel>{
+        new BaseItemBase("StampB27", <StampItemModel>{
                 "internalName": "StampB27",
                 "displayName": "Spikemouth Stamp",
                 "sellPrice": 4000,
@@ -12228,7 +12228,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB28", <StampItemModel>{
+        new BaseItemBase("StampB28", <StampItemModel>{
                 "internalName": "StampB28",
                 "displayName": "Shiny Crab Stamp",
                 "sellPrice": 4000,
@@ -12253,7 +12253,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB29", <StampItemModel>{
+        new BaseItemBase("StampB29", <StampItemModel>{
                 "internalName": "StampB29",
                 "displayName": "Gear Stamp",
                 "sellPrice": 4000,
@@ -12278,7 +12278,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB30", <StampItemModel>{
+        new BaseItemBase("StampB30", <StampItemModel>{
                 "internalName": "StampB30",
                 "displayName": "Stample Stamp",
                 "sellPrice": 4000,
@@ -12303,7 +12303,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB31", <StampItemModel>{
+        new BaseItemBase("StampB31", <StampItemModel>{
                 "internalName": "StampB31",
                 "displayName": "Saw Stamp",
                 "sellPrice": 4000,
@@ -12328,7 +12328,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB32", <StampItemModel>{
+        new BaseItemBase("StampB32", <StampItemModel>{
                 "internalName": "StampB32",
                 "displayName": "Amplestample Stamp",
                 "sellPrice": 4000,
@@ -12353,7 +12353,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB33", <StampItemModel>{
+        new BaseItemBase("StampB33", <StampItemModel>{
                 "internalName": "StampB33",
                 "displayName": "SpoOoky Stamp",
                 "sellPrice": 4000,
@@ -12378,7 +12378,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB34", <StampItemModel>{
+        new BaseItemBase("StampB34", <StampItemModel>{
                 "internalName": "StampB34",
                 "displayName": "Flowin Stamp",
                 "sellPrice": 4000,
@@ -12403,7 +12403,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB35", <StampItemModel>{
+        new BaseItemBase("StampB35", <StampItemModel>{
                 "internalName": "StampB35",
                 "displayName": "Prayday Stamp",
                 "sellPrice": 4000,
@@ -12428,7 +12428,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB36", <StampItemModel>{
+        new BaseItemBase("StampB36", <StampItemModel>{
                 "internalName": "StampB36",
                 "displayName": "Banked Pts Stamp",
                 "sellPrice": 4000,
@@ -12453,7 +12453,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB37", <StampItemModel>{
+        new BaseItemBase("StampB37", <StampItemModel>{
                 "internalName": "StampB37",
                 "displayName": "Cooked Meal Stamp",
                 "sellPrice": 4000,
@@ -12478,7 +12478,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB38", <StampItemModel>{
+        new BaseItemBase("StampB38", <StampItemModel>{
                 "internalName": "StampB38",
                 "displayName": "Spice Stamp",
                 "sellPrice": 50000000,
@@ -12503,7 +12503,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB39", <StampItemModel>{
+        new BaseItemBase("StampB39", <StampItemModel>{
                 "internalName": "StampB39",
                 "displayName": "Ladle Stamp",
                 "sellPrice": 4000,
@@ -12528,7 +12528,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB40", <StampItemModel>{
+        new BaseItemBase("StampB40", <StampItemModel>{
                 "internalName": "StampB40",
                 "displayName": "Nest Eggs Stamp",
                 "sellPrice": 4000,
@@ -12553,7 +12553,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB41", <StampItemModel>{
+        new BaseItemBase("StampB41", <StampItemModel>{
                 "internalName": "StampB41",
                 "displayName": "Egg Stamp",
                 "sellPrice": 10000000,
@@ -12578,7 +12578,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampB42", <StampItemModel>{
+        new BaseItemBase("StampB42", <StampItemModel>{
                 "internalName": "StampB42",
                 "displayName": "Lab Tube Stamp",
                 "sellPrice": 4000,
@@ -12603,7 +12603,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StampC1", <StampItemModel>{
+        new BaseItemBase("StampC1", <StampItemModel>{
                 "internalName": "StampC1",
                 "displayName": "Questin Stamp",
                 "sellPrice": 1000,
@@ -12628,7 +12628,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 3
                 }
             }),
-        new DescItemBase("StampC2", <StampItemModel>{
+        new BaseItemBase("StampC2", <StampItemModel>{
                 "internalName": "StampC2",
                 "displayName": "Mason Jar Stamp",
                 "sellPrice": 10000,
@@ -12653,7 +12653,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 3
                 }
             }),
-        new DescItemBase("StampC3", <StampItemModel>{
+        new BaseItemBase("StampC3", <StampItemModel>{
                 "internalName": "StampC3",
                 "displayName": "Crystallin",
                 "sellPrice": 2000,
@@ -12678,7 +12678,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 3
                 }
             }),
-        new DescItemBase("StampC4", <StampItemModel>{
+        new BaseItemBase("StampC4", <StampItemModel>{
                 "internalName": "StampC4",
                 "displayName": "Arcade Ball Stamp",
                 "sellPrice": 1,
@@ -12703,7 +12703,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 3
                 }
             }),
-        new DescItemBase("StampC5", <StampItemModel>{
+        new BaseItemBase("StampC5", <StampItemModel>{
                 "internalName": "StampC5",
                 "displayName": "Gold Ball Stamp",
                 "sellPrice": 1000,
@@ -12728,7 +12728,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 3
                 }
             }),
-        new DescItemBase("StampC6", <StampItemModel>{
+        new BaseItemBase("StampC6", <StampItemModel>{
                 "internalName": "StampC6",
                 "displayName": "Potion Stamp",
                 "sellPrice": 3000,
@@ -12753,7 +12753,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 3
                 }
             }),
-        new DescItemBase("StampC7", <StampItemModel>{
+        new BaseItemBase("StampC7", <StampItemModel>{
                 "internalName": "StampC7",
                 "displayName": "Golden Apple Stamp",
                 "sellPrice": 10000,
@@ -12778,7 +12778,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 3
                 }
             }),
-        new DescItemBase("StampC8", <StampItemModel>{
+        new BaseItemBase("StampC8", <StampItemModel>{
                 "internalName": "StampC8",
                 "displayName": "Ball Timer Stamp",
                 "sellPrice": 1,
@@ -12803,7 +12803,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 3
                 }
             }),
-        new DescItemBase("StampC9", <StampItemModel>{
+        new BaseItemBase("StampC9", <StampItemModel>{
                 "internalName": "StampC9",
                 "displayName": "Card Stamp",
                 "sellPrice": 3000,
@@ -12828,7 +12828,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 3
                 }
             }),
-        new DescItemBase("StampC10", <StampItemModel>{
+        new BaseItemBase("StampC10", <StampItemModel>{
                 "internalName": "StampC10",
                 "displayName": "Blank",
                 "sellPrice": 1,
@@ -12853,7 +12853,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 3
                 }
             }),
-        new DescItemBase("StampC11", <StampItemModel>{
+        new BaseItemBase("StampC11", <StampItemModel>{
                 "internalName": "StampC11",
                 "displayName": "Blank",
                 "sellPrice": 1,
@@ -12878,7 +12878,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 3
                 }
             }),
-        new DescItemBase("StampC12", <StampItemModel>{
+        new BaseItemBase("StampC12", <StampItemModel>{
                 "internalName": "StampC12",
                 "displayName": "Blank",
                 "sellPrice": 1,
@@ -12903,7 +12903,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 3
                 }
             }),
-        new DescItemBase("StampC13", <StampItemModel>{
+        new BaseItemBase("StampC13", <StampItemModel>{
                 "internalName": "StampC13",
                 "displayName": "Talent I Stamp",
                 "sellPrice": 1,
@@ -12928,7 +12928,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 3
                 }
             }),
-        new DescItemBase("StampC14", <StampItemModel>{
+        new BaseItemBase("StampC14", <StampItemModel>{
                 "internalName": "StampC14",
                 "displayName": "Talent II Stamp",
                 "sellPrice": 12000,
@@ -12953,7 +12953,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 3
                 }
             }),
-        new DescItemBase("StampC15", <StampItemModel>{
+        new BaseItemBase("StampC15", <StampItemModel>{
                 "internalName": "StampC15",
                 "displayName": "Talent III Stamp",
                 "sellPrice": 1,
@@ -12978,7 +12978,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 3
                 }
             }),
-        new DescItemBase("StampC16", <StampItemModel>{
+        new BaseItemBase("StampC16", <StampItemModel>{
                 "internalName": "StampC16",
                 "displayName": "Talent IV Stamp",
                 "sellPrice": 1,
@@ -13003,7 +13003,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 3
                 }
             }),
-        new DescItemBase("StampC17", <StampItemModel>{
+        new BaseItemBase("StampC17", <StampItemModel>{
                 "internalName": "StampC17",
                 "displayName": "Talent V Stamp",
                 "sellPrice": 1,
@@ -13028,7 +13028,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 3
                 }
             }),
-        new DescItemBase("StampC18", <StampItemModel>{
+        new BaseItemBase("StampC18", <StampItemModel>{
                 "internalName": "StampC18",
                 "displayName": "Talent S Stamp",
                 "sellPrice": 1,
@@ -13053,7 +13053,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 3
                 }
             }),
-        new DescItemBase("StampC19", <StampItemModel>{
+        new BaseItemBase("StampC19", <StampItemModel>{
                 "internalName": "StampC19",
                 "displayName": "Multikill Stamp",
                 "sellPrice": 1,
@@ -13078,7 +13078,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 3
                 }
             }),
-        new DescItemBase("StampC20", <StampItemModel>{
+        new BaseItemBase("StampC20", <StampItemModel>{
                 "internalName": "StampC20",
                 "displayName": "Biblio Stamp",
                 "sellPrice": 1,
@@ -13103,7 +13103,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 3
                 }
             }),
-        new DescItemBase("StampC21", <StampItemModel>{
+        new BaseItemBase("StampC21", <StampItemModel>{
                 "internalName": "StampC21",
                 "displayName": "DNA Stamp",
                 "sellPrice": 1,
@@ -13128,7 +13128,7 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
-        new DescItemBase("StoneWe", <StoneItemModel>{
+        new BaseItemBase("StoneWe", <StoneItemModel>{
                 "internalName": "StoneWe",
                 "displayName": "Easter Weapon Stone",
                 "sellPrice": 125,
@@ -13137,7 +13137,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Weapon to apply. +1 Weapon Power, +2 Defence. Success Chance; 25% Uses up 1 slots only if Successful ",
                 "tier": "Easter"
             }),
-        new DescItemBase("StoneWeb", <StoneItemModel>{
+        new BaseItemBase("StoneWeb", <StoneItemModel>{
                 "internalName": "StoneWeb",
                 "displayName": "Summer Weapon Stone",
                 "sellPrice": 125,
@@ -13146,7 +13146,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Weapon to apply. +1 Random Stat, +3 Defence. Success Chance; 40% Uses up 1 slots only if Successful ",
                 "tier": "Summer"
             }),
-        new DescItemBase("StoneW1", <StoneItemModel>{
+        new BaseItemBase("StoneW1", <StoneItemModel>{
                 "internalName": "StoneW1",
                 "displayName": "Weapon Upgrade Stone I",
                 "sellPrice": 125,
@@ -13155,7 +13155,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Weapon to apply. +1 Weapon Power. Success Chance; 100% Uses up 1 slots only if Successful ",
                 "tier": "I"
             }),
-        new DescItemBase("StoneW2", <StoneItemModel>{
+        new BaseItemBase("StoneW2", <StoneItemModel>{
                 "internalName": "StoneW2",
                 "displayName": "Weapon Upgrade Stone II",
                 "sellPrice": 1500,
@@ -13164,7 +13164,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Weapon to apply. +1 Weapon Power, +1 Random Stat. Success Chance; 80% Uses up 1 slots only if Successful ",
                 "tier": "II"
             }),
-        new DescItemBase("StoneW3", <StoneItemModel>{
+        new BaseItemBase("StoneW3", <StoneItemModel>{
                 "internalName": "StoneW3",
                 "displayName": "Weapon Upgrade Stone III",
                 "sellPrice": 25000,
@@ -13173,7 +13173,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Weapon to apply. +2 Weapon Power, +1 Random Stat. Success Chance; 50% Uses up 1 slots only if Successful ",
                 "tier": "III"
             }),
-        new DescItemBase("StoneW3b", <StoneItemModel>{
+        new BaseItemBase("StoneW3b", <StoneItemModel>{
                 "internalName": "StoneW3b",
                 "displayName": "Weapon Upgrade Stone C",
                 "sellPrice": 25000,
@@ -13182,7 +13182,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Weapon to apply. +6 Weapon Power. Success Chance; 60% Uses up 1 item slots. WARNING:Slots are used up even if the Upgrade fails! ",
                 "tier": "C"
             }),
-        new DescItemBase("StoneW6", <StoneItemModel>{
+        new BaseItemBase("StoneW6", <StoneItemModel>{
                 "internalName": "StoneW6",
                 "displayName": "Warped Weapon Upgrade Stone",
                 "sellPrice": 25000,
@@ -13191,7 +13191,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Weapon to apply. +3 Weapon Power, +4 Random Stat. Success Chance; 50% Uses up 1 item slots. WARNING:Slots are used up even if the Upgrade fails! ",
                 "tier": "Warped"
             }),
-        new DescItemBase("StoneW4", <StoneItemModel>{
+        new BaseItemBase("StoneW4", <StoneItemModel>{
                 "internalName": "StoneW4",
                 "displayName": "Weapon Upgrade Stone IV",
                 "sellPrice": 600000,
@@ -13200,7 +13200,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Weapon to apply. +4 Weapon Power, +3 Main Stat. Success Chance; 20% Uses up 1 slots only if Successful ",
                 "tier": "IV"
             }),
-        new DescItemBase("StoneAe", <StoneItemModel>{
+        new BaseItemBase("StoneAe", <StoneItemModel>{
                 "internalName": "StoneAe",
                 "displayName": "Easter Armor Stone",
                 "sellPrice": 100,
@@ -13209,7 +13209,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Armor to apply. +1 Defence, +3 Random Stat. Success Chance; 30% Uses up 1 slots only if Successful ",
                 "tier": "Easter"
             }),
-        new DescItemBase("StoneAeB", <StoneItemModel>{
+        new BaseItemBase("StoneAeB", <StoneItemModel>{
                 "internalName": "StoneAeB",
                 "displayName": "Summer Armor Stone",
                 "sellPrice": 100,
@@ -13218,7 +13218,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Armor to apply. +3 Defence. Success Chance; 50% Uses up 1 slots only if Successful ",
                 "tier": "Summer"
             }),
-        new DescItemBase("StoneA1", <StoneItemModel>{
+        new BaseItemBase("StoneA1", <StoneItemModel>{
                 "internalName": "StoneA1",
                 "displayName": "Armor Upgrade Stone I",
                 "sellPrice": 100,
@@ -13227,7 +13227,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Armor to apply. +2 Defence, +1 Random Stat. Success Chance; 100% Uses up 1 slots only if Successful ",
                 "tier": "I"
             }),
-        new DescItemBase("StoneA1b", <StoneItemModel>{
+        new BaseItemBase("StoneA1b", <StoneItemModel>{
                 "internalName": "StoneA1b",
                 "displayName": "Armor Upgrade Stone G",
                 "sellPrice": 100,
@@ -13236,7 +13236,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Armor to apply. +4 Random Stat. Success Chance; 42% Uses up 1 slots only if Successful ",
                 "tier": "G"
             }),
-        new DescItemBase("StoneA2", <StoneItemModel>{
+        new BaseItemBase("StoneA2", <StoneItemModel>{
                 "internalName": "StoneA2",
                 "displayName": "Armor Upgrade Stone II",
                 "sellPrice": 850,
@@ -13245,7 +13245,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Armor to apply. +2 Defence, +2 Random Stat. Success Chance; 80% Uses up 1 slots only if Successful ",
                 "tier": "II"
             }),
-        new DescItemBase("StoneA2b", <StoneItemModel>{
+        new BaseItemBase("StoneA2b", <StoneItemModel>{
                 "internalName": "StoneA2b",
                 "displayName": "Armor Upgrade Stone B",
                 "sellPrice": 100,
@@ -13254,7 +13254,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Armor to apply. +5 Defence. Success Chance; 45% Uses up 1 item slots. WARNING:Slots are used up even if the Upgrade fails! ",
                 "tier": "B"
             }),
-        new DescItemBase("StoneA3", <StoneItemModel>{
+        new BaseItemBase("StoneA3", <StoneItemModel>{
                 "internalName": "StoneA3",
                 "displayName": "Armor Upgrade Stone III",
                 "sellPrice": 15000,
@@ -13263,7 +13263,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Armor to apply. +3 Defence, +4 Random Stat. Success Chance; 50% Uses up 1 slots only if Successful ",
                 "tier": "III"
             }),
-        new DescItemBase("StoneA3b", <StoneItemModel>{
+        new BaseItemBase("StoneA3b", <StoneItemModel>{
                 "internalName": "StoneA3b",
                 "displayName": "Armor Upgrade Stone C",
                 "sellPrice": 15000,
@@ -13272,7 +13272,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Armor to apply. +1 Weapon Power, +3 Random Stat. Success Chance; 60% Uses up 1 item slots. WARNING:Slots are used up even if the Upgrade fails! ",
                 "tier": "C"
             }),
-        new DescItemBase("StoneA4", <StoneItemModel>{
+        new BaseItemBase("StoneA4", <StoneItemModel>{
                 "internalName": "StoneA4",
                 "displayName": "Armor Upgrade Stone IV",
                 "sellPrice": 450000,
@@ -13281,7 +13281,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Armor to apply. +7 Defence, +4 Main Stat. Success Chance; 20% Uses up 1 slots only if Successful ",
                 "tier": "IV"
             }),
-        new DescItemBase("StoneTe", <StoneItemModel>{
+        new BaseItemBase("StoneTe", <StoneItemModel>{
                 "internalName": "StoneTe",
                 "displayName": "Easter Tool Upgrade Stone",
                 "sellPrice": 110,
@@ -13290,7 +13290,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Tool to apply. +3 Random Stat. Success Chance; 30% Uses up 1 slots only if Successful ",
                 "tier": "Easter"
             }),
-        new DescItemBase("StoneT1", <StoneItemModel>{
+        new BaseItemBase("StoneT1", <StoneItemModel>{
                 "internalName": "StoneT1",
                 "displayName": "Tool Upgrade Stone I",
                 "sellPrice": 110,
@@ -13299,7 +13299,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Tool to apply. +1 Weapon Power, +1 Random Stat. Success Chance; 100% Uses up 1 slots only if Successful ",
                 "tier": "I"
             }),
-        new DescItemBase("StoneT1e", <StoneItemModel>{
+        new BaseItemBase("StoneT1e", <StoneItemModel>{
                 "internalName": "StoneT1e",
                 "displayName": "Giftmas Tool Upgrade Stone",
                 "sellPrice": 110,
@@ -13308,7 +13308,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Tool to apply. +4 Random Stat. Success Chance; 60% Uses up 1 slots only if Successful ",
                 "tier": "Giftmas"
             }),
-        new DescItemBase("StoneT1eb", <StoneItemModel>{
+        new BaseItemBase("StoneT1eb", <StoneItemModel>{
                 "internalName": "StoneT1eb",
                 "displayName": "Summer Tool Upgrade Stone",
                 "sellPrice": 110,
@@ -13317,7 +13317,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Tool to apply. +3 Defence. Success Chance; 50% Uses up 1 slots only if Successful ",
                 "tier": "Summer"
             }),
-        new DescItemBase("StoneT2", <StoneItemModel>{
+        new BaseItemBase("StoneT2", <StoneItemModel>{
                 "internalName": "StoneT2",
                 "displayName": "Tool Upgrade Stone II",
                 "sellPrice": 1250,
@@ -13326,7 +13326,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Tool to apply. +2 Weapon Power, +2 Random Stat. Success Chance; 80% Uses up 1 slots only if Successful ",
                 "tier": "II"
             }),
-        new DescItemBase("StoneT3", <StoneItemModel>{
+        new BaseItemBase("StoneT3", <StoneItemModel>{
                 "internalName": "StoneT3",
                 "displayName": "Tool Upgrade Stone III",
                 "sellPrice": 20000,
@@ -13335,7 +13335,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Tool to apply. +3 Weapon Power, +4 Random Stat. Success Chance; 50% Uses up 1 slots only if Successful ",
                 "tier": "III"
             }),
-        new DescItemBase("StoneT4", <StoneItemModel>{
+        new BaseItemBase("StoneT4", <StoneItemModel>{
                 "internalName": "StoneT4",
                 "displayName": "Tool Upgrade Stone IV",
                 "sellPrice": 550000,
@@ -13344,7 +13344,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Tool to apply. +5 Weapon Power, +4 Main Stat. Success Chance; 20% Uses up 1 slots only if Successful ",
                 "tier": "IV"
             }),
-        new DescItemBase("StoneHelm1", <StoneItemModel>{
+        new BaseItemBase("StoneHelm1", <StoneItemModel>{
                 "internalName": "StoneHelm1",
                 "displayName": "Helmet Upgrade Stone I",
                 "sellPrice": 400,
@@ -13353,7 +13353,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Helmet to apply. +3 Random Stat. Success Chance; 70% Uses up 1 slots only if Successful ",
                 "tier": "I"
             }),
-        new DescItemBase("StoneHelm6", <StoneItemModel>{
+        new BaseItemBase("StoneHelm6", <StoneItemModel>{
                 "internalName": "StoneHelm6",
                 "displayName": "Warped Helmet Upgrade Stone",
                 "sellPrice": 5000,
@@ -13362,7 +13362,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Helmet to apply. +5 Random Stat. Success Chance; 50% Uses up 1 item slots. WARNING:Slots are used up even if the Upgrade fails! ",
                 "tier": "Warped"
             }),
-        new DescItemBase("StoneHelm1b", <StoneItemModel>{
+        new BaseItemBase("StoneHelm1b", <StoneItemModel>{
                 "internalName": "StoneHelm1b",
                 "displayName": "Giftmas Helmet Upgrade Stone",
                 "sellPrice": 5000,
@@ -13371,7 +13371,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Helmet to apply. +4 Random Stat. Success Chance; 60% Uses up 1 item slots. ",
                 "tier": "Giftmas"
             }),
-        new DescItemBase("StoneZ1", <StoneItemModel>{
+        new BaseItemBase("StoneZ1", <StoneItemModel>{
                 "internalName": "StoneZ1",
                 "displayName": "Mystery Upgrade Stone I",
                 "sellPrice": 777,
@@ -13380,7 +13380,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Equip to apply. +3 Mystery Stat. Success Chance; 100% Uses up 1 slots only if Successful. WARNING:Mystery Stat has a chance to be Negative, and reduce stats! ",
                 "tier": "I"
             }),
-        new DescItemBase("StoneZ2", <StoneItemModel>{
+        new BaseItemBase("StoneZ2", <StoneItemModel>{
                 "internalName": "StoneZ2",
                 "displayName": "Mystery Upgrade Stone II",
                 "sellPrice": 777,
@@ -13389,7 +13389,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Equip to apply. +4 Mystery Stat. Success Chance; 50% Uses up 1 slots only if Successful. WARNING:Mystery Stat has a chance to be Negative, and reduce stats! ",
                 "tier": "II"
             }),
-        new DescItemBase("StonePremSTR", <StoneItemModel>{
+        new BaseItemBase("StonePremSTR", <StoneItemModel>{
                 "internalName": "StonePremSTR",
                 "displayName": "Premium STR Stone",
                 "sellPrice": 777,
@@ -13398,7 +13398,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Equip to apply. +5 STR. Success Chance; 101% Can only be used on Premium Equips! ",
                 "tier": "Premium"
             }),
-        new DescItemBase("StonePremAGI", <StoneItemModel>{
+        new BaseItemBase("StonePremAGI", <StoneItemModel>{
                 "internalName": "StonePremAGI",
                 "displayName": "Premium AGI Stone",
                 "sellPrice": 777,
@@ -13407,7 +13407,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Equip to apply. +5 AGI. Success Chance; 101% Can only be used on Premium Equips! ",
                 "tier": "Premium"
             }),
-        new DescItemBase("StonePremWIS", <StoneItemModel>{
+        new BaseItemBase("StonePremWIS", <StoneItemModel>{
                 "internalName": "StonePremWIS",
                 "displayName": "Premium WIS Stone",
                 "sellPrice": 777,
@@ -13416,7 +13416,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Equip to apply. +5 WIS. Success Chance; 101% Can only be used on Premium Equips! ",
                 "tier": "Premium"
             }),
-        new DescItemBase("StonePremLUK", <StoneItemModel>{
+        new BaseItemBase("StonePremLUK", <StoneItemModel>{
                 "internalName": "StonePremLUK",
                 "displayName": "Premium LUK Stone",
                 "sellPrice": 777,
@@ -13425,7 +13425,7 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Equip to apply. +5 LUK. Success Chance; 101% Can only be used on Premium Equips! ",
                 "tier": "Premium"
             }),
-        new DescItemBase("PureWater", <DescItemModel>{
+        new BaseItemBase("PureWater", <DescItemModel>{
                 "internalName": "PureWater",
                 "displayName": "Distilled Water",
                 "sellPrice": 50,
@@ -13433,7 +13433,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Material",
                 "description": "The full filtration process also invovles filtering the diamonds through a vat of diamonds before using those filtered diamonds to filter the water! If only they'd filter their filtration process through diamonds so this item description wouldn't be so long. "
             }),
-        new DescItemBase("PureWater2", <DescItemModel>{
+        new BaseItemBase("PureWater2", <DescItemModel>{
                 "internalName": "PureWater2",
                 "displayName": "Dense Water",
                 "sellPrice": 50,
@@ -13441,7 +13441,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Material",
                 "description": "It's like a bowl of oatmeal, but double the thiccness and hold the oats. "
             }),
-        new DescItemBase("Grasslands1", <DescItemModel>{
+        new BaseItemBase("Grasslands1", <DescItemModel>{
                 "internalName": "Grasslands1",
                 "displayName": "Spore Cap",
                 "sellPrice": 3,
@@ -13449,7 +13449,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "It's often misunderstood that this is part of the spore's head. But it's actually just a stylish hat. ... well, stylish in Mushroom Culture at least. "
             }),
-        new DescItemBase("Grasslands2", <DescItemModel>{
+        new BaseItemBase("Grasslands2", <DescItemModel>{
                 "internalName": "Grasslands2",
                 "displayName": "Frog Leg",
                 "sellPrice": 5,
@@ -13457,7 +13457,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Imagine if humans had legs like this. Actually, it would be better if you didn't, unless you want nightmares about humans violently jumping at you from 20 feet away. "
             }),
-        new DescItemBase("Grasslands3", <DescItemModel>{
+        new BaseItemBase("Grasslands3", <DescItemModel>{
                 "internalName": "Grasslands3",
                 "displayName": "Bean Slices",
                 "sellPrice": 7,
@@ -13465,7 +13465,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "There's something disturbing about how these beans have bones. Not as disturbing as how they also have eyeballs and walk around, but still disturbing anyway. "
             }),
-        new DescItemBase("Grasslands4", <DescItemModel>{
+        new BaseItemBase("Grasslands4", <DescItemModel>{
                 "internalName": "Grasslands4",
                 "displayName": "Red Spore Cap",
                 "sellPrice": 7,
@@ -13473,7 +13473,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "It's often misunderstood that this is just the spore's stylish hat, due to the cosmetic nature of Green Spores, but this cap is actually part of this spore's head. "
             }),
-        new DescItemBase("Jungle1", <DescItemModel>{
+        new BaseItemBase("Jungle1", <DescItemModel>{
                 "internalName": "Jungle1",
                 "displayName": "Slime Sludge",
                 "sellPrice": 10,
@@ -13481,7 +13481,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Ewww, slimey. "
             }),
-        new DescItemBase("Jungle2", <DescItemModel>{
+        new BaseItemBase("Jungle2", <DescItemModel>{
                 "internalName": "Jungle2",
                 "displayName": "Snake Skin",
                 "sellPrice": 13,
@@ -13489,7 +13489,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "''Theres a snake in me boots! Oh wait no, my boots are the snake!'' - Someone who wears snakeskin boots "
             }),
-        new DescItemBase("Jungle3", <DescItemModel>{
+        new BaseItemBase("Jungle3", <DescItemModel>{
                 "internalName": "Jungle3",
                 "displayName": "Carrot Cube",
                 "sellPrice": 15,
@@ -13497,7 +13497,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Probably the only time you'll ever see a carrot cut into a cube! "
             }),
-        new DescItemBase("Forest1", <DescItemModel>{
+        new BaseItemBase("Forest1", <DescItemModel>{
                 "internalName": "Forest1",
                 "displayName": "Glublin Ear",
                 "sellPrice": 20,
@@ -13505,7 +13505,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "This item will listen to anything you have to say, it's all ears! "
             }),
-        new DescItemBase("Forest2", <DescItemModel>{
+        new BaseItemBase("Forest2", <DescItemModel>{
                 "internalName": "Forest2",
                 "displayName": "Plank",
                 "sellPrice": 25,
@@ -13513,7 +13513,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "I wonder what the Ed Boys are up to these days? "
             }),
-        new DescItemBase("Forest3", <DescItemModel>{
+        new BaseItemBase("Forest3", <DescItemModel>{
                 "internalName": "Forest3",
                 "displayName": "Bullfrog Horn",
                 "sellPrice": 30,
@@ -13521,7 +13521,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Makes a loud noise when thrown at someones head, although the sound doesn't come from the horn itself... "
             }),
-        new DescItemBase("Sewers1", <DescItemModel>{
+        new BaseItemBase("Sewers1", <DescItemModel>{
                 "internalName": "Sewers1",
                 "displayName": "Corn Kernels",
                 "sellPrice": 30,
@@ -13529,7 +13529,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "I guess what they say about corn is true... "
             }),
-        new DescItemBase("Sewers1b", <DescItemModel>{
+        new BaseItemBase("Sewers1b", <DescItemModel>{
                 "internalName": "Sewers1b",
                 "displayName": "Golden Plop",
                 "sellPrice": 500,
@@ -13537,7 +13537,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Conker would have called this something else.                  NOTE: This is a very rare drop from Poops "
             }),
-        new DescItemBase("Sewers2", <DescItemModel>{
+        new BaseItemBase("Sewers2", <DescItemModel>{
                 "internalName": "Sewers2",
                 "displayName": "Rats Tail",
                 "sellPrice": 90,
@@ -13545,7 +13545,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Ew why did you pick this up? "
             }),
-        new DescItemBase("Sewers3", <DescItemModel>{
+        new BaseItemBase("Sewers3", <DescItemModel>{
                 "internalName": "Sewers3",
                 "displayName": "Bonemeal",
                 "sellPrice": 90,
@@ -13553,7 +13553,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Imagine the guy who came up with this name... ''wait, you guys HAVENT been eating this stuff?'' "
             }),
-        new DescItemBase("TreeInterior1", <DescItemModel>{
+        new BaseItemBase("TreeInterior1", <DescItemModel>{
                 "internalName": "TreeInterior1",
                 "displayName": "Stick",
                 "sellPrice": 90,
@@ -13561,7 +13561,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Made of wood. "
             }),
-        new DescItemBase("TreeInterior1b", <DescItemModel>{
+        new BaseItemBase("TreeInterior1b", <DescItemModel>{
                 "internalName": "TreeInterior1b",
                 "displayName": "Woodular Circle",
                 "sellPrice": 90,
@@ -13569,7 +13569,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Made of circle that's been carved into the shape of a wood.            NOTE: This is a very rare drop from Branches "
             }),
-        new DescItemBase("TreeInterior2", <DescItemModel>{
+        new BaseItemBase("TreeInterior2", <DescItemModel>{
                 "internalName": "TreeInterior2",
                 "displayName": "Acorn",
                 "sellPrice": 90,
@@ -13577,7 +13577,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Every time I plant one of these, someone eventually steals it and puts a fully grown tree in its place! Very annoying! "
             }),
-        new DescItemBase("BabaYagaETC", <DescItemModel>{
+        new BaseItemBase("BabaYagaETC", <DescItemModel>{
                 "internalName": "BabaYagaETC",
                 "displayName": "Baba Yaga Baby Eggs",
                 "sellPrice": 400,
@@ -13585,7 +13585,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Eventually you'll be able to turn these into a hatchable egg! Or maybe you already can! Or maybe you never will! Who knows what future content there may be! "
             }),
-        new DescItemBase("DesertA1", <DescItemModel>{
+        new BaseItemBase("DesertA1", <DescItemModel>{
                 "internalName": "DesertA1",
                 "displayName": "Pocket Sand",
                 "sellPrice": 60,
@@ -13593,7 +13593,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "This sand aint right, I tell you hwat! "
             }),
-        new DescItemBase("DesertA1b", <DescItemModel>{
+        new BaseItemBase("DesertA1b", <DescItemModel>{
                 "internalName": "DesertA1b",
                 "displayName": "Glass Shard",
                 "sellPrice": 60,
@@ -13601,7 +13601,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "The result of letting heat and sand get it on if you know what I'm sayin.                        NOTE: This is a very rare drop from Sandy Pots "
             }),
-        new DescItemBase("DesertA2", <DescItemModel>{
+        new BaseItemBase("DesertA2", <DescItemModel>{
                 "internalName": "DesertA2",
                 "displayName": "Megalodon Tooth",
                 "sellPrice": 70,
@@ -13609,7 +13609,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Wait a minute, this isn't a real megalodon tooth! "
             }),
-        new DescItemBase("DesertA3", <DescItemModel>{
+        new BaseItemBase("DesertA3", <DescItemModel>{
                 "internalName": "DesertA3",
                 "displayName": "Crabby Cakey",
                 "sellPrice": 80,
@@ -13617,7 +13617,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "You could probably start a restaurant selling these! Just employ an overeager cook, give the place a cool name like The Crispy Crustacean, and you'd be set! "
             }),
-        new DescItemBase("DesertA3b", <DescItemModel>{
+        new BaseItemBase("DesertA3b", <DescItemModel>{
                 "internalName": "DesertA3b",
                 "displayName": "Nuget Cake",
                 "sellPrice": 80,
@@ -13625,7 +13625,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Ohhhhh, that's what people mean when they say Love At First Sight!                             NOTE: This is a very rare drop from Crabcakes "
             }),
-        new DescItemBase("DesertB1", <DescItemModel>{
+        new BaseItemBase("DesertB1", <DescItemModel>{
                 "internalName": "DesertB1",
                 "displayName": "Coconotnotto",
                 "sellPrice": 95,
@@ -13633,7 +13633,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "How many O's are in this item's name? Yep, you're right, there's six! Good job! "
             }),
-        new DescItemBase("DesertB2", <DescItemModel>{
+        new BaseItemBase("DesertB2", <DescItemModel>{
                 "internalName": "DesertB2",
                 "displayName": "Furled Flag",
                 "sellPrice": 108,
@@ -13641,7 +13641,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "It's an American Flag with red paint spilled on all the non-red bits... no wait, it's the German Flag, but they ran out of black and yellow material. "
             }),
-        new DescItemBase("DesertB3", <DescItemModel>{
+        new BaseItemBase("DesertB3", <DescItemModel>{
                 "internalName": "DesertB3",
                 "displayName": "Pincer Arm",
                 "sellPrice": 120,
@@ -13649,7 +13649,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "That looks sharp! Is probably what the pincermin said before you cut his arm off. "
             }),
-        new DescItemBase("DesertB4", <DescItemModel>{
+        new BaseItemBase("DesertB4", <DescItemModel>{
                 "internalName": "DesertB4",
                 "displayName": "Potato Remains",
                 "sellPrice": 133,
@@ -13657,7 +13657,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Mashed potatos, I get it! "
             }),
-        new DescItemBase("DesertC1", <DescItemModel>{
+        new BaseItemBase("DesertC1", <DescItemModel>{
                 "internalName": "DesertC1",
                 "displayName": "High Steaks",
                 "sellPrice": 145,
@@ -13665,7 +13665,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": " "
             }),
-        new DescItemBase("DesertC2", <DescItemModel>{
+        new BaseItemBase("DesertC2", <DescItemModel>{
                 "internalName": "DesertC2",
                 "displayName": "Wakka Cherry",
                 "sellPrice": 160,
@@ -13673,7 +13673,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Weoweoweoweowdingding! "
             }),
-        new DescItemBase("DesertC2b", <DescItemModel>{
+        new BaseItemBase("DesertC2b", <DescItemModel>{
                 "internalName": "DesertC2b",
                 "displayName": "Ghost",
                 "sellPrice": 160,
@@ -13681,7 +13681,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "In case you haven't noticed, these are all references to the famous early 90s videogame called Gex! This description is like a bad joke at Louis CK's house! "
             }),
-        new DescItemBase("DesertC3", <DescItemModel>{
+        new BaseItemBase("DesertC3", <DescItemModel>{
                 "internalName": "DesertC3",
                 "displayName": "Singlecle",
                 "sellPrice": 180,
@@ -13689,7 +13689,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "It's like a monocle, but not quite. "
             }),
-        new DescItemBase("DesertC4", <DescItemModel>{
+        new BaseItemBase("DesertC4", <DescItemModel>{
                 "internalName": "DesertC4",
                 "displayName": "Shrapshell",
                 "sellPrice": 200,
@@ -13697,7 +13697,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "The very tippy top of the shell, with some of the underneath part attached as well. "
             }),
-        new DescItemBase("SnowA1", <DescItemModel>{
+        new BaseItemBase("SnowA1", <DescItemModel>{
                 "internalName": "SnowA1",
                 "displayName": "Floof Ploof",
                 "sellPrice": 200,
@@ -13705,7 +13705,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "A ball of sheep wool. Well, it used to be a ball of ice cream but then I re-drew it. "
             }),
-        new DescItemBase("SnowA2", <DescItemModel>{
+        new BaseItemBase("SnowA2", <DescItemModel>{
                 "internalName": "SnowA2",
                 "displayName": "Melty Cube",
                 "sellPrice": 215,
@@ -13713,7 +13713,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Eugh whats this WATER doing around my ice??? "
             }),
-        new DescItemBase("SnowA2a", <DescItemModel>{
+        new BaseItemBase("SnowA2a", <DescItemModel>{
                 "internalName": "SnowA2a",
                 "displayName": "Yellow Snowflake",
                 "sellPrice": 230,
@@ -13721,7 +13721,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Mmm yellow, my favorite flavor of snow! "
             }),
-        new DescItemBase("SnowA3", <DescItemModel>{
+        new BaseItemBase("SnowA3", <DescItemModel>{
                 "internalName": "SnowA3",
                 "displayName": "Moustache Comb",
                 "sellPrice": 250,
@@ -13729,7 +13729,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Sad times I hope I remember to change this before relase. "
             }),
-        new DescItemBase("SnowA4", <DescItemModel>{
+        new BaseItemBase("SnowA4", <DescItemModel>{
                 "internalName": "SnowA4",
                 "displayName": "Ram Wool",
                 "sellPrice": 500,
@@ -13737,7 +13737,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "It's got a horn stuck in it. I guess you could say this wool is kinda "
             }),
-        new DescItemBase("SnowB1", <DescItemModel>{
+        new BaseItemBase("SnowB1", <DescItemModel>{
                 "internalName": "SnowB1",
                 "displayName": "Sticky Stick",
                 "sellPrice": 270,
@@ -13745,7 +13745,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "It's ALLLLL sticky! "
             }),
-        new DescItemBase("SnowB2", <DescItemModel>{
+        new BaseItemBase("SnowB2", <DescItemModel>{
                 "internalName": "SnowB2",
                 "displayName": "Mamooth Tusk",
                 "sellPrice": 290,
@@ -13753,7 +13753,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "No see, this is a mamOOth tusk, not a mammoth tusk, thats why you think it looks weird. Trust me, it's an incredibly drawn mamooth tusk, truly a work of art. "
             }),
-        new DescItemBase("SnowB2a", <DescItemModel>{
+        new BaseItemBase("SnowB2a", <DescItemModel>{
                 "internalName": "SnowB2a",
                 "displayName": "Ice Age 3",
                 "sellPrice": 3150,
@@ -13761,7 +13761,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "The thrilling documentary that captures the first three years of Jonathan Ice's life, from birth to preschool. It also has thousands of 1 Star Ratings online claiming it's false advertising. "
             }),
-        new DescItemBase("SnowB5", <DescItemModel>{
+        new BaseItemBase("SnowB5", <DescItemModel>{
                 "internalName": "SnowB5",
                 "displayName": "Snow Ball",
                 "sellPrice": 315,
@@ -13769,7 +13769,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "If you have two of these together, please be careful what other objects you put near them, I need to keep this game age appropriate! "
             }),
-        new DescItemBase("SnowB3", <DescItemModel>{
+        new BaseItemBase("SnowB3", <DescItemModel>{
                 "internalName": "SnowB3",
                 "displayName": "Pen",
                 "sellPrice": 340,
@@ -13777,7 +13777,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Click the pen on, then hold it down against your desk and let go, and BAM that baby will fly you straight to the principal's office! "
             }),
-        new DescItemBase("SnowB4", <DescItemModel>{
+        new BaseItemBase("SnowB4", <DescItemModel>{
                 "internalName": "SnowB4",
                 "displayName": "Cracked Glass",
                 "sellPrice": 360,
@@ -13785,7 +13785,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Ah Mr. Thermostat, not looking so hot now that I've broken you into tiny little bits... no seriously, I can't tell the temperature now that you're broken. "
             }),
-        new DescItemBase("SnowC1", <DescItemModel>{
+        new BaseItemBase("SnowC1", <DescItemModel>{
                 "internalName": "SnowC1",
                 "displayName": "Sippy Straw",
                 "sellPrice": 380,
@@ -13793,7 +13793,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "This vacuum operated liquid transfer system is capable of dispencing over 500 mL of dangerous dihydrogen monoxide chemical compounds from one end to the other! "
             }),
-        new DescItemBase("SnowC2", <DescItemModel>{
+        new BaseItemBase("SnowC2", <DescItemModel>{
                 "internalName": "SnowC2",
                 "displayName": "Cryosnake Skin",
                 "sellPrice": 400,
@@ -13801,7 +13801,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Wow this is just a cheap recolouring of the normal snakeskin! I want my money back! "
             }),
-        new DescItemBase("SnowC3", <DescItemModel>{
+        new BaseItemBase("SnowC3", <DescItemModel>{
                 "internalName": "SnowC3",
                 "displayName": "Audio Cord",
                 "sellPrice": 425,
@@ -13809,7 +13809,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Uhhhh... which one which one...?? The red or the blue??? Cmon think think think.. Blue...? 'BOOOOOM'.       Wait, this is an audio cord description? Whoops, I thought this was the Bomb Defuser description!! "
             }),
-        new DescItemBase("SnowC4", <DescItemModel>{
+        new BaseItemBase("SnowC4", <DescItemModel>{
                 "internalName": "SnowC4",
                 "displayName": "Contact Lense",
                 "sellPrice": 450,
@@ -13817,7 +13817,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "It's the only transparent item in IdleOn! If they weren't, they'd just be pirate eyepatches after all... "
             }),
-        new DescItemBase("SnowC4a", <DescItemModel>{
+        new BaseItemBase("SnowC4a", <DescItemModel>{
                 "internalName": "SnowC4a",
                 "displayName": "Black Lense",
                 "sellPrice": 10000,
@@ -13825,7 +13825,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Why yes, I have also played that game for 100s of hours since it released over 10 years ago! "
             }),
-        new DescItemBase("SnowC5", <DescItemModel>{
+        new BaseItemBase("SnowC5", <DescItemModel>{
                 "internalName": "SnowC5",
                 "displayName": "Blood Bone",
                 "sellPrice": 700,
@@ -13833,7 +13833,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Wait a minute, these are just regular bones pained red! Wait another minute, no, that's actual blood... ew. "
             }),
-        new DescItemBase("IceMountains2", <DescItemModel>{
+        new BaseItemBase("IceMountains2", <DescItemModel>{
                 "internalName": "IceMountains2",
                 "displayName": "Ice A La Crem",
                 "sellPrice": 1,
@@ -13841,7 +13841,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "It's just a normal ice cream. It's been given a fancy name so people would pay more for it in a store. "
             }),
-        new DescItemBase("Hgg", <DescItemModel>{
+        new BaseItemBase("Hgg", <DescItemModel>{
                 "internalName": "Hgg",
                 "displayName": "Minuteglass",
                 "sellPrice": 1,
@@ -13849,7 +13849,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "It's a bit small, so it's not quite an hourglass, is it. "
             }),
-        new DescItemBase("EfauntDrop1", <DescItemModel>{
+        new BaseItemBase("EfauntDrop1", <DescItemModel>{
                 "internalName": "EfauntDrop1",
                 "displayName": "Ripped Tunic",
                 "sellPrice": 1,
@@ -13857,7 +13857,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "A piece of Efaunt's tunic. I guess it must have gotten torn off while you were absolutely obliterating them with big time Damage. "
             }),
-        new DescItemBase("EfauntDrop2", <DescItemModel>{
+        new BaseItemBase("EfauntDrop2", <DescItemModel>{
                 "internalName": "EfauntDrop2",
                 "displayName": "Ribbed Tunic",
                 "sellPrice": 1,
@@ -13865,7 +13865,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Chaotic Efaunt is probably glad you removed a few of his ribs, for uhh... various reasons. "
             }),
-        new DescItemBase("Trophy1", <ArmourItemModel>{
+        new BaseItemBase("Trophy1", <ArmourItemModel>{
                 "internalName": "Trophy1",
                 "displayName": "King of Food",
                 "sellPrice": 10000,
@@ -13886,7 +13886,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("Trophy2", <ArmourItemModel>{
+        new BaseItemBase("Trophy2", <ArmourItemModel>{
                 "internalName": "Trophy2",
                 "displayName": "Lucky Lad",
                 "sellPrice": 777,
@@ -13907,7 +13907,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("Trophy3", <ArmourItemModel>{
+        new BaseItemBase("Trophy3", <ArmourItemModel>{
                 "internalName": "Trophy3",
                 "displayName": "Club Member",
                 "sellPrice": 777,
@@ -13928,7 +13928,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("Trophy4", <ArmourItemModel>{
+        new BaseItemBase("Trophy4", <ArmourItemModel>{
                 "internalName": "Trophy4",
                 "displayName": "I Made This Game",
                 "sellPrice": 777,
@@ -13949,7 +13949,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("Trophy5", <ArmourItemModel>{
+        new BaseItemBase("Trophy5", <ArmourItemModel>{
                 "internalName": "Trophy5",
                 "displayName": "Dice Dynamo",
                 "sellPrice": 777,
@@ -13970,7 +13970,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("Trophy6", <ArmourItemModel>{
+        new BaseItemBase("Trophy6", <ArmourItemModel>{
                 "internalName": "Trophy6",
                 "displayName": "Blunder Hero",
                 "sellPrice": 69,
@@ -13991,7 +13991,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("Trophy7", <ArmourItemModel>{
+        new BaseItemBase("Trophy7", <ArmourItemModel>{
                 "internalName": "Trophy7",
                 "displayName": "Original Gamer",
                 "sellPrice": 69,
@@ -14012,7 +14012,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("Trophy8", <ArmourItemModel>{
+        new BaseItemBase("Trophy8", <ArmourItemModel>{
                 "internalName": "Trophy8",
                 "displayName": "Trailblazer",
                 "sellPrice": 69,
@@ -14033,7 +14033,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("Trophy9", <ArmourItemModel>{
+        new BaseItemBase("Trophy9", <ArmourItemModel>{
                 "internalName": "Trophy9",
                 "displayName": "Ultra Unboxer",
                 "sellPrice": 69,
@@ -14054,7 +14054,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("Trophy10", <ArmourItemModel>{
+        new BaseItemBase("Trophy10", <ArmourItemModel>{
                 "internalName": "Trophy10",
                 "displayName": "Critter Baron",
                 "sellPrice": 69,
@@ -14075,7 +14075,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("Trophy11", <ArmourItemModel>{
+        new BaseItemBase("Trophy11", <ArmourItemModel>{
                 "internalName": "Trophy11",
                 "displayName": "YumYum Sheriff",
                 "sellPrice": 69,
@@ -14096,7 +14096,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("Trophy12", <ArmourItemModel>{
+        new BaseItemBase("Trophy12", <ArmourItemModel>{
                 "internalName": "Trophy12",
                 "displayName": "Megalodon",
                 "sellPrice": 69,
@@ -14117,7 +14117,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("Trophy13", <ArmourItemModel>{
+        new BaseItemBase("Trophy13", <ArmourItemModel>{
                 "internalName": "Trophy13",
                 "displayName": "Club Maestro",
                 "sellPrice": 69,
@@ -14138,7 +14138,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("Trophy14", <ArmourItemModel>{
+        new BaseItemBase("Trophy14", <ArmourItemModel>{
                 "internalName": "Trophy14",
                 "displayName": "Beach Bro",
                 "sellPrice": 69,
@@ -14159,7 +14159,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("Trophy15", <ArmourItemModel>{
+        new BaseItemBase("Trophy15", <ArmourItemModel>{
                 "internalName": "Trophy15",
                 "displayName": "Frost Prince",
                 "sellPrice": 69,
@@ -14180,7 +14180,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("Starlight", <OreItemModel>{
+        new BaseItemBase("Starlight", <OreItemModel>{
                 "internalName": "Starlight",
                 "displayName": "Starlight Ore",
                 "sellPrice": 5,
@@ -14188,14 +14188,14 @@ export const initSpecificItemRepo = () => {
                 "Type": "Ore",
                 "description": "These ores cannot be smelted into into bars due to the 'Keep Tutorials Simple' Act passed in 2008. "
             }),
-        new DescItemBase("AlienTreetutorial", <BaseItemModel>{
+        new BaseItemBase("AlienTreetutorial", <BaseItemModel>{
                 "internalName": "AlienTreetutorial",
                 "displayName": "Alien Logs",
                 "sellPrice": 50,
                 "typeGen": TypeGenEnum.bLog,
                 "Type": "Log"
             }),
-        new DescItemBase("EquipmentWeapons2", <WeaponItemModel>{
+        new BaseItemBase("EquipmentWeapons2", <WeaponItemModel>{
                 "internalName": "EquipmentWeapons2",
                 "displayName": "Flesh Reaper",
                 "sellPrice": 40,
@@ -14216,7 +14216,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 9,
                 "Reach": 70
             }),
-        new DescItemBase("Secretstone", <DescItemModel>{
+        new BaseItemBase("Secretstone", <DescItemModel>{
                 "internalName": "Secretstone",
                 "displayName": "Secretstone",
                 "sellPrice": 1,
@@ -14224,7 +14224,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "It's almost as if the very essence of wonder and mystery has been infused into this little stone. Keep this secret to yourself, don't tell the noobs about it! "
             }),
-        new DescItemBase("Timecandy1", <DescItemModel>{
+        new BaseItemBase("Timecandy1", <DescItemModel>{
                 "internalName": "Timecandy1",
                 "displayName": "1 HR Time Candy",
                 "sellPrice": 1,
@@ -14232,7 +14232,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Time Candy",
                 "description": "Hold down to instantly get 1 Hour of AFK Gains. "
             }),
-        new DescItemBase("Timecandy2", <DescItemModel>{
+        new BaseItemBase("Timecandy2", <DescItemModel>{
                 "internalName": "Timecandy2",
                 "displayName": "2 HR Time Candy",
                 "sellPrice": 1,
@@ -14240,7 +14240,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Time Candy",
                 "description": "Hold down to instantly get 2 Hour of AFK Gains. "
             }),
-        new DescItemBase("Timecandy3", <DescItemModel>{
+        new BaseItemBase("Timecandy3", <DescItemModel>{
                 "internalName": "Timecandy3",
                 "displayName": "4 HR Time Candy",
                 "sellPrice": 1,
@@ -14248,7 +14248,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Time Candy",
                 "description": "Hold down to instantly get 4 Hour of AFK Gains. "
             }),
-        new DescItemBase("Timecandy4", <DescItemModel>{
+        new BaseItemBase("Timecandy4", <DescItemModel>{
                 "internalName": "Timecandy4",
                 "displayName": "12 HR Time Candy",
                 "sellPrice": 1,
@@ -14256,7 +14256,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Time Candy",
                 "description": "Twelve hours, that's a long time! Hold down to instantly get 12 Hour of AFK Gains. "
             }),
-        new DescItemBase("Timecandy5", <DescItemModel>{
+        new BaseItemBase("Timecandy5", <DescItemModel>{
                 "internalName": "Timecandy5",
                 "displayName": "24 HR Time Candy",
                 "sellPrice": 1,
@@ -14264,7 +14264,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Time Candy",
                 "description": "An entire day, just like that! Hold down to instantly get 24 Hour of AFK Gains. "
             }),
-        new DescItemBase("Timecandy6", <DescItemModel>{
+        new BaseItemBase("Timecandy6", <DescItemModel>{
                 "internalName": "Timecandy6",
                 "displayName": "72 HR Time Candy",
                 "sellPrice": 1,
@@ -14272,7 +14272,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Time Candy",
                 "description": "The LEGENDARY 72 Hour candy. Hold down to instantly get 30 Seconds of AFK Gai... just kidding, you'll get 72 Hours! "
             }),
-        new DescItemBase("Timecandy7", <DescItemModel>{
+        new BaseItemBase("Timecandy7", <DescItemModel>{
                 "internalName": "Timecandy7",
                 "displayName": "Steamy Time Candy",
                 "sellPrice": 1,
@@ -14280,7 +14280,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Time Candy",
                 "description": "Thanks for playing on Steam! Hold down to instantly get anywhere from 10 minutes to 24 hours of AFK time! "
             }),
-        new DescItemBase("Timecandy8", <DescItemModel>{
+        new BaseItemBase("Timecandy8", <DescItemModel>{
                 "internalName": "Timecandy8",
                 "displayName": "Spooky Time Candy",
                 "sellPrice": 1,
@@ -14288,7 +14288,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Time Candy",
                 "description": "Hold down to instantly get anywhere from 20 minutes to 12 hours of AFK time! "
             }),
-        new DescItemBase("Timecandy9", <DescItemModel>{
+        new BaseItemBase("Timecandy9", <DescItemModel>{
                 "internalName": "Timecandy9",
                 "displayName": "Cosmic Time Candy",
                 "sellPrice": 1,
@@ -14296,7 +14296,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Time Candy",
                 "description": "Hold down to get anywhere from 5 hours to 500 hours of AFK time! Gives 24 hrs on average. Odds are: 54% for 5-10hr, 25% for 10-25hr, 18% for 25-100 hr, 2.1% for 100-499hr, 0.4% for 500hr. "
             }),
-        new DescItemBase("InvBag1", <InvBagItemModel>{
+        new BaseItemBase("InvBag1", <InvBagItemModel>{
                 "internalName": "InvBag1",
                 "displayName": "Inventory Bag A",
                 "sellPrice": 200,
@@ -14306,7 +14306,7 @@ export const initSpecificItemRepo = () => {
                 "order": 1,
                 "level": 1
             }),
-        new DescItemBase("InvBag2", <InvBagItemModel>{
+        new BaseItemBase("InvBag2", <InvBagItemModel>{
                 "internalName": "InvBag2",
                 "displayName": "Inventory Bag B",
                 "sellPrice": 200,
@@ -14316,7 +14316,7 @@ export const initSpecificItemRepo = () => {
                 "order": 2,
                 "level": 3
             }),
-        new DescItemBase("InvBag3", <InvBagItemModel>{
+        new BaseItemBase("InvBag3", <InvBagItemModel>{
                 "internalName": "InvBag3",
                 "displayName": "Inventory Bag C",
                 "sellPrice": 200,
@@ -14326,7 +14326,7 @@ export const initSpecificItemRepo = () => {
                 "order": 3,
                 "level": 5
             }),
-        new DescItemBase("InvBag4", <InvBagItemModel>{
+        new BaseItemBase("InvBag4", <InvBagItemModel>{
                 "internalName": "InvBag4",
                 "displayName": "Inventory Bag D",
                 "sellPrice": 200,
@@ -14336,7 +14336,7 @@ export const initSpecificItemRepo = () => {
                 "order": 4,
                 "level": 10
             }),
-        new DescItemBase("InvBag5", <InvBagItemModel>{
+        new BaseItemBase("InvBag5", <InvBagItemModel>{
                 "internalName": "InvBag5",
                 "displayName": "Inventory Bag E",
                 "sellPrice": 200,
@@ -14346,7 +14346,7 @@ export const initSpecificItemRepo = () => {
                 "order": 5,
                 "level": 15
             }),
-        new DescItemBase("InvBag6", <InvBagItemModel>{
+        new BaseItemBase("InvBag6", <InvBagItemModel>{
                 "internalName": "InvBag6",
                 "displayName": "Inventory Bag F",
                 "sellPrice": 200,
@@ -14356,7 +14356,7 @@ export const initSpecificItemRepo = () => {
                 "order": 6,
                 "level": 20
             }),
-        new DescItemBase("InvBag7", <InvBagItemModel>{
+        new BaseItemBase("InvBag7", <InvBagItemModel>{
                 "internalName": "InvBag7",
                 "displayName": "Inventory Bag G",
                 "sellPrice": 200,
@@ -14366,7 +14366,7 @@ export const initSpecificItemRepo = () => {
                 "order": 7,
                 "level": 20
             }),
-        new DescItemBase("InvBag8", <InvBagItemModel>{
+        new BaseItemBase("InvBag8", <InvBagItemModel>{
                 "internalName": "InvBag8",
                 "displayName": "Inventory Bag H",
                 "sellPrice": 200,
@@ -14376,7 +14376,7 @@ export const initSpecificItemRepo = () => {
                 "order": 8,
                 "level": 20
             }),
-        new DescItemBase("InvBag9", <InvBagItemModel>{
+        new BaseItemBase("InvBag9", <InvBagItemModel>{
                 "internalName": "InvBag9",
                 "displayName": "Inventory Bag I",
                 "sellPrice": 200,
@@ -14386,7 +14386,7 @@ export const initSpecificItemRepo = () => {
                 "order": 9,
                 "level": 20
             }),
-        new DescItemBase("InvBag21", <InvBagItemModel>{
+        new BaseItemBase("InvBag21", <InvBagItemModel>{
                 "internalName": "InvBag21",
                 "displayName": "Inventory Bag U",
                 "sellPrice": 200,
@@ -14396,7 +14396,7 @@ export const initSpecificItemRepo = () => {
                 "order": 21,
                 "level": 1
             }),
-        new DescItemBase("InvBag22", <InvBagItemModel>{
+        new BaseItemBase("InvBag22", <InvBagItemModel>{
                 "internalName": "InvBag22",
                 "displayName": "Inventory Bag V",
                 "sellPrice": 200,
@@ -14406,7 +14406,7 @@ export const initSpecificItemRepo = () => {
                 "order": 22,
                 "level": 1
             }),
-        new DescItemBase("InvBag23", <InvBagItemModel>{
+        new BaseItemBase("InvBag23", <InvBagItemModel>{
                 "internalName": "InvBag23",
                 "displayName": "Inventory Bag W",
                 "sellPrice": 200,
@@ -14416,7 +14416,7 @@ export const initSpecificItemRepo = () => {
                 "order": 23,
                 "level": 1
             }),
-        new DescItemBase("InvBag24", <InvBagItemModel>{
+        new BaseItemBase("InvBag24", <InvBagItemModel>{
                 "internalName": "InvBag24",
                 "displayName": "Inventory Bag X",
                 "sellPrice": 200,
@@ -14426,7 +14426,7 @@ export const initSpecificItemRepo = () => {
                 "order": 24,
                 "level": 1
             }),
-        new DescItemBase("InvBag25", <InvBagItemModel>{
+        new BaseItemBase("InvBag25", <InvBagItemModel>{
                 "internalName": "InvBag25",
                 "displayName": "Inventory Bag Y",
                 "sellPrice": 200,
@@ -14436,7 +14436,7 @@ export const initSpecificItemRepo = () => {
                 "order": 25,
                 "level": 1
             }),
-        new DescItemBase("InvBag26", <InvBagItemModel>{
+        new BaseItemBase("InvBag26", <InvBagItemModel>{
                 "internalName": "InvBag26",
                 "displayName": "Inventory Bag Z",
                 "sellPrice": 200,
@@ -14446,7 +14446,7 @@ export const initSpecificItemRepo = () => {
                 "order": 26,
                 "level": 1
             }),
-        new DescItemBase("InvBag100", <InvBagItemModel>{
+        new BaseItemBase("InvBag100", <InvBagItemModel>{
                 "internalName": "InvBag100",
                 "displayName": "Snakeskinventory Bag",
                 "sellPrice": 1300,
@@ -14456,7 +14456,7 @@ export const initSpecificItemRepo = () => {
                 "order": 101,
                 "level": 1
             }),
-        new DescItemBase("InvBag101", <InvBagItemModel>{
+        new BaseItemBase("InvBag101", <InvBagItemModel>{
                 "internalName": "InvBag101",
                 "displayName": "Totally Normal and not fake Bag",
                 "sellPrice": 5000,
@@ -14466,7 +14466,7 @@ export const initSpecificItemRepo = () => {
                 "order": 102,
                 "level": 1
             }),
-        new DescItemBase("InvBag102", <InvBagItemModel>{
+        new BaseItemBase("InvBag102", <InvBagItemModel>{
                 "internalName": "InvBag102",
                 "displayName": "Blunderbag",
                 "sellPrice": 2500,
@@ -14476,7 +14476,7 @@ export const initSpecificItemRepo = () => {
                 "order": 103,
                 "level": 5
             }),
-        new DescItemBase("InvBag103", <InvBagItemModel>{
+        new BaseItemBase("InvBag103", <InvBagItemModel>{
                 "internalName": "InvBag103",
                 "displayName": "Sandy Satchel",
                 "sellPrice": 5000,
@@ -14486,7 +14486,7 @@ export const initSpecificItemRepo = () => {
                 "order": 104,
                 "level": 20
             }),
-        new DescItemBase("InvBag104", <InvBagItemModel>{
+        new BaseItemBase("InvBag104", <InvBagItemModel>{
                 "internalName": "InvBag104",
                 "displayName": "Bummo Bag",
                 "sellPrice": 24,
@@ -14496,7 +14496,7 @@ export const initSpecificItemRepo = () => {
                 "order": 105,
                 "level": 1
             }),
-        new DescItemBase("InvBag105", <InvBagItemModel>{
+        new BaseItemBase("InvBag105", <InvBagItemModel>{
                 "internalName": "InvBag105",
                 "displayName": "Capitalist Case",
                 "sellPrice": 2499,
@@ -14506,7 +14506,7 @@ export const initSpecificItemRepo = () => {
                 "order": 106,
                 "level": 15
             }),
-        new DescItemBase("InvBag106", <InvBagItemModel>{
+        new BaseItemBase("InvBag106", <InvBagItemModel>{
                 "internalName": "InvBag106",
                 "displayName": "Wealthy Wallet",
                 "sellPrice": 249999,
@@ -14516,7 +14516,7 @@ export const initSpecificItemRepo = () => {
                 "order": 107,
                 "level": 35
             }),
-        new DescItemBase("InvBag107", <InvBagItemModel>{
+        new BaseItemBase("InvBag107", <InvBagItemModel>{
                 "internalName": "InvBag107",
                 "displayName": "Prosperous Pouch",
                 "sellPrice": 24999999,
@@ -14526,7 +14526,7 @@ export const initSpecificItemRepo = () => {
                 "order": 108,
                 "level": 70
             }),
-        new DescItemBase("InvBag108", <InvBagItemModel>{
+        new BaseItemBase("InvBag108", <InvBagItemModel>{
                 "internalName": "InvBag108",
                 "displayName": "Sack of Success",
                 "sellPrice": 2499999999,
@@ -14536,7 +14536,7 @@ export const initSpecificItemRepo = () => {
                 "order": 109,
                 "level": 120
             }),
-        new DescItemBase("InvBag109", <InvBagItemModel>{
+        new BaseItemBase("InvBag109", <InvBagItemModel>{
                 "internalName": "InvBag109",
                 "displayName": "Shivering Sack",
                 "sellPrice": 5000,
@@ -14546,7 +14546,7 @@ export const initSpecificItemRepo = () => {
                 "order": 110,
                 "level": 65
             }),
-        new DescItemBase("InvBag110", <InvBagItemModel>{
+        new BaseItemBase("InvBag110", <InvBagItemModel>{
                 "internalName": "InvBag110",
                 "displayName": "Mamooth Hide Bag",
                 "sellPrice": 5000,
@@ -14556,7 +14556,7 @@ export const initSpecificItemRepo = () => {
                 "order": 111,
                 "level": 55
             }),
-        new DescItemBase("InvBag111", <InvBagItemModel>{
+        new BaseItemBase("InvBag111", <InvBagItemModel>{
                 "internalName": "InvBag111",
                 "displayName": "Peeper Pouch",
                 "sellPrice": 200,
@@ -14566,7 +14566,7 @@ export const initSpecificItemRepo = () => {
                 "order": 112,
                 "level": 115
             }),
-        new DescItemBase("InvStorage1", <ChestItemModel>{
+        new BaseItemBase("InvStorage1", <ChestItemModel>{
                 "internalName": "InvStorage1",
                 "displayName": "Storage Chest 1",
                 "sellPrice": 200,
@@ -14576,7 +14576,7 @@ export const initSpecificItemRepo = () => {
                 "order": 1,
                 "level": 1
             }),
-        new DescItemBase("InvStorage2", <ChestItemModel>{
+        new BaseItemBase("InvStorage2", <ChestItemModel>{
                 "internalName": "InvStorage2",
                 "displayName": "Storage Chest 2",
                 "sellPrice": 1000,
@@ -14586,7 +14586,7 @@ export const initSpecificItemRepo = () => {
                 "order": 2,
                 "level": 1
             }),
-        new DescItemBase("InvStorage3", <ChestItemModel>{
+        new BaseItemBase("InvStorage3", <ChestItemModel>{
                 "internalName": "InvStorage3",
                 "displayName": "Storage Chest 3",
                 "sellPrice": 800,
@@ -14596,7 +14596,7 @@ export const initSpecificItemRepo = () => {
                 "order": 3,
                 "level": 1
             }),
-        new DescItemBase("InvStorage4", <ChestItemModel>{
+        new BaseItemBase("InvStorage4", <ChestItemModel>{
                 "internalName": "InvStorage4",
                 "displayName": "Storage Chest 4",
                 "sellPrice": 1500,
@@ -14606,7 +14606,7 @@ export const initSpecificItemRepo = () => {
                 "order": 4,
                 "level": 1
             }),
-        new DescItemBase("InvStorage5", <ChestItemModel>{
+        new BaseItemBase("InvStorage5", <ChestItemModel>{
                 "internalName": "InvStorage5",
                 "displayName": "Storage Chest 5",
                 "sellPrice": 1,
@@ -14616,7 +14616,7 @@ export const initSpecificItemRepo = () => {
                 "order": 5,
                 "level": 1
             }),
-        new DescItemBase("InvStorage6", <ChestItemModel>{
+        new BaseItemBase("InvStorage6", <ChestItemModel>{
                 "internalName": "InvStorage6",
                 "displayName": "Storage Chest 6",
                 "sellPrice": 2500,
@@ -14626,7 +14626,7 @@ export const initSpecificItemRepo = () => {
                 "order": 6,
                 "level": 1
             }),
-        new DescItemBase("InvStorage7", <ChestItemModel>{
+        new BaseItemBase("InvStorage7", <ChestItemModel>{
                 "internalName": "InvStorage7",
                 "displayName": "Storage Chest 7",
                 "sellPrice": 5500,
@@ -14636,7 +14636,7 @@ export const initSpecificItemRepo = () => {
                 "order": 7,
                 "level": 1
             }),
-        new DescItemBase("InvStorage8", <ChestItemModel>{
+        new BaseItemBase("InvStorage8", <ChestItemModel>{
                 "internalName": "InvStorage8",
                 "displayName": "Storage Chest 8",
                 "sellPrice": 5500,
@@ -14646,7 +14646,7 @@ export const initSpecificItemRepo = () => {
                 "order": 8,
                 "level": 1
             }),
-        new DescItemBase("InvStorage9", <ChestItemModel>{
+        new BaseItemBase("InvStorage9", <ChestItemModel>{
                 "internalName": "InvStorage9",
                 "displayName": "Storage Chest 9",
                 "sellPrice": 8900,
@@ -14656,7 +14656,7 @@ export const initSpecificItemRepo = () => {
                 "order": 9,
                 "level": 1
             }),
-        new DescItemBase("InvStorage10", <ChestItemModel>{
+        new BaseItemBase("InvStorage10", <ChestItemModel>{
                 "internalName": "InvStorage10",
                 "displayName": "Storage Chest 10",
                 "sellPrice": 25000,
@@ -14666,7 +14666,7 @@ export const initSpecificItemRepo = () => {
                 "order": 10,
                 "level": 1
             }),
-        new DescItemBase("InvStorage11", <ChestItemModel>{
+        new BaseItemBase("InvStorage11", <ChestItemModel>{
                 "internalName": "InvStorage11",
                 "displayName": "Storage Chest 11",
                 "sellPrice": 50000,
@@ -14676,7 +14676,7 @@ export const initSpecificItemRepo = () => {
                 "order": 11,
                 "level": 1
             }),
-        new DescItemBase("InvStorage12", <ChestItemModel>{
+        new BaseItemBase("InvStorage12", <ChestItemModel>{
                 "internalName": "InvStorage12",
                 "displayName": "Storage Chest 12",
                 "sellPrice": 7000,
@@ -14686,7 +14686,7 @@ export const initSpecificItemRepo = () => {
                 "order": 12,
                 "level": 1
             }),
-        new DescItemBase("InvStorage13", <ChestItemModel>{
+        new BaseItemBase("InvStorage13", <ChestItemModel>{
                 "internalName": "InvStorage13",
                 "displayName": "Storage Chest 13",
                 "sellPrice": 60000,
@@ -14696,7 +14696,7 @@ export const initSpecificItemRepo = () => {
                 "order": 13,
                 "level": 1
             }),
-        new DescItemBase("InvStorage14", <ChestItemModel>{
+        new BaseItemBase("InvStorage14", <ChestItemModel>{
                 "internalName": "InvStorage14",
                 "displayName": "Storage Chest 14",
                 "sellPrice": 1,
@@ -14706,7 +14706,7 @@ export const initSpecificItemRepo = () => {
                 "order": 15,
                 "level": 1
             }),
-        new DescItemBase("InvStorage15", <ChestItemModel>{
+        new BaseItemBase("InvStorage15", <ChestItemModel>{
                 "internalName": "InvStorage15",
                 "displayName": "Storage Chest 15",
                 "sellPrice": 100000,
@@ -14716,7 +14716,7 @@ export const initSpecificItemRepo = () => {
                 "order": 14,
                 "level": 1
             }),
-        new DescItemBase("InvStorage16", <ChestItemModel>{
+        new BaseItemBase("InvStorage16", <ChestItemModel>{
                 "internalName": "InvStorage16",
                 "displayName": "Storage Chest 16",
                 "sellPrice": 150000,
@@ -14726,7 +14726,7 @@ export const initSpecificItemRepo = () => {
                 "order": 16,
                 "level": 1
             }),
-        new DescItemBase("InvStorage17", <ChestItemModel>{
+        new BaseItemBase("InvStorage17", <ChestItemModel>{
                 "internalName": "InvStorage17",
                 "displayName": "Storage Chest 17",
                 "sellPrice": 200000,
@@ -14736,7 +14736,7 @@ export const initSpecificItemRepo = () => {
                 "order": 17,
                 "level": 1
             }),
-        new DescItemBase("InvStorage18", <ChestItemModel>{
+        new BaseItemBase("InvStorage18", <ChestItemModel>{
                 "internalName": "InvStorage18",
                 "displayName": "Storage Chest 18",
                 "sellPrice": 350000,
@@ -14746,7 +14746,7 @@ export const initSpecificItemRepo = () => {
                 "order": 18,
                 "level": 1
             }),
-        new DescItemBase("InvStorage19", <ChestItemModel>{
+        new BaseItemBase("InvStorage19", <ChestItemModel>{
                 "internalName": "InvStorage19",
                 "displayName": "Storage Chest 19",
                 "sellPrice": 500000,
@@ -14756,7 +14756,7 @@ export const initSpecificItemRepo = () => {
                 "order": 19,
                 "level": 1
             }),
-        new DescItemBase("InvStorage20", <ChestItemModel>{
+        new BaseItemBase("InvStorage20", <ChestItemModel>{
                 "internalName": "InvStorage20",
                 "displayName": "Storage Chest 20",
                 "sellPrice": 800000,
@@ -14766,7 +14766,7 @@ export const initSpecificItemRepo = () => {
                 "order": 20,
                 "level": 1
             }),
-        new DescItemBase("InvStorage21", <ChestItemModel>{
+        new BaseItemBase("InvStorage21", <ChestItemModel>{
                 "internalName": "InvStorage21",
                 "displayName": "Storage Chest 21",
                 "sellPrice": 1250000,
@@ -14776,7 +14776,7 @@ export const initSpecificItemRepo = () => {
                 "order": 21,
                 "level": 1
             }),
-        new DescItemBase("InvStorage31", <ChestItemModel>{
+        new BaseItemBase("InvStorage31", <ChestItemModel>{
                 "internalName": "InvStorage31",
                 "displayName": "Storage Chest 90",
                 "sellPrice": 200,
@@ -14786,7 +14786,7 @@ export const initSpecificItemRepo = () => {
                 "order": 31,
                 "level": 1
             }),
-        new DescItemBase("InvStorage32", <ChestItemModel>{
+        new BaseItemBase("InvStorage32", <ChestItemModel>{
                 "internalName": "InvStorage32",
                 "displayName": "Storage Chest 91",
                 "sellPrice": 200,
@@ -14796,7 +14796,7 @@ export const initSpecificItemRepo = () => {
                 "order": 32,
                 "level": 1
             }),
-        new DescItemBase("InvStorage33", <ChestItemModel>{
+        new BaseItemBase("InvStorage33", <ChestItemModel>{
                 "internalName": "InvStorage33",
                 "displayName": "Storage Chest 92",
                 "sellPrice": 200,
@@ -14806,7 +14806,7 @@ export const initSpecificItemRepo = () => {
                 "order": 33,
                 "level": 1
             }),
-        new DescItemBase("InvStorage34", <ChestItemModel>{
+        new BaseItemBase("InvStorage34", <ChestItemModel>{
                 "internalName": "InvStorage34",
                 "displayName": "Storage Chest 93",
                 "sellPrice": 200,
@@ -14816,7 +14816,7 @@ export const initSpecificItemRepo = () => {
                 "order": 34,
                 "level": 1
             }),
-        new DescItemBase("InvStorage35", <ChestItemModel>{
+        new BaseItemBase("InvStorage35", <ChestItemModel>{
                 "internalName": "InvStorage35",
                 "displayName": "Storage Chest 94",
                 "sellPrice": 200,
@@ -14826,7 +14826,7 @@ export const initSpecificItemRepo = () => {
                 "order": 35,
                 "level": 1
             }),
-        new DescItemBase("InvStorage36", <ChestItemModel>{
+        new BaseItemBase("InvStorage36", <ChestItemModel>{
                 "internalName": "InvStorage36",
                 "displayName": "Storage Chest 95",
                 "sellPrice": 200,
@@ -14836,7 +14836,7 @@ export const initSpecificItemRepo = () => {
                 "order": 36,
                 "level": 1
             }),
-        new DescItemBase("InvStorage37", <ChestItemModel>{
+        new BaseItemBase("InvStorage37", <ChestItemModel>{
                 "internalName": "InvStorage37",
                 "displayName": "Storage Chest 96",
                 "sellPrice": 200,
@@ -14846,7 +14846,7 @@ export const initSpecificItemRepo = () => {
                 "order": 37,
                 "level": 1
             }),
-        new DescItemBase("InvStorage38", <ChestItemModel>{
+        new BaseItemBase("InvStorage38", <ChestItemModel>{
                 "internalName": "InvStorage38",
                 "displayName": "Storage Chest 97",
                 "sellPrice": 200,
@@ -14856,7 +14856,7 @@ export const initSpecificItemRepo = () => {
                 "order": 38,
                 "level": 1
             }),
-        new DescItemBase("InvStorage39", <ChestItemModel>{
+        new BaseItemBase("InvStorage39", <ChestItemModel>{
                 "internalName": "InvStorage39",
                 "displayName": "Storage Chest 98",
                 "sellPrice": 200,
@@ -14866,7 +14866,7 @@ export const initSpecificItemRepo = () => {
                 "order": 39,
                 "level": 1
             }),
-        new DescItemBase("InvStorage40", <ChestItemModel>{
+        new BaseItemBase("InvStorage40", <ChestItemModel>{
                 "internalName": "InvStorage40",
                 "displayName": "Storage Chest 99",
                 "sellPrice": 200,
@@ -14876,7 +14876,7 @@ export const initSpecificItemRepo = () => {
                 "order": 40,
                 "level": 1
             }),
-        new DescItemBase("InvStorage41", <ChestItemModel>{
+        new BaseItemBase("InvStorage41", <ChestItemModel>{
                 "internalName": "InvStorage41",
                 "displayName": "Storage Chest 99B",
                 "sellPrice": 200,
@@ -14886,7 +14886,7 @@ export const initSpecificItemRepo = () => {
                 "order": 41,
                 "level": 1
             }),
-        new DescItemBase("InvStorage42", <ChestItemModel>{
+        new BaseItemBase("InvStorage42", <ChestItemModel>{
                 "internalName": "InvStorage42",
                 "displayName": "Storage Chest 99C",
                 "sellPrice": 200,
@@ -14896,7 +14896,7 @@ export const initSpecificItemRepo = () => {
                 "order": 42,
                 "level": 1
             }),
-        new DescItemBase("InvStorageF", <ChestItemModel>{
+        new BaseItemBase("InvStorageF", <ChestItemModel>{
                 "internalName": "InvStorageF",
                 "displayName": "Dank Paypay Chest",
                 "sellPrice": 1000,
@@ -14906,7 +14906,7 @@ export const initSpecificItemRepo = () => {
                 "order": 101,
                 "level": 1
             }),
-        new DescItemBase("InvStorageS", <ChestItemModel>{
+        new BaseItemBase("InvStorageS", <ChestItemModel>{
                 "internalName": "InvStorageS",
                 "displayName": "Gelatinous Chest",
                 "sellPrice": 1000,
@@ -14916,7 +14916,7 @@ export const initSpecificItemRepo = () => {
                 "order": 102,
                 "level": 1
             }),
-        new DescItemBase("Line1", <FishingTKItemModel>{
+        new BaseItemBase("Line1", <FishingTKItemModel>{
                 "internalName": "Line1",
                 "displayName": "Copper Twine",
                 "sellPrice": 3500,
@@ -14934,7 +14934,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 0
                 }
             }),
-        new DescItemBase("Line2", <FishingTKItemModel>{
+        new BaseItemBase("Line2", <FishingTKItemModel>{
                 "internalName": "Line2",
                 "displayName": "Silver Twine",
                 "sellPrice": 50,
@@ -14952,7 +14952,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 0
                 }
             }),
-        new DescItemBase("Line3", <FishingTKItemModel>{
+        new BaseItemBase("Line3", <FishingTKItemModel>{
                 "internalName": "Line3",
                 "displayName": "Gold Twine",
                 "sellPrice": 50,
@@ -14970,7 +14970,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 2
                 }
             }),
-        new DescItemBase("Line4", <FishingTKItemModel>{
+        new BaseItemBase("Line4", <FishingTKItemModel>{
                 "internalName": "Line4",
                 "displayName": "Platinum Twine",
                 "sellPrice": 50,
@@ -14988,7 +14988,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 5
                 }
             }),
-        new DescItemBase("Line5", <FishingTKItemModel>{
+        new BaseItemBase("Line5", <FishingTKItemModel>{
                 "internalName": "Line5",
                 "displayName": "Leafy Vines",
                 "sellPrice": 7500,
@@ -15006,7 +15006,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 2
                 }
             }),
-        new DescItemBase("Line6", <FishingTKItemModel>{
+        new BaseItemBase("Line6", <FishingTKItemModel>{
                 "internalName": "Line6",
                 "displayName": "Fun Flags",
                 "sellPrice": 50,
@@ -15024,7 +15024,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 3
                 }
             }),
-        new DescItemBase("Line7", <FishingTKItemModel>{
+        new BaseItemBase("Line7", <FishingTKItemModel>{
                 "internalName": "Line7",
                 "displayName": "Electrical Wiring",
                 "sellPrice": 50,
@@ -15042,7 +15042,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 5
                 }
             }),
-        new DescItemBase("Line8", <FishingTKItemModel>{
+        new BaseItemBase("Line8", <FishingTKItemModel>{
                 "internalName": "Line8",
                 "displayName": "Wiener Links",
                 "sellPrice": 50,
@@ -15060,7 +15060,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 10
                 }
             }),
-        new DescItemBase("Line9", <FishingTKItemModel>{
+        new BaseItemBase("Line9", <FishingTKItemModel>{
                 "internalName": "Line9",
                 "displayName": "Zeus Gon Fishin",
                 "sellPrice": 50,
@@ -15078,7 +15078,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 20
                 }
             }),
-        new DescItemBase("Line10", <FishingTKItemModel>{
+        new BaseItemBase("Line10", <FishingTKItemModel>{
                 "internalName": "Line10",
                 "displayName": "Needledrop",
                 "sellPrice": 15000,
@@ -15096,7 +15096,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 0
                 }
             }),
-        new DescItemBase("Line11", <FishingTKItemModel>{
+        new BaseItemBase("Line11", <FishingTKItemModel>{
                 "internalName": "Line11",
                 "displayName": "Scripticus Spoons",
                 "sellPrice": 50,
@@ -15114,7 +15114,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 1
                 }
             }),
-        new DescItemBase("Line12", <FishingTKItemModel>{
+        new BaseItemBase("Line12", <FishingTKItemModel>{
                 "internalName": "Line12",
                 "displayName": "Its a Boy Celebration",
                 "sellPrice": 50,
@@ -15132,7 +15132,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 5
                 }
             }),
-        new DescItemBase("Line13", <FishingTKItemModel>{
+        new BaseItemBase("Line13", <FishingTKItemModel>{
                 "internalName": "Line13",
                 "displayName": "Its a Girl Celebration",
                 "sellPrice": 50,
@@ -15150,7 +15150,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 0
                 }
             }),
-        new DescItemBase("Line14", <FishingTKItemModel>{
+        new BaseItemBase("Line14", <FishingTKItemModel>{
                 "internalName": "Line14",
                 "displayName": "Its Alright Celebration",
                 "sellPrice": 50,
@@ -15168,7 +15168,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 8
                 }
             }),
-        new DescItemBase("Weight1", <FishingTKItemModel>{
+        new BaseItemBase("Weight1", <FishingTKItemModel>{
                 "internalName": "Weight1",
                 "displayName": "Wormie Weight",
                 "sellPrice": 5000,
@@ -15186,7 +15186,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 0
                 }
             }),
-        new DescItemBase("Weight2", <FishingTKItemModel>{
+        new BaseItemBase("Weight2", <FishingTKItemModel>{
                 "internalName": "Weight2",
                 "displayName": "Iron Hook",
                 "sellPrice": 50,
@@ -15204,7 +15204,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 1
                 }
             }),
-        new DescItemBase("Weight3", <FishingTKItemModel>{
+        new BaseItemBase("Weight3", <FishingTKItemModel>{
                 "internalName": "Weight3",
                 "displayName": "Basic Bobber",
                 "sellPrice": 50,
@@ -15222,7 +15222,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 1
                 }
             }),
-        new DescItemBase("Weight4", <FishingTKItemModel>{
+        new BaseItemBase("Weight4", <FishingTKItemModel>{
                 "internalName": "Weight4",
                 "displayName": "Dualhook Prongs",
                 "sellPrice": 50,
@@ -15240,7 +15240,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 3
                 }
             }),
-        new DescItemBase("Weight5", <FishingTKItemModel>{
+        new BaseItemBase("Weight5", <FishingTKItemModel>{
                 "internalName": "Weight5",
                 "displayName": "One Pound of Steel",
                 "sellPrice": 10000,
@@ -15258,7 +15258,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 0
                 }
             }),
-        new DescItemBase("Weight6", <FishingTKItemModel>{
+        new BaseItemBase("Weight6", <FishingTKItemModel>{
                 "internalName": "Weight6",
                 "displayName": "One Pound of Feathers",
                 "sellPrice": 50,
@@ -15276,7 +15276,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 0
                 }
             }),
-        new DescItemBase("Weight7", <FishingTKItemModel>{
+        new BaseItemBase("Weight7", <FishingTKItemModel>{
                 "internalName": "Weight7",
                 "displayName": "Massless Unit for Physics Questions",
                 "sellPrice": 50,
@@ -15294,7 +15294,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 0
                 }
             }),
-        new DescItemBase("Weight8", <FishingTKItemModel>{
+        new BaseItemBase("Weight8", <FishingTKItemModel>{
                 "internalName": "Weight8",
                 "displayName": "Literal Elephant",
                 "sellPrice": 50,
@@ -15312,7 +15312,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 6
                 }
             }),
-        new DescItemBase("Weight9", <FishingTKItemModel>{
+        new BaseItemBase("Weight9", <FishingTKItemModel>{
                 "internalName": "Weight9",
                 "displayName": "Valve Patented Circle Thingies",
                 "sellPrice": 50,
@@ -15330,7 +15330,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 5
                 }
             }),
-        new DescItemBase("Weight10", <FishingTKItemModel>{
+        new BaseItemBase("Weight10", <FishingTKItemModel>{
                 "internalName": "Weight10",
                 "displayName": "Dynamite",
                 "sellPrice": 17500,
@@ -15348,7 +15348,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 2
                 }
             }),
-        new DescItemBase("Weight11", <FishingTKItemModel>{
+        new BaseItemBase("Weight11", <FishingTKItemModel>{
                 "internalName": "Weight11",
                 "displayName": "Not Dynamite",
                 "sellPrice": 55000,
@@ -15366,7 +15366,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 4
                 }
             }),
-        new DescItemBase("Weight12", <FishingTKItemModel>{
+        new BaseItemBase("Weight12", <FishingTKItemModel>{
                 "internalName": "Weight12",
                 "displayName": "Triple Threat",
                 "sellPrice": 50,
@@ -15384,7 +15384,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 6
                 }
             }),
-        new DescItemBase("Weight13", <FishingTKItemModel>{
+        new BaseItemBase("Weight13", <FishingTKItemModel>{
                 "internalName": "Weight13",
                 "displayName": "Crash Box",
                 "sellPrice": 50,
@@ -15402,7 +15402,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 5
                 }
             }),
-        new DescItemBase("Weight14", <FishingTKItemModel>{
+        new BaseItemBase("Weight14", <FishingTKItemModel>{
                 "internalName": "Weight14",
                 "displayName": "Fat Albert",
                 "sellPrice": 50,
@@ -15420,7 +15420,7 @@ export const initSpecificItemRepo = () => {
                     "fishingPower": 19
                 }
             }),
-        new DescItemBase("GoldricP2", <DescItemModel>{
+        new BaseItemBase("GoldricP2", <DescItemModel>{
                 "internalName": "GoldricP2",
                 "displayName": "Triumphant Treason",
                 "sellPrice": 100,
@@ -15428,7 +15428,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "It's a rendition of the Battle of Sassasge, wherein Goldrichius Von Gallbladder waged war on the municipal kingdom of Sterling S. Elvar "
             }),
-        new DescItemBase("GoldricP3", <DescItemModel>{
+        new BaseItemBase("GoldricP3", <DescItemModel>{
                 "internalName": "GoldricP3",
                 "displayName": "Claiming Cashe",
                 "sellPrice": 100,
@@ -15436,7 +15436,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "The victory portrait of King Goldrichius Sr. after successfully dethroning S.S. Elvar from the East Yum-Yum dunedaries. "
             }),
-        new DescItemBase("Quest30", <DescItemModel>{
+        new BaseItemBase("Quest30", <DescItemModel>{
                 "internalName": "Quest30",
                 "displayName": "Giftmas Box",
                 "sellPrice": 100,
@@ -15444,7 +15444,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Hold down to open! There's a santa hat in one of these, as well as various holiday exclusive goodies, even cards! "
             }),
-        new DescItemBase("Quest31", <DescItemModel>{
+        new BaseItemBase("Quest31", <DescItemModel>{
                 "internalName": "Quest31",
                 "displayName": "Gem Note",
                 "sellPrice": 100,
@@ -15452,7 +15452,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Lava Letter",
                 "description": "Did you like those 20 gems you just picked up? Well you'll LOVE the 500 gems I just added to your account. This paper is worthless btw lol it's just a picture of a gem. "
             }),
-        new DescItemBase("Cutter", <DescItemModel>{
+        new BaseItemBase("Cutter", <DescItemModel>{
                 "internalName": "Cutter",
                 "displayName": "Bolt Cutters",
                 "sellPrice": 5000,
@@ -15460,7 +15460,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "I bet if you dropped these on a sewer grating, it would snap the bars right off! "
             }),
-        new DescItemBase("Quest32", <DescItemModel>{
+        new BaseItemBase("Quest32", <DescItemModel>{
                 "internalName": "Quest32",
                 "displayName": "Monster Rating",
                 "sellPrice": 100,
@@ -15468,7 +15468,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "'I literally just die over and over, I can't even fight back other than just running into them. Honestly I wish I was dead, but even then I just keep respawning, literally the worst experience ever, 1 star!!' "
             }),
-        new DescItemBase("Quest33", <DescItemModel>{
+        new BaseItemBase("Quest33", <DescItemModel>{
                 "internalName": "Quest33",
                 "displayName": "Player Rating With Letter P",
                 "sellPrice": 100,
@@ -15476,7 +15476,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "'WTF y do my items CONSTANTLY DISAPPEAR I HATE IT!! Complete RUBBISH! 1 STAR UNTIL YOU FIX MY SPECIFIC PROBLEM and even then I'll probably just raise it to 2 stars lol' "
             }),
-        new DescItemBase("Quest34", <DescItemModel>{
+        new BaseItemBase("Quest34", <DescItemModel>{
                 "internalName": "Quest34",
                 "displayName": "Player Rating With Letter S",
                 "sellPrice": 100,
@@ -15484,7 +15484,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "'This is NOT an Idle game! I actually have to play it sometimes! And why are there actual pictures on the screen, instead of just words and text boxes?? I can't believe I paid 0 dollars for this trash!' "
             }),
-        new DescItemBase("Quest35", <DescItemModel>{
+        new BaseItemBase("Quest35", <DescItemModel>{
                 "internalName": "Quest35",
                 "displayName": "Googley Eyes",
                 "sellPrice": 100,
@@ -15492,7 +15492,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Summon Item",
                 "description": "I remember when I was a kid, I spent an HOUR making a GLASS container look like it was a little friend using googley eyes just like these! If only there was a CONTAINER in this game, so you could do it to! "
             }),
-        new DescItemBase("Quest36", <DescItemModel>{
+        new BaseItemBase("Quest36", <DescItemModel>{
                 "internalName": "Quest36",
                 "displayName": "Dootjat Eye",
                 "sellPrice": 100,
@@ -15500,7 +15500,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Summon Item",
                 "description": "Blinks repeatedly when close to the Black Market, where you buy the Ankh used in the ice zone to get the Hedjet... wait, wrong game, sorry! "
             }),
-        new DescItemBase("Quest37", <DescItemModel>{
+        new BaseItemBase("Quest37", <DescItemModel>{
                 "internalName": "Quest37",
                 "displayName": "Silver Antique",
                 "sellPrice": 20000,
@@ -15508,7 +15508,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Hunk Of Junk",
                 "description": "An old lady pawned it off to the bazaar claiming it was some 'ancient artifact of the pharoah King Doot'. It's probably just scrap metal, doubt it's even real silver. Would make for a decent Necklace! "
             }),
-        new DescItemBase("Quest38", <DescItemModel>{
+        new BaseItemBase("Quest38", <DescItemModel>{
                 "internalName": "Quest38",
                 "displayName": "Guild Giftbox",
                 "sellPrice": 1,
@@ -15516,7 +15516,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Usable Box",
                 "description": "Hold down to open! Contains a random cool-kid item, like gems, exp balloons, or even time candy! Also, 1 in every 500 gifts contains the 'Ultra Unboxer' Trophy! "
             }),
-        new DescItemBase("Quest39", <DescItemModel>{
+        new BaseItemBase("Quest39", <DescItemModel>{
                 "internalName": "Quest39",
                 "displayName": "Lovey Dovey Letter",
                 "sellPrice": 1,
@@ -15524,7 +15524,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Event Item",
                 "description": "Hold down on 5 letters to spawn a Valentslime, or turn these in each day to the Loveulyte for a reward! "
             }),
-        new DescItemBase("Quest40", <DescItemModel>{
+        new BaseItemBase("Quest40", <DescItemModel>{
                 "internalName": "Quest40",
                 "displayName": "Choco Box",
                 "sellPrice": 100,
@@ -15532,7 +15532,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Hold down to open this box of meatballs... err chestnuts... err chocolate! There's a Giant Bow Hat in one of these, as well as various holiday exclusive goodies, even cards! "
             }),
-        new DescItemBase("Quest41", <DescItemModel>{
+        new BaseItemBase("Quest41", <DescItemModel>{
                 "internalName": "Quest41",
                 "displayName": "Flowies",
                 "sellPrice": 100,
@@ -15540,7 +15540,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Curse you flowey! I trusted you, I accepted your pellets of friendship, and then you had to go and throw it all away! And now here you are, trying to take over yet another video game... well I NOT GONNA LE-- oh wait, these are just normal flowers "
             }),
-        new DescItemBase("Quest42", <DescItemModel>{
+        new BaseItemBase("Quest42", <DescItemModel>{
                 "internalName": "Quest42",
                 "displayName": "Egg Capsule",
                 "sellPrice": 100,
@@ -15548,7 +15548,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Event Box",
                 "description": "Hold down to open for a random reward! Or, hold down for a LONG time to open them faster... yea, dreams do come true # "
             }),
-        new DescItemBase("Quest43", <DescItemModel>{
+        new BaseItemBase("Quest43", <DescItemModel>{
                 "internalName": "Quest43",
                 "displayName": "Gummy Bunny",
                 "sellPrice": 100,
@@ -15556,7 +15556,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Event Box",
                 "description": "Hold down to summon a friendly easter monster. But be careful, unlike real life where all friends are genuine, these monsters are just pretending to be your friend for personal gain! "
             }),
-        new DescItemBase("Quest44", <DescItemModel>{
+        new BaseItemBase("Quest44", <DescItemModel>{
                 "internalName": "Quest44",
                 "displayName": "Goldegg Capsule",
                 "sellPrice": 100,
@@ -15564,7 +15564,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Event Box",
                 "description": "Hold down to summon a mini boss or a green mushroom. It's a 50 50 shot which one you get! "
             }),
-        new DescItemBase("Quest45", <DescItemModel>{
+        new BaseItemBase("Quest45", <DescItemModel>{
                 "internalName": "Quest45",
                 "displayName": "Sesame Seed",
                 "sellPrice": 100,
@@ -15572,7 +15572,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Key",
                 "description": "The key to Bandit Bob's Party Dungeon! No not that dungeon... you're thinking of Snakenhotep's Dungeon, this one's for Bandit Bob's dungeon. So yea, this is worthless. "
             }),
-        new DescItemBase("Quest46", <DescItemModel>{
+        new BaseItemBase("Quest46", <DescItemModel>{
                 "internalName": "Quest46",
                 "displayName": "The Bobber Challenge Scroll",
                 "sellPrice": 100,
@@ -15580,7 +15580,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "A great behemoth has emerged from its slumber... and it now roams the fishing minigame! If you catch 2 whales, then purposefully avoid catching the 3rd whale, the ocean behemoth will eventually appear! Catch it to win a trophy! "
             }),
-        new DescItemBase("Quest47", <DescItemModel>{
+        new BaseItemBase("Quest47", <DescItemModel>{
                 "internalName": "Quest47",
                 "displayName": "Elderly Peanut",
                 "sellPrice": 100,
@@ -15588,7 +15588,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "It has a very peculiar stench... the smell is so unbearable, your damage is lowered by 50% and your Max HP is just 1! Only the sands of a dead Biggie Hours Miniboss could reverse the aging this peanut has undergone! "
             }),
-        new DescItemBase("Quest48", <DescItemModel>{
+        new BaseItemBase("Quest48", <DescItemModel>{
                 "internalName": "Quest48",
                 "displayName": "Pete the Peanut",
                 "sellPrice": 100,
@@ -15596,7 +15596,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Now that's a happy looking peanut! I wish he was MY best friend, but no one wants to be friends with sentient item dialogue ^ "
             }),
-        new DescItemBase("Quest49", <DescItemModel>{
+        new BaseItemBase("Quest49", <DescItemModel>{
                 "internalName": "Quest49",
                 "displayName": "Summer Cooler",
                 "sellPrice": 100,
@@ -15604,7 +15604,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Event Box",
                 "description": "Hold down to open for a random reward! Or, hold down for a LONG time to open them faster. "
             }),
-        new DescItemBase("Quest50", <DescItemModel>{
+        new BaseItemBase("Quest50", <DescItemModel>{
                 "internalName": "Quest50",
                 "displayName": "Beach Oyster",
                 "sellPrice": 100,
@@ -15612,7 +15612,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Event Box",
                 "description": "Hold down to summon a bunch of Summer Monsters, and get a random Pearl! "
             }),
-        new DescItemBase("Quest51", <DescItemModel>{
+        new BaseItemBase("Quest51", <DescItemModel>{
                 "internalName": "Quest51",
                 "displayName": "Skull Coin",
                 "sellPrice": 100,
@@ -15620,7 +15620,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Evaporate",
                 "description": "You shouldnt be seeing this... "
             }),
-        new DescItemBase("Quest52", <DescItemModel>{
+        new BaseItemBase("Quest52", <DescItemModel>{
                 "internalName": "Quest52",
                 "displayName": "Coin",
                 "sellPrice": 100,
@@ -15628,7 +15628,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Evaporate",
                 "description": "You shouldnt be seeing this... "
             }),
-        new DescItemBase("PalmTreeD", <DescItemModel>{
+        new BaseItemBase("PalmTreeD", <DescItemModel>{
                 "internalName": "PalmTreeD",
                 "displayName": "Palm Tree Log",
                 "sellPrice": 100,
@@ -15636,7 +15636,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Evaporate",
                 "description": "You shouldnt be seeing this... "
             }),
-        new DescItemBase("Pearl4", <DescItemModel>{
+        new BaseItemBase("Pearl4", <DescItemModel>{
                 "internalName": "Pearl4",
                 "displayName": "Black Pearl",
                 "sellPrice": 100,
@@ -15644,7 +15644,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Usable",
                 "description": "Hold down to gain 20% EXP in the skill that's shown in the corner of the screen. If you're in a town, you will gain EXP in the town skill. Only works on skills below level 30. "
             }),
-        new DescItemBase("Pearl5", <DescItemModel>{
+        new BaseItemBase("Pearl5", <DescItemModel>{
                 "internalName": "Pearl5",
                 "displayName": "White Pearl",
                 "sellPrice": 100,
@@ -15652,7 +15652,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Usable",
                 "description": "Hold down to gain Class EXP. The amount you gain is based on your Class LV. "
             }),
-        new DescItemBase("Quest53", <DescItemModel>{
+        new BaseItemBase("Quest53", <DescItemModel>{
                 "internalName": "Quest53",
                 "displayName": "Meat Cube",
                 "sellPrice": 100,
@@ -15660,7 +15660,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Evaporate",
                 "description": "You shouldnt be seeing this... "
             }),
-        new DescItemBase("Quest54", <DescItemModel>{
+        new BaseItemBase("Quest54", <DescItemModel>{
                 "internalName": "Quest54",
                 "displayName": "Sand Pile",
                 "sellPrice": 100,
@@ -15668,7 +15668,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Evaporate",
                 "description": "You shouldnt be seeing this... "
             }),
-        new DescItemBase("Quest55", <DescItemModel>{
+        new BaseItemBase("Quest55", <DescItemModel>{
                 "internalName": "Quest55",
                 "displayName": "Buried Treasure",
                 "sellPrice": 100,
@@ -15676,7 +15676,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Evaporate",
                 "description": "You shouldnt be seeing this... "
             }),
-        new DescItemBase("Quest56", <DescItemModel>{
+        new BaseItemBase("Quest56", <DescItemModel>{
                 "internalName": "Quest56",
                 "displayName": "Dootophone",
                 "sellPrice": 1,
@@ -15684,7 +15684,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Hold down on this vintage Dootophone to active all the obelisks on Doot's burial platform at once! "
             }),
-        new DescItemBase("Quest57", <DescItemModel>{
+        new BaseItemBase("Quest57", <DescItemModel>{
                 "internalName": "Quest57",
                 "displayName": "Damaged Cog",
                 "sellPrice": 500000000,
@@ -15692,7 +15692,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Hold down on this cog to turn it into a Refurbished Cog, IF you have a construction LV of 75{. "
             }),
-        new DescItemBase("Quest58", <DescItemModel>{
+        new BaseItemBase("Quest58", <DescItemModel>{
                 "internalName": "Quest58",
                 "displayName": "Refurbished Cog",
                 "sellPrice": 500000010,
@@ -15700,7 +15700,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Made from a Damaged Cog, which you can buy at the Town Shop! "
             }),
-        new DescItemBase("Quest59", <DescItemModel>{
+        new BaseItemBase("Quest59", <DescItemModel>{
                 "internalName": "Quest59",
                 "displayName": "Shuvelle's Vote",
                 "sellPrice": 1,
@@ -15708,7 +15708,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "A slip of paper indicating that a Ms. Shuvelle La Deuge intends to vote for Mayor Hoggindaz "
             }),
-        new DescItemBase("Quest60", <DescItemModel>{
+        new BaseItemBase("Quest60", <DescItemModel>{
                 "internalName": "Quest60",
                 "displayName": "Yondergreens Vote",
                 "sellPrice": 1,
@@ -15716,7 +15716,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "A slip of paper indicating that a Sir Yondergreen Von Timberbottom intends to vote for Mayor Hoggindaz "
             }),
-        new DescItemBase("Quest61", <DescItemModel>{
+        new BaseItemBase("Quest61", <DescItemModel>{
                 "internalName": "Quest61",
                 "displayName": "Bill Brr's Vote",
                 "sellPrice": 1,
@@ -15724,7 +15724,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "A slip of paper indicating that a Mr. Bill Brr doesn't intend to vote for any of these political puppets, but he left it blank so you filled it in for Hoggi. "
             }),
-        new DescItemBase("Quest62", <DescItemModel>{
+        new BaseItemBase("Quest62", <DescItemModel>{
                 "internalName": "Quest62",
                 "displayName": "Signed Contract",
                 "sellPrice": 1,
@@ -15732,7 +15732,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "It's the last will and testament of some penguin monster. Just pretend you signed it, ol' Yondergreen seems a little blind and probably wont notice. "
             }),
-        new DescItemBase("Quest63", <DescItemModel>{
+        new BaseItemBase("Quest63", <DescItemModel>{
                 "internalName": "Quest63",
                 "displayName": "Shovel",
                 "sellPrice": 1,
@@ -15740,7 +15740,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Evaporate",
                 "description": "You shouldnt be seeing this... "
             }),
-        new DescItemBase("Quest64", <DescItemModel>{
+        new BaseItemBase("Quest64", <DescItemModel>{
                 "internalName": "Quest64",
                 "displayName": "2021 Giftmas Box",
                 "sellPrice": 1,
@@ -15748,7 +15748,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Event Box",
                 "description": "Hold to open! Contains a random Giftmas goodie, from event cards to foods! "
             }),
-        new DescItemBase("Quest65", <DescItemModel>{
+        new BaseItemBase("Quest65", <DescItemModel>{
                 "internalName": "Quest65",
                 "displayName": "Pile of Processor Chips",
                 "sellPrice": 625000,
@@ -15756,7 +15756,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Lab Addition",
                 "description": "Collect 3 of these, then hold down on the stack of 3 to unlock the Chip Repository! "
             }),
-        new DescItemBase("Quest66", <DescItemModel>{
+        new BaseItemBase("Quest66", <DescItemModel>{
                 "internalName": "Quest66",
                 "displayName": "Strung Jewels",
                 "sellPrice": 2500000,
@@ -15764,7 +15764,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Lab Addition",
                 "description": "Collect 7 of these, then hold down on the stack of 7 to unlock the Jewel Spinner! "
             }),
-        new DescItemBase("Quest67", <DescItemModel>{
+        new BaseItemBase("Quest67", <DescItemModel>{
                 "internalName": "Quest67",
                 "displayName": "Bottled World Town Teleport",
                 "sellPrice": 1000000,
@@ -15772,7 +15772,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Teleport",
                 "description": "Buy this once and hold down on it to permanently allow for free teleports inbetween World Towns without consuming a teleport! From town to town, free of charge! "
             }),
-        new DescItemBase("Quest68", <DescItemModel>{
+        new BaseItemBase("Quest68", <DescItemModel>{
                 "internalName": "Quest68",
                 "displayName": "Bucket of Slush",
                 "sellPrice": 1000,
@@ -15780,7 +15780,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Bucket",
                 "description": "Drop this on the snowy pile in the Refigeration Station in World 3. There are rumors that the recent snowfall will coagulate with the slush in horrible ways... "
             }),
-        new DescItemBase("Quest69", <DescItemModel>{
+        new BaseItemBase("Quest69", <DescItemModel>{
                 "internalName": "Quest69",
                 "displayName": "Skull",
                 "sellPrice": 1000,
@@ -15788,7 +15788,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Evaporate",
                 "description": "It may be a skull, but it sure ain't no Killroy! "
             }),
-        new DescItemBase("KeyFrag", <DescItemModel>{
+        new BaseItemBase("KeyFrag", <DescItemModel>{
                 "internalName": "KeyFrag",
                 "displayName": "Keychain Fragment",
                 "sellPrice": 1,
@@ -15796,7 +15796,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Key Fragment",
                 "description": "Hold down on these to add them to your account. You'll be spending these in the next update to buy keychains at the Keychain Pile, which will be in the next update! "
             }),
-        new DescItemBase("Spice0", <DescItemModel>{
+        new BaseItemBase("Spice0", <DescItemModel>{
                 "internalName": "Spice0",
                 "displayName": "Spice",
                 "sellPrice": 1,
@@ -15804,7 +15804,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Spice",
                 "description": "Spicey "
             }),
-        new DescItemBase("Spice6", <DescItemModel>{
+        new BaseItemBase("Spice6", <DescItemModel>{
                 "internalName": "Spice6",
                 "displayName": "Spice",
                 "sellPrice": 1,
@@ -15812,7 +15812,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Spice",
                 "description": "Spicey "
             }),
-        new DescItemBase("Spice9", <DescItemModel>{
+        new BaseItemBase("Spice9", <DescItemModel>{
                 "internalName": "Spice9",
                 "displayName": "Strung Jewels",
                 "sellPrice": 1,
@@ -15820,7 +15820,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Spice",
                 "description": "Spicey "
             }),
-        new DescItemBase("Tree7D", <DescItemModel>{
+        new BaseItemBase("Tree7D", <DescItemModel>{
                 "internalName": "Tree7D",
                 "displayName": "Wispy Tree Log",
                 "sellPrice": 100,
@@ -15828,7 +15828,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Evaporate",
                 "description": "You shouldnt be seeing this... "
             }),
-        new DescItemBase("PlatD", <DescItemModel>{
+        new BaseItemBase("PlatD", <DescItemModel>{
                 "internalName": "PlatD",
                 "displayName": "Platinum Ore",
                 "sellPrice": 100,
@@ -15836,7 +15836,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Evaporate",
                 "description": "You shouldnt be seeing this... "
             }),
-        new DescItemBase("Fish1D", <DescItemModel>{
+        new BaseItemBase("Fish1D", <DescItemModel>{
                 "internalName": "Fish1D",
                 "displayName": "Goldfish",
                 "sellPrice": 100,
@@ -15844,7 +15844,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Evaporate",
                 "description": "You shouldnt be seeing this... "
             }),
-        new DescItemBase("Fish3D", <DescItemModel>{
+        new BaseItemBase("Fish3D", <DescItemModel>{
                 "internalName": "Fish3D",
                 "displayName": "Jellyfish",
                 "sellPrice": 100,
@@ -15852,7 +15852,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Evaporate",
                 "description": "You shouldnt be seeing this... "
             }),
-        new DescItemBase("Cashb", <DescItemModel>{
+        new BaseItemBase("Cashb", <DescItemModel>{
                 "internalName": "Cashb",
                 "displayName": "Ice Dollar",
                 "sellPrice": 1,
@@ -15860,7 +15860,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Item",
                 "description": "Cool! "
             }),
-        new DescItemBase("Dung3Ice", <DescItemModel>{
+        new BaseItemBase("Dung3Ice", <DescItemModel>{
                 "internalName": "Dung3Ice",
                 "displayName": "Basement Cube",
                 "sellPrice": 1,
@@ -15868,7 +15868,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Evaporate",
                 "description": "Cool! "
             }),
-        new DescItemBase("Chiz0", <DescItemModel>{
+        new BaseItemBase("Chiz0", <DescItemModel>{
                 "internalName": "Chiz0",
                 "displayName": "Chizoar Spike",
                 "sellPrice": 1,
@@ -15876,7 +15876,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "A spike from Chizoar's neck. It's ice cold, and sharp as a tack. "
             }),
-        new DescItemBase("Chiz1", <DescItemModel>{
+        new BaseItemBase("Chiz1", <DescItemModel>{
                 "internalName": "Chiz1",
                 "displayName": "Chizoar Stalagmite",
                 "sellPrice": 1,
@@ -15884,7 +15884,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "A spike from Chaotic Chizoar's neck. Despite it being made of ice, it burns at the touch due to its acidity. "
             }),
-        new DescItemBase("DungCredits1", <DescItemModel>{
+        new BaseItemBase("DungCredits1", <DescItemModel>{
                 "internalName": "DungCredits1",
                 "displayName": "Dungeon Credits",
                 "sellPrice": 1,
@@ -15892,7 +15892,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Currency",
                 "description": "Hold down to add these to your account. You can spend dungeon credits in any Dungeon Hub! "
             }),
-        new DescItemBase("LootDice", <DescItemModel>{
+        new BaseItemBase("LootDice", <DescItemModel>{
                 "internalName": "LootDice",
                 "displayName": "Loot Dice",
                 "sellPrice": 1,
@@ -15900,7 +15900,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Currency",
                 "description": "You shouldn't be reading this... "
             }),
-        new DescItemBase("Ladle", <DescItemModel>{
+        new BaseItemBase("Ladle", <DescItemModel>{
                 "internalName": "Ladle",
                 "displayName": "Cooking Ladle",
                 "sellPrice": 1,
@@ -15908,7 +15908,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Kitchen Ladle",
                 "description": "Hold down to boost all your kitchens ahead by 1 hour for each ladle in this stack. The entire stack will be used up when you do. "
             }),
-        new DescItemBase("PetEgg", <DescItemModel>{
+        new BaseItemBase("PetEgg", <DescItemModel>{
                 "internalName": "PetEgg",
                 "displayName": "Pet Egg",
                 "sellPrice": 1,
@@ -15916,7 +15916,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Pet Egg",
                 "description": "Hold down to instantly incubate eggs for your nest in World 4. It'll only use up eggs that you have space to carry, dont worry about wasting these! "
             }),
-        new DescItemBase("Genetic0", <DescItemModel>{
+        new BaseItemBase("Genetic0", <DescItemModel>{
                 "internalName": "Genetic0",
                 "displayName": "Grassy Gene Spiral",
                 "sellPrice": 1,
@@ -15924,7 +15924,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Evaporate",
                 "description": "You shouldn't be seeing this... "
             }),
-        new DescItemBase("Genetic1", <DescItemModel>{
+        new BaseItemBase("Genetic1", <DescItemModel>{
                 "internalName": "Genetic1",
                 "displayName": "YumYumy Gene Spiral",
                 "sellPrice": 1,
@@ -15932,7 +15932,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Evaporate",
                 "description": "You shouldn't be seeing this... "
             }),
-        new DescItemBase("Genetic2", <DescItemModel>{
+        new BaseItemBase("Genetic2", <DescItemModel>{
                 "internalName": "Genetic2",
                 "displayName": "Tundric Gene Spiral",
                 "sellPrice": 1,
@@ -15940,7 +15940,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Evaporate",
                 "description": "You shouldn't be seeing this... "
             }),
-        new DescItemBase("Genetic3", <DescItemModel>{
+        new BaseItemBase("Genetic3", <DescItemModel>{
                 "internalName": "Genetic3",
                 "displayName": "Nebulous Gene Spiral",
                 "sellPrice": 1,
@@ -15948,7 +15948,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Evaporate",
                 "description": "You shouldn't be seeing this... "
             }),
-        new DescItemBase("GalaxyA1", <DescItemModel>{
+        new BaseItemBase("GalaxyA1", <DescItemModel>{
                 "internalName": "GalaxyA1",
                 "displayName": "Purple Mush Cap",
                 "sellPrice": 100,
@@ -15956,7 +15956,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "According to herblore books, this purple cap is sterile. Those purple fungi that grow from the ground, however, will mutate if exposed to toxic oil radiation. "
             }),
-        new DescItemBase("GalaxyA2", <DescItemModel>{
+        new BaseItemBase("GalaxyA2", <DescItemModel>{
                 "internalName": "GalaxyA2",
                 "displayName": "TV Remote",
                 "sellPrice": 120,
@@ -15964,7 +15964,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Oh, THATS where he put the remote, all the way out here in outer space thousands of miles from the surface! Oh that silly man! "
             }),
-        new DescItemBase("GalaxyA2b", <DescItemModel>{
+        new BaseItemBase("GalaxyA2b", <DescItemModel>{
                 "internalName": "GalaxyA2b",
                 "displayName": "Lost Batteries",
                 "sellPrice": 150,
@@ -15972,7 +15972,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Oh, THATS why the remote wasn't working when I pushed the buttons, the batteries were all the way out here in the rare drop table! "
             }),
-        new DescItemBase("GalaxyA3", <DescItemModel>{
+        new BaseItemBase("GalaxyA3", <DescItemModel>{
                 "internalName": "GalaxyA3",
                 "displayName": "Half Eaten Donut",
                 "sellPrice": 200,
@@ -15980,7 +15980,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "WAIT NO STOP! Don't eat the rest of this donut! Think about it... if it was really worth eating, why was it left like this, all un-eaten and such? Think before you eat! "
             }),
-        new DescItemBase("GalaxyA4", <DescItemModel>{
+        new BaseItemBase("GalaxyA4", <DescItemModel>{
                 "internalName": "GalaxyA4",
                 "displayName": "Genie Lamp",
                 "sellPrice": 275,
@@ -15988,7 +15988,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Rub it, maybe a genie will come out! Oh wait, you already killed the genie. Maybe try 'not murder' next time. "
             }),
-        new DescItemBase("GalaxyB1", <DescItemModel>{
+        new BaseItemBase("GalaxyB1", <DescItemModel>{
                 "internalName": "GalaxyB1",
                 "displayName": "Bottle Cap",
                 "sellPrice": 375,
@@ -15996,7 +15996,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "With the main prey of the Soda Can being the Soda Bottle, one can conclude that bottle caps are indigestible, and will remain untarnished after being consumed. "
             }),
-        new DescItemBase("GalaxyB2", <DescItemModel>{
+        new BaseItemBase("GalaxyB2", <DescItemModel>{
                 "internalName": "GalaxyB2",
                 "displayName": "Wurm Tail",
                 "sellPrice": 500,
@@ -16004,7 +16004,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "That's a nice tail! "
             }),
-        new DescItemBase("GalaxyB3", <DescItemModel>{
+        new BaseItemBase("GalaxyB3", <DescItemModel>{
                 "internalName": "GalaxyB3",
                 "displayName": "Tongue Bone",
                 "sellPrice": 700,
@@ -16012,7 +16012,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "The tongue is wrapped around the bone. "
             }),
-        new DescItemBase("GalaxyB4", <DescItemModel>{
+        new BaseItemBase("GalaxyB4", <DescItemModel>{
                 "internalName": "GalaxyB4",
                 "displayName": "Crumpled Wrapper",
                 "sellPrice": 1000,
@@ -16020,7 +16020,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Yo... yuhhh, yea, yea. They said I was doomed from the start, maaan ain't no wrapper made it past the worst part... "
             }),
-        new DescItemBase("GalaxyB5", <DescItemModel>{
+        new BaseItemBase("GalaxyB5", <DescItemModel>{
                 "internalName": "GalaxyB5",
                 "displayName": "Smol Worm",
                 "sellPrice": 1250,
@@ -16028,7 +16028,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "I wonder if this one's an undercover agent too... "
             }),
-        new DescItemBase("GalaxyC1", <DescItemModel>{
+        new BaseItemBase("GalaxyC1", <DescItemModel>{
                 "internalName": "GalaxyC1",
                 "displayName": "Empty Oyster Shell",
                 "sellPrice": 1700,
@@ -16036,7 +16036,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "It's a lame shell that's been desaturated due to it's unimportance. "
             }),
-        new DescItemBase("GalaxyC1b", <DescItemModel>{
+        new BaseItemBase("GalaxyC1b", <DescItemModel>{
                 "internalName": "GalaxyC1b",
                 "displayName": "Pealer Shell",
                 "sellPrice": 3000,
@@ -16044,7 +16044,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Yow wow wow! This one's got a pearl in it!! "
             }),
-        new DescItemBase("GalaxyC2", <DescItemModel>{
+        new BaseItemBase("GalaxyC2", <DescItemModel>{
                 "internalName": "GalaxyC2",
                 "displayName": "Wriggly Ball",
                 "sellPrice": 4000,
@@ -16052,7 +16052,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "It's like some sort of tentankle ball. Hang on, let me try that again. It's like some sort of tentacle ball. "
             }),
-        new DescItemBase("GalaxyC3", <DescItemModel>{
+        new BaseItemBase("GalaxyC3", <DescItemModel>{
                 "internalName": "GalaxyC3",
                 "displayName": "Gel Chunk",
                 "sellPrice": 5500,
@@ -16060,7 +16060,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "Still tingly at the touch... "
             }),
-        new DescItemBase("GalaxyC4", <DescItemModel>{
+        new BaseItemBase("GalaxyC4", <DescItemModel>{
                 "internalName": "GalaxyC4",
                 "displayName": "Condensed Zap",
                 "sellPrice": 7500,
@@ -16068,7 +16068,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "...37 Megawatts of electricity, if my voltmeter reading is correct! "
             }),
-        new DescItemBase("EquipmentSword4", <WeaponItemModel>{
+        new BaseItemBase("EquipmentSword4", <WeaponItemModel>{
                 "internalName": "EquipmentSword4",
                 "displayName": "Slimsharp Fin",
                 "sellPrice": 26000,
@@ -16089,7 +16089,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 92
             }),
-        new DescItemBase("EquipmentSword5", <WeaponItemModel>{
+        new BaseItemBase("EquipmentSword5", <WeaponItemModel>{
                 "internalName": "EquipmentSword5",
                 "displayName": "Diabolical Flesh",
                 "sellPrice": 26000,
@@ -16110,7 +16110,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 7,
                 "Reach": 92
             }),
-        new DescItemBase("EquipmentBows9", <WeaponItemModel>{
+        new BaseItemBase("EquipmentBows9", <WeaponItemModel>{
                 "internalName": "EquipmentBows9",
                 "displayName": "Shardsure Leif",
                 "sellPrice": 15000,
@@ -16131,7 +16131,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 7,
                 "Reach": 255
             }),
-        new DescItemBase("EquipmentBows10", <WeaponItemModel>{
+        new BaseItemBase("EquipmentBows10", <WeaponItemModel>{
                 "internalName": "EquipmentBows10",
                 "displayName": "Diabolical Continuit",
                 "sellPrice": 15000,
@@ -16152,7 +16152,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 8,
                 "Reach": 300
             }),
-        new DescItemBase("EquipmentWands8", <WeaponItemModel>{
+        new BaseItemBase("EquipmentWands8", <WeaponItemModel>{
                 "internalName": "EquipmentWands8",
                 "displayName": "Skullslip Hallow",
                 "sellPrice": 200,
@@ -16173,7 +16173,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 195
             }),
-        new DescItemBase("EquipmentWands9", <WeaponItemModel>{
+        new BaseItemBase("EquipmentWands9", <WeaponItemModel>{
                 "internalName": "EquipmentWands9",
                 "displayName": "Diabolical Opticule",
                 "sellPrice": 200,
@@ -16194,7 +16194,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 7,
                 "Reach": 250
             }),
-        new DescItemBase("EquipmentHats68", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats68", <ArmourItemModel>{
                 "internalName": "EquipmentHats68",
                 "displayName": "Chizoar Helmet",
                 "sellPrice": 1,
@@ -16215,7 +16215,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats69", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats69", <ArmourItemModel>{
                 "internalName": "EquipmentHats69",
                 "displayName": "Giftmas Snoozy Cap",
                 "sellPrice": 1,
@@ -16236,7 +16236,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats70", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats70", <ArmourItemModel>{
                 "internalName": "EquipmentHats70",
                 "displayName": "Lustre Veil",
                 "sellPrice": 1,
@@ -16257,7 +16257,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats71", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats71", <ArmourItemModel>{
                 "internalName": "EquipmentHats71",
                 "displayName": "Diabolical Headcase",
                 "sellPrice": 1,
@@ -16278,7 +16278,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats72", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats72", <ArmourItemModel>{
                 "internalName": "EquipmentHats72",
                 "displayName": "Nondescript Game Show Host Hair",
                 "sellPrice": 1,
@@ -16299,7 +16299,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats73", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats73", <ArmourItemModel>{
                 "internalName": "EquipmentHats73",
                 "displayName": "Real Civil Engineer Helmet",
                 "sellPrice": 1,
@@ -16320,7 +16320,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts6", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts6", <ArmourItemModel>{
                 "internalName": "EquipmentShirts6",
                 "displayName": "Chizoar Bodyplate",
                 "sellPrice": 200,
@@ -16341,7 +16341,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts32", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts32", <ArmourItemModel>{
                 "internalName": "EquipmentShirts32",
                 "displayName": "Lustre Chestplate",
                 "sellPrice": 200,
@@ -16362,7 +16362,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShirts33", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShirts33", <ArmourItemModel>{
                 "internalName": "EquipmentShirts33",
                 "displayName": "Diabolical Abdomen",
                 "sellPrice": 200,
@@ -16383,7 +16383,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPants9", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPants9", <ArmourItemModel>{
                 "internalName": "EquipmentPants9",
                 "displayName": "Chizoar Scaled Leggings",
                 "sellPrice": 200,
@@ -16404,7 +16404,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPants24", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPants24", <ArmourItemModel>{
                 "internalName": "EquipmentPants24",
                 "displayName": "Lustre Scales",
                 "sellPrice": 200,
@@ -16425,7 +16425,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPants25", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPants25", <ArmourItemModel>{
                 "internalName": "EquipmentPants25",
                 "displayName": "Diabolical Trimed Leg Guards",
                 "sellPrice": 200,
@@ -16446,7 +16446,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes23", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes23", <ArmourItemModel>{
                 "internalName": "EquipmentShoes23",
                 "displayName": "Chizoar Walkers",
                 "sellPrice": 200,
@@ -16467,7 +16467,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes24", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes24", <ArmourItemModel>{
                 "internalName": "EquipmentShoes24",
                 "displayName": "Lustre Shieldshoe",
                 "sellPrice": 200,
@@ -16488,7 +16488,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes25", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes25", <ArmourItemModel>{
                 "internalName": "EquipmentShoes25",
                 "displayName": "Diabolical Toe Tips",
                 "sellPrice": 200,
@@ -16509,7 +16509,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes26", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes26", <ArmourItemModel>{
                 "internalName": "EquipmentShoes26",
                 "displayName": "Rough Rockers",
                 "sellPrice": 3000,
@@ -16530,7 +16530,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes27", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes27", <ArmourItemModel>{
                 "internalName": "EquipmentShoes27",
                 "displayName": "Fiberous Footings",
                 "sellPrice": 3000,
@@ -16551,7 +16551,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes28", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes28", <ArmourItemModel>{
                 "internalName": "EquipmentShoes28",
                 "displayName": "Deep Sea Galoshes",
                 "sellPrice": 3000,
@@ -16572,7 +16572,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes29", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes29", <ArmourItemModel>{
                 "internalName": "EquipmentShoes29",
                 "displayName": "Spaggy Westerados",
                 "sellPrice": 3000,
@@ -16593,7 +16593,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes30", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes30", <ArmourItemModel>{
                 "internalName": "EquipmentShoes30",
                 "displayName": "Cooking Clogs",
                 "sellPrice": 3000,
@@ -16614,7 +16614,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes31", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes31", <ArmourItemModel>{
                 "internalName": "EquipmentShoes31",
                 "displayName": "Chef Hat Shoes",
                 "sellPrice": 3000,
@@ -16635,7 +16635,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes32", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes32", <ArmourItemModel>{
                 "internalName": "EquipmentShoes32",
                 "displayName": "Laboratory Scrubs",
                 "sellPrice": 3000,
@@ -16656,7 +16656,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentShoes33", <ArmourItemModel>{
+        new BaseItemBase("EquipmentShoes33", <ArmourItemModel>{
                 "internalName": "EquipmentShoes33",
                 "displayName": "Sheek Scrubs",
                 "sellPrice": 3000,
@@ -16677,7 +16677,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPendant24", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPendant24", <ArmourItemModel>{
                 "internalName": "EquipmentPendant24",
                 "displayName": "Chizoars Blankie",
                 "sellPrice": 1,
@@ -16698,7 +16698,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPendant25", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPendant25", <ArmourItemModel>{
                 "internalName": "EquipmentPendant25",
                 "displayName": "Chizoars Caustic Scarf",
                 "sellPrice": 1,
@@ -16719,7 +16719,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPendant26", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPendant26", <ArmourItemModel>{
                 "internalName": "EquipmentPendant26",
                 "displayName": "Polished Bludgeon",
                 "sellPrice": 10000,
@@ -16740,7 +16740,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentPendant27", <ArmourItemModel>{
+        new BaseItemBase("EquipmentPendant27", <ArmourItemModel>{
                 "internalName": "EquipmentPendant27",
                 "displayName": "Skullfish Pendant",
                 "sellPrice": 1,
@@ -16761,7 +16761,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings23", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings23", <ArmourItemModel>{
                 "internalName": "EquipmentRings23",
                 "displayName": "Neutron Ice Ring",
                 "sellPrice": 1,
@@ -16782,7 +16782,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings24", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings24", <ArmourItemModel>{
                 "internalName": "EquipmentRings24",
                 "displayName": "Lab Ring",
                 "sellPrice": 1,
@@ -16803,7 +16803,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings25", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings25", <ArmourItemModel>{
                 "internalName": "EquipmentRings25",
                 "displayName": "Chef Ring",
                 "sellPrice": 1,
@@ -16824,7 +16824,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings26", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings26", <ArmourItemModel>{
                 "internalName": "EquipmentRings26",
                 "displayName": "Serrated Rex Ring",
                 "sellPrice": 1,
@@ -16845,7 +16845,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings27", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings27", <ArmourItemModel>{
                 "internalName": "EquipmentRings27",
                 "displayName": "Protectors Pride",
                 "sellPrice": 5000,
@@ -16866,7 +16866,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings28", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings28", <ArmourItemModel>{
                 "internalName": "EquipmentRings28",
                 "displayName": "Midnight Stopwatch",
                 "sellPrice": 5000,
@@ -16887,7 +16887,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings29", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings29", <ArmourItemModel>{
                 "internalName": "EquipmentRings29",
                 "displayName": "Dawn Stopwatch",
                 "sellPrice": 5000,
@@ -16908,7 +16908,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentRings30", <ArmourItemModel>{
+        new BaseItemBase("EquipmentRings30", <ArmourItemModel>{
                 "internalName": "EquipmentRings30",
                 "displayName": "Souped Lab Ring",
                 "sellPrice": 1,
@@ -16929,7 +16929,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentCape0", <ArmourItemModel>{
+        new BaseItemBase("EquipmentCape0", <ArmourItemModel>{
                 "internalName": "EquipmentCape0",
                 "displayName": "Angel Wings",
                 "sellPrice": 1,
@@ -16950,7 +16950,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentCape1", <ArmourItemModel>{
+        new BaseItemBase("EquipmentCape1", <ArmourItemModel>{
                 "internalName": "EquipmentCape1",
                 "displayName": "Lava Wings",
                 "sellPrice": 1,
@@ -16971,7 +16971,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentCape2", <ArmourItemModel>{
+        new BaseItemBase("EquipmentCape2", <ArmourItemModel>{
                 "internalName": "EquipmentCape2",
                 "displayName": "Easter Egg Backpack",
                 "sellPrice": 1,
@@ -16992,7 +16992,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentCape3", <ArmourItemModel>{
+        new BaseItemBase("EquipmentCape3", <ArmourItemModel>{
                 "internalName": "EquipmentCape3",
                 "displayName": "Radiant Amarok Backstabber",
                 "sellPrice": 1,
@@ -17013,7 +17013,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentCape4", <ArmourItemModel>{
+        new BaseItemBase("EquipmentCape4", <ArmourItemModel>{
                 "internalName": "EquipmentCape4",
                 "displayName": "Gilded Efaunt Dislodged Tusks",
                 "sellPrice": 1,
@@ -17034,7 +17034,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentCape5", <ArmourItemModel>{
+        new BaseItemBase("EquipmentCape5", <ArmourItemModel>{
                 "internalName": "EquipmentCape5",
                 "displayName": "Blighted Chizoar Shard Cape",
                 "sellPrice": 1,
@@ -17055,7 +17055,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("WorshipSkull8", <SkullItemModel>{
+        new BaseItemBase("WorshipSkull8", <SkullItemModel>{
                 "internalName": "WorshipSkull8",
                 "displayName": "Slush Skull",
                 "sellPrice": 100,
@@ -17077,7 +17077,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 10,
                 "Speed": 2
             }),
-        new DescItemBase("DNAgun0", <ToolItemModel>{
+        new BaseItemBase("DNAgun0", <ToolItemModel>{
                 "internalName": "DNAgun0",
                 "displayName": "Sappy DNA Splicer",
                 "sellPrice": 6000000,
@@ -17099,7 +17099,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 50,
                 "Speed": 0
             }),
-        new DescItemBase("DNAgun1", <ToolItemModel>{
+        new BaseItemBase("DNAgun1", <ToolItemModel>{
                 "internalName": "DNAgun1",
                 "displayName": "Bolstered DNA Splicer",
                 "sellPrice": 10000,
@@ -17121,7 +17121,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 70,
                 "Speed": 0
             }),
-        new DescItemBase("DNAgun2", <ToolItemModel>{
+        new BaseItemBase("DNAgun2", <ToolItemModel>{
                 "internalName": "DNAgun2",
                 "displayName": "Double Barreled DNA Splicer",
                 "sellPrice": 10000,
@@ -17143,7 +17143,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 100,
                 "Speed": 0
             }),
-        new DescItemBase("DNAgun3", <ToolItemModel>{
+        new BaseItemBase("DNAgun3", <ToolItemModel>{
                 "internalName": "DNAgun3",
                 "displayName": "Ergonomic DNA Splicer",
                 "sellPrice": 10000,
@@ -17165,7 +17165,7 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 150,
                 "Speed": 0
             }),
-        new DescItemBase("Refinery1", <DescItemModel>{
+        new BaseItemBase("Refinery1", <DescItemModel>{
                 "internalName": "Refinery1",
                 "displayName": "Redox Salts",
                 "sellPrice": 100,
@@ -17173,7 +17173,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Refinery Salts",
                 "description": "It's red, and boring. "
             }),
-        new DescItemBase("Refinery2", <DescItemModel>{
+        new BaseItemBase("Refinery2", <DescItemModel>{
                 "internalName": "Refinery2",
                 "displayName": "Explosive Salts",
                 "sellPrice": 100,
@@ -17181,7 +17181,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Refinery Salts",
                 "description": "It's orange, and explodey. "
             }),
-        new DescItemBase("Refinery3", <DescItemModel>{
+        new BaseItemBase("Refinery3", <DescItemModel>{
                 "internalName": "Refinery3",
                 "displayName": "Spontaneity Salts",
                 "sellPrice": 100,
@@ -17189,7 +17189,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Refinery Salts",
                 "description": "It's blue, and currently has a flight scheduled to Tahiti that it booked earlier this morning on a whim. "
             }),
-        new DescItemBase("Refinery4", <DescItemModel>{
+        new BaseItemBase("Refinery4", <DescItemModel>{
                 "internalName": "Refinery4",
                 "displayName": "Dioxide Synthesis",
                 "sellPrice": 100,
@@ -17197,7 +17197,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Refinery Salts",
                 "description": "It's green, and carbony. "
             }),
-        new DescItemBase("Refinery5", <DescItemModel>{
+        new BaseItemBase("Refinery5", <DescItemModel>{
                 "internalName": "Refinery5",
                 "displayName": "Purple Salt",
                 "sellPrice": 100,
@@ -17205,7 +17205,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Refinery Salts",
                 "description": "It's purple, and confusing. "
             }),
-        new DescItemBase("Refinery6", <DescItemModel>{
+        new BaseItemBase("Refinery6", <DescItemModel>{
                 "internalName": "Refinery6",
                 "displayName": "Nullo Salt",
                 "sellPrice": 100,
@@ -17213,7 +17213,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Refinery Salts",
                 "description": "It's grey, and doesn't exist. "
             }),
-        new DescItemBase("CraftMat1", <DescItemModel>{
+        new BaseItemBase("CraftMat1", <DescItemModel>{
                 "internalName": "CraftMat1",
                 "displayName": "Thread",
                 "sellPrice": 3,
@@ -17221,7 +17221,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Material",
                 "description": "It's basically string cheese, but without the cheese. CRAFT THESE IN THE 'PRODUCE' TAB IN ANVIL! "
             }),
-        new DescItemBase("CraftMat2", <DescItemModel>{
+        new BaseItemBase("CraftMat2", <DescItemModel>{
                 "internalName": "CraftMat2",
                 "displayName": "Crimson String",
                 "sellPrice": 1,
@@ -17229,7 +17229,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Material",
                 "description": "I think Scripticus forgot to take out his... spoon? You may want to give that back. "
             }),
-        new DescItemBase("CraftMat3", <DescItemModel>{
+        new BaseItemBase("CraftMat3", <DescItemModel>{
                 "internalName": "CraftMat3",
                 "displayName": "Cue Tape",
                 "sellPrice": 3,
@@ -17237,7 +17237,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Material",
                 "description": "Ohh that's why it's called Cue tape! "
             }),
-        new DescItemBase("CraftMat5", <DescItemModel>{
+        new BaseItemBase("CraftMat5", <DescItemModel>{
                 "internalName": "CraftMat5",
                 "displayName": "Trusty Nails",
                 "sellPrice": 12,
@@ -17245,7 +17245,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Material",
                 "description": "Twice the nailage, so you can feel even dumber when you still end up hitting your thumb instead! CRAFT THESE IN THE 'PRODUCE' TAB IN ANVIL! "
             }),
-        new DescItemBase("CraftMat6", <DescItemModel>{
+        new BaseItemBase("CraftMat6", <DescItemModel>{
                 "internalName": "CraftMat6",
                 "displayName": "Boring Brick",
                 "sellPrice": 25,
@@ -17253,7 +17253,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Material",
                 "description": "Go get your shovel... And we'll dig a deep hole... To gain a skill level... To gain a skill level... "
             }),
-        new DescItemBase("CraftMat7", <DescItemModel>{
+        new BaseItemBase("CraftMat7", <DescItemModel>{
                 "internalName": "CraftMat7",
                 "displayName": "Chain Link",
                 "sellPrice": 40,
@@ -17261,7 +17261,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Material",
                 "description": "Better keep an eye on this or it might try to leave your inventory to go save Chain Zelda! "
             }),
-        new DescItemBase("CraftMat9", <DescItemModel>{
+        new BaseItemBase("CraftMat9", <DescItemModel>{
                 "internalName": "CraftMat9",
                 "displayName": "Leather Hide",
                 "sellPrice": 60,
@@ -17269,7 +17269,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Material",
                 "description": "I mean come on, would this really be a Fantasy MMO if it didn't have a leather material item? "
             }),
-        new DescItemBase("CraftMat8", <DescItemModel>{
+        new BaseItemBase("CraftMat8", <DescItemModel>{
                 "internalName": "CraftMat8",
                 "displayName": "Pinion Spur",
                 "sellPrice": 80,
@@ -17277,7 +17277,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Material",
                 "description": "The big one is the Spur. The puny one is the Pinion. Have fun bragging in class when you get this question right on a test. "
             }),
-        new DescItemBase("CraftMat10", <DescItemModel>{
+        new BaseItemBase("CraftMat10", <DescItemModel>{
                 "internalName": "CraftMat10",
                 "displayName": "Lugi Bracket",
                 "sellPrice": 100,
@@ -17285,7 +17285,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Material",
                 "description": "Hey look Mario! I have-a my own reference in the game! "
             }),
-        new DescItemBase("CraftMat11", <DescItemModel>{
+        new BaseItemBase("CraftMat11", <DescItemModel>{
                 "internalName": "CraftMat11",
                 "displayName": "Purple Screw",
                 "sellPrice": 120,
@@ -17293,7 +17293,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Material",
                 "description": "Having trouble unscrewing this? Just put a rubber band inbetween your screwdriver and the screw head! This is an ANVIL PRODUCTION ITEM. "
             }),
-        new DescItemBase("CraftMat12", <DescItemModel>{
+        new BaseItemBase("CraftMat12", <DescItemModel>{
                 "internalName": "CraftMat12",
                 "displayName": "Thingymabob",
                 "sellPrice": 1,
@@ -17301,7 +17301,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Material",
                 "description": "Boi-oi-oi-oi-oi-ing! This is an ANVIL PRODUCTION ITEM. "
             }),
-        new DescItemBase("CraftMat13", <DescItemModel>{
+        new BaseItemBase("CraftMat13", <DescItemModel>{
                 "internalName": "CraftMat13",
                 "displayName": "Tangled Cords",
                 "sellPrice": 1,
@@ -17309,7 +17309,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Material",
                 "description": "Real talk, I once had to untangle some cords at school, and I couldn't do it. That was 11 years ago... This is an ANVIL PRODUCTION ITEM. "
             }),
-        new DescItemBase("CraftMat14", <DescItemModel>{
+        new BaseItemBase("CraftMat14", <DescItemModel>{
                 "internalName": "CraftMat14",
                 "displayName": "PVC Pipe",
                 "sellPrice": 1,
@@ -17317,7 +17317,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Material",
                 "description": "PVC stands for Proton Volumetric Containment, hence why they're so commonly used in industrial engineering! This is an ANVIL PRODUCTION ITEM. "
             }),
-        new DescItemBase("CraftMat15", <DescItemModel>{
+        new BaseItemBase("CraftMat15", <DescItemModel>{
                 "internalName": "CraftMat15",
                 "displayName": "Filler",
                 "sellPrice": 1,
@@ -17325,7 +17325,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Material",
                 "description": "Filler text lol "
             }),
-        new DescItemBase("CraftMat16", <DescItemModel>{
+        new BaseItemBase("CraftMat16", <DescItemModel>{
                 "internalName": "CraftMat16",
                 "displayName": "Filler",
                 "sellPrice": 1,
@@ -17333,7 +17333,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Material",
                 "description": "Filler text lol "
             }),
-        new DescItemBase("CraftMat17", <DescItemModel>{
+        new BaseItemBase("CraftMat17", <DescItemModel>{
                 "internalName": "CraftMat17",
                 "displayName": "Filler",
                 "sellPrice": 1,
@@ -17341,7 +17341,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Material",
                 "description": "Filler text lol "
             }),
-        new DescItemBase("NPCtoken8", <DescItemModel>{
+        new BaseItemBase("NPCtoken8", <DescItemModel>{
                 "internalName": "NPCtoken8",
                 "displayName": "FILLER",
                 "sellPrice": 1000,
@@ -17349,7 +17349,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "eafwef weafwef! "
             }),
-        new DescItemBase("BadgeG1", <DescItemModel>{
+        new BaseItemBase("BadgeG1", <DescItemModel>{
                 "internalName": "BadgeG1",
                 "displayName": "Blunderhills NPC Completion Token",
                 "sellPrice": 30000,
@@ -17357,7 +17357,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Made up of all the tokens that you collected after completing an NPC's entire questline. "
             }),
-        new DescItemBase("BadgeG2", <DescItemModel>{
+        new BaseItemBase("BadgeG2", <DescItemModel>{
                 "internalName": "BadgeG2",
                 "displayName": "Blunder Skills Completion Token",
                 "sellPrice": 25000,
@@ -17365,7 +17365,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you mastered the art of the Mining, Smithing, and Choppin skills. "
             }),
-        new DescItemBase("BadgeG3", <DescItemModel>{
+        new BaseItemBase("BadgeG3", <DescItemModel>{
                 "internalName": "BadgeG3",
                 "displayName": "Blunderhills Misc Completion Token",
                 "sellPrice": 1,
@@ -17373,7 +17373,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you collected all the coolest and rarest items that Blunder Hills has to offer! "
             }),
-        new DescItemBase("BadgeD1", <DescItemModel>{
+        new BaseItemBase("BadgeD1", <DescItemModel>{
                 "internalName": "BadgeD1",
                 "displayName": "Yumyum Desert NPC Completion Token",
                 "sellPrice": 30000,
@@ -17381,7 +17381,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Made up of all the tokens that you collected after completing an NPC's entire questline. "
             }),
-        new DescItemBase("BadgeD2", <DescItemModel>{
+        new BaseItemBase("BadgeD2", <DescItemModel>{
                 "internalName": "BadgeD2",
                 "displayName": "Yumyum Skills Completion Token",
                 "sellPrice": 25000,
@@ -17389,7 +17389,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you mastered the art of the Fishing, Alchemy, and Catching skills. "
             }),
-        new DescItemBase("BadgeD3", <DescItemModel>{
+        new BaseItemBase("BadgeD3", <DescItemModel>{
                 "internalName": "BadgeD3",
                 "displayName": "Yumyum Misc Completion Token",
                 "sellPrice": 1,
@@ -17397,7 +17397,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you collected all the coolest and rarest items that Yumyum Desert has to offer! "
             }),
-        new DescItemBase("NPCtoken1", <DescItemModel>{
+        new BaseItemBase("NPCtoken1", <DescItemModel>{
                 "internalName": "NPCtoken1",
                 "displayName": "Easy Blunderhills NPC Token",
                 "sellPrice": 2800,
@@ -17405,7 +17405,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Made up of the tokens from all of the Blunder NPCs whose quests are easiest to complete. "
             }),
-        new DescItemBase("NPCtoken2", <DescItemModel>{
+        new BaseItemBase("NPCtoken2", <DescItemModel>{
                 "internalName": "NPCtoken2",
                 "displayName": "Med Blunderhills NPC Token",
                 "sellPrice": 6000,
@@ -17413,7 +17413,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Made up of the tokens from all of the Blunder NPCs whose quests are tough to complete. "
             }),
-        new DescItemBase("NPCtoken3", <DescItemModel>{
+        new BaseItemBase("NPCtoken3", <DescItemModel>{
                 "internalName": "NPCtoken3",
                 "displayName": "Hard Blunderhills NPC Token",
                 "sellPrice": 16000,
@@ -17421,7 +17421,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Made up of the tokens from all of the Blunder NPCs whose quests are hardest to complete. "
             }),
-        new DescItemBase("NPCtoken5", <DescItemModel>{
+        new BaseItemBase("NPCtoken5", <DescItemModel>{
                 "internalName": "NPCtoken5",
                 "displayName": "Woodsman Token",
                 "sellPrice": 700,
@@ -17429,7 +17429,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of the Woodsman's quests! Hold down to add to your token bag found in Storage Info. Open items, look at the top left. "
             }),
-        new DescItemBase("NPCtoken6", <DescItemModel>{
+        new BaseItemBase("NPCtoken6", <DescItemModel>{
                 "internalName": "NPCtoken6",
                 "displayName": "Glumlee Token",
                 "sellPrice": 700,
@@ -17437,7 +17437,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of Glumlee's quests! Hold down to add to your token bag found in Storage Info. Open items, look at the top left. "
             }),
-        new DescItemBase("NPCtoken4", <DescItemModel>{
+        new BaseItemBase("NPCtoken4", <DescItemModel>{
                 "internalName": "NPCtoken4",
                 "displayName": "Stiltzcho Token",
                 "sellPrice": 700,
@@ -17445,7 +17445,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of Stiltzcho's main quests! Hold down to add to your token bag found in Storage Info. Open items, look at the top left. "
             }),
-        new DescItemBase("NPCtoken9", <DescItemModel>{
+        new BaseItemBase("NPCtoken9", <DescItemModel>{
                 "internalName": "NPCtoken9",
                 "displayName": "Funguy Token",
                 "sellPrice": 1500,
@@ -17453,7 +17453,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of Funguy's quests! Hold down to add to your token bag found in Storage Info. Open items, look at the top left. "
             }),
-        new DescItemBase("NPCtoken10", <DescItemModel>{
+        new BaseItemBase("NPCtoken10", <DescItemModel>{
                 "internalName": "NPCtoken10",
                 "displayName": "Krunk Token",
                 "sellPrice": 1500,
@@ -17461,7 +17461,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of Krunk's quests! Hold down to add to your token bag found in Storage Info. "
             }),
-        new DescItemBase("NPCtoken11", <DescItemModel>{
+        new BaseItemBase("NPCtoken11", <DescItemModel>{
                 "internalName": "NPCtoken11",
                 "displayName": "Tiki Chief Token",
                 "sellPrice": 1500,
@@ -17469,7 +17469,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of Tiki Chief's quests! Hold down to add to your token bag found in Storage Info. "
             }),
-        new DescItemBase("NPCtoken13", <DescItemModel>{
+        new BaseItemBase("NPCtoken13", <DescItemModel>{
                 "internalName": "NPCtoken13",
                 "displayName": "Dog Bone Token",
                 "sellPrice": 4000,
@@ -17477,7 +17477,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of Dog Bone's quests! Hold down to add to your token bag found in Storage Info. "
             }),
-        new DescItemBase("NPCtoken7", <DescItemModel>{
+        new BaseItemBase("NPCtoken7", <DescItemModel>{
                 "internalName": "NPCtoken7",
                 "displayName": "Papua Piggea Token",
                 "sellPrice": 700,
@@ -17485,7 +17485,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of Papua Piggea's quests! Hold down to add to your token bag found in Storage Info. "
             }),
-        new DescItemBase("Quest9", <DescItemModel>{
+        new BaseItemBase("Quest9", <DescItemModel>{
                 "internalName": "Quest9",
                 "displayName": "Picnic Token",
                 "sellPrice": 1,
@@ -17493,7 +17493,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you were able to feed a blobulyte all day. If you bring 30 of these to the Picnic Stowaway, you'll get a Trophy! Hold down to add to your token bag "
             }),
-        new DescItemBase("NPCtoken15", <DescItemModel>{
+        new BaseItemBase("NPCtoken15", <DescItemModel>{
                 "internalName": "NPCtoken15",
                 "displayName": "TP Pete Token",
                 "sellPrice": 4000,
@@ -17501,7 +17501,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of TP Pete's quests! Hold down to add to your token bag found in Storage Info. "
             }),
-        new DescItemBase("NPCtoken12", <DescItemModel>{
+        new BaseItemBase("NPCtoken12", <DescItemModel>{
                 "internalName": "NPCtoken12",
                 "displayName": "Sproutinald Token",
                 "sellPrice": 4000,
@@ -17509,7 +17509,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of Sproutinald's quests! Hold down to add to your token bag found in Storage Info. "
             }),
-        new DescItemBase("NPCtoken14", <DescItemModel>{
+        new BaseItemBase("NPCtoken14", <DescItemModel>{
                 "internalName": "NPCtoken14",
                 "displayName": "Dazey Token",
                 "sellPrice": 4000,
@@ -17517,7 +17517,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of Dazey's quests! Hold down to add to your token bag found in Storage Info. "
             }),
-        new DescItemBase("NPCtoken16", <DescItemModel>{
+        new BaseItemBase("NPCtoken16", <DescItemModel>{
                 "internalName": "NPCtoken16",
                 "displayName": "Bandit Bob Token",
                 "sellPrice": 4000,
@@ -17525,7 +17525,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of Bandit Bob's quests! Hold down to add to your token bag found in Storage Info. "
             }),
-        new DescItemBase("NPCtoken17", <DescItemModel>{
+        new BaseItemBase("NPCtoken17", <DescItemModel>{
                 "internalName": "NPCtoken17",
                 "displayName": "Snake Jar Token",
                 "sellPrice": 4000,
@@ -17533,7 +17533,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of Snake Jar's quests! Hold down to add to your token bag found in Storage Info. "
             }),
-        new DescItemBase("NPCtoken18", <DescItemModel>{
+        new BaseItemBase("NPCtoken18", <DescItemModel>{
                 "internalName": "NPCtoken18",
                 "displayName": "Whattso Token",
                 "sellPrice": 4000,
@@ -17541,7 +17541,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of Whattso's quests! Hold down to add to your token bag found in Storage Info. "
             }),
-        new DescItemBase("NPCtoken19", <DescItemModel>{
+        new BaseItemBase("NPCtoken19", <DescItemModel>{
                 "internalName": "NPCtoken19",
                 "displayName": "Cowbo Jones Token",
                 "sellPrice": 4000,
@@ -17549,7 +17549,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of Cowbo Jones's quests! Hold down to add to your token bag found in Storage Info. "
             }),
-        new DescItemBase("NPCtoken20", <DescItemModel>{
+        new BaseItemBase("NPCtoken20", <DescItemModel>{
                 "internalName": "NPCtoken20",
                 "displayName": "Carpetiem Token",
                 "sellPrice": 4000,
@@ -17557,7 +17557,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of Carpetiem's quests! Hold down to add to your token bag found in Storage Info. "
             }),
-        new DescItemBase("NPCtoken21", <DescItemModel>{
+        new BaseItemBase("NPCtoken21", <DescItemModel>{
                 "internalName": "NPCtoken21",
                 "displayName": "Goldric Token",
                 "sellPrice": 4000,
@@ -17565,7 +17565,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of Goldric's quests! Hold down to add to your token bag found in Storage Info. "
             }),
-        new DescItemBase("NPCtoken27", <DescItemModel>{
+        new BaseItemBase("NPCtoken27", <DescItemModel>{
                 "internalName": "NPCtoken27",
                 "displayName": "Cattleprod Token",
                 "sellPrice": 155000,
@@ -17573,7 +17573,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that Cattleprod is a little brat of a pig... like, he seriously went and SOLD his own token to the store??? "
             }),
-        new DescItemBase("NPCtoken22", <DescItemModel>{
+        new BaseItemBase("NPCtoken22", <DescItemModel>{
                 "internalName": "NPCtoken22",
                 "displayName": "Fishpaste Token",
                 "sellPrice": 4000,
@@ -17581,7 +17581,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of Fishpaste's quests! Hold down to add to your token bag found in Storage Info. "
             }),
-        new DescItemBase("NPCtoken24", <DescItemModel>{
+        new BaseItemBase("NPCtoken24", <DescItemModel>{
                 "internalName": "NPCtoken24",
                 "displayName": "Loominadi Token",
                 "sellPrice": 4000,
@@ -17589,7 +17589,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of Loominadi's quests! Hold down to add to your token bag found in Storage Info. "
             }),
-        new DescItemBase("NPCtoken25", <DescItemModel>{
+        new BaseItemBase("NPCtoken25", <DescItemModel>{
                 "internalName": "NPCtoken25",
                 "displayName": "Djonnut Token",
                 "sellPrice": 4000,
@@ -17597,7 +17597,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of Djonnut's quests! Hold down to add to your token bag found in Storage Info. "
             }),
-        new DescItemBase("NPCtoken26", <DescItemModel>{
+        new BaseItemBase("NPCtoken26", <DescItemModel>{
                 "internalName": "NPCtoken26",
                 "displayName": "Scubidew Token",
                 "sellPrice": 4000,
@@ -17605,7 +17605,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of Scubidew's quests! Well, most of them, at least. Hold down to add to your token pouch found in Storage Info. "
             }),
-        new DescItemBase("NPCtoken23", <DescItemModel>{
+        new BaseItemBase("NPCtoken23", <DescItemModel>{
                 "internalName": "NPCtoken23",
                 "displayName": "Wellington Token",
                 "sellPrice": 4000,
@@ -17613,7 +17613,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of Wellington's quests! Hold down to add to your token bag found in Storage Info. "
             }),
-        new DescItemBase("NPCtoken28", <DescItemModel>{
+        new BaseItemBase("NPCtoken28", <DescItemModel>{
                 "internalName": "NPCtoken28",
                 "displayName": "Easy Yumyum Dez NPC Token",
                 "sellPrice": 2800,
@@ -17621,7 +17621,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Made up of the tokens from all of the Yumyum NPCs whose quests are easiest to complete. "
             }),
-        new DescItemBase("NPCtoken29", <DescItemModel>{
+        new BaseItemBase("NPCtoken29", <DescItemModel>{
                 "internalName": "NPCtoken29",
                 "displayName": "Med Yumyum Dez NPC Token",
                 "sellPrice": 6000,
@@ -17629,7 +17629,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Made up of the tokens from all of the Yumyum NPCs whose quests are tough to complete. "
             }),
-        new DescItemBase("NPCtoken30", <DescItemModel>{
+        new BaseItemBase("NPCtoken30", <DescItemModel>{
                 "internalName": "NPCtoken30",
                 "displayName": "Hard Yumyum Dez NPC Token",
                 "sellPrice": 16000,
@@ -17637,7 +17637,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Made up of the tokens from all of the Yumyum NPCs whose quests are hardest to complete. "
             }),
-        new DescItemBase("NPCtoken31", <DescItemModel>{
+        new BaseItemBase("NPCtoken31", <DescItemModel>{
                 "internalName": "NPCtoken31",
                 "displayName": "Lonely Hunter Token",
                 "sellPrice": 4000,
@@ -17645,7 +17645,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of the Lonely Hunter's quests! Hold down to add to your token bag, found in Storage Info. "
             }),
-        new DescItemBase("NPCtoken32", <DescItemModel>{
+        new BaseItemBase("NPCtoken32", <DescItemModel>{
                 "internalName": "NPCtoken32",
                 "displayName": "Hoggi Token",
                 "sellPrice": 4000,
@@ -17653,7 +17653,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of Hoggindaz's quests! Hold down to add to your token bag, found in Storage Info. "
             }),
-        new DescItemBase("NPCtoken33", <DescItemModel>{
+        new BaseItemBase("NPCtoken33", <DescItemModel>{
                 "internalName": "NPCtoken33",
                 "displayName": "Bellows Token",
                 "sellPrice": 4000,
@@ -17661,7 +17661,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of Bellows' quests! Hold down to add to your token bag, found in Storage Info. "
             }),
-        new DescItemBase("NPCtoken34", <DescItemModel>{
+        new BaseItemBase("NPCtoken34", <DescItemModel>{
                 "internalName": "NPCtoken34",
                 "displayName": "Snouts Token",
                 "sellPrice": 4000,
@@ -17669,7 +17669,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of Snouts' quests! Hold down to add to your token bag, found in Storage Info. "
             }),
-        new DescItemBase("NPCtoken35", <DescItemModel>{
+        new BaseItemBase("NPCtoken35", <DescItemModel>{
                 "internalName": "NPCtoken35",
                 "displayName": "Shuvelle Token",
                 "sellPrice": 4000,
@@ -17677,7 +17677,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of Shuvelle's quests! Hold down to add to your token bag, found in Storage Info. "
             }),
-        new DescItemBase("NPCtoken36", <DescItemModel>{
+        new BaseItemBase("NPCtoken36", <DescItemModel>{
                 "internalName": "NPCtoken36",
                 "displayName": "Yondergreen Token",
                 "sellPrice": 4000,
@@ -17685,7 +17685,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of Yondergreen's quests! Hold down to add to your token bag, found in Storage Info. "
             }),
-        new DescItemBase("NPCtoken37", <DescItemModel>{
+        new BaseItemBase("NPCtoken37", <DescItemModel>{
                 "internalName": "NPCtoken37",
                 "displayName": "Bill Brr Token",
                 "sellPrice": 4000,
@@ -17693,7 +17693,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of Bill Brr's quests! Hold down to add to your token bag, found in Storage Info. "
             }),
-        new DescItemBase("NPCtoken38", <DescItemModel>{
+        new BaseItemBase("NPCtoken38", <DescItemModel>{
                 "internalName": "NPCtoken38",
                 "displayName": "Crystalswine Token",
                 "sellPrice": 4000,
@@ -17701,7 +17701,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you completed all of Crystalswine's quests! Hold down to add to your token bag, found in Storage Info. "
             }),
-        new DescItemBase("NPCtoken39", <DescItemModel>{
+        new BaseItemBase("NPCtoken39", <DescItemModel>{
                 "internalName": "NPCtoken39",
                 "displayName": "Easy FB Tundra NPC Token",
                 "sellPrice": 2800,
@@ -17709,7 +17709,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Made up of the tokens from all of the Tundra NPCs whose quests are easiest to complete. "
             }),
-        new DescItemBase("NPCtoken40", <DescItemModel>{
+        new BaseItemBase("NPCtoken40", <DescItemModel>{
                 "internalName": "NPCtoken40",
                 "displayName": "Med FB Tundra NPC Token",
                 "sellPrice": 6000,
@@ -17717,7 +17717,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Made up of the tokens from all of the Tundra NPCs whose quests are tough to complete. "
             }),
-        new DescItemBase("NPCtoken41", <DescItemModel>{
+        new BaseItemBase("NPCtoken41", <DescItemModel>{
                 "internalName": "NPCtoken41",
                 "displayName": "Hard FB Tundra NPC Token",
                 "sellPrice": 16000,
@@ -17725,7 +17725,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Made up of the tokens from all of the Tundra NPCs whose quests are hardest to complete. "
             }),
-        new DescItemBase("BadgeI1", <DescItemModel>{
+        new BaseItemBase("BadgeI1", <DescItemModel>{
                 "internalName": "BadgeI1",
                 "displayName": "Tundra NPC Completion Token",
                 "sellPrice": 30000,
@@ -17733,7 +17733,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Made up of all the tokens that you collected after completing an NPC's entire questline. "
             }),
-        new DescItemBase("BadgeI2", <DescItemModel>{
+        new BaseItemBase("BadgeI2", <DescItemModel>{
                 "internalName": "BadgeI2",
                 "displayName": "Tundra Skills Completion Token",
                 "sellPrice": 25000,
@@ -17741,7 +17741,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you mastered the art of the Trapping, Construction, and Worship skills. "
             }),
-        new DescItemBase("BadgeI3", <DescItemModel>{
+        new BaseItemBase("BadgeI3", <DescItemModel>{
                 "internalName": "BadgeI3",
                 "displayName": "Tundra Misc Completion Token",
                 "sellPrice": 1,
@@ -17749,7 +17749,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "Proof that you collected all the coolest and rarest items that Frostbite Tundra has to offer! "
             }),
-        new DescItemBase("EquipmentKeychain0", <KeychainItemModel>{
+        new BaseItemBase("EquipmentKeychain0", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain0",
                 "displayName": "Simple Key Chain",
                 "sellPrice": 200,
@@ -17768,7 +17768,7 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
                 "Upgrade_Slots_Left": 0
             }),
-        new DescItemBase("EquipmentKeychain1", <KeychainItemModel>{
+        new BaseItemBase("EquipmentKeychain1", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain1",
                 "displayName": "Leafy Chain",
                 "sellPrice": 200,
@@ -17787,7 +17787,7 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
                 "Upgrade_Slots_Left": 0
             }),
-        new DescItemBase("EquipmentKeychain2", <KeychainItemModel>{
+        new BaseItemBase("EquipmentKeychain2", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain2",
                 "displayName": "Red Sneaker Chain",
                 "sellPrice": 200,
@@ -17806,7 +17806,7 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
                 "Upgrade_Slots_Left": 0
             }),
-        new DescItemBase("EquipmentKeychain3", <KeychainItemModel>{
+        new BaseItemBase("EquipmentKeychain3", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain3",
                 "displayName": "Wartooth Chain",
                 "sellPrice": 200,
@@ -17825,7 +17825,7 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
                 "Upgrade_Slots_Left": 0
             }),
-        new DescItemBase("EquipmentKeychain4", <KeychainItemModel>{
+        new BaseItemBase("EquipmentKeychain4", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain4",
                 "displayName": "8 Ball Chain",
                 "sellPrice": 200,
@@ -17844,7 +17844,7 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
                 "Upgrade_Slots_Left": 0
             }),
-        new DescItemBase("EquipmentKeychain5", <KeychainItemModel>{
+        new BaseItemBase("EquipmentKeychain5", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain5",
                 "displayName": "Piggy Chain",
                 "sellPrice": 200,
@@ -17863,7 +17863,7 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
                 "Upgrade_Slots_Left": 0
             }),
-        new DescItemBase("EquipmentKeychain6", <KeychainItemModel>{
+        new BaseItemBase("EquipmentKeychain6", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain6",
                 "displayName": "Dumbphone Chain",
                 "sellPrice": 200,
@@ -17882,7 +17882,7 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
                 "Upgrade_Slots_Left": 0
             }),
-        new DescItemBase("EquipmentKeychain7", <KeychainItemModel>{
+        new BaseItemBase("EquipmentKeychain7", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain7",
                 "displayName": "Horn Chain",
                 "sellPrice": 200,
@@ -17901,7 +17901,7 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
                 "Upgrade_Slots_Left": 0
             }),
-        new DescItemBase("EquipmentKeychain8", <KeychainItemModel>{
+        new BaseItemBase("EquipmentKeychain8", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain8",
                 "displayName": "Rustic Key Chain",
                 "sellPrice": 200,
@@ -17920,7 +17920,7 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
                 "Upgrade_Slots_Left": 0
             }),
-        new DescItemBase("EquipmentKeychain9", <KeychainItemModel>{
+        new BaseItemBase("EquipmentKeychain9", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain9",
                 "displayName": "Taco Chain",
                 "sellPrice": 200,
@@ -17939,7 +17939,7 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
                 "Upgrade_Slots_Left": 0
             }),
-        new DescItemBase("EquipmentKeychain10", <KeychainItemModel>{
+        new BaseItemBase("EquipmentKeychain10", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain10",
                 "displayName": "Cactus Chain",
                 "sellPrice": 200,
@@ -17958,7 +17958,7 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
                 "Upgrade_Slots_Left": 0
             }),
-        new DescItemBase("EquipmentKeychain11", <KeychainItemModel>{
+        new BaseItemBase("EquipmentKeychain11", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain11",
                 "displayName": "Relic Chain",
                 "sellPrice": 200,
@@ -17977,7 +17977,7 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
                 "Upgrade_Slots_Left": 0
             }),
-        new DescItemBase("EquipmentKeychain12", <KeychainItemModel>{
+        new BaseItemBase("EquipmentKeychain12", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain12",
                 "displayName": "Balloon Dog Chain",
                 "sellPrice": 200,
@@ -17996,7 +17996,7 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
                 "Upgrade_Slots_Left": 0
             }),
-        new DescItemBase("EquipmentKeychain13", <KeychainItemModel>{
+        new BaseItemBase("EquipmentKeychain13", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain13",
                 "displayName": "Frozen Tart Chain",
                 "sellPrice": 200,
@@ -18015,7 +18015,7 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
                 "Upgrade_Slots_Left": 0
             }),
-        new DescItemBase("EquipmentKeychain14", <KeychainItemModel>{
+        new BaseItemBase("EquipmentKeychain14", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain14",
                 "displayName": "Whatamelon Chain",
                 "sellPrice": 200,
@@ -18034,7 +18034,7 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
                 "Upgrade_Slots_Left": 0
             }),
-        new DescItemBase("EquipmentKeychain15", <KeychainItemModel>{
+        new BaseItemBase("EquipmentKeychain15", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain15",
                 "displayName": "9 Ball Chain",
                 "sellPrice": 200,
@@ -18053,7 +18053,7 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
                 "Upgrade_Slots_Left": 0
             }),
-        new DescItemBase("EquipmentKeychain16", <KeychainItemModel>{
+        new BaseItemBase("EquipmentKeychain16", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain16",
                 "displayName": "Pincer Hand Chain",
                 "sellPrice": 200,
@@ -18072,7 +18072,7 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
                 "Upgrade_Slots_Left": 0
             }),
-        new DescItemBase("EquipmentKeychain17", <KeychainItemModel>{
+        new BaseItemBase("EquipmentKeychain17", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain17",
                 "displayName": "Gilded Key Chain",
                 "sellPrice": 200,
@@ -18091,7 +18091,7 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
                 "Upgrade_Slots_Left": 0
             }),
-        new DescItemBase("EquipmentKeychain18", <KeychainItemModel>{
+        new BaseItemBase("EquipmentKeychain18", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain18",
                 "displayName": "Sushi Chain",
                 "sellPrice": 200,
@@ -18110,7 +18110,7 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
                 "Upgrade_Slots_Left": 0
             }),
-        new DescItemBase("EquipmentKeychain19", <KeychainItemModel>{
+        new BaseItemBase("EquipmentKeychain19", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain19",
                 "displayName": "Time Candy Chain",
                 "sellPrice": 200,
@@ -18129,7 +18129,7 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
                 "Upgrade_Slots_Left": 0
             }),
-        new DescItemBase("EquipmentKeychain20", <KeychainItemModel>{
+        new BaseItemBase("EquipmentKeychain20", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain20",
                 "displayName": "Star Blobulyte Galaxy Chain",
                 "sellPrice": 200,
@@ -18148,7 +18148,7 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
                 "Upgrade_Slots_Left": 0
             }),
-        new DescItemBase("EquipmentKeychain21", <KeychainItemModel>{
+        new BaseItemBase("EquipmentKeychain21", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain21",
                 "displayName": "Mmm Donut Chain",
                 "sellPrice": 200,
@@ -18167,7 +18167,7 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
                 "Upgrade_Slots_Left": 0
             }),
-        new DescItemBase("EquipmentKeychain22", <KeychainItemModel>{
+        new BaseItemBase("EquipmentKeychain22", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain22",
                 "displayName": "Negative 7 Chain",
                 "sellPrice": 200,
@@ -18186,7 +18186,7 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
                 "Upgrade_Slots_Left": 0
             }),
-        new DescItemBase("EquipmentKeychain23", <KeychainItemModel>{
+        new BaseItemBase("EquipmentKeychain23", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain23",
                 "displayName": "Diamond Honker",
                 "sellPrice": 200,
@@ -18205,7 +18205,7 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
                 "Upgrade_Slots_Left": 0
             }),
-        new DescItemBase("EquipmentKeychain24", <KeychainItemModel>{
+        new BaseItemBase("EquipmentKeychain24", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain24",
                 "displayName": "BobGoldPickle",
                 "sellPrice": 200,
@@ -18224,7 +18224,7 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
                 "Upgrade_Slots_Left": 0
             }),
-        new DescItemBase("CardPack1", <DescItemModel>{
+        new BaseItemBase("CardPack1", <DescItemModel>{
                 "internalName": "CardPack1",
                 "displayName": "Newbie Card Pack",
                 "sellPrice": 1,
@@ -18232,7 +18232,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Card Pack",
                 "description": "Hold down to open the pack! The cards drop on the ground, make sure to pick them up!! "
             }),
-        new DescItemBase("CardPack2", <DescItemModel>{
+        new BaseItemBase("CardPack2", <DescItemModel>{
                 "internalName": "CardPack2",
                 "displayName": "Ancient Card Pack",
                 "sellPrice": 1,
@@ -18240,7 +18240,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Card Pack",
                 "description": "Hold down to open the pack! The cards drop on the ground, make sure to pick them up!! "
             }),
-        new DescItemBase("CardPack3", <DescItemModel>{
+        new BaseItemBase("CardPack3", <DescItemModel>{
                 "internalName": "CardPack3",
                 "displayName": "Eternal Card Pack",
                 "sellPrice": 1,
@@ -18248,7 +18248,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Card Pack",
                 "description": "Hold down to open the pack! The cards drop on the ground, make sure to pick them up!! "
             }),
-        new DescItemBase("CardPack4", <DescItemModel>{
+        new BaseItemBase("CardPack4", <DescItemModel>{
                 "internalName": "CardPack4",
                 "displayName": "Dungeon Card Pack",
                 "sellPrice": 1,
@@ -18256,7 +18256,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Card Pack",
                 "description": "Hold down to open the pack! The cards drop on the ground, make sure to pick them up!! "
             }),
-        new DescItemBase("CardPack5", <DescItemModel>{
+        new BaseItemBase("CardPack5", <DescItemModel>{
                 "internalName": "CardPack5",
                 "displayName": "Galaxy Card Pack",
                 "sellPrice": 1,
@@ -18264,7 +18264,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Card Pack",
                 "description": "Hold down to open the pack! The cards drop on the ground, make sure to pick them up!! "
             }),
-        new DescItemBase("FoodHealth1d", <ACItemModel>{
+        new BaseItemBase("FoodHealth1d", <ACItemModel>{
                 "internalName": "FoodHealth1d",
                 "displayName": "Nomwich",
                 "sellPrice": 3,
@@ -18272,7 +18272,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Food",
                 "description": "Auto-Used when your health goes below 50%. Restores 20 HP. Has a 30 second Cooldown. "
             }),
-        new DescItemBase("FoodHealth2d", <ACItemModel>{
+        new BaseItemBase("FoodHealth2d", <ACItemModel>{
                 "internalName": "FoodHealth2d",
                 "displayName": "Hotdog",
                 "sellPrice": 7,
@@ -18280,7 +18280,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Food",
                 "description": "Auto-Used when your health goes below 50%. Restores 20 HP. Has a 30 second Cooldown. "
             }),
-        new DescItemBase("FoodHealth3d", <ACItemModel>{
+        new BaseItemBase("FoodHealth3d", <ACItemModel>{
                 "internalName": "FoodHealth3d",
                 "displayName": "Big Cake",
                 "sellPrice": 15,
@@ -18288,7 +18288,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Food",
                 "description": "Auto-Used when your health goes below 50%. Restores 20 HP. Has a 30 second Cooldown. "
             }),
-        new DescItemBase("DungWeaponPunchA1", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchA1", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchA1",
                 "displayName": "Boxing Gloves",
                 "sellPrice": 1,
@@ -18309,7 +18309,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchA2", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchA2", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchA2",
                 "displayName": "Boxing Gloves",
                 "sellPrice": 1,
@@ -18330,7 +18330,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchA3", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchA3", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchA3",
                 "displayName": "Boxing Gloves",
                 "sellPrice": 1,
@@ -18351,7 +18351,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchA4", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchA4", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchA4",
                 "displayName": "Boxing Gloves",
                 "sellPrice": 1,
@@ -18372,7 +18372,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchA5", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchA5", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchA5",
                 "displayName": "Boxing Gloves",
                 "sellPrice": 1,
@@ -18393,7 +18393,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchB1", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchB1", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchB1",
                 "displayName": "The Stingers",
                 "sellPrice": 1,
@@ -18414,7 +18414,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchB2", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchB2", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchB2",
                 "displayName": "The Stingers",
                 "sellPrice": 1,
@@ -18435,7 +18435,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchB3", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchB3", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchB3",
                 "displayName": "The Stingers",
                 "sellPrice": 1,
@@ -18456,7 +18456,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchB4", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchB4", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchB4",
                 "displayName": "The Stingers",
                 "sellPrice": 1,
@@ -18477,7 +18477,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchB5", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchB5", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchB5",
                 "displayName": "The Stingers",
                 "sellPrice": 1,
@@ -18498,7 +18498,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchC1", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchC1", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchC1",
                 "displayName": "Bandage Wraps",
                 "sellPrice": 1,
@@ -18519,7 +18519,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 7,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchC2", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchC2", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchC2",
                 "displayName": "Bandage Wraps",
                 "sellPrice": 1,
@@ -18540,7 +18540,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 7,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchC3", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchC3", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchC3",
                 "displayName": "Bandage Wraps",
                 "sellPrice": 1,
@@ -18561,7 +18561,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 7,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchC4", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchC4", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchC4",
                 "displayName": "Bandage Wraps",
                 "sellPrice": 1,
@@ -18582,7 +18582,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 7,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchC5", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchC5", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchC5",
                 "displayName": "Bandage Wraps",
                 "sellPrice": 1,
@@ -18603,7 +18603,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 7,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchD1", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchD1", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchD1",
                 "displayName": "Uninflated Glove",
                 "sellPrice": 1,
@@ -18624,7 +18624,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 8,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchD2", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchD2", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchD2",
                 "displayName": "Uninflated Glove",
                 "sellPrice": 1,
@@ -18645,7 +18645,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 8,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchD3", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchD3", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchD3",
                 "displayName": "Uninflated Glove",
                 "sellPrice": 1,
@@ -18666,7 +18666,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 8,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchD4", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchD4", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchD4",
                 "displayName": "Uninflated Glove",
                 "sellPrice": 1,
@@ -18687,7 +18687,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 8,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchD5", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchD5", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchD5",
                 "displayName": "Uninflated Glove",
                 "sellPrice": 1,
@@ -18708,7 +18708,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 8,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchE1", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchE1", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchE1",
                 "displayName": "Eclectic Ordeal",
                 "sellPrice": 1,
@@ -18729,7 +18729,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 9,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchE2", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchE2", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchE2",
                 "displayName": "Eclectic Ordeal",
                 "sellPrice": 1,
@@ -18750,7 +18750,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 9,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchE3", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchE3", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchE3",
                 "displayName": "Eclectic Ordeal",
                 "sellPrice": 1,
@@ -18771,7 +18771,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 9,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchE4", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchE4", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchE4",
                 "displayName": "Eclectic Ordeal",
                 "sellPrice": 1,
@@ -18792,7 +18792,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 9,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchE5", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchE5", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchE5",
                 "displayName": "Eclectic Ordeal",
                 "sellPrice": 1,
@@ -18813,7 +18813,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 9,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchF1", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchF1", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchF1",
                 "displayName": "Eclectic Ordeal",
                 "sellPrice": 1,
@@ -18834,7 +18834,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 10,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchF2", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchF2", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchF2",
                 "displayName": "Eclectic Ordeal",
                 "sellPrice": 1,
@@ -18855,7 +18855,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 10,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchF3", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchF3", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchF3",
                 "displayName": "Eclectic Ordeal",
                 "sellPrice": 1,
@@ -18876,7 +18876,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 10,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchF4", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchF4", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchF4",
                 "displayName": "Eclectic Ordeal",
                 "sellPrice": 1,
@@ -18897,7 +18897,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 10,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponPunchF5", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponPunchF5", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchF5",
                 "displayName": "Eclectic Ordeal",
                 "sellPrice": 1,
@@ -18918,7 +18918,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 10,
                 "Reach": 55
             }),
-        new DescItemBase("DungWeaponSwordA1", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordA1", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordA1",
                 "displayName": "Wooden Spear",
                 "sellPrice": 1,
@@ -18939,7 +18939,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 70
             }),
-        new DescItemBase("DungWeaponSwordA2", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordA2", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordA2",
                 "displayName": "Wooden Spear",
                 "sellPrice": 1,
@@ -18960,7 +18960,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 70
             }),
-        new DescItemBase("DungWeaponSwordA3", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordA3", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordA3",
                 "displayName": "Wooden Spear",
                 "sellPrice": 1,
@@ -18981,7 +18981,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 70
             }),
-        new DescItemBase("DungWeaponSwordA4", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordA4", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordA4",
                 "displayName": "Wooden Spear",
                 "sellPrice": 1,
@@ -19002,7 +19002,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 70
             }),
-        new DescItemBase("DungWeaponSwordA5", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordA5", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordA5",
                 "displayName": "Wooden Spear",
                 "sellPrice": 1,
@@ -19023,7 +19023,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 70
             }),
-        new DescItemBase("DungWeaponSwordB1", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordB1", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordB1",
                 "displayName": "Steel Axe",
                 "sellPrice": 1,
@@ -19044,7 +19044,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 62
             }),
-        new DescItemBase("DungWeaponSwordB2", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordB2", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordB2",
                 "displayName": "Steel Axe",
                 "sellPrice": 1,
@@ -19065,7 +19065,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 62
             }),
-        new DescItemBase("DungWeaponSwordB3", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordB3", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordB3",
                 "displayName": "Steel Axe",
                 "sellPrice": 1,
@@ -19086,7 +19086,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 62
             }),
-        new DescItemBase("DungWeaponSwordB4", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordB4", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordB4",
                 "displayName": "Steel Axe",
                 "sellPrice": 1,
@@ -19107,7 +19107,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 62
             }),
-        new DescItemBase("DungWeaponSwordB5", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordB5", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordB5",
                 "displayName": "Steel Axe",
                 "sellPrice": 1,
@@ -19128,7 +19128,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 62
             }),
-        new DescItemBase("DungWeaponSwordC1", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordC1", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordC1",
                 "displayName": "Royal Bayonet",
                 "sellPrice": 1,
@@ -19149,7 +19149,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 95
             }),
-        new DescItemBase("DungWeaponSwordC2", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordC2", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordC2",
                 "displayName": "Royal Bayonet",
                 "sellPrice": 1,
@@ -19170,7 +19170,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 95
             }),
-        new DescItemBase("DungWeaponSwordC3", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordC3", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordC3",
                 "displayName": "Royal Bayonet",
                 "sellPrice": 1,
@@ -19191,7 +19191,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 95
             }),
-        new DescItemBase("DungWeaponSwordC4", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordC4", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordC4",
                 "displayName": "Royal Bayonet",
                 "sellPrice": 1,
@@ -19212,7 +19212,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 95
             }),
-        new DescItemBase("DungWeaponSwordC5", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordC5", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordC5",
                 "displayName": "Royal Bayonet",
                 "sellPrice": 1,
@@ -19233,7 +19233,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 95
             }),
-        new DescItemBase("DungWeaponSwordD1", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordD1", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordD1",
                 "displayName": "Enforced Slasher",
                 "sellPrice": 1,
@@ -19254,7 +19254,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 80
             }),
-        new DescItemBase("DungWeaponSwordD2", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordD2", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordD2",
                 "displayName": "Enforced Slasher",
                 "sellPrice": 1,
@@ -19275,7 +19275,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 80
             }),
-        new DescItemBase("DungWeaponSwordD3", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordD3", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordD3",
                 "displayName": "Enforced Slasher",
                 "sellPrice": 1,
@@ -19296,7 +19296,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 80
             }),
-        new DescItemBase("DungWeaponSwordD4", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordD4", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordD4",
                 "displayName": "Enforced Slasher",
                 "sellPrice": 1,
@@ -19317,7 +19317,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 80
             }),
-        new DescItemBase("DungWeaponSwordD5", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordD5", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordD5",
                 "displayName": "Enforced Slasher",
                 "sellPrice": 1,
@@ -19338,7 +19338,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 80
             }),
-        new DescItemBase("DungWeaponSwordE1", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordE1", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordE1",
                 "displayName": "The Ice Breaker",
                 "sellPrice": 1,
@@ -19359,7 +19359,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 76
             }),
-        new DescItemBase("DungWeaponSwordE2", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordE2", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordE2",
                 "displayName": "The Ice Breaker",
                 "sellPrice": 1,
@@ -19380,7 +19380,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 76
             }),
-        new DescItemBase("DungWeaponSwordE3", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordE3", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordE3",
                 "displayName": "The Ice Breaker",
                 "sellPrice": 1,
@@ -19401,7 +19401,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 76
             }),
-        new DescItemBase("DungWeaponSwordE4", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordE4", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordE4",
                 "displayName": "The Ice Breaker",
                 "sellPrice": 1,
@@ -19422,7 +19422,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 76
             }),
-        new DescItemBase("DungWeaponSwordE5", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordE5", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordE5",
                 "displayName": "The Ice Breaker",
                 "sellPrice": 1,
@@ -19443,7 +19443,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 76
             }),
-        new DescItemBase("DungWeaponSwordF1", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordF1", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordF1",
                 "displayName": "Deuscythe",
                 "sellPrice": 1,
@@ -19464,7 +19464,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 88
             }),
-        new DescItemBase("DungWeaponSwordF2", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordF2", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordF2",
                 "displayName": "Deuscythe",
                 "sellPrice": 1,
@@ -19485,7 +19485,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 88
             }),
-        new DescItemBase("DungWeaponSwordF3", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordF3", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordF3",
                 "displayName": "Deuscythe",
                 "sellPrice": 1,
@@ -19506,7 +19506,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 88
             }),
-        new DescItemBase("DungWeaponSwordF4", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordF4", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordF4",
                 "displayName": "Deuscythe",
                 "sellPrice": 1,
@@ -19527,7 +19527,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 88
             }),
-        new DescItemBase("DungWeaponSwordF5", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSwordF5", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordF5",
                 "displayName": "Deuscythe",
                 "sellPrice": 1,
@@ -19548,7 +19548,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 88
             }),
-        new DescItemBase("DungWeaponBowA1", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowA1", <WeaponItemModel>{
                 "internalName": "DungWeaponBowA1",
                 "displayName": "Wooden Bow",
                 "sellPrice": 1,
@@ -19569,7 +19569,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 150
             }),
-        new DescItemBase("DungWeaponBowA2", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowA2", <WeaponItemModel>{
                 "internalName": "DungWeaponBowA2",
                 "displayName": "Wooden Bow",
                 "sellPrice": 1,
@@ -19590,7 +19590,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 150
             }),
-        new DescItemBase("DungWeaponBowA3", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowA3", <WeaponItemModel>{
                 "internalName": "DungWeaponBowA3",
                 "displayName": "Wooden Bow",
                 "sellPrice": 1,
@@ -19611,7 +19611,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 150
             }),
-        new DescItemBase("DungWeaponBowA4", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowA4", <WeaponItemModel>{
                 "internalName": "DungWeaponBowA4",
                 "displayName": "Wooden Bow",
                 "sellPrice": 1,
@@ -19632,7 +19632,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 150
             }),
-        new DescItemBase("DungWeaponBowA5", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowA5", <WeaponItemModel>{
                 "internalName": "DungWeaponBowA5",
                 "displayName": "Wooden Bow",
                 "sellPrice": 1,
@@ -19653,7 +19653,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 150
             }),
-        new DescItemBase("DungWeaponBowB1", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowB1", <WeaponItemModel>{
                 "internalName": "DungWeaponBowB1",
                 "displayName": "Birch Longbow",
                 "sellPrice": 1,
@@ -19674,7 +19674,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 170
             }),
-        new DescItemBase("DungWeaponBowB2", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowB2", <WeaponItemModel>{
                 "internalName": "DungWeaponBowB2",
                 "displayName": "Birch Longbow",
                 "sellPrice": 1,
@@ -19695,7 +19695,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 170
             }),
-        new DescItemBase("DungWeaponBowB3", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowB3", <WeaponItemModel>{
                 "internalName": "DungWeaponBowB3",
                 "displayName": "Birch Longbow",
                 "sellPrice": 1,
@@ -19716,7 +19716,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 170
             }),
-        new DescItemBase("DungWeaponBowB4", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowB4", <WeaponItemModel>{
                 "internalName": "DungWeaponBowB4",
                 "displayName": "Birch Longbow",
                 "sellPrice": 1,
@@ -19737,7 +19737,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 170
             }),
-        new DescItemBase("DungWeaponBowB5", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowB5", <WeaponItemModel>{
                 "internalName": "DungWeaponBowB5",
                 "displayName": "Birch Longbow",
                 "sellPrice": 1,
@@ -19758,7 +19758,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 170
             }),
-        new DescItemBase("DungWeaponBowC1", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowC1", <WeaponItemModel>{
                 "internalName": "DungWeaponBowC1",
                 "displayName": "Spiked Menace",
                 "sellPrice": 1,
@@ -19779,7 +19779,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 175
             }),
-        new DescItemBase("DungWeaponBowC2", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowC2", <WeaponItemModel>{
                 "internalName": "DungWeaponBowC2",
                 "displayName": "Spiked Menace",
                 "sellPrice": 1,
@@ -19800,7 +19800,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 175
             }),
-        new DescItemBase("DungWeaponBowC3", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowC3", <WeaponItemModel>{
                 "internalName": "DungWeaponBowC3",
                 "displayName": "Spiked Menace",
                 "sellPrice": 1,
@@ -19821,7 +19821,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 175
             }),
-        new DescItemBase("DungWeaponBowC4", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowC4", <WeaponItemModel>{
                 "internalName": "DungWeaponBowC4",
                 "displayName": "Spiked Menace",
                 "sellPrice": 1,
@@ -19842,7 +19842,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 175
             }),
-        new DescItemBase("DungWeaponBowC5", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowC5", <WeaponItemModel>{
                 "internalName": "DungWeaponBowC5",
                 "displayName": "Spiked Menace",
                 "sellPrice": 1,
@@ -19863,7 +19863,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 175
             }),
-        new DescItemBase("DungWeaponBowD1", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowD1", <WeaponItemModel>{
                 "internalName": "DungWeaponBowD1",
                 "displayName": "Pharoah Bow",
                 "sellPrice": 1,
@@ -19884,7 +19884,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 200
             }),
-        new DescItemBase("DungWeaponBowD2", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowD2", <WeaponItemModel>{
                 "internalName": "DungWeaponBowD2",
                 "displayName": "Pharoah Bow",
                 "sellPrice": 1,
@@ -19905,7 +19905,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 200
             }),
-        new DescItemBase("DungWeaponBowD3", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowD3", <WeaponItemModel>{
                 "internalName": "DungWeaponBowD3",
                 "displayName": "Pharoah Bow",
                 "sellPrice": 1,
@@ -19926,7 +19926,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 200
             }),
-        new DescItemBase("DungWeaponBowD4", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowD4", <WeaponItemModel>{
                 "internalName": "DungWeaponBowD4",
                 "displayName": "Pharoah Bow",
                 "sellPrice": 1,
@@ -19947,7 +19947,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 200
             }),
-        new DescItemBase("DungWeaponBowD5", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowD5", <WeaponItemModel>{
                 "internalName": "DungWeaponBowD5",
                 "displayName": "Pharoah Bow",
                 "sellPrice": 1,
@@ -19968,7 +19968,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 200
             }),
-        new DescItemBase("DungWeaponBowE1", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowE1", <WeaponItemModel>{
                 "internalName": "DungWeaponBowE1",
                 "displayName": "Blizzard Bow",
                 "sellPrice": 1,
@@ -19989,7 +19989,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 205
             }),
-        new DescItemBase("DungWeaponBowE2", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowE2", <WeaponItemModel>{
                 "internalName": "DungWeaponBowE2",
                 "displayName": "Blizzard Bow",
                 "sellPrice": 1,
@@ -20010,7 +20010,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 205
             }),
-        new DescItemBase("DungWeaponBowE3", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowE3", <WeaponItemModel>{
                 "internalName": "DungWeaponBowE3",
                 "displayName": "Blizzard Bow",
                 "sellPrice": 1,
@@ -20031,7 +20031,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 205
             }),
-        new DescItemBase("DungWeaponBowE4", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowE4", <WeaponItemModel>{
                 "internalName": "DungWeaponBowE4",
                 "displayName": "Blizzard Bow",
                 "sellPrice": 1,
@@ -20052,7 +20052,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 205
             }),
-        new DescItemBase("DungWeaponBowE5", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowE5", <WeaponItemModel>{
                 "internalName": "DungWeaponBowE5",
                 "displayName": "Blizzard Bow",
                 "sellPrice": 1,
@@ -20073,7 +20073,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 205
             }),
-        new DescItemBase("DungWeaponBowF1", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowF1", <WeaponItemModel>{
                 "internalName": "DungWeaponBowF1",
                 "displayName": "Blackhole Bow",
                 "sellPrice": 1,
@@ -20094,7 +20094,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 7,
                 "Reach": 230
             }),
-        new DescItemBase("DungWeaponBowF2", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowF2", <WeaponItemModel>{
                 "internalName": "DungWeaponBowF2",
                 "displayName": "Blackhole Bow",
                 "sellPrice": 1,
@@ -20115,7 +20115,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 7,
                 "Reach": 230
             }),
-        new DescItemBase("DungWeaponBowF3", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowF3", <WeaponItemModel>{
                 "internalName": "DungWeaponBowF3",
                 "displayName": "Blackhole Bow",
                 "sellPrice": 1,
@@ -20136,7 +20136,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 7,
                 "Reach": 230
             }),
-        new DescItemBase("DungWeaponBowF4", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowF4", <WeaponItemModel>{
                 "internalName": "DungWeaponBowF4",
                 "displayName": "Blackhole Bow",
                 "sellPrice": 1,
@@ -20157,7 +20157,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 7,
                 "Reach": 230
             }),
-        new DescItemBase("DungWeaponBowF5", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBowF5", <WeaponItemModel>{
                 "internalName": "DungWeaponBowF5",
                 "displayName": "Blackhole Bow",
                 "sellPrice": 1,
@@ -20178,7 +20178,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 7,
                 "Reach": 230
             }),
-        new DescItemBase("DungWeaponWandA1", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandA1", <WeaponItemModel>{
                 "internalName": "DungWeaponWandA1",
                 "displayName": "Gnarled Wand",
                 "sellPrice": 1,
@@ -20199,7 +20199,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 115
             }),
-        new DescItemBase("DungWeaponWandA2", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandA2", <WeaponItemModel>{
                 "internalName": "DungWeaponWandA2",
                 "displayName": "Gnarled Wand",
                 "sellPrice": 1,
@@ -20220,7 +20220,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 115
             }),
-        new DescItemBase("DungWeaponWandA3", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandA3", <WeaponItemModel>{
                 "internalName": "DungWeaponWandA3",
                 "displayName": "Gnarled Wand",
                 "sellPrice": 1,
@@ -20241,7 +20241,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 115
             }),
-        new DescItemBase("DungWeaponWandA4", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandA4", <WeaponItemModel>{
                 "internalName": "DungWeaponWandA4",
                 "displayName": "Gnarled Wand",
                 "sellPrice": 1,
@@ -20262,7 +20262,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 115
             }),
-        new DescItemBase("DungWeaponWandA5", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandA5", <WeaponItemModel>{
                 "internalName": "DungWeaponWandA5",
                 "displayName": "Gnarled Wand",
                 "sellPrice": 1,
@@ -20283,7 +20283,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 115
             }),
-        new DescItemBase("DungWeaponWandB1", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandB1", <WeaponItemModel>{
                 "internalName": "DungWeaponWandB1",
                 "displayName": "Quarterstaff",
                 "sellPrice": 1,
@@ -20304,7 +20304,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 120
             }),
-        new DescItemBase("DungWeaponWandB2", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandB2", <WeaponItemModel>{
                 "internalName": "DungWeaponWandB2",
                 "displayName": "Quarterstaff",
                 "sellPrice": 1,
@@ -20325,7 +20325,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 120
             }),
-        new DescItemBase("DungWeaponWandB3", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandB3", <WeaponItemModel>{
                 "internalName": "DungWeaponWandB3",
                 "displayName": "Quarterstaff",
                 "sellPrice": 1,
@@ -20346,7 +20346,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 120
             }),
-        new DescItemBase("DungWeaponWandB4", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandB4", <WeaponItemModel>{
                 "internalName": "DungWeaponWandB4",
                 "displayName": "Quarterstaff",
                 "sellPrice": 1,
@@ -20367,7 +20367,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 120
             }),
-        new DescItemBase("DungWeaponWandB5", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandB5", <WeaponItemModel>{
                 "internalName": "DungWeaponWandB5",
                 "displayName": "Quarterstaff",
                 "sellPrice": 1,
@@ -20388,7 +20388,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 120
             }),
-        new DescItemBase("DungWeaponWandC1", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandC1", <WeaponItemModel>{
                 "internalName": "DungWeaponWandC1",
                 "displayName": "Starlight",
                 "sellPrice": 1,
@@ -20409,7 +20409,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 145
             }),
-        new DescItemBase("DungWeaponWandC2", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandC2", <WeaponItemModel>{
                 "internalName": "DungWeaponWandC2",
                 "displayName": "Starlight",
                 "sellPrice": 1,
@@ -20430,7 +20430,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 145
             }),
-        new DescItemBase("DungWeaponWandC3", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandC3", <WeaponItemModel>{
                 "internalName": "DungWeaponWandC3",
                 "displayName": "Starlight",
                 "sellPrice": 1,
@@ -20451,7 +20451,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 145
             }),
-        new DescItemBase("DungWeaponWandC4", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandC4", <WeaponItemModel>{
                 "internalName": "DungWeaponWandC4",
                 "displayName": "Starlight",
                 "sellPrice": 1,
@@ -20472,7 +20472,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 145
             }),
-        new DescItemBase("DungWeaponWandC5", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandC5", <WeaponItemModel>{
                 "internalName": "DungWeaponWandC5",
                 "displayName": "Starlight",
                 "sellPrice": 1,
@@ -20493,7 +20493,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 145
             }),
-        new DescItemBase("DungWeaponWandD1", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandD1", <WeaponItemModel>{
                 "internalName": "DungWeaponWandD1",
                 "displayName": "Crows Nest",
                 "sellPrice": 1,
@@ -20514,7 +20514,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 160
             }),
-        new DescItemBase("DungWeaponWandD2", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandD2", <WeaponItemModel>{
                 "internalName": "DungWeaponWandD2",
                 "displayName": "Crows Nest",
                 "sellPrice": 1,
@@ -20535,7 +20535,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 160
             }),
-        new DescItemBase("DungWeaponWandD3", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandD3", <WeaponItemModel>{
                 "internalName": "DungWeaponWandD3",
                 "displayName": "Crows Nest",
                 "sellPrice": 1,
@@ -20556,7 +20556,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 160
             }),
-        new DescItemBase("DungWeaponWandD4", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandD4", <WeaponItemModel>{
                 "internalName": "DungWeaponWandD4",
                 "displayName": "Crows Nest",
                 "sellPrice": 1,
@@ -20577,7 +20577,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 160
             }),
-        new DescItemBase("DungWeaponWandD5", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandD5", <WeaponItemModel>{
                 "internalName": "DungWeaponWandD5",
                 "displayName": "Crows Nest",
                 "sellPrice": 1,
@@ -20598,7 +20598,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 6,
                 "Reach": 160
             }),
-        new DescItemBase("DungWeaponWandE1", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandE1", <WeaponItemModel>{
                 "internalName": "DungWeaponWandE1",
                 "displayName": "Spriggly Storm",
                 "sellPrice": 1,
@@ -20619,7 +20619,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 7,
                 "Reach": 155
             }),
-        new DescItemBase("DungWeaponWandE2", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandE2", <WeaponItemModel>{
                 "internalName": "DungWeaponWandE2",
                 "displayName": "Spriggly Storm",
                 "sellPrice": 1,
@@ -20640,7 +20640,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 7,
                 "Reach": 155
             }),
-        new DescItemBase("DungWeaponWandE3", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandE3", <WeaponItemModel>{
                 "internalName": "DungWeaponWandE3",
                 "displayName": "Spriggly Storm",
                 "sellPrice": 1,
@@ -20661,7 +20661,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 7,
                 "Reach": 155
             }),
-        new DescItemBase("DungWeaponWandE4", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandE4", <WeaponItemModel>{
                 "internalName": "DungWeaponWandE4",
                 "displayName": "Spriggly Storm",
                 "sellPrice": 1,
@@ -20682,7 +20682,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 7,
                 "Reach": 155
             }),
-        new DescItemBase("DungWeaponWandE5", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandE5", <WeaponItemModel>{
                 "internalName": "DungWeaponWandE5",
                 "displayName": "Spriggly Storm",
                 "sellPrice": 1,
@@ -20703,7 +20703,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 7,
                 "Reach": 155
             }),
-        new DescItemBase("DungWeaponWandF1", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandF1", <WeaponItemModel>{
                 "internalName": "DungWeaponWandF1",
                 "displayName": "Grey Gatsby",
                 "sellPrice": 1,
@@ -20724,7 +20724,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 7,
                 "Reach": 170
             }),
-        new DescItemBase("DungWeaponWandF2", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandF2", <WeaponItemModel>{
                 "internalName": "DungWeaponWandF2",
                 "displayName": "Grey Gatsby",
                 "sellPrice": 1,
@@ -20745,7 +20745,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 7,
                 "Reach": 170
             }),
-        new DescItemBase("DungWeaponWandF3", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandF3", <WeaponItemModel>{
                 "internalName": "DungWeaponWandF3",
                 "displayName": "Grey Gatsby",
                 "sellPrice": 1,
@@ -20766,7 +20766,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 7,
                 "Reach": 170
             }),
-        new DescItemBase("DungWeaponWandF4", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandF4", <WeaponItemModel>{
                 "internalName": "DungWeaponWandF4",
                 "displayName": "Grey Gatsby",
                 "sellPrice": 1,
@@ -20787,7 +20787,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 7,
                 "Reach": 170
             }),
-        new DescItemBase("DungWeaponWandF5", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWandF5", <WeaponItemModel>{
                 "internalName": "DungWeaponWandF5",
                 "displayName": "Grey Gatsby",
                 "sellPrice": 1,
@@ -20808,7 +20808,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 7,
                 "Reach": 170
             }),
-        new DescItemBase("DungWeaponSword1", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponSword1", <WeaponItemModel>{
                 "internalName": "DungWeaponSword1",
                 "displayName": "Wooden Spear",
                 "sellPrice": 1,
@@ -20829,7 +20829,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 70
             }),
-        new DescItemBase("DungWeaponWand1", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponWand1", <WeaponItemModel>{
                 "internalName": "DungWeaponWand1",
                 "displayName": "Wooden Spear",
                 "sellPrice": 1,
@@ -20850,7 +20850,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 70
             }),
-        new DescItemBase("DungWeaponBow1", <WeaponItemModel>{
+        new BaseItemBase("DungWeaponBow1", <WeaponItemModel>{
                 "internalName": "DungWeaponBow1",
                 "displayName": "Wooden Spear",
                 "sellPrice": 1,
@@ -20871,7 +20871,7 @@ export const initSpecificItemRepo = () => {
                 "Speed": 5,
                 "Reach": 70
             }),
-        new DescItemBase("DungEquipmentHats0", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentHats0", <ArmourItemModel>{
                 "internalName": "DungEquipmentHats0",
                 "displayName": "Field Brim",
                 "sellPrice": 175,
@@ -20892,7 +20892,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentHats1", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentHats1", <ArmourItemModel>{
                 "internalName": "DungEquipmentHats1",
                 "displayName": "Grassy Brim",
                 "sellPrice": 175,
@@ -20913,7 +20913,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentHats2", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentHats2", <ArmourItemModel>{
                 "internalName": "DungEquipmentHats2",
                 "displayName": "Winter Brim",
                 "sellPrice": 175,
@@ -20934,7 +20934,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentHats3", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentHats3", <ArmourItemModel>{
                 "internalName": "DungEquipmentHats3",
                 "displayName": "Maize Brim",
                 "sellPrice": 175,
@@ -20955,7 +20955,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentHats4", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentHats4", <ArmourItemModel>{
                 "internalName": "DungEquipmentHats4",
                 "displayName": "The Crow Perch",
                 "sellPrice": 175,
@@ -20976,7 +20976,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentShirt0", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentShirt0", <ArmourItemModel>{
                 "internalName": "DungEquipmentShirt0",
                 "displayName": "White Tee",
                 "sellPrice": 175,
@@ -20997,7 +20997,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentShirt1", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentShirt1", <ArmourItemModel>{
                 "internalName": "DungEquipmentShirt1",
                 "displayName": "Green Shirt",
                 "sellPrice": 175,
@@ -21018,7 +21018,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentShirt2", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentShirt2", <ArmourItemModel>{
                 "internalName": "DungEquipmentShirt2",
                 "displayName": "Blue Stripe Tee",
                 "sellPrice": 175,
@@ -21039,7 +21039,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentShirt3", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentShirt3", <ArmourItemModel>{
                 "internalName": "DungEquipmentShirt3",
                 "displayName": "Purple Diagonal Striped Shirt",
                 "sellPrice": 175,
@@ -21060,7 +21060,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentShirt4", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentShirt4", <ArmourItemModel>{
                 "internalName": "DungEquipmentShirt4",
                 "displayName": "Solar Shirt",
                 "sellPrice": 175,
@@ -21081,7 +21081,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentPants0", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentPants0", <ArmourItemModel>{
                 "internalName": "DungEquipmentPants0",
                 "displayName": "Boring Jeans",
                 "sellPrice": 175,
@@ -21102,7 +21102,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentPants1", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentPants1", <ArmourItemModel>{
                 "internalName": "DungEquipmentPants1",
                 "displayName": "Camo Jeans",
                 "sellPrice": 175,
@@ -21123,7 +21123,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentPants2", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentPants2", <ArmourItemModel>{
                 "internalName": "DungEquipmentPants2",
                 "displayName": "Sandblasted Jeans",
                 "sellPrice": 175,
@@ -21144,7 +21144,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentPants3", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentPants3", <ArmourItemModel>{
                 "internalName": "DungEquipmentPants3",
                 "displayName": "Royale Jeans",
                 "sellPrice": 175,
@@ -21165,7 +21165,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentPants4", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentPants4", <ArmourItemModel>{
                 "internalName": "DungEquipmentPants4",
                 "displayName": "Pop Lock and Drop Jeans",
                 "sellPrice": 175,
@@ -21186,7 +21186,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentShoes0", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentShoes0", <ArmourItemModel>{
                 "internalName": "DungEquipmentShoes0",
                 "displayName": "Dull Flops",
                 "sellPrice": 175,
@@ -21207,7 +21207,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentShoes1", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentShoes1", <ArmourItemModel>{
                 "internalName": "DungEquipmentShoes1",
                 "displayName": "Flap Flops",
                 "sellPrice": 175,
@@ -21228,7 +21228,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentShoes2", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentShoes2", <ArmourItemModel>{
                 "internalName": "DungEquipmentShoes2",
                 "displayName": "Floop Floops",
                 "sellPrice": 175,
@@ -21249,7 +21249,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentShoes3", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentShoes3", <ArmourItemModel>{
                 "internalName": "DungEquipmentShoes3",
                 "displayName": "Fluppo Wuppos",
                 "sellPrice": 175,
@@ -21270,7 +21270,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentShoes4", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentShoes4", <ArmourItemModel>{
                 "internalName": "DungEquipmentShoes4",
                 "displayName": "Flipper Snapper Slipper Floppers",
                 "sellPrice": 175,
@@ -21291,7 +21291,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentPendant0", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentPendant0", <ArmourItemModel>{
                 "internalName": "DungEquipmentPendant0",
                 "displayName": "Quartz Pendant",
                 "sellPrice": 175,
@@ -21312,7 +21312,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentPendant1", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentPendant1", <ArmourItemModel>{
                 "internalName": "DungEquipmentPendant1",
                 "displayName": "Shruck Stone Pendant",
                 "sellPrice": 175,
@@ -21333,7 +21333,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentPendant2", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentPendant2", <ArmourItemModel>{
                 "internalName": "DungEquipmentPendant2",
                 "displayName": "Skydive Pendant",
                 "sellPrice": 175,
@@ -21354,7 +21354,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentPendant3", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentPendant3", <ArmourItemModel>{
                 "internalName": "DungEquipmentPendant3",
                 "displayName": "Maegatia Pendant",
                 "sellPrice": 175,
@@ -21375,7 +21375,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentPendant4", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentPendant4", <ArmourItemModel>{
                 "internalName": "DungEquipmentPendant4",
                 "displayName": "Lava Diamond Double Pendant",
                 "sellPrice": 175,
@@ -21396,7 +21396,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentRings0", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentRings0", <ArmourItemModel>{
                 "internalName": "DungEquipmentRings0",
                 "displayName": "Silver Ring",
                 "sellPrice": 175,
@@ -21417,7 +21417,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentRings1", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentRings1", <ArmourItemModel>{
                 "internalName": "DungEquipmentRings1",
                 "displayName": "Booger Ring",
                 "sellPrice": 175,
@@ -21438,7 +21438,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentRings2", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentRings2", <ArmourItemModel>{
                 "internalName": "DungEquipmentRings2",
                 "displayName": "Cold Fusion Rock Ring",
                 "sellPrice": 175,
@@ -21459,7 +21459,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentRings3", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentRings3", <ArmourItemModel>{
                 "internalName": "DungEquipmentRings3",
                 "displayName": "Creeper Peeper Ring",
                 "sellPrice": 175,
@@ -21480,7 +21480,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("DungEquipmentRings4", <ArmourItemModel>{
+        new BaseItemBase("DungEquipmentRings4", <ArmourItemModel>{
                 "internalName": "DungEquipmentRings4",
                 "displayName": "Jewels of the Setting Sun",
                 "sellPrice": 175,
@@ -21501,7 +21501,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("GemP9", <DescItemModel>{
+        new BaseItemBase("GemP9", <DescItemModel>{
                 "internalName": "GemP9",
                 "displayName": "Quality Obol Stack",
                 "sellPrice": 1,
@@ -21509,7 +21509,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Obol Stack",
                 "description": "Hold down and 3 obols will drop at your feet! YOU MUST BE IN WORLD 2 TOWN TO USE THIS! This way you can trash other obols incase you're out of space! "
             }),
-        new DescItemBase("GemP10", <DescItemModel>{
+        new BaseItemBase("GemP10", <DescItemModel>{
                 "internalName": "GemP10",
                 "displayName": "Marvelous Obol Stack",
                 "sellPrice": 1,
@@ -21517,7 +21517,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Obol Stack",
                 "description": "Hold down and 3 obols will drop at your feet! YOU MUST BE IN WORLD 2 TOWN TO USE THIS! This way you can trash other obols incase you're out of space! "
             }),
-        new DescItemBase("GemP11", <DescItemModel>{
+        new BaseItemBase("GemP11", <DescItemModel>{
                 "internalName": "GemP11",
                 "displayName": "Marvelous Obol Stack",
                 "sellPrice": 1,
@@ -21525,7 +21525,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Obol Stack",
                 "description": "Hold down and 3 obols will drop at your feet! YOU MUST BE IN WORLD 2 TOWN TO USE THIS! This way you can trash other obols incase you're out of space! "
             }),
-        new DescItemBase("GemP12", <DescItemModel>{
+        new BaseItemBase("GemP12", <DescItemModel>{
                 "internalName": "GemP12",
                 "displayName": "Marvelous Obol Stack",
                 "sellPrice": 1,
@@ -21533,7 +21533,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Obol Stack",
                 "description": "Hold down and 3 obols will drop at your feet! YOU MUST BE IN WORLD 2 TOWN TO USE THIS! This way you can trash other obols incase you're out of space! "
             }),
-        new DescItemBase("GemP13", <DescItemModel>{
+        new BaseItemBase("GemP13", <DescItemModel>{
                 "internalName": "GemP13",
                 "displayName": "Marvelous Obol Stack",
                 "sellPrice": 1,
@@ -21541,7 +21541,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Obol Stack",
                 "description": "Hold down and 3 obols will drop at your feet! YOU MUST BE IN WORLD 2 TOWN TO USE THIS! This way you can trash other obols incase you're out of space! "
             }),
-        new DescItemBase("GemP14", <DescItemModel>{
+        new BaseItemBase("GemP14", <DescItemModel>{
                 "internalName": "GemP14",
                 "displayName": "Marvelous Obol Stack",
                 "sellPrice": 1,
@@ -21549,7 +21549,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Obol Stack",
                 "description": "Hold down and 3 obols will drop at your feet! YOU MUST BE IN WORLD 2 TOWN TO USE THIS! This way you can trash other obols incase you're out of space! "
             }),
-        new DescItemBase("GemP15", <DescItemModel>{
+        new BaseItemBase("GemP15", <DescItemModel>{
                 "internalName": "GemP15",
                 "displayName": "Marvelous Obol Stack",
                 "sellPrice": 1,
@@ -21557,7 +21557,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Obol Stack",
                 "description": "Hold down and 3 obols will drop at your feet! YOU MUST BE IN WORLD 2 TOWN TO USE THIS! This way you can trash other obols incase you're out of space! "
             }),
-        new DescItemBase("GemP16", <DescItemModel>{
+        new BaseItemBase("GemP16", <DescItemModel>{
                 "internalName": "GemP16",
                 "displayName": "Dungeon Loot Dice",
                 "sellPrice": 1,
@@ -21565,7 +21565,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Loot Dice",
                 "description": "Hold down to get a loot roll! Use it anywhere you like! IMPORTANT: You need to be Dungeon Rank 10{ to get Tier 2 Keychains, and Rank 20{ to get Tier 3 keychains. "
             }),
-        new DescItemBase("EquipmentHats31", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats31", <ArmourItemModel>{
                 "internalName": "EquipmentHats31",
                 "displayName": "Smitty's Bubble Blowing Hat",
                 "sellPrice": 1,
@@ -21586,7 +21586,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats32", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats32", <ArmourItemModel>{
                 "internalName": "EquipmentHats32",
                 "displayName": "Bandit Bob Mask",
                 "sellPrice": 1,
@@ -21607,7 +21607,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats33", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats33", <ArmourItemModel>{
                 "internalName": "EquipmentHats33",
                 "displayName": "Paper Bag",
                 "sellPrice": 1,
@@ -21628,7 +21628,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats34", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats34", <ArmourItemModel>{
                 "internalName": "EquipmentHats34",
                 "displayName": "Parasite",
                 "sellPrice": 1,
@@ -21649,7 +21649,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats35", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats35", <ArmourItemModel>{
                 "internalName": "EquipmentHats35",
                 "displayName": "Diamon Horns",
                 "sellPrice": 1,
@@ -21670,7 +21670,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats36", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats36", <ArmourItemModel>{
                 "internalName": "EquipmentHats36",
                 "displayName": "Halloween Pumpkin",
                 "sellPrice": 1,
@@ -21691,7 +21691,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats40", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats40", <ArmourItemModel>{
                 "internalName": "EquipmentHats40",
                 "displayName": "Pardoned Turkey",
                 "sellPrice": 1,
@@ -21712,7 +21712,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats37", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats37", <ArmourItemModel>{
                 "internalName": "EquipmentHats37",
                 "displayName": "Hotdog Hero",
                 "sellPrice": 1,
@@ -21733,7 +21733,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats38", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats38", <ArmourItemModel>{
                 "internalName": "EquipmentHats38",
                 "displayName": "Invisible Hat",
                 "sellPrice": 1,
@@ -21754,7 +21754,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats46", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats46", <ArmourItemModel>{
                 "internalName": "EquipmentHats46",
                 "displayName": "Strawbiggy",
                 "sellPrice": 1,
@@ -21775,7 +21775,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats47", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats47", <ArmourItemModel>{
                 "internalName": "EquipmentHats47",
                 "displayName": "Pop Cat",
                 "sellPrice": 1,
@@ -21796,7 +21796,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats48", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats48", <ArmourItemModel>{
                 "internalName": "EquipmentHats48",
                 "displayName": "Dairy Dunk",
                 "sellPrice": 1,
@@ -21817,7 +21817,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats49", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats49", <ArmourItemModel>{
                 "internalName": "EquipmentHats49",
                 "displayName": "The Classic",
                 "sellPrice": 1,
@@ -21838,7 +21838,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats50", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats50", <ArmourItemModel>{
                 "internalName": "EquipmentHats50",
                 "displayName": "Green Beanie",
                 "sellPrice": 1,
@@ -21859,7 +21859,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats43", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats43", <ArmourItemModel>{
                 "internalName": "EquipmentHats43",
                 "displayName": "Snowman",
                 "sellPrice": 1,
@@ -21880,7 +21880,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats45", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats45", <ArmourItemModel>{
                 "internalName": "EquipmentHats45",
                 "displayName": "Giftmas Tree",
                 "sellPrice": 1,
@@ -21901,7 +21901,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats57", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats57", <ArmourItemModel>{
                 "internalName": "EquipmentHats57",
                 "displayName": "Big Bunny",
                 "sellPrice": 1,
@@ -21922,7 +21922,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats62", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats62", <ArmourItemModel>{
                 "internalName": "EquipmentHats62",
                 "displayName": "Fluffy Ramsy",
                 "sellPrice": 1,
@@ -21943,7 +21943,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("EquipmentHats65", <ArmourItemModel>{
+        new BaseItemBase("EquipmentHats65", <ArmourItemModel>{
                 "internalName": "EquipmentHats65",
                 "displayName": "The Red Boaty",
                 "sellPrice": 1,
@@ -21964,7 +21964,7 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new DescItemBase("Key1", <DescItemModel>{
+        new BaseItemBase("Key1", <DescItemModel>{
                 "internalName": "Key1",
                 "displayName": "Forest Villa Key",
                 "sellPrice": 50,
@@ -21972,7 +21972,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boss Key",
                 "description": "Hold down to add these Forest Boss Keys to your account. Account items are shared between all your Characters! "
             }),
-        new DescItemBase("Key2", <DescItemModel>{
+        new BaseItemBase("Key2", <DescItemModel>{
                 "internalName": "Key2",
                 "displayName": "Efaunt's Tomb Key",
                 "sellPrice": 50,
@@ -21980,7 +21980,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boss Key",
                 "description": "Hold down to add these Desert Boss Keys to your account. "
             }),
-        new DescItemBase("Key3", <DescItemModel>{
+        new BaseItemBase("Key3", <DescItemModel>{
                 "internalName": "Key3",
                 "displayName": "Chizoar's Cavern Key",
                 "sellPrice": 50,
@@ -21988,7 +21988,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Boss Key",
                 "description": "Hold down to add these Iceland Boss Keys to your account. "
             }),
-        new DescItemBase("ObolFrag", <DescItemModel>{
+        new BaseItemBase("ObolFrag", <DescItemModel>{
                 "internalName": "ObolFrag",
                 "displayName": "Obol Fragment",
                 "sellPrice": 50,
@@ -21996,7 +21996,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Obol Fragment",
                 "description": "Hold down to add these Obol Fragments to your account. Account items are shared between all your Characters! "
             }),
-        new DescItemBase("DoubleAFKtix", <DescItemModel>{
+        new BaseItemBase("DoubleAFKtix", <DescItemModel>{
                 "internalName": "DoubleAFKtix",
                 "displayName": "Double AFK Gain Ticket",
                 "sellPrice": 50,
@@ -22004,7 +22004,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Ticket",
                 "description": "Hold down to add these Double AFK tickets to your account. Account items are shared between all your Characters! "
             }),
-        new DescItemBase("TixCol", <DescItemModel>{
+        new BaseItemBase("TixCol", <DescItemModel>{
                 "internalName": "TixCol",
                 "displayName": "Colosseum Ticket",
                 "sellPrice": 50,
@@ -22012,7 +22012,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Ticket",
                 "description": "Hold down to add these Colosseum tickets to your account. Account items are shared between all your Characters! "
             }),
-        new DescItemBase("DeliveryBox", <DescItemModel>{
+        new BaseItemBase("DeliveryBox", <DescItemModel>{
                 "internalName": "DeliveryBox",
                 "displayName": "Delivery Box",
                 "sellPrice": 50,
@@ -22020,7 +22020,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Box",
                 "description": "Hold down to add these Delivery Boxes to your Post-Office Upgrade amount! These will be shared between all your Characters! "
             }),
-        new DescItemBase("SilverPen", <DescItemModel>{
+        new BaseItemBase("SilverPen", <DescItemModel>{
                 "internalName": "SilverPen",
                 "displayName": "Silver Pen",
                 "sellPrice": 50,
@@ -22028,7 +22028,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Office Pen",
                 "description": "Hold down to add a Silver Pen to your Post-Office! You can use it to skip a Delivery! "
             }),
-        new DescItemBase("PremiumGem", <DescItemModel>{
+        new BaseItemBase("PremiumGem", <DescItemModel>{
                 "internalName": "PremiumGem",
                 "displayName": "Gem",
                 "sellPrice": 69,
@@ -22036,7 +22036,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Gem",
                 "description": "Hold down to add these gems to your account. You can then spend them in the Gem Shop! "
             }),
-        new DescItemBase("TalentPoint1", <DescItemModel>{
+        new BaseItemBase("TalentPoint1", <DescItemModel>{
                 "internalName": "TalentPoint1",
                 "displayName": "Talent Point Tab 1",
                 "sellPrice": 1,
@@ -22044,7 +22044,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Talent Point",
                 "description": "Hold down to gain a Talent Point for the first tab of talents. THIS APPLIES TO ALL CHARACTERS, even ones you haven't made yet, so it doesn't matter which character uses this item. "
             }),
-        new DescItemBase("TalentPoint2", <DescItemModel>{
+        new BaseItemBase("TalentPoint2", <DescItemModel>{
                 "internalName": "TalentPoint2",
                 "displayName": "Talent Point Tab 2",
                 "sellPrice": 1,
@@ -22052,7 +22052,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Talent Point",
                 "description": "Hold down to gain a Talent Point for the second tab of talents. THIS APPLIES TO ALL CHARACTERS, even ones you haven't made yet, so it doesn't matter which character uses this item. "
             }),
-        new DescItemBase("TalentPoint3", <DescItemModel>{
+        new BaseItemBase("TalentPoint3", <DescItemModel>{
                 "internalName": "TalentPoint3",
                 "displayName": "Talent Point Tab 3",
                 "sellPrice": 1,
@@ -22060,7 +22060,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Talent Point",
                 "description": "Hold down to gain a Talent Point for the third tab of talents. THIS APPLIES TO ALL CHARACTERS, even ones you haven't made yet, so it doesn't matter which character uses this item. "
             }),
-        new DescItemBase("TalentPoint4", <DescItemModel>{
+        new BaseItemBase("TalentPoint4", <DescItemModel>{
                 "internalName": "TalentPoint4",
                 "displayName": "Talent Point Tab 4",
                 "sellPrice": 1,
@@ -22068,7 +22068,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Talent Point",
                 "description": "Hold down to gain a Talent Point for the fourth tab of talents. THIS APPLIES TO ALL CHARACTERS, even ones you haven't made yet, so it doesn't matter which character uses this item. "
             }),
-        new DescItemBase("TalentPoint5", <DescItemModel>{
+        new BaseItemBase("TalentPoint5", <DescItemModel>{
                 "internalName": "TalentPoint5",
                 "displayName": "Talent Point Tab 4",
                 "sellPrice": 1,
@@ -22076,7 +22076,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Talent Point",
                 "description": "Hold down to gain a Talent Point for the fifth tab of talents. THIS APPLIES TO ALL CHARACTERS, even ones you haven't made yet, so it doesn't matter which character uses this item. "
             }),
-        new DescItemBase("TalentPoint6", <DescItemModel>{
+        new BaseItemBase("TalentPoint6", <DescItemModel>{
                 "internalName": "TalentPoint6",
                 "displayName": "Talent Point Special Tab",
                 "sellPrice": 1,
@@ -22084,7 +22084,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Talent Point",
                 "description": "Hold down to gain a Talent Point for the Special tab of talents. THIS APPLIES TO ALL CHARACTERS, even ones you haven't made yet, so it doesn't matter which character uses this item. "
             }),
-        new DescItemBase("Gfoodcoupon", <DescItemModel>{
+        new BaseItemBase("Gfoodcoupon", <DescItemModel>{
                 "internalName": "Gfoodcoupon",
                 "displayName": "Gold Food Coupon",
                 "sellPrice": 1,
@@ -22092,7 +22092,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Usable",
                 "description": "Hold down to receive a random golden food! "
             }),
-        new DescItemBase("ItemsCoupon1", <DescItemModel>{
+        new BaseItemBase("ItemsCoupon1", <DescItemModel>{
                 "internalName": "ItemsCoupon1",
                 "displayName": "Resource Coupon",
                 "sellPrice": 1,
@@ -22100,7 +22100,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Usable",
                 "description": "Hold down, and a resource stack will drop on the floor! YOU MUST MANUALLY PICK UP THE RESOURCE ON THE GROUND "
             }),
-        new DescItemBase("ItemsCoupon2", <DescItemModel>{
+        new BaseItemBase("ItemsCoupon2", <DescItemModel>{
                 "internalName": "ItemsCoupon2",
                 "displayName": "Really Really Resource Coupon",
                 "sellPrice": 1,
@@ -22108,7 +22108,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Usable",
                 "description": "Hold down, and a resource stack will drop on the floor! YOU MUST MANUALLY PICK UP THE RESOURCE ON THE GROUND "
             }),
-        new DescItemBase("CardsA0", <CardItemModel>{
+        new BaseItemBase("CardsA0", <CardItemModel>{
                 "internalName": "CardsA0",
                 "displayName": "Green Mushroom Card",
                 "sellPrice": 1,
@@ -22124,7 +22124,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0001
             }),
-        new DescItemBase("CardsA1", <CardItemModel>{
+        new BaseItemBase("CardsA1", <CardItemModel>{
                 "internalName": "CardsA1",
                 "displayName": "Red Mushroom Card",
                 "sellPrice": 1,
@@ -22140,7 +22140,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0001
             }),
-        new DescItemBase("CardsA2", <CardItemModel>{
+        new BaseItemBase("CardsA2", <CardItemModel>{
                 "internalName": "CardsA2",
                 "displayName": "Frog Card",
                 "sellPrice": 1,
@@ -22156,7 +22156,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.007
             }),
-        new DescItemBase("CardsA3", <CardItemModel>{
+        new BaseItemBase("CardsA3", <CardItemModel>{
                 "internalName": "CardsA3",
                 "displayName": "Bored Bean Card",
                 "sellPrice": 1,
@@ -22172,7 +22172,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 9.7e-05
             }),
-        new DescItemBase("CardsA4", <CardItemModel>{
+        new BaseItemBase("CardsA4", <CardItemModel>{
                 "internalName": "CardsA4",
                 "displayName": "Slime Card",
                 "sellPrice": 1,
@@ -22188,7 +22188,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 9.5e-05
             }),
-        new DescItemBase("CardsA5", <CardItemModel>{
+        new BaseItemBase("CardsA5", <CardItemModel>{
                 "internalName": "CardsA5",
                 "displayName": "Baby Boa Card",
                 "sellPrice": 1,
@@ -22204,7 +22204,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 9.4e-05
             }),
-        new DescItemBase("CardsA6", <CardItemModel>{
+        new BaseItemBase("CardsA6", <CardItemModel>{
                 "internalName": "CardsA6",
                 "displayName": "Carrotman Card",
                 "sellPrice": 1,
@@ -22220,7 +22220,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 9e-05
             }),
-        new DescItemBase("CardsA7", <CardItemModel>{
+        new BaseItemBase("CardsA7", <CardItemModel>{
                 "internalName": "CardsA7",
                 "displayName": "Glublin Card",
                 "sellPrice": 1,
@@ -22236,7 +22236,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 8.6e-05
             }),
-        new DescItemBase("CardsA8", <CardItemModel>{
+        new BaseItemBase("CardsA8", <CardItemModel>{
                 "internalName": "CardsA8",
                 "displayName": "Wode Board Card",
                 "sellPrice": 1,
@@ -22252,7 +22252,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 8e-05
             }),
-        new DescItemBase("CardsA9", <CardItemModel>{
+        new BaseItemBase("CardsA9", <CardItemModel>{
                 "internalName": "CardsA9",
                 "displayName": "Gigafrog Card",
                 "sellPrice": 1,
@@ -22268,7 +22268,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0025
             }),
-        new DescItemBase("CardsA10", <CardItemModel>{
+        new BaseItemBase("CardsA10", <CardItemModel>{
                 "internalName": "CardsA10",
                 "displayName": "Poop Card",
                 "sellPrice": 1,
@@ -22284,7 +22284,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 6e-05
             }),
-        new DescItemBase("CardsA11", <CardItemModel>{
+        new BaseItemBase("CardsA11", <CardItemModel>{
                 "internalName": "CardsA11",
                 "displayName": "Rat Card",
                 "sellPrice": 1,
@@ -22300,7 +22300,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 5e-05
             }),
-        new DescItemBase("CardsA12", <CardItemModel>{
+        new BaseItemBase("CardsA12", <CardItemModel>{
                 "internalName": "CardsA12",
                 "displayName": "Walking Stick Card",
                 "sellPrice": 1,
@@ -22316,7 +22316,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 6e-05
             }),
-        new DescItemBase("CardsA13", <CardItemModel>{
+        new BaseItemBase("CardsA13", <CardItemModel>{
                 "internalName": "CardsA13",
                 "displayName": "Nutto Card",
                 "sellPrice": 1,
@@ -22332,7 +22332,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 5e-05
             }),
-        new DescItemBase("CardsA14", <CardItemModel>{
+        new BaseItemBase("CardsA14", <CardItemModel>{
                 "internalName": "CardsA14",
                 "displayName": "Crystal Carrot Card",
                 "sellPrice": 1,
@@ -22348,7 +22348,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.01
             }),
-        new DescItemBase("CardsA15", <CardItemModel>{
+        new BaseItemBase("CardsA15", <CardItemModel>{
                 "internalName": "CardsA15",
                 "displayName": "Boop Card",
                 "sellPrice": 1,
@@ -22364,7 +22364,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0015
             }),
-        new DescItemBase("CardsA16", <CardItemModel>{
+        new BaseItemBase("CardsA16", <CardItemModel>{
                 "internalName": "CardsA16",
                 "displayName": "Wood Mushroom Card",
                 "sellPrice": 1,
@@ -22380,7 +22380,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0001
             }),
-        new DescItemBase("CardsB1", <CardItemModel>{
+        new BaseItemBase("CardsB1", <CardItemModel>{
                 "internalName": "CardsB1",
                 "displayName": "Sandy Pot Card",
                 "sellPrice": 1,
@@ -22396,7 +22396,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0
             }),
-        new DescItemBase("CardsB2", <CardItemModel>{
+        new BaseItemBase("CardsB2", <CardItemModel>{
                 "internalName": "CardsB2",
                 "displayName": "Mimic Card",
                 "sellPrice": 1,
@@ -22412,7 +22412,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0
             }),
-        new DescItemBase("CardsB3", <CardItemModel>{
+        new BaseItemBase("CardsB3", <CardItemModel>{
                 "internalName": "CardsB3",
                 "displayName": "Crabcake Card",
                 "sellPrice": 1,
@@ -22428,7 +22428,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0
             }),
-        new DescItemBase("CardsB4", <CardItemModel>{
+        new BaseItemBase("CardsB4", <CardItemModel>{
                 "internalName": "CardsB4",
                 "displayName": "Mafioso Card",
                 "sellPrice": 1,
@@ -22444,7 +22444,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0
             }),
-        new DescItemBase("CardsB5", <CardItemModel>{
+        new BaseItemBase("CardsB5", <CardItemModel>{
                 "internalName": "CardsB5",
                 "displayName": "Sand Castle Card",
                 "sellPrice": 1,
@@ -22460,7 +22460,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0
             }),
-        new DescItemBase("CardsB6", <CardItemModel>{
+        new BaseItemBase("CardsB6", <CardItemModel>{
                 "internalName": "CardsB6",
                 "displayName": "Pincermin Card",
                 "sellPrice": 1,
@@ -22476,7 +22476,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0001
             }),
-        new DescItemBase("CardsB7", <CardItemModel>{
+        new BaseItemBase("CardsB7", <CardItemModel>{
                 "internalName": "CardsB7",
                 "displayName": "Mashed Potato Card",
                 "sellPrice": 1,
@@ -22492,7 +22492,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0001
             }),
-        new DescItemBase("CardsB8", <CardItemModel>{
+        new BaseItemBase("CardsB8", <CardItemModel>{
                 "internalName": "CardsB8",
                 "displayName": "Tyson Card",
                 "sellPrice": 1,
@@ -22508,7 +22508,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0
             }),
-        new DescItemBase("CardsB9", <CardItemModel>{
+        new BaseItemBase("CardsB9", <CardItemModel>{
                 "internalName": "CardsB9",
                 "displayName": "Moonmoon Card",
                 "sellPrice": 1,
@@ -22524,7 +22524,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0001
             }),
-        new DescItemBase("CardsB10", <CardItemModel>{
+        new BaseItemBase("CardsB10", <CardItemModel>{
                 "internalName": "CardsB10",
                 "displayName": "Sand Giant Card",
                 "sellPrice": 1,
@@ -22540,7 +22540,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0001
             }),
-        new DescItemBase("CardsB11", <CardItemModel>{
+        new BaseItemBase("CardsB11", <CardItemModel>{
                 "internalName": "CardsB11",
                 "displayName": "Snelbie Card",
                 "sellPrice": 1,
@@ -22556,7 +22556,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0001
             }),
-        new DescItemBase("CardsB12", <CardItemModel>{
+        new BaseItemBase("CardsB12", <CardItemModel>{
                 "internalName": "CardsB12",
                 "displayName": "Dig Doug Card",
                 "sellPrice": 1,
@@ -22572,7 +22572,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0
             }),
-        new DescItemBase("CardsB13", <CardItemModel>{
+        new BaseItemBase("CardsB13", <CardItemModel>{
                 "internalName": "CardsB13",
                 "displayName": "Crystal Crabal Card",
                 "sellPrice": 1,
@@ -22588,7 +22588,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.008
             }),
-        new DescItemBase("CardsB14", <CardItemModel>{
+        new BaseItemBase("CardsB14", <CardItemModel>{
                 "internalName": "CardsB14",
                 "displayName": "Bandit Bob Card",
                 "sellPrice": 1,
@@ -22604,7 +22604,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsC1", <CardItemModel>{
+        new BaseItemBase("CardsC1", <CardItemModel>{
                 "internalName": "CardsC1",
                 "displayName": "Copper Ore Card",
                 "sellPrice": 1,
@@ -22620,7 +22620,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0
             }),
-        new DescItemBase("CardsC2", <CardItemModel>{
+        new BaseItemBase("CardsC2", <CardItemModel>{
                 "internalName": "CardsC2",
                 "displayName": "Iron Ore Card",
                 "sellPrice": 1,
@@ -22636,7 +22636,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0
             }),
-        new DescItemBase("CardsC3", <CardItemModel>{
+        new BaseItemBase("CardsC3", <CardItemModel>{
                 "internalName": "CardsC3",
                 "displayName": "Gold Ore Card",
                 "sellPrice": 1,
@@ -22652,7 +22652,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0
             }),
-        new DescItemBase("CardsC4", <CardItemModel>{
+        new BaseItemBase("CardsC4", <CardItemModel>{
                 "internalName": "CardsC4",
                 "displayName": "Oak Logs Card",
                 "sellPrice": 1,
@@ -22668,7 +22668,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0004
             }),
-        new DescItemBase("CardsC5", <CardItemModel>{
+        new BaseItemBase("CardsC5", <CardItemModel>{
                 "internalName": "CardsC5",
                 "displayName": "Bleach Logs Card",
                 "sellPrice": 1,
@@ -22684,7 +22684,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.00029
             }),
-        new DescItemBase("CardsC6", <CardItemModel>{
+        new BaseItemBase("CardsC6", <CardItemModel>{
                 "internalName": "CardsC6",
                 "displayName": "Jungle Logs Card",
                 "sellPrice": 1,
@@ -22700,7 +22700,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.01
             }),
-        new DescItemBase("CardsC7", <CardItemModel>{
+        new BaseItemBase("CardsC7", <CardItemModel>{
                 "internalName": "CardsC7",
                 "displayName": "Forest Fibres Card",
                 "sellPrice": 1,
@@ -22716,7 +22716,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.00017
             }),
-        new DescItemBase("CardsC8", <CardItemModel>{
+        new BaseItemBase("CardsC8", <CardItemModel>{
                 "internalName": "CardsC8",
                 "displayName": "Goldfish Card",
                 "sellPrice": 1,
@@ -22732,7 +22732,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.002
             }),
-        new DescItemBase("CardsC9", <CardItemModel>{
+        new BaseItemBase("CardsC9", <CardItemModel>{
                 "internalName": "CardsC9",
                 "displayName": "Hermit Can Card",
                 "sellPrice": 1,
@@ -22748,7 +22748,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0018
             }),
-        new DescItemBase("CardsC10", <CardItemModel>{
+        new BaseItemBase("CardsC10", <CardItemModel>{
                 "internalName": "CardsC10",
                 "displayName": "Jellyfish Card",
                 "sellPrice": 1,
@@ -22764,7 +22764,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0016
             }),
-        new DescItemBase("CardsC11", <CardItemModel>{
+        new BaseItemBase("CardsC11", <CardItemModel>{
                 "internalName": "CardsC11",
                 "displayName": "Fly Card",
                 "sellPrice": 1,
@@ -22780,7 +22780,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.00022
             }),
-        new DescItemBase("CardsC12", <CardItemModel>{
+        new BaseItemBase("CardsC12", <CardItemModel>{
                 "internalName": "CardsC12",
                 "displayName": "Butterfly Card",
                 "sellPrice": 1,
@@ -22796,7 +22796,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.00018
             }),
-        new DescItemBase("CardsC13", <CardItemModel>{
+        new BaseItemBase("CardsC13", <CardItemModel>{
                 "internalName": "CardsC13",
                 "displayName": "FILLER",
                 "sellPrice": 1,
@@ -22805,7 +22805,7 @@ export const initSpecificItemRepo = () => {
                 "cardData": undefined,
                 "dropChance": 1
             }),
-        new DescItemBase("CardsC14", <CardItemModel>{
+        new BaseItemBase("CardsC14", <CardItemModel>{
                 "internalName": "CardsC14",
                 "displayName": "FILLER",
                 "sellPrice": 1,
@@ -22814,7 +22814,7 @@ export const initSpecificItemRepo = () => {
                 "cardData": undefined,
                 "dropChance": 1
             }),
-        new DescItemBase("CardsC15", <CardItemModel>{
+        new BaseItemBase("CardsC15", <CardItemModel>{
                 "internalName": "CardsC15",
                 "displayName": "FILLER",
                 "sellPrice": 1,
@@ -22823,7 +22823,7 @@ export const initSpecificItemRepo = () => {
                 "cardData": undefined,
                 "dropChance": 1
             }),
-        new DescItemBase("CardsC16", <CardItemModel>{
+        new BaseItemBase("CardsC16", <CardItemModel>{
                 "internalName": "CardsC16",
                 "displayName": "Fire Forge Card",
                 "sellPrice": 1,
@@ -22839,7 +22839,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsD1", <CardItemModel>{
+        new BaseItemBase("CardsD1", <CardItemModel>{
                 "internalName": "CardsD1",
                 "displayName": "Dementia Ore Card",
                 "sellPrice": 1,
@@ -22855,7 +22855,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 6e-05
             }),
-        new DescItemBase("CardsD2", <CardItemModel>{
+        new BaseItemBase("CardsD2", <CardItemModel>{
                 "internalName": "CardsD2",
                 "displayName": "Platinum Ore Card",
                 "sellPrice": 1,
@@ -22871,7 +22871,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0
             }),
-        new DescItemBase("CardsD3", <CardItemModel>{
+        new BaseItemBase("CardsD3", <CardItemModel>{
                 "internalName": "CardsD3",
                 "displayName": "Void Ore Card",
                 "sellPrice": 1,
@@ -22887,7 +22887,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0
             }),
-        new DescItemBase("CardsD4", <CardItemModel>{
+        new BaseItemBase("CardsD4", <CardItemModel>{
                 "internalName": "CardsD4",
                 "displayName": "Lustre Ore Card",
                 "sellPrice": 1,
@@ -22903,7 +22903,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 6e-05
             }),
-        new DescItemBase("CardsD5", <CardItemModel>{
+        new BaseItemBase("CardsD5", <CardItemModel>{
                 "internalName": "CardsD5",
                 "displayName": "Potty Rolls Card",
                 "sellPrice": 1,
@@ -22919,7 +22919,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.00012
             }),
-        new DescItemBase("CardsD6", <CardItemModel>{
+        new BaseItemBase("CardsD6", <CardItemModel>{
                 "internalName": "CardsD6",
                 "displayName": "Veiny Logs Card",
                 "sellPrice": 1,
@@ -22935,7 +22935,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.00013
             }),
-        new DescItemBase("CardsD7", <CardItemModel>{
+        new BaseItemBase("CardsD7", <CardItemModel>{
                 "internalName": "CardsD7",
                 "displayName": "Tropilogs Card",
                 "sellPrice": 1,
@@ -22951,7 +22951,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0
             }),
-        new DescItemBase("CardsD8", <CardItemModel>{
+        new BaseItemBase("CardsD8", <CardItemModel>{
                 "internalName": "CardsD8",
                 "displayName": "Tundra Logs Card",
                 "sellPrice": 1,
@@ -22967,7 +22967,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0001
             }),
-        new DescItemBase("CardsD9", <CardItemModel>{
+        new BaseItemBase("CardsD9", <CardItemModel>{
                 "internalName": "CardsD9",
                 "displayName": "Fruitfly Card",
                 "sellPrice": 1,
@@ -22983,7 +22983,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.00014
             }),
-        new DescItemBase("CardsD10", <CardItemModel>{
+        new BaseItemBase("CardsD10", <CardItemModel>{
                 "internalName": "CardsD10",
                 "displayName": "Sentient Cereal Card",
                 "sellPrice": 1,
@@ -22999,7 +22999,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.00014
             }),
-        new DescItemBase("CardsD11", <CardItemModel>{
+        new BaseItemBase("CardsD11", <CardItemModel>{
                 "internalName": "CardsD11",
                 "displayName": "Bloach Card",
                 "sellPrice": 1,
@@ -23015,7 +23015,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0014
             }),
-        new DescItemBase("CardsD12", <CardItemModel>{
+        new BaseItemBase("CardsD12", <CardItemModel>{
                 "internalName": "CardsD12",
                 "displayName": "FILLER",
                 "sellPrice": 1,
@@ -23024,7 +23024,7 @@ export const initSpecificItemRepo = () => {
                 "cardData": undefined,
                 "dropChance": 1
             }),
-        new DescItemBase("CardsD13", <CardItemModel>{
+        new BaseItemBase("CardsD13", <CardItemModel>{
                 "internalName": "CardsD13",
                 "displayName": "FILLER",
                 "sellPrice": 1,
@@ -23033,7 +23033,7 @@ export const initSpecificItemRepo = () => {
                 "cardData": undefined,
                 "dropChance": 1
             }),
-        new DescItemBase("CardsD16", <CardItemModel>{
+        new BaseItemBase("CardsD16", <CardItemModel>{
                 "internalName": "CardsD16",
                 "displayName": "Cinder Forge Card",
                 "sellPrice": 1,
@@ -23049,7 +23049,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsD17", <CardItemModel>{
+        new BaseItemBase("CardsD17", <CardItemModel>{
                 "internalName": "CardsD17",
                 "displayName": "Forest Soul Card",
                 "sellPrice": 1,
@@ -23065,7 +23065,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsD18", <CardItemModel>{
+        new BaseItemBase("CardsD18", <CardItemModel>{
                 "internalName": "CardsD18",
                 "displayName": "Dune Soul Card",
                 "sellPrice": 1,
@@ -23081,7 +23081,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsD19", <CardItemModel>{
+        new BaseItemBase("CardsD19", <CardItemModel>{
                 "internalName": "CardsD19",
                 "displayName": "Froge Card",
                 "sellPrice": 1,
@@ -23097,7 +23097,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsD20", <CardItemModel>{
+        new BaseItemBase("CardsD20", <CardItemModel>{
                 "internalName": "CardsD20",
                 "displayName": "Crabbo Card",
                 "sellPrice": 1,
@@ -23113,7 +23113,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsD21", <CardItemModel>{
+        new BaseItemBase("CardsD21", <CardItemModel>{
                 "internalName": "CardsD21",
                 "displayName": "Scorpie Card",
                 "sellPrice": 1,
@@ -23129,7 +23129,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsE0", <CardItemModel>{
+        new BaseItemBase("CardsE0", <CardItemModel>{
                 "internalName": "CardsE0",
                 "displayName": "Sheepie Card",
                 "sellPrice": 1,
@@ -23145,7 +23145,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.01
             }),
-        new DescItemBase("CardsE1", <CardItemModel>{
+        new BaseItemBase("CardsE1", <CardItemModel>{
                 "internalName": "CardsE1",
                 "displayName": "Frost Flake Card",
                 "sellPrice": 1,
@@ -23161,7 +23161,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.01
             }),
-        new DescItemBase("CardsE2", <CardItemModel>{
+        new BaseItemBase("CardsE2", <CardItemModel>{
                 "internalName": "CardsE2",
                 "displayName": "Sir Stache Card",
                 "sellPrice": 1,
@@ -23177,7 +23177,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0001
             }),
-        new DescItemBase("CardsE3", <CardItemModel>{
+        new BaseItemBase("CardsE3", <CardItemModel>{
                 "internalName": "CardsE3",
                 "displayName": "Bloque Card",
                 "sellPrice": 1,
@@ -23193,7 +23193,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0001
             }),
-        new DescItemBase("CardsE4", <CardItemModel>{
+        new BaseItemBase("CardsE4", <CardItemModel>{
                 "internalName": "CardsE4",
                 "displayName": "Mamooth Card",
                 "sellPrice": 1,
@@ -23209,7 +23209,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.01
             }),
-        new DescItemBase("CardsE5", <CardItemModel>{
+        new BaseItemBase("CardsE5", <CardItemModel>{
                 "internalName": "CardsE5",
                 "displayName": "Snowman Card",
                 "sellPrice": 1,
@@ -23225,7 +23225,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.01
             }),
-        new DescItemBase("CardsE6", <CardItemModel>{
+        new BaseItemBase("CardsE6", <CardItemModel>{
                 "internalName": "CardsE6",
                 "displayName": "Penguin Card",
                 "sellPrice": 1,
@@ -23241,7 +23241,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0001
             }),
-        new DescItemBase("CardsE7", <CardItemModel>{
+        new BaseItemBase("CardsE7", <CardItemModel>{
                 "internalName": "CardsE7",
                 "displayName": "Thermister Card",
                 "sellPrice": 1,
@@ -23257,7 +23257,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.01
             }),
-        new DescItemBase("CardsE8", <CardItemModel>{
+        new BaseItemBase("CardsE8", <CardItemModel>{
                 "internalName": "CardsE8",
                 "displayName": "Quenchie Card",
                 "sellPrice": 1,
@@ -23273,7 +23273,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0001
             }),
-        new DescItemBase("CardsE9", <CardItemModel>{
+        new BaseItemBase("CardsE9", <CardItemModel>{
                 "internalName": "CardsE9",
                 "displayName": "Cryosnake Card",
                 "sellPrice": 1,
@@ -23289,7 +23289,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0001
             }),
-        new DescItemBase("CardsE10", <CardItemModel>{
+        new BaseItemBase("CardsE10", <CardItemModel>{
                 "internalName": "CardsE10",
                 "displayName": "Bop Box Card",
                 "sellPrice": 1,
@@ -23305,7 +23305,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0001
             }),
-        new DescItemBase("CardsE11", <CardItemModel>{
+        new BaseItemBase("CardsE11", <CardItemModel>{
                 "internalName": "CardsE11",
                 "displayName": "Neyeptune Card",
                 "sellPrice": 1,
@@ -23321,7 +23321,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.01
             }),
-        new DescItemBase("CardsE12", <CardItemModel>{
+        new BaseItemBase("CardsE12", <CardItemModel>{
                 "internalName": "CardsE12",
                 "displayName": "Xylobone Card",
                 "sellPrice": 1,
@@ -23337,7 +23337,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.01
             }),
-        new DescItemBase("CardsE13", <CardItemModel>{
+        new BaseItemBase("CardsE13", <CardItemModel>{
                 "internalName": "CardsE13",
                 "displayName": "Bloodbone Card",
                 "sellPrice": 1,
@@ -23353,7 +23353,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0001
             }),
-        new DescItemBase("CardsE14", <CardItemModel>{
+        new BaseItemBase("CardsE14", <CardItemModel>{
                 "internalName": "CardsE14",
                 "displayName": "Dedotated Ram Card",
                 "sellPrice": 1,
@@ -23369,7 +23369,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0001
             }),
-        new DescItemBase("CardsE15", <CardItemModel>{
+        new BaseItemBase("CardsE15", <CardItemModel>{
                 "internalName": "CardsE15",
                 "displayName": "Crystal Cattle Card",
                 "sellPrice": 1,
@@ -23385,7 +23385,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.008
             }),
-        new DescItemBase("CardsF1", <CardItemModel>{
+        new BaseItemBase("CardsF1", <CardItemModel>{
                 "internalName": "CardsF1",
                 "displayName": "FILLER",
                 "sellPrice": 1,
@@ -23394,7 +23394,7 @@ export const initSpecificItemRepo = () => {
                 "cardData": undefined,
                 "dropChance": 1
             }),
-        new DescItemBase("CardsF2", <CardItemModel>{
+        new BaseItemBase("CardsF2", <CardItemModel>{
                 "internalName": "CardsF2",
                 "displayName": "Wispy Lumber Card",
                 "sellPrice": 1,
@@ -23410,7 +23410,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0001
             }),
-        new DescItemBase("CardsF3", <CardItemModel>{
+        new BaseItemBase("CardsF3", <CardItemModel>{
                 "internalName": "CardsF3",
                 "displayName": "Rooted Soul Card",
                 "sellPrice": 1,
@@ -23426,7 +23426,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsF4", <CardItemModel>{
+        new BaseItemBase("CardsF4", <CardItemModel>{
                 "internalName": "CardsF4",
                 "displayName": "Mousey Card",
                 "sellPrice": 1,
@@ -23442,7 +23442,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsF5", <CardItemModel>{
+        new BaseItemBase("CardsF5", <CardItemModel>{
                 "internalName": "CardsF5",
                 "displayName": "Owlio Card",
                 "sellPrice": 1,
@@ -23458,7 +23458,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsF6", <CardItemModel>{
+        new BaseItemBase("CardsF6", <CardItemModel>{
                 "internalName": "CardsF6",
                 "displayName": "Pingy Card",
                 "sellPrice": 1,
@@ -23474,7 +23474,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsF7", <CardItemModel>{
+        new BaseItemBase("CardsF7", <CardItemModel>{
                 "internalName": "CardsF7",
                 "displayName": "Bunny Card",
                 "sellPrice": 1,
@@ -23490,7 +23490,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsF8", <CardItemModel>{
+        new BaseItemBase("CardsF8", <CardItemModel>{
                 "internalName": "CardsF8",
                 "displayName": "Mosquisnow Card",
                 "sellPrice": 1,
@@ -23506,7 +23506,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.00025
             }),
-        new DescItemBase("CardsF9", <CardItemModel>{
+        new BaseItemBase("CardsF9", <CardItemModel>{
                 "internalName": "CardsF9",
                 "displayName": "Flycicle Card",
                 "sellPrice": 1,
@@ -23522,7 +23522,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.00025
             }),
-        new DescItemBase("CardsF10", <CardItemModel>{
+        new BaseItemBase("CardsF10", <CardItemModel>{
                 "internalName": "CardsF10",
                 "displayName": "Frigid Soul Card",
                 "sellPrice": 1,
@@ -23538,7 +23538,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsF11", <CardItemModel>{
+        new BaseItemBase("CardsF11", <CardItemModel>{
                 "internalName": "CardsF11",
                 "displayName": "Squiddy Soul Card",
                 "sellPrice": 1,
@@ -23554,7 +23554,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsF12", <CardItemModel>{
+        new BaseItemBase("CardsF12", <CardItemModel>{
                 "internalName": "CardsF12",
                 "displayName": "Cubed Logs Card",
                 "sellPrice": 1,
@@ -23570,7 +23570,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 4e-05
             }),
-        new DescItemBase("CardsF13", <CardItemModel>{
+        new BaseItemBase("CardsF13", <CardItemModel>{
                 "internalName": "CardsF13",
                 "displayName": "Alien Hive Chunk Card",
                 "sellPrice": 1,
@@ -23586,7 +23586,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1e-05
             }),
-        new DescItemBase("CardsF14", <CardItemModel>{
+        new BaseItemBase("CardsF14", <CardItemModel>{
                 "internalName": "CardsF14",
                 "displayName": "Worker Bee Card",
                 "sellPrice": 1,
@@ -23602,7 +23602,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 5e-05
             }),
-        new DescItemBase("CardsF15", <CardItemModel>{
+        new BaseItemBase("CardsF15", <CardItemModel>{
                 "internalName": "CardsF15",
                 "displayName": "Fairy Card",
                 "sellPrice": 1,
@@ -23618,7 +23618,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 2e-05
             }),
-        new DescItemBase("CardsF16", <CardItemModel>{
+        new BaseItemBase("CardsF16", <CardItemModel>{
                 "internalName": "CardsF16",
                 "displayName": "Starfire Ore Card",
                 "sellPrice": 1,
@@ -23634,7 +23634,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 3e-05
             }),
-        new DescItemBase("CardsF17", <CardItemModel>{
+        new BaseItemBase("CardsF17", <CardItemModel>{
                 "internalName": "CardsF17",
                 "displayName": "Dung Beat Card",
                 "sellPrice": 1,
@@ -23650,7 +23650,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsF18", <CardItemModel>{
+        new BaseItemBase("CardsF18", <CardItemModel>{
                 "internalName": "CardsF18",
                 "displayName": "Honker Card",
                 "sellPrice": 1,
@@ -23666,7 +23666,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsF19", <CardItemModel>{
+        new BaseItemBase("CardsF19", <CardItemModel>{
                 "internalName": "CardsF19",
                 "displayName": "Blobfish Card",
                 "sellPrice": 1,
@@ -23682,7 +23682,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsF20", <CardItemModel>{
+        new BaseItemBase("CardsF20", <CardItemModel>{
                 "internalName": "CardsF20",
                 "displayName": "Skelefish Card",
                 "sellPrice": 1,
@@ -23698,7 +23698,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.001
             }),
-        new DescItemBase("CardsF21", <CardItemModel>{
+        new BaseItemBase("CardsF21", <CardItemModel>{
                 "internalName": "CardsF21",
                 "displayName": "Sand Shark Card",
                 "sellPrice": 1,
@@ -23714,7 +23714,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0004
             }),
-        new DescItemBase("CardsF22", <CardItemModel>{
+        new BaseItemBase("CardsF22", <CardItemModel>{
                 "internalName": "CardsF22",
                 "displayName": "Manta Ray Card",
                 "sellPrice": 1,
@@ -23730,7 +23730,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0001
             }),
-        new DescItemBase("CardsF23", <CardItemModel>{
+        new BaseItemBase("CardsF23", <CardItemModel>{
                 "internalName": "CardsF23",
                 "displayName": "Kraken Card",
                 "sellPrice": 1,
@@ -23746,7 +23746,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 2.5e-05
             }),
-        new DescItemBase("CardsG1", <CardItemModel>{
+        new BaseItemBase("CardsG1", <CardItemModel>{
                 "internalName": "CardsG1",
                 "displayName": "Purp Mushroom Card",
                 "sellPrice": 1,
@@ -23762,7 +23762,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 2e-05
             }),
-        new DescItemBase("CardsG2", <CardItemModel>{
+        new BaseItemBase("CardsG2", <CardItemModel>{
                 "internalName": "CardsG2",
                 "displayName": "TV Card",
                 "sellPrice": 1,
@@ -23778,7 +23778,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 2e-05
             }),
-        new DescItemBase("CardsG3", <CardItemModel>{
+        new BaseItemBase("CardsG3", <CardItemModel>{
                 "internalName": "CardsG3",
                 "displayName": "Donut Card",
                 "sellPrice": 1,
@@ -23794,7 +23794,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 2e-05
             }),
-        new DescItemBase("CardsG4", <CardItemModel>{
+        new BaseItemBase("CardsG4", <CardItemModel>{
                 "internalName": "CardsG4",
                 "displayName": "Demon Genie Card",
                 "sellPrice": 1,
@@ -23810,7 +23810,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 2e-05
             }),
-        new DescItemBase("CardsG5", <CardItemModel>{
+        new BaseItemBase("CardsG5", <CardItemModel>{
                 "internalName": "CardsG5",
                 "displayName": "Flying Worm Card",
                 "sellPrice": 1,
@@ -23826,7 +23826,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 2e-05
             }),
-        new DescItemBase("CardsG6", <CardItemModel>{
+        new BaseItemBase("CardsG6", <CardItemModel>{
                 "internalName": "CardsG6",
                 "displayName": "Soda Can Card",
                 "sellPrice": 1,
@@ -23842,7 +23842,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 2e-05
             }),
-        new DescItemBase("CardsG7", <CardItemModel>{
+        new BaseItemBase("CardsG7", <CardItemModel>{
                 "internalName": "CardsG7",
                 "displayName": "Gelatinous Cuboid Card",
                 "sellPrice": 1,
@@ -23858,7 +23858,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 2e-05
             }),
-        new DescItemBase("CardsG8", <CardItemModel>{
+        new BaseItemBase("CardsG8", <CardItemModel>{
                 "internalName": "CardsG8",
                 "displayName": "Choccie Card",
                 "sellPrice": 1,
@@ -23874,7 +23874,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 2e-05
             }),
-        new DescItemBase("CardsG9", <CardItemModel>{
+        new BaseItemBase("CardsG9", <CardItemModel>{
                 "internalName": "CardsG9",
                 "displayName": "Biggole Wurm Card",
                 "sellPrice": 1,
@@ -23890,7 +23890,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 2e-05
             }),
-        new DescItemBase("CardsG10", <CardItemModel>{
+        new BaseItemBase("CardsG10", <CardItemModel>{
                 "internalName": "CardsG10",
                 "displayName": "Clammie Card",
                 "sellPrice": 1,
@@ -23906,7 +23906,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 2e-05
             }),
-        new DescItemBase("CardsG11", <CardItemModel>{
+        new BaseItemBase("CardsG11", <CardItemModel>{
                 "internalName": "CardsG11",
                 "displayName": "Octodar Card",
                 "sellPrice": 1,
@@ -23922,7 +23922,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 2e-05
             }),
-        new DescItemBase("CardsG12", <CardItemModel>{
+        new BaseItemBase("CardsG12", <CardItemModel>{
                 "internalName": "CardsG12",
                 "displayName": "Flombeige Card",
                 "sellPrice": 1,
@@ -23938,7 +23938,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 2e-05
             }),
-        new DescItemBase("CardsG13", <CardItemModel>{
+        new BaseItemBase("CardsG13", <CardItemModel>{
                 "internalName": "CardsG13",
                 "displayName": "Stilted Seeker Card",
                 "sellPrice": 1,
@@ -23954,7 +23954,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 2e-05
             }),
-        new DescItemBase("CardsG14", <CardItemModel>{
+        new BaseItemBase("CardsG14", <CardItemModel>{
                 "internalName": "CardsG14",
                 "displayName": "Crystal Custard Card",
                 "sellPrice": 1,
@@ -23970,7 +23970,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.008
             }),
-        new DescItemBase("CardsX0", <CardItemModel>{
+        new BaseItemBase("CardsX0", <CardItemModel>{
                 "internalName": "CardsX0",
                 "displayName": "Poisonic Frog Card",
                 "sellPrice": 1,
@@ -23986,7 +23986,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.004
             }),
-        new DescItemBase("CardsX1", <CardItemModel>{
+        new BaseItemBase("CardsX1", <CardItemModel>{
                 "internalName": "CardsX1",
                 "displayName": "Globohopper Card",
                 "sellPrice": 1,
@@ -24002,7 +24002,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0025
             }),
-        new DescItemBase("CardsX2", <CardItemModel>{
+        new BaseItemBase("CardsX2", <CardItemModel>{
                 "internalName": "CardsX2",
                 "displayName": "King Frog Card",
                 "sellPrice": 1,
@@ -24018,7 +24018,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0025
             }),
-        new DescItemBase("CardsX3", <CardItemModel>{
+        new BaseItemBase("CardsX3", <CardItemModel>{
                 "internalName": "CardsX3",
                 "displayName": "Grandfrogger Card",
                 "sellPrice": 1,
@@ -24034,7 +24034,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.04
             }),
-        new DescItemBase("CardsX4", <CardItemModel>{
+        new BaseItemBase("CardsX4", <CardItemModel>{
                 "internalName": "CardsX4",
                 "displayName": "Rotting Grandfrogger Card",
                 "sellPrice": 1,
@@ -24050,7 +24050,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsX5", <CardItemModel>{
+        new BaseItemBase("CardsX5", <CardItemModel>{
                 "internalName": "CardsX5",
                 "displayName": "Forlorn Grandfrogger Card",
                 "sellPrice": 1,
@@ -24066,7 +24066,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsX21", <CardItemModel>{
+        new BaseItemBase("CardsX21", <CardItemModel>{
                 "internalName": "CardsX21",
                 "displayName": "Vengeful Grandfrogger Card",
                 "sellPrice": 1,
@@ -24082,7 +24082,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsX22", <CardItemModel>{
+        new BaseItemBase("CardsX22", <CardItemModel>{
                 "internalName": "CardsX22",
                 "displayName": "Eldritch Croaker Card",
                 "sellPrice": 1,
@@ -24098,7 +24098,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.004
             }),
-        new DescItemBase("CardsX6", <CardItemModel>{
+        new BaseItemBase("CardsX6", <CardItemModel>{
                 "internalName": "CardsX6",
                 "displayName": "Target Card",
                 "sellPrice": 1,
@@ -24114,7 +24114,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.005
             }),
-        new DescItemBase("CardsX7", <CardItemModel>{
+        new BaseItemBase("CardsX7", <CardItemModel>{
                 "internalName": "CardsX7",
                 "displayName": "Grumblo Card",
                 "sellPrice": 1,
@@ -24130,7 +24130,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.008
             }),
-        new DescItemBase("CardsX8", <CardItemModel>{
+        new BaseItemBase("CardsX8", <CardItemModel>{
                 "internalName": "CardsX8",
                 "displayName": "Cactopunk Card",
                 "sellPrice": 1,
@@ -24146,7 +24146,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0025
             }),
-        new DescItemBase("CardsX9", <CardItemModel>{
+        new BaseItemBase("CardsX9", <CardItemModel>{
                 "internalName": "CardsX9",
                 "displayName": "Beefie Card",
                 "sellPrice": 1,
@@ -24162,7 +24162,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0025
             }),
-        new DescItemBase("CardsX10", <CardItemModel>{
+        new BaseItemBase("CardsX10", <CardItemModel>{
                 "internalName": "CardsX10",
                 "displayName": "Crescent Spud Card",
                 "sellPrice": 1,
@@ -24178,7 +24178,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0025
             }),
-        new DescItemBase("CardsX11", <CardItemModel>{
+        new BaseItemBase("CardsX11", <CardItemModel>{
                 "internalName": "CardsX11",
                 "displayName": "Snakenhotep Card",
                 "sellPrice": 1,
@@ -24194,7 +24194,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.02
             }),
-        new DescItemBase("CardsX12", <CardItemModel>{
+        new BaseItemBase("CardsX12", <CardItemModel>{
                 "internalName": "CardsX12",
                 "displayName": "Enraged Snakenhotep Card",
                 "sellPrice": 1,
@@ -24210,7 +24210,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsX13", <CardItemModel>{
+        new BaseItemBase("CardsX13", <CardItemModel>{
                 "internalName": "CardsX13",
                 "displayName": "Inevitable Snakenhotep Card",
                 "sellPrice": 1,
@@ -24226,7 +24226,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsX14", <CardItemModel>{
+        new BaseItemBase("CardsX14", <CardItemModel>{
                 "internalName": "CardsX14",
                 "displayName": "Lava Slimer Card",
                 "sellPrice": 1,
@@ -24242,7 +24242,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0025
             }),
-        new DescItemBase("CardsX15", <CardItemModel>{
+        new BaseItemBase("CardsX15", <CardItemModel>{
                 "internalName": "CardsX15",
                 "displayName": "Chromatium Frog Card",
                 "sellPrice": 1,
@@ -24258,7 +24258,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.0025
             }),
-        new DescItemBase("CardsX16", <CardItemModel>{
+        new BaseItemBase("CardsX16", <CardItemModel>{
                 "internalName": "CardsX16",
                 "displayName": "Lazlo Card",
                 "sellPrice": 1,
@@ -24274,7 +24274,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.07
             }),
-        new DescItemBase("CardsX17", <CardItemModel>{
+        new BaseItemBase("CardsX17", <CardItemModel>{
                 "internalName": "CardsX17",
                 "displayName": "Ice Guard Card",
                 "sellPrice": 1,
@@ -24290,7 +24290,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.017
             }),
-        new DescItemBase("CardsX18", <CardItemModel>{
+        new BaseItemBase("CardsX18", <CardItemModel>{
                 "internalName": "CardsX18",
                 "displayName": "Glaciaxus Card",
                 "sellPrice": 1,
@@ -24306,7 +24306,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.02
             }),
-        new DescItemBase("CardsX19", <CardItemModel>{
+        new BaseItemBase("CardsX19", <CardItemModel>{
                 "internalName": "CardsX19",
                 "displayName": "Golden Glaciaxus Card",
                 "sellPrice": 1,
@@ -24322,7 +24322,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsX20", <CardItemModel>{
+        new BaseItemBase("CardsX20", <CardItemModel>{
                 "internalName": "CardsX20",
                 "displayName": "Caustic Glaciaxus Card",
                 "sellPrice": 1,
@@ -24338,7 +24338,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsY0", <CardItemModel>{
+        new BaseItemBase("CardsY0", <CardItemModel>{
                 "internalName": "CardsY0",
                 "displayName": "Ghost (Event) Card",
                 "sellPrice": 1,
@@ -24354,7 +24354,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.05
             }),
-        new DescItemBase("CardsY1", <CardItemModel>{
+        new BaseItemBase("CardsY1", <CardItemModel>{
                 "internalName": "CardsY1",
                 "displayName": "Giftmas Blobulyte Card",
                 "sellPrice": 1,
@@ -24370,7 +24370,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsY2", <CardItemModel>{
+        new BaseItemBase("CardsY2", <CardItemModel>{
                 "internalName": "CardsY2",
                 "displayName": "Meaning of Giftmas Card",
                 "sellPrice": 1,
@@ -24386,7 +24386,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.05
             }),
-        new DescItemBase("CardsY3", <CardItemModel>{
+        new BaseItemBase("CardsY3", <CardItemModel>{
                 "internalName": "CardsY3",
                 "displayName": "Valentslime Card",
                 "sellPrice": 1,
@@ -24402,7 +24402,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.05
             }),
-        new DescItemBase("CardsY4", <CardItemModel>{
+        new BaseItemBase("CardsY4", <CardItemModel>{
                 "internalName": "CardsY4",
                 "displayName": "Loveulyte Card",
                 "sellPrice": 1,
@@ -24418,7 +24418,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsY5", <CardItemModel>{
+        new BaseItemBase("CardsY5", <CardItemModel>{
                 "internalName": "CardsY5",
                 "displayName": "Chocco Box Card",
                 "sellPrice": 1,
@@ -24434,7 +24434,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsY6", <CardItemModel>{
+        new BaseItemBase("CardsY6", <CardItemModel>{
                 "internalName": "CardsY6",
                 "displayName": "Floofie Card",
                 "sellPrice": 1,
@@ -24450,7 +24450,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.05
             }),
-        new DescItemBase("CardsY7", <CardItemModel>{
+        new BaseItemBase("CardsY7", <CardItemModel>{
                 "internalName": "CardsY7",
                 "displayName": "Shell Snake Card",
                 "sellPrice": 1,
@@ -24466,7 +24466,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.05
             }),
-        new DescItemBase("CardsY8", <CardItemModel>{
+        new BaseItemBase("CardsY8", <CardItemModel>{
                 "internalName": "CardsY8",
                 "displayName": "Egggulyte Card",
                 "sellPrice": 1,
@@ -24482,7 +24482,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsY9", <CardItemModel>{
+        new BaseItemBase("CardsY9", <CardItemModel>{
                 "internalName": "CardsY9",
                 "displayName": "Egg Capsule Card",
                 "sellPrice": 1,
@@ -24498,7 +24498,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsY10", <CardItemModel>{
+        new BaseItemBase("CardsY10", <CardItemModel>{
                 "internalName": "CardsY10",
                 "displayName": "Mr Blueberry Card",
                 "sellPrice": 1,
@@ -24514,7 +24514,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.03
             }),
-        new DescItemBase("CardsY11", <CardItemModel>{
+        new BaseItemBase("CardsY11", <CardItemModel>{
                 "internalName": "CardsY11",
                 "displayName": "Coastiolyte Card",
                 "sellPrice": 1,
@@ -24530,7 +24530,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.05
             }),
-        new DescItemBase("CardsY12", <CardItemModel>{
+        new BaseItemBase("CardsY12", <CardItemModel>{
                 "internalName": "CardsY12",
                 "displayName": "Summer Spirit Card",
                 "sellPrice": 1,
@@ -24546,7 +24546,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsY13", <CardItemModel>{
+        new BaseItemBase("CardsY13", <CardItemModel>{
                 "internalName": "CardsY13",
                 "displayName": "Plasti Doug Card",
                 "sellPrice": 1,
@@ -24562,7 +24562,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.03
             }),
-        new DescItemBase("CardsY14", <CardItemModel>{
+        new BaseItemBase("CardsY14", <CardItemModel>{
                 "internalName": "CardsY14",
                 "displayName": "Golden Giftmas Box Card",
                 "sellPrice": 1,
@@ -24578,7 +24578,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1
             }),
-        new DescItemBase("CardsZ0", <CardItemModel>{
+        new BaseItemBase("CardsZ0", <CardItemModel>{
                 "internalName": "CardsZ0",
                 "displayName": "Baba Yaga Card",
                 "sellPrice": 1,
@@ -24594,7 +24594,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.03
             }),
-        new DescItemBase("CardsZ1", <CardItemModel>{
+        new BaseItemBase("CardsZ1", <CardItemModel>{
                 "internalName": "CardsZ1",
                 "displayName": "Dr Defecaus Card",
                 "sellPrice": 1,
@@ -24610,7 +24610,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.03
             }),
-        new DescItemBase("CardsZ2", <CardItemModel>{
+        new BaseItemBase("CardsZ2", <CardItemModel>{
                 "internalName": "CardsZ2",
                 "displayName": "Amarok Card",
                 "sellPrice": 1,
@@ -24626,7 +24626,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.04
             }),
-        new DescItemBase("CardsZ3", <CardItemModel>{
+        new BaseItemBase("CardsZ3", <CardItemModel>{
                 "internalName": "CardsZ3",
                 "displayName": "Efaunt Card",
                 "sellPrice": 1,
@@ -24642,7 +24642,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 5e-07
             }),
-        new DescItemBase("CardsZ4", <CardItemModel>{
+        new BaseItemBase("CardsZ4", <CardItemModel>{
                 "internalName": "CardsZ4",
                 "displayName": "Chaotic Amarok Card",
                 "sellPrice": 1,
@@ -24658,7 +24658,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.02
             }),
-        new DescItemBase("CardsZ5", <CardItemModel>{
+        new BaseItemBase("CardsZ5", <CardItemModel>{
                 "internalName": "CardsZ5",
                 "displayName": "Biggie Hours Card",
                 "sellPrice": 1,
@@ -24674,7 +24674,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0
             }),
-        new DescItemBase("CardsZ6", <CardItemModel>{
+        new BaseItemBase("CardsZ6", <CardItemModel>{
                 "internalName": "CardsZ6",
                 "displayName": "King Doot Card",
                 "sellPrice": 1,
@@ -24690,7 +24690,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0
             }),
-        new DescItemBase("CardsZ7", <CardItemModel>{
+        new BaseItemBase("CardsZ7", <CardItemModel>{
                 "internalName": "CardsZ7",
                 "displayName": "Chaotic Efaunt Card",
                 "sellPrice": 1,
@@ -24706,7 +24706,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.016
             }),
-        new DescItemBase("CardsZ8", <CardItemModel>{
+        new BaseItemBase("CardsZ8", <CardItemModel>{
                 "internalName": "CardsZ8",
                 "displayName": "Chizoar Card",
                 "sellPrice": 1,
@@ -24722,7 +24722,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.007
             }),
-        new DescItemBase("CardsZ9", <CardItemModel>{
+        new BaseItemBase("CardsZ9", <CardItemModel>{
                 "internalName": "CardsZ9",
                 "displayName": "Chaotic Chizoar Card",
                 "sellPrice": 1,
@@ -24738,7 +24738,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.004
             }),
-        new DescItemBase("CardsZ10", <CardItemModel>{
+        new BaseItemBase("CardsZ10", <CardItemModel>{
                 "internalName": "CardsZ10",
                 "displayName": "Troll Card",
                 "sellPrice": 1,
@@ -24754,7 +24754,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.01
             }),
-        new DescItemBase("CardsZ11", <CardItemModel>{
+        new BaseItemBase("CardsZ11", <CardItemModel>{
                 "internalName": "CardsZ11",
                 "displayName": "Chaotic Troll Card",
                 "sellPrice": 1,
@@ -24770,7 +24770,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.004
             }),
-        new DescItemBase("CardsZ12", <CardItemModel>{
+        new BaseItemBase("CardsZ12", <CardItemModel>{
                 "internalName": "CardsZ12",
                 "displayName": "Dilapidated Slush Card",
                 "sellPrice": 1,
@@ -24786,7 +24786,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.2
             }),
-        new DescItemBase("CardsZ13", <CardItemModel>{
+        new BaseItemBase("CardsZ13", <CardItemModel>{
                 "internalName": "CardsZ13",
                 "displayName": "Mutated Mush Card",
                 "sellPrice": 1,
@@ -24802,7 +24802,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.2
             }),
-        new DescItemBase("CardsZ14", <CardItemModel>{
+        new BaseItemBase("CardsZ14", <CardItemModel>{
                 "internalName": "CardsZ14",
                 "displayName": "Radiant Amarok Card",
                 "sellPrice": 1,
@@ -24818,7 +24818,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.02
             }),
-        new DescItemBase("CardsZ15", <CardItemModel>{
+        new BaseItemBase("CardsZ15", <CardItemModel>{
                 "internalName": "CardsZ15",
                 "displayName": "Gilded Efaunt Card",
                 "sellPrice": 1,
@@ -24834,7 +24834,7 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 0.02
             }),
-        new DescItemBase("CardsZ16", <CardItemModel>{
+        new BaseItemBase("CardsZ16", <CardItemModel>{
                 "internalName": "CardsZ16",
                 "displayName": "Blighted Chizoar Card",
                 "sellPrice": 1,
