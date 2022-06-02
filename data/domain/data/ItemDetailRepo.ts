@@ -12,7 +12,7 @@ export class CommonItemBase { constructor(public id: string, public data: Common
 
 export const initItemDetailRepo = () => {
     return [    
-        new EquipItemBase("Blank", <EquipItemModel>{
+        new CommonItemBase("Blank", <EquipItemModel>{
                 "internalID": "Blank",
                 "displayName": "ERROR",
                 "sellPrice": 0,
@@ -36,7 +36,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("null", <EquipItemModel>{
+        new CommonItemBase("null", <EquipItemModel>{
                 "internalID": "null",
                 "displayName": "NULL",
                 "sellPrice": 0,
@@ -60,7 +60,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("LockedInvSpace", <EquipItemModel>{
+        new CommonItemBase("LockedInvSpace", <EquipItemModel>{
                 "internalID": "LockedInvSpace",
                 "displayName": "ERROR",
                 "sellPrice": 0,
@@ -84,7 +84,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("COIN", <EquipItemModel>{
+        new CommonItemBase("COIN", <EquipItemModel>{
                 "internalID": "COIN",
                 "displayName": "Coins",
                 "sellPrice": 0,
@@ -108,7 +108,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EXP", <EquipItemModel>{
+        new CommonItemBase("EXP", <EquipItemModel>{
                 "internalID": "EXP",
                 "displayName": "Exp",
                 "sellPrice": 0,
@@ -132,7 +132,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungCredits2", <QuestItemModel>{
+        new CommonItemBase("DungCredits2", <QuestItemModel>{
                 "internalID": "DungCredits2",
                 "displayName": "Dungeon Credits Flurbo Edition",
                 "sellPrice": 1,
@@ -149,7 +149,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Cash", <QuestItemModel>{
+        new CommonItemBase("Cash", <QuestItemModel>{
                 "internalID": "Cash",
                 "displayName": "Cash",
                 "sellPrice": 1,
@@ -166,7 +166,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("XP", <QuestItemModel>{
+        new CommonItemBase("XP", <QuestItemModel>{
                 "internalID": "XP",
                 "displayName": "Experience",
                 "sellPrice": 1,
@@ -183,7 +183,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("XPskill", <QuestItemModel>{
+        new CommonItemBase("XPskill", <QuestItemModel>{
                 "internalID": "XPskill",
                 "displayName": "Skill Experience",
                 "sellPrice": 1,
@@ -200,7 +200,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DungEnhancer0", <QuestItemModel>{
+        new CommonItemBase("DungEnhancer0", <QuestItemModel>{
                 "internalID": "DungEnhancer0",
                 "displayName": "Weapon Enhancer",
                 "sellPrice": 1,
@@ -217,7 +217,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DungEnhancer1", <QuestItemModel>{
+        new CommonItemBase("DungEnhancer1", <QuestItemModel>{
                 "internalID": "DungEnhancer1",
                 "displayName": "Armor Enhancer",
                 "sellPrice": 1,
@@ -234,7 +234,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DungEnhancer2", <QuestItemModel>{
+        new CommonItemBase("DungEnhancer2", <QuestItemModel>{
                 "internalID": "DungEnhancer2",
                 "displayName": "Jewelry Enhancer",
                 "sellPrice": 1,
@@ -251,7 +251,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DungRNG0", <QuestItemModel>{
+        new CommonItemBase("DungRNG0", <QuestItemModel>{
                 "internalID": "DungRNG0",
                 "displayName": "Uncommon RNG Item",
                 "sellPrice": 1,
@@ -268,7 +268,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DungRNG1", <QuestItemModel>{
+        new CommonItemBase("DungRNG1", <QuestItemModel>{
                 "internalID": "DungRNG1",
                 "displayName": "Uncommon RNG Item",
                 "sellPrice": 1,
@@ -285,7 +285,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DungRNG2", <QuestItemModel>{
+        new CommonItemBase("DungRNG2", <QuestItemModel>{
                 "internalID": "DungRNG2",
                 "displayName": "Uncommon RNG Item",
                 "sellPrice": 1,
@@ -302,7 +302,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DungRNG3", <QuestItemModel>{
+        new CommonItemBase("DungRNG3", <QuestItemModel>{
                 "internalID": "DungRNG3",
                 "displayName": "Uncommon RNG Item",
                 "sellPrice": 1,
@@ -319,7 +319,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DungRNG4", <QuestItemModel>{
+        new CommonItemBase("DungRNG4", <QuestItemModel>{
                 "internalID": "DungRNG4",
                 "displayName": "Uncommon RNG Item",
                 "sellPrice": 1,
@@ -336,7 +336,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DungeonA1", <QuestItemModel>{
+        new CommonItemBase("DungeonA1", <QuestItemModel>{
                 "internalID": "DungeonA1",
                 "displayName": "Poisoned Leg",
                 "sellPrice": 1,
@@ -353,7 +353,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DungeonA2", <QuestItemModel>{
+        new CommonItemBase("DungeonA2", <QuestItemModel>{
                 "internalID": "DungeonA2",
                 "displayName": "Minced Bluebeef",
                 "sellPrice": 1,
@@ -370,7 +370,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DungeonA3", <QuestItemModel>{
+        new CommonItemBase("DungeonA3", <QuestItemModel>{
                 "internalID": "DungeonA3",
                 "displayName": "Bloated Cyst",
                 "sellPrice": 1,
@@ -387,7 +387,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DungeonA4", <QuestItemModel>{
+        new CommonItemBase("DungeonA4", <QuestItemModel>{
                 "internalID": "DungeonA4",
                 "displayName": "Floppy Gizard",
                 "sellPrice": 1,
@@ -404,7 +404,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DungeonA5", <QuestItemModel>{
+        new CommonItemBase("DungeonA5", <QuestItemModel>{
                 "internalID": "DungeonA5",
                 "displayName": "Molted Tail",
                 "sellPrice": 1,
@@ -421,7 +421,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DungeonA6", <QuestItemModel>{
+        new CommonItemBase("DungeonA6", <QuestItemModel>{
                 "internalID": "DungeonA6",
                 "displayName": "Decomposing Skull",
                 "sellPrice": 1,
@@ -438,7 +438,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DungeonA7", <QuestItemModel>{
+        new CommonItemBase("DungeonA7", <QuestItemModel>{
                 "internalID": "DungeonA7",
                 "displayName": "Giant Frog Eye",
                 "sellPrice": 1,
@@ -455,7 +455,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DungeonA8", <QuestItemModel>{
+        new CommonItemBase("DungeonA8", <QuestItemModel>{
                 "internalID": "DungeonA8",
                 "displayName": "Eldritch Ripcage",
                 "sellPrice": 1,
@@ -472,7 +472,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Copper", <ConsumableItemModel>{
+        new CommonItemBase("Copper", <ConsumableItemModel>{
                 "internalID": "Copper",
                 "displayName": "Copper Ore",
                 "sellPrice": 3,
@@ -493,7 +493,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 2,
                 "Cooldown": 100
             }),
-        new EquipItemBase("Iron", <ConsumableItemModel>{
+        new CommonItemBase("Iron", <ConsumableItemModel>{
                 "internalID": "Iron",
                 "displayName": "Iron Ore",
                 "sellPrice": 7,
@@ -514,7 +514,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 4,
                 "Cooldown": 400
             }),
-        new EquipItemBase("Gold", <ConsumableItemModel>{
+        new CommonItemBase("Gold", <ConsumableItemModel>{
                 "internalID": "Gold",
                 "displayName": "Gold Ore",
                 "sellPrice": 13,
@@ -535,7 +535,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 7,
                 "Cooldown": 1000
             }),
-        new EquipItemBase("Plat", <ConsumableItemModel>{
+        new CommonItemBase("Plat", <ConsumableItemModel>{
                 "internalID": "Plat",
                 "displayName": "Platinum Ore",
                 "sellPrice": 20,
@@ -556,7 +556,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 16,
                 "Cooldown": 2200
             }),
-        new EquipItemBase("Dementia", <ConsumableItemModel>{
+        new CommonItemBase("Dementia", <ConsumableItemModel>{
                 "internalID": "Dementia",
                 "displayName": "Dementia Ore",
                 "sellPrice": 35,
@@ -577,7 +577,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 40,
                 "Cooldown": 3500
             }),
-        new EquipItemBase("Void", <ConsumableItemModel>{
+        new CommonItemBase("Void", <ConsumableItemModel>{
                 "internalID": "Void",
                 "displayName": "Void Ore",
                 "sellPrice": 48,
@@ -598,7 +598,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 100,
                 "Cooldown": 6000
             }),
-        new EquipItemBase("Lustre", <ConsumableItemModel>{
+        new CommonItemBase("Lustre", <ConsumableItemModel>{
                 "internalID": "Lustre",
                 "displayName": "Lustre Ore",
                 "sellPrice": 60,
@@ -619,7 +619,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 250,
                 "Cooldown": 12500
             }),
-        new EquipItemBase("Starfire", <ConsumableItemModel>{
+        new CommonItemBase("Starfire", <ConsumableItemModel>{
                 "internalID": "Starfire",
                 "displayName": "Starfire Ore",
                 "sellPrice": 100,
@@ -640,7 +640,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 500,
                 "Cooldown": 25000
             }),
-        new EquipItemBase("Dreadlo", <ConsumableItemModel>{
+        new CommonItemBase("Dreadlo", <ConsumableItemModel>{
                 "internalID": "Dreadlo",
                 "displayName": "Dreadlo Ore",
                 "sellPrice": 130,
@@ -661,7 +661,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 1000,
                 "Cooldown": 100
             }),
-        new EquipItemBase("Godshard", <ConsumableItemModel>{
+        new CommonItemBase("Godshard", <ConsumableItemModel>{
                 "internalID": "Godshard",
                 "displayName": "Godshard Ore",
                 "sellPrice": 250,
@@ -682,7 +682,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 5000,
                 "Cooldown": 100
             }),
-        new EquipItemBase("CopperBar", <CommonItemModel>{
+        new CommonItemBase("CopperBar", <CommonItemModel>{
                 "internalID": "CopperBar",
                 "displayName": "Copper Bar",
                 "sellPrice": 7,
@@ -691,7 +691,7 @@ export const initItemDetailRepo = () => {
                 "Type": "Bar",
                 "lvReqToCraft": 0
             }),
-        new EquipItemBase("IronBar", <CommonItemModel>{
+        new CommonItemBase("IronBar", <CommonItemModel>{
                 "internalID": "IronBar",
                 "displayName": "Iron Bar",
                 "sellPrice": 32,
@@ -700,7 +700,7 @@ export const initItemDetailRepo = () => {
                 "Type": "Bar",
                 "lvReqToCraft": 0
             }),
-        new EquipItemBase("GoldBar", <CommonItemModel>{
+        new CommonItemBase("GoldBar", <CommonItemModel>{
                 "internalID": "GoldBar",
                 "displayName": "Gold Bar",
                 "sellPrice": 115,
@@ -709,7 +709,7 @@ export const initItemDetailRepo = () => {
                 "Type": "Bar",
                 "lvReqToCraft": 0
             }),
-        new EquipItemBase("PlatBar", <CommonItemModel>{
+        new CommonItemBase("PlatBar", <CommonItemModel>{
                 "internalID": "PlatBar",
                 "displayName": "Platinum Bar",
                 "sellPrice": 460,
@@ -718,7 +718,7 @@ export const initItemDetailRepo = () => {
                 "Type": "Bar",
                 "lvReqToCraft": 0
             }),
-        new EquipItemBase("DementiaBar", <CommonItemModel>{
+        new CommonItemBase("DementiaBar", <CommonItemModel>{
                 "internalID": "DementiaBar",
                 "displayName": "Dementia Bar",
                 "sellPrice": 1500,
@@ -727,7 +727,7 @@ export const initItemDetailRepo = () => {
                 "Type": "Bar",
                 "lvReqToCraft": 0
             }),
-        new EquipItemBase("VoidBar", <CommonItemModel>{
+        new CommonItemBase("VoidBar", <CommonItemModel>{
                 "internalID": "VoidBar",
                 "displayName": "Void Bar",
                 "sellPrice": 6200,
@@ -736,7 +736,7 @@ export const initItemDetailRepo = () => {
                 "Type": "Bar",
                 "lvReqToCraft": 0
             }),
-        new EquipItemBase("LustreBar", <CommonItemModel>{
+        new CommonItemBase("LustreBar", <CommonItemModel>{
                 "internalID": "LustreBar",
                 "displayName": "Lustre Bar",
                 "sellPrice": 12500,
@@ -745,7 +745,7 @@ export const initItemDetailRepo = () => {
                 "Type": "Bar",
                 "lvReqToCraft": 0
             }),
-        new EquipItemBase("StarfireBar", <CommonItemModel>{
+        new CommonItemBase("StarfireBar", <CommonItemModel>{
                 "internalID": "StarfireBar",
                 "displayName": "Starfire Bar",
                 "sellPrice": 1,
@@ -754,7 +754,7 @@ export const initItemDetailRepo = () => {
                 "Type": "Bar",
                 "lvReqToCraft": 0
             }),
-        new EquipItemBase("DreadloBar", <CommonItemModel>{
+        new CommonItemBase("DreadloBar", <CommonItemModel>{
                 "internalID": "DreadloBar",
                 "displayName": "Dreadlo Bar",
                 "sellPrice": 1,
@@ -763,7 +763,7 @@ export const initItemDetailRepo = () => {
                 "Type": "Bar",
                 "lvReqToCraft": 0
             }),
-        new EquipItemBase("GodshardBar", <CommonItemModel>{
+        new CommonItemBase("GodshardBar", <CommonItemModel>{
                 "internalID": "GodshardBar",
                 "displayName": "Godshard Bar",
                 "sellPrice": 1,
@@ -772,7 +772,7 @@ export const initItemDetailRepo = () => {
                 "Type": "Bar",
                 "lvReqToCraft": 0
             }),
-        new EquipItemBase("OilBarrel1", <ConsumableItemModel>{
+        new CommonItemBase("OilBarrel1", <ConsumableItemModel>{
                 "internalID": "OilBarrel1",
                 "displayName": "Crude Oil",
                 "sellPrice": 8,
@@ -793,7 +793,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 15,
                 "Cooldown": 75
             }),
-        new EquipItemBase("OilBarrel2", <ConsumableItemModel>{
+        new CommonItemBase("OilBarrel2", <ConsumableItemModel>{
                 "internalID": "OilBarrel2",
                 "displayName": "Toxic Sludge",
                 "sellPrice": 20,
@@ -814,7 +814,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 20,
                 "Cooldown": 60
             }),
-        new EquipItemBase("OilBarrel3", <ConsumableItemModel>{
+        new CommonItemBase("OilBarrel3", <ConsumableItemModel>{
                 "internalID": "OilBarrel3",
                 "displayName": "Radioactive Waste",
                 "sellPrice": 50,
@@ -835,7 +835,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 30,
                 "Cooldown": 30
             }),
-        new EquipItemBase("OilBarrel4", <ConsumableItemModel>{
+        new CommonItemBase("OilBarrel4", <ConsumableItemModel>{
                 "internalID": "OilBarrel4",
                 "displayName": "Glumlee's Special Tutorial Oil",
                 "sellPrice": 350,
@@ -856,7 +856,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 999,
                 "Cooldown": 200
             }),
-        new EquipItemBase("OilBarrel5", <ConsumableItemModel>{
+        new CommonItemBase("OilBarrel5", <ConsumableItemModel>{
                 "internalID": "OilBarrel5",
                 "displayName": "Eco Friendly Oil",
                 "sellPrice": 350,
@@ -877,7 +877,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 10,
                 "Cooldown": 30
             }),
-        new EquipItemBase("OakTree", <CommonItemModel>{
+        new CommonItemBase("OakTree", <CommonItemModel>{
                 "internalID": "OakTree",
                 "displayName": "Oak Logs",
                 "sellPrice": 2,
@@ -886,7 +886,7 @@ export const initItemDetailRepo = () => {
                 "Type": "Log",
                 "lvReqToCraft": 0
             }),
-        new EquipItemBase("BirchTree", <CommonItemModel>{
+        new CommonItemBase("BirchTree", <CommonItemModel>{
                 "internalID": "BirchTree",
                 "displayName": "Bleach Logs",
                 "sellPrice": 3,
@@ -895,7 +895,7 @@ export const initItemDetailRepo = () => {
                 "Type": "Log",
                 "lvReqToCraft": 0
             }),
-        new EquipItemBase("JungleTree", <CommonItemModel>{
+        new CommonItemBase("JungleTree", <CommonItemModel>{
                 "internalID": "JungleTree",
                 "displayName": "Jungle Logs",
                 "sellPrice": 6,
@@ -904,7 +904,7 @@ export const initItemDetailRepo = () => {
                 "Type": "Log",
                 "lvReqToCraft": 0
             }),
-        new EquipItemBase("ForestTree", <CommonItemModel>{
+        new CommonItemBase("ForestTree", <CommonItemModel>{
                 "internalID": "ForestTree",
                 "displayName": "Forest Fibres",
                 "sellPrice": 10,
@@ -913,7 +913,7 @@ export const initItemDetailRepo = () => {
                 "Type": "Log",
                 "lvReqToCraft": 0
             }),
-        new EquipItemBase("ToiletTree", <CommonItemModel>{
+        new CommonItemBase("ToiletTree", <CommonItemModel>{
                 "internalID": "ToiletTree",
                 "displayName": "Potty Rolls",
                 "sellPrice": 15,
@@ -922,7 +922,7 @@ export const initItemDetailRepo = () => {
                 "Type": "Log",
                 "lvReqToCraft": 0
             }),
-        new EquipItemBase("PalmTree", <CommonItemModel>{
+        new CommonItemBase("PalmTree", <CommonItemModel>{
                 "internalID": "PalmTree",
                 "displayName": "Tropilogs",
                 "sellPrice": 20,
@@ -931,7 +931,7 @@ export const initItemDetailRepo = () => {
                 "Type": "Log",
                 "lvReqToCraft": 0
             }),
-        new EquipItemBase("StumpTree", <CommonItemModel>{
+        new CommonItemBase("StumpTree", <CommonItemModel>{
                 "internalID": "StumpTree",
                 "displayName": "Veiny Logs",
                 "sellPrice": 25,
@@ -940,7 +940,7 @@ export const initItemDetailRepo = () => {
                 "Type": "Log",
                 "lvReqToCraft": 0
             }),
-        new EquipItemBase("SaharanFoal", <CommonItemModel>{
+        new CommonItemBase("SaharanFoal", <CommonItemModel>{
                 "internalID": "SaharanFoal",
                 "displayName": "Tundra Logs",
                 "sellPrice": 30,
@@ -949,7 +949,7 @@ export const initItemDetailRepo = () => {
                 "Type": "Log",
                 "lvReqToCraft": 0
             }),
-        new EquipItemBase("Tree7", <CommonItemModel>{
+        new CommonItemBase("Tree7", <CommonItemModel>{
                 "internalID": "Tree7",
                 "displayName": "Wispy Lumber",
                 "sellPrice": 40,
@@ -958,7 +958,7 @@ export const initItemDetailRepo = () => {
                 "Type": "Log",
                 "lvReqToCraft": 0
             }),
-        new EquipItemBase("AlienTree", <CommonItemModel>{
+        new CommonItemBase("AlienTree", <CommonItemModel>{
                 "internalID": "AlienTree",
                 "displayName": "Alien Hive Chunk",
                 "sellPrice": 55,
@@ -967,7 +967,7 @@ export const initItemDetailRepo = () => {
                 "Type": "Log",
                 "lvReqToCraft": 0
             }),
-        new EquipItemBase("Tree8", <CommonItemModel>{
+        new CommonItemBase("Tree8", <CommonItemModel>{
                 "internalID": "Tree8",
                 "displayName": "Cubed Logs",
                 "sellPrice": 80,
@@ -976,7 +976,7 @@ export const initItemDetailRepo = () => {
                 "Type": "Log",
                 "lvReqToCraft": 0
             }),
-        new EquipItemBase("Leaf1", <CommonItemModel>{
+        new CommonItemBase("Leaf1", <CommonItemModel>{
                 "internalID": "Leaf1",
                 "displayName": "Grass Leaf",
                 "sellPrice": 4,
@@ -985,7 +985,7 @@ export const initItemDetailRepo = () => {
                 "Type": "Leaf",
                 "lvReqToCraft": 0
             }),
-        new EquipItemBase("Leaf2", <CommonItemModel>{
+        new CommonItemBase("Leaf2", <CommonItemModel>{
                 "internalID": "Leaf2",
                 "displayName": "Twisty Leaf",
                 "sellPrice": 50,
@@ -994,7 +994,7 @@ export const initItemDetailRepo = () => {
                 "Type": "Leaf",
                 "lvReqToCraft": 0
             }),
-        new EquipItemBase("Leaf3", <CommonItemModel>{
+        new CommonItemBase("Leaf3", <CommonItemModel>{
                 "internalID": "Leaf3",
                 "displayName": "Arctic Leaf",
                 "sellPrice": 100,
@@ -1003,7 +1003,7 @@ export const initItemDetailRepo = () => {
                 "Type": "Leaf",
                 "lvReqToCraft": 0
             }),
-        new EquipItemBase("Leaf4", <CommonItemModel>{
+        new CommonItemBase("Leaf4", <CommonItemModel>{
                 "internalID": "Leaf4",
                 "displayName": "Galactic Leaf",
                 "sellPrice": 100,
@@ -1012,7 +1012,7 @@ export const initItemDetailRepo = () => {
                 "Type": "Leaf",
                 "lvReqToCraft": 0
             }),
-        new EquipItemBase("FillerMaterial", <ConsumableItemModel>{
+        new CommonItemBase("FillerMaterial", <ConsumableItemModel>{
                 "internalID": "FillerMaterial",
                 "displayName": "Not Yet",
                 "sellPrice": 4,
@@ -1033,7 +1033,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Fish1", <ConsumableItemModel>{
+        new CommonItemBase("Fish1", <ConsumableItemModel>{
                 "internalID": "Fish1",
                 "displayName": "Goldfish",
                 "sellPrice": 4,
@@ -1054,7 +1054,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Fish2", <ConsumableItemModel>{
+        new CommonItemBase("Fish2", <ConsumableItemModel>{
                 "internalID": "Fish2",
                 "displayName": "Hermit Can",
                 "sellPrice": 11,
@@ -1075,7 +1075,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Fish3", <ConsumableItemModel>{
+        new CommonItemBase("Fish3", <ConsumableItemModel>{
                 "internalID": "Fish3",
                 "displayName": "Jellyfish",
                 "sellPrice": 14,
@@ -1096,7 +1096,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Fish4", <ConsumableItemModel>{
+        new CommonItemBase("Fish4", <ConsumableItemModel>{
                 "internalID": "Fish4",
                 "displayName": "Bloach",
                 "sellPrice": 18,
@@ -1117,7 +1117,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Fish5", <ConsumableItemModel>{
+        new CommonItemBase("Fish5", <ConsumableItemModel>{
                 "internalID": "Fish5",
                 "displayName": "Skelefish",
                 "sellPrice": 5,
@@ -1138,7 +1138,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Fish6", <ConsumableItemModel>{
+        new CommonItemBase("Fish6", <ConsumableItemModel>{
                 "internalID": "Fish6",
                 "displayName": "Sand Shark",
                 "sellPrice": 5,
@@ -1159,7 +1159,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Fish7", <ConsumableItemModel>{
+        new CommonItemBase("Fish7", <ConsumableItemModel>{
                 "internalID": "Fish7",
                 "displayName": "Manta Ray",
                 "sellPrice": 5,
@@ -1180,7 +1180,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Fish8", <ConsumableItemModel>{
+        new CommonItemBase("Fish8", <ConsumableItemModel>{
                 "internalID": "Fish8",
                 "displayName": "Kraken",
                 "sellPrice": 5,
@@ -1201,7 +1201,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Bug1", <ConsumableItemModel>{
+        new CommonItemBase("Bug1", <ConsumableItemModel>{
                 "internalID": "Bug1",
                 "displayName": "Fly",
                 "sellPrice": 3,
@@ -1222,7 +1222,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Bug2", <ConsumableItemModel>{
+        new CommonItemBase("Bug2", <ConsumableItemModel>{
                 "internalID": "Bug2",
                 "displayName": "Butterfly",
                 "sellPrice": 9,
@@ -1243,7 +1243,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Bug3", <ConsumableItemModel>{
+        new CommonItemBase("Bug3", <ConsumableItemModel>{
                 "internalID": "Bug3",
                 "displayName": "Sentient Cereal",
                 "sellPrice": 15,
@@ -1264,7 +1264,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Bug4", <ConsumableItemModel>{
+        new CommonItemBase("Bug4", <ConsumableItemModel>{
                 "internalID": "Bug4",
                 "displayName": "Fruitfly",
                 "sellPrice": 20,
@@ -1285,7 +1285,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Bug5", <ConsumableItemModel>{
+        new CommonItemBase("Bug5", <ConsumableItemModel>{
                 "internalID": "Bug5",
                 "displayName": "Mosquisnow",
                 "sellPrice": 32,
@@ -1306,7 +1306,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Bug6", <ConsumableItemModel>{
+        new CommonItemBase("Bug6", <ConsumableItemModel>{
                 "internalID": "Bug6",
                 "displayName": "Flycicle",
                 "sellPrice": 40,
@@ -1327,7 +1327,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Bug7", <ConsumableItemModel>{
+        new CommonItemBase("Bug7", <ConsumableItemModel>{
                 "internalID": "Bug7",
                 "displayName": "Worker Bee",
                 "sellPrice": 70,
@@ -1348,7 +1348,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Bug8", <ConsumableItemModel>{
+        new CommonItemBase("Bug8", <ConsumableItemModel>{
                 "internalID": "Bug8",
                 "displayName": "Fairy",
                 "sellPrice": 120,
@@ -1369,7 +1369,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Critter1", <ConsumableItemModel>{
+        new CommonItemBase("Critter1", <ConsumableItemModel>{
                 "internalID": "Critter1",
                 "displayName": "Froge",
                 "sellPrice": 3,
@@ -1390,7 +1390,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Critter1A", <ConsumableItemModel>{
+        new CommonItemBase("Critter1A", <ConsumableItemModel>{
                 "internalID": "Critter1A",
                 "displayName": "Poison Froge",
                 "sellPrice": 100,
@@ -1411,7 +1411,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Critter2", <ConsumableItemModel>{
+        new CommonItemBase("Critter2", <ConsumableItemModel>{
                 "internalID": "Critter2",
                 "displayName": "Crabbo",
                 "sellPrice": 5,
@@ -1432,7 +1432,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Critter2A", <ConsumableItemModel>{
+        new CommonItemBase("Critter2A", <ConsumableItemModel>{
                 "internalID": "Critter2A",
                 "displayName": "Mutant Crabbo",
                 "sellPrice": 2000,
@@ -1453,7 +1453,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Critter3", <ConsumableItemModel>{
+        new CommonItemBase("Critter3", <ConsumableItemModel>{
                 "internalID": "Critter3",
                 "displayName": "Scorpie",
                 "sellPrice": 10,
@@ -1474,7 +1474,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Critter3A", <ConsumableItemModel>{
+        new CommonItemBase("Critter3A", <ConsumableItemModel>{
                 "internalID": "Critter3A",
                 "displayName": "Crescent Scorpie",
                 "sellPrice": 10,
@@ -1495,7 +1495,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Critter4", <ConsumableItemModel>{
+        new CommonItemBase("Critter4", <ConsumableItemModel>{
                 "internalID": "Critter4",
                 "displayName": "Mousey",
                 "sellPrice": 15,
@@ -1516,7 +1516,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Critter4A", <ConsumableItemModel>{
+        new CommonItemBase("Critter4A", <ConsumableItemModel>{
                 "internalID": "Critter4A",
                 "displayName": "Nakeo Moleo",
                 "sellPrice": 3,
@@ -1537,7 +1537,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Critter5", <ConsumableItemModel>{
+        new CommonItemBase("Critter5", <ConsumableItemModel>{
                 "internalID": "Critter5",
                 "displayName": "Owlio",
                 "sellPrice": 23,
@@ -1558,7 +1558,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Critter5A", <ConsumableItemModel>{
+        new CommonItemBase("Critter5A", <ConsumableItemModel>{
                 "internalID": "Critter5A",
                 "displayName": "Minervowl",
                 "sellPrice": 3,
@@ -1579,7 +1579,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Critter6", <ConsumableItemModel>{
+        new CommonItemBase("Critter6", <ConsumableItemModel>{
                 "internalID": "Critter6",
                 "displayName": "Pingy",
                 "sellPrice": 35,
@@ -1600,7 +1600,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Critter6A", <ConsumableItemModel>{
+        new CommonItemBase("Critter6A", <ConsumableItemModel>{
                 "internalID": "Critter6A",
                 "displayName": "Eternal Lord of  The Undying Ember",
                 "sellPrice": 3,
@@ -1621,7 +1621,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Critter7", <ConsumableItemModel>{
+        new CommonItemBase("Critter7", <ConsumableItemModel>{
                 "internalID": "Critter7",
                 "displayName": "Bunny",
                 "sellPrice": 47,
@@ -1642,7 +1642,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Critter7A", <ConsumableItemModel>{
+        new CommonItemBase("Critter7A", <ConsumableItemModel>{
                 "internalID": "Critter7A",
                 "displayName": "Purbunni",
                 "sellPrice": 3,
@@ -1663,7 +1663,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Critter8", <ConsumableItemModel>{
+        new CommonItemBase("Critter8", <ConsumableItemModel>{
                 "internalID": "Critter8",
                 "displayName": "Dung Beat",
                 "sellPrice": 55,
@@ -1684,7 +1684,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Critter8A", <ConsumableItemModel>{
+        new CommonItemBase("Critter8A", <ConsumableItemModel>{
                 "internalID": "Critter8A",
                 "displayName": "Jade Scarab",
                 "sellPrice": 3,
@@ -1705,7 +1705,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Critter9", <ConsumableItemModel>{
+        new CommonItemBase("Critter9", <ConsumableItemModel>{
                 "internalID": "Critter9",
                 "displayName": "Honker",
                 "sellPrice": 80,
@@ -1726,7 +1726,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Critter9A", <ConsumableItemModel>{
+        new CommonItemBase("Critter9A", <ConsumableItemModel>{
                 "internalID": "Critter9A",
                 "displayName": "Diamond Duck",
                 "sellPrice": 3,
@@ -1747,7 +1747,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Critter10", <ConsumableItemModel>{
+        new CommonItemBase("Critter10", <ConsumableItemModel>{
                 "internalID": "Critter10",
                 "displayName": "Blobfish",
                 "sellPrice": 80,
@@ -1768,7 +1768,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Critter10A", <ConsumableItemModel>{
+        new CommonItemBase("Critter10A", <ConsumableItemModel>{
                 "internalID": "Critter10A",
                 "displayName": "Voodofish",
                 "sellPrice": 3,
@@ -1789,7 +1789,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Soul1", <ConsumableItemModel>{
+        new CommonItemBase("Soul1", <ConsumableItemModel>{
                 "internalID": "Soul1",
                 "displayName": "Forest Soul",
                 "sellPrice": 3,
@@ -1810,7 +1810,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Soul2", <ConsumableItemModel>{
+        new CommonItemBase("Soul2", <ConsumableItemModel>{
                 "internalID": "Soul2",
                 "displayName": "Dune Soul",
                 "sellPrice": 9,
@@ -1831,7 +1831,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Soul3", <ConsumableItemModel>{
+        new CommonItemBase("Soul3", <ConsumableItemModel>{
                 "internalID": "Soul3",
                 "displayName": "Rooted Soul",
                 "sellPrice": 20,
@@ -1852,7 +1852,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Soul4", <ConsumableItemModel>{
+        new CommonItemBase("Soul4", <ConsumableItemModel>{
                 "internalID": "Soul4",
                 "displayName": "Frigid Soul",
                 "sellPrice": 35,
@@ -1873,7 +1873,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Soul5", <ConsumableItemModel>{
+        new CommonItemBase("Soul5", <ConsumableItemModel>{
                 "internalID": "Soul5",
                 "displayName": "Squishy Soul",
                 "sellPrice": 50,
@@ -1894,7 +1894,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("Soul6", <ConsumableItemModel>{
+        new CommonItemBase("Soul6", <ConsumableItemModel>{
                 "internalID": "Soul6",
                 "displayName": "Cryo Soul",
                 "sellPrice": 70,
@@ -1915,7 +1915,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 0,
                 "Cooldown": 0
             }),
-        new EquipItemBase("EquipmentHats1", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats1", <EquipItemModel>{
                 "internalID": "EquipmentHats1",
                 "displayName": "Farmer Brim",
                 "sellPrice": 175,
@@ -1939,7 +1939,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 1
             }),
-        new EquipItemBase("TestObj15", <EquipItemModel>{
+        new CommonItemBase("TestObj15", <EquipItemModel>{
                 "internalID": "TestObj15",
                 "displayName": "Slime Cap",
                 "sellPrice": 200,
@@ -1963,7 +1963,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentHatsBeg1", <EquipItemModel>{
+        new CommonItemBase("EquipmentHatsBeg1", <EquipItemModel>{
                 "internalID": "EquipmentHatsBeg1",
                 "displayName": "Ice Cream Sunday",
                 "sellPrice": 200,
@@ -1987,7 +1987,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentHats61", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats61", <EquipItemModel>{
                 "internalID": "EquipmentHats61",
                 "displayName": "Mark of Member",
                 "sellPrice": 200,
@@ -2011,7 +2011,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentHats15", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats15", <EquipItemModel>{
                 "internalID": "EquipmentHats15",
                 "displayName": "Leather Cap",
                 "sellPrice": 400,
@@ -2035,7 +2035,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentHats5", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats5", <EquipItemModel>{
                 "internalID": "EquipmentHats5",
                 "displayName": "White Headband",
                 "sellPrice": 200,
@@ -2059,7 +2059,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentHats6", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats6", <EquipItemModel>{
                 "internalID": "EquipmentHats6",
                 "displayName": "Green Headband",
                 "sellPrice": 150,
@@ -2083,7 +2083,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentHats7", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats7", <EquipItemModel>{
                 "internalID": "EquipmentHats7",
                 "displayName": "Red Headband",
                 "sellPrice": 200,
@@ -2107,7 +2107,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentHats8", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats8", <EquipItemModel>{
                 "internalID": "EquipmentHats8",
                 "displayName": "Purple Tupacband",
                 "sellPrice": 200,
@@ -2131,7 +2131,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentHats9", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats9", <EquipItemModel>{
                 "internalID": "EquipmentHats9",
                 "displayName": "Yellow Headband",
                 "sellPrice": 200,
@@ -2155,7 +2155,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentHats10", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats10", <EquipItemModel>{
                 "internalID": "EquipmentHats10",
                 "displayName": "Pink Headband",
                 "sellPrice": 200,
@@ -2179,7 +2179,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentHats11", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats11", <EquipItemModel>{
                 "internalID": "EquipmentHats11",
                 "displayName": "Grey Beret",
                 "sellPrice": 5,
@@ -2203,7 +2203,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 1
             }),
-        new EquipItemBase("EquipmentHats12", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats12", <EquipItemModel>{
                 "internalID": "EquipmentHats12",
                 "displayName": "Traffic Cone",
                 "sellPrice": 5,
@@ -2227,7 +2227,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 1
             }),
-        new EquipItemBase("EquipmentHats13", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats13", <EquipItemModel>{
                 "internalID": "EquipmentHats13",
                 "displayName": "Propeller Cap",
                 "sellPrice": 5,
@@ -2251,7 +2251,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 1
             }),
-        new EquipItemBase("EquipmentHats14", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats14", <EquipItemModel>{
                 "internalID": "EquipmentHats14",
                 "displayName": "Baseball Hat",
                 "sellPrice": 5,
@@ -2275,7 +2275,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 1
             }),
-        new EquipItemBase("TestObj14", <EquipItemModel>{
+        new CommonItemBase("TestObj14", <EquipItemModel>{
                 "internalID": "TestObj14",
                 "displayName": "Trojan Helmet",
                 "sellPrice": 200,
@@ -2299,7 +2299,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("TestObj16", <EquipItemModel>{
+        new CommonItemBase("TestObj16", <EquipItemModel>{
                 "internalID": "TestObj16",
                 "displayName": "Demon Horns",
                 "sellPrice": 200,
@@ -2323,7 +2323,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentHats4Choppin", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats4Choppin", <EquipItemModel>{
                 "internalID": "EquipmentHats4Choppin",
                 "displayName": "Stump Prop",
                 "sellPrice": 200,
@@ -2347,7 +2347,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentHats17", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats17", <EquipItemModel>{
                 "internalID": "EquipmentHats17",
                 "displayName": "Copper Helmet",
                 "sellPrice": 1000,
@@ -2371,7 +2371,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentHats18", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats18", <EquipItemModel>{
                 "internalID": "EquipmentHats18",
                 "displayName": "Iron Helmet",
                 "sellPrice": 5000,
@@ -2395,7 +2395,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentHats28", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats28", <EquipItemModel>{
                 "internalID": "EquipmentHats28",
                 "displayName": "Gold Helmet",
                 "sellPrice": 15000,
@@ -2419,7 +2419,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentHats22", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats22", <EquipItemModel>{
                 "internalID": "EquipmentHats22",
                 "displayName": "Amarok Helmet",
                 "sellPrice": 100,
@@ -2443,7 +2443,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 6
             }),
-        new EquipItemBase("EquipmentHats19", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats19", <EquipItemModel>{
                 "internalID": "EquipmentHats19",
                 "displayName": "Platinum Helmet",
                 "sellPrice": 40000,
@@ -2467,7 +2467,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentHats53", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats53", <EquipItemModel>{
                 "internalID": "EquipmentHats53",
                 "displayName": "Dementia Helmet",
                 "sellPrice": 1,
@@ -2491,7 +2491,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentHats52", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats52", <EquipItemModel>{
                 "internalID": "EquipmentHats52",
                 "displayName": "Efaunt Helmet",
                 "sellPrice": 1,
@@ -2515,7 +2515,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 6
             }),
-        new EquipItemBase("EquipmentHats54", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats54", <EquipItemModel>{
                 "internalID": "EquipmentHats54",
                 "displayName": "Void Imperium Helmet",
                 "sellPrice": 1,
@@ -2539,7 +2539,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentHats21", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats21", <EquipItemModel>{
                 "internalID": "EquipmentHats21",
                 "displayName": "Party Hat",
                 "sellPrice": 1500,
@@ -2563,7 +2563,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentHats23", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats23", <EquipItemModel>{
                 "internalID": "EquipmentHats23",
                 "displayName": "Farmer Brimer",
                 "sellPrice": 150,
@@ -2587,7 +2587,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentHats24", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats24", <EquipItemModel>{
                 "internalID": "EquipmentHats24",
                 "displayName": "Farmer Brimest",
                 "sellPrice": 400,
@@ -2611,7 +2611,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentHats25", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats25", <EquipItemModel>{
                 "internalID": "EquipmentHats25",
                 "displayName": "Bored Beanie",
                 "sellPrice": 500,
@@ -2635,7 +2635,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentHats2", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats2", <EquipItemModel>{
                 "internalID": "EquipmentHats2",
                 "displayName": "Royal Turban",
                 "sellPrice": 200,
@@ -2659,7 +2659,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 6
             }),
-        new EquipItemBase("EquipmentHats27", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats27", <EquipItemModel>{
                 "internalID": "EquipmentHats27",
                 "displayName": "Paper Boat",
                 "sellPrice": 1500,
@@ -2683,7 +2683,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentHats29", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats29", <EquipItemModel>{
                 "internalID": "EquipmentHats29",
                 "displayName": "Alien Headband",
                 "sellPrice": 1000,
@@ -2707,7 +2707,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentHats30", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats30", <EquipItemModel>{
                 "internalID": "EquipmentHats30",
                 "displayName": "Cowbo Galloneer",
                 "sellPrice": 1500,
@@ -2731,7 +2731,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentHats39", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats39", <EquipItemModel>{
                 "internalID": "EquipmentHats39",
                 "displayName": "Grandma Disguise",
                 "sellPrice": 1500,
@@ -2755,7 +2755,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 6
             }),
-        new EquipItemBase("EquipmentHats42", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats42", <EquipItemModel>{
                 "internalID": "EquipmentHats42",
                 "displayName": "Santa Hat",
                 "sellPrice": 1,
@@ -2779,7 +2779,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentHats44", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats44", <EquipItemModel>{
                 "internalID": "EquipmentHats44",
                 "displayName": "Jar",
                 "sellPrice": 1,
@@ -2803,7 +2803,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentHats51", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats51", <EquipItemModel>{
                 "internalID": "EquipmentHats51",
                 "displayName": "Big Pretty Bow",
                 "sellPrice": 1,
@@ -2827,7 +2827,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentHats55", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats55", <EquipItemModel>{
                 "internalID": "EquipmentHats55",
                 "displayName": "Steam Cap",
                 "sellPrice": 1,
@@ -2851,7 +2851,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentHats56", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats56", <EquipItemModel>{
                 "internalID": "EquipmentHats56",
                 "displayName": "Bunny Ears",
                 "sellPrice": 1,
@@ -2875,7 +2875,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentHats63", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats63", <EquipItemModel>{
                 "internalID": "EquipmentHats63",
                 "displayName": "Summer Shell",
                 "sellPrice": 1,
@@ -2899,7 +2899,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentHats64", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats64", <EquipItemModel>{
                 "internalID": "EquipmentHats64",
                 "displayName": "Nuget Cake Fedora",
                 "sellPrice": 1,
@@ -2923,7 +2923,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 6
             }),
-        new EquipItemBase("EquipmentHats66", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats66", <EquipItemModel>{
                 "internalID": "EquipmentHats66",
                 "displayName": "Honker Hat",
                 "sellPrice": 1,
@@ -2947,7 +2947,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 7
             }),
-        new EquipItemBase("EquipmentHats67", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats67", <EquipItemModel>{
                 "internalID": "EquipmentHats67",
                 "displayName": "Acorn Topper",
                 "sellPrice": 1,
@@ -2971,7 +2971,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentHats20", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats20", <EquipItemModel>{
                 "internalID": "EquipmentHats20",
                 "displayName": "Militia Helm",
                 "sellPrice": 8500,
@@ -2995,7 +2995,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("TestObj13", <EquipItemModel>{
+        new CommonItemBase("TestObj13", <EquipItemModel>{
                 "internalID": "TestObj13",
                 "displayName": "Viking Cap",
                 "sellPrice": 200,
@@ -3019,7 +3019,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentHats58", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats58", <EquipItemModel>{
                 "internalID": "EquipmentHats58",
                 "displayName": "Murmillo Helm",
                 "sellPrice": 200,
@@ -3043,7 +3043,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentHats3", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats3", <EquipItemModel>{
                 "internalID": "EquipmentHats3",
                 "displayName": "Thief Hood",
                 "sellPrice": 8500,
@@ -3067,7 +3067,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentHats41", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats41", <EquipItemModel>{
                 "internalID": "EquipmentHats41",
                 "displayName": "Sleek Coif",
                 "sellPrice": 8500,
@@ -3091,7 +3091,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentHats59", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats59", <EquipItemModel>{
                 "internalID": "EquipmentHats59",
                 "displayName": "Conquistador Plume",
                 "sellPrice": 8500,
@@ -3115,7 +3115,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentHats16", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats16", <EquipItemModel>{
                 "internalID": "EquipmentHats16",
                 "displayName": "Top Hat",
                 "sellPrice": 8500,
@@ -3139,7 +3139,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentHats26", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats26", <EquipItemModel>{
                 "internalID": "EquipmentHats26",
                 "displayName": "Witch Hat",
                 "sellPrice": 800,
@@ -3163,7 +3163,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentHats60", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats60", <EquipItemModel>{
                 "internalID": "EquipmentHats60",
                 "displayName": "Adornment of the High Priest",
                 "sellPrice": 800,
@@ -3187,7 +3187,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentPunching1", <EquipItemModel>{
+        new CommonItemBase("EquipmentPunching1", <EquipItemModel>{
                 "internalID": "EquipmentPunching1",
                 "displayName": "Boxing Gloves",
                 "sellPrice": 1,
@@ -3211,7 +3211,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentPunching2", <EquipItemModel>{
+        new CommonItemBase("EquipmentPunching2", <EquipItemModel>{
                 "internalID": "EquipmentPunching2",
                 "displayName": "The Stingers",
                 "sellPrice": 1800,
@@ -3235,7 +3235,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentPunching3", <EquipItemModel>{
+        new CommonItemBase("EquipmentPunching3", <EquipItemModel>{
                 "internalID": "EquipmentPunching3",
                 "displayName": "Bandage Wraps",
                 "sellPrice": 7800,
@@ -3259,7 +3259,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentPunching4", <EquipItemModel>{
+        new CommonItemBase("EquipmentPunching4", <EquipItemModel>{
                 "internalID": "EquipmentPunching4",
                 "displayName": "Uninflated Glove",
                 "sellPrice": 7800,
@@ -3283,7 +3283,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentPunching5", <EquipItemModel>{
+        new CommonItemBase("EquipmentPunching5", <EquipItemModel>{
                 "internalID": "EquipmentPunching5",
                 "displayName": "Eclectic Ordeal",
                 "sellPrice": 7800,
@@ -3307,7 +3307,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentPunching6", <EquipItemModel>{
+        new CommonItemBase("EquipmentPunching6", <EquipItemModel>{
                 "internalID": "EquipmentPunching6",
                 "displayName": "Knuckle Sabers",
                 "sellPrice": 7800,
@@ -3331,7 +3331,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentPunching7", <EquipItemModel>{
+        new CommonItemBase("EquipmentPunching7", <EquipItemModel>{
                 "internalID": "EquipmentPunching7",
                 "displayName": "Diabolical Gauntlet",
                 "sellPrice": 7800,
@@ -3355,7 +3355,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("TestObj1", <EquipItemModel>{
+        new CommonItemBase("TestObj1", <EquipItemModel>{
                 "internalID": "TestObj1",
                 "displayName": "Wooden Spear",
                 "sellPrice": 265,
@@ -3379,7 +3379,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 1
             }),
-        new EquipItemBase("TestObj7", <EquipItemModel>{
+        new CommonItemBase("TestObj7", <EquipItemModel>{
                 "internalID": "TestObj7",
                 "displayName": "Steel Axe",
                 "sellPrice": 5500,
@@ -3403,7 +3403,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("TestObj3", <EquipItemModel>{
+        new CommonItemBase("TestObj3", <EquipItemModel>{
                 "internalID": "TestObj3",
                 "displayName": "Royal Bayonet",
                 "sellPrice": 12530,
@@ -3427,7 +3427,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentSword1", <EquipItemModel>{
+        new CommonItemBase("EquipmentSword1", <EquipItemModel>{
                 "internalID": "EquipmentSword1",
                 "displayName": "Enforced Slasher",
                 "sellPrice": 26000,
@@ -3451,7 +3451,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentSword2", <EquipItemModel>{
+        new CommonItemBase("EquipmentSword2", <EquipItemModel>{
                 "internalID": "EquipmentSword2",
                 "displayName": "The Ice Breaker",
                 "sellPrice": 26000,
@@ -3475,7 +3475,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentSword3", <EquipItemModel>{
+        new CommonItemBase("EquipmentSword3", <EquipItemModel>{
                 "internalID": "EquipmentSword3",
                 "displayName": "Deuscythe",
                 "sellPrice": 26000,
@@ -3499,7 +3499,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("TestObj4", <EquipItemModel>{
+        new CommonItemBase("TestObj4", <EquipItemModel>{
                 "internalID": "TestObj4",
                 "displayName": "Frozen Impaler",
                 "sellPrice": 120,
@@ -3523,7 +3523,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("TestObj5", <EquipItemModel>{
+        new CommonItemBase("TestObj5", <EquipItemModel>{
                 "internalID": "TestObj5",
                 "displayName": "Blood Screamer",
                 "sellPrice": 200,
@@ -3547,7 +3547,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("TestObj8", <EquipItemModel>{
+        new CommonItemBase("TestObj8", <EquipItemModel>{
                 "internalID": "TestObj8",
                 "displayName": "Flaming Katana",
                 "sellPrice": 200,
@@ -3571,7 +3571,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("TestObj9", <EquipItemModel>{
+        new CommonItemBase("TestObj9", <EquipItemModel>{
                 "internalID": "TestObj9",
                 "displayName": "Emerald Eizon",
                 "sellPrice": 200,
@@ -3595,7 +3595,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("TestObj10", <EquipItemModel>{
+        new CommonItemBase("TestObj10", <EquipItemModel>{
                 "internalID": "TestObj10",
                 "displayName": "Stalagmite",
                 "sellPrice": 200,
@@ -3619,7 +3619,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentWeapons1", <EquipItemModel>{
+        new CommonItemBase("EquipmentWeapons1", <EquipItemModel>{
                 "internalID": "EquipmentWeapons1",
                 "displayName": "Iron Sword",
                 "sellPrice": 200,
@@ -3643,7 +3643,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("TestObj2", <EquipItemModel>{
+        new CommonItemBase("TestObj2", <EquipItemModel>{
                 "internalID": "TestObj2",
                 "displayName": "Steel Spear",
                 "sellPrice": 223400,
@@ -3667,7 +3667,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentBows1", <EquipItemModel>{
+        new CommonItemBase("EquipmentBows1", <EquipItemModel>{
                 "internalID": "EquipmentBows1",
                 "displayName": "Wooden Bow",
                 "sellPrice": 275,
@@ -3691,7 +3691,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 1
             }),
-        new EquipItemBase("EquipmentBows3", <EquipItemModel>{
+        new CommonItemBase("EquipmentBows3", <EquipItemModel>{
                 "internalID": "EquipmentBows3",
                 "displayName": "Birch Longbow",
                 "sellPrice": 1000,
@@ -3715,7 +3715,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentBows4", <EquipItemModel>{
+        new CommonItemBase("EquipmentBows4", <EquipItemModel>{
                 "internalID": "EquipmentBows4",
                 "displayName": "Carrot Launcher",
                 "sellPrice": 5000,
@@ -3739,7 +3739,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentBows5", <EquipItemModel>{
+        new CommonItemBase("EquipmentBows5", <EquipItemModel>{
                 "internalID": "EquipmentBows5",
                 "displayName": "Spiked Menace",
                 "sellPrice": 4000,
@@ -3763,7 +3763,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentBows6", <EquipItemModel>{
+        new CommonItemBase("EquipmentBows6", <EquipItemModel>{
                 "internalID": "EquipmentBows6",
                 "displayName": "Pharoah Bow",
                 "sellPrice": 15000,
@@ -3787,7 +3787,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentBows7", <EquipItemModel>{
+        new CommonItemBase("EquipmentBows7", <EquipItemModel>{
                 "internalID": "EquipmentBows7",
                 "displayName": "Blizzard Bow",
                 "sellPrice": 15000,
@@ -3811,7 +3811,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentBows8", <EquipItemModel>{
+        new CommonItemBase("EquipmentBows8", <EquipItemModel>{
                 "internalID": "EquipmentBows8",
                 "displayName": "Blackhole Bow",
                 "sellPrice": 15000,
@@ -3835,7 +3835,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentWands1", <EquipItemModel>{
+        new CommonItemBase("EquipmentWands1", <EquipItemModel>{
                 "internalID": "EquipmentWands1",
                 "displayName": "Gnarled Wand",
                 "sellPrice": 20,
@@ -3859,7 +3859,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 1
             }),
-        new EquipItemBase("EquipmentWands2", <EquipItemModel>{
+        new CommonItemBase("EquipmentWands2", <EquipItemModel>{
                 "internalID": "EquipmentWands2",
                 "displayName": "Quarterstaff",
                 "sellPrice": 4000,
@@ -3883,7 +3883,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentWands5", <EquipItemModel>{
+        new CommonItemBase("EquipmentWands5", <EquipItemModel>{
                 "internalID": "EquipmentWands5",
                 "displayName": "Starlight",
                 "sellPrice": 10000,
@@ -3907,7 +3907,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentWands6", <EquipItemModel>{
+        new CommonItemBase("EquipmentWands6", <EquipItemModel>{
                 "internalID": "EquipmentWands6",
                 "displayName": "Crows Nest",
                 "sellPrice": 200,
@@ -3931,7 +3931,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentWands3", <EquipItemModel>{
+        new CommonItemBase("EquipmentWands3", <EquipItemModel>{
                 "internalID": "EquipmentWands3",
                 "displayName": "Spriggly Storm",
                 "sellPrice": 200,
@@ -3955,7 +3955,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentWands7", <EquipItemModel>{
+        new CommonItemBase("EquipmentWands7", <EquipItemModel>{
                 "internalID": "EquipmentWands7",
                 "displayName": "Grey Gatsby",
                 "sellPrice": 200,
@@ -3979,7 +3979,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentWands4", <EquipItemModel>{
+        new CommonItemBase("EquipmentWands4", <EquipItemModel>{
                 "internalID": "EquipmentWands4",
                 "displayName": "Microphone",
                 "sellPrice": 200,
@@ -4003,7 +4003,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentShirts1", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts1", <EquipItemModel>{
                 "internalID": "EquipmentShirts1",
                 "displayName": "Orange Tee",
                 "sellPrice": 200,
@@ -4027,7 +4027,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 1
             }),
-        new EquipItemBase("EquipmentShirts2", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts2", <EquipItemModel>{
                 "internalID": "EquipmentShirts2",
                 "displayName": "Blue Tee",
                 "sellPrice": 250,
@@ -4051,7 +4051,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentShirts16", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts16", <EquipItemModel>{
                 "internalID": "EquipmentShirts16",
                 "displayName": "Spore Tee",
                 "sellPrice": 125,
@@ -4075,7 +4075,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 1
             }),
-        new EquipItemBase("EquipmentShirts3", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts3", <EquipItemModel>{
                 "internalID": "EquipmentShirts3",
                 "displayName": "Black Tee",
                 "sellPrice": 50,
@@ -4099,7 +4099,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentShirts4", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts4", <EquipItemModel>{
                 "internalID": "EquipmentShirts4",
                 "displayName": "Tanned Hide",
                 "sellPrice": 200,
@@ -4123,7 +4123,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentShirts7", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts7", <EquipItemModel>{
                 "internalID": "EquipmentShirts7",
                 "displayName": "Molten Chest",
                 "sellPrice": 200,
@@ -4147,7 +4147,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentShirts8", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts8", <EquipItemModel>{
                 "internalID": "EquipmentShirts8",
                 "displayName": "REPLACE ME",
                 "sellPrice": 200,
@@ -4171,7 +4171,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentShirts9", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts9", <EquipItemModel>{
                 "internalID": "EquipmentShirts9",
                 "displayName": "REPLACE ME",
                 "sellPrice": 200,
@@ -4195,7 +4195,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentShirts21", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts21", <EquipItemModel>{
                 "internalID": "EquipmentShirts21",
                 "displayName": "Tattered Cloth",
                 "sellPrice": 200,
@@ -4219,7 +4219,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentShirts10", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts10", <EquipItemModel>{
                 "internalID": "EquipmentShirts10",
                 "displayName": "Fur Shirt",
                 "sellPrice": 200,
@@ -4243,7 +4243,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentShirts11", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts11", <EquipItemModel>{
                 "internalID": "EquipmentShirts11",
                 "displayName": "Copper Platebody",
                 "sellPrice": 1500,
@@ -4267,7 +4267,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentShirts12", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts12", <EquipItemModel>{
                 "internalID": "EquipmentShirts12",
                 "displayName": "Iron Platebody",
                 "sellPrice": 6000,
@@ -4291,7 +4291,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentShirts13", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts13", <EquipItemModel>{
                 "internalID": "EquipmentShirts13",
                 "displayName": "Gold Platebody",
                 "sellPrice": 12000,
@@ -4315,7 +4315,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentShirts18", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts18", <EquipItemModel>{
                 "internalID": "EquipmentShirts18",
                 "displayName": "Amarok Bodyplate",
                 "sellPrice": 200,
@@ -4339,7 +4339,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentShirts14", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts14", <EquipItemModel>{
                 "internalID": "EquipmentShirts14",
                 "displayName": "Platinum Platbody",
                 "sellPrice": 40000,
@@ -4363,7 +4363,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentShirts15", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts15", <EquipItemModel>{
                 "internalID": "EquipmentShirts15",
                 "displayName": "Dementia Body",
                 "sellPrice": 200,
@@ -4387,7 +4387,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentShirts26", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts26", <EquipItemModel>{
                 "internalID": "EquipmentShirts26",
                 "displayName": "Efaunt Ribcage",
                 "sellPrice": 200,
@@ -4411,7 +4411,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 6
             }),
-        new EquipItemBase("EquipmentShirts27", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts27", <EquipItemModel>{
                 "internalID": "EquipmentShirts27",
                 "displayName": "Void Imperium Platebody",
                 "sellPrice": 200,
@@ -4435,7 +4435,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentShirts17", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts17", <EquipItemModel>{
                 "internalID": "EquipmentShirts17",
                 "displayName": "MCR Tshirt",
                 "sellPrice": 200,
@@ -4459,7 +4459,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentShirts19", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts19", <EquipItemModel>{
                 "internalID": "EquipmentShirts19",
                 "displayName": "Planktop",
                 "sellPrice": 200,
@@ -4483,7 +4483,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentShirts20", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts20", <EquipItemModel>{
                 "internalID": "EquipmentShirts20",
                 "displayName": "Hide Shirt",
                 "sellPrice": 200,
@@ -4507,7 +4507,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentShirts24", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts24", <EquipItemModel>{
                 "internalID": "EquipmentShirts24",
                 "displayName": "Green Tee",
                 "sellPrice": 200,
@@ -4531,7 +4531,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 1
             }),
-        new EquipItemBase("EquipmentShirts25", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts25", <EquipItemModel>{
                 "internalID": "EquipmentShirts25",
                 "displayName": "Purple Tee",
                 "sellPrice": 200,
@@ -4555,7 +4555,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 1
             }),
-        new EquipItemBase("EquipmentShirts31", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts31", <EquipItemModel>{
                 "internalID": "EquipmentShirts31",
                 "displayName": "Member Hoodie",
                 "sellPrice": 200,
@@ -4579,7 +4579,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentShirts5", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts5", <EquipItemModel>{
                 "internalID": "EquipmentShirts5",
                 "displayName": "Studded Hide",
                 "sellPrice": 200,
@@ -4603,7 +4603,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentShirts23", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts23", <EquipItemModel>{
                 "internalID": "EquipmentShirts23",
                 "displayName": "Feral Leathering",
                 "sellPrice": 200,
@@ -4627,7 +4627,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentShirts22", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts22", <EquipItemModel>{
                 "internalID": "EquipmentShirts22",
                 "displayName": "Furled Robes",
                 "sellPrice": 200,
@@ -4651,7 +4651,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentShirts28", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts28", <EquipItemModel>{
                 "internalID": "EquipmentShirts28",
                 "displayName": "Damascus Plates",
                 "sellPrice": 200,
@@ -4675,7 +4675,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentShirts29", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts29", <EquipItemModel>{
                 "internalID": "EquipmentShirts29",
                 "displayName": "Evergreen Wraps",
                 "sellPrice": 200,
@@ -4699,7 +4699,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentShirts30", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts30", <EquipItemModel>{
                 "internalID": "EquipmentShirts30",
                 "displayName": "Elegantine Robes",
                 "sellPrice": 200,
@@ -4723,7 +4723,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentPants1", <EquipItemModel>{
+        new CommonItemBase("EquipmentPants1", <EquipItemModel>{
                 "internalID": "EquipmentPants1",
                 "displayName": "Torn Jeans",
                 "sellPrice": 650,
@@ -4747,7 +4747,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 1
             }),
-        new EquipItemBase("EquipmentPants2", <EquipItemModel>{
+        new CommonItemBase("EquipmentPants2", <EquipItemModel>{
                 "internalID": "EquipmentPants2",
                 "displayName": "Copper Platelegs",
                 "sellPrice": 3000,
@@ -4771,7 +4771,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentPants3", <EquipItemModel>{
+        new CommonItemBase("EquipmentPants3", <EquipItemModel>{
                 "internalID": "EquipmentPants3",
                 "displayName": "Iron Platelegs",
                 "sellPrice": 6000,
@@ -4795,7 +4795,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentPants4", <EquipItemModel>{
+        new CommonItemBase("EquipmentPants4", <EquipItemModel>{
                 "internalID": "EquipmentPants4",
                 "displayName": "Gold Platelegs",
                 "sellPrice": 15000,
@@ -4819,7 +4819,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentPants17", <EquipItemModel>{
+        new CommonItemBase("EquipmentPants17", <EquipItemModel>{
                 "internalID": "EquipmentPants17",
                 "displayName": "Amarok Hinds",
                 "sellPrice": 200,
@@ -4843,7 +4843,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentPants5", <EquipItemModel>{
+        new CommonItemBase("EquipmentPants5", <EquipItemModel>{
                 "internalID": "EquipmentPants5",
                 "displayName": "Platinum Shins",
                 "sellPrice": 25000,
@@ -4867,7 +4867,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentPants6", <EquipItemModel>{
+        new CommonItemBase("EquipmentPants6", <EquipItemModel>{
                 "internalID": "EquipmentPants6",
                 "displayName": "Dementia Shins",
                 "sellPrice": 200,
@@ -4891,7 +4891,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentPants20", <EquipItemModel>{
+        new CommonItemBase("EquipmentPants20", <EquipItemModel>{
                 "internalID": "EquipmentPants20",
                 "displayName": "Efaunt Hipilium",
                 "sellPrice": 200,
@@ -4915,7 +4915,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 6
             }),
-        new EquipItemBase("EquipmentPants21", <EquipItemModel>{
+        new CommonItemBase("EquipmentPants21", <EquipItemModel>{
                 "internalID": "EquipmentPants21",
                 "displayName": "Void Imperium Shardshins",
                 "sellPrice": 200,
@@ -4939,7 +4939,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentPants7", <EquipItemModel>{
+        new CommonItemBase("EquipmentPants7", <EquipItemModel>{
                 "internalID": "EquipmentPants7",
                 "displayName": "Gilded Pilates",
                 "sellPrice": 200,
@@ -4963,7 +4963,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentPants8", <EquipItemModel>{
+        new CommonItemBase("EquipmentPants8", <EquipItemModel>{
                 "internalID": "EquipmentPants8",
                 "displayName": "Twisted Scales",
                 "sellPrice": 200,
@@ -4987,7 +4987,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentPants10", <EquipItemModel>{
+        new CommonItemBase("EquipmentPants10", <EquipItemModel>{
                 "internalID": "EquipmentPants10",
                 "displayName": "Give Up On Life Pants",
                 "sellPrice": 200,
@@ -5011,7 +5011,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentPants11", <EquipItemModel>{
+        new CommonItemBase("EquipmentPants11", <EquipItemModel>{
                 "internalID": "EquipmentPants11",
                 "displayName": "Yellow Belt Ninja Pants",
                 "sellPrice": 200,
@@ -5035,7 +5035,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentPants12", <EquipItemModel>{
+        new CommonItemBase("EquipmentPants12", <EquipItemModel>{
                 "internalID": "EquipmentPants12",
                 "displayName": "Merchantile Pants",
                 "sellPrice": 200,
@@ -5059,7 +5059,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentPants13", <EquipItemModel>{
+        new CommonItemBase("EquipmentPants13", <EquipItemModel>{
                 "internalID": "EquipmentPants13",
                 "displayName": "Ancient Leggings",
                 "sellPrice": 200,
@@ -5083,7 +5083,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentPants14", <EquipItemModel>{
+        new CommonItemBase("EquipmentPants14", <EquipItemModel>{
                 "internalID": "EquipmentPants14",
                 "displayName": "Forensic Leggings",
                 "sellPrice": 200,
@@ -5107,7 +5107,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentPants15", <EquipItemModel>{
+        new CommonItemBase("EquipmentPants15", <EquipItemModel>{
                 "internalID": "EquipmentPants15",
                 "displayName": "Bleached Designer Wode Patch Pants",
                 "sellPrice": 3500,
@@ -5131,7 +5131,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentPants16", <EquipItemModel>{
+        new CommonItemBase("EquipmentPants16", <EquipItemModel>{
                 "internalID": "EquipmentPants16",
                 "displayName": "Adam's Leaf",
                 "sellPrice": 200,
@@ -5155,7 +5155,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentPants18", <EquipItemModel>{
+        new CommonItemBase("EquipmentPants18", <EquipItemModel>{
                 "internalID": "EquipmentPants18",
                 "displayName": "Dirty Coal Miner Baggy Soot Pants",
                 "sellPrice": 200,
@@ -5179,7 +5179,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentPants19", <EquipItemModel>{
+        new CommonItemBase("EquipmentPants19", <EquipItemModel>{
                 "internalID": "EquipmentPants19",
                 "displayName": "Trimmed Rune Platelegs",
                 "sellPrice": 200,
@@ -5203,7 +5203,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentPants22", <EquipItemModel>{
+        new CommonItemBase("EquipmentPants22", <EquipItemModel>{
                 "internalID": "EquipmentPants22",
                 "displayName": "Fishing Overalls",
                 "sellPrice": 200,
@@ -5227,7 +5227,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentPants23", <EquipItemModel>{
+        new CommonItemBase("EquipmentPants23", <EquipItemModel>{
                 "internalID": "EquipmentPants23",
                 "displayName": "Bandito Pantaloon",
                 "sellPrice": 200,
@@ -5251,7 +5251,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentShoes1", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes1", <EquipItemModel>{
                 "internalID": "EquipmentShoes1",
                 "displayName": "Copper Boots",
                 "sellPrice": 1000,
@@ -5275,7 +5275,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentShoes15", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes15", <EquipItemModel>{
                 "internalID": "EquipmentShoes15",
                 "displayName": "Iron Boots",
                 "sellPrice": 3000,
@@ -5299,7 +5299,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentShoes3", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes3", <EquipItemModel>{
                 "internalID": "EquipmentShoes3",
                 "displayName": "Gold Boots",
                 "sellPrice": 10000,
@@ -5323,7 +5323,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentShoes20", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes20", <EquipItemModel>{
                 "internalID": "EquipmentShoes20",
                 "displayName": "Amarok Paws",
                 "sellPrice": 3000,
@@ -5347,7 +5347,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentShoes4", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes4", <EquipItemModel>{
                 "internalID": "EquipmentShoes4",
                 "displayName": "Platinum Boots",
                 "sellPrice": 20000,
@@ -5371,7 +5371,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentShoes5", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes5", <EquipItemModel>{
                 "internalID": "EquipmentShoes5",
                 "displayName": "Dementia Boots",
                 "sellPrice": 200,
@@ -5395,7 +5395,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentShoes21", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes21", <EquipItemModel>{
                 "internalID": "EquipmentShoes21",
                 "displayName": "Efaunts Broken Ankles",
                 "sellPrice": 20,
@@ -5419,7 +5419,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 6
             }),
-        new EquipItemBase("EquipmentShoes22", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes22", <EquipItemModel>{
                 "internalID": "EquipmentShoes22",
                 "displayName": "Void Imperium Kicks",
                 "sellPrice": 200,
@@ -5443,7 +5443,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentShoes6", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes6", <EquipItemModel>{
                 "internalID": "EquipmentShoes6",
                 "displayName": "Hermes Boots",
                 "sellPrice": 200,
@@ -5467,7 +5467,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentShoes7", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes7", <EquipItemModel>{
                 "internalID": "EquipmentShoes7",
                 "displayName": "Goo Galoshes",
                 "sellPrice": 500,
@@ -5491,7 +5491,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentShoes8", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes8", <EquipItemModel>{
                 "internalID": "EquipmentShoes8",
                 "displayName": "Yeti Walkers",
                 "sellPrice": 200,
@@ -5515,7 +5515,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentShoes9", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes9", <EquipItemModel>{
                 "internalID": "EquipmentShoes9",
                 "displayName": "Flip Flops",
                 "sellPrice": 500,
@@ -5539,7 +5539,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 1
             }),
-        new EquipItemBase("EquipmentShoes10", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes10", <EquipItemModel>{
                 "internalID": "EquipmentShoes10",
                 "displayName": "Flap Flops",
                 "sellPrice": 200,
@@ -5563,7 +5563,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentShoes11", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes11", <EquipItemModel>{
                 "internalID": "EquipmentShoes11",
                 "displayName": "Floop Flops",
                 "sellPrice": 200,
@@ -5587,7 +5587,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentShoes12", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes12", <EquipItemModel>{
                 "internalID": "EquipmentShoes12",
                 "displayName": "Flux Flops",
                 "sellPrice": 200,
@@ -5611,7 +5611,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentShoes13", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes13", <EquipItemModel>{
                 "internalID": "EquipmentShoes13",
                 "displayName": "Gaia Shoes",
                 "sellPrice": 200,
@@ -5635,7 +5635,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentShoes14", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes14", <EquipItemModel>{
                 "internalID": "EquipmentShoes14",
                 "displayName": "Cauldrunners",
                 "sellPrice": 200,
@@ -5659,7 +5659,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentShoes16", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes16", <EquipItemModel>{
                 "internalID": "EquipmentShoes16",
                 "displayName": "Cavern Trekkers",
                 "sellPrice": 3000,
@@ -5683,7 +5683,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentShoes17", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes17", <EquipItemModel>{
                 "internalID": "EquipmentShoes17",
                 "displayName": "Logger Heels",
                 "sellPrice": 3000,
@@ -5707,7 +5707,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentShoes18", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes18", <EquipItemModel>{
                 "internalID": "EquipmentShoes18",
                 "displayName": "Angler Boots",
                 "sellPrice": 3000,
@@ -5731,7 +5731,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentShoes19", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes19", <EquipItemModel>{
                 "internalID": "EquipmentShoes19",
                 "displayName": "Bandito Boots",
                 "sellPrice": 3000,
@@ -5755,7 +5755,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentShoes2", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes2", <EquipItemModel>{
                 "internalID": "EquipmentShoes2",
                 "displayName": "Eyern Boots",
                 "sellPrice": 20,
@@ -5779,7 +5779,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentPendant1", <EquipItemModel>{
+        new CommonItemBase("EquipmentPendant1", <EquipItemModel>{
                 "internalID": "EquipmentPendant1",
                 "displayName": "Mint Icey",
                 "sellPrice": 420,
@@ -5803,7 +5803,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentPendant2", <EquipItemModel>{
+        new CommonItemBase("EquipmentPendant2", <EquipItemModel>{
                 "internalID": "EquipmentPendant2",
                 "displayName": "Strawbu Icey",
                 "sellPrice": 420,
@@ -5827,7 +5827,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentPendant3", <EquipItemModel>{
+        new CommonItemBase("EquipmentPendant3", <EquipItemModel>{
                 "internalID": "EquipmentPendant3",
                 "displayName": "Rok Road Icey",
                 "sellPrice": 420,
@@ -5851,7 +5851,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 1
             }),
-        new EquipItemBase("EquipmentPendant4", <EquipItemModel>{
+        new CommonItemBase("EquipmentPendant4", <EquipItemModel>{
                 "internalID": "EquipmentPendant4",
                 "displayName": "Rainbo Icey",
                 "sellPrice": 420,
@@ -5875,7 +5875,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 1
             }),
-        new EquipItemBase("EquipmentPendant5", <EquipItemModel>{
+        new CommonItemBase("EquipmentPendant5", <EquipItemModel>{
                 "internalID": "EquipmentPendant5",
                 "displayName": "Chocotastic Icey",
                 "sellPrice": 420,
@@ -5899,7 +5899,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 1
             }),
-        new EquipItemBase("EquipmentPendant6", <EquipItemModel>{
+        new CommonItemBase("EquipmentPendant6", <EquipItemModel>{
                 "internalID": "EquipmentPendant6",
                 "displayName": "Blubbery Icey",
                 "sellPrice": 420,
@@ -5923,7 +5923,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentPendant7", <EquipItemModel>{
+        new CommonItemBase("EquipmentPendant7", <EquipItemModel>{
                 "internalID": "EquipmentPendant7",
                 "displayName": "Lava Icey",
                 "sellPrice": 420,
@@ -5947,7 +5947,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentPendant8", <EquipItemModel>{
+        new CommonItemBase("EquipmentPendant8", <EquipItemModel>{
                 "internalID": "EquipmentPendant8",
                 "displayName": "Legends Icey",
                 "sellPrice": 27,
@@ -5971,7 +5971,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentPendant9", <EquipItemModel>{
+        new CommonItemBase("EquipmentPendant9", <EquipItemModel>{
                 "internalID": "EquipmentPendant9",
                 "displayName": "Little Wooden Katana",
                 "sellPrice": 200,
@@ -5995,7 +5995,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 1
             }),
-        new EquipItemBase("EquipmentPendant10", <EquipItemModel>{
+        new CommonItemBase("EquipmentPendant10", <EquipItemModel>{
                 "internalID": "EquipmentPendant10",
                 "displayName": "Sleek Shank",
                 "sellPrice": 400,
@@ -6019,7 +6019,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentPendant11", <EquipItemModel>{
+        new CommonItemBase("EquipmentPendant11", <EquipItemModel>{
                 "internalID": "EquipmentPendant11",
                 "displayName": "Carrot Horror",
                 "sellPrice": 500,
@@ -6043,7 +6043,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentPendant12", <EquipItemModel>{
+        new CommonItemBase("EquipmentPendant12", <EquipItemModel>{
                 "internalID": "EquipmentPendant12",
                 "displayName": "Tarantulight",
                 "sellPrice": 6500,
@@ -6067,7 +6067,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentPendant13", <EquipItemModel>{
+        new CommonItemBase("EquipmentPendant13", <EquipItemModel>{
                 "internalID": "EquipmentPendant13",
                 "displayName": "Quartz Pendant",
                 "sellPrice": 6500,
@@ -6091,7 +6091,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentPendant14", <EquipItemModel>{
+        new CommonItemBase("EquipmentPendant14", <EquipItemModel>{
                 "internalID": "EquipmentPendant14",
                 "displayName": "Fuscismatia",
                 "sellPrice": 10000,
@@ -6115,7 +6115,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentPendant15", <EquipItemModel>{
+        new CommonItemBase("EquipmentPendant15", <EquipItemModel>{
                 "internalID": "EquipmentPendant15",
                 "displayName": "Lucky Fish Head",
                 "sellPrice": 6500,
@@ -6139,7 +6139,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentPendant16", <EquipItemModel>{
+        new CommonItemBase("EquipmentPendant16", <EquipItemModel>{
                 "internalID": "EquipmentPendant16",
                 "displayName": "Strung Bludgeon",
                 "sellPrice": 10000,
@@ -6163,7 +6163,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentPendant17", <EquipItemModel>{
+        new CommonItemBase("EquipmentPendant17", <EquipItemModel>{
                 "internalID": "EquipmentPendant17",
                 "displayName": "Chaotic Amarok Pendant",
                 "sellPrice": 10000,
@@ -6187,7 +6187,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentPendant18", <EquipItemModel>{
+        new CommonItemBase("EquipmentPendant18", <EquipItemModel>{
                 "internalID": "EquipmentPendant18",
                 "displayName": "Strung Steamy",
                 "sellPrice": 1,
@@ -6211,7 +6211,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentPendant19", <EquipItemModel>{
+        new CommonItemBase("EquipmentPendant19", <EquipItemModel>{
                 "internalID": "EquipmentPendant19",
                 "displayName": "Cedar Pendant",
                 "sellPrice": 1,
@@ -6235,7 +6235,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 1
             }),
-        new EquipItemBase("EquipmentPendant20", <EquipItemModel>{
+        new CommonItemBase("EquipmentPendant20", <EquipItemModel>{
                 "internalID": "EquipmentPendant20",
                 "displayName": "Fishhead Pendant",
                 "sellPrice": 1,
@@ -6259,7 +6259,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 15,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentPendant21", <EquipItemModel>{
+        new CommonItemBase("EquipmentPendant21", <EquipItemModel>{
                 "internalID": "EquipmentPendant21",
                 "displayName": "Deathly Cluster Pendant",
                 "sellPrice": 1,
@@ -6283,7 +6283,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentPendant22", <EquipItemModel>{
+        new CommonItemBase("EquipmentPendant22", <EquipItemModel>{
                 "internalID": "EquipmentPendant22",
                 "displayName": "Hallowed Tail Pendant",
                 "sellPrice": 1,
@@ -6307,7 +6307,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentPendant23", <EquipItemModel>{
+        new CommonItemBase("EquipmentPendant23", <EquipItemModel>{
                 "internalID": "EquipmentPendant23",
                 "displayName": "Persephones Bouquet",
                 "sellPrice": 1,
@@ -6331,7 +6331,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentRings1", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings1", <EquipItemModel>{
                 "internalID": "EquipmentRings1",
                 "displayName": "Gold Ring",
                 "sellPrice": 200,
@@ -6355,7 +6355,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentRings2", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings2", <EquipItemModel>{
                 "internalID": "EquipmentRings2",
                 "displayName": "Copper Band",
                 "sellPrice": 200,
@@ -6379,7 +6379,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentRings3", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings3", <EquipItemModel>{
                 "internalID": "EquipmentRings3",
                 "displayName": "Steel Band",
                 "sellPrice": 200,
@@ -6403,7 +6403,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentRings4", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings4", <EquipItemModel>{
                 "internalID": "EquipmentRings4",
                 "displayName": "Molden Crust",
                 "sellPrice": 200,
@@ -6427,7 +6427,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentRings5", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings5", <EquipItemModel>{
                 "internalID": "EquipmentRings5",
                 "displayName": "Toxic Bubbles Band",
                 "sellPrice": 200,
@@ -6451,7 +6451,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentRings6", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings6", <EquipItemModel>{
                 "internalID": "EquipmentRings6",
                 "displayName": "Death Wish",
                 "sellPrice": 200,
@@ -6475,7 +6475,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentRings7", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings7", <EquipItemModel>{
                 "internalID": "EquipmentRings7",
                 "displayName": "Pugilist Demise",
                 "sellPrice": 4000,
@@ -6499,7 +6499,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentRings8", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings8", <EquipItemModel>{
                 "internalID": "EquipmentRings8",
                 "displayName": "The Used Bandaid",
                 "sellPrice": 2500,
@@ -6523,7 +6523,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentRings9", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings9", <EquipItemModel>{
                 "internalID": "EquipmentRings9",
                 "displayName": "Chat Ring",
                 "sellPrice": 2500,
@@ -6547,7 +6547,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentRings10", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings10", <EquipItemModel>{
                 "internalID": "EquipmentRings10",
                 "displayName": "Spikeweed Ring",
                 "sellPrice": 2500,
@@ -6571,7 +6571,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentRings11", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings11", <EquipItemModel>{
                 "internalID": "EquipmentRings11",
                 "displayName": "Defenders Dignity",
                 "sellPrice": 5000,
@@ -6595,7 +6595,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentRingsFishing1", <EquipItemModel>{
+        new CommonItemBase("EquipmentRingsFishing1", <EquipItemModel>{
                 "internalID": "EquipmentRingsFishing1",
                 "displayName": "Shallow Watering",
                 "sellPrice": 2500,
@@ -6619,7 +6619,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentRingsFishing2", <EquipItemModel>{
+        new CommonItemBase("EquipmentRingsFishing2", <EquipItemModel>{
                 "internalID": "EquipmentRingsFishing2",
                 "displayName": "Oceanic Ring",
                 "sellPrice": 2500,
@@ -6643,7 +6643,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentRingsFishing3", <EquipItemModel>{
+        new CommonItemBase("EquipmentRingsFishing3", <EquipItemModel>{
                 "internalID": "EquipmentRingsFishing3",
                 "displayName": "Deepwater Trench Ring",
                 "sellPrice": 2500,
@@ -6667,7 +6667,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentRings12", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings12", <EquipItemModel>{
                 "internalID": "EquipmentRings12",
                 "displayName": "Frisbee Ring",
                 "sellPrice": 5000,
@@ -6691,7 +6691,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentRings13", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings13", <EquipItemModel>{
                 "internalID": "EquipmentRings13",
                 "displayName": "Silver Stopwatch",
                 "sellPrice": 5000,
@@ -6715,7 +6715,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentRings14", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings14", <EquipItemModel>{
                 "internalID": "EquipmentRings14",
                 "displayName": "Dooble Goopi",
                 "sellPrice": 1,
@@ -6739,7 +6739,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentRings15", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings15", <EquipItemModel>{
                 "internalID": "EquipmentRings15",
                 "displayName": "Sanic Ring",
                 "sellPrice": 1,
@@ -6763,7 +6763,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentRings16", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings16", <EquipItemModel>{
                 "internalID": "EquipmentRings16",
                 "displayName": "Efaunt Trunculus",
                 "sellPrice": 1,
@@ -6787,7 +6787,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentRings21", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings21", <EquipItemModel>{
                 "internalID": "EquipmentRings21",
                 "displayName": "Elf Twist Ring",
                 "sellPrice": 1,
@@ -6811,7 +6811,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentRings20", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings20", <EquipItemModel>{
                 "internalID": "EquipmentRings20",
                 "displayName": "Rex Ring",
                 "sellPrice": 1,
@@ -6835,7 +6835,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentRings19", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings19", <EquipItemModel>{
                 "internalID": "EquipmentRings19",
                 "displayName": "Bejeweled Ring",
                 "sellPrice": 1,
@@ -6859,7 +6859,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentRings22", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings22", <EquipItemModel>{
                 "internalID": "EquipmentRings22",
                 "displayName": "Tenacity Ring",
                 "sellPrice": 1,
@@ -6883,7 +6883,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentRings18", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings18", <EquipItemModel>{
                 "internalID": "EquipmentRings18",
                 "displayName": "The Emperor's Opal",
                 "sellPrice": 1,
@@ -6907,7 +6907,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentRingsChat1", <EquipItemModel>{
+        new CommonItemBase("EquipmentRingsChat1", <EquipItemModel>{
                 "internalID": "EquipmentRingsChat1",
                 "displayName": "Love Ring",
                 "sellPrice": 2500,
@@ -6931,7 +6931,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentRingsChat2", <EquipItemModel>{
+        new CommonItemBase("EquipmentRingsChat2", <EquipItemModel>{
                 "internalID": "EquipmentRingsChat2",
                 "displayName": "Leafy Ring",
                 "sellPrice": 2500,
@@ -6955,7 +6955,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentRingsChat3", <EquipItemModel>{
+        new CommonItemBase("EquipmentRingsChat3", <EquipItemModel>{
                 "internalID": "EquipmentRingsChat3",
                 "displayName": "Wealth Ring",
                 "sellPrice": 2500,
@@ -6979,7 +6979,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentRingsChat4", <EquipItemModel>{
+        new CommonItemBase("EquipmentRingsChat4", <EquipItemModel>{
                 "internalID": "EquipmentRingsChat4",
                 "displayName": "Bob Ring",
                 "sellPrice": 2500,
@@ -7003,7 +7003,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentRingsChat5", <EquipItemModel>{
+        new CommonItemBase("EquipmentRingsChat5", <EquipItemModel>{
                 "internalID": "EquipmentRingsChat5",
                 "displayName": "Bubble Ring",
                 "sellPrice": 2500,
@@ -7027,7 +7027,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentRingsChat6", <EquipItemModel>{
+        new CommonItemBase("EquipmentRingsChat6", <EquipItemModel>{
                 "internalID": "EquipmentRingsChat6",
                 "displayName": "Cthulu's Ring",
                 "sellPrice": 2500,
@@ -7051,7 +7051,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentRingsChat8", <EquipItemModel>{
+        new CommonItemBase("EquipmentRingsChat8", <EquipItemModel>{
                 "internalID": "EquipmentRingsChat8",
                 "displayName": "Lava Sez Buy More Gems",
                 "sellPrice": 2500,
@@ -7075,7 +7075,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentRingsChat9", <EquipItemModel>{
+        new CommonItemBase("EquipmentRingsChat9", <EquipItemModel>{
                 "internalID": "EquipmentRingsChat9",
                 "displayName": "HONK Ring",
                 "sellPrice": 2500,
@@ -7099,7 +7099,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentTools1", <EquipItemModel>{
+        new CommonItemBase("EquipmentTools1", <EquipItemModel>{
                 "internalID": "EquipmentTools1",
                 "displayName": "Junk Pickaxe",
                 "sellPrice": 50,
@@ -7123,7 +7123,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentTools2", <EquipItemModel>{
+        new CommonItemBase("EquipmentTools2", <EquipItemModel>{
                 "internalID": "EquipmentTools2",
                 "displayName": "Copper Pickaxe",
                 "sellPrice": 800,
@@ -7147,7 +7147,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentTools3", <EquipItemModel>{
+        new CommonItemBase("EquipmentTools3", <EquipItemModel>{
                 "internalID": "EquipmentTools3",
                 "displayName": "Iron Pickaxe",
                 "sellPrice": 5000,
@@ -7171,7 +7171,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentTools5", <EquipItemModel>{
+        new CommonItemBase("EquipmentTools5", <EquipItemModel>{
                 "internalID": "EquipmentTools5",
                 "displayName": "Gold Pickaxe",
                 "sellPrice": 10000,
@@ -7195,7 +7195,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentTools6", <EquipItemModel>{
+        new CommonItemBase("EquipmentTools6", <EquipItemModel>{
                 "internalID": "EquipmentTools6",
                 "displayName": "Platinum Pickaxe",
                 "sellPrice": 200,
@@ -7219,7 +7219,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentTools7", <EquipItemModel>{
+        new CommonItemBase("EquipmentTools7", <EquipItemModel>{
                 "internalID": "EquipmentTools7",
                 "displayName": "Dementia Pickaxe",
                 "sellPrice": 200,
@@ -7243,7 +7243,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentTools11", <EquipItemModel>{
+        new CommonItemBase("EquipmentTools11", <EquipItemModel>{
                 "internalID": "EquipmentTools11",
                 "displayName": "Void Imperium Pik",
                 "sellPrice": 200,
@@ -7267,7 +7267,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentTools8", <EquipItemModel>{
+        new CommonItemBase("EquipmentTools8", <EquipItemModel>{
                 "internalID": "EquipmentTools8",
                 "displayName": "Lustre Pickaxe",
                 "sellPrice": 200,
@@ -7291,7 +7291,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentTools12", <EquipItemModel>{
+        new CommonItemBase("EquipmentTools12", <EquipItemModel>{
                 "internalID": "EquipmentTools12",
                 "displayName": "Starfire Pickaxe",
                 "sellPrice": 200,
@@ -7315,7 +7315,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentTools9", <EquipItemModel>{
+        new CommonItemBase("EquipmentTools9", <EquipItemModel>{
                 "internalID": "EquipmentTools9",
                 "displayName": "Dreadlo Pickolo",
                 "sellPrice": 200,
@@ -7339,7 +7339,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentTools10", <EquipItemModel>{
+        new CommonItemBase("EquipmentTools10", <EquipItemModel>{
                 "internalID": "EquipmentTools10",
                 "displayName": "Poopy Pickaxe",
                 "sellPrice": 200,
@@ -7363,7 +7363,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 6
             }),
-        new EquipItemBase("EquipmentToolsHatchet0", <EquipItemModel>{
+        new CommonItemBase("EquipmentToolsHatchet0", <EquipItemModel>{
                 "internalID": "EquipmentToolsHatchet0",
                 "displayName": "Old Hatchet",
                 "sellPrice": 50,
@@ -7387,7 +7387,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 1
             }),
-        new EquipItemBase("EquipmentToolsHatchet3", <EquipItemModel>{
+        new CommonItemBase("EquipmentToolsHatchet3", <EquipItemModel>{
                 "internalID": "EquipmentToolsHatchet3",
                 "displayName": "Copper Chopper",
                 "sellPrice": 650,
@@ -7411,7 +7411,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentToolsHatchet1", <EquipItemModel>{
+        new CommonItemBase("EquipmentToolsHatchet1", <EquipItemModel>{
                 "internalID": "EquipmentToolsHatchet1",
                 "displayName": "Iron Hatchet",
                 "sellPrice": 5000,
@@ -7435,7 +7435,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentToolsHatchet2b", <EquipItemModel>{
+        new CommonItemBase("EquipmentToolsHatchet2b", <EquipItemModel>{
                 "internalID": "EquipmentToolsHatchet2b",
                 "displayName": "Stinky Axe",
                 "sellPrice": 10000,
@@ -7459,7 +7459,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 6
             }),
-        new EquipItemBase("EquipmentToolsHatchet2", <EquipItemModel>{
+        new CommonItemBase("EquipmentToolsHatchet2", <EquipItemModel>{
                 "internalID": "EquipmentToolsHatchet2",
                 "displayName": "Golden Axe",
                 "sellPrice": 12000,
@@ -7483,7 +7483,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentToolsHatchet4", <EquipItemModel>{
+        new CommonItemBase("EquipmentToolsHatchet4", <EquipItemModel>{
                 "internalID": "EquipmentToolsHatchet4",
                 "displayName": "Plat Hatchet",
                 "sellPrice": 200,
@@ -7507,7 +7507,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentToolsHatchet5", <EquipItemModel>{
+        new CommonItemBase("EquipmentToolsHatchet5", <EquipItemModel>{
                 "internalID": "EquipmentToolsHatchet5",
                 "displayName": "Dementia Dicer",
                 "sellPrice": 200,
@@ -7531,7 +7531,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentToolsHatchet7", <EquipItemModel>{
+        new CommonItemBase("EquipmentToolsHatchet7", <EquipItemModel>{
                 "internalID": "EquipmentToolsHatchet7",
                 "displayName": "Void Imperium Axe",
                 "sellPrice": 200,
@@ -7555,7 +7555,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentToolsHatchet6", <EquipItemModel>{
+        new CommonItemBase("EquipmentToolsHatchet6", <EquipItemModel>{
                 "internalID": "EquipmentToolsHatchet6",
                 "displayName": "Lustre Logger",
                 "sellPrice": 200,
@@ -7579,7 +7579,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentToolsHatchet8", <EquipItemModel>{
+        new CommonItemBase("EquipmentToolsHatchet8", <EquipItemModel>{
                 "internalID": "EquipmentToolsHatchet8",
                 "displayName": "Starfire Hatchet",
                 "sellPrice": 200,
@@ -7603,7 +7603,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentToolsHatchet9", <EquipItemModel>{
+        new CommonItemBase("EquipmentToolsHatchet9", <EquipItemModel>{
                 "internalID": "EquipmentToolsHatchet9",
                 "displayName": "Dreadlo Eviscerator",
                 "sellPrice": 200,
@@ -7627,7 +7627,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentToolsHatchet10", <EquipItemModel>{
+        new CommonItemBase("EquipmentToolsHatchet10", <EquipItemModel>{
                 "internalID": "EquipmentToolsHatchet10",
                 "displayName": "Annihilator of the Yggdrasil",
                 "sellPrice": 200,
@@ -7651,7 +7651,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 6
             }),
-        new EquipItemBase("FishingRod1", <EquipItemModel>{
+        new CommonItemBase("FishingRod1", <EquipItemModel>{
                 "internalID": "FishingRod1",
                 "displayName": "Wood Fishing Rod",
                 "sellPrice": 200,
@@ -7675,7 +7675,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("FishingRod2", <EquipItemModel>{
+        new CommonItemBase("FishingRod2", <EquipItemModel>{
                 "internalID": "FishingRod2",
                 "displayName": "Copper Fish Rod",
                 "sellPrice": 500,
@@ -7699,7 +7699,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("FishingRod3", <EquipItemModel>{
+        new CommonItemBase("FishingRod3", <EquipItemModel>{
                 "internalID": "FishingRod3",
                 "displayName": "Iron Fishing Rod",
                 "sellPrice": 2500,
@@ -7723,7 +7723,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("FishingRod4", <EquipItemModel>{
+        new CommonItemBase("FishingRod4", <EquipItemModel>{
                 "internalID": "FishingRod4",
                 "displayName": "Gold Fishing Rod",
                 "sellPrice": 10000,
@@ -7747,7 +7747,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("FishingRod5", <EquipItemModel>{
+        new CommonItemBase("FishingRod5", <EquipItemModel>{
                 "internalID": "FishingRod5",
                 "displayName": "Plat Fishing Rod",
                 "sellPrice": 20000,
@@ -7771,7 +7771,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("FishingRod6", <EquipItemModel>{
+        new CommonItemBase("FishingRod6", <EquipItemModel>{
                 "internalID": "FishingRod6",
                 "displayName": "Dementia Rod for Fishing",
                 "sellPrice": 20000,
@@ -7795,7 +7795,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("FishingRod7", <EquipItemModel>{
+        new CommonItemBase("FishingRod7", <EquipItemModel>{
                 "internalID": "FishingRod7",
                 "displayName": "Void Imperium Rod",
                 "sellPrice": 20000,
@@ -7819,7 +7819,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("FishingRod8", <EquipItemModel>{
+        new CommonItemBase("FishingRod8", <EquipItemModel>{
                 "internalID": "FishingRod8",
                 "displayName": "Lustre Rod",
                 "sellPrice": 20000,
@@ -7843,7 +7843,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("FishingRod9", <EquipItemModel>{
+        new CommonItemBase("FishingRod9", <EquipItemModel>{
                 "internalID": "FishingRod9",
                 "displayName": "Starfire Rod",
                 "sellPrice": 10000,
@@ -7867,7 +7867,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("CatchingNet1", <EquipItemModel>{
+        new CommonItemBase("CatchingNet1", <EquipItemModel>{
                 "internalID": "CatchingNet1",
                 "displayName": "Bug Net",
                 "sellPrice": 100,
@@ -7891,7 +7891,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("CatchingNet2", <EquipItemModel>{
+        new CommonItemBase("CatchingNet2", <EquipItemModel>{
                 "internalID": "CatchingNet2",
                 "displayName": "Copper Netted Net",
                 "sellPrice": 2000,
@@ -7915,7 +7915,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("CatchingNet3", <EquipItemModel>{
+        new CommonItemBase("CatchingNet3", <EquipItemModel>{
                 "internalID": "CatchingNet3",
                 "displayName": "Reinforced Net",
                 "sellPrice": 7500,
@@ -7939,7 +7939,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("CatchingNet4", <EquipItemModel>{
+        new CommonItemBase("CatchingNet4", <EquipItemModel>{
                 "internalID": "CatchingNet4",
                 "displayName": "Golden Net",
                 "sellPrice": 17000,
@@ -7963,7 +7963,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("CatchingNet5", <EquipItemModel>{
+        new CommonItemBase("CatchingNet5", <EquipItemModel>{
                 "internalID": "CatchingNet5",
                 "displayName": "Platinet",
                 "sellPrice": 17000,
@@ -7987,7 +7987,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("CatchingNet6", <EquipItemModel>{
+        new CommonItemBase("CatchingNet6", <EquipItemModel>{
                 "internalID": "CatchingNet6",
                 "displayName": "Dementia Net",
                 "sellPrice": 17000,
@@ -8011,7 +8011,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("CatchingNet7", <EquipItemModel>{
+        new CommonItemBase("CatchingNet7", <EquipItemModel>{
                 "internalID": "CatchingNet7",
                 "displayName": "Void Imperium Net",
                 "sellPrice": 17000,
@@ -8035,7 +8035,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("CatchingNet8", <EquipItemModel>{
+        new CommonItemBase("CatchingNet8", <EquipItemModel>{
                 "internalID": "CatchingNet8",
                 "displayName": "Lustre Netting",
                 "sellPrice": 17000,
@@ -8059,7 +8059,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("CatchingNet9", <EquipItemModel>{
+        new CommonItemBase("CatchingNet9", <EquipItemModel>{
                 "internalID": "CatchingNet9",
                 "displayName": "Starfire Trim Netting",
                 "sellPrice": 17000,
@@ -8083,7 +8083,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("TrapBoxSet1", <EquipItemModel>{
+        new CommonItemBase("TrapBoxSet1", <EquipItemModel>{
                 "internalID": "TrapBoxSet1",
                 "displayName": "Cardboard Traps",
                 "sellPrice": 5000,
@@ -8107,7 +8107,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 1
             }),
-        new EquipItemBase("TrapBoxSet2", <EquipItemModel>{
+        new CommonItemBase("TrapBoxSet2", <EquipItemModel>{
                 "internalID": "TrapBoxSet2",
                 "displayName": "Silkskin Traps",
                 "sellPrice": 1,
@@ -8131,7 +8131,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 1
             }),
-        new EquipItemBase("TrapBoxSet3", <EquipItemModel>{
+        new CommonItemBase("TrapBoxSet3", <EquipItemModel>{
                 "internalID": "TrapBoxSet3",
                 "displayName": "Wooden Traps",
                 "sellPrice": 2,
@@ -8155,7 +8155,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("TrapBoxSet4", <EquipItemModel>{
+        new CommonItemBase("TrapBoxSet4", <EquipItemModel>{
                 "internalID": "TrapBoxSet4",
                 "displayName": "Natural Traps",
                 "sellPrice": 3,
@@ -8179,7 +8179,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("TrapBoxSet5", <EquipItemModel>{
+        new CommonItemBase("TrapBoxSet5", <EquipItemModel>{
                 "internalID": "TrapBoxSet5",
                 "displayName": "Steel Traps",
                 "sellPrice": 4,
@@ -8203,7 +8203,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("TrapBoxSet6", <EquipItemModel>{
+        new CommonItemBase("TrapBoxSet6", <EquipItemModel>{
                 "internalID": "TrapBoxSet6",
                 "displayName": "Meaty Traps",
                 "sellPrice": 5,
@@ -8227,7 +8227,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("TrapBoxSet7", <EquipItemModel>{
+        new CommonItemBase("TrapBoxSet7", <EquipItemModel>{
                 "internalID": "TrapBoxSet7",
                 "displayName": "Royal Traps",
                 "sellPrice": 6,
@@ -8251,7 +8251,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("WorshipSkull1", <EquipItemModel>{
+        new CommonItemBase("WorshipSkull1", <EquipItemModel>{
                 "internalID": "WorshipSkull1",
                 "displayName": "Wax Skull",
                 "sellPrice": 5000,
@@ -8275,7 +8275,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 1
             }),
-        new EquipItemBase("WorshipSkull2", <EquipItemModel>{
+        new CommonItemBase("WorshipSkull2", <EquipItemModel>{
                 "internalID": "WorshipSkull2",
                 "displayName": "Ceramic Skull",
                 "sellPrice": 100,
@@ -8299,7 +8299,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 1
             }),
-        new EquipItemBase("WorshipSkull3", <EquipItemModel>{
+        new CommonItemBase("WorshipSkull3", <EquipItemModel>{
                 "internalID": "WorshipSkull3",
                 "displayName": "Horned Skull",
                 "sellPrice": 100,
@@ -8323,7 +8323,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("WorshipSkull4", <EquipItemModel>{
+        new CommonItemBase("WorshipSkull4", <EquipItemModel>{
                 "internalID": "WorshipSkull4",
                 "displayName": "Prickle Skull",
                 "sellPrice": 100,
@@ -8347,7 +8347,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("WorshipSkull5", <EquipItemModel>{
+        new CommonItemBase("WorshipSkull5", <EquipItemModel>{
                 "internalID": "WorshipSkull5",
                 "displayName": "Manifested Skull",
                 "sellPrice": 100,
@@ -8371,7 +8371,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("WorshipSkull6", <EquipItemModel>{
+        new CommonItemBase("WorshipSkull6", <EquipItemModel>{
                 "internalID": "WorshipSkull6",
                 "displayName": "Glauss Skull",
                 "sellPrice": 100,
@@ -8395,7 +8395,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("WorshipSkull7", <EquipItemModel>{
+        new CommonItemBase("WorshipSkull7", <EquipItemModel>{
                 "internalID": "WorshipSkull7",
                 "displayName": "Luciferian Skull",
                 "sellPrice": 100,
@@ -8419,7 +8419,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("FoodHealth1", <ConsumableItemModel>{
+        new CommonItemBase("FoodHealth1", <ConsumableItemModel>{
                 "internalID": "FoodHealth1",
                 "displayName": "Nomwich",
                 "sellPrice": 2,
@@ -8440,7 +8440,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 20,
                 "Cooldown": 30
             }),
-        new EquipItemBase("FoodHealth3", <ConsumableItemModel>{
+        new CommonItemBase("FoodHealth3", <ConsumableItemModel>{
                 "internalID": "FoodHealth3",
                 "displayName": "Hot Dog",
                 "sellPrice": 7,
@@ -8461,7 +8461,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 50,
                 "Cooldown": 30
             }),
-        new EquipItemBase("FoodHealth2", <ConsumableItemModel>{
+        new CommonItemBase("FoodHealth2", <ConsumableItemModel>{
                 "internalID": "FoodHealth2",
                 "displayName": "Cheezy Pizza",
                 "sellPrice": 20,
@@ -8482,7 +8482,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 125,
                 "Cooldown": 30
             }),
-        new EquipItemBase("Peanut", <ConsumableItemModel>{
+        new CommonItemBase("Peanut", <ConsumableItemModel>{
                 "internalID": "Peanut",
                 "displayName": "Peanut",
                 "sellPrice": 12,
@@ -8503,7 +8503,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 80,
                 "Cooldown": 20
             }),
-        new EquipItemBase("FoodHealth4", <ConsumableItemModel>{
+        new CommonItemBase("FoodHealth4", <ConsumableItemModel>{
                 "internalID": "FoodHealth4",
                 "displayName": "Saucy Weiner",
                 "sellPrice": 120,
@@ -8524,7 +8524,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 700,
                 "Cooldown": 30
             }),
-        new EquipItemBase("FoodHealth6", <ConsumableItemModel>{
+        new CommonItemBase("FoodHealth6", <ConsumableItemModel>{
                 "internalID": "FoodHealth6",
                 "displayName": "Kebab Sticks",
                 "sellPrice": 48,
@@ -8545,7 +8545,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 300,
                 "Cooldown": 30
             }),
-        new EquipItemBase("FoodHealth7", <ConsumableItemModel>{
+        new CommonItemBase("FoodHealth7", <ConsumableItemModel>{
                 "internalID": "FoodHealth7",
                 "displayName": "Meat Pie",
                 "sellPrice": 80,
@@ -8566,7 +8566,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 500,
                 "Cooldown": 30
             }),
-        new EquipItemBase("FoodHealth10", <ConsumableItemModel>{
+        new CommonItemBase("FoodHealth10", <ConsumableItemModel>{
                 "internalID": "FoodHealth10",
                 "displayName": "Mountain Bread",
                 "sellPrice": 140,
@@ -8587,7 +8587,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 750,
                 "Cooldown": 30
             }),
-        new EquipItemBase("FoodHealth9", <ConsumableItemModel>{
+        new CommonItemBase("FoodHealth9", <ConsumableItemModel>{
                 "internalID": "FoodHealth9",
                 "displayName": "Yeti Ham",
                 "sellPrice": 190,
@@ -8608,7 +8608,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 1000,
                 "Cooldown": 30
             }),
-        new EquipItemBase("FoodHealth11", <ConsumableItemModel>{
+        new CommonItemBase("FoodHealth11", <ConsumableItemModel>{
                 "internalID": "FoodHealth11",
                 "displayName": "Sheepie Dairy",
                 "sellPrice": 310,
@@ -8629,7 +8629,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 1500,
                 "Cooldown": 30
             }),
-        new EquipItemBase("FoodHealth13", <ConsumableItemModel>{
+        new CommonItemBase("FoodHealth13", <ConsumableItemModel>{
                 "internalID": "FoodHealth13",
                 "displayName": "Cupcake",
                 "sellPrice": 1500,
@@ -8650,7 +8650,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 3000,
                 "Cooldown": 30
             }),
-        new EquipItemBase("FoodHealth12", <ConsumableItemModel>{
+        new CommonItemBase("FoodHealth12", <ConsumableItemModel>{
                 "internalID": "FoodHealth12",
                 "displayName": "Spicy Space Ribs",
                 "sellPrice": 4000,
@@ -8671,7 +8671,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 6000,
                 "Cooldown": 25
             }),
-        new EquipItemBase("FoodHealth5", <ConsumableItemModel>{
+        new CommonItemBase("FoodHealth5", <ConsumableItemModel>{
                 "internalID": "FoodHealth5",
                 "displayName": "Cranberry Jam",
                 "sellPrice": 32,
@@ -8692,7 +8692,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 200,
                 "Cooldown": 30
             }),
-        new EquipItemBase("FoodHealth8", <ConsumableItemModel>{
+        new CommonItemBase("FoodHealth8", <ConsumableItemModel>{
                 "internalID": "FoodHealth8",
                 "displayName": "Crabby Cake Supreme",
                 "sellPrice": 120,
@@ -8713,7 +8713,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 700,
                 "Cooldown": 60
             }),
-        new EquipItemBase("FoodEvent8", <ConsumableItemModel>{
+        new CommonItemBase("FoodEvent8", <ConsumableItemModel>{
                 "internalID": "FoodEvent8",
                 "displayName": "Milk Choco",
                 "sellPrice": 10,
@@ -8734,7 +8734,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 420,
                 "Cooldown": 20
             }),
-        new EquipItemBase("Meatloaf", <ConsumableItemModel>{
+        new CommonItemBase("Meatloaf", <ConsumableItemModel>{
                 "internalID": "Meatloaf",
                 "displayName": "Magic Meatloaf",
                 "sellPrice": 300,
@@ -8755,7 +8755,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 2000,
                 "Cooldown": 10
             }),
-        new EquipItemBase("FoodPotOr1", <ConsumableItemModel>{
+        new CommonItemBase("FoodPotOr1", <ConsumableItemModel>{
                 "internalID": "FoodPotOr1",
                 "displayName": "Small Strength Potion",
                 "sellPrice": 5,
@@ -8776,7 +8776,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 10,
                 "Cooldown": 15
             }),
-        new EquipItemBase("FoodPotOr2", <ConsumableItemModel>{
+        new CommonItemBase("FoodPotOr2", <ConsumableItemModel>{
                 "internalID": "FoodPotOr2",
                 "displayName": "Average Strength Potion",
                 "sellPrice": 25,
@@ -8797,7 +8797,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 30,
                 "Cooldown": 13
             }),
-        new EquipItemBase("FoodPotOr3", <ConsumableItemModel>{
+        new CommonItemBase("FoodPotOr3", <ConsumableItemModel>{
                 "internalID": "FoodPotOr3",
                 "displayName": "Decent Strength Potion",
                 "sellPrice": 150,
@@ -8818,7 +8818,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 100,
                 "Cooldown": 10
             }),
-        new EquipItemBase("FoodPotOr4", <ConsumableItemModel>{
+        new CommonItemBase("FoodPotOr4", <ConsumableItemModel>{
                 "internalID": "FoodPotOr4",
                 "displayName": "Potent Strength Potion",
                 "sellPrice": 2700,
@@ -8839,7 +8839,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 250,
                 "Cooldown": 8
             }),
-        new EquipItemBase("FoodPotRe1", <ConsumableItemModel>{
+        new CommonItemBase("FoodPotRe1", <ConsumableItemModel>{
                 "internalID": "FoodPotRe1",
                 "displayName": "Small Life Potion",
                 "sellPrice": 4,
@@ -8860,7 +8860,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 30,
                 "Cooldown": 5
             }),
-        new EquipItemBase("FoodPotRe2", <ConsumableItemModel>{
+        new CommonItemBase("FoodPotRe2", <ConsumableItemModel>{
                 "internalID": "FoodPotRe2",
                 "displayName": "Average Life Potion",
                 "sellPrice": 30,
@@ -8881,7 +8881,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 120,
                 "Cooldown": 4
             }),
-        new EquipItemBase("FoodPotRe3", <ConsumableItemModel>{
+        new CommonItemBase("FoodPotRe3", <ConsumableItemModel>{
                 "internalID": "FoodPotRe3",
                 "displayName": "Decent Life Potion",
                 "sellPrice": 200,
@@ -8902,7 +8902,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 250,
                 "Cooldown": 3
             }),
-        new EquipItemBase("FoodPotRe4", <ConsumableItemModel>{
+        new CommonItemBase("FoodPotRe4", <ConsumableItemModel>{
                 "internalID": "FoodPotRe4",
                 "displayName": "Potent Life Potion",
                 "sellPrice": 4000,
@@ -8923,7 +8923,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 700,
                 "Cooldown": 2
             }),
-        new EquipItemBase("FoodPotGr1", <ConsumableItemModel>{
+        new CommonItemBase("FoodPotGr1", <ConsumableItemModel>{
                 "internalID": "FoodPotGr1",
                 "displayName": "Small Speed Potion",
                 "sellPrice": 7,
@@ -8944,7 +8944,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 5,
                 "Cooldown": 15
             }),
-        new EquipItemBase("FoodPotGr2", <ConsumableItemModel>{
+        new CommonItemBase("FoodPotGr2", <ConsumableItemModel>{
                 "internalID": "FoodPotGr2",
                 "displayName": "Average Speed Potion",
                 "sellPrice": 60,
@@ -8965,7 +8965,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 10,
                 "Cooldown": 13
             }),
-        new EquipItemBase("FoodPotGr3", <ConsumableItemModel>{
+        new CommonItemBase("FoodPotGr3", <ConsumableItemModel>{
                 "internalID": "FoodPotGr3",
                 "displayName": "Decent Speed Potion",
                 "sellPrice": 400,
@@ -8986,7 +8986,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 15,
                 "Cooldown": 10
             }),
-        new EquipItemBase("FoodPotGr4", <ConsumableItemModel>{
+        new CommonItemBase("FoodPotGr4", <ConsumableItemModel>{
                 "internalID": "FoodPotGr4",
                 "displayName": "Potent Speed Potion",
                 "sellPrice": 8000,
@@ -9007,7 +9007,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 20,
                 "Cooldown": 7
             }),
-        new EquipItemBase("FoodEvent7", <ConsumableItemModel>{
+        new CommonItemBase("FoodEvent7", <ConsumableItemModel>{
                 "internalID": "FoodEvent7",
                 "displayName": "Minto Choco",
                 "sellPrice": 10,
@@ -9028,7 +9028,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 8,
                 "Cooldown": 4
             }),
-        new EquipItemBase("FoodPotMana1", <ConsumableItemModel>{
+        new CommonItemBase("FoodPotMana1", <ConsumableItemModel>{
                 "internalID": "FoodPotMana1",
                 "displayName": "Small Mana Potion",
                 "sellPrice": 5,
@@ -9049,7 +9049,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 10,
                 "Cooldown": 40
             }),
-        new EquipItemBase("FoodPotMana2", <ConsumableItemModel>{
+        new CommonItemBase("FoodPotMana2", <ConsumableItemModel>{
                 "internalID": "FoodPotMana2",
                 "displayName": "Average Mana Potion",
                 "sellPrice": 25,
@@ -9070,7 +9070,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 17,
                 "Cooldown": 35
             }),
-        new EquipItemBase("FoodPotMana3", <ConsumableItemModel>{
+        new CommonItemBase("FoodPotMana3", <ConsumableItemModel>{
                 "internalID": "FoodPotMana3",
                 "displayName": "Decent Mana Potion",
                 "sellPrice": 175,
@@ -9091,7 +9091,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 25,
                 "Cooldown": 30
             }),
-        new EquipItemBase("FoodPotMana4", <ConsumableItemModel>{
+        new CommonItemBase("FoodPotMana4", <ConsumableItemModel>{
                 "internalID": "FoodPotMana4",
                 "displayName": "Potent Mana Potion",
                 "sellPrice": 4500,
@@ -9112,7 +9112,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 40,
                 "Cooldown": 30
             }),
-        new EquipItemBase("FoodPotYe1", <ConsumableItemModel>{
+        new CommonItemBase("FoodPotYe1", <ConsumableItemModel>{
                 "internalID": "FoodPotYe1",
                 "displayName": "Small EXP Potion",
                 "sellPrice": 25,
@@ -9133,7 +9133,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 5,
                 "Cooldown": 10
             }),
-        new EquipItemBase("FoodPotYe2", <ConsumableItemModel>{
+        new CommonItemBase("FoodPotYe2", <ConsumableItemModel>{
                 "internalID": "FoodPotYe2",
                 "displayName": "Average EXP Potion",
                 "sellPrice": 250,
@@ -9154,7 +9154,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 10,
                 "Cooldown": 8
             }),
-        new EquipItemBase("FoodPotYe3", <ConsumableItemModel>{
+        new CommonItemBase("FoodPotYe3", <ConsumableItemModel>{
                 "internalID": "FoodPotYe3",
                 "displayName": "Decent EXP Potion",
                 "sellPrice": 1500,
@@ -9175,7 +9175,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 15,
                 "Cooldown": 6
             }),
-        new EquipItemBase("FoodPotYe4", <ConsumableItemModel>{
+        new CommonItemBase("FoodPotYe4", <ConsumableItemModel>{
                 "internalID": "FoodPotYe4",
                 "displayName": "Potent EXP Potion",
                 "sellPrice": 30000,
@@ -9196,7 +9196,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 20,
                 "Cooldown": 3
             }),
-        new EquipItemBase("FoodEvent6", <ConsumableItemModel>{
+        new CommonItemBase("FoodEvent6", <ConsumableItemModel>{
                 "internalID": "FoodEvent6",
                 "displayName": "Lemony Choco",
                 "sellPrice": 10,
@@ -9217,7 +9217,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 10,
                 "Cooldown": 6
             }),
-        new EquipItemBase("Pearl3", <ConsumableItemModel>{
+        new CommonItemBase("Pearl3", <ConsumableItemModel>{
                 "internalID": "Pearl3",
                 "displayName": "Shiny Pearl",
                 "sellPrice": 10,
@@ -9238,7 +9238,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 25,
                 "Cooldown": 1
             }),
-        new EquipItemBase("FoodMining1", <ConsumableItemModel>{
+        new CommonItemBase("FoodMining1", <ConsumableItemModel>{
                 "internalID": "FoodMining1",
                 "displayName": "Icing Ironbite",
                 "sellPrice": 10,
@@ -9259,7 +9259,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 15,
                 "Cooldown": 10
             }),
-        new EquipItemBase("FoodEvent1", <ConsumableItemModel>{
+        new CommonItemBase("FoodEvent1", <ConsumableItemModel>{
                 "internalID": "FoodEvent1",
                 "displayName": "Giftybread Man",
                 "sellPrice": 10,
@@ -9280,7 +9280,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 25,
                 "Cooldown": 3
             }),
-        new EquipItemBase("Pearl2", <ConsumableItemModel>{
+        new CommonItemBase("Pearl2", <ConsumableItemModel>{
                 "internalID": "Pearl2",
                 "displayName": "Stained Pearl",
                 "sellPrice": 10,
@@ -9301,7 +9301,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 30,
                 "Cooldown": 1
             }),
-        new EquipItemBase("FoodChoppin1", <ConsumableItemModel>{
+        new CommonItemBase("FoodChoppin1", <ConsumableItemModel>{
                 "internalID": "FoodChoppin1",
                 "displayName": "Saucy Logfries",
                 "sellPrice": 10,
@@ -9322,7 +9322,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 15,
                 "Cooldown": 10
             }),
-        new EquipItemBase("FoodEvent2", <ConsumableItemModel>{
+        new CommonItemBase("FoodEvent2", <ConsumableItemModel>{
                 "internalID": "FoodEvent2",
                 "displayName": "Chogg Nog",
                 "sellPrice": 10,
@@ -9343,7 +9343,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 25,
                 "Cooldown": 1
             }),
-        new EquipItemBase("FoodFish1", <ConsumableItemModel>{
+        new CommonItemBase("FoodFish1", <ConsumableItemModel>{
                 "internalID": "FoodFish1",
                 "displayName": "Slurpin Herm",
                 "sellPrice": 10,
@@ -9364,7 +9364,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 20,
                 "Cooldown": 10
             }),
-        new EquipItemBase("FoodEvent3", <ConsumableItemModel>{
+        new CommonItemBase("FoodEvent3", <ConsumableItemModel>{
                 "internalID": "FoodEvent3",
                 "displayName": "Candy Canes",
                 "sellPrice": 10,
@@ -9385,7 +9385,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 25,
                 "Cooldown": 3
             }),
-        new EquipItemBase("Pearl1", <ConsumableItemModel>{
+        new CommonItemBase("Pearl1", <ConsumableItemModel>{
                 "internalID": "Pearl1",
                 "displayName": "Aqua Pearl",
                 "sellPrice": 10,
@@ -9406,7 +9406,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 30,
                 "Cooldown": 1
             }),
-        new EquipItemBase("FoodCatch1", <ConsumableItemModel>{
+        new CommonItemBase("FoodCatch1", <ConsumableItemModel>{
                 "internalID": "FoodCatch1",
                 "displayName": "Buttered Toasted Butter",
                 "sellPrice": 10,
@@ -9427,7 +9427,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 20,
                 "Cooldown": 10
             }),
-        new EquipItemBase("FoodEvent4", <ConsumableItemModel>{
+        new CommonItemBase("FoodEvent4", <ConsumableItemModel>{
                 "internalID": "FoodEvent4",
                 "displayName": "Mistleberries",
                 "sellPrice": 10,
@@ -9448,7 +9448,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 25,
                 "Cooldown": 1
             }),
-        new EquipItemBase("FoodTrapping1", <ConsumableItemModel>{
+        new CommonItemBase("FoodTrapping1", <ConsumableItemModel>{
                 "internalID": "FoodTrapping1",
                 "displayName": "Critter Numnums",
                 "sellPrice": 10,
@@ -9469,7 +9469,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 25,
                 "Cooldown": 125
             }),
-        new EquipItemBase("FoodWorship1", <ConsumableItemModel>{
+        new CommonItemBase("FoodWorship1", <ConsumableItemModel>{
                 "internalID": "FoodWorship1",
                 "displayName": "Soulble Gum",
                 "sellPrice": 10,
@@ -9490,7 +9490,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 25,
                 "Cooldown": 125
             }),
-        new EquipItemBase("Bullet", <ConsumableItemModel>{
+        new CommonItemBase("Bullet", <ConsumableItemModel>{
                 "internalID": "Bullet",
                 "displayName": "Bullet",
                 "sellPrice": 20,
@@ -9511,7 +9511,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 1,
                 "Cooldown": 15
             }),
-        new EquipItemBase("BulletB", <ConsumableItemModel>{
+        new CommonItemBase("BulletB", <ConsumableItemModel>{
                 "internalID": "BulletB",
                 "displayName": "FMJ Bullet",
                 "sellPrice": 20,
@@ -9532,7 +9532,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 2,
                 "Cooldown": 12
             }),
-        new EquipItemBase("MidnightCookie", <ConsumableItemModel>{
+        new CommonItemBase("MidnightCookie", <ConsumableItemModel>{
                 "internalID": "MidnightCookie",
                 "displayName": "Midnight Cookie",
                 "sellPrice": 300,
@@ -9553,7 +9553,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 5,
                 "Cooldown": 2
             }),
-        new EquipItemBase("FoodEvent5", <ConsumableItemModel>{
+        new CommonItemBase("FoodEvent5", <ConsumableItemModel>{
                 "internalID": "FoodEvent5",
                 "displayName": "Cherry Choco",
                 "sellPrice": 10,
@@ -9574,7 +9574,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 1,
                 "Cooldown": 10
             }),
-        new EquipItemBase("PeanutG", <ConsumableItemModel>{
+        new CommonItemBase("PeanutG", <ConsumableItemModel>{
                 "internalID": "PeanutG",
                 "displayName": "Golden Peanut",
                 "sellPrice": 125,
@@ -9595,7 +9595,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 30,
                 "Cooldown": 1
             }),
-        new EquipItemBase("FoodG1", <ConsumableItemModel>{
+        new CommonItemBase("FoodG1", <ConsumableItemModel>{
                 "internalID": "FoodG1",
                 "displayName": "Golden Jam",
                 "sellPrice": 50,
@@ -9616,7 +9616,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 30,
                 "Cooldown": 1
             }),
-        new EquipItemBase("FoodG2", <ConsumableItemModel>{
+        new CommonItemBase("FoodG2", <ConsumableItemModel>{
                 "internalID": "FoodG2",
                 "displayName": "Golden Kebabs",
                 "sellPrice": 200,
@@ -9637,7 +9637,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 20,
                 "Cooldown": 1
             }),
-        new EquipItemBase("FoodG3", <ConsumableItemModel>{
+        new CommonItemBase("FoodG3", <ConsumableItemModel>{
                 "internalID": "FoodG3",
                 "displayName": "Golden Meat Pie",
                 "sellPrice": 350,
@@ -9658,7 +9658,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 30,
                 "Cooldown": 1
             }),
-        new EquipItemBase("FoodG4", <ConsumableItemModel>{
+        new CommonItemBase("FoodG4", <ConsumableItemModel>{
                 "internalID": "FoodG4",
                 "displayName": "Golden Nomwich",
                 "sellPrice": 100,
@@ -9679,7 +9679,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 400,
                 "Cooldown": 1
             }),
-        new EquipItemBase("FoodG5", <ConsumableItemModel>{
+        new CommonItemBase("FoodG5", <ConsumableItemModel>{
                 "internalID": "FoodG5",
                 "displayName": "Golden Ham",
                 "sellPrice": 100,
@@ -9700,7 +9700,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 18,
                 "Cooldown": 1
             }),
-        new EquipItemBase("FoodG6", <ConsumableItemModel>{
+        new CommonItemBase("FoodG6", <ConsumableItemModel>{
                 "internalID": "FoodG6",
                 "displayName": "Golden Bread",
                 "sellPrice": 100,
@@ -9721,7 +9721,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 30,
                 "Cooldown": 1
             }),
-        new EquipItemBase("FoodG7", <ConsumableItemModel>{
+        new CommonItemBase("FoodG7", <ConsumableItemModel>{
                 "internalID": "FoodG7",
                 "displayName": "Golden Ribs",
                 "sellPrice": 100,
@@ -9742,7 +9742,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 40,
                 "Cooldown": 1
             }),
-        new EquipItemBase("FoodG8", <ConsumableItemModel>{
+        new CommonItemBase("FoodG8", <ConsumableItemModel>{
                 "internalID": "FoodG8",
                 "displayName": "Golden Cheese",
                 "sellPrice": 100,
@@ -9763,7 +9763,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 20,
                 "Cooldown": 1
             }),
-        new EquipItemBase("ButterBar", <ConsumableItemModel>{
+        new CommonItemBase("ButterBar", <ConsumableItemModel>{
                 "internalID": "ButterBar",
                 "displayName": "Butter Bar",
                 "sellPrice": 1,
@@ -9784,7 +9784,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 60,
                 "Cooldown": 1
             }),
-        new EquipItemBase("rtt0", <QuestItemModel>{
+        new CommonItemBase("rtt0", <QuestItemModel>{
                 "internalID": "rtt0",
                 "displayName": "Bottled Town Teleport",
                 "sellPrice": 50,
@@ -9801,7 +9801,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("ResetFrag", <QuestItemModel>{
+        new CommonItemBase("ResetFrag", <QuestItemModel>{
                 "internalID": "ResetFrag",
                 "displayName": "Talent Point Reset Fragment",
                 "sellPrice": 200,
@@ -9818,7 +9818,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("ResetCompleted", <QuestItemModel>{
+        new CommonItemBase("ResetCompleted", <QuestItemModel>{
                 "internalID": "ResetCompleted",
                 "displayName": "Talent Point Reset Potion",
                 "sellPrice": 1,
@@ -9835,7 +9835,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("ResetCompletedS", <QuestItemModel>{
+        new CommonItemBase("ResetCompletedS", <QuestItemModel>{
                 "internalID": "ResetCompletedS",
                 "displayName": "Star Talent Reset Potion",
                 "sellPrice": 1,
@@ -9852,7 +9852,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("ClassSwap", <QuestItemModel>{
+        new CommonItemBase("ClassSwap", <QuestItemModel>{
                 "internalID": "ClassSwap",
                 "displayName": "Sub Class Swap Token",
                 "sellPrice": 1,
@@ -9869,7 +9869,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("ResetBox", <QuestItemModel>{
+        new CommonItemBase("ResetBox", <QuestItemModel>{
                 "internalID": "ResetBox",
                 "displayName": "Post Office Box Reseto Magnifico",
                 "sellPrice": 1,
@@ -9886,7 +9886,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Ht", <QuestItemModel>{
+        new CommonItemBase("Ht", <QuestItemModel>{
                 "internalID": "Ht",
                 "displayName": "Hat Premiumifier",
                 "sellPrice": 1,
@@ -9903,7 +9903,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StonePremRestore", <QuestItemModel>{
+        new CommonItemBase("StonePremRestore", <QuestItemModel>{
                 "internalID": "StonePremRestore",
                 "displayName": "Premium Stone Refunder",
                 "sellPrice": 1,
@@ -9920,7 +9920,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("ExpBalloon1", <QuestItemModel>{
+        new CommonItemBase("ExpBalloon1", <QuestItemModel>{
                 "internalID": "ExpBalloon1",
                 "displayName": "Small Experience Balloon",
                 "sellPrice": 1,
@@ -9937,7 +9937,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("ExpBalloon2", <QuestItemModel>{
+        new CommonItemBase("ExpBalloon2", <QuestItemModel>{
                 "internalID": "ExpBalloon2",
                 "displayName": "Medium Experience Balloon",
                 "sellPrice": 1,
@@ -9954,7 +9954,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("ExpBalloon3", <QuestItemModel>{
+        new CommonItemBase("ExpBalloon3", <QuestItemModel>{
                 "internalID": "ExpBalloon3",
                 "displayName": "Large Experience Balloon",
                 "sellPrice": 1,
@@ -9971,7 +9971,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("JobApplication", <QuestItemModel>{
+        new CommonItemBase("JobApplication", <QuestItemModel>{
                 "internalID": "JobApplication",
                 "displayName": "Job Application",
                 "sellPrice": 200,
@@ -9988,7 +9988,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("SmithingHammerChisel", <QuestItemModel>{
+        new CommonItemBase("SmithingHammerChisel", <QuestItemModel>{
                 "internalID": "SmithingHammerChisel",
                 "displayName": "Sculpting Tools",
                 "sellPrice": 800,
@@ -10005,7 +10005,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("SmithingHammerChisel2", <QuestItemModel>{
+        new CommonItemBase("SmithingHammerChisel2", <QuestItemModel>{
                 "internalID": "SmithingHammerChisel2",
                 "displayName": "Guilding Tools",
                 "sellPrice": 12500,
@@ -10022,7 +10022,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("BobJoePickle", <QuestItemModel>{
+        new CommonItemBase("BobJoePickle", <QuestItemModel>{
                 "internalID": "BobJoePickle",
                 "displayName": "BobJoePickle",
                 "sellPrice": 40000,
@@ -10039,7 +10039,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("BallJoePickle", <QuestItemModel>{
+        new CommonItemBase("BallJoePickle", <QuestItemModel>{
                 "internalID": "BallJoePickle",
                 "displayName": "BallJoePickle",
                 "sellPrice": 40000,
@@ -10056,7 +10056,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest1", <QuestItemModel>{
+        new CommonItemBase("Quest1", <QuestItemModel>{
                 "internalID": "Quest1",
                 "displayName": "Mining Certificate",
                 "sellPrice": 1,
@@ -10073,7 +10073,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Crystal1", <QuestItemModel>{
+        new CommonItemBase("Crystal1", <QuestItemModel>{
                 "internalID": "Crystal1",
                 "displayName": "Desert Topaz",
                 "sellPrice": 1,
@@ -10090,7 +10090,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Crystal2", <QuestItemModel>{
+        new CommonItemBase("Crystal2", <QuestItemModel>{
                 "internalID": "Crystal2",
                 "displayName": "Glacier Quartz",
                 "sellPrice": 1,
@@ -10107,7 +10107,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Crystal3", <QuestItemModel>{
+        new CommonItemBase("Crystal3", <QuestItemModel>{
                 "internalID": "Crystal3",
                 "displayName": "Galaxial Amethyst",
                 "sellPrice": 1,
@@ -10124,7 +10124,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest2", <QuestItemModel>{
+        new CommonItemBase("Quest2", <QuestItemModel>{
                 "internalID": "Quest2",
                 "displayName": "Mining Certificate",
                 "sellPrice": 1,
@@ -10141,7 +10141,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("PeanutS", <QuestItemModel>{
+        new CommonItemBase("PeanutS", <QuestItemModel>{
                 "internalID": "PeanutS",
                 "displayName": "Stone Peanut",
                 "sellPrice": 5000,
@@ -10158,7 +10158,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest3", <QuestItemModel>{
+        new CommonItemBase("Quest3", <QuestItemModel>{
                 "internalID": "Quest3",
                 "displayName": "Ketchup Bottle",
                 "sellPrice": 1,
@@ -10175,7 +10175,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest4", <QuestItemModel>{
+        new CommonItemBase("Quest4", <QuestItemModel>{
                 "internalID": "Quest4",
                 "displayName": "Mustard Bottle",
                 "sellPrice": 1,
@@ -10192,7 +10192,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Mayo", <QuestItemModel>{
+        new CommonItemBase("Mayo", <QuestItemModel>{
                 "internalID": "Mayo",
                 "displayName": "Mayonnaise Bottle",
                 "sellPrice": 1,
@@ -10209,7 +10209,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Trash", <QuestItemModel>{
+        new CommonItemBase("Trash", <QuestItemModel>{
                 "internalID": "Trash",
                 "displayName": "Broken Weapon",
                 "sellPrice": 1,
@@ -10226,7 +10226,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Trash2", <QuestItemModel>{
+        new CommonItemBase("Trash2", <QuestItemModel>{
                 "internalID": "Trash2",
                 "displayName": "Dried Paint Blob",
                 "sellPrice": 1,
@@ -10243,7 +10243,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Trash3", <QuestItemModel>{
+        new CommonItemBase("Trash3", <QuestItemModel>{
                 "internalID": "Trash3",
                 "displayName": "Engraved Bullet",
                 "sellPrice": 1,
@@ -10260,7 +10260,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest5", <QuestItemModel>{
+        new CommonItemBase("Quest5", <QuestItemModel>{
                 "internalID": "Quest5",
                 "displayName": "Golden Jam (Quest)",
                 "sellPrice": 1,
@@ -10277,7 +10277,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest6", <QuestItemModel>{
+        new CommonItemBase("Quest6", <QuestItemModel>{
                 "internalID": "Quest6",
                 "displayName": "Scouting Report",
                 "sellPrice": 1,
@@ -10294,7 +10294,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest7", <QuestItemModel>{
+        new CommonItemBase("Quest7", <QuestItemModel>{
                 "internalID": "Quest7",
                 "displayName": "Strange Rock",
                 "sellPrice": 1,
@@ -10311,7 +10311,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest8", <QuestItemModel>{
+        new CommonItemBase("Quest8", <QuestItemModel>{
                 "internalID": "Quest8",
                 "displayName": "Filler bc I messed up",
                 "sellPrice": 1,
@@ -10328,7 +10328,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest10", <QuestItemModel>{
+        new CommonItemBase("Quest10", <QuestItemModel>{
                 "internalID": "Quest10",
                 "displayName": "Green Tea",
                 "sellPrice": 1000,
@@ -10345,7 +10345,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest11", <QuestItemModel>{
+        new CommonItemBase("Quest11", <QuestItemModel>{
                 "internalID": "Quest11",
                 "displayName": "Forest Villas Flyer Thingy",
                 "sellPrice": 1,
@@ -10362,7 +10362,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest12", <QuestItemModel>{
+        new CommonItemBase("Quest12", <QuestItemModel>{
                 "internalID": "Quest12",
                 "displayName": "Dog Bone",
                 "sellPrice": 7,
@@ -10379,7 +10379,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest13", <QuestItemModel>{
+        new CommonItemBase("Quest13", <QuestItemModel>{
                 "internalID": "Quest13",
                 "displayName": "Empty Box",
                 "sellPrice": 7,
@@ -10396,7 +10396,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest14", <QuestItemModel>{
+        new CommonItemBase("Quest14", <QuestItemModel>{
                 "internalID": "Quest14",
                 "displayName": "Employment Statistics",
                 "sellPrice": 50,
@@ -10413,7 +10413,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest15", <QuestItemModel>{
+        new CommonItemBase("Quest15", <QuestItemModel>{
                 "internalID": "Quest15",
                 "displayName": "Red Frisbee",
                 "sellPrice": 1,
@@ -10430,7 +10430,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest16", <QuestItemModel>{
+        new CommonItemBase("Quest16", <QuestItemModel>{
                 "internalID": "Quest16",
                 "displayName": "Broken Mic",
                 "sellPrice": 1,
@@ -10447,7 +10447,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest17", <QuestItemModel>{
+        new CommonItemBase("Quest17", <QuestItemModel>{
                 "internalID": "Quest17",
                 "displayName": "Amarok Slab",
                 "sellPrice": 250,
@@ -10464,7 +10464,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest18", <QuestItemModel>{
+        new CommonItemBase("Quest18", <QuestItemModel>{
                 "internalID": "Quest18",
                 "displayName": "Loomi's Room Key",
                 "sellPrice": 1,
@@ -10481,7 +10481,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest19", <QuestItemModel>{
+        new CommonItemBase("Quest19", <QuestItemModel>{
                 "internalID": "Quest19",
                 "displayName": "Golden Dubloon",
                 "sellPrice": 3500,
@@ -10498,7 +10498,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest20", <QuestItemModel>{
+        new CommonItemBase("Quest20", <QuestItemModel>{
                 "internalID": "Quest20",
                 "displayName": "Signed Arrest Warrant",
                 "sellPrice": 1,
@@ -10515,7 +10515,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest21", <QuestItemModel>{
+        new CommonItemBase("Quest21", <QuestItemModel>{
                 "internalID": "Quest21",
                 "displayName": "Time Thingy",
                 "sellPrice": 1,
@@ -10532,7 +10532,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest22", <QuestItemModel>{
+        new CommonItemBase("Quest22", <QuestItemModel>{
                 "internalID": "Quest22",
                 "displayName": "Corporatube Sub",
                 "sellPrice": 1,
@@ -10549,7 +10549,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest23", <QuestItemModel>{
+        new CommonItemBase("Quest23", <QuestItemModel>{
                 "internalID": "Quest23",
                 "displayName": "Instablab Follower",
                 "sellPrice": 1,
@@ -10566,7 +10566,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest24", <QuestItemModel>{
+        new CommonItemBase("Quest24", <QuestItemModel>{
                 "internalID": "Quest24",
                 "displayName": "Cloudsound Follower",
                 "sellPrice": 1,
@@ -10583,7 +10583,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest25", <QuestItemModel>{
+        new CommonItemBase("Quest25", <QuestItemModel>{
                 "internalID": "Quest25",
                 "displayName": "Birthday Card",
                 "sellPrice": 100,
@@ -10600,7 +10600,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest26", <QuestItemModel>{
+        new CommonItemBase("Quest26", <QuestItemModel>{
                 "internalID": "Quest26",
                 "displayName": "Pre Crime Box",
                 "sellPrice": 100,
@@ -10617,7 +10617,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest27", <QuestItemModel>{
+        new CommonItemBase("Quest27", <QuestItemModel>{
                 "internalID": "Quest27",
                 "displayName": "Bag o Nuts",
                 "sellPrice": 100,
@@ -10634,7 +10634,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest28", <QuestItemModel>{
+        new CommonItemBase("Quest28", <QuestItemModel>{
                 "internalID": "Quest28",
                 "displayName": "IOU One Blue Crystal",
                 "sellPrice": 100,
@@ -10651,7 +10651,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest29", <QuestItemModel>{
+        new CommonItemBase("Quest29", <QuestItemModel>{
                 "internalID": "Quest29",
                 "displayName": "Chaotic Amarok Slab",
                 "sellPrice": 100,
@@ -10668,7 +10668,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("GoldricP1", <QuestItemModel>{
+        new CommonItemBase("GoldricP1", <QuestItemModel>{
                 "internalID": "GoldricP1",
                 "displayName": "Casual Confidante",
                 "sellPrice": 100,
@@ -10685,7 +10685,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentSmithingTabs2", <QuestItemModel>{
+        new CommonItemBase("EquipmentSmithingTabs2", <QuestItemModel>{
                 "internalID": "EquipmentSmithingTabs2",
                 "displayName": "Anvil Tab 2",
                 "sellPrice": 100,
@@ -10702,7 +10702,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentSmithingTabs3", <QuestItemModel>{
+        new CommonItemBase("EquipmentSmithingTabs3", <QuestItemModel>{
                 "internalID": "EquipmentSmithingTabs3",
                 "displayName": "Anvil Tab 3",
                 "sellPrice": 1,
@@ -10719,7 +10719,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentSmithingTabs4", <QuestItemModel>{
+        new CommonItemBase("EquipmentSmithingTabs4", <QuestItemModel>{
                 "internalID": "EquipmentSmithingTabs4",
                 "displayName": "Anvil Tab 4",
                 "sellPrice": 1,
@@ -10736,7 +10736,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentSmithingTabs5", <QuestItemModel>{
+        new CommonItemBase("EquipmentSmithingTabs5", <QuestItemModel>{
                 "internalID": "EquipmentSmithingTabs5",
                 "displayName": "Anvil Tab 5",
                 "sellPrice": 1,
@@ -10753,7 +10753,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentSmithingTabs6", <QuestItemModel>{
+        new CommonItemBase("EquipmentSmithingTabs6", <QuestItemModel>{
                 "internalID": "EquipmentSmithingTabs6",
                 "displayName": "Anvil Tab 6",
                 "sellPrice": 1,
@@ -10770,7 +10770,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentSmithingTabs7", <QuestItemModel>{
+        new CommonItemBase("EquipmentSmithingTabs7", <QuestItemModel>{
                 "internalID": "EquipmentSmithingTabs7",
                 "displayName": "Anvil Tab 7",
                 "sellPrice": 1,
@@ -10787,7 +10787,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentSmithingTabs8", <QuestItemModel>{
+        new CommonItemBase("EquipmentSmithingTabs8", <QuestItemModel>{
                 "internalID": "EquipmentSmithingTabs8",
                 "displayName": "Anvil Tab 8",
                 "sellPrice": 1,
@@ -10804,7 +10804,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentStatues1", <QuestItemModel>{
+        new CommonItemBase("EquipmentStatues1", <QuestItemModel>{
                 "internalID": "EquipmentStatues1",
                 "displayName": "Power Statue",
                 "sellPrice": 10,
@@ -10821,7 +10821,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentStatues2", <QuestItemModel>{
+        new CommonItemBase("EquipmentStatues2", <QuestItemModel>{
                 "internalID": "EquipmentStatues2",
                 "displayName": "Speed Statue",
                 "sellPrice": 10,
@@ -10838,7 +10838,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentStatues3", <QuestItemModel>{
+        new CommonItemBase("EquipmentStatues3", <QuestItemModel>{
                 "internalID": "EquipmentStatues3",
                 "displayName": "Mining Statue",
                 "sellPrice": 10,
@@ -10855,7 +10855,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentStatues4", <QuestItemModel>{
+        new CommonItemBase("EquipmentStatues4", <QuestItemModel>{
                 "internalID": "EquipmentStatues4",
                 "displayName": "Feasty Statue",
                 "sellPrice": 10,
@@ -10872,7 +10872,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentStatues5", <QuestItemModel>{
+        new CommonItemBase("EquipmentStatues5", <QuestItemModel>{
                 "internalID": "EquipmentStatues5",
                 "displayName": "Health Statue",
                 "sellPrice": 10,
@@ -10889,7 +10889,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentStatues6", <QuestItemModel>{
+        new CommonItemBase("EquipmentStatues6", <QuestItemModel>{
                 "internalID": "EquipmentStatues6",
                 "displayName": "Kachow Statue",
                 "sellPrice": 10,
@@ -10906,7 +10906,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentStatues7", <QuestItemModel>{
+        new CommonItemBase("EquipmentStatues7", <QuestItemModel>{
                 "internalID": "EquipmentStatues7",
                 "displayName": "Lumberbob Statue",
                 "sellPrice": 10,
@@ -10923,7 +10923,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentStatues8", <QuestItemModel>{
+        new CommonItemBase("EquipmentStatues8", <QuestItemModel>{
                 "internalID": "EquipmentStatues8",
                 "displayName": "Thicc Skin Statue",
                 "sellPrice": 10,
@@ -10940,7 +10940,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentStatues9", <QuestItemModel>{
+        new CommonItemBase("EquipmentStatues9", <QuestItemModel>{
                 "internalID": "EquipmentStatues9",
                 "displayName": "Oceanman Statue",
                 "sellPrice": 10,
@@ -10957,7 +10957,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentStatues10", <QuestItemModel>{
+        new CommonItemBase("EquipmentStatues10", <QuestItemModel>{
                 "internalID": "EquipmentStatues10",
                 "displayName": "Ol Reliable Statue",
                 "sellPrice": 10,
@@ -10974,7 +10974,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentStatues11", <QuestItemModel>{
+        new CommonItemBase("EquipmentStatues11", <QuestItemModel>{
                 "internalID": "EquipmentStatues11",
                 "displayName": "Exp Book Statue",
                 "sellPrice": 10,
@@ -10991,7 +10991,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentStatues12", <QuestItemModel>{
+        new CommonItemBase("EquipmentStatues12", <QuestItemModel>{
                 "internalID": "EquipmentStatues12",
                 "displayName": "Anvil Statue",
                 "sellPrice": 10,
@@ -11008,7 +11008,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentStatues13", <QuestItemModel>{
+        new CommonItemBase("EquipmentStatues13", <QuestItemModel>{
                 "internalID": "EquipmentStatues13",
                 "displayName": "Cauldron Statue",
                 "sellPrice": 10,
@@ -11025,7 +11025,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentStatues14", <QuestItemModel>{
+        new CommonItemBase("EquipmentStatues14", <QuestItemModel>{
                 "internalID": "EquipmentStatues14",
                 "displayName": "Beholder Statue",
                 "sellPrice": 10,
@@ -11042,7 +11042,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentStatues15", <QuestItemModel>{
+        new CommonItemBase("EquipmentStatues15", <QuestItemModel>{
                 "internalID": "EquipmentStatues15",
                 "displayName": "Bullseye Statue",
                 "sellPrice": 10,
@@ -11059,7 +11059,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentStatues16", <QuestItemModel>{
+        new CommonItemBase("EquipmentStatues16", <QuestItemModel>{
                 "internalID": "EquipmentStatues16",
                 "displayName": "Box Statue",
                 "sellPrice": 10,
@@ -11076,7 +11076,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentStatues17", <QuestItemModel>{
+        new CommonItemBase("EquipmentStatues17", <QuestItemModel>{
                 "internalID": "EquipmentStatues17",
                 "displayName": "Twosoul Statue",
                 "sellPrice": 10,
@@ -11093,7 +11093,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentStatues18", <QuestItemModel>{
+        new CommonItemBase("EquipmentStatues18", <QuestItemModel>{
                 "internalID": "EquipmentStatues18",
                 "displayName": "EhExPee Statue",
                 "sellPrice": 10,
@@ -11110,7 +11110,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentStatues19", <QuestItemModel>{
+        new CommonItemBase("EquipmentStatues19", <QuestItemModel>{
                 "internalID": "EquipmentStatues19",
                 "displayName": "Seesaw Statue",
                 "sellPrice": 10,
@@ -11127,7 +11127,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("SmithingRecipes1", <EquipItemModel>{
+        new CommonItemBase("SmithingRecipes1", <EquipItemModel>{
                 "internalID": "SmithingRecipes1",
                 "displayName": "Beginner Recipe",
                 "sellPrice": 1,
@@ -11151,7 +11151,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("SmithingRecipes2", <EquipItemModel>{
+        new CommonItemBase("SmithingRecipes2", <EquipItemModel>{
                 "internalID": "SmithingRecipes2",
                 "displayName": "Novice Recipe",
                 "sellPrice": 1,
@@ -11175,7 +11175,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("SmithingRecipes3", <EquipItemModel>{
+        new CommonItemBase("SmithingRecipes3", <EquipItemModel>{
                 "internalID": "SmithingRecipes3",
                 "displayName": "Apprentice Recipe",
                 "sellPrice": 1,
@@ -11199,7 +11199,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("SmithingRecipes4", <EquipItemModel>{
+        new CommonItemBase("SmithingRecipes4", <EquipItemModel>{
                 "internalID": "SmithingRecipes4",
                 "displayName": "Journeyman Recipe",
                 "sellPrice": 1,
@@ -11223,7 +11223,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("TalentBook1", <EquipItemModel>{
+        new CommonItemBase("TalentBook1", <EquipItemModel>{
                 "internalID": "TalentBook1",
                 "displayName": "Special Talent Book",
                 "sellPrice": 100,
@@ -11247,7 +11247,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("TalentBook2", <EquipItemModel>{
+        new CommonItemBase("TalentBook2", <EquipItemModel>{
                 "internalID": "TalentBook2",
                 "displayName": "Beginner Talent Book",
                 "sellPrice": 100,
@@ -11271,7 +11271,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("TalentBook3", <EquipItemModel>{
+        new CommonItemBase("TalentBook3", <EquipItemModel>{
                 "internalID": "TalentBook3",
                 "displayName": "Warrior Talent Book",
                 "sellPrice": 100,
@@ -11295,7 +11295,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("TalentBook4", <EquipItemModel>{
+        new CommonItemBase("TalentBook4", <EquipItemModel>{
                 "internalID": "TalentBook4",
                 "displayName": "Archer Talent Book",
                 "sellPrice": 100,
@@ -11319,7 +11319,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("TalentBook5", <EquipItemModel>{
+        new CommonItemBase("TalentBook5", <EquipItemModel>{
                 "internalID": "TalentBook5",
                 "displayName": "Wizard Talent Book",
                 "sellPrice": 100,
@@ -11343,7 +11343,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagT2", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagT2", <EquipItemModel>{
                 "internalID": "MaxCapBagT2",
                 "displayName": "Miniature Mining Pouch",
                 "sellPrice": 200,
@@ -11367,7 +11367,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBag1", <EquipItemModel>{
+        new CommonItemBase("MaxCapBag1", <EquipItemModel>{
                 "internalID": "MaxCapBag1",
                 "displayName": "Cramped Mining Pouch",
                 "sellPrice": 900,
@@ -11391,7 +11391,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBag2", <EquipItemModel>{
+        new CommonItemBase("MaxCapBag2", <EquipItemModel>{
                 "internalID": "MaxCapBag2",
                 "displayName": "Small Mining Pouch",
                 "sellPrice": 13000,
@@ -11415,7 +11415,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBag3", <EquipItemModel>{
+        new CommonItemBase("MaxCapBag3", <EquipItemModel>{
                 "internalID": "MaxCapBag3",
                 "displayName": "Average Mining Pouch",
                 "sellPrice": 200,
@@ -11439,7 +11439,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBag4", <EquipItemModel>{
+        new CommonItemBase("MaxCapBag4", <EquipItemModel>{
                 "internalID": "MaxCapBag4",
                 "displayName": "Sizable Mining Pouch",
                 "sellPrice": 200,
@@ -11463,7 +11463,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBag5", <EquipItemModel>{
+        new CommonItemBase("MaxCapBag5", <EquipItemModel>{
                 "internalID": "MaxCapBag5",
                 "displayName": "Big Mining Pouch",
                 "sellPrice": 200,
@@ -11487,7 +11487,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagMi6", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagMi6", <EquipItemModel>{
                 "internalID": "MaxCapBagMi6",
                 "displayName": "Large Mining Pouch",
                 "sellPrice": 200,
@@ -11511,7 +11511,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagMi7", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagMi7", <EquipItemModel>{
                 "internalID": "MaxCapBagMi7",
                 "displayName": "Massive Mining Pouch",
                 "sellPrice": 200,
@@ -11535,7 +11535,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagMi8", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagMi8", <EquipItemModel>{
                 "internalID": "MaxCapBagMi8",
                 "displayName": "Volumetric Mining Pouch",
                 "sellPrice": 200,
@@ -11559,7 +11559,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagT1", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagT1", <EquipItemModel>{
                 "internalID": "MaxCapBagT1",
                 "displayName": "Miniature Choppin Pouch",
                 "sellPrice": 200,
@@ -11583,7 +11583,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBag7", <EquipItemModel>{
+        new CommonItemBase("MaxCapBag7", <EquipItemModel>{
                 "internalID": "MaxCapBag7",
                 "displayName": "Cramped Choppin Pouch",
                 "sellPrice": 1400,
@@ -11607,7 +11607,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBag9", <EquipItemModel>{
+        new CommonItemBase("MaxCapBag9", <EquipItemModel>{
                 "internalID": "MaxCapBag9",
                 "displayName": "Small Choppin Pouch",
                 "sellPrice": 10500,
@@ -11631,7 +11631,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagT3", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagT3", <EquipItemModel>{
                 "internalID": "MaxCapBagT3",
                 "displayName": "Average Choppin Pouch",
                 "sellPrice": 10500,
@@ -11655,7 +11655,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagT4", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagT4", <EquipItemModel>{
                 "internalID": "MaxCapBagT4",
                 "displayName": "Sizable Choppin Pouch",
                 "sellPrice": 10500,
@@ -11679,7 +11679,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagT5", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagT5", <EquipItemModel>{
                 "internalID": "MaxCapBagT5",
                 "displayName": "Big Choppin Pouch",
                 "sellPrice": 10500,
@@ -11703,7 +11703,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagT6", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagT6", <EquipItemModel>{
                 "internalID": "MaxCapBagT6",
                 "displayName": "Large Choppin Pouch",
                 "sellPrice": 10500,
@@ -11727,7 +11727,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagT7", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagT7", <EquipItemModel>{
                 "internalID": "MaxCapBagT7",
                 "displayName": "Massive Choppin Pouch",
                 "sellPrice": 200,
@@ -11751,7 +11751,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagT8", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagT8", <EquipItemModel>{
                 "internalID": "MaxCapBagT8",
                 "displayName": "Volumetric Chopping Pouch",
                 "sellPrice": 200,
@@ -11775,7 +11775,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBag6", <EquipItemModel>{
+        new CommonItemBase("MaxCapBag6", <EquipItemModel>{
                 "internalID": "MaxCapBag6",
                 "displayName": "Miniscule Food Pouch",
                 "sellPrice": 200,
@@ -11799,7 +11799,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBag8", <EquipItemModel>{
+        new CommonItemBase("MaxCapBag8", <EquipItemModel>{
                 "internalID": "MaxCapBag8",
                 "displayName": "Cramped Food Pouch",
                 "sellPrice": 5800,
@@ -11823,7 +11823,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBag10", <EquipItemModel>{
+        new CommonItemBase("MaxCapBag10", <EquipItemModel>{
                 "internalID": "MaxCapBag10",
                 "displayName": "Small Food Pouch",
                 "sellPrice": 5800,
@@ -11847,7 +11847,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagF3", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagF3", <EquipItemModel>{
                 "internalID": "MaxCapBagF3",
                 "displayName": "Average Food Pouch",
                 "sellPrice": 5800,
@@ -11871,7 +11871,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagF4", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagF4", <EquipItemModel>{
                 "internalID": "MaxCapBagF4",
                 "displayName": "Sizable Food Pouch",
                 "sellPrice": 5800,
@@ -11895,7 +11895,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagF5", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagF5", <EquipItemModel>{
                 "internalID": "MaxCapBagF5",
                 "displayName": "Big Food Pouch",
                 "sellPrice": 5800,
@@ -11919,7 +11919,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagF6", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagF6", <EquipItemModel>{
                 "internalID": "MaxCapBagF6",
                 "displayName": "Large Food Pouch",
                 "sellPrice": 5800,
@@ -11943,7 +11943,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagF7", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagF7", <EquipItemModel>{
                 "internalID": "MaxCapBagF7",
                 "displayName": "Massive Food Pouch",
                 "sellPrice": 200,
@@ -11967,7 +11967,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagF8", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagF8", <EquipItemModel>{
                 "internalID": "MaxCapBagF8",
                 "displayName": "Volumetric Food Pouch",
                 "sellPrice": 200,
@@ -11991,7 +11991,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagM1", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagM1", <EquipItemModel>{
                 "internalID": "MaxCapBagM1",
                 "displayName": "Mini Materials Pouch",
                 "sellPrice": 200,
@@ -12015,7 +12015,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagM2", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagM2", <EquipItemModel>{
                 "internalID": "MaxCapBagM2",
                 "displayName": "Cramped Material Pouch",
                 "sellPrice": 4200,
@@ -12039,7 +12039,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagM3", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagM3", <EquipItemModel>{
                 "internalID": "MaxCapBagM3",
                 "displayName": "Small Material Pouch",
                 "sellPrice": 200,
@@ -12063,7 +12063,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagM4", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagM4", <EquipItemModel>{
                 "internalID": "MaxCapBagM4",
                 "displayName": "Average Material Pouch",
                 "sellPrice": 200,
@@ -12087,7 +12087,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagM5", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagM5", <EquipItemModel>{
                 "internalID": "MaxCapBagM5",
                 "displayName": "Sizable Materials Pouch",
                 "sellPrice": 200,
@@ -12111,7 +12111,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagM6", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagM6", <EquipItemModel>{
                 "internalID": "MaxCapBagM6",
                 "displayName": "Big Materials Pouch",
                 "sellPrice": 200,
@@ -12135,7 +12135,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagM7", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagM7", <EquipItemModel>{
                 "internalID": "MaxCapBagM7",
                 "displayName": "Large Materials Pouch",
                 "sellPrice": 200,
@@ -12159,7 +12159,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagM8", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagM8", <EquipItemModel>{
                 "internalID": "MaxCapBagM8",
                 "displayName": "Massive Materials Pouch",
                 "sellPrice": 200,
@@ -12183,7 +12183,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagM9", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagM9", <EquipItemModel>{
                 "internalID": "MaxCapBagM9",
                 "displayName": "Volumetric Matty Pouch",
                 "sellPrice": 200,
@@ -12207,7 +12207,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagFi0", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagFi0", <EquipItemModel>{
                 "internalID": "MaxCapBagFi0",
                 "displayName": "Miniature Fish Pouch",
                 "sellPrice": 200,
@@ -12231,7 +12231,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagFi1", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagFi1", <EquipItemModel>{
                 "internalID": "MaxCapBagFi1",
                 "displayName": "Cramped Fish Pouch",
                 "sellPrice": 200,
@@ -12255,7 +12255,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagFi2", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagFi2", <EquipItemModel>{
                 "internalID": "MaxCapBagFi2",
                 "displayName": "Small Fish Pouch",
                 "sellPrice": 200,
@@ -12279,7 +12279,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagFi3", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagFi3", <EquipItemModel>{
                 "internalID": "MaxCapBagFi3",
                 "displayName": "Average Fish Pouch",
                 "sellPrice": 200,
@@ -12303,7 +12303,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagFi4", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagFi4", <EquipItemModel>{
                 "internalID": "MaxCapBagFi4",
                 "displayName": "Sizable Fish Pouch",
                 "sellPrice": 200,
@@ -12327,7 +12327,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagFi5", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagFi5", <EquipItemModel>{
                 "internalID": "MaxCapBagFi5",
                 "displayName": "Big Fish Pouch",
                 "sellPrice": 200,
@@ -12351,7 +12351,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagFi6", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagFi6", <EquipItemModel>{
                 "internalID": "MaxCapBagFi6",
                 "displayName": "Large Fish Pouch",
                 "sellPrice": 200,
@@ -12375,7 +12375,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagFi7", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagFi7", <EquipItemModel>{
                 "internalID": "MaxCapBagFi7",
                 "displayName": "Massive Fish Pouch",
                 "sellPrice": 200,
@@ -12399,7 +12399,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagFi8", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagFi8", <EquipItemModel>{
                 "internalID": "MaxCapBagFi8",
                 "displayName": "Volumetric Fish Pouch",
                 "sellPrice": 200,
@@ -12423,7 +12423,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagB0", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagB0", <EquipItemModel>{
                 "internalID": "MaxCapBagB0",
                 "displayName": "Miniature Bug Pouch",
                 "sellPrice": 200,
@@ -12447,7 +12447,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagB1", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagB1", <EquipItemModel>{
                 "internalID": "MaxCapBagB1",
                 "displayName": "Cramped Bug Pouch",
                 "sellPrice": 200,
@@ -12471,7 +12471,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagB2", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagB2", <EquipItemModel>{
                 "internalID": "MaxCapBagB2",
                 "displayName": "Small Bug Pouch",
                 "sellPrice": 200,
@@ -12495,7 +12495,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagB3", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagB3", <EquipItemModel>{
                 "internalID": "MaxCapBagB3",
                 "displayName": "Average Bug Pouch",
                 "sellPrice": 200,
@@ -12519,7 +12519,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagB4", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagB4", <EquipItemModel>{
                 "internalID": "MaxCapBagB4",
                 "displayName": "Sizable Bug Pouch",
                 "sellPrice": 200,
@@ -12543,7 +12543,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagB5", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagB5", <EquipItemModel>{
                 "internalID": "MaxCapBagB5",
                 "displayName": "Big Bug Pouch",
                 "sellPrice": 200,
@@ -12567,7 +12567,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagB6", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagB6", <EquipItemModel>{
                 "internalID": "MaxCapBagB6",
                 "displayName": "Large Bug Pouch",
                 "sellPrice": 200,
@@ -12591,7 +12591,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagB7", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagB7", <EquipItemModel>{
                 "internalID": "MaxCapBagB7",
                 "displayName": "Massive Bug Pouch",
                 "sellPrice": 200,
@@ -12615,7 +12615,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagB8", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagB8", <EquipItemModel>{
                 "internalID": "MaxCapBagB8",
                 "displayName": "Volumetric Bug Pouch",
                 "sellPrice": 200,
@@ -12639,7 +12639,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagTr0", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagTr0", <EquipItemModel>{
                 "internalID": "MaxCapBagTr0",
                 "displayName": "Cramped Critter Pouch",
                 "sellPrice": 200,
@@ -12663,7 +12663,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagTr1", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagTr1", <EquipItemModel>{
                 "internalID": "MaxCapBagTr1",
                 "displayName": "Small Critter Pouch",
                 "sellPrice": 200,
@@ -12687,7 +12687,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagTr2", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagTr2", <EquipItemModel>{
                 "internalID": "MaxCapBagTr2",
                 "displayName": "Average Critter Pouch",
                 "sellPrice": 200,
@@ -12711,7 +12711,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagTr3", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagTr3", <EquipItemModel>{
                 "internalID": "MaxCapBagTr3",
                 "displayName": "Sizable Critter Pouch",
                 "sellPrice": 200,
@@ -12735,7 +12735,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagTr4", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagTr4", <EquipItemModel>{
                 "internalID": "MaxCapBagTr4",
                 "displayName": "Big Critter Pouch",
                 "sellPrice": 200,
@@ -12759,7 +12759,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagTr5", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagTr5", <EquipItemModel>{
                 "internalID": "MaxCapBagTr5",
                 "displayName": "Large Critter Pouch",
                 "sellPrice": 200,
@@ -12783,7 +12783,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagTr6", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagTr6", <EquipItemModel>{
                 "internalID": "MaxCapBagTr6",
                 "displayName": "Massive Critter Pouch",
                 "sellPrice": 200,
@@ -12807,7 +12807,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagTr7", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagTr7", <EquipItemModel>{
                 "internalID": "MaxCapBagTr7",
                 "displayName": "Volumetric Critta Pouch",
                 "sellPrice": 200,
@@ -12831,7 +12831,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagS0", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagS0", <EquipItemModel>{
                 "internalID": "MaxCapBagS0",
                 "displayName": "Cramped Soul Pouch",
                 "sellPrice": 200,
@@ -12855,7 +12855,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagS1", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagS1", <EquipItemModel>{
                 "internalID": "MaxCapBagS1",
                 "displayName": "Small Soul Pouch",
                 "sellPrice": 200,
@@ -12879,7 +12879,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagS2", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagS2", <EquipItemModel>{
                 "internalID": "MaxCapBagS2",
                 "displayName": "Average Soul Pouch",
                 "sellPrice": 200,
@@ -12903,7 +12903,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagS3", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagS3", <EquipItemModel>{
                 "internalID": "MaxCapBagS3",
                 "displayName": "Sizable Soul Pouch",
                 "sellPrice": 200,
@@ -12927,7 +12927,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagS4", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagS4", <EquipItemModel>{
                 "internalID": "MaxCapBagS4",
                 "displayName": "Big Soul Pouch",
                 "sellPrice": 200,
@@ -12951,7 +12951,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagS5", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagS5", <EquipItemModel>{
                 "internalID": "MaxCapBagS5",
                 "displayName": "Large Soul Pouch",
                 "sellPrice": 200,
@@ -12975,7 +12975,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagS6", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagS6", <EquipItemModel>{
                 "internalID": "MaxCapBagS6",
                 "displayName": "Massive Soul Pouch",
                 "sellPrice": 200,
@@ -12999,7 +12999,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("MaxCapBagS7", <EquipItemModel>{
+        new CommonItemBase("MaxCapBagS7", <EquipItemModel>{
                 "internalID": "MaxCapBagS7",
                 "displayName": "Volumetric Soul Pouch",
                 "sellPrice": 200,
@@ -13023,7 +13023,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolBronze0", <EquipItemModel>{
+        new CommonItemBase("ObolBronze0", <EquipItemModel>{
                 "internalID": "ObolBronze0",
                 "displayName": "Bronze STR Obol",
                 "sellPrice": 1,
@@ -13047,7 +13047,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolBronze1", <EquipItemModel>{
+        new CommonItemBase("ObolBronze1", <EquipItemModel>{
                 "internalID": "ObolBronze1",
                 "displayName": "Bronze AGI Obol",
                 "sellPrice": 1,
@@ -13071,7 +13071,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolBronze2", <EquipItemModel>{
+        new CommonItemBase("ObolBronze2", <EquipItemModel>{
                 "internalID": "ObolBronze2",
                 "displayName": "Bronze WIS Obol",
                 "sellPrice": 1,
@@ -13095,7 +13095,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolBronze3", <EquipItemModel>{
+        new CommonItemBase("ObolBronze3", <EquipItemModel>{
                 "internalID": "ObolBronze3",
                 "displayName": "Bronze LUK Obol",
                 "sellPrice": 1,
@@ -13119,7 +13119,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolSilver0", <EquipItemModel>{
+        new CommonItemBase("ObolSilver0", <EquipItemModel>{
                 "internalID": "ObolSilver0",
                 "displayName": "Silver STR Obol",
                 "sellPrice": 3,
@@ -13143,7 +13143,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolSilver1", <EquipItemModel>{
+        new CommonItemBase("ObolSilver1", <EquipItemModel>{
                 "internalID": "ObolSilver1",
                 "displayName": "Silver AGI Obol",
                 "sellPrice": 3,
@@ -13167,7 +13167,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolSilver2", <EquipItemModel>{
+        new CommonItemBase("ObolSilver2", <EquipItemModel>{
                 "internalID": "ObolSilver2",
                 "displayName": "Silver WIS Obol",
                 "sellPrice": 3,
@@ -13191,7 +13191,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolSilver3", <EquipItemModel>{
+        new CommonItemBase("ObolSilver3", <EquipItemModel>{
                 "internalID": "ObolSilver3",
                 "displayName": "Silver LUK Obol",
                 "sellPrice": 3,
@@ -13215,7 +13215,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolGold0", <EquipItemModel>{
+        new CommonItemBase("ObolGold0", <EquipItemModel>{
                 "internalID": "ObolGold0",
                 "displayName": "Gold STR Obol",
                 "sellPrice": 8,
@@ -13239,7 +13239,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolGold1", <EquipItemModel>{
+        new CommonItemBase("ObolGold1", <EquipItemModel>{
                 "internalID": "ObolGold1",
                 "displayName": "Gold AGI Obol",
                 "sellPrice": 8,
@@ -13263,7 +13263,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolGold2", <EquipItemModel>{
+        new CommonItemBase("ObolGold2", <EquipItemModel>{
                 "internalID": "ObolGold2",
                 "displayName": "Gold WIS Obol",
                 "sellPrice": 8,
@@ -13287,7 +13287,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolGold3", <EquipItemModel>{
+        new CommonItemBase("ObolGold3", <EquipItemModel>{
                 "internalID": "ObolGold3",
                 "displayName": "Gold LUK Obol",
                 "sellPrice": 8,
@@ -13311,7 +13311,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPlatinum0", <EquipItemModel>{
+        new CommonItemBase("ObolPlatinum0", <EquipItemModel>{
                 "internalID": "ObolPlatinum0",
                 "displayName": "Platinum STR Obol",
                 "sellPrice": 20,
@@ -13335,7 +13335,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPlatinum1", <EquipItemModel>{
+        new CommonItemBase("ObolPlatinum1", <EquipItemModel>{
                 "internalID": "ObolPlatinum1",
                 "displayName": "Platinum AGI Obol",
                 "sellPrice": 20,
@@ -13359,7 +13359,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPlatinum2", <EquipItemModel>{
+        new CommonItemBase("ObolPlatinum2", <EquipItemModel>{
                 "internalID": "ObolPlatinum2",
                 "displayName": "Platinum WIS Obol",
                 "sellPrice": 20,
@@ -13383,7 +13383,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPlatinum3", <EquipItemModel>{
+        new CommonItemBase("ObolPlatinum3", <EquipItemModel>{
                 "internalID": "ObolPlatinum3",
                 "displayName": "Platinum LUK Obol",
                 "sellPrice": 20,
@@ -13407,7 +13407,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPink0", <EquipItemModel>{
+        new CommonItemBase("ObolPink0", <EquipItemModel>{
                 "internalID": "ObolPink0",
                 "displayName": "Dementia STR Obol",
                 "sellPrice": 50,
@@ -13431,7 +13431,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPink1", <EquipItemModel>{
+        new CommonItemBase("ObolPink1", <EquipItemModel>{
                 "internalID": "ObolPink1",
                 "displayName": "Dementia AGI Obol",
                 "sellPrice": 50,
@@ -13455,7 +13455,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPink2", <EquipItemModel>{
+        new CommonItemBase("ObolPink2", <EquipItemModel>{
                 "internalID": "ObolPink2",
                 "displayName": "Dementia WIS Obol",
                 "sellPrice": 50,
@@ -13479,7 +13479,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPink3", <EquipItemModel>{
+        new CommonItemBase("ObolPink3", <EquipItemModel>{
                 "internalID": "ObolPink3",
                 "displayName": "Dementia LUK Obol",
                 "sellPrice": 50,
@@ -13503,7 +13503,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolBronzeDamage", <EquipItemModel>{
+        new CommonItemBase("ObolBronzeDamage", <EquipItemModel>{
                 "internalID": "ObolBronzeDamage",
                 "displayName": "Bronze Obol of Puny Damage",
                 "sellPrice": 1,
@@ -13527,7 +13527,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolSilverDamage", <EquipItemModel>{
+        new CommonItemBase("ObolSilverDamage", <EquipItemModel>{
                 "internalID": "ObolSilverDamage",
                 "displayName": "Silver Obol of Little Damage",
                 "sellPrice": 3,
@@ -13551,7 +13551,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolGoldDamage", <EquipItemModel>{
+        new CommonItemBase("ObolGoldDamage", <EquipItemModel>{
                 "internalID": "ObolGoldDamage",
                 "displayName": "Golden Obol of Big Boy Damage",
                 "sellPrice": 8,
@@ -13575,7 +13575,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPlatinumDamage", <EquipItemModel>{
+        new CommonItemBase("ObolPlatinumDamage", <EquipItemModel>{
                 "internalID": "ObolPlatinumDamage",
                 "displayName": "Platinum Obol of Lethal Damage",
                 "sellPrice": 20,
@@ -13599,7 +13599,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPinkDamage", <EquipItemModel>{
+        new CommonItemBase("ObolPinkDamage", <EquipItemModel>{
                 "internalID": "ObolPinkDamage",
                 "displayName": "Dementia Obol of Infinite Damage",
                 "sellPrice": 50,
@@ -13623,7 +13623,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPlatinumSpeed", <EquipItemModel>{
+        new CommonItemBase("ObolPlatinumSpeed", <EquipItemModel>{
                 "internalID": "ObolPlatinumSpeed",
                 "displayName": "Platinum Obol of Blinding Speed",
                 "sellPrice": 20,
@@ -13647,7 +13647,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolSilverMoney", <EquipItemModel>{
+        new CommonItemBase("ObolSilverMoney", <EquipItemModel>{
                 "internalID": "ObolSilverMoney",
                 "displayName": "Silver Obol of Pocket Change",
                 "sellPrice": 3,
@@ -13671,7 +13671,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolGoldMoney", <EquipItemModel>{
+        new CommonItemBase("ObolGoldMoney", <EquipItemModel>{
                 "internalID": "ObolGoldMoney",
                 "displayName": "Golden Obol of Plentiful Riches",
                 "sellPrice": 8,
@@ -13695,7 +13695,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolBronzeMining", <EquipItemModel>{
+        new CommonItemBase("ObolBronzeMining", <EquipItemModel>{
                 "internalID": "ObolBronzeMining",
                 "displayName": "Bronze Obol of Small Swings",
                 "sellPrice": 1,
@@ -13719,7 +13719,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolSilverMining", <EquipItemModel>{
+        new CommonItemBase("ObolSilverMining", <EquipItemModel>{
                 "internalID": "ObolSilverMining",
                 "displayName": "Silver Obol of Moderate Mining",
                 "sellPrice": 3,
@@ -13743,7 +13743,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolGoldMining", <EquipItemModel>{
+        new CommonItemBase("ObolGoldMining", <EquipItemModel>{
                 "internalID": "ObolGoldMining",
                 "displayName": "Golden Obol of Diligent Digging",
                 "sellPrice": 8,
@@ -13767,7 +13767,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPlatinumMining", <EquipItemModel>{
+        new CommonItemBase("ObolPlatinumMining", <EquipItemModel>{
                 "internalID": "ObolPlatinumMining",
                 "displayName": "Platinum Obol of Dwarven Delving",
                 "sellPrice": 20,
@@ -13791,7 +13791,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPinkMining", <EquipItemModel>{
+        new CommonItemBase("ObolPinkMining", <EquipItemModel>{
                 "internalID": "ObolPinkMining",
                 "displayName": "Dementia Obol of Magisterial Metals",
                 "sellPrice": 50,
@@ -13815,7 +13815,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolBronzeChoppin", <EquipItemModel>{
+        new CommonItemBase("ObolBronzeChoppin", <EquipItemModel>{
                 "internalID": "ObolBronzeChoppin",
                 "displayName": "Bronze Obol of Chippin Chops",
                 "sellPrice": 1,
@@ -13839,7 +13839,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolSilverChoppin", <EquipItemModel>{
+        new CommonItemBase("ObolSilverChoppin", <EquipItemModel>{
                 "internalID": "ObolSilverChoppin",
                 "displayName": "Silver Obol of Big Bark",
                 "sellPrice": 3,
@@ -13863,7 +13863,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolGoldChoppin", <EquipItemModel>{
+        new CommonItemBase("ObolGoldChoppin", <EquipItemModel>{
                 "internalID": "ObolGoldChoppin",
                 "displayName": "Golden Obol of Huge Hackin",
                 "sellPrice": 8,
@@ -13887,7 +13887,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPlatinumChoppin", <EquipItemModel>{
+        new CommonItemBase("ObolPlatinumChoppin", <EquipItemModel>{
                 "internalID": "ObolPlatinumChoppin",
                 "displayName": "Platinum Obol of Lumby Loggo",
                 "sellPrice": 20,
@@ -13911,7 +13911,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPinkChoppin", <EquipItemModel>{
+        new CommonItemBase("ObolPinkChoppin", <EquipItemModel>{
                 "internalID": "ObolPinkChoppin",
                 "displayName": "Dementia Obol of WOWOWOWWO",
                 "sellPrice": 50,
@@ -13935,7 +13935,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolBronzeFishing", <EquipItemModel>{
+        new CommonItemBase("ObolBronzeFishing", <EquipItemModel>{
                 "internalID": "ObolBronzeFishing",
                 "displayName": "Bronze Obol of Finite Fish",
                 "sellPrice": 1,
@@ -13959,7 +13959,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolSilverFishing", <EquipItemModel>{
+        new CommonItemBase("ObolSilverFishing", <EquipItemModel>{
                 "internalID": "ObolSilverFishing",
                 "displayName": "Silver Obol of Puny Pikes",
                 "sellPrice": 3,
@@ -13983,7 +13983,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolGoldFishing", <EquipItemModel>{
+        new CommonItemBase("ObolGoldFishing", <EquipItemModel>{
                 "internalID": "ObolGoldFishing",
                 "displayName": "Golden Obol of Crazy Carp",
                 "sellPrice": 8,
@@ -14007,7 +14007,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPlatinumFishing", <EquipItemModel>{
+        new CommonItemBase("ObolPlatinumFishing", <EquipItemModel>{
                 "internalID": "ObolPlatinumFishing",
                 "displayName": "Platinum Obol of Tremendous Trout",
                 "sellPrice": 20,
@@ -14031,7 +14031,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPinkFishing", <EquipItemModel>{
+        new CommonItemBase("ObolPinkFishing", <EquipItemModel>{
                 "internalID": "ObolPinkFishing",
                 "displayName": "Dementia Obol of Monument Marlins",
                 "sellPrice": 50,
@@ -14055,7 +14055,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolBronzeCatching", <EquipItemModel>{
+        new CommonItemBase("ObolBronzeCatching", <EquipItemModel>{
                 "internalID": "ObolBronzeCatching",
                 "displayName": "Bronze Obol of Few Flies",
                 "sellPrice": 1,
@@ -14079,7 +14079,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolSilverCatching", <EquipItemModel>{
+        new CommonItemBase("ObolSilverCatching", <EquipItemModel>{
                 "internalID": "ObolSilverCatching",
                 "displayName": "Silver Obol of Big Bugs",
                 "sellPrice": 3,
@@ -14103,7 +14103,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolGoldCatching", <EquipItemModel>{
+        new CommonItemBase("ObolGoldCatching", <EquipItemModel>{
                 "internalID": "ObolGoldCatching",
                 "displayName": "Golden Obol of Insane Insects",
                 "sellPrice": 8,
@@ -14127,7 +14127,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPlatinumCatching", <EquipItemModel>{
+        new CommonItemBase("ObolPlatinumCatching", <EquipItemModel>{
                 "internalID": "ObolPlatinumCatching",
                 "displayName": "Platinum Obol of Ample Anthropods",
                 "sellPrice": 20,
@@ -14151,7 +14151,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPinkCatching", <EquipItemModel>{
+        new CommonItemBase("ObolPinkCatching", <EquipItemModel>{
                 "internalID": "ObolPinkCatching",
                 "displayName": "Dementia Obol of Colossal Crawlies",
                 "sellPrice": 50,
@@ -14175,7 +14175,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolSilverLuck", <EquipItemModel>{
+        new CommonItemBase("ObolSilverLuck", <EquipItemModel>{
                 "internalID": "ObolSilverLuck",
                 "displayName": "Silver Obol of Double Sixes",
                 "sellPrice": 3,
@@ -14199,7 +14199,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolGoldLuck", <EquipItemModel>{
+        new CommonItemBase("ObolGoldLuck", <EquipItemModel>{
                 "internalID": "ObolGoldLuck",
                 "displayName": "Golden Obol of Triple Sixes",
                 "sellPrice": 8,
@@ -14223,7 +14223,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPlatinumLuck", <EquipItemModel>{
+        new CommonItemBase("ObolPlatinumLuck", <EquipItemModel>{
                 "internalID": "ObolPlatinumLuck",
                 "displayName": "Platinum Obol of Yahtzee Sixes",
                 "sellPrice": 20,
@@ -14247,7 +14247,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPinkLuck", <EquipItemModel>{
+        new CommonItemBase("ObolPinkLuck", <EquipItemModel>{
                 "internalID": "ObolPinkLuck",
                 "displayName": "Dementia Obol of Infinisixes",
                 "sellPrice": 50,
@@ -14271,7 +14271,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolBronzePop", <EquipItemModel>{
+        new CommonItemBase("ObolBronzePop", <EquipItemModel>{
                 "internalID": "ObolBronzePop",
                 "displayName": "Bronze Obol of Pop",
                 "sellPrice": 1,
@@ -14295,7 +14295,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolSilverPop", <EquipItemModel>{
+        new CommonItemBase("ObolSilverPop", <EquipItemModel>{
                 "internalID": "ObolSilverPop",
                 "displayName": "Silver Obol of Pop Pop",
                 "sellPrice": 3,
@@ -14319,7 +14319,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolGoldPop", <EquipItemModel>{
+        new CommonItemBase("ObolGoldPop", <EquipItemModel>{
                 "internalID": "ObolGoldPop",
                 "displayName": "Golden Obol of Poppity Pop",
                 "sellPrice": 8,
@@ -14343,7 +14343,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPlatinumPop", <EquipItemModel>{
+        new CommonItemBase("ObolPlatinumPop", <EquipItemModel>{
                 "internalID": "ObolPlatinumPop",
                 "displayName": "Platinum Obol of Poppity Poppy",
                 "sellPrice": 20,
@@ -14367,7 +14367,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPinkPop", <EquipItemModel>{
+        new CommonItemBase("ObolPinkPop", <EquipItemModel>{
                 "internalID": "ObolPinkPop",
                 "displayName": "Dementia Obol of Pop Pop Pop Pop",
                 "sellPrice": 50,
@@ -14391,7 +14391,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolAmarokA", <EquipItemModel>{
+        new CommonItemBase("ObolAmarokA", <EquipItemModel>{
                 "internalID": "ObolAmarokA",
                 "displayName": "Granite Obol of Amarok's Stare",
                 "sellPrice": 20,
@@ -14415,7 +14415,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolEfauntA", <EquipItemModel>{
+        new CommonItemBase("ObolEfauntA", <EquipItemModel>{
                 "internalID": "ObolEfauntA",
                 "displayName": "Skeletal Obol of Efaunt's Gaze",
                 "sellPrice": 20,
@@ -14439,7 +14439,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolChizoarA", <EquipItemModel>{
+        new CommonItemBase("ObolChizoarA", <EquipItemModel>{
                 "internalID": "ObolChizoarA",
                 "displayName": "Frozen Obol of Chizoar's Rage",
                 "sellPrice": 20,
@@ -14463,7 +14463,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolSlush", <EquipItemModel>{
+        new CommonItemBase("ObolSlush", <EquipItemModel>{
                 "internalID": "ObolSlush",
                 "displayName": "Slushy Obol of Much Dilapidation",
                 "sellPrice": 20,
@@ -14487,7 +14487,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolBronzeKill", <EquipItemModel>{
+        new CommonItemBase("ObolBronzeKill", <EquipItemModel>{
                 "internalID": "ObolBronzeKill",
                 "displayName": "Bronze Obol of Multikill",
                 "sellPrice": 1,
@@ -14511,7 +14511,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolSilverKill", <EquipItemModel>{
+        new CommonItemBase("ObolSilverKill", <EquipItemModel>{
                 "internalID": "ObolSilverKill",
                 "displayName": "Silver Obol of Megakill",
                 "sellPrice": 3,
@@ -14535,7 +14535,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolGoldKill", <EquipItemModel>{
+        new CommonItemBase("ObolGoldKill", <EquipItemModel>{
                 "internalID": "ObolGoldKill",
                 "displayName": "Golden Obol of Ultrakill",
                 "sellPrice": 8,
@@ -14559,7 +14559,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPlatinumKill", <EquipItemModel>{
+        new CommonItemBase("ObolPlatinumKill", <EquipItemModel>{
                 "internalID": "ObolPlatinumKill",
                 "displayName": "Platinum Obol of Killimanjaro",
                 "sellPrice": 20,
@@ -14583,7 +14583,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPinkKill", <EquipItemModel>{
+        new CommonItemBase("ObolPinkKill", <EquipItemModel>{
                 "internalID": "ObolPinkKill",
                 "displayName": "Dementia Obol of Killionaire",
                 "sellPrice": 50,
@@ -14607,7 +14607,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolBronzeEXP", <EquipItemModel>{
+        new CommonItemBase("ObolBronzeEXP", <EquipItemModel>{
                 "internalID": "ObolBronzeEXP",
                 "displayName": "Bronze Obol of Experience",
                 "sellPrice": 1,
@@ -14631,7 +14631,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolSilverEXP", <EquipItemModel>{
+        new CommonItemBase("ObolSilverEXP", <EquipItemModel>{
                 "internalID": "ObolSilverEXP",
                 "displayName": "Silver Obol of Experience",
                 "sellPrice": 3,
@@ -14655,7 +14655,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolGoldEXP", <EquipItemModel>{
+        new CommonItemBase("ObolGoldEXP", <EquipItemModel>{
                 "internalID": "ObolGoldEXP",
                 "displayName": "Golden Obol of Experience",
                 "sellPrice": 8,
@@ -14679,7 +14679,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPlatinumEXP", <EquipItemModel>{
+        new CommonItemBase("ObolPlatinumEXP", <EquipItemModel>{
                 "internalID": "ObolPlatinumEXP",
                 "displayName": "Platinum Obol of Experience",
                 "sellPrice": 20,
@@ -14703,7 +14703,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPinkEXP", <EquipItemModel>{
+        new CommonItemBase("ObolPinkEXP", <EquipItemModel>{
                 "internalID": "ObolPinkEXP",
                 "displayName": "Dementia Obol of Experience",
                 "sellPrice": 50,
@@ -14727,7 +14727,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolBronzeCard", <EquipItemModel>{
+        new CommonItemBase("ObolBronzeCard", <EquipItemModel>{
                 "internalID": "ObolBronzeCard",
                 "displayName": "Bronze Obol of Cards",
                 "sellPrice": 1,
@@ -14751,7 +14751,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolSilverCard", <EquipItemModel>{
+        new CommonItemBase("ObolSilverCard", <EquipItemModel>{
                 "internalID": "ObolSilverCard",
                 "displayName": "Silver Obol of Cards",
                 "sellPrice": 3,
@@ -14775,7 +14775,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolGoldCard", <EquipItemModel>{
+        new CommonItemBase("ObolGoldCard", <EquipItemModel>{
                 "internalID": "ObolGoldCard",
                 "displayName": "Golden Obol of Cards",
                 "sellPrice": 8,
@@ -14799,7 +14799,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPlatinumCard", <EquipItemModel>{
+        new CommonItemBase("ObolPlatinumCard", <EquipItemModel>{
                 "internalID": "ObolPlatinumCard",
                 "displayName": "Platinum Obol of Cards",
                 "sellPrice": 20,
@@ -14823,7 +14823,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPinkCard", <EquipItemModel>{
+        new CommonItemBase("ObolPinkCard", <EquipItemModel>{
                 "internalID": "ObolPinkCard",
                 "displayName": "Dementia Obol of Cards",
                 "sellPrice": 50,
@@ -14847,7 +14847,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolBronzeDef", <EquipItemModel>{
+        new CommonItemBase("ObolBronzeDef", <EquipItemModel>{
                 "internalID": "ObolBronzeDef",
                 "displayName": "Bronze Obol of Defence",
                 "sellPrice": 1,
@@ -14871,7 +14871,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolSilverDef", <EquipItemModel>{
+        new CommonItemBase("ObolSilverDef", <EquipItemModel>{
                 "internalID": "ObolSilverDef",
                 "displayName": "Silver Obol of Defence",
                 "sellPrice": 3,
@@ -14895,7 +14895,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolGoldDef", <EquipItemModel>{
+        new CommonItemBase("ObolGoldDef", <EquipItemModel>{
                 "internalID": "ObolGoldDef",
                 "displayName": "Golden Obol of Defence",
                 "sellPrice": 8,
@@ -14919,7 +14919,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPlatinumDef", <EquipItemModel>{
+        new CommonItemBase("ObolPlatinumDef", <EquipItemModel>{
                 "internalID": "ObolPlatinumDef",
                 "displayName": "Platinum Obol of Defense with an S",
                 "sellPrice": 20,
@@ -14943,7 +14943,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPinkDef", <EquipItemModel>{
+        new CommonItemBase("ObolPinkDef", <EquipItemModel>{
                 "internalID": "ObolPinkDef",
                 "displayName": "Dementia Obol of Defence",
                 "sellPrice": 50,
@@ -14967,7 +14967,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolBronzeTrapping", <EquipItemModel>{
+        new CommonItemBase("ObolBronzeTrapping", <EquipItemModel>{
                 "internalID": "ObolBronzeTrapping",
                 "displayName": "Bronze Obol of Trapping",
                 "sellPrice": 1,
@@ -14991,7 +14991,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolSilverTrapping", <EquipItemModel>{
+        new CommonItemBase("ObolSilverTrapping", <EquipItemModel>{
                 "internalID": "ObolSilverTrapping",
                 "displayName": "Silver Obol of Trapping",
                 "sellPrice": 3,
@@ -15015,7 +15015,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolGoldTrapping", <EquipItemModel>{
+        new CommonItemBase("ObolGoldTrapping", <EquipItemModel>{
                 "internalID": "ObolGoldTrapping",
                 "displayName": "Golden Obol of Trapping",
                 "sellPrice": 8,
@@ -15039,7 +15039,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPlatinumTrapping", <EquipItemModel>{
+        new CommonItemBase("ObolPlatinumTrapping", <EquipItemModel>{
                 "internalID": "ObolPlatinumTrapping",
                 "displayName": "Platinum Obol of Trapping",
                 "sellPrice": 20,
@@ -15063,7 +15063,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPinkTrapping", <EquipItemModel>{
+        new CommonItemBase("ObolPinkTrapping", <EquipItemModel>{
                 "internalID": "ObolPinkTrapping",
                 "displayName": "Dementia Obol of Trapping",
                 "sellPrice": 50,
@@ -15087,7 +15087,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolBronzeCons", <EquipItemModel>{
+        new CommonItemBase("ObolBronzeCons", <EquipItemModel>{
                 "internalID": "ObolBronzeCons",
                 "displayName": "Bronze Obol of Construction",
                 "sellPrice": 1,
@@ -15111,7 +15111,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolSilverCons", <EquipItemModel>{
+        new CommonItemBase("ObolSilverCons", <EquipItemModel>{
                 "internalID": "ObolSilverCons",
                 "displayName": "Silver Obol of Construction",
                 "sellPrice": 3,
@@ -15135,7 +15135,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolGoldCons", <EquipItemModel>{
+        new CommonItemBase("ObolGoldCons", <EquipItemModel>{
                 "internalID": "ObolGoldCons",
                 "displayName": "Golden Obol of Construction",
                 "sellPrice": 8,
@@ -15159,7 +15159,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPlatinumCons", <EquipItemModel>{
+        new CommonItemBase("ObolPlatinumCons", <EquipItemModel>{
                 "internalID": "ObolPlatinumCons",
                 "displayName": "Platinum Obol of Construction",
                 "sellPrice": 20,
@@ -15183,7 +15183,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPinkCons", <EquipItemModel>{
+        new CommonItemBase("ObolPinkCons", <EquipItemModel>{
                 "internalID": "ObolPinkCons",
                 "displayName": "Dementia Obol of Construction",
                 "sellPrice": 50,
@@ -15207,7 +15207,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolBronzeWorship", <EquipItemModel>{
+        new CommonItemBase("ObolBronzeWorship", <EquipItemModel>{
                 "internalID": "ObolBronzeWorship",
                 "displayName": "Bronze Obol of Worship",
                 "sellPrice": 1,
@@ -15231,7 +15231,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolSilverWorship", <EquipItemModel>{
+        new CommonItemBase("ObolSilverWorship", <EquipItemModel>{
                 "internalID": "ObolSilverWorship",
                 "displayName": "Silver Obol of Worship",
                 "sellPrice": 3,
@@ -15255,7 +15255,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolGoldWorship", <EquipItemModel>{
+        new CommonItemBase("ObolGoldWorship", <EquipItemModel>{
                 "internalID": "ObolGoldWorship",
                 "displayName": "Golden Obol of Worship",
                 "sellPrice": 8,
@@ -15279,7 +15279,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPlatinumWorship", <EquipItemModel>{
+        new CommonItemBase("ObolPlatinumWorship", <EquipItemModel>{
                 "internalID": "ObolPlatinumWorship",
                 "displayName": "Platinum Obol of Worship",
                 "sellPrice": 20,
@@ -15303,7 +15303,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ObolPinkWorship", <EquipItemModel>{
+        new CommonItemBase("ObolPinkWorship", <EquipItemModel>{
                 "internalID": "ObolPinkWorship",
                 "displayName": "Dementia Obol of Worship",
                 "sellPrice": 50,
@@ -15327,7 +15327,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("ExpSmith1", <QuestItemModel>{
+        new CommonItemBase("ExpSmith1", <QuestItemModel>{
                 "internalID": "ExpSmith1",
                 "displayName": "Smithing Exp",
                 "sellPrice": 1,
@@ -15344,7 +15344,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA1", <QuestItemModel>{
+        new CommonItemBase("StampA1", <QuestItemModel>{
                 "internalID": "StampA1",
                 "displayName": "Sword Stamp",
                 "sellPrice": 500,
@@ -15361,7 +15361,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA2", <QuestItemModel>{
+        new CommonItemBase("StampA2", <QuestItemModel>{
                 "internalID": "StampA2",
                 "displayName": "Heart Stamp",
                 "sellPrice": 500,
@@ -15378,7 +15378,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA3", <QuestItemModel>{
+        new CommonItemBase("StampA3", <QuestItemModel>{
                 "internalID": "StampA3",
                 "displayName": "Mana Stamp",
                 "sellPrice": 2500,
@@ -15395,7 +15395,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA4", <QuestItemModel>{
+        new CommonItemBase("StampA4", <QuestItemModel>{
                 "internalID": "StampA4",
                 "displayName": "Tomahawk Stamp",
                 "sellPrice": 1000,
@@ -15412,7 +15412,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA5", <QuestItemModel>{
+        new CommonItemBase("StampA5", <QuestItemModel>{
                 "internalID": "StampA5",
                 "displayName": "Target Stamp",
                 "sellPrice": 250,
@@ -15429,7 +15429,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA6", <QuestItemModel>{
+        new CommonItemBase("StampA6", <QuestItemModel>{
                 "internalID": "StampA6",
                 "displayName": "Shield Stamp",
                 "sellPrice": 800,
@@ -15446,7 +15446,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA7", <QuestItemModel>{
+        new CommonItemBase("StampA7", <QuestItemModel>{
                 "internalID": "StampA7",
                 "displayName": "Longsword Stamp",
                 "sellPrice": 1000,
@@ -15463,7 +15463,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA8", <QuestItemModel>{
+        new CommonItemBase("StampA8", <QuestItemModel>{
                 "internalID": "StampA8",
                 "displayName": "Kapow Stamp",
                 "sellPrice": 2500,
@@ -15480,7 +15480,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA9", <QuestItemModel>{
+        new CommonItemBase("StampA9", <QuestItemModel>{
                 "internalID": "StampA9",
                 "displayName": "Fist Stamp",
                 "sellPrice": 2500,
@@ -15497,7 +15497,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA10", <QuestItemModel>{
+        new CommonItemBase("StampA10", <QuestItemModel>{
                 "internalID": "StampA10",
                 "displayName": "Battleaxe Stamp",
                 "sellPrice": 2500,
@@ -15514,7 +15514,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA11", <QuestItemModel>{
+        new CommonItemBase("StampA11", <QuestItemModel>{
                 "internalID": "StampA11",
                 "displayName": "Agile Stamp",
                 "sellPrice": 2500,
@@ -15531,7 +15531,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA12", <QuestItemModel>{
+        new CommonItemBase("StampA12", <QuestItemModel>{
                 "internalID": "StampA12",
                 "displayName": "Vitality Stamp",
                 "sellPrice": 8000,
@@ -15548,7 +15548,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA13", <QuestItemModel>{
+        new CommonItemBase("StampA13", <QuestItemModel>{
                 "internalID": "StampA13",
                 "displayName": "Book Stamp",
                 "sellPrice": 8000,
@@ -15565,7 +15565,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA14", <QuestItemModel>{
+        new CommonItemBase("StampA14", <QuestItemModel>{
                 "internalID": "StampA14",
                 "displayName": "Manamoar Stamp",
                 "sellPrice": 8000,
@@ -15582,7 +15582,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA15", <QuestItemModel>{
+        new CommonItemBase("StampA15", <QuestItemModel>{
                 "internalID": "StampA15",
                 "displayName": "Clover Stamp",
                 "sellPrice": 12000,
@@ -15599,7 +15599,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA16", <QuestItemModel>{
+        new CommonItemBase("StampA16", <QuestItemModel>{
                 "internalID": "StampA16",
                 "displayName": "Scimitar Stamp",
                 "sellPrice": 4000,
@@ -15616,7 +15616,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA17", <QuestItemModel>{
+        new CommonItemBase("StampA17", <QuestItemModel>{
                 "internalID": "StampA17",
                 "displayName": "Bullseye Stamp",
                 "sellPrice": 12500,
@@ -15633,7 +15633,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA18", <QuestItemModel>{
+        new CommonItemBase("StampA18", <QuestItemModel>{
                 "internalID": "StampA18",
                 "displayName": "Feather Stamp",
                 "sellPrice": 6000,
@@ -15650,7 +15650,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA19", <QuestItemModel>{
+        new CommonItemBase("StampA19", <QuestItemModel>{
                 "internalID": "StampA19",
                 "displayName": "Polearm Stamp",
                 "sellPrice": 7500,
@@ -15667,7 +15667,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA20", <QuestItemModel>{
+        new CommonItemBase("StampA20", <QuestItemModel>{
                 "internalID": "StampA20",
                 "displayName": "Violence Stamp",
                 "sellPrice": 25000,
@@ -15684,7 +15684,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA21", <QuestItemModel>{
+        new CommonItemBase("StampA21", <QuestItemModel>{
                 "internalID": "StampA21",
                 "displayName": "Buckler Stamp",
                 "sellPrice": 12000,
@@ -15701,7 +15701,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA22", <QuestItemModel>{
+        new CommonItemBase("StampA22", <QuestItemModel>{
                 "internalID": "StampA22",
                 "displayName": "Hermes Stamp",
                 "sellPrice": 10000,
@@ -15718,7 +15718,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA23", <QuestItemModel>{
+        new CommonItemBase("StampA23", <QuestItemModel>{
                 "internalID": "StampA23",
                 "displayName": "Sukka Foo",
                 "sellPrice": 10000,
@@ -15735,7 +15735,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA24", <QuestItemModel>{
+        new CommonItemBase("StampA24", <QuestItemModel>{
                 "internalID": "StampA24",
                 "displayName": "Arcane Stamp",
                 "sellPrice": 6000,
@@ -15752,7 +15752,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA25", <QuestItemModel>{
+        new CommonItemBase("StampA25", <QuestItemModel>{
                 "internalID": "StampA25",
                 "displayName": "Avast Yar Stamp",
                 "sellPrice": 1,
@@ -15769,7 +15769,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA26", <QuestItemModel>{
+        new CommonItemBase("StampA26", <QuestItemModel>{
                 "internalID": "StampA26",
                 "displayName": "Steve Sword",
                 "sellPrice": 50000,
@@ -15786,7 +15786,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA27", <QuestItemModel>{
+        new CommonItemBase("StampA27", <QuestItemModel>{
                 "internalID": "StampA27",
                 "displayName": "Blover Stamp",
                 "sellPrice": 12500,
@@ -15803,7 +15803,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA28", <QuestItemModel>{
+        new CommonItemBase("StampA28", <QuestItemModel>{
                 "internalID": "StampA28",
                 "displayName": "Stat Graph Stamp",
                 "sellPrice": 10000,
@@ -15820,7 +15820,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA29", <QuestItemModel>{
+        new CommonItemBase("StampA29", <QuestItemModel>{
                 "internalID": "StampA29",
                 "displayName": "Gilded Axe Stamp",
                 "sellPrice": 1,
@@ -15837,7 +15837,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA30", <QuestItemModel>{
+        new CommonItemBase("StampA30", <QuestItemModel>{
                 "internalID": "StampA30",
                 "displayName": "Diamond Axe Stamp",
                 "sellPrice": 1,
@@ -15854,7 +15854,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA31", <QuestItemModel>{
+        new CommonItemBase("StampA31", <QuestItemModel>{
                 "internalID": "StampA31",
                 "displayName": "Tripleshot Stamp",
                 "sellPrice": 1,
@@ -15871,7 +15871,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA32", <QuestItemModel>{
+        new CommonItemBase("StampA32", <QuestItemModel>{
                 "internalID": "StampA32",
                 "displayName": "Blackheart Stamp",
                 "sellPrice": 1,
@@ -15888,7 +15888,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA33", <QuestItemModel>{
+        new CommonItemBase("StampA33", <QuestItemModel>{
                 "internalID": "StampA33",
                 "displayName": "FILLER",
                 "sellPrice": 1,
@@ -15905,7 +15905,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA34", <QuestItemModel>{
+        new CommonItemBase("StampA34", <QuestItemModel>{
                 "internalID": "StampA34",
                 "displayName": "FILLER",
                 "sellPrice": 1,
@@ -15922,7 +15922,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampA35", <QuestItemModel>{
+        new CommonItemBase("StampA35", <QuestItemModel>{
                 "internalID": "StampA35",
                 "displayName": "FILLER",
                 "sellPrice": 1,
@@ -15939,7 +15939,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB1", <QuestItemModel>{
+        new CommonItemBase("StampB1", <QuestItemModel>{
                 "internalID": "StampB1",
                 "displayName": "Pickaxe Stamp",
                 "sellPrice": 500,
@@ -15956,7 +15956,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB2", <QuestItemModel>{
+        new CommonItemBase("StampB2", <QuestItemModel>{
                 "internalID": "StampB2",
                 "displayName": "Hatchet Stamp",
                 "sellPrice": 1200,
@@ -15973,7 +15973,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB3", <QuestItemModel>{
+        new CommonItemBase("StampB3", <QuestItemModel>{
                 "internalID": "StampB3",
                 "displayName": "Anvil Zoomer Stamp",
                 "sellPrice": 800,
@@ -15990,7 +15990,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB4", <QuestItemModel>{
+        new CommonItemBase("StampB4", <QuestItemModel>{
                 "internalID": "StampB4",
                 "displayName": "Lil' Mining Baggy Stamp",
                 "sellPrice": 1000,
@@ -16007,7 +16007,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB5", <QuestItemModel>{
+        new CommonItemBase("StampB5", <QuestItemModel>{
                 "internalID": "StampB5",
                 "displayName": "Twin Ores Stamp",
                 "sellPrice": 1000,
@@ -16024,7 +16024,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB6", <QuestItemModel>{
+        new CommonItemBase("StampB6", <QuestItemModel>{
                 "internalID": "StampB6",
                 "displayName": "Choppin' Bag Stamp",
                 "sellPrice": 1000,
@@ -16041,7 +16041,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB7", <QuestItemModel>{
+        new CommonItemBase("StampB7", <QuestItemModel>{
                 "internalID": "StampB7",
                 "displayName": "Duplogs Stamp",
                 "sellPrice": 1000,
@@ -16058,7 +16058,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB8", <QuestItemModel>{
+        new CommonItemBase("StampB8", <QuestItemModel>{
                 "internalID": "StampB8",
                 "displayName": "Matty Bag Stamp",
                 "sellPrice": 6700,
@@ -16075,7 +16075,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB9", <QuestItemModel>{
+        new CommonItemBase("StampB9", <QuestItemModel>{
                 "internalID": "StampB9",
                 "displayName": "Smart Dirt Stamp",
                 "sellPrice": 1500,
@@ -16092,7 +16092,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB10", <QuestItemModel>{
+        new CommonItemBase("StampB10", <QuestItemModel>{
                 "internalID": "StampB10",
                 "displayName": "Cool Diggy Tool Stamp",
                 "sellPrice": 1000,
@@ -16109,7 +16109,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB11", <QuestItemModel>{
+        new CommonItemBase("StampB11", <QuestItemModel>{
                 "internalID": "StampB11",
                 "displayName": "High IQ Lumber Stamp",
                 "sellPrice": 1800,
@@ -16126,7 +16126,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB12", <QuestItemModel>{
+        new CommonItemBase("StampB12", <QuestItemModel>{
                 "internalID": "StampB12",
                 "displayName": "Swag Swingy Tool Stamp",
                 "sellPrice": 2500,
@@ -16143,7 +16143,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB13", <QuestItemModel>{
+        new CommonItemBase("StampB13", <QuestItemModel>{
                 "internalID": "StampB13",
                 "displayName": "Alch Go Brrr Stamp",
                 "sellPrice": 2000,
@@ -16160,7 +16160,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB14", <QuestItemModel>{
+        new CommonItemBase("StampB14", <QuestItemModel>{
                 "internalID": "StampB14",
                 "displayName": "Brainstew Stamps",
                 "sellPrice": 2500,
@@ -16177,7 +16177,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB15", <QuestItemModel>{
+        new CommonItemBase("StampB15", <QuestItemModel>{
                 "internalID": "StampB15",
                 "displayName": "Drippy Drop Stamp",
                 "sellPrice": 2000,
@@ -16194,7 +16194,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB16", <QuestItemModel>{
+        new CommonItemBase("StampB16", <QuestItemModel>{
                 "internalID": "StampB16",
                 "displayName": "Droplots Stamp",
                 "sellPrice": 5000,
@@ -16211,7 +16211,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB17", <QuestItemModel>{
+        new CommonItemBase("StampB17", <QuestItemModel>{
                 "internalID": "StampB17",
                 "displayName": "Fishing Rod Stamp",
                 "sellPrice": 2000,
@@ -16228,7 +16228,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB18", <QuestItemModel>{
+        new CommonItemBase("StampB18", <QuestItemModel>{
                 "internalID": "StampB18",
                 "displayName": "Fishhead Stamp",
                 "sellPrice": 3000,
@@ -16245,7 +16245,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB19", <QuestItemModel>{
+        new CommonItemBase("StampB19", <QuestItemModel>{
                 "internalID": "StampB19",
                 "displayName": "Catch Net Stamp",
                 "sellPrice": 2000,
@@ -16262,7 +16262,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB20", <QuestItemModel>{
+        new CommonItemBase("StampB20", <QuestItemModel>{
                 "internalID": "StampB20",
                 "displayName": "Fly Intel Stamp",
                 "sellPrice": 3000,
@@ -16279,7 +16279,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB21", <QuestItemModel>{
+        new CommonItemBase("StampB21", <QuestItemModel>{
                 "internalID": "StampB21",
                 "displayName": "Bag o Heads Stamp",
                 "sellPrice": 2000,
@@ -16296,7 +16296,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB22", <QuestItemModel>{
+        new CommonItemBase("StampB22", <QuestItemModel>{
                 "internalID": "StampB22",
                 "displayName": "Holy Mackerel Stamp",
                 "sellPrice": 3000,
@@ -16313,7 +16313,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB23", <QuestItemModel>{
+        new CommonItemBase("StampB23", <QuestItemModel>{
                 "internalID": "StampB23",
                 "displayName": "Bugsack Stamp",
                 "sellPrice": 3000,
@@ -16330,7 +16330,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB24", <QuestItemModel>{
+        new CommonItemBase("StampB24", <QuestItemModel>{
                 "internalID": "StampB24",
                 "displayName": "Buzz Buzz Stamp",
                 "sellPrice": 4000,
@@ -16347,7 +16347,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB25", <QuestItemModel>{
+        new CommonItemBase("StampB25", <QuestItemModel>{
                 "internalID": "StampB25",
                 "displayName": "Hidey Box Stamp",
                 "sellPrice": 4000,
@@ -16364,7 +16364,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB26", <QuestItemModel>{
+        new CommonItemBase("StampB26", <QuestItemModel>{
                 "internalID": "StampB26",
                 "displayName": "Purp Froge Stamp",
                 "sellPrice": 4000,
@@ -16381,7 +16381,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB27", <QuestItemModel>{
+        new CommonItemBase("StampB27", <QuestItemModel>{
                 "internalID": "StampB27",
                 "displayName": "Spikemouth Stamp",
                 "sellPrice": 4000,
@@ -16398,7 +16398,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB28", <QuestItemModel>{
+        new CommonItemBase("StampB28", <QuestItemModel>{
                 "internalID": "StampB28",
                 "displayName": "Shiny Crab Stamp",
                 "sellPrice": 4000,
@@ -16415,7 +16415,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB29", <QuestItemModel>{
+        new CommonItemBase("StampB29", <QuestItemModel>{
                 "internalID": "StampB29",
                 "displayName": "Gear Stamp",
                 "sellPrice": 4000,
@@ -16432,7 +16432,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB30", <QuestItemModel>{
+        new CommonItemBase("StampB30", <QuestItemModel>{
                 "internalID": "StampB30",
                 "displayName": "Stample Stamp",
                 "sellPrice": 4000,
@@ -16449,7 +16449,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB31", <QuestItemModel>{
+        new CommonItemBase("StampB31", <QuestItemModel>{
                 "internalID": "StampB31",
                 "displayName": "Saw Stamp",
                 "sellPrice": 4000,
@@ -16466,7 +16466,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB32", <QuestItemModel>{
+        new CommonItemBase("StampB32", <QuestItemModel>{
                 "internalID": "StampB32",
                 "displayName": "Amplestample Stamp",
                 "sellPrice": 4000,
@@ -16483,7 +16483,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB33", <QuestItemModel>{
+        new CommonItemBase("StampB33", <QuestItemModel>{
                 "internalID": "StampB33",
                 "displayName": "SpoOoky Stamp",
                 "sellPrice": 4000,
@@ -16500,7 +16500,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB34", <QuestItemModel>{
+        new CommonItemBase("StampB34", <QuestItemModel>{
                 "internalID": "StampB34",
                 "displayName": "Flowin Stamp",
                 "sellPrice": 4000,
@@ -16517,7 +16517,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB35", <QuestItemModel>{
+        new CommonItemBase("StampB35", <QuestItemModel>{
                 "internalID": "StampB35",
                 "displayName": "Prayday Stamp",
                 "sellPrice": 4000,
@@ -16534,7 +16534,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB36", <QuestItemModel>{
+        new CommonItemBase("StampB36", <QuestItemModel>{
                 "internalID": "StampB36",
                 "displayName": "Banked Pts Stamp",
                 "sellPrice": 4000,
@@ -16551,7 +16551,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB37", <QuestItemModel>{
+        new CommonItemBase("StampB37", <QuestItemModel>{
                 "internalID": "StampB37",
                 "displayName": "Cooked Meal Stamp",
                 "sellPrice": 4000,
@@ -16568,7 +16568,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB38", <QuestItemModel>{
+        new CommonItemBase("StampB38", <QuestItemModel>{
                 "internalID": "StampB38",
                 "displayName": "Spice Stamp",
                 "sellPrice": 50000000,
@@ -16585,7 +16585,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB39", <QuestItemModel>{
+        new CommonItemBase("StampB39", <QuestItemModel>{
                 "internalID": "StampB39",
                 "displayName": "Ladle Stamp",
                 "sellPrice": 4000,
@@ -16602,7 +16602,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB40", <QuestItemModel>{
+        new CommonItemBase("StampB40", <QuestItemModel>{
                 "internalID": "StampB40",
                 "displayName": "Nest Eggs Stamp",
                 "sellPrice": 4000,
@@ -16619,7 +16619,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB41", <QuestItemModel>{
+        new CommonItemBase("StampB41", <QuestItemModel>{
                 "internalID": "StampB41",
                 "displayName": "Egg Stamp",
                 "sellPrice": 10000000,
@@ -16636,7 +16636,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampB42", <QuestItemModel>{
+        new CommonItemBase("StampB42", <QuestItemModel>{
                 "internalID": "StampB42",
                 "displayName": "Lab Tube Stamp",
                 "sellPrice": 4000,
@@ -16653,7 +16653,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampC1", <QuestItemModel>{
+        new CommonItemBase("StampC1", <QuestItemModel>{
                 "internalID": "StampC1",
                 "displayName": "Questin Stamp",
                 "sellPrice": 1000,
@@ -16670,7 +16670,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampC2", <QuestItemModel>{
+        new CommonItemBase("StampC2", <QuestItemModel>{
                 "internalID": "StampC2",
                 "displayName": "Mason Jar Stamp",
                 "sellPrice": 10000,
@@ -16687,7 +16687,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampC3", <QuestItemModel>{
+        new CommonItemBase("StampC3", <QuestItemModel>{
                 "internalID": "StampC3",
                 "displayName": "Crystallin",
                 "sellPrice": 2000,
@@ -16704,7 +16704,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampC4", <QuestItemModel>{
+        new CommonItemBase("StampC4", <QuestItemModel>{
                 "internalID": "StampC4",
                 "displayName": "Arcade Ball Stamp",
                 "sellPrice": 1,
@@ -16721,7 +16721,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampC5", <QuestItemModel>{
+        new CommonItemBase("StampC5", <QuestItemModel>{
                 "internalID": "StampC5",
                 "displayName": "Gold Ball Stamp",
                 "sellPrice": 1000,
@@ -16738,7 +16738,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampC6", <QuestItemModel>{
+        new CommonItemBase("StampC6", <QuestItemModel>{
                 "internalID": "StampC6",
                 "displayName": "Potion Stamp",
                 "sellPrice": 3000,
@@ -16755,7 +16755,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampC7", <QuestItemModel>{
+        new CommonItemBase("StampC7", <QuestItemModel>{
                 "internalID": "StampC7",
                 "displayName": "Golden Apple Stamp",
                 "sellPrice": 10000,
@@ -16772,7 +16772,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampC8", <QuestItemModel>{
+        new CommonItemBase("StampC8", <QuestItemModel>{
                 "internalID": "StampC8",
                 "displayName": "Ball Timer Stamp",
                 "sellPrice": 1,
@@ -16789,7 +16789,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampC9", <QuestItemModel>{
+        new CommonItemBase("StampC9", <QuestItemModel>{
                 "internalID": "StampC9",
                 "displayName": "Card Stamp",
                 "sellPrice": 3000,
@@ -16806,7 +16806,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampC10", <QuestItemModel>{
+        new CommonItemBase("StampC10", <QuestItemModel>{
                 "internalID": "StampC10",
                 "displayName": "Blank",
                 "sellPrice": 1,
@@ -16823,7 +16823,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampC11", <QuestItemModel>{
+        new CommonItemBase("StampC11", <QuestItemModel>{
                 "internalID": "StampC11",
                 "displayName": "Blank",
                 "sellPrice": 1,
@@ -16840,7 +16840,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampC12", <QuestItemModel>{
+        new CommonItemBase("StampC12", <QuestItemModel>{
                 "internalID": "StampC12",
                 "displayName": "Blank",
                 "sellPrice": 1,
@@ -16857,7 +16857,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampC13", <QuestItemModel>{
+        new CommonItemBase("StampC13", <QuestItemModel>{
                 "internalID": "StampC13",
                 "displayName": "Talent I Stamp",
                 "sellPrice": 1,
@@ -16874,7 +16874,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampC14", <QuestItemModel>{
+        new CommonItemBase("StampC14", <QuestItemModel>{
                 "internalID": "StampC14",
                 "displayName": "Talent II Stamp",
                 "sellPrice": 12000,
@@ -16891,7 +16891,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampC15", <QuestItemModel>{
+        new CommonItemBase("StampC15", <QuestItemModel>{
                 "internalID": "StampC15",
                 "displayName": "Talent III Stamp",
                 "sellPrice": 1,
@@ -16908,7 +16908,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampC16", <QuestItemModel>{
+        new CommonItemBase("StampC16", <QuestItemModel>{
                 "internalID": "StampC16",
                 "displayName": "Talent IV Stamp",
                 "sellPrice": 1,
@@ -16925,7 +16925,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampC17", <QuestItemModel>{
+        new CommonItemBase("StampC17", <QuestItemModel>{
                 "internalID": "StampC17",
                 "displayName": "Talent V Stamp",
                 "sellPrice": 1,
@@ -16942,7 +16942,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampC18", <QuestItemModel>{
+        new CommonItemBase("StampC18", <QuestItemModel>{
                 "internalID": "StampC18",
                 "displayName": "Talent S Stamp",
                 "sellPrice": 1,
@@ -16959,7 +16959,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampC19", <QuestItemModel>{
+        new CommonItemBase("StampC19", <QuestItemModel>{
                 "internalID": "StampC19",
                 "displayName": "Multikill Stamp",
                 "sellPrice": 1,
@@ -16976,7 +16976,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampC20", <QuestItemModel>{
+        new CommonItemBase("StampC20", <QuestItemModel>{
                 "internalID": "StampC20",
                 "displayName": "Biblio Stamp",
                 "sellPrice": 1,
@@ -16993,7 +16993,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StampC21", <QuestItemModel>{
+        new CommonItemBase("StampC21", <QuestItemModel>{
                 "internalID": "StampC21",
                 "displayName": "DNA Stamp",
                 "sellPrice": 1,
@@ -17010,7 +17010,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("StoneWe", <ConsumableItemModel>{
+        new CommonItemBase("StoneWe", <ConsumableItemModel>{
                 "internalID": "StoneWe",
                 "displayName": "Easter Weapon Stone",
                 "sellPrice": 125,
@@ -17031,7 +17031,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 25,
                 "Cooldown": 0
             }),
-        new EquipItemBase("StoneWeb", <ConsumableItemModel>{
+        new CommonItemBase("StoneWeb", <ConsumableItemModel>{
                 "internalID": "StoneWeb",
                 "displayName": "Summer Weapon Stone",
                 "sellPrice": 125,
@@ -17052,7 +17052,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 40,
                 "Cooldown": 0
             }),
-        new EquipItemBase("StoneW1", <ConsumableItemModel>{
+        new CommonItemBase("StoneW1", <ConsumableItemModel>{
                 "internalID": "StoneW1",
                 "displayName": "Weapon Upgrade Stone I",
                 "sellPrice": 125,
@@ -17073,7 +17073,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 100,
                 "Cooldown": 0
             }),
-        new EquipItemBase("StoneW2", <ConsumableItemModel>{
+        new CommonItemBase("StoneW2", <ConsumableItemModel>{
                 "internalID": "StoneW2",
                 "displayName": "Weapon Upgrade Stone II",
                 "sellPrice": 1500,
@@ -17094,7 +17094,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 80,
                 "Cooldown": 0
             }),
-        new EquipItemBase("StoneW3", <ConsumableItemModel>{
+        new CommonItemBase("StoneW3", <ConsumableItemModel>{
                 "internalID": "StoneW3",
                 "displayName": "Weapon Upgrade Stone III",
                 "sellPrice": 25000,
@@ -17115,7 +17115,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 50,
                 "Cooldown": 0
             }),
-        new EquipItemBase("StoneW3b", <ConsumableItemModel>{
+        new CommonItemBase("StoneW3b", <ConsumableItemModel>{
                 "internalID": "StoneW3b",
                 "displayName": "Weapon Upgrade Stone C",
                 "sellPrice": 25000,
@@ -17136,7 +17136,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 60,
                 "Cooldown": 1
             }),
-        new EquipItemBase("StoneW6", <ConsumableItemModel>{
+        new CommonItemBase("StoneW6", <ConsumableItemModel>{
                 "internalID": "StoneW6",
                 "displayName": "Warped Weapon Upgrade Stone",
                 "sellPrice": 25000,
@@ -17157,7 +17157,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 50,
                 "Cooldown": 1
             }),
-        new EquipItemBase("StoneW4", <ConsumableItemModel>{
+        new CommonItemBase("StoneW4", <ConsumableItemModel>{
                 "internalID": "StoneW4",
                 "displayName": "Weapon Upgrade Stone IV",
                 "sellPrice": 600000,
@@ -17178,7 +17178,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 20,
                 "Cooldown": 0
             }),
-        new EquipItemBase("StoneAe", <ConsumableItemModel>{
+        new CommonItemBase("StoneAe", <ConsumableItemModel>{
                 "internalID": "StoneAe",
                 "displayName": "Easter Armor Stone",
                 "sellPrice": 100,
@@ -17199,7 +17199,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 30,
                 "Cooldown": 0
             }),
-        new EquipItemBase("StoneAeB", <ConsumableItemModel>{
+        new CommonItemBase("StoneAeB", <ConsumableItemModel>{
                 "internalID": "StoneAeB",
                 "displayName": "Summer Armor Stone",
                 "sellPrice": 100,
@@ -17220,7 +17220,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 50,
                 "Cooldown": 0
             }),
-        new EquipItemBase("StoneA1", <ConsumableItemModel>{
+        new CommonItemBase("StoneA1", <ConsumableItemModel>{
                 "internalID": "StoneA1",
                 "displayName": "Armor Upgrade Stone I",
                 "sellPrice": 100,
@@ -17241,7 +17241,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 100,
                 "Cooldown": 0
             }),
-        new EquipItemBase("StoneA1b", <ConsumableItemModel>{
+        new CommonItemBase("StoneA1b", <ConsumableItemModel>{
                 "internalID": "StoneA1b",
                 "displayName": "Armor Upgrade Stone G",
                 "sellPrice": 100,
@@ -17262,7 +17262,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 42,
                 "Cooldown": 0
             }),
-        new EquipItemBase("StoneA2", <ConsumableItemModel>{
+        new CommonItemBase("StoneA2", <ConsumableItemModel>{
                 "internalID": "StoneA2",
                 "displayName": "Armor Upgrade Stone II",
                 "sellPrice": 850,
@@ -17283,7 +17283,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 80,
                 "Cooldown": 0
             }),
-        new EquipItemBase("StoneA2b", <ConsumableItemModel>{
+        new CommonItemBase("StoneA2b", <ConsumableItemModel>{
                 "internalID": "StoneA2b",
                 "displayName": "Armor Upgrade Stone B",
                 "sellPrice": 100,
@@ -17304,7 +17304,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 45,
                 "Cooldown": 1
             }),
-        new EquipItemBase("StoneA3", <ConsumableItemModel>{
+        new CommonItemBase("StoneA3", <ConsumableItemModel>{
                 "internalID": "StoneA3",
                 "displayName": "Armor Upgrade Stone III",
                 "sellPrice": 15000,
@@ -17325,7 +17325,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 50,
                 "Cooldown": 0
             }),
-        new EquipItemBase("StoneA3b", <ConsumableItemModel>{
+        new CommonItemBase("StoneA3b", <ConsumableItemModel>{
                 "internalID": "StoneA3b",
                 "displayName": "Armor Upgrade Stone C",
                 "sellPrice": 15000,
@@ -17346,7 +17346,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 60,
                 "Cooldown": 1
             }),
-        new EquipItemBase("StoneA4", <ConsumableItemModel>{
+        new CommonItemBase("StoneA4", <ConsumableItemModel>{
                 "internalID": "StoneA4",
                 "displayName": "Armor Upgrade Stone IV",
                 "sellPrice": 450000,
@@ -17367,7 +17367,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 20,
                 "Cooldown": 0
             }),
-        new EquipItemBase("StoneTe", <ConsumableItemModel>{
+        new CommonItemBase("StoneTe", <ConsumableItemModel>{
                 "internalID": "StoneTe",
                 "displayName": "Easter Tool Upgrade Stone",
                 "sellPrice": 110,
@@ -17388,7 +17388,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 30,
                 "Cooldown": 0
             }),
-        new EquipItemBase("StoneT1", <ConsumableItemModel>{
+        new CommonItemBase("StoneT1", <ConsumableItemModel>{
                 "internalID": "StoneT1",
                 "displayName": "Tool Upgrade Stone I",
                 "sellPrice": 110,
@@ -17409,7 +17409,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 100,
                 "Cooldown": 0
             }),
-        new EquipItemBase("StoneT1e", <ConsumableItemModel>{
+        new CommonItemBase("StoneT1e", <ConsumableItemModel>{
                 "internalID": "StoneT1e",
                 "displayName": "Giftmas Tool Upgrade Stone",
                 "sellPrice": 110,
@@ -17430,7 +17430,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 60,
                 "Cooldown": 0
             }),
-        new EquipItemBase("StoneT1eb", <ConsumableItemModel>{
+        new CommonItemBase("StoneT1eb", <ConsumableItemModel>{
                 "internalID": "StoneT1eb",
                 "displayName": "Summer Tool Upgrade Stone",
                 "sellPrice": 110,
@@ -17451,7 +17451,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 50,
                 "Cooldown": 0
             }),
-        new EquipItemBase("StoneT2", <ConsumableItemModel>{
+        new CommonItemBase("StoneT2", <ConsumableItemModel>{
                 "internalID": "StoneT2",
                 "displayName": "Tool Upgrade Stone II",
                 "sellPrice": 1250,
@@ -17472,7 +17472,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 80,
                 "Cooldown": 0
             }),
-        new EquipItemBase("StoneT3", <ConsumableItemModel>{
+        new CommonItemBase("StoneT3", <ConsumableItemModel>{
                 "internalID": "StoneT3",
                 "displayName": "Tool Upgrade Stone III",
                 "sellPrice": 20000,
@@ -17493,7 +17493,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 50,
                 "Cooldown": 0
             }),
-        new EquipItemBase("StoneT4", <ConsumableItemModel>{
+        new CommonItemBase("StoneT4", <ConsumableItemModel>{
                 "internalID": "StoneT4",
                 "displayName": "Tool Upgrade Stone IV",
                 "sellPrice": 550000,
@@ -17514,7 +17514,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 20,
                 "Cooldown": 0
             }),
-        new EquipItemBase("StoneHelm1", <ConsumableItemModel>{
+        new CommonItemBase("StoneHelm1", <ConsumableItemModel>{
                 "internalID": "StoneHelm1",
                 "displayName": "Helmet Upgrade Stone I",
                 "sellPrice": 400,
@@ -17535,7 +17535,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 70,
                 "Cooldown": 0
             }),
-        new EquipItemBase("StoneHelm6", <ConsumableItemModel>{
+        new CommonItemBase("StoneHelm6", <ConsumableItemModel>{
                 "internalID": "StoneHelm6",
                 "displayName": "Warped Helmet Upgrade Stone",
                 "sellPrice": 5000,
@@ -17556,7 +17556,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 50,
                 "Cooldown": 1
             }),
-        new EquipItemBase("StoneHelm1b", <ConsumableItemModel>{
+        new CommonItemBase("StoneHelm1b", <ConsumableItemModel>{
                 "internalID": "StoneHelm1b",
                 "displayName": "Giftmas Helmet Upgrade Stone",
                 "sellPrice": 5000,
@@ -17577,7 +17577,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 60,
                 "Cooldown": 0
             }),
-        new EquipItemBase("StoneZ1", <ConsumableItemModel>{
+        new CommonItemBase("StoneZ1", <ConsumableItemModel>{
                 "internalID": "StoneZ1",
                 "displayName": "Mystery Upgrade Stone I",
                 "sellPrice": 777,
@@ -17598,7 +17598,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 100,
                 "Cooldown": 0
             }),
-        new EquipItemBase("StoneZ2", <ConsumableItemModel>{
+        new CommonItemBase("StoneZ2", <ConsumableItemModel>{
                 "internalID": "StoneZ2",
                 "displayName": "Mystery Upgrade Stone II",
                 "sellPrice": 777,
@@ -17619,7 +17619,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 50,
                 "Cooldown": 0
             }),
-        new EquipItemBase("StonePremSTR", <ConsumableItemModel>{
+        new CommonItemBase("StonePremSTR", <ConsumableItemModel>{
                 "internalID": "StonePremSTR",
                 "displayName": "Premium STR Stone",
                 "sellPrice": 777,
@@ -17640,7 +17640,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 101,
                 "Cooldown": 0
             }),
-        new EquipItemBase("StonePremAGI", <ConsumableItemModel>{
+        new CommonItemBase("StonePremAGI", <ConsumableItemModel>{
                 "internalID": "StonePremAGI",
                 "displayName": "Premium AGI Stone",
                 "sellPrice": 777,
@@ -17661,7 +17661,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 101,
                 "Cooldown": 0
             }),
-        new EquipItemBase("StonePremWIS", <ConsumableItemModel>{
+        new CommonItemBase("StonePremWIS", <ConsumableItemModel>{
                 "internalID": "StonePremWIS",
                 "displayName": "Premium WIS Stone",
                 "sellPrice": 777,
@@ -17682,7 +17682,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 101,
                 "Cooldown": 0
             }),
-        new EquipItemBase("StonePremLUK", <ConsumableItemModel>{
+        new CommonItemBase("StonePremLUK", <ConsumableItemModel>{
                 "internalID": "StonePremLUK",
                 "displayName": "Premium LUK Stone",
                 "sellPrice": 777,
@@ -17703,7 +17703,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 101,
                 "Cooldown": 0
             }),
-        new EquipItemBase("PureWater", <QuestItemModel>{
+        new CommonItemBase("PureWater", <QuestItemModel>{
                 "internalID": "PureWater",
                 "displayName": "Distilled Water",
                 "sellPrice": 50,
@@ -17720,7 +17720,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("PureWater2", <QuestItemModel>{
+        new CommonItemBase("PureWater2", <QuestItemModel>{
                 "internalID": "PureWater2",
                 "displayName": "Dense Water",
                 "sellPrice": 50,
@@ -17737,7 +17737,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Grasslands1", <QuestItemModel>{
+        new CommonItemBase("Grasslands1", <QuestItemModel>{
                 "internalID": "Grasslands1",
                 "displayName": "Spore Cap",
                 "sellPrice": 3,
@@ -17754,7 +17754,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Grasslands2", <QuestItemModel>{
+        new CommonItemBase("Grasslands2", <QuestItemModel>{
                 "internalID": "Grasslands2",
                 "displayName": "Frog Leg",
                 "sellPrice": 5,
@@ -17771,7 +17771,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Grasslands3", <QuestItemModel>{
+        new CommonItemBase("Grasslands3", <QuestItemModel>{
                 "internalID": "Grasslands3",
                 "displayName": "Bean Slices",
                 "sellPrice": 7,
@@ -17788,7 +17788,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Grasslands4", <QuestItemModel>{
+        new CommonItemBase("Grasslands4", <QuestItemModel>{
                 "internalID": "Grasslands4",
                 "displayName": "Red Spore Cap",
                 "sellPrice": 7,
@@ -17805,7 +17805,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Jungle1", <QuestItemModel>{
+        new CommonItemBase("Jungle1", <QuestItemModel>{
                 "internalID": "Jungle1",
                 "displayName": "Slime Sludge",
                 "sellPrice": 10,
@@ -17822,7 +17822,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Jungle2", <QuestItemModel>{
+        new CommonItemBase("Jungle2", <QuestItemModel>{
                 "internalID": "Jungle2",
                 "displayName": "Snake Skin",
                 "sellPrice": 13,
@@ -17839,7 +17839,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Jungle3", <QuestItemModel>{
+        new CommonItemBase("Jungle3", <QuestItemModel>{
                 "internalID": "Jungle3",
                 "displayName": "Carrot Cube",
                 "sellPrice": 15,
@@ -17856,7 +17856,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Forest1", <QuestItemModel>{
+        new CommonItemBase("Forest1", <QuestItemModel>{
                 "internalID": "Forest1",
                 "displayName": "Glublin Ear",
                 "sellPrice": 20,
@@ -17873,7 +17873,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Forest2", <QuestItemModel>{
+        new CommonItemBase("Forest2", <QuestItemModel>{
                 "internalID": "Forest2",
                 "displayName": "Plank",
                 "sellPrice": 25,
@@ -17890,7 +17890,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Forest3", <QuestItemModel>{
+        new CommonItemBase("Forest3", <QuestItemModel>{
                 "internalID": "Forest3",
                 "displayName": "Bullfrog Horn",
                 "sellPrice": 30,
@@ -17907,7 +17907,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Sewers1", <QuestItemModel>{
+        new CommonItemBase("Sewers1", <QuestItemModel>{
                 "internalID": "Sewers1",
                 "displayName": "Corn Kernels",
                 "sellPrice": 30,
@@ -17924,7 +17924,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Sewers1b", <QuestItemModel>{
+        new CommonItemBase("Sewers1b", <QuestItemModel>{
                 "internalID": "Sewers1b",
                 "displayName": "Golden Plop",
                 "sellPrice": 500,
@@ -17941,7 +17941,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Sewers2", <QuestItemModel>{
+        new CommonItemBase("Sewers2", <QuestItemModel>{
                 "internalID": "Sewers2",
                 "displayName": "Rats Tail",
                 "sellPrice": 90,
@@ -17958,7 +17958,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Sewers3", <QuestItemModel>{
+        new CommonItemBase("Sewers3", <QuestItemModel>{
                 "internalID": "Sewers3",
                 "displayName": "Bonemeal",
                 "sellPrice": 90,
@@ -17975,7 +17975,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("TreeInterior1", <QuestItemModel>{
+        new CommonItemBase("TreeInterior1", <QuestItemModel>{
                 "internalID": "TreeInterior1",
                 "displayName": "Stick",
                 "sellPrice": 90,
@@ -17992,7 +17992,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("TreeInterior1b", <QuestItemModel>{
+        new CommonItemBase("TreeInterior1b", <QuestItemModel>{
                 "internalID": "TreeInterior1b",
                 "displayName": "Woodular Circle",
                 "sellPrice": 90,
@@ -18009,7 +18009,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("TreeInterior2", <QuestItemModel>{
+        new CommonItemBase("TreeInterior2", <QuestItemModel>{
                 "internalID": "TreeInterior2",
                 "displayName": "Acorn",
                 "sellPrice": 90,
@@ -18026,7 +18026,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("BabaYagaETC", <QuestItemModel>{
+        new CommonItemBase("BabaYagaETC", <QuestItemModel>{
                 "internalID": "BabaYagaETC",
                 "displayName": "Baba Yaga Baby Eggs",
                 "sellPrice": 400,
@@ -18043,7 +18043,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DesertA1", <QuestItemModel>{
+        new CommonItemBase("DesertA1", <QuestItemModel>{
                 "internalID": "DesertA1",
                 "displayName": "Pocket Sand",
                 "sellPrice": 60,
@@ -18060,7 +18060,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DesertA1b", <QuestItemModel>{
+        new CommonItemBase("DesertA1b", <QuestItemModel>{
                 "internalID": "DesertA1b",
                 "displayName": "Glass Shard",
                 "sellPrice": 60,
@@ -18077,7 +18077,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DesertA2", <QuestItemModel>{
+        new CommonItemBase("DesertA2", <QuestItemModel>{
                 "internalID": "DesertA2",
                 "displayName": "Megalodon Tooth",
                 "sellPrice": 70,
@@ -18094,7 +18094,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DesertA3", <QuestItemModel>{
+        new CommonItemBase("DesertA3", <QuestItemModel>{
                 "internalID": "DesertA3",
                 "displayName": "Crabby Cakey",
                 "sellPrice": 80,
@@ -18111,7 +18111,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DesertA3b", <QuestItemModel>{
+        new CommonItemBase("DesertA3b", <QuestItemModel>{
                 "internalID": "DesertA3b",
                 "displayName": "Nuget Cake",
                 "sellPrice": 80,
@@ -18128,7 +18128,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DesertB1", <QuestItemModel>{
+        new CommonItemBase("DesertB1", <QuestItemModel>{
                 "internalID": "DesertB1",
                 "displayName": "Coconotnotto",
                 "sellPrice": 95,
@@ -18145,7 +18145,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DesertB2", <QuestItemModel>{
+        new CommonItemBase("DesertB2", <QuestItemModel>{
                 "internalID": "DesertB2",
                 "displayName": "Furled Flag",
                 "sellPrice": 108,
@@ -18162,7 +18162,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DesertB3", <QuestItemModel>{
+        new CommonItemBase("DesertB3", <QuestItemModel>{
                 "internalID": "DesertB3",
                 "displayName": "Pincer Arm",
                 "sellPrice": 120,
@@ -18179,7 +18179,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DesertB4", <QuestItemModel>{
+        new CommonItemBase("DesertB4", <QuestItemModel>{
                 "internalID": "DesertB4",
                 "displayName": "Potato Remains",
                 "sellPrice": 133,
@@ -18196,7 +18196,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DesertC1", <QuestItemModel>{
+        new CommonItemBase("DesertC1", <QuestItemModel>{
                 "internalID": "DesertC1",
                 "displayName": "High Steaks",
                 "sellPrice": 145,
@@ -18213,7 +18213,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DesertC2", <QuestItemModel>{
+        new CommonItemBase("DesertC2", <QuestItemModel>{
                 "internalID": "DesertC2",
                 "displayName": "Wakka Cherry",
                 "sellPrice": 160,
@@ -18230,7 +18230,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DesertC2b", <QuestItemModel>{
+        new CommonItemBase("DesertC2b", <QuestItemModel>{
                 "internalID": "DesertC2b",
                 "displayName": "Ghost",
                 "sellPrice": 160,
@@ -18247,7 +18247,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DesertC3", <QuestItemModel>{
+        new CommonItemBase("DesertC3", <QuestItemModel>{
                 "internalID": "DesertC3",
                 "displayName": "Singlecle",
                 "sellPrice": 180,
@@ -18264,7 +18264,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DesertC4", <QuestItemModel>{
+        new CommonItemBase("DesertC4", <QuestItemModel>{
                 "internalID": "DesertC4",
                 "displayName": "Shrapshell",
                 "sellPrice": 200,
@@ -18281,7 +18281,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("SnowA1", <QuestItemModel>{
+        new CommonItemBase("SnowA1", <QuestItemModel>{
                 "internalID": "SnowA1",
                 "displayName": "Floof Ploof",
                 "sellPrice": 200,
@@ -18298,7 +18298,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("SnowA2", <QuestItemModel>{
+        new CommonItemBase("SnowA2", <QuestItemModel>{
                 "internalID": "SnowA2",
                 "displayName": "Melty Cube",
                 "sellPrice": 215,
@@ -18315,7 +18315,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("SnowA2a", <QuestItemModel>{
+        new CommonItemBase("SnowA2a", <QuestItemModel>{
                 "internalID": "SnowA2a",
                 "displayName": "Yellow Snowflake",
                 "sellPrice": 230,
@@ -18332,7 +18332,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("SnowA3", <QuestItemModel>{
+        new CommonItemBase("SnowA3", <QuestItemModel>{
                 "internalID": "SnowA3",
                 "displayName": "Moustache Comb",
                 "sellPrice": 250,
@@ -18349,7 +18349,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("SnowA4", <QuestItemModel>{
+        new CommonItemBase("SnowA4", <QuestItemModel>{
                 "internalID": "SnowA4",
                 "displayName": "Ram Wool",
                 "sellPrice": 500,
@@ -18366,7 +18366,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("SnowB1", <QuestItemModel>{
+        new CommonItemBase("SnowB1", <QuestItemModel>{
                 "internalID": "SnowB1",
                 "displayName": "Sticky Stick",
                 "sellPrice": 270,
@@ -18383,7 +18383,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("SnowB2", <QuestItemModel>{
+        new CommonItemBase("SnowB2", <QuestItemModel>{
                 "internalID": "SnowB2",
                 "displayName": "Mamooth Tusk",
                 "sellPrice": 290,
@@ -18400,7 +18400,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("SnowB2a", <QuestItemModel>{
+        new CommonItemBase("SnowB2a", <QuestItemModel>{
                 "internalID": "SnowB2a",
                 "displayName": "Ice Age 3",
                 "sellPrice": 3150,
@@ -18417,7 +18417,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("SnowB5", <QuestItemModel>{
+        new CommonItemBase("SnowB5", <QuestItemModel>{
                 "internalID": "SnowB5",
                 "displayName": "Snow Ball",
                 "sellPrice": 315,
@@ -18434,7 +18434,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("SnowB3", <QuestItemModel>{
+        new CommonItemBase("SnowB3", <QuestItemModel>{
                 "internalID": "SnowB3",
                 "displayName": "Pen",
                 "sellPrice": 340,
@@ -18451,7 +18451,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("SnowB4", <QuestItemModel>{
+        new CommonItemBase("SnowB4", <QuestItemModel>{
                 "internalID": "SnowB4",
                 "displayName": "Cracked Glass",
                 "sellPrice": 360,
@@ -18468,7 +18468,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("SnowC1", <QuestItemModel>{
+        new CommonItemBase("SnowC1", <QuestItemModel>{
                 "internalID": "SnowC1",
                 "displayName": "Sippy Straw",
                 "sellPrice": 380,
@@ -18485,7 +18485,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("SnowC2", <QuestItemModel>{
+        new CommonItemBase("SnowC2", <QuestItemModel>{
                 "internalID": "SnowC2",
                 "displayName": "Cryosnake Skin",
                 "sellPrice": 400,
@@ -18502,7 +18502,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("SnowC3", <QuestItemModel>{
+        new CommonItemBase("SnowC3", <QuestItemModel>{
                 "internalID": "SnowC3",
                 "displayName": "Audio Cord",
                 "sellPrice": 425,
@@ -18519,7 +18519,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("SnowC4", <QuestItemModel>{
+        new CommonItemBase("SnowC4", <QuestItemModel>{
                 "internalID": "SnowC4",
                 "displayName": "Contact Lense",
                 "sellPrice": 450,
@@ -18536,7 +18536,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("SnowC4a", <QuestItemModel>{
+        new CommonItemBase("SnowC4a", <QuestItemModel>{
                 "internalID": "SnowC4a",
                 "displayName": "Black Lense",
                 "sellPrice": 10000,
@@ -18553,7 +18553,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("SnowC5", <QuestItemModel>{
+        new CommonItemBase("SnowC5", <QuestItemModel>{
                 "internalID": "SnowC5",
                 "displayName": "Blood Bone",
                 "sellPrice": 700,
@@ -18570,7 +18570,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("IceMountains2", <QuestItemModel>{
+        new CommonItemBase("IceMountains2", <QuestItemModel>{
                 "internalID": "IceMountains2",
                 "displayName": "Ice A La Crem",
                 "sellPrice": 1,
@@ -18587,7 +18587,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Hgg", <QuestItemModel>{
+        new CommonItemBase("Hgg", <QuestItemModel>{
                 "internalID": "Hgg",
                 "displayName": "Minuteglass",
                 "sellPrice": 1,
@@ -18604,7 +18604,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EfauntDrop1", <QuestItemModel>{
+        new CommonItemBase("EfauntDrop1", <QuestItemModel>{
                 "internalID": "EfauntDrop1",
                 "displayName": "Ripped Tunic",
                 "sellPrice": 1,
@@ -18621,7 +18621,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EfauntDrop2", <QuestItemModel>{
+        new CommonItemBase("EfauntDrop2", <QuestItemModel>{
                 "internalID": "EfauntDrop2",
                 "displayName": "Ribbed Tunic",
                 "sellPrice": 1,
@@ -18638,7 +18638,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Trophy1", <EquipItemModel>{
+        new CommonItemBase("Trophy1", <EquipItemModel>{
                 "internalID": "Trophy1",
                 "displayName": "King of Food",
                 "sellPrice": 10000,
@@ -18662,7 +18662,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("Trophy2", <EquipItemModel>{
+        new CommonItemBase("Trophy2", <EquipItemModel>{
                 "internalID": "Trophy2",
                 "displayName": "Lucky Lad",
                 "sellPrice": 777,
@@ -18686,7 +18686,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("Trophy3", <EquipItemModel>{
+        new CommonItemBase("Trophy3", <EquipItemModel>{
                 "internalID": "Trophy3",
                 "displayName": "Club Member",
                 "sellPrice": 777,
@@ -18710,7 +18710,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("Trophy4", <EquipItemModel>{
+        new CommonItemBase("Trophy4", <EquipItemModel>{
                 "internalID": "Trophy4",
                 "displayName": "I Made This Game",
                 "sellPrice": 777,
@@ -18734,7 +18734,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 42,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("Trophy5", <EquipItemModel>{
+        new CommonItemBase("Trophy5", <EquipItemModel>{
                 "internalID": "Trophy5",
                 "displayName": "Dice Dynamo",
                 "sellPrice": 777,
@@ -18758,7 +18758,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("Trophy6", <EquipItemModel>{
+        new CommonItemBase("Trophy6", <EquipItemModel>{
                 "internalID": "Trophy6",
                 "displayName": "Blunder Hero",
                 "sellPrice": 69,
@@ -18782,7 +18782,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("Trophy7", <EquipItemModel>{
+        new CommonItemBase("Trophy7", <EquipItemModel>{
                 "internalID": "Trophy7",
                 "displayName": "Original Gamer",
                 "sellPrice": 69,
@@ -18806,7 +18806,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("Trophy8", <EquipItemModel>{
+        new CommonItemBase("Trophy8", <EquipItemModel>{
                 "internalID": "Trophy8",
                 "displayName": "Trailblazer",
                 "sellPrice": 69,
@@ -18830,7 +18830,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("Trophy9", <EquipItemModel>{
+        new CommonItemBase("Trophy9", <EquipItemModel>{
                 "internalID": "Trophy9",
                 "displayName": "Ultra Unboxer",
                 "sellPrice": 69,
@@ -18854,7 +18854,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("Trophy10", <EquipItemModel>{
+        new CommonItemBase("Trophy10", <EquipItemModel>{
                 "internalID": "Trophy10",
                 "displayName": "Critter Baron",
                 "sellPrice": 69,
@@ -18878,7 +18878,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("Trophy11", <EquipItemModel>{
+        new CommonItemBase("Trophy11", <EquipItemModel>{
                 "internalID": "Trophy11",
                 "displayName": "YumYum Sheriff",
                 "sellPrice": 69,
@@ -18902,7 +18902,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("Trophy12", <EquipItemModel>{
+        new CommonItemBase("Trophy12", <EquipItemModel>{
                 "internalID": "Trophy12",
                 "displayName": "Megalodon",
                 "sellPrice": 69,
@@ -18926,7 +18926,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("Trophy13", <EquipItemModel>{
+        new CommonItemBase("Trophy13", <EquipItemModel>{
                 "internalID": "Trophy13",
                 "displayName": "Club Maestro",
                 "sellPrice": 69,
@@ -18950,7 +18950,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("Trophy14", <EquipItemModel>{
+        new CommonItemBase("Trophy14", <EquipItemModel>{
                 "internalID": "Trophy14",
                 "displayName": "Beach Bro",
                 "sellPrice": 69,
@@ -18974,7 +18974,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("Trophy15", <EquipItemModel>{
+        new CommonItemBase("Trophy15", <EquipItemModel>{
                 "internalID": "Trophy15",
                 "displayName": "Frost Prince",
                 "sellPrice": 69,
@@ -18998,7 +18998,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("Starlight", <ConsumableItemModel>{
+        new CommonItemBase("Starlight", <ConsumableItemModel>{
                 "internalID": "Starlight",
                 "displayName": "Starlight Ore",
                 "sellPrice": 5,
@@ -19019,7 +19019,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 4,
                 "Cooldown": 100
             }),
-        new EquipItemBase("AlienTreetutorial", <CommonItemModel>{
+        new CommonItemBase("AlienTreetutorial", <CommonItemModel>{
                 "internalID": "AlienTreetutorial",
                 "displayName": "Alien Logs",
                 "sellPrice": 50,
@@ -19028,7 +19028,7 @@ export const initItemDetailRepo = () => {
                 "Type": "Log",
                 "lvReqToCraft": 0
             }),
-        new EquipItemBase("EquipmentWeapons2", <EquipItemModel>{
+        new CommonItemBase("EquipmentWeapons2", <EquipItemModel>{
                 "internalID": "EquipmentWeapons2",
                 "displayName": "Flesh Reaper",
                 "sellPrice": 40,
@@ -19052,7 +19052,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("Secretstone", <QuestItemModel>{
+        new CommonItemBase("Secretstone", <QuestItemModel>{
                 "internalID": "Secretstone",
                 "displayName": "Secretstone",
                 "sellPrice": 1,
@@ -19069,7 +19069,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Timecandy1", <QuestItemModel>{
+        new CommonItemBase("Timecandy1", <QuestItemModel>{
                 "internalID": "Timecandy1",
                 "displayName": "1 HR Time Candy",
                 "sellPrice": 1,
@@ -19086,7 +19086,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Timecandy2", <QuestItemModel>{
+        new CommonItemBase("Timecandy2", <QuestItemModel>{
                 "internalID": "Timecandy2",
                 "displayName": "2 HR Time Candy",
                 "sellPrice": 1,
@@ -19103,7 +19103,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Timecandy3", <QuestItemModel>{
+        new CommonItemBase("Timecandy3", <QuestItemModel>{
                 "internalID": "Timecandy3",
                 "displayName": "4 HR Time Candy",
                 "sellPrice": 1,
@@ -19120,7 +19120,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Timecandy4", <QuestItemModel>{
+        new CommonItemBase("Timecandy4", <QuestItemModel>{
                 "internalID": "Timecandy4",
                 "displayName": "12 HR Time Candy",
                 "sellPrice": 1,
@@ -19137,7 +19137,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Timecandy5", <QuestItemModel>{
+        new CommonItemBase("Timecandy5", <QuestItemModel>{
                 "internalID": "Timecandy5",
                 "displayName": "24 HR Time Candy",
                 "sellPrice": 1,
@@ -19154,7 +19154,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Timecandy6", <QuestItemModel>{
+        new CommonItemBase("Timecandy6", <QuestItemModel>{
                 "internalID": "Timecandy6",
                 "displayName": "72 HR Time Candy",
                 "sellPrice": 1,
@@ -19171,7 +19171,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Timecandy7", <QuestItemModel>{
+        new CommonItemBase("Timecandy7", <QuestItemModel>{
                 "internalID": "Timecandy7",
                 "displayName": "Steamy Time Candy",
                 "sellPrice": 1,
@@ -19188,7 +19188,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Timecandy8", <QuestItemModel>{
+        new CommonItemBase("Timecandy8", <QuestItemModel>{
                 "internalID": "Timecandy8",
                 "displayName": "Spooky Time Candy",
                 "sellPrice": 1,
@@ -19205,7 +19205,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Timecandy9", <QuestItemModel>{
+        new CommonItemBase("Timecandy9", <QuestItemModel>{
                 "internalID": "Timecandy9",
                 "displayName": "Cosmic Time Candy",
                 "sellPrice": 1,
@@ -19222,7 +19222,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("InvBag1", <EquipItemModel>{
+        new CommonItemBase("InvBag1", <EquipItemModel>{
                 "internalID": "InvBag1",
                 "displayName": "Inventory Bag A",
                 "sellPrice": 200,
@@ -19246,7 +19246,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvBag2", <EquipItemModel>{
+        new CommonItemBase("InvBag2", <EquipItemModel>{
                 "internalID": "InvBag2",
                 "displayName": "Inventory Bag B",
                 "sellPrice": 200,
@@ -19270,7 +19270,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvBag3", <EquipItemModel>{
+        new CommonItemBase("InvBag3", <EquipItemModel>{
                 "internalID": "InvBag3",
                 "displayName": "Inventory Bag C",
                 "sellPrice": 200,
@@ -19294,7 +19294,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvBag4", <EquipItemModel>{
+        new CommonItemBase("InvBag4", <EquipItemModel>{
                 "internalID": "InvBag4",
                 "displayName": "Inventory Bag D",
                 "sellPrice": 200,
@@ -19318,7 +19318,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvBag5", <EquipItemModel>{
+        new CommonItemBase("InvBag5", <EquipItemModel>{
                 "internalID": "InvBag5",
                 "displayName": "Inventory Bag E",
                 "sellPrice": 200,
@@ -19342,7 +19342,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvBag6", <EquipItemModel>{
+        new CommonItemBase("InvBag6", <EquipItemModel>{
                 "internalID": "InvBag6",
                 "displayName": "Inventory Bag F",
                 "sellPrice": 200,
@@ -19366,7 +19366,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvBag7", <EquipItemModel>{
+        new CommonItemBase("InvBag7", <EquipItemModel>{
                 "internalID": "InvBag7",
                 "displayName": "Inventory Bag G",
                 "sellPrice": 200,
@@ -19390,7 +19390,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvBag8", <EquipItemModel>{
+        new CommonItemBase("InvBag8", <EquipItemModel>{
                 "internalID": "InvBag8",
                 "displayName": "Inventory Bag H",
                 "sellPrice": 200,
@@ -19414,7 +19414,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvBag9", <EquipItemModel>{
+        new CommonItemBase("InvBag9", <EquipItemModel>{
                 "internalID": "InvBag9",
                 "displayName": "Inventory Bag I",
                 "sellPrice": 200,
@@ -19438,7 +19438,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvBag21", <EquipItemModel>{
+        new CommonItemBase("InvBag21", <EquipItemModel>{
                 "internalID": "InvBag21",
                 "displayName": "Inventory Bag U",
                 "sellPrice": 200,
@@ -19462,7 +19462,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvBag22", <EquipItemModel>{
+        new CommonItemBase("InvBag22", <EquipItemModel>{
                 "internalID": "InvBag22",
                 "displayName": "Inventory Bag V",
                 "sellPrice": 200,
@@ -19486,7 +19486,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvBag23", <EquipItemModel>{
+        new CommonItemBase("InvBag23", <EquipItemModel>{
                 "internalID": "InvBag23",
                 "displayName": "Inventory Bag W",
                 "sellPrice": 200,
@@ -19510,7 +19510,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvBag24", <EquipItemModel>{
+        new CommonItemBase("InvBag24", <EquipItemModel>{
                 "internalID": "InvBag24",
                 "displayName": "Inventory Bag X",
                 "sellPrice": 200,
@@ -19534,7 +19534,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvBag25", <EquipItemModel>{
+        new CommonItemBase("InvBag25", <EquipItemModel>{
                 "internalID": "InvBag25",
                 "displayName": "Inventory Bag Y",
                 "sellPrice": 200,
@@ -19558,7 +19558,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvBag26", <EquipItemModel>{
+        new CommonItemBase("InvBag26", <EquipItemModel>{
                 "internalID": "InvBag26",
                 "displayName": "Inventory Bag Z",
                 "sellPrice": 200,
@@ -19582,7 +19582,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvBag100", <EquipItemModel>{
+        new CommonItemBase("InvBag100", <EquipItemModel>{
                 "internalID": "InvBag100",
                 "displayName": "Snakeskinventory Bag",
                 "sellPrice": 1300,
@@ -19606,7 +19606,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvBag101", <EquipItemModel>{
+        new CommonItemBase("InvBag101", <EquipItemModel>{
                 "internalID": "InvBag101",
                 "displayName": "Totally Normal and not fake Bag",
                 "sellPrice": 5000,
@@ -19630,7 +19630,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvBag102", <EquipItemModel>{
+        new CommonItemBase("InvBag102", <EquipItemModel>{
                 "internalID": "InvBag102",
                 "displayName": "Blunderbag",
                 "sellPrice": 2500,
@@ -19654,7 +19654,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvBag103", <EquipItemModel>{
+        new CommonItemBase("InvBag103", <EquipItemModel>{
                 "internalID": "InvBag103",
                 "displayName": "Sandy Satchel",
                 "sellPrice": 5000,
@@ -19678,7 +19678,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvBag104", <EquipItemModel>{
+        new CommonItemBase("InvBag104", <EquipItemModel>{
                 "internalID": "InvBag104",
                 "displayName": "Bummo Bag",
                 "sellPrice": 24,
@@ -19702,7 +19702,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvBag105", <EquipItemModel>{
+        new CommonItemBase("InvBag105", <EquipItemModel>{
                 "internalID": "InvBag105",
                 "displayName": "Capitalist Case",
                 "sellPrice": 2499,
@@ -19726,7 +19726,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvBag106", <EquipItemModel>{
+        new CommonItemBase("InvBag106", <EquipItemModel>{
                 "internalID": "InvBag106",
                 "displayName": "Wealthy Wallet",
                 "sellPrice": 249999,
@@ -19750,7 +19750,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvBag107", <EquipItemModel>{
+        new CommonItemBase("InvBag107", <EquipItemModel>{
                 "internalID": "InvBag107",
                 "displayName": "Prosperous Pouch",
                 "sellPrice": 24999999,
@@ -19774,7 +19774,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvBag108", <EquipItemModel>{
+        new CommonItemBase("InvBag108", <EquipItemModel>{
                 "internalID": "InvBag108",
                 "displayName": "Sack of Success",
                 "sellPrice": 2499999999,
@@ -19798,7 +19798,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvBag109", <EquipItemModel>{
+        new CommonItemBase("InvBag109", <EquipItemModel>{
                 "internalID": "InvBag109",
                 "displayName": "Shivering Sack",
                 "sellPrice": 5000,
@@ -19822,7 +19822,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvBag110", <EquipItemModel>{
+        new CommonItemBase("InvBag110", <EquipItemModel>{
                 "internalID": "InvBag110",
                 "displayName": "Mamooth Hide Bag",
                 "sellPrice": 5000,
@@ -19846,7 +19846,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvBag111", <EquipItemModel>{
+        new CommonItemBase("InvBag111", <EquipItemModel>{
                 "internalID": "InvBag111",
                 "displayName": "Peeper Pouch",
                 "sellPrice": 200,
@@ -19870,7 +19870,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage1", <EquipItemModel>{
+        new CommonItemBase("InvStorage1", <EquipItemModel>{
                 "internalID": "InvStorage1",
                 "displayName": "Storage Chest 1",
                 "sellPrice": 200,
@@ -19894,7 +19894,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage2", <EquipItemModel>{
+        new CommonItemBase("InvStorage2", <EquipItemModel>{
                 "internalID": "InvStorage2",
                 "displayName": "Storage Chest 2",
                 "sellPrice": 1000,
@@ -19918,7 +19918,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage3", <EquipItemModel>{
+        new CommonItemBase("InvStorage3", <EquipItemModel>{
                 "internalID": "InvStorage3",
                 "displayName": "Storage Chest 3",
                 "sellPrice": 800,
@@ -19942,7 +19942,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage4", <EquipItemModel>{
+        new CommonItemBase("InvStorage4", <EquipItemModel>{
                 "internalID": "InvStorage4",
                 "displayName": "Storage Chest 4",
                 "sellPrice": 1500,
@@ -19966,7 +19966,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage5", <EquipItemModel>{
+        new CommonItemBase("InvStorage5", <EquipItemModel>{
                 "internalID": "InvStorage5",
                 "displayName": "Storage Chest 5",
                 "sellPrice": 1,
@@ -19990,7 +19990,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage6", <EquipItemModel>{
+        new CommonItemBase("InvStorage6", <EquipItemModel>{
                 "internalID": "InvStorage6",
                 "displayName": "Storage Chest 6",
                 "sellPrice": 2500,
@@ -20014,7 +20014,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage7", <EquipItemModel>{
+        new CommonItemBase("InvStorage7", <EquipItemModel>{
                 "internalID": "InvStorage7",
                 "displayName": "Storage Chest 7",
                 "sellPrice": 5500,
@@ -20038,7 +20038,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage8", <EquipItemModel>{
+        new CommonItemBase("InvStorage8", <EquipItemModel>{
                 "internalID": "InvStorage8",
                 "displayName": "Storage Chest 8",
                 "sellPrice": 5500,
@@ -20062,7 +20062,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage9", <EquipItemModel>{
+        new CommonItemBase("InvStorage9", <EquipItemModel>{
                 "internalID": "InvStorage9",
                 "displayName": "Storage Chest 9",
                 "sellPrice": 8900,
@@ -20086,7 +20086,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage10", <EquipItemModel>{
+        new CommonItemBase("InvStorage10", <EquipItemModel>{
                 "internalID": "InvStorage10",
                 "displayName": "Storage Chest 10",
                 "sellPrice": 25000,
@@ -20110,7 +20110,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage11", <EquipItemModel>{
+        new CommonItemBase("InvStorage11", <EquipItemModel>{
                 "internalID": "InvStorage11",
                 "displayName": "Storage Chest 11",
                 "sellPrice": 50000,
@@ -20134,7 +20134,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage12", <EquipItemModel>{
+        new CommonItemBase("InvStorage12", <EquipItemModel>{
                 "internalID": "InvStorage12",
                 "displayName": "Storage Chest 12",
                 "sellPrice": 7000,
@@ -20158,7 +20158,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage13", <EquipItemModel>{
+        new CommonItemBase("InvStorage13", <EquipItemModel>{
                 "internalID": "InvStorage13",
                 "displayName": "Storage Chest 13",
                 "sellPrice": 60000,
@@ -20182,7 +20182,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage14", <EquipItemModel>{
+        new CommonItemBase("InvStorage14", <EquipItemModel>{
                 "internalID": "InvStorage14",
                 "displayName": "Storage Chest 14",
                 "sellPrice": 1,
@@ -20206,7 +20206,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage15", <EquipItemModel>{
+        new CommonItemBase("InvStorage15", <EquipItemModel>{
                 "internalID": "InvStorage15",
                 "displayName": "Storage Chest 15",
                 "sellPrice": 100000,
@@ -20230,7 +20230,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage16", <EquipItemModel>{
+        new CommonItemBase("InvStorage16", <EquipItemModel>{
                 "internalID": "InvStorage16",
                 "displayName": "Storage Chest 16",
                 "sellPrice": 150000,
@@ -20254,7 +20254,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage17", <EquipItemModel>{
+        new CommonItemBase("InvStorage17", <EquipItemModel>{
                 "internalID": "InvStorage17",
                 "displayName": "Storage Chest 17",
                 "sellPrice": 200000,
@@ -20278,7 +20278,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage18", <EquipItemModel>{
+        new CommonItemBase("InvStorage18", <EquipItemModel>{
                 "internalID": "InvStorage18",
                 "displayName": "Storage Chest 18",
                 "sellPrice": 350000,
@@ -20302,7 +20302,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage19", <EquipItemModel>{
+        new CommonItemBase("InvStorage19", <EquipItemModel>{
                 "internalID": "InvStorage19",
                 "displayName": "Storage Chest 19",
                 "sellPrice": 500000,
@@ -20326,7 +20326,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage20", <EquipItemModel>{
+        new CommonItemBase("InvStorage20", <EquipItemModel>{
                 "internalID": "InvStorage20",
                 "displayName": "Storage Chest 20",
                 "sellPrice": 800000,
@@ -20350,7 +20350,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage21", <EquipItemModel>{
+        new CommonItemBase("InvStorage21", <EquipItemModel>{
                 "internalID": "InvStorage21",
                 "displayName": "Storage Chest 21",
                 "sellPrice": 1250000,
@@ -20374,7 +20374,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage31", <EquipItemModel>{
+        new CommonItemBase("InvStorage31", <EquipItemModel>{
                 "internalID": "InvStorage31",
                 "displayName": "Storage Chest 90",
                 "sellPrice": 200,
@@ -20398,7 +20398,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage32", <EquipItemModel>{
+        new CommonItemBase("InvStorage32", <EquipItemModel>{
                 "internalID": "InvStorage32",
                 "displayName": "Storage Chest 91",
                 "sellPrice": 200,
@@ -20422,7 +20422,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage33", <EquipItemModel>{
+        new CommonItemBase("InvStorage33", <EquipItemModel>{
                 "internalID": "InvStorage33",
                 "displayName": "Storage Chest 92",
                 "sellPrice": 200,
@@ -20446,7 +20446,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage34", <EquipItemModel>{
+        new CommonItemBase("InvStorage34", <EquipItemModel>{
                 "internalID": "InvStorage34",
                 "displayName": "Storage Chest 93",
                 "sellPrice": 200,
@@ -20470,7 +20470,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage35", <EquipItemModel>{
+        new CommonItemBase("InvStorage35", <EquipItemModel>{
                 "internalID": "InvStorage35",
                 "displayName": "Storage Chest 94",
                 "sellPrice": 200,
@@ -20494,7 +20494,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage36", <EquipItemModel>{
+        new CommonItemBase("InvStorage36", <EquipItemModel>{
                 "internalID": "InvStorage36",
                 "displayName": "Storage Chest 95",
                 "sellPrice": 200,
@@ -20518,7 +20518,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage37", <EquipItemModel>{
+        new CommonItemBase("InvStorage37", <EquipItemModel>{
                 "internalID": "InvStorage37",
                 "displayName": "Storage Chest 96",
                 "sellPrice": 200,
@@ -20542,7 +20542,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage38", <EquipItemModel>{
+        new CommonItemBase("InvStorage38", <EquipItemModel>{
                 "internalID": "InvStorage38",
                 "displayName": "Storage Chest 97",
                 "sellPrice": 200,
@@ -20566,7 +20566,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage39", <EquipItemModel>{
+        new CommonItemBase("InvStorage39", <EquipItemModel>{
                 "internalID": "InvStorage39",
                 "displayName": "Storage Chest 98",
                 "sellPrice": 200,
@@ -20590,7 +20590,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage40", <EquipItemModel>{
+        new CommonItemBase("InvStorage40", <EquipItemModel>{
                 "internalID": "InvStorage40",
                 "displayName": "Storage Chest 99",
                 "sellPrice": 200,
@@ -20614,7 +20614,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage41", <EquipItemModel>{
+        new CommonItemBase("InvStorage41", <EquipItemModel>{
                 "internalID": "InvStorage41",
                 "displayName": "Storage Chest 99B",
                 "sellPrice": 200,
@@ -20638,7 +20638,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorage42", <EquipItemModel>{
+        new CommonItemBase("InvStorage42", <EquipItemModel>{
                 "internalID": "InvStorage42",
                 "displayName": "Storage Chest 99C",
                 "sellPrice": 200,
@@ -20662,7 +20662,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorageF", <EquipItemModel>{
+        new CommonItemBase("InvStorageF", <EquipItemModel>{
                 "internalID": "InvStorageF",
                 "displayName": "Dank Paypay Chest",
                 "sellPrice": 1000,
@@ -20686,7 +20686,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("InvStorageS", <EquipItemModel>{
+        new CommonItemBase("InvStorageS", <EquipItemModel>{
                 "internalID": "InvStorageS",
                 "displayName": "Gelatinous Chest",
                 "sellPrice": 1000,
@@ -20710,7 +20710,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("Line1", <QuestItemModel>{
+        new CommonItemBase("Line1", <QuestItemModel>{
                 "internalID": "Line1",
                 "displayName": "Copper Twine",
                 "sellPrice": 3500,
@@ -20727,7 +20727,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Line2", <QuestItemModel>{
+        new CommonItemBase("Line2", <QuestItemModel>{
                 "internalID": "Line2",
                 "displayName": "Silver Twine",
                 "sellPrice": 50,
@@ -20744,7 +20744,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Line3", <QuestItemModel>{
+        new CommonItemBase("Line3", <QuestItemModel>{
                 "internalID": "Line3",
                 "displayName": "Gold Twine",
                 "sellPrice": 50,
@@ -20761,7 +20761,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Line4", <QuestItemModel>{
+        new CommonItemBase("Line4", <QuestItemModel>{
                 "internalID": "Line4",
                 "displayName": "Platinum Twine",
                 "sellPrice": 50,
@@ -20778,7 +20778,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Line5", <QuestItemModel>{
+        new CommonItemBase("Line5", <QuestItemModel>{
                 "internalID": "Line5",
                 "displayName": "Leafy Vines",
                 "sellPrice": 7500,
@@ -20795,7 +20795,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Line6", <QuestItemModel>{
+        new CommonItemBase("Line6", <QuestItemModel>{
                 "internalID": "Line6",
                 "displayName": "Fun Flags",
                 "sellPrice": 50,
@@ -20812,7 +20812,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Line7", <QuestItemModel>{
+        new CommonItemBase("Line7", <QuestItemModel>{
                 "internalID": "Line7",
                 "displayName": "Electrical Wiring",
                 "sellPrice": 50,
@@ -20829,7 +20829,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Line8", <QuestItemModel>{
+        new CommonItemBase("Line8", <QuestItemModel>{
                 "internalID": "Line8",
                 "displayName": "Wiener Links",
                 "sellPrice": 50,
@@ -20846,7 +20846,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Line9", <QuestItemModel>{
+        new CommonItemBase("Line9", <QuestItemModel>{
                 "internalID": "Line9",
                 "displayName": "Zeus Gon Fishin",
                 "sellPrice": 50,
@@ -20863,7 +20863,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Line10", <QuestItemModel>{
+        new CommonItemBase("Line10", <QuestItemModel>{
                 "internalID": "Line10",
                 "displayName": "Needledrop",
                 "sellPrice": 15000,
@@ -20880,7 +20880,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Line11", <QuestItemModel>{
+        new CommonItemBase("Line11", <QuestItemModel>{
                 "internalID": "Line11",
                 "displayName": "Scripticus Spoons",
                 "sellPrice": 50,
@@ -20897,7 +20897,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Line12", <QuestItemModel>{
+        new CommonItemBase("Line12", <QuestItemModel>{
                 "internalID": "Line12",
                 "displayName": "Its a Boy Celebration",
                 "sellPrice": 50,
@@ -20914,7 +20914,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Line13", <QuestItemModel>{
+        new CommonItemBase("Line13", <QuestItemModel>{
                 "internalID": "Line13",
                 "displayName": "Its a Girl Celebration",
                 "sellPrice": 50,
@@ -20931,7 +20931,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Line14", <QuestItemModel>{
+        new CommonItemBase("Line14", <QuestItemModel>{
                 "internalID": "Line14",
                 "displayName": "Its Alright Celebration",
                 "sellPrice": 50,
@@ -20948,7 +20948,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Weight1", <QuestItemModel>{
+        new CommonItemBase("Weight1", <QuestItemModel>{
                 "internalID": "Weight1",
                 "displayName": "Wormie Weight",
                 "sellPrice": 5000,
@@ -20965,7 +20965,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Weight2", <QuestItemModel>{
+        new CommonItemBase("Weight2", <QuestItemModel>{
                 "internalID": "Weight2",
                 "displayName": "Iron Hook",
                 "sellPrice": 50,
@@ -20982,7 +20982,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Weight3", <QuestItemModel>{
+        new CommonItemBase("Weight3", <QuestItemModel>{
                 "internalID": "Weight3",
                 "displayName": "Basic Bobber",
                 "sellPrice": 50,
@@ -20999,7 +20999,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Weight4", <QuestItemModel>{
+        new CommonItemBase("Weight4", <QuestItemModel>{
                 "internalID": "Weight4",
                 "displayName": "Dualhook Prongs",
                 "sellPrice": 50,
@@ -21016,7 +21016,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Weight5", <QuestItemModel>{
+        new CommonItemBase("Weight5", <QuestItemModel>{
                 "internalID": "Weight5",
                 "displayName": "One Pound of Steel",
                 "sellPrice": 10000,
@@ -21033,7 +21033,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Weight6", <QuestItemModel>{
+        new CommonItemBase("Weight6", <QuestItemModel>{
                 "internalID": "Weight6",
                 "displayName": "One Pound of Feathers",
                 "sellPrice": 50,
@@ -21050,7 +21050,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Weight7", <QuestItemModel>{
+        new CommonItemBase("Weight7", <QuestItemModel>{
                 "internalID": "Weight7",
                 "displayName": "Massless Unit for Physics Questions",
                 "sellPrice": 50,
@@ -21067,7 +21067,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Weight8", <QuestItemModel>{
+        new CommonItemBase("Weight8", <QuestItemModel>{
                 "internalID": "Weight8",
                 "displayName": "Literal Elephant",
                 "sellPrice": 50,
@@ -21084,7 +21084,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Weight9", <QuestItemModel>{
+        new CommonItemBase("Weight9", <QuestItemModel>{
                 "internalID": "Weight9",
                 "displayName": "Valve Patented Circle Thingies",
                 "sellPrice": 50,
@@ -21101,7 +21101,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Weight10", <QuestItemModel>{
+        new CommonItemBase("Weight10", <QuestItemModel>{
                 "internalID": "Weight10",
                 "displayName": "Dynamite",
                 "sellPrice": 17500,
@@ -21118,7 +21118,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Weight11", <QuestItemModel>{
+        new CommonItemBase("Weight11", <QuestItemModel>{
                 "internalID": "Weight11",
                 "displayName": "Not Dynamite",
                 "sellPrice": 55000,
@@ -21135,7 +21135,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Weight12", <QuestItemModel>{
+        new CommonItemBase("Weight12", <QuestItemModel>{
                 "internalID": "Weight12",
                 "displayName": "Triple Threat",
                 "sellPrice": 50,
@@ -21152,7 +21152,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Weight13", <QuestItemModel>{
+        new CommonItemBase("Weight13", <QuestItemModel>{
                 "internalID": "Weight13",
                 "displayName": "Crash Box",
                 "sellPrice": 50,
@@ -21169,7 +21169,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Weight14", <QuestItemModel>{
+        new CommonItemBase("Weight14", <QuestItemModel>{
                 "internalID": "Weight14",
                 "displayName": "Fat Albert",
                 "sellPrice": 50,
@@ -21186,7 +21186,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("GoldricP2", <QuestItemModel>{
+        new CommonItemBase("GoldricP2", <QuestItemModel>{
                 "internalID": "GoldricP2",
                 "displayName": "Triumphant Treason",
                 "sellPrice": 100,
@@ -21203,7 +21203,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("GoldricP3", <QuestItemModel>{
+        new CommonItemBase("GoldricP3", <QuestItemModel>{
                 "internalID": "GoldricP3",
                 "displayName": "Claiming Cashe",
                 "sellPrice": 100,
@@ -21220,7 +21220,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest30", <QuestItemModel>{
+        new CommonItemBase("Quest30", <QuestItemModel>{
                 "internalID": "Quest30",
                 "displayName": "Giftmas Box",
                 "sellPrice": 100,
@@ -21237,7 +21237,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest31", <QuestItemModel>{
+        new CommonItemBase("Quest31", <QuestItemModel>{
                 "internalID": "Quest31",
                 "displayName": "Gem Note",
                 "sellPrice": 100,
@@ -21254,7 +21254,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Cutter", <QuestItemModel>{
+        new CommonItemBase("Cutter", <QuestItemModel>{
                 "internalID": "Cutter",
                 "displayName": "Bolt Cutters",
                 "sellPrice": 5000,
@@ -21271,7 +21271,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest32", <QuestItemModel>{
+        new CommonItemBase("Quest32", <QuestItemModel>{
                 "internalID": "Quest32",
                 "displayName": "Monster Rating",
                 "sellPrice": 100,
@@ -21288,7 +21288,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest33", <QuestItemModel>{
+        new CommonItemBase("Quest33", <QuestItemModel>{
                 "internalID": "Quest33",
                 "displayName": "Player Rating With Letter P",
                 "sellPrice": 100,
@@ -21305,7 +21305,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest34", <QuestItemModel>{
+        new CommonItemBase("Quest34", <QuestItemModel>{
                 "internalID": "Quest34",
                 "displayName": "Player Rating With Letter S",
                 "sellPrice": 100,
@@ -21322,7 +21322,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest35", <QuestItemModel>{
+        new CommonItemBase("Quest35", <QuestItemModel>{
                 "internalID": "Quest35",
                 "displayName": "Googley Eyes",
                 "sellPrice": 100,
@@ -21339,7 +21339,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest36", <QuestItemModel>{
+        new CommonItemBase("Quest36", <QuestItemModel>{
                 "internalID": "Quest36",
                 "displayName": "Dootjat Eye",
                 "sellPrice": 100,
@@ -21356,7 +21356,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest37", <QuestItemModel>{
+        new CommonItemBase("Quest37", <QuestItemModel>{
                 "internalID": "Quest37",
                 "displayName": "Silver Antique",
                 "sellPrice": 20000,
@@ -21373,7 +21373,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest38", <QuestItemModel>{
+        new CommonItemBase("Quest38", <QuestItemModel>{
                 "internalID": "Quest38",
                 "displayName": "Guild Giftbox",
                 "sellPrice": 1,
@@ -21390,7 +21390,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest39", <QuestItemModel>{
+        new CommonItemBase("Quest39", <QuestItemModel>{
                 "internalID": "Quest39",
                 "displayName": "Lovey Dovey Letter",
                 "sellPrice": 1,
@@ -21407,7 +21407,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest40", <QuestItemModel>{
+        new CommonItemBase("Quest40", <QuestItemModel>{
                 "internalID": "Quest40",
                 "displayName": "Choco Box",
                 "sellPrice": 100,
@@ -21424,7 +21424,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest41", <QuestItemModel>{
+        new CommonItemBase("Quest41", <QuestItemModel>{
                 "internalID": "Quest41",
                 "displayName": "Flowies",
                 "sellPrice": 100,
@@ -21441,7 +21441,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest42", <QuestItemModel>{
+        new CommonItemBase("Quest42", <QuestItemModel>{
                 "internalID": "Quest42",
                 "displayName": "Egg Capsule",
                 "sellPrice": 100,
@@ -21458,7 +21458,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest43", <QuestItemModel>{
+        new CommonItemBase("Quest43", <QuestItemModel>{
                 "internalID": "Quest43",
                 "displayName": "Gummy Bunny",
                 "sellPrice": 100,
@@ -21475,7 +21475,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest44", <QuestItemModel>{
+        new CommonItemBase("Quest44", <QuestItemModel>{
                 "internalID": "Quest44",
                 "displayName": "Goldegg Capsule",
                 "sellPrice": 100,
@@ -21492,7 +21492,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest45", <QuestItemModel>{
+        new CommonItemBase("Quest45", <QuestItemModel>{
                 "internalID": "Quest45",
                 "displayName": "Sesame Seed",
                 "sellPrice": 100,
@@ -21509,7 +21509,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest46", <QuestItemModel>{
+        new CommonItemBase("Quest46", <QuestItemModel>{
                 "internalID": "Quest46",
                 "displayName": "The Bobber Challenge Scroll",
                 "sellPrice": 100,
@@ -21526,7 +21526,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest47", <QuestItemModel>{
+        new CommonItemBase("Quest47", <QuestItemModel>{
                 "internalID": "Quest47",
                 "displayName": "Elderly Peanut",
                 "sellPrice": 100,
@@ -21543,7 +21543,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest48", <QuestItemModel>{
+        new CommonItemBase("Quest48", <QuestItemModel>{
                 "internalID": "Quest48",
                 "displayName": "Pete the Peanut",
                 "sellPrice": 100,
@@ -21560,7 +21560,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest49", <QuestItemModel>{
+        new CommonItemBase("Quest49", <QuestItemModel>{
                 "internalID": "Quest49",
                 "displayName": "Summer Cooler",
                 "sellPrice": 100,
@@ -21577,7 +21577,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest50", <QuestItemModel>{
+        new CommonItemBase("Quest50", <QuestItemModel>{
                 "internalID": "Quest50",
                 "displayName": "Beach Oyster",
                 "sellPrice": 100,
@@ -21594,7 +21594,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest51", <QuestItemModel>{
+        new CommonItemBase("Quest51", <QuestItemModel>{
                 "internalID": "Quest51",
                 "displayName": "Skull Coin",
                 "sellPrice": 100,
@@ -21611,7 +21611,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest52", <QuestItemModel>{
+        new CommonItemBase("Quest52", <QuestItemModel>{
                 "internalID": "Quest52",
                 "displayName": "Coin",
                 "sellPrice": 100,
@@ -21628,7 +21628,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("PalmTreeD", <QuestItemModel>{
+        new CommonItemBase("PalmTreeD", <QuestItemModel>{
                 "internalID": "PalmTreeD",
                 "displayName": "Palm Tree Log",
                 "sellPrice": 100,
@@ -21645,7 +21645,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Pearl4", <QuestItemModel>{
+        new CommonItemBase("Pearl4", <QuestItemModel>{
                 "internalID": "Pearl4",
                 "displayName": "Black Pearl",
                 "sellPrice": 100,
@@ -21662,7 +21662,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Pearl5", <QuestItemModel>{
+        new CommonItemBase("Pearl5", <QuestItemModel>{
                 "internalID": "Pearl5",
                 "displayName": "White Pearl",
                 "sellPrice": 100,
@@ -21679,7 +21679,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest53", <QuestItemModel>{
+        new CommonItemBase("Quest53", <QuestItemModel>{
                 "internalID": "Quest53",
                 "displayName": "Meat Cube",
                 "sellPrice": 100,
@@ -21696,7 +21696,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest54", <QuestItemModel>{
+        new CommonItemBase("Quest54", <QuestItemModel>{
                 "internalID": "Quest54",
                 "displayName": "Sand Pile",
                 "sellPrice": 100,
@@ -21713,7 +21713,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest55", <QuestItemModel>{
+        new CommonItemBase("Quest55", <QuestItemModel>{
                 "internalID": "Quest55",
                 "displayName": "Buried Treasure",
                 "sellPrice": 100,
@@ -21730,7 +21730,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest56", <QuestItemModel>{
+        new CommonItemBase("Quest56", <QuestItemModel>{
                 "internalID": "Quest56",
                 "displayName": "Dootophone",
                 "sellPrice": 1,
@@ -21747,7 +21747,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest57", <QuestItemModel>{
+        new CommonItemBase("Quest57", <QuestItemModel>{
                 "internalID": "Quest57",
                 "displayName": "Damaged Cog",
                 "sellPrice": 500000000,
@@ -21764,7 +21764,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest58", <QuestItemModel>{
+        new CommonItemBase("Quest58", <QuestItemModel>{
                 "internalID": "Quest58",
                 "displayName": "Refurbished Cog",
                 "sellPrice": 500000010,
@@ -21781,7 +21781,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest59", <QuestItemModel>{
+        new CommonItemBase("Quest59", <QuestItemModel>{
                 "internalID": "Quest59",
                 "displayName": "Shuvelle's Vote",
                 "sellPrice": 1,
@@ -21798,7 +21798,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest60", <QuestItemModel>{
+        new CommonItemBase("Quest60", <QuestItemModel>{
                 "internalID": "Quest60",
                 "displayName": "Yondergreens Vote",
                 "sellPrice": 1,
@@ -21815,7 +21815,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest61", <QuestItemModel>{
+        new CommonItemBase("Quest61", <QuestItemModel>{
                 "internalID": "Quest61",
                 "displayName": "Bill Brr's Vote",
                 "sellPrice": 1,
@@ -21832,7 +21832,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest62", <QuestItemModel>{
+        new CommonItemBase("Quest62", <QuestItemModel>{
                 "internalID": "Quest62",
                 "displayName": "Signed Contract",
                 "sellPrice": 1,
@@ -21849,7 +21849,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest63", <QuestItemModel>{
+        new CommonItemBase("Quest63", <QuestItemModel>{
                 "internalID": "Quest63",
                 "displayName": "Shovel",
                 "sellPrice": 1,
@@ -21866,7 +21866,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest64", <QuestItemModel>{
+        new CommonItemBase("Quest64", <QuestItemModel>{
                 "internalID": "Quest64",
                 "displayName": "2021 Giftmas Box",
                 "sellPrice": 1,
@@ -21883,7 +21883,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest65", <QuestItemModel>{
+        new CommonItemBase("Quest65", <QuestItemModel>{
                 "internalID": "Quest65",
                 "displayName": "Pile of Processor Chips",
                 "sellPrice": 625000,
@@ -21900,7 +21900,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest66", <QuestItemModel>{
+        new CommonItemBase("Quest66", <QuestItemModel>{
                 "internalID": "Quest66",
                 "displayName": "Strung Jewels",
                 "sellPrice": 2500000,
@@ -21917,7 +21917,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest67", <QuestItemModel>{
+        new CommonItemBase("Quest67", <QuestItemModel>{
                 "internalID": "Quest67",
                 "displayName": "Bottled World Town Teleport",
                 "sellPrice": 1000000,
@@ -21934,7 +21934,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest68", <QuestItemModel>{
+        new CommonItemBase("Quest68", <QuestItemModel>{
                 "internalID": "Quest68",
                 "displayName": "Bucket of Slush",
                 "sellPrice": 1000,
@@ -21951,7 +21951,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest69", <QuestItemModel>{
+        new CommonItemBase("Quest69", <QuestItemModel>{
                 "internalID": "Quest69",
                 "displayName": "Skull",
                 "sellPrice": 1000,
@@ -21968,7 +21968,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("KeyFrag", <QuestItemModel>{
+        new CommonItemBase("KeyFrag", <QuestItemModel>{
                 "internalID": "KeyFrag",
                 "displayName": "Keychain Fragment",
                 "sellPrice": 1,
@@ -21985,7 +21985,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Spice0", <QuestItemModel>{
+        new CommonItemBase("Spice0", <QuestItemModel>{
                 "internalID": "Spice0",
                 "displayName": "Spice",
                 "sellPrice": 1,
@@ -22002,7 +22002,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Spice6", <QuestItemModel>{
+        new CommonItemBase("Spice6", <QuestItemModel>{
                 "internalID": "Spice6",
                 "displayName": "Spice",
                 "sellPrice": 1,
@@ -22019,7 +22019,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Spice9", <QuestItemModel>{
+        new CommonItemBase("Spice9", <QuestItemModel>{
                 "internalID": "Spice9",
                 "displayName": "Strung Jewels",
                 "sellPrice": 1,
@@ -22036,7 +22036,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Tree7D", <QuestItemModel>{
+        new CommonItemBase("Tree7D", <QuestItemModel>{
                 "internalID": "Tree7D",
                 "displayName": "Wispy Tree Log",
                 "sellPrice": 100,
@@ -22053,7 +22053,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("PlatD", <QuestItemModel>{
+        new CommonItemBase("PlatD", <QuestItemModel>{
                 "internalID": "PlatD",
                 "displayName": "Platinum Ore",
                 "sellPrice": 100,
@@ -22070,7 +22070,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Fish1D", <QuestItemModel>{
+        new CommonItemBase("Fish1D", <QuestItemModel>{
                 "internalID": "Fish1D",
                 "displayName": "Goldfish",
                 "sellPrice": 100,
@@ -22087,7 +22087,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Fish3D", <QuestItemModel>{
+        new CommonItemBase("Fish3D", <QuestItemModel>{
                 "internalID": "Fish3D",
                 "displayName": "Jellyfish",
                 "sellPrice": 100,
@@ -22104,7 +22104,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Cashb", <QuestItemModel>{
+        new CommonItemBase("Cashb", <QuestItemModel>{
                 "internalID": "Cashb",
                 "displayName": "Ice Dollar",
                 "sellPrice": 1,
@@ -22121,7 +22121,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Dung3Ice", <QuestItemModel>{
+        new CommonItemBase("Dung3Ice", <QuestItemModel>{
                 "internalID": "Dung3Ice",
                 "displayName": "Basement Cube",
                 "sellPrice": 1,
@@ -22138,7 +22138,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Chiz0", <QuestItemModel>{
+        new CommonItemBase("Chiz0", <QuestItemModel>{
                 "internalID": "Chiz0",
                 "displayName": "Chizoar Spike",
                 "sellPrice": 1,
@@ -22155,7 +22155,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Chiz1", <QuestItemModel>{
+        new CommonItemBase("Chiz1", <QuestItemModel>{
                 "internalID": "Chiz1",
                 "displayName": "Chizoar Stalagmite",
                 "sellPrice": 1,
@@ -22172,7 +22172,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DungCredits1", <QuestItemModel>{
+        new CommonItemBase("DungCredits1", <QuestItemModel>{
                 "internalID": "DungCredits1",
                 "displayName": "Dungeon Credits",
                 "sellPrice": 1,
@@ -22189,7 +22189,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("LootDice", <QuestItemModel>{
+        new CommonItemBase("LootDice", <QuestItemModel>{
                 "internalID": "LootDice",
                 "displayName": "Loot Dice",
                 "sellPrice": 1,
@@ -22206,7 +22206,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Ladle", <QuestItemModel>{
+        new CommonItemBase("Ladle", <QuestItemModel>{
                 "internalID": "Ladle",
                 "displayName": "Cooking Ladle",
                 "sellPrice": 1,
@@ -22223,7 +22223,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("PetEgg", <QuestItemModel>{
+        new CommonItemBase("PetEgg", <QuestItemModel>{
                 "internalID": "PetEgg",
                 "displayName": "Pet Egg",
                 "sellPrice": 1,
@@ -22240,7 +22240,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Genetic0", <QuestItemModel>{
+        new CommonItemBase("Genetic0", <QuestItemModel>{
                 "internalID": "Genetic0",
                 "displayName": "Grassy Gene Spiral",
                 "sellPrice": 1,
@@ -22257,7 +22257,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Genetic1", <QuestItemModel>{
+        new CommonItemBase("Genetic1", <QuestItemModel>{
                 "internalID": "Genetic1",
                 "displayName": "YumYumy Gene Spiral",
                 "sellPrice": 1,
@@ -22274,7 +22274,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Genetic2", <QuestItemModel>{
+        new CommonItemBase("Genetic2", <QuestItemModel>{
                 "internalID": "Genetic2",
                 "displayName": "Tundric Gene Spiral",
                 "sellPrice": 1,
@@ -22291,7 +22291,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Genetic3", <QuestItemModel>{
+        new CommonItemBase("Genetic3", <QuestItemModel>{
                 "internalID": "Genetic3",
                 "displayName": "Nebulous Gene Spiral",
                 "sellPrice": 1,
@@ -22308,7 +22308,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("GalaxyA1", <QuestItemModel>{
+        new CommonItemBase("GalaxyA1", <QuestItemModel>{
                 "internalID": "GalaxyA1",
                 "displayName": "Purple Mush Cap",
                 "sellPrice": 100,
@@ -22325,7 +22325,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("GalaxyA2", <QuestItemModel>{
+        new CommonItemBase("GalaxyA2", <QuestItemModel>{
                 "internalID": "GalaxyA2",
                 "displayName": "TV Remote",
                 "sellPrice": 120,
@@ -22342,7 +22342,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("GalaxyA2b", <QuestItemModel>{
+        new CommonItemBase("GalaxyA2b", <QuestItemModel>{
                 "internalID": "GalaxyA2b",
                 "displayName": "Lost Batteries",
                 "sellPrice": 150,
@@ -22359,7 +22359,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("GalaxyA3", <QuestItemModel>{
+        new CommonItemBase("GalaxyA3", <QuestItemModel>{
                 "internalID": "GalaxyA3",
                 "displayName": "Half Eaten Donut",
                 "sellPrice": 200,
@@ -22376,7 +22376,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("GalaxyA4", <QuestItemModel>{
+        new CommonItemBase("GalaxyA4", <QuestItemModel>{
                 "internalID": "GalaxyA4",
                 "displayName": "Genie Lamp",
                 "sellPrice": 275,
@@ -22393,7 +22393,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("GalaxyB1", <QuestItemModel>{
+        new CommonItemBase("GalaxyB1", <QuestItemModel>{
                 "internalID": "GalaxyB1",
                 "displayName": "Bottle Cap",
                 "sellPrice": 375,
@@ -22410,7 +22410,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("GalaxyB2", <QuestItemModel>{
+        new CommonItemBase("GalaxyB2", <QuestItemModel>{
                 "internalID": "GalaxyB2",
                 "displayName": "Wurm Tail",
                 "sellPrice": 500,
@@ -22427,7 +22427,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("GalaxyB3", <QuestItemModel>{
+        new CommonItemBase("GalaxyB3", <QuestItemModel>{
                 "internalID": "GalaxyB3",
                 "displayName": "Tongue Bone",
                 "sellPrice": 700,
@@ -22444,7 +22444,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("GalaxyB4", <QuestItemModel>{
+        new CommonItemBase("GalaxyB4", <QuestItemModel>{
                 "internalID": "GalaxyB4",
                 "displayName": "Crumpled Wrapper",
                 "sellPrice": 1000,
@@ -22461,7 +22461,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("GalaxyB5", <QuestItemModel>{
+        new CommonItemBase("GalaxyB5", <QuestItemModel>{
                 "internalID": "GalaxyB5",
                 "displayName": "Smol Worm",
                 "sellPrice": 1250,
@@ -22478,7 +22478,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("GalaxyC1", <QuestItemModel>{
+        new CommonItemBase("GalaxyC1", <QuestItemModel>{
                 "internalID": "GalaxyC1",
                 "displayName": "Empty Oyster Shell",
                 "sellPrice": 1700,
@@ -22495,7 +22495,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("GalaxyC1b", <QuestItemModel>{
+        new CommonItemBase("GalaxyC1b", <QuestItemModel>{
                 "internalID": "GalaxyC1b",
                 "displayName": "Pealer Shell",
                 "sellPrice": 3000,
@@ -22512,7 +22512,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("GalaxyC2", <QuestItemModel>{
+        new CommonItemBase("GalaxyC2", <QuestItemModel>{
                 "internalID": "GalaxyC2",
                 "displayName": "Wriggly Ball",
                 "sellPrice": 4000,
@@ -22529,7 +22529,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("GalaxyC3", <QuestItemModel>{
+        new CommonItemBase("GalaxyC3", <QuestItemModel>{
                 "internalID": "GalaxyC3",
                 "displayName": "Gel Chunk",
                 "sellPrice": 5500,
@@ -22546,7 +22546,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("GalaxyC4", <QuestItemModel>{
+        new CommonItemBase("GalaxyC4", <QuestItemModel>{
                 "internalID": "GalaxyC4",
                 "displayName": "Condensed Zap",
                 "sellPrice": 7500,
@@ -22563,7 +22563,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentSword4", <EquipItemModel>{
+        new CommonItemBase("EquipmentSword4", <EquipItemModel>{
                 "internalID": "EquipmentSword4",
                 "displayName": "Slimsharp Fin",
                 "sellPrice": 26000,
@@ -22587,7 +22587,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentSword5", <EquipItemModel>{
+        new CommonItemBase("EquipmentSword5", <EquipItemModel>{
                 "internalID": "EquipmentSword5",
                 "displayName": "Diabolical Flesh",
                 "sellPrice": 26000,
@@ -22611,7 +22611,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 6,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentBows9", <EquipItemModel>{
+        new CommonItemBase("EquipmentBows9", <EquipItemModel>{
                 "internalID": "EquipmentBows9",
                 "displayName": "Shardsure Leif",
                 "sellPrice": 15000,
@@ -22635,7 +22635,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentBows10", <EquipItemModel>{
+        new CommonItemBase("EquipmentBows10", <EquipItemModel>{
                 "internalID": "EquipmentBows10",
                 "displayName": "Diabolical Continuit",
                 "sellPrice": 15000,
@@ -22659,7 +22659,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 6,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentWands8", <EquipItemModel>{
+        new CommonItemBase("EquipmentWands8", <EquipItemModel>{
                 "internalID": "EquipmentWands8",
                 "displayName": "Skullslip Hallow",
                 "sellPrice": 200,
@@ -22683,7 +22683,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentWands9", <EquipItemModel>{
+        new CommonItemBase("EquipmentWands9", <EquipItemModel>{
                 "internalID": "EquipmentWands9",
                 "displayName": "Diabolical Opticule",
                 "sellPrice": 200,
@@ -22707,7 +22707,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 6,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentHats68", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats68", <EquipItemModel>{
                 "internalID": "EquipmentHats68",
                 "displayName": "Chizoar Helmet",
                 "sellPrice": 1,
@@ -22731,7 +22731,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 7
             }),
-        new EquipItemBase("EquipmentHats69", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats69", <EquipItemModel>{
                 "internalID": "EquipmentHats69",
                 "displayName": "Giftmas Snoozy Cap",
                 "sellPrice": 1,
@@ -22755,7 +22755,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentHats70", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats70", <EquipItemModel>{
                 "internalID": "EquipmentHats70",
                 "displayName": "Lustre Veil",
                 "sellPrice": 1,
@@ -22779,7 +22779,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 6
             }),
-        new EquipItemBase("EquipmentHats71", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats71", <EquipItemModel>{
                 "internalID": "EquipmentHats71",
                 "displayName": "Diabolical Headcase",
                 "sellPrice": 1,
@@ -22803,7 +22803,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 8
             }),
-        new EquipItemBase("EquipmentHats72", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats72", <EquipItemModel>{
                 "internalID": "EquipmentHats72",
                 "displayName": "Nondescript Game Show Host Hair",
                 "sellPrice": 1,
@@ -22827,7 +22827,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 8
             }),
-        new EquipItemBase("EquipmentHats73", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats73", <EquipItemModel>{
                 "internalID": "EquipmentHats73",
                 "displayName": "Real Civil Engineer Helmet",
                 "sellPrice": 1,
@@ -22851,7 +22851,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentShirts6", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts6", <EquipItemModel>{
                 "internalID": "EquipmentShirts6",
                 "displayName": "Chizoar Bodyplate",
                 "sellPrice": 200,
@@ -22875,7 +22875,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 3,
                 "Upgrade_Slots_Left": 6
             }),
-        new EquipItemBase("EquipmentShirts32", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts32", <EquipItemModel>{
                 "internalID": "EquipmentShirts32",
                 "displayName": "Lustre Chestplate",
                 "sellPrice": 200,
@@ -22899,7 +22899,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 6
             }),
-        new EquipItemBase("EquipmentShirts33", <EquipItemModel>{
+        new CommonItemBase("EquipmentShirts33", <EquipItemModel>{
                 "internalID": "EquipmentShirts33",
                 "displayName": "Diabolical Abdomen",
                 "sellPrice": 200,
@@ -22923,7 +22923,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 7
             }),
-        new EquipItemBase("EquipmentPants9", <EquipItemModel>{
+        new CommonItemBase("EquipmentPants9", <EquipItemModel>{
                 "internalID": "EquipmentPants9",
                 "displayName": "Chizoar Scaled Leggings",
                 "sellPrice": 200,
@@ -22947,7 +22947,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 6
             }),
-        new EquipItemBase("EquipmentPants24", <EquipItemModel>{
+        new CommonItemBase("EquipmentPants24", <EquipItemModel>{
                 "internalID": "EquipmentPants24",
                 "displayName": "Lustre Scales",
                 "sellPrice": 200,
@@ -22971,7 +22971,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 6
             }),
-        new EquipItemBase("EquipmentPants25", <EquipItemModel>{
+        new CommonItemBase("EquipmentPants25", <EquipItemModel>{
                 "internalID": "EquipmentPants25",
                 "displayName": "Diabolical Trimed Leg Guards",
                 "sellPrice": 200,
@@ -22995,7 +22995,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 7
             }),
-        new EquipItemBase("EquipmentShoes23", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes23", <EquipItemModel>{
                 "internalID": "EquipmentShoes23",
                 "displayName": "Chizoar Walkers",
                 "sellPrice": 200,
@@ -23019,7 +23019,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentShoes24", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes24", <EquipItemModel>{
                 "internalID": "EquipmentShoes24",
                 "displayName": "Lustre Shieldshoe",
                 "sellPrice": 200,
@@ -23043,7 +23043,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentShoes25", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes25", <EquipItemModel>{
                 "internalID": "EquipmentShoes25",
                 "displayName": "Diabolical Toe Tips",
                 "sellPrice": 200,
@@ -23067,7 +23067,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 6
             }),
-        new EquipItemBase("EquipmentShoes26", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes26", <EquipItemModel>{
                 "internalID": "EquipmentShoes26",
                 "displayName": "Rough Rockers",
                 "sellPrice": 3000,
@@ -23091,7 +23091,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentShoes27", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes27", <EquipItemModel>{
                 "internalID": "EquipmentShoes27",
                 "displayName": "Fiberous Footings",
                 "sellPrice": 3000,
@@ -23115,7 +23115,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentShoes28", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes28", <EquipItemModel>{
                 "internalID": "EquipmentShoes28",
                 "displayName": "Deep Sea Galoshes",
                 "sellPrice": 3000,
@@ -23139,7 +23139,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentShoes29", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes29", <EquipItemModel>{
                 "internalID": "EquipmentShoes29",
                 "displayName": "Spaggy Westerados",
                 "sellPrice": 3000,
@@ -23163,7 +23163,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentShoes30", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes30", <EquipItemModel>{
                 "internalID": "EquipmentShoes30",
                 "displayName": "Cooking Clogs",
                 "sellPrice": 3000,
@@ -23187,7 +23187,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentShoes31", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes31", <EquipItemModel>{
                 "internalID": "EquipmentShoes31",
                 "displayName": "Chef Hat Shoes",
                 "sellPrice": 3000,
@@ -23211,7 +23211,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentShoes32", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes32", <EquipItemModel>{
                 "internalID": "EquipmentShoes32",
                 "displayName": "Laboratory Scrubs",
                 "sellPrice": 3000,
@@ -23235,7 +23235,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentShoes33", <EquipItemModel>{
+        new CommonItemBase("EquipmentShoes33", <EquipItemModel>{
                 "internalID": "EquipmentShoes33",
                 "displayName": "Sheek Scrubs",
                 "sellPrice": 3000,
@@ -23259,7 +23259,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentPendant24", <EquipItemModel>{
+        new CommonItemBase("EquipmentPendant24", <EquipItemModel>{
                 "internalID": "EquipmentPendant24",
                 "displayName": "Chizoars Blankie",
                 "sellPrice": 1,
@@ -23283,7 +23283,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 3,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentPendant25", <EquipItemModel>{
+        new CommonItemBase("EquipmentPendant25", <EquipItemModel>{
                 "internalID": "EquipmentPendant25",
                 "displayName": "Chizoars Caustic Scarf",
                 "sellPrice": 1,
@@ -23307,7 +23307,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 5,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("EquipmentPendant26", <EquipItemModel>{
+        new CommonItemBase("EquipmentPendant26", <EquipItemModel>{
                 "internalID": "EquipmentPendant26",
                 "displayName": "Polished Bludgeon",
                 "sellPrice": 10000,
@@ -23331,7 +23331,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentPendant27", <EquipItemModel>{
+        new CommonItemBase("EquipmentPendant27", <EquipItemModel>{
                 "internalID": "EquipmentPendant27",
                 "displayName": "Skullfish Pendant",
                 "sellPrice": 1,
@@ -23355,7 +23355,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 40,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentRings23", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings23", <EquipItemModel>{
                 "internalID": "EquipmentRings23",
                 "displayName": "Neutron Ice Ring",
                 "sellPrice": 1,
@@ -23379,7 +23379,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentRings24", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings24", <EquipItemModel>{
                 "internalID": "EquipmentRings24",
                 "displayName": "Lab Ring",
                 "sellPrice": 1,
@@ -23403,7 +23403,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 15,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentRings25", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings25", <EquipItemModel>{
                 "internalID": "EquipmentRings25",
                 "displayName": "Chef Ring",
                 "sellPrice": 1,
@@ -23427,7 +23427,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 15,
                 "Upgrade_Slots_Left": 2
             }),
-        new EquipItemBase("EquipmentRings26", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings26", <EquipItemModel>{
                 "internalID": "EquipmentRings26",
                 "displayName": "Serrated Rex Ring",
                 "sellPrice": 1,
@@ -23451,7 +23451,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentRings27", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings27", <EquipItemModel>{
                 "internalID": "EquipmentRings27",
                 "displayName": "Protectors Pride",
                 "sellPrice": 5000,
@@ -23475,7 +23475,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentRings28", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings28", <EquipItemModel>{
                 "internalID": "EquipmentRings28",
                 "displayName": "Midnight Stopwatch",
                 "sellPrice": 5000,
@@ -23499,7 +23499,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 3,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentRings29", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings29", <EquipItemModel>{
                 "internalID": "EquipmentRings29",
                 "displayName": "Dawn Stopwatch",
                 "sellPrice": 5000,
@@ -23523,7 +23523,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 1,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentRings30", <EquipItemModel>{
+        new CommonItemBase("EquipmentRings30", <EquipItemModel>{
                 "internalID": "EquipmentRings30",
                 "displayName": "Souped Lab Ring",
                 "sellPrice": 1,
@@ -23547,7 +23547,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 35,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("EquipmentCape0", <EquipItemModel>{
+        new CommonItemBase("EquipmentCape0", <EquipItemModel>{
                 "internalID": "EquipmentCape0",
                 "displayName": "Angel Wings",
                 "sellPrice": 1,
@@ -23571,7 +23571,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentCape1", <EquipItemModel>{
+        new CommonItemBase("EquipmentCape1", <EquipItemModel>{
                 "internalID": "EquipmentCape1",
                 "displayName": "Lava Wings",
                 "sellPrice": 1,
@@ -23595,7 +23595,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 100,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentCape2", <EquipItemModel>{
+        new CommonItemBase("EquipmentCape2", <EquipItemModel>{
                 "internalID": "EquipmentCape2",
                 "displayName": "Easter Egg Backpack",
                 "sellPrice": 1,
@@ -23619,7 +23619,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentCape3", <EquipItemModel>{
+        new CommonItemBase("EquipmentCape3", <EquipItemModel>{
                 "internalID": "EquipmentCape3",
                 "displayName": "Radiant Amarok Backstabber",
                 "sellPrice": 1,
@@ -23643,7 +23643,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentCape4", <EquipItemModel>{
+        new CommonItemBase("EquipmentCape4", <EquipItemModel>{
                 "internalID": "EquipmentCape4",
                 "displayName": "Gilded Efaunt Dislodged Tusks",
                 "sellPrice": 1,
@@ -23667,7 +23667,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentCape5", <EquipItemModel>{
+        new CommonItemBase("EquipmentCape5", <EquipItemModel>{
                 "internalID": "EquipmentCape5",
                 "displayName": "Blighted Chizoar Shard Cape",
                 "sellPrice": 1,
@@ -23691,7 +23691,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("WorshipSkull8", <EquipItemModel>{
+        new CommonItemBase("WorshipSkull8", <EquipItemModel>{
                 "internalID": "WorshipSkull8",
                 "displayName": "Slush Skull",
                 "sellPrice": 100,
@@ -23715,7 +23715,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 2,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DNAgun0", <EquipItemModel>{
+        new CommonItemBase("DNAgun0", <EquipItemModel>{
                 "internalID": "DNAgun0",
                 "displayName": "Sappy DNA Splicer",
                 "sellPrice": 6000000,
@@ -23739,7 +23739,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("DNAgun1", <EquipItemModel>{
+        new CommonItemBase("DNAgun1", <EquipItemModel>{
                 "internalID": "DNAgun1",
                 "displayName": "Bolstered DNA Splicer",
                 "sellPrice": 10000,
@@ -23763,7 +23763,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
             }),
-        new EquipItemBase("DNAgun2", <EquipItemModel>{
+        new CommonItemBase("DNAgun2", <EquipItemModel>{
                 "internalID": "DNAgun2",
                 "displayName": "Double Barreled DNA Splicer",
                 "sellPrice": 10000,
@@ -23787,7 +23787,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("DNAgun3", <EquipItemModel>{
+        new CommonItemBase("DNAgun3", <EquipItemModel>{
                 "internalID": "DNAgun3",
                 "displayName": "Ergonomic DNA Splicer",
                 "sellPrice": 10000,
@@ -23811,7 +23811,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 4
             }),
-        new EquipItemBase("Refinery1", <QuestItemModel>{
+        new CommonItemBase("Refinery1", <QuestItemModel>{
                 "internalID": "Refinery1",
                 "displayName": "Redox Salts",
                 "sellPrice": 100,
@@ -23828,7 +23828,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Refinery2", <QuestItemModel>{
+        new CommonItemBase("Refinery2", <QuestItemModel>{
                 "internalID": "Refinery2",
                 "displayName": "Explosive Salts",
                 "sellPrice": 100,
@@ -23845,7 +23845,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Refinery3", <QuestItemModel>{
+        new CommonItemBase("Refinery3", <QuestItemModel>{
                 "internalID": "Refinery3",
                 "displayName": "Spontaneity Salts",
                 "sellPrice": 100,
@@ -23862,7 +23862,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Refinery4", <QuestItemModel>{
+        new CommonItemBase("Refinery4", <QuestItemModel>{
                 "internalID": "Refinery4",
                 "displayName": "Dioxide Synthesis",
                 "sellPrice": 100,
@@ -23879,7 +23879,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Refinery5", <QuestItemModel>{
+        new CommonItemBase("Refinery5", <QuestItemModel>{
                 "internalID": "Refinery5",
                 "displayName": "Purple Salt",
                 "sellPrice": 100,
@@ -23896,7 +23896,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Refinery6", <QuestItemModel>{
+        new CommonItemBase("Refinery6", <QuestItemModel>{
                 "internalID": "Refinery6",
                 "displayName": "Nullo Salt",
                 "sellPrice": 100,
@@ -23913,7 +23913,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CraftMat1", <QuestItemModel>{
+        new CommonItemBase("CraftMat1", <QuestItemModel>{
                 "internalID": "CraftMat1",
                 "displayName": "Thread",
                 "sellPrice": 3,
@@ -23930,7 +23930,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CraftMat2", <QuestItemModel>{
+        new CommonItemBase("CraftMat2", <QuestItemModel>{
                 "internalID": "CraftMat2",
                 "displayName": "Crimson String",
                 "sellPrice": 1,
@@ -23947,7 +23947,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CraftMat3", <QuestItemModel>{
+        new CommonItemBase("CraftMat3", <QuestItemModel>{
                 "internalID": "CraftMat3",
                 "displayName": "Cue Tape",
                 "sellPrice": 3,
@@ -23964,7 +23964,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CraftMat5", <QuestItemModel>{
+        new CommonItemBase("CraftMat5", <QuestItemModel>{
                 "internalID": "CraftMat5",
                 "displayName": "Trusty Nails",
                 "sellPrice": 12,
@@ -23981,7 +23981,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CraftMat6", <QuestItemModel>{
+        new CommonItemBase("CraftMat6", <QuestItemModel>{
                 "internalID": "CraftMat6",
                 "displayName": "Boring Brick",
                 "sellPrice": 25,
@@ -23998,7 +23998,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CraftMat7", <QuestItemModel>{
+        new CommonItemBase("CraftMat7", <QuestItemModel>{
                 "internalID": "CraftMat7",
                 "displayName": "Chain Link",
                 "sellPrice": 40,
@@ -24015,7 +24015,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CraftMat9", <QuestItemModel>{
+        new CommonItemBase("CraftMat9", <QuestItemModel>{
                 "internalID": "CraftMat9",
                 "displayName": "Leather Hide",
                 "sellPrice": 60,
@@ -24032,7 +24032,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CraftMat8", <QuestItemModel>{
+        new CommonItemBase("CraftMat8", <QuestItemModel>{
                 "internalID": "CraftMat8",
                 "displayName": "Pinion Spur",
                 "sellPrice": 80,
@@ -24049,7 +24049,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CraftMat10", <QuestItemModel>{
+        new CommonItemBase("CraftMat10", <QuestItemModel>{
                 "internalID": "CraftMat10",
                 "displayName": "Lugi Bracket",
                 "sellPrice": 100,
@@ -24066,7 +24066,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CraftMat11", <QuestItemModel>{
+        new CommonItemBase("CraftMat11", <QuestItemModel>{
                 "internalID": "CraftMat11",
                 "displayName": "Purple Screw",
                 "sellPrice": 120,
@@ -24083,7 +24083,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CraftMat12", <QuestItemModel>{
+        new CommonItemBase("CraftMat12", <QuestItemModel>{
                 "internalID": "CraftMat12",
                 "displayName": "Thingymabob",
                 "sellPrice": 1,
@@ -24100,7 +24100,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CraftMat13", <QuestItemModel>{
+        new CommonItemBase("CraftMat13", <QuestItemModel>{
                 "internalID": "CraftMat13",
                 "displayName": "Tangled Cords",
                 "sellPrice": 1,
@@ -24117,7 +24117,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CraftMat14", <QuestItemModel>{
+        new CommonItemBase("CraftMat14", <QuestItemModel>{
                 "internalID": "CraftMat14",
                 "displayName": "PVC Pipe",
                 "sellPrice": 1,
@@ -24134,7 +24134,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CraftMat15", <QuestItemModel>{
+        new CommonItemBase("CraftMat15", <QuestItemModel>{
                 "internalID": "CraftMat15",
                 "displayName": "Filler",
                 "sellPrice": 1,
@@ -24151,7 +24151,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CraftMat16", <QuestItemModel>{
+        new CommonItemBase("CraftMat16", <QuestItemModel>{
                 "internalID": "CraftMat16",
                 "displayName": "Filler",
                 "sellPrice": 1,
@@ -24168,7 +24168,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CraftMat17", <QuestItemModel>{
+        new CommonItemBase("CraftMat17", <QuestItemModel>{
                 "internalID": "CraftMat17",
                 "displayName": "Filler",
                 "sellPrice": 1,
@@ -24185,7 +24185,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken8", <QuestItemModel>{
+        new CommonItemBase("NPCtoken8", <QuestItemModel>{
                 "internalID": "NPCtoken8",
                 "displayName": "FILLER",
                 "sellPrice": 1000,
@@ -24202,7 +24202,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("BadgeG1", <QuestItemModel>{
+        new CommonItemBase("BadgeG1", <QuestItemModel>{
                 "internalID": "BadgeG1",
                 "displayName": "Blunderhills NPC Completion Token",
                 "sellPrice": 30000,
@@ -24219,7 +24219,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("BadgeG2", <QuestItemModel>{
+        new CommonItemBase("BadgeG2", <QuestItemModel>{
                 "internalID": "BadgeG2",
                 "displayName": "Blunder Skills Completion Token",
                 "sellPrice": 25000,
@@ -24236,7 +24236,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("BadgeG3", <QuestItemModel>{
+        new CommonItemBase("BadgeG3", <QuestItemModel>{
                 "internalID": "BadgeG3",
                 "displayName": "Blunderhills Misc Completion Token",
                 "sellPrice": 1,
@@ -24253,7 +24253,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("BadgeD1", <QuestItemModel>{
+        new CommonItemBase("BadgeD1", <QuestItemModel>{
                 "internalID": "BadgeD1",
                 "displayName": "Yumyum Desert NPC Completion Token",
                 "sellPrice": 30000,
@@ -24270,7 +24270,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("BadgeD2", <QuestItemModel>{
+        new CommonItemBase("BadgeD2", <QuestItemModel>{
                 "internalID": "BadgeD2",
                 "displayName": "Yumyum Skills Completion Token",
                 "sellPrice": 25000,
@@ -24287,7 +24287,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("BadgeD3", <QuestItemModel>{
+        new CommonItemBase("BadgeD3", <QuestItemModel>{
                 "internalID": "BadgeD3",
                 "displayName": "Yumyum Misc Completion Token",
                 "sellPrice": 1,
@@ -24304,7 +24304,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken1", <QuestItemModel>{
+        new CommonItemBase("NPCtoken1", <QuestItemModel>{
                 "internalID": "NPCtoken1",
                 "displayName": "Easy Blunderhills NPC Token",
                 "sellPrice": 2800,
@@ -24321,7 +24321,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken2", <QuestItemModel>{
+        new CommonItemBase("NPCtoken2", <QuestItemModel>{
                 "internalID": "NPCtoken2",
                 "displayName": "Med Blunderhills NPC Token",
                 "sellPrice": 6000,
@@ -24338,7 +24338,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken3", <QuestItemModel>{
+        new CommonItemBase("NPCtoken3", <QuestItemModel>{
                 "internalID": "NPCtoken3",
                 "displayName": "Hard Blunderhills NPC Token",
                 "sellPrice": 16000,
@@ -24355,7 +24355,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken5", <QuestItemModel>{
+        new CommonItemBase("NPCtoken5", <QuestItemModel>{
                 "internalID": "NPCtoken5",
                 "displayName": "Woodsman Token",
                 "sellPrice": 700,
@@ -24372,7 +24372,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken6", <QuestItemModel>{
+        new CommonItemBase("NPCtoken6", <QuestItemModel>{
                 "internalID": "NPCtoken6",
                 "displayName": "Glumlee Token",
                 "sellPrice": 700,
@@ -24389,7 +24389,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken4", <QuestItemModel>{
+        new CommonItemBase("NPCtoken4", <QuestItemModel>{
                 "internalID": "NPCtoken4",
                 "displayName": "Stiltzcho Token",
                 "sellPrice": 700,
@@ -24406,7 +24406,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken9", <QuestItemModel>{
+        new CommonItemBase("NPCtoken9", <QuestItemModel>{
                 "internalID": "NPCtoken9",
                 "displayName": "Funguy Token",
                 "sellPrice": 1500,
@@ -24423,7 +24423,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken10", <QuestItemModel>{
+        new CommonItemBase("NPCtoken10", <QuestItemModel>{
                 "internalID": "NPCtoken10",
                 "displayName": "Krunk Token",
                 "sellPrice": 1500,
@@ -24440,7 +24440,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken11", <QuestItemModel>{
+        new CommonItemBase("NPCtoken11", <QuestItemModel>{
                 "internalID": "NPCtoken11",
                 "displayName": "Tiki Chief Token",
                 "sellPrice": 1500,
@@ -24457,7 +24457,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken13", <QuestItemModel>{
+        new CommonItemBase("NPCtoken13", <QuestItemModel>{
                 "internalID": "NPCtoken13",
                 "displayName": "Dog Bone Token",
                 "sellPrice": 4000,
@@ -24474,7 +24474,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken7", <QuestItemModel>{
+        new CommonItemBase("NPCtoken7", <QuestItemModel>{
                 "internalID": "NPCtoken7",
                 "displayName": "Papua Piggea Token",
                 "sellPrice": 700,
@@ -24491,7 +24491,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Quest9", <QuestItemModel>{
+        new CommonItemBase("Quest9", <QuestItemModel>{
                 "internalID": "Quest9",
                 "displayName": "Picnic Token",
                 "sellPrice": 1,
@@ -24508,7 +24508,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken15", <QuestItemModel>{
+        new CommonItemBase("NPCtoken15", <QuestItemModel>{
                 "internalID": "NPCtoken15",
                 "displayName": "TP Pete Token",
                 "sellPrice": 4000,
@@ -24525,7 +24525,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken12", <QuestItemModel>{
+        new CommonItemBase("NPCtoken12", <QuestItemModel>{
                 "internalID": "NPCtoken12",
                 "displayName": "Sproutinald Token",
                 "sellPrice": 4000,
@@ -24542,7 +24542,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken14", <QuestItemModel>{
+        new CommonItemBase("NPCtoken14", <QuestItemModel>{
                 "internalID": "NPCtoken14",
                 "displayName": "Dazey Token",
                 "sellPrice": 4000,
@@ -24559,7 +24559,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken16", <QuestItemModel>{
+        new CommonItemBase("NPCtoken16", <QuestItemModel>{
                 "internalID": "NPCtoken16",
                 "displayName": "Bandit Bob Token",
                 "sellPrice": 4000,
@@ -24576,7 +24576,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken17", <QuestItemModel>{
+        new CommonItemBase("NPCtoken17", <QuestItemModel>{
                 "internalID": "NPCtoken17",
                 "displayName": "Snake Jar Token",
                 "sellPrice": 4000,
@@ -24593,7 +24593,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken18", <QuestItemModel>{
+        new CommonItemBase("NPCtoken18", <QuestItemModel>{
                 "internalID": "NPCtoken18",
                 "displayName": "Whattso Token",
                 "sellPrice": 4000,
@@ -24610,7 +24610,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken19", <QuestItemModel>{
+        new CommonItemBase("NPCtoken19", <QuestItemModel>{
                 "internalID": "NPCtoken19",
                 "displayName": "Cowbo Jones Token",
                 "sellPrice": 4000,
@@ -24627,7 +24627,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken20", <QuestItemModel>{
+        new CommonItemBase("NPCtoken20", <QuestItemModel>{
                 "internalID": "NPCtoken20",
                 "displayName": "Carpetiem Token",
                 "sellPrice": 4000,
@@ -24644,7 +24644,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken21", <QuestItemModel>{
+        new CommonItemBase("NPCtoken21", <QuestItemModel>{
                 "internalID": "NPCtoken21",
                 "displayName": "Goldric Token",
                 "sellPrice": 4000,
@@ -24661,7 +24661,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken27", <QuestItemModel>{
+        new CommonItemBase("NPCtoken27", <QuestItemModel>{
                 "internalID": "NPCtoken27",
                 "displayName": "Cattleprod Token",
                 "sellPrice": 155000,
@@ -24678,7 +24678,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken22", <QuestItemModel>{
+        new CommonItemBase("NPCtoken22", <QuestItemModel>{
                 "internalID": "NPCtoken22",
                 "displayName": "Fishpaste Token",
                 "sellPrice": 4000,
@@ -24695,7 +24695,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken24", <QuestItemModel>{
+        new CommonItemBase("NPCtoken24", <QuestItemModel>{
                 "internalID": "NPCtoken24",
                 "displayName": "Loominadi Token",
                 "sellPrice": 4000,
@@ -24712,7 +24712,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken25", <QuestItemModel>{
+        new CommonItemBase("NPCtoken25", <QuestItemModel>{
                 "internalID": "NPCtoken25",
                 "displayName": "Djonnut Token",
                 "sellPrice": 4000,
@@ -24729,7 +24729,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken26", <QuestItemModel>{
+        new CommonItemBase("NPCtoken26", <QuestItemModel>{
                 "internalID": "NPCtoken26",
                 "displayName": "Scubidew Token",
                 "sellPrice": 4000,
@@ -24746,7 +24746,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken23", <QuestItemModel>{
+        new CommonItemBase("NPCtoken23", <QuestItemModel>{
                 "internalID": "NPCtoken23",
                 "displayName": "Wellington Token",
                 "sellPrice": 4000,
@@ -24763,7 +24763,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken28", <QuestItemModel>{
+        new CommonItemBase("NPCtoken28", <QuestItemModel>{
                 "internalID": "NPCtoken28",
                 "displayName": "Easy Yumyum Dez NPC Token",
                 "sellPrice": 2800,
@@ -24780,7 +24780,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken29", <QuestItemModel>{
+        new CommonItemBase("NPCtoken29", <QuestItemModel>{
                 "internalID": "NPCtoken29",
                 "displayName": "Med Yumyum Dez NPC Token",
                 "sellPrice": 6000,
@@ -24797,7 +24797,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken30", <QuestItemModel>{
+        new CommonItemBase("NPCtoken30", <QuestItemModel>{
                 "internalID": "NPCtoken30",
                 "displayName": "Hard Yumyum Dez NPC Token",
                 "sellPrice": 16000,
@@ -24814,7 +24814,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken31", <QuestItemModel>{
+        new CommonItemBase("NPCtoken31", <QuestItemModel>{
                 "internalID": "NPCtoken31",
                 "displayName": "Lonely Hunter Token",
                 "sellPrice": 4000,
@@ -24831,7 +24831,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken32", <QuestItemModel>{
+        new CommonItemBase("NPCtoken32", <QuestItemModel>{
                 "internalID": "NPCtoken32",
                 "displayName": "Hoggi Token",
                 "sellPrice": 4000,
@@ -24848,7 +24848,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken33", <QuestItemModel>{
+        new CommonItemBase("NPCtoken33", <QuestItemModel>{
                 "internalID": "NPCtoken33",
                 "displayName": "Bellows Token",
                 "sellPrice": 4000,
@@ -24865,7 +24865,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken34", <QuestItemModel>{
+        new CommonItemBase("NPCtoken34", <QuestItemModel>{
                 "internalID": "NPCtoken34",
                 "displayName": "Snouts Token",
                 "sellPrice": 4000,
@@ -24882,7 +24882,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken35", <QuestItemModel>{
+        new CommonItemBase("NPCtoken35", <QuestItemModel>{
                 "internalID": "NPCtoken35",
                 "displayName": "Shuvelle Token",
                 "sellPrice": 4000,
@@ -24899,7 +24899,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken36", <QuestItemModel>{
+        new CommonItemBase("NPCtoken36", <QuestItemModel>{
                 "internalID": "NPCtoken36",
                 "displayName": "Yondergreen Token",
                 "sellPrice": 4000,
@@ -24916,7 +24916,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken37", <QuestItemModel>{
+        new CommonItemBase("NPCtoken37", <QuestItemModel>{
                 "internalID": "NPCtoken37",
                 "displayName": "Bill Brr Token",
                 "sellPrice": 4000,
@@ -24933,7 +24933,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken38", <QuestItemModel>{
+        new CommonItemBase("NPCtoken38", <QuestItemModel>{
                 "internalID": "NPCtoken38",
                 "displayName": "Crystalswine Token",
                 "sellPrice": 4000,
@@ -24950,7 +24950,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken39", <QuestItemModel>{
+        new CommonItemBase("NPCtoken39", <QuestItemModel>{
                 "internalID": "NPCtoken39",
                 "displayName": "Easy FB Tundra NPC Token",
                 "sellPrice": 2800,
@@ -24967,7 +24967,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken40", <QuestItemModel>{
+        new CommonItemBase("NPCtoken40", <QuestItemModel>{
                 "internalID": "NPCtoken40",
                 "displayName": "Med FB Tundra NPC Token",
                 "sellPrice": 6000,
@@ -24984,7 +24984,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("NPCtoken41", <QuestItemModel>{
+        new CommonItemBase("NPCtoken41", <QuestItemModel>{
                 "internalID": "NPCtoken41",
                 "displayName": "Hard FB Tundra NPC Token",
                 "sellPrice": 16000,
@@ -25001,7 +25001,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("BadgeI1", <QuestItemModel>{
+        new CommonItemBase("BadgeI1", <QuestItemModel>{
                 "internalID": "BadgeI1",
                 "displayName": "Tundra NPC Completion Token",
                 "sellPrice": 30000,
@@ -25018,7 +25018,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("BadgeI2", <QuestItemModel>{
+        new CommonItemBase("BadgeI2", <QuestItemModel>{
                 "internalID": "BadgeI2",
                 "displayName": "Tundra Skills Completion Token",
                 "sellPrice": 25000,
@@ -25035,7 +25035,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("BadgeI3", <QuestItemModel>{
+        new CommonItemBase("BadgeI3", <QuestItemModel>{
                 "internalID": "BadgeI3",
                 "displayName": "Tundra Misc Completion Token",
                 "sellPrice": 1,
@@ -25052,7 +25052,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentKeychain0", <EquipItemModel>{
+        new CommonItemBase("EquipmentKeychain0", <EquipItemModel>{
                 "internalID": "EquipmentKeychain0",
                 "displayName": "Simple Key Chain",
                 "sellPrice": 200,
@@ -25076,7 +25076,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentKeychain1", <EquipItemModel>{
+        new CommonItemBase("EquipmentKeychain1", <EquipItemModel>{
                 "internalID": "EquipmentKeychain1",
                 "displayName": "Leafy Chain",
                 "sellPrice": 200,
@@ -25100,7 +25100,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentKeychain2", <EquipItemModel>{
+        new CommonItemBase("EquipmentKeychain2", <EquipItemModel>{
                 "internalID": "EquipmentKeychain2",
                 "displayName": "Red Sneaker Chain",
                 "sellPrice": 200,
@@ -25124,7 +25124,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentKeychain3", <EquipItemModel>{
+        new CommonItemBase("EquipmentKeychain3", <EquipItemModel>{
                 "internalID": "EquipmentKeychain3",
                 "displayName": "Wartooth Chain",
                 "sellPrice": 200,
@@ -25148,7 +25148,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentKeychain4", <EquipItemModel>{
+        new CommonItemBase("EquipmentKeychain4", <EquipItemModel>{
                 "internalID": "EquipmentKeychain4",
                 "displayName": "8 Ball Chain",
                 "sellPrice": 200,
@@ -25172,7 +25172,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentKeychain5", <EquipItemModel>{
+        new CommonItemBase("EquipmentKeychain5", <EquipItemModel>{
                 "internalID": "EquipmentKeychain5",
                 "displayName": "Piggy Chain",
                 "sellPrice": 200,
@@ -25196,7 +25196,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentKeychain6", <EquipItemModel>{
+        new CommonItemBase("EquipmentKeychain6", <EquipItemModel>{
                 "internalID": "EquipmentKeychain6",
                 "displayName": "Dumbphone Chain",
                 "sellPrice": 200,
@@ -25220,7 +25220,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentKeychain7", <EquipItemModel>{
+        new CommonItemBase("EquipmentKeychain7", <EquipItemModel>{
                 "internalID": "EquipmentKeychain7",
                 "displayName": "Horn Chain",
                 "sellPrice": 200,
@@ -25244,7 +25244,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentKeychain8", <EquipItemModel>{
+        new CommonItemBase("EquipmentKeychain8", <EquipItemModel>{
                 "internalID": "EquipmentKeychain8",
                 "displayName": "Rustic Key Chain",
                 "sellPrice": 200,
@@ -25268,7 +25268,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentKeychain9", <EquipItemModel>{
+        new CommonItemBase("EquipmentKeychain9", <EquipItemModel>{
                 "internalID": "EquipmentKeychain9",
                 "displayName": "Taco Chain",
                 "sellPrice": 200,
@@ -25292,7 +25292,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentKeychain10", <EquipItemModel>{
+        new CommonItemBase("EquipmentKeychain10", <EquipItemModel>{
                 "internalID": "EquipmentKeychain10",
                 "displayName": "Cactus Chain",
                 "sellPrice": 200,
@@ -25316,7 +25316,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentKeychain11", <EquipItemModel>{
+        new CommonItemBase("EquipmentKeychain11", <EquipItemModel>{
                 "internalID": "EquipmentKeychain11",
                 "displayName": "Relic Chain",
                 "sellPrice": 200,
@@ -25340,7 +25340,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentKeychain12", <EquipItemModel>{
+        new CommonItemBase("EquipmentKeychain12", <EquipItemModel>{
                 "internalID": "EquipmentKeychain12",
                 "displayName": "Balloon Dog Chain",
                 "sellPrice": 200,
@@ -25364,7 +25364,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentKeychain13", <EquipItemModel>{
+        new CommonItemBase("EquipmentKeychain13", <EquipItemModel>{
                 "internalID": "EquipmentKeychain13",
                 "displayName": "Frozen Tart Chain",
                 "sellPrice": 200,
@@ -25388,7 +25388,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentKeychain14", <EquipItemModel>{
+        new CommonItemBase("EquipmentKeychain14", <EquipItemModel>{
                 "internalID": "EquipmentKeychain14",
                 "displayName": "Whatamelon Chain",
                 "sellPrice": 200,
@@ -25412,7 +25412,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentKeychain15", <EquipItemModel>{
+        new CommonItemBase("EquipmentKeychain15", <EquipItemModel>{
                 "internalID": "EquipmentKeychain15",
                 "displayName": "9 Ball Chain",
                 "sellPrice": 200,
@@ -25436,7 +25436,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentKeychain16", <EquipItemModel>{
+        new CommonItemBase("EquipmentKeychain16", <EquipItemModel>{
                 "internalID": "EquipmentKeychain16",
                 "displayName": "Pincer Hand Chain",
                 "sellPrice": 200,
@@ -25460,7 +25460,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentKeychain17", <EquipItemModel>{
+        new CommonItemBase("EquipmentKeychain17", <EquipItemModel>{
                 "internalID": "EquipmentKeychain17",
                 "displayName": "Gilded Key Chain",
                 "sellPrice": 200,
@@ -25484,7 +25484,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentKeychain18", <EquipItemModel>{
+        new CommonItemBase("EquipmentKeychain18", <EquipItemModel>{
                 "internalID": "EquipmentKeychain18",
                 "displayName": "Sushi Chain",
                 "sellPrice": 200,
@@ -25508,7 +25508,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentKeychain19", <EquipItemModel>{
+        new CommonItemBase("EquipmentKeychain19", <EquipItemModel>{
                 "internalID": "EquipmentKeychain19",
                 "displayName": "Time Candy Chain",
                 "sellPrice": 200,
@@ -25532,7 +25532,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentKeychain20", <EquipItemModel>{
+        new CommonItemBase("EquipmentKeychain20", <EquipItemModel>{
                 "internalID": "EquipmentKeychain20",
                 "displayName": "Star Blobulyte Galaxy Chain",
                 "sellPrice": 200,
@@ -25556,7 +25556,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentKeychain21", <EquipItemModel>{
+        new CommonItemBase("EquipmentKeychain21", <EquipItemModel>{
                 "internalID": "EquipmentKeychain21",
                 "displayName": "Mmm Donut Chain",
                 "sellPrice": 200,
@@ -25580,7 +25580,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentKeychain22", <EquipItemModel>{
+        new CommonItemBase("EquipmentKeychain22", <EquipItemModel>{
                 "internalID": "EquipmentKeychain22",
                 "displayName": "Negative 7 Chain",
                 "sellPrice": 200,
@@ -25604,7 +25604,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentKeychain23", <EquipItemModel>{
+        new CommonItemBase("EquipmentKeychain23", <EquipItemModel>{
                 "internalID": "EquipmentKeychain23",
                 "displayName": "Diamond Honker",
                 "sellPrice": 200,
@@ -25628,7 +25628,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("EquipmentKeychain24", <EquipItemModel>{
+        new CommonItemBase("EquipmentKeychain24", <EquipItemModel>{
                 "internalID": "EquipmentKeychain24",
                 "displayName": "BobGoldPickle",
                 "sellPrice": 200,
@@ -25652,7 +25652,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("CardPack1", <QuestItemModel>{
+        new CommonItemBase("CardPack1", <QuestItemModel>{
                 "internalID": "CardPack1",
                 "displayName": "Newbie Card Pack",
                 "sellPrice": 1,
@@ -25669,7 +25669,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardPack2", <QuestItemModel>{
+        new CommonItemBase("CardPack2", <QuestItemModel>{
                 "internalID": "CardPack2",
                 "displayName": "Ancient Card Pack",
                 "sellPrice": 1,
@@ -25686,7 +25686,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardPack3", <QuestItemModel>{
+        new CommonItemBase("CardPack3", <QuestItemModel>{
                 "internalID": "CardPack3",
                 "displayName": "Eternal Card Pack",
                 "sellPrice": 1,
@@ -25703,7 +25703,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardPack4", <QuestItemModel>{
+        new CommonItemBase("CardPack4", <QuestItemModel>{
                 "internalID": "CardPack4",
                 "displayName": "Dungeon Card Pack",
                 "sellPrice": 1,
@@ -25720,7 +25720,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardPack5", <QuestItemModel>{
+        new CommonItemBase("CardPack5", <QuestItemModel>{
                 "internalID": "CardPack5",
                 "displayName": "Galaxy Card Pack",
                 "sellPrice": 1,
@@ -25737,7 +25737,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("FoodHealth1d", <ConsumableItemModel>{
+        new CommonItemBase("FoodHealth1d", <ConsumableItemModel>{
                 "internalID": "FoodHealth1d",
                 "displayName": "Nomwich",
                 "sellPrice": 3,
@@ -25758,7 +25758,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 20,
                 "Cooldown": 30
             }),
-        new EquipItemBase("FoodHealth2d", <ConsumableItemModel>{
+        new CommonItemBase("FoodHealth2d", <ConsumableItemModel>{
                 "internalID": "FoodHealth2d",
                 "displayName": "Hotdog",
                 "sellPrice": 7,
@@ -25779,7 +25779,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 20,
                 "Cooldown": 30
             }),
-        new EquipItemBase("FoodHealth3d", <ConsumableItemModel>{
+        new CommonItemBase("FoodHealth3d", <ConsumableItemModel>{
                 "internalID": "FoodHealth3d",
                 "displayName": "Big Cake",
                 "sellPrice": 15,
@@ -25800,7 +25800,7 @@ export const initItemDetailRepo = () => {
                 "Amount": 20,
                 "Cooldown": 30
             }),
-        new EquipItemBase("DungWeaponPunchA1", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchA1", <EquipItemModel>{
                 "internalID": "DungWeaponPunchA1",
                 "displayName": "Boxing Gloves",
                 "sellPrice": 1,
@@ -25824,7 +25824,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchA2", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchA2", <EquipItemModel>{
                 "internalID": "DungWeaponPunchA2",
                 "displayName": "Boxing Gloves",
                 "sellPrice": 1,
@@ -25848,7 +25848,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchA3", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchA3", <EquipItemModel>{
                 "internalID": "DungWeaponPunchA3",
                 "displayName": "Boxing Gloves",
                 "sellPrice": 1,
@@ -25872,7 +25872,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchA4", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchA4", <EquipItemModel>{
                 "internalID": "DungWeaponPunchA4",
                 "displayName": "Boxing Gloves",
                 "sellPrice": 1,
@@ -25896,7 +25896,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchA5", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchA5", <EquipItemModel>{
                 "internalID": "DungWeaponPunchA5",
                 "displayName": "Boxing Gloves",
                 "sellPrice": 1,
@@ -25920,7 +25920,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchB1", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchB1", <EquipItemModel>{
                 "internalID": "DungWeaponPunchB1",
                 "displayName": "The Stingers",
                 "sellPrice": 1,
@@ -25944,7 +25944,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchB2", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchB2", <EquipItemModel>{
                 "internalID": "DungWeaponPunchB2",
                 "displayName": "The Stingers",
                 "sellPrice": 1,
@@ -25968,7 +25968,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchB3", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchB3", <EquipItemModel>{
                 "internalID": "DungWeaponPunchB3",
                 "displayName": "The Stingers",
                 "sellPrice": 1,
@@ -25992,7 +25992,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchB4", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchB4", <EquipItemModel>{
                 "internalID": "DungWeaponPunchB4",
                 "displayName": "The Stingers",
                 "sellPrice": 1,
@@ -26016,7 +26016,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchB5", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchB5", <EquipItemModel>{
                 "internalID": "DungWeaponPunchB5",
                 "displayName": "The Stingers",
                 "sellPrice": 1,
@@ -26040,7 +26040,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchC1", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchC1", <EquipItemModel>{
                 "internalID": "DungWeaponPunchC1",
                 "displayName": "Bandage Wraps",
                 "sellPrice": 1,
@@ -26064,7 +26064,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchC2", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchC2", <EquipItemModel>{
                 "internalID": "DungWeaponPunchC2",
                 "displayName": "Bandage Wraps",
                 "sellPrice": 1,
@@ -26088,7 +26088,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchC3", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchC3", <EquipItemModel>{
                 "internalID": "DungWeaponPunchC3",
                 "displayName": "Bandage Wraps",
                 "sellPrice": 1,
@@ -26112,7 +26112,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchC4", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchC4", <EquipItemModel>{
                 "internalID": "DungWeaponPunchC4",
                 "displayName": "Bandage Wraps",
                 "sellPrice": 1,
@@ -26136,7 +26136,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchC5", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchC5", <EquipItemModel>{
                 "internalID": "DungWeaponPunchC5",
                 "displayName": "Bandage Wraps",
                 "sellPrice": 1,
@@ -26160,7 +26160,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchD1", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchD1", <EquipItemModel>{
                 "internalID": "DungWeaponPunchD1",
                 "displayName": "Uninflated Glove",
                 "sellPrice": 1,
@@ -26184,7 +26184,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchD2", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchD2", <EquipItemModel>{
                 "internalID": "DungWeaponPunchD2",
                 "displayName": "Uninflated Glove",
                 "sellPrice": 1,
@@ -26208,7 +26208,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchD3", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchD3", <EquipItemModel>{
                 "internalID": "DungWeaponPunchD3",
                 "displayName": "Uninflated Glove",
                 "sellPrice": 1,
@@ -26232,7 +26232,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchD4", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchD4", <EquipItemModel>{
                 "internalID": "DungWeaponPunchD4",
                 "displayName": "Uninflated Glove",
                 "sellPrice": 1,
@@ -26256,7 +26256,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchD5", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchD5", <EquipItemModel>{
                 "internalID": "DungWeaponPunchD5",
                 "displayName": "Uninflated Glove",
                 "sellPrice": 1,
@@ -26280,7 +26280,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchE1", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchE1", <EquipItemModel>{
                 "internalID": "DungWeaponPunchE1",
                 "displayName": "Eclectic Ordeal",
                 "sellPrice": 1,
@@ -26304,7 +26304,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchE2", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchE2", <EquipItemModel>{
                 "internalID": "DungWeaponPunchE2",
                 "displayName": "Eclectic Ordeal",
                 "sellPrice": 1,
@@ -26328,7 +26328,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchE3", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchE3", <EquipItemModel>{
                 "internalID": "DungWeaponPunchE3",
                 "displayName": "Eclectic Ordeal",
                 "sellPrice": 1,
@@ -26352,7 +26352,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchE4", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchE4", <EquipItemModel>{
                 "internalID": "DungWeaponPunchE4",
                 "displayName": "Eclectic Ordeal",
                 "sellPrice": 1,
@@ -26376,7 +26376,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchE5", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchE5", <EquipItemModel>{
                 "internalID": "DungWeaponPunchE5",
                 "displayName": "Eclectic Ordeal",
                 "sellPrice": 1,
@@ -26400,7 +26400,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchF1", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchF1", <EquipItemModel>{
                 "internalID": "DungWeaponPunchF1",
                 "displayName": "Eclectic Ordeal",
                 "sellPrice": 1,
@@ -26424,7 +26424,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchF2", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchF2", <EquipItemModel>{
                 "internalID": "DungWeaponPunchF2",
                 "displayName": "Eclectic Ordeal",
                 "sellPrice": 1,
@@ -26448,7 +26448,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchF3", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchF3", <EquipItemModel>{
                 "internalID": "DungWeaponPunchF3",
                 "displayName": "Eclectic Ordeal",
                 "sellPrice": 1,
@@ -26472,7 +26472,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchF4", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchF4", <EquipItemModel>{
                 "internalID": "DungWeaponPunchF4",
                 "displayName": "Eclectic Ordeal",
                 "sellPrice": 1,
@@ -26496,7 +26496,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponPunchF5", <EquipItemModel>{
+        new CommonItemBase("DungWeaponPunchF5", <EquipItemModel>{
                 "internalID": "DungWeaponPunchF5",
                 "displayName": "Eclectic Ordeal",
                 "sellPrice": 1,
@@ -26520,7 +26520,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordA1", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordA1", <EquipItemModel>{
                 "internalID": "DungWeaponSwordA1",
                 "displayName": "Wooden Spear",
                 "sellPrice": 1,
@@ -26544,7 +26544,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordA2", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordA2", <EquipItemModel>{
                 "internalID": "DungWeaponSwordA2",
                 "displayName": "Wooden Spear",
                 "sellPrice": 1,
@@ -26568,7 +26568,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordA3", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordA3", <EquipItemModel>{
                 "internalID": "DungWeaponSwordA3",
                 "displayName": "Wooden Spear",
                 "sellPrice": 1,
@@ -26592,7 +26592,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordA4", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordA4", <EquipItemModel>{
                 "internalID": "DungWeaponSwordA4",
                 "displayName": "Wooden Spear",
                 "sellPrice": 1,
@@ -26616,7 +26616,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordA5", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordA5", <EquipItemModel>{
                 "internalID": "DungWeaponSwordA5",
                 "displayName": "Wooden Spear",
                 "sellPrice": 1,
@@ -26640,7 +26640,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordB1", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordB1", <EquipItemModel>{
                 "internalID": "DungWeaponSwordB1",
                 "displayName": "Steel Axe",
                 "sellPrice": 1,
@@ -26664,7 +26664,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordB2", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordB2", <EquipItemModel>{
                 "internalID": "DungWeaponSwordB2",
                 "displayName": "Steel Axe",
                 "sellPrice": 1,
@@ -26688,7 +26688,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordB3", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordB3", <EquipItemModel>{
                 "internalID": "DungWeaponSwordB3",
                 "displayName": "Steel Axe",
                 "sellPrice": 1,
@@ -26712,7 +26712,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordB4", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordB4", <EquipItemModel>{
                 "internalID": "DungWeaponSwordB4",
                 "displayName": "Steel Axe",
                 "sellPrice": 1,
@@ -26736,7 +26736,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordB5", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordB5", <EquipItemModel>{
                 "internalID": "DungWeaponSwordB5",
                 "displayName": "Steel Axe",
                 "sellPrice": 1,
@@ -26760,7 +26760,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordC1", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordC1", <EquipItemModel>{
                 "internalID": "DungWeaponSwordC1",
                 "displayName": "Royal Bayonet",
                 "sellPrice": 1,
@@ -26784,7 +26784,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordC2", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordC2", <EquipItemModel>{
                 "internalID": "DungWeaponSwordC2",
                 "displayName": "Royal Bayonet",
                 "sellPrice": 1,
@@ -26808,7 +26808,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordC3", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordC3", <EquipItemModel>{
                 "internalID": "DungWeaponSwordC3",
                 "displayName": "Royal Bayonet",
                 "sellPrice": 1,
@@ -26832,7 +26832,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordC4", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordC4", <EquipItemModel>{
                 "internalID": "DungWeaponSwordC4",
                 "displayName": "Royal Bayonet",
                 "sellPrice": 1,
@@ -26856,7 +26856,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordC5", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordC5", <EquipItemModel>{
                 "internalID": "DungWeaponSwordC5",
                 "displayName": "Royal Bayonet",
                 "sellPrice": 1,
@@ -26880,7 +26880,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordD1", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordD1", <EquipItemModel>{
                 "internalID": "DungWeaponSwordD1",
                 "displayName": "Enforced Slasher",
                 "sellPrice": 1,
@@ -26904,7 +26904,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordD2", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordD2", <EquipItemModel>{
                 "internalID": "DungWeaponSwordD2",
                 "displayName": "Enforced Slasher",
                 "sellPrice": 1,
@@ -26928,7 +26928,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordD3", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordD3", <EquipItemModel>{
                 "internalID": "DungWeaponSwordD3",
                 "displayName": "Enforced Slasher",
                 "sellPrice": 1,
@@ -26952,7 +26952,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordD4", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordD4", <EquipItemModel>{
                 "internalID": "DungWeaponSwordD4",
                 "displayName": "Enforced Slasher",
                 "sellPrice": 1,
@@ -26976,7 +26976,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordD5", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordD5", <EquipItemModel>{
                 "internalID": "DungWeaponSwordD5",
                 "displayName": "Enforced Slasher",
                 "sellPrice": 1,
@@ -27000,7 +27000,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordE1", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordE1", <EquipItemModel>{
                 "internalID": "DungWeaponSwordE1",
                 "displayName": "The Ice Breaker",
                 "sellPrice": 1,
@@ -27024,7 +27024,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordE2", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordE2", <EquipItemModel>{
                 "internalID": "DungWeaponSwordE2",
                 "displayName": "The Ice Breaker",
                 "sellPrice": 1,
@@ -27048,7 +27048,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordE3", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordE3", <EquipItemModel>{
                 "internalID": "DungWeaponSwordE3",
                 "displayName": "The Ice Breaker",
                 "sellPrice": 1,
@@ -27072,7 +27072,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordE4", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordE4", <EquipItemModel>{
                 "internalID": "DungWeaponSwordE4",
                 "displayName": "The Ice Breaker",
                 "sellPrice": 1,
@@ -27096,7 +27096,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordE5", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordE5", <EquipItemModel>{
                 "internalID": "DungWeaponSwordE5",
                 "displayName": "The Ice Breaker",
                 "sellPrice": 1,
@@ -27120,7 +27120,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordF1", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordF1", <EquipItemModel>{
                 "internalID": "DungWeaponSwordF1",
                 "displayName": "Deuscythe",
                 "sellPrice": 1,
@@ -27144,7 +27144,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordF2", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordF2", <EquipItemModel>{
                 "internalID": "DungWeaponSwordF2",
                 "displayName": "Deuscythe",
                 "sellPrice": 1,
@@ -27168,7 +27168,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordF3", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordF3", <EquipItemModel>{
                 "internalID": "DungWeaponSwordF3",
                 "displayName": "Deuscythe",
                 "sellPrice": 1,
@@ -27192,7 +27192,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordF4", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordF4", <EquipItemModel>{
                 "internalID": "DungWeaponSwordF4",
                 "displayName": "Deuscythe",
                 "sellPrice": 1,
@@ -27216,7 +27216,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSwordF5", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSwordF5", <EquipItemModel>{
                 "internalID": "DungWeaponSwordF5",
                 "displayName": "Deuscythe",
                 "sellPrice": 1,
@@ -27240,7 +27240,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowA1", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowA1", <EquipItemModel>{
                 "internalID": "DungWeaponBowA1",
                 "displayName": "Wooden Bow",
                 "sellPrice": 1,
@@ -27264,7 +27264,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowA2", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowA2", <EquipItemModel>{
                 "internalID": "DungWeaponBowA2",
                 "displayName": "Wooden Bow",
                 "sellPrice": 1,
@@ -27288,7 +27288,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowA3", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowA3", <EquipItemModel>{
                 "internalID": "DungWeaponBowA3",
                 "displayName": "Wooden Bow",
                 "sellPrice": 1,
@@ -27312,7 +27312,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowA4", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowA4", <EquipItemModel>{
                 "internalID": "DungWeaponBowA4",
                 "displayName": "Wooden Bow",
                 "sellPrice": 1,
@@ -27336,7 +27336,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowA5", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowA5", <EquipItemModel>{
                 "internalID": "DungWeaponBowA5",
                 "displayName": "Wooden Bow",
                 "sellPrice": 1,
@@ -27360,7 +27360,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowB1", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowB1", <EquipItemModel>{
                 "internalID": "DungWeaponBowB1",
                 "displayName": "Birch Longbow",
                 "sellPrice": 1,
@@ -27384,7 +27384,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowB2", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowB2", <EquipItemModel>{
                 "internalID": "DungWeaponBowB2",
                 "displayName": "Birch Longbow",
                 "sellPrice": 1,
@@ -27408,7 +27408,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowB3", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowB3", <EquipItemModel>{
                 "internalID": "DungWeaponBowB3",
                 "displayName": "Birch Longbow",
                 "sellPrice": 1,
@@ -27432,7 +27432,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowB4", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowB4", <EquipItemModel>{
                 "internalID": "DungWeaponBowB4",
                 "displayName": "Birch Longbow",
                 "sellPrice": 1,
@@ -27456,7 +27456,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowB5", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowB5", <EquipItemModel>{
                 "internalID": "DungWeaponBowB5",
                 "displayName": "Birch Longbow",
                 "sellPrice": 1,
@@ -27480,7 +27480,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowC1", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowC1", <EquipItemModel>{
                 "internalID": "DungWeaponBowC1",
                 "displayName": "Spiked Menace",
                 "sellPrice": 1,
@@ -27504,7 +27504,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowC2", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowC2", <EquipItemModel>{
                 "internalID": "DungWeaponBowC2",
                 "displayName": "Spiked Menace",
                 "sellPrice": 1,
@@ -27528,7 +27528,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowC3", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowC3", <EquipItemModel>{
                 "internalID": "DungWeaponBowC3",
                 "displayName": "Spiked Menace",
                 "sellPrice": 1,
@@ -27552,7 +27552,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowC4", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowC4", <EquipItemModel>{
                 "internalID": "DungWeaponBowC4",
                 "displayName": "Spiked Menace",
                 "sellPrice": 1,
@@ -27576,7 +27576,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowC5", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowC5", <EquipItemModel>{
                 "internalID": "DungWeaponBowC5",
                 "displayName": "Spiked Menace",
                 "sellPrice": 1,
@@ -27600,7 +27600,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowD1", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowD1", <EquipItemModel>{
                 "internalID": "DungWeaponBowD1",
                 "displayName": "Pharoah Bow",
                 "sellPrice": 1,
@@ -27624,7 +27624,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowD2", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowD2", <EquipItemModel>{
                 "internalID": "DungWeaponBowD2",
                 "displayName": "Pharoah Bow",
                 "sellPrice": 1,
@@ -27648,7 +27648,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowD3", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowD3", <EquipItemModel>{
                 "internalID": "DungWeaponBowD3",
                 "displayName": "Pharoah Bow",
                 "sellPrice": 1,
@@ -27672,7 +27672,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowD4", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowD4", <EquipItemModel>{
                 "internalID": "DungWeaponBowD4",
                 "displayName": "Pharoah Bow",
                 "sellPrice": 1,
@@ -27696,7 +27696,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowD5", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowD5", <EquipItemModel>{
                 "internalID": "DungWeaponBowD5",
                 "displayName": "Pharoah Bow",
                 "sellPrice": 1,
@@ -27720,7 +27720,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowE1", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowE1", <EquipItemModel>{
                 "internalID": "DungWeaponBowE1",
                 "displayName": "Blizzard Bow",
                 "sellPrice": 1,
@@ -27744,7 +27744,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowE2", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowE2", <EquipItemModel>{
                 "internalID": "DungWeaponBowE2",
                 "displayName": "Blizzard Bow",
                 "sellPrice": 1,
@@ -27768,7 +27768,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowE3", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowE3", <EquipItemModel>{
                 "internalID": "DungWeaponBowE3",
                 "displayName": "Blizzard Bow",
                 "sellPrice": 1,
@@ -27792,7 +27792,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowE4", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowE4", <EquipItemModel>{
                 "internalID": "DungWeaponBowE4",
                 "displayName": "Blizzard Bow",
                 "sellPrice": 1,
@@ -27816,7 +27816,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowE5", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowE5", <EquipItemModel>{
                 "internalID": "DungWeaponBowE5",
                 "displayName": "Blizzard Bow",
                 "sellPrice": 1,
@@ -27840,7 +27840,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowF1", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowF1", <EquipItemModel>{
                 "internalID": "DungWeaponBowF1",
                 "displayName": "Blackhole Bow",
                 "sellPrice": 1,
@@ -27864,7 +27864,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowF2", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowF2", <EquipItemModel>{
                 "internalID": "DungWeaponBowF2",
                 "displayName": "Blackhole Bow",
                 "sellPrice": 1,
@@ -27888,7 +27888,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowF3", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowF3", <EquipItemModel>{
                 "internalID": "DungWeaponBowF3",
                 "displayName": "Blackhole Bow",
                 "sellPrice": 1,
@@ -27912,7 +27912,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowF4", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowF4", <EquipItemModel>{
                 "internalID": "DungWeaponBowF4",
                 "displayName": "Blackhole Bow",
                 "sellPrice": 1,
@@ -27936,7 +27936,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBowF5", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBowF5", <EquipItemModel>{
                 "internalID": "DungWeaponBowF5",
                 "displayName": "Blackhole Bow",
                 "sellPrice": 1,
@@ -27960,7 +27960,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandA1", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandA1", <EquipItemModel>{
                 "internalID": "DungWeaponWandA1",
                 "displayName": "Gnarled Wand",
                 "sellPrice": 1,
@@ -27984,7 +27984,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandA2", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandA2", <EquipItemModel>{
                 "internalID": "DungWeaponWandA2",
                 "displayName": "Gnarled Wand",
                 "sellPrice": 1,
@@ -28008,7 +28008,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandA3", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandA3", <EquipItemModel>{
                 "internalID": "DungWeaponWandA3",
                 "displayName": "Gnarled Wand",
                 "sellPrice": 1,
@@ -28032,7 +28032,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandA4", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandA4", <EquipItemModel>{
                 "internalID": "DungWeaponWandA4",
                 "displayName": "Gnarled Wand",
                 "sellPrice": 1,
@@ -28056,7 +28056,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandA5", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandA5", <EquipItemModel>{
                 "internalID": "DungWeaponWandA5",
                 "displayName": "Gnarled Wand",
                 "sellPrice": 1,
@@ -28080,7 +28080,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandB1", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandB1", <EquipItemModel>{
                 "internalID": "DungWeaponWandB1",
                 "displayName": "Quarterstaff",
                 "sellPrice": 1,
@@ -28104,7 +28104,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandB2", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandB2", <EquipItemModel>{
                 "internalID": "DungWeaponWandB2",
                 "displayName": "Quarterstaff",
                 "sellPrice": 1,
@@ -28128,7 +28128,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandB3", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandB3", <EquipItemModel>{
                 "internalID": "DungWeaponWandB3",
                 "displayName": "Quarterstaff",
                 "sellPrice": 1,
@@ -28152,7 +28152,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandB4", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandB4", <EquipItemModel>{
                 "internalID": "DungWeaponWandB4",
                 "displayName": "Quarterstaff",
                 "sellPrice": 1,
@@ -28176,7 +28176,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandB5", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandB5", <EquipItemModel>{
                 "internalID": "DungWeaponWandB5",
                 "displayName": "Quarterstaff",
                 "sellPrice": 1,
@@ -28200,7 +28200,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandC1", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandC1", <EquipItemModel>{
                 "internalID": "DungWeaponWandC1",
                 "displayName": "Starlight",
                 "sellPrice": 1,
@@ -28224,7 +28224,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandC2", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandC2", <EquipItemModel>{
                 "internalID": "DungWeaponWandC2",
                 "displayName": "Starlight",
                 "sellPrice": 1,
@@ -28248,7 +28248,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandC3", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandC3", <EquipItemModel>{
                 "internalID": "DungWeaponWandC3",
                 "displayName": "Starlight",
                 "sellPrice": 1,
@@ -28272,7 +28272,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandC4", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandC4", <EquipItemModel>{
                 "internalID": "DungWeaponWandC4",
                 "displayName": "Starlight",
                 "sellPrice": 1,
@@ -28296,7 +28296,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandC5", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandC5", <EquipItemModel>{
                 "internalID": "DungWeaponWandC5",
                 "displayName": "Starlight",
                 "sellPrice": 1,
@@ -28320,7 +28320,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandD1", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandD1", <EquipItemModel>{
                 "internalID": "DungWeaponWandD1",
                 "displayName": "Crows Nest",
                 "sellPrice": 1,
@@ -28344,7 +28344,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandD2", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandD2", <EquipItemModel>{
                 "internalID": "DungWeaponWandD2",
                 "displayName": "Crows Nest",
                 "sellPrice": 1,
@@ -28368,7 +28368,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandD3", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandD3", <EquipItemModel>{
                 "internalID": "DungWeaponWandD3",
                 "displayName": "Crows Nest",
                 "sellPrice": 1,
@@ -28392,7 +28392,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandD4", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandD4", <EquipItemModel>{
                 "internalID": "DungWeaponWandD4",
                 "displayName": "Crows Nest",
                 "sellPrice": 1,
@@ -28416,7 +28416,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandD5", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandD5", <EquipItemModel>{
                 "internalID": "DungWeaponWandD5",
                 "displayName": "Crows Nest",
                 "sellPrice": 1,
@@ -28440,7 +28440,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandE1", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandE1", <EquipItemModel>{
                 "internalID": "DungWeaponWandE1",
                 "displayName": "Spriggly Storm",
                 "sellPrice": 1,
@@ -28464,7 +28464,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandE2", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandE2", <EquipItemModel>{
                 "internalID": "DungWeaponWandE2",
                 "displayName": "Spriggly Storm",
                 "sellPrice": 1,
@@ -28488,7 +28488,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandE3", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandE3", <EquipItemModel>{
                 "internalID": "DungWeaponWandE3",
                 "displayName": "Spriggly Storm",
                 "sellPrice": 1,
@@ -28512,7 +28512,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandE4", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandE4", <EquipItemModel>{
                 "internalID": "DungWeaponWandE4",
                 "displayName": "Spriggly Storm",
                 "sellPrice": 1,
@@ -28536,7 +28536,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandE5", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandE5", <EquipItemModel>{
                 "internalID": "DungWeaponWandE5",
                 "displayName": "Spriggly Storm",
                 "sellPrice": 1,
@@ -28560,7 +28560,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandF1", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandF1", <EquipItemModel>{
                 "internalID": "DungWeaponWandF1",
                 "displayName": "Grey Gatsby",
                 "sellPrice": 1,
@@ -28584,7 +28584,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandF2", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandF2", <EquipItemModel>{
                 "internalID": "DungWeaponWandF2",
                 "displayName": "Grey Gatsby",
                 "sellPrice": 1,
@@ -28608,7 +28608,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandF3", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandF3", <EquipItemModel>{
                 "internalID": "DungWeaponWandF3",
                 "displayName": "Grey Gatsby",
                 "sellPrice": 1,
@@ -28632,7 +28632,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandF4", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandF4", <EquipItemModel>{
                 "internalID": "DungWeaponWandF4",
                 "displayName": "Grey Gatsby",
                 "sellPrice": 1,
@@ -28656,7 +28656,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWandF5", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWandF5", <EquipItemModel>{
                 "internalID": "DungWeaponWandF5",
                 "displayName": "Grey Gatsby",
                 "sellPrice": 1,
@@ -28680,7 +28680,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponSword1", <EquipItemModel>{
+        new CommonItemBase("DungWeaponSword1", <EquipItemModel>{
                 "internalID": "DungWeaponSword1",
                 "displayName": "Wooden Spear",
                 "sellPrice": 1,
@@ -28704,7 +28704,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponWand1", <EquipItemModel>{
+        new CommonItemBase("DungWeaponWand1", <EquipItemModel>{
                 "internalID": "DungWeaponWand1",
                 "displayName": "Wooden Spear",
                 "sellPrice": 1,
@@ -28728,7 +28728,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungWeaponBow1", <EquipItemModel>{
+        new CommonItemBase("DungWeaponBow1", <EquipItemModel>{
                 "internalID": "DungWeaponBow1",
                 "displayName": "Wooden Spear",
                 "sellPrice": 1,
@@ -28752,7 +28752,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentHats0", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentHats0", <EquipItemModel>{
                 "internalID": "DungEquipmentHats0",
                 "displayName": "Field Brim",
                 "sellPrice": 175,
@@ -28776,7 +28776,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentHats1", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentHats1", <EquipItemModel>{
                 "internalID": "DungEquipmentHats1",
                 "displayName": "Grassy Brim",
                 "sellPrice": 175,
@@ -28800,7 +28800,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentHats2", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentHats2", <EquipItemModel>{
                 "internalID": "DungEquipmentHats2",
                 "displayName": "Winter Brim",
                 "sellPrice": 175,
@@ -28824,7 +28824,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentHats3", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentHats3", <EquipItemModel>{
                 "internalID": "DungEquipmentHats3",
                 "displayName": "Maize Brim",
                 "sellPrice": 175,
@@ -28848,7 +28848,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentHats4", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentHats4", <EquipItemModel>{
                 "internalID": "DungEquipmentHats4",
                 "displayName": "The Crow Perch",
                 "sellPrice": 175,
@@ -28872,7 +28872,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentShirt0", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentShirt0", <EquipItemModel>{
                 "internalID": "DungEquipmentShirt0",
                 "displayName": "White Tee",
                 "sellPrice": 175,
@@ -28896,7 +28896,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentShirt1", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentShirt1", <EquipItemModel>{
                 "internalID": "DungEquipmentShirt1",
                 "displayName": "Green Shirt",
                 "sellPrice": 175,
@@ -28920,7 +28920,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentShirt2", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentShirt2", <EquipItemModel>{
                 "internalID": "DungEquipmentShirt2",
                 "displayName": "Blue Stripe Tee",
                 "sellPrice": 175,
@@ -28944,7 +28944,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentShirt3", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentShirt3", <EquipItemModel>{
                 "internalID": "DungEquipmentShirt3",
                 "displayName": "Purple Diagonal Striped Shirt",
                 "sellPrice": 175,
@@ -28968,7 +28968,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentShirt4", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentShirt4", <EquipItemModel>{
                 "internalID": "DungEquipmentShirt4",
                 "displayName": "Solar Shirt",
                 "sellPrice": 175,
@@ -28992,7 +28992,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentPants0", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentPants0", <EquipItemModel>{
                 "internalID": "DungEquipmentPants0",
                 "displayName": "Boring Jeans",
                 "sellPrice": 175,
@@ -29016,7 +29016,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentPants1", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentPants1", <EquipItemModel>{
                 "internalID": "DungEquipmentPants1",
                 "displayName": "Camo Jeans",
                 "sellPrice": 175,
@@ -29040,7 +29040,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentPants2", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentPants2", <EquipItemModel>{
                 "internalID": "DungEquipmentPants2",
                 "displayName": "Sandblasted Jeans",
                 "sellPrice": 175,
@@ -29064,7 +29064,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentPants3", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentPants3", <EquipItemModel>{
                 "internalID": "DungEquipmentPants3",
                 "displayName": "Royale Jeans",
                 "sellPrice": 175,
@@ -29088,7 +29088,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentPants4", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentPants4", <EquipItemModel>{
                 "internalID": "DungEquipmentPants4",
                 "displayName": "Pop Lock and Drop Jeans",
                 "sellPrice": 175,
@@ -29112,7 +29112,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentShoes0", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentShoes0", <EquipItemModel>{
                 "internalID": "DungEquipmentShoes0",
                 "displayName": "Dull Flops",
                 "sellPrice": 175,
@@ -29136,7 +29136,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentShoes1", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentShoes1", <EquipItemModel>{
                 "internalID": "DungEquipmentShoes1",
                 "displayName": "Flap Flops",
                 "sellPrice": 175,
@@ -29160,7 +29160,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentShoes2", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentShoes2", <EquipItemModel>{
                 "internalID": "DungEquipmentShoes2",
                 "displayName": "Floop Floops",
                 "sellPrice": 175,
@@ -29184,7 +29184,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentShoes3", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentShoes3", <EquipItemModel>{
                 "internalID": "DungEquipmentShoes3",
                 "displayName": "Fluppo Wuppos",
                 "sellPrice": 175,
@@ -29208,7 +29208,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentShoes4", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentShoes4", <EquipItemModel>{
                 "internalID": "DungEquipmentShoes4",
                 "displayName": "Flipper Snapper Slipper Floppers",
                 "sellPrice": 175,
@@ -29232,7 +29232,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentPendant0", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentPendant0", <EquipItemModel>{
                 "internalID": "DungEquipmentPendant0",
                 "displayName": "Quartz Pendant",
                 "sellPrice": 175,
@@ -29256,7 +29256,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentPendant1", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentPendant1", <EquipItemModel>{
                 "internalID": "DungEquipmentPendant1",
                 "displayName": "Shruck Stone Pendant",
                 "sellPrice": 175,
@@ -29280,7 +29280,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentPendant2", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentPendant2", <EquipItemModel>{
                 "internalID": "DungEquipmentPendant2",
                 "displayName": "Skydive Pendant",
                 "sellPrice": 175,
@@ -29304,7 +29304,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentPendant3", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentPendant3", <EquipItemModel>{
                 "internalID": "DungEquipmentPendant3",
                 "displayName": "Maegatia Pendant",
                 "sellPrice": 175,
@@ -29328,7 +29328,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentPendant4", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentPendant4", <EquipItemModel>{
                 "internalID": "DungEquipmentPendant4",
                 "displayName": "Lava Diamond Double Pendant",
                 "sellPrice": 175,
@@ -29352,7 +29352,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentRings0", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentRings0", <EquipItemModel>{
                 "internalID": "DungEquipmentRings0",
                 "displayName": "Silver Ring",
                 "sellPrice": 175,
@@ -29376,7 +29376,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentRings1", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentRings1", <EquipItemModel>{
                 "internalID": "DungEquipmentRings1",
                 "displayName": "Booger Ring",
                 "sellPrice": 175,
@@ -29400,7 +29400,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentRings2", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentRings2", <EquipItemModel>{
                 "internalID": "DungEquipmentRings2",
                 "displayName": "Cold Fusion Rock Ring",
                 "sellPrice": 175,
@@ -29424,7 +29424,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentRings3", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentRings3", <EquipItemModel>{
                 "internalID": "DungEquipmentRings3",
                 "displayName": "Creeper Peeper Ring",
                 "sellPrice": 175,
@@ -29448,7 +29448,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("DungEquipmentRings4", <EquipItemModel>{
+        new CommonItemBase("DungEquipmentRings4", <EquipItemModel>{
                 "internalID": "DungEquipmentRings4",
                 "displayName": "Jewels of the Setting Sun",
                 "sellPrice": 175,
@@ -29472,7 +29472,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
-        new EquipItemBase("GemQ1", <EquipItemModel>{
+        new CommonItemBase("GemQ1", <EquipItemModel>{
                 "internalID": "GemQ1",
                 "displayName": "Infinite Forge",
                 "sellPrice": 1,
@@ -29496,7 +29496,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("GemQ2", <EquipItemModel>{
+        new CommonItemBase("GemQ2", <EquipItemModel>{
                 "internalID": "GemQ2",
                 "displayName": "Infinite Forge",
                 "sellPrice": 1,
@@ -29520,7 +29520,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("GemQ3", <EquipItemModel>{
+        new CommonItemBase("GemQ3", <EquipItemModel>{
                 "internalID": "GemQ3",
                 "displayName": "Infinite Forge",
                 "sellPrice": 1,
@@ -29544,7 +29544,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("GemQ4", <EquipItemModel>{
+        new CommonItemBase("GemQ4", <EquipItemModel>{
                 "internalID": "GemQ4",
                 "displayName": "Infinite Forge",
                 "sellPrice": 1,
@@ -29568,7 +29568,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("GemQ5", <EquipItemModel>{
+        new CommonItemBase("GemQ5", <EquipItemModel>{
                 "internalID": "GemQ5",
                 "displayName": "Infinite Forge",
                 "sellPrice": 1,
@@ -29592,7 +29592,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("GemQ6", <EquipItemModel>{
+        new CommonItemBase("GemQ6", <EquipItemModel>{
                 "internalID": "GemQ6",
                 "displayName": "Infinite Forge",
                 "sellPrice": 1,
@@ -29616,7 +29616,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("GemQ7", <EquipItemModel>{
+        new CommonItemBase("GemQ7", <EquipItemModel>{
                 "internalID": "GemQ7",
                 "displayName": "Infinite Forge",
                 "sellPrice": 1,
@@ -29640,7 +29640,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("GemQ8", <EquipItemModel>{
+        new CommonItemBase("GemQ8", <EquipItemModel>{
                 "internalID": "GemQ8",
                 "displayName": "Infinite Forge",
                 "sellPrice": 1,
@@ -29664,7 +29664,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("GemQ9", <EquipItemModel>{
+        new CommonItemBase("GemQ9", <EquipItemModel>{
                 "internalID": "GemQ9",
                 "displayName": "Infinite Forge",
                 "sellPrice": 1,
@@ -29688,7 +29688,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("GemQ10", <EquipItemModel>{
+        new CommonItemBase("GemQ10", <EquipItemModel>{
                 "internalID": "GemQ10",
                 "displayName": "Infinite Forge",
                 "sellPrice": 1,
@@ -29712,7 +29712,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("GemQ11", <EquipItemModel>{
+        new CommonItemBase("GemQ11", <EquipItemModel>{
                 "internalID": "GemQ11",
                 "displayName": "Infinite Forge",
                 "sellPrice": 1,
@@ -29736,7 +29736,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("GemQ12", <EquipItemModel>{
+        new CommonItemBase("GemQ12", <EquipItemModel>{
                 "internalID": "GemQ12",
                 "displayName": "Infinite Forge",
                 "sellPrice": 1,
@@ -29760,7 +29760,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("GemQ13", <EquipItemModel>{
+        new CommonItemBase("GemQ13", <EquipItemModel>{
                 "internalID": "GemQ13",
                 "displayName": "Infinite Forge",
                 "sellPrice": 1,
@@ -29784,7 +29784,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("GemQ14", <EquipItemModel>{
+        new CommonItemBase("GemQ14", <EquipItemModel>{
                 "internalID": "GemQ14",
                 "displayName": "Infinite Forge",
                 "sellPrice": 1,
@@ -29808,7 +29808,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("GemQ15", <EquipItemModel>{
+        new CommonItemBase("GemQ15", <EquipItemModel>{
                 "internalID": "GemQ15",
                 "displayName": "Infinite Forge",
                 "sellPrice": 1,
@@ -29832,7 +29832,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("GemQ16", <EquipItemModel>{
+        new CommonItemBase("GemQ16", <EquipItemModel>{
                 "internalID": "GemQ16",
                 "displayName": "Infinite Forge",
                 "sellPrice": 1,
@@ -29856,7 +29856,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("GemQ17", <EquipItemModel>{
+        new CommonItemBase("GemQ17", <EquipItemModel>{
                 "internalID": "GemQ17",
                 "displayName": "Infinite Forge",
                 "sellPrice": 1,
@@ -29880,7 +29880,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("GemP1", <EquipItemModel>{
+        new CommonItemBase("GemP1", <EquipItemModel>{
                 "internalID": "GemP1",
                 "displayName": "Infinite Forge",
                 "sellPrice": 1,
@@ -29904,7 +29904,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("GemP9", <QuestItemModel>{
+        new CommonItemBase("GemP9", <QuestItemModel>{
                 "internalID": "GemP9",
                 "displayName": "Quality Obol Stack",
                 "sellPrice": 1,
@@ -29921,7 +29921,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("GemP10", <QuestItemModel>{
+        new CommonItemBase("GemP10", <QuestItemModel>{
                 "internalID": "GemP10",
                 "displayName": "Marvelous Obol Stack",
                 "sellPrice": 1,
@@ -29938,7 +29938,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("GemP11", <QuestItemModel>{
+        new CommonItemBase("GemP11", <QuestItemModel>{
                 "internalID": "GemP11",
                 "displayName": "Marvelous Obol Stack",
                 "sellPrice": 1,
@@ -29955,7 +29955,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("GemP12", <QuestItemModel>{
+        new CommonItemBase("GemP12", <QuestItemModel>{
                 "internalID": "GemP12",
                 "displayName": "Marvelous Obol Stack",
                 "sellPrice": 1,
@@ -29972,7 +29972,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("GemP13", <QuestItemModel>{
+        new CommonItemBase("GemP13", <QuestItemModel>{
                 "internalID": "GemP13",
                 "displayName": "Marvelous Obol Stack",
                 "sellPrice": 1,
@@ -29989,7 +29989,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("GemP14", <QuestItemModel>{
+        new CommonItemBase("GemP14", <QuestItemModel>{
                 "internalID": "GemP14",
                 "displayName": "Marvelous Obol Stack",
                 "sellPrice": 1,
@@ -30006,7 +30006,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("GemP15", <QuestItemModel>{
+        new CommonItemBase("GemP15", <QuestItemModel>{
                 "internalID": "GemP15",
                 "displayName": "Marvelous Obol Stack",
                 "sellPrice": 1,
@@ -30023,7 +30023,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("GemP16", <QuestItemModel>{
+        new CommonItemBase("GemP16", <QuestItemModel>{
                 "internalID": "GemP16",
                 "displayName": "Dungeon Loot Dice",
                 "sellPrice": 1,
@@ -30040,7 +30040,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("EquipmentHats31", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats31", <EquipItemModel>{
                 "internalID": "EquipmentHats31",
                 "displayName": "Smitty's Bubble Blowing Hat",
                 "sellPrice": 1,
@@ -30064,7 +30064,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentHats32", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats32", <EquipItemModel>{
                 "internalID": "EquipmentHats32",
                 "displayName": "Bandit Bob Mask",
                 "sellPrice": 1,
@@ -30088,7 +30088,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentHats33", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats33", <EquipItemModel>{
                 "internalID": "EquipmentHats33",
                 "displayName": "Paper Bag",
                 "sellPrice": 1,
@@ -30112,7 +30112,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentHats34", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats34", <EquipItemModel>{
                 "internalID": "EquipmentHats34",
                 "displayName": "Parasite",
                 "sellPrice": 1,
@@ -30136,7 +30136,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentHats35", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats35", <EquipItemModel>{
                 "internalID": "EquipmentHats35",
                 "displayName": "Diamon Horns",
                 "sellPrice": 1,
@@ -30160,7 +30160,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 7
             }),
-        new EquipItemBase("EquipmentHats36", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats36", <EquipItemModel>{
                 "internalID": "EquipmentHats36",
                 "displayName": "Halloween Pumpkin",
                 "sellPrice": 1,
@@ -30184,7 +30184,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentHats40", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats40", <EquipItemModel>{
                 "internalID": "EquipmentHats40",
                 "displayName": "Pardoned Turkey",
                 "sellPrice": 1,
@@ -30208,7 +30208,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentHats37", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats37", <EquipItemModel>{
                 "internalID": "EquipmentHats37",
                 "displayName": "Hotdog Hero",
                 "sellPrice": 1,
@@ -30232,7 +30232,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentHats38", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats38", <EquipItemModel>{
                 "internalID": "EquipmentHats38",
                 "displayName": "Invisible Hat",
                 "sellPrice": 1,
@@ -30256,7 +30256,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentHats46", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats46", <EquipItemModel>{
                 "internalID": "EquipmentHats46",
                 "displayName": "Strawbiggy",
                 "sellPrice": 1,
@@ -30280,7 +30280,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentHats47", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats47", <EquipItemModel>{
                 "internalID": "EquipmentHats47",
                 "displayName": "Pop Cat",
                 "sellPrice": 1,
@@ -30304,7 +30304,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentHats48", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats48", <EquipItemModel>{
                 "internalID": "EquipmentHats48",
                 "displayName": "Dairy Dunk",
                 "sellPrice": 1,
@@ -30328,7 +30328,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentHats49", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats49", <EquipItemModel>{
                 "internalID": "EquipmentHats49",
                 "displayName": "The Classic",
                 "sellPrice": 1,
@@ -30352,7 +30352,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentHats50", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats50", <EquipItemModel>{
                 "internalID": "EquipmentHats50",
                 "displayName": "Green Beanie",
                 "sellPrice": 1,
@@ -30376,7 +30376,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentHats43", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats43", <EquipItemModel>{
                 "internalID": "EquipmentHats43",
                 "displayName": "Snowman",
                 "sellPrice": 1,
@@ -30400,7 +30400,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentHats45", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats45", <EquipItemModel>{
                 "internalID": "EquipmentHats45",
                 "displayName": "Giftmas Tree",
                 "sellPrice": 1,
@@ -30424,7 +30424,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentHats57", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats57", <EquipItemModel>{
                 "internalID": "EquipmentHats57",
                 "displayName": "Big Bunny",
                 "sellPrice": 1,
@@ -30448,7 +30448,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentHats62", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats62", <EquipItemModel>{
                 "internalID": "EquipmentHats62",
                 "displayName": "Fluffy Ramsy",
                 "sellPrice": 1,
@@ -30472,7 +30472,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("EquipmentHats65", <EquipItemModel>{
+        new CommonItemBase("EquipmentHats65", <EquipItemModel>{
                 "internalID": "EquipmentHats65",
                 "displayName": "The Red Boaty",
                 "sellPrice": 1,
@@ -30496,7 +30496,7 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
-        new EquipItemBase("Key1", <QuestItemModel>{
+        new CommonItemBase("Key1", <QuestItemModel>{
                 "internalID": "Key1",
                 "displayName": "Forest Villa Key",
                 "sellPrice": 50,
@@ -30513,7 +30513,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Key2", <QuestItemModel>{
+        new CommonItemBase("Key2", <QuestItemModel>{
                 "internalID": "Key2",
                 "displayName": "Efaunt's Tomb Key",
                 "sellPrice": 50,
@@ -30530,7 +30530,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Key3", <QuestItemModel>{
+        new CommonItemBase("Key3", <QuestItemModel>{
                 "internalID": "Key3",
                 "displayName": "Chizoar's Cavern Key",
                 "sellPrice": 50,
@@ -30547,7 +30547,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("ObolFrag", <QuestItemModel>{
+        new CommonItemBase("ObolFrag", <QuestItemModel>{
                 "internalID": "ObolFrag",
                 "displayName": "Obol Fragment",
                 "sellPrice": 50,
@@ -30564,7 +30564,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DoubleAFKtix", <QuestItemModel>{
+        new CommonItemBase("DoubleAFKtix", <QuestItemModel>{
                 "internalID": "DoubleAFKtix",
                 "displayName": "Double AFK Gain Ticket",
                 "sellPrice": 50,
@@ -30581,7 +30581,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("TixCol", <QuestItemModel>{
+        new CommonItemBase("TixCol", <QuestItemModel>{
                 "internalID": "TixCol",
                 "displayName": "Colosseum Ticket",
                 "sellPrice": 50,
@@ -30598,7 +30598,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("DeliveryBox", <QuestItemModel>{
+        new CommonItemBase("DeliveryBox", <QuestItemModel>{
                 "internalID": "DeliveryBox",
                 "displayName": "Delivery Box",
                 "sellPrice": 50,
@@ -30615,7 +30615,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("SilverPen", <QuestItemModel>{
+        new CommonItemBase("SilverPen", <QuestItemModel>{
                 "internalID": "SilverPen",
                 "displayName": "Silver Pen",
                 "sellPrice": 50,
@@ -30632,7 +30632,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("PremiumGem", <QuestItemModel>{
+        new CommonItemBase("PremiumGem", <QuestItemModel>{
                 "internalID": "PremiumGem",
                 "displayName": "Gem",
                 "sellPrice": 69,
@@ -30649,7 +30649,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("TalentPoint1", <QuestItemModel>{
+        new CommonItemBase("TalentPoint1", <QuestItemModel>{
                 "internalID": "TalentPoint1",
                 "displayName": "Talent Point Tab 1",
                 "sellPrice": 1,
@@ -30666,7 +30666,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("TalentPoint2", <QuestItemModel>{
+        new CommonItemBase("TalentPoint2", <QuestItemModel>{
                 "internalID": "TalentPoint2",
                 "displayName": "Talent Point Tab 2",
                 "sellPrice": 1,
@@ -30683,7 +30683,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("TalentPoint3", <QuestItemModel>{
+        new CommonItemBase("TalentPoint3", <QuestItemModel>{
                 "internalID": "TalentPoint3",
                 "displayName": "Talent Point Tab 3",
                 "sellPrice": 1,
@@ -30700,7 +30700,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("TalentPoint4", <QuestItemModel>{
+        new CommonItemBase("TalentPoint4", <QuestItemModel>{
                 "internalID": "TalentPoint4",
                 "displayName": "Talent Point Tab 4",
                 "sellPrice": 1,
@@ -30717,7 +30717,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("TalentPoint5", <QuestItemModel>{
+        new CommonItemBase("TalentPoint5", <QuestItemModel>{
                 "internalID": "TalentPoint5",
                 "displayName": "Talent Point Tab 4",
                 "sellPrice": 1,
@@ -30734,7 +30734,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("TalentPoint6", <QuestItemModel>{
+        new CommonItemBase("TalentPoint6", <QuestItemModel>{
                 "internalID": "TalentPoint6",
                 "displayName": "Talent Point Special Tab",
                 "sellPrice": 1,
@@ -30751,7 +30751,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("Gfoodcoupon", <QuestItemModel>{
+        new CommonItemBase("Gfoodcoupon", <QuestItemModel>{
                 "internalID": "Gfoodcoupon",
                 "displayName": "Gold Food Coupon",
                 "sellPrice": 1,
@@ -30768,7 +30768,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("ItemsCoupon1", <QuestItemModel>{
+        new CommonItemBase("ItemsCoupon1", <QuestItemModel>{
                 "internalID": "ItemsCoupon1",
                 "displayName": "Resource Coupon",
                 "sellPrice": 1,
@@ -30785,7 +30785,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("ItemsCoupon2", <QuestItemModel>{
+        new CommonItemBase("ItemsCoupon2", <QuestItemModel>{
                 "internalID": "ItemsCoupon2",
                 "displayName": "Really Really Resource Coupon",
                 "sellPrice": 1,
@@ -30802,7 +30802,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsA0", <QuestItemModel>{
+        new CommonItemBase("CardsA0", <QuestItemModel>{
                 "internalID": "CardsA0",
                 "displayName": "CardsA0",
                 "sellPrice": 1,
@@ -30819,7 +30819,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsA1", <QuestItemModel>{
+        new CommonItemBase("CardsA1", <QuestItemModel>{
                 "internalID": "CardsA1",
                 "displayName": "CardsA1",
                 "sellPrice": 1,
@@ -30836,7 +30836,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsA2", <QuestItemModel>{
+        new CommonItemBase("CardsA2", <QuestItemModel>{
                 "internalID": "CardsA2",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -30853,7 +30853,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsA3", <QuestItemModel>{
+        new CommonItemBase("CardsA3", <QuestItemModel>{
                 "internalID": "CardsA3",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -30870,7 +30870,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsA4", <QuestItemModel>{
+        new CommonItemBase("CardsA4", <QuestItemModel>{
                 "internalID": "CardsA4",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -30887,7 +30887,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsA5", <QuestItemModel>{
+        new CommonItemBase("CardsA5", <QuestItemModel>{
                 "internalID": "CardsA5",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -30904,7 +30904,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsA6", <QuestItemModel>{
+        new CommonItemBase("CardsA6", <QuestItemModel>{
                 "internalID": "CardsA6",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -30921,7 +30921,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsA7", <QuestItemModel>{
+        new CommonItemBase("CardsA7", <QuestItemModel>{
                 "internalID": "CardsA7",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -30938,7 +30938,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsA8", <QuestItemModel>{
+        new CommonItemBase("CardsA8", <QuestItemModel>{
                 "internalID": "CardsA8",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -30955,7 +30955,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsA9", <QuestItemModel>{
+        new CommonItemBase("CardsA9", <QuestItemModel>{
                 "internalID": "CardsA9",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -30972,7 +30972,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsA10", <QuestItemModel>{
+        new CommonItemBase("CardsA10", <QuestItemModel>{
                 "internalID": "CardsA10",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -30989,7 +30989,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsA11", <QuestItemModel>{
+        new CommonItemBase("CardsA11", <QuestItemModel>{
                 "internalID": "CardsA11",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31006,7 +31006,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsA12", <QuestItemModel>{
+        new CommonItemBase("CardsA12", <QuestItemModel>{
                 "internalID": "CardsA12",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31023,7 +31023,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsA13", <QuestItemModel>{
+        new CommonItemBase("CardsA13", <QuestItemModel>{
                 "internalID": "CardsA13",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31040,7 +31040,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsA14", <QuestItemModel>{
+        new CommonItemBase("CardsA14", <QuestItemModel>{
                 "internalID": "CardsA14",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31057,7 +31057,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsA15", <QuestItemModel>{
+        new CommonItemBase("CardsA15", <QuestItemModel>{
                 "internalID": "CardsA15",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31074,7 +31074,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsA16", <QuestItemModel>{
+        new CommonItemBase("CardsA16", <QuestItemModel>{
                 "internalID": "CardsA16",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31091,7 +31091,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsB1", <QuestItemModel>{
+        new CommonItemBase("CardsB1", <QuestItemModel>{
                 "internalID": "CardsB1",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31108,7 +31108,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsB2", <QuestItemModel>{
+        new CommonItemBase("CardsB2", <QuestItemModel>{
                 "internalID": "CardsB2",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31125,7 +31125,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsB3", <QuestItemModel>{
+        new CommonItemBase("CardsB3", <QuestItemModel>{
                 "internalID": "CardsB3",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31142,7 +31142,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsB4", <QuestItemModel>{
+        new CommonItemBase("CardsB4", <QuestItemModel>{
                 "internalID": "CardsB4",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31159,7 +31159,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsB5", <QuestItemModel>{
+        new CommonItemBase("CardsB5", <QuestItemModel>{
                 "internalID": "CardsB5",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31176,7 +31176,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsB6", <QuestItemModel>{
+        new CommonItemBase("CardsB6", <QuestItemModel>{
                 "internalID": "CardsB6",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31193,7 +31193,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsB7", <QuestItemModel>{
+        new CommonItemBase("CardsB7", <QuestItemModel>{
                 "internalID": "CardsB7",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31210,7 +31210,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsB8", <QuestItemModel>{
+        new CommonItemBase("CardsB8", <QuestItemModel>{
                 "internalID": "CardsB8",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31227,7 +31227,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsB9", <QuestItemModel>{
+        new CommonItemBase("CardsB9", <QuestItemModel>{
                 "internalID": "CardsB9",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31244,7 +31244,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsB10", <QuestItemModel>{
+        new CommonItemBase("CardsB10", <QuestItemModel>{
                 "internalID": "CardsB10",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31261,7 +31261,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsB11", <QuestItemModel>{
+        new CommonItemBase("CardsB11", <QuestItemModel>{
                 "internalID": "CardsB11",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31278,7 +31278,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsB12", <QuestItemModel>{
+        new CommonItemBase("CardsB12", <QuestItemModel>{
                 "internalID": "CardsB12",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31295,7 +31295,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsB13", <QuestItemModel>{
+        new CommonItemBase("CardsB13", <QuestItemModel>{
                 "internalID": "CardsB13",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31312,7 +31312,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsB14", <QuestItemModel>{
+        new CommonItemBase("CardsB14", <QuestItemModel>{
                 "internalID": "CardsB14",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31329,7 +31329,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsC1", <QuestItemModel>{
+        new CommonItemBase("CardsC1", <QuestItemModel>{
                 "internalID": "CardsC1",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31346,7 +31346,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsC2", <QuestItemModel>{
+        new CommonItemBase("CardsC2", <QuestItemModel>{
                 "internalID": "CardsC2",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31363,7 +31363,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsC3", <QuestItemModel>{
+        new CommonItemBase("CardsC3", <QuestItemModel>{
                 "internalID": "CardsC3",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31380,7 +31380,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsC4", <QuestItemModel>{
+        new CommonItemBase("CardsC4", <QuestItemModel>{
                 "internalID": "CardsC4",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31397,7 +31397,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsC5", <QuestItemModel>{
+        new CommonItemBase("CardsC5", <QuestItemModel>{
                 "internalID": "CardsC5",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31414,7 +31414,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsC6", <QuestItemModel>{
+        new CommonItemBase("CardsC6", <QuestItemModel>{
                 "internalID": "CardsC6",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31431,7 +31431,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsC7", <QuestItemModel>{
+        new CommonItemBase("CardsC7", <QuestItemModel>{
                 "internalID": "CardsC7",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31448,7 +31448,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsC8", <QuestItemModel>{
+        new CommonItemBase("CardsC8", <QuestItemModel>{
                 "internalID": "CardsC8",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31465,7 +31465,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsC9", <QuestItemModel>{
+        new CommonItemBase("CardsC9", <QuestItemModel>{
                 "internalID": "CardsC9",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31482,7 +31482,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsC10", <QuestItemModel>{
+        new CommonItemBase("CardsC10", <QuestItemModel>{
                 "internalID": "CardsC10",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31499,7 +31499,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsC11", <QuestItemModel>{
+        new CommonItemBase("CardsC11", <QuestItemModel>{
                 "internalID": "CardsC11",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31516,7 +31516,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsC12", <QuestItemModel>{
+        new CommonItemBase("CardsC12", <QuestItemModel>{
                 "internalID": "CardsC12",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31533,7 +31533,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsC13", <QuestItemModel>{
+        new CommonItemBase("CardsC13", <QuestItemModel>{
                 "internalID": "CardsC13",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31550,7 +31550,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsC14", <QuestItemModel>{
+        new CommonItemBase("CardsC14", <QuestItemModel>{
                 "internalID": "CardsC14",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31567,7 +31567,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsC15", <QuestItemModel>{
+        new CommonItemBase("CardsC15", <QuestItemModel>{
                 "internalID": "CardsC15",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31584,7 +31584,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsC16", <QuestItemModel>{
+        new CommonItemBase("CardsC16", <QuestItemModel>{
                 "internalID": "CardsC16",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31601,7 +31601,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsD1", <QuestItemModel>{
+        new CommonItemBase("CardsD1", <QuestItemModel>{
                 "internalID": "CardsD1",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31618,7 +31618,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsD2", <QuestItemModel>{
+        new CommonItemBase("CardsD2", <QuestItemModel>{
                 "internalID": "CardsD2",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31635,7 +31635,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsD3", <QuestItemModel>{
+        new CommonItemBase("CardsD3", <QuestItemModel>{
                 "internalID": "CardsD3",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31652,7 +31652,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsD4", <QuestItemModel>{
+        new CommonItemBase("CardsD4", <QuestItemModel>{
                 "internalID": "CardsD4",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31669,7 +31669,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsD5", <QuestItemModel>{
+        new CommonItemBase("CardsD5", <QuestItemModel>{
                 "internalID": "CardsD5",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31686,7 +31686,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsD6", <QuestItemModel>{
+        new CommonItemBase("CardsD6", <QuestItemModel>{
                 "internalID": "CardsD6",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31703,7 +31703,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsD7", <QuestItemModel>{
+        new CommonItemBase("CardsD7", <QuestItemModel>{
                 "internalID": "CardsD7",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31720,7 +31720,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsD8", <QuestItemModel>{
+        new CommonItemBase("CardsD8", <QuestItemModel>{
                 "internalID": "CardsD8",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31737,7 +31737,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsD9", <QuestItemModel>{
+        new CommonItemBase("CardsD9", <QuestItemModel>{
                 "internalID": "CardsD9",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31754,7 +31754,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsD10", <QuestItemModel>{
+        new CommonItemBase("CardsD10", <QuestItemModel>{
                 "internalID": "CardsD10",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31771,7 +31771,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsD11", <QuestItemModel>{
+        new CommonItemBase("CardsD11", <QuestItemModel>{
                 "internalID": "CardsD11",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31788,7 +31788,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsD12", <QuestItemModel>{
+        new CommonItemBase("CardsD12", <QuestItemModel>{
                 "internalID": "CardsD12",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31805,7 +31805,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsD13", <QuestItemModel>{
+        new CommonItemBase("CardsD13", <QuestItemModel>{
                 "internalID": "CardsD13",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31822,7 +31822,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsD16", <QuestItemModel>{
+        new CommonItemBase("CardsD16", <QuestItemModel>{
                 "internalID": "CardsD16",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31839,7 +31839,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsD17", <QuestItemModel>{
+        new CommonItemBase("CardsD17", <QuestItemModel>{
                 "internalID": "CardsD17",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31856,7 +31856,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsD18", <QuestItemModel>{
+        new CommonItemBase("CardsD18", <QuestItemModel>{
                 "internalID": "CardsD18",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31873,7 +31873,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsD19", <QuestItemModel>{
+        new CommonItemBase("CardsD19", <QuestItemModel>{
                 "internalID": "CardsD19",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31890,7 +31890,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsD20", <QuestItemModel>{
+        new CommonItemBase("CardsD20", <QuestItemModel>{
                 "internalID": "CardsD20",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31907,7 +31907,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsD21", <QuestItemModel>{
+        new CommonItemBase("CardsD21", <QuestItemModel>{
                 "internalID": "CardsD21",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31924,7 +31924,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsE0", <QuestItemModel>{
+        new CommonItemBase("CardsE0", <QuestItemModel>{
                 "internalID": "CardsE0",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31941,7 +31941,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsE1", <QuestItemModel>{
+        new CommonItemBase("CardsE1", <QuestItemModel>{
                 "internalID": "CardsE1",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31958,7 +31958,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsE2", <QuestItemModel>{
+        new CommonItemBase("CardsE2", <QuestItemModel>{
                 "internalID": "CardsE2",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31975,7 +31975,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsE3", <QuestItemModel>{
+        new CommonItemBase("CardsE3", <QuestItemModel>{
                 "internalID": "CardsE3",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -31992,7 +31992,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsE4", <QuestItemModel>{
+        new CommonItemBase("CardsE4", <QuestItemModel>{
                 "internalID": "CardsE4",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32009,7 +32009,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsE5", <QuestItemModel>{
+        new CommonItemBase("CardsE5", <QuestItemModel>{
                 "internalID": "CardsE5",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32026,7 +32026,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsE6", <QuestItemModel>{
+        new CommonItemBase("CardsE6", <QuestItemModel>{
                 "internalID": "CardsE6",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32043,7 +32043,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsE7", <QuestItemModel>{
+        new CommonItemBase("CardsE7", <QuestItemModel>{
                 "internalID": "CardsE7",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32060,7 +32060,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsE8", <QuestItemModel>{
+        new CommonItemBase("CardsE8", <QuestItemModel>{
                 "internalID": "CardsE8",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32077,7 +32077,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsE9", <QuestItemModel>{
+        new CommonItemBase("CardsE9", <QuestItemModel>{
                 "internalID": "CardsE9",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32094,7 +32094,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsE10", <QuestItemModel>{
+        new CommonItemBase("CardsE10", <QuestItemModel>{
                 "internalID": "CardsE10",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32111,7 +32111,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsE11", <QuestItemModel>{
+        new CommonItemBase("CardsE11", <QuestItemModel>{
                 "internalID": "CardsE11",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32128,7 +32128,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsE12", <QuestItemModel>{
+        new CommonItemBase("CardsE12", <QuestItemModel>{
                 "internalID": "CardsE12",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32145,7 +32145,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsE13", <QuestItemModel>{
+        new CommonItemBase("CardsE13", <QuestItemModel>{
                 "internalID": "CardsE13",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32162,7 +32162,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsE14", <QuestItemModel>{
+        new CommonItemBase("CardsE14", <QuestItemModel>{
                 "internalID": "CardsE14",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32179,7 +32179,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsE15", <QuestItemModel>{
+        new CommonItemBase("CardsE15", <QuestItemModel>{
                 "internalID": "CardsE15",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32196,7 +32196,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsF1", <QuestItemModel>{
+        new CommonItemBase("CardsF1", <QuestItemModel>{
                 "internalID": "CardsF1",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32213,7 +32213,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsF2", <QuestItemModel>{
+        new CommonItemBase("CardsF2", <QuestItemModel>{
                 "internalID": "CardsF2",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32230,7 +32230,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsF3", <QuestItemModel>{
+        new CommonItemBase("CardsF3", <QuestItemModel>{
                 "internalID": "CardsF3",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32247,7 +32247,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsF4", <QuestItemModel>{
+        new CommonItemBase("CardsF4", <QuestItemModel>{
                 "internalID": "CardsF4",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32264,7 +32264,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsF5", <QuestItemModel>{
+        new CommonItemBase("CardsF5", <QuestItemModel>{
                 "internalID": "CardsF5",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32281,7 +32281,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsF6", <QuestItemModel>{
+        new CommonItemBase("CardsF6", <QuestItemModel>{
                 "internalID": "CardsF6",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32298,7 +32298,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsF7", <QuestItemModel>{
+        new CommonItemBase("CardsF7", <QuestItemModel>{
                 "internalID": "CardsF7",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32315,7 +32315,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsF8", <QuestItemModel>{
+        new CommonItemBase("CardsF8", <QuestItemModel>{
                 "internalID": "CardsF8",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32332,7 +32332,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsF9", <QuestItemModel>{
+        new CommonItemBase("CardsF9", <QuestItemModel>{
                 "internalID": "CardsF9",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32349,7 +32349,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsF10", <QuestItemModel>{
+        new CommonItemBase("CardsF10", <QuestItemModel>{
                 "internalID": "CardsF10",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32366,7 +32366,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsF11", <QuestItemModel>{
+        new CommonItemBase("CardsF11", <QuestItemModel>{
                 "internalID": "CardsF11",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32383,7 +32383,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsF12", <QuestItemModel>{
+        new CommonItemBase("CardsF12", <QuestItemModel>{
                 "internalID": "CardsF12",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32400,7 +32400,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsF13", <QuestItemModel>{
+        new CommonItemBase("CardsF13", <QuestItemModel>{
                 "internalID": "CardsF13",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32417,7 +32417,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsF14", <QuestItemModel>{
+        new CommonItemBase("CardsF14", <QuestItemModel>{
                 "internalID": "CardsF14",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32434,7 +32434,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsF15", <QuestItemModel>{
+        new CommonItemBase("CardsF15", <QuestItemModel>{
                 "internalID": "CardsF15",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32451,7 +32451,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsF16", <QuestItemModel>{
+        new CommonItemBase("CardsF16", <QuestItemModel>{
                 "internalID": "CardsF16",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32468,7 +32468,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsF17", <QuestItemModel>{
+        new CommonItemBase("CardsF17", <QuestItemModel>{
                 "internalID": "CardsF17",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32485,7 +32485,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsF18", <QuestItemModel>{
+        new CommonItemBase("CardsF18", <QuestItemModel>{
                 "internalID": "CardsF18",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32502,7 +32502,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsF19", <QuestItemModel>{
+        new CommonItemBase("CardsF19", <QuestItemModel>{
                 "internalID": "CardsF19",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32519,7 +32519,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsF20", <QuestItemModel>{
+        new CommonItemBase("CardsF20", <QuestItemModel>{
                 "internalID": "CardsF20",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32536,7 +32536,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsF21", <QuestItemModel>{
+        new CommonItemBase("CardsF21", <QuestItemModel>{
                 "internalID": "CardsF21",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32553,7 +32553,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsF22", <QuestItemModel>{
+        new CommonItemBase("CardsF22", <QuestItemModel>{
                 "internalID": "CardsF22",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32570,7 +32570,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsF23", <QuestItemModel>{
+        new CommonItemBase("CardsF23", <QuestItemModel>{
                 "internalID": "CardsF23",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32587,7 +32587,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsG1", <QuestItemModel>{
+        new CommonItemBase("CardsG1", <QuestItemModel>{
                 "internalID": "CardsG1",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32604,7 +32604,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsG2", <QuestItemModel>{
+        new CommonItemBase("CardsG2", <QuestItemModel>{
                 "internalID": "CardsG2",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32621,7 +32621,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsG3", <QuestItemModel>{
+        new CommonItemBase("CardsG3", <QuestItemModel>{
                 "internalID": "CardsG3",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32638,7 +32638,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsG4", <QuestItemModel>{
+        new CommonItemBase("CardsG4", <QuestItemModel>{
                 "internalID": "CardsG4",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32655,7 +32655,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsG5", <QuestItemModel>{
+        new CommonItemBase("CardsG5", <QuestItemModel>{
                 "internalID": "CardsG5",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32672,7 +32672,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsG6", <QuestItemModel>{
+        new CommonItemBase("CardsG6", <QuestItemModel>{
                 "internalID": "CardsG6",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32689,7 +32689,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsG7", <QuestItemModel>{
+        new CommonItemBase("CardsG7", <QuestItemModel>{
                 "internalID": "CardsG7",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32706,7 +32706,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsG8", <QuestItemModel>{
+        new CommonItemBase("CardsG8", <QuestItemModel>{
                 "internalID": "CardsG8",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32723,7 +32723,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsG9", <QuestItemModel>{
+        new CommonItemBase("CardsG9", <QuestItemModel>{
                 "internalID": "CardsG9",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32740,7 +32740,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsG10", <QuestItemModel>{
+        new CommonItemBase("CardsG10", <QuestItemModel>{
                 "internalID": "CardsG10",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32757,7 +32757,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsG11", <QuestItemModel>{
+        new CommonItemBase("CardsG11", <QuestItemModel>{
                 "internalID": "CardsG11",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32774,7 +32774,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsG12", <QuestItemModel>{
+        new CommonItemBase("CardsG12", <QuestItemModel>{
                 "internalID": "CardsG12",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32791,7 +32791,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsG13", <QuestItemModel>{
+        new CommonItemBase("CardsG13", <QuestItemModel>{
                 "internalID": "CardsG13",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32808,7 +32808,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsG14", <QuestItemModel>{
+        new CommonItemBase("CardsG14", <QuestItemModel>{
                 "internalID": "CardsG14",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32825,7 +32825,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsX0", <QuestItemModel>{
+        new CommonItemBase("CardsX0", <QuestItemModel>{
                 "internalID": "CardsX0",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32842,7 +32842,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsX1", <QuestItemModel>{
+        new CommonItemBase("CardsX1", <QuestItemModel>{
                 "internalID": "CardsX1",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32859,7 +32859,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsX2", <QuestItemModel>{
+        new CommonItemBase("CardsX2", <QuestItemModel>{
                 "internalID": "CardsX2",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32876,7 +32876,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsX3", <QuestItemModel>{
+        new CommonItemBase("CardsX3", <QuestItemModel>{
                 "internalID": "CardsX3",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32893,7 +32893,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsX4", <QuestItemModel>{
+        new CommonItemBase("CardsX4", <QuestItemModel>{
                 "internalID": "CardsX4",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32910,7 +32910,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsX5", <QuestItemModel>{
+        new CommonItemBase("CardsX5", <QuestItemModel>{
                 "internalID": "CardsX5",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32927,7 +32927,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsX21", <QuestItemModel>{
+        new CommonItemBase("CardsX21", <QuestItemModel>{
                 "internalID": "CardsX21",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32944,7 +32944,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsX22", <QuestItemModel>{
+        new CommonItemBase("CardsX22", <QuestItemModel>{
                 "internalID": "CardsX22",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32961,7 +32961,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsX6", <QuestItemModel>{
+        new CommonItemBase("CardsX6", <QuestItemModel>{
                 "internalID": "CardsX6",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32978,7 +32978,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsX7", <QuestItemModel>{
+        new CommonItemBase("CardsX7", <QuestItemModel>{
                 "internalID": "CardsX7",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -32995,7 +32995,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsX8", <QuestItemModel>{
+        new CommonItemBase("CardsX8", <QuestItemModel>{
                 "internalID": "CardsX8",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33012,7 +33012,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsX9", <QuestItemModel>{
+        new CommonItemBase("CardsX9", <QuestItemModel>{
                 "internalID": "CardsX9",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33029,7 +33029,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsX10", <QuestItemModel>{
+        new CommonItemBase("CardsX10", <QuestItemModel>{
                 "internalID": "CardsX10",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33046,7 +33046,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsX11", <QuestItemModel>{
+        new CommonItemBase("CardsX11", <QuestItemModel>{
                 "internalID": "CardsX11",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33063,7 +33063,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsX12", <QuestItemModel>{
+        new CommonItemBase("CardsX12", <QuestItemModel>{
                 "internalID": "CardsX12",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33080,7 +33080,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsX13", <QuestItemModel>{
+        new CommonItemBase("CardsX13", <QuestItemModel>{
                 "internalID": "CardsX13",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33097,7 +33097,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsX14", <QuestItemModel>{
+        new CommonItemBase("CardsX14", <QuestItemModel>{
                 "internalID": "CardsX14",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33114,7 +33114,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsX15", <QuestItemModel>{
+        new CommonItemBase("CardsX15", <QuestItemModel>{
                 "internalID": "CardsX15",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33131,7 +33131,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsX16", <QuestItemModel>{
+        new CommonItemBase("CardsX16", <QuestItemModel>{
                 "internalID": "CardsX16",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33148,7 +33148,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsX17", <QuestItemModel>{
+        new CommonItemBase("CardsX17", <QuestItemModel>{
                 "internalID": "CardsX17",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33165,7 +33165,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsX18", <QuestItemModel>{
+        new CommonItemBase("CardsX18", <QuestItemModel>{
                 "internalID": "CardsX18",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33182,7 +33182,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsX19", <QuestItemModel>{
+        new CommonItemBase("CardsX19", <QuestItemModel>{
                 "internalID": "CardsX19",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33199,7 +33199,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsX20", <QuestItemModel>{
+        new CommonItemBase("CardsX20", <QuestItemModel>{
                 "internalID": "CardsX20",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33216,7 +33216,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsY0", <QuestItemModel>{
+        new CommonItemBase("CardsY0", <QuestItemModel>{
                 "internalID": "CardsY0",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33233,7 +33233,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsY1", <QuestItemModel>{
+        new CommonItemBase("CardsY1", <QuestItemModel>{
                 "internalID": "CardsY1",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33250,7 +33250,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsY2", <QuestItemModel>{
+        new CommonItemBase("CardsY2", <QuestItemModel>{
                 "internalID": "CardsY2",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33267,7 +33267,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsY3", <QuestItemModel>{
+        new CommonItemBase("CardsY3", <QuestItemModel>{
                 "internalID": "CardsY3",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33284,7 +33284,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsY4", <QuestItemModel>{
+        new CommonItemBase("CardsY4", <QuestItemModel>{
                 "internalID": "CardsY4",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33301,7 +33301,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsY5", <QuestItemModel>{
+        new CommonItemBase("CardsY5", <QuestItemModel>{
                 "internalID": "CardsY5",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33318,7 +33318,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsY6", <QuestItemModel>{
+        new CommonItemBase("CardsY6", <QuestItemModel>{
                 "internalID": "CardsY6",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33335,7 +33335,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsY7", <QuestItemModel>{
+        new CommonItemBase("CardsY7", <QuestItemModel>{
                 "internalID": "CardsY7",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33352,7 +33352,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsY8", <QuestItemModel>{
+        new CommonItemBase("CardsY8", <QuestItemModel>{
                 "internalID": "CardsY8",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33369,7 +33369,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsY9", <QuestItemModel>{
+        new CommonItemBase("CardsY9", <QuestItemModel>{
                 "internalID": "CardsY9",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33386,7 +33386,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsY10", <QuestItemModel>{
+        new CommonItemBase("CardsY10", <QuestItemModel>{
                 "internalID": "CardsY10",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33403,7 +33403,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsY11", <QuestItemModel>{
+        new CommonItemBase("CardsY11", <QuestItemModel>{
                 "internalID": "CardsY11",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33420,7 +33420,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsY12", <QuestItemModel>{
+        new CommonItemBase("CardsY12", <QuestItemModel>{
                 "internalID": "CardsY12",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33437,7 +33437,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsY13", <QuestItemModel>{
+        new CommonItemBase("CardsY13", <QuestItemModel>{
                 "internalID": "CardsY13",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33454,7 +33454,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsY14", <QuestItemModel>{
+        new CommonItemBase("CardsY14", <QuestItemModel>{
                 "internalID": "CardsY14",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33471,7 +33471,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsZ0", <QuestItemModel>{
+        new CommonItemBase("CardsZ0", <QuestItemModel>{
                 "internalID": "CardsZ0",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33488,7 +33488,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsZ1", <QuestItemModel>{
+        new CommonItemBase("CardsZ1", <QuestItemModel>{
                 "internalID": "CardsZ1",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33505,7 +33505,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsZ2", <QuestItemModel>{
+        new CommonItemBase("CardsZ2", <QuestItemModel>{
                 "internalID": "CardsZ2",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33522,7 +33522,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsZ3", <QuestItemModel>{
+        new CommonItemBase("CardsZ3", <QuestItemModel>{
                 "internalID": "CardsZ3",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33539,7 +33539,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsZ4", <QuestItemModel>{
+        new CommonItemBase("CardsZ4", <QuestItemModel>{
                 "internalID": "CardsZ4",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33556,7 +33556,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsZ5", <QuestItemModel>{
+        new CommonItemBase("CardsZ5", <QuestItemModel>{
                 "internalID": "CardsZ5",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33573,7 +33573,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsZ6", <QuestItemModel>{
+        new CommonItemBase("CardsZ6", <QuestItemModel>{
                 "internalID": "CardsZ6",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33590,7 +33590,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsZ7", <QuestItemModel>{
+        new CommonItemBase("CardsZ7", <QuestItemModel>{
                 "internalID": "CardsZ7",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33607,7 +33607,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsZ8", <QuestItemModel>{
+        new CommonItemBase("CardsZ8", <QuestItemModel>{
                 "internalID": "CardsZ8",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33624,7 +33624,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsZ9", <QuestItemModel>{
+        new CommonItemBase("CardsZ9", <QuestItemModel>{
                 "internalID": "CardsZ9",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33641,7 +33641,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsZ10", <QuestItemModel>{
+        new CommonItemBase("CardsZ10", <QuestItemModel>{
                 "internalID": "CardsZ10",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33658,7 +33658,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsZ11", <QuestItemModel>{
+        new CommonItemBase("CardsZ11", <QuestItemModel>{
                 "internalID": "CardsZ11",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33675,7 +33675,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsZ12", <QuestItemModel>{
+        new CommonItemBase("CardsZ12", <QuestItemModel>{
                 "internalID": "CardsZ12",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33692,7 +33692,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsZ13", <QuestItemModel>{
+        new CommonItemBase("CardsZ13", <QuestItemModel>{
                 "internalID": "CardsZ13",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33709,7 +33709,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsZ14", <QuestItemModel>{
+        new CommonItemBase("CardsZ14", <QuestItemModel>{
                 "internalID": "CardsZ14",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33726,7 +33726,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsZ15", <QuestItemModel>{
+        new CommonItemBase("CardsZ15", <QuestItemModel>{
                 "internalID": "CardsZ15",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,
@@ -33743,7 +33743,7 @@ export const initItemDetailRepo = () => {
                 "desc_line7": "Filler",
                 "desc_line8": "Filler"
             }),
-        new EquipItemBase("CardsZ16", <QuestItemModel>{
+        new CommonItemBase("CardsZ16", <QuestItemModel>{
                 "internalID": "CardsZ16",
                 "displayName": "DONTFILL",
                 "sellPrice": 1,

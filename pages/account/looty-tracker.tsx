@@ -8,25 +8,25 @@ import {
 import { useState, useEffect, useContext, useMemo } from 'react';
 import { AppContext } from '../../data/appContext'
 import { LootyInfo } from '../../data/domain/lootyTracker';
-import { ItemSources } from '../../data/domain/items';
 import { NextSeo } from 'next-seo';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 import IconImage from '../../components/base/IconImage';
+import { SourcesModel } from '../../data/domain/model/sourcesModel';
 
 const getRegex = () => { return /Cards(\w)(\d+)/g };
 const getEnhancerRegex = () => { return /DungEnhancer(\d+)/g };
 
 
-function ItemSourcesDisplay({ sources }: { sources: ItemSources }) {
+function ItemSourcesDisplay({ sources }: { sources: SourcesModel }) {
 
     const possibleSources = useMemo(() => {
         if (!sources) {
             return []
         }
 
-        const fromSources = sources.sources.map(x => x.txtName);
-        const fromRecipe = sources.recipeFrom.map(x => x.txtName);
-        const fromQuests = sources.questAss.map(x => x.txtName);
+        const fromSources = sources.sources ? sources.sources.map(x => x.txtName) : [];
+        const fromRecipe = sources.recipeFrom ? sources.recipeFrom.map(x => x.txtName) : [];
+        const fromQuests = sources.questAss ? sources.questAss.map(x => x.txtName) : [];
         return Array.from(new Set([...fromSources, ...fromRecipe, ...fromQuests]));
     }, [sources]);
 

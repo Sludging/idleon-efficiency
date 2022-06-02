@@ -40,7 +40,7 @@ function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stam
 
     function TipContent({ stamp, faceLeft }: { stamp: Stamp, faceLeft: boolean }) {
         if (stamp.level == 0) {
-            if (stampItem && stampItem.sources.sources.length > 0) {
+            if (stampItem && stampItem.sources.sources && stampItem.sources.sources.length > 0) {
                 return <ItemSourcesDisplay sources={stampItem.sources} />
             }
             else {

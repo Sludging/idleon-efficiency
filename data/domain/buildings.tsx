@@ -1,6 +1,7 @@
 import { BuildingBase } from "./data/BuildingRepo";
 import { ImageData } from "./imageData";
 import { BuildingModel } from "./model/buildingModel";
+import { ComponentModel } from "./model/componentModel";
 
 // Randolist[13]
 const buildMultiplier = "15 200 2250 12000 25000 60000 100000 50000 15000000 25 700 4500 20000 40000 125000 1250000 500000 35000000 60 1250 6000 27500 70000 200000 2000000 7000000 60000000".split(" ");
@@ -8,7 +9,7 @@ const buildMultiplier = "15 200 2250 12000 25000 60000 100000 50000 15000000 25 
 export class Building {
     description: string
     bonus: string
-    lvlUpReq: { item: string, quantity: number}[]
+    lvlUpReq: ComponentModel[]
     maxLvl: number
     costIncrement: number
     bonusInc: number[]
@@ -22,7 +23,7 @@ export class Building {
     constructor(public index: number, data: BuildingModel) {
         this.description = data.description;
         this.bonus = data.bonus;
-        this.lvlUpReq = data.lvlUpReq;
+        this.lvlUpReq = data.lvlUpReq as ComponentModel[];
         this.maxLvl = data.maxLvl;
         this.costIncrement = data.costInc;
         this.bonusInc = data.bonusInc;
