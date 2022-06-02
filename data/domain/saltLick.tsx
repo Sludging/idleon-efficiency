@@ -35,9 +35,9 @@ export class SaltLick {
     getCost = (bonusIndex: number, level?: number) => {
         const bonus = this.bonuses[bonusIndex];
         if (level) {
-            return Math.floor(bonus.data.baseCost * Math.pow(bonus.data.increment, level));    
+            return Math.floor(bonus.data.baseCost * Math.pow(bonus.data.costInc, level));    
         }
-        return Math.floor(bonus.data.baseCost * Math.pow(bonus.data.increment, bonus.level ?? 0));
+        return Math.floor(bonus.data.baseCost * Math.pow(bonus.data.costInc, bonus.level ?? 0));
     }
 
     getCostToMax = (bonusIndex: number) => {
