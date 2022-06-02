@@ -23,7 +23,8 @@ import TipDisplay, { TipDirection } from "../../components/base/TipDisplay";
 import { Ascending } from "grommet-icons";
 import IconImage from "../../components/base/IconImage";
 import { Sigils } from "../../data/domain/sigils";
-import TextAndLabel from "../../components/base/TextAndLabel";
+import TextAndLabel, { ComponentAndLabel } from "../../components/base/TextAndLabel";
+import { TimeDown } from "../../components/base/TimeDisplay";
 
 const CapitalizedH3 = styled.h3`
     text-transform: capitalize
@@ -197,7 +198,7 @@ function VialsDisplay() {
                                         <IconImage data={vial.getBackgroundImageData()} />
                                     </Box>
                                     <Box>
-                                        <IconImage data={vial.getImageData()} scale={1.3}/>
+                                        <IconImage data={vial.getImageData()} scale={1.3} />
                                     </Box>
                                 </Stack>
                             </TipDisplay>
@@ -225,18 +226,27 @@ function SigilsDisplay() {
             <Grid columns="1/3">
                 {
                     sigilData?.sigils.map((sigil, index) => {
-                        const isMaxed = sigil.progress > sigil.data.boostCost;
-                        const reqLimit = sigil.progress > sigil.data.unlockCost ? sigil.data.boostCost : sigil.data.unlockCost;
+                        const reqLimit = sigil.boostLevel < 0 ? sigil.data.unlockCost : sigil.data.boostCost;
+                        const chargeSpeed = sigil.activePlayers * sigilData.chargeSpeed;
+                        const timeToNext = ((reqLimit - sigil.progress) / chargeSpeed) * 3600;
                         return (
-                            <ShadowBox background="dark-1" key={index} margin={{right: 'small', bottom: 'small'}} gap="medium" align="start" pad="small">
-                                <IconImage data={sigil.getImageData()} />
+                            <ShadowBox background="dark-1" key={index} margin={{ right: 'small', bottom: 'small' }} gap="medium" align="start" pad="small">
+                                <IconImage style={sigil.boostLevel == 1 ? { filter: 'hue-rotate(190deg)' } : sigil.boostLevel == -1 ? { opacity: 0.2 } : undefined} data={sigil.getImageData()} />
                                 <Box direction="row" gap="medium">
                                     <TextAndLabel textSize="xsmall" label="Name" text={sigil.data.name} />
-                                    <TextAndLabel textSize="xsmall" label="Description" text={sigil.data.desc} />
+                                    <TextAndLabel textSize="xsmall" label="Description" text={sigil.getBonusText()} />
                                 </Box>
-                                {
-                                    !isMaxed && <TextAndLabel label="Progress" text={`${nFormatter(sigil.progress, "Smaller")}/${nFormatter(reqLimit, "Smaller")}`} />
-                                }
+                                <Box direction="row" gap="medium">
+                                    <TextAndLabel textSize="xsmall" label="Progress" text={sigil.boostLevel != 1 ? `${nFormatter(sigil.progress, "Smaller")}/${nFormatter(reqLimit, "Smaller")}` : "Maxed"} />
+                                    {sigil.activePlayers > 0 &&
+                                        <ComponentAndLabel
+                                            label="Time To max"
+                                            component={
+                                                <TimeDown addSeconds={timeToNext} />
+                                            }
+                                        />
+                                    }
+                                </Box>
                             </ShadowBox>
                         )
                     })

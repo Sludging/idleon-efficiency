@@ -8,14 +8,14 @@ const cdnLoader = ({ src, width, quality } : ImageLoaderProps): string => {
     return `${BASE_URL}/${src}.png`;
 }
 
-const IconImage = ({ data, scale = 1 }: { data: ImageData, scale?: number }) => {
+const IconImage = ({ data, scale = 1, style }: { data: ImageData, scale?: number, style?: React.CSSProperties }) => {
     if (data.location == "Blank") {
         return (
             <Box height={`${data.height * scale}px`} width={`${data.width * scale}px`} />
         );
     }
     return (
-        <Box height={`${data.height * scale}px`} width={`${data.width * scale}px`}>
+        <Box style={style} height={`${data.height * scale}px`} width={`${data.width * scale}px`}>
             <Image
                 src={data.location}
                 loader={cdnLoader}
