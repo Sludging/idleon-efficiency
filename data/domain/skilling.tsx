@@ -25,10 +25,10 @@ export class Skilling {
     }
 
     // if ("AllSkillxpz" == t) {
-    static getAllSkillXP = (player: Player, shrines: Shrine[], playerStatues: PlayerStatues, prayers: Prayer[], saltLickBonus: number = 0, dungeonBonus: number = 0, family: Family, goldFoodStampBonus: number = 0, goldFoodAchievement: boolean = false) => {
+    static getAllSkillXP = (player: Player, shrines: Shrine[], playerStatues: PlayerStatues, prayers: Prayer[], saltLickBonus: number = 0, dungeonBonus: number = 0, family: Family, goldFoodStampBonus: number = 0, goldFoodAchievement: boolean = false, sigilBonus: number = 0) => {
         const skillingCardBonus = Card.GetTotalBonusForId(player.cardInfo?.equippedCards ?? [], 50);
         const goldenFoodBonus = player.gear.food.filter(food => food && food.goldenFood != undefined && food.description.includes("Skill EXP"))
-            .reduce((sum, food) => sum += (food as Food).goldFoodBonus(food?.count ?? 0, player.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus() ?? 0, goldFoodStampBonus, goldFoodAchievement)), 0);
+            .reduce((sum, food) => sum += (food as Food).goldFoodBonus(food?.count ?? 0, player.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus() ?? 0, goldFoodStampBonus, goldFoodAchievement, sigilBonus)), 0);
         const cardSetBonus = player.cardInfo?.getBonusForId(3) ?? 0;
         const chizCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "Z9")?.getBonus() ?? 0
         const shrineBonus = shrines[ShrineConstants.ExpShrine].getBonus(player.currentMapId, chizCardBonus);

@@ -19,8 +19,9 @@ import { TimeDisplaySize, TimeDown } from '../../components/base/TimeDisplay';
 import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import { Worship as WorshipDomain } from '../../data/domain/worship';
 import { Prayer } from '../../data/domain/prayers';
-import { GroupBy, nFormatter } from '../../data/utility';
+import { GroupBy, GroupByFunction, nFormatter } from '../../data/utility';
 import IconImage from '../../components/base/IconImage';
+import { PrayerBase } from '../../data/domain/data/PrayerRepo';
 
 function ChargeDisplay() {
     const [playerData, setPlayerData] = useState<Player[]>();
@@ -248,7 +249,7 @@ function TotemDisplay() {
                         <ShadowBox key={index} background="dark-1" pad="medium" align="start" margin={{ right: 'large', bottom: 'small' }}>
                             <Grid columns={{ count: 5, size: 'auto' }} gap={{ column: 'medium' }} fill>
                                 <TextAndLabel text={totem.name} label="Name" />
-                                <TextAndLabel text={totem.map?.area ?? ""} label="Area" />
+                                <TextAndLabel text={totem.map.data.map.name ?? ""} label="Area" />
                                 <TextAndLabel text={totem.maxWave.toString()} label="Max Wave" />
                                 <TextAndLabel text={Math.floor(totem.getExpRewards() / totem.getChargeCost()).toString()} label="XP Per Charge" />
                                 <TextAndLabel text={totem.getSoulRewards(efficiency, effFoodBonus).toString()} label="Souls" />
@@ -286,7 +287,7 @@ function PrayerDisplay() {
     return (
         <Box gap="medium">
             {
-                Array.from(GroupBy(prayers.filter(prayer => prayer.name != "Some Prayer Name0"), "towerName").entries()).map(([tower, prayers], index) => (
+                Array.from(GroupByFunction(prayers.filter(prayer => prayer.data.name != "Some Prayer Name0"), function(base: PrayerBase) { return base.data.unlockZone}).entries()).map(([tower, prayers], index) => (
                     <Box key={index} gap="small">
                         <Text>{tower}</Text>
                         {
@@ -294,14 +295,14 @@ function PrayerDisplay() {
                                 <ShadowBox key={`prayer_${index}`} background="dark-1" pad="medium" align="start" margin={{ right: 'large', bottom: 'small' }}>
                                     <Grid columns={{ count: 7, size: 'auto' }} gap={{ column: 'medium' }} fill>
                                         <IconImage data={prayer.getImageData()} />
-                                        <TextAndLabel text={prayer.name} label="Name" />
-                                        <TextAndLabel text={`${prayer.level.toString()}/${prayer.maxLevel.toString()}`} label="Level" />
+                                        <TextAndLabel text={prayer.data.name} label="Name" />
+                                        <TextAndLabel text={`${prayer.level.toString()}/${prayer.data.maxLevel.toString()}`} label="Level" />
                                         <TextAndLabel text={prayer.getBonusText()} label="Bonus" />
                                         <TextAndLabel text={prayer.getCurseText()} label="Curse" />
-                                        {prayer.level == prayer.maxLevel && <Box align="center" justify="center"><Text color="green-1" size="large">Maxed!</Text></Box>}
-                                        {prayer.level == 0 && <TextAndLabel text={prayer.waveReq.toString()} label="Wave Req" />}
-                                        {prayer.level > 0 && prayer.level != prayer.maxLevel && <TextAndLabel text={nFormatter(prayer.getLevelCosts(), "Smaller")} label="Cost to next" />}
-                                        {prayer.level > 0 && prayer.level != prayer.maxLevel && <TextAndLabel text={nFormatter(prayer.getCostToMax(), "Smaller")} label="Cost to max" />}
+                                        {prayer.level == prayer.data.maxLevel && <Box align="center" justify="center"><Text color="green-1" size="large">Maxed!</Text></Box>}
+                                        {prayer.level == 0 && <TextAndLabel text={prayer.data.unlockWave.toString()} label="Wave Req" />}
+                                        {prayer.level > 0 && prayer.level != prayer.data.maxLevel && <TextAndLabel text={nFormatter(prayer.getLevelCosts(), "Smaller")} label="Cost to next" />}
+                                        {prayer.level > 0 && prayer.level != prayer.data.maxLevel && <TextAndLabel text={nFormatter(prayer.getCostToMax(), "Smaller")} label="Cost to max" />}
 
                                     </Grid>
                                 </ShadowBox>

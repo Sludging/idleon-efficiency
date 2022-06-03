@@ -163,13 +163,13 @@ export const parseForge = (forgeItemQuantity: number[], forgeProgress: number[],
 
     let index = 0;
     while (index < forgeItemQuantity.length) {
-        const oreItem = allItems.find(item => item.internalName == forgeItemOrder[index])?.duplicate() ?? new Item({ internalName: forgeItemOrder[index], displayName: forgeItemOrder[index] });
+        const oreItem = allItems.find(item => item.internalName == forgeItemOrder[index])?.duplicate() ?? Item.emptyItem(forgeItemOrder[index]);
         oreItem.count = forgeItemQuantity[index];
 
-        const oilItem = allItems.find(item => item.internalName == forgeItemOrder[index + 1])?.duplicate() ?? new Item({ internalName: forgeItemOrder[index + 1], displayName: forgeItemOrder[index + 1] });
+        const oilItem = allItems.find(item => item.internalName == forgeItemOrder[index + 1])?.duplicate() ?? Item.emptyItem(forgeItemOrder[index + 1]);
         oilItem.count = forgeItemQuantity[index + 1];
 
-        const barItem = allItems.find(item => item.internalName == forgeItemOrder[index + 2])?.duplicate() ?? new Item({ internalName: forgeItemOrder[index + 2], displayName: forgeItemOrder[index + 2] });
+        const barItem = allItems.find(item => item.internalName == forgeItemOrder[index + 2])?.duplicate() ?? Item.emptyItem(forgeItemOrder[index + 2]);
         barItem.count = forgeItemQuantity[index + 2];
 
         forge.slots.push(new ForgeSlot(oreItem, oilItem, barItem, forgeProgress[index / 3]));

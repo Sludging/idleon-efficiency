@@ -1,0 +1,192 @@
+import { PetUpgradeModel } from '../model/petUpgradeModel';
+
+export class PetUpgradeBase { constructor(public index: number, public data: PetUpgradeModel) { } }
+
+
+
+export const initPetUpgradeRepo = () => {
+    return [    
+        new PetUpgradeBase(0, <PetUpgradeModel>{
+                "upgradeName": "No Upgrade Selected",
+                "filler": "Filler",
+                "material": "PetDeadCell",
+                "cost": -1,
+                "baseMatCost": 6,
+                "costMatScale": 1.08,
+                "baseCost": 0,
+                "costScale": 1.15,
+                "maxLevel": 100,
+                "description": "TAP AN UPGRADE ABOVE! Also, as a reward for reading this, I'll let you know that upgrading this 'nothing' bonus actually boosts breeding exp gain!!",
+                "boostEffect": "",
+                "bonusQty": 0
+            }),
+        new PetUpgradeBase(1, <PetUpgradeModel>{
+                "upgradeName": "Genetic Splicing",
+                "filler": "Filler",
+                "material": "PetDeadCell",
+                "cost": 0,
+                "baseMatCost": 6,
+                "costMatScale": 1.1,
+                "baseCost": 3,
+                "costScale": 2.5,
+                "maxLevel": 20,
+                "description": "Unlocks the 1st Breeding Multiplier, Gene Boosting. Genes are found while fighting with the DNA Splicer tool purchased at the Town Shop.",
+                "boostEffect": "-}% Gene Boost Cost",
+                "bonusQty": 4
+            }),
+        new PetUpgradeBase(2, <PetUpgradeModel>{
+                "upgradeName": "Egg Capacity",
+                "filler": "Filler",
+                "material": "PetDeadCell",
+                "cost": 3,
+                "baseMatCost": 20,
+                "costMatScale": 1.5,
+                "baseCost": 10,
+                "costScale": 100,
+                "maxLevel": 5,
+                "description": "Increases the maximum number of eggs your incubator can hold. The more eggs you currently hold, the rarer it is to get a new one.",
+                "boostEffect": "+} Egg Max",
+                "bonusQty": 1
+            }),
+        new PetUpgradeBase(3, <PetUpgradeModel>{
+                "upgradeName": "Breedability Pulse",
+                "filler": "Filler",
+                "material": "PetDeadCell",
+                "cost": 6,
+                "baseMatCost": 25,
+                "costMatScale": 1.25,
+                "baseCost": 10,
+                "costScale": 7,
+                "maxLevel": 10,
+                "description": "Unlocks the 2nd Breeding Multiplier, Breedability. Pets placed in the Fenceyard with the Breedable Gene increase this multi over time.",
+                "boostEffect": "+}% Breedability Spd",
+                "bonusQty": 25
+            }),
+        new PetUpgradeBase(4, <PetUpgradeModel>{
+                "upgradeName": "Fence Extension",
+                "filler": "Filler",
+                "material": "PetDeadCell",
+                "cost": 11,
+                "baseMatCost": 30,
+                "costMatScale": 1.16,
+                "baseCost": 10,
+                "costScale": 4,
+                "maxLevel": 10,
+                "description": "Increases the number of slots in your Fence Yard, allowing for more pets to roam around, free range style!",
+                "boostEffect": "+} Fenceyard Slots",
+                "bonusQty": 1
+            }),
+        new PetUpgradeBase(5, <PetUpgradeModel>{
+                "upgradeName": "Rarity of the Egg",
+                "filler": "Filler",
+                "material": "PetDeadCell",
+                "cost": 14,
+                "baseMatCost": 35,
+                "costMatScale": 1.25,
+                "baseCost": 10,
+                "costScale": 9,
+                "maxLevel": 10,
+                "description": "Unlocks the 3rd Breeding Multiplier, Rarity. Whenever you incubate with a full incubator, theres a chance to increase the rarity of another egg!",
+                "boostEffect": "}x Rarity Chance",
+                "bonusQty": 1
+            }),
+        new PetUpgradeBase(6, <PetUpgradeModel>{
+                "upgradeName": "Blooming Axe",
+                "filler": "Filler",
+                "material": "PetDeadCell",
+                "cost": 20,
+                "baseMatCost": 40,
+                "costMatScale": 1.25,
+                "baseCost": 10,
+                "costScale": 10,
+                "maxLevel": 10,
+                "description": "Forage pets contribute a fraction of their forage speed toward Fight Power. Now you no longer need at least 1 fighting pet!",
+                "boostEffect": "}% Fight Contribution",
+                "bonusQty": 6
+            }),
+        new PetUpgradeBase(7, <PetUpgradeModel>{
+                "upgradeName": "Pastpresent Brood",
+                "filler": "Filler",
+                "material": "PetDeadCell",
+                "cost": 25,
+                "baseMatCost": 45,
+                "costMatScale": 1.6,
+                "baseCost": 10,
+                "costScale": 130,
+                "maxLevel": 5,
+                "description": "Unlocks the 4th Breeding Multiplier, Pastpres. This increases based on the number of different pets discovered from the previous world.",
+                "boostEffect": "}x Bigger Multi",
+                "bonusQty": 0.15
+            }),
+        new PetUpgradeBase(8, <PetUpgradeModel>{
+                "upgradeName": "Paint Bucket",
+                "filler": "Filler",
+                "material": "PetDeadCell",
+                "cost": 30,
+                "baseMatCost": 50,
+                "costMatScale": 1.05,
+                "baseCost": 10,
+                "costScale": 1.35,
+                "maxLevel": 100,
+                "description": "Unlocks Shiny Pet Breeding. Shiny Pets come in 1 of 5 colours, and boost their Special Passive bonus when in the Fenceyard.",
+                "boostEffect": "+}% Base Shiny Chance",
+                "bonusQty": 2
+            }),
+        new PetUpgradeBase(9, <PetUpgradeModel>{
+                "upgradeName": "Overwhelmed Golden Egg",
+                "filler": "Filler",
+                "material": "PetDeadCell",
+                "cost": 35,
+                "baseMatCost": 55,
+                "costMatScale": 1.6,
+                "baseCost": 10,
+                "costScale": 5,
+                "maxLevel": 20,
+                "description": "Your New Pet Chance is multiplied by the number below for every 25 kitchen upgrade levels across all kitchens! This is SUPER important!",
+                "boostEffect": "}x Multiplier per 100 Upg",
+                "bonusQty": 0.05
+            }),
+        new PetUpgradeBase(10, <PetUpgradeModel>{
+                "upgradeName": "Failsafe Restitution Cloud",
+                "filler": "Filler",
+                "material": "PetDeadCell",
+                "cost": 40,
+                "baseMatCost": 60,
+                "costMatScale": 1.08,
+                "baseCost": 10,
+                "costScale": 3.88,
+                "maxLevel": 25,
+                "description": "Unlocks the 5th Breeding Multiplier, Failure. This increases every time you fail to get a new/shiny pet, up to a max, and depletes when you succeed.",
+                "boostEffect": "} Maximum Times",
+                "bonusQty": 10
+            }),
+        new PetUpgradeBase(11, <PetUpgradeModel>{
+                "upgradeName": "Shattershell Iteration",
+                "filler": "Filler",
+                "material": "PetDeadCell",
+                "cost": 45,
+                "baseMatCost": 65,
+                "costMatScale": 1.25,
+                "baseCost": 10,
+                "costScale": 34,
+                "maxLevel": 10,
+                "description": "Every time you use up your last incubator egg, there is a chance to produce 2 more eggs immediately.",
+                "boostEffect": "}% Chance",
+                "bonusQty": 8
+            }),
+        new PetUpgradeBase(12, <PetUpgradeModel>{
+                "upgradeName": "Filler",
+                "filler": "Filler",
+                "material": "PetDeadCell",
+                "cost": 50,
+                "baseMatCost": 70,
+                "costMatScale": 1.6,
+                "baseCost": 10,
+                "costScale": 50,
+                "maxLevel": 10,
+                "description": "Filler",
+                "boostEffect": "}% Cost Reduction",
+                "bonusQty": 0
+            })    
+]
+}

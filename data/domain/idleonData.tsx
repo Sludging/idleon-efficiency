@@ -31,7 +31,7 @@ import { parseCooking, updateCooking } from './cooking';
 import { parseLab, updateLab } from './lab';
 import { parseBreeding, updateBreeding } from './breeding';
 import { notUndefined } from '../utility';
-import parseSigils from './sigils';
+import parseSigils, { updateSigils } from './sigils';
 
 
 export const safeJsonParse = <T, >(doc: Cloudsave, key: string, emptyValue: T): T => {
@@ -117,7 +117,7 @@ const keyFunctionMap: Record<string, Function> = {
     "cooking": (doc: Cloudsave, charCount: number) => parseCooking(safeJsonParse(doc, "Cooking", []), safeJsonParse(doc, "Meals", [])),
     "lab": (doc: Cloudsave, charCount: number) => parseLab(safeJsonParse(doc, "Lab", [])),
     "breeding": (doc: Cloudsave, charCount: number) => parseBreeding(safeJsonParse(doc, "PetsStored", []), safeJsonParse(doc, "Pets", []), doc.get("OptLacc"), safeJsonParse(doc, "Territory", []), safeJsonParse(doc, "Breeding", [])),
-    "sigils": (doc: Cloudsave, charCount: number) => parseSigils(safeJsonParse(doc, "CauldronP2W", [])),
+    "sigils": (doc: Cloudsave, charCount: number) => parseSigils(safeJsonParse(doc, "CauldronP2W", []), safeJsonParse(doc, "CauldronJobs1", [])),
 }
 
 // ORDER IS IMPORTANT!
@@ -134,6 +134,7 @@ const postProcessingMap: Record<string, Function> = {
     "worship": (doc: Cloudsave, accountData: Map<string, any>) => updateWorship(accountData),
     "players": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayers(accountData),
     "printer": (doc: Cloudsave, accountData: Map<string, any>) => updatePrinter(accountData),
+    "sigils": (doc: Cloudsave, accountData: Map<string, any>) => updateSigils(accountData),
 }
 
 export const updateIdleonData = async (data: Cloudsave, charNames: string[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {

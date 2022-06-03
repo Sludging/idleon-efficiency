@@ -26,6 +26,7 @@ import { safeJsonParse } from "./idleonData";
 import { Arcade } from "./arcade";
 import { ObolsData, ObolStats } from "./obols";
 import { ImageData } from "./imageData";
+import { Sigils } from "./sigils";
 
 export class PlayerStats {
     strength: number = 0;
@@ -406,9 +407,9 @@ export class Player {
         return 0;
     }
 
-    getGoldFoodMulti = (familyBonus: number = 0, goldFoodStampBonus: number = 0, achievement: boolean) => {
+    getGoldFoodMulti = (familyBonus: number = 0, goldFoodStampBonus: number = 0, achievement: boolean, sigilBonus: number) => {
         const gearBonus = this.gear.equipment.reduce((sum, gear) => sum += gear?.getMiscBonus("Gold Food Effect") ?? 0, 0);
-        return Math.max(familyBonus, 1) + (gearBonus + ((this.talents.find(skill => skill.skillIndex == 99)?.getBonus() ?? 0) + (goldFoodStampBonus + (achievement ? 5 : 0)))) / 100;
+        return Math.max(familyBonus, 1) + (gearBonus + ((this.talents.find(skill => skill.skillIndex == 99)?.getBonus() ?? 0) + (goldFoodStampBonus + (achievement ? 5 : 0))) + sigilBonus) / 100;
     }
 
     getMiscBonusFromGear = (bonusType: string) => {
@@ -447,10 +448,10 @@ export class Player {
 
     setMonsterCash = (strBubbleBonus: number, wisBubbleBonus: number, agiBubbleBonus: number, mealBonus: number,
         petArenaBonus1: number, petArenaBonus2: number, labBonus: number, vialBonus: number, dungeonBonus: number, guildBonus: number,
-        family: Family, goldFoodStampBonus: number, goldFoodAchievement: boolean, prayers: Prayer[], arcadeBonus: number) => {
+        family: Family, goldFoodStampBonus: number, goldFoodAchievement: boolean, prayers: Prayer[], arcadeBonus: number, sigilBonus: number) => {
         let gearBonus = this.getMiscBonusFromGear("Money");
         const goldenFoodBonus = this.gear.food.filter(food => food && food.goldenFood != undefined && food.description.includes("Boosts coins dropped"))
-            .reduce((sum, food) => sum += (food as Food).goldFoodBonus(food?.count ?? 0, this.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus() ?? 0, goldFoodStampBonus, goldFoodAchievement)), 0);
+            .reduce((sum, food) => sum += (food as Food).goldFoodBonus(food?.count ?? 0, this.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus() ?? 0, goldFoodStampBonus, goldFoodAchievement, sigilBonus)), 0);
         const cardBonus = Card.GetTotalBonusForId(this.cardInfo?.equippedCards ?? [], 11);
         const poBox = this.postOffice.find(box => box.index == 13);
         const boxBonus = poBox?.bonuses[2].getBonus(poBox.level, 2) ?? 0;
@@ -499,7 +500,7 @@ const keyFunctionMap: Record<string, Function> = {
         player.class = ClassIndex[doc.get(`CharacterClass_${player.playerID}`)]?.replace(/_/g, " ") || "New Class?";
         player.classId = doc.get(`CharacterClass_${player.playerID}`) as ClassIndex;
     },
-    "monster": (doc: Cloudsave, player: Player) => { player.currentMonster = EnemyInfo.find(enemy => enemy.details.internalName == doc.get(`AFKtarget_${player.playerID}`))?.details.Name || doc.get(`AFKtarget_${player.playerID}`); },
+    "monster": (doc: Cloudsave, player: Player) => { player.currentMonster = EnemyInfo.find(enemy => enemy.id == doc.get(`AFKtarget_${player.playerID}`))?.details.Name || doc.get(`AFKtarget_${player.playerID}`); },
     "map": (doc: Cloudsave, player: Player) => parseMap(doc.get(`CurrentMap_${player.playerID}`), player),
     "starsigns": (doc: Cloudsave, player: Player) => parseStarSigns(doc.get(`PVtStarSign_${player.playerID}`), player),
     "money": (doc: Cloudsave, player: Player) => { player.money = doc.get(`Money_${player.playerID}`) },
@@ -631,7 +632,7 @@ const parseStarSigns = (starSigns: string, player: Player) => {
 
 const parseMap = (currentMap: number, player: Player) => {
     player.currentMapId = currentMap;
-    player.currentMap = MapInfo.find(map => map.id == currentMap)?.area || "New Map?";
+    player.currentMap = MapInfo[currentMap].data.map.name;
 }
 
 const parseStats = (stats: number[], lvZero: number[], skillXP: Array<number>, skillXPReqs: Array<number>, player: Player) => {
@@ -784,6 +785,7 @@ export const updatePlayers = (data: Map<string, any>) => {
     const stamps = data.get("stamps") as Stamp[][];
     const achievementsInfo = data.get("achievements") as Achievement[];
     const arcade = data.get("arcade") as Arcade;
+    const sigils = data.get("sigils") as Sigils;
 
     // Double claim chance.
     const doubleChanceBubbleBonus = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).find(bubble => bubble.name == "Afk Expexp")?.getBonus() ?? 0;
@@ -812,7 +814,7 @@ export const updatePlayers = (data: Map<string, any>) => {
     players.forEach(player => {
         player.setMonsterCash(strBubbleBonus, wisBubbleBonus, agiBubbleBonus, mealBonus,
             petArenaBonus1, petArenaBonus2, labBonus, vialBonus,
-            dungeonBonus, guildBonus, family, goldFoodStampBonus, goldFoodAchievement, prayers, arcadeBonus);
+            dungeonBonus, guildBonus, family, goldFoodStampBonus, goldFoodAchievement, prayers, arcadeBonus, sigils.sigils[14].getBonus());
     })
 
     return players;
