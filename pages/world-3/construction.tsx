@@ -41,6 +41,7 @@ import { Construction as ConstructionData } from '../../data/domain/construction
 import { Card } from '../../data/domain/cards';
 import { Lab } from '../../data/domain/lab';
 import IconImage from '../../components/base/IconImage';
+import { Sigils } from '../../data/domain/sigils';
 
 
 function RefineryDisplay() {
@@ -62,18 +63,19 @@ function RefineryDisplay() {
             return [];
         }
         const lab = appContext.data.getData().get("lab") as Lab;
+        const sigils = appContext.data.getData().get("sigils") as Sigils;
         const labCycleBonus = lab.bonuses.find(bonus => bonus.name == "Gilded Cyclical Tubing")?.active ?? false ? 3 : 1;
         const vialBonus = alchemyData?.vials.find((vial) => vial.description.includes("Refinery Cycle Speed"))?.getBonus() ?? 0;
         const saltLickBonus = saltLickData?.getBonus(2) ?? 0;
         const secondsSinceUpdate = (new Date().getTime() - (lastUpdated?.getTime() ?? 0)) / 1000;
 
         const toReturn = [
-            { name: "Combustion", time: Math.ceil((900 * Math.pow(4, 0)) / ((1 + (vialBonus + saltLickBonus) / 100) * labCycleBonus)), timePast: refineryData.timePastCombustion + secondsSinceUpdate }
+            { name: "Combustion", time: Math.ceil((900 * Math.pow(4, 0)) / ((1 + (vialBonus + saltLickBonus + sigils.sigils[10].getBonus()) / 100) * labCycleBonus)), timePast: refineryData.timePastCombustion + secondsSinceUpdate }
         ];
 
         if (Object.keys(refineryData.salts).length > 3) {
             toReturn.push(
-                { name: "Synthesis ", time: Math.ceil((900 * Math.pow(4, 1)) / ((1 + (vialBonus + saltLickBonus) / 100) * labCycleBonus)), timePast: refineryData.timePastSynthesis + secondsSinceUpdate }
+                { name: "Synthesis ", time: Math.ceil((900 * Math.pow(4, 1)) / ((1 + (vialBonus + saltLickBonus + sigils.sigils[10].getBonus()) / 100) * labCycleBonus)), timePast: refineryData.timePastSynthesis + secondsSinceUpdate }
             );
         }
         return toReturn;

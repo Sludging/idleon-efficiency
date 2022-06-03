@@ -8,6 +8,7 @@ import { GemStore } from "./gemPurchases";
 import { ImageData } from "./imageData";
 import { Lab } from "./lab";
 import { MealModel } from "./model/mealModel";
+import { Sigils } from "./sigils";
 import { Stamp } from "./stamps";
 
 const spiceValues: number[] = "0 3 5 8 10 13 15 19 20 23 27 31 33 37 41 45 48 51 53 57".split(" ").map(value => parseInt(value));
@@ -189,9 +190,9 @@ export class Kitchen {
         return Math.floor(2 * this.index + upgradeType);
     }
 
-    getSpiceUpgradeCost = (alchemyBonus: number, mealCostBonus: number, petBonusActive: boolean, upgradeType: UpgradeType) => {
+    getSpiceUpgradeCost = (alchemyBonus: number, mealCostBonus: number, petBonusActive: boolean, upgradeType: UpgradeType, sigilBonus: number) => {
         const baseMath = 1 /
-            ((1 + alchemyBonus / 100) *
+            ((1 + (alchemyBonus + sigilBonus) / 100) *
                 (1 + mealCostBonus / 100) *
                 (1 + (this.richelin ? 40 : 0) / 100) *
                 (1 + (0.5 * (petBonusActive ? 1 : 0))))
@@ -355,6 +356,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const cards = data.get("cards") as Card[];
     const breeding = data.get("breeding") as Breeding;
     const achievements = data.get("achievements") as Achievement[];
+    const sigils = data.get("sigils") as Sigils;
 
     const jewelMealBonus = mainframe.jewels[16].active ? mainframe.jewels[16].getBonus() : 0; // TODO: Remove hardcoding
     const voidPlateAchiev = achievements[233].completed;
@@ -389,9 +391,9 @@ export const updateCooking = (data: Map<string, any>) => {
         kitchen.fireSpeed = kitchen.getFireSpeed(fireVialBonus, fireStampBonus, fireSpeedMealBonus, cardBonus, kitchenEfficientBonus, diamonChef);
         kitchen.recipeLuck = kitchen.getLuck();
 
-        kitchen.speedUpgradeCost = kitchen.getSpiceUpgradeCost(kitchenCosts, mealKitchenCosts, arenaBonusActive, UpgradeType.Speed);
-        kitchen.fireUpgradeCost = kitchen.getSpiceUpgradeCost(kitchenCosts, mealKitchenCosts, arenaBonusActive, UpgradeType.Fire);
-        kitchen.luckUpgradecost = kitchen.getSpiceUpgradeCost(kitchenCosts, mealKitchenCosts, arenaBonusActive, UpgradeType.Luck);
+        kitchen.speedUpgradeCost = kitchen.getSpiceUpgradeCost(kitchenCosts, mealKitchenCosts, arenaBonusActive, UpgradeType.Speed, sigils.sigils[18].getBonus());
+        kitchen.fireUpgradeCost = kitchen.getSpiceUpgradeCost(kitchenCosts, mealKitchenCosts, arenaBonusActive, UpgradeType.Fire, sigils.sigils[18].getBonus());
+        kitchen.luckUpgradecost = kitchen.getSpiceUpgradeCost(kitchenCosts, mealKitchenCosts, arenaBonusActive, UpgradeType.Luck, sigils.sigils[18].getBonus());
 
         // if actively cooking
         if (kitchen.activeMeal != -1) {

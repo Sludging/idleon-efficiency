@@ -52,6 +52,7 @@ import { EnemyInfo } from '../data/domain/enemies';
 import Stat from '../components/base/Stat';
 import IconImage from '../components/base/IconImage';
 import { SourcesModel } from '../data/domain/model/sourcesModel';
+import { Sigils } from '../data/domain/sigils';
 
 
 function ItemSourcesDisplay({ sources, dropInfo }: { sources: SourcesModel, dropInfo: DropSource[] }) {
@@ -563,10 +564,11 @@ function EquipmentDisplay({ player }: { player: Player }) {
     const family = theData.get("family") as Family;
     const stampData = theData.get("stamps") as Stamp[][];
     const achievementsInfo = theData.get("achievements") as Achievement[];
+    const sigils = theData.get("sigils") as Sigils;
 
     const goldFoodStampBonus = stampData.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC7")?.getBonus() ?? 0;
     const goldFoodAchievement = achievementsInfo[AchievementConst.GoldFood].completed;
-    const goldFoodMulti = player.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus() ?? 0, goldFoodStampBonus, goldFoodAchievement);
+    const goldFoodMulti = player.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus() ?? 0, goldFoodStampBonus, goldFoodAchievement, sigils.sigils[14].getBonus());
 
 
     return (
@@ -692,13 +694,14 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
         const achievementsInfo = theData.get("achievements") as Achievement[];
         const dungeonsData = theData.get("dungeons") as Dungeons;
         const players = theData.get("players") as Player[];
+        const sigils = theData.get("sigils") as Sigils;
 
         if (shrines && prayers && saltLick && playerStatues && family && stampData && achievementsInfo && players) {
             const saltLickBonus = saltLick.getBonus(3);
             const dungeonBonus = (dungeonsData.passives.get(PassiveType.Flurbo) ?? [])[2]?.getBonus() ?? 0; // Lava is looking at the wrong bonus.
             const goldFoodStampBonus = stampData.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC7")?.getBonus() ?? 0;
             const goldFoodAchievement = achievementsInfo[AchievementConst.GoldFood].completed;
-            const allSkillXP = Skilling.getAllSkillXP(player, shrines, playerStatues, prayers, saltLickBonus, dungeonBonus, family, goldFoodStampBonus, goldFoodAchievement);
+            const allSkillXP = Skilling.getAllSkillXP(player, shrines, playerStatues, prayers, saltLickBonus, dungeonBonus, family, goldFoodStampBonus, goldFoodAchievement, sigils.sigils[14].getBonus());
 
             // todo handle more then 1 mman somehow.
             const mmanBonus = players.find(player => player.classId == ClassIndex.Maestro)?.talents.find(talent => talent.skillIndex == 42)?.getBonus() ?? 0;
