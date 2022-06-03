@@ -1,6 +1,7 @@
 import { notUndefined, round } from "../utility";
 import { Alchemy, AlchemyConst, Bubble, CauldronIndex } from "./alchemy";
-import { MapData, MapInfo } from "./maps";
+import { MapDataBase } from "./data/MapDataRepo";
+import { MapInfo } from "./maps";
 import { Player, SkillsIndex } from "./player";
 import { Stamp, StampConsts, StampTab } from "./stamps";
 import { ClassIndex, TalentConst } from "./talents";
@@ -49,7 +50,7 @@ const worshipBaseInfo: string[][] = ["4 130 goblinG 0 170 570 25 60 1".split(" "
 ]
 
 export class Totem {
-    constructor(public name: string, public map: MapData | undefined, public maxWave: number, public index: number) { }
+    constructor(public name: string, public map: MapDataBase, public maxWave: number, public index: number) { }
 
     getWaveMultiplier = () => {
         if (this.maxWave == 0) {
@@ -120,11 +121,11 @@ export default function parseWorship(totemInfo: number[][]) {
 
     if (totemInfo.length > 0) {
         // hard coded info, maybe better way?
-        worship.totemInfo.push(new Totem(totemNames[0].replace(/_/g, " "), MapInfo.find(map => map.id == totemMapIds[0]), totemInfo[0][0], 0));
-        worship.totemInfo.push(new Totem(totemNames[1].replace(/_/g, " "), MapInfo.find(map => map.id == totemMapIds[1]), totemInfo[0][1], 1));
-        worship.totemInfo.push(new Totem(totemNames[2].replace(/_/g, " "), MapInfo.find(map => map.id == totemMapIds[2]), totemInfo[0][2], 2));
-        worship.totemInfo.push(new Totem(totemNames[3].replace(/_/g, " "), MapInfo.find(map => map.id == totemMapIds[3]), totemInfo[0][3], 3));
-        worship.totemInfo.push(new Totem(totemNames[4].replace(/_/g, " "), MapInfo.find(map => map.id == totemMapIds[4]), totemInfo[0][4], 4));
+        worship.totemInfo.push(new Totem(totemNames[0].replace(/_/g, " "), MapInfo[totemMapIds[0]], totemInfo[0][0], 0));
+        worship.totemInfo.push(new Totem(totemNames[1].replace(/_/g, " "), MapInfo[totemMapIds[1]], totemInfo[0][1], 1));
+        worship.totemInfo.push(new Totem(totemNames[2].replace(/_/g, " "), MapInfo[totemMapIds[2]], totemInfo[0][2], 2));
+        worship.totemInfo.push(new Totem(totemNames[3].replace(/_/g, " "), MapInfo[totemMapIds[3]], totemInfo[0][3], 3));
+        worship.totemInfo.push(new Totem(totemNames[4].replace(/_/g, " "), MapInfo[totemMapIds[4]], totemInfo[0][4], 4));
     }
     return worship;
 }

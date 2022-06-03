@@ -218,3 +218,19 @@ export function range(start: number, end: number) {
     const length = end - start;
     return Array.from({ length }, (_, i) => start + i);
 }
+
+/**
+ * Groups all items in an array of objects `T` where the return value of a function is the same
+ * @param array Items to group
+ * @param func the func to group by
+ */
+ export function GroupByFunction<T>(array: T[], func: Function) {
+	let map = new Map<T, T[]>();
+	array.forEach(item => {
+		let funcOutcome = func(item);
+		if (!map.has(funcOutcome)) {
+			map.set(funcOutcome, array.filter(i => func(i) === func(item)));
+		}
+	});
+	return map;
+}

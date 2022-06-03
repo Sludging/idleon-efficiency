@@ -12,7 +12,7 @@ import {
     TableCell,
     TableBody
 } from 'grommet'
-import { useEffect, useContext, useState, useMemo } from 'react';
+import React, { useEffect, useContext, useState, useMemo } from 'react';
 import { AppContext } from '../../data/appContext'
 import { NextSeo } from 'next-seo';
 
@@ -41,6 +41,7 @@ import { Construction as ConstructionData } from '../../data/domain/construction
 import { Card } from '../../data/domain/cards';
 import { Lab } from '../../data/domain/lab';
 import IconImage from '../../components/base/IconImage';
+import { Sigils } from '../../data/domain/sigils';
 
 
 function RefineryDisplay() {
@@ -62,18 +63,19 @@ function RefineryDisplay() {
             return [];
         }
         const lab = appContext.data.getData().get("lab") as Lab;
+        const sigils = appContext.data.getData().get("sigils") as Sigils;
         const labCycleBonus = lab.bonuses.find(bonus => bonus.name == "Gilded Cyclical Tubing")?.active ?? false ? 3 : 1;
         const vialBonus = alchemyData?.vials.find((vial) => vial.description.includes("Refinery Cycle Speed"))?.getBonus() ?? 0;
         const saltLickBonus = saltLickData?.getBonus(2) ?? 0;
         const secondsSinceUpdate = (new Date().getTime() - (lastUpdated?.getTime() ?? 0)) / 1000;
 
         const toReturn = [
-            { name: "Combustion", time: Math.ceil((900 * Math.pow(4, 0)) / ((1 + (vialBonus + saltLickBonus) / 100) * labCycleBonus)), timePast: refineryData.timePastCombustion + secondsSinceUpdate }
+            { name: "Combustion", time: Math.ceil((900 * Math.pow(4, 0)) / ((1 + (vialBonus + saltLickBonus + sigils.sigils[10].getBonus()) / 100) * labCycleBonus)), timePast: refineryData.timePastCombustion + secondsSinceUpdate }
         ];
 
         if (Object.keys(refineryData.salts).length > 3) {
             toReturn.push(
-                { name: "Synthesis ", time: Math.ceil((900 * Math.pow(4, 1)) / ((1 + (vialBonus + saltLickBonus) / 100) * labCycleBonus)), timePast: refineryData.timePastSynthesis + secondsSinceUpdate }
+                { name: "Synthesis ", time: Math.ceil((900 * Math.pow(4, 1)) / ((1 + (vialBonus + saltLickBonus + sigils.sigils[10].getBonus()) / 100) * labCycleBonus)), timePast: refineryData.timePastSynthesis + secondsSinceUpdate }
             );
         }
         return toReturn;
@@ -412,7 +414,7 @@ function SaltLickDisplay() {
             </Box>
             {
                 saltLickData && saltLickData.bonuses.map((bonus, index) => {
-                    const saltItem = itemData?.find((item) => item.internalName == bonus.item);
+                    const saltItem = itemData?.find((item) => item.internalName == bonus.data.item);
                     if (saltItem) {
                         let countInStorage = storage?.chest.find(item => item.internalName == saltItem.internalName)?.count ?? 0
                         // If salt item, check refinery storage as well
@@ -425,18 +427,23 @@ function SaltLickDisplay() {
                             <ShadowBox key={index} background="dark-1" pad="medium" direction="row" align="center" justify="between" margin={{ bottom: 'small' }}>
                                 <Grid columns={["35%", "10%", "20%", "15%", "15%"]} fill gap="small" align="center">
                                     <TextAndLabel textSize='small' text={saltLickData.getBonusText(index)} label="Bonus" />
-                                    <TextAndLabel text={`${bonus.level} / ${bonus.maxLevel}`} label="Level" />
-                                    <Box direction="row" align="center">
-                                        <Box title={saltItem.displayName} margin={{ right: 'small' }}>
-                                            <IconImage data={saltItem.getImageData()} />
-                                        </Box>
-                                        <TextAndLabel text={nFormatter(costToNextLevel)} label="Next Level costs" />
+                                    <TextAndLabel text={`${bonus.level} / ${bonus.data.maxLevel}`} label="Level" />
+                                    {bonus.level < bonus.data.maxLevel ?
+                                        <React.Fragment>
+                                            <Box direction="row" align="center">
+                                                <Box title={saltItem.displayName} margin={{ right: 'small' }}>
+                                                    <IconImage data={saltItem.getImageData()} />
+                                                </Box>
+                                                <TextAndLabel text={nFormatter(costToNextLevel)} label="Next Level costs" />
 
-                                    </Box>
-                                    <Box direction="row" align="center">
-                                        <TextAndLabel text={nFormatter(costToMax)} label="Cost to max" />
-                                    </Box>
-                                    <TextAndLabel textColor={costToNextLevel > countInStorage ? 'accent-1' : 'green-1'} text={nFormatter(countInStorage)} label="In Storage" />
+                                            </Box>
+                                            <Box direction="row" align="center">
+                                                <TextAndLabel text={nFormatter(costToMax)} label="Cost to max" />
+                                            </Box>
+                                            <TextAndLabel textColor={costToNextLevel > countInStorage ? 'accent-1' : 'green-1'} text={nFormatter(countInStorage)} label="In Storage" />
+                                        </React.Fragment> :
+                                        <Box align="center" justify="center"><Text color="green-1" size="large">Maxed!</Text></Box>
+                                    }
                                 </Grid>
                             </ShadowBox>
                         )
@@ -583,7 +590,6 @@ function PrinterDisplay() {
 }
 
 function DeathnoteDisplay() {
-    const [playerData, setPlayerData] = useState<Player[]>();
     const [deathnoteData, setDeathnoteData] = useState<Deathnote>();
     const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
@@ -597,7 +603,7 @@ function DeathnoteDisplay() {
         }
 
         deathnoteData.mobKillCount.forEach((killArray, mobName) => {
-            const monsterData = monsterInfo.find((monster) => monster.details.internalName == mobName);
+            const monsterData = monsterInfo.find((monster) => monster.id == mobName);
             const killCount = killArray.reduce((sum, killCount) => sum += Math.round(killCount), 0);
             if (monsterData?.mapData?.world) {
                 if (!toReturn.has(monsterData.mapData.world)) {
@@ -627,7 +633,6 @@ function DeathnoteDisplay() {
         if (appContext) {
             const theData = appContext.data.getData();
             setDeathnoteData(theData.get("deathnote"));
-            setPlayerData(theData.get("players"));
         }
     }, [appContext]);
 
@@ -649,7 +654,6 @@ function DeathnoteDisplay() {
                             {
                                 [...deathnoteMobs.entries()].map(([mobName, killCount], mobIndex) => {
                                     const deathnoteRank = deathnoteData?.getDeathnoteRank(killCount);
-                                    const nextKillReq = deathnoteData?.getNextRankReq(deathnoteRank);
                                     return (
                                         <Box key={mobIndex} gap="small" border={deathnoteMobs.size != mobIndex + 1 ? { side: 'bottom', color: 'grey-1', size: '2px' } : undefined} pad={{ bottom: "small" }}>
                                             <Box direction="row" align="center" gap="small">
@@ -739,7 +743,7 @@ function ShrinesDisplay() {
                                     />
                                     <TextAndLabel
                                         label="Current Map"
-                                        text={MapInfo.find(map => map.id == shrine.currentMap)?.area ?? ""}
+                                        text={MapInfo[shrine.currentMap].data.map.name}
                                         margin={{ right: 'medium', bottom: 'small' }}
                                     />
                                     <TextAndLabel

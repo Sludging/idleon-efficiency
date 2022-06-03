@@ -335,7 +335,7 @@ export default function Layout({
                         <Box margin={{right: 'medium'}}>
                             <Image alt="Logo" src="/logo.svg" height="21px" width="171px" />
                         </Box>
-                        <IconLink icon={Icon} href="/leaderboards" text="Leaderboards" />
+                        <IconLink icon={Icon} href="https://www.idleonefficiency.com/leaderboards" text="Leaderboards" />
                         <Box align="center" pad="small">
                             <Text size="12px" color="grey-2">|</Text>
                         </Box>

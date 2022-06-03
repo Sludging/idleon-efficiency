@@ -138,7 +138,7 @@ export default function parseObols(doc: Cloudsave, charCount: number, allItems: 
         const playerObolArray: Obol[] = [];
         const playerStats = new ObolStats();
         playerObols.forEach((obol, obolIndex) => {
-            let itemInfo = allItems.find(item => item.internalName == obol)?.duplicate() ?? new Item({internalName: obol, displayName: obol});
+            let itemInfo = allItems.find(item => item.internalName == obol)?.duplicate() ?? Item.emptyItem(obol);
             if (!obol.includes("Locked") && obol != "Blank" && Object.keys(playerObolsMods).includes(obolIndex.toString())) {
                 itemInfo.addStone(playerObolsMods[obolIndex]);
             }
@@ -155,7 +155,7 @@ export default function parseObols(doc: Cloudsave, charCount: number, allItems: 
     const familyObols = doc.get(`ObolEqO1`) as string[];
     const familyObolsMods = safeJsonParse(doc, 'ObolEqMAPz1', {}) as Record<number, StoneProps>;
     familyObols.forEach((obol, obolIndex) => {
-        let itemInfo = allItems.find(item => item.internalName == obol)?.duplicate() ?? new Item({internalName: obol, displayName: obol});
+        let itemInfo = allItems.find(item => item.internalName == obol)?.duplicate() ?? Item.emptyItem(obol);
         if (!obol.includes("Locked") && obol != "Blank" && Object.keys(familyObolsMods).includes(obolIndex.toString())) {
             itemInfo.addStone(familyObolsMods[obolIndex]);
         }
@@ -173,7 +173,7 @@ export default function parseObols(doc: Cloudsave, charCount: number, allItems: 
             if (key == "length") {  // ignore the length key, we don't care.
                 return;
             }
-            let itemInfo = allItems.find(item => item.internalName == obol)?.duplicate() ?? new Item({internalName: obol, displayName: obol});
+            let itemInfo = allItems.find(item => item.internalName == obol)?.duplicate() ?? Item.emptyItem(obol);
             if (!obol.includes("Locked") && obol != "Blank" && Object.keys(tabModifications).includes(obolIndex.toString())) {
                 itemInfo.addStone(tabModifications[obolIndex]);
             }

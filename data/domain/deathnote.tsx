@@ -74,14 +74,14 @@ export default function updateDeathnote(accountData: Map<string, any>) {
     rawData.forEach((playerKillData, index) => {
         const jsonData = JSON.parse(playerKillData) as number[][];
         jsonData.forEach((mapInfo, mapIndex) => {
-            const mapData = MapInfo.find(map => map.id == mapIndex);
-            if (mapData && mapData.enemy && deathNote.mobKillCount.has(mapData.enemy)) {
-                const killCount = mapData.portalRequirements[0] - mapInfo[0];
-                deathNote.mobKillCount.get(mapData.enemy)?.push(killCount); //do we really only care about 0?
-            }
-            if (mapData && mapData.enemy) {
-                const killCount = mapData.portalRequirements[0] - mapInfo[0];
-                playerData[index].killInfo.set(mapData.id, killCount);
+            if (mapIndex < MapInfo.length) {
+                const mapData = MapInfo[mapIndex];
+                const killCount = mapData.data.portalRequirements[0] - mapInfo[0];
+                if (deathNote.mobKillCount.has(mapData.data.enemy)) {
+                    deathNote.mobKillCount.get(mapData.data.enemy)?.push(killCount); //do we really only care about 0?
+                }
+
+                playerData[index].killInfo.set(mapIndex, killCount);
             }
         });
     })           
