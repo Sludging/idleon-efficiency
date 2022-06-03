@@ -4,6 +4,7 @@ import { Lab } from './lab';
 import { BaseItemModel } from './model/baseItemModel';
 import { StampDataModel } from './model/stampDataModel';
 import { StampItemModel } from './model/stampItemModel';
+import { Sigils } from './sigils';
 
 export enum StampTab {
     Combat = 0,
@@ -30,6 +31,8 @@ export class Stamp {
     materialItem: Item | undefined = undefined;
 
     multiplier: number = 1;
+    matCostDiscount: number = 0;
+
     constructor(name: string, raw_name: string, type: string, bonus: string, data: StampDataModel) {
         this.raw_name = raw_name;
         this.icon = `/icons/assets/data/${raw_name}.png`;
@@ -54,7 +57,8 @@ export class Stamp {
     }
 
     getMaterialCost = (blueFlavPercent: number = 0): number => {
-        const baseCost = this.data.startV * Math.pow(this.data.mCostExp, Math.pow(Math.round(this.level / this.data.upgradeInterval) - 1, 0.8));
+        const matDiscount = 1 / (1 + (this.matCostDiscount / 100));
+        const baseCost = this.data.startV * matDiscount * Math.pow(this.data.mCostExp, Math.pow(Math.round(this.level / this.data.upgradeInterval) - 1, 0.8));
         return Math.floor(baseCost) * Math.max(0.1, 1 - blueFlavPercent);
     }
 
@@ -131,6 +135,7 @@ export default function parseStamps(rawData: Array<any>, maxData: Array<any>, al
 export function updateStamps(data: Map<string, any>) {
     const stamps = data.get("stamps") as Stamp[][];
     const lab = data.get("lab") as Lab;
+    const sigils = data.get("sigils") as Sigils;
 
     if (lab.bonuses.find(bonus => bonus.name == "Certified Stamp Book")?.active ?? false) {
         const allButMisc = stamps.flatMap(tab => tab).filter(stamp => stamp.type != "Misc Stamp");
@@ -138,6 +143,10 @@ export function updateStamps(data: Map<string, any>) {
             stamp.multiplier = 2;
         })
     }
+
+    stamps.flatMap(tab => tab).forEach(stamp => {
+        stamp.matCostDiscount = sigils.sigils[6].getBonus();
+    })
 
     return stamps;
 }
