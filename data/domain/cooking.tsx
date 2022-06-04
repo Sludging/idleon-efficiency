@@ -373,7 +373,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const kitchenEfficientBonus = cooking?.meals.filter(meal => meal.bonusKey == "KitchenEff").reduce((sum, meal) => sum += meal.getBonus(), 0);
     const jewelBonus = mainframe.jewels[0].active ? mainframe.jewels[0].getBonus() : 1; // TODO: Remove hardcoding
     const jewelBonus2 = mainframe.jewels[14].active ? mainframe.jewels[14].getBonus() : 0; // TODO: Remove hardcoding
-    const cardBonus = cards.find(card => card.data.cardID == "Boss4A")?.getBonus() ?? 0;
+    const cardBonus = cards.find(card => card.id == "Boss4A")?.getBonus() ?? 0;
 
     // Fire speed
     const fireVialBonus = alchemy.vials.filter(vial => vial.description.includes("New Recipe Cooking Speed")).reduce((sum, vial) => sum += vial.getBonus(), 0);

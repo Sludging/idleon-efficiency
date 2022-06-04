@@ -708,7 +708,7 @@ function ShrinesDisplay() {
     }, [appContext]);
 
     const shrineCardBonus = useMemo(() => {
-        return cardData?.find(card => card.data.cardID == "Z9")?.getBonus();
+        return cardData?.find(card => card.id == "Boss3B")?.getBonus();
     }, [cardData]);
 
     if (!shrineData || shrineData.filter(shrine => shrine.level > 0).length == 0) {
