@@ -255,7 +255,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
             crystalSpawnStamp = stamps[StampTab.Misc][StampConsts.CrystallinIndex].getBonus();
         }
 
-        const shrineCardBonus = player.cardInfo?.equippedCards.find((card) => card.data.cardID == "Z9")?.getBonus() ?? 0;
+        const shrineCardBonus = player.cardInfo?.equippedCards.find((card) => card.id == "Boss3B")?.getBonus() ?? 0;
         const shrineBonus = shrines[ShrineConstants.CrystalShrine].getBonus(player.currentMapId, shrineCardBonus);
         const cardBonus = player.cardInfo?.equippedCards.filter((card) => card.data.effect.includes("Crystal Mob Spawn Chance")).reduce((sum, card) => sum += card.getBonus(), 0) ?? 0;
         const crystalSpawnTalentBonus = player.talents.find(x => x.skillIndex == TalentConst.CrystalSpawnIndex)?.getBonus() ?? 0;
