@@ -753,12 +753,12 @@ function ShrinesDisplay() {
                                     />
                                     <TextAndLabel
                                         label="Bonus (without card)"
-                                        text={`${Math.round(shrine.getBonus(shrine.currentMap, 0))}%`}
+                                        text={`${nFormatter(shrine.getBonus(shrine.currentMap, 0), "Smaller")}%`}
                                         margin={{ right: 'medium', bottom: 'small' }}
                                     />
                                     <TextAndLabel
                                         label="Bonus (with card)"
-                                        text={`${Math.round(shrine.getBonus(shrine.currentMap, shrineCardBonus))}%`}
+                                        text={`${nFormatter(shrine.getBonus(shrine.currentMap, shrineCardBonus), "Smaller")}%`}
                                         margin={{ right: 'medium', bottom: 'small' }}
                                     />
                                 </Box>
