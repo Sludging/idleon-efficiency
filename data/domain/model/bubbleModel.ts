@@ -6,5 +6,6 @@ export interface BubbleModel {
     x2: number,
     func: string,
     description: string,
-    requirements: ComponentBaseModel[]
+    requirements: ComponentBaseModel[],
+    boostKey: string
 }

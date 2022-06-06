@@ -131,10 +131,10 @@ const postProcessingMap: Record<string, Function> = {
     "cooking": (doc: Cloudsave, accountData: Map<string, any>) => updateCooking(accountData),
     "breeding": (doc: Cloudsave, accountData: Map<string, any>) => updateBreeding(accountData),
     "shrines": (doc: Cloudsave, accountData: Map<string, any>) => updateShrines(accountData),
-    "worship": (doc: Cloudsave, accountData: Map<string, any>) => updateWorship(accountData),
     "players": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayers(accountData),
     "printer": (doc: Cloudsave, accountData: Map<string, any>) => updatePrinter(accountData),
     "sigils": (doc: Cloudsave, accountData: Map<string, any>) => updateSigils(accountData),
+    "worship": (doc: Cloudsave, accountData: Map<string, any>) => updateWorship(accountData),
 }
 
 export const updateIdleonData = async (data: Cloudsave, charNames: string[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {

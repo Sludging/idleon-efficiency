@@ -193,7 +193,7 @@ function Cooking() {
                 <Grid columns="1/3">
                     {
                         cooking?.meals.filter(meal => (meal.level > 0 || meal.optimalSpices.length > 0)).map((meal, index) => (
-                            <ShadowBox background="dark-1" key={index} margin={{ right: 'small', bottom: 'small' }} direction="row" pad="small" gap="small" align="center">
+                            <ShadowBox background="dark-1" key={index} margin={{ right: 'small', bottom: 'small' }} direction="row" pad="small" gap="small" align="center" border={meal.cookingContribution > 0 ? { color: 'green-1', size: '1px'} : undefined}>
                                 <Box direction="row" align='center' fill>
                                     <Box direction="row" align="center" margin={{right: 'small'}}>
                                         <Text size="small">{meal.level}</Text>

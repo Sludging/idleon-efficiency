@@ -8,6 +8,9 @@ import { BubbleModel } from './model/bubbleModel';
 import { ComponentBaseModel } from './model/componentBaseModel';
 import { LiquidComponentModel } from './model/liquidComponentModel';
 import { ComponentModel } from './model/componentModel';
+import { SpiceComponentModel } from './model/spiceComponentModel';
+import { Player } from './player';
+import { ClassIndex } from './talents';
 
 export enum CauldronIndex {
     Power = 0,
@@ -104,7 +107,7 @@ export class Bubble {
         return new Bubble(id, data, iconPrefix, bubbleIndex);
     }
 
-    constructor(id: string, data: BubbleModel, iconPrefix: string, bubbleIndex: number) {
+    constructor(id: string, public data: BubbleModel, iconPrefix: string, bubbleIndex: number) {
         this.name = id
         this.x1 = data.x1;
         this.x2 = data.x2;
@@ -135,8 +138,8 @@ export class Bubble {
         return lavaFunc(this.func, this.level, this.x1, this.x2, roundResult);
     }
 
-    getBonusText = (): string => {
-        let titleText = this.description.replace(/{/g, this.getBonus(true).toString());
+    getBonusText = (bonus: number = this.getBonus(true)): string => {
+        let titleText = this.description.replace(/{/g, bonus.toString());
         return handleToolBubbles(titleText, this.name);
     }
 
@@ -217,9 +220,8 @@ export class Vial {
         return lavaFunc(this.func, this.level, this.x1, this.x2, round) * this.bonusMulitplier;
     }
 
-    getBonusText = (): string => {
-        return this.description.replace(/{/g, nFormatter(this.getBonus(true), "Smaller"));
-
+    getBonusText = (bonus: number = this.getBonus(true)): string => {
+        return this.description.replace(/{/g, nFormatter(bonus, "Smaller"));
     }
 
     getImageData = (): ImageData => {
@@ -279,6 +281,65 @@ export class Alchemy {
         }
 
         return 0;
+    }
+
+    _shouldBoostPlayer = (player: Player, cauldron: CauldronIndex, bubble: number) => {
+        // 2nd bubble doesn't boost active talents.
+        if (this.cauldrons[cauldron].bubbles[bubble].data.boostKey.includes("ACTIVE")) {
+            return false;
+        }
+
+        if (player.getBaseClass() == ClassIndex.Archer && cauldron == CauldronIndex.Quicc) {
+            return true;
+        }
+
+        if (player.getBaseClass() == ClassIndex.Mage && cauldron == CauldronIndex.HighIQ) {
+            return true;
+        }
+
+        if (player.getBaseClass() == ClassIndex.Warrior && cauldron == CauldronIndex.Power) {
+            return true;
+        }
+
+        return false;
+    }
+
+    _shouldBoostBubble = (bubble: number, cauldron: CauldronIndex) => {
+        if (cauldron == CauldronIndex.Power) {
+            return [0,2,4,7,14].includes(bubble);
+        }
+
+        if (cauldron == CauldronIndex.Quicc || cauldron == CauldronIndex.HighIQ) {
+            return [0,6,9,12,14].includes(bubble);
+        }
+
+        return false
+    }
+
+    getBonusForBubble = (cauldron: CauldronIndex, bubble: number) => {
+        let extraBonus = 1;
+
+        // If bubble is boosted by the 16th bubble.
+        if (this._shouldBoostBubble(bubble, cauldron)) {
+            extraBonus *= this.cauldrons[cauldron].bubbles[16].getBonus();
+        }
+
+        return this.cauldrons[cauldron].bubbles[bubble].getBonus() * extraBonus;
+    }
+
+    getBonusTextForBubble = (cauldron: CauldronIndex, bubble: number) => {
+        return this.cauldrons[cauldron].bubbles[bubble].getBonusText(this.getBonusForBubble(cauldron, bubble));
+    }
+
+    getBonusForPlayer = (player: Player, cauldron: CauldronIndex, bubble: number) => {
+        let extraBonus = 1;
+
+        // If player is right class, boost by the 2nd bubble
+        if (this._shouldBoostPlayer(player, cauldron, bubble)) {
+            extraBonus *= this.cauldrons[cauldron].bubbles[1].getBonus();
+        }
+
+        return this.getBonusForBubble(cauldron, bubble) * extraBonus;
     }
 
     hasAchievement = (): boolean => {
@@ -352,6 +413,7 @@ const handleVial = (vialData: Map<string, number>, alchemy: Alchemy) => {
 // Should move this to a common library for typeguards.
 const isLiquidComponent = (x: ComponentBaseModel): x is LiquidComponentModel => "liquidNo" in x 
 const isComponent = (x: ComponentBaseModel): x is ComponentModel => "item" in x 
+const isSpiceComponent = (x: ComponentBaseModel): x is SpiceComponentModel => "spiceNo" in x 
 
 const convertToItemClass = (alchemy: Alchemy, allItems: Item[]) => {
     alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).forEach(bubble => {
@@ -365,6 +427,13 @@ const convertToItemClass = (alchemy: Alchemy, allItems: Item[]) => {
             
             if (isComponent(req)) {
                 const itemName = req.item;
+                const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
+                reqItem.count = req.quantity;
+                bubble.requirements.push(reqItem);
+            }
+
+            if (isSpiceComponent(req)) {
+                const itemName = `CookingSpice${req.spiceNo}`;
                 const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
                 reqItem.count = req.quantity;
                 bubble.requirements.push(reqItem);
