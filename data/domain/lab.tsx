@@ -382,9 +382,9 @@ const _calculatePlayersLineWidth = (lab: Lab, cooking: Cooking, breeding: Breedi
         const passiveCardBonus = cards?.filter(card => card.data.effect.includes("Line Width")).reduce((sum, card) => sum += card.getBonus(), 0) ?? 0;
         const petArenaBonus = breeding.hasBonus(13) ? 20 : 0;
         const gemTubes = (gemStore?.purchases.find(purchase => purchase.no == 123)?.pucrhased ?? 0) * 2;
-
         lab.playersInTubes.forEach((player, index) => {
-            player.labInfo.lineWidth = lab?.getPlayerLinewidth(player, pxMealBonus, linePctMealBonus, passiveCardBonus, petArenaBonus, index < gemTubes, buboBoost);
+            const rightOfBubo = lab.playerCords[player.playerID].x > lab.playerCords[lab.bestBuboPlayerID].x;
+            player.labInfo.lineWidth = lab?.getPlayerLinewidth(player, pxMealBonus, linePctMealBonus, passiveCardBonus, petArenaBonus, index < gemTubes, rightOfBubo ? buboBoost : 0);
             player.labInfo.supped = index < gemTubes;
         });
     }
