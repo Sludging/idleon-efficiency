@@ -59,7 +59,7 @@ export class MainframeBonus {
         return this.active ? this.bonusOn : this.bonusOff;
     }
 
-    getRange = (connectionBonus: number = 0, meritConnectionBonus: number = 0) => {
+    getRange = (connectionBonus: number, meritConnectionBonus: number) => {
         return Math.floor((80 * (1 + connectionBonus / 100)) + meritConnectionBonus);
     }
 }
@@ -168,7 +168,7 @@ export class Jewel {
         return `${this.data.effect.replace(/}/g, this.getBonus().toString())}${this.bonusMultiplier > 1 ? ` (${this.bonusMultiplier}x multiplier from mainframe bonus)` : ""}`;
     }
 
-    getRange = (connectionBonus: number = 0, meritConnectionBonus: number = 0) => {
+    getRange = (connectionBonus: number, meritConnectionBonus: number) => {
         return Math.floor((80 * (1 + connectionBonus / 100)) + meritConnectionBonus);
     }
 }
@@ -315,11 +315,13 @@ export class Lab {
     playersInTubes: Player[] = [];
     playersInChain: Player[] = [];
 
+    bestBuboPlayerID: number = -1;
+
     getDistance = (x1: number, y1: number, x2: number, y2: number) => {
         return 0.9604339 * Math.max(Math.abs(x1 - x2), Math.abs(y1 - y2)) + 0.397824735 * Math.min(Math.abs(x1 - x2), Math.abs(y1 - y2));
     }
 
-    getPlayerLinewidth = (player: Player, pxMealBonus: number, linePctMealBonus: number, passiveCardBonus: number, petArenaBonus: number, inGemTube: boolean) => {
+    getPlayerLinewidth = (player: Player, pxMealBonus: number, linePctMealBonus: number, passiveCardBonus: number, petArenaBonus: number, inGemTube: boolean, buboBoost: number) => {
         const labSkillLevel = player.skills.get(SkillsIndex.Intellect)?.level ?? 0;
         let baseWidth = 50 + (2 * labSkillLevel);
 
@@ -332,7 +334,7 @@ export class Lab {
         const playerChipBonus = player.labInfo.chips.filter(slot => slot.chip && slot.chip.index == 6).reduce((sum, slot) => sum += slot.chip?.getBonus() ?? 0, 0);
         const bonusWidth = inGemTube ? 30 : 0;
         return Math.floor((baseWidth + (pxMealBonus + Math.min(passiveCardBonus, 50)))
-            * (1 + ((linePctMealBonus + playerChipBonus + (20 * petArenaBonus) + bonusWidth) / 100))
+            * (1 + ((buboBoost + linePctMealBonus + playerChipBonus + (20 * petArenaBonus) + bonusWidth) / 100))
         )
     }
 }
@@ -371,7 +373,7 @@ export const parseLab = (labData: number[][]) => {
     return lab;
 }
 
-const _calculatePlayersLineWidth = (lab: Lab, cooking: Cooking, breeding: Breeding, cards: Card[], gemStore: GemStore, meritConnectionBonus: number) => {
+const _calculatePlayersLineWidth = (lab: Lab, cooking: Cooking, breeding: Breeding, cards: Card[], gemStore: GemStore, buboBoost: number) => {
     const jewelMultiplier = (lab.bonuses.find(bonus => bonus.index == 8)?.active ?? false) ? 1.5 : 1;
     const mealBonus = lab.jewels.filter(jewel => jewel.active && jewel.index == 16).reduce((sum, jewel) => sum += jewel.getBonus(jewelMultiplier), 0)
     if (lab.playersInTubes.length > 0) {
@@ -380,9 +382,9 @@ const _calculatePlayersLineWidth = (lab: Lab, cooking: Cooking, breeding: Breedi
         const passiveCardBonus = cards?.filter(card => card.data.effect.includes("Line Width")).reduce((sum, card) => sum += card.getBonus(), 0) ?? 0;
         const petArenaBonus = breeding.hasBonus(13) ? 20 : 0;
         const gemTubes = (gemStore?.purchases.find(purchase => purchase.no == 123)?.pucrhased ?? 0) * 2;
-
         lab.playersInTubes.forEach((player, index) => {
-            player.labInfo.lineWidth = lab?.getPlayerLinewidth(player, pxMealBonus, linePctMealBonus, passiveCardBonus, petArenaBonus, index < gemTubes) + meritConnectionBonus ?? 0;
+            const rightOfBubo = lab.playerCords[player.playerID].x >= lab.playerCords[lab.bestBuboPlayerID].x;
+            player.labInfo.lineWidth = lab?.getPlayerLinewidth(player, pxMealBonus, linePctMealBonus, passiveCardBonus, petArenaBonus, index < gemTubes, rightOfBubo ? buboBoost : 0);
             player.labInfo.supped = index < gemTubes;
         });
     }
@@ -468,6 +470,7 @@ export const updateLab = (data: Map<string, any>) => {
     // 2. Jewel that boosts line width.
     // 3. Jewel that boosts connection range.
     // 4. Bonus that doubles all Jewels.
+    // 5. Bubo purple for extra line width.
 
     // Figure out which players are in lab first and sort by player id.
     const playersInLab = [...playerData].filter(player => player.currentMonster == "Laboratory").sort((player1, player2) => player1.playerID > player2.playerID ? 1 : -1);
@@ -480,12 +483,17 @@ export const updateLab = (data: Map<string, any>) => {
         meritConnectionBonus = connectionMerit.bonusPerLevel * connectionMerit.level;
     }
 
+    // Figure out best bubo (for purple) and his bonus.
+    const bestBubo = playerData.reduce((final, player) => final = (final.talents.find(talent => talent.skillIndex == 535)?.level ?? 0) > (player.talents.find(talent => talent.skillIndex == 535)?.level ?? 0)? final : player, playerData[0]);
+    const buboPxBoost = bestBubo.talents.find(talent => talent.skillIndex == 535)?.getBonus() ?? 0;
+    lab.bestBuboPlayerID = bestBubo.playerID;
+
     let loopAgain = true;
     const connectedPlayers: Player[] = [];
     while (loopAgain) {
         loopAgain = false;
         // calculate line widths
-        _calculatePlayersLineWidth(lab, cooking, breeding, cards, gemStore, meritConnectionBonus);
+        _calculatePlayersLineWidth(lab, cooking, breeding, cards, gemStore, buboPxBoost);
 
         // If we have players in lab, and no chain, try and find the player connected to prism.
         if (lab.playersInTubes.length > 0 && connectedPlayers.length == 0) {
@@ -507,7 +515,7 @@ export const updateLab = (data: Map<string, any>) => {
         // fake 16 is active to avoid odd scenarios
         lab.jewels[16].active = true;
 
-        _calculatePlayersLineWidth(lab, cooking, breeding, cards, gemStore, meritConnectionBonus);
+        _calculatePlayersLineWidth(lab, cooking, breeding, cards, gemStore, buboPxBoost);
         // deactivate after we updated all the widths.
         lab.jewels[16].active = false;
 
@@ -527,7 +535,7 @@ export const updateLab = (data: Map<string, any>) => {
         }
 
         // Redo line width maths in case the jewel didn't get re-enabled.
-        _calculatePlayersLineWidth(lab, cooking, breeding, cards, gemStore, meritConnectionBonus);
+        _calculatePlayersLineWidth(lab, cooking, breeding, cards, gemStore, buboPxBoost);
     }
 
     const jewelMultiplier = (lab.bonuses.find(bonus => bonus.index == 8)?.active ?? false) ? 1.5 : 1;
