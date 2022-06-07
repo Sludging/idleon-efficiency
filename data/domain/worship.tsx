@@ -154,7 +154,7 @@ export const updateWorship = (data: Map<string, any>) => {
             const flowinStamp = stamps[StampTab.Skill][StampConsts.FlowinIndex];
             const chargeSpeedTalent = player.talents.find(x => x.skillIndex == TalentConst.NearbyOutletIndex);
             const talentBonus = chargeSpeedTalent?.getBonus() ?? 0;
-            const chargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "F11")?.getBonus() ?? 0;
+            const chargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "SoulCard5")?.getBonus() ?? 0;
             const chargeRate = player.gear.tools[5] ? Worship.getChargeRate(player.gear.tools[5].internalName, worshipLevel, popeBonus, chargeCardBonus, flowinStamp.getBonus(worshipLevel), talentBonus) : 0;
             worship.playerData.push({
                 maxCharge: maxCharge,
