@@ -1,11 +1,9 @@
-import { itemMap, monstersMap, mapsMap } from "../maps";
 import { Capacity } from './capacity';
 import { StarSignMap, StarSign } from './starsigns';
 import { Box, initPostOffice, PostOfficeConst } from './postoffice';
-import { Worship } from './worship';
 import { ClassIndex, Talent, ClassTalentMap, GetTalentArray } from './talents';
 import { Card, CardInfo } from "./cards";
-import { Item, Equipment, Food, Tool, StoneProps } from "./items";
+import { Item, Food, Tool, StoneProps } from "./items";
 import { notUndefined } from '../utility';
 import { Cloudsave } from "./cloudsave";
 import { EnemyInfo } from "./enemies";
@@ -328,6 +326,9 @@ export class Player {
     doubleClaimChance: Stat = new Stat("Double XP Chance", "%");
     monsterCash: Stat = new Stat("Monster Cash", "x");
 
+    // Misc
+    extraLevelsFromTalent: number = 0;
+
     constructor(playerID: number, playerName: string) {
         this.playerID = playerID;
         this.playerName = playerName;
@@ -336,7 +337,7 @@ export class Player {
     }
 
     getBaseClass = (): ClassIndex => {
-        switch (ClassIndex[this.class.replace(/ /g, "_") as keyof typeof ClassIndex]) {
+        switch (this.classId) {
             case ClassIndex.Beginner:
             case ClassIndex.Journeyman:
             case ClassIndex.Maestro:
@@ -774,6 +775,13 @@ export const updatePlayers = (data: Map<string, any>) => {
             player.starSigns.forEach(sign => sign.hasChip == true);
         }
     })
+
+    // Update players talents levels due to elite class level increase talents.
+    players.forEach(player => {
+        const extraLevels = Math.floor(player.talents.filter(talent => [149, 374, 539].includes(talent.skillIndex)).reduce((sum, value) => sum += value.getBonus(), 0))
+        player.talents.forEach(talent => talent.level += extraLevels);
+        player.extraLevelsFromTalent = extraLevels;
+    });
 
     const alchemy = data.get("alchemy") as Alchemy;
     const guild = data.get("guild") as Guild;

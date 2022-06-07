@@ -140,16 +140,12 @@ export const updateWorship = (data: Map<string, any>) => {
         players.forEach(player => {
             const worshipLevel = player.skills.get(SkillsIndex.Worship)?.level;
             const praydayStamp = stamps[StampTab.Skill][StampConsts.PraydayIndex];
-            let gospelLeaderBonus = alchemy.cauldrons[CauldronIndex.HighIQ].bubbles[AlchemyConst.GospelLeader].getBonus();
-            let popeBonus = getActiveBubbles(alchemy, player.activeBubblesString).find(x => x.name == "Call Me Pope")?.getBonus() ?? 0;
-
-            if (player.getBaseClass() == ClassIndex.Mage) {
-                const classMultiBonus = alchemy.cauldrons[CauldronIndex.HighIQ].bubbles[1].getBonus();
-                gospelLeaderBonus *= classMultiBonus;
-            }
+            const gospelLeaderBonus = alchemy.getBonusForPlayer(player, CauldronIndex.HighIQ, AlchemyConst.GospelLeader);
+            const popeFromActive = getActiveBubbles(alchemy, player.activeBubblesString).find(x => x.name == "Call Me Pope");
+            const popeBonus = popeFromActive ? alchemy.getBonusForPlayer(player, CauldronIndex.HighIQ, AlchemyConst.CallMePope) : 0;
 
             // max charge
-            const maxChargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "F10")?.getBonus() ?? 0;
+            const maxChargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "SoulCard4")?.getBonus() ?? 0;
             const talentChargeBonus = player.activeBuffs.find(x => x.skillIndex == TalentConst.ChargeSiphonIndex)?.getBonus(false, true) ?? 0;
             const postOfficeBonus = player.postOffice[18].bonuses[1].getBonus(player.postOffice[18].level, 1);
             const maxCharge = player.gear.tools[5] ? Worship.getMaxCharge(player.gear.tools[5].internalName, maxChargeCardBonus, talentChargeBonus, praydayStamp.getBonus(worshipLevel), gospelLeaderBonus, worshipLevel, popeBonus, postOfficeBonus) : 0;

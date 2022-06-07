@@ -13,12 +13,14 @@ import IconImage from '../../components/base/IconImage';
 import ShadowBox from '../../components/base/ShadowBox';
 import TabButton from '../../components/base/TabButton';
 import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
-import { TimeDown } from '../../components/base/TimeDisplay';
+import { TimeDisplaySize, TimeDown } from '../../components/base/TimeDisplay';
 import { AppContext } from '../../data/appContext';
 import { Breeding as BreedingDomain, petArenaBonuses, waveReqs } from '../../data/domain/breeding';
 import { Cooking } from '../../data/domain/cooking';
 import { EnemyInfo } from '../../data/domain/enemies';
 import { GemStore } from '../../data/domain/gemPurchases';
+import { Player } from '../../data/domain/player';
+import { ClassIndex, Talent } from '../../data/domain/talents';
 import { TaskBoard } from '../../data/domain/tasks';
 import { nFormatter } from '../../data/utility';
 
@@ -51,7 +53,7 @@ function TerritoryDisplay() {
                             <TextAndLabel textSize='small' label="Name" text={territory.data.battleName} />
                             <ComponentAndLabel label="Current Spices" component={
                                 <Box direction="row" gap="small" align="center">
-                                    <IconImage data={{location:`CookingSpice${index}`, height: 36, width: 36 }} />
+                                    <IconImage data={{ location: `CookingSpice${index}`, height: 36, width: 36 }} />
                                     <Text>{nFormatter(territory.currentSpices)}</Text>
                                 </Box>
                             } />
@@ -87,7 +89,7 @@ function PetUpgradeDisplay() {
                 const meal = upgrade.data.cost != -1 ? cooking.meals[upgrade.data.cost] : undefined
                 const mealCost = meal ? upgrade.getCost(1) : -1;
                 return [{
-                    image: { 
+                    image: {
                         location: "PetDeadCell",
                         width: 33,
                         height: 33
@@ -157,12 +159,18 @@ function PetUpgradeDisplay() {
 
 function ArenaBonusDisplay() {
     const [breeding, setBreeding] = useState<BreedingDomain>();
+    const [playerData, setPlayerData] = useState<Player[]>();
     const appContext = useContext(AppContext);
+
+    const beastMasters = useMemo(() => {
+        return playerData?.filter(player => (player.classId == ClassIndex.Beast_Master)) ?? [];
+    }, [playerData])
 
     useEffect(() => {
         if (appContext) {
             const theData = appContext.data.getData();
             setBreeding(theData.get("breeding"));
+            setPlayerData(theData.get("players"));
         }
     }, [appContext]);
 
@@ -174,7 +182,31 @@ function ArenaBonusDisplay() {
         )
     }
     return (
-        <Box>
+        <Box gap="small">
+            <Box direction="row" wrap justify="center" margin={{top: 'small'}}>
+                {beastMasters && beastMasters.map((bm, index) => {
+                    const [arenaTalent, cooldown] = [...bm.cooldown.entries()].filter(([talent, cooldown]) => talent.skillIndex == 370)?.pop() as [Talent, number];
+                    const realCD = cooldown - bm.afkFor;
+                    return (
+                        <ShadowBox key={index} background="dark-1" pad="medium" align="center" margin={{ right: 'large', bottom: 'small' }}>
+                            <Box gap="small">
+                                <Box direction="row" gap="small">
+                                    <IconImage data={bm.getClassImageData()} />
+                                    <Text>{bm.playerName}</Text>
+                                </Box>
+                                <Box direction="row" gap="small">
+                                    <Box style={{ opacity: realCD <= 0 ? 1 : 0.5 }}>
+                                        <IconImage data={arenaTalent.getImageData()} scale={0.8} />
+                                    </Box>
+                                    {realCD > 0 && <TimeDown size={TimeDisplaySize.Small} addSeconds={realCD} resetToSeconds={72000} />}
+                                    {realCD <= 0 && <Text>Skill is ready!</Text>}
+                                </Box>
+                            </Box>
+                        </ShadowBox>
+                    )
+                })
+                }
+            </Box>
             <TextAndLabel
                 label="Max Arena Wave"
                 text={breeding.arenaWave.toString() ?? "Unknown"}
@@ -240,25 +272,25 @@ function EggDisplay() {
             <Text size="xsmall">* New eggs will only show up after the cloud save updates.</Text>
             <Box direction="row" gap="medium">
                 <Box direction="row" align="center">
-                {
-                    [...Array(capacity)].map((_, index) => {
-                        if (breeding.eggs.length < index) {
-                            return;
-                        }
-                        return (
-                            <Box key={`egg_${index}`} border={{ color: 'grey-1', side: 'all', size: '2px' }} align="center">
-                                {
-                                    breeding.eggs[index]?.rarity ?? 0 > 0 ?
-                                    <Box key={index}>
-                                        <IconImage data={breeding.eggs[index].getImageData()} />
-                                    </Box>
-                                    : 
-                                    <Box height="43px" width="38px" />
-                                }
-                            </Box>
-                        )
-                    })
-                }
+                    {
+                        [...Array(capacity)].map((_, index) => {
+                            if (breeding.eggs.length < index) {
+                                return;
+                            }
+                            return (
+                                <Box key={`egg_${index}`} border={{ color: 'grey-1', side: 'all', size: '2px' }} align="center">
+                                    {
+                                        breeding.eggs[index]?.rarity ?? 0 > 0 ?
+                                            <Box key={index}>
+                                                <IconImage data={breeding.eggs[index].getImageData()} />
+                                            </Box>
+                                            :
+                                            <Box height="43px" width="38px" />
+                                    }
+                                </Box>
+                            )
+                        })
+                    }
                 </Box>
                 <ComponentAndLabel label="Next Egg In" component={<TimeDown addSeconds={breeding.totalEggTime - breeding.timeTillEgg} />} />
                 {
@@ -267,12 +299,12 @@ function EggDisplay() {
                     ))
                 }
                 <ComponentAndLabel label="Dead Cells" component={
-                    <Box direction="row" gap="small" align="center"> 
+                    <Box direction="row" gap="small" align="center">
                         <Text>{nFormatter(breeding.deadCells)}</Text>
-                        <IconImage data={{ location: 'PetDeadCell', height: 25, width: 25}} />
+                        <IconImage data={{ location: 'PetDeadCell', height: 25, width: 25 }} />
                     </Box>
                 } />
-                
+
             </Box>
         </Box>
     )
