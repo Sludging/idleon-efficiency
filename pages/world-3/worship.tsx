@@ -80,10 +80,8 @@ function ChargeDisplay() {
                         <ComponentAndLabel
                             label="Best Wizard"
                             component={
-                                <Box direction="row">
-                                    <Box width={{ min: "30px", max: '30px' }} margin={{ right: 'small' }}>
-                                        <Box className={`icons-3836 icons-ClassIcons${bestWizard.classId.valueOf()}`} />
-                                    </Box>
+                                <Box direction="row" gap="small">
+                                    <IconImage data={bestWizard.getClassImageData()} scale={0.8}/>
                                     <Text>{bestWizard.playerName}</Text>
                                 </Box>
                             }
@@ -132,10 +130,8 @@ function ChargeDisplay() {
                     return (
                         <ShadowBox key={index} background="dark-1" pad="medium" align="center" margin={{ right: 'large', bottom: 'small' }}>
                             <Box gap="small">
-                                <Box direction="row">
-                                    <Box width={{ min: "30px", max: '30px' }} margin={{ right: 'small' }}>
-                                        <Box className={`icons-3836 icons-ClassIcons${player.classId.valueOf()}`} />
-                                    </Box>
+                                <Box direction="row" gap="small">
+                                    <IconImage data={player.getClassImageData()} scale={0.8}/>
                                     <Text>{player.playerName}</Text>
                                 </Box>
                                 <Box direction="row" gap="small">

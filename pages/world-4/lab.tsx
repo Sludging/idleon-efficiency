@@ -17,16 +17,14 @@ import { Player, SkillsIndex } from '../../data/domain/player';
 function CharacterBox({ player, lineWidth, supped = false }: { player: Player, lineWidth: string, supped?: boolean }) {
     const theBox = (
         <Box background="dark-2" align="center" pad={{ top: "xsmall", bottom: "xsmall", left: "small", right: "small" }} gap="xsmall" direction="row" border={{ size: '1px', color: supped ? 'green-1' : 'grey-1' }}>
-            <Box width={{ min: "20px", max: '20px' }}>
-                <Box className={`icons-3836 icons-ClassIcons${player.classId.valueOf()}`} />
-            </Box>
+            <IconImage data={player.getClassImageData()} scale={0.6} />
             <Box margin={{ right: 'small' }} align="center">
                 <Text size="small" truncate={true}>{player.playerName}</Text>
             </Box>
             <Box direction="row">
                 <Box pad={{ right: 'small' }} margin={{ right: 'small' }} direction="row" border={{ side: 'right', color: 'grey-1' }} align="center">
                     <Box width={{ max: '15px' }} margin={{ right: 'xsmall' }}>
-                        <Box className='icons-3836 icons-ClassIcons53' />
+                        <IconImage data={{location: 'ClassIcons53', height: 36, width: 38}} scale={0.4} />
                     </Box>
                     <Text size="small" truncate={true}>{player.skills.get(SkillsIndex.Intellect)?.level}</Text>
                 </Box>
@@ -180,13 +178,9 @@ function ChipDisplay() {
                             const player = playersData[playerId];
                             return (
                                 <ShadowBox background="dark-1" pad="small" key={index} margin={{ right: 'small', bottom: 'small' }} align="center" gap="small">
-                                    <Box direction="row">
-                                        <Box width={{ min: "20px", max: '20px' }}>
-                                            <Box className={`icons-3836 icons-ClassIcons${player.classId.valueOf()}`} />
-                                        </Box>
-                                        <Box margin={{ right: 'small' }} align="center">
-                                            <Text size="xsmall" truncate={true}>{player.playerName}</Text>
-                                        </Box>
+                                    <Box direction="row" gap="small" align="center">
+                                        <IconImage data={player.getClassImageData()} scale={0.5} />
+                                        <Text size="12px" truncate={true}>{player.playerName}</Text>
                                     </Box>
                                     <Box>
                                         {

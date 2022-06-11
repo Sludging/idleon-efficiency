@@ -10,7 +10,7 @@ import parseAchievements from './achievements';
 import parseLooty from './lootyTracker';
 import parseShrines, { updateShrines } from './shrines';
 import { initAllItems, Item } from './items';
-import parseStorage from './storage';
+import parseStorage, { updateStorage } from './storage';
 import parseQuests from './quests';
 import parsePrayers from './prayers';
 import parseRefinery from './refinery';
@@ -89,7 +89,7 @@ const keyFunctionMap: Record<string, Function> = {
     "alchemy": (doc: Cloudsave, allItems: Item[], charCount: number) => parseAlchemy(doc.get("CauldronInfo"), doc.get("CauldUpgLVs"), allItems),
     "bribes": (doc: Cloudsave, charCount: number) => parseBribes(doc.get("BribeStatus")),
     "guild": (doc: Cloudsave, charCount: number) => parseGuild(JSON.parse(doc.get("Guild"))),
-    "gems": (doc: Cloudsave, charCount: number) => parseGems(JSON.parse(doc.get('GemItemsPurchased'))),
+    "gems": (doc: Cloudsave, charCount: number) => parseGems(safeJsonParse(doc, 'GemItemsPurchased', [])),
     "achievements": (doc: Cloudsave, charCount: number) => parseAchievements(safeJsonParse(doc, 'AchieveReg', []), safeJsonParse(doc, 'SteamAchieve', [])),
     "lootyData": (doc: Cloudsave, allItems: Item[], charCount: number) => parseLooty(JSON.parse(doc.get("Cards1")), allItems),
     "rawData": (doc: Cloudsave, charCount: number) => doc.toJSON(),
@@ -115,13 +115,14 @@ const keyFunctionMap: Record<string, Function> = {
     "dungeons": (doc: Cloudsave, charCount: number) => parseDungeons(safeJsonParse(doc, "DungUpg", []), doc.get("OptLacc")),
     "forge": (doc: Cloudsave, allItems: Item[], charCount: number) => parseForge(doc.get("ForgeItemQty"), doc.get("ForgeIntProg"), doc.get("ForgeItemOrder"), doc.get("ForgeLV"), allItems),
     "cooking": (doc: Cloudsave, charCount: number) => parseCooking(safeJsonParse(doc, "Cooking", []), safeJsonParse(doc, "Meals", [])),
-    "lab": (doc: Cloudsave, charCount: number) => parseLab(safeJsonParse(doc, "Lab", [])),
+    "lab": (doc: Cloudsave, charCount: number) => parseLab(safeJsonParse(doc, "Lab", []), charCount),
     "breeding": (doc: Cloudsave, charCount: number) => parseBreeding(safeJsonParse(doc, "PetsStored", []), safeJsonParse(doc, "Pets", []), doc.get("OptLacc"), safeJsonParse(doc, "Territory", []), safeJsonParse(doc, "Breeding", [])),
     "sigils": (doc: Cloudsave, charCount: number) => parseSigils(safeJsonParse(doc, "CauldronP2W", []), safeJsonParse(doc, "CauldronJobs1", [])),
 }
 
 // ORDER IS IMPORTANT!
 const postProcessingMap: Record<string, Function> = {
+    "storage": (doc: Cloudsave, accountData: Map<string, any>) => updateStorage(accountData),
     "deathnote": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnote(accountData),
     "lab": (doc: Cloudsave, accountData: Map<string, any>) => updateLab(accountData),
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStamps(accountData),

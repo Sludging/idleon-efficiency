@@ -339,7 +339,7 @@ export class Lab {
     }
 }
 
-export const parseLab = (labData: number[][]) => {
+export const parseLab = (labData: number[][], charCount: number) => {
     const lab = new Lab();
 
     if (labData.length == 0) {
@@ -358,7 +358,7 @@ export const parseLab = (labData: number[][]) => {
     })
 
     // Figure out what chips players have.
-    labData.slice(1, 11).forEach((playerChips, index) => {
+    labData.slice(1, 1 + charCount).forEach((playerChips, index) => {
         lab.playerChips[index] = playerChips.filter(chip => chip != -1).map(chip => lab.chips[chip]);
     });
 

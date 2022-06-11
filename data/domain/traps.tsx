@@ -85,7 +85,7 @@ export class Trap {
             return 1;
         }
         switch (trap.internalName) {
-            case "TrapBoxSet1": return 2;
+            case "TrapBoxSet1": return 1;
             case "TrapBoxSet2": return 2;
             case "TrapBoxSet3": return 3;
             case "TrapBoxSet4": return 4;
