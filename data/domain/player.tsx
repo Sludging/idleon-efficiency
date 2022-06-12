@@ -467,7 +467,7 @@ export class Player {
             (1 + labBonus / 100) *
             (1 + prayerBonus / 100)
 
-        const americaTipper = (this.talents.find(talent => talent.skillIndex == 644)?.getBonus() ?? 0) * (this.skills.get(SkillsIndex.Cooking)?.level ?? 0);
+        const americaTipper = (this.talents.find(talent => talent.skillIndex == 644)?.getBonus() ?? 0) * ((this.skills.get(SkillsIndex.Cooking)?.level ?? 0) / 10);
         const currentWorldBonus = 1 + Math.floor(this.currentMapId / 50);
         this.monsterCash.value = baseMath *
             (1 + (vialBonus + gearBonus + cardBonus + (this.talents.find(talent => talent.skillIndex == 22)?.getBonus() ?? 0)
