@@ -1,3 +1,4 @@
+import { range } from "../utility";
 import { BuildingBase } from "./data/BuildingRepo";
 import { ImageData } from "./imageData";
 import { BuildingModel } from "./model/buildingModel";
@@ -70,6 +71,26 @@ export class Building {
                 })
             }
         });
+
+        return toReturn;
+    }
+
+    getMaxLevelCosts = (costCruncher: Building): { item: string, quantity: number}[] => {
+        let toReturn: { item: string, quantity: number}[] = [];
+        range(this.level, this.maxLvl).forEach(level => {
+            const thisLevelCosts = this.getLevelCosts(level, costCruncher);
+            if (toReturn.length == 0) {
+                toReturn = thisLevelCosts;
+            }
+            else {
+                thisLevelCosts.forEach(levelCost => {
+                    const matchingItem = toReturn.find(costItem => costItem.item == levelCost.item);
+                    if (matchingItem) {
+                        matchingItem.quantity += levelCost.quantity;
+                    }
+                });
+            }
+        })
 
         return toReturn;
     }

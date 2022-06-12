@@ -36,12 +36,12 @@ import { ClassIndex, Talent } from '../../data/domain/talents';
 import { TaskBoard } from '../../data/domain/tasks';
 import { Shrine } from '../../data/domain/shrines';
 import { MapInfo } from '../../data/domain/maps';
-import { Building } from '../../data/domain/buildings';
-import { Construction as ConstructionData } from '../../data/domain/construction';
 import { Card } from '../../data/domain/cards';
 import { Lab } from '../../data/domain/lab';
 import IconImage from '../../components/base/IconImage';
 import { Sigils } from '../../data/domain/sigils';
+import { BuildingsDisplay } from '../../components/world-3/construction/buildings';
+import { SaltLickDisplay } from '../../components/world-3/construction/saltLick';
 
 
 function RefineryDisplay() {
@@ -192,10 +192,8 @@ function RefineryDisplay() {
                     return (
                         <ShadowBox key={index} background="dark-1" pad="medium" align="center" margin={{ right: 'large', bottom: 'small' }}>
                             <Box gap="small">
-                                <Box direction="row">
-                                    <Box width={{ min: "30px", max: '30px' }} margin={{ right: 'small' }}>
-                                        <Box className={`icons-3836 icons-ClassIcons${squire.classId.valueOf()}`} />
-                                    </Box>
+                                <Box direction="row" gap="small">
+                                    <IconImage data={squire.getClassImageData()} scale={0.8}/>
                                     <Text>{squire.playerName}</Text>
                                 </Box>
                                 <Box direction="row" gap="small">
@@ -382,80 +380,6 @@ function RefineryDisplay() {
     )
 }
 
-function SaltLickDisplay() {
-    const [saltLickData, setSaltLickData] = useState<SaltLick>();
-    const [refineryData, setRefineryData] = useState<Refinery>();
-    const [itemData, setItemData] = useState<Item[]>();
-    const [storage, setStorage] = useState<Storage>();
-    const appContext = useContext(AppContext);
-
-    useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setItemData(theData.get("itemsData"));
-            setStorage(theData.get("storage"));
-            setRefineryData(theData.get("refinery"));
-            setSaltLickData(theData.get("saltLick"));
-        }
-    }, [appContext]);
-
-    if (!saltLickData || saltLickData.bonuses.filter(bonus => bonus.level ?? 0 > 0).length == 0) {
-        return (
-            <Box align="center" pad="medium">
-                <Heading level='3'>Come back when you unlocked this!</Heading>
-            </Box>
-        )
-    }
-
-    return (
-        <Box>
-            <Box margin={{ bottom: 'small' }}>
-                <Text size="small">* Green text &apos;In Storage&apos; means you can afford the next level.</Text>
-            </Box>
-            {
-                saltLickData && saltLickData.bonuses.map((bonus, index) => {
-                    const saltItem = itemData?.find((item) => item.internalName == bonus.data.item);
-                    if (saltItem) {
-                        let countInStorage = storage?.chest.find(item => item.internalName == saltItem.internalName)?.count ?? 0
-                        // If salt item, check refinery storage as well
-                        if (saltItem.internalName.includes("Refinery")) {
-                            countInStorage += refineryData?.storage.find(salt => salt.name == saltItem.internalName)?.quantity ?? 0;
-                        }
-                        const costToMax = saltLickData.getCostToMax(index);
-                        const costToNextLevel = saltLickData.getCost(index);
-                        return (
-                            <ShadowBox key={index} background="dark-1" pad="medium" direction="row" align="center" justify="between" margin={{ bottom: 'small' }}>
-                                <Grid columns={["35%", "10%", "20%", "15%", "15%"]} fill gap="small" align="center">
-                                    <TextAndLabel textSize='small' text={saltLickData.getBonusText(index)} label="Bonus" />
-                                    <TextAndLabel text={`${bonus.level} / ${bonus.data.maxLevel}`} label="Level" />
-                                    {bonus.level < bonus.data.maxLevel ?
-                                        <React.Fragment>
-                                            <Box direction="row" align="center">
-                                                <Box title={saltItem.displayName} margin={{ right: 'small' }}>
-                                                    <IconImage data={saltItem.getImageData()} />
-                                                </Box>
-                                                <TextAndLabel text={nFormatter(costToNextLevel)} label="Next Level costs" />
-
-                                            </Box>
-                                            <Box direction="row" align="center">
-                                                <TextAndLabel text={nFormatter(costToMax)} label="Cost to max" />
-                                            </Box>
-                                            <TextAndLabel textColor={costToNextLevel > countInStorage ? 'accent-1' : 'green-1'} text={nFormatter(countInStorage)} label="In Storage" />
-                                        </React.Fragment> :
-                                        <Box align="center" justify="center"><Text color="green-1" size="large">Maxed!</Text></Box>
-                                    }
-                                </Grid>
-                            </ShadowBox>
-                        )
-                    }
-                }
-                )
-            }
-        </Box>
-    )
-
-}
-
 function SampleBox({ sample, activeItem, itemData }: { sample: { item: string, quantity: number }, activeItem: { item: string, quantity: number } | undefined, itemData: Item[] | undefined }) {
     const sampleItem = itemData?.find((item) => item.internalName == sample.item);
     return (
@@ -520,10 +444,8 @@ function PrinterDisplay() {
                     return (
                         <ShadowBox key={index} background="dark-1" pad="medium" align="center" margin={{ right: 'large', bottom: 'small' }}>
                             <Box gap="small">
-                                <Box direction="row">
-                                    <Box width={{ min: "30px", max: '30px' }} margin={{ right: 'small' }}>
-                                        <Box className={`icons-3836 icons-ClassIcons${mastero.classId.valueOf()}`} />
-                                    </Box>
+                                <Box direction="row" gap="small">
+                                    <IconImage data={mastero.getClassImageData()} scale={0.8}/>
                                     <Text>{mastero.playerName}</Text>
                                 </Box>
                                 <Box direction="row" gap="small">
@@ -768,106 +690,6 @@ function ShrinesDisplay() {
                 })
                 }
             </Box>
-        </Box>
-    )
-
-}
-
-function BuildingsDisplay() {
-    const [constructionData, setConstructionData] = useState<ConstructionData>();
-    const [itemData, setItemData] = useState<Item[]>();
-    const appContext = useContext(AppContext);
-    const size = useContext(ResponsiveContext);
-
-    useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setItemData(theData.get("itemsData"));
-            setConstructionData(theData.get("construction"));
-        }
-    }, [appContext]);
-
-    const costCruncher = useMemo(() => {
-        return constructionData?.buildings.find(building => building.index == 5) as Building;
-    }, [constructionData])
-
-    if (!constructionData || constructionData.buildings.filter(building => building.level > 0).length == 0) {
-        return (
-            <Box align="center" pad="medium">
-                <Heading level='3'>Come back when you unlocked this!</Heading>
-            </Box>
-        )
-    }
-    return (
-        <Box gap="medium" pad="large">
-            <TextAndLabel
-                label="Total Levels"
-                text={constructionData.buildings.reduce((sum, building) => sum += building.level, 0).toString()}
-            />
-            <Grid columns={size == "small" ? "1" : "1/2"} fill>
-                {constructionData.buildings && constructionData.buildings.map((building, index) => {
-                    return (
-                        <ShadowBox style={{ opacity: building.level > 0 ? 1 : 0.5 }} key={index} background="dark-1" pad="medium" align="start" margin={{ right: 'large', bottom: 'small' }}>
-                            <Grid columns="1/3" gap="medium" fill>
-                                <Box justify="center">
-                                    <Box margin={{ right: 'small' }}>
-                                        <IconImage data={building.getImageData()} />
-                                    </Box>
-                                    <Text size="small">{building.name}</Text>
-                                </Box>
-                                <Box>
-                                    <TextAndLabel
-                                        label="Level"
-                                        textSize="small"
-                                        text={`${building.level.toString()}/${building.maxLvl.toString()}`}
-                                        margin={{ right: 'large', bottom: 'small' }}
-                                    />
-                                    {building.nextLevelUnlocked || building.level == building.maxLvl || building.currentXP > building.getBuildCost() ?
-                                        <TextAndLabel
-                                            label="Build Req"
-                                            textSize="small"
-                                            text={"Maxed"}
-                                            margin={{ right: 'large', bottom: 'small' }}
-                                        /> :
-                                        <TextAndLabel
-                                            label="Build Req"
-                                            textSize="small"
-                                            text={`${nFormatter(building.currentXP)}/${nFormatter(building.getBuildCost())}`}
-                                            margin={{ right: 'large', bottom: 'small' }}
-                                        />}
-                                </Box>
-                                {building.level != building.maxLvl &&
-                                    <Box>
-                                        <Box wrap align="start" gap="small">
-                                            <Text size="small">Next level costs</Text>
-                                            <Box gap="xsmall">
-                                                {
-                                                    building.lvlUpReq && building.getLevelCosts(building.level, costCruncher).map((costData, index) => {
-                                                        const costItem = itemData?.find((item) => item.internalName == costData.item);
-                                                        if (costItem) {
-                                                            return (
-                                                                <Box key={index} direction="row" align="center">
-                                                                    <Box title={costItem?.displayName}>
-                                                                        <IconImage data={costItem.getImageData()} />
-                                                                    </Box>
-                                                                    <Box direction="row" gap="xsmall" align="center">
-                                                                        <Text size="small">{nFormatter(costData.quantity)}</Text>
-                                                                    </Box>
-                                                                </Box>
-                                                            )
-                                                        }
-                                                    })
-                                                }
-                                            </Box>
-                                        </Box>
-                                    </Box>
-                                }
-                            </Grid>
-                        </ShadowBox>
-                    )
-                })
-                }
-            </Grid>
         </Box>
     )
 

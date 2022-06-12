@@ -103,6 +103,13 @@ export class Worship {
 
     static getChargeRate = (skullInternalName: string, worshipLevel: number = 0, popeRate: number = 0, cardBonus: number = 0, stampBonus: number = 0, talentBonus: number = 0) => {
         const skullSpeed = SkullSpeedMap[skullInternalName];
+        if (skullSpeed < 3) {
+            const speedMath = 5.7 + Math.pow(4 - skullSpeed, 2.2);
+            const levelMath = (0.9 * Math.pow(worshipLevel, 0.5)) / (Math.pow(worshipLevel, 0.5) + 250);
+            const base = 6 / Math.max(speedMath - (levelMath + (0.6 * worshipLevel) / (worshipLevel + 40)), 0.57);
+            return base * Math.max(1, popeRate) * (1 + (cardBonus + stampBonus) / 100) * Math.max(talentBonus, 1)
+        }
+        // skull speed >= 3
         const speedMath = 0.2 * Math.pow(skullSpeed, 1.3);
         const levelMath = (0.9 * Math.pow(worshipLevel, 0.5)) / (Math.pow(worshipLevel, 0.5) + 250);
         const base = 6 / Math.max(5.7 - (speedMath + (levelMath + (0.6 * worshipLevel) / (worshipLevel + 40))), 0.57);
@@ -154,7 +161,7 @@ export const updateWorship = (data: Map<string, any>) => {
             const flowinStamp = stamps[StampTab.Skill][StampConsts.FlowinIndex];
             const chargeSpeedTalent = player.talents.find(x => x.skillIndex == TalentConst.NearbyOutletIndex);
             const talentBonus = chargeSpeedTalent?.getBonus() ?? 0;
-            const chargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "F11")?.getBonus() ?? 0;
+            const chargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "SoulCard5")?.getBonus() ?? 0;
             const chargeRate = player.gear.tools[5] ? Worship.getChargeRate(player.gear.tools[5].internalName, worshipLevel, popeBonus, chargeCardBonus, flowinStamp.getBonus(worshipLevel), talentBonus) : 0;
             worship.playerData.push({
                 maxCharge: maxCharge,
