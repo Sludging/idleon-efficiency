@@ -53,6 +53,8 @@ import Stat from '../components/base/Stat';
 import IconImage from '../components/base/IconImage';
 import { SourcesModel } from '../data/domain/model/sourcesModel';
 import { Sigils } from '../data/domain/sigils';
+import { Chip } from '../data/domain/lab';
+import { ImageData } from '../data/domain/imageData';
 
 
 function ItemSourcesDisplay({ sources, dropInfo }: { sources: SourcesModel, dropInfo: DropSource[] }) {
@@ -98,22 +100,54 @@ interface SkillProps {
 function nth(n: number) { return `${n}${["st", "nd", "rd"][((n + 90) % 100 - 10) % 10 - 1] || "th"}` }
 
 function ShowSkills(props: SkillProps) {
-    const getSkillClass = (skill: SkillsIndex) => {
+    const getSkillImageData = (skill: SkillsIndex): ImageData => {
+        let imageSrc: string;
         switch (skill) {
-            case SkillsIndex.Mining: return `icons-3836 icons-ClassIcons42`;
-            case SkillsIndex.Smithing: return `icons-3836 icons-ClassIcons43`;
-            case SkillsIndex.Chopping: return `icons-3836 icons-ClassIcons44`;
-            case SkillsIndex.Fishing: return `icons-3836 icons-ClassIcons45`;
-            case SkillsIndex.Alchemy: return `icons-3836 icons-ClassIcons46`;
-            case SkillsIndex.Catching: return `icons-3836 icons-ClassIcons47`;
-            case SkillsIndex.Trapping: return `icons-3836 icons-ClassIcons48`;
-            case SkillsIndex.Construction: return `icons-3836 icons-ClassIcons49`;
-            case SkillsIndex.Worship: return `icons-3836 icons-ClassIcons50`;
-            case SkillsIndex.Cooking: return `icons-3836 icons-ClassIcons51`;
-            case SkillsIndex.Breeding: return `icons-3836 icons-ClassIcons52`;
-            case SkillsIndex.Intellect: return `icons-3836 icons-ClassIcons53`;
+            case SkillsIndex.Mining:
+                imageSrc = 'ClassIcons42';
+                break;
+            case SkillsIndex.Smithing:
+                imageSrc = 'ClassIcons43';
+                break;
+            case SkillsIndex.Chopping:
+                imageSrc = 'ClassIcons44';
+                break;
+            case SkillsIndex.Fishing:
+                imageSrc = 'ClassIcons45';
+                break;
+            case SkillsIndex.Alchemy:
+                imageSrc = 'ClassIcons46';
+                break;
+            case SkillsIndex.Catching:
+                imageSrc = 'ClassIcons47';
+                break;
+            case SkillsIndex.Trapping:
+                imageSrc = 'ClassIcons48';
+                break;
+            case SkillsIndex.Construction:
+                imageSrc = 'ClassIcons49';
+                break;
+            case SkillsIndex.Worship:
+                imageSrc = 'ClassIcons50';
+                break;
+            case SkillsIndex.Cooking:
+                imageSrc = 'ClassIcons51';
+                break;
+            case SkillsIndex.Breeding:
+                imageSrc = 'ClassIcons52';
+                break;
+            case SkillsIndex.Intellect:
+                imageSrc = 'ClassIcons53';
+                break;
+            default:
+                imageSrc = '';
+                break;
+        }
 
-            default: return '';
+        return {
+            location: imageSrc,
+            height: 36,
+            width: 38,
         }
     }
 
@@ -138,9 +172,7 @@ function ShowSkills(props: SkillProps) {
                         return (
                             <Box key={`skill_${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} gridArea={`${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} direction="row" gap="medium" margin={{ right: 'small', bottom: 'medium' }}>
                                 <Box direction="row" align="center" gap="small">
-                                    <Box width={{ max: '30px', min: '30px' }}>
-                                        <Box className={getSkillClass(skillIndex)} />
-                                    </Box>
+                                    <IconImage data={getSkillImageData(skillIndex)} scale={0.75} />
                                     <Box gap="small">
                                         <Box direction="row" gap="small">
                                             <Text size="small">{skill.level}</Text>
@@ -186,12 +218,10 @@ function ShowSkills(props: SkillProps) {
                                         return (
                                             <Box key={`ccd_${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} direction="row" gap="medium" margin={{ right: 'small', bottom: 'small' }}>
                                                 <Box direction="row" align="center" gap="small">
-                                                    <Box width={{ max: '36px', min: '36px' }}>
-                                                        <Box className={getSkillClass(skillIndex)} />
-                                                    </Box>
+                                                    <IconImage data={getSkillImageData(skillIndex)} scale={0.75} />
                                                     <Box gap="small">
                                                         <Box direction="row" gap="small">
-                                                            <Text color={ ccdMax == crystalReduction ? 'green' : ''} size="small">{nFormatter(crystalReduction, "Smaller")}%</Text>
+                                                            <Text color={ccdMax == crystalReduction ? 'green' : ''} size="small">{nFormatter(crystalReduction, "Smaller")}%</Text>
                                                         </Box>
                                                     </Box>
                                                 </Box>
@@ -439,7 +469,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                                             size={size}
                                             direction={TipDirection.Down}
                                         >
-                                            <IconImage data={buff.getImageData()} scale={0.8}/>
+                                            <IconImage data={buff.getImageData()} scale={0.8} />
                                         </TipDisplay>
                                     </Box>
                                 )
@@ -463,7 +493,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                                                     size={size}
                                                     direction={TipDirection.Down}
                                                 >
-                                                    <IconImage data={shrine.getImageData()} scale={0.7}/>
+                                                    <IconImage data={shrine.getImageData()} scale={0.7} />
                                                 </TipDisplay>
                                             </Box>
                                         )
@@ -542,14 +572,14 @@ function ItemDisplay({ item, size = "50px", goldFoodMulti }: { item: Item | unde
 
                     <Box direction="row" align="center">
                         <Box width={{ max: size, min: size }} align="center">
-                            <IconImage data={item.getImageData()} scale={ parseInt(size.replace('px', '')) / 36 }/>
+                            <IconImage data={item.getImageData()} scale={parseInt(size.replace('px', '')) / 36} />
                         </Box>
                         <Box>
                             <Text>{item.count}</Text>
                         </Box>
                     </Box>
                     : <Box width={{ max: size, min: size }} align="center">
-                        <IconImage data={item.getImageData()} scale={ parseInt(size.replace('px', '')) / 36 } />
+                        <IconImage data={item.getImageData()} scale={parseInt(size.replace('px', '')) / 36} />
                     </Box>
                 }
             </Box>
@@ -775,9 +805,7 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
                     component={
                         <Box direction="row" align="center">
                             <Text>{nFormatter(player.anvil.getTotalSharpshells(anvilCostDiscount))}</Text>
-                            <Box width={{ max: '25px', min: '25px' }}>
-                                <Box className={sharpShells?.getClass()} />
-                            </Box>
+                            <IconImage data={(sharpShells as Item).getImageData()} scale={0.8} />
                         </Box>
                     }
                 />
@@ -816,9 +844,7 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
                         const timeTillCap = ((anvilCapcity - futureProduction) / (anvilSpeed / 3600 / anvilItem.time * (anvilItem.hammers ?? 0)));
                         return (
                             <Box key={`player_${player.playerID}_anvil_${index}`} direction="column" align="center">
-                                <Box width={{ min: '50px', max: '50px' }}>
-                                    <Box className={`icons-3636 icons-${anvilItem.internalName}_x1`} />
-                                </Box>
+                                <IconImage data={{ height: 36, location: `${anvilItem.internalName}`, width: 36 }} scale={1.2}/>
                                 <Text size="small">Number of Hammers = {anvilItem.hammers}</Text>
                                 <Box direction="row" gap="small">
                                     <Stack>
@@ -994,7 +1020,7 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
                     player.capacity.bags.filter((bag) => bag.displayName != undefined).map((bag, index) => (
                         <Box align="center" key={index} gap="small">
                             <Box>
-                                <IconImage data={bag.getImageData()} scale={50 / 36 }/>
+                                <IconImage data={bag.getImageData()} scale={50 / 36} />
                             </Box>
                             <Text size="small">{bag.displayName}: {Intl.NumberFormat().format(bag.getCapacity(capBonuses.get(bag.name)))}</Text>
                         </Box>
@@ -1034,7 +1060,7 @@ function TalentDisplay({ player }: { player: Player }) {
                                                         dropProps={{ align: { top: 'bottom' } }}
                                                     >
                                                         <Box pad="xxsmall" key={`player_${player.playerID}_talents_${index}`} direction="row" gap="xxsmall">
-                                                            <Box title={talent.name}  style={{ opacity: talent.level > 0 ? 1 : 0.2 }} align="center">
+                                                            <Box title={talent.name} style={{ opacity: talent.level > 0 ? 1 : 0.2 }} align="center">
                                                                 <IconImage data={talent.getImageData()} scale={0.8} />
                                                             </Box>
                                                             <Box direction="row" gap="xxsmall">
@@ -1230,8 +1256,8 @@ function ZowInfo({ player }: { player: Player }) {
     return (
         <Box pad="medium" gap="medium" fill>
             <Box direction="row" gap="small">
-            <Text>Current zow count: {zowCount}</Text>
-            <Text>Current chow count: {chowCount}</Text>
+                <Text>Current zow count: {zowCount}</Text>
+                <Text>Current chow count: {chowCount}</Text>
             </Box>
             <Heading level="3" margin={{ bottom: '1px', top: '1px' }} >To be zowed:</Heading>
             <Box direction="row" wrap>
@@ -1254,7 +1280,7 @@ function ZowInfo({ player }: { player: Player }) {
                     })
                 }
             </Box>
-            
+
             <Heading level="3" margin={{ bottom: '1px', top: '1px' }} >To be chowed:</Heading>
             <Box direction="row" wrap>
                 {
@@ -1274,6 +1300,39 @@ function ZowInfo({ player }: { player: Player }) {
                             )
                         }
                     })
+                }
+            </Box>
+        </Box>
+    )
+}
+
+function ChipInfo({ player }: { player: Player }) {
+
+    return (
+        <Box pad="medium" gap="medium" fill>
+            <Text size='medium'>Chips</Text>
+            <Box direction="row">
+                {
+                    player.labInfo.chips.map((slot, index) => (
+                        <Box key={index} direction="row" gap="small" border={{ color: 'grey-1', side: 'all', size: '2px' }}>
+                            {
+                                slot.chip ?
+                                    <TipDisplay
+                                        heading={slot.chip.data.name}
+                                        body={slot.chip.getBonusText()}
+                                        direction={TipDirection.Down}
+                                        size='small'>
+                                        <IconImage data={(slot.chip as Chip).getImageData()} />
+                                    </TipDisplay> :
+                                    <Box width={{ max: '42px', min: '42px' }} height={{ max: '42px', min: '42px' }} align="center">
+                                        {
+                                            (player.skills.get(SkillsIndex.Intellect)?.level ?? 0) < slot.lvlReq && <Text size="xsmall">Lv {slot.lvlReq}</Text>
+                                        }
+
+                                    </Box>
+                            }
+                        </Box>
+                    ))
                 }
             </Box>
         </Box>
@@ -1348,6 +1407,7 @@ function PlayerTab({ player }: PlayerTabProps) {
                     <SpecialButton isActive={index == 8} clickHandler={() => onActive(8)} text={"Post Office"} />
                     <SpecialButton isActive={index == 9} clickHandler={() => onActive(9)} text={"Inventory"} />
                     <SpecialButton isActive={index == 10} clickHandler={() => onActive(10)} text={"Obols"} />
+                    <SpecialButton isActive={index == 12} clickHandler={() => onActive(12)} text={"Chips"} />
                     {
                         (player.classId == ClassIndex.Barbarian || player.classId == ClassIndex.Blood_Berserker) &&
                         <SpecialButton isActive={index == 11} clickHandler={() => onActive(11)} text={"Zow/Chow"} />
@@ -1365,6 +1425,7 @@ function PlayerTab({ player }: PlayerTabProps) {
                     {index == 9 && <InventoryDisplay player={player} />}
                     {index == 10 && <ObolsInfo playerIndex={player.playerID} title={"Obols"} level={player.level} />}
                     {index == 11 && <ZowInfo player={player} />}
+                    {index == 12 && <ChipInfo player={player} />}
                 </Box>
             </Grid>
         </ShadowBox>
@@ -1407,7 +1468,7 @@ const customTabs = {
 const CustomTabTitle = ({ player, isActive }: { player: Player, isActive: boolean }) => (
     <Box direction="row" align="center" margin={{ vertical: 'xsmall' }}>
         <Box margin={{ right: 'xsmall' }}>
-            <IconImage data={player.getClassImageData()} scale={0.6}/>
+            <IconImage data={player.getClassImageData()} scale={0.6} />
         </Box>
         <Text size="xsmall" color={isActive ? 'brand' : 'accent-2'}>
             {player.playerName ? player.playerName : `Character ${player.playerID}`}

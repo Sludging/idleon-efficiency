@@ -2,6 +2,7 @@ import {
     Box,
     Grid,
     Heading,
+    ResponsiveContext,
     Text,
 } from 'grommet'
 import { NextSeo } from 'next-seo';
@@ -156,6 +157,7 @@ function KitchensDisplay() {
 function Cooking() {
     const [cooking, setCooking] = useState<CookingDomain>();
     const appContext = useContext(AppContext);
+    const size = useContext(ResponsiveContext);
 
     useEffect(() => {
         if (appContext) {
@@ -190,12 +192,26 @@ function Cooking() {
             </Box>
             <Box margin={{ bottom: 'medium' }} gap="small">
                 <Text>Meals</Text>
-                <Grid columns="1/3">
+                <Grid columns={size == "small" ? "1/2" : "1/3"}>
+                    <Box direction="row" pad={{ left: '70px', right: '25px' }} justify="between" align="center" margin={{ right: 'small', bottom: 'small' }}>
+                        <Text color="accent-2" size="xsmall">Bonus</Text>
+                        <Text color="accent-2" size="xsmall">Next Level</Text>
+                    </Box>
+                    <Box direction="row" pad={{ left: '70px', right: '25px' }} justify="between" align="center" margin={{ right: 'small', bottom: 'small' }}>
+                        <Text color="accent-2" size="xsmall">Bonus</Text>
+                        <Text color="accent-2" size="xsmall">Next Level</Text>
+                    </Box>
+                    {size != "small" &&
+                        <Box direction="row" pad={{ left: '70px', right: '25px' }} justify="between" align="center" margin={{ right: 'small', bottom: 'small' }}>
+                            <Text color="accent-2" size="xsmall">Bonus</Text>
+                            <Text color="accent-2" size="xsmall">Next Level</Text>
+                        </Box>
+                    }
                     {
                         cooking?.meals.filter(meal => (meal.level > 0 || meal.optimalSpices.length > 0)).map((meal, index) => (
-                            <ShadowBox background="dark-1" key={index} margin={{ right: 'small', bottom: 'small' }} direction="row" pad="small" gap="small" align="center" border={meal.cookingContribution > 0 ? { color: 'green-1', size: '1px'} : undefined}>
+                            <ShadowBox background="dark-1" key={index} margin={{ right: 'small', bottom: 'small' }} direction="row" pad="small" gap="small" align="center" border={meal.cookingContribution > 0 ? { color: 'green-1', size: '1px' } : undefined}>
                                 <Box direction="row" align='center' fill>
-                                    <Box direction="row" align="center" margin={{right: 'small'}}>
+                                    <Box direction="row" align="center" margin={{ right: 'small' }}>
                                         <Text size="small">{meal.level}</Text>
                                         <Box margin={{ bottom: 'small' }}>
                                             <IconImage data={meal.getImageData()} />
@@ -229,20 +245,9 @@ function Cooking() {
                                         >
                                             {
                                                 meal.level > 0 ?
-                                                    <Box direction="row" fill justify="between">
-                                                        <TextAndLabel
-                                                            label="Bonus"
-                                                            textSize='xsmall'
-                                                            text={meal.getBonusText()}
-                                                            margin={{ right: 'small' }}
-                                                        />
-                                                        <TextAndLabel
-                                                            label="Next Level"
-                                                            textSize='xsmall'
-                                                            right
-                                                            textColor={meal.count > meal.getMealLevelCost() ? 'green-1' : 'accent-1'}
-                                                            text={`${nFormatter(Math.floor(meal.count))}/${nFormatter(Math.ceil(meal.getMealLevelCost()))}`}
-                                                        />
+                                                    <Box direction="row" justify="between" align="center" pad={{top: 'small'}}>
+                                                        <Text margin={{ right: 'small' }} size="xsmall">{meal.getBonusText()}</Text>
+                                                        <Text color={meal.count > meal.getMealLevelCost() ? 'green-1' : 'accent-1'} margin={{ right: 'small' }} size="xsmall">{`${nFormatter(Math.floor(meal.count))}/${nFormatter(Math.ceil(meal.getMealLevelCost()))}`}</Text>
                                                     </Box> :
                                                     <Box direction="row">
                                                         {

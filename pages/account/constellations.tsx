@@ -14,8 +14,8 @@ import ShadowBox from "../../components/base/ShadowBox";
 import { AppContext } from '../../data/appContext';
 import { ConstellationMap } from '../../data/domain/starsigns';
 import { NextSeo } from 'next-seo';
-import { ClassIndex } from "../../data/domain/talents";
 import { Player } from "../../data/domain/player";
+import IconImage from "../../components/base/IconImage";
 
 enum CharacterBoxStatus {
     Complete,
@@ -23,14 +23,14 @@ enum CharacterBoxStatus {
     Disabled
 }
 
-function CharacterBox({ playerName, playerClass, status }: { playerName: string, playerClass: ClassIndex, status: CharacterBoxStatus }) {
+function CharacterBox({ player, status }: { player: Player, status: CharacterBoxStatus }) {
     return (
         <Box background="dark-2" align="center" pad={{ top: "xsmall", bottom: "xsmall", left: "small", right: "small" }} gap="xsmall" direction="row" border={{ size: '2px', color: status == CharacterBoxStatus.Complete ? 'green-1' : 'none' }}>
-            <Box style={{ opacity: status == CharacterBoxStatus.Disabled ? 0.4 : 1 }} width={{ min: "35px", max: '35px' }}>
-                <Box className={`icons-3836 icons-ClassIcons${playerClass.valueOf()}`} />
+            <Box style={{ opacity: status == CharacterBoxStatus.Disabled ? 0.4 : 1 }}>
+                <IconImage data={player.getClassImageData()} scale={0.7} />
             </Box>
             <Box>
-                <Text color="grey-2" size="12px" truncate={true}>{playerName}</Text>
+                <Text color="grey-2" size="12px" truncate={true}>{player.playerName}</Text>
             </Box>
         </Box>
     )
@@ -117,7 +117,7 @@ function Constellations() {
                                                                 playerData?.map((player, index) => {
                                                                     const isComplete = constellationData && constellationData.length > (Number(data.index)) && constellationData[Number(data.index)][0].includes(player.getPlayerLetter());
                                                                     return (
-                                                                        <CharacterBox key={index} playerName={player.playerName} playerClass={player.classId} status={isComplete ? CharacterBoxStatus.Complete : CharacterBoxStatus.Disabled} />
+                                                                        <CharacterBox key={index} player={player} status={isComplete ? CharacterBoxStatus.Complete : CharacterBoxStatus.Disabled} />
                                                                     )
                                                                 })
                                                             }

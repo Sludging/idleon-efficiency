@@ -7,7 +7,7 @@ import {
 } from "grommet"
 
 import { Stamp } from '../../data/domain/stamps';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, useMemo } from 'react';
 import { AppContext } from '../../data/appContext';
 import { getCoinsArray, nFormatter } from '../../data/utility'
 import CoinsDisplay from "../../components/coinsDisplay";
@@ -58,26 +58,26 @@ function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stam
     }
 
     return (
-        <Box pad="small" border={{color: 'grey-1'}} key={`stamp_${index}_${stamp.raw_name}`}>
-                <TipDisplay
-                    body={
-                        <TipContent stamp={stamp} faceLeft={stamp.type == "Misc Stamp"} />
-                    }
-                    heading={`${stamp.name} (${stamp.level}/${stamp.maxLevel})`}
-                    direction={ size == "small" ? TipDirection.Down : stamp.type == "Misc Stamp" ? TipDirection.Left : TipDirection.Right }
-                    size="medium"
-                    visibility={stamp.name == "Blank" || stamp.name == "FILLER" ? 'none' : undefined}
-                >
-                    {/* Do the opacity thing in styled components? */}
-                    <Box direction="row" fill align="center">
-                        <Box align="center" width={{max: '50px'}} fill>
-                            <Box style={{ opacity: stamp.level > 0 ? 1 : 0.2 }} className={getCardClass()}/>
-                        </Box>
-                        <Box>
-                            <Text size="medium">{stamp.level}</Text>
-                        </Box>
+        <Box pad="small" border={{ color: 'grey-1' }} key={`stamp_${index}_${stamp.raw_name}`}>
+            <TipDisplay
+                body={
+                    <TipContent stamp={stamp} faceLeft={stamp.type == "Misc Stamp"} />
+                }
+                heading={`${stamp.name} (${stamp.level}/${stamp.maxLevel})`}
+                direction={size == "small" ? TipDirection.Down : stamp.type == "Misc Stamp" ? TipDirection.Left : TipDirection.Right}
+                size="medium"
+                visibility={stamp.name == "Blank" || stamp.name == "FILLER" ? 'none' : undefined}
+            >
+                {/* Do the opacity thing in styled components? */}
+                <Box direction="row" fill align="center">
+                    <Box align="center" width={{ max: '50px' }} fill>
+                        <Box style={{ opacity: stamp.level > 0 ? 1 : 0.2 }} className={getCardClass()} />
                     </Box>
-                </TipDisplay>
+                    <Box>
+                        <Text size="medium">{stamp.level}</Text>
+                    </Box>
+                </Box>
+            </TipDisplay>
         </Box>
     )
 }
@@ -87,7 +87,7 @@ function StampTab({ tab, index, blueFlavPercent, hasBribe }: { tab: Stamp[], ind
         <Box pad="medium">
             <h3>{tab[0].type}</h3>
             <Box fill>
-                <Grid columns={{ count: 4, size: "auto"}} gap="none">
+                <Grid columns={{ count: 4, size: "auto" }} gap="none">
                     {
                         tab.filter(stamp => stamp.name != "FILLER").map((stamp: Stamp) => {
                             if (stamp != undefined) {
@@ -125,6 +125,10 @@ function Stamps() {
         }
     }, [appContext, stampData])
 
+    const totalLevels = useMemo(() => {
+        return stampData?.flatMap(tab => tab).reduce((sum, stamp) => sum += stamp.level, 0);
+    }, [stampData])
+
     if (stampData && stampData.flatMap(tab => tab).filter(stamp => stamp.level > 0).length == 0) {
         return (
             <Box align="center" pad="medium">
@@ -136,8 +140,11 @@ function Stamps() {
         <Box>
             <NextSeo title="Stamps" />
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Stamps</Heading>
+            <Box margin={{ bottom: 'small' }}>
+                <Text>Total levels: {totalLevels}</Text>
+            </Box>
             <ShadowBox flex={false} background="dark-1" pad="small">
-                <Grid columns={{ size: '300px'}} gap="medium">
+                <Grid columns={{ size: '300px' }} gap="medium">
                     {
                         stampData && stampData.map((tab, index) => {
                             return (<StampTab key={`tab_${index}`} tab={tab} index={index} blueFlavPercent={blueFlavPercent} hasBribe={hasBribe == BribeStatus.Purchased} />)

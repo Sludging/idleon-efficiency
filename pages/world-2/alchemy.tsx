@@ -13,7 +13,7 @@ import styled from 'styled-components'
 
 import { Alchemy as AlchemyData, Cauldron, Bubble, CauldronBoostIndex, Vial } from '../../data/domain/alchemy';
 import { AchievementConst } from '../../data/domain/achievements'
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, useMemo } from 'react';
 import { AppContext } from '../../data/appContext'
 import { nFormatter, round } from '../../data/utility'
 import { NextSeo } from 'next-seo';
@@ -230,7 +230,7 @@ function SigilsDisplay() {
                         const chargeSpeed = sigil.activePlayers * sigilData.chargeSpeed;
                         const timeToNext = ((reqLimit - sigil.progress) / chargeSpeed) * 3600;
                         return (
-                            <ShadowBox background="dark-1" key={index} margin={{ right: 'small', bottom: 'small' }} gap="medium" align="start" pad="small">
+                            <ShadowBox background="dark-1" key={index} margin={{ right: 'small', bottom: 'small' }} gap="medium" align="start" pad="small" border={ sigil.activePlayers > 0 ? { color: 'green-1', size: '1px' } : undefined}>
                                 <IconImage style={sigil.boostLevel == 1 ? { filter: 'hue-rotate(190deg)' } : sigil.boostLevel == -1 ? { opacity: 0.2 } : undefined} data={sigil.getImageData()} />
                                 <Box direction="row" gap="medium">
                                     <TextAndLabel textSize="xsmall" label="Name" text={sigil.data.name} />

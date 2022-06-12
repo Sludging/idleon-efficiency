@@ -11,7 +11,6 @@ import { useEffect, useState, useContext, useMemo } from 'react';
 import ShadowBox from "../../components/base/ShadowBox";
 import { AppContext } from '../../data/appContext';
 import { NextSeo } from 'next-seo';
-import { ClassIndex } from "../../data/domain/talents";
 import { Player } from "../../data/domain/player";
 import { NPC, Quests as QuestInfo, NpcQuest } from "../../data/domain/quests";
 import { Next } from 'grommet-icons';
@@ -19,6 +18,7 @@ import { MouseEventHandler } from "hoist-non-react-statics/node_modules/@types/r
 import TipDisplay, { TipDirection } from "../../components/base/TipDisplay";
 import CoinsDisplay from "../../components/coinsDisplay";
 import { getCoinsArray } from "../../data/utility";
+import IconImage from "../../components/base/IconImage";
 
 enum CharacterBoxStatus {
     Complete,
@@ -26,7 +26,7 @@ enum CharacterBoxStatus {
     Disabled
 }
 
-function CharacterBox({ playerName, playerClass, status }: { playerName: string, playerClass: ClassIndex, status: CharacterBoxStatus }) {
+function CharacterBox({ player, status }: { player: Player, status: CharacterBoxStatus }) {
     const borderColorForStatus = (status: CharacterBoxStatus) => {
         switch (status) {
             case CharacterBoxStatus.Complete: return "green-1";
@@ -47,11 +47,11 @@ function CharacterBox({ playerName, playerClass, status }: { playerName: string,
 
     return (
         <Box title={titleForStatus(status)} background="dark-2" align="center" pad={{ top: "xsmall", bottom: "xsmall", left: "small", right: "small" }} gap="xsmall" direction="row" border={{ size: '1px', color: borderColorForStatus(status) }}>
-            <Box style={{ opacity: status == CharacterBoxStatus.Disabled ? 0.4 : 1 }} width={{ min: "35px", max: '35px' }}>
-                <Box className={`icons-3836 icons-ClassIcons${playerClass.valueOf()}`} />
+            <Box style={{ opacity: status == CharacterBoxStatus.Disabled ? 0.4 : 1 }}>
+                <IconImage data={player.getClassImageData()} scale={0.7}/>
             </Box>
             <Box>
-                <Text color="grey-2" size="12px" truncate={true}>{playerName}</Text>
+                <Text color="grey-2" size="12px" truncate={true}>{player.playerName}</Text>
             </Box>
         </Box>
     )
@@ -111,9 +111,7 @@ function QuestInformation({ info }: { info: NpcQuest}) {
                     if (item.item) {
                         return (
                             <Box key={`reward_${index}`} direction="row" gap="small" align="center">
-                                <Box width={{max: '36px', min: '36px'}}>
-                                    <Box className={item.className} />
-                                </Box>
+                                <IconImage data={{ location: item.item, height: 36, width: 36 }} />
                                 <Text size="small">{item.displayName ?? item.item}: {item.quantity}</Text>
                             </Box>
                              )
@@ -174,7 +172,7 @@ function NPCQuests({ npc, playerInfo, playerQuestData }: { npc: NPC, playerInfo:
 
                                         }
                                         return (
-                                            <CharacterBox key={index} playerName={player.playerName} playerClass={player.classId} status={questStatus} />
+                                            <CharacterBox key={index} player={player} status={questStatus} />
                                         )
                                     })
                                 }

@@ -466,12 +466,14 @@ export class Player {
             (1 + (petArenaBonus1 * 0.5) + petArenaBonus2) *
             (1 + labBonus / 100) *
             (1 + prayerBonus / 100)
+
+        const americaTipper = (this.talents.find(talent => talent.skillIndex == 644)?.getBonus() ?? 0) * ((this.skills.get(SkillsIndex.Cooking)?.level ?? 0) / 10);
         const currentWorldBonus = 1 + Math.floor(this.currentMapId / 50);
         this.monsterCash.value = baseMath *
             (1 + (vialBonus + gearBonus + cardBonus + (this.talents.find(talent => talent.skillIndex == 22)?.getBonus() ?? 0)
                 + dungeonBonus + arcadeBonus + boxBonus + (guildBonus * currentWorldBonus) +
                 (this.talents.find(talent => talent.skillIndex == 643)?.getBonus() ?? 0) +
-                (this.talents.find(talent => talent.skillIndex == 644)?.getBonus() ?? 0) +
+                americaTipper +
                 goldenFoodBonus) / 100);
 
         this.monsterCash.sources.push({ name: "Prayer (*)", value: prayerBonus });
@@ -482,14 +484,14 @@ export class Player {
         this.monsterCash.sources.push({ name: "Equipment", value: gearBonus });
         this.monsterCash.sources.push({ name: "Gold Food", value: goldenFoodBonus });
         this.monsterCash.sources.push({ name: "Card", value: cardBonus });
-        this.monsterCash.sources.push({ name: "Post Office", value: boxBonus });   
+        this.monsterCash.sources.push({ name: "Post Office", value: boxBonus });
         this.monsterCash.sources.push({ name: "Vial", value: vialBonus });
         this.monsterCash.sources.push({ name: "Guild + World bonus", value: (guildBonus * currentWorldBonus) });
         this.monsterCash.sources.push({ name: "Dungeons Bonus", value: dungeonBonus });
         this.monsterCash.sources.push({ name: "Arcade", value: arcadeBonus });
         this.monsterCash.sources.push({
             name: "Talents", value: (this.talents.find(talent => talent.skillIndex == 643)?.getBonus() ?? 0) +
-                (this.talents.find(talent => talent.skillIndex == 644)?.getBonus() ?? 0) + (this.talents.find(talent => talent.skillIndex == 22)?.getBonus() ?? 0)
+                americaTipper + (this.talents.find(talent => talent.skillIndex == 22)?.getBonus() ?? 0)
         });
     }
 }
@@ -779,7 +781,7 @@ export const updatePlayers = (data: Map<string, any>) => {
     // Update players talents levels due to elite class level increase talents.
     players.forEach(player => {
         const extraLevels = Math.floor(player.talents.filter(talent => [149, 374, 539].includes(talent.skillIndex)).reduce((sum, value) => sum += value.getBonus(), 0))
-        player.talents.forEach(talent => talent.level += extraLevels);
+        player.talents.filter(talent => ![149, 374, 539].includes(talent.skillIndex) && talent.skillIndex <= 614 && talent.level > 0).forEach(talent => talent.level += extraLevels);
         player.extraLevelsFromTalent = extraLevels;
     });
 
