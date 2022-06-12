@@ -66,12 +66,12 @@ export function SaltLickDisplay() {
                         if (saltItem.internalName.includes("Refinery")) {
                             countInStorage += refineryData?.storage.find(salt => salt.name == saltItem.internalName)?.quantity ?? 0;
                         }
-                        const costToMax = saltLickData.getCostToMax(index);
-                        const costToNextLevel = saltLickData.getCost(index);
+                        const costToMax = saltLickData.getCostToMax(bonus.index);
+                        const costToNextLevel = saltLickData.getCost(bonus.index);
                         return (
                             <ShadowBox key={index} background="dark-1" pad="medium" direction="row" align="center" justify="between" margin={{ bottom: 'small' }}>
                                 <Grid columns={["35%", "10%", "20%", "15%", "15%"]} fill gap="small" align="center">
-                                    <TextAndLabel textSize='small' text={saltLickData.getBonusText(index)} label="Bonus" />
+                                    <TextAndLabel textSize='small' text={saltLickData.getBonusText(bonus.index)} label="Bonus" />
                                     <TextAndLabel text={`${bonus.level} / ${bonus.data.maxLevel}`} label="Level" />
                                     {bonus.level < bonus.data.maxLevel ?
                                         <React.Fragment>
