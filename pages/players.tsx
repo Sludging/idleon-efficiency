@@ -17,7 +17,8 @@ import { useState, useEffect, useContext, useMemo } from 'react';
 import { AppContext } from '../data/appContext'
 import { GemStore } from '../data/domain/gemPurchases';
 
-import { Player, SkillData, SkillsIndex } from '../data/domain/player';
+import { Player, SkillData } from '../data/domain/player';
+import { SkillsIndex } from "../data/domain/SkillsIndex";
 import { ClassIndex, ClassTalentMap, GetTalentArray, TalentConst } from '../data/domain/talents';
 import { CapacityConst, playerInventoryBagMapping } from '../data/domain/capacity';
 import { Alchemy, AlchemyConst, CauldronIndex, Bubble } from "../data/domain/alchemy";
@@ -55,6 +56,7 @@ import { SourcesModel } from '../data/domain/model/sourcesModel';
 import { Sigils } from '../data/domain/sigils';
 import { Chip } from '../data/domain/lab';
 import { ImageData } from '../data/domain/imageData';
+import { AnvilWrapper } from '../data/domain/anvil';
 
 
 function ItemSourcesDisplay({ sources, dropInfo }: { sources: SourcesModel, dropInfo: DropSource[] }) {
@@ -681,65 +683,11 @@ function StatuesDisplay({ playerStatues, player }: { playerStatues: PlayerStatue
 
 function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player, activeBubbles: Bubble[], playerStatues: PlayerStatues | undefined }) {
     const appContext = useContext(AppContext);
-    const hammerName = "Hammer Hammer";
 
+    const anvils = appContext.data.getData().get("anvil") as AnvilWrapper;
+    const storage = appContext.data.getData().get("storage") as Storage;
     const allItems = appContext.data.getData().get("itemsData") as Item[];
-    const sharpShells = allItems.find(item => item.displayName == "Shrapshell");
-
-    const anvilCostDiscount = useMemo(() => {
-        const theData = appContext.data.getData();
-        const alchemy = theData.get("alchemy") as Alchemy;
-        const anvilnomicsBubble = alchemy.cauldrons[CauldronIndex.Quicc].bubbles[AlchemyConst.Anvilnomics];
-        const anvilnomicsBonus = lavaFunc(anvilnomicsBubble.func, anvilnomicsBubble.level, anvilnomicsBubble.x1, anvilnomicsBubble.x2);
-        if (player.getBaseClass() == ClassIndex.Archer) {
-            const greenCauldronBonusBubble = alchemy.cauldrons[CauldronIndex.Quicc].bubbles[AlchemyConst.CauldronBonusBubbleIndex];
-            const classBonus = lavaFunc(greenCauldronBonusBubble.func, greenCauldronBonusBubble.level, greenCauldronBonusBubble.x1, greenCauldronBonusBubble.x2);
-            return anvilnomicsBonus * classBonus;
-        }
-        return anvilnomicsBonus;
-    }, [appContext, player])
-
-    const anvilSpeed = useMemo(() => {
-        // ANVIL SPEED MATH;
-        const theData = appContext.data.getData();
-        const stampData = theData.get("stamps");
-        const anvilZoomerBonus = stampData ? stampData[1][2].getBonus(player.skills.get(SkillsIndex.Smithing)?.level) : 0;
-        const blackSmithBox = player.postOffice[PostOfficeConst.BlacksmithBoxIndex];
-        const postOfficeBonus = blackSmithBox.level > 0 ? blackSmithBox.bonuses[1].getBonus(blackSmithBox.level, 1) : 0;
-        const hammerHammerBonus = activeBubbles ? activeBubbles.find(x => x.name == hammerName)?.getBonus() ?? 0 : 0;
-        const anvilStatueBonus = playerStatues ? playerStatues.statues[StatueConst.AnvilIndex].getBonus(player) : 0;
-        const starSignBonus = player.starSigns.reduce((sum, sign) => sum += sign.getBonus("Speed in Town"), 0);
-        const talentTownSpeedBonus = player.talents.find(x => x.skillIndex == 269)?.getBonus() ?? 0;
-
-        return (3600 * player.anvil.getSpeed(player.stats.agility, anvilZoomerBonus, postOfficeBonus, hammerHammerBonus, anvilStatueBonus, starSignBonus, talentTownSpeedBonus));
-    }, [appContext, activeBubbles, playerStatues, player])
-
-    const anvilXP = useMemo(() => {
-        const theData = appContext.data.getData();
-        const shrines = theData.get("shrines") as Shrine[];
-        const prayers = theData.get("prayers") as Prayer[];
-        const saltLick = theData.get("saltLick") as SaltLick;
-        const family = theData.get("family") as Family;
-        const stampData = theData.get("stamps") as Stamp[][];
-        const achievementsInfo = theData.get("achievements") as Achievement[];
-        const dungeonsData = theData.get("dungeons") as Dungeons;
-        const players = theData.get("players") as Player[];
-        const sigils = theData.get("sigils") as Sigils;
-
-        if (shrines && prayers && saltLick && playerStatues && family && stampData && achievementsInfo && players) {
-            const saltLickBonus = saltLick.getBonus(3);
-            const dungeonBonus = (dungeonsData.passives.get(PassiveType.Flurbo) ?? [])[2]?.getBonus() ?? 0; // Lava is looking at the wrong bonus.
-            const goldFoodStampBonus = stampData.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC7")?.getBonus() ?? 0;
-            const goldFoodAchievement = achievementsInfo[AchievementConst.GoldFood].completed;
-            const allSkillXP = Skilling.getAllSkillXP(player, shrines, playerStatues, prayers, saltLickBonus, dungeonBonus, family, goldFoodStampBonus, goldFoodAchievement, sigils.sigils[14].getBonus());
-
-            // todo handle more then 1 mman somehow.
-            const mmanBonus = players.find(player => player.classId == ClassIndex.Maestro)?.talents.find(talent => talent.skillIndex == 42)?.getBonus() ?? 0;
-            const xpMulti = player.anvil.getXPMulti(player, allSkillXP, mmanBonus);
-            return (100 * (player.anvil.getXP(xpMulti) - 1));
-        }
-        return 0;
-    }, [appContext, player, playerStatues])
+    const playerAnvil = anvils.playerAnvils[player.playerID];
 
     const allCapBonus = useMemo(() => {
         const theData = appContext.data.getData();
@@ -782,69 +730,72 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
             starSignExtraCap: starSignExtraCap
         }
 
-        return player.anvil.getCapacity(player.capacity.bags.find(x => x.name == "bCraft")?.getCapacity(capProps) ?? 0);
+        return playerAnvil.getCapacity(player.capacity.bags.find(x => x.name == "bCraft")?.getCapacity(capProps) ?? 0);
     }, [appContext, player, allCapBonus])
+
 
     return (
         <Box pad="medium" gap="small">
             <Text size='medium'>Anvil</Text>
             <Box gap="small" pad="small">
-                <Text size="small">Available Points: {player.anvil.availablePoints}</Text>
-                <Text size="small">Points from coins: {player.anvil.pointsFromCoins}</Text>
+                <Text size="small">Available Points: {playerAnvil.availablePoints}</Text>
+                <Text size="small">Points from coins: {playerAnvil.pointsFromCoins}/600</Text>
                 <ComponentAndLabel
                     label={"Next Point Cost"}
-                    component={<CoinsDisplay coinMap={getCoinsArray(player.anvil.getCoinCost(anvilCostDiscount))} />}
+                    component={<CoinsDisplay coinMap={getCoinsArray(playerAnvil.getCoinCost())} />}
                 />
                 <ComponentAndLabel
                     label={"Total Point Cost"}
-                    component={<CoinsDisplay coinMap={getCoinsArray(player.anvil.getTotalCoinCost(anvilCostDiscount))} />}
+                    component={<CoinsDisplay coinMap={getCoinsArray(playerAnvil.getTotalCoinCost())} />}
                 />
-                <Text size="small">Points from mats: {player.anvil.pointsFromMats}</Text>
-                <ComponentAndLabel
-                    label={"Total Sharpshells Cost"}
-                    component={
-                        <Box direction="row" align="center">
-                            <Text>{nFormatter(player.anvil.getTotalSharpshells(anvilCostDiscount))}</Text>
-                            <IconImage data={(sharpShells as Item).getImageData()} scale={0.8} />
-                        </Box>
-                    }
-                />
-                <TextAndLabel
-                    label={"Next Material Point Cost"}
-                    text={nFormatter(player.anvil.getMonsterMatCost(anvilCostDiscount))}
-                />
+                <Text size="small">Points from mats: {playerAnvil.pointsFromMats}/700</Text>
+                {playerAnvil.pointsFromMats < 700 &&
+                    <ComponentAndLabel
+                        label="Next Material Point Cost"
+                        component={
+                            <Box direction="row" align="center">
+                                <IconImage data={{
+                                    location: playerAnvil.getMonsterMat(),
+                                    height: 36,
+                                    width: 36
+                                }} scale={0.8} />
+                                <Text color={ storage.amountInStorage(playerAnvil.getMonsterMat()) > playerAnvil.getMonsterMatCost() ? 'green-1' : 'white' }>{`${nFormatter(storage.amountInStorage(playerAnvil.getMonsterMat()))}/${nFormatter(playerAnvil.getMonsterMatCost())}`}</Text>
+                            </Box>
+                        }
+                    />
+                }
                 <Box direction="row">
                     <Box margin={{ right: 'small' }} border={{ side: 'right', color: 'grey-1', size: '2px' }}>
                         <TextAndLabel
                             label="XP"
-                            text={`${nFormatter(anvilXP, "Big")}% (${player.anvil.xpPoints})`}
+                            text={`${nFormatter(playerAnvil.anvilXP, "Big")}% (${playerAnvil.xpPoints})`}
                             margin={{ right: 'small' }}
                         />
                     </Box>
                     <Box margin={{ right: 'small' }} border={{ side: 'right', color: 'grey-1', size: '2px' }}>
                         <TextAndLabel
                             label="Speed"
-                            text={`${nFormatter(anvilSpeed)} (${player.anvil.speedPoints})`}
+                            text={`${nFormatter(playerAnvil.anvilSpeed)} (${playerAnvil.speedPoints})`}
                             margin={{ right: 'small' }}
                         />
                     </Box>
                     <TextAndLabel
                         label="Capacity"
-                        text={`${anvilCapcity} (${player.anvil.capPoints})`}
+                        text={`${anvilCapcity} (${playerAnvil.capPoints})`}
                         margin={{ right: 'small' }}
                     />
                 </Box>
-                {player.anvil.currentlySelect.indexOf(-1) > -1 && <Text>UNUSED PRODUCTION</Text>}
+                {playerAnvil.currentlySelect.indexOf(-1) > -1 && <Text>UNUSED PRODUCTION</Text>}
             </Box>
             <Box gap="small">
                 {
-                    player.anvil.production.filter((x) => x.displayName != "Filler" && (x?.hammers ?? 0) > 0).map((anvilItem, index) => {
-                        const futureProduction = Math.min(Math.round(anvilItem.currentAmount + ((anvilItem.currentProgress + (player.afkFor * anvilSpeed / 3600)) / anvilItem.time) * (anvilItem.hammers ?? 0)), anvilCapcity);
+                    playerAnvil.production.filter((x) => x.displayName != "Filler" && (x?.hammers ?? 0) > 0).map((anvilItem, index) => {
+                        const futureProduction = Math.min(Math.round(anvilItem.currentAmount + ((anvilItem.currentProgress + (player.afkFor * playerAnvil.anvilSpeed / 3600)) / anvilItem.data.time) * (anvilItem.hammers ?? 0)), anvilCapcity);
                         const percentOfCap = Math.round(futureProduction / anvilCapcity * 100);
-                        const timeTillCap = ((anvilCapcity - futureProduction) / (anvilSpeed / 3600 / anvilItem.time * (anvilItem.hammers ?? 0)));
+                        const timeTillCap = ((anvilCapcity - futureProduction) / (playerAnvil.anvilSpeed / 3600 / anvilItem.data.time * (anvilItem.hammers ?? 0)));
                         return (
                             <Box key={`player_${player.playerID}_anvil_${index}`} direction="column" align="center">
-                                <IconImage data={{ height: 36, location: `${anvilItem.internalName}`, width: 36 }} scale={1.2}/>
+                                <IconImage data={{ height: 36, location: `${anvilItem.data.item}`, width: 36 }} scale={1.2} />
                                 <Text size="small">Number of Hammers = {anvilItem.hammers}</Text>
                                 <Box direction="row" gap="small">
                                     <Stack>
@@ -871,7 +822,7 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
                                     <Text size="small">Time till cap =</Text>
                                     <TimeDown addSeconds={timeTillCap} />
                                 </Box>
-                                <Text size="small">Production Per Hour (per hammer) = {Math.round(anvilSpeed / anvilItem.time)} </Text>
+                                <Text size="small">Production Per Hour (per hammer) = {Math.round(playerAnvil.anvilSpeed / anvilItem.data.time)} </Text>
                                 <Text size="small">Total Produced of this item = {nFormatter(Math.round(anvilItem.totalProduced))}</Text>
                                 {/* <Text>{anvilItem.displayName} - {anvilItem.currentAmount} - {anvilItem.currentXP} - {anvilItem.currentProgress} - {anvilItem.totalProduced}</Text> */}
                             </Box>
