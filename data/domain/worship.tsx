@@ -2,7 +2,8 @@ import { notUndefined, round } from "../utility";
 import { Alchemy, AlchemyConst, Bubble, CauldronIndex } from "./alchemy";
 import { MapDataBase } from "./data/MapDataRepo";
 import { MapInfo } from "./maps";
-import { Player, SkillsIndex } from "./player";
+import { Player } from "./player";
+import { SkillsIndex } from "./SkillsIndex";
 import { Stamp, StampConsts, StampTab } from "./stamps";
 import { ClassIndex, TalentConst } from "./talents";
 

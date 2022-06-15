@@ -9,7 +9,8 @@ import { Lab } from "./lab";
 import { PetUpgradeModel } from "./model/petUpgradeModel";
 import { TerritoryFightModel } from "./model/territoryFightModel";
 import { PetGeneModel } from './model/petGeneModel';
-import { Player, SkillsIndex } from "./player";
+import { Player } from "./player";
+import { SkillsIndex } from "./SkillsIndex";
 
 export const waveReqs = "2 5 8 12 15 20 25 35 50 65 80 100 125 150 175 200".split(" ").map(value => parseInt(value));
 

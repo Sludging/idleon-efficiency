@@ -16,7 +16,8 @@ import { NextSeo } from 'next-seo';
 
 import { Trap, TrapSet } from '../../data/domain/traps';
 import ShadowBox from '../../components/base/ShadowBox';
-import { Player, SkillsIndex } from '../../data/domain/player';
+import { Player } from '../../data/domain/player';
+import { SkillsIndex } from "../../data/domain/SkillsIndex";
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 
 interface PlayerTrapProps {
