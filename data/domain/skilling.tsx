@@ -1,7 +1,8 @@
 import { Card } from "./cards";
 import { Family } from "./family";
 import { Food } from "./items";
-import { Player, SkillsIndex } from "./player";
+import { Player } from "./player";
+import { SkillsIndex } from "./SkillsIndex";
 import { Prayer } from "./prayers";
 import { ShrineConstants, Shrine } from "./shrines";
 import { PlayerStatues, StatueConst } from "./statues";

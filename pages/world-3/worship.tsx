@@ -13,7 +13,8 @@ import { AppContext } from '../../data/appContext'
 import { NextSeo } from 'next-seo';
 
 import TabButton from '../../components/base/TabButton';
-import { Player, SkillsIndex } from '../../data/domain/player';
+import { Player } from '../../data/domain/player';
+import { SkillsIndex } from "../../data/domain/SkillsIndex";
 import ShadowBox from '../../components/base/ShadowBox';
 import { TimeDisplaySize, TimeDown } from '../../components/base/TimeDisplay';
 import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
