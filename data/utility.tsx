@@ -65,7 +65,7 @@ export const dateToText = (date: Date): string => {
     return Intl.DateTimeFormat(resolvedFormat.locale, options).format(date)
 } 
 
-export const nFormatter = (num: number, type?: string) => {
+export const nFormatter = (num: number, type: string = "Smaller") => {
     if (type) {
         switch(type) {
             case "Whole": {
