@@ -759,11 +759,27 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
                                     height: 36,
                                     width: 36
                                 }} scale={0.8} />
-                                <Text color={ storage.amountInStorage(playerAnvil.getMonsterMat()) > playerAnvil.getMonsterMatCost() ? 'green-1' : 'white' }>{`${nFormatter(storage.amountInStorage(playerAnvil.getMonsterMat()))}/${nFormatter(playerAnvil.getMonsterMatCost())}`}</Text>
+                                <Text color={storage.amountInStorage(playerAnvil.getMonsterMat()) > playerAnvil.getMonsterMatCost() ? 'green-1' : 'white'}>{`${nFormatter(storage.amountInStorage(playerAnvil.getMonsterMat()))}/${nFormatter(playerAnvil.getMonsterMatCost())}`}</Text>
                             </Box>
                         }
                     />
                 }
+                {/* <Box>
+                {
+                    Object.entries(playerAnvil.getMonsterCostToMax()).map(([monsterMat, totalCost], index) => {
+                        return (
+                            <Box direction="row" align="center" key={index}>
+                                <IconImage data={{
+                                    location: monsterMat,
+                                    height: 36,
+                                    width: 36
+                                }} scale={0.8} />
+                                <Text color={storage.amountInStorage(monsterMat) > totalCost ? 'green-1' : 'white'}>{`${nFormatter(storage.amountInStorage(monsterMat))}/${nFormatter(totalCost)}`}</Text>
+                            </Box>
+                        )
+                    })
+                }
+                </Box> */}
                 <Box direction="row">
                     <Box margin={{ right: 'small' }} border={{ side: 'right', color: 'grey-1', size: '2px' }}>
                         <TextAndLabel
