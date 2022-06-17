@@ -160,6 +160,19 @@ export class Anvil {
 
         return totalCost;
     };
+
+    getMonsterCostToMax = (pointsBought: number = this.pointsFromMats) => {
+        const finalCosts: { [key:string]:number; } = {};
+        range(pointsBought, 700).forEach(level => {
+            const monsterMat = this.getMonsterMat(level);
+            const cost = this.getMonsterMatCost(level);
+            if (!finalCosts[monsterMat]) {
+                finalCosts[monsterMat] = 0;
+            }
+            finalCosts[monsterMat] = finalCosts[monsterMat] + cost;
+        })
+        return finalCosts;
+    }
 }
 
 export class AnvilWrapper {
