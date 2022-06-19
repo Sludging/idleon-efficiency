@@ -32,6 +32,7 @@ import { parseLab, updateLab } from './lab';
 import { parseBreeding, updateBreeding } from './breeding';
 import { notUndefined } from '../utility';
 import parseSigils, { updateSigils } from './sigils';
+import { parseAnvil, updateAnvil } from './anvil';
 
 
 export const safeJsonParse = <T, >(doc: Cloudsave, key: string, emptyValue: T): T => {
@@ -39,7 +40,7 @@ export const safeJsonParse = <T, >(doc: Cloudsave, key: string, emptyValue: T): 
         return JSON.parse(doc.get(key))
     }
     catch (e) {
-        //console.debug(key, doc.get(key))
+        //console.debug(key, doc.get(key), e)
     }
     return emptyValue;
 }
@@ -81,6 +82,11 @@ const keyFunctionMap: Record<string, Function> = {
     "stamps": (doc: Cloudsave, allItems: Item[], charCount: number) => parseStamps(doc.get("StampLv"), doc.get("StampLvM"), allItems),
     "traps": (doc: Cloudsave, charCount: number) => parseTraps([...Array(charCount)].map((_, i) => { return doc.get(`PldTraps_${i}`) })),
     "statues": (doc: Cloudsave, charCount: number) => parseStatues([...Array(charCount)].map((_, i) => safeJsonParse(doc, `StatueLevels_${i}`, [])), safeJsonParse(doc, `StuG`, [])),
+    "anvil": (doc: Cloudsave, allItems: Item[], charCount: number) => parseAnvil(
+        [...Array(charCount)].map((_, i) => doc.get(`AnvilPA_${i}`)), 
+        [...Array(charCount)].map((_, i) => doc.get(`AnvilPAstats_${i}`)), 
+        [...Array(charCount)].map((_, i) => doc.get(`AnvilPAselect_${i}`)),
+        allItems),
     "timeAway": (doc: Cloudsave, charCount: number) => JSON.parse(doc.get('TimeAway')),
     "cauldronBubbles": (doc: Cloudsave, charCount: number) => doc.get('CauldronBubbles'),
     "prayers": (doc: Cloudsave, charCount: number) => parsePrayers(safeJsonParse(doc, "PrayOwned", [])),
@@ -136,6 +142,7 @@ const postProcessingMap: Record<string, Function> = {
     "printer": (doc: Cloudsave, accountData: Map<string, any>) => updatePrinter(accountData),
     "sigils": (doc: Cloudsave, accountData: Map<string, any>) => updateSigils(accountData),
     "worship": (doc: Cloudsave, accountData: Map<string, any>) => updateWorship(accountData),
+    "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),
 }
 
 export const updateIdleonData = async (data: Cloudsave, charNames: string[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
@@ -153,7 +160,7 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], all
             else if (key == "worship") {
                 accountData.set(key, toExecute(data, accountData, validCharCount));
             }
-            else if (key == "lootyData" || key == "obols" || key == "alchemy" || key == "forge" || key == "stamps") {
+            else if (key == "lootyData" || key == "obols" || key == "alchemy" || key == "forge" || key == "stamps" || key == "anvil") {
                 accountData.set(key, toExecute(data, allItems, validCharCount));
             }
             else {

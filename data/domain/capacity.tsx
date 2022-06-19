@@ -99,7 +99,7 @@
 // }),
 
 import { ImageData } from "./imageData";
-import { SkillsIndex } from "./player";
+import { SkillsIndex } from "./SkillsIndex";
 
 
 export const playerInventoryBagMapping = [
