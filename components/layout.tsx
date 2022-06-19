@@ -152,6 +152,7 @@ export default function Layout({
             link: "/world-1", label: "World 1", subLinks: [
                 { subLink: "/stamps", label: "Stamps" },
                 { subLink: "/forge", label: "Forge" },
+                { subLink: "/anvil", label: "Anvil" },
             ]
         },
         {
