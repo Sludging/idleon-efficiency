@@ -19,7 +19,7 @@ import { getCoinsArray, nFormatter } from '../../data/utility';
 import CoinsDisplay from '../../components/coinsDisplay';
 import { CircleInformation, Info } from 'grommet-icons';
 
-function CharacterBox({ player, cost }: { player: Player, cost: number }) {
+function CharacterBox({ player, cost }: { player: Player, cost?: number }) {
     return (
         <Box background="dark-2" align="end" pad={{ top: "xsmall", bottom: "xsmall", left: "small", right: "small" }} gap="xsmall" border={{ size: '2px', color: 'grey-1' }}>
             <Box direction="row">
@@ -28,7 +28,7 @@ function CharacterBox({ player, cost }: { player: Player, cost: number }) {
                     <Text color="grey-2" size="12px" truncate={true}>{player.playerName}</Text>
                 </Box>
             </Box>
-            <Text size="small">{nFormatter(cost)}</Text>
+            {cost && <Text size="small">{nFormatter(cost)}</Text>}
         </Box>
     )
 }
@@ -104,7 +104,7 @@ function PointsDisplay() {
                 finalCosts[monsterMat].playerCosts[playerAnvil.playerID] = cost;
             })
         });
-        return Object.entries(finalCosts).sort(([blah2, cost1], [blah1,cost2]) => cost1.totalCost > cost2.totalCost ? 1 : -1);
+        return Object.entries(finalCosts).sort(([blah2, cost1], [blah1, cost2]) => cost1.totalCost > cost2.totalCost ? 1 : -1);
     }, [anvilWrapper])
 
     const totalPointCosts = useMemo(() => {
@@ -174,8 +174,47 @@ function AnvilProductionDisplay() {
     const theData = appContext.data.getData();
     const anvilWrapper = theData.get("anvil") as AnvilWrapper;
     const players = theData.get("players") as Player[];
+
+    const totalSpeed = useMemo(() => {
+        return Object.entries(anvilWrapper.playerAnvils).reduce((sum, [_, playerAnvil]) =>
+            sum += playerAnvil.anvilSpeed
+            , 0)
+    }, [anvilWrapper])
+
+    const unusedHammers = useMemo(() => {
+        return Object.entries(anvilWrapper.playerAnvils).reduce((sum, [_, playerAnvil]) =>
+            sum += playerAnvil.currentlySelect.indexOf(-1) > -1 ? 1 : 0
+            , 0)
+    }, [anvilWrapper])
+
     return (
         <Box>
+            <Box direction="row">
+                <ShadowBox background="dark-1" pad="medium" margin={{ bottom: 'medium', right: 'medium' }} width="200px">
+                    <TextAndLabel
+                        label={"Total anvil speed"}
+                        text={nFormatter(totalSpeed)}
+                    />
+                </ShadowBox>
+                {unusedHammers > 0 &&
+                    <ShadowBox background="dark-1" pad="medium" margin={{ bottom: 'medium' }} direction="row" gap="small">
+                        <Box width={{max: '150px'}}>
+                            <TextAndLabel
+                                label={"Characters with unused hammers"}
+                                text={nFormatter(unusedHammers)}
+                            />
+                        </Box>
+                        <Box direction="row" wrap>
+                        {
+                            Object.entries(anvilWrapper.playerAnvils).filter(([_, playerAnvil]) => playerAnvil.currentlySelect.indexOf(-1) > -1)
+                                .map(([_, playerAnvil]) => (
+                                    <CharacterBox key={playerAnvil.playerID} player={players[playerAnvil.playerID]} />
+                                ))
+                        }
+                        </Box>
+                    </ShadowBox>
+                }
+            </Box>
             {
                 anvilWrapper ? anvilWrapper.production.filter(anvilProduct => anvilProduct.totalSpeed > 0).map(anvilProduct => (
                     <ShadowBox background="dark-1" direction="row" key={anvilProduct.index} gap="small" margin={{ bottom: 'medium' }} pad="small">
