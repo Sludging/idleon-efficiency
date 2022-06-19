@@ -91,6 +91,11 @@ function PointsDisplay() {
             totalCost: number,
             playerCosts: Record<number, number>
         }> = {};
+
+        if (!anvilWrapper) {
+            return finalCosts;
+        }
+
         Object.entries(anvilWrapper.playerAnvils).forEach(([_, playerAnvil]) => {
             const playerCosts = playerAnvil.getMonsterCostToMax();
             Object.entries(playerCosts).forEach(([monsterMat, cost]) => {
@@ -108,6 +113,10 @@ function PointsDisplay() {
     }, [anvilWrapper])
 
     const totalPointCosts = useMemo(() => {
+        if (!anvilWrapper) {
+            return 0;
+        }
+        
         return Object.entries(anvilWrapper.playerAnvils).reduce((sum, [_, playerAnvil]) =>
             sum += playerAnvil.getCoinCostToMax()
             , 0)
@@ -176,12 +185,20 @@ function AnvilProductionDisplay() {
     const players = theData.get("players") as Player[];
 
     const totalSpeed = useMemo(() => {
+        if (!anvilWrapper) {
+            return 0;
+        }
+
         return Object.entries(anvilWrapper.playerAnvils).reduce((sum, [_, playerAnvil]) =>
             sum += playerAnvil.anvilSpeed
             , 0)
     }, [anvilWrapper])
 
     const unusedHammers = useMemo(() => {
+        if (!anvilWrapper) {
+            return 0;
+        }
+
         return Object.entries(anvilWrapper.playerAnvils).reduce((sum, [_, playerAnvil]) =>
             sum += playerAnvil.currentlySelect.indexOf(-1) > -1 ? 1 : 0
             , 0)
