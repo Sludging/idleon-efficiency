@@ -93,7 +93,7 @@ function PointsDisplay() {
         }> = {};
 
         if (!anvilWrapper) {
-            return finalCosts;
+            return Object.entries(finalCosts);
         }
 
         Object.entries(anvilWrapper.playerAnvils).forEach(([_, playerAnvil]) => {
@@ -116,7 +116,7 @@ function PointsDisplay() {
         if (!anvilWrapper) {
             return 0;
         }
-        
+
         return Object.entries(anvilWrapper.playerAnvils).reduce((sum, [_, playerAnvil]) =>
             sum += playerAnvil.getCoinCostToMax()
             , 0)
@@ -221,7 +221,7 @@ function AnvilProductionDisplay() {
                                 text={nFormatter(unusedHammers)}
                             />
                         </Box>
-                        <Box direction="row" wrap>
+                        <Box direction="row" wrap gap="xsmall">
                         {
                             Object.entries(anvilWrapper.playerAnvils).filter(([_, playerAnvil]) => playerAnvil.currentlySelect.indexOf(-1) > -1)
                                 .map(([_, playerAnvil]) => (
