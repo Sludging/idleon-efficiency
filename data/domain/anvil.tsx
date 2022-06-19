@@ -9,7 +9,7 @@ import { Alchemy, AlchemyConst, CauldronIndex } from './alchemy';
 import { Stamp } from './stamps';
 import { SkillsIndex } from './SkillsIndex';
 import { PlayerStatues, StatueConst } from './statues';
-import { Shrine } from './shrines';
+import { Shrine, ShrineConstants } from './shrines';
 import { Prayer } from './prayers';
 import { SaltLick } from './saltLick';
 import { Family } from './family';
@@ -18,6 +18,10 @@ import { Dungeons, PassiveType } from './dungeons';
 import { Sigils } from './sigils';
 import { Skilling } from './skilling';
 import { ClassIndex } from './talents';
+import { GemStore } from './gemPurchases';
+import { Bribe, BribeStatus } from './bribes';
+import { Guild } from './guild';
+import { CapacityConst } from './capacity';
 
 
 // if ("Costs2TypeAnvilPA" == t) {}
@@ -29,12 +33,12 @@ export class AnvilProduct {
     totalProduced: number = 0
     hammers: number = 0
 
-    active: boolean = false;
+    totalSpeed: number = 0;
 
-    constructor(public index: number, public data: AnvilProduceModel) {}
+    constructor(public index: number, public data: AnvilProduceModel) { }
 
     static fromBase = (data: AnvilProduceBase[]) => {
-        return data.map(product => new AnvilProduct(product.index, product.data));
+        return data.filter(product => product.data.levelReq != 999).map(product => new AnvilProduct(product.index, product.data));
     }
 }
 
@@ -61,18 +65,20 @@ export class Anvil {
     capPoints: number = 0;
     production: AnvilProduct[];
     currentlySelect: number[] = [];
+    playerID: number = -1;
 
     // Calculated
     costDiscount: number = 0;
     anvilSpeed: number = 0;
     anvilXP: number = 0;
+    productCapacity: number = 0;
 
     constructor() {
         this.production = AnvilProduct.fromBase(initAnvilRepo());
     }
 
-    getCapacity = (bagCapacity: number = 0) => {
-        return Math.round(bagCapacity * (2 + 0.1 * this.capPoints));
+    setCapacity = (bagCapacity: number = 0) => {
+        this.productCapacity = Math.round(bagCapacity * (2 + 0.1 * this.capPoints));
     };
 
     setSpeed = (agility: number = 0, stampBonus: number = 0, poBoxBonus: number = 0, hammerHammerBonus: number = 0, statueBonus: number = 0, starSignTownSpeed: number = 0, talentTownSpeed: number = 0) => {
@@ -112,12 +118,19 @@ export class Anvil {
     };
 
     getCoinCost = (pointsBought: number = this.pointsFromCoins) => {
+        if (pointsBought >= 600) {
+            return 0;
+        }
         const baseCost = Math.pow(pointsBought, 3) + 50;
         return Math.round(baseCost * (1 + pointsBought / 100) * Math.max(0.1, 1 - this.costDiscount / 100));
     };
 
+    getCoinCostToMax = (pointsBought: number = this.pointsFromCoins) => {
+        return range(pointsBought, 600).reduce((sum, level) => sum += this.getCoinCost(level) ,0)
+    }
+
     getMonsterMat = (pointsBought: number = this.pointsFromMats) => {
-        switch(true) {
+        switch (true) {
             case pointsBought < 5: return 'Grasslands1';
             case pointsBought < 15: return 'Grasslands2';
             case pointsBought < 25: return 'Grasslands3';
@@ -162,7 +175,7 @@ export class Anvil {
     };
 
     getMonsterCostToMax = (pointsBought: number = this.pointsFromMats) => {
-        const finalCosts: { [key:string]:number; } = {};
+        const finalCosts: { [key: string]: number; } = {};
         range(pointsBought, 700).forEach(level => {
             const monsterMat = this.getMonsterMat(level);
             const cost = this.getMonsterMatCost(level);
@@ -177,6 +190,11 @@ export class Anvil {
 
 export class AnvilWrapper {
     playerAnvils: Record<number, Anvil> = {};
+    production: AnvilProduct[];
+
+    constructor() {
+        this.production = AnvilProduct.fromBase(initAnvilRepo());
+    }
 
 }
 
@@ -193,15 +211,16 @@ export const parseAnvil = (anvilProduction: number[][][], anvilStats: number[][]
             item.hammers = anvilSelected[pIndex].filter(x => x == index).length;
             item.displayName = allItems.find(fullItem => fullItem.internalName == item.data.item)?.displayName ?? "Unknown";
         })
-    
+
         anvil.availablePoints = anvilStats[pIndex][0];
         anvil.pointsFromCoins = anvilStats[pIndex][1];
         anvil.pointsFromMats = anvilStats[pIndex][2];
         anvil.xpPoints = anvilStats[pIndex][3];
         anvil.speedPoints = anvilStats[pIndex][4];
         anvil.capPoints = anvilStats[pIndex][5];
-    
+
         anvil.currentlySelect = anvilSelected[pIndex];
+        anvil.playerID = pIndex;
         wrapper.playerAnvils[pIndex] = anvil;
     })
 
@@ -223,6 +242,11 @@ export const updateAnvil = (data: Map<string, any>) => {
     const achievementsInfo = data.get("achievements") as Achievement[];
     const dungeonsData = data.get("dungeons") as Dungeons;
     const sigils = data.get("sigils") as Sigils;
+
+    // Cap stuff
+    const gemStore = data.get("gems") as GemStore;
+    const guild = data.get("guild") as Guild;
+    const bribes = data.get("bribes") as Bribe[];
 
     players.forEach(player => {
         const playerAnvil = anvilWrapper.playerAnvils[player.playerID];
@@ -249,7 +273,42 @@ export const updateAnvil = (data: Map<string, any>) => {
         const allSkillXP = Skilling.getAllSkillXP(player, shrines, statues[player.playerID], prayers, saltLickBonus, dungeonBonus, family, goldFoodStampBonus, goldFoodAchievement, sigils.sigils[14].getBonus());
         const mmanBonus = players.find(player => player.classId == ClassIndex.Maestro)?.talents.find(talent => talent.skillIndex == 42)?.getBonus() ?? 0;
         const xpMulti = playerAnvil.getXPMulti(player, allSkillXP, mmanBonus);
-        playerAnvil.setXP(xpMulti);  
+        playerAnvil.setXP(xpMulti);
+
+        // Capacity Math.
+        let guildCarryBonus: number = guild.guildBonuses[2].getBonus();
+        let zergPrayerBonus: number = prayers[4].getCurse();
+        let ruckSackPrayerBonus: number = prayers[12].getBonus();
+
+        const telekineticStorageBonus = player.talents.find(x => x.skillIndex == CapacityConst.TelekineticStorageSkillIndex)?.getBonus() ?? 0;
+        const cardBonus = player.cardInfo?.equippedCards.find(x => x.id == "Z9")?.getBonus() ?? 0;
+        const carryCapShrineBonus = shrines[ShrineConstants.CarryShrine].getBonus(player.currentMapId, cardBonus);
+        const bribeCapBonus = bribes.find(bribe => bribe.name == "Bottomless Bags")?.status == BribeStatus.Purchased ? 5 : 0;
+        const allCapBonus = player.capacity.getAllCapsBonus(guildCarryBonus, telekineticStorageBonus, carryCapShrineBonus, zergPrayerBonus, ruckSackPrayerBonus, bribeCapBonus);
+
+        const allStamps = stampData.flatMap((tab) => [...tab]);
+        const allCapStampBonus = allStamps.find((stamp) => stamp.raw_name == CapacityConst.AllCarryStamp)?.getBonus(player.skills.get(SkillsIndex.Smithing)?.level) ?? 0;
+        const gemCapacityBonus = gemStore?.purchases.find(x => x.no == 58)?.pucrhased ?? 0;
+        const extraBagsTalentBonus = player.talents.find(x => x.skillIndex == CapacityConst.ExtraBagsSkillIndex)?.getBonus() ?? 0;
+        const starSignExtraCap = player.starSigns.reduce((sum, sign) => sum += sign.getBonus("Carry Cap"), 0);
+
+        const capProps = {
+            allCapBonuses: allCapBonus,
+            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.MaterialCapStamp)?.getBonus(player.skills.get(SkillsIndex.Smithing)?.level) ?? 0,
+            gemsCapacityBought: gemCapacityBonus,
+            stampAllCapBonus: allCapStampBonus,
+            extraBagsLevel: extraBagsTalentBonus,
+            starSignExtraCap: starSignExtraCap
+        }
+
+        playerAnvil.setCapacity(player.capacity.bags.find(x => x.name == "bCraft")?.getCapacity(capProps) ?? 0);
+    })
+
+    anvilWrapper.production.forEach((anvilProduct, index) => {
+        anvilProduct.totalProduced = Object.entries(anvilWrapper.playerAnvils).reduce((sum, [_, anvil]) => sum += anvil.production[index].totalProduced, 0);
+        anvilProduct.totalSpeed = Object.entries(anvilWrapper.playerAnvils).reduce((sum, [_, anvil]) => 
+            sum += anvil.production[index].hammers > 0 ? anvil.anvilSpeed * anvil.production[index].hammers : 0
+        , 0);
     })
 
     return anvilWrapper;
