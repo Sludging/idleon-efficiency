@@ -12,7 +12,8 @@ import TabButton from '../../components/base/TabButton';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 import { AppContext } from '../../data/appContext';
 import { Chip, Lab as LabDomain } from '../../data/domain/lab';
-import { Player, SkillsIndex } from '../../data/domain/player';
+import { Player } from '../../data/domain/player';
+import { SkillsIndex } from "../../data/domain/SkillsIndex";
 
 function CharacterBox({ player, lineWidth, supped = false }: { player: Player, lineWidth: string, supped?: boolean }) {
     const theBox = (

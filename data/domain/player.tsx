@@ -1,6 +1,6 @@
 import { Capacity } from './capacity';
 import { StarSignMap, StarSign } from './starsigns';
-import { Box, initPostOffice, PostOfficeConst } from './postoffice';
+import { Box, initPostOffice } from './postoffice';
 import { ClassIndex, Talent, ClassTalentMap, GetTalentArray } from './talents';
 import { Card, CardInfo } from "./cards";
 import { Item, Food, Tool, StoneProps } from "./items";
@@ -9,7 +9,7 @@ import { Cloudsave } from "./cloudsave";
 import { EnemyInfo } from "./enemies";
 import { MapInfo } from "./maps";
 import { Chip, chipSlotReq, Lab } from "./lab";
-import { Alchemy } from "./alchemy";
+import { Alchemy, Bubble } from "./alchemy";
 import { Guild } from "./guild";
 import { Bribe } from "./bribes";
 import { Stat } from "./base/stat";
@@ -25,6 +25,7 @@ import { Arcade } from "./arcade";
 import { ObolsData, ObolStats } from "./obols";
 import { ImageData } from "./imageData";
 import { Sigils } from "./sigils";
+import { SkillsIndex } from './SkillsIndex';
 
 export class PlayerStats {
     strength: number = 0;
@@ -54,223 +55,6 @@ export class PlayerEquipment {
     }
 }
 
-export enum SkillsIndex {
-    Mining = 1,
-    Smithing = 2,
-    Chopping = 3,
-    Fishing = 4,
-    Alchemy = 5,
-    Catching = 6,
-    Trapping = 7,
-    Construction = 8,
-    Worship = 9,
-    Cooking = 10,
-    Breeding = 11,
-    Intellect = 12,
-}
-
-
-// if ("Costs2TypeAnvilPA" == t) {
-//     var B = b.engine.getGameAttribute("AnvilPAstats")[2];
-//     if (5 > parsenum(B)) return "Grasslands1";
-//     var P = b.engine.getGameAttribute("AnvilPAstats")[2];
-//     if (15 > parsenum(P)) return "Grasslands2";
-//     var O = b.engine.getGameAttribute("AnvilPAstats")[2];
-//     if (25 > parsenum(O)) return "Grasslands3";
-//     var x = b.engine.getGameAttribute("AnvilPAstats")[2];
-//     if (40 > parsenum(x)) return "Jungle1";
-//     var w = b.engine.getGameAttribute("AnvilPAstats")[2];
-//     if (55 > parsenum(w)) return "Jungle3";
-//     var Q = b.engine.getGameAttribute("AnvilPAstats")[2];
-//     if (70 > parsenum(Q)) return "Forest1";
-//     var X = b.engine.getGameAttribute("AnvilPAstats")[2];
-//     if (85 > parsenum(X)) return "Forest3";
-//     var z = b.engine.getGameAttribute("AnvilPAstats")[2];
-//     if (100 > parsenum(z)) return "DesertA1";
-//     var L = b.engine.getGameAttribute("AnvilPAstats")[2];
-//     if (115 > parsenum(L)) return "DesertA3";
-//     var Z = b.engine.getGameAttribute("AnvilPAstats")[2];
-//     if (130 > parsenum(Z)) return "DesertB1";
-//     var W = b.engine.getGameAttribute("AnvilPAstats")[2];
-//     if (150 > parsenum(W)) return "DesertB3";
-//     var Y = b.engine.getGameAttribute("AnvilPAstats")[2];
-//     if (175 > parsenum(Y)) return "DesertC1";
-//     var H = b.engine.getGameAttribute("AnvilPAstats")[2];
-//     return 200 > parsenum(H) ? "DesertC2" : "DesertC4";
-// }
-
-const initCrafts = (): AnvilProduct[] => {
-    return [
-        { displayName: "Thread", internalName: "CraftMat1", time: 100, levelReq: 1, exp: 6, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
-        { displayName: "Trusty Nails", internalName: "CraftMat5", time: 200, levelReq: 5, exp: 10, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
-        { displayName: "Boring Brick", internalName: "CraftMat6", time: 350, levelReq: 12, exp: 16, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
-        { displayName: "Chain Link", internalName: "CraftMat7", time: 700, levelReq: 17, exp: 25, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
-        { displayName: "Leather Hide", internalName: "CraftMat9", time: 1200, levelReq: 25, exp: 35, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
-        { displayName: "Pinion Spur", internalName: "CraftMat8", time: 2000, levelReq: 30, exp: 50, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
-        { displayName: "Lugi Bracket", internalName: "CraftMat10", time: 3000, levelReq: 35, exp: 65, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
-        { displayName: "Purple Screw", internalName: "CraftMat11", time: 4000, levelReq: 43, exp: 75, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
-        { displayName: "Thingymabob", internalName: "CraftMat12", time: 6000, levelReq: 50, exp: 90, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
-        { displayName: "Tangled Cords", internalName: "CraftMat13", time: 8500, levelReq: 60, exp: 110, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
-        { displayName: "PVC Pipe", internalName: "CraftMat14", time: 12000, levelReq: 70, exp: 140, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
-        { displayName: "Filler", internalName: "CraftMat15", time: 120000, levelReq: 999, exp: 1000, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
-        { displayName: "Filler", internalName: "CraftMat16", time: 160000, levelReq: 999, exp: 1300, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 },
-        { displayName: "Filler", internalName: "CraftMat17", time: 250000, levelReq: 999, exp: 2000, currentAmount: 0, currentXP: 0, currentProgress: 0, totalProduced: 0 }
-    ];
-}
-
-interface AnvilProduct {
-    displayName: string
-    internalName: string
-    time: number
-    levelReq: number
-    exp: number
-
-    currentAmount: number
-    currentXP: number
-    currentProgress: number
-    totalProduced: number
-    hammers?: number
-}
-
-const range = (start: number, end: number) => {
-    const length = end - start;
-    return Array.from({ length }, (_, i) => start + i);
-}
-
-export class Anvil {
-    // AnvilPAstats - 
-    // [0] = Available points I think
-    // [1] = coin costs - some crazy math, look at "Costs1"
-    // [2] = number of points from monster mats, with logic on how to calculate which monster is next (look for "Costs2TypeAnvilPA")
-    // [3] xp bonus = (n = (1 + (3 * (parsenum(n) = b.engine.getGameAttribute("AnvilPAstats")[3])) / 100) * H._customBlock_SkillStats("SmithingEXPmulti")),
-    // [4] speed bonus = no math?
-    // [5] cap bonus = if ("Cap" == t) return (t = H._customBlock_MaxCapacity("bCraft")), (n = b.engine.getGameAttribute("AnvilPAstats")[5]), Math.round(t * (2 + 0.1 * parsenum(n)));
-    // AnvilPA_<x> -  // [0-13] of rawAnvil are each anvil product
-    // of each product...
-    // 0 = amount to be produced (claimed)
-    // 1 = amount of xp gained when claimed
-    // 2 = current progress? (idk need more proof but also kinda useless)
-    // 3 = total produced
-
-    // _customBlock_AFKcode for return from AFK math.
-    availablePoints: number = 0
-    pointsFromCoins: number = 0
-    pointsFromMats: number = 0
-    xpPoints: number = 0
-    speedPoints: number = 0
-    capPoints: number = 0
-    production: AnvilProduct[]
-    currentlySelect: number[] = []
-
-    constructor() {
-        this.production = initCrafts()
-    }
-
-    getCapacity = (bagCapacity: number = 0) => {
-        return Math.round(bagCapacity * (2 + 0.1 * this.capPoints));
-    }
-
-    getSpeed = (agility: number = 0, stampBonus: number = 0, poBoxBonus: number = 0, hammerHammerBonus: number = 0, statueBonus: number = 0, starSignTownSpeed: number = 0, talentTownSpeed: number = 0) => {
-        const boxAndStatueMath = 1 + ((poBoxBonus + statueBonus) / 100);
-        const agilityBonus = this.getSpeedBonusFromAgility(agility);
-        return (1 + (stampBonus + (2 * this.speedPoints)) / 100) * boxAndStatueMath * (1 + (hammerHammerBonus / 100)) * agilityBonus * (1 + (starSignTownSpeed + talentTownSpeed) / 100);
-    }
-
-    // if ("SmithingEXPmulti" == t) {
-    //     var Ys = b.engine.getGameAttribute("DNSM"),
-    //         Hs = null != d.TotStatSkMAP ? Ys.getReserved("TotStatSkMAP") : Ys.h.TotStatSkMAP,
-    //         Js = 1 + (r._customBlock_GetTalentNumber(1, 265) + (r._customBlock_StampBonusOfTypeX("SmithExp") + r._customBlock_GetTalentNumber(1, 75))) / 100,
-    //         js = 1 + U._customBlock_CardBonusREAL(49) / 100,
-    //         qs = b.engine.getGameAttribute("DNSM"),
-    //         Ks = null != d.BoxRewards ? qs.getReserved("BoxRewards") : qs.h.BoxRewards,
-    //         $s = null != d.SmithExp ? Ks.getReserved("SmithExp") : Ks.h.SmithExp,
-    //         ea = parsenum($s),
-    //         ta = F._customBlock_SkillStats("AllSkillxpz"),
-    //         na = b.engine.getGameAttribute("DNSM"),
-    //         sa = null != d.CalcTalentMAP ? na.getReserved("CalcTalentMAP") : na.h.CalcTalentMAP,
-    //         aa = (null != d[42] ? sa.getReserved("42") : sa.h[42])[1],
-    //         Aa = Math.max(0.1, Js * js * (1 + ea / 100) + (ta + parsenum(aa)) / 100);
-    //     null != d[t] ? Hs.setReserved(t, Aa) : (Hs.h[t] = Aa);
-    //     var ra = b.engine.getGameAttribute("DNSM"),
-    //         la = null != d.TotStatSkMAP ? ra.getReserved("TotStatSkMAP") : ra.h.TotStatSkMAP;
-    //     return null != d[t] ? la.getReserved(t) : la.h[t];
-    // }
-    getXPMulti = (player: Player, allSkillsXP: number, mmanBonus: number) => {
-        const focusedSoulBonus = player.talents.find(talent => talent.skillIndex == 265)?.getBonus() ?? 0;
-        const stampBonus = 0; // TODO: Real look up, but currently stamp isn't obtainable.
-        const happyDudeBonus = player.talents.find(talent => talent.skillIndex == 75)?.getBonus() ?? 0;
-        const math1 = 1 + ((focusedSoulBonus + stampBonus + happyDudeBonus) / 100);
-        const smithingCardBonus = 1 + Card.GetTotalBonusForId(player.cardInfo?.equippedCards ?? [], 49) / 100;
-        const blackSmithBox = player.postOffice[PostOfficeConst.BlacksmithBoxIndex];
-        const postOfficeBonus = blackSmithBox.level > 0 ? blackSmithBox.bonuses[0].getBonus(blackSmithBox.level, 0) : 0;
-
-        return Math.max(0.1, math1 * smithingCardBonus * (1 + (postOfficeBonus / 100)) + (allSkillsXP + mmanBonus) / 100);
-    }
-
-    // return (
-    //     (t = b.engine.getGameAttribute("DNSM")),
-    //     (n = (1 + (3 * (parsenum(n) = b.engine.getGameAttribute("AnvilPAstats")[3])) / 100) * F._customBlock_SkillStats("SmithingEXPmulti")),
-    //     null != d.AnvilPAxpDN ? t.setReserved("AnvilPAxpDN", n) : (t.h.AnvilPAxpDN = n),
-    //     (t = b.engine.getGameAttribute("DNSM")),
-    //     20 > (parsenum(t) = null != d.AnvilPAxpDN ? t.getReserved("AnvilPAxpDN") : t.h.AnvilPAxpDN)
-    //         ? ((t = b.engine.getGameAttribute("DNSM")), null != d.AnvilPAxpDN ? t.getReserved("AnvilPAxpDN") : t.h.AnvilPAxpDN)
-    //         : ((t = b.engine.getGameAttribute("DNSM")),
-    //           (t = parsenum(t) = null != d.AnvilPAxpDN ? t.getReserved("AnvilPAxpDN") : t.h.AnvilPAxpDN),
-    //           (n = b.engine.getGameAttribute("DNSM")),
-    //           (n = null != d.AnvilPAxpDN ? n.getReserved("AnvilPAxpDN") : n.h.AnvilPAxpDN),
-    //           Math.min(20 + ((t - 20) / (parsenum(n) - 20 + 70)) * 50, 75))
-    // );
-    getXP = (xpMulti: number) => {
-        const baseMath = (1 + (3 * (this.xpPoints / 100))) * xpMulti;
-        if (baseMath < 20) {
-            return baseMath;
-        }
-
-        return Math.min(20 + ((baseMath - 20) / (baseMath - 20 + 70) * 50), 75);
-    }
-
-    getSpeedBonusFromAgility = (agility: number = 0): number => {
-        let base: number = (Math.pow(agility + 1, 0.37) - 1) / 40;
-        if (agility > 1000) {
-            base = ((agility - 1000) / (agility + 2500)) * 0.5 + 0.297;
-        }
-        return (base * 2) + 1;
-    }
-
-    getCoinCost = (alchemyCostReduction: number, pointsBought: number = this.pointsFromCoins) => {
-        const baseCost = Math.pow(pointsBought, 3) + 50;
-        return Math.round(baseCost * (1 + pointsBought / 100) * Math.max(0.1, 1 - alchemyCostReduction / 100));
-    }
-
-    getMonsterMatCost = (alchemyCostReduction: number, pointsBought: number = this.pointsFromMats) => {
-        if (pointsBought >= 200) {
-            return Math.round((Math.pow(pointsBought + 1, 1.5) + pointsBought) * Math.max(0.1, 1 - alchemyCostReduction / 100));
-        }
-        // TODO: Handle before sharpshell!
-        return 0;
-    }
-
-    getTotalCoinCost = (alchemyCostReduction: number, pointsBought: number = this.pointsFromCoins) => {
-        let totalCost = 0;
-        range(0, pointsBought).forEach((_, point) => {
-            totalCost += this.getCoinCost(alchemyCostReduction, point);
-        });
-
-        return totalCost;
-    }
-
-    getTotalSharpshells = (alchemyCostReduction: number) => {
-        if (this.pointsFromMats < 200) {
-            return 0
-        }
-        let totalCost = 0;
-        range(200, this.pointsFromMats).forEach((point, _) => {
-            totalCost += this.getMonsterMatCost(alchemyCostReduction, point);
-        });
-
-        return totalCost;
-    }
-}
 
 export class SkillData {
     constructor(public level: number, public currentXP: number, public xpReq: number) { }
@@ -303,11 +87,11 @@ export class Player {
     money: number = 0;
     skills: Map<SkillsIndex, SkillData>;
     skillsRank: Map<SkillsIndex, number>;
-    anvil: Anvil = new Anvil();
     capacity: Capacity = new Capacity();
     talents: Talent[] = [];
     postOffice: Box[] = initPostOffice();
     activeBubblesString: string[] = [];
+    activeBubbles: Bubble[] = [];
     afkFor: number = 0;
     currentCharge: number = 0;
     cardInfo: CardInfo | undefined = undefined; // TODO: Do BETTER!
@@ -508,12 +292,6 @@ const keyFunctionMap: Record<string, Function> = {
     "starsigns": (doc: Cloudsave, player: Player) => parseStarSigns(doc.get(`PVtStarSign_${player.playerID}`), player),
     "money": (doc: Cloudsave, player: Player) => { player.money = doc.get(`Money_${player.playerID}`) },
     "skills": (doc: Cloudsave, player: Player) => parseSkills(doc.get(`Lv0_${player.playerID}`), doc.get(`Exp0_${player.playerID}`), doc.get(`ExpReq0_${player.playerID}`), player),
-    "anvil": (doc: Cloudsave, player: Player) => parseAnvil(
-        doc.get(`AnvilPA_${player.playerID}`),
-        doc.get(`AnvilPAstats_${player.playerID}`),
-        doc.get(`AnvilPAselect_${player.playerID}`),
-        player
-    ),
     "capacity": (doc: Cloudsave, player: Player) => { player.capacity = new Capacity(JSON.parse(doc.get(`MaxCarryCap_${player.playerID}`))) },
     "talents": (doc: Cloudsave, player: Player) => parseTalents(
         doc.get(`SL_${player.playerID}`),
@@ -593,26 +371,6 @@ const parseTalents = (talentLevels: string, talentMaxLevels: string, player: Pla
         talent.level = jsonTalents[talent.skillIndex] ?? 0;
         talent.maxLevel = jsonMaxTalents[talent.skillIndex] ?? 0;
     })
-}
-
-const parseAnvil = (anvilProduction: number[][], anvilStats: number[], anvilSelected: number[], player: Player) => {
-    // TODO: Get rid of magic indexes
-    player.anvil.production.forEach((item, index) => {
-        item.currentAmount = anvilProduction[index][0];
-        item.currentXP = anvilProduction[index][1];
-        item.currentProgress = anvilProduction[index][2];
-        item.totalProduced = anvilProduction[index][3];
-        item.hammers = anvilSelected.filter(x => x == index).length;
-    })
-
-    player.anvil.availablePoints = anvilStats[0];
-    player.anvil.pointsFromCoins = anvilStats[1];
-    player.anvil.pointsFromMats = anvilStats[2];
-    player.anvil.xpPoints = anvilStats[3];
-    player.anvil.speedPoints = anvilStats[4];
-    player.anvil.capPoints = anvilStats[5];
-
-    player.anvil.currentlySelect = anvilSelected;
 }
 
 const parseSkills = (skills: Array<number>, skillXP: Array<number>, skillXPReqs: Array<number>, player: Player) => {
@@ -750,6 +508,30 @@ export default function parsePlayers(doc: Cloudsave, accountData: Map<string, an
 export const updatePlayers = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const obols = data.get("obols") as ObolsData;
+    const alchemy = data.get("alchemy") as Alchemy;
+    const guild = data.get("guild") as Guild;
+    const bribes = data.get("bribes") as Bribe[];
+    const cooking = data.get("cooking") as Cooking;
+    const breeding = data.get("breeding") as Breeding;
+    const lab = data.get("lab") as Lab;
+    const dungeons = data.get("dungeons") as Dungeons;
+    const stamps = data.get("stamps") as Stamp[][];
+    const achievementsInfo = data.get("achievements") as Achievement[];
+    const arcade = data.get("arcade") as Arcade;
+    const sigils = data.get("sigils") as Sigils;
+
+    // Set player active bubble array, easier to work with.
+    players.forEach(player => {
+        if (player.activeBubblesString.length > 0) {
+            const bubbleArray: Bubble[] = player.activeBubblesString.map((bubbleString, _) => {
+                const activeBubble = alchemy.getActiveBubble(bubbleString);
+                if (activeBubble) {
+                    return activeBubble;
+                }
+            }).filter(notUndefined);
+            player.activeBubbles = bubbleArray;
+        }
+    })
 
     // Update player obols info so we can use it in maths
     players.forEach(player => {
@@ -784,18 +566,6 @@ export const updatePlayers = (data: Map<string, any>) => {
         player.talents.filter(talent => ![149, 374, 539].includes(talent.skillIndex) && talent.skillIndex <= 614 && talent.level > 0).forEach(talent => talent.level += extraLevels);
         player.extraLevelsFromTalent = extraLevels;
     });
-
-    const alchemy = data.get("alchemy") as Alchemy;
-    const guild = data.get("guild") as Guild;
-    const bribes = data.get("bribes") as Bribe[];
-    const cooking = data.get("cooking") as Cooking;
-    const breeding = data.get("breeding") as Breeding;
-    const lab = data.get("lab") as Lab;
-    const dungeons = data.get("dungeons") as Dungeons;
-    const stamps = data.get("stamps") as Stamp[][];
-    const achievementsInfo = data.get("achievements") as Achievement[];
-    const arcade = data.get("arcade") as Arcade;
-    const sigils = data.get("sigils") as Sigils;
 
     // Double claim chance.
     const doubleChanceBubbleBonus = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).find(bubble => bubble.name == "Afk Expexp")?.getBonus() ?? 0;
