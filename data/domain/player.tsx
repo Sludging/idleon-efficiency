@@ -563,7 +563,11 @@ export const updatePlayers = (data: Map<string, any>) => {
     // Update players talents levels due to elite class level increase talents.
     players.forEach(player => {
         const extraLevels = Math.floor(player.talents.filter(talent => [149, 374, 539].includes(talent.skillIndex)).reduce((sum, value) => sum += value.getBonus(), 0))
-        player.talents.filter(talent => ![149, 374, 539].includes(talent.skillIndex) && talent.skillIndex <= 614 && talent.level > 0).forEach(talent => talent.level += extraLevels);
+        player.talents.filter(talent => ![149, 374, 539].includes(talent.skillIndex) && talent.skillIndex <= 614 && talent.level > 0)
+        .forEach(talent => {
+            talent.level += extraLevels;
+            talent.maxLevel += extraLevels;
+        });
         player.extraLevelsFromTalent = extraLevels;
     });
 
