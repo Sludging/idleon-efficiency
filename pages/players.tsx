@@ -681,57 +681,12 @@ function StatuesDisplay({ playerStatues, player }: { playerStatues: PlayerStatue
     )
 }
 
-function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player, activeBubbles: Bubble[], playerStatues: PlayerStatues | undefined }) {
+function AnvilDisplay({ player }: { player: Player }) {
     const appContext = useContext(AppContext);
 
     const anvils = appContext.data.getData().get("anvil") as AnvilWrapper;
     const storage = appContext.data.getData().get("storage") as Storage;
-    const allItems = appContext.data.getData().get("itemsData") as Item[];
     const playerAnvil = anvils.playerAnvils[player.playerID];
-
-    const allCapBonus = useMemo(() => {
-        const theData = appContext.data.getData();
-        const guild = theData.get("guild");
-        const shrines = theData.get("shrines");
-        const bribes = theData.get("bribes") as Bribe[];
-
-        let guildCarryBonus: number = 0;
-        let zergPrayerBonus: number = 0; // TODO!
-        let ruckSackPrayerBonus: number = 0; // TODO!
-
-        if (guild) {
-            guildCarryBonus = lavaFunc(guild.guildBonuses[2].func, guild.guildBonuses[2].level, guild.guildBonuses[2].x1, guild.guildBonuses[2].x2);
-        }
-        const telekineticStorageBonus = player.talents.find(x => x.skillIndex == CapacityConst.TelekineticStorageSkillIndex)?.getBonus() ?? 0;
-        const cardBonus = player.cardInfo?.equippedCards.find(x => x.id == "Z9")?.getBonus() ?? 0;
-        const carryCapShrineBonus = shrines[ShrineConstants.CarryShrine].getBonus(player.currentMapId, cardBonus);
-        const bribeCapBonus = bribes.find(bribe => bribe.name == "Bottomless Bags")?.status == BribeStatus.Purchased ? 5 : 0;
-        return player.capacity.getAllCapsBonus(guildCarryBonus, telekineticStorageBonus, carryCapShrineBonus, zergPrayerBonus, ruckSackPrayerBonus, bribeCapBonus);
-
-    }, [appContext, player])
-
-    const anvilCapcity = useMemo(() => {
-        const theData = appContext.data.getData();
-        const stampData = theData.get("stamps") as Stamp[][];
-        const gemStore = theData.get("gems") as GemStore;
-
-        const allStamps = stampData.flatMap((tab) => [...tab]);
-        const allCapStampBonus = allStamps.find((stamp) => stamp.raw_name == CapacityConst.AllCarryStamp)?.getBonus(player.skills.get(SkillsIndex.Smithing)?.level) ?? 0;
-        const gemCapacityBonus = gemStore?.purchases.find(x => x.no == 58)?.pucrhased ?? 0;
-        const extraBagsTalentBonus = player.talents.find(x => x.skillIndex == CapacityConst.ExtraBagsSkillIndex)?.getBonus() ?? 0;
-        const starSignExtraCap = player.starSigns.reduce((sum, sign) => sum += sign.getBonus("Carry Cap"), 0);
-
-        const capProps = {
-            allCapBonuses: allCapBonus,
-            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.MaterialCapStamp)?.getBonus(player.skills.get(SkillsIndex.Smithing)?.level) ?? 0,
-            gemsCapacityBought: gemCapacityBonus,
-            stampAllCapBonus: allCapStampBonus,
-            extraBagsLevel: extraBagsTalentBonus,
-            starSignExtraCap: starSignExtraCap
-        }
-
-        return playerAnvil.getCapacity(player.capacity.bags.find(x => x.name == "bCraft")?.getCapacity(capProps) ?? 0);
-    }, [appContext, player, allCapBonus])
 
 
     return (
@@ -740,14 +695,18 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
             <Box gap="small" pad="small">
                 <Text size="small">Available Points: {playerAnvil.availablePoints}</Text>
                 <Text size="small">Points from coins: {playerAnvil.pointsFromCoins}/600</Text>
-                <ComponentAndLabel
-                    label={"Next Point Cost"}
-                    component={<CoinsDisplay coinMap={getCoinsArray(playerAnvil.getCoinCost())} />}
-                />
-                <ComponentAndLabel
-                    label={"Total Point Cost"}
-                    component={<CoinsDisplay coinMap={getCoinsArray(playerAnvil.getTotalCoinCost())} />}
-                />
+                {playerAnvil.pointsFromCoins < 600 &&
+                    <Box>
+                        <ComponentAndLabel
+                            label={"Next Point Cost"}
+                            component={<CoinsDisplay coinMap={getCoinsArray(playerAnvil.getCoinCost())} />}
+                        />
+                        <ComponentAndLabel
+                            label={"Cost to max"}
+                            component={<CoinsDisplay coinMap={getCoinsArray(playerAnvil.getCoinCostToMax())} />}
+                        />
+                    </Box>
+                }
                 <Text size="small">Points from mats: {playerAnvil.pointsFromMats}/700</Text>
                 {playerAnvil.pointsFromMats < 700 &&
                     <ComponentAndLabel
@@ -764,22 +723,6 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
                         }
                     />
                 }
-                {/* <Box>
-                {
-                    Object.entries(playerAnvil.getMonsterCostToMax()).map(([monsterMat, totalCost], index) => {
-                        return (
-                            <Box direction="row" align="center" key={index}>
-                                <IconImage data={{
-                                    location: monsterMat,
-                                    height: 36,
-                                    width: 36
-                                }} scale={0.8} />
-                                <Text color={storage.amountInStorage(monsterMat) > totalCost ? 'green-1' : 'white'}>{`${nFormatter(storage.amountInStorage(monsterMat))}/${nFormatter(totalCost)}`}</Text>
-                            </Box>
-                        )
-                    })
-                }
-                </Box> */}
                 <Box direction="row">
                     <Box margin={{ right: 'small' }} border={{ side: 'right', color: 'grey-1', size: '2px' }}>
                         <TextAndLabel
@@ -797,7 +740,7 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
                     </Box>
                     <TextAndLabel
                         label="Capacity"
-                        text={`${anvilCapcity} (${playerAnvil.capPoints})`}
+                        text={`${playerAnvil.productCapacity} (${playerAnvil.capPoints})`}
                         margin={{ right: 'small' }}
                     />
                 </Box>
@@ -806,9 +749,9 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
             <Box gap="small">
                 {
                     playerAnvil.production.filter((x) => x.displayName != "Filler" && (x?.hammers ?? 0) > 0).map((anvilItem, index) => {
-                        const futureProduction = Math.min(Math.round(anvilItem.currentAmount + ((anvilItem.currentProgress + (player.afkFor * playerAnvil.anvilSpeed / 3600)) / anvilItem.data.time) * (anvilItem.hammers ?? 0)), anvilCapcity);
-                        const percentOfCap = Math.round(futureProduction / anvilCapcity * 100);
-                        const timeTillCap = ((anvilCapcity - futureProduction) / (playerAnvil.anvilSpeed / 3600 / anvilItem.data.time * (anvilItem.hammers ?? 0)));
+                        const futureProduction = Math.min(Math.round(anvilItem.currentAmount + ((anvilItem.currentProgress + (player.afkFor * playerAnvil.anvilSpeed / 3600)) / anvilItem.data.time) * (anvilItem.hammers ?? 0)), playerAnvil.productCapacity);
+                        const percentOfCap = Math.round(futureProduction / playerAnvil.productCapacity * 100);
+                        const timeTillCap = ((playerAnvil.productCapacity - futureProduction) / (playerAnvil.anvilSpeed / 3600 / anvilItem.data.time * (anvilItem.hammers ?? 0)));
                         return (
                             <Box key={`player_${player.playerID}_anvil_${index}`} direction="column" align="center">
                                 <IconImage data={{ height: 36, location: `${anvilItem.data.item}`, width: 36 }} scale={1.2} />
@@ -827,12 +770,12 @@ function AnvilDisplay({ player, activeBubbles, playerStatues }: { player: Player
                                                     color: 'brand'
                                                 }
                                             ]}
-                                            max={anvilCapcity} />
+                                            max={playerAnvil.productCapacity} />
                                         <Box align="center" pad="xxsmall">
                                             <Text size="small">{futureProduction.toString()} ({(percentOfCap)}%)</Text>
                                         </Box>
                                     </Stack>
-                                    <Text>Cap: {anvilCapcity}</Text>
+                                    <Text>Cap: {playerAnvil.productCapacity}</Text>
                                 </Box>
                                 <Box direction="row" gap="xsmall">
                                     <Text size="small">Time till cap =</Text>
@@ -1385,7 +1328,7 @@ function PlayerTab({ player }: PlayerTabProps) {
                     {index == 2 && <ShowSkills skillsMap={player.skills} skillsRank={player.skillsRank} player={player} />}
                     {index == 3 && <EquipmentDisplay player={player} />}
                     {index == 4 && <StatuesDisplay playerStatues={playerStatues} player={player} />}
-                    {index == 5 && <AnvilDisplay player={player} activeBubbles={activeBubbles} playerStatues={playerStatues} />}
+                    {index == 5 && <AnvilDisplay player={player} />}
                     {index == 6 && <CarryCapacityDisplay player={player} />}
                     {index == 7 && <TalentDisplay player={player} />}
                     {index == 8 && <PostOfficeDisplay player={player} extra={poExtra} />}
