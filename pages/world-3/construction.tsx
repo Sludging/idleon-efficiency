@@ -428,10 +428,10 @@ function PrinterDisplay() {
         return masteroes;
     }, [playerData])
 
-    if (!printerData || printerData.playerInfo.filter(player => player.samples.filter(sample => sample.item != "Blank").length > 0).length == 0) {
+    if (!printerData || printerData.playerInfo.flatMap(player =>[...player.samples, ...player.active]).filter(sample => sample.item != "Blank").length == 0) {
         return (
             <Box align="center" pad="medium">
-                <Heading level='3'>Come back when you unlocked this!</Heading>
+                <Heading level='3'>Come back when you have some samples!</Heading>
             </Box>
         )
     }

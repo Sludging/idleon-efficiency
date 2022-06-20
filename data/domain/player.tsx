@@ -9,7 +9,7 @@ import { Cloudsave } from "./cloudsave";
 import { EnemyInfo } from "./enemies";
 import { MapInfo } from "./maps";
 import { Chip, chipSlotReq, Lab } from "./lab";
-import { Alchemy, Bubble } from "./alchemy";
+import { Alchemy, Bubble, CauldronIndex } from "./alchemy";
 import { Guild } from "./guild";
 import { Bribe } from "./bribes";
 import { Stat } from "./base/stat";
@@ -563,7 +563,11 @@ export const updatePlayers = (data: Map<string, any>) => {
     // Update players talents levels due to elite class level increase talents.
     players.forEach(player => {
         const extraLevels = Math.floor(player.talents.filter(talent => [149, 374, 539].includes(talent.skillIndex)).reduce((sum, value) => sum += value.getBonus(), 0))
-        player.talents.filter(talent => ![149, 374, 539].includes(talent.skillIndex) && talent.skillIndex <= 614 && talent.level > 0).forEach(talent => talent.level += extraLevels);
+        player.talents.filter(talent => ![149, 374, 539].includes(talent.skillIndex) && talent.skillIndex <= 614 && talent.level > 0)
+        .forEach(talent => {
+            talent.level += extraLevels;
+            talent.maxLevel += extraLevels;
+        });
         player.extraLevelsFromTalent = extraLevels;
     });
 
@@ -576,9 +580,6 @@ export const updatePlayers = (data: Map<string, any>) => {
     })
 
     // Monster Cash.
-    const strBubbleBonus = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).find(bubble => bubble.name == "Penny Of Strength")?.getBonus() ?? 0;
-    const wisBubbleBonus = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).find(bubble => bubble.name == "Dollar Of Agility")?.getBonus() ?? 0;
-    const agiBubbleBonus = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).find(bubble => bubble.name == "Nickel Of Wisdom")?.getBonus() ?? 0;
     const mealBonus = cooking.meals.filter(meal => meal.bonusKey == "Cash").reduce((sum, meal) => sum += meal.getBonus() ?? 0, 0);
     const petArenaBonus1 = breeding.hasBonus(5) ? 1 : 0;
     const petArenaBonus2 = breeding.hasBonus(14) ? 1 : 0;
@@ -592,6 +593,10 @@ export const updatePlayers = (data: Map<string, any>) => {
     const prayers = data.get("prayers") as Prayer[];
     const arcadeBonus = arcade.bonuses.filter(bonus => [10, 11].includes(bonus.index)).reduce((sum, bonus) => sum += bonus.getBonus(), 0);
     players.forEach(player => {
+        const strBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 15)
+        const wisBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.HighIQ, 15)
+        const agiBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.Quicc, 15)
+
         player.setMonsterCash(strBubbleBonus, wisBubbleBonus, agiBubbleBonus, mealBonus,
             petArenaBonus1, petArenaBonus2, labBonus, vialBonus,
             dungeonBonus, guildBonus, family, goldFoodStampBonus, goldFoodAchievement, prayers, arcadeBonus, sigils.sigils[14].getBonus());
