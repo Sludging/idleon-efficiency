@@ -232,7 +232,7 @@ function AnvilProductionDisplay() {
                     </ShadowBox>
                 }
             </Box>
-            <Text size="xsmall">* Timers on this page don't tick down on purpose, they will update on every cloud save update.</Text>
+            <Text size="xsmall">* Timers on this page don&apos;t tick down on purpose, they will update on every cloud save update.</Text>
             {
                 anvilWrapper ? anvilWrapper.production.filter(anvilProduct => anvilProduct.totalSpeed > 0).map(anvilProduct => (
                     <ShadowBox background="dark-1" direction="row" key={anvilProduct.index} gap="small" margin={{ bottom: 'medium' }} pad="small">
