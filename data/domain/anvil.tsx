@@ -277,9 +277,9 @@ export const updateAnvil = (data: Map<string, any>) => {
 
         // Capacity Math.
         let guildCarryBonus: number = guild.guildBonuses[2].getBonus();
-        let zergPrayerBonus: number = prayers[4].getCurse();
-        let ruckSackPrayerBonus: number = prayers[12].getBonus();
-
+        let zergPrayerBonus: number = player.activePrayers.findIndex(prayer => prayer == 4) != -1 ? prayers[4].getCurse() : 0;
+        let ruckSackPrayerBonus: number = player.activePrayers.findIndex(prayer => prayer == 12) != -1 ? prayers[12].getBonus() : 0;
+        
         const telekineticStorageBonus = player.talents.find(x => x.skillIndex == CapacityConst.TelekineticStorageSkillIndex)?.getBonus() ?? 0;
         const cardBonus = player.cardInfo?.equippedCards.find(x => x.id == "Z9")?.getBonus() ?? 0;
         const carryCapShrineBonus = shrines[ShrineConstants.CarryShrine].getBonus(player.currentMapId, cardBonus);
