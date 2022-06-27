@@ -48,6 +48,13 @@ const cauldronPrefix: Record<string, string> = {
     "Kazam Cauldron": "Y"
 }
 
+const cauldronIndex: Record<string, number> = {
+    "Power Cauldron": 0,
+    "Quicc Cauldron": 1,
+    "High-IQ Cauldron": 2,
+    "Kazam Cauldron": 3
+}
+
 export const VialIndex = 4;
 
 const vialPercentages = "99 90 80 70 60 60 40 50 40 35 30 25 17 16 13 9 13 10 7 11 1 25 25 20 20 15 14 13 5 12 10 9 7 5 4 3 3 2 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1".split(" ").map((value) => parseInt(value));
@@ -99,7 +106,8 @@ export class Bubble {
 
     level: number = 0;
     labUpgrade: boolean = false;
-    bubbleIndex: number
+    bubbleIndex: number;
+    cauldronIndex: number;
 
     iconPrefix: string
 
@@ -116,6 +124,8 @@ export class Bubble {
         this.rawRequirements = data.requirements;
         this.bubbleIndex = bubbleIndex;
         this.iconPrefix = iconPrefix;
+        this.cauldronIndex = cauldronIndex[data.cauldron];
+        
     }
 
     getImageData = (): ImageData => {
@@ -491,7 +501,18 @@ export function updateAlchemy(data: Map<string, any>) {
         if (lab.jewels.find(jewel => jewel.data.name == "Pyrite Rhinestone")?.active) {
             bubblesToUpgrade += 1;
         }
-        const sortedBubbles = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles.slice(0, 15).filter(bubble => bubble.level > 5)).sort((bubble1, bubble2) => bubble1.level < bubble2.level ? -1 : 1);
+        const sortedBubbles = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles.slice(0, 15).filter(bubble => bubble.level > 5)).sort((bubble1, bubble2) => {
+            // If same level, then go with higher cauldron index + higher bubble index.
+            if (bubble1.level == bubble2.level) {
+                if (bubble1.cauldronIndex == bubble2.cauldronIndex) {
+                    return bubble1.bubbleIndex > bubble2.bubbleIndex ? -1 : 1
+                }
+                else {
+                    return bubble1.cauldronIndex > bubble2.cauldronIndex ? -1 : 1
+                }
+            }
+            return bubble1.level < bubble2.level ? -1 : 1
+        });
         sortedBubbles.slice(0, bubblesToUpgrade).forEach(bubble => bubble.labUpgrade = true);
     }
 

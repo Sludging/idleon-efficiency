@@ -8,6 +8,7 @@ import { GemStore } from "./gemPurchases";
 import { ImageData } from "./imageData";
 import { Lab } from "./lab";
 import { MealModel } from "./model/mealModel";
+import { Player } from "./player";
 import { Sigils } from "./sigils";
 import { Stamp } from "./stamps";
 
@@ -62,6 +63,10 @@ export class Meal {
 
     // Void plate achivement
     reducedCostToUpgrade: boolean = false;
+
+    // Ladles
+    ladlesToLevel: number = -1;
+    zerkerLadlesToLevel: number = -1;
 
     constructor(public mealIndex: number, data: MealModel) {
         this.name = data.name;
@@ -220,6 +225,8 @@ export class Cooking {
     spices: number[] = [];
     kitchens: Kitchen[] = [...Array(10)].map((_, index) => { return new Kitchen(index) });
 
+    bestBerserker: Player | undefined;
+
     constructor() {
         this.meals = Meal.fromBase(initMealRepo());
     }
@@ -345,11 +352,6 @@ export const parseCooking = (cookingData: number[][], mealsData: number[][]) => 
 export const updateCooking = (data: Map<string, any>) => {
     const cooking = data.get("cooking") as Cooking;
     const gemStore = data.get("gems") as GemStore;
-
-    cooking.kitchens.forEach(kitchen => {
-        kitchen.richelin = (gemStore.purchases.find(purchase => purchase.itemName == "Richelin Kitchen")?.pucrhased ?? -1) > kitchen.index;
-    });
-
     const alchemy = data.get("alchemy") as Alchemy;
     const stamps = data.get("stamps") as Stamp[][];
     const mainframe = data.get("lab") as Lab;
@@ -357,6 +359,17 @@ export const updateCooking = (data: Map<string, any>) => {
     const breeding = data.get("breeding") as Breeding;
     const achievements = data.get("achievements") as Achievement[];
     const sigils = data.get("sigils") as Sigils;
+    const players = data.get("players") as Player[];
+
+    const bestLadleSkillLevel = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 148)?.maxLevel ?? 0)));
+    if (bestLadleSkillLevel > 0) {
+        cooking.bestBerserker = players.find(player => player.talents.find(talent => talent.skillIndex == 148 && talent.maxLevel == bestLadleSkillLevel) != undefined);
+    }
+    const zerkerBonus = cooking.bestBerserker?.talents.find(talent => talent.skillIndex == 148)?.getBonus(false, false, true) ?? 0;
+
+    cooking.kitchens.forEach(kitchen => {
+        kitchen.richelin = (gemStore.purchases.find(purchase => purchase.itemName == "Richelin Kitchen")?.pucrhased ?? -1) > kitchen.index;
+    });
 
     const jewelMealBonus = mainframe.jewels[16].active ? mainframe.jewels[16].getBonus() : 0; // TODO: Remove hardcoding
     const voidPlateAchiev = achievements[233].completed;
@@ -404,6 +417,8 @@ export const updateCooking = (data: Map<string, any>) => {
 
     cooking.meals.filter(meal => meal.cookingContribution > 0).forEach(meal => {
         meal.timeToNext = ((meal.getMealLevelCost() - meal.count) * meal.cookReq) / meal.cookingContribution;
+        meal.ladlesToLevel = Math.ceil((((meal.getMealLevelCost() - meal.count) * meal.cookReq) / meal.cookingContribution));
+        meal.zerkerLadlesToLevel = Math.ceil((((meal.getMealLevelCost() - meal.count) * meal.cookReq) / meal.cookingContribution) / (1 + zerkerBonus / 100));
     });
 
     cooking.meals.forEach(meal => {
@@ -414,7 +429,10 @@ export const updateCooking = (data: Map<string, any>) => {
         // If this meal isn't being actively cooked, show time to next level using all kitchens.
         if (meal.cookingContribution == 0) {
             meal.timeToNext = ((meal.getMealLevelCost() - meal.count) * meal.cookReq) / totalContribution;
+            meal.ladlesToLevel = Math.ceil((((meal.getMealLevelCost() - meal.count) * meal.cookReq) / totalContribution));
+            meal.zerkerLadlesToLevel = Math.ceil((((meal.getMealLevelCost() - meal.count) * meal.cookReq) / totalContribution) / (1 + zerkerBonus / 100));
         }
+        
         
     });
 
