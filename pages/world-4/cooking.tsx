@@ -9,7 +9,6 @@ import { NextSeo } from 'next-seo';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import IconImage from '../../components/base/IconImage';
 import ShadowBox from '../../components/base/ShadowBox';
-import TextAndLabel from '../../components/base/TextAndLabel';
 import { TimeDown } from '../../components/base/TimeDisplay';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 import CoinsDisplay from '../../components/coinsDisplay';
@@ -227,6 +226,7 @@ function Cooking() {
                                                         <Box>
                                                             {meal.cookingContribution > 0 && <Text>Cooking speed: {nFormatter(meal.cookingContribution, "Smaller")}</Text>}
                                                             {meal.timeToNext > 0 && <Text>Time to next level: {toTime(meal.timeToNext * 3600)}</Text>}
+                                                            {meal.ladlesToLevel > 0 && <Text>{meal.ladlesToLevel} Ladles to next level ({meal.zerkerLadlesToLevel} if using {cooking.bestBerserker?.playerName ?? "zerker"})</Text>}
                                                             {meal.timeToDiamond > 0 && <Text>Time to Diamond: {toTime(meal.timeToDiamond * 3600)}</Text>}
                                                             {meal.timeToDiamond <= 0 && meal.timeToPurple > 0 && <Text>Time to Purple: {toTime(meal.timeToPurple * 3600)}</Text>}
                                                             {meal.timeToPurple <= 0 && meal.timeToVoid > 0 && <Text>Time to Void: {toTime(meal.timeToVoid * 3600)}</Text>}
