@@ -2,6 +2,8 @@ import {
     Box,
     Grid,
     Heading,
+    ResponsiveContext,
+    Stack,
     Tab,
     Tabs,
     Text,
@@ -27,6 +29,7 @@ import { nFormatter } from '../../data/utility';
 function TerritoryDisplay() {
     const [breeding, setBreeding] = useState<BreedingDomain>();
     const appContext = useContext(AppContext);
+    const size = useContext(ResponsiveContext);
 
     useEffect(() => {
         if (appContext) {
@@ -49,22 +52,40 @@ function TerritoryDisplay() {
             {
                 breeding.territory.filter(territory => territory.unlocked).map((territory, index) => (
                     <ShadowBox background="dark-1" key={index} direction="row" gap="medium" margin={{ bottom: 'medium' }} align="center" pad="small">
-                        <Grid columns={["25%", "15%", "15%", "15%"]} fill>
+                        <Grid columns={["20%", "15%", "20%", "20%", "25%"]} fill>
                             <TextAndLabel textSize='small' label="Name" text={territory.data.battleName} />
-                            <ComponentAndLabel label="Current Spices" component={
-                                <Box direction="row" gap="small" align="center">
-                                    <IconImage data={{ location: `CookingSpice${index}`, height: 36, width: 36 }} />
-                                    <Text>{nFormatter(territory.currentSpices)}</Text>
-                                </Box>
-                            } />
+                            {
+                                territory.spiceRewards.length > 0 ? territory.spiceRewards.map((spice, index) => (
+                                    <ComponentAndLabel key={index} label="Current Spices" component={
+                                        <Box direction="row" gap="small" align="center">
+                                            <IconImage data={{ location: spice.type, height: size == "small" ? 20 : 36, width: size == "small" ? 20 : 36 }} />
+                                            <Text size={size == "small" ? "small" : undefined}>{nFormatter(spice.count)}</Text>
+                                        </Box>
+                                    } />
+                                )) :
+                                <Box></Box>
+                            }
                             <TextAndLabel label="Progress" text={`${nFormatter(territory.currentProgress)}/${nFormatter(territory.getTrekReq())}`} />
-                            <Box>
+                            { territory.trekkingSpeedHr > 0 ?
+                                <TextAndLabel label="Foraging Speed" text={`${nFormatter(territory.trekkingSpeedHr)}`} /> :
+                                <TextAndLabel textColor='red' label="Combat Power" text={`${nFormatter(territory.trekkingFightPower)}/${nFormatter(territory.data.fightPower)}`} />
+                            }
+                            <Box direction="row" wrap>
                                 {
                                     territory.pets.map((pet, index) => {
                                         const enemy = EnemyInfo.find(enemy => enemy.id == pet.name);
                                         return (
-                                            <Box key={`pet_${index}`} direction="row" gap="small">
-                                                <Text size="xsmall">{enemy?.details.Name} | {pet.gene.data.name} | {nFormatter(pet.power)}</Text>
+                                            <Box key={`pet_${index}`} direction="row" gap="small" align="center">
+                                                { 
+                                                    enemy ?
+                                                    <Stack anchor='bottom'>
+                                                        <IconImage data={pet.getBackgroundImageData()} />
+                                                        <IconImage data={{ location: enemy?.id.toLowerCase() ?? "Unknown", width: 67, height: 67}} style={{paddingBottom: '15px'}}/>
+                                                        <Text size="8px">{nFormatter(pet.power)}</Text>
+                                                    </Stack>
+                                                    : 
+                                                    <IconImage data={{location: "PetBackcard4", width: 67, height: 67}} />
+                                                }
                                             </Box>
                                         )
                                     })
@@ -183,7 +204,7 @@ function ArenaBonusDisplay() {
     }
     return (
         <Box gap="small">
-            <Box direction="row" wrap justify="center" margin={{top: 'small'}}>
+            <Box direction="row" wrap justify="center" margin={{ top: 'small' }}>
                 {beastMasters && beastMasters.map((bm, index) => {
                     const [arenaTalent, cooldown] = [...bm.cooldown.entries()].filter(([talent, cooldown]) => talent.skillIndex == 370)?.pop() as [Talent, number];
                     const realCD = cooldown - bm.afkFor;
@@ -233,6 +254,7 @@ function ArenaBonusDisplay() {
 function EggDisplay() {
     const [breeding, setBreeding] = useState<BreedingDomain>();
     const appContext = useContext(AppContext);
+    const size = useContext(ResponsiveContext);
 
     const capacity = useMemo(() => {
         const theData = appContext.data.getData();
@@ -270,8 +292,8 @@ function EggDisplay() {
     return (
         <Box gap="small">
             <Text size="xsmall">* New eggs will only show up after the cloud save updates.</Text>
-            <Box direction="row" gap="medium">
-                <Box direction="row" align="center">
+            <Box direction="row" gap="medium" wrap>
+                <Box direction="row" align="center" wrap>
                     {
                         [...Array(capacity)].map((_, index) => {
                             if (breeding.eggs.length < index) {
@@ -282,7 +304,7 @@ function EggDisplay() {
                                     {
                                         breeding.eggs[index]?.rarity ?? 0 > 0 ?
                                             <Box key={index}>
-                                                <IconImage data={breeding.eggs[index].getImageData()} />
+                                                <IconImage scale={size == "small" ? 0.5 : 1} data={breeding.eggs[index].getImageData()} />
                                             </Box>
                                             :
                                             <Box height="43px" width="38px" />
