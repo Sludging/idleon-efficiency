@@ -50,7 +50,7 @@ function TerritoryDisplay() {
         <Box>
             <Text>Territory</Text>
             {
-                breeding.territory.filter(territory => territory.unlocked).map((territory, index) => (
+                breeding.territory.filter(territory => territory.unlocked && territory.index != 14).map((territory, index) => (
                     <ShadowBox background="dark-1" key={index} direction="row" gap="medium" margin={{ bottom: 'medium' }} align="center" pad="small">
                         <Grid columns={["20%", "15%", "20%", "20%", "25%"]} fill>
                             <TextAndLabel textSize='small' label="Name" text={territory.data.battleName} />
