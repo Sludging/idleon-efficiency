@@ -11,6 +11,7 @@ import { TerritoryFightModel } from "./model/territoryFightModel";
 import { PetGeneModel } from './model/petGeneModel';
 import { Player } from "./player";
 import { SkillsIndex } from "./SkillsIndex";
+import { AbilityTypeEnum } from "./enum/abilityTypeEnum";
 
 export const waveReqs = "2 5 8 12 15 20 25 35 50 65 80 100 125 150 175 200".split(" ").map(value => parseInt(value));
 
@@ -21,6 +22,8 @@ export class PetGene {
     static fromBase(data: PetGeneBase[]): PetGene[] {
         return data.map(gene => new PetGene(gene.index, gene.data));
     }
+
+    // Image for the gene background -> Development\idleon-efficiency\data\icons\assets\graphics\1x\font-551.png
 }
 
 export class PetUpgrade {
@@ -89,99 +92,114 @@ export class PetUpgrade {
 
 export class Pet {
     constructor(public name: string, public gene: PetGene, public power: number) { }
+
+    getTrekSpeed = (territoryIndex: number, sameTerritory: Pet[], territoryBefore: Pet[]) => {
+        if (this.gene.data.abilityType === AbilityTypeEnum.Green) {
+            switch (this.gene.data.name) {
+                case 'Forager': return this.power * 2;
+                case 'Targeter':
+                    // If we have pets in the territory before and the pet above is a targeter, multiply power by 5.
+                    if (territoryBefore.length > territoryIndex && territoryBefore[territoryIndex].gene.data.name == "Targeter") {
+                        return this.power * 5;
+                    }
+                case 'Opticular':
+                    // If has more power then every other pet in the territory, multiply power by 3.
+                    if (sameTerritory.every(comparePet => comparePet.power <= this.power)) {
+                        return this.power * 3;
+                    }
+            }
+            return this.power;
+        }
+        return 0;
+    }
+
+    getFightPower = () => {
+        if (this.gene.data.abilityType === AbilityTypeEnum.Red) {
+            switch (this.gene.data.name) {
+                case "Mercenary":
+                    return this.power * 2;
+            }
+            return this.power;
+        }
+        return 0;
+    }
+
+    getBackgroundImageData = (): ImageData => {
+        let cardNumber: number = 4;
+        switch(this.gene.data.abilityType) {
+            case AbilityTypeEnum.Green: 
+                cardNumber = 1;
+                break;
+            case AbilityTypeEnum.Red: 
+                cardNumber = 0;
+                break;
+            case AbilityTypeEnum.Special: 
+                cardNumber = 3;
+                break;
+        }
+
+        return {
+            location: `PetBackcard${cardNumber}`,
+            height: 67,
+            width: 67
+        }
+    }
+}
+
+export interface Spice {
+    type: string
+    count: number
 }
 
 export class Territory {
-    currentSpices: number = 0;
+    currentForagingRound: number = 0;
     currentProgress: number = 0;
-    spiceReward: string = '';
+    spiceRewards: Spice[] = [];
     pets: Pet[] = [];
 
     unlocked: boolean = false;
 
+    // Trekking info
+    trekkingFightPower = 0;
+    trekkingSpeedHr = 0;
+
     constructor(public index: number, public data: TerritoryFightModel) { }
 
     getTrekReq = () => {
-        const monolithicPets = 0; // TODO: actually check
+        const monolithicPets = this.pets.filter(pet => pet.gene.data.name === 'Monolithic').length;
         const baseMath = 1 + 0.02 / (monolithicPets / 5 + 1);
-        return (this.data.trekReq + this.currentSpices) * Math.pow(baseMath, this.currentSpices);
+        return (this.data.trekReq + this.currentForagingRound) * Math.pow(baseMath, this.currentForagingRound);
     }
 
-    getTrekHr = () => {
-        // if ("TotalTrekkingHR" == t) {
-        //     var us = b.engine.getGameAttribute("DNSM");
-        //     null != d.PetszzDN2 ? us.setReserved("PetszzDN2", 0) : (us.h.PetszzDN2 = 0);
-        //     for (var gs = 0; 4 > gs; ) {
-        //         var ms = gs++;
-        //         if ("none" != b.engine.getGameAttribute("Pets")[(ms + (27 + 4 * w._customBlock_Breeding("TerritoryID", "0", a, 42))) | 0]) {
-        //             var ds = b.engine.getGameAttribute("DNSM"),
-        //                 cs = b.engine.getGameAttribute("DNSM"),
-        //                 ps = null != d.PetszzDN2 ? cs.getReserved("PetszzDN2") : cs.h.PetszzDN2,
-        //                 hs = ds,
-        //                 bs = parsenum(ps) + w._customBlock_PetStuff("Trekking", "0", ms, w._customBlock_Breeding("TerritoryID", "0", a, 42));
-        //             null != d.PetszzDN2 ? hs.setReserved("PetszzDN2", bs) : (hs.h.PetszzDN2 = bs);
-        //         }
-        //     }
-        //     for (var fs = 0; 4 > fs; ) {
-        //         var ys = fs++,
-        //             Rs = b.engine.getGameAttribute("Pets")[(ys + (27 + 4 * w._customBlock_Breeding("TerritoryID", "0", a, 42))) | 0][1];
-        //         if (parsenum(Rs) == e.__cast(3, k)) {
-        //             var vs = b.engine.getGameAttribute("DNSM"),
-        //                 Fs = b.engine.getGameAttribute("DNSM"),
-        //                 Ns = null != d.PetszzDN2 ? Fs.getReserved("PetszzDN2") : Fs.h.PetszzDN2,
-        //                 Is = vs,
-        //                 Ds = 1.3 * parsenum(Ns);
-        //             null != d.PetszzDN2 ? Is.setReserved("PetszzDN2", Ds) : (Is.h.PetszzDN2 = Ds);
-        //         }
-        //     }
-        //     for (var Es = 0; 12 > Es; ) {
-        //         var Ss = Es++;
-        //         if (0 <= Ss + 4 * (w._customBlock_Breeding("TerritoryID", "0", a, 42) - 1) && -1 != b.engine.getGameAttribute("Pets")[(27 + (Ss + 4 * (w._customBlock_Breeding("TerritoryID", "0", a, 42) - 1))) | 0]) {
-        //             var Gs = b.engine.getGameAttribute("Pets")[(Ss + (27 + 4 * (w._customBlock_Breeding("TerritoryID", "0", a, 42) - 1))) | 0][1];
-        //             if (parsenum(Gs) == e.__cast(18, k)) {
-        //                 var Ts = b.engine.getGameAttribute("DNSM"),
-        //                     Us = b.engine.getGameAttribute("DNSM"),
-        //                     _s = null != d.PetszzDN2 ? Us.getReserved("PetszzDN2") : Us.h.PetszzDN2,
-        //                     Ms = Ts,
-        //                     Vs = 1.2 * parsenum(_s);
-        //                 null != d.PetszzDN2 ? Ms.setReserved("PetszzDN2", Vs) : (Ms.h.PetszzDN2 = Vs);
-        //             }
-        //         }
-        //     }
-        //     for (var Ps = 0; 4 > Ps; ) {
-        //         var Cs = Ps++,
-        //             Bs = b.engine.getGameAttribute("Pets")[(Cs + (27 + 4 * w._customBlock_Breeding("TerritoryID", "0", a, 42))) | 0][1];
-        //         if (parsenum(Bs) == e.__cast(14, k)) {
-        //             var Os = b.engine.getGameAttribute("DNSM");
-        //             null != d.PetszzDN3 ? Os.setReserved("PetszzDN3", 1) : (Os.h.PetszzDN3 = 1);
-        //             for (var xs = 0; 4 > xs; ) {
-        //                 var ks = xs++;
-        //                 if ("none" != b.engine.getGameAttribute("Pets")[(ks + (27 + 4 * w._customBlock_Breeding("TerritoryID", "0", a, 42))) | 0][0]) {
-        //                     var ws = b.engine.getGameAttribute("CustomLists"),
-        //                         Xs = null != d.PetGenes ? ws.getReserved("PetGenes") : ws.h.PetGenes,
-        //                         zs = b.engine.getGameAttribute("Pets")[(ks + (27 + 4 * w._customBlock_Breeding("TerritoryID", "0", a, 42))) | 0][1],
-        //                         Ls = Xs[0 | parsenum(zs)][1];
-        //                     if (0 == parsenum(Ls)) {
-        //                         var Qs = b.engine.getGameAttribute("DNSM");
-        //                         null != d.PetszzDN3 ? Qs.setReserved("PetszzDN3", 0) : (Qs.h.PetszzDN3 = 0);
-        //                         break;
-        //                     }
-        //                 }
-        //             }
-        //             var Ws = b.engine.getGameAttribute("DNSM");
-        //             if (1 == (null != d.PetszzDN3 ? Ws.getReserved("PetszzDN3") : Ws.h.PetszzDN3)) {
-        //                 var Ys = b.engine.getGameAttribute("DNSM"),
-        //                     Zs = b.engine.getGameAttribute("DNSM"),
-        //                     Hs = null != d.PetszzDN2 ? Zs.getReserved("PetszzDN2") : Zs.h.PetszzDN2,
-        //                     Js = Ys,
-        //                     js = 1.5 * parsenum(Hs);
-        //                 null != d.PetszzDN2 ? Js.setReserved("PetszzDN2", js) : (Js.h.PetszzDN2 = js);
-        //             }
-        //         }
-        //     }
-        //     var qs = b.engine.getGameAttribute("DNSM");
-        //     return null != d.PetszzDN2 ? qs.getReserved("PetszzDN2") : qs.h.PetszzDN2;
-        // }
+    setTrekInfo = (territoryBefore: Pet[], territoryAfter: Pet[], bloomingAxeBonus: number) => {
+        // Nothing to set for a lock territory, skip.
+        if (!this.unlocked) {
+            return;
+        }
+
+        const baseForagingPower = this.pets.reduce((sum, pet, petIndex) => sum += pet.getTrekSpeed(petIndex, this.pets, territoryBefore), 0);
+        const baseFightPower = this.pets.reduce((sum, pet) => sum += pet.getFightPower(), 0);
+
+        const hasCombatPets = this.pets.some(pet => pet.gene.data.abilityType === AbilityTypeEnum.Red);
+        const fleetersCount = this.pets.filter(pet => pet.gene.data.name === 'Fleeter').length;
+        const flashyCount = hasCombatPets ? 0 : this.pets.filter(pet => pet.gene.data.name === 'Flashy').length;
+        const fastidiousCount = !hasCombatPets ? 0 : this.pets.filter(pet => pet.gene.data.name === 'Fastidious').length;
+
+        const territoryWithNeighbours = [...this.pets, ...territoryBefore, ...territoryAfter];
+
+        const whalesCount = territoryWithNeighbours.filter(pet => pet.gene.data.name === 'Badumdum').length;
+        const poopsCount = territoryWithNeighbours.filter(pet => pet.gene.data.name === 'Tsar').length;
+
+        const totalForagingSpeed = baseForagingPower
+            * Math.pow(1.3, fleetersCount)
+            * Math.pow(1.2, whalesCount)
+            * Math.pow(1.5, flashyCount)
+            * Math.pow(1.5, fastidiousCount);
+
+        this.trekkingFightPower = (baseFightPower + baseForagingPower * bloomingAxeBonus)
+            * Math.pow(1.5, poopsCount);
+
+        this.trekkingSpeedHr = this.trekkingFightPower < this.data.fightPower ? 0 : totalForagingSpeed;
     }
 
     static fromBase = (data: TerritoryFightBase[]) => {
@@ -320,8 +338,13 @@ export const parseBreeding = (petsStored: any[][], pets: any[][], optionsList: a
         if (index < breeding.territory.length) {
             breeding.territory[index].unlocked = index < territoryFightsWon;
             breeding.territory[index].currentProgress = territory[0];
-            breeding.territory[index].currentSpices = territory[1];
-            breeding.territory[index].spiceReward = territory[3];
+            breeding.territory[index].currentForagingRound = territory[1]; // number of foraging rounds passed
+
+            // Check index 3, 5, and 7. If not blank, 
+            // then get the name from that index and the current spice count from the next index.
+            breeding.territory[index].spiceRewards = [3, 5, 7]
+                .filter(i => territory[i] && territory[i] != 'Blank')
+                .map(i => ({ type: territory[i], count: territory[i + 1] }));
 
             const territoryPets = pets.slice(27 + (4 * index), 27 + (4 * index) + 4);
             territoryPets.forEach(pet => {
@@ -351,6 +374,15 @@ export const updateBreeding = (data: Map<string, any>) => {
 
     // Breeding level is universal, so just get it from the first player.
     breeding.skillLevel = players[0].skills.get(SkillsIndex.Breeding)?.level ?? 0;
+
+    // We don't actually need to do this inside the "update" function, but feels more right.
+    breeding.territory.forEach((territory, index) => {
+        territory.setTrekInfo(
+            breeding.territory[index-1] ? breeding.territory[index-1].pets : [],
+            breeding.territory[index+1] ? breeding.territory[index+1].pets : [],
+            breeding.upgrade[6].getBonus() / 100
+        )
+    })
 
     return breeding;
 }
