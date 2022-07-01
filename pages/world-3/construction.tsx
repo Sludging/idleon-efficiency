@@ -64,7 +64,7 @@ function RefineryDisplay() {
         }
         const lab = appContext.data.getData().get("lab") as Lab;
         const sigils = appContext.data.getData().get("sigils") as Sigils;
-        const labCycleBonus = lab.bonuses.find(bonus => bonus.name == "Gilded Cyclical Tubing")?.active ?? false ? 3 : 1;
+        const labCycleBonus = lab?.bonuses.find(bonus => bonus.name == "Gilded Cyclical Tubing")?.active ?? false ? 3 : 1;
         const vialBonus = alchemyData?.vials.find((vial) => vial.description.includes("Refinery Cycle Speed"))?.getBonus() ?? 0;
         const saltLickBonus = saltLickData?.getBonus(2) ?? 0;
         const secondsSinceUpdate = (new Date().getTime() - (lastUpdated?.getTime() ?? 0)) / 1000;
