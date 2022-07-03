@@ -50,13 +50,13 @@ function TerritoryDisplay() {
         <Box>
             <Text>Territory</Text>
             {
-                breeding.territory.filter(territory => territory.unlocked && territory.index != 14).map((territory, index) => (
-                    <ShadowBox background="dark-1" key={index} direction="row" gap="medium" margin={{ bottom: 'medium' }} align="center" pad="small">
+                breeding.territory.filter(territory => territory.unlocked && territory.index != 14).map((territory, tIndex) => (
+                    <ShadowBox background="dark-1" key={tIndex} direction="row" gap="medium" margin={{ bottom: 'medium' }} align="center" pad="small">
                         <Grid columns={["20%", "15%", "20%", "20%", "25%"]} fill>
                             <TextAndLabel textSize='small' label="Name" text={territory.data.battleName} />
                             {
-                                territory.spiceRewards.length > 0 ? territory.spiceRewards.map((spice, index) => (
-                                    <ComponentAndLabel key={index} label="Current Spices" component={
+                                territory.spiceRewards.length > 0 ? territory.spiceRewards.map((spice, sIndex) => (
+                                    <ComponentAndLabel key={sIndex} label="Current Spices" component={
                                         <Box direction="row" gap="small" align="center">
                                             <IconImage data={{ location: spice.type, height: size == "small" ? 20 : 36, width: size == "small" ? 20 : 36 }} />
                                             <Text size={size == "small" ? "small" : undefined}>{nFormatter(spice.count)}</Text>
@@ -72,10 +72,10 @@ function TerritoryDisplay() {
                             }
                             <Box direction="row" wrap>
                                 {
-                                    territory.pets.map((pet, index) => {
+                                    territory.pets.map((pet, pIndex) => {
                                         const enemy = EnemyInfo.find(enemy => enemy.id == pet.name);
                                         return (
-                                            <Box key={`pet_${index}`} direction="row" gap="small" align="center">
+                                            <Box key={`pet_${pIndex}`} direction="row" gap="small" align="center">
                                                 { 
                                                     enemy ?
                                                     <Stack anchor='bottom'>
