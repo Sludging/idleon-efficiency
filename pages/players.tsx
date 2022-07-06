@@ -17,7 +17,7 @@ import { useState, useEffect, useContext, useMemo } from 'react';
 import { AppContext } from '../data/appContext'
 import { GemStore } from '../data/domain/gemPurchases';
 
-import { Player, SkillData } from '../data/domain/player';
+import { Activity, Player, SkillData } from '../data/domain/player';
 import { SkillsIndex } from "../data/domain/SkillsIndex";
 import { ClassIndex, ClassTalentMap, GetTalentArray, TalentConst } from '../data/domain/talents';
 import { CapacityConst, playerInventoryBagMapping } from '../data/domain/capacity';
@@ -349,7 +349,17 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                             </Box>
                         </Box>
                     </Box>
-                    <Text size="small">Current Monster / Map = {player.currentMonster} / {player.currentMap}</Text>
+                    <ComponentAndLabel
+                        label="Activity"
+                        component={
+                            <Box direction="row" gap="xsmall" align="center">
+                                <IconImage data={player.getActivityIcon()} scale={0.6} />
+                                <Text size="small">{Activity[player.getActivityType()]}</Text>
+                                <Text>|</Text>
+                                <Text size="small">{player.currentMonster?.details.Name}</Text>
+                            </Box>
+                        }
+                    />
                     {
                         player.killInfo.has(player.currentMapId) &&
                         (MapInfo[player.currentMapId].data.portalRequirements ?? []).reduce((sum, req) => sum += req, 0) > 0 &&
@@ -1380,9 +1390,12 @@ const CustomTabTitle = ({ player, isActive }: { player: Player, isActive: boolea
         <Box margin={{ right: 'xsmall' }}>
             <IconImage data={player.getClassImageData()} scale={0.6} />
         </Box>
-        <Text size="xsmall" color={isActive ? 'brand' : 'accent-2'}>
-            {player.playerName ? player.playerName : `Character ${player.playerID}`}
-        </Text>
+        <Box margin={{ right: 'xsmall' }}>
+            <Text size="xsmall" color={isActive ? 'brand' : 'accent-2'}>
+                {player.playerName ? player.playerName : `Character ${player.playerID}`}
+            </Text>
+        </Box>
+        {/* <IconImage data={player.getActivityIcon()} scale={0.4} /> */}
     </Box>
 );
 
