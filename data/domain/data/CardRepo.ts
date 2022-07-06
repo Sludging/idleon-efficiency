@@ -954,7 +954,7 @@ export const initCardRepo = () => {
                 "cardID": "X22",
                 "category": "Dungeons",
                 "perTier": 5,
-                "effect": "{% to start with RNG item",
+                "effect": "{% to start with RNG orb (Passive)",
                 "bonus": 20,
                 "order": 6
             }),
@@ -962,7 +962,7 @@ export const initCardRepo = () => {
                 "cardID": "X3",
                 "category": "Dungeons",
                 "perTier": 1.5,
-                "effect": "{% to start with RNG item",
+                "effect": "{% to start with RNG orb (Passive)",
                 "bonus": 15,
                 "order": 7
             }),

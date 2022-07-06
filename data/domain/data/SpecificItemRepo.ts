@@ -1179,7 +1179,7 @@ export const initSpecificItemRepo = () => {
                 "lvReqToCraft": 1,
                 "lvReqToEquip": 15,
                 "Class": ClassTypeEnum.All,
-                "Weapon_Power": 200,
+                "Weapon_Power": 400,
                 "STR": 3000,
                 "AGI": 3000,
                 "WIS": 3000,
@@ -1382,7 +1382,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("EquipmentHats21", <ArmourItemModel>{
                 "internalName": "EquipmentHats21",
-                "displayName": "Party Hat",
+                "displayName": "Birthday Hat",
                 "sellPrice": 1500,
                 "typeGen": TypeGenEnum.aHelmet,
                 "Type": "Helmet",
@@ -3489,27 +3489,6 @@ export const initSpecificItemRepo = () => {
                 "lvReqToCraft": 55,
                 "lvReqToEquip": 15,
                 "Class": ClassTypeEnum.Warrior,
-                "Weapon_Power": 5,
-                "STR": 3,
-                "AGI": 3,
-                "WIS": 0,
-                "LUK": 3,
-                "Defence": 0,
-                "miscUp1": "",
-                "miscUp2": "00",
-                "Upgrade_Slots_Left": 2,
-                "Skill": "",
-                "Skill_Power": 0
-            }),
-        new BaseItemBase("EquipmentPants8", <ArmourItemModel>{
-                "internalName": "EquipmentPants8",
-                "displayName": "Twisted Scales",
-                "sellPrice": 200,
-                "typeGen": TypeGenEnum.aPants,
-                "Type": "Pants",
-                "lvReqToCraft": 55,
-                "lvReqToEquip": 15,
-                "Class": ClassTypeEnum.All,
                 "Weapon_Power": 5,
                 "STR": 3,
                 "AGI": 3,
@@ -7552,7 +7531,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 100,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
-                "description": "It'll mean more to you when you're older... or may when this game is older and I add a use for this item, can't remember which. "
+                "description": "Hold down to read the card! There's a 1 in 75 chance it contains a Birthday Hat recipe, and a 74 in 75 chance it contains a few dollars from grandma. "
             }),
         new BaseItemBase("Quest26", <DescItemModel>{
                 "internalName": "Quest26",
@@ -9870,6 +9849,29 @@ export const initSpecificItemRepo = () => {
                 "Upgrade_Slots_Left": 0,
                 "family": "Slush",
                 "rarity": "Slushy",
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("ObolTroll", <ObolItemModel>{
+                "internalName": "ObolTroll",
+                "displayName": "Jagged Obol of Massive Trolling",
+                "sellPrice": 50,
+                "typeGen": TypeGenEnum.aObolSparkle,
+                "Type": "Sparkle Obol",
+                "lvReqToCraft": 0,
+                "lvReqToEquip": 0,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 4,
+                "STR": 9,
+                "AGI": 9,
+                "WIS": 9,
+                "LUK": 9,
+                "Defence": 10,
+                "miscUp1": "3% All Stats",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "family": "Troll",
+                "rarity": "Jagged",
                 "Skill": "",
                 "Skill_Power": 0
             }),
@@ -14776,6 +14778,26 @@ export const initSpecificItemRepo = () => {
                 "order": 21,
                 "level": 1
             }),
+        new BaseItemBase("InvStorage22", <ChestItemModel>{
+                "internalName": "InvStorage22",
+                "displayName": "Storage Chest 22",
+                "sellPrice": 10,
+                "typeGen": TypeGenEnum.aStorageChest,
+                "Type": "Storage",
+                "description": "Hold down to permanently add +8 Slots to your Storage Chest. Can only be used once.",
+                "order": 22,
+                "level": 1
+            }),
+        new BaseItemBase("InvStorage23", <ChestItemModel>{
+                "internalName": "InvStorage23",
+                "displayName": "Storage Chest 23",
+                "sellPrice": 10,
+                "typeGen": TypeGenEnum.aStorageChest,
+                "Type": "Storage",
+                "description": "Hold down to permanently add +9 Slots to your Storage Chest. Can only be used once.",
+                "order": 23,
+                "level": 1
+            }),
         new BaseItemBase("InvStorage31", <ChestItemModel>{
                 "internalName": "InvStorage31",
                 "displayName": "Storage Chest 90",
@@ -15788,6 +15810,22 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Evaporate",
                 "description": "It may be a skull, but it sure ain't no Killroy! "
             }),
+        new BaseItemBase("TrollPart", <DescItemModel>{
+                "internalName": "TrollPart",
+                "displayName": "Troll Scales",
+                "sellPrice": 1000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "Even the scales look like they have a wry smile, almost as if it remembers the part it played in that infamous tutorial prank you were unfortunately involved in "
+            }),
+        new BaseItemBase("InvStorage99", <DescItemModel>{
+                "internalName": "InvStorage99",
+                "displayName": "Cosmic Storage Chest",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Chest Receipt",
+                "description": "This item does nothing, you got the 9 Storage Slots instantly when you bought this. Consider this a receipt of purchase, you can throw it away. "
+            }),
         new BaseItemBase("KeyFrag", <DescItemModel>{
                 "internalName": "KeyFrag",
                 "displayName": "Keychain Fragment",
@@ -16038,7 +16076,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("GalaxyC1b", <DescItemModel>{
                 "internalName": "GalaxyC1b",
-                "displayName": "Pealer Shell",
+                "displayName": "Pearler Shell",
                 "sellPrice": 3000,
                 "typeGen": TypeGenEnum.bCraft,
                 "Type": "Monster Drop",
@@ -16320,6 +16358,27 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentHats74", <ArmourItemModel>{
+                "internalName": "EquipmentHats74",
+                "displayName": "Thin Veil of The Troll",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmet,
+                "Type": "Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 200,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 7,
+                "STR": 35,
+                "AGI": 35,
+                "WIS": 35,
+                "LUK": 35,
+                "Defence": 100,
+                "miscUp1": "4% All Stats",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 9,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentShirts6", <ArmourItemModel>{
                 "internalName": "EquipmentShirts6",
                 "displayName": "Chizoar Bodyplate",
@@ -16380,6 +16439,27 @@ export const initSpecificItemRepo = () => {
                 "miscUp1": "11% Defence",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 7,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentShirts34", <ArmourItemModel>{
+                "internalName": "EquipmentShirts34",
+                "displayName": "Trollish Garb",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aShirt,
+                "Type": "Shirt",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 190,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 3,
+                "STR": 24,
+                "AGI": 24,
+                "WIS": 24,
+                "LUK": 24,
+                "Defence": 80,
+                "miscUp1": "3% All Stats",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 8,
                 "Skill": "",
                 "Skill_Power": 0
             }),
@@ -16446,6 +16526,27 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentPants8", <ArmourItemModel>{
+                "internalName": "EquipmentPants8",
+                "displayName": "Twisted Scales",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aPants,
+                "Type": "Pants",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 180,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 3,
+                "STR": 25,
+                "AGI": 25,
+                "WIS": 25,
+                "LUK": 25,
+                "Defence": 70,
+                "miscUp1": "3% All Stats",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 8,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentShoes23", <ArmourItemModel>{
                 "internalName": "EquipmentShoes23",
                 "displayName": "Chizoar Walkers",
@@ -16506,6 +16607,27 @@ export const initSpecificItemRepo = () => {
                 "miscUp1": "13% Defence",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 6,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentShoes34", <ArmourItemModel>{
+                "internalName": "EquipmentShoes34",
+                "displayName": "Soles of the Troll",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aShoes,
+                "Type": "Shoes",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 185,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 22,
+                "AGI": 22,
+                "WIS": 22,
+                "LUK": 22,
+                "Defence": 65,
+                "miscUp1": "3% All Stats",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 7,
                 "Skill": "",
                 "Skill_Power": 0
             }),
@@ -21986,7 +22108,15 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 50,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Boss Key",
-                "description": "Hold down to add these Iceland Boss Keys to your account. "
+                "description": "Hold down to add these Tundra Boss Keys to your account. "
+            }),
+        new BaseItemBase("Key4", <DescItemModel>{
+                "internalName": "Key4",
+                "displayName": "Troll's Enclave Key",
+                "sellPrice": 50,
+                "typeGen": TypeGenEnum.dCurrency,
+                "Type": "Boss Key",
+                "description": "Hold down to add these Nebula Boss Keys to your account. "
             }),
         new BaseItemBase("ObolFrag", <DescItemModel>{
                 "internalName": "ObolFrag",
@@ -23540,7 +23670,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("CardsF11", <CardItemModel>{
                 "internalName": "CardsF11",
-                "displayName": "Squiddy Soul Card",
+                "displayName": "Squishy Soul Card",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.dCard,
                 "Type": "Card",
@@ -24028,7 +24158,7 @@ export const initSpecificItemRepo = () => {
                     "cardID": "X3",
                     "category": "Dungeons",
                     "perTier": 1.5,
-                    "effect": "{% to start with RNG item",
+                    "effect": "{% to start with RNG orb (Passive)",
                     "bonus": 15,
                     "order": 7
                 },
@@ -24092,7 +24222,7 @@ export const initSpecificItemRepo = () => {
                     "cardID": "X22",
                     "category": "Dungeons",
                     "perTier": 5,
-                    "effect": "{% to start with RNG item",
+                    "effect": "{% to start with RNG orb (Passive)",
                     "bonus": 20,
                     "order": 6
                 },
@@ -24740,7 +24870,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("CardsZ10", <CardItemModel>{
                 "internalName": "CardsZ10",
-                "displayName": "Troll Card",
+                "displayName": "Massive Troll Card",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.dCard,
                 "Type": "Card",
@@ -24752,7 +24882,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 6,
                     "order": 17
                 },
-                "dropChance": 0.01
+                "dropChance": 0.004
             }),
         new BaseItemBase("CardsZ11", <CardItemModel>{
                 "internalName": "CardsZ11",
@@ -24768,7 +24898,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 10,
                     "order": 18
                 },
-                "dropChance": 0.004
+                "dropChance": 0.002
             }),
         new BaseItemBase("CardsZ12", <CardItemModel>{
                 "internalName": "CardsZ12",
@@ -24849,6 +24979,15 @@ export const initSpecificItemRepo = () => {
                     "order": 15
                 },
                 "dropChance": 0.02
+            }),
+        new BaseItemBase("CardsZ17", <CardItemModel>{
+                "internalName": "CardsZ17",
+                "displayName": "FILLER",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": undefined,
+                "dropChance": 0.003
             })    
 ]
 }

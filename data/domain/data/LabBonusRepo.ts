@@ -44,7 +44,7 @@ export const initLabBonusRepo = () => {
                 "bonusOn": 0,
                 "bonusOff": 1,
                 "name": "No Bubble Left Behind",
-                "description": "Every 24 hours, your 3 lowest level Alchemy Bubbles gets +1 Lv. This only applies to bubbles Lv 5 or higher, so it's more like 'your lowest level bubble that is at least level 5'. ALSO, it only works on the first 15 bubbles of each colour!"
+                "description": "Every 24 hours, your 3 lowest level Alchemy Bubbles gets +1 Lv. This only applies to bubbles Lv 5 or higher, so it's more like 'your lowest level bubble that is at least level 5'. ALSO, it only works on the first 15 bubbles of each colour! @ Doesn't trigger on days that you don't login."
             }),
         new LabBonusBase(4, <LabBonusModel>{
                 "no": 4,

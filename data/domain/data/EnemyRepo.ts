@@ -275,7 +275,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("SoulCard5", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Squiddy Soul",
+                    "Name": "Squishy Soul",
                     "AFKtype": AFKTypeEnum.Fighting,
                     "MonsterFace": 4,
                     "MonsterOffsetX": 42,
@@ -3719,6 +3719,7 @@ export const initEnemyRepo = () => {
                         <ItemDropModel>{"item": "GalaxyA2b", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
                         <ItemDropModel>{"item": "Line12", "quantity": 1, "chance": 2.2e-06, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsG2", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "InvStorage22", "quantity": 1, "chance": 8e-06, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable19", "quantity": 1, "chance": 0.0028, "questLink": "N/A"}
                     ]
                 },
@@ -3863,7 +3864,7 @@ export const initEnemyRepo = () => {
                 "mapData": <MapDataModel>{
                     "enemy": "w4b2",
                     "world": "Hyperion Nebula",
-                    "map": <MapNameModel>{"intName": "xSpaceB1", "name": "Moutainous Deugh", "id": 155},
+                    "map": <MapNameModel>{"intName": "xSpaceB1", "name": "Mountainous Deugh", "id": 155},
                     "portalRequirements": [100000]
                 },
                 "navigation": <EnemyNavModel>{
@@ -4040,6 +4041,7 @@ export const initEnemyRepo = () => {
                         <CoinDropModel>{"item": "COIN", "quantity": 2500, "chance": 0.5, "questLink": "N/A"},
                         <ItemDropModel>{"item": "GalaxyB5", "quantity": 1, "chance": 0.16, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsG9", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "InvStorage23", "quantity": 1, "chance": 1e-06, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable20", "quantity": 1, "chance": 0.0033, "questLink": "N/A"}
                     ]
                 },
@@ -4911,8 +4913,8 @@ export const initEnemyRepo = () => {
                         <ItemDropModel>{"item": "EquipmentCape5", "quantity": 1, "chance": 0.0003, "questLink": "N/A"},
                         <ItemDropModel>{"item": "Chiz0", "quantity": 7, "chance": 0.5, "questLink": "N/A"},
                         <ItemDropModel>{"item": "Chiz1", "quantity": 2, "chance": 0.5, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneZ1", "quantity": 1, "chance": 0.03, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable8", "quantity": 2, "chance": 1, "questLink": "N/A"}
+                        <ItemDropModel>{"item": "StoneZ2", "quantity": 1, "chance": 0.03, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable16", "quantity": 2, "chance": 1, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,
@@ -4940,7 +4942,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("Boss4A", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Troll",
+                    "Name": "Massive Troll",
                     "AFKtype": AFKTypeEnum.Fighting,
                     "MonsterFace": 4,
                     "MonsterOffsetX": 42,
@@ -4950,7 +4952,7 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 4,
                     "RespawnTime": 86400,
                     "DeathFrame": 13,
-                    "MonsterHPTotal": 400000000,
+                    "MonsterHPTotal": 80000000,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "a",
                     "ExpGiven": 12000,
@@ -4962,9 +4964,10 @@ export const initEnemyRepo = () => {
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 4000, "chance": 1, "questLink": "N/A"},
-                        <CardDropModel>{"item": "CardsZ10", "quantity": 1, "chance": 0.007, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FillerMaterial", "quantity": 2, "chance": 0.3, "questLink": "N/A"},
+                        <CoinDropModel>{"item": "COIN", "quantity": 1000000, "chance": 1, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsZ10", "quantity": 1, "chance": 0.004, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "ObolTroll", "quantity": 1, "chance": 0.0002, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "TrollPart", "quantity": 1, "chance": 0.13, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable19", "quantity": 2, "chance": 1, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable20", "quantity": 2, "chance": 1, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable21", "quantity": 2, "chance": 1, "questLink": "N/A"}
@@ -4978,11 +4981,66 @@ export const initEnemyRepo = () => {
                     "crystalName": undefined,
                     "hasCard": true
                 },
-                "bossData": undefined
+                "bossData": <BossDetailsModel>{
+                    "health": 80000000,
+                    "defence": 2500,
+                    "exp": 750000,
+                    "keys": 1,
+                    "attacks": [<BossAttackModel>{"name": "filler", "damage": 400}]
+                }
             }),
         new EnemyBase("Boss4B", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
                     "Name": "Chaotic Troll",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 4,
+                    "MonsterOffsetX": 42,
+                    "MonsterOffsetY": 28,
+                    "HeightOfMonster": 85,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 4,
+                    "RespawnTime": 86400,
+                    "DeathFrame": 13,
+                    "MonsterHPTotal": 350000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "a",
+                    "ExpGiven": 12000,
+                    "ExpType": 0,
+                    "Defence": 600,
+                    "MoveSPEED": 3,
+                    "Damages": [1000, 1],
+                    "DefFor0": 1223.26
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 5000000, "chance": 1, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsZ11", "quantity": 1, "chance": 0.002, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "ObolTroll", "quantity": 1, "chance": 0.0008, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "TrollPart", "quantity": 2, "chance": 0.3, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable19", "quantity": 2, "chance": 1, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable20", "quantity": 2, "chance": 1, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable21", "quantity": 2, "chance": 1, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "Boss4A",
+                    "next": "Blank",
+                    "hasCrystal": true,
+                    "crystalName": undefined,
+                    "hasCard": true
+                },
+                "bossData": <BossDetailsModel>{
+                    "health": 350000000,
+                    "defence": 5,
+                    "exp": 200000,
+                    "keys": 5,
+                    "attacks": [<BossAttackModel>{"name": "filler", "damage": 3300}]
+                }
+            }),
+        new EnemyBase("Boss4C", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Blitzkrieg Troll",
                     "AFKtype": AFKTypeEnum.Fighting,
                     "MonsterFace": 4,
                     "MonsterOffsetX": 42,
@@ -5004,24 +5062,25 @@ export const initEnemyRepo = () => {
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 4000, "chance": 1, "questLink": "N/A"},
-                        <CardDropModel>{"item": "CardsZ11", "quantity": 1, "chance": 0.004, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FillerMaterial", "quantity": 2, "chance": 0.1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FillerMaterial", "quantity": 2, "chance": 0.002, "questLink": "N/A"},
+                        <CoinDropModel>{"item": "COIN", "quantity": 20000000, "chance": 1, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsZ17", "quantity": 1, "chance": 0.003, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "ObolTroll", "quantity": 1, "chance": 0.007, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "TrollPart", "quantity": 4, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "StoneZ2", "quantity": 1, "chance": 0.03, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable19", "quantity": 2, "chance": 1, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable20", "quantity": 2, "chance": 1, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable21", "quantity": 2, "chance": 1, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "Boss4A",
-                    "next": "Blank",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
-                "bossData": undefined
+                "navigation": undefined,
+                "bossData": <BossDetailsModel>{
+                    "health": 2000000000,
+                    "defence": 25,
+                    "exp": 1000000,
+                    "keys": 60,
+                    "attacks": [<BossAttackModel>{"name": "filler", "damage": 33000}]
+                }
             }),
         new EnemyBase("poopBig", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
@@ -5279,6 +5338,7 @@ export const initEnemyRepo = () => {
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 25000, "chance": 1, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsZ13", "quantity": 1, "chance": 0.2, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Key4", "quantity": 1, "chance": 0.5, "questLink": "N/A"},
                         <RecipeDropModel>{"item": "SmithingRecipes3", "quantity": 21, "chance": 0.02, "questLink": "N/A"},
                         <ItemDropModel>{"item": "StoneA3b", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
                         <ItemDropModel>{"item": "PetEgg", "quantity": 1, "chance": 0.6, "questLink": "N/A"},
@@ -6960,7 +7020,7 @@ export const initEnemyRepo = () => {
                     "MonsterHPTotal": 5,
                     "Type": EnemyTypeEnum.fishType,
                     "SpecialType": "",
-                    "ExpGiven": 2,
+                    "ExpGiven": 6,
                     "ExpType": 4,
                     "Defence": 40,
                     "MoveSPEED": 0,
@@ -6997,7 +7057,7 @@ export const initEnemyRepo = () => {
                     "MonsterHPTotal": 5,
                     "Type": EnemyTypeEnum.fishType,
                     "SpecialType": "",
-                    "ExpGiven": 2,
+                    "ExpGiven": 50,
                     "ExpType": 4,
                     "Defence": 20000,
                     "MoveSPEED": 0,
@@ -8283,7 +8343,7 @@ export const initEnemyRepo = () => {
                         <ItemDropModel>{"item": "Soul1", "quantity": 50, "chance": 0.6, "questLink": "N/A"},
                         <ItemDropModel>{"item": "Critter6", "quantity": 200, "chance": 0.6, "questLink": "N/A"},
                         <ItemDropModel>{"item": "VoidBar", "quantity": 100, "chance": 0.35, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Key1", "quantity": 1, "chance": 0.006, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Key4", "quantity": 1, "chance": 0.006, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable19", "quantity": 1, "chance": 1, "questLink": "N/A"}
                     ]
                 },
@@ -8321,7 +8381,7 @@ export const initEnemyRepo = () => {
                         <ItemDropModel>{"item": "StoneA4", "quantity": 1, "chance": 0.07, "questLink": "N/A"},
                         <ItemDropModel>{"item": "Critter8", "quantity": 600, "chance": 0.4, "questLink": "N/A"},
                         <ItemDropModel>{"item": "Bug7", "quantity": 1500, "chance": 0.4, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Key2", "quantity": 1, "chance": 0.012, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Key4", "quantity": 1, "chance": 0.012, "questLink": "N/A"},
                         <ItemDropModel>{"item": "FoodG7", "quantity": 1, "chance": 0.5, "questLink": "N/A"},
                         <ItemDropModel>{"item": "Lustre", "quantity": 1000, "chance": 0.6, "questLink": "N/A"},
                         <ItemDropModel>{"item": "AlienTree", "quantity": 750, "chance": 0.5, "questLink": "N/A"},
@@ -8361,8 +8421,8 @@ export const initEnemyRepo = () => {
                         <ItemDropModel>{"item": "LustreBar", "quantity": 150, "chance": 0.05, "questLink": "N/A"},
                         <ItemDropModel>{"item": "Starfire", "quantity": 2000, "chance": 0.03, "questLink": "N/A"},
                         <ItemDropModel>{"item": "Bug8", "quantity": 1500, "chance": 0.02, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Key3", "quantity": 1, "chance": 0.01, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FoodG7", "quantity": 2, "chance": 0.03, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Key4", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "FoodG7", "quantity": 2, "chance": 0.025, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable21", "quantity": 1, "chance": 1, "questLink": "N/A"}
                     ]
                 },

@@ -137,25 +137,25 @@ export const initBossDetailRepo = () => {
                     <BossAttackModel>{"name": "filler", "damage": 33000}
                 ]
             }),
-        new BossDetailsBase("FILLERA", <BossDetailsModel>{
-                "health": 2000000000,
+        new BossDetailsBase("Boss4A", <BossDetailsModel>{
+                "health": 80000000,
                 "defence": 2500,
                 "exp": 750000,
                 "keys": 1,
                 "attacks": [<BossAttackModel>{"name": "filler", "damage": 400}]
             }),
-        new BossDetailsBase("FILLERB", <BossDetailsModel>{
-                "health": 2000000000,
+        new BossDetailsBase("Boss4B", <BossDetailsModel>{
+                "health": 350000000,
                 "defence": 5,
                 "exp": 200000,
                 "keys": 5,
                 "attacks": [<BossAttackModel>{"name": "filler", "damage": 3300}]
             }),
-        new BossDetailsBase("FILLERC", <BossDetailsModel>{
+        new BossDetailsBase("Boss4C", <BossDetailsModel>{
                 "health": 2000000000,
                 "defence": 25,
                 "exp": 1000000,
-                "keys": 9999,
+                "keys": 60,
                 "attacks": [<BossAttackModel>{"name": "filler", "damage": 33000}]
             })    
 ]

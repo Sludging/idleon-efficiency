@@ -611,20 +611,20 @@ export const initGemShopRepo = () => {
                 "itemName": "Name Of Item",
                 "desc": "DESCRIPTION OF ITEM",
                 "cost": -1,
-                "no": 109,
+                "no": 60,
                 "maxPurchases": 1,
                 "qty": 1,
                 "costIncrement": 0
             }),
         new GemShopItemBase(61, <GemShopItemModel>{
-                "name": "Blank",
-                "itemName": "Name Of Item",
-                "desc": "DESCRIPTION OF ITEM",
-                "cost": -1,
-                "no": 60,
-                "maxPurchases": 1,
+                "name": "InvStorage99",
+                "itemName": "More Storage Space",
+                "desc": "Gives +9 extra Storage Chest Slots! Perfect for any hoarding tendencies you may have!",
+                "cost": 450,
+                "no": 109,
+                "maxPurchases": 10,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 12
             }),
         new GemShopItemBase(62, <GemShopItemModel>{
                 "name": "Blank",
