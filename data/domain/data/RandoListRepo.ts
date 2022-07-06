@@ -316,7 +316,7 @@ export const initRandoListRepo = () => {
                     "Build_this_space_to_get_your_sixth_Shrine._This_one_is_a_pile_of_books,_which_will_somehow_give_you_a_boost_even_though_we_both_know_you_don't_read.",
                     "Build_this_space_to_get_your_seventh_Shrine._This_one_is_practically_worthless,_and_will_be_forgotten_about_within_a_week_of_being_unlocked.",
                     "Build_this_space_to_get_your_eigth_Shrine!_Dang,_we're_close_to_the_end,_I'm_gonna_miss_vaguely_describing_upcoming_shrines_to_you!_Anyway,_this_one's_spooky_and_scary.",
-                    "Build_this_space_to_get_your_last_Shrine._Honestly_it's_not_even_that_good,_just_wait_for_a_future_update_to_make_it_good_before_using_it."
+                    "Build_this_space_to_get_your_last_Shrine._Yep,_definitely_the_last_one._No_need_to_look_for_a_10th_shrine_anywhere..._yet..."
                 ]
             }),
         new RandoListBase(15, <RandoListModel>{
@@ -751,7 +751,7 @@ export const initRandoListRepo = () => {
                     "Key1_x1.png",
                     "Key2_x1.png",
                     "Key3_x1.png",
-                    "Blank.png",
+                    "Key4_x1.png",
                     "TixCol_x1.png",
                     "MGp.png",
                     "rtt0_x1.png",
@@ -1723,11 +1723,8 @@ export const initRandoListRepo = () => {
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "v1.58_Killroys_Slaughter!",
-                    "v1.58_----------------_@_*Added Killroy's_Slaughterhouse, go_talk_to_Killroy_in_world_2!_@_*Rack_up_as_many_kills_as_you_can_in_100_sec, and_spend_Skulls_on_various_rewards!_@_*Unlock_Killroy's_2nd_room_by_reaching_World_4._@_*10th_CHARACTER_SLOT_ADDED!!_Requires_Account_Lv_of_900+_@_*Blood_Berserker's_Inflame_now_slows_you_down_bigly, and_doesn't_go_away_when_you_move!_@___@_v1.57_----------------_@_*Added 3 new elite classes: Blood Berserker",
-                    "Beast Master",
-                    "and Bubonic Conjuror!_The_subclasses_that_get_these_elite_classes_are_Barbarian, Hunter, and_Shaman_respectively._@_*Elite classes are given by Eliteus",
-                    "found in the 4th map of World 4 with the demon genies!_@_*The_other_3_subclasses_also_have_their_elite_classes, but_wont_get_their_Talents_until_world_5."
+                    "v1.59_Quality_and_Fixes",
+                    "Quality_Improvements_---------------------_@_*Added_a_new_Gilded_Damage_font_for_10M+_dmg_@_*Arcade_Gold_Ball_Shop_now_shows_current_bonus_rotation_@_*Several_Dungeon_Cards_are_now_passive_@_*Dungeons_now_have_a_SELL_ALL_feature_@_*DC-ing_from_a_dungeon_will_refund_your_Passes!_@_*Added_some_Storage_Chests_to_world_2_and_4_drop_tables_@_*Added_more_Storage_Chests_to_the_Gem_Shop_@_*12_other_QoL_improvements, check_discord.gg/idleon_@___@_Bug_Fixes_-----------------------_@_*Overwhelmed_Golden_Egg_pet_breed_upgrade_now_works_*The_Party_Starter_wizard_tower_2nd_trait_now_works_*Eldritch_Frog's_Ripcages_no_longer_desync_@_*2x_Ladles_bonus_from_post_office_now_works_@_*All_bonuses_to_Pet_Fight_Damage_now_work_@_*26_other_bug_fixes, check_discord_for_the_full_list"
                 ]
             }),
         new RandoListBase(62, <RandoListModel>{
@@ -1916,6 +1913,52 @@ export const initRandoListRepo = () => {
                     "xSpaceC4"
                 ]
             }),
-        new RandoListBase(72, <RandoListModel>{"elements": ["_"]})    
+        new RandoListBase(72, <RandoListModel>{"elements": ["_"]}),
+        new RandoListBase(73, <RandoListModel>{
+                "elements": [
+                    "Oh_hi_again_cutie..._how_you_doing?",
+                    "Heyyyyy..._so_uhm,_yea..._about_that...",
+                    "Oh,_it's_you..._huh....",
+                    "Well_well_well_look_who_came_back!_I_knew_you_couldn't_resist_me!",
+                    "Great_timing!_I_just_finished_work,_I_dropped_351_new_players_off_at_world_1_#",
+                    "My_my..._you_look_just_as_handsome_as_the_day_we_first_met!",
+                    "Ew,_the_noob_is_back_|_@_Haha_just_kidding_you're_still_a_cutie.",
+                    "Oh_how_long_I've_been_waiting_for_you_to_return...",
+                    "Aha!_I_knew_you_wouldn't_forget_about_me!",
+                    "I_knew_what_we_had_between_us_was_special,_I'm_glad_you_felt_the_same_way..."
+                ]
+            }),
+        new RandoListBase(74, <RandoListModel>{
+                "elements": [
+                    "Kill_all_monsters_in_under_25_seconds!_Tick_tock,_times_running_out!!",
+                    "Defeat_10_monsters_without_hurting_a_green_mushroom!",
+                    "Yahtzee!!!!_You_need_a_6,_or_it's_all_over!",
+                    "Oh_no,_the_energy_orbs_are_coming!_Hehehe_don't_get_zapped!",
+                    "I'm_gonna_close_my_eyes_and_count_to_10._You_better_be_climbing_when_I_open_them!",
+                    "Defeat_5_monsters_within_20_seconds!_Yeah_yeah_move_them_feet!!",
+                    "Ok_uhhmm..._how_about_a_classic_coin_flip?_Look_right_for_heads,_look_left_for_tails!",
+                    "Hmmm..._now_kill_the_monster_closest_to_the_middle_of_the_screen!",
+                    "'Yawn'..._Uh,_do_100_lines_of_damage_before_I_get_bored_and_self_heal!",
+                    "WHAT?_Who_let_all_these_shrooms_in??!?_Haha_jk_jk_it_was_obviously_me._Ya_got_25_seconds...",
+                    "I_sure_love_my_soda,_it'd_be_a_real_shame_if_any_were_to_get_spilled..._anyway,_go_kill_that_crab_hehe!",
+                    "",
+                    "",
+                    "",
+                    ""
+                ]
+            }),
+        new RandoListBase(75, <RandoListModel>{
+                "elements": [
+                    "Aaaaarrrggghhh...._aauuguauauauauauau..._I'm_ded...._hehehehe",
+                    "OOF_OUCHIE!_I'm_gonna_need_an_ice_pack_for_this_one..._pfft_hahahaha!!",
+                    "Awww_ya_got_me_^_hahaha_",
+                    "Oh_jeez,_Lava_ain't_gonna_be_happy_when_I_tell_him_that_you_made_it_this_Far..._erm,_I_mean_dying_noises!!!_Gahh_I'm_dead!!",
+                    "Golly!_You_done_killed_me!_Shucks,_guess_you_get_all_this_loot_now_since_I'm_dead_and_all_that_lol",
+                    "..._@_I'd_congratulate_you_for_killing_me,_but_I_think_Lava_told_me_that_playing_dead_means_not_talking,_so_I_won't_say_anything...",
+                    "Oh_no_I'm_dead_etc_etc_yada_yada..._ugh_when_is_my_shift_over...",
+                    "Oof_there_goes_my_HP_bar,_guess_you_finally_vanquished_IdleOn's_'FINAL'_Boss...._tehehehe",
+                    "Wow_what_a_fight!_Here,_you_deserve_these_great_items,_after_all_I_am_the_final_boss_and_you_did_kill_me_once_and_for_all_#"
+                ]
+            })    
 ]
 }

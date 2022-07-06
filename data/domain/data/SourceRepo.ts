@@ -631,9 +631,6 @@ export const initSourceRepo = () => {
         new SourcesBase("FillerMaterial", <SourcesModel>{
                 "sources": [
                     <SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"},
-                    <SourceModel>{"wikiName": "[[Troll]]", "txtName": "Troll"},
-                    <SourceModel>{"wikiName": "[[Chaotic Troll]]", "txtName": "Chaotic Troll"},
-                    <SourceModel>{"wikiName": "[[Chaotic Troll]]", "txtName": "Chaotic Troll"},
                     <SourceModel>{"wikiName": "[[Fishing]]", "txtName": "Fishing"}
                 ],
                 "recipeFrom": [],
@@ -2838,6 +2835,26 @@ export const initSourceRepo = () => {
                 "recipeFrom": [<SourceModel>{"wikiName": "[[Mutated Mush]]", "txtName": "Mutated Mush"}],
                 "questAss": []
             }),
+        new SourcesBase("EquipmentHats74", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentShirts34", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentPants8", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentShoes34", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("COIN", <SourcesModel>{
                 "sources": [
                     <SourceModel>{"wikiName": "[[Eldritch Croaker]]", "txtName": "Eldritch Croaker"},
@@ -2926,8 +2943,9 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Octodar]]", "txtName": "Octodar"},
                     <SourceModel>{"wikiName": "[[Flombeige]]", "txtName": "Flombeige"},
                     <SourceModel>{"wikiName": "[[Stilted Seeker]]", "txtName": "Stilted Seeker"},
-                    <SourceModel>{"wikiName": "[[Troll]]", "txtName": "Troll"},
+                    <SourceModel>{"wikiName": "[[Massive Troll]]", "txtName": "Massive Troll"},
                     <SourceModel>{"wikiName": "[[Chaotic Troll]]", "txtName": "Chaotic Troll"},
+                    <SourceModel>{"wikiName": "[[Blitzkrieg Troll]]", "txtName": "Blitzkrieg Troll"},
                     <SourceModel>{"wikiName": "[[Mutated Mush]]", "txtName": "Mutated Mush"},
                     <SourceModel>{
                         "wikiName": "[[Colosseum/Dewdrop#Bronze Chest|Dewdrop Bronze Chest]]",
@@ -3330,7 +3348,6 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Efaunt]]", "txtName": "Efaunt"},
                     <SourceModel>{"wikiName": "[[Chaotic Efaunt]]", "txtName": "Chaotic Efaunt"},
                     <SourceModel>{"wikiName": "[[Gilded Efaunt]]", "txtName": "Gilded Efaunt"},
-                    <SourceModel>{"wikiName": "[[Blighted Chizoar]]", "txtName": "Blighted Chizoar"},
                     <SourceModel>{
                         "wikiName": "[[Colosseum/Sandstone#Golden Chest|Sandstone Golden Chest]]",
                         "txtName": "Colosseum: Sandstone Golden Chest"
@@ -3417,6 +3434,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Bloodbone]]", "txtName": "Bloodbone"},
                     <SourceModel>{"wikiName": "[[Chizoar]]", "txtName": "Chizoar"},
                     <SourceModel>{"wikiName": "[[Chaotic Chizoar]]", "txtName": "Chaotic Chizoar"},
+                    <SourceModel>{"wikiName": "[[Blighted Chizoar]]", "txtName": "Blighted Chizoar"},
                     <SourceModel>{
                         "wikiName": "[[Colosseum/Chillsnap#Golden Chest|Chillsnap Golden Chest]]",
                         "txtName": "Colosseum: Chillsnap Golden Chest"
@@ -3455,8 +3473,9 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[TV]]", "txtName": "TV"},
                     <SourceModel>{"wikiName": "[[Donut]]", "txtName": "Donut"},
                     <SourceModel>{"wikiName": "[[Demon Genie]]", "txtName": "Demon Genie"},
-                    <SourceModel>{"wikiName": "[[Troll]]", "txtName": "Troll"},
+                    <SourceModel>{"wikiName": "[[Massive Troll]]", "txtName": "Massive Troll"},
                     <SourceModel>{"wikiName": "[[Chaotic Troll]]", "txtName": "Chaotic Troll"},
+                    <SourceModel>{"wikiName": "[[Blitzkrieg Troll]]", "txtName": "Blitzkrieg Troll"},
                     <SourceModel>{
                         "wikiName": "[[Colosseum/Astro#Bronze Chest|Astro Bronze Chest]]",
                         "txtName": "Colosseum: Astro Bronze Chest"
@@ -3473,8 +3492,9 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Gelatinous Cuboid]]", "txtName": "Gelatinous Cuboid"},
                     <SourceModel>{"wikiName": "[[Choccie]]", "txtName": "Choccie"},
                     <SourceModel>{"wikiName": "[[Biggole Wurm]]", "txtName": "Biggole Wurm"},
-                    <SourceModel>{"wikiName": "[[Troll]]", "txtName": "Troll"},
+                    <SourceModel>{"wikiName": "[[Massive Troll]]", "txtName": "Massive Troll"},
                     <SourceModel>{"wikiName": "[[Chaotic Troll]]", "txtName": "Chaotic Troll"},
+                    <SourceModel>{"wikiName": "[[Blitzkrieg Troll]]", "txtName": "Blitzkrieg Troll"},
                     <SourceModel>{
                         "wikiName": "[[Colosseum/Astro#Silver Chest|Astro Silver Chest]]",
                         "txtName": "Colosseum: Astro Silver Chest"
@@ -3490,8 +3510,9 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Octodar]]", "txtName": "Octodar"},
                     <SourceModel>{"wikiName": "[[Flombeige]]", "txtName": "Flombeige"},
                     <SourceModel>{"wikiName": "[[Stilted Seeker]]", "txtName": "Stilted Seeker"},
-                    <SourceModel>{"wikiName": "[[Troll]]", "txtName": "Troll"},
+                    <SourceModel>{"wikiName": "[[Massive Troll]]", "txtName": "Massive Troll"},
                     <SourceModel>{"wikiName": "[[Chaotic Troll]]", "txtName": "Chaotic Troll"},
+                    <SourceModel>{"wikiName": "[[Blitzkrieg Troll]]", "txtName": "Blitzkrieg Troll"},
                     <SourceModel>{
                         "wikiName": "[[Colosseum/Astro#Golden Chest|Astro Golden Chest]]",
                         "txtName": "Colosseum: Astro Golden Chest"
@@ -4032,7 +4053,10 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Rat]]", "txtName": "Rat"},
                     <SourceModel>{"wikiName": "[[DropTable6]]", "txtName": "DropTable6"},
                     <SourceModel>{"wikiName": "[[DropTable7]]", "txtName": "DropTable7"},
-                    <SourceModel>{"wikiName": "[[DropTable8]]", "txtName": "DropTable8"}
+                    <SourceModel>{"wikiName": "[[DropTable8]]", "txtName": "DropTable8"},
+                    <SourceModel>{"wikiName": "[[DropTable14]]", "txtName": "DropTable14"},
+                    <SourceModel>{"wikiName": "[[DropTable15]]", "txtName": "DropTable15"},
+                    <SourceModel>{"wikiName": "[[DropTable16]]", "txtName": "DropTable16"}
                 ],
                 "recipeFrom": [],
                 "questAss": [
@@ -4195,7 +4219,6 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Radiant Amarok]]", "txtName": "Radiant Amarok"},
                     <SourceModel>{"wikiName": "[[Biggie Hours]]", "txtName": "Biggie Hours"},
                     <SourceModel>{"wikiName": "[[King Doot]]", "txtName": "King Doot"},
-                    <SourceModel>{"wikiName": "[[Blighted Chizoar]]", "txtName": "Blighted Chizoar"},
                     <SourceModel>{"wikiName": "[[SuperDropTable1]]", "txtName": "SuperDropTable1"},
                     <SourceModel>{"wikiName": "[[SuperDropTable2]]", "txtName": "SuperDropTable2"},
                     <SourceModel>{
@@ -4484,10 +4507,6 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Colosseum/Sandstone#Golden Chest|Sandstone Golden Chest]]",
                         "txtName": "Colosseum: Sandstone Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Silver Chest|Astro Silver Chest]]",
-                        "txtName": "Colosseum: Astro Silver Chest"
                     },
                     <SourceModel>{
                         "wikiName": "[[Post Office#Simple Shippin|Simple Shippin]]",
@@ -5249,6 +5268,20 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("StoneZ2", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Blighted Chizoar]]", "txtName": "Blighted Chizoar"},
+                    <SourceModel>{"wikiName": "[[Blitzkrieg Troll]]", "txtName": "Blitzkrieg Troll"},
+                    <SourceModel>{"wikiName": "[[SuperDropTable3]]", "txtName": "SuperDropTable3"},
+                    <SourceModel>{"wikiName": "[[SuperDropTable4]]", "txtName": "SuperDropTable4"},
+                    <SourceModel>{
+                        "wikiName": "[[Loominadi#Journey to the Center of the Blundermines|Journey to the Center of the Blundermines]]",
+                        "txtName": "Loominadi: Journey to the Center of the Blundermines"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("CardsZ12", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Dilapidated Slush]]", "txtName": "Dilapidated Slush"}],
                 "recipeFrom": [],
@@ -5278,10 +5311,6 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Colosseum/Chillsnap#Golden Chest|Chillsnap Golden Chest]]",
                         "txtName": "Colosseum: Chillsnap Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Golden Chest|Astro Golden Chest]]",
-                        "txtName": "Colosseum: Astro Golden Chest"
                     },
                     <SourceModel>{
                         "wikiName": "[[Post Office#Alpine Suppliers|Alpine Suppliers]]",
@@ -5337,6 +5366,11 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("CardsG2", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[TV]]", "txtName": "TV"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("InvStorage22", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[TV]]", "txtName": "TV"}],
                 "recipeFrom": [],
                 "questAss": []
@@ -5447,6 +5481,11 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("InvStorage23", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Biggole Wurm]]", "txtName": "Biggole Wurm"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("GalaxyC1", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Clammie]]", "txtName": "Clammie"}],
                 "recipeFrom": [],
@@ -5498,7 +5537,25 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("CardsZ10", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Troll]]", "txtName": "Troll"}],
+                "sources": [<SourceModel>{"wikiName": "[[Massive Troll]]", "txtName": "Massive Troll"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("ObolTroll", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Massive Troll]]", "txtName": "Massive Troll"},
+                    <SourceModel>{"wikiName": "[[Chaotic Troll]]", "txtName": "Chaotic Troll"},
+                    <SourceModel>{"wikiName": "[[Blitzkrieg Troll]]", "txtName": "Blitzkrieg Troll"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("TrollPart", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Massive Troll]]", "txtName": "Massive Troll"},
+                    <SourceModel>{"wikiName": "[[Chaotic Troll]]", "txtName": "Chaotic Troll"},
+                    <SourceModel>{"wikiName": "[[Blitzkrieg Troll]]", "txtName": "Blitzkrieg Troll"}
+                ],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -5507,8 +5564,32 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("CardsZ17", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Blitzkrieg Troll]]", "txtName": "Blitzkrieg Troll"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("CardsZ13", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Mutated Mush]]", "txtName": "Mutated Mush"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Key4", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Mutated Mush]]", "txtName": "Mutated Mush"},
+                    <SourceModel>{
+                        "wikiName": "[[Colosseum/Astro#Bronze Chest|Astro Bronze Chest]]",
+                        "txtName": "Colosseum: Astro Bronze Chest"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Colosseum/Astro#Silver Chest|Astro Silver Chest]]",
+                        "txtName": "Colosseum: Astro Silver Chest"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Colosseum/Astro#Golden Chest|Astro Golden Chest]]",
+                        "txtName": "Colosseum: Astro Golden Chest"
+                    }
+                ],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -5755,10 +5836,6 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Colosseum/Dewdrop#Golden Chest|Dewdrop Golden Chest]]",
                         "txtName": "Colosseum: Dewdrop Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Bronze Chest|Astro Bronze Chest]]",
-                        "txtName": "Colosseum: Astro Bronze Chest"
                     },
                     <SourceModel>{
                         "wikiName": "[[Post Office#Simple Shippin|Simple Shippin]]",
@@ -8767,6 +8844,11 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("InvStorage14", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[DropTable7]]", "txtName": "DropTable7"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("StoneA2b", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[DropTable7]]", "txtName": "DropTable7"}],
                 "recipeFrom": [],
@@ -9126,18 +9208,6 @@ export const initSourceRepo = () => {
                 "sources": [
                     <SourceModel>{"wikiName": "[[SuperDropTable3]]", "txtName": "SuperDropTable3"},
                     <SourceModel>{"wikiName": "[[Alchemy#Liquid Shop|Grand Obols]]", "txtName": "Alchemy: Grand Obols"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("StoneZ2", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{"wikiName": "[[SuperDropTable3]]", "txtName": "SuperDropTable3"},
-                    <SourceModel>{"wikiName": "[[SuperDropTable4]]", "txtName": "SuperDropTable4"},
-                    <SourceModel>{
-                        "wikiName": "[[Loominadi#Journey to the Center of the Blundermines|Journey to the Center of the Blundermines]]",
-                        "txtName": "Loominadi: Journey to the Center of the Blundermines"
-                    }
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -11016,6 +11086,11 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("InvStorage31", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("InvStorage99", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []

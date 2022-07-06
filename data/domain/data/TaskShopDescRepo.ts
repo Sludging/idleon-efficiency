@@ -418,11 +418,11 @@ export const initTaskShopDescRepo = () => {
                 "number1": 1,
                 "number2": 6,
                 "number3": 2,
-                "totalLevels": 5,
+                "totalLevels": 4,
                 "meritCost": 2,
                 "text1": "bonusGiven",
                 "text2": "BonusPerLv",
-                "extraStr": "Shoes Pants Torso Helmet Pendant SoldOut",
+                "extraStr": "Shoes Pants Torso Helmet SoldOut",
                 "icon": "SmithingRecipes4",
                 "bonusPerLevel": 0
             }),
