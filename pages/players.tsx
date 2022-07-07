@@ -207,7 +207,7 @@ function ShowSkills(props: SkillProps) {
             {
                 props.player.classId == ClassIndex.Maestro &&
                 <Box gap="small">
-                    <Text>Current crystal cooldown reductions: (max is {nFormatter(ccdMax, "Smaller")}%)</Text>
+                    <Text>Current crystal countdown reductions: (max is {nFormatter(ccdMax, "Smaller")}%)</Text>
                     <Box direction="row" wrap>
                         {
                             Array.from(props.skillsMap).map(([skillIndex, skill]) => {
@@ -671,23 +671,30 @@ function EquipmentDisplay({ player }: { player: Player }) {
 
 function StatuesDisplay({ playerStatues, player }: { playerStatues: PlayerStatues | undefined, player: Player }) {
     return (
-        <Box pad="medium" gap="xsmall">
+        <Box pad="medium" gap="medium">
             <Text size='medium'>Statues</Text>
-            {
-                playerStatues ? playerStatues.statues.map((statue, index) => {
-                    return (
-                        <Box key={`statue_${index}`} direction="row" gap="medium">
-                            <Box title={statue.displayName}>
-                                <IconImage data={statue.getImageData()} scale={0.8} />
+            <TextAndLabel
+                label="Total levels"
+                text={(playerStatues ? playerStatues.statues.reduce((sum, statue) => sum += statue.level, 0) : 0).toString()}
+            />
+            <Box>
+                {
+                    playerStatues ? playerStatues.statues.map((statue, index) => {
+                        return (
+                            <Box key={`statue_${index}`} direction="row" gap="medium">
+                                <Box title={statue.displayName}>
+                                    <IconImage data={statue.getImageData()} scale={0.8} />
+                                </Box>
+                                <Text alignSelf="center">Level: {statue.level}</Text>
+                                <Text alignSelf="center">/</Text>
+                                <Text alignSelf="center">{statue.getBonusText(player)}</Text>
                             </Box>
-                            <Text alignSelf="center">Level: {statue.level}</Text>
-                            <Text alignSelf="center">/</Text>
-                            <Text alignSelf="center">{statue.getBonusText(player)}</Text>
-                        </Box>
-                    )
-                }) : <></>
-            }
+                        )
+                    }) : <></>
+                }
+            </Box>
         </Box>
+
     )
 }
 
@@ -1150,7 +1157,7 @@ function ZowInfo({ player }: { player: Player }) {
         if (["TutorialA", "TutorialB", "TutorialC", "TutorialD", "JungleX", "MininggF", "How Did u get here", "Miningg1", "Miningg2", "Outer World Town",
             "Spike Surprise", "YumYum Grotto", "Salty Shores", "Faraway Piers", "Filler", "Deepwater Docks", "Bandit Bob's Hideout", "Frostbite Towndra",
             "Tunnels Entrance", "Trappers Folley", "Freefall Caverns", "The Ol' Straightaway", "Slip Slidy Ledges", "Echoing Egress",
-            "Blunder Hills", "JungleZ", "PlayerSelect", "Efaunt's Tomb", "The Roots", "Mummy Memorial", "Gravel Tomb", "Heaty Hole", "End Of The Road", "Z", "Eycicles's Nest", "The Office"].includes(area)) {
+            "Blunder Hills", "JungleZ", "PlayerSelect", "Efaunt's Tomb", "The Roots", "Mummy Memorial", "Gravel Tomb", "Heaty Hole", "End Of The Road", "Z", "Eycicles's Nest", "The Office", "Enclave a la Troll"].includes(area)) {
             return true;
         }
         return false;
