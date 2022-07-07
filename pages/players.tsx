@@ -19,15 +19,15 @@ import { GemStore } from '../data/domain/gemPurchases';
 
 import { Activity, Player, SkillData } from '../data/domain/player';
 import { SkillsIndex } from "../data/domain/SkillsIndex";
-import { ClassIndex, ClassTalentMap, GetTalentArray, TalentConst } from '../data/domain/talents';
+import { ClassIndex, ClassTalentMap, GetTalentArray } from '../data/domain/talents';
 import { CapacityConst, playerInventoryBagMapping } from '../data/domain/capacity';
-import { Alchemy, AlchemyConst, CauldronIndex, Bubble } from "../data/domain/alchemy";
-import { Stamp, StampTab, StampConsts } from '../data/domain/stamps';
+import { Alchemy, Bubble } from "../data/domain/alchemy";
+import { Stamp } from '../data/domain/stamps';
 import { Shrine, ShrineConstants } from '../data/domain/shrines';
-import { PlayerStatues, StatueConst } from '../data/domain/statues';
+import { PlayerStatues } from '../data/domain/statues';
 import { PostOfficeConst, PostOfficeExtra } from '../data/domain/postoffice'
 
-import { getCoinsArray, lavaFunc, toTime, notUndefined, round, nFormatter } from '../data/utility';
+import { getCoinsArray, lavaFunc, notUndefined, nFormatter } from '../data/utility';
 import CoinsDisplay from '../components/coinsDisplay';
 import { css } from 'styled-components'
 import ShadowBox from '../components/base/ShadowBox';
@@ -35,7 +35,7 @@ import TipDisplay, { TipDirection } from '../components/base/TipDisplay';
 import { Next } from 'grommet-icons';
 import { NextSeo } from 'next-seo';
 import { MouseEventHandler } from 'hoist-non-react-statics/node_modules/@types/react';
-import { Item, ItemStat, ItemSources, Food, DropSource } from '../data/domain/items';
+import { Item, ItemStat, Food, DropSource } from '../data/domain/items';
 import { Storage } from '../data/domain/storage';
 import { Prayer } from '../data/domain/prayers';
 import { TimeDown, TimeUp } from '../components/base/TimeDisplay';
@@ -44,10 +44,8 @@ import ObolsInfo from '../components/account/task-board/obolsInfo';
 import TextAndLabel, { ComponentAndLabel } from '../components/base/TextAndLabel';
 import { Bribe, BribeStatus } from '../data/domain/bribes';
 import { Skilling } from '../data/domain/skilling';
-import { SaltLick } from '../data/domain/saltLick';
 import { Family } from '../data/domain/family';
 import { Achievement, AchievementConst } from '../data/domain/achievements';
-import { Dungeons, PassiveType } from '../data/domain/dungeons';
 import { MapInfo } from '../data/domain/maps';
 import { EnemyInfo } from '../data/domain/enemies';
 import Stat from '../components/base/Stat';
@@ -277,36 +275,6 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
         }
     }, [worship, player])
 
-    const crystalSpawnChance = useMemo(() => {
-        const theData = appContext.data.getData();
-        const stamps = theData.get("stamps") as Stamp[][];
-        const shrines = theData.get("shrines") as Shrine[];
-
-        let crystalSpawnStamp = 0;
-        if (stamps) {
-            crystalSpawnStamp = stamps[StampTab.Misc][StampConsts.CrystallinIndex].getBonus();
-        }
-
-        const shrineCardBonus = player.cardInfo?.equippedCards.find((card) => card.id == "Boss3B")?.getBonus() ?? 0;
-        const shrineBonus = shrines[ShrineConstants.CrystalShrine].getBonus(player.currentMapId, shrineCardBonus);
-        const cardBonus = player.cardInfo?.equippedCards.filter((card) => card.data.effect.includes("Crystal Mob Spawn Chance")).reduce((sum, card) => sum += card.getBonus(), 0) ?? 0;
-        const crystalSpawnTalentBonus = player.talents.find(x => x.skillIndex == TalentConst.CrystalSpawnIndex)?.getBonus() ?? 0;
-        const crystalForDaysTalentBonus = player.talents.find(x => x.skillIndex == TalentConst.CrystalForDaysIndex)?.getBonus() ?? 0;
-
-        let postOfficeBonus = 0;
-        if (player.postOffice) {
-            const nonPredatoryBox = player.postOffice[PostOfficeConst.NonPredatoryBoxIndex];
-            postOfficeBonus = nonPredatoryBox.level > 0 ? nonPredatoryBox.bonuses[2].getBonus(nonPredatoryBox.level, 2) : 0;
-        }
-
-        return 5e-4 *
-            (1 + crystalSpawnTalentBonus / 100) *
-            (1 + (postOfficeBonus + shrineBonus) / 100) *
-            (1 + crystalForDaysTalentBonus / 100) *
-            (1 + crystalSpawnStamp / 100) *
-            (1 + cardBonus / 100);
-    }, [appContext, player])
-
 
     const secondsSinceUpdate = useMemo(() => {
         const lastUpdated = appContext.data.getLastUpdated(true) as Date | undefined;
@@ -380,7 +348,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     <Text size="small">AGI = {player.stats.agility}</Text>
                     <Text size="small">WIS = {player.stats.wisdom}</Text>
                     <Text size="small">LUK = {player.stats.luck}</Text>
-                    <Text size="small">Crystal Spawn Chance = 1 in {Math.floor(1 / crystalSpawnChance)}</Text>
+                    <Stat stat={player.crystalChance} />
                     <Stat stat={player.doubleClaimChance} />
                     <Stat stat={player.monsterCash} />
                     {playerWorshipInfo.maxCharge > 0 &&
