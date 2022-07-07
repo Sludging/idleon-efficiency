@@ -237,7 +237,7 @@ export const initJewelRepo = () => {
                 "x": 1365,
                 "y": 100,
                 "range": 90,
-                "effect": "All meal bonuses, as shown in the Dinner Table Menu, actaully give 1.}x higher bonus than what is shown. So if a bonus says +100%, it is actually giving +1}%",
+                "effect": "All meal bonuses, as shown in the Dinner Table Menu, actaully give 1.}x higher bonus than what is shown. So if a bonus says +100%, it is actually giving +1}%. @ Doesn't apply to Line Width bonus.",
                 "description": "Bolsters meals",
                 "requirements": [
                     <ComponentModel>{"item": "GalaxyC1b", "quantity": 300},

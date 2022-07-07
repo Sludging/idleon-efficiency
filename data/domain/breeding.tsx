@@ -335,20 +335,22 @@ export const parseBreeding = (petsStored: any[][], pets: any[][], optionsList: a
     const territoryFightsWon = parseInt(optionsList[85] as string);
 
     territory.forEach((territory, index) => {
-        if (index < breeding.territory.length) {
-            breeding.territory[index].unlocked = index < territoryFightsWon;
-            breeding.territory[index].currentProgress = territory[0];
-            breeding.territory[index].currentForagingRound = territory[1]; // number of foraging rounds passed
+        // Lava does some weird math to skip territory 14 in some scenarios.
+        const tIndex = Math.round(index + Math.floor((index + 86.1) / 100))
+        if (tIndex < breeding.territory.length) {
+            breeding.territory[tIndex].unlocked = index < territoryFightsWon;
+            breeding.territory[tIndex].currentProgress = territory[0];
+            breeding.territory[tIndex].currentForagingRound = territory[1]; // number of foraging rounds passed
 
             // Check index 3, 5, and 7. If not blank, 
             // then get the name from that index and the current spice count from the next index.
-            breeding.territory[index].spiceRewards = [3, 5, 7]
+            breeding.territory[tIndex].spiceRewards = [3, 5, 7]
                 .filter(i => territory[i] && territory[i] != 'Blank')
                 .map(i => ({ type: territory[i], count: territory[i + 1] }));
 
             const territoryPets = pets.slice(27 + (4 * index), 27 + (4 * index) + 4);
             territoryPets.forEach(pet => {
-                breeding.territory[index].pets.push(new Pet(pet[0] as string, breeding.genes[pet[1] as number], pet[2] as number));
+                breeding.territory[tIndex].pets.push(new Pet(pet[0] as string, breeding.genes[pet[1] as number], pet[2] as number));
             })
         }
     })
@@ -376,13 +378,18 @@ export const updateBreeding = (data: Map<string, any>) => {
     breeding.skillLevel = players[0].skills.get(SkillsIndex.Breeding)?.level ?? 0;
 
     // We don't actually need to do this inside the "update" function, but feels more right.
-    breeding.territory.forEach((territory, index) => {
+    breeding.territory.filter(territory => territory.index != 14).forEach((territory, index) => {
+        // Lava does some weird math to skip territory 14 in some scenarios.
+        const tIndex = Math.round(index + Math.floor((index + 86.1) / 100))
+        const beforeIndex = index == 14 ? 13 : tIndex - 1;
+        const afterIndex = index == 13 ? 15 : tIndex + 1;
         territory.setTrekInfo(
-            breeding.territory[index-1] ? breeding.territory[index-1].pets : [],
-            breeding.territory[index+1] ? breeding.territory[index+1].pets : [],
+            breeding.territory[beforeIndex] ? breeding.territory[beforeIndex].pets : [],
+            breeding.territory[afterIndex] ? breeding.territory[afterIndex].pets : [],
             breeding.upgrade[6].getBonus() / 100
         )
     })
 
     return breeding;
 }
+

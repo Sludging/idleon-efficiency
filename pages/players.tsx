@@ -17,17 +17,17 @@ import { useState, useEffect, useContext, useMemo } from 'react';
 import { AppContext } from '../data/appContext'
 import { GemStore } from '../data/domain/gemPurchases';
 
-import { Player, SkillData } from '../data/domain/player';
+import { Activity, Player, SkillData } from '../data/domain/player';
 import { SkillsIndex } from "../data/domain/SkillsIndex";
-import { ClassIndex, ClassTalentMap, GetTalentArray, TalentConst } from '../data/domain/talents';
+import { ClassIndex, ClassTalentMap, GetTalentArray } from '../data/domain/talents';
 import { CapacityConst, playerInventoryBagMapping } from '../data/domain/capacity';
-import { Alchemy, AlchemyConst, CauldronIndex, Bubble } from "../data/domain/alchemy";
-import { Stamp, StampTab, StampConsts } from '../data/domain/stamps';
+import { Alchemy, Bubble } from "../data/domain/alchemy";
+import { Stamp } from '../data/domain/stamps';
 import { Shrine, ShrineConstants } from '../data/domain/shrines';
-import { PlayerStatues, StatueConst } from '../data/domain/statues';
+import { PlayerStatues } from '../data/domain/statues';
 import { PostOfficeConst, PostOfficeExtra } from '../data/domain/postoffice'
 
-import { getCoinsArray, lavaFunc, toTime, notUndefined, round, nFormatter } from '../data/utility';
+import { getCoinsArray, lavaFunc, notUndefined, nFormatter } from '../data/utility';
 import CoinsDisplay from '../components/coinsDisplay';
 import { css } from 'styled-components'
 import ShadowBox from '../components/base/ShadowBox';
@@ -35,7 +35,7 @@ import TipDisplay, { TipDirection } from '../components/base/TipDisplay';
 import { Next } from 'grommet-icons';
 import { NextSeo } from 'next-seo';
 import { MouseEventHandler } from 'hoist-non-react-statics/node_modules/@types/react';
-import { Item, ItemStat, ItemSources, Food, DropSource } from '../data/domain/items';
+import { Item, ItemStat, Food, DropSource } from '../data/domain/items';
 import { Storage } from '../data/domain/storage';
 import { Prayer } from '../data/domain/prayers';
 import { TimeDown, TimeUp } from '../components/base/TimeDisplay';
@@ -44,10 +44,8 @@ import ObolsInfo from '../components/account/task-board/obolsInfo';
 import TextAndLabel, { ComponentAndLabel } from '../components/base/TextAndLabel';
 import { Bribe, BribeStatus } from '../data/domain/bribes';
 import { Skilling } from '../data/domain/skilling';
-import { SaltLick } from '../data/domain/saltLick';
 import { Family } from '../data/domain/family';
 import { Achievement, AchievementConst } from '../data/domain/achievements';
-import { Dungeons, PassiveType } from '../data/domain/dungeons';
 import { MapInfo } from '../data/domain/maps';
 import { EnemyInfo } from '../data/domain/enemies';
 import Stat from '../components/base/Stat';
@@ -207,7 +205,7 @@ function ShowSkills(props: SkillProps) {
             {
                 props.player.classId == ClassIndex.Maestro &&
                 <Box gap="small">
-                    <Text>Current crystal cooldown reductions: (max is {nFormatter(ccdMax, "Smaller")}%)</Text>
+                    <Text>Current crystal countdown reductions: (max is {nFormatter(ccdMax, "Smaller")}%)</Text>
                     <Box direction="row" wrap>
                         {
                             Array.from(props.skillsMap).map(([skillIndex, skill]) => {
@@ -277,36 +275,6 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
         }
     }, [worship, player])
 
-    const crystalSpawnChance = useMemo(() => {
-        const theData = appContext.data.getData();
-        const stamps = theData.get("stamps") as Stamp[][];
-        const shrines = theData.get("shrines") as Shrine[];
-
-        let crystalSpawnStamp = 0;
-        if (stamps) {
-            crystalSpawnStamp = stamps[StampTab.Misc][StampConsts.CrystallinIndex].getBonus();
-        }
-
-        const shrineCardBonus = player.cardInfo?.equippedCards.find((card) => card.id == "Boss3B")?.getBonus() ?? 0;
-        const shrineBonus = shrines[ShrineConstants.CrystalShrine].getBonus(player.currentMapId, shrineCardBonus);
-        const cardBonus = player.cardInfo?.equippedCards.filter((card) => card.data.effect.includes("Crystal Mob Spawn Chance")).reduce((sum, card) => sum += card.getBonus(), 0) ?? 0;
-        const crystalSpawnTalentBonus = player.talents.find(x => x.skillIndex == TalentConst.CrystalSpawnIndex)?.getBonus() ?? 0;
-        const crystalForDaysTalentBonus = player.talents.find(x => x.skillIndex == TalentConst.CrystalForDaysIndex)?.getBonus() ?? 0;
-
-        let postOfficeBonus = 0;
-        if (player.postOffice) {
-            const nonPredatoryBox = player.postOffice[PostOfficeConst.NonPredatoryBoxIndex];
-            postOfficeBonus = nonPredatoryBox.level > 0 ? nonPredatoryBox.bonuses[2].getBonus(nonPredatoryBox.level, 2) : 0;
-        }
-
-        return 5e-4 *
-            (1 + crystalSpawnTalentBonus / 100) *
-            (1 + (postOfficeBonus + shrineBonus) / 100) *
-            (1 + crystalForDaysTalentBonus / 100) *
-            (1 + crystalSpawnStamp / 100) *
-            (1 + cardBonus / 100);
-    }, [appContext, player])
-
 
     const secondsSinceUpdate = useMemo(() => {
         const lastUpdated = appContext.data.getLastUpdated(true) as Date | undefined;
@@ -349,7 +317,17 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                             </Box>
                         </Box>
                     </Box>
-                    <Text size="small">Current Monster / Map = {player.currentMonster} / {player.currentMap}</Text>
+                    <ComponentAndLabel
+                        label="Activity"
+                        component={
+                            <Box direction="row" gap="xsmall" align="center">
+                                <IconImage data={player.getActivityIcon()} scale={0.6} />
+                                <Text size="small">{Activity[player.getActivityType()]}</Text>
+                                <Text>|</Text>
+                                <Text size="small">{player.currentMonster?.details.Name}</Text>
+                            </Box>
+                        }
+                    />
                     {
                         player.killInfo.has(player.currentMapId) &&
                         (MapInfo[player.currentMapId].data.portalRequirements ?? []).reduce((sum, req) => sum += req, 0) > 0 &&
@@ -370,7 +348,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     <Text size="small">AGI = {player.stats.agility}</Text>
                     <Text size="small">WIS = {player.stats.wisdom}</Text>
                     <Text size="small">LUK = {player.stats.luck}</Text>
-                    <Text size="small">Crystal Spawn Chance = 1 in {Math.floor(1 / crystalSpawnChance)}</Text>
+                    <Stat stat={player.crystalChance} />
                     <Stat stat={player.doubleClaimChance} />
                     <Stat stat={player.monsterCash} />
                     {playerWorshipInfo.maxCharge > 0 &&
@@ -661,23 +639,30 @@ function EquipmentDisplay({ player }: { player: Player }) {
 
 function StatuesDisplay({ playerStatues, player }: { playerStatues: PlayerStatues | undefined, player: Player }) {
     return (
-        <Box pad="medium" gap="xsmall">
+        <Box pad="medium" gap="medium">
             <Text size='medium'>Statues</Text>
-            {
-                playerStatues ? playerStatues.statues.map((statue, index) => {
-                    return (
-                        <Box key={`statue_${index}`} direction="row" gap="medium">
-                            <Box title={statue.displayName}>
-                                <IconImage data={statue.getImageData()} scale={0.8} />
+            <TextAndLabel
+                label="Total levels"
+                text={(playerStatues ? playerStatues.statues.reduce((sum, statue) => sum += statue.level, 0) : 0).toString()}
+            />
+            <Box>
+                {
+                    playerStatues ? playerStatues.statues.map((statue, index) => {
+                        return (
+                            <Box key={`statue_${index}`} direction="row" gap="medium">
+                                <Box title={statue.displayName}>
+                                    <IconImage data={statue.getImageData()} scale={0.8} />
+                                </Box>
+                                <Text alignSelf="center">Level: {statue.level}</Text>
+                                <Text alignSelf="center">/</Text>
+                                <Text alignSelf="center">{statue.getBonusText(player)}</Text>
                             </Box>
-                            <Text alignSelf="center">Level: {statue.level}</Text>
-                            <Text alignSelf="center">/</Text>
-                            <Text alignSelf="center">{statue.getBonusText(player)}</Text>
-                        </Box>
-                    )
-                }) : <></>
-            }
+                        )
+                    }) : <></>
+                }
+            </Box>
         </Box>
+
     )
 }
 
@@ -1140,7 +1125,7 @@ function ZowInfo({ player }: { player: Player }) {
         if (["TutorialA", "TutorialB", "TutorialC", "TutorialD", "JungleX", "MininggF", "How Did u get here", "Miningg1", "Miningg2", "Outer World Town",
             "Spike Surprise", "YumYum Grotto", "Salty Shores", "Faraway Piers", "Filler", "Deepwater Docks", "Bandit Bob's Hideout", "Frostbite Towndra",
             "Tunnels Entrance", "Trappers Folley", "Freefall Caverns", "The Ol' Straightaway", "Slip Slidy Ledges", "Echoing Egress",
-            "Blunder Hills", "JungleZ", "PlayerSelect", "Efaunt's Tomb", "The Roots", "Mummy Memorial", "Gravel Tomb", "Heaty Hole", "End Of The Road", "Z", "Eycicles's Nest", "The Office"].includes(area)) {
+            "Blunder Hills", "JungleZ", "PlayerSelect", "Efaunt's Tomb", "The Roots", "Mummy Memorial", "Gravel Tomb", "Heaty Hole", "End Of The Road", "Z", "Eycicles's Nest", "The Office", "Enclave a la Troll"].includes(area)) {
             return true;
         }
         return false;
@@ -1380,9 +1365,12 @@ const CustomTabTitle = ({ player, isActive }: { player: Player, isActive: boolea
         <Box margin={{ right: 'xsmall' }}>
             <IconImage data={player.getClassImageData()} scale={0.6} />
         </Box>
-        <Text size="xsmall" color={isActive ? 'brand' : 'accent-2'}>
-            {player.playerName ? player.playerName : `Character ${player.playerID}`}
-        </Text>
+        <Box margin={{ right: 'xsmall' }}>
+            <Text size="xsmall" color={isActive ? 'brand' : 'accent-2'}>
+                {player.playerName ? player.playerName : `Character ${player.playerID}`}
+            </Text>
+        </Box>
+        {/* <IconImage data={player.getActivityIcon()} scale={0.4} /> */}
     </Box>
 );
 

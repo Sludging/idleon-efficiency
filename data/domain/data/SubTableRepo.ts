@@ -89,7 +89,6 @@ export const initSubTableRepo = () => {
                     <SubTableModel>{"name": "crabcake", "chance": 0.0036, "quantity": 1},
                     <SubTableModel>{"name": "babaHour", "chance": 0.5, "quantity": 1},
                     <SubTableModel>{"name": "Boss2A", "chance": 1, "quantity": 2},
-                    <SubTableModel>{"name": "Boss4C", "chance": 1, "quantity": 2},
                     <SubTableModel>{"name": "ChestA2", "chance": 1, "quantity": 1}
                 ]
             }),
@@ -103,7 +102,6 @@ export const initSubTableRepo = () => {
                     <SubTableModel>{"name": "potato", "chance": 0.0039, "quantity": 1},
                     <SubTableModel>{"name": "Boss2A", "chance": 1, "quantity": 2},
                     <SubTableModel>{"name": "Boss2B", "chance": 1, "quantity": 2},
-                    <SubTableModel>{"name": "Boss4C", "chance": 1, "quantity": 2},
                     <SubTableModel>{"name": "ChestB2", "chance": 1, "quantity": 1}
                 ]
             }),
@@ -117,8 +115,6 @@ export const initSubTableRepo = () => {
                     <SubTableModel>{"name": "Boss2A", "chance": 1, "quantity": 2},
                     <SubTableModel>{"name": "Boss2B", "chance": 1, "quantity": 2},
                     <SubTableModel>{"name": "Boss2C", "chance": 1, "quantity": 2},
-                    <SubTableModel>{"name": "Boss3C", "chance": 1, "quantity": 2},
-                    <SubTableModel>{"name": "Boss4C", "chance": 1, "quantity": 2},
                     <SubTableModel>{"name": "ChestC2", "chance": 1, "quantity": 1}
                 ]
             }),
@@ -184,6 +180,7 @@ export const initSubTableRepo = () => {
                     <SubTableModel>{"name": "skele2", "chance": 0.005, "quantity": 1},
                     <SubTableModel>{"name": "Boss3A", "chance": 1, "quantity": 2},
                     <SubTableModel>{"name": "Boss3B", "chance": 1, "quantity": 2},
+                    <SubTableModel>{"name": "Boss3C", "chance": 1, "quantity": 2},
                     <SubTableModel>{"name": "ChestC3", "chance": 1, "quantity": 1}
                 ]
             }),
@@ -211,6 +208,7 @@ export const initSubTableRepo = () => {
                     <SubTableModel>{"name": "demonP", "chance": 0.0034, "quantity": 1},
                     <SubTableModel>{"name": "Boss4A", "chance": 1, "quantity": 2},
                     <SubTableModel>{"name": "Boss4B", "chance": 1, "quantity": 2},
+                    <SubTableModel>{"name": "Boss4C", "chance": 1, "quantity": 2},
                     <SubTableModel>{"name": "ChestA4", "chance": 1, "quantity": 1}
                 ]
             }),
@@ -224,6 +222,7 @@ export const initSubTableRepo = () => {
                     <SubTableModel>{"name": "w4b5", "chance": 0.0033, "quantity": 1},
                     <SubTableModel>{"name": "Boss4A", "chance": 1, "quantity": 2},
                     <SubTableModel>{"name": "Boss4B", "chance": 1, "quantity": 2},
+                    <SubTableModel>{"name": "Boss4C", "chance": 1, "quantity": 2},
                     <SubTableModel>{"name": "ChestB4", "chance": 1, "quantity": 1}
                 ]
             }),
@@ -236,6 +235,7 @@ export const initSubTableRepo = () => {
                     <SubTableModel>{"name": "w4c4", "chance": 0.0032, "quantity": 1},
                     <SubTableModel>{"name": "Boss4A", "chance": 1, "quantity": 2},
                     <SubTableModel>{"name": "Boss4B", "chance": 1, "quantity": 2},
+                    <SubTableModel>{"name": "Boss4C", "chance": 1, "quantity": 2},
                     <SubTableModel>{"name": "ChestC4", "chance": 1, "quantity": 1}
                 ]
             }),
@@ -337,7 +337,6 @@ export const initSubTableRepo = () => {
                     <SubTableModel>{"name": "crabcake", "chance": 2.16e-05, "quantity": 1},
                     <SubTableModel>{"name": "babaHour", "chance": 0.003, "quantity": 1},
                     <SubTableModel>{"name": "Boss2A", "chance": 0.006, "quantity": 2},
-                    <SubTableModel>{"name": "Boss4C", "chance": 0.006, "quantity": 2},
                     <SubTableModel>{"name": "ChestA2", "chance": 0.006, "quantity": 1},
                     <SubTableModel>{"name": "Crystal1", "chance": 0.003, "quantity": 1},
                     <SubTableModel>{"name": "shovelR", "chance": 1.92e-05, "quantity": 1},
@@ -347,7 +346,6 @@ export const initSubTableRepo = () => {
                     <SubTableModel>{"name": "potato", "chance": 2.34e-05, "quantity": 1},
                     <SubTableModel>{"name": "Boss2A", "chance": 0.006, "quantity": 2},
                     <SubTableModel>{"name": "Boss2B", "chance": 0.006, "quantity": 2},
-                    <SubTableModel>{"name": "Boss4C", "chance": 0.006, "quantity": 2},
                     <SubTableModel>{"name": "ChestB2", "chance": 0.006, "quantity": 1},
                     <SubTableModel>{"name": "Crystal1", "chance": 0.0024, "quantity": 1},
                     <SubTableModel>{"name": "steak", "chance": 1.92e-05, "quantity": 1},
@@ -357,8 +355,6 @@ export const initSubTableRepo = () => {
                     <SubTableModel>{"name": "Boss2A", "chance": 0.006, "quantity": 2},
                     <SubTableModel>{"name": "Boss2B", "chance": 0.006, "quantity": 2},
                     <SubTableModel>{"name": "Boss2C", "chance": 0.006, "quantity": 2},
-                    <SubTableModel>{"name": "Boss3C", "chance": 0.006, "quantity": 2},
-                    <SubTableModel>{"name": "Boss4C", "chance": 0.006, "quantity": 2},
                     <SubTableModel>{"name": "ChestC2", "chance": 0.006, "quantity": 1},
                     <SubTableModel>{"name": "Crystal1", "chance": 0.0036, "quantity": 1},
                     <SubTableModel>{"name": "FishSmall", "chance": 7.2e-05, "quantity": 1},
@@ -409,6 +405,7 @@ export const initSubTableRepo = () => {
                     <SubTableModel>{"name": "skele2", "chance": 3e-05, "quantity": 1},
                     <SubTableModel>{"name": "Boss3A", "chance": 0.006, "quantity": 2},
                     <SubTableModel>{"name": "Boss3B", "chance": 0.006, "quantity": 2},
+                    <SubTableModel>{"name": "Boss3C", "chance": 0.006, "quantity": 2},
                     <SubTableModel>{"name": "ChestC3", "chance": 0.006, "quantity": 1},
                     <SubTableModel>{"name": "Crystal2", "chance": 0.0036, "quantity": 1},
                     <SubTableModel>{"name": "SaharanFoal", "chance": 5.34e-05, "quantity": 1},
@@ -428,6 +425,7 @@ export const initSubTableRepo = () => {
                     <SubTableModel>{"name": "demonP", "chance": 2.04e-05, "quantity": 1},
                     <SubTableModel>{"name": "Boss4A", "chance": 0.006, "quantity": 2},
                     <SubTableModel>{"name": "Boss4B", "chance": 0.006, "quantity": 2},
+                    <SubTableModel>{"name": "Boss4C", "chance": 0.006, "quantity": 2},
                     <SubTableModel>{"name": "ChestA4", "chance": 0.006, "quantity": 1},
                     <SubTableModel>{"name": "Crystal3", "chance": 0.003, "quantity": 1},
                     <SubTableModel>{"name": "w4b2", "chance": 1.62e-05, "quantity": 1},
@@ -437,6 +435,7 @@ export const initSubTableRepo = () => {
                     <SubTableModel>{"name": "w4b5", "chance": 1.98e-05, "quantity": 1},
                     <SubTableModel>{"name": "Boss4A", "chance": 0.006, "quantity": 2},
                     <SubTableModel>{"name": "Boss4B", "chance": 0.006, "quantity": 2},
+                    <SubTableModel>{"name": "Boss4C", "chance": 0.006, "quantity": 2},
                     <SubTableModel>{"name": "ChestB4", "chance": 0.006, "quantity": 1},
                     <SubTableModel>{"name": "Crystal3", "chance": 0.0024, "quantity": 1},
                     <SubTableModel>{"name": "w4c1", "chance": 1.5e-05, "quantity": 1},
@@ -445,6 +444,7 @@ export const initSubTableRepo = () => {
                     <SubTableModel>{"name": "w4c4", "chance": 1.92e-05, "quantity": 1},
                     <SubTableModel>{"name": "Boss4A", "chance": 0.006, "quantity": 2},
                     <SubTableModel>{"name": "Boss4B", "chance": 0.006, "quantity": 2},
+                    <SubTableModel>{"name": "Boss4C", "chance": 0.006, "quantity": 2},
                     <SubTableModel>{"name": "ChestC4", "chance": 0.006, "quantity": 1},
                     <SubTableModel>{"name": "AlienTree", "chance": 4.89e-05, "quantity": 2},
                     <SubTableModel>{"name": "Tree8", "chance": 5.34e-05, "quantity": 1},

@@ -275,7 +275,7 @@ export const initMealRepo = () => {
                 "cookingReq": 8000000,
                 "bonusQty": 2,
                 "bonusText": "+{% skilling prowess",
-                "description": "Leek! More importantly, prowess lowers the efficiency needed when AFK bar is orange.",
+                "description": "Prowess lowers the efficiency needed when efficiency bar is orange in AFK info",
                 "bonusKey": "Sprow"
             }),
         new MealBase(34, <MealModel>{
@@ -396,7 +396,7 @@ export const initMealRepo = () => {
                 "bonusQty": 3,
                 "bonusText": "+{% Total Damage",
                 "description": "This thing has gotta weigh at least 30!",
-                "bonusKey": "non"
+                "bonusKey": "TotDmg"
             }),
         new MealBase(49, <MealModel>{
                 "name": "Turkey a la Thank",

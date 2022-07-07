@@ -73,5 +73,9 @@ export enum RandoListDescriptionsEnum {
     killroyRoomsW4 = "killroyRoomsW4",
     idk9 = "idk9",
     idk10 = "idk10",
-    idk11 = "idk11"
+    idk11 = "idk11",
+    idk12 = "idk12",
+    idk13 = "idk13",
+    idk14 = "idk14",
+    idk15 = "idk15"
 }

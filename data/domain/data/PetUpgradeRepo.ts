@@ -86,8 +86,8 @@ export const initPetUpgradeRepo = () => {
                 "baseCost": 10,
                 "costScale": 9,
                 "maxLevel": 10,
-                "description": "Unlocks the 3rd Breeding Multiplier, Rarity. Whenever you incubate with a full incubator, theres a chance to increase the rarity of another egg!",
-                "boostEffect": "}x Rarity Chance",
+                "description": "Unlocks the 3rd Breeding Multi, Rarity. When the egg incubator is full, theres a chance to increase the rarity of another egg!",
+                "boostEffect": "}x Chance",
                 "bonusQty": 1
             }),
         new PetUpgradeBase(6, <PetUpgradeModel>{
@@ -142,9 +142,9 @@ export const initPetUpgradeRepo = () => {
                 "baseCost": 10,
                 "costScale": 5,
                 "maxLevel": 20,
-                "description": "Your New Pet Chance is multiplied by the number below for every 25 kitchen upgrade levels across all kitchens! This is SUPER important!",
-                "boostEffect": "}x Multiplier per 100 Upg",
-                "bonusQty": 0.05
+                "description": "Your New Pet Chance is multiplied for every 100 kitchen upgrade levels across all kitchens! So 200 Lvs would apply it twice!!",
+                "boostEffect": "}x Multiplier every 100 Upg",
+                "bonusQty": 0.02
             }),
         new PetUpgradeBase(10, <PetUpgradeModel>{
                 "upgradeName": "Failsafe Restitution Cloud",
