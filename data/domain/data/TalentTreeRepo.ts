@@ -4963,7 +4963,7 @@ export const initTalentTreeRepo = () => {
                     },
                     "American Tipper": <TalentModel>{
                         "name": "American Tipper",
-                        "description": "+{% Cash per 10 Levels of your Cooking Skill. This one isn't additive with any other bonus!",
+                        "description": "+{% Cash per 10 Levels of your Cooking Skill.",
                         "x1": 80,
                         "x2": 100,
                         "funcX": "decay",

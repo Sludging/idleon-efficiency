@@ -295,7 +295,7 @@ export class Alchemy {
 
     _shouldBoostPlayer = (player: Player, cauldron: CauldronIndex, bubble: number) => {
         // 2nd bubble doesn't boost active talents.
-        if (this.cauldrons[cauldron].bubbles[bubble].data.boostKey.includes("ACTIVE")) {
+        if (this.cauldrons[cauldron].bubbles[bubble].data.bonusKey.includes("ACTIVE")) {
             return false;
         }
 

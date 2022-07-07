@@ -940,7 +940,7 @@ export const initMapDataRepo = () => {
         new MapDataBase(155, <MapDataModel>{
                 "enemy": "w4b2",
                 "world": "Hyperion Nebula",
-                "map": <MapNameModel>{"intName": "xSpaceB1", "name": "Moutainous Deugh", "id": 155},
+                "map": <MapNameModel>{"intName": "xSpaceB1", "name": "Mountainous Deugh", "id": 155},
                 "portalRequirements": [100000]
             }),
         new MapDataBase(156, <MapDataModel>{
@@ -998,9 +998,9 @@ export const initMapDataRepo = () => {
                 "portalRequirements": [250]
             }),
         new MapDataBase(165, <MapDataModel>{
-                "enemy": "Z",
+                "enemy": "w4c4",
                 "world": "Hyperion Nebula",
-                "map": <MapNameModel>{"intName": "xSpaceCBOSS", "name": "Z", "id": 165},
+                "map": <MapNameModel>{"intName": "xSpaceCBOSS", "name": "Enclave a la Troll", "id": 165},
                 "portalRequirements": [700]
             }),
         new MapDataBase(166, <MapDataModel>{

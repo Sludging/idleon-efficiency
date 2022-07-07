@@ -1,12 +1,12 @@
 import { Capacity } from './capacity';
 import { StarSignMap, StarSign } from './starsigns';
-import { Box, initPostOffice } from './postoffice';
-import { ClassIndex, Talent, ClassTalentMap, GetTalentArray } from './talents';
+import { Box, initPostOffice, PostOfficeConst } from './postoffice';
+import { ClassIndex, Talent, ClassTalentMap, GetTalentArray, TalentConst } from './talents';
 import { Card, CardInfo } from "./cards";
 import { Item, Food, Tool, StoneProps } from "./items";
 import { notUndefined } from '../utility';
 import { Cloudsave } from "./cloudsave";
-import { EnemyInfo } from "./enemies";
+import { EnemyData, EnemyInfo } from "./enemies";
 import { MapInfo } from "./maps";
 import { Chip, chipSlotReq, Lab } from "./lab";
 import { Alchemy, Bubble, CauldronIndex } from "./alchemy";
@@ -18,7 +18,7 @@ import { Prayer } from "./prayers";
 import { Cooking } from "./cooking";
 import { Breeding } from "./breeding";
 import { Dungeons, PassiveType } from "./dungeons";
-import { Stamp } from "./stamps";
+import { Stamp, StampConsts, StampTab } from "./stamps";
 import { Achievement, AchievementConst } from "./achievements";
 import { safeJsonParse } from "./idleonData";
 import { Arcade } from "./arcade";
@@ -26,6 +26,8 @@ import { ObolsData, ObolStats } from "./obols";
 import { ImageData } from "./imageData";
 import { Sigils } from "./sigils";
 import { SkillsIndex } from './SkillsIndex';
+import { AFKTypeEnum } from './enum/aFKTypeEnum';
+import { Shrine, ShrineConstants } from './shrines';
 
 export class PlayerStats {
     strength: number = 0;
@@ -64,6 +66,13 @@ export class ChipSlot {
     constructor(public chip: Chip | undefined, public lvlReq: number) { }
 }
 
+export enum Activity {
+    Skilling = 1,
+    Fighting = 2,
+    Lab = 3,
+    Unknown = 4,
+}
+
 interface LabInfo {
     lineWidth: number
     supped: boolean
@@ -80,7 +89,7 @@ export class Player {
     classId: ClassIndex = ClassIndex.Beginner; // combine to one "class" class
     classExp: number = 0;
     classExpReq: number = 0;
-    currentMonster: string = "Blank";
+    currentMonster: EnemyData | undefined; // TODO: Do BETTER!
     currentMap: string = "Blank";
     currentMapId: number = 0;
     starSigns: StarSign[] = [];
@@ -109,6 +118,7 @@ export class Player {
     // Stats
     doubleClaimChance: Stat = new Stat("Double XP Chance", "%");
     monsterCash: Stat = new Stat("Monster Cash", "x");
+    crystalChance: Stat = new Stat("Crystal Spawn Chance", undefined, "1 in ");
 
     // Misc
     extraLevelsFromTalent: number = 0;
@@ -278,6 +288,128 @@ export class Player {
                 americaTipper + (this.talents.find(talent => talent.skillIndex == 22)?.getBonus() ?? 0)
         });
     }
+
+    setCrystalChance = (crystalSpawnStamp: number, crystalShrine: Shrine, chaoticChizCard: Card) => {
+        const shrineCardBonus = this.cardInfo?.equippedCards.find((card) => card.id == "Boss3B")?.getBonus() ?? 0;
+        const shrineBonus = crystalShrine.getBonus(this.currentMapId, shrineCardBonus);
+        const cardBonus = this.cardInfo?.equippedCards.filter((card) => card.data.effect.includes("Crystal Mob Spawn Chance")).reduce((sum, card) => sum += card.getBonus(), 0) ?? 0;
+        const crystalSpawnTalentBonus = this.talents.find(x => x.skillIndex == TalentConst.CrystalSpawnIndex)?.getBonus() ?? 0;
+        const crystalForDaysTalentBonus = this.talents.find(x => x.skillIndex == TalentConst.CrystalForDaysIndex)?.getBonus() ?? 0;
+
+        let postOfficeBonus = 0;
+        if (this.postOffice) {
+            const nonPredatoryBox = this.postOffice[PostOfficeConst.NonPredatoryBoxIndex];
+            postOfficeBonus = nonPredatoryBox.level > 0 ? nonPredatoryBox.bonuses[2].getBonus(nonPredatoryBox.level, 2) : 0;
+        }
+
+        const spawnChance = 5e-4 *
+            (1 + crystalSpawnTalentBonus / 100) *
+            (1 + (postOfficeBonus + shrineBonus) / 100) *
+            (1 + crystalForDaysTalentBonus / 100) *
+            (1 + crystalSpawnStamp / 100) *
+            (1 + cardBonus / 100);
+
+        this.crystalChance.value = Math.floor(1 / spawnChance);
+
+        this.crystalChance.sources.push({ name: "Shrine", value: shrineBonus });
+        this.crystalChance.sources.push({ name: "Cards", value: cardBonus });
+        this.crystalChance.sources.push({ name: "Stamp", value: crystalSpawnStamp });
+        this.crystalChance.sources.push({ name: "Talents", value: crystalForDaysTalentBonus + crystalSpawnTalentBonus });
+        this.crystalChance.sources.push({ name: "Post Office", value: postOfficeBonus });
+
+        // No need to do fake math if user doesn't have the card at all or is not on the same map as the shrine.
+        if (chaoticChizCard.count == 0 || !crystalShrine.isShrineActive(this.currentMapId)) {
+            return; 
+        }
+        
+        // If user isn't currently using c.chiz card, get the card and fake the shrine bonus.
+        const cchizBonus = chaoticChizCard.getBonus();
+        if (shrineCardBonus == 0) {
+            const cchizShrineBonus = crystalShrine.getBonus(this.currentMapId, cchizBonus);
+            const spawnChance = 5e-4 *
+                (1 + crystalSpawnTalentBonus / 100) *
+                (1 + (postOfficeBonus + cchizShrineBonus) / 100) *
+                (1 + crystalForDaysTalentBonus / 100) *
+                (1 + crystalSpawnStamp / 100) *
+                (1 + cardBonus / 100);
+            // Abusing sources to show what if scenarios.
+            this.crystalChance.sources.push({ name: "With Chaotic Chizoar", value: Math.floor(1 / spawnChance) });
+        }
+
+        const cchizShrineBonus = crystalShrine.getBonus(this.currentMapId, cchizBonus * 2);
+        const doubleCchizSpawnChance = 5e-4 *
+            (1 + crystalSpawnTalentBonus / 100) *
+            (1 + (postOfficeBonus + cchizShrineBonus) / 100) *
+            (1 + crystalForDaysTalentBonus / 100) *
+            (1 + crystalSpawnStamp / 100) *
+            (1 + cardBonus / 100);
+        // Abusing sources to show what if scenarios.
+        this.crystalChance.sources.push({ name: "With Chaotic Chizoar DOUBLED", value: Math.floor(1 / doubleCchizSpawnChance) });
+    }
+
+    getActivityType = (): Activity => {
+        switch (this.currentMonster?.details.AFKtype) {
+            case AFKTypeEnum.Catching:
+            case AFKTypeEnum.Choppin:
+            case AFKTypeEnum.Cooking:
+            case AFKTypeEnum.Fishing:
+            case AFKTypeEnum.Mining:
+                return Activity.Skilling;
+            case AFKTypeEnum.Fighting:
+                return Activity.Fighting;
+            case AFKTypeEnum.Laboratory:
+                return Activity.Lab;
+            default:
+                return Activity.Unknown
+        }
+    }
+
+    getActivityIcon = (): ImageData => {
+        // eh.AFKicons = function () {
+        //     var a = new p();
+        //     null != e.SMITHING ? a.setReserved("SMITHING", "ClassIcons43") : (a.h.SMITHING = "ClassIcons43");
+        //     null != e.Nothing ? a.setReserved("Nothing", "ClassIconsFb") : (a.h.Nothing = "ClassIconsFb");
+        //     null != e.ALCHEMY ? a.setReserved("ALCHEMY", "ClassIcons46") : (a.h.ALCHEMY = "ClassIcons46");
+        //     null != e.LABORATORY ? a.setReserved("LABORATORY", "ClassIcons53") : (a.h.LABORATORY = "ClassIcons53");
+        //     return a;
+        // };
+        let imageLocation: string;
+        switch (this.currentMonster?.details.AFKtype) {
+            case AFKTypeEnum.Catching:
+                imageLocation = "ClassIcons47";
+                break;
+            case AFKTypeEnum.Choppin:
+                imageLocation = "ClassIcons44";
+                break;
+            case AFKTypeEnum.Cooking:
+                imageLocation = "ClassIcons51";
+                break;
+            case AFKTypeEnum.Fishing:
+                imageLocation = "ClassIcons45";
+                break;
+            case AFKTypeEnum.Mining:
+                imageLocation = "ClassIconsM";
+                break;
+            case AFKTypeEnum.Fighting:
+                imageLocation = "ClassIconsF";
+                break;
+            case AFKTypeEnum.Laboratory:
+                imageLocation = "ClassIcons53";
+                break;
+            case AFKTypeEnum.Nothing:
+                imageLocation = "ClassIconsFb";
+                break;
+            default:
+                imageLocation = "ClassIconsNA1";
+                break;
+        }
+
+        return {
+            location: imageLocation,
+            height: 38,
+            width: 36
+        }
+    }
 }
 
 const keyFunctionMap: Record<string, Function> = {
@@ -287,7 +419,7 @@ const keyFunctionMap: Record<string, Function> = {
         player.class = ClassIndex[doc.get(`CharacterClass_${player.playerID}`)]?.replace(/_/g, " ") || "New Class?";
         player.classId = doc.get(`CharacterClass_${player.playerID}`) as ClassIndex;
     },
-    "monster": (doc: Cloudsave, player: Player) => { player.currentMonster = EnemyInfo.find(enemy => enemy.id == doc.get(`AFKtarget_${player.playerID}`))?.details.Name || doc.get(`AFKtarget_${player.playerID}`); },
+    "monster": (doc: Cloudsave, player: Player) => { player.currentMonster = EnemyInfo.find(enemy => enemy.id == doc.get(`AFKtarget_${player.playerID}`)) || doc.get(`AFKtarget_${player.playerID}`); },
     "map": (doc: Cloudsave, player: Player) => parseMap(doc.get(`CurrentMap_${player.playerID}`), player),
     "starsigns": (doc: Cloudsave, player: Player) => parseStarSigns(doc.get(`PVtStarSign_${player.playerID}`), player),
     "money": (doc: Cloudsave, player: Player) => { player.money = doc.get(`Money_${player.playerID}`) },
@@ -519,6 +651,8 @@ export const updatePlayers = (data: Map<string, any>) => {
     const achievementsInfo = data.get("achievements") as Achievement[];
     const arcade = data.get("arcade") as Arcade;
     const sigils = data.get("sigils") as Sigils;
+    const shrines = data.get("shrines") as Shrine[];
+    const cards = data.get("cards") as Card[];
 
     // Set player active bubble array, easier to work with.
     players.forEach(player => {
@@ -600,6 +734,14 @@ export const updatePlayers = (data: Map<string, any>) => {
         player.setMonsterCash(strBubbleBonus, wisBubbleBonus, agiBubbleBonus, mealBonus,
             petArenaBonus1, petArenaBonus2, labBonus, vialBonus,
             dungeonBonus, guildBonus, family, goldFoodStampBonus, goldFoodAchievement, prayers, arcadeBonus, sigils.sigils[14].getBonus());
+    })
+
+    // Crystal Spawn Chance
+    const crystalSpawnStamp = stamps[StampTab.Misc][StampConsts.CrystallinIndex].getBonus();
+    const crysalShrine = shrines[ShrineConstants.CrystalShrine];
+    const cchizCard = cards.find((card) => card.id == "Boss3B");
+    players.forEach(player => {
+        player.setCrystalChance(crystalSpawnStamp, crysalShrine, cchizCard as Card);
     })
 
     return players;

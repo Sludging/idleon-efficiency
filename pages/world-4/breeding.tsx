@@ -15,7 +15,7 @@ import IconImage from '../../components/base/IconImage';
 import ShadowBox from '../../components/base/ShadowBox';
 import TabButton from '../../components/base/TabButton';
 import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
-import { TimeDisplaySize, TimeDown } from '../../components/base/TimeDisplay';
+import { StaticTime, TimeDisplaySize, TimeDown } from '../../components/base/TimeDisplay';
 import { AppContext } from '../../data/appContext';
 import { Breeding as BreedingDomain, petArenaBonuses, waveReqs } from '../../data/domain/breeding';
 import { Cooking } from '../../data/domain/cooking';
@@ -50,41 +50,41 @@ function TerritoryDisplay() {
         <Box>
             <Text>Territory</Text>
             {
-                breeding.territory.filter(territory => territory.unlocked && territory.index != 14).map((territory, index) => (
-                    <ShadowBox background="dark-1" key={index} direction="row" gap="medium" margin={{ bottom: 'medium' }} align="center" pad="small">
+                breeding.territory.filter(territory => territory.unlocked && territory.index != 14).map((territory, tIndex) => (
+                    <ShadowBox background="dark-1" key={tIndex} direction="row" gap="medium" margin={{ bottom: 'medium' }} align="center" pad="small">
                         <Grid columns={["20%", "15%", "20%", "20%", "25%"]} fill>
                             <TextAndLabel textSize='small' label="Name" text={territory.data.battleName} />
                             {
-                                territory.spiceRewards.length > 0 ? territory.spiceRewards.map((spice, index) => (
-                                    <ComponentAndLabel key={index} label="Current Spices" component={
+                                territory.spiceRewards.length > 0 ? territory.spiceRewards.map((spice, sIndex) => (
+                                    <ComponentAndLabel key={sIndex} label="Current Spices" component={
                                         <Box direction="row" gap="small" align="center">
                                             <IconImage data={{ location: spice.type, height: size == "small" ? 20 : 36, width: size == "small" ? 20 : 36 }} />
                                             <Text size={size == "small" ? "small" : undefined}>{nFormatter(spice.count)}</Text>
                                         </Box>
                                     } />
                                 )) :
-                                <Box></Box>
+                                    <Box></Box>
                             }
                             <TextAndLabel label="Progress" text={`${nFormatter(territory.currentProgress)}/${nFormatter(territory.getTrekReq())}`} />
-                            { territory.trekkingSpeedHr > 0 ?
+                            {territory.trekkingSpeedHr > 0 ?
                                 <TextAndLabel label="Foraging Speed" text={`${nFormatter(territory.trekkingSpeedHr)}`} /> :
                                 <TextAndLabel textColor='red' label="Combat Power" text={`${nFormatter(territory.trekkingFightPower)}/${nFormatter(territory.data.fightPower)}`} />
                             }
                             <Box direction="row" wrap>
                                 {
-                                    territory.pets.map((pet, index) => {
+                                    territory.pets.map((pet, pIndex) => {
                                         const enemy = EnemyInfo.find(enemy => enemy.id == pet.name);
                                         return (
-                                            <Box key={`pet_${index}`} direction="row" gap="small" align="center">
-                                                { 
+                                            <Box key={`pet_${pIndex}`} direction="row" gap="small" align="center">
+                                                {
                                                     enemy ?
-                                                    <Stack anchor='bottom'>
-                                                        <IconImage data={pet.getBackgroundImageData()} />
-                                                        <IconImage data={{ location: enemy?.id.toLowerCase() ?? "Unknown", width: 67, height: 67}} style={{paddingBottom: '15px'}}/>
-                                                        <Text size="8px">{nFormatter(pet.power)}</Text>
-                                                    </Stack>
-                                                    : 
-                                                    <IconImage data={{location: "PetBackcard4", width: 67, height: 67}} />
+                                                        <Stack anchor='bottom'>
+                                                            <IconImage data={pet.getBackgroundImageData()} />
+                                                            <IconImage data={{ location: enemy?.id.toLowerCase() ?? "Unknown", width: 67, height: 67 }} style={{ paddingBottom: '15px' }} />
+                                                            <Text size="8px">{nFormatter(pet.power)}</Text>
+                                                        </Stack>
+                                                        :
+                                                        <IconImage data={{ location: "PetBackcard4", width: 67, height: 67 }} />
                                                 }
                                             </Box>
                                         )
@@ -315,11 +315,13 @@ function EggDisplay() {
                     }
                 </Box>
                 <ComponentAndLabel label="Next Egg In" component={<TimeDown addSeconds={breeding.totalEggTime - breeding.timeTillEgg} />} />
+                <ComponentAndLabel label="Time per egg" component={<StaticTime fromSeconds={breeding.totalEggTime} />} />
                 {
                     breeding.getStatRange().map((stat, index) => (
                         <TextAndLabel label={index == 0 ? "Min Stat" : "Max Stat"} text={nFormatter(stat)} key={index} />
                     ))
                 }
+
                 <ComponentAndLabel label="Dead Cells" component={
                     <Box direction="row" gap="small" align="center">
                         <Text>{nFormatter(breeding.deadCells)}</Text>
