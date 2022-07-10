@@ -13,6 +13,7 @@ import { TimeDown } from '../../components/base/TimeDisplay';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 import CoinsDisplay from '../../components/coinsDisplay';
 import { AppContext } from '../../data/appContext';
+import { territoryNiceNames } from '../../data/domain/breeding';
 import { Cooking as CookingDomain, Kitchen, KitchenStatus, UpgradeType } from '../../data/domain/cooking';
 import { getCoinsArray, nFormatter, toTime } from '../../data/utility';
 
@@ -176,14 +177,21 @@ function Cooking() {
                     {
                         cooking?.spices.filter(spice => spice > -1).map((spice, index) => (
                             <Box key={index} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} align="center">
-                                <Box direction="row" pad={{ vertical: 'small' }} align="center">
-                                    <IconImage data={{
-                                        location: `CookingSpice${index}`,
-                                        width: 36,
-                                        height: 36
-                                    }} />
-                                    <Text size="small">{nFormatter(spice)}</Text>
-                                </Box>
+                                <TipDisplay
+                                    size='medium'
+                                    heading={territoryNiceNames[index < 14 ? index : index + 1]}
+                                    body=''
+                                    direction={TipDirection.Down}
+                                >
+                                    <Box direction="row" pad={{ vertical: 'small' }} align="center">
+                                        <IconImage data={{
+                                            location: `CookingSpice${index}`,
+                                            width: 36,
+                                            height: 36
+                                        }} />
+                                        <Text size="small">{nFormatter(spice)}</Text>
+                                    </Box>
+                                </TipDisplay>
                             </Box>
                         ))
                     }
@@ -207,7 +215,7 @@ function Cooking() {
                         </Box>
                     }
                     {
-                        cooking?.meals.filter(meal => (meal.level > 0 || meal.optimalSpices.length > 0)).map((meal, index) => (
+                        cooking?.meals.filter(meal => (meal.level > 0 || meal.timeOptimalSpices.length > 0)).map((meal, index) => (
                             <ShadowBox background="dark-1" key={index} margin={{ right: 'small', bottom: 'small' }} direction="row" pad="small" gap="small" align="center" border={meal.cookingContribution > 0 ? { color: 'green-1', size: '1px' } : undefined}>
                                 <Box direction="row" align='center' fill>
                                     <Box direction="row" align="center" margin={{ right: 'small' }}>
@@ -226,17 +234,38 @@ function Cooking() {
                                                         <Box>
                                                             {meal.cookingContribution > 0 && <Text>Cooking speed: {nFormatter(meal.cookingContribution, "Smaller")}</Text>}
                                                             {meal.timeToNext > 0 && <Text>Time to next level: {toTime(meal.timeToNext * 3600)}</Text>}
-                                                            {meal.ladlesToLevel > 0 && <Text>{meal.ladlesToLevel} Ladles to next level ({meal.zerkerLadlesToLevel} if using {cooking.bestBerserker?.playerName ?? "zerker"})</Text>}
+                                                            {meal.ladlesToLevel > 0 && <Text size="small">{meal.ladlesToLevel} Ladles to next level ({meal.zerkerLadlesToLevel} if using {cooking.bestBerserker?.playerName ?? "zerker"})</Text>}
                                                             {meal.timeToDiamond > 0 && <Text>Time to Diamond: {toTime(meal.timeToDiamond * 3600)}</Text>}
                                                             {meal.timeToDiamond <= 0 && meal.timeToPurple > 0 && <Text>Time to Purple: {toTime(meal.timeToPurple * 3600)}</Text>}
                                                             {meal.timeToPurple <= 0 && meal.timeToVoid > 0 && <Text>Time to Void: {toTime(meal.timeToVoid * 3600)}</Text>}
+                                                            {meal.ladlesToNextMilestone > 0 && <Text size="small">{meal.ladlesToNextMilestone} Ladles to next milestone ({meal.zerkerLadlesToNextMilestone} if using {cooking.bestBerserker?.playerName ?? "zerker"})</Text>}
                                                         </Box>
                                                         <Text size="xsmall">* The time is calculated assuming all kitchens are cooking the same meal.</Text>
                                                     </Box> :
                                                     <Box>
                                                         <Text>Bonus: {meal.getBonusText()}</Text>
-                                                        <Text>Chance: {nFormatter(meal.discoveryChance * 100, "Smaller")}%</Text>
-                                                        <Text>Time: {toTime(meal.discoveryTime)}</Text>
+                                                        <Text>Chance: {nFormatter(meal.timeDiscoveryChance * 100, "Smaller")}%</Text>
+                                                        <Text>Time: {toTime(meal.timeDiscoveryTime)}</Text>
+                                                        {
+                                                            meal.chanceDiscoveryChance > meal.timeDiscoveryChance &&
+                                                            <Box>
+                                                                <hr style={{ width: "100%" }} />
+                                                                <Text>Can achieve higher chance with longer time using:</Text>
+                                                                <Box direction="row">
+                                                                    {
+                                                                        meal.chanceOptimalSpices.map((spice, index) => (
+                                                                            <IconImage key={index} data={{
+                                                                                location: `CookingSpice${spice}`,
+                                                                                width: 36,
+                                                                                height: 36
+                                                                            }} />
+                                                                        ))
+                                                                    }
+                                                                </Box>
+                                                                <Text>Chance: {nFormatter(meal.chanceDiscoveryChance * 100, "Smaller")}%</Text>
+                                                                <Text>Time: {toTime(meal.chanceDiscoveryTime)}</Text>
+                                                            </Box>
+                                                        }
                                                         <Text size="xsmall">* Chance/Time is based on your first kitchen luck stat.</Text>
                                                     </Box>
                                             }
@@ -245,13 +274,13 @@ function Cooking() {
                                         >
                                             {
                                                 meal.level > 0 ?
-                                                    <Box direction="row" justify="between" align="center" pad={{top: 'small'}}>
+                                                    <Box direction="row" justify="between" align="center" pad={{ top: 'small' }}>
                                                         <Text margin={{ right: 'small' }} size="xsmall">{meal.getBonusText()}</Text>
                                                         <Text color={meal.count > meal.getMealLevelCost() ? 'green-1' : 'accent-1'} margin={{ right: 'small' }} size="xsmall">{`${nFormatter(Math.floor(meal.count))}/${nFormatter(Math.ceil(meal.getMealLevelCost()))}`}</Text>
                                                     </Box> :
                                                     <Box direction="row">
                                                         {
-                                                            meal.optimalSpices.map((spice, index) => (
+                                                            meal.timeOptimalSpices.map((spice, index) => (
                                                                 <IconImage key={index} data={{
                                                                     location: `CookingSpice${spice}`,
                                                                     width: 36,
