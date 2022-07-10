@@ -91,6 +91,7 @@ const customTheme = deepMerge(dark, {
       "Legendary": "#e49c5f",
       "blue-1": "#19243A",
       "blue-2": "#283F70",
+      "blue-3": "#6dcdff"
     }
   },
   notification: {

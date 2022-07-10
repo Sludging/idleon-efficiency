@@ -15,6 +15,27 @@ import { AbilityTypeEnum } from "./enum/abilityTypeEnum";
 
 export const waveReqs = "2 5 8 12 15 20 25 35 50 65 80 100 125 150 175 200".split(" ").map(value => parseInt(value));
 
+export const territoryNiceNames = [
+    "Grasslands",
+    "Jungle",
+    "Encroaching Forest",
+    "Tree Interior",
+    "Stinky Sewers",
+    "Desert Oasis",
+    "Beach Docks",
+    "Coarse Mountains",
+    "Twilight Desert",
+    "The Crypt",
+    "Frosty Peaks",
+    "Tundra Outback",
+    "Crystal Caverns",
+    "Pristalle Lake",
+    "Arena",
+    "Nebulon Mantle",
+    "Starfield Skies",
+    "Shroes Of Eternity",
+]
+
 
 export class PetGene {
     constructor(public index: number, public data: PetGeneModel) { }
