@@ -48,9 +48,12 @@ export class Meal {
     level: number = 0;
 
     // Discover values
-    optimalSpices: number[] = [];
-    discoveryTime: number = 0;
-    discoveryChance: number = 0;
+    timeOptimalSpices: number[] = [];
+    timeDiscoveryTime: number = 0;
+    timeDiscoveryChance: number = 0;
+    chanceOptimalSpices: number[] = [];
+    chanceDiscoveryTime: number = 0;
+    chanceDiscoveryChance: number = 0;
 
     mainframeBonus: number = 0;
 
@@ -67,6 +70,8 @@ export class Meal {
     // Ladles
     ladlesToLevel: number = -1;
     zerkerLadlesToLevel: number = -1;
+    ladlesToNextMilestone: number = -1;
+    zerkerLadlesToNextMilestone: number = -1;
 
     constructor(public mealIndex: number, data: MealModel) {
         this.name = data.name;
@@ -290,7 +295,7 @@ export class Cooking {
 const populateDiscovery = (cooking: Cooking) => {
     const availableValues = cooking.spicesToValues(cooking.spices.map((spice, index) => spice != -1 ? index : -1).filter(value => value != -1));
     const outputlucktime = [...Array(49)].map((_, index) => 5000000000 * 2 / .004)
-    const mealTimes = cooking.meals.map(meal => meal.cookReq);
+    const outputLuck = [...Array(49)].map((_, index) => 0)
     for (let len of range(0, 3)) {
         const possibleCombinations = combinations(availableValues, len + 1);
         for (let combination of possibleCombinations) {
@@ -309,9 +314,15 @@ const populateDiscovery = (cooking: Cooking) => {
                     const luckTime = time / realLuck;
                     if (luckTime < outputlucktime[meal]) {
                         outputlucktime[meal] = luckTime;
-                        cooking.meals[meal].discoveryTime = time / (firstKitchenFire / 3600);
-                        cooking.meals[meal].discoveryChance = realLuck;
-                        cooking.meals[meal].optimalSpices = combination.map(value => spiceValues.indexOf(value));
+                        cooking.meals[meal].timeDiscoveryTime = time / (firstKitchenFire / 3600);
+                        cooking.meals[meal].timeDiscoveryChance = realLuck;
+                        cooking.meals[meal].timeOptimalSpices = combination.map(value => spiceValues.indexOf(value));
+                    }
+                    if (realLuck > outputLuck[meal]) {
+                        outputLuck[meal] = realLuck;
+                        cooking.meals[meal].chanceDiscoveryTime = time / (firstKitchenFire / 3600);
+                        cooking.meals[meal].chanceDiscoveryChance = realLuck;
+                        cooking.meals[meal].chanceOptimalSpices = combination.map(value => spiceValues.indexOf(value));
                     }
                 }
             })
@@ -432,8 +443,21 @@ export const updateCooking = (data: Map<string, any>) => {
             meal.ladlesToLevel = Math.ceil((((meal.getMealLevelCost() - meal.count) * meal.cookReq) / totalContribution));
             meal.zerkerLadlesToLevel = Math.ceil((((meal.getMealLevelCost() - meal.count) * meal.cookReq) / totalContribution) / (1 + zerkerBonus / 100));
         }
-        
-        
+
+        let milestoneCosts = 0;
+        if (meal.timeToDiamond > 0) {
+            milestoneCosts = meal.getCostsTillDiamond();
+        }
+        else if (meal.timeToPurple > 0) {
+            milestoneCosts = meal.getCostsTillPurple();
+        }
+        else if (meal.timeToVoid > 0) {
+            milestoneCosts = meal.getCostsTillVoid();
+        }
+        if (milestoneCosts > 0) {
+            meal.ladlesToNextMilestone = Math.ceil((((milestoneCosts - meal.count) * meal.cookReq) / totalContribution));
+            meal.zerkerLadlesToNextMilestone = Math.ceil((((milestoneCosts - meal.count) * meal.cookReq) / totalContribution) / (1 + zerkerBonus / 100));
+        }
     });
 
     populateDiscovery(cooking);

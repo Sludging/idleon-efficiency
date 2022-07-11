@@ -193,7 +193,7 @@ function RefineryDisplay() {
                         <ShadowBox key={index} background="dark-1" pad="medium" align="center" margin={{ right: 'large', bottom: 'small' }}>
                             <Box gap="small">
                                 <Box direction="row" gap="small">
-                                    <IconImage data={squire.getClassImageData()} scale={0.8}/>
+                                    <IconImage data={squire.getClassImageData()} scale={0.8} />
                                     <Text>{squire.playerName}</Text>
                                 </Box>
                                 <Box direction="row" gap="small">
@@ -266,7 +266,11 @@ function RefineryDisplay() {
                                                     <Box>
                                                         <Text color="accent-2" size="small">Rank up in</Text>
                                                         <Box>
-                                                            {info.active && fuelTime > 0 ? <TimeDown size={size == "medium" ? TimeDisplaySize.Medium : TimeDisplaySize.Large} addSeconds={squirePowha ? squireTimeSave[index] : timeToNextRank} /> : <Text color="accent-1" size="small">Not active</Text>}
+                                                            {fuelTime > 0 && (info.active ?
+                                                                <TimeDown size={size == "medium" ? TimeDisplaySize.Medium : TimeDisplaySize.Large} addSeconds={squirePowha ? squireTimeSave[index] : timeToNextRank} />
+                                                                : <StaticTime size={size == "medium" ? TimeDisplaySize.Medium : TimeDisplaySize.Large} fromSeconds={squirePowha ? squireTimeSave[index] : timeToNextRank} color='accent-1' />
+                                                            )}
+                                                            {!info.active && <Box margin={{top: 'medium'}}><Text color="accent-1" size="medium">Not active</Text></Box>}
                                                         </Box>
                                                     </Box>
                                                     :
@@ -380,7 +384,7 @@ function RefineryDisplay() {
     )
 }
 
-function SampleBox({ sample, activeItem, itemData }: { sample: { item: string, quantity: number }, activeItem: { item: string, quantity: number } | undefined, itemData: Item[] | undefined }) {
+function SampleBox({ sample, activeItem, itemData, inLab = false }: { sample: { item: string, quantity: number }, activeItem: { item: string, quantity: number } | undefined, itemData: Item[] | undefined, inLab?: boolean }) {
     const sampleItem = itemData?.find((item) => item.internalName == sample.item);
     return (
         <Box border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} height={{ min: '82px', max: '82px' }} direction="row" align="center" justify="center">
@@ -390,7 +394,7 @@ function SampleBox({ sample, activeItem, itemData }: { sample: { item: string, q
                 </Box> :
                 <Box pad={{ vertical: 'small' }} align="center">
                     <IconImage data={(sampleItem as Item).getImageData()} />
-                    <Text color={activeItem ? 'green-1' : ''} size="small">{nFormatter(sample.quantity)}</Text>
+                    <Text color={ inLab == true ? 'blue-3' : activeItem ? 'green-1' : ''} size="small">{nFormatter(inLab ? sample.quantity * 2 : sample.quantity)}</Text>
                 </Box>
             }
             {activeItem && (activeItem?.quantity ?? 0) < sample.quantity &&
@@ -428,7 +432,7 @@ function PrinterDisplay() {
         return masteroes;
     }, [playerData])
 
-    if (!printerData || printerData.playerInfo.flatMap(player =>[...player.samples, ...player.active]).filter(sample => sample.item != "Blank").length == 0) {
+    if (!printerData || printerData.playerInfo.flatMap(player => [...player.samples, ...player.active]).filter(sample => sample.item != "Blank").length == 0) {
         return (
             <Box align="center" pad="medium">
                 <Heading level='3'>Come back when you have some samples!</Heading>
@@ -445,7 +449,7 @@ function PrinterDisplay() {
                         <ShadowBox key={index} background="dark-1" pad="medium" align="center" margin={{ right: 'large', bottom: 'small' }}>
                             <Box gap="small">
                                 <Box direction="row" gap="small">
-                                    <IconImage data={mastero.getClassImageData()} scale={0.8}/>
+                                    <IconImage data={mastero.getClassImageData()} scale={0.8} />
                                     <Text>{mastero.playerName}</Text>
                                 </Box>
                                 <Box direction="row" gap="small">
@@ -493,7 +497,7 @@ function PrinterDisplay() {
                                                 {
                                                     playerInfo.active.map((sample, sampleIndex) => {
                                                         return (
-                                                            <SampleBox key={`active_${sampleIndex}`} activeItem={undefined} sample={sample} itemData={itemData} />
+                                                            <SampleBox key={`active_${sampleIndex}`} activeItem={undefined} sample={sample} itemData={itemData} inLab={playerInfo.inLab}/>
                                                         )
                                                     })
                                                 }

@@ -988,10 +988,23 @@ function PostOfficeDisplay({ player, extra }: { player: Player, extra: PostOffic
         return extra.misc + extra.streak + extra.complete - totalSpent;
     }, [player, extra]);
 
+    const costToMax = useMemo(() => {
+        return player.postOffice.reduce((sum, box) => sum += 400 - box.level, 0) ;
+    }, [player, extra]);
+
     return (
         <Box pad="medium" gap="small" fill>
             <Text size='medium'>Post Office</Text>
-            <Text size='small'>Unspent: {unSpentPoints}</Text>
+            <Box direction="row" gap="medium">
+                <TextAndLabel
+                    label="Unspent"
+                    text={unSpentPoints.toString()}
+                />
+                <TextAndLabel
+                    label="Cost to max all"
+                    text={costToMax.toString()}
+                />
+            </Box>
             <Grid columns={{ count: size == "small" ? 2 : 4, size: "auto" }} gap="xsmall">
                 {
                     player.postOffice.filter((box) => box.name != "Filler").map((box) => {
