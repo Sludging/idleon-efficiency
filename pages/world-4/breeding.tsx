@@ -17,7 +17,7 @@ import TabButton from '../../components/base/TabButton';
 import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import { StaticTime, TimeDisplaySize, TimeDown } from '../../components/base/TimeDisplay';
 import { AppContext } from '../../data/appContext';
-import { Breeding as BreedingDomain, petArenaBonuses, waveReqs } from '../../data/domain/breeding';
+import { Breeding as BreedingDomain, petArenaBonuses, territoryNiceNames, waveReqs } from '../../data/domain/breeding';
 import { Cooking } from '../../data/domain/cooking';
 import { EnemyInfo } from '../../data/domain/enemies';
 import { GemStore } from '../../data/domain/gemPurchases';
@@ -53,7 +53,7 @@ function TerritoryDisplay() {
                 breeding.territory.filter(territory => territory.unlocked && territory.index != 14).map((territory, tIndex) => (
                     <ShadowBox background="dark-1" key={tIndex} direction="row" gap="medium" margin={{ bottom: 'medium' }} align="center" pad="small">
                         <Grid columns={["20%", "15%", "20%", "20%", "25%"]} fill>
-                            <TextAndLabel textSize='small' label="Name" text={territory.data.battleName} />
+                            <TextAndLabel textSize='small' label="Name" text={territoryNiceNames[territory.index]} />
                             {
                                 territory.spiceRewards.length > 0 ? territory.spiceRewards.map((spice, sIndex) => (
                                     <ComponentAndLabel key={sIndex} label="Current Spices" component={
