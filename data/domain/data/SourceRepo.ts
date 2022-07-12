@@ -5531,6 +5531,26 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("Key4", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Stilted Seeker]]", "txtName": "Stilted Seeker"},
+                    <SourceModel>{"wikiName": "[[Mutated Mush]]", "txtName": "Mutated Mush"},
+                    <SourceModel>{
+                        "wikiName": "[[Colosseum/Astro#Bronze Chest|Astro Bronze Chest]]",
+                        "txtName": "Colosseum: Astro Bronze Chest"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Colosseum/Astro#Silver Chest|Astro Silver Chest]]",
+                        "txtName": "Colosseum: Astro Silver Chest"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Colosseum/Astro#Golden Chest|Astro Golden Chest]]",
+                        "txtName": "Colosseum: Astro Golden Chest"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("CardsG13", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Stilted Seeker]]", "txtName": "Stilted Seeker"}],
                 "recipeFrom": [],
@@ -5569,27 +5589,13 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("CardsZ13", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Mutated Mush]]", "txtName": "Mutated Mush"}],
+        new SourcesBase("EquipmentCape6", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Blitzkrieg Troll]]", "txtName": "Blitzkrieg Troll"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("Key4", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{"wikiName": "[[Mutated Mush]]", "txtName": "Mutated Mush"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Bronze Chest|Astro Bronze Chest]]",
-                        "txtName": "Colosseum: Astro Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Silver Chest|Astro Silver Chest]]",
-                        "txtName": "Colosseum: Astro Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Golden Chest|Astro Golden Chest]]",
-                        "txtName": "Colosseum: Astro Golden Chest"
-                    }
-                ],
+        new SourcesBase("CardsZ13", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Mutated Mush]]", "txtName": "Mutated Mush"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -10732,7 +10738,8 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Carpenter Cardinal#Restoring Power, once again, to a Portal|Restoring Power, once again, to a Portal]]",
                         "txtName": "Carpenter Cardinal: Restoring Power, once again, to a Portal"
-                    }
+                    },
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -11170,6 +11177,23 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("EquipmentKeychain17", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"},
+                    <SourceModel>{"wikiName": "[[Dungeons#Flurbo Shop|Flurbo Shop]]", "txtName": "Dungeons: Flurbo Shop"},
+                    <SourceModel>{
+                        "wikiName": "[[Dungeons#Loot Rolls|Dungeon Loot Rolls]]",
+                        "txtName": "Dungeons: Flurbo Shop"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentCape0", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentKeychain20", <SourcesModel>{
                 "sources": [
                     <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"},
                     <SourceModel>{"wikiName": "[[Dungeons#Flurbo Shop|Flurbo Shop]]", "txtName": "Dungeons: Flurbo Shop"},
@@ -11836,17 +11860,6 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("EquipmentKeychain19", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{"wikiName": "[[Dungeons#Flurbo Shop|Flurbo Shop]]", "txtName": "Dungeons: Flurbo Shop"},
-                    <SourceModel>{
-                        "wikiName": "[[Dungeons#Loot Rolls|Dungeon Loot Rolls]]",
-                        "txtName": "Dungeons: Flurbo Shop"
-                    }
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("EquipmentKeychain20", <SourcesModel>{
                 "sources": [
                     <SourceModel>{"wikiName": "[[Dungeons#Flurbo Shop|Flurbo Shop]]", "txtName": "Dungeons: Flurbo Shop"},
                     <SourceModel>{

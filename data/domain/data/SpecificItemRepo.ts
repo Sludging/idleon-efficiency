@@ -7551,11 +7551,11 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("Quest28", <DescItemModel>{
                 "internalName": "Quest28",
-                "displayName": "IOU One Blue Crystal",
+                "displayName": "IOU One Fire Crystal",
                 "sellPrice": 100,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
-                "description": "Hold down on this IOU, and a Blue Crystal will drop at your feet! "
+                "description": "Sorry cutie, but you gotta wait until big man Lava up top tells me I'm allowed to drop the crystal to World 5! Them's the rules, I'm sure you've noticed by now... @ Love, Your Favorite Troll "
             }),
         new BaseItemBase("Quest29", <DescItemModel>{
                 "internalName": "Quest29",
@@ -16619,7 +16619,7 @@ export const initSpecificItemRepo = () => {
                 "lvReqToCraft": 55,
                 "lvReqToEquip": 185,
                 "Class": ClassTypeEnum.All,
-                "Weapon_Power": 0,
+                "Weapon_Power": 2,
                 "STR": 22,
                 "AGI": 22,
                 "WIS": 22,
@@ -17172,6 +17172,27 @@ export const initSpecificItemRepo = () => {
                 "LUK": 0,
                 "Defence": 0,
                 "miscUp1": "8% Total Damage",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentCape6", <ArmourItemModel>{
+                "internalName": "EquipmentCape6",
+                "displayName": "Cascading Scaled Cape of Krieg",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aCape,
+                "Type": "Cape",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 1,
+                "STR": 10,
+                "AGI": 10,
+                "WIS": 10,
+                "LUK": 10,
+                "Defence": 0,
+                "miscUp1": "6% All Stats",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
@@ -24982,11 +25003,18 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("CardsZ17", <CardItemModel>{
                 "internalName": "CardsZ17",
-                "displayName": "FILLER",
+                "displayName": "Blitzkrieg Troll Card",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.dCard,
                 "Type": "Card",
-                "cardData": undefined,
+                "cardData": <CardDataModel>{
+                    "cardID": "Z17",
+                    "category": "Bosses",
+                    "perTier": 4,
+                    "effect": "+{% Total Damage",
+                    "bonus": 7,
+                    "order": 19
+                },
                 "dropChance": 0.003
             })    
 ]

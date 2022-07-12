@@ -247,7 +247,7 @@ export const initTerritoryFightRepo = () => {
             }),
         new TerritoryFightBase(14, <TerritoryFightModel>{
                 "img": "PetFightBGz.png",
-                "trekReq": 5000000,
+                "trekReq": 4000000,
                 "fightPower": 77000,
                 "enemyAttack": 1,
                 "battleName": "BRuh",
@@ -264,7 +264,7 @@ export const initTerritoryFightRepo = () => {
             }),
         new TerritoryFightBase(15, <TerritoryFightModel>{
                 "img": "8bg.png",
-                "trekReq": 4000000,
+                "trekReq": 8000000,
                 "fightPower": 100000,
                 "enemyAttack": 200000,
                 "battleName": "The Blue Jeans Group",
@@ -281,7 +281,7 @@ export const initTerritoryFightRepo = () => {
             }),
         new TerritoryFightBase(16, <TerritoryFightModel>{
                 "img": "21bg.png",
-                "trekReq": 7500000,
+                "trekReq": 12500000,
                 "fightPower": 175000,
                 "enemyAttack": 300000,
                 "battleName": "Fissure Wurm",
@@ -298,7 +298,7 @@ export const initTerritoryFightRepo = () => {
             }),
         new TerritoryFightBase(17, <TerritoryFightModel>{
                 "img": "22bg.png",
-                "trekReq": 10000000,
+                "trekReq": 20000000,
                 "fightPower": 300000,
                 "enemyAttack": 400000,
                 "battleName": "Calamity Clammies",
@@ -315,7 +315,7 @@ export const initTerritoryFightRepo = () => {
             }),
         new TerritoryFightBase(18, <TerritoryFightModel>{
                 "img": "22bg.png",
-                "trekReq": 10000000,
+                "trekReq": 50000000,
                 "fightPower": 300000,
                 "enemyAttack": 500000,
                 "battleName": "FILLER FILLER FILLER",
