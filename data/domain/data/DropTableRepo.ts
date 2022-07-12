@@ -240,12 +240,12 @@ export const initDropTableRepo = () => {
                 "drops": [
                     <ItemDropModel>{"item": "ExpBalloon1", "quantity": 1, "chance": 0.5, "questLink": "N/A"},
                     <ItemDropModel>{"item": "PremiumGem", "quantity": 4, "chance": 1, "questLink": "N/A"},
-                    <ItemDropModel>{"item": "Timecandy1", "quantity": 1, "chance": 0.6, "questLink": "N/A"},
-                    <ItemDropModel>{"item": "Timecandy2", "quantity": 1, "chance": 0.32, "questLink": "N/A"},
-                    <ItemDropModel>{"item": "Timecandy3", "quantity": 1, "chance": 0.13, "questLink": "N/A"},
-                    <ItemDropModel>{"item": "Timecandy4", "quantity": 1, "chance": 0.035, "questLink": "N/A"},
-                    <ItemDropModel>{"item": "Timecandy5", "quantity": 1, "chance": 0.01, "questLink": "N/A"},
-                    <ItemDropModel>{"item": "Timecandy6", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
+                    <ItemDropModel>{"item": "Timecandy1", "quantity": 1, "chance": 0.4, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "Timecandy2", "quantity": 1, "chance": 0.2, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "Timecandy3", "quantity": 1, "chance": 0.05, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "Timecandy4", "quantity": 1, "chance": 0.01, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "Timecandy5", "quantity": 1, "chance": 0.003, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "Timecandy6", "quantity": 1, "chance": 0.0003, "questLink": "N/A"}
                 ],
                 "subTable": "DropTable13"
             }),

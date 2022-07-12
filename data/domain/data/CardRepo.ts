@@ -1238,6 +1238,14 @@ export const initCardRepo = () => {
                 "bonus": 10,
                 "order": 18
             }),
+        new CardDataBase("Boss4C", <CardDataModel>{
+                "cardID": "Z17",
+                "category": "Bosses",
+                "perTier": 4,
+                "effect": "+{% Total Damage",
+                "bonus": 7,
+                "order": 19
+            }),
         new CardDataBase("ghost", <CardDataModel>{
                 "cardID": "Y0",
                 "category": "Event",

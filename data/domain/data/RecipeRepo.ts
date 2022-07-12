@@ -9112,26 +9112,26 @@ export const initRecipeRepo = () => {
                 "intID": "EquipmentHats74",
                 "recipe": [
                     <ComponentModel>{"item": "TrollPart", "quantity": 50},
-                    <ComponentModel>{"item": "FishTKlineIcon3", "quantity": 10},
+                    <ComponentModel>{"item": "Line3", "quantity": 10},
                     <ComponentModel>{"item": "StarfireBar", "quantity": 20000},
                     <ComponentModel>{"item": "Refinery6", "quantity": 4000}
                 ],
-                "levelReqToCraft": 111,
+                "levelReqToCraft": 70,
                 "expGiven": 1000000,
                 "no": 61,
                 "tab": 4,
-                "sellPrice": 470000,
+                "sellPrice": 470500,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "TrollPart", "quantity": 50},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "FishTKlineIcon3", "quantity": 10},
+                        <DetRecipeComponentModel>{"indent": 0, "item": "Line3", "quantity": 10},
                         <DetRecipeComponentModel>{"indent": 0, "item": "StarfireBar", "quantity": 20000},
                         <DetRecipeComponentModel>{"indent": 0, "item": "Refinery6", "quantity": 4000}
                     ],
                     "detRecipeTotals": [
                         <ComponentModel>{"item": "TrollPart", "quantity": 50},
-                        <ComponentModel>{"item": "FishTKlineIcon3", "quantity": 10},
+                        <ComponentModel>{"item": "Line3", "quantity": 10},
                         <ComponentModel>{"item": "StarfireBar", "quantity": 20000},
                         <ComponentModel>{"item": "Refinery6", "quantity": 4000}
                     ]
@@ -9145,7 +9145,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "StarfireBar", "quantity": 10000},
                     <ComponentModel>{"item": "Refinery6", "quantity": 2800}
                 ],
-                "levelReqToCraft": 111,
+                "levelReqToCraft": 68,
                 "expGiven": 1000000,
                 "no": 62,
                 "tab": 4,
@@ -9174,7 +9174,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "StarfireBar", "quantity": 5000},
                     <ComponentModel>{"item": "Refinery6", "quantity": 1600}
                 ],
-                "levelReqToCraft": 111,
+                "levelReqToCraft": 67,
                 "expGiven": 1000000,
                 "no": 63,
                 "tab": 4,
@@ -9203,7 +9203,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "StarfireBar", "quantity": 3000},
                     <ComponentModel>{"item": "Refinery6", "quantity": 750}
                 ],
-                "levelReqToCraft": 111,
+                "levelReqToCraft": 65,
                 "expGiven": 1000000,
                 "no": 64,
                 "tab": 4,

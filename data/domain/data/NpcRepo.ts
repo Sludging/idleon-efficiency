@@ -8326,19 +8326,19 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Filler",
+                        "DialogueText": "Huh...",
                         "NextIndex": 22,
                         "Name": ""
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.LevelReq,
-                        "DialogueText": "Filler final quest before you get a trophy <br> Return at Class Lv. 85",
+                        "DialogueText": "You know maybe you're the one to finally do it... <br> Return at Class Lv. 130",
                         "NextIndex": 23,
                         "Name": ""
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Filler",
+                        "DialogueText": "So you think you can do it? Well you'll have to come back in a future update to find out.",
                         "NextIndex": -1,
                         "Name": ""
                     }

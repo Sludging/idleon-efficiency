@@ -22,7 +22,7 @@ export const initRefineryCostRepo = () => {
                     <ComponentModel>{"item": "DesertA1", "quantity": 50},
                     <ComponentModel>{"item": "Fish1", "quantity": 30},
                     <ComponentModel>{"item": "Bug1", "quantity": 40},
-                    <ComponentModel>{"item": "Refinery2", "quantity": 3}
+                    <ComponentModel>{"item": "Refinery2", "quantity": 2}
                 ]
             }),
         new RefineryCostBase("Refinery4", <RefineryCostModel>{
@@ -49,7 +49,7 @@ export const initRefineryCostRepo = () => {
                     <ComponentModel>{"item": "Tree7", "quantity": 5},
                     <ComponentModel>{"item": "Bug6", "quantity": 5},
                     <ComponentModel>{"item": "Soul4", "quantity": 5},
-                    <ComponentModel>{"item": "Refinery5", "quantity": 3}
+                    <ComponentModel>{"item": "Refinery5", "quantity": 2}
                 ]
             })    
 ]
