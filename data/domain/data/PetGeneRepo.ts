@@ -14,7 +14,7 @@ export const initPetGeneRepo = () => {
                 "lowerLetter": "a",
                 "upperLetter": "A",
                 "description": "Throws a Rusty Sword, which deals 200% Damage",
-                "combatDescription": "When in combat, all pets on team deal 1.10x Damage"
+                "combatDescription": "When in combat, all pets on team deal 1.20x Damage"
             }),
         new PetGeneBase(1, <PetGeneModel>{
                 "name": "Defender",
@@ -46,10 +46,10 @@ export const initPetGeneRepo = () => {
         new PetGeneBase(4, <PetGeneModel>{
                 "name": "Breeder",
                 "abilityType": AbilityTypeEnum.Special,
-                "x2": 15,
+                "x2": 17,
                 "lowerLetter": "e",
                 "upperLetter": "E",
-                "description": "Every 1 sec, heal whatever pet you are holding down on for 5% HP. On PC, you just need you mouse over the pet. On Phones, your finger must be on the pet. This Lasts 10 seconds.",
+                "description": "Every 1 sec, heal whatever pet you are holding down on for 5% HP. On PC, you just need you mouse over the pet. On Phones, your finger must be on the pet. This lasts 10 seconds.",
                 "combatDescription": "When in Fence Yard, increases Breedability Multiplier of this pet species"
             }),
         new PetGeneBase(5, <PetGeneModel>{
@@ -166,7 +166,7 @@ export const initPetGeneRepo = () => {
                 "x2": 9,
                 "lowerLetter": "r",
                 "upperLetter": "R",
-                "description": "Turns all friend attacks into Cursed Skulls",
+                "description": "Turns all friendly attacks into Cursed Skulls",
                 "combatDescription": "When foraging, there is a 50% chance for 2 spices when filling the reward bar"
             }),
         new PetGeneBase(18, <PetGeneModel>{
@@ -184,8 +184,8 @@ export const initPetGeneRepo = () => {
                 "x2": 5,
                 "lowerLetter": "t",
                 "upperLetter": "T",
-                "description": "Shoots rocks bases on the total number of blocks by your team. Resets block amount when activated",
-                "combatDescription": "When in combat, all pets have +50% HP"
+                "description": "Shoots multiple rocks based on the total number of blocks by your team. Rocks deal 250% Damage. Resets total number of blocks when activated",
+                "combatDescription": "When in combat, all pets start 2x max HP. Multiplies with other defstone pets."
             }),
         new PetGeneBase(20, <PetGeneModel>{
                 "name": "Targeter",
@@ -199,10 +199,10 @@ export const initPetGeneRepo = () => {
         new PetGeneBase(21, <PetGeneModel>{
                 "name": "Looter",
                 "abilityType": AbilityTypeEnum.Green,
-                "x2": 4,
+                "x2": 6,
                 "lowerLetter": "v",
                 "upperLetter": "V",
-                "description": "Activates a random ability, selected from all the abilites across all pets you've ever had",
+                "description": "Activates a random ability, selected from all the abilites across all pets you've ever unlocked",
                 "combatDescription": "When foraging, there is a small chance to find extra spices when filling the reward bar many times before claiming"
             }),
         new PetGeneBase(22, <PetGeneModel>{
@@ -221,7 +221,106 @@ export const initPetGeneRepo = () => {
                 "lowerLetter": "x",
                 "upperLetter": "X",
                 "description": "For 10 seconds, every critical hit boosts the block chance of all pets by 1%",
-                "combatDescription": "When in Fence Yard, randomly lays eggs which can be picked up and will appear in your incubator"
+                "combatDescription": "When in Fence Yard, randomly lays eggs which can be picked up and will appear in your incubator. Egg laying time takes MANY hours, but will stay until you revisit the pet yard personally, you don't need to stand around personally and wait."
+            }),
+        new PetGeneBase(24, <PetGeneModel>{
+                "name": "Lazarus",
+                "abilityType": AbilityTypeEnum.Red,
+                "x2": 5,
+                "lowerLetter": "y",
+                "upperLetter": "Y",
+                "description": "Fires a laser, dealing 100% Damage to all enemies every 1 sec. Strangely enough, the laser will continue zapping as long as you dont click anything.",
+                "combatDescription": "When in combat, all pets have their abilities fill up +10% faster"
+            }),
+        new PetGeneBase(25, <PetGeneModel>{
+                "name": "Trasher",
+                "abilityType": AbilityTypeEnum.Green,
+                "x2": 20,
+                "lowerLetter": "z",
+                "upperLetter": "Z",
+                "description": "The next 6 taps delete any enemy attack you tap on. This ability will not refill while you have taps remaining",
+                "combatDescription": "When in Fence Yard, +25 daily spice claims. Only works if pet is in Fence Yard before the start of the day."
+            }),
+        new PetGeneBase(26, <PetGeneModel>{
+                "name": "Miasma",
+                "abilityType": AbilityTypeEnum.Green,
+                "x2": 60,
+                "lowerLetter": "1",
+                "upperLetter": "0",
+                "description": "Fully heal all pets. Also, for 60 sec all enemies have -100% crit chance and all pets have +20% block chance. Always starts 100% filled",
+                "combatDescription": "When foraging, all pets on the team contribute 4.00x more Foraging Speed if there aren't two pets of the same type."
+            }),
+        new PetGeneBase(27, <PetGeneModel>{
+                "name": "Converter",
+                "abilityType": AbilityTypeEnum.Green,
+                "x2": 25,
+                "lowerLetter": "3",
+                "upperLetter": "2",
+                "description": "For 15 seconds, all basic fist attacks have a 30% chance to turn into the weapon of that pet's ability, but only if their ability is a weapon.",
+                "combatDescription": "When foraging, there is a 50% chance to not reset trekking progress when claiming, essentially giving you FREE SPICE! Multiple converter pets won't stack. @ WARNING: Placing this pet in a territory will reset that territory's trekking progress."
+            }),
+        new PetGeneBase(28, <PetGeneModel>{
+                "name": "Heavyweight",
+                "abilityType": AbilityTypeEnum.Red,
+                "x2": 10,
+                "lowerLetter": "5",
+                "upperLetter": "4",
+                "description": "Shoots a giant fist that deals 300% Damage. The giant fist itself shoots a basic fist attack every 1 sec.",
+                "combatDescription": "When in combat, all pets shoot their basic fist attacks +10% faster"
+            }),
+        new PetGeneBase(29, <PetGeneModel>{
+                "name": "Fastihoop",
+                "abilityType": AbilityTypeEnum.Red,
+                "x2": 13,
+                "lowerLetter": "7",
+                "upperLetter": "6",
+                "description": "Shoots a gold hoop, which deals 50% Damage. Each bullet that passes through the hoop has a 30% chance to give a permanent +1 Fastidious buff.",
+                "combatDescription": "When in combat, all pets have a +20% crit chance"
+            }),
+        new PetGeneBase(30, <PetGeneModel>{
+                "name": "Ninja",
+                "abilityType": AbilityTypeEnum.Red,
+                "x2": 5,
+                "lowerLetter": "9",
+                "upperLetter": "8",
+                "description": "Shoots 4 ninja stars, which deal 175% Damage each",
+                "combatDescription": "When in combat, adjacent pets and this one throw ninja stars instead of basic attacks"
+            }),
+        new PetGeneBase(31, <PetGeneModel>{
+                "name": "Superboomer",
+                "abilityType": AbilityTypeEnum.Red,
+                "x2": 9,
+                "lowerLetter": "!",
+                "upperLetter": "@",
+                "description": "Throws 2 super boomerangs, which deal 100% Damage and has an 80% chance to bounce",
+                "combatDescription": "When in combat, all pets deal 1.40x Damage"
+            }),
+        new PetGeneBase(32, <PetGeneModel>{
+                "name": "Borger",
+                "abilityType": AbilityTypeEnum.Green,
+                "x2": 7,
+                "lowerLetter": "%",
+                "upperLetter": "^",
+                "description": "Shoots 2 basic attacks, but would much rather have shot 2 burgers into its mouth",
+                "combatDescription": "When in combat, this pet has +2000% hp. Big borger, big health. @ When foraging, this pet contributes 10x more foraging speed if the territory above has at least one Forager type (the Green Leaf type) pet."
+            }),
+        new PetGeneBase(33, <PetGeneModel>{
+                "name": "GeneName",
+                "abilityType": AbilityTypeEnum.Green,
+                "x2": 20,
+                "lowerLetter": "&",
+                "upperLetter": "*",
+                "description": "Filler Description",
+                "combatDescription": "Filler Description"
+            }),
+        new PetGeneBase(34, <PetGeneModel>{
+                "name": "GeneName",
+                "abilityType": AbilityTypeEnum.Green,
+                "x2": 20,
+                "lowerLetter": "(",
+                "upperLetter": ")",
+                "description": "Filler Description",
+                "combatDescription": "Filler Description"
             })    
 ]
 }

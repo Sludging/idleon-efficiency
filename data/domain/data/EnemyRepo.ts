@@ -4224,6 +4224,7 @@ export const initEnemyRepo = () => {
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 5000, "chance": 0.5, "questLink": "N/A"},
                         <ItemDropModel>{"item": "GalaxyC4", "quantity": 1, "chance": 0.16, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Key4", "quantity": 1, "chance": 6.667e-05, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsG13", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable21", "quantity": 1, "chance": 0.0032, "questLink": "N/A"}
                     ]
@@ -5025,7 +5026,7 @@ export const initEnemyRepo = () => {
                 "mapData": undefined,
                 "navigation": <EnemyNavModel>{
                     "prev": "Boss4A",
-                    "next": "Blank",
+                    "next": "Boss4C",
                     "hasCrystal": true,
                     "crystalName": undefined,
                     "hasCard": true
@@ -5066,6 +5067,7 @@ export const initEnemyRepo = () => {
                         <CardDropModel>{"item": "CardsZ17", "quantity": 1, "chance": 0.003, "questLink": "N/A"},
                         <ItemDropModel>{"item": "ObolTroll", "quantity": 1, "chance": 0.007, "questLink": "N/A"},
                         <ItemDropModel>{"item": "TrollPart", "quantity": 4, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentCape6", "quantity": 1, "chance": 0.00025, "questLink": "N/A"},
                         <ItemDropModel>{"item": "StoneZ2", "quantity": 1, "chance": 0.03, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable19", "quantity": 2, "chance": 1, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable20", "quantity": 2, "chance": 1, "questLink": "N/A"},
@@ -5073,7 +5075,13 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "Boss4B",
+                    "next": "Blank",
+                    "hasCrystal": true,
+                    "crystalName": undefined,
+                    "hasCard": true
+                },
                 "bossData": <BossDetailsModel>{
                     "health": 2000000000,
                     "defence": 25,
@@ -6210,16 +6218,16 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("Pet9", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Panda",
+                    "Name": "Dog",
                     "AFKtype": AFKTypeEnum.Fighting,
                     "MonsterFace": 23,
                     "MonsterOffsetX": 38,
                     "MonsterOffsetY": 47,
-                    "HeightOfMonster": 47,
-                    "MonsterMoving": 1,
-                    "MovingFrame": 6,
+                    "HeightOfMonster": 44,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 0,
                     "RespawnTime": 40,
-                    "DeathFrame": 12,
+                    "DeathFrame": 7,
                     "MonsterHPTotal": 14000,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
@@ -6237,16 +6245,16 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("Pet10", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Panda",
+                    "Name": "Cool Bird",
                     "AFKtype": AFKTypeEnum.Fighting,
                     "MonsterFace": 23,
                     "MonsterOffsetX": 38,
                     "MonsterOffsetY": 47,
-                    "HeightOfMonster": 47,
+                    "HeightOfMonster": 53,
                     "MonsterMoving": 1,
-                    "MovingFrame": 6,
+                    "MovingFrame": 8,
                     "RespawnTime": 40,
-                    "DeathFrame": 12,
+                    "DeathFrame": 17,
                     "MonsterHPTotal": 14000,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
@@ -6264,16 +6272,16 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("Pet11", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Panda",
+                    "Name": "Hedgehog",
                     "AFKtype": AFKTypeEnum.Fighting,
                     "MonsterFace": 23,
                     "MonsterOffsetX": 38,
                     "MonsterOffsetY": 47,
-                    "HeightOfMonster": 47,
+                    "HeightOfMonster": 46,
                     "MonsterMoving": 1,
                     "MovingFrame": 6,
                     "RespawnTime": 40,
-                    "DeathFrame": 12,
+                    "DeathFrame": 11,
                     "MonsterHPTotal": 14000,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
