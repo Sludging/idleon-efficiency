@@ -21754,11 +21754,11 @@ export const initItemRepo = () => {
         new ItemBase("Quest28", <ItemModel>{
                 "item": <DescItemModel>{
                     "internalName": "Quest28",
-                    "displayName": "IOU One Blue Crystal",
+                    "displayName": "IOU One Fire Crystal",
                     "sellPrice": 100,
                     "typeGen": TypeGenEnum.dQuest,
                     "Type": "Quest Item",
-                    "description": "Hold down on this IOU, and a Blue Crystal will drop at your feet! "
+                    "description": "Sorry cutie, but you gotta wait until big man Lava up top tells me I'm allowed to drop the crystal to World 5! Them's the rules, I'm sure you've noticed by now... @ Love, Your Favorite Troll "
                 },
                 "sources": undefined,
                 "notes": <NoteModel>{
@@ -38164,10 +38164,10 @@ export const initItemRepo = () => {
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{
                     "sources": [
-                        <DetDropModel>{"source": "babaHour", "quantity": 1, "chance": 0.24},
-                        <DetDropModel>{"source": "babaMummy", "quantity": 1, "chance": 0.3},
-                        <DetDropModel>{"source": "mini3a", "quantity": 1, "chance": 0.3},
-                        <DetDropModel>{"source": "mini4a", "quantity": 1, "chance": 0.3},
+                        <DetDropModel>{"source": "babaHour", "quantity": 1, "chance": 0.16},
+                        <DetDropModel>{"source": "babaMummy", "quantity": 1, "chance": 0.2},
+                        <DetDropModel>{"source": "mini3a", "quantity": 1, "chance": 0.2},
+                        <DetDropModel>{"source": "mini4a", "quantity": 1, "chance": 0.2},
                         <DetDropModel>{"source": "sheepB", "quantity": 3, "chance": 0.6},
                         <DetDropModel>{"source": "snakeY", "quantity": 3, "chance": 0.2}
                     ]
@@ -38245,10 +38245,10 @@ export const initItemRepo = () => {
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{
                     "sources": [
-                        <DetDropModel>{"source": "babaHour", "quantity": 1, "chance": 0.128},
-                        <DetDropModel>{"source": "babaMummy", "quantity": 1, "chance": 0.16},
-                        <DetDropModel>{"source": "mini3a", "quantity": 1, "chance": 0.16},
-                        <DetDropModel>{"source": "mini4a", "quantity": 1, "chance": 0.16},
+                        <DetDropModel>{"source": "babaHour", "quantity": 1, "chance": 0.08},
+                        <DetDropModel>{"source": "babaMummy", "quantity": 1, "chance": 0.1},
+                        <DetDropModel>{"source": "mini3a", "quantity": 1, "chance": 0.1},
+                        <DetDropModel>{"source": "mini4a", "quantity": 1, "chance": 0.1},
                         <DetDropModel>{"source": "sheepB", "quantity": 3, "chance": 0.15},
                         <DetDropModel>{"source": "snakeY", "quantity": 3, "chance": 0.05}
                     ]
@@ -38349,10 +38349,10 @@ export const initItemRepo = () => {
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{
                     "sources": [
-                        <DetDropModel>{"source": "babaHour", "quantity": 1, "chance": 0.052},
-                        <DetDropModel>{"source": "babaMummy", "quantity": 1, "chance": 0.065},
-                        <DetDropModel>{"source": "mini3a", "quantity": 1, "chance": 0.065},
-                        <DetDropModel>{"source": "mini4a", "quantity": 1, "chance": 0.065}
+                        <DetDropModel>{"source": "babaHour", "quantity": 1, "chance": 0.02},
+                        <DetDropModel>{"source": "babaMummy", "quantity": 1, "chance": 0.025},
+                        <DetDropModel>{"source": "mini3a", "quantity": 1, "chance": 0.025},
+                        <DetDropModel>{"source": "mini4a", "quantity": 1, "chance": 0.025}
                     ]
                 }
             }),
@@ -38422,10 +38422,10 @@ export const initItemRepo = () => {
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{
                     "sources": [
-                        <DetDropModel>{"source": "babaHour", "quantity": 1, "chance": 0.014},
-                        <DetDropModel>{"source": "babaMummy", "quantity": 1, "chance": 0.0175},
-                        <DetDropModel>{"source": "mini3a", "quantity": 1, "chance": 0.0175},
-                        <DetDropModel>{"source": "mini4a", "quantity": 1, "chance": 0.0175},
+                        <DetDropModel>{"source": "babaHour", "quantity": 1, "chance": 0.004},
+                        <DetDropModel>{"source": "babaMummy", "quantity": 1, "chance": 0.005},
+                        <DetDropModel>{"source": "mini3a", "quantity": 1, "chance": 0.005},
+                        <DetDropModel>{"source": "mini4a", "quantity": 1, "chance": 0.005},
                         <DetDropModel>{"source": "sheepB", "quantity": 2, "chance": 0.01}
                     ]
                 }
@@ -38489,10 +38489,10 @@ export const initItemRepo = () => {
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{
                     "sources": [
-                        <DetDropModel>{"source": "babaHour", "quantity": 1, "chance": 0.004},
-                        <DetDropModel>{"source": "babaMummy", "quantity": 1, "chance": 0.005},
-                        <DetDropModel>{"source": "mini3a", "quantity": 1, "chance": 0.005},
-                        <DetDropModel>{"source": "mini4a", "quantity": 1, "chance": 0.005}
+                        <DetDropModel>{"source": "babaHour", "quantity": 1, "chance": 0.0012},
+                        <DetDropModel>{"source": "babaMummy", "quantity": 1, "chance": 0.0015},
+                        <DetDropModel>{"source": "mini3a", "quantity": 1, "chance": 0.0015},
+                        <DetDropModel>{"source": "mini4a", "quantity": 1, "chance": 0.0015}
                     ]
                 }
             }),
@@ -38516,10 +38516,10 @@ export const initItemRepo = () => {
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{
                     "sources": [
-                        <DetDropModel>{"source": "babaHour", "quantity": 1, "chance": 0.0004},
-                        <DetDropModel>{"source": "babaMummy", "quantity": 1, "chance": 0.0005},
-                        <DetDropModel>{"source": "mini3a", "quantity": 1, "chance": 0.0005},
-                        <DetDropModel>{"source": "mini4a", "quantity": 1, "chance": 0.0005}
+                        <DetDropModel>{"source": "babaHour", "quantity": 1, "chance": 0.00012},
+                        <DetDropModel>{"source": "babaMummy", "quantity": 1, "chance": 0.00015},
+                        <DetDropModel>{"source": "mini3a", "quantity": 1, "chance": 0.00015},
+                        <DetDropModel>{"source": "mini4a", "quantity": 1, "chance": 0.00015}
                     ]
                 }
             }),
@@ -38603,7 +38603,8 @@ export const initItemRepo = () => {
                         <SourceModel>{
                             "wikiName": "[[Carpenter Cardinal#Restoring Power, once again, to a Portal|Restoring Power, once again, to a Portal]]",
                             "txtName": "Carpenter Cardinal: Restoring Power, once again, to a Portal"
-                        }
+                        },
+                        <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
                     ],
                     "recipeFrom": [],
                     "questAss": []
@@ -44760,26 +44761,26 @@ export const initItemRepo = () => {
                     "intID": "EquipmentHats74",
                     "recipe": [
                         <ComponentModel>{"item": "TrollPart", "quantity": 50},
-                        <ComponentModel>{"item": "FishTKlineIcon3", "quantity": 10},
+                        <ComponentModel>{"item": "Line3", "quantity": 10},
                         <ComponentModel>{"item": "StarfireBar", "quantity": 20000},
                         <ComponentModel>{"item": "Refinery6", "quantity": 4000}
                     ],
-                    "levelReqToCraft": 111,
+                    "levelReqToCraft": 70,
                     "expGiven": 1000000,
                     "no": 61,
                     "tab": 4,
-                    "sellPrice": 470000,
+                    "sellPrice": 470500,
                     "recipeFrom": [],
                     "detailedRecipe": <DetailedRecipeModel>{
                         "detRecipe": [
                             <DetRecipeComponentModel>{"indent": 0, "item": "TrollPart", "quantity": 50},
-                            <DetRecipeComponentModel>{"indent": 0, "item": "FishTKlineIcon3", "quantity": 10},
+                            <DetRecipeComponentModel>{"indent": 0, "item": "Line3", "quantity": 10},
                             <DetRecipeComponentModel>{"indent": 0, "item": "StarfireBar", "quantity": 20000},
                             <DetRecipeComponentModel>{"indent": 0, "item": "Refinery6", "quantity": 4000}
                         ],
                         "detRecipeTotals": [
                             <ComponentModel>{"item": "TrollPart", "quantity": 50},
-                            <ComponentModel>{"item": "FishTKlineIcon3", "quantity": 10},
+                            <ComponentModel>{"item": "Line3", "quantity": 10},
                             <ComponentModel>{"item": "StarfireBar", "quantity": 20000},
                             <ComponentModel>{"item": "Refinery6", "quantity": 4000}
                         ]
@@ -45092,7 +45093,7 @@ export const initItemRepo = () => {
                         <ComponentModel>{"item": "StarfireBar", "quantity": 10000},
                         <ComponentModel>{"item": "Refinery6", "quantity": 2800}
                     ],
-                    "levelReqToCraft": 111,
+                    "levelReqToCraft": 68,
                     "expGiven": 1000000,
                     "no": 62,
                     "tab": 4,
@@ -45420,7 +45421,7 @@ export const initItemRepo = () => {
                         <ComponentModel>{"item": "StarfireBar", "quantity": 5000},
                         <ComponentModel>{"item": "Refinery6", "quantity": 1600}
                     ],
-                    "levelReqToCraft": 111,
+                    "levelReqToCraft": 67,
                     "expGiven": 1000000,
                     "no": 63,
                     "tab": 4,
@@ -45746,7 +45747,7 @@ export const initItemRepo = () => {
                     "lvReqToCraft": 55,
                     "lvReqToEquip": 185,
                     "Class": ClassTypeEnum.All,
-                    "Weapon_Power": 0,
+                    "Weapon_Power": 2,
                     "STR": 22,
                     "AGI": 22,
                     "WIS": 22,
@@ -45772,7 +45773,7 @@ export const initItemRepo = () => {
                         <ComponentModel>{"item": "StarfireBar", "quantity": 3000},
                         <ComponentModel>{"item": "Refinery6", "quantity": 750}
                     ],
-                    "levelReqToCraft": 111,
+                    "levelReqToCraft": 65,
                     "expGiven": 1000000,
                     "no": 64,
                     "tab": 4,
@@ -47155,7 +47156,11 @@ export const initItemRepo = () => {
                     "Skill": "",
                     "Skill_Power": 0
                 },
-                "sources": undefined,
+                "sources": <SourcesModel>{
+                    "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                    "recipeFrom": [],
+                    "questAss": []
+                },
                 "notes": undefined,
                 "recipe": undefined,
                 "vendors": undefined,
@@ -47318,6 +47323,39 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Boss3C", "quantity": 1, "chance": 0.0003}]}
+            }),
+        new ItemBase("EquipmentCape6", <ItemModel>{
+                "item": <ArmourItemModel>{
+                    "internalName": "EquipmentCape6",
+                    "displayName": "Cascading Scaled Cape of Krieg",
+                    "sellPrice": 1,
+                    "typeGen": TypeGenEnum.aCape,
+                    "Type": "Cape",
+                    "lvReqToCraft": 55,
+                    "lvReqToEquip": 1,
+                    "Class": ClassTypeEnum.All,
+                    "Weapon_Power": 1,
+                    "STR": 10,
+                    "AGI": 10,
+                    "WIS": 10,
+                    "LUK": 10,
+                    "Defence": 0,
+                    "miscUp1": "6% All Stats",
+                    "miscUp2": "00",
+                    "Upgrade_Slots_Left": 0,
+                    "Skill": "",
+                    "Skill_Power": 0
+                },
+                "sources": <SourcesModel>{
+                    "sources": [<SourceModel>{"wikiName": "[[Blitzkrieg Troll]]", "txtName": "Blitzkrieg Troll"}],
+                    "recipeFrom": [],
+                    "questAss": []
+                },
+                "notes": undefined,
+                "recipe": undefined,
+                "vendors": undefined,
+                "anvilProduction": undefined,
+                "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Boss4C", "quantity": 1, "chance": 0.00025}]}
             }),
         new ItemBase("WorshipSkull8", <ItemModel>{
                 "item": <SkullItemModel>{
@@ -50877,6 +50915,7 @@ export const initItemRepo = () => {
                 },
                 "sources": <SourcesModel>{
                     "sources": [
+                        <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"},
                         <SourceModel>{"wikiName": "[[Dungeons#Flurbo Shop|Flurbo Shop]]", "txtName": "Dungeons: Flurbo Shop"},
                         <SourceModel>{
                             "wikiName": "[[Dungeons#Loot Rolls|Dungeon Loot Rolls]]",
@@ -57341,6 +57380,7 @@ export const initItemRepo = () => {
                 },
                 "sources": <SourcesModel>{
                     "sources": [
+                        <SourceModel>{"wikiName": "[[Stilted Seeker]]", "txtName": "Stilted Seeker"},
                         <SourceModel>{"wikiName": "[[Mutated Mush]]", "txtName": "Mutated Mush"},
                         <SourceModel>{
                             "wikiName": "[[Colosseum/Astro#Bronze Chest|Astro Bronze Chest]]",
@@ -57364,6 +57404,7 @@ export const initItemRepo = () => {
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{
                     "sources": [
+                        <DetDropModel>{"source": "w4c4", "quantity": 1, "chance": 6.667e-05},
                         <DetDropModel>{"source": "mini4a", "quantity": 1, "chance": 0.5},
                         <DetDropModel>{"source": "ChestA4", "quantity": 1, "chance": 0.006},
                         <DetDropModel>{"source": "ChestB4", "quantity": 1, "chance": 0.012},
@@ -63008,11 +63049,18 @@ export const initItemRepo = () => {
         new ItemBase("CardsZ17", <ItemModel>{
                 "item": <CardItemModel>{
                     "internalName": "CardsZ17",
-                    "displayName": "FILLER",
+                    "displayName": "Blitzkrieg Troll Card",
                     "sellPrice": 1,
                     "typeGen": TypeGenEnum.dCard,
                     "Type": "Card",
-                    "cardData": undefined,
+                    "cardData": <CardDataModel>{
+                        "cardID": "Z17",
+                        "category": "Bosses",
+                        "perTier": 4,
+                        "effect": "+{% Total Damage",
+                        "bonus": 7,
+                        "order": 19
+                    },
                     "dropChance": 0.003
                 },
                 "sources": <SourcesModel>{
