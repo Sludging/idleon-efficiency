@@ -296,6 +296,15 @@ export const initPetGeneRepo = () => {
                 "combatDescription": "When in combat, all pets deal 1.40x Damage"
             }),
         new PetGeneBase(32, <PetGeneModel>{
+                "name": "Peapeapod",
+                "abilityType": AbilityTypeEnum.Red,
+                "x2": 6,
+                "lowerLetter": "#",
+                "upperLetter": "$",
+                "description": "Shoot 10 tiny peas which deal 75% damage. Pow pow pow pow pow pow pow pow pow pow!!!",
+                "combatDescription": "When in combat, all pets have a 25% chance to shoot another basic attack. This can happen multiple times in a row."
+            }),
+        new PetGeneBase(33, <PetGeneModel>{
                 "name": "Borger",
                 "abilityType": AbilityTypeEnum.Green,
                 "x2": 7,
@@ -304,7 +313,7 @@ export const initPetGeneRepo = () => {
                 "description": "Shoots 2 basic attacks, but would much rather have shot 2 burgers into its mouth",
                 "combatDescription": "When in combat, this pet has +2000% hp. Big borger, big health. @ When foraging, this pet contributes 10x more foraging speed if the territory above has at least one Forager type (the Green Leaf type) pet."
             }),
-        new PetGeneBase(33, <PetGeneModel>{
+        new PetGeneBase(34, <PetGeneModel>{
                 "name": "GeneName",
                 "abilityType": AbilityTypeEnum.Green,
                 "x2": 20,
@@ -313,7 +322,7 @@ export const initPetGeneRepo = () => {
                 "description": "Filler Description",
                 "combatDescription": "Filler Description"
             }),
-        new PetGeneBase(34, <PetGeneModel>{
+        new PetGeneBase(35, <PetGeneModel>{
                 "name": "GeneName",
                 "abilityType": AbilityTypeEnum.Green,
                 "x2": 20,
