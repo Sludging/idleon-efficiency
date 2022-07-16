@@ -1,30 +1,38 @@
 import { Lab } from "./lab";
 
 interface PlayerInfo {
-    samples: {item: string, quantity: number}[]
-    active: {item: string, quantity: number}[]
+    samples: { item: string, quantity: number }[]
+    active: { item: string, quantity: number }[]
     inLab: boolean;
 }
 
 export class Printer {
     playerInfo: PlayerInfo[] = [];
+
+    GetTotalActive = (itemName: string): number => {
+        return this.playerInfo.reduce<number>((total, player) => {
+            const activeSamples = player.active.filter(sample => sample.item == itemName).map(sample => sample.quantity);
+            total += activeSamples.reduce((sum, sample) => sum += player.inLab ? sample * 2 : sample, 0);
+            return total;
+        }, 0)
+    }
 }
 
 export default function parsePrinter(rawData: any[], charCount: number) {
     const toReturn = new Printer();
     if (rawData) {
         [...Array(charCount)].forEach((_, playerIndex) => {
-            const samples: {item: string, quantity: number}[] = [];
+            const samples: { item: string, quantity: number }[] = [];
             [...Array(5)].forEach((_, sampleIndex) => {
-                samples.push({ item: rawData[5 + (sampleIndex * 2) + (playerIndex * 14)], quantity: rawData[6 + (sampleIndex * 2) + (playerIndex * 14)]})
+                samples.push({ item: rawData[5 + (sampleIndex * 2) + (playerIndex * 14)], quantity: rawData[6 + (sampleIndex * 2) + (playerIndex * 14)] })
             })
 
-            const active: {item: string, quantity: number}[] = [];
+            const active: { item: string, quantity: number }[] = [];
             [...Array(2)].forEach((_, printerIndex) => {
-                active.push({ item: rawData[5 + 10 + (printerIndex * 2) + (playerIndex * 14)], quantity: rawData[6 + 10 + (printerIndex * 2) + (playerIndex * 14)]})
+                active.push({ item: rawData[5 + 10 + (printerIndex * 2) + (playerIndex * 14)], quantity: rawData[6 + 10 + (printerIndex * 2) + (playerIndex * 14)] })
             })
 
-            toReturn.playerInfo.push({ samples: samples, active: active, inLab: false});
+            toReturn.playerInfo.push({ samples: samples, active: active, inLab: false });
         })
     }
     return toReturn;
