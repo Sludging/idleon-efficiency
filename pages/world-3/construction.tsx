@@ -156,11 +156,6 @@ function RefineryDisplay() {
         }
     }, [appContext, refineryData]);
 
-    const getSample = (allSamples: { item: string, quantity: number }[], item: string) => {
-        const itemSamples = allSamples.filter(sample => sample.item == item).map(sample => sample.quantity);
-        return itemSamples.reduce((sum, sample) => sum += sample, 0);
-    }
-
     if (!refineryData || Object.entries(refineryData.salts).filter(([name, saltInfo]) => saltInfo.rank > 0).length == 0) {
         return (
             <Box align="center" pad="medium">
@@ -310,10 +305,7 @@ function RefineryDisplay() {
                                                         const itemCost = costData.quantity * info.getCostMulti(costData.item.includes("Refinery"), index <= saltMeritLevel);
                                                         const cyclesPerHour = Math.ceil(3600 / cycleInfo[Math.floor(index / 3)].time);
                                                         const isSalt = costItem?.internalName.includes("Refinery");
-                                                        let currentPrinting = 0;
-                                                        if (printer) {
-                                                            currentPrinting = getSample(printer?.playerInfo.flatMap(player => player.active), costData.item);
-                                                        }
+                                                        const currentPrinting = printer?.GetTotalActive(costData.item) ?? 0;
                                                         if (costItem != undefined) {
                                                             return (
                                                                 <Box key={costIndex} direction="row" align="center">
