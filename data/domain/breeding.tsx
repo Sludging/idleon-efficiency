@@ -117,17 +117,26 @@ export class Pet {
     getTrekSpeed = (territoryIndex: number, sameTerritory: Pet[], territoryBefore: Pet[]) => {
         if (this.gene.data.abilityType === AbilityTypeEnum.Green) {
             switch (this.gene.data.name) {
-                case 'Forager': return this.power * 2;
+                case 'Forager':
+                    return this.power * 2;
                 case 'Targeter':
                     // If we have pets in the territory before and the pet above is a targeter, multiply power by 5.
                     if (territoryBefore.length > territoryIndex && territoryBefore[territoryIndex].gene.data.name == "Targeter") {
                         return this.power * 5;
                     }
+                    break;
                 case 'Opticular':
                     // If has more power then every other pet in the territory, multiply power by 3.
                     if (sameTerritory.every(comparePet => comparePet.power <= this.power)) {
                         return this.power * 3;
                     }
+                    break;
+                case 'Borger':
+                    // If the territory before has at least one Forager, multiply power by 10.
+                    if (territoryBefore.some(pet => pet.gene.data.name === 'Forager')) {
+                        return this.power * 10;
+                    }
+                    break;
             }
             return this.power;
         }
@@ -148,13 +157,13 @@ export class Pet {
     getBackgroundImageData = (): ImageData => {
         let cardNumber: number = 4;
         switch(this.gene.data.abilityType) {
-            case AbilityTypeEnum.Green: 
+            case AbilityTypeEnum.Green:
                 cardNumber = 1;
                 break;
-            case AbilityTypeEnum.Red: 
+            case AbilityTypeEnum.Red:
                 cardNumber = 0;
                 break;
-            case AbilityTypeEnum.Special: 
+            case AbilityTypeEnum.Special:
                 cardNumber = 3;
                 break;
         }
@@ -206,6 +215,12 @@ export class Territory {
         const flashyCount = hasCombatPets ? 0 : this.pets.filter(pet => pet.gene.data.name === 'Flashy').length;
         const fastidiousCount = !hasCombatPets ? 0 : this.pets.filter(pet => pet.gene.data.name === 'Fastidious').length;
 
+        const miasmaBonus = (
+          this.pets.some(pet => pet.gene.data.name === 'Miasma') // has Miasma pet
+          // check that pet genes do not repeat
+          && this.pets.map(pet => pet.gene.data.name).every((item, index, genes) => genes.indexOf(item) === index)
+        ) ? 4 : 1;
+
         const territoryWithNeighbours = [...this.pets, ...territoryBefore, ...territoryAfter];
 
         const whalesCount = territoryWithNeighbours.filter(pet => pet.gene.data.name === 'Badumdum').length;
@@ -215,7 +230,8 @@ export class Territory {
             * Math.pow(1.3, fleetersCount)
             * Math.pow(1.2, whalesCount)
             * Math.pow(1.5, flashyCount)
-            * Math.pow(1.5, fastidiousCount);
+            * Math.pow(1.5, fastidiousCount)
+            * miasmaBonus; // x4 or x1 if conditions not met
 
         this.trekkingFightPower = (baseFightPower + baseForagingPower * bloomingAxeBonus)
             * Math.pow(1.5, poopsCount);
@@ -363,13 +379,14 @@ export const parseBreeding = (petsStored: any[][], pets: any[][], optionsList: a
             breeding.territory[tIndex].currentProgress = territory[0];
             breeding.territory[tIndex].currentForagingRound = territory[1]; // number of foraging rounds passed
 
-            // Check index 3, 5, and 7. If not blank, 
+            // Check index 3, 5, and 7. If not blank,
             // then get the name from that index and the current spice count from the next index.
             breeding.territory[tIndex].spiceRewards = [3, 5, 7]
                 .filter(i => territory[i] && territory[i] != 'Blank')
                 .map(i => ({ type: territory[i], count: territory[i + 1] }));
 
             const territoryPets = pets.slice(27 + (4 * index), 27 + (4 * index) + 4);
+
             territoryPets.forEach(pet => {
                 breeding.territory[tIndex].pets.push(new Pet(pet[0] as string, breeding.genes[pet[1] as number], pet[2] as number));
             })

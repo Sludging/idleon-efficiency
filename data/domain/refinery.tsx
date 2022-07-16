@@ -1,42 +1,6 @@
+import { initRefineryCostRepo } from "./data/RefineryCostRepo";
 import { Item } from "./items";
-
-export const SaltCostMap: Map<string, { item: string, quantity: number}[]> = new Map();
-SaltCostMap.set("Refinery1", [
-    {"item": "Grasslands1", "quantity": 10},
-    {"item": "Copper", "quantity": 5}
-]);
-SaltCostMap.set("Refinery2", [
-    {"item": "Forest3", "quantity": 10},
-    {"item": "ForestTree", "quantity": 5},
-    {"item": "Refinery1", "quantity": 2}
-]);
-SaltCostMap.set("Refinery3", [
-    {"item": "DesertA1", "quantity": 50},
-    {"item": "Fish1", "quantity": 30},
-    {"item": "Bug1", "quantity": 40},
-    {"item": "Refinery2", "quantity": 3}
-]);
-SaltCostMap.set("Refinery4", [
-    {"item": "SnowA1", "quantity": 10},
-    {"item": "Soul2", "quantity": 2},
-    {"item": "Critter3", "quantity": 1},
-    {"item": "Refinery3", "quantity": 1}
-]);
-SaltCostMap.set("Refinery5", [
-    {"item": "SnowB4", "quantity": 25},
-    {"item": "Fish4", "quantity": 5},
-    {"item": "Bug3", "quantity": 5},
-    {"item": "Critter4", "quantity": 5},
-    {"item": "Refinery4", "quantity": 2}
-]);
-SaltCostMap.set("Refinery6", [
-    {"item": "SnowC4", "quantity": 50},
-    {"item": "VoidBar", "quantity": 5},
-    {"item": "Tree7", "quantity": 5},
-    {"item": "Bug6", "quantity": 5},
-    {"item": "Soul4", "quantity": 5},
-    {"item": "Refinery5", "quantity": 3}
-]);
+import { ComponentModel } from "./model/componentModel";
 
 const RankToPowerCap = "50 50 200 800 3000 8000 14000 20000 30000 40000 50000 65000 80000 100000 200000 300000 400000 500000 600000 700000 800000 800000 800000 800000 800000 800000 800000 800000".split(" ");
 
@@ -97,7 +61,7 @@ export class SaltStatus {
     progress: number = 0
     autoRefine: number = 0
     active: boolean = false
-    baseCost: {item: string, quantity: number}[] = []
+    baseCost: ComponentModel[] = []
 
     getCap = () => {
         return parseInt(RankToPowerCap[this.rank]);
@@ -152,6 +116,7 @@ export class Refinery {
 
 export default function parseRefinery(rawData: any[][]) {
     const toReturn = new Refinery();
+    const costRepo = initRefineryCostRepo();
     if (rawData.length > 0) {
         const unlockedSalts = rawData[0][0];
         toReturn.timePastCombustion = rawData[0][1];
@@ -169,7 +134,7 @@ export default function parseRefinery(rawData: any[][]) {
             newSaltStatus.progress = rawData[saltIndex][0];
             newSaltStatus.autoRefine = rawData[saltIndex][4];
             newSaltStatus.active = rawData[saltIndex][3] as boolean;
-            newSaltStatus.baseCost = SaltCostMap.get(`Refinery${i + 1}`) ?? [];
+            newSaltStatus.baseCost = costRepo[i].data.cost.map(component => component as ComponentModel);
             toReturn.salts[`Refinery${i + 1}`] = newSaltStatus;
         })
     }
