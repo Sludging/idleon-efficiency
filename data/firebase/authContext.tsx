@@ -6,9 +6,15 @@ import { GoogleAuthProvider, signInWithPopup, signInWithCredential, signOut, Ema
 import { sendEvent, loginEvent } from '../../lib/gtag';
 import { useRouter } from "next/dist/client/router";
 
+export enum AuthStatus {
+    Loading,
+    Valid,
+    NoUser
+}
+
 interface AuthData {
     user: User | null
-    isLoading: boolean
+    authStatus: AuthStatus
     logoutFunction: Function
     tokenFunction: Function
     emailLoginFunction: Function
@@ -26,7 +32,7 @@ export const getAuthData = (): AuthData => {
 
 export const AuthProvider: React.FC<{appLoading: boolean, data: {data: Map<string, any>, charNames: string[]} | undefined, domain: string, children?: React.ReactNode}> = ({ appLoading, data, domain, children }) => {
     const [user, setUser] = useState<User | null>(null);
-    const [loading, setLoading] = useState(appLoading);
+    const [authStatus, setAuthStatus] = useState(AuthStatus.Loading);
     const router = useRouter();
 
     const loginThroughToken = (id_token: string, callback?: Function) => {
@@ -36,6 +42,7 @@ export const AuthProvider: React.FC<{appLoading: boolean, data: {data: Map<strin
             .then((result) => {
                 setUser(result.user);
                 loginEvent("TOKEN");
+                setAuthStatus(AuthStatus.Valid);
                 router.push("/world-1/stamps");
             }).catch((error) => {
                 const errorCode = error.code;
@@ -54,6 +61,7 @@ export const AuthProvider: React.FC<{appLoading: boolean, data: {data: Map<strin
             .then((result) => {
                 setUser(result.user);
                 loginEvent("EMAIL");
+                setAuthStatus(AuthStatus.Valid);
                 router.push("/world-1/stamps");
             }).catch((error) => {
                 const errorCode = error.code;
@@ -75,6 +83,8 @@ export const AuthProvider: React.FC<{appLoading: boolean, data: {data: Map<strin
                         category: "engagement",
                         value: 1,
                     });
+                    setUser(null);
+                    setAuthStatus(AuthStatus.NoUser);
                     router.push('/');
                 }).catch((error) => {
                     const errorCode = error.code;
@@ -86,27 +96,29 @@ export const AuthProvider: React.FC<{appLoading: boolean, data: {data: Map<strin
 
     useEffect(() => {
         if (!appLoading && domain == "") {
-            setLoading(true);
+            setAuthStatus(AuthStatus.Loading);
             const auth = getAuth(app);
             auth.onAuthStateChanged(res => {
                 if (res) {
                     setUser(res);
+                    setAuthStatus(AuthStatus.Valid);
                 }
                 else {
                     setUser(null);
+                    setAuthStatus(AuthStatus.NoUser);
+
                 }
-                setLoading(false);
             });
         }
         else if (domain != "") {
-            setLoading(false);
+            setAuthStatus(AuthStatus.NoUser);
         }
     }, [user, appLoading, domain]);
 
     return (
         <AuthContext.Provider value={{
             user: user,
-            isLoading: loading,
+            authStatus: authStatus,
             emailLoginFunction: loginThroughEmailPassword,
             logoutFunction: logout,
             tokenFunction: loginThroughToken,

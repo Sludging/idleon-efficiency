@@ -35,6 +35,11 @@ export class AnvilProduct {
 
     totalSpeed: number = 0;
 
+    // Production math
+    futureProduction: number = 0;
+    percentOfCap: number = 0
+    timeTillCap: number = 0;
+
     constructor(public index: number, public data: AnvilProduceModel) { }
 
     static fromBase = (data: AnvilProduceBase[]) => {
@@ -302,6 +307,12 @@ export const updateAnvil = (data: Map<string, any>) => {
         }
 
         playerAnvil.setCapacity(player.capacity.bags.find(x => x.name == "bCraft")?.getCapacity(capProps) ?? 0);
+
+        playerAnvil.production.forEach(anvilProduct => {
+            anvilProduct.futureProduction = Math.min(Math.round(anvilProduct.currentAmount + ((anvilProduct.currentProgress + (player.afkFor * playerAnvil.anvilSpeed / 3600)) / anvilProduct.data.time) * (anvilProduct.hammers ?? 0)), playerAnvil.productCapacity);
+            anvilProduct.percentOfCap = Math.round(anvilProduct.futureProduction / playerAnvil.productCapacity * 100);
+            anvilProduct.timeTillCap = ((playerAnvil.productCapacity - anvilProduct.futureProduction) / (playerAnvil.anvilSpeed / 3600 / anvilProduct.data.time * (anvilProduct.hammers ?? 0)));
+        })
     })
 
     anvilWrapper.production.forEach((anvilProduct, index) => {

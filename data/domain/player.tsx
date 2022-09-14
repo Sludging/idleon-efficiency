@@ -706,10 +706,10 @@ export const updatePlayers = (data: Map<string, any>) => {
     });
 
     // Double claim chance.
-    const doubleChanceBubbleBonus = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).find(bubble => bubble.name == "Afk Expexp")?.getBonus() ?? 0;
     const doubleChanceGuildBonus = guild.guildBonuses.find(bonus => bonus.name == "Anotha One")?.getBonus() ?? 0;
     const doubleChanceBribeBonus = bribes.find(bribe => bribe.bonus == "AfkDoubleEXP")?.value ?? 0;
     players.forEach(player => {
+        const doubleChanceBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.Quicc, 19)
         player.setDoubleClaimChance(doubleChanceBubbleBonus, doubleChanceBribeBonus, doubleChanceGuildBonus);
     })
 

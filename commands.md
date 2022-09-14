@@ -5,7 +5,7 @@ aws sso login --profile idleon
 To sync images:
 ```
 1. cd data/icons/assets/data
-2. aws --profile idleon s3 sync . s3://idleon-efficiency-images/images/ --acl bucket-owner-full-control
+2. aws --profile idleon s3 sync . s3://idleon-efficiency-images/images/ --acl bucket-owner-full-control --cache-control max-age=84600,public
 ```
 
 To copy models from the Wikibot:
