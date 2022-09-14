@@ -33,6 +33,8 @@ import { parseBreeding, updateBreeding } from './breeding';
 import { notUndefined } from '../utility';
 import parseSigils, { updateSigils } from './sigils';
 import { parseAnvil, updateAnvil } from './anvil';
+import { updateAlerts } from './alerts';
+import { parseAccount, updateAccount } from './account';
 
 
 export const safeJsonParse = <T, >(doc: Cloudsave, key: string, emptyValue: T): T => {
@@ -124,6 +126,7 @@ const keyFunctionMap: Record<string, Function> = {
     "lab": (doc: Cloudsave, charCount: number) => parseLab(safeJsonParse(doc, "Lab", []), charCount),
     "breeding": (doc: Cloudsave, charCount: number) => parseBreeding(safeJsonParse(doc, "PetsStored", []), safeJsonParse(doc, "Pets", []), doc.get("OptLacc"), safeJsonParse(doc, "Territory", []), safeJsonParse(doc, "Breeding", [])),
     "sigils": (doc: Cloudsave, charCount: number) => parseSigils(safeJsonParse(doc, "CauldronP2W", []), safeJsonParse(doc, "CauldronJobs1", [])),
+    "account": (doc: Cloudsave, allItems: Item[], charCount: number) => parseAccount(doc, allItems),
 }
 
 // ORDER IS IMPORTANT!
@@ -143,6 +146,8 @@ const postProcessingMap: Record<string, Function> = {
     "sigils": (doc: Cloudsave, accountData: Map<string, any>) => updateSigils(accountData),
     "worship": (doc: Cloudsave, accountData: Map<string, any>) => updateWorship(accountData),
     "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),
+    "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
+    "account": (doc: Cloudsave, accountData: Map<string, any>) => updateAccount(accountData),
 }
 
 export const updateIdleonData = async (data: Cloudsave, charNames: string[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
@@ -160,7 +165,7 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], all
             else if (key == "worship") {
                 accountData.set(key, toExecute(data, accountData, validCharCount));
             }
-            else if (key == "lootyData" || key == "obols" || key == "alchemy" || key == "forge" || key == "stamps" || key == "anvil") {
+            else if (key == "lootyData" || key == "obols" || key == "alchemy" || key == "forge" || key == "stamps" || key == "anvil" || key == "account") {
                 accountData.set(key, toExecute(data, allItems, validCharCount));
             }
             else {

@@ -33,7 +33,7 @@ export const territoryNiceNames = [
     "Arena",
     "Nebulon Mantle",
     "Starfield Skies",
-    "Shroes Of Eternity",
+    "Shores Of Eternity",
 ]
 
 
@@ -240,7 +240,15 @@ export class Territory {
     }
 
     static fromBase = (data: TerritoryFightBase[]) => {
-        return data.map(territory => new Territory(territory.index, territory.data));
+        return data.map(territory => {
+            const toReturn = new Territory(territory.index, {...territory.data});
+            // If index is over 14 (after arena territory index), the territory req is the one from the index before.
+            if (toReturn.index > 14) {
+                console.log(toReturn.index, toReturn.data.trekReq, data[territory.index - 1].data.trekReq, data[toReturn.index - 1]);
+                toReturn.data.trekReq = data[toReturn.index - 1].data.trekReq;
+            }
+            return toReturn;
+        });
     }
 }
 

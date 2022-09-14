@@ -64,7 +64,7 @@ const calcBubbleMatCost = (bubbleLvl: number, bubbleIndex: number, baseCost: num
     if (isLiquid) {
         return baseCost + Math.floor(bubbleLvl / 20);
     } else {
-        const first = bubbleIndex < 14 ?
+        const first = bubbleIndex < 15 ?
             baseCost * Math.pow(1.35 - (0.3 * bubbleLvl) / (50 + bubbleLvl), bubbleLvl) :
             baseCost * Math.pow(1.37 - (0.28 * bubbleLvl) / (60 + bubbleLvl), bubbleLvl);
 
@@ -116,7 +116,7 @@ export class Bubble {
     }
 
     constructor(id: string, public data: BubbleModel, iconPrefix: string, bubbleIndex: number) {
-        this.name = id
+        this.name = id.replace("]", "²")
         this.x1 = data.x1;
         this.x2 = data.x2;
         this.func = data.func;

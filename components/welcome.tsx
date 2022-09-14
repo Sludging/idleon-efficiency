@@ -13,7 +13,7 @@ import {
 } from 'grommet'
 import styled from 'styled-components'
 import { useEffect, useContext, useState } from 'react';
-import { AuthContext } from '../data/firebase/authContext'
+import { AuthContext, AuthStatus } from '../data/firebase/authContext'
 import ShadowBox from './base/ShadowBox';
 import { MouseEventHandler } from 'hoist-non-react-statics/node_modules/@types/react';
 import { NextSeo } from 'next-seo';
@@ -88,7 +88,7 @@ export default function Welcome() {
 
 
     useEffect(() => {
-        setIsLoading(authData?.isLoading ?? true);
+        setIsLoading(authData?.authStatus == AuthStatus.Loading ?? true);
     }, [authData]);
     return (
         <Box>
