@@ -244,7 +244,6 @@ export class Territory {
             const toReturn = new Territory(territory.index, {...territory.data});
             // If index is over 14 (after arena territory index), the territory req is the one from the index before.
             if (toReturn.index > 14) {
-                console.log(toReturn.index, toReturn.data.trekReq, data[territory.index - 1].data.trekReq, data[toReturn.index - 1]);
                 toReturn.data.trekReq = data[toReturn.index - 1].data.trekReq;
             }
             return toReturn;

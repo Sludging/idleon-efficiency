@@ -20,7 +20,7 @@ import updateDeathnote from './deathnote';
 import parseTaskboard from './tasks';
 import { Cloudsave } from './cloudsave';
 import parseWorship, { updateWorship } from './worship';
-import parseConstruction from './construction';
+import parseConstruction, { updateConstruction } from './construction';
 import parseCards from './cards';
 import parseArcade from './arcade';
 import parseObols from './obols';
@@ -117,7 +117,7 @@ const keyFunctionMap: Record<string, Function> = {
     "printer": (doc: Cloudsave, charCount: number) => parsePrinter(safeJsonParse(doc, "Print", []), charCount),
     "taskboard": (doc: Cloudsave, charCount: number) => parseTaskboard(JSON.parse(doc.get(`TaskZZ0`)), JSON.parse(doc.get(`TaskZZ1`)), JSON.parse(doc.get(`TaskZZ2`)), JSON.parse(doc.get(`TaskZZ3`)), doc.get(`TaskZZ4`), doc.get(`TaskZZ5`)),
     "worship": (doc: Cloudsave, accountData: Map<string, any>, charCount: number) => parseWorship(safeJsonParse(doc,"TotemInfo", [])),
-    "construction": (doc: Cloudsave, charCount: number) => parseConstruction(safeJsonParse(doc, "Tower", [])),
+    "construction": (doc: Cloudsave, charCount: number) => parseConstruction(safeJsonParse(doc, "Tower", []), doc.get("OptLacc")),
     "arcade": (doc: Cloudsave, charCount: number) => parseArcade(safeJsonParse(doc, "ArcadeUpg", []), doc.get("OptLacc")),
     "obols": (doc: Cloudsave, allItems: Item[], charCount: number) => parseObols(doc, charCount, allItems),
     "dungeons": (doc: Cloudsave, charCount: number) => parseDungeons(safeJsonParse(doc, "DungUpg", []), doc.get("OptLacc")),
@@ -148,6 +148,7 @@ const postProcessingMap: Record<string, Function> = {
     "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),
     "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
     "account": (doc: Cloudsave, accountData: Map<string, any>) => updateAccount(accountData),
+    "construction": (doc: Cloudsave, accountData: Map<string, any>) => updateConstruction(accountData),
 }
 
 export const updateIdleonData = async (data: Cloudsave, charNames: string[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
@@ -179,7 +180,7 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], all
         }
     })
 
-    // Do post parse processing.
+    // Do post parse processing (twice for some edge cases)
     Object.entries(postProcessingMap).forEach(([key, toExecute]) => {
         try {
             accountData.set(key, toExecute(data, accountData));

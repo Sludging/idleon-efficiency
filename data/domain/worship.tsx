@@ -92,8 +92,22 @@ interface PlayerWorshipData {
     playerID: number
 }
 
+interface TotalWorshipData {
+    currentCharge: number
+    chargeRate: number
+    maxCharge: number
+    overFlowTime: number
+}
+
 export class Worship {
     playerData: PlayerWorshipData[] = [];
+    totalData: TotalWorshipData = {
+        currentCharge: 0,
+        chargeRate: 0,
+        maxCharge: 0,
+        overFlowTime: 0
+    };
+    bestWizardPlayerID: number = -1;
     totemInfo: Totem[] = [];
     constructor() { }
 
@@ -173,5 +187,15 @@ export const updateWorship = (data: Map<string, any>) => {
             })
         });
     }
+
+    const bestMaxLevel = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 475)?.maxLevel ?? 0)));
+    const bestWizard = players.find(player => player.talents.find(talent => talent.skillIndex == 475 && talent.maxLevel == bestMaxLevel) != undefined) as Player;
+    worship.bestWizardPlayerID = bestWizard.playerID;
+
+    worship.totalData.currentCharge = worship.playerData.filter(player => player.playerID != bestWizard.playerID).reduce((sum, player) => sum += player.estimatedCharge, 0) ?? 0;
+    worship.totalData.chargeRate = worship.playerData.filter(player => player.playerID != bestWizard.playerID).reduce((sum, player) => sum += player.chargeRate, 0) ?? 0;
+    worship.totalData.maxCharge = worship.playerData[bestWizard.playerID].maxCharge + (bestWizard.talents.find(talent => talent.skillIndex == 475)?.getBonus(false, true, true) ?? 0);
+    worship.totalData.overFlowTime = (worship.totalData.maxCharge - worship.totalData.currentCharge) / (worship.totalData.chargeRate / 60 / 60);
+
     return worship;
 }

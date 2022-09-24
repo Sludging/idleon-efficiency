@@ -7,6 +7,7 @@ import { Prayer } from "./prayers";
 import { ShrineConstants, Shrine } from "./shrines";
 import { PlayerStatues, StatueConst } from "./statues";
 import { ClassIndex } from "./talents";
+import { ImageData } from "./imageData";
 
 export class Skilling {
     static getXPReq = (skill: SkillsIndex, level: number) => {
@@ -44,5 +45,56 @@ export class Skilling {
         const poBonus = myriadBox?.bonuses[2].getBonus(myriadBox.level, 2) ?? 0;
 
         return starSignBonus + (skillingCardBonus + goldenFoodBonus) + (cardSetBonus + shrineBonus + statueBonus + (prayerIncrease - prayerDecrease + (equipmentBonus + (masteroBuff + (saltLickBonus + dungeonBonus + poBonus)))));
+    }
+
+    static getSkillImageData = (skill: SkillsIndex): ImageData => {
+        let imageSrc: string;
+        switch (skill) {
+            case SkillsIndex.Mining:
+                imageSrc = 'ClassIcons42';
+                break;
+            case SkillsIndex.Smithing:
+                imageSrc = 'ClassIcons43';
+                break;
+            case SkillsIndex.Chopping:
+                imageSrc = 'ClassIcons44';
+                break;
+            case SkillsIndex.Fishing:
+                imageSrc = 'ClassIcons45';
+                break;
+            case SkillsIndex.Alchemy:
+                imageSrc = 'ClassIcons46';
+                break;
+            case SkillsIndex.Catching:
+                imageSrc = 'ClassIcons47';
+                break;
+            case SkillsIndex.Trapping:
+                imageSrc = 'ClassIcons48';
+                break;
+            case SkillsIndex.Construction:
+                imageSrc = 'ClassIcons49';
+                break;
+            case SkillsIndex.Worship:
+                imageSrc = 'ClassIcons50';
+                break;
+            case SkillsIndex.Cooking:
+                imageSrc = 'ClassIcons51';
+                break;
+            case SkillsIndex.Breeding:
+                imageSrc = 'ClassIcons52';
+                break;
+            case SkillsIndex.Intellect:
+                imageSrc = 'ClassIcons53';
+                break;
+            default:
+                imageSrc = '';
+                break;
+        }
+
+        return {
+            location: imageSrc,
+            height: 36,
+            width: 38,
+        }
     }
 }

@@ -1,5 +1,5 @@
 import { Box, Grid, Heading, ResponsiveContext, Text } from "grommet";
-import { EmptyCircle, Tools, UserSettings } from "grommet-icons";
+import { EmptyCircle, Tools, UserSettings, BarChart } from "grommet-icons";
 import { DirectionType } from "grommet/utils";
 import { NextSeo } from "next-seo";
 import { useContext, useEffect, useState } from "react";
@@ -7,18 +7,111 @@ import IconImage from "../../components/base/IconImage";
 import ShadowBox from "../../components/base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../../components/base/TextAndLabel";
 import { AppContext } from "../../data/appContext";
-import { Account, Miniboss } from "../../data/domain/account";
-import { Alerts, AlertType, PlayerAlert } from "../../data/domain/alerts";
+import { Account, Key } from "../../data/domain/account";
+import { Alerts, AlertType, PlayerAlert, Alert } from "../../data/domain/alerts";
 import { EnemyInfo } from "../../data/domain/enemies";
-import { GroupBy, nFormatter } from "../../data/utility";
+import { getCoinsArray, nFormatter } from "../../data/utility";
+import TipDisplay from "../../components/base/TipDisplay";
+import { Activity } from "../../data/domain/player";
+import CoinsDisplay from "../../components/coinsDisplay";
+import { TimeDisplaySize, TimeDown } from "../../components/base/TimeDisplay";
 
-function AlertDisplay({ alert }: { alert: PlayerAlert }) {
+const isPlayerAlert = (x: Alert): x is PlayerAlert => "player" in x
+
+function KeyDisplay({ toShow }: { toShow: Key }) {
+    return (
+        <TipDisplay
+            heading={toShow.item.displayName}
+            body={
+                <Box>
+                    <Box direction="row" gap="small">
+                        <TextAndLabel
+                            label="Characters awarding keys per day"
+                            text={`${toShow.amountPerDay}`}
+                            labelColor="black"
+                            textSize="large"
+                        />
+                        <TextAndLabel
+                            label="Days since last Pickup"
+                            text={`${toShow.daysSincePickup}`}
+                            labelColor="black"
+                            textSize="large"
+                        />
+                    </Box>
+                    {
+                        toShow.daysSincePickup >= 3 &&
+                        <Text size="xsmall">3 days is the maximum for keys to accumulate, you are wasting keys. GO CLAIM!</Text>
+                    }
+                </Box>
+
+            }
+        >
+            <Box direction="row" pad={{ vertical: 'small' }} align="center" margin={{ right: 'small', bottom: 'small' }}>
+                <Box>
+                    <IconImage data={toShow.item.getImageData()} scale={toShow.item.getImageData().width > 36 ? 0.5 : 1} />
+                </Box>
+                <Box>
+                    <Text size="small">{nFormatter(toShow.item.count)}</Text>
+                    <Text color={toShow.daysSincePickup > 3 ? 'red' : ''} size="xsmall">{toShow.keysAvailableForPickup()}</Text>
+                </Box>
+            </Box>
+        </TipDisplay>
+    )
+}
+
+function ActivityDisplay({ activity, count }: { activity: Activity, count: number }) {
+    const getImageData = (activity: Activity) => {
+        var imageName: string = "";
+        switch (activity) {
+            case Activity.Fighting:
+                imageName = 'ClassIconsF';
+                break;
+            case Activity.Lab:
+                imageName = 'ClassIcons53';
+                break;
+            case Activity.Skilling:
+                imageName = 'ClassIcons44';
+                break;
+            default:
+                imageName = 'ClassIconsQmark';
+                break;
+        }
+
+        return {
+            location: imageName,
+            height: 38,
+            width: 36,
+        }
+    }
+    return (
+        <Box gap="small" align="center">
+            <IconImage data={getImageData(activity)} />
+            <Text size="small">{count}</Text>
+        </Box>
+    )
+}
+
+function AlertDisplay({ alert }: { alert: Alert }) {
+    const getIcon = (alert: Alert) => {
+        const playerAlert = isPlayerAlert(alert);
+        switch (alert.type) {
+            case AlertType.Anvil: return playerAlert ? <Tools size="medium" /> : null;
+            case AlertType.CardSet: return playerAlert ? <UserSettings size="medium" /> : null;
+            case AlertType.EmptyObolSlot: return playerAlert ? <EmptyCircle size="medium" /> : null;
+            case AlertType.Worship: return playerAlert ? <BarChart size="medium" /> : null;
+            default: return null;
+        }
+    }
+
+    const alertIcon = getIcon(alert);
 
     return (
         <Box>
-            {alert.type == AlertType.Anvil && <Tools size="medium" />}
-            {alert.type == AlertType.CardSet && <UserSettings size="medium" />}
-            {alert.type == AlertType.EmptyObolSlot && <EmptyCircle size="medium" />}
+            <TipDisplay
+                heading={alert.title}
+                body={alert.text}>
+                {alert.icon ? <IconImage data={alert.icon} /> : getIcon(alert)}
+            </TipDisplay>
         </Box>
     )
 }
@@ -76,8 +169,6 @@ function Dashboard() {
         }
     }, [appContext]);
 
-    console.log(Array.from(GroupBy(Object.entries(alertData.playerAlerts).flatMap(([_, alerts]) => alerts), "type")));
-
     return (
         <Box width={{ max: '1440px' }} pad={{ left: "large", right: 'large', bottom: 'medium' }} fill margin={{ left: 'auto', right: 'auto' }}>
             <NextSeo title="Dashboard" />
@@ -88,12 +179,7 @@ function Dashboard() {
                         <DashboardWidget direction="row" heading="Keys">
                             {
                                 accountData.keys.filter(key => key.item.count > 0).map((key, index) => (
-                                    <Box key={index} direction="row" pad={{ vertical: 'small' }} align="center" margin={{ right: 'small', bottom: 'small' }}>
-                                        <Box>
-                                            <IconImage data={key.item.getImageData()} scale={key.item.getImageData().width > 36 ? 0.5 : 1} />
-                                        </Box>
-                                        <Text size="small">{nFormatter(key.item.count)}</Text>
-                                    </Box>
+                                    <KeyDisplay key={index} toShow={key} />
                                 ))
                             }
                         </DashboardWidget>
@@ -105,22 +191,52 @@ function Dashboard() {
                                 <Text size="small">{nFormatter(accountData.coloTickets.count)}</Text>
                             </Box>
                         </DashboardWidget>
+                        <DashboardWidget heading="Money">
+                            <Box pad="small">
+                                <CoinsDisplay coinMap={getCoinsArray(accountData.totalMoney)} maxCoins={4} />
+                            </Box>
+                        </DashboardWidget>
+                        <DashboardWidget heading="Library">
+                            <Box direction="row" pad={{ vertical: 'small' }} gap="medium">
+                                <IconImage data={accountData.library.getImageData()} />
+                                <TextAndLabel
+                                    label="Book count"
+                                    text={accountData.library.currentBooks.toString()}
+                                />
+                                <ComponentAndLabel
+                                    label={"Time till next"}
+                                    component={
+                                        <TimeDown addSeconds={accountData.library.secondsToNextCheckout} />
+                                    }
+                                />
+                                {accountData.library.currentBooks < 20 &&
+                                    <ComponentAndLabel
+                                        label={"Time till 20"}
+                                        component={
+                                            <TimeDown addSeconds={accountData.library.secondsToMaxCheckout} />
+                                        }
+                                    />
+                                }
+                            </Box>
+                        </DashboardWidget>
                         <DashboardWidget heading="Minibosses">
                             {
-                                accountData.miniBosses.map((miniBoss,index) => {
+                                accountData.miniBosses.map((miniBoss, index) => {
                                     const miniBossInfo = EnemyInfo.find(enemy => enemy.id == miniBoss.bossInternalName)
                                     if (!miniBossInfo) {
                                         return null
                                     }
                                     return (
-                                        <Box key={`boss_${index}`} direction="row" margin={{right: 'small'}} align="center" gap="small">
-                                            <IconImage data={miniBossInfo?.getImageData()} scale={0.8}/>
-                                            <TextAndLabel 
+                                        <Box key={`boss_${index}`} direction="row" margin={{ right: 'small' }} align="center" gap="small">
+                                            <IconImage data={miniBossInfo?.getImageData()} scale={0.5} />
+                                            <TextAndLabel
                                                 label="Current Count"
+                                                labelSize="small"
                                                 text={miniBoss.currentCount.toString()}
                                             />
-                                            <TextAndLabel 
+                                            <TextAndLabel
                                                 label="Days till +1"
+                                                labelSize="small"
                                                 text={miniBoss.currentCount == miniBoss.getMaxCount() ? 'Maxed' : miniBoss.daysToNext.toString()}
                                             />
                                             <Text></Text>
@@ -129,6 +245,33 @@ function Dashboard() {
                                 })
                             }
                         </DashboardWidget>
+                        <DashboardWidget heading="Activity">
+                            {
+                                Object.entries(accountData.activity).map(([activity, count], index) => {
+                                    if (count == 0) {
+                                        return null;
+                                    }
+
+                                    return (
+                                        <Box key={index} title={activity} margin={{ right: 'small' }}>
+                                            <ActivityDisplay activity={Activity[activity as keyof typeof Activity]} count={count} />
+                                        </Box>
+                                    )
+                                })
+                            }
+                        </DashboardWidget>
+                        {
+                            alertData.generalAlerts.length > 0 &&
+                            <DashboardWidget heading="Global Alerts">
+                                {
+                                    alertData.generalAlerts.map((alert, index) => (
+                                        <Box key={index}>
+                                            <AlertDisplay alert={alert} />
+                                        </Box>
+                                    ))
+                                }
+                            </DashboardWidget>
+                        }
                     </Box>
                 </Box>
                 <Box>

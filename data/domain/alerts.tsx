@@ -1,24 +1,45 @@
 import { AnvilWrapper } from "./anvil";
+import { ImageData } from "./imageData";
+import { Item } from "./items";
 import { ObolsData, Obol } from "./obols";
 import { Activity, Player } from "./player";
+import { Refinery } from "./refinery";
+import { Skilling } from "./skilling";
+import { SkillsIndex } from "./SkillsIndex";
+import { ClassIndex, Talent } from "./talents";
+import { Trap } from "./traps";
+import { Worship } from "./worship";
 
 export enum AlertType {
     CardSet = "Card Set",
     NoActivity = "No Activity",
     Anvil = "Anvil",
-    EmptyObolSlot = "Empty Obol Slot"
+    EmptyObolSlot = "Empty Obol Slot",
+    Worship = "Worship",
+    Refinery = "Refinery",
+    CDReady = "Cooldown Ready",
+    Traps = "Traps"
 }
 
-abstract class Alert {
+export abstract class Alert {
     title: string = "";
     text: string = "";
+    icon: ImageData | undefined = undefined;
     constructor(public type: AlertType) { }
+}
+
+export class GlobalAlert extends Alert {
+    constructor(title: string, type: AlertType, icon?: ImageData) {
+        super(type);
+        this.title = title;
+        this.icon = icon;
+    }
 }
 
 export class PlayerAlert extends Alert {
     constructor(public player: Player, type: AlertType) {
         super(type);
-     }
+    }
 }
 
 export class CardSetAlert extends PlayerAlert {
@@ -44,22 +65,37 @@ export class ObolEmptyAlert extends PlayerAlert {
 }
 
 export class AnvilAlert extends PlayerAlert {
-    constructor(player: Player, text: string) {
+    constructor(player: Player, text: string, icon?: ImageData) {
         super(player, AlertType.Anvil);
         this.title = "Anvil issues";
         this.text = text;
+        this.icon = icon;
+    }
+}
+
+export class WorshipAlert extends PlayerAlert {
+    constructor(player: Player) {
+        super(player, AlertType.Worship);
+        this.title = "Worship is Full";
+    }
+}
+
+export class TrapAlerts extends GlobalAlert {
+    constructor(public count: number) {
+        super(`${count} Traps ready to be collected`, AlertType.Traps, Item.getImageData("TrapBoxSet1"));
     }
 }
 
 export class Alerts {
     playerAlerts: Record<number, Alert[]> = {};
+    generalAlerts: Alert[] = [];
 
     getPlayerAlertsOfType = (playerID: number, alertType: string): Alert[] => {
         return this.playerAlerts[playerID].filter(alert => alert.type == alertType);
     }
 }
 
-const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[]): Alert[] => {
+const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[], worshipData: Worship): Alert[] => {
     const alerts: Alert[] = [];
     // Activity based alerts
     switch (player.getActivityType()) {
@@ -86,7 +122,7 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
     // Anvil Alerts
     anvil.playerAnvils[player.playerID].production.forEach(anvilProduct => {
         if (anvilProduct.timeTillCap <= 0) {
-            alerts.push(new AnvilAlert(player, `${anvilProduct.displayName} production is at capacity, go collect!`))
+            alerts.push(new AnvilAlert(player, `${anvilProduct.displayName} production is at capacity, go collect!`, Item.getImageData(anvilProduct.data.item)))
         }
     })
 
@@ -100,7 +136,57 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
         alerts.push(new ObolEmptyAlert(player, emptyObolSlots));
     }
 
+    // Worship Alerts
+    const playerWorshipInfo = worshipData.playerData[player.playerID];
+    if (playerWorshipInfo.currentCharge >= playerWorshipInfo.maxCharge) {
+        alerts.push(new WorshipAlert(player));
+    }
+
     return alerts;
+}
+
+const getGlobalAlerts = (worship: Worship, refinery: Refinery, players: Player[], traps: Trap[][]): Alert[] => {
+    const globalAlerts: Alert[] = [];
+
+    // Worship
+    if (worship.totalData.overFlowTime <= 0) {
+        globalAlerts.push(new GlobalAlert("Overflowing charge", AlertType.Worship, Skilling.getSkillImageData(SkillsIndex.Worship)))
+    }
+
+    // Refinery
+    Object.entries(refinery.salts).forEach(([saltName, saltInfo]) => {
+        if (saltInfo.progress == saltInfo.getCap()) {
+            globalAlerts.push(new GlobalAlert(`${saltName} is ready for rank up.`, AlertType.Refinery, Item.getImageData(saltName)))
+        }
+        // Fuel is empty math, need storage items logic from the construction page.
+        //if (saltInfo.active && saltInfo.getFuelTime())
+    })
+
+    // Cooldown alerts
+    const cooldownTalentIndexes = [32, 130, 475, 370, 490]
+    cooldownTalentIndexes.forEach(cdTalent => {
+        const potentialPlayers = players.filter(player => player.talents.find(talent => talent.skillIndex == cdTalent) != undefined);
+        const readyPlayers = potentialPlayers.reduce((toPrint, player, index, _) => {
+            const talentCooldown = player.getCurrentCooldown(cdTalent);
+            if (talentCooldown <= 0) {
+                toPrint.push(player.playerName)
+            }
+            return toPrint;
+        }, [] as String[])
+
+        if (readyPlayers.length > 0) {
+            const talent = potentialPlayers[0].talents.find(talent => talent.skillIndex == cdTalent);
+            globalAlerts.push(new GlobalAlert(`${talent?.name} is ready on ${readyPlayers.join(",")}`, AlertType.CDReady, talent?.getImageData()))
+        }
+    })
+
+    // Traps
+    const readyTraps = traps.flatMap(playerTraps => playerTraps).reduce((sum, trap) => sum += trap.placed && trap.isReady() ? 1 : 0, 0);
+    if (readyTraps > 0) {
+        globalAlerts.push(new TrapAlerts(readyTraps));
+    }
+
+    return globalAlerts;
 }
 
 export const updateAlerts = (data: Map<string, any>) => {
@@ -108,11 +194,17 @@ export const updateAlerts = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const anvil = data.get("anvil") as AnvilWrapper;
     const obols = data.get("obols") as ObolsData;
+    const worship = data.get("worship") as Worship;
+    const refinery = data.get("refinery") as Refinery;
+    const traps = data.get("traps") as Trap[][];
 
 
     players.forEach(player => {
         alerts.playerAlerts[player.playerID] = []
-        alerts.playerAlerts[player.playerID].push(...getPlayerAlerts(player, anvil, obols.playerObols[player.playerID]))
+        alerts.playerAlerts[player.playerID].push(...getPlayerAlerts(player, anvil, obols.playerObols[player.playerID], worship))
     })
+
+    // Global Alerts
+    alerts.generalAlerts = getGlobalAlerts(worship, refinery, players, traps);
     return alerts;
 }

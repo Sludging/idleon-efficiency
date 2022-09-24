@@ -101,57 +101,6 @@ interface SkillProps {
 function nth(n: number) { return `${n}${["st", "nd", "rd"][((n + 90) % 100 - 10) % 10 - 1] || "th"}` }
 
 function ShowSkills(props: SkillProps) {
-    const getSkillImageData = (skill: SkillsIndex): ImageData => {
-        let imageSrc: string;
-        switch (skill) {
-            case SkillsIndex.Mining:
-                imageSrc = 'ClassIcons42';
-                break;
-            case SkillsIndex.Smithing:
-                imageSrc = 'ClassIcons43';
-                break;
-            case SkillsIndex.Chopping:
-                imageSrc = 'ClassIcons44';
-                break;
-            case SkillsIndex.Fishing:
-                imageSrc = 'ClassIcons45';
-                break;
-            case SkillsIndex.Alchemy:
-                imageSrc = 'ClassIcons46';
-                break;
-            case SkillsIndex.Catching:
-                imageSrc = 'ClassIcons47';
-                break;
-            case SkillsIndex.Trapping:
-                imageSrc = 'ClassIcons48';
-                break;
-            case SkillsIndex.Construction:
-                imageSrc = 'ClassIcons49';
-                break;
-            case SkillsIndex.Worship:
-                imageSrc = 'ClassIcons50';
-                break;
-            case SkillsIndex.Cooking:
-                imageSrc = 'ClassIcons51';
-                break;
-            case SkillsIndex.Breeding:
-                imageSrc = 'ClassIcons52';
-                break;
-            case SkillsIndex.Intellect:
-                imageSrc = 'ClassIcons53';
-                break;
-            default:
-                imageSrc = '';
-                break;
-        }
-
-        return {
-            location: imageSrc,
-            height: 36,
-            width: 38,
-        }
-    }
-
     const ccdMax = useMemo(() => {
         return props.player.talents.find(talent => talent.skillIndex == 41)?.getBonus() ?? 0
     }, [props])
@@ -173,7 +122,7 @@ function ShowSkills(props: SkillProps) {
                         return (
                             <Box key={`skill_${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} gridArea={`${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} direction="row" gap="medium" margin={{ right: 'small', bottom: 'medium' }}>
                                 <Box direction="row" align="center" gap="small">
-                                    <IconImage data={getSkillImageData(skillIndex)} scale={0.75} />
+                                    <IconImage data={Skilling.getSkillImageData(skillIndex)} scale={0.75} />
                                     <Box gap="small">
                                         <Box direction="row" gap="small">
                                             <Text size="small">{skill.level}</Text>
@@ -219,7 +168,7 @@ function ShowSkills(props: SkillProps) {
                                         return (
                                             <Box key={`ccd_${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} direction="row" gap="medium" margin={{ right: 'small', bottom: 'small' }}>
                                                 <Box direction="row" align="center" gap="small">
-                                                    <IconImage data={getSkillImageData(skillIndex)} scale={0.75} />
+                                                    <IconImage data={Skilling.getSkillImageData(skillIndex)} scale={0.75} />
                                                     <Box gap="small">
                                                         <Box direction="row" gap="small">
                                                             <Text color={ccdMax == crystalReduction ? 'green' : ''} size="small">{nFormatter(crystalReduction, "Smaller")}%</Text>
