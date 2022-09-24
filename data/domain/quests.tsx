@@ -165,6 +165,7 @@ export const initNPCs = (): Record<string, NPC> => {
 export class Quests {
     npcData: Record<string, NPC> = initNPCs();
     playerData: Record<number, Record<string, number>> = {}
+    dialogData: Record<number, Record<string, number>> = {}
 }
 
 export default function parseQuests(doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], validCharCount: number) {
@@ -190,6 +191,7 @@ export default function parseQuests(doc: Cloudsave, accountData: Map<string, any
     const playerNames = accountData.get("playerNames") as string[];
     playerNames.slice(0, validCharCount).forEach((_, index) => {
         questsData.playerData[index] = JSON.parse(doc.get(`QuestComplete_${index}`)) as Record<string, number>
+        questsData.dialogData[index] = JSON.parse(doc.get(`NPCdialogue_${index}`)) as Record<string, number>
     });
 
     return questsData;

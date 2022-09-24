@@ -148,6 +148,9 @@ export default function Layout({
 
     const navItems = [
         {
+            link: "/", label: "Dashboard"
+        },
+        {
             link: "/world-1", label: "World 1", subLinks: [
                 { subLink: "/stamps", label: "Stamps" },
                 { subLink: "/forge", label: "Forge" },

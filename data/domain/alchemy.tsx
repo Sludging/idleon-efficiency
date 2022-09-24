@@ -337,6 +337,25 @@ export class Alchemy {
         return this.cauldrons[cauldron].bubbles[bubble].getBonus() * extraBonus;
     }
 
+    getBubbleBonusForKey = (bonusKey: string) => {
+        const matchingBubbles = this.cauldrons.flatMap(cauldron => cauldron.bubbles).filter(bubble => bubble.data.bonusKey == bonusKey);
+        return matchingBubbles.reduce((sum, bubble) => {
+            // If bubble is boosted by the 16th bubble.
+            let extraBonus = 1;
+            if (this._shouldBoostBubble(bubble.bubbleIndex, bubble.cauldronIndex)) {
+                extraBonus *= this.cauldrons[bubble.cauldronIndex].bubbles[16].getBonus();
+            }
+
+            sum += bubble.getBonus() * extraBonus;
+            return sum;
+        }, 0)
+    }
+
+    getVialBonusForKey = (bonusKey: string) => {
+        const matchingVials = this.vials.filter(vial => vial.data.bonusKey == bonusKey);
+        return matchingVials.reduce((sum, vial) => sum += vial.getBonus(), 0)
+    }
+
     getBonusTextForBubble = (cauldron: CauldronIndex, bubble: number) => {
         return this.cauldrons[cauldron].bubbles[bubble].getBonusText(this.getBonusForBubble(cauldron, bubble));
     }

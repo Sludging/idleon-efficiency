@@ -290,6 +290,10 @@ export class Cooking {
         }
     }
 
+    getMealBonusForKey = (bonusKey: string) => {
+        return this.meals.filter(meal => meal.bonusKey == bonusKey).reduce((sum, meal) => sum += meal.getBonus(), 0);
+    }
+
 }
 
 const populateDiscovery = (cooking: Cooking) => {
