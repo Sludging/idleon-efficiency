@@ -47,6 +47,11 @@ export class CardSetAlert extends PlayerAlert {
         super(player, AlertType.CardSet);
         this.title = "Bad card set";
         this.text = text;
+        this.icon = {
+            location: 'CardSet26',
+            height: 36,
+            width: 36,
+        }
     }
 }
 
@@ -61,6 +66,11 @@ export class ObolEmptyAlert extends PlayerAlert {
     constructor(player: Player, public count: number) {
         super(player, AlertType.EmptyObolSlot);
         this.title = "Empty Obol Slots";
+        this.icon = {
+            location: 'ObolLocked1',
+            height: 36,
+            width: 36,
+        }
     }
 }
 
@@ -127,7 +137,7 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
     })
 
     if (anvil.playerAnvils[player.playerID].currentlySelect.indexOf(-1) > -1) {
-        alerts.push(new AnvilAlert(player, "Unused hammer, losing out on production!"))
+        alerts.push(new AnvilAlert(player, "Unused hammer, losing out on production!",{ location: 'UIquickref1', height: 36, width: 36}))
     }
 
     // Obol Alerts
