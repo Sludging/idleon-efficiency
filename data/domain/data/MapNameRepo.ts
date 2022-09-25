@@ -205,6 +205,7 @@ export const initMapNameRepo = () => {
         new MapNameBase(196, <MapNameModel>{"intName": "Z", "name": "Z", "id": 196}),
         new MapNameBase(197, <MapNameModel>{"intName": "Z", "name": "Z", "id": 197}),
         new MapNameBase(198, <MapNameModel>{"intName": "Z", "name": "Z", "id": 198}),
-        new MapNameBase(199, <MapNameModel>{"intName": "Z", "name": "Z", "id": 199})    
+        new MapNameBase(199, <MapNameModel>{"intName": "Z", "name": "Z", "id": 199}),
+        new MapNameBase(200, <MapNameModel>{"intName": "wLavaaTown", "name": "Magma Rivertown", "id": 200})    
 ]
 }

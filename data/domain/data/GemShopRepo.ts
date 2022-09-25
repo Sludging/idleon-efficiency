@@ -887,33 +887,33 @@ export const initGemShopRepo = () => {
                 "costIncrement": 0
             }),
         new GemShopItemBase(88, <GemShopItemModel>{
-                "name": "EquipmentCape0",
-                "itemName": "Random Wing Equip",
-                "desc": "Gives you one of the following: Angel Wings (+11% AFK gains), Easter Eggs (+10% Total Dmg), Amarok Backstabber (+10% Def), Efaunt Tusks (+10% Efficiency), Chizoar Shards (+8% Total Dmg), or Troll Scales (+6% All Stat)",
-                "cost": 950,
+                "name": "GemP19",
+                "itemName": "Random Boss Obol",
+                "desc": "Gives you one of the following obols: Amarok Obol (+4% Defence), Efaunt Obol (+5% Boss Damage), Slush Obol (+3% Skill Effic), Chizoar Obol (+4% Total Damage), or Troll Obol (+3% All Stats)",
+                "cost": 600,
                 "no": 87,
+                "maxPurchases": 3,
+                "qty": 1,
+                "costIncrement": 0
+            }),
+        new GemShopItemBase(89, <GemShopItemModel>{
+                "name": "GemP18",
+                "itemName": "Dragonic Liquid Cauldron",
+                "desc": "Turns your 1st liquid cauldron into a dragonic cauldron, giving it 2x Liquid Capacity. (Note: The cauldron will only change visually if you have the bleach one. The 2x cap will apply regardless)",
+                "cost": 969,
+                "no": 88,
                 "maxPurchases": 1,
                 "qty": 0,
                 "costIncrement": 0
             }),
-        new GemShopItemBase(89, <GemShopItemModel>{
-                "name": "EquipmentKeychain20",
-                "itemName": "Star Blobultye Keychain",
-                "desc": "Gives you a top tier Star Blobulyte Keychain with +11% Total Damage bonus. Keychains are equipped on the 2nd equipment page!",
-                "cost": 850,
-                "no": 88,
-                "maxPurchases": 2,
-                "qty": 0,
-                "costIncrement": 250
-            }),
         new GemShopItemBase(90, <GemShopItemModel>{
-                "name": "Timecandy9",
-                "itemName": "Cosmic Candy",
-                "desc": "Gives 1 Cosmic Time Candy, which can give up to 500 HOURS of AFK time! On average, it will give 24 hrs.",
-                "cost": 300,
+                "name": "EquipmentKeychain26",
+                "itemName": "Idle Skilling Keychain",
+                "desc": "Gives you a random Idle Skilling keychain with up to +12% AFK Gain! Keychains are equipped on the 2nd equipment page!",
+                "cost": 750,
                 "no": 89,
-                "maxPurchases": 5,
-                "qty": 1,
+                "maxPurchases": 3,
+                "qty": 0,
                 "costIncrement": 0
             }),
         new GemShopItemBase(91, <GemShopItemModel>{
