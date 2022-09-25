@@ -20646,6 +20646,22 @@ export const initItemRepo = () => {
                 "anvilProduction": undefined,
                 "detDrops": undefined
             }),
+        new ItemBase("Crystal4", <ItemModel>{
+                "item": <DescItemModel>{
+                    "internalName": "Crystal4",
+                    "displayName": "Magma Geode",
+                    "sellPrice": 1,
+                    "typeGen": TypeGenEnum.dQuest,
+                    "Type": "Quest Item",
+                    "description": "Restores power to the Magma Portal in the galaxy town, allowing travel to World 5! "
+                },
+                "sources": undefined,
+                "notes": undefined,
+                "recipe": undefined,
+                "vendors": undefined,
+                "anvilProduction": undefined,
+                "detDrops": undefined
+            }),
         new ItemBase("Quest2", <ItemModel>{
                 "item": <DescItemModel>{
                     "internalName": "Quest2",
@@ -37979,6 +37995,35 @@ export const initItemRepo = () => {
                 "anvilProduction": undefined,
                 "detDrops": undefined
             }),
+        new ItemBase("Trophy16", <ItemModel>{
+                "item": <ArmourItemModel>{
+                    "internalName": "Trophy16",
+                    "displayName": "Idle Skiller",
+                    "sellPrice": 69,
+                    "typeGen": TypeGenEnum.aTrophy,
+                    "Type": "Trophy",
+                    "lvReqToCraft": 1,
+                    "lvReqToEquip": 99,
+                    "Class": ClassTypeEnum.All,
+                    "Weapon_Power": 3,
+                    "STR": 20,
+                    "AGI": 20,
+                    "WIS": 20,
+                    "LUK": 20,
+                    "Defence": 0,
+                    "miscUp1": "15% Skill Efficiency",
+                    "miscUp2": "00",
+                    "Upgrade_Slots_Left": 0,
+                    "Skill": "",
+                    "Skill_Power": 0
+                },
+                "sources": undefined,
+                "notes": undefined,
+                "recipe": undefined,
+                "vendors": undefined,
+                "anvilProduction": undefined,
+                "detDrops": undefined
+            }),
         new ItemBase("Starlight", <ItemModel>{
                 "item": <OreItemModel>{
                     "internalName": "Starlight",
@@ -38603,8 +38648,7 @@ export const initItemRepo = () => {
                         <SourceModel>{
                             "wikiName": "[[Carpenter Cardinal#Restoring Power, once again, to a Portal|Restoring Power, once again, to a Portal]]",
                             "txtName": "Carpenter Cardinal: Restoring Power, once again, to a Portal"
-                        },
-                        <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                        }
                     ],
                     "recipeFrom": [],
                     "questAss": []
@@ -42863,6 +42907,38 @@ export const initItemRepo = () => {
                 "anvilProduction": undefined,
                 "detDrops": undefined
             }),
+        new ItemBase("Quest70", <ItemModel>{
+                "item": <DescItemModel>{
+                    "internalName": "Quest70",
+                    "displayName": "Phone Box",
+                    "sellPrice": 100,
+                    "typeGen": TypeGenEnum.dQuest,
+                    "Type": "Event Box",
+                    "description": "IdleOn is out on iPhone devices! Go download it there if you have any iOS devices!                 Hold down to open for a random reward! Or, hold down for a LONG time to open them faster. "
+                },
+                "sources": undefined,
+                "notes": undefined,
+                "recipe": undefined,
+                "vendors": undefined,
+                "anvilProduction": undefined,
+                "detDrops": undefined
+            }),
+        new ItemBase("Quest71", <ItemModel>{
+                "item": <DescItemModel>{
+                    "internalName": "Quest71",
+                    "displayName": "Gem Envelope",
+                    "sellPrice": 100,
+                    "typeGen": TypeGenEnum.dQuest,
+                    "Type": "Event Box",
+                    "description": "Contains a random number of gems, hold down to open! It could be just a couple gems, but it could also have as many as 10,000 gems! "
+                },
+                "sources": undefined,
+                "notes": undefined,
+                "recipe": undefined,
+                "vendors": undefined,
+                "anvilProduction": undefined,
+                "detDrops": undefined
+            }),
         new ItemBase("TrollPart", <ItemModel>{
                 "item": <DescItemModel>{
                     "internalName": "TrollPart",
@@ -44786,6 +44862,64 @@ export const initItemRepo = () => {
                         ]
                     }
                 },
+                "vendors": undefined,
+                "anvilProduction": undefined,
+                "detDrops": undefined
+            }),
+        new ItemBase("EquipmentHats75", <ItemModel>{
+                "item": <ArmourItemModel>{
+                    "internalName": "EquipmentHats75",
+                    "displayName": "Apple Launch Hat",
+                    "sellPrice": 1,
+                    "typeGen": TypeGenEnum.aHelmet,
+                    "Type": "Helmet",
+                    "lvReqToCraft": 5,
+                    "lvReqToEquip": 1,
+                    "Class": ClassTypeEnum.All,
+                    "Weapon_Power": 3,
+                    "STR": 0,
+                    "AGI": 0,
+                    "WIS": 0,
+                    "LUK": 0,
+                    "Defence": 3,
+                    "miscUp1": "5% Xp From Monsters",
+                    "miscUp2": "00",
+                    "Upgrade_Slots_Left": 5,
+                    "Skill": "",
+                    "Skill_Power": 0
+                },
+                "sources": undefined,
+                "notes": undefined,
+                "recipe": undefined,
+                "vendors": undefined,
+                "anvilProduction": undefined,
+                "detDrops": undefined
+            }),
+        new ItemBase("EquipmentHats76", <ItemModel>{
+                "item": <ArmourItemModel>{
+                    "internalName": "EquipmentHats76",
+                    "displayName": "Funny Hat",
+                    "sellPrice": 1,
+                    "typeGen": TypeGenEnum.aHelmet,
+                    "Type": "Helmet",
+                    "lvReqToCraft": 5,
+                    "lvReqToEquip": 20,
+                    "Class": ClassTypeEnum.All,
+                    "Weapon_Power": 3,
+                    "STR": 5,
+                    "AGI": 5,
+                    "WIS": 5,
+                    "LUK": 5,
+                    "Defence": 10,
+                    "miscUp1": "6% Skill Efficiency",
+                    "miscUp2": "00",
+                    "Upgrade_Slots_Left": 5,
+                    "Skill": "",
+                    "Skill_Power": 0
+                },
+                "sources": undefined,
+                "notes": undefined,
+                "recipe": undefined,
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined
@@ -47156,11 +47290,7 @@ export const initItemRepo = () => {
                     "Skill": "",
                     "Skill_Power": 0
                 },
-                "sources": <SourcesModel>{
-                    "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                    "recipeFrom": [],
-                    "questAss": []
-                },
+                "sources": undefined,
                 "notes": undefined,
                 "recipe": undefined,
                 "vendors": undefined,
@@ -50915,7 +51045,6 @@ export const initItemRepo = () => {
                 },
                 "sources": <SourcesModel>{
                     "sources": [
-                        <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"},
                         <SourceModel>{"wikiName": "[[Dungeons#Flurbo Shop|Flurbo Shop]]", "txtName": "Dungeons: Flurbo Shop"},
                         <SourceModel>{
                             "wikiName": "[[Dungeons#Loot Rolls|Dungeon Loot Rolls]]",
@@ -51073,6 +51202,118 @@ export const initItemRepo = () => {
                     "recipeFrom": [],
                     "questAss": []
                 },
+                "notes": undefined,
+                "recipe": undefined,
+                "vendors": undefined,
+                "anvilProduction": undefined,
+                "detDrops": undefined
+            }),
+        new ItemBase("EquipmentKeychain25", <ItemModel>{
+                "item": <KeychainItemModel>{
+                    "internalName": "EquipmentKeychain25",
+                    "displayName": "Eye Owe Ess Chain",
+                    "sellPrice": 200,
+                    "typeGen": TypeGenEnum.aKeychain,
+                    "Type": "Keychain",
+                    "lvReqToCraft": 1,
+                    "lvReqToEquip": 1,
+                    "Class": ClassTypeEnum.All,
+                    "Weapon_Power": 1,
+                    "STR": 0,
+                    "AGI": 0,
+                    "WIS": 0,
+                    "LUK": 0,
+                    "Defence": 5,
+                    "miscUp1": "",
+                    "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
+                    "Upgrade_Slots_Left": 0
+                },
+                "sources": undefined,
+                "notes": undefined,
+                "recipe": undefined,
+                "vendors": undefined,
+                "anvilProduction": undefined,
+                "detDrops": undefined
+            }),
+        new ItemBase("EquipmentKeychain26", <ItemModel>{
+                "item": <KeychainItemModel>{
+                    "internalName": "EquipmentKeychain26",
+                    "displayName": "Key to Desert",
+                    "sellPrice": 200,
+                    "typeGen": TypeGenEnum.aKeychain,
+                    "Type": "Keychain",
+                    "lvReqToCraft": 1,
+                    "lvReqToEquip": 1,
+                    "Class": ClassTypeEnum.All,
+                    "Weapon_Power": 1,
+                    "STR": 0,
+                    "AGI": 0,
+                    "WIS": 0,
+                    "LUK": 0,
+                    "Defence": 5,
+                    "miscUp1": "",
+                    "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
+                    "Upgrade_Slots_Left": 0
+                },
+                "sources": <SourcesModel>{
+                    "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                    "recipeFrom": [],
+                    "questAss": []
+                },
+                "notes": undefined,
+                "recipe": undefined,
+                "vendors": undefined,
+                "anvilProduction": undefined,
+                "detDrops": undefined
+            }),
+        new ItemBase("EquipmentKeychain27", <ItemModel>{
+                "item": <KeychainItemModel>{
+                    "internalName": "EquipmentKeychain27",
+                    "displayName": "Key to Mountains",
+                    "sellPrice": 200,
+                    "typeGen": TypeGenEnum.aKeychain,
+                    "Type": "Keychain",
+                    "lvReqToCraft": 1,
+                    "lvReqToEquip": 1,
+                    "Class": ClassTypeEnum.All,
+                    "Weapon_Power": 1,
+                    "STR": 0,
+                    "AGI": 0,
+                    "WIS": 0,
+                    "LUK": 0,
+                    "Defence": 5,
+                    "miscUp1": "",
+                    "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
+                    "Upgrade_Slots_Left": 0
+                },
+                "sources": undefined,
+                "notes": undefined,
+                "recipe": undefined,
+                "vendors": undefined,
+                "anvilProduction": undefined,
+                "detDrops": undefined
+            }),
+        new ItemBase("EquipmentKeychain28", <ItemModel>{
+                "item": <KeychainItemModel>{
+                    "internalName": "EquipmentKeychain28",
+                    "displayName": "Key to Purgatory",
+                    "sellPrice": 200,
+                    "typeGen": TypeGenEnum.aKeychain,
+                    "Type": "Keychain",
+                    "lvReqToCraft": 1,
+                    "lvReqToEquip": 1,
+                    "Class": ClassTypeEnum.All,
+                    "Weapon_Power": 1,
+                    "STR": 0,
+                    "AGI": 0,
+                    "WIS": 0,
+                    "LUK": 0,
+                    "Defence": 5,
+                    "miscUp1": "",
+                    "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
+                    "Upgrade_Slots_Left": 0
+                },
+                "sources": undefined,
                 "notes": undefined,
                 "recipe": undefined,
                 "vendors": undefined,
@@ -56555,6 +56796,26 @@ export const initItemRepo = () => {
                             "txtName": "Gangster Gus: Sanke Revival Denial"
                         }
                     ],
+                    "recipeFrom": [],
+                    "questAss": []
+                },
+                "notes": undefined,
+                "recipe": undefined,
+                "vendors": undefined,
+                "anvilProduction": undefined,
+                "detDrops": undefined
+            }),
+        new ItemBase("GemP19", <ItemModel>{
+                "item": <DescItemModel>{
+                    "internalName": "GemP19",
+                    "displayName": "Bossius Obol Stack",
+                    "sellPrice": 1,
+                    "typeGen": TypeGenEnum.dQuest,
+                    "Type": "Obol Stack",
+                    "description": "Hold down and 1 boss obol will drop at your feet! YOU MUST BE IN WORLD 2 TOWN TO USE THIS! This way you can trash other obols incase you're out of space! "
+                },
+                "sources": <SourcesModel>{
+                    "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                     "recipeFrom": [],
                     "questAss": []
                 },
