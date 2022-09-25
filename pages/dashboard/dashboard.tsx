@@ -21,6 +21,7 @@ const isPlayerAlert = (x: Alert): x is PlayerAlert => "player" in x
 function KeyDisplay({ toShow }: { toShow: Key }) {
     return (
         <TipDisplay
+            visibility={toShow.amountPerDay == 0 ? 'none' : ''}
             heading={toShow.item.displayName}
             body={
                 <Box>
@@ -46,13 +47,16 @@ function KeyDisplay({ toShow }: { toShow: Key }) {
 
             }
         >
-            <Box direction="row" pad={{ vertical: 'small' }} align="center" margin={{ right: 'small', bottom: 'small' }}>
+            <Box direction="row" border={{ color: 'grey-1' }} background="accent-4" pad='small' align="center" margin={{ right: 'small', bottom: 'small' }}>
                 <Box>
                     <IconImage data={toShow.item.getImageData()} scale={toShow.item.getImageData().width > 36 ? 0.5 : 1} />
                 </Box>
                 <Box>
                     <Text size="small">{nFormatter(toShow.item.count)}</Text>
-                    <Text color={toShow.daysSincePickup > 3 ? 'red' : ''} size="xsmall">{toShow.keysAvailableForPickup()}</Text>
+                    {
+                        toShow.amountPerDay > 0 &&
+                        <Text color={toShow.daysSincePickup > 3 ? 'red' : ''} size="xsmall">{toShow.keysAvailableForPickup()}</Text>
+                    }
                 </Box>
             </Box>
         </TipDisplay>
@@ -121,16 +125,16 @@ function CharacterAlerts({ alerts }: { alerts: PlayerAlert[] }) {
 
     return (
         <ShadowBox background="dark-1" gap="xsmall" direction="row" align="center">
-            <Box direction="row" align="center" pad={{ top: "xsmall", bottom: "xsmall", left: "small", right: "small" }} gap="xsmall">
-                <IconImage data={player.getClassImageData()} />
+            <Box direction="row" align="center" pad={{ top: "xsmall", bottom: "xsmall", left: "small", right: "small" }} gap="xsmall" width={{ min: '120px', max: '120px'}}>
+                <IconImage data={player.getClassImageData()} scale={0.8}/>
                 <Box>
-                    <Text color="grey-2" size="small" truncate={true}>{player.playerName}</Text>
+                    <Text color="grey-2" size="xsmall" truncate={true}>{player.playerName}</Text>
                 </Box>
             </Box>
             <Box>
                 <Box direction="row" wrap>
                     {
-                        alerts.map((alert, index) => <Box key={index} margin={{ right: 'small', bottom: 'small' }}><AlertDisplay alert={alert} /></Box>)
+                        alerts.map((alert, index) => <Box key={index}><AlertDisplay alert={alert} /></Box>)
                     }
                 </Box>
             </Box>
@@ -140,7 +144,7 @@ function CharacterAlerts({ alerts }: { alerts: PlayerAlert[] }) {
 
 function DashboardWidget({ children, direction = "row", wrap, heading }: { children: React.ReactNode, direction?: DirectionType, wrap?: boolean, heading: string }) {
     return (
-        <ShadowBox background="dark-1" pad="small" margin={{ right: 'small', bottom: 'small' }}>
+        <ShadowBox align='start' background="dark-1" pad="small" margin={{ right: 'small', bottom: 'small' }}>
             <ComponentAndLabel
                 label={heading}
                 labelSize="large"
@@ -176,15 +180,13 @@ function Dashboard() {
                 <Box>
                     <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Dashboard</Heading>
                     <Box direction="row" wrap>
-                        <DashboardWidget direction="row" heading="Keys">
+                        <DashboardWidget direction="row" heading="Account wide items" wrap>
                             {
                                 accountData.keys.filter(key => key.item.count > 0).map((key, index) => (
                                     <KeyDisplay key={index} toShow={key} />
                                 ))
                             }
-                        </DashboardWidget>
-                        <DashboardWidget heading="Colo">
-                            <Box direction="row" pad={{ vertical: 'small' }} align="center" margin={{ right: 'small', bottom: 'small' }}>
+                            <Box direction="row" border={{ color: 'grey-1' }} background="accent-4" pad='small' align="center" margin={{ right: 'small', bottom: 'small' }}>
                                 <Box>
                                     <IconImage data={accountData.coloTickets.getImageData()} scale={accountData.coloTickets.getImageData().width > 36 ? 0.5 : 1} />
                                 </Box>
@@ -219,7 +221,7 @@ function Dashboard() {
                                 }
                             </Box>
                         </DashboardWidget>
-                        <DashboardWidget heading="Minibosses">
+                        <DashboardWidget heading="Minibosses" wrap>
                             {
                                 accountData.miniBosses.map((miniBoss, index) => {
                                     const miniBossInfo = EnemyInfo.find(enemy => enemy.id == miniBoss.bossInternalName)
@@ -227,7 +229,7 @@ function Dashboard() {
                                         return null
                                     }
                                     return (
-                                        <Box key={`boss_${index}`} direction="row" margin={{ right: 'small' }} align="center" gap="small">
+                                        <Box key={`boss_${index}`} direction="row" margin={{ right: 'small', bottom: 'small' }} align="center" gap="small">
                                             <IconImage data={miniBossInfo?.getImageData()} scale={0.5} />
                                             <TextAndLabel
                                                 label="Current Count"
