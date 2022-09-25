@@ -107,27 +107,21 @@ export const updateConstruction = (data: Map<string, any>) => {
             (1 + (5 * construction.buildings[1].level + alchemyBonus + vialBonus + (
                 stampBonus + Math.min(30, Math.max(0, 30 * (achievements[145].completed ? 1 : 0))))) / 100)));
     
-    construction.library.secondsToNextCheckout = construction.library.getTimeTillNextCheckout() - secondsSinceUpdate(timeAway["Global"]) - timeAway["BookLib"];
-    construction.library.secondsToMaxCheckout = construction.library.getTimeTillMaxCheckout() - secondsSinceUpdate(timeAway["Global"]) - timeAway["BookLib"];
+    // Figure out how long since library was checked.
+    let timeSinceCheck = timeAway["BookLib"];
+    const time = new Date()
+    const gapFromLastSave = (time.getTime() / 1000) - timeAway['GlobalTime'];
+    // If more than 5 mintues from last time save was updated, try and add that
+    if (gapFromLastSave > 60 * 5) {
+        timeSinceCheck += gapFromLastSave;
+    }
+    // Fake checkouts if been AFK for a long time.
+    while (timeSinceCheck > construction.library.getTimeTillNextCheckout()) {
+        construction.library.currentBooks += 1;
+        timeSinceCheck -= construction.library.getTimeTillNextCheckout();
+    }
+    construction.library.secondsToNextCheckout = construction.library.getTimeTillNextCheckout() - timeSinceCheck;
+    construction.library.secondsToMaxCheckout = construction.library.getTimeTillMaxCheckout() - timeSinceCheck;
 
     return construction;
 }
-
-// if ("BookReqTime" == c) {
-//     var Vf = 1 + A._customBlock_MealBonus("Lib") / 100,
-//         Fg = a.engine.getGameAttribute("TowerInfo")[1],
-//         ng = null == Fg ? 0 : parseNumber(Fg),
-//         gg = a.engine.getGameAttribute("DNSM"),
-//         Od = null != e.AlchBubbles ? gg.getReserved("AlchBubbles") : gg.h.AlchBubbles,
-//         je = null != e.booksSpeed ? Od.getReserved("booksSpeed") : Od.h.booksSpeed,
-//         ig = null == je ? 0 : parseNumber(je)
-//         Cf = a.engine.getGameAttribute("DNSM"),
-//         sg = null != e.AlchVials ? Cf.getReserved("AlchVials") : Cf.h.AlchVials,
-//         Wf = null != e.TalBookSpd ? sg.getReserved("TalBookSpd") : sg.h.TalBookSpd,
-//         dg = 4 * (
-    // 3600 / (Vf * (1 + (5 * ng + ig + parseNumber(Wf) +
-    // (t._customBlock_StampBonusOfTypeX("BookSpd") +
-    // Math.min(30, Math.max(0, 30 * w._customBlock_AchieveStatus(145)))))) / 100))),
-//         Ig = a.engine.getGameAttribute("OptionsListAccount")[55];
-//     return Math.round(dg * (1 + 10 * Math.pow(parseNumber(Ig), 1.4) / 100))
-// }
