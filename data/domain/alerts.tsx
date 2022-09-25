@@ -87,6 +87,7 @@ export class WorshipAlert extends PlayerAlert {
     constructor(player: Player) {
         super(player, AlertType.Worship);
         this.title = "Worship is Full";
+        this.icon = Skilling.getSkillImageData(SkillsIndex.Worship);
     }
 }
 
