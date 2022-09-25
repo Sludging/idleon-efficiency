@@ -57,7 +57,7 @@ export class Miniboss {
     }
 
     getCurrentCount = (daysSinceKill: number = this.daysSinceLastKill) => {
-        if (daysSinceKill == 0) { 
+        if (daysSinceKill < 3) { 
             return 0;
         }
         
