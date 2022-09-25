@@ -117,8 +117,8 @@ export const updateConstruction = (data: Map<string, any>) => {
     }
     // Fake checkouts if been AFK for a long time.
     while (timeSinceCheck > construction.library.getTimeTillNextCheckout()) {
-        construction.library.currentBooks += 1;
         timeSinceCheck -= construction.library.getTimeTillNextCheckout();
+        construction.library.currentBooks += 1;
     }
     construction.library.secondsToNextCheckout = construction.library.getTimeTillNextCheckout() - timeSinceCheck;
     construction.library.secondsToMaxCheckout = construction.library.getTimeTillMaxCheckout() - timeSinceCheck;
