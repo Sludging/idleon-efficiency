@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { getApp } from 'firebase/app';
 import { useContext } from 'react';
 import { AuthContext, AuthStatus } from './firebase/authContext';
@@ -44,9 +44,9 @@ export const AppProvider: React.FC<{ appLoading: boolean, data: { data: Map<stri
   const [fireStore, setFireStore] = useState<FirestoreData | undefined>(undefined);
   const authContext = useContext(AuthContext);
   const user = authContext?.user;
-  const allItems = initAllItems();
+  const allItems = useMemo(() => initAllItems(), []);
 
-  const handleStaticData = async (profile: string, data: { data: Map<string, any>, charNames: string[] }) => {
+  const handleStaticData = useCallback(async (profile: string, data: { data: Map<string, any>, charNames: string[] }) => {
     setAppStatus(AppStatus.Loading);
     const cloudsave = Cloudsave.fromJSON(data.data)
     const newData = await updateIdleonData(cloudsave, data.charNames, allItems, {}, true);
@@ -58,10 +58,13 @@ export const AppProvider: React.FC<{ appLoading: boolean, data: { data: Map<stri
       value: 1,
     });
     setAppStatus(AppStatus.StaticData);
-  }
+  }, []);
 
-  const handleLiveData = async (cloudsave: Cloudsave, charNames: string[], serverVars: Record<string, any>) => {
-    setAppStatus(AppStatus.Loading);
+  const handleLiveData = useCallback(async (cloudsave: Cloudsave, charNames: string[], serverVars: Record<string, any>) => {
+    // console.log("LiveData", appStatus, idleonData.getData().size);
+    // if (appStatus != AppStatus.LiveData) {
+    //   setAppStatus(AppStatus.Loading);
+    // }
     const newData = await updateIdleonData(cloudsave, charNames, allItems, serverVars, false);
     setData(newData);
     sendEvent({
@@ -71,7 +74,7 @@ export const AppProvider: React.FC<{ appLoading: boolean, data: { data: Map<stri
       value: 1,
     });
     setAppStatus(AppStatus.LiveData);
-  }
+  }, [appStatus]);
 
   useEffect(() => {
     // Don't do anything while the auth is still being figured out.
@@ -100,12 +103,14 @@ export const AppProvider: React.FC<{ appLoading: boolean, data: { data: Map<stri
     }
   }, [domain, user, authContext, data, appLoading]);
 
+  const contextValue = useMemo(() => ({
+    data: idleonData,
+    status: appStatus,
+    profile: domain
+  }), [idleonData, appStatus, domain]);
+
   return (
-    <AppContext.Provider value={{
-      data: idleonData,
-      status: appStatus,
-      profile: domain
-    }}>
+    <AppContext.Provider value={contextValue}>
       {children}
     </AppContext.Provider>
   );

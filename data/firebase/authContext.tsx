@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { getAuth, User } from 'firebase/auth';
 import app from "./config";
 import { GoogleAuthProvider, signInWithPopup, signInWithCredential, signOut, EmailAuthProvider } from "firebase/auth";
@@ -35,7 +35,7 @@ export const AuthProvider: React.FC<{appLoading: boolean, data: {data: Map<strin
     const [authStatus, setAuthStatus] = useState(AuthStatus.Loading);
     const router = useRouter();
 
-    const loginThroughToken = (id_token: string, callback?: Function) => {
+    const loginThroughToken = useCallback((id_token: string, callback?: Function) => {
         const auth = getAuth(app);
         const credential = GoogleAuthProvider.credential(id_token, null);
         signInWithCredential(auth, credential)
@@ -52,9 +52,9 @@ export const AuthProvider: React.FC<{appLoading: boolean, data: {data: Map<strin
                 }
                 console.debug(errorCode, errorMessage);
             });
-    }
+    }, [])
 
-    const loginThroughEmailPassword = (email: string, password: string, callback?: Function) => {
+    const loginThroughEmailPassword = useCallback((email: string, password: string, callback?: Function) => {
         const auth = getAuth(app);
         const credential = EmailAuthProvider.credential(email, password);
         signInWithCredential(auth, credential)
@@ -71,9 +71,9 @@ export const AuthProvider: React.FC<{appLoading: boolean, data: {data: Map<strin
                 }
                 console.debug(errorCode, errorMessage);
             });
-    }
+    }, [])
 
-    const logout = () => {
+    const logout = useCallback(() => {
         const auth = getAuth(app);
         if (user) {
             signOut(auth)
@@ -92,7 +92,7 @@ export const AuthProvider: React.FC<{appLoading: boolean, data: {data: Map<strin
                     console.log(errorCode, errorMessage);
                 });
         }
-    }
+    }, [user])
 
     useEffect(() => {
         if (!appLoading && domain == "") {
