@@ -1,4 +1,5 @@
 import { AnvilWrapper } from "./anvil";
+import { Arcade } from "./arcade";
 import { ImageData } from "./imageData";
 import { Item } from "./items";
 import { ObolsData, Obol } from "./obols";
@@ -18,7 +19,8 @@ export enum AlertType {
     Worship = "Worship",
     Refinery = "Refinery",
     CDReady = "Cooldown Ready",
-    Traps = "Traps"
+    Traps = "Traps",
+    ArcadeFull = "Arcade Full"
 }
 
 export abstract class Alert {
@@ -113,6 +115,16 @@ export class TrapAlerts extends GlobalAlert {
     }
 }
 
+export class ArcadeFullAlert extends GlobalAlert {
+    constructor() {
+        super(`Your arcade balls are capped, go claim.`, AlertType.ArcadeFull, Arcade.silverBallImageData());
+
+        // override default size
+        (this.icon as ImageData).width = 50;
+        (this.icon as ImageData).height = 50;
+    }
+}
+
 export class Alerts {
     playerAlerts: Record<number, Alert[]> = {};
     generalAlerts: Alert[] = [];
@@ -184,12 +196,12 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
     return alerts;
 }
 
-const getGlobalAlerts = (worship: Worship, refinery: Refinery, players: Player[], traps: Trap[][]): Alert[] => {
+const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], arcade: Arcade): Alert[] => {
     const globalAlerts: Alert[] = [];
 
     // Worship
     if (worship.totalData.overFlowTime <= 0) {
-        globalAlerts.push(new GlobalAlert("Overflowing charge", AlertType.Worship, Skilling.getSkillImageData(SkillsIndex.Worship)))
+        globalAlerts.push(new GlobalAlert("Overflowing charge. Go to World 3 -> Worship for more details.", AlertType.Worship, Skilling.getSkillImageData(SkillsIndex.Worship)))
     }
 
     // Refinery
@@ -207,6 +219,12 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, players: Player[]
         globalAlerts.push(new TrapAlerts(readyTraps));
     }
 
+    // Arcade
+    const isCapped = arcade.maxBalls <= arcade.ballsToClaim;
+    if (isCapped) {
+        globalAlerts.push(new ArcadeFullAlert())
+    }
+
     return globalAlerts;
 }
 
@@ -218,6 +236,7 @@ export const updateAlerts = (data: Map<string, any>) => {
     const worship = data.get("worship") as Worship;
     const refinery = data.get("refinery") as Refinery;
     const traps = data.get("traps") as Trap[][];
+    const arcade = data.get("arcade") as Arcade;
 
 
     players.forEach(player => {
@@ -226,6 +245,6 @@ export const updateAlerts = (data: Map<string, any>) => {
     })
 
     // Global Alerts
-    alerts.generalAlerts = getGlobalAlerts(worship, refinery, players, traps);
+    alerts.generalAlerts = getGlobalAlerts(worship, refinery, traps, arcade);
     return alerts;
 }

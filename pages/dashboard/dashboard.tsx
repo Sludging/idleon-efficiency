@@ -15,6 +15,7 @@ import TipDisplay from "../../components/base/TipDisplay";
 import { Activity } from "../../data/domain/player";
 import CoinsDisplay from "../../components/coinsDisplay";
 import { TimeDown } from "../../components/base/TimeDisplay";
+import { Arcade } from "../../data/domain/arcade";
 
 const isPlayerAlert = (x: Alert): x is PlayerAlert => "player" in x
 
@@ -223,6 +224,12 @@ function Dashboard() {
                                     <IconImage data={accountData.coloTickets.getImageData()} scale={accountData.coloTickets.getImageData().width > 36 ? 0.5 : 1} />
                                 </Box>
                                 <Text size="small">{nFormatter(accountData.coloTickets.count)}</Text>
+                            </Box>
+                            <Box direction="row" border={{ color: 'grey-1' }} background="accent-4" pad='small' align="center" margin={{ right: 'small', bottom: 'small' }}>
+                                <Box>
+                                    <IconImage data={Arcade.silverBallImageData()} />
+                                </Box>
+                                <Text size="small">{accountData.arcadeBallsToClaim}/{accountData.arcadeMaxBalls}</Text>
                             </Box>
                         </DashboardWidget>
                         <DashboardWidget heading="Money" gridArea="money">

@@ -1,4 +1,5 @@
 import { range } from "../utility";
+import { Arcade } from "./arcade";
 import { Cloudsave } from "./cloudsave";
 import { Construction, Library } from "./construction";
 import { Item } from "./items";
@@ -104,6 +105,11 @@ export class Account {
     library: Library = new Library();
     miniBosses: Miniboss[] = [];
     totalMoney: number = 0;
+    
+    // Arcade
+    arcadeMaxBalls: number = 0;
+    arcadeBallsToClaim: number = 0;
+
     activity: Record<Activity, number> = {
         [Activity.Skilling]: 0,
         [Activity.Fighting]: 0,
@@ -146,6 +152,7 @@ export const updateAccount = (data: Map<string, any>) => {
     const storage = data.get("storage") as Storage;
     const accountOptions = (data.get("rawData") as { [k: string]: any })["OptLacc"] as string | number[];
     const construction = data.get("construction") as Construction;
+    const arcade = data.get("arcade") as Arcade;
 
     account.keys.forEach(key => {
         key.daysSincePickup = accountOptions[daysSincePickupBossIndexMap[key.item.internalName]] as number ?? 0;
@@ -169,5 +176,10 @@ export const updateAccount = (data: Map<string, any>) => {
 
     // Sum up your money
     account.totalMoney = storage.money + players.reduce((sum, player) => sum += player.money, 0);
+
+    // Arcade
+    account.arcadeMaxBalls = arcade.maxBalls;
+    account.arcadeBallsToClaim = arcade.ballsToClaim;
+    
     return account;
 }

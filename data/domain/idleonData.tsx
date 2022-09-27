@@ -22,7 +22,7 @@ import { Cloudsave } from './cloudsave';
 import parseWorship, { updateWorship } from './worship';
 import parseConstruction, { updateConstruction } from './construction';
 import parseCards from './cards';
-import parseArcade from './arcade';
+import parseArcade, { updateArcade } from './arcade';
 import parseObols from './obols';
 import { parseFamily } from './family';
 import { parseDungeons } from './dungeons';
@@ -146,6 +146,7 @@ const postProcessingMap: Record<string, Function> = {
     "sigils": (doc: Cloudsave, accountData: Map<string, any>) => updateSigils(accountData),
     "worship": (doc: Cloudsave, accountData: Map<string, any>) => updateWorship(accountData),
     "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),
+    "arcade": (doc: Cloudsave, accountData: Map<string, any>) => updateArcade(accountData),
     "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
     "account": (doc: Cloudsave, accountData: Map<string, any>) => updateAccount(accountData),
     "construction": (doc: Cloudsave, accountData: Map<string, any>) => updateConstruction(accountData),
