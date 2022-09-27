@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import IconImage from "../../components/base/IconImage";
 import ShadowBox from "../../components/base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../../components/base/TextAndLabel";
-import { AppContext } from "../../data/appContext";
+import { AppContext, AppStatus } from "../../data/appContext";
 import { Account, Key } from "../../data/domain/account";
 import { Alerts, AlertType, PlayerAlert, Alert } from "../../data/domain/alerts";
 import { EnemyInfo } from "../../data/domain/enemies";
@@ -14,52 +14,54 @@ import { getCoinsArray, nFormatter } from "../../data/utility";
 import TipDisplay from "../../components/base/TipDisplay";
 import { Activity } from "../../data/domain/player";
 import CoinsDisplay from "../../components/coinsDisplay";
-import { TimeDisplaySize, TimeDown } from "../../components/base/TimeDisplay";
+import { TimeDown } from "../../components/base/TimeDisplay";
 
 const isPlayerAlert = (x: Alert): x is PlayerAlert => "player" in x
 
 function KeyDisplay({ toShow }: { toShow: Key }) {
     return (
-        <TipDisplay
-            visibility={toShow.amountPerDay == 0 ? 'none' : ''}
-            heading={toShow.item.displayName}
-            body={
-                <Box>
-                    <Box direction="row" gap="small">
-                        <TextAndLabel
-                            label="Characters awarding keys per day"
-                            text={`${toShow.amountPerDay}`}
-                            labelColor="black"
-                            textSize="large"
-                        />
-                        <TextAndLabel
-                            label="Days since last Pickup"
-                            text={`${toShow.daysSincePickup}`}
-                            labelColor="black"
-                            textSize="large"
-                        />
+        <Box>
+            <TipDisplay
+                visibility={toShow.amountPerDay == 0 ? 'none' : ''}
+                heading={`${toShow.item.displayName} (${toShow.keysAvailableForPickup()} available to pickup)`}
+                body={
+                    <Box>
+                        <Box direction="row" gap="small">
+                            <TextAndLabel
+                                label="Characters awarding keys per day"
+                                text={`${toShow.amountPerDay}`}
+                                labelColor="black"
+                                textSize="large"
+                            />
+                            <TextAndLabel
+                                label="Days since last Pickup"
+                                text={`${toShow.daysSincePickup}`}
+                                labelColor="black"
+                                textSize="large"
+                            />
+                        </Box>
+                        {
+                            toShow.daysSincePickup >= 3 &&
+                            <Text size="xsmall">3 days is the maximum for keys to accumulate, you are wasting keys. GO CLAIM!</Text>
+                        }
                     </Box>
-                    {
-                        toShow.daysSincePickup >= 3 &&
-                        <Text size="xsmall">3 days is the maximum for keys to accumulate, you are wasting keys. GO CLAIM!</Text>
-                    }
-                </Box>
 
-            }
-        >
-            <Box direction="row" border={{ color: 'grey-1' }} background="accent-4" pad='small' align="center" margin={{ right: 'small', bottom: 'small' }}>
-                <Box>
-                    <IconImage data={toShow.item.getImageData()} scale={toShow.item.getImageData().width > 36 ? 0.5 : 1} />
+                }
+            >
+                <Box direction="row" border={{ color: 'grey-1' }} background="accent-4" pad='small' align="center" margin={{ right: 'small', bottom: 'small' }}>
+                    <Box margin={{ right: 'small' }}>
+                        <IconImage data={toShow.item.getImageData()} scale={toShow.item.getImageData().width > 36 ? 0.5 : 1} />
+                    </Box>
+                    <Box>
+                        <Text size="small">{nFormatter(toShow.item.count)}</Text>
+                        {
+                            toShow.amountPerDay > 0 &&
+                            <Text color={toShow.daysSincePickup > 3 ? 'red' : ''} size="xsmall">{toShow.keysAvailableForPickup()}</Text>
+                        }
+                    </Box>
                 </Box>
-                <Box>
-                    <Text size="small">{nFormatter(toShow.item.count)}</Text>
-                    {
-                        toShow.amountPerDay > 0 &&
-                        <Text color={toShow.daysSincePickup > 3 ? 'red' : ''} size="xsmall">{toShow.keysAvailableForPickup()}</Text>
-                    }
-                </Box>
-            </Box>
-        </TipDisplay>
+            </TipDisplay>
+        </Box>
     )
 }
 
@@ -95,7 +97,7 @@ function ActivityDisplay({ activity, count }: { activity: Activity, count: numbe
     )
 }
 
-function AlertDisplay({ alert }: { alert: Alert }) {
+function AlertDisplay({ alert, iconScale = 1 }: { alert: Alert, iconScale?: number }) {
     const getIcon = (alert: Alert) => {
         const playerAlert = isPlayerAlert(alert);
         switch (alert.type) {
@@ -114,7 +116,7 @@ function AlertDisplay({ alert }: { alert: Alert }) {
             <TipDisplay
                 heading={alert.title}
                 body={alert.text}>
-                {alert.icon ? <IconImage data={alert.icon} /> : getIcon(alert)}
+                {alert.icon ? <IconImage data={alert.icon} scale={iconScale} /> : getIcon(alert)}
             </TipDisplay>
         </Box>
     )
@@ -124,33 +126,35 @@ function CharacterAlerts({ alerts }: { alerts: PlayerAlert[] }) {
     const player = alerts[0].player;
 
     return (
-        <ShadowBox background="dark-1" gap="xsmall" direction="row" align="center">
-            <Box direction="row" align="center" pad={{ top: "xsmall", bottom: "xsmall", left: "small", right: "small" }} gap="xsmall" width={{ min: '120px', max: '120px'}}>
-                <IconImage data={player.getClassImageData()} scale={0.8}/>
-                <Box>
-                    <Text color="grey-2" size="xsmall" truncate={true}>{player.playerName}</Text>
+        <Box background="dark-3" gap="xsmall" direction="row" align="center" pad='16px'>
+            <Box fill direction="row">
+                <Box align="center" gap="xsmall" margin={{ right: '16px' }}>
+                    <IconImage data={player.getClassImageData()} />
+                </Box>
+                <Box fill>
+                    <Box pad={{ vertical: 'small' }}>
+                        <Text weight='bold' size="small" truncate={true}>{player.playerName}</Text>
+                    </Box>
+                    <Box direction="row" wrap border={{ side: 'top', color: 'grey-1', size: '1px' }} pad={{ top: 'xsmall' }}>
+                        {
+                            alerts.map((alert, index) => <Box margin={{ right: 'xsmall' }} key={index}><AlertDisplay alert={alert} iconScale={0.7} /></Box>)
+                        }
+                    </Box>
                 </Box>
             </Box>
-            <Box>
-                <Box direction="row" wrap>
-                    {
-                        alerts.map((alert, index) => <Box key={index}><AlertDisplay alert={alert} /></Box>)
-                    }
-                </Box>
-            </Box>
-        </ShadowBox >
+        </Box >
     )
 }
 
-function DashboardWidget({ children, direction = "row", wrap, heading }: { children: React.ReactNode, direction?: DirectionType, wrap?: boolean, heading: string }) {
+function DashboardWidget({ children, direction = "row", wrap, heading, gridArea }: { children: React.ReactNode, direction?: DirectionType, wrap?: boolean, heading: string, gridArea?: string }) {
     return (
-        <ShadowBox align='start' background="dark-1" pad="small" margin={{ right: 'small', bottom: 'small' }}>
+        <ShadowBox background="dark-1" pad="24px" margin={{ right: 'small', bottom: 'small' }} gridArea={gridArea}>
             <ComponentAndLabel
                 label={heading}
-                labelSize="large"
-                center
+                labelSize="medium"
+                labelColor="white"
                 component={
-                    <Box direction={direction} wrap={wrap}>
+                    <Box direction={direction} wrap={wrap} alignContent='evenly' align='stretch'>
                         {children}
                     </Box>
                 } />
@@ -173,14 +177,41 @@ function Dashboard() {
         }
     }, [appContext]);
 
+    const mainColumns = appContext.status == AppStatus.StaticData || size == "small" ? ["100%"] : ["75%", "25%"];
+    const dashboardGridArea = appContext.status == AppStatus.StaticData ?
+        [
+            { name: 'accountItems', start: [0, 0], end: [2, 0] },
+            { name: 'money', start: [0, 1], end: [1, 1] },
+            { name: 'activity', start: [1, 1], end: [2, 1] },
+            { name: 'minibosses', start: [0, 2], end: [1, 2] },
+            { name: 'library', start: [1, 2], end: [2, 2] },
+            { name: 'globalAlerts', start: [0, 3], end: [2, 3] },
+        ]
+        :
+        [
+            { name: 'accountItems', start: [0, 0], end: [2, 0] },
+            { name: 'money', start: [0, 1], end: [1, 1] },
+            { name: 'activity', start: [1, 1], end: [2, 1] },
+            { name: 'minibosses', start: [0, 2], end: [2, 2] },
+            { name: 'library', start: [0, 3], end: [1, 3] },
+            { name: 'globalAlerts', start: [1, 3], end: [2, 3] },
+        ]
+
     return (
         <Box width={{ max: '1440px' }} pad={{ left: "large", right: 'large', bottom: 'medium' }} fill margin={{ left: 'auto', right: 'auto' }}>
             <NextSeo title="Dashboard" />
-            <Grid columns={size == "small" ? ["100%"] : ["70%", "30%"]}>
-                <Box>
+            <Grid columns={mainColumns}>
+                <Box pad={{ right: '24px' }}>
                     <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Dashboard</Heading>
-                    <Box direction="row" wrap>
-                        <DashboardWidget direction="row" heading="Account wide items" wrap>
+                    <Grid
+                        areas={dashboardGridArea}
+                        columns={[
+                            ["50%", "20%", "30%"]
+                        ]}
+                        gap="24px"
+                        rows={["fit", "fit", "fit", "fit"]}
+                    >
+                        <DashboardWidget direction="row" heading="Account wide items" wrap gridArea="accountItems">
                             {
                                 accountData.keys.filter(key => key.item.count > 0).map((key, index) => (
                                     <KeyDisplay key={index} toShow={key} />
@@ -193,13 +224,13 @@ function Dashboard() {
                                 <Text size="small">{nFormatter(accountData.coloTickets.count)}</Text>
                             </Box>
                         </DashboardWidget>
-                        <DashboardWidget heading="Money">
+                        <DashboardWidget heading="Money" gridArea="money">
                             <Box pad="small">
                                 <CoinsDisplay coinMap={getCoinsArray(accountData.totalMoney)} maxCoins={4} />
                             </Box>
                         </DashboardWidget>
-                        <DashboardWidget heading="Library">
-                            <Box direction="row" pad={{ vertical: 'small' }} gap="medium">
+                        <DashboardWidget heading="Library" gridArea="library">
+                            <Box direction="row" pad={{ vertical: 'small' }} gap="large">
                                 <IconImage data={accountData.library.getImageData()} />
                                 <TextAndLabel
                                     label="Book count"
@@ -221,7 +252,7 @@ function Dashboard() {
                                 }
                             </Box>
                         </DashboardWidget>
-                        <DashboardWidget heading="Minibosses" wrap>
+                        <DashboardWidget heading="Minibosses" wrap gridArea="minibosses">
                             {
                                 accountData.miniBosses.map((miniBoss, index) => {
                                     const miniBossInfo = EnemyInfo.find(enemy => enemy.id == miniBoss.bossInternalName)
@@ -229,7 +260,7 @@ function Dashboard() {
                                         return null
                                     }
                                     return (
-                                        <Box key={`boss_${index}`} direction="row" margin={{ right: 'small', bottom: 'small' }} align="center" gap="small">
+                                        <Box key={`boss_${index}`} border={{ color: 'grey-1' }} pad="16px" direction="row" margin={{ right: 'small', bottom: 'small' }} align="center" gap="small">
                                             <IconImage data={miniBossInfo?.getImageData()} scale={0.5} />
                                             <TextAndLabel
                                                 label="Current Count"
@@ -247,7 +278,7 @@ function Dashboard() {
                                 })
                             }
                         </DashboardWidget>
-                        <DashboardWidget heading="Activity">
+                        <DashboardWidget heading="Activity" gridArea="activity">
                             {
                                 Object.entries(accountData.activity).map(([activity, count], index) => {
                                     if (count == 0) {
@@ -263,8 +294,8 @@ function Dashboard() {
                             }
                         </DashboardWidget>
                         {
-                            alertData.generalAlerts.length > 0 &&
-                            <DashboardWidget heading="Global Alerts">
+                            alertData.generalAlerts.length > 0 && appContext.status != AppStatus.StaticData &&
+                            <DashboardWidget heading="Global Alerts" gridArea="globalAlerts">
                                 {
                                     alertData.generalAlerts.map((alert, index) => (
                                         <Box key={index}>
@@ -274,23 +305,25 @@ function Dashboard() {
                                 }
                             </DashboardWidget>
                         }
-                    </Box>
+                    </Grid>
                 </Box>
-                <Box>
-                    <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Alerts</Heading>
-                    <Box>
-                        {
-                            Object.entries(alertData.playerAlerts).filter(([_, alerts]) => alerts.length > 0).map(([playerID, playerAlerts]) => {
-                                return (
-
-                                    <Box key={`alerts_${playerID}`} margin={{ right: 'small', bottom: 'small' }}>
-                                        <CharacterAlerts alerts={playerAlerts as PlayerAlert[]} />
-                                    </Box>
-                                )
-                            })
-                        }
+                {
+                    appContext.status != AppStatus.StaticData &&
+                    <Box background="dark-1" pad={{ left: 'medium', right: 'medium' }}>
+                        <Heading level="3" size="medium" style={{ fontWeight: 'normal' }}>Alerts</Heading>
+                        <Box>
+                            {
+                                Object.entries(alertData.playerAlerts).filter(([_, alerts]) => alerts.length > 0).map(([playerID, playerAlerts]) => {
+                                    return (
+                                        <Box key={`alerts_${playerID}`} margin={{ bottom: 'small' }}>
+                                            <CharacterAlerts alerts={playerAlerts as PlayerAlert[]} />
+                                        </Box>
+                                    )
+                                })
+                            }
+                        </Box>
                     </Box>
-                </Box>
+                }
             </Grid>
         </Box>
     )

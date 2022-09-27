@@ -6,7 +6,7 @@ import { Activity, Player } from "./player";
 import { Refinery } from "./refinery";
 import { Skilling } from "./skilling";
 import { SkillsIndex } from "./SkillsIndex";
-import { ClassIndex, Talent } from "./talents";
+import { Talent } from "./talents";
 import { Trap } from "./traps";
 import { Worship } from "./worship";
 
@@ -91,9 +91,25 @@ export class WorshipAlert extends PlayerAlert {
     }
 }
 
+export class CooldownAlert extends PlayerAlert {
+    constructor(player: Player, talent: Talent) {
+        super(player, AlertType.CDReady);
+        this.title = `${talent.name} is ready`;
+        this.icon = talent.getImageData();
+
+        // Override default size
+        this.icon.height = 36;
+        this.icon.width = 36;
+    }
+}
+
 export class TrapAlerts extends GlobalAlert {
     constructor(public count: number) {
         super(`${count} Traps ready to be collected`, AlertType.Traps, Item.getImageData("TrapBoxSet1"));
+
+        // override default size
+        (this.icon as ImageData).width = 50;
+        (this.icon as ImageData).height = 50;
     }
 }
 
@@ -153,6 +169,18 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
         alerts.push(new WorshipAlert(player));
     }
 
+    // Cooldown alerts
+    const cooldownTalentIndexes = [32, 130, 475, 370, 490]
+    cooldownTalentIndexes.forEach(cdTalent => {
+        const talent = player.talents.find(talent => talent.skillIndex == cdTalent && talent.level > 0);
+        if (talent) {
+            const talentCooldown = player.getCurrentCooldown(cdTalent);
+            if (talentCooldown <= 0) {
+                alerts.push(new CooldownAlert(player, talent));
+            }
+        }
+    })
+
     return alerts;
 }
 
@@ -171,24 +199,6 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, players: Player[]
         }
         // Fuel is empty math, need storage items logic from the construction page.
         //if (saltInfo.active && saltInfo.getFuelTime())
-    })
-
-    // Cooldown alerts
-    const cooldownTalentIndexes = [32, 130, 475, 370, 490]
-    cooldownTalentIndexes.forEach(cdTalent => {
-        const potentialPlayers = players.filter(player => player.talents.find(talent => talent.skillIndex == cdTalent) != undefined);
-        const readyPlayers = potentialPlayers.reduce((toPrint, player, index, _) => {
-            const talentCooldown = player.getCurrentCooldown(cdTalent);
-            if (talentCooldown <= 0) {
-                toPrint.push(player.playerName)
-            }
-            return toPrint;
-        }, [] as String[])
-
-        if (readyPlayers.length > 0) {
-            const talent = potentialPlayers[0].talents.find(talent => talent.skillIndex == cdTalent);
-            globalAlerts.push(new GlobalAlert(`${talent?.name} is ready on ${readyPlayers.join(",")}`, AlertType.CDReady, talent?.getImageData()))
-        }
     })
 
     // Traps

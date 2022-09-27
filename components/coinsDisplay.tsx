@@ -25,7 +25,7 @@ export default function CoinsDisplay(props: CoinProps) {
     }
 
     return (
-        <Box direction={props.regularRow ? "row" : "row-responsive"} gap="xsmall">
+        <Box direction={props.regularRow ? "row" : "row-responsive"} gap="small">
             {
                 Array.from(props.coinMap).map(([coin, value], index) => {
                     if (!props.maxCoins || index < props.maxCoins) {
