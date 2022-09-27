@@ -66,6 +66,7 @@ function KeyDisplay({ toShow }: { toShow: Key }) {
 }
 
 function ActivityDisplay({ activity, count }: { activity: Activity, count: number }) {
+    const size = useContext(ResponsiveContext);
     const getImageData = (activity: Activity) => {
         var imageName: string = "";
         switch (activity) {
@@ -91,7 +92,7 @@ function ActivityDisplay({ activity, count }: { activity: Activity, count: numbe
     }
     return (
         <Box gap="small" align="center">
-            <IconImage data={getImageData(activity)} />
+            <IconImage data={getImageData(activity)} scale={size == "small" ? 0.7 : 1} />
             <Text size="small">{count}</Text>
         </Box>
     )
@@ -230,7 +231,7 @@ function Dashboard() {
                             </Box>
                         </DashboardWidget>
                         <DashboardWidget heading="Library" gridArea="library">
-                            <Box direction="row" pad={{ vertical: 'small' }} gap="large">
+                            <Box direction="row" pad={{ vertical: 'small' }} gap="large" wrap>
                                 <IconImage data={accountData.library.getImageData()} />
                                 <TextAndLabel
                                     label="Book count"
