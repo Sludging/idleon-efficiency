@@ -1,5 +1,5 @@
 import { Box, Grid, Heading, ResponsiveContext, Text } from "grommet";
-import { EmptyCircle, Tools, UserSettings, BarChart } from "grommet-icons";
+import { EmptyCircle, Tools, UserSettings, BarChart, CircleInformation } from "grommet-icons";
 import { DirectionType } from "grommet/utils";
 import { NextSeo } from "next-seo";
 import { useContext, useEffect, useState } from "react";
@@ -204,7 +204,20 @@ function Dashboard() {
             <NextSeo title="Dashboard" />
             <Grid columns={mainColumns}>
                 <Box pad={{ right: '24px' }}>
-                    <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Dashboard</Heading>
+                    <Box direction="row" align="center">
+                        <Heading margin={{ right: 'small' }} level="2" size="medium" style={{ fontWeight: 'normal' }}>Dashboard</Heading>
+                        <TipDisplay
+                            heading="This is a work in progress"
+                            body={
+                                <Box gap="xsmall">
+                                    <Text size="small">Only a handful of alerts are supported at the moment but more will be added over time.</Text>
+                                    <Text size="small">For suggestions and feature requests, please reach out to me over Discord (see link at the bottom)</Text>
+                                </Box>
+                            }
+                        >
+                            <CircleInformation size="small" />
+                        </TipDisplay>
+                    </Box>
                     <Grid
                         areas={dashboardGridArea}
                         columns={[
