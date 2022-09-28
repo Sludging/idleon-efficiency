@@ -48,7 +48,7 @@ function Arcade() {
                 <Box direction="row">
                     <TextAndLabel text={arcadeData?.balls?.toString() ?? "0"} label="Silver balls" margin={{ right: 'medium' }} />
                     <TextAndLabel text={arcadeData?.goldBalls?.toString() ?? "0"} label="Gold balls" margin={{ right: 'medium' }}/>
-                    <ComponentAndLabel component={<StaticTime fromSeconds={arcadeData?.ballsPerSecond ?? 0} size={TimeDisplaySize.Small} /> } label="Time per ball" margin={{ right: 'medium' }}/>
+                    <ComponentAndLabel component={<StaticTime fromSeconds={arcadeData?.secondsPerBall ?? 0} size={TimeDisplaySize.Small} /> } label="Time per ball" margin={{ right: 'medium' }}/>
                     <ComponentAndLabel component={<StaticTime fromSeconds={arcadeData?.maxClaimTime ?? 0} size={TimeDisplaySize.Small} /> } label="Max Claim time" margin={{ right: 'medium' }}/>
                     <TextAndLabel text={`${(arcadeData?.ballsToClaim ?? 0).toString()}/${arcadeData?.maxBalls}`} label="Balls to claim" />
                 </Box>
