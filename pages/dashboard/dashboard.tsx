@@ -2,7 +2,7 @@ import { Box, Grid, Heading, ResponsiveContext, Text } from "grommet";
 import { EmptyCircle, Tools, UserSettings, BarChart, CircleInformation } from "grommet-icons";
 import { DirectionType } from "grommet/utils";
 import { NextSeo } from "next-seo";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import IconImage from "../../components/base/IconImage";
 import ShadowBox from "../../components/base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../../components/base/TextAndLabel";
@@ -179,8 +179,14 @@ function Dashboard() {
         }
     }, [appContext]);
 
-    const mainColumns = appContext.status == AppStatus.StaticData || size == "small" ? ["100%"] : ["75%", "25%"];
-    const dashboardGridArea = appContext.status == AppStatus.StaticData ?
+    const playerAlerts = useMemo(() => {
+        return Object.entries(alertData.playerAlerts).filter(([_, alerts]) => alerts.length > 0)
+    }, [alertData]);
+
+    // We have a single column layout if it's a public profile, small screen, or not player alerts. Else 2 columns.
+    const mainColumns = appContext.status == AppStatus.StaticData || size == "small" || playerAlerts.length == 0 ? ["100%"] : ["75%", "25%"];
+    // If single column, use a different grid layout.
+    const dashboardGridArea = appContext.status == AppStatus.StaticData || playerAlerts.length == 0 ?
         [
             { name: 'accountItems', start: [0, 0], end: [2, 0] },
             { name: 'money', start: [0, 1], end: [1, 1] },
@@ -329,7 +335,7 @@ function Dashboard() {
                     </Grid>
                 </Box>
                 {
-                    appContext.status != AppStatus.StaticData &&
+                    appContext.status != AppStatus.StaticData && playerAlerts.length > 0 &&
                     <Box background="dark-1" pad={{ left: 'medium', right: 'medium' }}>
                         <Heading level="3" size="medium" style={{ fontWeight: 'normal' }}>Alerts</Heading>
                         <Box>
