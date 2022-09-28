@@ -37,33 +37,6 @@ function ChargeDisplay() {
         }
     }, [appContext]);
 
-
-    const bestWizard = useMemo(() => {
-        if (playerData) {
-            const bestMaxLevel = Math.max(...playerData.flatMap(player => (player.talents.find(talent => talent.skillIndex == 475)?.maxLevel ?? 0)));
-            return playerData.find(player => player.talents.find(talent => talent.skillIndex == 475 && talent.maxLevel == bestMaxLevel) != undefined);
-        }
-
-        return undefined;
-    }, [playerData])
-
-    const totalChargeInfo = useMemo(() => {
-        if (worship && bestWizard) {
-            const totalCurrentCharge = worship.playerData.filter(player => player.playerID != bestWizard.playerID).reduce((sum, player) => sum += player.estimatedCharge, 0) ?? 0;
-            const totalChargeRate = worship.playerData.filter(player => player.playerID != bestWizard.playerID).reduce((sum, player) => sum += player.chargeRate, 0) ?? 0;
-            const maxCharge = worship.playerData[bestWizard.playerID].maxCharge + (bestWizard.talents.find(talent => talent.skillIndex == 475)?.getBonus(false, true, true) ?? 0);
-            const overFlowIn = (maxCharge - totalCurrentCharge) / (totalChargeRate / 60 / 60);
-            return {
-                charge: totalCurrentCharge,
-                rate: totalChargeRate,
-                maxCharge: maxCharge,
-                overFlowTime: overFlowIn
-            }
-        }
-
-        return undefined;
-    }, [worship, bestWizard])
-
     if (!playerData || !worship || worship.playerData.filter(player => player.currentCharge > 0).length == 0) {
         return (
             <Box align="center" pad="medium">
@@ -74,57 +47,55 @@ function ChargeDisplay() {
 
     return (
         <Box gap="medium" align="center">
-            {totalChargeInfo && bestWizard &&
-                <Box>
-                    <Text size="xsmall">* This is ignoring the wizard&apos;s charge, since you can just .. use it.</Text>
-                    <ShadowBox background="dark-1" pad="medium" gap="large" direction="row" wrap>
-                        <ComponentAndLabel
-                            label="Best Wizard"
-                            component={
-                                <Box direction="row" gap="small">
-                                    <IconImage data={bestWizard.getClassImageData()} scale={0.8} />
-                                    <Text>{bestWizard.playerName}</Text>
-                                </Box>
-                            }
-                        />
-                        <ComponentAndLabel
-                            label="Charge with Charge Syphon"
-                            component={
-                                <Box direction="row" gap="small">
-                                    <Stack>
-                                        <Meter
-                                            size="small"
-                                            type="bar"
-                                            background="accent-3"
-                                            color="brand"
-                                            values={[
-                                                {
-                                                    value: Math.round(totalChargeInfo.charge),
-                                                    label: 'Current total charge',
-                                                    color: 'brand'
-                                                }
-                                            ]}
-                                            max={totalChargeInfo.maxCharge} />
-                                        <Box align="center" pad="xxsmall">
-                                            <Text size="small">{Math.round(totalChargeInfo.charge).toString()} ({(totalChargeInfo.charge / totalChargeInfo.maxCharge * 100).toPrecision(3)}%)</Text>
-                                        </Box>
-                                    </Stack>
-                                    <Text>{totalChargeInfo.maxCharge}</Text>
-                                </Box>
-                            }
-                        />
-                        <TextAndLabel label="Total Charge rate" text={`${Math.round(totalChargeInfo.rate * 24)}% / day`} />
-                        <ComponentAndLabel
-                            label="Time till overflow"
-                            component={
-                                totalChargeInfo.overFlowTime > 0 ?
-                                    <TimeDown size={TimeDisplaySize.Small} addSeconds={totalChargeInfo.overFlowTime} />
-                                    : <Text>Overflowing, you are wasting charge!</Text>
-                            }
-                        />
-                    </ShadowBox>
-                </Box>
-            }
+            <Box>
+                <Text size="xsmall">* This is ignoring the wizard&apos;s charge, since you can just .. use it.</Text>
+                <ShadowBox background="dark-1" pad="medium" gap="large" direction="row" wrap>
+                    <ComponentAndLabel
+                        label="Best Wizard"
+                        component={
+                            <Box direction="row" gap="small">
+                                <IconImage data={playerData[worship.bestWizardPlayerID].getClassImageData()} scale={0.8} />
+                                <Text>{playerData[worship.bestWizardPlayerID].playerName}</Text>
+                            </Box>
+                        }
+                    />
+                    <ComponentAndLabel
+                        label="Charge with Charge Syphon"
+                        component={
+                            <Box direction="row" gap="small">
+                                <Stack>
+                                    <Meter
+                                        size="small"
+                                        type="bar"
+                                        background="accent-3"
+                                        color="brand"
+                                        values={[
+                                            {
+                                                value: Math.round(worship.totalData.currentCharge),
+                                                label: 'Current total charge',
+                                                color: 'brand'
+                                            }
+                                        ]}
+                                        max={worship.totalData.maxCharge} />
+                                    <Box align="center" pad="xxsmall">
+                                        <Text size="small">{Math.round(worship.totalData.currentCharge).toString()} ({(worship.totalData.currentCharge / worship.totalData.maxCharge * 100).toPrecision(3)}%)</Text>
+                                    </Box>
+                                </Stack>
+                                <Text>{worship.totalData.maxCharge}</Text>
+                            </Box>
+                        }
+                    />
+                    <TextAndLabel label="Total Charge rate" text={`${Math.round(worship.totalData.chargeRate * 24)}% / day`} />
+                    <ComponentAndLabel
+                        label="Time till overflow"
+                        component={
+                            worship.totalData.overFlowTime > 0 ?
+                                <TimeDown size={TimeDisplaySize.Small} addSeconds={worship.totalData.overFlowTime} />
+                                : <Text>Overflowing, you are wasting charge!</Text>
+                        }
+                    />
+                </ShadowBox>
+            </Box>
             <Box direction="row" wrap justify="center">
                 {playerData && playerData.map((player, index) => {
                     const timeToFull = (worship.playerData[index].maxCharge - worship.playerData[index].estimatedCharge) / (worship.playerData[index].chargeRate / 60 / 60);

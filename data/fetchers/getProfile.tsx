@@ -14,7 +14,7 @@ export const fetcher = async (windowLocation: string, oldDomain: string): Promis
                     const jsonData = await res.json();
                     return {
                         data: jsonData as Map<string, any>,
-                        charNames: [...Array(9)].map((number, index) => `Player_${index}`),
+                        charNames: [...Array(10)].map((number, index) => `Player_${index}`),
                         domain: urlDomain
                     }
                 }
@@ -29,7 +29,7 @@ export const fetcher = async (windowLocation: string, oldDomain: string): Promis
                 const downloader = new ProfileDownloader();
                 const jsonData = await downloader.downloadProfile(urlDomain);
                 if (jsonData) {
-                    const playerNames = jsonData["playerNames"] ?? [...Array(9)].map((number, index) => `Player_${index}`)
+                    const playerNames = jsonData["playerNames"] ?? [...Array(10)].map((number, index) => `Player_${index}`)
                     return {
                         data: jsonData as Map<string, any>,
                         charNames: playerNames,

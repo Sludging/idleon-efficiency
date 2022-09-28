@@ -23,6 +23,13 @@ export class EnemyData {
     }
 
     getImageData = (): ImageData => {
+        if (this.id == "mini3a" || this.id == "mini4a") {
+            return {
+                location: this.id,
+                height: 68,
+                width: 81
+            }    
+        }
         return {
             location: `Mface${this.details.MonsterFace}`,
             height: 41,
