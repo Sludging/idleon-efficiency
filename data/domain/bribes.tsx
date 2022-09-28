@@ -18,6 +18,14 @@ export class Bribe {
     static fromBase = (data: BribeBase[]) => {
         return data.map((bribe, index) => new Bribe(index, bribe.data.name, bribe.data.desc, bribe.data.cost, bribe.data.type, bribe.data.intName, bribe.data.amount));
     }
+
+    getBonus = () => {
+        if (this.status != BribeStatus.Purchased) {
+            return 0;
+        }
+
+        return this.value;
+    }
 }
 
 export default function parseBribes(bribesData: number[]) {

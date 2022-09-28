@@ -234,3 +234,7 @@ export function range(start: number, end: number) {
 	});
 	return map;
 }
+
+export function secondsSinceUpdate(globalTime: number) {
+    return (new Date().getTime() - globalTime) / 1000;
+}

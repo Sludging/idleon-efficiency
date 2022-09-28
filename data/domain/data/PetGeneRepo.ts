@@ -130,7 +130,7 @@ export const initPetGeneRepo = () => {
                 "x2": 10,
                 "lowerLetter": "n",
                 "upperLetter": "N",
-                "description": "Pemanently gives all pets +1% Crit Chance, +5% Crit DMG, and +2% ability regen speed. After 20 stacks, additional stacks give less bonus.",
+                "description": "Permanently gives all pets +1% Crit Chance, +5% Crit DMG, and +2% ability regen speed. After 20 stacks, additional stacks give less bonus.",
                 "combatDescription": "When foraging, all pets contribute 1.50x more Foraging Speed if there is at least 1 Combat Pet in team"
             }),
         new PetGeneBase(14, <PetGeneModel>{

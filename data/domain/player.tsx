@@ -67,10 +67,10 @@ export class ChipSlot {
 }
 
 export enum Activity {
-    Skilling = 1,
-    Fighting = 2,
-    Lab = 3,
-    Unknown = 4,
+    Skilling = "Skilling",
+    Fighting = "Fighting",
+    Lab = "Lab",
+    Unknown = "Unknown",
 }
 
 interface LabInfo {
@@ -503,6 +503,15 @@ const parseTalents = (talentLevels: string, talentMaxLevels: string, player: Pla
         talent.level = jsonTalents[talent.skillIndex] ?? 0;
         talent.maxLevel = jsonMaxTalents[talent.skillIndex] ?? 0;
     })
+
+    // Update players talents levels due to elite class level increase talents.
+    const extraLevels = Math.floor(player.talents.filter(talent => [149, 374, 539].includes(talent.skillIndex)).reduce((sum, value) => sum += value.getBonus(), 0))
+    player.talents.filter(talent => ![149, 374, 539].includes(talent.skillIndex) && talent.skillIndex <= 614 && talent.level > 0)
+    .forEach(talent => {
+        talent.level += extraLevels;
+        talent.maxLevel += extraLevels;
+    });
+    player.extraLevelsFromTalent = extraLevels;
 }
 
 const parseSkills = (skills: Array<number>, skillXP: Array<number>, skillXPReqs: Array<number>, player: Player) => {
@@ -694,22 +703,11 @@ export const updatePlayers = (data: Map<string, any>) => {
         }
     })
 
-    // Update players talents levels due to elite class level increase talents.
-    players.forEach(player => {
-        const extraLevels = Math.floor(player.talents.filter(talent => [149, 374, 539].includes(talent.skillIndex)).reduce((sum, value) => sum += value.getBonus(), 0))
-        player.talents.filter(talent => ![149, 374, 539].includes(talent.skillIndex) && talent.skillIndex <= 614 && talent.level > 0)
-        .forEach(talent => {
-            talent.level += extraLevels;
-            talent.maxLevel += extraLevels;
-        });
-        player.extraLevelsFromTalent = extraLevels;
-    });
-
     // Double claim chance.
-    const doubleChanceBubbleBonus = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).find(bubble => bubble.name == "Afk Expexp")?.getBonus() ?? 0;
     const doubleChanceGuildBonus = guild.guildBonuses.find(bonus => bonus.name == "Anotha One")?.getBonus() ?? 0;
     const doubleChanceBribeBonus = bribes.find(bribe => bribe.bonus == "AfkDoubleEXP")?.value ?? 0;
     players.forEach(player => {
+        const doubleChanceBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.Quicc, 19)
         player.setDoubleClaimChance(doubleChanceBubbleBonus, doubleChanceBribeBonus, doubleChanceGuildBonus);
     })
 

@@ -34,9 +34,6 @@ function CharacterBox({ player, cost }: { player: Player, cost?: number }) {
 }
 
 function ProductionProgress({ player, playerAnvil, anvilItem }: { player: Player, playerAnvil: AnvilModel, anvilItem: AnvilProduct }) {
-    const futureProduction = Math.min(Math.round(anvilItem.currentAmount + ((anvilItem.currentProgress + (player.afkFor * playerAnvil.anvilSpeed / 3600)) / anvilItem.data.time) * (anvilItem.hammers ?? 0)), playerAnvil.productCapacity);
-    const percentOfCap = Math.round(futureProduction / playerAnvil.productCapacity * 100);
-    const timeTillCap = ((playerAnvil.productCapacity - futureProduction) / (playerAnvil.anvilSpeed / 3600 / anvilItem.data.time * (anvilItem.hammers ?? 0)));
     return (
         <Box gap="small" width={{ min: '250px' }}>
             <Box direction="row" align="center" margin={{ vertical: 'xsmall' }}>
@@ -55,14 +52,14 @@ function ProductionProgress({ player, playerAnvil, anvilItem }: { player: Player
                             color="brand"
                             values={[
                                 {
-                                    value: futureProduction,
+                                    value: anvilItem.futureProduction,
                                     label: 'current',
                                     color: 'brand'
                                 }
                             ]}
                             max={playerAnvil.productCapacity} />
                         <Box align="center" pad="xxsmall">
-                            <Text size="small">{futureProduction.toString()} ({(percentOfCap)}%)</Text>
+                            <Text size="small">{anvilItem.futureProduction.toString()} ({(anvilItem.percentOfCap)}%)</Text>
                         </Box>
                     </Stack>
                     <Text size="xsmall">{nFormatter(playerAnvil.productCapacity)}</Text>
@@ -71,7 +68,7 @@ function ProductionProgress({ player, playerAnvil, anvilItem }: { player: Player
                     label={"Time till cap"}
                     labelSize="xsmall"
                     component={
-                        <StaticTime fromSeconds={timeTillCap} />
+                        <StaticTime fromSeconds={anvilItem.timeTillCap} />
                     }
                 />
             </Box>

@@ -14,7 +14,7 @@ export class Cloudsave {
 
     fakePlayerNames = () => {
         let finalCount = 0;
-        [...Array(9)].map((_, index) => {
+        [...Array(10)].map((_, index) => {
             if (this.fields.has(`Exp0_${index}`)) {
                 finalCount += 1;
             }

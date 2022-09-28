@@ -417,41 +417,7 @@ export class Item {
     }
 
     getImageData = () => {
-        if (getEnhancerRegex().exec(this.internalName)) {
-            return {
-                height: 34,
-                location: `${this.internalName}_x1`,
-                width: 34
-            };
-        }
-        if (getRegex().exec(this.internalName)) {
-            return {
-                height: 36,
-                location: this.internalName,
-                width: 28
-            };
-        }
-        if (liquidRegex().exec(this.internalName)) {
-            return {
-                height: 36,
-                location: `${this.internalName}_x1`,
-                width: 36
-            };
-        }
-        // Cons dem for some reason has capital x.
-        if (this.internalName == "ObolPinkCons") {
-            return {
-                height: 36,
-                location: `${this.internalName}_X1`,
-                width: 36
-            };
-        }
-
-        return {
-            height: 36,
-            location: `${this.internalName}`,
-            width: 36
-        };
+        return Item.getImageData(this.internalName);
     }
 
     addStone = (data: StoneProps) => {
@@ -635,6 +601,44 @@ export class Item {
                 
             }
         })
+    }
+
+    static getImageData = (internalName: string) => {
+        if (getEnhancerRegex().exec(internalName)) {
+            return {
+                height: 34,
+                location: `${internalName}_x1`,
+                width: 34
+            };
+        }
+        if (getRegex().exec(internalName)) {
+            return {
+                height: 36,
+                location: internalName,
+                width: 28
+            };
+        }
+        if (liquidRegex().exec(internalName)) {
+            return {
+                height: 36,
+                location: `${internalName}_x1`,
+                width: 36
+            };
+        }
+        // Cons dem for some reason has capital x.
+        if (internalName == "ObolPinkCons") {
+            return {
+                height: 36,
+                location: `${internalName}_X1`,
+                width: 36
+            };
+        }
+
+        return {
+            height: 36,
+            location: `${internalName}`,
+            width: 36
+        };
     }
 }
 

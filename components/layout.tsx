@@ -19,7 +19,7 @@ import {
 } from "grommet"
 import { useContext, useState, useEffect } from 'react'
 import { AppContext, AppStatus } from '../data/appContext'
-import { AuthContext } from '../data/firebase/authContext'
+import { AuthContext, AuthStatus } from '../data/firebase/authContext'
 import { useRouter } from 'next/dist/client/router';
 
 import { CaretDownFill, FormDown, Menu as MenuIcon, User } from 'grommet-icons';
@@ -145,9 +145,11 @@ export default function Layout({
     const [validState, setValidState] = useState<boolean>(false);
     const [lastUpdated, setLastUpdated] = useState<string>("");
     const [profileDropDownOpen, setProfileDropDownOpen] = useState<boolean>(false);
-    const [loading, setLoading] = useState(true);
 
     const navItems = [
+        {
+            link: "/", label: "Dashboard"
+        },
         {
             link: "/world-1", label: "World 1", subLinks: [
                 { subLink: "/stamps", label: "Stamps" },
@@ -215,17 +217,16 @@ export default function Layout({
             setValidState(false);
         }
         setLastUpdated(appContext.data.getLastUpdated() as string)
-        setLoading(authData ? authData.isLoading : true);
     }, [authData, appContext])
 
-    if (loading) {
+    if (authData?.authStatus == AuthStatus.Loading || appContext.status == AppStatus.Loading) {
         return (
             <Box pad="large" fill align="center">
                 <Text size="large">Loading Data</Text>
             </Box>);
     }
 
-    if (!loading && !validState && router.pathname != "/") {
+    if (authData?.authStatus == AuthStatus.NoUser && appContext.status == AppStatus.NoData && router.pathname != "/") {
         router.push('/');
     }
 

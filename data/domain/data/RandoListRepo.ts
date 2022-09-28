@@ -1741,8 +1741,8 @@ export const initRandoListRepo = () => {
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "v1.60_World_4_Boss_n_Pets",
-                    "New_Content---------------------_@_*Take_on_the_Massive_Troll_at_the_end_of_World_4!_New_boss_equipment, obol, and_cape!_@_*Troll_Boss_Keys_dropped_by_Seekers, 1_in_15k_chance_@_*Unlock_16_new_pets_after_defeating_the_Troll_boss!_@_*11_new_Pet_Abilities_to_find_from_new_and_old_pets!_@___@_Quality_Improvements_-----------------------_@_*Added_hotkeys_1-6_for_using_Pet_Abilities_in_territory_fights!_@_*Added_a_toggle_display_to_show_all_pet_types_upfront!_@___@_Balancing_and_Bug_Fixes_-----------------------_@_*Fixed_an_issue_where_Party_Tower_would_show_+30%_dmg_instead_of_+15%_@_*Bottom_row_salts_of_refinery_now_cost_less_salt_to_produce_@_*Defstone_and_Fighter_pet_abilities_buffed, Looter_ability_no_longer_casts_Fleeter_@_*For_a_full_list_of_patch_notes, check_the_discord_at_Discord.gg/idleon"
+                    "Idle_Skilling_Crossover",
+                    "Idle_Skilling_Launch_Event-----------------_@_*My_old_game_I_made_before_IdleOn_is_finally_out_on_Steam!_@_*Make_progress_in_Idle_Skilling_to_receive_codes, which_you_can_redeem_at_the_Keymaster_in_world_1_town_for_rewards!_@_*Never_heard_of_Idle_Skilling?_Imagine_IdleOn_without_characters, less_complexity, but_more_skills_to_level_up!_It's_similar_enough_to_IdleOn_that_I_think_you'll_enjoy_it, but_still_very_unique_and_worth_giving_a_go!_@_*The_crossover_rewards_for_playing_Idle_Skilling_include_1000s_of_gems, a_unique_hat, gemshop_items, and_even_a_+15%_Skill_Efficiency_trophy!_@_*There_is_no_time_limit_on_the_crossover_event, since_Idle_Skilling_has_years_of_content_and_is_a_much_more_passive_game!_@_*Well_that's_all_I_have_to_say, gonna_get_back_to_working_on_World_5, which_will_have_3_new_skills, new_monsters, and_new_subfeatures!"
                 ]
             }),
         new RandoListBase(62, <RandoListModel>{
@@ -1997,6 +1997,7 @@ export const initRandoListRepo = () => {
                     "filler",
                     "filler"
                 ]
-            })    
+            }),
+        new RandoListBase(77, <RandoListModel>{"elements": ["ObolAmarokA", "ObolEfauntA", "ObolChizoarA", "ObolSlush", "ObolTroll"]})    
 ]
 }

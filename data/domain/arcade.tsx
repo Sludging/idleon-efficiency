@@ -1,8 +1,12 @@
 import { lavaFunc, range } from "../utility"
 import { Achievement } from "./achievements";
+import { Alchemy } from "./alchemy";
+import { Bribe } from "./bribes";
 import { ArcadeBonusBase, initArcadeBonusRepo } from "./data/ArcadeBonusRepo";
 import { ImageData } from "./imageData";
 import { ArcadeBonusModel } from "./model/arcadeBonusModel";
+import { Stamp } from "./stamps";
+import { TaskBoard } from "./tasks";
 
 export const ARCADE_MAX_LEVEL: number = 100
 const achivementsWithBallBonus: number[][] = [
@@ -87,8 +91,15 @@ export class Arcade {
     balls: number = 0;
     goldBalls: number = 0;
 
-    getMaxClaimTime = (stampBonus: number = 0) => {
-        return Math.ceil(3600 * 48 + Math.min(10, stampBonus));
+    // Computed
+
+    secondsPerBall: number = 0;
+    maxClaimTime: number = 0;
+    ballsToClaim: number = 0;
+    maxBalls: number = 0;
+
+    setMaxClaimTime = (stampBonus: number = 0) => {
+        this.maxClaimTime = Math.ceil(3600 * (48 + Math.min(10, stampBonus)));
     }
 
     getBallBonus = (achivements: Achievement[], ballVialBonus: number = 0, meritLevel: number = 0, stampBonus: number = 0) => {
@@ -104,14 +115,22 @@ export class Arcade {
         return totalBonus + ballVialBonus + (5 * meritLevel + Math.min(50, stampBonus));
     }
 
-    getBallsPerSec = (achivements: Achievement[], ballVialBonus: number = 0, meritLevel: number = 0, stampBonus: number = 0) => {
-        return 4000 / (1 + this.getBallBonus(achivements, ballVialBonus, meritLevel, stampBonus) / 100);
+    setSecondsPerBall = (achivements: Achievement[], ballVialBonus: number = 0, meritLevel: number = 0, stampBonus: number = 0, bribeBonus: number = 0) => {
+        this.secondsPerBall = 4000 / (1 + (this.getBallBonus(achivements, ballVialBonus, meritLevel, stampBonus) + bribeBonus) / 100);
     }
 
     static fromBase = (data: ArcadeBonusBase[]) => {
         const toReturn = new Arcade();
         toReturn.bonuses = data.map((bonus => new ArcadeBonus(bonus.index, bonus.data)))
         return toReturn;
+    }
+
+    static silverBallImageData = (): ImageData => {
+        return {
+            location: 'PachAcc',
+            width: 36,
+            height: 36
+        }
     }
 }
 
@@ -127,5 +146,40 @@ export default function parseArcade(bonusArray: number[], optionList: number[]) 
     arcade.balls = optionList[74];
     arcade.goldBalls = optionList[75];
 
+    return arcade;
+}
+
+export const updateArcade = (data: Map<string, any>) => {
+    const arcade = data.get("arcade") as Arcade;
+    const timeAway = JSON.parse((data.get("rawData") as { [k: string]: any })["TimeAway"]);
+    const alchemyData = data.get("alchemy") as Alchemy;
+    const stampData = data.get("stamps") as Stamp[][];
+    const achievementData = data.get("achievements") as Achievement[];
+    const taskboardData = data.get("taskboard") as TaskBoard;
+    const bribeData = data.get("bribes") as Bribe[];
+
+    // Balls per Second
+    const ballVialBonus = alchemyData?.vials.find(vial => vial.name == "Ball Pickle Jar")?.getBonus() ?? 0;
+    const ballMeritLevel = taskboardData?.merits.find(merit => merit.descLine1.includes("arcade ball gain rate"))?.level ?? 0;
+    const stampBonus = stampData.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC4")?.getBonus() ?? 0;
+    const bribeBonus = bribeData[14].getBonus();
+    arcade.setSecondsPerBall(achievementData, ballVialBonus, ballMeritLevel, stampBonus, bribeBonus);
+
+    // Max Claim time
+    const claimStampBonus = stampData.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC8")?.getBonus() ?? 0;
+    arcade.setMaxClaimTime(claimStampBonus);
+
+    // Balls available to claim.
+    const time = new Date()
+    const gapFromLastSave = (time.getTime() / 1000) - timeAway['GlobalTime'];
+    
+    let timeSinceLastClaim = timeAway["GlobalTime"] - timeAway["Arcade"];
+    if (gapFromLastSave > 60 * 5) {
+        timeSinceLastClaim += gapFromLastSave;
+    }
+    arcade.ballsToClaim = Math.floor(Math.min(timeSinceLastClaim, arcade.maxClaimTime) / Math.max(arcade.secondsPerBall, 1800));
+
+    // Max balls
+    arcade.maxBalls = Math.floor(arcade.maxClaimTime / arcade.secondsPerBall);
     return arcade;
 }

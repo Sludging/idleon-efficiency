@@ -340,7 +340,7 @@ const _findPrismSource = (lab: Lab) => {
 }
 
 const _calculatePlayerImpact = (connectedPlayers: Player[], chainIndex: number, lab: Lab, meritConnectionBonus: number) => {
-    const jewelMultiplier = (lab.bonuses.find(bonus => bonus.index == 8)?.active ?? false) ? 1.5 : 1;
+    const jewelMultiplier = lab.bonuses[8].getBonus();
     const jewelconnectionRangeBonus = lab.jewels.filter(jewel => jewel.active && jewel.index == 9).reduce((sum, jewel) => sum += jewel.getBonus(jewelMultiplier), 0)
     const bonusConnectionRangeBonus = lab.bonuses[13].getBonus();
 
@@ -422,7 +422,7 @@ export const updateLab = (data: Map<string, any>) => {
     }
 
     // Figure out best bubo (for purple) and his bonus.
-    const bestBubo = playerData.reduce((final, player) => final = (final.talents.find(talent => talent.skillIndex == 535)?.level ?? 0) > (player.talents.find(talent => talent.skillIndex == 535)?.level ?? 0)? final : player, playerData[0]);
+    const bestBubo = playerData.reduce((final, player) => final = (player.talents.find(talent => talent.skillIndex == 535)?.level ?? 0) > 0 && player.playerID > final.playerID ? player : final, playerData[0]);
     const buboPxBoost = bestBubo.talents.find(talent => talent.skillIndex == 535)?.getBonus() ?? 0;
     lab.bestBuboPlayerID = bestBubo.playerID;
 
