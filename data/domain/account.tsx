@@ -2,6 +2,7 @@ import { range } from "../utility";
 import { Arcade } from "./arcade";
 import { Cloudsave } from "./cloudsave";
 import { Construction, Library } from "./construction";
+import { AFKTypeEnum } from "./enum/aFKTypeEnum";
 import { Item } from "./items";
 import { Activity, Player } from "./player";
 import { Quests } from "./quests";
@@ -110,11 +111,16 @@ export class Account {
     arcadeMaxBalls: number = 0;
     arcadeBallsToClaim: number = 0;
 
-    activity: Record<Activity, number> = {
-        [Activity.Skilling]: 0,
-        [Activity.Fighting]: 0,
-        [Activity.Lab]: 0,
-        [Activity.Unknown]: 0,
+    activity: Record<AFKTypeEnum, number> = {
+        [AFKTypeEnum.Choppin]: 0,
+        [AFKTypeEnum.Fighting]: 0,
+        [AFKTypeEnum.Laboratory]: 0,
+        [AFKTypeEnum.Catching]: 0,
+        [AFKTypeEnum.Cooking]: 0,
+        [AFKTypeEnum.Error]: 0,
+        [AFKTypeEnum.Fishing]: 0,
+        [AFKTypeEnum.Mining]: 0,
+        [AFKTypeEnum.Nothing]: 0,
     };
 }
 
@@ -164,10 +170,12 @@ export const updateAccount = (data: Map<string, any>) => {
 
 
     // Check how many players are in each activity type.
-    Object.keys(Activity).forEach(activity => {
-        if (isNaN(parseInt(activity))) {
-            const asEnum = activity as keyof typeof Activity;
-            account.activity[asEnum] = players.reduce((sum, player) => sum += player.getActivityType() == asEnum ? 1 : 0, 0);
+    players.forEach(player => {
+        if (player.currentMonster) {
+            account.activity[player.currentMonster.details.AFKtype] += 1;
+        }
+        else {
+            account.activity[AFKTypeEnum.Error] += 1;
         }
     })
 

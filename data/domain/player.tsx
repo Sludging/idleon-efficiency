@@ -364,17 +364,9 @@ export class Player {
         }
     }
 
-    getActivityIcon = (): ImageData => {
-        // eh.AFKicons = function () {
-        //     var a = new p();
-        //     null != e.SMITHING ? a.setReserved("SMITHING", "ClassIcons43") : (a.h.SMITHING = "ClassIcons43");
-        //     null != e.Nothing ? a.setReserved("Nothing", "ClassIconsFb") : (a.h.Nothing = "ClassIconsFb");
-        //     null != e.ALCHEMY ? a.setReserved("ALCHEMY", "ClassIcons46") : (a.h.ALCHEMY = "ClassIcons46");
-        //     null != e.LABORATORY ? a.setReserved("LABORATORY", "ClassIcons53") : (a.h.LABORATORY = "ClassIcons53");
-        //     return a;
-        // };
+    static getActivityIcon = (afkType?: AFKTypeEnum): ImageData => {
         let imageLocation: string;
-        switch (this.currentMonster?.details.AFKtype) {
+        switch (afkType) {
             case AFKTypeEnum.Catching:
                 imageLocation = "ClassIcons47";
                 break;
@@ -397,10 +389,10 @@ export class Player {
                 imageLocation = "ClassIcons53";
                 break;
             case AFKTypeEnum.Nothing:
-                imageLocation = "ClassIconsFb";
+                imageLocation = "ClassIconsNA1";
                 break;
             default:
-                imageLocation = "ClassIconsNA1";
+                imageLocation = "ClassIconsNA2";
                 break;
         }
 
