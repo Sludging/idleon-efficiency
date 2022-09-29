@@ -12,10 +12,11 @@ import { Alerts, AlertType, PlayerAlert, Alert } from "../../data/domain/alerts"
 import { EnemyInfo } from "../../data/domain/enemies";
 import { getCoinsArray, nFormatter } from "../../data/utility";
 import TipDisplay from "../../components/base/TipDisplay";
-import { Activity } from "../../data/domain/player";
+import { Activity, Player } from "../../data/domain/player";
 import CoinsDisplay from "../../components/coinsDisplay";
 import { TimeDown } from "../../components/base/TimeDisplay";
 import { Arcade } from "../../data/domain/arcade";
+import { AFKTypeEnum } from "../../data/domain/enum/aFKTypeEnum";
 
 const isPlayerAlert = (x: Alert): x is PlayerAlert => "player" in x
 
@@ -66,34 +67,12 @@ function KeyDisplay({ toShow }: { toShow: Key }) {
     )
 }
 
-function ActivityDisplay({ activity, count }: { activity: Activity, count: number }) {
+function ActivityDisplay({ activity, count }: { activity: AFKTypeEnum, count: number }) {
     const size = useContext(ResponsiveContext);
-    const getImageData = (activity: Activity) => {
-        var imageName: string = "";
-        switch (activity) {
-            case Activity.Fighting:
-                imageName = 'ClassIconsF';
-                break;
-            case Activity.Lab:
-                imageName = 'ClassIcons53';
-                break;
-            case Activity.Skilling:
-                imageName = 'ClassIcons44';
-                break;
-            default:
-                imageName = 'ClassIconsQmark';
-                break;
-        }
 
-        return {
-            location: imageName,
-            height: 38,
-            width: 36,
-        }
-    }
     return (
         <Box gap="small" align="center">
-            <IconImage data={getImageData(activity)} scale={size == "small" ? 0.7 : 1} />
+            <IconImage data={Player.getActivityIcon(activity)} scale={size == "small" ? 0.7 : 1} />
             <Text size="small">{count}</Text>
         </Box>
     )
@@ -314,7 +293,7 @@ function Dashboard() {
 
                                     return (
                                         <Box key={index} title={activity} margin={{ right: 'small' }}>
-                                            <ActivityDisplay activity={Activity[activity as keyof typeof Activity]} count={count} />
+                                            <ActivityDisplay activity={AFKTypeEnum[activity as keyof typeof AFKTypeEnum]} count={count} />
                                         </Box>
                                     )
                                 })
