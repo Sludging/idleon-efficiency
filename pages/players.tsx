@@ -53,7 +53,6 @@ import IconImage from '../components/base/IconImage';
 import { SourcesModel } from '../data/domain/model/sourcesModel';
 import { Sigils } from '../data/domain/sigils';
 import { Chip } from '../data/domain/lab';
-import { ImageData } from '../data/domain/imageData';
 import { AnvilWrapper } from '../data/domain/anvil';
 import { Alerts, CardSetAlert } from '../data/domain/alerts';
 
@@ -276,7 +275,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                         label="Activity"
                         component={
                             <Box direction="row" gap="xsmall" align="center">
-                                <IconImage data={player.getActivityIcon()} scale={0.6} />
+                                <IconImage data={Player.getActivityIcon(player.currentMonster?.data.details.AFKtype)} scale={0.6} />
                                 <Text size="small">{Activity[player.getActivityType()]}</Text>
                                 <Text>|</Text>
                                 <Text size="small">{player.currentMonster?.details.Name}</Text>
