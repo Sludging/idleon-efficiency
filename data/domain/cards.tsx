@@ -83,15 +83,17 @@ export class CardInfo {
                 bonus: cardSetInfo[1]
             };
         }
-        equippedCardsData.forEach((card) => {
-            const theCard = this.cards.find(x => x.id == card);
-            if (theCard) {
-                this.equippedCards.push(theCard);
-            }
-            else {
-                this.equippedCards.push(new Card(-1, "Empty", { bonus: -1, cardID: "Empty", category: "Empty", effect: "Empty", order: -1, perTier: -1 }))
-            }
-        });
+        if (equippedCardsData) {
+            equippedCardsData.forEach((card) => {
+                const theCard = this.cards.find(x => x.id == card);
+                if (theCard) {
+                    this.equippedCards.push(theCard);
+                }
+                else {
+                    this.equippedCards.push(new Card(-1, "Empty", { bonus: -1, cardID: "Empty", category: "Empty", effect: "Empty", order: -1, perTier: -1 }))
+                }
+            });
+        }
 
         this.cards.forEach((card, _) => {
             card.count = cardData[card.id];

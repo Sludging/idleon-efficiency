@@ -84,7 +84,7 @@ export default function parseConstruction(towerData: number[], optionsList: any[
     })
 
     // current book count;
-    construction.library.currentBooks = optionsList[55] as number;
+    construction.library.currentBooks = optionsList[55] as number || 0;
 
     return construction;
 }
