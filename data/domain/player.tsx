@@ -445,9 +445,9 @@ const keyFunctionMap: Record<string, Function> = {
         }
     },
     "cards": (doc: Cloudsave, player: Player) => {
-        const currentCardSet = JSON.parse(doc.get(`CSetEq_${player.playerID}`));
+        const currentCardSet = safeJsonParse(doc, `CSetEq_${player.playerID}`, new Map());
         const equippedCards = doc.get(`CardEquip_${player.playerID}`) as string[];
-        const cards = JSON.parse(doc.get('Cards0'));
+        const cards = safeJsonParse(doc, 'Cards0', {});
         player.cardInfo = new CardInfo(cards, currentCardSet, equippedCards);
     },
     "activebuffs": (doc: Cloudsave, player: Player) => {
@@ -461,7 +461,7 @@ const keyFunctionMap: Record<string, Function> = {
         player.activePrayers = activePrayers.filter((prayer) => prayer != -1);
     },
     "cooldowns": (doc: Cloudsave, player: Player) => {
-        const talentCooldowns = JSON.parse(doc.get(`AtkCD_${player.playerID}`)) as Record<string, number>;
+        const talentCooldowns = safeJsonParse(doc, `AtkCD_${player.playerID}`, {}) as Record<string, number>;
         Object.entries(talentCooldowns).forEach(([talentId, cooldown]) => {
             const talent = player.talents.find((talent) => talent.skillIndex == parseInt(talentId));
             if (talent) {
@@ -517,6 +517,9 @@ const parseSkills = (skills: Array<number>, skillXP: Array<number>, skillXPReqs:
 }
 
 const parseStarSigns = (starSigns: string, player: Player) => {
+    if (starSigns == undefined) {
+        return;
+    }
     player.starSigns = starSigns.split(',').map((sign) => {
         if (sign) {
             return StarSignMap[Number(sign)];

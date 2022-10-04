@@ -92,8 +92,8 @@ export class ForgeUpgrade {
 
     // TODO: Think of a better name? this is based on '_customBlock_ForgeStats'
     getStat = () => {
-        switch(this.name) {
-            case "New Forge Slot": 
+        switch (this.name) {
+            case "New Forge Slot":
             case "Forge EXP Gain":
             case "Bar Bonanza":
                 return this.level
@@ -158,7 +158,9 @@ export const parseForge = (forgeItemQuantity: number[], forgeProgress: number[],
     const forge = new Forge();
 
     forgeLevels.forEach((level, index) => {
-        forge.upgrades[index].level = level;
+        if (index < forge.upgrades.length) {
+            forge.upgrades[index].level = level;
+        }
     });
 
     let index = 0;

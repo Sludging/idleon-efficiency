@@ -1,4 +1,5 @@
 import { Cloudsave } from "./cloudsave";
+import { safeJsonParse } from "./idleonData";
 import { Item, StoneProps } from "./items";
 import { Refinery, RefineryStorage } from "./refinery";
 
@@ -35,7 +36,7 @@ export default function parseStorage(doc: Cloudsave, playerNames: string[], allI
         let playerInventory: Item[] = [];
         const inventoryOrder: string[] = doc.get(`InventoryOrder_${index}`);
         const inventoryQuantity: number[] = doc.get(`ItemQTY_${index}`);
-        const stoneData: Record<number,StoneProps> = JSON.parse(doc.get(`IMm_${index}`)); 
+        const stoneData: Record<number,StoneProps> = safeJsonParse(doc, `IMm_${index}`, {}); 
         inventoryOrder.forEach((item, index) => {
             const itemData = allItems.find(x => x.internalName == item)?.duplicate() ?? Item.emptyItem(item);
             itemData.count = inventoryQuantity[index];
