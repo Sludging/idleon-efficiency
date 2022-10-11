@@ -395,7 +395,9 @@ export const parseBreeding = (petsStored: any[][], pets: any[][], optionsList: a
             const territoryPets = pets.slice(27 + (4 * index), 27 + (4 * index) + 4);
 
             territoryPets.forEach(pet => {
-                breeding.territory[tIndex].pets.push(new Pet(pet[0] as string, breeding.genes[pet[1] as number], pet[2] as number));
+                // If getting unknown gene, just default to the first gene as a fallback.
+                const petGene = breeding.genes[pet[1] as number] ?? breeding.genes[0];
+                breeding.territory[tIndex].pets.push(new Pet(pet[0] as string, petGene, pet[2] as number));
             })
         }
     })
