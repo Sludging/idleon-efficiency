@@ -161,19 +161,23 @@ export default function parseTaskboard(taskInfo0: number[][], taskInfo1: number[
     const tasksByWorld = GroupBy(taskBoard.tasks, "world");
     const meritsByWorld = GroupBy(taskBoard.merits, "world");
 
-    tasksByWorld.forEach((world, worldIndex) => {
-        world.forEach((task, taskIndex) => {
-            if (!task.isDaily()) {
-                task.count = taskInfo0[worldIndex - 1][taskIndex];
-                task.level = taskInfo1[worldIndex - 1][taskIndex];
-            }
+    if (taskInfo0.length >= tasksByWorld.size && taskInfo1.length >= tasksByWorld.size) {
+        tasksByWorld.forEach((world, worldIndex) => {
+            world.forEach((task, taskIndex) => {
+                if (!task.isDaily()) {
+                    task.count = taskInfo0[worldIndex - 1][taskIndex];
+                    task.level = taskInfo1[worldIndex - 1][taskIndex];
+                }
+            })
         })
-    })
+    }
 
-    meritsByWorld.forEach((world, worldIndex) => {
-        world.forEach((merit, meritIndex) => {
-            merit.level = taskInfo2[worldIndex - 1][meritIndex];
+    if (taskInfo2.length >= meritsByWorld.size) {
+        meritsByWorld.forEach((world, worldIndex) => {
+            world.forEach((merit, meritIndex) => {
+                merit.level = taskInfo2[worldIndex - 1][meritIndex];
+            })
         })
-    })
+    }
     return taskBoard;
 }

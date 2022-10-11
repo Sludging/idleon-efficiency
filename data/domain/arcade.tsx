@@ -143,8 +143,8 @@ export default function parseArcade(bonusArray: number[], optionList: number[]) 
         }
     });
 
-    arcade.balls = optionList[74];
-    arcade.goldBalls = optionList[75];
+    arcade.balls = optionList[74] as number || 0;
+    arcade.goldBalls = optionList[75] as number || 0;
 
     return arcade;
 }
@@ -170,14 +170,19 @@ export const updateArcade = (data: Map<string, any>) => {
     arcade.setMaxClaimTime(claimStampBonus);
 
     // Balls available to claim.
-    const time = new Date()
-    const gapFromLastSave = (time.getTime() / 1000) - timeAway['GlobalTime'];
-    
-    let timeSinceLastClaim = timeAway["GlobalTime"] - timeAway["Arcade"];
-    if (gapFromLastSave > 60 * 5) {
-        timeSinceLastClaim += gapFromLastSave;
+    if (timeAway["Arcade"]) { // confirm 'arcade' timer exists
+        const time = new Date()
+        const gapFromLastSave = (time.getTime() / 1000) - timeAway['GlobalTime'];
+
+        let timeSinceLastClaim = timeAway["GlobalTime"] - timeAway["Arcade"];
+        if (gapFromLastSave > 60 * 5) {
+            timeSinceLastClaim += gapFromLastSave;
+        }
+
+        if (timeSinceLastClaim) {
+            arcade.ballsToClaim = Math.floor(Math.min(timeSinceLastClaim, arcade.maxClaimTime) / Math.max(arcade.secondsPerBall, 1800));
+        }
     }
-    arcade.ballsToClaim = Math.floor(Math.min(timeSinceLastClaim, arcade.maxClaimTime) / Math.max(arcade.secondsPerBall, 1800));
 
     // Max balls
     arcade.maxBalls = Math.floor(arcade.maxClaimTime / arcade.secondsPerBall);

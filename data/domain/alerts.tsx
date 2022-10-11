@@ -177,7 +177,7 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
 
     // Worship Alerts
     const playerWorshipInfo = worshipData.playerData[player.playerID];
-    if (playerWorshipInfo.currentCharge >= playerWorshipInfo.maxCharge) {
+    if (playerWorshipInfo && playerWorshipInfo.currentCharge >= playerWorshipInfo.maxCharge) {
         alerts.push(new WorshipAlert(player));
     }
 
