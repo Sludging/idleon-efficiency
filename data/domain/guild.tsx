@@ -49,12 +49,14 @@ export class Guild {
     constructor(guildInfo: number[][]) {
         this.guildBonuses = GuildBonus.fromBase(initGuildBonusRepo());
 
-        const bonuses = guildInfo[GuildConstants.BonusIndex]
-        bonuses.forEach((bonusLevel, index) => {
-            if (index < this.guildBonuses.length) {
-                this.guildBonuses[index].level = bonusLevel;
-            }
-        })
+        if (guildInfo.length > 0) {
+            const bonuses = guildInfo[GuildConstants.BonusIndex]
+            bonuses.forEach((bonusLevel, index) => {
+                if (index < this.guildBonuses.length) {
+                    this.guildBonuses[index].level = bonusLevel;
+                }
+            })
+        }
     }
 }
 

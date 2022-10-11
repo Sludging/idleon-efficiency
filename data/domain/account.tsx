@@ -142,11 +142,11 @@ export const parseAccount = (doc: Cloudsave, allItems: Item[]) => {
     account.coloTickets = coloItem;
 
     // W3 Mini Boss
-    const daysSinceW3mini = accountOptions[96] as number;
+    const daysSinceW3mini = accountOptions[96] as number || 0;
     account.miniBosses.push(new Miniboss("mini3a", daysSinceW3mini));
 
     // W4 Mini Boss
-    const daysSinceW4mini = accountOptions[98] as number;
+    const daysSinceW4mini = accountOptions[98] as number || 0;
     account.miniBosses.push(new Miniboss("mini4a", daysSinceW4mini));
     return account;
 }
