@@ -432,7 +432,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                             <Box direction="row" wrap>
                                 {
                                     activeShrines.map((shrine, index) => {
-                                        const cardBonus = player.cardInfo?.equippedCards.find(x => x.id == "Z9")?.getBonus() ?? 0;
+                                        const cardBonus = player.cardInfo?.equippedCards.find(x => x.data.cardID == "Z9")?.getBonus() ?? 0;
                                         return (
                                             <Box key={index} margin={{ right: 'small', bottom: 'small' }}>
                                                 <TipDisplay
@@ -760,7 +760,7 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
         }
 
         const telekineticStorageBonus = player.talents.find(x => x.skillIndex == CapacityConst.TelekineticStorageSkillIndex)?.getBonus() ?? 0;
-        const cardBonus = player.cardInfo?.equippedCards.find(x => x.id == "Z9")?.getBonus() ?? 0;
+        const cardBonus = player.cardInfo?.equippedCards.find(x => x.data.cardID == "Z9")?.getBonus() ?? 0;
         const carryCapShrineBonus = shrines[ShrineConstants.CarryShrine].getBonus(player.currentMapId, cardBonus);
         const bribeCapBonus = bribes.find(bribe => bribe.name == "Bottomless Bags")?.status == BribeStatus.Purchased ? 5 : 0;
         return player.capacity.getAllCapsBonus(guildCarryBonus, telekineticStorageBonus, carryCapShrineBonus, zergPrayerBonus, ruckSackPrayerBonus, bribeCapBonus);
