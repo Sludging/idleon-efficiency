@@ -32,7 +32,7 @@ export class Skilling {
         const goldenFoodBonus = player.gear.food.filter(food => food && food.goldenFood != undefined && food.description.includes("Skill EXP"))
             .reduce((sum, food) => sum += (food as Food).goldFoodBonus(food?.count ?? 0, player.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus() ?? 0, goldFoodStampBonus, goldFoodAchievement, sigilBonus)), 0);
         const cardSetBonus = player.cardInfo?.getBonusForId(3) ?? 0;
-        const chizCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "Z9")?.getBonus() ?? 0
+        const chizCardBonus = player.cardInfo?.equippedCards.find(x => x.data.cardID == "Z9")?.getBonus() ?? 0
         const shrineBonus = shrines[ShrineConstants.ExpShrine].getBonus(player.currentMapId, chizCardBonus);
         const statueBonus = playerStatues.statues[StatueConst.SkillXpIndex].getBonus(player);
         const prayerIncrease = prayers.filter(prayer => [2, 17].includes(prayer.index) && player.activePrayers.includes(prayer.index)).reduce((sum, prayer) => sum += prayer.getBonus(), 0) ?? 0;
