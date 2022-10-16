@@ -11,6 +11,7 @@ import { ComponentModel } from './model/componentModel';
 import { SpiceComponentModel } from './model/spiceComponentModel';
 import { Player } from './player';
 import { ClassIndex } from './talents';
+import { SkillsIndex } from './SkillsIndex';
 
 export enum CauldronIndex {
     Power = 0,
@@ -173,6 +174,29 @@ export class DiamonChefBubble extends Bubble {
     }
 }
 
+export class DailyDripBubble extends Bubble {
+    totalAlchemyLevel: number = 0;
+
+    // Should this live inside the bubble base class? :thinking:
+    static fromBase = (id: string, data: BubbleModel, iconPrefix: string, bubbleIndex: number) => {
+        return new DailyDripBubble(id, data, iconPrefix, bubbleIndex);
+    }
+
+    constructor(id: string, data: BubbleModel, iconPrefix: string, bubbleIndex: number) {
+        super(id, data, iconPrefix, bubbleIndex);
+    }
+
+    override getBonus = (roundResult: boolean = false): number => {
+        const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, roundResult);
+        const alchemyBonus = bonus * Math.max(Math.pow(this.totalAlchemyLevel / 25, .3), 0);
+        return roundResult ? round(alchemyBonus) : alchemyBonus;
+    }
+    
+    override getBonusText = (bonus: number = this.getBonus(true)): string => {
+        return this.description.replace(/\$/g, bonus.toString());
+    }
+}
+
 export class Cauldron {
     name: string;
     short_name: string;
@@ -191,10 +215,12 @@ export class Cauldron {
             if (iconPrefix == "Y" && index == 17) {
                 toReturn.bubbles.push(DiamonChefBubble.fromBase(bubble.id, bubble.data, iconPrefix, index));    
             }
+            else if (bubble.data.name == "Da Daily Drip") {
+                toReturn.bubbles.push(DailyDripBubble.fromBase(bubble.id, bubble.data, iconPrefix, index));    
+            }
             else {
                 toReturn.bubbles.push(Bubble.fromBase(bubble.id, bubble.data, iconPrefix, index));
             }
-            
         })
 
         return toReturn;
@@ -510,6 +536,7 @@ export function updateAlchemy(data: Map<string, any>) {
     const alchemy = data.get("alchemy") as Alchemy;
     const lab = data.get("lab") as Lab;
     const cooking = data.get("cooking") as Cooking;
+    const players = data.get("players") as Player[];
 
     if (lab.bonuses.find(bonus => bonus.name == "My 1st Chemistry Set")?.active ?? false) {
         alchemy.vials.forEach(vial => vial.bonusMulitplier = 2)
@@ -538,6 +565,10 @@ export function updateAlchemy(data: Map<string, any>) {
     const diamonChefBubble = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).find(bubble => bubble.name == "Diamond Chef") as DiamonChefBubble;
     if (diamonChefBubble) {
         diamonChefBubble.diamonMeals = cooking.meals.reduce((sum, meal) => sum += meal.level >= 11 ? 1 : 0, 0);
+    }
+    const dailyDripBubble = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).find(bubble => bubble.name == "Da Daily Drip") as DailyDripBubble;
+    if (dailyDripBubble) {
+        dailyDripBubble.totalAlchemyLevel = players.reduce((sum, player) => sum += player.skills.get(SkillsIndex.Alchemy)?.level ?? 0, 0);
     }
 
     return alchemy;
