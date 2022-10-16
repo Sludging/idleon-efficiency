@@ -971,7 +971,7 @@ function PostOfficeDisplay({ player, extra }: { player: Player, extra: PostOffic
             </Box>
             <Grid columns={{ count: size == "small" ? 2 : 4, size: "auto" }} gap="xsmall">
                 {
-                    player.postOffice.filter((box) => box.name != "Filler").map((box) => {
+                    player.postOffice.map((box) => {
                         return (
                             <Box key={`player_${player.playerID}_postoffice_${box.index}`} fill>
                                 <Tip

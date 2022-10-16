@@ -58,7 +58,7 @@ export class Box {
     }
 
     static fromBase = (data: PostOfficeUpgradesBase[]) => {
-        return data.map((box, index) => new Box(index, box.id, box.data.bonuses.map(bonus => new BoxBonus(bonus.bonus, bonus.x1, bonus.x2, bonus.func))));
+        return data.filter(box => box.data.name != "Filler").map((box, index) => new Box(index, box.id, box.data.bonuses.map(bonus => new BoxBonus(bonus.bonus, bonus.x1, bonus.x2, bonus.func))));
     }
 }
 
