@@ -43,21 +43,33 @@ export class Statue {
             switch (this.displayName) {
                 case "Power Statue":
                 case "Mining Statue":
-                case "Thicc Skin Statue":
-                case "Oceanman Statue":
                     talentBonus += (player.talents.find(x => x.skillIndex == 112 || x.skillIndex == 127)?.getBonus() ?? 0) / 100;
+                    break;
+                case "Thicc Skin Statue":
+                    talentBonus += (player.talents.find(x => x.skillIndex == 127)?.getBonus() ?? 0) / 100;
+                    break;
+                case "Oceanman Statue":
+                    talentBonus += (player.talents.find(x => x.skillIndex == 112)?.getBonus() ?? 0) / 100;
                     break;
                 case "Speed Statue":
                 case "Anvil Statue":
-                case "Bullseye Statue":
-                case "Ol Reliable Statue":
                     talentBonus += (player.talents.find(x => x.skillIndex == 307 || x.skillIndex == 292)?.getBonus() ?? 0) / 100;
                     break;
-                case "Exp Book Statue":
+                case "Bullseye Statue":
+                    talentBonus += (player.talents.find(x => x.skillIndex == 307)?.getBonus() ?? 0) / 100;
+                    break;
+                case "Ol Reliable Statue":
+                    talentBonus += (player.talents.find(x => x.skillIndex == 292)?.getBonus() ?? 0) / 100;
+                    break;
+                case "Exp Statue":
                 case "Lumberbob Statue":
-                case "Beholder Statue":
-                case "Cauldron Statue":
                     talentBonus += (player.talents.find(x => x.skillIndex == 472 || x.skillIndex == 487)?.getBonus() ?? 0) / 100;
+                    break;
+                case "Beholder Statue":
+                    talentBonus += (player.talents.find(x => x.skillIndex == 472)?.getBonus() ?? 0) / 100;
+                    break;
+                case "Cauldron Statue":
+                    talentBonus += (player.talents.find(x => x.skillIndex == 487)?.getBonus() ?? 0) / 100;
                     break;
                 case "EhExPee Statue":
                 case "Kachow Statue":
