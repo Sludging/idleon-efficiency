@@ -169,7 +169,7 @@ export class DiamonChefBubble extends Bubble {
     }
 
     override getBonus = (roundResult: boolean = false): number => {
-        const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, roundResult);
+        const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, false);
         return roundResult ? round(Math.pow(bonus, this.diamonMeals)) : Math.pow(bonus, this.diamonMeals);
     }
 }
