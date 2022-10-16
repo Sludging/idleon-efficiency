@@ -189,7 +189,7 @@ function Cooking() {
                                             width: 36,
                                             height: 36
                                         }} />
-                                        <Text size="small">{nFormatter(spice)}</Text>
+                                        <Text size="small">{nFormatter(Math.floor(spice))}</Text>
                                     </Box>
                                 </TipDisplay>
                             </Box>
