@@ -171,7 +171,7 @@ export class Kitchen {
     getMealSpeed = (vialBonus: number, stampBonus: number, mealCookBonus: number, jewelBonus: number, cardBonus: number, kitchenEffBonus: number, jewelBonus2: number, diamonChef: number, achieve225: boolean, achieve224: boolean) => {
         const baseMath = 10 * (1 + (this.richelin ? 2 : 0)) * Math.max(1, diamonChef);
         const bonusMath = (1 + (stampBonus + Math.max(0, jewelBonus2)) / 100) * (1 + mealCookBonus / 100) * Math.max(1, jewelBonus);
-        const cardAndAchiImpact = 1 + (Math.min(cardBonus, 50) + (20 * (achieve225 ? 1 : 0)) + (10 * (achieve224 ? 1 : 0))) / 100 ;
+        const cardAndAchiImpact = 1 + Math.min(cardBonus + (20 * (achieve225 ? 1 : 0)) + (10 * (achieve224 ? 1 : 0)), 100) / 100;
         return baseMath *
             (1 + this.mealLevels / 10) *
             (1 + vialBonus / 100) *
@@ -399,8 +399,8 @@ export const updateCooking = (data: Map<string, any>) => {
     const stampBonus = stamps.flatMap(tab => tab).filter(stamp => stamp.bonus.includes("Meal Cooking Speed")).reduce((sum, stamp) => sum += stamp.getBonus(), 0);
     const mealSpeedBonus = cooking?.meals.filter(meal => meal.bonusKey == "Mcook").reduce((sum, meal) => sum += meal.getBonus(), 0);
     const kitchenEfficientBonus = cooking?.meals.filter(meal => meal.bonusKey == "KitchenEff").reduce((sum, meal) => sum += meal.getBonus(), 0);
-    const jewelBonus = mainframe.jewels[0].active ? mainframe.jewels[0].getBonus() : 1; // TODO: Remove hardcoding
-    const jewelBonus2 = mainframe.jewels[14].active ? mainframe.jewels[14].getBonus() : 0; // TODO: Remove hardcoding
+    const jewelBonus = mainframe.jewels[0].getBonus(); // TODO: Remove hardcoding
+    const jewelBonus2 = mainframe.jewels[14].getBonus(); // TODO: Remove hardcoding
     const cardBonus = cards.find(card => card.id == "Boss4A")?.getBonus() ?? 0;
 
     // Fire speed

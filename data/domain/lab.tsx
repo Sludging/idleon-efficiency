@@ -136,6 +136,10 @@ export class Jewel {
     }
 
     getBonus = (bonusMultiplier: number = this.bonusMultiplier) => {
+        if (!this.active) {
+            return 0;
+        }
+        
         return this.data.bonusGiven * bonusMultiplier;
     }
 
@@ -196,7 +200,7 @@ export class EmeraldNavetteJewel extends Jewel {
 export class EmeraldPyramiteJewel extends Jewel {
     numberOfKitchenLevels: number = 0;
     override getBonus = (bonusMultiplier: number = this.bonusMultiplier) => {
-        const extraMultiplier = Math.ceil((this.numberOfKitchenLevels + 1) / 25);
+        const extraMultiplier = Math.floor((this.numberOfKitchenLevels + 0.5) / 25);
         return this.data.bonusGiven * bonusMultiplier * extraMultiplier;
     }
 
