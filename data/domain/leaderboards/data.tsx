@@ -388,6 +388,16 @@ export const TitleMap: Map<string, DisplayInfo> = new Map(Object.entries({
         type: CategoryType.Number,
         group: CategoryGroup.Highscore
     },
+    "TotalCookingSpeed": {
+        title: "Combined Cooking Speed",
+        imageData: {
+            location: "Ladle_x1",
+            height: 32,
+            width: 32
+        },
+        type: CategoryType.Number,
+        group: CategoryGroup.Totals
+    },
 }));
 
 export interface Metadata {

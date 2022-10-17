@@ -171,7 +171,7 @@ export class Kitchen {
     getMealSpeed = (vialBonus: number, stampBonus: number, mealCookBonus: number, jewelBonus: number, cardBonus: number, kitchenEffBonus: number, jewelBonus2: number, diamonChef: number, achieve225: boolean, achieve224: boolean) => {
         const baseMath = 10 * (1 + (this.richelin ? 2 : 0)) * Math.max(1, diamonChef);
         const bonusMath = (1 + (stampBonus + Math.max(0, jewelBonus2)) / 100) * (1 + mealCookBonus / 100) * Math.max(1, jewelBonus);
-        const cardAndAchiImpact = 1 + (Math.min(cardBonus, 50) + (20 * (achieve225 ? 1 : 0)) + (10 * (achieve224 ? 1 : 0))) / 100 ;
+        const cardAndAchiImpact = 1 + Math.min(cardBonus + (20 * (achieve225 ? 1 : 0)) + (10 * (achieve224 ? 1 : 0)), 100) / 100;
         return baseMath *
             (1 + this.mealLevels / 10) *
             (1 + vialBonus / 100) *
@@ -399,8 +399,8 @@ export const updateCooking = (data: Map<string, any>) => {
     const stampBonus = stamps.flatMap(tab => tab).filter(stamp => stamp.bonus.includes("Meal Cooking Speed")).reduce((sum, stamp) => sum += stamp.getBonus(), 0);
     const mealSpeedBonus = cooking?.meals.filter(meal => meal.bonusKey == "Mcook").reduce((sum, meal) => sum += meal.getBonus(), 0);
     const kitchenEfficientBonus = cooking?.meals.filter(meal => meal.bonusKey == "KitchenEff").reduce((sum, meal) => sum += meal.getBonus(), 0);
-    const jewelBonus = mainframe.jewels[0].active ? mainframe.jewels[0].getBonus() : 1; // TODO: Remove hardcoding
-    const jewelBonus2 = mainframe.jewels[14].active ? mainframe.jewels[14].getBonus() : 0; // TODO: Remove hardcoding
+    const jewelBonus = mainframe.jewels[0].getBonus(); // TODO: Remove hardcoding
+    const jewelBonus2 = mainframe.jewels[14].getBonus(); // TODO: Remove hardcoding
     const cardBonus = cards.find(card => card.id == "Boss4A")?.getBonus() ?? 0;
 
     // Fire speed
@@ -430,23 +430,15 @@ export const updateCooking = (data: Map<string, any>) => {
         }
     })
 
-    cooking.meals.filter(meal => meal.cookingContribution > 0).forEach(meal => {
-        meal.timeToNext = ((meal.getMealLevelCost() - meal.count) * meal.cookReq) / meal.cookingContribution;
-        meal.ladlesToLevel = Math.ceil((((meal.getMealLevelCost() - meal.count) * meal.cookReq) / meal.cookingContribution));
-        meal.zerkerLadlesToLevel = Math.ceil((((meal.getMealLevelCost() - meal.count) * meal.cookReq) / meal.cookingContribution) / (1 + zerkerBonus / 100));
-    });
-
     cooking.meals.forEach(meal => {
-        meal.timeToDiamond = ((meal.getCostsTillDiamond() - meal.count) * meal.cookReq) / totalContribution;
-        meal.timeToPurple = ((meal.getCostsTillPurple() - meal.count) * meal.cookReq) / totalContribution;
-        meal.timeToVoid = ((meal.getCostsTillVoid() - meal.count) * meal.cookReq) / totalContribution;
+        const cookingSpeed = meal.cookingContribution > 0 ? meal.cookingContribution : totalContribution;
+        meal.timeToDiamond = ((meal.getCostsTillDiamond() - meal.count) * meal.cookReq) / cookingSpeed;
+        meal.timeToPurple = ((meal.getCostsTillPurple() - meal.count) * meal.cookReq) / cookingSpeed;
+        meal.timeToVoid = ((meal.getCostsTillVoid() - meal.count) * meal.cookReq) / cookingSpeed;
 
-        // If this meal isn't being actively cooked, show time to next level using all kitchens.
-        if (meal.cookingContribution == 0) {
-            meal.timeToNext = ((meal.getMealLevelCost() - meal.count) * meal.cookReq) / totalContribution;
-            meal.ladlesToLevel = Math.ceil((((meal.getMealLevelCost() - meal.count) * meal.cookReq) / totalContribution));
-            meal.zerkerLadlesToLevel = Math.ceil((((meal.getMealLevelCost() - meal.count) * meal.cookReq) / totalContribution) / (1 + zerkerBonus / 100));
-        }
+        meal.timeToNext = ((meal.getMealLevelCost() - meal.count) * meal.cookReq) / cookingSpeed;
+        meal.ladlesToLevel = Math.ceil((((meal.getMealLevelCost() - meal.count) * meal.cookReq) / cookingSpeed));
+        meal.zerkerLadlesToLevel = Math.ceil((((meal.getMealLevelCost() - meal.count) * meal.cookReq) / cookingSpeed) / (1 + zerkerBonus / 100));
 
         let milestoneCosts = 0;
         if (meal.timeToDiamond > 0) {
@@ -459,8 +451,8 @@ export const updateCooking = (data: Map<string, any>) => {
             milestoneCosts = meal.getCostsTillVoid();
         }
         if (milestoneCosts > 0) {
-            meal.ladlesToNextMilestone = Math.ceil((((milestoneCosts - meal.count) * meal.cookReq) / totalContribution));
-            meal.zerkerLadlesToNextMilestone = Math.ceil((((milestoneCosts - meal.count) * meal.cookReq) / totalContribution) / (1 + zerkerBonus / 100));
+            meal.ladlesToNextMilestone = Math.ceil((((milestoneCosts - meal.count) * meal.cookReq) / cookingSpeed));
+            meal.zerkerLadlesToNextMilestone = Math.ceil((((milestoneCosts - meal.count) * meal.cookReq) / cookingSpeed) / (1 + zerkerBonus / 100));
         }
     });
 
