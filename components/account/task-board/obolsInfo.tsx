@@ -150,7 +150,7 @@ function ObolsInfo({ playerIndex, title, level }: { playerIndex: number, title: 
                 }
                 {
                     playerIndex != -1 &&
-                    obolsData?.familyStats.stats.filter(stat => obolsData.playerStats[playerIndex].stats.find(playerStat => stat.extra == '' ? playerStat.displayName == stat.displayName : stat.extra == playerStat.extra) == undefined)
+                    obolsData?.familyStats.stats.filter(stat => (obolsData.playerStats[playerIndex].stats.find(playerStat => stat.extra == '' ? playerStat.displayName == stat.displayName : stat.extra == playerStat.extra)?.getValue() ?? 0) == 0)
                         .filter(stat => stat.shouldDisplay() && stat.getValue() > 0)
                         .map((stat, statIndex) => {
                             return (

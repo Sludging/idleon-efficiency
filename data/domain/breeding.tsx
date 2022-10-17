@@ -49,6 +49,7 @@ export class PetGene {
 
 export class PetUpgrade {
     level: number = 0;
+    gildedShellsAchiv: boolean = false;
 
     constructor(public index: number, public data: PetUpgradeModel) { }
 
@@ -78,15 +79,15 @@ export class PetUpgrade {
             case 3:
                 return this.level * 25;
             case 5:
-                return this.level * 0.25 + 1;
+                return (this.level * 0.25 + 1) * Math.min(2, Math.max(1, 1 + .1 * (this.gildedShellsAchiv ? 1 : 0)));
             case 6:
                 return this.level * 6;
             case 7:
-                return this.level * 0.3 + 1;
+                return this.level * 0.15 + 1;
             case 8:
                 return this.level * 2 + 1;
             case 9:
-                return this.level * 0.05 + 1;
+                return this.level * 0.02 + 1;
             case 10:
                 return this.level * 10;
             case 11:
@@ -424,6 +425,9 @@ export const updateBreeding = (data: Map<string, any>) => {
     // Breeding level is universal, so just get it from the first player.
     breeding.skillLevel = players[0].skills.get(SkillsIndex.Breeding)?.level ?? 0;
 
+    // Update Rarity of the Egg to know about Gilded Shells achievement.
+    breeding.upgrade[5].gildedShellsAchiv = achievements[221].completed;
+    
     // We don't actually need to do this inside the "update" function, but feels more right.
     breeding.territory.filter(territory => territory.index != 14).forEach((territory, index) => {
         // Lava does some weird math to skip territory 14 in some scenarios.

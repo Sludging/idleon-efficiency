@@ -136,6 +136,10 @@ export class Jewel {
     }
 
     getBonus = (bonusMultiplier: number = this.bonusMultiplier) => {
+        if (!this.active) {
+            return 0;
+        }
+        
         return this.data.bonusGiven * bonusMultiplier;
     }
 
@@ -172,6 +176,10 @@ export class PyriteRhombolJewel extends Jewel {
 export class AmethystRhinestoneJewel extends Jewel {
     numberOfActivePurples: number = 0;
     override getBonus = (bonusMultiplier: number = this.bonusMultiplier) => {
+        if (!this.active) {
+            return 0;
+        }
+
         const extraMultiplier = this.numberOfActivePurples >= 3 ? 2 : 1;
         return this.data.bonusGiven * bonusMultiplier * extraMultiplier;
     }
@@ -180,6 +188,10 @@ export class AmethystRhinestoneJewel extends Jewel {
 export class PyritePyramiteJewel extends Jewel {
     numberOfActiveOrange: number = 0;
     override getBonus = (bonusMultiplier: number = this.bonusMultiplier) => {
+        if (!this.active) {
+            return 0;
+        }
+
         const extraMultiplier = this.numberOfActiveOrange >= 4 ? 2 : 1;
         return this.data.bonusGiven * bonusMultiplier * extraMultiplier;
     }
@@ -188,6 +200,10 @@ export class PyritePyramiteJewel extends Jewel {
 export class EmeraldNavetteJewel extends Jewel {
     numberOfActiveGreen: number = 0;
     override getBonus = (bonusMultiplier: number = this.bonusMultiplier) => {
+        if (!this.active) {
+            return 0;
+        }
+
         const extraMultiplier = this.numberOfActiveGreen >= 5 ? 2 : 1;
         return this.data.bonusGiven * bonusMultiplier * extraMultiplier;
     }
@@ -196,7 +212,11 @@ export class EmeraldNavetteJewel extends Jewel {
 export class EmeraldPyramiteJewel extends Jewel {
     numberOfKitchenLevels: number = 0;
     override getBonus = (bonusMultiplier: number = this.bonusMultiplier) => {
-        const extraMultiplier = Math.ceil((this.numberOfKitchenLevels + 1) / 25);
+        if (!this.active) {
+            return 0;
+        }
+
+        const extraMultiplier = Math.floor((this.numberOfKitchenLevels + 0.5) / 25);
         return this.data.bonusGiven * bonusMultiplier * extraMultiplier;
     }
 
