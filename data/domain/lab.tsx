@@ -156,6 +156,7 @@ export class Jewel {
         {
             switch (jewel.index) {
                 case 0: return new AmethystRhinestoneJewel(jewel.index, jewel.data);
+                case 5: return new SapphireRhombolJewel(jewel.index, jewel.data);
                 case 9: return new PyriteRhombolJewel(jewel.index, jewel.data);
                 case 10: return new PyritePyramiteJewel(jewel.index, jewel.data);
                 case 12: return new EmeraldNavetteJewel(jewel.index, jewel.data);
@@ -163,6 +164,14 @@ export class Jewel {
                 default: return new Jewel(jewel.index, jewel.data);
             }
         });
+    }
+}
+
+export class SapphireRhombolJewel extends Jewel {
+    // Need to make this smarter in the future if I even want to care about breeding EXP.
+    // Right now it returns even if the jewel isn't active (which it shouldn't for breeding)
+    override getBonus = (bonusMultiplier: number = this.bonusMultiplier) => {     
+        return this.data.bonusGiven * bonusMultiplier;
     }
 }
 
