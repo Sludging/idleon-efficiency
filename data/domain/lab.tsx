@@ -430,6 +430,10 @@ export const updateLab = (data: Map<string, any>) => {
         if (chips.filter(chip => chip.data.name == "Omega Motherboard").length > 0 && playerData[index].cardInfo) {
             (playerData[index].cardInfo as CardInfo).equippedCards[7].chipBoost = 2;
         }
+        // Same ugly handling for starsign doubler.
+        if (chips.filter(chip => chip.data.name == "Silkrode Nanochip").length > 0) {
+            playerData[index].starSigns.forEach(sign => sign.hasChip == true);
+        }
     })
 
     // Things to care about:
