@@ -203,29 +203,6 @@ export class DailyDripBubble extends Bubble {
     }
 }
 
-export class DailyDripBubble extends Bubble {
-    totalAlchemyLevel: number = 0;
-
-    // Should this live inside the bubble base class? :thinking:
-    static fromBase = (id: string, data: BubbleModel, iconPrefix: string, bubbleIndex: number) => {
-        return new DailyDripBubble(id, data, iconPrefix, bubbleIndex);
-    }
-
-    constructor(id: string, data: BubbleModel, iconPrefix: string, bubbleIndex: number) {
-        super(id, data, iconPrefix, bubbleIndex);
-    }
-
-    override getBonus = (roundResult: boolean = false): number => {
-        const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, roundResult);
-        const alchemyBonus = bonus * Math.max(Math.pow(this.totalAlchemyLevel / 25, .3), 0);
-        return roundResult ? round(alchemyBonus) : alchemyBonus;
-    }
-    
-    override getBonusText = (bonus: number = this.getBonus(true)): string => {
-        return this.description.replace(/\$/g, bonus.toString());
-    }
-}
-
 export class Cauldron {
     name: string;
     short_name: string;
