@@ -691,13 +691,6 @@ export const updatePlayers = (data: Map<string, any>) => {
             });
     })
 
-    // Update star signs if has double starsign chip.
-    players.forEach(player => {
-        if (player.labInfo.chips.find(chip => chip.chip?.index == 15) != undefined) {
-            player.starSigns.forEach(sign => sign.hasChip == true);
-        }
-    })
-
     // Double claim chance.
     const doubleChanceGuildBonus = guild.guildBonuses.find(bonus => bonus.name == "Anotha One")?.getBonus() ?? 0;
     const doubleChanceBribeBonus = bribes.find(bribe => bribe.bonus == "AfkDoubleEXP")?.value ?? 0;

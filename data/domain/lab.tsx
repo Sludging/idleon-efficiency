@@ -156,6 +156,7 @@ export class Jewel {
         {
             switch (jewel.index) {
                 case 0: return new AmethystRhinestoneJewel(jewel.index, jewel.data);
+                case 5: return new SapphireRhombolJewel(jewel.index, jewel.data);
                 case 9: return new PyriteRhombolJewel(jewel.index, jewel.data);
                 case 10: return new PyritePyramiteJewel(jewel.index, jewel.data);
                 case 12: return new EmeraldNavetteJewel(jewel.index, jewel.data);
@@ -163,6 +164,14 @@ export class Jewel {
                 default: return new Jewel(jewel.index, jewel.data);
             }
         });
+    }
+}
+
+export class SapphireRhombolJewel extends Jewel {
+    // Need to make this smarter in the future if I even want to care about breeding EXP.
+    // Right now it returns even if the jewel isn't active (which it shouldn't for breeding)
+    override getBonus = (bonusMultiplier: number = this.bonusMultiplier) => {     
+        return this.data.bonusGiven * bonusMultiplier;
     }
 }
 
@@ -284,10 +293,11 @@ export class Lab {
         if (this.jewels[5].available) {
             const playerCords = this.playerCords[player.playerID];
             if (this.getDistance(this.jewels[5].data.x, this.jewels[5].data.y, playerCords.x, playerCords.y) < 150) {
-                baseWidth *= (1 + (this.jewels[5].getBonus() / 100));
+                // Match the game code a bit, hard coded 1.25
+                baseWidth *= 1.25;
             }
         }
-        const playerChipBonus = player.labInfo.chips.filter(slot => slot.chip && slot.chip.index == 6).reduce((sum, slot) => sum += slot.chip?.getBonus() ?? 0, 0);
+        const playerChipBonus = player.labInfo.chips.filter(slot => slot.chip && slot.chip.data.name == "Conductive Motherboard").reduce((sum, slot) => sum += slot.chip?.getBonus() ?? 0, 0);
         const bonusWidth = inGemTube ? 30 : 0;
         return Math.floor((baseWidth + (pxMealBonus + Math.min(passiveCardBonus, 50)))
             * (1 + ((buboBoost + linePctMealBonus + playerChipBonus + (20 * petArenaBonus) + bonusWidth) / 100))
@@ -420,6 +430,10 @@ export const updateLab = (data: Map<string, any>) => {
         }
         if (chips.filter(chip => chip.data.name == "Omega Motherboard").length > 0 && playerData[index].cardInfo) {
             (playerData[index].cardInfo as CardInfo).equippedCards[7].chipBoost = 2;
+        }
+        // Same ugly handling for starsign doubler.
+        if (chips.filter(chip => chip.data.name == "Silkrode Nanochip").length > 0) {
+            playerData[index].starSigns.forEach(sign => sign.hasChip == true);
         }
     })
 
