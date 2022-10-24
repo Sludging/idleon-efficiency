@@ -293,10 +293,11 @@ export class Lab {
         if (this.jewels[5].available) {
             const playerCords = this.playerCords[player.playerID];
             if (this.getDistance(this.jewels[5].data.x, this.jewels[5].data.y, playerCords.x, playerCords.y) < 150) {
-                baseWidth *= (1 + (this.jewels[5].getBonus() / 100));
+                // Match the game code a bit, hard coded 1.25
+                baseWidth *= 1.25;
             }
         }
-        const playerChipBonus = player.labInfo.chips.filter(slot => slot.chip && slot.chip.index == 6).reduce((sum, slot) => sum += slot.chip?.getBonus() ?? 0, 0);
+        const playerChipBonus = player.labInfo.chips.filter(slot => slot.chip && slot.chip.data.name == "Conductive Motherboard").reduce((sum, slot) => sum += slot.chip?.getBonus() ?? 0, 0);
         const bonusWidth = inGemTube ? 30 : 0;
         return Math.floor((baseWidth + (pxMealBonus + Math.min(passiveCardBonus, 50)))
             * (1 + ((buboBoost + linePctMealBonus + playerChipBonus + (20 * petArenaBonus) + bonusWidth) / 100))
