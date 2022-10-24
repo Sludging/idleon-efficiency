@@ -172,6 +172,12 @@ export class DiamonChefBubble extends Bubble {
         const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, false);
         return roundResult ? round(Math.pow(bonus, this.diamonMeals)) : Math.pow(bonus, this.diamonMeals);
     }
+
+    override getBonusText = (bonus: number = this.getBonus(true)): string => {
+        let titleText = this.description.replace(/{/g, bonus.toString());
+        titleText += ` (${this.diamonMeals} diamond plates)`;
+        return handleToolBubbles(titleText, this.name);
+    }
 }
 
 export class DailyDripBubble extends Bubble {
