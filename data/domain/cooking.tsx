@@ -91,6 +91,12 @@ export class Meal {
     }
 
     getBonus = (roundResult: boolean = false, mainFrameBonus: number = this.mainframeBonus, level: number = this.level) => {
+        // Jewel doesn't impact the line width meals.
+        if (this.bonusKey == "PxLine" || this.bonusKey == "LinePct") {
+            const finalMath = level * this.bonusQty;
+            return roundResult ? round(finalMath) : finalMath;
+        }
+
         const finalMath = (1 + mainFrameBonus / 100) * level * this.bonusQty;
         return roundResult ? round(finalMath) : finalMath;
     }
