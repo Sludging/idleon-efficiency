@@ -4,6 +4,7 @@ import { ImageData } from "./imageData";
 import { Item } from "./items";
 import { ObolsData, Obol } from "./obols";
 import { Activity, Player } from "./player";
+import { Prayer } from "./prayers";
 import { Refinery } from "./refinery";
 import { Skilling } from "./skilling";
 import { SkillsIndex } from "./SkillsIndex";
@@ -20,7 +21,8 @@ export enum AlertType {
     Refinery = "Refinery",
     CDReady = "Cooldown Ready",
     Traps = "Traps",
-    ArcadeFull = "Arcade Full"
+    ArcadeFull = "Arcade Full",
+    Prayer = "Prayer"
 }
 
 export abstract class Alert {
@@ -105,6 +107,25 @@ export class CooldownAlert extends PlayerAlert {
     }
 }
 
+export class PrayerAlert extends PlayerAlert {
+    constructor(player: Player, prayer: Prayer) {
+        super(player, AlertType.Prayer);
+            switch(prayer.data.name) {
+                case "Unending Energy":
+                    this.title = "AFK for too long (>10 hours) with Unending Energy Prayer";
+                    break;
+                default:
+                    this.title = `Prayer issue with ${prayer.data.name}`;
+                    break;
+            }
+        this.icon = prayer.getImageData();
+
+        // Override default size
+        this.icon.height = 36;
+        this.icon.width = 36;
+    }
+}
+
 export class TrapAlerts extends GlobalAlert {
     constructor(public count: number) {
         super(`${count} Traps ready to be collected`, AlertType.Traps, Item.getImageData("TrapBoxSet1"));
@@ -134,12 +155,12 @@ export class Alerts {
     }
 }
 
-const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[], worshipData: Worship): Alert[] => {
+const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[], worshipData: Worship, prayers: Prayer[]): Alert[] => {
     const alerts: Alert[] = [];
     // Activity based alerts
     switch (player.getActivityType()) {
         case Activity.Fighting:
-            if (![0, 1, 4, 5, 6].some(id => (player.cardInfo?.getBonusForId(id) ?? 0) > 0)) {
+            if (![0, 1, 4, 5].some(id => (player.cardInfo?.getBonusForId(id) ?? 0) > 0)) {
                 alerts.push(new CardSetAlert(player, `${player.cardInfo?.getCardSetText()} isn't useful for fighting`));
             }
             break;
@@ -193,6 +214,11 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
         }
     })
 
+    // Unending Energy Issue (Prayer Index = 2)
+    if (player.activePrayers.includes(2) && player.afkFor > 10 * 60 * 60) {
+        alerts.push(new PrayerAlert(player, prayers[2]))
+    }
+
     return alerts;
 }
 
@@ -237,11 +263,11 @@ export const updateAlerts = (data: Map<string, any>) => {
     const refinery = data.get("refinery") as Refinery;
     const traps = data.get("traps") as Trap[][];
     const arcade = data.get("arcade") as Arcade;
-
+    const prayers = data.get("prayers") as Prayer[];
 
     players.forEach(player => {
         alerts.playerAlerts[player.playerID] = []
-        alerts.playerAlerts[player.playerID].push(...getPlayerAlerts(player, anvil, obols.playerObols[player.playerID], worship))
+        alerts.playerAlerts[player.playerID].push(...getPlayerAlerts(player, anvil, obols.playerObols[player.playerID], worship, prayers))
     })
 
     // Global Alerts

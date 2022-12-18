@@ -211,7 +211,7 @@ function TotemDisplay() {
             </Box>
             <Box>
                 <Text size="xsmall">* Base XP is assuming multiplier of 1x.</Text>
-                <Text size="xsmall">* You need a minimum efficiency of 60, 250, 1000, and 3000 on the respective totems to get bonus souls.</Text>
+                <Text size="xsmall">* You need a minimum efficiency of 60, 250, 1000, 3000, and 8000 on the respective totems to get bonus souls.</Text>
             </Box>
             <Grid columns={{ count: size == "small" ? 1 : 2, size: 'auto' }}>
                 {
