@@ -91,6 +91,12 @@ export class Meal {
     }
 
     getBonus = (roundResult: boolean = false, mainFrameBonus: number = this.mainframeBonus, level: number = this.level) => {
+        // Jewel doesn't impact the line width meals.
+        if (this.bonusKey == "PxLine" || this.bonusKey == "LinePct") {
+            const finalMath = level * this.bonusQty;
+            return roundResult ? round(finalMath) : finalMath;
+        }
+
         const finalMath = (1 + mainFrameBonus / 100) * level * this.bonusQty;
         return roundResult ? round(finalMath) : finalMath;
     }
@@ -310,13 +316,18 @@ const populateDiscovery = (cooking: Cooking) => {
             possibleMeals.slice(0, 6).forEach((meal, index) => {
                 if (meal < 49) {
                     let notOdds = 1;
+                    // Get the chance to cook this meal based on it's index in the possible meal array
                     let mealChance = Math.min(mealLuckValues[index] * firstKitchenLuck, 1);
-                    for (let reverseIndex = possibleMeals.length; reverseIndex > index; reverseIndex--) {
-                        notOdds *= 1 - Math.min(mealLuckValues[reverseIndex] * firstKitchenLuck, 1);
+                    // If we have more then one possible meal, calculate the chance of hitting the other meals.
+                    if (possibleMeals.length > 1) {
+                        for (let reverseIndex = possibleMeals.length; reverseIndex > index; reverseIndex--) {
+                            notOdds *= 1 - Math.min(mealLuckValues[reverseIndex] * firstKitchenLuck, 1);
+                        }
                     }
+                    // Calculate "real chance to hit meal".
                     const realLuck = mealChance * notOdds;
                     const luckTime = time / realLuck;
-                    if (luckTime < outputlucktime[meal]) {
+                    if (luckTime < outputlucktime[meal] || (luckTime == outputlucktime[meal] && combination.length < cooking.meals[meal].timeOptimalSpices.length)) {
                         outputlucktime[meal] = luckTime;
                         cooking.meals[meal].timeDiscoveryTime = time / (firstKitchenFire / 3600);
                         cooking.meals[meal].timeDiscoveryChance = realLuck;
