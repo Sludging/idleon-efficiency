@@ -90,8 +90,8 @@ const calcBubbleMatCost = (bubbleLvl: number, bubbleIndex: number, baseCost: num
 function handleToolBubbles(titleText: string, bubbleName: string) {
     switch (bubbleName) {
         case "Stronk Tools": return titleText.replace("$", "Pickaxes and Fishing Rods");
-        case "Sanic Tools": return titleText.replace("$", "Catching Nets");
-        case "Le Brain Tools": return titleText.replace("$", "Hatchets");
+        case "Sanic Tools": return titleText.replace("$", "Catching Nets and Traps");
+        case "Le Brain Tools": return titleText.replace("$", "Hatchets and Worship Skulls");
         default: return titleText;
     }
 }
