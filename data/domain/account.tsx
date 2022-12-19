@@ -171,7 +171,7 @@ export const updateAccount = (data: Map<string, any>) => {
 
     // Check how many players are in each activity type.
     players.forEach(player => {
-        if (player.currentMonster) {
+        if (player.currentMonster && player.currentMonster.details) {
             account.activity[player.currentMonster.details.AFKtype] += 1;
         }
         else {
