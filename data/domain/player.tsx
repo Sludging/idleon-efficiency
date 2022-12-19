@@ -319,9 +319,9 @@ export class Player {
 
         // No need to do fake math if user doesn't have the card at all or is not on the same map as the shrine.
         if (chaoticChizCard.count == 0 || !crystalShrine.isShrineActive(this.currentMapId)) {
-            return; 
+            return;
         }
-        
+
         // If user isn't currently using c.chiz card, get the card and fake the shrine bonus.
         const cchizBonus = chaoticChizCard.getBonus();
         if (shrineCardBonus == 0) {
@@ -348,19 +348,24 @@ export class Player {
     }
 
     getActivityType = (): Activity => {
-        switch (this.currentMonster?.details.AFKtype) {
-            case AFKTypeEnum.Catching:
-            case AFKTypeEnum.Choppin:
-            case AFKTypeEnum.Cooking:
-            case AFKTypeEnum.Fishing:
-            case AFKTypeEnum.Mining:
-                return Activity.Skilling;
-            case AFKTypeEnum.Fighting:
-                return Activity.Fighting;
-            case AFKTypeEnum.Laboratory:
-                return Activity.Lab;
-            default:
-                return Activity.Unknown
+        if (this.currentMonster && this.currentMonster.details) {
+            switch (this.currentMonster.details.AFKtype) {
+                case AFKTypeEnum.Catching:
+                case AFKTypeEnum.Choppin:
+                case AFKTypeEnum.Cooking:
+                case AFKTypeEnum.Fishing:
+                case AFKTypeEnum.Mining:
+                    return Activity.Skilling;
+                case AFKTypeEnum.Fighting:
+                    return Activity.Fighting;
+                case AFKTypeEnum.Laboratory:
+                    return Activity.Lab;
+                default:
+                    return Activity.Unknown
+            }
+        }
+        else {
+            return Activity.Unknown;
         }
     }
 
@@ -499,10 +504,10 @@ const parseTalents = (talentLevels: string, talentMaxLevels: string, player: Pla
     // Update players talents levels due to elite class level increase talents.
     const extraLevels = Math.floor(player.talents.filter(talent => [149, 374, 539].includes(talent.skillIndex)).reduce((sum, value) => sum += value.getBonus(), 0))
     player.talents.filter(talent => ![149, 374, 539].includes(talent.skillIndex) && talent.skillIndex <= 614 && talent.level > 0)
-    .forEach(talent => {
-        talent.level += extraLevels;
-        talent.maxLevel += extraLevels;
-    });
+        .forEach(talent => {
+            talent.level += extraLevels;
+            talent.maxLevel += extraLevels;
+        });
     player.extraLevelsFromTalent = extraLevels;
 }
 
@@ -529,7 +534,9 @@ const parseStarSigns = (starSigns: string, player: Player) => {
 
 const parseMap = (currentMap: number, player: Player) => {
     player.currentMapId = currentMap;
-    player.currentMap = MapInfo[currentMap].data.map.name;
+    if (currentMap < MapInfo.length) {
+        player.currentMap = MapInfo[currentMap].data.map.name;
+    }
 }
 
 const parseStats = (stats: number[], lvZero: number[], skillXP: Array<number>, skillXPReqs: Array<number>, player: Player) => {
