@@ -275,10 +275,10 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                         label="Activity"
                         component={
                             <Box direction="row" gap="xsmall" align="center">
-                                <IconImage data={Player.getActivityIcon(player.currentMonster?.data.details.AFKtype)} scale={0.6} />
+                                <IconImage data={Player.getActivityIcon(player.currentMonster?.details?.AFKtype)} scale={0.6} />
                                 <Text size="small">{Activity[player.getActivityType()]}</Text>
                                 <Text>|</Text>
-                                <Text size="small">{player.currentMonster?.details.Name}</Text>
+                                <Text size="small">{player.currentMonster?.details?.Name ?? "Unknown"}</Text>
                             </Box>
                         }
                     />
