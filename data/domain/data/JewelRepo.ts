@@ -119,7 +119,7 @@ export const initJewelRepo = () => {
                     <SpiceComponentModel>{"spiceNo": "7", "quantity": 1500}
                 ],
                 "name": "Pyrite Rhinestone",
-                "bonusGiven": 2
+                "bonusGiven": 1
             }),
         new JewelBase(8, <JewelModel>{
                 "x": 646,

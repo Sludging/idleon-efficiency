@@ -179,7 +179,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Well catch you later when you're higher level! <br> What? Oh did I say level 60 before? I meant 160... thousand. Yea come back at Lv. 160000 and I'll probably have a new quest by then. <br> Return at Class Lv. 160000",
-                        "NextIndex": -1,
+                        "NextIndex": 15,
                         "Name": ""
                     }
                 ]
@@ -268,7 +268,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Wut wuuuut!",
-                        "NextIndex": -1,
+                        "NextIndex": 0,
                         "Name": ""
                     }
                 ]
@@ -350,7 +350,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "So is that a deal? Type a name in and create me if you agree!",
-                        "NextIndex": -1,
+                        "NextIndex": 11,
                         "Name": ""
                     }
                 ]
@@ -539,7 +539,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Hahaha I sure do love bobbin' up and down!! It's a flower thing you wouldn't get it!!",
-                        "NextIndex": -1,
+                        "NextIndex": 15,
                         "Name": ""
                     }
                 ]
@@ -594,7 +594,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Aha! Now all shall bear witness to ultimate perfection! Please do return with any other statues you may come across on your journey so that they too may bask in my greatness!",
-                        "NextIndex": -1,
+                        "NextIndex": 4,
                         "Name": ""
                     }
                 ]
@@ -643,7 +643,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "MROWW! 'The cat jumps off in fear of the pickle. What a silly cat getting scared of a little pickl-- OH MY GOD THE PICKLE HAS EYEBALLS AAAAAH KILL IT KILL IT!!!'",
-                        "NextIndex": -1,
+                        "NextIndex": 9999,
                         "Name": ""
                     }
                 ]
@@ -813,7 +813,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Hahahaha did I getcha again my boy? Ah don't take it too hard you don't need to pretend that I didn't fool ya we all know I did #",
-                        "NextIndex": -1,
+                        "NextIndex": 14,
                         "Name": ""
                     }
                 ]
@@ -1416,7 +1416,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Wow I never thought someone would care enough about the first world to do everything! It feels like just yesterday I found you unconscious at 1 hp and took some of your money... to think I'm now giving you the highest honor in the land! You're one heckin' sick gamer wear this trophy with pride!",
-                        "NextIndex": -1,
+                        "NextIndex": 55,
                         "Name": ""
                     }
                 ]
@@ -1592,7 +1592,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You can have my token early if it means you'll get off my back for a while but do return when I am prepared for my final plan!",
-                        "NextIndex": -1,
+                        "NextIndex": 15,
                         "Name": ""
                     }
                 ]
@@ -1849,7 +1849,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Uh thanks... anyway I'll have quests later on that increase that Talent's max level above just 40 but those will be added in later.",
-                        "NextIndex": -1,
+                        "NextIndex": 26,
                         "Name": ""
                     }
                 ]
@@ -2389,7 +2389,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "King of food! King of food! And coming from a blobulyte like myself that means something! But hey that shouldn't stop you from doin' stuff for me eh? Hahaha I'll be here tomorrow if you wanna help out again.",
-                        "NextIndex": -1,
+                        "NextIndex": 49,
                         "Name": ""
                     }
                 ]
@@ -2536,7 +2536,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Idk what to do with all this sludge! It's very cool looking at least.",
-                        "NextIndex": -1,
+                        "NextIndex": 13,
                         "Name": ""
                     }
                 ]
@@ -2588,7 +2588,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "I'll go ahead and open up the first set of Tasks. You're gonna have to see my friends to get the other sets. They're located in the other towns.",
-                        "NextIndex": -1,
+                        "NextIndex": 9999,
                         "Name": ""
                     }
                 ]
@@ -2692,7 +2692,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Come on over I'll give you access to your stamps! No need for that prequest nonsense OINK!",
-                        "NextIndex": -1,
+                        "NextIndex": 9999,
                         "Name": ""
                     }
                 ]
@@ -2931,7 +2931,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Please clear up 2 spaces in your item bag!",
-                        "NextIndex": -1,
+                        "NextIndex": 10,
                         "Name": ""
                     }
                 ]
@@ -3088,7 +3088,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "DROP STONE PEANUT AT MARKED ROCK IN GRASSY LANDS.... YUMMY OFFERING FOR ROCKLYTE FRIEND! HE WILL LET U JOIN SECRET GROUP AND BECOME BEST BEGINNER!",
-                        "NextIndex": -1,
+                        "NextIndex": 14,
                         "Name": ""
                     }
                 ]
@@ -3219,7 +3219,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "WELCOME TO CLUB! BEGINNER FOR LIFE!!! BUT U CAN STILL BE MORE BEGINNEREST LONG WAY TO GO! DESERT MEMBER KNOW MORE THAN ME GO FIND THEM!",
-                        "NextIndex": -1,
+                        "NextIndex": 10,
                         "Name": ""
                     }
                 ]
@@ -3419,7 +3419,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "OH WELL AT LEAST PETE WAS TASTY! OH HEY YOURE A MAESTRO NOW COOL!!!",
-                        "NextIndex": -1,
+                        "NextIndex": 17,
                         "Name": ""
                     }
                 ]
@@ -3765,7 +3765,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "I think I will take some time alone having rest when it is needed is NEVER a waste of time even for a leaf like me!",
-                        "NextIndex": -1,
+                        "NextIndex": 35,
                         "Name": ""
                     }
                 ]
@@ -3980,7 +3980,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Hey thanks good stuff back there eh? I'll see you on your next character party never truly ends hahaha!",
-                        "NextIndex": -1,
+                        "NextIndex": 16,
                         "Name": ""
                     }
                 ]
@@ -4183,7 +4183,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "I'm still thinking of other schemes to bring in more visitors come back later and I may have something for you to do.",
-                        "NextIndex": -1,
+                        "NextIndex": 17,
                         "Name": ""
                     }
                 ]
@@ -4336,7 +4336,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Keys... I think I gooOOooot some oooOOooon me somewhere lemme check.",
-                        "NextIndex": -1,
+                        "NextIndex": 16,
                         "Name": ""
                     }
                 ]
@@ -4385,7 +4385,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Kacaw! Kacaw! <br> 'The bird looks very happy with itself after successfully restoring the portal.'",
-                        "NextIndex": -1,
+                        "NextIndex": 2,
                         "Name": ""
                     }
                 ]
@@ -4440,7 +4440,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Kacaw! Kacaw! <br> 'The bird looks very happy with itself after successfully restoring the portal.'",
-                        "NextIndex": -1,
+                        "NextIndex": 3,
                         "Name": ""
                     }
                 ]
@@ -4632,7 +4632,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Snagglu wingo bada chango reagg eEECHH-- thank you noble adventurer. I eagerly await the next time that our paths mi-- ouggo blarf wulanu! 'The pig points to his throat showing embarassment for reusing his opening joke and for choking.",
-                        "NextIndex": -1,
+                        "NextIndex": 15,
                         "Name": ""
                     }
                 ]
@@ -4708,7 +4708,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Huh these are definitely the coolest items. You sure are one cool gamer ",
-                        "NextIndex": -1,
+                        "NextIndex": 9999,
                         "Name": ""
                     }
                 ]
@@ -4889,7 +4889,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Oh well you'll probably help me get a following again on another character. Cya then!",
-                        "NextIndex": -1,
+                        "NextIndex": 15,
                         "Name": ""
                     }
                 ]
@@ -5047,7 +5047,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "If youre reading this I made an oopsie haha",
-                        "NextIndex": -1,
+                        "NextIndex": 11,
                         "Name": ""
                     }
                 ]
@@ -5169,7 +5169,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Shh I'm playing the minigame!!! Triple whale here I come!",
-                        "NextIndex": -1,
+                        "NextIndex": 11,
                         "Name": ""
                     }
                 ]
@@ -5332,7 +5332,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Thank you so much for the fish it's perfect! A perfect fish from a perfect ocean caught by a perfect player! Have a wonderful day friend I'll see you later! <br> Return at Lv. 200",
-                        "NextIndex": -1,
+                        "NextIndex": 14,
                         "Name": ""
                     }
                 ]
@@ -5484,7 +5484,7 @@ export const initNpcRepo = () => {
                         "NextIndex": 10,
                         "Name": ""
                     },
-                    <DialogueLineModel>{"Type": QuestTypeEnum.NoQuest, "DialogueText": "D:", "NextIndex": -1, "Name": ""}
+                    <DialogueLineModel>{"Type": QuestTypeEnum.NoQuest, "DialogueText": "D:", "NextIndex": 12, "Name": ""}
                 ]
             }),
         new NpcBase("Postboy Pablob", <NpcModel>{
@@ -5567,7 +5567,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "...get it? Post? Since I'm the postboy...?     <br> Ah come on now don't try to hide your laughter I can tell by the look on your face you found it funny! Anyway then get to filling those orders!",
-                        "NextIndex": -1,
+                        "NextIndex": 9999,
                         "Name": ""
                     }
                 ]
@@ -5797,7 +5797,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "I still can't believe I don't got my own dungeon no more... man if I ever get my hands on that darn dev...",
-                        "NextIndex": -1,
+                        "NextIndex": 23,
                         "Name": ""
                     }
                 ]
@@ -6013,7 +6013,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Thanks a million ya did it! Me and them Zoomer generation are great friends now they even include me in their Ticky Tocky shenanigans it's great fun! <br> Now get off my lawn ya darn millenial!",
-                        "NextIndex": -1,
+                        "NextIndex": 19,
                         "Name": ""
                     }
                 ]
@@ -6196,7 +6196,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Here are ur keys to the pyramid and if you return tomorrow more keys I will wish for you! And to say sorry for joke earlier I even wait up to 3 days and will give u keys as if you were here every day!",
-                        "NextIndex": -1,
+                        "NextIndex": 16,
                         "Name": ""
                     }
                 ]
@@ -6489,7 +6489,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Bwahahaha!!! What a hoot! <br> Ok I'm bored. Ta-ta! <br> That means get lost in rich-speak.",
-                        "NextIndex": -1,
+                        "NextIndex": 26,
                         "Name": ""
                     }
                 ]
@@ -6517,7 +6517,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "''Omar looks back over his shoulder and at the anchor he is holding...'' <br> Me have no sail boat... <br> Dev Note: ISLAND EXPEDITIONS ARE COMING IN A FUTURE UPDATE. Enjoy the sunset in the meantime!",
-                        "NextIndex": -1,
+                        "NextIndex": 1,
                         "Name": ""
                     }
                 ]
@@ -6617,7 +6617,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Oh hey gamer! Ooo yea!!! You found a secret! Mmm yea to the left to the right!",
-                        "NextIndex": -1,
+                        "NextIndex": 8,
                         "Name": ""
                     }
                 ]
@@ -6645,7 +6645,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "I run the Arcade the greatest game in town! Search around there isn't a more thrilling game to be found! Just gimme a tap and that will be that!",
-                        "NextIndex": -1,
+                        "NextIndex": 9999,
                         "Name": ""
                     }
                 ]
@@ -6840,7 +6840,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "MMMMmmmm what a juicy noob that was! The dumb ones are alwayssss the most ssssucculent!",
-                        "NextIndex": -1,
+                        "NextIndex": 18,
                         "Name": ""
                     }
                 ]
@@ -7045,7 +7045,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Vanquished at last boy that was fast! That iconoclast mummy has passed I forecast that my status will now go unsurpassed! Thank you player this was really great... an absolute blast!",
-                        "NextIndex": -1,
+                        "NextIndex": 17,
                         "Name": ""
                     }
                 ]
@@ -7249,7 +7249,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Top stuff my man! Brilliantly solved! I must be getting back to my adventure now as you to yours... cheerio!",
-                        "NextIndex": -1,
+                        "NextIndex": 17,
                         "Name": ""
                     }
                 ]
@@ -7370,7 +7370,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "NICE! FINALLY!!! Now I can make my costume and pretend to be Sprout! No one will ever bother me again!! Just gotta take this off and... <br> Hey can I get some privacy you creep? Please leave the map and come back...",
-                        "NextIndex": -1,
+                        "NextIndex": 11,
                         "Name": ""
                     }
                 ]
@@ -8014,7 +8014,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Go git 'er dun new Sheriff! YeeeeHAW!!!",
-                        "NextIndex": -1,
+                        "NextIndex": 61,
                         "Name": ""
                     }
                 ]
@@ -8082,7 +8082,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Come tap on me every day to get another ticket given you're a registered combatant now. <br> And don't think I won't recognize you on your other characters! You only get 1 ticket every day!",
-                        "NextIndex": -1,
+                        "NextIndex": 5,
                         "Name": ""
                     }
                 ]
@@ -8339,7 +8339,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "So you think you can do it? Well you'll have to come back in a future update to find out.",
-                        "NextIndex": -1,
+                        "NextIndex": 23,
                         "Name": ""
                     }
                 ]
@@ -8506,7 +8506,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Woah nice Lucky Lad trophy! Kinda weird how it's under me and not you... oh right thats because it's MINE hahaha! <br> Hiyaa! Take that air!",
-                        "NextIndex": -1,
+                        "NextIndex": 14,
                         "Name": ""
                     }
                 ]
@@ -8655,7 +8655,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Here you go! Cmon open them open them!! Oh and I've got more left so come back tomorrow!!! ##",
-                        "NextIndex": -1,
+                        "NextIndex": 13,
                         "Name": ""
                     }
                 ]
@@ -8735,7 +8735,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Oh no there's still more engravi- <br> 'Anyway as I was saying before I got interrupted there are constellations all over the game so always look out for them wherever you go! There's also a trophy if you can light up them all!' <br> The engraving pops out of the telescope and falls down the tree.",
-                        "NextIndex": -1,
+                        "NextIndex": 9999,
                         "Name": ""
                     }
                 ]
@@ -8841,7 +8841,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Alas I must admit. The loneliness I feel up here has broken my spirit. Neither cards from lovers nor destruction of others can bring to me what we all hold dearest. Please return tomorrow so we may try one more to ease my sorrow.",
-                        "NextIndex": -1,
+                        "NextIndex": 8,
                         "Name": ""
                     }
                 ]
@@ -8956,7 +8956,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You found one! Thats <br> . <br> very impressive! Come <br> . <br> back tomorrow to find more capsules! <br> . <br> Good job Eggy! <br> . <br> Yea nice! <br> . <br> Haha thx guys #",
-                        "NextIndex": -1,
+                        "NextIndex": 9,
                         "Name": ""
                     }
                 ]
@@ -9021,7 +9021,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Right-o then mate! Go get those tasks!",
-                        "NextIndex": -1,
+                        "NextIndex": 9999,
                         "Name": ""
                     }
                 ]
@@ -9483,7 +9483,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You got it?? Oh you filled it out I see... meh what's an election without a bit of corruption right? I'm sure if we weren't just 2d drawings we would be more than capable of doing without corruption!",
-                        "NextIndex": -1,
+                        "NextIndex": 41,
                         "Name": ""
                     }
                 ]
@@ -9760,7 +9760,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Not bad not bad. But I wont lie to ya I'm tired of seeing that blank face of yours. How about we do one last thing and call it quits?",
-                        "NextIndex": -1,
+                        "NextIndex": 23,
                         "Name": ""
                     }
                 ]
@@ -9916,7 +9916,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You've got... the vibes... <br> and I've got... the keys... <br> Every day... you can have more keys...",
-                        "NextIndex": -1,
+                        "NextIndex": 12,
                         "Name": ""
                     }
                 ]
@@ -10089,7 +10089,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "'The frozen pig seems happy with you... wait no that's just a smudge on the ice making it look like he's smiling. He is infact unmoved by your actions literally.",
-                        "NextIndex": -1,
+                        "NextIndex": 14,
                         "Name": ""
                     }
                 ]
@@ -10362,7 +10362,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "I can see why Hoggi picked you to represent him you're a very versatile and competent person! Thank you for the help and best of luck to you in your future endeavors!",
-                        "NextIndex": -1,
+                        "NextIndex": 24,
                         "Name": ""
                     }
                 ]
@@ -10469,7 +10469,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "That'll show 'em! <br> Well guess that's all we can do. I mean I'd give you a quest to kill the Big Boss and bring down the system but if any of his goons found out they'd come get me for sure... so yea no more quests.",
-                        "NextIndex": -1,
+                        "NextIndex": 9,
                         "Name": ""
                     }
                 ]
@@ -10749,7 +10749,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You're a great digger especially for someone who isn't a literal shovel! Well I better get back to digging my own grave here who knows when my handle will splinter!",
-                        "NextIndex": -1,
+                        "NextIndex": 23,
                         "Name": ""
                     }
                 ]
@@ -10880,7 +10880,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Alright you got your tickets now get outta here.",
-                        "NextIndex": -1,
+                        "NextIndex": 10,
                         "Name": ""
                     }
                 ]
@@ -10935,7 +10935,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "KAW! KAWWWWWW! <br> 'The bird looks very proud of itself after successfully restoring the portal.'",
-                        "NextIndex": -1,
+                        "NextIndex": 3,
                         "Name": ""
                     }
                 ]
@@ -11342,7 +11342,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Huh. I guess that makes YOU the Lord of the Hunt... Well we can't be having a plot hole like this no sir! Enjoy the trophy but I'm going to go sell all this evidence to the store.",
-                        "NextIndex": -1,
+                        "NextIndex": 37,
                         "Name": ""
                     }
                 ]
@@ -11537,7 +11537,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Oh right mana potions don't actually give you mana they just make it recharge faster... guess I'll have to wait!",
-                        "NextIndex": -1,
+                        "NextIndex": 18,
                         "Name": ""
                     }
                 ]
@@ -11635,7 +11635,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Yooo now its a party! <br> Pfft cmon don't be down about it bro it's Summer Break! We don't worry about the underlying morals and themes behind quests around here we just have fun!",
-                        "NextIndex": -1,
+                        "NextIndex": 7,
                         "Name": ""
                     }
                 ]
@@ -11796,7 +11796,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "WAOOO!! YEHEHEHE!!",
-                        "NextIndex": -1,
+                        "NextIndex": 12,
                         "Name": ""
                     }
                 ]
@@ -11939,7 +11939,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Hehe... that outta teach that old coot to not hit me off my walking stick! Please do keep bothering him from time to time he has it coming!",
-                        "NextIndex": -1,
+                        "NextIndex": 12,
                         "Name": ""
                     }
                 ]
@@ -12079,7 +12079,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Ya got rid of 'im? They had it comin always sneerin' at me and tellin' me want to do.",
-                        "NextIndex": -1,
+                        "NextIndex": 12,
                         "Name": ""
                     }
                 ]
@@ -12297,7 +12297,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Happy Falloween! I'll scare you good next time so ya better watch out!",
-                        "NextIndex": -1,
+                        "NextIndex": 17,
                         "Name": ""
                     }
                 ]
@@ -12388,7 +12388,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Blunb Blu ###",
-                        "NextIndex": -1,
+                        "NextIndex": 6,
                         "Name": ""
                     }
                 ]
@@ -12520,7 +12520,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Holla holla! You're a winning MACHINE! I'm gonna keep the party going but that's it for the games for now. PartyOn!",
-                        "NextIndex": -1,
+                        "NextIndex": 10,
                         "Name": ""
                     }
                 ]
@@ -12664,7 +12664,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Now that's what I call non-raw cooking! I can't believe I'm saying this but that's all the cooking I can do for now... I'm all cooked out!",
-                        "NextIndex": -1,
+                        "NextIndex": 10,
                         "Name": ""
                     }
                 ]
@@ -12884,7 +12884,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Zzzz.... nono lava I wont tell them... zzz... I wont tell them to drop sludge oil onto the purple spores.... zzz... nah lava secrets safe with... zzz... me...",
-                        "NextIndex": -1,
+                        "NextIndex": 18,
                         "Name": ""
                     }
                 ]
@@ -12953,7 +12953,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "This is.... acceptable. You may proceed to the Task TV behind me.",
-                        "NextIndex": -1,
+                        "NextIndex": 9999,
                         "Name": ""
                     }
                 ]

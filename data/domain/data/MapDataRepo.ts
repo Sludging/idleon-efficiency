@@ -917,79 +917,79 @@ export const initMapDataRepo = () => {
                 "enemy": "mushP",
                 "world": "Hyperion Nebula",
                 "map": <MapNameModel>{"intName": "xSpaceA1", "name": "Spaceway Raceway", "id": 151},
-                "portalRequirements": [20000]
+                "portalRequirements": [5000]
             }),
         new MapDataBase(152, <MapDataModel>{
                 "enemy": "w4a2",
                 "world": "Hyperion Nebula",
                 "map": <MapNameModel>{"intName": "xSpaceA2", "name": "TV Outpost", "id": 152},
-                "portalRequirements": [30000]
+                "portalRequirements": [12000]
             }),
         new MapDataBase(153, <MapDataModel>{
                 "enemy": "w4a3",
                 "world": "Hyperion Nebula",
                 "map": <MapNameModel>{"intName": "xSpaceA3", "name": "Donut Drive-In", "id": 153},
-                "portalRequirements": [50000]
+                "portalRequirements": [18000]
             }),
         new MapDataBase(154, <MapDataModel>{
                 "enemy": "demonP",
                 "world": "Hyperion Nebula",
                 "map": <MapNameModel>{"intName": "xSpaceA4", "name": "Outskirts of Fallstar Isle", "id": 154},
-                "portalRequirements": [70000]
+                "portalRequirements": [25000]
             }),
         new MapDataBase(155, <MapDataModel>{
                 "enemy": "w4b2",
                 "world": "Hyperion Nebula",
                 "map": <MapNameModel>{"intName": "xSpaceB1", "name": "Mountainous Deugh", "id": 155},
-                "portalRequirements": [100000]
+                "portalRequirements": [40000]
             }),
         new MapDataBase(156, <MapDataModel>{
                 "enemy": "w4b1",
                 "world": "Hyperion Nebula",
                 "map": <MapNameModel>{"intName": "xSpaceB2", "name": "Wurm Highway", "id": 156},
-                "portalRequirements": [150000]
+                "portalRequirements": [60000]
             }),
         new MapDataBase(157, <MapDataModel>{
                 "enemy": "w4b3",
                 "world": "Hyperion Nebula",
                 "map": <MapNameModel>{"intName": "xSpaceB3", "name": "Jelly Cube Bridge", "id": 157},
-                "portalRequirements": [250000]
+                "portalRequirements": [90000]
             }),
         new MapDataBase(158, <MapDataModel>{
                 "enemy": "w4b4",
                 "world": "Hyperion Nebula",
                 "map": <MapNameModel>{"intName": "xSpaceB4", "name": "Cocoa Tunnel", "id": 158},
-                "portalRequirements": [500000]
+                "portalRequirements": [120000]
             }),
         new MapDataBase(159, <MapDataModel>{
                 "enemy": "w4b5",
                 "world": "Hyperion Nebula",
                 "map": <MapNameModel>{"intName": "xSpaceB5", "name": "Standstill Plains", "id": 159},
-                "portalRequirements": [700000]
+                "portalRequirements": [150000]
             }),
         new MapDataBase(160, <MapDataModel>{
                 "enemy": "w4c1",
                 "world": "Hyperion Nebula",
                 "map": <MapNameModel>{"intName": "xSpaceC1", "name": "Shelled Shores", "id": 160},
-                "portalRequirements": [1000000]
+                "portalRequirements": [190000]
             }),
         new MapDataBase(161, <MapDataModel>{
                 "enemy": "w4c2",
                 "world": "Hyperion Nebula",
                 "map": <MapNameModel>{"intName": "xSpaceC2", "name": "The Untraveled Octopath", "id": 161},
-                "portalRequirements": [2000000]
+                "portalRequirements": [250000]
             }),
         new MapDataBase(162, <MapDataModel>{
                 "enemy": "w4c3",
                 "world": "Hyperion Nebula",
                 "map": <MapNameModel>{"intName": "xSpaceC3", "name": "Flamboyant Bayou", "id": 162},
-                "portalRequirements": [3000000]
+                "portalRequirements": [300000]
             }),
         new MapDataBase(163, <MapDataModel>{
                 "enemy": "w4c4",
                 "world": "Hyperion Nebula",
                 "map": <MapNameModel>{"intName": "xSpaceC4", "name": "Enclave of Eyes", "id": 163},
-                "portalRequirements": [4000000]
+                "portalRequirements": [350000]
             }),
         new MapDataBase(164, <MapDataModel>{
                 "enemy": "mushP",
@@ -1205,6 +1205,294 @@ export const initMapDataRepo = () => {
                 "enemy": "Z",
                 "world": "Hyperion Nebula",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 199},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(200, <MapDataModel>{
+                "enemy": "Nothing",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "wLavaaTown", "name": "Magma Rivertown", "id": 200},
+                "portalRequirements": [1, 0]
+            }),
+        new MapDataBase(201, <MapDataModel>{
+                "enemy": "w5a1",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "wLavaA1", "name": "Naut Sake Perimeter", "id": 201},
+                "portalRequirements": [25000]
+            }),
+        new MapDataBase(202, <MapDataModel>{
+                "enemy": "w5a2",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "wLavaA2", "name": "Niagrilled Falls", "id": 202},
+                "portalRequirements": [30000]
+            }),
+        new MapDataBase(203, <MapDataModel>{
+                "enemy": "w5a3",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "wLavaA3", "name": "The Killer Roundabout", "id": 203},
+                "portalRequirements": [50000]
+            }),
+        new MapDataBase(204, <MapDataModel>{
+                "enemy": "w5a4",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "wLavaA4", "name": "Cracker Jack Lake", "id": 204},
+                "portalRequirements": [75000]
+            }),
+        new MapDataBase(205, <MapDataModel>{
+                "enemy": "w5a5",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "wLavaA5", "name": "The Great Molehill", "id": 205},
+                "portalRequirements": [125000]
+            }),
+        new MapDataBase(206, <MapDataModel>{
+                "enemy": "w5b1",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "wLavaB1", "name": "Erruption River", "id": 206},
+                "portalRequirements": [300000]
+            }),
+        new MapDataBase(207, <MapDataModel>{
+                "enemy": "w5b2",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "wLavaB2", "name": "Mount Doomish", "id": 207},
+                "portalRequirements": [500000]
+            }),
+        new MapDataBase(208, <MapDataModel>{
+                "enemy": "w5b3",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "wLavaB3", "name": "OJ Bay", "id": 208},
+                "portalRequirements": [1000000]
+            }),
+        new MapDataBase(209, <MapDataModel>{
+                "enemy": "w5b4",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "wLavaB4", "name": "Lampar Lake", "id": 209},
+                "portalRequirements": [2000000]
+            }),
+        new MapDataBase(210, <MapDataModel>{
+                "enemy": "w5b5",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "wLavaB5", "name": "Spitfire River", "id": 210},
+                "portalRequirements": [3000000]
+            }),
+        new MapDataBase(211, <MapDataModel>{
+                "enemy": "w5b6",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "wLavaB6", "name": "Miner Mole Outskirts", "id": 211},
+                "portalRequirements": [6000000]
+            }),
+        new MapDataBase(212, <MapDataModel>{
+                "enemy": "w5c1",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "wLavaC1", "name": "Crawly Catacombs", "id": 212},
+                "portalRequirements": [10000000]
+            }),
+        new MapDataBase(213, <MapDataModel>{
+                "enemy": "w5c2",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "wLavaC2", "name": "The Worm Nest", "id": 213},
+                "portalRequirements": [60000]
+            }),
+        new MapDataBase(214, <MapDataModel>{
+                "enemy": "w5a1",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "ColosseumE", "name": "Z", "id": 214},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(215, <MapDataModel>{
+                "enemy": "w5b6",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "wLavaCBOSS", "name": "Z", "id": 215},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(216, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 216},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(217, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 217},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(218, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 218},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(219, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 219},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(220, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 220},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(221, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 221},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(222, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 222},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(223, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 223},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(224, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 224},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(225, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 225},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(226, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 226},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(227, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 227},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(228, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 228},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(229, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 229},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(230, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 230},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(231, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 231},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(232, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 232},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(233, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 233},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(234, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 234},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(235, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 235},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(236, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 236},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(237, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 237},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(238, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 238},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(239, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 239},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(240, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 240},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(241, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 241},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(242, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 242},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(243, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 243},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(244, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 244},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(245, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 245},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(246, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 246},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(247, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Smolderin' Plateau",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 247},
                 "portalRequirements": [0]
             })    
 ]

@@ -266,7 +266,10 @@ export const initEnemyRepo = () => {
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsD9", "quantity": 1, "chance": 0.00014, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable12", "quantity": 1, "chance": 0.015, "questLink": "N/A"}
+                        <ItemDropModel>{"item": "Soul4", "quantity": 1, "chance": 1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Soul4", "quantity": 1, "chance": 1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Soul4", "quantity": 1, "chance": 1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Soul4", "quantity": 1, "chance": 1, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,
@@ -299,7 +302,10 @@ export const initEnemyRepo = () => {
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsD9", "quantity": 1, "chance": 0.00014, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable12", "quantity": 1, "chance": 0.015, "questLink": "N/A"}
+                        <ItemDropModel>{"item": "Soul5", "quantity": 1, "chance": 1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Soul5", "quantity": 1, "chance": 1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Soul5", "quantity": 1, "chance": 1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Soul5", "quantity": 1, "chance": 1, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,
@@ -308,7 +314,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("SoulCard6", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Bandit Bob",
+                    "Name": "Oozie Soul",
                     "AFKtype": AFKTypeEnum.Fighting,
                     "MonsterFace": 4,
                     "MonsterOffsetX": 42,
@@ -332,7 +338,10 @@ export const initEnemyRepo = () => {
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsD9", "quantity": 1, "chance": 0.00014, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable12", "quantity": 1, "chance": 0.015, "questLink": "N/A"}
+                        <ItemDropModel>{"item": "Soul6", "quantity": 1, "chance": 1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Soul6", "quantity": 1, "chance": 1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Soul6", "quantity": 1, "chance": 1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Soul6", "quantity": 1, "chance": 1, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,
@@ -700,6 +709,33 @@ export const initEnemyRepo = () => {
                 "details": <EnemyDetailsModel>{
                     "Name": "Laboratory",
                     "AFKtype": AFKTypeEnum.Laboratory,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 22,
+                    "MonsterOffsetY": 38,
+                    "HeightOfMonster": 25,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 0,
+                    "RespawnTime": 180,
+                    "DeathFrame": 1,
+                    "MonsterHPTotal": 5,
+                    "Type": EnemyTypeEnum.oreType,
+                    "SpecialType": "",
+                    "ExpGiven": 25,
+                    "ExpType": 12,
+                    "Defence": 100,
+                    "MoveSPEED": 0,
+                    "Damages": [0, 1],
+                    "DefFor0": 0.22
+                },
+                "drops": undefined,
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("Divinity", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Divinity",
+                    "AFKtype": AFKTypeEnum.Divinity,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 22,
                     "MonsterOffsetY": 38,
@@ -1689,6 +1725,48 @@ export const initEnemyRepo = () => {
                     "next": "Blank",
                     "hasCrystal": false,
                     "crystalName": "Crystal3",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("Crystal4", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Crystal Capybara",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 47,
+                    "MonsterOffsetX": 38,
+                    "MonsterOffsetY": 40,
+                    "HeightOfMonster": 60,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 7,
+                    "RespawnTime": 252000,
+                    "DeathFrame": 14,
+                    "MonsterHPTotal": 1000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 210,
+                    "ExpType": 0,
+                    "Defence": 180,
+                    "MoveSPEED": 5,
+                    "Damages": [1, 1],
+                    "DefFor0": 0
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0.5, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsH14", "quantity": 1, "chance": 0.008, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "StampC3", "quantity": 1, "chance": 0.1, "questLink": "Papua_Piggea2"},
+                        <SubTableDropModel>{"item": "DropTable25", "quantity": 1, "chance": 0.3, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable26", "quantity": 1, "chance": 0.2, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable27", "quantity": 1, "chance": 0.17, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "w5c2",
+                    "next": "Blank",
+                    "hasCrystal": false,
+                    "crystalName": "Crystal4",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -3656,7 +3734,7 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 7,
                     "RespawnTime": 38,
                     "DeathFrame": 15,
-                    "MonsterHPTotal": 520000,
+                    "MonsterHPTotal": 500000,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
                     "ExpGiven": 2350,
@@ -3679,7 +3757,7 @@ export const initEnemyRepo = () => {
                     "enemy": "mushP",
                     "world": "Hyperion Nebula",
                     "map": <MapNameModel>{"intName": "xSpaceA1", "name": "Spaceway Raceway", "id": 151},
-                    "portalRequirements": [20000]
+                    "portalRequirements": [5000]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": undefined,
@@ -3702,7 +3780,7 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 7,
                     "RespawnTime": 40,
                     "DeathFrame": 18,
-                    "MonsterHPTotal": 700000,
+                    "MonsterHPTotal": 650000,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
                     "ExpGiven": 3000,
@@ -3727,7 +3805,7 @@ export const initEnemyRepo = () => {
                     "enemy": "w4a2",
                     "world": "Hyperion Nebula",
                     "map": <MapNameModel>{"intName": "xSpaceA2", "name": "TV Outpost", "id": 152},
-                    "portalRequirements": [30000]
+                    "portalRequirements": [12000]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "mushP",
@@ -3750,7 +3828,7 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 8,
                     "RespawnTime": 40,
                     "DeathFrame": 16,
-                    "MonsterHPTotal": 925000,
+                    "MonsterHPTotal": 850000,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
                     "ExpGiven": 4000,
@@ -3773,7 +3851,7 @@ export const initEnemyRepo = () => {
                     "enemy": "w4a3",
                     "world": "Hyperion Nebula",
                     "map": <MapNameModel>{"intName": "xSpaceA3", "name": "Donut Drive-In", "id": 153},
-                    "portalRequirements": [50000]
+                    "portalRequirements": [18000]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w4a2",
@@ -3796,7 +3874,7 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 13,
                     "RespawnTime": 40,
                     "DeathFrame": 24,
-                    "MonsterHPTotal": 1250000,
+                    "MonsterHPTotal": 1000000,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
                     "ExpGiven": 4800,
@@ -3819,7 +3897,7 @@ export const initEnemyRepo = () => {
                     "enemy": "demonP",
                     "world": "Hyperion Nebula",
                     "map": <MapNameModel>{"intName": "xSpaceA4", "name": "Outskirts of Fallstar Isle", "id": 154},
-                    "portalRequirements": [70000]
+                    "portalRequirements": [25000]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w4a3",
@@ -3842,7 +3920,7 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 7,
                     "RespawnTime": 38,
                     "DeathFrame": 16,
-                    "MonsterHPTotal": 2000000,
+                    "MonsterHPTotal": 1500000,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
                     "ExpGiven": 7600,
@@ -3865,7 +3943,7 @@ export const initEnemyRepo = () => {
                     "enemy": "w4b2",
                     "world": "Hyperion Nebula",
                     "map": <MapNameModel>{"intName": "xSpaceB1", "name": "Mountainous Deugh", "id": 155},
-                    "portalRequirements": [100000]
+                    "portalRequirements": [40000]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "demonP",
@@ -3888,7 +3966,7 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 8,
                     "RespawnTime": 40,
                     "DeathFrame": 18,
-                    "MonsterHPTotal": 2500000,
+                    "MonsterHPTotal": 2000000,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
                     "ExpGiven": 8750,
@@ -3911,7 +3989,7 @@ export const initEnemyRepo = () => {
                     "enemy": "w4b1",
                     "world": "Hyperion Nebula",
                     "map": <MapNameModel>{"intName": "xSpaceB2", "name": "Wurm Highway", "id": 156},
-                    "portalRequirements": [150000]
+                    "portalRequirements": [60000]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w4b2",
@@ -3934,7 +4012,7 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 12,
                     "RespawnTime": 40,
                     "DeathFrame": 19,
-                    "MonsterHPTotal": 3300000,
+                    "MonsterHPTotal": 3000000,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
                     "ExpGiven": 10800,
@@ -3957,7 +4035,7 @@ export const initEnemyRepo = () => {
                     "enemy": "w4b3",
                     "world": "Hyperion Nebula",
                     "map": <MapNameModel>{"intName": "xSpaceB3", "name": "Jelly Cube Bridge", "id": 157},
-                    "portalRequirements": [250000]
+                    "portalRequirements": [90000]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w4b1",
@@ -3980,7 +4058,7 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 8,
                     "RespawnTime": 40,
                     "DeathFrame": 17,
-                    "MonsterHPTotal": 4500000,
+                    "MonsterHPTotal": 4000000,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
                     "ExpGiven": 14000,
@@ -4003,7 +4081,7 @@ export const initEnemyRepo = () => {
                     "enemy": "w4b4",
                     "world": "Hyperion Nebula",
                     "map": <MapNameModel>{"intName": "xSpaceB4", "name": "Cocoa Tunnel", "id": 158},
-                    "portalRequirements": [500000]
+                    "portalRequirements": [120000]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w4b3",
@@ -4026,7 +4104,7 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 0,
                     "RespawnTime": 40,
                     "DeathFrame": 10,
-                    "MonsterHPTotal": 6500000,
+                    "MonsterHPTotal": 6000000,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
                     "ExpGiven": 17500,
@@ -4049,7 +4127,7 @@ export const initEnemyRepo = () => {
                     "enemy": "w4b5",
                     "world": "Hyperion Nebula",
                     "map": <MapNameModel>{"intName": "xSpaceB5", "name": "Standstill Plains", "id": 159},
-                    "portalRequirements": [700000]
+                    "portalRequirements": [150000]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w4b4",
@@ -4072,7 +4150,7 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 7,
                     "RespawnTime": 40,
                     "DeathFrame": 16,
-                    "MonsterHPTotal": 9000000,
+                    "MonsterHPTotal": 8000000,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
                     "ExpGiven": 23400,
@@ -4095,7 +4173,7 @@ export const initEnemyRepo = () => {
                     "enemy": "w4c1",
                     "world": "Hyperion Nebula",
                     "map": <MapNameModel>{"intName": "xSpaceC1", "name": "Shelled Shores", "id": 160},
-                    "portalRequirements": [1000000]
+                    "portalRequirements": [190000]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w4b5",
@@ -4118,7 +4196,7 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 6,
                     "RespawnTime": 40,
                     "DeathFrame": 14,
-                    "MonsterHPTotal": 12000000,
+                    "MonsterHPTotal": 11000000,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
                     "ExpGiven": 27600,
@@ -4141,7 +4219,7 @@ export const initEnemyRepo = () => {
                     "enemy": "w4c2",
                     "world": "Hyperion Nebula",
                     "map": <MapNameModel>{"intName": "xSpaceC2", "name": "The Untraveled Octopath", "id": 161},
-                    "portalRequirements": [2000000]
+                    "portalRequirements": [250000]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w4c1",
@@ -4164,7 +4242,7 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 7,
                     "RespawnTime": 45,
                     "DeathFrame": 16,
-                    "MonsterHPTotal": 16000000,
+                    "MonsterHPTotal": 15000000,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
                     "ExpGiven": 30000,
@@ -4187,7 +4265,7 @@ export const initEnemyRepo = () => {
                     "enemy": "w4c3",
                     "world": "Hyperion Nebula",
                     "map": <MapNameModel>{"intName": "xSpaceC3", "name": "Flamboyant Bayou", "id": 162},
-                    "portalRequirements": [3000000]
+                    "portalRequirements": [300000]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w4c2",
@@ -4233,13 +4311,614 @@ export const initEnemyRepo = () => {
                     "enemy": "w4c4",
                     "world": "Hyperion Nebula",
                     "map": <MapNameModel>{"intName": "xSpaceC4", "name": "Enclave of Eyes", "id": 163},
-                    "portalRequirements": [4000000]
+                    "portalRequirements": [350000]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w4c3",
                     "next": "Crystal3",
                     "hasCrystal": true,
                     "crystalName": "Crystal3",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w5a1", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Suggma",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 62,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 25,
+                    "HeightOfMonster": 29,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 6,
+                    "RespawnTime": 43,
+                    "DeathFrame": 13,
+                    "MonsterHPTotal": 25000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 40000,
+                    "ExpType": 0,
+                    "Defence": 12000,
+                    "MoveSPEED": 3,
+                    "Damages": [10000, 1],
+                    "DefFor0": 10638.1
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 6000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "LavaA1", "quantity": 1, "chance": 0.16, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "LavaA1b", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes5", "quantity": 4, "chance": 2e-08, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsH1", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable25", "quantity": 1, "chance": 0.0025, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w5a1",
+                    "world": "Smolderin' Plateau",
+                    "map": <MapNameModel>{"intName": "wLavaA1", "name": "Naut Sake Perimeter", "id": 201},
+                    "portalRequirements": [25000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": undefined,
+                    "next": "w5a2",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal4",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w5a2", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Maccie",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 63,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 25,
+                    "HeightOfMonster": 42,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 6,
+                    "RespawnTime": 43,
+                    "DeathFrame": 15,
+                    "MonsterHPTotal": 35000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 54000,
+                    "ExpType": 0,
+                    "Defence": 12000,
+                    "MoveSPEED": 4,
+                    "Damages": [14000, 1],
+                    "DefFor0": 14295.2
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 7000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "LavaA2", "quantity": 1, "chance": 0.15, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsH2", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes5", "quantity": 20, "chance": 1e-05, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "StampC16", "quantity": 1, "chance": 3e-06, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable25", "quantity": 1, "chance": 0.0028, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w5a2",
+                    "world": "Smolderin' Plateau",
+                    "map": <MapNameModel>{"intName": "wLavaA2", "name": "Niagrilled Falls", "id": 202},
+                    "portalRequirements": [30000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w5a1",
+                    "next": "w5a3",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal4",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w5a3", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Mister Brightside",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 64,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 63,
+                    "HeightOfMonster": 68,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 6,
+                    "RespawnTime": 43,
+                    "DeathFrame": 20,
+                    "MonsterHPTotal": 60000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 91000,
+                    "ExpType": 0,
+                    "Defence": 12000,
+                    "MoveSPEED": 4,
+                    "Damages": [14000, 1],
+                    "DefFor0": 14295.2
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 8500, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "LavaA3", "quantity": 1, "chance": 0.15, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsH3", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes5", "quantity": 21, "chance": 4e-06, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable25", "quantity": 1, "chance": 0.0031, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w5a3",
+                    "world": "Smolderin' Plateau",
+                    "map": <MapNameModel>{"intName": "wLavaA3", "name": "The Killer Roundabout", "id": 203},
+                    "portalRequirements": [50000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w5a2",
+                    "next": "w5a4",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal4",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w5a4", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Cheese Nub",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 65,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 37,
+                    "HeightOfMonster": 47,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 7,
+                    "RespawnTime": 43,
+                    "DeathFrame": 17,
+                    "MonsterHPTotal": 90000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 135000,
+                    "ExpType": 0,
+                    "Defence": 17000,
+                    "MoveSPEED": 5,
+                    "Damages": [14000, 1],
+                    "DefFor0": 14295.2
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 10000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "LavaA4", "quantity": 1, "chance": 0.14, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsH4", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes5", "quantity": 0, "chance": 1e-06, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable25", "quantity": 1, "chance": 0.0034, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w5a4",
+                    "world": "Smolderin' Plateau",
+                    "map": <MapNameModel>{"intName": "wLavaA4", "name": "Cracker Jack Lake", "id": 204},
+                    "portalRequirements": [75000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w5a3",
+                    "next": "w5a5",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal4",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w5a5", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Stiltmole",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 66,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 68,
+                    "HeightOfMonster": 65,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 6,
+                    "RespawnTime": 45,
+                    "DeathFrame": 15,
+                    "MonsterHPTotal": 130000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 185000,
+                    "ExpType": 0,
+                    "Defence": 17000,
+                    "MoveSPEED": 3,
+                    "Damages": [23000, 1],
+                    "DefFor0": 21974.5
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 12500, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "LavaA5", "quantity": 1, "chance": 0.14, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "LavaA5b", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes5", "quantity": 1, "chance": 6e-07, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsH5", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable25", "quantity": 1, "chance": 0.0037, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w5a5",
+                    "world": "Smolderin' Plateau",
+                    "map": <MapNameModel>{"intName": "wLavaA5", "name": "The Great Molehill", "id": 205},
+                    "portalRequirements": [125000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w5a4",
+                    "next": "w5b1",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal4",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w5b1", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Molti",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 67,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 25,
+                    "HeightOfMonster": 40,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 7,
+                    "RespawnTime": 43,
+                    "DeathFrame": 15,
+                    "MonsterHPTotal": 200000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 275000,
+                    "ExpType": 0,
+                    "Defence": 17000,
+                    "MoveSPEED": 3,
+                    "Damages": [23000, 1],
+                    "DefFor0": 21974.5
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 15000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "LavaB1", "quantity": 1, "chance": 0.16, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsH6", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes5", "quantity": 2, "chance": 4e-07, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable26", "quantity": 1, "chance": 0.0025, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w5b1",
+                    "world": "Smolderin' Plateau",
+                    "map": <MapNameModel>{"intName": "wLavaB1", "name": "Erruption River", "id": 206},
+                    "portalRequirements": [300000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w5a5",
+                    "next": "w5b2",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal4",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w5b2", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Purgatory Stalker",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 68,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 47,
+                    "HeightOfMonster": 46,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 0,
+                    "RespawnTime": 43,
+                    "DeathFrame": 9,
+                    "MonsterHPTotal": 300000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 400000,
+                    "ExpType": 0,
+                    "Defence": 17000,
+                    "MoveSPEED": 3,
+                    "Damages": [30000, 1],
+                    "DefFor0": 27591.3
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 17000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "LavaB2", "quantity": 1, "chance": 0.16, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsH7", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes5", "quantity": 3, "chance": 2e-07, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable26", "quantity": 1, "chance": 0.0025, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w5b2",
+                    "world": "Smolderin' Plateau",
+                    "map": <MapNameModel>{"intName": "wLavaB2", "name": "Mount Doomish", "id": 207},
+                    "portalRequirements": [500000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w5b1",
+                    "next": "w5b3",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal4",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w5b3", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Citringe",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 69,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 43,
+                    "HeightOfMonster": 45,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 8,
+                    "RespawnTime": 45,
+                    "DeathFrame": 19,
+                    "MonsterHPTotal": 420000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 550000,
+                    "ExpType": 0,
+                    "Defence": 26000,
+                    "MoveSPEED": 3,
+                    "Damages": [30000, 1],
+                    "DefFor0": 27591.3
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 19000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "LavaB3", "quantity": 1, "chance": 0.16, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "LavaB3b", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsH8", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes5", "quantity": 5, "chance": 1e-06, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable26", "quantity": 1, "chance": 0.0029, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w5b3",
+                    "world": "Smolderin' Plateau",
+                    "map": <MapNameModel>{"intName": "wLavaB3", "name": "OJ Bay", "id": 208},
+                    "portalRequirements": [1000000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w5b2",
+                    "next": "w5b4",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal4",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w5b4", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Lampar",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 70,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 48,
+                    "HeightOfMonster": 55,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 7,
+                    "RespawnTime": 43,
+                    "DeathFrame": 15,
+                    "MonsterHPTotal": 600000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 780000,
+                    "ExpType": 0,
+                    "Defence": 26000,
+                    "MoveSPEED": 3,
+                    "Damages": [40000, 1],
+                    "DefFor0": 35242.3
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 22000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "LavaB4", "quantity": 1, "chance": 0.16, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsH9", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes5", "quantity": 6, "chance": 1e-06, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable26", "quantity": 1, "chance": 0.0031, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w5b4",
+                    "world": "Smolderin' Plateau",
+                    "map": <MapNameModel>{"intName": "wLavaB4", "name": "Lampar Lake", "id": 209},
+                    "portalRequirements": [2000000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w5b3",
+                    "next": "w5b5",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal4",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w5b5", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Fire Spirit",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 71,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 63,
+                    "HeightOfMonster": 60,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 7,
+                    "RespawnTime": 43,
+                    "DeathFrame": 15,
+                    "MonsterHPTotal": 720000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 900000,
+                    "ExpType": 0,
+                    "Defence": 26000,
+                    "MoveSPEED": 4,
+                    "Damages": [40000, 1],
+                    "DefFor0": 35242.3
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 25000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "LavaB5", "quantity": 1, "chance": 0.16, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsH10", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes5", "quantity": 7, "chance": 1e-06, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable26", "quantity": 1, "chance": 0.0033, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w5b5",
+                    "world": "Smolderin' Plateau",
+                    "map": <MapNameModel>{"intName": "wLavaB5", "name": "Spitfire River", "id": 210},
+                    "portalRequirements": [3000000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w5b4",
+                    "next": "w5b6",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal4",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w5b6", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Biggole Mole",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 72,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 25,
+                    "HeightOfMonster": 60,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 9,
+                    "RespawnTime": 45,
+                    "DeathFrame": 18,
+                    "MonsterHPTotal": 900000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 1000000,
+                    "ExpType": 0,
+                    "Defence": 36000,
+                    "MoveSPEED": 3,
+                    "Damages": [60000, 1],
+                    "DefFor0": 49629.3
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 29000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "LavaB6", "quantity": 1, "chance": 0.16, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsH11", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes5", "quantity": 22, "chance": 5e-07, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable26", "quantity": 1, "chance": 0.0035, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w5b6",
+                    "world": "Smolderin' Plateau",
+                    "map": <MapNameModel>{"intName": "wLavaB6", "name": "Miner Mole Outskirts", "id": 211},
+                    "portalRequirements": [6000000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w5b5",
+                    "next": "w5c1",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal4",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w5c1", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Crawler",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 73,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 24,
+                    "HeightOfMonster": 35,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 6,
+                    "RespawnTime": 42,
+                    "DeathFrame": 15,
+                    "MonsterHPTotal": 1200000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 1150000,
+                    "ExpType": 0,
+                    "Defence": 45000,
+                    "MoveSPEED": 4,
+                    "Damages": [2100, 1],
+                    "DefFor0": 2541.34
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 36000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "LavaC1", "quantity": 1, "chance": 0.16, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsH12", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable27", "quantity": 1, "chance": 0.0028, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w5c1",
+                    "world": "Smolderin' Plateau",
+                    "map": <MapNameModel>{"intName": "wLavaC1", "name": "Crawly Catacombs", "id": 212},
+                    "portalRequirements": [10000000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w5b6",
+                    "next": "w5c2",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal4",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w5c2", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Tremor Wurm",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 74,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 50,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 0,
+                    "RespawnTime": 47,
+                    "DeathFrame": 8,
+                    "MonsterHPTotal": 1500000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 1250000,
+                    "ExpType": 0,
+                    "Defence": 50000,
+                    "MoveSPEED": 2,
+                    "Damages": [2100, 1],
+                    "DefFor0": 2541.34
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 50000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "LavaC2", "quantity": 1, "chance": 0.16, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsH13", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "StampA37", "quantity": 1, "chance": 1e-06, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable27", "quantity": 1, "chance": 0.0035, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w5c2",
+                    "world": "Smolderin' Plateau",
+                    "map": <MapNameModel>{"intName": "wLavaC2", "name": "The Worm Nest", "id": 213},
+                    "portalRequirements": [60000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w5c1",
+                    "next": "Crystal4",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal4",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -4908,7 +5587,7 @@ export const initEnemyRepo = () => {
                 "drops": <EnemyTableModel>{
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 4000, "chance": 1, "questLink": "N/A"},
-                        <CardDropModel>{"item": "CardsZ16", "quantity": 1, "chance": 0.02, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsZ16", "quantity": 1, "chance": 0.002, "questLink": "N/A"},
                         <ItemDropModel>{"item": "ObolChizoarA", "quantity": 1, "chance": 0.01, "questLink": "N/A"},
                         <ItemDropModel>{"item": "EquipmentPendant24", "quantity": 1, "chance": 0.014, "questLink": "N/A"},
                         <ItemDropModel>{"item": "EquipmentCape5", "quantity": 1, "chance": 0.0003, "questLink": "N/A"},
@@ -5077,7 +5756,7 @@ export const initEnemyRepo = () => {
                 "mapData": undefined,
                 "navigation": <EnemyNavModel>{
                     "prev": "Boss4B",
-                    "next": "Blank",
+                    "next": "Boss5A",
                     "hasCrystal": true,
                     "crystalName": undefined,
                     "hasCard": true
@@ -5089,6 +5768,129 @@ export const initEnemyRepo = () => {
                     "keys": 60,
                     "attacks": [<BossAttackModel>{"name": "filler", "damage": 33000}]
                 }
+            }),
+        new EnemyBase("Boss5A", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Kattlecruk",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 4,
+                    "MonsterOffsetX": 42,
+                    "MonsterOffsetY": 28,
+                    "HeightOfMonster": 85,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 4,
+                    "RespawnTime": 86400,
+                    "DeathFrame": 13,
+                    "MonsterHPTotal": 1500000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "a",
+                    "ExpGiven": 12000,
+                    "ExpType": 0,
+                    "Defence": 600,
+                    "MoveSPEED": 3,
+                    "Damages": [1000, 1],
+                    "DefFor0": 1223.26
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 1000000, "chance": 1, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsZ18", "quantity": 1, "chance": 0.004, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable25", "quantity": 2, "chance": 1, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable26", "quantity": 2, "chance": 1, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable27", "quantity": 2, "chance": 1, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "Boss4C",
+                    "next": "Boss5B",
+                    "hasCrystal": true,
+                    "crystalName": undefined,
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("Boss5B", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Septic Kattlecruk",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 4,
+                    "MonsterOffsetX": 42,
+                    "MonsterOffsetY": 28,
+                    "HeightOfMonster": 85,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 4,
+                    "RespawnTime": 86400,
+                    "DeathFrame": 13,
+                    "MonsterHPTotal": 4e+10,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "a",
+                    "ExpGiven": 12000,
+                    "ExpType": 0,
+                    "Defence": 600,
+                    "MoveSPEED": 3,
+                    "Damages": [1000, 1],
+                    "DefFor0": 1223.26
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 5000000, "chance": 1, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsZ19", "quantity": 1, "chance": 0.002, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable25", "quantity": 2, "chance": 1, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable26", "quantity": 2, "chance": 1, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable27", "quantity": 2, "chance": 1, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "Boss5A",
+                    "next": "Boss5C",
+                    "hasCrystal": true,
+                    "crystalName": undefined,
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("Boss5C", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Undying Troll",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 4,
+                    "MonsterOffsetX": 42,
+                    "MonsterOffsetY": 28,
+                    "HeightOfMonster": 85,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 4,
+                    "RespawnTime": 86400,
+                    "DeathFrame": 13,
+                    "MonsterHPTotal": 2.5e+11,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "a",
+                    "ExpGiven": 12000,
+                    "ExpType": 0,
+                    "Defence": 600,
+                    "MoveSPEED": 3,
+                    "Damages": [1000, 1],
+                    "DefFor0": 1223.26
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 20000000, "chance": 1, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsZ20", "quantity": 1, "chance": 0.003, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable25", "quantity": 2, "chance": 1, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable26", "quantity": 2, "chance": 1, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable27", "quantity": 2, "chance": 1, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "Boss5B",
+                    "next": "Blank",
+                    "hasCrystal": true,
+                    "crystalName": undefined,
+                    "hasCard": true
+                },
+                "bossData": undefined
             }),
         new EnemyBase("poopBig", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
@@ -6314,7 +7116,7 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 2,
                     "ExpType": 1,
-                    "Defence": 30,
+                    "Defence": 25,
                     "MoveSPEED": 0,
                     "Damages": [0, 1],
                     "DefFor0": 0.22
@@ -6352,7 +7154,7 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 5,
                     "ExpType": 1,
-                    "Defence": 180,
+                    "Defence": 140,
                     "MoveSPEED": 0,
                     "Damages": [0, 1],
                     "DefFor0": 0.22
@@ -6390,7 +7192,7 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 10,
                     "ExpType": 1,
-                    "Defence": 1250,
+                    "Defence": 1000,
                     "MoveSPEED": 0,
                     "Damages": [0, 1],
                     "DefFor0": 0.22
@@ -6423,7 +7225,7 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 30,
                     "ExpType": 1,
-                    "Defence": 16000,
+                    "Defence": 7500,
                     "MoveSPEED": 0,
                     "Damages": [0, 1],
                     "DefFor0": 0.22
@@ -6461,7 +7263,7 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 55,
                     "ExpType": 1,
-                    "Defence": 150000,
+                    "Defence": 40000,
                     "MoveSPEED": 0,
                     "Damages": [0, 1],
                     "DefFor0": 0.22
@@ -6494,7 +7296,7 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 185,
                     "ExpType": 1,
-                    "Defence": 600000,
+                    "Defence": 100000,
                     "MoveSPEED": 0,
                     "Damages": [0, 1],
                     "DefFor0": 0.22
@@ -6532,7 +7334,7 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 250,
                     "ExpType": 1,
-                    "Defence": 2000000,
+                    "Defence": 250000,
                     "MoveSPEED": 0,
                     "Damages": [0, 1],
                     "DefFor0": 0.22
@@ -6565,7 +7367,7 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 500,
                     "ExpType": 1,
-                    "Defence": 5000000,
+                    "Defence": 1000000,
                     "MoveSPEED": 0,
                     "Damages": [0, 1],
                     "DefFor0": 0.22
@@ -6603,7 +7405,7 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 850,
                     "ExpType": 1,
-                    "Defence": 25000000,
+                    "Defence": 5000000,
                     "MoveSPEED": 0,
                     "Damages": [0, 1],
                     "DefFor0": 0.22
@@ -6611,7 +7413,8 @@ export const initEnemyRepo = () => {
                 "drops": <EnemyTableModel>{
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Grasslands2", "quantity": 2, "chance": 0.4, "questLink": "N/A"}
+                        <CardDropModel>{"item": "CardsF29", "quantity": 1, "chance": 3e-05, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable4", "quantity": 2, "chance": 0.013, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,
@@ -6635,7 +7438,7 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 1250,
                     "ExpType": 1,
-                    "Defence": 100000000,
+                    "Defence": 20000000,
                     "MoveSPEED": 0,
                     "Damages": [0, 1],
                     "DefFor0": 0.22
@@ -6898,7 +7701,7 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 150,
                     "ExpType": 3,
-                    "Defence": 20000,
+                    "Defence": 16000,
                     "MoveSPEED": 0,
                     "Damages": [0, 1],
                     "DefFor0": 0.22
@@ -6931,7 +7734,7 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 275,
                     "ExpType": 3,
-                    "Defence": 50000,
+                    "Defence": 30000,
                     "MoveSPEED": 0,
                     "Damages": [0, 1],
                     "DefFor0": 0.22
@@ -6964,7 +7767,7 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 500,
                     "ExpType": 3,
-                    "Defence": 100000,
+                    "Defence": 70000,
                     "MoveSPEED": 0,
                     "Damages": [0, 1],
                     "DefFor0": 0.22
@@ -6997,7 +7800,7 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 1250,
                     "ExpType": 3,
-                    "Defence": 250000,
+                    "Defence": 150000,
                     "MoveSPEED": 0,
                     "Damages": [0, 1],
                     "DefFor0": 0.22
@@ -7006,6 +7809,72 @@ export const initEnemyRepo = () => {
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsF12", "quantity": 1, "chance": 4e-05, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable22", "quantity": 1, "chance": 0.0089, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("Tree9", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Maple Tree",
+                    "AFKtype": AFKTypeEnum.Choppin,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 32,
+                    "MonsterOffsetY": 0,
+                    "HeightOfMonster": 100,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 5,
+                    "RespawnTime": 0,
+                    "DeathFrame": 11,
+                    "MonsterHPTotal": 5,
+                    "Type": EnemyTypeEnum.treeType,
+                    "SpecialType": "",
+                    "ExpGiven": 2500,
+                    "ExpType": 3,
+                    "Defence": 600000,
+                    "MoveSPEED": 0,
+                    "Damages": [0, 1],
+                    "DefFor0": 0.22
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsF24", "quantity": 1, "chance": 1e-05, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable22", "quantity": 1, "chance": 0.0089, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("Tree10", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Dandelioli Tree",
+                    "AFKtype": AFKTypeEnum.Choppin,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 32,
+                    "MonsterOffsetY": 0,
+                    "HeightOfMonster": 100,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 5,
+                    "RespawnTime": 0,
+                    "DeathFrame": 12,
+                    "MonsterHPTotal": 5,
+                    "Type": EnemyTypeEnum.treeType,
+                    "SpecialType": "",
+                    "ExpGiven": 6600,
+                    "ExpType": 3,
+                    "Defence": 2500000,
+                    "MoveSPEED": 0,
+                    "Damages": [0, 1],
+                    "DefFor0": 0.22
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsF25", "quantity": 1, "chance": 5e-06, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable22", "quantity": 1, "chance": 0.0089, "questLink": "N/A"}
                     ]
                 },
@@ -7599,6 +8468,70 @@ export const initEnemyRepo = () => {
                 "navigation": undefined,
                 "bossData": undefined
             }),
+        new EnemyBase("BugNest9", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Scarab Nest",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 32,
+                    "MonsterOffsetY": 30,
+                    "HeightOfMonster": 100,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 205,
+                    "RespawnTime": 86400,
+                    "DeathFrame": 8,
+                    "MonsterHPTotal": 999999999,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 2,
+                    "ExpType": 6,
+                    "Defence": 1,
+                    "MoveSPEED": 0,
+                    "Damages": [6, 1],
+                    "DefFor0": 2.67
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Grasslands2", "quantity": 2, "chance": 0, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("BugNest10", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Mote Hovel",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 32,
+                    "MonsterOffsetY": 30,
+                    "HeightOfMonster": 100,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 207,
+                    "RespawnTime": 86400,
+                    "DeathFrame": 9,
+                    "MonsterHPTotal": 999999999,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 2,
+                    "ExpType": 6,
+                    "Defence": 1,
+                    "MoveSPEED": 0,
+                    "Damages": [6, 1],
+                    "DefFor0": 2.67
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Grasslands2", "quantity": 2, "chance": 0, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
         new EnemyBase("Bug1", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
                     "Name": "Flies",
@@ -7616,7 +8549,7 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 2,
                     "ExpType": 6,
-                    "Defence": 50,
+                    "Defence": 40,
                     "MoveSPEED": 0,
                     "Damages": [6, 1],
                     "DefFor0": 2.67
@@ -7649,7 +8582,7 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 6,
                     "ExpType": 6,
-                    "Defence": 600,
+                    "Defence": 400,
                     "MoveSPEED": 0,
                     "Damages": [6, 1],
                     "DefFor0": 2.67
@@ -7688,7 +8621,7 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 10,
                     "ExpType": 6,
-                    "Defence": 2500,
+                    "Defence": 2000,
                     "MoveSPEED": 0,
                     "Damages": [6, 1],
                     "DefFor0": 2.67
@@ -7721,7 +8654,7 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 20,
                     "ExpType": 6,
-                    "Defence": 7000,
+                    "Defence": 6000,
                     "MoveSPEED": 0,
                     "Damages": [6, 1],
                     "DefFor0": 2.67
@@ -7754,7 +8687,7 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 40,
                     "ExpType": 6,
-                    "Defence": 18000,
+                    "Defence": 15000,
                     "MoveSPEED": 0,
                     "Damages": [6, 1],
                     "DefFor0": 2.67
@@ -7787,7 +8720,7 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 75,
                     "ExpType": 6,
-                    "Defence": 40000,
+                    "Defence": 35000,
                     "MoveSPEED": 0,
                     "Damages": [6, 1],
                     "DefFor0": 2.67
@@ -7863,6 +8796,72 @@ export const initEnemyRepo = () => {
                         <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsF15", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable23", "quantity": 1, "chance": 0.015, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("Bug9", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Scarab",
+                    "AFKtype": AFKTypeEnum.Catching,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 32,
+                    "MonsterOffsetY": 50,
+                    "HeightOfMonster": 100,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 1,
+                    "RespawnTime": 0,
+                    "DeathFrame": 7,
+                    "MonsterHPTotal": 5,
+                    "Type": EnemyTypeEnum.bugType,
+                    "SpecialType": "",
+                    "ExpGiven": 550,
+                    "ExpType": 6,
+                    "Defence": 500000,
+                    "MoveSPEED": 0,
+                    "Damages": [6, 1],
+                    "DefFor0": 2.67
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsF26", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable25", "quantity": 1, "chance": 0.015, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("Bug10", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Dust Mote",
+                    "AFKtype": AFKTypeEnum.Catching,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 32,
+                    "MonsterOffsetY": 50,
+                    "HeightOfMonster": 100,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 1,
+                    "RespawnTime": 0,
+                    "DeathFrame": 7,
+                    "MonsterHPTotal": 5,
+                    "Type": EnemyTypeEnum.bugType,
+                    "SpecialType": "",
+                    "ExpGiven": 1750,
+                    "ExpType": 6,
+                    "Defence": 2000000,
+                    "MoveSPEED": 0,
+                    "Damages": [6, 1],
+                    "DefFor0": 2.67
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsF27", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable26", "quantity": 1, "chance": 0.015, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,

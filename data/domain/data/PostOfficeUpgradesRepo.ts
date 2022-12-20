@@ -170,17 +170,33 @@ export const initPostOfficeUpgradesRepo = () => {
         new PostOfficeUpgradesBase("Myriad Crate", <PostOfficeUpgradesModel>{
                 "name": "Myriad Crate",
                 "bonuses": [
-                    <PostOfficeUpgradeModel>{"bonus": "Base All Stat", "x1": 40, "x2": 200, "func": "decay"},
-                    <PostOfficeUpgradeModel>{"bonus": "Base All Efficiency", "x1": 100, "x2": 200, "func": "decay"},
-                    <PostOfficeUpgradeModel>{"bonus": "% All Skills exp", "x1": 30, "x2": 200, "func": "decay"}
+                    <PostOfficeUpgradeModel>{"bonus": "Base All Stat", "x1": 400, "x2": 20000, "func": "decay"},
+                    <PostOfficeUpgradeModel>{"bonus": "Base All Efficiency", "x1": 1000, "x2": 20000, "func": "decay"},
+                    <PostOfficeUpgradeModel>{"bonus": "% All Skills exp", "x1": 100, "x2": 20000, "func": "decay"}
                 ]
             }),
-        new PostOfficeUpgradesBase("Filler", <PostOfficeUpgradesModel>{
-                "name": "Filler",
+        new PostOfficeUpgradesBase("Scurvy C'arr'ate", <PostOfficeUpgradesModel>{
+                "name": "Scurvy C'arr'ate",
                 "bonuses": [
-                    <PostOfficeUpgradeModel>{"bonus": "Nothing", "x1": 50, "x2": 200, "func": "decay"},
-                    <PostOfficeUpgradeModel>{"bonus": "Nothing", "x1": 0.25, "x2": 0, "func": "add"},
-                    <PostOfficeUpgradeModel>{"bonus": "Nothing", "x1": 65, "x2": 200, "func": "decay"}
+                    <PostOfficeUpgradeModel>{"bonus": "% afk counts for sailing", "x1": 8, "x2": 400, "func": "decay"},
+                    <PostOfficeUpgradeModel>{"bonus": "AGI", "x1": 0.2, "x2": 0, "func": "add"},
+                    <PostOfficeUpgradeModel>{"bonus": "% Total Damage", "x1": 25, "x2": 400, "func": "decay"}
+                ]
+            }),
+        new PostOfficeUpgradesBase("Box of Gosh", <PostOfficeUpgradesModel>{
+                "name": "Box of Gosh",
+                "bonuses": [
+                    <PostOfficeUpgradeModel>{"bonus": "% Divinity EXP", "x1": 75, "x2": 400, "func": "decay"},
+                    <PostOfficeUpgradeModel>{"bonus": "WIS", "x1": 0.2, "x2": 0, "func": "add"},
+                    <PostOfficeUpgradeModel>{"bonus": "% Divinity Gain", "x1": 30, "x2": 400, "func": "decay"}
+                ]
+            }),
+        new PostOfficeUpgradesBase("Gaming Lootcrate", <PostOfficeUpgradesModel>{
+                "name": "Gaming Lootcrate",
+                "bonuses": [
+                    <PostOfficeUpgradeModel>{"bonus": "% afk counts for gaming", "x1": 14, "x2": 400, "func": "decay"},
+                    <PostOfficeUpgradeModel>{"bonus": "STR", "x1": 0.2, "x2": 0, "func": "add"},
+                    <PostOfficeUpgradeModel>{"bonus": "% Total Damage", "x1": 25, "x2": 400, "func": "decay"}
                 ]
             })    
 ]

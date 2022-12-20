@@ -779,6 +779,59 @@ export const initVendorRepo = () => {
                         "purchasePrice": 200000000
                     }
                 ]
+            }),
+        new VendorsBase("Magma Rivertown", <VendorsModel>{
+                "items": [
+                    <VendorModel>{
+                        "vendor": "Magma Rivertown",
+                        "item": "FoodHealth14",
+                        "quantity": 7500000,
+                        "no": 1,
+                        "purchasePrice": 32000
+                    },
+                    <VendorModel>{
+                        "vendor": "Magma Rivertown",
+                        "item": "FoodHealth15",
+                        "quantity": 7500000,
+                        "no": 2,
+                        "purchasePrice": 64000
+                    },
+                    <VendorModel>{
+                        "vendor": "Magma Rivertown",
+                        "item": "OilBarrel6",
+                        "quantity": 200000,
+                        "no": 3,
+                        "purchasePrice": 12000000
+                    },
+                    <VendorModel>{
+                        "vendor": "Magma Rivertown",
+                        "item": "StoneW5",
+                        "quantity": 4,
+                        "no": 4,
+                        "purchasePrice": 24000000
+                    },
+                    <VendorModel>{
+                        "vendor": "Magma Rivertown",
+                        "item": "StoneA5",
+                        "quantity": 10,
+                        "no": 5,
+                        "purchasePrice": 12000000
+                    },
+                    <VendorModel>{
+                        "vendor": "Magma Rivertown",
+                        "item": "StoneT5",
+                        "quantity": 7,
+                        "no": 6,
+                        "purchasePrice": 16000000
+                    },
+                    <VendorModel>{
+                        "vendor": "Magma Rivertown",
+                        "item": "StampC22",
+                        "quantity": 1,
+                        "no": 7,
+                        "purchasePrice": 120000000
+                    }
+                ]
             })    
 ]
 }

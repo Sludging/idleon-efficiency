@@ -378,17 +378,17 @@ export const initMealRepo = () => {
                 "name": "Pumpkin",
                 "cookingReq": 1700000000,
                 "bonusQty": 2,
-                "bonusText": "+{% EXP from World 1 Mobs",
+                "bonusText": "+{% Liquid Cap for liquids 1 and 2",
                 "description": "According to the author of the Iliad, its value should peak right around January...",
-                "bonusKey": "non"
+                "bonusKey": "Liquid12"
             }),
         new MealBase(47, <MealModel>{
                 "name": "Cotton Candy",
                 "cookingReq": 4000000000,
                 "bonusQty": 2,
-                "bonusText": "+{% EXP from World 1 Mobs",
+                "bonusText": "+{% Divinity EXP",
                 "description": "The most exquisite of fairground cuisine!",
-                "bonusKey": "non"
+                "bonusKey": "DivExp"
             }),
         new MealBase(48, <MealModel>{
                 "name": "Massive Fig",
@@ -399,68 +399,68 @@ export const initMealRepo = () => {
                 "bonusKey": "TotDmg"
             }),
         new MealBase(49, <MealModel>{
-                "name": "Turkey a la Thank",
-                "cookingReq": 50000000000,
-                "bonusQty": 2,
-                "bonusText": "+{% EXP from World 1 Mobs",
-                "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.",
-                "bonusKey": "non"
+                "name": "Head Chef Bread",
+                "cookingReq": 10000000000,
+                "bonusQty": 4,
+                "bonusText": "+{% Bits Gained in Gaming",
+                "description": "How DARE you question the honorable Chef Geustloaf's cooking abilities!",
+                "bonusKey": "GamingBits"
             }),
         new MealBase(50, <MealModel>{
-                "name": "Turkey a la Thank",
-                "cookingReq": 50000000000,
+                "name": "Kiwi Fruit",
+                "cookingReq": 14000000000,
                 "bonusQty": 2,
-                "bonusText": "+{% EXP from World 1 Mobs",
-                "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.",
-                "bonusKey": "non"
+                "bonusText": "+{% Liquid Cap for liquids 3 and 4",
+                "description": "Is there a reason these are so hard to cook? Are you just like... cutting it in half?",
+                "bonusKey": "Liquid34"
             }),
         new MealBase(51, <MealModel>{
-                "name": "Turkey a la Thank",
-                "cookingReq": 50000000000,
+                "name": "Popped Corn",
+                "cookingReq": 20000000000,
                 "bonusQty": 2,
-                "bonusText": "+{% EXP from World 1 Mobs",
-                "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.",
-                "bonusKey": "non"
+                "bonusText": "+{% Sailing Speed",
+                "description": "Effectively no different than a normal bowl of popcorn, but it's still impressive!",
+                "bonusKey": "Sailing"
             }),
         new MealBase(52, <MealModel>{
-                "name": "Turkey a la Thank",
-                "cookingReq": 50000000000,
-                "bonusQty": 2,
-                "bonusText": "+{% EXP from World 1 Mobs",
-                "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.",
-                "bonusKey": "non"
+                "name": "Double Cherry",
+                "cookingReq": 32000000000,
+                "bonusQty": 30,
+                "bonusText": "+{% Meal Cooking Speed",
+                "description": "So like... why did the yellow circle want these again? This bonus is pretty bad.",
+                "bonusKey": "Mcook"
             }),
         new MealBase(53, <MealModel>{
-                "name": "Turkey a la Thank",
-                "cookingReq": 50000000000,
-                "bonusQty": 2,
-                "bonusText": "+{% EXP from World 1 Mobs",
-                "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.",
-                "bonusKey": "non"
+                "name": "Ratatouey",
+                "cookingReq": 52000000000,
+                "bonusQty": 8,
+                "bonusText": "+{% Lower Kitchen Upgrade costs",
+                "description": "Hey cmon man how should I know how to spell Ratatouille, there's no France remember?",
+                "bonusKey": "KitchC"
             }),
         new MealBase(54, <MealModel>{
-                "name": "Turkey a la Thank",
-                "cookingReq": 50000000000,
-                "bonusQty": 2,
-                "bonusText": "+{% EXP from World 1 Mobs",
-                "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.",
-                "bonusKey": "non"
+                "name": "Giant Tomato",
+                "cookingReq": 90000000000,
+                "bonusQty": 5,
+                "bonusText": "+{% Gaming EXP",
+                "description": "It's big, it's large, it's round, it's red, and it'll fill you up thats for sure!",
+                "bonusKey": "GamingExp"
             }),
         new MealBase(55, <MealModel>{
-                "name": "Turkey a la Thank",
-                "cookingReq": 50000000000,
-                "bonusQty": 2,
-                "bonusText": "+{% EXP from World 1 Mobs",
-                "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.",
-                "bonusKey": "non"
+                "name": "Wrath Grapes",
+                "cookingReq": 130000000000,
+                "bonusQty": 4,
+                "bonusText": "+{% Divinity EXP",
+                "description": "I'd be angry too if I were a grape.",
+                "bonusKey": "DivExp"
             }),
         new MealBase(56, <MealModel>{
-                "name": "Turkey a la Thank",
-                "cookingReq": 50000000000,
-                "bonusQty": 2,
-                "bonusText": "+{% EXP from World 1 Mobs",
-                "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.",
-                "bonusKey": "non"
+                "name": "Sausy Sausage",
+                "cookingReq": 225000000000,
+                "bonusQty": 6,
+                "bonusText": "+{% Bits Gained in Gaming",
+                "description": "Plump innit! Would go great with some mommy milk!",
+                "bonusKey": "GamingBits"
             }),
         new MealBase(57, <MealModel>{
                 "name": "Turkey a la Thank",
