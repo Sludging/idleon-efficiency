@@ -269,6 +269,20 @@ export const initQuestNameRepo = () => {
         new QuestNameBase("Blobbo4", <QuestNameModel>{"name": "Glitter Critter", "difficulty": 5}),
         new QuestNameBase("Nebula Neddy2", <QuestNameModel>{"name": "Task Requirement Affirmative", "difficulty": 4}),
         new QuestNameBase("Eliteus2", <QuestNameModel>{"name": "The Greenie Gucci Gang", "difficulty": 5}),
-        new QuestNameBase("Eliteus4", <QuestNameModel>{"name": "Elite Class for the Elites in Class", "difficulty": 5})    
+        new QuestNameBase("Eliteus4", <QuestNameModel>{"name": "Elite Class for the Elites in Class", "difficulty": 5}),
+        new QuestNameBase("Slargon3", <QuestNameModel>{"name": "Shut up the Namecallers!", "difficulty": 2}),
+        new QuestNameBase("Slargon6", <QuestNameModel>{"name": "Smack the meanies!", "difficulty": 4}),
+        new QuestNameBase("Slargon9", <QuestNameModel>{"name": "Mess with the Misters!", "difficulty": 5}),
+        new QuestNameBase("Slargon12", <QuestNameModel>{"name": "Assert Dominance over the Meek!", "difficulty": 7}),
+        new QuestNameBase("Pirate Porkchop2", <QuestNameModel>{"name": "Bring me the Booty", "difficulty": 2}),
+        new QuestNameBase("Pirate Porkchop5", <QuestNameModel>{"name": "Sailing for some Sparks", "difficulty": 3}),
+        new QuestNameBase("Pirate Porkchop8", <QuestNameModel>{"name": "Seeking Treasure Shrooms", "difficulty": 6}),
+        new QuestNameBase("Pirate Porkchop11", <QuestNameModel>{"name": "Ye finest treasure at once!", "difficulty": 8}),
+        new QuestNameBase("Poigu1", <QuestNameModel>{"name": "Think twice speak once", "difficulty": 3}),
+        new QuestNameBase("Poigu4", <QuestNameModel>{"name": "Speak from the heart not the mind", "difficulty": 5}),
+        new QuestNameBase("Poigu7", <QuestNameModel>{"name": "Learn the Language of the Universe", "difficulty": 8}),
+        new QuestNameBase("Muhmuguh2", <QuestNameModel>{"name": "Wave after wave slowly Sailing", "difficulty": 1}),
+        new QuestNameBase("Muhmuguh6", <QuestNameModel>{"name": "Rising up and Growing as a Gamer", "difficulty": 1}),
+        new QuestNameBase("Muhmuguh10", <QuestNameModel>{"name": "Learn the Language of the Universe", "difficulty": 2})    
 ]
 }

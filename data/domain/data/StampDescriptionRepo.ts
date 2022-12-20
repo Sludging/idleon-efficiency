@@ -39,7 +39,12 @@ export const initStampDescriptionRepo = () => {
                     "+{ Base Damage",
                     "+{% Total Damage",
                     "+{ Base Accuracy",
-                    "+{ Base HP"
+                    "+{ Base HP",
+                    "+{ STR",
+                    "+{ AGI",
+                    "+{ WIS",
+                    "+{ LUK",
+                    "+{% Total Damage"
                 ]
             }),
         new StampDescriptionBase("Skills Stamp", <StampDescriptionModel>{
@@ -85,7 +90,11 @@ export const initStampDescriptionRepo = () => {
                     "+{ Cooking Efficiency",
                     "+{% Breeding EXP Gain",
                     "+{% New Pet Chance",
-                    "+{% Lab Exp Gain"
+                    "+{% Lab Exp Gain",
+                    "+{% Sailing Speed",
+                    "+{% Gaming EXP Gain",
+                    "+{% Divinity EXP Gain",
+                    "+{ All Skill Efficiency"
                 ]
             }),
         new StampDescriptionBase("Misc Stamp", <StampDescriptionModel>{
@@ -110,7 +119,8 @@ export const initStampDescriptionRepo = () => {
                     "+{ Talent Points for Star Tab",
                     "+{% Base Multikill Rate, for all worlds.",
                     "+{% Talent Book Library Refresh Speed",
-                    "+{% DNA gained from Splicing"
+                    "+{% DNA gained from Splicing",
+                    "+{% Faster refinery cycles"
                 ]
             })    
 ]

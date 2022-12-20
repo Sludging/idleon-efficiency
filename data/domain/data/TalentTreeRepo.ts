@@ -1319,14 +1319,14 @@ export const initTalentTreeRepo = () => {
                     },
                     "Worming Undercover": <TalentModel>{
                         "name": "Worming Undercover",
-                        "description": "{% chance to wake the sleeper agent worm within the fish, letting you instantly catch",
-                        "x1": 9.3,
-                        "x2": 0.7,
-                        "funcX": "bigBase",
-                        "y1": 0,
-                        "y2": 0,
-                        "funcY": "txt",
-                        "lvlUpText": "+1% Chance",
+                        "description": "{% chance",
+                        "x1": -1,
+                        "x2": -1,
+                        "funcX": "9.3",
+                        "y1": 0.7,
+                        "y2": -1,
+                        "funcY": "_",
+                        "lvlUpText": "",
                         "skillIndex": 115,
                         "activeData": <ActiveTalentModel>{
                             "name": "Worming Undercover",
@@ -1659,7 +1659,7 @@ export const initTalentTreeRepo = () => {
                 "talents": {
                     "Fired Up": <TalentModel>{
                         "name": "Fired Up",
-                        "description": "Inflame yourself, boosting attack spd. Attacks refresh flame, but you move super slow.",
+                        "description": "Inflame yourself, boosting attack spd. Basic attacks refresh time you are inflamed.",
                         "x1": 5,
                         "x2": 25,
                         "funcX": "intervalAdd",

@@ -627,14 +627,14 @@ export const initGemShopRepo = () => {
                 "costIncrement": 12
             }),
         new GemShopItemBase(62, <GemShopItemModel>{
-                "name": "Blank",
-                "itemName": "Name Of Item",
-                "desc": "DESCRIPTION OF ITEM",
-                "cost": -1,
-                "no": 61,
-                "maxPurchases": 1,
-                "qty": 1,
-                "costIncrement": 0
+                "name": "GemQ9",
+                "itemName": "Card Presets",
+                "desc": "Lets you swap between different card loadouts with ease! No more manually swapping cards around when doing different things! Each purchase gives +1 preset for ALL characters!",
+                "cost": 250,
+                "no": 66,
+                "maxPurchases": 5,
+                "qty": 0,
+                "costIncrement": 160
             }),
         new GemShopItemBase(63, <GemShopItemModel>{
                 "name": "Blank",
@@ -769,7 +769,7 @@ export const initGemShopRepo = () => {
         new GemShopItemBase(76, <GemShopItemModel>{
                 "name": "GemP3",
                 "itemName": "Extra Card Slot",
-                "desc": "Lets you equip another card, so you can have more card bonuses! This applies to all characters.",
+                "desc": "Lets you equip another card, so you can have more card bonuses! This applies to all characters, and is recommended before buying card packs!",
                 "cost": 150,
                 "no": 63,
                 "maxPurchases": 4,
@@ -777,14 +777,14 @@ export const initGemShopRepo = () => {
                 "costIncrement": 40
             }),
         new GemShopItemBase(77, <GemShopItemModel>{
-                "name": "GemQ9",
-                "itemName": "Card Presets",
-                "desc": "Lets you swap between different card loadouts with ease! No more manually swapping cards around when doing different things! Each purchase gives +1 preset for ALL characters!",
-                "cost": 250,
-                "no": 66,
-                "maxPurchases": 5,
-                "qty": 0,
-                "costIncrement": 160
+                "name": "CardPack4",
+                "itemName": "Dungeon Card Pack",
+                "desc": "Contains 3 cards from the dungeon set.",
+                "cost": 475,
+                "no": 70,
+                "maxPurchases": 100000,
+                "qty": 1,
+                "costIncrement": 0
             }),
         new GemShopItemBase(78, <GemShopItemModel>{
                 "name": "GemQ17",
@@ -797,11 +797,11 @@ export const initGemShopRepo = () => {
                 "costIncrement": 0
             }),
         new GemShopItemBase(79, <GemShopItemModel>{
-                "name": "CardPack4",
-                "itemName": "Dungeon Card Pack",
-                "desc": "Contains 3 cards from the dungeon set.",
-                "cost": 475,
-                "no": 70,
+                "name": "CardPack6",
+                "itemName": "Smolderin Card Pack",
+                "desc": "Blah",
+                "cost": 690,
+                "no": 61,
                 "maxPurchases": 100000,
                 "qty": 1,
                 "costIncrement": 0
@@ -1287,74 +1287,74 @@ export const initGemShopRepo = () => {
                 "costIncrement": 0
             }),
         new GemShopItemBase(128, <GemShopItemModel>{
-                "name": "Blank",
-                "itemName": "Name Of Item",
-                "desc": "DESCRIPTION OF ITEM",
-                "cost": -1,
+                "name": "GemP20",
+                "itemName": "Miracle Chest",
+                "desc": "Gives you 1 Miracle Chest from a random island! These have 20x more treasure and 30x higher     Artifact chance, including Ancient Artifacts!              This item restocks each day.",
+                "cost": 345,
                 "no": 127,
-                "maxPurchases": 1,
-                "qty": 1,
+                "maxPurchases": 3,
+                "qty": 0,
                 "costIncrement": 0
             }),
         new GemShopItemBase(129, <GemShopItemModel>{
-                "name": "Blank",
-                "itemName": "Name Of Item",
-                "desc": "DESCRIPTION OF ITEM",
-                "cost": -1,
+                "name": "Quest72",
+                "itemName": "Bottled Wind",
+                "desc": "Gives you a bottled wind item. Use it in your       player inventory to instantly get 6 hours of                           sailing progress!                       This item restocks each day.",
+                "cost": 190,
                 "no": 128,
-                "maxPurchases": 1,
+                "maxPurchases": 4,
                 "qty": 1,
                 "costIncrement": 0
             }),
         new GemShopItemBase(130, <GemShopItemModel>{
-                "name": "Blank",
-                "itemName": "Name Of Item",
-                "desc": "DESCRIPTION OF ITEM",
-                "cost": -1,
+                "name": "GemP21",
+                "itemName": "Chest Sluggo",
+                "desc": "Increases the maximum number of chests your sailing Loot Pile can hold by +1! Also adds a Chest Sluggo to roam around your dock! (Note:Not every purchase will visually add another slug, it'd be too chaotic!)",
+                "cost": 250,
                 "no": 129,
-                "maxPurchases": 1,
-                "qty": 1,
-                "costIncrement": 0
+                "maxPurchases": 8,
+                "qty": 0,
+                "costIncrement": 40
             }),
         new GemShopItemBase(131, <GemShopItemModel>{
-                "name": "Blank",
-                "itemName": "Name Of Item",
-                "desc": "DESCRIPTION OF ITEM",
-                "cost": -1,
+                "name": "GemP22",
+                "itemName": "Divinity Sparkie",
+                "desc": "Boosts the amount of Divinity Points and Divinity EXP gained by +25% for all of your players! Also adds a divinity sparkie that wanders around the deity volcanos, pondering its existence.",
+                "cost": 250,
                 "no": 130,
-                "maxPurchases": 1,
-                "qty": 1,
-                "costIncrement": 0
+                "maxPurchases": 6,
+                "qty": 0,
+                "costIncrement": 50
             }),
         new GemShopItemBase(132, <GemShopItemModel>{
-                "name": "Blank",
-                "itemName": "Name Of Item",
-                "desc": "DESCRIPTION OF ITEM",
-                "cost": -1,
+                "name": "GemP23",
+                "itemName": "Golden Sprinkler",
+                "desc": "The Sprinkler in the garden, which instantly regrows sprouts, now has a 30% chance to not use up its charge! Each additional purchase boosts this chance by 1.5x! Instantly unlocks Sprinkler if not unlocked yet!",
+                "cost": 400,
                 "no": 131,
-                "maxPurchases": 1,
-                "qty": 1,
-                "costIncrement": 0
+                "maxPurchases": 4,
+                "qty": 0,
+                "costIncrement": 75
             }),
         new GemShopItemBase(133, <GemShopItemModel>{
-                "name": "Blank",
-                "itemName": "Name Of Item",
-                "desc": "DESCRIPTION OF ITEM",
-                "cost": -1,
+                "name": "Quest73",
+                "itemName": "Gaming Fertilizer",
+                "desc": "Gives you a gaming fertilizer item. Use it in your    player inventory to instantly get 8 hours of                         gaming progress!                     This item restocks each day.",
+                "cost": 230,
                 "no": 132,
-                "maxPurchases": 1,
+                "maxPurchases": 4,
                 "qty": 1,
                 "costIncrement": 0
             }),
         new GemShopItemBase(134, <GemShopItemModel>{
-                "name": "Blank",
-                "itemName": "Name Of Item",
-                "desc": "DESCRIPTION OF ITEM",
-                "cost": -1,
+                "name": "GemP24",
+                "itemName": "Lava Sprouts",
+                "desc": "Increases the maximum number of sprouts your garden can hold by +1! Also adds a small lava sprout to your underground gamer lair, which complements the dankness of the ground walls!",
+                "cost": 310,
                 "no": 133,
-                "maxPurchases": 1,
-                "qty": 1,
-                "costIncrement": 0
+                "maxPurchases": 6,
+                "qty": 0,
+                "costIncrement": 70
             }),
         new GemShopItemBase(135, <GemShopItemModel>{
                 "name": "Blank",

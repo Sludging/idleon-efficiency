@@ -243,6 +243,56 @@ export const initBubbleRepo = () => {
                 "requirements": [<ComponentModel>{"item": "GalaxyC4", "quantity": 200}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
                 "bonusKey": "nonFoodACTIVE"
             }),
+        new BubbleBase("Spear Powah", <BubbleModel>{
+                "cauldron": "Power Cauldron",
+                "name": "Spear Powah",
+                "x1": 40,
+                "x2": 60,
+                "func": "decay",
+                "description": "+{% more Weapon Power from your weapon, but only if its a Spear!",
+                "requirements": [<ComponentModel>{"item": "Bits", "quantity": 10000}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
+                "bonusKey": "W1"
+            }),
+        new BubbleBase("Slabi Orefish", <BubbleModel>{
+                "cauldron": "Power Cauldron",
+                "name": "Slabi Orefish",
+                "x1": 3,
+                "x2": 60,
+                "func": "decay",
+                "description": "+{ Mining and Fishing Power per 100 items found, shown on The Slab!",
+                "requirements": [<ComponentModel>{"item": "Soul6", "quantity": 150}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
+                "bonusKey": "W2"
+            }),
+        new BubbleBase("Gamer At Heart", <BubbleModel>{
+                "cauldron": "Power Cauldron",
+                "name": "Gamer At Heart",
+                "x1": 60,
+                "x2": 60,
+                "func": "decay",
+                "description": "When claiming AFK Gains, +{% chance to gain an equal amount of time for Gaming progress!",
+                "requirements": [<ComponentModel>{"item": "SailTr10", "quantity": 100}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
+                "bonusKey": "W3ACTIVE"
+            }),
+        new BubbleBase("Slabi Strength", <BubbleModel>{
+                "cauldron": "Power Cauldron",
+                "name": "Slabi Strength",
+                "x1": 25,
+                "x2": 60,
+                "func": "decay",
+                "description": "+{ Base STR per 100 items found, shown on The Slab!",
+                "requirements": [<ComponentModel>{"item": "LavaB3b", "quantity": 2}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
+                "bonusKey": "W4"
+            }),
+        new BubbleBase("Power Trione", <BubbleModel>{
+                "cauldron": "Power Cauldron",
+                "name": "Power Trione",
+                "x1": 23,
+                "x2": 50,
+                "func": "decay",
+                "description": "+{% Total Damage per 250 STR, but only for warriors! No triple dipping into AGI and WIS! Also this, but for beginners with LUK!",
+                "requirements": [<ComponentModel>{"item": "SailTr21", "quantity": 150}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
+                "bonusKey": "W5"
+            }),
         new BubbleBase("Swift Steppin", <BubbleModel>{
                 "cauldron": "Quicc Cauldron",
                 "name": "Swift Steppin",
@@ -476,6 +526,56 @@ export const initBubbleRepo = () => {
                 "description": "+{% chance for Double EXP when claiming AFK gains. You'll know this happens because it literally tells you it happened!",
                 "requirements": [<ComponentModel>{"item": "Bug8", "quantity": 300}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
                 "bonusKey": "DubEXP"
+            }),
+        new BubbleBase("Bow Power", <BubbleModel>{
+                "cauldron": "Quicc Cauldron",
+                "name": "Bow Power",
+                "x1": 40,
+                "x2": 60,
+                "func": "decay",
+                "description": "+{% more Weapon Power from your weapon, but only if its a Bow!",
+                "requirements": [<ComponentModel>{"item": "Bits", "quantity": 10000}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
+                "bonusKey": "A1"
+            }),
+        new BubbleBase("Slabo Critterbug", <BubbleModel>{
+                "cauldron": "Quicc Cauldron",
+                "name": "Slabo Critterbug",
+                "x1": 3,
+                "x2": 60,
+                "func": "decay",
+                "description": "+{ Catching and Trapping Power per 100 items found, shown on The Slab!",
+                "requirements": [<ComponentModel>{"item": "Tree9", "quantity": 500}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
+                "bonusKey": "A2"
+            }),
+        new BubbleBase("Sailor At Heart", <BubbleModel>{
+                "cauldron": "Quicc Cauldron",
+                "name": "Sailor At Heart",
+                "x1": 50,
+                "x2": 60,
+                "func": "decay",
+                "description": "When claiming AFK Gains, +{% chance to gain an equal amount of time for Sailing progress!",
+                "requirements": [<ComponentModel>{"item": "SailTr12", "quantity": 100}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
+                "bonusKey": "A3ACTIVE"
+            }),
+        new BubbleBase("Slabo Agility", <BubbleModel>{
+                "cauldron": "Quicc Cauldron",
+                "name": "Slabo Agility",
+                "x1": 25,
+                "x2": 60,
+                "func": "decay",
+                "description": "+{ Base AGI and LUK per 100 items found, shown on The Slab! Woah cool this is like a Archer Beginner crossover bubble!",
+                "requirements": [<ComponentModel>{"item": "LavaB6", "quantity": 250}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
+                "bonusKey": "A4"
+            }),
+        new BubbleBase("Power Tritwo", <BubbleModel>{
+                "cauldron": "Quicc Cauldron",
+                "name": "Power Tritwo",
+                "x1": 23,
+                "x2": 50,
+                "func": "decay",
+                "description": "+{% Total Damage per 250 AGI, but only for archers! No triple dipping into STR and WIS!",
+                "requirements": [<ComponentModel>{"item": "SailTr25", "quantity": 150}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
+                "bonusKey": "A5"
             }),
         new BubbleBase("Stable Jenius", <BubbleModel>{
                 "cauldron": "High-IQ Cauldron",
@@ -711,6 +811,56 @@ export const initBubbleRepo = () => {
                 "requirements": [<ComponentModel>{"item": "Tree8", "quantity": 250}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
                 "bonusKey": "LabXpACTIVE"
             }),
+        new BubbleBase("Wand Pawur", <BubbleModel>{
+                "cauldron": "High-IQ Cauldron",
+                "name": "Wand Pawur",
+                "x1": 40,
+                "x2": 60,
+                "func": "decay",
+                "description": "+{% more Weapon Power from your weapon, but only if its a Wand! Or a fisticuff I guess...",
+                "requirements": [<ComponentModel>{"item": "Bits", "quantity": 10000}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
+                "bonusKey": "M1"
+            }),
+        new BubbleBase("Slabe Logsoul", <BubbleModel>{
+                "cauldron": "High-IQ Cauldron",
+                "name": "Slabe Logsoul",
+                "x1": 3,
+                "x2": 60,
+                "func": "decay",
+                "description": "+{ Choppin and Worship Power per 100 items found, shown on The Slab!",
+                "requirements": [<ComponentModel>{"item": "Bug9", "quantity": 250}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
+                "bonusKey": "M2"
+            }),
+        new BubbleBase("Pious At Heart", <BubbleModel>{
+                "cauldron": "High-IQ Cauldron",
+                "name": "Pious At Heart",
+                "x1": 300,
+                "x2": 100,
+                "func": "decay",
+                "description": "+{% Divinity EXP Gain",
+                "requirements": [<ComponentModel>{"item": "SailTr14", "quantity": 15}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
+                "bonusKey": "M3ACTIVE"
+            }),
+        new BubbleBase("Slabe Wisdom", <BubbleModel>{
+                "cauldron": "High-IQ Cauldron",
+                "name": "Slabe Wisdom",
+                "x1": 25,
+                "x2": 60,
+                "func": "decay",
+                "description": "+{ Base WIS per 100 items found, shown on The Slab!",
+                "requirements": [<ComponentModel>{"item": "LavaC1", "quantity": 200}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
+                "bonusKey": "M4"
+            }),
+        new BubbleBase("Power Trithree", <BubbleModel>{
+                "cauldron": "High-IQ Cauldron",
+                "name": "Power Trithree",
+                "x1": 23,
+                "x2": 50,
+                "func": "decay",
+                "description": "+{% Total Damage per 250 WIS, but only for mages! No triple dipping into STR and AGI! Also, beginners get this bonus, but for LUK",
+                "requirements": [<ComponentModel>{"item": "SailTr29", "quantity": 200}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
+                "bonusKey": "M5"
+            }),
         new BubbleBase("Lotto Skills", <BubbleModel>{
                 "cauldron": "Kazam Cauldron",
                 "name": "Lotto Skills",
@@ -936,6 +1086,56 @@ export const initBubbleRepo = () => {
                 "description": "{x New Pet Chance for every gap you traverse in the SpaceTime Rift. The Rift entrance is deep in World 4, far above the 8 armed octodars.",
                 "requirements": [<ComponentModel>{"item": "Critter10", "quantity": 100}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
                 "bonusKey": "NewPetRift"
+            }),
+        new BubbleBase("Boaty Bubble", <BubbleModel>{
+                "cauldron": "Kazam Cauldron",
+                "name": "Boaty Bubble",
+                "x1": 160,
+                "x2": 70,
+                "func": "decay",
+                "description": "+{% Sailing Speed for all boats",
+                "requirements": [<ComponentModel>{"item": "Bits", "quantity": 5000}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
+                "bonusKey": "Y1"
+            }),
+        new BubbleBase("Big P", <BubbleModel>{
+                "cauldron": "Kazam Cauldron",
+                "name": "Big P",
+                "x1": 0.5,
+                "x2": 60,
+                "func": "decayMulti",
+                "description": "{x higher bonus than displayed from the passive bonus of the deity you're linked to in Divinity. AKA bigger god passive!",
+                "requirements": [<ComponentModel>{"item": "SailTr1", "quantity": 50}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
+                "bonusKey": "Y2ACTIVE"
+            }),
+        new BubbleBase("Bit By Bit", <BubbleModel>{
+                "cauldron": "Kazam Cauldron",
+                "name": "Bit By Bit",
+                "x1": 40,
+                "x2": 70,
+                "func": "decay",
+                "description": "+{% more bits earned in gaming per plant found, as shown in the Log Book found in the top right of the gaming garden!",
+                "requirements": [<ComponentModel>{"item": "Tree10", "quantity": 200}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
+                "bonusKey": "Y3"
+            }),
+        new BubbleBase("Gifts Abound", <BubbleModel>{
+                "cauldron": "Kazam Cauldron",
+                "name": "Gifts Abound",
+                "x1": 40,
+                "x2": 60,
+                "func": "decay",
+                "description": "+{% chance to not use up Divinity points when offering a gift!",
+                "requirements": [<ComponentModel>{"item": "Bug10", "quantity": 200}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
+                "bonusKey": "Y4"
+            }),
+        new BubbleBase("Atom Split", <BubbleModel>{
+                "cauldron": "Kazam Cauldron",
+                "name": "Atom Split",
+                "x1": 50,
+                "x2": 60,
+                "func": "decay",
+                "description": "+{% chance to gain 2x atoms from the Supercollider",
+                "requirements": [<ComponentModel>{"item": "LavaC2", "quantity": 250}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
+                "bonusKey": "Y5"
             }),
         new BubbleBase("Copper Corona", <BubbleModel>{
                 "cauldron": "Vials",
@@ -1456,6 +1656,86 @@ export const initBubbleRepo = () => {
                 "description": "+{% Pet Team Damage",
                 "requirements": [<ComponentModel>{"item": "GalaxyC4", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "3", "quantity": -1}],
                 "bonusKey": "PetDmg"
+            }),
+        new BubbleBase("Ash Agua", <BubbleModel>{
+                "cauldron": "Vials",
+                "name": "Ash Agua",
+                "x1": 2,
+                "x2": 0,
+                "func": "add",
+                "description": "+{ Talent Points for Tab 4",
+                "requirements": [<ComponentModel>{"item": "LavaA1", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "3", "quantity": -1}],
+                "bonusKey": "Tab4Pts"
+            }),
+        new BubbleBase("Maple Syrup", <BubbleModel>{
+                "cauldron": "Vials",
+                "name": "Maple Syrup",
+                "x1": 2,
+                "x2": 0,
+                "func": "add",
+                "description": "+{% Divinity EXP. Maple syrup helps me keep calm and meditate with the divine, eh? No wonder those Canadians sure are nice and calm people!",
+                "requirements": [<ComponentModel>{"item": "Tree9", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "3", "quantity": -1}],
+                "bonusKey": "DivXP"
+            }),
+        new BubbleBase("Hampter Drippy", <BubbleModel>{
+                "cauldron": "Vials",
+                "name": "Hampter Drippy",
+                "x1": 2,
+                "x2": 0,
+                "func": "add",
+                "description": "+{% Sailing EXP gain. Doesn't help level up captains, only yourself. So yea, I'm basically saying you're a crappy captain haha!",
+                "requirements": [<ComponentModel>{"item": "LavaA5b", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "3", "quantity": -1}],
+                "bonusKey": "SailXP"
+            }),
+        new BubbleBase("Dreadnog", <BubbleModel>{
+                "cauldron": "Vials",
+                "name": "Dreadnog",
+                "x1": 2,
+                "x2": 0,
+                "func": "add",
+                "description": "+{% Cooking Speed for meals. No, MEALS, not meel, dont cook him!! Stop!! STOP!!!!",
+                "requirements": [<ComponentModel>{"item": "DreadloBar", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "3", "quantity": -1}],
+                "bonusKey": "MealCook"
+            }),
+        new BubbleBase("Dusted Drink", <BubbleModel>{
+                "cauldron": "Vials",
+                "name": "Dusted Drink",
+                "x1": 2,
+                "x2": 0,
+                "func": "add",
+                "description": "+{% Gaming EXP. Cool.",
+                "requirements": [<ComponentModel>{"item": "Bug10", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "3", "quantity": -1}],
+                "bonusKey": "GameXP"
+            }),
+        new BubbleBase("Oj Jooce", <BubbleModel>{
+                "cauldron": "Vials",
+                "name": "Oj Jooce",
+                "x1": 2,
+                "x2": 0,
+                "func": "add",
+                "description": "+{% Sailing Speed. If only there was a way to also lower the minimum sailing time... I'm sure you'll find it eventually...",
+                "requirements": [<ComponentModel>{"item": "LavaB3", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "3", "quantity": -1}],
+                "bonusKey": "SailSpd"
+            }),
+        new BubbleBase("Oozie Ooblek", <BubbleModel>{
+                "cauldron": "Vials",
+                "name": "Oozie Ooblek",
+                "x1": 2,
+                "x2": 0,
+                "func": "add",
+                "description": "+{% Bits gained in Gaming. Cool.",
+                "requirements": [<ComponentModel>{"item": "Soul6", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "3", "quantity": -1}],
+                "bonusKey": "GameBits"
+            }),
+        new BubbleBase("Venison Malt", <BubbleModel>{
+                "cauldron": "Vials",
+                "name": "Venison Malt",
+                "x1": 2,
+                "x2": 0,
+                "func": "add",
+                "description": "-{% material cost for stamps. Have at it endgamers!",
+                "requirements": [<ComponentModel>{"item": "LavaC2", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "3", "quantity": -1}],
+                "bonusKey": "MatCostStamp"
             }),
         new BubbleBase("Mediocre Obols", <BubbleModel>{
                 "cauldron": "Liquid Shop",
