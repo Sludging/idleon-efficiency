@@ -237,7 +237,7 @@ function Quests() {
                     <TabButton isActive={activeWorld == "Events"} text="Events" clickHandler={() => { setActiveWorld("Events"); onActive(1) }} />
                 </Box>
                 <Box pad={{ horizontal: "large", top: "small" }}>
-                    <Text size="xsmall">* Exp and Coin rewards currently don't display properly, it's a known issue.</Text>
+                    <Text size="xsmall">* Exp and Coin rewards currently don&apos;t display properly, it&apos;s a known issue.</Text>
                 </Box>
                 <ShadowBox flex={false}>
                     <Grid rows="1" columns={size == "small" ? ['40%', '60%'] : ['25%', '75%']}>
