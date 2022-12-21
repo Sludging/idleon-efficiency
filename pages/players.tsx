@@ -100,6 +100,7 @@ interface SkillProps {
 function nth(n: number) { return `${n}${["st", "nd", "rd"][((n + 90) % 100 - 10) % 10 - 1] || "th"}` }
 
 function ShowSkills(props: SkillProps) {
+    const size = useContext(ResponsiveContext)
     const ccdMax = useMemo(() => {
         return props.player.talents.find(talent => talent.skillIndex == 41)?.getBonus() ?? 0
     }, [props])
@@ -113,6 +114,9 @@ function ShowSkills(props: SkillProps) {
                     ['mining', 'fishing', 'trapping', 'cooking'],
                     ['smithing', 'alchemy', 'construction', 'breeding'],
                     ['chopping', 'catching', 'worship', 'intellect'],
+                    ['sailing', 'empty', 'empty', 'empty'],
+                    ['divinity', 'empty', 'empty', 'empty'],
+                    ['gaming', 'empty', 'empty', 'empty'],
                 ]}
             >
                 {
@@ -120,12 +124,12 @@ function ShowSkills(props: SkillProps) {
                         const skillRank = props.skillsRank.get(skillIndex);
                         return (
                             <Box key={`skill_${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} gridArea={`${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} direction="row" gap="medium" margin={{ right: 'small', bottom: 'medium' }}>
-                                <Box direction="row" align="center" gap="small">
-                                    <IconImage data={Skilling.getSkillImageData(skillIndex)} scale={0.75} />
+                                <Box direction="row" align="center" gap="small" border={{color: 'grey-1' }} pad="small">
+                                    <IconImage data={Skilling.getSkillImageData(skillIndex)} scale={size == "small" ? 0.5 : 0.75} />
                                     <Box gap="small">
                                         <Box direction="row" gap="small">
                                             <Text size="small">{skill.level}</Text>
-                                            {skillRank != undefined && <Text size="xsmall">(Ranked {nth(skillRank + 1)})</Text>}
+                                            {skillRank != undefined && size != "small" && <Text size="xsmall">(Ranked {nth(skillRank + 1)})</Text>}
                                         </Box>
                                         <Meter
                                             size="small"
@@ -982,10 +986,12 @@ function PostOfficeDisplay({ player, extra }: { player: Player, extra: PostOffic
                                             <hr style={{ width: "100%" }} />
                                             {
                                                 box.bonuses.map((bonus, bIndex) => {
+                                                    const maxLevel = box.name == "Myriad Crate" ? 100000 : PostOfficeConst.MaxBoxLevel;
+                                                    console.log(box.name, maxLevel);
                                                     return (
                                                         <Box key={`player_${player.playerID}_postoffice_${box.index}_${bIndex}`} direction="row" gap="small">
                                                             <Text>{bonus.getBonusText(box.level, bIndex)}</Text>
-                                                            <Text>{box.level < 400 && `(Max value is ${bonus.getBonus(PostOfficeConst.MaxBoxLevel, bIndex, true)} at 400 boxes)`}</Text>
+                                                            <Text>{box.level < maxLevel && `(Max value is ${bonus.getBonus(maxLevel, bIndex, true)} at ${maxLevel} boxes)`}</Text>
                                                         </Box>
                                                     )
                                                 })
