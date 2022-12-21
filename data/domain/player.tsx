@@ -355,6 +355,7 @@ export class Player {
                 case AFKTypeEnum.Cooking:
                 case AFKTypeEnum.Fishing:
                 case AFKTypeEnum.Mining:
+                case AFKTypeEnum.Divinity:
                     return Activity.Skilling;
                 case AFKTypeEnum.Fighting:
                     return Activity.Fighting;
@@ -386,6 +387,9 @@ export class Player {
                 break;
             case AFKTypeEnum.Mining:
                 imageLocation = "ClassIconsM";
+                break;
+            case AFKTypeEnum.Divinity:
+                imageLocation = "ClassIcons55";
                 break;
             case AFKTypeEnum.Fighting:
                 imageLocation = "ClassIconsF";
