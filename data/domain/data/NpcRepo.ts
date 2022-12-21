@@ -13051,6 +13051,639 @@ export const initNpcRepo = () => {
                         "Name": ""
                     }
                 ]
+            }),
+        new NpcBase("Slargon", <NpcModel>{
+                "head": <NpcHeadModel>{
+                    "location": "Unknown",
+                    "world": "Unknown",
+                    "noQuest": 0,
+                    "repeatable": "Unknown",
+                    "type": "Unknown",
+                    "birthWeight": 4.47,
+                    "starSign": "Libra",
+                    "mothersMaidenName": "Ortiz",
+                    "notes": ""
+                },
+                "quests": {
+                    "Shut up the Namecallers!": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "I HATE them all so much. Oh I wish I wish I wish everyone would just be nice to me... blurblblurg... <br> QUEST:Beat up monsters to change public perception of Slargon.",
+                        "NextIndex": 5,
+                        "Name": "Shut up the Namecallers!",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 1,
+                        "NoSpaceIndex": 4,
+                        "Rewards": [<ComponentModel>{"item": "Quest72", "quantity": 1}],
+                        "QuestName": "Slargon1",
+                        "Difficulty": 2,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Slargon1",
+                        "CustomArray": [<CustomReqModel>{"desc": "Defeat Suggmas:", "finalV": 30000, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "Smack the meanies!": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "You know having fwends is awesome! I just wish I had more cuz those maccies down the road are super meanie heads too... <br> QUEST:Beat up Maccies to further change public perception of Slargon.",
+                        "NextIndex": 8,
+                        "Name": "Smack the meanies!",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 1,
+                        "NoSpaceIndex": 7,
+                        "Rewards": [<ComponentModel>{"item": "Quest73", "quantity": 1}],
+                        "QuestName": "Slargon2",
+                        "Difficulty": 4,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Slargon2",
+                        "CustomArray": [<CustomReqModel>{"desc": "Defeat Maccies:", "finalV": 250000, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "Mess with the Misters!": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "You're like... so super cool!!! Hey do you think you can do the same thing for those tubey looking thingies across town?? <br> QUEST:Beat up Mister Brightsides to uh well to make Slargon feel good I guess.",
+                        "NextIndex": 11,
+                        "Name": "Mess with the Misters!",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 10,
+                        "Rewards": [<ComponentModel>{"item": "Quest73", "quantity": 2}, <ComponentModel>{"item": "Pearl6", "quantity": 3}],
+                        "QuestName": "Slargon3",
+                        "Difficulty": 5,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Slargon3",
+                        "CustomArray": [<CustomReqModel>{"desc": "Defeat Mr BSs:", "finalV": 1000000, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "Assert Dominance over the Meek!": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Adventuwa I need you to do this again. Pwease!!! Its those cheese nubby creatures. They're so icky and gross looking completely gross!!! <br> QUEST:Complete the cycle. Destroy the meek.",
+                        "NextIndex": 14,
+                        "Name": "Assert Dominance over the Meek!",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 3,
+                        "NoSpaceIndex": 13,
+                        "Rewards": [
+                            <ComponentModel>{"item": "Quest72", "quantity": 3},
+                            <ComponentModel>{"item": "Quest73", "quantity": 3},
+                            <ComponentModel>{"item": "Pearl6", "quantity": 5}
+                        ],
+                        "QuestName": "Slargon4",
+                        "Difficulty": 7,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Slargon4",
+                        "CustomArray": [<CustomReqModel>{
+                            "desc": "Defeat Cheese Nubs:",
+                            "finalV": 10000000,
+                            "type": "GreaterEqual",
+                            "startV": 0
+                        }]
+                    }
+                },
+                "dialogue": [
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Blurblblurg.... Hewwo ther I'm slargon who are you?",
+                        "NextIndex": 1,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "You're a adventuwa? Ooooh do you go around punching the baddies??",
+                        "NextIndex": 2,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "I like you you look cool. My fwends dont like me very much... no one does... they all call me names and never want to play wif me.",
+                        "NextIndex": 3,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "I HATE them all so much. Oh I wish I wish I wish everyone would just be nice to me... blurblblurg... <br> QUEST:Beat up monsters to change public perception of Slargon.",
+                        "NextIndex": 5,
+                        "Name": "Shut up the Namecallers!"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Adventuwa I want to give you a pwesent but you have no space!",
+                        "NextIndex": 3,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Woah... <br> That... was... AWESOME!! You were all like POW and BAM and WHAM! I dont know why maybe it was my birfday wish coming true but every since you did that they've all been super nice to me!",
+                        "NextIndex": 6,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "You know having fwends is awesome! I just wish I had more cuz those maccies down the road are super meanie heads too... <br> QUEST:Beat up Maccies to further change public perception of Slargon.",
+                        "NextIndex": 8,
+                        "Name": "Smack the meanies!"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Adventuwa I want to give you a pwesent but you have no space!",
+                        "NextIndex": 6,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Wowowow I don't know what you did adventuwa since I can't see through that portal but even the maccies have stopped calling me names!! I've even made a fwend with one of them!",
+                        "NextIndex": 9,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "You're like... so super cool!!! Hey do you think you can do the same thing for those tubey looking thingies across town?? <br> QUEST:Beat up Mister Brightsides to uh well to make Slargon feel good I guess.",
+                        "NextIndex": 11,
+                        "Name": "Mess with the Misters!"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Adventuwa I want to give you a pwesent but you have no space!",
+                        "NextIndex": 9,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Hehe... you weally are the best adventuwa!! Those tubey guys gave me all their coins when I went over there this morning!!",
+                        "NextIndex": 12,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Adventuwa I need you to do this again. Pwease!!! Its those cheese nubby creatures. They're so icky and gross looking completely gross!!! <br> QUEST:Complete the cycle. Destroy the meek.",
+                        "NextIndex": 14,
+                        "Name": "Assert Dominance over the Meek!"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Adventuwa I want to give you a pwesent but you have no space!",
+                        "NextIndex": 12,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Adventuwa adventuwa!! I dont know wha happen but no one talks to me anymore! I didnt like when they called me names but now they dont even say anything at all!",
+                        "NextIndex": 15,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "I hate this. I wish things could just fix themself naturally and come to a conclusion but I guess things are never gonna change ^",
+                        "NextIndex": 15,
+                        "Name": ""
+                    }
+                ]
+            }),
+        new NpcBase("Pirate Porkchop", <NpcModel>{
+                "head": <NpcHeadModel>{
+                    "location": "Unknown",
+                    "world": "Unknown",
+                    "noQuest": 0,
+                    "repeatable": "Unknown",
+                    "type": "Unknown",
+                    "birthWeight": 6.81,
+                    "starSign": "Scorpio",
+                    "mothersMaidenName": "Nuttle",
+                    "notes": ""
+                },
+                "quests": {
+                    "Bring me the Booty": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "I be out here lookin' for treasure but I haven't found any. I'm not even sure where to look I didn't read the Sailing tutorial. <br> QUEST:Get Porkchop some gold bars. He wont take them don't worry he has no space in his boat.",
+                        "NextIndex": 4,
+                        "Name": "Bring me the Booty",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 1,
+                        "NoSpaceIndex": 3,
+                        "Rewards": [<ComponentModel>{"item": "StampB43", "quantity": 1}],
+                        "QuestName": "Pirate Porkchop1",
+                        "Difficulty": 2,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Pirate Porkchop1",
+                        "CustomArray": [<CustomReqModel>{"desc": "Sailing Gold Bars:", "finalV": 4000, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "Sailing for some Sparks": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "I must say I almost enjoyed looking at the bars more than having them for meself... hows about you go find me some more treasure? <br> QUEST:Find Porkchop some lightning treasure.",
+                        "NextIndex": 7,
+                        "Name": "Sailing for some Sparks",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 1,
+                        "NoSpaceIndex": 6,
+                        "Rewards": [<ComponentModel>{"item": "StampB45", "quantity": 1}],
+                        "QuestName": "Pirate Porkchop2",
+                        "Difficulty": 3,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Pirate Porkchop2",
+                        "CustomArray": [<CustomReqModel>{
+                            "desc": "Lightning Treasure:",
+                            "finalV": 20000,
+                            "type": "GreaterEqual",
+                            "startV": 0
+                        }]
+                    },
+                    "Seeking Treasure Shrooms": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Hows about ye find me some more exotic treasures then? Set sail matey! <br> QUEST:Find Porkchop some rare multishroom treasure.",
+                        "NextIndex": 10,
+                        "Name": "Seeking Treasure Shrooms",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 1,
+                        "NoSpaceIndex": 9,
+                        "Rewards": [<ComponentModel>{"item": "StampA34", "quantity": 1}],
+                        "QuestName": "Pirate Porkchop3",
+                        "Difficulty": 6,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Pirate Porkchop3",
+                        "CustomArray": [<CustomReqModel>{
+                            "desc": "Multishroom Treasure:",
+                            "finalV": 250000,
+                            "type": "GreaterEqual",
+                            "startV": 0
+                        }]
+                    },
+                    "Ye finest treasure at once!": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "I bet me lucky black cap there's something greater to be found... find me the rarest treasure there is I must see it with me own eye! <br> QUEST:Find Porkchop the rarest treasure there is!",
+                        "NextIndex": 13,
+                        "Name": "Ye finest treasure at once!",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 1,
+                        "NoSpaceIndex": 12,
+                        "Rewards": [<ComponentModel>{"item": "StampA36", "quantity": 1}],
+                        "QuestName": "Pirate Porkchop4",
+                        "Difficulty": 8,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Pirate Porkchop4",
+                        "CustomArray": [<CustomReqModel>{"desc": "Rarest Treasure:", "finalV": 1000001, "type": "GreaterEqual", "startV": 0}]
+                    }
+                },
+                "dialogue": [
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Ahoy! What brings ye 'round these parts then matey?",
+                        "NextIndex": 1,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Nothin' in particular eh? I aint sure if ye said anything I play with chat bubbles off so I'll assume ye got some spare time. Care to lend this old sailor a hand?",
+                        "NextIndex": 2,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "I be out here lookin' for treasure but I haven't found any. I'm not even sure where to look I didn't read the Sailing tutorial. <br> QUEST:Get Porkchop some gold bars. He wont take them don't worry he has no space in his boat.",
+                        "NextIndex": 4,
+                        "Name": "Bring me the Booty"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Yarr matey ye got a full inventory! How am I meant to give ye this nice stamp if ye got no space?",
+                        "NextIndex": 2,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Yar har har! Looks like all that glitters really is gold! I'd dont be needing to take any of it from ye it was your find after all... and no its NOT because my magnificent ship is too small that's just malarky!",
+                        "NextIndex": 5,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "I must say I almost enjoyed looking at the bars more than having them for meself... hows about you go find me some more treasure? <br> QUEST:Find Porkchop some lightning treasure.",
+                        "NextIndex": 7,
+                        "Name": "Sailing for some Sparks"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Yarr matey ye got a full inventory! How am I meant to give ye this nice stamp if ye got no space?",
+                        "NextIndex": 5,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Amazing! Concentrated electricity and in such condition too!",
+                        "NextIndex": 8,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Hows about ye find me some more exotic treasures then? Set sail matey! <br> QUEST:Find Porkchop some rare multishroom treasure.",
+                        "NextIndex": 10,
+                        "Name": "Seeking Treasure Shrooms"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Yarr matey ye got a full inventory! How am I meant to give ye this nice stamp if ye got no space?",
+                        "NextIndex": 8,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "My my what a fanciful find!",
+                        "NextIndex": 11,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "I bet me lucky black cap there's something greater to be found... find me the rarest treasure there is I must see it with me own eye! <br> QUEST:Find Porkchop the rarest treasure there is!",
+                        "NextIndex": 13,
+                        "Name": "Ye finest treasure at once!"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Yarr matey ye got a full inventory! How am I meant to give ye this nice stamp if ye got no space?",
+                        "NextIndex": 11,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Oh ho ho! You've really gone and done it this right here be the finest treasure I've ever laid eyes on!",
+                        "NextIndex": 14,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Well done laddy! I take my cap off to ye that was some fine sailin' ye must have done!",
+                        "NextIndex": 14,
+                        "Name": ""
+                    }
+                ]
+            }),
+        new NpcBase("Poigu", <NpcModel>{
+                "head": <NpcHeadModel>{
+                    "location": "Unknown",
+                    "world": "Unknown",
+                    "noQuest": 0,
+                    "repeatable": "Unknown",
+                    "type": "Unknown",
+                    "birthWeight": 6.53,
+                    "starSign": "Cancer",
+                    "mothersMaidenName": "Johnson",
+                    "notes": ""
+                },
+                "quests": {
+                    "Think twice speak once": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Speak not with words but with belief. I shall listen to whatever it is I can hear... <br> QUEST:I speak pretentious and he's saying you need to level up divinity and show your faith.",
+                        "NextIndex": 3,
+                        "Name": "Think twice speak once",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 3,
+                        "NoSpaceIndex": 2,
+                        "Rewards": [
+                            <ComponentModel>{"item": "StampB44", "quantity": 1},
+                            <ComponentModel>{"item": "Quest72", "quantity": 3},
+                            <ComponentModel>{"item": "Quest73", "quantity": 2}
+                        ],
+                        "QuestName": "Poigu1",
+                        "Difficulty": 3,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Poigu1",
+                        "CustomArray": [<CustomReqModel>{"desc": "Divinity Lv:", "finalV": 25, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "Speak from the heart not the mind": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Mmm... perhaps a greater voice from you will suit us both better... <br> QUEST:Wow la de da ya friggin piglet. Level up divinity more but I'd totally understand if you just wanna stop talking to this guy.",
+                        "NextIndex": 6,
+                        "Name": "Speak from the heart not the mind",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 3,
+                        "NoSpaceIndex": 5,
+                        "Rewards": [
+                            <ComponentModel>{"item": "StampB46", "quantity": 1},
+                            <ComponentModel>{"item": "Quest72", "quantity": 4},
+                            <ComponentModel>{"item": "Quest73", "quantity": 3}
+                        ],
+                        "QuestName": "Poigu2",
+                        "Difficulty": 5,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Poigu2",
+                        "CustomArray": [<CustomReqModel>{"desc": "Divinity Lv:", "finalV": 50, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "Learn the Language of the Universe": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Only when you connect with your true beliefs will we finally be able to communicate without error... <br> QUEST:He's just being a pansy because his divinity is all he has... maybe if you outlevel him he'll stop being so annoying.",
+                        "NextIndex": 9,
+                        "Name": "Learn the Language of the Universe",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 3,
+                        "NoSpaceIndex": 8,
+                        "Rewards": [
+                            <ComponentModel>{"item": "StampB46", "quantity": 1},
+                            <ComponentModel>{"item": "Quest72", "quantity": 6},
+                            <ComponentModel>{"item": "Quest73", "quantity": 5}
+                        ],
+                        "QuestName": "Poigu3",
+                        "Difficulty": 8,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Poigu3",
+                        "CustomArray": [<CustomReqModel>{"desc": "Divinity Lv:", "finalV": 80, "type": "GreaterEqual", "startV": 0}]
+                    }
+                },
+                "dialogue": [
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Mmm... who is that I feel approaching?",
+                        "NextIndex": 1,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Speak not with words but with belief. I shall listen to whatever it is I can hear... <br> QUEST:I speak pretentious and he's saying you need to level up divinity and show your faith.",
+                        "NextIndex": 3,
+                        "Name": "Think twice speak once"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Mmm... the job is done but you don't have the space to handle what comes with it!",
+                        "NextIndex": 1,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "You speak with words so soft I can hardly understand...",
+                        "NextIndex": 4,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Mmm... perhaps a greater voice from you will suit us both better... <br> QUEST:Wow la de da ya friggin piglet. Level up divinity more but I'd totally understand if you just wanna stop talking to this guy.",
+                        "NextIndex": 6,
+                        "Name": "Speak from the heart not the mind"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Mmm... the job is done but you don't have the space to handle what comes with it!",
+                        "NextIndex": 4,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Mmm... yes I hear you now but what it is you're saying is not to be understood.",
+                        "NextIndex": 7,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Only when you connect with your true beliefs will we finally be able to communicate without error... <br> QUEST:He's just being a pansy because his divinity is all he has... maybe if you outlevel him he'll stop being so annoying.",
+                        "NextIndex": 9,
+                        "Name": "Learn the Language of the Universe"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Mmm... the job is done but you don't have the space to handle what comes with it!",
+                        "NextIndex": 7,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Ah now I understand you perfectly... yes it is wonderful weather we're having.",
+                        "NextIndex": 9,
+                        "Name": ""
+                    }
+                ]
+            }),
+        new NpcBase("Muhmuguh", <NpcModel>{
+                "head": <NpcHeadModel>{
+                    "location": "Unknown",
+                    "world": "Unknown",
+                    "noQuest": 0,
+                    "repeatable": "Unknown",
+                    "type": "Unknown",
+                    "birthWeight": 4.51,
+                    "starSign": "Pisces",
+                    "mothersMaidenName": "Irwin",
+                    "notes": ""
+                },
+                "quests": {
+                    "Wave after wave slowly Sailing": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Ok so first lets learn SAILING. Put your captain in the boat by clicking the boat then the captain. Next go to the map and drag the boat with the captain to the safari island! <br> QUEST:Do the sailing things that Muhmuguh says!",
+                        "NextIndex": 4,
+                        "Name": "Wave after wave slowly Sailing",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 3,
+                        "Rewards": [<ComponentModel>{"item": "Quest72", "quantity": 4}, <ComponentModel>{"item": "Quest73", "quantity": 3}],
+                        "QuestName": "Muhmuguh1",
+                        "Difficulty": 1,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Muhmuguh1",
+                        "CustomArray": [<CustomReqModel>{"desc": "Listen to Muhmuguh:", "finalV": 1, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "Rising up and Growing as a Gamer": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "So what exactly is GAMING. Simply put pick sprouts to get bits and use those bits to upgrade your garden! Over time things will get more... gamey.. <br> QUEST:Go to the Underground Computer and upgrade the Gaming Garden 3 times!",
+                        "NextIndex": 8,
+                        "Name": "Rising up and Growing as a Gamer",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 7,
+                        "Rewards": [<ComponentModel>{"item": "Quest72", "quantity": 4}, <ComponentModel>{"item": "Quest73", "quantity": 4}],
+                        "QuestName": "Muhmuguh2",
+                        "Difficulty": 1,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Muhmuguh2",
+                        "CustomArray": [<CustomReqModel>{"desc": "Upgrade Gaming Garden:", "finalV": 3, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "Learn the Language of the Universe": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "So DIVINITY... ok basically you need to meditate on the altar to get Divinity Points which you spend and unlock new divinities! You can only be linked to 1 divinity at once but can change weekly! <br> QUEST:Learn Divinity from Muhmuguh!",
+                        "NextIndex": 12,
+                        "Name": "Learn the Language of the Universe",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 11,
+                        "Rewards": [<ComponentModel>{"item": "Quest72", "quantity": 5}, <ComponentModel>{"item": "Quest73", "quantity": 4}],
+                        "QuestName": "Muhmuguh3",
+                        "Difficulty": 2,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Muhmuguh3",
+                        "CustomArray": [<CustomReqModel>{"desc": "Unlock 1st Divinity:", "finalV": 1, "type": "GreaterEqual", "startV": 0}]
+                    }
+                },
+                "dialogue": [
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Bluhblblbuh... hey wussuuuhhp.",
+                        "NextIndex": 1,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Its me everyones favorite continuously <br> BLUBLURGH <br> ...queasy volcano grumblo hybrid guy! And yea I've got your lava world goodies right here.",
+                        "NextIndex": 2,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Ok so first lets learn SAILING. Put your captain in the boat by clicking the boat then the captain. Next go to the map and drag the boat with the captain to the safari island! <br> QUEST:Do the sailing things that Muhmuguh says!",
+                        "NextIndex": 4,
+                        "Name": "Wave after wave slowly Sailing"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "You dont have enou <br> BLUBLURGH <br> guh... enough space in your inventory for my rewards!",
+                        "NextIndex": 2,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Nice job that was Cool! Erm uhh.. I mean hot! Warm! Mid 30s Celsius!",
+                        "NextIndex": 5,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "... ... sorry I thought I was about to vo <br> BLUBLURGH <br> ...to do that. Lets move on to Gaming!",
+                        "NextIndex": 6,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "So what exactly is GAMING. Simply put pick sprouts to get bits and use those bits to upgrade your garden! Over time things will get more... gamey.. <br> QUEST:Go to the Underground Computer and upgrade the Gaming Garden 3 times!",
+                        "NextIndex": 8,
+                        "Name": "Rising up and Growing as a Gamer"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "You dont have enou <br> BLUBLURGH <br> guh... enough space in your inventory for my rewards!",
+                        "NextIndex": 6,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Nice job that was super hot! Super hot! Super H... no? You don't get that reference? Eh never mind. Guess you ARE only a level 1 gamer after all right now.",
+                        "NextIndex": 9,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Last skill! Divinity! It's my personal favorite.",
+                        "NextIndex": 10,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "So DIVINITY... ok basically you need to meditate on the altar to get Divinity Points which you spend and unlock new divinities! You can only be linked to 1 divinity at once but can change weekly! <br> QUEST:Learn Divinity from Muhmuguh!",
+                        "NextIndex": 12,
+                        "Name": "Learn the Language of the Universe"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "You dont have enou <br> BLUBLURGH <br> guh... enough space in your inventory for my rewards!",
+                        "NextIndex": 10,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Daaang you've got skills!! Now get out there and teach everyone else how it's done! Literally! So I don't have to do it myself anymore! ...no? Eh fine just go have fun then and leave me to it!",
+                        "NextIndex": -1,
+                        "Name": ""
+                    }
+                ]
             })    
 ]
 }

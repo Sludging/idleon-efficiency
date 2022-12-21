@@ -29475,7 +29475,20 @@ export const initItemRepo = () => {
                     "Type": "Usable",
                     "description": "Hold down to gain 40% EXP in the skill that's shown in the corner of the screen. If you're in a town, you will gain EXP in the town skill. Only works on skills below level 50. "
                 },
-                "sources": undefined,
+                "sources": <SourcesModel>{
+                    "sources": [
+                        <SourceModel>{
+                            "wikiName": "[[Slargon#Mess with the Misters!|Mess with the Misters!]]",
+                            "txtName": "Slargon: Mess with the Misters!"
+                        },
+                        <SourceModel>{
+                            "wikiName": "[[Slargon#Assert Dominance over the Meek!|Assert Dominance over the Meek!]]",
+                            "txtName": "Slargon: Assert Dominance over the Meek!"
+                        }
+                    ],
+                    "recipeFrom": [],
+                    "questAss": []
+                },
                 "notes": undefined,
                 "recipe": undefined,
                 "vendors": undefined,
@@ -30007,7 +30020,41 @@ export const initItemRepo = () => {
                     "description": "Hold down instantly gain 6 Hours of Sailing Progress! "
                 },
                 "sources": <SourcesModel>{
-                    "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                    "sources": [
+                        <SourceModel>{
+                            "wikiName": "[[Slargon#Shut up the Namecallers!|Shut up the Namecallers!]]",
+                            "txtName": "Slargon: Shut up the Namecallers!"
+                        },
+                        <SourceModel>{
+                            "wikiName": "[[Slargon#Assert Dominance over the Meek!|Assert Dominance over the Meek!]]",
+                            "txtName": "Slargon: Assert Dominance over the Meek!"
+                        },
+                        <SourceModel>{
+                            "wikiName": "[[Poigu#Think twice speak once|Think twice speak once]]",
+                            "txtName": "Poigu: Think twice speak once"
+                        },
+                        <SourceModel>{
+                            "wikiName": "[[Poigu#Speak from the heart not the mind|Speak from the heart not the mind]]",
+                            "txtName": "Poigu: Speak from the heart not the mind"
+                        },
+                        <SourceModel>{
+                            "wikiName": "[[Poigu#Learn the Language of the Universe|Learn the Language of the Universe]]",
+                            "txtName": "Poigu: Learn the Language of the Universe"
+                        },
+                        <SourceModel>{
+                            "wikiName": "[[Muhmuguh#Wave after wave slowly Sailing|Wave after wave slowly Sailing]]",
+                            "txtName": "Muhmuguh: Wave after wave slowly Sailing"
+                        },
+                        <SourceModel>{
+                            "wikiName": "[[Muhmuguh#Rising up and Growing as a Gamer|Rising up and Growing as a Gamer]]",
+                            "txtName": "Muhmuguh: Rising up and Growing as a Gamer"
+                        },
+                        <SourceModel>{
+                            "wikiName": "[[Muhmuguh#Learn the Language of the Universe|Learn the Language of the Universe]]",
+                            "txtName": "Muhmuguh: Learn the Language of the Universe"
+                        },
+                        <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                    ],
                     "recipeFrom": [],
                     "questAss": []
                 },
@@ -30027,7 +30074,45 @@ export const initItemRepo = () => {
                     "description": "Hold down instantly gain 8 Hours of Gaming Progress! "
                 },
                 "sources": <SourcesModel>{
-                    "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                    "sources": [
+                        <SourceModel>{
+                            "wikiName": "[[Slargon#Smack the meanies!|Smack the meanies!]]",
+                            "txtName": "Slargon: Smack the meanies!"
+                        },
+                        <SourceModel>{
+                            "wikiName": "[[Slargon#Mess with the Misters!|Mess with the Misters!]]",
+                            "txtName": "Slargon: Mess with the Misters!"
+                        },
+                        <SourceModel>{
+                            "wikiName": "[[Slargon#Assert Dominance over the Meek!|Assert Dominance over the Meek!]]",
+                            "txtName": "Slargon: Assert Dominance over the Meek!"
+                        },
+                        <SourceModel>{
+                            "wikiName": "[[Poigu#Think twice speak once|Think twice speak once]]",
+                            "txtName": "Poigu: Think twice speak once"
+                        },
+                        <SourceModel>{
+                            "wikiName": "[[Poigu#Speak from the heart not the mind|Speak from the heart not the mind]]",
+                            "txtName": "Poigu: Speak from the heart not the mind"
+                        },
+                        <SourceModel>{
+                            "wikiName": "[[Poigu#Learn the Language of the Universe|Learn the Language of the Universe]]",
+                            "txtName": "Poigu: Learn the Language of the Universe"
+                        },
+                        <SourceModel>{
+                            "wikiName": "[[Muhmuguh#Wave after wave slowly Sailing|Wave after wave slowly Sailing]]",
+                            "txtName": "Muhmuguh: Wave after wave slowly Sailing"
+                        },
+                        <SourceModel>{
+                            "wikiName": "[[Muhmuguh#Rising up and Growing as a Gamer|Rising up and Growing as a Gamer]]",
+                            "txtName": "Muhmuguh: Rising up and Growing as a Gamer"
+                        },
+                        <SourceModel>{
+                            "wikiName": "[[Muhmuguh#Learn the Language of the Universe|Learn the Language of the Universe]]",
+                            "txtName": "Muhmuguh: Learn the Language of the Universe"
+                        },
+                        <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                    ],
                     "recipeFrom": [],
                     "questAss": []
                 },
@@ -42488,7 +42573,16 @@ export const initItemRepo = () => {
                         "i12": 0
                     }
                 },
-                "sources": undefined,
+                "sources": <SourcesModel>{
+                    "sources": [
+                        <SourceModel>{
+                            "wikiName": "[[Pirate Porkchop#Seeking Treasure Shrooms|Seeking Treasure Shrooms]]",
+                            "txtName": "Pirate Porkchop: Seeking Treasure Shrooms"
+                        }
+                    ],
+                    "recipeFrom": [],
+                    "questAss": []
+                },
                 "notes": undefined,
                 "recipe": undefined,
                 "vendors": undefined,
@@ -42572,7 +42666,16 @@ export const initItemRepo = () => {
                         "i12": 0
                     }
                 },
-                "sources": undefined,
+                "sources": <SourcesModel>{
+                    "sources": [
+                        <SourceModel>{
+                            "wikiName": "[[Pirate Porkchop#Ye finest treasure at once!|Ye finest treasure at once!]]",
+                            "txtName": "Pirate Porkchop: Ye finest treasure at once!"
+                        }
+                    ],
+                    "recipeFrom": [],
+                    "questAss": []
+                },
                 "notes": undefined,
                 "recipe": undefined,
                 "vendors": undefined,
@@ -44457,7 +44560,16 @@ export const initItemRepo = () => {
                         "i12": 0
                     }
                 },
-                "sources": undefined,
+                "sources": <SourcesModel>{
+                    "sources": [
+                        <SourceModel>{
+                            "wikiName": "[[Pirate Porkchop#Bring me the Booty|Bring me the Booty]]",
+                            "txtName": "Pirate Porkchop: Bring me the Booty"
+                        }
+                    ],
+                    "recipeFrom": [],
+                    "questAss": []
+                },
                 "notes": undefined,
                 "recipe": undefined,
                 "vendors": undefined,
@@ -44490,7 +44602,16 @@ export const initItemRepo = () => {
                         "i12": 0
                     }
                 },
-                "sources": undefined,
+                "sources": <SourcesModel>{
+                    "sources": [
+                        <SourceModel>{
+                            "wikiName": "[[Poigu#Think twice speak once|Think twice speak once]]",
+                            "txtName": "Poigu: Think twice speak once"
+                        }
+                    ],
+                    "recipeFrom": [],
+                    "questAss": []
+                },
                 "notes": undefined,
                 "recipe": undefined,
                 "vendors": undefined,
@@ -44523,7 +44644,16 @@ export const initItemRepo = () => {
                         "i12": 0
                     }
                 },
-                "sources": undefined,
+                "sources": <SourcesModel>{
+                    "sources": [
+                        <SourceModel>{
+                            "wikiName": "[[Pirate Porkchop#Sailing for some Sparks|Sailing for some Sparks]]",
+                            "txtName": "Pirate Porkchop: Sailing for some Sparks"
+                        }
+                    ],
+                    "recipeFrom": [],
+                    "questAss": []
+                },
                 "notes": undefined,
                 "recipe": undefined,
                 "vendors": undefined,
@@ -44556,7 +44686,20 @@ export const initItemRepo = () => {
                         "i12": 0
                     }
                 },
-                "sources": undefined,
+                "sources": <SourcesModel>{
+                    "sources": [
+                        <SourceModel>{
+                            "wikiName": "[[Poigu#Speak from the heart not the mind|Speak from the heart not the mind]]",
+                            "txtName": "Poigu: Speak from the heart not the mind"
+                        },
+                        <SourceModel>{
+                            "wikiName": "[[Poigu#Learn the Language of the Universe|Learn the Language of the Universe]]",
+                            "txtName": "Poigu: Learn the Language of the Universe"
+                        }
+                    ],
+                    "recipeFrom": [],
+                    "questAss": []
+                },
                 "notes": undefined,
                 "recipe": undefined,
                 "vendors": undefined,

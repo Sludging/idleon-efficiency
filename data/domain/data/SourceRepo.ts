@@ -11606,6 +11606,166 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("Quest72", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Slargon#Shut up the Namecallers!|Shut up the Namecallers!]]",
+                        "txtName": "Slargon: Shut up the Namecallers!"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Slargon#Assert Dominance over the Meek!|Assert Dominance over the Meek!]]",
+                        "txtName": "Slargon: Assert Dominance over the Meek!"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Poigu#Think twice speak once|Think twice speak once]]",
+                        "txtName": "Poigu: Think twice speak once"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Poigu#Speak from the heart not the mind|Speak from the heart not the mind]]",
+                        "txtName": "Poigu: Speak from the heart not the mind"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Poigu#Learn the Language of the Universe|Learn the Language of the Universe]]",
+                        "txtName": "Poigu: Learn the Language of the Universe"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Muhmuguh#Wave after wave slowly Sailing|Wave after wave slowly Sailing]]",
+                        "txtName": "Muhmuguh: Wave after wave slowly Sailing"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Muhmuguh#Rising up and Growing as a Gamer|Rising up and Growing as a Gamer]]",
+                        "txtName": "Muhmuguh: Rising up and Growing as a Gamer"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Muhmuguh#Learn the Language of the Universe|Learn the Language of the Universe]]",
+                        "txtName": "Muhmuguh: Learn the Language of the Universe"
+                    },
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Quest73", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Slargon#Smack the meanies!|Smack the meanies!]]",
+                        "txtName": "Slargon: Smack the meanies!"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Slargon#Mess with the Misters!|Mess with the Misters!]]",
+                        "txtName": "Slargon: Mess with the Misters!"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Slargon#Assert Dominance over the Meek!|Assert Dominance over the Meek!]]",
+                        "txtName": "Slargon: Assert Dominance over the Meek!"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Poigu#Think twice speak once|Think twice speak once]]",
+                        "txtName": "Poigu: Think twice speak once"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Poigu#Speak from the heart not the mind|Speak from the heart not the mind]]",
+                        "txtName": "Poigu: Speak from the heart not the mind"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Poigu#Learn the Language of the Universe|Learn the Language of the Universe]]",
+                        "txtName": "Poigu: Learn the Language of the Universe"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Muhmuguh#Wave after wave slowly Sailing|Wave after wave slowly Sailing]]",
+                        "txtName": "Muhmuguh: Wave after wave slowly Sailing"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Muhmuguh#Rising up and Growing as a Gamer|Rising up and Growing as a Gamer]]",
+                        "txtName": "Muhmuguh: Rising up and Growing as a Gamer"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Muhmuguh#Learn the Language of the Universe|Learn the Language of the Universe]]",
+                        "txtName": "Muhmuguh: Learn the Language of the Universe"
+                    },
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Pearl6", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Slargon#Mess with the Misters!|Mess with the Misters!]]",
+                        "txtName": "Slargon: Mess with the Misters!"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Slargon#Assert Dominance over the Meek!|Assert Dominance over the Meek!]]",
+                        "txtName": "Slargon: Assert Dominance over the Meek!"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("StampB43", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Pirate Porkchop#Bring me the Booty|Bring me the Booty]]",
+                        "txtName": "Pirate Porkchop: Bring me the Booty"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("StampB45", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Pirate Porkchop#Sailing for some Sparks|Sailing for some Sparks]]",
+                        "txtName": "Pirate Porkchop: Sailing for some Sparks"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("StampA34", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Pirate Porkchop#Seeking Treasure Shrooms|Seeking Treasure Shrooms]]",
+                        "txtName": "Pirate Porkchop: Seeking Treasure Shrooms"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("StampA36", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Pirate Porkchop#Ye finest treasure at once!|Ye finest treasure at once!]]",
+                        "txtName": "Pirate Porkchop: Ye finest treasure at once!"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("StampB44", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Poigu#Think twice speak once|Think twice speak once]]",
+                        "txtName": "Poigu: Think twice speak once"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("StampB46", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Poigu#Speak from the heart not the mind|Speak from the heart not the mind]]",
+                        "txtName": "Poigu: Speak from the heart not the mind"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Poigu#Learn the Language of the Universe|Learn the Language of the Universe]]",
+                        "txtName": "Poigu: Learn the Language of the Universe"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("EquipmentHats46", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
@@ -11925,11 +12085,6 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("Quest72", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
         new SourcesBase("GemP21", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
@@ -11941,11 +12096,6 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("GemP23", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Quest73", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
