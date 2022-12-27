@@ -5,6 +5,7 @@ import { ChipBase, initChipRepo } from "./data/ChipRepo"
 import { initJewelRepo, JewelBase } from "./data/JewelRepo"
 import { initLabBonusRepo, LabBonusBase } from "./data/LabBonusRepo"
 import { Deathnote } from "./deathnote"
+import { Divinity } from "./divinity"
 import { GemStore } from "./gemPurchases"
 import { ImageData } from "./imageData"
 import { ChipModel } from "./model/chipModel"
@@ -417,6 +418,7 @@ export const updateLab = (data: Map<string, any>) => {
     const deathnote = data.get("deathnote") as Deathnote;
     const storage = data.get("storage") as Storage;
     const taskBoard = data.get("taskboard") as TaskBoard;
+    const divinity = data.get("divinity") as Divinity;
 
     // Append chip info to the players.
     Object.entries(lab.playerChips).forEach(([playerIndex, chips]) => {
@@ -445,7 +447,7 @@ export const updateLab = (data: Map<string, any>) => {
     // 5. Bubo purple for extra line width.
 
     // Figure out which players are in lab first and sort by player id.
-    const playersInLab = [...playerData].filter(player => player.currentMonster?.id == "Laboratory").sort((player1, player2) => player1.playerID > player2.playerID ? 1 : -1);
+    const playersInLab = [...playerData].filter(player => player.currentMonster?.id == "Laboratory" || divinity.playerInfo[player.playerID].god.index == 1).sort((player1, player2) => player1.playerID > player2.playerID ? 1 : -1);
     lab.playersInTubes = playersInLab;
 
     // figure out w4 merit extra connection range;
