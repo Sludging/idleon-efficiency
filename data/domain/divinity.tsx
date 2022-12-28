@@ -17,6 +17,11 @@ export class DivinityGod {
 
 export class PlayerDivinityInfo {
     constructor(public style: DivinityStyleModel, public god: DivinityGod, public active: boolean = false) {}
+
+    divinityPerHour = (): number => {
+        
+        return 0;
+    }
 }
 
 export class GodOffering {
@@ -28,6 +33,10 @@ export class Divinity {
     currentDivinity: number = 0;
     gods: DivinityGod[] = DivinityGod.fromBase(initGodInfoRepo());
     offerings: GodOffering[] = [];
+
+    purrmepActive = (): boolean => {
+        return this.playerInfo.some(info => info.god.index == 6);
+    }
 }
 
 export default function parseDivinity(playerCount: number, divinityData: number[], afkTarget: string[]) {
