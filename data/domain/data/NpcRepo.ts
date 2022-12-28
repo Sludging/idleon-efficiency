@@ -258,9 +258,9 @@ export const initNpcRepo = () => {
                     "noQuest": 0,
                     "repeatable": "Unknown",
                     "type": "Unknown",
-                    "birthWeight": 8.8,
-                    "starSign": "Gemini",
-                    "mothersMaidenName": "Davis",
+                    "birthWeight": 4.47,
+                    "starSign": "Leo",
+                    "mothersMaidenName": "Vogal",
                     "notes": ""
                 },
                 "quests": {},
@@ -280,9 +280,9 @@ export const initNpcRepo = () => {
                     "noQuest": 0,
                     "repeatable": "Unknown",
                     "type": "Unknown",
-                    "birthWeight": 6.63,
-                    "starSign": "Leo",
-                    "mothersMaidenName": "Leisinger",
+                    "birthWeight": 2.88,
+                    "starSign": "Gemini",
+                    "mothersMaidenName": "Sandstrom",
                     "notes": ""
                 },
                 "quests": {},
@@ -828,7 +828,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 1.54,
                     "starSign": "Pisces",
                     "mothersMaidenName": "Garcia",
-                    "notes": "[[Scripticus]] is the first NPC you interact with after the tutorial, located to the right in the [[Worlds#G1 - Blunder Hills|starting town]].$NEWLINE$$NEWLINE$He introduces the player to the basics of completing quests, fighting monsters, [[Smithing]], equipping gear, and creating multiple characters. His questline guides the player through most of World 1 leading to the [[Amarok]] boss fight.$NEWLINE$$NEWLINE$"
+                    "notes": "[[Scripticus]] is the first NPC you interact with after the tutorial, located to the right in the [[Worlds#G1 - Blunder Hills|starting town]].$NEWLINE$$NEWLINE$He introduces the player to the basics of completing quests, fighting monsters, [[Smithing]], equipping gear, and creating multiple characters. His questline guides the player through most of World 1 leading to the [[Amarok]] boss fight.$NEWLINE$$NEWLINE$$NEWLINE$"
                 },
                 "quests": {
                     "Hardcore Gamer Status, Here I Come!": <CustomQuestModel>{
@@ -1607,7 +1607,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 6.45,
                     "starSign": "Gemini",
                     "mothersMaidenName": "Thomas",
-                    "notes": "[[Glumlee]] is located in the [[Worlds#M1 - Tunnels Entrance|Tunnels Entrance]] to the left of the [[Worlds#G1 - Blunder Hills|starting town]].$NEWLINE$$NEWLINE$His quests focus on introducing players to the [[File:Mining Skill Icon.png]] [[Mining]] Skill and smelting ores in the [[Forge]] to earn the [[Mining Certificate]] needed to complete the quest 'Get Glumlee's Certification' given by [[Scripticus]].$NEWLINE$$NEWLINE$His final quest awards the {{CraftReq|Glumlee Token}}.$NEWLINE$$NEWLINE$"
+                    "notes": "[[Glumlee]] is located in the [[Worlds#M1 - Tunnels Entrance|Tunnels Entrance]] to the left of the [[Worlds#G1 - Blunder Hills|starting town]].$NEWLINE$$NEWLINE$His quests focus on introducing players to the [[File:Mining Skill Icon.png]] [[Mining]] Skill and smelting ores in the [[Forge]] to earn the [[Mining Certificate]] needed to complete the quest 'Get Glumlee's Certification' given by [[Scripticus]].$NEWLINE$$NEWLINE$His final quest awards the {{CraftReq|Glumlee Token}}.$NEWLINE$$NEWLINE$$NEWLINE$"
                 },
                 "quests": {
                     "Learning to Swing": <ItemQuestModel>{
@@ -1864,12 +1864,12 @@ export const initNpcRepo = () => {
                     "birthWeight": 3.7,
                     "starSign": "Libra",
                     "mothersMaidenName": "Jones",
-                    "notes": "The [[Picnic Stowaway]] is found in [[Worlds#G3 - Froggy Fields|Froggy Fields]], the second zone of Grasslands, located in the bottom left of the area.$NEWLINE$$NEWLINE$After completing his first 3 quests, his following quests will be part of a quest chain that is limited by a daily reset. You can do the full daily questline once per character per reset, but whether you complete the full questline or not it will start over at the first quest in the chain (The Most Important Meal of the Day) after your daily reset.$NEWLINE$$NEWLINE$The Picnic Stowaway daily questline is the source of the [[Peanut]] Recipe, and completing the third quest in the chain is a possible daily [[Tasks#Blunder Hills|Task]]. $NEWLINE$$NEWLINE$Completing the full daily questline in a single day awards you one {{CraftReq|Picnic Token}}. In order to obtain the [[King of Food]] trophy, you must complete the full daily questline 30 times.$NEWLINE$$NEWLINE$"
+                    "notes": "The [[Picnic Stowaway]] is found in [[Worlds#G3 - Froggy Fields|Froggy Fields]], the second zone of Grasslands, located in the bottom left of the area.$NEWLINE$$NEWLINE$After completing his first 3 quests, his following quests will be part of a quest chain that is limited by a daily reset. You can do the full daily questline once per character per reset, but whether you complete the full questline or not it will start over at the first quest in the chain (The Most Important Meal of the Day) after your daily reset.$NEWLINE$$NEWLINE$The Picnic Stowaway daily questline is the source of the [[Peanut]] Recipe, and completing the third quest in the chain is a possible daily [[Tasks#Blunder Hills|Task]]. $NEWLINE$$NEWLINE$Completing the full daily questline in a single day awards you one {{CraftReq|Picnic Token}}. In order to obtain the [[King of Food]] trophy, you must complete the full daily questline 30 times.$NEWLINE$$NEWLINE$$NEWLINE$"
                 },
                 "quests": {
                     "The Hungry Stowaway": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Well come on now I aint gonna give you part of my stash here for nothin'. This is a picnic basket not a charity house! Bring me something and maybe we can fix up a deal... <br> QUEST:Buy and bring 50 Nomwiches from the Town Shop.",
+                        "DialogueText": "Well come on now I aint gonna give you part of my stash here for nothin'. This is a picnic basket not a charity house! Bring me something and maybe we can fix up a deal... <br> QUEST:Buy and bring 30 Nomwiches from the Town Shop.",
                         "NextIndex": 7,
                         "Name": "The Hungry Stowaway",
                         "ConsumeItems": true,
@@ -1928,7 +1928,7 @@ export const initNpcRepo = () => {
                         "Rewards": [<ComponentModel>{"item": "FoodG1", "quantity": 1}, <ComponentModel>{"item": "FoodPotRe2", "quantity": 25}],
                         "QuestName": "Picnic Stowaway4",
                         "Difficulty": 2,
-                        "note": <NoteModel>{"note": "Daily Quest"},
+                        "note": <NoteModel>{"note": " "},
                         "ItemReq": [<ComponentModel>{"item": "Grasslands2", "quantity": 200}, <ComponentModel>{"item": "Grasslands3", "quantity": 100}]
                     },
                     "Brunchin' with the Blobs": <ItemQuestModel>{
@@ -1946,9 +1946,7 @@ export const initNpcRepo = () => {
                         ],
                         "QuestName": "Picnic Stowaway5",
                         "Difficulty": 3,
-                        "note": <NoteModel>{
-                            "note": "Daily Quest. The first time you start this quest, the recipe for the Peanut drops."
-                        },
+                        "note": <NoteModel>{"note": "The first time you start this quest, the recipe for the Peanut drops."},
                         "ItemReq": [
                             <ComponentModel>{"item": "Peanut", "quantity": 100},
                             <ComponentModel>{"item": "BirchTree", "quantity": 1500},
@@ -1971,7 +1969,7 @@ export const initNpcRepo = () => {
                         "QuestName": "Picnic Stowaway6",
                         "Difficulty": 4,
                         "note": <NoteModel>{
-                            "note": "Daily Quest. You must complete this quest for the 'Escapin' the 'Laws' daily [[Tasks|Task]]."
+                            "note": "You must complete this quest for the 'Escapin' the 'Laws' daily [[Tasks|Task]]."
                         },
                         "ItemReq": [
                             <ComponentModel>{"item": "OilBarrel1", "quantity": 200},
@@ -1995,7 +1993,7 @@ export const initNpcRepo = () => {
                         "QuestName": "Picnic Stowaway7",
                         "Difficulty": 4,
                         "note": <NoteModel>{
-                            "note": "Daily Quest. There is a [[Sandy Pot]] at [[Carrotman|Carrotmen]]. Kill it, pick up the teacup and run back to Picnic Stowaway."
+                            "note": "There is a [[Sandy Pot]] at [[Carrotman|Carrotmen]]. Kill it, pick up the teacup and run back to Picnic Stowaway."
                         },
                         "CustomType": "Picnic Stowaway7",
                         "CustomArray": [
@@ -2019,7 +2017,7 @@ export const initNpcRepo = () => {
                         ],
                         "QuestName": "Picnic Stowaway8",
                         "Difficulty": 5,
-                        "note": <NoteModel>{"note": "Daily Quest"},
+                        "note": <NoteModel>{"note": " "},
                         "ItemReq": [<ComponentModel>{"item": "EquipmentHats18", "quantity": 1}, <ComponentModel>{"item": "FoodHealth6", "quantity": 500}]
                     },
                     "The Last Supper, at Least for Today!": <ItemQuestModel>{
@@ -2037,7 +2035,7 @@ export const initNpcRepo = () => {
                         ],
                         "QuestName": "Picnic Stowaway9",
                         "Difficulty": 5,
-                        "note": <NoteModel>{"note": "Daily Quest"},
+                        "note": <NoteModel>{"note": " "},
                         "ItemReq": [<ComponentModel>{"item": "Meatloaf", "quantity": 1}]
                     },
                     "Don't Desert the Dessert": <ItemQuestModel>{
@@ -2055,7 +2053,7 @@ export const initNpcRepo = () => {
                         ],
                         "QuestName": "Picnic Stowaway10",
                         "Difficulty": 5,
-                        "note": <NoteModel>{"note": "Daily Quest. Nuget Cakes drop from [[Crabcake|Crabcakes]]"},
+                        "note": <NoteModel>{"note": "Nuget Cakes drop from [[Crabcake|Crabcakes]]"},
                         "ItemReq": [<ComponentModel>{"item": "DesertA3b", "quantity": 2}]
                     },
                     "A Midnight Snack": <ItemQuestModel>{
@@ -2073,7 +2071,7 @@ export const initNpcRepo = () => {
                         ],
                         "QuestName": "Picnic Stowaway11",
                         "Difficulty": 6,
-                        "note": <NoteModel>{"note": "Daily Quest"},
+                        "note": <NoteModel>{"note": " "},
                         "ItemReq": [<ComponentModel>{"item": "MidnightCookie", "quantity": 2}]
                     },
                     "King of Food": <ItemQuestModel>{
@@ -2124,7 +2122,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Well come on now I aint gonna give you part of my stash here for nothin'. This is a picnic basket not a charity house! Bring me something and maybe we can fix up a deal... <br> QUEST:Buy and bring 50 Nomwiches from the Town Shop.",
+                        "DialogueText": "Well come on now I aint gonna give you part of my stash here for nothin'. This is a picnic basket not a charity house! Bring me something and maybe we can fix up a deal... <br> QUEST:Buy and bring 30 Nomwiches from the Town Shop.",
                         "NextIndex": 7,
                         "Name": "The Hungry Stowaway"
                     },
@@ -2548,9 +2546,9 @@ export const initNpcRepo = () => {
                     "noQuest": 0,
                     "repeatable": "Unknown",
                     "type": "Unknown",
-                    "birthWeight": 9.68,
-                    "starSign": "Taurus",
-                    "mothersMaidenName": "Soloman",
+                    "birthWeight": 3.36,
+                    "starSign": "Libra",
+                    "mothersMaidenName": "Christensen",
                     "notes": ""
                 },
                 "quests": {},
@@ -3103,7 +3101,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 3.32,
                     "starSign": "Aquarius",
                     "mothersMaidenName": "Ramirez",
-                    "notes": "[[Rocklyte]] is hidden within [[Worlds#G3 - Froggy Fields|Froggy Fields]]. In order to find him, you must complete [[Bushlyte|Bushlyte's]] quests. See [[Secrets]] for more details.$NEWLINE$"
+                    "notes": "[[Rocklyte]] is hidden within [[Worlds#G3 - Froggy Fields|Froggy Fields]]. In order to find him, you must complete [[Bushlyte|Bushlyte's]] quests. See [[Secrets]] for more details.$NEWLINE$$NEWLINE$"
                 },
                 "quests": {
                     "How It's Made, Episode 7. The Super Peanut": <ItemQuestModel>{
@@ -4351,7 +4349,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 8.43,
                     "starSign": "Aries",
                     "mothersMaidenName": "Wilson",
-                    "notes": "[[Builder Bird]] is found in the [[Worlds#G1 - Blunder Hills|starting town]], located in the top right section of the area. $NEWLINE$$NEWLINE$Upon completing his quest the player gains access to the portal to [[Worlds#D0 - YumYum Grotto|World 2 - Yum Yum Desert]].$NEWLINE$$NEWLINE$'''Note:''' Unlocking the portal with one character unlocks it for all characters on your account."
+                    "notes": "[[Builder Bird]] is found in the [[Worlds#G1 - Blunder Hills|starting town]], located in the top right section of the area. $NEWLINE$$NEWLINE$Upon completing his quest the player gains access to the portal to [[Worlds#D0 - YumYum Grotto|World 2 - Yum Yum Desert]].$NEWLINE$$NEWLINE$This little guy also (for a limited time only) gave us the [[Real Civil Engineer Helmet]].$NEWLINE$$NEWLINE$'''Note:''' Unlocking the portal with one character unlocks it for all characters on your account."
                 },
                 "quests": {
                     "Restoring Power to the Portal": <ItemQuestModel>{
@@ -5062,7 +5060,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 6.75,
                     "starSign": "Pisces",
                     "mothersMaidenName": "Lee",
-                    "notes": "[[Fishpaste97]] is found in [[Worlds#F2- Faraway Piers|Faraway Piers]].$NEWLINE$$NEWLINE$Like other piggy NPCs, his quests award stamps. Although he's found in a Fishing zone, his first quest requires you to work on your [[File:Catching Skill Icon.png]] [[Catching]] Skill.$NEWLINE$"
+                    "notes": "[[Fishpaste97]] is found in [[Worlds#F2- Faraway Piers|Faraway Piers]].$NEWLINE$$NEWLINE$Like other piggy NPCs, his quests award stamps. Although he's found in a Fishing zone, his first quest requires you to work on your [[File:Catching Skill Icon.png|35px]] [[Catching]] Skill.$NEWLINE$"
                 },
                 "quests": {
                     "'Accidental' Exploit": <ItemQuestModel>{
@@ -5651,7 +5649,9 @@ export const initNpcRepo = () => {
                         "Rewards": [<ComponentModel>{"item": "NPCtoken16", "quantity": 1}],
                         "QuestName": "Bandit Bob4",
                         "Difficulty": 2,
-                        "note": <NoteModel>{"note": " "},
+                        "note": <NoteModel>{
+                            "note": "{{Sources/datarow|Item=Sesame Seed|Source=Mimics, Quest|Link=Bandit Bob#The Desert Dungeon Prequest{{!}}Bandit Bob|SpecialText=From Mimics|Category=Quest}}"
+                        },
                         "ItemReq": [<ComponentModel>{"item": "Quest45", "quantity": 1}]
                     }
                 },
@@ -6204,7 +6204,7 @@ export const initNpcRepo = () => {
         new NpcBase("Goldric", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Shifty Sandbox",
-                    "world": "Yum-Yum Desert}}n",
+                    "world": "Yum-Yum Desert",
                     "noQuest": 5,
                     "repeatable": "Unknown",
                     "type": "",
@@ -6501,9 +6501,9 @@ export const initNpcRepo = () => {
                     "noQuest": 0,
                     "repeatable": "Unknown",
                     "type": "Unknown",
-                    "birthWeight": 7.66,
-                    "starSign": "Gemini",
-                    "mothersMaidenName": "Duffmann}}n",
+                    "birthWeight": 8.59,
+                    "starSign": "Pisces",
+                    "mothersMaidenName": "Quinn",
                     "notes": ""
                 },
                 "quests": {},
@@ -6654,7 +6654,7 @@ export const initNpcRepo = () => {
                 "head": <NpcHeadModel>{
                     "location": "The Mimic Hole",
                     "world": "Yum-Yum Desert",
-                    "noQuest": 3,
+                    "noQuest": 4,
                     "repeatable": "Unknown",
                     "type": "",
                     "birthWeight": 4.16,
@@ -7060,7 +7060,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 1.69,
                     "starSign": "Taurus",
                     "mothersMaidenName": "Brown",
-                    "notes": "[[Wellington]] is found in [[Worlds#D11 - Sands of Time|Sands of Time]].$NEWLINE$$NEWLINE$Like other piggy NPCs, his quests award stamps. For help completing his quests, see [[Secrets]].$NEWLINE$"
+                    "notes": "[[Wellington]] is found in [[Worlds#D11 - Sands of Time|Sands of Time]].$NEWLINE$$NEWLINE$Like other piggy NPCs, his quests award stamps. For help completing his quests, see [[Secrets]].$NEWLINE$$NEWLINE$"
                 },
                 "quests": {
                     "Platforms in Disguise, Platsformers!": <CustomQuestModel>{
@@ -7116,7 +7116,7 @@ export const initNpcRepo = () => {
                         "QuestName": "Wellington3",
                         "Difficulty": 1,
                         "note": <NoteModel>{
-                            "note": "It has to be typed exactly like Wellington says, cAsE sEnSiTiVe. If you're not using a US Keyboard layout, Shift+1 is how you must type the exclamation point. Requires level 70."
+                            "note": "It has to be typed like Wellington says, 'Darn you, Blobulyte! Why must you hide like a coward' exactly. If you're not using a US Keyboard layout, Shift+1 is how you must type the exclamation point. Requires level 70."
                         },
                         "CustomType": "Wellington3",
                         "CustomArray": [<CustomReqModel>{"desc": "Up's Given:", "finalV": 1, "type": "GreaterEqual", "startV": 0}]
@@ -8097,7 +8097,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 3.06,
                     "starSign": "Taurus",
                     "mothersMaidenName": "Garcia",
-                    "notes": "[[Centurion]] is located in [[Worlds#D2 - The Mimic Hole|The Mimic Hole]], next to the [[Colosseum/Sandstone|Sandstone Colosseum]].$NEWLINE$$NEWLINE$Completing his first quest (Down The Mimic Hole!) gives the player the ability to talk to him once every day to obtain a {{CraftReq|Colosseum Ticket}}. This is the second daily source of tickets after [[Typhoon]]. He will hold tickets for you for up to 3 days. Having more characters complete his quests does not provide more daily tickets.$NEWLINE$"
+                    "notes": "[[Centurion]] is located in [[Worlds#D2 - The Mimic Hole|The Mimic Hole]], next to the [[Colosseum/Sandstone|Sandstone Colosseum]].$NEWLINE$$NEWLINE$Completing his first quest (Down The Mimic Hole!) gives the player the ability to talk to him once every day to obtain a {{CraftReq|Colosseum Ticket}}. This is the second daily source of tickets after [[Typhoon]]. He will hold tickets for you for up to 3 days. Having more characters complete his quests does not provide more daily tickets.$NEWLINE$$NEWLINE$"
                 },
                 "quests": {
                     "Down The Mimic Hole!": <CustomQuestModel>{
@@ -9036,7 +9036,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 3.42,
                     "starSign": "Sagittarius",
                     "mothersMaidenName": "Jenson",
-                    "notes": "[[Hoggindaz]] is found in [[Worlds#Frostbite Towndra|Frostbite Towndra]], at the bottom right of town. $NEWLINE$$NEWLINE$His quests introduce the basics of [[Construction]], [[Trapping]] and [[Worship]] to the player. His quests award special talents that allow the sampling resources for the 3D Printer and moving shrines.$NEWLINE$$NEWLINE$"
+                    "notes": "[[Hoggindaz]] is found in [[Worlds#Frostbite Towndra|Frostbite Towndra]], at the bottom right of town. $NEWLINE$$NEWLINE$His quests introduce the basics of [[Construction]], [[Trapping]] and [[Worship]] to the player. His quests award special talents that allow the sampling resources for the 3D Printer and moving shrines.$NEWLINE$$NEWLINE$$NEWLINE$"
                 },
                 "quests": {
                     "Turn ON for what???": <CustomQuestModel>{
@@ -9120,7 +9120,7 @@ export const initNpcRepo = () => {
                         "QuestName": "Hoggindaz4",
                         "Difficulty": 2,
                         "note": <NoteModel>{
-                            "note": "You need at least 25% charge to play a round of [[Worship]] at the [[Glublin]] totem. Purchase and equip a {{CraftReq|Ceramic Skull}} from the W3 town shop to gain charge. Charge is per-character, not account wide."
+                            "note": "You need at least 25% charge to play a round of [[Worship]] at the [[Glublin]] totem. Purchase and equip a {{CraftReq|Wax Skull}} from the W3 town shop to gain charge. Charge is per-character, not account wide."
                         },
                         "CustomType": "Hoggindaz4",
                         "CustomArray": [
@@ -9971,7 +9971,7 @@ export const initNpcRepo = () => {
                         ],
                         "QuestName": "Crystalswine5",
                         "Difficulty": 6,
-                        "note": <NoteModel>{"note": " "},
+                        "note": <NoteModel>{"note": "Defeat 20 Cryosnake, 17 Bop Box and 22 Neyeptune "},
                         "CustomType": "Crystalswine5",
                         "CustomArray": [
                             <CustomReqModel>{"desc": "Monsters Defeated:", "finalV": 59, "type": "GreaterEqual", "startV": 0},
@@ -9993,7 +9993,9 @@ export const initNpcRepo = () => {
                         ],
                         "QuestName": "Crystalswine6",
                         "Difficulty": 7,
-                        "note": <NoteModel>{"note": ""},
+                        "note": <NoteModel>{
+                            "note": "Defeat 20 Cryosnakes, 19 Quenchies, 18 Thermisters, 13 Penguins, 19 Snowmans, 20 Mamooths, 19 Bloques, 20 Sir Staches, 20 Dedotated Rams"
+                        },
                         "CustomType": "Crystalswine6",
                         "CustomArray": [
                             <CustomReqModel>{"desc": "Monsters Defeated:", "finalV": 168, "type": "GreaterEqual", "startV": 0},
@@ -10104,7 +10106,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 5.03,
                     "starSign": "Sagittarius",
                     "mothersMaidenName": "Napier",
-                    "notes": "[[Yondergreen]] is found in [[Worlds#Signature Slopes|Signature Slopes]].$NEWLINE$$NEWLINE$"
+                    "notes": "[[Yondergreen]] is found in [[Worlds#Signature Slopes|Signature Slopes]].$NEWLINE$"
                 },
                 "quests": {
                     "Infrastructure Plan": <CustomQuestModel>{
@@ -10141,7 +10143,7 @@ export const initNpcRepo = () => {
                     },
                     "Stance on Big Tech": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "So how about big tech then? <br> QUEST:Take a printer sample of at least 25 pens",
+                        "DialogueText": "So how about big tech then? <br> QUEST:Take a printer sample of at least 20 pens",
                         "NextIndex": 11,
                         "Name": "Stance on Big Tech",
                         "ConsumeItems": false,
@@ -10165,7 +10167,9 @@ export const initNpcRepo = () => {
                         "Rewards": [<ComponentModel>{"item": "Quest60", "quantity": 1}, <ComponentModel>{"item": "GemP16", "quantity": 2}],
                         "QuestName": "Yondergreen4",
                         "Difficulty": 5,
-                        "note": <NoteModel>{"note": " "},
+                        "note": <NoteModel>{
+                            "note": "{{Sources/datarow|Item=Signed Contract|Source=Penguin|Link=Yondergreen#Legislative Action{{!}}Penguin|SpecialText=Quest Only|Category=Quest Spawned}}"
+                        },
                         "ItemReq": [<ComponentModel>{"item": "Quest62", "quantity": 4}]
                     },
                     "No Snapping Contract": <CustomQuestModel>{
@@ -10271,7 +10275,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "So how about big tech then? <br> QUEST:Take a printer sample of at least 25 pens",
+                        "DialogueText": "So how about big tech then? <br> QUEST:Take a printer sample of at least 20 pens",
                         "NextIndex": 11,
                         "Name": "Stance on Big Tech"
                     },
@@ -11650,7 +11654,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 1.74,
                     "starSign": "Cancer",
                     "mothersMaidenName": "Ingram",
-                    "notes": "See the [https://www.youtube.com/playlist?list=PLBG_WXgv7iS7UtkCmTxAL_-nH8V4ldufF Legends of Idleon Youtube Channel] for more details.$NEWLINE$"
+                    "notes": "See the [https://www.youtube.com/playlist?list=PLBG_WXgv7iS7UtkCmTxAL_-nH8V4ldufF Legends of Idleon Youtube Channel] for more details. (Steps will not be included here. You have to follow the videos with the steps in them instead.)$NEWLINE$"
                 },
                 "quests": {
                     "Treasure Hunt 1": <CustomQuestModel>{
@@ -11730,9 +11734,7 @@ export const initNpcRepo = () => {
                         ],
                         "QuestName": "Walupiggy4",
                         "Difficulty": 5,
-                        "note": <NoteModel>{
-                            "note": "[https://www.youtube.com/watch?v=33k5wVGUyII Treasure Hunt #4 Video] Goldegg Capsules are no longer usable in game."
-                        },
+                        "note": <NoteModel>{"note": "[https://www.youtube.com/watch?v=33k5wVGUyII Treasure Hunt #4 Video]"},
                         "CustomType": "Walupiggy4",
                         "CustomArray": [
                             <CustomReqModel>{"desc": "Steps Completed:", "finalV": 8, "type": "GreaterEqual", "startV": 0},
@@ -12892,7 +12894,7 @@ export const initNpcRepo = () => {
         new NpcBase("Nebula Neddy", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Hyperion Nebula",
+                    "world": "Unknown",
                     "noQuest": 0,
                     "repeatable": "Unknown",
                     "type": "Unknown",
@@ -12960,15 +12962,15 @@ export const initNpcRepo = () => {
             }),
         new NpcBase("Eliteus", <NpcModel>{
                 "head": <NpcHeadModel>{
-                    "location": "Unknown",
+                    "location": "Outskirts of Fallstar Isle",
                     "world": "Hyperion Nebula",
-                    "noQuest": 0,
+                    "noQuest": 2,
                     "repeatable": "Unknown",
-                    "type": "Unknown",
+                    "type": "",
                     "birthWeight": 4.46,
                     "starSign": "Libra",
                     "mothersMaidenName": "Darnell",
-                    "notes": ""
+                    "notes": "[[Eliteus]] is found in [[Worlds#H4 - Outskirts of Fallstar Isle|Outskirts of Fallstar Isle]].$NEWLINE$$NEWLINE$Complete his quests to choose a [[Classes|elite class]] for your Barbarian, Squire, Bowman, Hunter, Shaman, or Wizard. $NEWLINE$$NEWLINE$NOTE: Divine Knight, Siege Breaker, and Elemental Sorcerer are not complete and are for World 5, which is not out yet. These classes have no talents except for the ones shared between all elite classes.$NEWLINE$"
                 },
                 "quests": {
                     "The Greenie Gucci Gang": <CustomQuestModel>{
@@ -13059,9 +13061,9 @@ export const initNpcRepo = () => {
                     "noQuest": 0,
                     "repeatable": "Unknown",
                     "type": "Unknown",
-                    "birthWeight": 4.47,
-                    "starSign": "Libra",
-                    "mothersMaidenName": "Ortiz",
+                    "birthWeight": 2.39,
+                    "starSign": "Taurus",
+                    "mothersMaidenName": "Hesch",
                     "notes": ""
                 },
                 "quests": {
@@ -13241,9 +13243,9 @@ export const initNpcRepo = () => {
                     "noQuest": 0,
                     "repeatable": "Unknown",
                     "type": "Unknown",
-                    "birthWeight": 6.81,
-                    "starSign": "Scorpio",
-                    "mothersMaidenName": "Nuttle",
+                    "birthWeight": 6.19,
+                    "starSign": "Capricorn",
+                    "mothersMaidenName": "Stahl",
                     "notes": ""
                 },
                 "quests": {
@@ -13418,9 +13420,9 @@ export const initNpcRepo = () => {
                     "noQuest": 0,
                     "repeatable": "Unknown",
                     "type": "Unknown",
-                    "birthWeight": 6.53,
-                    "starSign": "Cancer",
-                    "mothersMaidenName": "Johnson",
+                    "birthWeight": 4.78,
+                    "starSign": "Scorpio",
+                    "mothersMaidenName": "Napier",
                     "notes": ""
                 },
                 "quests": {
@@ -13552,9 +13554,9 @@ export const initNpcRepo = () => {
                     "noQuest": 0,
                     "repeatable": "Unknown",
                     "type": "Unknown",
-                    "birthWeight": 4.51,
-                    "starSign": "Pisces",
-                    "mothersMaidenName": "Irwin",
+                    "birthWeight": 4.62,
+                    "starSign": "Sagittarius",
+                    "mothersMaidenName": "Uddin",
                     "notes": ""
                 },
                 "quests": {

@@ -119,7 +119,7 @@ export const initJewelRepo = () => {
                     <SpiceComponentModel>{"spiceNo": "7", "quantity": 1500}
                 ],
                 "name": "Pyrite Rhinestone",
-                "bonusGiven": 1
+                "bonusGiven": 2
             }),
         new JewelBase(8, <JewelModel>{
                 "x": 646,
@@ -237,7 +237,7 @@ export const initJewelRepo = () => {
                 "x": 1365,
                 "y": 100,
                 "range": 90,
-                "effect": "All meal bonuses, as shown in the Dinner Table Menu, actaully give 1.}x higher bonus than what is shown. So if a bonus says +100%, it is actually giving +1}%. @ Doesn't apply to Line Width bonus.",
+                "effect": "All meal bonuses, as shown in the Dinner Table Menu, actually give 1.}x higher bonus than what is shown. So if a bonus says +100%, it is actually giving +1}%. @ Doesn't apply to Line Width bonus.",
                 "description": "Bolsters meals",
                 "requirements": [
                     <ComponentModel>{"item": "GalaxyC1b", "quantity": 300},

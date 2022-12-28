@@ -3121,8 +3121,8 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Crawler]]", "txtName": "Crawler"},
                     <SourceModel>{"wikiName": "[[Tremor Wurm]]", "txtName": "Tremor Wurm"},
                     <SourceModel>{"wikiName": "[[Kattlecruk]]", "txtName": "Kattlecruk"},
-                    <SourceModel>{"wikiName": "[[Septic Kattlecruk]]", "txtName": "Septic Kattlecruk"},
-                    <SourceModel>{"wikiName": "[[Undying Troll]]", "txtName": "Undying Troll"},
+                    <SourceModel>{"wikiName": "[[Chaotic Kattlecruk]]", "txtName": "Chaotic Kattlecruk"},
+                    <SourceModel>{"wikiName": "[[Sacrilegious Kattlecruk]]", "txtName": "Sacrilegious Kattlecruk"},
                     <SourceModel>{
                         "wikiName": "[[Colosseum/Dewdrop#Bronze Chest|Dewdrop Bronze Chest]]",
                         "txtName": "Colosseum: Dewdrop Bronze Chest"
@@ -3723,8 +3723,8 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Cheese Nub]]", "txtName": "Cheese Nub"},
                     <SourceModel>{"wikiName": "[[Stiltmole]]", "txtName": "Stiltmole"},
                     <SourceModel>{"wikiName": "[[Kattlecruk]]", "txtName": "Kattlecruk"},
-                    <SourceModel>{"wikiName": "[[Septic Kattlecruk]]", "txtName": "Septic Kattlecruk"},
-                    <SourceModel>{"wikiName": "[[Undying Troll]]", "txtName": "Undying Troll"},
+                    <SourceModel>{"wikiName": "[[Chaotic Kattlecruk]]", "txtName": "Chaotic Kattlecruk"},
+                    <SourceModel>{"wikiName": "[[Sacrilegious Kattlecruk]]", "txtName": "Sacrilegious Kattlecruk"},
                     <SourceModel>{"wikiName": "[[Scarab]]", "txtName": "Scarab"}
                 ],
                 "recipeFrom": [],
@@ -3740,8 +3740,8 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Fire Spirit]]", "txtName": "Fire Spirit"},
                     <SourceModel>{"wikiName": "[[Biggole Mole]]", "txtName": "Biggole Mole"},
                     <SourceModel>{"wikiName": "[[Kattlecruk]]", "txtName": "Kattlecruk"},
-                    <SourceModel>{"wikiName": "[[Septic Kattlecruk]]", "txtName": "Septic Kattlecruk"},
-                    <SourceModel>{"wikiName": "[[Undying Troll]]", "txtName": "Undying Troll"},
+                    <SourceModel>{"wikiName": "[[Chaotic Kattlecruk]]", "txtName": "Chaotic Kattlecruk"},
+                    <SourceModel>{"wikiName": "[[Sacrilegious Kattlecruk]]", "txtName": "Sacrilegious Kattlecruk"},
                     <SourceModel>{"wikiName": "[[Dust Mote]]", "txtName": "Dust Mote"}
                 ],
                 "recipeFrom": [],
@@ -3753,8 +3753,8 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Crawler]]", "txtName": "Crawler"},
                     <SourceModel>{"wikiName": "[[Tremor Wurm]]", "txtName": "Tremor Wurm"},
                     <SourceModel>{"wikiName": "[[Kattlecruk]]", "txtName": "Kattlecruk"},
-                    <SourceModel>{"wikiName": "[[Septic Kattlecruk]]", "txtName": "Septic Kattlecruk"},
-                    <SourceModel>{"wikiName": "[[Undying Troll]]", "txtName": "Undying Troll"}
+                    <SourceModel>{"wikiName": "[[Chaotic Kattlecruk]]", "txtName": "Chaotic Kattlecruk"},
+                    <SourceModel>{"wikiName": "[[Sacrilegious Kattlecruk]]", "txtName": "Sacrilegious Kattlecruk"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -6121,12 +6121,12 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("CardsZ19", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Septic Kattlecruk]]", "txtName": "Septic Kattlecruk"}],
+                "sources": [<SourceModel>{"wikiName": "[[Chaotic Kattlecruk]]", "txtName": "Chaotic Kattlecruk"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
         new SourcesBase("CardsZ20", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Undying Troll]]", "txtName": "Undying Troll"}],
+                "sources": [<SourceModel>{"wikiName": "[[Sacrilegious Kattlecruk]]", "txtName": "Sacrilegious Kattlecruk"}],
                 "recipeFrom": [],
                 "questAss": []
             }),

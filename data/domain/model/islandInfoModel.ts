@@ -9,5 +9,6 @@ export interface IslandInfoModel {
     unlockQty: number,
     cloudsUnlocked: number,
     xYPointer: string,
-    expPerTrip: number
+    expPerTrip: number,
+    artifactsPerIsland: number
 }

@@ -1170,7 +1170,7 @@ export const initTaskDescriptionRepo = () => {
                 "description": "Refine a total of { Salts of any type.",
                 "extraStr": "Blank420q",
                 "number1": 15,
-                "descLine2": "1|0|Filler",
+                "descLine2": "1|0|As long as you remember to throw it over your left shoulder you'll be fine.",
                 "numbers": [
                     25,
                     150,
@@ -1189,7 +1189,7 @@ export const initTaskDescriptionRepo = () => {
                 "description": "Trash a total of { Cogs. Er, I mean crocs... no, I did mean cogs.",
                 "extraStr": "Blank420q",
                 "number1": 15,
-                "descLine2": "1|0|Filler",
+                "descLine2": "1|0|The cogs are gone! At least all the ones you trashed. The rest are still there.",
                 "numbers": [
                     10,
                     40,
@@ -1208,7 +1208,7 @@ export const initTaskDescriptionRepo = () => {
                 "description": "In a single map, have the total lv of all shrines be at least {",
                 "extraStr": "Blank420q",
                 "number1": 15,
-                "descLine2": "1|1|Filler",
+                "descLine2": "1|1|My shrines aren't even half the LV of yours! Please, go teach mine how to be better.",
                 "numbers": [
                     4,
                     12,
@@ -1227,7 +1227,7 @@ export const initTaskDescriptionRepo = () => {
                 "description": "Print a total of { resources. If only you could sample gems...",
                 "extraStr": "Blank420q",
                 "number1": 15,
-                "descLine2": "2|0|Filler",
+                "descLine2": "2|0|And brrr it went, all through the night.",
                 "numbers": [
                     5000,
                     25000,
@@ -1246,7 +1246,7 @@ export const initTaskDescriptionRepo = () => {
                 "description": "Have your 'Best Waves' in Worship add up to at least {",
                 "extraStr": "Blank420q",
                 "number1": 15,
-                "descLine2": "2|0|Filler",
+                "descLine2": "2|0|Congratulations!!! What, what are you looking at? I was talking to the wizards...",
                 "numbers": [
                     25,
                     40,
@@ -1265,7 +1265,7 @@ export const initTaskDescriptionRepo = () => {
                 "description": "Collect a total of { Traps. +2% shiny chance each time you complete this! ",
                 "extraStr": "Blank420q",
                 "number1": 15,
-                "descLine2": "2|0|Filler",
+                "descLine2": "2|0|Remember when you naively placed all those 10 minute traps? Haha good times.",
                 "numbers": [
                     10,
                     50,
@@ -1303,7 +1303,7 @@ export const initTaskDescriptionRepo = () => {
                 "description": "Complete { Frostbite Tundra achieves, accessed with that button in the top left!",
                 "extraStr": "Blank420q",
                 "number1": 15,
-                "descLine2": "2|0|Filler",
+                "descLine2": "2|0|There snow better feeling than an ice fully completed achievement list!",
                 "numbers": [
                     5,
                     10,
@@ -1681,7 +1681,7 @@ export const initTaskDescriptionRepo = () => {
         new TaskDescriptionBase(88, <TaskDescriptionModel>{
                 "name": "Cracking Eggs",
                 "description": "Breed a } pet { times.",
-                "extraStr": "Squirrel|Piggo|Mallay|Wild Boar|Mecho Mouse|Axolotl|Burd|Chippy|Panda|Hedgehog",
+                "extraStr": "Squirrel|Piggo|Mallay|Wild Boar|Mecho Mouse|Choccie|Cool Bird|Chippy|Panda|Hedgehog",
                 "number1": 10,
                 "descLine2": "1|1|I tell u hwat that right thers quite the animal farm ya got pardner!",
                 "numbers": [

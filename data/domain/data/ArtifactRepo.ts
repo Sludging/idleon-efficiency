@@ -181,9 +181,9 @@ export const initArtifactRepo = () => {
                 "name": "Dreamcatcher",
                 "baseBonus": 10,
                 "baseFindChance": 200,
-                "qtyBonus": 1,
-                "bonus": "Auto deliver post office orders at the start of each day, if you can afford to.",
-                "ancientBonus": "25% chance for +1 box when completing post office orders!",
+                "qtyBonus": 2,
+                "bonus": "Your loot pile can hold +{ more sailing chests at once! What a dream situation!",
+                "ancientBonus": "The artifact's main bonus is doubled!",
                 "ancientBonusQty": 25
             }),
         new ArtifactBase(20, <ArtifactModel>{

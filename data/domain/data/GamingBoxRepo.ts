@@ -8,7 +8,7 @@ export const initGamingBoxRepo = () => {
     return [    
         new GamingBoxBase(0, <GamingBoxModel>{
                 "name": "Half Opened Box",
-                "costA": 3,
+                "costA": 2,
                 "costB": 5,
                 "drawX": 43,
                 "drawY": 133,
@@ -24,7 +24,7 @@ export const initGamingBoxRepo = () => {
             }),
         new GamingBoxBase(1, <GamingBoxModel>{
                 "name": "Spaded Box",
-                "costA": 5,
+                "costA": 3,
                 "costB": 6,
                 "drawX": 293,
                 "drawY": 273,
@@ -40,8 +40,8 @@ export const initGamingBoxRepo = () => {
             }),
         new GamingBoxBase(2, <GamingBoxModel>{
                 "name": "Animal Box",
-                "costA": 2,
-                "costB": 9,
+                "costA": 5,
+                "costB": 8,
                 "drawX": 506,
                 "drawY": 301,
                 "clickWidth": 94,
@@ -56,7 +56,7 @@ export const initGamingBoxRepo = () => {
             }),
         new GamingBoxBase(3, <GamingBoxModel>{
                 "name": "Oceanside Package",
-                "costA": 7,
+                "costA": 1,
                 "costB": 12,
                 "drawX": 585,
                 "drawY": 91,

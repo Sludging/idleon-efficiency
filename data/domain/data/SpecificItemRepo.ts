@@ -8630,12 +8630,13 @@ export const initSpecificItemRepo = () => {
                 "WIS": 2,
                 "LUK": 0,
                 "Defence": 0,
-                "miscUp1": "Max Worship Charge: 100%",
+                "miscUp1": "",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 1,
                 "Skill": "Worship",
                 "Skill_Power": 4,
-                "Speed": 4
+                "Speed": 4,
+                "maxCharge": 100
             }),
         new BaseItemBase("WorshipSkull2", <SkullItemModel>{
                 "internalName": "WorshipSkull2",
@@ -8652,12 +8653,13 @@ export const initSpecificItemRepo = () => {
                 "WIS": 4,
                 "LUK": 0,
                 "Defence": 0,
-                "miscUp1": "Max Worship Charge: 200%",
+                "miscUp1": "",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 1,
                 "Skill": "Worship",
                 "Skill_Power": 8,
-                "Speed": 5
+                "Speed": 5,
+                "maxCharge": 200
             }),
         new BaseItemBase("WorshipSkull3", <SkullItemModel>{
                 "internalName": "WorshipSkull3",
@@ -8674,12 +8676,13 @@ export const initSpecificItemRepo = () => {
                 "WIS": 7,
                 "LUK": 0,
                 "Defence": 0,
-                "miscUp1": "Max Worship Charge: 400%",
+                "miscUp1": "",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 2,
                 "Skill": "Worship",
                 "Skill_Power": 13,
-                "Speed": 5
+                "Speed": 5,
+                "maxCharge": 400
             }),
         new BaseItemBase("WorshipSkull4", <SkullItemModel>{
                 "internalName": "WorshipSkull4",
@@ -8696,12 +8699,13 @@ export const initSpecificItemRepo = () => {
                 "WIS": 10,
                 "LUK": 0,
                 "Defence": 0,
-                "miscUp1": "Max Worship Charge: 750%",
+                "miscUp1": "",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 2,
                 "Skill": "Worship",
                 "Skill_Power": 20,
-                "Speed": 6
+                "Speed": 6,
+                "maxCharge": 750
             }),
         new BaseItemBase("WorshipSkull5", <SkullItemModel>{
                 "internalName": "WorshipSkull5",
@@ -8718,12 +8722,13 @@ export const initSpecificItemRepo = () => {
                 "WIS": 12,
                 "LUK": 0,
                 "Defence": 0,
-                "miscUp1": "Max Worship Charge: 1250%",
+                "miscUp1": "",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 3,
                 "Skill": "Worship",
                 "Skill_Power": 26,
-                "Speed": 7
+                "Speed": 7,
+                "maxCharge": 1250
             }),
         new BaseItemBase("WorshipSkull6", <SkullItemModel>{
                 "internalName": "WorshipSkull6",
@@ -8740,12 +8745,13 @@ export const initSpecificItemRepo = () => {
                 "WIS": 15,
                 "LUK": 0,
                 "Defence": 0,
-                "miscUp1": "Max Worship Charge: 1750%",
+                "miscUp1": "",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 4,
                 "Skill": "Worship",
                 "Skill_Power": 34,
-                "Speed": 7
+                "Speed": 7,
+                "maxCharge": 1750
             }),
         new BaseItemBase("WorshipSkull7", <SkullItemModel>{
                 "internalName": "WorshipSkull7",
@@ -8762,12 +8768,13 @@ export const initSpecificItemRepo = () => {
                 "WIS": 20,
                 "LUK": 0,
                 "Defence": 0,
-                "miscUp1": "Max Worship Charge: 2500%",
+                "miscUp1": "",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 4,
                 "Skill": "Worship",
                 "Skill_Power": 45,
-                "Speed": 8
+                "Speed": 8,
+                "maxCharge": 2500
             }),
         new BaseItemBase("WorshipSkull8", <SkullItemModel>{
                 "internalName": "WorshipSkull8",
@@ -8784,12 +8791,13 @@ export const initSpecificItemRepo = () => {
                 "WIS": 0,
                 "LUK": 0,
                 "Defence": 25,
-                "miscUp1": "Max Worship Charge: 1000%",
+                "miscUp1": "250Base Damage",
                 "miscUp2": "2% All Stats",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "Worship",
                 "Skill_Power": 10,
-                "Speed": 2
+                "Speed": 2,
+                "maxCharge": 1000
             }),
         new BaseItemBase("WorshipSkull9", <SkullItemModel>{
                 "internalName": "WorshipSkull9",
@@ -8806,12 +8814,13 @@ export const initSpecificItemRepo = () => {
                 "WIS": 0,
                 "LUK": 0,
                 "Defence": 0,
-                "miscUp1": "Max Worship Charge: 3000%",
+                "miscUp1": "3% Total Damage",
                 "miscUp2": "3% All Stats",
                 "Upgrade_Slots_Left": 5,
                 "Skill": "Worship",
                 "Skill_Power": 55,
-                "Speed": 9
+                "Speed": 9,
+                "maxCharge": 3000
             }),
         new BaseItemBase("DNAgun0", <ToolItemModel>{
                 "internalName": "DNAgun0",
@@ -9470,7 +9479,7 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Golden Food",
                 "description": "Claiming AFK gives Sailing AFK time [% chance.. Golden foods are never consumed.",
-                "goldenFoodData": <GoldenFoodDataModel>{"effect": "Claiming AFK gives Sailing AFK time [% chance.", "amount": 30}
+                "goldenFoodData": <GoldenFoodDataModel>{"effect": "Claiming AFK gives Sailing AFK time [% chance.", "amount": 23}
             }),
         new BaseItemBase("ButterBar", <GoldenFoodItemModel>{
                 "internalName": "ButterBar",
@@ -14794,7 +14803,7 @@ export const initSpecificItemRepo = () => {
                 "stampData": <StampDataModel>{
                     "effect": "BossDmg",
                     "function": "decay",
-                    "x1": 24,
+                    "x1": 20,
                     "x2": 60,
                     "upgradeInterval": 10,
                     "material": <QtylessComponentModel>{"item": "Quest17"},
@@ -15114,8 +15123,8 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.aStamp,
                 "Type": "Combat Stamp",
                 "description": "",
-                "bonus": "+{ WIS",
-                "ID": 35,
+                "bonus": "+{ LUK",
+                "ID": 36,
                 "stampData": <StampDataModel>{
                     "effect": "BaseLUK",
                     "function": "add",
@@ -15139,8 +15148,8 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.aStamp,
                 "Type": "Combat Stamp",
                 "description": "",
-                "bonus": "+{ WIS",
-                "ID": 35,
+                "bonus": "+{% Total Damage",
+                "ID": 37,
                 "stampData": <StampDataModel>{
                     "effect": "PctDmg",
                     "function": "decay",
@@ -15739,7 +15748,7 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.aStamp,
                 "Type": "Skills Stamp",
                 "description": "",
-                "bonus": "+{% Mutli-Bug Chance",
+                "bonus": "+{% Multi-Bug Chance",
                 "ID": 24,
                 "stampData": <StampDataModel>{
                     "effect": "DoubleCatch",
@@ -26451,7 +26460,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("CardsZ19", <CardItemModel>{
                 "internalName": "CardsZ19",
-                "displayName": "Septic Kattlecruk Card",
+                "displayName": "Chaotic Kattlecruk Card",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.dCard,
                 "Type": "Card",
@@ -26467,7 +26476,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("CardsZ20", <CardItemModel>{
                 "internalName": "CardsZ20",
-                "displayName": "Undying Troll Card",
+                "displayName": "Sacrilegious Kattlecruk Card",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.dCard,
                 "Type": "Card",

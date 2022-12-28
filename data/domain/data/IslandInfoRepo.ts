@@ -15,7 +15,8 @@ export const initIslandInfoRepo = () => {
                 "unlockQty": 10,
                 "cloudsUnlocked": 1.2,
                 "xYPointer": "0,0",
-                "expPerTrip": 2
+                "expPerTrip": 2,
+                "artifactsPerIsland": 4
             }),
         new IslandInfoBase(1, <IslandInfoModel>{
                 "name": "Beachy Coast",
@@ -26,7 +27,8 @@ export const initIslandInfoRepo = () => {
                 "unlockQty": 200,
                 "cloudsUnlocked": 3.5,
                 "xYPointer": "43,304",
-                "expPerTrip": 6
+                "expPerTrip": 6,
+                "artifactsPerIsland": 3
             }),
         new IslandInfoBase(2, <IslandInfoModel>{
                 "name": "Isolated Woods",
@@ -37,7 +39,8 @@ export const initIslandInfoRepo = () => {
                 "unlockQty": 800,
                 "cloudsUnlocked": -1,
                 "xYPointer": "398,206",
-                "expPerTrip": 10
+                "expPerTrip": 10,
+                "artifactsPerIsland": 2
             }),
         new IslandInfoBase(3, <IslandInfoModel>{
                 "name": "Rocky Peaks",
@@ -48,7 +51,8 @@ export const initIslandInfoRepo = () => {
                 "unlockQty": 6000,
                 "cloudsUnlocked": 5,
                 "xYPointer": "271,340",
-                "expPerTrip": 20
+                "expPerTrip": 20,
+                "artifactsPerIsland": 3
             }),
         new IslandInfoBase(4, <IslandInfoModel>{
                 "name": "Stormy North",
@@ -59,7 +63,8 @@ export const initIslandInfoRepo = () => {
                 "unlockQty": 30000,
                 "cloudsUnlocked": 1,
                 "xYPointer": "426,69",
-                "expPerTrip": 30
+                "expPerTrip": 30,
+                "artifactsPerIsland": 3
             }),
         new IslandInfoBase(5, <IslandInfoModel>{
                 "name": "Toxic Bay Inc",
@@ -70,7 +75,8 @@ export const initIslandInfoRepo = () => {
                 "unlockQty": 120000,
                 "cloudsUnlocked": 7,
                 "xYPointer": "190,426",
-                "expPerTrip": 55
+                "expPerTrip": 55,
+                "artifactsPerIsland": 2
             }),
         new IslandInfoBase(6, <IslandInfoModel>{
                 "name": "Candied Island",
@@ -81,7 +87,8 @@ export const initIslandInfoRepo = () => {
                 "unlockQty": 400000,
                 "cloudsUnlocked": 7.8,
                 "xYPointer": "479,309",
-                "expPerTrip": 85
+                "expPerTrip": 85,
+                "artifactsPerIsland": 2
             }),
         new IslandInfoBase(7, <IslandInfoModel>{
                 "name": "Fungi Meadows",
@@ -92,7 +99,8 @@ export const initIslandInfoRepo = () => {
                 "unlockQty": 2000000,
                 "cloudsUnlocked": 10,
                 "xYPointer": "379,404",
-                "expPerTrip": 150
+                "expPerTrip": 150,
+                "artifactsPerIsland": 2
             }),
         new IslandInfoBase(8, <IslandInfoModel>{
                 "name": "Cloudy Quay",
@@ -103,7 +111,8 @@ export const initIslandInfoRepo = () => {
                 "unlockQty": 8000000,
                 "cloudsUnlocked": 9.11,
                 "xYPointer": "625,219",
-                "expPerTrip": 300
+                "expPerTrip": 300,
+                "artifactsPerIsland": 1
             }),
         new IslandInfoBase(9, <IslandInfoModel>{
                 "name": "Dungeon Cove",
@@ -114,7 +123,8 @@ export const initIslandInfoRepo = () => {
                 "unlockQty": 30000000,
                 "cloudsUnlocked": 12,
                 "xYPointer": "635,113",
-                "expPerTrip": 600
+                "expPerTrip": 600,
+                "artifactsPerIsland": 2
             }),
         new IslandInfoBase(10, <IslandInfoModel>{
                 "name": "Crystal Enclave",
@@ -125,7 +135,8 @@ export const initIslandInfoRepo = () => {
                 "unlockQty": 60000000,
                 "cloudsUnlocked": 1,
                 "xYPointer": "542,426",
-                "expPerTrip": 900
+                "expPerTrip": 900,
+                "artifactsPerIsland": 1
             }),
         new IslandInfoBase(11, <IslandInfoModel>{
                 "name": "Petulent Garage",
@@ -136,7 +147,8 @@ export const initIslandInfoRepo = () => {
                 "unlockQty": 120000000,
                 "cloudsUnlocked": 1,
                 "xYPointer": "645,354",
-                "expPerTrip": 1500
+                "expPerTrip": 1500,
+                "artifactsPerIsland": 1
             }),
         new IslandInfoBase(12, <IslandInfoModel>{
                 "name": "Isle of Note",
@@ -147,7 +159,8 @@ export const initIslandInfoRepo = () => {
                 "unlockQty": 400000000,
                 "cloudsUnlocked": 13,
                 "xYPointer": "826,74",
-                "expPerTrip": 3000
+                "expPerTrip": 3000,
+                "artifactsPerIsland": 1
             }),
         new IslandInfoBase(13, <IslandInfoModel>{
                 "name": "The Edge",
@@ -158,7 +171,8 @@ export const initIslandInfoRepo = () => {
                 "unlockQty": 1200000000,
                 "cloudsUnlocked": 14,
                 "xYPointer": "840,243",
-                "expPerTrip": 5000
+                "expPerTrip": 5000,
+                "artifactsPerIsland": 2
             }),
         new IslandInfoBase(14, <IslandInfoModel>{
                 "name": "Sahara",
@@ -169,7 +183,8 @@ export const initIslandInfoRepo = () => {
                 "unlockQty": 2000000000,
                 "cloudsUnlocked": 1,
                 "xYPointer": "764,426",
-                "expPerTrip": 10000
+                "expPerTrip": 10000,
+                "artifactsPerIsland": 1
             })    
 ]
 }

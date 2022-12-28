@@ -72,7 +72,7 @@ export const initStampDescriptionRepo = () => {
                     "+{% Carry Capacity for Fishing Items",
                     "+{% Multi-Fish Chance",
                     "+{% Carry Capacity for Catching Items",
-                    "+{% Mutli-Bug Chance",
+                    "+{% Multi-Bug Chance",
                     "+{ Base Trapping Efficiency",
                     "+{% Shiny Catch rate, multiplier",
                     "+{% Trapping Exp Gain",
