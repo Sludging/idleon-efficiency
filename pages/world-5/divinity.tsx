@@ -40,7 +40,7 @@ function AlignmentDisplay() {
                                 <IconImage data={player.getClassImageData()} scale={0.8} />
                                 <Text size="small">{player.playerName}</Text>
                             </Box>
-                            <Box direction="row" justify="between" gap="small" wrap>
+                            <Box direction="row" justify="between" wrap>
                                 <ComponentAndLabel
                                     label="Level"
                                     component={
@@ -49,9 +49,18 @@ function AlignmentDisplay() {
                                             <Text>{player.skills.get(SkillsIndex.Divinity)?.level.toString() ?? "0"}</Text>
                                         </Box>
                                     }
+                                    margin={{ bottom: 'small', right: 'small' }}
                                 />
-                                <TextAndLabel label="Style" text={divinity?.playerInfo[player.playerID].style.name ?? "Unknown"} />
-                                <TextAndLabel label="God" text={divinity?.playerInfo[player.playerID].god.data.name ?? "Unknown"} />
+                                <TextAndLabel 
+                                    label="Style" 
+                                    text={divinity?.playerInfo[player.playerID].style.name ?? "Unknown"} 
+                                    margin={{ bottom: 'small', right: 'small' }}
+                                />
+                                <TextAndLabel 
+                                    label="God" 
+                                    text={divinity?.playerInfo[player.playerID].god.data.name ?? "Unknown"} 
+                                    margin={{ bottom: 'small', right: 'small' }}
+                                />
                             </Box>
                         </Box>
                     </ShadowBox>
@@ -83,10 +92,10 @@ function GodDisplay() {
                                 <Box margin={{ right: 'small' }}>
                                     <TextAndLabel textSize='small' text={god.data.name} label="Name" />
                                 </Box>
-                                <Box margin={{ right: 'small' }}>
+                                <Box margin={{ bottom: 'small', right: 'small' }}>
                                     <TextAndLabel textSize='small' text={`${god.bonusLevel}/100`} label="Level" />
                                 </Box>
-                                <Box>
+                                <Box margin={{ bottom: 'small', right: 'small' }}>
                                     <TextAndLabel textSize='small' text={`FAKE`} label="Bonus" />
                                 </Box>
                             </ShadowBox>
@@ -106,7 +115,7 @@ function Divinity() {
             <NextSeo title="Divinity" />
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Divinity</Heading>
             <Text size="xsmall">* This is a work in progress, there could some bugs and minor inaccuracies.</Text>
-            <Box align="center" direction="row" justify="center" gap="small">
+            <Box align="center" direction="row" justify="center" gap="small" margin={{bottom: 'small'}}>
                 {["Gods", "Alignment"].map((tabName, index) => (
                     <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
                 ))
