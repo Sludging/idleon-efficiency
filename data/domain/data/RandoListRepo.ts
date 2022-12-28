@@ -512,13 +512,11 @@ export const initRandoListRepo = () => {
                     "600000",
                     "700000",
                     "800000",
-                    "800000",
-                    "800000",
-                    "800000",
-                    "800000",
-                    "800000",
-                    "800000",
-                    "800000"
+                    "900000",
+                    "1000000",
+                    "1000000",
+                    "1000000",
+                    "1000000"
                 ]
             }),
         new RandoListBase(19, <RandoListModel>{
@@ -1834,8 +1832,8 @@ export const initRandoListRepo = () => {
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "World_5_Launch",
-                    "New_Content-----------------_@_*World_5_has_been_released, once_you_kill_the_World_4_boss!_3_New_skills, new_submechanics, new_monsters_to_fight, 100s_of_new_bonuses, it's_a_whole_new_world_baby_lets_go!_@_*If_you_want_more_info_on_World_5, go_check_the_main_Patch_Notes._Keep_reading_for_info_on_small_changes_and_other_things_in_this_big_update!_@___@_New_stuff_not_related_to_World_5-------------------_@_*The_Voidinator, the_final_tower_defence_wizard, can_now_be_constructed_and_used_via_construction_in_world_3._@_*New_pet_battles_and_cooking_meals_added_to_world_4._@_*20_new_bubbles, 5_of_each_colour, as_well_as_new_vials_added_to_alchemy_in_world_2_@_*Enemy_HP_in_all_Tower_Defence, except_Glublins, has_been_lowered._@_*See_discord_for_a_full_list_of_all_15+_changes_at_Discord.gg/Idleon"
+                    "1st_Week_Update_v171",
+                    "World_5_new_content-----------------_@_*World_5_has_been_released, once_you_kill_the_World_4_boss!_3_New_skills, new_submechanics, new_monsters_to_fight!_@_*For_more_info_on_World_5, go_check_the_Patch_Notes_on_the_Character_Select_screen._@___@_New_stuff_in_Weekly_Update-------------------_@_*Storage_Chest_now_has_auto-sort!_Go_try_it_out_right_now, it's_the_new_button_on_the_left._GO_NOW, EMBRACE_CHEST_ORGANIZATION!_@_*You_can_now_identify_Captains_and_Boats_in_sailing, just_click_on_the_new_button_on_the_left_side_of_the_map_window!_@_*Several_major_issues_fixed, including_Eliteus_not_giving_you_an_Elite_Class_in_rare_scenarios, monsters_wouldn't_actively_drop_coins_for_endgamers, autoloot_not_functioning_if_you_had_inventory_opened, and_World_3_Town_map_crashing_on_some_characters._@_*21_other_bugs_were_fixed_in_this_patch._Thats_a_lot_of_bug_fixes!_Lets_go_lavaman!_@_*See_discord_for_a_full_list_of_all_15+_changes_at_Discord.gg/Idleon"
                 ]
             }),
         new RandoListBase(62, <RandoListModel>{
@@ -1845,11 +1843,11 @@ export const initRandoListRepo = () => {
                     "Pet3",
                     "Pet2",
                     "Pet7",
-                    "PetNA",
-                    "PetNA",
+                    "w4b4",
+                    "Pet10",
                     "Pet5",
                     "Pet8",
-                    "PetNA",
+                    "Pet11",
                     "PetNA"
                 ]
             }),

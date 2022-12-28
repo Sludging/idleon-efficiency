@@ -266,11 +266,11 @@ export const initBubbleRepo = () => {
         new BubbleBase("Gamer At Heart", <BubbleModel>{
                 "cauldron": "Power Cauldron",
                 "name": "Gamer At Heart",
-                "x1": 60,
+                "x1": 20,
                 "x2": 60,
                 "func": "decay",
                 "description": "When claiming AFK Gains, +{% chance to gain an equal amount of time for Gaming progress!",
-                "requirements": [<ComponentModel>{"item": "SailTr10", "quantity": 100}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
+                "requirements": [<ComponentModel>{"item": "SailTr9", "quantity": 100}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
                 "bonusKey": "W3ACTIVE"
             }),
         new BubbleBase("Slabi Strength", <BubbleModel>{
@@ -290,7 +290,7 @@ export const initBubbleRepo = () => {
                 "x2": 50,
                 "func": "decay",
                 "description": "+{% Total Damage per 250 STR, but only for warriors! No triple dipping into AGI and WIS! Also this, but for beginners with LUK!",
-                "requirements": [<ComponentModel>{"item": "SailTr21", "quantity": 150}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
+                "requirements": [<ComponentModel>{"item": "SailTr20", "quantity": 150}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
                 "bonusKey": "W5"
             }),
         new BubbleBase("Swift Steppin", <BubbleModel>{
@@ -550,11 +550,11 @@ export const initBubbleRepo = () => {
         new BubbleBase("Sailor At Heart", <BubbleModel>{
                 "cauldron": "Quicc Cauldron",
                 "name": "Sailor At Heart",
-                "x1": 50,
+                "x1": 16,
                 "x2": 60,
                 "func": "decay",
                 "description": "When claiming AFK Gains, +{% chance to gain an equal amount of time for Sailing progress!",
-                "requirements": [<ComponentModel>{"item": "SailTr12", "quantity": 100}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
+                "requirements": [<ComponentModel>{"item": "SailTr11", "quantity": 100}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
                 "bonusKey": "A3ACTIVE"
             }),
         new BubbleBase("Slabo Agility", <BubbleModel>{
@@ -574,7 +574,7 @@ export const initBubbleRepo = () => {
                 "x2": 50,
                 "func": "decay",
                 "description": "+{% Total Damage per 250 AGI, but only for archers! No triple dipping into STR and WIS!",
-                "requirements": [<ComponentModel>{"item": "SailTr25", "quantity": 150}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
+                "requirements": [<ComponentModel>{"item": "SailTr24", "quantity": 150}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
                 "bonusKey": "A5"
             }),
         new BubbleBase("Stable Jenius", <BubbleModel>{
@@ -838,7 +838,7 @@ export const initBubbleRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "description": "+{% Divinity EXP Gain",
-                "requirements": [<ComponentModel>{"item": "SailTr14", "quantity": 15}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
+                "requirements": [<ComponentModel>{"item": "SailTr13", "quantity": 15}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
                 "bonusKey": "M3ACTIVE"
             }),
         new BubbleBase("Slabe Wisdom", <BubbleModel>{
@@ -858,7 +858,7 @@ export const initBubbleRepo = () => {
                 "x2": 50,
                 "func": "decay",
                 "description": "+{% Total Damage per 250 WIS, but only for mages! No triple dipping into STR and AGI! Also, beginners get this bonus, but for LUK",
-                "requirements": [<ComponentModel>{"item": "SailTr29", "quantity": 200}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
+                "requirements": [<ComponentModel>{"item": "SailTr28", "quantity": 200}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
                 "bonusKey": "M5"
             }),
         new BubbleBase("Lotto Skills", <BubbleModel>{
@@ -1090,7 +1090,7 @@ export const initBubbleRepo = () => {
         new BubbleBase("Boaty Bubble", <BubbleModel>{
                 "cauldron": "Kazam Cauldron",
                 "name": "Boaty Bubble",
-                "x1": 160,
+                "x1": 135,
                 "x2": 70,
                 "func": "decay",
                 "description": "+{% Sailing Speed for all boats",
@@ -1110,7 +1110,7 @@ export const initBubbleRepo = () => {
         new BubbleBase("Bit By Bit", <BubbleModel>{
                 "cauldron": "Kazam Cauldron",
                 "name": "Bit By Bit",
-                "x1": 40,
+                "x1": 50,
                 "x2": 70,
                 "func": "decay",
                 "description": "+{% more bits earned in gaming per plant found, as shown in the Log Book found in the top right of the gaming garden!",

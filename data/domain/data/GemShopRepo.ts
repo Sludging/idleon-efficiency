@@ -1059,7 +1059,7 @@ export const initGemShopRepo = () => {
         new GemShopItemBase(105, <GemShopItemModel>{
                 "name": "GemP4",
                 "itemName": "Brimstone Forge Slot",
-                "desc": "Brimstone slots smelt bars 50% faster, and have +50% multi-bar chance, meaning you'll get extra bars for every ore! These MUTLIPLY with forge upgrades, so they're always good!",
+                "desc": "Brimstone slots smelt bars 50% faster, and have +50% multi-bar chance, meaning you'll get extra bars for every ore! These MULTIPLY with forge upgrades, so they're always good!",
                 "cost": 100,
                 "no": 104,
                 "maxPurchases": 16,
