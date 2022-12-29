@@ -177,6 +177,13 @@ export default function Layout({
                 { subLink: "/breeding", label: "Breeding" },
             ]
         },
+        {
+            link: "/world-5", label: "World 5", subLinks: [
+                { subLink: "/divinity", label: "Divinity" },
+                { subLink: "/sailing", label: "Sailing" },
+                { subLink: "/gaming", label: "Gaming" },
+            ]
+        },
         { link: "/players", label: "Players" },
         // { link: "/bribes", label: "Bribes - WIP"},
         {

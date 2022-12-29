@@ -266,17 +266,17 @@ export const initRandoListRepo = () => {
                     "25000",
                     "60000",
                     "100000",
-                    "50000",
-                    "15000000",
+                    "150000",
+                    "50000000",
                     "25",
                     "700",
                     "4500",
                     "20000",
                     "40000",
                     "125000",
-                    "1250000",
-                    "500000",
-                    "35000000",
+                    "400000",
+                    "1000000",
+                    "3500000",
                     "60",
                     "1250",
                     "6000",
@@ -399,7 +399,94 @@ export const initRandoListRepo = () => {
                     "EquipmentRingsChat5",
                     "EquipmentRingsChat6",
                     "EquipmentRingsChat8",
-                    "EquipmentRingsChat9"
+                    "EquipmentRingsChat9",
+                    "LockedInvSpace",
+                    "null",
+                    "Blank",
+                    "TestObj4",
+                    "TestObj5",
+                    "TestObj8",
+                    "TestObj9",
+                    "TestObj10",
+                    "EquipmentWeapons1",
+                    "TestObj2",
+                    "EquipmentWands4",
+                    "ExpSmith1",
+                    "Starlight",
+                    "AlienTreetutorial",
+                    "EquipmentWeapons2",
+                    "Secretstone",
+                    "InvStorage99",
+                    "COIN",
+                    "EXP",
+                    "FillerMaterial",
+                    "DungWeaponBow1",
+                    "DungWeaponWand1",
+                    "DungWeaponSword1",
+                    "TestObj15",
+                    "TestObj16",
+                    "TestObj14",
+                    "EquipmentCape1",
+                    "EquipmentHats72",
+                    "Spice0",
+                    "Spice6",
+                    "Spice9",
+                    "SailTr10",
+                    "SailTr12",
+                    "SailTr14",
+                    "SailTr21",
+                    "SailTr25",
+                    "SailTr29",
+                    "Bits",
+                    "EquipmentHatsBeg1",
+                    "EquipmentShirts8",
+                    "EquipmentShirts9",
+                    "EquipmentPants11",
+                    "EquipmentPants14",
+                    "EquipmentShoes6",
+                    "EquipmentShoes8",
+                    "EquipmentShoes13",
+                    "EquipmentPendant1",
+                    "EquipmentPendant2",
+                    "EquipmentPendant3",
+                    "EquipmentPendant4",
+                    "EquipmentPendant5",
+                    "EquipmentPendant6",
+                    "EquipmentPendant7",
+                    "EquipmentPendant8",
+                    "Trophy4",
+                    "DoubleAFKtix",
+                    "ObolFrag",
+                    "DeliveryBox",
+                    "EquipmentHats23",
+                    "EquipmentHats24",
+                    "Quest8",
+                    "CraftMat15",
+                    "CraftMat16",
+                    "CraftMat17",
+                    "NPCtoken8",
+                    "EquipmentShirts4",
+                    "EquipmentPants12",
+                    "EquipmentShoes10",
+                    "EquipmentShoes11",
+                    "EquipmentShoes12",
+                    "EquipmentShoes14",
+                    "EquipmentPendant13",
+                    "EquipmentPendant15",
+                    "EquipmentRings1",
+                    "FoodHealth8",
+                    "FishingRod1",
+                    "CatchingNet1",
+                    "MaxCapBagFi0",
+                    "MaxCapBagB0",
+                    "MaxCapBagTr0",
+                    "MaxCapBagTr2",
+                    "MaxCapBagS0",
+                    "MaxCapBagS2",
+                    "ObolPlatinumSpeed",
+                    "StampC10",
+                    "StampC11",
+                    "StampC12"
                 ]
             }),
         new RandoListBase(18, <RandoListModel>{
@@ -425,13 +512,11 @@ export const initRandoListRepo = () => {
                     "600000",
                     "700000",
                     "800000",
-                    "800000",
-                    "800000",
-                    "800000",
-                    "800000",
-                    "800000",
-                    "800000",
-                    "800000"
+                    "900000",
+                    "1000000",
+                    "1000000",
+                    "1000000",
+                    "1000000"
                 ]
             }),
         new RandoListBase(19, <RandoListModel>{
@@ -1396,9 +1481,9 @@ export const initRandoListRepo = () => {
                     "41",
                     "45",
                     "48",
-                    "51",
+                    "50",
                     "53",
-                    "57"
+                    "56"
                 ]
             }),
         new RandoListBase(50, <RandoListModel>{
@@ -1429,7 +1514,10 @@ export const initRandoListRepo = () => {
                     "_",
                     "BarCook.png",
                     "BarBreed.png",
-                    "BarLab.png"
+                    "BarLab.png",
+                    "BarB2.png",
+                    "BarDiv.png",
+                    "BarR2.png"
                 ]
             }),
         new RandoListBase(52, <RandoListModel>{
@@ -1736,13 +1824,16 @@ export const initRandoListRepo = () => {
                     "152",
                     "153",
                     "154",
-                    "155"
+                    "155",
+                    "156",
+                    "157",
+                    "159"
                 ]
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "Idle_Skilling_Crossover",
-                    "Idle_Skilling_Launch_Event-----------------_@_*My_old_game_I_made_before_IdleOn_is_finally_out_on_Steam!_@_*Make_progress_in_Idle_Skilling_to_receive_codes, which_you_can_redeem_at_the_Keymaster_in_world_1_town_for_rewards!_@_*Never_heard_of_Idle_Skilling?_Imagine_IdleOn_without_characters, less_complexity, but_more_skills_to_level_up!_It's_similar_enough_to_IdleOn_that_I_think_you'll_enjoy_it, but_still_very_unique_and_worth_giving_a_go!_@_*The_crossover_rewards_for_playing_Idle_Skilling_include_1000s_of_gems, a_unique_hat, gemshop_items, and_even_a_+15%_Skill_Efficiency_trophy!_@_*There_is_no_time_limit_on_the_crossover_event, since_Idle_Skilling_has_years_of_content_and_is_a_much_more_passive_game!_@_*Well_that's_all_I_have_to_say, gonna_get_back_to_working_on_World_5, which_will_have_3_new_skills, new_monsters, and_new_subfeatures!"
+                    "1st_Week_Update_v171",
+                    "World_5_new_content-----------------_@_*World_5_has_been_released, once_you_kill_the_World_4_boss!_3_New_skills, new_submechanics, new_monsters_to_fight!_@_*For_more_info_on_World_5, go_check_the_Patch_Notes_on_the_Character_Select_screen._@___@_New_stuff_in_Weekly_Update-------------------_@_*Storage_Chest_now_has_auto-sort!_Go_try_it_out_right_now, it's_the_new_button_on_the_left._GO_NOW, EMBRACE_CHEST_ORGANIZATION!_@_*You_can_now_identify_Captains_and_Boats_in_sailing, just_click_on_the_new_button_on_the_left_side_of_the_map_window!_@_*Several_major_issues_fixed, including_Eliteus_not_giving_you_an_Elite_Class_in_rare_scenarios, monsters_wouldn't_actively_drop_coins_for_endgamers, autoloot_not_functioning_if_you_had_inventory_opened, and_World_3_Town_map_crashing_on_some_characters._@_*21_other_bugs_were_fixed_in_this_patch._Thats_a_lot_of_bug_fixes!_Lets_go_lavaman!_@_*See_discord_for_a_full_list_of_all_15+_changes_at_Discord.gg/Idleon"
                 ]
             }),
         new RandoListBase(62, <RandoListModel>{
@@ -1752,11 +1843,11 @@ export const initRandoListRepo = () => {
                     "Pet3",
                     "Pet2",
                     "Pet7",
-                    "PetNA",
-                    "PetNA",
+                    "w4b4",
+                    "Pet10",
                     "Pet5",
                     "Pet8",
-                    "PetNA",
+                    "Pet11",
                     "PetNA"
                 ]
             }),
@@ -1831,7 +1922,10 @@ export const initRandoListRepo = () => {
                     "WORSHIP",
                     "COOKING",
                     "BREEDING",
-                    "LABORATORY"
+                    "LABORATORY",
+                    "SAILING",
+                    "DIVINITY",
+                    "GAMING"
                 ]
             }),
         new RandoListBase(67, <RandoListModel>{
@@ -1860,7 +1954,10 @@ export const initRandoListRepo = () => {
                     "WORSHIP",
                     "COOKING",
                     "BREEDING",
-                    "LABORATORY"
+                    "LABORATORY",
+                    "SAILING",
+                    "DIVINITY",
+                    "GAMING"
                 ]
             }),
         new RandoListBase(68, <RandoListModel>{
@@ -1998,6 +2095,27 @@ export const initRandoListRepo = () => {
                     "filler"
                 ]
             }),
-        new RandoListBase(77, <RandoListModel>{"elements": ["ObolAmarokA", "ObolEfauntA", "ObolChizoarA", "ObolSlush", "ObolTroll"]})    
+        new RandoListBase(77, <RandoListModel>{"elements": ["ObolAmarokA", "ObolEfauntA", "ObolChizoarA", "ObolSlush", "ObolTroll"]}),
+        new RandoListBase(78, <RandoListModel>{
+                "elements": [
+                    "96",
+                    "137",
+                    "168",
+                    "159",
+                    "57",
+                    "258",
+                    "247",
+                    "160",
+                    "113",
+                    "308",
+                    "197",
+                    "315",
+                    "325",
+                    "205",
+                    "280",
+                    "330"
+                ]
+            }),
+        new RandoListBase(79, <RandoListModel>{"elements": ["Slargon", "Pirate_Porkchop", "Muhmuguh", "Poigu"]})    
 ]
 }

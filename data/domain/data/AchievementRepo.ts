@@ -605,14 +605,14 @@ export const initAchievementRepo = () => {
                 "name": "B-o-B to Help",
                 "qty": 1,
                 "desc": "Complete 75 unique quests on a single character. I'm not sure what B-o-B stands for either...",
-                "rewards": "*STEAM EXCLUSIVE &*16 gems &*Item3",
+                "rewards": "*STEAM EXCLUSIVE &*16 gems",
                 "world": "Yum Yum Desert"
             }),
         new AchievementBase(86, <AchievementModel>{
                 "name": "Card Enthusiast",
                 "qty": 1,
                 "desc": "Collect 30 unique cards. If u wanna trade, I got some spare Amarok cards!",
-                "rewards": "*STEAM EXCLUSIVE &*16 gems &*Item3",
+                "rewards": "*STEAM EXCLUSIVE &*16 gems",
                 "world": "Yum Yum Desert"
             }),
         new AchievementBase(87, <AchievementModel>{
@@ -1333,7 +1333,7 @@ export const initAchievementRepo = () => {
                 "name": "FILLERZZZ ACH",
                 "qty": 20,
                 "desc": "Reach level on any character",
-                "rewards": "*STEAM EXCLUSIVE &*30 gems &*Item3",
+                "rewards": "*STEAM EXCLUSIVE &*30 gems",
                 "world": "Frostbite Tundra"
             }),
         new AchievementBase(190, <AchievementModel>{

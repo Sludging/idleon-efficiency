@@ -5,5 +5,6 @@ import { TypeGenEnum } from '../enum/typeGenEnum';
 export interface SkullItemModel extends StatItemModel {
     Skill: string,
     Skill_Power: number,
-    Speed: number
+    Speed: number,
+    maxCharge: number
 }

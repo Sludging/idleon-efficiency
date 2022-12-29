@@ -11,5 +11,9 @@ export enum SkillsIndex {
     Worship = 9,
     Cooking = 10,
     Breeding = 11,
-    Intellect = 12
+    Intellect = 12,
+    Sailing = 13,
+    Divinity = 14,
+    Gaming = 15,
+
 }

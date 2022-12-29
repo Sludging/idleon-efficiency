@@ -49,7 +49,7 @@ export const initPetGeneRepo = () => {
                 "x2": 17,
                 "lowerLetter": "e",
                 "upperLetter": "E",
-                "description": "Every 1 sec, heal whatever pet you are holding down on for 5% HP. On PC, you just need you mouse over the pet. On Phones, your finger must be on the pet. This lasts 10 seconds.",
+                "description": "Every 1 sec, heal whatever pet you are holding down on for 10% HP. On PC, you just need you mouse over the pet. On Phones, your finger must be on the pet. This lasts 15 seconds.",
                 "combatDescription": "When in Fence Yard, increases Breedability Multiplier of this pet species"
             }),
         new PetGeneBase(5, <PetGeneModel>{

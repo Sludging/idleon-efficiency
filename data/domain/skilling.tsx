@@ -86,6 +86,15 @@ export class Skilling {
             case SkillsIndex.Intellect:
                 imageSrc = 'ClassIcons53';
                 break;
+            case SkillsIndex.Sailing:
+                imageSrc = 'ClassIcons54';
+                break;
+            case SkillsIndex.Divinity:
+                imageSrc = 'ClassIcons55';
+                break;
+            case SkillsIndex.Gaming:
+                imageSrc = 'ClassIcons56';
+                break;
             default:
                 imageSrc = '';
                 break;

@@ -622,13 +622,21 @@ export const initCardRepo = () => {
                 "bonus": 8,
                 "order": 2
             }),
+        new CardDataBase("Dreadlo", <CardDataModel>{
+                "cardID": "F29",
+                "category": "Hard Resources",
+                "perTier": 15,
+                "effect": "+{% Mining Away Gains",
+                "bonus": 3,
+                "order": 3
+            }),
         new CardDataBase("SaharanFoal", <CardDataModel>{
                 "cardID": "D8",
                 "category": "Hard Resources",
                 "perTier": 10,
                 "effect": "+{% Choppin Away Gains",
                 "bonus": 2.5,
-                "order": 3
+                "order": 4
             }),
         new CardDataBase("Tree7", <CardDataModel>{
                 "cardID": "F2",
@@ -636,7 +644,7 @@ export const initCardRepo = () => {
                 "perTier": 10,
                 "effect": "+{% Choppin Speed",
                 "bonus": 6,
-                "order": 4
+                "order": 5
             }),
         new CardDataBase("AlienTree", <CardDataModel>{
                 "cardID": "F13",
@@ -644,7 +652,7 @@ export const initCardRepo = () => {
                 "perTier": 10,
                 "effect": "+{% Total Choppin Efficiency",
                 "bonus": 8,
-                "order": 5
+                "order": 6
             }),
         new CardDataBase("Tree8", <CardDataModel>{
                 "cardID": "F12",
@@ -652,7 +660,23 @@ export const initCardRepo = () => {
                 "perTier": 10,
                 "effect": "+{% Choppin Speed",
                 "bonus": 7,
-                "order": 6
+                "order": 7
+            }),
+        new CardDataBase("Tree9", <CardDataModel>{
+                "cardID": "F24",
+                "category": "Hard Resources",
+                "perTier": 12,
+                "effect": "+{% Choppin Away Gains",
+                "bonus": 3,
+                "order": 8
+            }),
+        new CardDataBase("Tree10", <CardDataModel>{
+                "cardID": "F25",
+                "category": "Hard Resources",
+                "perTier": 15,
+                "effect": "+{% Choppin Speed",
+                "bonus": 8,
+                "order": 9
             }),
         new CardDataBase("Fish5", <CardDataModel>{
                 "cardID": "F20",
@@ -660,7 +684,7 @@ export const initCardRepo = () => {
                 "perTier": 8,
                 "effect": "+{% Total Fishing Efficiency",
                 "bonus": 8,
-                "order": 7
+                "order": 10
             }),
         new CardDataBase("Fish6", <CardDataModel>{
                 "cardID": "F21",
@@ -668,7 +692,7 @@ export const initCardRepo = () => {
                 "perTier": 10,
                 "effect": "+{% Fishing Speed",
                 "bonus": 4,
-                "order": 8
+                "order": 11
             }),
         new CardDataBase("Fish7", <CardDataModel>{
                 "cardID": "F22",
@@ -676,7 +700,7 @@ export const initCardRepo = () => {
                 "perTier": 10,
                 "effect": "+{% Fishing EXP",
                 "bonus": 10,
-                "order": 9
+                "order": 12
             }),
         new CardDataBase("Fish8", <CardDataModel>{
                 "cardID": "F23",
@@ -684,7 +708,7 @@ export const initCardRepo = () => {
                 "perTier": 10,
                 "effect": "+{% Fishing Away Gains",
                 "bonus": 3,
-                "order": 10
+                "order": 13
             }),
         new CardDataBase("Bug5", <CardDataModel>{
                 "cardID": "F8",
@@ -692,7 +716,7 @@ export const initCardRepo = () => {
                 "perTier": 10,
                 "effect": "+{% Total Catching Efficiency",
                 "bonus": 7,
-                "order": 11
+                "order": 14
             }),
         new CardDataBase("Bug6", <CardDataModel>{
                 "cardID": "F9",
@@ -700,7 +724,7 @@ export const initCardRepo = () => {
                 "perTier": 10,
                 "effect": "+{% Catching Away Gains",
                 "bonus": 2.5,
-                "order": 12
+                "order": 15
             }),
         new CardDataBase("Bug7", <CardDataModel>{
                 "cardID": "F14",
@@ -708,7 +732,7 @@ export const initCardRepo = () => {
                 "perTier": 10,
                 "effect": "+{% Total Catching Efficiency",
                 "bonus": 8,
-                "order": 13
+                "order": 16
             }),
         new CardDataBase("Bug8", <CardDataModel>{
                 "cardID": "F15",
@@ -716,7 +740,23 @@ export const initCardRepo = () => {
                 "perTier": 10,
                 "effect": "+{% Catching Speed",
                 "bonus": 4,
-                "order": 14
+                "order": 17
+            }),
+        new CardDataBase("Bug9", <CardDataModel>{
+                "cardID": "F26",
+                "category": "Hard Resources",
+                "perTier": 12,
+                "effect": "+{% Total Catching Efficiency",
+                "bonus": 10,
+                "order": 18
+            }),
+        new CardDataBase("Bug10", <CardDataModel>{
+                "cardID": "F27",
+                "category": "Hard Resources",
+                "perTier": 15,
+                "effect": "+{% Catching Away Gains",
+                "bonus": 3,
+                "order": 19
             }),
         new CardDataBase("CritterCard4", <CardDataModel>{
                 "cardID": "F4",
@@ -724,7 +764,7 @@ export const initCardRepo = () => {
                 "perTier": 4,
                 "effect": "+{% Shiny Critter Chance",
                 "bonus": 5,
-                "order": 15
+                "order": 20
             }),
         new CardDataBase("CritterCard5", <CardDataModel>{
                 "cardID": "F5",
@@ -732,7 +772,7 @@ export const initCardRepo = () => {
                 "perTier": 4,
                 "effect": "+{% EXP from monsters",
                 "bonus": 1.25,
-                "order": 16
+                "order": 21
             }),
         new CardDataBase("CritterCard6", <CardDataModel>{
                 "cardID": "F6",
@@ -740,7 +780,7 @@ export const initCardRepo = () => {
                 "perTier": 5,
                 "effect": "+{% Shiny Critter Chance",
                 "bonus": 6,
-                "order": 17
+                "order": 22
             }),
         new CardDataBase("CritterCard7", <CardDataModel>{
                 "cardID": "F7",
@@ -748,7 +788,7 @@ export const initCardRepo = () => {
                 "perTier": 6,
                 "effect": "+{% Skill AFK gain rate",
                 "bonus": 1,
-                "order": 18
+                "order": 23
             }),
         new CardDataBase("CritterCard8", <CardDataModel>{
                 "cardID": "F17",
@@ -756,7 +796,7 @@ export const initCardRepo = () => {
                 "perTier": 7,
                 "effect": "+{% Trapping Efficiency",
                 "bonus": 7,
-                "order": 19
+                "order": 24
             }),
         new CardDataBase("CritterCard9", <CardDataModel>{
                 "cardID": "F18",
@@ -764,7 +804,7 @@ export const initCardRepo = () => {
                 "perTier": 9,
                 "effect": "+{% Trapping EXP",
                 "bonus": 8,
-                "order": 20
+                "order": 25
             }),
         new CardDataBase("CritterCard10", <CardDataModel>{
                 "cardID": "F19",
@@ -772,7 +812,7 @@ export const initCardRepo = () => {
                 "perTier": 12,
                 "effect": "+{% Shiny Critter Chance",
                 "bonus": 8,
-                "order": 21
+                "order": 26
             }),
         new CardDataBase("SoulCard3", <CardDataModel>{
                 "cardID": "F3",
@@ -780,7 +820,7 @@ export const initCardRepo = () => {
                 "perTier": 3,
                 "effect": "+{ Starting Pts in Worship",
                 "bonus": 6,
-                "order": 22
+                "order": 27
             }),
         new CardDataBase("SoulCard4", <CardDataModel>{
                 "cardID": "F10",
@@ -788,7 +828,7 @@ export const initCardRepo = () => {
                 "perTier": 4,
                 "effect": "+{% Max Charge",
                 "bonus": 7,
-                "order": 23
+                "order": 28
             }),
         new CardDataBase("SoulCard5", <CardDataModel>{
                 "cardID": "F11",
@@ -796,7 +836,15 @@ export const initCardRepo = () => {
                 "perTier": 5,
                 "effect": "+{% Charge Rate",
                 "bonus": 5,
-                "order": 24
+                "order": 29
+            }),
+        new CardDataBase("SoulCard6", <CardDataModel>{
+                "cardID": "F28",
+                "category": "Hard Resources",
+                "perTier": 7,
+                "effect": "+{% Max Charge",
+                "bonus": 10,
+                "order": 30
             }),
         new CardDataBase("mushP", <CardDataModel>{
                 "cardID": "G1",
@@ -908,6 +956,118 @@ export const initCardRepo = () => {
                 "perTier": 10,
                 "effect": "+px Line Width (Passive)",
                 "bonus": 2,
+                "order": 14
+            }),
+        new CardDataBase("w5a1", <CardDataModel>{
+                "cardID": "H1",
+                "category": "Smolderin' Plateau",
+                "perTier": 25,
+                "effect": "+{% Multikill per tier",
+                "bonus": 2,
+                "order": 1
+            }),
+        new CardDataBase("w5a2", <CardDataModel>{
+                "cardID": "H2",
+                "category": "Smolderin' Plateau",
+                "perTier": 28,
+                "effect": "+{% Defence from Equipment",
+                "bonus": 5,
+                "order": 2
+            }),
+        new CardDataBase("w5a3", <CardDataModel>{
+                "cardID": "H3",
+                "category": "Smolderin' Plateau",
+                "perTier": 32,
+                "effect": "+{% Total Drop Rate",
+                "bonus": 6,
+                "order": 3
+            }),
+        new CardDataBase("w5a4", <CardDataModel>{
+                "cardID": "H4",
+                "category": "Smolderin' Plateau",
+                "perTier": 35,
+                "effect": "+{% Skill EXP (Passive)",
+                "bonus": 5,
+                "order": 4
+            }),
+        new CardDataBase("w5a5", <CardDataModel>{
+                "cardID": "H5",
+                "category": "Smolderin' Plateau",
+                "perTier": 45,
+                "effect": "+{% Divinity EXP (Passive)",
+                "bonus": 6,
+                "order": 5
+            }),
+        new CardDataBase("w5b1", <CardDataModel>{
+                "cardID": "H6",
+                "category": "Smolderin' Plateau",
+                "perTier": 48,
+                "effect": "+{% Money from mobs (Passive)",
+                "bonus": 7,
+                "order": 6
+            }),
+        new CardDataBase("w5b2", <CardDataModel>{
+                "cardID": "H7",
+                "category": "Smolderin' Plateau",
+                "perTier": 52,
+                "effect": "+{ Weapon Power (Passive)",
+                "bonus": 1,
+                "order": 7
+            }),
+        new CardDataBase("w5b3", <CardDataModel>{
+                "cardID": "H8",
+                "category": "Smolderin' Plateau",
+                "perTier": 60,
+                "effect": "+{% Total Damage",
+                "bonus": 4.5,
+                "order": 8
+            }),
+        new CardDataBase("w5b4", <CardDataModel>{
+                "cardID": "H9",
+                "category": "Smolderin' Plateau",
+                "perTier": 65,
+                "effect": "+{% EXP from monsters",
+                "bonus": 4,
+                "order": 9
+            }),
+        new CardDataBase("w5b5", <CardDataModel>{
+                "cardID": "H10",
+                "category": "Smolderin' Plateau",
+                "perTier": 70,
+                "effect": "+{ Base LUK",
+                "bonus": 15,
+                "order": 10
+            }),
+        new CardDataBase("w5b6", <CardDataModel>{
+                "cardID": "H11",
+                "category": "Smolderin' Plateau",
+                "perTier": 75,
+                "effect": "+{% Mining Speed",
+                "bonus": 6,
+                "order": 11
+            }),
+        new CardDataBase("w5c1", <CardDataModel>{
+                "cardID": "H12",
+                "category": "Smolderin' Plateau",
+                "perTier": 80,
+                "effect": "+{% Sailing Speed (Passive)",
+                "bonus": 4,
+                "order": 12
+            }),
+        new CardDataBase("w5c2", <CardDataModel>{
+                "cardID": "H13",
+                "category": "Smolderin' Plateau",
+                "perTier": 100,
+                "effect": "+{% All Stat",
+                "bonus": 1,
+                "order": 13
+            }),
+        new CardDataBase("Crystal4", <CardDataModel>{
+                "cardID": "H14",
+                "category": "Smolderin' Plateau",
+                "perTier": 15,
+                "effect": "+{% Skill Efficncy (Passive)",
+                "bonus": 3,
                 "order": 14
             }),
         new CardDataBase("frogP", <CardDataModel>{
@@ -1202,7 +1362,7 @@ export const initCardRepo = () => {
                 "cardID": "Z9",
                 "category": "Bosses",
                 "perTier": 1.5,
-                "effect": "+{% Shrine Effects",
+                "effect": "+{% Shrine Effects (Passive)",
                 "bonus": 5,
                 "order": 14
             }),
@@ -1245,6 +1405,30 @@ export const initCardRepo = () => {
                 "effect": "+{% Total Damage",
                 "bonus": 7,
                 "order": 19
+            }),
+        new CardDataBase("Boss5A", <CardDataModel>{
+                "cardID": "Z18",
+                "category": "Bosses",
+                "perTier": 3,
+                "effect": "+{% Sailing Speed (Passive)",
+                "bonus": 6,
+                "order": 20
+            }),
+        new CardDataBase("Boss5B", <CardDataModel>{
+                "cardID": "Z19",
+                "category": "Bosses",
+                "perTier": 4,
+                "effect": "+{% EXP from monsters",
+                "bonus": 8,
+                "order": 21
+            }),
+        new CardDataBase("Boss5C", <CardDataModel>{
+                "cardID": "Z20",
+                "category": "Bosses",
+                "perTier": 5,
+                "effect": "+{% Money from Monsters",
+                "bonus": 18,
+                "order": 22
             }),
         new CardDataBase("ghost", <CardDataModel>{
                 "cardID": "Y0",

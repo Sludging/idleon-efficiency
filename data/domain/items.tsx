@@ -131,6 +131,26 @@ export const filteredMissingItems = [
     'IceMountains2',
     'OilBarrel3',
     'Quest2',
+
+    'FoodHealth8',
+    'MaxCapBagFi0',
+    'MaxCapBagB0',
+    'MaxCapBagTr0',
+    'MaxCapBagTr2',
+    'MaxCapBagS0',
+    'MaxCapBagS2',
+    'DoubleAFKtix',
+    'Spice0',
+    'Spice6',
+    'Spice9',
+    'SailTr10',
+    'SailTr12',
+    'SailTr14',
+    'SailTr21',
+    'SailTr25',
+    'SailTr29',
+    'Bits',
+    'EquipmentHatsBeg1'
 ]
 
 export const filteredLootyItems = [
