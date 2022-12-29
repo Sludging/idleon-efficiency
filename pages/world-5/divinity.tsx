@@ -30,6 +30,12 @@ function AlignmentDisplay() {
         }
     }, [appContext]);
 
+    if (!divinity) {
+        return (
+            <Box>Still loading or error occured.</Box>
+        )
+    }
+
     return (
         <Grid columns={{size: 'small'}}>
             {playerData && playerData.map((player, index) => {
@@ -53,12 +59,12 @@ function AlignmentDisplay() {
                                 />
                                 <TextAndLabel 
                                     label="Style" 
-                                    text={divinity?.playerInfo[player.playerID].style.name ?? "Unknown"} 
+                                    text={divinity.playerInfo[player.playerID].style.name ?? "Not Linked"} 
                                     margin={{ bottom: 'small', right: 'small' }}
                                 />
                                 <TextAndLabel 
                                     label="God" 
-                                    text={divinity?.playerInfo[player.playerID].god.data.name ?? "Unknown"} 
+                                    text={divinity.playerInfo[player.playerID].god?.data.name ?? "Not Linked"} 
                                     margin={{ bottom: 'small', right: 'small' }}
                                 />
                             </Box>
