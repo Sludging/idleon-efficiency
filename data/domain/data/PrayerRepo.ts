@@ -63,7 +63,7 @@ export const initPrayerRepo = () => {
                 "id": 1,
                 "bonus": "+{% AFK Gain Rate",
                 "curse": "-{% Carry Capacity",
-                "x1": 10,
+                "x1": 5,
                 "x2": 12,
                 "soul": "Soul1",
                 "costMult": 3000,

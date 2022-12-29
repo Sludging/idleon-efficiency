@@ -88,13 +88,13 @@ export const initBuildingRepo = () => {
                 "misc": 0
             }),
         new BuildingBase(8, <BuildingModel>{
-                "name": "Coming Soon",
-                "description": "Don't worry, by the time you read this I'll probably have already added this building into the game! Actually wait no, I probably won't.",
-                "bonus": "Filler",
-                "lvlUpReq": [<ComponentModel>{"item": "FillerMaterial", "quantity": 15}, <ComponentModel>{"item": "Blank", "quantity": 0}],
-                "maxLvl": 1,
-                "costInc": 0,
-                "bonusInc": [10, 30],
+                "name": "Atom Collider",
+                "description": "Accelerate enough material to high speeds, and you can create the first physical atoms in this pixellated world! ",
+                "bonus": " +{% chance for an extra atom upon collision",
+                "lvlUpReq": [<ComponentModel>{"item": "Refinery6", "quantity": 10}, <ComponentModel>{"item": "FillerMaterial", "quantity": 100}],
+                "maxLvl": 200,
+                "costInc": 1.2,
+                "bonusInc": [10, 5],
                 "misc": 0
             }),
         new BuildingBase(9, <BuildingModel>{
@@ -179,15 +179,12 @@ export const initBuildingRepo = () => {
             }),
         new BuildingBase(17, <BuildingModel>{
                 "name": "Voidinator",
-                "description": "Teleports monsters back to the start, and sets them all to a certain amount of HP. ",
-                "bonus": " +{% Recharge Speed @ +}% Lower Upgrade Costs in Worship",
-                "lvlUpReq": [
-                    <ComponentModel>{"item": "Refinery6", "quantity": 10000},
-                    <ComponentModel>{"item": "FillerMaterial", "quantity": 10000}
-                ],
-                "maxLvl": 50,
-                "costInc": 1.19,
-                "bonusInc": [15, 1.6],
+                "description": "Casts a wave of null and void, removing enemy colours. ",
+                "bonus": " +{% Range @ +}% Lower Upgrade Costs in Worship",
+                "lvlUpReq": [<ComponentModel>{"item": "Refinery6", "quantity": 20}, <ComponentModel>{"item": "LavaA1", "quantity": 5000}],
+                "maxLvl": 100,
+                "costInc": 1.4,
+                "bonusInc": [0.7, 0.8],
                 "misc": 0
             }),
         new BuildingBase(18, <BuildingModel>{

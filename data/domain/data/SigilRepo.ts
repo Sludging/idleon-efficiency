@@ -196,31 +196,31 @@ export const initSigilRepo = () => {
                 "desc": "Boosts the regeneration rate of all alchemy liquids by +{%"
             }),
         new SigilBase(21, <SigilModel>{
-                "name": "World 5a",
+                "name": "Loot Pile",
                 "unlockCost": 23000,
                 "boostCost": 160000,
                 "unlockBonus": 10,
-                "boostBonus": 25,
+                "boostBonus": 20,
                 "filler": "filler",
-                "desc": "This bonus will affect world 5. Feel free to lv it up early!"
+                "desc": "All sailing treasure chests give +{% more treasure!"
             }),
         new SigilBase(22, <SigilModel>{
-                "name": "World 5d",
+                "name": "Div Spiral",
                 "unlockCost": 26000,
                 "boostCost": 200000,
                 "unlockBonus": 10,
-                "boostBonus": 25,
+                "boostBonus": 30,
                 "filler": "filler",
-                "desc": "This bonus will affect world 5. Feel free to lv it up early!"
+                "desc": "Boosts Divinity EXP gain by +{%"
             }),
         new SigilBase(23, <SigilModel>{
-                "name": "World 5c",
+                "name": "World 6",
                 "unlockCost": 30000,
                 "boostCost": 250000,
                 "unlockBonus": 10,
                 "boostBonus": 25,
                 "filler": "filler",
-                "desc": "This bonus will affect world 5. Feel free to lv it up early!"
+                "desc": "This bonus will affect world 6. Feel free to lv it up early!"
             })    
 ]
 }

@@ -120,6 +120,7 @@ export class Account {
         [AFKTypeEnum.Error]: 0,
         [AFKTypeEnum.Fishing]: 0,
         [AFKTypeEnum.Mining]: 0,
+        [AFKTypeEnum.Divinity]: 0,
         [AFKTypeEnum.Nothing]: 0,
     };
 }

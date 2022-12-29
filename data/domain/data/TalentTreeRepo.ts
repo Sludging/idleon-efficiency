@@ -1659,7 +1659,7 @@ export const initTalentTreeRepo = () => {
                 "talents": {
                     "Fired Up": <TalentModel>{
                         "name": "Fired Up",
-                        "description": "Inflame yourself, boosting attack spd. Attacks refresh flame, but you move super slow.",
+                        "description": "Inflame yourself, boosting attack spd. Basic attacks refresh time you are inflamed.",
                         "x1": 5,
                         "x2": 25,
                         "funcX": "intervalAdd",

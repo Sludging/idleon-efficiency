@@ -5,5 +5,5 @@ import { QuestModel } from './questModel';
 import { QuestTypeEnum } from '../enum/questTypeEnum';
 
 export interface ItemQuestModel extends QuestModel {
-    ItemReq: ComponentBaseModel[]
+    ItemReq: ComponentModel[]
 }

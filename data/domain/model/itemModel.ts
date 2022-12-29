@@ -4,6 +4,7 @@ import { DetDropsModel } from './detDropsModel';
 import { ItemVendorsModel } from './itemVendorsModel';
 import { NoteModel } from './noteModel';
 import { RecipeModel } from './recipeModel';
+import { SlabItemSortModel } from './slabItemSortModel';
 import { SourcesModel } from './sourcesModel';
 
 export interface ItemModel {
@@ -13,5 +14,6 @@ export interface ItemModel {
     recipe?: RecipeModel,
     vendors?: ItemVendorsModel,
     anvilProduction?: AnvilProduceModel,
-    detDrops?: DetDropsModel
+    detDrops?: DetDropsModel,
+    order?: SlabItemSortModel
 }
