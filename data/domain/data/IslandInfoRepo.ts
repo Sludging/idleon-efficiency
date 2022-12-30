@@ -67,7 +67,7 @@ export const initIslandInfoRepo = () => {
                 "artifactsPerIsland": 3
             }),
         new IslandInfoBase(5, <IslandInfoModel>{
-                "name": "Toxic Bay Inc",
+                "name": "Snowy South",
                 "distance": 10000,
                 "relic1": 0,
                 "relic2": -1,
@@ -79,7 +79,7 @@ export const initIslandInfoRepo = () => {
                 "artifactsPerIsland": 2
             }),
         new IslandInfoBase(6, <IslandInfoModel>{
-                "name": "Candied Island",
+                "name": "Toxic Bay Inc",
                 "distance": 25000,
                 "relic1": 0,
                 "relic2": -1,
@@ -91,7 +91,7 @@ export const initIslandInfoRepo = () => {
                 "artifactsPerIsland": 2
             }),
         new IslandInfoBase(7, <IslandInfoModel>{
-                "name": "Fungi Meadows",
+                "name": "Candied Island",
                 "distance": 100000,
                 "relic1": 0,
                 "relic2": -1,
@@ -103,7 +103,7 @@ export const initIslandInfoRepo = () => {
                 "artifactsPerIsland": 2
             }),
         new IslandInfoBase(8, <IslandInfoModel>{
-                "name": "Cloudy Quay",
+                "name": "Fungi Meadows",
                 "distance": 300000,
                 "relic1": 0,
                 "relic2": -1,
@@ -115,7 +115,7 @@ export const initIslandInfoRepo = () => {
                 "artifactsPerIsland": 1
             }),
         new IslandInfoBase(9, <IslandInfoModel>{
-                "name": "Dungeon Cove",
+                "name": "Cloudy Quay",
                 "distance": 1000000,
                 "relic1": 0,
                 "relic2": -1,
@@ -127,7 +127,7 @@ export const initIslandInfoRepo = () => {
                 "artifactsPerIsland": 2
             }),
         new IslandInfoBase(10, <IslandInfoModel>{
-                "name": "Crystal Enclave",
+                "name": "Dungeon Cove",
                 "distance": 2000000,
                 "relic1": 0,
                 "relic2": -1,
@@ -139,7 +139,7 @@ export const initIslandInfoRepo = () => {
                 "artifactsPerIsland": 1
             }),
         new IslandInfoBase(11, <IslandInfoModel>{
-                "name": "Petulent Garage",
+                "name": "Crystal Enclave",
                 "distance": 5000000,
                 "relic1": 0,
                 "relic2": -1,
@@ -151,7 +151,7 @@ export const initIslandInfoRepo = () => {
                 "artifactsPerIsland": 1
             }),
         new IslandInfoBase(12, <IslandInfoModel>{
-                "name": "Isle of Note",
+                "name": "Petulent Garage",
                 "distance": 15000000,
                 "relic1": 0,
                 "relic2": -1,
@@ -163,7 +163,7 @@ export const initIslandInfoRepo = () => {
                 "artifactsPerIsland": 1
             }),
         new IslandInfoBase(13, <IslandInfoModel>{
-                "name": "The Edge",
+                "name": "Isle of Note",
                 "distance": 40000000,
                 "relic1": 0,
                 "relic2": -1,
@@ -175,7 +175,7 @@ export const initIslandInfoRepo = () => {
                 "artifactsPerIsland": 2
             }),
         new IslandInfoBase(14, <IslandInfoModel>{
-                "name": "Sahara",
+                "name": "The Edge",
                 "distance": 100000000,
                 "relic1": 0,
                 "relic2": -1,
