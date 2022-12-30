@@ -303,9 +303,12 @@ export class Cooking {
 }
 
 const populateDiscovery = (cooking: Cooking) => {
+    // Lava is using 'Turkey a la Thank' as filler name in the end, remove all of those meals and add 1 for the first meal which is real.
+    const mealsThatCanBeDiscovered = cooking.meals.filter(meal => meal.name != "Turkey a la Thank").length + 1;
+
     const availableValues = cooking.spicesToValues(cooking.spices.map((spice, index) => spice != -1 ? index : -1).filter(value => value != -1));
-    const outputlucktime = [...Array(49)].map((_, index) => 5000000000 * 2 / .004)
-    const outputLuck = [...Array(49)].map((_, index) => 0)
+    const outputlucktime = [...Array(mealsThatCanBeDiscovered)].map((_, index) => 5000000000 * 2 / .004)
+    const outputLuck = [...Array(mealsThatCanBeDiscovered)].map((_, index) => 0)
     for (let len of range(0, 3)) {
         const possibleCombinations = combinations(availableValues, len + 1);
         for (let combination of possibleCombinations) {
@@ -314,7 +317,7 @@ const populateDiscovery = (cooking: Cooking) => {
             const firstKitchenLuck = cooking.kitchens[0].recipeLuck;
             const firstKitchenFire = cooking.kitchens[0].fireSpeed;
             possibleMeals.slice(0, 6).forEach((meal, index) => {
-                if (meal < 49) {
+                if (meal < mealsThatCanBeDiscovered) {
                     let notOdds = 1;
                     // Get the chance to cook this meal based on it's index in the possible meal array
                     let mealChance = Math.min(mealLuckValues[index] * firstKitchenLuck, 1);
