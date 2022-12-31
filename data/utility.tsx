@@ -238,3 +238,7 @@ export function range(start: number, end: number) {
 export function secondsSinceUpdate(globalTime: number) {
     return (new Date().getTime() - globalTime) / 1000;
 }
+
+export function randomFloatBetween(e: number, t: number) {
+    return e <= t ? e + Math.random() * (t - e) : t + Math.random() * (e - t)
+}
