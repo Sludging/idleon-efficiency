@@ -63,9 +63,9 @@ export class Gaming {
 
     getNuggetRange = (): number[] => {
         const boxUpgrade = this.importBoxes[1].getBonus();
-        const minStat = boxUpgrade * (1 / Math.pow(1e-5, .64));
-        const maxStat = boxUpgrade * (1 / Math.pow(1, .64));
-        return [maxStat, minStat];
+        const maxStat = boxUpgrade * (1 / Math.pow(1e-5, .64));
+        const minStat = boxUpgrade * (1 / Math.pow(1, .64));
+        return [minStat, maxStat];
     }
 }
 
