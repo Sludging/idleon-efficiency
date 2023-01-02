@@ -160,18 +160,18 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
     // Activity based alerts
     switch (player.getActivityType()) {
         case Activity.Fighting:
-            if (![0, 1, 4, 5].some(id => (player.cardInfo?.getBonusForId(id) ?? 0) > 0)) {
-                alerts.push(new CardSetAlert(player, `${player.cardInfo?.getCardSetText()} isn't useful for fighting`));
+            if (![0, 1, 4, 5, 6, 9, 10].some(id => (player.cardInfo?.getBonusForId(id) ?? 0) > 0)) {
+                alerts.push(new CardSetAlert(player, `${player.cardInfo?.getCardSetText()} isn't optimal fighting`));
             }
             break;
         case Activity.Lab:
             if (![2, 3, 7].some(id => (player.cardInfo?.getBonusForId(id) ?? 0) > 0)) {
-                alerts.push(new CardSetAlert(player, `${player.cardInfo?.getCardSetText()} isn't useful for lab`));
+                alerts.push(new CardSetAlert(player, `${player.cardInfo?.getCardSetText()} isn't optimal lab`));
             }
             break;
         case Activity.Skilling:
             if (![1, 2, 3, 7].some(id => (player.cardInfo?.getBonusForId(id) ?? 0) > 0)) {
-                alerts.push(new CardSetAlert(player, `${player.cardInfo?.getCardSetText()} isn't useful for skilling`));
+                alerts.push(new CardSetAlert(player, `${player.cardInfo?.getCardSetText()} isn't optimal skilling`));
             }
             break;
         case Activity.Unknown:
