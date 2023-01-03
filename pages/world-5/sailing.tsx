@@ -10,7 +10,7 @@ import IconImage from '../../components/base/IconImage';
 import ShadowBox from '../../components/base/ShadowBox';
 
 import TabButton from '../../components/base/TabButton';
-import TextAndLabel from '../../components/base/TextAndLabel';
+import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import TipDisplay from '../../components/base/TipDisplay';
 import { AppContext } from '../../data/appContext';
 import { ArtifactStatus, Sailing as SailingDomain } from '../../data/domain/sailing';
@@ -32,8 +32,30 @@ function CrewDisplay() {
     }
 
     return (
-        <Box direction="row">
-            TBD
+        <Box direction="row" wrap>
+            {
+                sailing.captains.map((captain, index) => (
+                    <ShadowBox key={index} pad="medium" margin={{ right: 'small', bottom: 'small' }} gap="xsmall">
+                        <Text size="small">Captain {index + 1}</Text>
+                        <Text size="xsmall">Current Level: {captain.level}</Text>
+                        <Text size="xsmall">Current EXP: {captain.currentXP}</Text>
+                        <hr style={{ width: "100%" }} />
+                        <ComponentAndLabel
+                            label='Traits'
+                            component={
+                                <Box>
+                                    {
+                                        captain.traits.map((trait, tIndex) => (
+                                            <Text size="small" key={tIndex}>{trait.getBonusText()}</Text>
+                                        ))
+                                    }
+                                </Box>
+                            }
+                        />
+
+                    </ShadowBox>
+                ))
+            }
         </Box>
     )
 };
@@ -98,7 +120,7 @@ function Sailing() {
             <NextSeo title="Sailing" />
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Sailing</Heading>
             <Text size="xsmall">* This is a work in progress, there could some bugs and minor inaccuracies. THE UI ISN&apos;T FINAL!</Text>
-            <Box direction="row" margin={{top: 'small'}}>
+            <Box direction="row" margin={{ top: 'small' }}>
                 <ShadowBox>
                     <TextAndLabel
                         label="Ships"
