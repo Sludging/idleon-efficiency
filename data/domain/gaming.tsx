@@ -72,6 +72,10 @@ export class Gaming {
 export default function parseGaming(gamingData: any[], gamingSproutData: number[][]) {
     const gaming = new Gaming();
 
+    if (gamingData.length == 0) {
+        return gaming;
+    }
+    
     gaming.rawGamingData = gamingData;
     gaming.rawSproutData = gamingSproutData;
 
