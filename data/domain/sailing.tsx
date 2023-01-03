@@ -56,7 +56,7 @@ const captainBonuses = initCaptainBonusRepo();
 
 export class CaptainTrait {
     bonus: CaptainBonusModel;
-    constructor(bonus: CaptainBonusBase, public currentBonus: number) { 
+    constructor(bonus: CaptainBonusBase, public baseValue: number, public currentBonus: number) { 
         this.bonus = bonus.data;
     }
 
@@ -73,9 +73,15 @@ export class Captain {
         // If base value is 0, there's no trait.
         traitInfo.forEach(([traitIndex, baseValue]) => {
             if (traitIndex > -1) {
-                this.traits.push(new CaptainTrait(captainBonuses[traitIndex], baseValue * this.level));
+                this.traits.push(new CaptainTrait(captainBonuses[traitIndex], baseValue, baseValue * this.level));
             }
         })
+    }
+
+    getExpForNextLevel = () => {
+        const firstMath = 9 + Math.pow(this.level, 3);
+        const secondMath = Math.pow(1.5, this.level);
+        return firstMath * secondMath * Math.pow(1.5, Math.max(this.level - 10, 0));
     }
 }
 

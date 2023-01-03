@@ -130,9 +130,9 @@ const keyFunctionMap: Record<string, Function> = {
     "breeding": (doc: Cloudsave, charCount: number) => parseBreeding(safeJsonParse(doc, "PetsStored", []), safeJsonParse(doc, "Pets", []), doc.get("OptLacc"), safeJsonParse(doc, "Territory", []), safeJsonParse(doc, "Breeding", [])),
     "sigils": (doc: Cloudsave, charCount: number) => parseSigils(safeJsonParse(doc, "CauldronP2W", []), safeJsonParse(doc, "CauldronJobs1", [])),
     "account": (doc: Cloudsave, allItems: Item[], charCount: number) => parseAccount(doc, allItems),
-    "divinity": (doc: Cloudsave, charCount: number) => parseDivinity(charCount, doc.get("Divinity") as number[], [...Array(charCount)].map((_, index) =>doc.get(`AFKtarget_${index}`))),
+    "divinity": (doc: Cloudsave, charCount: number) => parseDivinity(charCount, doc.get("Divinity") as number[] || [], [...Array(charCount)].map((_, index) =>doc.get(`AFKtarget_${index}`))),
     "sailing": (doc: Cloudsave, charCount: number) => parseSailing(safeJsonParse(doc, "Sailing", []), safeJsonParse(doc, "Boats", []), safeJsonParse(doc, "Captains", [])),
-    "gaming": (doc: Cloudsave, charCount: number) => parseGaming(safeJsonParse(doc, "Gaming", []), safeJsonParse(doc, "GamingSprout", [])),
+    "gaming": (doc: Cloudsave, charCount: number) => parseGaming(doc.get("Gaming") as any[] || [], safeJsonParse(doc, "GamingSprout", [])),
 }
 
 // ORDER IS IMPORTANT!
