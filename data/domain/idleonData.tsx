@@ -131,7 +131,7 @@ const keyFunctionMap: Record<string, Function> = {
     "sigils": (doc: Cloudsave, charCount: number) => parseSigils(safeJsonParse(doc, "CauldronP2W", []), safeJsonParse(doc, "CauldronJobs1", [])),
     "account": (doc: Cloudsave, allItems: Item[], charCount: number) => parseAccount(doc, allItems),
     "divinity": (doc: Cloudsave, charCount: number) => parseDivinity(charCount, doc.get("Divinity") as number[], [...Array(charCount)].map((_, index) =>doc.get(`AFKtarget_${index}`))),
-    "sailing": (doc: Cloudsave, charCount: number) => parseSailing(safeJsonParse(doc, "Sailing", [])),
+    "sailing": (doc: Cloudsave, charCount: number) => parseSailing(safeJsonParse(doc, "Sailing", []), safeJsonParse(doc, "Boats", []), safeJsonParse(doc, "Captains", [])),
     "gaming": (doc: Cloudsave, charCount: number) => parseGaming(safeJsonParse(doc, "Gaming", []), safeJsonParse(doc, "GamingSprout", [])),
 }
 
