@@ -148,6 +148,8 @@ const IDforCardSETbonus: NumberMap = {
         6: "{%_Drop_Rate",
         7: "{%_Skill_AFK_Gain_Rate",
         8: "{%_more_Dungeon_Credits",
+        9: "{%_Crit_Chance",
+        10: "{%_Fight_AFK_Gain_Rate",
 }
 
 const classMap = new Map(Object.entries({

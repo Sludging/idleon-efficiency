@@ -42,6 +42,9 @@ export class Divinity {
 export default function parseDivinity(playerCount: number, divinityData: number[], afkTarget: string[]) {
     const divinity = new Divinity();
 
+    if (divinityData.length == 0) {
+        return divinity;
+    }
     // Index 25 = Number of gods unlocked?
     const numberOfUnlockedGods = divinityData[25];
     // Next 10 indexes = god bonus level
