@@ -59,12 +59,12 @@ function AlignmentDisplay() {
                                 />
                                 <TextAndLabel 
                                     label="Style" 
-                                    text={divinity.playerInfo[player.playerID].style.name ?? "Not Linked"} 
+                                    text={divinity.playerInfo[player.playerID]?.style.name ?? "Not Linked"} 
                                     margin={{ bottom: 'small', right: 'small' }}
                                 />
                                 <TextAndLabel 
                                     label="God" 
-                                    text={divinity.playerInfo[player.playerID].god?.data.name ?? "Not Linked"} 
+                                    text={divinity.playerInfo[player.playerID]?.god?.data.name ?? "Not Linked"} 
                                     margin={{ bottom: 'small', right: 'small' }}
                                 />
                             </Box>
