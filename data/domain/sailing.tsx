@@ -1,5 +1,7 @@
 import { ArtifactBase, initArtifactRepo } from "./data/ArtifactRepo";
 import { initIslandInfoRepo, IslandInfoBase } from "./data/IslandInfoRepo";
+import { CaptainBonusBase, initCaptainBonusRepo } from './data/CaptainBonusRepo';
+import { CaptainBonusModel } from './model/captainBonusModel';
 import { GemStore } from "./gemPurchases";
 import { ImageData } from "./imageData";
 import { ArtifactModel } from "./model/artifactModel";
@@ -14,18 +16,18 @@ export enum ArtifactStatus {
 export class Artifact {
     status: ArtifactStatus = ArtifactStatus.Unobtained;
 
-    constructor(public index: number, public data: ArtifactModel) {}
+    constructor(public index: number, public data: ArtifactModel) { }
 
     static fromBase = (data: ArtifactBase[]): Artifact[] => {
         return data.map(artifact => new Artifact(artifact.index, artifact.data));
     }
 
     updateStatus = (artifactStatus: number) => {
-        switch(artifactStatus) {
+        switch (artifactStatus) {
             case 1:
                 this.status = ArtifactStatus.Obtained;
                 break;
-            case 2: 
+            case 2:
                 this.status = ArtifactStatus.Ancient;
                 break;
         }
@@ -40,10 +42,55 @@ export class Artifact {
     }
 }
 
+// "Captains": [
+//     [0,0,-1,3,6.75,2,0],
+//     [0,1,-1,4,259.25,6,0],
+
+// [3] == level
+// [0] == Trait1?
+// [1] == Trait2?
+// [5] == Base of trait 1
+// [6] == Base of trait 2
+
+const captainBonuses = initCaptainBonusRepo();
+
+export class CaptainTrait {
+    bonus: CaptainBonusModel;
+    constructor(bonus: CaptainBonusBase, public currentBonus: number) { 
+        this.bonus = bonus.data;
+    }
+
+    getBonusText = () => {
+        return this.bonus.bonus.replace("{", this.currentBonus.toString());   
+    }
+}
+
+export class Captain {
+    traits: CaptainTrait[] = [];
+    
+    // bonusValues is array of traits, each array holds another array of [traitIndex, bonusValue].
+    constructor(public index: number, public level: number, public currentXP: number, traitInfo: number[][]) {
+        // If base value is 0, there's no trait.
+        traitInfo.forEach(([traitIndex, baseValue]) => {
+            if (traitIndex > -1) {
+                this.traits.push(new CaptainTrait(captainBonuses[traitIndex], baseValue * this.level));
+            }
+        })
+    }
+}
+
+// 
+export class Boat {
+    speedUpgrades: number = 0;
+    loadUpgrades: number = 0;
+
+    constructor(public index: number) { }
+}
+
 export class Island {
     artifacts: Artifact[] = [];
 
-    constructor(public index: number, public data: IslandInfoModel) {}
+    constructor(public index: number, public data: IslandInfoModel) { }
 
     static fromBase = (data: IslandInfoBase[]): Island[] => {
         return data.map(island => new Island(island.index, island.data));
@@ -627,6 +674,9 @@ export class Sailing {
     islands: Island[] = Island.fromBase(initIslandInfoRepo());
     ships: Ship[] = [];
 
+    boats: Boat[] = [];
+    captains: Captain[] = [];
+
     maxChests: number = 5;
     captainsUnlocked = 1;
     boatsUnlocked = 1;
@@ -643,9 +693,13 @@ export class Sailing {
 
 }
 
-export default function parseSailing(sailingData: number[][]) {
+export default function parseSailing(sailingData: number[][], boatData: number[][], captainData: number[][]) {
     const sailing = new Sailing();
 
+    if (sailingData.length == 0) {
+        return sailing;
+    }
+    
     // Sailing index 3 = array of artifacts found or not.
     sailingData[3].forEach((artifact, index) => {
         sailing.artifacts[index].updateStatus(artifact);
@@ -653,6 +707,12 @@ export default function parseSailing(sailingData: number[][]) {
 
     sailing.captainsUnlocked = Math.round(sailingData[2][0] + 1);
     sailing.boatsUnlocked = Math.round(sailingData[2][1] + 1);
+
+    captainData.forEach((captain, cIndex) => {
+        if (cIndex < sailing.captainsUnlocked && captain[0] != -1) {
+            sailing.captains.push(new Captain(cIndex, captain[3], captain[4], [[captain[1], captain[5]], [captain[2], captain[6]]]));
+        }
+    })
 
     return sailing;
 }
