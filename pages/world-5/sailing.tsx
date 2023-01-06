@@ -14,7 +14,7 @@ import TabButton from '../../components/base/TabButton';
 import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import TipDisplay from '../../components/base/TipDisplay';
 import { AppContext } from '../../data/appContext';
-import { BoatUpgradeType, Sailing as SailingDomain } from '../../data/domain/sailing';
+import { BoatUpgradeType, IslandStatus, Sailing as SailingDomain } from '../../data/domain/sailing';
 import { ArtifactStatus } from '../../data/domain/sailing/artifacts';
 import { nFormatter } from '../../data/utility';
 
@@ -176,7 +176,7 @@ function ArtifactDisplay() {
                 {
                     artifactsToShow.map((artifact, aIndex) => (
                         <ShadowBox style={{ opacity: artifact.status == ArtifactStatus.Unobtained ? 0.5 : 1 }} background={artifact.status == ArtifactStatus.Unobtained ? "dark-2" : "dark-1"} key={aIndex} pad="medium" margin={{ right: 'small', bottom: 'small' }} gap="medium">
-                            <Box direction="row" gap="xsmall" align="center" border={{ color: 'grey-1', side: 'bottom', size: '1px' }} pad={{ bottom: '16px'}}>
+                            <Box direction="row" gap="xsmall" align="center" border={{ color: 'grey-1', side: 'bottom', size: '1px' }} pad={{ bottom: '16px' }}>
                                 <IconImage data={artifact.getImageData()} scale={0.9} />
                                 <Text>{artifact.data.name}</Text>
                             </Box>
@@ -188,19 +188,21 @@ function ArtifactDisplay() {
                                     text={artifact.getCalculatedBonusText()}
                                 />
                             }
-                            <TextAndLabel
-                                label="BONUS TEXT"
-                                labelSize='11px'
-                                textSize='12px'
-                                text={artifact.getBonusText()}
-                            />
-                            <TextAndLabel
-                                label="ANCIENT BONUS"
-                                labelSize='xsmall'
-                                textSize='12px'
-                                textColor={artifact.status == ArtifactStatus.Ancient ? 'green-1' : 'grey-3'}
-                                text={artifact.data.ancientBonus}
-                            />
+                            <Box justify='between' fill>
+                                <TextAndLabel
+                                    label="BONUS TEXT"
+                                    labelSize='11px'
+                                    textSize='12px'
+                                    text={artifact.getBonusText()}
+                                />
+                                <TextAndLabel
+                                    label="ANCIENT BONUS"
+                                    labelSize='xsmall'
+                                    textSize='12px'
+                                    textColor={artifact.status == ArtifactStatus.Ancient ? 'green-1' : 'grey-3'}
+                                    text={artifact.data.ancientBonus}
+                                />
+                            </Box>
                         </ShadowBox>
                     ))
                 }
@@ -228,9 +230,13 @@ function IslandDisplay() {
         <Grid columns={{ size: 'small' }}>
             {
                 sailing.islands.map((island, index) => (
-                    <ShadowBox key={index} pad="small">
+                    <ShadowBox style={{ opacity: island.status == IslandStatus.Hidden ? 0.5 : 1 }} background={island.status == IslandStatus.Hidden ? "dark-2" : "dark-1"} margin={{ right: 'small', bottom: 'small' }} key={index} pad="small">
                         <Box margin={{ vertical: 'small' }}>
                             <Text>{island.data.name}</Text>
+                            {
+                                island.status == IslandStatus.Hidden &&
+                                <Text size="12px">{nFormatter(island.discoverProgress)}/{nFormatter(island.data.unlockQty)}</Text>
+                            }
                         </Box>
                         <Box direction="row">
                             {
@@ -238,7 +244,7 @@ function IslandDisplay() {
                                     <Box key={aIndex} margin={{ right: 'small' }} border={artifact.status == ArtifactStatus.Ancient ? { color: 'green-1', side: 'all' } : undefined} style={{ opacity: artifact.status == ArtifactStatus.Unobtained ? 0.2 : 1 }}>
                                         <TipDisplay
                                             heading={`${artifact.data.name}${artifact.status == ArtifactStatus.Ancient ? " (Ancient)" : ""}`}
-                                            body={<Text>{artifact.data.bonus}</Text>}
+                                            body={<Text>{artifact.getBonusText()}</Text>}
                                         >
                                             <IconImage data={artifact.getImageData()} />
                                         </TipDisplay>
@@ -273,7 +279,7 @@ function Sailing() {
             <NextSeo title="Sailing" />
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Sailing</Heading>
             <Text size="xsmall">* This is a work in progress, there could some bugs and minor inaccuracies. THE UI ISN&apos;T FINAL!</Text>
-            <Box direction="row" margin={{ top: 'small' }}>
+            <Box direction="row" margin={{ top: 'small', bottom: 'small' }}>
                 <ShadowBox>
                     <TextAndLabel
                         label="Boats"
@@ -292,6 +298,21 @@ function Sailing() {
                     label="Loot Pile Max"
                     text={sailing.maxChests.toString()}
                 />
+            </Box>
+            <Box margin={{ bottom: 'medium' }} gap="small">
+                <Text>Loot pile</Text>
+                <Box direction="row" wrap>
+                    {
+                        sailing.loot.filter(lootCount => lootCount > 0).map((lootCount, index) => (
+                            <Box key={index} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} align="center">
+                                <Box direction="row" pad={{ vertical: 'small' }} align="center">
+                                    <IconImage data={SailingDomain.getLootImageData(index)} scale={0.8} />
+                                    <Text size="12px">{nFormatter(Math.floor(lootCount))}</Text>
+                                </Box>
+                            </Box>
+                        ))
+                    }
+                </Box>
             </Box>
             <Box align="center" direction="row" justify="center" gap="small" margin={{ bottom: 'small' }}>
                 {["Islands", "Artifacts", "Captains", "Boats"].map((tabName, index) => (
