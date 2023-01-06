@@ -38,9 +38,10 @@ export class Artifact {
                     return new OperaMaskArtifact(artifact.index, artifact.data);
                 case 29:
                     return new TheTrueLanternArtifact(artifact.index, artifact.data);
-                // TODO: Special handling for 25, it's per character.
-                // TODO: Think about 8, it requires build rate which I don't have.
-                
+                case 25:
+                    return new CrystalSteakArtifact(artifact.index, artifact.data);
+                case 8:
+                    return new FunHippoeteArtifact(artifact.index, artifact.data);
                 default: return new Artifact(artifact.index, artifact.data)
             }
         });
@@ -118,11 +119,11 @@ export class AshenUrnArtifact extends Artifact {
         return Math.min(bonusCap, this.highestLevel) * this.data.qtyBonus;
     }
 
-    hasCalculatedBonus = () => {
+    override hasCalculatedBonus = () => {
         return true;
     }
 
-    getCalculatedBonusText = () => {
+    override getCalculatedBonusText = () => {
         return `+${this.getBonus().toString()}% Divinity Gain`;
     }
 }
@@ -153,11 +154,49 @@ export class OperaMaskArtifact extends Artifact {
     override getBonus = () => {
         return lavaLog(this.goldOwned) * this.data.qtyBonus * (this.status == ArtifactStatus.Ancient ? 2 : 1);
     }
+
+    override getCalculatedBonusText = () => {
+        return `Currently broken in-game`;
+    }
 }
 
 export class TheTrueLanternArtifact extends Artifact {
     blessingsOwned: number = 0;
     override getBonus = () => {
         return lavaLog(this.blessingsOwned) * this.data.qtyBonus * (this.status == ArtifactStatus.Ancient ? 2 : 1);
+    }
+
+    override getCalculatedBonusText = () => {
+        return `Currently broken in-game`;
+    }
+}
+
+export class CrystalSteakArtifact extends Artifact {
+    statsBonus: number = 0;
+    override getBonus = () => {
+        return 0;
+    }
+
+    override hasCalculatedBonus = () => {
+        return true;
+    }
+
+    override getCalculatedBonusText = () => {
+        return `N/A for now.`;
+    }
+}
+
+export class FunHippoeteArtifact extends Artifact {
+    constructionSpeed: number = 0;
+    override getBonus = () => {
+        return 0;
+    }
+
+    override hasCalculatedBonus = () => {
+        return true;
+    }
+
+    override getCalculatedBonusText = () => {
+        return `N/A for now.`;
     }
 }
