@@ -12,7 +12,7 @@ import { Player } from "./player";
 import { Sigils } from "./sigils";
 import { Stamp } from "./stamps";
 
-const spiceValues: number[] = "0 3 5 8 10 13 15 19 20 23 27 31 33 37 41 45 48 51 53 57".split(" ").map(value => parseInt(value));
+const spiceValues: number[] = "0 3 5 8 10 13 15 19 20 23 27 31 33 37 41 45 48 50 53 56".split(" ").map(value => parseInt(value));
 const mealLuckValues: number[] = "1 .20 .10 .05 .02 .01 .004 .001 .0005 .0003".split(" ").map(value => parseFloat(value));
 
 
