@@ -8,8 +8,9 @@ import { IslandInfoModel } from "./model/islandInfoModel";
 import { Player } from "./player";
 import { SkillsIndex } from "./SkillsIndex";
 import { LootyInfo } from "./lootyTracker";
-import { Artifact, AshenUrnArtifact, FauxoryTuskArtifact, GenieLampArtifact, ManekiKatArtifact, SlabInfluencedArtifact, TriagulonArtifact, WeatherbookArtifact } from "./sailing/artifacts";
+import { Artifact, AshenUrnArtifact, FauxoryTuskArtifact, GenieLampArtifact, ManekiKatArtifact, OperaMaskArtifact, SlabInfluencedArtifact, TriagulonArtifact, WeatherbookArtifact } from "./sailing/artifacts";
 import { Cooking } from "./cooking";
+import { Sigils } from "./sigils";
 
 // "Captains": [
 //     [0,0,-1,3,6.75,2,0],
@@ -22,6 +23,11 @@ import { Cooking } from "./cooking";
 // [6] == Base of trait 2
 
 const captainBonuses = initCaptainBonusRepo();
+
+export enum IslandStatus {
+    Discoverd,
+    Hidden
+}
 
 export class CaptainTrait {
     bonus: CaptainBonusModel;
@@ -135,6 +141,8 @@ export class Boat {
 
 export class Island {
     artifacts: Artifact[] = [];
+    status: IslandStatus = IslandStatus.Hidden;
+    discoverProgress: number = -1;
 
     constructor(public index: number, public data: IslandInfoModel) { }
 
@@ -149,579 +157,19 @@ export class Ship {
 
 }
 
-// "Sailing": [
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         1000,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         87.48177916406271,
-//         96.88550000000004,
-//         12.99,
-//         286.22762500000056,
-//         28.99,
-//         199.94,
-//         -0.01,
-//         -0.01,
-//         -0.01,
-//         -0.01,
-//         -0.01,
-//         -0.01,
-//         -0.01,
-//         -0.01,
-//         -0.01,
-//         -0.01,
-//         -0.01,
-//         -0.01,
-//         -0.01,
-//         -0.01,
-//         -0.01,
-//         -0.01,
-//         -0.01,
-//         -0.01,
-//         -0.01,
-//         -0.01,
-//         -0.01,
-//         -0.01,
-//         -0.01,
-//         -0.01,
-//         -0.01
-//     ],
-//     [
-//         2,
-//         3
-//     ],
-//     [
-//         1,
-//         1,
-//         1,
-//         1,
-//         1,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0,
-//         0
-//     ]
-// ]
+// Sailing: [
+//    [-1,-1,-1,-1,3000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+//    [660.9760136675222,176.57040000000018,3.8640000000000043,151.72152500000084,313.4682,23.24000000000001,-0.01,5512.430243750001,40.99,-0.01,-0.01,-0.01,-0.01,-0.01,-0.01,-0.01,-0.01,-0.01,-0.01,-0.01,-0.01,-0.01,-0.01,-0.01,-0.01,-0.01,-0.01,-0.01,-0.01,-0.01,-0.01],
+//    [5,5],
+//    [1,1,2,1,1,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]
 
-
-// "Boats": [
-//     [
-//         1,
-//         1,
-//         0,
-//         8,
-//         29.187414635975678,
-//         9
-//     ],
-//     [
-//         2,
-//         3,
-//         1,
-//         8,
-//         586.5551424352022,
-//         12
-//     ],
-//     [
-//         0,
-//         2,
-//         0,
-//         7,
-//         184.21441201857112,
-//         10
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         1,
-//         0,
-//         15
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0
-//     ]
-// ]
-
-
-// "Captains": [
-//     [
-//         0,
-//         1,
-//         -1,
-//         3,
-//         6.75,
-//         7,
-//         0
-//     ],
-//     [
-//         0,
-//         1,
-//         -1,
-//         4,
-//         13.25,
-//         6,
-//         0
-//     ],
-//     [
-//         0,
-//         1,
-//         -1,
-//         3,
-//         24.75,
-//         6,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         0,
-//         1,
-//         -1,
-//         1,
-//         0,
-//         5,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ],
-//     [
-//         -1,
-//         -1,
-//         -1,
-//         0,
-//         0,
-//         0,
-//         0
-//     ]
-// ]
 
 export class Sailing {
     artifacts: Artifact[] = Artifact.fromBase(initArtifactRepo());
     islands: Island[] = Island.fromBase(initIslandInfoRepo());
     boats: Boat[] = [];
     captains: Captain[] = [];
+    loot: number[] = [];
 
     maxChests: number = 5;
     captainsUnlocked = 1;
@@ -752,10 +200,21 @@ export default function parseSailing(sailingData: number[][], boatData: number[]
         return sailing;
     }
 
+    sailing.loot = sailingData[1];
+
     // Sailing index 3 = array of artifacts found or not.
     sailingData[3].forEach((artifact, index) => {
         sailing.artifacts[index].updateStatus(artifact);
     })
+
+    sailing.islands.forEach(island => {
+        if (sailingData[0][island.index] == -1) {
+            island.status = IslandStatus.Discoverd;
+        }
+        else {
+            island.discoverProgress = sailingData[0][island.index];
+        }
+    });
 
     sailing.captainsUnlocked = Math.round(sailingData[2][0] + 1);
     sailing.boatsUnlocked = Math.round(sailingData[2][1] + 1);
@@ -782,13 +241,14 @@ export const updateSailing = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const looty = data.get("lootyData") as LootyInfo;
     const cooking = data.get("cooking") as Cooking;
+    const sigils = data.get("sigils") as Sigils;
 
     // Max chests
     const chestPurchases = gemStore.purchases.find(upgrade => upgrade.index == 130)?.pucrhased ?? 0;
     sailing.maxChests += Math.min(Math.round(5 + chestPurchases), 19);
 
     // Sailing Related
-    // TODO: Add handling for 27 once I know the number of gold owned.
+    (sailing.artifacts[27] as OperaMaskArtifact).goldOwned = sailing.loot[0];
 
     // Skills related.
     (sailing.artifacts[5] as GenieLampArtifact).sailingLevel = players[0].skills.get(SkillsIndex.Sailing)?.level ?? 0;
@@ -810,7 +270,10 @@ export const updateSailing = (data: Map<string, any>) => {
     (sailing.artifacts[13] as TriagulonArtifact).turkeyOwned = cooking.meals[0].count;
 
     // Update artifact impacts
-    sailing.boats.forEach(boat => boat.genieLampBonus = sailing.artifacts[5].getBonus());
+    sailing.boats.forEach(boat => {
+        boat.genieLampBonus = sailing.artifacts[5].getBonus()
+        boat.sigilBonus = sigils.sigils[21].getBonus();
+    });
 
     return sailing;
 }
