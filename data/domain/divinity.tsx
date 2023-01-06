@@ -11,7 +11,14 @@ export class DivinityGod {
 
 
     static fromBase = (data: GodInfoBase[]): DivinityGod[] => {
-        return data.map(god => new DivinityGod(god.index, god.data));
+        const godData = data.map(god => new DivinityGod(god.index, god.data));
+        const godCopy = [...godData];
+
+        // Fix up the bonus texts based on bonus index, because ... Lava.
+        godData.forEach(god => {
+            god.data.majorBonus = godCopy[god.data.bonusIndex].data.majorBonus;
+        })
+        return godData;
     }
 }
 
@@ -47,9 +54,14 @@ export default function parseDivinity(playerCount: number, divinityData: number[
     }
     // Index 25 = Number of gods unlocked?
     const numberOfUnlockedGods = divinityData[25];
-    // Next 10 indexes = god bonus level
+    
+    // Index 26 = ? 
+    // Index 27 = ?
+    // Next 10 indexes = god levels
     divinity.gods.forEach((god, godIndex) => {
-        god.bonusLevel = divinityData[godIndex + 26];
+        // The index of the god doesn't match up the bonus, yay Lava.
+        // Using bonus index instead of godIndex.
+        god.bonusLevel = divinityData[godIndex + 28];
         god.unlocked = godIndex < numberOfUnlockedGods
     });
 

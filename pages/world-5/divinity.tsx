@@ -94,7 +94,7 @@ function GodDisplay() {
                 {
                     divinity && divinity.gods.map((god, index) => {
                         return (
-                            <ShadowBox key={index} background="dark-1" pad="medium" direction="row" margin={{ bottom: 'small', right: 'small' }}>
+                            <ShadowBox key={index} background="dark-1" pad="medium" direction="row" wrap margin={{ bottom: 'small', right: 'small' }}>
                                 <Box margin={{ right: 'small' }}>
                                     <TextAndLabel textSize='small' text={god.data.name} label="Name" />
                                 </Box>
@@ -102,7 +102,7 @@ function GodDisplay() {
                                     <TextAndLabel textSize='small' text={`${god.bonusLevel}/100`} label="Level" />
                                 </Box>
                                 <Box margin={{ bottom: 'small', right: 'small' }}>
-                                    <TextAndLabel textSize='small' text={`FAKE`} label="Bonus" />
+                                    <TextAndLabel textSize='small' text={god.data.majorBonus} label="Link Bonus" />
                                 </Box>
                             </ShadowBox>
                         )
