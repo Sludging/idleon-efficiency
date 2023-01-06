@@ -36,7 +36,7 @@ import { parseAnvil, updateAnvil } from './anvil';
 import { updateAlerts } from './alerts';
 import { parseAccount, updateAccount } from './account';
 import parseDivinity from './divinity';
-import parseSailing from './sailing';
+import parseSailing, { updateSailing } from './sailing';
 import parseGaming from './gaming';
 
 
@@ -139,6 +139,7 @@ const keyFunctionMap: Record<string, Function> = {
 const postProcessingMap: Record<string, Function> = {
     "storage": (doc: Cloudsave, accountData: Map<string, any>) => updateStorage(accountData),
     "deathnote": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnote(accountData),
+    "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateSailing(accountData),
     "lab": (doc: Cloudsave, accountData: Map<string, any>) => updateLab(accountData),
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStamps(accountData),
     "alchemy": (doc: Cloudsave, accountData: Map<string, any>) => updateAlchemy(accountData),
