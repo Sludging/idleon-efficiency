@@ -11,6 +11,11 @@ import { LootyInfo } from "./lootyTracker";
 import { Artifact, AshenUrnArtifact, FauxoryTuskArtifact, GenieLampArtifact, ManekiKatArtifact, OperaMaskArtifact, SlabInfluencedArtifact, TriagulonArtifact, WeatherbookArtifact } from "./sailing/artifacts";
 import { Cooking } from "./cooking";
 import { Sigils } from "./sigils";
+import { Divinity } from "./divinity";
+import { Card } from "./cards";
+import { Alchemy } from "./alchemy";
+import { Stamp } from "./stamps";
+import { PlayerStatues } from "./statues";
 
 // "Captains": [
 //     [0,0,-1,3,6.75,2,0],
@@ -37,14 +42,30 @@ export class CaptainTrait {
         this.traitIndex = bonus.index;
     }
 
-    getBonusText = () => {
-        return `+${this.currentBonus}% (${this.baseValue})`;
+    getBonusText = (includeBase: boolean = true) => {
+        return `+${this.currentBonus}%${includeBase ? `(${this.baseValue})` : ""}`;
         //return this.bonus.bonus.replace("{", this.currentBonus.toString());   
     }
 
     getImageData = () => {
         return {
             location: `SailTra${this.traitIndex}`,
+            width: 28,
+            height: 23
+        }
+    }
+
+    static getLootImageData = () => {
+        return {
+            location: `SailTra1`,
+            width: 28,
+            height: 23
+        }
+    }
+
+    static getSpeedImageData = () => {
+        return {
+            location: `SailTra0`,
             width: 28,
             height: 23
         }
@@ -89,7 +110,12 @@ export class Boat {
     sigilBonus: number = 0;
     genieLampBonus: number = 30;
 
-    constructor(public index: number, public assignIsland: number, public lootUpgrades: number, public speedUpgrades: number, public captain: Captain | undefined) { }
+    speed: number = 0;
+
+    // Helper values.
+    speedBaseMath = 0;
+
+    constructor(public index: number, public assignIsland: Island | undefined, public distanceTravelled: number, public lootUpgrades: number, public speedUpgrades: number, public captain: Captain | undefined) { }
 
     getSpeedUpgradeType = () => {
         if (this.index < 2) {
@@ -125,17 +151,35 @@ export class Boat {
         return Math.round((2 + currentUpgradeLevel) * Math.pow(1.12 - .07 * currentUpgradeLevel / (currentUpgradeLevel + 200), currentUpgradeLevel));
     }
 
-    getLootValue = (something: number = 4) => {
+    getLootValue = (
+        { lootUpgrades = this.lootUpgrades, includeCaptain = true }
+            : { lootUpgrades?: number, includeCaptain?: boolean } = { lootUpgrades: this.lootUpgrades, includeCaptain: true }
+    ) => {
         // Check if captain is boosting the value.
-        const captainBonus = this.captain?.traits.filter(trait => trait.bonus.bonus.includes("Loot Value")).reduce((sum, trait) => sum += trait.currentBonus, 0) ?? 0;
+        const captainBonus = includeCaptain ?
+            this.captain?.traits.filter(trait => trait.bonus.bonus.includes("Loot Value")).reduce((sum, trait) => sum += trait.currentBonus, 0) ?? 0
+            : 0;
 
-        if (something == 6) {
-            const firstMath = 2 + Math.pow(Math.floor((this.lootUpgrades + 1) / 8), 2);
-            return (5 + firstMath * (this.lootUpgrades + 1)) * (1 + (this.sigilBonus + captainBonus + this.genieLampBonus) / 100);
+        const firstMath = 2 + Math.pow(Math.floor(lootUpgrades / 8), 2);
+        return (5 + firstMath * lootUpgrades) * (1 + (this.sigilBonus + (captainBonus + this.genieLampBonus)) / 100);
+    }
+
+    getSpeedValue = (
+        { speedUpgrades = this.speedUpgrades, includeCaptain = true, islandBound = false }
+            : { speedUpgrades?: number, includeCaptain?: boolean, islandBound?: boolean } = { speedUpgrades: this.speedUpgrades, includeCaptain: true, islandBound: false }
+    ) => {
+        // Check if captain is boosting the value.
+        const captainBonus = includeCaptain ?
+            this.captain?.traits.filter(trait => trait.bonus.bonus.includes("Boat Speed")).reduce((sum, trait) => sum += trait.currentBonus, 0) ?? 0
+            : 0;
+
+        const firstMath = 5 + Math.pow(Math.floor(speedUpgrades / 7), 2);
+        const boatSpeed = (10 + firstMath * speedUpgrades * (1 + captainBonus / 100) * this.speedBaseMath);
+        if (islandBound && this.assignIsland) {
+            return Math.min(boatSpeed, (this.assignIsland.data.distance * 60) / 120);
         }
 
-        const firstMath = 2 + Math.pow(Math.floor(this.lootUpgrades / 8), 2);
-        return (5 + firstMath * this.lootUpgrades) * (1 + (this.sigilBonus + (captainBonus + this.genieLampBonus)) / 100);
+        return boatSpeed;
     }
 }
 
@@ -145,6 +189,14 @@ export class Island {
     discoverProgress: number = -1;
 
     constructor(public index: number, public data: IslandInfoModel) { }
+
+    getImageData = (): ImageData => {
+        return {
+            location: `SailIsland${this.index}`,
+            height: 20,
+            width: 20,
+        }
+    }
 
     static fromBase = (data: IslandInfoBase[]): Island[] => {
         return data.map(island => new Island(island.index, island.data));
@@ -174,6 +226,14 @@ export class Sailing {
     maxChests: number = 5;
     captainsUnlocked = 1;
     boatsUnlocked = 1;
+
+    nextCaptainCost = () => {
+        return (60 * this.captainsUnlocked + 15 * Math.pow(this.captainsUnlocked, 2)) * Math.pow(1.43, this.captainsUnlocked) * .6;
+    }
+
+    nextBoatCost = () => {
+        return (60 * this.boatsUnlocked + 15 * Math.pow(this.boatsUnlocked, 2)) * Math.pow(1.43, this.boatsUnlocked);
+    }
 
     constructor() {
         // Map artifacts to islands to make display easier.
@@ -225,10 +285,13 @@ export default function parseSailing(sailingData: number[][], boatData: number[]
         }
     })
 
+    // [1,4,1,14,1827.7902880492559,17],
+    // [2,4,1,14,1290.5608459374048,23]
     boatData.forEach((boat, bIndex) => {
         if (bIndex < sailing.boatsUnlocked && (boat[3] + boat[5]) != 0) {
             const boatCaptain = boat[0] < sailing.captains.length ? sailing.captains[boat[0]] : undefined;
-            sailing.boats.push(new Boat(bIndex, boat[1], boat[3], boat[5], boatCaptain));
+            const targetIsland = boat[1] != -1 && boat[1] < sailing.islands.length ? sailing.islands[boat[1]] : undefined;
+            sailing.boats.push(new Boat(bIndex, targetIsland, boat[4], boat[3], boat[5], boatCaptain));
         }
     })
 
@@ -242,6 +305,12 @@ export const updateSailing = (data: Map<string, any>) => {
     const looty = data.get("lootyData") as LootyInfo;
     const cooking = data.get("cooking") as Cooking;
     const sigils = data.get("sigils") as Sigils;
+    const divinity = data.get("divinity") as Divinity;
+    const cards = data.get("cards") as Card[];
+    const stamps = data.get("stamps") as Stamp[][];
+    const statues = data.get("statues") as PlayerStatues[];
+    const alchemy = data.get("alchemy") as Alchemy;
+
 
     // Max chests
     const chestPurchases = gemStore.purchases.find(upgrade => upgrade.index == 130)?.pucrhased ?? 0;
@@ -254,13 +323,13 @@ export const updateSailing = (data: Map<string, any>) => {
     (sailing.artifacts[5] as GenieLampArtifact).sailingLevel = players[0].skills.get(SkillsIndex.Sailing)?.level ?? 0;
     (sailing.artifacts[3] as FauxoryTuskArtifact).sailingLevel = players[0].skills.get(SkillsIndex.Sailing)?.level ?? 0;
     (sailing.artifacts[23] as WeatherbookArtifact).gamingLevel = players[0].skills.get(SkillsIndex.Gaming)?.level ?? 0;
-    
+
     // Slab related.
     (sailing.artifacts[2] as SlabInfluencedArtifact).lootyCount = looty.rawData.length;
     (sailing.artifacts[10] as SlabInfluencedArtifact).lootyCount = looty.rawData.length;
     (sailing.artifacts[18] as SlabInfluencedArtifact).lootyCount = looty.rawData.length;
     (sailing.artifacts[20] as SlabInfluencedArtifact).lootyCount = looty.rawData.length;
-    
+
     // Highest level
     const highestLevelPlayer = players.sort((playera, playerb) => playera.level > playerb.level ? -1 : 1)[0];
     (sailing.artifacts[1] as ManekiKatArtifact).highestLevel = highestLevelPlayer.level;
@@ -269,11 +338,23 @@ export const updateSailing = (data: Map<string, any>) => {
     // Cooking related.
     (sailing.artifacts[13] as TriagulonArtifact).turkeyOwned = cooking.meals[0].count;
 
-    // Update artifact impacts
+    // Speed base math
+    const purrmepPlayer = divinity.gods[6].linkedPlayers.at(0); // purrmep is limited to only 1 player linked.
+    const cardBonus = cards.filter(card => card.data.effect.includes("Sailing Speed (Passive)")).reduce((sum, card) => sum += card.getBonus(), 0);
+    const divinityMinorBonus = purrmepPlayer ? divinity.gods[6].getPassiveBonus(purrmepPlayer) : 0;
+    const stampBonus = stamps.flatMap(tab => tab).reduce((sum, stamp) => sum += stamp.data.effect == "SailSpd" ? stamp.getBonus() : 0, 0);
+    const mealBonus = cooking.getMealBonusForKey("Sailing");
+    const firstMath = (1 + (divinityMinorBonus + cardBonus + alchemy.getBubbleBonusForKey("Y1")) / 125) * (1 + divinity.gods[4].getBlessingBonus() / 100);
+    const speedBaseMath = firstMath * (1 + divinity.gods[6].getBlessingBonus() / 100)
+        * (1 + (divinity.gods[9].getBlessingBonus() + sailing.artifacts[10].getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd")) / 125);
+
+    // Update boat impacts
     sailing.boats.forEach(boat => {
         boat.genieLampBonus = sailing.artifacts[5].getBonus()
         boat.sigilBonus = sigils.sigils[21].getBonus();
+        boat.speedBaseMath = speedBaseMath;
     });
+
 
     return sailing;
 }

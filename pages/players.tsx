@@ -987,7 +987,6 @@ function PostOfficeDisplay({ player, extra }: { player: Player, extra: PostOffic
                                             {
                                                 box.bonuses.map((bonus, bIndex) => {
                                                     const maxLevel = box.name == "Myriad Crate" ? 100000 : PostOfficeConst.MaxBoxLevel;
-                                                    console.log(box.name, maxLevel);
                                                     return (
                                                         <Box key={`player_${player.playerID}_postoffice_${box.index}_${bIndex}`} direction="row" gap="small">
                                                             <Text>{bonus.getBonusText(box.level, bIndex)}</Text>
