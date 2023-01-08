@@ -78,7 +78,6 @@ export class Artifact {
         if (!this.hasCalculatedBonus()) {
             return "";
         }
-        console.log(this.data.bonus.split("Total Bonus: "));
         return this.data.bonus.split("Total Bonus: ")[1].trim().replace("}", nFormatter(this.getBonus()));
     }
 
