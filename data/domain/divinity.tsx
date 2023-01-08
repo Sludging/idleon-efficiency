@@ -37,6 +37,10 @@ export class DivinityGod {
         return divinityLevel / (60 + divinityLevel) * alchemyBoost * this.data.passiveMax;
     }
 
+    getBlessingBonusText = () => {
+        return this.data.blessingBonus.replace("{", this.getBlessingBonus().toString());
+    }
+
     getBlessingBonus = () => {
         if (this.index == 2) {
             // TODO: Fix this properly, bit weird with skilling eff

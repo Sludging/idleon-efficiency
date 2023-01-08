@@ -49,7 +49,7 @@ function ShipsDisplay() {
                                     <Text size="xsmall">{nFormatter(Math.round(boat.getLootValue()))}</Text>
                                 </Box>
                                 <FormNext color="grey-2" size="16px" />
-                                <Text size="xsmall">{nFormatter(Math.round(boat.getLootValue(boat.lootUpgrades + 1)))}</Text>
+                                <Text size="xsmall">{nFormatter(Math.round(boat.getLootValue({ lootUpgrades: boat.lootUpgrades + 1})))}</Text>
                                 <Box direction="row" gap="xsmall" align="center" margin={{ left: 'xsmall' }}>
                                     <IconImage data={SailingDomain.getLootImageData(boat.getLootUpgradeType())} scale={0.8} />
                                     <Text color={sailing.loot[boat.getLootUpgradeType()] > boat.getUpgradeCost(BoatUpgradeType.Loot) ? 'green-1' : 'accent-1'} size="xsmall">{nFormatter(boat.getUpgradeCost(BoatUpgradeType.Loot))}</Text>
@@ -59,7 +59,7 @@ function ShipsDisplay() {
                                     <Text size="xsmall">{nFormatter(Math.round(boat.getSpeedValue()))}</Text>
                                 </Box>
                                 <FormNext color="grey-2" size="16px" />
-                                <Text size="xsmall">{nFormatter(Math.round(boat.getSpeedValue(boat.speedUpgrades + 1)))}</Text>
+                                <Text size="xsmall">{nFormatter(Math.round(boat.getSpeedValue({ speedUpgrades: boat.speedUpgrades + 1})))}</Text>
                                 <Box direction="row" gap="xsmall" align="center" margin={{ left: 'xsmall' }}>
                                     <IconImage data={SailingDomain.getLootImageData(boat.getSpeedUpgradeType())} scale={0.8} />
                                     <Text color={sailing.loot[boat.getSpeedUpgradeType()] > boat.getUpgradeCost(BoatUpgradeType.Speed) ? 'green-1' : 'accent-1'} size="xsmall">{nFormatter(boat.getUpgradeCost(BoatUpgradeType.Speed))}</Text>
