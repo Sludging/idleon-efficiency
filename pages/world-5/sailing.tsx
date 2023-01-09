@@ -49,7 +49,7 @@ function ShipsDisplay() {
                                     <Text size="xsmall">{nFormatter(Math.round(boat.getLootValue()))}</Text>
                                 </Box>
                                 <FormNext color="grey-2" size="16px" />
-                                <Text size="xsmall">{nFormatter(Math.round(boat.getLootValue({ lootUpgrades: boat.lootUpgrades + 1})))}</Text>
+                                <Text size="xsmall">{nFormatter(Math.round(boat.getLootValue({ lootUpgrades: boat.lootUpgrades + 1 })))}</Text>
                                 <Box direction="row" gap="xsmall" align="center" margin={{ left: 'xsmall' }}>
                                     <IconImage data={SailingDomain.getLootImageData(boat.getLootUpgradeType())} scale={0.8} />
                                     <Text color={sailing.loot[boat.getLootUpgradeType()] > boat.getUpgradeCost(BoatUpgradeType.Loot) ? 'green-1' : 'accent-1'} size="xsmall">{nFormatter(boat.getUpgradeCost(BoatUpgradeType.Loot))}</Text>
@@ -59,7 +59,7 @@ function ShipsDisplay() {
                                     <Text size="xsmall">{nFormatter(Math.round(boat.getSpeedValue()))}</Text>
                                 </Box>
                                 <FormNext color="grey-2" size="16px" />
-                                <Text size="xsmall">{nFormatter(Math.round(boat.getSpeedValue({ speedUpgrades: boat.speedUpgrades + 1})))}</Text>
+                                <Text size="xsmall">{nFormatter(Math.round(boat.getSpeedValue({ speedUpgrades: boat.speedUpgrades + 1 })))}</Text>
                                 <Box direction="row" gap="xsmall" align="center" margin={{ left: 'xsmall' }}>
                                     <IconImage data={SailingDomain.getLootImageData(boat.getSpeedUpgradeType())} scale={0.8} />
                                     <Text color={sailing.loot[boat.getSpeedUpgradeType()] > boat.getUpgradeCost(BoatUpgradeType.Speed) ? 'green-1' : 'accent-1'} size="xsmall">{nFormatter(boat.getUpgradeCost(BoatUpgradeType.Speed))}</Text>
@@ -417,14 +417,18 @@ function Sailing() {
                 <Text>Loot pile</Text>
                 <Box direction="row" wrap>
                     {
-                        sailing.loot.filter(lootCount => lootCount > 0).map((lootCount, index) => (
-                            <Box key={index} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} align="center">
-                                <Box direction="row" pad={{ vertical: 'small' }} align="center">
-                                    <IconImage data={SailingDomain.getLootImageData(index)} scale={0.8} />
-                                    <Text size="12px">{nFormatter(Math.floor(lootCount))}</Text>
+                        sailing.loot.map((lootCount, index) => {
+                            if (lootCount < 0) return null;
+
+                            return (
+                                <Box key={index} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} align="center">
+                                    <Box direction="row" pad={{ vertical: 'small' }} align="center">
+                                        <IconImage data={SailingDomain.getLootImageData(index)} scale={0.8} />
+                                        <Text size="12px">{nFormatter(Math.floor(lootCount))}</Text>
+                                    </Box>
                                 </Box>
-                            </Box>
-                        ))
+                            )
+                        })
                     }
                 </Box>
             </Box>
