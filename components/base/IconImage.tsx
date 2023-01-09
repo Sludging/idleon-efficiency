@@ -19,10 +19,11 @@ const IconImage = ({ data, scale = 1, style }: { data: ImageData, scale?: number
             <Image
                 src={data.location}
                 loader={cdnLoader}
+                sizes="100vw"
                 height={data.height * scale}
                 width={data.width * scale}
                 layout='fixed'
-                objectFit='scale-down'
+                objectFit='contain'
                 loading='eager'
             />
         </Box>
