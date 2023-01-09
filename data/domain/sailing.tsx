@@ -174,7 +174,7 @@ export class Boat {
             : 0;
 
         const firstMath = 5 + Math.pow(Math.floor(speedUpgrades / 7), 2);
-        const boatSpeed = (10 + firstMath * speedUpgrades * (1 + captainBonus / 100) * this.speedBaseMath);
+        const boatSpeed = (10 + firstMath * speedUpgrades) * (1 + captainBonus / 100) * this.speedBaseMath;
         if (islandBound && this.assignIsland) {
             return Math.min(boatSpeed, (this.assignIsland.data.distance * 60) / 120);
         }
@@ -331,9 +331,9 @@ export const updateSailing = (data: Map<string, any>) => {
     (sailing.artifacts[20] as SlabInfluencedArtifact).lootyCount = looty.rawData.length;
 
     // Highest level
-    const highestLevelPlayer = players.sort((playera, playerb) => playera.level > playerb.level ? -1 : 1)[0];
-    (sailing.artifacts[1] as ManekiKatArtifact).highestLevel = highestLevelPlayer.level;
-    (sailing.artifacts[11] as AshenUrnArtifact).highestLevel = highestLevelPlayer.level;
+    const highestLevel = players.reduce((maxLevel, player) => maxLevel = player.level > maxLevel ? player.level : maxLevel, 0);
+    (sailing.artifacts[1] as ManekiKatArtifact).highestLevel = highestLevel;
+    (sailing.artifacts[11] as AshenUrnArtifact).highestLevel = highestLevel;
 
     // Cooking related.
     (sailing.artifacts[13] as TriagulonArtifact).turkeyOwned = cooking.meals[0].count;
