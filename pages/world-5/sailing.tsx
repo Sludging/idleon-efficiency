@@ -261,10 +261,10 @@ function OverviewDisplay() {
                 sailing.boats.map((boat, index) => (
                     <ShadowBox key={index} background="dark-1" pad="small" margin={{ bottom: 'small' }} wrap>
                         <Grid columns={["5%", "15%", "15%", "30%", "35%"]} align="center" fill>
-                            <Box title={boat.assignIsland?.data.name ?? "Dock"} border={{ side: 'right', color: 'grey-2', size: '1px' }} pad={{ horizontal: 'small' }} fill align="center" justify='center'>
+                            <Box title={boat.assignIsland?.data.name ?? "Dock"} border={{ side: 'right', color: 'grey-3', size: '1px' }} pad={{ horizontal: 'small' }} fill align="center" justify='center'>
                                 {boat.assignIsland && <IconImage data={boat.assignIsland?.getImageData()} />}
                             </Box>
-                            <Box border={{ side: 'right', color: 'grey-2', size: '1px' }} pad={{ horizontal: 'small' }} fill align="center" justify='center'>
+                            <Box border={{ side: 'right', color: 'grey-3', size: '1px' }} pad={{ horizontal: 'small' }} fill align="center" justify='center'>
                                 <Box direction="row" gap="small" align="center">
                                     <Text size="medium">{boat.index + 1}</Text>
                                     <Box>
@@ -279,7 +279,7 @@ function OverviewDisplay() {
                                     </Box>
                                 </Box>
                             </Box>
-                            <Box border={{ side: 'right', color: 'grey-2', size: '1px' }} pad={{ horizontal: 'small' }} fill align="center" justify='center'>
+                            <Box border={{ side: 'right', color: 'grey-3', size: '1px' }} pad={{ horizontal: 'small' }} fill align="center" justify='center'>
                                 {boat.captain &&
                                     <Box direction="row" gap="small" align="center">
                                         <Text size="medium">{String.fromCharCode(64 + boat.captain.index + 1)}</Text>
@@ -298,11 +298,28 @@ function OverviewDisplay() {
                                     </Box>
                                 }
                             </Box>
-                            <Box border={{ side: 'right', color: 'grey-2', size: '1px' }} pad={{ horizontal: 'small' }} fill align="center" justify='center'>
-                                Some summary
+                            <Box border={{ side: 'right', color: 'grey-3', size: '1px' }} pad={{ horizontal: 'small' }} fill align="center" justify='center'>
+                                Some Summary
                             </Box>
-                            <Box pad={{ horizontal: 'small' }} fill align="start" direction="row" gap="small">
-                                <TextAndLabel labelSize='xsmall' textColor={(boat.assignIsland?.data.distance || 0) > boat.getSpeedValue() * 2 ? 'red' : ''} center={true} textSize='small' label="Max Distance / Current Target" text={`${nFormatter(boat.getSpeedValue() * 2)}/${nFormatter(boat.assignIsland?.data.distance || 0)}`} />
+                            <Box pad={{ horizontal: 'small', bottom: 'small' }} fill align="start" direction="row" gap="medium">
+                                <TextAndLabel
+                                    labelSize='xsmall'
+                                    right={true}
+                                    textSize="small"
+                                    label="2hrs dist"
+                                    textColor={(boat.assignIsland?.data.distance || 0) > boat.getSpeedValue() * 2 ? 'accent-1' : ''}
+                                    text={nFormatter(boat.getSpeedValue() * 2)}
+                                    tooltip={
+                                        <Box>This is how far the ship travels in 2h, you want to target islands that have less distance than this.</Box>
+                                    }
+                                />
+                                <TextAndLabel
+                                    labelSize='xsmall'
+                                    right={true}
+                                    textSize="small"
+                                    label="Island Distance"
+                                    text={nFormatter(boat.assignIsland?.data.distance || 0)}
+                                />
                                 {boat.assignIsland &&
                                     <ComponentAndLabel
                                         labelSize='xsmall'
