@@ -35,7 +35,7 @@ import parseSigils, { updateSigils } from './sigils';
 import { parseAnvil, updateAnvil } from './anvil';
 import { updateAlerts } from './alerts';
 import { parseAccount, updateAccount } from './account';
-import parseDivinity from './divinity';
+import parseDivinity, { updateDivinity } from './divinity';
 import parseSailing, { updateSailing } from './sailing';
 import parseGaming from './gaming';
 
@@ -139,13 +139,14 @@ const keyFunctionMap: Record<string, Function> = {
 const postProcessingMap: Record<string, Function> = {
     "storage": (doc: Cloudsave, accountData: Map<string, any>) => updateStorage(accountData),
     "deathnote": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnote(accountData),
-    "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateSailing(accountData),
     "lab": (doc: Cloudsave, accountData: Map<string, any>) => updateLab(accountData),
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStamps(accountData),
     "alchemy": (doc: Cloudsave, accountData: Map<string, any>) => updateAlchemy(accountData),
+    "divinity": (doc: Cloudsave, accountData: Map<string, any>) => updateDivinity(accountData),
     "family": (doc: Cloudsave, accountData: Map<string, any>) => parseFamily(accountData.get("players") as Player[]),
     "forge": (doc: Cloudsave, accountData: Map<string, any>) => updateForge(accountData.get("forge"), accountData.get("gems")),
     "cooking": (doc: Cloudsave, accountData: Map<string, any>) => updateCooking(accountData),
+    "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateSailing(accountData),
     "breeding": (doc: Cloudsave, accountData: Map<string, any>) => updateBreeding(accountData),
     "shrines": (doc: Cloudsave, accountData: Map<string, any>) => updateShrines(accountData),
     "players": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayers(accountData),
