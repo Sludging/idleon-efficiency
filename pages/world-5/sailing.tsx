@@ -266,7 +266,7 @@ function OverviewDisplay() {
                             </Box>
                             <Box border={{ side: 'right', color: 'grey-2', size: '1px' }} pad={{ horizontal: 'small' }} fill align="center" justify='center'>
                                 <Box direction="row" gap="small" align="center">
-                                    <Text size="small">{boat.index + 1}</Text>
+                                    <Text size="medium">{boat.index + 1}</Text>
                                     <Box>
                                         <Box direction="row" gap="xsmall" align='center'>
                                             <IconImage data={CaptainTrait.getLootImageData()} scale={0.8} />
@@ -282,7 +282,7 @@ function OverviewDisplay() {
                             <Box border={{ side: 'right', color: 'grey-2', size: '1px' }} pad={{ horizontal: 'small' }} fill align="center" justify='center'>
                                 {boat.captain &&
                                     <Box direction="row" gap="small" align="center">
-                                        <Text size="small">{String.fromCharCode(64 + boat.captain.index + 1)}</Text>
+                                        <Text size="medium">{String.fromCharCode(64 + boat.captain.index + 1)}</Text>
                                         <Box pad={{ vertical: 'xsmall' }} gap="xsmall">
                                             {
                                                 boat.captain.traits.map((trait, tIndex) => (
@@ -302,9 +302,10 @@ function OverviewDisplay() {
                                 Some summary
                             </Box>
                             <Box pad={{ horizontal: 'small' }} fill align="start" direction="row" gap="small">
-                                <TextAndLabel center={true} textSize='small' label="Max distance" text={nFormatter(boat.getSpeedValue() * 2)} />
+                                <TextAndLabel labelSize='xsmall' textColor={(boat.assignIsland?.data.distance || 0) > boat.getSpeedValue() * 2 ? 'red' : ''} center={true} textSize='small' label="Max Distance / Current Target" text={`${nFormatter(boat.getSpeedValue() * 2)}/${nFormatter(boat.assignIsland?.data.distance || 0)}`} />
                                 {boat.assignIsland &&
                                     <ComponentAndLabel
+                                        labelSize='xsmall'
                                         label="Time till arrival"
                                         component={
                                             <TimeDown size={TimeDisplaySize.XSmall} addSeconds={((boat.assignIsland.data.distance - boat.distanceTravelled) / boat.getSpeedValue({ islandBound: true })) * 3600} />
