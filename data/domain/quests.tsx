@@ -90,7 +90,7 @@ export default function parseQuests(doc: Cloudsave, accountData: Map<string, any
 
             if (isItemQuestModel(quest)) {
                 quest.ItemReq.forEach((item) => {
-                    const theItem = allItems.find((parsedItem) => parsedItem.internalName == item.item);
+                    const theItem = allItems.find((parsedItem) => parsedItem.internalName == item.item)?.duplicate();
                     if (theItem) {
                         theItem.count = item.quantity;
                         npc.convertedItemReqs[quest.Name!].push(theItem);
@@ -99,7 +99,7 @@ export default function parseQuests(doc: Cloudsave, accountData: Map<string, any
             }
     
             quest.Rewards.forEach((item) => {
-                const theItem = allItems.find((parsedItem) => parsedItem.internalName == item.item);
+                const theItem = allItems.find((parsedItem) => parsedItem.internalName == item.item)?.duplicate();
                 if (theItem) {
                     theItem.count = item.quantity;
                     npc.convertedRewards[quest.Name!].push(theItem);

@@ -1,31 +1,67 @@
+import { Alchemy } from "./alchemy";
 import { initDivinityStyleRepo } from "./data/DivinityStyleRepo";
 import { GodInfoBase, initGodInfoRepo } from "./data/GodInfoRepo";
 import { DivinityStyleModel } from "./model/divinityStyleModel";
 import { GodInfoModel } from "./model/godInfoModel";
+import { Player } from "./player";
+import { SkillsIndex } from "./SkillsIndex";
 
 export class DivinityGod {
-    bonusLevel: number = 0;
+    blessLevel: number = 0;
     unlocked: boolean = false;
+    linkedPlayers: Player[] = [];
 
-    constructor(public index: number, public data: GodInfoModel) {}
+    // updated values
+    activeBubblePassiveBonus: number = 0;
+    constructor(public index: number, public data: GodInfoModel) { }
 
 
     static fromBase = (data: GodInfoBase[]): DivinityGod[] => {
-        return data.map(god => new DivinityGod(god.index, god.data));
+        const godData = data.map(god => new DivinityGod(god.index, god.data));
+        const godCopy = [...godData];
+
+        // Fix up the bonus texts based on bonus index, because ... Lava.
+        godData.forEach(god => {
+            god.data.majorBonus = godCopy[god.data.bonusIndex].data.majorBonus;
+            god.data.passiveBonus = godCopy[god.data.bonusIndex].data.passiveBonus;
+            god.data.passiveMax = godCopy[god.data.bonusIndex].data.passiveMax;
+        })
+        return godData;
+    }
+
+    getPassiveBonus = (player: Player) => {
+        const divinityLevel = player.skills.get(SkillsIndex.Divinity)?.level ?? 0
+        const hasActiveBubble = player.activeBubbles.filter(bubble => bubble.data.bonusKey == "Y2ACTIVE").length > 0;
+
+        const alchemyBoost = Math.max(1, hasActiveBubble ? this.activeBubblePassiveBonus : 0);
+        return divinityLevel / (60 + divinityLevel) * alchemyBoost * this.data.passiveMax;
+    }
+
+    getBlessingBonusText = () => {
+        return this.data.blessingBonus.replace("{", this.getBlessingBonus().toString());
+    }
+
+    getBlessingBonus = () => {
+        if (this.index == 2) {
+            // TODO: Fix this properly, bit weird with skilling eff
+            return 0;
+        }
+
+        return this.blessLevel * this.data.blessingPerLevel;
     }
 }
 
 export class PlayerDivinityInfo {
-    constructor(public style: DivinityStyleModel, public god: DivinityGod, public active: boolean = false) {}
+    constructor(public playerIndex: number, public style: DivinityStyleModel, public god: DivinityGod, public active: boolean = false) { }
 
     divinityPerHour = (): number => {
-        
+
         return 0;
     }
 }
 
 export class GodOffering {
-    constructor(public index: number, public odds: number) {}
+    constructor(public index: number, public odds: number) { }
 }
 
 export class Divinity {
@@ -47,9 +83,14 @@ export default function parseDivinity(playerCount: number, divinityData: number[
     }
     // Index 25 = Number of gods unlocked?
     const numberOfUnlockedGods = divinityData[25];
-    // Next 10 indexes = god bonus level
+
+    // Index 26 = ? 
+    // Index 27 = ?
+    // Next 10 indexes = god levels
     divinity.gods.forEach((god, godIndex) => {
-        god.bonusLevel = divinityData[godIndex + 26];
+        // The index of the god doesn't match up the bonus, yay Lava.
+        // Using bonus index instead of godIndex.
+        god.blessLevel = divinityData[godIndex + 28];
         god.unlocked = godIndex < numberOfUnlockedGods
     });
 
@@ -58,7 +99,7 @@ export default function parseDivinity(playerCount: number, divinityData: number[
     [...Array(playerCount)].forEach((_, playerIndex) => {
         const playerMantra = divinityData[playerIndex];
         const playerLinkedGod = divinityData[playerIndex + 12];
-        divinity.playerInfo.push(new PlayerDivinityInfo(mantraInfo[playerMantra].data, divinity.gods[playerLinkedGod], afkTarget[playerIndex] == "Divinity"));
+        divinity.playerInfo.push(new PlayerDivinityInfo(playerIndex, mantraInfo[playerMantra].data, divinity.gods[playerLinkedGod], afkTarget[playerIndex] == "Divinity"));
     });
 
     divinity.currentDivinity = divinityData[24];
@@ -68,11 +109,25 @@ export default function parseDivinity(playerCount: number, divinityData: number[
     divinity.offerings.push(new GodOffering(0, divinityData[26]));
     divinity.offerings.push(new GodOffering(1, divinityData[27]));
 
-    
-    return divinity;    
+
+    return divinity;
 }
 
 export const updateDivinity = (data: Map<string, any>) => {
     const divinity = data.get("divinity") as Divinity;
+    const alchemy = data.get("alchemy") as Alchemy;
+    const players = data.get("players") as Player[];
+
+    // God related math values;
+    const activeBubblePassiveDivinityBonus = alchemy.getBubbleBonusForKey("Y2ACTIVE")
+    divinity.gods.forEach(god => {
+        god.activeBubblePassiveBonus = activeBubblePassiveDivinityBonus;
+    })
+
+    divinity.playerInfo.forEach(player => {
+        player.god.linkedPlayers.push(players[player.playerIndex]);
+    })
+
+
     return divinity;
 }
