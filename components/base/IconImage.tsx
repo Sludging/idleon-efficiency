@@ -22,7 +22,7 @@ const IconImage = ({ data, scale = 1, style }: { data: ImageData, scale?: number
                 height={data.height * scale}
                 width={data.width * scale}
                 layout='fixed'
-                objectFit='scale-down'
+                objectFit='contain'
                 loading='eager'
             />
         </Box>

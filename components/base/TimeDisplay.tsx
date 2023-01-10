@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { useTimer, useStopwatch } from 'react-timer-hook';
 
 export enum TimeDisplaySize {
+    XSmall,
     Small,
     Medium,
     Large
@@ -13,6 +14,11 @@ function Digit({ label, number, color, size } : { label: string, number: number,
     let numberSize = "medium";
     let labelSize = "8px";
     switch (size) {
+        case TimeDisplaySize.XSmall: 
+            width = "12px";
+            numberSize = "small";
+            labelSize = "8px";
+            break;
         case TimeDisplaySize.Small: 
             width = "20px";
             numberSize = "medium";
@@ -41,6 +47,9 @@ function Digit({ label, number, color, size } : { label: string, number: number,
 function Seperator({ size } : {size : TimeDisplaySize}) {
     let textSize = 'medium';
     switch (size) {
+        case TimeDisplaySize.XSmall: 
+            textSize = "small";
+            break;
         case TimeDisplaySize.Small: 
             textSize = "medium";
             break;
@@ -67,6 +76,9 @@ function TimeDisplay({ seconds, minutes, hours, days, color, size = TimeDisplayS
 
     let width = "90px";
     switch (size) {
+        case TimeDisplaySize.XSmall: 
+            width = "70px";
+            break;
         case TimeDisplaySize.Small: 
             width = "90px";
             break;

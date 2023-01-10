@@ -37,7 +37,7 @@ function AlignmentDisplay() {
     }
 
     return (
-        <Grid columns={{size: 'small'}}>
+        <Grid columns={{ size: 'small' }}>
             {playerData && playerData.map((player, index) => {
                 return (
                     <ShadowBox key={index} background="dark-1" pad="medium" align="center" margin={{ right: 'medium', bottom: 'small' }}>
@@ -57,14 +57,14 @@ function AlignmentDisplay() {
                                     }
                                     margin={{ bottom: 'small', right: 'small' }}
                                 />
-                                <TextAndLabel 
-                                    label="Style" 
-                                    text={divinity.playerInfo[player.playerID]?.style.name ?? "Not Linked"} 
+                                <TextAndLabel
+                                    label="Style"
+                                    text={divinity.playerInfo[player.playerID]?.style.name ?? "Not Linked"}
                                     margin={{ bottom: 'small', right: 'small' }}
                                 />
-                                <TextAndLabel 
-                                    label="God" 
-                                    text={divinity.playerInfo[player.playerID]?.god?.data.name ?? "Not Linked"} 
+                                <TextAndLabel
+                                    label="God"
+                                    text={divinity.playerInfo[player.playerID]?.god?.data.name ?? "Not Linked"}
                                     margin={{ bottom: 'small', right: 'small' }}
                                 />
                             </Box>
@@ -90,19 +90,26 @@ function GodDisplay() {
 
     return (
         <Box margin={{ top: 'small' }}>
-            <Grid columns={{ size: 'medium' }} gap={{ column: 'small' }}>
+            <Grid columns={{ size: 'small' }} gap={{ column: 'small' }}>
                 {
                     divinity && divinity.gods.map((god, index) => {
                         return (
-                            <ShadowBox key={index} background="dark-1" pad="medium" direction="row" margin={{ bottom: 'small', right: 'small' }}>
-                                <Box margin={{ right: 'small' }}>
-                                    <TextAndLabel textSize='small' text={god.data.name} label="Name" />
+                            <ShadowBox key={index} background="dark-1" pad="medium" wrap margin={{ bottom: 'small', right: 'small' }} justify="between">
+                                <Box>
+                                    <Box margin={{ bottom: 'small', right: 'small' }}>
+                                        <TextAndLabel textSize='small' text={god.data.name} label="Name" />
+                                    </Box>
+                                    <Box margin={{ bottom: 'small', right: 'small' }}>
+                                        <TextAndLabel textSize='small' text={god.data.majorBonus} label="Link Bonus" />
+                                    </Box>
                                 </Box>
-                                <Box margin={{ bottom: 'small', right: 'small' }}>
-                                    <TextAndLabel textSize='small' text={`${god.bonusLevel}/100`} label="Level" />
-                                </Box>
-                                <Box margin={{ bottom: 'small', right: 'small' }}>
-                                    <TextAndLabel textSize='small' text={`FAKE`} label="Bonus" />
+                                <Box>
+                                    <Box margin={{ bottom: 'small', right: 'small' }}>
+                                        <TextAndLabel textSize='small' text={`${god.blessLevel}/100`} label="Blessing Level" />
+                                    </Box>
+                                    <Box margin={{ bottom: 'small', right: 'small' }}>
+                                        <TextAndLabel textSize='small' text={god.getBlessingBonusText()} label="Blessing Bonus" />
+                                    </Box>
                                 </Box>
                             </ShadowBox>
                         )
@@ -121,7 +128,7 @@ function Divinity() {
             <NextSeo title="Divinity" />
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Divinity</Heading>
             <Text size="xsmall">* This is a work in progress, there could some bugs and minor inaccuracies.</Text>
-            <Box align="center" direction="row" justify="center" gap="small" margin={{bottom: 'small'}}>
+            <Box align="center" direction="row" justify="center" gap="small" margin={{ bottom: 'small' }}>
                 {["Gods", "Alignment"].map((tabName, index) => (
                     <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
                 ))

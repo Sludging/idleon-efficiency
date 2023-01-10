@@ -16,6 +16,7 @@ const moduleExports = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     domains: ['cdn.buymeacoffee.com', 'cdn.idleonefficiency.com'],
     minimumCacheTTL: 14400,
+    unoptimized: true,
   },
 };
 
