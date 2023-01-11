@@ -61,10 +61,9 @@ export class DivinityGod {
 }
 
 export class PlayerDivinityInfo {
-    constructor(public playerIndex: number, public style: DivinityStyleModel, public god: DivinityGod, public active: boolean = false) { }
+    constructor(public playerIndex: number, public style: DivinityStyleModel, public god: DivinityGod | undefined, public active: boolean = false) { }
 
     divinityPerHour = (): number => {
-
         return 0;
     }
 }
@@ -78,10 +77,6 @@ export class Divinity {
     currentDivinity: number = 0;
     gods: DivinityGod[] = DivinityGod.fromBase(initGodInfoRepo());
     offerings: GodOffering[] = [];
-
-    purrmepActive = (): boolean => {
-        return this.playerInfo.some(info => info.god.index == 6);
-    }
 }
 
 export default function parseDivinity(playerCount: number, divinityData: number[], afkTarget: string[]) {
@@ -107,8 +102,9 @@ export default function parseDivinity(playerCount: number, divinityData: number[
     // Read player data.
     [...Array(playerCount)].forEach((_, playerIndex) => {
         const playerMantra = divinityData[playerIndex];
-        const playerLinkedGod = divinityData[playerIndex + 12];
-        divinity.playerInfo.push(new PlayerDivinityInfo(playerIndex, mantraInfo[playerMantra].data, divinity.gods[playerLinkedGod], afkTarget[playerIndex] == "Divinity"));
+        const linkedGodIndex = divinityData[playerIndex + 12];
+        const playerLinkedGod = linkedGodIndex != -1 && linkedGodIndex < divinity.gods.length ? divinity.gods[linkedGodIndex] : undefined;
+        divinity.playerInfo.push(new PlayerDivinityInfo(playerIndex, mantraInfo[playerMantra].data, playerLinkedGod, afkTarget[playerIndex] == "Divinity"));
     });
 
     divinity.currentDivinity = divinityData[24];
@@ -133,7 +129,12 @@ export const updateDivinity = (data: Map<string, any>) => {
         god.activeBubblePassiveBonus = activeBubblePassiveDivinityBonus;
     })
 
+    // Update the linked player to each god by iterating on each player's data.
     divinity.playerInfo.forEach(player => {
+        // Don't do anything if not linked.
+        if (!player.god) {
+            return
+        }
         player.god.linkedPlayers.push(players[player.playerIndex]);
     })
 
