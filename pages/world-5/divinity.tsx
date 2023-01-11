@@ -13,7 +13,7 @@ import TabButton from '../../components/base/TabButton';
 import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import { AppContext } from '../../data/appContext';
 import { Divinity as DivinityDomain, PlayerDivinityInfo } from '../../data/domain/divinity';
-import { Player } from '../../data/domain/player';
+import { Activity, Player } from '../../data/domain/player';
 import { Skilling } from '../../data/domain/skilling';
 import { SkillsIndex } from '../../data/domain/SkillsIndex';
 
@@ -39,6 +39,9 @@ function AlignmentDisplay() {
     return (
         <Grid columns={{ size: 'small' }}>
             {playerData && playerData.map((player, index) => {
+                if (player.getActivityType() != Activity.Divinity) {
+                    return null;
+                }
                 return (
                     <ShadowBox key={index} background="dark-1" pad="medium" align="start" margin={{ right: 'medium', bottom: 'small' }}>
                         <Box gap="small">
