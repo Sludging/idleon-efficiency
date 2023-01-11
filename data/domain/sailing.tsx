@@ -228,11 +228,11 @@ export class Sailing {
     boatsUnlocked = 1;
 
     nextCaptainCost = () => {
-        return (60 * this.captainsUnlocked + 15 * Math.pow(this.captainsUnlocked, 2)) * Math.pow(1.43, this.captainsUnlocked) * .6;
+        return (60 * this.captainsUnlocked + 15 * Math.pow(this.captainsUnlocked, 2.2)) * Math.pow(1.52, this.captainsUnlocked) * .6;
     }
 
     nextBoatCost = () => {
-        return (60 * this.boatsUnlocked + 15 * Math.pow(this.boatsUnlocked, 2)) * Math.pow(1.43, this.boatsUnlocked);
+        return (60 * this.boatsUnlocked + 15 * Math.pow(this.boatsUnlocked, 2.25)) * Math.pow(1.55, this.boatsUnlocked);
     }
 
     constructor() {
