@@ -57,21 +57,27 @@ function AlignmentDisplay() {
                                     }
                                     margin={{ bottom: 'small', right: 'small' }}
                                 />
-                                <TextAndLabel
-                                    label="Style"
-                                    text={divinity.playerInfo[player.playerID]?.style.name ?? "Not Linked"}
-                                    margin={{ bottom: 'small', right: 'small' }}
-                                />
-                                <ComponentAndLabel
-                                    label="God"
-                                    component={
-                                        <Box direction="row" gap="xsmall" align="center">
-                                            <IconImage data={divinity.playerInfo[player.playerID].god.getImageData()} scale={0.3} />
-                                            <Text>{divinity.playerInfo[player.playerID]?.god?.data.name ?? "Not Linked"}</Text>
-                                        </Box>
-                                    }
-                                    margin={{ bottom: 'small', right: 'small' }}
-                                />
+                                {
+                                    divinity.playerInfo[player.playerID] &&
+                                    <TextAndLabel
+                                        label="Style"
+                                        text={divinity.playerInfo[player.playerID].style.name ?? "Not Linked"}
+                                        margin={{ bottom: 'small', right: 'small' }}
+                                    />
+                                }
+                                {
+                                    divinity.playerInfo[player.playerID]?.god &&
+                                    <ComponentAndLabel
+                                        label="God"
+                                        component={
+                                            <Box direction="row" gap="xsmall" align="center">
+                                                <IconImage data={divinity.playerInfo[player.playerID].god!.getImageData()} scale={0.3} />
+                                                <Text>{divinity.playerInfo[player.playerID].god!.data.name}</Text>
+                                            </Box>
+                                        }
+                                        margin={{ bottom: 'small', right: 'small' }}
+                                    />
+                                }
                             </Box>
                         </Box>
                     </ShadowBox>
