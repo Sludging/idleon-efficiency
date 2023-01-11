@@ -1096,25 +1096,25 @@ export const initRecipeRepo = () => {
                 "intID": "InvBag102",
                 "recipe": [
                     <ComponentModel>{"item": "EquipmentShirts16", "quantity": 2},
-                    <ComponentModel>{"item": "InvStorageF", "quantity": 1},
-                    <ComponentModel>{"item": "Grasslands1", "quantity": 169}
+                    <ComponentModel>{"item": "EquipmentHats6", "quantity": 2},
+                    <ComponentModel>{"item": "Grasslands1", "quantity": 150}
                 ],
                 "levelReqToCraft": 8,
                 "expGiven": 60,
                 "no": 53,
                 "tab": 1,
-                "sellPrice": 1757,
+                "sellPrice": 1000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShirts16", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "InvStorageF", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "Grasslands1", "quantity": 169}
+                        <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentHats6", "quantity": 2},
+                        <DetRecipeComponentModel>{"indent": 0, "item": "Grasslands1", "quantity": 150}
                     ],
                     "detRecipeTotals": [
                         <ComponentModel>{"item": "EquipmentShirts16", "quantity": 2},
-                        <ComponentModel>{"item": "InvStorageF", "quantity": 1},
-                        <ComponentModel>{"item": "Grasslands1", "quantity": 169}
+                        <ComponentModel>{"item": "EquipmentHats6", "quantity": 2},
+                        <ComponentModel>{"item": "Grasslands1", "quantity": 150}
                     ]
                 }
             }),
@@ -9093,25 +9093,25 @@ export const initRecipeRepo = () => {
                 "intID": "EquipmentRings30",
                 "recipe": [
                     <ComponentModel>{"item": "EquipmentRings24", "quantity": 5},
-                    <ComponentModel>{"item": "GalaxyA1", "quantity": 200000},
-                    <ComponentModel>{"item": "InvStorageS", "quantity": 1}
+                    <ComponentModel>{"item": "GalaxyA1", "quantity": 100000},
+                    <ComponentModel>{"item": "EquipmentRings25", "quantity": 1}
                 ],
                 "levelReqToCraft": 60,
                 "expGiven": 1000000,
                 "no": 57,
                 "tab": 4,
-                "sellPrice": 20001005,
+                "sellPrice": 10000006,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentRings24", "quantity": 5},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "GalaxyA1", "quantity": 200000},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "InvStorageS", "quantity": 1}
+                        <DetRecipeComponentModel>{"indent": 0, "item": "GalaxyA1", "quantity": 100000},
+                        <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentRings25", "quantity": 1}
                     ],
                     "detRecipeTotals": [
                         <ComponentModel>{"item": "EquipmentRings24", "quantity": 5},
-                        <ComponentModel>{"item": "GalaxyA1", "quantity": 200000},
-                        <ComponentModel>{"item": "InvStorageS", "quantity": 1}
+                        <ComponentModel>{"item": "GalaxyA1", "quantity": 100000},
+                        <ComponentModel>{"item": "EquipmentRings25", "quantity": 1}
                     ]
                 }
             }),

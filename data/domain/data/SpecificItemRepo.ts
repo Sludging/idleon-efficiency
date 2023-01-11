@@ -5528,6 +5528,27 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentPendant28", <ArmourItemModel>{
+                "internalName": "EquipmentPendant28",
+                "displayName": "Crescent Moon Pendant",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aPendant,
+                "Type": "Pendant",
+                "lvReqToCraft": 17,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 3,
+                "STR": 10,
+                "AGI": 10,
+                "WIS": 10,
+                "LUK": 10,
+                "Defence": 10,
+                "miscUp1": "35% Xp From Monsters",
+                "miscUp2": "5% Mob Respawn",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentRings1", <ArmourItemModel>{
                 "internalName": "EquipmentRings1",
                 "displayName": "Gold Ring",
@@ -6032,174 +6053,6 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
-        new BaseItemBase("EquipmentRingsChat1", <ArmourItemModel>{
-                "internalName": "EquipmentRingsChat1",
-                "displayName": "Love Ring",
-                "sellPrice": 2500,
-                "typeGen": TypeGenEnum.aChatRingMTX,
-                "Type": "Chat Ring",
-                "lvReqToCraft": 55,
-                "lvReqToEquip": 1,
-                "Class": ClassTypeEnum.All,
-                "Weapon_Power": 1,
-                "STR": 1,
-                "AGI": 1,
-                "WIS": 1,
-                "LUK": 1,
-                "Defence": 0,
-                "miscUp1": "69% Love",
-                "miscUp2": "00",
-                "Upgrade_Slots_Left": 3,
-                "Skill": "",
-                "Skill_Power": 0
-            }),
-        new BaseItemBase("EquipmentRingsChat2", <ArmourItemModel>{
-                "internalName": "EquipmentRingsChat2",
-                "displayName": "Leafy Ring",
-                "sellPrice": 2500,
-                "typeGen": TypeGenEnum.aChatRingMTX,
-                "Type": "Chat Ring",
-                "lvReqToCraft": 55,
-                "lvReqToEquip": 1,
-                "Class": ClassTypeEnum.All,
-                "Weapon_Power": 1,
-                "STR": 1,
-                "AGI": 1,
-                "WIS": 1,
-                "LUK": 1,
-                "Defence": 0,
-                "miscUp1": "100% All Natural",
-                "miscUp2": "00",
-                "Upgrade_Slots_Left": 3,
-                "Skill": "",
-                "Skill_Power": 0
-            }),
-        new BaseItemBase("EquipmentRingsChat3", <ArmourItemModel>{
-                "internalName": "EquipmentRingsChat3",
-                "displayName": "Wealth Ring",
-                "sellPrice": 2500,
-                "typeGen": TypeGenEnum.aChatRingMTX,
-                "Type": "Chat Ring",
-                "lvReqToCraft": 55,
-                "lvReqToEquip": 1,
-                "Class": ClassTypeEnum.All,
-                "Weapon_Power": 1,
-                "STR": 3,
-                "AGI": 3,
-                "WIS": 3,
-                "LUK": 3,
-                "Defence": 0,
-                "miscUp1": "777% Coolness",
-                "miscUp2": "00",
-                "Upgrade_Slots_Left": 3,
-                "Skill": "",
-                "Skill_Power": 0
-            }),
-        new BaseItemBase("EquipmentRingsChat4", <ArmourItemModel>{
-                "internalName": "EquipmentRingsChat4",
-                "displayName": "Bob Ring",
-                "sellPrice": 2500,
-                "typeGen": TypeGenEnum.aChatRingMTX,
-                "Type": "Chat Ring",
-                "lvReqToCraft": 55,
-                "lvReqToEquip": 1,
-                "Class": ClassTypeEnum.All,
-                "Weapon_Power": 1,
-                "STR": 1,
-                "AGI": 1,
-                "WIS": 1,
-                "LUK": 1,
-                "Defence": 0,
-                "miscUp1": "808% Bob",
-                "miscUp2": "00",
-                "Upgrade_Slots_Left": 3,
-                "Skill": "",
-                "Skill_Power": 0
-            }),
-        new BaseItemBase("EquipmentRingsChat5", <ArmourItemModel>{
-                "internalName": "EquipmentRingsChat5",
-                "displayName": "Bubble Ring",
-                "sellPrice": 2500,
-                "typeGen": TypeGenEnum.aChatRingMTX,
-                "Type": "Chat Ring",
-                "lvReqToCraft": 55,
-                "lvReqToEquip": 1,
-                "Class": ClassTypeEnum.All,
-                "Weapon_Power": 1,
-                "STR": 1,
-                "AGI": 1,
-                "WIS": 1,
-                "LUK": 1,
-                "Defence": 0,
-                "miscUp1": "0% Pop Chance",
-                "miscUp2": "00",
-                "Upgrade_Slots_Left": 3,
-                "Skill": "",
-                "Skill_Power": 0
-            }),
-        new BaseItemBase("EquipmentRingsChat6", <ArmourItemModel>{
-                "internalName": "EquipmentRingsChat6",
-                "displayName": "Cthulu's Ring",
-                "sellPrice": 2500,
-                "typeGen": TypeGenEnum.aChatRingMTX,
-                "Type": "Chat Ring",
-                "lvReqToCraft": 55,
-                "lvReqToEquip": 1,
-                "Class": ClassTypeEnum.All,
-                "Weapon_Power": 1,
-                "STR": 1,
-                "AGI": 1,
-                "WIS": 1,
-                "LUK": 1,
-                "Defence": 0,
-                "miscUp1": "666% Pure Evil",
-                "miscUp2": "00",
-                "Upgrade_Slots_Left": 3,
-                "Skill": "",
-                "Skill_Power": 0
-            }),
-        new BaseItemBase("EquipmentRingsChat8", <ArmourItemModel>{
-                "internalName": "EquipmentRingsChat8",
-                "displayName": "Lava Sez Buy More Gems",
-                "sellPrice": 2500,
-                "typeGen": TypeGenEnum.aChatRingMTX,
-                "Type": "Chat Ring",
-                "lvReqToCraft": 55,
-                "lvReqToEquip": 1,
-                "Class": ClassTypeEnum.All,
-                "Weapon_Power": 1,
-                "STR": 1,
-                "AGI": 1,
-                "WIS": 1,
-                "LUK": 1,
-                "Defence": 0,
-                "miscUp1": "-1% Self Esteem",
-                "miscUp2": "00",
-                "Upgrade_Slots_Left": 3,
-                "Skill": "",
-                "Skill_Power": 0
-            }),
-        new BaseItemBase("EquipmentRingsChat9", <ArmourItemModel>{
-                "internalName": "EquipmentRingsChat9",
-                "displayName": "HONK Ring",
-                "sellPrice": 2500,
-                "typeGen": TypeGenEnum.aChatRingMTX,
-                "Type": "Chat Ring",
-                "lvReqToCraft": 55,
-                "lvReqToEquip": 1,
-                "Class": ClassTypeEnum.All,
-                "Weapon_Power": 1,
-                "STR": 1,
-                "AGI": 1,
-                "WIS": 1,
-                "LUK": 1,
-                "Defence": 0,
-                "miscUp1": "100% Honk",
-                "miscUp2": "00",
-                "Upgrade_Slots_Left": 3,
-                "Skill": "",
-                "Skill_Power": 0
-            }),
         new BaseItemBase("EquipmentRings23", <ArmourItemModel>{
                 "internalName": "EquipmentRings23",
                 "displayName": "Neutron Ice Ring",
@@ -6364,6 +6217,237 @@ export const initSpecificItemRepo = () => {
                 "Defence": 10,
                 "miscUp1": "25% Lab Exp",
                 "miscUp2": "35% Lab Efficiency",
+                "Upgrade_Slots_Left": 3,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentRings31", <ArmourItemModel>{
+                "internalName": "EquipmentRings31",
+                "displayName": "Tundra Killer Ring",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aRing,
+                "Type": "Ring",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 3,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 3,
+                "miscUp1": "30% Kills In World 3",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentRings32", <ArmourItemModel>{
+                "internalName": "EquipmentRings32",
+                "displayName": "Nebula Killer Ring",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aRing,
+                "Type": "Ring",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 4,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 4,
+                "miscUp1": "30% Kills In World 4",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentRings33", <ArmourItemModel>{
+                "internalName": "EquipmentRings33",
+                "displayName": "Dune Killer Ring",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aRing,
+                "Type": "Ring",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 2,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 3,
+                "miscUp1": "30% Kills In World 2",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentRingsChat1", <ArmourItemModel>{
+                "internalName": "EquipmentRingsChat1",
+                "displayName": "Love Ring",
+                "sellPrice": 2500,
+                "typeGen": TypeGenEnum.aChatRingMTX,
+                "Type": "Chat Ring",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 1,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 1,
+                "Defence": 0,
+                "miscUp1": "69% Love",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 3,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentRingsChat2", <ArmourItemModel>{
+                "internalName": "EquipmentRingsChat2",
+                "displayName": "Leafy Ring",
+                "sellPrice": 2500,
+                "typeGen": TypeGenEnum.aChatRingMTX,
+                "Type": "Chat Ring",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 1,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 1,
+                "Defence": 0,
+                "miscUp1": "100% All Natural",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 3,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentRingsChat3", <ArmourItemModel>{
+                "internalName": "EquipmentRingsChat3",
+                "displayName": "Wealth Ring",
+                "sellPrice": 2500,
+                "typeGen": TypeGenEnum.aChatRingMTX,
+                "Type": "Chat Ring",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 1,
+                "STR": 3,
+                "AGI": 3,
+                "WIS": 3,
+                "LUK": 3,
+                "Defence": 0,
+                "miscUp1": "777% Coolness",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 3,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentRingsChat4", <ArmourItemModel>{
+                "internalName": "EquipmentRingsChat4",
+                "displayName": "Bob Ring",
+                "sellPrice": 2500,
+                "typeGen": TypeGenEnum.aChatRingMTX,
+                "Type": "Chat Ring",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 1,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 1,
+                "Defence": 0,
+                "miscUp1": "808% Bob",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 3,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentRingsChat5", <ArmourItemModel>{
+                "internalName": "EquipmentRingsChat5",
+                "displayName": "Bubble Ring",
+                "sellPrice": 2500,
+                "typeGen": TypeGenEnum.aChatRingMTX,
+                "Type": "Chat Ring",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 1,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 1,
+                "Defence": 0,
+                "miscUp1": "0% Pop Chance",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 3,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentRingsChat6", <ArmourItemModel>{
+                "internalName": "EquipmentRingsChat6",
+                "displayName": "Cthulu's Ring",
+                "sellPrice": 2500,
+                "typeGen": TypeGenEnum.aChatRingMTX,
+                "Type": "Chat Ring",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 1,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 1,
+                "Defence": 0,
+                "miscUp1": "666% Pure Evil",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 3,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentRingsChat8", <ArmourItemModel>{
+                "internalName": "EquipmentRingsChat8",
+                "displayName": "Lava Sez Buy More Gems",
+                "sellPrice": 2500,
+                "typeGen": TypeGenEnum.aChatRingMTX,
+                "Type": "Chat Ring",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 1,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 1,
+                "Defence": 0,
+                "miscUp1": "-1% Self Esteem",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 3,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentRingsChat9", <ArmourItemModel>{
+                "internalName": "EquipmentRingsChat9",
+                "displayName": "HONK Ring",
+                "sellPrice": 2500,
+                "typeGen": TypeGenEnum.aChatRingMTX,
+                "Type": "Chat Ring",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 1,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 1,
+                "Defence": 0,
+                "miscUp1": "100% Honk",
+                "miscUp2": "00",
                 "Upgrade_Slots_Left": 3,
                 "Skill": "",
                 "Skill_Power": 0
@@ -15154,7 +15238,7 @@ export const initSpecificItemRepo = () => {
                     "effect": "PctDmg",
                     "function": "decay",
                     "x1": 25,
-                    "x2": 0,
+                    "x2": 80,
                     "upgradeInterval": 10,
                     "material": <QtylessComponentModel>{"item": "Dreadlo"},
                     "startV": 1000,
@@ -17831,6 +17915,26 @@ export const initSpecificItemRepo = () => {
                 "order": 23,
                 "level": 1
             }),
+        new BaseItemBase("InvStorage24", <ChestItemModel>{
+                "internalName": "InvStorage24",
+                "displayName": "Storage Chest 24",
+                "sellPrice": 10,
+                "typeGen": TypeGenEnum.aStorageChest,
+                "Type": "Storage",
+                "description": "Hold down to permanently add +9 Slots to your Storage Chest. Can only be used once.",
+                "order": 24,
+                "level": 1
+            }),
+        new BaseItemBase("InvStorage25", <ChestItemModel>{
+                "internalName": "InvStorage25",
+                "displayName": "Storage Chest 25",
+                "sellPrice": 10,
+                "typeGen": TypeGenEnum.aStorageChest,
+                "Type": "Storage",
+                "description": "Hold down to permanently add +9 Slots to your Storage Chest. Can only be used once.",
+                "order": 25,
+                "level": 1
+            }),
         new BaseItemBase("InvStorage31", <ChestItemModel>{
                 "internalName": "InvStorage31",
                 "displayName": "Storage Chest 90",
@@ -17969,6 +18073,16 @@ export const initSpecificItemRepo = () => {
                 "Type": "Storage",
                 "description": "Hold down to permanently add +3 Slots to your Storage Chest. Can only be used once.",
                 "order": 102,
+                "level": 1
+            }),
+        new BaseItemBase("InvStorageC", <ChestItemModel>{
+                "internalName": "InvStorageC",
+                "displayName": "Cheesy Chest",
+                "sellPrice": 1000,
+                "typeGen": TypeGenEnum.aStorageChest,
+                "Type": "Storage",
+                "description": "Hold down to permanently add +4 Slots to your Storage Chest. Can only be used once.",
+                "order": 103,
                 "level": 1
             }),
         new BaseItemBase("Line1", <FishingTKItemModel>{
@@ -18809,7 +18923,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 30000,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
-                "description": "Made up of all the tokens that you collected after completing an NPC's entire questline. "
+                "description": "Made up of all the tokens that you collected after completing an NPC's entire questline.  DONT SELL THIS ITEM "
             }),
         new BaseItemBase("BadgeG2", <DescItemModel>{
                 "internalName": "BadgeG2",
@@ -18817,7 +18931,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 25000,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
-                "description": "Proof that you mastered the art of the Mining, Smithing, and Choppin skills. "
+                "description": "Proof that you mastered the art of the Mining, Smithing, and Choppin skills. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("BadgeG3", <DescItemModel>{
                 "internalName": "BadgeG3",
@@ -18825,7 +18939,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
-                "description": "Proof that you collected all the coolest and rarest items that Blunder Hills has to offer! "
+                "description": "Proof that you collected all the coolest and rarest items that Blunder Hills has to offer! DONT SELL THIS ITEM "
             }),
         new BaseItemBase("BadgeD1", <DescItemModel>{
                 "internalName": "BadgeD1",
@@ -18833,7 +18947,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 30000,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
-                "description": "Made up of all the tokens that you collected after completing an NPC's entire questline. "
+                "description": "Made up of all the tokens that you collected after completing an NPC's entire questline. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("BadgeD2", <DescItemModel>{
                 "internalName": "BadgeD2",
@@ -18841,7 +18955,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 25000,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
-                "description": "Proof that you mastered the art of the Fishing, Alchemy, and Catching skills. "
+                "description": "Proof that you mastered the art of the Fishing, Alchemy, and Catching skills. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("BadgeD3", <DescItemModel>{
                 "internalName": "BadgeD3",
@@ -18849,7 +18963,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
-                "description": "Proof that you collected all the coolest and rarest items that Yumyum Desert has to offer! "
+                "description": "Proof that you collected all the coolest and rarest items that Yumyum Desert has to offer! DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken1", <DescItemModel>{
                 "internalName": "NPCtoken1",
@@ -18857,7 +18971,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 2800,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
-                "description": "Made up of the tokens from all of the Blunder NPCs whose quests are easiest to complete. "
+                "description": "Made up of the tokens from all of the Blunder NPCs whose quests are easiest to complete. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken2", <DescItemModel>{
                 "internalName": "NPCtoken2",
@@ -18865,7 +18979,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 6000,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
-                "description": "Made up of the tokens from all of the Blunder NPCs whose quests are tough to complete. "
+                "description": "Made up of the tokens from all of the Blunder NPCs whose quests are tough to complete. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken3", <DescItemModel>{
                 "internalName": "NPCtoken3",
@@ -18873,7 +18987,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 16000,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
-                "description": "Made up of the tokens from all of the Blunder NPCs whose quests are hardest to complete. "
+                "description": "Made up of the tokens from all of the Blunder NPCs whose quests are hardest to complete. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken5", <DescItemModel>{
                 "internalName": "NPCtoken5",
@@ -18881,7 +18995,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 700,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of the Woodsman's quests! Hold down to add to your token bag found in Storage Info. Open items, look at the top left. "
+                "description": "Proof that you completed all of the Woodsman's quests! Hold down to add to your token bag found in Storage Info. Open items, look at the top left. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken6", <DescItemModel>{
                 "internalName": "NPCtoken6",
@@ -18889,7 +19003,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 700,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of Glumlee's quests! Hold down to add to your token bag found in Storage Info. Open items, look at the top left. "
+                "description": "Proof that you completed all of Glumlee's quests! Hold down to add to your token bag found in Storage Info. Open items, look at the top left. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken4", <DescItemModel>{
                 "internalName": "NPCtoken4",
@@ -18897,7 +19011,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 700,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of Stiltzcho's main quests! Hold down to add to your token bag found in Storage Info. Open items, look at the top left. "
+                "description": "Proof that you completed all of Stiltzcho's main quests! Hold down to add to your token bag found in Storage Info. Open items, look at the top left. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken9", <DescItemModel>{
                 "internalName": "NPCtoken9",
@@ -18905,7 +19019,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 1500,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of Funguy's quests! Hold down to add to your token bag found in Storage Info. Open items, look at the top left. "
+                "description": "Proof that you completed all of Funguy's quests! Hold down to add to your token bag found in Storage Info. Open items, look at the top left. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken10", <DescItemModel>{
                 "internalName": "NPCtoken10",
@@ -18913,7 +19027,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 1500,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of Krunk's quests! Hold down to add to your token bag found in Storage Info. "
+                "description": "Proof that you completed all of Krunk's quests! Hold down to add to your token bag found in Storage Info. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken11", <DescItemModel>{
                 "internalName": "NPCtoken11",
@@ -18921,7 +19035,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 1500,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of Tiki Chief's quests! Hold down to add to your token bag found in Storage Info. "
+                "description": "Proof that you completed all of Tiki Chief's quests! Hold down to add to your token bag found in Storage Info. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken13", <DescItemModel>{
                 "internalName": "NPCtoken13",
@@ -18929,7 +19043,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 4000,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of Dog Bone's quests! Hold down to add to your token bag found in Storage Info. "
+                "description": "Proof that you completed all of Dog Bone's quests! Hold down to add to your token bag found in Storage Info. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken7", <DescItemModel>{
                 "internalName": "NPCtoken7",
@@ -18937,7 +19051,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 700,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of Papua Piggea's quests! Hold down to add to your token bag found in Storage Info. "
+                "description": "Proof that you completed all of Papua Piggea's quests! Hold down to add to your token bag found in Storage Info. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("Quest9", <DescItemModel>{
                 "internalName": "Quest9",
@@ -18945,7 +19059,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you were able to feed a blobulyte all day. If you bring 30 of these to the Picnic Stowaway, you'll get a Trophy! Hold down to add to your token bag "
+                "description": "Proof that you were able to feed a blobulyte all day. If you bring 30 of these to the Picnic Stowaway, you'll get a Trophy! Hold down to add to your token bag DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken15", <DescItemModel>{
                 "internalName": "NPCtoken15",
@@ -18953,7 +19067,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 4000,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of TP Pete's quests! Hold down to add to your token bag found in Storage Info. "
+                "description": "Proof that you completed all of TP Pete's quests! Hold down to add to your token bag found in Storage Info. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken12", <DescItemModel>{
                 "internalName": "NPCtoken12",
@@ -18961,7 +19075,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 4000,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of Sproutinald's quests! Hold down to add to your token bag found in Storage Info. "
+                "description": "Proof that you completed all of Sproutinald's quests! Hold down to add to your token bag found in Storage Info. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken14", <DescItemModel>{
                 "internalName": "NPCtoken14",
@@ -18969,7 +19083,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 4000,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of Dazey's quests! Hold down to add to your token bag found in Storage Info. "
+                "description": "Proof that you completed all of Dazey's quests! Hold down to add to your token bag found in Storage Info. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken16", <DescItemModel>{
                 "internalName": "NPCtoken16",
@@ -18977,7 +19091,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 4000,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of Bandit Bob's quests! Hold down to add to your token bag found in Storage Info. "
+                "description": "Proof that you completed all of Bandit Bob's quests! Hold down to add to your token bag found in Storage Info. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken17", <DescItemModel>{
                 "internalName": "NPCtoken17",
@@ -18985,7 +19099,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 4000,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of Snake Jar's quests! Hold down to add to your token bag found in Storage Info. "
+                "description": "Proof that you completed all of Snake Jar's quests! Hold down to add to your token bag found in Storage Info. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken18", <DescItemModel>{
                 "internalName": "NPCtoken18",
@@ -18993,7 +19107,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 4000,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of Whattso's quests! Hold down to add to your token bag found in Storage Info. "
+                "description": "Proof that you completed all of Whattso's quests! Hold down to add to your token bag found in Storage Info. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken19", <DescItemModel>{
                 "internalName": "NPCtoken19",
@@ -19001,7 +19115,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 4000,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of Cowbo Jones's quests! Hold down to add to your token bag found in Storage Info. "
+                "description": "Proof that you completed all of Cowbo Jones's quests! Hold down to add to your token bag found in Storage Info. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken20", <DescItemModel>{
                 "internalName": "NPCtoken20",
@@ -19009,7 +19123,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 4000,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of Carpetiem's quests! Hold down to add to your token bag found in Storage Info. "
+                "description": "Proof that you completed all of Carpetiem's quests! Hold down to add to your token bag found in Storage Info. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken21", <DescItemModel>{
                 "internalName": "NPCtoken21",
@@ -19017,7 +19131,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 4000,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of Goldric's quests! Hold down to add to your token bag found in Storage Info. "
+                "description": "Proof that you completed all of Goldric's quests! Hold down to add to your token bag found in Storage Info. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken27", <DescItemModel>{
                 "internalName": "NPCtoken27",
@@ -19025,7 +19139,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 155000,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that Cattleprod is a little brat of a pig... like, he seriously went and SOLD his own token to the store??? "
+                "description": "Proof that Cattleprod is a little brat of a pig... like, he seriously went and SOLD his own token to the store??? DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken22", <DescItemModel>{
                 "internalName": "NPCtoken22",
@@ -19033,7 +19147,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 4000,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of Fishpaste's quests! Hold down to add to your token bag found in Storage Info. "
+                "description": "Proof that you completed all of Fishpaste's quests! Hold down to add to your token bag found in Storage Info. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken24", <DescItemModel>{
                 "internalName": "NPCtoken24",
@@ -19041,7 +19155,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 4000,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of Loominadi's quests! Hold down to add to your token bag found in Storage Info. "
+                "description": "Proof that you completed all of Loominadi's quests! Hold down to add to your token bag found in Storage Info. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken25", <DescItemModel>{
                 "internalName": "NPCtoken25",
@@ -19049,7 +19163,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 4000,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of Djonnut's quests! Hold down to add to your token bag found in Storage Info. "
+                "description": "Proof that you completed all of Djonnut's quests! Hold down to add to your token bag found in Storage Info. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken26", <DescItemModel>{
                 "internalName": "NPCtoken26",
@@ -19057,7 +19171,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 4000,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of Scubidew's quests! Well, most of them, at least. Hold down to add to your token pouch found in Storage Info. "
+                "description": "Proof that you completed all of Scubidew's quests! Well, most of them, at least. Hold down to add to your token pouch found in Storage Info. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken23", <DescItemModel>{
                 "internalName": "NPCtoken23",
@@ -19065,7 +19179,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 4000,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of Wellington's quests! Hold down to add to your token bag found in Storage Info. "
+                "description": "Proof that you completed all of Wellington's quests! Hold down to add to your token bag found in Storage Info. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken28", <DescItemModel>{
                 "internalName": "NPCtoken28",
@@ -19073,7 +19187,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 2800,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
-                "description": "Made up of the tokens from all of the Yumyum NPCs whose quests are easiest to complete. "
+                "description": "Made up of the tokens from all of the Yumyum NPCs whose quests are easiest to complete. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken29", <DescItemModel>{
                 "internalName": "NPCtoken29",
@@ -19081,7 +19195,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 6000,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
-                "description": "Made up of the tokens from all of the Yumyum NPCs whose quests are tough to complete. "
+                "description": "Made up of the tokens from all of the Yumyum NPCs whose quests are tough to complete. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken30", <DescItemModel>{
                 "internalName": "NPCtoken30",
@@ -19089,7 +19203,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 16000,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
-                "description": "Made up of the tokens from all of the Yumyum NPCs whose quests are hardest to complete. "
+                "description": "Made up of the tokens from all of the Yumyum NPCs whose quests are hardest to complete. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken31", <DescItemModel>{
                 "internalName": "NPCtoken31",
@@ -19097,7 +19211,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 4000,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of the Lonely Hunter's quests! Hold down to add to your token bag, found in Storage Info. "
+                "description": "Proof that you completed all of the Lonely Hunter's quests! Hold down to add to your token bag, found in Storage Info. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken32", <DescItemModel>{
                 "internalName": "NPCtoken32",
@@ -19105,7 +19219,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 4000,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of Hoggindaz's quests! Hold down to add to your token bag, found in Storage Info. "
+                "description": "Proof that you completed all of Hoggindaz's quests! Hold down to add to your token bag, found in Storage Info. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken33", <DescItemModel>{
                 "internalName": "NPCtoken33",
@@ -19113,7 +19227,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 4000,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of Bellows' quests! Hold down to add to your token bag, found in Storage Info. "
+                "description": "Proof that you completed all of Bellows' quests! Hold down to add to your token bag, found in Storage Info. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken34", <DescItemModel>{
                 "internalName": "NPCtoken34",
@@ -19121,7 +19235,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 4000,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of Snouts' quests! Hold down to add to your token bag, found in Storage Info. "
+                "description": "Proof that you completed all of Snouts' quests! Hold down to add to your token bag, found in Storage Info. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken35", <DescItemModel>{
                 "internalName": "NPCtoken35",
@@ -19129,7 +19243,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 4000,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of Shuvelle's quests! Hold down to add to your token bag, found in Storage Info. "
+                "description": "Proof that you completed all of Shuvelle's quests! Hold down to add to your token bag, found in Storage Info. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken36", <DescItemModel>{
                 "internalName": "NPCtoken36",
@@ -19137,7 +19251,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 4000,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of Yondergreen's quests! Hold down to add to your token bag, found in Storage Info. "
+                "description": "Proof that you completed all of Yondergreen's quests! Hold down to add to your token bag, found in Storage Info. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken37", <DescItemModel>{
                 "internalName": "NPCtoken37",
@@ -19145,7 +19259,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 4000,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of Bill Brr's quests! Hold down to add to your token bag, found in Storage Info. "
+                "description": "Proof that you completed all of Bill Brr's quests! Hold down to add to your token bag, found in Storage Info. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken38", <DescItemModel>{
                 "internalName": "NPCtoken38",
@@ -19153,7 +19267,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 4000,
                 "typeGen": TypeGenEnum.dCurrency,
                 "Type": "Quest Item",
-                "description": "Proof that you completed all of Crystalswine's quests! Hold down to add to your token bag, found in Storage Info. "
+                "description": "Proof that you completed all of Crystalswine's quests! Hold down to add to your token bag, found in Storage Info. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken39", <DescItemModel>{
                 "internalName": "NPCtoken39",
@@ -19161,7 +19275,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 2800,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
-                "description": "Made up of the tokens from all of the Tundra NPCs whose quests are easiest to complete. "
+                "description": "Made up of the tokens from all of the Tundra NPCs whose quests are easiest to complete. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken40", <DescItemModel>{
                 "internalName": "NPCtoken40",
@@ -19169,7 +19283,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 6000,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
-                "description": "Made up of the tokens from all of the Tundra NPCs whose quests are tough to complete. "
+                "description": "Made up of the tokens from all of the Tundra NPCs whose quests are tough to complete. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("NPCtoken41", <DescItemModel>{
                 "internalName": "NPCtoken41",
@@ -19177,7 +19291,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 16000,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
-                "description": "Made up of the tokens from all of the Tundra NPCs whose quests are hardest to complete. "
+                "description": "Made up of the tokens from all of the Tundra NPCs whose quests are hardest to complete. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("BadgeI1", <DescItemModel>{
                 "internalName": "BadgeI1",
@@ -19185,7 +19299,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 30000,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
-                "description": "Made up of all the tokens that you collected after completing an NPC's entire questline. "
+                "description": "Made up of all the tokens that you collected after completing an NPC's entire questline. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("BadgeI2", <DescItemModel>{
                 "internalName": "BadgeI2",
@@ -19193,7 +19307,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 25000,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
-                "description": "Proof that you mastered the art of the Trapping, Construction, and Worship skills. "
+                "description": "Proof that you mastered the art of the Trapping, Construction, and Worship skills. DONT SELL THIS ITEM "
             }),
         new BaseItemBase("BadgeI3", <DescItemModel>{
                 "internalName": "BadgeI3",
@@ -19201,7 +19315,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
-                "description": "Proof that you collected all the coolest and rarest items that Frostbite Tundra has to offer! "
+                "description": "Proof that you collected all the coolest and rarest items that Frostbite Tundra has to offer! DONT SELL THIS ITEM "
             }),
         new BaseItemBase("CardPack1", <DescItemModel>{
                 "internalName": "CardPack1",

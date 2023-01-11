@@ -17,13 +17,13 @@ export const initMapDataRepo = () => {
                 "enemy": "mushG",
                 "world": "Blunder Hills",
                 "map": <MapNameModel>{"intName": "GrasslandsA", "name": "Spore Meadows", "id": 1},
-                "portalRequirements": [20]
+                "portalRequirements": [11]
             }),
         new MapDataBase(2, <MapDataModel>{
                 "enemy": "frogG",
                 "world": "Blunder Hills",
                 "map": <MapNameModel>{"intName": "GrasslandsB", "name": "Froggy Fields", "id": 2},
-                "portalRequirements": [30]
+                "portalRequirements": [20]
             }),
         new MapDataBase(3, <MapDataModel>{
                 "enemy": "JungleZ",

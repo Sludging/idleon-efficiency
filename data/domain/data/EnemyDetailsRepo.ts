@@ -2441,8 +2441,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 26000,
                 "MoveSPEED": 3,
-                "Damages": [40000, 1],
-                "DefFor0": 35242.3
+                "Damages": [30000, 1],
+                "DefFor0": 27591.3
             }),
         new EnemyDetailsBase("w5b5", <EnemyDetailsModel>{
                 "Name": "Fire Spirit",
@@ -2483,8 +2483,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 36000,
                 "MoveSPEED": 3,
-                "Damages": [60000, 1],
-                "DefFor0": 49629.3
+                "Damages": [40000, 1],
+                "DefFor0": 35242.3
             }),
         new EnemyDetailsBase("w5c1", <EnemyDetailsModel>{
                 "Name": "Crawler",
@@ -2504,8 +2504,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 45000,
                 "MoveSPEED": 4,
-                "Damages": [2100, 1],
-                "DefFor0": 2541.34
+                "Damages": [40000, 1],
+                "DefFor0": 35242.3
             }),
         new EnemyDetailsBase("w5c2", <EnemyDetailsModel>{
                 "Name": "Tremor Wurm",
@@ -2525,8 +2525,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 50000,
                 "MoveSPEED": 2,
-                "Damages": [2100, 1],
-                "DefFor0": 2541.34
+                "Damages": [200000, 1],
+                "DefFor0": 135245
             }),
         new EnemyDetailsBase("mushR", <EnemyDetailsModel>{
                 "Name": "Red Mushroom",
