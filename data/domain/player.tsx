@@ -70,6 +70,7 @@ export enum Activity {
     Skilling = "Skilling",
     Fighting = "Fighting",
     Lab = "Lab",
+    Divinity = "Divinity",
     Unknown = "Unknown",
 }
 
@@ -355,8 +356,9 @@ export class Player {
                 case AFKTypeEnum.Cooking:
                 case AFKTypeEnum.Fishing:
                 case AFKTypeEnum.Mining:
-                case AFKTypeEnum.Divinity:
                     return Activity.Skilling;
+                case AFKTypeEnum.Divinity:
+                    return Activity.Divinity;
                 case AFKTypeEnum.Fighting:
                     return Activity.Fighting;
                 case AFKTypeEnum.Laboratory:
