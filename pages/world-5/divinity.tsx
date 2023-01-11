@@ -13,7 +13,7 @@ import TabButton from '../../components/base/TabButton';
 import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import { AppContext } from '../../data/appContext';
 import { Divinity as DivinityDomain, PlayerDivinityInfo } from '../../data/domain/divinity';
-import { Player } from '../../data/domain/player';
+import { Activity, Player } from '../../data/domain/player';
 import { Skilling } from '../../data/domain/skilling';
 import { SkillsIndex } from '../../data/domain/SkillsIndex';
 
@@ -40,13 +40,13 @@ function AlignmentDisplay() {
         <Grid columns={{ size: 'small' }}>
             {playerData && playerData.map((player, index) => {
                 return (
-                    <ShadowBox key={index} background="dark-1" pad="medium" align="center" margin={{ right: 'medium', bottom: 'small' }}>
+                    <ShadowBox key={index} background="dark-1" pad="medium" align="start" margin={{ right: 'medium', bottom: 'small' }}>
                         <Box gap="small">
                             <Box direction="row" gap="xsmall" align="center">
                                 <IconImage data={player.getClassImageData()} scale={0.8} />
                                 <Text size="small">{player.playerName}</Text>
                             </Box>
-                            <Box direction="row" justify="between" wrap>
+                            <Box justify="between" wrap>
                                 <ComponentAndLabel
                                     label="Level"
                                     component={
@@ -62,9 +62,14 @@ function AlignmentDisplay() {
                                     text={divinity.playerInfo[player.playerID]?.style.name ?? "Not Linked"}
                                     margin={{ bottom: 'small', right: 'small' }}
                                 />
-                                <TextAndLabel
+                                <ComponentAndLabel
                                     label="God"
-                                    text={divinity.playerInfo[player.playerID]?.god?.data.name ?? "Not Linked"}
+                                    component={
+                                        <Box direction="row" gap="xsmall" align="center">
+                                            <IconImage data={divinity.playerInfo[player.playerID].god.getImageData()} scale={0.3} />
+                                            <Text>{divinity.playerInfo[player.playerID]?.god?.data.name ?? "Not Linked"}</Text>
+                                        </Box>
+                                    }
                                     margin={{ bottom: 'small', right: 'small' }}
                                 />
                             </Box>
@@ -90,32 +95,32 @@ function GodDisplay() {
 
     return (
         <Box margin={{ top: 'small' }}>
-            <Grid columns={{ size: 'small' }} gap={{ column: 'small' }}>
-                {
-                    divinity && divinity.gods.map((god, index) => {
-                        return (
-                            <ShadowBox key={index} background="dark-1" pad="medium" wrap margin={{ bottom: 'small', right: 'small' }} justify="between">
-                                <Box>
-                                    <Box margin={{ bottom: 'small', right: 'small' }}>
-                                        <TextAndLabel textSize='small' text={god.data.name} label="Name" />
-                                    </Box>
-                                    <Box margin={{ bottom: 'small', right: 'small' }}>
-                                        <TextAndLabel textSize='small' text={god.data.majorBonus} label="Link Bonus" />
-                                    </Box>
+            {
+                divinity && divinity.gods.map((god, index) => {
+                    return (
+                        <ShadowBox key={index} background="dark-1" pad="medium" direction="row" wrap margin={{ bottom: 'small', right: 'small' }} justify="between">
+                            <Grid columns={{ count: 5, size: 'auto' }}>
+                                <Box margin={{ bottom: 'small', right: 'small' }} direction="row" gap="xsmall" align="center">
+                                    <IconImage data={god.getImageData()} scale={0.5} />
+                                    <TextAndLabel textSize='small' text={god.data.name} label="Name" />
                                 </Box>
-                                <Box>
-                                    <Box margin={{ bottom: 'small', right: 'small' }}>
-                                        <TextAndLabel textSize='small' text={`${god.blessLevel}/100`} label="Blessing Level" />
-                                    </Box>
-                                    <Box margin={{ bottom: 'small', right: 'small' }}>
-                                        <TextAndLabel textSize='small' text={god.getBlessingBonusText()} label="Blessing Bonus" />
-                                    </Box>
+                                <Box margin={{ bottom: 'small', right: 'small' }}>
+                                    <TextAndLabel textSize='small' text={god.data.majorBonus} label="Link Bonus" />
                                 </Box>
-                            </ShadowBox>
-                        )
-                    })
-                }
-            </Grid>
+                                <Box margin={{ bottom: 'small', right: 'small' }}>
+                                    <TextAndLabel textSize='small' text={god.data.passiveBonus} label="Passive Bonus" />
+                                </Box>
+                                <Box margin={{ bottom: 'small', right: 'small' }}>
+                                    <TextAndLabel textSize='small' text={`${god.blessLevel}/100`} label="Blessing Level" />
+                                </Box>
+                                <Box margin={{ bottom: 'small', right: 'small' }}>
+                                    <TextAndLabel textSize='small' text={god.getBlessingBonusText()} label="Blessing Bonus" />
+                                </Box>
+                            </Grid>
+                        </ShadowBox>
+                    )
+                })
+            }
         </Box>
     )
 }

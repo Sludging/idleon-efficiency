@@ -300,7 +300,7 @@ export const initRandoListRepo = () => {
                     "Build_this_space_to_harness_the_power_of_Automation!_Good_thing_you're_a_gamer,_thats_a_job_that_robots_will_never_replace.",
                     "Build_this_space_because_it's_the_last_one..._I_mean_what_else_are_you_gonna_do?",
                     "Build_this_space_to_get_your_first_Wizard_Defender._This_one_will_zap_nearby_monsters_as_they_run_by!",
-                    "Build_this_space_to_get_your_second_Wizard_Defender._This_one_will_throw_exploding_fireballs_toward_monsters,_which_explode!_Did_I_mention_the_fireballs_EXPLODE??!",
+                    "Build_this_space_to_get_your_second_Wizard_Defender._This_one_will_throw_exploding_fireballs_toward_monsters,_which_explode!_Did_I_mention_the_fireballs_EXPLODE!",
                     "Build_this_space_to_get_your_third_Wizard_Defender._This_one_will_roll_a_boulder_at_the_monsters,_squashing_them_into_inedible_pancakes!",
                     "Build_this_space_to_get_your_fourth_Wizard_Defender._This_one_will_freeze_monsters..._pretty_cool,_right?",
                     "Build_this_space_to_get_your_fifth_Wizard_Defender._This_one_will_smite_the_monsters_for_their_sins!_I_mean,_sure,_you're_the_one_murdering_them,_but_they're_monsters!",
@@ -1832,8 +1832,8 @@ export const initRandoListRepo = () => {
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "1st_Week_Update_v171",
-                    "World_5_new_content-----------------_@_*World_5_has_been_released, once_you_kill_the_World_4_boss!_3_New_skills, new_submechanics, new_monsters_to_fight!_@_*For_more_info_on_World_5, go_check_the_Patch_Notes_on_the_Character_Select_screen._@___@_New_stuff_in_Weekly_Update-------------------_@_*Storage_Chest_now_has_auto-sort!_Go_try_it_out_right_now, it's_the_new_button_on_the_left._GO_NOW, EMBRACE_CHEST_ORGANIZATION!_@_*You_can_now_identify_Captains_and_Boats_in_sailing, just_click_on_the_new_button_on_the_left_side_of_the_map_window!_@_*Several_major_issues_fixed, including_Eliteus_not_giving_you_an_Elite_Class_in_rare_scenarios, monsters_wouldn't_actively_drop_coins_for_endgamers, autoloot_not_functioning_if_you_had_inventory_opened, and_World_3_Town_map_crashing_on_some_characters._@_*21_other_bugs_were_fixed_in_this_patch._Thats_a_lot_of_bug_fixes!_Lets_go_lavaman!_@_*See_discord_for_a_full_list_of_all_15+_changes_at_Discord.gg/Idleon"
+                    "2nd_Weekly_Update_v172",
+                    "1st_Weekly_Update-------------------_@_*Storage_Chest_now_has_auto-sort!_This_was_in_last_week's_update, but_I_wanted_to_mention_it_again._It's_a_new_button_on_the_left_side._@_*The_Atom_Collider_can_now_be_build_in_Construction_in_World_3!_Convert_10M_resources_into_particles, and_use_them_to_create_ATOMS!_@_*The_item_limit_in_storage_is_now_1000M._All_excess_items_are_automatically_converted_to_particles._@_*Added_8_FREE_storage_slots_to_everyones_account!_Enjoy!_@_*The_World_4_boss_will_let_you_hit_him_instantly_once_you_complete_the_3rd_Boss_Task._@_*Added_a_Cook_All_button_to_Kitchens!_@_*When_QUICK_is_enabled_in_shops, pressing_the_plus_button_maxes_out_the_items_you_want_to_buy!_@_*All_Alchemy_Bubbles_now_have_just_2_costs, instead_of_3_or_sometimes_4!_@_*3_new_Storage_Chests_Added_to_drop_tables_of_World_5_Monsters._@_*For_full_update_notes, check_Discord.gg/Idleon!"
                 ]
             }),
         new RandoListBase(62, <RandoListModel>{

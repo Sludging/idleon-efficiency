@@ -75,21 +75,21 @@ export const initVendorRepo = () => {
                     <VendorModel>{
                         "vendor": "Blunder Hills",
                         "item": "StoneW1",
-                        "quantity": 3,
+                        "quantity": 12,
                         "no": 10,
                         "purchasePrice": 500
                     },
                     <VendorModel>{
                         "vendor": "Blunder Hills",
                         "item": "StoneA1",
-                        "quantity": 6,
+                        "quantity": 24,
                         "no": 11,
                         "purchasePrice": 400
                     },
                     <VendorModel>{
                         "vendor": "Blunder Hills",
                         "item": "StoneT1",
-                        "quantity": 4,
+                        "quantity": 16,
                         "no": 12,
                         "purchasePrice": 440
                     },
@@ -166,7 +166,7 @@ export const initVendorRepo = () => {
                     <VendorModel>{
                         "vendor": "Blunder Hills",
                         "item": "rtt0",
-                        "quantity": 15,
+                        "quantity": 50,
                         "no": 23,
                         "purchasePrice": 200
                     },
@@ -321,21 +321,21 @@ export const initVendorRepo = () => {
                     <VendorModel>{
                         "vendor": "YumYum Grotto",
                         "item": "StoneW2",
-                        "quantity": 3,
+                        "quantity": 12,
                         "no": 6,
                         "purchasePrice": 6000
                     },
                     <VendorModel>{
                         "vendor": "YumYum Grotto",
                         "item": "StoneA2",
-                        "quantity": 6,
+                        "quantity": 24,
                         "no": 7,
                         "purchasePrice": 3400
                     },
                     <VendorModel>{
                         "vendor": "YumYum Grotto",
                         "item": "StoneT2",
-                        "quantity": 4,
+                        "quantity": 16,
                         "no": 8,
                         "purchasePrice": 5000
                     },
@@ -553,21 +553,21 @@ export const initVendorRepo = () => {
                     <VendorModel>{
                         "vendor": "Frostbite Towndra",
                         "item": "StoneW3",
-                        "quantity": 4,
+                        "quantity": 12,
                         "no": 6,
                         "purchasePrice": 100000
                     },
                     <VendorModel>{
                         "vendor": "Frostbite Towndra",
                         "item": "StoneA3",
-                        "quantity": 10,
+                        "quantity": 30,
                         "no": 7,
                         "purchasePrice": 60000
                     },
                     <VendorModel>{
                         "vendor": "Frostbite Towndra",
                         "item": "StoneT3",
-                        "quantity": 7,
+                        "quantity": 21,
                         "no": 8,
                         "purchasePrice": 80000
                     },
@@ -711,21 +711,21 @@ export const initVendorRepo = () => {
                     <VendorModel>{
                         "vendor": "Outer World Town",
                         "item": "StoneW4",
-                        "quantity": 4,
+                        "quantity": 12,
                         "no": 6,
                         "purchasePrice": 2400000
                     },
                     <VendorModel>{
                         "vendor": "Outer World Town",
                         "item": "StoneA4",
-                        "quantity": 10,
+                        "quantity": 30,
                         "no": 7,
                         "purchasePrice": 1800000
                     },
                     <VendorModel>{
                         "vendor": "Outer World Town",
                         "item": "StoneT4",
-                        "quantity": 7,
+                        "quantity": 21,
                         "no": 8,
                         "purchasePrice": 2200000
                     },
@@ -806,21 +806,21 @@ export const initVendorRepo = () => {
                     <VendorModel>{
                         "vendor": "Magma Rivertown",
                         "item": "StoneW5",
-                        "quantity": 4,
+                        "quantity": 12,
                         "no": 4,
                         "purchasePrice": 24000000
                     },
                     <VendorModel>{
                         "vendor": "Magma Rivertown",
                         "item": "StoneA5",
-                        "quantity": 10,
+                        "quantity": 30,
                         "no": 5,
                         "purchasePrice": 12000000
                     },
                     <VendorModel>{
                         "vendor": "Magma Rivertown",
                         "item": "StoneT5",
-                        "quantity": 7,
+                        "quantity": 21,
                         "no": 6,
                         "purchasePrice": 16000000
                     },

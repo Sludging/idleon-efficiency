@@ -1,6 +1,7 @@
 import { Alchemy } from "./alchemy";
 import { initDivinityStyleRepo } from "./data/DivinityStyleRepo";
 import { GodInfoBase, initGodInfoRepo } from "./data/GodInfoRepo";
+import { ImageData } from "./imageData";
 import { DivinityStyleModel } from "./model/divinityStyleModel";
 import { GodInfoModel } from "./model/godInfoModel";
 import { Player } from "./player";
@@ -18,7 +19,7 @@ export class DivinityGod {
 
     static fromBase = (data: GodInfoBase[]): DivinityGod[] => {
         const godData = data.map(god => new DivinityGod(god.index, god.data));
-        const godCopy = [...godData];
+        const godCopy = JSON.parse(JSON.stringify(godData));
 
         // Fix up the bonus texts based on bonus index, because ... Lava.
         godData.forEach(god => {
@@ -48,6 +49,14 @@ export class DivinityGod {
         }
 
         return this.blessLevel * this.data.blessingPerLevel;
+    }
+
+    getImageData = (): ImageData => {
+        return {
+            location: `DivGod${this.index}`,
+            width: 108,
+            height: 97
+        }
     }
 }
 

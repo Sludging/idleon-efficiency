@@ -22,7 +22,7 @@ export const initBuildingRepo = () => {
                 "description": "Relive your youth by checking out books, and further relive your youth by never returning them! Instead, use them to boost your talent max levels. ",
                 "bonus": " +{% Checkout Refresh Speed",
                 "lvlUpReq": [<ComponentModel>{"item": "Refinery1", "quantity": 6}, <ComponentModel>{"item": "Critter1", "quantity": 100}],
-                "maxLvl": 50,
+                "maxLvl": 100,
                 "costInc": 1.34,
                 "bonusInc": [5, 30],
                 "misc": 0
@@ -90,11 +90,11 @@ export const initBuildingRepo = () => {
         new BuildingBase(8, <BuildingModel>{
                 "name": "Atom Collider",
                 "description": "Accelerate enough material to high speeds, and you can create the first physical atoms in this pixellated world! ",
-                "bonus": " +{% chance for an extra atom upon collision",
-                "lvlUpReq": [<ComponentModel>{"item": "Refinery6", "quantity": 10}, <ComponentModel>{"item": "FillerMaterial", "quantity": 100}],
+                "bonus": " Upgrade costs for atoms are {% cheaper (Increases every 10 lvs).",
+                "lvlUpReq": [<ComponentModel>{"item": "Refinery6", "quantity": 10}, <ComponentModel>{"item": "LavaB2", "quantity": 25}],
                 "maxLvl": 200,
-                "costInc": 1.2,
-                "bonusInc": [10, 5],
+                "costInc": 1.14,
+                "bonusInc": [0.1, 0.1],
                 "misc": 0
             }),
         new BuildingBase(9, <BuildingModel>{
@@ -182,7 +182,7 @@ export const initBuildingRepo = () => {
                 "description": "Casts a wave of null and void, removing enemy colours. ",
                 "bonus": " +{% Range @ +}% Lower Upgrade Costs in Worship",
                 "lvlUpReq": [<ComponentModel>{"item": "Refinery6", "quantity": 20}, <ComponentModel>{"item": "LavaA1", "quantity": 5000}],
-                "maxLvl": 100,
+                "maxLvl": 50,
                 "costInc": 1.4,
                 "bonusInc": [0.7, 0.8],
                 "misc": 0
