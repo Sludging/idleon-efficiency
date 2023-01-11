@@ -39,9 +39,6 @@ function AlignmentDisplay() {
     return (
         <Grid columns={{ size: 'small' }}>
             {playerData && playerData.map((player, index) => {
-                if (player.getActivityType() != Activity.Divinity) {
-                    return null;
-                }
                 return (
                     <ShadowBox key={index} background="dark-1" pad="medium" align="start" margin={{ right: 'medium', bottom: 'small' }}>
                         <Box gap="small">
