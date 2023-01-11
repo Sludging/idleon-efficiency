@@ -26,11 +26,7 @@ export const initBubbleRepo = () => {
                 "x2": 50,
                 "func": "decayMulti",
                 "description": "All Orange Passive Bubbles, which are the smaller sized ones, give a {x higher bonus to your warrior-based classes.",
-                "requirements": [
-                    <ComponentModel>{"item": "Grasslands1", "quantity": 20},
-                    <ComponentModel>{"item": "CraftMat1", "quantity": 3},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}
-                ],
+                "requirements": [<ComponentModel>{"item": "Grasslands1", "quantity": 20}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                 "bonusKey": "Opassz"
             }),
         new BubbleBase("Hearty Diggy", <BubbleModel>{
@@ -40,11 +36,7 @@ export const initBubbleRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "description": "+{% mining efficiency per power of 10 max HP that your character has. The perfect bonus for miners with infinite HP!",
-                "requirements": [
-                    <ComponentModel>{"item": "JungleTree", "quantity": 40},
-                    <ComponentModel>{"item": "CopperBar", "quantity": 18},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}
-                ],
+                "requirements": [<ComponentModel>{"item": "JungleTree", "quantity": 40}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                 "bonusKey": "MinEff"
             }),
         new BubbleBase("Wyoming Blood", <BubbleModel>{
@@ -54,11 +46,7 @@ export const initBubbleRepo = () => {
                 "x2": 1.5,
                 "func": "bigBase",
                 "description": "Multi-Ore mining chance is increased by +{%, and your max Multi-Ore chance is 300% instead of 100%.",
-                "requirements": [
-                    <ComponentModel>{"item": "Bug1", "quantity": 30},
-                    <ComponentModel>{"item": "Forest1", "quantity": 50},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}
-                ],
+                "requirements": [<ComponentModel>{"item": "Bug1", "quantity": 30}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}],
                 "bonusKey": "MiningACTIVE"
             }),
         new BubbleBase("Reely Smart", <BubbleModel>{
@@ -68,11 +56,7 @@ export const initBubbleRepo = () => {
                 "x2": 80,
                 "func": "decay",
                 "description": "+{% Mining and Fishing EXP gain. Y'know what, I'll even DOUBLE that bonus for whichever skill has the lower level!",
-                "requirements": [
-                    <ComponentModel>{"item": "CraftMat6", "quantity": 25},
-                    <ComponentModel>{"item": "DesertA3", "quantity": 40},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}
-                ],
+                "requirements": [<ComponentModel>{"item": "CraftMat6", "quantity": 25}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}],
                 "bonusKey": "MinFishEXP"
             }),
         new BubbleBase("Big Meaty Claws", <BubbleModel>{
@@ -82,11 +66,7 @@ export const initBubbleRepo = () => {
                 "x2": 0.02,
                 "func": "add",
                 "description": "Increases base damage by +$. This bonus increases based on how much Max HP you have above 250.",
-                "requirements": [
-                    <ComponentModel>{"item": "BirchTree", "quantity": 200},
-                    <ComponentModel>{"item": "DesertB2", "quantity": 75},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 4}
-                ],
+                "requirements": [<ComponentModel>{"item": "DesertB2", "quantity": 200}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 4}],
                 "bonusKey": "bdmgHP"
             }),
         new BubbleBase("Sploosh Sploosh", <BubbleModel>{
@@ -106,11 +86,7 @@ export const initBubbleRepo = () => {
                 "x2": 70,
                 "func": "decay",
                 "description": "The following tools give +{% more skilling Power than normal: $",
-                "requirements": [
-                    <ComponentModel>{"item": "Plat", "quantity": 60},
-                    <ComponentModel>{"item": "Grasslands2", "quantity": 200},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 4}
-                ],
+                "requirements": [<ComponentModel>{"item": "Plat", "quantity": 60}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 4}],
                 "bonusKey": "ToolW"
             }),
         new BubbleBase("Fmj", <BubbleModel>{
@@ -120,12 +96,7 @@ export const initBubbleRepo = () => {
                 "x2": 0,
                 "func": "add",
                 "description": "+{% more defence from Equipment. Also, +1 base Def per Class LV, up to +{.",
-                "requirements": [
-                    <ComponentModel>{"item": "Bug4", "quantity": 50},
-                    <ComponentModel>{"item": "DesertC2", "quantity": 140},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 5},
-                    <LiquidComponentModel>{"liquidNo": "2", "quantity": 2}
-                ],
+                "requirements": [<ComponentModel>{"item": "Bug4", "quantity": 50}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 5}],
                 "bonusKey": "DefPct"
             }),
         new BubbleBase("Bappity Boopity", <BubbleModel>{
@@ -135,12 +106,7 @@ export const initBubbleRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "description": "+{% critical Damage. Badabing, badaboom! Or in Italian, Babadabinga, babadaboomahh!",
-                "requirements": [
-                    <ComponentModel>{"item": "CraftMat8", "quantity": 100},
-                    <ComponentModel>{"item": "JungleTree", "quantity": 700},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 5},
-                    <LiquidComponentModel>{"liquidNo": "2", "quantity": 2}
-                ],
+                "requirements": [<ComponentModel>{"item": "CraftMat8", "quantity": 100}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 5}],
                 "bonusKey": "critDMG"
             }),
         new BubbleBase("Brittley Spears", <BubbleModel>{
@@ -310,11 +276,7 @@ export const initBubbleRepo = () => {
                 "x2": 50,
                 "func": "decayMulti",
                 "description": "All Green Passive Bonuses, which are the smaller sized ones, give {x more bonuses to your archer-based characters.",
-                "requirements": [
-                    <ComponentModel>{"item": "Grasslands1", "quantity": 20},
-                    <ComponentModel>{"item": "BirchTree", "quantity": 30},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}
-                ],
+                "requirements": [<ComponentModel>{"item": "Grasslands1", "quantity": 20}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                 "bonusKey": "Gpassz"
             }),
         new BubbleBase("Hammer Hammer", <BubbleModel>{
@@ -324,11 +286,7 @@ export const initBubbleRepo = () => {
                 "x2": 2,
                 "func": "bigBase",
                 "description": "You can now produce +1 more items at once in the anvil, and your production speed is increased by {%.",
-                "requirements": [
-                    <ComponentModel>{"item": "Iron", "quantity": 30},
-                    <ComponentModel>{"item": "Grasslands3", "quantity": 30},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}
-                ],
+                "requirements": [<ComponentModel>{"item": "Iron", "quantity": 30}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                 "bonusKey": "AnvilACTIVE"
             }),
         new BubbleBase("Lil Big Damage", <BubbleModel>{
@@ -338,11 +296,7 @@ export const initBubbleRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "description": "+{% Mastery. Mastery is your stat that boosts minimum damage. Just like in Maplest... err, just like how I thought it up myself!",
-                "requirements": [
-                    <ComponentModel>{"item": "Fish1", "quantity": 25},
-                    <ComponentModel>{"item": "Jungle3", "quantity": 40},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}
-                ],
+                "requirements": [<ComponentModel>{"item": "Fish1", "quantity": 25}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}],
                 "bonusKey": "Mastery"
             }),
         new BubbleBase("Anvilnomics", <BubbleModel>{
@@ -352,11 +306,7 @@ export const initBubbleRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "description": "Costs for buying Anvil Production Points is reduced by {%. This is just like a tax cut, so remember me as a hero!",
-                "requirements": [
-                    <ComponentModel>{"item": "ForestTree", "quantity": 50},
-                    <ComponentModel>{"item": "Gold", "quantity": 40},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}
-                ],
+                "requirements": [<ComponentModel>{"item": "ForestTree", "quantity": 50}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}],
                 "bonusKey": "AnvilProdCost"
             }),
         new BubbleBase("Quick Slap", <BubbleModel>{
@@ -366,11 +316,7 @@ export const initBubbleRepo = () => {
                 "x2": 0.02,
                 "func": "add",
                 "description": "Increases base damage by +$. This bonus increases based on how much Movement Speed you have above 110%.",
-                "requirements": [
-                    <ComponentModel>{"item": "DesertB1", "quantity": 90},
-                    <ComponentModel>{"item": "CraftMat6", "quantity": 200},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 4}
-                ],
+                "requirements": [<ComponentModel>{"item": "DesertB1", "quantity": 90}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 4}],
                 "bonusKey": "bdmgSPD"
             }),
         new BubbleBase("Sanic Tools", <BubbleModel>{
@@ -380,11 +326,7 @@ export const initBubbleRepo = () => {
                 "x2": 70,
                 "func": "decay",
                 "description": "The following tools give +{% more skilling Power than normal: $",
-                "requirements": [
-                    <ComponentModel>{"item": "Jungle1", "quantity": 130},
-                    <ComponentModel>{"item": "GoldBar", "quantity": 6},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 4}
-                ],
+                "requirements": [<ComponentModel>{"item": "Jungle1", "quantity": 130}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 4}],
                 "bonusKey": "ToolA"
             }),
         new BubbleBase("Bug]", <BubbleModel>{
@@ -404,12 +346,7 @@ export const initBubbleRepo = () => {
                 "x2": 0,
                 "func": "add",
                 "description": "Your secondary stat (WIS for warrior, STR for archer, AGI for mage) gives +{% more Accuracy than normal.",
-                "requirements": [
-                    <ComponentModel>{"item": "Fish4", "quantity": 65},
-                    <ComponentModel>{"item": "PalmTree", "quantity": 250},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 5},
-                    <LiquidComponentModel>{"liquidNo": "2", "quantity": 2}
-                ],
+                "requirements": [<ComponentModel>{"item": "Fish4", "quantity": 65}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 5}],
                 "bonusKey": "AccPct"
             }),
         new BubbleBase("Cheap Shot", <BubbleModel>{
@@ -419,12 +356,7 @@ export const initBubbleRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "description": "+{% critical Chance, as it increases the chance for your attack to hit the monster's privates, and for the monster to be male.",
-                "requirements": [
-                    <ComponentModel>{"item": "Bug5", "quantity": 35},
-                    <ComponentModel>{"item": "DesertC3", "quantity": 150},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 5},
-                    <LiquidComponentModel>{"liquidNo": "2", "quantity": 2}
-                ],
+                "requirements": [<ComponentModel>{"item": "Bug5", "quantity": 35}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 5}],
                 "bonusKey": "CritChance"
             }),
         new BubbleBase("Bow Jack", <BubbleModel>{
@@ -584,7 +516,7 @@ export const initBubbleRepo = () => {
                 "x2": 0,
                 "func": "add",
                 "description": "+{ Total WIS. Honesty the greatest bonus in any Idle Game, believe me. Absolutely incredible, everyone says so!",
-                "requirements": [<ComponentModel>{"item": "CraftMat1", "quantity": 10}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
+                "requirements": [<ComponentModel>{"item": "BirchTree", "quantity": 16}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                 "bonusKey": "TotalWIS"
             }),
         new BubbleBase("Mage Is Best", <BubbleModel>{
@@ -594,11 +526,7 @@ export const initBubbleRepo = () => {
                 "x2": 50,
                 "func": "decayMulti",
                 "description": "All Purple Passive Bonuses, which are the smaller sized ones, give {x more bonuses to your mage-based characters.",
-                "requirements": [
-                    <ComponentModel>{"item": "Grasslands1", "quantity": 25},
-                    <ComponentModel>{"item": "CopperBar", "quantity": 13},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}
-                ],
+                "requirements": [<ComponentModel>{"item": "Grasslands1", "quantity": 20}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                 "bonusKey": "Ppassz"
             }),
         new BubbleBase("Hocus Choppus", <BubbleModel>{
@@ -608,11 +536,7 @@ export const initBubbleRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "description": "+{% choppin efficiency per power of 10 max MP that your character has. Super diaper! Err, duper.",
-                "requirements": [
-                    <ComponentModel>{"item": "CraftMat5", "quantity": 22},
-                    <ComponentModel>{"item": "ForestTree", "quantity": 40},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}
-                ],
+                "requirements": [<ComponentModel>{"item": "CraftMat5", "quantity": 22}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                 "bonusKey": "ChopEff"
             }),
         new BubbleBase("Molto Loggo", <BubbleModel>{
@@ -622,11 +546,7 @@ export const initBubbleRepo = () => {
                 "x2": 1.5,
                 "func": "bigBase",
                 "description": "Multi-Log chop chance is increased by +{%, and your max Multi-Log chance is now 300% instead of 100%.",
-                "requirements": [
-                    <ComponentModel>{"item": "IronBar", "quantity": 21},
-                    <ComponentModel>{"item": "DesertA2", "quantity": 30},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}
-                ],
+                "requirements": [<ComponentModel>{"item": "IronBar", "quantity": 21}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}],
                 "bonusKey": "MultiLogACTIVE"
             }),
         new BubbleBase("Noodubble", <BubbleModel>{
@@ -636,11 +556,7 @@ export const initBubbleRepo = () => {
                 "x2": 60,
                 "func": "decay",
                 "description": "+{% Choppin' and Alchemy EXP gain. Y'know what, I'll even... actually, never mind.",
-                "requirements": [
-                    <ComponentModel>{"item": "CraftMat7", "quantity": 20},
-                    <ComponentModel>{"item": "Fish2", "quantity": 30},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}
-                ],
+                "requirements": [<ComponentModel>{"item": "CraftMat7", "quantity": 20}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}],
                 "bonusKey": "ChopAlchEXP"
             }),
         new BubbleBase("Name I Guess", <BubbleModel>{
@@ -650,11 +566,7 @@ export const initBubbleRepo = () => {
                 "x2": 0.02,
                 "func": "add",
                 "description": "Increases base damage by +$. This bonus increases based on how much Max MP you have above 150.",
-                "requirements": [
-                    <ComponentModel>{"item": "Jungle2", "quantity": 110},
-                    <ComponentModel>{"item": "Gold", "quantity": 40},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 4}
-                ],
+                "requirements": [<ComponentModel>{"item": "Gold", "quantity": 40}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 4}],
                 "bonusKey": "bdmgMP"
             }),
         new BubbleBase("Le Brain Tools", <BubbleModel>{
@@ -664,11 +576,7 @@ export const initBubbleRepo = () => {
                 "x2": 70,
                 "func": "decay",
                 "description": "The following tools give +{% more skilling Power than normal: $",
-                "requirements": [
-                    <ComponentModel>{"item": "BirchTree", "quantity": 250},
-                    <ComponentModel>{"item": "Bug3", "quantity": 55},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 4}
-                ],
+                "requirements": [<ComponentModel>{"item": "Bug3", "quantity": 55}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 4}],
                 "bonusKey": "ToolM"
             }),
         new BubbleBase("Cookin Roadkill", <BubbleModel>{
@@ -688,12 +596,7 @@ export const initBubbleRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "description": "+{% Brew Speed. This a multiplicative bonus, which means its ultra powerful, all the time! Even on Mondays, the worst day!",
-                "requirements": [
-                    <ComponentModel>{"item": "DesertC1", "quantity": 150},
-                    <ComponentModel>{"item": "Fish4", "quantity": 50},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 5},
-                    <LiquidComponentModel>{"liquidNo": "2", "quantity": 2}
-                ],
+                "requirements": [<ComponentModel>{"item": "DesertC1", "quantity": 150}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 5}],
                 "bonusKey": "BrewSpd"
             }),
         new BubbleBase("All For Kill", <BubbleModel>{
@@ -703,12 +606,7 @@ export const initBubbleRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "description": "Attack Talents give +{% higher bonuses to Offline Gains than they normally do. So you might as well just AFK forever, bye!",
-                "requirements": [
-                    <ComponentModel>{"item": "StumpTree", "quantity": 100},
-                    <ComponentModel>{"item": "PlatBar", "quantity": 5},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 5},
-                    <LiquidComponentModel>{"liquidNo": "2", "quantity": 2}
-                ],
+                "requirements": [<ComponentModel>{"item": "StumpTree", "quantity": 100}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 5}],
                 "bonusKey": "AttackAfk"
             }),
         new BubbleBase("Matty Stafford", <BubbleModel>{
@@ -868,12 +766,7 @@ export const initBubbleRepo = () => {
                 "x2": 0,
                 "func": "add",
                 "description": "+{ LUK. Also, this will increase your chances of winning the lottery in real life from 0.0% to 0.000%! I'm not even joking, it's true!!",
-                "requirements": [
-                    <ComponentModel>{"item": "Copper", "quantity": 11},
-                    <ComponentModel>{"item": "OakTree", "quantity": 15},
-                    <ComponentModel>{"item": "CraftMat1", "quantity": 8},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}
-                ],
+                "requirements": [<ComponentModel>{"item": "CraftMat1", "quantity": 9}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                 "bonusKey": "TotalLUK"
             }),
         new BubbleBase("Droppin Loads", <BubbleModel>{
@@ -883,11 +776,7 @@ export const initBubbleRepo = () => {
                 "x2": 70,
                 "func": "decay",
                 "description": "+{% Drop Rate. Thanks to this upgrade, you can get even MORE angry when you keep not getting that rare pet drop from the boss!",
-                "requirements": [
-                    <ComponentModel>{"item": "Fish1", "quantity": 20},
-                    <ComponentModel>{"item": "Bug1", "quantity": 30},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}
-                ],
+                "requirements": [<ComponentModel>{"item": "Fish1", "quantity": 20}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                 "bonusKey": "DropRate"
             }),
         new BubbleBase("Startue Exp", <BubbleModel>{
@@ -897,11 +786,7 @@ export const initBubbleRepo = () => {
                 "x2": 60,
                 "func": "decay",
                 "description": "Leveling up a statue resets it's exp bar down to {%, instead of 0%. Staturrific! Yea... the jokes are only gonna go downhill from here lol",
-                "requirements": [
-                    <ComponentModel>{"item": "DesertA1", "quantity": 30},
-                    <ComponentModel>{"item": "Forest2", "quantity": 40},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}
-                ],
+                "requirements": [<ComponentModel>{"item": "DesertA1", "quantity": 30}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                 "bonusKey": "StatueStartEXP"
             }),
         new BubbleBase("Level Up Gift", <BubbleModel>{
@@ -911,12 +796,7 @@ export const initBubbleRepo = () => {
                 "x2": 30,
                 "func": "decay",
                 "description": "Whenever you level up anything, {% chance to drop a gift! It could be an EXP balloon, a Gem for the gem shop, or something crazy weird!",
-                "requirements": [
-                    <ComponentModel>{"item": "Iron", "quantity": 35},
-                    <ComponentModel>{"item": "JungleTree", "quantity": 70},
-                    <ComponentModel>{"item": "CraftMat5", "quantity": 30},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}
-                ],
+                "requirements": [<ComponentModel>{"item": "DesertA3", "quantity": 30}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                 "bonusKey": "LevelUpACTIVE"
             }),
         new BubbleBase("Prowesessary", <BubbleModel>{
@@ -926,11 +806,7 @@ export const initBubbleRepo = () => {
                 "x2": 60,
                 "func": "decayMulti",
                 "description": "The Prowess Bonus for every skill is multiplied by {. Prowess lowers the Efficiency needed to get multiple QTY per drop from resources.",
-                "requirements": [
-                    <ComponentModel>{"item": "GoldBar", "quantity": 25},
-                    <ComponentModel>{"item": "ToiletTree", "quantity": 50},
-                    <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}
-                ],
+                "requirements": [<ComponentModel>{"item": "ToiletTree", "quantity": 50}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}],
                 "bonusKey": "ProwessMulti"
             }),
         new BubbleBase("Stamp Tramp", <BubbleModel>{
@@ -980,11 +856,7 @@ export const initBubbleRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "description": "Every time you upgrade an Alchemy bubble, there's a {% chance it'll upgrade 2 times, for no extra cost! Two fer one, getter dun!",
-                "requirements": [
-                    <ComponentModel>{"item": "Dementia", "quantity": 50},
-                    <ComponentModel>{"item": "DesertC4", "quantity": 130},
-                    <LiquidComponentModel>{"liquidNo": "2", "quantity": 4}
-                ],
+                "requirements": [<ComponentModel>{"item": "Dementia", "quantity": 50}, <LiquidComponentModel>{"liquidNo": "2", "quantity": 4}],
                 "bonusKey": "DoubleBubbleUpg"
             }),
         new BubbleBase("Cogs For Hands", <BubbleModel>{
@@ -1130,10 +1002,10 @@ export const initBubbleRepo = () => {
         new BubbleBase("Atom Split", <BubbleModel>{
                 "cauldron": "Kazam Cauldron",
                 "name": "Atom Split",
-                "x1": 50,
-                "x2": 60,
+                "x1": 14,
+                "x2": 40,
                 "func": "decay",
-                "description": "+{% chance to gain 2x atoms from the Supercollider",
+                "description": "+{% lower particle cost for upgrading all atoms",
                 "requirements": [<ComponentModel>{"item": "LavaC2", "quantity": 250}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
                 "bonusKey": "Y5"
             }),
