@@ -68,14 +68,9 @@ function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stam
                 size="medium"
                 visibility={stamp.name == "Blank" || stamp.name == "FILLER" ? 'none' : undefined}
             >
-                {/* Do the opacity thing in styled components? */}
-                <Box direction="row" fill align="center">
-                    <Box align="center" width={{ max: '50px' }} fill>
-                        <Box style={{ opacity: stamp.level > 0 ? 1 : 0.2 }} className={getCardClass()} />
-                    </Box>
-                    <Box>
-                        <Text size="medium">{stamp.level}</Text>
-                    </Box>
+                <Box direction="row" align="center" gap="xsmall">
+                    <IconImage data={stamp.getImageData()} scale={0.4} />
+                    <Text size="small">{stamp.level}</Text>
                 </Box>
             </TipDisplay>
         </Box>
@@ -84,7 +79,7 @@ function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stam
 
 function StampTab({ tab, index, blueFlavPercent, hasBribe }: { tab: Stamp[], index: number, blueFlavPercent: number, hasBribe: boolean }) {
     return (
-        <Box pad="medium">
+        <Box pad="small">
             <h3>{tab[0].type}</h3>
             <Box fill>
                 <Grid columns={{ count: 4, size: "auto" }} gap="none">
@@ -144,7 +139,7 @@ function Stamps() {
                 <Text>Total levels: {totalLevels}</Text>
             </Box>
             <ShadowBox flex={false} background="dark-1" pad="small">
-                <Grid columns={{ size: '300px' }} gap="medium">
+                <Grid columns={{ size: '300px' }} gap="none">
                     {
                         stampData && stampData.map((tab, index) => {
                             return (<StampTab key={`tab_${index}`} tab={tab} index={index} blueFlavPercent={blueFlavPercent} hasBribe={hasBribe == BribeStatus.Purchased} />)

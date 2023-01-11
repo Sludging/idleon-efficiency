@@ -1,4 +1,5 @@
 import { lavaFunc, range } from '../utility'
+import { ImageData } from './imageData';
 import { Item } from './items';
 import { Lab } from './lab';
 import { BaseItemModel } from './model/baseItemModel';
@@ -79,6 +80,14 @@ export class Stamp {
 
     isMaxLevel = (): boolean => {
         return this.level == this.maxLevel;
+    }
+
+    getImageData = (): ImageData => {
+        return {
+            location: this.raw_name,
+            height: 72,
+            width: 72
+        }
     }
 
     static fromBase = (data: Item[]) => {
