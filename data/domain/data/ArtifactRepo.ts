@@ -47,7 +47,7 @@ export const initArtifactRepo = () => {
                 "baseBonus": 10,
                 "baseFindChance": 12,
                 "qtyBonus": 1,
-                "bonus": "All 3d printer samples grow by +1% per day for 40 days. Resets when taking new samples.",
+                "bonus": "All 3d printer samples grow by +1% per day for 40 days. Resets when taking a sample. Bonus shown in 3d Printer.",
                 "ancientBonus": "Samples grow by 1.5% for 60 days instead!",
                 "ancientBonusQty": 0.5
             }),

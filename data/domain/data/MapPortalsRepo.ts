@@ -7,8 +7,8 @@ export class MapInfoBase { constructor(public index: number, public data: MapInf
 export const initMapPortalsRepo = () => {
     return [    
         new MapInfoBase(0, <MapInfoModel>{"id": 0, "portalRequirements": [1, 0]}),
-        new MapInfoBase(1, <MapInfoModel>{"id": 1, "portalRequirements": [20]}),
-        new MapInfoBase(2, <MapInfoModel>{"id": 2, "portalRequirements": [30]}),
+        new MapInfoBase(1, <MapInfoModel>{"id": 1, "portalRequirements": [11]}),
+        new MapInfoBase(2, <MapInfoModel>{"id": 2, "portalRequirements": [20]}),
         new MapInfoBase(3, <MapInfoModel>{"id": 3, "portalRequirements": [150, 10]}),
         new MapInfoBase(4, <MapInfoModel>{"id": 4, "portalRequirements": [150]}),
         new MapInfoBase(5, <MapInfoModel>{"id": 5, "portalRequirements": [150]}),

@@ -301,9 +301,7 @@ export const initSubTableRepo = () => {
         new SubTablesBase("DropTable22", <SubTablesModel>{
                 "sources": [
                     <SubTableModel>{"name": "AlienTree", "chance": 0.00815, "quantity": 2},
-                    <SubTableModel>{"name": "Tree8", "chance": 0.0089, "quantity": 1},
-                    <SubTableModel>{"name": "Tree9", "chance": 0.0089, "quantity": 1},
-                    <SubTableModel>{"name": "Tree10", "chance": 0.0089, "quantity": 1}
+                    <SubTableModel>{"name": "Tree8", "chance": 0.0089, "quantity": 1}
                 ]
             }),
         new SubTablesBase("DropTable23", <SubTablesModel>{
@@ -483,8 +481,6 @@ export const initSubTableRepo = () => {
                     <SubTableModel>{"name": "ChestC4", "chance": 0.006, "quantity": 1},
                     <SubTableModel>{"name": "AlienTree", "chance": 4.89e-05, "quantity": 2},
                     <SubTableModel>{"name": "Tree8", "chance": 5.34e-05, "quantity": 1},
-                    <SubTableModel>{"name": "Tree9", "chance": 5.34e-05, "quantity": 1},
-                    <SubTableModel>{"name": "Tree10", "chance": 5.34e-05, "quantity": 1},
                     <SubTableModel>{"name": "Bug7", "chance": 9e-05, "quantity": 1},
                     <SubTableModel>{"name": "Bug8", "chance": 9e-05, "quantity": 1}
                 ]
