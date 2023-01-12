@@ -134,7 +134,7 @@ const keyFunctionMap: Record<string, Function> = {
     "divinity": (doc: Cloudsave, charCount: number) => parseDivinity(charCount, doc.get("Divinity") as number[] || [], [...Array(charCount)].map((_, index) =>doc.get(`AFKtarget_${index}`))),
     "sailing": (doc: Cloudsave, charCount: number) => parseSailing(safeJsonParse(doc, "Sailing", []), safeJsonParse(doc, "Boats", []), safeJsonParse(doc, "Captains", [])),
     "gaming": (doc: Cloudsave, charCount: number) => parseGaming(doc.get("Gaming") as any[] || [], safeJsonParse(doc, "GamingSprout", [])),
-    "collider": (doc: Cloudsave, charCount: number) => parseAtomCollider(safeJsonParse(doc, "Atoms", []), doc.get("Divinity") as number[] || []),
+    "collider": (doc: Cloudsave, charCount: number) => parseAtomCollider(doc.get("Atoms") as number[] || [], doc.get("Divinity") as number[] || []),
 }
 
 // ORDER IS IMPORTANT!
