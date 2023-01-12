@@ -67,7 +67,7 @@ export class Artifact {
     }
 
     getBonus = (showUnobtained: boolean = false) => {
-        if (!showUnobtained && this.status == ArtifactStatus.Unobtained) {
+        if (showUnobtained || this.status != ArtifactStatus.Unobtained) {
             return 0;
         }
 
@@ -96,45 +96,46 @@ export class Artifact {
 export class GenieLampArtifact extends Artifact {
     sailingLevel: number = 0;
     override getBonus = (showUnobtained: boolean = false) => {
-        if (!showUnobtained && this.status == ArtifactStatus.Unobtained) {
-            return 0;
+        if (showUnobtained || this.status != ArtifactStatus.Unobtained) {
+            return this.sailingLevel * this.data.qtyBonus * (this.status == ArtifactStatus.Ancient ? 2 : 1);
         }
 
-        return this.sailingLevel * this.data.qtyBonus * (this.status == ArtifactStatus.Ancient ? 2 : 1);
+        return 0;
     }
 }
 
 export class SlabInfluencedArtifact extends Artifact {
     lootyCount: number = 0;
     override getBonus = (showUnobtained: boolean = false) => {
-        if (!showUnobtained && this.status == ArtifactStatus.Unobtained) {
-            return 0;
+        if (showUnobtained || this.status != ArtifactStatus.Unobtained) {
+            return Math.floor(Math.max(0, this.lootyCount - 500) / 10) * this.data.qtyBonus * (this.status == ArtifactStatus.Ancient ? 2 : 1);
         }
 
-        return Math.floor(Math.max(0, this.lootyCount - 500) / 10) * this.data.qtyBonus * (this.status == ArtifactStatus.Ancient ? 2 : 1);
+        return 0;
     }
 }
 
 export class ManekiKatArtifact extends Artifact {
     highestLevel: number = 0;
     override getBonus = (showUnobtained: boolean = false) => {
-        if (!showUnobtained && this.status == ArtifactStatus.Unobtained) {
-            return 0;
+        if (showUnobtained || this.status != ArtifactStatus.Unobtained) {
+            return this.highestLevel * this.data.qtyBonus * (this.status == ArtifactStatus.Ancient ? 2 : 1);
         }
 
-        return this.highestLevel * this.data.qtyBonus * (this.status == ArtifactStatus.Ancient ? 2 : 1);
+        return 0;
     }
 }
 
 export class AshenUrnArtifact extends Artifact {
     highestLevel: number = 0;
     override getBonus = (showUnobtained: boolean = false) => {
-        if (!showUnobtained && this.status == ArtifactStatus.Unobtained) {
-            return 0;
+        if (showUnobtained || this.status != ArtifactStatus.Unobtained) {
+            // Hard coded numbers because .. that's what Lava also did :facepalm:.
+            const bonusCap = this.status == ArtifactStatus.Ancient ? 400 : 200
+            return Math.min(bonusCap, this.highestLevel) * this.data.qtyBonus;
         }
-        // Hard coded numbers because .. that's what Lava also did :facepalm:.
-        const bonusCap = this.status == ArtifactStatus.Ancient ? 400 : 200
-        return Math.min(bonusCap, this.highestLevel) * this.data.qtyBonus;
+
+        return 0;
     }
 
     override hasCalculatedBonus = () => {
@@ -148,67 +149,63 @@ export class AshenUrnArtifact extends Artifact {
 
 export class FauxoryTuskArtifact extends Artifact {
     sailingLevel: number = 0;
-    override getBonus = () => {
-        return this.sailingLevel * this.data.qtyBonus * (this.status == ArtifactStatus.Ancient ? 2 : 1);
+    override getBonus = (showUnobtained: boolean = false) => {
+        if (showUnobtained || this.status != ArtifactStatus.Unobtained) {
+            return this.sailingLevel * this.data.qtyBonus * (this.status == ArtifactStatus.Ancient ? 2 : 1);
+        }
+
+        return 0;
     }
 }
 
 export class WeatherbookArtifact extends Artifact {
     gamingLevel: number = 0;
     override getBonus = (showUnobtained: boolean = false) => {
-        if (!showUnobtained && this.status == ArtifactStatus.Unobtained) {
-            return 0;
+        if (showUnobtained || this.status != ArtifactStatus.Unobtained) {
+            return this.gamingLevel * this.data.qtyBonus * (this.status == ArtifactStatus.Ancient ? 2 : 1);
         }
 
-        return this.gamingLevel * this.data.qtyBonus * (this.status == ArtifactStatus.Ancient ? 2 : 1);
+        return 0;
     }
 }
 
 export class TriagulonArtifact extends Artifact {
     turkeyOwned: number = 0;
     override getBonus = (showUnobtained: boolean = false) => {
-        if (!showUnobtained && this.status == ArtifactStatus.Unobtained) {
-            return 0;
+        if (showUnobtained || this.status != ArtifactStatus.Unobtained) {
+            return lavaLog(this.turkeyOwned) * this.data.qtyBonus * (this.status == ArtifactStatus.Ancient ? 2 : 1);
         }
 
-        return lavaLog(this.turkeyOwned) * this.data.qtyBonus * (this.status == ArtifactStatus.Ancient ? 2 : 1);
+        return 0;
     }
 }
 
 export class OperaMaskArtifact extends Artifact {
     goldOwned: number = 0;
     override getBonus = (showUnobtained: boolean = false) => {
-        if (!showUnobtained && this.status == ArtifactStatus.Unobtained) {
-            return 0;
+        if (showUnobtained || this.status != ArtifactStatus.Unobtained) {
+            return lavaLog(this.goldOwned) * this.data.qtyBonus * (this.status == ArtifactStatus.Ancient ? 2 : 1);
         }
 
-        return lavaLog(this.goldOwned) * this.data.qtyBonus * (this.status == ArtifactStatus.Ancient ? 2 : 1);
-    }
-
-    override getCalculatedBonusText = () => {
-        return `Currently broken in-game`;
+        return 0;
     }
 }
 
 export class TheTrueLanternArtifact extends Artifact {
-    blessingsOwned: number = 0;
+    particlesOwned: number = 0;
     override getBonus = (showUnobtained: boolean = false) => {
-        if (!showUnobtained && this.status == ArtifactStatus.Unobtained) {
-            return 0;
+        if (showUnobtained || this.status != ArtifactStatus.Unobtained) {
+            return lavaLog(this.particlesOwned) * this.data.qtyBonus * (this.status == ArtifactStatus.Ancient ? 2 : 1);
         }
 
-        return lavaLog(this.blessingsOwned) * this.data.qtyBonus * (this.status == ArtifactStatus.Ancient ? 2 : 1);
-    }
-
-    override getCalculatedBonusText = () => {
-        return `Currently broken in-game`;
+        return 0;
     }
 }
 
 export class CrystalSteakArtifact extends Artifact {
     statsBonus: number = 0;
     override getBonus = (showUnobtained: boolean = false) => {
-        if (!showUnobtained && this.status == ArtifactStatus.Unobtained) {
+        if (showUnobtained || this.status != ArtifactStatus.Unobtained) {
             return 0;
         }
 
@@ -227,7 +224,7 @@ export class CrystalSteakArtifact extends Artifact {
 export class FunHippoeteArtifact extends Artifact {
     constructionSpeed: number = 0;
     override getBonus = (showUnobtained: boolean = false) => {
-        if (!showUnobtained && this.status == ArtifactStatus.Unobtained) {
+        if (showUnobtained || this.status != ArtifactStatus.Unobtained) {
             return 0;
         }
 

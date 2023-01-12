@@ -8,7 +8,7 @@ import { IslandInfoModel } from "./model/islandInfoModel";
 import { Player } from "./player";
 import { SkillsIndex } from "./SkillsIndex";
 import { LootyInfo } from "./lootyTracker";
-import { Artifact, AshenUrnArtifact, FauxoryTuskArtifact, GenieLampArtifact, ManekiKatArtifact, OperaMaskArtifact, SlabInfluencedArtifact, TriagulonArtifact, WeatherbookArtifact } from "./sailing/artifacts";
+import { Artifact, AshenUrnArtifact, FauxoryTuskArtifact, GenieLampArtifact, ManekiKatArtifact, OperaMaskArtifact, SlabInfluencedArtifact, TheTrueLanternArtifact, TriagulonArtifact, WeatherbookArtifact } from "./sailing/artifacts";
 import { Cooking } from "./cooking";
 import { Sigils } from "./sigils";
 import { Divinity } from "./divinity";
@@ -16,6 +16,7 @@ import { Card } from "./cards";
 import { Alchemy } from "./alchemy";
 import { Stamp } from "./stamps";
 import { PlayerStatues } from "./statues";
+import { AtomCollider } from "./atomCollider";
 
 // "Captains": [
 //     [0,0,-1,3,6.75,2,0],
@@ -310,6 +311,7 @@ export const updateSailing = (data: Map<string, any>) => {
     const stamps = data.get("stamps") as Stamp[][];
     const statues = data.get("statues") as PlayerStatues[];
     const alchemy = data.get("alchemy") as Alchemy;
+    const collider = data.get("collider") as AtomCollider;
 
 
     // Max chests
@@ -337,6 +339,9 @@ export const updateSailing = (data: Map<string, any>) => {
 
     // Cooking related.
     (sailing.artifacts[13] as TriagulonArtifact).turkeyOwned = cooking.meals[0].count;
+    
+    // Collider related
+    (sailing.artifacts[29] as TheTrueLanternArtifact).particlesOwned = collider.particles;
 
     // Speed base math
     const purrmepPlayer = divinity.gods[6].linkedPlayers.at(0); // purrmep is limited to only 1 player linked.
