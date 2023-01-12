@@ -38,6 +38,7 @@ import { parseAccount, updateAccount } from './account';
 import parseDivinity, { updateDivinity } from './divinity';
 import parseSailing, { updateSailing } from './sailing';
 import parseGaming from './gaming';
+import parseAtomCollider, { updateAtomCollider } from './atomCollider';
 
 
 export const safeJsonParse = <T, >(doc: Cloudsave, key: string, emptyValue: T): T => {
@@ -133,10 +134,12 @@ const keyFunctionMap: Record<string, Function> = {
     "divinity": (doc: Cloudsave, charCount: number) => parseDivinity(charCount, doc.get("Divinity") as number[] || [], [...Array(charCount)].map((_, index) =>doc.get(`AFKtarget_${index}`))),
     "sailing": (doc: Cloudsave, charCount: number) => parseSailing(safeJsonParse(doc, "Sailing", []), safeJsonParse(doc, "Boats", []), safeJsonParse(doc, "Captains", [])),
     "gaming": (doc: Cloudsave, charCount: number) => parseGaming(doc.get("Gaming") as any[] || [], safeJsonParse(doc, "GamingSprout", [])),
+    "collider": (doc: Cloudsave, charCount: number) => parseAtomCollider(safeJsonParse(doc, "Atoms", []), doc.get("Divinity") as number[] || []),
 }
 
 // ORDER IS IMPORTANT!
 const postProcessingMap: Record<string, Function> = {
+    "collider": (doc: Cloudsave, accountData: Map<string, any>) => updateAtomCollider(accountData),
     "storage": (doc: Cloudsave, accountData: Map<string, any>) => updateStorage(accountData),
     "deathnote": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnote(accountData),
     "lab": (doc: Cloudsave, accountData: Map<string, any>) => updateLab(accountData),
@@ -165,6 +168,7 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], all
     accountData.set("playerNames", charNames);
     accountData.set("itemsData", allItems);
     accountData.set("servervars", serverVars);
+    accountData.set("OptLacc", data.get("OptLacc"));
 
     const validCharCount = [...Array(charNames.length)].map((_, i) => data.get(`Lv0_${i}`) as number[]).filter(notUndefined).length;
     Object.entries(keyFunctionMap).forEach(([key, toExecute]) => {
