@@ -1,7 +1,14 @@
 import { lavaLog, nFormatter } from "../../utility";
+import { AtomCollider } from "../atomCollider";
+import { Cooking } from "../cooking";
 import { ArtifactBase } from "../data/ArtifactRepo";
+import { GemStore } from "../gemPurchases";
 import { ImageData } from "../imageData";
+import { LootyInfo } from "../lootyTracker";
 import { ArtifactModel } from "../model/artifactModel";
+import { Player } from "../player";
+import { Sailing } from "../sailing";
+import { SkillsIndex } from "../SkillsIndex";
 
 export enum ArtifactStatus {
     Unobtained,
@@ -238,4 +245,45 @@ export class FunHippoeteArtifact extends Artifact {
     override getCalculatedBonusText = () => {
         return `N/A for now.`;
     }
+}
+
+export const updateArtifacts = (data: Map<string, any>) => {
+    const sailing = data.get("sailing") as Sailing;
+    const gemStore = data.get("gems") as GemStore;
+    const players = data.get("players") as Player[];
+    const cooking = data.get("cooking") as Cooking;
+    const collider = data.get("collider") as AtomCollider;
+    const looty = data.get("lootyData") as LootyInfo;
+
+
+    // Max chests
+    const chestPurchases = gemStore.purchases.find(upgrade => upgrade.index == 130)?.pucrhased ?? 0;
+    sailing.maxChests += Math.min(Math.round(5 + chestPurchases), 19);
+
+    // Sailing Related
+    (sailing.artifacts[27] as OperaMaskArtifact).goldOwned = sailing.loot[0];
+
+    // Skills related.
+    (sailing.artifacts[5] as GenieLampArtifact).sailingLevel = players[0].skills.get(SkillsIndex.Sailing)?.level ?? 0;
+    (sailing.artifacts[3] as FauxoryTuskArtifact).sailingLevel = players[0].skills.get(SkillsIndex.Sailing)?.level ?? 0;
+    (sailing.artifacts[23] as WeatherbookArtifact).gamingLevel = players[0].skills.get(SkillsIndex.Gaming)?.level ?? 0;
+
+    // Slab related.
+    (sailing.artifacts[2] as SlabInfluencedArtifact).lootyCount = looty.rawData.length;
+    (sailing.artifacts[10] as SlabInfluencedArtifact).lootyCount = looty.rawData.length;
+    (sailing.artifacts[18] as SlabInfluencedArtifact).lootyCount = looty.rawData.length;
+    (sailing.artifacts[20] as SlabInfluencedArtifact).lootyCount = looty.rawData.length;
+
+    // Highest level
+    const highestLevel = players.reduce((maxLevel, player) => maxLevel = player.level > maxLevel ? player.level : maxLevel, 0);
+    (sailing.artifacts[1] as ManekiKatArtifact).highestLevel = highestLevel;
+    (sailing.artifacts[11] as AshenUrnArtifact).highestLevel = highestLevel;
+
+    // Cooking related.
+    (sailing.artifacts[13] as TriagulonArtifact).turkeyOwned = cooking.meals[0].count;
+    
+    // Collider related
+    (sailing.artifacts[29] as TheTrueLanternArtifact).particlesOwned = collider.particles;
+
+    return sailing.artifacts;
 }
