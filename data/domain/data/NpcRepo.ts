@@ -2550,7 +2550,7 @@ export const initNpcRepo = () => {
         new NpcBase("Grasslands Gary", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "Blunder Hills",
                     "noQuest": 0,
                     "repeatable": "Unknown",
                     "type": "Unknown",
@@ -6509,7 +6509,7 @@ export const initNpcRepo = () => {
         new NpcBase("Omar Da Ogar", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "YumYum Desert",
                     "noQuest": 0,
                     "repeatable": "Unknown",
                     "type": "Unknown",
@@ -12912,7 +12912,7 @@ export const initNpcRepo = () => {
         new NpcBase("Nebula Neddy", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "Hyperion Nebula",
                     "noQuest": 0,
                     "repeatable": "Unknown",
                     "type": "Unknown",
@@ -13075,7 +13075,7 @@ export const initNpcRepo = () => {
         new NpcBase("Slargon", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "Smolderin' Plateau",
                     "noQuest": 0,
                     "repeatable": "Unknown",
                     "type": "Unknown",
@@ -13257,7 +13257,7 @@ export const initNpcRepo = () => {
         new NpcBase("Pirate Porkchop", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "Smolderin' Plateau",
                     "noQuest": 0,
                     "repeatable": "Unknown",
                     "type": "Unknown",
@@ -13434,7 +13434,7 @@ export const initNpcRepo = () => {
         new NpcBase("Poigu", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "Smolderin' Plateau",
                     "noQuest": 0,
                     "repeatable": "Unknown",
                     "type": "Unknown",
@@ -13568,7 +13568,7 @@ export const initNpcRepo = () => {
         new NpcBase("Muhmuguh", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "Smolderin' Plateau",
                     "noQuest": 0,
                     "repeatable": "Unknown",
                     "type": "Unknown",
