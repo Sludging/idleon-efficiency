@@ -1,4 +1,4 @@
-import { range } from "../utility";
+import { GroupByFunction, range } from "../utility";
 import { Arcade } from "./arcade";
 import { Cloudsave } from "./cloudsave";
 import { Construction, Library } from "./construction";
@@ -171,12 +171,14 @@ export const updateAccount = (data: Map<string, any>) => {
 
 
     // Check how many players are in each activity type.
-    players.forEach(player => {
-        if (player.currentMonster && player.currentMonster.details) {
-            account.activity[player.currentMonster.details.AFKtype] += 1;
+    GroupByFunction(players, function(player: Player) { return player.currentMonster && player.currentMonster.details ? player.currentMonster.details.AFKtype : undefined})
+    .forEach(players => {
+        const firstPlayer = players[0] ?? undefined;
+        if (firstPlayer && firstPlayer.currentMonster && firstPlayer.currentMonster.details) {
+            account.activity[firstPlayer.currentMonster.details.AFKtype] = players.length;
         }
         else {
-            account.activity[AFKTypeEnum.Error] += 1;
+            account.activity[AFKTypeEnum.Error] += players.length;
         }
     })
 
