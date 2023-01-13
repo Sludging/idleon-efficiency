@@ -39,6 +39,7 @@ import parseDivinity, { updateDivinity } from './divinity';
 import parseSailing, { updateSailing } from './sailing';
 import parseGaming from './gaming';
 import parseAtomCollider, { updateAtomCollider } from './atomCollider';
+import { updateArtifacts } from './sailing/artifacts';
 
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
@@ -148,6 +149,7 @@ const postProcessingMap: Record<string, Function> = {
     "divinity": (doc: Cloudsave, accountData: Map<string, any>) => updateDivinity(accountData),
     "family": (doc: Cloudsave, accountData: Map<string, any>) => parseFamily(accountData.get("players") as Player[]),
     "forge": (doc: Cloudsave, accountData: Map<string, any>) => updateForge(accountData.get("forge"), accountData.get("gems")),
+    "artifacts": (doc: Cloudsave, accountData: Map<string, any>) => updateArtifacts(accountData),
     "cooking": (doc: Cloudsave, accountData: Map<string, any>) => updateCooking(accountData),
     "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateSailing(accountData),
     "breeding": (doc: Cloudsave, accountData: Map<string, any>) => updateBreeding(accountData),
@@ -194,17 +196,6 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], all
     })
 
     // Do post parse processing (twice for some edge cases)
-    Object.entries(postProcessingMap).forEach(([key, toExecute]) => {
-        try {
-            accountData.set(key, toExecute(data, accountData));
-        }
-        catch (e) {
-            console.debug(e);
-            console.log(`Failed post-processing ${key}`);
-            accountData.set(key, undefined);
-        }
-    })
-
     Object.entries(postProcessingMap).forEach(([key, toExecute]) => {
         try {
             accountData.set(key, toExecute(data, accountData));
