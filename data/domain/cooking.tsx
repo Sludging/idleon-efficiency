@@ -176,10 +176,10 @@ export class Kitchen {
 
     constructor(public index: number) { }
 
-    getMealSpeed = (vialBonus: number, stampBonus: number, mealCookBonus: number, jewelBonus: number, cardBonus: number, kitchenEffBonus: number, jewelBonus2: number, diamonChef: number, achieve225: boolean, achieve224: boolean, atom8Bonus: number, artifact13Bonus: number) => {
+    getMealSpeed = (vialBonus: number, stampBonus: number, mealCookBonus: number, jewel0Bonus: number, cardBonus: number, kitchenEffBonus: number, jewel14Bonus: number, diamonChef: number, achieve225: boolean, achieve224: boolean, atom8Bonus: number, artifact13Bonus: number) => {
         const baseMath = 10 * (1 + (this.richelin ? 2 : 0)) * Math.max(1, diamonChef) * Math.max(1, atom8Bonus);
-        const moreMath = (1 + this.mealLevels / 10) * (1 + artifact13Bonus / 100); 
-        const bonusMath = (1 + (stampBonus + Math.max(0, jewelBonus2)) / 100) * (1 + mealCookBonus / 100) * Math.max(1, jewelBonus);
+        const moreMath = (1 + (this.mealLevels / 10)) * (1 + (artifact13Bonus / 100)); 
+        const bonusMath = (1 + (stampBonus + Math.max(0, jewel14Bonus)) / 100) * (1 + mealCookBonus / 100) * Math.max(1, jewel0Bonus);
         const cardAndAchiImpact = 1 + Math.min(cardBonus + (20 * (achieve225 ? 1 : 0)) + (10 * (achieve224 ? 1 : 0)), 100) / 100;
         return baseMath *
             moreMath *
@@ -413,13 +413,13 @@ export const updateCooking = (data: Map<string, any>) => {
     });
 
     // Meal speed
-    const vialBonus = alchemy.vials.filter(vial => vial.description.includes("Meal Cooking Speed")).reduce((sum, vial) => sum += vial.getBonus(), 0);
-    const diamonChef = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).find(bubble => bubble.name == "Diamond Chef")?.getBonus() ?? 0;
+    const vialBonus = alchemy.getVialBonusForKey("MealCook");
+    const diamonChef = alchemy.getBubbleBonusForKey("MealSpdz");
     const stampBonus = stamps.flatMap(tab => tab).filter(stamp => stamp.bonus.includes("Meal Cooking Speed")).reduce((sum, stamp) => sum += stamp.getBonus(), 0);
     const mealSpeedBonus = cooking?.meals.filter(meal => meal.bonusKey == "Mcook").reduce((sum, meal) => sum += meal.getBonus(), 0);
     const kitchenEfficientBonus = cooking?.meals.filter(meal => meal.bonusKey == "KitchenEff").reduce((sum, meal) => sum += meal.getBonus(), 0);
-    const jewelBonus = mainframe.jewels[0].getBonus(); // TODO: Remove hardcoding
-    const jewelBonus2 = mainframe.jewels[14].getBonus(); // TODO: Remove hardcoding
+    const jewel0Bonus = mainframe.jewels[0].getBonus(); // TODO: Remove hardcoding
+    const jewel14Bonus = mainframe.jewels[14].getBonus(); // TODO: Remove hardcoding
     const cardBonus = cards.find(card => card.id == "Boss4A")?.getBonus() ?? 0;
     const artifactBonus = sailing.artifacts[13].getBonus();
     const atomBonus = collider.atoms[8].getBonus();
@@ -436,7 +436,7 @@ export const updateCooking = (data: Map<string, any>) => {
 
     let totalContribution = 0;
     cooking.kitchens.forEach(kitchen => {
-        kitchen.mealSpeed = kitchen.getMealSpeed(vialBonus, stampBonus, mealSpeedBonus, jewelBonus, cardBonus, kitchenEfficientBonus, jewelBonus2, diamonChef, achievements[225].completed, achievements[224].completed, atomBonus, artifactBonus);
+        kitchen.mealSpeed = kitchen.getMealSpeed(vialBonus, stampBonus, mealSpeedBonus, jewel0Bonus, cardBonus, kitchenEfficientBonus, jewel14Bonus, diamonChef, achievements[225].completed, achievements[224].completed, atomBonus, artifactBonus);
         kitchen.fireSpeed = kitchen.getFireSpeed(fireVialBonus, fireStampBonus, fireSpeedMealBonus, cardBonus, kitchenEfficientBonus, diamonChef);
         kitchen.recipeLuck = kitchen.getLuck();
 
