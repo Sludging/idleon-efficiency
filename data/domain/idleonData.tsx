@@ -41,7 +41,7 @@ import parseGaming from './gaming';
 import parseAtomCollider, { updateAtomCollider } from './atomCollider';
 
 
-export const safeJsonParse = <T, >(doc: Cloudsave, key: string, emptyValue: T): T => {
+export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     try {
         return JSON.parse(doc.get(key))
     }
@@ -89,8 +89,8 @@ const keyFunctionMap: Record<string, Function> = {
     "traps": (doc: Cloudsave, charCount: number) => parseTraps([...Array(charCount)].map((_, i) => { return doc.get(`PldTraps_${i}`) })),
     "statues": (doc: Cloudsave, charCount: number) => parseStatues([...Array(charCount)].map((_, i) => safeJsonParse(doc, `StatueLevels_${i}`, [])), safeJsonParse(doc, `StuG`, [])),
     "anvil": (doc: Cloudsave, allItems: Item[], charCount: number) => parseAnvil(
-        [...Array(charCount)].map((_, i) => doc.get(`AnvilPA_${i}`)), 
-        [...Array(charCount)].map((_, i) => doc.get(`AnvilPAstats_${i}`)), 
+        [...Array(charCount)].map((_, i) => doc.get(`AnvilPA_${i}`)),
+        [...Array(charCount)].map((_, i) => doc.get(`AnvilPAstats_${i}`)),
         [...Array(charCount)].map((_, i) => doc.get(`AnvilPAselect_${i}`)),
         allItems),
     "timeAway": (doc: Cloudsave, charCount: number) => JSON.parse(doc.get('TimeAway')),
@@ -120,7 +120,7 @@ const keyFunctionMap: Record<string, Function> = {
     "saltLick": (doc: Cloudsave, charCount: number) => parseSaltLick(safeJsonParse(doc, "SaltLick", [])),
     "printer": (doc: Cloudsave, charCount: number) => parsePrinter(safeJsonParse(doc, "Print", []), charCount),
     "taskboard": (doc: Cloudsave, charCount: number) => parseTaskboard(safeJsonParse(doc, `TaskZZ0`, []), safeJsonParse(doc, `TaskZZ1`, []), safeJsonParse(doc, `TaskZZ2`, []), safeJsonParse(doc, `TaskZZ3`, []), safeJsonParse(doc, `TaskZZ4`, []), safeJsonParse(doc, `TaskZZ5`, [])),
-    "worship": (doc: Cloudsave, accountData: Map<string, any>, charCount: number) => parseWorship(safeJsonParse(doc,"TotemInfo", [])),
+    "worship": (doc: Cloudsave, accountData: Map<string, any>, charCount: number) => parseWorship(safeJsonParse(doc, "TotemInfo", [])),
     "construction": (doc: Cloudsave, charCount: number) => parseConstruction(safeJsonParse(doc, "Tower", []), doc.get("OptLacc")),
     "arcade": (doc: Cloudsave, charCount: number) => parseArcade(safeJsonParse(doc, "ArcadeUpg", []), doc.get("OptLacc")),
     "obols": (doc: Cloudsave, allItems: Item[], charCount: number) => parseObols(doc, charCount, allItems),
@@ -131,7 +131,7 @@ const keyFunctionMap: Record<string, Function> = {
     "breeding": (doc: Cloudsave, charCount: number) => parseBreeding(safeJsonParse(doc, "PetsStored", []), safeJsonParse(doc, "Pets", []), doc.get("OptLacc"), safeJsonParse(doc, "Territory", []), safeJsonParse(doc, "Breeding", [])),
     "sigils": (doc: Cloudsave, charCount: number) => parseSigils(safeJsonParse(doc, "CauldronP2W", []), safeJsonParse(doc, "CauldronJobs1", [])),
     "account": (doc: Cloudsave, allItems: Item[], charCount: number) => parseAccount(doc, allItems),
-    "divinity": (doc: Cloudsave, charCount: number) => parseDivinity(charCount, doc.get("Divinity") as number[] || [], [...Array(charCount)].map((_, index) =>doc.get(`AFKtarget_${index}`))),
+    "divinity": (doc: Cloudsave, charCount: number) => parseDivinity(charCount, doc.get("Divinity") as number[] || [], [...Array(charCount)].map((_, index) => doc.get(`AFKtarget_${index}`))),
     "sailing": (doc: Cloudsave, charCount: number) => parseSailing(safeJsonParse(doc, "Sailing", []), safeJsonParse(doc, "Boats", []), safeJsonParse(doc, "Captains", [])),
     "gaming": (doc: Cloudsave, charCount: number) => parseGaming(doc.get("Gaming") as any[] || [], safeJsonParse(doc, "GamingSprout", [])),
     "collider": (doc: Cloudsave, charCount: number) => parseAtomCollider(doc.get("Atoms") as number[] || [], doc.get("Divinity") as number[] || []),
@@ -194,6 +194,17 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], all
     })
 
     // Do post parse processing (twice for some edge cases)
+    Object.entries(postProcessingMap).forEach(([key, toExecute]) => {
+        try {
+            accountData.set(key, toExecute(data, accountData));
+        }
+        catch (e) {
+            console.debug(e);
+            console.log(`Failed post-processing ${key}`);
+            accountData.set(key, undefined);
+        }
+    })
+
     Object.entries(postProcessingMap).forEach(([key, toExecute]) => {
         try {
             accountData.set(key, toExecute(data, accountData));
