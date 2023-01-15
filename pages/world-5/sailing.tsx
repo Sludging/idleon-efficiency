@@ -42,7 +42,7 @@ function ShipsDisplay() {
                 {
                     sailing.boats.map((boat, index) => (
                         <ShadowBox background="dark-1" key={index} pad="medium" margin={{ right: 'small', bottom: 'small' }} gap="xsmall">
-                            <Text size="small">Boat {index + 1} (LV {(boat.lootUpgrades + boat.speedUpgrades).toString()})</Text>
+                            <Text size="small">Boat {boat.index + 1} (LV {(boat.lootUpgrades + boat.speedUpgrades).toString()})</Text>
                             <Grid columns={["35%", "15%", "20%", "30%"]} justifyContent="start" align="center">
                                 <Box direction="row" gap="xsmall" align='center'>
                                     <IconImage data={CaptainTrait.getLootImageData()} scale={0.7} />
@@ -110,7 +110,7 @@ function CaptainsDisplay() {
                 {
                     sailing.captains.map((captain, index) => (
                         <ShadowBox background="dark-1" key={index} pad="medium" margin={{ right: 'small', bottom: 'small' }} gap="xsmall">
-                            <Text size="small">Captain {index + 1}</Text>
+                            <Text size="small">Captain {captain.index + 1}</Text>
                             <Box direction="row" gap="small">
                                 <TextAndLabel
                                     label="Level"

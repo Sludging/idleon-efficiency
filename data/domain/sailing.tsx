@@ -290,7 +290,7 @@ export default function parseSailing(sailingData: number[][], boatData: number[]
     // [2,4,1,14,1290.5608459374048,23]
     boatData.forEach((boat, bIndex) => {
         if (bIndex < sailing.boatsUnlocked && (boat[3] + boat[5]) != 0) {
-            const boatCaptain = boat[0] < sailing.captains.length ? sailing.captains[boat[0]] : undefined;
+            const boatCaptain = sailing.captains.find(captain => captain.index == boat[0]);
             const targetIsland = boat[1] != -1 && boat[1] < sailing.islands.length ? sailing.islands[boat[1]] : undefined;
             sailing.boats.push(new Boat(bIndex, targetIsland, boat[4], boat[3], boat[5], boatCaptain));
         }
