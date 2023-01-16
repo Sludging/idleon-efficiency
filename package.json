@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_OPTIONS='--inspect' NODE_EXTRA_CA_CERTS=\"$(cat ./certs/.capath)\" node scripts/create-local-server.js",
+    "dev": "cross-env NODE_OPTIONS='--inspect' NODE_EXTRA_CA_CERTS=\"$(cat ./certs/.capath)\" node scripts/create-local-server.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -12,6 +12,7 @@
   "dependencies": {
     "@sentry/nextjs": "^6.14.3",
     "@types/styled-components": "^5.1.14",
+    "cross-env": "^7.0.3",
     "firebase": "^9.0.2",
     "firebaseui": "^5.0.0",
     "grommet": "^2.17.5",
