@@ -1,6 +1,7 @@
 import { Box, Text } from "grommet";
 import { css } from "styled-components";
 import { Player } from "../../data/domain/player";
+import IconImage from "./IconImage";
 
 export const customTabsTheme = {
     tab: {
@@ -51,12 +52,15 @@ export const CustomTabTitle = ({ label, isActive, player }: { label?: string, is
     if (player) {
         return (
             <Box direction="row" align="center" margin={{ vertical: 'xsmall' }}>
-                <Box width={{ max: '20px', min: '20px' }} margin={{ right: 'xsmall' }}>
-                    <Box className={player.getClassClass()} />
+                <Box margin={{ right: 'xsmall' }}>
+                    <IconImage data={player.getClassImageData()} scale={0.6} />
                 </Box>
-                <Text size="xsmall" color={isActive ? 'brand' : 'accent-2'}>
-                    {player.playerName ? player.playerName : `Character ${player.playerID}`}
-                </Text>
+                <Box margin={{ right: 'xsmall' }}>
+                    <Text size="xsmall" color={isActive ? 'brand' : 'accent-2'}>
+                        {player.playerName ? player.playerName : `Character ${player.playerID}`}
+                    </Text>
+                </Box>
+                {/* <IconImage data={player.getActivityIcon()} scale={0.4} /> */}
             </Box>
         )
     }

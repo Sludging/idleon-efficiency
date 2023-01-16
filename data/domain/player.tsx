@@ -182,11 +182,7 @@ export class Player {
             default: return '';
         }
     }
-
-    getClassClass = () => {
-        return `icons-3836 icons-ClassIcons${this.classId.valueOf()}`
-    }
-
+    
     getClassImageData = (): ImageData => {
         return {
             location: `ClassIcons${this.classId.valueOf()}`,
