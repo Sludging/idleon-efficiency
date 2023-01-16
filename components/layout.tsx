@@ -217,7 +217,7 @@ export default function Layout({
     }
 
     useEffect(() => {
-        if (appContext.status == AppStatus.LiveData || appContext.status == AppStatus.StaticData) {
+        if (appContext.status == AppStatus.LiveData || appContext.status == AppStatus.StaticData || appContext.status == AppStatus.NoData) {
             setValidState(true);
         }
         else {
