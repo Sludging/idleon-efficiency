@@ -166,7 +166,7 @@ const capacityToBagMapping: Record<string, Record<number, string>> = {
         2000: "MaxCapBagM7",
         5000: "MaxCapBagM8",
         10000: "MaxCapBagM9",
-        25000: "MaxCapBagM10",
+        20000: "MaxCapBagM10",
         50000: "MaxCapBag",
         100000: "MaxCapBag",
         250000: "MaxCapBag",
@@ -184,7 +184,7 @@ const capacityToBagMapping: Record<string, Record<number, string>> = {
         2000: "MaxCapBagF6",
         5000: "MaxCapBagF7",
         10000: "MaxCapBagF8",
-        25000: "MaxCapBagF9",
+        20000: "MaxCapBagF9",
         50000: "MaxCapBag",
         100000: "MaxCapBag",
         250000: "MaxCapBag",
@@ -202,7 +202,7 @@ const capacityToBagMapping: Record<string, Record<number, string>> = {
         2000: "MaxCapBagMi6",
         5000: "MaxCapBagMi7",
         10000: "MaxCapBagMi8",
-        25000: "MaxCapBagMi9",
+        20000: "MaxCapBagMi9",
         50000: "MaxCapBag",
         100000: "MaxCapBag",
         250000: "MaxCapBag",
@@ -220,7 +220,7 @@ const capacityToBagMapping: Record<string, Record<number, string>> = {
         2000: "MaxCapBagT6",
         5000: "MaxCapBagT7",
         10000: "MaxCapBagT8",
-        25000: "MaxCapBagT9",
+        20000: "MaxCapBagT9",
         50000: "MaxCapBag",
         100000: "MaxCapBag",
         250000: "MaxCapBag",
@@ -238,7 +238,7 @@ const capacityToBagMapping: Record<string, Record<number, string>> = {
         2000: "MaxCapBagFi6",
         5000: "MaxCapBagFi7",
         10000: "MaxCapBagFi8",
-        25000: "MaxCapBagFi9",
+        20000: "MaxCapBagFi9",
         50000: "MaxCapBag",
         100000: "MaxCapBag",
         250000: "MaxCapBag",
@@ -256,7 +256,7 @@ const capacityToBagMapping: Record<string, Record<number, string>> = {
         2000: "MaxCapBagB6",
         5000: "MaxCapBagB7",
         10000: "MaxCapBagB8",
-        25000: "MaxCapBagB9",
+        20000: "MaxCapBagB9",
         50000: "MaxCapBag",
         100000: "MaxCapBag",
         250000: "MaxCapBag",
@@ -274,7 +274,7 @@ const capacityToBagMapping: Record<string, Record<number, string>> = {
         2000: "MaxCapBagTr5",
         5000: "MaxCapBagTr6",
         10000: "MaxCapBagTr7",
-        25000: "MaxCapBagTr8",
+        20000: "MaxCapBagTr8",
         50000: "MaxCapBag",
         100000: "MaxCapBag",
         250000: "MaxCapBag",
@@ -292,7 +292,7 @@ const capacityToBagMapping: Record<string, Record<number, string>> = {
         2000: "MaxCapBagS5",
         5000: "MaxCapBagS6",
         10000: "MaxCapBagS7",
-        25000: "MaxCapBagS8",
+        20000: "MaxCapBagS8",
         50000: "MaxCapBag",
         100000: "MaxCapBag",
         250000: "MaxCapBag",
@@ -400,6 +400,7 @@ export class Capacity {
 
     constructor(bags?: BagCapacity) {
         this.bags = [];
+        console.log("Capacity", bags);
         this.bags.push(new Bag("Mining", bags?.Mining ?? 0, "Mining", SkillsIndex.Mining));
         this.bags.push(new Bag("Chopping", bags?.Chopping ?? 0, "Chopping", SkillsIndex.Chopping));
         this.bags.push(new Bag("Souls", bags?.Souls ?? 0, "Souls", SkillsIndex.Worship));
