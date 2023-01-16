@@ -415,27 +415,6 @@ export class Item {
         return bonusTotal;
     }
 
-    getClass = () => {
-        if (getEnhancerRegex().exec(this.internalName)) {
-            return `icons-3434 icons-${this.internalName}_x1`;
-        }
-        if (getRegex().exec(this.internalName)) {
-            return `icons-2836 icons-${this.internalName}`;
-        }
-        if (liquidRegex().exec(this.internalName)) {
-            return `icons-3636 icons-${this.internalName}_x1`;
-        }
-        // Cons dem for some reason has capital x.
-        if (this.internalName == "ObolPinkCons") {
-            return `icons-3636 icons-${this.internalName}_X1`;
-        }
-        // 35 doesn't have an image for some reason.
-        // if (this.internalName == "StampA35") {
-        //     return `icons-3636 icons-StampA34_x1`;    
-        // }
-        return `icons-7272 icons-${this.internalName}`;
-    }
-
     getImageData = () => {
         return Item.getImageData(this.internalName);
     }

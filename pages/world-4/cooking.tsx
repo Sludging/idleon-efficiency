@@ -25,9 +25,11 @@ function KitchenUpgrade({ title, level, spiceIndex, cost, costColor }: { title: 
                 <Text size="xsmall">{title} {level}</Text>
             </Box>
             <Box direction="row" justify="between">
-                <Box width={{ max: '25px' }}>
-                    <Box className={`icons-3636 icons-CookingSpice${spiceIndex}`} />
-                </Box>
+                <IconImage data={{
+                    location: `CookingSpice${spiceIndex}`,
+                    width: 36,
+                    height: 36
+                }} scale={0.6} />
                 <Text color={costColor} >{nFormatter(cost, "Big")}</Text>
             </Box>
         </Box>
@@ -240,7 +242,7 @@ function Cooking() {
                                                             {meal.timeToPurple <= 0 && meal.timeToVoid > 0 && <Text>Time to Void: {toTime(meal.timeToVoid * 3600)}</Text>}
                                                             {meal.ladlesToNextMilestone > 0 && <Text size="small">{meal.ladlesToNextMilestone} Ladles to next milestone ({meal.zerkerLadlesToNextMilestone} if using {cooking.bestBerserker?.playerName ?? "zerker"})</Text>}
                                                         </Box>
-                                                        <Text size="xsmall">* {meal.cookingContribution > 0 ?  "The time is calculated based on your current cooking speed for this meal." : "The time is calculated assuming all kitchens are cooking the same meal." }</Text>
+                                                        <Text size="xsmall">* {meal.cookingContribution > 0 ? "The time is calculated based on your current cooking speed for this meal." : "The time is calculated assuming all kitchens are cooking the same meal."}</Text>
                                                     </Box> :
                                                     <Box>
                                                         <Text>Bonus: {meal.getBonusText()}</Text>
