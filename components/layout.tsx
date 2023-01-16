@@ -226,13 +226,6 @@ export default function Layout({
         setLastUpdated(appContext.data.getLastUpdated() as string)
     }, [authData, appContext])
 
-    if (authData?.authStatus == AuthStatus.Loading || appContext.status == AppStatus.Loading) {
-        return (
-            <Box pad="large" fill align="center">
-                <Text size="large">Loading Data</Text>
-            </Box>);
-    }
-
     if (authData?.authStatus == AuthStatus.NoUser && appContext.status == AppStatus.NoData && router.pathname != "/") {
         router.push('/');
     }
@@ -301,6 +294,11 @@ export default function Layout({
                 </Box>
             </Header>
             <Main>
+                {!validState && (
+                    <Box pad="large" fill align="center">
+                        <Text size="large">Loading Data</Text>
+                    </Box>)
+                }
                 {validState && (size === 'small' ?
                     <Box justify="end">
                         <Menu
@@ -330,13 +328,16 @@ export default function Layout({
                                 </Nav>
                             </ThemeContext.Extend>
                         </Box>
-                    </Box>)
-                }
-                <Box width={{ max: (!specialRoutes.includes(router.pathname) && router.pathname != '/') ? '1440px' : '' }} margin={{ left: 'auto', right: 'auto' }} fill="horizontal">
-                    <Box pad={{ right: (!specialRoutes.includes(router.pathname) && router.pathname != '/') ? 'large' : '', left: (!specialRoutes.includes(router.pathname) && router.pathname != '/') ? 'large' : '', bottom: 'medium' }}>
-                        {children}
                     </Box>
-                </Box>
+                    )
+                }
+                {validState &&
+                    <Box width={{ max: (!specialRoutes.includes(router.pathname) && router.pathname != '/') ? '1440px' : '' }} margin={{ left: 'auto', right: 'auto' }} fill="horizontal">
+                        <Box pad={{ right: (!specialRoutes.includes(router.pathname) && router.pathname != '/') ? 'large' : '', left: (!specialRoutes.includes(router.pathname) && router.pathname != '/') ? 'large' : '', bottom: 'medium' }}>
+                            {children}
+                        </Box>
+                    </Box>
+                }
             </Main>
             <Footer height={{ min: "82px" }} background="dark-1">
                 <Box width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} direction="row" justify='between' fill="horizontal" align="center" pad="small">
