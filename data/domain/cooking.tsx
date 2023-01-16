@@ -425,7 +425,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const atomBonus = collider.atoms[8].getBonus();
 
     // Fire speed
-    const fireVialBonus = alchemy.vials.filter(vial => vial.description.includes("New Recipe Cooking Speed")).reduce((sum, vial) => sum += vial.getBonus(), 0);
+    const fireVialBonus = alchemy.getVialBonusForKey("RecCook");
     const fireStampBonus = stamps.flatMap(tab => tab).filter(stamp => stamp.bonus.includes("New Recipe Cooking Speed")).reduce((sum, stamp) => sum += stamp.getBonus(), 0);
     const fireSpeedMealBonus = cooking?.meals.filter(meal => meal.bonusKey == "Rcook").reduce((sum, meal) => sum += meal.getBonus(), 0);
 

@@ -290,7 +290,7 @@ export default function parseSailing(sailingData: number[][], boatData: number[]
     // [2,4,1,14,1290.5608459374048,23]
     boatData.forEach((boat, bIndex) => {
         if (bIndex < sailing.boatsUnlocked && (boat[3] + boat[5]) != 0) {
-            const boatCaptain = boat[0] < sailing.captains.length ? sailing.captains[boat[0]] : undefined;
+            const boatCaptain = sailing.captains.find(captain => captain.index == boat[0]);
             const targetIsland = boat[1] != -1 && boat[1] < sailing.islands.length ? sailing.islands[boat[1]] : undefined;
             sailing.boats.push(new Boat(bIndex, targetIsland, boat[4], boat[3], boat[5], boatCaptain));
         }
@@ -312,7 +312,7 @@ export const updateSailing = (data: Map<string, any>) => {
     // Speed base math
     const purrmepPlayer = divinity.gods[6].linkedPlayers.at(0); // purrmep is limited to only 1 player linked.
     const cardBonus = cards.filter(card => card.data.effect.includes("Sailing Speed (Passive)")).reduce((sum, card) => sum += card.getBonus(), 0);
-    const divinityMinorBonus = purrmepPlayer ? divinity.gods[6].getPassiveBonus(purrmepPlayer) : 0;
+    const divinityMinorBonus = purrmepPlayer ? divinity.gods[6].getMinorLinkBonus(purrmepPlayer) : 0;
     const stampBonus = stamps.flatMap(tab => tab).reduce((sum, stamp) => sum += stamp.data.effect == "SailSpd" ? stamp.getBonus() : 0, 0);
     const mealBonus = cooking.getMealBonusForKey("Sailing");
     const firstMath = (1 + (divinityMinorBonus + cardBonus + alchemy.getBubbleBonusForKey("Y1")) / 125) * (1 + divinity.gods[4].getBlessingBonus() / 100);
