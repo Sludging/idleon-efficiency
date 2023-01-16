@@ -34,6 +34,9 @@ export const territoryNiceNames = [
     "Nebulon Mantle",
     "Starfield Skies",
     "Shores Of Eternity",
+    "Molten Bay",
+    "Smokey Lake",
+    "Wurm Catacombs"
 ]
 
 

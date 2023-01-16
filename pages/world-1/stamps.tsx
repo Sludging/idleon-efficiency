@@ -31,13 +31,6 @@ function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stam
     const allItems = theData.get("itemsData") as Item[];
     const stampItem = allItems.find(item => item.internalName == stamp.raw_name);
 
-    const getCardClass = () => {
-        let className = `icons-${stamp.raw_name}_x1`;
-        if (stamp.raw_name == "StampA35")
-            className = "icons-StampA34_x1"; // StampA35 doesn't have an image for some reason.
-        return `icons-3636 ${className}`;
-    }
-
     function TipContent({ stamp, faceLeft }: { stamp: Stamp, faceLeft: boolean }) {
         if (stamp.level == 0) {
             if (stampItem && stampItem.sources.sources && stampItem.sources.sources.length > 0) {
