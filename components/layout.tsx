@@ -226,14 +226,6 @@ export default function Layout({
         setLastUpdated(appContext.data.getLastUpdated() as string)
     }, [authData, appContext])
 
-    // if (authData?.authStatus == AuthStatus.Loading || appContext.status == AppStatus.Loading) {
-    //     return (
-    //         <Box pad="large" fill align="center">
-    //             <Text size="large">Loading Data</Text>
-    //         </Box>);
-    //     setLoadingState(true)
-    // }
-
     if (authData?.authStatus == AuthStatus.NoUser && appContext.status == AppStatus.NoData && router.pathname != "/") {
         router.push('/');
     }
