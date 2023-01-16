@@ -29,10 +29,6 @@ export class NPC {
     convertedRewards: Record<string, Item[]> = {};
     constructor(public name: string, public data: NpcModel) { }
 
-    getClass = () => {
-        return `icons-5050 icons-${this.name.replace(/ /g, "_").toLowerCase()}`
-    }
-
     getImageData = (): ImageData => {
         return {
             location: this.name.replace(/ /g, "_").toLowerCase(),
