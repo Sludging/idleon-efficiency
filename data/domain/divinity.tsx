@@ -30,7 +30,11 @@ export class DivinityGod {
         return godData;
     }
 
-    getPassiveBonus = (player: Player) => {
+    getMaxMinorLinkBonusText = () => {
+        return this.data.passiveBonus.replace(/{/g, this.data.passiveMax.toString());
+    }
+
+    getMinorLinkBonus = (player: Player) => {
         const divinityLevel = player.skills.get(SkillsIndex.Divinity)?.level ?? 0
         const hasActiveBubble = player.activeBubbles.filter(bubble => bubble.data.bonusKey == "Y2ACTIVE").length > 0;
 
