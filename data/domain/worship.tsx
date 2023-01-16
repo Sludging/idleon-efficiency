@@ -2,10 +2,11 @@ import { notUndefined, round } from "../utility";
 import { Alchemy, AlchemyConst, Bubble, CauldronIndex } from "./alchemy";
 import { MapDataBase } from "./data/MapDataRepo";
 import { MapInfo } from "./maps";
+import { SkullItemModel } from "./model/skullItemModel";
 import { Player } from "./player";
 import { SkillsIndex } from "./SkillsIndex";
 import { Stamp, StampConsts, StampTab } from "./stamps";
-import { ClassIndex, TalentConst } from "./talents";
+import { TalentConst } from "./talents";
 
 const getActiveBubbles = (alchemy: Alchemy, activeBubbleString: string[]): Bubble[] => {
     return activeBubbleString.map((bubbleString, _) => {
@@ -16,38 +17,15 @@ const getActiveBubbles = (alchemy: Alchemy, activeBubbleString: string[]): Bubbl
     }).filter(notUndefined);
 }
 
-const SkullChargeMap: Record<string, number> = {
-    "WorshipSkull1": 100,
-    "WorshipSkull2": 200,
-    "WorshipSkull3": 400,
-    "WorshipSkull4": 750,
-    "WorshipSkull5": 1250,
-    "WorshipSkull6": 1750,
-    "WorshipSkull7": 2500,
-    "WorshipSkull8": 1000,
-}
-
-
-const SkullSpeedMap: Record<string, number> = {
-    "WorshipSkull1": 4,
-    "WorshipSkull2": 5,
-    "WorshipSkull3": 5,
-    "WorshipSkull4": 6,
-    "WorshipSkull5": 7,
-    "WorshipSkull6": 7,
-    "WorshipSkull7": 8,
-    "WorshipSkull8": 2,
-}
-
 const totemNames: string[] = "Goblin_Gorefest Wakawaka_War Acorn_Assault Frosty_Firefight Clash_of_Cans Tower_Defence_6".split(" ");
 const totemMapIds: number[] = [26, 63, 30, 107, 155];
 
-const worshipBaseInfo: string[][] = ["4 130 goblinG 0 170 570 25 60 1".split(" "),
-"7 70 moonman 21 42 357 40 250 10".split(" "),
-"13 40 acorn 38 655 200 60 1000 30".split(" "),
-"25 190 snowball 56 42 357 90 3000 45".split(" "),
-"40 300 w4b2 74 2 493 120 8000 60".split(" "),
-"70 130 goblinG 91 42 357 300 25000 75".split(" ")
+const worshipBaseInfo: string[][] = ["3 130 goblinG 0 170 570 25 60 1".split(" "),
+"5 70 moonman 21 42 357 40 250 10".split(" "),
+"9 40 acorn 38 655 200 60 1000 30".split(" "),
+"18 190 snowball 56 42 357 90 3000 40".split(" "),
+"34 300 w4b2 74 2 493 120 8000 50".split(" "),
+"55 45 w5b3 91 158 362 250 25000 60".split(" ")
 ]
 
 export class Totem {
@@ -116,8 +94,7 @@ export class Worship {
         return Math.min(currentCharge + chargeRate * (timeAwayInSeconds / 3600), maxCharge);
     }
 
-    static getChargeRate = (skullInternalName: string, worshipLevel: number = 0, popeRate: number = 0, cardBonus: number = 0, stampBonus: number = 0, talentBonus: number = 0) => {
-        const skullSpeed = SkullSpeedMap[skullInternalName];
+    static getChargeRate = (skullSpeed: number, worshipLevel: number = 0, popeRate: number = 0, cardBonus: number = 0, stampBonus: number = 0, talentBonus: number = 0) => {
         if (skullSpeed < 3) {
             const speedMath = 5.7 + Math.pow(4 - skullSpeed, 2.2);
             const levelMath = (0.9 * Math.pow(worshipLevel, 0.5)) / (Math.pow(worshipLevel, 0.5) + 250);
@@ -131,10 +108,9 @@ export class Worship {
         return base * Math.max(1, popeRate) * (1 + (cardBonus + stampBonus) / 100) * Math.max(talentBonus, 1)
     }
 
-    static getMaxCharge = (skullInternalName: string, cardBonus: number = 0, buffBonus: number = 0, stampBonus: number = 0, alchemyBonus: number = 0, worshipLevel: number = 0, popeRate: number = 0, postofficeBonus: number = 0) => {
-        const skullChargeBonus = SkullChargeMap[skullInternalName];
+    static getMaxCharge = (skullMaxCharge: number, cardBonus: number = 0, buffBonus: number = 0, stampBonus: number = 0, alchemyBonus: number = 0, worshipLevel: number = 0, popeRate: number = 0, postofficeBonus: number = 0) => {
         const base = buffBonus + (stampBonus + alchemyBonus * Math.floor(worshipLevel / 10));
-        return Math.floor(Math.max(50, cardBonus + postofficeBonus + (base + skullChargeBonus * Math.max(popeRate, 1))));
+        return Math.floor(Math.max(50, cardBonus + postofficeBonus + (base + skullMaxCharge * Math.max(popeRate, 1))));
     }
 }
 
@@ -166,18 +142,21 @@ export const updateWorship = (data: Map<string, any>) => {
             const popeFromActive = getActiveBubbles(alchemy, player.activeBubblesString).find(x => x.name == "Call Me Pope");
             const popeBonus = popeFromActive ? alchemy.getBonusForPlayer(player, CauldronIndex.HighIQ, AlchemyConst.CallMePope) : 0;
 
+            // Make skull info available.
+            const playerSkull = player.gear.tools[5] ? (player.gear.tools[5].data.item as SkullItemModel) : undefined;
+
             // max charge
             const maxChargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "SoulCard4")?.getBonus() ?? 0;
             const talentChargeBonus = player.activeBuffs.find(x => x.skillIndex == TalentConst.ChargeSiphonIndex)?.getBonus(false, true) ?? 0;
             const postOfficeBonus = player.postOffice[18].bonuses[1].getBonus(player.postOffice[18].level, 1);
-            const maxCharge = player.gear.tools[5] ? Worship.getMaxCharge(player.gear.tools[5].internalName, maxChargeCardBonus, talentChargeBonus, praydayStamp.getBonus(worshipLevel), gospelLeaderBonus, worshipLevel, popeBonus, postOfficeBonus) : 0;
+            const maxCharge = playerSkull ? Worship.getMaxCharge(playerSkull.maxCharge, maxChargeCardBonus, talentChargeBonus, praydayStamp.getBonus(worshipLevel), gospelLeaderBonus, worshipLevel, popeBonus, postOfficeBonus) : 0;
 
             // charge rate
             const flowinStamp = stamps[StampTab.Skill][StampConsts.FlowinIndex];
             const chargeSpeedTalent = player.talents.find(x => x.skillIndex == TalentConst.NearbyOutletIndex);
             const talentBonus = chargeSpeedTalent?.getBonus() ?? 0;
             const chargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "SoulCard5")?.getBonus() ?? 0;
-            const chargeRate = player.gear.tools[5] ? Worship.getChargeRate(player.gear.tools[5].internalName, worshipLevel, popeBonus, chargeCardBonus, flowinStamp.getBonus(worshipLevel), talentBonus) : 0;
+            const chargeRate = playerSkull ? Worship.getChargeRate(playerSkull.Speed, worshipLevel, popeBonus, chargeCardBonus, flowinStamp.getBonus(worshipLevel), talentBonus) : 0;
             worship.playerData.push({
                 maxCharge: maxCharge,
                 chargeRate: chargeRate,

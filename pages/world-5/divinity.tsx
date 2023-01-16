@@ -114,7 +114,9 @@ function GodDisplay() {
                                     <TextAndLabel textSize='small' text={god.data.majorBonus} label="Link Bonus" />
                                 </Box>
                                 <Box margin={{ bottom: 'small', right: 'small' }}>
-                                    <TextAndLabel textSize='small' text={god.data.passiveBonus} label="Passive Bonus" />
+                                    <TextAndLabel textSize='small' text={god.getMaxMinorLinkBonusText()} label="Minor Link Bonus" tooltip={
+                                        <Text>This is the max possible bonus, each character gets a reduced amount based on their divinity level.</Text>
+                                    } />
                                 </Box>
                                 <Box margin={{ bottom: 'small', right: 'small' }}>
                                     <TextAndLabel textSize='small' text={`${god.blessLevel}/100`} label="Blessing Level" />

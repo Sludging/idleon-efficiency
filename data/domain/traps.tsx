@@ -1,3 +1,4 @@
+import { ImageData } from "./imageData";
 import { Item } from "./items";
 
 export enum TrapSet {
@@ -15,39 +16,39 @@ const trapBoxInfo = [
         [1200, 1, 1, 0],
         [3600, 2, 2, 0],
         [28800, 10, 8, 0],
-        [72e3, 20, 15, 0],
+        [72e3, 20, 15, 0]
     ],
     [
         [1200, 1, 2, 1],
         [3600, 2, 4, 1],
         [28800, 10, 16, 1],
         [72e3, 20, 30, 1],
-        [144e3, 35, 50, 1],
+        [144e3, 35, 50, 1]
     ],
     [
         [10800, 5, 5, 0],
         [216e3, 50, 40, 0],
         [432e3, 100, 80, 0],
         [432e3, 200, 0, 0],
-        [432e3, 0, 200, 0],
+        [432e3, 0, 200, 0]
     ],
     [
         [28800, 0, 40, 0],
         [72e3, 0, 75, 0],
         [158e3, 0, 120, 0],
-        [518e3, 0, 350, 0],
+        [518e3, 0, 350, 0]
     ],
     [
         [10800, 5, 10, 1],
         [216e3, 50, 80, 1],
         [432e3, 100, 160, 1],
-        [72e3, 1, 60, 1],
+        [72e3, 1, 60, 1]
     ],
     [
         [3600, 3, 3, 0],
         [36e3, 15, 12, 0],
         [108e3, 40, 30, 0],
-        [72e4, 220, 200, 0],
+        [72e4, 220, 200, 0]
     ],
     [
         [1200, 2, 4, 1],
@@ -55,7 +56,7 @@ const trapBoxInfo = [
         [36e3, 21, 38, 1],
         [144e3, 70, 125, 1],
         [576e3, 250, 375, 1],
-        [2419e3, 550, 1150, 1],
+        [2419e3, 550, 1150, 1]
     ],
 ];
 
@@ -80,6 +81,14 @@ export class Trap {
         return this.timeSincePut >= this.trapDuration;
     }
 
+    getCritterImageData = (): ImageData => {
+        return {
+            location: `${this.critterName}_x1`,
+            height: 36,
+            width: 36,
+        }
+    }
+
     static getMaxTraps = (trap: Item | undefined) => {
         if (trap == undefined) {
             return 1;
@@ -92,6 +101,7 @@ export class Trap {
             case "TrapBoxSet5": return 5;
             case "TrapBoxSet6": return 6;
             case "TrapBoxSet7": return 7;
+            case "TrapBoxSet8": return 7;
             default: return 1;
         }
     }

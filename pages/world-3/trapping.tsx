@@ -19,6 +19,7 @@ import ShadowBox from '../../components/base/ShadowBox';
 import { Player } from '../../data/domain/player';
 import { SkillsIndex } from "../../data/domain/SkillsIndex";
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
+import IconImage from '../../components/base/IconImage';
 
 interface PlayerTrapProps {
     traps: Array<Trap>
@@ -47,7 +48,7 @@ function PlayerTraps(props: PlayerTrapProps) {
     }
 
     return (
-        <Grid columns={{ count: 8, size: ["50px", "12.5%"] }} gap="small" justify="start">
+        <Grid columns={{ count: 9, size: ["50px", "12.5%"] }} gap="small" justify="start">
             {
                 props.traps.map((trap, index) => {
                     if (!trap.placed && index >= props.maxTraps) {
@@ -78,9 +79,7 @@ function PlayerTraps(props: PlayerTrapProps) {
                                         size='medium'
                                         direction={TipDirection.Down}
                                         heading='Trap Info'>
-                                        <Box width={{ max: size == "small" ? '30px' : '50px' }} >
-                                            <Box className={`icons-3636 icons-${trap.critterName}_x1`} />
-                                        </Box>
+                                        <IconImage data={trap.getCritterImageData()} />
                                     </TipDisplay>
                                     <Text textAlign='center' size="xsmall">{formatTime(trap.trapDuration - trap.timeSincePut)}</Text>
                                 </Box>
@@ -136,10 +135,21 @@ function Traps() {
                                 const maxTraps = Trap.getMaxTraps(boxSet);
                                 return (
                                     <TableRow key={`traps_${index}`}>
-                                        <TableCell><Box><Text size="small">{playerNames[trapsData[0]?.playerID]}</Text><Text title={"Trapping level"} size="small">(Level: {skillLevel})</Text></Box></TableCell>
-                                        <TableCell><Box title={boxSet?.displayName} width={{ max: '50px', min: '50px' }}><Box className={boxSet?.getClass()} /></Box></TableCell>
                                         <TableCell>
-                                            <PlayerTraps traps={trapsData} maxTraps={maxTraps+1} />
+                                            <Box>
+                                                <Text size="small">{playerNames[trapsData[0]?.playerID]}</Text>
+                                                <Text title={"Trapping level"} size="small">(Level: {skillLevel})</Text>
+                                            </Box>
+                                        </TableCell>
+                                        <TableCell>
+                                            {boxSet &&
+                                                <Box title={boxSet.displayName}>
+                                                    <IconImage data={boxSet.getImageData()} />
+                                                </Box>
+                                            }
+                                        </TableCell>
+                                        <TableCell>
+                                            <PlayerTraps traps={trapsData} maxTraps={maxTraps + 1} />
                                         </TableCell>
                                     </TableRow>
                                 )
