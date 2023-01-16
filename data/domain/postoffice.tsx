@@ -28,7 +28,7 @@ export class BoxBonus {
         let bonusLevel = level - Math.round(this.data.investmentReq);
 
         // Bonus isn't unlocked yet.
-        if (bonusLevel < 0) {
+        if (bonusLevel <= 0) {
             return 0;
         }
         return lavaFunc(this.data.func, bonusLevel, this.data.x1, this.data.x2, round);
