@@ -189,7 +189,7 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], all
             }
         }
         catch (e) {
-            console.log(e);
+            console.debug(e);
             console.log(`Failed parsing ${key}`);
             accountData.set(key, undefined);
         }
