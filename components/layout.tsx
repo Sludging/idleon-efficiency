@@ -245,7 +245,10 @@ export default function Layout({
                     </Link>
                     {validState &&
                         <Box direction="row" gap="xlarge" pad="medium">
-                            <TextAndLabel textColor='accent-3' textSize='xsmall' labelSize='xsmall' label='Last Updated' text={lastUpdated} />
+                            {
+                                appContext.status != AppStatus.NoData && <TextAndLabel textColor='accent-3' textSize='xsmall' labelSize='xsmall' label='Last Updated' text={lastUpdated} />
+                            }
+
                             {
                                 appContext.status == AppStatus.LiveData &&
                                 <Box direction="row">
@@ -299,7 +302,7 @@ export default function Layout({
                         <Text size="large">Loading Data</Text>
                     </Box>)
                 }
-                {validState && (size === 'small' ?
+                {validState && appContext.status != AppStatus.NoData && (size === 'small' ?
                     <Box justify="end">
                         <Menu
                             a11yTitle="Navigation Menu"
