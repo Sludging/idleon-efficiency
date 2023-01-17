@@ -40,7 +40,7 @@ import parseSailing, { updateSailing } from './sailing';
 import parseGaming from './gaming';
 import parseAtomCollider, { updateAtomCollider } from './atomCollider';
 import { updateArtifacts } from './sailing/artifacts';
-
+import parseConstellations from './constellations';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     try {
@@ -115,7 +115,7 @@ const keyFunctionMap: Record<string, Function> = {
     },
     "shrines": (doc: Cloudsave, charCount: number) => parseShrines(safeJsonParse(doc, "Shrine", [])),
     "storage": (doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], charCount: number) => parseStorage(doc, accountData.get("playerNames"), allItems, JSON.parse(doc.get("InvStorageUsed"))),
-    "constellations": (doc: Cloudsave, charCount: number) => safeJsonParse(doc, "SSprog", []),
+    "constellations": (doc: Cloudsave, accountData: Map<string, any>, charCount: number) => parseConstellations(safeJsonParse(doc, "SSprog", []), accountData.get("players") as Player[]),
     "quests": (doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], charCount: number) => parseQuests(doc, accountData, allItems, charCount),
     "refinery": (doc: Cloudsave, charCount: number) => parseRefinery(safeJsonParse(doc, "Refinery", [])),
     "saltLick": (doc: Cloudsave, charCount: number) => parseSaltLick(safeJsonParse(doc, "SaltLick", [])),
@@ -178,7 +178,7 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], all
             if (key == "players" || key == "storage" || key == "quests") {
                 accountData.set(key, toExecute(data, accountData, allItems, validCharCount));
             }
-            else if (key == "worship") {
+            else if (key == "worship" || key == "constellations") {
                 accountData.set(key, toExecute(data, accountData, validCharCount));
             }
             else if (key == "lootyData" || key == "obols" || key == "alchemy" || key == "forge" || key == "stamps" || key == "anvil" || key == "account") {
@@ -189,7 +189,7 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], all
             }
         }
         catch (e) {
-            console.debug(e);
+            console.log(e);
             console.log(`Failed parsing ${key}`);
             accountData.set(key, undefined);
         }
