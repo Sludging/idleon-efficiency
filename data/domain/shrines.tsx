@@ -2,6 +2,8 @@ import { round } from '../utility';
 import { initShrineRepo, ShrineBase } from './data/ShrineRepo';
 import { ImageData } from './imageData';
 import { Lab } from './lab';
+import { Sailing } from './sailing';
+import { ArtifactStatus } from './sailing/artifacts';
 
 export const ShrineConstants = {
     DmgShrine: 0,
@@ -17,9 +19,15 @@ export class Shrine {
     accumulatedHours: number = 0;
 
     worldTour: boolean = false;
+    artifactAcquired: boolean = false;
     constructor(public name: string, public boost: string, public initialBonus: number, public increment: number, public iconName: string) { }
 
     isShrineActive = (map: number | undefined = undefined) => {
+        // If user has Moai Head, shrines are always active.
+        if (this.artifactAcquired) {
+            return true;
+        }
+
         // if map is valid, and we are on the same map, shrine is active.
         if (map != undefined && map == this.currentMap) {
             return true;
@@ -81,8 +89,14 @@ export default function parseShrines(rawData: Array<Array<number>>) {
 export const updateShrines = (data: Map<string, any>) => {
     const shrines = data.get("shrines") as Shrine[];
     const lab = data.get("lab") as Lab;
+    const sailing = data.get("sailing") as Sailing;
 
     const worldTour = lab.bonuses.find(bonus => bonus.name == "Shrine World Tour")?.active ?? false;
-    shrines.forEach(shrine => shrine.worldTour = worldTour);
+    const shrineArtifact = sailing.artifacts[0];
+    shrines.forEach(shrine => {
+        shrine.worldTour = worldTour
+        shrine.artifactAcquired = shrineArtifact.status != ArtifactStatus.Unobtained;
+    });
+    
     return shrines;
 }
