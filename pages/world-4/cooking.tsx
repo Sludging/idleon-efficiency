@@ -204,8 +204,8 @@ function Cooking() {
             <Box margin={{ bottom: 'medium' }} gap="small">
                 <Text>Meals</Text>
                 <Text size="xsmall">Sort</Text>
-                <Box direction="row" gap="small">
-                    <Select
+                <Box direction="row" gap="medium">
+                    <Select size="small"
                         placeholder="Filter by Type"
                         clear
                         value={sort}
