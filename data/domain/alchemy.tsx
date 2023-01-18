@@ -150,7 +150,7 @@ export class Bubble {
     }
 
     getBonusText = (bonus: number = this.getBonus(true)): string => {
-        let titleText = this.description.replace(/{/g, bonus.toString());
+        let titleText = this.description.replace(/{/g, nFormatter(bonus));
         return handleToolBubbles(titleText, this.name);
     }
 
@@ -351,8 +351,12 @@ export class Alchemy {
             return [0,2,4,7,14].includes(bubble);
         }
 
-        if (cauldron == CauldronIndex.Quicc || cauldron == CauldronIndex.HighIQ) {
+        if (cauldron == CauldronIndex.Quicc) {
             return [0,6,9,12,14].includes(bubble);
+        }
+
+        if (cauldron == CauldronIndex.HighIQ) {
+            return [0,2,6,12,14].includes(bubble);
         }
 
         return false

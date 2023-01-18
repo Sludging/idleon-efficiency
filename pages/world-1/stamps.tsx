@@ -61,7 +61,7 @@ function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stam
                 size="medium"
                 visibility={stamp.name == "Blank" || stamp.name == "FILLER" ? 'none' : undefined}
             >
-                <Box direction="row" align="center" gap="xsmall">
+                <Box direction="row" align="center" gap="xsmall" style={{opacity: stamp.level > 0 ? 1 : 0.2}}>
                     <IconImage data={stamp.getImageData()} scale={0.4} />
                     <Text size="small">{stamp.level}</Text>
                 </Box>
