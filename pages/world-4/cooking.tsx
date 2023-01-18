@@ -3,6 +3,7 @@ import {
     Grid,
     Heading,
     ResponsiveContext,
+    Select,
     Text,
 } from 'grommet'
 import { NextSeo } from 'next-seo';
@@ -158,6 +159,7 @@ function KitchensDisplay() {
 
 function Cooking() {
     const [cooking, setCooking] = useState<CookingDomain>();
+    const [sort, setSort] = useState<string>('None');
     const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
 
@@ -201,6 +203,16 @@ function Cooking() {
             </Box>
             <Box margin={{ bottom: 'medium' }} gap="small">
                 <Text>Meals</Text>
+                <Text size="xsmall">Sort</Text>
+                <Box direction="row" gap="small">
+                    <Select
+                        placeholder="Filter by Type"
+                        clear
+                        value={sort}
+                        options={["Level", "Least Time to Cook"]}
+                        onChange={({ value: nextValue }) => { setSort(nextValue);}}
+                    />
+                </Box>
                 <Grid columns={size == "small" ? "1/2" : "1/3"}>
                     <Box direction="row" pad={{ left: '70px', right: '25px' }} justify="between" align="center" margin={{ right: 'small', bottom: 'small' }}>
                         <Text color="accent-2" size="xsmall">Bonus</Text>
@@ -217,7 +229,18 @@ function Cooking() {
                         </Box>
                     }
                     {
-                        cooking?.meals.filter(meal => (meal.level > 0 || meal.timeOptimalSpices.length > 0)).map((meal, index) => (
+                        cooking?.meals.filter(meal => (meal.level > 0 || meal.timeOptimalSpices.length > 0))
+                        .sort((meal1, meal2) => {
+                            switch (sort) {
+                                case "Level":
+                                    return meal1.level > meal2.level ? -1 : 1;
+                                case "Least Time to Cook":
+                                    return meal1.timeToNext > meal2.timeToNext ? 1 : -1;
+                                default:
+                                    return meal1.mealIndex > meal2.mealIndex ? 1 : -1;
+                            }
+                        })
+                        .map((meal, index) => (
                             <ShadowBox background="dark-1" key={index} margin={{ right: 'small', bottom: 'small' }} direction="row" pad="small" gap="small" align="center" border={meal.cookingContribution > 0 ? { color: 'green-1', size: '1px' } : undefined}>
                                 <Box direction="row" align='center' fill>
                                     <Box direction="row" align="center" margin={{ right: 'small' }}>
@@ -294,6 +317,13 @@ function Cooking() {
                                             }
 
                                         </TipDisplay>
+                                        <Text size="xsmall" color="grey-2">{
+                                            {
+                                                'Level': '', //level already shown
+                                                'Least Time to Cook': toTime(meal.timeToNext * 3600)
+                                            }[sort]    
+                                        }
+                                        </Text>
                                     </Box>
                                 </Box>
                             </ShadowBox>
