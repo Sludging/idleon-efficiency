@@ -208,7 +208,7 @@ function Cooking() {
                         placeholder="Sort by"
                         clear
                         value={sort}
-                        options={["Level", "Least Time to Cook Next", "Least Time to Diamond", "Least Time to Purple"]}
+                        options={["Level", "Least Time to Cook Next", "Least Time to Diamond", "Least Time to Purple", "Least Time to Void"]}
                         onChange={({ value: nextValue }) => { setSort(nextValue);}}
                     />
                 </Box>
@@ -237,7 +237,6 @@ function Cooking() {
 
                             function sortByTimeAndIndex(timeA: number, timeB: number){
                                 //negative times get switched to index sorting
-                                const indexSort = timeA > timeB ? 1 : -1;
                                 if(timeA > 0 && timeB > 0) return timeA > timeB ? 1 : indexSort //neither reached
                                 else if (timeA < 0 && timeB < 0) return indexSort //both reached
                                 else return timeA > timeB ? -1 : 1 //one reached, one not
@@ -251,6 +250,8 @@ function Cooking() {
                                     return sortByTimeAndIndex(meal1.timeToDiamond, meal2.timeToPurple);
                                 case "Least Time to Purple":
                                     return sortByTimeAndIndex(meal1.timeToPurple, meal2.timeToPurple);
+                                case "Least Time to Void":
+                                    return sortByTimeAndIndex(meal1.timeToVoid, meal2.timeToVoid);
                                 default:
                                     return indexSort;
                             }
@@ -334,10 +335,11 @@ function Cooking() {
                                         </TipDisplay>
                                         <Text size="xsmall" color="grey-2">{
                                             {
-                                                'Level': '', //level already shown
-                                                'Least Time to Cook Next': toTime(meal.timeToNext * 3600),
-                                                'Least Time to Diamond': meal.timeToDiamond > 0 ? toTime(meal.timeToDiamond * 3600) : "Already Diamond!",
-                                                'Least Time to Purple': meal.timeToPurple > 0 ? toTime(meal.timeToPurple * 3600): "Already Purple!"
+                                                "Level": "", //level already shown
+                                                "Least Time to Cook Next": toTime(meal.timeToNext * 3600),
+                                                "Least Time to Diamond": meal.timeToDiamond > 0 ? toTime(meal.timeToDiamond * 3600) : "Already Diamond!",
+                                                "Least Time to Purple": meal.timeToPurple > 0 ? toTime(meal.timeToPurple * 3600): "Already Purple!",
+                                                "Least Time to Void": meal.timeToVoid > 0 ? toTime(meal.timeToVoid * 3600): "Already Void!"
                                             }[sort]
                                         }
                                         </Text>
