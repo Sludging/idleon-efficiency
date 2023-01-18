@@ -4,7 +4,7 @@ import { Player } from "./player";
 
 export class Constellation {
     isComplete: boolean = false;
-    completedBy: Player[] = []
+    completedByPlayerIndex: number[] = []
     
     constructor(public index: number, public data: ConstellationModel) { }
 
@@ -13,12 +13,27 @@ export class Constellation {
     }
 }
 
-export default function parseConstellations(constellationData: any[][], players: Player[]) {
+export default function parseConstellations(constellationData: any[][]) {
     const constellations: Constellation[] = Constellation.fromBase(initConstellationsRepo());
 
+    function playerLetterToIndex(letter: any){
+        switch(letter){
+            case "_": return 0;
+            case "a": return 1;
+            case "b": return 2;
+            case "c": return 3;
+            case "d": return 4;
+            case "e": return 5;
+            case "f": return 6;
+            case "g": return 7;
+            case "h": return 8;
+            case "i": return 9;
+            default: return -1;
+        }
+    }
     constellations.forEach(constellation => {
         constellation.isComplete = constellationData && constellationData[constellation.index][1] == "1";
-        constellation.completedBy = players.filter((player) => constellationData[constellation.index][0].includes(player.getPlayerLetter()));
+        constellation.completedByPlayerIndex = constellationData[constellation.index][0].split("").map((playerLetter: any) => {return playerLetterToIndex(playerLetter)});
     })
 
     return constellations;
