@@ -68,7 +68,6 @@ function Constellations() {
             <ShadowBox background="dark-1" pad="small" gap="small">
                 <Tabs activeIndex={index} onActive={onActive}>
                     {['A', 'B', 'C', 'D'].map((letter) => {
-                        // console.log("REEE: " + JSON.stringify(constellations))
                         return (
                             <Tab key={letter} title={LetterToWorldNumber(letter)}>
                                 {
@@ -116,7 +115,7 @@ function Constellations() {
                                                             {
                                                                 playerData?.map((player, index) => {
                                                                     return (
-                                                                        <CharacterBox key={index} player={player} status={filteredConstellation.completedBy.includes(player) ? CharacterBoxStatus.Complete : CharacterBoxStatus.Disabled} />
+                                                                        <CharacterBox key={index} player={player} status={filteredConstellation.completedByPlayerIndex.includes(index) ? CharacterBoxStatus.Complete : CharacterBoxStatus.Disabled} />
                                                                     )
                                                                 })
                                                             }

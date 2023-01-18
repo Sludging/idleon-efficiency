@@ -115,7 +115,7 @@ const keyFunctionMap: Record<string, Function> = {
     },
     "shrines": (doc: Cloudsave, charCount: number) => parseShrines(safeJsonParse(doc, "Shrine", [])),
     "storage": (doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], charCount: number) => parseStorage(doc, accountData.get("playerNames"), allItems, JSON.parse(doc.get("InvStorageUsed"))),
-    "constellations": (doc: Cloudsave, accountData: Map<string, any>, charCount: number) => parseConstellations(safeJsonParse(doc, "SSprog", []), accountData.get("players") as Player[]),
+    "constellations": (doc: Cloudsave, accountData: Map<string, any>, charCount: number) => parseConstellations(safeJsonParse(doc, "SSprog", [])),
     "quests": (doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], charCount: number) => parseQuests(doc, accountData, allItems, charCount),
     "refinery": (doc: Cloudsave, charCount: number) => parseRefinery(safeJsonParse(doc, "Refinery", [])),
     "saltLick": (doc: Cloudsave, charCount: number) => parseSaltLick(safeJsonParse(doc, "SaltLick", [])),
@@ -178,7 +178,7 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], all
             if (key == "players" || key == "storage" || key == "quests") {
                 accountData.set(key, toExecute(data, accountData, allItems, validCharCount));
             }
-            else if (key == "worship" || key == "constellations") {
+            else if (key == "worship") {
                 accountData.set(key, toExecute(data, accountData, validCharCount));
             }
             else if (key == "lootyData" || key == "obols" || key == "alchemy" || key == "forge" || key == "stamps" || key == "anvil" || key == "account") {
