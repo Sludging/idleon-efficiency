@@ -159,7 +159,7 @@ function KitchensDisplay() {
 
 function Cooking() {
     const [cooking, setCooking] = useState<CookingDomain>();
-    const [sort, setSort] = useState<string>('None');
+    const [sort, setSort] = useState<string>('');
     const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
 
@@ -203,10 +203,9 @@ function Cooking() {
             </Box>
             <Box margin={{ bottom: 'medium' }} gap="small">
                 <Text>Meals</Text>
-                <Text size="xsmall">Sort</Text>
                 <Box direction="row" gap="medium">
                     <Select size="small"
-                        placeholder="Filter by Type"
+                        placeholder="Sort by"
                         clear
                         value={sort}
                         options={["Level", "Least Time to Cook"]}
