@@ -207,7 +207,7 @@ function Cooking() {
             case "Level": return ""; //level already shown
             case "Least Time to Cook Next": return toTime(meal.timeToNext * 3600);
             case "Least Time to Diamond": return meal.timeToDiamond > 0 ? toTime(meal.timeToDiamond * 3600) : "Already Diamond!";
-            case"Least Time to Purple": return meal.timeToPurple > 0 ? toTime(meal.timeToPurple * 3600): "Already Purple!";
+            case "Least Time to Purple": return meal.timeToPurple > 0 ? toTime(meal.timeToPurple * 3600): "Already Purple!";
             case "Least Time to Void": return meal.timeToVoid > 0 ? toTime(meal.timeToVoid * 3600): "Already Void!";
         }
     }
