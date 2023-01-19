@@ -12,10 +12,10 @@ import {
 import { useEffect, useState, useContext } from 'react';
 import ShadowBox from "../../components/base/ShadowBox";
 import { AppContext } from '../../data/appContext';
-import { ConstellationMap } from '../../data/domain/starsigns';
 import { NextSeo } from 'next-seo';
 import { Player } from "../../data/domain/player";
 import IconImage from "../../components/base/IconImage";
+import { Constellation } from "../../data/domain/constellations";
 
 enum CharacterBoxStatus {
     Complete,
@@ -38,7 +38,7 @@ function CharacterBox({ player, status }: { player: Player, status: CharacterBox
 
 function Constellations() {
     const [playerData, setPlayerData] = useState<Player[]>();
-    const [constellationData, setConstellationData] = useState<string[][]>();
+    const [constellations, setConstellations] = useState<Constellation[]>();
     const [index, setIndex] = useState<number>(0);
     const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext)
@@ -58,7 +58,7 @@ function Constellations() {
         if (appContext) {
             const theData = appContext.data.getData();
             setPlayerData(theData.get("players"));
-            setConstellationData(theData.get("constellations"));
+            setConstellations(theData.get("constellations"));
         }
     }, [appContext])
     return (
@@ -71,14 +71,13 @@ function Constellations() {
                         return (
                             <Tab key={letter} title={LetterToWorldNumber(letter)}>
                                 {
-                                    ConstellationMap.filter((data) => data.name.includes(letter)).map(data => {
-                                        const isComplete = constellationData && constellationData.length > (Number(data.index)) && constellationData[data.index][1] == "1";
+                                    constellations?.filter((constellation) => constellation.data.name.includes(letter)).map(filteredConstellation => {
                                         return (
-                                            <Box border={{ color: "white-1", side: "bottom" }} key={data.index} gap="medium" pad="large">
+                                            <Box border={{ color: "white-1", side: "bottom" }} key={filteredConstellation.index} gap="medium" pad="large">
                                                 <Grid columns={["10%", "30%", "60%"]}>
-                                                    <Box alignSelf="center" width="140px" height="140px" border={{ size: isComplete ? '2px' : '', color: isComplete ? 'green-1' : "white-1" }} pad="32px">
+                                                    <Box alignSelf="center" width="140px" height="140px" border={{ size: filteredConstellation.isComplete ? '2px' : '', color: filteredConstellation.isComplete ? 'green-1' : "white-1" }} pad="32px">
                                                         <Box alignSelf="center" width={{ min: "70px", max: "70px" }} height={{ min: "70px", max: "70px" }}>
-                                                            <Box className={`icons-constellations icons-constellation${data.name.replace("-", "")}${isComplete ? '_done' : ''}`} title={data.name} />
+                                                            <Box className={`icons-constellations icons-constellation${filteredConstellation.data.name.replace("-", "")}${filteredConstellation.isComplete ? '_done' : ''}`} title={filteredConstellation.data.name} />
                                                         </Box>
                                                     </Box>
                                                     <Box pad="large" gap="small" border={{ side: 'right', color: "white-1" }}>
@@ -87,7 +86,7 @@ function Constellations() {
                                                                 <Image src="../icons/custom/map.svg" alt="Map Icon"/>
                                                             </Box>
                                                             <Box>
-                                                                <Text>{data.area}</Text>
+                                                                <Text>{filteredConstellation.data.area}</Text>
                                                                 <Text color="grey-2" size="xsmall">Map</Text>
                                                             </Box>
                                                         </Box>
@@ -96,7 +95,7 @@ function Constellations() {
                                                                 <Image src="../icons/custom/user.svg" alt="User Icon"/>
                                                             </Box>
                                                             <Box>
-                                                                <Text>{data.requirement.split("@")[0]}</Text>
+                                                                <Text>{filteredConstellation.data.requirement.split("@")[0]}</Text>
                                                                 <Text color="grey-2" size="xsmall">Requirement</Text>
                                                             </Box>
                                                         </Box>
@@ -105,7 +104,7 @@ function Constellations() {
                                                                 <Image src="../icons/custom/points.svg" alt="Points Icon"/>
                                                             </Box>
                                                             <Box>
-                                                                <Text>{data.starChartPoints}</Text>
+                                                                <Text>{filteredConstellation.data.starChartPoints}</Text>
                                                                 <Text color="grey-2" size="xsmall">Points</Text>
                                                             </Box>
                                                         </Box>
@@ -115,9 +114,8 @@ function Constellations() {
                                                         <Grid columns={{ size: '120px' }} gap="small">
                                                             {
                                                                 playerData?.map((player, index) => {
-                                                                    const isComplete = constellationData && constellationData.length > (Number(data.index)) && constellationData[Number(data.index)][0].includes(player.getPlayerLetter());
                                                                     return (
-                                                                        <CharacterBox key={index} player={player} status={isComplete ? CharacterBoxStatus.Complete : CharacterBoxStatus.Disabled} />
+                                                                        <CharacterBox key={index} player={player} status={filteredConstellation.completedByPlayerIndex.includes(index) ? CharacterBoxStatus.Complete : CharacterBoxStatus.Disabled} />
                                                                     )
                                                                 })
                                                             }
