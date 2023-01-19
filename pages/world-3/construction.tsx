@@ -563,7 +563,7 @@ function DeathnoteDisplay() {
     }
 
     return (
-        <Box wrap direction="row">
+        <Box wrap direction="row" justify="center">
             {
                 deathNoteByWorld && [...deathNoteByWorld.entries()].map(([worldName, deathnoteMobs], index) => {
                     return (
@@ -573,7 +573,7 @@ function DeathnoteDisplay() {
                                 [...deathnoteMobs.entries()].map(([mobName, killCount], mobIndex) => {
                                     const deathnoteRank = deathnoteData.getDeathnoteRank(killCount);
                                     return (
-                                        <Box key={mobIndex} border={deathnoteMobs.size != mobIndex + 1 ? { side: 'bottom', color: 'grey-1', size: '2px' } : undefined} pad={{ vertical: 'small' }}>
+                                        <Box key={mobIndex} pad={{ vertical: 'small' }}>
                                             <Box direction="row" align="center" gap="small">
                                                 <IconImage data={deathnoteData.getRankImageData(deathnoteRank)} />
                                                 <Box gap="xsmall">
