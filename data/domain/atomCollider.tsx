@@ -40,6 +40,10 @@ export class HydrogenAtom extends Atom {
     // Stored in OptLacc[134] 
     daysSinceUpgrade: number = 0;
     override getBonus = (): number => {
+        if (this.level == 0) {
+            return 0;
+        }
+        
         return Math.min(90, this.level * this.data.bonusPerLv * this.daysSinceUpgrade);
     }
 }
@@ -47,6 +51,10 @@ export class HydrogenAtom extends Atom {
 export class CarbonAtom extends Atom {
     wizardTowersOver50: number = 0;
     override getBonus = (): number => {
+        if (this.level == 0) {
+            return 0;
+        }
+
         return 2 * this.wizardTowersOver50;
     }
 
@@ -58,6 +66,9 @@ export class CarbonAtom extends Atom {
 export class FluorideAtom extends Atom {
     voidMeals: number = 0;
     override getBonus = (): number => {
+        if (this.level == 0) {
+            return 0;
+        }
         return Math.pow(1 + (this.level * this.data.bonusPerLv) / 100, this.voidMeals);
     }
 }
@@ -72,7 +83,7 @@ export default function parseAtomCollider(atomsData: number[], divinityData: num
     const collider = new AtomCollider();
 
     collider.atoms.forEach(atom => {
-        atom.level = atomsData[atom.index]
+        atom.level = atomsData[atom.index] ?? 0;
     });
 
     collider.particles = divinityData[39];
