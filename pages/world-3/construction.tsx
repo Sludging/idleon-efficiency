@@ -573,16 +573,20 @@ function DeathnoteDisplay() {
                                 [...deathnoteMobs.entries()].map(([mobName, killCount], mobIndex) => {
                                     const deathnoteRank = deathnoteData.getDeathnoteRank(killCount);
                                     return (
-                                        <Box key={mobIndex} pad={{ vertical: 'small' }}>
+                                        <Box key={mobIndex} pad={{ vertical: 'small' }} margin={{ bottom: 'xsmall' }}>
                                             <Box direction="row" align="center" gap="small">
-                                                <IconImage data={deathnoteData.getRankImageData(deathnoteRank)} />
                                                 <Box gap="xsmall">
-
-                                                    <Text size="xsmall">{mobName}</Text>
+                                                    <Box direction="row" gap="xsmall" align="center" margin={{ bottom: '8px' }}>
+                                                        <IconImage data={deathnoteData.getRankImageData(deathnoteRank)} />
+                                                        <Box margin={{top: '8px'}}>
+                                                            <Text size="small">{mobName}</Text>
+                                                        </Box>
+                                                    </Box>
                                                     <Meter
                                                         size="small"
-                                                        thickness='2px'
+                                                        thickness='8px'
                                                         type="bar"
+                                                        round={true}
                                                         background="grey-1"
                                                         color="brand"
                                                         values={[
@@ -594,8 +598,8 @@ function DeathnoteDisplay() {
                                                         ]}
                                                         max={deathnoteData?.getNextRankReq(deathnoteRank)} />
                                                     <Box direction="row" justify="between">
-                                                        <Text size="xsmall">{nFormatter(killCount)}</Text>
-                                                        <Text size="xsmall">{nFormatter(deathnoteData.getNextRankReq(deathnoteRank))}</Text>
+                                                        <Text color='grey-2' size="xsmall">{nFormatter(killCount)}</Text>
+                                                        <Text color='grey-2' size="xsmall">{nFormatter(deathnoteData.getNextRankReq(deathnoteRank))}</Text>
                                                     </Box>
                                                 </Box>
 
