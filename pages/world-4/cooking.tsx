@@ -247,7 +247,7 @@ function Cooking() {
                                 case "Least Time to Cook Next":
                                     return meal1.timeToNext > meal2.timeToNext ? 1 : -1;
                                 case "Least Time to Diamond":
-                                    return sortByTimeAndIndex(meal1.timeToDiamond, meal2.timeToPurple);
+                                    return sortByTimeAndIndex(meal1.timeToDiamond, meal2.timeToDiamond);
                                 case "Least Time to Purple":
                                     return sortByTimeAndIndex(meal1.timeToPurple, meal2.timeToPurple);
                                 case "Least Time to Void":
