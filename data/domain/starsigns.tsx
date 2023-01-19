@@ -25,14 +25,6 @@ export class StarSign {
     }
 }
 
-export class Constellation {
-    constructor(public index: number, public name: string, public area: string, public x: number, public y: number, public num1: number, public num2: number, public num3: number, public starChartPoints: number, public requirement: string, public type: number) { }
-
-    static fromBase = (data: ConstellationBase[]) => {
-        return data.map(constellation => new Constellation(constellation.index, constellation.data.name, constellation.data.area, constellation.data.x, constellation.data.y, constellation.data.num1, constellation.data.num2, constellation.data.num3, constellation.data.starChartPoints, constellation.data.requirement, constellation.data.type))
-    }
-}
-
 export const StarSignMap: Record<number, StarSign> = {
     0: new StarSign("The Buff Guy", [{ text: "Total Damage", bonus: 1, percent: true }, { text: "STR", bonus: 3, percent: false }]),
     1: new StarSign("Flexo Bendo", [{ text: "Movement Speed", bonus: 2, percent: true }, { text: "AGI", bonus: 3, percent: false }]),
@@ -99,5 +91,3 @@ export const StarSignMap: Record<number, StarSign> = {
     62: new StarSign("Fillerz28", [{ text: "", bonus: 0, percent: false }]),
     63: new StarSign("Fillerz29", [{ text: "", bonus: 0, percent: false }]),
 }
-
-export const ConstellationMap = Constellation.fromBase(initConstellationsRepo());
