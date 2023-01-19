@@ -957,7 +957,7 @@ function PostOfficeDisplay({ player, extra }: { player: Player, extra: PostOffic
     }, [player, extra]);
 
     const costToMax = useMemo(() => {
-        return player.postOffice.reduce((sum, box) => sum += 400 - box.level, 0);
+        return player.postOffice.filter(box => box.name != "Myriad Crate").reduce((sum, box) => sum += Math.round(box.maxLevel) - box.level, 0);
     }, [player, extra]);
 
     return (
@@ -970,6 +970,9 @@ function PostOfficeDisplay({ player, extra }: { player: Player, extra: PostOffic
                 />
                 <TextAndLabel
                     label="Cost to max all"
+                    tooltip={
+                        <Text>This is ignoring the Myriad Crate, so to max all add another 100,000.</Text>
+                    }
                     text={costToMax.toString()}
                 />
             </Box>
@@ -986,11 +989,10 @@ function PostOfficeDisplay({ player, extra }: { player: Player, extra: PostOffic
                                             <hr style={{ width: "100%" }} />
                                             {
                                                 box.bonuses.map((bonus, bIndex) => {
-                                                    const maxLevel = box.name == "Myriad Crate" ? 100000 : PostOfficeConst.MaxBoxLevel;
                                                     return (
                                                         <Box key={`player_${player.playerID}_postoffice_${box.index}_${bIndex}`} direction="row" gap="small">
                                                             <Text>{bonus.getBonusText(box.level, bIndex)}</Text>
-                                                            <Text>{box.level < maxLevel && `(Max value is ${bonus.getBonus(maxLevel, bIndex, true)} at ${maxLevel} boxes)`}</Text>
+                                                            <Text>{box.level < Math.round(box.maxLevel) && `(Max value is ${bonus.getBonus(Math.round(box.maxLevel), bIndex, true)} at ${Math.round(box.maxLevel)} boxes)`}</Text>
                                                         </Box>
                                                     )
                                                 })
