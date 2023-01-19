@@ -15,7 +15,7 @@ import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 import CoinsDisplay from '../../components/coinsDisplay';
 import { AppContext } from '../../data/appContext';
 import { territoryNiceNames } from '../../data/domain/breeding';
-import { Cooking as CookingDomain, Kitchen, KitchenStatus, UpgradeType } from '../../data/domain/cooking';
+import { Cooking as CookingDomain, Kitchen, KitchenStatus, Meal, UpgradeType } from '../../data/domain/cooking';
 import { getCoinsArray, nFormatter, toTime } from '../../data/utility';
 
 
@@ -170,6 +170,48 @@ function Cooking() {
         }
     }, [appContext]);
 
+    const mealsToShow = useMemo(() => {
+        return cooking?.meals.filter(meal => (meal.level > 0 || meal.timeOptimalSpices.length > 0))
+            .sort((meal1, meal2) => {
+                const indexSort = meal1.mealIndex > meal2.mealIndex ? 1 : -1;
+
+                //undiscovered meals get pushed to bottom
+                if (meal1.level == 0) return meal2.level == 0 ? indexSort : 1
+
+                function sortByTimeAndIndex(timeA: number, timeB: number){
+                    //negative times get switched to index sorting
+                    if(timeA > 0 && timeB > 0) return timeA > timeB ? 1 : indexSort //neither reached
+                    else if (timeA < 0 && timeB < 0) return indexSort //both reached
+                    else return timeA > timeB ? -1 : 1 //one reached, one not
+                }
+                switch (sort) {
+                    case "Level":
+                        return meal1.level > meal2.level ? -1 : 1;
+                    case "Least Time to Cook Next":
+                        return meal1.timeToNext > meal2.timeToNext ? 1 : -1;
+                    case "Least Time to Diamond":
+                        return sortByTimeAndIndex(meal1.timeToDiamond, meal2.timeToDiamond);
+                    case "Least Time to Purple":
+                        return sortByTimeAndIndex(meal1.timeToPurple, meal2.timeToPurple);
+                    case "Least Time to Void":
+                        return sortByTimeAndIndex(meal1.timeToVoid, meal2.timeToVoid);
+                    default:
+                        return indexSort;
+                }
+            })
+    },[cooking, sort])
+
+    function getMealExtraText(meal: Meal){
+        if(meal.level == 0) return "" //undiscovered meals
+        switch(sort){
+            case "Level": return ""; //level already shown
+            case "Least Time to Cook Next": return toTime(meal.timeToNext * 3600);
+            case "Least Time to Diamond": return meal.timeToDiamond > 0 ? toTime(meal.timeToDiamond * 3600) : "Already Diamond!";
+            case"Least Time to Purple": return meal.timeToPurple > 0 ? toTime(meal.timeToPurple * 3600): "Already Purple!";
+            case "Least Time to Void": return meal.timeToVoid > 0 ? toTime(meal.timeToVoid * 3600): "Already Void!";
+        }
+    }
+
     return (
         <Box>
             <NextSeo title="Cooking" />
@@ -228,35 +270,7 @@ function Cooking() {
                         </Box>
                     }
                     {
-                        cooking?.meals.filter(meal => (meal.level > 0 || meal.timeOptimalSpices.length > 0))
-                        .sort((meal1, meal2) => {
-                            const indexSort = meal1.mealIndex > meal2.mealIndex ? 1 : -1;
-
-                            //undiscovered meals get pushed to bottom
-                            if (meal1.level == 0) return meal2.level == 0 ? indexSort : 1
-
-                            function sortByTimeAndIndex(timeA: number, timeB: number){
-                                //negative times get switched to index sorting
-                                if(timeA > 0 && timeB > 0) return timeA > timeB ? 1 : indexSort //neither reached
-                                else if (timeA < 0 && timeB < 0) return indexSort //both reached
-                                else return timeA > timeB ? -1 : 1 //one reached, one not
-                            }
-                            switch (sort) {
-                                case "Level":
-                                    return meal1.level > meal2.level ? -1 : 1;
-                                case "Least Time to Cook Next":
-                                    return meal1.timeToNext > meal2.timeToNext ? 1 : -1;
-                                case "Least Time to Diamond":
-                                    return sortByTimeAndIndex(meal1.timeToDiamond, meal2.timeToDiamond);
-                                case "Least Time to Purple":
-                                    return sortByTimeAndIndex(meal1.timeToPurple, meal2.timeToPurple);
-                                case "Least Time to Void":
-                                    return sortByTimeAndIndex(meal1.timeToVoid, meal2.timeToVoid);
-                                default:
-                                    return indexSort;
-                            }
-                        })
-                        .map((meal, index) => (
+                        mealsToShow?.map((meal, index) => (
                             <ShadowBox background="dark-1" key={index} margin={{ right: 'small', bottom: 'small' }} direction="row" pad="small" gap="small" align="center" border={meal.cookingContribution > 0 ? { color: 'green-1', size: '1px' } : undefined}>
                                 <Box direction="row" align='center' fill>
                                     <Box direction="row" align="center" margin={{ right: 'small' }}>
@@ -275,11 +289,11 @@ function Cooking() {
                                                         <Box>
                                                             {meal.cookingContribution > 0 && <Text>Cooking speed: {nFormatter(meal.cookingContribution, "Smaller")}</Text>}
                                                             {meal.timeToNext > 0 && <Text>Time to next level: {toTime(meal.timeToNext * 3600)}</Text>}
-                                                            {meal.ladlesToLevel > 0 && <Text size="small">{meal.ladlesToLevel} Ladles to next level ({meal.zerkerLadlesToLevel} if using {cooking.bestBerserker?.playerName ?? "zerker"})</Text>}
+                                                            {meal.ladlesToLevel > 0 && <Text size="small">{meal.ladlesToLevel} Ladles to next level ({meal.zerkerLadlesToLevel} if using {cooking?.bestBerserker?.playerName ?? "zerker"})</Text>}
                                                             {meal.timeToDiamond > 0 && <Text>Time to Diamond: {toTime(meal.timeToDiamond * 3600)}</Text>}
                                                             {meal.timeToDiamond <= 0 && meal.timeToPurple > 0 && <Text>Time to Purple: {toTime(meal.timeToPurple * 3600)}</Text>}
                                                             {meal.timeToPurple <= 0 && meal.timeToVoid > 0 && <Text>Time to Void: {toTime(meal.timeToVoid * 3600)}</Text>}
-                                                            {meal.ladlesToNextMilestone > 0 && <Text size="small">{meal.ladlesToNextMilestone} Ladles to next milestone ({meal.zerkerLadlesToNextMilestone} if using {cooking.bestBerserker?.playerName ?? "zerker"})</Text>}
+                                                            {meal.ladlesToNextMilestone > 0 && <Text size="small">{meal.ladlesToNextMilestone} Ladles to next milestone ({meal.zerkerLadlesToNextMilestone} if using {cooking?.bestBerserker?.playerName ?? "zerker"})</Text>}
                                                         </Box>
                                                         <Text size="xsmall">* {meal.cookingContribution > 0 ? "The time is calculated based on your current cooking speed for this meal." : "The time is calculated assuming all kitchens are cooking the same meal."}</Text>
                                                     </Box> :
@@ -333,16 +347,7 @@ function Cooking() {
                                             }
 
                                         </TipDisplay>
-                                        <Text size="xsmall" color="grey-2">{
-                                            {
-                                                "Level": "", //level already shown
-                                                "Least Time to Cook Next": toTime(meal.timeToNext * 3600),
-                                                "Least Time to Diamond": meal.timeToDiamond > 0 ? toTime(meal.timeToDiamond * 3600) : "Already Diamond!",
-                                                "Least Time to Purple": meal.timeToPurple > 0 ? toTime(meal.timeToPurple * 3600): "Already Purple!",
-                                                "Least Time to Void": meal.timeToVoid > 0 ? toTime(meal.timeToVoid * 3600): "Already Void!"
-                                            }[sort]
-                                        }
-                                        </Text>
+                                        <Text size="xsmall" color="grey-2">{getMealExtraText(meal)}</Text>
                                     </Box>
                                 </Box>
                             </ShadowBox>
