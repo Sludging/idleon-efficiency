@@ -253,7 +253,6 @@ function OverviewDisplay() {
 
     return (
         <Box pad="small">
-            <Text>* UNTIL LAVA FIXES THE BUG WITH CAPTAINS, ALL THE BOAT VALUES ARE WRONG! DON'T RELY ON THIS!</Text>
             <Box margin={{ bottom: 'xsmall' }}>
                 <Text size="xsmall">* Boat values are shown ignoring captain traits, to allow comparing them without captain influence.</Text>
             </Box>
