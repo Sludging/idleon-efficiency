@@ -400,7 +400,6 @@ export class Capacity {
 
     constructor(bags?: BagCapacity) {
         this.bags = [];
-        console.log("Capacity", bags);
         this.bags.push(new Bag("Mining", bags?.Mining ?? 0, "Mining", SkillsIndex.Mining));
         this.bags.push(new Bag("Chopping", bags?.Chopping ?? 0, "Chopping", SkillsIndex.Chopping));
         this.bags.push(new Bag("Souls", bags?.Souls ?? 0, "Souls", SkillsIndex.Worship));
