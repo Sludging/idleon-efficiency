@@ -200,6 +200,10 @@ export default function Layout({
         { link: "/raw-data", label: "Raw Data" },
     ]
 
+    const onMobileClick = (href: string) => {
+        router.push(href);
+    }
+
     const onButtonClick = (toCall: Function | undefined, value?: string) => {
         try {
             if (toCall) {
@@ -313,10 +317,10 @@ export default function Layout({
                             items={navItems.flatMap(({ link, label, subLinks }, index) => {
                                 if (subLinks) {
                                     return subLinks.map(({ subLink, label }) => {
-                                        return { pad: 'large', label: <Link key={index} href={link + subLink}><Box className={router.pathname == link + subLink ? 'active' : ''} color="accent-2">{label}</Box></Link> }
+                                        return { fill: true, pad: 'large', onClick: () => onMobileClick(link + subLink), label: <Box key={index} className={router.pathname == link + subLink ? 'active' : ''} color="accent-2">{label}</Box> }
                                     })
                                 }
-                                return { pad: 'large', label: <Link key={index} href={link}><Box className={router.pathname == link ? 'active' : ''} color="accent-2">{label}</Box></Link> }
+                                return { fill: true, pad: 'large', onClick: () => onMobileClick(link), label: <Box key={index} className={router.pathname == link ? 'active' : ''} color="accent-2">{label}</Box> }
                             })}
                         />
                     </Box>
