@@ -1,4 +1,5 @@
 import { round } from '../utility';
+import { Card } from './cards';
 import { initShrineRepo, ShrineBase } from './data/ShrineRepo';
 import { ImageData } from './imageData';
 import { Lab } from './lab';
@@ -20,6 +21,8 @@ export class Shrine {
 
     worldTour: boolean = false;
     artifactAcquired: boolean = false;
+    cchizBonus: number = 0;
+
     constructor(public name: string, public boost: string, public initialBonus: number, public increment: number, public iconName: string) { }
 
     isShrineActive = (map: number | undefined = undefined) => {
@@ -44,16 +47,16 @@ export class Shrine {
         return false;
     }
 
-    getBonus = (map: number | undefined = undefined, cardBonus: number = 0) => {
+    getBonus = (map: number | undefined = undefined) => {
         if (!this.isShrineActive(map)) {
             return 0;
         }
 
-        return (this.initialBonus + ((this.level - 1) * this.increment)) * (1 + cardBonus / 100);
+        return (this.initialBonus + ((this.level - 1) * this.increment)) * (1 + this.cchizBonus / 100);
     }
 
-    getBonusText = (map: number | undefined = undefined, cardBonus: number = 0) => {
-        const bonus = this.getBonus(map, cardBonus);
+    getBonusText = (map: number | undefined = undefined) => {
+        const bonus = this.getBonus(map);
         return this.boost.split('.')[0].replace(/\+/g, round(bonus).toString());
     }
 
@@ -90,12 +93,15 @@ export const updateShrines = (data: Map<string, any>) => {
     const shrines = data.get("shrines") as Shrine[];
     const lab = data.get("lab") as Lab;
     const sailing = data.get("sailing") as Sailing;
+    const cards = data.get("cards") as Card[];
 
+    const cchizBonus = cards.find((card) => card.id == "Boss3B")?.getBonus() ?? 0;
     const worldTour = lab.bonuses.find(bonus => bonus.name == "Shrine World Tour")?.active ?? false;
     const shrineArtifact = sailing.artifacts[0];
     shrines.forEach(shrine => {
         shrine.worldTour = worldTour
         shrine.artifactAcquired = shrineArtifact.status != ArtifactStatus.Unobtained;
+        shrine.cchizBonus = cchizBonus;
     });
     
     return shrines;
