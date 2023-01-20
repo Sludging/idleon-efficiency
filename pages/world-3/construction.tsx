@@ -571,6 +571,7 @@ function DeathnoteDisplay() {
                             {
                                 [...deathnoteMobs.entries()].map(([mobName, killCount], mobIndex) => {
                                     const deathnoteRank = deathnoteData.getDeathnoteRank(killCount);
+                                    const hasNextRank = deathnoteData.getNextRankReq(deathnoteRank) > 0;
                                     return (
                                         <Box key={mobIndex} pad={{ vertical: 'small' }} margin={{ bottom: 'xsmall' }}>
                                             <Box direction="row" align="center" gap="small">
@@ -595,10 +596,10 @@ function DeathnoteDisplay() {
                                                                 color: 'brand'
                                                             }
                                                         ]}
-                                                        max={deathnoteData?.getNextRankReq(deathnoteRank)} />
-                                                    <Box direction="row" justify="between">
+                                                        max={hasNextRank ? deathnoteData?.getNextRankReq(deathnoteRank) : killCount} />
+                                                    <Box direction="row" justify={hasNextRank ? "between" : "center"} align={hasNextRank ? "" : "center"}>
                                                         <Text color='grey-2' size="xsmall">{nFormatter(killCount)}</Text>
-                                                        <Text color='grey-2' size="xsmall">{nFormatter(deathnoteData.getNextRankReq(deathnoteRank))}</Text>
+                                                        { hasNextRank && <Text color='grey-2' size="xsmall">{nFormatter(deathnoteData.getNextRankReq(deathnoteRank))}</Text>}
                                                     </Box>
                                                 </Box>
 
