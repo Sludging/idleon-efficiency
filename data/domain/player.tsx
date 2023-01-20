@@ -286,9 +286,8 @@ export class Player {
         });
     }
 
-    setCrystalChance = (crystalSpawnStamp: number, crystalShrine: Shrine, chaoticChizCard: Card) => {
-        const shrineCardBonus = this.cardInfo?.equippedCards.find((card) => card.id == "Boss3B")?.getBonus() ?? 0;
-        const shrineBonus = crystalShrine.getBonus(this.currentMapId, shrineCardBonus);
+    setCrystalChance = (crystalSpawnStamp: number, crystalShrine: Shrine) => {
+        const shrineBonus = crystalShrine.getBonus(this.currentMapId);
         const cardBonus = this.cardInfo?.equippedCards.filter((card) => card.data.effect.includes("Crystal Mob Spawn Chance")).reduce((sum, card) => sum += card.getBonus(), 0) ?? 0;
         const crystalSpawnTalentBonus = this.talents.find(x => x.skillIndex == TalentConst.CrystalSpawnIndex)?.getBonus() ?? 0;
         const crystalForDaysTalentBonus = this.talents.find(x => x.skillIndex == TalentConst.CrystalForDaysIndex)?.getBonus() ?? 0;
@@ -313,35 +312,6 @@ export class Player {
         this.crystalChance.sources.push({ name: "Stamp", value: crystalSpawnStamp });
         this.crystalChance.sources.push({ name: "Talents", value: crystalForDaysTalentBonus + crystalSpawnTalentBonus });
         this.crystalChance.sources.push({ name: "Post Office", value: postOfficeBonus });
-
-        // No need to do fake math if user doesn't have the card at all or is not on the same map as the shrine.
-        if (chaoticChizCard.count == 0 || !crystalShrine.isShrineActive(this.currentMapId)) {
-            return;
-        }
-
-        // If user isn't currently using c.chiz card, get the card and fake the shrine bonus.
-        const cchizBonus = chaoticChizCard.getBonus();
-        if (shrineCardBonus == 0) {
-            const cchizShrineBonus = crystalShrine.getBonus(this.currentMapId, cchizBonus);
-            const spawnChance = 5e-4 *
-                (1 + crystalSpawnTalentBonus / 100) *
-                (1 + (postOfficeBonus + cchizShrineBonus) / 100) *
-                (1 + crystalForDaysTalentBonus / 100) *
-                (1 + crystalSpawnStamp / 100) *
-                (1 + cardBonus / 100);
-            // Abusing sources to show what if scenarios.
-            this.crystalChance.sources.push({ name: "With Chaotic Chizoar", value: Math.floor(1 / spawnChance) });
-        }
-
-        const cchizShrineBonus = crystalShrine.getBonus(this.currentMapId, cchizBonus * 2);
-        const doubleCchizSpawnChance = 5e-4 *
-            (1 + crystalSpawnTalentBonus / 100) *
-            (1 + (postOfficeBonus + cchizShrineBonus) / 100) *
-            (1 + crystalForDaysTalentBonus / 100) *
-            (1 + crystalSpawnStamp / 100) *
-            (1 + cardBonus / 100);
-        // Abusing sources to show what if scenarios.
-        this.crystalChance.sources.push({ name: "With Chaotic Chizoar DOUBLED", value: Math.floor(1 / doubleCchizSpawnChance) });
     }
 
     getActivityType = (): Activity => {
@@ -665,7 +635,6 @@ export const updatePlayers = (data: Map<string, any>) => {
     const arcade = data.get("arcade") as Arcade;
     const sigils = data.get("sigils") as Sigils;
     const shrines = data.get("shrines") as Shrine[];
-    const cards = data.get("cards") as Card[];
 
     // Set player active bubble array, easier to work with.
     players.forEach(player => {
@@ -734,9 +703,8 @@ export const updatePlayers = (data: Map<string, any>) => {
     // Crystal Spawn Chance
     const crystalSpawnStamp = stamps[StampTab.Misc][StampConsts.CrystallinIndex].getBonus();
     const crysalShrine = shrines[ShrineConstants.CrystalShrine];
-    const cchizCard = cards.find((card) => card.id == "Boss3B");
     players.forEach(player => {
-        player.setCrystalChance(crystalSpawnStamp, crysalShrine, cchizCard as Card);
+        player.setCrystalChance(crystalSpawnStamp, crysalShrine);
     })
 
     // I dunno why I have to sort it now, I never had to before. Need to think about it further.
