@@ -1,6 +1,7 @@
 import { lavaFunc } from '../utility'
 import { initPostOfficeUpgradesRepo, PostOfficeUpgradesBase } from './data/PostOfficeUpgradesRepo';
 import { ImageData } from './imageData';
+import { PostOfficeUpgradeModel } from './model/postOfficeUpgradeModel';
 
 // PostOfficeInfo0 - The current deliverables
 // PostOfficeInfo1 - streak / shield info
@@ -21,33 +22,27 @@ export interface PostOfficeExtra {
 }
 
 export class BoxBonus {
-    constructor(public bonus: string, public x1: number, public x2: number, public func: string) { }
+    constructor(public data: PostOfficeUpgradeModel) { }
 
     getBonus = (level: number, index: number, round = false): number => {
-        let bonusLevel = level;
-        if (index == 1) {
-            bonusLevel -= 25;
-        }
-        if (index == 2) {
-            bonusLevel -= 100;
-        }
+        let bonusLevel = level - Math.round(this.data.investmentReq);
 
+        // Bonus isn't unlocked yet.
         if (bonusLevel <= 0) {
             return 0;
         }
-
-        return lavaFunc(this.func, bonusLevel, this.x1, this.x2, round);
+        return lavaFunc(this.data.func, bonusLevel, this.data.x1, this.data.x2, round);
     }
 
     getBonusText = (level: number, index: number): string => {
-        return `${this.getBonus(level, index, true)} ${this.bonus}`;
+        return `${this.getBonus(level, index, true)} ${this.data.bonus}`;
     }
 }
 
 export class Box {
     level: number = 0;
 
-    constructor(public index: number, public name: string, public bonuses: BoxBonus[]) { }
+    constructor(public index: number, public name: string, public bonuses: BoxBonus[], public maxLevel: number) { }
 
     getImageData = (): ImageData => {
         return {
@@ -58,7 +53,7 @@ export class Box {
     }
 
     static fromBase = (data: PostOfficeUpgradesBase[]) => {
-        return data.filter(box => box.data.name != "Filler").map((box, index) => new Box(index, box.id, box.data.bonuses.map(bonus => new BoxBonus(bonus.bonus, bonus.x1, bonus.x2, bonus.func))));
+        return data.filter(box => box.data.name != "Filler").map((box, index) => new Box(index, box.id, box.data.bonuses.map(bonus => new BoxBonus(bonus)), box.data.maxLevel));
     }
 }
 

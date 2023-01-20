@@ -265,7 +265,7 @@ function RefineryDisplay() {
                                                                 <TimeDown size={size == "medium" ? TimeDisplaySize.Medium : TimeDisplaySize.Large} addSeconds={squirePowha ? squireTimeSave[index] : timeToNextRank} />
                                                                 : <StaticTime size={size == "medium" ? TimeDisplaySize.Medium : TimeDisplaySize.Large} fromSeconds={squirePowha ? squireTimeSave[index] : timeToNextRank} color='accent-1' />
                                                             )}
-                                                            {!info.active && <Box margin={{top: 'medium'}}><Text color="accent-1" size="medium">Not active</Text></Box>}
+                                                            {!info.active && <Box margin={{ top: 'medium' }}><Text color="accent-1" size="medium">Not active</Text></Box>}
                                                         </Box>
                                                     </Box>
                                                     :
@@ -386,7 +386,7 @@ function SampleBox({ sample, activeItem, itemData, inLab = false }: { sample: { 
                 </Box> :
                 <Box pad={{ vertical: 'small' }} align="center">
                     <IconImage data={(sampleItem as Item).getImageData()} />
-                    <Text color={ inLab == true ? 'blue-3' : activeItem ? 'green-1' : ''} size="small">{nFormatter(inLab ? sample.quantity * 2 : sample.quantity)}</Text>
+                    <Text color={inLab == true ? 'blue-3' : activeItem ? 'green-1' : ''} size="small">{nFormatter(inLab ? sample.quantity * 2 : sample.quantity)}</Text>
                 </Box>
             }
             {activeItem && (activeItem?.quantity ?? 0) < sample.quantity &&
@@ -489,7 +489,7 @@ function PrinterDisplay() {
                                                 {
                                                     playerInfo.active.map((sample, sampleIndex) => {
                                                         return (
-                                                            <SampleBox key={`active_${sampleIndex}`} activeItem={undefined} sample={sample} itemData={itemData} inLab={playerInfo.inLab}/>
+                                                            <SampleBox key={`active_${sampleIndex}`} activeItem={undefined} sample={sample} itemData={itemData} inLab={playerInfo.inLab} />
                                                         )
                                                     })
                                                 }
@@ -563,25 +563,30 @@ function DeathnoteDisplay() {
     }
 
     return (
-        <Grid columns={size == "small" ? "1" : "1/4"}>
+        <Box wrap direction="row" justify="center">
             {
                 deathNoteByWorld && [...deathNoteByWorld.entries()].map(([worldName, deathnoteMobs], index) => {
                     return (
-                        <ShadowBox background="dark-1" key={index} gap="medium" pad="medium" margin={{ right: 'small', bottom: 'large' }}>
-                            <Text size="medium">{worldName} (Bonus {worldTierInfo[index]}%)</Text>
+                        <ShadowBox width={{ max: '250px' }} background="dark-1" key={index} pad="medium" margin={{ right: 'small', bottom: 'medium' }}>
+                            <Text size="small">{worldName} ({worldTierInfo[index]}%)</Text>
                             {
                                 [...deathnoteMobs.entries()].map(([mobName, killCount], mobIndex) => {
-                                    const deathnoteRank = deathnoteData?.getDeathnoteRank(killCount);
+                                    const deathnoteRank = deathnoteData.getDeathnoteRank(killCount);
                                     return (
-                                        <Box key={mobIndex} gap="small" border={deathnoteMobs.size != mobIndex + 1 ? { side: 'bottom', color: 'grey-1', size: '2px' } : undefined} pad={{ bottom: "small" }}>
+                                        <Box key={mobIndex} pad={{ vertical: 'small' }} margin={{ bottom: 'xsmall' }}>
                                             <Box direction="row" align="center" gap="small">
-                                                <IconImage data={deathnoteData.getRankImageData(deathnoteRank)} />
-                                                <Box gap="small">
-                                                    <Text size="xsmall">{mobName}</Text>
+                                                <Box gap="xsmall">
+                                                    <Box direction="row" gap="xsmall" align="center" margin={{ bottom: '8px' }}>
+                                                        <IconImage data={deathnoteData.getRankImageData(deathnoteRank)} />
+                                                        <Box margin={{top: '8px'}}>
+                                                            <Text size="small">{mobName}</Text>
+                                                        </Box>
+                                                    </Box>
                                                     <Meter
                                                         size="small"
-                                                        thickness='2px'
+                                                        thickness='8px'
                                                         type="bar"
+                                                        round={true}
                                                         background="grey-1"
                                                         color="brand"
                                                         values={[
@@ -593,8 +598,8 @@ function DeathnoteDisplay() {
                                                         ]}
                                                         max={deathnoteData?.getNextRankReq(deathnoteRank)} />
                                                     <Box direction="row" justify="between">
-                                                        <Text size="xsmall">{nFormatter(killCount)}</Text>
-                                                        <Text size="small">{nFormatter(deathnoteData?.getNextRankReq(deathnoteRank))}</Text>
+                                                        <Text color='grey-2' size="xsmall">{nFormatter(killCount)}</Text>
+                                                        <Text color='grey-2' size="xsmall">{nFormatter(deathnoteData.getNextRankReq(deathnoteRank))}</Text>
                                                     </Box>
                                                 </Box>
 
@@ -607,7 +612,7 @@ function DeathnoteDisplay() {
                     )
                 })
             }
-        </Grid>
+        </Box>
     )
 
 }
