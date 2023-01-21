@@ -18,6 +18,10 @@ const moduleExports = {
     minimumCacheTTL: 14400,
     unoptimized: true,
   },
+  sentry: {
+    hideSourceMaps: true,
+    disableServerWebpackPlugin: true,
+  },
 };
 
 const sentryWebpackPluginOptions = {
