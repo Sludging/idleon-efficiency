@@ -15,5 +15,5 @@ export interface ItemModel {
     vendors?: ItemVendorsModel,
     anvilProduction?: AnvilProduceModel,
     detDrops?: DetDropsModel,
-    order?: SlabItemSortModel
+    slabSort?: SlabItemSortModel
 }

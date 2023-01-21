@@ -78,5 +78,13 @@ export enum RandoListDescriptionsEnum {
     converterGeneticAttacks = "converterGeneticAttacks",
     bossObols = "bossObols",
     xYOfMutationDisplay = "xYOfMutationDisplay",
-    npcsInSmolderin = "npcsInSmolderin"
+    npcsInSmolderin = "npcsInSmolderin",
+    dk1 = "dk1",
+    dk2 = "dk2",
+    dk3 = "dk3",
+    dk4 = "dk4",
+    dk5 = "dk5",
+    dk6 = "dk6",
+    dk7 = "dk7",
+    dk8 = "dk8"
 }
