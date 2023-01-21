@@ -74,7 +74,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestA1", "quantity": 30, "chance": 0.6}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Copper"}, "order": 0}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Copper"}, "order": 0}
             }),
         new ItemBase("Iron", <ItemModel>{
                 "item": <OreItemModel>{
@@ -101,7 +101,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestB1", "quantity": 50, "chance": 0.6}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Iron"}, "order": 1}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Iron"}, "order": 1}
             }),
         new ItemBase("Gold", <ItemModel>{
                 "item": <OreItemModel>{
@@ -137,7 +137,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestA2", "quantity": 75, "chance": 0.6}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Gold"}, "order": 2}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Gold"}, "order": 2}
             }),
         new ItemBase("Plat", <ItemModel>{
                 "item": <OreItemModel>{
@@ -164,7 +164,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestB2", "quantity": 50, "chance": 0.6}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Plat"}, "order": 3}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Plat"}, "order": 3}
             }),
         new ItemBase("Dementia", <ItemModel>{
                 "item": <OreItemModel>{
@@ -200,7 +200,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB3", "quantity": 100, "chance": 0.6}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Dementia"}, "order": 4}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Dementia"}, "order": 4}
             }),
         new ItemBase("Void", <ItemModel>{
                 "item": <OreItemModel>{
@@ -227,7 +227,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestC3", "quantity": 120, "chance": 0.1}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Void"}, "order": 5}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Void"}, "order": 5}
             }),
         new ItemBase("Lustre", <ItemModel>{
                 "item": <OreItemModel>{
@@ -254,7 +254,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestB4", "quantity": 1000, "chance": 0.6}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Lustre"}, "order": 6}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Lustre"}, "order": 6}
             }),
         new ItemBase("Starfire", <ItemModel>{
                 "item": <OreItemModel>{
@@ -281,7 +281,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestC4", "quantity": 2000, "chance": 0.03}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Starfire"}, "order": 7}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Starfire"}, "order": 7}
             }),
         new ItemBase("Dreadlo", <ItemModel>{
                 "item": <OreItemModel>{
@@ -302,7 +302,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Dreadlo"}, "order": 8}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Dreadlo"}, "order": 8}
             }),
         new ItemBase("Godshard", <ItemModel>{
                 "item": <OreItemModel>{
@@ -323,7 +323,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Godshard"}, "order": 9}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Godshard"}, "order": 9}
             }),
         new ItemBase("CopperBar", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -358,7 +358,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB1", "quantity": 50, "chance": 0.35}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CopperBar"}, "order": 10}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CopperBar"}, "order": 10}
             }),
         new ItemBase("IronBar", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -384,7 +384,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestC1", "quantity": 15, "chance": 0.1}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "IronBar"}, "order": 11}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "IronBar"}, "order": 11}
             }),
         new ItemBase("GoldBar", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -419,7 +419,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB2", "quantity": 60, "chance": 0.35}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GoldBar"}, "order": 12}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GoldBar"}, "order": 12}
             }),
         new ItemBase("PlatBar", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -459,7 +459,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestA3", "quantity": 20, "chance": 0.2}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "PlatBar"}, "order": 13}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "PlatBar"}, "order": 13}
             }),
         new ItemBase("DementiaBar", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -485,7 +485,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestC3", "quantity": 80, "chance": 0.2}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DementiaBar"}, "order": 14}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DementiaBar"}, "order": 14}
             }),
         new ItemBase("VoidBar", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -511,7 +511,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestA4", "quantity": 100, "chance": 0.35}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "VoidBar"}, "order": 15}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "VoidBar"}, "order": 15}
             }),
         new ItemBase("LustreBar", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -537,7 +537,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestC4", "quantity": 150, "chance": 0.05}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LustreBar"}, "order": 16}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LustreBar"}, "order": 16}
             }),
         new ItemBase("StarfireBar", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -557,7 +557,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StarfireBar"}, "order": 17}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StarfireBar"}, "order": 17}
             }),
         new ItemBase("DreadloBar", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -577,7 +577,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DreadloBar"}, "order": 18}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DreadloBar"}, "order": 18}
             }),
         new ItemBase("GodshardBar", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -597,7 +597,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GodshardBar"}, "order": 19}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GodshardBar"}, "order": 19}
             }),
         new ItemBase("OilBarrel1", <ItemModel>{
                 "item": <ACItemModel>{
@@ -635,7 +635,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "OilBarrel1"}, "order": 101}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "OilBarrel1"}, "order": 101}
             }),
         new ItemBase("OilBarrel2", <ItemModel>{
                 "item": <ACItemModel>{
@@ -656,7 +656,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "slimeG", "quantity": 10, "chance": 0.0003}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "OilBarrel2"}, "order": 102}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "OilBarrel2"}, "order": 102}
             }),
         new ItemBase("OilBarrel3", <ItemModel>{
                 "item": <ACItemModel>{
@@ -694,7 +694,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "OilBarrel3"}, "order": 103}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "OilBarrel3"}, "order": 103}
             }),
         new ItemBase("OilBarrel4", <ItemModel>{
                 "item": <ACItemModel>{
@@ -720,7 +720,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "OilBarrel4"}, "order": 104}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "OilBarrel4"}, "order": 104}
             }),
         new ItemBase("OilBarrel5", <ItemModel>{
                 "item": <ACItemModel>{
@@ -763,7 +763,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "OilBarrel5"}, "order": 105}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "OilBarrel5"}, "order": 105}
             }),
         new ItemBase("OilBarrel6", <ItemModel>{
                 "item": <ACItemModel>{
@@ -799,7 +799,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "OilBarrel6"}, "order": 106}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "OilBarrel6"}, "order": 106}
             }),
         new ItemBase("OakTree", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -825,7 +825,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestA1", "quantity": 40, "chance": 0.6}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "OakTree"}, "order": 20}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "OakTree"}, "order": 20}
             }),
         new ItemBase("BirchTree", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -851,7 +851,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestB1", "quantity": 25, "chance": 0.1}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BirchTree"}, "order": 21}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BirchTree"}, "order": 21}
             }),
         new ItemBase("JungleTree", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -877,7 +877,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestB1", "quantity": 15, "chance": 0.4}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "JungleTree"}, "order": 22}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "JungleTree"}, "order": 22}
             }),
         new ItemBase("ForestTree", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -899,7 +899,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ForestTree"}, "order": 23}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ForestTree"}, "order": 23}
             }),
         new ItemBase("ToiletTree", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -925,7 +925,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestC1", "quantity": 50, "chance": 0.5}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ToiletTree"}, "order": 24}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ToiletTree"}, "order": 24}
             }),
         new ItemBase("PalmTree", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -951,7 +951,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestB2", "quantity": 100, "chance": 0.5}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "PalmTree"}, "order": 25}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "PalmTree"}, "order": 25}
             }),
         new ItemBase("StumpTree", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -977,7 +977,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestC1", "quantity": 50, "chance": 0.5}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StumpTree"}, "order": 26}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StumpTree"}, "order": 26}
             }),
         new ItemBase("SaharanFoal", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -1003,7 +1003,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestB3", "quantity": 100, "chance": 0.5}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SaharanFoal"}, "order": 27}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SaharanFoal"}, "order": 27}
             }),
         new ItemBase("Tree7", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -1023,7 +1023,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Tree7"}, "order": 28}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Tree7"}, "order": 28}
             }),
         new ItemBase("AlienTree", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -1049,7 +1049,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestB4", "quantity": 750, "chance": 0.5}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "AlienTree"}, "order": 29}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "AlienTree"}, "order": 29}
             }),
         new ItemBase("Tree8", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -1069,7 +1069,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Tree8"}, "order": 30}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Tree8"}, "order": 30}
             }),
         new ItemBase("Tree9", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -1089,7 +1089,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Tree9"}, "order": 31}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Tree9"}, "order": 31}
             }),
         new ItemBase("Tree10", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -1109,7 +1109,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Tree10"}, "order": 32}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Tree10"}, "order": 32}
             }),
         new ItemBase("Leaf1", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -1139,7 +1139,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ToiletTree", "quantity": 5, "chance": 0.0053}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Leaf1"}, "order": 33}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Leaf1"}, "order": 33}
             }),
         new ItemBase("Leaf2", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -1159,7 +1159,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "PalmTree", "quantity": 8, "chance": 0.0075}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Leaf2"}, "order": 34}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Leaf2"}, "order": 34}
             }),
         new ItemBase("Leaf3", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -1185,7 +1185,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Tree7", "quantity": 3, "chance": 0.00445}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Leaf3"}, "order": 35}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Leaf3"}, "order": 35}
             }),
         new ItemBase("Leaf4", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -1210,7 +1210,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Tree8", "quantity": 3, "chance": 0.00445}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Leaf4"}, "order": 36}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Leaf4"}, "order": 36}
             }),
         new ItemBase("Leaf5", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -1238,7 +1238,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Tree10", "quantity": 1, "chance": 0.0049}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Leaf5"}, "order": 37}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Leaf5"}, "order": 37}
             }),
         new ItemBase("FillerMaterial", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1278,7 +1278,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("Fish1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1305,7 +1305,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestA2", "quantity": 50, "chance": 0.6}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Fish1"}, "order": 38}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Fish1"}, "order": 38}
             }),
         new ItemBase("Fish2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1332,7 +1332,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestA2", "quantity": 50, "chance": 0.4}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Fish2"}, "order": 39}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Fish2"}, "order": 39}
             }),
         new ItemBase("Fish3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1363,7 +1363,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestB2", "quantity": 100, "chance": 0.4}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Fish3"}, "order": 40}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Fish3"}, "order": 40}
             }),
         new ItemBase("Fish4", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1390,7 +1390,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestC2", "quantity": 150, "chance": 0.2}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Fish4"}, "order": 41}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Fish4"}, "order": 41}
             }),
         new ItemBase("Fish5", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1411,7 +1411,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Fish5"}, "order": 42}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Fish5"}, "order": 42}
             }),
         new ItemBase("Fish6", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1432,7 +1432,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Fish6"}, "order": 43}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Fish6"}, "order": 43}
             }),
         new ItemBase("Fish7", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1453,7 +1453,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Fish7"}, "order": 44}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Fish7"}, "order": 44}
             }),
         new ItemBase("Fish8", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1474,7 +1474,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Fish8"}, "order": 45}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Fish8"}, "order": 45}
             }),
         new ItemBase("Bug1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1501,7 +1501,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestA2", "quantity": 65, "chance": 0.6}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Bug1"}, "order": 46}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Bug1"}, "order": 46}
             }),
         new ItemBase("Bug2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1522,7 +1522,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Bug2"}, "order": 47}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Bug2"}, "order": 47}
             }),
         new ItemBase("Bug3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1553,7 +1553,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestB2", "quantity": 125, "chance": 0.4}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Bug3"}, "order": 48}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Bug3"}, "order": 48}
             }),
         new ItemBase("Bug4", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1580,7 +1580,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestC2", "quantity": 169, "chance": 0.2}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Bug4"}, "order": 49}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Bug4"}, "order": 49}
             }),
         new ItemBase("Bug5", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1607,7 +1607,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestB3", "quantity": 150, "chance": 0.4}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Bug5"}, "order": 50}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Bug5"}, "order": 50}
             }),
         new ItemBase("Bug6", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1634,7 +1634,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestC3", "quantity": 150, "chance": 0.2}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Bug6"}, "order": 51}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Bug6"}, "order": 51}
             }),
         new ItemBase("Bug7", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1661,7 +1661,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestB4", "quantity": 1500, "chance": 0.4}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Bug7"}, "order": 52}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Bug7"}, "order": 52}
             }),
         new ItemBase("Bug8", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1688,7 +1688,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestC4", "quantity": 1500, "chance": 0.02}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Bug8"}, "order": 53}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Bug8"}, "order": 53}
             }),
         new ItemBase("Bug9", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1709,7 +1709,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Bug9"}, "order": 54}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Bug9"}, "order": 54}
             }),
         new ItemBase("Bug10", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1730,7 +1730,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Bug10"}, "order": 55}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Bug10"}, "order": 55}
             }),
         new ItemBase("Critter1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1757,7 +1757,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestA3", "quantity": 65, "chance": 0.6}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter1"}, "order": 56}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter1"}, "order": 56}
             }),
         new ItemBase("Critter1A", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1778,7 +1778,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter1A"}, "order": 57}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter1A"}, "order": 57}
             }),
         new ItemBase("Critter2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1805,7 +1805,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestB3", "quantity": 350, "chance": 0.4}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter2"}, "order": 58}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter2"}, "order": 58}
             }),
         new ItemBase("Critter2A", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1826,7 +1826,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter2A"}, "order": 59}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter2A"}, "order": 59}
             }),
         new ItemBase("Critter3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1847,7 +1847,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter3"}, "order": 60}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter3"}, "order": 60}
             }),
         new ItemBase("Critter3A", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1868,7 +1868,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter3A"}, "order": 61}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter3A"}, "order": 61}
             }),
         new ItemBase("Critter4", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1889,7 +1889,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter4"}, "order": 62}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter4"}, "order": 62}
             }),
         new ItemBase("Critter4A", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1910,7 +1910,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter4A"}, "order": 63}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter4A"}, "order": 63}
             }),
         new ItemBase("Critter5", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1931,7 +1931,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter5"}, "order": 64}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter5"}, "order": 64}
             }),
         new ItemBase("Critter5A", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1952,7 +1952,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter5A"}, "order": 65}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter5A"}, "order": 65}
             }),
         new ItemBase("Critter6", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1979,7 +1979,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestA4", "quantity": 200, "chance": 0.6}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter6"}, "order": 66}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter6"}, "order": 66}
             }),
         new ItemBase("Critter6A", <ItemModel>{
                 "item": <DescItemModel>{
@@ -1995,12 +1995,12 @@ export const initItemRepo = () => {
                     "recipeFrom": [],
                     "questAss": []
                 },
-                "notes": <NoteModel>{"note": "}}"},
+                "notes": undefined,
                 "recipe": undefined,
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter6A"}, "order": 67}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter6A"}, "order": 67}
             }),
         new ItemBase("Critter7", <ItemModel>{
                 "item": <DescItemModel>{
@@ -2021,7 +2021,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter7"}, "order": 68}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter7"}, "order": 68}
             }),
         new ItemBase("Critter7A", <ItemModel>{
                 "item": <DescItemModel>{
@@ -2042,7 +2042,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter7A"}, "order": 69}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter7A"}, "order": 69}
             }),
         new ItemBase("Critter8", <ItemModel>{
                 "item": <DescItemModel>{
@@ -2069,7 +2069,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestB4", "quantity": 600, "chance": 0.4}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter8"}, "order": 70}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter8"}, "order": 70}
             }),
         new ItemBase("Critter8A", <ItemModel>{
                 "item": <DescItemModel>{
@@ -2090,7 +2090,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter8A"}, "order": 71}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter8A"}, "order": 71}
             }),
         new ItemBase("Critter9", <ItemModel>{
                 "item": <DescItemModel>{
@@ -2111,7 +2111,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter9"}, "order": 72}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter9"}, "order": 72}
             }),
         new ItemBase("Critter9A", <ItemModel>{
                 "item": <DescItemModel>{
@@ -2132,7 +2132,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter9A"}, "order": 73}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter9A"}, "order": 73}
             }),
         new ItemBase("Critter10", <ItemModel>{
                 "item": <DescItemModel>{
@@ -2156,7 +2156,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "CritterCard10", "quantity": 1, "chance": 0.015}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter10"}, "order": 74}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter10"}, "order": 74}
             }),
         new ItemBase("Critter10A", <ItemModel>{
                 "item": <DescItemModel>{
@@ -2177,7 +2177,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter10A"}, "order": 75}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Critter10A"}, "order": 75}
             }),
         new ItemBase("Soul1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -2213,7 +2213,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestA4", "quantity": 50, "chance": 0.6}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Soul1"}, "order": 76}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Soul1"}, "order": 76}
             }),
         new ItemBase("Soul2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -2240,7 +2240,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestC3", "quantity": 400, "chance": 0.4}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Soul2"}, "order": 77}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Soul2"}, "order": 77}
             }),
         new ItemBase("Soul3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -2261,7 +2261,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Soul3"}, "order": 78}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Soul3"}, "order": 78}
             }),
         new ItemBase("Soul4", <ItemModel>{
                 "item": <DescItemModel>{
@@ -2282,7 +2282,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Soul4"}, "order": 79}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Soul4"}, "order": 79}
             }),
         new ItemBase("Soul5", <ItemModel>{
                 "item": <DescItemModel>{
@@ -2303,7 +2303,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Soul5"}, "order": 80}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Soul5"}, "order": 80}
             }),
         new ItemBase("Soul6", <ItemModel>{
                 "item": <DescItemModel>{
@@ -2324,7 +2324,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Soul6"}, "order": 81}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Soul6"}, "order": 81}
             }),
         new ItemBase("EquipmentHats1", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -2337,7 +2337,7 @@ export const initItemRepo = () => {
                     "lvReqToEquip": 1,
                     "Class": ClassTypeEnum.All,
                     "Weapon_Power": 0,
-                    "STR": 1,
+                    "STR": 2,
                     "AGI": 1,
                     "WIS": 1,
                     "LUK": 0,
@@ -2374,7 +2374,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats1"}, "order": 196}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats1"}, "order": 196}
             }),
         new ItemBase("TestObj15", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -2404,7 +2404,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentHatsBeg1", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -2434,7 +2434,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentHats61", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -2519,7 +2519,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats61"}, "order": 197}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats61"}, "order": 197}
             }),
         new ItemBase("EquipmentHats15", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -2578,7 +2578,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats15"}, "order": 198}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats15"}, "order": 198}
             }),
         new ItemBase("EquipmentHats5", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -2624,7 +2624,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestA1", "quantity": 1, "chance": 0.01}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats5"}, "order": 199}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats5"}, "order": 199}
             }),
         new ItemBase("EquipmentHats6", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -2658,7 +2658,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "frogG", "quantity": 1, "chance": 0.00025}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats6"}, "order": 200}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats6"}, "order": 200}
             }),
         new ItemBase("EquipmentHats7", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -2697,7 +2697,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats7"}, "order": 201}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats7"}, "order": 201}
             }),
         new ItemBase("EquipmentHats8", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -2756,7 +2756,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats8"}, "order": 202}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats8"}, "order": 202}
             }),
         new ItemBase("EquipmentHats9", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -2790,7 +2790,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "jarSand", "quantity": 1, "chance": 0.0001}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats9"}, "order": 203}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats9"}, "order": 203}
             }),
         new ItemBase("EquipmentHats10", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -2822,7 +2822,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats10"}, "order": 204}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats10"}, "order": 204}
             }),
         new ItemBase("EquipmentHats11", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -2856,7 +2856,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats11"}, "order": 205}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats11"}, "order": 205}
             }),
         new ItemBase("EquipmentHats12", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -2890,7 +2890,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats12"}, "order": 206}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats12"}, "order": 206}
             }),
         new ItemBase("EquipmentHats13", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -2924,7 +2924,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats13"}, "order": 207}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats13"}, "order": 207}
             }),
         new ItemBase("EquipmentHats14", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -2958,7 +2958,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats14"}, "order": 208}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats14"}, "order": 208}
             }),
         new ItemBase("TestObj14", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -2988,7 +2988,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("TestObj16", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -3018,7 +3018,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentHats4Choppin", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -3057,7 +3057,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats4Choppin"}, "order": 209}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats4Choppin"}, "order": 209}
             }),
         new ItemBase("EquipmentHats17", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -3113,7 +3113,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestB1", "quantity": 1, "chance": 0.02}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats17"}, "order": 210}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats17"}, "order": 210}
             }),
         new ItemBase("EquipmentHats18", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -3169,7 +3169,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestB2", "quantity": 1, "chance": 0.02}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats18"}, "order": 211}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats18"}, "order": 211}
             }),
         new ItemBase("EquipmentHats28", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -3237,7 +3237,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestB3", "quantity": 1, "chance": 0.02}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats28"}, "order": 212}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats28"}, "order": 212}
             }),
         new ItemBase("EquipmentHats22", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -3306,7 +3306,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats22"}, "order": 213}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats22"}, "order": 213}
             }),
         new ItemBase("EquipmentHats19", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -3368,7 +3368,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats19"}, "order": 214}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats19"}, "order": 214}
             }),
         new ItemBase("EquipmentHats53", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -3435,7 +3435,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats53"}, "order": 215}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats53"}, "order": 215}
             }),
         new ItemBase("EquipmentHats52", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -3482,7 +3482,7 @@ export const initItemRepo = () => {
                     "expGiven": 250000,
                     "no": 61,
                     "tab": 2,
-                    "sellPrice": 118300,
+                    "sellPrice": 120220,
                     "recipeFrom": [
                         <SourceModel>{
                             "wikiName": "[[Tasks/Yum_Yum_Desert#Merit_Shop|Yum Yum Desert Merit Shop]]",
@@ -3497,7 +3497,7 @@ export const initItemRepo = () => {
                             <DetRecipeComponentModel>{"indent": 0, "item": "Quest36", "quantity": 3},
                             <DetRecipeComponentModel>{"indent": 1, "item": "Quest37", "quantity": 3},
                             <DetRecipeComponentModel>{"indent": 1, "item": "GoldBar", "quantity": 240},
-                            <DetRecipeComponentModel>{"indent": 1, "item": "DesertC2b", "quantity": 3}
+                            <DetRecipeComponentModel>{"indent": 1, "item": "DesertC2b", "quantity": 15}
                         ],
                         "detRecipeTotals": [
                             <ComponentModel>{"item": "EquipmentPants19", "quantity": 1},
@@ -3505,14 +3505,14 @@ export const initItemRepo = () => {
                             <ComponentModel>{"item": "StoneA3b", "quantity": 2},
                             <ComponentModel>{"item": "Quest37", "quantity": 3},
                             <ComponentModel>{"item": "GoldBar", "quantity": 240},
-                            <ComponentModel>{"item": "DesertC2b", "quantity": 3}
+                            <ComponentModel>{"item": "DesertC2b", "quantity": 15}
                         ]
                     }
                 },
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats52"}, "order": 216}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats52"}, "order": 216}
             }),
         new ItemBase("EquipmentHats54", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -3587,7 +3587,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats54"}, "order": 217}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats54"}, "order": 217}
             }),
         new ItemBase("EquipmentHats68", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -3685,7 +3685,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats68"}, "order": 218}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats68"}, "order": 218}
             }),
         new ItemBase("EquipmentHats70", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -3764,7 +3764,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats70"}, "order": 219}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats70"}, "order": 219}
             }),
         new ItemBase("EquipmentHats71", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -3857,7 +3857,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats71"}, "order": 220}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats71"}, "order": 220}
             }),
         new ItemBase("EquipmentHats74", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -3919,7 +3919,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats74"}, "order": 221}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats74"}, "order": 221}
             }),
         new ItemBase("EquipmentHats77", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -3988,7 +3988,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats77"}, "order": 222}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats77"}, "order": 222}
             }),
         new ItemBase("EquipmentHats21", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -4050,7 +4050,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats21"}, "order": 223}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats21"}, "order": 223}
             }),
         new ItemBase("EquipmentHats23", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -4080,7 +4080,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentHats24", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -4110,7 +4110,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentHats25", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -4144,7 +4144,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "beanG", "quantity": 1, "chance": 3.5e-05}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats25"}, "order": 224}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats25"}, "order": 224}
             }),
         new ItemBase("EquipmentHats2", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -4188,7 +4188,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Boss2C", "quantity": 1, "chance": 0.015}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats2"}, "order": 225}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats2"}, "order": 225}
             }),
         new ItemBase("EquipmentHats27", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -4236,7 +4236,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Fish8", "quantity": 1, "chance": 1.2e-06}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats27"}, "order": 226}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats27"}, "order": 226}
             }),
         new ItemBase("EquipmentHats29", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -4275,7 +4275,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats29"}, "order": 227}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats29"}, "order": 227}
             }),
         new ItemBase("EquipmentHats30", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -4314,7 +4314,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats30"}, "order": 228}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats30"}, "order": 228}
             }),
         new ItemBase("EquipmentHats39", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -4358,7 +4358,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "wolfC", "quantity": 1, "chance": 0.012}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats39"}, "order": 229}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats39"}, "order": 229}
             }),
         new ItemBase("EquipmentHats42", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -4392,7 +4392,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats42"}, "order": 230}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats42"}, "order": 230}
             }),
         new ItemBase("EquipmentHats44", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -4431,7 +4431,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats44"}, "order": 231}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats44"}, "order": 231}
             }),
         new ItemBase("EquipmentHats51", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -4465,7 +4465,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats51"}, "order": 232}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats51"}, "order": 232}
             }),
         new ItemBase("EquipmentHats55", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -4494,12 +4494,12 @@ export const initItemRepo = () => {
                     "recipeFrom": [],
                     "questAss": []
                 },
-                "notes": <NoteModel>{"note": " "},
+                "notes": undefined,
                 "recipe": undefined,
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats55"}, "order": 233}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats55"}, "order": 233}
             }),
         new ItemBase("EquipmentHats56", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -4533,7 +4533,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats56"}, "order": 234}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats56"}, "order": 234}
             }),
         new ItemBase("EquipmentHats63", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -4567,7 +4567,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats63"}, "order": 235}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats63"}, "order": 235}
             }),
         new ItemBase("EquipmentHats64", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -4630,7 +4630,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats64"}, "order": 236}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats64"}, "order": 236}
             }),
         new ItemBase("EquipmentHats66", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -4689,7 +4689,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats66"}, "order": 237}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats66"}, "order": 237}
             }),
         new ItemBase("EquipmentHats67", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -4745,7 +4745,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats67"}, "order": 238}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats67"}, "order": 238}
             }),
         new ItemBase("EquipmentHats72", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -4775,7 +4775,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentHats73", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -4807,7 +4807,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats73"}, "order": 239}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats73"}, "order": 239}
             }),
         new ItemBase("EquipmentHats75", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -4837,7 +4837,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats75"}, "order": 240}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats75"}, "order": 240}
             }),
         new ItemBase("EquipmentHats76", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -4867,7 +4867,67 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats76"}, "order": 241}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats76"}, "order": 241}
+            }),
+        new ItemBase("EquipmentHats78", <ItemModel>{
+                "item": <ArmourItemModel>{
+                    "internalName": "EquipmentHats78",
+                    "displayName": "Meteorhead",
+                    "sellPrice": 1,
+                    "typeGen": TypeGenEnum.aHelmet,
+                    "Type": "Helmet",
+                    "lvReqToCraft": 5,
+                    "lvReqToEquip": 1,
+                    "Class": ClassTypeEnum.All,
+                    "Weapon_Power": 3,
+                    "STR": 5,
+                    "AGI": 5,
+                    "WIS": 5,
+                    "LUK": 5,
+                    "Defence": 5,
+                    "miscUp1": "5% Xp From Monsters",
+                    "miscUp2": "00",
+                    "Upgrade_Slots_Left": 5,
+                    "Skill": "",
+                    "Skill_Power": 0
+                },
+                "sources": undefined,
+                "notes": undefined,
+                "recipe": undefined,
+                "vendors": undefined,
+                "anvilProduction": undefined,
+                "detDrops": undefined,
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats78"}, "order": 242}
+            }),
+        new ItemBase("EquipmentHats79", <ItemModel>{
+                "item": <ArmourItemModel>{
+                    "internalName": "EquipmentHats79",
+                    "displayName": "Ice Guard Helmet",
+                    "sellPrice": 1,
+                    "typeGen": TypeGenEnum.aHelmet,
+                    "Type": "Helmet",
+                    "lvReqToCraft": 5,
+                    "lvReqToEquip": 1,
+                    "Class": ClassTypeEnum.All,
+                    "Weapon_Power": 3,
+                    "STR": 5,
+                    "AGI": 5,
+                    "WIS": 5,
+                    "LUK": 5,
+                    "Defence": 5,
+                    "miscUp1": "5% Xp From Monsters",
+                    "miscUp2": "00",
+                    "Upgrade_Slots_Left": 5,
+                    "Skill": "",
+                    "Skill_Power": 0
+                },
+                "sources": undefined,
+                "notes": undefined,
+                "recipe": undefined,
+                "vendors": undefined,
+                "anvilProduction": undefined,
+                "detDrops": undefined,
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats79"}, "order": 243}
             }),
         new ItemBase("EquipmentHats20", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -4935,7 +4995,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats20"}, "order": 242}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats20"}, "order": 244}
             }),
         new ItemBase("TestObj13", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -5008,7 +5068,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TestObj13"}, "order": 243}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TestObj13"}, "order": 245}
             }),
         new ItemBase("EquipmentHats58", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -5087,7 +5147,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats58"}, "order": 244}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats58"}, "order": 246}
             }),
         new ItemBase("EquipmentHats3", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -5155,7 +5215,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats3"}, "order": 245}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats3"}, "order": 247}
             }),
         new ItemBase("EquipmentHats41", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -5228,7 +5288,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats41"}, "order": 246}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats41"}, "order": 248}
             }),
         new ItemBase("EquipmentHats59", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -5307,7 +5367,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats59"}, "order": 247}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats59"}, "order": 249}
             }),
         new ItemBase("EquipmentHats16", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -5375,7 +5435,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats16"}, "order": 248}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats16"}, "order": 250}
             }),
         new ItemBase("EquipmentHats26", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -5448,7 +5508,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats26"}, "order": 249}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats26"}, "order": 251}
             }),
         new ItemBase("EquipmentHats60", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -5527,7 +5587,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats60"}, "order": 250}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats60"}, "order": 252}
             }),
         new ItemBase("EquipmentPunching1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -5579,7 +5639,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPunching1"}, "order": 251}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPunching1"}, "order": 253}
             }),
         new ItemBase("EquipmentPunching2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -5638,7 +5698,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPunching2"}, "order": 252}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPunching2"}, "order": 254}
             }),
         new ItemBase("EquipmentPunching3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -5708,7 +5768,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPunching3"}, "order": 253}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPunching3"}, "order": 255}
             }),
         new ItemBase("EquipmentPunching4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -5777,7 +5837,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPunching4"}, "order": 254}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPunching4"}, "order": 256}
             }),
         new ItemBase("EquipmentPunching5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -5825,7 +5885,7 @@ export const initItemRepo = () => {
                     "expGiven": 500000,
                     "no": 29,
                     "tab": 3,
-                    "sellPrice": 317500,
+                    "sellPrice": 323900,
                     "recipeFrom": [<SourceModel>{"wikiName": "[[Tasks/Unlocks|Task Unlocks Tab 3]]", "txtName": "Task Unlocks Tab 3"}],
                     "detailedRecipe": <DetailedRecipeModel>{
                         "detRecipe": [
@@ -5834,7 +5894,7 @@ export const initItemRepo = () => {
                             <DetRecipeComponentModel>{"indent": 0, "item": "Quest36", "quantity": 10},
                             <DetRecipeComponentModel>{"indent": 1, "item": "Quest37", "quantity": 10},
                             <DetRecipeComponentModel>{"indent": 1, "item": "GoldBar", "quantity": 800},
-                            <DetRecipeComponentModel>{"indent": 1, "item": "DesertC2b", "quantity": 10},
+                            <DetRecipeComponentModel>{"indent": 1, "item": "DesertC2b", "quantity": 50},
                             <DetRecipeComponentModel>{"indent": 0, "item": "PureWater2", "quantity": 15}
                         ],
                         "detRecipeTotals": [
@@ -5843,14 +5903,14 @@ export const initItemRepo = () => {
                             <ComponentModel>{"item": "PureWater2", "quantity": 15},
                             <ComponentModel>{"item": "Quest37", "quantity": 10},
                             <ComponentModel>{"item": "GoldBar", "quantity": 800},
-                            <ComponentModel>{"item": "DesertC2b", "quantity": 10}
+                            <ComponentModel>{"item": "DesertC2b", "quantity": 50}
                         ]
                     }
                 },
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPunching5"}, "order": 255}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPunching5"}, "order": 257}
             }),
         new ItemBase("EquipmentPunching6", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -5897,7 +5957,7 @@ export const initItemRepo = () => {
                     "expGiven": 1000000,
                     "no": 5,
                     "tab": 4,
-                    "sellPrice": 567500,
+                    "sellPrice": 573900,
                     "recipeFrom": [<SourceModel>{"wikiName": "[[Tasks/Unlocks|Task Unlocks Tab 4]]", "txtName": "Task Unlocks Tab 4"}],
                     "detailedRecipe": <DetailedRecipeModel>{
                         "detRecipe": [
@@ -5907,7 +5967,7 @@ export const initItemRepo = () => {
                             <DetRecipeComponentModel>{"indent": 1, "item": "Quest36", "quantity": 10},
                             <DetRecipeComponentModel>{"indent": 2, "item": "Quest37", "quantity": 10},
                             <DetRecipeComponentModel>{"indent": 2, "item": "GoldBar", "quantity": 800},
-                            <DetRecipeComponentModel>{"indent": 2, "item": "DesertC2b", "quantity": 10},
+                            <DetRecipeComponentModel>{"indent": 2, "item": "DesertC2b", "quantity": 50},
                             <DetRecipeComponentModel>{"indent": 1, "item": "PureWater2", "quantity": 15},
                             <DetRecipeComponentModel>{"indent": 0, "item": "CraftMat12", "quantity": 50000},
                             <DetRecipeComponentModel>{"indent": 0, "item": "Refinery4", "quantity": 2000}
@@ -5920,14 +5980,14 @@ export const initItemRepo = () => {
                             <ComponentModel>{"item": "PureWater2", "quantity": 15},
                             <ComponentModel>{"item": "Quest37", "quantity": 10},
                             <ComponentModel>{"item": "GoldBar", "quantity": 800},
-                            <ComponentModel>{"item": "DesertC2b", "quantity": 10}
+                            <ComponentModel>{"item": "DesertC2b", "quantity": 50}
                         ]
                     }
                 },
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPunching6"}, "order": 256}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPunching6"}, "order": 258}
             }),
         new ItemBase("EquipmentPunching7", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -5974,7 +6034,7 @@ export const initItemRepo = () => {
                     "expGiven": 1000000,
                     "no": 33,
                     "tab": 4,
-                    "sellPrice": 1117500,
+                    "sellPrice": 1123900,
                     "recipeFrom": [<SourceModel>{"wikiName": "[[Tasks/Unlocks|Task Unlocks Tab 4]]", "txtName": "Task Unlocks Tab 4"}],
                     "detailedRecipe": <DetailedRecipeModel>{
                         "detRecipe": [
@@ -5985,7 +6045,7 @@ export const initItemRepo = () => {
                             <DetRecipeComponentModel>{"indent": 2, "item": "Quest36", "quantity": 10},
                             <DetRecipeComponentModel>{"indent": 3, "item": "Quest37", "quantity": 10},
                             <DetRecipeComponentModel>{"indent": 3, "item": "GoldBar", "quantity": 800},
-                            <DetRecipeComponentModel>{"indent": 3, "item": "DesertC2b", "quantity": 10},
+                            <DetRecipeComponentModel>{"indent": 3, "item": "DesertC2b", "quantity": 50},
                             <DetRecipeComponentModel>{"indent": 2, "item": "PureWater2", "quantity": 15},
                             <DetRecipeComponentModel>{"indent": 1, "item": "CraftMat12", "quantity": 50000},
                             <DetRecipeComponentModel>{"indent": 1, "item": "Refinery4", "quantity": 2000},
@@ -6002,14 +6062,14 @@ export const initItemRepo = () => {
                             <ComponentModel>{"item": "PureWater2", "quantity": 15},
                             <ComponentModel>{"item": "Quest37", "quantity": 10},
                             <ComponentModel>{"item": "GoldBar", "quantity": 800},
-                            <ComponentModel>{"item": "DesertC2b", "quantity": 10}
+                            <ComponentModel>{"item": "DesertC2b", "quantity": 50}
                         ]
                     }
                 },
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPunching7"}, "order": 257}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPunching7"}, "order": 259}
             }),
         new ItemBase("EquipmentPunching8", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -6053,7 +6113,7 @@ export const initItemRepo = () => {
                     "expGiven": 1000000,
                     "no": 5,
                     "tab": 5,
-                    "sellPrice": 251217500,
+                    "sellPrice": 251223900,
                     "recipeFrom": [<SourceModel>{"wikiName": "[[Suggma]]", "txtName": "Suggma"}],
                     "detailedRecipe": <DetailedRecipeModel>{
                         "detRecipe": [
@@ -6065,7 +6125,7 @@ export const initItemRepo = () => {
                             <DetRecipeComponentModel>{"indent": 3, "item": "Quest36", "quantity": 10},
                             <DetRecipeComponentModel>{"indent": 4, "item": "Quest37", "quantity": 10},
                             <DetRecipeComponentModel>{"indent": 4, "item": "GoldBar", "quantity": 800},
-                            <DetRecipeComponentModel>{"indent": 4, "item": "DesertC2b", "quantity": 10},
+                            <DetRecipeComponentModel>{"indent": 4, "item": "DesertC2b", "quantity": 50},
                             <DetRecipeComponentModel>{"indent": 3, "item": "PureWater2", "quantity": 15},
                             <DetRecipeComponentModel>{"indent": 2, "item": "CraftMat12", "quantity": 50000},
                             <DetRecipeComponentModel>{"indent": 2, "item": "Refinery4", "quantity": 2000},
@@ -6086,14 +6146,14 @@ export const initItemRepo = () => {
                             <ComponentModel>{"item": "PureWater2", "quantity": 15},
                             <ComponentModel>{"item": "Quest37", "quantity": 10},
                             <ComponentModel>{"item": "GoldBar", "quantity": 800},
-                            <ComponentModel>{"item": "DesertC2b", "quantity": 10}
+                            <ComponentModel>{"item": "DesertC2b", "quantity": 50}
                         ]
                     }
                 },
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPunching8"}, "order": 258}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPunching8"}, "order": 260}
             }),
         new ItemBase("TestObj1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -6143,7 +6203,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TestObj1"}, "order": 259}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TestObj1"}, "order": 261}
             }),
         new ItemBase("TestObj7", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -6199,7 +6259,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TestObj7"}, "order": 260}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TestObj7"}, "order": 262}
             }),
         new ItemBase("TestObj3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -6267,7 +6327,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TestObj3"}, "order": 261}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TestObj3"}, "order": 263}
             }),
         new ItemBase("EquipmentSword1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -6340,7 +6400,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentSword1"}, "order": 262}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentSword1"}, "order": 264}
             }),
         new ItemBase("EquipmentSword2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -6418,7 +6478,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentSword2"}, "order": 263}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentSword2"}, "order": 265}
             }),
         new ItemBase("EquipmentSword3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -6504,7 +6564,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentSword3"}, "order": 264}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentSword3"}, "order": 266}
             }),
         new ItemBase("EquipmentSword4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -6594,7 +6654,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentSword4"}, "order": 265}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentSword4"}, "order": 267}
             }),
         new ItemBase("EquipmentSword5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -6692,7 +6752,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentSword5"}, "order": 266}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentSword5"}, "order": 268}
             }),
         new ItemBase("EquipmentSword6", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -6791,7 +6851,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentSword6"}, "order": 267}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentSword6"}, "order": 269}
             }),
         new ItemBase("TestObj4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -6821,7 +6881,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("TestObj5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -6842,7 +6902,7 @@ export const initItemRepo = () => {
                     "miscUp1": "",
                     "miscUp2": "00",
                     "Upgrade_Slots_Left": 2,
-                    "Speed": 4,
+                    "Speed": 10,
                     "Reach": 84
                 },
                 "sources": undefined,
@@ -6851,7 +6911,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("TestObj8", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -6881,7 +6941,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("TestObj9", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -6911,7 +6971,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("TestObj10", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -6941,7 +7001,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentWeapons1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -6971,7 +7031,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("TestObj2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -7001,7 +7061,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentBows1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -7051,7 +7111,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentBows1"}, "order": 268}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentBows1"}, "order": 270}
             }),
         new ItemBase("EquipmentBows3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -7107,7 +7167,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentBows3"}, "order": 269}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentBows3"}, "order": 271}
             }),
         new ItemBase("EquipmentBows4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -7141,7 +7201,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "carrotO", "quantity": 1, "chance": 4e-05}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentBows4"}, "order": 270}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentBows4"}, "order": 272}
             }),
         new ItemBase("EquipmentBows5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -7209,7 +7269,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentBows5"}, "order": 271}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentBows5"}, "order": 273}
             }),
         new ItemBase("EquipmentBows6", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -7282,7 +7342,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentBows6"}, "order": 272}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentBows6"}, "order": 274}
             }),
         new ItemBase("EquipmentBows7", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -7360,7 +7420,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentBows7"}, "order": 273}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentBows7"}, "order": 275}
             }),
         new ItemBase("EquipmentBows8", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -7446,7 +7506,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentBows8"}, "order": 274}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentBows8"}, "order": 276}
             }),
         new ItemBase("EquipmentBows9", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -7536,7 +7596,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentBows9"}, "order": 275}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentBows9"}, "order": 277}
             }),
         new ItemBase("EquipmentBows10", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -7634,7 +7694,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentBows10"}, "order": 276}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentBows10"}, "order": 278}
             }),
         new ItemBase("EquipmentBows11", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -7733,7 +7793,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentBows11"}, "order": 277}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentBows11"}, "order": 279}
             }),
         new ItemBase("EquipmentWands1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -7783,7 +7843,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentWands1"}, "order": 278}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentWands1"}, "order": 280}
             }),
         new ItemBase("EquipmentWands2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -7839,7 +7899,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentWands2"}, "order": 279}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentWands2"}, "order": 281}
             }),
         new ItemBase("EquipmentWands5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -7907,7 +7967,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentWands5"}, "order": 280}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentWands5"}, "order": 282}
             }),
         new ItemBase("EquipmentWands6", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -7980,7 +8040,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentWands6"}, "order": 281}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentWands6"}, "order": 283}
             }),
         new ItemBase("EquipmentWands3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -8058,7 +8118,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentWands3"}, "order": 282}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentWands3"}, "order": 284}
             }),
         new ItemBase("EquipmentWands7", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -8144,7 +8204,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentWands7"}, "order": 283}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentWands7"}, "order": 285}
             }),
         new ItemBase("EquipmentWands8", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -8234,7 +8294,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentWands8"}, "order": 284}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentWands8"}, "order": 286}
             }),
         new ItemBase("EquipmentWands9", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -8332,7 +8392,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentWands9"}, "order": 285}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentWands9"}, "order": 287}
             }),
         new ItemBase("EquipmentWands10", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -8431,7 +8491,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentWands10"}, "order": 286}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentWands10"}, "order": 288}
             }),
         new ItemBase("EquipmentWands4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -8461,7 +8521,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentShirts1", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -8511,7 +8571,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts1"}, "order": 287}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts1"}, "order": 289}
             }),
         new ItemBase("EquipmentShirts17", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -8550,7 +8610,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts17"}, "order": 288}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts17"}, "order": 290}
             }),
         new ItemBase("EquipmentShirts19", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -8584,7 +8644,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "plank", "quantity": 1, "chance": 1e-05}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts19"}, "order": 289}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts19"}, "order": 291}
             }),
         new ItemBase("EquipmentShirts20", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -8655,7 +8715,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts20"}, "order": 290}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts20"}, "order": 292}
             }),
         new ItemBase("EquipmentShirts24", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -8723,7 +8783,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts24"}, "order": 291}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts24"}, "order": 293}
             }),
         new ItemBase("EquipmentShirts25", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -8791,7 +8851,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts25"}, "order": 292}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts25"}, "order": 294}
             }),
         new ItemBase("EquipmentShirts2", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -8864,7 +8924,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts2"}, "order": 293}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts2"}, "order": 295}
             }),
         new ItemBase("EquipmentShirts16", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -8898,7 +8958,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "mushG", "quantity": 1, "chance": 0.00035}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts16"}, "order": 294}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts16"}, "order": 296}
             }),
         new ItemBase("EquipmentShirts3", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -8985,7 +9045,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts3"}, "order": 295}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts3"}, "order": 297}
             }),
         new ItemBase("EquipmentShirts4", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -9015,7 +9075,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentShirts7", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -9045,7 +9105,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts7"}, "order": 296}
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentShirts8", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -9075,7 +9135,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentShirts9", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -9105,7 +9165,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentShirts21", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -9150,7 +9210,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB1", "quantity": 1, "chance": 0.01}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts21"}, "order": 297}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts21"}, "order": 298}
             }),
         new ItemBase("EquipmentShirts10", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -9219,7 +9279,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts10"}, "order": 298}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts10"}, "order": 299}
             }),
         new ItemBase("EquipmentShirts11", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -9269,7 +9329,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts11"}, "order": 299}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts11"}, "order": 300}
             }),
         new ItemBase("EquipmentShirts12", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -9325,7 +9385,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestC1", "quantity": 1, "chance": 0.04}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts12"}, "order": 300}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts12"}, "order": 301}
             }),
         new ItemBase("EquipmentShirts13", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -9387,7 +9447,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts13"}, "order": 301}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts13"}, "order": 302}
             }),
         new ItemBase("EquipmentShirts18", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -9456,7 +9516,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts18"}, "order": 302}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts18"}, "order": 303}
             }),
         new ItemBase("EquipmentShirts14", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -9518,7 +9578,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts14"}, "order": 303}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts14"}, "order": 304}
             }),
         new ItemBase("EquipmentShirts5", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -9594,7 +9654,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts5"}, "order": 304}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts5"}, "order": 305}
             }),
         new ItemBase("EquipmentShirts23", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -9662,7 +9722,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts23"}, "order": 305}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts23"}, "order": 306}
             }),
         new ItemBase("EquipmentShirts22", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -9727,7 +9787,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts22"}, "order": 306}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts22"}, "order": 307}
             }),
         new ItemBase("EquipmentShirts15", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -9794,7 +9854,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts15"}, "order": 307}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts15"}, "order": 308}
             }),
         new ItemBase("EquipmentShirts26", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -9863,7 +9923,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts26"}, "order": 308}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts26"}, "order": 309}
             }),
         new ItemBase("EquipmentShirts27", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -9938,7 +9998,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts27"}, "order": 309}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts27"}, "order": 310}
             }),
         new ItemBase("EquipmentShirts31", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -10036,7 +10096,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts31"}, "order": 310}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts31"}, "order": 311}
             }),
         new ItemBase("EquipmentShirts28", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -10115,7 +10175,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts28"}, "order": 311}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts28"}, "order": 312}
             }),
         new ItemBase("EquipmentShirts29", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -10194,7 +10254,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts29"}, "order": 312}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts29"}, "order": 313}
             }),
         new ItemBase("EquipmentShirts30", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -10273,7 +10333,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts30"}, "order": 313}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts30"}, "order": 314}
             }),
         new ItemBase("EquipmentShirts6", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -10371,7 +10431,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts6"}, "order": 314}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts6"}, "order": 315}
             }),
         new ItemBase("EquipmentShirts32", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -10450,7 +10510,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts32"}, "order": 315}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts32"}, "order": 316}
             }),
         new ItemBase("EquipmentShirts33", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -10543,7 +10603,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts33"}, "order": 316}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts33"}, "order": 317}
             }),
         new ItemBase("EquipmentShirts34", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -10605,7 +10665,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts34"}, "order": 317}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts34"}, "order": 318}
             }),
         new ItemBase("EquipmentShirts35", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -10674,7 +10734,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts35"}, "order": 318}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShirts35"}, "order": 319}
             }),
         new ItemBase("EquipmentPants1", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -10724,7 +10784,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants1"}, "order": 319}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants1"}, "order": 320}
             }),
         new ItemBase("EquipmentPants2", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -10774,7 +10834,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants2"}, "order": 320}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants2"}, "order": 321}
             }),
         new ItemBase("EquipmentPants3", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -10824,7 +10884,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants3"}, "order": 321}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants3"}, "order": 322}
             }),
         new ItemBase("EquipmentPants4", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -10892,7 +10952,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestC2", "quantity": 1, "chance": 0.04}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants4"}, "order": 322}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants4"}, "order": 323}
             }),
         new ItemBase("EquipmentPants17", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -10961,7 +11021,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants17"}, "order": 323}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants17"}, "order": 324}
             }),
         new ItemBase("EquipmentPants5", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -11029,7 +11089,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestC3", "quantity": 1, "chance": 0.04}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants5"}, "order": 324}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants5"}, "order": 325}
             }),
         new ItemBase("EquipmentPants6", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -11096,7 +11156,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants6"}, "order": 325}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants6"}, "order": 326}
             }),
         new ItemBase("EquipmentPants20", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -11165,7 +11225,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants20"}, "order": 326}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants20"}, "order": 327}
             }),
         new ItemBase("EquipmentPants21", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -11240,7 +11300,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants21"}, "order": 327}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants21"}, "order": 328}
             }),
         new ItemBase("EquipmentPants7", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -11270,7 +11330,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants7"}, "order": 328}
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentPants10", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -11316,7 +11376,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestA1", "quantity": 1, "chance": 0.02}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants10"}, "order": 329}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants10"}, "order": 329}
             }),
         new ItemBase("EquipmentPants11", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -11346,7 +11406,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentPants12", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -11376,7 +11436,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentPants13", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -11406,7 +11466,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants13"}, "order": 330}
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentPants14", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -11436,7 +11496,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentPants15", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -11501,7 +11561,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants15"}, "order": 331}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants15"}, "order": 330}
             }),
         new ItemBase("EquipmentPants16", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -11540,7 +11600,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants16"}, "order": 332}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants16"}, "order": 331}
             }),
         new ItemBase("EquipmentPants18", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -11602,7 +11662,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants18"}, "order": 333}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants18"}, "order": 332}
             }),
         new ItemBase("EquipmentPants19", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -11636,7 +11696,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "babaMummy", "quantity": 1, "chance": 0.04}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants19"}, "order": 334}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants19"}, "order": 333}
             }),
         new ItemBase("EquipmentPants22", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -11700,7 +11760,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants22"}, "order": 335}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants22"}, "order": 334}
             }),
         new ItemBase("EquipmentPants23", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -11762,7 +11822,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants23"}, "order": 336}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants23"}, "order": 335}
             }),
         new ItemBase("EquipmentPants9", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -11860,7 +11920,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants9"}, "order": 337}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants9"}, "order": 336}
             }),
         new ItemBase("EquipmentPants24", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -11939,7 +11999,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants24"}, "order": 338}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants24"}, "order": 337}
             }),
         new ItemBase("EquipmentPants25", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -12032,7 +12092,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants25"}, "order": 339}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants25"}, "order": 338}
             }),
         new ItemBase("EquipmentPants8", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -12094,7 +12154,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants8"}, "order": 340}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants8"}, "order": 339}
             }),
         new ItemBase("EquipmentPants26", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -12163,7 +12223,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants26"}, "order": 341}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPants26"}, "order": 340}
             }),
         new ItemBase("EquipmentShoes1", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -12210,7 +12270,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes1"}, "order": 342}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes1"}, "order": 341}
             }),
         new ItemBase("EquipmentShoes9", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -12260,7 +12320,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes9"}, "order": 343}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes9"}, "order": 342}
             }),
         new ItemBase("EquipmentShoes10", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -12290,7 +12350,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentShoes11", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -12320,7 +12380,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentShoes12", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -12350,7 +12410,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentShoes15", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -12420,7 +12480,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes15"}, "order": 344}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes15"}, "order": 343}
             }),
         new ItemBase("EquipmentShoes3", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -12485,7 +12545,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes3"}, "order": 345}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes3"}, "order": 344}
             }),
         new ItemBase("EquipmentShoes20", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -12560,7 +12620,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes20"}, "order": 346}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes20"}, "order": 345}
             }),
         new ItemBase("EquipmentShoes4", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -12630,7 +12690,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes4"}, "order": 347}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes4"}, "order": 346}
             }),
         new ItemBase("EquipmentShoes5", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -12705,7 +12765,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes5"}, "order": 348}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes5"}, "order": 347}
             }),
         new ItemBase("EquipmentShoes21", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -12790,7 +12850,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes21"}, "order": 349}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes21"}, "order": 348}
             }),
         new ItemBase("EquipmentShoes22", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -12873,7 +12933,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes22"}, "order": 350}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes22"}, "order": 349}
             }),
         new ItemBase("EquipmentShoes6", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -12903,7 +12963,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentShoes7", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -12966,7 +13026,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes7"}, "order": 351}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes7"}, "order": 350}
             }),
         new ItemBase("EquipmentShoes8", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -12996,7 +13056,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentShoes13", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -13026,7 +13086,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentShoes14", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -13056,7 +13116,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentShoes16", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -13134,7 +13194,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes16"}, "order": 352}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes16"}, "order": 351}
             }),
         new ItemBase("EquipmentShoes17", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -13212,7 +13272,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes17"}, "order": 353}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes17"}, "order": 352}
             }),
         new ItemBase("EquipmentShoes18", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -13290,7 +13350,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes18"}, "order": 354}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes18"}, "order": 353}
             }),
         new ItemBase("EquipmentShoes19", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -13368,7 +13428,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes19"}, "order": 355}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes19"}, "order": 354}
             }),
         new ItemBase("EquipmentShoes2", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -13398,7 +13458,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes2"}, "order": 356}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes2"}, "order": 355}
             }),
         new ItemBase("EquipmentShoes23", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -13504,7 +13564,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes23"}, "order": 357}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes23"}, "order": 356}
             }),
         new ItemBase("EquipmentShoes26", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -13613,7 +13673,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes26"}, "order": 358}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes26"}, "order": 357}
             }),
         new ItemBase("EquipmentShoes27", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -13723,7 +13783,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes27"}, "order": 359}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes27"}, "order": 358}
             }),
         new ItemBase("EquipmentShoes28", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -13832,7 +13892,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes28"}, "order": 360}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes28"}, "order": 359}
             }),
         new ItemBase("EquipmentShoes29", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -13941,7 +14001,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes29"}, "order": 361}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes29"}, "order": 360}
             }),
         new ItemBase("EquipmentShoes30", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -13975,7 +14035,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "mushP", "quantity": 1, "chance": 6e-06}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes30"}, "order": 362}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes30"}, "order": 361}
             }),
         new ItemBase("EquipmentShoes31", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -14070,7 +14130,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes31"}, "order": 363}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes31"}, "order": 362}
             }),
         new ItemBase("EquipmentShoes32", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -14104,7 +14164,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4a3", "quantity": 1, "chance": 6e-06}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes32"}, "order": 364}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes32"}, "order": 363}
             }),
         new ItemBase("EquipmentShoes33", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -14199,7 +14259,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes33"}, "order": 365}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes33"}, "order": 364}
             }),
         new ItemBase("EquipmentShoes24", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -14286,7 +14346,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes24"}, "order": 366}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes24"}, "order": 365}
             }),
         new ItemBase("EquipmentShoes25", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -14387,7 +14447,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes25"}, "order": 367}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes25"}, "order": 366}
             }),
         new ItemBase("EquipmentShoes34", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -14449,7 +14509,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes34"}, "order": 368}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes34"}, "order": 367}
             }),
         new ItemBase("EquipmentShoes35", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -14521,7 +14581,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes35"}, "order": 369}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentShoes35"}, "order": 368}
             }),
         new ItemBase("EquipmentPendant1", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -14551,7 +14611,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentPendant2", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -14581,7 +14641,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentPendant3", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -14611,7 +14671,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentPendant4", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -14641,7 +14701,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentPendant5", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -14671,7 +14731,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentPendant6", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -14701,7 +14761,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentPendant7", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -14731,7 +14791,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentPendant8", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -14761,7 +14821,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentPendant9", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -14800,7 +14860,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant9"}, "order": 370}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant9"}, "order": 369}
             }),
         new ItemBase("EquipmentPendant10", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -14874,7 +14934,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant10"}, "order": 371}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant10"}, "order": 370}
             }),
         new ItemBase("EquipmentPendant11", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -14913,7 +14973,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant11"}, "order": 372}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant11"}, "order": 371}
             }),
         new ItemBase("EquipmentPendant12", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -14962,7 +15022,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant12"}, "order": 373}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant12"}, "order": 372}
             }),
         new ItemBase("EquipmentPendant13", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -14992,7 +15052,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentPendant14", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -15026,7 +15086,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "snailZ", "quantity": 1, "chance": 2e-06}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant14"}, "order": 374}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant14"}, "order": 373}
             }),
         new ItemBase("EquipmentPendant15", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -15056,7 +15116,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentPendant16", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -15131,7 +15191,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant16"}, "order": 375}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant16"}, "order": 374}
             }),
         new ItemBase("EquipmentPendant17", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -15200,7 +15260,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant17"}, "order": 376}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant17"}, "order": 375}
             }),
         new ItemBase("EquipmentPendant18", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -15232,7 +15292,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant18"}, "order": 377}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant18"}, "order": 376}
             }),
         new ItemBase("EquipmentPendant19", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -15266,7 +15326,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant19"}, "order": 378}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant19"}, "order": 377}
             }),
         new ItemBase("EquipmentPendant20", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -15300,7 +15360,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant20"}, "order": 379}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant20"}, "order": 378}
             }),
         new ItemBase("EquipmentPendant21", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -15334,7 +15394,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant21"}, "order": 380}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant21"}, "order": 379}
             }),
         new ItemBase("EquipmentPendant22", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -15368,7 +15428,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant22"}, "order": 381}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant22"}, "order": 380}
             }),
         new ItemBase("EquipmentPendant23", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -15402,7 +15462,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant23"}, "order": 382}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant23"}, "order": 381}
             }),
         new ItemBase("EquipmentPendant24", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -15446,7 +15506,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Boss3C", "quantity": 1, "chance": 0.014}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant24"}, "order": 383}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant24"}, "order": 382}
             }),
         new ItemBase("EquipmentPendant25", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -15521,7 +15581,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant25"}, "order": 384}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant25"}, "order": 383}
             }),
         new ItemBase("EquipmentPendant26", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -15594,7 +15654,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant26"}, "order": 385}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant26"}, "order": 384}
             }),
         new ItemBase("EquipmentPendant27", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -15647,7 +15707,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant27"}, "order": 386}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant27"}, "order": 385}
             }),
         new ItemBase("EquipmentPendant28", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -15681,7 +15741,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant28"}, "order": 387}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentPendant28"}, "order": 386}
             }),
         new ItemBase("EquipmentRings1", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -15711,7 +15771,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentRings2", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -15761,7 +15821,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings2"}, "order": 388}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings2"}, "order": 387}
             }),
         new ItemBase("EquipmentRings3", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -15821,7 +15881,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings3"}, "order": 389}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings3"}, "order": 388}
             }),
         new ItemBase("EquipmentRings4", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -15851,7 +15911,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings4"}, "order": 390}
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentRings5", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -15881,7 +15941,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings5"}, "order": 391}
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentRings6", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -15920,7 +15980,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings6"}, "order": 392}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings6"}, "order": 389}
             }),
         new ItemBase("EquipmentRings7", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -15969,7 +16029,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings7"}, "order": 393}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings7"}, "order": 390}
             }),
         new ItemBase("EquipmentRings8", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -15999,7 +16059,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings8"}, "order": 394}
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentRings9", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -16029,7 +16089,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings9"}, "order": 395}
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentRings10", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -16059,7 +16119,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings10"}, "order": 396}
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentRings11", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -16121,7 +16181,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings11"}, "order": 397}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings11"}, "order": 391}
             }),
         new ItemBase("EquipmentRingsFishing1", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -16151,7 +16211,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRingsFishing1"}, "order": 398}
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentRingsFishing2", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -16181,7 +16241,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRingsFishing2"}, "order": 399}
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentRingsFishing3", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -16211,7 +16271,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRingsFishing3"}, "order": 400}
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentRings12", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -16250,7 +16310,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings12"}, "order": 401}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings12"}, "order": 392}
             }),
         new ItemBase("EquipmentRings13", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -16289,7 +16349,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings13"}, "order": 402}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings13"}, "order": 393}
             }),
         new ItemBase("EquipmentRings14", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -16353,7 +16413,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings14"}, "order": 403}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings14"}, "order": 394}
             }),
         new ItemBase("EquipmentRings15", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -16392,7 +16452,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings15"}, "order": 404}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings15"}, "order": 395}
             }),
         new ItemBase("EquipmentRings16", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -16487,7 +16547,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings16"}, "order": 405}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings16"}, "order": 396}
             }),
         new ItemBase("EquipmentRings21", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -16521,7 +16581,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings21"}, "order": 406}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings21"}, "order": 397}
             }),
         new ItemBase("EquipmentRings20", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -16555,7 +16615,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings20"}, "order": 407}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings20"}, "order": 398}
             }),
         new ItemBase("EquipmentRings19", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -16589,7 +16649,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings19"}, "order": 408}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings19"}, "order": 399}
             }),
         new ItemBase("EquipmentRings22", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -16623,7 +16683,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings22"}, "order": 409}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings22"}, "order": 400}
             }),
         new ItemBase("EquipmentRings18", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -16657,7 +16717,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings18"}, "order": 410}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings18"}, "order": 401}
             }),
         new ItemBase("EquipmentRings23", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -16691,7 +16751,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ram", "quantity": 1, "chance": 1e-06}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings23"}, "order": 411}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings23"}, "order": 402}
             }),
         new ItemBase("EquipmentRings24", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -16725,7 +16785,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "demonP", "quantity": 1, "chance": 4e-06}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings24"}, "order": 412}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings24"}, "order": 403}
             }),
         new ItemBase("EquipmentRings25", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -16759,7 +16819,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4b4", "quantity": 1, "chance": 4e-06}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings25"}, "order": 413}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings25"}, "order": 404}
             }),
         new ItemBase("EquipmentRings26", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -16812,7 +16872,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings26"}, "order": 414}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings26"}, "order": 405}
             }),
         new ItemBase("EquipmentRings27", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -16878,7 +16938,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings27"}, "order": 415}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings27"}, "order": 406}
             }),
         new ItemBase("EquipmentRings28", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -16946,7 +17006,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings28"}, "order": 416}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings28"}, "order": 407}
             }),
         new ItemBase("EquipmentRings29", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -17011,7 +17071,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings29"}, "order": 417}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings29"}, "order": 408}
             }),
         new ItemBase("EquipmentRings30", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -17073,7 +17133,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings30"}, "order": 418}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings30"}, "order": 409}
             }),
         new ItemBase("EquipmentRings31", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -17107,7 +17167,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings31"}, "order": 419}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings31"}, "order": 410}
             }),
         new ItemBase("EquipmentRings32", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -17141,7 +17201,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings32"}, "order": 420}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings32"}, "order": 411}
             }),
         new ItemBase("EquipmentRings33", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -17175,7 +17235,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings33"}, "order": 421}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRings33"}, "order": 412}
             }),
         new ItemBase("EquipmentRingsChat1", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -17209,7 +17269,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentRingsChat2", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -17243,7 +17303,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentRingsChat3", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -17277,7 +17337,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentRingsChat4", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -17311,7 +17371,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentRingsChat5", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -17345,7 +17405,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentRingsChat6", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -17379,7 +17439,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentRingsChat8", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -17413,7 +17473,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentRingsChat9", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -17447,7 +17507,37 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
+            }),
+        new ItemBase("EquipmentRingsChat10", <ItemModel>{
+                "item": <ArmourItemModel>{
+                    "internalName": "EquipmentRingsChat10",
+                    "displayName": "Meteorite Ring",
+                    "sellPrice": 2500,
+                    "typeGen": TypeGenEnum.aChatRingMTX,
+                    "Type": "Chat Ring",
+                    "lvReqToCraft": 55,
+                    "lvReqToEquip": 1,
+                    "Class": ClassTypeEnum.All,
+                    "Weapon_Power": 1,
+                    "STR": 0,
+                    "AGI": 0,
+                    "WIS": 0,
+                    "LUK": 0,
+                    "Defence": 1,
+                    "miscUp1": "100% Cheese",
+                    "miscUp2": "17% Gravity",
+                    "Upgrade_Slots_Left": 3,
+                    "Skill": "",
+                    "Skill_Power": 0
+                },
+                "sources": undefined,
+                "notes": undefined,
+                "recipe": undefined,
+                "vendors": undefined,
+                "anvilProduction": undefined,
+                "detDrops": undefined,
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentRingsChat10"}, "order": 413}
             }),
         new ItemBase("EquipmentCape0", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -17477,7 +17567,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentCape0"}, "order": 422}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentCape0"}, "order": 414}
             }),
         new ItemBase("EquipmentCape1", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -17507,7 +17597,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentCape2", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -17537,7 +17627,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentCape2"}, "order": 423}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentCape2"}, "order": 415}
             }),
         new ItemBase("EquipmentCape3", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -17571,7 +17661,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "wolfC", "quantity": 1, "chance": 0.001}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentCape3"}, "order": 424}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentCape3"}, "order": 416}
             }),
         new ItemBase("EquipmentCape4", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -17605,7 +17695,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Boss2C", "quantity": 1, "chance": 0.0007}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentCape4"}, "order": 425}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentCape4"}, "order": 417}
             }),
         new ItemBase("EquipmentCape5", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -17639,7 +17729,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Boss3C", "quantity": 1, "chance": 0.0003}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentCape5"}, "order": 426}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentCape5"}, "order": 418}
             }),
         new ItemBase("EquipmentCape6", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -17673,7 +17763,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Boss4C", "quantity": 1, "chance": 0.00025}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentCape6"}, "order": 427}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentCape6"}, "order": 419}
             }),
         new ItemBase("EquipmentCape7", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -17703,7 +17793,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentCape7"}, "order": 428}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentCape7"}, "order": 420}
             }),
         new ItemBase("EquipmentKeychain0", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -17742,7 +17832,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain0"}, "order": 429}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain0"}, "order": 421}
             }),
         new ItemBase("EquipmentKeychain1", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -17780,7 +17870,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain1"}, "order": 430}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain1"}, "order": 422}
             }),
         new ItemBase("EquipmentKeychain2", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -17818,7 +17908,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain2"}, "order": 431}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain2"}, "order": 423}
             }),
         new ItemBase("EquipmentKeychain3", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -17856,7 +17946,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain3"}, "order": 432}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain3"}, "order": 424}
             }),
         new ItemBase("EquipmentKeychain4", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -17894,7 +17984,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain4"}, "order": 433}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain4"}, "order": 425}
             }),
         new ItemBase("EquipmentKeychain5", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -17932,7 +18022,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain5"}, "order": 434}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain5"}, "order": 426}
             }),
         new ItemBase("EquipmentKeychain6", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -17970,7 +18060,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain6"}, "order": 435}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain6"}, "order": 427}
             }),
         new ItemBase("EquipmentKeychain7", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -18008,7 +18098,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain7"}, "order": 436}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain7"}, "order": 428}
             }),
         new ItemBase("EquipmentKeychain8", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -18047,7 +18137,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain8"}, "order": 437}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain8"}, "order": 429}
             }),
         new ItemBase("EquipmentKeychain9", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -18085,7 +18175,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain9"}, "order": 438}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain9"}, "order": 430}
             }),
         new ItemBase("EquipmentKeychain10", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -18123,7 +18213,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain10"}, "order": 439}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain10"}, "order": 431}
             }),
         new ItemBase("EquipmentKeychain11", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -18161,7 +18251,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain11"}, "order": 440}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain11"}, "order": 432}
             }),
         new ItemBase("EquipmentKeychain12", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -18199,7 +18289,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain12"}, "order": 441}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain12"}, "order": 433}
             }),
         new ItemBase("EquipmentKeychain13", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -18237,7 +18327,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain13"}, "order": 442}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain13"}, "order": 434}
             }),
         new ItemBase("EquipmentKeychain14", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -18275,7 +18365,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain14"}, "order": 443}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain14"}, "order": 435}
             }),
         new ItemBase("EquipmentKeychain15", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -18313,7 +18403,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain15"}, "order": 444}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain15"}, "order": 436}
             }),
         new ItemBase("EquipmentKeychain16", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -18351,7 +18441,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain16"}, "order": 445}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain16"}, "order": 437}
             }),
         new ItemBase("EquipmentKeychain17", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -18390,7 +18480,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain17"}, "order": 446}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain17"}, "order": 438}
             }),
         new ItemBase("EquipmentKeychain18", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -18428,7 +18518,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain18"}, "order": 447}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain18"}, "order": 439}
             }),
         new ItemBase("EquipmentKeychain19", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -18466,7 +18556,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain19"}, "order": 448}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain19"}, "order": 440}
             }),
         new ItemBase("EquipmentKeychain20", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -18504,7 +18594,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain20"}, "order": 449}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain20"}, "order": 441}
             }),
         new ItemBase("EquipmentKeychain21", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -18542,7 +18632,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain21"}, "order": 450}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain21"}, "order": 442}
             }),
         new ItemBase("EquipmentKeychain22", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -18580,7 +18670,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain22"}, "order": 451}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain22"}, "order": 443}
             }),
         new ItemBase("EquipmentKeychain23", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -18618,7 +18708,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain23"}, "order": 452}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain23"}, "order": 444}
             }),
         new ItemBase("EquipmentKeychain24", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -18656,7 +18746,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain24"}, "order": 453}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain24"}, "order": 445}
             }),
         new ItemBase("EquipmentKeychain25", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -18684,7 +18774,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain25"}, "order": 454}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain25"}, "order": 446}
             }),
         new ItemBase("EquipmentKeychain26", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -18712,7 +18802,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain26"}, "order": 455}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain26"}, "order": 447}
             }),
         new ItemBase("EquipmentKeychain27", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -18740,7 +18830,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain27"}, "order": 456}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain27"}, "order": 448}
             }),
         new ItemBase("EquipmentKeychain28", <ItemModel>{
                 "item": <KeychainItemModel>{
@@ -18768,7 +18858,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain28"}, "order": 457}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentKeychain28"}, "order": 449}
             }),
         new ItemBase("Trophy1", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -18807,7 +18897,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy1"}, "order": 458}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy1"}, "order": 450}
             }),
         new ItemBase("Trophy2", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -19033,7 +19123,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Boss5C", "quantity": 2, "chance": 1.5e-06}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy2"}, "order": 459}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy2"}, "order": 451}
             }),
         new ItemBase("Trophy3", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -19072,7 +19162,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy3"}, "order": 460}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy3"}, "order": 452}
             }),
         new ItemBase("Trophy4", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -19102,7 +19192,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("Trophy5", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -19141,7 +19231,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy5"}, "order": 461}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy5"}, "order": 453}
             }),
         new ItemBase("Trophy6", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -19180,7 +19270,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy6"}, "order": 462}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy6"}, "order": 454}
             }),
         new ItemBase("Trophy7", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -19210,7 +19300,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy7"}, "order": 463}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy7"}, "order": 455}
             }),
         new ItemBase("Trophy8", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -19249,7 +19339,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy8"}, "order": 464}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy8"}, "order": 456}
             }),
         new ItemBase("Trophy9", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -19283,7 +19373,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy9"}, "order": 465}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy9"}, "order": 457}
             }),
         new ItemBase("Trophy10", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -19322,7 +19412,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy10"}, "order": 466}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy10"}, "order": 458}
             }),
         new ItemBase("Trophy11", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -19361,7 +19451,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy11"}, "order": 467}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy11"}, "order": 459}
             }),
         new ItemBase("Trophy12", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -19400,7 +19490,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy12"}, "order": 468}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy12"}, "order": 460}
             }),
         new ItemBase("Trophy13", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -19439,7 +19529,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy13"}, "order": 469}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy13"}, "order": 461}
             }),
         new ItemBase("Trophy14", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -19473,7 +19563,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy14"}, "order": 470}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy14"}, "order": 462}
             }),
         new ItemBase("Trophy15", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -19512,7 +19602,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy15"}, "order": 471}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy15"}, "order": 463}
             }),
         new ItemBase("Trophy16", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -19542,7 +19632,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy16"}, "order": 472}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trophy16"}, "order": 464}
             }),
         new ItemBase("EquipmentTools1", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -19582,7 +19672,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentTools1"}, "order": 473}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentTools1"}, "order": 465}
             }),
         new ItemBase("EquipmentTools2", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -19633,7 +19723,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentTools2"}, "order": 474}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentTools2"}, "order": 466}
             }),
         new ItemBase("EquipmentTools3", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -19684,7 +19774,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentTools3"}, "order": 475}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentTools3"}, "order": 467}
             }),
         new ItemBase("EquipmentTools5", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -19753,7 +19843,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentTools5"}, "order": 476}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentTools5"}, "order": 468}
             }),
         new ItemBase("EquipmentTools6", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -19827,7 +19917,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentTools6"}, "order": 477}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentTools6"}, "order": 469}
             }),
         new ItemBase("EquipmentTools7", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -19906,7 +19996,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentTools7"}, "order": 478}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentTools7"}, "order": 470}
             }),
         new ItemBase("EquipmentTools11", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -19990,7 +20080,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentTools11"}, "order": 479}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentTools11"}, "order": 471}
             }),
         new ItemBase("EquipmentTools8", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -20079,7 +20169,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentTools8"}, "order": 480}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentTools8"}, "order": 472}
             }),
         new ItemBase("EquipmentTools12", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -20172,7 +20262,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentTools12"}, "order": 481}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentTools12"}, "order": 473}
             }),
         new ItemBase("EquipmentTools9", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -20261,7 +20351,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentTools9"}, "order": 482}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentTools9"}, "order": 474}
             }),
         new ItemBase("EquipmentTools10", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -20302,7 +20392,38 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "poopBig", "quantity": 1, "chance": 0.01}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentTools10"}, "order": 483}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentTools10"}, "order": 475}
+            }),
+        new ItemBase("EquipmentTools13", <ItemModel>{
+                "item": <ToolItemModel>{
+                    "internalName": "EquipmentTools13",
+                    "displayName": "Skewered Snek",
+                    "sellPrice": 200,
+                    "typeGen": TypeGenEnum.aPick,
+                    "Type": "Pickaxe",
+                    "lvReqToCraft": 55,
+                    "lvReqToEquip": 10,
+                    "Class": ClassTypeEnum.All,
+                    "Weapon_Power": 0,
+                    "STR": 0,
+                    "AGI": 0,
+                    "WIS": 12,
+                    "LUK": 0,
+                    "Defence": 0,
+                    "miscUp1": "5% Chop Efficiency",
+                    "miscUp2": "00",
+                    "Upgrade_Slots_Left": 6,
+                    "Skill": "Mining",
+                    "Skill_Power": 5,
+                    "Speed": 2
+                },
+                "sources": undefined,
+                "notes": undefined,
+                "recipe": undefined,
+                "vendors": undefined,
+                "anvilProduction": undefined,
+                "detDrops": undefined,
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentTools13"}, "order": 476}
             }),
         new ItemBase("EquipmentToolsHatchet0", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -20342,7 +20463,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentToolsHatchet0"}, "order": 484}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentToolsHatchet0"}, "order": 477}
             }),
         new ItemBase("EquipmentToolsHatchet3", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -20402,7 +20523,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentToolsHatchet3"}, "order": 485}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentToolsHatchet3"}, "order": 478}
             }),
         new ItemBase("EquipmentToolsHatchet1", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -20453,7 +20574,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentToolsHatchet1"}, "order": 486}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentToolsHatchet1"}, "order": 479}
             }),
         new ItemBase("EquipmentToolsHatchet2b", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -20488,7 +20609,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "poopBig", "quantity": 1, "chance": 0.02}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentToolsHatchet2b"}, "order": 487}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentToolsHatchet2b"}, "order": 480}
             }),
         new ItemBase("EquipmentToolsHatchet2", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -20557,7 +20678,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentToolsHatchet2"}, "order": 488}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentToolsHatchet2"}, "order": 481}
             }),
         new ItemBase("EquipmentToolsHatchet4", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -20631,7 +20752,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentToolsHatchet4"}, "order": 489}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentToolsHatchet4"}, "order": 482}
             }),
         new ItemBase("EquipmentToolsHatchet5", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -20710,7 +20831,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentToolsHatchet5"}, "order": 490}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentToolsHatchet5"}, "order": 483}
             }),
         new ItemBase("EquipmentToolsHatchet7", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -20794,7 +20915,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentToolsHatchet7"}, "order": 491}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentToolsHatchet7"}, "order": 484}
             }),
         new ItemBase("EquipmentToolsHatchet6", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -20883,7 +21004,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentToolsHatchet6"}, "order": 492}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentToolsHatchet6"}, "order": 485}
             }),
         new ItemBase("EquipmentToolsHatchet8", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -20977,7 +21098,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentToolsHatchet8"}, "order": 493}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentToolsHatchet8"}, "order": 486}
             }),
         new ItemBase("EquipmentToolsHatchet9", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -21066,7 +21187,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentToolsHatchet9"}, "order": 494}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentToolsHatchet9"}, "order": 487}
             }),
         new ItemBase("EquipmentToolsHatchet10", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -21097,7 +21218,38 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentToolsHatchet10"}, "order": 495}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentToolsHatchet10"}, "order": 488}
+            }),
+        new ItemBase("EquipmentToolsHatchet11", <ItemModel>{
+                "item": <ToolItemModel>{
+                    "internalName": "EquipmentToolsHatchet11",
+                    "displayName": "Grumbie the Hatchet Hammer",
+                    "sellPrice": 200,
+                    "typeGen": TypeGenEnum.aHatchet,
+                    "Type": "Hatchet",
+                    "lvReqToCraft": 15,
+                    "lvReqToEquip": 10,
+                    "Class": ClassTypeEnum.All,
+                    "Weapon_Power": 0,
+                    "STR": 12,
+                    "AGI": 0,
+                    "WIS": 0,
+                    "LUK": 0,
+                    "Defence": 0,
+                    "miscUp1": "5% Mining Efficincy",
+                    "miscUp2": "00",
+                    "Upgrade_Slots_Left": 6,
+                    "Skill": "Choppin",
+                    "Skill_Power": 5,
+                    "Speed": 2
+                },
+                "sources": undefined,
+                "notes": undefined,
+                "recipe": undefined,
+                "vendors": undefined,
+                "anvilProduction": undefined,
+                "detDrops": undefined,
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentToolsHatchet11"}, "order": 489}
             }),
         new ItemBase("FishingRod1", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -21128,7 +21280,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("FishingRod2", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -21185,7 +21337,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FishingRod2"}, "order": 496}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FishingRod2"}, "order": 490}
             }),
         new ItemBase("FishingRod3", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -21251,7 +21403,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FishingRod3"}, "order": 497}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FishingRod3"}, "order": 491}
             }),
         new ItemBase("FishingRod4", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -21321,7 +21473,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FishingRod4"}, "order": 498}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FishingRod4"}, "order": 492}
             }),
         new ItemBase("FishingRod5", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -21396,7 +21548,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FishingRod5"}, "order": 499}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FishingRod5"}, "order": 493}
             }),
         new ItemBase("FishingRod6", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -21476,7 +21628,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FishingRod6"}, "order": 500}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FishingRod6"}, "order": 494}
             }),
         new ItemBase("FishingRod7", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -21564,7 +21716,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FishingRod7"}, "order": 501}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FishingRod7"}, "order": 495}
             }),
         new ItemBase("FishingRod8", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -21656,7 +21808,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FishingRod8"}, "order": 502}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FishingRod8"}, "order": 496}
             }),
         new ItemBase("FishingRod9", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -21753,7 +21905,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FishingRod9"}, "order": 503}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FishingRod9"}, "order": 497}
             }),
         new ItemBase("FishingRod10", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -21843,7 +21995,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FishingRod10"}, "order": 504}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FishingRod10"}, "order": 498}
             }),
         new ItemBase("CatchingNet1", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -21874,7 +22026,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CatchingNet2", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -21931,7 +22083,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CatchingNet2"}, "order": 505}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CatchingNet2"}, "order": 499}
             }),
         new ItemBase("CatchingNet3", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -21997,7 +22149,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CatchingNet3"}, "order": 506}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CatchingNet3"}, "order": 500}
             }),
         new ItemBase("CatchingNet4", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -22067,7 +22219,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CatchingNet4"}, "order": 507}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CatchingNet4"}, "order": 501}
             }),
         new ItemBase("CatchingNet5", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -22142,7 +22294,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CatchingNet5"}, "order": 508}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CatchingNet5"}, "order": 502}
             }),
         new ItemBase("CatchingNet6", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -22222,7 +22374,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CatchingNet6"}, "order": 509}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CatchingNet6"}, "order": 503}
             }),
         new ItemBase("CatchingNet7", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -22307,7 +22459,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CatchingNet7"}, "order": 510}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CatchingNet7"}, "order": 504}
             }),
         new ItemBase("CatchingNet8", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -22397,7 +22549,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CatchingNet8"}, "order": 511}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CatchingNet8"}, "order": 505}
             }),
         new ItemBase("CatchingNet9", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -22492,7 +22644,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CatchingNet9"}, "order": 512}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CatchingNet9"}, "order": 506}
             }),
         new ItemBase("CatchingNet10", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -22580,7 +22732,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CatchingNet10"}, "order": 513}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CatchingNet10"}, "order": 507}
             }),
         new ItemBase("TrapBoxSet1", <ItemModel>{
                 "item": <TrapBoxItemModel>{
@@ -22642,7 +22794,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TrapBoxSet1"}, "order": 514}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TrapBoxSet1"}, "order": 508}
             }),
         new ItemBase("TrapBoxSet2", <ItemModel>{
                 "item": <TrapBoxItemModel>{
@@ -22702,7 +22854,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TrapBoxSet2"}, "order": 515}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TrapBoxSet2"}, "order": 509}
             }),
         new ItemBase("TrapBoxSet3", <ItemModel>{
                 "item": <TrapBoxItemModel>{
@@ -22762,7 +22914,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TrapBoxSet3"}, "order": 516}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TrapBoxSet3"}, "order": 510}
             }),
         new ItemBase("TrapBoxSet4", <ItemModel>{
                 "item": <TrapBoxItemModel>{
@@ -22838,7 +22990,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TrapBoxSet4"}, "order": 517}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TrapBoxSet4"}, "order": 511}
             }),
         new ItemBase("TrapBoxSet5", <ItemModel>{
                 "item": <TrapBoxItemModel>{
@@ -22919,7 +23071,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TrapBoxSet5"}, "order": 518}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TrapBoxSet5"}, "order": 512}
             }),
         new ItemBase("TrapBoxSet6", <ItemModel>{
                 "item": <TrapBoxItemModel>{
@@ -23005,7 +23157,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TrapBoxSet6"}, "order": 519}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TrapBoxSet6"}, "order": 513}
             }),
         new ItemBase("TrapBoxSet7", <ItemModel>{
                 "item": <TrapBoxItemModel>{
@@ -23092,7 +23244,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TrapBoxSet7"}, "order": 520}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TrapBoxSet7"}, "order": 514}
             }),
         new ItemBase("TrapBoxSet8", <ItemModel>{
                 "item": <TrapBoxItemModel>{
@@ -23182,7 +23334,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TrapBoxSet8"}, "order": 521}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TrapBoxSet8"}, "order": 515}
             }),
         new ItemBase("WorshipSkull1", <ItemModel>{
                 "item": <SkullItemModel>{
@@ -23233,7 +23385,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "WorshipSkull1"}, "order": 522}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "WorshipSkull1"}, "order": 516}
             }),
         new ItemBase("WorshipSkull2", <ItemModel>{
                 "item": <SkullItemModel>{
@@ -23285,7 +23437,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "WorshipSkull2"}, "order": 523}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "WorshipSkull2"}, "order": 517}
             }),
         new ItemBase("WorshipSkull3", <ItemModel>{
                 "item": <SkullItemModel>{
@@ -23337,7 +23489,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "WorshipSkull3"}, "order": 524}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "WorshipSkull3"}, "order": 518}
             }),
         new ItemBase("WorshipSkull4", <ItemModel>{
                 "item": <SkullItemModel>{
@@ -23406,7 +23558,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "WorshipSkull4"}, "order": 525}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "WorshipSkull4"}, "order": 519}
             }),
         new ItemBase("WorshipSkull5", <ItemModel>{
                 "item": <SkullItemModel>{
@@ -23480,7 +23632,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "WorshipSkull5"}, "order": 526}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "WorshipSkull5"}, "order": 520}
             }),
         new ItemBase("WorshipSkull6", <ItemModel>{
                 "item": <SkullItemModel>{
@@ -23558,7 +23710,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "WorshipSkull6"}, "order": 527}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "WorshipSkull6"}, "order": 521}
             }),
         new ItemBase("WorshipSkull7", <ItemModel>{
                 "item": <SkullItemModel>{
@@ -23635,7 +23787,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "WorshipSkull7"}, "order": 528}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "WorshipSkull7"}, "order": 522}
             }),
         new ItemBase("WorshipSkull8", <ItemModel>{
                 "item": <SkullItemModel>{
@@ -23671,7 +23823,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "mini3a", "quantity": 1, "chance": 0.009}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "WorshipSkull8"}, "order": 529}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "WorshipSkull8"}, "order": 523}
             }),
         new ItemBase("WorshipSkull9", <ItemModel>{
                 "item": <SkullItemModel>{
@@ -23754,7 +23906,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "WorshipSkull9"}, "order": 530}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "WorshipSkull9"}, "order": 524}
             }),
         new ItemBase("DNAgun0", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -23804,7 +23956,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DNAgun0"}, "order": 531}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DNAgun0"}, "order": 525}
             }),
         new ItemBase("DNAgun1", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -23840,25 +23992,25 @@ export const initItemRepo = () => {
                 "notes": undefined,
                 "recipe": <RecipeModel>{
                     "intID": "DNAgun1",
-                    "recipe": [<ComponentModel>{"item": "DesertC2b", "quantity": 18}, <ComponentModel>{"item": "DNAgun0", "quantity": 5}],
+                    "recipe": [<ComponentModel>{"item": "DesertC2b", "quantity": 100}, <ComponentModel>{"item": "DNAgun0", "quantity": 5}],
                     "levelReqToCraft": 55,
                     "expGiven": 1000000,
                     "no": 54,
                     "tab": 4,
-                    "sellPrice": 30002880,
+                    "sellPrice": 30016000,
                     "recipeFrom": [<SourceModel>{"wikiName": "[[Pincermin]]", "txtName": "Pincermin"}],
                     "detailedRecipe": <DetailedRecipeModel>{
                         "detRecipe": [
-                            <DetRecipeComponentModel>{"indent": 0, "item": "DesertC2b", "quantity": 18},
+                            <DetRecipeComponentModel>{"indent": 0, "item": "DesertC2b", "quantity": 100},
                             <DetRecipeComponentModel>{"indent": 0, "item": "DNAgun0", "quantity": 5}
                         ],
-                        "detRecipeTotals": [<ComponentModel>{"item": "DesertC2b", "quantity": 18}, <ComponentModel>{"item": "DNAgun0", "quantity": 5}]
+                        "detRecipeTotals": [<ComponentModel>{"item": "DesertC2b", "quantity": 100}, <ComponentModel>{"item": "DNAgun0", "quantity": 5}]
                     }
                 },
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DNAgun1"}, "order": 532}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DNAgun1"}, "order": 526}
             }),
         new ItemBase("DNAgun2", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -23899,18 +24051,18 @@ export const initItemRepo = () => {
                     "expGiven": 1000000,
                     "no": 55,
                     "tab": 4,
-                    "sellPrice": 30097380,
+                    "sellPrice": 30110500,
                     "recipeFrom": [<SourceModel>{"wikiName": "[[Thermister]]", "txtName": "Thermister"}],
                     "detailedRecipe": <DetailedRecipeModel>{
                         "detRecipe": [
                             <DetRecipeComponentModel>{"indent": 0, "item": "SnowB2a", "quantity": 30},
                             <DetRecipeComponentModel>{"indent": 0, "item": "DNAgun1", "quantity": 1},
-                            <DetRecipeComponentModel>{"indent": 1, "item": "DesertC2b", "quantity": 18},
+                            <DetRecipeComponentModel>{"indent": 1, "item": "DesertC2b", "quantity": 100},
                             <DetRecipeComponentModel>{"indent": 1, "item": "DNAgun0", "quantity": 5}
                         ],
                         "detRecipeTotals": [
                             <ComponentModel>{"item": "SnowB2a", "quantity": 30},
-                            <ComponentModel>{"item": "DesertC2b", "quantity": 18},
+                            <ComponentModel>{"item": "DesertC2b", "quantity": 100},
                             <ComponentModel>{"item": "DNAgun0", "quantity": 5}
                         ]
                     }
@@ -23918,7 +24070,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DNAgun2"}, "order": 533}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DNAgun2"}, "order": 527}
             }),
         new ItemBase("DNAgun3", <ItemModel>{
                 "item": <ToolItemModel>{
@@ -23959,7 +24111,7 @@ export const initItemRepo = () => {
                     "expGiven": 1000000,
                     "no": 56,
                     "tab": 4,
-                    "sellPrice": 30127380,
+                    "sellPrice": 30140500,
                     "recipeFrom": [<SourceModel>{"wikiName": "[[Octodar]]", "txtName": "Octodar"}],
                     "detailedRecipe": <DetailedRecipeModel>{
                         "detRecipe": [
@@ -23967,13 +24119,13 @@ export const initItemRepo = () => {
                             <DetRecipeComponentModel>{"indent": 0, "item": "DNAgun2", "quantity": 1},
                             <DetRecipeComponentModel>{"indent": 1, "item": "SnowB2a", "quantity": 30},
                             <DetRecipeComponentModel>{"indent": 1, "item": "DNAgun1", "quantity": 1},
-                            <DetRecipeComponentModel>{"indent": 2, "item": "DesertC2b", "quantity": 18},
+                            <DetRecipeComponentModel>{"indent": 2, "item": "DesertC2b", "quantity": 100},
                             <DetRecipeComponentModel>{"indent": 2, "item": "DNAgun0", "quantity": 5}
                         ],
                         "detRecipeTotals": [
                             <ComponentModel>{"item": "GalaxyA2b", "quantity": 200},
                             <ComponentModel>{"item": "SnowB2a", "quantity": 30},
-                            <ComponentModel>{"item": "DesertC2b", "quantity": 18},
+                            <ComponentModel>{"item": "DesertC2b", "quantity": 100},
                             <ComponentModel>{"item": "DNAgun0", "quantity": 5}
                         ]
                     }
@@ -23981,7 +24133,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DNAgun3"}, "order": 534}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DNAgun3"}, "order": 528}
             }),
         new ItemBase("FoodHealth1", <ItemModel>{
                 "item": <ACItemModel>{
@@ -24034,7 +24186,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "mushG", "quantity": 3, "chance": 0.005}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth1"}, "order": 535}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth1"}, "order": 529}
             }),
         new ItemBase("FoodHealth3", <ItemModel>{
                 "item": <ACItemModel>{
@@ -24093,7 +24245,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB1", "quantity": 15, "chance": 0.35}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth3"}, "order": 536}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth3"}, "order": 530}
             }),
         new ItemBase("FoodHealth2", <ItemModel>{
                 "item": <ACItemModel>{
@@ -24158,7 +24310,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "carrotO", "quantity": 4, "chance": 0.006}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth2"}, "order": 537}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth2"}, "order": 531}
             }),
         new ItemBase("Peanut", <ItemModel>{
                 "item": <ACItemModel>{
@@ -24220,7 +24372,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Peanut"}, "order": 538}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Peanut"}, "order": 532}
             }),
         new ItemBase("FoodHealth4", <ItemModel>{
                 "item": <ACItemModel>{
@@ -24256,7 +24408,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth4"}, "order": 539}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth4"}, "order": 533}
             }),
         new ItemBase("FoodHealth6", <ItemModel>{
                 "item": <ACItemModel>{
@@ -24303,7 +24455,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestA2", "quantity": 15, "chance": 0.42}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth6"}, "order": 540}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth6"}, "order": 534}
             }),
         new ItemBase("FoodHealth7", <ItemModel>{
                 "item": <ACItemModel>{
@@ -24352,7 +24504,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB2", "quantity": 15, "chance": 0.42}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth7"}, "order": 541}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth7"}, "order": 535}
             }),
         new ItemBase("FoodHealth10", <ItemModel>{
                 "item": <ACItemModel>{
@@ -24403,7 +24555,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "snowball", "quantity": 1, "chance": 0.009}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth10"}, "order": 542}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth10"}, "order": 536}
             }),
         new ItemBase("FoodHealth9", <ItemModel>{
                 "item": <ACItemModel>{
@@ -24440,7 +24592,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "speaker", "quantity": 1, "chance": 0.007}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth9"}, "order": 543}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth9"}, "order": 537}
             }),
         new ItemBase("FoodHealth11", <ItemModel>{
                 "item": <ACItemModel>{
@@ -24476,7 +24628,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth11"}, "order": 544}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth11"}, "order": 538}
             }),
         new ItemBase("FoodHealth13", <ItemModel>{
                 "item": <ACItemModel>{
@@ -24512,7 +24664,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth13"}, "order": 545}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth13"}, "order": 539}
             }),
         new ItemBase("FoodHealth12", <ItemModel>{
                 "item": <ACItemModel>{
@@ -24548,7 +24700,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth12"}, "order": 546}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth12"}, "order": 540}
             }),
         new ItemBase("FoodHealth14", <ItemModel>{
                 "item": <ACItemModel>{
@@ -24584,7 +24736,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth14"}, "order": 547}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth14"}, "order": 541}
             }),
         new ItemBase("FoodHealth15", <ItemModel>{
                 "item": <ACItemModel>{
@@ -24620,7 +24772,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth15"}, "order": 548}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth15"}, "order": 542}
             }),
         new ItemBase("FoodHealth5", <ItemModel>{
                 "item": <ACItemModel>{
@@ -24656,7 +24808,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth5"}, "order": 549}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth5"}, "order": 543}
             }),
         new ItemBase("FoodHealth8", <ItemModel>{
                 "item": <ACItemModel>{
@@ -24673,7 +24825,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("FoodEvent8", <ItemModel>{
                 "item": <ACItemModel>{
@@ -24705,7 +24857,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "loveEvent2", "quantity": 2, "chance": 0.25}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodEvent8"}, "order": 550}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodEvent8"}, "order": 544}
             }),
         new ItemBase("Meatloaf", <ItemModel>{
                 "item": <ACItemModel>{
@@ -24736,7 +24888,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "wolfC", "quantity": 10, "chance": 0.05}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Meatloaf"}, "order": 551}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Meatloaf"}, "order": 545}
             }),
         new ItemBase("FoodPotOr1", <ItemModel>{
                 "item": <ACItemModel>{
@@ -24789,7 +24941,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Bug4", "quantity": 5, "chance": 0.00105}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotOr1"}, "order": 552}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotOr1"}, "order": 546}
             }),
         new ItemBase("FoodPotOr2", <ItemModel>{
                 "item": <ACItemModel>{
@@ -24848,7 +25000,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB1", "quantity": 10, "chance": 0.2}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotOr2"}, "order": 553}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotOr2"}, "order": 547}
             }),
         new ItemBase("FoodPotOr3", <ItemModel>{
                 "item": <ACItemModel>{
@@ -24895,7 +25047,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestA3", "quantity": 25, "chance": 0.15}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotOr3"}, "order": 554}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotOr3"}, "order": 548}
             }),
         new ItemBase("FoodPotOr4", <ItemModel>{
                 "item": <ACItemModel>{
@@ -24931,7 +25083,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotOr4"}, "order": 555}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotOr4"}, "order": 549}
             }),
         new ItemBase("FoodPotRe1", <ItemModel>{
                 "item": <ACItemModel>{
@@ -24975,7 +25127,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "acorn", "quantity": 25, "chance": 0.0026}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotRe1"}, "order": 556}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotRe1"}, "order": 550}
             }),
         new ItemBase("FoodPotRe2", <ItemModel>{
                 "item": <ACItemModel>{
@@ -25016,7 +25168,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "frogBIG", "quantity": 5, "chance": 0.001}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotRe2"}, "order": 557}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotRe2"}, "order": 551}
             }),
         new ItemBase("FoodPotRe3", <ItemModel>{
                 "item": <ACItemModel>{
@@ -25065,7 +25217,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestC2", "quantity": 25, "chance": 0.4}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotRe3"}, "order": 558}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotRe3"}, "order": 552}
             }),
         new ItemBase("FoodPotRe4", <ItemModel>{
                 "item": <ACItemModel>{
@@ -25101,7 +25253,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotRe4"}, "order": 559}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotRe4"}, "order": 553}
             }),
         new ItemBase("FoodPotGr1", <ItemModel>{
                 "item": <ACItemModel>{
@@ -25159,7 +25311,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Dreadlo", "quantity": 10, "chance": 0.0026}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotGr1"}, "order": 560}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotGr1"}, "order": 554}
             }),
         new ItemBase("FoodPotGr2", <ItemModel>{
                 "item": <ACItemModel>{
@@ -25218,7 +25370,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestA2", "quantity": 25, "chance": 0.4}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotGr2"}, "order": 561}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotGr2"}, "order": 555}
             }),
         new ItemBase("FoodPotGr3", <ItemModel>{
                 "item": <ACItemModel>{
@@ -25263,7 +25415,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "stache", "quantity": 1, "chance": 0.002}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotGr3"}, "order": 562}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotGr3"}, "order": 556}
             }),
         new ItemBase("FoodPotGr4", <ItemModel>{
                 "item": <ACItemModel>{
@@ -25299,7 +25451,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotGr4"}, "order": 563}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotGr4"}, "order": 557}
             }),
         new ItemBase("FoodEvent7", <ItemModel>{
                 "item": <ACItemModel>{
@@ -25331,7 +25483,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "loveEvent2", "quantity": 2, "chance": 0.25}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodEvent7"}, "order": 564}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodEvent7"}, "order": 558}
             }),
         new ItemBase("FoodPotMana1", <ItemModel>{
                 "item": <ACItemModel>{
@@ -25387,7 +25539,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "frogG", "quantity": 1, "chance": 0.002}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotMana1"}, "order": 565}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotMana1"}, "order": 559}
             }),
         new ItemBase("FoodPotMana2", <ItemModel>{
                 "item": <ACItemModel>{
@@ -25421,7 +25573,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestC1", "quantity": 10, "chance": 0.25}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotMana2"}, "order": 566}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotMana2"}, "order": 560}
             }),
         new ItemBase("FoodPotMana3", <ItemModel>{
                 "item": <ACItemModel>{
@@ -25442,7 +25594,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "bloque", "quantity": 1, "chance": 0.0025}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotMana3"}, "order": 567}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotMana3"}, "order": 561}
             }),
         new ItemBase("FoodPotMana4", <ItemModel>{
                 "item": <ACItemModel>{
@@ -25476,7 +25628,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB4", "quantity": 50, "chance": 0.15}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotMana4"}, "order": 568}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotMana4"}, "order": 562}
             }),
         new ItemBase("FoodPotYe1", <ItemModel>{
                 "item": <ACItemModel>{
@@ -25520,7 +25672,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotYe1"}, "order": 569}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotYe1"}, "order": 563}
             }),
         new ItemBase("FoodPotYe2", <ItemModel>{
                 "item": <ACItemModel>{
@@ -25574,7 +25726,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestC3", "quantity": 25, "chance": 0.1}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotYe2"}, "order": 570}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotYe2"}, "order": 564}
             }),
         new ItemBase("FoodPotYe3", <ItemModel>{
                 "item": <ACItemModel>{
@@ -25601,7 +25753,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotYe3"}, "order": 571}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotYe3"}, "order": 565}
             }),
         new ItemBase("FoodPotYe4", <ItemModel>{
                 "item": <ACItemModel>{
@@ -25637,7 +25789,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotYe4"}, "order": 572}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotYe4"}, "order": 566}
             }),
         new ItemBase("FoodPotYe5", <ItemModel>{
                 "item": <ACItemModel>{
@@ -25692,7 +25844,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Boss5C", "quantity": 40, "chance": 0.19}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotYe5"}, "order": 573}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodPotYe5"}, "order": 567}
             }),
         new ItemBase("FoodEvent6", <ItemModel>{
                 "item": <ACItemModel>{
@@ -25724,7 +25876,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "loveEvent2", "quantity": 3, "chance": 0.25}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodEvent6"}, "order": 574}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodEvent6"}, "order": 568}
             }),
         new ItemBase("Pearl3", <ItemModel>{
                 "item": <ACItemModel>{
@@ -25745,7 +25897,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Pearl3"}, "order": 575}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Pearl3"}, "order": 569}
             }),
         new ItemBase("FoodMining1", <ItemModel>{
                 "item": <ACItemModel>{
@@ -25792,7 +25944,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodMining1"}, "order": 576}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodMining1"}, "order": 570}
             }),
         new ItemBase("FoodEvent1", <ItemModel>{
                 "item": <ACItemModel>{
@@ -25823,7 +25975,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "xmasEvent", "quantity": 3, "chance": 0.25}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodEvent1"}, "order": 577}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodEvent1"}, "order": 571}
             }),
         new ItemBase("Pearl2", <ItemModel>{
                 "item": <ACItemModel>{
@@ -25844,7 +25996,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Pearl2"}, "order": 578}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Pearl2"}, "order": 572}
             }),
         new ItemBase("FoodChoppin1", <ItemModel>{
                 "item": <ACItemModel>{
@@ -25887,7 +26039,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodChoppin1"}, "order": 579}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodChoppin1"}, "order": 573}
             }),
         new ItemBase("FoodEvent2", <ItemModel>{
                 "item": <ACItemModel>{
@@ -25917,7 +26069,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "xmasEvent", "quantity": 3, "chance": 0.25}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodEvent2"}, "order": 580}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodEvent2"}, "order": 574}
             }),
         new ItemBase("FoodFish1", <ItemModel>{
                 "item": <ACItemModel>{
@@ -25960,7 +26112,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodFish1"}, "order": 581}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodFish1"}, "order": 575}
             }),
         new ItemBase("FoodEvent3", <ItemModel>{
                 "item": <ACItemModel>{
@@ -25990,7 +26142,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "xmasEvent", "quantity": 2, "chance": 0.25}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodEvent3"}, "order": 582}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodEvent3"}, "order": 576}
             }),
         new ItemBase("Pearl1", <ItemModel>{
                 "item": <ACItemModel>{
@@ -26011,7 +26163,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Pearl1"}, "order": 583}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Pearl1"}, "order": 577}
             }),
         new ItemBase("FoodCatch1", <ItemModel>{
                 "item": <ACItemModel>{
@@ -26054,7 +26206,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodCatch1"}, "order": 584}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodCatch1"}, "order": 578}
             }),
         new ItemBase("FoodEvent4", <ItemModel>{
                 "item": <ACItemModel>{
@@ -26084,7 +26236,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "xmasEvent", "quantity": 2, "chance": 0.25}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodEvent4"}, "order": 585}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodEvent4"}, "order": 579}
             }),
         new ItemBase("FoodTrapping1", <ItemModel>{
                 "item": <ACItemModel>{
@@ -26127,7 +26279,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodTrapping1"}, "order": 586}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodTrapping1"}, "order": 580}
             }),
         new ItemBase("FoodWorship1", <ItemModel>{
                 "item": <ACItemModel>{
@@ -26170,7 +26322,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodWorship1"}, "order": 587}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodWorship1"}, "order": 581}
             }),
         new ItemBase("Bullet", <ItemModel>{
                 "item": <ACItemModel>{
@@ -26213,7 +26365,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Bullet"}, "order": 588}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Bullet"}, "order": 582}
             }),
         new ItemBase("BulletB", <ItemModel>{
                 "item": <ACItemModel>{
@@ -26262,7 +26414,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BulletB"}, "order": 589}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BulletB"}, "order": 583}
             }),
         new ItemBase("Bullet3", <ItemModel>{
                 "item": <ACItemModel>{
@@ -26311,7 +26463,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Bullet3"}, "order": 590}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Bullet3"}, "order": 584}
             }),
         new ItemBase("MidnightCookie", <ItemModel>{
                 "item": <ACItemModel>{
@@ -26354,7 +26506,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Boss2C", "quantity": 1, "chance": 0.07}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MidnightCookie"}, "order": 591}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MidnightCookie"}, "order": 585}
             }),
         new ItemBase("FoodEvent5", <ItemModel>{
                 "item": <ACItemModel>{
@@ -26385,7 +26537,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "loveEvent2", "quantity": 3, "chance": 0.25}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodEvent5"}, "order": 592}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodEvent5"}, "order": 586}
             }),
         new ItemBase("PeanutG", <ItemModel>{
                 "item": <GoldenFoodItemModel>{
@@ -26447,7 +26599,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "PeanutG"}, "order": 593}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "PeanutG"}, "order": 587}
             }),
         new ItemBase("FoodG1", <ItemModel>{
                 "item": <GoldenFoodItemModel>{
@@ -26508,7 +26660,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestC1", "quantity": 1, "chance": 0.5}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodG1"}, "order": 594}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodG1"}, "order": 588}
             }),
         new ItemBase("FoodG2", <ItemModel>{
                 "item": <GoldenFoodItemModel>{
@@ -26555,7 +26707,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestB2", "quantity": 1, "chance": 0.5}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodG2"}, "order": 595}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodG2"}, "order": 589}
             }),
         new ItemBase("FoodG3", <ItemModel>{
                 "item": <GoldenFoodItemModel>{
@@ -26641,7 +26793,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestC2", "quantity": 1, "chance": 0.5}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodG3"}, "order": 596}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodG3"}, "order": 590}
             }),
         new ItemBase("FoodG4", <ItemModel>{
                 "item": <GoldenFoodItemModel>{
@@ -26726,7 +26878,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB1", "quantity": 1, "chance": 0.5}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodG4"}, "order": 597}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodG4"}, "order": 591}
             }),
         new ItemBase("FoodG5", <ItemModel>{
                 "item": <GoldenFoodItemModel>{
@@ -26795,7 +26947,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB3", "quantity": 1, "chance": 0.5}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodG5"}, "order": 598}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodG5"}, "order": 592}
             }),
         new ItemBase("FoodG6", <ItemModel>{
                 "item": <GoldenFoodItemModel>{
@@ -26826,7 +26978,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestC3", "quantity": 1, "chance": 0.3}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodG6"}, "order": 599}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodG6"}, "order": 593}
             }),
         new ItemBase("FoodG7", <ItemModel>{
                 "item": <GoldenFoodItemModel>{
@@ -26899,7 +27051,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestC4", "quantity": 2, "chance": 0.025}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodG7"}, "order": 600}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodG7"}, "order": 594}
             }),
         new ItemBase("FoodG8", <ItemModel>{
                 "item": <GoldenFoodItemModel>{
@@ -26957,7 +27109,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Bug6", "quantity": 1, "chance": 3.6e-05}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodG8"}, "order": 601}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodG8"}, "order": 595}
             }),
         new ItemBase("FoodG9", <ItemModel>{
                 "item": <GoldenFoodItemModel>{
@@ -27030,7 +27182,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Boss5C", "quantity": 2, "chance": 0.0025}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodG9"}, "order": 602}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodG9"}, "order": 596}
             }),
         new ItemBase("FoodG10", <ItemModel>{
                 "item": <GoldenFoodItemModel>{
@@ -27074,7 +27226,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Boss5C", "quantity": 2, "chance": 0.0083}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodG10"}, "order": 603}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodG10"}, "order": 597}
             }),
         new ItemBase("ButterBar", <ItemModel>{
                 "item": <GoldenFoodItemModel>{
@@ -27096,7 +27248,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Bug2", "quantity": 1, "chance": 0.01}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ButterBar"}, "order": 604}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ButterBar"}, "order": 598}
             }),
         new ItemBase("rtt0", <ItemModel>{
                 "item": <DescItemModel>{
@@ -27200,7 +27352,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestC1", "quantity": 1, "chance": 0.05}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "rtt0"}, "order": 605}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "rtt0"}, "order": 599}
             }),
         new ItemBase("ResetFrag", <ItemModel>{
                 "item": <DescItemModel>{
@@ -27480,7 +27632,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Boss5C", "quantity": 2, "chance": 0.00075}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ResetFrag"}, "order": 606}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ResetFrag"}, "order": 600}
             }),
         new ItemBase("ResetCompleted", <ItemModel>{
                 "item": <DescItemModel>{
@@ -27527,7 +27679,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ResetCompleted"}, "order": 607}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ResetCompleted"}, "order": 601}
             }),
         new ItemBase("ResetCompletedS", <ItemModel>{
                 "item": <DescItemModel>{
@@ -27583,7 +27735,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ResetCompletedS"}, "order": 608}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ResetCompletedS"}, "order": 602}
             }),
         new ItemBase("ClassSwap", <ItemModel>{
                 "item": <DescItemModel>{
@@ -27606,7 +27758,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ClassSwap"}, "order": 609}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ClassSwap"}, "order": 603}
             }),
         new ItemBase("ResetBox", <ItemModel>{
                 "item": <DescItemModel>{
@@ -27633,7 +27785,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ResetBox"}, "order": 610}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ResetBox"}, "order": 604}
             }),
         new ItemBase("Ht", <ItemModel>{
                 "item": <DescItemModel>{
@@ -27654,7 +27806,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Ht"}, "order": 611}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Ht"}, "order": 605}
             }),
         new ItemBase("StonePremRestore", <ItemModel>{
                 "item": <DescItemModel>{
@@ -27675,7 +27827,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StonePremRestore"}, "order": 612}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StonePremRestore"}, "order": 606}
             }),
         new ItemBase("ExpBalloon1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -27798,7 +27950,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "mini4a", "quantity": 1, "chance": 0.25}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ExpBalloon1"}, "order": 613}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ExpBalloon1"}, "order": 607}
             }),
         new ItemBase("ExpBalloon2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -27869,7 +28021,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ExpBalloon2"}, "order": 614}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ExpBalloon2"}, "order": 608}
             }),
         new ItemBase("ExpBalloon3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -27908,7 +28060,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ExpBalloon3"}, "order": 615}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ExpBalloon3"}, "order": 609}
             }),
         new ItemBase("JobApplication", <ItemModel>{
                 "item": <DescItemModel>{
@@ -27934,7 +28086,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "poopBig", "quantity": 1, "chance": 1}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "JobApplication"}, "order": 663}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "JobApplication"}, "order": 656}
             }),
         new ItemBase("SmithingHammerChisel", <ItemModel>{
                 "item": <DescItemModel>{
@@ -27979,7 +28131,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SmithingHammerChisel"}, "order": 664}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SmithingHammerChisel"}, "order": 657}
             }),
         new ItemBase("SmithingHammerChisel2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28015,7 +28167,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SmithingHammerChisel2"}, "order": 665}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SmithingHammerChisel2"}, "order": 658}
             }),
         new ItemBase("BobJoePickle", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28056,7 +28208,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BobJoePickle"}, "order": 666}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BobJoePickle"}, "order": 659}
             }),
         new ItemBase("BallJoePickle", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28077,7 +28229,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BallJoePickle"}, "order": 667}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BallJoePickle"}, "order": 660}
             }),
         new ItemBase("Quest1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28108,7 +28260,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest1"}, "order": 668}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest1"}, "order": 661}
             }),
         new ItemBase("Crystal1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28134,7 +28286,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "wolfA", "quantity": 1, "chance": 1}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Crystal1"}, "order": 669}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Crystal1"}, "order": 662}
             }),
         new ItemBase("Crystal2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28160,7 +28312,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Boss2A", "quantity": 1, "chance": 1}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Crystal2"}, "order": 670}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Crystal2"}, "order": 663}
             }),
         new ItemBase("Crystal3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28186,7 +28338,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Crystal3"}, "order": 671}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Crystal3"}, "order": 664}
             }),
         new ItemBase("Crystal4", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28203,7 +28355,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Crystal4"}, "order": 672}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Crystal4"}, "order": 665}
             }),
         new ItemBase("PeanutS", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28229,7 +28381,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "PeanutS"}, "order": 673}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "PeanutS"}, "order": 666}
             }),
         new ItemBase("Quest3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28255,7 +28407,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "frogG", "quantity": 1, "chance": 0.5}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest3"}, "order": 674}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest3"}, "order": 667}
             }),
         new ItemBase("Quest4", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28281,7 +28433,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "frogG", "quantity": 1, "chance": 0.3}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest4"}, "order": 675}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest4"}, "order": 668}
             }),
         new ItemBase("Mayo", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28307,7 +28459,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Mayo"}, "order": 676}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Mayo"}, "order": 669}
             }),
         new ItemBase("Trash", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28333,7 +28485,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trash"}, "order": 677}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trash"}, "order": 670}
             }),
         new ItemBase("Trash2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28359,7 +28511,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trash2"}, "order": 678}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trash2"}, "order": 671}
             }),
         new ItemBase("Trash3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28376,7 +28528,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trash3"}, "order": 679}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Trash3"}, "order": 672}
             }),
         new ItemBase("Quest5", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28407,7 +28559,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest5"}, "order": 680}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest5"}, "order": 673}
             }),
         new ItemBase("Quest6", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28438,7 +28590,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest6"}, "order": 681}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest6"}, "order": 674}
             }),
         new ItemBase("Quest7", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28464,7 +28616,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "snakeG", "quantity": 1, "chance": 0.2}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest7"}, "order": 682}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest7"}, "order": 675}
             }),
         new ItemBase("Quest8", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28481,7 +28633,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("Quest10", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28507,7 +28659,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest10"}, "order": 683}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest10"}, "order": 676}
             }),
         new ItemBase("Quest11", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28538,7 +28690,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest11"}, "order": 684}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest11"}, "order": 677}
             }),
         new ItemBase("Quest12", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28564,7 +28716,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "plank", "quantity": 1, "chance": 0.1}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest12"}, "order": 685}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest12"}, "order": 678}
             }),
         new ItemBase("Quest13", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28615,7 +28767,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest13"}, "order": 686}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest13"}, "order": 679}
             }),
         new ItemBase("Quest14", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28641,7 +28793,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ratB", "quantity": 1, "chance": 0.1}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest14"}, "order": 687}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest14"}, "order": 680}
             }),
         new ItemBase("Quest15", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28667,7 +28819,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "mushW", "quantity": 1, "chance": 1e-05}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest15"}, "order": 688}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest15"}, "order": 681}
             }),
         new ItemBase("Quest16", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28697,7 +28849,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest16"}, "order": 689}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest16"}, "order": 682}
             }),
         new ItemBase("Quest18", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28723,7 +28875,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "moonman", "quantity": 1, "chance": 0.0001}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest18"}, "order": 690}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest18"}, "order": 683}
             }),
         new ItemBase("Quest19", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28766,7 +28918,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest19"}, "order": 691}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest19"}, "order": 684}
             }),
         new ItemBase("Quest20", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28797,7 +28949,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest20"}, "order": 692}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest20"}, "order": 685}
             }),
         new ItemBase("Quest21", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28834,7 +28986,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB1", "quantity": 1, "chance": 0.3}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest21"}, "order": 693}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest21"}, "order": 686}
             }),
         new ItemBase("Quest22", <ItemModel>{
                 "item": <DescItemModel>{
@@ -28969,7 +29121,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "poopSmall", "quantity": 1, "chance": 0.23}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest22"}, "order": 694}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest22"}, "order": 687}
             }),
         new ItemBase("Quest23", <ItemModel>{
                 "item": <DescItemModel>{
@@ -29065,7 +29217,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ratB", "quantity": 1, "chance": 0.16}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest23"}, "order": 695}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest23"}, "order": 688}
             }),
         new ItemBase("Quest24", <ItemModel>{
                 "item": <DescItemModel>{
@@ -29251,7 +29403,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Boss5C", "quantity": 16, "chance": 0.5}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest24"}, "order": 696}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest24"}, "order": 689}
             }),
         new ItemBase("Quest25", <ItemModel>{
                 "item": <DescItemModel>{
@@ -29279,7 +29431,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest25"}, "order": 697}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest25"}, "order": 690}
             }),
         new ItemBase("Quest26", <ItemModel>{
                 "item": <DescItemModel>{
@@ -29305,7 +29457,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest26"}, "order": 698}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest26"}, "order": 691}
             }),
         new ItemBase("Quest27", <ItemModel>{
                 "item": <DescItemModel>{
@@ -29331,7 +29483,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest27"}, "order": 699}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest27"}, "order": 692}
             }),
         new ItemBase("Quest28", <ItemModel>{
                 "item": <DescItemModel>{
@@ -29350,7 +29502,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("GoldricP1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -29376,7 +29528,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "mimicA", "quantity": 1, "chance": 0.1}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GoldricP1"}, "order": 700}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GoldricP1"}, "order": 693}
             }),
         new ItemBase("GoldricP2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -29402,7 +29554,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "coconut", "quantity": 1, "chance": 0.075}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GoldricP2"}, "order": 701}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GoldricP2"}, "order": 694}
             }),
         new ItemBase("GoldricP3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -29428,7 +29580,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "sandcastle", "quantity": 1, "chance": 0.05}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GoldricP3"}, "order": 702}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GoldricP3"}, "order": 695}
             }),
         new ItemBase("Quest30", <ItemModel>{
                 "item": <DescItemModel>{
@@ -29465,7 +29617,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "xmasEvent", "quantity": 1, "chance": 0.05}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest30"}, "order": 703}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest30"}, "order": 696}
             }),
         new ItemBase("Quest31", <ItemModel>{
                 "item": <DescItemModel>{
@@ -29482,7 +29634,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest31"}, "order": 704}
+                "slabSort": undefined
             }),
         new ItemBase("Cutter", <ItemModel>{
                 "item": <DescItemModel>{
@@ -29503,7 +29655,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "mushG", "quantity": 1, "chance": 1e-05}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Cutter"}, "order": 705}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Cutter"}, "order": 697}
             }),
         new ItemBase("Quest32", <ItemModel>{
                 "item": <DescItemModel>{
@@ -29551,7 +29703,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB2", "quantity": 1, "chance": 0.9}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest32"}, "order": 706}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest32"}, "order": 698}
             }),
         new ItemBase("Quest33", <ItemModel>{
                 "item": <DescItemModel>{
@@ -29577,7 +29729,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest33"}, "order": 707}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest33"}, "order": 699}
             }),
         new ItemBase("Quest34", <ItemModel>{
                 "item": <DescItemModel>{
@@ -29603,7 +29755,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest34"}, "order": 708}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest34"}, "order": 700}
             }),
         new ItemBase("Quest35", <ItemModel>{
                 "item": <DescItemModel>{
@@ -29652,7 +29804,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest35"}, "order": 709}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest35"}, "order": 701}
             }),
         new ItemBase("Quest36", <ItemModel>{
                 "item": <DescItemModel>{
@@ -29677,31 +29829,31 @@ export const initItemRepo = () => {
                     "recipe": [
                         <ComponentModel>{"item": "Quest37", "quantity": 1},
                         <ComponentModel>{"item": "GoldBar", "quantity": 80},
-                        <ComponentModel>{"item": "DesertC2b", "quantity": 1}
+                        <ComponentModel>{"item": "DesertC2b", "quantity": 5}
                     ],
                     "levelReqToCraft": 21,
                     "expGiven": 2500,
                     "no": 59,
                     "tab": 2,
-                    "sellPrice": 29360,
+                    "sellPrice": 30000,
                     "recipeFrom": [<SourceModel>{"wikiName": "[[Sand Giant]]", "txtName": "Sand Giant"}],
                     "detailedRecipe": <DetailedRecipeModel>{
                         "detRecipe": [
                             <DetRecipeComponentModel>{"indent": 0, "item": "Quest37", "quantity": 1},
                             <DetRecipeComponentModel>{"indent": 0, "item": "GoldBar", "quantity": 80},
-                            <DetRecipeComponentModel>{"indent": 0, "item": "DesertC2b", "quantity": 1}
+                            <DetRecipeComponentModel>{"indent": 0, "item": "DesertC2b", "quantity": 5}
                         ],
                         "detRecipeTotals": [
                             <ComponentModel>{"item": "Quest37", "quantity": 1},
                             <ComponentModel>{"item": "GoldBar", "quantity": 80},
-                            <ComponentModel>{"item": "DesertC2b", "quantity": 1}
+                            <ComponentModel>{"item": "DesertC2b", "quantity": 5}
                         ]
                     }
                 },
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest36"}, "order": 710}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest36"}, "order": 702}
             }),
         new ItemBase("Quest37", <ItemModel>{
                 "item": <DescItemModel>{
@@ -29741,7 +29893,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest37"}, "order": 711}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest37"}, "order": 703}
             }),
         new ItemBase("Quest38", <ItemModel>{
                 "item": <DescItemModel>{
@@ -29767,7 +29919,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest38"}, "order": 712}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest38"}, "order": 704}
             }),
         new ItemBase("Quest39", <ItemModel>{
                 "item": <DescItemModel>{
@@ -29793,7 +29945,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest39"}, "order": 713}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest39"}, "order": 705}
             }),
         new ItemBase("Quest40", <ItemModel>{
                 "item": <DescItemModel>{
@@ -29832,7 +29984,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "loveEvent2", "quantity": 1, "chance": 0.05}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest40"}, "order": 714}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest40"}, "order": 706}
             }),
         new ItemBase("Quest41", <ItemModel>{
                 "item": <DescItemModel>{
@@ -29862,7 +30014,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "babayaga", "quantity": 1, "chance": 1}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest41"}, "order": 715}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest41"}, "order": 707}
             }),
         new ItemBase("Quest42", <ItemModel>{
                 "item": <DescItemModel>{
@@ -29893,7 +30045,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "EasterEvent2", "quantity": 1, "chance": 0.05}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest42"}, "order": 716}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest42"}, "order": 708}
             }),
         new ItemBase("Quest43", <ItemModel>{
                 "item": <DescItemModel>{
@@ -29923,7 +30075,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest43"}, "order": 717}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest43"}, "order": 709}
             }),
         new ItemBase("Quest44", <ItemModel>{
                 "item": <DescItemModel>{
@@ -29950,7 +30102,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "EasterEvent2", "quantity": 1, "chance": 0.13}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest44"}, "order": 718}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest44"}, "order": 710}
             }),
         new ItemBase("Quest45", <ItemModel>{
                 "item": <DescItemModel>{
@@ -29976,7 +30128,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest45"}, "order": 719}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest45"}, "order": 711}
             }),
         new ItemBase("Quest46", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30004,7 +30156,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest46"}, "order": 720}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest46"}, "order": 712}
             }),
         new ItemBase("Quest47", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30035,7 +30187,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest47"}, "order": 721}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest47"}, "order": 713}
             }),
         new ItemBase("Quest48", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30061,7 +30213,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest48"}, "order": 722}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest48"}, "order": 714}
             }),
         new ItemBase("Quest49", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30098,7 +30250,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "shovelY", "quantity": 1, "chance": 0.4}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest49"}, "order": 723}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest49"}, "order": 715}
             }),
         new ItemBase("Quest50", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30129,7 +30281,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest50"}, "order": 724}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest50"}, "order": 716}
             }),
         new ItemBase("Quest51", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30155,7 +30307,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest51"}, "order": 725}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest51"}, "order": 717}
             }),
         new ItemBase("Quest52", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30181,7 +30333,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest52"}, "order": 726}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest52"}, "order": 718}
             }),
         new ItemBase("PalmTreeD", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30207,7 +30359,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "PalmTreeD"}, "order": 727}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "PalmTreeD"}, "order": 719}
             }),
         new ItemBase("Pearl4", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30239,7 +30391,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Pearl4"}, "order": 728}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Pearl4"}, "order": 720}
             }),
         new ItemBase("Pearl5", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30260,7 +30412,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Pearl5"}, "order": 729}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Pearl5"}, "order": 721}
             }),
         new ItemBase("Pearl6", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30294,7 +30446,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Pearl6"}, "order": 730}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Pearl6"}, "order": 722}
             }),
         new ItemBase("Quest53", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30320,7 +30472,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest53"}, "order": 731}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest53"}, "order": 723}
             }),
         new ItemBase("Quest54", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30346,7 +30498,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest54"}, "order": 732}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest54"}, "order": 724}
             }),
         new ItemBase("Quest55", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30372,7 +30524,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest55"}, "order": 733}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest55"}, "order": 725}
             }),
         new ItemBase("Quest56", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30393,7 +30545,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest56"}, "order": 734}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest56"}, "order": 726}
             }),
         new ItemBase("Quest57", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30429,7 +30581,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest57"}, "order": 735}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest57"}, "order": 727}
             }),
         new ItemBase("Quest58", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30446,7 +30598,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest58"}, "order": 736}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest58"}, "order": 728}
             }),
         new ItemBase("Quest59", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30477,7 +30629,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest59"}, "order": 737}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest59"}, "order": 729}
             }),
         new ItemBase("Quest60", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30508,7 +30660,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest60"}, "order": 738}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest60"}, "order": 730}
             }),
         new ItemBase("Quest61", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30539,7 +30691,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest61"}, "order": 739}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest61"}, "order": 731}
             }),
         new ItemBase("Quest62", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30565,7 +30717,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest62"}, "order": 740}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest62"}, "order": 732}
             }),
         new ItemBase("Quest63", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30596,7 +30748,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "thermostat", "quantity": 1, "chance": 1}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest63"}, "order": 741}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest63"}, "order": 733}
             }),
         new ItemBase("Quest64", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30622,7 +30774,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest64"}, "order": 742}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest64"}, "order": 734}
             }),
         new ItemBase("Quest65", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30656,7 +30808,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest65"}, "order": 743}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest65"}, "order": 735}
             }),
         new ItemBase("Quest66", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30692,7 +30844,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest66"}, "order": 744}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest66"}, "order": 736}
             }),
         new ItemBase("Quest67", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30728,7 +30880,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest67"}, "order": 745}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest67"}, "order": 737}
             }),
         new ItemBase("Quest68", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30777,7 +30929,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest68"}, "order": 746}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest68"}, "order": 738}
             }),
         new ItemBase("Quest69", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30794,7 +30946,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest69"}, "order": 747}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest69"}, "order": 739}
             }),
         new ItemBase("Quest70", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30813,7 +30965,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest70"}, "order": 748}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest70"}, "order": 740}
             }),
         new ItemBase("Quest71", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30830,7 +30982,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest71"}, "order": 749}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest71"}, "order": 741}
             }),
         new ItemBase("Quest72", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30885,7 +31037,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest72"}, "order": 750}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest72"}, "order": 742}
             }),
         new ItemBase("Quest73", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30944,7 +31096,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest73"}, "order": 751}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest73"}, "order": 743}
             }),
         new ItemBase("EquipmentSmithingTabs2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -30993,7 +31145,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentSmithingTabs2"}, "order": 827}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentSmithingTabs2"}, "order": 819}
             }),
         new ItemBase("EquipmentSmithingTabs3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -31042,7 +31194,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentSmithingTabs3"}, "order": 828}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentSmithingTabs3"}, "order": 820}
             }),
         new ItemBase("EquipmentSmithingTabs4", <ItemModel>{
                 "item": <DescItemModel>{
@@ -31091,7 +31243,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentSmithingTabs4"}, "order": 829}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentSmithingTabs4"}, "order": 821}
             }),
         new ItemBase("EquipmentSmithingTabs5", <ItemModel>{
                 "item": <DescItemModel>{
@@ -31140,7 +31292,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentSmithingTabs5"}, "order": 830}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentSmithingTabs5"}, "order": 822}
             }),
         new ItemBase("EquipmentSmithingTabs6", <ItemModel>{
                 "item": <DescItemModel>{
@@ -31182,7 +31334,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentSmithingTabs6"}, "order": 831}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentSmithingTabs6"}, "order": 823}
             }),
         new ItemBase("EquipmentStatues1", <ItemModel>{
                 "item": <StatueItemModel>{
@@ -31248,7 +31400,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB1", "quantity": 1, "chance": 0.12}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues1"}, "order": 802}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues1"}, "order": 794}
             }),
         new ItemBase("EquipmentStatues2", <ItemModel>{
                 "item": <StatueItemModel>{
@@ -31308,7 +31460,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestA3", "quantity": 1, "chance": 0.03}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues2"}, "order": 803}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues2"}, "order": 795}
             }),
         new ItemBase("EquipmentStatues3", <ItemModel>{
                 "item": <StatueItemModel>{
@@ -31347,7 +31499,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ToiletTree", "quantity": 1, "chance": 0.003392}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues3"}, "order": 804}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues3"}, "order": 796}
             }),
         new ItemBase("EquipmentStatues4", <ItemModel>{
                 "item": <StatueItemModel>{
@@ -31406,7 +31558,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestC3", "quantity": 1, "chance": 0.03}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues4"}, "order": 805}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues4"}, "order": 797}
             }),
         new ItemBase("EquipmentStatues5", <ItemModel>{
                 "item": <StatueItemModel>{
@@ -31455,7 +31607,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "acorn", "quantity": 1, "chance": 0.000585}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues5"}, "order": 806}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues5"}, "order": 798}
             }),
         new ItemBase("EquipmentStatues6", <ItemModel>{
                 "item": <StatueItemModel>{
@@ -31495,7 +31647,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues6"}, "order": 807}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues6"}, "order": 799}
             }),
         new ItemBase("EquipmentStatues7", <ItemModel>{
                 "item": <StatueItemModel>{
@@ -31537,7 +31689,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Dreadlo", "quantity": 2, "chance": 0.00351}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues7"}, "order": 808}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues7"}, "order": 800}
             }),
         new ItemBase("EquipmentStatues8", <ItemModel>{
                 "item": <StatueItemModel>{
@@ -31570,7 +31722,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "PalmTree", "quantity": 2, "chance": 0.00075}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues8"}, "order": 809}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues8"}, "order": 801}
             }),
         new ItemBase("EquipmentStatues9", <ItemModel>{
                 "item": <StatueItemModel>{
@@ -31601,7 +31753,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Bug4", "quantity": 1, "chance": 0.001275}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues9"}, "order": 810}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues9"}, "order": 802}
             }),
         new ItemBase("EquipmentStatues10", <ItemModel>{
                 "item": <StatueItemModel>{
@@ -31638,7 +31790,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Fish8", "quantity": 1, "chance": 0.001224}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues10"}, "order": 811}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues10"}, "order": 803}
             }),
         new ItemBase("EquipmentStatues11", <ItemModel>{
                 "item": <StatueItemModel>{
@@ -31673,7 +31825,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB2", "quantity": 1, "chance": 0.04}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues11"}, "order": 812}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues11"}, "order": 804}
             }),
         new ItemBase("EquipmentStatues12", <ItemModel>{
                 "item": <StatueItemModel>{
@@ -31706,7 +31858,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestA2", "quantity": 1, "chance": 0.07}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues12"}, "order": 813}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues12"}, "order": 805}
             }),
         new ItemBase("EquipmentStatues13", <ItemModel>{
                 "item": <StatueItemModel>{
@@ -31747,7 +31899,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestC2", "quantity": 1, "chance": 0.07}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues13"}, "order": 814}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues13"}, "order": 806}
             }),
         new ItemBase("EquipmentStatues14", <ItemModel>{
                 "item": <StatueItemModel>{
@@ -31783,7 +31935,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "mushW", "quantity": 1, "chance": 0.0001}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues14"}, "order": 815}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues14"}, "order": 807}
             }),
         new ItemBase("EquipmentStatues15", <ItemModel>{
                 "item": <StatueItemModel>{
@@ -31818,7 +31970,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "acorn", "quantity": 1, "chance": 0.000325}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues15"}, "order": 816}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues15"}, "order": 808}
             }),
         new ItemBase("EquipmentStatues16", <ItemModel>{
                 "item": <StatueItemModel>{
@@ -31849,7 +32001,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "penguin", "quantity": 1, "chance": 0.0003}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues16"}, "order": 817}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues16"}, "order": 809}
             }),
         new ItemBase("EquipmentStatues17", <ItemModel>{
                 "item": <StatueItemModel>{
@@ -31880,7 +32032,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "glass", "quantity": 1, "chance": 0.0003}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues17"}, "order": 818}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues17"}, "order": 810}
             }),
         new ItemBase("EquipmentStatues18", <ItemModel>{
                 "item": <StatueItemModel>{
@@ -31929,7 +32081,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB3", "quantity": 1, "chance": 0.04}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues18"}, "order": 819}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues18"}, "order": 811}
             }),
         new ItemBase("EquipmentStatues19", <ItemModel>{
                 "item": <StatueItemModel>{
@@ -31964,7 +32116,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "snakeB", "quantity": 1, "chance": 0.0003}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues19"}, "order": 820}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues19"}, "order": 812}
             }),
         new ItemBase("EquipmentStatues20", <ItemModel>{
                 "item": <StatueItemModel>{
@@ -31999,7 +32151,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestA4", "quantity": 1, "chance": 0.025}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues20"}, "order": 821}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues20"}, "order": 813}
             }),
         new ItemBase("EquipmentStatues21", <ItemModel>{
                 "item": <StatueItemModel>{
@@ -32035,7 +32187,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB4", "quantity": 1, "chance": 0.025}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues21"}, "order": 822}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues21"}, "order": 814}
             }),
         new ItemBase("EquipmentStatues22", <ItemModel>{
                 "item": <StatueItemModel>{
@@ -32070,7 +32222,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestC4", "quantity": 1, "chance": 0.025}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues22"}, "order": 823}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues22"}, "order": 815}
             }),
         new ItemBase("EquipmentStatues23", <ItemModel>{
                 "item": <StatueItemModel>{
@@ -32106,7 +32258,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Bug9", "quantity": 1, "chance": 0.000225}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues23"}, "order": 824}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues23"}, "order": 816}
             }),
         new ItemBase("EquipmentStatues24", <ItemModel>{
                 "item": <StatueItemModel>{
@@ -32138,7 +32290,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Boss5C", "quantity": 2, "chance": 0.015}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues24"}, "order": 825}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues24"}, "order": 817}
             }),
         new ItemBase("EquipmentStatues25", <ItemModel>{
                 "item": <StatueItemModel>{
@@ -32175,7 +32327,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Bug10", "quantity": 1, "chance": 0.000225}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues25"}, "order": 826}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentStatues25"}, "order": 818}
             }),
         new ItemBase("MaxCapBagT2", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -32202,7 +32354,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagT2"}, "order": 842}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagT2"}, "order": 834}
             }),
         new ItemBase("MaxCapBag1", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -32237,7 +32389,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBag1"}, "order": 843}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBag1"}, "order": 835}
             }),
         new ItemBase("MaxCapBag2", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -32272,7 +32424,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBag2"}, "order": 844}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBag2"}, "order": 836}
             }),
         new ItemBase("MaxCapBag3", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -32327,7 +32479,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBag3"}, "order": 845}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBag3"}, "order": 837}
             }),
         new ItemBase("MaxCapBag4", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -32381,7 +32533,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBag4"}, "order": 846}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBag4"}, "order": 838}
             }),
         new ItemBase("MaxCapBag5", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -32438,7 +32590,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBag5"}, "order": 847}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBag5"}, "order": 839}
             }),
         new ItemBase("MaxCapBagMi6", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -32498,7 +32650,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagMi6"}, "order": 848}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagMi6"}, "order": 840}
             }),
         new ItemBase("MaxCapBagMi7", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -32542,7 +32694,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagMi7"}, "order": 849}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagMi7"}, "order": 841}
             }),
         new ItemBase("MaxCapBagMi8", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -32595,7 +32747,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagMi8"}, "order": 850}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagMi8"}, "order": 842}
             }),
         new ItemBase("MaxCapBagMi9", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -32630,7 +32782,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagMi9"}, "order": 851}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagMi9"}, "order": 843}
             }),
         new ItemBase("MaxCapBagT1", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -32657,7 +32809,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagT1"}, "order": 852}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagT1"}, "order": 844}
             }),
         new ItemBase("MaxCapBag7", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -32695,7 +32847,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBag7"}, "order": 853}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBag7"}, "order": 845}
             }),
         new ItemBase("MaxCapBag9", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -32730,7 +32882,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBag9"}, "order": 854}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBag9"}, "order": 846}
             }),
         new ItemBase("MaxCapBagT3", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -32787,7 +32939,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagT3"}, "order": 855}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagT3"}, "order": 847}
             }),
         new ItemBase("MaxCapBagT4", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -32843,7 +32995,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagT4"}, "order": 856}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagT4"}, "order": 848}
             }),
         new ItemBase("MaxCapBagT5", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -32902,7 +33054,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagT5"}, "order": 857}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagT5"}, "order": 849}
             }),
         new ItemBase("MaxCapBagT6", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -32964,7 +33116,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagT6"}, "order": 858}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagT6"}, "order": 850}
             }),
         new ItemBase("MaxCapBagT7", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -33008,7 +33160,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagT7"}, "order": 859}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagT7"}, "order": 851}
             }),
         new ItemBase("MaxCapBagT8", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -33061,7 +33213,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagT8"}, "order": 860}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagT8"}, "order": 852}
             }),
         new ItemBase("MaxCapBagT9", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -33096,7 +33248,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagT9"}, "order": 861}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagT9"}, "order": 853}
             }),
         new ItemBase("MaxCapBag6", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -33123,7 +33275,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBag6"}, "order": 862}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBag6"}, "order": 854}
             }),
         new ItemBase("MaxCapBag8", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -33173,7 +33325,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBag8"}, "order": 863}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBag8"}, "order": 855}
             }),
         new ItemBase("MaxCapBag10", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -33200,7 +33352,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBag10"}, "order": 864}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBag10"}, "order": 856}
             }),
         new ItemBase("MaxCapBagF3", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -33263,7 +33415,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagF3"}, "order": 865}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagF3"}, "order": 857}
             }),
         new ItemBase("MaxCapBagF4", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -33336,7 +33488,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagF4"}, "order": 866}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagF4"}, "order": 858}
             }),
         new ItemBase("MaxCapBagF5", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -33417,7 +33569,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagF5"}, "order": 867}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagF5"}, "order": 859}
             }),
         new ItemBase("MaxCapBagF6", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -33516,7 +33668,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagF6"}, "order": 868}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagF6"}, "order": 860}
             }),
         new ItemBase("MaxCapBagF7", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -33566,7 +33718,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagF7"}, "order": 869}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagF7"}, "order": 861}
             }),
         new ItemBase("MaxCapBagF8", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -33619,7 +33771,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagF8"}, "order": 870}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagF8"}, "order": 862}
             }),
         new ItemBase("MaxCapBagF9", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -33669,7 +33821,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagF9"}, "order": 871}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagF9"}, "order": 863}
             }),
         new ItemBase("MaxCapBagM1", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -33696,7 +33848,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagM1"}, "order": 872}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagM1"}, "order": 864}
             }),
         new ItemBase("MaxCapBagM2", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -33743,7 +33895,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagM2"}, "order": 873}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagM2"}, "order": 865}
             }),
         new ItemBase("MaxCapBagM3", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -33770,7 +33922,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagM3"}, "order": 874}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagM3"}, "order": 866}
             }),
         new ItemBase("MaxCapBagM4", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -33822,7 +33974,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagM4"}, "order": 875}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagM4"}, "order": 867}
             }),
         new ItemBase("MaxCapBagM5", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -33885,7 +34037,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagM5"}, "order": 876}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagM5"}, "order": 868}
             }),
         new ItemBase("MaxCapBagM6", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -33947,7 +34099,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagM6"}, "order": 877}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagM6"}, "order": 869}
             }),
         new ItemBase("MaxCapBagM7", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -34020,7 +34172,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagM7"}, "order": 878}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagM7"}, "order": 870}
             }),
         new ItemBase("MaxCapBagM8", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -34067,7 +34219,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagM8"}, "order": 879}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagM8"}, "order": 871}
             }),
         new ItemBase("MaxCapBagM9", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -34120,7 +34272,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagM9"}, "order": 880}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagM9"}, "order": 872}
             }),
         new ItemBase("MaxCapBagM10", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -34173,7 +34325,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagM10"}, "order": 881}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagM10"}, "order": 873}
             }),
         new ItemBase("MaxCapBagFi0", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -34191,7 +34343,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("MaxCapBagFi1", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -34232,7 +34384,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagFi1"}, "order": 882}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagFi1"}, "order": 874}
             }),
         new ItemBase("MaxCapBagFi2", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -34276,7 +34428,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagFi2"}, "order": 883}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagFi2"}, "order": 875}
             }),
         new ItemBase("MaxCapBagFi3", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -34332,7 +34484,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagFi3"}, "order": 884}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagFi3"}, "order": 876}
             }),
         new ItemBase("MaxCapBagFi4", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -34392,7 +34544,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagFi4"}, "order": 885}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagFi4"}, "order": 877}
             }),
         new ItemBase("MaxCapBagFi5", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -34457,7 +34609,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagFi5"}, "order": 886}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagFi5"}, "order": 878}
             }),
         new ItemBase("MaxCapBagFi6", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -34520,7 +34672,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagFi6"}, "order": 887}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagFi6"}, "order": 879}
             }),
         new ItemBase("MaxCapBagFi7", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -34564,7 +34716,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagFi7"}, "order": 888}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagFi7"}, "order": 880}
             }),
         new ItemBase("MaxCapBagFi8", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -34608,7 +34760,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagFi8"}, "order": 889}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagFi8"}, "order": 881}
             }),
         new ItemBase("MaxCapBagFi9", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -34643,7 +34795,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagFi9"}, "order": 890}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagFi9"}, "order": 882}
             }),
         new ItemBase("MaxCapBagB0", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -34661,7 +34813,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("MaxCapBagB1", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -34702,7 +34854,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagB1"}, "order": 891}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagB1"}, "order": 883}
             }),
         new ItemBase("MaxCapBagB2", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -34746,7 +34898,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagB2"}, "order": 892}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagB2"}, "order": 884}
             }),
         new ItemBase("MaxCapBagB3", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -34802,7 +34954,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagB3"}, "order": 893}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagB3"}, "order": 885}
             }),
         new ItemBase("MaxCapBagB4", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -34857,7 +35009,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagB4"}, "order": 894}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagB4"}, "order": 886}
             }),
         new ItemBase("MaxCapBagB5", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -34915,7 +35067,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagB5"}, "order": 895}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagB5"}, "order": 887}
             }),
         new ItemBase("MaxCapBagB6", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -34976,7 +35128,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagB6"}, "order": 896}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagB6"}, "order": 888}
             }),
         new ItemBase("MaxCapBagB7", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -35020,7 +35172,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagB7"}, "order": 897}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagB7"}, "order": 889}
             }),
         new ItemBase("MaxCapBagB8", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -35064,7 +35216,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagB8"}, "order": 898}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagB8"}, "order": 890}
             }),
         new ItemBase("MaxCapBagB9", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -35099,7 +35251,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagB9"}, "order": 899}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagB9"}, "order": 891}
             }),
         new ItemBase("MaxCapBagTr0", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -35117,7 +35269,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("MaxCapBagTr1", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -35155,7 +35307,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagTr1"}, "order": 900}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagTr1"}, "order": 892}
             }),
         new ItemBase("MaxCapBagTr2", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -35173,7 +35325,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("MaxCapBagTr3", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -35211,7 +35363,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagTr3"}, "order": 901}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagTr3"}, "order": 893}
             }),
         new ItemBase("MaxCapBagTr4", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -35261,7 +35413,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagTr4"}, "order": 902}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagTr4"}, "order": 894}
             }),
         new ItemBase("MaxCapBagTr5", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -35314,7 +35466,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagTr5"}, "order": 903}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagTr5"}, "order": 895}
             }),
         new ItemBase("MaxCapBagTr6", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -35358,7 +35510,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagTr6"}, "order": 904}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagTr6"}, "order": 896}
             }),
         new ItemBase("MaxCapBagTr7", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -35402,7 +35554,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagTr7"}, "order": 905}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagTr7"}, "order": 897}
             }),
         new ItemBase("MaxCapBagTr8", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -35440,7 +35592,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagTr8"}, "order": 906}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagTr8"}, "order": 898}
             }),
         new ItemBase("MaxCapBagS0", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -35458,7 +35610,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("MaxCapBagS1", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -35496,7 +35648,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagS1"}, "order": 907}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagS1"}, "order": 899}
             }),
         new ItemBase("MaxCapBagS2", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -35514,7 +35666,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("MaxCapBagS3", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -35552,7 +35704,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagS3"}, "order": 908}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagS3"}, "order": 900}
             }),
         new ItemBase("MaxCapBagS4", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -35602,7 +35754,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagS4"}, "order": 909}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagS4"}, "order": 901}
             }),
         new ItemBase("MaxCapBagS5", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -35654,7 +35806,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagS5"}, "order": 910}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagS5"}, "order": 902}
             }),
         new ItemBase("MaxCapBagS6", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -35698,7 +35850,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagS6"}, "order": 911}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagS6"}, "order": 903}
             }),
         new ItemBase("MaxCapBagS7", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -35742,7 +35894,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagS7"}, "order": 912}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagS7"}, "order": 904}
             }),
         new ItemBase("MaxCapBagS8", <ItemModel>{
                 "item": <CarryBagItemModel>{
@@ -35780,7 +35932,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagS8"}, "order": 913}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "MaxCapBagS8"}, "order": 905}
             }),
         new ItemBase("ObolBronze0", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -35836,7 +35988,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestA1", "quantity": 1, "chance": 0.00063}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronze0"}, "order": 914}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronze0"}, "order": 906}
             }),
         new ItemBase("ObolSilver0", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -35890,7 +36042,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestA2", "quantity": 1, "chance": 0.00063}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilver0"}, "order": 915}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilver0"}, "order": 907}
             }),
         new ItemBase("ObolGold0", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -35935,7 +36087,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGold0"}, "order": 916}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGold0"}, "order": 908}
             }),
         new ItemBase("ObolPlatinum0", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -35976,7 +36128,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinum0"}, "order": 917}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinum0"}, "order": 909}
             }),
         new ItemBase("ObolPink0", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -36017,7 +36169,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPink0"}, "order": 918}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPink0"}, "order": 910}
             }),
         new ItemBase("ObolBronze1", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -36072,7 +36224,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB1", "quantity": 1, "chance": 0.00063}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronze1"}, "order": 919}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronze1"}, "order": 911}
             }),
         new ItemBase("ObolSilver1", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -36124,7 +36276,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB2", "quantity": 1, "chance": 0.00063}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilver1"}, "order": 920}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilver1"}, "order": 912}
             }),
         new ItemBase("ObolGold1", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -36169,7 +36321,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGold1"}, "order": 921}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGold1"}, "order": 913}
             }),
         new ItemBase("ObolPlatinum1", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -36210,7 +36362,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinum1"}, "order": 922}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinum1"}, "order": 914}
             }),
         new ItemBase("ObolPink1", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -36251,7 +36403,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPink1"}, "order": 923}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPink1"}, "order": 915}
             }),
         new ItemBase("ObolBronze2", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -36308,7 +36460,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestC1", "quantity": 1, "chance": 0.00063}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronze2"}, "order": 924}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronze2"}, "order": 916}
             }),
         new ItemBase("ObolSilver2", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -36360,7 +36512,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestC2", "quantity": 1, "chance": 0.00063}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilver2"}, "order": 925}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilver2"}, "order": 917}
             }),
         new ItemBase("ObolGold2", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -36405,7 +36557,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGold2"}, "order": 926}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGold2"}, "order": 918}
             }),
         new ItemBase("ObolPlatinum2", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -36446,7 +36598,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinum2"}, "order": 927}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinum2"}, "order": 919}
             }),
         new ItemBase("ObolPink2", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -36487,7 +36639,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPink2"}, "order": 928}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPink2"}, "order": 920}
             }),
         new ItemBase("ObolBronze3", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -36543,7 +36695,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Dreadlo", "quantity": 2, "chance": 8.19e-06}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronze3"}, "order": 929}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronze3"}, "order": 921}
             }),
         new ItemBase("ObolSilver3", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -36596,7 +36748,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Fish8", "quantity": 1, "chance": 7.56e-06}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilver3"}, "order": 930}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilver3"}, "order": 922}
             }),
         new ItemBase("ObolGold3", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -36677,7 +36829,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Bug4", "quantity": 1, "chance": 1.9845e-06}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGold3"}, "order": 931}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGold3"}, "order": 923}
             }),
         new ItemBase("ObolPlatinum3", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -36718,7 +36870,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinum3"}, "order": 932}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinum3"}, "order": 924}
             }),
         new ItemBase("ObolPink3", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -36759,7 +36911,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPink3"}, "order": 933}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPink3"}, "order": 925}
             }),
         new ItemBase("ObolBronzeDamage", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -36804,7 +36956,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronzeDamage"}, "order": 934}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronzeDamage"}, "order": 926}
             }),
         new ItemBase("ObolSilverDamage", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -36896,7 +37048,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ToiletTree", "quantity": 1, "chance": 1.80306e-06}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverDamage"}, "order": 935}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverDamage"}, "order": 927}
             }),
         new ItemBase("ObolGoldDamage", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -36941,7 +37093,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldDamage"}, "order": 936}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldDamage"}, "order": 928}
             }),
         new ItemBase("ObolPlatinumDamage", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -36982,7 +37134,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumDamage"}, "order": 937}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumDamage"}, "order": 929}
             }),
         new ItemBase("ObolPinkDamage", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -37023,7 +37175,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkDamage"}, "order": 938}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkDamage"}, "order": 930}
             }),
         new ItemBase("ObolPlatinumSpeed", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -37055,7 +37207,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("ObolSilverMoney", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -37143,7 +37295,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ToiletTree", "quantity": 1, "chance": 1.80306e-06}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverMoney"}, "order": 939}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverMoney"}, "order": 931}
             }),
         new ItemBase("ObolGoldMoney", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -37188,7 +37340,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldMoney"}, "order": 940}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldMoney"}, "order": 932}
             }),
         new ItemBase("ObolBronzeMining", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -37229,7 +37381,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronzeMining"}, "order": 941}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronzeMining"}, "order": 933}
             }),
         new ItemBase("ObolSilverMining", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -37265,7 +37417,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverMining"}, "order": 942}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverMining"}, "order": 934}
             }),
         new ItemBase("ObolGoldMining", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -37310,7 +37462,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldMining"}, "order": 943}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldMining"}, "order": 935}
             }),
         new ItemBase("ObolPlatinumMining", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -37351,7 +37503,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumMining"}, "order": 944}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumMining"}, "order": 936}
             }),
         new ItemBase("ObolPinkMining", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -37392,7 +37544,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkMining"}, "order": 945}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkMining"}, "order": 937}
             }),
         new ItemBase("ObolBronzeChoppin", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -37433,7 +37585,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronzeChoppin"}, "order": 946}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronzeChoppin"}, "order": 938}
             }),
         new ItemBase("ObolSilverChoppin", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -37469,7 +37621,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverChoppin"}, "order": 947}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverChoppin"}, "order": 939}
             }),
         new ItemBase("ObolGoldChoppin", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -37514,7 +37666,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldChoppin"}, "order": 948}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldChoppin"}, "order": 940}
             }),
         new ItemBase("ObolPlatinumChoppin", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -37555,7 +37707,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumChoppin"}, "order": 949}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumChoppin"}, "order": 941}
             }),
         new ItemBase("ObolPinkChoppin", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -37591,7 +37743,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkChoppin"}, "order": 950}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkChoppin"}, "order": 942}
             }),
         new ItemBase("ObolBronzeFishing", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -37627,7 +37779,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronzeFishing"}, "order": 951}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronzeFishing"}, "order": 943}
             }),
         new ItemBase("ObolSilverFishing", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -37663,7 +37815,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverFishing"}, "order": 952}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverFishing"}, "order": 944}
             }),
         new ItemBase("ObolGoldFishing", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -37708,7 +37860,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldFishing"}, "order": 953}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldFishing"}, "order": 945}
             }),
         new ItemBase("ObolPlatinumFishing", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -37749,7 +37901,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumFishing"}, "order": 954}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumFishing"}, "order": 946}
             }),
         new ItemBase("ObolPinkFishing", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -37790,7 +37942,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkFishing"}, "order": 955}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkFishing"}, "order": 947}
             }),
         new ItemBase("ObolBronzeCatching", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -37826,7 +37978,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronzeCatching"}, "order": 956}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronzeCatching"}, "order": 948}
             }),
         new ItemBase("ObolSilverCatching", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -37862,7 +38014,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverCatching"}, "order": 957}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverCatching"}, "order": 949}
             }),
         new ItemBase("ObolGoldCatching", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -37907,7 +38059,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldCatching"}, "order": 958}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldCatching"}, "order": 950}
             }),
         new ItemBase("ObolPlatinumCatching", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -37948,7 +38100,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumCatching"}, "order": 959}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumCatching"}, "order": 951}
             }),
         new ItemBase("ObolPinkCatching", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -37989,7 +38141,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkCatching"}, "order": 960}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkCatching"}, "order": 952}
             }),
         new ItemBase("ObolSilverLuck", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -38070,7 +38222,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Bug4", "quantity": 1, "chance": 1.9845e-06}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverLuck"}, "order": 961}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverLuck"}, "order": 953}
             }),
         new ItemBase("ObolGoldLuck", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -38115,7 +38267,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldLuck"}, "order": 962}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldLuck"}, "order": 954}
             }),
         new ItemBase("ObolPlatinumLuck", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -38156,7 +38308,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumLuck"}, "order": 963}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumLuck"}, "order": 955}
             }),
         new ItemBase("ObolPinkLuck", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -38197,7 +38349,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkLuck"}, "order": 964}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkLuck"}, "order": 956}
             }),
         new ItemBase("ObolBronzePop", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -38233,7 +38385,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "frogBIG", "quantity": 1, "chance": 1e-05}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronzePop"}, "order": 965}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronzePop"}, "order": 957}
             }),
         new ItemBase("ObolSilverPop", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -38269,7 +38421,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverPop"}, "order": 966}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverPop"}, "order": 958}
             }),
         new ItemBase("ObolGoldPop", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -38305,7 +38457,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldPop"}, "order": 967}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldPop"}, "order": 959}
             }),
         new ItemBase("ObolPlatinumPop", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -38346,7 +38498,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumPop"}, "order": 968}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumPop"}, "order": 960}
             }),
         new ItemBase("ObolPinkPop", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -38387,7 +38539,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkPop"}, "order": 969}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkPop"}, "order": 961}
             }),
         new ItemBase("ObolBronzeKill", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -38462,7 +38614,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Bug6", "quantity": 1, "chance": 2.7405e-06}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronzeKill"}, "order": 970}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronzeKill"}, "order": 962}
             }),
         new ItemBase("ObolSilverKill", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -38498,7 +38650,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverKill"}, "order": 971}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverKill"}, "order": 963}
             }),
         new ItemBase("ObolGoldKill", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -38543,7 +38695,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldKill"}, "order": 972}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldKill"}, "order": 964}
             }),
         new ItemBase("ObolPlatinumKill", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -38584,7 +38736,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumKill"}, "order": 973}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumKill"}, "order": 965}
             }),
         new ItemBase("ObolPinkKill", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -38625,7 +38777,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkKill"}, "order": 974}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkKill"}, "order": 966}
             }),
         new ItemBase("ObolBronzeEXP", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -38713,7 +38865,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ToiletTree", "quantity": 1, "chance": 1.93662e-06}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronzeEXP"}, "order": 975}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronzeEXP"}, "order": 967}
             }),
         new ItemBase("ObolSilverEXP", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -38749,7 +38901,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverEXP"}, "order": 976}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverEXP"}, "order": 968}
             }),
         new ItemBase("ObolGoldEXP", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -38794,7 +38946,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldEXP"}, "order": 977}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldEXP"}, "order": 969}
             }),
         new ItemBase("ObolPlatinumEXP", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -38835,7 +38987,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumEXP"}, "order": 978}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumEXP"}, "order": 970}
             }),
         new ItemBase("ObolPinkEXP", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -38876,7 +39028,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkEXP"}, "order": 979}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkEXP"}, "order": 971}
             }),
         new ItemBase("ObolBronzeCard", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -38908,7 +39060,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronzeCard"}, "order": 980}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronzeCard"}, "order": 972}
             }),
         new ItemBase("ObolSilverCard", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -38949,7 +39101,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverCard"}, "order": 981}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverCard"}, "order": 973}
             }),
         new ItemBase("ObolGoldCard", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -38985,7 +39137,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldCard"}, "order": 982}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldCard"}, "order": 974}
             }),
         new ItemBase("ObolPlatinumCard", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -39026,7 +39178,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumCard"}, "order": 983}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumCard"}, "order": 975}
             }),
         new ItemBase("ObolPinkCard", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -39067,7 +39219,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkCard"}, "order": 984}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkCard"}, "order": 976}
             }),
         new ItemBase("ObolBronzeDef", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -39151,7 +39303,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Bug4", "quantity": 1, "chance": 2.7405e-06}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronzeDef"}, "order": 985}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronzeDef"}, "order": 977}
             }),
         new ItemBase("ObolSilverDef", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -39192,7 +39344,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverDef"}, "order": 986}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverDef"}, "order": 978}
             }),
         new ItemBase("ObolGoldDef", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -39237,7 +39389,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldDef"}, "order": 987}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldDef"}, "order": 979}
             }),
         new ItemBase("ObolPlatinumDef", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -39278,7 +39430,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumDef"}, "order": 988}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumDef"}, "order": 980}
             }),
         new ItemBase("ObolPinkDef", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -39319,7 +39471,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkDef"}, "order": 989}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkDef"}, "order": 981}
             }),
         new ItemBase("ObolBronzeTrapping", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -39370,7 +39522,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB3", "quantity": 1, "chance": 0.02205}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronzeTrapping"}, "order": 990}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronzeTrapping"}, "order": 982}
             }),
         new ItemBase("ObolSilverTrapping", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -39406,7 +39558,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverTrapping"}, "order": 991}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverTrapping"}, "order": 983}
             }),
         new ItemBase("ObolGoldTrapping", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -39447,7 +39599,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldTrapping"}, "order": 992}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldTrapping"}, "order": 984}
             }),
         new ItemBase("ObolPlatinumTrapping", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -39483,7 +39635,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumTrapping"}, "order": 993}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumTrapping"}, "order": 985}
             }),
         new ItemBase("ObolPinkTrapping", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -39519,7 +39671,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkTrapping"}, "order": 994}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkTrapping"}, "order": 986}
             }),
         new ItemBase("ObolBronzeCons", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -39572,7 +39724,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestC3", "quantity": 1, "chance": 0.02205}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronzeCons"}, "order": 995}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronzeCons"}, "order": 987}
             }),
         new ItemBase("ObolSilverCons", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -39608,7 +39760,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverCons"}, "order": 996}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverCons"}, "order": 988}
             }),
         new ItemBase("ObolGoldCons", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -39649,7 +39801,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldCons"}, "order": 997}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldCons"}, "order": 989}
             }),
         new ItemBase("ObolPlatinumCons", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -39685,7 +39837,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumCons"}, "order": 998}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumCons"}, "order": 990}
             }),
         new ItemBase("ObolPinkCons", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -39721,7 +39873,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkCons"}, "order": 999}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkCons"}, "order": 991}
             }),
         new ItemBase("ObolBronzeWorship", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -39770,7 +39922,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestA3", "quantity": 1, "chance": 0.02205}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronzeWorship"}, "order": 1000}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolBronzeWorship"}, "order": 992}
             }),
         new ItemBase("ObolSilverWorship", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -39806,7 +39958,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverWorship"}, "order": 1001}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSilverWorship"}, "order": 993}
             }),
         new ItemBase("ObolGoldWorship", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -39847,7 +39999,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldWorship"}, "order": 1002}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolGoldWorship"}, "order": 994}
             }),
         new ItemBase("ObolPlatinumWorship", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -39883,7 +40035,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumWorship"}, "order": 1003}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPlatinumWorship"}, "order": 995}
             }),
         new ItemBase("ObolPinkWorship", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -39919,7 +40071,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkWorship"}, "order": 1004}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolPinkWorship"}, "order": 996}
             }),
         new ItemBase("ObolAmarokA", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -39965,7 +40117,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "wolfC", "quantity": 1, "chance": 0.0085}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolAmarokA"}, "order": 1005}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolAmarokA"}, "order": 997}
             }),
         new ItemBase("ObolEfauntA", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -40011,7 +40163,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Boss2C", "quantity": 1, "chance": 0.018}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolEfauntA"}, "order": 1006}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolEfauntA"}, "order": 998}
             }),
         new ItemBase("ObolChizoarA", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -40057,7 +40209,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Boss3C", "quantity": 1, "chance": 0.01}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolChizoarA"}, "order": 1007}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolChizoarA"}, "order": 999}
             }),
         new ItemBase("ObolSlush", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -40093,7 +40245,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "mini3a", "quantity": 1, "chance": 0.004}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSlush"}, "order": 1008}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolSlush"}, "order": 1000}
             }),
         new ItemBase("ObolTroll", <ItemModel>{
                 "item": <ObolItemModel>{
@@ -40139,7 +40291,71 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Boss4C", "quantity": 1, "chance": 0.007}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolTroll"}, "order": 1009}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolTroll"}, "order": 1001}
+            }),
+        new ItemBase("ObolFrog", <ItemModel>{
+                "item": <ObolItemModel>{
+                    "internalName": "ObolFrog",
+                    "displayName": "Grumpy Obol of the Grandfrogger",
+                    "sellPrice": 50,
+                    "typeGen": TypeGenEnum.aObolSquare,
+                    "Type": "Square Obol",
+                    "lvReqToCraft": 0,
+                    "lvReqToEquip": 0,
+                    "Class": ClassTypeEnum.All,
+                    "Weapon_Power": 0,
+                    "STR": 0,
+                    "AGI": 0,
+                    "WIS": 0,
+                    "LUK": 0,
+                    "Defence": 2,
+                    "miscUp1": "12% Money",
+                    "miscUp2": "1% Drop Chance",
+                    "Upgrade_Slots_Left": 0,
+                    "family": "Frog",
+                    "rarity": "Grumpy",
+                    "Skill": "",
+                    "Skill_Power": 0
+                },
+                "sources": undefined,
+                "notes": undefined,
+                "recipe": undefined,
+                "vendors": undefined,
+                "anvilProduction": undefined,
+                "detDrops": undefined,
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ObolFrog"}, "order": 1002}
+            }),
+        new ItemBase("ObolKnight", <ItemModel>{
+                "item": <ObolItemModel>{
+                    "internalName": "ObolKnight",
+                    "displayName": "Vigilant Obol of Ice Guard",
+                    "sellPrice": 50,
+                    "typeGen": TypeGenEnum.aObolSquare,
+                    "Type": "Square Obol",
+                    "lvReqToCraft": 0,
+                    "lvReqToEquip": 0,
+                    "Class": ClassTypeEnum.All,
+                    "Weapon_Power": 2,
+                    "STR": 3,
+                    "AGI": 3,
+                    "WIS": 3,
+                    "LUK": 3,
+                    "Defence": 5,
+                    "miscUp1": "8% Drop Chance",
+                    "miscUp2": "00",
+                    "Upgrade_Slots_Left": 0,
+                    "family": "Knight",
+                    "rarity": "Vigilant",
+                    "Skill": "",
+                    "Skill_Power": 0
+                },
+                "sources": undefined,
+                "notes": undefined,
+                "recipe": undefined,
+                "vendors": undefined,
+                "anvilProduction": undefined,
+                "detDrops": undefined,
+                "slabSort": undefined
             }),
         new ItemBase("PureWater", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40202,7 +40418,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestC3", "quantity": 1, "chance": 0.027}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "PureWater"}, "order": 107}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "PureWater"}, "order": 107}
             }),
         new ItemBase("PureWater2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40232,7 +40448,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "PureWater2"}, "order": 108}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "PureWater2"}, "order": 108}
             }),
         new ItemBase("Grasslands1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40253,7 +40469,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "mushG", "quantity": 1, "chance": 0.22}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Grasslands1"}, "order": 109}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Grasslands1"}, "order": 109}
             }),
         new ItemBase("Grasslands2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40302,7 +40518,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "BugNest10", "quantity": 2, "chance": 0}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Grasslands2"}, "order": 110}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Grasslands2"}, "order": 110}
             }),
         new ItemBase("Grasslands3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40323,7 +40539,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "beanG", "quantity": 1, "chance": 0.2}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Grasslands3"}, "order": 111}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Grasslands3"}, "order": 111}
             }),
         new ItemBase("Grasslands4", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40344,7 +40560,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "mushR", "quantity": 1, "chance": 0.2}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Grasslands4"}, "order": 112}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Grasslands4"}, "order": 112}
             }),
         new ItemBase("Jungle1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40365,7 +40581,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "slimeG", "quantity": 1, "chance": 0.19}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Jungle1"}, "order": 113}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Jungle1"}, "order": 113}
             }),
         new ItemBase("Jungle2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40386,7 +40602,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "snakeG", "quantity": 1, "chance": 0.18}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Jungle2"}, "order": 114}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Jungle2"}, "order": 114}
             }),
         new ItemBase("Jungle3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40407,7 +40623,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "carrotO", "quantity": 1, "chance": 0.17}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Jungle3"}, "order": 115}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Jungle3"}, "order": 115}
             }),
         new ItemBase("Forest1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40428,7 +40644,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "goblinG", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Forest1"}, "order": 116}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Forest1"}, "order": 116}
             }),
         new ItemBase("Forest2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40449,7 +40665,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "plank", "quantity": 1, "chance": 0.15}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Forest2"}, "order": 117}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Forest2"}, "order": 117}
             }),
         new ItemBase("Forest3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40470,7 +40686,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "frogBIG", "quantity": 1, "chance": 0.14}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Forest3"}, "order": 118}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Forest3"}, "order": 118}
             }),
         new ItemBase("Sewers1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40499,7 +40715,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "poopBig", "quantity": 150, "chance": 1}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Sewers1"}, "order": 119}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Sewers1"}, "order": 119}
             }),
         new ItemBase("Sewers1b", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40532,7 +40748,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "poopBig", "quantity": 1, "chance": 0.1}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Sewers1b"}, "order": 120}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Sewers1b"}, "order": 120}
             }),
         new ItemBase("Sewers2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40553,7 +40769,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ratB", "quantity": 1, "chance": 0.19}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Sewers2"}, "order": 121}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Sewers2"}, "order": 121}
             }),
         new ItemBase("Sewers3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40574,7 +40790,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "poopD", "quantity": 1, "chance": 0.5}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Sewers3"}, "order": 122}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Sewers3"}, "order": 122}
             }),
         new ItemBase("TreeInterior1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40595,7 +40811,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "branch", "quantity": 1, "chance": 0.21}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TreeInterior1"}, "order": 123}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TreeInterior1"}, "order": 123}
             }),
         new ItemBase("TreeInterior1b", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40628,7 +40844,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "branch", "quantity": 1, "chance": 5e-05}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TreeInterior1b"}, "order": 124}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TreeInterior1b"}, "order": 124}
             }),
         new ItemBase("TreeInterior2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40649,7 +40865,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "acorn", "quantity": 1, "chance": 0.23}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TreeInterior2"}, "order": 125}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TreeInterior2"}, "order": 125}
             }),
         new ItemBase("BabaYagaETC", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40670,7 +40886,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "babayaga", "quantity": 1, "chance": 0.006}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BabaYagaETC"}, "order": 126}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BabaYagaETC"}, "order": 126}
             }),
         new ItemBase("DesertA1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40691,7 +40907,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "jarSand", "quantity": 1, "chance": 0.22}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertA1"}, "order": 127}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertA1"}, "order": 127}
             }),
         new ItemBase("DesertA1b", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40712,7 +40928,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "jarSand", "quantity": 1, "chance": 5e-05}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertA1b"}, "order": 128}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertA1b"}, "order": 128}
             }),
         new ItemBase("DesertA2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40733,7 +40949,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "mimicA", "quantity": 1, "chance": 0.212}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertA2"}, "order": 129}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertA2"}, "order": 129}
             }),
         new ItemBase("DesertA3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40754,7 +40970,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "crabcake", "quantity": 1, "chance": 0.205}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertA3"}, "order": 130}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertA3"}, "order": 130}
             }),
         new ItemBase("DesertA3b", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40781,7 +40997,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "crabcake", "quantity": 1, "chance": 5e-05}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertA3b"}, "order": 131}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertA3b"}, "order": 131}
             }),
         new ItemBase("DesertB1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40802,7 +41018,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "coconut", "quantity": 1, "chance": 0.2}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertB1"}, "order": 132}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertB1"}, "order": 132}
             }),
         new ItemBase("DesertB2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40823,7 +41039,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "sandcastle", "quantity": 1, "chance": 0.19}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertB2"}, "order": 133}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertB2"}, "order": 133}
             }),
         new ItemBase("DesertB3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40844,7 +41060,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "pincermin", "quantity": 1, "chance": 0.18}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertB3"}, "order": 134}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertB3"}, "order": 134}
             }),
         new ItemBase("DesertB4", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40865,7 +41081,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "potato", "quantity": 1, "chance": 0.17}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertB4"}, "order": 135}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertB4"}, "order": 135}
             }),
         new ItemBase("DesertC1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40886,7 +41102,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "steak", "quantity": 1, "chance": 0.18}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertC1"}, "order": 136}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertC1"}, "order": 136}
             }),
         new ItemBase("DesertC2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40907,7 +41123,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "moonman", "quantity": 1, "chance": 0.165}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertC2"}, "order": 137}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertC2"}, "order": 137}
             }),
         new ItemBase("DesertC2b", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40927,8 +41143,8 @@ export const initItemRepo = () => {
                 "recipe": undefined,
                 "vendors": undefined,
                 "anvilProduction": undefined,
-                "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "moonman", "quantity": 1, "chance": 5e-05}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertC2b"}, "order": 138}
+                "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "moonman", "quantity": 1, "chance": 0.0005}]},
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertC2b"}, "order": 138}
             }),
         new ItemBase("DesertC3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40949,7 +41165,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "sandgiant", "quantity": 1, "chance": 0.152}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertC3"}, "order": 139}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertC3"}, "order": 139}
             }),
         new ItemBase("DesertC4", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40970,7 +41186,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "snailZ", "quantity": 1, "chance": 0.14}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertC4"}, "order": 140}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DesertC4"}, "order": 140}
             }),
         new ItemBase("SnowA1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -40991,7 +41207,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "sheep", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowA1"}, "order": 141}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowA1"}, "order": 141}
             }),
         new ItemBase("SnowA2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41012,7 +41228,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "flake", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowA2"}, "order": 142}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowA2"}, "order": 142}
             }),
         new ItemBase("SnowA2a", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41044,7 +41260,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestA3", "quantity": 1, "chance": 0.01}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowA2a"}, "order": 143}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowA2a"}, "order": 143}
             }),
         new ItemBase("SnowA3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41065,7 +41281,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "stache", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowA3"}, "order": 144}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowA3"}, "order": 144}
             }),
         new ItemBase("SnowA4", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41086,7 +41302,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ram", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowA4"}, "order": 145}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowA4"}, "order": 145}
             }),
         new ItemBase("SnowB1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41107,7 +41323,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "bloque", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowB1"}, "order": 146}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowB1"}, "order": 146}
             }),
         new ItemBase("SnowB2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41128,7 +41344,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "mamoth", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowB2"}, "order": 147}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowB2"}, "order": 147}
             }),
         new ItemBase("SnowB2a", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41149,7 +41365,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "mamoth", "quantity": 1, "chance": 5e-05}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowB2a"}, "order": 148}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowB2a"}, "order": 148}
             }),
         new ItemBase("SnowB5", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41170,7 +41386,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "snowball", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowB5"}, "order": 149}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowB5"}, "order": 149}
             }),
         new ItemBase("SnowB3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41191,7 +41407,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "penguin", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowB3"}, "order": 150}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowB3"}, "order": 150}
             }),
         new ItemBase("SnowB4", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41212,7 +41428,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "thermostat", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowB4"}, "order": 151}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowB4"}, "order": 151}
             }),
         new ItemBase("SnowC1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41233,7 +41449,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "glass", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowC1"}, "order": 152}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowC1"}, "order": 152}
             }),
         new ItemBase("SnowC2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41254,7 +41470,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "snakeB", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowC2"}, "order": 153}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowC2"}, "order": 153}
             }),
         new ItemBase("SnowC3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41275,7 +41491,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "speaker", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowC3"}, "order": 154}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowC3"}, "order": 154}
             }),
         new ItemBase("SnowC4", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41296,7 +41512,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "eye", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowC4"}, "order": 155}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowC4"}, "order": 155}
             }),
         new ItemBase("SnowC4a", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41317,7 +41533,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "eye", "quantity": 1, "chance": 5e-05}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowC4a"}, "order": 156}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowC4a"}, "order": 156}
             }),
         new ItemBase("SnowC5", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41338,7 +41554,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "skele2", "quantity": 1, "chance": 0.01}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowC5"}, "order": 157}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SnowC5"}, "order": 157}
             }),
         new ItemBase("GalaxyA1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41359,7 +41575,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "mushP", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyA1"}, "order": 158}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyA1"}, "order": 158}
             }),
         new ItemBase("GalaxyA2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41380,7 +41596,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4a2", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyA2"}, "order": 159}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyA2"}, "order": 159}
             }),
         new ItemBase("GalaxyA2b", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41412,7 +41628,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestA4", "quantity": 1, "chance": 0.02}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyA2b"}, "order": 160}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyA2b"}, "order": 160}
             }),
         new ItemBase("GalaxyA3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41433,7 +41649,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4a3", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyA3"}, "order": 161}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyA3"}, "order": 161}
             }),
         new ItemBase("GalaxyA4", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41454,7 +41670,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "demonP", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyA4"}, "order": 162}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyA4"}, "order": 162}
             }),
         new ItemBase("GalaxyB1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41475,7 +41691,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4b2", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyB1"}, "order": 163}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyB1"}, "order": 163}
             }),
         new ItemBase("GalaxyB2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41496,7 +41712,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4b1", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyB2"}, "order": 164}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyB2"}, "order": 164}
             }),
         new ItemBase("GalaxyB3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41517,7 +41733,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4b3", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyB3"}, "order": 165}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyB3"}, "order": 165}
             }),
         new ItemBase("GalaxyB4", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41538,7 +41754,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4b4", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyB4"}, "order": 166}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyB4"}, "order": 166}
             }),
         new ItemBase("GalaxyB5", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41559,7 +41775,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4b5", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyB5"}, "order": 167}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyB5"}, "order": 167}
             }),
         new ItemBase("GalaxyC1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41580,7 +41796,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4c1", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyC1"}, "order": 168}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyC1"}, "order": 168}
             }),
         new ItemBase("GalaxyC1b", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41601,7 +41817,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4c1", "quantity": 1, "chance": 2e-05}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyC1b"}, "order": 169}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyC1b"}, "order": 169}
             }),
         new ItemBase("GalaxyC2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41622,7 +41838,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4c2", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyC2"}, "order": 170}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyC2"}, "order": 170}
             }),
         new ItemBase("GalaxyC3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41643,7 +41859,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4c3", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyC3"}, "order": 171}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyC3"}, "order": 171}
             }),
         new ItemBase("GalaxyC4", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41664,7 +41880,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4c4", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyC4"}, "order": 172}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "GalaxyC4"}, "order": 172}
             }),
         new ItemBase("Quest17", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41700,7 +41916,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "wolfC", "quantity": 6, "chance": 0.5}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest17"}, "order": 173}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest17"}, "order": 173}
             }),
         new ItemBase("Quest29", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41729,7 +41945,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "wolfC", "quantity": 2, "chance": 0.5}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest29"}, "order": 174}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest29"}, "order": 174}
             }),
         new ItemBase("EfauntDrop1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41760,7 +41976,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Boss2C", "quantity": 12, "chance": 0.9}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EfauntDrop1"}, "order": 175}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EfauntDrop1"}, "order": 175}
             }),
         new ItemBase("EfauntDrop2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41789,7 +42005,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Boss2C", "quantity": 4, "chance": 0.5}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EfauntDrop2"}, "order": 176}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EfauntDrop2"}, "order": 176}
             }),
         new ItemBase("Chiz0", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41820,7 +42036,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Boss3C", "quantity": 7, "chance": 0.5}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Chiz0"}, "order": 177}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Chiz0"}, "order": 177}
             }),
         new ItemBase("Chiz1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41849,7 +42065,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Boss3C", "quantity": 2, "chance": 0.5}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Chiz1"}, "order": 178}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Chiz1"}, "order": 178}
             }),
         new ItemBase("TrollPart", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41880,7 +42096,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Boss4C", "quantity": 4, "chance": 0.5}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TrollPart"}, "order": 179}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TrollPart"}, "order": 179}
             }),
         new ItemBase("LavaA1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41901,7 +42117,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5a1", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaA1"}, "order": 180}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaA1"}, "order": 180}
             }),
         new ItemBase("LavaA1b", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41922,7 +42138,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5a1", "quantity": 1, "chance": 2e-05}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaA1b"}, "order": 181}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaA1b"}, "order": 181}
             }),
         new ItemBase("LavaA2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41943,7 +42159,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5a2", "quantity": 1, "chance": 0.15}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaA2"}, "order": 182}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaA2"}, "order": 182}
             }),
         new ItemBase("LavaA3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41964,7 +42180,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5a3", "quantity": 1, "chance": 0.15}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaA3"}, "order": 183}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaA3"}, "order": 183}
             }),
         new ItemBase("LavaA4", <ItemModel>{
                 "item": <DescItemModel>{
@@ -41985,7 +42201,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5a4", "quantity": 1, "chance": 0.14}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaA4"}, "order": 184}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaA4"}, "order": 184}
             }),
         new ItemBase("LavaA5", <ItemModel>{
                 "item": <DescItemModel>{
@@ -42006,7 +42222,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5a5", "quantity": 1, "chance": 0.14}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaA5"}, "order": 185}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaA5"}, "order": 185}
             }),
         new ItemBase("LavaA5b", <ItemModel>{
                 "item": <DescItemModel>{
@@ -42027,7 +42243,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5a5", "quantity": 1, "chance": 2e-05}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaA5b"}, "order": 186}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaA5b"}, "order": 186}
             }),
         new ItemBase("LavaB1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -42048,7 +42264,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5b1", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaB1"}, "order": 187}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaB1"}, "order": 187}
             }),
         new ItemBase("LavaB2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -42069,7 +42285,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5b2", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaB2"}, "order": 188}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaB2"}, "order": 188}
             }),
         new ItemBase("LavaB3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -42090,7 +42306,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5b3", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaB3"}, "order": 189}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaB3"}, "order": 189}
             }),
         new ItemBase("LavaB3b", <ItemModel>{
                 "item": <DescItemModel>{
@@ -42111,7 +42327,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5b3", "quantity": 1, "chance": 2e-05}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaB3b"}, "order": 190}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaB3b"}, "order": 190}
             }),
         new ItemBase("LavaB4", <ItemModel>{
                 "item": <DescItemModel>{
@@ -42132,7 +42348,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5b4", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaB4"}, "order": 191}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaB4"}, "order": 191}
             }),
         new ItemBase("LavaB5", <ItemModel>{
                 "item": <DescItemModel>{
@@ -42153,7 +42369,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5b5", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaB5"}, "order": 192}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaB5"}, "order": 192}
             }),
         new ItemBase("LavaB6", <ItemModel>{
                 "item": <DescItemModel>{
@@ -42174,7 +42390,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5b6", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaB6"}, "order": 193}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaB6"}, "order": 193}
             }),
         new ItemBase("LavaC1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -42195,7 +42411,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5c1", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaC1"}, "order": 194}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaC1"}, "order": 194}
             }),
         new ItemBase("LavaC2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -42216,7 +42432,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5c2", "quantity": 1, "chance": 0.16}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaC2"}, "order": 195}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LavaC2"}, "order": 195}
             }),
         new ItemBase("StampA1", <ItemModel>{
                 "item": <StampItemModel>{
@@ -42254,7 +42470,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA1"}, "order": 1010}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA1"}, "order": 1003}
             }),
         new ItemBase("StampA2", <ItemModel>{
                 "item": <StampItemModel>{
@@ -42292,7 +42508,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA2"}, "order": 1011}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA2"}, "order": 1004}
             }),
         new ItemBase("StampA3", <ItemModel>{
                 "item": <StampItemModel>{
@@ -42343,7 +42559,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA3"}, "order": 1012}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA3"}, "order": 1005}
             }),
         new ItemBase("StampA4", <ItemModel>{
                 "item": <StampItemModel>{
@@ -42386,7 +42602,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA4"}, "order": 1013}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA4"}, "order": 1006}
             }),
         new ItemBase("StampA5", <ItemModel>{
                 "item": <StampItemModel>{
@@ -42437,7 +42653,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA5"}, "order": 1014}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA5"}, "order": 1007}
             }),
         new ItemBase("StampA6", <ItemModel>{
                 "item": <StampItemModel>{
@@ -42488,7 +42704,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA6"}, "order": 1015}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA6"}, "order": 1008}
             }),
         new ItemBase("StampA7", <ItemModel>{
                 "item": <StampItemModel>{
@@ -42526,7 +42742,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "snakeG", "quantity": 1, "chance": 5e-05}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA7"}, "order": 1016}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA7"}, "order": 1009}
             }),
         new ItemBase("StampA8", <ItemModel>{
                 "item": <StampItemModel>{
@@ -42564,7 +42780,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "frogBIG", "quantity": 1, "chance": 0.0003}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA8"}, "order": 1017}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA8"}, "order": 1010}
             }),
         new ItemBase("StampA9", <ItemModel>{
                 "item": <StampItemModel>{
@@ -42607,7 +42823,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA9"}, "order": 1018}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA9"}, "order": 1011}
             }),
         new ItemBase("StampA10", <ItemModel>{
                 "item": <StampItemModel>{
@@ -42645,7 +42861,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "frogBIG", "quantity": 1, "chance": 3e-05}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA10"}, "order": 1019}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA10"}, "order": 1012}
             }),
         new ItemBase("StampA11", <ItemModel>{
                 "item": <StampItemModel>{
@@ -42691,7 +42907,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Bug4", "quantity": 1, "chance": 3e-06}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA11"}, "order": 1020}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA11"}, "order": 1013}
             }),
         new ItemBase("StampA12", <ItemModel>{
                 "item": <StampItemModel>{
@@ -42744,7 +42960,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA12"}, "order": 1021}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA12"}, "order": 1014}
             }),
         new ItemBase("StampA13", <ItemModel>{
                 "item": <StampItemModel>{
@@ -42795,7 +43011,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Dreadlo", "quantity": 2, "chance": 1.95e-06}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA13"}, "order": 1022}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA13"}, "order": 1015}
             }),
         new ItemBase("StampA14", <ItemModel>{
                 "item": <StampItemModel>{
@@ -42836,7 +43052,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA14"}, "order": 1023}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA14"}, "order": 1016}
             }),
         new ItemBase("StampA15", <ItemModel>{
                 "item": <StampItemModel>{
@@ -42887,7 +43103,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA15"}, "order": 1024}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA15"}, "order": 1017}
             }),
         new ItemBase("StampA16", <ItemModel>{
                 "item": <StampItemModel>{
@@ -42930,7 +43146,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA16"}, "order": 1025}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA16"}, "order": 1018}
             }),
         new ItemBase("StampA17", <ItemModel>{
                 "item": <StampItemModel>{
@@ -42980,7 +43196,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestC2", "quantity": 1, "chance": 0.01}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA17"}, "order": 1026}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA17"}, "order": 1019}
             }),
         new ItemBase("StampA18", <ItemModel>{
                 "item": <StampItemModel>{
@@ -43023,7 +43239,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA18"}, "order": 1027}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA18"}, "order": 1020}
             }),
         new ItemBase("StampA19", <ItemModel>{
                 "item": <StampItemModel>{
@@ -43066,7 +43282,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA19"}, "order": 1028}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA19"}, "order": 1021}
             }),
         new ItemBase("StampA20", <ItemModel>{
                 "item": <StampItemModel>{
@@ -43116,7 +43332,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB3", "quantity": 1, "chance": 0.00015}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA20"}, "order": 1029}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA20"}, "order": 1022}
             }),
         new ItemBase("StampA21", <ItemModel>{
                 "item": <StampItemModel>{
@@ -43154,7 +43370,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA21"}, "order": 1030}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA21"}, "order": 1023}
             }),
         new ItemBase("StampA22", <ItemModel>{
                 "item": <StampItemModel>{
@@ -43197,7 +43413,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA22"}, "order": 1031}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA22"}, "order": 1024}
             }),
         new ItemBase("StampA23", <ItemModel>{
                 "item": <StampItemModel>{
@@ -43240,7 +43456,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA23"}, "order": 1032}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA23"}, "order": 1025}
             }),
         new ItemBase("StampA24", <ItemModel>{
                 "item": <StampItemModel>{
@@ -43283,7 +43499,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA24"}, "order": 1033}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA24"}, "order": 1026}
             }),
         new ItemBase("StampA25", <ItemModel>{
                 "item": <StampItemModel>{
@@ -43326,7 +43542,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA25"}, "order": 1034}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA25"}, "order": 1027}
             }),
         new ItemBase("StampA26", <ItemModel>{
                 "item": <StampItemModel>{
@@ -43369,7 +43585,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA26"}, "order": 1035}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA26"}, "order": 1028}
             }),
         new ItemBase("StampA27", <ItemModel>{
                 "item": <StampItemModel>{
@@ -43421,7 +43637,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestC3", "quantity": 1, "chance": 8e-05}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA27"}, "order": 1036}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA27"}, "order": 1029}
             }),
         new ItemBase("StampA28", <ItemModel>{
                 "item": <StampItemModel>{
@@ -43464,7 +43680,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA28"}, "order": 1037}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA28"}, "order": 1030}
             }),
         new ItemBase("StampA29", <ItemModel>{
                 "item": <StampItemModel>{
@@ -43502,7 +43718,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4b1", "quantity": 1, "chance": 3.8e-06}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA29"}, "order": 1038}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA29"}, "order": 1031}
             }),
         new ItemBase("StampA30", <ItemModel>{
                 "item": <StampItemModel>{
@@ -43545,7 +43761,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA30"}, "order": 1039}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA30"}, "order": 1032}
             }),
         new ItemBase("StampA31", <ItemModel>{
                 "item": <StampItemModel>{
@@ -43595,7 +43811,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestA4", "quantity": 1, "chance": 0.00027}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA31"}, "order": 1040}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA31"}, "order": 1033}
             }),
         new ItemBase("StampA32", <ItemModel>{
                 "item": <StampItemModel>{
@@ -43645,7 +43861,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestC4", "quantity": 1, "chance": 0.00018}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA32"}, "order": 1041}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA32"}, "order": 1034}
             }),
         new ItemBase("StampA33", <ItemModel>{
                 "item": <StampItemModel>{
@@ -43696,7 +43912,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Bug9", "quantity": 1, "chance": 2.55e-06}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA33"}, "order": 1042}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA33"}, "order": 1035}
             }),
         new ItemBase("StampA34", <ItemModel>{
                 "item": <StampItemModel>{
@@ -43739,7 +43955,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA34"}, "order": 1043}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA34"}, "order": 1036}
             }),
         new ItemBase("StampA35", <ItemModel>{
                 "item": <StampItemModel>{
@@ -43791,7 +44007,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Bug10", "quantity": 1, "chance": 2.25e-06}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA35"}, "order": 1044}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA35"}, "order": 1037}
             }),
         new ItemBase("StampA36", <ItemModel>{
                 "item": <StampItemModel>{
@@ -43834,7 +44050,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA36"}, "order": 1045}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA36"}, "order": 1038}
             }),
         new ItemBase("StampA37", <ItemModel>{
                 "item": <StampItemModel>{
@@ -43872,7 +44088,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5c2", "quantity": 1, "chance": 1e-06}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA37"}, "order": 1046}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampA37"}, "order": 1039}
             }),
         new ItemBase("StampB1", <ItemModel>{
                 "item": <StampItemModel>{
@@ -43910,7 +44126,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB1"}, "order": 1047}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB1"}, "order": 1040}
             }),
         new ItemBase("StampB2", <ItemModel>{
                 "item": <StampItemModel>{
@@ -43948,7 +44164,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB2"}, "order": 1048}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB2"}, "order": 1041}
             }),
         new ItemBase("StampB3", <ItemModel>{
                 "item": <StampItemModel>{
@@ -43998,7 +44214,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestA1", "quantity": 1, "chance": 0.0012}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB3"}, "order": 1049}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB3"}, "order": 1042}
             }),
         new ItemBase("StampB4", <ItemModel>{
                 "item": <StampItemModel>{
@@ -44041,7 +44257,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB4"}, "order": 1050}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB4"}, "order": 1043}
             }),
         new ItemBase("StampB5", <ItemModel>{
                 "item": <StampItemModel>{
@@ -44079,7 +44295,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "sheep", "quantity": 1, "chance": 8e-05}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB5"}, "order": 1051}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB5"}, "order": 1044}
             }),
         new ItemBase("StampB6", <ItemModel>{
                 "item": <StampItemModel>{
@@ -44122,7 +44338,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB6"}, "order": 1052}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB6"}, "order": 1045}
             }),
         new ItemBase("StampB7", <ItemModel>{
                 "item": <StampItemModel>{
@@ -44160,7 +44376,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "flake", "quantity": 1, "chance": 6e-05}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB7"}, "order": 1053}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB7"}, "order": 1046}
             }),
         new ItemBase("StampB8", <ItemModel>{
                 "item": <StampItemModel>{
@@ -44211,7 +44427,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB8"}, "order": 1054}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB8"}, "order": 1047}
             }),
         new ItemBase("StampB9", <ItemModel>{
                 "item": <StampItemModel>{
@@ -44259,7 +44475,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ToiletTree", "quantity": 1, "chance": 1.59e-05}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB9"}, "order": 1055}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB9"}, "order": 1048}
             }),
         new ItemBase("StampB10", <ItemModel>{
                 "item": <StampItemModel>{
@@ -44297,7 +44513,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "snowball", "quantity": 1, "chance": 2.5e-05}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB10"}, "order": 1056}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB10"}, "order": 1049}
             }),
         new ItemBase("StampB11", <ItemModel>{
                 "item": <StampItemModel>{
@@ -44348,7 +44564,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Dreadlo", "quantity": 2, "chance": 1.17e-05}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB11"}, "order": 1057}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB11"}, "order": 1050}
             }),
         new ItemBase("StampB12", <ItemModel>{
                 "item": <StampItemModel>{
@@ -44386,7 +44602,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "thermostat", "quantity": 1, "chance": 1e-05}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB12"}, "order": 1058}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB12"}, "order": 1051}
             }),
         new ItemBase("StampB13", <ItemModel>{
                 "item": <StampItemModel>{
@@ -44424,7 +44640,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "PalmTree", "quantity": 2, "chance": 4.5e-06}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB13"}, "order": 1059}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB13"}, "order": 1052}
             }),
         new ItemBase("StampB14", <ItemModel>{
                 "item": <StampItemModel>{
@@ -44467,7 +44683,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB14"}, "order": 1060}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB14"}, "order": 1053}
             }),
         new ItemBase("StampB15", <ItemModel>{
                 "item": <StampItemModel>{
@@ -44515,7 +44731,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestA2", "quantity": 1, "chance": 0.0006}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB15"}, "order": 1061}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB15"}, "order": 1054}
             }),
         new ItemBase("StampB16", <ItemModel>{
                 "item": <StampItemModel>{
@@ -44565,7 +44781,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB2", "quantity": 1, "chance": 0.0004}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB16"}, "order": 1062}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB16"}, "order": 1055}
             }),
         new ItemBase("StampB17", <ItemModel>{
                 "item": <StampItemModel>{
@@ -44608,7 +44824,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB17"}, "order": 1063}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB17"}, "order": 1056}
             }),
         new ItemBase("StampB18", <ItemModel>{
                 "item": <StampItemModel>{
@@ -44651,7 +44867,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB18"}, "order": 1064}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB18"}, "order": 1057}
             }),
         new ItemBase("StampB19", <ItemModel>{
                 "item": <StampItemModel>{
@@ -44694,7 +44910,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB19"}, "order": 1065}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB19"}, "order": 1058}
             }),
         new ItemBase("StampB20", <ItemModel>{
                 "item": <StampItemModel>{
@@ -44737,7 +44953,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB20"}, "order": 1066}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB20"}, "order": 1059}
             }),
         new ItemBase("StampB21", <ItemModel>{
                 "item": <StampItemModel>{
@@ -44783,7 +44999,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Bug4", "quantity": 1, "chance": 1.5e-06}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB21"}, "order": 1067}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB21"}, "order": 1060}
             }),
         new ItemBase("StampB22", <ItemModel>{
                 "item": <StampItemModel>{
@@ -44826,7 +45042,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB22"}, "order": 1068}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB22"}, "order": 1061}
             }),
         new ItemBase("StampB23", <ItemModel>{
                 "item": <StampItemModel>{
@@ -44878,7 +45094,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Fish8", "quantity": 1, "chance": 1.2e-05}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB23"}, "order": 1069}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB23"}, "order": 1062}
             }),
         new ItemBase("StampB24", <ItemModel>{
                 "item": <StampItemModel>{
@@ -44928,7 +45144,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestC2", "quantity": 1, "chance": 0.00015}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB24"}, "order": 1070}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB24"}, "order": 1063}
             }),
         new ItemBase("StampB25", <ItemModel>{
                 "item": <StampItemModel>{
@@ -44972,7 +45188,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Tree7", "quantity": 1, "chance": 1.068e-05}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB25"}, "order": 1071}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB25"}, "order": 1064}
             }),
         new ItemBase("StampB26", <ItemModel>{
                 "item": <StampItemModel>{
@@ -45015,7 +45231,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB26"}, "order": 1072}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB26"}, "order": 1065}
             }),
         new ItemBase("StampB27", <ItemModel>{
                 "item": <StampItemModel>{
@@ -45059,7 +45275,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Bug6", "quantity": 1, "chance": 1.8e-05}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB27"}, "order": 1073}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB27"}, "order": 1066}
             }),
         new ItemBase("StampB28", <ItemModel>{
                 "item": <StampItemModel>{
@@ -45093,7 +45309,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB28"}, "order": 1074}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB28"}, "order": 1067}
             }),
         new ItemBase("StampB29", <ItemModel>{
                 "item": <StampItemModel>{
@@ -45127,7 +45343,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB29"}, "order": 1075}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB29"}, "order": 1068}
             }),
         new ItemBase("StampB30", <ItemModel>{
                 "item": <StampItemModel>{
@@ -45175,7 +45391,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestA3", "quantity": 1, "chance": 0.001}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB30"}, "order": 1076}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB30"}, "order": 1069}
             }),
         new ItemBase("StampB31", <ItemModel>{
                 "item": <StampItemModel>{
@@ -45249,7 +45465,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Bug6", "quantity": 1, "chance": 1.35e-06}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB31"}, "order": 1077}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB31"}, "order": 1070}
             }),
         new ItemBase("StampB32", <ItemModel>{
                 "item": <StampItemModel>{
@@ -45283,7 +45499,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB32"}, "order": 1078}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB32"}, "order": 1071}
             }),
         new ItemBase("StampB33", <ItemModel>{
                 "item": <StampItemModel>{
@@ -45317,7 +45533,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB33"}, "order": 1079}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB33"}, "order": 1072}
             }),
         new ItemBase("StampB34", <ItemModel>{
                 "item": <StampItemModel>{
@@ -45369,7 +45585,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestC3", "quantity": 1, "chance": 0.0001}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB34"}, "order": 1080}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB34"}, "order": 1073}
             }),
         new ItemBase("StampB35", <ItemModel>{
                 "item": <StampItemModel>{
@@ -45403,7 +45619,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB35"}, "order": 1081}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB35"}, "order": 1074}
             }),
         new ItemBase("StampB36", <ItemModel>{
                 "item": <StampItemModel>{
@@ -45451,7 +45667,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestA3", "quantity": 1, "chance": 0.0006}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB36"}, "order": 1082}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB36"}, "order": 1075}
             }),
         new ItemBase("StampB37", <ItemModel>{
                 "item": <StampItemModel>{
@@ -45494,7 +45710,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB37"}, "order": 1083}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB37"}, "order": 1076}
             }),
         new ItemBase("StampB38", <ItemModel>{
                 "item": <StampItemModel>{
@@ -45547,7 +45763,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB38"}, "order": 1084}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB38"}, "order": 1077}
             }),
         new ItemBase("StampB39", <ItemModel>{
                 "item": <StampItemModel>{
@@ -45590,7 +45806,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB39"}, "order": 1085}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB39"}, "order": 1078}
             }),
         new ItemBase("StampB40", <ItemModel>{
                 "item": <StampItemModel>{
@@ -45633,7 +45849,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB40"}, "order": 1086}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB40"}, "order": 1079}
             }),
         new ItemBase("StampB41", <ItemModel>{
                 "item": <StampItemModel>{
@@ -45686,7 +45902,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB41"}, "order": 1087}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB41"}, "order": 1080}
             }),
         new ItemBase("StampB42", <ItemModel>{
                 "item": <StampItemModel>{
@@ -45729,7 +45945,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB42"}, "order": 1088}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB42"}, "order": 1081}
             }),
         new ItemBase("StampB43", <ItemModel>{
                 "item": <StampItemModel>{
@@ -45772,7 +45988,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB43"}, "order": 1089}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB43"}, "order": 1082}
             }),
         new ItemBase("StampB44", <ItemModel>{
                 "item": <StampItemModel>{
@@ -45815,7 +46031,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB44"}, "order": 1090}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB44"}, "order": 1083}
             }),
         new ItemBase("StampB45", <ItemModel>{
                 "item": <StampItemModel>{
@@ -45858,7 +46074,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB45"}, "order": 1091}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB45"}, "order": 1084}
             }),
         new ItemBase("StampB46", <ItemModel>{
                 "item": <StampItemModel>{
@@ -45901,7 +46117,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB46"}, "order": 1092}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampB46"}, "order": 1085}
             }),
         new ItemBase("StampC1", <ItemModel>{
                 "item": <StampItemModel>{
@@ -45944,7 +46160,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC1"}, "order": 1093}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC1"}, "order": 1086}
             }),
         new ItemBase("StampC2", <ItemModel>{
                 "item": <StampItemModel>{
@@ -45987,7 +46203,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC2"}, "order": 1094}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC2"}, "order": 1087}
             }),
         new ItemBase("StampC3", <ItemModel>{
                 "item": <StampItemModel>{
@@ -46039,7 +46255,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Crystal4", "quantity": 1, "chance": 0.1}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC3"}, "order": 1095}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC3"}, "order": 1088}
             }),
         new ItemBase("StampC4", <ItemModel>{
                 "item": <StampItemModel>{
@@ -46077,7 +46293,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC4"}, "order": 1096}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC4"}, "order": 1089}
             }),
         new ItemBase("StampC5", <ItemModel>{
                 "item": <StampItemModel>{
@@ -46115,7 +46331,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC5"}, "order": 1097}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC5"}, "order": 1090}
             }),
         new ItemBase("StampC6", <ItemModel>{
                 "item": <StampItemModel>{
@@ -46158,7 +46374,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC6"}, "order": 1098}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC6"}, "order": 1091}
             }),
         new ItemBase("StampC7", <ItemModel>{
                 "item": <StampItemModel>{
@@ -46201,7 +46417,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC7"}, "order": 1099}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC7"}, "order": 1092}
             }),
         new ItemBase("StampC8", <ItemModel>{
                 "item": <StampItemModel>{
@@ -46239,7 +46455,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC8"}, "order": 1100}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC8"}, "order": 1093}
             }),
         new ItemBase("StampC9", <ItemModel>{
                 "item": <StampItemModel>{
@@ -46282,7 +46498,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC9"}, "order": 1101}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC9"}, "order": 1094}
             }),
         new ItemBase("StampC10", <ItemModel>{
                 "item": <StampItemModel>{
@@ -46316,7 +46532,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("StampC11", <ItemModel>{
                 "item": <StampItemModel>{
@@ -46350,7 +46566,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("StampC12", <ItemModel>{
                 "item": <StampItemModel>{
@@ -46384,7 +46600,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("StampC13", <ItemModel>{
                 "item": <StampItemModel>{
@@ -46418,7 +46634,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC13"}, "order": 1102}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC13"}, "order": 1095}
             }),
         new ItemBase("StampC14", <ItemModel>{
                 "item": <StampItemModel>{
@@ -46461,7 +46677,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC14"}, "order": 1103}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC14"}, "order": 1096}
             }),
         new ItemBase("StampC15", <ItemModel>{
                 "item": <StampItemModel>{
@@ -46504,7 +46720,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC15"}, "order": 1104}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC15"}, "order": 1097}
             }),
         new ItemBase("StampC16", <ItemModel>{
                 "item": <StampItemModel>{
@@ -46542,7 +46758,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5a2", "quantity": 1, "chance": 3e-06}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC16"}, "order": 1105}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC16"}, "order": 1098}
             }),
         new ItemBase("StampC17", <ItemModel>{
                 "item": <StampItemModel>{
@@ -46576,7 +46792,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC17"}, "order": 1106}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC17"}, "order": 1099}
             }),
         new ItemBase("StampC18", <ItemModel>{
                 "item": <StampItemModel>{
@@ -46619,7 +46835,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC18"}, "order": 1107}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC18"}, "order": 1100}
             }),
         new ItemBase("StampC19", <ItemModel>{
                 "item": <StampItemModel>{
@@ -46669,7 +46885,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB3", "quantity": 1, "chance": 0.0003}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC19"}, "order": 1108}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC19"}, "order": 1101}
             }),
         new ItemBase("StampC20", <ItemModel>{
                 "item": <StampItemModel>{
@@ -46712,7 +46928,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC20"}, "order": 1109}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC20"}, "order": 1102}
             }),
         new ItemBase("StampC21", <ItemModel>{
                 "item": <StampItemModel>{
@@ -46755,7 +46971,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC21"}, "order": 1110}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC21"}, "order": 1103}
             }),
         new ItemBase("StampC22", <ItemModel>{
                 "item": <StampItemModel>{
@@ -46808,7 +47024,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC22"}, "order": 1111}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StampC22"}, "order": 1104}
             }),
         new ItemBase("StoneWe", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -46840,7 +47056,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "EasterEvent2", "quantity": 2, "chance": 0.25}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneWe"}, "order": 625}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneWe"}, "order": 619}
             }),
         new ItemBase("StoneWeb", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -46871,7 +47087,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "shovelY", "quantity": 2, "chance": 0.01}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneWeb"}, "order": 626}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneWeb"}, "order": 620}
             }),
         new ItemBase("StoneW1", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -46942,7 +47158,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestA1", "quantity": 1, "chance": 0.025}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneW1"}, "order": 627}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneW1"}, "order": 621}
             }),
         new ItemBase("StoneW2", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -47011,7 +47227,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestA2", "quantity": 1, "chance": 0.025}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneW2"}, "order": 628}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneW2"}, "order": 622}
             }),
         new ItemBase("StoneW3", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -47078,7 +47294,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB3", "quantity": 1, "chance": 0.2}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneW3"}, "order": 629}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneW3"}, "order": 623}
             }),
         new ItemBase("StoneW3b", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -47105,7 +47321,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneW3b"}, "order": 630}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneW3b"}, "order": 624}
             }),
         new ItemBase("StoneW6", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -47141,7 +47357,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneW6"}, "order": 631}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneW6"}, "order": 625}
             }),
         new ItemBase("StoneW4", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -47195,7 +47411,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB4", "quantity": 1, "chance": 0.04}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneW4"}, "order": 632}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneW4"}, "order": 626}
             }),
         new ItemBase("StoneW5", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -47232,7 +47448,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneW5"}, "order": 633}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneW5"}, "order": 627}
             }),
         new ItemBase("StoneAe", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -47264,7 +47480,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "EasterEvent2", "quantity": 3, "chance": 0.25}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneAe"}, "order": 634}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneAe"}, "order": 628}
             }),
         new ItemBase("StoneAeB", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -47295,7 +47511,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "shovelY", "quantity": 3, "chance": 0.02}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneAeB"}, "order": 635}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneAeB"}, "order": 629}
             }),
         new ItemBase("StoneA1", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -47373,7 +47589,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestA1", "quantity": 1, "chance": 0.09}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneA1"}, "order": 636}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneA1"}, "order": 630}
             }),
         new ItemBase("StoneA1b", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -47404,7 +47620,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneA1b"}, "order": 637}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneA1b"}, "order": 631}
             }),
         new ItemBase("StoneA2", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -47493,7 +47709,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestA2", "quantity": 1, "chance": 0.09}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneA2"}, "order": 638}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneA2"}, "order": 632}
             }),
         new ItemBase("StoneA2b", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -47527,7 +47743,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB2", "quantity": 1, "chance": 0.005}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneA2b"}, "order": 639}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneA2b"}, "order": 633}
             }),
         new ItemBase("StoneA3", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -47584,7 +47800,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB3", "quantity": 1, "chance": 0.3}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneA3"}, "order": 640}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneA3"}, "order": 634}
             }),
         new ItemBase("StoneA3b", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -47629,7 +47845,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "mini4a", "quantity": 1, "chance": 0.04}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneA3b"}, "order": 641}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneA3b"}, "order": 635}
             }),
         new ItemBase("StoneA4", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -47683,7 +47899,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB4", "quantity": 1, "chance": 0.07}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneA4"}, "order": 642}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneA4"}, "order": 636}
             }),
         new ItemBase("StoneA5", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -47720,7 +47936,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneA5"}, "order": 643}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneA5"}, "order": 637}
             }),
         new ItemBase("StoneTe", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -47752,7 +47968,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "EasterEvent2", "quantity": 3, "chance": 0.25}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneTe"}, "order": 644}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneTe"}, "order": 638}
             }),
         new ItemBase("StoneT1", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -47839,7 +48055,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Bug4", "quantity": 1, "chance": 0.00045}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneT1"}, "order": 645}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneT1"}, "order": 639}
             }),
         new ItemBase("StoneT1e", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -47864,7 +48080,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneT1e"}, "order": 646}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneT1e"}, "order": 640}
             }),
         new ItemBase("StoneT1eb", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -47895,7 +48111,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "shovelY", "quantity": 3, "chance": 0.012}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneT1eb"}, "order": 647}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneT1eb"}, "order": 641}
             }),
         new ItemBase("StoneT2", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -47987,7 +48203,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Bug4", "quantity": 1, "chance": 3e-05}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneT2"}, "order": 648}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneT2"}, "order": 642}
             }),
         new ItemBase("StoneT3", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -48027,7 +48243,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneT3"}, "order": 649}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneT3"}, "order": 643}
             }),
         new ItemBase("StoneT4", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -48068,7 +48284,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneT4"}, "order": 650}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneT4"}, "order": 644}
             }),
         new ItemBase("StoneT5", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -48105,7 +48321,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneT5"}, "order": 651}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneT5"}, "order": 645}
             }),
         new ItemBase("StoneHelm1", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -48149,7 +48365,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "goblinG", "quantity": 1, "chance": 0.00015}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneHelm1"}, "order": 652}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneHelm1"}, "order": 646}
             }),
         new ItemBase("StoneHelm6", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -48193,7 +48409,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneHelm6"}, "order": 653}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneHelm6"}, "order": 647}
             }),
         new ItemBase("StoneHelm1b", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -48218,7 +48434,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneHelm1b"}, "order": 654}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneHelm1b"}, "order": 648}
             }),
         new ItemBase("StoneZ1", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -48377,7 +48593,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "babaMummy", "quantity": 1, "chance": 1}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneZ1"}, "order": 655}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneZ1"}, "order": 649}
             }),
         new ItemBase("StoneZ2", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -48480,7 +48696,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Boss4C", "quantity": 1, "chance": 0.03}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneZ2"}, "order": 656}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneZ2"}, "order": 650}
             }),
         new ItemBase("StoneZ3", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -48532,7 +48748,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Boss5C", "quantity": 2, "chance": 0.00125}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneZ3"}, "order": 657}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StoneZ3"}, "order": 651}
             }),
         new ItemBase("StonePremSTR", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -48554,7 +48770,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StonePremSTR"}, "order": 658}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StonePremSTR"}, "order": 652}
             }),
         new ItemBase("StonePremAGI", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -48576,7 +48792,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StonePremAGI"}, "order": 659}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StonePremAGI"}, "order": 653}
             }),
         new ItemBase("StonePremWIS", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -48598,7 +48814,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StonePremWIS"}, "order": 660}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StonePremWIS"}, "order": 654}
             }),
         new ItemBase("StonePremLUK", <ItemModel>{
                 "item": <StoneItemModel>{
@@ -48623,7 +48839,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StonePremLUK"}, "order": 661}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "StonePremLUK"}, "order": 655}
             }),
         new ItemBase("IceMountains2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -48640,7 +48856,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "IceMountains2"}, "order": 662}
+                "slabSort": undefined
             }),
         new ItemBase("Hgg", <ItemModel>{
                 "item": <DescItemModel>{
@@ -48661,7 +48877,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "babaHour", "quantity": 1, "chance": 0.3}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Hgg"}, "order": 1112}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Hgg"}, "order": 1105}
             }),
         new ItemBase("Starlight", <ItemModel>{
                 "item": <OreItemModel>{
@@ -48682,7 +48898,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("AlienTreetutorial", <ItemModel>{
                 "item": <BaseItemModel>{
@@ -48702,7 +48918,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentWeapons2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -48734,7 +48950,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("Secretstone", <ItemModel>{
                 "item": <DescItemModel>{
@@ -48760,7 +48976,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("Timecandy1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -48866,7 +49082,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "snakeY", "quantity": 3, "chance": 0.2}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Timecandy1"}, "order": 616}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Timecandy1"}, "order": 610}
             }),
         new ItemBase("Timecandy2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -48948,7 +49164,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "snakeY", "quantity": 3, "chance": 0.05}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Timecandy2"}, "order": 617}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Timecandy2"}, "order": 611}
             }),
         new ItemBase("Timecandy3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -49051,7 +49267,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "mini4a", "quantity": 1, "chance": 0.025}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Timecandy3"}, "order": 618}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Timecandy3"}, "order": 612}
             }),
         new ItemBase("Timecandy4", <ItemModel>{
                 "item": <DescItemModel>{
@@ -49126,7 +49342,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "sheepB", "quantity": 2, "chance": 0.01}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Timecandy4"}, "order": 619}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Timecandy4"}, "order": 613}
             }),
         new ItemBase("Timecandy5", <ItemModel>{
                 "item": <DescItemModel>{
@@ -49193,7 +49409,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "mini4a", "quantity": 1, "chance": 0.0015}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Timecandy5"}, "order": 620}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Timecandy5"}, "order": 614}
             }),
         new ItemBase("Timecandy6", <ItemModel>{
                 "item": <DescItemModel>{
@@ -49221,7 +49437,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "mini4a", "quantity": 1, "chance": 0.00015}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Timecandy6"}, "order": 621}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Timecandy6"}, "order": 615}
             }),
         new ItemBase("Timecandy7", <ItemModel>{
                 "item": <DescItemModel>{
@@ -49247,7 +49463,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Timecandy7"}, "order": 622}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Timecandy7"}, "order": 616}
             }),
         new ItemBase("Timecandy8", <ItemModel>{
                 "item": <DescItemModel>{
@@ -49289,7 +49505,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Timecandy8"}, "order": 623}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Timecandy8"}, "order": 617}
             }),
         new ItemBase("Timecandy9", <ItemModel>{
                 "item": <DescItemModel>{
@@ -49316,7 +49532,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Timecandy9"}, "order": 624}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Timecandy9"}, "order": 618}
             }),
         new ItemBase("InvBag1", <ItemModel>{
                 "item": <InvBagItemModel>{
@@ -49344,7 +49560,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag1"}, "order": 1113}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag1"}, "order": 1106}
             }),
         new ItemBase("InvBag2", <ItemModel>{
                 "item": <InvBagItemModel>{
@@ -49372,7 +49588,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag2"}, "order": 1114}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag2"}, "order": 1107}
             }),
         new ItemBase("InvBag3", <ItemModel>{
                 "item": <InvBagItemModel>{
@@ -49400,7 +49616,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag3"}, "order": 1115}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag3"}, "order": 1108}
             }),
         new ItemBase("InvBag4", <ItemModel>{
                 "item": <InvBagItemModel>{
@@ -49428,7 +49644,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag4"}, "order": 1116}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag4"}, "order": 1109}
             }),
         new ItemBase("InvBag5", <ItemModel>{
                 "item": <InvBagItemModel>{
@@ -49456,7 +49672,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag5"}, "order": 1117}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag5"}, "order": 1110}
             }),
         new ItemBase("InvBag6", <ItemModel>{
                 "item": <InvBagItemModel>{
@@ -49484,7 +49700,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag6"}, "order": 1118}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag6"}, "order": 1111}
             }),
         new ItemBase("InvBag7", <ItemModel>{
                 "item": <InvBagItemModel>{
@@ -49517,7 +49733,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestA2", "quantity": 1, "chance": 0.0018}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag7"}, "order": 1119}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag7"}, "order": 1112}
             }),
         new ItemBase("InvBag8", <ItemModel>{
                 "item": <InvBagItemModel>{
@@ -49545,7 +49761,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag8"}, "order": 1120}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag8"}, "order": 1113}
             }),
         new ItemBase("InvBag9", <ItemModel>{
                 "item": <InvBagItemModel>{
@@ -49564,7 +49780,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag9"}, "order": 1121}
+                "slabSort": undefined
             }),
         new ItemBase("InvBag21", <ItemModel>{
                 "item": <InvBagItemModel>{
@@ -49587,7 +49803,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("InvBag22", <ItemModel>{
                 "item": <InvBagItemModel>{
@@ -49610,7 +49826,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("InvBag23", <ItemModel>{
                 "item": <InvBagItemModel>{
@@ -49633,7 +49849,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("InvBag24", <ItemModel>{
                 "item": <InvBagItemModel>{
@@ -49656,7 +49872,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("InvBag25", <ItemModel>{
                 "item": <InvBagItemModel>{
@@ -49679,7 +49895,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("InvBag26", <ItemModel>{
                 "item": <InvBagItemModel>{
@@ -49702,7 +49918,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("InvBag100", <ItemModel>{
                 "item": <InvBagItemModel>{
@@ -49725,7 +49941,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "snakeG", "quantity": 1, "chance": 8e-05}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag100"}, "order": 1122}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag100"}, "order": 1114}
             }),
         new ItemBase("InvBag101", <ItemModel>{
                 "item": <InvBagItemModel>{
@@ -49748,7 +49964,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "mimicA", "quantity": 1, "chance": 2.5e-05}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag101"}, "order": 1123}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag101"}, "order": 1115}
             }),
         new ItemBase("InvBag102", <ItemModel>{
                 "item": <InvBagItemModel>{
@@ -49802,7 +50018,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag102"}, "order": 1124}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag102"}, "order": 1116}
             }),
         new ItemBase("InvBag103", <ItemModel>{
                 "item": <InvBagItemModel>{
@@ -49856,7 +50072,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag103"}, "order": 1125}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag103"}, "order": 1117}
             }),
         new ItemBase("InvBag104", <ItemModel>{
                 "item": <InvBagItemModel>{
@@ -49892,7 +50108,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag104"}, "order": 1126}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag104"}, "order": 1118}
             }),
         new ItemBase("InvBag105", <ItemModel>{
                 "item": <InvBagItemModel>{
@@ -49930,7 +50146,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag105"}, "order": 1127}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag105"}, "order": 1119}
             }),
         new ItemBase("InvBag106", <ItemModel>{
                 "item": <InvBagItemModel>{
@@ -49966,7 +50182,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag106"}, "order": 1128}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag106"}, "order": 1120}
             }),
         new ItemBase("InvBag107", <ItemModel>{
                 "item": <InvBagItemModel>{
@@ -50004,7 +50220,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag107"}, "order": 1129}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag107"}, "order": 1121}
             }),
         new ItemBase("InvBag108", <ItemModel>{
                 "item": <InvBagItemModel>{
@@ -50042,7 +50258,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag108"}, "order": 1130}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag108"}, "order": 1122}
             }),
         new ItemBase("InvBag109", <ItemModel>{
                 "item": <InvBagItemModel>{
@@ -50096,7 +50312,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag109"}, "order": 1131}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag109"}, "order": 1123}
             }),
         new ItemBase("InvBag110", <ItemModel>{
                 "item": <InvBagItemModel>{
@@ -50119,7 +50335,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "mamoth", "quantity": 1, "chance": 8e-06}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag110"}, "order": 1132}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag110"}, "order": 1124}
             }),
         new ItemBase("InvBag111", <ItemModel>{
                 "item": <InvBagItemModel>{
@@ -50176,7 +50392,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag111"}, "order": 1133}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvBag111"}, "order": 1125}
             }),
         new ItemBase("InvStorage1", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -50204,7 +50420,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage1"}, "order": 1134}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage1"}, "order": 1126}
             }),
         new ItemBase("InvStorage2", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -50240,7 +50456,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage2"}, "order": 1135}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage2"}, "order": 1127}
             }),
         new ItemBase("InvStorage3", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -50268,7 +50484,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage3"}, "order": 1136}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage3"}, "order": 1128}
             }),
         new ItemBase("InvStorage4", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -50296,7 +50512,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage4"}, "order": 1137}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage4"}, "order": 1129}
             }),
         new ItemBase("InvStorage5", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -50324,7 +50540,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage5"}, "order": 1138}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage5"}, "order": 1130}
             }),
         new ItemBase("InvStorage6", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -50360,7 +50576,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage6"}, "order": 1139}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage6"}, "order": 1131}
             }),
         new ItemBase("InvStorage7", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -50396,7 +50612,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage7"}, "order": 1140}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage7"}, "order": 1132}
             }),
         new ItemBase("InvStorage8", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -50434,7 +50650,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage8"}, "order": 1141}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage8"}, "order": 1133}
             }),
         new ItemBase("InvStorage9", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -50470,7 +50686,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage9"}, "order": 1142}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage9"}, "order": 1134}
             }),
         new ItemBase("InvStorage10", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -50508,7 +50724,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage10"}, "order": 1143}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage10"}, "order": 1135}
             }),
         new ItemBase("InvStorage11", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -50536,7 +50752,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage11"}, "order": 1144}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage11"}, "order": 1136}
             }),
         new ItemBase("InvStorage12", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -50574,7 +50790,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage12"}, "order": 1145}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage12"}, "order": 1137}
             }),
         new ItemBase("InvStorage13", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -50612,7 +50828,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage13"}, "order": 1146}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage13"}, "order": 1138}
             }),
         new ItemBase("InvStorage14", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -50647,7 +50863,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB2", "quantity": 1, "chance": 0.0012}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage14"}, "order": 1147}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage14"}, "order": 1139}
             }),
         new ItemBase("InvStorage15", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -50685,7 +50901,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage15"}, "order": 1148}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage15"}, "order": 1140}
             }),
         new ItemBase("InvStorage16", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -50723,7 +50939,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage16"}, "order": 1149}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage16"}, "order": 1141}
             }),
         new ItemBase("InvStorage17", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -50761,7 +50977,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage17"}, "order": 1150}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage17"}, "order": 1142}
             }),
         new ItemBase("InvStorage18", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -50799,7 +51015,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage18"}, "order": 1151}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage18"}, "order": 1143}
             }),
         new ItemBase("InvStorage19", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -50837,7 +51053,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage19"}, "order": 1152}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage19"}, "order": 1144}
             }),
         new ItemBase("InvStorage20", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -50875,7 +51091,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage20"}, "order": 1153}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage20"}, "order": 1145}
             }),
         new ItemBase("InvStorage21", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -50913,7 +51129,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage21"}, "order": 1154}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage21"}, "order": 1146}
             }),
         new ItemBase("InvStorage22", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -50936,7 +51152,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4a2", "quantity": 1, "chance": 8e-06}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage22"}, "order": 1155}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage22"}, "order": 1147}
             }),
         new ItemBase("InvStorage23", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -50959,7 +51175,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4b5", "quantity": 1, "chance": 1e-06}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage23"}, "order": 1156}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage23"}, "order": 1148}
             }),
         new ItemBase("InvStorage24", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -50995,7 +51211,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Bug9", "quantity": 1, "chance": 1.8e-05}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage24"}, "order": 1157}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage24"}, "order": 1149}
             }),
         new ItemBase("InvStorage25", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -51032,7 +51248,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Bug10", "quantity": 1, "chance": 4.5e-06}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage25"}, "order": 1158}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorage25"}, "order": 1150}
             }),
         new ItemBase("InvStorage31", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -51055,7 +51271,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("InvStorage32", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -51078,7 +51294,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("InvStorage33", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -51101,7 +51317,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("InvStorage34", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -51124,7 +51340,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("InvStorage35", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -51147,7 +51363,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("InvStorage36", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -51170,7 +51386,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("InvStorage37", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -51193,7 +51409,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("InvStorage38", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -51216,7 +51432,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("InvStorage39", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -51239,7 +51455,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("InvStorage40", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -51262,7 +51478,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("InvStorage41", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -51285,7 +51501,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("InvStorage42", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -51308,7 +51524,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("InvStorageF", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -51331,7 +51547,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "frogG", "quantity": 1, "chance": 0.0001}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorageF"}, "order": 1159}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorageF"}, "order": 1151}
             }),
         new ItemBase("InvStorageS", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -51354,7 +51570,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4b3", "quantity": 1, "chance": 3.8e-06}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorageS"}, "order": 1160}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorageS"}, "order": 1152}
             }),
         new ItemBase("InvStorageC", <ItemModel>{
                 "item": <ChestItemModel>{
@@ -51377,7 +51593,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5a4", "quantity": 1, "chance": 1.01e-06}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorageC"}, "order": 1161}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "InvStorageC"}, "order": 1153}
             }),
         new ItemBase("Line1", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -51421,7 +51637,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line1"}, "order": 1162}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line1"}, "order": 1154}
             }),
         new ItemBase("Line2", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -51457,7 +51673,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line2"}, "order": 1163}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line2"}, "order": 1155}
             }),
         new ItemBase("Line3", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -51488,7 +51704,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4c3", "quantity": 1, "chance": 1e-06}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line3"}, "order": 1164}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line3"}, "order": 1156}
             }),
         new ItemBase("Line4", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -51515,7 +51731,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line4"}, "order": 1165}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line4"}, "order": 1157}
             }),
         new ItemBase("Line5", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -51559,7 +51775,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line5"}, "order": 1166}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line5"}, "order": 1158}
             }),
         new ItemBase("Line6", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -51595,7 +51811,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line6"}, "order": 1167}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line6"}, "order": 1159}
             }),
         new ItemBase("Line7", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -51631,7 +51847,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line7"}, "order": 1168}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line7"}, "order": 1160}
             }),
         new ItemBase("Line8", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -51675,7 +51891,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestB4", "quantity": 1, "chance": 0.00015}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line8"}, "order": 1169}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line8"}, "order": 1161}
             }),
         new ItemBase("Line9", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -51702,7 +51918,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line9"}, "order": 1170}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line9"}, "order": 1162}
             }),
         new ItemBase("Line10", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -51746,7 +51962,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line10"}, "order": 1171}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line10"}, "order": 1163}
             }),
         new ItemBase("Line11", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -51782,7 +51998,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line11"}, "order": 1172}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line11"}, "order": 1164}
             }),
         new ItemBase("Line12", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -51813,7 +52029,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4a2", "quantity": 1, "chance": 2.2e-06}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line12"}, "order": 1173}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line12"}, "order": 1165}
             }),
         new ItemBase("Line13", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -51849,7 +52065,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Bug8", "quantity": 1, "chance": 1.2e-05}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line13"}, "order": 1174}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line13"}, "order": 1166}
             }),
         new ItemBase("Line14", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -51876,7 +52092,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line14"}, "order": 1175}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Line14"}, "order": 1167}
             }),
         new ItemBase("Weight1", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -51921,7 +52137,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight1"}, "order": 1176}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight1"}, "order": 1168}
             }),
         new ItemBase("Weight2", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -51961,7 +52177,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight2"}, "order": 1177}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight2"}, "order": 1169}
             }),
         new ItemBase("Weight3", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -51998,7 +52214,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4b2", "quantity": 1, "chance": 1.9e-06}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight3"}, "order": 1178}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight3"}, "order": 1170}
             }),
         new ItemBase("Weight4", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -52034,7 +52250,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Tree8", "quantity": 1, "chance": 7.12e-06}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight4"}, "order": 1179}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight4"}, "order": 1171}
             }),
         new ItemBase("Weight5", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -52078,7 +52294,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight5"}, "order": 1180}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight5"}, "order": 1172}
             }),
         new ItemBase("Weight6", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -52114,7 +52330,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight6"}, "order": 1181}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight6"}, "order": 1173}
             }),
         new ItemBase("Weight7", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -52157,7 +52373,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestA4", "quantity": 1, "chance": 0.00023}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight7"}, "order": 1182}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight7"}, "order": 1174}
             }),
         new ItemBase("Weight8", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -52193,7 +52409,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight8"}, "order": 1183}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight8"}, "order": 1175}
             }),
         new ItemBase("Weight9", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -52220,7 +52436,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight9"}, "order": 1184}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight9"}, "order": 1176}
             }),
         new ItemBase("Weight10", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -52264,7 +52480,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight10"}, "order": 1185}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight10"}, "order": 1177}
             }),
         new ItemBase("Weight11", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -52308,7 +52524,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight11"}, "order": 1186}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight11"}, "order": 1178}
             }),
         new ItemBase("Weight12", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -52344,7 +52560,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight12"}, "order": 1187}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight12"}, "order": 1179}
             }),
         new ItemBase("Weight13", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -52387,7 +52603,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestC4", "quantity": 1, "chance": 5e-05}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight13"}, "order": 1188}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight13"}, "order": 1180}
             }),
         new ItemBase("Weight14", <ItemModel>{
                 "item": <FishingTKItemModel>{
@@ -52414,7 +52630,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight14"}, "order": 1189}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Weight14"}, "order": 1181}
             }),
         new ItemBase("InvStorage99", <ItemModel>{
                 "item": <DescItemModel>{
@@ -52435,7 +52651,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("Spice0", <ItemModel>{
                 "item": <DescItemModel>{
@@ -52452,7 +52668,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("Spice6", <ItemModel>{
                 "item": <DescItemModel>{
@@ -52469,7 +52685,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("Spice9", <ItemModel>{
                 "item": <DescItemModel>{
@@ -52486,7 +52702,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("SailTr1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -52503,7 +52719,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("SailTr9", <ItemModel>{
                 "item": <DescItemModel>{
@@ -52520,7 +52736,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("SailTr11", <ItemModel>{
                 "item": <DescItemModel>{
@@ -52537,7 +52753,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("SailTr13", <ItemModel>{
                 "item": <DescItemModel>{
@@ -52554,7 +52770,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("SailTr20", <ItemModel>{
                 "item": <DescItemModel>{
@@ -52571,7 +52787,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("SailTr24", <ItemModel>{
                 "item": <DescItemModel>{
@@ -52588,7 +52804,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("SailTr28", <ItemModel>{
                 "item": <DescItemModel>{
@@ -52605,7 +52821,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("Bits", <ItemModel>{
                 "item": <DescItemModel>{
@@ -52622,7 +52838,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("Ladle", <ItemModel>{
                 "item": <DescItemModel>{
@@ -52699,7 +52915,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "mini4a", "quantity": 3, "chance": 1}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Ladle"}, "order": 1190}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Ladle"}, "order": 1182}
             }),
         new ItemBase("PetEgg", <ItemModel>{
                 "item": <DescItemModel>{
@@ -52773,7 +52989,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "mini4a", "quantity": 1, "chance": 0.6}]},
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "PetEgg"}, "order": 1191}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "PetEgg"}, "order": 1183}
             }),
         new ItemBase("Genetic0", <ItemModel>{
                 "item": <DescItemModel>{
@@ -52790,7 +53006,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Genetic0"}, "order": 1192}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Genetic0"}, "order": 1184}
             }),
         new ItemBase("Genetic1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -52807,7 +53023,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Genetic1"}, "order": 1193}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Genetic1"}, "order": 1185}
             }),
         new ItemBase("Genetic2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -52824,7 +53040,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Genetic2"}, "order": 1194}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Genetic2"}, "order": 1186}
             }),
         new ItemBase("Genetic3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -52841,7 +53057,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Genetic3"}, "order": 1195}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Genetic3"}, "order": 1187}
             }),
         new ItemBase("Refinery1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -52862,7 +53078,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Refinery1"}, "order": 82}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Refinery1"}, "order": 82}
             }),
         new ItemBase("Refinery2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -52883,7 +53099,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Refinery2"}, "order": 83}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Refinery2"}, "order": 83}
             }),
         new ItemBase("Refinery3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -52904,7 +53120,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Refinery3"}, "order": 84}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Refinery3"}, "order": 84}
             }),
         new ItemBase("Refinery4", <ItemModel>{
                 "item": <DescItemModel>{
@@ -52925,7 +53141,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Refinery4"}, "order": 85}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Refinery4"}, "order": 85}
             }),
         new ItemBase("Refinery5", <ItemModel>{
                 "item": <DescItemModel>{
@@ -52946,7 +53162,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Refinery5"}, "order": 86}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Refinery5"}, "order": 86}
             }),
         new ItemBase("Refinery6", <ItemModel>{
                 "item": <DescItemModel>{
@@ -52967,7 +53183,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Refinery6"}, "order": 87}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Refinery6"}, "order": 87}
             }),
         new ItemBase("CraftMat1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -52993,7 +53209,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": <AnvilProduceModel>{"item": "CraftMat1", "no": 1, "time": 100, "levelReq": 1, "exp": 6},
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CraftMat1"}, "order": 88}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CraftMat1"}, "order": 88}
             }),
         new ItemBase("CraftMat2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -53019,7 +53235,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CraftMat2"}, "order": 89}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CraftMat2"}, "order": 89}
             }),
         new ItemBase("CraftMat3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -53053,7 +53269,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CraftMat3"}, "order": 90}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CraftMat3"}, "order": 90}
             }),
         new ItemBase("CraftMat5", <ItemModel>{
                 "item": <DescItemModel>{
@@ -53079,7 +53295,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": <AnvilProduceModel>{"item": "CraftMat5", "no": 2, "time": 200, "levelReq": 5, "exp": 10},
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CraftMat5"}, "order": 91}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CraftMat5"}, "order": 91}
             }),
         new ItemBase("CraftMat6", <ItemModel>{
                 "item": <DescItemModel>{
@@ -53105,7 +53321,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": <AnvilProduceModel>{"item": "CraftMat6", "no": 3, "time": 350, "levelReq": 12, "exp": 16},
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CraftMat6"}, "order": 92}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CraftMat6"}, "order": 92}
             }),
         new ItemBase("CraftMat7", <ItemModel>{
                 "item": <DescItemModel>{
@@ -53131,7 +53347,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": <AnvilProduceModel>{"item": "CraftMat7", "no": 4, "time": 700, "levelReq": 17, "exp": 25},
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CraftMat7"}, "order": 93}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CraftMat7"}, "order": 93}
             }),
         new ItemBase("CraftMat9", <ItemModel>{
                 "item": <DescItemModel>{
@@ -53157,7 +53373,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": <AnvilProduceModel>{"item": "CraftMat9", "no": 5, "time": 1200, "levelReq": 25, "exp": 35},
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CraftMat9"}, "order": 94}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CraftMat9"}, "order": 94}
             }),
         new ItemBase("CraftMat8", <ItemModel>{
                 "item": <DescItemModel>{
@@ -53183,7 +53399,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": <AnvilProduceModel>{"item": "CraftMat8", "no": 6, "time": 2000, "levelReq": 30, "exp": 50},
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CraftMat8"}, "order": 95}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CraftMat8"}, "order": 95}
             }),
         new ItemBase("CraftMat10", <ItemModel>{
                 "item": <DescItemModel>{
@@ -53209,7 +53425,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": <AnvilProduceModel>{"item": "CraftMat10", "no": 7, "time": 3000, "levelReq": 35, "exp": 65},
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CraftMat10"}, "order": 96}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CraftMat10"}, "order": 96}
             }),
         new ItemBase("CraftMat11", <ItemModel>{
                 "item": <DescItemModel>{
@@ -53235,7 +53451,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": <AnvilProduceModel>{"item": "CraftMat11", "no": 8, "time": 4000, "levelReq": 43, "exp": 75},
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CraftMat11"}, "order": 97}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CraftMat11"}, "order": 97}
             }),
         new ItemBase("CraftMat12", <ItemModel>{
                 "item": <DescItemModel>{
@@ -53261,7 +53477,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": <AnvilProduceModel>{"item": "CraftMat12", "no": 9, "time": 6000, "levelReq": 50, "exp": 90},
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CraftMat12"}, "order": 98}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CraftMat12"}, "order": 98}
             }),
         new ItemBase("CraftMat13", <ItemModel>{
                 "item": <DescItemModel>{
@@ -53287,7 +53503,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": <AnvilProduceModel>{"item": "CraftMat13", "no": 10, "time": 8500, "levelReq": 60, "exp": 110},
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CraftMat13"}, "order": 99}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CraftMat13"}, "order": 99}
             }),
         new ItemBase("CraftMat14", <ItemModel>{
                 "item": <DescItemModel>{
@@ -53313,7 +53529,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": <AnvilProduceModel>{"item": "CraftMat14", "no": 11, "time": 12000, "levelReq": 70, "exp": 140},
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CraftMat14"}, "order": 100}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CraftMat14"}, "order": 100}
             }),
         new ItemBase("CraftMat15", <ItemModel>{
                 "item": <DescItemModel>{
@@ -53339,7 +53555,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": <AnvilProduceModel>{"item": "CraftMat15", "no": 12, "time": 120000, "levelReq": 999, "exp": 1000},
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CraftMat16", <ItemModel>{
                 "item": <DescItemModel>{
@@ -53365,7 +53581,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": <AnvilProduceModel>{"item": "CraftMat16", "no": 13, "time": 160000, "levelReq": 999, "exp": 1300},
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CraftMat17", <ItemModel>{
                 "item": <DescItemModel>{
@@ -53391,7 +53607,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": <AnvilProduceModel>{"item": "CraftMat17", "no": 14, "time": 250000, "levelReq": 999, "exp": 2000},
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("NPCtoken8", <ItemModel>{
                 "item": <DescItemModel>{
@@ -53408,7 +53624,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("BadgeG1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -53490,7 +53706,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BadgeG1"}, "order": 752}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BadgeG1"}, "order": 744}
             }),
         new ItemBase("BadgeG2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -53556,7 +53772,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BadgeG2"}, "order": 753}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BadgeG2"}, "order": 745}
             }),
         new ItemBase("BadgeG3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -53628,7 +53844,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BadgeG3"}, "order": 754}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BadgeG3"}, "order": 746}
             }),
         new ItemBase("BadgeD1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -53710,7 +53926,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BadgeD1"}, "order": 755}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BadgeD1"}, "order": 747}
             }),
         new ItemBase("BadgeD2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -53771,7 +53987,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BadgeD2"}, "order": 756}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BadgeD2"}, "order": 748}
             }),
         new ItemBase("BadgeD3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -53804,13 +54020,13 @@ export const initItemRepo = () => {
                         <ComponentModel>{"item": "EquipmentHats52", "quantity": 1},
                         <ComponentModel>{"item": "EquipmentPendant14", "quantity": 1},
                         <ComponentModel>{"item": "Hgg", "quantity": 13},
-                        <ComponentModel>{"item": "DesertC2b", "quantity": 25}
+                        <ComponentModel>{"item": "DesertC2b", "quantity": 100}
                     ],
                     "levelReqToCraft": 30,
                     "expGiven": 4000,
                     "no": 75,
                     "tab": 2,
-                    "sellPrice": 132313,
+                    "sellPrice": 146233,
                     "recipeFrom": [
                         <SourceModel>{
                             "wikiName": "[[Cowbo_Jones#The_New_Sheriff|The New Sheriff]]",
@@ -53826,15 +54042,15 @@ export const initItemRepo = () => {
                             <DetRecipeComponentModel>{"indent": 1, "item": "Quest36", "quantity": 3},
                             <DetRecipeComponentModel>{"indent": 2, "item": "Quest37", "quantity": 3},
                             <DetRecipeComponentModel>{"indent": 2, "item": "GoldBar", "quantity": 240},
-                            <DetRecipeComponentModel>{"indent": 2, "item": "DesertC2b", "quantity": 3},
+                            <DetRecipeComponentModel>{"indent": 2, "item": "DesertC2b", "quantity": 15},
                             <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentPendant14", "quantity": 1},
                             <DetRecipeComponentModel>{"indent": 0, "item": "Hgg", "quantity": 13},
-                            <DetRecipeComponentModel>{"indent": 0, "item": "DesertC2b", "quantity": 25}
+                            <DetRecipeComponentModel>{"indent": 0, "item": "DesertC2b", "quantity": 100}
                         ],
                         "detRecipeTotals": [
                             <ComponentModel>{"item": "EquipmentPendant14", "quantity": 1},
                             <ComponentModel>{"item": "Hgg", "quantity": 13},
-                            <ComponentModel>{"item": "DesertC2b", "quantity": 28},
+                            <ComponentModel>{"item": "DesertC2b", "quantity": 115},
                             <ComponentModel>{"item": "EquipmentPants19", "quantity": 1},
                             <ComponentModel>{"item": "EfauntDrop1", "quantity": 20},
                             <ComponentModel>{"item": "StoneA3b", "quantity": 2},
@@ -53846,7 +54062,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BadgeD3"}, "order": 757}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BadgeD3"}, "order": 749}
             }),
         new ItemBase("NPCtoken1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -53905,7 +54121,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken1"}, "order": 758}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken1"}, "order": 750}
             }),
         new ItemBase("NPCtoken2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -53964,7 +54180,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken2"}, "order": 759}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken2"}, "order": 751}
             }),
         new ItemBase("NPCtoken3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54023,7 +54239,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken3"}, "order": 760}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken3"}, "order": 752}
             }),
         new ItemBase("NPCtoken5", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54049,7 +54265,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken5"}, "order": 761}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken5"}, "order": 753}
             }),
         new ItemBase("NPCtoken6", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54075,7 +54291,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken6"}, "order": 762}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken6"}, "order": 754}
             }),
         new ItemBase("NPCtoken4", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54101,7 +54317,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken4"}, "order": 763}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken4"}, "order": 755}
             }),
         new ItemBase("NPCtoken9", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54127,7 +54343,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken9"}, "order": 764}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken9"}, "order": 756}
             }),
         new ItemBase("NPCtoken10", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54150,7 +54366,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken10"}, "order": 765}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken10"}, "order": 757}
             }),
         new ItemBase("NPCtoken11", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54176,7 +54392,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken11"}, "order": 766}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken11"}, "order": 758}
             }),
         new ItemBase("NPCtoken13", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54202,7 +54418,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken13"}, "order": 767}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken13"}, "order": 759}
             }),
         new ItemBase("NPCtoken7", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54228,7 +54444,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken7"}, "order": 768}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken7"}, "order": 760}
             }),
         new ItemBase("Quest9", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54259,7 +54475,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest9"}, "order": 769}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Quest9"}, "order": 761}
             }),
         new ItemBase("NPCtoken15", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54282,7 +54498,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken15"}, "order": 770}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken15"}, "order": 762}
             }),
         new ItemBase("NPCtoken12", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54308,7 +54524,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken12"}, "order": 771}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken12"}, "order": 763}
             }),
         new ItemBase("NPCtoken14", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54334,7 +54550,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken14"}, "order": 772}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken14"}, "order": 764}
             }),
         new ItemBase("NPCtoken16", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54360,7 +54576,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken16"}, "order": 773}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken16"}, "order": 765}
             }),
         new ItemBase("NPCtoken17", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54386,7 +54602,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken17"}, "order": 774}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken17"}, "order": 766}
             }),
         new ItemBase("NPCtoken18", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54412,7 +54628,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken18"}, "order": 775}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken18"}, "order": 767}
             }),
         new ItemBase("NPCtoken19", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54433,7 +54649,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken19"}, "order": 776}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken19"}, "order": 768}
             }),
         new ItemBase("NPCtoken20", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54459,7 +54675,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken20"}, "order": 777}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken20"}, "order": 769}
             }),
         new ItemBase("NPCtoken21", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54485,7 +54701,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken21"}, "order": 778}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken21"}, "order": 770}
             }),
         new ItemBase("NPCtoken27", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54519,7 +54735,7 @@ export const initItemRepo = () => {
                 },
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken27"}, "order": 779}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken27"}, "order": 771}
             }),
         new ItemBase("NPCtoken22", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54545,7 +54761,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken22"}, "order": 780}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken22"}, "order": 772}
             }),
         new ItemBase("NPCtoken24", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54571,7 +54787,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken24"}, "order": 781}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken24"}, "order": 773}
             }),
         new ItemBase("NPCtoken25", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54597,7 +54813,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken25"}, "order": 782}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken25"}, "order": 774}
             }),
         new ItemBase("NPCtoken26", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54623,7 +54839,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken26"}, "order": 783}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken26"}, "order": 775}
             }),
         new ItemBase("NPCtoken23", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54649,7 +54865,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken23"}, "order": 784}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken23"}, "order": 776}
             }),
         new ItemBase("NPCtoken28", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54708,7 +54924,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken28"}, "order": 785}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken28"}, "order": 777}
             }),
         new ItemBase("NPCtoken29", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54767,7 +54983,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken29"}, "order": 786}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken29"}, "order": 778}
             }),
         new ItemBase("NPCtoken30", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54826,7 +55042,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken30"}, "order": 787}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken30"}, "order": 779}
             }),
         new ItemBase("NPCtoken31", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54852,7 +55068,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken31"}, "order": 788}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken31"}, "order": 780}
             }),
         new ItemBase("NPCtoken32", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54878,7 +55094,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken32"}, "order": 789}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken32"}, "order": 781}
             }),
         new ItemBase("NPCtoken33", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54904,7 +55120,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken33"}, "order": 790}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken33"}, "order": 782}
             }),
         new ItemBase("NPCtoken34", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54925,7 +55141,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken34"}, "order": 791}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken34"}, "order": 783}
             }),
         new ItemBase("NPCtoken35", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54951,7 +55167,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken35"}, "order": 792}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken35"}, "order": 784}
             }),
         new ItemBase("NPCtoken36", <ItemModel>{
                 "item": <DescItemModel>{
@@ -54977,7 +55193,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken36"}, "order": 793}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken36"}, "order": 785}
             }),
         new ItemBase("NPCtoken37", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55003,7 +55219,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken37"}, "order": 794}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken37"}, "order": 786}
             }),
         new ItemBase("NPCtoken38", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55029,7 +55245,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken38"}, "order": 795}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken38"}, "order": 787}
             }),
         new ItemBase("NPCtoken39", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55091,7 +55307,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken39"}, "order": 796}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken39"}, "order": 788}
             }),
         new ItemBase("NPCtoken40", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55153,7 +55369,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken40"}, "order": 797}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken40"}, "order": 789}
             }),
         new ItemBase("NPCtoken41", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55206,7 +55422,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken41"}, "order": 798}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "NPCtoken41"}, "order": 790}
             }),
         new ItemBase("BadgeI1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55286,7 +55502,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BadgeI1"}, "order": 799}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BadgeI1"}, "order": 791}
             }),
         new ItemBase("BadgeI2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55353,7 +55569,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BadgeI2"}, "order": 800}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BadgeI2"}, "order": 792}
             }),
         new ItemBase("BadgeI3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55450,7 +55666,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BadgeI3"}, "order": 801}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "BadgeI3"}, "order": 793}
             }),
         new ItemBase("CardPack1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55479,7 +55695,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CardPack1"}, "order": 1196}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CardPack1"}, "order": 1188}
             }),
         new ItemBase("CardPack2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55502,7 +55718,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CardPack2"}, "order": 1197}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CardPack2"}, "order": 1189}
             }),
         new ItemBase("CardPack3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55525,7 +55741,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CardPack3"}, "order": 1198}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CardPack3"}, "order": 1190}
             }),
         new ItemBase("CardPack4", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55556,7 +55772,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CardPack4"}, "order": 1199}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CardPack4"}, "order": 1191}
             }),
         new ItemBase("CardPack5", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55579,7 +55795,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CardPack5"}, "order": 1200}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CardPack5"}, "order": 1192}
             }),
         new ItemBase("CardPack6", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55600,7 +55816,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CardPack6"}, "order": 1201}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "CardPack6"}, "order": 1193}
             }),
         new ItemBase("DungCredits2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55650,7 +55866,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "iceBossZ3", "quantity": 1, "chance": 0.8}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungCredits2"}, "order": 1202}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungCredits2"}, "order": 1194}
             }),
         new ItemBase("Cash", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55667,7 +55883,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Cash"}, "order": 1203}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Cash"}, "order": 1195}
             }),
         new ItemBase("XP", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55684,7 +55900,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "XP"}, "order": 1204}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "XP"}, "order": 1196}
             }),
         new ItemBase("XPskill", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55701,7 +55917,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "XPskill"}, "order": 1205}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "XPskill"}, "order": 1197}
             }),
         new ItemBase("DungEnhancer0", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55722,7 +55938,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEnhancer0"}, "order": 1206}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEnhancer0"}, "order": 1198}
             }),
         new ItemBase("DungEnhancer1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55743,7 +55959,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEnhancer1"}, "order": 1207}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEnhancer1"}, "order": 1199}
             }),
         new ItemBase("DungEnhancer2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55764,7 +55980,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEnhancer2"}, "order": 1208}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEnhancer2"}, "order": 1200}
             }),
         new ItemBase("DungRNG0", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55785,7 +56001,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungRNG0"}, "order": 1209}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungRNG0"}, "order": 1201}
             }),
         new ItemBase("DungRNG1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55806,7 +56022,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungRNG1"}, "order": 1210}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungRNG1"}, "order": 1202}
             }),
         new ItemBase("DungRNG2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55827,7 +56043,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungRNG2"}, "order": 1211}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungRNG2"}, "order": 1203}
             }),
         new ItemBase("DungRNG3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55848,7 +56064,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungRNG3"}, "order": 1212}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungRNG3"}, "order": 1204}
             }),
         new ItemBase("DungRNG4", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55869,7 +56085,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungRNG4"}, "order": 1213}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungRNG4"}, "order": 1205}
             }),
         new ItemBase("DungeonA1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55890,7 +56106,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungeonA1"}, "order": 1214}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungeonA1"}, "order": 1206}
             }),
         new ItemBase("DungeonA2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55911,7 +56127,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungeonA2"}, "order": 1215}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungeonA2"}, "order": 1207}
             }),
         new ItemBase("DungeonA3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55932,7 +56148,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungeonA3"}, "order": 1216}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungeonA3"}, "order": 1208}
             }),
         new ItemBase("DungeonA4", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55953,7 +56169,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungeonA4"}, "order": 1217}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungeonA4"}, "order": 1209}
             }),
         new ItemBase("DungeonA5", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55974,7 +56190,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungeonA5"}, "order": 1218}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungeonA5"}, "order": 1210}
             }),
         new ItemBase("DungeonA6", <ItemModel>{
                 "item": <DescItemModel>{
@@ -55995,7 +56211,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungeonA6"}, "order": 1219}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungeonA6"}, "order": 1211}
             }),
         new ItemBase("DungeonA7", <ItemModel>{
                 "item": <DescItemModel>{
@@ -56016,7 +56232,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungeonA7"}, "order": 1220}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungeonA7"}, "order": 1212}
             }),
         new ItemBase("DungeonA8", <ItemModel>{
                 "item": <DescItemModel>{
@@ -56037,7 +56253,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungeonA8"}, "order": 1221}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungeonA8"}, "order": 1213}
             }),
         new ItemBase("KeyFrag", <ItemModel>{
                 "item": <DescItemModel>{
@@ -56054,7 +56270,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "KeyFrag"}, "order": 1222}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "KeyFrag"}, "order": 1214}
             }),
         new ItemBase("DungCredits1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -56134,7 +56350,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "iceBossZ3", "quantity": 1, "chance": 0.8}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungCredits1"}, "order": 1223}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungCredits1"}, "order": 1215}
             }),
         new ItemBase("LootDice", <ItemModel>{
                 "item": <DescItemModel>{
@@ -56155,7 +56371,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LootDice"}, "order": 1224}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "LootDice"}, "order": 1216}
             }),
         new ItemBase("Tree7D", <ItemModel>{
                 "item": <DescItemModel>{
@@ -56181,7 +56397,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Tree7D"}, "order": 1225}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Tree7D"}, "order": 1217}
             }),
         new ItemBase("PlatD", <ItemModel>{
                 "item": <DescItemModel>{
@@ -56207,7 +56423,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "PlatD"}, "order": 1226}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "PlatD"}, "order": 1218}
             }),
         new ItemBase("Fish1D", <ItemModel>{
                 "item": <DescItemModel>{
@@ -56233,7 +56449,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Fish1D"}, "order": 1227}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Fish1D"}, "order": 1219}
             }),
         new ItemBase("Fish3D", <ItemModel>{
                 "item": <DescItemModel>{
@@ -56259,7 +56475,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Fish3D"}, "order": 1228}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Fish3D"}, "order": 1220}
             }),
         new ItemBase("Cashb", <ItemModel>{
                 "item": <DescItemModel>{
@@ -56285,7 +56501,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Cashb"}, "order": 1229}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Cashb"}, "order": 1221}
             }),
         new ItemBase("Dung3Ice", <ItemModel>{
                 "item": <DescItemModel>{
@@ -56311,7 +56527,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Dung3Ice"}, "order": 1230}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Dung3Ice"}, "order": 1222}
             }),
         new ItemBase("FoodHealth1d", <ItemModel>{
                 "item": <ACItemModel>{
@@ -56328,7 +56544,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth1d"}, "order": 1231}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth1d"}, "order": 1223}
             }),
         new ItemBase("FoodHealth2d", <ItemModel>{
                 "item": <ACItemModel>{
@@ -56345,7 +56561,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth2d"}, "order": 1232}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth2d"}, "order": 1224}
             }),
         new ItemBase("FoodHealth3d", <ItemModel>{
                 "item": <ACItemModel>{
@@ -56362,7 +56578,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth3d"}, "order": 1233}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "FoodHealth3d"}, "order": 1225}
             }),
         new ItemBase("DungWeaponPunchA1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -56398,7 +56614,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchA1"}, "order": 1234}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchA1"}, "order": 1226}
             }),
         new ItemBase("DungWeaponPunchA2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -56434,7 +56650,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchA2"}, "order": 1235}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchA2"}, "order": 1227}
             }),
         new ItemBase("DungWeaponPunchA3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -56470,7 +56686,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchA3"}, "order": 1236}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchA3"}, "order": 1228}
             }),
         new ItemBase("DungWeaponPunchA4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -56506,7 +56722,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchA4"}, "order": 1237}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchA4"}, "order": 1229}
             }),
         new ItemBase("DungWeaponPunchA5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -56542,7 +56758,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchA5"}, "order": 1238}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchA5"}, "order": 1230}
             }),
         new ItemBase("DungWeaponPunchB1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -56576,7 +56792,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchB1"}, "order": 1239}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchB1"}, "order": 1231}
             }),
         new ItemBase("DungWeaponPunchB2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -56610,7 +56826,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchB2"}, "order": 1240}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchB2"}, "order": 1232}
             }),
         new ItemBase("DungWeaponPunchB3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -56644,7 +56860,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchB3"}, "order": 1241}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchB3"}, "order": 1233}
             }),
         new ItemBase("DungWeaponPunchB4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -56678,7 +56894,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchB4"}, "order": 1242}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchB4"}, "order": 1234}
             }),
         new ItemBase("DungWeaponPunchB5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -56712,7 +56928,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchB5"}, "order": 1243}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchB5"}, "order": 1235}
             }),
         new ItemBase("DungWeaponPunchC1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -56746,7 +56962,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchC1"}, "order": 1244}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchC1"}, "order": 1236}
             }),
         new ItemBase("DungWeaponPunchC2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -56780,7 +56996,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchC2"}, "order": 1245}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchC2"}, "order": 1237}
             }),
         new ItemBase("DungWeaponPunchC3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -56814,7 +57030,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchC3"}, "order": 1246}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchC3"}, "order": 1238}
             }),
         new ItemBase("DungWeaponPunchC4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -56848,7 +57064,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchC4"}, "order": 1247}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchC4"}, "order": 1239}
             }),
         new ItemBase("DungWeaponPunchC5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -56882,7 +57098,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchC5"}, "order": 1248}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchC5"}, "order": 1240}
             }),
         new ItemBase("DungWeaponPunchD1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -56916,7 +57132,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchD1"}, "order": 1249}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchD1"}, "order": 1241}
             }),
         new ItemBase("DungWeaponPunchD2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -56950,7 +57166,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchD2"}, "order": 1250}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchD2"}, "order": 1242}
             }),
         new ItemBase("DungWeaponPunchD3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -56984,7 +57200,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchD3"}, "order": 1251}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchD3"}, "order": 1243}
             }),
         new ItemBase("DungWeaponPunchD4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57018,7 +57234,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchD4"}, "order": 1252}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchD4"}, "order": 1244}
             }),
         new ItemBase("DungWeaponPunchD5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57052,7 +57268,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchD5"}, "order": 1253}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchD5"}, "order": 1245}
             }),
         new ItemBase("DungWeaponPunchE1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57086,7 +57302,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchE1"}, "order": 1254}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchE1"}, "order": 1246}
             }),
         new ItemBase("DungWeaponPunchE2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57120,7 +57336,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchE2"}, "order": 1255}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchE2"}, "order": 1247}
             }),
         new ItemBase("DungWeaponPunchE3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57154,7 +57370,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchE3"}, "order": 1256}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchE3"}, "order": 1248}
             }),
         new ItemBase("DungWeaponPunchE4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57188,7 +57404,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchE4"}, "order": 1257}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchE4"}, "order": 1249}
             }),
         new ItemBase("DungWeaponPunchE5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57222,7 +57438,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchE5"}, "order": 1258}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchE5"}, "order": 1250}
             }),
         new ItemBase("DungWeaponPunchF1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57256,7 +57472,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchF1"}, "order": 1259}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchF1"}, "order": 1251}
             }),
         new ItemBase("DungWeaponPunchF2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57290,7 +57506,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchF2"}, "order": 1260}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchF2"}, "order": 1252}
             }),
         new ItemBase("DungWeaponPunchF3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57324,7 +57540,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchF3"}, "order": 1261}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchF3"}, "order": 1253}
             }),
         new ItemBase("DungWeaponPunchF4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57358,7 +57574,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchF4"}, "order": 1262}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchF4"}, "order": 1254}
             }),
         new ItemBase("DungWeaponPunchF5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57392,7 +57608,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchF5"}, "order": 1263}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponPunchF5"}, "order": 1255}
             }),
         new ItemBase("DungWeaponSwordA1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57426,7 +57642,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordA1"}, "order": 1264}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordA1"}, "order": 1256}
             }),
         new ItemBase("DungWeaponSwordA2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57460,7 +57676,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordA2"}, "order": 1265}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordA2"}, "order": 1257}
             }),
         new ItemBase("DungWeaponSwordA3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57494,7 +57710,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordA3"}, "order": 1266}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordA3"}, "order": 1258}
             }),
         new ItemBase("DungWeaponSwordA4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57528,7 +57744,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordA4"}, "order": 1267}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordA4"}, "order": 1259}
             }),
         new ItemBase("DungWeaponSwordA5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57562,7 +57778,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordA5"}, "order": 1268}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordA5"}, "order": 1260}
             }),
         new ItemBase("DungWeaponSwordB1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57596,7 +57812,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordB1"}, "order": 1269}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordB1"}, "order": 1261}
             }),
         new ItemBase("DungWeaponSwordB2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57630,7 +57846,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordB2"}, "order": 1270}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordB2"}, "order": 1262}
             }),
         new ItemBase("DungWeaponSwordB3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57664,7 +57880,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordB3"}, "order": 1271}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordB3"}, "order": 1263}
             }),
         new ItemBase("DungWeaponSwordB4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57698,7 +57914,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordB4"}, "order": 1272}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordB4"}, "order": 1264}
             }),
         new ItemBase("DungWeaponSwordB5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57732,7 +57948,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordB5"}, "order": 1273}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordB5"}, "order": 1265}
             }),
         new ItemBase("DungWeaponSwordC1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57766,7 +57982,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordC1"}, "order": 1274}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordC1"}, "order": 1266}
             }),
         new ItemBase("DungWeaponSwordC2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57800,7 +58016,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordC2"}, "order": 1275}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordC2"}, "order": 1267}
             }),
         new ItemBase("DungWeaponSwordC3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57834,7 +58050,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordC3"}, "order": 1276}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordC3"}, "order": 1268}
             }),
         new ItemBase("DungWeaponSwordC4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57868,7 +58084,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordC4"}, "order": 1277}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordC4"}, "order": 1269}
             }),
         new ItemBase("DungWeaponSwordC5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57902,7 +58118,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordC5"}, "order": 1278}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordC5"}, "order": 1270}
             }),
         new ItemBase("DungWeaponSwordD1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57936,7 +58152,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordD1"}, "order": 1279}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordD1"}, "order": 1271}
             }),
         new ItemBase("DungWeaponSwordD2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -57970,7 +58186,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordD2"}, "order": 1280}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordD2"}, "order": 1272}
             }),
         new ItemBase("DungWeaponSwordD3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58004,7 +58220,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordD3"}, "order": 1281}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordD3"}, "order": 1273}
             }),
         new ItemBase("DungWeaponSwordD4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58038,7 +58254,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordD4"}, "order": 1282}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordD4"}, "order": 1274}
             }),
         new ItemBase("DungWeaponSwordD5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58072,7 +58288,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordD5"}, "order": 1283}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordD5"}, "order": 1275}
             }),
         new ItemBase("DungWeaponSwordE1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58106,7 +58322,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordE1"}, "order": 1284}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordE1"}, "order": 1276}
             }),
         new ItemBase("DungWeaponSwordE2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58140,7 +58356,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordE2"}, "order": 1285}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordE2"}, "order": 1277}
             }),
         new ItemBase("DungWeaponSwordE3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58174,7 +58390,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordE3"}, "order": 1286}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordE3"}, "order": 1278}
             }),
         new ItemBase("DungWeaponSwordE4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58208,7 +58424,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordE4"}, "order": 1287}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordE4"}, "order": 1279}
             }),
         new ItemBase("DungWeaponSwordE5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58242,7 +58458,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordE5"}, "order": 1288}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordE5"}, "order": 1280}
             }),
         new ItemBase("DungWeaponSwordF1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58276,7 +58492,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordF1"}, "order": 1289}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordF1"}, "order": 1281}
             }),
         new ItemBase("DungWeaponSwordF2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58310,7 +58526,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordF2"}, "order": 1290}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordF2"}, "order": 1282}
             }),
         new ItemBase("DungWeaponSwordF3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58344,7 +58560,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordF3"}, "order": 1291}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordF3"}, "order": 1283}
             }),
         new ItemBase("DungWeaponSwordF4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58378,7 +58594,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordF4"}, "order": 1292}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordF4"}, "order": 1284}
             }),
         new ItemBase("DungWeaponSwordF5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58412,7 +58628,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordF5"}, "order": 1293}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponSwordF5"}, "order": 1285}
             }),
         new ItemBase("DungWeaponBowA1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58446,7 +58662,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowA1"}, "order": 1294}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowA1"}, "order": 1286}
             }),
         new ItemBase("DungWeaponBowA2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58480,7 +58696,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowA2"}, "order": 1295}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowA2"}, "order": 1287}
             }),
         new ItemBase("DungWeaponBowA3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58514,7 +58730,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowA3"}, "order": 1296}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowA3"}, "order": 1288}
             }),
         new ItemBase("DungWeaponBowA4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58548,7 +58764,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowA4"}, "order": 1297}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowA4"}, "order": 1289}
             }),
         new ItemBase("DungWeaponBowA5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58582,7 +58798,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowA5"}, "order": 1298}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowA5"}, "order": 1290}
             }),
         new ItemBase("DungWeaponBowB1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58616,7 +58832,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowB1"}, "order": 1299}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowB1"}, "order": 1291}
             }),
         new ItemBase("DungWeaponBowB2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58650,7 +58866,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowB2"}, "order": 1300}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowB2"}, "order": 1292}
             }),
         new ItemBase("DungWeaponBowB3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58684,7 +58900,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowB3"}, "order": 1301}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowB3"}, "order": 1293}
             }),
         new ItemBase("DungWeaponBowB4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58718,7 +58934,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowB4"}, "order": 1302}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowB4"}, "order": 1294}
             }),
         new ItemBase("DungWeaponBowB5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58752,7 +58968,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowB5"}, "order": 1303}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowB5"}, "order": 1295}
             }),
         new ItemBase("DungWeaponBowC1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58786,7 +59002,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowC1"}, "order": 1304}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowC1"}, "order": 1296}
             }),
         new ItemBase("DungWeaponBowC2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58820,7 +59036,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowC2"}, "order": 1305}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowC2"}, "order": 1297}
             }),
         new ItemBase("DungWeaponBowC3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58854,7 +59070,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowC3"}, "order": 1306}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowC3"}, "order": 1298}
             }),
         new ItemBase("DungWeaponBowC4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58888,7 +59104,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowC4"}, "order": 1307}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowC4"}, "order": 1299}
             }),
         new ItemBase("DungWeaponBowC5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58922,7 +59138,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowC5"}, "order": 1308}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowC5"}, "order": 1300}
             }),
         new ItemBase("DungWeaponBowD1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58956,7 +59172,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowD1"}, "order": 1309}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowD1"}, "order": 1301}
             }),
         new ItemBase("DungWeaponBowD2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -58990,7 +59206,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowD2"}, "order": 1310}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowD2"}, "order": 1302}
             }),
         new ItemBase("DungWeaponBowD3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59024,7 +59240,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowD3"}, "order": 1311}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowD3"}, "order": 1303}
             }),
         new ItemBase("DungWeaponBowD4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59058,7 +59274,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowD4"}, "order": 1312}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowD4"}, "order": 1304}
             }),
         new ItemBase("DungWeaponBowD5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59092,7 +59308,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowD5"}, "order": 1313}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowD5"}, "order": 1305}
             }),
         new ItemBase("DungWeaponBowE1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59126,7 +59342,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowE1"}, "order": 1314}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowE1"}, "order": 1306}
             }),
         new ItemBase("DungWeaponBowE2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59160,7 +59376,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowE2"}, "order": 1315}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowE2"}, "order": 1307}
             }),
         new ItemBase("DungWeaponBowE3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59194,7 +59410,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowE3"}, "order": 1316}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowE3"}, "order": 1308}
             }),
         new ItemBase("DungWeaponBowE4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59228,7 +59444,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowE4"}, "order": 1317}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowE4"}, "order": 1309}
             }),
         new ItemBase("DungWeaponBowE5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59262,7 +59478,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowE5"}, "order": 1318}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowE5"}, "order": 1310}
             }),
         new ItemBase("DungWeaponBowF1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59296,7 +59512,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowF1"}, "order": 1319}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowF1"}, "order": 1311}
             }),
         new ItemBase("DungWeaponBowF2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59330,7 +59546,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowF2"}, "order": 1320}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowF2"}, "order": 1312}
             }),
         new ItemBase("DungWeaponBowF3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59364,7 +59580,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowF3"}, "order": 1321}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowF3"}, "order": 1313}
             }),
         new ItemBase("DungWeaponBowF4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59398,7 +59614,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowF4"}, "order": 1322}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowF4"}, "order": 1314}
             }),
         new ItemBase("DungWeaponBowF5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59432,7 +59648,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowF5"}, "order": 1323}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponBowF5"}, "order": 1315}
             }),
         new ItemBase("DungWeaponWandA1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59466,7 +59682,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandA1"}, "order": 1324}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandA1"}, "order": 1316}
             }),
         new ItemBase("DungWeaponWandA2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59500,7 +59716,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandA2"}, "order": 1325}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandA2"}, "order": 1317}
             }),
         new ItemBase("DungWeaponWandA3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59534,7 +59750,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandA3"}, "order": 1326}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandA3"}, "order": 1318}
             }),
         new ItemBase("DungWeaponWandA4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59568,7 +59784,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandA4"}, "order": 1327}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandA4"}, "order": 1319}
             }),
         new ItemBase("DungWeaponWandA5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59602,7 +59818,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandA5"}, "order": 1328}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandA5"}, "order": 1320}
             }),
         new ItemBase("DungWeaponWandB1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59636,7 +59852,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandB1"}, "order": 1329}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandB1"}, "order": 1321}
             }),
         new ItemBase("DungWeaponWandB2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59670,7 +59886,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandB2"}, "order": 1330}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandB2"}, "order": 1322}
             }),
         new ItemBase("DungWeaponWandB3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59704,7 +59920,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandB3"}, "order": 1331}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandB3"}, "order": 1323}
             }),
         new ItemBase("DungWeaponWandB4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59738,7 +59954,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandB4"}, "order": 1332}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandB4"}, "order": 1324}
             }),
         new ItemBase("DungWeaponWandB5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59772,7 +59988,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandB5"}, "order": 1333}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandB5"}, "order": 1325}
             }),
         new ItemBase("DungWeaponWandC1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59806,7 +60022,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandC1"}, "order": 1334}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandC1"}, "order": 1326}
             }),
         new ItemBase("DungWeaponWandC2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59840,7 +60056,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandC2"}, "order": 1335}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandC2"}, "order": 1327}
             }),
         new ItemBase("DungWeaponWandC3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59874,7 +60090,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandC3"}, "order": 1336}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandC3"}, "order": 1328}
             }),
         new ItemBase("DungWeaponWandC4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59908,7 +60124,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandC4"}, "order": 1337}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandC4"}, "order": 1329}
             }),
         new ItemBase("DungWeaponWandC5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59942,7 +60158,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandC5"}, "order": 1338}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandC5"}, "order": 1330}
             }),
         new ItemBase("DungWeaponWandD1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -59976,7 +60192,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandD1"}, "order": 1339}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandD1"}, "order": 1331}
             }),
         new ItemBase("DungWeaponWandD2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -60010,7 +60226,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandD2"}, "order": 1340}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandD2"}, "order": 1332}
             }),
         new ItemBase("DungWeaponWandD3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -60044,7 +60260,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandD3"}, "order": 1341}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandD3"}, "order": 1333}
             }),
         new ItemBase("DungWeaponWandD4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -60078,7 +60294,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandD4"}, "order": 1342}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandD4"}, "order": 1334}
             }),
         new ItemBase("DungWeaponWandD5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -60112,7 +60328,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandD5"}, "order": 1343}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandD5"}, "order": 1335}
             }),
         new ItemBase("DungWeaponWandE1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -60146,7 +60362,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandE1"}, "order": 1344}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandE1"}, "order": 1336}
             }),
         new ItemBase("DungWeaponWandE2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -60180,7 +60396,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandE2"}, "order": 1345}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandE2"}, "order": 1337}
             }),
         new ItemBase("DungWeaponWandE3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -60214,7 +60430,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandE3"}, "order": 1346}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandE3"}, "order": 1338}
             }),
         new ItemBase("DungWeaponWandE4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -60248,7 +60464,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandE4"}, "order": 1347}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandE4"}, "order": 1339}
             }),
         new ItemBase("DungWeaponWandE5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -60282,7 +60498,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandE5"}, "order": 1348}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandE5"}, "order": 1340}
             }),
         new ItemBase("DungWeaponWandF1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -60316,7 +60532,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandF1"}, "order": 1349}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandF1"}, "order": 1341}
             }),
         new ItemBase("DungWeaponWandF2", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -60350,7 +60566,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandF2"}, "order": 1350}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandF2"}, "order": 1342}
             }),
         new ItemBase("DungWeaponWandF3", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -60384,7 +60600,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandF3"}, "order": 1351}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandF3"}, "order": 1343}
             }),
         new ItemBase("DungWeaponWandF4", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -60418,7 +60634,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandF4"}, "order": 1352}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandF4"}, "order": 1344}
             }),
         new ItemBase("DungWeaponWandF5", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -60452,7 +60668,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandF5"}, "order": 1353}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungWeaponWandF5"}, "order": 1345}
             }),
         new ItemBase("DungWeaponSword1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -60486,7 +60702,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("DungWeaponWand1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -60520,7 +60736,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("DungWeaponBow1", <ItemModel>{
                 "item": <WeaponItemModel>{
@@ -60554,7 +60770,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("DungEquipmentHats0", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -60588,7 +60804,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentHats0"}, "order": 1354}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentHats0"}, "order": 1346}
             }),
         new ItemBase("DungEquipmentHats1", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -60622,7 +60838,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentHats1"}, "order": 1355}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentHats1"}, "order": 1347}
             }),
         new ItemBase("DungEquipmentHats2", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -60656,7 +60872,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentHats2"}, "order": 1356}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentHats2"}, "order": 1348}
             }),
         new ItemBase("DungEquipmentHats3", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -60690,7 +60906,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentHats3"}, "order": 1357}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentHats3"}, "order": 1349}
             }),
         new ItemBase("DungEquipmentHats4", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -60724,7 +60940,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentHats4"}, "order": 1358}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentHats4"}, "order": 1350}
             }),
         new ItemBase("DungEquipmentShirt0", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -60758,7 +60974,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentShirt0"}, "order": 1359}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentShirt0"}, "order": 1351}
             }),
         new ItemBase("DungEquipmentShirt1", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -60792,7 +61008,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentShirt1"}, "order": 1360}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentShirt1"}, "order": 1352}
             }),
         new ItemBase("DungEquipmentShirt2", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -60826,7 +61042,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentShirt2"}, "order": 1361}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentShirt2"}, "order": 1353}
             }),
         new ItemBase("DungEquipmentShirt3", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -60860,7 +61076,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentShirt3"}, "order": 1362}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentShirt3"}, "order": 1354}
             }),
         new ItemBase("DungEquipmentShirt4", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -60894,7 +61110,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentShirt4"}, "order": 1363}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentShirt4"}, "order": 1355}
             }),
         new ItemBase("DungEquipmentPants0", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -60928,7 +61144,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentPants0"}, "order": 1364}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentPants0"}, "order": 1356}
             }),
         new ItemBase("DungEquipmentPants1", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -60962,7 +61178,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentPants1"}, "order": 1365}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentPants1"}, "order": 1357}
             }),
         new ItemBase("DungEquipmentPants2", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -60996,7 +61212,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentPants2"}, "order": 1366}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentPants2"}, "order": 1358}
             }),
         new ItemBase("DungEquipmentPants3", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -61030,7 +61246,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentPants3"}, "order": 1367}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentPants3"}, "order": 1359}
             }),
         new ItemBase("DungEquipmentPants4", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -61064,7 +61280,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentPants4"}, "order": 1368}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentPants4"}, "order": 1360}
             }),
         new ItemBase("DungEquipmentShoes0", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -61098,7 +61314,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentShoes0"}, "order": 1369}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentShoes0"}, "order": 1361}
             }),
         new ItemBase("DungEquipmentShoes1", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -61132,7 +61348,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentShoes1"}, "order": 1370}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentShoes1"}, "order": 1362}
             }),
         new ItemBase("DungEquipmentShoes2", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -61166,7 +61382,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentShoes2"}, "order": 1371}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentShoes2"}, "order": 1363}
             }),
         new ItemBase("DungEquipmentShoes3", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -61200,7 +61416,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentShoes3"}, "order": 1372}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentShoes3"}, "order": 1364}
             }),
         new ItemBase("DungEquipmentShoes4", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -61234,7 +61450,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentShoes4"}, "order": 1373}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentShoes4"}, "order": 1365}
             }),
         new ItemBase("DungEquipmentPendant0", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -61268,7 +61484,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentPendant0"}, "order": 1374}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentPendant0"}, "order": 1366}
             }),
         new ItemBase("DungEquipmentPendant1", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -61302,7 +61518,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentPendant1"}, "order": 1375}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentPendant1"}, "order": 1367}
             }),
         new ItemBase("DungEquipmentPendant2", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -61336,7 +61552,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentPendant2"}, "order": 1376}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentPendant2"}, "order": 1368}
             }),
         new ItemBase("DungEquipmentPendant3", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -61370,7 +61586,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentPendant3"}, "order": 1377}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentPendant3"}, "order": 1369}
             }),
         new ItemBase("DungEquipmentPendant4", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -61404,7 +61620,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentPendant4"}, "order": 1378}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentPendant4"}, "order": 1370}
             }),
         new ItemBase("DungEquipmentRings0", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -61438,7 +61654,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentRings0"}, "order": 1379}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentRings0"}, "order": 1371}
             }),
         new ItemBase("DungEquipmentRings1", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -61472,7 +61688,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentRings1"}, "order": 1380}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentRings1"}, "order": 1372}
             }),
         new ItemBase("DungEquipmentRings2", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -61506,7 +61722,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentRings2"}, "order": 1381}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentRings2"}, "order": 1373}
             }),
         new ItemBase("DungEquipmentRings3", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -61540,7 +61756,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentRings3"}, "order": 1382}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentRings3"}, "order": 1374}
             }),
         new ItemBase("DungEquipmentRings4", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -61574,7 +61790,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentRings4"}, "order": 1383}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "DungEquipmentRings4"}, "order": 1375}
             }),
         new ItemBase("GemP9", <ItemModel>{
                 "item": <DescItemModel>{
@@ -61595,7 +61811,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("GemP10", <ItemModel>{
                 "item": <DescItemModel>{
@@ -61616,7 +61832,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("GemP11", <ItemModel>{
                 "item": <DescItemModel>{
@@ -61637,7 +61853,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("GemP12", <ItemModel>{
                 "item": <DescItemModel>{
@@ -61658,7 +61874,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("GemP13", <ItemModel>{
                 "item": <DescItemModel>{
@@ -61679,7 +61895,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("GemP14", <ItemModel>{
                 "item": <DescItemModel>{
@@ -61696,7 +61912,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("GemP15", <ItemModel>{
                 "item": <DescItemModel>{
@@ -61717,7 +61933,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("GemP16", <ItemModel>{
                 "item": <DescItemModel>{
@@ -61838,7 +62054,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("GemP19", <ItemModel>{
                 "item": <DescItemModel>{
@@ -61855,7 +62071,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentHats31", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -61889,7 +62105,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentHats32", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -61923,7 +62139,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentHats33", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -61957,7 +62173,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentHats34", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -61991,7 +62207,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentHats35", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -62025,7 +62241,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentHats36", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -62059,7 +62275,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentHats40", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -62093,7 +62309,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentHats37", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -62127,7 +62343,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentHats38", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -62161,7 +62377,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentHats46", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -62195,7 +62411,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentHats47", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -62229,7 +62445,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentHats48", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -62263,7 +62479,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentHats49", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -62297,7 +62513,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentHats50", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -62331,7 +62547,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentHats43", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -62361,7 +62577,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentHats45", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -62395,7 +62611,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentHats57", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -62429,7 +62645,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentHats62", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -62463,7 +62679,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("EquipmentHats65", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -62497,7 +62713,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats65"}, "order": 1384}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats65"}, "order": 1376}
             }),
         new ItemBase("EquipmentHats69", <ItemModel>{
                 "item": <ArmourItemModel>{
@@ -62536,7 +62752,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats69"}, "order": 1385}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats69"}, "order": 1377}
             }),
         new ItemBase("Key1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -62596,7 +62812,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestC1", "quantity": 1, "chance": 0.18}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Key1"}, "order": 1386}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Key1"}, "order": 1378}
             }),
         new ItemBase("Key2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -62666,7 +62882,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestC2", "quantity": 1, "chance": 0.18}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Key2"}, "order": 1387}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Key2"}, "order": 1379}
             }),
         new ItemBase("Key3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -62721,7 +62937,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestC3", "quantity": 1, "chance": 0.18}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Key3"}, "order": 1388}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Key3"}, "order": 1380}
             }),
         new ItemBase("Key4", <ItemModel>{
                 "item": <DescItemModel>{
@@ -62765,7 +62981,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "ChestC4", "quantity": 1, "chance": 0.04}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Key4"}, "order": 1389}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Key4"}, "order": 1381}
             }),
         new ItemBase("ObolFrag", <ItemModel>{
                 "item": <DescItemModel>{
@@ -62784,7 +63000,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("DoubleAFKtix", <ItemModel>{
                 "item": <DescItemModel>{
@@ -62801,7 +63017,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("TixCol", <ItemModel>{
                 "item": <DescItemModel>{
@@ -62847,7 +63063,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TixCol"}, "order": 1390}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TixCol"}, "order": 1382}
             }),
         new ItemBase("DeliveryBox", <ItemModel>{
                 "item": <DescItemModel>{
@@ -62864,7 +63080,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("SilverPen", <ItemModel>{
                 "item": <DescItemModel>{
@@ -63077,7 +63293,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "Boss5C", "quantity": 2, "chance": 0.00045}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SilverPen"}, "order": 1391}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "SilverPen"}, "order": 1383}
             }),
         new ItemBase("PremiumGem", <ItemModel>{
                 "item": <DescItemModel>{
@@ -63427,7 +63643,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "EasterEvent2", "quantity": 1, "chance": 0.3}
                     ]
                 },
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "PremiumGem"}, "order": 1392}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "PremiumGem"}, "order": 1384}
             }),
         new ItemBase("TalentPoint1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -63444,7 +63660,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TalentPoint1"}, "order": 1393}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TalentPoint1"}, "order": 1385}
             }),
         new ItemBase("TalentPoint2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -63470,7 +63686,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TalentPoint2"}, "order": 1394}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TalentPoint2"}, "order": 1386}
             }),
         new ItemBase("TalentPoint3", <ItemModel>{
                 "item": <DescItemModel>{
@@ -63496,7 +63712,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TalentPoint3"}, "order": 1395}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TalentPoint3"}, "order": 1387}
             }),
         new ItemBase("TalentPoint4", <ItemModel>{
                 "item": <DescItemModel>{
@@ -63513,7 +63729,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TalentPoint4"}, "order": 1396}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TalentPoint4"}, "order": 1388}
             }),
         new ItemBase("TalentPoint5", <ItemModel>{
                 "item": <DescItemModel>{
@@ -63530,7 +63746,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TalentPoint5"}, "order": 1397}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TalentPoint5"}, "order": 1389}
             }),
         new ItemBase("TalentPoint6", <ItemModel>{
                 "item": <DescItemModel>{
@@ -63556,7 +63772,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TalentPoint6"}, "order": 1398}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "TalentPoint6"}, "order": 1390}
             }),
         new ItemBase("Gfoodcoupon", <ItemModel>{
                 "item": <DescItemModel>{
@@ -63577,7 +63793,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Gfoodcoupon"}, "order": 1399}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "Gfoodcoupon"}, "order": 1391}
             }),
         new ItemBase("ItemsCoupon1", <ItemModel>{
                 "item": <DescItemModel>{
@@ -63598,7 +63814,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ItemsCoupon1"}, "order": 1400}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ItemsCoupon1"}, "order": 1392}
             }),
         new ItemBase("ItemsCoupon2", <ItemModel>{
                 "item": <DescItemModel>{
@@ -63619,7 +63835,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ItemsCoupon2"}, "order": 1401}
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "ItemsCoupon2"}, "order": 1393}
             }),
         new ItemBase("CardsA0", <ItemModel>{
                 "item": <CardItemModel>{
@@ -63648,7 +63864,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "mushG", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsA1", <ItemModel>{
                 "item": <CardItemModel>{
@@ -63677,7 +63893,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "mushR", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsA2", <ItemModel>{
                 "item": <CardItemModel>{
@@ -63706,7 +63922,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "frogG", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsA3", <ItemModel>{
                 "item": <CardItemModel>{
@@ -63735,7 +63951,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "beanG", "quantity": 1, "chance": 9.7e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsA4", <ItemModel>{
                 "item": <CardItemModel>{
@@ -63764,7 +63980,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "slimeG", "quantity": 1, "chance": 9.5e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsA5", <ItemModel>{
                 "item": <CardItemModel>{
@@ -63793,7 +64009,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "snakeG", "quantity": 1, "chance": 9.4e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsA6", <ItemModel>{
                 "item": <CardItemModel>{
@@ -63822,7 +64038,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "carrotO", "quantity": 1, "chance": 9e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsA7", <ItemModel>{
                 "item": <CardItemModel>{
@@ -63851,7 +64067,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "goblinG", "quantity": 1, "chance": 8.6e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsA8", <ItemModel>{
                 "item": <CardItemModel>{
@@ -63880,7 +64096,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "plank", "quantity": 1, "chance": 8e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsA9", <ItemModel>{
                 "item": <CardItemModel>{
@@ -63909,7 +64125,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "frogBIG", "quantity": 1, "chance": 7e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsA10", <ItemModel>{
                 "item": <CardItemModel>{
@@ -63938,7 +64154,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "poopSmall", "quantity": 1, "chance": 6e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsA11", <ItemModel>{
                 "item": <CardItemModel>{
@@ -63967,7 +64183,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ratB", "quantity": 1, "chance": 5e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsA12", <ItemModel>{
                 "item": <CardItemModel>{
@@ -63996,7 +64212,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "branch", "quantity": 1, "chance": 6e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsA13", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64025,7 +64241,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "acorn", "quantity": 1, "chance": 5e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsA14", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64054,7 +64270,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Crystal0", "quantity": 1, "chance": 0.01}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsA15", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64083,7 +64299,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "poopD", "quantity": 1, "chance": 0.0015}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsA16", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64112,7 +64328,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "mushW", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsB1", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64141,7 +64357,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "jarSand", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsB2", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64170,7 +64386,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "mimicA", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsB3", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64199,7 +64415,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "crabcake", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsB4", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64228,7 +64444,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "coconut", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsB5", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64257,7 +64473,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "sandcastle", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsB6", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64286,7 +64502,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "pincermin", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsB7", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64315,7 +64531,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "potato", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsB8", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64344,7 +64560,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "steak", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsB9", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64373,7 +64589,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "moonman", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsB10", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64402,7 +64618,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "sandgiant", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsB11", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64431,7 +64647,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "snailZ", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsB12", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64460,7 +64676,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "shovelR", "quantity": 1, "chance": 0.04}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsB13", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64489,7 +64705,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Crystal1", "quantity": 1, "chance": 0.008}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsB14", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64514,7 +64730,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsC1", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64543,7 +64759,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Copper", "quantity": 1, "chance": 0.0002}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsC2", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64572,7 +64788,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Iron", "quantity": 1, "chance": 0.00013}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsC3", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64601,7 +64817,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Gold", "quantity": 1, "chance": 0.00011}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsC4", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64630,7 +64846,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "OakTree", "quantity": 1, "chance": 0.0004}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsC5", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64659,7 +64875,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "BirchTree", "quantity": 1, "chance": 0.00029}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsC6", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64688,7 +64904,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "JungleTree", "quantity": 1, "chance": 0.00021}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsC7", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64717,7 +64933,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ForestTree", "quantity": 1, "chance": 0.00017}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsC8", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64742,7 +64958,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsC9", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64767,7 +64983,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsC10", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64792,7 +65008,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsC11", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64821,7 +65037,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Bug1", "quantity": 1, "chance": 0.00042}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsC12", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64850,7 +65066,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Bug2", "quantity": 1, "chance": 0.0003}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsC13", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64868,7 +65084,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsC14", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64886,7 +65102,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsC15", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64904,7 +65120,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsC16", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64929,7 +65145,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsD1", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64958,7 +65174,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Dementia", "quantity": 1, "chance": 6e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsD2", <ItemModel>{
                 "item": <CardItemModel>{
@@ -64987,7 +65203,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Plat", "quantity": 1, "chance": 8e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsD3", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65016,7 +65232,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Void", "quantity": 1, "chance": 6e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsD4", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65045,7 +65261,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Lustre", "quantity": 1, "chance": 6e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsD5", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65074,7 +65290,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ToiletTree", "quantity": 1, "chance": 0.00012}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsD6", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65103,7 +65319,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "StumpTree", "quantity": 1, "chance": 0.00013}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsD7", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65132,7 +65348,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "PalmTree", "quantity": 1, "chance": 0.00011}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsD8", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65161,7 +65377,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "SaharanFoal", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsD9", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65190,7 +65406,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Bug4", "quantity": 1, "chance": 0.00025}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsD10", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65227,7 +65443,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "CritterCard10", "quantity": 1, "chance": 0.00014}
                     ]
                 },
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsD11", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65252,7 +65468,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsD12", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65270,7 +65486,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsD13", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65288,7 +65504,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsD16", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65313,7 +65529,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsD17", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65338,7 +65554,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsD18", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65363,7 +65579,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsD19", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65388,7 +65604,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsD20", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65413,7 +65629,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsD21", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65438,7 +65654,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsE0", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65467,7 +65683,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "sheep", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsE1", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65496,7 +65712,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "flake", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsE2", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65525,7 +65741,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "stache", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsE3", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65554,7 +65770,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "bloque", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsE4", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65583,7 +65799,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "mamoth", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsE5", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65612,7 +65828,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "snowball", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsE6", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65641,7 +65857,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "penguin", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsE7", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65670,7 +65886,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "thermostat", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsE8", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65699,7 +65915,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "glass", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsE9", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65728,7 +65944,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "snakeB", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsE10", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65757,7 +65973,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "speaker", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsE11", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65786,7 +66002,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "eye", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsE12", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65815,7 +66031,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "skele", "quantity": 1, "chance": 0.01}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsE13", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65844,7 +66060,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "skele2", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsE14", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65873,7 +66089,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "ram", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsE15", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65902,7 +66118,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Crystal2", "quantity": 1, "chance": 0.008}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF1", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65920,7 +66136,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF2", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65949,7 +66165,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Tree7", "quantity": 1, "chance": 0.0001}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF3", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65974,7 +66190,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF4", <ItemModel>{
                 "item": <CardItemModel>{
@@ -65999,7 +66215,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF5", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66024,7 +66240,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF6", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66049,7 +66265,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF7", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66074,7 +66290,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF8", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66103,7 +66319,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Bug5", "quantity": 1, "chance": 0.00025}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF9", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66132,7 +66348,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Bug6", "quantity": 1, "chance": 0.00025}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF10", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66157,7 +66373,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF11", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66182,7 +66398,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF12", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66211,7 +66427,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Tree8", "quantity": 1, "chance": 4e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF13", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66240,7 +66456,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "AlienTree", "quantity": 1, "chance": 1e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF14", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66269,7 +66485,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Bug7", "quantity": 1, "chance": 5e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF15", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66298,7 +66514,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Bug8", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF16", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66327,7 +66543,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Starfire", "quantity": 1, "chance": 3e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF17", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66352,7 +66568,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF18", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66377,7 +66593,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF19", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66402,7 +66618,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF20", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66427,7 +66643,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF21", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66452,7 +66668,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF22", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66477,7 +66693,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF23", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66502,7 +66718,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF24", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66531,7 +66747,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Tree9", "quantity": 1, "chance": 1e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF25", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66560,7 +66776,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Tree10", "quantity": 1, "chance": 5e-06}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF26", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66589,7 +66805,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Bug9", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF27", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66618,7 +66834,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Bug10", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF28", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66643,7 +66859,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsF29", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66672,7 +66888,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Dreadlo", "quantity": 1, "chance": 3e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsG1", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66701,7 +66917,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "mushP", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsG2", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66730,7 +66946,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4a2", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsG3", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66759,7 +66975,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4a3", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsG4", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66788,7 +67004,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "demonP", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsG5", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66817,7 +67033,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4b1", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsG6", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66846,7 +67062,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4b2", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsG7", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66875,7 +67091,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4b3", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsG8", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66904,7 +67120,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4b4", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsG9", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66933,7 +67149,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4b5", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsG10", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66962,7 +67178,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4c1", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsG11", <ItemModel>{
                 "item": <CardItemModel>{
@@ -66991,7 +67207,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4c2", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsG12", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67020,7 +67236,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4c3", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsG13", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67049,7 +67265,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w4c4", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsG14", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67078,7 +67294,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Crystal3", "quantity": 1, "chance": 0.008}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsH1", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67107,7 +67323,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5a1", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsH2", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67136,7 +67352,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5a2", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsH3", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67165,7 +67381,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5a3", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsH4", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67194,7 +67410,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5a4", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsH5", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67223,7 +67439,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5a5", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsH6", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67252,7 +67468,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5b1", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsH7", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67281,7 +67497,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5b2", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsH8", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67310,7 +67526,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5b3", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsH9", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67339,7 +67555,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5b4", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsH10", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67368,7 +67584,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5b5", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsH11", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67397,7 +67613,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5b6", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsH12", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67426,7 +67642,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5c1", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsH13", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67455,7 +67671,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "w5c2", "quantity": 1, "chance": 2e-05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsH14", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67484,7 +67700,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Crystal4", "quantity": 1, "chance": 0.008}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsX0", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67518,7 +67734,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsX1", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67552,7 +67768,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsX2", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67586,7 +67802,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsX3", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67620,7 +67836,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsX4", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67654,7 +67870,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsX5", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67688,7 +67904,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsX21", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67713,7 +67929,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsX22", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67738,7 +67954,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsX6", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67772,7 +67988,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsX7", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67806,7 +68022,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsX8", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67840,7 +68056,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsX9", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67874,7 +68090,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsX10", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67908,7 +68124,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsX11", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67942,7 +68158,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsX12", <ItemModel>{
                 "item": <CardItemModel>{
@@ -67976,7 +68192,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsX13", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68010,7 +68226,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsX14", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68044,7 +68260,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsX15", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68078,7 +68294,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsX16", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68112,7 +68328,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsX17", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68146,7 +68362,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsX18", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68180,7 +68396,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsX19", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68214,7 +68430,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsX20", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68248,7 +68464,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsY0", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68286,7 +68502,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "xmasEvent", "quantity": 1, "chance": 0.05}
                     ]
                 },
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsY1", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68318,7 +68534,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsY2", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68350,7 +68566,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsY3", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68389,7 +68605,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "loveEvent2", "quantity": 1, "chance": 0.05}
                     ]
                 },
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsY4", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68414,7 +68630,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsY5", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68439,7 +68655,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsY6", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68476,7 +68692,7 @@ export const initItemRepo = () => {
                         <DetDropModel>{"source": "EasterEvent2", "quantity": 1, "chance": 0.05}
                     ]
                 },
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsY7", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68505,7 +68721,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "snakeY", "quantity": 1, "chance": 0.05}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsY8", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68530,7 +68746,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsY9", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68555,7 +68771,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsY10", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68584,7 +68800,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "crabcakeB", "quantity": 1, "chance": 0.03}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsY11", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68613,7 +68829,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsY12", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68642,7 +68858,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsY13", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68671,7 +68887,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "shovelY", "quantity": 1, "chance": 0.03}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsY14", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68700,7 +68916,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsZ0", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68729,7 +68945,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "babayaga", "quantity": 1, "chance": 0.03}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsZ1", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68758,7 +68974,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "poopBig", "quantity": 1, "chance": 0.03}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsZ2", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68787,7 +69003,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "wolfA", "quantity": 1, "chance": 0.04}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsZ3", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68816,7 +69032,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Boss2A", "quantity": 1, "chance": 0.025}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsZ4", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68845,7 +69061,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "wolfB", "quantity": 1, "chance": 0.02}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsZ5", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68874,7 +69090,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "babaHour", "quantity": 1, "chance": 0.024}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsZ6", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68903,7 +69119,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "babaMummy", "quantity": 1, "chance": 0.04}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsZ7", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68932,7 +69148,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Boss2B", "quantity": 1, "chance": 0.016}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsZ8", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68961,7 +69177,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Boss3A", "quantity": 1, "chance": 0.007}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsZ9", <ItemModel>{
                 "item": <CardItemModel>{
@@ -68990,7 +69206,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Boss3B", "quantity": 1, "chance": 0.004}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsZ10", <ItemModel>{
                 "item": <CardItemModel>{
@@ -69019,7 +69235,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Boss4A", "quantity": 1, "chance": 0.004}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsZ11", <ItemModel>{
                 "item": <CardItemModel>{
@@ -69048,7 +69264,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Boss4B", "quantity": 1, "chance": 0.002}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsZ12", <ItemModel>{
                 "item": <CardItemModel>{
@@ -69077,7 +69293,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "mini3a", "quantity": 1, "chance": 0.2}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsZ13", <ItemModel>{
                 "item": <CardItemModel>{
@@ -69106,7 +69322,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "mini4a", "quantity": 1, "chance": 0.2}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsZ14", <ItemModel>{
                 "item": <CardItemModel>{
@@ -69135,7 +69351,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "wolfC", "quantity": 1, "chance": 0.02}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsZ15", <ItemModel>{
                 "item": <CardItemModel>{
@@ -69164,7 +69380,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Boss2C", "quantity": 1, "chance": 0.02}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsZ16", <ItemModel>{
                 "item": <CardItemModel>{
@@ -69193,7 +69409,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Boss3C", "quantity": 1, "chance": 0.002}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsZ17", <ItemModel>{
                 "item": <CardItemModel>{
@@ -69222,7 +69438,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Boss4C", "quantity": 1, "chance": 0.003}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsZ18", <ItemModel>{
                 "item": <CardItemModel>{
@@ -69251,7 +69467,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Boss5A", "quantity": 1, "chance": 0.004}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsZ19", <ItemModel>{
                 "item": <CardItemModel>{
@@ -69280,7 +69496,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Boss5B", "quantity": 1, "chance": 0.002}]},
-                "order": undefined
+                "slabSort": undefined
             }),
         new ItemBase("CardsZ20", <ItemModel>{
                 "item": <CardItemModel>{
@@ -69309,7 +69525,7 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Boss5C", "quantity": 1, "chance": 0.003}]},
-                "order": undefined
+                "slabSort": undefined
             })    
 ]
 }

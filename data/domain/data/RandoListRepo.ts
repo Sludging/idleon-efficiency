@@ -486,7 +486,21 @@ export const initRandoListRepo = () => {
                     "ObolPlatinumSpeed",
                     "StampC10",
                     "StampC11",
-                    "StampC12"
+                    "StampC12",
+                    "EquipmentShirts7",
+                    "EquipmentPants7",
+                    "EquipmentPants13",
+                    "EquipmentRings4",
+                    "EquipmentRings5",
+                    "EquipmentRings8",
+                    "EquipmentRings9",
+                    "EquipmentRings10",
+                    "EquipmentRingsFishing1",
+                    "EquipmentRingsFishing2",
+                    "EquipmentRingsFishing3",
+                    "IceMountains2",
+                    "InvBag9",
+                    "Quest31"
                 ]
             }),
         new RandoListBase(18, <RandoListModel>{
@@ -1832,8 +1846,8 @@ export const initRandoListRepo = () => {
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "2nd_Weekly_Update_v172",
-                    "1st_Weekly_Update-------------------_@_*Storage_Chest_now_has_auto-sort!_This_was_in_last_week's_update, but_I_wanted_to_mention_it_again._It's_a_new_button_on_the_left_side._@_*The_Atom_Collider_can_now_be_build_in_Construction_in_World_3!_Convert_10M_resources_into_particles, and_use_them_to_create_ATOMS!_@_*The_item_limit_in_storage_is_now_1000M._All_excess_items_are_automatically_converted_to_particles._@_*Added_8_FREE_storage_slots_to_everyones_account!_Enjoy!_@_*The_World_4_boss_will_let_you_hit_him_instantly_once_you_complete_the_3rd_Boss_Task._@_*Added_a_Cook_All_button_to_Kitchens!_@_*When_QUICK_is_enabled_in_shops, pressing_the_plus_button_maxes_out_the_items_you_want_to_buy!_@_*All_Alchemy_Bubbles_now_have_just_2_costs, instead_of_3_or_sometimes_4!_@_*3_new_Storage_Chests_Added_to_drop_tables_of_World_5_Monsters._@_*For_full_update_notes, check_Discord.gg/Idleon!"
+                    "3rd_Weekly_Update_v173",
+                    "*Storage_Chest_now_has_auto-sort!_This_was_in_1st_week's_update._It's_a_new_button_on_the_left_side._@_*The_Atom_Collider_can_now_be_build_in_Construction_in_World_3!_This_was_in_2nd_week's_update._@___@_New_Stuff_in_Week_3_Update_-----------------------_@_*Added_RANDOM_EVENTS_to_the_world_of_IdleOn!_Every_hour, theres_a_roughly_1-in-4_chance_a_random_event_will_occur, and_you'll_be_notified_with_a_popup_on_screen!_You_can_only_do_1_per_day._@_*Find_7_new_items_from_Random_Events!_Each_one_has_a_unique_drop_table!_@_*Alchemy_will_now_tell_you_which_resource_you_need_for_the_next_vial!_Just_check_the_top_of_the_Vials_section, you'll_see_what_I'm_sayin'_yo._@_*Changed_the_max_resource_stack_to_1050M, to_avoid_complete_losses_of_materials_in_certain_situations._@_*Fixed_several_bugs, including_Sizzling_Skull_Crashes, Sailing_AFK_interruption, Atom_Trimmed_Construction_slots, and_more._@_*For_full_update_notes, check_Discord.gg/Idleon!"
                 ]
             }),
         new RandoListBase(62, <RandoListModel>{
@@ -1893,7 +1907,8 @@ export const initRandoListRepo = () => {
                     "snakeZ3",
                     "frogGR",
                     "frogGR2",
-                    "frogGR3"
+                    "frogGR3",
+                    "Meteor"
                 ]
             }),
         new RandoListBase(66, <RandoListModel>{
@@ -2116,6 +2131,13 @@ export const initRandoListRepo = () => {
                     "330"
                 ]
             }),
-        new RandoListBase(79, <RandoListModel>{"elements": ["Slargon", "Pirate_Porkchop", "Muhmuguh", "Poigu"]})    
+        new RandoListBase(79, <RandoListModel>{"elements": ["Slargon", "Pirate_Porkchop", "Muhmuguh", "Poigu"]}),
+        new RandoListBase(80, <RandoListModel>{"elements": ["Slargon", "Pirate_Porkchop", "Muhmuguh", "Poigu"]}),
+        new RandoListBase(81, <RandoListModel>{"elements": ["Meteor", "rocky", "iceknight", "snakeZ", "frogGR"]}),
+        new RandoListBase(82, <RandoListModel>{"elements": ["EquipmentHats78", "EquipmentRingsChat10"]}),
+        new RandoListBase(83, <RandoListModel>{"elements": ["EquipmentToolsHatchet11"]}),
+        new RandoListBase(84, <RandoListModel>{"elements": ["EquipmentHats79", "ObolKnight"]}),
+        new RandoListBase(85, <RandoListModel>{"elements": ["EquipmentTools13"]}),
+        new RandoListBase(86, <RandoListModel>{"elements": ["ObolFrog"]})    
 ]
 }
