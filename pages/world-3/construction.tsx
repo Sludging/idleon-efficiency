@@ -36,7 +36,6 @@ import { ClassIndex, Talent } from '../../data/domain/talents';
 import { TaskBoard } from '../../data/domain/tasks';
 import { Shrine } from '../../data/domain/shrines';
 import { MapInfo } from '../../data/domain/maps';
-import { Card } from '../../data/domain/cards';
 import { Lab } from '../../data/domain/lab';
 import IconImage from '../../components/base/IconImage';
 import { Sigils } from '../../data/domain/sigils';
@@ -572,6 +571,7 @@ function DeathnoteDisplay() {
                             {
                                 [...deathnoteMobs.entries()].map(([mobName, killCount], mobIndex) => {
                                     const deathnoteRank = deathnoteData.getDeathnoteRank(killCount);
+                                    const hasNextRank = deathnoteData.getNextRankReq(deathnoteRank) > 0;
                                     return (
                                         <Box key={mobIndex} pad={{ vertical: 'small' }} margin={{ bottom: 'xsmall' }}>
                                             <Box direction="row" align="center" gap="small">
@@ -596,10 +596,10 @@ function DeathnoteDisplay() {
                                                                 color: 'brand'
                                                             }
                                                         ]}
-                                                        max={deathnoteData?.getNextRankReq(deathnoteRank)} />
-                                                    <Box direction="row" justify="between">
+                                                        max={hasNextRank ? deathnoteData?.getNextRankReq(deathnoteRank) : killCount} />
+                                                    <Box direction="row" justify={hasNextRank ? "between" : "center"} align={hasNextRank ? "" : "center"}>
                                                         <Text color='grey-2' size="xsmall">{nFormatter(killCount)}</Text>
-                                                        <Text color='grey-2' size="xsmall">{nFormatter(deathnoteData.getNextRankReq(deathnoteRank))}</Text>
+                                                        { hasNextRank && <Text color='grey-2' size="xsmall">{nFormatter(deathnoteData.getNextRankReq(deathnoteRank))}</Text>}
                                                     </Box>
                                                 </Box>
 
@@ -618,7 +618,6 @@ function DeathnoteDisplay() {
 }
 
 function ShrinesDisplay() {
-    const [cardData, setCardData] = useState<Card[]>();
     const [shrineData, setShrineData] = useState<Shrine[]>([]);
     const appContext = useContext(AppContext);
 
@@ -626,13 +625,8 @@ function ShrinesDisplay() {
         if (appContext) {
             const theData = appContext.data.getData();
             setShrineData(theData.get("shrines"));
-            setCardData(theData.get("cards"));
         }
     }, [appContext]);
-
-    const shrineCardBonus = useMemo(() => {
-        return cardData?.find(card => card.id == "Boss3B")?.getBonus();
-    }, [cardData]);
 
     if (!shrineData || shrineData.filter(shrine => shrine.level > 0).length == 0) {
         return (
@@ -675,13 +669,8 @@ function ShrinesDisplay() {
                                         margin={{ right: 'medium', bottom: 'small' }}
                                     />
                                     <TextAndLabel
-                                        label="Bonus (without card)"
-                                        text={`${nFormatter(shrine.getBonus(shrine.currentMap, 0), "Smaller")}%`}
-                                        margin={{ right: 'medium', bottom: 'small' }}
-                                    />
-                                    <TextAndLabel
-                                        label="Bonus (with card)"
-                                        text={`${nFormatter(shrine.getBonus(shrine.currentMap, shrineCardBonus), "Smaller")}%`}
+                                        label="Bonus"
+                                        text={`${nFormatter(shrine.getBonus(shrine.currentMap), "Smaller")}%`}
                                         margin={{ right: 'medium', bottom: 'small' }}
                                     />
                                 </Box>

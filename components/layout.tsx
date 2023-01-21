@@ -200,6 +200,10 @@ export default function Layout({
         { link: "/raw-data", label: "Raw Data" },
     ]
 
+    const onMobileClick = (href: string) => {
+        router.push(href);
+    }
+
     const onButtonClick = (toCall: Function | undefined, value?: string) => {
         try {
             if (toCall) {
@@ -245,7 +249,10 @@ export default function Layout({
                     </Link>
                     {validState &&
                         <Box direction="row" gap="xlarge" pad="medium">
-                            <TextAndLabel textColor='accent-3' textSize='xsmall' labelSize='xsmall' label='Last Updated' text={lastUpdated} />
+                            {
+                                appContext.status != AppStatus.NoData && <TextAndLabel textColor='accent-3' textSize='xsmall' labelSize='xsmall' label='Last Updated' text={lastUpdated} />
+                            }
+
                             {
                                 appContext.status == AppStatus.LiveData &&
                                 <Box direction="row">
@@ -299,7 +306,7 @@ export default function Layout({
                         <Text size="large">Loading Data</Text>
                     </Box>)
                 }
-                {validState && (size === 'small' ?
+                {validState && appContext.status != AppStatus.NoData && (size === 'small' ?
                     <Box justify="end">
                         <Menu
                             a11yTitle="Navigation Menu"
@@ -310,10 +317,10 @@ export default function Layout({
                             items={navItems.flatMap(({ link, label, subLinks }, index) => {
                                 if (subLinks) {
                                     return subLinks.map(({ subLink, label }) => {
-                                        return { pad: 'large', label: <Link key={index} href={link + subLink}><Box className={router.pathname == link + subLink ? 'active' : ''} color="accent-2">{label}</Box></Link> }
+                                        return { fill: true, pad: 'large', onClick: () => onMobileClick(link + subLink), label: <Box key={index} className={router.pathname == link + subLink ? 'active' : ''} color="accent-2">{label}</Box> }
                                     })
                                 }
-                                return { pad: 'large', label: <Link key={index} href={link}><Box className={router.pathname == link ? 'active' : ''} color="accent-2">{label}</Box></Link> }
+                                return { fill: true, pad: 'large', onClick: () => onMobileClick(link), label: <Box key={index} className={router.pathname == link ? 'active' : ''} color="accent-2">{label}</Box> }
                             })}
                         />
                     </Box>
@@ -352,7 +359,7 @@ export default function Layout({
                         <IconLink icon={Discord} href="https://discord.gg/AfsyBkSd2q" text="Idleon Efficiency" />
                     </Box>
                     <Box justify="end" direction="row" gap="medium">
-                        <Anchor href="https://www.buymeacoffee.com/sludger" target="_blank"><Image src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me A Coffee" height="40px" width="150px" /></Anchor>
+                        <Anchor href="https://www.buymeacoffee.com/sludger" target="_blank"><Image src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me A Coffee" height="40px" width="150px" unoptimized /></Anchor>
                         
                     </Box>
                 </Box>

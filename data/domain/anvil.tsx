@@ -286,8 +286,7 @@ export const updateAnvil = (data: Map<string, any>) => {
         let ruckSackPrayerBonus: number = player.activePrayers.findIndex(prayer => prayer == 12) != -1 ? prayers[12].getBonus() : 0;
         
         const telekineticStorageBonus = player.talents.find(x => x.skillIndex == CapacityConst.TelekineticStorageSkillIndex)?.getBonus() ?? 0;
-        const cardBonus = player.cardInfo?.equippedCards.find(x => x.data.cardID == "Z9")?.getBonus() ?? 0;
-        const carryCapShrineBonus = shrines[ShrineConstants.CarryShrine].getBonus(player.currentMapId, cardBonus);
+        const carryCapShrineBonus = shrines[ShrineConstants.CarryShrine].getBonus(player.currentMapId);
         const bribeCapBonus = bribes.find(bribe => bribe.name == "Bottomless Bags")?.status == BribeStatus.Purchased ? 5 : 0;
         const allCapBonus = player.capacity.getAllCapsBonus(guildCarryBonus, telekineticStorageBonus, carryCapShrineBonus, zergPrayerBonus, ruckSackPrayerBonus, bribeCapBonus);
 
