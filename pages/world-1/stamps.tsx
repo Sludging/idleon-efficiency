@@ -34,7 +34,10 @@ function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stam
     function TipContent({ stamp, faceLeft }: { stamp: Stamp, faceLeft: boolean }) {
         if (stamp.level == 0) {
             if (stampItem && stampItem.sources.sources && stampItem.sources.sources.length > 0) {
-                return <ItemSourcesDisplay sources={stampItem.sources} />
+                return <Box>
+                    <Text size="small">Bonus: {stamp.getBonusText()}</Text>
+                    <ItemSourcesDisplay sources={stampItem.sources} />
+                </Box> 
             }
             else {
                 return <Box>Unobtainable</Box>
