@@ -37,6 +37,8 @@ export class Artifact {
                     return new SlabInfluencedArtifact(artifact.index, artifact.data);
                 case 11: 
                     return new AshenUrnArtifact(artifact.index, artifact.data);
+                case 12:
+                    return new AmberiteArtifact(artifact.index, artifact.data);
                 case 23:
                     return new WeatherbookArtifact(artifact.index, artifact.data);
                 case 13:
@@ -151,6 +153,15 @@ export class AshenUrnArtifact extends Artifact {
 
     override getCalculatedBonusText = () => {
         return `+${this.getBonus(true).toString()}% Divinity Gain`;
+    }
+}
+
+export class AmberiteArtifact extends Artifact {
+    override getBonus = (showUnobtained: boolean = false) => {
+        if (showUnobtained || this.status != ArtifactStatus.Unobtained) {
+            return this.status == ArtifactStatus.Ancient ? 2 : 1;
+        }
+        return 0
     }
 }
 
