@@ -191,7 +191,7 @@ export default function Layout({
                 { subLink: "/task-board", label: "Task Board" },
                 { subLink: "/constellations", label: "Constellations" },
                 { subLink: "/quests", label: "Quests" },
-                { subLink: "/looty-tracker", label: "Looty Tracker" },
+                { subLink: "/slab", label: "Slab" },
                 { subLink: "/storage", label: "Storage" },
                 { subLink: "/obols", label: "Obols" },
                 { subLink: "/dungeons", label: "Dungeons" },

@@ -4,11 +4,11 @@ import { Cooking } from "../cooking";
 import { ArtifactBase } from "../data/ArtifactRepo";
 import { GemStore } from "../gemPurchases";
 import { ImageData } from "../imageData";
-import { LootyInfo } from "../lootyTracker";
 import { ArtifactModel } from "../model/artifactModel";
 import { Player } from "../player";
 import { Sailing } from "../sailing";
 import { SkillsIndex } from "../SkillsIndex";
+import { Slab } from "../slab";
 
 export enum ArtifactStatus {
     Unobtained,
@@ -264,7 +264,7 @@ export const updateArtifacts = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const cooking = data.get("cooking") as Cooking;
     const collider = data.get("collider") as AtomCollider;
-    const looty = data.get("lootyData") as LootyInfo;
+    const slab = data.get("slab") as Slab;
 
 
     // Max chests
@@ -280,10 +280,10 @@ export const updateArtifacts = (data: Map<string, any>) => {
     (sailing.artifacts[23] as WeatherbookArtifact).gamingLevel = players[0].skills.get(SkillsIndex.Gaming)?.level ?? 0;
 
     // Slab related.
-    (sailing.artifacts[2] as SlabInfluencedArtifact).lootyCount = looty.rawData.length;
-    (sailing.artifacts[10] as SlabInfluencedArtifact).lootyCount = looty.rawData.length;
-    (sailing.artifacts[18] as SlabInfluencedArtifact).lootyCount = looty.rawData.length;
-    (sailing.artifacts[20] as SlabInfluencedArtifact).lootyCount = looty.rawData.length;
+    (sailing.artifacts[2] as SlabInfluencedArtifact).lootyCount = slab.rawObtainedCount;
+    (sailing.artifacts[10] as SlabInfluencedArtifact).lootyCount = slab.rawObtainedCount;
+    (sailing.artifacts[18] as SlabInfluencedArtifact).lootyCount = slab.rawObtainedCount;
+    (sailing.artifacts[20] as SlabInfluencedArtifact).lootyCount = slab.rawObtainedCount;
 
     // Highest level
     const highestLevel = players.reduce((maxLevel, player) => maxLevel = player.level > maxLevel ? player.level : maxLevel, 0);

@@ -7,9 +7,8 @@ import parseBribes from './bribes';
 import parseGuild from './guild';
 import parseGems from './gemPurchases';
 import parseAchievements from './achievements';
-import parseLooty from './lootyTracker';
 import parseShrines, { updateShrines } from './shrines';
-import { initAllItems, Item } from './items';
+import { Item } from './items';
 import parseStorage, { updateStorage } from './storage';
 import parseQuests from './quests';
 import parsePrayers from './prayers';
@@ -41,6 +40,7 @@ import parseGaming from './gaming';
 import parseAtomCollider, { updateAtomCollider } from './atomCollider';
 import { updateArtifacts } from './sailing/artifacts';
 import parseConstellations from './constellations';
+import parseSlab from './slab';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     try {
@@ -104,7 +104,7 @@ const keyFunctionMap: Record<string, Function> = {
     "guild": (doc: Cloudsave, charCount: number) => parseGuild(safeJsonParse(doc, "Guild", []),),
     "gems": (doc: Cloudsave, charCount: number) => parseGems(safeJsonParse(doc, 'GemItemsPurchased', [])),
     "achievements": (doc: Cloudsave, charCount: number) => parseAchievements(safeJsonParse(doc, 'AchieveReg', []), safeJsonParse(doc, 'SteamAchieve', [])),
-    "lootyData": (doc: Cloudsave, allItems: Item[], charCount: number) => parseLooty(safeJsonParse(doc, "Cards1", []), allItems),
+    "slab": (doc: Cloudsave, allItems: Item[], charCount: number) => parseSlab(safeJsonParse(doc, "Cards1", []), allItems),
     "rawData": (doc: Cloudsave, charCount: number) => doc.toJSON(),
     "POExtra": (doc: Cloudsave, charCount: number) => {
         return {
@@ -181,7 +181,7 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], all
             else if (key == "worship") {
                 accountData.set(key, toExecute(data, accountData, validCharCount));
             }
-            else if (key == "lootyData" || key == "obols" || key == "alchemy" || key == "forge" || key == "stamps" || key == "anvil" || key == "account") {
+            else if (key == "obols" || key == "alchemy" || key == "forge" || key == "stamps" || key == "anvil" || key == "account" || key == "slab") {
                 accountData.set(key, toExecute(data, allItems, validCharCount));
             }
             else {
