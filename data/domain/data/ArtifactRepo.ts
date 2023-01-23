@@ -272,7 +272,7 @@ export const initArtifactRepo = () => {
                 "baseBonus": 10,
                 "baseFindChance": 1400,
                 "qtyBonus": 15,
-                "bonus": "+{% total dmg per power of 10 blessings owned. @ Total Bonus: +}% dmg",
+                "bonus": "+{% total dmg per power of 10 Particles owned in atom collider. @ Total Bonus: +}% dmg",
                 "ancientBonus": "The artifact's main bonus is doubled!",
                 "ancientBonusQty": 1
             })    

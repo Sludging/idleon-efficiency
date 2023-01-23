@@ -23,7 +23,7 @@ export const initMapDataRepo = () => {
                 "enemy": "frogG",
                 "world": "Blunder Hills",
                 "map": <MapNameModel>{"intName": "GrasslandsB", "name": "Froggy Fields", "id": 2},
-                "portalRequirements": [20]
+                "portalRequirements": [15]
             }),
         new MapDataBase(3, <MapDataModel>{
                 "enemy": "JungleZ",
@@ -95,7 +95,7 @@ export const initMapDataRepo = () => {
                 "enemy": "beanG",
                 "world": "Blunder Hills",
                 "map": <MapNameModel>{"intName": "GrasslandsC", "name": "Valley Of The Beans", "id": 14},
-                "portalRequirements": [80, 1500]
+                "portalRequirements": [40, 1500]
             }),
         new MapDataBase(15, <MapDataModel>{
                 "enemy": "ratB",
@@ -107,7 +107,7 @@ export const initMapDataRepo = () => {
                 "enemy": "slimeG",
                 "world": "Blunder Hills",
                 "map": <MapNameModel>{"intName": "JungleA", "name": "Jungle Perimeter", "id": 16},
-                "portalRequirements": [200, 3000]
+                "portalRequirements": [60, 3000]
             }),
         new MapDataBase(17, <MapDataModel>{
                 "enemy": "mushR",
@@ -125,7 +125,7 @@ export const initMapDataRepo = () => {
                 "enemy": "snakeG",
                 "world": "Blunder Hills",
                 "map": <MapNameModel>{"intName": "JungleB", "name": "Winding Willows", "id": 19},
-                "portalRequirements": [250]
+                "portalRequirements": [100]
             }),
         new MapDataBase(20, <MapDataModel>{
                 "enemy": "Nothing",
@@ -155,7 +155,7 @@ export const initMapDataRepo = () => {
                 "enemy": "carrotO",
                 "world": "Blunder Hills",
                 "map": <MapNameModel>{"intName": "JungleC", "name": "Vegetable Patch", "id": 24},
-                "portalRequirements": [300, 2000]
+                "portalRequirements": [125, 2000]
             }),
         new MapDataBase(25, <MapDataModel>{
                 "enemy": "Nothing",
@@ -167,7 +167,7 @@ export const initMapDataRepo = () => {
                 "enemy": "goblinG",
                 "world": "Blunder Hills",
                 "map": <MapNameModel>{"intName": "ForestA", "name": "Forest Outskirts", "id": 26},
-                "portalRequirements": [350]
+                "portalRequirements": [150]
             }),
         new MapDataBase(27, <MapDataModel>{
                 "enemy": "plank",

@@ -990,7 +990,7 @@ export const initEnemyRepo = () => {
                     "AFKtype": AFKTypeEnum.Fighting,
                     "MonsterFace": 45,
                     "MonsterOffsetX": 38,
-                    "MonsterOffsetY": 32,
+                    "MonsterOffsetY": 112,
                     "HeightOfMonster": 107,
                     "MonsterMoving": 0,
                     "MovingFrame": 0,
@@ -1023,7 +1023,7 @@ export const initEnemyRepo = () => {
                     "AFKtype": AFKTypeEnum.Fighting,
                     "MonsterFace": 4,
                     "MonsterOffsetX": 42,
-                    "MonsterOffsetY": 28,
+                    "MonsterOffsetY": 112,
                     "HeightOfMonster": 85,
                     "MonsterMoving": 1,
                     "MovingFrame": 4,
@@ -1056,7 +1056,7 @@ export const initEnemyRepo = () => {
                     "AFKtype": AFKTypeEnum.Fighting,
                     "MonsterFace": 4,
                     "MonsterOffsetX": 42,
-                    "MonsterOffsetY": 28,
+                    "MonsterOffsetY": 112,
                     "HeightOfMonster": 85,
                     "MonsterMoving": 1,
                     "MovingFrame": 4,
@@ -1089,7 +1089,7 @@ export const initEnemyRepo = () => {
                     "AFKtype": AFKTypeEnum.Fighting,
                     "MonsterFace": 4,
                     "MonsterOffsetX": 42,
-                    "MonsterOffsetY": 28,
+                    "MonsterOffsetY": 112,
                     "HeightOfMonster": 85,
                     "MonsterMoving": 1,
                     "MovingFrame": 4,
@@ -1112,6 +1112,33 @@ export const initEnemyRepo = () => {
                         <ItemDropModel>{"item": "DungCredits2", "quantity": 1, "chance": 0.8, "questLink": "N/A"}
                     ]
                 },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("Meteor", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Fallen Meteor",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 4,
+                    "MonsterOffsetX": 42,
+                    "MonsterOffsetY": 68,
+                    "HeightOfMonster": 43,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 0,
+                    "RespawnTime": 86400,
+                    "DeathFrame": 0,
+                    "MonsterHPTotal": 1000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "a",
+                    "ExpGiven": 1,
+                    "ExpType": 0,
+                    "Defence": 1,
+                    "MoveSPEED": 0,
+                    "Damages": [1, 1],
+                    "DefFor0": 0
+                },
+                "drops": <EnemyTableModel>{"drops": []},
                 "mapData": undefined,
                 "navigation": undefined,
                 "bossData": undefined
@@ -1321,7 +1348,7 @@ export const initEnemyRepo = () => {
                     "MonsterFace": 45,
                     "MonsterOffsetX": 38,
                     "MonsterOffsetY": 90,
-                    "HeightOfMonster": 156,
+                    "HeightOfMonster": 148,
                     "MonsterMoving": 0,
                     "MovingFrame": 0,
                     "RespawnTime": 45,
@@ -1832,15 +1859,15 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 5,
                     "RespawnTime": 40,
                     "DeathFrame": 12,
-                    "MonsterHPTotal": 50,
+                    "MonsterHPTotal": 25,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
-                    "ExpGiven": 7,
+                    "ExpGiven": 10,
                     "ExpType": 0,
-                    "Defence": 2,
+                    "Defence": 1,
                     "MoveSPEED": 4,
-                    "Damages": [5, 1],
-                    "DefFor0": 2
+                    "Damages": [3, 1],
+                    "DefFor0": 1
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -1859,7 +1886,7 @@ export const initEnemyRepo = () => {
                     "enemy": "frogG",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "GrasslandsB", "name": "Froggy Fields", "id": 2},
-                    "portalRequirements": [20]
+                    "portalRequirements": [15]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "mushR",
@@ -1882,15 +1909,15 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 6,
                     "RespawnTime": 50,
                     "DeathFrame": 15,
-                    "MonsterHPTotal": 150,
+                    "MonsterHPTotal": 80,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
-                    "ExpGiven": 15,
+                    "ExpGiven": 18,
                     "ExpType": 0,
-                    "Defence": 4,
+                    "Defence": 2,
                     "MoveSPEED": 4,
-                    "Damages": [11, 1],
-                    "DefFor0": 5.97
+                    "Damages": [6, 1],
+                    "DefFor0": 2.67
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -1906,7 +1933,7 @@ export const initEnemyRepo = () => {
                     "enemy": "beanG",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "GrasslandsC", "name": "Valley Of The Beans", "id": 14},
-                    "portalRequirements": [80, 1500]
+                    "portalRequirements": [40, 1500]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "frogG",
@@ -1929,15 +1956,15 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 4,
                     "RespawnTime": 42,
                     "DeathFrame": 13,
-                    "MonsterHPTotal": 250,
+                    "MonsterHPTotal": 175,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
-                    "ExpGiven": 23,
+                    "ExpGiven": 26,
                     "ExpType": 0,
-                    "Defence": 9,
+                    "Defence": 4,
                     "MoveSPEED": 4,
-                    "Damages": [15, 1],
-                    "DefFor0": 8.9
+                    "Damages": [10, 1],
+                    "DefFor0": 5.27
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -1954,7 +1981,7 @@ export const initEnemyRepo = () => {
                     "enemy": "slimeG",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "JungleA", "name": "Jungle Perimeter", "id": 16},
-                    "portalRequirements": [200, 3000]
+                    "portalRequirements": [60, 3000]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "beanG",
@@ -1977,15 +2004,15 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 6,
                     "RespawnTime": 45,
                     "DeathFrame": 13,
-                    "MonsterHPTotal": 450,
+                    "MonsterHPTotal": 325,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
-                    "ExpGiven": 34,
+                    "ExpGiven": 36,
                     "ExpType": 0,
-                    "Defence": 18,
+                    "Defence": 8,
                     "MoveSPEED": 8,
-                    "Damages": [18, 1],
-                    "DefFor0": 11.22
+                    "Damages": [13, 1],
+                    "DefFor0": 7.4
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -2003,7 +2030,7 @@ export const initEnemyRepo = () => {
                     "enemy": "snakeG",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "JungleB", "name": "Winding Willows", "id": 19},
-                    "portalRequirements": [250]
+                    "portalRequirements": [100]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "slimeG",
@@ -2026,15 +2053,15 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 6,
                     "RespawnTime": 50,
                     "DeathFrame": 15,
-                    "MonsterHPTotal": 800,
+                    "MonsterHPTotal": 600,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
-                    "ExpGiven": 45,
+                    "ExpGiven": 46,
                     "ExpType": 0,
-                    "Defence": 30,
+                    "Defence": 10,
                     "MoveSPEED": 6,
-                    "Damages": [22, 1],
-                    "DefFor0": 14.57
+                    "Damages": [16, 1],
+                    "DefFor0": 9.66
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -2050,7 +2077,7 @@ export const initEnemyRepo = () => {
                     "enemy": "carrotO",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "JungleC", "name": "Vegetable Patch", "id": 24},
-                    "portalRequirements": [300, 2000]
+                    "portalRequirements": [125, 2000]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "snakeG",
@@ -2073,15 +2100,15 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 6,
                     "RespawnTime": 52,
                     "DeathFrame": 15,
-                    "MonsterHPTotal": 1250,
+                    "MonsterHPTotal": 1100,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
                     "ExpGiven": 60,
                     "ExpType": 0,
-                    "Defence": 52,
+                    "Defence": 15,
                     "MoveSPEED": 4,
-                    "Damages": [30, 1],
-                    "DefFor0": 21.54
+                    "Damages": [20, 1],
+                    "DefFor0": 12.82
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -2097,7 +2124,7 @@ export const initEnemyRepo = () => {
                     "enemy": "goblinG",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "ForestA", "name": "Forest Outskirts", "id": 26},
-                    "portalRequirements": [350]
+                    "portalRequirements": [150]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "carrotO",
@@ -2125,7 +2152,7 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 75,
                     "ExpType": 0,
-                    "Defence": 70,
+                    "Defence": 25,
                     "MoveSPEED": 3,
                     "Damages": [35, 1],
                     "DefFor0": 26.12
@@ -2173,7 +2200,7 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 95,
                     "ExpType": 0,
-                    "Defence": 110,
+                    "Defence": 60,
                     "MoveSPEED": 3,
                     "Damages": [45, 1],
                     "DefFor0": 35.69
@@ -2579,15 +2606,15 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 5,
                     "RespawnTime": 50,
                     "DeathFrame": 15,
-                    "MonsterHPTotal": 4000,
+                    "MonsterHPTotal": 2000,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
                     "ExpGiven": 150,
                     "ExpType": 0,
-                    "Defence": 115,
+                    "Defence": 60,
                     "MoveSPEED": 5,
-                    "Damages": [55, 1],
-                    "DefFor0": 45.72
+                    "Damages": [30, 1],
+                    "DefFor0": 21.54
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -2626,15 +2653,15 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 9,
                     "RespawnTime": 50,
                     "DeathFrame": 19,
-                    "MonsterHPTotal": 5500,
+                    "MonsterHPTotal": 4000,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
                     "ExpGiven": 180,
                     "ExpType": 0,
-                    "Defence": 132,
+                    "Defence": 80,
                     "MoveSPEED": 4,
-                    "Damages": [62, 1],
-                    "DefFor0": 52.96
+                    "Damages": [45, 1],
+                    "DefFor0": 35.69
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -2674,15 +2701,15 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 6,
                     "RespawnTime": 40,
                     "DeathFrame": 12,
-                    "MonsterHPTotal": 7500,
+                    "MonsterHPTotal": 6500,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
                     "ExpGiven": 210,
                     "ExpType": 0,
-                    "Defence": 150,
+                    "Defence": 120,
                     "MoveSPEED": 4,
-                    "Damages": [70, 1],
-                    "DefFor0": 61.42
+                    "Damages": [60, 1],
+                    "DefFor0": 50.87
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -2721,15 +2748,15 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 15,
                     "RespawnTime": 40,
                     "DeathFrame": 26,
-                    "MonsterHPTotal": 11000,
+                    "MonsterHPTotal": 10000,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
                     "ExpGiven": 240,
                     "ExpType": 0,
-                    "Defence": 180,
+                    "Defence": 145,
                     "MoveSPEED": 4,
-                    "Damages": [90, 1],
-                    "DefFor0": 83.29
+                    "Damages": [80, 1],
+                    "DefFor0": 72.24
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -2768,15 +2795,15 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 9,
                     "RespawnTime": 40,
                     "DeathFrame": 19,
-                    "MonsterHPTotal": 13000,
+                    "MonsterHPTotal": 12500,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
                     "ExpGiven": 265,
                     "ExpType": 0,
-                    "Defence": 205,
+                    "Defence": 170,
                     "MoveSPEED": 3,
-                    "Damages": [99, 1],
-                    "DefFor0": 93.41
+                    "Damages": [95, 1],
+                    "DefFor0": 88.89
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -2819,7 +2846,7 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 290,
                     "ExpType": 0,
-                    "Defence": 240,
+                    "Defence": 225,
                     "MoveSPEED": 5,
                     "Damages": [112, 1],
                     "DefFor0": 108.27
@@ -2969,7 +2996,7 @@ export const initEnemyRepo = () => {
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 125, "chance": 0.35, "questLink": "N/A"},
                         <ItemDropModel>{"item": "DesertC2", "quantity": 1, "chance": 0.165, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "DesertC2b", "quantity": 1, "chance": 5e-05, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "DesertC2b", "quantity": 1, "chance": 0.0005, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsB9", "quantity": 1, "chance": 0.0001, "questLink": "N/A"},
                         <ItemDropModel>{"item": "Quest18", "quantity": 1, "chance": 0.0001, "questLink": "Loominadi1"},
                         <SubTableDropModel>{"item": "DropTable8", "quantity": 1, "chance": 0.0035, "questLink": "N/A"}

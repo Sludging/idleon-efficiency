@@ -4558,7 +4558,7 @@ export const initDetDropsRepo = () => {
         new DetDropsBase("DesertC1", <DetDropsModel>{"sources": [<DetDropModel>{"source": "steak", "quantity": 1, "chance": 0.18}]}),
         new DetDropsBase("CardsB8", <DetDropsModel>{"sources": [<DetDropModel>{"source": "steak", "quantity": 1, "chance": 0.0001}]}),
         new DetDropsBase("DesertC2", <DetDropsModel>{"sources": [<DetDropModel>{"source": "moonman", "quantity": 1, "chance": 0.165}]}),
-        new DetDropsBase("DesertC2b", <DetDropsModel>{"sources": [<DetDropModel>{"source": "moonman", "quantity": 1, "chance": 5e-05}]}),
+        new DetDropsBase("DesertC2b", <DetDropsModel>{"sources": [<DetDropModel>{"source": "moonman", "quantity": 1, "chance": 0.0005}]}),
         new DetDropsBase("CardsB9", <DetDropsModel>{"sources": [<DetDropModel>{"source": "moonman", "quantity": 1, "chance": 0.0001}]}),
         new DetDropsBase("Quest18", <DetDropsModel>{"sources": [<DetDropModel>{"source": "moonman", "quantity": 1, "chance": 0.0001}]}),
         new DetDropsBase("DesertC3", <DetDropsModel>{"sources": [<DetDropModel>{"source": "sandgiant", "quantity": 1, "chance": 0.152}]}),

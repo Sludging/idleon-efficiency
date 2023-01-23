@@ -153,7 +153,7 @@ export const initPostOfficeRepo = () => {
                 "orders": [
                     <PartModel>{"item": "DesertA3b", "base": 1, "increment": 1.03},
                     <PartModel>{"item": "DesertA1b", "base": 1, "increment": 1.03},
-                    <PartModel>{"item": "DesertC2b", "base": 1, "increment": 1.03},
+                    <PartModel>{"item": "DesertC2b", "base": 5, "increment": 1.03},
                     <PartModel>{"item": "TreeInterior1b", "base": 1, "increment": 1.03},
                     <PartModel>{"item": "Sewers1b", "base": 1, "increment": 1.03},
                     <PartModel>{"item": "SnowA2a", "base": 1, "increment": 1.03},

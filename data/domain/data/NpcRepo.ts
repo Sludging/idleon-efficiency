@@ -28,7 +28,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 1.31,
                     "starSign": "Leo",
                     "mothersMaidenName": "Perez",
-                    "notes": "[[TP Pete]] is found in [[Worlds#S2 - Rats Nest|Rat's Nest]], the second zone of the sewers$NEWLINE$$NEWLINE$You must complete all three of his quests and talk to him after reaching Class Level 70 in order to receive the {{CraftReq|TP Pete Token}}, which falls on the ground.$NEWLINE$$NEWLINE$Type 'More like Poopy Pete' while standing next to him to receive {{Talentbook|Toilet Paper Postage}}.$NEWLINE$"
+                    "notes": "[[TP Pete]] is found in [[Worlds#S2 - Rats Nest|Rat's Nest]], the second zone of the sewers$NEWLINE$$NEWLINE$You must complete all three of his quests and talk to him after reaching Class Level 70 in order to receive the {{CraftReq|TP Pete Token}}, which falls on the ground.{{Sources/datarow|Item=TP Pete Token$NEWLINE$Type 'More like Poopy Pete' while standing next to him to receive {{Talentbook|Toilet Paper Postage}}.$NEWLINE$"
                 },
                 "quests": {
                     "Roll of Anger": <CustomQuestModel>{
@@ -258,9 +258,9 @@ export const initNpcRepo = () => {
                     "noQuest": 0,
                     "repeatable": "Unknown",
                     "type": "Unknown",
-                    "birthWeight": 4.47,
-                    "starSign": "Leo",
-                    "mothersMaidenName": "Vogal",
+                    "birthWeight": 8.15,
+                    "starSign": "Capricorn",
+                    "mothersMaidenName": "Maki",
                     "notes": ""
                 },
                 "quests": {},
@@ -280,9 +280,9 @@ export const initNpcRepo = () => {
                     "noQuest": 0,
                     "repeatable": "Unknown",
                     "type": "Unknown",
-                    "birthWeight": 2.88,
-                    "starSign": "Gemini",
-                    "mothersMaidenName": "Sandstrom",
+                    "birthWeight": 5.85,
+                    "starSign": "Taurus",
+                    "mothersMaidenName": "Duffman",
                     "notes": ""
                 },
                 "quests": {},
@@ -828,7 +828,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 1.54,
                     "starSign": "Pisces",
                     "mothersMaidenName": "Garcia",
-                    "notes": "[[Scripticus]] is the first NPC you interact with after the tutorial, located to the right in the [[Worlds#G1 - Blunder Hills|starting town]].$NEWLINE$$NEWLINE$He introduces the player to the basics of completing quests, fighting monsters, [[Smithing]], equipping gear, and creating multiple characters. His questline guides the player through most of World 1 leading to the [[Amarok]] boss fight.$NEWLINE$$NEWLINE$$NEWLINE$"
+                    "notes": "[[Scripticus]] is the first NPC you interact with after the tutorial, located to the right in the [[Worlds#G1 - Blunder Hills|starting town]].$NEWLINE$$NEWLINE$He introduces the player to the basics of completing quests, fighting monsters, [[Smithing]], equipping gear, and creating multiple characters. His questline guides the player through most of World 1 leading to the [[Amarok]] boss fight.$NEWLINE$$NEWLINE$$NEWLINE$$NEWLINE$"
                 },
                 "quests": {
                     "Hardcore Gamer Status, Here I Come!": <CustomQuestModel>{
@@ -1431,7 +1431,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 9.31,
                     "starSign": "Taurus",
                     "mothersMaidenName": "Thomas",
-                    "notes": "[[Krunk]] is found in [[Worlds#M2 - Freefall Caverns|Freefall Caverns]], the second zone of the mines, located at the bottom of the area.$NEWLINE$$NEWLINE$Finishing his questline will unlock a shortcut to the gold ore within [[Worlds#M2 - Freefall Caverns|Freefall Caverns]], but only for characters that have completed the questline.$NEWLINE$$NEWLINE$You must complete all three of his quests and talk to him after reaching [[Mining]] Level 25 in order to receive the {{CraftReq|Krunk Token}}, which falls on the ground. He does say Level 33 at first but then changes his mind and gives it to you early.$NEWLINE$"
+                    "notes": "[[Krunk]] is found in [[Worlds#M2 - Freefall Caverns|Freefall Caverns]], the second zone of the mines, located at the bottom of the area.$NEWLINE$$NEWLINE$Finishing his questline will unlock a shortcut to the gold ore within [[Worlds#M2 - Freefall Caverns|Freefall Caverns]], but only for characters that have completed the questline.$NEWLINE$$NEWLINE$You must complete all three of his quests and talk to him after reaching [[Mining]] Level 25 in order to receive the {{CraftReq|Krunk Token}}, which falls on the ground. He does say Level 33 at first but then changes his mind and gives it to you early.{{Sources/datarow|Item=Krunk Token"
                 },
                 "quests": {
                     "A Plot to be Perfect": <ItemQuestModel>{
@@ -1607,7 +1607,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 6.45,
                     "starSign": "Gemini",
                     "mothersMaidenName": "Thomas",
-                    "notes": "[[Glumlee]] is located in the [[Worlds#M1 - Tunnels Entrance|Tunnels Entrance]] to the left of the [[Worlds#G1 - Blunder Hills|starting town]].$NEWLINE$$NEWLINE$His quests focus on introducing players to the [[File:Mining Skill Icon.png]] [[Mining]] Skill and smelting ores in the [[Forge]] to earn the [[Mining Certificate]] needed to complete the quest 'Get Glumlee's Certification' given by [[Scripticus]].$NEWLINE$$NEWLINE$His final quest awards the {{CraftReq|Glumlee Token}}.$NEWLINE$$NEWLINE$$NEWLINE$"
+                    "notes": "[[Glumlee]] is located in the [[Worlds#M1 - Tunnels Entrance|Tunnels Entrance]] to the left of the [[Worlds#G1 - Blunder Hills|starting town]].$NEWLINE$$NEWLINE$His quests focus on introducing players to the [[File:Mining Skill Icon.png]] [[Mining]] Skill and smelting ores in the [[Forge]] to earn the [[Mining Certificate]] needed to complete the quest 'Get Glumlee's Certification' given by [[Scripticus]].$NEWLINE$$NEWLINE$His final quest awards the {{CraftReq|Glumlee Token}}.$NEWLINE$$NEWLINE$$NEWLINE$$NEWLINE$"
                 },
                 "quests": {
                     "Learning to Swing": <ItemQuestModel>{
@@ -1868,7 +1868,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 3.7,
                     "starSign": "Libra",
                     "mothersMaidenName": "Jones",
-                    "notes": "The [[Picnic Stowaway]] is found in [[Worlds#G3 - Froggy Fields|Froggy Fields]], the second zone of Grasslands, located in the bottom left of the area.$NEWLINE$$NEWLINE$After completing his first 3 quests, his following quests will be part of a quest chain that is limited by a daily reset. You can do the full daily questline once per character per reset, but whether you complete the full questline or not it will start over at the first quest in the chain (The Most Important Meal of the Day) after your daily reset.$NEWLINE$$NEWLINE$The Picnic Stowaway daily questline is the source of the [[Peanut]] Recipe, and completing the third quest in the chain is a possible daily [[Tasks#Blunder Hills|Task]]. $NEWLINE$$NEWLINE$Completing the full daily questline in a single day awards you one {{CraftReq|Picnic Token}}. In order to obtain the [[King of Food]] trophy, you must complete the full daily questline 30 times.$NEWLINE$$NEWLINE$$NEWLINE$"
+                    "notes": "The [[Picnic Stowaway]] is found in [[Worlds#G3 - Froggy Fields|Froggy Fields]], the second zone of Grasslands, located in the bottom left of the area.$NEWLINE$$NEWLINE$After completing his first 3 quests, his following quests will be part of a quest chain that is limited by a daily reset. You can do the full daily questline once per character per reset, but whether you complete the full questline or not it will start over at the first quest in the chain (The Most Important Meal of the Day) after your daily reset.$NEWLINE$$NEWLINE$The Picnic Stowaway daily questline is the source of the [[Peanut]] Recipe, and completing the third quest in the chain is a possible daily [[Tasks#Blunder Hills|Task]]. $NEWLINE$$NEWLINE$Completing the full daily questline in a single day awards you one {{CraftReq|Picnic Token}}. In order to obtain the [[King of Food]] trophy, you must complete the full daily questline 30 times.$NEWLINE$$NEWLINE$$NEWLINE$$NEWLINE$"
                 },
                 "quests": {
                     "The Hungry Stowaway": <ItemQuestModel>{
@@ -2609,7 +2609,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 1.09,
                     "starSign": "Cancer",
                     "mothersMaidenName": "Jackson",
-                    "notes": "[[Mr Pigibank]] is found in the [[Worlds#G1 - Blunder Hills|starting town]], located at the top section of the area.$NEWLINE$$NEWLINE$Upon completing his quest the player is awarded with the ability to deposit and upgrade [[File:Longsword_Stamp.png|36px]] [[Stamps]], as well as purchase [[Stamps#Bribes|Bribes]] for account-wide bonuses.$NEWLINE$"
+                    "notes": "[[Mr Pigibank]] is found in the [[Worlds#G1 - Blunder Hills|starting town]], located at the top section of the area.$NEWLINE$$NEWLINE$Upon completing his quest the player is awarded with the ability to deposit and upgrade [[File:Longsword_Stamp.png|36px]] [[Stamps]], as well as purchase [[Stamps#Bribes|Bribes]] for account-wide bonuses.{{Sources/datarow|Item=Sword Stamp}}{{Sources/datarow|Item=Heart Stamp}}{{Sources/datarow|Item=Pickaxe Stamp}}{{Sources/datarow|Item=Hatchet Stamp"
                 },
                 "quests": {
                     "A Pig and his Stamps": <CustomQuestModel>{
@@ -2713,7 +2713,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 2.29,
                     "starSign": "Taurus",
                     "mothersMaidenName": "Lopez",
-                    "notes": "[[Promotheus]] is found in [[Worlds#G4 - Valley Of The Beans|Valley of the Beans]], the third zone of Grasslands, located in the middle left side of the area.$NEWLINE$$NEWLINE$Upon completing his first quest the player is given a quest allowing them to choose [[Classes#Warrior|one of three main classes: Warrior, Archer or Mage]].$NEWLINE$$NEWLINE$He also gives hints on how to find [[Baba Yaga]].$NEWLINE$"
+                    "notes": "[[Promotheus]] is found in [[Worlds#G4 - Valley Of The Beans|Valley of the Beans]], the third zone of Grasslands, located in the middle left side of the area.$NEWLINE$$NEWLINE$Upon completing his first quest the player is given a quest allowing them to choose [[Classes#Warrior|one of three main classes: Warrior, Archer or Mage]].$NEWLINE$$NEWLINE$He also gives hints on how to find [[Baba Yaga]].$NEWLINE$$NEWLINE$"
                 },
                 "quests": {
                     "I'm Ready, Promotion!": <CustomQuestModel>{
@@ -3109,7 +3109,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 3.32,
                     "starSign": "Aquarius",
                     "mothersMaidenName": "Ramirez",
-                    "notes": "[[Rocklyte]] is hidden within [[Worlds#G3 - Froggy Fields|Froggy Fields]]. In order to find him, you must complete [[Bushlyte|Bushlyte's]] quests. See [[Secrets]] for more details.$NEWLINE$$NEWLINE$"
+                    "notes": "[[Rocklyte]] is hidden within [[Worlds#G3 - Froggy Fields|Froggy Fields]]. In order to find him, you must complete [[Bushlyte|Bushlyte's]] quests. See [[Secrets]] for more details.$NEWLINE$$NEWLINE$$NEWLINE$"
                 },
                 "quests": {
                     "How It's Made, Episode 7. The Super Peanut": <ItemQuestModel>{
@@ -3440,7 +3440,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 2.73,
                     "starSign": "Capricorn",
                     "mothersMaidenName": "Wilson",
-                    "notes": "[[Stiltzcho]] is found in [[Worlds#J1 - Jungle Perimeter|Jungle Perimeter]], the first zone of the Jungle, located to the left of the area. His quests can be considered a DPS and skill check for progressing [[Scripticus]]' questline. Dropping a [[Grass Leaf]] on him is a possible daily [[Tasks#Blunder Hills|Task]].$NEWLINE$"
+                    "notes": "[[Stiltzcho]] is found in [[Worlds#J1 - Jungle Perimeter|Jungle Perimeter]], the first zone of the Jungle, located to the left of the area. His quests can be considered a DPS and skill check for progressing [[Scripticus]]' questline. Dropping a [[Grass Leaf]] on him is a possible daily [[Tasks#Blunder Hills|Task]].$NEWLINE$$NEWLINE$"
                 },
                 "quests": {
                     "Outta the Way Slimes": <CustomQuestModel>{
@@ -4357,7 +4357,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 8.43,
                     "starSign": "Aries",
                     "mothersMaidenName": "Wilson",
-                    "notes": "[[Builder Bird]] is found in the [[Worlds#G1 - Blunder Hills|starting town]], located in the top right section of the area. $NEWLINE$$NEWLINE$Upon completing his quest the player gains access to the portal to [[Worlds#D0 - YumYum Grotto|World 2 - Yum Yum Desert]].$NEWLINE$$NEWLINE$This little guy also (for a limited time only) gave us the [[Real Civil Engineer Helmet]].$NEWLINE$$NEWLINE$'''Note:''' Unlocking the portal with one character unlocks it for all characters on your account."
+                    "notes": "[[Builder Bird]] is found in the [[Worlds#G1 - Blunder Hills|starting town]], located in the top right section of the area. $NEWLINE$$NEWLINE$Upon completing his quest the player gains access to the portal to [[Worlds#D0 - YumYum Grotto|World 2 - Yum Yum Desert]].$NEWLINE$$NEWLINE$This little guy also (for a limited time only) gave us the [[Real Civil Engineer Helmet]].$NEWLINE$$NEWLINE$'''Note:''' Unlocking the portal with one character unlocks it for all characters on your account.$NEWLINE$"
                 },
                 "quests": {
                     "Restoring Power to the Portal": <ItemQuestModel>{
@@ -5072,7 +5072,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 6.75,
                     "starSign": "Pisces",
                     "mothersMaidenName": "Lee",
-                    "notes": "[[Fishpaste97]] is found in [[Worlds#F2- Faraway Piers|Faraway Piers]].$NEWLINE$$NEWLINE$Like other piggy NPCs, his quests award stamps. Although he's found in a Fishing zone, his first quest requires you to work on your [[File:Catching Skill Icon.png|35px]] [[Catching]] Skill.$NEWLINE$"
+                    "notes": "[[Fishpaste97]] is found in [[Worlds#F2- Faraway Piers|Faraway Piers]].$NEWLINE$$NEWLINE$Like other piggy NPCs, his quests award stamps. Although he's found in a Fishing zone, his first quest requires you to work on your [[File:Catching Skill Icon.png|35px]] [[Catching]] Skill.$NEWLINE$$NEWLINE$"
                 },
                 "quests": {
                     "'Accidental' Exploit": <ItemQuestModel>{
@@ -5592,7 +5592,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 5.09,
                     "starSign": "Aries",
                     "mothersMaidenName": "Sanchez",
-                    "notes": "[[Bandit Bob]] is found in [[Worlds#D3 - Bandit Bob's Hideout|Bandit Bob's Hideout]]. His quests require you to open up the 2nd [[Smithing]] tab, unlock recipes from [[Tasks]], and open the [[Post Office]]. $NEWLINE$"
+                    "notes": "[[Bandit Bob]] is found in [[Worlds#D3 - Bandit Bob's Hideout|Bandit Bob's Hideout]]. His quests require you to open up the 2nd [[Smithing]] tab, unlock recipes from [[Tasks]], and open the [[Post Office]].{{Sources/datarow|Item=Bandit Bob Card|SpecialText=Survive first contact.$NEWLINE$"
                 },
                 "quests": {
                     "Bullets for Bandit Bob!": <ItemQuestModel>{
@@ -6079,13 +6079,13 @@ export const initNpcRepo = () => {
                         },
                         "CustomType": "Djonnut2",
                         "CustomArray": [
-                            <CustomReqModel>{"desc": "Moonmen Defeated:", "finalV": 10000, "type": "GreaterEqual", "startV": 0},
+                            <CustomReqModel>{"desc": "Moonmen Defeated:", "finalV": 3000, "type": "GreaterEqual", "startV": 0},
                             <CustomReqModel>{"desc": "Ghosts Collected:", "finalV": 1, "type": "GreaterEqual", "startV": 0}
                         ]
                     },
                     "The Blue New World": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "How I would love to see this blue world. I would of be so happy but no I must remain here. Please player please help me see the blue world! <br> QUEST:He's blue nuff said.",
+                        "DialogueText": "How I would love to see this blue world. I would of be so happy but no I must remain here. Please player please help me see the blue world! <br> QUEST:He's blue get him blue stuff from world 3 nuff said.",
                         "NextIndex": 15,
                         "Name": "The Blue New World",
                         "ConsumeItems": true,
@@ -6183,7 +6183,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "How I would love to see this blue world. I would of be so happy but no I must remain here. Please player please help me see the blue world! <br> QUEST:He's blue nuff said.",
+                        "DialogueText": "How I would love to see this blue world. I would of be so happy but no I must remain here. Please player please help me see the blue world! <br> QUEST:He's blue get him blue stuff from world 3 nuff said.",
                         "NextIndex": 15,
                         "Name": "The Blue New World"
                     },
@@ -6223,7 +6223,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 3.11,
                     "starSign": "Libra",
                     "mothersMaidenName": "Anderson",
-                    "notes": "[[Goldric]] is found in [[Worlds#D6 - Shifty Sandbox|Shifty Sandbox]]. In order to get any quests from Goldric, you must have gotten far enough in the [[Cowbo Jones]] questline by completing three quests for [[Bandit Bob]]. Until you've completed the requisite quests, Goldric refuses to talk to you.$NEWLINE$"
+                    "notes": "[[Goldric]] is found in [[Worlds#D6 - Shifty Sandbox|Shifty Sandbox]]. In order to get any quests from Goldric, you must have gotten far enough in the [[Cowbo Jones]] questline by completing three quests for [[Bandit Bob]]. Until you've completed the requisite quests, Goldric refuses to talk to you.$NEWLINE$$NEWLINE$"
                 },
                 "quests": {
                     "Trickle Down Economics": <CustomQuestModel>{
@@ -6299,7 +6299,7 @@ export const initNpcRepo = () => {
                         "QuestName": "Goldric4",
                         "Difficulty": 5,
                         "note": <NoteModel>{
-                            "note": "While you have this quest active and have the [[Alchemy#Level_up_Gift|Level Up Gift Alchemy Bubble]] equipped, [[Pre Crime Box|Pre Crime Boxes]] may drop. They don't do anything, you can safely sell them."
+                            "note": "While you have this quest active and have the [[Alchemy/Kazam_Cauldron#Level_Up_Gift|Level Up Gift Alchemy Bubble]] equipped, [[Pre Crime Box|Pre Crime Boxes]] may drop. They don't do anything, you can safely sell them."
                         },
                         "ItemReq": [<ComponentModel>{"item": "Sewers1b", "quantity": 1}]
                     },
@@ -6644,7 +6644,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 9.36,
                     "starSign": "Scorpio",
                     "mothersMaidenName": "Fletcher",
-                    "notes": "The Clown is located beside [[Desert Davey]] to his right.$NEWLINE$"
+                    "notes": "The Clown is located beside [[Desert Davey]] to his right.$NEWLINE$$NEWLINE$"
                 },
                 "quests": {},
                 "dialogue": [
@@ -6678,7 +6678,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 4.16,
                     "starSign": "Aries",
                     "mothersMaidenName": "Jones",
-                    "notes": "[[Snake Jar]] sits at the bottom of [[Worlds#D2 - The Mimic Hole|The Mimic Hole]], near the portal to [[Bandit Bob]].$NEWLINE$"
+                    "notes": "[[Snake Jar]] sits at the bottom of [[Worlds#D2 - The Mimic Hole|The Mimic Hole]], near the portal to [[Bandit Bob]].$NEWLINE$$NEWLINE$"
                 },
                 "quests": {
                     "Lookin' Like a Snack": <ItemQuestModel>{
@@ -7078,7 +7078,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 1.69,
                     "starSign": "Taurus",
                     "mothersMaidenName": "Brown",
-                    "notes": "[[Wellington]] is found in [[Worlds#D11 - Sands of Time|Sands of Time]].$NEWLINE$$NEWLINE$Like other piggy NPCs, his quests award stamps. For help completing his quests, see [[Secrets]].$NEWLINE$$NEWLINE$"
+                    "notes": "[[Wellington]] is found in [[Worlds#D11 - Sands of Time|Sands of Time]].$NEWLINE$$NEWLINE$Like other piggy NPCs, his quests award stamps. For help completing his quests, see [[Secrets]].$NEWLINE$$NEWLINE$$NEWLINE$"
                 },
                 "quests": {
                     "Platforms in Disguise, Platsformers!": <CustomQuestModel>{
@@ -8115,7 +8115,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 3.06,
                     "starSign": "Taurus",
                     "mothersMaidenName": "Garcia",
-                    "notes": "[[Centurion]] is located in [[Worlds#D2 - The Mimic Hole|The Mimic Hole]], next to the [[Colosseum/Sandstone|Sandstone Colosseum]].$NEWLINE$$NEWLINE$Completing his first quest (Down The Mimic Hole!) gives the player the ability to talk to him once every day to obtain a {{CraftReq|Colosseum Ticket}}. This is the second daily source of tickets after [[Typhoon]]. He will hold tickets for you for up to 3 days. Having more characters complete his quests does not provide more daily tickets.$NEWLINE$$NEWLINE$"
+                    "notes": "[[Centurion]] is located in [[Worlds#D2 - The Mimic Hole|The Mimic Hole]], next to the [[Colosseum/Sandstone|Sandstone Colosseum]].$NEWLINE$$NEWLINE$Completing his first quest (Down The Mimic Hole!) gives the player the ability to talk to him once every day to obtain a {{CraftReq|Colosseum Ticket}}. This is the second daily source of tickets after [[Typhoon]]. He will hold tickets for you for up to 3 days. Having more characters complete his quests does not provide more daily tickets.$NEWLINE$$NEWLINE$$NEWLINE$"
                 },
                 "quests": {
                     "Down The Mimic Hole!": <CustomQuestModel>{
@@ -9054,7 +9054,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 3.42,
                     "starSign": "Sagittarius",
                     "mothersMaidenName": "Jenson",
-                    "notes": "[[Hoggindaz]] is found in [[Worlds#Frostbite Towndra|Frostbite Towndra]], at the bottom right of town. $NEWLINE$$NEWLINE$His quests introduce the basics of [[Construction]], [[Trapping]] and [[Worship]] to the player. His quests award special talents that allow the sampling resources for the 3D Printer and moving shrines.$NEWLINE$$NEWLINE$$NEWLINE$"
+                    "notes": "[[Hoggindaz]] is found in [[Worlds#Frostbite Towndra|Frostbite Towndra]], at the bottom right of town. $NEWLINE$$NEWLINE$His quests introduce the basics of [[Construction]], [[Trapping]] and [[Worship]] to the player. His quests award special talents that allow the sampling resources for the 3D Printer and moving shrines.$NEWLINE$$NEWLINE$$NEWLINE$$NEWLINE$"
                 },
                 "quests": {
                     "Turn ON for what???": <CustomQuestModel>{
@@ -9949,7 +9949,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 8.75,
                     "starSign": "Leo",
                     "mothersMaidenName": "Vogal",
-                    "notes": "[[Crystalswine]] is found in [[Worlds#Cryo Catacombs|Cryo Catacombs]].$NEWLINE$$NEWLINE$"
+                    "notes": "[[Crystalswine]] is found in [[Worlds#Cryo Catacombs|Cryo Catacombs]].$NEWLINE$$NEWLINE$$NEWLINE$"
                 },
                 "quests": {
                     "Melting the Snakes": <CustomQuestModel>{
@@ -10124,7 +10124,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 5.03,
                     "starSign": "Sagittarius",
                     "mothersMaidenName": "Napier",
-                    "notes": "[[Yondergreen]] is found in [[Worlds#Signature Slopes|Signature Slopes]].$NEWLINE$"
+                    "notes": "[[Yondergreen]] is found in [[Worlds#Signature Slopes|Signature Slopes]].$NEWLINE$$NEWLINE$"
                 },
                 "quests": {
                     "Infrastructure Plan": <CustomQuestModel>{
@@ -11004,7 +11004,7 @@ export const initNpcRepo = () => {
                         "Rewards": [<ComponentModel>{"item": "ExpBalloon2", "quantity": 5}, <ComponentModel>{"item": "Timecandy3", "quantity": 2}],
                         "QuestName": "Lord of the Hunt2",
                         "Difficulty": 2,
-                        "note": <NoteModel>{"note": " Located at Jungle Perimeter inn Blunder Hills"},
+                        "note": <NoteModel>{"note": " Located at Jungle Perimeter in Blunder Hills"},
                         "ItemReq": [<ComponentModel>{"item": "Critter1", "quantity": 100}, <ComponentModel>{"item": "Critter1A", "quantity": 1}]
                     },
                     "Yet another Cartoon Reference": <ItemQuestModel>{
@@ -11672,7 +11672,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 1.74,
                     "starSign": "Cancer",
                     "mothersMaidenName": "Ingram",
-                    "notes": "See the [https://www.youtube.com/playlist?list=PLBG_WXgv7iS7UtkCmTxAL_-nH8V4ldufF Legends of Idleon Youtube Channel] for more details. (Steps will not be included here. You have to follow the videos with the steps in them instead.)$NEWLINE$"
+                    "notes": "See the [https://www.youtube.com/playlist?list=PLBG_WXgv7iS7UtkCmTxAL_-nH8V4ldufF Legends of Idleon Youtube Channel] for more details. (Steps will not be included here. You have to follow the videos with the steps in them instead.)$NEWLINE$$NEWLINE$"
                 },
                 "quests": {
                     "Treasure Hunt 1": <CustomQuestModel>{
@@ -12988,7 +12988,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 4.46,
                     "starSign": "Libra",
                     "mothersMaidenName": "Darnell",
-                    "notes": "[[Eliteus]] is found in [[Worlds#H4 - Outskirts of Fallstar Isle|Outskirts of Fallstar Isle]].$NEWLINE$$NEWLINE$Complete his quests to choose a [[Classes|elite class]] for your Barbarian, Squire, Bowman, Hunter, Shaman, or Wizard. $NEWLINE$$NEWLINE$NOTE: Divine Knight, Siege Breaker, and Elemental Sorcerer are not complete and are for World 5, which is not out yet. These classes have no talents except for the ones shared between all elite classes.$NEWLINE$"
+                    "notes": "[[Eliteus]] is found in [[Worlds#H4 - Outskirts of Fallstar Isle|Outskirts of Fallstar Isle]].$NEWLINE$$NEWLINE$Complete his quests to choose a [[Classes|elite class]] for your Barbarian, Squire, Bowman, Hunter, Shaman, or Wizard. $NEWLINE$$NEWLINE$NOTE: Divine Knight, Siege Breaker, and Elemental Sorcerer are not complete and are for World 5, which is not out yet. These classes have no talents except for the ones shared between all elite classes.$NEWLINE$$NEWLINE$"
                 },
                 "quests": {
                     "The Greenie Gucci Gang": <CustomQuestModel>{
