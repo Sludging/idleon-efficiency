@@ -2,13 +2,9 @@ import { initArtifactRepo } from "./data/ArtifactRepo";
 import { initIslandInfoRepo, IslandInfoBase } from "./data/IslandInfoRepo";
 import { CaptainBonusBase, initCaptainBonusRepo } from './data/CaptainBonusRepo';
 import { CaptainBonusModel } from './model/captainBonusModel';
-import { GemStore } from "./gemPurchases";
 import { ImageData } from "./imageData";
 import { IslandInfoModel } from "./model/islandInfoModel";
-import { Player } from "./player";
-import { SkillsIndex } from "./SkillsIndex";
-import { LootyInfo } from "./lootyTracker";
-import { Artifact, AshenUrnArtifact, FauxoryTuskArtifact, GenieLampArtifact, ManekiKatArtifact, OperaMaskArtifact, SlabInfluencedArtifact, TheTrueLanternArtifact, TriagulonArtifact, WeatherbookArtifact } from "./sailing/artifacts";
+import { Artifact } from "./sailing/artifacts";
 import { Cooking } from "./cooking";
 import { Sigils } from "./sigils";
 import { Divinity } from "./divinity";
@@ -16,7 +12,6 @@ import { Card } from "./cards";
 import { Alchemy } from "./alchemy";
 import { Stamp } from "./stamps";
 import { PlayerStatues } from "./statues";
-import { AtomCollider } from "./atomCollider";
 
 // "Captains": [
 //     [0,0,-1,3,6.75,2,0],
