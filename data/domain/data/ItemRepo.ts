@@ -4832,7 +4832,7 @@ export const initItemRepo = () => {
                     "Skill_Power": 0
                 },
                 "sources": undefined,
-                "notes": undefined,
+                "notes": <NoteModel>{"note": "Was available during the launch event of the iOS version."},
                 "recipe": undefined,
                 "vendors": undefined,
                 "anvilProduction": undefined,
@@ -4862,7 +4862,7 @@ export const initItemRepo = () => {
                     "Skill_Power": 0
                 },
                 "sources": undefined,
-                "notes": undefined,
+                "notes": <NoteModel>{"note": "Available from the Idle Skilling crossover event, requires reaching the mist in IS."},
                 "recipe": undefined,
                 "vendors": undefined,
                 "anvilProduction": undefined,
@@ -4892,7 +4892,7 @@ export const initItemRepo = () => {
                     "Skill_Power": 0
                 },
                 "sources": undefined,
-                "notes": undefined,
+                "notes": <NoteModel>{"note": "Available from Random Events (Meteorite)"},
                 "recipe": undefined,
                 "vendors": undefined,
                 "anvilProduction": undefined,
@@ -4922,7 +4922,7 @@ export const initItemRepo = () => {
                     "Skill_Power": 0
                 },
                 "sources": undefined,
-                "notes": undefined,
+                "notes": <NoteModel>{"note": "Available from Random Events (Glacial Guild)"},
                 "recipe": undefined,
                 "vendors": undefined,
                 "anvilProduction": undefined,
@@ -13453,7 +13453,7 @@ export const initItemRepo = () => {
                     "Skill_Power": 0
                 },
                 "sources": undefined,
-                "notes": <NoteModel>{"note": " "},
+                "notes": <NoteModel>{"note": "Unobtainable"},
                 "recipe": undefined,
                 "vendors": undefined,
                 "anvilProduction": undefined,
@@ -17532,7 +17532,7 @@ export const initItemRepo = () => {
                     "Skill_Power": 0
                 },
                 "sources": undefined,
-                "notes": undefined,
+                "notes": <NoteModel>{"note": "Available from Random Events (Meteorite)"},
                 "recipe": undefined,
                 "vendors": undefined,
                 "anvilProduction": undefined,
@@ -17562,7 +17562,7 @@ export const initItemRepo = () => {
                     "Skill_Power": 0
                 },
                 "sources": undefined,
-                "notes": undefined,
+                "notes": <NoteModel>{"note": "Requires buying the Outta This World Pack"},
                 "recipe": undefined,
                 "vendors": undefined,
                 "anvilProduction": undefined,
@@ -17622,7 +17622,7 @@ export const initItemRepo = () => {
                     "Skill_Power": 0
                 },
                 "sources": undefined,
-                "notes": undefined,
+                "notes": <NoteModel>{"note": "Requires buying the Eggscellent Pack."},
                 "recipe": undefined,
                 "vendors": undefined,
                 "anvilProduction": undefined,
@@ -18769,7 +18769,7 @@ export const initItemRepo = () => {
                     "Upgrade_Slots_Left": 0
                 },
                 "sources": undefined,
-                "notes": undefined,
+                "notes": <NoteModel>{"note": "Dungeon Loot Dice (Random)"},
                 "recipe": undefined,
                 "vendors": undefined,
                 "anvilProduction": undefined,
@@ -18797,7 +18797,7 @@ export const initItemRepo = () => {
                     "Upgrade_Slots_Left": 0
                 },
                 "sources": undefined,
-                "notes": undefined,
+                "notes": <NoteModel>{"note": "Dungeon Loot Dice (Random)"},
                 "recipe": undefined,
                 "vendors": undefined,
                 "anvilProduction": undefined,
@@ -18825,7 +18825,7 @@ export const initItemRepo = () => {
                     "Upgrade_Slots_Left": 0
                 },
                 "sources": undefined,
-                "notes": undefined,
+                "notes": <NoteModel>{"note": "Dungeon Loot Dice (Random)"},
                 "recipe": undefined,
                 "vendors": undefined,
                 "anvilProduction": undefined,
@@ -18853,7 +18853,7 @@ export const initItemRepo = () => {
                     "Upgrade_Slots_Left": 0
                 },
                 "sources": undefined,
-                "notes": undefined,
+                "notes": <NoteModel>{"note": "Dungeon Loot Dice (Random)"},
                 "recipe": undefined,
                 "vendors": undefined,
                 "anvilProduction": undefined,
@@ -19627,7 +19627,7 @@ export const initItemRepo = () => {
                     "Skill_Power": 0
                 },
                 "sources": undefined,
-                "notes": undefined,
+                "notes": <NoteModel>{"note": "Available from the Idle Skilling crossover event, requires reaching Tee Hee 15 in IS."},
                 "recipe": undefined,
                 "vendors": undefined,
                 "anvilProduction": undefined,
@@ -20418,7 +20418,7 @@ export const initItemRepo = () => {
                     "Speed": 2
                 },
                 "sources": undefined,
-                "notes": undefined,
+                "notes": <NoteModel>{"note": "Random Events (Snake Swarm)"},
                 "recipe": undefined,
                 "vendors": undefined,
                 "anvilProduction": undefined,
@@ -21244,7 +21244,7 @@ export const initItemRepo = () => {
                     "Speed": 2
                 },
                 "sources": undefined,
-                "notes": undefined,
+                "notes": <NoteModel>{"note": "Random Events (Mega Grumblo)"},
                 "recipe": undefined,
                 "vendors": undefined,
                 "anvilProduction": undefined,
@@ -28350,7 +28350,7 @@ export const initItemRepo = () => {
                     "description": "Restores power to the Magma Portal in the galaxy town, allowing travel to World 5! "
                 },
                 "sources": undefined,
-                "notes": undefined,
+                "notes": <NoteModel>{"note": "Massive Troll (Any Difficulty)"},
                 "recipe": undefined,
                 "vendors": undefined,
                 "anvilProduction": undefined,
@@ -28523,7 +28523,7 @@ export const initItemRepo = () => {
                     "description": "It's a bullet, and it's got your name on it! "
                 },
                 "sources": undefined,
-                "notes": undefined,
+                "notes": <NoteModel>{"note": "Treasure Hunt (check Idleon youtube)"},
                 "recipe": undefined,
                 "vendors": undefined,
                 "anvilProduction": undefined,
@@ -30593,7 +30593,7 @@ export const initItemRepo = () => {
                     "description": "Made from a Damaged Cog, which you can buy at the Town Shop! "
                 },
                 "sources": undefined,
-                "notes": undefined,
+                "notes": <NoteModel>{"note": "Made from a Damaged Cog, which you can buy at the world 3 Town Shop!"},
                 "recipe": undefined,
                 "vendors": undefined,
                 "anvilProduction": undefined,
@@ -30941,7 +30941,7 @@ export const initItemRepo = () => {
                     "description": "It may be a skull, but it sure ain't no Killroy! "
                 },
                 "sources": undefined,
-                "notes": undefined,
+                "notes": <NoteModel>{"note": "Killroy"},
                 "recipe": undefined,
                 "vendors": undefined,
                 "anvilProduction": undefined,
@@ -30977,7 +30977,9 @@ export const initItemRepo = () => {
                     "description": "Contains a random number of gems, hold down to open! It could be just a couple gems, but it could also have as many as 10,000 gems! "
                 },
                 "sources": undefined,
-                "notes": undefined,
+                "notes": <NoteModel>{
+                    "note": "Droprates are displayed on the Event page this item was apart of: [[Events/iOS_Release|iOS Release Event]]."
+                },
                 "recipe": undefined,
                 "vendors": undefined,
                 "anvilProduction": undefined,
@@ -39055,7 +39057,9 @@ export const initItemRepo = () => {
                     "Skill_Power": 0
                 },
                 "sources": undefined,
-                "notes": undefined,
+                "notes": <NoteModel>{
+                    "note": "Alchemy Shop"
+                },
                 "recipe": undefined,
                 "vendors": undefined,
                 "anvilProduction": undefined,
@@ -40318,7 +40322,7 @@ export const initItemRepo = () => {
                     "Skill_Power": 0
                 },
                 "sources": undefined,
-                "notes": undefined,
+                "notes": <NoteModel>{"note": "Random Events (Mega Grumblo)"},
                 "recipe": undefined,
                 "vendors": undefined,
                 "anvilProduction": undefined,

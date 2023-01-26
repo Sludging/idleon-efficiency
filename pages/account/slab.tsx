@@ -13,10 +13,11 @@ import IconImage from '../../components/base/IconImage';
 import { SourcesModel } from '../../data/domain/model/sourcesModel';
 import { customHandCraftedListOfUnobtainableItems, Slab as SlabDomain } from '../../data/domain/slab';
 import TextAndLabel from '../../components/base/TextAndLabel';
+import { NoteModel } from '../../data/domain/model/noteModel';
 
 
 
-function ItemSourcesDisplay({ sources }: { sources: SourcesModel }) {
+function ItemSourcesDisplay({ sources, notes }: { sources: SourcesModel, notes: NoteModel | undefined }) {
 
     const possibleSources = useMemo(() => {
         if (!sources) {
@@ -43,6 +44,7 @@ function ItemSourcesDisplay({ sources }: { sources: SourcesModel }) {
                             ))
                         }
                     </Box> :
+                    notes ? <Text>{notes.note}</Text> :
                     <>I don&apos;t know yet</>
             }
         </Box>
@@ -115,7 +117,7 @@ function Slab() {
                             <Box key={index}>
                                 <TipDisplay
                                     heading={`${item.displayName} (${item.type})`}
-                                    body={<ItemSourcesDisplay sources={item.sources} />}
+                                    body={<ItemSourcesDisplay sources={item.sources} notes={item.data.notes} />}
                                     size={"large"}
                                     direction={TipDirection.Down}
                                     maxWidth="large"
