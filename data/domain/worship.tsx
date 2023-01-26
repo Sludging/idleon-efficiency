@@ -17,8 +17,8 @@ const getActiveBubbles = (alchemy: Alchemy, activeBubbleString: string[]): Bubbl
     }).filter(notUndefined);
 }
 
-const totemNames: string[] = "Goblin_Gorefest Wakawaka_War Acorn_Assault Frosty_Firefight Clash_of_Cans Tower_Defence_6".split(" ");
-const totemMapIds: number[] = [26, 63, 30, 107, 155];
+const totemNames: string[] = "Goblin_Gorefest Wakawaka_War Acorn_Assault Frosty_Firefight Clash_of_Cans Citric_Conflict".split(" ");
+const totemMapIds: number[] = [26, 63, 30, 107, 155, 208];
 
 const worshipBaseInfo: string[][] = ["3 130 goblinG 0 170 570 25 60 1".split(" "),
 "5 70 moonman 21 42 357 40 250 10".split(" "),
@@ -124,6 +124,7 @@ export default function parseWorship(totemInfo: number[][]) {
         worship.totemInfo.push(new Totem(totemNames[2].replace(/_/g, " "), MapInfo[totemMapIds[2]], totemInfo[0][2], 2));
         worship.totemInfo.push(new Totem(totemNames[3].replace(/_/g, " "), MapInfo[totemMapIds[3]], totemInfo[0][3], 3));
         worship.totemInfo.push(new Totem(totemNames[4].replace(/_/g, " "), MapInfo[totemMapIds[4]], totemInfo[0][4], 4));
+        worship.totemInfo.push(new Totem(totemNames[5].replace(/_/g, " "), MapInfo[totemMapIds[5]], totemInfo[0][5], 5));
     }
     return worship;
 }
