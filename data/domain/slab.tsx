@@ -78,6 +78,9 @@ export const customHandCraftedListOfUnobtainableItems = [
     "DungEquipmentRings4",
     "TalentPoint5",
     "Quest31",
+    "EquipmentShoes2",
+    "EquipmentCape7",
+    "Trophy7",
 ];
 
 export default function parseSlab(lootedInfo: string[], allItems: Item[]) {
