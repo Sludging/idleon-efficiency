@@ -91,6 +91,7 @@ export default function parseAtomCollider(atomsData: number[], divinityData: num
     return collider;
 }
 
+// Currently all data only requires parsing, can be very high on post processing list.
 export function updateAtomCollider(data: Map<string, any>) {
     const collider = data.get("collider") as AtomCollider;
     const optLacc = data.get("OptLacc");
