@@ -1,4 +1,7 @@
 import { lavaFunc, range } from '../utility'
+import { Alchemy } from './alchemy';
+import { AtomCollider } from './atomCollider';
+import { Bribe, BribeConst, BribeStatus } from './bribes';
 import { ImageData } from './imageData';
 import { Item } from './items';
 import { Lab } from './lab';
@@ -24,43 +27,45 @@ export class Stamp {
     name: string;
     level: number = 0;
     maxLevel: number = 0;
-    icon: string;
     type: string; // todo: enum
     bonus: string;
     data: StampDataModel;
 
     materialItem: Item | undefined = undefined;
 
+    // Update field
     multiplier: number = 1;
-    matCostDiscount: number = 0;
+    sigilDiscount: number = 0;
+    hasBribe: boolean = false;
+    vialDiscount: number = 0;
+    atomDiscount: number = 0;
 
     constructor(name: string, raw_name: string, type: string, bonus: string, data: StampDataModel) {
         this.raw_name = raw_name;
-        this.icon = `/icons/assets/data/${raw_name}.png`;
         this.name = name.replace("_", " ");
         this.type = type;
         this.bonus = bonus;
         this.data = data;
     }
 
-    getGoldCost = (hasBribe: boolean = false, blueFlavPercent: number = 0, level: number = this.level): number => {
-        const goldCost = this.data.startingCost * Math.pow(this.data.cCostExp - (level / (level + 5 * this.data.upgradeInterval)) * 0.25, level * (10 / this.data.upgradeInterval)) * Math.max(0.1, 1 - blueFlavPercent);
-        if (hasBribe) {
+    getGoldCost = (level: number = this.level): number => {
+        const goldCost = this.data.startingCost * Math.pow(this.data.cCostExp - (level / (level + 5 * this.data.upgradeInterval)) * 0.25, level * (10 / this.data.upgradeInterval)) * Math.max(0.1, 1 - this.vialDiscount / 100);
+        if (this.hasBribe) {
             //TODO: Make this math less... hard coded?
             return goldCost * 0.92;
         }
         return goldCost
     }
 
-    getGoldCostToMax = (hasBribe: boolean = false, blueFlavPercent: number = 0): number => {
+    getGoldCostToMax = (): number => {
         const maxLevel = this.level == this.maxLevel ? this.level + this.data.upgradeInterval : this.maxLevel
-        return range(this.level, maxLevel).reduce((sum, level) => sum += this.getGoldCost(hasBribe, blueFlavPercent, level), 0);
+        return range(this.level, maxLevel).reduce((sum, level) => sum += this.getGoldCost(level), 0);
     }
 
-    getMaterialCost = (blueFlavPercent: number = 0): number => {
-        const matDiscount = 1 / (1 + (this.matCostDiscount / 100));
+    getMaterialCost = (): number => {
+        const matDiscount = Math.max(0.1, 1 - this.atomDiscount / 100) * (1 / (1 + (this.sigilDiscount / 100)));
         const baseCost = this.data.startV * matDiscount * Math.pow(this.data.mCostExp, Math.pow(Math.round(this.level / this.data.upgradeInterval) - 1, 0.8));
-        return Math.floor(baseCost) * Math.max(0.1, 1 - blueFlavPercent);
+        return Math.floor(Math.floor(baseCost) * Math.max(0.1, 1 - this.vialDiscount / 100));
     }
 
     getBonusText = (skillLevel: number = 0): string => {
@@ -124,7 +129,7 @@ export default function parseStamps(rawData: Array<any>, maxData: Array<any>, al
     if (rawData) {
         rawData.forEach((tab, index) => { // for each tab in the cloud save
             Object.entries(tab).map(([key, value]) => { // for each stamp in the current tab
-                if (key.toLowerCase() !== "length") {  // ignroe length at the end
+                if (key.toLowerCase() !== "length") {  // ignore length at the end
                     try {
                         stampData[index][parseInt(key)].level = value as number; // update our pre-populated data with the stamp level
                         stampData[index][parseInt(key)].maxLevel = maxData[index][key] as number;
@@ -145,6 +150,9 @@ export function updateStamps(data: Map<string, any>) {
     const stamps = data.get("stamps") as Stamp[][];
     const lab = data.get("lab") as Lab;
     const sigils = data.get("sigils") as Sigils;
+    const bribes = data.get("bribes") as Bribe[];
+    const alchemy = data.get("alchemy") as Alchemy;
+    const collider = data.get("collider") as AtomCollider;
 
     if (lab.bonuses.find(bonus => bonus.name == "Certified Stamp Book")?.active ?? false) {
         const allButMisc = stamps.flatMap(tab => tab).filter(stamp => stamp.type != "Misc Stamp");
@@ -153,8 +161,13 @@ export function updateStamps(data: Map<string, any>) {
         })
     }
 
+    const discountBribe = bribes[BribeConst.StampBribe];
+    const vialDiscount = alchemy.getVialBonusForKey("MatCostStamp");
     stamps.flatMap(tab => tab).forEach(stamp => {
-        stamp.matCostDiscount = sigils.sigils[6].getBonus();
+        stamp.sigilDiscount = sigils.sigils[6].getBonus();
+        stamp.atomDiscount = collider.atoms[0].getBonus();
+        stamp.vialDiscount = vialDiscount;
+        stamp.hasBribe = discountBribe.status == BribeStatus.Purchased;
     })
 
     return stamps;

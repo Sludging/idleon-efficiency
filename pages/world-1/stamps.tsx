@@ -11,20 +11,19 @@ import { useEffect, useState, useContext, useMemo } from 'react';
 import { AppContext } from '../../data/appContext';
 import { getCoinsArray, nFormatter } from '../../data/utility'
 import CoinsDisplay from "../../components/coinsDisplay";
-import { Alchemy, AlchemyConst } from "../../data/domain/alchemy";
-import { Bribe, BribeConst, BribeStatus } from "../../data/domain/bribes";
 import styled from 'styled-components'
 import { NextSeo } from 'next-seo';
 import { Item } from "../../data/domain/items";
 import ItemSourcesDisplay from "../../components/base/ItemSourceDisplay";
 import TipDisplay, { TipDirection } from "../../components/base/TipDisplay";
 import IconImage from "../../components/base/IconImage";
+import TextAndLabel from "../../components/base/TextAndLabel";
 
 const ShadowBox = styled(Box)`
     box-shadow: -7px 8px 16px 0 rgba(0,0,0,0.17)
 `
 
-function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stamp, index: number, blueFlavPercent: number, hasBribe: boolean }) {
+function StampDisplay({ stamp, index }: { stamp: Stamp, index: number }) {
     const size = useContext(ResponsiveContext)
     const appContext = useContext(AppContext);
     const theData = appContext.data.getData();
@@ -37,7 +36,7 @@ function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stam
                 return <Box>
                     <Text size="small">Bonus: {stamp.getBonusText()}</Text>
                     <ItemSourcesDisplay sources={stampItem.sources} />
-                </Box> 
+                </Box>
             }
             else {
                 return <Box>Unobtainable</Box>
@@ -46,9 +45,9 @@ function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stam
         return (
             <Box gap="small">
                 <Text size="small">Bonus: {stamp.getBonusText()}</Text>
-                {stamp.isMaxLevel() && <Box direction="row" align="center"><Text size="small">Material Cost: {nFormatter(stamp.getMaterialCost(blueFlavPercent))}</Text><IconImage data={(stamp.materialItem as Item).getImageData()} /></Box>}
-                <Box direction="row" gap="small"><Text size="small">Cost: </Text><CoinsDisplay coinMap={getCoinsArray(stamp.getGoldCost(hasBribe, blueFlavPercent))} maxCoins={3} /></Box>
-                <Box direction="row" gap="small"><Text size="small">Cost to next tier: </Text><CoinsDisplay coinMap={getCoinsArray(stamp.getGoldCostToMax(hasBribe, blueFlavPercent))} maxCoins={3} /></Box>
+                {stamp.isMaxLevel() && <Box direction="row" align="center"><Text size="small">Material Cost: {nFormatter(stamp.getMaterialCost())}</Text><IconImage data={(stamp.materialItem as Item).getImageData()} /></Box>}
+                <Box direction="row" gap="small"><Text size="small">Cost: </Text><CoinsDisplay coinMap={getCoinsArray(stamp.getGoldCost())} maxCoins={3} /></Box>
+                <Box direction="row" gap="small"><Text size="small">Cost to next tier: </Text><CoinsDisplay coinMap={getCoinsArray(stamp.getGoldCostToMax())} maxCoins={3} /></Box>
             </Box>
         )
     }
@@ -64,7 +63,7 @@ function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stam
                 size="medium"
                 visibility={stamp.name == "Blank" || stamp.name == "FILLER" ? 'none' : undefined}
             >
-                <Box direction="row" align="center" gap="xsmall" style={{opacity: stamp.level > 0 ? 1 : 0.2}}>
+                <Box direction="row" align="center" gap="xsmall" style={{ opacity: stamp.level > 0 ? 1 : 0.2 }}>
                     <IconImage data={stamp.getImageData()} scale={0.4} />
                     <Text size="small">{stamp.level}</Text>
                 </Box>
@@ -73,17 +72,20 @@ function StampDisplay({ stamp, index, blueFlavPercent, hasBribe }: { stamp: Stam
     )
 }
 
-function StampTab({ tab, index, blueFlavPercent, hasBribe }: { tab: Stamp[], index: number, blueFlavPercent: number, hasBribe: boolean }) {
+function StampTab({ tab, index }: { tab: Stamp[], index: number }) {
+    const tabLevel = tab.reduce((sum, stamp) => sum += stamp.level, 0);
     return (
         <Box pad="small">
-            <h3>{tab[0].type}</h3>
+            <Box margin={{ bottom: 'small' }}>
+                <Text size="small">{tab[0].type.replace("Stamp", "")} ({tabLevel}) </Text>
+            </Box>
             <Box fill>
                 <Grid columns={{ count: 4, size: "auto" }} gap="none">
                     {
                         tab.filter(stamp => stamp.name != "FILLER").map((stamp: Stamp) => {
                             if (stamp != undefined) {
                                 return (
-                                    <StampDisplay key={`tab_${index}_${stamp.raw_name}`} stamp={stamp} index={index} blueFlavPercent={blueFlavPercent} hasBribe={hasBribe} />
+                                    <StampDisplay key={`tab_${index}_${stamp.raw_name}`} stamp={stamp} index={index} />
                                 )
                             }
                         })
@@ -96,28 +98,17 @@ function StampTab({ tab, index, blueFlavPercent, hasBribe }: { tab: Stamp[], ind
 
 function Stamps() {
     const [stampData, setStampData] = useState<Stamp[][]>();
-    const [hasBribe, setHasBribe] = useState<BribeStatus>(BribeStatus.Available);
-    const [blueFlavPercent, setBlueFlavPercent] = useState<number>(0);
     const appContext = useContext(AppContext);
 
     useEffect(() => {
         if (appContext.data.getData().size > 0) {
             const theData = appContext.data.getData();
             setStampData(theData.get("stamps"));
-
-            const alchemy = theData.get("alchemy") as Alchemy;
-            const blueFlavPower = alchemy?.vials[AlchemyConst.BlueFlav].getBonus() ?? 0;
-            setBlueFlavPercent(blueFlavPower / 100); // divide by 100 to get the %.
-
-            const bribes = theData.get("bribes") as Bribe[];
-            if (bribes) {
-                setHasBribe(bribes[BribeConst.StampBribe].status);
-            }
         }
     }, [appContext, stampData])
 
     const totalLevels = useMemo(() => {
-        return stampData?.flatMap(tab => tab).reduce((sum, stamp) => sum += stamp.level, 0);
+        return stampData?.flatMap(tab => tab).reduce((sum, stamp) => sum += stamp.level, 0) ?? 0;
     }, [stampData])
 
     if (stampData && stampData.flatMap(tab => tab).filter(stamp => stamp.level > 0).length == 0) {
@@ -127,23 +118,33 @@ function Stamps() {
             </Box>
         )
     }
+
+    if (!stampData) {
+        return (
+            <Box align="center" pad="medium">
+                <Heading level='3'>Loading or something is wrong!</Heading>
+            </Box>
+        )
+    }
+
     return (
         <Box>
             <NextSeo title="Stamps" />
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Stamps</Heading>
-            <Box margin={{ bottom: 'small' }}>
-                <Text>Total levels: {totalLevels}</Text>
+            <Box direction="row" gap="medium">
+                <TextAndLabel label="Total Levels" text={totalLevels?.toString()} margin={{ bottom: 'small' }} />
+                <TextAndLabel label="Atom Discount" text={`${stampData[0][0].atomDiscount}%`} margin={{ bottom: 'small' }} />
             </Box>
             <ShadowBox flex={false} background="dark-1" pad="small">
                 <Grid columns={{ size: '300px' }} gap="none">
                     {
                         stampData && stampData.map((tab, index) => {
-                            return (<StampTab key={`tab_${index}`} tab={tab} index={index} blueFlavPercent={blueFlavPercent} hasBribe={hasBribe == BribeStatus.Purchased} />)
+                            return (<StampTab key={`tab_${index}`} tab={tab} index={index} />)
                         })
                     }
                 </Grid>
             </ShadowBox>
-        </Box>
+        </Box >
     )
 }
 
