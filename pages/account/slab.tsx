@@ -17,7 +17,7 @@ import { NoteModel } from '../../data/domain/model/noteModel';
 
 
 
-function ItemSourcesDisplay({ sources, notes }: { sources: SourcesModel, notes: NoteModel }) {
+function ItemSourcesDisplay({ sources, notes }: { sources: SourcesModel, notes: NoteModel | undefined }) {
 
     const possibleSources = useMemo(() => {
         if (!sources) {
