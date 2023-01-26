@@ -65,6 +65,7 @@ export class Meal {
     timeToDiamond: number = 0;
     timeToPurple: number = 0;
     timeToVoid: number = 0;
+    timeToThirty: number = 0;
 
     // Void plate achivement
     reducedCostToUpgrade: boolean = false;
@@ -132,6 +133,14 @@ export class Meal {
     getCostsTillVoid = () => {
         let totalCost = 0;
         for (let level of range(this.level, 21)) {
+            totalCost += this.getMealLevelCost(level);
+        }
+        return totalCost;
+    }
+
+    getCostsTillThirty = () => {
+        let totalCost = 0;
+        for (let level of range(this.level, 29)) {
             totalCost += this.getMealLevelCost(level);
         }
         return totalCost;
@@ -456,6 +465,7 @@ export const updateCooking = (data: Map<string, any>) => {
         meal.timeToDiamond = ((meal.getCostsTillDiamond() - meal.count) * meal.cookReq) / cookingSpeed;
         meal.timeToPurple = ((meal.getCostsTillPurple() - meal.count) * meal.cookReq) / cookingSpeed;
         meal.timeToVoid = ((meal.getCostsTillVoid() - meal.count) * meal.cookReq) / cookingSpeed;
+        meal.timeToThirty = ((meal.getCostsTillThirty() - meal.count) * meal.cookReq) / cookingSpeed;
 
         meal.timeToNext = ((meal.getMealLevelCost() - meal.count) * meal.cookReq) / cookingSpeed;
         meal.ladlesToLevel = Math.ceil((((meal.getMealLevelCost() - meal.count) * meal.cookReq) / cookingSpeed));
@@ -470,6 +480,9 @@ export const updateCooking = (data: Map<string, any>) => {
         }
         else if (meal.timeToVoid > 0) {
             milestoneCosts = meal.getCostsTillVoid();
+        }
+        else if (meal.timeToThirty > 0) {
+            milestoneCosts = meal.getCostsTillThirty();
         }
         if (milestoneCosts > 0) {
             meal.ladlesToNextMilestone = Math.ceil((((milestoneCosts - meal.count) * meal.cookReq) / cookingSpeed));
