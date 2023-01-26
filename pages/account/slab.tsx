@@ -55,7 +55,6 @@ function Slab() {
     const [slabInfo, setSlabInfo] = useState<SlabDomain>();
     const [onlyMissing, setOnlyMissing] = useState<boolean>(false);
     const [onlyLooted, setOnlyLooted] = useState<boolean>(false);
-    const [onlyUnk, setOnlyUnk] = useState<boolean>(false);
     const appContext = useContext(AppContext);
 
     const missingItems = useMemo(() => {
@@ -64,14 +63,6 @@ function Slab() {
         }
 
         return slabInfo.obtainableItems.filter(item => !item.obtained).filter(item => !customHandCraftedListOfUnobtainableItems.includes(item.internalName));
-    }, [slabInfo]);
-
-    const unknownItems = useMemo(() => {
-        if (!slabInfo) {
-            return [];
-        }
-
-        return slabInfo.obtainableItems.filter(item => item.sources?.questAss?.length == 0 && item.sources?.recipeFrom?.length == 0 && item.sources?.sources?.length == 0);
     }, [slabInfo]);
 
     const obtainedItems = useMemo(() => {
@@ -111,16 +102,11 @@ function Slab() {
                     label="Show only looted"
                     onChange={(event) => { setOnlyLooted(event.target.checked); setOnlyMissing(false); }}
                 />
-                <CheckBox
-                    checked={onlyUnk}
-                    label="Show only unknown"
-                    onChange={(event) => { setOnlyUnk(event.target.checked); setOnlyMissing(false); }}
-                />
             </Box>
             <Box pad="small">
                 <Grid columns={{ size: "36px" }} gap="small">
                     {
-                        !onlyUnk && !onlyMissing && !onlyLooted && slabInfo.obtainableItems.map((item, index) => (
+                        !onlyMissing && !onlyLooted && slabInfo.obtainableItems.map((item, index) => (
                             <Box key={index} style={{ opacity: item.obtained ? 1 : 0.5 }}>
                                 <IconImage data={item.getImageData()} scale={item.getImageData().width > 36 ? 0.5 : 1} />
                             </Box>
@@ -128,23 +114,6 @@ function Slab() {
                     }
                     {
                         onlyMissing && missingItems.map((item, index) => (
-                            <Box key={index}>
-                                <TipDisplay
-                                    heading={`${item.displayName} (${item.type})`}
-                                    body={<ItemSourcesDisplay sources={item.sources} notes={item.data.notes} />}
-                                    size={"large"}
-                                    direction={TipDirection.Down}
-                                    maxWidth="large"
-                                >
-                                    <Box>
-                                        <IconImage data={item.getImageData()} scale={item.getImageData().width > 36 ? 0.5 : 1} />
-                                    </Box>
-                                </TipDisplay>
-                            </Box>
-                        ))
-                    }
-                    {
-                        onlyUnk && unknownItems.map((item, index) => (
                             <Box key={index}>
                                 <TipDisplay
                                     heading={`${item.displayName} (${item.type})`}
