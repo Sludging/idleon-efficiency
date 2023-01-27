@@ -715,7 +715,7 @@ export const updatePlayers = (data: Map<string, any>) => {
     const bearGod = divinity.gods[1];
     bearGod.linkedPlayers.forEach(linkedPlayer => {
         const bearBonus = Math.ceil(bearGod.getMinorLinkBonus(linkedPlayer));
-        linkedPlayer.talents.filter(talent => ![149, 374, 539].includes(talent.skillIndex) && talent.skillIndex <= 614 && talent.level > 0)
+        linkedPlayer.talents.filter(talent => talent.skillIndex <= 614 && talent.level > 0)
         .forEach(talent => {
             talent.level += bearBonus;
             talent.maxLevel += bearBonus;
