@@ -1,6 +1,11 @@
+import { Alchemy } from "./alchemy";
 import { initRefineryCostRepo } from "./data/RefineryCostRepo";
 import { Item } from "./items";
+import { Lab } from "./lab";
 import { ComponentModel } from "./model/componentModel";
+import { SaltLick } from "./saltLick";
+import { Sigils } from "./sigils";
+import { getStampBonusForKey, Stamp } from "./stamps";
 
 const RankToPowerCap = "50 50 200 800 3000 8000 14000 20000 30000 40000 50000 65000 80000 100000 200000 300000 400000 500000 600000 700000 800000 900000 1000000 1000000 1000000 1000000".split(" ");
 
@@ -107,11 +112,14 @@ export class RefineryStorage {
     constructor(public name: string, public quantity: number) {}
 }
 
+export class CycleInfo {
+    constructor(public name: string, public cycleTime: number, public timePast: number) {}
+}
+
 export class Refinery {
     salts: Record<string, SaltStatus> = {}
     storage: RefineryStorage[] = []
-    timePastCombustion: number = 0
-    timePastSynthesis: number = 0
+    cycleInfo: Record<string, CycleInfo> = {}
 }
 
 export default function parseRefinery(rawData: any[][]) {
@@ -119,8 +127,10 @@ export default function parseRefinery(rawData: any[][]) {
     const costRepo = initRefineryCostRepo();
     if (rawData.length > 0) {
         const unlockedSalts = rawData[0][0];
-        toReturn.timePastCombustion = rawData[0][1];
-        toReturn.timePastSynthesis = rawData[0][2];
+        
+        // Init cycle time as max time (900), will be updated in post processing to match reduced values.
+        toReturn.cycleInfo["Combustion"] = new CycleInfo("Combustion", 900, rawData[0][1]);
+        toReturn.cycleInfo["Synthesis"] = new CycleInfo("Synthesis", 900, rawData[0][2]);
         rawData[1].forEach((salt, index) => {
             if (salt != "Blank") {
                 toReturn.storage.push(new RefineryStorage(salt, rawData[2][index]));
@@ -139,4 +149,29 @@ export default function parseRefinery(rawData: any[][]) {
         })
     }
     return toReturn;
+}
+
+// Nothing depends on this, can be last.
+export function updateRefinery(data: Map<string, any>) {
+    const refinery = data.get("refinery") as Refinery;
+    const lab = data.get("lab") as Lab;
+    const sigils = data.get("sigils") as Sigils;
+    const alchemy = data.get("alchemy") as Alchemy;
+    const saltLick = data.get("saltLick") as SaltLick; 
+    const stamps = data.get("stamps") as Stamp[][];
+    const lastUpdated = data.get("lastUpdated") as Date;
+
+    const labCycleBonus = lab.bonuses.find(bonus => bonus.name == "Gilded Cyclical Tubing")?.active ?? false ? 3 : 1;
+    const vialBonus = alchemy.getVialBonusForKey("RefSpd");
+    const saltLickBonus = saltLick.getBonus(2);
+    const secondsSinceUpdate = (new Date().getTime() - lastUpdated.getTime()) / 1000;
+    const stampBonus = getStampBonusForKey(stamps, "RefinerySpd");
+
+    refinery.cycleInfo["Combustion"].cycleTime = Math.ceil((900 * Math.pow(4, 0)) / ((1 + (vialBonus + saltLickBonus + sigils.sigils[10].getBonus() + stampBonus) / 100) * labCycleBonus));
+    refinery.cycleInfo["Combustion"].timePast += secondsSinceUpdate;
+
+    refinery.cycleInfo["Synthesis"].cycleTime =Math.ceil((900 * Math.pow(4, 1)) / ((1 + (vialBonus + saltLickBonus + sigils.sigils[10].getBonus() + stampBonus) / 100) * labCycleBonus));
+    refinery.cycleInfo["Synthesis"].timePast += secondsSinceUpdate;
+
+    return refinery;
 }
