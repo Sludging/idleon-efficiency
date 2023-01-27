@@ -48,37 +48,12 @@ function RefineryDisplay() {
     const [refineryData, setRefineryData] = useState<Refinery>();
     const [storage, setStorage] = useState<Storage>();
     const [itemData, setItemData] = useState<Item[]>();
-    const [saltLickData, setSaltLickData] = useState<SaltLick>();
-    const [alchemyData, setAlchemyData] = useState<Alchemy>();
     const [taskboardData, setTaskboardData] = useState<TaskBoard>();
     const [lastUpdated, setLastUpdated] = useState<Date | undefined>();
     const [squirePowha, setSquirePowha] = useState<boolean>(false);
     const [printer, setPrinter] = useState<Printer>();
     const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
-
-    const cycleInfo = useMemo(() => {
-        if (!refineryData) {
-            return [];
-        }
-        const lab = appContext.data.getData().get("lab") as Lab;
-        const sigils = appContext.data.getData().get("sigils") as Sigils;
-        const labCycleBonus = lab?.bonuses.find(bonus => bonus.name == "Gilded Cyclical Tubing")?.active ?? false ? 3 : 1;
-        const vialBonus = alchemyData?.vials.find((vial) => vial.description.includes("Refinery Cycle Speed"))?.getBonus() ?? 0;
-        const saltLickBonus = saltLickData?.getBonus(2) ?? 0;
-        const secondsSinceUpdate = (new Date().getTime() - (lastUpdated?.getTime() ?? 0)) / 1000;
-
-        const toReturn = [
-            { name: "Combustion", time: Math.ceil((900 * Math.pow(4, 0)) / ((1 + (vialBonus + saltLickBonus + sigils.sigils[10].getBonus()) / 100) * labCycleBonus)), timePast: refineryData.timePastCombustion + secondsSinceUpdate }
-        ];
-
-        if (Object.keys(refineryData.salts).length > 3) {
-            toReturn.push(
-                { name: "Synthesis ", time: Math.ceil((900 * Math.pow(4, 1)) / ((1 + (vialBonus + saltLickBonus + sigils.sigils[10].getBonus()) / 100) * labCycleBonus)), timePast: refineryData.timePastSynthesis + secondsSinceUpdate }
-            );
-        }
-        return toReturn;
-    }, [refineryData, saltLickData, alchemyData]);
 
     const squireInfo = useMemo(() => {
         const squires = playerData?.filter(player => (player.classId == ClassIndex.Squire || player.classId == ClassIndex.Divine_Knight));
@@ -95,7 +70,8 @@ function RefineryDisplay() {
                         currentCooldowns.push([squire, squire.getCurrentCooldown(130)]);
                     });
                     let totalWait = 0;
-                    let timeToNextRank = info.getTimeToNextRank(cycleInfo[Math.floor(index / 3)].time);
+                    const refineryCycle = Math.floor(index / 3) == 0 ? refineryData.cycleInfo["Combustion"] : refineryData.cycleInfo["Synthesis"];
+                    let timeToNextRank = info.getTimeToNextRank(refineryCycle.cycleTime);
                     while (timeToNextRank > 0) {
                         const nextCDTime = Math.min(...currentCooldowns.map(cooldowns => cooldowns[1]));
                         if (timeToNextRank > nextCDTime) {
@@ -107,7 +83,7 @@ function RefineryDisplay() {
                                     const manaBox = squire.postOffice.find(box => box.name == "Magician Starterpack");
                                     const cdReduction = manaBox?.bonuses[2].getBonus(manaBox.level, 2) ?? 0;
                                     originalArray[squireIndex][1] = Math.floor((1 - cdReduction / 100) * 72000);
-                                    const timePerSquireSkilluse = (squire.talents.find(talent => talent.skillIndex == 130)?.getBonus(false, false, true) ?? 0) * cycleInfo[Math.floor(index / 3)].time
+                                    const timePerSquireSkilluse = (squire.talents.find(talent => talent.skillIndex == 130)?.getBonus(false, false, true) ?? 0) * refineryCycle.cycleTime
                                     timeToNextRank -= timePerSquireSkilluse;
                                     if (timeToNextRank < 0) {
                                         timeToNextRank = 0;
@@ -132,7 +108,7 @@ function RefineryDisplay() {
 
         return [];
 
-    }, [squireInfo, refineryData, cycleInfo, squirePowha])
+    }, [squireInfo, refineryData, squirePowha])
 
     const saltMeritLevel = useMemo(() => {
         const saltMerit = taskboardData?.merits.find(merit => merit.descLine1 == "Refinery Salt Costs don't scale beyond");
@@ -147,8 +123,6 @@ function RefineryDisplay() {
             setRefineryData(theData.get("refinery"));
             setItemData(theData.get("itemsData"));
             setStorage(theData.get("storage"));
-            setSaltLickData(theData.get("saltLick"));
-            setAlchemyData(theData.get("alchemy"));
             setPlayerData(theData.get("players"));
             setTaskboardData(theData.get("taskboard"));
             setPrinter(theData.get("printer"));
@@ -167,15 +141,16 @@ function RefineryDisplay() {
         <Box gap="medium">
             <Box direction="row" wrap justify="center">
                 {
-                    cycleInfo.map((cycle, index) => {
+                    Object.entries(refineryData.cycleInfo).map(([_, cycleInfo], index) => {
+                        console.log(cycleInfo.name, cycleInfo);
                         return (
                             <ShadowBox margin={{ right: 'large', bottom: 'small' }} background="dark-1" key={index} gap="xsmall" pad="medium" align="center">
-                                <TextAndLabel center textSize='xsmall' labelSize='medium' text='Next cycle in' label={cycle.name} />
+                                <TextAndLabel center textSize='xsmall' labelSize='medium' text='Next cycle in' label={cycleInfo.name} />
                                 <Box>
-                                    <TimeDown addSeconds={cycle.time - cycle.timePast} resetToSeconds={cycle.time} />
+                                    <TimeDown addSeconds={cycleInfo.cycleTime - cycleInfo.timePast} resetToSeconds={cycleInfo.cycleTime} />
                                 </Box>
                                 <Text margin={{ top: 'small' }} color="accent-3" size="12px">* Might be off by a few seconds.</Text>
-                                <Text color="accent-3" size="12px">Max cycle is: {toTime(cycle.time)}</Text>
+                                <Text color="accent-3" size="12px">Max cycle is: {toTime(cycleInfo.cycleTime)}</Text>
                             </ShadowBox>
                         )
                     })
@@ -234,9 +209,10 @@ function RefineryDisplay() {
                         const inChestStorage = storage?.chest.find((item) => item.internalName == storageItem.internalName)
                         storageItem.count = (inSaltStorage?.quantity ?? 0) + (inChestStorage?.count ?? 0);
                     });
+                    const refineryCycle = Math.floor(index / 3) == 0 ? refineryData.cycleInfo["Combustion"] : refineryData.cycleInfo["Synthesis"];
                     const secondsSinceUpdate = (new Date().getTime() - (lastUpdated?.getTime() ?? 0)) / 1000;
-                    const fuelTime = info.getFuelTime(storageItems, [], index <= saltMeritLevel) * cycleInfo[Math.floor(index / 3)].time - secondsSinceUpdate;
-                    const timeToNextRank = info.getTimeToNextRank(cycleInfo[Math.floor(index / 3)].time) - secondsSinceUpdate;
+                    const fuelTime = info.getFuelTime(storageItems, [], index <= saltMeritLevel) * refineryCycle.cycleTime - secondsSinceUpdate;
+                    const timeToNextRank = info.getTimeToNextRank(refineryCycle.cycleTime) - secondsSinceUpdate;
 
                     if (saltItem) {
                         return (
@@ -302,7 +278,7 @@ function RefineryDisplay() {
                                                     info.baseCost && info.baseCost.map((costData, costIndex) => {
                                                         const costItem = itemData?.find((item) => item.internalName == costData.item);
                                                         const itemCost = costData.quantity * info.getCostMulti(costData.item.includes("Refinery"), index <= saltMeritLevel);
-                                                        const cyclesPerHour = Math.ceil(3600 / cycleInfo[Math.floor(index / 3)].time);
+                                                        const cyclesPerHour = Math.ceil(3600 / refineryCycle.cycleTime);
                                                         const isSalt = costItem?.internalName.includes("Refinery");
                                                         const currentPrinting = printer?.GetTotalActive(costData.item) ?? 0;
                                                         if (costItem != undefined) {

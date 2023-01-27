@@ -105,6 +105,10 @@ export class Stamp {
     }
 }
 
+export const getStampBonusForKey = (stamps: Stamp[][], key: string) => {
+    return stamps.flatMap(tab => tab).filter(stamp => stamp.data.effect == key).reduce((sum, stamp) => sum += stamp.getBonus(), 0);
+}
+
 const isStampItem = (x: BaseItemModel): x is StampItemModel => "stampData" in x
 
 const initStamps = (allItems: Item[]): Stamp[][] => {
