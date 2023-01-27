@@ -1,20 +1,46 @@
+import { range } from "../utility";
 import { Lab } from "./lab";
 
-interface PlayerInfo {
-    samples: { item: string, quantity: number }[]
-    active: { item: string, quantity: number }[]
-    inLab: boolean;
+export class Sample {
+    inLab: boolean = false;
+    harriep: boolean = false;
+    // Number of slots printing this sample.
+    printing: number = 0;
+
+    printingQuantity: number = 0;
+
+    constructor(public item: string, public quantity: number) {}
+
+    getSampleQuantity = (base: boolean = true) => {
+        // If we want base amount, or if the sample isn't actively printing. Just return the raw sample number.
+        if (base || !this.printing) {
+            return this.quantity;
+        }
+
+        // Else do math to figure out the boost from lab / harriep.
+        let baseQuantity = this.printingQuantity;
+        baseQuantity *= this.inLab ? 2 : 1;
+        baseQuantity *= this.harriep ? 3 : 1;
+        return baseQuantity;
+    }
+
+    isOutdatedPrint = () => {
+        return this.printingQuantity < this.quantity;
+    }
+}
+
+export class PlayerInfo {
+    constructor(public samples: Sample[]) {}
 }
 
 export class Printer {
-    playerInfo: PlayerInfo[] = [];
+    // 2d array of players and their 5 samples.
+    samples: Sample[][] = [];
 
     GetTotalActive = (itemName: string): number => {
-        return this.playerInfo.reduce<number>((total, player) => {
-            const activeSamples = player.active.filter(sample => sample.item == itemName).map(sample => sample.quantity);
-            total += activeSamples.reduce((sum, sample) => sum += player.inLab ? sample * 2 : sample, 0);
-            return total;
-        }, 0)
+        return this.samples.flatMap(sample => sample)
+        .filter(sample => sample.item == itemName && sample.printing)
+        .reduce((total, sample) => total += sample.getSampleQuantity(false), 0);
     }
 }
 
@@ -22,17 +48,19 @@ export default function parsePrinter(rawData: any[], charCount: number) {
     const toReturn = new Printer();
     if (rawData) {
         [...Array(charCount)].forEach((_, playerIndex) => {
-            const samples: { item: string, quantity: number }[] = [];
-            [...Array(5)].forEach((_, sampleIndex) => {
-                samples.push({ item: rawData[5 + (sampleIndex * 2) + (playerIndex * 14)], quantity: rawData[6 + (sampleIndex * 2) + (playerIndex * 14)] })
+            const samples: Sample[] = [];
+            range(0, 5).forEach(sampleIndex => {
+                samples.push(new Sample(rawData[5 + (sampleIndex * 2) + (playerIndex * 14)], rawData[6 + (sampleIndex * 2) + (playerIndex * 14)]));
+            });
+
+            range(0,2).forEach(activeIndex => {
+                const printingItem = rawData[5 + 10 + (activeIndex * 2) + (playerIndex * 14)];
+                const matchingSample = samples.find(sample => sample.item == printingItem);
+                matchingSample!.printingQuantity = rawData[6 + 10 + (activeIndex * 2) + (playerIndex * 14)];
+                matchingSample!.printing += 1;
             })
 
-            const active: { item: string, quantity: number }[] = [];
-            [...Array(2)].forEach((_, printerIndex) => {
-                active.push({ item: rawData[5 + 10 + (printerIndex * 2) + (playerIndex * 14)], quantity: rawData[6 + 10 + (printerIndex * 2) + (playerIndex * 14)] })
-            })
-
-            toReturn.playerInfo.push({ samples: samples, active: active, inLab: false });
+            toReturn.samples[playerIndex] = samples;
         })
     }
     return toReturn;
@@ -45,7 +73,7 @@ export const updatePrinter = (data: Map<string, any>) => {
     // if double printer
     if (lab.bonuses[1].active) {
         lab.playersInTubes.forEach(player => {
-            printer.playerInfo[player.playerID].inLab = true
+            printer.samples[player.playerID].forEach(sample => sample.inLab = true);
         })
     }
 
