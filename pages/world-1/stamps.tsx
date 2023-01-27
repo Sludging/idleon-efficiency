@@ -18,6 +18,7 @@ import ItemSourcesDisplay from "../../components/base/ItemSourceDisplay";
 import TipDisplay, { TipDirection } from "../../components/base/TipDisplay";
 import IconImage from "../../components/base/IconImage";
 import TextAndLabel from "../../components/base/TextAndLabel";
+import { AtomCollider } from "../../data/domain/atomCollider";
 
 const ShadowBox = styled(Box)`
     box-shadow: -7px 8px 16px 0 rgba(0,0,0,0.17)
@@ -100,6 +101,15 @@ function Stamps() {
     const [stampData, setStampData] = useState<Stamp[][]>();
     const appContext = useContext(AppContext);
 
+    const hasHydrogen = useMemo(() => {
+        if (appContext.data.getData().size > 0) {
+            const theData = appContext.data.getData();
+            const collider = theData.get("collider") as AtomCollider;
+            return collider.atoms[0].level > 0;
+        }
+        return false;
+    }, [appContext])
+
     useEffect(() => {
         if (appContext.data.getData().size > 0) {
             const theData = appContext.data.getData();
@@ -133,7 +143,7 @@ function Stamps() {
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Stamps</Heading>
             <Box direction="row" gap="medium">
                 <TextAndLabel label="Total Levels" text={totalLevels?.toString()} margin={{ bottom: 'small' }} />
-                <TextAndLabel label="Atom Discount" text={`${stampData[0][0].atomDiscount}%`} margin={{ bottom: 'small' }} />
+                {hasHydrogen && <TextAndLabel label="Atom Discount" text={`${stampData[0][0].atomDiscount}%`} margin={{ bottom: 'small' }} />}
             </Box>
             <ShadowBox flex={false} background="dark-1" pad="small">
                 <Grid columns={{ size: '300px' }} gap="none">
