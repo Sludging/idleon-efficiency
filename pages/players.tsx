@@ -932,7 +932,7 @@ function TalentDisplay({ player }: { player: Player }) {
                                     GetTalentArray(talentPage).map((originalTalent, index) => {
                                         const talent = player.talents.find(x => x.skillIndex == originalTalent.skillIndex);
                                         if (talent) {
-                                            const maxLeveLToShow = bookMaxLevel ? Math.max(100, talent.maxLevel - player.extraLevelsFromBear - player.extraLevelsFromTalent) : talent.maxLevel;
+                                            const maxLeveLToShow = bookMaxLevel && (![149, 374, 539].includes(talent.skillIndex) && talent.skillIndex <= 614) ? Math.max(100, talent.maxLevel - player.extraLevelsFromBear - player.extraLevelsFromTalent) : talent.maxLevel;
                                             return (
                                                 <Box key={index}>
                                                     <Tip

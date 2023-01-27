@@ -477,9 +477,9 @@ const parseTalents = (talentLevels: string, talentMaxLevels: string, player: Pla
 
     // Update players talents levels due to elite class level increase talents.
     const extraLevels = Math.floor(player.talents.filter(talent => [149, 374, 539].includes(talent.skillIndex)).reduce((sum, value) => sum += value.getBonus(), 0))
-    player.talents.filter(talent => ![149, 374, 539].includes(talent.skillIndex) && talent.skillIndex <= 614 && talent.level > 0)
+    player.talents.filter(talent => ![149, 374, 539].includes(talent.skillIndex) && talent.skillIndex <= 614)
         .forEach(talent => {
-            talent.level += extraLevels;
+            talent.level += talent.level > 0 ? extraLevels : 0;
             talent.maxLevel += extraLevels;
         });
     player.extraLevelsFromTalent = extraLevels;
@@ -715,9 +715,9 @@ export const updatePlayers = (data: Map<string, any>) => {
     const bearGod = divinity.gods[1];
     bearGod.linkedPlayers.forEach(linkedPlayer => {
         const bearBonus = Math.ceil(bearGod.getMinorLinkBonus(linkedPlayer));
-        linkedPlayer.talents.filter(talent => talent.skillIndex <= 614 && talent.level > 0)
+        linkedPlayer.talents.filter(talent => ![149, 374, 539].includes(talent.skillIndex) && talent.skillIndex <= 614)
         .forEach(talent => {
-            talent.level += bearBonus;
+            talent.level += talent.level > 0 ? bearBonus : 0;
             talent.maxLevel += bearBonus;
         });
         linkedPlayer.extraLevelsFromBear = bearBonus;
