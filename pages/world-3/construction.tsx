@@ -402,7 +402,7 @@ function PrinterDisplay() {
             return optLacc[125];
         }
         return 0;
-    }, [appContext]);
+    }, [appContext, printerArtifact]);
 
     const artifactBoost = useMemo(() => {
         if (printerArtifact) {
