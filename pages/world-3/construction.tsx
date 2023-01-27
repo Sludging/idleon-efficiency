@@ -21,11 +21,11 @@ import TabButton from '../../components/base/TabButton';
 import { Refinery } from '../../data/domain/refinery';
 import { Item } from '../../data/domain/items';
 import { Storage } from '../../data/domain/storage';
-import { nFormatter, toTime } from '../../data/utility';
+import { nFormatter, range, toTime } from '../../data/utility';
 import { SaltLick } from '../../data/domain/saltLick';
 import { Alchemy } from '../../data/domain/alchemy';
 import { StaticTime, TimeDisplaySize, TimeDown } from '../../components/base/TimeDisplay';
-import { Printer } from '../../data/domain/printer';
+import { PlayerInfo, Printer, Sample } from '../../data/domain/printer';
 import { Player } from '../../data/domain/player';
 import { CircleInformation, StatusWarning, Trash } from 'grommet-icons';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
@@ -142,7 +142,6 @@ function RefineryDisplay() {
             <Box direction="row" wrap justify="center">
                 {
                     Object.entries(refineryData.cycleInfo).map(([_, cycleInfo], index) => {
-                        console.log(cycleInfo.name, cycleInfo);
                         return (
                             <ShadowBox margin={{ right: 'large', bottom: 'small' }} background="dark-1" key={index} gap="xsmall" pad="medium" align="center">
                                 <TextAndLabel center textSize='xsmall' labelSize='medium' text='Next cycle in' label={cycleInfo.name} />
@@ -351,23 +350,29 @@ function RefineryDisplay() {
     )
 }
 
-function SampleBox({ sample, activeItem, itemData, inLab = false }: { sample: { item: string, quantity: number }, activeItem: { item: string, quantity: number } | undefined, itemData: Item[] | undefined, inLab?: boolean }) {
+function SampleBox({ sample, itemData, printing = false }: { sample: Sample, itemData: Item[] | undefined, printing: boolean }) {
+    if (sample.item == "Blank") {
+        return (
+            <Box border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} height={{ min: '82px', max: '82px' }} direction="row" align="center" justify="center">
+                <Box align="center" width={{ max: '100px', min: '100px' }} height={{ min: '82px', max: '82px' }} justify='center'>
+                    <Text size="xsmall" color="accent-3">Empty</Text>
+                </Box>
+            </Box>
+        )
+    }
+
     const sampleItem = itemData?.find((item) => item.internalName == sample.item);
     return (
         <Box border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} height={{ min: '82px', max: '82px' }} direction="row" align="center" justify="center">
-            {sample.item == "Blank" || !sample.item ?
-                <Box align="center" width={{ max: '100px', min: '100px' }} height={{ min: '82px', max: '82px' }} justify='center'>
-                    <Text size="xsmall" color="accent-3">Empty</Text>
-                </Box> :
-                <Box pad={{ vertical: 'small' }} align="center">
-                    <IconImage data={(sampleItem as Item).getImageData()} />
-                    <Text color={inLab == true ? 'blue-3' : activeItem ? 'green-1' : ''} size="small">{nFormatter(inLab ? sample.quantity * 2 : sample.quantity)}</Text>
-                </Box>
-            }
-            {activeItem && (activeItem?.quantity ?? 0) < sample.quantity &&
+            <Box pad={{ vertical: 'small' }} align="center">
+                <IconImage data={(sampleItem as Item).getImageData()} />
+                {printing && <Text color={sample.inLab == true ? 'blue-3' : ''} size="small">{nFormatter(sample.getSampleQuantity(false))}</Text>}
+                {!printing && <Text color={sample.printing > 0 ? 'green-1' : ''} size="small">{nFormatter(sample.getSampleQuantity(true))}</Text>}
+            </Box>
+            {sample.printing > 0 && sample.isOutdatedPrint() &&
                 <TipDisplay
                     heading='Active lower than sample'
-                    body={<Box><Text>You have a sample of {nFormatter(sample.quantity)} but only printing {nFormatter(activeItem.quantity)}.</Text><Text>Go update your printing!</Text></Box>}
+                    body={<Box><Text>You have a sample of {nFormatter(sample.quantity)} but only printing {nFormatter(sample.printingQuantity)}.</Text><Text>Go update your printing!</Text></Box>}
                     size='large'
                     direction={TipDirection.Down}
                 >
@@ -399,7 +404,7 @@ function PrinterDisplay() {
         return masteroes;
     }, [playerData])
 
-    if (!printerData || printerData.playerInfo.flatMap(player => [...player.samples, ...player.active]).filter(sample => sample.item != "Blank").length == 0) {
+    if (!printerData || Object.values(printerData.samples).flatMap(samples => samples).filter(sample => sample.item != "Blank").length == 0) {
         return (
             <Box align="center" pad="medium">
                 <Heading level='3'>Come back when you have some samples!</Heading>
@@ -443,17 +448,17 @@ function PrinterDisplay() {
                     </TableHeader>
                     <TableBody>
                         {
-                            printerData.playerInfo.map((playerInfo, index) => {
+                            Object.entries(printerData.samples).map(([playerIndex, samples]) => {
+                                const indexAsNumber = Number.parseInt(playerIndex);
                                 return (
-                                    <TableRow key={`player_${index}`}>
-                                        <TableCell>{playerData && playerData[index] && playerData[index].playerName}</TableCell>
+                                    <TableRow key={`player_${indexAsNumber}`}>
+                                        <TableCell>{playerData && playerData[indexAsNumber] && playerData[indexAsNumber].playerName}</TableCell>
                                         <TableCell>
                                             <Box direction="row">
                                                 {
-                                                    playerInfo.samples.map((sample, sampleIndex) => {
-                                                        const activeItem = playerInfo.active.find((activeItem) => activeItem.item == sample.item);
+                                                    samples.map((sample, sampleIndex) => {
                                                         return (
-                                                            <SampleBox key={`sample_${sampleIndex}`} activeItem={activeItem} sample={sample} itemData={itemData} />
+                                                            <SampleBox key={`sample_${sampleIndex}`} sample={sample} itemData={itemData} printing={false} />
                                                         )
                                                     })
                                                 }
@@ -462,11 +467,11 @@ function PrinterDisplay() {
                                         <TableCell>
                                             <Box direction="row">
                                                 {
-                                                    playerInfo.active.map((sample, sampleIndex) => {
-                                                        return (
-                                                            <SampleBox key={`active_${sampleIndex}`} activeItem={undefined} sample={sample} itemData={itemData} inLab={playerInfo.inLab} />
-                                                        )
-                                                    })
+                                                    samples.filter(sample => sample.printing > 0).map((sample, sampleIndex) => (
+                                                        range(0, sample.printing).map((_, printIndex) => (
+                                                            <SampleBox key={`active_${sampleIndex + printIndex}`} sample={sample} itemData={itemData} printing={true} />
+                                                        ))
+                                                    ))
                                                 }
                                             </Box>
                                         </TableCell>
@@ -554,7 +559,7 @@ function DeathnoteDisplay() {
                                                 <Box gap="xsmall">
                                                     <Box direction="row" gap="xsmall" align="center" margin={{ bottom: '8px' }}>
                                                         <IconImage data={deathnoteData.getRankImageData(deathnoteRank)} />
-                                                        <Box margin={{top: '8px'}}>
+                                                        <Box margin={{ top: '8px' }}>
                                                             <Text size="small">{mobName}</Text>
                                                         </Box>
                                                     </Box>
@@ -575,7 +580,7 @@ function DeathnoteDisplay() {
                                                         max={hasNextRank ? deathnoteData?.getNextRankReq(deathnoteRank) : killCount} />
                                                     <Box direction="row" justify={hasNextRank ? "between" : "center"} align={hasNextRank ? "" : "center"}>
                                                         <Text color='grey-2' size="xsmall">{nFormatter(killCount)}</Text>
-                                                        { hasNextRank && <Text color='grey-2' size="xsmall">{nFormatter(deathnoteData.getNextRankReq(deathnoteRank))}</Text>}
+                                                        {hasNextRank && <Text color='grey-2' size="xsmall">{nFormatter(deathnoteData.getNextRankReq(deathnoteRank))}</Text>}
                                                     </Box>
                                                 </Box>
 
