@@ -1133,7 +1133,8 @@ function ZowInfo({ player }: { player: Player }) {
         if (["TutorialA", "TutorialB", "TutorialC", "TutorialD", "JungleX", "MininggF", "How Did u get here", "Miningg1", "Miningg2", "Outer World Town",
             "Spike Surprise", "YumYum Grotto", "Salty Shores", "Faraway Piers", "Filler", "Deepwater Docks", "Bandit Bob's Hideout", "Frostbite Towndra",
             "Tunnels Entrance", "Trappers Folley", "Freefall Caverns", "The Ol' Straightaway", "Slip Slidy Ledges", "Echoing Egress",
-            "Blunder Hills", "JungleZ", "PlayerSelect", "Efaunt's Tomb", "The Roots", "Mummy Memorial", "Gravel Tomb", "Heaty Hole", "End Of The Road", "Z", "Eycicles's Nest", "The Office", "Enclave a la Troll"].includes(area)) {
+            "Blunder Hills", "JungleZ", "PlayerSelect", "Efaunt's Tomb", "The Roots", "Mummy Memorial", "Gravel Tomb", "Heaty Hole", "End Of The Road", "Z", "Eycicles's Nest", "The Office", "Enclave a la Troll",
+            "Magma Rivertown"].includes(area)) {
             return true;
         }
         return false;
@@ -1141,7 +1142,7 @@ function ZowInfo({ player }: { player: Player }) {
     const zowCount = Array.from(player.killInfo.entries()).filter(([_, count]) => count > 100000).length;
     const toZow = Array.from(player.killInfo.entries()).map(([mapId, count]) => {
         const mapData = MapInfo[mapId];
-        if (mapData.data.enemy === undefined || count > 100000 || ignoreArea(mapData.data.map.name) || mapData.data.map.name == "Z") {
+        if (mapData.data.enemy === undefined || count > 100000 || ignoreArea(mapData.data.map.name) || mapData.data.enemy == "Nothing" || mapData.data.map.name == "Z") {
             return null;
         }
         return [mapId, count]
