@@ -63,7 +63,7 @@ export class Talent {
     }
 
     canBook = (): boolean => {
-        return [10,
+        return ![10,
             11,
             12,
             23,

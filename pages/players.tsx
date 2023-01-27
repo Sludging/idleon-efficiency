@@ -902,7 +902,7 @@ function TalentDisplay({ player }: { player: Player }) {
             <Box direction="row" gap="medium">
                 {player.extraLevelsFromTalent > 0 && <TextAndLabel label="Symbols Of Beyond" text={`+${player.extraLevelsFromTalent}`} />}
                 {player.extraLevelsFromBear > 0 && <TextAndLabel label="Bear God" text={`+${player.extraLevelsFromBear}`} />}
-                { (player.extraLevelsFromBear > 0 || player.extraLevelsFromTalent > 0) && <CheckBox
+                {(player.extraLevelsFromBear > 0 || player.extraLevelsFromTalent > 0) && <CheckBox
                     checked={bookMaxLevel}
                     label={<Box direction="row" align="center">
                         <Text margin={{ right: 'xsmall' }} size="small">Show book level</Text>
@@ -932,7 +932,7 @@ function TalentDisplay({ player }: { player: Player }) {
                                     GetTalentArray(talentPage).map((originalTalent, index) => {
                                         const talent = player.talents.find(x => x.skillIndex == originalTalent.skillIndex);
                                         if (talent) {
-                                            const maxLeveLToShow = bookMaxLevel && talent.canBook() ? Math.max(100, talent.maxLevel - player.extraLevelsFromBear - player.extraLevelsFromTalent) : talent.maxLevel;
+                                            const maxLeveLToShow = bookMaxLevel ? Math.max(100, talent.maxLevel - player.extraLevelsFromBear - player.extraLevelsFromTalent) : talent.maxLevel;
                                             return (
                                                 <Box key={index}>
                                                     <Tip
