@@ -22,25 +22,22 @@ import { Refinery } from '../../data/domain/refinery';
 import { Item } from '../../data/domain/items';
 import { Storage } from '../../data/domain/storage';
 import { nFormatter, range, toTime } from '../../data/utility';
-import { SaltLick } from '../../data/domain/saltLick';
-import { Alchemy } from '../../data/domain/alchemy';
 import { StaticTime, TimeDisplaySize, TimeDown } from '../../components/base/TimeDisplay';
-import { PlayerInfo, Printer, Sample } from '../../data/domain/printer';
+import { Printer, Sample } from '../../data/domain/printer';
 import { Player } from '../../data/domain/player';
-import { CircleInformation, StatusWarning, Trash } from 'grommet-icons';
+import { CircleInformation, Star, StatusWarning, Trash } from 'grommet-icons';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 import { Deathnote } from '../../data/domain/deathnote';
 import { EnemyInfo } from '../../data/domain/enemies';
-import TextAndLabel from '../../components/base/TextAndLabel';
+import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import { ClassIndex, Talent } from '../../data/domain/talents';
 import { TaskBoard } from '../../data/domain/tasks';
 import { Shrine } from '../../data/domain/shrines';
 import { MapInfo } from '../../data/domain/maps';
-import { Lab } from '../../data/domain/lab';
 import IconImage from '../../components/base/IconImage';
-import { Sigils } from '../../data/domain/sigils';
 import { BuildingsDisplay } from '../../components/world-3/construction/buildings';
 import { SaltLickDisplay } from '../../components/world-3/construction/saltLick';
+import { Artifact, ArtifactStatus } from '../../data/domain/sailing/artifacts';
 
 
 function RefineryDisplay() {
@@ -366,7 +363,7 @@ function SampleBox({ sample, itemData, printing = false }: { sample: Sample, ite
         <Box border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} height={{ min: '82px', max: '82px' }} direction="row" align="center" justify="center">
             <Box pad={{ vertical: 'small' }} align="center">
                 <IconImage data={(sampleItem as Item).getImageData()} />
-                {printing && <Text color={sample.inLab == true ? 'blue-3' : ''} size="small">{nFormatter(sample.getSampleQuantity(false))}</Text>}
+                {printing && <Text color={sample.inLab == true ? 'blue-3' : ''} size="small">{sample.harriep && <Star size="small" color="gold-1" />} {nFormatter(sample.getSampleQuantity(false))}</Text>}
                 {!printing && <Text color={sample.printing > 0 ? 'green-1' : ''} size="small">{nFormatter(sample.getSampleQuantity(true))}</Text>}
             </Box>
             {sample.printing > 0 && sample.isOutdatedPrint() &&
@@ -389,6 +386,29 @@ function PrinterDisplay() {
     const [printerData, setPrinterData] = useState<Printer>();
     const [itemData, setItemData] = useState<Item[]>();
     const appContext = useContext(AppContext);
+
+    const printerArtifact = useMemo(() => {
+        if (appContext) {
+            const theData = appContext.data.getData();
+            const artifacts = theData.get("artifacts") as Artifact[];
+            return artifacts[4];
+        }
+    }, [appContext])
+
+    const daysSinceLastSample = useMemo(() => {
+        if (appContext && printerArtifact) {
+            const theData = appContext.data.getData();
+            const optLacc = theData.get("OptLacc");
+            return optLacc[125];
+        }
+        return 0;
+    }, [appContext]);
+
+    const artifactBoost = useMemo(() => {
+        if (printerArtifact) {
+            return daysSinceLastSample * printerArtifact.getBonus();
+        }
+    }, [appContext, printerArtifact, daysSinceLastSample])
 
     useEffect(() => {
         if (appContext) {
@@ -435,6 +455,22 @@ function PrinterDisplay() {
                         </ShadowBox>
                     )
                 })
+                }
+                {
+                    printerArtifact && printerArtifact.status != ArtifactStatus.Unobtained &&
+                    <ShadowBox key={"artifact_bonus"} background="dark-1" pad="medium" align="center" margin={{ right: 'large', bottom: 'small' }}>
+                        <Box gap="small">
+                            <ComponentAndLabel
+                                label="Gold Relic sample boost"
+                                component={
+                                    <Box direction="row" gap="small" align="center" margin={{top: 'medium'}}>
+                                        <IconImage data={printerArtifact.getImageData()} scale={0.8} />
+                                        <Text>{artifactBoost}% ({daysSinceLastSample} Day)</Text>
+                                    </Box>
+                                }
+                            />
+                        </Box>
+                    </ShadowBox>
                 }
             </Box>
             <ShadowBox background="dark-1" pad="large">

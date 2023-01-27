@@ -1,9 +1,12 @@
 import { range } from "../utility";
+import { Divinity } from "./divinity";
 import { Lab } from "./lab";
+import { Artifact } from "./sailing/artifacts";
 
 export class Sample {
     inLab: boolean = false;
     harriep: boolean = false;
+    artifactBoost: number = 0;
     // Number of slots printing this sample.
     printing: number = 0;
 
@@ -21,7 +24,7 @@ export class Sample {
         let baseQuantity = this.printingQuantity;
         baseQuantity *= this.inLab ? 2 : 1;
         baseQuantity *= this.harriep ? 3 : 1;
-        return baseQuantity;
+        return baseQuantity * (1 + this.artifactBoost / 100);
     }
 
     isOutdatedPrint = () => {
@@ -69,6 +72,9 @@ export default function parsePrinter(rawData: any[], charCount: number) {
 export const updatePrinter = (data: Map<string, any>) => {
     const printer = data.get("printer") as Printer;
     const lab = data.get("lab") as Lab;
+    const divinity = data.get("divinity") as Divinity;
+    const artifacts = data.get("artifacts") as Artifact[];
+    const optLacc = data.get("OptLacc");
 
     // if double printer
     if (lab.bonuses[1].active) {
@@ -76,6 +82,13 @@ export const updatePrinter = (data: Map<string, any>) => {
             printer.samples[player.playerID].forEach(sample => sample.inLab = true);
         })
     }
+
+    divinity.gods[3].linkedPlayers.forEach(linkedPlayer => {
+        printer.samples[linkedPlayer.playerID].forEach(sample => sample.harriep = true);
+    })
+
+    const daysSinceLastPrint = optLacc[125];
+    printer.samples.flatMap(player => player).forEach(sample => sample.artifactBoost = artifacts[4].getBonus() * daysSinceLastPrint);
 
     return printer;
 }
