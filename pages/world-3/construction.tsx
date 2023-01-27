@@ -424,7 +424,7 @@ function PrinterDisplay() {
         return masteroes;
     }, [playerData])
 
-    if (!printerData || Object.values(printerData.samples).flatMap(samples => samples).filter(sample => sample.item != "Blank").length == 0) {
+    if (!printerData || printerData.samples.flatMap(samples => samples).filter(sample => sample.item != "Blank").length == 0) {
         return (
             <Box align="center" pad="medium">
                 <Heading level='3'>Come back when you have some samples!</Heading>
