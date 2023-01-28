@@ -12,7 +12,7 @@ import { Item } from './items';
 import parseStorage, { updateStorage } from './storage';
 import parseQuests from './quests';
 import parsePrayers from './prayers';
-import parseRefinery from './refinery';
+import parseRefinery, { updateRefinery } from './refinery';
 import parseSaltLick from './saltLick';
 import parsePrinter, { updatePrinter } from './printer';
 import updateDeathnote from './deathnote';
@@ -141,12 +141,13 @@ const keyFunctionMap: Record<string, Function> = {
 // ORDER IS IMPORTANT!
 const postProcessingMap: Record<string, Function> = {
     "collider": (doc: Cloudsave, accountData: Map<string, any>) => updateAtomCollider(accountData),
+    "artifacts": (doc: Cloudsave, accountData: Map<string, any>) => updateArtifacts(accountData),
+    "sigils": (doc: Cloudsave, accountData: Map<string, any>) => updateSigils(accountData),
     "storage": (doc: Cloudsave, accountData: Map<string, any>) => updateStorage(accountData),
     "deathnote": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnote(accountData),
     "lab": (doc: Cloudsave, accountData: Map<string, any>) => updateLab(accountData),
-    "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStamps(accountData),
-    "artifacts": (doc: Cloudsave, accountData: Map<string, any>) => updateArtifacts(accountData),
     "alchemy": (doc: Cloudsave, accountData: Map<string, any>) => updateAlchemy(accountData),
+    "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStamps(accountData),
     "divinity": (doc: Cloudsave, accountData: Map<string, any>) => updateDivinity(accountData),
     "family": (doc: Cloudsave, accountData: Map<string, any>) => parseFamily(accountData.get("players") as Player[]),
     "forge": (doc: Cloudsave, accountData: Map<string, any>) => updateForge(accountData.get("forge"), accountData.get("gems")),
@@ -156,13 +157,13 @@ const postProcessingMap: Record<string, Function> = {
     "shrines": (doc: Cloudsave, accountData: Map<string, any>) => updateShrines(accountData),
     "players": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayers(accountData),
     "printer": (doc: Cloudsave, accountData: Map<string, any>) => updatePrinter(accountData),
-    "sigils": (doc: Cloudsave, accountData: Map<string, any>) => updateSigils(accountData),
     "worship": (doc: Cloudsave, accountData: Map<string, any>) => updateWorship(accountData),
     "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),
     "arcade": (doc: Cloudsave, accountData: Map<string, any>) => updateArcade(accountData),
     "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
     "account": (doc: Cloudsave, accountData: Map<string, any>) => updateAccount(accountData),
     "construction": (doc: Cloudsave, accountData: Map<string, any>) => updateConstruction(accountData),
+    "refinery": (doc: Cloudsave, accountData: Map<string, any>) => updateRefinery(accountData),
 }
 
 export const updateIdleonData = async (data: Cloudsave, charNames: string[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
@@ -171,6 +172,11 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], all
     accountData.set("itemsData", allItems);
     accountData.set("servervars", serverVars);
     accountData.set("OptLacc", data.get("OptLacc"));
+
+    // Do some time math, useful for adjusting AFK timers if needed.
+    const saveGlobalTime = JSON.parse(data.get("TimeAway"))["GlobalTime"] as number;
+    const lastUpdated = isStatic ? new Date(saveGlobalTime * 1000) : new Date()
+    accountData.set("lastUpdated", lastUpdated);
 
     const validCharCount = [...Array(charNames.length)].map((_, i) => data.get(`Lv0_${i}`) as number[]).filter(notUndefined).length;
     Object.entries(keyFunctionMap).forEach(([key, toExecute]) => {
@@ -206,9 +212,7 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], all
             accountData.set(key, undefined);
         }
     })
-
-    const saveGlobalTime = JSON.parse(data.get("TimeAway"))["GlobalTime"] as number;
-    const lastUpdated = isStatic ? new Date(saveGlobalTime * 1000) : new Date()
+    
     const newData = new IdleonData(accountData, lastUpdated);
 
     return newData;
