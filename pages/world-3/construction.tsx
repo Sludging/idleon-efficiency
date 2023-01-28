@@ -688,32 +688,36 @@ function ShrinesDisplay() {
                             <Box gap="small">
                                 <Box direction="row" align="center">
                                     <Box margin={{ right: 'small' }}>
-                                        <IconImage data={shrine.getImageData()} scale={0.7} />
+                                        <IconImage data={shrine.getImageData()} scale={0.5} />
                                     </Box>
-                                    <Text>{shrine.name}</Text>
+                                    <Text size="small">{shrine.name}</Text>
                                 </Box>
-                                <Box direction="row" justify="between" wrap>
+                                <Grid columns={{count: 4, size: 'auto'}}>
                                     <TextAndLabel
+                                        textSize='small'
                                         label="Level"
                                         text={shrine.level.toString()}
                                         margin={{ right: 'medium', bottom: 'small' }}
                                     />
                                     <TextAndLabel
                                         label="Current Map"
+                                        textSize='small'
                                         text={MapInfo[shrine.currentMap].data.map.name}
                                         margin={{ right: 'medium', bottom: 'small' }}
                                     />
                                     <TextAndLabel
                                         label="Hours"
-                                        text={`${Math.round(shrine.accumulatedHours)}/${Math.round(shrine.getHourRequirement())}`}
+                                        textSize='small'
+                                        text={`${nFormatter(Math.round(shrine.accumulatedHours))}/${nFormatter(Math.round(shrine.getHourRequirement()))}`}
                                         margin={{ right: 'medium', bottom: 'small' }}
                                     />
                                     <TextAndLabel
                                         label="Bonus"
-                                        text={`${nFormatter(shrine.getBonus(shrine.currentMap), "Smaller")}%`}
+                                        textSize='xsmall'
+                                        text={`${shrine.getBonusText(shrine.currentMap)}`}
                                         margin={{ right: 'medium', bottom: 'small' }}
                                     />
-                                </Box>
+                                </Grid>
                             </Box>
                         </ShadowBox>
                     )
