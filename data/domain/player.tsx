@@ -28,6 +28,7 @@ import { Sigils } from "./sigils";
 import { SkillsIndex } from './SkillsIndex';
 import { AFKTypeEnum } from './enum/aFKTypeEnum';
 import { Shrine, ShrineConstants } from './shrines';
+import { Divinity } from './divinity';
 
 export class PlayerStats {
     strength: number = 0;
@@ -123,6 +124,7 @@ export class Player {
 
     // Misc
     extraLevelsFromTalent: number = 0;
+    extraLevelsFromBear: number = 0;
 
     constructor(playerID: number, playerName: string) {
         this.playerID = playerID;
@@ -475,9 +477,9 @@ const parseTalents = (talentLevels: string, talentMaxLevels: string, player: Pla
 
     // Update players talents levels due to elite class level increase talents.
     const extraLevels = Math.floor(player.talents.filter(talent => [149, 374, 539].includes(talent.skillIndex)).reduce((sum, value) => sum += value.getBonus(), 0))
-    player.talents.filter(talent => ![149, 374, 539].includes(talent.skillIndex) && talent.skillIndex <= 614 && talent.level > 0)
+    player.talents.filter(talent => ![149, 374, 539].includes(talent.skillIndex) && talent.skillIndex <= 614)
         .forEach(talent => {
-            talent.level += extraLevels;
+            talent.level += talent.level > 0 ? extraLevels : 0;
             talent.maxLevel += extraLevels;
         });
     player.extraLevelsFromTalent = extraLevels;
@@ -635,6 +637,7 @@ export const updatePlayers = (data: Map<string, any>) => {
     const arcade = data.get("arcade") as Arcade;
     const sigils = data.get("sigils") as Sigils;
     const shrines = data.get("shrines") as Shrine[];
+    const divinity = data.get("divinity") as Divinity;
 
     // Set player active bubble array, easier to work with.
     players.forEach(player => {
@@ -706,6 +709,19 @@ export const updatePlayers = (data: Map<string, any>) => {
     players.forEach(player => {
         player.setCrystalChance(crystalSpawnStamp, crysalShrine);
     })
+
+    // Update max talent level due to bear.
+    // Update players talents levels due to elite class level increase talents.
+    const bearGod = divinity.gods[1];
+    bearGod.linkedPlayers.forEach(linkedPlayer => {
+        const bearBonus = Math.ceil(bearGod.getMinorLinkBonus(linkedPlayer));
+        linkedPlayer.talents.filter(talent => ![149, 374, 539].includes(talent.skillIndex) && talent.skillIndex <= 614)
+        .forEach(talent => {
+            talent.level += talent.level > 0 ? bearBonus : 0;
+            talent.maxLevel += bearBonus;
+        });
+        linkedPlayer.extraLevelsFromBear = bearBonus;
+    })    
 
     // I dunno why I have to sort it now, I never had to before. Need to think about it further.
     return players.sort((playera, playerb) => playera.playerID > playerb.playerID ? 1 : -1);

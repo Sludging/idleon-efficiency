@@ -106,7 +106,7 @@ function PointsDisplay() {
                 finalCosts[monsterMat].playerCosts[playerAnvil.playerID] = cost;
             })
         });
-        return Object.entries(finalCosts).sort(([blah2, cost1], [blah1, cost2]) => cost1.totalCost > cost2.totalCost ? 1 : -1);
+        return Object.entries(finalCosts);
     }, [anvilWrapper])
 
     const totalPointCosts = useMemo(() => {

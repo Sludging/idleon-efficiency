@@ -61,6 +61,21 @@ export class Talent {
             height: 56
         }
     }
+
+    canBook = (): boolean => {
+        return ![10,
+            11,
+            12,
+            23,
+            75,
+            86,
+            87,
+            266,
+            267,
+            446,
+            447,
+            79].includes(this.skillIndex);
+    }
 }
 
 export enum ClassIndex {

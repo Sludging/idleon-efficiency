@@ -3,12 +3,15 @@ import { initSigilRepo, SigilBase } from "./data/SigilRepo";
 import { GemStore } from "./gemPurchases";
 import { ImageData } from "./imageData";
 import { SigilModel } from "./model/sigilModel";
+import { Artifact } from "./sailing/artifacts";
 
 export class Sigil {
     progress: number = 0
     boostLevel: number = -1;
 
     activePlayers: number = 0;
+
+    artifactBoost: number = 0;
 
     constructor(public index: number, public data: SigilModel) {}
 
@@ -22,7 +25,8 @@ export class Sigil {
     }
 
     getBonus = () => {
-        return this.boostLevel == 1 ? this.data.boostBonus : this.boostLevel == 0 ? this.data.unlockBonus : 0;
+        const baseBoost = this.boostLevel == 1 ? this.data.boostBonus : this.boostLevel == 0 ? this.data.unlockBonus : 0;
+        return baseBoost * (1 + this.artifactBoost);
     }
 
     getBonusText = () => {
@@ -68,13 +72,20 @@ export default function parseSigils(cauldronP2w: number[][], cauldronJobs1: numb
     return sigils;
 }
 
+// Currently only requires artifact to be post processed, can be below it.
 export const updateSigils = (data: Map<string, any>) => {
     const sigils = data.get("sigils") as Sigils;
     const gemStore = data.get("gems") as GemStore;
     const achievements = data.get("achievements") as Achievement[];
+    const artifacts = data.get("artifacts") as Artifact[];
 
     const sigilAchiev = achievements[112].completed ? 20 : 0;
     const sigilGemBonus = (gemStore.purchases.find(purchase => purchase.no == 110)?.pucrhased ?? 0) * 20;
+
+    const artifactBonus = artifacts[16].getBonus();
+    sigils.sigils.forEach(sigil => {
+        sigil.artifactBoost = artifactBonus;
+    })
 
     sigils.setSigilSpeed(sigilAchiev, sigilGemBonus);
     return sigils;

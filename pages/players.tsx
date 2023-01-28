@@ -11,7 +11,8 @@ import {
     Button,
     ResponsiveContext,
     Select,
-    Meter
+    Meter,
+    CheckBox
 } from 'grommet'
 import { useState, useEffect, useContext, useMemo } from 'react';
 import { AppContext } from '../data/appContext'
@@ -124,7 +125,7 @@ function ShowSkills(props: SkillProps) {
                         const skillRank = props.skillsRank.get(skillIndex);
                         return (
                             <Box key={`skill_${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} gridArea={`${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} direction="row" gap="medium" margin={{ right: 'small', bottom: 'medium' }}>
-                                <Box direction="row" align="center" gap="small" border={{color: 'grey-1' }} pad="small">
+                                <Box direction="row" align="center" gap="small" border={{ color: 'grey-1' }} pad="small">
                                     <IconImage data={Skilling.getSkillImageData(skillIndex)} scale={size == "small" ? 0.5 : 0.75} />
                                     <Box gap="small">
                                         <Box direction="row" gap="small">
@@ -894,9 +895,33 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
 
 function TalentDisplay({ player }: { player: Player }) {
     const size = useContext(ResponsiveContext);
+    const [bookMaxLevel, setBookMaxLevel] = useState<boolean>(false);
     return (
         <Box pad="medium" gap="medium">
             <Text size='medium'>Talents</Text>
+            <Box direction="row" gap="medium">
+                {player.extraLevelsFromTalent > 0 && <TextAndLabel label="Symbols Of Beyond" text={`+${player.extraLevelsFromTalent}`} />}
+                {player.extraLevelsFromBear > 0 && <TextAndLabel label="Bear God" text={`+${player.extraLevelsFromBear}`} />}
+                {(player.extraLevelsFromBear > 0 || player.extraLevelsFromTalent > 0) && <CheckBox
+                    checked={bookMaxLevel}
+                    label={<Box direction="row" align="center">
+                        <Text margin={{ right: 'xsmall' }} size="small">Show book level</Text>
+                        <TipDisplay
+                            body={<Box gap="xsmall">
+                                <Text>This will match the in-game UI showing you the max level without bonuses from symbols and bear god.</Text>
+                            </Box>}
+                            size="small"
+                            heading='Show book level'
+                            maxWidth='medium'
+                            direction={TipDirection.Down}
+                        >
+                            <CircleInformation size="small" />
+                        </TipDisplay>
+                    </Box>}
+                    onChange={(event) => setBookMaxLevel(event.target.checked)}
+                />
+                }
+            </Box>
             {
                 ClassTalentMap[ClassIndex[player.class.replace(/ /g, "_") as keyof typeof ClassIndex]].concat(["Special Talent 1", "Special Talent 2", "Special Talent 3"]).map((talentPage, _) => {
                     return (
@@ -907,13 +932,14 @@ function TalentDisplay({ player }: { player: Player }) {
                                     GetTalentArray(talentPage).map((originalTalent, index) => {
                                         const talent = player.talents.find(x => x.skillIndex == originalTalent.skillIndex);
                                         if (talent) {
+                                            const maxLeveLToShow = bookMaxLevel && (![149, 374, 539].includes(talent.skillIndex) && talent.skillIndex <= 614) ? Math.max(100, talent.maxLevel - player.extraLevelsFromBear - player.extraLevelsFromTalent) : talent.maxLevel;
                                             return (
                                                 <Box key={index}>
                                                     <Tip
                                                         plain
                                                         content={
                                                             <Box pad="small" gap="small" background="white" style={{ display: talent.level > 0 ? 'normal' : 'none' }}>
-                                                                <Text size={size == "small" ? 'small' : ''} weight="bold">{talent.name} ({talent.level}/{talent.maxLevel})</Text>
+                                                                <Text size={size == "small" ? 'small' : ''} weight="bold">{talent.name} ({talent.level}/{maxLeveLToShow})</Text>
                                                                 <hr style={{ width: "100%" }} />
                                                                 <Text>{talent.getBonusText()}</Text>
                                                             </Box>
@@ -927,7 +953,7 @@ function TalentDisplay({ player }: { player: Player }) {
                                                             <Box direction="row" gap="xxsmall">
                                                                 <Text size={size == "small" ? "xsmall" : "small"}>{talent.level} </Text>
                                                                 <Text size={size == "small" ? "xsmall" : "small"}>/</Text>
-                                                                <Text size={size == "small" ? "xsmall" : "small"}>{talent.maxLevel}</Text>
+                                                                <Text size={size == "small" ? "xsmall" : "small"}>{maxLeveLToShow}</Text>
                                                             </Box>
                                                         </Box>
                                                     </Tip>
@@ -1107,7 +1133,8 @@ function ZowInfo({ player }: { player: Player }) {
         if (["TutorialA", "TutorialB", "TutorialC", "TutorialD", "JungleX", "MininggF", "How Did u get here", "Miningg1", "Miningg2", "Outer World Town",
             "Spike Surprise", "YumYum Grotto", "Salty Shores", "Faraway Piers", "Filler", "Deepwater Docks", "Bandit Bob's Hideout", "Frostbite Towndra",
             "Tunnels Entrance", "Trappers Folley", "Freefall Caverns", "The Ol' Straightaway", "Slip Slidy Ledges", "Echoing Egress",
-            "Blunder Hills", "JungleZ", "PlayerSelect", "Efaunt's Tomb", "The Roots", "Mummy Memorial", "Gravel Tomb", "Heaty Hole", "End Of The Road", "Z", "Eycicles's Nest", "The Office", "Enclave a la Troll"].includes(area)) {
+            "Blunder Hills", "JungleZ", "PlayerSelect", "Efaunt's Tomb", "The Roots", "Mummy Memorial", "Gravel Tomb", "Heaty Hole", "End Of The Road", "Z", "Eycicles's Nest", "The Office", "Enclave a la Troll",
+            "Magma Rivertown"].includes(area)) {
             return true;
         }
         return false;
@@ -1115,7 +1142,7 @@ function ZowInfo({ player }: { player: Player }) {
     const zowCount = Array.from(player.killInfo.entries()).filter(([_, count]) => count > 100000).length;
     const toZow = Array.from(player.killInfo.entries()).map(([mapId, count]) => {
         const mapData = MapInfo[mapId];
-        if (mapData.data.enemy === undefined || count > 100000 || ignoreArea(mapData.data.map.name) || mapData.data.map.name == "Z") {
+        if (mapData.data.enemy === undefined || count > 100000 || ignoreArea(mapData.data.map.name) || mapData.data.enemy == "Nothing" || mapData.data.map.name == "Z") {
             return null;
         }
         return [mapId, count]
