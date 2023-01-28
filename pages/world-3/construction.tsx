@@ -366,7 +366,8 @@ function SampleBox({ sample, itemData, printing = false }: { sample: Sample, ite
                 {printing && <Text color={sample.inLab == true ? 'blue-3' : ''} size="small">{sample.harriep && <Star size="small" color="gold-1" />} {nFormatter(sample.getSampleQuantity(false))}</Text>}
                 {!printing && <Text color={sample.printing > 0 ? 'green-1' : ''} size="small">{nFormatter(sample.getSampleQuantity(true))}</Text>}
             </Box>
-            {sample.printing > 0 && sample.isOutdatedPrint() &&
+            {/* Show warning on the sample if it's printing and outdated. */}
+            {sample.printing > 0 && !printing && sample.isOutdatedPrint() &&
                 <TipDisplay
                     heading='Active lower than sample'
                     body={<Box><Text>You have a sample of {nFormatter(sample.quantity)} but only printing {nFormatter(sample.printingQuantity)}.</Text><Text>Go update your printing!</Text></Box>}
@@ -492,7 +493,8 @@ function PrinterDisplay() {
                                         <TableCell>
                                             <Box direction="row">
                                                 {
-                                                    samples.map((sample, sampleIndex) => {
+                                                    // We might have samples that are only in the printing slot but already deleted, so only filter for blank and sample quantity bigger then 0)
+                                                    samples.filter(sample => sample.quantity > 0 || sample.item == "Blank").map((sample, sampleIndex) => {
                                                         return (
                                                             <SampleBox key={`sample_${sampleIndex}`} sample={sample} itemData={itemData} printing={false} />
                                                         )

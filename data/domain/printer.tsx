@@ -56,11 +56,22 @@ export default function parsePrinter(rawData: any[], charCount: number) {
                 samples.push(new Sample(rawData[5 + (sampleIndex * 2) + (playerIndex * 14)], rawData[6 + (sampleIndex * 2) + (playerIndex * 14)]));
             });
 
+            
             range(0,2).forEach(activeIndex => {
                 const printingItem = rawData[5 + 10 + (activeIndex * 2) + (playerIndex * 14)];
                 const matchingSample = samples.find(sample => sample.item == printingItem);
-                matchingSample!.printingQuantity = rawData[6 + 10 + (activeIndex * 2) + (playerIndex * 14)];
-                matchingSample!.printing += 1;
+                // Old print, without an active sample.
+                const printingQuantity = rawData[6 + 10 + (activeIndex * 2) + (playerIndex * 14)]
+                if (!matchingSample) {
+                    const newSample = new Sample(printingItem, 0);
+                    newSample.printingQuantity = printingQuantity;
+                    newSample.printing += 1;
+                    samples.push(newSample);
+                }
+                else {
+                    matchingSample.printingQuantity = printingQuantity;
+                    matchingSample.printing += 1;
+                }
             })
 
             toReturn.samples[playerIndex] = samples;
