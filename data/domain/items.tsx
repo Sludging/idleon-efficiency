@@ -415,7 +415,7 @@ export class Item {
                 width: 28
             };
         }
-        if (liquidRegex().exec(internalName) || getDungRNGRegex().exec(internalName)) {
+        if (liquidRegex().exec(internalName) || getDungRNGRegex().exec(internalName) || internalName.includes("SailTr") || internalName == "Bits") {
             return {
                 height: 36,
                 location: `${internalName}_x1`,
