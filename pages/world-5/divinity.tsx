@@ -107,7 +107,7 @@ function GodDisplay() {
                         <ShadowBox key={index} background="dark-1" pad="medium" direction="row" wrap margin={{ bottom: 'small', right: 'small' }} justify="between">
                             <Grid columns={{ count: 5, size: 'auto' }} fill>
                                 <Box margin={{ bottom: 'small', right: 'small' }} direction="row" gap="xsmall" align="center">
-                                    <IconImage data={god.getImageData()} scale={0.5} />
+                                    <IconImage data={god.getImageData()} scale={0.5} style={{"opacity": god.unlocked ? 1 : 0.1}}/>
                                     <TextAndLabel textSize='small' text={god.data.name} label="Name" />
                                 </Box>
                                 <Box margin={{ bottom: 'small', right: 'small' }}>
