@@ -41,6 +41,7 @@ import parseAtomCollider, { updateAtomCollider } from './atomCollider';
 import { updateArtifacts } from './sailing/artifacts';
 import parseConstellations from './constellations';
 import parseSlab from './slab';
+import parseCapacity, { updateCapacity } from './capacity';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     try {
@@ -136,6 +137,7 @@ const keyFunctionMap: Record<string, Function> = {
     "sailing": (doc: Cloudsave, charCount: number) => parseSailing(safeJsonParse(doc, "Sailing", []), safeJsonParse(doc, "Boats", []), safeJsonParse(doc, "Captains", [])),
     "gaming": (doc: Cloudsave, charCount: number) => parseGaming(doc.get("Gaming") as any[] || [], safeJsonParse(doc, "GamingSprout", [])),
     "collider": (doc: Cloudsave, charCount: number) => parseAtomCollider(doc.get("Atoms") as number[] || [], doc.get("Divinity") as number[] || []),
+    "capacity": (doc: Cloudsave, charCount: number) => parseCapacity([...Array(charCount)].map((_, index) => new Map(Object.entries(safeJsonParse(doc,`MaxCarryCap_${index}`, new Map()))))),
 }
 
 // ORDER IS IMPORTANT!
@@ -156,6 +158,7 @@ const postProcessingMap: Record<string, Function> = {
     "breeding": (doc: Cloudsave, accountData: Map<string, any>) => updateBreeding(accountData),
     "shrines": (doc: Cloudsave, accountData: Map<string, any>) => updateShrines(accountData),
     "players": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayers(accountData),
+    "capacity": (doc: Cloudsave, accountData: Map<string, any>) => updateCapacity(accountData),
     "printer": (doc: Cloudsave, accountData: Map<string, any>) => updatePrinter(accountData),
     "worship": (doc: Cloudsave, accountData: Map<string, any>) => updateWorship(accountData),
     "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),
