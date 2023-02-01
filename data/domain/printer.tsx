@@ -43,7 +43,7 @@ export class Printer {
     GetTotalActive = (itemName: string): number => {
         return this.samples.flatMap(sample => sample)
         .filter(sample => sample.item == itemName && sample.printing)
-        .reduce((total, sample) => total += sample.getSampleQuantity(false), 0);
+        .reduce((total, sample) => total += sample.getSampleQuantity(false) * sample.printing, 0);
     }
 }
 
@@ -59,9 +59,16 @@ export default function parsePrinter(rawData: any[], charCount: number) {
             
             range(0,2).forEach(activeIndex => {
                 const printingItem = rawData[5 + 10 + (activeIndex * 2) + (playerIndex * 14)];
+                // If there's no printing item, exit early.
+                if (printingItem == "Blank") {
+                    return;
+                }
+
                 const matchingSample = samples.find(sample => sample.item == printingItem);
                 // Old print, without an active sample.
                 const printingQuantity = rawData[6 + 10 + (activeIndex * 2) + (playerIndex * 14)]
+
+                // If we have an old print, without an active sample.
                 if (!matchingSample) {
                     const newSample = new Sample(printingItem, 0);
                     newSample.printingQuantity = printingQuantity;
