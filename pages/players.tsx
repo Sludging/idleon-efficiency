@@ -21,7 +21,7 @@ import { GemStore } from '../data/domain/gemPurchases';
 import { Activity, Player, SkillData } from '../data/domain/player';
 import { SkillsIndex } from "../data/domain/SkillsIndex";
 import { ClassIndex, ClassTalentMap, GetTalentArray } from '../data/domain/talents';
-import { CapacityConst, playerInventoryBagMapping } from '../data/domain/capacity';
+import { Capacity, CapacityConst, playerInventoryBagMapping } from '../data/domain/capacity';
 import { Alchemy, Bubble } from "../data/domain/alchemy";
 import { Stamp } from '../data/domain/stamps';
 import { Shrine, ShrineConstants } from '../data/domain/shrines';
@@ -748,148 +748,29 @@ function AnvilDisplay({ player }: { player: Player }) {
 
 function CarryCapacityDisplay({ player }: { player: Player }) {
     const appContext = useContext(AppContext);
+    const size = useContext(ResponsiveContext);
 
-    const allCapBonus = useMemo(() => {
+    const playerCapacity = useMemo(() => {
         const theData = appContext.data.getData();
-        const guild = theData.get("guild");
-        const shrines = theData.get("shrines");
-        const bribes = theData.get("bribes") as Bribe[];
-
-        let guildCarryBonus: number = 0;
-        let zergPrayerBonus: number = 0; // TODO!
-        let ruckSackPrayerBonus: number = 0; // TODO!
-
-        if (guild) {
-            guildCarryBonus = lavaFunc(guild.guildBonuses[2].func, guild.guildBonuses[2].level, guild.guildBonuses[2].x1, guild.guildBonuses[2].x2);
-        }
-
-        const telekineticStorageBonus = player.talents.find(x => x.skillIndex == CapacityConst.TelekineticStorageSkillIndex)?.getBonus() ?? 0;
-        const carryCapShrineBonus = shrines[ShrineConstants.CarryShrine].getBonus(player.currentMapId);
-        const bribeCapBonus = bribes.find(bribe => bribe.name == "Bottomless Bags")?.status == BribeStatus.Purchased ? 5 : 0;
-        return player.capacity.getAllCapsBonus(guildCarryBonus, telekineticStorageBonus, carryCapShrineBonus, zergPrayerBonus, ruckSackPrayerBonus, bribeCapBonus);
-
+        const capacity = theData.get("capacity") as Capacity;
+        return capacity.players[player.playerID];
     }, [appContext, player])
-
-    const guildBonus = useMemo(() => {
-        const theData = appContext.data.getData();
-        const guild = theData.get("guild");
-
-        if (guild) {
-            return lavaFunc(guild.guildBonuses[2].func, guild.guildBonuses[2].level, guild.guildBonuses[2].x1, guild.guildBonuses[2].x2);
-        }
-        return 0;
-    }, [appContext])
-
-    const gemCapBought = useMemo(() => {
-        const theData = appContext.data.getData();
-        const gemStore = theData.get("gems") as GemStore;
-
-        if (gemStore) {
-            return gemStore?.purchases.find(x => x.no == 58)?.pucrhased;
-        }
-        return 0;
-    }, [appContext])
-
-    const capBonuses = useMemo(() => {
-        const theData = appContext.data.getData();
-        const stampData = theData.get("stamps") as Stamp[][];
-        const gemStore = theData.get("gems") as GemStore;
-
-        const extraBagsTalentBonus = player.talents.find(x => x.skillIndex == CapacityConst.ExtraBagsSkillIndex)?.getBonus() ?? 0;
-        const starSignExtraCap = player.starSigns.reduce((sum, sign) => sum += sign.getBonus("Carry Cap"), 0);
-
-        const allStamps = stampData.flatMap((tab) => [...tab]);
-        const allCapStampBonus = allStamps.find((stamp) => stamp.raw_name == CapacityConst.AllCarryStamp)?.getBonus() ?? 0;
-        const gemCapacityBonus = gemStore?.purchases.find(x => x.no == 58)?.pucrhased ?? 0;
-        const toReturn = new Map();
-        toReturn.set("Mining", {
-            allCapBonuses: allCapBonus,
-            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.MiningCapStamp)?.getBonus(player.skills.get(SkillsIndex.Mining)?.level) ?? 0,
-            gemsCapacityBought: gemCapacityBonus,
-            stampAllCapBonus: allCapStampBonus,
-            extraBagsLevel: extraBagsTalentBonus,
-            starSignExtraCap: starSignExtraCap
-        });
-        toReturn.set("Chopping", {
-            allCapBonuses: allCapBonus,
-            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.ChoppingCapStamp)?.getBonus(player.skills.get(SkillsIndex.Chopping)?.level) ?? 0,
-            gemsCapacityBought: gemCapacityBonus,
-            stampAllCapBonus: allCapStampBonus,
-            extraBagsLevel: extraBagsTalentBonus,
-            starSignExtraCap: starSignExtraCap
-        });
-        toReturn.set("Souls", {
-            allCapBonuses: allCapBonus,
-            stampMatCapBonus: 0,
-            gemsCapacityBought: gemCapacityBonus,
-            stampAllCapBonus: allCapStampBonus,
-            extraBagsLevel: extraBagsTalentBonus,
-            starSignExtraCap: starSignExtraCap
-        });
-        toReturn.set("Fishing", {
-            allCapBonuses: allCapBonus,
-            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.FishCapStamp)?.getBonus(player.skills.get(SkillsIndex.Fishing)?.level) ?? 0,
-            gemsCapacityBought: gemCapacityBonus,
-            stampAllCapBonus: allCapStampBonus,
-            extraBagsLevel: extraBagsTalentBonus,
-            starSignExtraCap: starSignExtraCap
-        });
-        toReturn.set("Foods", {
-            allCapBonuses: allCapBonus,
-            stampMatCapBonus: 0,
-            gemsCapacityBought: gemCapacityBonus,
-            stampAllCapBonus: allCapStampBonus,
-            extraBagsLevel: extraBagsTalentBonus,
-            starSignExtraCap: starSignExtraCap
-        });
-        toReturn.set("bCraft", {
-            allCapBonuses: allCapBonus,
-            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.MaterialCapStamp)?.getBonus(player.skills.get(SkillsIndex.Smithing)?.level) ?? 0,
-            gemsCapacityBought: gemCapacityBonus,
-            stampAllCapBonus: allCapStampBonus,
-            extraBagsLevel: extraBagsTalentBonus,
-            starSignExtraCap: starSignExtraCap
-        });
-        toReturn.set("Bugs", {
-            allCapBonuses: allCapBonus,
-            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.BugCapStamp)?.getBonus(player.skills.get(SkillsIndex.Catching)?.level) ?? 0,
-            gemsCapacityBought: gemCapacityBonus,
-            stampAllCapBonus: allCapStampBonus,
-            extraBagsLevel: extraBagsTalentBonus,
-            starSignExtraCap: starSignExtraCap
-        });
-        toReturn.set("Critters", {
-            allCapBonuses: allCapBonus,
-            stampMatCapBonus: 0,
-            gemsCapacityBought: gemCapacityBonus,
-            stampAllCapBonus: allCapStampBonus,
-            extraBagsLevel: extraBagsTalentBonus,
-            starSignExtraCap: starSignExtraCap
-        });
-
-        return toReturn;
-    }, [appContext, player, allCapBonus])
 
     return (
         <Box pad="medium" gap="small">
             <Text size='medium'>Carry Capacity</Text>
-            <Box>
-                <Text size="small">Guild Bonus: {guildBonus} </Text>
-                <Text size="small">Gem Capacity Bought: {gemCapBought}</Text>
-            </Box>
-            <Grid columns="1/3" gap="small" pad="small">
+            <Grid columns={size == "small" ? "1" : "1/2"}>
                 {
-                    player.capacity.bags.filter((bag) => bag.displayName != undefined).map((bag, index) => (
-                        <Box align="center" key={index} gap="small">
-                            <Box>
-                                <IconImage data={bag.getImageData()} scale={50 / 36} />
-                            </Box>
-                            <Text size="small">{bag.displayName}: {Intl.NumberFormat().format(bag.getCapacity(capBonuses.get(bag.name)))}</Text>
+                    playerCapacity.bags.map((bag, index) => (
+                        <Box direction="row" key={index} gap="medium" pad="small" align="center" justify="between" width={{max: '300px'}}>
+                            <IconImage data={bag.getImageData()} scale={1.3} />
+                            <TextAndLabel label="Per Slot" text={Intl.NumberFormat().format(bag.maxCarry)} />
+                            <TextAndLabel label="Full Inventory" text={nFormatter(bag.maxCarry * playerCapacity.totalInventorySlots)} />
                         </Box>
                     ))
                 }
             </Grid>
-        </Box>
+        </Box >
     )
 }
 
