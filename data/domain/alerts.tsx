@@ -70,6 +70,7 @@ export class ObolEmptyAlert extends PlayerAlert {
     constructor(player: Player, public count: number) {
         super(player, AlertType.EmptyObolSlot);
         this.title = "Empty Obol Slots";
+        this.text = `${count} empty slots`;
         this.icon = {
             location: 'ObolLocked1',
             height: 36,
