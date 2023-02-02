@@ -3,6 +3,7 @@ import { Divinity } from "./divinity";
 import { Lab } from "./lab";
 import { Player } from "./player";
 import { Artifact } from "./sailing/artifacts";
+import { ClassIndex } from "./talents";
 
 export class Sample {
     inLab: boolean = false;
@@ -110,21 +111,21 @@ export const updatePrinter = (data: Map<string, any>) => {
         printer.samples[linkedPlayer.playerID].forEach(sample => sample.harriep = true);
     })
 
-    const bestDivineKnight = players.reduce((final, player) => final = (player.talents.find(talent => talent.skillIndex == 178)?.level ?? 0) > 0 ? player : final, players[0]);
-    console.log("Best Divine Knight", bestDivineKnight);
-    if (bestDivineKnight) {
-        printer.bestDivineKnightPlayerId = bestDivineKnight.playerID;
-    }
-
     const daysSinceLastPrint = optLacc[125];
-    const divineKnightOrbKills = optLacc[138];
-
-    printer.divineKnightOrbKills = divineKnightOrbKills;
-    
     printer.samples.flatMap(player => player).forEach(sample => {
         sample.artifactBoost = artifacts[4].getBonus() * daysSinceLastPrint
-        sample.divineKnightBoost = (bestDivineKnight.talents.find(talent => talent.skillIndex == 178)?.getBonus() ?? 0) * lavaLog(divineKnightOrbKills);
     });
+
+    const bestDivineKnight = players.filter(player => player.classId == ClassIndex.Divine_Knight).sort((player1, player2) => player1.getTalentBonus(178) > player2.getTalentBonus(178) ? 1 : -1).pop()
+
+    if (bestDivineKnight) {
+        const divineKnightOrbKills = optLacc[138];
+        printer.divineKnightOrbKills = divineKnightOrbKills;
+        printer.bestDivineKnightPlayerId = bestDivineKnight.playerID;
+        printer.samples.flatMap(player => player).forEach(sample => {
+            sample.divineKnightBoost = bestDivineKnight.getTalentBonus(178) * lavaLog(divineKnightOrbKills);
+        });
+    }
 
     return printer;
 }
