@@ -17,7 +17,7 @@ export const familyBonusMapping = [
     "+{%_TOTAL_HP 40 100 decay _ _ txt".split(" "),
     "+{%_TOTAL_DAMAGE 20 180 decay _ _ txt".split(" "),
     "DEATH_BRINGER _ _ txt _ _ txt".split(" "),
-    "+{%_WORLD_5_STUFF 25 100 decay _ _ txt".split(" "),
+    "+{%_Refinery_Speed 50 150 decay _ _ txt".split(" "),
     "ROYAL_GUARDIAN _ _ txt _ _ txt".split(" "),
     "FILLER _ _ txt _ _ txt".split(" "),
     "FILLER _ _ txt _ _ txt".split(" "),
@@ -119,7 +119,7 @@ export const FamilyBonusRelations: Record<ClassIndex, ClassIndex[]> = {
     [ClassIndex.Wizard]: [ClassIndex.Mage],
     [ClassIndex.Elemental_Sorcerer]: [ClassIndex.Mage, ClassIndex.Wizard],
     [ClassIndex.Spiritual_Monk]: [],
-    [ClassIndex.Bubonic_Conjuror]:  [ClassIndex.Mage, ClassIndex.Shaman],
+    [ClassIndex.Bubonic_Conjuror]: [ClassIndex.Mage, ClassIndex.Shaman],
     [ClassIndex.Arcane_Cultist]: [],
 }
 
