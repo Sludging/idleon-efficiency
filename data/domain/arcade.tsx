@@ -5,7 +5,7 @@ import { Bribe } from "./bribes";
 import { ArcadeBonusBase, initArcadeBonusRepo } from "./data/ArcadeBonusRepo";
 import { ImageData } from "./imageData";
 import { ArcadeBonusModel } from "./model/arcadeBonusModel";
-import { Stamp } from "./stamps";
+import { Stamp, getStampBonusForKey } from "./stamps";
 import { TaskBoard } from "./tasks";
 
 export const ARCADE_MAX_LEVEL: number = 100
@@ -116,7 +116,9 @@ export class Arcade {
     }
 
     setSecondsPerBall = (achivements: Achievement[], ballVialBonus: number = 0, meritLevel: number = 0, stampBonus: number = 0, bribeBonus: number = 0) => {
-        this.secondsPerBall = 4000 / (1 + (this.getBallBonus(achivements, ballVialBonus, meritLevel, stampBonus) + bribeBonus) / 100);
+        this.secondsPerBall = Math.max(
+            4000 / (1 + (this.getBallBonus(achivements, ballVialBonus, meritLevel, stampBonus) + bribeBonus) / 100),
+            1800);
     }
 
     static fromBase = (data: ArcadeBonusBase[]) => {
@@ -166,7 +168,7 @@ export const updateArcade = (data: Map<string, any>) => {
     arcade.setSecondsPerBall(achievementData, ballVialBonus, ballMeritLevel, stampBonus, bribeBonus);
 
     // Max Claim time
-    const claimStampBonus = stampData.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC8")?.getBonus() ?? 0;
+    const claimStampBonus = getStampBonusForKey(stampData, "ArcadeTimeMax");
     arcade.setMaxClaimTime(claimStampBonus);
 
     // Balls available to claim.
