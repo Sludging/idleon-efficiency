@@ -4650,7 +4650,7 @@ export const initNpcRepo = () => {
         new NpcBase("Desert Davey", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "YumYum Grotto",
-                    "world": "",
+                    "world": "Yum-Yum Desert",
                     "noQuest": 1,
                     "repeatable": "Unknown",
                     "type": "",
@@ -7071,7 +7071,7 @@ export const initNpcRepo = () => {
         new NpcBase("Wellington", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Sands of Time",
-                    "world": "",
+                    "world": "Yum-Yum Desert",
                     "noQuest": 3,
                     "repeatable": "Unknown",
                     "type": "",
@@ -8040,7 +8040,7 @@ export const initNpcRepo = () => {
         new NpcBase("Typhoon", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Froggy Fields",
-                    "world": "",
+                    "world": "Blunder Hills",
                     "noQuest": 1,
                     "repeatable": "Daily",
                     "type": "",
@@ -8365,7 +8365,7 @@ export const initNpcRepo = () => {
         new NpcBase("XxX Cattleprod XxX", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "The Grandioso Canyon",
-                    "world": "",
+                    "world": "Yum-Yum Desert",
                     "noQuest": 3,
                     "repeatable": "Unknown",
                     "type": "",
