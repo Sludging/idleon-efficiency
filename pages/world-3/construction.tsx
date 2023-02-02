@@ -466,11 +466,11 @@ function PrinterDisplay() {
                             </Box>
                             <Box direction="row" gap="small">
                                 <ComponentAndLabel
-                                    label="King Of The Remembered boost"
+                                    label="King Of The Remembered"
                                     component={
                                         <Box direction="row" gap="small" align="center" margin={{ top: 'medium' }}>
                                             <IconImage data={playerData[printerData.bestDivineKnightPlayerId]!.talents.find(talent => talent.skillIndex == 178)!.getImageData()} scale={0.6} />
-                                            <Text size="small">{nFormatter(playerData[printerData.bestDivineKnightPlayerId]!.talents.find(talent => talent.skillIndex == 178)!.getBonus() * lavaLog(printerData.divineKnightOrbKills))}% ({nFormatter(printerData.divineKnightOrbKills)} Kills)</Text>
+                                            <Text size="small">{nFormatter(playerData[printerData.bestDivineKnightPlayerId].getTalentBonus(178) * lavaLog(printerData.divineKnightOrbKills))}% ({nFormatter(printerData.divineKnightOrbKills)} Kills)</Text>
                                         </Box>
                                     }
                                 />
