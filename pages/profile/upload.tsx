@@ -104,19 +104,38 @@ function UploadProfile() {
         <Box>
             <NextSeo title="User Profile - Upload Public Profile" />
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Public Profile</Heading>
-            { showToast && 
-                <Notification 
+            {showToast &&
+                <Notification
                     toast
                     title="Upload Result"
                     message={toastMessage}
                     status={toastStatus}
-                    onClose={() => { setShowToast(false); setToastMessage("")}}
+                    onClose={() => { setShowToast(false); setToastMessage("") }}
                 />
             }
-            <Box width="large" margin={{ bottom: 'medium' }}>
+            <Box width="large" margin={{ bottom: 'small' }}>
                 <Text>This page allows you to manage your public profile stored on the Idleon Efficiency servers.</Text>
                 {lastUpload == undefined && <Text>The profile will be available under {encodeURIComponent(firstCharName.toLowerCase())}.idleonefficiency.com once uploaded.</Text>}
                 {lastUpload != undefined && <Text>Your profile is available under <Anchor href={`https://${encodeURIComponent(firstCharName.toLowerCase())}.idleonefficiency.com`} target='_blank'>https://{encodeURIComponent(firstCharName.toLowerCase())}.idleonefficiency.com</Anchor></Text>}
+            </Box>
+            <Box direction="row" gap="small" align="center" margin={{ bottom: 'medium' }}>
+                <Text size="small">* gem related information will not be uploaded</Text>
+                <TipDisplay
+                    body={<Box gap="xsmall">
+                        <Paragraph>
+                            This will remove data containing information about the number of gems you have or previously bought.
+                            It will also remove information about bundles you purchased.
+                        </Paragraph>
+                        <Text size="xsmall">* This will not remove premium items, so they will still be visible on looty and other places.</Text>
+                        <Text size="xsmall">* This will not remove gem store data, as that&apos;s important for some maths like capacity.</Text>
+                    </Box>}
+                    size="small"
+                    heading='What will be removed?'
+                    maxWidth='medium'
+                    direction={TipDirection.Down}
+                >
+                    <CircleInformation size="small" />
+                </TipDisplay>
             </Box>
             <Box gap="small">
                 <Text>You can update your profile once every 4 hours.</Text>
@@ -131,8 +150,7 @@ function UploadProfile() {
                         />
                     </Box>
                 }
-
-                <CheckBox
+                {/* <CheckBox
                     checked={uploadSensitiveData}
                     label={<Box direction="row" align="center">
                         <Text margin={{ right: 'xsmall' }} size="small">Upload gem related information?</Text>
@@ -154,7 +172,7 @@ function UploadProfile() {
                         </TipDisplay>
                     </Box>}
                     onChange={(event) => setUploadSensitiveData(event.target.checked)}
-                />
+                /> */}
                 <Box width="medium" direction="row" align="center" gap="small">
                     <Button primary color='brand' label="Upload" disabled={uploading || (secondsSinceLastUpload > 0 && secondsSinceLastUpload < 14400)} onClick={() => uploadData()} />
                     {uploading &&
