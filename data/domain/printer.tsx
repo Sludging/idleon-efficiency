@@ -1,12 +1,14 @@
-import { range } from "../utility";
+import { lavaLog, range } from "../utility";
 import { Divinity } from "./divinity";
 import { Lab } from "./lab";
+import { Player } from "./player";
 import { Artifact } from "./sailing/artifacts";
 
 export class Sample {
     inLab: boolean = false;
     harriep: boolean = false;
     artifactBoost: number = 0;
+    divineKnightBoost: number = 0;
     // Number of slots printing this sample.
     printing: number = 0;
 
@@ -24,7 +26,7 @@ export class Sample {
         let baseQuantity = this.printingQuantity;
         baseQuantity *= this.inLab ? 2 : 1;
         baseQuantity *= this.harriep ? 3 : 1;
-        return baseQuantity * (1 + this.artifactBoost / 100);
+        return baseQuantity * (1 + (this.artifactBoost + this.divineKnightBoost) / 100);
     }
 
     isOutdatedPrint = () => {
@@ -39,6 +41,8 @@ export class PlayerInfo {
 export class Printer {
     // 2d array of players and their 5 samples.
     samples: Sample[][] = [];
+    bestDivineKnightPlayerId: number = -1;
+    divineKnightOrbKills: number = 0;
 
     GetTotalActive = (itemName: string): number => {
         return this.samples.flatMap(sample => sample)
@@ -92,6 +96,7 @@ export const updatePrinter = (data: Map<string, any>) => {
     const lab = data.get("lab") as Lab;
     const divinity = data.get("divinity") as Divinity;
     const artifacts = data.get("artifacts") as Artifact[];
+    const players = data.get("players") as Player[];
     const optLacc = data.get("OptLacc");
 
     // if double printer
@@ -105,8 +110,21 @@ export const updatePrinter = (data: Map<string, any>) => {
         printer.samples[linkedPlayer.playerID].forEach(sample => sample.harriep = true);
     })
 
+    const bestDivineKnight = players.reduce((final, player) => final = (player.talents.find(talent => talent.skillIndex == 178)?.level ?? 0) > 0 ? player : final, players[0]);
+    console.log("Best Divine Knight", bestDivineKnight);
+    if (bestDivineKnight) {
+        printer.bestDivineKnightPlayerId = bestDivineKnight.playerID;
+    }
+
     const daysSinceLastPrint = optLacc[125];
-    printer.samples.flatMap(player => player).forEach(sample => sample.artifactBoost = artifacts[4].getBonus() * daysSinceLastPrint);
+    const divineKnightOrbKills = optLacc[138];
+
+    printer.divineKnightOrbKills = divineKnightOrbKills;
+    
+    printer.samples.flatMap(player => player).forEach(sample => {
+        sample.artifactBoost = artifacts[4].getBonus() * daysSinceLastPrint
+        sample.divineKnightBoost = (bestDivineKnight.talents.find(talent => talent.skillIndex == 178)?.getBonus() ?? 0) * lavaLog(divineKnightOrbKills);
+    });
 
     return printer;
 }
