@@ -193,6 +193,10 @@ export class Player {
         }
     }
 
+    getTalentBonus = (skillIndex: number) => {
+        return this.talents.find(talent => talent.skillIndex == skillIndex)?.getBonus() ?? 0;
+    }
+
     getCurrentCooldown = (skillIndex: number) => {
         const skillCooldown = [...this.cooldown.entries()].filter(([talent, cooldown]) => talent.skillIndex == skillIndex).pop()
         if (skillCooldown) {
