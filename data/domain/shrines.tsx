@@ -48,7 +48,7 @@ export class Shrine {
     }
 
     getBonus = (map: number | undefined = undefined) => {
-        if (!this.isShrineActive(map)) {
+        if (!this.isShrineActive(map) || this.level == 0) {
             return 0;
         }
 
@@ -88,6 +88,8 @@ export default function parseShrines(rawData: Array<Array<number>>) {
     }
     return shrineData;
 }
+
+// shrine math: https://discord.com/channels/912156088873418792/912156088873418795/1068153373817327646
 
 export const updateShrines = (data: Map<string, any>) => {
     const shrines = data.get("shrines") as Shrine[];
