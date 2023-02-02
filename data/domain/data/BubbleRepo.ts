@@ -175,7 +175,7 @@ export const initBubbleRepo = () => {
                 "x1": 1.4,
                 "x2": 30,
                 "func": "decayMulti",
-                "description": "The following orange bubbles give {x higher bonus than what they display: I, III, IV, VI, XII",
+                "description": "The following orange bubbles give {x higher bonus than displayed: 1st, 3rd, 5th, 8th, 15th",
                 "requirements": [<ComponentModel>{"item": "GalaxyA3", "quantity": 250}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 3}],
                 "bonusKey": "MultiOr"
             }),
@@ -425,7 +425,7 @@ export const initBubbleRepo = () => {
                 "x1": 1.4,
                 "x2": 30,
                 "func": "decayMulti",
-                "description": "The following green bubbles give {x higher bonus than what they display: I, VI, VIII, X, XII",
+                "description": "The following green bubbles give {x higher bonus than displayed: 1st, 7th, 10th, 13th, 15th",
                 "requirements": [<ComponentModel>{"item": "Critter8", "quantity": 150}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 3}],
                 "bonusKey": "MultiGr"
             }),
@@ -675,7 +675,7 @@ export const initBubbleRepo = () => {
                 "x1": 1.4,
                 "x2": 30,
                 "func": "decayMulti",
-                "description": "The following purple bubbles give {x higher bonus than what they display: I, III, VI, X, XII",
+                "description": "The following purple bubbles give {x higher bonus than displayed: 1st, 3rd, 5th, 13th, 15th",
                 "requirements": [<ComponentModel>{"item": "Void", "quantity": 175}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 3}],
                 "bonusKey": "MultiPu"
             }),

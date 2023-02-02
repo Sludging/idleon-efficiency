@@ -1,11 +1,13 @@
 import { Alchemy } from "./alchemy";
 import { initRefineryCostRepo } from "./data/RefineryCostRepo";
+import { Family } from "./family";
 import { Item } from "./items";
 import { Lab } from "./lab";
 import { ComponentModel } from "./model/componentModel";
 import { SaltLick } from "./saltLick";
 import { Sigils } from "./sigils";
 import { getStampBonusForKey, Stamp } from "./stamps";
+import { ClassIndex } from "./talents";
 
 const RankToPowerCap = "50 50 200 800 3000 8000 14000 20000 30000 40000 50000 65000 80000 100000 200000 300000 400000 500000 600000 700000 800000 900000 1000000 1000000 1000000 1000000".split(" ");
 
@@ -69,7 +71,8 @@ export class SaltStatus {
     baseCost: ComponentModel[] = []
 
     getCap = () => {
-        return parseInt(RankToPowerCap[this.rank]);
+        // The math.max(x,25) is taken from Lava's code, guess he got lazy to add more values after 25.
+        return parseInt(RankToPowerCap[Math.max(this.rank,25)]);
     }
 
     getPowerPerCycle = () => {
@@ -159,6 +162,7 @@ export function updateRefinery(data: Map<string, any>) {
     const alchemy = data.get("alchemy") as Alchemy;
     const saltLick = data.get("saltLick") as SaltLick; 
     const stamps = data.get("stamps") as Stamp[][];
+    const family = data.get("family") as Family;
     const lastUpdated = data.get("lastUpdated") as Date;
 
     const labCycleBonus = lab.bonuses.find(bonus => bonus.name == "Gilded Cyclical Tubing")?.active ?? false ? 3 : 1;
@@ -166,11 +170,12 @@ export function updateRefinery(data: Map<string, any>) {
     const saltLickBonus = saltLick.getBonus(2);
     const secondsSinceUpdate = (new Date().getTime() - lastUpdated.getTime()) / 1000;
     const stampBonus = getStampBonusForKey(stamps, "RefinerySpd");
+    const divineKnightBonus = family.classBonus.get(ClassIndex.Divine_Knight)?.getBonus() ?? 0;
 
-    refinery.cycleInfo["Combustion"].cycleTime = Math.ceil((900 * Math.pow(4, 0)) / ((1 + (vialBonus + saltLickBonus + sigils.sigils[10].getBonus() + stampBonus) / 100) * labCycleBonus));
+    refinery.cycleInfo["Combustion"].cycleTime = Math.ceil((900 * Math.pow(4, 0)) / ((1 + (vialBonus + saltLickBonus + divineKnightBonus + sigils.sigils[10].getBonus() + stampBonus) / 100) * labCycleBonus));
     refinery.cycleInfo["Combustion"].timePast += secondsSinceUpdate;
 
-    refinery.cycleInfo["Synthesis"].cycleTime =Math.ceil((900 * Math.pow(4, 1)) / ((1 + (vialBonus + saltLickBonus + sigils.sigils[10].getBonus() + stampBonus) / 100) * labCycleBonus));
+    refinery.cycleInfo["Synthesis"].cycleTime =Math.ceil((900 * Math.pow(4, 1)) / ((1 + (vialBonus + saltLickBonus + divineKnightBonus + sigils.sigils[10].getBonus() + stampBonus) / 100) * labCycleBonus));
     refinery.cycleInfo["Synthesis"].timePast += secondsSinceUpdate;
 
     return refinery;

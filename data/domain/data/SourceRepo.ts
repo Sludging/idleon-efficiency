@@ -8893,6 +8893,16 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("Whetstone", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Vendors#Frostbite Towndra|Frostbite Towndra Vendors]]",
+                        "txtName": "Frostbite Towndra Vendor"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("Quest65", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
@@ -9624,7 +9634,10 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("Timecandy6", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[DropTable13]]", "txtName": "DropTable13"}],
+                "sources": [
+                    <SourceModel>{"wikiName": "[[DropTable13]]", "txtName": "DropTable13"},
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                ],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -11371,8 +11384,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Carpenter Cardinal#Restoring Power, once again, to a Portal|Restoring Power, once again, to a Portal]]",
                         "txtName": "Carpenter Cardinal: Restoring Power, once again, to a Portal"
-                    },
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                    }
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -11986,22 +11998,12 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentRings33", <SourcesModel>{
+        new SourcesBase("ObolHyper0", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentRings31", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("EquipmentRings32", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("EquipmentPendant28", <SourcesModel>{
+        new SourcesBase("EquipmentCape0", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []

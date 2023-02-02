@@ -21,7 +21,7 @@ import TabButton from '../../components/base/TabButton';
 import { Refinery } from '../../data/domain/refinery';
 import { Item } from '../../data/domain/items';
 import { Storage } from '../../data/domain/storage';
-import { nFormatter, range, toTime } from '../../data/utility';
+import { lavaLog, nFormatter, range, toTime } from '../../data/utility';
 import { StaticTime, TimeDisplaySize, TimeDown } from '../../components/base/TimeDisplay';
 import { Printer, Sample } from '../../data/domain/printer';
 import { Player } from '../../data/domain/player';
@@ -457,6 +457,27 @@ function PrinterDisplay() {
                     )
                 })
                 }
+                {playerData && printerData.bestDivineKnightPlayerId != -1 &&
+                    <ShadowBox key={"best_dk"} background="dark-1" pad="medium" align="center" margin={{ right: 'large', bottom: 'small' }}>
+                        <Box gap="small">
+                            <Box direction="row" gap="small">
+                                <IconImage data={playerData[printerData.bestDivineKnightPlayerId].getClassImageData()} scale={0.8} />
+                                <Text>{playerData[printerData.bestDivineKnightPlayerId].playerName}</Text>
+                            </Box>
+                            <Box direction="row" gap="small">
+                                <ComponentAndLabel
+                                    label="King Of The Remembered boost"
+                                    component={
+                                        <Box direction="row" gap="small" align="center" margin={{ top: 'medium' }}>
+                                            <IconImage data={playerData[printerData.bestDivineKnightPlayerId]!.talents.find(talent => talent.skillIndex == 178)!.getImageData()} scale={0.6} />
+                                            <Text size="small">{nFormatter(playerData[printerData.bestDivineKnightPlayerId]!.talents.find(talent => talent.skillIndex == 178)!.getBonus() * lavaLog(printerData.divineKnightOrbKills))}% ({nFormatter(printerData.divineKnightOrbKills)} Kills)</Text>
+                                        </Box>
+                                    }
+                                />
+                            </Box>
+                        </Box>
+                    </ShadowBox>
+                }
                 {
                     printerArtifact && printerArtifact.status != ArtifactStatus.Unobtained &&
                     <ShadowBox key={"artifact_bonus"} background="dark-1" pad="medium" align="center" margin={{ right: 'large', bottom: 'small' }}>
@@ -464,7 +485,7 @@ function PrinterDisplay() {
                             <ComponentAndLabel
                                 label="Gold Relic sample boost"
                                 component={
-                                    <Box direction="row" gap="small" align="center" margin={{top: 'medium'}}>
+                                    <Box direction="row" gap="small" align="center" margin={{ top: 'medium' }}>
                                         <IconImage data={printerArtifact.getImageData()} scale={0.8} />
                                         <Text>{artifactBoost}% ({daysSinceLastSample} Day)</Text>
                                     </Box>

@@ -40,7 +40,7 @@ function AlignmentDisplay() {
         <Grid columns={{ size: 'small' }}>
             {playerData && playerData.map((player, index) => {
                 return (
-                    <ShadowBox key={index} background="dark-1" pad="medium" align="start" margin={{ right: 'medium', bottom: 'small' }}>
+                    <ShadowBox style={{opacity: divinity.playerInfo[player.playerID].active ? 1 : 0.6 }} key={index} background="dark-1" pad="medium" align="start" margin={{ right: 'medium', bottom: 'small' }}>
                         <Box gap="small">
                             <Box direction="row" gap="xsmall" align="center">
                                 <IconImage data={player.getClassImageData()} scale={0.8} />
@@ -104,7 +104,7 @@ function GodDisplay() {
             {
                 divinity && divinity.gods.map((god, index) => {
                     return (
-                        <ShadowBox key={index} background="dark-1" pad="medium" direction="row" wrap margin={{ bottom: 'small', right: 'small' }} justify="between">
+                        <ShadowBox style={{opacity: god.unlocked ? 1 : 0.5 }} key={index} background="dark-1" pad="medium" direction="row" wrap margin={{ bottom: 'small', right: 'small' }} justify="between">
                             <Grid columns={{ count: 5, size: 'auto' }} fill>
                                 <Box margin={{ bottom: 'small', right: 'small' }} direction="row" gap="xsmall" align="center">
                                     <IconImage data={god.getImageData()} scale={0.5} />

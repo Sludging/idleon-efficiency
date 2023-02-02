@@ -668,6 +668,13 @@ export const initVendorRepo = () => {
                         "quantity": 1,
                         "no": 22,
                         "purchasePrice": 4000000
+                    },
+                    <VendorModel>{
+                        "vendor": "Frostbite Towndra",
+                        "item": "Whetstone",
+                        "quantity": 1,
+                        "no": 23,
+                        "purchasePrice": 1200000
                     }
                 ]
             }),

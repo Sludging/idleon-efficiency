@@ -2,7 +2,6 @@ import { lavaLog, nFormatter } from "../../utility";
 import { AtomCollider } from "../atomCollider";
 import { Cooking } from "../cooking";
 import { ArtifactBase } from "../data/ArtifactRepo";
-import { GemStore } from "../gemPurchases";
 import { ImageData } from "../imageData";
 import { ArtifactModel } from "../model/artifactModel";
 import { Player } from "../player";
@@ -77,10 +76,17 @@ export class Artifact {
 
     getBonus = (showUnobtained: boolean = false) => {
         if (showUnobtained || this.status != ArtifactStatus.Unobtained) {
-            return this.data.qtyBonus + (this.status == ArtifactStatus.Ancient ? this.data.ancientBonusQty : 0);
+            return this.data.qtyBonus + (this.status == ArtifactStatus.Ancient ? this.getAncientBonus() : 0);
         }
 
         return 0;
+    }
+
+    getAncientBonus = () => {
+        if (this.data.ancientBonus == "The artifact's main bonus is doubled!") {
+            return this.data.qtyBonus;
+        }
+        return this.data.ancientBonusQty;
     }
 
     hasCalculatedBonus = () => {
@@ -261,16 +267,10 @@ export class FunHippoeteArtifact extends Artifact {
 // Currently all data only requires parsing, can be very high on post processing list.
 export const updateArtifacts = (data: Map<string, any>) => {
     const sailing = data.get("sailing") as Sailing;
-    const gemStore = data.get("gems") as GemStore;
     const players = data.get("players") as Player[];
     const cooking = data.get("cooking") as Cooking;
     const collider = data.get("collider") as AtomCollider;
     const slab = data.get("slab") as Slab;
-
-
-    // Max chests (parse data)
-    const chestPurchases = gemStore.purchases.find(upgrade => upgrade.index == 130)?.pucrhased ?? 0;
-    sailing.maxChests += Math.min(Math.round(5 + chestPurchases), 19);
 
     // Sailing Related (parse data)
     (sailing.artifacts[27] as OperaMaskArtifact).goldOwned = sailing.loot[0];
