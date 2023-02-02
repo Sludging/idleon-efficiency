@@ -500,7 +500,8 @@ export const initRandoListRepo = () => {
                     "EquipmentRingsFishing3",
                     "IceMountains2",
                     "InvBag9",
-                    "Quest31"
+                    "Quest31",
+                    "GemP25"
                 ]
             }),
         new RandoListBase(18, <RandoListModel>{
@@ -1388,6 +1389,7 @@ export const initRandoListRepo = () => {
                     "135",
                     "136",
                     "137",
+                    "165",
                     "315",
                     "361",
                     "362",
@@ -1846,8 +1848,8 @@ export const initRandoListRepo = () => {
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "3rd_Weekly_Update_v173",
-                    "*Storage_Chest_now_has_auto-sort!_This_was_in_1st_week's_update._It's_a_new_button_on_the_left_side._@_*The_Atom_Collider_can_now_be_build_in_Construction_in_World_3!_This_was_in_2nd_week's_update._@___@_New_Stuff_in_Week_3_Update_-----------------------_@_*Added_RANDOM_EVENTS_to_the_world_of_IdleOn!_Every_hour, theres_a_roughly_1-in-4_chance_a_random_event_will_occur, and_you'll_be_notified_with_a_popup_on_screen!_You_can_only_do_1_per_day._@_*Find_7_new_items_from_Random_Events!_Each_one_has_a_unique_drop_table!_@_*Alchemy_will_now_tell_you_which_resource_you_need_for_the_next_vial!_Just_check_the_top_of_the_Vials_section, you'll_see_what_I'm_sayin'_yo._@_*Changed_the_max_resource_stack_to_1050M, to_avoid_complete_losses_of_materials_in_certain_situations._@_*Fixed_several_bugs, including_Sizzling_Skull_Crashes, Sailing_AFK_interruption, Atom_Trimmed_Construction_slots, and_more._@_*For_full_update_notes, check_Discord.gg/Idleon!"
+                    "4th_Weekly_Update_v174",
+                    "*See_Discord.gg/idleon_for_Weeks_1-3_patch_notes_@___@_New_Stuff_in_Week_4_Update_-----------------------_@_*The_Elite_Class_DIVINE_KNIGHT, who_comes_from_Squire_class, has_been_released!_His_talents_include_include_5_new_attacks, and_5_utilities._@_*Quick-Ref_now_lets_you_INTERACT_with_the_following_systems_from_anywhere:_Obols, Star_Signs, and_Alchemy._Go_try_it_in_the_Codex!_@_*Added_the_Anvil_Whetstone_to_World_3_Town_Shoppe!_Allows_you_to_reset_your_anvil_points_spent._@_*Added_'hold_down_to_autospend'_for_Anvil_Points._@_*Added_'hold_down'_for_Craft_From_Storage_in_Anvil._@_*Added_the_ALL_PERSONAL_obol_altar_tab!_Allows_for_easy_sorting_of_all_your_obols_across_all_characters!_@_*Added_an_'Auto-cast_abilities'_toggle_in_Pet_Battles._@_*You_now_get_10_free_teleports_every_day, instead_of_5._Gemshop_purchases_also_give_13_instead_of_10._@_*Also, if_you_love_Improvements_like_these, please_leave_a_review_saying_so!_Help_me_fight_back_against_people_who_say_IdleOn_never_improves!!_Bam!_Pow!"
                 ]
             }),
         new RandoListBase(62, <RandoListModel>{

@@ -277,8 +277,8 @@ export class Cooking {
             possibleMeals.push(sum + 1);
         }
 
-        // return sorted by lowest meal to highest.
-        return possibleMeals.sort((meal1, meal2) => meal1 < meal2 ? -1 : 1);
+        // remove all outcomes that are larger than 59 and return sorted by lowest meal to highest.
+        return possibleMeals.filter(meal => meal < 60).sort((meal1, meal2) => meal1 < meal2 ? -1 : 1);
     }
 
     spicesToValues = (spices: number[]) => {
