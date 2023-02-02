@@ -72,7 +72,7 @@ export class SaltStatus {
 
     getCap = () => {
         // The math.max(x,25) is taken from Lava's code, guess he got lazy to add more values after 25.
-        return parseInt(RankToPowerCap[Math.max(this.rank,25)]);
+        return parseInt(RankToPowerCap[Math.min(this.rank,25)]);
     }
 
     getPowerPerCycle = () => {
