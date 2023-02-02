@@ -12,6 +12,7 @@ import { Card } from "./cards";
 import { Alchemy } from "./alchemy";
 import { Stamp } from "./stamps";
 import { PlayerStatues } from "./statues";
+import { GemStore } from "./gemPurchases";
 
 // "Captains": [
 //     [0,0,-1,3,6.75,2,0],
@@ -303,6 +304,12 @@ export const updateSailing = (data: Map<string, any>) => {
     const stamps = data.get("stamps") as Stamp[][];
     const statues = data.get("statues") as PlayerStatues[];
     const alchemy = data.get("alchemy") as Alchemy;
+    const gemStore = data.get("gems") as GemStore;
+
+    // Max chests (requires artifacts info)
+    const chestPurchases = gemStore.purchases.find(upgrade => upgrade.index == 130)?.pucrhased ?? 0;
+    const artifactBoost = sailing.artifacts[19].getBonus();
+    sailing.maxChests = Math.min(Math.round(5 + chestPurchases + artifactBoost), 19);
 
     // Speed base math
     const purrmepPlayer = divinity.gods[6].linkedPlayers.at(0); // purrmep is limited to only 1 player linked.
