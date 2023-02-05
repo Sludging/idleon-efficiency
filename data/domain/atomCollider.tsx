@@ -57,6 +57,7 @@ export class Atom {
             switch (atom.index) {
                 case 0: return new HydrogenAtom(atom.index, atom.data);
                 case 5: return new CarbonAtom(atom.index, atom.data);
+                case 7: return new OxygenAtom(atom.index, atom.data);
                 case 8: return new FluorideAtom(atom.index, atom.data);
                 default: return new Atom(atom.index, atom.data)
             }
@@ -89,6 +90,11 @@ export class CarbonAtom extends Atom {
     getExtraLevels = (): number => {
         return 2 * this.level;
     }
+
+    override getBonusText = () => {
+        return this.data.desc.replace(/{/g, (this.level * this.data.bonusPerLv).toString())
+        .replace(/}/, this.getBonus().toString());
+    }
 }
 
 export class FluorideAtom extends Atom {
@@ -98,6 +104,18 @@ export class FluorideAtom extends Atom {
             return 0;
         }
         return Math.pow(1 + (this.level * this.data.bonusPerLv) / 100, this.voidMeals);
+    }
+
+    override getBonusText = () => {
+        return this.data.desc.replace(/{/g, (this.level * this.data.bonusPerLv).toString())
+        .replace(/>/, this.getBonus().toString());
+    }
+}
+
+export class OxygenAtom extends Atom {
+    override getBonusText = () => {
+        return this.data.desc.replace(/{/g, (this.level * this.data.bonusPerLv).toString())
+        .replace(/</, this.level.toString());
     }
 }
 
