@@ -394,14 +394,13 @@ class Bag {
         if (this.name == "bCraft") {
             this.maxCarry = this.getMaterialCapacity(props.allCapBonuses, props.stampMatCapBonus, props.gemsCapacityBought, props.stampAllCapBonus, props.extraBagsLevel, props.starSignExtraCap);
         }
-
-        if (this.skill != undefined || this.name == "Foods") {
+        else if (this.skill != undefined || this.name == "Foods") {
             this.maxCarry = this.getSkillCapacity(props.allCapBonuses, props.gemsCapacityBought, props.stampMatCapBonus, props.stampAllCapBonus, props.starSignExtraCap)
         }
     }
 
 
-    private getSkillCapacity = (allCapBonuses: number = 0, gemCarryCap: number = 0, skillCapstamp: number = 0, allCapStamp: number = 0, starSign: number = 0) => {
+    private getSkillCapacity = (allCapBonuses: number, gemCarryCap: number, skillCapstamp: number, allCapStamp: number, starSign: number) => {
         return Math.floor(
             this.capacity *
             (1 + (25 * gemCarryCap) / 100) *
@@ -411,7 +410,7 @@ class Bag {
         );
     }
 
-    private getMaterialCapacity = (allCapBonuses: number = 0, stampMatCapBonus: number, gemsCapacityBought: number, stampAllCapBonus: number, extraBagsLevel: number, starSignExtraCap: number) => {
+    private getMaterialCapacity = (allCapBonuses: number, stampMatCapBonus: number, gemsCapacityBought: number, stampAllCapBonus: number, extraBagsLevel: number, starSignExtraCap: number) => {
         const stampMatCapMath = (1 + stampMatCapBonus / 100);
         const gemPurchaseMath = (1 + (25 * gemsCapacityBought) / 100);
         const additionalCapMath = (1 + (stampAllCapBonus + starSignExtraCap) / 100);
@@ -475,8 +474,8 @@ export function updateCapacity(data: Map<string, any>) {
         // All Cap Math
         const currentPlayerInfo = capacity.players[player.playerID];
 
-        const telekineticStorageBonus = player.talents.find(x => x.skillIndex == CapacityConst.TelekineticStorageSkillIndex)?.getBonus() ?? 0;
-        const extraBagsTalentBonus = player.talents.find(x => x.skillIndex == CapacityConst.ExtraBagsSkillIndex)?.getBonus() ?? 0;
+        const telekineticStorageBonus = player.getTalentBonus(CapacityConst.TelekineticStorageSkillIndex);
+        const extraBagsTalentBonus = player.getTalentBonus(CapacityConst.ExtraBagsSkillIndex);
         const starSignExtraCap = player.starSigns.reduce((sum, sign) => sum += sign.getBonus("Carry Cap"), 0);
 
         const carryCapShrineBonus = shrines[ShrineConstants.CarryShrine].getBonus(player.currentMapId);
@@ -501,7 +500,6 @@ export function updateCapacity(data: Map<string, any>) {
                 stampBonus = stamps.find(stamp => stamp.raw_name == playerBag.stampName)?.getBonus(skillLevel) ?? 0;
             }
 
-            
             playerBag.setCapacity({
                 allCapBonuses: currentPlayerInfo.allCapBonus,
                 stampMatCapBonus: stampBonus,
