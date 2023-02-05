@@ -178,6 +178,16 @@ function Cooking() {
                 //undiscovered meals get pushed to bottom
                 if (meal1.level == 0) return meal2.level == 0 ? indexSort : 1
 
+                function moveMaxedToEnd(meal1: Meal, meal2: Meal) {
+                    if (meal1.level == meal1.maxLevel) {
+                        return -1;
+                    }
+                    if (meal2.level == meal2.maxLevel) {
+                        return -1;
+                    }
+                    return meal1.timeToNext > meal2.timeToNext ? 1 : -1;
+                }
+
                 function sortByTimeAndIndex(timeA: number, timeB: number){
                     //negative times get switched to index sorting
                     if(timeA > 0 && timeB > 0) return timeA > timeB ? 1 : indexSort //neither reached
@@ -188,7 +198,7 @@ function Cooking() {
                     case "Level":
                         return meal1.level > meal2.level ? -1 : 1;
                     case "Least Time to Cook Next":
-                        return meal1.timeToNext > meal2.timeToNext ? 1 : -1;
+                        return moveMaxedToEnd(meal1, meal2);
                     case "Least Time to Diamond":
                         return sortByTimeAndIndex(meal1.timeToDiamond, meal2.timeToDiamond);
                     case "Least Time to Purple":
@@ -207,7 +217,7 @@ function Cooking() {
         if(meal.level == 0) return "" //undiscovered meals
         switch(sort){
             case "Level": return ""; //level already shown
-            case "Least Time to Cook Next": return toTime(meal.timeToNext * 3600);
+            case "Least Time to Cook Next": return meal.level < meal.maxLevel ? toTime(meal.timeToNext * 3600) : "Already max level!";
             case "Least Time to Diamond": return meal.timeToDiamond > 0 ? toTime(meal.timeToDiamond * 3600) : "Already Diamond!";
             case "Least Time to Purple": return meal.timeToPurple > 0 ? toTime(meal.timeToPurple * 3600): "Already Purple!";
             case "Least Time to Void": return meal.timeToVoid > 0 ? toTime(meal.timeToVoid * 3600): "Already Void!";
