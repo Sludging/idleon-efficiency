@@ -339,7 +339,7 @@ export class PlayerCapacity {
     allCapBonus: number = 0;
     totalInventorySlots: number = 0;
 
-    constructor(bagInfo: Map<string, number>) {
+    constructor(public playerID: number, bagInfo: Map<string, number>) {
         this.bags = [];
         Object.keys(CarryInfo).forEach(carryType => {
             // This should never fail but, better safe then sorry.
@@ -421,16 +421,31 @@ class Bag {
     }
 }
 
+interface BestCapacityPlayer {
+    maxCapacity: number
+    inventorySlots: number
+    player?: Player
+}
 
 export class Capacity {
     players: PlayerCapacity[] = [];
+    maxCapacityByType: Record<string, BestCapacityPlayer> = {
+        "bCraft": { maxCapacity: 0, inventorySlots: 0 },
+        "Foods": { maxCapacity: 0, inventorySlots: 0 },
+        "Mining": { maxCapacity: 0, inventorySlots: 0 },
+        "Chopping": { maxCapacity: 0, inventorySlots: 0 },
+        "Fishing": { maxCapacity: 0, inventorySlots: 0 },
+        "Bugs": { maxCapacity: 0, inventorySlots: 0 },
+        "Critters": { maxCapacity: 0, inventorySlots: 0 },
+        "Souls": { maxCapacity: 0, inventorySlots: 0 },
+    }
 }
 
 // Accepts an array of `MaxCarryCap_<x>` data from each player.
 export default function parseCapacity(maxCapacities: Map<string, number>[]) {
     const capacity = new Capacity();
-    maxCapacities.forEach(playerCapacity => {
-        capacity.players.push(new PlayerCapacity(playerCapacity));
+    maxCapacities.forEach((playerCapacity, index) => {
+        capacity.players.push(new PlayerCapacity(index, playerCapacity));
     })
 
     return capacity;
@@ -470,11 +485,14 @@ export function updateCapacity(data: Map<string, any>) {
 
         currentPlayerInfo.setAllCapsBonus(guildCarryBonus, telekineticStorageBonus, carryCapShrineBonus, zergPrayerBonus, ruckSackPrayerBonus, bribeCapBonus);
 
+        // Set max inventory slots.
+        currentPlayerInfo.totalInventorySlots = storage.playerStorage[player.playerID].filter((item) => item.internalName != "LockedInvSpace").length;
+
         // Update individual bag carry caps.
         Object.keys(CarryInfo).forEach(carryType => {
             const playerBag = currentPlayerInfo.bags.find(bag => bag.name == carryType);
+            // This shouldn't happen but, handling it to be safe and to make TS happy.
             if (!playerBag) {
-                console.log(player, carryType);
                 return;
             }
             let stampBonus = 0;
@@ -492,10 +510,14 @@ export function updateCapacity(data: Map<string, any>) {
                 extraBagsLevel: extraBagsTalentBonus,
                 starSignExtraCap: starSignExtraCap
             })
-        })
 
-        // Set max inventory slots.
-        currentPlayerInfo.totalInventorySlots = storage.playerStorage[player.playerID].filter((item) => item.internalName != "LockedInvSpace").length;
+            // Keep track of highest carry cap player per type.
+            if (playerBag.maxCarry > capacity.maxCapacityByType[carryType].maxCapacity) {
+                capacity.maxCapacityByType[carryType].maxCapacity = playerBag.maxCarry;
+                capacity.maxCapacityByType[carryType].player = player;
+                capacity.maxCapacityByType[carryType].inventorySlots = currentPlayerInfo.totalInventorySlots; 
+            }
+        })
     })
     
     return capacity;

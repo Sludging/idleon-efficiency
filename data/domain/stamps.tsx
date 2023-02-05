@@ -2,6 +2,7 @@ import { lavaFunc, range } from '../utility'
 import { Alchemy } from './alchemy';
 import { AtomCollider } from './atomCollider';
 import { Bribe, BribeConst, BribeStatus } from './bribes';
+import { Capacity } from './capacity';
 import { ImageData } from './imageData';
 import { Item } from './items';
 import { Lab } from './lab';
@@ -40,6 +41,12 @@ export class Stamp {
     vialDiscount: number = 0;
     atomDiscount: number = 0;
 
+    // Max upgrades (key is either 0% or 90% to represent both ends of atom discount)
+    maxCarryInfo: Record<string, {
+        maxLevel: number,
+        costToMax: number
+    }> = {}
+
     constructor(name: string, raw_name: string, type: string, bonus: string, data: StampDataModel) {
         this.raw_name = raw_name;
         this.name = name.replace("_", " ");
@@ -62,10 +69,39 @@ export class Stamp {
         return range(this.level, maxLevel).reduce((sum, level) => sum += this.getGoldCost(level), 0);
     }
 
-    getMaterialCost = (): number => {
+    getMaterialCost = (level: number = this.level): number => {
         const matDiscount = Math.max(0.1, 1 - this.atomDiscount / 100) * (1 / (1 + (this.sigilDiscount / 100)));
-        const baseCost = this.data.startV * matDiscount * Math.pow(this.data.mCostExp, Math.pow(Math.round(this.level / this.data.upgradeInterval) - 1, 0.8));
+        const baseCost = this.data.startV * matDiscount * Math.pow(this.data.mCostExp, Math.pow(Math.round(level / this.data.upgradeInterval) - 1, 0.8));
         return Math.floor(Math.floor(baseCost) * Math.max(0.1, 1 - this.vialDiscount / 100));
+    }
+
+    setMaterialCostToMaxCarry = () => {
+        const currentAtomDiscount = this.atomDiscount;
+        ["0%", "90%"].forEach(atomDiscount => {
+            this.atomDiscount = atomDiscount == "0%" ? 0 : 90;
+            const maxCarryLevel = this.maxCarryInfo[atomDiscount].maxLevel;
+            const costToMaxCarryLevel = range(this.maxLevel, maxCarryLevel, this.data.upgradeInterval).reduce((sum, level) => sum += this.getMaterialCost(level), 0);
+            this.maxCarryInfo[atomDiscount].costToMax = costToMaxCarryLevel;
+        })
+        // Revert the discount to real number.
+        this.atomDiscount = currentAtomDiscount;
+    }
+
+    // I don't like this, need to think of a better way
+    setMaxLevelForCarryCap = (maxCarryCapacity: number) => {
+        const currentAtomDiscount = this.atomDiscount;
+        ["0%", "90%"].forEach(atomDiscount => {
+            this.atomDiscount = atomDiscount == "0%" ? 0 : 90;
+            let maxCarryLevel = this.maxLevel;
+
+            // As long as we can carry enough for upgrade, keep increasing the upgrades.
+            while (this.getMaterialCost(maxCarryLevel) < maxCarryCapacity) {
+                maxCarryLevel += this.data.upgradeInterval;
+            }
+            this.maxCarryInfo[atomDiscount] = { maxLevel: maxCarryLevel, costToMax: 0 }
+        })
+        // Revert the discount to real number.
+        this.atomDiscount = currentAtomDiscount;
     }
 
     getBonusText = (skillLevel: number = 0): string => {
@@ -172,6 +208,24 @@ export function updateStamps(data: Map<string, any>) {
         stamp.atomDiscount = collider.atoms[0].getBonus();
         stamp.vialDiscount = vialDiscount;
         stamp.hasBribe = discountBribe.status == BribeStatus.Purchased;
+    })
+
+    return stamps;
+}
+
+// Carry cap is influenced by stamps, so this has to be done in a separate function after carry caps are calculated.
+export function updateStampMaxCarry(data: Map<string, any>) {
+    const stamps = data.get("stamps") as Stamp[][];
+    const capacity = data.get("capacity") as Capacity;
+    stamps.flatMap(tab => tab).forEach(stamp => {
+        // Identify the max possible level for this stamp based on current carry caps.
+        const stampMatBagType = stamp.materialItem?.getBagType();
+        if (stampMatBagType) {
+            const maxCarry = capacity.maxCapacityByType[stampMatBagType];
+
+            stamp.setMaxLevelForCarryCap(maxCarry.maxCapacity * maxCarry.inventorySlots);
+            stamp.setMaterialCostToMaxCarry();
+        }
     })
 
     return stamps;

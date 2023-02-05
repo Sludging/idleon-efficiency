@@ -1,5 +1,5 @@
 import parseTraps from './traps';
-import parseStamps, { updateStamps } from './stamps';
+import parseStamps, { updateStampMaxCarry, updateStamps } from './stamps';
 import parseStatues from './statues';
 import parsePlayers, { Player, updatePlayers } from './player';
 import parseAlchemy, { updateAlchemy } from './alchemy';
@@ -167,6 +167,12 @@ const postProcessingMap: Record<string, Function> = {
     "account": (doc: Cloudsave, accountData: Map<string, any>) => updateAccount(accountData),
     "construction": (doc: Cloudsave, accountData: Map<string, any>) => updateConstruction(accountData),
     "refinery": (doc: Cloudsave, accountData: Map<string, any>) => updateRefinery(accountData),
+    
+}
+
+// I really really hate this.
+const postPostProcessingMap: Record<string, Function> = {
+    "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStampMaxCarry(accountData),
 }
 
 export const updateIdleonData = async (data: Cloudsave, charNames: string[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
@@ -204,7 +210,7 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], all
         }
     })
 
-    // Do post parse processing (twice for some edge cases)
+    // Do post parse processing
     Object.entries(postProcessingMap).forEach(([key, toExecute]) => {
         try {
             accountData.set(key, toExecute(data, accountData));
@@ -212,6 +218,18 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], all
         catch (e) {
             console.debug(e);
             console.log(`Failed post-processing ${key}`);
+            accountData.set(key, undefined);
+        }
+    })
+
+    // Do post post parse processing
+    Object.entries(postPostProcessingMap).forEach(([key, toExecute]) => {
+        try {
+            accountData.set(key, toExecute(data, accountData));
+        }
+        catch (e) {
+            console.debug(e);
+            console.log(`Failed post-post-processing ${key}`);
             accountData.set(key, undefined);
         }
     })

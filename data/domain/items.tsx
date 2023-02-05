@@ -250,6 +250,33 @@ export class Item {
         })
     }
 
+    getBagType = () => {
+        // This function is based on _customBlock_MaxCapacity
+        switch (this.data.item.typeGen) {
+            case TypeGenEnum.bBar: 
+            case TypeGenEnum.cOil: 
+            case TypeGenEnum.bOre: 
+                return "Mining"
+            case TypeGenEnum.dFish: 
+                return "Fishing";
+            case TypeGenEnum.dBugs: 
+                return "Bugs"
+            case TypeGenEnum.bLeaf: 
+            case TypeGenEnum.bLog: 
+                return "Chopping";
+            case TypeGenEnum.cFood: 
+                return "Foods"
+            case TypeGenEnum.dCritters: 
+                return "Critters"
+            case TypeGenEnum.dSouls:
+                return "Souls"
+            case TypeGenEnum.bCraft:
+                return "bCraft";
+            default:
+                return undefined;
+        }
+    }
+
     getArchType = () => {
         switch (this.type) {
             case 'Bow':
