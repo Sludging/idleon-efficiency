@@ -214,9 +214,9 @@ export function notUndefined<T>(x: T | undefined): x is T {
 	return map;
 }
 
-export function range(start: number, end: number) {
-    const length = end - start;
-    return Array.from({ length }, (_, i) => start + i);
+export function range(start: number, end: number, increment: number = 1) {
+    const length = (end - start) / increment;
+    return Array.from({ length }, (_, i) => start + i * increment);
 }
 
 /**
