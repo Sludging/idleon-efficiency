@@ -17,7 +17,7 @@ import { Item } from "../../data/domain/items";
 import ItemSourcesDisplay from "../../components/base/ItemSourceDisplay";
 import TipDisplay, { TipDirection } from "../../components/base/TipDisplay";
 import IconImage from "../../components/base/IconImage";
-import TextAndLabel from "../../components/base/TextAndLabel";
+import TextAndLabel, { ComponentAndLabel } from "../../components/base/TextAndLabel";
 import { AtomCollider } from "../../data/domain/atomCollider";
 
 const ShadowBox = styled(Box)`
@@ -45,10 +45,19 @@ function StampDisplay({ stamp, index }: { stamp: Stamp, index: number }) {
         }
         return (
             <Box gap="small">
-                <Text size="small">Bonus: {stamp.getBonusText()}</Text>
-                {stamp.isMaxLevel() && <Box direction="row" align="center"><Text size="small">Material Cost: {nFormatter(stamp.getMaterialCost())}</Text><IconImage data={(stamp.materialItem as Item).getImageData()} /></Box>}
-                <Box direction="row" gap="small"><Text size="small">Cost: </Text><CoinsDisplay coinMap={getCoinsArray(stamp.getGoldCost())} maxCoins={3} /></Box>
-                <Box direction="row" gap="small"><Text size="small">Cost to next tier: </Text><CoinsDisplay coinMap={getCoinsArray(stamp.getGoldCostToMax())} maxCoins={3} /></Box>
+                <TextAndLabel labelColor="grey-3" textSize="small" label="Bonus" text={stamp.getBonusText()} />
+                {stamp.isMaxLevel() && <ComponentAndLabel labelColor="grey-3" label="Material Cost" component={<Box direction="row" gap="small" align="center"><Text size="small">{nFormatter(stamp.getMaterialCost())}</Text><IconImage data={(stamp.materialItem as Item).getImageData()} /></Box>} />}
+                <ComponentAndLabel labelColor="grey-3" label="Cost" component={<CoinsDisplay coinMap={getCoinsArray(stamp.getGoldCost())} maxCoins={3} />} />
+                <ComponentAndLabel labelColor="grey-3" label="Cost to next tier" component={<CoinsDisplay coinMap={getCoinsArray(stamp.getGoldCostToMax())} maxCoins={3} />} />
+                {
+                    Object.entries(stamp.maxCarryInfo).length > 0 && ["0%", "90%"].map(atomDiscount => (
+                        <Box key={atomDiscount}>
+                            <Text size="medium">At {atomDiscount} atom discount:</Text>
+                            {stamp.maxCarryInfo[atomDiscount].maxLevel > 0 && <Text size="small">Max level based on current carry cap: {stamp.maxCarryInfo[atomDiscount].maxLevel}</Text>}
+                            {stamp.maxCarryInfo[atomDiscount].costToMax > 0 && <Box direction="row" align="center"><Text size="small">Total material cost: {nFormatter(stamp.maxCarryInfo[atomDiscount].costToMax)}</Text><IconImage data={(stamp.materialItem as Item).getImageData()} scale={0.7} /></Box>}
+                        </Box>
+                    ))
+                }
             </Box>
         )
     }
