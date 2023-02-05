@@ -148,14 +148,16 @@ export const parseFamily = (players: Player[]) => {
     GroupBy(players, "classId").forEach(classPlayers => {
         const highestLevel = classPlayers.sort((player1, player2) => player1.level > player2.level ? -1 : 1)[0];
         const bonusData = familyBonusMapping[highestLevel.classId];
-        family.classBonus.set(highestLevel.classId, new FamilyBonus(bonusData[0], lavaFunc(bonusData[3], highestLevel.level - Number(classAccountBonus[highestLevel.classId][1]), Number(bonusData[1]), Number(bonusData[2]), false)));
+        const familyManBoost = 1; // + highestLevel.getTalentBonus(144) / 100;
+        const familyBonus = lavaFunc(bonusData[3], highestLevel.level - Number(classAccountBonus[highestLevel.classId][1]), Number(bonusData[1]), Number(bonusData[2]), false);
+        family.classBonus.set(highestLevel.classId, new FamilyBonus(bonusData[0], familyBonus * familyManBoost));
         FamilyBonusRelations[highestLevel.classId].forEach((subClass) => {
             const bonusData = familyBonusMapping[subClass];
             const subClassFamilyBonus = lavaFunc(bonusData[3], highestLevel.level - Number(classAccountBonus[subClass][1]), Number(bonusData[1]), Number(bonusData[2]), false)
             // if we never seen this subclass or the value is higher, set a new family bonus.
             const currentBonus = family.classBonus.get(subClass);
-            if (subClassFamilyBonus > (currentBonus?.getBonus() ?? 0)) {
-                family.classBonus.set(subClass, new FamilyBonus(bonusData[0], subClassFamilyBonus));
+            if (subClassFamilyBonus * familyManBoost > (currentBonus?.getBonus() ?? 0)) {
+                family.classBonus.set(subClass, new FamilyBonus(bonusData[0], subClassFamilyBonus * familyManBoost));
             }
         })
     })
