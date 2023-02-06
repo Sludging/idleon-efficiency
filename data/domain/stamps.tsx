@@ -45,7 +45,8 @@ export class Stamp {
     // Max upgrades (key is either 0% or 90% to represent both ends of atom discount)
     maxCarryInfo: Record<string, {
         maxLevel: number,
-        costToMax: number
+        costToMax: number,
+        moneyCost: number,
     }> = {}
     maxCarryPlayer: Player | undefined;
 
@@ -89,6 +90,18 @@ export class Stamp {
         this.atomDiscount = currentAtomDiscount;
     }
 
+    setGoldCostToMaxCarry = () => {
+        const currentAtomDiscount = this.atomDiscount;
+        ["0%", "90%"].forEach(atomDiscount => {
+            this.atomDiscount = atomDiscount == "0%" ? 0 : 90;
+            const maxCarryLevel = this.maxCarryInfo[atomDiscount].maxLevel;
+            const goldCostToMaxCarryLevel = range(this.level, maxCarryLevel).reduce((sum, level) => sum += this.getGoldCost(level), 0);
+            this.maxCarryInfo[atomDiscount].moneyCost = goldCostToMaxCarryLevel;
+        });
+        // Revert the discount to real number.
+        this.atomDiscount = currentAtomDiscount;
+    }
+
     // I don't like this, need to think of a better way
     setMaxLevelForCarryCap = (maxCarryCapacity: number) => {
         const currentAtomDiscount = this.atomDiscount;
@@ -100,7 +113,7 @@ export class Stamp {
             while (this.getMaterialCost(maxCarryLevel) < maxCarryCapacity) {
                 maxCarryLevel += this.data.upgradeInterval;
             }
-            this.maxCarryInfo[atomDiscount] = { maxLevel: maxCarryLevel, costToMax: 0 }
+            this.maxCarryInfo[atomDiscount] = { maxLevel: maxCarryLevel, costToMax: 0, moneyCost: 0 }
         })
         // Revert the discount to real number.
         this.atomDiscount = currentAtomDiscount;
@@ -227,6 +240,7 @@ export function updateStampMaxCarry(data: Map<string, any>) {
 
             stamp.setMaxLevelForCarryCap(maxCarry.maxCapacity * maxCarry.inventorySlots);
             stamp.setMaterialCostToMaxCarry();
+            stamp.setGoldCostToMaxCarry();
             stamp.maxCarryPlayer = maxCarry.player;
         }
     })
