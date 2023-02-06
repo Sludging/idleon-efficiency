@@ -57,6 +57,7 @@ function StampDisplay({ stamp, index }: { stamp: Stamp, index: number }) {
                             <Text size="small">At {atomDiscount} atom discount:</Text>
                             {stamp.maxCarryInfo[atomDiscount].maxLevel > 0 && <Box direction="row" gap="xsmall"><Text size="xsmall">Max level based on current carry cap: </Text><Text size="xsmall" weight={"bold"}>{stamp.maxCarryInfo[atomDiscount].maxLevel}</Text></Box>}
                             {stamp.maxCarryInfo[atomDiscount].costToMax > 0 && <Box direction="row" align="center"><Text size="xsmall">Total material cost: {nFormatter(stamp.maxCarryInfo[atomDiscount].costToMax)}</Text><IconImage data={(stamp.materialItem as Item).getImageData()} scale={0.7} /></Box>}
+                            {stamp.maxCarryInfo[atomDiscount].moneyCost > 0 && <Box direction="row" align="center"><Text size="xsmall">Money cost:</Text><CoinsDisplay coinScale={0.8} coinMap={getCoinsArray(stamp.maxCarryInfo[atomDiscount].moneyCost)} maxCoins={3} /></Box>}
                         </Box>
                     ))
                 }
