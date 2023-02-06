@@ -9,6 +9,7 @@ import { Lab } from './lab';
 import { BaseItemModel } from './model/baseItemModel';
 import { StampDataModel } from './model/stampDataModel';
 import { StampItemModel } from './model/stampItemModel';
+import { Player } from './player';
 import { Sigils } from './sigils';
 
 export enum StampTab {
@@ -46,6 +47,7 @@ export class Stamp {
         maxLevel: number,
         costToMax: number
     }> = {}
+    maxCarryPlayer: Player | undefined;
 
     constructor(name: string, raw_name: string, type: string, bonus: string, data: StampDataModel) {
         this.raw_name = raw_name;
@@ -225,6 +227,7 @@ export function updateStampMaxCarry(data: Map<string, any>) {
 
             stamp.setMaxLevelForCarryCap(maxCarry.maxCapacity * maxCarry.inventorySlots);
             stamp.setMaterialCostToMaxCarry();
+            stamp.maxCarryPlayer = maxCarry.player;
         }
     })
 

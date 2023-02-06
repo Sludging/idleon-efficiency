@@ -47,16 +47,22 @@ function StampDisplay({ stamp, index }: { stamp: Stamp, index: number }) {
             <Box gap="small">
                 <TextAndLabel labelColor="grey-3" textSize="small" label="Bonus" text={stamp.getBonusText()} />
                 {stamp.isMaxLevel() && <ComponentAndLabel labelColor="grey-3" label="Material Cost" component={<Box direction="row" gap="small" align="center"><Text size="small">{nFormatter(stamp.getMaterialCost())}</Text><IconImage data={(stamp.materialItem as Item).getImageData()} /></Box>} />}
+                <hr style={{ width: "100%" }} />
                 <ComponentAndLabel labelColor="grey-3" label="Cost" component={<CoinsDisplay coinMap={getCoinsArray(stamp.getGoldCost())} maxCoins={3} />} />
                 <ComponentAndLabel labelColor="grey-3" label="Cost to next tier" component={<CoinsDisplay coinMap={getCoinsArray(stamp.getGoldCostToMax())} maxCoins={3} />} />
                 {
                     Object.entries(stamp.maxCarryInfo).length > 0 && ["0%", "90%"].map(atomDiscount => (
                         <Box key={atomDiscount}>
-                            <Text size="medium">At {atomDiscount} atom discount:</Text>
-                            {stamp.maxCarryInfo[atomDiscount].maxLevel > 0 && <Text size="small">Max level based on current carry cap: {stamp.maxCarryInfo[atomDiscount].maxLevel}</Text>}
-                            {stamp.maxCarryInfo[atomDiscount].costToMax > 0 && <Box direction="row" align="center"><Text size="small">Total material cost: {nFormatter(stamp.maxCarryInfo[atomDiscount].costToMax)}</Text><IconImage data={(stamp.materialItem as Item).getImageData()} scale={0.7} /></Box>}
+                            <hr style={{ width: "100%" }} />
+                            <Text size="small">At {atomDiscount} atom discount:</Text>
+                            {stamp.maxCarryInfo[atomDiscount].maxLevel > 0 && <Box direction="row" gap="xsmall"><Text size="xsmall">Max level based on current carry cap: </Text><Text size="xsmall" weight={"bold"}>{stamp.maxCarryInfo[atomDiscount].maxLevel}</Text></Box>}
+                            {stamp.maxCarryInfo[atomDiscount].costToMax > 0 && <Box direction="row" align="center"><Text size="xsmall">Total material cost: {nFormatter(stamp.maxCarryInfo[atomDiscount].costToMax)}</Text><IconImage data={(stamp.materialItem as Item).getImageData()} scale={0.7} /></Box>}
                         </Box>
                     ))
+                }
+                                                            
+                {
+                    stamp.maxCarryPlayer && <Box><hr style={{ width: "100%" }} /><Text size="xsmall">Highest carry cap on: {stamp.maxCarryPlayer.playerName}</Text></Box>
                 }
             </Box>
         )
