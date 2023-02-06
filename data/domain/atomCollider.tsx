@@ -4,7 +4,7 @@ import { AtomColliderBase, initAtomColliderRepo } from './data/AtomColliderRepo'
 import { AtomColliderModel } from './model/atomColliderModel';
 import { Alchemy } from './alchemy';
 import { ImageData } from './imageData';
-import { range } from '../utility';
+import { nFormatter, range } from '../utility';
 
 export class Atom {
     level: number = 0;
@@ -108,7 +108,7 @@ export class FluorideAtom extends Atom {
 
     override getBonusText = () => {
         return this.data.desc.replace(/{/g, (this.level * this.data.bonusPerLv).toString())
-        .replace(/>/, this.getBonus().toString());
+        .replace(/>/, nFormatter(Math.max(0, 100 * (this.getBonus() - 1)), "Big"));
     }
 }
 
