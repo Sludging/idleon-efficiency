@@ -530,7 +530,7 @@ export const updateLab = (data: Map<string, any>) => {
         (lab.bonuses[9] as FungiFingerBonus).jewelBoost = lab.jewels[13].getBonus()
     
     }
-    (lab.bonuses[11] as UnadulteratedBankingBonus).greenStacks = storage.chest.filter(item => item.count >= 1e7).length;
+    (lab.bonuses[11] as UnadulteratedBankingBonus).greenStacks = [...new Set(storage.chest.filter(item => item.count >= 1e7).map(item => item.internalName))].length;
     
 
     return lab;
