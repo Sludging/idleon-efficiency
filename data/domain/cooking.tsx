@@ -465,11 +465,15 @@ export const updateCooking = (data: Map<string, any>) => {
 
     // Max Level
     const artifactMaxMealLevel = sailing.artifacts[17].getBonus();
-
-    cooking.meals.filter(meal => meal.level < meal.maxLevel).forEach(meal => {
+    cooking.meals.forEach(meal => {
         const cookingSpeed = meal.cookingContribution > 0 ? meal.cookingContribution : totalContribution;
         meal.maxLevel += artifactMaxMealLevel;
         
+        // No need to do any maths for max level meals.
+        if (meal.level == meal.maxLevel) {
+            return;
+        }
+
         meal.timeToDiamond = Math.max(0, ((meal.getCostsTillDiamond() - meal.count) * meal.cookReq) / cookingSpeed);
         meal.timeToPurple = Math.max(0, ((meal.getCostsTillPurple() - meal.count) * meal.cookReq) / cookingSpeed);
         meal.timeToVoid = Math.max(0, ((meal.getCostsTillVoid() - meal.count) * meal.cookReq) / cookingSpeed);
