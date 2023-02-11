@@ -186,7 +186,7 @@ function VialsDisplay() {
                         <Box key={index} width={{ max: '104px', min: '104px' }} height={{ max: '120px', min: '120px' }}>
                             <TipDisplay
                                 body={<VialTipInfo vial={vial} />}
-                                heading={vial.name}
+                                heading={`${vial.name} (${vial.level})`}
                                 direction={TipDirection.Down}
                                 size="medium"
                             >
