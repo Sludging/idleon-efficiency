@@ -3,7 +3,13 @@ import {
     Grid,
     Text,
     Heading,
-    ResponsiveContext
+    ResponsiveContext,
+    TableHeader,
+    TableCell,
+    Table,
+    TableBody,
+    TableRow,
+    TableFooter
 } from "grommet"
 
 import { Stamp } from '../../data/domain/stamps';
@@ -19,12 +25,13 @@ import TipDisplay, { TipDirection } from "../../components/base/TipDisplay";
 import IconImage from "../../components/base/IconImage";
 import TextAndLabel, { ComponentAndLabel } from "../../components/base/TextAndLabel";
 import { AtomCollider } from "../../data/domain/atomCollider";
+import { Storage } from "../../data/domain/storage";
 
 const ShadowBox = styled(Box)`
     box-shadow: -7px 8px 16px 0 rgba(0,0,0,0.17)
 `
 
-function StampDisplay({ stamp, index }: { stamp: Stamp, index: number }) {
+function StampDisplay({ stamp, index, storageAmount = 0 }: { stamp: Stamp, index: number, storageAmount?: number }) {
     const size = useContext(ResponsiveContext)
     const appContext = useContext(AppContext);
     const theData = appContext.data.getData();
@@ -44,27 +51,85 @@ function StampDisplay({ stamp, index }: { stamp: Stamp, index: number }) {
             }
         }
         return (
-            <Box gap="small">
-                <TextAndLabel labelColor="grey-3" textSize="small" label="Bonus" text={stamp.getBonusText()} />
-                {stamp.isMaxLevel() && <ComponentAndLabel labelColor="grey-3" label="Material Cost" component={<Box direction="row" gap="small" align="center"><Text size="small">{nFormatter(stamp.getMaterialCost())}</Text><IconImage data={(stamp.materialItem as Item).getImageData()} /></Box>} />}
+            <Box gap="small" width={{ min: '500px' }}>
+                <Box direction="row" justify="between">
+                    <TextAndLabel  labelColor="dark-1" textSize="small" label="Bonus" text={stamp.getBonusText()} />
+                </Box>
+                {
+                    Object.entries(stamp.maxCarryInfo).length == 1 &&
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                                <TableCell>Level</TableCell>
+                                <TableCell>Total Cost</TableCell>
+                                <TableCell></TableCell>
+                                <TableCell>Discount</TableCell>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {
+                                Object.entries(stamp.maxCarryInfo).map(([maxLevel, costInfo], index) => (
+                                    <TableRow key={`${stamp.name}_${maxLevel}`}>
+                                        <TableCell>{maxLevel}</TableCell>
+                                        <TableCell><Box direction="row" align="center"><Text>{nFormatter(costInfo.costToLevel)}</Text><IconImage data={(stamp.materialItem as Item).getImageData()} scale={0.7} /></Box></TableCell>
+                                        <TableCell><CoinsDisplay coinScale={0.8} coinMap={getCoinsArray(costInfo.goldCostToLevel)} maxCoins={3} /></TableCell>
+                                        <TableCell>{`${costInfo.colliderDiscount}%`}</TableCell>
+                                    </TableRow>
+                                ))
+                            }
+                        </TableBody>
+                    </Table>
+                }
+                {
+                    Object.entries(stamp.maxCarryInfo).length > 1 &&
+                    <Box>
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableCell>Level</TableCell>
+                                    <TableCell>Total Cost</TableCell>
+                                    <TableCell></TableCell>
+                                    <TableCell>Discount Req.</TableCell>
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                {
+                                    Object.entries(stamp.maxCarryInfo).slice(0, -1).map(([maxLevel, costInfo], index) => (
+                                        <TableRow key={`${stamp.name}_${maxLevel}`}>
+                                            <TableCell>{maxLevel}</TableCell>
+                                            <TableCell><Box direction="row" align="center"><Text size="small">{nFormatter(costInfo.costToLevel)}{costInfo.currentDiscount ? " *" : ""}</Text><IconImage data={(stamp.materialItem as Item).getImageData()} scale={0.7} /></Box></TableCell>
+                                            <TableCell><CoinsDisplay coinScale={0.8} coinMap={getCoinsArray(costInfo.goldCostToLevel)} maxCoins={3} /></TableCell>
+                                            <TableCell>{`${costInfo.colliderDiscount}%`}</TableCell>
+                                        </TableRow>
+                                    ))
+                                }
+                                <TableRow><TableCell>---</TableCell></TableRow>
+                                {
+                                    Object.entries(stamp.maxCarryInfo).slice(-1).map(([maxLevel, costInfo]) => (
+                                        <TableRow key={`${stamp.name}_${maxLevel}`}>
+                                            <TableCell>{maxLevel}**</TableCell>
+                                            <TableCell direction="row" align="center"><Text size="xsmall">{nFormatter(costInfo.costToLevel)}</Text><IconImage data={(stamp.materialItem as Item).getImageData()} scale={0.7} /></TableCell>
+                                            <TableCell><CoinsDisplay coinScale={0.8} coinMap={getCoinsArray(costInfo.goldCostToLevel)} maxCoins={3} /></TableCell>
+                                            <TableCell>{costInfo.colliderDiscount}%</TableCell>
+                                        </TableRow>
+                                    ))
+                                }
+                            </TableBody>
+                        </Table>
+                        <Text size="xsmall">* Including current collider discount.</Text>
+                        <Text size="xsmall">** Maximum possible level based on current carry capacity.</Text>
+                    </Box>
+                }
                 <hr style={{ width: "100%" }} />
-                <ComponentAndLabel labelColor="grey-3" label="Cost" component={<CoinsDisplay coinMap={getCoinsArray(stamp.getGoldCost())} maxCoins={3} />} />
-                <ComponentAndLabel labelColor="grey-3" label="Cost to next tier" component={<CoinsDisplay coinMap={getCoinsArray(stamp.getGoldCostToMax())} maxCoins={3} />} />
-                {
-                    Object.entries(stamp.maxCarryInfo).length > 0 && ["0%", "90%"].map(atomDiscount => (
-                        <Box key={atomDiscount}>
-                            <hr style={{ width: "100%" }} />
-                            <Text size="small">At {atomDiscount} atom discount:</Text>
-                            {stamp.maxCarryInfo[atomDiscount].maxLevel > 0 && <Box direction="row" gap="xsmall"><Text size="xsmall">Max level based on current carry cap: </Text><Text size="xsmall" weight={"bold"}>{stamp.maxCarryInfo[atomDiscount].maxLevel}</Text></Box>}
-                            {stamp.maxCarryInfo[atomDiscount].costToMax > 0 && <Box direction="row" align="center"><Text size="xsmall">Total material cost: {nFormatter(stamp.maxCarryInfo[atomDiscount].costToMax)}</Text><IconImage data={(stamp.materialItem as Item).getImageData()} scale={0.7} /></Box>}
-                            {stamp.maxCarryInfo[atomDiscount].moneyCost > 0 && <Box direction="row" align="center"><Text size="xsmall">Money cost:</Text><CoinsDisplay coinScale={0.8} coinMap={getCoinsArray(stamp.maxCarryInfo[atomDiscount].moneyCost)} maxCoins={3} /></Box>}
-                        </Box>
-                    ))
-                }
-                                                            
-                {
-                    stamp.maxCarryPlayer && <Box><hr style={{ width: "100%" }} /><Text size="xsmall">Highest carry cap on: {stamp.maxCarryPlayer.playerName}</Text></Box>
-                }
+                <Box direction="row" gap="large">
+                    {storageAmount > 0 && <ComponentAndLabel labelColor="dark-1" label="Storage amount"
+                        component={
+                            <Box direction="row" align="center"><Text size="small">{nFormatter(storageAmount)}</Text><IconImage data={(stamp.materialItem as Item).getImageData()} scale={0.7} /></Box>
+                        }
+                    />
+                    }
+                    {stamp.maxCarryPlayer && <TextAndLabel labelColor="dark-1" label="Max Cap" textSize="small" text={`${stamp.maxCarryPlayer.playerName} (${nFormatter(stamp.maxCarryAmount)})`} />}
+                </Box>
             </Box>
         )
     }
@@ -77,7 +142,7 @@ function StampDisplay({ stamp, index }: { stamp: Stamp, index: number }) {
                 }
                 heading={`${stamp.name} (${stamp.level}/${stamp.maxLevel})`}
                 direction={size == "small" ? TipDirection.Down : stamp.type == "Misc Stamp" ? TipDirection.Left : TipDirection.Right}
-                size="medium"
+                size="small"
                 visibility={stamp.name == "Blank" || stamp.name == "FILLER" ? 'none' : undefined}
             >
                 <Box direction="row" align="center" gap="xsmall" style={{ opacity: stamp.level > 0 ? 1 : 0.2 }}>
@@ -90,6 +155,14 @@ function StampDisplay({ stamp, index }: { stamp: Stamp, index: number }) {
 }
 
 function StampTab({ tab, index }: { tab: Stamp[], index: number }) {
+    const [storage, setStorage] = useState<Storage>();
+    const appContext = useContext(AppContext);
+    const theData = appContext.data.getData();
+
+    useEffect(() => {
+        setStorage(theData.get("storage"));
+    }, [appContext, theData])
+
     const tabLevel = tab.reduce((sum, stamp) => sum += stamp.level, 0);
     return (
         <Box pad="small">
@@ -102,7 +175,7 @@ function StampTab({ tab, index }: { tab: Stamp[], index: number }) {
                         tab.filter(stamp => stamp.name != "FILLER").map((stamp: Stamp) => {
                             if (stamp != undefined) {
                                 return (
-                                    <StampDisplay key={`tab_${index}_${stamp.raw_name}`} stamp={stamp} index={index} />
+                                    <StampDisplay key={`tab_${index}_${stamp.raw_name}`} stamp={stamp} index={index} storageAmount={stamp.materialItem ? storage?.amountInStorage(stamp.materialItem.internalName) : 0} />
                                 )
                             }
                         })
