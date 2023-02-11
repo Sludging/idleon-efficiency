@@ -214,8 +214,15 @@ export function notUndefined<T>(x: T | undefined): x is T {
 	return map;
 }
 
+// This range function is exclusive of the end number (i.e end won't be part of the result)
 export function range(start: number, end: number, increment: number = 1) {
-    const length = (end - start) / increment;
+    const length = Math.floor((end - start) / increment);
+    return Array.from({ length }, (_, i) => start + i * increment);
+}
+
+// This range function is inclusive of the end number
+export function inclusiveRange(start: number, end: number, increment: number = 1) {
+    const length = Math.floor(((end - start) / increment) + 1);
     return Array.from({ length }, (_, i) => start + i * increment);
 }
 

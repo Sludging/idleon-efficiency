@@ -1,4 +1,4 @@
-import { lavaFunc, range } from '../utility'
+import { inclusiveRange, lavaFunc, range } from '../utility'
 import { Alchemy } from './alchemy';
 import { AtomCollider } from './atomCollider';
 import { Bribe, BribeConst, BribeStatus } from './bribes';
@@ -42,12 +42,14 @@ export class Stamp {
     vialDiscount: number = 0;
     atomDiscount: number = 0;
 
-    // Max upgrades (key is either 0% or 90% to represent both ends of atom discount)
-    maxCarryInfo: Record<string, {
-        maxLevel: number,
-        costToMax: number,
-        moneyCost: number,
+    // Max upgrades (key is the stamp level that will the costs in the value)
+    maxCarryInfo: Record<number, {
+        colliderDiscount: number,
+        costToLevel: number,
+        goldCostToLevel: number,
+        currentDiscount: boolean,
     }> = {}
+    maxCarryAmount: number = 0;
     maxCarryPlayer: Player | undefined;
 
     constructor(name: string, raw_name: string, type: string, bonus: string, data: StampDataModel) {
@@ -78,43 +80,65 @@ export class Stamp {
         return Math.floor(Math.floor(baseCost) * Math.max(0.1, 1 - this.vialDiscount / 100));
     }
 
-    setMaterialCostToMaxCarry = () => {
-        const currentAtomDiscount = this.atomDiscount;
-        ["0%", "90%"].forEach(atomDiscount => {
-            this.atomDiscount = atomDiscount == "0%" ? 0 : 90;
-            const maxCarryLevel = this.maxCarryInfo[atomDiscount].maxLevel;
-            const costToMaxCarryLevel = range(this.maxLevel, maxCarryLevel, this.data.upgradeInterval).reduce((sum, level) => sum += this.getMaterialCost(level), 0);
-            this.maxCarryInfo[atomDiscount].costToMax = costToMaxCarryLevel;
-        })
-        // Revert the discount to real number.
-        this.atomDiscount = currentAtomDiscount;
-    }
+    // Calculate information required to show the user the following information:
+    // 1. The cost to reach their current max level if not maxed
+    // 2. The cost to unlock the next 3 "tiers" (both material and money)
+    // The cost will be the total cost to reach that "max", not the cost to unlock that max.
+    calculateCostForNextTiers = (discountIncrement: number) => {
+        const maxCarryLevel = Number(Object.keys(this.maxCarryInfo)[0]); // We currently should only have one key and that's the max carry level with 90% discount.
+        // If we are already at our max carry level, no need to do any math.
+        if (this.maxLevel == maxCarryLevel) {
+            return;
+        }
 
-    setGoldCostToMaxCarry = () => {
+        // Show money cost to reach max level if we haven't fully capped our stamp yet.
+        if (this.level < this.maxLevel) {
+            this.maxCarryInfo[this.maxLevel] = { colliderDiscount: 0, costToLevel: 0, goldCostToLevel: range(this.level, this.maxLevel).reduce((sum, level) => sum += this.getGoldCost(level), 0), currentDiscount: false };
+        }
+
+        // Always show the cost till next tier, even if we can't carry it.
+        const nextTier = this.maxLevel + this.data.upgradeInterval;
+        const costToLevel = this.getMaterialCost(this.maxLevel);
+        const goldCostToLevel = range(this.level, nextTier).reduce((sum, level) => sum += this.getGoldCost(level), 0);
+        this.maxCarryInfo[nextTier] = { colliderDiscount: this.atomDiscount, costToLevel: costToLevel, goldCostToLevel: goldCostToLevel, currentDiscount: true };
+
         const currentAtomDiscount = this.atomDiscount;
-        ["0%", "90%"].forEach(atomDiscount => {
-            this.atomDiscount = atomDiscount == "0%" ? 0 : 90;
-            const maxCarryLevel = this.maxCarryInfo[atomDiscount].maxLevel;
-            const goldCostToMaxCarryLevel = range(this.level, maxCarryLevel).reduce((sum, level) => sum += this.getGoldCost(level), 0);
-            this.maxCarryInfo[atomDiscount].moneyCost = goldCostToMaxCarryLevel;
-        });
+        const upperLimit = Math.min(maxCarryLevel, nextTier + this.data.upgradeInterval * 2); // Show at most 2 more tiers + max carry level
+
+        // Calculate the next 2 tiers (using for loop so can break early).
+        for (var tier = nextTier + this.data.upgradeInterval; tier <= upperLimit; tier += this.data.upgradeInterval) {
+            // Start from 0 discount, find the minimum discount required to level this tier
+            for (var atomDiscount = 0; atomDiscount <= 90; atomDiscount += discountIncrement) {
+                this.atomDiscount = atomDiscount;
+                const tierCost = this.getMaterialCost(tier)
+                if (tierCost < this.maxCarryAmount) { // If we can carry this amount, we found the minimum required for this tier
+                    const costToLevel = tierCost + range(this.maxLevel, tier, this.data.upgradeInterval).reduce((sum, level) => sum += this.maxCarryInfo[level]?.costToLevel ?? 0, 0);
+                    const goldCostToLevel = range(this.level, tier).reduce((sum, level) => sum += this.getGoldCost(level), 0);
+                    this.maxCarryInfo[tier] = { colliderDiscount: atomDiscount, costToLevel: costToLevel, goldCostToLevel: goldCostToLevel, currentDiscount: false };
+                    break;
+                }
+            }
+        }
+
         // Revert the discount to real number.
         this.atomDiscount = currentAtomDiscount;
     }
 
     // I don't like this, need to think of a better way
-    setMaxLevelForCarryCap = (maxCarryCapacity: number) => {
+    setMaxLevelForCarryCap = () => {
         const currentAtomDiscount = this.atomDiscount;
-        ["0%", "90%"].forEach(atomDiscount => {
-            this.atomDiscount = atomDiscount == "0%" ? 0 : 90;
-            let maxCarryLevel = this.maxLevel;
+        this.atomDiscount = 90;
+        let maxCarryLevel = this.maxLevel;
 
-            // As long as we can carry enough for upgrade, keep increasing the upgrades.
-            while (this.getMaterialCost(maxCarryLevel) < maxCarryCapacity) {
-                maxCarryLevel += this.data.upgradeInterval;
-            }
-            this.maxCarryInfo[atomDiscount] = { maxLevel: maxCarryLevel, costToMax: 0, moneyCost: 0 }
-        })
+        // As long as we can carry enough for upgrade, keep increasing the upgrades.
+        while (this.getMaterialCost(maxCarryLevel) < this.maxCarryAmount) {
+            maxCarryLevel += this.data.upgradeInterval;
+        }
+
+        const costToLevel = range(this.maxLevel, maxCarryLevel, this.data.upgradeInterval).reduce((sum, level) => sum += this.getMaterialCost(level), 0);
+        const goldCostToLevel = range(this.level, maxCarryLevel).reduce((sum, level) => sum += this.getGoldCost(level), 0);
+        this.maxCarryInfo[maxCarryLevel] = { colliderDiscount: 90, costToLevel: costToLevel, goldCostToLevel: goldCostToLevel, currentDiscount: false }
+
         // Revert the discount to real number.
         this.atomDiscount = currentAtomDiscount;
     }
@@ -186,8 +210,8 @@ export default function parseStamps(rawData: Array<any>, maxData: Array<any>, al
             Object.entries(tab).map(([key, value]) => { // for each stamp in the current tab
                 if (key.toLowerCase() !== "length") {  // ignore length at the end
                     try {
-                        stampData[index][parseInt(key)].level = value as number; // update our pre-populated data with the stamp level
-                        stampData[index][parseInt(key)].maxLevel = maxData[index][key] as number;
+                        stampData[index][parseInt(key)].level = Number(value); // update our pre-populated data with the stamp level
+                        stampData[index][parseInt(key)].maxLevel = Number(maxData[index][key]);
                     }
                     catch (e) {
                         console.debug("Unable to set level for stamp", key);
@@ -232,16 +256,24 @@ export function updateStamps(data: Map<string, any>) {
 export function updateStampMaxCarry(data: Map<string, any>) {
     const stamps = data.get("stamps") as Stamp[][];
     const capacity = data.get("capacity") as Capacity;
+    const collider = data.get("collider") as AtomCollider;
+
+    const dailyAtomDiscountIncrease = collider.atoms[0].level * collider.atoms[0].data.bonusPerLv;
     stamps.flatMap(tab => tab).forEach(stamp => {
         // Identify the max possible level for this stamp based on current carry caps.
         const stampMatBagType = stamp.materialItem?.getBagType();
+        stamp.maxCarryInfo = {}; // clean data so we don't get any old info mix-up.
         if (stampMatBagType) {
             const maxCarry = capacity.maxCapacityByType[stampMatBagType];
-
-            stamp.setMaxLevelForCarryCap(maxCarry.maxCapacity * maxCarry.inventorySlots);
-            stamp.setMaterialCostToMaxCarry();
-            stamp.setGoldCostToMaxCarry();
+            stamp.maxCarryAmount = maxCarry.maxCapacity * maxCarry.inventorySlots;
             stamp.maxCarryPlayer = maxCarry.player;
+
+            stamp.setMaxLevelForCarryCap();
+            stamp.calculateCostForNextTiers(dailyAtomDiscountIncrease);
+
+        }
+        else {
+            stamp.maxCarryInfo[stamp.maxLevel] = { colliderDiscount: stamp.atomDiscount, costToLevel: stamp.getMaterialCost(stamp.maxLevel), goldCostToLevel: stamp.getGoldCostToMax(), currentDiscount: true }
         }
     })
 
