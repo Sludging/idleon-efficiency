@@ -202,13 +202,13 @@ function Stamps() {
     const [stampData, setStampData] = useState<Stamp[][]>();
     const appContext = useContext(AppContext);
 
-    const hasHydrogen = useMemo(() => {
+    const hydrogen = useMemo(() => {
         if (appContext.data.getData().size > 0) {
             const theData = appContext.data.getData();
             const collider = theData.get("collider") as AtomCollider;
-            return collider.atoms[0].level > 0;
+            return collider.atoms[0];
         }
-        return false;
+        return undefined;
     }, [appContext])
 
     useEffect(() => {
@@ -244,7 +244,7 @@ function Stamps() {
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Stamps</Heading>
             <Box direction="row" gap="medium">
                 <TextAndLabel label="Total Levels" text={totalLevels?.toString()} margin={{ bottom: 'small' }} />
-                {hasHydrogen && <TextAndLabel label="Atom Discount" text={`${stampData[0][0].atomDiscount}%`} margin={{ bottom: 'small' }} />}
+                {hydrogen && hydrogen.level > 0 && <TextAndLabel label="Atom Discount" text={`${stampData[0][0].atomDiscount}% (+${hydrogen.level * hydrogen.data.bonusPerLv}%/day)`} margin={{ bottom: 'small' }} />}
             </Box>
             <ShadowBox flex={false} background="dark-1" pad="small">
                 <Grid columns={{ size: '300px' }} gap="none">
