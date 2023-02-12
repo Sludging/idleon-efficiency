@@ -52,8 +52,9 @@ function StampDisplay({ stamp, index, storageAmount = 0 }: { stamp: Stamp, index
         }
         return (
             <Box gap="small" width={{ min: '500px' }}>
-                <Box direction="row" justify="between">
+                <Box direction="row" gap="large">
                     <TextAndLabel labelColor="dark-1" textSize="small" label="Bonus" text={stamp.getBonusText()} />
+                    <ComponentAndLabel labelColor="dark-1" label="Next level cost" component={<CoinsDisplay coinScale={0.8} coinMap={getCoinsArray(stamp.getGoldCost())} maxCoins={3} />} />
                 </Box>
                 {
                     Object.entries(stamp.maxCarryInfo).length == 1 &&
@@ -97,7 +98,7 @@ function StampDisplay({ stamp, index, storageAmount = 0 }: { stamp: Stamp, index
                                     Object.entries(stamp.maxCarryInfo).slice(0, -1).map(([maxLevel, costInfo], index) => (
                                         <TableRow key={`${stamp.name}_${maxLevel}`}>
                                             <TableCell>{maxLevel}</TableCell>
-                                            <TableCell><Box direction="row" align="center"><Text size="small">{nFormatter(costInfo.costToLevel)}{costInfo.currentDiscount ? " *" : ""}</Text><IconImage data={(stamp.materialItem as Item).getImageData()} scale={0.7} /></Box></TableCell>
+                                            <TableCell>{ costInfo.costToLevel > 0 && <Box direction="row" align="center"><Text size="small">{nFormatter(costInfo.costToLevel)}{costInfo.currentDiscount ? " *" : ""}</Text><IconImage data={(stamp.materialItem as Item).getImageData()} scale={0.7} /></Box>}</TableCell>
                                             <TableCell><CoinsDisplay coinScale={0.8} coinMap={getCoinsArray(costInfo.goldCostToLevel)} maxCoins={3} /></TableCell>
                                             <TableCell>{`${costInfo.colliderDiscount}%`}</TableCell>
                                         </TableRow>

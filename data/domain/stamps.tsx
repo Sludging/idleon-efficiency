@@ -135,13 +135,14 @@ export class Stamp {
         // Calculate the next 2 tiers (using for loop so can break early).
         for (var tier = nextTier ; tier <= upperLimit; tier += this.data.upgradeInterval) {
             // Start from 0 discount, find the minimum discount required to level this tier
-            for (var atomDiscount = 0; atomDiscount <= 90; atomDiscount += discountIncrement) {
+            for (var atomDiscount = (tier == nextTier ? currentAtomDiscount : 0) ; atomDiscount <= 90; atomDiscount += discountIncrement) {
                 this.atomDiscount = atomDiscount;
                 const tierCost = this.getMaterialCost(tier - this.data.upgradeInterval) // to reach this level, we only need to unlock the previous tier.
                 if (tierCost < this.maxCarryAmount) { // If we can carry this amount, we found the minimum required to reach this tier
                     const costToLevel = tierCost + (Object.keys(this.maxCarryInfo).includes((tier - this.data.upgradeInterval).toString()) ? this.maxCarryInfo[tier - this.data.upgradeInterval].costToLevel : 0);
                     const goldCostToLevel = range(this.level, tier).reduce((sum, level) => sum += this.getGoldCost(level), 0);
-                    this.maxCarryInfo[tier] = { colliderDiscount: atomDiscount, costToLevel: costToLevel, goldCostToLevel: goldCostToLevel, currentDiscount: false };
+                    const isCurrentUnlock = tier == nextTier;
+                    this.maxCarryInfo[tier] = { colliderDiscount: atomDiscount, costToLevel: costToLevel, goldCostToLevel: goldCostToLevel, currentDiscount: isCurrentUnlock && currentAtomDiscount == atomDiscount ? true : false };
                     break;
                 }
             }
