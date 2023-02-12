@@ -38,7 +38,7 @@ function StampDisplay({ stamp, index, storageAmount = 0 }: { stamp: Stamp, index
     const allItems = theData.get("itemsData") as Item[];
     const stampItem = allItems.find(item => item.internalName == stamp.raw_name);
 
-    function TipContent({ stamp, faceLeft }: { stamp: Stamp, faceLeft: boolean }) {
+    function TipContent({ stamp }: { stamp: Stamp }) {
         if (stamp.level == 0) {
             if (stampItem && stampItem.sources.sources && stampItem.sources.sources.length > 0) {
                 return <Box>
@@ -53,7 +53,7 @@ function StampDisplay({ stamp, index, storageAmount = 0 }: { stamp: Stamp, index
         return (
             <Box gap="small" width={{ min: '500px' }}>
                 <Box direction="row" justify="between">
-                    <TextAndLabel  labelColor="dark-1" textSize="small" label="Bonus" text={stamp.getBonusText()} />
+                    <TextAndLabel labelColor="dark-1" textSize="small" label="Bonus" text={stamp.getBonusText()} />
                 </Box>
                 {
                     Object.entries(stamp.maxCarryInfo).length == 1 &&
@@ -103,8 +103,8 @@ function StampDisplay({ stamp, index, storageAmount = 0 }: { stamp: Stamp, index
                                         </TableRow>
                                     ))
                                 }
-                                <TableRow><TableCell>---</TableCell></TableRow>
-                                {
+                                {stamp.shouldShowMaxCap() && <TableRow><TableCell>---</TableCell></TableRow>}
+                                {stamp.shouldShowMaxCap() &&
                                     Object.entries(stamp.maxCarryInfo).slice(-1).map(([maxLevel, costInfo]) => (
                                         <TableRow key={`${stamp.name}_${maxLevel}`}>
                                             <TableCell>{maxLevel}**</TableCell>
@@ -120,16 +120,20 @@ function StampDisplay({ stamp, index, storageAmount = 0 }: { stamp: Stamp, index
                         <Text size="xsmall">** Maximum possible level based on current carry capacity.</Text>
                     </Box>
                 }
-                <hr style={{ width: "100%" }} />
-                <Box direction="row" gap="large">
-                    {storageAmount > 0 && <ComponentAndLabel labelColor="dark-1" label="Storage amount"
-                        component={
-                            <Box direction="row" align="center"><Text size="small">{nFormatter(storageAmount)}</Text><IconImage data={(stamp.materialItem as Item).getImageData()} scale={0.7} /></Box>
-                        }
-                    />
-                    }
-                    {stamp.maxCarryPlayer && <TextAndLabel labelColor="dark-1" label="Max Cap" textSize="small" text={`${stamp.maxCarryPlayer.playerName} (${nFormatter(stamp.maxCarryAmount)})`} />}
-                </Box>
+                {!["Equipment", "Misc"].includes((stamp.materialItem as Item).getArchType()) &&
+                    <Box>
+                        <hr style={{ width: "100%" }} />
+                        <Box direction="row" gap="large">
+                            {storageAmount > 0 && <ComponentAndLabel labelColor="dark-1" label="Storage amount"
+                                component={
+                                    <Box direction="row" align="center"><Text size="small">{nFormatter(storageAmount)}</Text><IconImage data={(stamp.materialItem as Item).getImageData()} scale={0.7} /></Box>
+                                }
+                            />
+                            }
+                            {stamp.maxCarryPlayer && <TextAndLabel labelColor="dark-1" label="Max Cap" textSize="small" text={`${stamp.maxCarryPlayer.playerName} (${nFormatter(stamp.maxCarryAmount)})`} />}
+                        </Box>
+                    </Box>
+                }
             </Box>
         )
     }
@@ -138,10 +142,10 @@ function StampDisplay({ stamp, index, storageAmount = 0 }: { stamp: Stamp, index
         <Box pad="small" border={{ color: 'grey-1' }} key={`stamp_${index}_${stamp.raw_name}`}>
             <TipDisplay
                 body={
-                    <TipContent stamp={stamp} faceLeft={stamp.type == "Misc Stamp"} />
+                    <TipContent stamp={stamp} />
                 }
                 heading={`${stamp.name} (${stamp.level}/${stamp.maxLevel})`}
-                direction={size == "small" ? TipDirection.Down : stamp.type == "Misc Stamp" ? TipDirection.Left : TipDirection.Right}
+                direction={ Number(/Stamp[ABC](\d+)/g.exec(stamp.raw_name)?.[1]) > 28 ? TipDirection.Up : TipDirection.Down}
                 size="small"
                 visibility={stamp.name == "Blank" || stamp.name == "FILLER" ? 'none' : undefined}
             >
@@ -153,6 +157,12 @@ function StampDisplay({ stamp, index, storageAmount = 0 }: { stamp: Stamp, index
         </Box>
     )
 }
+
+const HoverBox = styled(Box)`
+    &:hover {
+        background: #0376E3;
+    }
+`
 
 function StampTab({ tab, index }: { tab: Stamp[], index: number }) {
     const [storage, setStorage] = useState<Storage>();
@@ -175,7 +185,9 @@ function StampTab({ tab, index }: { tab: Stamp[], index: number }) {
                         tab.filter(stamp => stamp.name != "FILLER").map((stamp: Stamp) => {
                             if (stamp != undefined) {
                                 return (
-                                    <StampDisplay key={`tab_${index}_${stamp.raw_name}`} stamp={stamp} index={index} storageAmount={stamp.materialItem ? storage?.amountInStorage(stamp.materialItem.internalName) : 0} />
+                                    <HoverBox key={`tab_${index}_${stamp.raw_name}`}>
+                                        <StampDisplay  stamp={stamp} index={index} storageAmount={stamp.materialItem ? storage?.amountInStorage(stamp.materialItem.internalName) : 0} />
+                                    </HoverBox>
                                 )
                             }
                         })

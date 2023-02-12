@@ -80,6 +80,38 @@ export class Stamp {
         return Math.floor(Math.floor(baseCost) * Math.max(0.1, 1 - this.vialDiscount / 100));
     }
 
+    // Some stamps max cap isn't realistic, not showing their caps is more realistic.
+    shouldShowMaxCap = () => {
+        // If not one of these stamps, show max level.
+        return ![
+            "StampC15", // Talent III
+            "StampC18", // Talent S
+            "StampC7", // Golden Apple
+            "StampA11", // Agile Stamp
+            "StampA15", // Clover Stamp
+            "StampB10", // Cool Diggy Tool
+            "StampB8", // Matty Bag
+            "StampA19", // Polearm Stamp
+            "StampB12", // Swag Swingy
+            "StampA23", // Sukka Foo
+            "StampA28", // Stat Graph
+            "StampB7", // Duplogs
+            "StampC2", // Mason Jar
+            "StampB5", // Twin ores
+            "StampB34", // Flowin
+            "StampC16", // Talent IV
+            "StampC6", // Potion
+            "StampC21", // DNA
+            "StampC22", // Refinery
+            "StampA10", // Battleaxe
+            // My own list, based on money scaling and not mat scaling.
+            "StampA29", // Gilded Axe
+            "StampA30", // Diamond Axe
+            "StampA31", // Tripleshot
+            "StampA32", // Blackheart
+        ].includes(this.raw_name)
+    }
+
     // Calculate information required to show the user the following information:
     // 1. The cost to reach their current max level if not maxed
     // 2. The cost to unlock the next 3 "tiers" (both material and money)
@@ -110,9 +142,9 @@ export class Stamp {
             // Start from 0 discount, find the minimum discount required to level this tier
             for (var atomDiscount = 0; atomDiscount <= 90; atomDiscount += discountIncrement) {
                 this.atomDiscount = atomDiscount;
-                const tierCost = this.getMaterialCost(tier)
-                if (tierCost < this.maxCarryAmount) { // If we can carry this amount, we found the minimum required for this tier
-                    const costToLevel = tierCost + range(this.maxLevel, tier, this.data.upgradeInterval).reduce((sum, level) => sum += this.maxCarryInfo[level]?.costToLevel ?? 0, 0);
+                const tierCost = this.getMaterialCost(tier - this.data.upgradeInterval) // to reach this level, we only need to unlock the previous tier.
+                if (tierCost < this.maxCarryAmount) { // If we can carry this amount, we found the minimum required to reach this tier
+                    const costToLevel = tierCost + this.maxCarryInfo[tier - this.data.upgradeInterval]?.costToLevel ?? 0;
                     const goldCostToLevel = range(this.level, tier).reduce((sum, level) => sum += this.getGoldCost(level), 0);
                     this.maxCarryInfo[tier] = { colliderDiscount: atomDiscount, costToLevel: costToLevel, goldCostToLevel: goldCostToLevel, currentDiscount: false };
                     break;
@@ -273,7 +305,10 @@ export function updateStampMaxCarry(data: Map<string, any>) {
 
         }
         else {
-            stamp.maxCarryInfo[stamp.maxLevel] = { colliderDiscount: stamp.atomDiscount, costToLevel: stamp.getMaterialCost(stamp.maxLevel), goldCostToLevel: stamp.getGoldCostToMax(), currentDiscount: true }
+            stamp.maxCarryAmount = ["dStone", "dQuest"].includes((stamp.materialItem as Item).typeGen) ? 999999 : 80;
+            stamp.setMaxLevelForCarryCap();
+            stamp.calculateCostForNextTiers(dailyAtomDiscountIncrease);
+            //stamp.maxCarryInfo[stamp.maxLevel] = { colliderDiscount: stamp.atomDiscount, costToLevel: stamp.getMaterialCost(stamp.maxLevel), goldCostToLevel: stamp.getGoldCostToMax(), currentDiscount: true }
         }
     })
 
