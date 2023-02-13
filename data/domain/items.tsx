@@ -9,6 +9,35 @@ import { WeaponItemModel } from "./model/weaponItemModel";
 import { SourcesModel } from "./model/sourcesModel";
 import { DescItemModel } from "./model/descItemModel";
 import { GoldenFoodItemModel } from "./model/goldenFoodItemModel";
+import { NoteModel } from "./model/noteModel";
+
+// Used to make slab page nicer.
+const specialNotes: Record<string, NoteModel> = {
+    "EquipmentHats75": {"note": "Was available during the launch event of the iOS version."},
+    "EquipmentHats76": {"note": "Available from the Idle Skilling crossover event, requires reaching the mist in IS."},
+    "EquipmentHats78": {"note": "Available from Random Events (Meteorite)"},
+    "EquipmentHats79": {"note": "Available from Random Events (Glacial Guild)"},
+    "EquipmentShoes2": {"note": "Unobtainable"},
+    "EquipmentRingsChat10": {"note": "Available from Random Events (Meteorite)"},
+    "EquipmentCape2": {"note": "Requires buying the Eggscellent Pack."},
+    "EquipmentKeychain25": {"note": "Dungeon Loot Dice (Random)"},
+    "EquipmentKeychain26": {"note": "Dungeon Loot Dice (Random)"},
+    "EquipmentKeychain27": {"note": "Dungeon Loot Dice (Random)"},
+    "EquipmentKeychain28": {"note": "Dungeon Loot Dice (Random)"},
+    "Trophy16": {"note": "Available from the Idle Skilling crossover event, requires reaching Tee Hee 15 in IS."},
+    "EquipmentTools13": {"note": "Random Events (Snake Swarm)"},
+    "EquipmentToolsHatchet11": {"note": "Random Events (Mega Grumblo)"},
+    "Crystal4": {"note": "Massive Troll (Any Difficulty)"},
+    "Trash3": {"note": "Treasure Hunt (check Idleon youtube)"},
+    "Quest58": {"note": "Made from a Damaged Cog, which you can buy at the world 3 Town Shop!"},
+    "Quest69": {"note": "Killroy"},
+    "Quest71": {
+        "note": "Droprates are displayed on the Event page this item was apart of: [[Events/iOS_Release|iOS Release Event]]."
+    },
+    "ObolBronzeCard": { "note": "Alchemy Shop" },
+    "ObolFrog": {"note": "Random Events (Mega Grumblo)"},
+
+}
 
 export interface DropSource {
     source: string
@@ -137,6 +166,13 @@ export class Item {
         this.typeGen = data.item.typeGen;
         this.type = data.item.Type ?? '';
         this.lvReqToCraft = data.recipe?.levelReqToCraft ?? 0;
+
+        // Special note handling for slab display.
+        const noteOverwrite = specialNotes[this.internalName];
+        if (noteOverwrite) {
+            this.data.notes = noteOverwrite;
+        }
+
         if (isStatModel(data.item)) {
             this.lvReqToEquip = data.item.lvReqToEquip;
             this.allowedClass = data.item.Class ?? '';
