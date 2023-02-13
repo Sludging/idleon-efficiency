@@ -1390,6 +1390,9 @@ export const initRandoListRepo = () => {
                     "136",
                     "137",
                     "165",
+                    "360",
+                    "316",
+                    "317",
                     "315",
                     "361",
                     "362",
@@ -1848,8 +1851,8 @@ export const initRandoListRepo = () => {
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "4th_Weekly_Update_v174",
-                    "*See_Discord.gg/idleon_for_Weeks_1-3_patch_notes_@___@_New_Stuff_in_Week_4_Update_-----------------------_@_*The_Elite_Class_DIVINE_KNIGHT, who_comes_from_Squire_class, has_been_released!_His_talents_include_include_5_new_attacks, and_5_utilities._@_*Quick-Ref_now_lets_you_INTERACT_with_the_following_systems_from_anywhere:_Obols, Star_Signs, and_Alchemy._Go_try_it_in_the_Codex!_@_*Added_the_Anvil_Whetstone_to_World_3_Town_Shoppe!_Allows_you_to_reset_your_anvil_points_spent._@_*Added_'hold_down_to_autospend'_for_Anvil_Points._@_*Added_'hold_down'_for_Craft_From_Storage_in_Anvil._@_*Added_the_ALL_PERSONAL_obol_altar_tab!_Allows_for_easy_sorting_of_all_your_obols_across_all_characters!_@_*Added_an_'Auto-cast_abilities'_toggle_in_Pet_Battles._@_*You_now_get_10_free_teleports_every_day, instead_of_5._Gemshop_purchases_also_give_13_instead_of_10._@_*Also, if_you_love_Improvements_like_these, please_leave_a_review_saying_so!_Help_me_fight_back_against_people_who_say_IdleOn_never_improves!!_Bam!_Pow!"
+                    "5th_Weekly_Update_v175",
+                    "*See_Discord.gg/idleon_for_Weeks_1-4_patch_notes_@___@_New_Stuff_in_Week_5_Update_-----------------------_@_*The_Elite_Class_SIEGE_BREAKER, who_comes_from_Bowman_class, has_been_released!_His_talents_include_include_5_new_attacks, and_5_utilities._@_*Added_the_3D_Printer_to_Quick_Ref, and_you_can_interact_with_it_fully!_@_*Added_the_Premium_Hat_Stat_Swapper_Stone_to_the_Gem_Shop!_It's_amazing._Fashion_will_never_be_the_same_fo_sho._@_*Added_5_more_3d_Printer_sample_storage_slots._You_can_buy_3_of_them_in_the_Gem_Shop, and_I_gave_2_of_them_to_you_FOR_FREE!!_@_*Construction_can_now_be_used_while_in_Quick_Ref!_@_*Added_the_LOOT_FILTER!_Find_it_in_the_Cards_section_of_Codex._@_*Hope_you_enjoy_this_awesome_update!_And_thanks_to_everyone_who_has_left_a_review!!_We_are_almost_at_10,000_ratings_btw_which_is_friggin_sweet!"
                 ]
             }),
         new RandoListBase(62, <RandoListModel>{

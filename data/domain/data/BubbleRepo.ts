@@ -975,7 +975,7 @@ export const initBubbleRepo = () => {
                 "x1": 0.5,
                 "x2": 60,
                 "func": "decayMulti",
-                "description": "{x higher bonus than displayed from the passive bonus of the deity you're linked to in Divinity. AKA bigger god passive!",
+                "description": "{x higher bonus than displayed from the Minor Link bonus of the deity you're linked to in Divinity. AKA bigger god passive!",
                 "requirements": [<ComponentModel>{"item": "SailTr1", "quantity": 50}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
                 "bonusKey": "Y2ACTIVE"
             }),
