@@ -21,7 +21,7 @@ import { ClassIndex } from './talents';
 import { GemStore } from './gemPurchases';
 import { Bribe, BribeStatus } from './bribes';
 import { Guild } from './guild';
-import { CapacityConst } from './capacity';
+import { Capacity, CapacityConst } from './capacity';
 
 
 // if ("Costs2TypeAnvilPA" == t) {}
@@ -249,9 +249,7 @@ export const updateAnvil = (data: Map<string, any>) => {
     const sigils = data.get("sigils") as Sigils;
 
     // Cap stuff
-    const gemStore = data.get("gems") as GemStore;
-    const guild = data.get("guild") as Guild;
-    const bribes = data.get("bribes") as Bribe[];
+    const capacity = data.get("capacity") as Capacity;
 
     players.forEach(player => {
         const playerAnvil = anvilWrapper.playerAnvils[player.playerID];
@@ -280,32 +278,9 @@ export const updateAnvil = (data: Map<string, any>) => {
         const xpMulti = playerAnvil.getXPMulti(player, allSkillXP, mmanBonus);
         playerAnvil.setXP(xpMulti);
 
-        // Capacity Math.
-        let guildCarryBonus: number = guild.guildBonuses[2].getBonus();
-        let zergPrayerBonus: number = player.activePrayers.findIndex(prayer => prayer == 4) != -1 ? prayers[4].getCurse() : 0;
-        let ruckSackPrayerBonus: number = player.activePrayers.findIndex(prayer => prayer == 12) != -1 ? prayers[12].getBonus() : 0;
-        
-        const telekineticStorageBonus = player.talents.find(x => x.skillIndex == CapacityConst.TelekineticStorageSkillIndex)?.getBonus() ?? 0;
-        const carryCapShrineBonus = shrines[ShrineConstants.CarryShrine].getBonus(player.currentMapId);
-        const bribeCapBonus = bribes.find(bribe => bribe.name == "Bottomless Bags")?.status == BribeStatus.Purchased ? 5 : 0;
-        const allCapBonus = player.capacity.getAllCapsBonus(guildCarryBonus, telekineticStorageBonus, carryCapShrineBonus, zergPrayerBonus, ruckSackPrayerBonus, bribeCapBonus);
-
-        const allStamps = stampData.flatMap((tab) => [...tab]);
-        const allCapStampBonus = allStamps.find((stamp) => stamp.raw_name == CapacityConst.AllCarryStamp)?.getBonus(player.skills.get(SkillsIndex.Smithing)?.level) ?? 0;
-        const gemCapacityBonus = gemStore?.purchases.find(x => x.no == 58)?.pucrhased ?? 0;
-        const extraBagsTalentBonus = player.talents.find(x => x.skillIndex == CapacityConst.ExtraBagsSkillIndex)?.getBonus() ?? 0;
-        const starSignExtraCap = player.starSigns.reduce((sum, sign) => sum += sign.getBonus("Carry Cap"), 0);
-
-        const capProps = {
-            allCapBonuses: allCapBonus,
-            stampMatCapBonus: allStamps.find((stamp) => stamp.raw_name == CapacityConst.MaterialCapStamp)?.getBonus(player.skills.get(SkillsIndex.Smithing)?.level) ?? 0,
-            gemsCapacityBought: gemCapacityBonus,
-            stampAllCapBonus: allCapStampBonus,
-            extraBagsLevel: extraBagsTalentBonus,
-            starSignExtraCap: starSignExtraCap
-        }
-
-        playerAnvil.setCapacity(player.capacity.bags.find(x => x.name == "bCraft")?.getCapacity(capProps) ?? 0);
+        // Capacity
+        const playerCapacity = capacity.players[player.playerID];
+        playerAnvil.setCapacity(playerCapacity.bags.find(x => x.name == "bCraft")?.maxCarry ?? 0);
 
         playerAnvil.production.forEach(anvilProduct => {
             anvilProduct.futureProduction = Math.min(Math.round(anvilProduct.currentAmount + ((anvilProduct.currentProgress + (player.afkFor * playerAnvil.anvilSpeed / 3600)) / anvilProduct.data.time) * (anvilProduct.hammers ?? 0)), playerAnvil.productCapacity);

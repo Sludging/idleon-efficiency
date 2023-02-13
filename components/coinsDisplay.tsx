@@ -12,6 +12,7 @@ interface CoinProps {
     coinMap: Map<Coins, number>
     maxCoins?: number
     regularRow?: boolean
+    coinScale?: number
 }
 
 export default function CoinsDisplay(props: CoinProps) {
@@ -31,7 +32,7 @@ export default function CoinsDisplay(props: CoinProps) {
                     if (!props.maxCoins || index < props.maxCoins) {
                         return (
                             <Box key={`coin-${coin.valueOf()}`} direction="row" gap="xsmall">
-                                <IconImage data={getCoinClass(coin)} />
+                                <IconImage data={getCoinClass(coin)} scale={props.coinScale ? props.coinScale : 1} />
                                 <Text>{value}</Text>
                             </Box>
                         )

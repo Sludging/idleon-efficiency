@@ -76,6 +76,9 @@ export class Meal {
     ladlesToNextMilestone: number = -1;
     zerkerLadlesToNextMilestone: number = -1;
 
+    // Calculated
+    maxLevel: number = 30;
+
     constructor(public mealIndex: number, data: MealModel) {
         this.name = data.name;
         this.cookReq = data.cookingReq;
@@ -460,16 +463,25 @@ export const updateCooking = (data: Map<string, any>) => {
         }
     })
 
+    // Max Level
+    const artifactMaxMealLevel = sailing.artifacts[17].getBonus();
     cooking.meals.forEach(meal => {
         const cookingSpeed = meal.cookingContribution > 0 ? meal.cookingContribution : totalContribution;
-        meal.timeToDiamond = ((meal.getCostsTillDiamond() - meal.count) * meal.cookReq) / cookingSpeed;
-        meal.timeToPurple = ((meal.getCostsTillPurple() - meal.count) * meal.cookReq) / cookingSpeed;
-        meal.timeToVoid = ((meal.getCostsTillVoid() - meal.count) * meal.cookReq) / cookingSpeed;
-        meal.timeToThirty = ((meal.getCostsTillThirty() - meal.count) * meal.cookReq) / cookingSpeed;
+        meal.maxLevel += artifactMaxMealLevel;
+        
+        // No need to do any maths for max level meals.
+        if (meal.level == meal.maxLevel) {
+            return;
+        }
 
-        meal.timeToNext = ((meal.getMealLevelCost() - meal.count) * meal.cookReq) / cookingSpeed;
-        meal.ladlesToLevel = Math.ceil((((meal.getMealLevelCost() - meal.count) * meal.cookReq) / cookingSpeed));
-        meal.zerkerLadlesToLevel = Math.ceil((((meal.getMealLevelCost() - meal.count) * meal.cookReq) / cookingSpeed) / (1 + zerkerBonus / 100));
+        meal.timeToDiamond = Math.max(0, ((meal.getCostsTillDiamond() - meal.count) * meal.cookReq) / cookingSpeed);
+        meal.timeToPurple = Math.max(0, ((meal.getCostsTillPurple() - meal.count) * meal.cookReq) / cookingSpeed);
+        meal.timeToVoid = Math.max(0, ((meal.getCostsTillVoid() - meal.count) * meal.cookReq) / cookingSpeed);
+        meal.timeToThirty = Math.max(0, ((meal.getCostsTillThirty() - meal.count) * meal.cookReq) / cookingSpeed);
+
+        meal.timeToNext = Math.max(0, ((meal.getMealLevelCost() - meal.count) * meal.cookReq) / cookingSpeed);
+        meal.ladlesToLevel = Math.max(0, Math.ceil((((meal.getMealLevelCost() - meal.count) * meal.cookReq) / cookingSpeed)));
+        meal.zerkerLadlesToLevel = Math.max(0, Math.ceil((((meal.getMealLevelCost() - meal.count) * meal.cookReq) / cookingSpeed) / (1 + zerkerBonus / 100)));
 
         let milestoneCosts = 0;
         if (meal.timeToDiamond > 0) {

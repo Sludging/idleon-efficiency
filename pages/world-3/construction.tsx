@@ -38,6 +38,7 @@ import IconImage from '../../components/base/IconImage';
 import { BuildingsDisplay } from '../../components/world-3/construction/buildings';
 import { SaltLickDisplay } from '../../components/world-3/construction/saltLick';
 import { Artifact, ArtifactStatus } from '../../data/domain/sailing/artifacts';
+import { AtomColliderDisplay } from '../../components/world-3/construction/atomCollider';
 
 
 function RefineryDisplay() {
@@ -688,32 +689,36 @@ function ShrinesDisplay() {
                             <Box gap="small">
                                 <Box direction="row" align="center">
                                     <Box margin={{ right: 'small' }}>
-                                        <IconImage data={shrine.getImageData()} scale={0.7} />
+                                        <IconImage data={shrine.getImageData()} scale={0.5} />
                                     </Box>
-                                    <Text>{shrine.name}</Text>
+                                    <Text size="small">{shrine.name}</Text>
                                 </Box>
-                                <Box direction="row" justify="between" wrap>
+                                <Grid columns={{count: 4, size: 'auto'}}>
                                     <TextAndLabel
+                                        textSize='small'
                                         label="Level"
                                         text={shrine.level.toString()}
                                         margin={{ right: 'medium', bottom: 'small' }}
                                     />
                                     <TextAndLabel
                                         label="Current Map"
+                                        textSize='small'
                                         text={MapInfo[shrine.currentMap].data.map.name}
                                         margin={{ right: 'medium', bottom: 'small' }}
                                     />
                                     <TextAndLabel
                                         label="Hours"
-                                        text={`${Math.round(shrine.accumulatedHours)}/${Math.round(shrine.getHourRequirement())}`}
+                                        textSize='small'
+                                        text={`${nFormatter(Math.round(shrine.accumulatedHours))}/${nFormatter(Math.round(shrine.getHourRequirement()))}`}
                                         margin={{ right: 'medium', bottom: 'small' }}
                                     />
                                     <TextAndLabel
                                         label="Bonus"
-                                        text={`${nFormatter(shrine.getBonus(shrine.currentMap), "Smaller")}%`}
+                                        textSize='xsmall'
+                                        text={`${shrine.getBonusText(shrine.currentMap)}`}
                                         margin={{ right: 'medium', bottom: 'small' }}
                                     />
-                                </Box>
+                                </Grid>
                             </Box>
                         </ShadowBox>
                     )
@@ -734,7 +739,7 @@ function Construction() {
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Construction</Heading>
             <Box gap="small">
                 <Box align="center" direction="row" justify="center" gap="small">
-                    {["Refinery", "Salt Lick", "3D Printer", "Death Note", "Shrines", "Buildings"].map((tabName, index) => (
+                    {["Refinery", "Salt Lick", "3D Printer", "Death Note", "Shrines", "Buildings", "Atom Collider"].map((tabName, index) => (
                         <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
                     ))
                     }
@@ -745,6 +750,7 @@ function Construction() {
                 {activeTab == "Death Note" && <DeathnoteDisplay />}
                 {activeTab == "Shrines" && <ShrinesDisplay />}
                 {activeTab == "Buildings" && <BuildingsDisplay />}
+                {activeTab == "Atom Collider" && <AtomColliderDisplay />}
             </Box>
         </Box>
     )

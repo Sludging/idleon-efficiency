@@ -435,7 +435,7 @@ export const updateLab = (data: Map<string, any>) => {
         }
         // Same ugly handling for starsign doubler.
         if (chips.filter(chip => chip.data.name == "Silkrode Nanochip").length > 0) {
-            playerData[index].starSigns.forEach(sign => sign.hasChip == true);
+            playerData[index].starSigns.forEach(sign => sign.hasChip = true);
         }
     })
 
@@ -530,7 +530,7 @@ export const updateLab = (data: Map<string, any>) => {
         (lab.bonuses[9] as FungiFingerBonus).jewelBoost = lab.jewels[13].getBonus()
     
     }
-    (lab.bonuses[11] as UnadulteratedBankingBonus).greenStacks = storage.chest.filter(item => item.count >= 1e7).length;
+    (lab.bonuses[11] as UnadulteratedBankingBonus).greenStacks = [...new Set(storage.chest.filter(item => item.count >= 1e7).map(item => item.internalName))].length;
     
 
     return lab;

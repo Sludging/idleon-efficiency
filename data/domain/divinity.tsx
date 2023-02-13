@@ -108,7 +108,8 @@ export default function parseDivinity(playerCount: number, divinityData: number[
         const playerMantra = divinityData[playerIndex];
         const linkedGodIndex = divinityData[playerIndex + 12];
         const playerLinkedGod = linkedGodIndex != -1 && linkedGodIndex < divinity.gods.length ? divinity.gods[linkedGodIndex] : undefined;
-        const isActive = afkTarget[playerIndex] == "Divinity" || (playerLinkedGod?.data.name == "Goharut" && afkTarget[playerIndex] == "Laboratory");
+        // Player is active if actually on divinity alter or using Goharut as god and being in lab.
+        const isActive = afkTarget[playerIndex] == "Divinity" || (playerLinkedGod && playerLinkedGod.index == 4 && afkTarget[playerIndex] == "Laboratory")
         divinity.playerInfo.push(new PlayerDivinityInfo(playerIndex, mantraInfo[playerMantra].data, playerLinkedGod, isActive));
     });
 
