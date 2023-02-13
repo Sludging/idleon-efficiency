@@ -3,6 +3,8 @@ import { Construction } from './construction';
 import { AtomColliderBase, initAtomColliderRepo } from './data/AtomColliderRepo';
 import { AtomColliderModel } from './model/atomColliderModel';
 import { Alchemy } from './alchemy';
+import { ImageData } from './imageData';
+import { nFormatter, range } from '../utility';
 
 export class Atom {
     level: number = 0;
@@ -14,21 +16,48 @@ export class Atom {
 
     constructor(public index: number, public data: AtomColliderModel) { }
 
+    getMaxLevel = () => {
+        return 20;
+    }
+
     getBonus = (): number => {
         return this.level * this.data.bonusPerLv;
     }
 
     getCost = (level: number = this.level): number => {
-        return (1 / 1 + (this.nenoBonus + (this.bubbleBonus + this.colliderBuildingLevel / 10)) / 100) * 
-        (this.data.baseCost + level * this.data.growthFactor) *
-        Math.pow(this.data.baseExponent, this.index);
+        const bonusMath = (1 / (1 + (this.nenoBonus + this.bubbleBonus + (this.colliderBuildingLevel / 10)) / 100));
+        const baseMath = this.data.baseCost + (level * this.data.growthFactor);
+        const exponentMath = Math.pow(this.data.baseExponent, level);
+        return Math.floor(bonusMath * baseMath * exponentMath);
+    }
+
+    getCostToUnlock = () => {
+        const bonusMath = (1 / (1 + (this.nenoBonus + this.bubbleBonus + (this.colliderBuildingLevel / 10)) / 100));
+        return this.data.baseCost * bonusMath;
+    }
+
+    getCostToMaxLevel = () => {
+        return range(this.level, this.getMaxLevel()).reduce((sum, level) => sum += this.getCost(level), 0);
+    }
+
+    getBonusText = () => {
+        return this.data.desc.replace(/{/g, (this.level * this.data.bonusPerLv).toString());
+    }
+
+    getImageData = (): ImageData => {
+        return {
+            location: `Atom${this.index}`,
+            height: 81,
+            width: 100
+        }
     }
 
     static fromBase = (data: AtomColliderBase[]) => {
         return data.map(atom => {
-            switch(atom.index) {   
+            switch (atom.index) {
                 case 0: return new HydrogenAtom(atom.index, atom.data);
                 case 5: return new CarbonAtom(atom.index, atom.data);
+                case 7: return new OxygenAtom(atom.index, atom.data);
                 case 8: return new FluorideAtom(atom.index, atom.data);
                 default: return new Atom(atom.index, atom.data)
             }
@@ -43,7 +72,7 @@ export class HydrogenAtom extends Atom {
         if (this.level == 0) {
             return 0;
         }
-        
+
         return Math.min(90, this.level * this.data.bonusPerLv * this.daysSinceUpgrade);
     }
 }
@@ -61,6 +90,11 @@ export class CarbonAtom extends Atom {
     getExtraLevels = (): number => {
         return 2 * this.level;
     }
+
+    override getBonusText = () => {
+        return this.data.desc.replace(/{/g, (this.level * this.data.bonusPerLv).toString())
+        .replace(/}/, this.getBonus().toString());
+    }
 }
 
 export class FluorideAtom extends Atom {
@@ -71,12 +105,31 @@ export class FluorideAtom extends Atom {
         }
         return Math.pow(1 + (this.level * this.data.bonusPerLv) / 100, this.voidMeals);
     }
+
+    override getBonusText = () => {
+        return this.data.desc.replace(/{/g, (this.level * this.data.bonusPerLv).toString())
+        .replace(/>/, nFormatter(Math.max(0, 100 * (this.getBonus() - 1)), "Big"));
+    }
+}
+
+export class OxygenAtom extends Atom {
+    override getBonusText = () => {
+        return this.data.desc.replace(/{/g, (this.level * this.data.bonusPerLv).toString())
+        .replace(/</, this.level.toString());
+    }
 }
 
 export class AtomCollider {
     particles: number = 0;
     atoms: Atom[] = Atom.fromBase(initAtomColliderRepo())
-    
+
+    static getParticleImageData = (): ImageData => {
+        return {
+            location: 'Particle',
+            height: 29,
+            width: 29
+        }
+    }
 }
 
 export default function parseAtomCollider(atomsData: number[], divinityData: number[]) {

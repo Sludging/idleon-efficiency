@@ -1,4 +1,3 @@
-import { Capacity } from './capacity';
 import { StarSignMap, StarSign } from './starsigns';
 import { Box, initPostOffice, PostOfficeConst } from './postoffice';
 import { ClassIndex, Talent, ClassTalentMap, GetTalentArray, TalentConst } from './talents';
@@ -98,7 +97,6 @@ export class Player {
     money: number = 0;
     skills: Map<SkillsIndex, SkillData>;
     skillsRank: Map<SkillsIndex, number>;
-    capacity: Capacity = new Capacity();
     talents: Talent[] = [];
     postOffice: Box[] = initPostOffice();
     activeBubblesString: string[] = [];
@@ -399,7 +397,6 @@ const keyFunctionMap: Record<string, Function> = {
     "starsigns": (doc: Cloudsave, player: Player) => parseStarSigns(doc.get(`PVtStarSign_${player.playerID}`), player),
     "money": (doc: Cloudsave, player: Player) => { player.money = doc.get(`Money_${player.playerID}`) },
     "skills": (doc: Cloudsave, player: Player) => parseSkills(doc.get(`Lv0_${player.playerID}`), doc.get(`Exp0_${player.playerID}`), doc.get(`ExpReq0_${player.playerID}`), player),
-    "capacity": (doc: Cloudsave, player: Player) => { player.capacity = new Capacity(JSON.parse(doc.get(`MaxCarryCap_${player.playerID}`))) },
     "talents": (doc: Cloudsave, player: Player) => parseTalents(
         doc.get(`SL_${player.playerID}`),
         doc.get(`SM_${player.playerID}`),

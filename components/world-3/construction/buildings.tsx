@@ -66,8 +66,8 @@ export function BuildingsDisplay() {
             <Box wrap direction="row">
                 {buildingsToShow.map((building, index) => {
                     return (
-                        <ShadowBox style={{ opacity: building.level > 0 ? 1 : 0.5 }} key={index} align="center" background="dark-1" pad="medium" justify="between" margin={{ bottom: 'small', right: 'small' }} direction="row" width="large">
-                            <Box justify="center" margin={{ right: 'medium' }}>
+                        <ShadowBox style={{ opacity: building.level > 0 ? 1 : 0.5 }} key={index} align="start" background="dark-1" pad="medium" justify="between" margin={{ bottom: 'small', right: 'small' }} direction="row" width="large">
+                            <Box justify="center" margin={{ right: 'medium' }} gap="small">
                                 <Text size="xsmall">{building.name}</Text>
                                 <Box margin={{ right: 'small' }}>
                                     <IconImage data={building.getImageData()} scale={0.8} />
