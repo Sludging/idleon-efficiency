@@ -19,7 +19,9 @@ export const initEnemyTableRepo = () => {
                     <ItemDropModel>{"item": "DungCredits2", "quantity": 1, "chance": 0.0014, "questLink": "N/A"}
                 ]
             }),
-        new EnemyTableBase("frogNest", <EnemyTableModel>{"drops": []}),
+        new EnemyTableBase("frogNest", <EnemyTableModel>{
+                "drops": [<CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"}]
+            }),
         new EnemyTableBase("frogD", <EnemyTableModel>{
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"},
@@ -83,10 +85,18 @@ export const initEnemyTableRepo = () => {
                     <ItemDropModel>{"item": "DungCredits2", "quantity": 1, "chance": 0.8, "questLink": "N/A"}
                 ]
             }),
-        new EnemyTableBase("frogFiller1", <EnemyTableModel>{"drops": []}),
-        new EnemyTableBase("frogFiller1b", <EnemyTableModel>{"drops": []}),
-        new EnemyTableBase("frogFiller1d", <EnemyTableModel>{"drops": []}),
-        new EnemyTableBase("Meteor", <EnemyTableModel>{"drops": []}),
+        new EnemyTableBase("frogFiller1", <EnemyTableModel>{
+                "drops": [<CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"}]
+            }),
+        new EnemyTableBase("frogFiller1b", <EnemyTableModel>{
+                "drops": [<CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"}]
+            }),
+        new EnemyTableBase("frogFiller1d", <EnemyTableModel>{
+                "drops": [<CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"}]
+            }),
+        new EnemyTableBase("Meteor", <EnemyTableModel>{
+                "drops": [<CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"}]
+            }),
         new EnemyTableBase("rocky", <EnemyTableModel>{
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"},
@@ -181,10 +191,18 @@ export const initEnemyTableRepo = () => {
                     <ItemDropModel>{"item": "DungCredits2", "quantity": 1, "chance": 0.8, "questLink": "N/A"}
                 ]
             }),
-        new EnemyTableBase("frogFiller3de", <EnemyTableModel>{"drops": []}),
-        new EnemyTableBase("frogFiller3fd", <EnemyTableModel>{"drops": []}),
-        new EnemyTableBase("frogFiller3drt", <EnemyTableModel>{"drops": []}),
-        new EnemyTableBase("frogFiller3ed", <EnemyTableModel>{"drops": []}),
+        new EnemyTableBase("frogFiller3de", <EnemyTableModel>{
+                "drops": [<CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"}]
+            }),
+        new EnemyTableBase("frogFiller3fd", <EnemyTableModel>{
+                "drops": [<CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"}]
+            }),
+        new EnemyTableBase("frogFiller3drt", <EnemyTableModel>{
+                "drops": [<CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"}]
+            }),
+        new EnemyTableBase("frogFiller3ed", <EnemyTableModel>{
+                "drops": [<CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"}]
+            }),
         new EnemyTableBase("ForgeA", <EnemyTableModel>{
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"},
@@ -212,11 +230,21 @@ export const initEnemyTableRepo = () => {
                     <ItemDropModel>{"item": "Quest19", "quantity": 69, "chance": 0.07, "questLink": "N/A"}
                 ]
             }),
-        new EnemyTableBase("mushPtutorial", <EnemyTableModel>{"drops": []}),
-        new EnemyTableBase("demonPtutorial", <EnemyTableModel>{"drops": []}),
-        new EnemyTableBase("behemoth", <EnemyTableModel>{"drops": []}),
-        new EnemyTableBase("AlienTreetutorial", <EnemyTableModel>{"drops": []}),
-        new EnemyTableBase("Starlight", <EnemyTableModel>{"drops": []}),
+        new EnemyTableBase("mushPtutorial", <EnemyTableModel>{
+                "drops": [<CoinDropModel>{"item": "COIN", "quantity": 50, "chance": 0.5, "questLink": "N/A"}]
+            }),
+        new EnemyTableBase("demonPtutorial", <EnemyTableModel>{
+                "drops": [<CoinDropModel>{"item": "COIN", "quantity": 250, "chance": 0.4, "questLink": "N/A"}]
+            }),
+        new EnemyTableBase("behemoth", <EnemyTableModel>{
+                "drops": [<CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 1, "questLink": "N/A"}]
+            }),
+        new EnemyTableBase("AlienTreetutorial", <EnemyTableModel>{
+                "drops": [<CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"}]
+            }),
+        new EnemyTableBase("Starlight", <EnemyTableModel>{
+                "drops": [<CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"}]
+            }),
         new EnemyTableBase("Crystal0", <EnemyTableModel>{
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0.5, "questLink": "N/A"},
@@ -533,11 +561,21 @@ export const initEnemyTableRepo = () => {
                     <SubTableDropModel>{"item": "DropTable3", "quantity": 2, "chance": 1, "questLink": "N/A"}
                 ]
             }),
-        new EnemyTableBase("BossPart", <EnemyTableModel>{"drops": []}),
-        new EnemyTableBase("rockG", <EnemyTableModel>{"drops": []}),
-        new EnemyTableBase("rockB", <EnemyTableModel>{"drops": []}),
-        new EnemyTableBase("rockS", <EnemyTableModel>{"drops": []}),
-        new EnemyTableBase("Iceball", <EnemyTableModel>{"drops": []}),
+        new EnemyTableBase("BossPart", <EnemyTableModel>{
+                "drops": [<CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0, "questLink": "N/A"}]
+            }),
+        new EnemyTableBase("rockG", <EnemyTableModel>{
+                "drops": [<CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0, "questLink": "N/A"}]
+            }),
+        new EnemyTableBase("rockB", <EnemyTableModel>{
+                "drops": [<CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0, "questLink": "N/A"}]
+            }),
+        new EnemyTableBase("rockS", <EnemyTableModel>{
+                "drops": [<CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0, "questLink": "N/A"}]
+            }),
+        new EnemyTableBase("Iceball", <EnemyTableModel>{
+                "drops": [<CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0, "questLink": "N/A"}]
+            }),
         new EnemyTableBase("jarSand", <EnemyTableModel>{
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 40, "chance": 0.5, "questLink": "N/A"},
@@ -1283,7 +1321,9 @@ export const initEnemyTableRepo = () => {
                     <SubTableDropModel>{"item": "DropTable3", "quantity": 1, "chance": 1, "questLink": "N/A"}
                 ]
             }),
-        new EnemyTableBase("ChestD1", <EnemyTableModel>{"drops": []}),
+        new EnemyTableBase("ChestD1", <EnemyTableModel>{
+                "drops": [<CoinDropModel>{"item": "COIN", "quantity": 5000, "chance": 1, "questLink": "N/A"}]
+            }),
         new EnemyTableBase("ChestA2", <EnemyTableModel>{
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 1000, "chance": 1, "questLink": "N/A"},
@@ -1330,7 +1370,9 @@ export const initEnemyTableRepo = () => {
                     <SubTableDropModel>{"item": "DropTable8", "quantity": 1, "chance": 1, "questLink": "N/A"}
                 ]
             }),
-        new EnemyTableBase("ChestD2", <EnemyTableModel>{"drops": []}),
+        new EnemyTableBase("ChestD2", <EnemyTableModel>{
+                "drops": [<CoinDropModel>{"item": "COIN", "quantity": 5000, "chance": 1, "questLink": "N/A"}]
+            }),
         new EnemyTableBase("ChestA3", <EnemyTableModel>{
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 10000, "chance": 1, "questLink": "N/A"},
@@ -1376,7 +1418,9 @@ export const initEnemyTableRepo = () => {
                     <SubTableDropModel>{"item": "DropTable16", "quantity": 1, "chance": 1, "questLink": "N/A"}
                 ]
             }),
-        new EnemyTableBase("ChestD3", <EnemyTableModel>{"drops": []}),
+        new EnemyTableBase("ChestD3", <EnemyTableModel>{
+                "drops": [<CoinDropModel>{"item": "COIN", "quantity": 5000, "chance": 1, "questLink": "N/A"}]
+            }),
         new EnemyTableBase("ChestA4", <EnemyTableModel>{
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 8000000, "chance": 1, "questLink": "N/A"},
@@ -1418,7 +1462,9 @@ export const initEnemyTableRepo = () => {
                     <SubTableDropModel>{"item": "DropTable21", "quantity": 1, "chance": 1, "questLink": "N/A"}
                 ]
             }),
-        new EnemyTableBase("ChestD4", <EnemyTableModel>{"drops": []}),
+        new EnemyTableBase("ChestD4", <EnemyTableModel>{
+                "drops": [<CoinDropModel>{"item": "COIN", "quantity": 5000, "chance": 1, "questLink": "N/A"}]
+            }),
         new EnemyTableBase("GiantMobzz69", <EnemyTableModel>{
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
