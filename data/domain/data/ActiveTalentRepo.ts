@@ -527,6 +527,58 @@ export const initActiveTalentRepo = () => {
                 "AFKactivity": -2
             }),
         new ActiveTalentBase(40, <ActiveTalentModel>{
+                "name": "Cannonball",
+                "K": 1,
+                "D": 1.5,
+                "s": 1,
+                "cooldown": 4,
+                "castTime": 0.45,
+                "manaCost": 22,
+                "inputReq": 0,
+                "AFKrange": 350,
+                "AFKtype": "line",
+                "AFKactivity": 0
+            }),
+        new ActiveTalentBase(41, <ActiveTalentModel>{
+                "name": "Suppressing Fire",
+                "K": 1.3,
+                "D": 1.2,
+                "s": 1.1,
+                "cooldown": 6,
+                "castTime": 0.45,
+                "manaCost": 22,
+                "inputReq": 0,
+                "AFKrange": 400,
+                "AFKtype": "line",
+                "AFKactivity": 0
+            }),
+        new ActiveTalentBase(42, <ActiveTalentModel>{
+                "name": "Firebomb",
+                "K": 1,
+                "D": 1.4,
+                "s": 1,
+                "cooldown": 38,
+                "castTime": 1.1,
+                "manaCost": 16,
+                "inputReq": 0,
+                "AFKrange": 0,
+                "AFKtype": "auto",
+                "AFKactivity": 0
+            }),
+        new ActiveTalentBase(43, <ActiveTalentModel>{
+                "name": "Pirate Flag",
+                "K": 1,
+                "D": 1,
+                "s": 1,
+                "cooldown": 490,
+                "castTime": 0.5,
+                "manaCost": 15,
+                "inputReq": 0,
+                "AFKrange": 150,
+                "AFKtype": "buff",
+                "AFKactivity": 0
+            }),
+        new ActiveTalentBase(44, <ActiveTalentModel>{
                 "name": "Ballista",
                 "K": 1.1,
                 "D": 1.3,
@@ -539,7 +591,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "target",
                 "AFKactivity": 0
             }),
-        new ActiveTalentBase(41, <ActiveTalentModel>{
+        new ActiveTalentBase(45, <ActiveTalentModel>{
                 "name": "Boar Rush",
                 "K": 1.1,
                 "D": 1.2,
@@ -552,7 +604,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "buff",
                 "AFKactivity": 0
             }),
-        new ActiveTalentBase(42, <ActiveTalentModel>{
+        new ActiveTalentBase(46, <ActiveTalentModel>{
                 "name": "Whale Wallop",
                 "K": 1.2,
                 "D": 1.1,
@@ -565,7 +617,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "buff",
                 "AFKactivity": 0
             }),
-        new ActiveTalentBase(43, <ActiveTalentModel>{
+        new ActiveTalentBase(47, <ActiveTalentModel>{
                 "name": "Nacho Party",
                 "K": 1.1,
                 "D": 1.1,
@@ -578,7 +630,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "buff",
                 "AFKactivity": 0
             }),
-        new ActiveTalentBase(44, <ActiveTalentModel>{
+        new ActiveTalentBase(48, <ActiveTalentModel>{
                 "name": "Arena Spirit",
                 "K": 1.1,
                 "D": 1.1,
@@ -591,7 +643,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "buff",
                 "AFKactivity": -2
             }),
-        new ActiveTalentBase(45, <ActiveTalentModel>{
+        new ActiveTalentBase(49, <ActiveTalentModel>{
                 "name": "Energy Bolt",
                 "K": 1,
                 "D": 1.21,
@@ -604,7 +656,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "auto",
                 "AFKactivity": 0
             }),
-        new ActiveTalentBase(46, <ActiveTalentModel>{
+        new ActiveTalentBase(50, <ActiveTalentModel>{
                 "name": "Mini Fireball",
                 "K": 1.05,
                 "D": 1.2,
@@ -617,7 +669,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "line",
                 "AFKactivity": 0
             }),
-        new ActiveTalentBase(47, <ActiveTalentModel>{
+        new ActiveTalentBase(51, <ActiveTalentModel>{
                 "name": "Teleport",
                 "K": 1,
                 "D": 1,
@@ -630,7 +682,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "auto",
                 "AFKactivity": -1
             }),
-        new ActiveTalentBase(48, <ActiveTalentModel>{
+        new ActiveTalentBase(52, <ActiveTalentModel>{
                 "name": "Log On Logs",
                 "K": 1,
                 "D": 1,
@@ -643,7 +695,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "buff",
                 "AFKactivity": 3
             }),
-        new ActiveTalentBase(49, <ActiveTalentModel>{
+        new ActiveTalentBase(53, <ActiveTalentModel>{
                 "name": "Ice Shards",
                 "K": 1.1,
                 "D": 1.3,
@@ -656,7 +708,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "auto",
                 "AFKactivity": 0
             }),
-        new ActiveTalentBase(50, <ActiveTalentModel>{
+        new ActiveTalentBase(54, <ActiveTalentModel>{
                 "name": "Floor Is Lava",
                 "K": 1.1,
                 "D": 1.3,
@@ -669,7 +721,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "line",
                 "AFKactivity": 0
             }),
-        new ActiveTalentBase(51, <ActiveTalentModel>{
+        new ActiveTalentBase(55, <ActiveTalentModel>{
                 "name": "Tornado",
                 "K": 1.1,
                 "D": 1.3,
@@ -682,7 +734,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "line",
                 "AFKactivity": 0
             }),
-        new ActiveTalentBase(52, <ActiveTalentModel>{
+        new ActiveTalentBase(56, <ActiveTalentModel>{
                 "name": "Speedy Book",
                 "K": 1,
                 "D": 1,
@@ -695,7 +747,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "line",
                 "AFKactivity": 0
             }),
-        new ActiveTalentBase(53, <ActiveTalentModel>{
+        new ActiveTalentBase(57, <ActiveTalentModel>{
                 "name": "Mana Is Life",
                 "K": 1,
                 "D": 1,
@@ -708,7 +760,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "buff",
                 "AFKactivity": 0
             }),
-        new ActiveTalentBase(54, <ActiveTalentModel>{
+        new ActiveTalentBase(58, <ActiveTalentModel>{
                 "name": "Charge Syphon",
                 "K": 1,
                 "D": 1,
@@ -721,7 +773,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "buff",
                 "AFKactivity": -2
             }),
-        new ActiveTalentBase(55, <ActiveTalentModel>{
+        new ActiveTalentBase(59, <ActiveTalentModel>{
                 "name": "Crazy Concoctions",
                 "K": 1.1,
                 "D": 1.3,
@@ -734,7 +786,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "line",
                 "AFKactivity": 0
             }),
-        new ActiveTalentBase(56, <ActiveTalentModel>{
+        new ActiveTalentBase(60, <ActiveTalentModel>{
                 "name": "Auspicious Aura",
                 "K": 1.05,
                 "D": 1.21,
@@ -747,7 +799,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "line",
                 "AFKactivity": 0
             }),
-        new ActiveTalentBase(57, <ActiveTalentModel>{
+        new ActiveTalentBase(61, <ActiveTalentModel>{
                 "name": "Sizzling Skull",
                 "K": 1.05,
                 "D": 1.21,
@@ -760,7 +812,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "line",
                 "AFKactivity": 0
             }),
-        new ActiveTalentBase(58, <ActiveTalentModel>{
+        new ActiveTalentBase(62, <ActiveTalentModel>{
                 "name": "Cranium Cooking",
                 "K": 1,
                 "D": 1,
@@ -773,7 +825,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "buff",
                 "AFKactivity": 0
             }),
-        new ActiveTalentBase(59, <ActiveTalentModel>{
+        new ActiveTalentBase(63, <ActiveTalentModel>{
                 "name": "Chemical Warfare",
                 "K": 1,
                 "D": 1.21,
@@ -786,7 +838,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "auto",
                 "AFKactivity": 0
             }),
-        new ActiveTalentBase(60, <ActiveTalentModel>{
+        new ActiveTalentBase(64, <ActiveTalentModel>{
                 "name": "Flatulent Spirit",
                 "K": 1,
                 "D": 1.21,
@@ -799,7 +851,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "auto",
                 "AFKactivity": 0
             }),
-        new ActiveTalentBase(61, <ActiveTalentModel>{
+        new ActiveTalentBase(65, <ActiveTalentModel>{
                 "name": "Tampered Injection",
                 "K": 1,
                 "D": 1.21,
@@ -812,7 +864,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "auto",
                 "AFKactivity": 0
             }),
-        new ActiveTalentBase(62, <ActiveTalentModel>{
+        new ActiveTalentBase(66, <ActiveTalentModel>{
                 "name": "Raise Dead",
                 "K": 1,
                 "D": 1.21,
@@ -825,7 +877,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "auto",
                 "AFKactivity": 0
             }),
-        new ActiveTalentBase(63, <ActiveTalentModel>{
+        new ActiveTalentBase(67, <ActiveTalentModel>{
                 "name": "Roll Da Dice",
                 "K": 1,
                 "D": 1,
@@ -838,7 +890,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "buff",
                 "AFKactivity": -1
             }),
-        new ActiveTalentBase(64, <ActiveTalentModel>{
+        new ActiveTalentBase(68, <ActiveTalentModel>{
                 "name": "Exp Converter",
                 "K": 1,
                 "D": 1,
@@ -851,7 +903,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "buff",
                 "AFKactivity": -2
             }),
-        new ActiveTalentBase(65, <ActiveTalentModel>{
+        new ActiveTalentBase(69, <ActiveTalentModel>{
                 "name": "Telekinetic Storage",
                 "K": 1,
                 "D": 1,
@@ -864,7 +916,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "buff",
                 "AFKactivity": -2
             }),
-        new ActiveTalentBase(66, <ActiveTalentModel>{
+        new ActiveTalentBase(70, <ActiveTalentModel>{
                 "name": "Printer Sampling",
                 "K": 1,
                 "D": 1,
@@ -877,7 +929,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "buff",
                 "AFKactivity": -2
             }),
-        new ActiveTalentBase(67, <ActiveTalentModel>{
+        new ActiveTalentBase(71, <ActiveTalentModel>{
                 "name": "Shrine Architect",
                 "K": 1,
                 "D": 1,
@@ -890,7 +942,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "buff",
                 "AFKactivity": -2
             }),
-        new ActiveTalentBase(68, <ActiveTalentModel>{
+        new ActiveTalentBase(72, <ActiveTalentModel>{
                 "name": "From Downtown",
                 "K": 1,
                 "D": 1.3,
