@@ -814,7 +814,9 @@ export const initEnemyRepo = () => {
                     "Damages": [50, 1],
                     "DefFor0": 40.66
                 },
-                "drops": <EnemyTableModel>{"drops": []},
+                "drops": <EnemyTableModel>{
+                    "drops": [<CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"}]
+                },
                 "mapData": undefined,
                 "navigation": undefined,
                 "bossData": undefined
@@ -1138,7 +1140,9 @@ export const initEnemyRepo = () => {
                     "Damages": [1, 1],
                     "DefFor0": 0
                 },
-                "drops": <EnemyTableModel>{"drops": []},
+                "drops": <EnemyTableModel>{
+                    "drops": [<CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"}]
+                },
                 "mapData": undefined,
                 "navigation": undefined,
                 "bossData": undefined
@@ -2535,7 +2539,9 @@ export const initEnemyRepo = () => {
                     "Damages": [50, 1],
                     "DefFor0": 40.66
                 },
-                "drops": <EnemyTableModel>{"drops": []},
+                "drops": <EnemyTableModel>{
+                    "drops": [<CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0, "questLink": "N/A"}]
+                },
                 "mapData": undefined,
                 "navigation": undefined,
                 "bossData": undefined
@@ -2562,7 +2568,9 @@ export const initEnemyRepo = () => {
                     "Damages": [50, 1],
                     "DefFor0": 40.66
                 },
-                "drops": <EnemyTableModel>{"drops": []},
+                "drops": <EnemyTableModel>{
+                    "drops": [<CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0, "questLink": "N/A"}]
+                },
                 "mapData": undefined,
                 "navigation": undefined,
                 "bossData": undefined
@@ -2589,7 +2597,9 @@ export const initEnemyRepo = () => {
                     "Damages": [50, 1],
                     "DefFor0": 40.66
                 },
-                "drops": <EnemyTableModel>{"drops": []},
+                "drops": <EnemyTableModel>{
+                    "drops": [<CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0, "questLink": "N/A"}]
+                },
                 "mapData": undefined,
                 "navigation": undefined,
                 "bossData": undefined
@@ -3744,7 +3754,9 @@ export const initEnemyRepo = () => {
                     "Damages": [1, 1],
                     "DefFor0": 0
                 },
-                "drops": <EnemyTableModel>{"drops": []},
+                "drops": <EnemyTableModel>{
+                    "drops": [<CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0, "questLink": "N/A"}]
+                },
                 "mapData": undefined,
                 "navigation": undefined,
                 "bossData": undefined
@@ -9040,7 +9052,9 @@ export const initEnemyRepo = () => {
                     "Damages": [0, 1],
                     "DefFor0": 0.22
                 },
-                "drops": <EnemyTableModel>{"drops": []},
+                "drops": <EnemyTableModel>{
+                    "drops": [<CoinDropModel>{"item": "COIN", "quantity": 5000, "chance": 1, "questLink": "N/A"}]
+                },
                 "mapData": undefined,
                 "navigation": undefined,
                 "bossData": undefined
@@ -9191,7 +9205,9 @@ export const initEnemyRepo = () => {
                     "Damages": [0, 1],
                     "DefFor0": 0.22
                 },
-                "drops": <EnemyTableModel>{"drops": []},
+                "drops": <EnemyTableModel>{
+                    "drops": [<CoinDropModel>{"item": "COIN", "quantity": 5000, "chance": 1, "questLink": "N/A"}]
+                },
                 "mapData": undefined,
                 "navigation": undefined,
                 "bossData": undefined
@@ -9341,7 +9357,9 @@ export const initEnemyRepo = () => {
                     "Damages": [0, 1],
                     "DefFor0": 0.22
                 },
-                "drops": <EnemyTableModel>{"drops": []},
+                "drops": <EnemyTableModel>{
+                    "drops": [<CoinDropModel>{"item": "COIN", "quantity": 5000, "chance": 1, "questLink": "N/A"}]
+                },
                 "mapData": undefined,
                 "navigation": undefined,
                 "bossData": undefined
@@ -9487,7 +9505,9 @@ export const initEnemyRepo = () => {
                     "Damages": [0, 1],
                     "DefFor0": 0.22
                 },
-                "drops": <EnemyTableModel>{"drops": []},
+                "drops": <EnemyTableModel>{
+                    "drops": [<CoinDropModel>{"item": "COIN", "quantity": 5000, "chance": 1, "questLink": "N/A"}]
+                },
                 "mapData": undefined,
                 "navigation": undefined,
                 "bossData": undefined

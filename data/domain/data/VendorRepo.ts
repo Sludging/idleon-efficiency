@@ -8,6 +8,7 @@ export class VendorsBase { constructor(public id: string, public data: VendorsMo
 export const initVendorRepo = () => {
     return [    
         new VendorsBase("Blunder Hills", <VendorsModel>{
+                "area": "Blunder Hills",
                 "items": [
                     <VendorModel>{
                         "vendor": "Blunder Hills",
@@ -180,6 +181,7 @@ export const initVendorRepo = () => {
                 ]
             }),
         new VendorsBase("Encroaching Forest Villas", <VendorsModel>{
+                "area": "Encroaching Forest Villas",
                 "items": [
                     <VendorModel>{
                         "vendor": "Encroaching Forest Villas",
@@ -282,6 +284,7 @@ export const initVendorRepo = () => {
                 ]
             }),
         new VendorsBase("YumYum Grotto", <VendorsModel>{
+                "area": "YumYum Grotto",
                 "items": [
                     <VendorModel>{
                         "vendor": "YumYum Grotto",
@@ -419,6 +422,7 @@ export const initVendorRepo = () => {
                 ]
             }),
         new VendorsBase("Faraway Piers", <VendorsModel>{
+                "area": "Faraway Piers",
                 "items": [
                     <VendorModel>{
                         "vendor": "Faraway Piers",
@@ -514,6 +518,7 @@ export const initVendorRepo = () => {
                 ]
             }),
         new VendorsBase("Frostbite Towndra", <VendorsModel>{
+                "area": "Frostbite Towndra",
                 "items": [
                     <VendorModel>{
                         "vendor": "Frostbite Towndra",
@@ -679,6 +684,7 @@ export const initVendorRepo = () => {
                 ]
             }),
         new VendorsBase("Outer World Town", <VendorsModel>{
+                "area": "Outer World Town",
                 "items": [
                     <VendorModel>{
                         "vendor": "Outer World Town",
@@ -788,6 +794,7 @@ export const initVendorRepo = () => {
                 ]
             }),
         new VendorsBase("Magma Rivertown", <VendorsModel>{
+                "area": "Magma Rivertown",
                 "items": [
                     <VendorModel>{
                         "vendor": "Magma Rivertown",

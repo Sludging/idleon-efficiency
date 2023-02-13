@@ -145,6 +145,10 @@ export class Stamp {
                     this.maxCarryInfo[tier] = { colliderDiscount: atomDiscount, costToLevel: costToLevel, goldCostToLevel: goldCostToLevel, currentDiscount: isCurrentUnlock && currentAtomDiscount == atomDiscount ? true : false };
                     break;
                 }
+                // Ugly hack: for users without hydrogen atom, no discount increment means infinite loop on this for. So we break after checking once.
+                if (discountIncrement == 0) {
+                    break;
+                }
             }
         }
 
