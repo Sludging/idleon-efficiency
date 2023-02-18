@@ -196,6 +196,10 @@ export class Player {
         return this.talents.find(talent => talent.skillIndex == skillIndex)?.getBonus() ?? 0;
     }
 
+    getTalentMaxLevel = (skillIndex: number) => {
+        return this.talents.find(talent => talent.skillIndex == skillIndex)?.maxLevel ?? 0;
+    }
+
     getCurrentCooldown = (skillIndex: number) => {
         const skillCooldown = [...this.cooldown.entries()].filter(([talent, cooldown]) => talent.skillIndex == skillIndex).pop()
         if (skillCooldown) {
