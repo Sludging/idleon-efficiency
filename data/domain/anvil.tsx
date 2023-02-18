@@ -273,7 +273,8 @@ export const updateAnvil = (data: Map<string, any>) => {
         const dungeonBonus = (dungeonsData.passives.get(PassiveType.Flurbo) ?? [])[2]?.getBonus() ?? 0; // Lava is looking at the wrong bonus.
         const goldFoodStampBonus = stampData.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC7")?.getBonus() ?? 0;
         const goldFoodAchievement = achievementsInfo[AchievementConst.GoldFood].completed;
-        const allSkillXP = Skilling.getAllSkillXP(player, shrines, statues[player.playerID], prayers, saltLickBonus, dungeonBonus, family, goldFoodStampBonus, goldFoodAchievement, sigils.sigils[14].getBonus());
+        const goldFoodBubble = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 18);
+        const allSkillXP = Skilling.getAllSkillXP(player, shrines, statues[player.playerID], prayers, saltLickBonus, dungeonBonus, family, goldFoodStampBonus, goldFoodAchievement, sigils.sigils[14].getBonus(), goldFoodBubble);
         const mmanBonus = players.find(player => player.classId == ClassIndex.Maestro)?.talents.find(talent => talent.skillIndex == 42)?.getBonus() ?? 0;
         const xpMulti = playerAnvil.getXPMulti(player, allSkillXP, mmanBonus);
         playerAnvil.setXP(xpMulti);

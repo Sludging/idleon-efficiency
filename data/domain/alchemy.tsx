@@ -13,6 +13,7 @@ import { Player } from './player';
 import { ClassIndex } from './talents';
 import { SkillsIndex } from './SkillsIndex';
 import { Artifact } from './sailing/artifacts';
+import { Sailing } from './sailing';
 
 export enum CauldronIndex {
     Power = 0,
@@ -548,7 +549,7 @@ export function updateAlchemy(data: Map<string, any>) {
     const lab = data.get("lab") as Lab;
     const cooking = data.get("cooking") as Cooking;
     const players = data.get("players") as Player[];
-    const artifacts = data.get("artifacts") as Artifact[];
+    const sailing = data.get("sailing") as Sailing;
 
     if (lab.bonuses.find(bonus => bonus.name == "My 1st Chemistry Set")?.active ?? false) {
         alchemy.vials.forEach(vial => vial.bonusMulitplier = 2)
@@ -559,7 +560,7 @@ export function updateAlchemy(data: Map<string, any>) {
         if (lab.jewels.find(jewel => jewel.data.name == "Pyrite Rhinestone")?.active) {
             bubblesToUpgrade += 1;
         }
-        bubblesToUpgrade += artifacts[12].getBonus(); //Amberite Artifact
+        bubblesToUpgrade += sailing.artifacts[12].getBonus(); //Amberite Artifact
         
         const sortedBubbles = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles.slice(0, 15).filter(bubble => bubble.level > 5)).sort((bubble1, bubble2) => {
             // If same level, then go with higher cauldron index + higher bubble index.

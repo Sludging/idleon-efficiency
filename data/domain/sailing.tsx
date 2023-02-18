@@ -13,6 +13,9 @@ import { Alchemy } from "./alchemy";
 import { Stamp } from "./stamps";
 import { PlayerStatues } from "./statues";
 import { GemStore } from "./gemPurchases";
+import { Player } from "./player";
+import { Family } from "./family";
+import { ClassIndex } from "./talents";
 
 // "Captains": [
 //     [0,0,-1,3,6.75,2,0],
@@ -111,6 +114,8 @@ export class Boat {
 
     // Helper values.
     speedBaseMath = 0;
+    unendingSearchBonus = 0;
+    minTravelTime = 120;
 
     constructor(public index: number, public assignIsland: Island | undefined, public distanceTravelled: number, public lootUpgrades: number, public speedUpgrades: number, public captain: Captain | undefined) { }
 
@@ -158,7 +163,7 @@ export class Boat {
             : 0;
 
         const firstMath = 2 + Math.pow(Math.floor(lootUpgrades / 8), 2);
-        return (5 + firstMath * lootUpgrades) * (1 + (this.sigilBonus + (captainBonus + this.genieLampBonus)) / 100);
+        return (5 + firstMath * lootUpgrades) * (1 + (this.sigilBonus + (captainBonus + this.genieLampBonus)) / 100) * (1 + this.unendingSearchBonus / 100);
     }
 
     getSpeedValue = (
@@ -173,7 +178,7 @@ export class Boat {
         const firstMath = 5 + Math.pow(Math.floor(speedUpgrades / 7), 2);
         const boatSpeed = (10 + firstMath * speedUpgrades) * (1 + captainBonus / 100) * this.speedBaseMath;
         if (islandBound && this.assignIsland) {
-            return Math.min(boatSpeed, (this.assignIsland.data.distance * 60) / 120);
+            return Math.min(boatSpeed, (this.assignIsland.data.distance * 60) / this.minTravelTime);
         }
 
         return boatSpeed;
@@ -305,6 +310,7 @@ export const updateSailing = (data: Map<string, any>) => {
     const statues = data.get("statues") as PlayerStatues[];
     const alchemy = data.get("alchemy") as Alchemy;
     const gemStore = data.get("gems") as GemStore;
+    const players = data.get("players") as Player[];
 
     // Max chests (requires artifacts info)
     const chestPurchases = gemStore.purchases.find(upgrade => upgrade.index == 130)?.pucrhased ?? 0;
@@ -321,13 +327,31 @@ export const updateSailing = (data: Map<string, any>) => {
     const speedBaseMath = firstMath * (1 + divinity.gods[6].getBlessingBonus() / 100)
         * (1 + (divinity.gods[9].getBlessingBonus() + sailing.artifacts[10].getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd")) / 125);
 
+    //Unending Loot Search
+    const highestLevelUnendingSearch = players.sort((player1, player2) => player1.getTalentBonus(325) > player2.getTalentBonus(325) ? -1 : 1)[0];
+
     // Update boat impacts
     sailing.boats.forEach(boat => {
         boat.genieLampBonus = sailing.artifacts[5].getBonus()
         boat.sigilBonus = sigils.sigils[21].getBonus();
         boat.speedBaseMath = speedBaseMath;
+        boat.unendingSearchBonus = highestLevelUnendingSearch.getTalentBonus(325);
     });
 
+
+    return sailing;
+}
+
+export const updateFamilyImpact = (data: Map<string, any>) => {
+    const sailing = data.get("sailing") as Sailing;
+    const family = data.get("family") as Family;
+
+    // Minimum travel time
+    const siegeBonus = family.classBonus.get(ClassIndex.Siege_Breaker)?.getBonus() ?? 0;
+    console.log(siegeBonus);
+    sailing.boats.forEach(boat => {
+        boat.minTravelTime = 120 / (1 + siegeBonus / 100);
+    });
 
     return sailing;
 }
