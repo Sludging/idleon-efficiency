@@ -3,6 +3,7 @@ import { initSigilRepo, SigilBase } from "./data/SigilRepo";
 import { GemStore } from "./gemPurchases";
 import { ImageData } from "./imageData";
 import { SigilModel } from "./model/sigilModel";
+import { Sailing } from "./sailing";
 import { Artifact } from "./sailing/artifacts";
 
 export class Sigil {
@@ -77,12 +78,12 @@ export const updateSigils = (data: Map<string, any>) => {
     const sigils = data.get("sigils") as Sigils;
     const gemStore = data.get("gems") as GemStore;
     const achievements = data.get("achievements") as Achievement[];
-    const artifacts = data.get("artifacts") as Artifact[];
+    const sailing = data.get("sailing") as Sailing;
 
     const sigilAchiev = achievements[112].completed ? 20 : 0;
     const sigilGemBonus = (gemStore.purchases.find(purchase => purchase.no == 110)?.pucrhased ?? 0) * 20;
 
-    const artifactBonus = artifacts[16].getBonus();
+    const artifactBonus = sailing.artifacts[16].getBonus();
     sigils.sigils.forEach(sigil => {
         sigil.artifactBoost = artifactBonus;
     })

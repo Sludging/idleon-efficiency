@@ -15,7 +15,6 @@ import parsePrayers from './prayers';
 import parseRefinery, { updateRefinery } from './refinery';
 import parseSaltLick from './saltLick';
 import parsePrinter, { updatePrinter } from './printer';
-import updateDeathnote from './deathnote';
 import parseTaskboard from './tasks';
 import { Cloudsave } from './cloudsave';
 import parseWorship, { updateWorship } from './worship';
@@ -23,7 +22,7 @@ import parseConstruction, { updateConstruction } from './construction';
 import parseCards from './cards';
 import parseArcade, { updateArcade } from './arcade';
 import parseObols from './obols';
-import { parseFamily } from './family';
+import { calculateFamily } from './family';
 import { parseDungeons } from './dungeons';
 import { parseForge, updateForge } from './forge';
 import { parseCooking, updateCooking } from './cooking';
@@ -35,13 +34,14 @@ import { parseAnvil, updateAnvil } from './anvil';
 import { updateAlerts } from './alerts';
 import { parseAccount, updateAccount } from './account';
 import parseDivinity, { updateDivinity } from './divinity';
-import parseSailing, { updateSailing } from './sailing';
+import parseSailing, { updateFamilyImpact, updateSailing } from './sailing';
 import parseGaming from './gaming';
 import parseAtomCollider, { updateAtomCollider } from './atomCollider';
 import { updateArtifacts } from './sailing/artifacts';
 import parseConstellations from './constellations';
 import parseSlab from './slab';
 import parseCapacity, { updateCapacity } from './capacity';
+import parseDeathnote from './deathnote';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     try {
@@ -138,20 +138,20 @@ const keyFunctionMap: Record<string, Function> = {
     "gaming": (doc: Cloudsave, charCount: number) => parseGaming(doc.get("Gaming") as any[] || [], safeJsonParse(doc, "GamingSprout", [])),
     "collider": (doc: Cloudsave, charCount: number) => parseAtomCollider(doc.get("Atoms") as number[] || [], doc.get("Divinity") as number[] || []),
     "capacity": (doc: Cloudsave, charCount: number) => parseCapacity([...Array(charCount)].map((_, index) => new Map(Object.entries(safeJsonParse(doc,`MaxCarryCap_${index}`, new Map()))))),
+    "deathnote": (doc: Cloudsave, charCount: number) => parseDeathnote([...Array(charCount)].map((_, i) => { return doc.get(`KLA_${i}`) })),
 }
 
-// ORDER IS IMPORTANT!
+// ORDER IS IMPORTANT, the keys are not relevant as data doesn't get persisted.
+// This allows for multiple calls that touch the same data to happen in the same map (artifacts + sailing for example)
 const postProcessingMap: Record<string, Function> = {
     "collider": (doc: Cloudsave, accountData: Map<string, any>) => updateAtomCollider(accountData),
     "artifacts": (doc: Cloudsave, accountData: Map<string, any>) => updateArtifacts(accountData),
     "sigils": (doc: Cloudsave, accountData: Map<string, any>) => updateSigils(accountData),
     "storage": (doc: Cloudsave, accountData: Map<string, any>) => updateStorage(accountData),
-    "deathnote": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnote(accountData),
     "lab": (doc: Cloudsave, accountData: Map<string, any>) => updateLab(accountData),
     "alchemy": (doc: Cloudsave, accountData: Map<string, any>) => updateAlchemy(accountData),
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStamps(accountData),
     "divinity": (doc: Cloudsave, accountData: Map<string, any>) => updateDivinity(accountData),
-    "family": (doc: Cloudsave, accountData: Map<string, any>) => parseFamily(accountData.get("players") as Player[]),
     "forge": (doc: Cloudsave, accountData: Map<string, any>) => updateForge(accountData.get("forge"), accountData.get("gems")),
     "cooking": (doc: Cloudsave, accountData: Map<string, any>) => updateCooking(accountData),
     "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateSailing(accountData),
@@ -161,18 +161,19 @@ const postProcessingMap: Record<string, Function> = {
     "capacity": (doc: Cloudsave, accountData: Map<string, any>) => updateCapacity(accountData),
     "printer": (doc: Cloudsave, accountData: Map<string, any>) => updatePrinter(accountData),
     "worship": (doc: Cloudsave, accountData: Map<string, any>) => updateWorship(accountData),
-    "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),
     "arcade": (doc: Cloudsave, accountData: Map<string, any>) => updateArcade(accountData),
-    "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
     "account": (doc: Cloudsave, accountData: Map<string, any>) => updateAccount(accountData),
-    "construction": (doc: Cloudsave, accountData: Map<string, any>) => updateConstruction(accountData),
-    "refinery": (doc: Cloudsave, accountData: Map<string, any>) => updateRefinery(accountData),
-    
+    "construction": (doc: Cloudsave, accountData: Map<string, any>) => updateConstruction(accountData),    
 }
 
 // I really really hate this.
 const postPostProcessingMap: Record<string, Function> = {
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStampMaxCarry(accountData),
+    "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
+    "family": (doc: Cloudsave, accountData: Map<string, any>) => calculateFamily(accountData.get("players") as Player[]),
+    "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),
+    "refinery": (doc: Cloudsave, accountData: Map<string, any>) => updateRefinery(accountData),
+    "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateFamilyImpact(accountData),
 }
 
 export const updateIdleonData = async (data: Cloudsave, charNames: string[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
@@ -213,12 +214,12 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], all
     // Do post parse processing
     Object.entries(postProcessingMap).forEach(([key, toExecute]) => {
         try {
-            accountData.set(key, toExecute(data, accountData));
+            toExecute(data, accountData);
         }
         catch (e) {
             console.debug(e);
             console.log(`Failed post-processing ${key}`);
-            accountData.set(key, undefined);
+            //accountData.set(key, undefined);
         }
     })
 
@@ -230,7 +231,7 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], all
         catch (e) {
             console.debug(e);
             console.log(`Failed post-post-processing ${key}`);
-            accountData.set(key, undefined);
+            //accountData.set(key, undefined);
         }
     })
     

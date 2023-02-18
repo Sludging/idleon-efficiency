@@ -7,7 +7,7 @@ export const fetcher = async (windowLocation: string, oldDomain: string): Promis
         urlDomain = window.location.host.replace(baseURL, "").replace('.', '');
     }
     if (urlDomain != oldDomain && urlDomain != "" && urlDomain != "www") {
-        if (process.env.NEXT_PUBLIC_APP_STAGE == "dev") {
+        if (process.env.NEXT_PUBLIC_APP_STAGE == "local") {
             try {
                 const res = await fetch(`/api/publicProfile?profile=${urlDomain}`);
                 if (res.ok) {
