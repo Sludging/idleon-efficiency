@@ -28,6 +28,7 @@ import { SkillsIndex } from './SkillsIndex';
 import { AFKTypeEnum } from './enum/aFKTypeEnum';
 import { Shrine, ShrineConstants } from './shrines';
 import { Divinity } from './divinity';
+import { Deathnote } from './deathnote';
 
 export class PlayerStats {
     strength: number = 0;
@@ -203,9 +204,9 @@ export class Player {
         return 0;
     }
 
-    getGoldFoodMulti = (familyBonus: number = 0, goldFoodStampBonus: number = 0, achievement: boolean, sigilBonus: number) => {
+    getGoldFoodMulti = (familyBonus: number = 0, goldFoodStampBonus: number = 0, achievement: boolean, sigilBonus: number, bubbleBonus: number) => {
         const gearBonus = this.gear.equipment.reduce((sum, gear) => sum += gear?.getMiscBonus("Gold Food Effect") ?? 0, 0);
-        return Math.max(familyBonus, 1) + (gearBonus + ((this.talents.find(skill => skill.skillIndex == 99)?.getBonus() ?? 0) + (goldFoodStampBonus + (achievement ? 5 : 0))) + sigilBonus) / 100;
+        return Math.max(familyBonus, 1) + (gearBonus + ((this.talents.find(skill => skill.skillIndex == 99)?.getBonus() ?? 0) + (goldFoodStampBonus + (achievement ? 5 : 0))) + bubbleBonus + sigilBonus) / 100;
     }
 
     getMiscBonusFromGear = (bonusType: string) => {
@@ -244,10 +245,10 @@ export class Player {
 
     setMonsterCash = (strBubbleBonus: number, wisBubbleBonus: number, agiBubbleBonus: number, mealBonus: number,
         petArenaBonus1: number, petArenaBonus2: number, labBonus: number, vialBonus: number, dungeonBonus: number, guildBonus: number,
-        family: Family, goldFoodStampBonus: number, goldFoodAchievement: boolean, prayers: Prayer[], arcadeBonus: number, sigilBonus: number) => {
+        family: Family, goldFoodStampBonus: number, goldFoodAchievement: boolean, prayers: Prayer[], arcadeBonus: number, sigilBonus: number, bubbleBonus: number) => {
         let gearBonus = this.getMiscBonusFromGear("Money");
         const goldenFoodBonus = this.gear.food.filter(food => food && food.goldenFood != undefined && food.description.includes("Boosts coins dropped"))
-            .reduce((sum, food) => sum += (food as Food).goldFoodBonus(food?.count ?? 0, this.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus() ?? 0, goldFoodStampBonus, goldFoodAchievement, sigilBonus)), 0);
+            .reduce((sum, food) => sum += (food as Food).goldFoodBonus(food?.count ?? 0, this.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus(this) ?? 0, goldFoodStampBonus, goldFoodAchievement, sigilBonus, bubbleBonus)), 0);
         const cardBonus = Card.GetTotalBonusForId(this.cardInfo?.equippedCards ?? [], 11);
         const poBox = this.postOffice.find(box => box.index == 13);
         const boxBonus = poBox?.bonuses[2].getBonus(poBox.level, 2) ?? 0;
@@ -639,6 +640,7 @@ export const updatePlayers = (data: Map<string, any>) => {
     const sigils = data.get("sigils") as Sigils;
     const shrines = data.get("shrines") as Shrine[];
     const divinity = data.get("divinity") as Divinity;
+    const deathnote = data.get("deathnote") as Deathnote;
 
     // Set player active bubble array, easier to work with.
     players.forEach(player => {
@@ -651,6 +653,11 @@ export const updatePlayers = (data: Map<string, any>) => {
             }).filter(notUndefined);
             player.activeBubbles = bubbleArray;
         }
+    })
+
+    // Track player deathnote data on the player object as well.
+    players.forEach(player => {
+        player.killInfo = deathnote.playerKillsByMap.get(player.playerID)!;
     })
 
     // Update player obols info so we can use it in maths
@@ -698,10 +705,11 @@ export const updatePlayers = (data: Map<string, any>) => {
         const strBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 15)
         const wisBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.HighIQ, 15)
         const agiBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.Quicc, 15)
+        const goldFoodBubble = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 18);
 
         player.setMonsterCash(strBubbleBonus, wisBubbleBonus, agiBubbleBonus, mealBonus,
             petArenaBonus1, petArenaBonus2, labBonus, vialBonus,
-            dungeonBonus, guildBonus, family, goldFoodStampBonus, goldFoodAchievement, prayers, arcadeBonus, sigils.sigils[14].getBonus());
+            dungeonBonus, guildBonus, family, goldFoodStampBonus, goldFoodAchievement, prayers, arcadeBonus, sigils.sigils[14].getBonus(), goldFoodBubble);
     })
 
     // Crystal Spawn Chance

@@ -39,6 +39,7 @@ import { BuildingsDisplay } from '../../components/world-3/construction/building
 import { SaltLickDisplay } from '../../components/world-3/construction/saltLick';
 import { Artifact, ArtifactStatus } from '../../data/domain/sailing/artifacts';
 import { AtomColliderDisplay } from '../../components/world-3/construction/atomCollider';
+import { Sailing } from '../../data/domain/sailing';
 
 
 function RefineryDisplay() {
@@ -392,8 +393,8 @@ function PrinterDisplay() {
     const printerArtifact = useMemo(() => {
         if (appContext) {
             const theData = appContext.data.getData();
-            const artifacts = theData.get("artifacts") as Artifact[];
-            return artifacts[4];
+            const sailing = theData.get("sailing") as Sailing;
+            return sailing.artifacts[4];
         }
     }, [appContext])
 
