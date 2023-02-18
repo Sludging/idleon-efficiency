@@ -64,7 +64,7 @@ export function AtomColliderDisplay() {
                 atomsToShow.map((atom, index) => {
                     return (
                         <ShadowBox style={{ opacity: atom.level > 0 ? 1 : 0.6 }} key={index} background="dark-1" pad="medium" direction="row" align="center" justify="between" margin={{ bottom: 'small' }}>
-                            <Grid columns={["10%", "15%", "35%", "10%", "10%", "10%"]} gap="small" align="start">
+                            <Grid columns={["5%", "20%", "35%", "10%", "10%", "20%"]} gap="small" align="start" fill>
                                 <IconImage data={atom.getImageData()} scale={0.5} />
                                 <TextAndLabel labelSize="xsmall" textSize='small' text={atom.data.name} label="Name" />
                                 <TextAndLabel labelSize="xsmall" textSize='xsmall' text={atom.getBonusText()} label="Bonus" />
