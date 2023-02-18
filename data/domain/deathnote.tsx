@@ -12,6 +12,7 @@ const deathNoteMobOrder = [
 
 export class Deathnote {
     mobKillCount: Map<string, number[]> = new Map()
+    playerKillsByMap: Map<number, Map<number, number>> = new Map();
 
     constructor() {
         deathNoteMobOrder.forEach((world) => {
@@ -65,15 +66,15 @@ export class Deathnote {
     }
 }
 
-export default function updateDeathnote(accountData: Map<string, any>) {
+export default function parseDeathnote(klaData: string[]) {
     const deathNote = new Deathnote();
-    const doc = new Map<string, any>(Object.entries(accountData.get("rawData")));
-    const playerData = accountData.get("players") as Player[];
-    const charCount = playerData.length;
+    // const doc = new Map<string, any>(Object.entries(accountData.get("rawData")));
+    // const playerData = accountData.get("players") as Player[];
+    // const charCount = playerData.length;
 
-    const rawData = [...Array(charCount)].map((_, i) => { return doc.get(`KLA_${i}`) })
-    rawData.forEach((playerKillData, index) => {
-        const jsonData = JSON.parse(playerKillData) as number[][];
+    klaData.forEach((playerKillData, pIndex) => {
+        deathNote.playerKillsByMap.set(pIndex, new Map());
+        const jsonData = JSON.parse(playerKillData) as number[][]
         jsonData.forEach((mapInfo, mapIndex) => {
             if (mapIndex < MapInfo.length) {
                 const mapData = MapInfo[mapIndex];
@@ -82,7 +83,7 @@ export default function updateDeathnote(accountData: Map<string, any>) {
                     deathNote.mobKillCount.get(mapData.data.enemy)?.push(killCount); //do we really only care about 0?
                 }
 
-                playerData[index].killInfo.set(mapIndex, killCount);
+                deathNote.playerKillsByMap.get(pIndex)?.set(mapIndex, killCount);
             }
         });
     })           

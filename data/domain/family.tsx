@@ -27,7 +27,7 @@ export const familyBonusMapping = [
     "+{_TOTAL_AGI 1 5 intervalAdd _ _ txt".split(" "),
     "+{%_EXP_WHEN_FIGHT|MONSTERS_ACTIVELY 38 100 decay _ _ txt".split(" "),
     "+{%_EFFICIENCY|FOR_ALL_SKILLS 30 100 decay _ _ txt".split(" "),
-    "+{%_WORLD_5_STUFF 25 100 decay _ _ txt".split(" "),
+    "+{%_FASTER_MINIMUM|BOAT_TRAVEL_TIME 20 170 decay _ _ txt".split(" "),
     "MAYHEIM 25 100 decay _ _ txt".split(" "),
     "WIND_WALKER 25 100 decay _ _ txt".split(" "),
     "+{%_ALL_SKILL|AFK_GAINS 5 180 decay _ _ txt".split(" "),
@@ -46,7 +46,7 @@ export const familyBonusMapping = [
     "FILLER _ _ txt _ _ txt".split(" "),
     "FILLER _ _ txt _ _ txt".split(" "),
     "FILLER _ _ txt _ _ txt".split(" "),
-    "FILLER _ _ txt _ _ txt".split(" ")
+    "FILLER _ _ txt _ _ txt".split(" "),
 ];
 
 export const classAccountBonus = [
@@ -91,7 +91,7 @@ export const classAccountBonus = [
     ["FILLER", "129"],
     ["FILLER", "129"],
     ["FILLER", "129"],
-    ["FILLER", "129"]
+    ["FILLER", "129"],
 ];
 
 export const FamilyBonusRelations: Record<ClassIndex, ClassIndex[]> = {
@@ -124,17 +124,20 @@ export const FamilyBonusRelations: Record<ClassIndex, ClassIndex[]> = {
 }
 
 export class FamilyBonus {
-    constructor(public bonus: string, public value: number) { }
+    constructor(public classIndex: ClassIndex, public bonus: string, public value: number, public playerID: number) { }
 
-    getBonusText = (rounding: boolean = true) => {
-        return this.bonus.replace(/_/g, " ").replace("|", " ").replace("#@", "x ").replace(/{/g, this.getBonus(rounding).toString());
+    getBonusText = (player: Player | undefined = undefined, rounding: boolean = true) => {
+        return this.bonus.replace(/_/g, " ").replace("|", " ").replace("#@", "x ").replace(/{/g, this.getBonus(player, rounding).toString());
     }
 
-    getBonus = (rounding: boolean = false) => {
-        if (rounding) {
-            return round(this.value);
+    getBonus = (player: Player | undefined = undefined, rounding: boolean = false) => {
+        let familyManBoost = 1;
+        // Only the highest player of a class gets boosted by family guy, so check if same class and if highest level of that class.
+        if (player && player.classId == this.classIndex && player.playerID == this.playerID) {
+            familyManBoost += player.getTalentBonus(144) / 100;
         }
-        return this.value;
+
+        return rounding ? round(this.value * familyManBoost) : this.value * familyManBoost;
     }
 }
 
@@ -142,22 +145,28 @@ export class Family {
     classBonus: Map<ClassIndex, FamilyBonus> = new Map()
 }
 
-export const parseFamily = (players: Player[]) => {
+export const calculateFamily = (players: Player[]) => {
     const family = new Family();
+
+    const highestFamilyGuy = players.sort((player1, player2) => player1.getTalentBonus(144) > player2.getTalentBonus(144) ? -1 : 1)[0];
 
     GroupBy(players, "classId").forEach(classPlayers => {
         const highestLevel = classPlayers.sort((player1, player2) => player1.level > player2.level ? -1 : 1)[0];
         const bonusData = familyBonusMapping[highestLevel.classId];
-        const familyManBoost = 1; // + highestLevel.getTalentBonus(144) / 100;
+        let familyManBoost = 1;
+        // For siege breaker and divine knight bonus, the highest family guy bonus (across all players, not just dk/sb) boosts the family bonus.
+        if ([ClassIndex.Siege_Breaker, ClassIndex.Divine_Knight].includes(highestLevel.classId)) {
+            familyManBoost += highestFamilyGuy.getTalentBonus(144) / 100;
+        }
         const familyBonus = lavaFunc(bonusData[3], highestLevel.level - Number(classAccountBonus[highestLevel.classId][1]), Number(bonusData[1]), Number(bonusData[2]), false);
-        family.classBonus.set(highestLevel.classId, new FamilyBonus(bonusData[0], familyBonus * familyManBoost));
+        family.classBonus.set(highestLevel.classId, new FamilyBonus(highestLevel.classId, bonusData[0], familyBonus * familyManBoost, highestLevel.classId));
         FamilyBonusRelations[highestLevel.classId].forEach((subClass) => {
             const bonusData = familyBonusMapping[subClass];
             const subClassFamilyBonus = lavaFunc(bonusData[3], highestLevel.level - Number(classAccountBonus[subClass][1]), Number(bonusData[1]), Number(bonusData[2]), false)
             // if we never seen this subclass or the value is higher, set a new family bonus.
             const currentBonus = family.classBonus.get(subClass);
-            if (subClassFamilyBonus * familyManBoost > (currentBonus?.getBonus() ?? 0)) {
-                family.classBonus.set(subClass, new FamilyBonus(bonusData[0], subClassFamilyBonus * familyManBoost));
+            if (subClassFamilyBonus > (currentBonus?.getBonus() ?? 0)) {
+                family.classBonus.set(subClass, new FamilyBonus(highestLevel.classId, bonusData[0], subClassFamilyBonus, highestLevel.playerID));
             }
         })
     })

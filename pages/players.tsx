@@ -22,7 +22,7 @@ import { Activity, Player, SkillData } from '../data/domain/player';
 import { SkillsIndex } from "../data/domain/SkillsIndex";
 import { ClassIndex, ClassTalentMap, GetTalentArray } from '../data/domain/talents';
 import { Capacity, CapacityConst, playerInventoryBagMapping } from '../data/domain/capacity';
-import { Alchemy, Bubble } from "../data/domain/alchemy";
+import { Alchemy, Bubble, CauldronIndex } from "../data/domain/alchemy";
 import { Stamp } from '../data/domain/stamps';
 import { Shrine, ShrineConstants } from '../data/domain/shrines';
 import { PlayerStatues } from '../data/domain/statues';
@@ -547,10 +547,12 @@ function EquipmentDisplay({ player }: { player: Player }) {
     const stampData = theData.get("stamps") as Stamp[][];
     const achievementsInfo = theData.get("achievements") as Achievement[];
     const sigils = theData.get("sigils") as Sigils;
+    const alchemy = theData.get("alchemy") as Alchemy;
 
     const goldFoodStampBonus = stampData.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC7")?.getBonus() ?? 0;
     const goldFoodAchievement = achievementsInfo[AchievementConst.GoldFood].completed;
-    const goldFoodMulti = player.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus() ?? 0, goldFoodStampBonus, goldFoodAchievement, sigils.sigils[14].getBonus());
+    const goldFoodBubble = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 18);
+    const goldFoodMulti = player.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus(player) ?? 0, goldFoodStampBonus, goldFoodAchievement, sigils.sigils[14].getBonus(), goldFoodBubble);
 
 
     return (

@@ -2,6 +2,7 @@ import { lavaLog, range } from "../utility";
 import { Divinity } from "./divinity";
 import { Lab } from "./lab";
 import { Player } from "./player";
+import { Sailing } from "./sailing";
 import { Artifact } from "./sailing/artifacts";
 import { ClassIndex } from "./talents";
 
@@ -96,7 +97,7 @@ export const updatePrinter = (data: Map<string, any>) => {
     const printer = data.get("printer") as Printer;
     const lab = data.get("lab") as Lab;
     const divinity = data.get("divinity") as Divinity;
-    const artifacts = data.get("artifacts") as Artifact[];
+    const sailing = data.get("sailing") as Sailing;
     const players = data.get("players") as Player[];
     const optLacc = data.get("OptLacc");
 
@@ -113,7 +114,7 @@ export const updatePrinter = (data: Map<string, any>) => {
 
     const daysSinceLastPrint = optLacc[125];
     printer.samples.flatMap(player => player).forEach(sample => {
-        sample.artifactBoost = artifacts[4].getBonus() * daysSinceLastPrint
+        sample.artifactBoost = sailing.artifacts[4].getBonus() * daysSinceLastPrint
     });
 
     const bestDivineKnight = players.filter(player => player.classId == ClassIndex.Divine_Knight).sort((player1, player2) => player1.getTalentBonus(178) > player2.getTalentBonus(178) ? 1 : -1).pop()

@@ -18,7 +18,7 @@ import TipDisplay from '../../components/base/TipDisplay';
 import { AppContext } from '../../data/appContext';
 import { BoatUpgradeType, CaptainTrait, IslandStatus, Sailing as SailingDomain } from '../../data/domain/sailing';
 import { ArtifactStatus } from '../../data/domain/sailing/artifacts';
-import { nFormatter } from '../../data/utility';
+import { nFormatter, round } from '../../data/utility';
 
 function ShipsDisplay() {
     const [sailing, setSailing] = useState<SailingDomain>();
@@ -428,6 +428,12 @@ function Sailing() {
                 <TextAndLabel
                     label="Loot Pile Max"
                     text={sailing.maxChests.toString()}
+                    margin={{ right: 'small' }}
+                />
+
+                <TextAndLabel
+                    label="Minimum Travel Time"
+                    text={`${Math.round(sailing.boats[0].minTravelTime)} min`}
                 />
             </Box>
             <Box margin={{ bottom: 'medium' }} gap="small">
