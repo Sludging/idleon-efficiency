@@ -16,6 +16,7 @@ import { GemStore } from "./gemPurchases";
 import { Player } from "./player";
 import { Family } from "./family";
 import { ClassIndex } from "./talents";
+import { range } from "../utility";
 
 // "Captains": [
 //     [0,0,-1,3,6.75,2,0],
@@ -138,9 +139,15 @@ export class Boat {
         return Math.min(30, 1 + 2 * (this.index - 4));
     }
 
-    getUpgradeCost = (type: BoatUpgradeType) => {
-        const lootType = type == BoatUpgradeType.Loot ? this.getLootUpgradeType() : this.getSpeedUpgradeType();
+    getUpgradeCostTillLevel = (type: BoatUpgradeType, targetLevel: number) => {
         const currentUpgradeLevel = type == BoatUpgradeType.Loot ? this.lootUpgrades : this.speedUpgrades;
+        return range(currentUpgradeLevel, targetLevel).reduce((sum, level) => sum += this.getUpgradeCost(type, targetLevel), 0);
+    }
+
+    getUpgradeCost = (type: BoatUpgradeType, targetLevel?: number) => {
+        const lootType = type == BoatUpgradeType.Loot ? this.getLootUpgradeType() : this.getSpeedUpgradeType();
+        // Taking a page out of Lava's book, ternary operator FTW.
+        const currentUpgradeLevel = targetLevel ? targetLevel : type == BoatUpgradeType.Loot ? this.lootUpgrades : this.speedUpgrades;
 
         if (lootType == 0) {
             return Math.round((5 + 4 * currentUpgradeLevel) * Math.pow(1.17 - .12 * currentUpgradeLevel / (currentUpgradeLevel + 200), currentUpgradeLevel));
@@ -328,7 +335,7 @@ export const updateSailing = (data: Map<string, any>) => {
         * (1 + (divinity.gods[9].getBlessingBonus() + sailing.artifacts[10].getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd")) / 125);
 
     //Unending Loot Search
-    const highestLevelUnendingSearch = players.sort((player1, player2) => player1.getTalentBonus(325) > player2.getTalentBonus(325) ? -1 : 1)[0];
+    const highestLevelUnendingSearch = players.slice().sort((player1, player2) => player1.getTalentBonus(325) > player2.getTalentBonus(325) ? -1 : 1)[0];
 
     // Update boat impacts
     sailing.boats.forEach(boat => {
@@ -348,7 +355,6 @@ export const updateFamilyImpact = (data: Map<string, any>) => {
 
     // Minimum travel time
     const siegeBonus = family.classBonus.get(ClassIndex.Siege_Breaker)?.getBonus() ?? 0;
-    console.log(siegeBonus);
     sailing.boats.forEach(boat => {
         boat.minTravelTime = 120 / (1 + siegeBonus / 100);
     });
