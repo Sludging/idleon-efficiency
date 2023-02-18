@@ -169,11 +169,11 @@ const postProcessingMap: Record<string, Function> = {
 // I really really hate this.
 const postPostProcessingMap: Record<string, Function> = {
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStampMaxCarry(accountData),
-    "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
     "family": (doc: Cloudsave, accountData: Map<string, any>) => calculateFamily(accountData.get("players") as Player[]),
     "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),
     "refinery": (doc: Cloudsave, accountData: Map<string, any>) => updateRefinery(accountData),
     "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateFamilyImpact(accountData),
+    "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
 }
 
 export const updateIdleonData = async (data: Cloudsave, charNames: string[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
