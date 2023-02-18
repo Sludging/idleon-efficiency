@@ -737,7 +737,7 @@ export const updatePlayers = (data: Map<string, any>) => {
     })    
 
     // I dunno why I have to sort it now, I never had to before. Need to think about it further.
-    return players.sort((playera, playerb) => playera.playerID > playerb.playerID ? 1 : -1);
+    return players;
 }
 
 

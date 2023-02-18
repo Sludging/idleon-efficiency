@@ -235,6 +235,10 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], all
         }
     })
     
+    // I sometimes forget that sorting has implication, fix sorting in the end incase I screwed something up in the post processing functions.
+    const players = accountData.get("players") as Player[];
+    players.sort((playera, playerb) => playera.playerID > playerb.playerID ? 1 : -1);
+
     const newData = new IdleonData(accountData, lastUpdated);
 
     return newData;
