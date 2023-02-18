@@ -85,12 +85,27 @@ def handleMonsterFaces():
         ("w4c1", "sprite-2-109",6 ,5),
         ("w4c2", "sprite-2-115",6 ,6),
         ("w4c3", "sprite-2-116",6 ,5),
-        ("w4c4", "sprite-2-104",5 ,4),
+        ("w4c4", "sprite-2-117",7 ,6),
+        # World 5
+        ("w5a1", "sprite-2-136", x, x),
+        ("w5a2", "sprite-2-137", x, x),
+        ("w5a3", "sprite-2-138", x, x),
+        ("w5a4", "sprite-2-139", x, x),
+        ("w5a5", "sprite-2-140", x, x),
+        ("w5b1", "sprite-2-142", x, x),
+        ("w5b2", "sprite-2-143", x, x),
+        ("w5b3", "sprite-2-144", x, x),
+        ("w5b4", "sprite-2-145", x, x),
+        ("w5b5", "sprite-2-146", x, x),
+        ("w5b6", "sprite-2-147", x, x),
+        ("w5c1", "sprite-2-148", x, x),
+        ("w5c2", "sprite-2-149", x, x),
         # Crystals
         ("Crystal0", "sprite-2-59",5 ,5),
         ("Crystal1", "sprite-2-61",6 ,5),
         ("Crystal2", "sprite-2-84",6 ,6),
         ("Crystal3", "sprite-2-128",5 ,5),
+        ("Crystal4",  "sprite-2-141", x, x),
         # Mini bosses
         ("mini3a", "sprite-2-129",4 ,3),
         ("mini4a", "sprite-2-130",4 ,4),
@@ -218,6 +233,12 @@ def handleQuestGivers():
         ("Blobbo", "sprite-84-75",3 ,3),
         ("Capital P", "sprite-84-76",4 ,4),
         ("Nebula Neddy", "sprite-84-79",2 ,2),
+        ("Eliteus", "sprite-84-80",4 ,3),
+        # World 5
+        ("Muhmuguh", "sprite-84-84",3 ,3),
+        ("Pirate Porkchop", "sprite-84-82",1 ,1),
+        ("Poigu", "sprite-84-83",1 ,1),
+        ("Slargon", "sprite-84-81",3 ,2),
         # Events
         ("Loveulyte", "sprite-84-57",4 ,3),
         ("Egggulyte", "sprite-84-67",3 ,3),
@@ -409,10 +430,10 @@ background-position: 0 calc(var(--row) * __PERCENTAGE__%)
 
 if __name__ == "__main__":
     #handleConstellations()
-    #handleQuestGivers()
+    handleQuestGivers()
     #handleColo()
-    handleMonsterFaces()
-    sys.exit(0)
+    #handleMonsterFaces()
+    #sys.exit(0)
     dimDict = {}
     filesDict = {
         'data/icons/assets/data/': get_files_from_dir(['data/icons/assets/data/']),

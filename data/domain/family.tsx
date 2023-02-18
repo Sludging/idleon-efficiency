@@ -148,10 +148,10 @@ export class Family {
 export const calculateFamily = (players: Player[]) => {
     const family = new Family();
 
-    const highestFamilyGuy = players.sort((player1, player2) => player1.getTalentBonus(144) > player2.getTalentBonus(144) ? -1 : 1)[0];
+    const highestFamilyGuy = players.slice().sort((player1, player2) => player1.getTalentBonus(144) > player2.getTalentBonus(144) ? -1 : 1)[0];
 
     GroupBy(players, "classId").forEach(classPlayers => {
-        const highestLevel = classPlayers.sort((player1, player2) => player1.level > player2.level ? -1 : 1)[0];
+        const highestLevel = classPlayers.slice().sort((player1, player2) => player1.level > player2.level ? -1 : 1)[0];
         const bonusData = familyBonusMapping[highestLevel.classId];
         let familyManBoost = 1;
         // For siege breaker and divine knight bonus, the highest family guy bonus (across all players, not just dk/sb) boosts the family bonus.
