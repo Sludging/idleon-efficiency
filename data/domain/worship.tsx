@@ -6,7 +6,7 @@ import { SkullItemModel } from "./model/skullItemModel";
 import { Player } from "./player";
 import { SkillsIndex } from "./SkillsIndex";
 import { Stamp, StampConsts, StampTab } from "./stamps";
-import { TalentConst } from "./talents";
+import { ClassIndex, TalentConst } from "./talents";
 
 const getActiveBubbles = (alchemy: Alchemy, activeBubbleString: string[]): Bubble[] => {
     return activeBubbleString.map((bubbleString, _) => {
@@ -168,8 +168,7 @@ export const updateWorship = (data: Map<string, any>) => {
         });
     }
 
-    const bestMaxLevel = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 475)?.maxLevel ?? 0)));
-    const bestWizard = players.find(player => player.talents.find(talent => talent.skillIndex == 475 && talent.maxLevel == bestMaxLevel) != undefined) as Player;
+    const bestWizard = players.filter(player => [ClassIndex.Wizard, ClassIndex.Elemental_Sorcerer].includes(player.classId)).sort((player1, player2) => player1.getTalentMaxLevel(475) > player2.getTalentMaxLevel(475) ? -1 : 1)[0];
     if (bestWizard) {
         worship.bestWizardPlayerID = bestWizard.playerID;
 
