@@ -154,7 +154,7 @@ export function updateAtomCollider(data: Map<string, any>) {
 
     (collider.atoms[0] as HydrogenAtom).daysSinceUpgrade = optLacc[134];
     (collider.atoms[5] as CarbonAtom).wizardTowersOver50 = construction.buildings.slice(9, 18).reduce((sum, tower) => sum += Math.max(0, tower.level - 50), 0);
-    (collider.atoms[8] as FluorideAtom).voidMeals = cooking.meals.reduce((count, meal) => count += meal.level >= 30 ? 1 : 0, 0);
+    (collider.atoms[8] as FluorideAtom).voidMeals = cooking.mealsAtVoid;
 
     const colliderBuildingLevel = construction.buildings.find(building => building.name == "Atom Collider")?.level ?? 0;
     const nenoBonus = collider.atoms[9].getBonus();
