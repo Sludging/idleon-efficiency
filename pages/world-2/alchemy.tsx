@@ -25,6 +25,7 @@ import IconImage from "../../components/base/IconImage";
 import { Sigils } from "../../data/domain/sigils";
 import TextAndLabel, { ComponentAndLabel } from "../../components/base/TextAndLabel";
 import { TimeDown } from "../../components/base/TimeDisplay";
+import { AtomCollider } from "../../data/domain/atomCollider";
 
 const CapitalizedH3 = styled.h3`
     text-transform: capitalize
@@ -42,9 +43,10 @@ interface DisplayProps {
     discountLevel: number,
     classMultiBonus: boolean
     vialMultiplier: number
+    particles: number
 }
 
-function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVialLevel, hasAchievement, discountLevel, classMultiBonus, vialMultiplier = 1 }: DisplayProps) {
+function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVialLevel, hasAchievement, discountLevel, classMultiBonus, vialMultiplier = 1, particles }: DisplayProps) {
     const size = useContext(ResponsiveContext)
     const [bargainBubbleLevel, setBargainBubbleLevel] = useState(0);
     const [classMultiBubbleLevel, setClassMultiBubbleLevel] = useState(0);
@@ -69,40 +71,64 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
         const materialCosts: Map<Item, number> = bubble.getMaterialCost(cauldronCostLevel, undevelopedCostsBubbleLevel, barleyBrewVialLevel, bargainBubbleLevel, classMultiBubbleLevel, discountLevel, hasAchievement, newMultiBubbleLevel, vialMultiplier);
         return (
             <Box direction="row" align="center" width={{ max: 'medium' }}>
-                {!faceLeft &&
-                    <svg viewBox="0 0 22 22" version="1.1" width="22px" height="22px">
-                        <polygon
-                            fill="white"
-                            points="6 2 18 12 6 22"
-                            transform="matrix(-1 0 0 1 30 0)"
-                        />
-                    </svg>
-                }
                 <Box pad="small" gap="small" background="white">
                     <Text size={size == "small" ? 'small' : ''} weight="bold">{bubble.name} ({bubble.level})</Text>
                     <hr style={{ width: "100%" }} />
                     <Text size="small">Bonus: {bubble.getBonusText()}</Text>
-                    {
-                        Array.from(materialCosts).map(([item, cost]) => {
-                            return (
-                                <Box key={`${bubble.name}_${item.internalName}`} direction="row" align="center" ><Text size="small">Material Cost: {nFormatter(round(cost))}</Text><IconImage data={item.getImageData()} /></Box>
-                            )
-                        })
-                    }
+                    <Box gap="small">
+                        <ComponentAndLabel
+                            label="Material cost"
+                            labelColor="grey-3"
+                            component={
+                                <Box direction="row" align="center" gap="small">
+                                    {
+                                        Array.from(materialCosts).map(([item, cost]) => {
+                                            return (
+                                                <Box key={`${bubble.name}_${item.internalName}`} direction="row" align="center">
+                                                    <Box direction="row" gap="xsmall" align="center">
+                                                        <IconImage data={item.getImageData()} />
+                                                        <Text size="small">{nFormatter(round(cost))}</Text>
+                                                    </Box>
+
+                                                </Box>
+                                            )
+                                        })
+                                    }
+                                </Box>
+                            } />
+                        {
+                            Array.from(materialCosts.values())[0] > 1e8 && Array.from(materialCosts.keys())[0].internalName != "Bits" &&
+                            <ComponentAndLabel
+                                label="Atom cost"
+                                labelColor="grey-3"
+                                component={
+                                    <Box direction="row" align="center">
+                                        {
+                                            Array.from(materialCosts).map(([item, cost]) => {
+                                                const isLiquid = item.internalName.includes("Liquid");
+                                                if (isLiquid) {
+                                                    return null;
+                                                }
+                                                const atomCost = bubble.getAtomCost(cost);
+                                                return (
+                                                    <Box key={`${bubble.name}_atomcost`} direction="row" align="center">
+                                                        <Box direction="row" gap="xsmall" align="center">
+                                                            <IconImage data={AtomCollider.getParticleImageData()} scale={0.7} />
+                                                            <Text color={particles > atomCost ? 'green-1' : ""} size="small">{Math.round(particles)}/{nFormatter(atomCost)}</Text>
+                                                        </Box>
+
+                                                    </Box>
+                                                )
+                                            })
+                                        }
+                                    </Box>
+                                } />
+                        }
+                    </Box>
                 </Box>
-                {
-                    faceLeft &&
-                    <svg viewBox="0 0 22 22" version="1.1" width="22px" height="22px">
-                        <polygon
-                            fill="white"
-                            points="0 2 12 12 0 22"
-                        />
-                    </svg>
-                }
-            </Box >
+            </Box>
         )
     }
-
 
     return (
         <Box align="center">
@@ -264,6 +290,15 @@ function BubblesDisplay() {
 
     const appContext = useContext(AppContext);
 
+    const particles = useMemo(() => {
+        if (appContext) {
+            const theData = appContext.data.getData();
+            const collider = theData.get("collider") as AtomCollider;
+            return collider.particles;
+        }
+        return 0;
+    }, [appContext])
+
     const bargainOptions = [
         {
             label: 'No discount',
@@ -350,7 +385,7 @@ function BubblesDisplay() {
             <Grid columns="1/4">
                 {
                     alchemyData && Object.entries(alchemyData.cauldrons).map(([_, cauldron], index) => {
-                        return (<CauldronDisplay key={`tab_${index}`} cauldron={cauldron} undevelopedCostsBubbleLevel={undevelopedCostsBubbleLevel} barleyBrewVialLevel={barleyBrewVialLevel} hasAchievement={hasAlchemyAchievement} discountLevel={parseInt(discountLevel)} classMultiBonus={classMulti} vialMultiplier={vialMultiplier} />)
+                        return (<CauldronDisplay key={`tab_${index}`} cauldron={cauldron} undevelopedCostsBubbleLevel={undevelopedCostsBubbleLevel} barleyBrewVialLevel={barleyBrewVialLevel} hasAchievement={hasAlchemyAchievement} discountLevel={parseInt(discountLevel)} classMultiBonus={classMulti} vialMultiplier={vialMultiplier} particles={particles} />)
                     })
                 }
                 {
