@@ -1,7 +1,7 @@
 import parseTraps from './traps';
 import parseStamps, { updateStampMaxCarry, updateStamps } from './stamps';
 import parseStatues from './statues';
-import parsePlayers, { Player, updatePlayers } from './player';
+import parsePlayers, { Player, playerExtraCalculations, updatePlayers } from './player';
 import parseAlchemy, { updateAlchemy } from './alchemy';
 import parseBribes from './bribes';
 import parseGuild from './guild';
@@ -170,6 +170,7 @@ const postProcessingMap: Record<string, Function> = {
 const postPostProcessingMap: Record<string, Function> = {
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStampMaxCarry(accountData),
     "family": (doc: Cloudsave, accountData: Map<string, any>) => calculateFamily(accountData.get("players") as Player[]),
+    "playersExtraMaths": (doc: Cloudsave, accountData: Map<string, any>) => playerExtraCalculations(accountData),
     "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),
     "refinery": (doc: Cloudsave, accountData: Map<string, any>) => updateRefinery(accountData),
     "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateFamilyImpact(accountData),
