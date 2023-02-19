@@ -632,17 +632,6 @@ export const updatePlayers = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const obols = data.get("obols") as ObolsData;
     const alchemy = data.get("alchemy") as Alchemy;
-    const guild = data.get("guild") as Guild;
-    const bribes = data.get("bribes") as Bribe[];
-    const cooking = data.get("cooking") as Cooking;
-    const breeding = data.get("breeding") as Breeding;
-    const lab = data.get("lab") as Lab;
-    const dungeons = data.get("dungeons") as Dungeons;
-    const stamps = data.get("stamps") as Stamp[][];
-    const achievementsInfo = data.get("achievements") as Achievement[];
-    const arcade = data.get("arcade") as Arcade;
-    const sigils = data.get("sigils") as Sigils;
-    const shrines = data.get("shrines") as Shrine[];
     const divinity = data.get("divinity") as Divinity;
     const deathnote = data.get("deathnote") as Deathnote;
 
@@ -684,6 +673,38 @@ export const updatePlayers = (data: Map<string, any>) => {
             });
     })
 
+    // Update max talent level due to bear.
+    // Update players talents levels due to elite class level increase talents.
+    const bearGod = divinity.gods[1];
+    bearGod.linkedPlayers.forEach(linkedPlayer => {
+        const bearBonus = Math.ceil(bearGod.getMinorLinkBonus(linkedPlayer));
+        linkedPlayer.talents.filter(talent => ![149, 374, 539].includes(talent.skillIndex) && talent.skillIndex <= 614)
+        .forEach(talent => {
+            talent.level += talent.level > 0 ? bearBonus : 0;
+            talent.maxLevel += bearBonus;
+        });
+        linkedPlayer.extraLevelsFromBear = bearBonus;
+    })    
+
+    // I dunno why I have to sort it now, I never had to before. Need to think about it further.
+    return players;
+}
+
+export const playerExtraCalculations = (data: Map<string, any>) => {
+    const players = data.get("players") as Player[];
+    const alchemy = data.get("alchemy") as Alchemy;
+    const guild = data.get("guild") as Guild;
+    const bribes = data.get("bribes") as Bribe[];
+    const cooking = data.get("cooking") as Cooking;
+    const breeding = data.get("breeding") as Breeding;
+    const lab = data.get("lab") as Lab;
+    const dungeons = data.get("dungeons") as Dungeons;
+    const stamps = data.get("stamps") as Stamp[][];
+    const achievementsInfo = data.get("achievements") as Achievement[];
+    const arcade = data.get("arcade") as Arcade;
+    const sigils = data.get("sigils") as Sigils;
+    const shrines = data.get("shrines") as Shrine[];
+
     // Double claim chance.
     const doubleChanceGuildBonus = guild.guildBonuses.find(bonus => bonus.name == "Anotha One")?.getBonus() ?? 0;
     const doubleChanceBribeBonus = bribes.find(bribe => bribe.bonus == "AfkDoubleEXP")?.value ?? 0;
@@ -722,22 +743,6 @@ export const updatePlayers = (data: Map<string, any>) => {
     players.forEach(player => {
         player.setCrystalChance(crystalSpawnStamp, crysalShrine);
     })
-
-    // Update max talent level due to bear.
-    // Update players talents levels due to elite class level increase talents.
-    const bearGod = divinity.gods[1];
-    bearGod.linkedPlayers.forEach(linkedPlayer => {
-        const bearBonus = Math.ceil(bearGod.getMinorLinkBonus(linkedPlayer));
-        linkedPlayer.talents.filter(talent => ![149, 374, 539].includes(talent.skillIndex) && talent.skillIndex <= 614)
-        .forEach(talent => {
-            talent.level += talent.level > 0 ? bearBonus : 0;
-            talent.maxLevel += bearBonus;
-        });
-        linkedPlayer.extraLevelsFromBear = bearBonus;
-    })    
-
-    // I dunno why I have to sort it now, I never had to before. Need to think about it further.
-    return players;
 }
 
 
