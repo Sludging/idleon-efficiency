@@ -1,5 +1,6 @@
 import { lavaLog, range } from "../utility";
 import { Divinity } from "./divinity";
+import { GemStore } from "./gemPurchases";
 import { Lab } from "./lab";
 import { Player } from "./player";
 import { Sailing } from "./sailing";
@@ -45,6 +46,8 @@ export class Printer {
     samples: Sample[][] = [];
     bestDivineKnightPlayerId: number = -1;
     divineKnightOrbKills: number = 0;
+
+    slotsUnlocked: number = 4;
 
     GetTotalActive = (itemName: string): number => {
         return this.samples.flatMap(sample => sample)
@@ -107,6 +110,7 @@ export const updatePrinter = (data: Map<string, any>) => {
     const divinity = data.get("divinity") as Divinity;
     const sailing = data.get("sailing") as Sailing;
     const players = data.get("players") as Player[];
+    const gemStore = data.get("gems") as GemStore;
     const optLacc = data.get("OptLacc");
 
     // if double printer
@@ -135,6 +139,8 @@ export const updatePrinter = (data: Map<string, any>) => {
             sample.divineKnightBoost = bestDivineKnight.getTalentBonus(178) * lavaLog(divineKnightOrbKills);
         });
     }
+
+    printer.slotsUnlocked = 4 + (gemStore.purchases.find(purchase => purchase.no == 112)?.pucrhased ?? 0);
 
     return printer;
 }
