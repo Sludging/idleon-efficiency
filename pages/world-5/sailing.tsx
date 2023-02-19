@@ -57,6 +57,7 @@ function ShipsDisplay() {
                 {
                     sailing.boats.map((boat, index) => (
                         <TipDisplay
+                            key={index}
                             direction={TipDirection.Down}
                             heading='Upgrade Milestones'
                             body={
