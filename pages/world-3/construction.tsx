@@ -349,12 +349,12 @@ function RefineryDisplay() {
     )
 }
 
-function SampleBox({ sample, itemData, printing = false }: { sample: Sample, itemData: Item[] | undefined, printing: boolean }) {
+function SampleBox({ sample, itemData, printing = false, slotUnlocked = false }: { sample: Sample, itemData: Item[] | undefined, printing: boolean, slotUnlocked?: boolean }) {
     if (sample.item == "Blank") {
         return (
             <Box border={{ color: 'grey-1' }} background="accent-4" width={{ max: '75px', min: '75px' }} height={{ min: '82px', max: '82px' }} direction="row" align="center" justify="center">
                 <Box align="center" width={{ max: '100px', min: '100px' }} height={{ min: '82px', max: '82px' }} justify='center'>
-                    <Text size="xsmall" color="accent-3">Empty</Text>
+                    <Text size="xsmall" color="accent-3">{slotUnlocked ? "Empty" : "Locked"}</Text>
                 </Box>
             </Box>
         )
@@ -519,7 +519,7 @@ function PrinterDisplay() {
                                                     // We might have samples that are only in the printing slot but already deleted, so only filter for blank and sample quantity bigger then 0)
                                                     samples.filter(sample => sample.quantity > 0 || sample.item == "Blank").map((sample, sampleIndex) => {
                                                         return (
-                                                            <SampleBox key={`sample_${sampleIndex}`} sample={sample} itemData={itemData} printing={false} />
+                                                            <SampleBox key={`sample_${sampleIndex}`} sample={sample} itemData={itemData} printing={false} slotUnlocked={sampleIndex < printerData.slotsUnlocked } />
                                                         )
                                                     })
                                                 }
