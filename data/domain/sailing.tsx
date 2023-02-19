@@ -141,7 +141,7 @@ export class Boat {
 
     getUpgradeCostTillLevel = (type: BoatUpgradeType, targetLevel: number) => {
         const currentUpgradeLevel = type == BoatUpgradeType.Loot ? this.lootUpgrades : this.speedUpgrades;
-        return range(currentUpgradeLevel, targetLevel).reduce((sum, level) => sum += this.getUpgradeCost(type, targetLevel), 0);
+        return range(currentUpgradeLevel, targetLevel).reduce((sum, level) => sum += this.getUpgradeCost(type, level), 0);
     }
 
     getUpgradeCost = (type: BoatUpgradeType, targetLevel?: number) => {
