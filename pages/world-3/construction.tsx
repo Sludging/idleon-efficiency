@@ -352,7 +352,7 @@ function RefineryDisplay() {
 function SampleBox({ sample, itemData, printing = false }: { sample: Sample, itemData: Item[] | undefined, printing: boolean }) {
     if (sample.item == "Blank") {
         return (
-            <Box border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} height={{ min: '82px', max: '82px' }} direction="row" align="center" justify="center">
+            <Box border={{ color: 'grey-1' }} background="accent-4" width={{ max: '75px', min: '75px' }} height={{ min: '82px', max: '82px' }} direction="row" align="center" justify="center">
                 <Box align="center" width={{ max: '100px', min: '100px' }} height={{ min: '82px', max: '82px' }} justify='center'>
                     <Text size="xsmall" color="accent-3">Empty</Text>
                 </Box>
@@ -362,9 +362,9 @@ function SampleBox({ sample, itemData, printing = false }: { sample: Sample, ite
 
     const sampleItem = itemData?.find((item) => item.internalName == sample.item);
     return (
-        <Box border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} height={{ min: '82px', max: '82px' }} direction="row" align="center" justify="center">
+        <Box border={{ color: 'grey-1' }} background="accent-4" width={{ max: '75px', min: '75px' }} height={{ min: '82px', max: '82px' }} direction="row" align="center" justify="center">
             <Box pad={{ vertical: 'small' }} align="center">
-                <IconImage data={(sampleItem as Item).getImageData()} />
+                <IconImage data={(sampleItem as Item).getImageData()} scale={0.8} />
                 {printing && <Text color={sample.inLab == true ? 'blue-3' : ''} size="small">{sample.harriep && <Star size="small" color="gold-1" />} {nFormatter(sample.getSampleQuantity(false))}</Text>}
                 {!printing && <Text color={sample.printing > 0 ? 'green-1' : ''} size="small">{nFormatter(sample.getSampleQuantity(true))}</Text>}
             </Box>
@@ -497,7 +497,7 @@ function PrinterDisplay() {
                     </ShadowBox>
                 }
             </Box>
-            <ShadowBox background="dark-1" pad="large">
+            <ShadowBox background="dark-1" pad="large" width={{min: "780px"}}>
                 <Table>
                     <TableHeader>
                         <TableRow>
@@ -514,7 +514,7 @@ function PrinterDisplay() {
                                     <TableRow key={`player_${indexAsNumber}`}>
                                         <TableCell>{playerData && playerData[indexAsNumber] && playerData[indexAsNumber].playerName}</TableCell>
                                         <TableCell>
-                                            <Box direction="row">
+                                            <Box direction="row" wrap>
                                                 {
                                                     // We might have samples that are only in the printing slot but already deleted, so only filter for blank and sample quantity bigger then 0)
                                                     samples.filter(sample => sample.quantity > 0 || sample.item == "Blank").map((sample, sampleIndex) => {
@@ -694,7 +694,7 @@ function ShrinesDisplay() {
                                     </Box>
                                     <Text size="small">{shrine.name}</Text>
                                 </Box>
-                                <Grid columns={{count: 4, size: 'auto'}}>
+                                <Grid columns={{ count: 4, size: 'auto' }}>
                                     <TextAndLabel
                                         textSize='small'
                                         label="Level"
