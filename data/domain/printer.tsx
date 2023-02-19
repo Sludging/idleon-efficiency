@@ -53,18 +53,26 @@ export class Printer {
     }
 }
 
-export default function parsePrinter(rawData: any[], charCount: number) {
+export default function parsePrinter(printerData: any[], extraPrinterData: any[], charCount: number) {
     const toReturn = new Printer();
-    if (rawData) {
+    if (printerData) {
         [...Array(charCount)].forEach((_, playerIndex) => {
             const samples: Sample[] = [];
+            // First 5 sample slots
             range(0, 5).forEach(sampleIndex => {
-                samples.push(new Sample(rawData[5 + (sampleIndex * 2) + (playerIndex * 14)], rawData[6 + (sampleIndex * 2) + (playerIndex * 14)]));
+                const arrayIndex = 5 + (sampleIndex * 2) + (playerIndex * 14);
+                samples.push(new Sample(printerData[arrayIndex], printerData[arrayIndex + 1]));
+            });
+
+            // Second set of 5 sample slots
+            range(0, 5).forEach(sampleIndex => {
+                const arrayIndex = (sampleIndex * 2) + (playerIndex * 10);
+                samples.push(new Sample(extraPrinterData[arrayIndex], extraPrinterData[arrayIndex + 1]));
             });
 
             
             range(0,2).forEach(activeIndex => {
-                const printingItem = rawData[5 + 10 + (activeIndex * 2) + (playerIndex * 14)];
+                const printingItem = printerData[5 + 10 + (activeIndex * 2) + (playerIndex * 14)];
                 // If there's no printing item, exit early.
                 if (printingItem == "Blank") {
                     return;
@@ -72,7 +80,7 @@ export default function parsePrinter(rawData: any[], charCount: number) {
 
                 const matchingSample = samples.find(sample => sample.item == printingItem);
                 // Old print, without an active sample.
-                const printingQuantity = rawData[6 + 10 + (activeIndex * 2) + (playerIndex * 14)]
+                const printingQuantity = printerData[6 + 10 + (activeIndex * 2) + (playerIndex * 14)]
 
                 // If we have an old print, without an active sample.
                 if (!matchingSample) {
