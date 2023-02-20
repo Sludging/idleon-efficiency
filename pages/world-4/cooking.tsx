@@ -18,6 +18,7 @@ import { territoryNiceNames } from '../../data/domain/breeding';
 import { Cooking as CookingDomain, Kitchen, KitchenStatus, Meal, UpgradeType } from '../../data/domain/cooking';
 import { getCoinsArray, nFormatter, toTime } from '../../data/utility';
 import TextAndLabel from '../../components/base/TextAndLabel';
+import { AtomCollider } from '../../data/domain/atomCollider';
 
 
 function KitchenUpgrade({ title, level, spiceIndex, cost, costColor }: { title: string, level: number, spiceIndex: number, cost: number, costColor: string }) {
@@ -164,6 +165,16 @@ function Cooking() {
     const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
 
+    const hasColliderBonus = useMemo(() => {
+        if (appContext) {
+            const theData = appContext.data.getData();
+            const collider = theData.get("collider") as AtomCollider;
+            return collider.atoms[8].level > 0;
+        }
+
+        return false;
+    }, [appContext]);
+
     useEffect(() => {
         if (appContext) {
             const theData = appContext.data.getData();
@@ -267,7 +278,8 @@ function Cooking() {
             <Box direction="row" margin={{ top: 'small', bottom: 'small' }}>
                 <TextAndLabel label="Total Cooking Speed" text={nFormatter(cooking?.totalCookingSpeed ?? 0)} margin={{right: 'medium'}} />
                 { cooking.mealsDiscovered < cooking.getMaxMeals() && <TextAndLabel label="Meals Discovered" text={`${cooking.mealsDiscovered}/${cooking.getMaxMeals()}`} margin={{right: 'medium'}} /> }
-                { cooking.mealsAtVoid > 0 && <TextAndLabel label="Void plates" text={`${cooking.mealsAtVoid}/${cooking.getMaxMeals()}`} margin={{right: 'medium'}} /> }
+                { cooking.mealsAtDiamond > 0 && cooking.mealsAtDiamond < cooking.getMaxMeals() && <TextAndLabel label="Lv 11+ Meals" text={`${cooking.mealsAtDiamond}/${cooking.getMaxMeals()}`} margin={{right: 'medium'}} /> }
+                { hasColliderBonus && cooking.mealsAtVoid > 0 && <TextAndLabel label="Lv 30+ Meals" text={`${cooking.mealsAtVoid}/${cooking.getMaxMeals()}`} margin={{right: 'medium'}} /> }
             </Box>
             <Box margin={{ bottom: 'medium' }} gap="small">
                 <Text>Meals</Text>
