@@ -63,7 +63,7 @@ function ShipsDisplay() {
                             body={
                                 <Box>
                                     <Text size="small">Loot ({boat.lootUpgrades}):</Text>
-                                    <Box direction="row">
+                                    <Box direction="row" gap="1px">
                                         {
                                             range(boat.lootUpgrades - (boat.lootUpgrades % 8), boat.lootUpgrades - (boat.lootUpgrades % 8) + 8).map((upgrade, index) => {
                                                 return (
@@ -79,7 +79,7 @@ function ShipsDisplay() {
                                         </Box>
                                     </Box>
                                     <Text size="small">Speed ({boat.speedUpgrades}):</Text>
-                                    <Box direction="row">
+                                    <Box direction="row" gap="1px">
                                         {
                                             range(boat.speedUpgrades - (boat.speedUpgrades % 7), boat.speedUpgrades - (boat.speedUpgrades % 7) + 7).map((upgrade, index) => {
                                                 return (
