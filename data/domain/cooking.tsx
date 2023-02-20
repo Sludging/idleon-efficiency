@@ -256,6 +256,7 @@ export class Cooking {
 
     mealsDiscovered: number = 0;
     mealsAtVoid: number = 0;
+    mealsAtDiamond: number = 0;
 
     constructor() {
         this.meals = Meal.fromBase(initMealRepo());
@@ -517,6 +518,7 @@ export const updateCooking = (data: Map<string, any>) => {
     cooking.totalCookingSpeed = totalContribution;
     cooking.mealsDiscovered = cooking.meals.filter(meal => meal.level > 0).length;
     cooking.mealsAtVoid = cooking.meals.reduce((count, meal) => count += meal.level >= 30 ? 1 : 0, 0);
+    cooking.mealsAtDiamond = cooking.meals.reduce((sum, meal) => sum += meal.level >= 11 ? 1 : 0, 0);
 
     return cooking;
 }
