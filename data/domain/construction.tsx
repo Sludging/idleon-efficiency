@@ -1,6 +1,7 @@
 import { range, secondsSinceUpdate } from "../utility";
 import { Achievement } from "./achievements";
 import { Alchemy } from "./alchemy";
+import { AtomCollider } from "./atomCollider";
 import { Building } from "./buildings";
 import { Cooking } from "./cooking";
 import { initBuildingRepo } from "./data/BuildingRepo";
@@ -96,14 +97,19 @@ export const updateConstruction = (data: Map<string, any>) => {
     const achievements = data.get("achievements") as Achievement[];
     const cooking = data.get("cooking") as Cooking;
     const timeAway = JSON.parse((data.get("rawData") as { [k: string]: any })["TimeAway"]);
+    const collider = data.get("collider") as AtomCollider;
+
     // Lib checkout speed
-    const mealBonus = (1 + cooking.getMealBonusForKey("Lib") / 100);
+    const mealBonus = cooking.getMealBonusForKey("Lib");
     const alchemyBonus = alchemy.getBubbleBonusForKey("booksSpeed");
     const vialBonus = alchemy.getVialBonusForKey("TalBookSpd");
+    const colliderBonus = collider.atoms[7].getBonus();
     const stampBonus = stamps.flatMap(tab => tab).filter(stamp => stamp.data.effect == "BookSpd").reduce((sum, stamp) => sum += stamp.getBonus(), 0);
 
     construction.library.libCheckoutSpeed = 4 *
-        (3600 / (mealBonus *
+        (3600 / (
+            (1 + mealBonus / 100) *
+            (1 + colliderBonus / 100) *
             (1 + (5 * construction.buildings[1].level + alchemyBonus + vialBonus + (
                 stampBonus + Math.min(30, Math.max(0, 30 * (achievements[145].completed ? 1 : 0))))) / 100)));
     
