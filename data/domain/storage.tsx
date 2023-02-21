@@ -14,7 +14,7 @@ export class Storage {
         let finalCount = 0;
 
         finalCount += this.chest.reduce((sum, item) => sum += item.internalName == itemName ? item.count : 0, 0);
-        finalCount += this.playerStorage.reduce((sum, player) => sum += (player.find(item => item.internalName == itemName)?.count ?? 0), 0);
+        finalCount += this.playerStorage.reduce((sum, player) => sum += player.reduce((sum,item) => sum += item.internalName == itemName ? item.count : 0, 0), 0);
         finalCount += this.refinery.find(item => item.name == itemName)?.quantity ?? 0;
 
         return finalCount;

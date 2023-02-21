@@ -17,6 +17,8 @@ import { AppContext } from '../../data/appContext';
 import { territoryNiceNames } from '../../data/domain/breeding';
 import { Cooking as CookingDomain, Kitchen, KitchenStatus, Meal, UpgradeType } from '../../data/domain/cooking';
 import { getCoinsArray, nFormatter, toTime } from '../../data/utility';
+import TextAndLabel from '../../components/base/TextAndLabel';
+import { AtomCollider } from '../../data/domain/atomCollider';
 
 
 function KitchenUpgrade({ title, level, spiceIndex, cost, costColor }: { title: string, level: number, spiceIndex: number, cost: number, costColor: string }) {
@@ -163,6 +165,16 @@ function Cooking() {
     const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
 
+    const hasColliderBonus = useMemo(() => {
+        if (appContext) {
+            const theData = appContext.data.getData();
+            const collider = theData.get("collider") as AtomCollider;
+            return collider.atoms[8].level > 0;
+        }
+
+        return false;
+    }, [appContext]);
+
     useEffect(() => {
         if (appContext) {
             const theData = appContext.data.getData();
@@ -188,9 +200,9 @@ function Cooking() {
                     return meal1.timeToNext > meal2.timeToNext ? 1 : -1;
                 }
 
-                function sortByTimeAndIndex(timeA: number, timeB: number){
+                function sortByTimeAndIndex(timeA: number, timeB: number) {
                     //negative times get switched to index sorting
-                    if(timeA > 0 && timeB > 0) return timeA > timeB ? 1 : indexSort //neither reached
+                    if (timeA > 0 && timeB > 0) return timeA > timeB ? 1 : indexSort //neither reached
                     else if (timeA < 0 && timeB < 0) return indexSort //both reached
                     else return timeA > timeB ? -1 : 1 //one reached, one not
                 }
@@ -211,25 +223,32 @@ function Cooking() {
                         return indexSort;
                 }
             })
-    },[cooking, sort])
+    }, [cooking, sort])
 
-    function getMealExtraText(meal: Meal){
-        if(meal.level == 0) return "" //undiscovered meals
-        switch(sort){
+    function getMealExtraText(meal: Meal) {
+        if (meal.level == 0) return "" //undiscovered meals
+        switch (sort) {
             case "Level": return ""; //level already shown
             case "Least Time to Cook Next": return meal.level < meal.maxLevel ? toTime(meal.timeToNext * 3600) : "Already max level!";
             case "Least Time to Diamond": return meal.timeToDiamond > 0 ? toTime(meal.timeToDiamond * 3600) : "Already Diamond!";
-            case "Least Time to Purple": return meal.timeToPurple > 0 ? toTime(meal.timeToPurple * 3600): "Already Purple!";
-            case "Least Time to Void": return meal.timeToVoid > 0 ? toTime(meal.timeToVoid * 3600): "Already Void!";
-            case "Least Time to 30": return meal.timeToThirty > 0 ? toTime(meal.timeToThirty * 3600): "Already 30!";
+            case "Least Time to Purple": return meal.timeToPurple > 0 ? toTime(meal.timeToPurple * 3600) : "Already Purple!";
+            case "Least Time to Void": return meal.timeToVoid > 0 ? toTime(meal.timeToVoid * 3600) : "Already Void!";
+            case "Least Time to 30": return meal.timeToThirty > 0 ? toTime(meal.timeToThirty * 3600) : "Already 30!";
         }
+    }
+
+    if (!cooking) {
+        return (
+            <Box>
+                Still loading or something is wrong.
+            </Box>
+        )
     }
 
     return (
         <Box>
             <NextSeo title="Cooking" />
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Cooking</Heading>
-            <Text size="xsmall">* This is a work in progress, there could some bugs and minor inaccuracies.</Text>
             <Box margin={{ bottom: 'medium' }} gap="small">
                 <Text>Spices</Text>
                 <Box direction="row" wrap>
@@ -242,19 +261,25 @@ function Cooking() {
                                     body=''
                                     direction={TipDirection.Down}
                                 >
-                                    <Box direction="row" pad={{ vertical: 'small' }} align="center">
+                                    <Box direction="row" pad={{ vertical: 'small' }} align="center" gap='xsmall'>
                                         <IconImage data={{
                                             location: `CookingSpice${index}`,
                                             width: 36,
                                             height: 36
-                                        }} />
-                                        <Text size="small">{nFormatter(Math.floor(spice))}</Text>
+                                        }} scale={0.5} />
+                                        <Text size="xsmall">{nFormatter(Math.floor(spice))}</Text>
                                     </Box>
                                 </TipDisplay>
                             </Box>
                         ))
                     }
                 </Box>
+            </Box>
+            <Box direction="row" margin={{ top: 'small', bottom: 'small' }}>
+                <TextAndLabel label="Total Cooking Speed" text={nFormatter(cooking?.totalCookingSpeed ?? 0)} margin={{right: 'medium'}} />
+                { cooking.mealsDiscovered < cooking.getMaxMeals() && <TextAndLabel label="Meals Discovered" text={`${cooking.mealsDiscovered}/${cooking.getMaxMeals()}`} margin={{right: 'medium'}} /> }
+                { cooking.mealsAtDiamond > 0 && cooking.mealsAtDiamond < cooking.getMaxMeals() && <TextAndLabel label="Lv 11+ Meals" text={`${cooking.mealsAtDiamond}/${cooking.getMaxMeals()}`} margin={{right: 'medium'}} /> }
+                { hasColliderBonus && cooking.mealsAtVoid > 0 && <TextAndLabel label="Lv 30+ Meals" text={`${cooking.mealsAtVoid}/${cooking.getMaxMeals()}`} margin={{right: 'medium'}} /> }
             </Box>
             <Box margin={{ bottom: 'medium' }} gap="small">
                 <Text>Meals</Text>
@@ -264,7 +289,7 @@ function Cooking() {
                         clear
                         value={sort}
                         options={["Level", "Least Time to Cook Next", "Least Time to Diamond", "Least Time to Purple", "Least Time to Void", "Least Time to 30"]}
-                        onChange={({ value: nextValue }) => { setSort(nextValue);}}
+                        onChange={({ value: nextValue }) => { setSort(nextValue); }}
                     />
                 </Box>
                 <Grid columns={size == "small" ? "1/2" : "1/3"}>

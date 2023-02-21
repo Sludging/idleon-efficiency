@@ -1,7 +1,7 @@
 import parseTraps from './traps';
 import parseStamps, { updateStampMaxCarry, updateStamps } from './stamps';
 import parseStatues from './statues';
-import parsePlayers, { Player, updatePlayers } from './player';
+import parsePlayers, { Player, playerExtraCalculations, updatePlayers } from './player';
 import parseAlchemy, { updateAlchemy } from './alchemy';
 import parseBribes from './bribes';
 import parseGuild from './guild';
@@ -120,7 +120,7 @@ const keyFunctionMap: Record<string, Function> = {
     "quests": (doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], charCount: number) => parseQuests(doc, accountData, allItems, charCount),
     "refinery": (doc: Cloudsave, charCount: number) => parseRefinery(safeJsonParse(doc, "Refinery", [])),
     "saltLick": (doc: Cloudsave, charCount: number) => parseSaltLick(safeJsonParse(doc, "SaltLick", [])),
-    "printer": (doc: Cloudsave, charCount: number) => parsePrinter(safeJsonParse(doc, "Print", []), charCount),
+    "printer": (doc: Cloudsave, charCount: number) => parsePrinter(safeJsonParse(doc, "Print", []), doc.get("PrinterXtra") as any[], charCount),
     "taskboard": (doc: Cloudsave, charCount: number) => parseTaskboard(safeJsonParse(doc, `TaskZZ0`, []), safeJsonParse(doc, `TaskZZ1`, []), safeJsonParse(doc, `TaskZZ2`, []), safeJsonParse(doc, `TaskZZ3`, []), safeJsonParse(doc, `TaskZZ4`, []), safeJsonParse(doc, `TaskZZ5`, [])),
     "worship": (doc: Cloudsave, accountData: Map<string, any>, charCount: number) => parseWorship(safeJsonParse(doc, "TotemInfo", [])),
     "construction": (doc: Cloudsave, charCount: number) => parseConstruction(safeJsonParse(doc, "Tower", []), doc.get("OptLacc")),
@@ -170,6 +170,7 @@ const postProcessingMap: Record<string, Function> = {
 const postPostProcessingMap: Record<string, Function> = {
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStampMaxCarry(accountData),
     "family": (doc: Cloudsave, accountData: Map<string, any>) => calculateFamily(accountData.get("players") as Player[]),
+    "playersExtraMaths": (doc: Cloudsave, accountData: Map<string, any>) => playerExtraCalculations(accountData),
     "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),
     "refinery": (doc: Cloudsave, accountData: Map<string, any>) => updateRefinery(accountData),
     "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateFamilyImpact(accountData),

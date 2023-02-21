@@ -33,7 +33,9 @@ export default function parseConstellations(constellationData: any[][]) {
     }
     constellations.forEach(constellation => {
         constellation.isComplete = constellationData && constellationData[constellation.index][1] == "1";
-        constellation.completedByPlayerIndex = constellationData[constellation.index][0].split("").map((playerLetter: any) => {return playerLetterToIndex(playerLetter)});
+        if (constellationData[constellation.index][0]) { // Add a null check because, somehow it can be null sometimes for no reason.
+            constellation.completedByPlayerIndex = constellationData[constellation.index][0].split("").map((playerLetter: any) => {return playerLetterToIndex(playerLetter)});
+        }
     })
 
     return constellations;
