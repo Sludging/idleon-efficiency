@@ -6683,6 +6683,69 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentCape8", <ArmourItemModel>{
+                "internalName": "EquipmentCape8",
+                "displayName": "Giant Rose",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aCape,
+                "Type": "Cape",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 2,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 10,
+                "miscUp1": "7% All Afk Gain",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentCape9", <ArmourItemModel>{
+                "internalName": "EquipmentCape9",
+                "displayName": "Giant Violet",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aCape,
+                "Type": "Cape",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 4,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 10,
+                "miscUp1": "10% All Stats",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentCape10", <ArmourItemModel>{
+                "internalName": "EquipmentCape10",
+                "displayName": "Giant Starflower",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aCape,
+                "Type": "Cape",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 6,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 10,
+                "miscUp1": "13% All Afk Gain",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentKeychain0", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain0",
                 "displayName": "Simple Key Chain",
@@ -9235,7 +9298,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 10,
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Health Food",
-                "description": "Auto-Used when your health goes below 80%. Restores 420 HP. Has a 20 second Cooldown. "
+                "description": "Auto-Used when your health goes below 80%. Restores 1000 HP. Has a 12 second Cooldown. "
             }),
         new BaseItemBase("Meatloaf", <ACItemModel>{
                 "internalName": "Meatloaf",
@@ -9347,7 +9410,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 10,
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Boost Food",
-                "description": "Increases Move Spd by 8%. 4% chance to be consumed every 10 meters walked. Must be equipped in a Food Slot to give its bonus. "
+                "description": "Increases Move Spd by 8%. 1% chance to be consumed every 10 meters walked. Must be equipped in a Food Slot to give its bonus. "
             }),
         new BaseItemBase("FoodPotMana1", <ACItemModel>{
                 "internalName": "FoodPotMana1",
@@ -9427,7 +9490,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 10,
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Boost Food",
-                "description": "Increases Exp Gain by 10% 6% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
+                "description": "Increases Exp Gain by 30% 1% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
         new BaseItemBase("Pearl3", <ACItemModel>{
                 "internalName": "Pearl3",
@@ -9571,7 +9634,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 10,
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Boost Food",
-                "description": "Increases Weapon Power by 1. 10% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
+                "description": "Increases Weapon Power by 5. 10% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
         new BaseItemBase("PeanutG", <GoldenFoodItemModel>{
                 "internalName": "PeanutG",
@@ -10199,7 +10262,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Event Item",
-                "description": "Hold down on 5 letters to spawn a Valentslime, or turn these in each day to the Loveulyte for a reward! "
+                "description": "Hold down on a letter to spawn a Valentslime, or turn these in each day to the Loveulyte for a reward! "
             }),
         new BaseItemBase("Quest40", <DescItemModel>{
                 "internalName": "Quest40",
@@ -10207,7 +10270,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 100,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
-                "description": "Hold down to open this box of meatballs... err chestnuts... err chocolate! There's a Giant Bow Hat in one of these, as well as various holiday exclusive goodies, even cards! "
+                "description": "Hold down to open a random reward like Gems and Cards! There's a 1 in 700 chance for a special ROSE CAPE, and there are 3 different roses! Also if you're unlucky, you're GUARANTEED to get a rose every 650 boxes! "
             }),
         new BaseItemBase("Quest41", <DescItemModel>{
                 "internalName": "Quest41",
@@ -26447,7 +26510,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 3,
                     "effect": "+{% MP regen rate",
                     "bonus": 3,
-                    "order": 7
+                    "order": 8
                 },
                 "dropChance": 0.05
             }),
@@ -26463,7 +26526,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 3,
                     "effect": "+{ Base LUK",
                     "bonus": 3,
-                    "order": 8
+                    "order": 9
                 },
                 "dropChance": 0.05
             }),
@@ -26479,7 +26542,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 1.5,
                     "effect": "+{% Card Drop Chance",
                     "bonus": 1,
-                    "order": 9
+                    "order": 10
                 },
                 "dropChance": 1
             }),
@@ -26495,7 +26558,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 1.5,
                     "effect": "+{% Critical Damage",
                     "bonus": 1,
-                    "order": 10
+                    "order": 11
                 },
                 "dropChance": 1
             }),
@@ -26511,7 +26574,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 4,
                     "effect": "+{% Total Drop Rate",
                     "bonus": 3,
-                    "order": 12
+                    "order": 13
                 },
                 "dropChance": 0.03
             }),
@@ -26527,7 +26590,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 8,
                     "effect": "+{% Fishing Away Gains",
                     "bonus": 1,
-                    "order": 13
+                    "order": 14
                 },
                 "dropChance": 0.05
             }),
@@ -26543,7 +26606,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 8,
                     "effect": "+{% Catching EXP",
                     "bonus": 4,
-                    "order": 14
+                    "order": 15
                 },
                 "dropChance": 1
             }),
@@ -26559,7 +26622,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 4,
                     "effect": "+{ Base Defence",
                     "bonus": 2,
-                    "order": 11
+                    "order": 12
                 },
                 "dropChance": 0.03
             }),
@@ -26575,7 +26638,23 @@ export const initSpecificItemRepo = () => {
                     "perTier": 1,
                     "effect": "+{% Defence from Equipment",
                     "bonus": 3,
-                    "order": 15
+                    "order": 16
+                },
+                "dropChance": 1
+            }),
+        new BaseItemBase("CardsY15", <CardItemModel>{
+                "internalName": "CardsY15",
+                "displayName": "Giant Rose Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "Y15",
+                    "category": "Event",
+                    "perTier": 1.5,
+                    "effect": "+{% EXP from monsters",
+                    "bonus": 3,
+                    "order": 7
                 },
                 "dropChance": 1
             }),

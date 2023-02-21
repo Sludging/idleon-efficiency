@@ -3179,6 +3179,27 @@ export const initEnemyDetailsRepo = () => {
                 "Damages": [1000, 1],
                 "DefFor0": 1223.26
             }),
+        new EnemyDetailsBase("loveEvent3", <EnemyDetailsModel>{
+                "Name": "Giant Rose",
+                "AFKtype": AFKTypeEnum.Fighting,
+                "MonsterFace": 4,
+                "MonsterOffsetX": 42,
+                "MonsterOffsetY": 28,
+                "HeightOfMonster": 85,
+                "MonsterMoving": 1,
+                "MovingFrame": 4,
+                "RespawnTime": 86400,
+                "DeathFrame": 13,
+                "MonsterHPTotal": 750000,
+                "Type": EnemyTypeEnum.monsterType,
+                "SpecialType": "a",
+                "ExpGiven": 12000,
+                "ExpType": 0,
+                "Defence": 600,
+                "MoveSPEED": 3,
+                "Damages": [1000, 1],
+                "DefFor0": 1223.26
+            }),
         new EnemyDetailsBase("EasterEvent1", <EnemyDetailsModel>{
                 "Name": "Egggulyte",
                 "AFKtype": AFKTypeEnum.Fighting,
