@@ -252,9 +252,19 @@ export class Cooking {
     kitchens: Kitchen[] = [...Array(10)].map((_, index) => { return new Kitchen(index) });
 
     bestBerserker: Player | undefined;
+    totalCookingSpeed: number = 0;
+
+    mealsDiscovered: number = 0;
+    mealsAtVoid: number = 0;
+    mealsAtDiamond: number = 0;
 
     constructor() {
         this.meals = Meal.fromBase(initMealRepo());
+    }
+
+    getMaxMeals = () => {
+        // Lava is using 'Turkey a la Thank' as filler name in the end, remove all of those meals and add 1 for the first meal which is real.
+        return this.meals.filter(meal => meal.name != "Turkey a la Thank").length + 1;
     }
 
     getMealsFromSpiceValues = (valueOfSpices: number[]): number[] => {
@@ -503,6 +513,12 @@ export const updateCooking = (data: Map<string, any>) => {
     });
 
     populateDiscovery(cooking);
+
+    // Nice to have maths
+    cooking.totalCookingSpeed = totalContribution;
+    cooking.mealsDiscovered = cooking.meals.filter(meal => meal.level > 0).length;
+    cooking.mealsAtVoid = cooking.meals.reduce((count, meal) => count += meal.level >= 30 ? 1 : 0, 0);
+    cooking.mealsAtDiamond = cooking.meals.reduce((sum, meal) => sum += meal.level >= 11 ? 1 : 0, 0);
 
     return cooking;
 }

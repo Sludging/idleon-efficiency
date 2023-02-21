@@ -161,7 +161,7 @@ function StampDisplay({ stamp, index, storageAmount = 0 }: { stamp: Stamp, index
 
 const HoverBox = styled(Box)`
     &:hover {
-        background: #0376E3;
+        background: #4C4F54;
     }
 `
 

@@ -65,17 +65,45 @@ export const dateToText = (date: Date): string => {
     return Intl.DateTimeFormat(resolvedFormat.locale, options).format(date)
 } 
 
+const bitsFormatter = (num: number) => {
+    let modifiedValue = num;
+    let bitIndex = 0;
+    for (; bitIndex < 4 ; bitIndex++) {
+        if (modifiedValue > 1e18) {
+            modifiedValue /= 1e18;
+        }
+    }
+    switch(true) {
+        case num < 1e4: return `${Math.floor(modifiedValue)}`;
+        case num < 1e5: return `${Math.floor(modifiedValue / 100) / 10}K`;
+        case num < 1e6: return `${Math.floor(modifiedValue / 1e3)}K`;
+        case num < 1e7: return `${Math.floor(modifiedValue / 1e4) / 100}M`;
+        case num < 1e8: return `${Math.floor(modifiedValue / 1e5) / 10}M`;
+        case num < 1e9: return `${Math.floor(modifiedValue / 1e6)}M`;
+        case num < 1e10: return `${Math.floor(modifiedValue / 1e7) / 100}B`;
+        case num < 1e11: return `${Math.floor(modifiedValue / 1e8) / 10}B`;
+        case num < 1e12: return `${Math.floor(modifiedValue / 1e9)}B`;
+        case num < 1e13: return `${Math.floor(modifiedValue / 1e10) / 100}T`;
+        case num < 1e14: return `${Math.floor(modifiedValue / 1e11) / 10}T`;
+        case num < 1e15: return `${Math.floor(modifiedValue / 1e12)}T`;
+        case num < 1e16: return `${Math.floor(modifiedValue / 1e13) / 100}Q`;
+        case num < 1e17: return `${Math.floor(modifiedValue / 1e14) / 10}Q`;
+        case num < 1e18: return `${Math.floor(modifiedValue / 1e15)}Q`;
+        default: return `${Math.floor((modifiedValue / Math.pow(10, Math.floor(lavaLog(modifiedValue)))) * 100) / 100}e`;
+    }
+}
+
 export const nFormatter = (num: number, type: string = "Smaller") => {
     if (type) {
         switch(type) {
             case "Whole": {
                 switch (true) {
-                    case num < 10000: return `${Math.floor(num).toString()}`;
-                    case num < 1000000: return `${Math.floor(num / 1000)}K`
-                    case num < 10000000: return `${Math.floor(num / 100000) / 10}M`
-                    case num < 1000000000: return `${Math.floor(num / 1000000)}M`
-                    case num < 10000000000: return `${Math.floor(num / 100000000) / 10}B`
-                    case num >= 10000000000: return `${Math.floor(num / 1000000000)}B`
+                    case num < 1e4: return `${Math.floor(num).toString()}`;
+                    case num < 1e6: return `${Math.floor(num / 1e3)}K`
+                    case num < 1e7: return `${Math.floor(num / 1e5) / 10}M`
+                    case num < 1e9: return `${Math.floor(num / 1e6)}M`
+                    case num < 1e10: return `${Math.floor(num / 1e8) / 10}B`
+                    case num >= 1e10: return `${Math.floor(num / 1e9)}B`
                     default: return `${num}`;
                 }
             }
@@ -85,26 +113,41 @@ export const nFormatter = (num: number, type: string = "Smaller") => {
                     case 0 == (100 * num) % 10: return `${Math.round(10 * num) / 10}0#`
                     default: return `${Math.round(100 * num) / 100}#`
                 }
-            }        
+            }
+            case "Micro": {
+                switch (true) {
+                    case num > 10: return `${Math.round(num) / 1}`
+                    case num > 0.1: return `${Math.round(10 * num) / 10}`
+                    case num > 0.01: return `${Math.round(100 * num) / 100}`
+                    default: return `${Math.round(1e3 * num) / 1e3}`
+                }
+            }
+            case "Bits": {
+                return bitsFormatter(num);
+            }       
         }
     }
     switch (true) {
         case num < 100 && type == "Small" && num < 1: return `${Math.round(100 * num) / 100}`
         case num < 100 && type == "Small" && num >= 1: return `${Math.round(10 * num) / 10}`
+        case num < 100 && type == "Smallish" && num < 10: return `${Math.round(10 * num) / 10}`
+        case num < 100 && type == "Smallish" && num >= 10: return `${Math.round(num)}`
         case num < 100 && type == "Smaller" && num < 10: return `${Math.round(100 * num) / 100}`
         case num < 100 && type == "Smaller" && num >= 10: return `${Math.round(10 * num) / 10}`
-        case num < 100: return `${Math.floor(num)}`
-        case num < 1000: return `${Math.floor(num)}`
-        case num < 10000: return `${Math.ceil(num / 10) / 100}K`
-        case num < 100000: return `${Math.ceil(num / 100) / 10}K`
-        case num < 1000000: return `${Math.ceil(num / 1000) / 1}K`
-        case num < 10000000: return `${Math.ceil(num / 10000) / 100}M`
-        case num < 100000000: return `${Math.ceil(num / 100000) / 10}M`
-        case num < 10000000000: return `${Math.ceil(num / 1000000) / 1}M`
-        case num < 10000000000000: return `${Math.ceil(num / 1000000000)}B`
-        case num < 10000000000000000: return `${Math.ceil(num / 1000000000000)}T`
-        case num < 10000000000000000000: return `${Math.ceil(num / 1000000000000000)}Q`
-        case num >= 10000000000000000000: return `${Math.ceil(num / 1000000000000000000)}QQ`
+        case num < 1e3: return `${Math.floor(num)}`
+        case num < 1e4 && type == "Bigish": return `${Math.floor(num)}`
+        case num < 1e4: return `${Math.ceil(num / 10) / 100}K`
+        case num < 1e5: return `${Math.ceil(num / 100) / 10}K`
+        case num < 1e6: return `${Math.ceil(num / 1e3) / 1}K`
+        case num < 1e7: return `${Math.ceil(num / 1e4) / 100}M`
+        case num < 1e8: return `${Math.ceil(num / 1e5) / 10}M`
+        case num < 1e10: return `${Math.ceil(num / 1e6) / 1}M`
+        case num < 1e13: return `${Math.ceil(num / 1e9)}B`
+        case num < 1e16: return `${Math.ceil(num / 1e12)}T`
+        case num < 1e19: return `${Math.ceil(num / 1e15)}Q`
+        case num < 1e22: return `${Math.ceil(num / 1e18)}QQ`
+        case num < 1e24: return `${Math.ceil(num / 1e21)}QQQ`
+        case num >= 1e24: return `${Math.floor((num / Math.pow(10, Math.floor(lavaLog(num)))) * 100) / 100}E${Math.floor(lavaLog(num))}`
         default: return `${num}`;
     }
 }

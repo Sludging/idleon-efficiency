@@ -9,16 +9,30 @@ import { FormNext } from 'grommet-icons';
 import { NextSeo } from 'next-seo';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import IconImage from '../../components/base/IconImage';
-import ShadowBox from '../../components/base/ShadowBox';
+import ShadowBox, { ShadowHoverBox } from '../../components/base/ShadowBox';
 
 import TabButton from '../../components/base/TabButton';
 import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import { TimeDisplaySize, TimeDown } from '../../components/base/TimeDisplay';
-import TipDisplay from '../../components/base/TipDisplay';
+import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 import { AppContext } from '../../data/appContext';
 import { BoatUpgradeType, CaptainTrait, IslandStatus, Sailing as SailingDomain } from '../../data/domain/sailing';
 import { ArtifactStatus } from '../../data/domain/sailing/artifacts';
-import { nFormatter, round } from '../../data/utility';
+import { nFormatter, range, round } from '../../data/utility';
+import styled from 'styled-components';
+
+const BlankBox = styled.div`
+height: 10px;
+width: 10px;
+border: 1px solid black;
+`
+
+const BlackBox = styled.div`
+height: 10px;
+width: 10px;
+border: 1px solid black;
+background-color: black;
+`
 
 function ShipsDisplay() {
     const [sailing, setSailing] = useState<SailingDomain>();
@@ -38,34 +52,77 @@ function ShipsDisplay() {
 
     return (
         <Box gap="medium">
+            <Text size="xsmall">* Ship speed and loot upgrades hit milestones every 7 and 8 levels respectively. Hover over the boats to see progress and total cost to next milestone.</Text>
             <Grid columns={{ size: 'auto', count: 4 }}>
                 {
                     sailing.boats.map((boat, index) => (
-                        <ShadowBox background="dark-1" key={index} pad="medium" margin={{ right: 'small', bottom: 'small' }} gap="xsmall">
-                            <Text size="small">Boat {boat.index + 1} (LV {(boat.lootUpgrades + boat.speedUpgrades).toString()})</Text>
-                            <Grid columns={["35%", "15%", "20%", "30%"]} justifyContent="start" align="center">
-                                <Box direction="row" gap="xsmall" align='center'>
-                                    <IconImage data={CaptainTrait.getLootImageData()} scale={0.7} />
-                                    <Text size="xsmall">{nFormatter(Math.round(boat.getLootValue()))}</Text>
+                        <TipDisplay
+                            key={index}
+                            direction={TipDirection.Down}
+                            heading='Upgrade Milestones'
+                            body={
+                                <Box>
+                                    <Text size="small">Loot ({boat.lootUpgrades}):</Text>
+                                    <Box direction="row" gap="1px">
+                                        {
+                                            range(boat.lootUpgrades - (boat.lootUpgrades % 8), boat.lootUpgrades - (boat.lootUpgrades % 8) + 8).map((upgrade, index) => {
+                                                return (
+                                                    <Box key={index}>
+                                                        {upgrade < boat.lootUpgrades ? <BlackBox /> : <BlankBox />}
+                                                    </Box>
+                                                )
+                                            })
+                                        }
+                                        <Box direction="row" gap="xsmall" align="center" margin={{ left: 'small' }}>
+                                            <IconImage data={SailingDomain.getLootImageData(boat.getLootUpgradeType())} scale={1} />
+                                            <Text color={sailing.loot[boat.getLootUpgradeType()] > boat.getUpgradeCostTillLevel(BoatUpgradeType.Loot, boat.lootUpgrades - (boat.lootUpgrades % 8) + 8) ? 'green-1' : 'accent-1'} size="small">{nFormatter(boat.getUpgradeCostTillLevel(BoatUpgradeType.Loot, boat.lootUpgrades - (boat.lootUpgrades % 8) + 8))}</Text>
+                                        </Box>
+                                    </Box>
+                                    <Text size="small">Speed ({boat.speedUpgrades}):</Text>
+                                    <Box direction="row" gap="1px">
+                                        {
+                                            range(boat.speedUpgrades - (boat.speedUpgrades % 7), boat.speedUpgrades - (boat.speedUpgrades % 7) + 7).map((upgrade, index) => {
+                                                return (
+                                                    <Box key={index}>
+                                                        {upgrade < boat.speedUpgrades ? <BlackBox /> : <BlankBox />}
+                                                    </Box>
+                                                )
+                                            })
+                                        }
+                                        <Box direction="row" gap="xsmall" align="center" margin={{ left: 'small' }}>
+                                            <IconImage data={SailingDomain.getLootImageData(boat.getSpeedUpgradeType())} scale={1} />
+                                            <Text color={sailing.loot[boat.getSpeedUpgradeType()] > boat.getUpgradeCostTillLevel(BoatUpgradeType.Speed, boat.speedUpgrades - (boat.speedUpgrades % 7) + 7) ? 'green-1' : 'accent-1'} size="small">{nFormatter(boat.getUpgradeCostTillLevel(BoatUpgradeType.Speed, boat.speedUpgrades - (boat.speedUpgrades % 7) + 7))}</Text>
+                                        </Box>
+                                    </Box>
                                 </Box>
-                                <FormNext color="grey-2" size="16px" />
-                                <Text size="xsmall">{nFormatter(Math.round(boat.getLootValue({ lootUpgrades: boat.lootUpgrades + 1 })))}</Text>
-                                <Box direction="row" gap="xsmall" align="center" margin={{ left: 'xsmall' }}>
-                                    <IconImage data={SailingDomain.getLootImageData(boat.getLootUpgradeType())} scale={0.8} />
-                                    <Text color={sailing.loot[boat.getLootUpgradeType()] > boat.getUpgradeCost(BoatUpgradeType.Loot) ? 'green-1' : 'accent-1'} size="xsmall">{nFormatter(boat.getUpgradeCost(BoatUpgradeType.Loot))}</Text>
-                                </Box>
-                                <Box direction="row" gap="xsmall" align='center'>
-                                    <IconImage data={CaptainTrait.getSpeedImageData()} scale={0.7} />
-                                    <Text size="xsmall">{nFormatter(Math.round(boat.getSpeedValue()))}</Text>
-                                </Box>
-                                <FormNext color="grey-2" size="16px" />
-                                <Text size="xsmall">{nFormatter(Math.round(boat.getSpeedValue({ speedUpgrades: boat.speedUpgrades + 1 })))}</Text>
-                                <Box direction="row" gap="xsmall" align="center" margin={{ left: 'xsmall' }}>
-                                    <IconImage data={SailingDomain.getLootImageData(boat.getSpeedUpgradeType())} scale={0.8} />
-                                    <Text color={sailing.loot[boat.getSpeedUpgradeType()] > boat.getUpgradeCost(BoatUpgradeType.Speed) ? 'green-1' : 'accent-1'} size="xsmall">{nFormatter(boat.getUpgradeCost(BoatUpgradeType.Speed))}</Text>
-                                </Box>
-                            </Grid>
-                        </ShadowBox>
+                            }
+                        >
+                            <ShadowHoverBox background="dark-1" pad="medium" margin={{ right: 'small', bottom: 'small' }} gap="xsmall">
+                                <Text size="small">Boat {boat.index + 1} (LV {(boat.lootUpgrades + boat.speedUpgrades).toString()})</Text>
+                                <Grid columns={["35%", "15%", "20%", "30%"]} justifyContent="start" align="center">
+                                    <Box direction="row" gap="xsmall" align='center'>
+                                        <IconImage data={CaptainTrait.getLootImageData()} scale={0.7} />
+                                        <Text size="xsmall">{nFormatter(Math.round(boat.getLootValue()))}</Text>
+                                    </Box>
+                                    <FormNext color="grey-2" size="16px" />
+                                    <Text size="xsmall">{nFormatter(Math.round(boat.getLootValue({ lootUpgrades: boat.lootUpgrades + 1 })))}</Text>
+                                    <Box direction="row" gap="xsmall" align="center" margin={{ left: 'xsmall' }}>
+                                        <IconImage data={SailingDomain.getLootImageData(boat.getLootUpgradeType())} scale={0.8} />
+                                        <Text color={sailing.loot[boat.getLootUpgradeType()] > boat.getUpgradeCost(BoatUpgradeType.Loot) ? 'green-1' : 'accent-1'} size="xsmall">{nFormatter(boat.getUpgradeCost(BoatUpgradeType.Loot))}</Text>
+                                    </Box>
+                                    <Box direction="row" gap="xsmall" align='center'>
+                                        <IconImage data={CaptainTrait.getSpeedImageData()} scale={0.7} />
+                                        <Text size="xsmall">{nFormatter(Math.round(boat.getSpeedValue()))}</Text>
+                                    </Box>
+                                    <FormNext color="grey-2" size="16px" />
+                                    <Text size="xsmall">{nFormatter(Math.round(boat.getSpeedValue({ speedUpgrades: boat.speedUpgrades + 1 })))}</Text>
+                                    <Box direction="row" gap="xsmall" align="center" margin={{ left: 'xsmall' }}>
+                                        <IconImage data={SailingDomain.getLootImageData(boat.getSpeedUpgradeType())} scale={0.8} />
+                                        <Text color={sailing.loot[boat.getSpeedUpgradeType()] > boat.getUpgradeCost(BoatUpgradeType.Speed) ? 'green-1' : 'accent-1'} size="xsmall">{nFormatter(boat.getUpgradeCost(BoatUpgradeType.Speed))}</Text>
+                                    </Box>
+                                </Grid>
+                            </ShadowHoverBox>
+                        </TipDisplay>
                     ))
                 }
                 {
