@@ -3199,6 +3199,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Valentslime]]", "txtName": "Valentslime"},
                     <SourceModel>{"wikiName": "[[Loveulyte]]", "txtName": "Loveulyte"},
                     <SourceModel>{"wikiName": "[[Chocco Box]]", "txtName": "Chocco Box"},
+                    <SourceModel>{"wikiName": "[[Giant Rose]]", "txtName": "Giant Rose"},
                     <SourceModel>{"wikiName": "[[Floofie]]", "txtName": "Floofie"},
                     <SourceModel>{"wikiName": "[[Shell Snake]]", "txtName": "Shell Snake"},
                     <SourceModel>{"wikiName": "[[Egg Capsule]]", "txtName": "Egg Capsule"},
@@ -5027,14 +5028,6 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Telescope#I'm Seeing Stars!|I'm Seeing Stars!]]",
                         "txtName": "Telescope: I'm Seeing Stars!"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Loveulyte#Heart Hogger|Heart Hogger]]",
-                        "txtName": "Loveulyte: Heart Hogger"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Loveulyte#Heartbreaker|Heartbreaker]]",
-                        "txtName": "Loveulyte: Heartbreaker"
                     },
                     <SourceModel>{
                         "wikiName": "[[Egggulyte#Egg Shaped Lootboxes!|Egg Shaped Lootboxes!]]",
@@ -7074,24 +7067,8 @@ export const initSourceRepo = () => {
                 "sources": [
                     <SourceModel>{"wikiName": "[[Valentslime]]", "txtName": "Valentslime"},
                     <SourceModel>{"wikiName": "[[Loveulyte]]", "txtName": "Loveulyte"},
-                    <SourceModel>{"wikiName": "[[Chocco Box]]", "txtName": "Chocco Box"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Quest40", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{"wikiName": "[[Valentslime]]", "txtName": "Valentslime"},
-                    <SourceModel>{"wikiName": "[[Loveulyte]]", "txtName": "Loveulyte"},
                     <SourceModel>{"wikiName": "[[Chocco Box]]", "txtName": "Chocco Box"},
-                    <SourceModel>{
-                        "wikiName": "[[Loveulyte#Heart Hogger|Heart Hogger]]",
-                        "txtName": "Loveulyte: Heart Hogger"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Loveulyte#Heartbreaker|Heartbreaker]]",
-                        "txtName": "Loveulyte: Heartbreaker"
-                    }
+                    <SourceModel>{"wikiName": "[[Giant Rose]]", "txtName": "Giant Rose"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -7132,6 +7109,38 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Chocco Box]]", "txtName": "Chocco Box"},
                     <SourceModel>{"wikiName": "[[2021 Giftmas Box]]", "txtName": "2021 Giftmas Box"}
                 ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Quest40", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Loveulyte]]", "txtName": "Loveulyte"},
+                    <SourceModel>{"wikiName": "[[Chocco Box]]", "txtName": "Chocco Box"},
+                    <SourceModel>{
+                        "wikiName": "[[Loveulyte#Heart Hogger|Heart Hogger]]",
+                        "txtName": "Loveulyte: Heart Hogger"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Loveulyte#Heartbreaker|Heartbreaker]]",
+                        "txtName": "Loveulyte: Heartbreaker"
+                    },
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentCape8", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Giant Rose]]", "txtName": "Giant Rose"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentCape9", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Giant Rose]]", "txtName": "Giant Rose"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentCape10", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Giant Rose]]", "txtName": "Giant Rose"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -7256,6 +7265,10 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Telescope#I'm Seeing Stars!|I'm Seeing Stars!]]",
                         "txtName": "Telescope: I'm Seeing Stars!"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Loveulyte#Heartbreaker|Heartbreaker]]",
+                        "txtName": "Loveulyte: Heartbreaker"
                     },
                     <SourceModel>{
                         "wikiName": "[[Hoggindaz#Voter Recognition|Voter Recognition]]",

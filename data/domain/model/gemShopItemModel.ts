@@ -1,6 +1,7 @@
 
 
 export interface GemShopItemModel {
+    section: string,
     name: string,
     itemName: string,
     desc: string,

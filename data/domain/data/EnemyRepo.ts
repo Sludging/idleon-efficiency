@@ -6392,6 +6392,41 @@ export const initEnemyRepo = () => {
                 "navigation": undefined,
                 "bossData": undefined
             }),
+        new EnemyBase("loveEvent3", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Giant Rose",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 4,
+                    "MonsterOffsetX": 42,
+                    "MonsterOffsetY": 28,
+                    "HeightOfMonster": 85,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 4,
+                    "RespawnTime": 86400,
+                    "DeathFrame": 13,
+                    "MonsterHPTotal": 750000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "a",
+                    "ExpGiven": 12000,
+                    "ExpType": 0,
+                    "Defence": 600,
+                    "MoveSPEED": 3,
+                    "Damages": [1000, 1],
+                    "DefFor0": 1223.26
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsY3", "quantity": 1, "chance": 0.05, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentCape8", "quantity": 1, "chance": 0.001429, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentCape9", "quantity": 1, "chance": 0.001429, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentCape10", "quantity": 1, "chance": 0.001429, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
         new EnemyBase("EasterEvent1", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
                     "Name": "Egggulyte",
@@ -6630,11 +6665,10 @@ export const initEnemyRepo = () => {
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsY3", "quantity": 1, "chance": 0.085, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Quest40", "quantity": 1, "chance": 0.2, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FoodEvent5", "quantity": 3, "chance": 0.25, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FoodEvent6", "quantity": 3, "chance": 0.25, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FoodEvent7", "quantity": 2, "chance": 0.25, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FoodEvent8", "quantity": 2, "chance": 0.25, "questLink": "N/A"}
+                        <ItemDropModel>{"item": "FoodEvent5", "quantity": 5, "chance": 0.25, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "FoodEvent6", "quantity": 5, "chance": 0.25, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "FoodEvent7", "quantity": 5, "chance": 0.25, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "FoodEvent8", "quantity": 5, "chance": 0.25, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,
