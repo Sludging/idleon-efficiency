@@ -248,11 +248,11 @@ export const initCardRepo = () => {
             }),
         new CardDataBase("Blank", <CardDataModel>{
                 "cardID": "A0",
-                "category": "Event",
+                "category": "Bosses",
                 "perTier": 10,
                 "effect": "+{% Base HP",
                 "bonus": 3,
-                "order": 16
+                "order": 24
             }),
         new CardDataBase("Copper", <CardDataModel>{
                 "cardID": "C1",
@@ -1478,13 +1478,21 @@ export const initCardRepo = () => {
                 "bonus": 4,
                 "order": 6
             }),
+        new CardDataBase("loveEvent3", <CardDataModel>{
+                "cardID": "Y15",
+                "category": "Event",
+                "perTier": 1.5,
+                "effect": "+{% EXP from monsters",
+                "bonus": 3,
+                "order": 7
+            }),
         new CardDataBase("sheepB", <CardDataModel>{
                 "cardID": "Y6",
                 "category": "Event",
                 "perTier": 3,
                 "effect": "+{% MP regen rate",
                 "bonus": 3,
-                "order": 7
+                "order": 8
             }),
         new CardDataBase("snakeY", <CardDataModel>{
                 "cardID": "Y7",
@@ -1492,7 +1500,7 @@ export const initCardRepo = () => {
                 "perTier": 3,
                 "effect": "+{ Base LUK",
                 "bonus": 3,
-                "order": 8
+                "order": 9
             }),
         new CardDataBase("EasterEvent1", <CardDataModel>{
                 "cardID": "Y8",
@@ -1500,7 +1508,7 @@ export const initCardRepo = () => {
                 "perTier": 1.5,
                 "effect": "+{% Card Drop Chance",
                 "bonus": 1,
-                "order": 9
+                "order": 10
             }),
         new CardDataBase("EasterEvent2", <CardDataModel>{
                 "cardID": "Y9",
@@ -1508,7 +1516,7 @@ export const initCardRepo = () => {
                 "perTier": 1.5,
                 "effect": "+{% Critical Damage",
                 "bonus": 1,
-                "order": 10
+                "order": 11
             }),
         new CardDataBase("shovelY", <CardDataModel>{
                 "cardID": "Y13",
@@ -1516,7 +1524,7 @@ export const initCardRepo = () => {
                 "perTier": 4,
                 "effect": "+{ Base Defence",
                 "bonus": 2,
-                "order": 11
+                "order": 12
             }),
         new CardDataBase("crabcakeB", <CardDataModel>{
                 "cardID": "Y10",
@@ -1524,7 +1532,7 @@ export const initCardRepo = () => {
                 "perTier": 4,
                 "effect": "+{% Total Drop Rate",
                 "bonus": 3,
-                "order": 12
+                "order": 13
             }),
         new CardDataBase("SummerEvent1", <CardDataModel>{
                 "cardID": "Y11",
@@ -1532,7 +1540,7 @@ export const initCardRepo = () => {
                 "perTier": 8,
                 "effect": "+{% Fishing Away Gains",
                 "bonus": 1,
-                "order": 13
+                "order": 14
             }),
         new CardDataBase("SummerEvent2", <CardDataModel>{
                 "cardID": "Y12",
@@ -1540,7 +1548,7 @@ export const initCardRepo = () => {
                 "perTier": 8,
                 "effect": "+{% Catching EXP",
                 "bonus": 4,
-                "order": 14
+                "order": 15
             }),
         new CardDataBase("xmasEvent3", <CardDataModel>{
                 "cardID": "Y14",
@@ -1548,7 +1556,7 @@ export const initCardRepo = () => {
                 "perTier": 1,
                 "effect": "+{% Defence from Equipment",
                 "bonus": 3,
-                "order": 15
+                "order": 16
             })    
 ]
 }

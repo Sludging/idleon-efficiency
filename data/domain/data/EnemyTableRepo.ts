@@ -1519,11 +1519,10 @@ export const initEnemyTableRepo = () => {
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"},
                     <CardDropModel>{"item": "CardsY3", "quantity": 1, "chance": 0.085, "questLink": "N/A"},
-                    <ItemDropModel>{"item": "Quest40", "quantity": 1, "chance": 0.2, "questLink": "N/A"},
-                    <ItemDropModel>{"item": "FoodEvent5", "quantity": 3, "chance": 0.25, "questLink": "N/A"},
-                    <ItemDropModel>{"item": "FoodEvent6", "quantity": 3, "chance": 0.25, "questLink": "N/A"},
-                    <ItemDropModel>{"item": "FoodEvent7", "quantity": 2, "chance": 0.25, "questLink": "N/A"},
-                    <ItemDropModel>{"item": "FoodEvent8", "quantity": 2, "chance": 0.25, "questLink": "N/A"}
+                    <ItemDropModel>{"item": "FoodEvent5", "quantity": 5, "chance": 0.25, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "FoodEvent6", "quantity": 5, "chance": 0.25, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "FoodEvent7", "quantity": 5, "chance": 0.25, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "FoodEvent8", "quantity": 5, "chance": 0.25, "questLink": "N/A"}
                 ]
             }),
         new EnemyTableBase("loveEvent", <EnemyTableModel>{
@@ -1546,6 +1545,15 @@ export const initEnemyTableRepo = () => {
                     <ItemDropModel>{"item": "FoodEvent6", "quantity": 3, "chance": 0.25, "questLink": "N/A"},
                     <ItemDropModel>{"item": "FoodEvent7", "quantity": 2, "chance": 0.25, "questLink": "N/A"},
                     <ItemDropModel>{"item": "FoodEvent8", "quantity": 2, "chance": 0.25, "questLink": "N/A"}
+                ]
+            }),
+        new EnemyTableBase("loveEvent3", <EnemyTableModel>{
+                "drops": [
+                    <CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"},
+                    <CardDropModel>{"item": "CardsY3", "quantity": 1, "chance": 0.05, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentCape8", "quantity": 1, "chance": 0.001429, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentCape9", "quantity": 1, "chance": 0.001429, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentCape10", "quantity": 1, "chance": 0.001429, "questLink": "N/A"}
                 ]
             }),
         new EnemyTableBase("sheepB", <EnemyTableModel>{

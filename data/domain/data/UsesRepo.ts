@@ -26365,7 +26365,7 @@ export const initUsesRepo = () => {
                         "repoSource": "NpcRepo",
                         "key": "Loveulyte@Heart Hogger",
                         "name": "Heart Hogger Requirements",
-                        "amount": 25,
+                        "amount": 3,
                         "type": "quest"
                     }
                 ],
