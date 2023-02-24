@@ -535,7 +535,7 @@ export const initConstellationsRepo = () => {
                 "type": 0
             }),
         new ConstellationBase(44, <ConstellationModel>{
-                "name": "D-11",
+                "name": "E-1",
                 "area": "Magma Rivertown",
                 "x": 1577,
                 "y": 634,
@@ -547,7 +547,7 @@ export const initConstellationsRepo = () => {
                 "type": 1
             }),
         new ConstellationBase(45, <ConstellationModel>{
-                "name": "D-12",
+                "name": "E-2",
                 "area": "Niagrilled Falls",
                 "x": 487,
                 "y": 744,
@@ -559,7 +559,7 @@ export const initConstellationsRepo = () => {
                 "type": 4
             }),
         new ConstellationBase(46, <ConstellationModel>{
-                "name": "D-13",
+                "name": "E-3",
                 "area": "Cracker Jack Lake",
                 "x": 347,
                 "y": 172,
@@ -571,7 +571,7 @@ export const initConstellationsRepo = () => {
                 "type": 0
             }),
         new ConstellationBase(47, <ConstellationModel>{
-                "name": "D-14",
+                "name": "E-4",
                 "area": "Erruption River",
                 "x": 1000,
                 "y": 350,
@@ -583,7 +583,7 @@ export const initConstellationsRepo = () => {
                 "type": 4
             }),
         new ConstellationBase(48, <ConstellationModel>{
-                "name": "D-15",
+                "name": "E-5",
                 "area": "OJ Bay",
                 "x": 900,
                 "y": 250,
@@ -595,7 +595,7 @@ export const initConstellationsRepo = () => {
                 "type": 4
             }),
         new ConstellationBase(49, <ConstellationModel>{
-                "name": "D-16",
+                "name": "E-6",
                 "area": "Miner Mole Outskirts",
                 "x": 165,
                 "y": 806,
@@ -607,7 +607,7 @@ export const initConstellationsRepo = () => {
                 "type": 0
             }),
         new ConstellationBase(50, <ConstellationModel>{
-                "name": "D-17",
+                "name": "E-7",
                 "area": "The Worm Nest",
                 "x": 512,
                 "y": 887,
