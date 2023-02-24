@@ -36,7 +36,7 @@ export const initSaltLickRepo = () => {
                 "baseCost": 250,
                 "baseBonus": 0.2,
                 "maxLevel": 100,
-                "costInc": 1.3
+                "costInc": 1.079
             }),
         new SaltLickBase(4, <SaltLickModel>{
                 "item": "Refinery3",
@@ -52,7 +52,7 @@ export const initSaltLickRepo = () => {
                 "baseCost": 100,
                 "baseBonus": 1,
                 "maxLevel": 100,
-                "costInc": 1.2
+                "costInc": 1.122
             }),
         new SaltLickBase(6, <SaltLickModel>{
                 "item": "Refinery4",
@@ -68,7 +68,7 @@ export const initSaltLickRepo = () => {
                 "baseCost": 100,
                 "baseBonus": 0.4,
                 "maxLevel": 25,
-                "costInc": 1.3
+                "costInc": 1.15
             }),
         new SaltLickBase(8, <SaltLickModel>{
                 "item": "Refinery5",
@@ -84,7 +84,7 @@ export const initSaltLickRepo = () => {
                 "baseCost": 250,
                 "baseBonus": 0.1,
                 "maxLevel": 250,
-                "costInc": 1.1
+                "costInc": 1.04
             })    
 ]
 }

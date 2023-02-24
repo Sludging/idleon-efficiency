@@ -7274,7 +7274,7 @@ export const initItemRepo = () => {
         new ItemBase("EquipmentBows6", <ItemModel>{
                 "item": <WeaponItemModel>{
                     "internalName": "EquipmentBows6",
-                    "displayName": "Pharoah Bow",
+                    "displayName": "Pharaoh Bow",
                     "sellPrice": 15000,
                     "typeGen": TypeGenEnum.aWeapon,
                     "Type": "Bow",
@@ -17183,7 +17183,11 @@ export const initItemRepo = () => {
                     "Skill": "",
                     "Skill_Power": 0
                 },
-                "sources": undefined,
+                "sources": <SourcesModel>{
+                    "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                    "recipeFrom": [],
+                    "questAss": []
+                },
                 "notes": undefined,
                 "recipe": undefined,
                 "vendors": undefined,
@@ -30544,7 +30548,8 @@ export const initItemRepo = () => {
                         <SourceModel>{
                             "wikiName": "[[Poigu#Learn the Language of the Universe|Learn the Language of the Universe]]",
                             "txtName": "Poigu: Learn the Language of the Universe"
-                        }
+                        },
+                        <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
                     ],
                     "recipeFrom": [],
                     "questAss": []
@@ -36102,11 +36107,7 @@ export const initItemRepo = () => {
                     "Skill": "",
                     "Skill_Power": 0
                 },
-                "sources": <SourcesModel>{
-                    "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                    "recipeFrom": [],
-                    "questAss": []
-                },
+                "sources": undefined,
                 "notes": undefined,
                 "recipe": undefined,
                 "vendors": undefined,
@@ -49669,7 +49670,6 @@ export const initItemRepo = () => {
                             "wikiName": "[[Walupiggy#Treasure Hunt 2|Treasure Hunt 2]]",
                             "txtName": "Walupiggy: Treasure Hunt 2"
                         },
-                        <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"},
                         <SourceModel>{
                             "wikiName": "[[Alchemy#Level up Gift|Level up Gift]]",
                             "txtName": "Alchemy: Level up Gift"
@@ -49802,8 +49802,7 @@ export const initItemRepo = () => {
                         <SourceModel>{
                             "wikiName": "[[Carpenter Cardinal#Restoring Power, once again, to a Portal|Restoring Power, once again, to a Portal]]",
                             "txtName": "Carpenter Cardinal: Restoring Power, once again, to a Portal"
-                        },
-                        <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                        }
                     ],
                     "recipeFrom": [],
                     "questAss": []
@@ -62346,7 +62345,11 @@ export const initItemRepo = () => {
                     "Type": "Obol Stack",
                     "description": "Hold down and 1 boss obol will drop at your feet! YOU MUST BE IN WORLD 2 TOWN TO USE THIS! This way you can trash other obols incase you're out of space! "
                 },
-                "sources": undefined,
+                "sources": <SourcesModel>{
+                    "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                    "recipeFrom": [],
+                    "questAss": []
+                },
                 "notes": undefined,
                 "recipe": undefined,
                 "vendors": undefined,
@@ -62464,10 +62467,7 @@ export const initItemRepo = () => {
                     "Skill_Power": 0
                 },
                 "sources": <SourcesModel>{
-                    "sources": [
-                        <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"},
-                        <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
-                    ],
+                    "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                     "recipeFrom": [],
                     "questAss": []
                 },
@@ -63079,11 +63079,7 @@ export const initItemRepo = () => {
                     "Skill": "",
                     "Skill_Power": 0
                 },
-                "sources": <SourcesModel>{
-                    "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                    "recipeFrom": [],
-                    "questAss": []
-                },
+                "sources": undefined,
                 "notes": undefined,
                 "recipe": undefined,
                 "vendors": undefined,
@@ -63113,11 +63109,7 @@ export const initItemRepo = () => {
                     "Skill": "",
                     "Skill_Power": 0
                 },
-                "sources": <SourcesModel>{
-                    "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                    "recipeFrom": [],
-                    "questAss": []
-                },
+                "sources": undefined,
                 "notes": undefined,
                 "recipe": undefined,
                 "vendors": undefined,

@@ -5,7 +5,7 @@
     const pixelmatch = require('pixelmatch');
     const getDirName = require('path').dirname;
 
-    const assetFolder = "../assets/apk/assets/assets/data/";
+    const assetFolder = "../apk/assets/assets/data/";
     await fs.readdir(assetFolder, {}, async (err, files) => {
         files.forEach(async file => {
                 if (!file.includes(".png") || file.substring(0,4) == "Plat" || file.includes("bg.png") || file.includes("menuserver")) {

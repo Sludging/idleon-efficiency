@@ -548,7 +548,7 @@ export const initGemShopRepo = () => {
         new GemShopItemBase(49, <GemShopItemModel>{
                 "section": "Time Candy",
                 "name": "Timecandy2",
-                "itemName": "Baby'S First Lolly",
+                "itemName": "Baby's First Lolly",
                 "desc": "Gives a random Time Candy. The chances are: 34% for 1 Hr, 33% for 2 Hr, and 33% for 4 Hr.",
                 "cost": 80,
                 "no": 48,
@@ -976,42 +976,42 @@ export const initGemShopRepo = () => {
             }),
         new GemShopItemBase(88, <GemShopItemModel>{
                 "section": "Limited Specials",
-                "name": "ObolHyper0",
-                "itemName": "Random Hyper Obol",
-                "desc": "Gives you a random Circle Hyper Obol! The four equal possibilites are +4% DROP RATE, +2% ALL STAT, +3% DAMAGE, and +2% MULTIKILL PER TIER!",
-                "cost": 475,
+                "name": "GemP26",
+                "itemName": "Ancient Artifact",
+                "desc": "Upgrades a random artifact you own to its ANCIENT form! You can now buy these in the World 5 Gemshop section, but I'll offer you one here at a sweet 15% Discount!",
+                "cost": 670,
                 "no": 87,
-                "maxPurchases": 4,
+                "maxPurchases": 1,
                 "qty": 0,
                 "costIncrement": 0
             }),
         new GemShopItemBase(89, <GemShopItemModel>{
                 "section": "Limited Specials",
-                "name": "Timecandy9",
-                "itemName": "Cosmic Time Candy",
-                "desc": "A time candy that gives a random amount of time for a nonrandom cost of gems? How inexplicable! @ These candies give up to 500 hours, but on average give 24 hrs.",
-                "cost": 395,
+                "name": "Pearl6",
+                "itemName": "Pair Of Pearls",
+                "desc": "You found a pair of what now? Where'd you find those, I don't remember stocking them... well, does it have a price tag? No? Eh lets just call it 1 gem... but the 2nd one is gonna cost ya extra!",
+                "cost": 1,
                 "no": 88,
-                "maxPurchases": 5,
+                "maxPurchases": 2,
                 "qty": 1,
-                "costIncrement": 0
+                "costIncrement": 1
             }),
         new GemShopItemBase(90, <GemShopItemModel>{
                 "section": "Limited Specials",
-                "name": "Timecandy5",
-                "itemName": "Freebie Candy",
-                "desc": "Hey kid, how bout we get you a nice lil time candy for the road eh? It's on the house... plus a small freebie fee of course.",
-                "cost": 1,
+                "name": "GemP18",
+                "itemName": "Dragonic Liquid Cauldron",
+                "desc": "Turns your 1st Liquid Cauldron into a Dragonic Cauldron, or 2nd Liquid Cauldron if you bought this before. Dragonic Cauldrons give 2x Liquid Capacity, a bonus which stacks with the 1.5x from Bleach Liquid Cauldrons.",
+                "cost": 969,
                 "no": 89,
                 "maxPurchases": 1,
-                "qty": 1,
+                "qty": 0,
                 "costIncrement": 0
             }),
         new GemShopItemBase(91, <GemShopItemModel>{
                 "section": "Limited Specials",
                 "name": "Quest40",
                 "itemName": "Valenslime Boxes",
-                "desc": "100 Choco Boxes to open! Average rewards are 60 HOURS of Time Candy, over 100 gems, and a 20% chance at a Rose Cape! YOU CAN ONLY GET 3 ROSE CAPES, so maybe don't buy after you get all 3!",
+                "desc": "100 Choco Boxes to open! Average rewards are 60 HOURS of Time Candy over 100 gems, and a 20% Chance at a Rose Cape! YOU CAN ONLY GET 3 ROSE CAPES, so maybe don't buy after you get all 3 capes!",
                 "cost": 590,
                 "no": 90,
                 "maxPurchases": 20,
@@ -1020,21 +1020,21 @@ export const initGemShopRepo = () => {
             }),
         new GemShopItemBase(92, <GemShopItemModel>{
                 "section": "Limited Specials",
-                "name": "EquipmentHats81",
-                "itemName": "Siege Captain Cap",
-                "desc": "Avast mateys, this here premium hat has got a +10% DROP RATE bonus, so it be extra pricey, yarrgh!",
-                "cost": 820,
+                "name": "GemP19",
+                "itemName": "Random Boss Obol",
+                "desc": "Gives you one of the Following Obols: Amarok Obol (+4% DEF), Efaunt Obol (+5% Boss Damage), Slush Obol (+3% Skill Efficiency), Chizoar Obol (+4% Total Damage), or Troll Obol (+3% ALL STAT)",
+                "cost": 600,
                 "no": 91,
-                "maxPurchases": 1,
+                "maxPurchases": 4,
                 "qty": 1,
                 "costIncrement": 0
             }),
         new GemShopItemBase(93, <GemShopItemModel>{
                 "section": "Limited Specials",
-                "name": "EquipmentHats80",
-                "itemName": "Corgi Topper Hat",
-                "desc": "It's SO CUTE OMG!!! The little fella is a premium hat that sits atop your head!",
-                "cost": 400,
+                "name": "Blank",
+                "itemName": "Name Of Item",
+                "desc": "Super close to getting a rose? Well don't worry I'll give you one more shot... good luck! Buying this will give you 100 Valenslimes Day Choco boxes.",
+                "cost": 325,
                 "no": 92,
                 "maxPurchases": 1,
                 "qty": 1,
@@ -1042,10 +1042,10 @@ export const initGemShopRepo = () => {
             }),
         new GemShopItemBase(94, <GemShopItemModel>{
                 "section": "Limited Specials",
-                "name": "EquipmentHats33",
-                "itemName": "Paper Bag Hat",
-                "desc": "Shame. Guilt. Sadness. Premium Hat. Pain. Degredation.",
-                "cost": 315,
+                "name": "EquipmentRings32",
+                "itemName": "World 4 Kill Ring",
+                "desc": "All kills in World 4 count for 1.30x for opening portals to the next map. Helps you get to World 5 faster! 30% Faster to be exact!",
+                "cost": 844,
                 "no": 93,
                 "maxPurchases": 1,
                 "qty": 1,
@@ -1241,7 +1241,7 @@ export const initGemShopRepo = () => {
         new GemShopItemBase(112, <GemShopItemModel>{
                 "section": "World 3",
                 "name": "GemQ1",
-                "itemName": "Crystal 3D Printer",
+                "itemName": "Crystal 3d Printer",
                 "desc": "Unlocks the 2nd printer chamber to print stuff in, for ALL characters you ever make, forever. This lets you print two things at once, it can even be the same thing twice!",
                 "cost": 875,
                 "no": 111,
@@ -1449,6 +1449,17 @@ export const initGemShopRepo = () => {
             }),
         new GemShopItemBase(131, <GemShopItemModel>{
                 "section": "World 5",
+                "name": "GemP26",
+                "itemName": "Ancient Artifact",
+                "desc": "Upgrades a random artifact you own to its ANCIENT form! 100% Success chance, no foolin! This item restocks every week. See Guild GP claim for when that happens.",
+                "cost": 790,
+                "no": 134,
+                "maxPurchases": 2,
+                "qty": 0,
+                "costIncrement": 0
+            }),
+        new GemShopItemBase(132, <GemShopItemModel>{
+                "section": "World 5",
                 "name": "GemP22",
                 "itemName": "Divinity Sparkie",
                 "desc": "Boosts the amount of Divinity Points and Divinity EXP gained by +25% for all of your players! Also adds a divinity sparkie that wanders around the deity volcanos, pondering its existence.",
@@ -1458,7 +1469,7 @@ export const initGemShopRepo = () => {
                 "qty": 0,
                 "costIncrement": 50
             }),
-        new GemShopItemBase(132, <GemShopItemModel>{
+        new GemShopItemBase(133, <GemShopItemModel>{
                 "section": "World 5",
                 "name": "GemP23",
                 "itemName": "Golden Sprinkler",
@@ -1469,7 +1480,7 @@ export const initGemShopRepo = () => {
                 "qty": 0,
                 "costIncrement": 75
             }),
-        new GemShopItemBase(133, <GemShopItemModel>{
+        new GemShopItemBase(134, <GemShopItemModel>{
                 "section": "World 5",
                 "name": "Quest73",
                 "itemName": "Gaming Fertilizer",
@@ -1480,7 +1491,7 @@ export const initGemShopRepo = () => {
                 "qty": 1,
                 "costIncrement": 0
             }),
-        new GemShopItemBase(134, <GemShopItemModel>{
+        new GemShopItemBase(135, <GemShopItemModel>{
                 "section": "World 5",
                 "name": "GemP24",
                 "itemName": "Lava Sprouts",
@@ -1490,17 +1501,6 @@ export const initGemShopRepo = () => {
                 "maxPurchases": 6,
                 "qty": 0,
                 "costIncrement": 70
-            }),
-        new GemShopItemBase(135, <GemShopItemModel>{
-                "section": "World 5",
-                "name": "Blank",
-                "itemName": "Name Of Item",
-                "desc": "DESCRIPTION OF ITEM",
-                "cost": -1,
-                "no": 134,
-                "maxPurchases": 1,
-                "qty": 1,
-                "costIncrement": 0
             }),
         new GemShopItemBase(136, <GemShopItemModel>{
                 "section": "Blank",
