@@ -1851,8 +1851,8 @@ export const initRandoListRepo = () => {
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "5th_Weekly_Update_v175",
-                    "*See_Discord.gg/idleon_for_Weeks_1-4_patch_notes_@___@_New_Stuff_in_Week_5_Update_-----------------------_@_*The_Elite_Class_SIEGE_BREAKER,_who_comes_from_Bowman_class,_has_been_released!_His_talents_include_include_5_new_attacks,_and_5_utilities._@_*Added_the_3D_Printer_to_Quick_Ref,_and_you_can_interact_with_it_fully!_@_*Added_the_Premium_Hat_Stat_Swapper_Stone_to_the_Gem_Shop!_It's_amazing._Fashion_will_never_be_the_same_fo_sho._@_*Added_5_more_3d_Printer_sample_storage_slots._You_can_buy_3_of_them_in_the_Gem_Shop,_and_I_gave_2_of_them_to_you_FOR_FREE!!_@_*Construction_can_now_be_used_while_in_Quick_Ref!_@_*Added_the_LOOT_FILTER!_Find_it_in_the_Cards_section_of_Codex._@_*Hope_you_enjoy_this_awesome_update!_Also_small_note,_we_are_almost_at_10,000_ratings_which_is_SO_HYPE!!!"
+                    "6th_Weekly_Update_v176",
+                    "*See_Discord.gg/idleon_for_Weeks_1-5_patch_notes_@___@_New_Stuff_in_Week_6_Update_-----------------------_@_*Keyboard_movement_has_been_added_to_Steam_and_Browser!_Btw_if_you_didnt_know,_you_can_play_IdleOn_at_LegendsOfIdleon.com!_@_*7_Constellations_added_to_World_5!_Go_find_them_and_light_'em_up_up_up_light_em_up_up_up_@_*Added_a_High_Performance_toggle_option_to_Pet_Battles_@_*Added_a_Quick_Trash_button_to_the_Obol_Altar._You'll_find_it_if_you_look_for_it!_@_*You_can_now_reclaim_Inventory_Bag_D_via_the_Codex,_for_any_character_who_lost_it._@_*Adjusted_Salt_Lick_costs_for_Souls_and_Critters._@_*Fixed_the_POiNG_gaming_game_not_giving_bit_multi._@_*Fixed_8_other_bugs._@_*Hope_you_enjoy_the_Quality_Improvements!_I'll_see_you_all_next_week_with_the_next_ELITE_CLASS!!!"
                 ]
             }),
         new RandoListBase(62, <RandoListModel>{

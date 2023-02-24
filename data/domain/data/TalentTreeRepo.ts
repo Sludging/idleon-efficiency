@@ -3257,7 +3257,7 @@ export const initTalentTreeRepo = () => {
                         "y1": 0,
                         "y2": 0,
                         "funcY": "txt",
-                        "lvlUpText": "+{% Chest Loot",
+                        "lvlUpText": "+{% Chest Loot (Passive)",
                         "skillIndex": 325,
                         "activeData": undefined
                     },

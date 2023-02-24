@@ -2653,7 +2653,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("EquipmentBows6", <WeaponItemModel>{
                 "internalName": "EquipmentBows6",
-                "displayName": "Pharoah Bow",
+                "displayName": "Pharaoh Bow",
                 "sellPrice": 15000,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
