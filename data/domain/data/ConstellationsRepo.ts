@@ -533,6 +533,126 @@ export const initConstellationsRepo = () => {
                 "starChartPoints": 0,
                 "requirement": "",
                 "type": 0
+            }),
+        new ConstellationBase(44, <ConstellationModel>{
+                "name": "E-1",
+                "area": "Magma Rivertown",
+                "x": 1577,
+                "y": 634,
+                "num1": 200,
+                "num2": 99,
+                "num3": 10,
+                "starChartPoints": 5,
+                "requirement": "Reach Lv 200 on 10 players @ Progress:{/}",
+                "type": 1
+            }),
+        new ConstellationBase(45, <ConstellationModel>{
+                "name": "E-2",
+                "area": "Niagrilled Falls",
+                "x": 487,
+                "y": 744,
+                "num1": 0,
+                "num2": 99,
+                "num3": 6,
+                "starChartPoints": 4,
+                "requirement": "Defeat all maccies before any respawn on 6 players @ Progress:{/}",
+                "type": 4
+            }),
+        new ConstellationBase(46, <ConstellationModel>{
+                "name": "E-3",
+                "area": "Cracker Jack Lake",
+                "x": 347,
+                "y": 172,
+                "num1": 0,
+                "num2": 99,
+                "num3": 10,
+                "starChartPoints": 3,
+                "requirement": "Reach this star on 10 players @ Progress:{/}",
+                "type": 0
+            }),
+        new ConstellationBase(47, <ConstellationModel>{
+                "name": "E-4",
+                "area": "Erruption River",
+                "x": 1000,
+                "y": 350,
+                "num1": 0,
+                "num2": 99,
+                "num3": 3,
+                "starChartPoints": 4,
+                "requirement": "Successfully gather dandielogs on 3 players @ Progress:{/}",
+                "type": 4
+            }),
+        new ConstellationBase(48, <ConstellationModel>{
+                "name": "E-5",
+                "area": "OJ Bay",
+                "x": 900,
+                "y": 250,
+                "num1": 0,
+                "num2": 99,
+                "num3": 7,
+                "starChartPoints": 5,
+                "requirement": "Defeat all citringes before any respawn on 7 players @ Progress:{/}",
+                "type": 4
+            }),
+        new ConstellationBase(49, <ConstellationModel>{
+                "name": "E-6",
+                "area": "Miner Mole Outskirts",
+                "x": 165,
+                "y": 806,
+                "num1": 0,
+                "num2": 99,
+                "num3": 10,
+                "starChartPoints": 5,
+                "requirement": "Reach this star on 10 players @ Progress:{/}",
+                "type": 0
+            }),
+        new ConstellationBase(50, <ConstellationModel>{
+                "name": "E-7",
+                "area": "The Worm Nest",
+                "x": 512,
+                "y": 887,
+                "num1": 0,
+                "num2": 99,
+                "num3": 5,
+                "starChartPoints": 8,
+                "requirement": "Defeat 100 Wurms in under 100 sec from entering on 5 players @ Progress:{/}",
+                "type": 4
+            }),
+        new ConstellationBase(51, <ConstellationModel>{
+                "name": "Filler",
+                "area": "",
+                "x": 0,
+                "y": 0,
+                "num1": 0,
+                "num2": 0,
+                "num3": 0,
+                "starChartPoints": 0,
+                "requirement": "",
+                "type": 0
+            }),
+        new ConstellationBase(52, <ConstellationModel>{
+                "name": "Filler",
+                "area": "",
+                "x": 0,
+                "y": 0,
+                "num1": 0,
+                "num2": 0,
+                "num3": 0,
+                "starChartPoints": 0,
+                "requirement": "",
+                "type": 0
+            }),
+        new ConstellationBase(53, <ConstellationModel>{
+                "name": "Filler",
+                "area": "",
+                "x": 0,
+                "y": 0,
+                "num1": 0,
+                "num2": 0,
+                "num3": 0,
+                "starChartPoints": 0,
+                "requirement": "",
+                "type": 0
             })    
 ]
 }

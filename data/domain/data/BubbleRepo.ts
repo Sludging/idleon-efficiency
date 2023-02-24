@@ -375,7 +375,7 @@ export const initBubbleRepo = () => {
                 "x1": 25,
                 "x2": 2,
                 "func": "bigBase",
-                "description": "+1 Placeable Trap, and +{% Trapping Efficiency.",
+                "description": "+{% Trapping Efficiency when this bubble is equipped. Also, +1 Placeable Trap ALWAYS, even when this isn't equipped!",
                 "requirements": [<ComponentModel>{"item": "SaharanFoal", "quantity": 100}, <LiquidComponentModel>{"liquidNo": "2", "quantity": 3}],
                 "bonusKey": "TrapACTIVE"
             }),

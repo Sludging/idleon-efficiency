@@ -285,13 +285,13 @@ def handleQuestGivers():
 
 
 def handleConstellations():
-    dimensions = get_image_dimensions("data/icons/assets/graphics/1x/sprite-54-41.png")
+    dimensions = get_image_dimensions("apk/assets/assets/graphics/1x/sprite-54-41.png")
     tile_width = 36
     tile_height = 36
 
     w, h = dimensions
-    numberOfColumns = 10
-    numberOfRows = 9
+    numberOfColumns = w / tile_width
+    numberOfRows = h / tile_height
 
     max_frames_row = 1.0
     spritesheet_width = tile_width * max_frames_row
@@ -312,9 +312,9 @@ background-position: 0 calc(var(--row) * __PERCENTAGE__%)
 """
     image_count = 0
     print(numberOfRows, numberOfColumns)
-    prefixes = ["A", "B", "C", "D"]
+    prefixes = ["A", "B", "C", "D", "E"]
 
-    with Image.open("data/icons/assets/graphics/1x/sprite-54-41.png") as im:
+    with Image.open("apk/assets/assets/graphics/1x/sprite-54-41.png") as im:
         data = im.getdata()
         currentRow = 0
         currentCol = 0
@@ -336,8 +336,10 @@ background-position: 0 calc(var(--row) * __PERCENTAGE__%)
                 prefix = "B"
             elif (image_count < 67):
                 prefix = "C"
-            else:
+            elif (image_count < 88):
                 prefix = "D"
+            else:
+                prefix = "E"
             
             if prefix == "A":
                 constNumber = math.floor(1 + image_count / 2)
@@ -347,6 +349,8 @@ background-position: 0 calc(var(--row) * __PERCENTAGE__%)
                 constNumber = math.floor(1 + image_count / 2 - 23) 
             elif prefix == "D":
                  constNumber = math.floor(1 + image_count / 2 - 34)
+            elif prefix == "E":
+                 constNumber = math.floor(1 + image_count / 2 - 44)
             constName = f"{prefix}-{constNumber}"
             spritesheet.paste(cut_frame, box)
             if (complete_version):
@@ -429,11 +433,11 @@ background-position: 0 calc(var(--row) * __PERCENTAGE__%)
     shutil.copy(f'sprites/spritesheet_colosseums.css', f'public/icons/assets/sheets/spritesheet_colosseums.css')
 
 if __name__ == "__main__":
-    #handleConstellations()
-    handleQuestGivers()
+    handleConstellations()
+    #handleQuestGivers()
     #handleColo()
     #handleMonsterFaces()
-    #sys.exit(0)
+    sys.exit(0)
     dimDict = {}
     filesDict = {
         'data/icons/assets/data/': get_files_from_dir(['data/icons/assets/data/']),
