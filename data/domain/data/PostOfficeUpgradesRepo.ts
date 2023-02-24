@@ -237,7 +237,7 @@ export const initPostOfficeUpgradesRepo = () => {
                         "investmentReq": 24.9
                     },
                     <PostOfficeUpgradeModel>{
-                        "bonus": "% Power Food Effect",
+                        "bonus": "% Boost Food Effect",
                         "x1": 30,
                         "x2": 200,
                         "func": "decay",

@@ -2639,7 +2639,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows6",
-                        "name": "Pharoah Bow Detailed Recipe",
+                        "name": "Pharaoh Bow Detailed Recipe",
                         "amount": 250,
                         "type": "detRecipe"
                     },
@@ -3651,7 +3651,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows6",
-                        "name": "Pharoah Bow Detailed Recipe",
+                        "name": "Pharaoh Bow Detailed Recipe",
                         "amount": 125,
                         "type": "detRecipe"
                     },
@@ -5825,7 +5825,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows6",
-                        "name": "Pharoah Bow Detailed Recipe",
+                        "name": "Pharaoh Bow Detailed Recipe",
                         "amount": 250,
                         "type": "detRecipe"
                     },
@@ -7171,14 +7171,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows6",
-                        "name": "Pharoah Bow Recipe",
+                        "name": "Pharaoh Bow Recipe",
                         "amount": 3,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows6",
-                        "name": "Pharoah Bow Detailed Recipe",
+                        "name": "Pharaoh Bow Detailed Recipe",
                         "amount": 3,
                         "type": "detRecipe"
                     },
@@ -8325,7 +8325,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows6",
-                        "name": "Pharoah Bow Detailed Recipe",
+                        "name": "Pharaoh Bow Detailed Recipe",
                         "amount": 8,
                         "type": "detRecipe"
                     },
@@ -12470,7 +12470,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows6",
-                        "name": "Pharoah Bow Recipe",
+                        "name": "Pharaoh Bow Recipe",
                         "amount": 1,
                         "type": "recipe"
                     },
@@ -12490,14 +12490,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows6",
-                        "name": "Pharoah Bow Recipe",
+                        "name": "Pharaoh Bow Recipe",
                         "amount": 1400,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows6",
-                        "name": "Pharoah Bow Detailed Recipe",
+                        "name": "Pharaoh Bow Detailed Recipe",
                         "amount": 1400,
                         "type": "detRecipe"
                     },

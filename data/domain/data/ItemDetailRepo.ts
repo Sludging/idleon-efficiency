@@ -3875,7 +3875,7 @@ export const initItemDetailRepo = () => {
             }),
         new CommonItemBase("EquipmentBows6", <EquipItemModel>{
                 "internalID": "EquipmentBows6",
-                "displayName": "Pharoah Bow",
+                "displayName": "Pharaoh Bow",
                 "sellPrice": 15000,
                 "typeGen": TypeGenEnum.aWeapon,
                 "ID": 6,
