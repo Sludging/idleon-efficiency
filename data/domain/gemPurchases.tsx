@@ -1,16 +1,6 @@
 import { GemShopItemBase, initGemShopRepo } from "./data/GemShopRepo"
 import { GemShopItemModel } from "./model/gemShopItemModel"
 
-interface GemData {
-    itemName: string
-    desc: string
-    cost: number
-    no: number
-    maxPurchases: number
-    qty: number
-    costIncrement: number
-}
-
 export class GemPurchase {
     name: string
     itemName: string
@@ -25,7 +15,7 @@ export class GemPurchase {
 
     constructor(public index: number, data: GemShopItemModel) {
         this.name = data.name;
-        this.itemName = data.itemName;
+        this.itemName = data.itemDisplayName;
         this.desc = data.desc;
         this.cost = data.cost;
         this.maxPurchases = data.maxPurchases;
