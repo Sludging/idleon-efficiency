@@ -1386,6 +1386,9 @@ export const initRandoListRepo = () => {
                     "480",
                     "481",
                     "482",
+                    "495",
+                    "496",
+                    "497",
                     "135",
                     "136",
                     "137",
@@ -1851,8 +1854,8 @@ export const initRandoListRepo = () => {
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "6th_Weekly_Update_v176",
-                    "*See_Discord.gg/idleon_for_Weeks_1-5_patch_notes_@___@_New_Stuff_in_Week_6_Update_-----------------------_@_*Keyboard_movement_has_been_added_to_Steam_and_Browser!_Btw_if_you_didnt_know,_you_can_play_IdleOn_at_LegendsOfIdleon.com!_@_*7_Constellations_added_to_World_5!_Go_find_them_and_light_'em_up_up_up_light_em_up_up_up_@_*Added_a_High_Performance_toggle_option_to_Pet_Battles_@_*Added_a_Quick_Trash_button_to_the_Obol_Altar._You'll_find_it_if_you_look_for_it!_@_*You_can_now_reclaim_Inventory_Bag_D_via_the_Codex,_for_any_character_who_lost_it._@_*Adjusted_Salt_Lick_costs_for_Souls_and_Critters._@_*Fixed_the_POiNG_gaming_game_not_giving_bit_multi._@_*Fixed_8_other_bugs._@_*Hope_you_enjoy_the_Quality_Improvements!_I'll_see_you_all_next_week_with_the_next_ELITE_CLASS!!!"
+                    "7th_Weekly_Update_v177",
+                    "*See_Discord.gg/idleon_for_Weeks_1-6_patch_notes_@___@_New_Stuff_in_Week_7_Update_-----------------------_@_*Elemental_Sorcerer_elite_class_is_OUT_NOW!_10_new_talents,_5_attacks_and_5_utilty!_@_*As_Elemental_Sorcerer,_you_can_spawn_Wormholes_an_endless_invasion_of_increasingly_difficult_mobs_with_boosted_EXP_and_Drop_rate!_@_*Rack_up_1000s_of_Wormhole_kills_to_boost_the_damage_of_all_your_characters_with_the_Wormhole_Emperor_talent!_@_*Added_8_Storage_Chest_Slots_to_everyone,_FOR_FREE!_Thats_right,_I'm_out_here_giving_the_best_game_community_the_best_updates!_Lets_go!!_@_*Plunderous_Mobs_now_have_a_2%_Spawn_Rate_in_the_Siege_Breaker_class,_instead_of_the_previous_1%_chance._@_*Fixed_3_other_bugs._@_*Hope_you_like_Elemental_Sorcerer,_which_you_can_unlock_in_the_4th_map_of_World_4_if_you_didn't_know!_See_you_next_week_with_some_new_updates,_enjoy!"
                 ]
             }),
         new RandoListBase(62, <RandoListModel>{
