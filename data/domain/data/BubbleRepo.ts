@@ -1679,6 +1679,16 @@ export const initBubbleRepo = () => {
                 "requirements": [<LiquidComponentModel>{"liquidNo": "1", "quantity": 20}, <LiquidComponentModel>{"liquidNo": "2", "quantity": 3}],
                 "bonusKey": "1"
             }),
+        new BubbleBase("Talent Point", <BubbleModel>{
+                "cauldron": "Liquid Shop",
+                "name": "Talent Point",
+                "x1": 1,
+                "x2": 1,
+                "func": "1",
+                "description": "Gives a redeemable talent point for the 3rd Talent Tab. Applies to all characters. This item's cost will reset every 50,000,000 years.",
+                "requirements": [<LiquidComponentModel>{"liquidNo": "3", "quantity": 3}],
+                "bonusKey": "0"
+            }),
         new BubbleBase("Grand Obols", <BubbleModel>{
                 "cauldron": "Liquid Shop",
                 "name": "Grand Obols",

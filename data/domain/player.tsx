@@ -124,6 +124,7 @@ export class Player {
     // Misc
     extraLevelsFromTalent: number = 0;
     extraLevelsFromBear: number = 0;
+    extraLevelsFromES: number = 0;
 
     constructor(playerID: number, playerName: string) {
         this.playerID = playerID;
@@ -483,7 +484,7 @@ const parseTalents = (talentLevels: string, talentMaxLevels: string, player: Pla
 
     // Update players talents levels due to elite class level increase talents.
     const extraLevels = Math.floor(player.talents.filter(talent => [149, 374, 539].includes(talent.skillIndex)).reduce((sum, value) => sum += value.getBonus(), 0))
-    player.talents.filter(talent => ![149, 374, 539].includes(talent.skillIndex) && talent.skillIndex <= 614)
+    player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614)
         .forEach(talent => {
             talent.level += talent.level > 0 ? extraLevels : 0;
             talent.maxLevel += extraLevels;
@@ -678,7 +679,7 @@ export const updatePlayers = (data: Map<string, any>) => {
     const bearGod = divinity.gods[1];
     bearGod.linkedPlayers.forEach(linkedPlayer => {
         const bearBonus = Math.ceil(bearGod.getMinorLinkBonus(linkedPlayer));
-        linkedPlayer.talents.filter(talent => ![149, 374, 539].includes(talent.skillIndex) && talent.skillIndex <= 614)
+        linkedPlayer.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614)
         .forEach(talent => {
             talent.level += talent.level > 0 ? bearBonus : 0;
             talent.maxLevel += bearBonus;
@@ -742,6 +743,17 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
     const crysalShrine = shrines[ShrineConstants.CrystalShrine];
     players.forEach(player => {
         player.setCrystalChance(crystalSpawnStamp, crysalShrine);
+    })
+
+    // Max talent level from Elemental Sorcerer
+    players.forEach(player => {
+        const esBonus = Math.floor(family.classBonus.get(ClassIndex.Elemental_Sorcerer)?.getBonus(player) ?? 0);
+        player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614)
+        .forEach(talent => {
+            talent.level += talent.level > 0 ? esBonus : 0;
+            talent.maxLevel += esBonus;
+        });
+        player.extraLevelsFromES = esBonus;
     })
 }
 

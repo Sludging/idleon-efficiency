@@ -17183,11 +17183,7 @@ export const initItemRepo = () => {
                     "Skill": "",
                     "Skill_Power": 0
                 },
-                "sources": <SourcesModel>{
-                    "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                    "recipeFrom": [],
-                    "questAss": []
-                },
+                "sources": undefined,
                 "notes": undefined,
                 "recipe": undefined,
                 "vendors": undefined,
@@ -18327,6 +18323,7 @@ export const initItemRepo = () => {
                 },
                 "sources": <SourcesModel>{
                     "sources": [
+                        <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"},
                         <SourceModel>{"wikiName": "[[Dungeons#Flurbo Shop|Flurbo Shop]]", "txtName": "Dungeons: Flurbo Shop"},
                         <SourceModel>{
                             "wikiName": "[[Dungeons#Loot Rolls|Dungeon Loot Rolls]]",
@@ -30078,8 +30075,7 @@ export const initItemRepo = () => {
                         <SourceModel>{
                             "wikiName": "[[Loveulyte#Heartbreaker|Heartbreaker]]",
                             "txtName": "Loveulyte: Heartbreaker"
-                        },
-                        <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                        }
                     ],
                     "recipeFrom": [],
                     "questAss": []
@@ -30548,8 +30544,7 @@ export const initItemRepo = () => {
                         <SourceModel>{
                             "wikiName": "[[Poigu#Learn the Language of the Universe|Learn the Language of the Universe]]",
                             "txtName": "Poigu: Learn the Language of the Universe"
-                        },
-                        <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                        }
                     ],
                     "recipeFrom": [],
                     "questAss": []
@@ -49802,7 +49797,8 @@ export const initItemRepo = () => {
                         <SourceModel>{
                             "wikiName": "[[Carpenter Cardinal#Restoring Power, once again, to a Portal|Restoring Power, once again, to a Portal]]",
                             "txtName": "Carpenter Cardinal: Restoring Power, once again, to a Portal"
-                        }
+                        },
+                        <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
                     ],
                     "recipeFrom": [],
                     "questAss": []
@@ -62345,11 +62341,7 @@ export const initItemRepo = () => {
                     "Type": "Obol Stack",
                     "description": "Hold down and 1 boss obol will drop at your feet! YOU MUST BE IN WORLD 2 TOWN TO USE THIS! This way you can trash other obols incase you're out of space! "
                 },
-                "sources": <SourcesModel>{
-                    "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                    "recipeFrom": [],
-                    "questAss": []
-                },
+                "sources": undefined,
                 "notes": undefined,
                 "recipe": undefined,
                 "vendors": undefined,
@@ -63116,6 +63108,40 @@ export const initItemRepo = () => {
                 "anvilProduction": undefined,
                 "detDrops": undefined,
                 "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats81"}, "order": 1388}
+            }),
+        new ItemBase("EquipmentHats82", <ItemModel>{
+                "item": <ArmourItemModel>{
+                    "internalName": "EquipmentHats82",
+                    "displayName": "Ele Sorcerer Pointed Hat",
+                    "sellPrice": 1,
+                    "typeGen": TypeGenEnum.aHelmetMTX,
+                    "Type": "Premium Helmet",
+                    "lvReqToCraft": 5,
+                    "lvReqToEquip": 1,
+                    "Class": ClassTypeEnum.All,
+                    "Weapon_Power": 0,
+                    "STR": 1,
+                    "AGI": 1,
+                    "WIS": 1,
+                    "LUK": 0,
+                    "Defence": 0,
+                    "miscUp1": "5% All Stats",
+                    "miscUp2": "00",
+                    "Upgrade_Slots_Left": 5,
+                    "Skill": "",
+                    "Skill_Power": 0
+                },
+                "sources": <SourcesModel>{
+                    "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                    "recipeFrom": [],
+                    "questAss": []
+                },
+                "notes": undefined,
+                "recipe": undefined,
+                "vendors": undefined,
+                "anvilProduction": undefined,
+                "detDrops": undefined,
+                "slabSort": undefined
             }),
         new ItemBase("Key1", <ItemModel>{
                 "item": <DescItemModel>{
