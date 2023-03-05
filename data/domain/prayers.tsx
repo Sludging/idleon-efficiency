@@ -62,6 +62,10 @@ export class Prayer {
     }
 }
 
+export const initPrayers = () => {
+    return Prayer.fromBase(initPrayerRepo());
+}
+
 export default function parsePrayers(rawData: number[]) {
     const prayerData = Prayer.fromBase(initPrayerRepo());
     if (rawData) {

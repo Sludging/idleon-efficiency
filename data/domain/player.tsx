@@ -583,6 +583,10 @@ const parseEquipment = (
     player.gear = playerEquipment;
 }
 
+export const initPlayers = (charCount: number, playerNames: string[]) => {
+    return Array(charCount).map(pIndex => new Player(pIndex, playerNames[pIndex]));
+}
+
 export default function parsePlayers(doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], validCharCount: number) {
     const playerNames = accountData.get("playerNames") as string[];
     let parsedData = playerNames.slice(0, validCharCount).map((playerName, index) => {

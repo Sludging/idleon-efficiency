@@ -115,6 +115,10 @@ export class CardInfo {
     }
 }
 
+export const initCards = () => {
+    return Card.fromBase(initCardRepo());
+}
+
 export default function parseCards(cardData: Record<string, number>) {
     const cards = Card.fromBase(initCardRepo());
 

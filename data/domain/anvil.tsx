@@ -205,6 +205,15 @@ export class AnvilWrapper {
 
 }
 
+export const initAnvil = (charCount: number) => {
+    const wrapper = new AnvilWrapper();
+    Array(charCount).forEach(pIndex => {
+        wrapper.playerAnvils[pIndex] = new Anvil();
+    })
+
+    return wrapper;
+}
+
 export const parseAnvil = (anvilProduction: number[][][], anvilStats: number[][], anvilSelected: number[][], allItems: Item[]) => {
     const wrapper = new AnvilWrapper();
 

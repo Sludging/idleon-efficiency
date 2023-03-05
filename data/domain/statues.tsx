@@ -111,6 +111,10 @@ export class PlayerStatues {
     }
 }
 
+export const initStatues = (charCount: number) => {
+    return Array(charCount).map(pIndex => new PlayerStatues(pIndex));
+}
+
 export default function parseStatues(allStatues: Array<Array<Array<number>>>, goldStatues: Array<boolean>) {
     const parsedData = [...Array(allStatues.length)].map((_, pIndex) => { // for each player we have data for
         const playerStatues = new PlayerStatues(pIndex);

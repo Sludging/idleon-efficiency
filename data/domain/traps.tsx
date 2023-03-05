@@ -120,6 +120,11 @@ export class Trap {
     }
 }
 
+export const initTraps = (charCount: number) => {
+    // Empty init for now.
+    return Array(charCount) as Trap[][];
+}
+
 
 export default function parseTraps(allTraps: Array<any>) {
 

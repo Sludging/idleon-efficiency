@@ -537,6 +537,10 @@ const convertToItemClass = (alchemy: Alchemy, allItems: Item[]) => {
     })
 }
 
+export const initAlchemy = () => {
+    return Alchemy.fromBase(initBubbleRepo());
+}
+
 export default function parseAlchemy(alchemyData: Array<Map<string, number>>, boostLevels: Array<number>, allItems: Item[]) {
     var alchemy = Alchemy.fromBase(initBubbleRepo());
     alchemyData.forEach((indexData, index) => {

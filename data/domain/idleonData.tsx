@@ -1,8 +1,8 @@
-import parseTraps from './traps';
-import parseStamps, { updateStampMaxCarry, updateStamps } from './stamps';
-import parseStatues from './statues';
-import parsePlayers, { Player, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayers } from './player';
-import parseAlchemy, { updateAlchemy } from './alchemy';
+import parseTraps, { initTraps } from './traps';
+import parseStamps, { initStamps, updateStampMaxCarry, updateStamps } from './stamps';
+import parseStatues, { initStatues } from './statues';
+import parsePlayers, { Player, initPlayers, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayers } from './player';
+import parseAlchemy, { initAlchemy, updateAlchemy } from './alchemy';
 import parseBribes from './bribes';
 import parseGuild from './guild';
 import parseGems from './gemPurchases';
@@ -11,7 +11,7 @@ import parseShrines, { updateShrines } from './shrines';
 import { Item } from './items';
 import parseStorage, { updateStorage } from './storage';
 import parseQuests from './quests';
-import parsePrayers from './prayers';
+import parsePrayers, { initPrayers } from './prayers';
 import parseRefinery, { updateRefinery } from './refinery';
 import parseSaltLick from './saltLick';
 import parsePrinter, { updatePrinter } from './printer';
@@ -19,7 +19,7 @@ import parseTaskboard from './tasks';
 import { Cloudsave } from './cloudsave';
 import parseWorship, { updateWorship } from './worship';
 import parseConstruction, { updateConstruction } from './construction';
-import parseCards, { updateCards } from './cards';
+import parseCards, { updateCards, initCards } from './cards';
 import parseArcade, { updateArcade } from './arcade';
 import parseObols from './obols';
 import { calculateFamily } from './family';
@@ -30,7 +30,7 @@ import { parseLab, updateLab } from './lab';
 import { parseBreeding, updateAllShinyEffects, updateBreeding } from './breeding';
 import { notUndefined } from '../utility';
 import parseSigils, { updateSigils } from './sigils';
-import { parseAnvil, updateAnvil } from './anvil';
+import { initAnvil, parseAnvil, updateAnvil } from './anvil';
 import { updateAlerts } from './alerts';
 import { parseAccount, updateAccount } from './account';
 import parseDivinity, { updateDivinity } from './divinity';
@@ -85,6 +85,53 @@ export class IdleonData {
 
         return "";
     }
+}
+
+const initAccountDataKeys = (accountData: Map<string, any>) => {
+    const charCount = accountData.get("charCount");
+
+    accountData.set("stamps", initStamps(accountData.get("itemsData")));
+    accountData.set("traps", initTraps(charCount));
+    accountData.set("statues", initStatues(charCount));
+    accountData.set("anvil", initAnvil(charCount));
+    accountData.set("prayers", initPrayers());
+    accountData.set("cards", initCards());
+    accountData.set("players", initPlayers(charCount, accountData.get("playerNames")));
+    accountData.set("alchemy", initAlchemy());
+    accountData.set("bribes", undefined);
+    accountData.set("guild", undefined);
+    accountData.set("gems", undefined);
+    accountData.set("achievements", undefined);
+    accountData.set("slab", undefined);
+    accountData.set("rawData", undefined);
+    accountData.set("POExtra", undefined);
+    accountData.set("shrines", undefined);
+    accountData.set("storage", undefined);
+    accountData.set("constellations", undefined);
+    accountData.set("quests", undefined);
+    accountData.set("refinery", undefined);
+    accountData.set("saltLick", undefined);
+    accountData.set("printer", undefined);
+    accountData.set("taskboard", undefined);
+    accountData.set("worship", undefined);
+    accountData.set("construction", undefined);
+    accountData.set("arcade", undefined);
+    accountData.set("obols", undefined);
+    accountData.set("dungeons", undefined);
+    accountData.set("forge", undefined);
+    accountData.set("cooking", undefined);
+    accountData.set("lab", undefined);
+    accountData.set("breeding", undefined);
+    accountData.set("sigils", undefined);
+    accountData.set("account", undefined);
+    accountData.set("divinity", undefined);
+    accountData.set("sailing", undefined);
+    accountData.set("gaming", undefined);
+    accountData.set("collider", undefined);
+    accountData.set("capacity", undefined);
+    accountData.set("deathnote", undefined);
+    accountData.set("family", undefined);
+    accountData.set("alerts", undefined);
 }
 
 
@@ -194,6 +241,8 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], com
     accountData.set("itemsData", allItems);
     accountData.set("servervars", serverVars);
     accountData.set("OptLacc", data.get("OptLacc"));
+    accountData.set("rawData", data.toJSON())
+    accountData.set("timeAway", JSON.parse(data.get('TimeAway')));
 
     // Handle Companions
     accountData.set("companions", parseCompanions(companions));
@@ -204,6 +253,8 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], com
     accountData.set("lastUpdated", lastUpdated);
 
     const validCharCount = [...Array(charNames.length)].map((_, i) => data.get(`Lv0_${i}`) as number[]).filter(notUndefined).length;
+    accountData.set("charCount", validCharCount);
+    initAccountDataKeys(accountData);
     Object.entries(keyFunctionMap).forEach(([key, toExecute]) => {
         try {
             if (key == "players" || key == "storage" || key == "quests") {

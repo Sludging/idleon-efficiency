@@ -13,29 +13,29 @@ import { NoteModel } from "./model/noteModel";
 
 // Used to make slab page nicer.
 const specialNotes: Record<string, NoteModel> = {
-    "EquipmentHats75": {"note": "Was available during the launch event of the iOS version."},
-    "EquipmentHats76": {"note": "Available from the Idle Skilling crossover event, requires reaching the mist in IS."},
-    "EquipmentHats78": {"note": "Available from Random Events (Meteorite)"},
-    "EquipmentHats79": {"note": "Available from Random Events (Glacial Guild)"},
-    "EquipmentShoes2": {"note": "Unobtainable"},
-    "EquipmentRingsChat10": {"note": "Available from Random Events (Meteorite)"},
-    "EquipmentCape2": {"note": "Requires buying the Eggscellent Pack."},
-    "EquipmentKeychain25": {"note": "Dungeon Loot Dice (Random)"},
-    "EquipmentKeychain26": {"note": "Dungeon Loot Dice (Random)"},
-    "EquipmentKeychain27": {"note": "Dungeon Loot Dice (Random)"},
-    "EquipmentKeychain28": {"note": "Dungeon Loot Dice (Random)"},
-    "Trophy16": {"note": "Available from the Idle Skilling crossover event, requires reaching Tee Hee 15 in IS."},
-    "EquipmentTools13": {"note": "Random Events (Snake Swarm)"},
-    "EquipmentToolsHatchet11": {"note": "Random Events (Mega Grumblo)"},
-    "Crystal4": {"note": "Massive Troll (Any Difficulty)"},
-    "Trash3": {"note": "Treasure Hunt (check Idleon youtube)"},
-    "Quest58": {"note": "Made from a Damaged Cog, which you can buy at the world 3 Town Shop!"},
-    "Quest69": {"note": "Killroy"},
+    "EquipmentHats75": { "note": "Was available during the launch event of the iOS version." },
+    "EquipmentHats76": { "note": "Available from the Idle Skilling crossover event, requires reaching the mist in IS." },
+    "EquipmentHats78": { "note": "Available from Random Events (Meteorite)" },
+    "EquipmentHats79": { "note": "Available from Random Events (Glacial Guild)" },
+    "EquipmentShoes2": { "note": "Unobtainable" },
+    "EquipmentRingsChat10": { "note": "Available from Random Events (Meteorite)" },
+    "EquipmentCape2": { "note": "Requires buying the Eggscellent Pack." },
+    "EquipmentKeychain25": { "note": "Dungeon Loot Dice (Random)" },
+    "EquipmentKeychain26": { "note": "Dungeon Loot Dice (Random)" },
+    "EquipmentKeychain27": { "note": "Dungeon Loot Dice (Random)" },
+    "EquipmentKeychain28": { "note": "Dungeon Loot Dice (Random)" },
+    "Trophy16": { "note": "Available from the Idle Skilling crossover event, requires reaching Tee Hee 15 in IS." },
+    "EquipmentTools13": { "note": "Random Events (Snake Swarm)" },
+    "EquipmentToolsHatchet11": { "note": "Random Events (Mega Grumblo)" },
+    "Crystal4": { "note": "Massive Troll (Any Difficulty)" },
+    "Trash3": { "note": "Treasure Hunt (check Idleon youtube)" },
+    "Quest58": { "note": "Made from a Damaged Cog, which you can buy at the world 3 Town Shop!" },
+    "Quest69": { "note": "Killroy" },
     "Quest71": {
         "note": "Droprates are displayed on the Event page this item was apart of: [[Events/iOS_Release|iOS Release Event]]."
     },
     "ObolBronzeCard": { "note": "Alchemy Shop" },
-    "ObolFrog": {"note": "Random Events (Mega Grumblo)"},
+    "ObolFrog": { "note": "Random Events (Mega Grumblo)" },
 
 }
 
@@ -186,7 +186,6 @@ export class Item {
             this.miscUp2 = data.item.miscUp2 ?? '';
             this.upgradeSlots = data.item.Upgrade_Slots_Left ?? 0;
 
-            //this.itemStats.push(new ItemStat("Weapon Power", "Weapon_Power", data.item.Weapon_Power));
             this.itemStats.push(new ItemStat("STR", "STR", data.item.STR));
             this.itemStats.push(new ItemStat("AGI", "AGI", data.item.AGI));
             this.itemStats.push(new ItemStat("WIS", "WIS", data.item.WIS));
@@ -289,20 +288,20 @@ export class Item {
     getBagType = () => {
         // This function is based on _customBlock_MaxCapacity
         switch (this.data.item.typeGen) {
-            case TypeGenEnum.bBar: 
-            case TypeGenEnum.cOil: 
-            case TypeGenEnum.bOre: 
+            case TypeGenEnum.bBar:
+            case TypeGenEnum.cOil:
+            case TypeGenEnum.bOre:
                 return "Mining"
-            case TypeGenEnum.dFish: 
+            case TypeGenEnum.dFish:
                 return "Fishing";
-            case TypeGenEnum.dBugs: 
+            case TypeGenEnum.dBugs:
                 return "Bugs"
-            case TypeGenEnum.bLeaf: 
-            case TypeGenEnum.bLog: 
+            case TypeGenEnum.bLeaf:
+            case TypeGenEnum.bLog:
                 return "Chopping";
-            case TypeGenEnum.cFood: 
+            case TypeGenEnum.cFood:
                 return "Foods"
-            case TypeGenEnum.dCritters: 
+            case TypeGenEnum.dCritters:
                 return "Critters"
             case TypeGenEnum.dSouls:
                 return "Souls"
@@ -421,7 +420,7 @@ export class Item {
             "recipe": undefined,
             "vendors": undefined,
             "anvilProduction": undefined,
-            "detDrops":undefined
+            "detDrops": undefined
         }
         return new Item(fakeModel);
     }
@@ -454,11 +453,11 @@ export class Item {
                     return new Food(item.data);
                 case TypeGenEnum.aObolCircle:
                 case TypeGenEnum.aObolSquare:
-                case TypeGenEnum.aObolHexagon:                    
+                case TypeGenEnum.aObolHexagon:
                 case TypeGenEnum.aObolSparkle:
                 default:
                     return new Item(item.data);
-                
+
             }
         })
     }

@@ -233,7 +233,7 @@ export const getStampBonusForKey = (stamps: Stamp[][], key: string) => {
 
 const isStampItem = (x: BaseItemModel): x is StampItemModel => "stampData" in x
 
-const initStamps = (allItems: Item[]): Stamp[][] => {
+export const initStamps = (allItems: Item[]): Stamp[][] => {
     const stampItems = allItems.filter(item => isStampItem(item.data.item));
     const allStamps = Stamp.fromBase(stampItems);
     const combat_stamp = allStamps.filter(stamp => stamp.type == "Combat Stamp");
