@@ -26,7 +26,13 @@ When new patch comes out:
 ```
 1. asar extract "/mnt/d/Program Files/Steam/steamapps/common/Legends of Idleon/resources/app.asar" assets
 2. js-beautify assets/distBuild/static/game/N.js > N_clean.js
-4. Go to https://unminify.com/, upload it and download the unminified version.
+3. Go to https://unminify.com/, paste the following first:
+```
+if (a == b)
+a = 1
+else b = 2
+```
+4. Then drag and drop the N_clean.js file and unminify.
 
 OPTIONAL ALTERNATIVE: 
 1. Download Z.js from web: curl -O https://www.legendsofidleon.com/ytGl5oc/Z.js
