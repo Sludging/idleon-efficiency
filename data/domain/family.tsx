@@ -39,7 +39,7 @@ export const familyBonusMapping = [
     "+{_TOTAL_WIS 1 5 intervalAdd _ _ txt".split(" "),
     "+{_STAR_TAB|TALENT_POINTS 1 6 intervalAdd _ _ txt".split(" "),
     "{#@HIGHER_BONUSES|FROM_GOLDEN_FOODS 0.4 100 decayMulti _ _ txt".split(" "),
-    "+{%_WORLD_5_STUFF 25 100 decay _ _ txt".split(" "),
+    "+{_LV_FOR_ALL|TALENTS_ABOVE_LV_1 20 350 decay _ _ txt".split(" "),
     "SPIRITUAL_MONK 25 100 decay _ _ txt".split(" "),
     "+{%_ALL_STAT.|STR,_AGI,_WIS,_LUK. 5 180 decay _ _ txt".split(" "),
     "ARCANE_CULTIST 25 100 decay _ _ txt".split(" "),
@@ -136,7 +136,7 @@ export class FamilyBonus {
         if (player && player.classId == this.classIndex && player.playerID == this.playerID) {
             familyManBoost += player.getTalentBonus(144) / 100;
         }
-
+        
         return rounding ? round(this.value * familyManBoost) : this.value * familyManBoost;
     }
 }
@@ -159,7 +159,7 @@ export const calculateFamily = (players: Player[]) => {
             familyManBoost += highestFamilyGuy.getTalentBonus(144) / 100;
         }
         const familyBonus = lavaFunc(bonusData[3], highestLevel.level - Number(classAccountBonus[highestLevel.classId][1]), Number(bonusData[1]), Number(bonusData[2]), false);
-        family.classBonus.set(highestLevel.classId, new FamilyBonus(highestLevel.classId, bonusData[0], familyBonus * familyManBoost, highestLevel.classId));
+        family.classBonus.set(highestLevel.classId, new FamilyBonus(highestLevel.classId, bonusData[0], familyBonus * familyManBoost, highestLevel.playerID));
         FamilyBonusRelations[highestLevel.classId].forEach((subClass) => {
             const bonusData = familyBonusMapping[subClass];
             const subClassFamilyBonus = lavaFunc(bonusData[3], highestLevel.level - Number(classAccountBonus[subClass][1]), Number(bonusData[1]), Number(bonusData[2]), false)
