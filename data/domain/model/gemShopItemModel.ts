@@ -3,7 +3,8 @@
 export interface GemShopItemModel {
     section: string,
     name: string,
-    itemName: string,
+    mtxName: string,
+    itemDisplayName: string,
     desc: string,
     cost: number,
     no: number,
