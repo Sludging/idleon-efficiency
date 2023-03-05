@@ -68,3 +68,5 @@ profiles/*
 *.md
 some icons for w5
 profile_local/*
+apk/**
+base.apk
