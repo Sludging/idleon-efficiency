@@ -186,7 +186,7 @@ export class Item {
             this.miscUp2 = data.item.miscUp2 ?? '';
             this.upgradeSlots = data.item.Upgrade_Slots_Left ?? 0;
 
-            this.itemStats.push(new ItemStat("Weapon Power", "Weapon_Power", data.item.Weapon_Power));
+            //this.itemStats.push(new ItemStat("Weapon Power", "Weapon_Power", data.item.Weapon_Power));
             this.itemStats.push(new ItemStat("STR", "STR", data.item.STR));
             this.itemStats.push(new ItemStat("AGI", "AGI", data.item.AGI));
             this.itemStats.push(new ItemStat("WIS", "WIS", data.item.WIS));
@@ -217,7 +217,7 @@ export class Item {
         if (isWeaponModel(data.item)) {
             this.speed = data.item.Speed ?? 0;
             this.reach = data.item.Reach ?? 0;
-
+            this.itemStats.push(new ItemStat("Weapon Power", "Weapon_Power", data.item.Weapon_Power));
             this.itemStats.push(new ItemStat("Speed", "Speed", data.item.Speed));
             this.itemStats.push(new ItemStat("Reach", "Reach", data.item.Reach));
         }
