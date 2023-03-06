@@ -262,7 +262,7 @@ function EggDisplay() {
         const taskBoard = theData.get("taskboard") as TaskBoard;
 
         if (gemStore && breeding) {
-            const eggCapacityUpgrade = gemStore.purchases.find(purchase => purchase.itemName == "Royal Egg Cap")?.pucrhased ?? 0;
+            const eggCapacityUpgrade = gemStore.purchases.find(purchase => purchase.no == 119)?.pucrhased ?? 0;
             const breedingUpgradeLevel = breeding?.upgrade.find(upgrade => upgrade.data.upgradeName == "Egg Capacity")?.level ?? 0;
             const eggMerit = taskBoard.merits.find(merit => merit.descLine1.includes("egg capacity in the Nest"));
             return 3 + eggCapacityUpgrade + breedingUpgradeLevel + (eggMerit ? eggMerit.level * eggMerit.bonusPerLevel : 0);
