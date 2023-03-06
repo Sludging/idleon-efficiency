@@ -182,7 +182,7 @@ export const parseForge = (forgeItemQuantity: number[], forgeProgress: number[],
 }
 
 export const updateForge = (forge: Forge, gemStore: GemStore) => {
-    const brimeStoneBought = gemStore.purchases.find(purchase => purchase.itemName == "Brimstone Forge Slot")?.pucrhased ?? 0;
+    const brimeStoneBought = gemStore.purchases.find(purchase => purchase.no == 104)?.pucrhased ?? 0;
     forge.slots.forEach((slot, index) => {
         if (index < brimeStoneBought)
             slot.brimestone = true;
