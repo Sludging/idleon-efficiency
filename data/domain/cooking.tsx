@@ -424,7 +424,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const zerkerBonus = cooking.bestBerserker?.talents.find(talent => talent.skillIndex == 148)?.getBonus(false, false, true) ?? 0;
 
     cooking.kitchens.forEach(kitchen => {
-        kitchen.richelin = (gemStore.purchases.find(purchase => purchase.itemName == "Richelin Kitchen")?.pucrhased ?? -1) > kitchen.index;
+        kitchen.richelin = (gemStore.purchases.find(purchase => purchase.no == 120)?.pucrhased ?? -1) > kitchen.index;
     });
 
     const jewelMealBonus = mainframe.jewels[16].active ? mainframe.jewels[16].getBonus() : 0; // TODO: Remove hardcoding
