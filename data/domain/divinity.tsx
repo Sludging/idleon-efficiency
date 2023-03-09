@@ -161,13 +161,14 @@ export const updateDivinity = (data: Map<string, any>) => {
 
     // Update the linked player to each god by iterating on each player's data.
     divinity.playerInfo.forEach(player => {
-        // Don't do anything if not linked.
-        if (!player.god) {
-            return
+        if (player.god) {
+            player.god.linkedPlayers.push(players[player.playerIndex]);
         }
-        player.god.linkedPlayers.push(players[player.playerIndex]);
-    })
 
+        if (player.esGod) {
+            player.esGod.linkedPlayers.push(players[player.playerIndex]);
+        }
+    })
 
     return divinity;
 }
