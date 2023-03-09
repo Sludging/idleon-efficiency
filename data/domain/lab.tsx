@@ -447,7 +447,8 @@ export const updateLab = (data: Map<string, any>) => {
     // 5. Bubo purple for extra line width.
 
     // Figure out which players are in lab first and sort by player id.
-    const playersInLab = [...playerData].filter(player => player.currentMonster?.id == "Laboratory" || divinity.playerInfo[player.playerID]?.god?.index == 1).sort((player1, player2) => player1.playerID > player2.playerID ? 1 : -1);
+    const playersInLab = [...playerData].filter(player => player.currentMonster?.id == "Laboratory" || divinity.playerInfo[player.playerID].isLinkedToGod(1)).sort((player1, player2) => player1.playerID > player2.playerID ? 1 : -1);
+
     lab.playersInTubes = playersInLab;
 
     // figure out w4 merit extra connection range;
