@@ -77,6 +77,10 @@ export class Shrine {
     }
 }
 
+export const initShrines = () => {
+    return Shrine.fromBase(initShrineRepo());
+}
+
 export default function parseShrines(rawData: Array<Array<number>>) {
     const shrineData = Shrine.fromBase(initShrineRepo());
     if (rawData) {

@@ -73,6 +73,10 @@ export class Quests {
     dialogData: Record<number, Record<string, number>> = {}
 }
 
+export const initQuests = () => {
+    return new Quests();
+}
+
 export default function parseQuests(doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], validCharCount: number) {
     const questsData = new Quests();
 

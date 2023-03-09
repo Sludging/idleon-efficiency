@@ -247,6 +247,10 @@ export class Dungeons {
     }
 }
 
+export const initDungeons = () => {
+    return new Dungeons();
+}
+
 export const parseDungeons = (upgrades: number[][], optList: number[]) => {
     const dungeons = new Dungeons();
 

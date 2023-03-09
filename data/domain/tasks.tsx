@@ -159,6 +159,10 @@ export class TaskBoard {
     }
 }
 
+export const initTaskboard = () => {
+    return new TaskBoard();
+}
+
 export default function parseTaskboard(taskInfo0: number[][], taskInfo1: number[][], taskInfo2: number[][], taskInfo3: number[][], taskInfo4: number[], taskInfo5: number[]) {
     const taskBoard = new TaskBoard()
 

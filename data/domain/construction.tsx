@@ -59,6 +59,10 @@ export class Construction {
     }
 }
 
+export const initConstruction = () => {
+    return new Construction();
+}
+
 export default function parseConstruction(towerData: number[], optionsList: any[]) {
     const construction = new Construction();
     construction.buildings.forEach((building) => {

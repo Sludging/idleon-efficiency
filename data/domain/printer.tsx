@@ -57,6 +57,10 @@ export class Printer {
     }
 }
 
+export const initPrinter = () => {
+    return new Printer();
+}
+
 export default function parsePrinter(printerData: any[], extraPrinterData: any[], charCount: number) {
     const toReturn = new Printer();
     if (printerData) {

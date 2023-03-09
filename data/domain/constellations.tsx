@@ -13,6 +13,10 @@ export class Constellation {
     }
 }
 
+export const initConstellations = () => {
+    return Constellation.fromBase(initConstellationsRepo());
+}
+
 export default function parseConstellations(constellationData: any[][]) {
     const constellations: Constellation[] = Constellation.fromBase(initConstellationsRepo());
 

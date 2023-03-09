@@ -136,6 +136,10 @@ export class Arcade {
     }
 }
 
+export const initArcade = () => {
+    return Arcade.fromBase(initArcadeBonusRepo());
+}
+
 export default function parseArcade(bonusArray: number[], optionList: number[]) {
     const arcade = Arcade.fromBase(initArcadeBonusRepo());
 

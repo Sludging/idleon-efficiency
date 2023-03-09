@@ -128,6 +128,12 @@ export class Refinery {
     shinyBonusSpeed: number = 0;
 }
 
+export const initRefinery = () => {
+    return new Refinery();   
+}
+
+
+// TODO: Should probably init all salts + costs at construction time and mark as locked/unlocked.
 export default function parseRefinery(rawData: any[][]) {
     const toReturn = new Refinery();
     const costRepo = initRefineryCostRepo();

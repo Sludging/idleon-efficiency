@@ -21,6 +21,10 @@ export class Storage {
     }
 }
 
+export const initStorage = () => {
+    return new Storage();
+}
+
 export default function parseStorage(doc: Cloudsave, playerNames: string[], allItems: Item[], storageInvUsed: Record<string, number>) {
     const chestOrder: string[] = doc.get("ChestOrder");
     const chestQuantity: number[] = doc.get("ChestQuantity");

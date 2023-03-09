@@ -533,6 +533,9 @@ const achievOrdering = [
     ]
 ];
 
+export const initAchievements = () => {
+    return Achievement.fromBase(initAchievementRepo());
+}
 
 export default function parseAchievements(achiData: number[], steamData: number[]) {
     let toReturn = Achievement.fromBase(initAchievementRepo());

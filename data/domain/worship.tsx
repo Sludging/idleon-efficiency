@@ -114,6 +114,10 @@ export class Worship {
     }
 }
 
+export const initWorship = () => {
+    return new Worship();
+}
+
 export default function parseWorship(totemInfo: number[][]) {
     const worship = new Worship();
 

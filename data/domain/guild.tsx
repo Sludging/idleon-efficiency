@@ -46,20 +46,26 @@ export class GuildBonus {
 export class Guild {
     guildBonuses: GuildBonus[];
 
-    constructor(guildInfo: number[][]) {
+    constructor() {
         this.guildBonuses = GuildBonus.fromBase(initGuildBonusRepo());
-
-        if (guildInfo.length > 0) {
-            const bonuses = guildInfo[GuildConstants.BonusIndex]
-            bonuses.forEach((bonusLevel, index) => {
-                if (index < this.guildBonuses.length) {
-                    this.guildBonuses[index].level = bonusLevel;
-                }
-            })
-        }
     }
 }
 
+export const initGuild = () => {
+    return new Guild();
+}
+
 export default function parseGuild(guildInfo: number[][]) {
-    return new Guild(guildInfo);
+    const guild = new Guild();
+
+    if (guildInfo.length > 0) {
+        const bonuses = guildInfo[GuildConstants.BonusIndex]
+        bonuses.forEach((bonusLevel, index) => {
+            if (index < guild.guildBonuses.length) {
+                guild.guildBonuses[index].level = bonusLevel;
+            }
+        })
+    }
+
+    return guild;
 }

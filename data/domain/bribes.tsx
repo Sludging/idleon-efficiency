@@ -28,6 +28,10 @@ export class Bribe {
     }
 }
 
+export const initBribes = () => {
+    return Bribe.fromBase(initBribeRepo());
+}
+
 export default function parseBribes(bribesData: number[]) {
     let bribeArray = Bribe.fromBase(initBribeRepo());
     bribesData.forEach((bribe, index) => {

@@ -32,20 +32,26 @@ export class GemPurchase {
 export class GemStore {
     purchases: GemPurchase[];
 
-    constructor(rawData: number[]) {
+    constructor() {
         this.purchases = GemPurchase.fromBase(initGemShopRepo());
-        
-        rawData.forEach((data, index) => {
-            if (data > 0) {
-                let purchase = this.purchases.find(x => x.no == index);
-                if (purchase) {
-                    purchase.pucrhased = data;
-                }
-            }
-        })
     }
 }
 
+export const initGems = () => {
+    return new GemStore();
+}
+
 export default function parseGems(gemData: number[]) {
-    return new GemStore(gemData);
+    const gems = new GemStore();
+
+    gemData.forEach((data, index) => {
+        if (data > 0) {
+            let purchase = gems.purchases.find(x => x.no == index);
+            if (purchase) {
+                purchase.pucrhased = data;
+            }
+        }
+    })
+
+    return gems;
 }

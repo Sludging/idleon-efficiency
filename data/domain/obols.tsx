@@ -129,6 +129,10 @@ export class ObolsData {
     inventory: Map<ObolType,Obol[]> = new Map();
 }
 
+export const initObols = () => {
+    return new ObolsData();
+}
+
 export default function parseObols(doc: Cloudsave, charCount: number, allItems: Item[]) {
     const toReturn = new ObolsData();
 

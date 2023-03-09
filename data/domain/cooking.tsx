@@ -378,6 +378,10 @@ const populateDiscovery = (cooking: Cooking) => {
     }
 }
 
+export const initCooking = () => {
+    return new Cooking();
+}
+
 export const parseCooking = (cookingData: number[][], mealsData: number[][]) => {
     const cooking = new Cooking();
 

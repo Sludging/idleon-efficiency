@@ -2,11 +2,22 @@ import { initSlabItemSortRepo } from './data/SlabItemSortRepo';
 import { Item } from './items'
 
 export class Slab {
-    obtainableItems: Item[] = [];
+    obtainableItems: Item[];
     // Keeping track of the raw number from cloudsave because it has fake items and therefore doesn't match up with our "realistic" obtainableItems array.
     rawObtainedCount: number = 0;
     // Keeping track of the max possible slab items to make it easy to display.
     obtainableCount: number = 0;
+
+    constructor(allItems: Item[]) {
+        this.obtainableItems = allItems.filter(item => item.data.slabSort != undefined);
+
+        // Sort all items based on slab sort to match up the game better.
+        this.obtainableItems.sort((item1, item2) => {
+            const item1Order = slabItems.find(item => item.item == item1.internalName)?.order ?? 0;
+            const item2Order = slabItems.find(item => item.item == item2.internalName)?.order ?? 0;
+            return item1Order > item2Order ? 1 : -1;
+        });
+    }
 }
 
 export const slabItems = initSlabItemSortRepo().map(slabItem => {
@@ -83,8 +94,12 @@ export const customHandCraftedListOfUnobtainableItems = [
     "Trophy7",
 ];
 
+export const initSlab = (allItems: Item[) => {
+    return new Slab(allItems);
+}
+
 export default function parseSlab(lootedInfo: string[], allItems: Item[]) {
-    let slab = new Slab();
+    let slab = new Slab(allItems);
     slab.obtainableItems = allItems.filter(item => item.data.slabSort != undefined);
 
     slab.obtainableItems.forEach(item => {

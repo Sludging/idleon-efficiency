@@ -154,6 +154,10 @@ export class Forge {
     }
 }
 
+export const initForge = () => {
+    return new Forge();
+}
+
 export const parseForge = (forgeItemQuantity: number[], forgeProgress: number[], forgeItemOrder: string[], forgeLevels: number[], allItems: Item[]) => {
     const forge = new Forge();
 

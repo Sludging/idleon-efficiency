@@ -56,6 +56,10 @@ export class SaltLick {
     }
 }
 
+export const initSaltLick = () => {
+    return new SaltLick();
+}
+
 export default function parseSaltLick(rawData: number[]) {
     const saltLick = new SaltLick();
     if (rawData) {

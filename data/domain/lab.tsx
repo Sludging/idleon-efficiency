@@ -306,6 +306,10 @@ export class Lab {
     }
 }
 
+export const initLab = () => {
+    return new Lab();
+}
+
 export const parseLab = (labData: number[][], charCount: number) => {
     const lab = new Lab();
 
