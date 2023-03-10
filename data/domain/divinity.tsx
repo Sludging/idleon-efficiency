@@ -65,10 +65,25 @@ export class DivinityGod {
 }
 
 export class PlayerDivinityInfo {
+    // es has a second god, jam it in here.
+    esGod: DivinityGod | undefined = undefined;
+
     constructor(public playerIndex: number, public style: DivinityStyleModel, public god: DivinityGod | undefined, public active: boolean = false) { }
 
     divinityPerHour = (): number => {
         return 0;
+    }
+
+    isLinkedToGod = (godIndex: number) => {
+        if (!this.esGod && !this.god) {
+            return false;
+        }
+
+        if (this.god && this.god.index == godIndex) {
+            return true;
+        }
+
+        return this.esGod && this.esGod.index == godIndex;
     }
 }
 
@@ -83,7 +98,7 @@ export class Divinity {
     offerings: GodOffering[] = [];
 }
 
-export default function parseDivinity(playerCount: number, divinityData: number[], afkTarget: string[]) {
+export default function parseDivinity(playerCount: number, divinityData: number[], afkTarget: string[], talentLevels: string[]) {
     const divinity = new Divinity();
 
     if (divinityData.length == 0) {
@@ -111,6 +126,15 @@ export default function parseDivinity(playerCount: number, divinityData: number[
         // Player is active if actually on divinity alter or using Goharut as god and being in lab.
         const isActive = afkTarget[playerIndex] == "Divinity" || (playerLinkedGod && playerLinkedGod.index == 4 && afkTarget[playerIndex] == "Laboratory")
         divinity.playerInfo.push(new PlayerDivinityInfo(playerIndex, mantraInfo[playerMantra].data, playerLinkedGod, isActive));
+
+        // Handle ES extra link talent.
+        if (talentLevels.length > playerIndex) { // This should never fail but better safe than sorry.
+            const playerTalents = JSON.parse(talentLevels[playerIndex]);
+            if (playerTalents[505] > 0) {
+                const godIndex = playerTalents[505] % 10;
+                divinity.playerInfo[playerIndex].esGod = divinity.gods[godIndex];
+            }
+        }
     });
 
     divinity.currentDivinity = divinityData[24];
@@ -137,13 +161,14 @@ export const updateDivinity = (data: Map<string, any>) => {
 
     // Update the linked player to each god by iterating on each player's data.
     divinity.playerInfo.forEach(player => {
-        // Don't do anything if not linked.
-        if (!player.god) {
-            return
+        if (player.god) {
+            player.god.linkedPlayers.push(players[player.playerIndex]);
         }
-        player.god.linkedPlayers.push(players[player.playerIndex]);
-    })
 
+        if (player.esGod) {
+            player.esGod.linkedPlayers.push(players[player.playerIndex]);
+        }
+    })
 
     return divinity;
 }
