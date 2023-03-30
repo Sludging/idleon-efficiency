@@ -11,20 +11,13 @@ import ShadowBox from "../../base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
 
 export function BuildingsDisplay() {
-    const [constructionData, setConstructionData] = useState<Construction>();
-    const [itemData, setItemData] = useState<Item[]>();
     const [hideMaxed, setHideMaxed] = useState(true);
-    const [storage, setStorage] = useState<Storage>();
     const appContext = useContext(AppContext);
 
-    useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setItemData(theData.get("itemsData"));
-            setStorage(theData.get("storage"));
-            setConstructionData(theData.get("construction"));
-        }
-    }, [appContext]);
+    const theData = appContext.data.getData();
+    const itemData = theData.get("itemsData") as Item[];
+    const storage = theData.get("storage") as Storage;
+    const constructionData = theData.get("construction") as Construction;
 
     const buildingsToShow = useMemo(() => {
         if (!constructionData) {
@@ -42,13 +35,6 @@ export function BuildingsDisplay() {
         return constructionData?.buildings.find(building => building.index == 5) as Building;
     }, [constructionData])
 
-    if (!constructionData || constructionData.buildings.filter(building => building.level > 0).length == 0) {
-        return (
-            <Box align="center" pad="medium">
-                <Heading level='3'>Come back when you unlocked this!</Heading>
-            </Box>
-        )
-    }
     return (
         <Box gap="medium" pad="large">
             <Box direction="row">

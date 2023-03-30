@@ -93,27 +93,13 @@ function PlayerTraps(props: PlayerTrapProps) {
 }
 
 function Traps() {
-    const [playerTraps, setPlayerTraps] = useState<Array<Array<Trap>>>(Array<Array<Trap>>());
-    const [playerNames, setPlayerNames] = useState<Array<string>>([]);
-    const [playerData, setPlayerData] = useState<Player[]>();
     const appContext = useContext(AppContext);
 
-    useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setPlayerTraps(theData.get("traps"));
-            setPlayerNames(theData.get("playerNames"));
-            setPlayerData(theData.get("players"));
-        }
-    }, [appContext]);
+    const theData = appContext.data.getData();
+    const playerTraps = theData.get("traps") as Trap[][];
+    const playerNames = theData.get("playerNames") as string[];
+    const playerData = theData.get("players") as Player[];
 
-    if (!playerTraps || playerTraps.filter(x => playerNames[x[0]?.playerID] != undefined).length == 0) {
-        return (
-            <Box align="center" pad="medium">
-                <Heading level='3'>Come back when you unlocked this!</Heading>
-            </Box>
-        )
-    }
     return (
         <Box>
             <NextSeo title="Traps" />

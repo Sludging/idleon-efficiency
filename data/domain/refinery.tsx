@@ -73,10 +73,14 @@ export class SaltStatus {
 
     getCap = () => {
         // The math.max(x,25) is taken from Lava's code, guess he got lazy to add more values after 25.
-        return parseInt(RankToPowerCap[Math.min(this.rank,25)]);
+        return parseInt(RankToPowerCap[Math.min(this.rank, 25)]);
     }
 
     getPowerPerCycle = () => {
+        // If salt isn't unlocked, just return 1 per cycle.
+        if (this.rank == 0) {
+            return 1
+        }
         return Math.floor(Math.pow(this.rank, 1.3));
     }
 
@@ -105,6 +109,11 @@ export class SaltStatus {
 
 
     getCostMulti = (salt: boolean, taskBought: boolean = false) => {
+        // For unranked salts, just show base costs.
+        if (this.rank == 0) { 
+            return 1;
+        }
+
         if (salt && taskBought) {
             return Math.floor(Math.pow(this.rank, 1.3));
         }
@@ -113,11 +122,11 @@ export class SaltStatus {
 }
 
 export class RefineryStorage {
-    constructor(public name: string, public quantity: number) {}
+    constructor(public name: string, public quantity: number) { }
 }
 
 export class CycleInfo {
-    constructor(public name: string, public cycleTime: number, public timePast: number) {}
+    constructor(public name: string, public cycleTime: number, public timePast: number) { }
 }
 
 export class Refinery {
@@ -129,17 +138,27 @@ export class Refinery {
 }
 
 export const initRefinery = () => {
-    return new Refinery();   
+    const refinery = new Refinery();
+    const costRepo = initRefineryCostRepo();
+
+    costRepo.forEach((salt, index) => {
+        // Init cycle time as max time (900), will be updated in post processing to match reduced values.
+        refinery.cycleInfo["Combustion"] = new CycleInfo("Combustion", 900, 0);
+        refinery.cycleInfo["Synthesis"] = new CycleInfo("Synthesis", 900, 0);
+
+        const newSaltStatus = new SaltStatus()
+        newSaltStatus.baseCost = salt.data.cost.map(component => component as ComponentModel);
+        refinery.salts[`Refinery${index + 1}`] = newSaltStatus;
+    })
+    return refinery;
 }
 
 
-// TODO: Should probably init all salts + costs at construction time and mark as locked/unlocked.
 export default function parseRefinery(rawData: any[][]) {
     const toReturn = new Refinery();
-    const costRepo = initRefineryCostRepo();
     if (rawData.length > 0) {
         const unlockedSalts = rawData[0][0];
-        
+
         // Init cycle time as max time (900), will be updated in post processing to match reduced values.
         toReturn.cycleInfo["Combustion"] = new CycleInfo("Combustion", 900, rawData[0][1]);
         toReturn.cycleInfo["Synthesis"] = new CycleInfo("Synthesis", 900, rawData[0][2]);
@@ -172,7 +191,7 @@ export function updateRefinery(data: Map<string, any>) {
     const lab = data.get("lab") as Lab;
     const sigils = data.get("sigils") as Sigils;
     const alchemy = data.get("alchemy") as Alchemy;
-    const saltLick = data.get("saltLick") as SaltLick; 
+    const saltLick = data.get("saltLick") as SaltLick;
     const stamps = data.get("stamps") as Stamp[][];
     const family = data.get("family") as Family;
     const rift = data.get("rift") as Rift;

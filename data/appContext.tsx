@@ -9,7 +9,7 @@ import { sendEvent } from '../lib/gtag';
 import { FirestoreData } from './firebase/data';
 import { initAllItems } from './domain/items';
 import { Cloudsave } from './domain/cloudsave';
-import { IdleonData, updateIdleonData } from './domain/idleonData';
+import { IdleonData, initAccountDataKeys, updateIdleonData } from './domain/idleonData';
 
 export enum AppStatus {
   LiveData,
@@ -39,12 +39,14 @@ Known paths:
 
 
 export const AppProvider: React.FC<{ appLoading: boolean, data: { data: Map<string, any>, charNames: string[] } | undefined, domain: string, children?: React.ReactNode }> = ({ appLoading, data, domain, children }) => {
-  const [idleonData, setData] = useState<IdleonData>(new IdleonData(new Map(), undefined));
+  const allItems = useMemo(() => initAllItems(), []);
+  const baseAccountData = initAccountDataKeys(allItems);
+
+  const [idleonData, setData] = useState<IdleonData>(new IdleonData(baseAccountData, new Date()));
   const [appStatus, setAppStatus] = useState<AppStatus>(AppStatus.Loading);
   const [fireStore, setFireStore] = useState<FirestoreData | undefined>(undefined);
   const authContext = useContext(AuthContext);
   const user = authContext?.user;
-  const allItems = useMemo(() => initAllItems(), []);
 
   const handleStaticData = useCallback(async (profile: string, data: { data: Map<string, any>, charNames: string[] }) => {
     setAppStatus(AppStatus.Loading);
@@ -65,8 +67,8 @@ export const AppProvider: React.FC<{ appLoading: boolean, data: { data: Map<stri
     // if (appStatus != AppStatus.LiveData) {
     //   setAppStatus(AppStatus.Loading);
     // }
-    const newData = await updateIdleonData(cloudsave, charNames, companions, allItems, serverVars, false);
-    setData(newData);
+    //const newData = await updateIdleonData(cloudsave, charNames, companions, allItems, serverVars, false);
+    //setData(newData);
     sendEvent({
       action: "handle_snapshot",
       category: "engagement",

@@ -73,8 +73,38 @@ export class Quests {
     dialogData: Record<number, Record<string, number>> = {}
 }
 
-export const initQuests = () => {
-    return new Quests();
+export const initQuests = (allItems: Item[]) => {
+    const questsData = new Quests();
+
+    // Foreach NPC
+    Object.entries(questsData.npcData).forEach(([_, npc]) => {
+        // For each quest under this NPC
+        Object.entries(npc.data.quests).forEach(([_, quest]) => {
+            // init the array.
+            npc.convertedItemReqs[quest.Name!] = [];
+            npc.convertedRewards[quest.Name!] = [];
+
+            if (isItemQuestModel(quest)) {
+                quest.ItemReq.forEach((item) => {
+                    const theItem = allItems.find((parsedItem) => parsedItem.internalName == item.item)?.duplicate();
+                    if (theItem) {
+                        theItem.count = item.quantity;
+                        npc.convertedItemReqs[quest.Name!].push(theItem);
+                    }
+                })
+            }
+    
+            quest.Rewards.forEach((item) => {
+                const theItem = allItems.find((parsedItem) => parsedItem.internalName == item.item)?.duplicate();
+                if (theItem) {
+                    theItem.count = item.quantity;
+                    npc.convertedRewards[quest.Name!].push(theItem);
+                }
+            })
+        });
+    });
+
+    return questsData;
 }
 
 export default function parseQuests(doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], validCharCount: number) {

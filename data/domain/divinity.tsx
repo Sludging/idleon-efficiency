@@ -102,6 +102,10 @@ export class Divinity {
     offerings: GodOffering[] = [];
 }
 
+export const initDivinity = () => {
+    return new Divinity();
+}
+
 export default function parseDivinity(playerCount: number, divinityData: number[], afkTarget: string[], talentLevels: string[]) {
     const divinity = new Divinity();
 

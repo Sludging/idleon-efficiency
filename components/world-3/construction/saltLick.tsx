@@ -8,25 +8,22 @@ import { nFormatter } from "../../../data/utility";
 import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
 import TextAndLabel from "../../base/TextAndLabel";
+import { Construction } from "../../../data/domain/construction";
 
 export function SaltLickDisplay() {
-    const [saltLickData, setSaltLickData] = useState<SaltLick>();
-    const [refineryData, setRefineryData] = useState<Refinery>();
-    const [itemData, setItemData] = useState<Item[]>();
-    const [storage, setStorage] = useState<Storage>();
     const [hideMaxed, setHideMaxed] = useState(true);
     const appContext = useContext(AppContext);
 
-    useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setItemData(theData.get("itemsData"));
-            setStorage(theData.get("storage"));
-            setRefineryData(theData.get("refinery"));
-            setSaltLickData(theData.get("saltLick"));
-        }
-    }, [appContext]);
+    const theData = appContext.data.getData();
+    const saltLickData = theData.get("saltLick") as SaltLick;
+    const refineryData = theData.get("refinery") as Refinery;
+    const itemData = theData.get("itemsData") as Item[];
+    const storage = theData.get("storage") as Storage;
+    const construction = theData.get("construction") as Construction;
 
+    const saltLickBuildingLevel = construction.buildings[3].level
+
+    // Probably doesn't need .. useMemo? Need to check with react docs.
     const bonusesToShow = useMemo(() => {
         if (!saltLickData) {
             return [];
@@ -38,14 +35,6 @@ export function SaltLickDisplay() {
 
         return saltLickData.bonuses;
     }, [saltLickData, hideMaxed])
-
-    if (!saltLickData || saltLickData.bonuses.filter(bonus => bonus.level ?? 0 > 0).length == 0) {
-        return (
-            <Box align="center" pad="medium">
-                <Heading level='3'>Come back when you unlocked this!</Heading>
-            </Box>
-        )
-    }
 
     return (
         <Box>
@@ -69,7 +58,7 @@ export function SaltLickDisplay() {
                         const costToMax = saltLickData.getCostToMax(bonus.index);
                         const costToNextLevel = saltLickData.getCost(bonus.index);
                         return (
-                            <ShadowBox key={index} background="dark-1" pad="medium" direction="row" align="center" justify="between" margin={{ bottom: 'small' }}>
+                            <ShadowBox key={index} background="dark-1" pad="medium" direction="row" align="center" justify="between" margin={{ bottom: 'small' }} style={{opacity: saltLickBuildingLevel < bonus.index + 1 ? 0.5 : 1}}>
                                 <Grid columns={["35%", "10%", "20%", "15%", "15%"]} fill gap="small" align="center">
                                     <TextAndLabel textSize='small' text={saltLickData.getBonusText(bonus.index)} label="Bonus" />
                                     <TextAndLabel text={`${bonus.level} / ${bonus.data.maxLevel}`} label="Level" />

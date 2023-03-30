@@ -269,6 +269,10 @@ export class Sailing {
     }
 }
 
+export const initSailing = () => {
+    return new Sailing();
+}
+
 export default function parseSailing(sailingData: number[][], boatData: number[][], captainData: number[][]) {
     const sailing = new Sailing();
 

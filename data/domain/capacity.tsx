@@ -439,6 +439,10 @@ export class Capacity {
     }
 }
 
+export const initCapacity = () => {
+    return new Capacity();
+}
+
 // Accepts an array of `MaxCarryCap_<x>` data from each player.
 export default function parseCapacity(maxCapacities: Map<string, number>[]) {
     const capacity = new Capacity();

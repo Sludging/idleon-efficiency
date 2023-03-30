@@ -293,7 +293,7 @@ export class Vial {
 
     getBackgroundImageData = (): ImageData => {
         return {
-            location: `aVials${this.level}`,
+            location: `aVials${Math.max(this.level, 1)}`,
             width: 104,
             height: 120
         };
@@ -537,11 +537,14 @@ const convertToItemClass = (alchemy: Alchemy, allItems: Item[]) => {
     })
 }
 
-export const initAlchemy = () => {
-    return Alchemy.fromBase(initBubbleRepo());
+export const initAlchemy = (allItems: Item[]) => {
+    const alchemy = Alchemy.fromBase(initBubbleRepo());
+    convertToItemClass(alchemy, allItems);
+
+    return alchemy;
 }
 
-export default function parseAlchemy(alchemyData: Array<Map<string, number>>, boostLevels: Array<number>, allItems: Item[]) {
+export default function parseAlchemy(alchemyData: Array<Map<string, number>>, boostLevels: Array<number>) {
     var alchemy = Alchemy.fromBase(initBubbleRepo());
     alchemyData.forEach((indexData, index) => {
         // Handle cauldrons if the first 4 arrays of data
@@ -554,7 +557,6 @@ export default function parseAlchemy(alchemyData: Array<Map<string, number>>, bo
         }
     })
 
-    convertToItemClass(alchemy, allItems);
     return alchemy;
 }
 

@@ -115,7 +115,13 @@ export class Worship {
 }
 
 export const initWorship = () => {
-    return new Worship();
+    const worship = new Worship();
+
+    [...Array(6)].forEach((_, index) => {
+        worship.totemInfo.push(new Totem(totemNames[index].replace(/_/g, " "), MapInfo[totemMapIds[index]], 0, index));
+    });
+
+    return worship;
 }
 
 export default function parseWorship(totemInfo: number[][]) {

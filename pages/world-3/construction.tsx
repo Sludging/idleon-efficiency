@@ -25,7 +25,7 @@ import { lavaLog, nFormatter, range, toTime } from '../../data/utility';
 import { StaticTime, TimeDisplaySize, TimeDown } from '../../components/base/TimeDisplay';
 import { Printer, Sample } from '../../data/domain/printer';
 import { Player } from '../../data/domain/player';
-import { CircleInformation, Star, StatusWarning, Trash } from 'grommet-icons';
+import { CircleInformation, Info, Star, StatusWarning, Trash } from 'grommet-icons';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 import { Deathnote } from '../../data/domain/deathnote';
 import { EnemyInfo } from '../../data/domain/enemies';
@@ -43,61 +43,66 @@ import { Sailing } from '../../data/domain/sailing';
 
 
 function RefineryDisplay() {
-    const [playerData, setPlayerData] = useState<Player[]>();
-    const [refineryData, setRefineryData] = useState<Refinery>();
-    const [storage, setStorage] = useState<Storage>();
-    const [itemData, setItemData] = useState<Item[]>();
-    const [taskboardData, setTaskboardData] = useState<TaskBoard>();
-    const [lastUpdated, setLastUpdated] = useState<Date | undefined>();
     const [squirePowha, setSquirePowha] = useState<boolean>(false);
-    const [printer, setPrinter] = useState<Printer>();
+
     const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
 
+    const theData = appContext.data.getData();
+    const lastUpdated = appContext.data.getLastUpdated(true) as Date;
+    const refineryData = theData.get("refinery") as Refinery;
+    const itemData = theData.get("itemsData") as Item[];
+    const storage = theData.get("storage") as Storage;
+    const playerData = theData.get("players") as Player[];
+    const taskboardData = theData.get("taskboard") as TaskBoard;
+    const printer = theData.get("printer") as Printer;
+
     const squireInfo = useMemo(() => {
-        const squires = playerData?.filter(player => (player.classId == ClassIndex.Squire || player.classId == ClassIndex.Divine_Knight));
+        const squires = playerData.filter(player => (player.classId == ClassIndex.Squire || player.classId == ClassIndex.Divine_Knight));
         return squires;
     }, [playerData])
+
+    const saltsUnlocked = useMemo(() => {
+        return Object.entries(refineryData.salts).some(([_, info]) => info.rank > 0);
+    }, [refineryData]);
 
     const squireTimeSave = useMemo(() => {
         const theSlowRockMethod = () => {
             const toReturn: number[] = [];
-            if (refineryData?.salts) {
-                Object.entries(refineryData.salts).forEach(([salt, info], index) => {
-                    const currentCooldowns: [Player, number][] = [];
-                    squireInfo && squireInfo.forEach(squire => {
-                        currentCooldowns.push([squire, squire.getCurrentCooldown(130)]);
-                    });
-                    let totalWait = 0;
-                    const refineryCycle = Math.floor(index / 3) == 0 ? refineryData.cycleInfo["Combustion"] : refineryData.cycleInfo["Synthesis"];
-                    let timeToNextRank = info.getTimeToNextRank(refineryCycle.cycleTime);
-                    while (timeToNextRank > 0) {
-                        const nextCDTime = Math.min(...currentCooldowns.map(cooldowns => cooldowns[1]));
-                        if (timeToNextRank > nextCDTime) {
-                            totalWait += nextCDTime;
-                            timeToNextRank -= nextCDTime;
-                            currentCooldowns.forEach(([squire, _], squireIndex, originalArray) => {
-                                originalArray[squireIndex][1] -= nextCDTime; // adjust the actual array data
-                                if (originalArray[squireIndex][1] == 0) {
-                                    const manaBox = squire.postOffice.find(box => box.name == "Magician Starterpack");
-                                    const cdReduction = manaBox?.bonuses[2].getBonus(manaBox.level, 2) ?? 0;
-                                    originalArray[squireIndex][1] = Math.floor((1 - cdReduction / 100) * 72000);
-                                    const timePerSquireSkilluse = (squire.talents.find(talent => talent.skillIndex == 130)?.getBonus(false, false, true) ?? 0) * refineryCycle.cycleTime
-                                    timeToNextRank -= timePerSquireSkilluse;
-                                    if (timeToNextRank < 0) {
-                                        timeToNextRank = 0;
-                                    }
+            Object.entries(refineryData.salts).forEach(([salt, info], index) => {
+                const currentCooldowns: [Player, number][] = [];
+                squireInfo && squireInfo.forEach(squire => {
+                    currentCooldowns.push([squire, squire.getCurrentCooldown(130)]);
+                });
+                let totalWait = 0;
+                const refineryCycle = Math.floor(index / 3) == 0 ? refineryData.cycleInfo["Combustion"] : refineryData.cycleInfo["Synthesis"];
+                let timeToNextRank = info.getTimeToNextRank(refineryCycle.cycleTime);
+                while (timeToNextRank > 0) {
+                    const nextCDTime = Math.min(...currentCooldowns.map(cooldowns => cooldowns[1]));
+                    if (timeToNextRank > nextCDTime) {
+                        totalWait += nextCDTime;
+                        timeToNextRank -= nextCDTime;
+                        currentCooldowns.forEach(([squire, _], squireIndex, originalArray) => {
+                            originalArray[squireIndex][1] -= nextCDTime; // adjust the actual array data
+                            if (originalArray[squireIndex][1] == 0) {
+                                const manaBox = squire.postOffice.find(box => box.name == "Magician Starterpack");
+                                const cdReduction = manaBox?.bonuses[2].getBonus(manaBox.level, 2) ?? 0;
+                                originalArray[squireIndex][1] = Math.floor((1 - cdReduction / 100) * 72000);
+                                const timePerSquireSkilluse = (squire.talents.find(talent => talent.skillIndex == 130)?.getBonus(false, false, true) ?? 0) * refineryCycle.cycleTime
+                                timeToNextRank -= timePerSquireSkilluse;
+                                if (timeToNextRank < 0) {
+                                    timeToNextRank = 0;
                                 }
-                            })
-                        }
-                        else {
-                            totalWait += timeToNextRank
-                            timeToNextRank = 0;
-                        }
+                            }
+                        })
                     }
-                    toReturn.push(totalWait);
-                })
-            }
+                    else {
+                        totalWait += timeToNextRank
+                        timeToNextRank = 0;
+                    }
+                }
+                toReturn.push(totalWait);
+            })
             return toReturn;
         }
         if (squirePowha) {
@@ -115,27 +120,6 @@ function RefineryDisplay() {
 
     }, [taskboardData]);
 
-    useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setLastUpdated(appContext.data.getLastUpdated(true) as Date);
-            setRefineryData(theData.get("refinery"));
-            setItemData(theData.get("itemsData"));
-            setStorage(theData.get("storage"));
-            setPlayerData(theData.get("players"));
-            setTaskboardData(theData.get("taskboard"));
-            setPrinter(theData.get("printer"));
-        }
-    }, [appContext, refineryData]);
-
-    if (!refineryData || Object.entries(refineryData.salts).filter(([name, saltInfo]) => saltInfo.rank > 0).length == 0) {
-        return (
-            <Box align="center" pad="medium">
-                <Heading level='3'>Come back when you unlocked this!</Heading>
-            </Box>
-        )
-    }
-
     return (
         <Box gap="medium">
             <Box direction="row" wrap justify="center">
@@ -145,7 +129,10 @@ function RefineryDisplay() {
                             <ShadowBox margin={{ right: 'large', bottom: 'small' }} background="dark-1" key={index} gap="xsmall" pad="medium" align="center">
                                 <TextAndLabel center textSize='xsmall' labelSize='medium' text='Next cycle in' label={cycleInfo.name} />
                                 <Box>
-                                    <TimeDown addSeconds={cycleInfo.cycleTime - cycleInfo.timePast} resetToSeconds={cycleInfo.cycleTime} />
+                                    { saltsUnlocked ?
+                                    <TimeDown addSeconds={cycleInfo.cycleTime - cycleInfo.timePast} resetToSeconds={cycleInfo.cycleTime} /> :
+                                    <StaticTime fromSeconds={cycleInfo.cycleTime - cycleInfo.timePast} />
+                                    }
                                 </Box>
                                 <Text margin={{ top: 'small' }} color="accent-3" size="12px">* Might be off by a few seconds.</Text>
                                 <Text color="accent-3" size="12px">Max cycle is: {toTime(cycleInfo.cycleTime)}</Text>
@@ -198,10 +185,10 @@ function RefineryDisplay() {
             />
             <Text>This is WIP - fuel times don&apos;t account for printer or auto refine salt generation.</Text>
             {
-                refineryData?.salts && Object.entries(refineryData.salts).map(([salt, info], index) => {
-                    const saltItem = itemData?.find((item) => item.internalName == salt);
+                Object.entries(refineryData.salts).map(([salt, info], index) => {
+                    const saltItem = itemData.find((item) => item.internalName == salt);
                     const costItems = info.baseCost.map((cost) => cost.item);
-                    const storageItems = itemData?.filter((item) => costItems.includes(item.internalName)) ?? [];
+                    const storageItems = itemData.filter((item) => costItems.includes(item.internalName)) ?? [];
                     storageItems.forEach((storageItem) => {
                         const inSaltStorage = refineryData.storage.find((saltStorageItem) => saltStorageItem.name == storageItem.internalName);
                         const inChestStorage = storage?.chest.find((item) => item.internalName == storageItem.internalName)
@@ -214,7 +201,7 @@ function RefineryDisplay() {
 
                     if (saltItem) {
                         return (
-                            <ShadowBox key={index} background="dark-1">
+                            <ShadowBox key={index} background="dark-1" style={{opacity: info.rank == 0 ? 0.5 : 1}}>
                                 <Grid columns={size == "small" ? ["50%", "50%"] : ["15%", "20%", "25%", "20%", "20%"]}>
                                     <Box direction="row" gap="medium" align="center" background="dark-2" pad="medium" justify="center" fill>
                                         <Box align="center">
@@ -274,7 +261,7 @@ function RefineryDisplay() {
                                             <Box gap="xsmall">
                                                 {
                                                     info.baseCost && info.baseCost.map((costData, costIndex) => {
-                                                        const costItem = itemData?.find((item) => item.internalName == costData.item);
+                                                        const costItem = itemData.find((item) => item.internalName == costData.item);
                                                         const itemCost = costData.quantity * info.getCostMulti(costData.item.includes("Refinery"), index <= saltMeritLevel);
                                                         const cyclesPerHour = Math.ceil(3600 / refineryCycle.cycleTime);
                                                         const isSalt = costItem?.internalName.includes("Refinery");
@@ -385,10 +372,12 @@ function SampleBox({ sample, itemData, printing = false, slotUnlocked = false }:
 }
 
 function PrinterDisplay() {
-    const [playerData, setPlayerData] = useState<Player[]>();
-    const [printerData, setPrinterData] = useState<Printer>();
-    const [itemData, setItemData] = useState<Item[]>();
     const appContext = useContext(AppContext);
+    const theData = appContext.data.getData();
+
+    const itemData = theData.get("itemsData") as Item[];
+    const printerData = theData.get("printer") as Printer;
+    const playerData = theData.get("players") as Player[];
 
     const printerArtifact = useMemo(() => {
         if (appContext) {
@@ -402,6 +391,9 @@ function PrinterDisplay() {
         if (appContext && printerArtifact) {
             const theData = appContext.data.getData();
             const optLacc = theData.get("OptLacc");
+            if (!optLacc) {
+                return 0;
+            }
             return optLacc[125];
         }
         return 0;
@@ -413,27 +405,11 @@ function PrinterDisplay() {
         }
     }, [appContext, printerArtifact, daysSinceLastSample])
 
-    useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setItemData(theData.get("itemsData"));
-            setPrinterData(theData.get("printer"));
-            setPlayerData(theData.get("players"));
-        }
-    }, [appContext]);
-
     const masteroInfo = useMemo(() => {
         const masteroes = playerData?.filter(player => [ClassIndex.Maestro, ClassIndex.Voidwalker].includes(player.classId));
         return masteroes;
     }, [playerData])
 
-    if (!printerData || printerData.samples.flatMap(samples => samples).filter(sample => sample.item != "Blank").length == 0) {
-        return (
-            <Box align="center" pad="medium">
-                <Heading level='3'>Come back when you have some samples!</Heading>
-            </Box>
-        )
-    }
     return (
         <Box gap="medium">
             <Box direction="row" wrap justify="center">
@@ -497,7 +473,7 @@ function PrinterDisplay() {
                     </ShadowBox>
                 }
             </Box>
-            <ShadowBox background="dark-1" pad="large" width={{min: "780px"}}>
+            <ShadowBox background="dark-1" pad="large" width={{ min: "780px" }}>
                 <Table>
                     <TableHeader>
                         <TableRow>
@@ -519,7 +495,7 @@ function PrinterDisplay() {
                                                     // We might have samples that are only in the printing slot but already deleted, so only filter for blank and sample quantity bigger then 0)
                                                     samples.filter(sample => sample.quantity > 0 || sample.item == "Blank").map((sample, sampleIndex) => {
                                                         return (
-                                                            <SampleBox key={`sample_${sampleIndex}`} sample={sample} itemData={itemData} printing={false} slotUnlocked={sampleIndex < printerData.slotsUnlocked } />
+                                                            <SampleBox key={`sample_${sampleIndex}`} sample={sample} itemData={itemData} printing={false} slotUnlocked={sampleIndex < printerData.slotsUnlocked} />
                                                         )
                                                     })
                                                 }
@@ -660,23 +636,10 @@ function DeathnoteDisplay() {
 }
 
 function ShrinesDisplay() {
-    const [shrineData, setShrineData] = useState<Shrine[]>([]);
     const appContext = useContext(AppContext);
+    const theData = appContext.data.getData();
+    const shrineData = theData.get("shrines") as Shrine[];
 
-    useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setShrineData(theData.get("shrines"));
-        }
-    }, [appContext]);
-
-    if (!shrineData || shrineData.filter(shrine => shrine.level > 0).length == 0) {
-        return (
-            <Box align="center" pad="medium">
-                <Heading level='3'>Come back when you unlocked this!</Heading>
-            </Box>
-        )
-    }
     return (
         <Box gap="medium" pad="large">
             <TextAndLabel
@@ -684,9 +647,9 @@ function ShrinesDisplay() {
                 text={shrineData.reduce((sum, shrine) => sum += shrine.level, 0).toString()}
             />
             <Box>
-                {shrineData && shrineData.filter(shrine => shrine.level > 0).map((shrine, index) => {
+                {shrineData.map((shrine, index) => {
                     return (
-                        <ShadowBox key={index} background="dark-1" pad="medium" margin={{ bottom: 'small' }}>
+                        <ShadowBox key={index} background="dark-1" pad="medium" margin={{ bottom: 'small' }} style={{opacity: shrine.level == 0 ? 0.5 : 1}}>
                             <Box gap="small">
                                 <Box direction="row" align="center">
                                     <Box margin={{ right: 'small' }}>

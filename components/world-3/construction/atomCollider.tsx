@@ -12,16 +12,11 @@ import ShadowBox from "../../base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
 
 export function AtomColliderDisplay() {
-    const [atomCollider, setAtomCollider] = useState<AtomCollider>();
     const [hideMaxed, setHideMaxed] = useState(true);
     const appContext = useContext(AppContext);
 
-    useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setAtomCollider(theData.get("collider"));
-        }
-    }, [appContext]);
+    const theData = appContext.data.getData();
+    const atomCollider = theData.get("collider") as AtomCollider;
 
     const atomsToShow = useMemo(() => {
         if (!atomCollider) {
@@ -35,13 +30,6 @@ export function AtomColliderDisplay() {
         return atomCollider.atoms;
     }, [atomCollider, hideMaxed])
 
-    if (!atomCollider || atomCollider.atoms.filter(atom => atom.level > 0).length == 0) {
-        return (
-            <Box align="center" pad="medium">
-                <Heading level='3'>Come back when you unlocked this!</Heading>
-            </Box>
-        )
-    }
     return (
         <Box gap="medium" pad="large">
             <Box direction="row" gap="medium">

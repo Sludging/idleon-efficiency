@@ -224,10 +224,11 @@ function StampTab({ tab, index, highlight }: { tab: Stamp[], index: number, high
 }
 
 function Stamps() {
-    const [stampData, setStampData] = useState<Stamp[][]>();
     const appContext = useContext(AppContext);
     const theme = useContext(ThemeContext);
     const [highlight, sethighlight] = useState(false);
+    const theData = appContext.data.getData();
+    const stampData = theData.get("stamps") as Stamp[][];
 
     const hydrogen = useMemo(() => {
         if (appContext.data.getData().size > 0) {
@@ -245,24 +246,9 @@ function Stamps() {
         return 0;
     }, [stampData]);
 
-    useEffect(() => {
-        if (appContext.data.getData().size > 0) {
-            const theData = appContext.data.getData();
-            setStampData(theData.get("stamps"));
-        }
-    }, [appContext, stampData])
-
     const totalLevels = useMemo(() => {
         return stampData?.flatMap(tab => tab).reduce((sum, stamp) => sum += stamp.level, 0) ?? 0;
     }, [stampData])
-
-    if (stampData && stampData.flatMap(tab => tab).filter(stamp => stamp.level > 0).length == 0) {
-        return (
-            <Box align="center" pad="medium">
-                <Heading level='3'>Come back when you unlocked this!</Heading>
-            </Box>
-        )
-    }
 
     if (!stampData) {
         return (

@@ -54,6 +54,10 @@ export class Sigils {
     }
 }
 
+export const initSigils = () => {
+    return new Sigils();
+}
+
 export default function parseSigils(cauldronP2w: number[][], cauldronJobs1: number[]) {
     const sigils = new Sigils();
 

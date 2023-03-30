@@ -61,7 +61,8 @@ export class Shrine {
     }
 
     getHourRequirement = () => {
-        return Math.floor(20 * (this.level - 1) + 6 * this.level * Math.pow(1.63, this.level - 1))
+        const shrineLevel = Math.max(this.level, 1);
+        return Math.floor(20 * (shrineLevel - 1) + 6 * shrineLevel * Math.pow(1.63, shrineLevel - 1))
     }
 
     getImageData = (): ImageData => {

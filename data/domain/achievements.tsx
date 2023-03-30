@@ -534,7 +534,28 @@ const achievOrdering = [
 ];
 
 export const initAchievements = () => {
-    return Achievement.fromBase(initAchievementRepo());
+    const achievements = Achievement.fromBase(initAchievementRepo());
+
+    achievements.forEach((achievement, index) => {
+        const reminder = Math.floor(index / 70);
+        let letter = 'A';
+        if (reminder == 1) {
+            letter = 'B';
+        }
+        if (reminder == 2) {
+            letter = 'C';
+        }
+        if (reminder == 3) {
+            letter = 'D';
+        }
+        achievement.arrayIndex = index + 1;
+        achievement.visualIndex = achievOrdering[reminder].indexOf(index - (70 * reminder));
+        achievement.worldLetter = letter;
+
+        achievement.baseName = `TaskAch${achievement.worldLetter}${achievement.arrayIndex - (70 * reminder)}`
+    })
+
+    return achievements
 }
 
 export default function parseAchievements(achiData: number[], steamData: number[]) {

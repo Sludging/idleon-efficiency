@@ -69,6 +69,10 @@ export class Deathnote {
     }
 }
 
+export const initDeathnote = () => {
+    return new Deathnote();
+}
+
 export default function parseDeathnote(klaData: string[]) {
     const deathNote = new Deathnote();
     // const doc = new Map<string, any>(Object.entries(accountData.get("rawData")));

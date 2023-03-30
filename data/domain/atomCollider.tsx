@@ -137,6 +137,10 @@ export class AtomCollider {
     }
 }
 
+export const initAtomCollider = () => {
+    return new AtomCollider();
+}
+
 export default function parseAtomCollider(atomsData: number[], divinityData: number[]) {
     const collider = new AtomCollider();
 

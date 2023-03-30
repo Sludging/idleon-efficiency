@@ -497,10 +497,9 @@ function Sailing() {
                     text={sailing.maxChests.toString()}
                     margin={{ right: 'small' }}
                 />
-
                 <TextAndLabel
                     label="Minimum Travel Time"
-                    text={`${Math.round(sailing.boats[0].minTravelTime)} min`}
+                    text={`${sailing.boats.length > 0 ? Math.round(sailing.boats[0].minTravelTime) : 120} min`}
                 />
             </Box>
             <Box margin={{ bottom: 'medium' }} gap="small">

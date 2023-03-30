@@ -145,6 +145,10 @@ export class Family {
     classBonus: Map<ClassIndex, FamilyBonus> = new Map()
 }
 
+export const initFamily = () => {
+    return new Family();
+}
+
 export const calculateFamily = (players: Player[]) => {
     const family = new Family();
 

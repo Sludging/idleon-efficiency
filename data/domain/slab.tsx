@@ -94,12 +94,21 @@ export const customHandCraftedListOfUnobtainableItems = [
     "Trophy7",
 ];
 
-export const initSlab = (allItems: Item[) => {
+export const initSlab = (allItems: Item[]) => {
     return new Slab(allItems);
 }
 
-export default function parseSlab(lootedInfo: string[], allItems: Item[]) {
+export default function parseSlab(rawItems: string[], allItems: Item[]) {
     let slab = new Slab(allItems);
+
+    // Clean up items that shouldn't be here, happens on older profiles.
+    const lootedInfo = rawItems.filter(item =>
+        item.indexOf("Cards") == -1 &&
+        item.indexOf("SailTr") == -1 &&
+        item != "Bits" &&
+        item.indexOf("Spice") == -1
+    )
+
     slab.obtainableItems = allItems.filter(item => item.data.slabSort != undefined);
 
     slab.obtainableItems.forEach(item => {

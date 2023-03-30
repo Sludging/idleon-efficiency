@@ -1280,6 +1280,10 @@ function Players() {
             }
         }
     }, [appContext, activePlayer, playerData]);
+
+    if (!playerData || playerData.length == 0) {
+        return <Box>Nothing to see here.</Box>
+    }
     return (
         <Box>
             <NextSeo title="Players" />

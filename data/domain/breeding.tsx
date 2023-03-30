@@ -381,6 +381,10 @@ export class Breeding {
     }
 
     getStatRange = () => {
+        if (this.skillLevel == 0) {
+            return [0, 0];
+        }
+        
         let baseMath = Math.pow(4 * this.skillLevel + Math.pow(this.skillLevel / 2, 3), 0.85);
         const eggRarity = Math.min(1, Math.max(...this.eggs.map(egg => egg.rarity)));
         const maxRange = Math.max(0.1, 1 - ((eggRarity + 4) / 12) * 0.9);
@@ -444,6 +448,10 @@ export const petArenaBonuses = [
 //     [0],
 //     [0]
 // ]
+
+export const initBreeding = () => {
+    return new Breeding();
+}
 
 export const parseBreeding = (petsStored: any[][], pets: any[][], optionsList: any[], territory: any[][], breedingData: number[][]) => {
     const breeding = new Breeding();

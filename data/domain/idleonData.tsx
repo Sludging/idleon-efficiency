@@ -22,26 +22,26 @@ import parseConstruction, { initConstruction, updateConstruction } from './const
 import parseCards, { updateCards, initCards } from './cards';
 import parseArcade, { initArcade, updateArcade } from './arcade';
 import parseObols, { initObols } from './obols';
-import { calculateFamily } from './family';
+import { calculateFamily, initFamily } from './family';
 import { initDungeons, parseDungeons } from './dungeons';
 import { initForge, parseForge, updateForge } from './forge';
 import { initCooking, parseCooking, updateCooking } from './cooking';
 import { initLab, parseLab, updateLab } from './lab';
-import { parseBreeding, updateAllShinyEffects, updateBreeding } from './breeding';
+import { initBreeding, parseBreeding, updateAllShinyEffects, updateBreeding } from './breeding';
 import { notUndefined } from '../utility';
-import parseSigils, { updateSigils } from './sigils';
+import parseSigils, { initSigils, updateSigils } from './sigils';
 import { initAnvil, parseAnvil, updateAnvil } from './anvil';
-import { updateAlerts } from './alerts';
-import { parseAccount, updateAccount } from './account';
-import parseDivinity, { updateDivinity } from './divinity';
-import parseSailing, { updateMinTravelTime, updateSailing } from './sailing';
-import parseGaming, { updateGaming, updateSuperbitImpacts } from './gaming';
-import parseAtomCollider, { updateAtomCollider } from './atomCollider';
+import { initAlerts, updateAlerts } from './alerts';
+import { initAccount, parseAccount, updateAccount } from './account';
+import parseDivinity, { initDivinity, updateDivinity } from './divinity';
+import parseSailing, { initSailing, updateMinTravelTime, updateSailing } from './sailing';
+import parseGaming, { updateGaming, updateSuperbitImpacts, initGaming } from './gaming';
+import parseAtomCollider, { initAtomCollider, updateAtomCollider } from './atomCollider';
 import { updateArtifacts } from './sailing/artifacts';
 import parseConstellations, { initConstellations } from './constellations';
 import parseSlab, { initSlab } from './slab';
-import parseCapacity, { updateCapacity } from './capacity';
-import parseDeathnote, { updateDeathnote } from './deathnote';
+import parseCapacity, { initCapacity, updateCapacity } from './capacity';
+import parseDeathnote, { updateDeathnote, initDeathnote } from './deathnote';
 import parseRift from './rift';
 import parseCompanions, { updateCompanionImpact } from './companions';
 
@@ -57,9 +57,9 @@ export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T
 
 export class IdleonData {
     private data: Map<string, any>
-    private lastUpdated?: Date
+    private lastUpdated: Date
 
-    constructor(data: Map<string, any>, lastUpdated?: Date) {
+    constructor(data: Map<string, any>, lastUpdated: Date) {
         this.data = data;
         this.lastUpdated = lastUpdated;
     }
@@ -87,17 +87,17 @@ export class IdleonData {
     }
 }
 
-const initAccountDataKeys = (accountData: Map<string, any>) => {
-    const charCount = accountData.get("charCount");
-    const allItems = accountData.get("itemsData");
-    accountData.set("stamps", initStamps(accountData.get("itemsData")));
-    accountData.set("traps", initTraps(charCount));
-    accountData.set("statues", initStatues(charCount));
-    accountData.set("anvil", initAnvil(charCount));
+export const initAccountDataKeys = (allItems: Item[]) => {
+    //const charCount = accountData.get("charCount");
+    const accountData = new Map<string, any>();
+    accountData.set("stamps", initStamps(allItems));
+    accountData.set("traps", initTraps(0));
+    accountData.set("statues", initStatues(0));
+    accountData.set("anvil", initAnvil(0));
     accountData.set("prayers", initPrayers());
     accountData.set("cards", initCards());
-    accountData.set("players", initPlayers(charCount, accountData.get("playerNames")));
-    accountData.set("alchemy", initAlchemy());
+    accountData.set("players", initPlayers(0, accountData.get("playerNames")));
+    accountData.set("alchemy", initAlchemy(allItems));
     accountData.set("bribes", initBribes());
     accountData.set("guild", initGuild());
     accountData.set("gems", initGems());
@@ -107,7 +107,7 @@ const initAccountDataKeys = (accountData: Map<string, any>) => {
     accountData.set("shrines", initShrines());
     accountData.set("storage", initStorage());
     accountData.set("constellations", initConstellations());
-    accountData.set("quests", initQuests());
+    accountData.set("quests", initQuests(allItems));
     accountData.set("refinery", initRefinery());
     accountData.set("saltLick", initSaltLick());
     accountData.set("printer", initPrinter());
@@ -120,17 +120,19 @@ const initAccountDataKeys = (accountData: Map<string, any>) => {
     accountData.set("forge", initForge());
     accountData.set("cooking", initCooking());
     accountData.set("lab", initLab());
-    accountData.set("breeding", undefined);
-    accountData.set("sigils", undefined);
-    accountData.set("account", undefined);
-    accountData.set("divinity", undefined);
-    accountData.set("sailing", undefined);
-    accountData.set("gaming", undefined);
-    accountData.set("collider", undefined);
-    accountData.set("capacity", undefined);
-    accountData.set("deathnote", undefined);
-    accountData.set("family", undefined);
-    accountData.set("alerts", undefined);
+    accountData.set("breeding", initBreeding());
+    accountData.set("sigils", initSigils());
+    accountData.set("account", initAccount());
+    accountData.set("divinity", initDivinity());
+    accountData.set("sailing", initSailing());
+    accountData.set("gaming", initGaming());
+    accountData.set("collider", initAtomCollider());
+    accountData.set("capacity", initCapacity());
+    accountData.set("deathnote", initDeathnote());
+    accountData.set("family", initFamily());
+    accountData.set("alerts", initAlerts());
+    accountData.set("itemsData", allItems);
+    return accountData;
 }
 
 
@@ -253,7 +255,7 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], com
 
     const validCharCount = [...Array(charNames.length)].map((_, i) => data.get(`Lv0_${i}`) as number[]).filter(notUndefined).length;
     accountData.set("charCount", validCharCount);
-    initAccountDataKeys(accountData);
+    //initAccountDataKeys(accountData);
     Object.entries(keyFunctionMap).forEach(([key, toExecute]) => {
         try {
             if (key == "players" || key == "storage" || key == "quests") {

@@ -2,10 +2,11 @@ import { nFormatter, round } from "../utility"
 import { Achievement } from "./achievements";
 import { Alchemy } from "./alchemy";
 import { AtomCollider } from "./atomCollider";
-import { Breeding } from "./breeding";
+import { Breeding, territoryNiceNames } from "./breeding";
 import { Card } from "./cards";
 import { initMealRepo, MealBase } from "./data/MealRepo";
 import { Gaming, TotalizerBonus } from "./gaming";
+import { initTerritoryFightRepo } from "./data/TerritoryFightRepo";
 import { GemStore } from "./gemPurchases";
 import { ImageData } from "./imageData";
 import { Lab } from "./lab";
@@ -185,9 +186,9 @@ export class Kitchen {
     progress: number = -1;
     richelin: boolean = false;
 
-    mealSpeed: number = 0;
-    fireSpeed: number = 0;
-    recipeLuck: number = 0;
+    mealSpeed: number = 1;
+    fireSpeed: number = 1;
+    recipeLuck: number = 1;
 
     constructor(public index: number) { }
 
@@ -265,6 +266,7 @@ export class Cooking {
 
     constructor() {
         this.meals = Meal.fromBase(initMealRepo());
+        this.spices = [...Array(territoryNiceNames.length-1)].map(index => 0); 
     }
 
     getMaxMeals = () => {
@@ -379,7 +381,11 @@ const populateDiscovery = (cooking: Cooking) => {
 }
 
 export const initCooking = () => {
-    return new Cooking();
+    const cooking = new Cooking();
+
+    populateDiscovery(cooking);
+
+    return cooking;
 }
 
 export const parseCooking = (cookingData: number[][], mealsData: number[][]) => {

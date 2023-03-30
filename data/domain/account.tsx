@@ -125,6 +125,10 @@ export class Account {
     };
 }
 
+export const initAccount = () => {
+    return new Account();
+}
+
 export const parseAccount = (doc: Cloudsave, allItems: Item[]) => {
     const account = new Account();
     const accountOptions = doc.get("OptLacc") as string | number[];

@@ -127,6 +127,10 @@ export class Gaming {
     }
 }
 
+export const initGaming = () => {
+    return new Gaming();
+}
+
 export default function parseGaming(gamingData: any[], gamingSproutData: number[][], playerSkillLevels: number[][]) {
     const gaming = new Gaming();
 

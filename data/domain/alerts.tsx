@@ -272,6 +272,10 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], 
     return globalAlerts;
 }
 
+export const initAlerts = () => {
+    return new Alerts();
+}
+
 export const updateAlerts = (data: Map<string, any>) => {
     const alerts = new Alerts();
     const players = data.get("players") as Player[];
