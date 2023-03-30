@@ -31,20 +31,8 @@ function PetDisplay() {
     const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
 
-    useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setBreeding(theData.get("breeding"));
-        }
-    }, [appContext]);
-
-    if (!breeding) {
-        return (
-            <Box>
-                Still loading
-            </Box>
-        )
-    }
+    const theData = appContext.data.getData();
+    const breeding = theData.get("breeding") as BreedingDomain;
 
     return (
         <Box>
