@@ -1565,7 +1565,7 @@ export const initTalentTreeRepo = () => {
                     },
                     "Blocky Bottles": <TalentModel>{
                         "name": "Blocky Bottles",
-                        "description": "Each Lv of 'Warriors Only' Bubble raises max Lv of 'Meat Shank' Talent, up to +{",
+                        "description": "Each Lv of 'Warriors Rule' Bubble raises max Lv of 'Meat Shank' Talent, up to +{",
                         "x1": 1,
                         "x2": 0,
                         "funcX": "add",
@@ -2413,7 +2413,7 @@ export const initTalentTreeRepo = () => {
                         "y1": 2,
                         "y2": 15,
                         "funcY": "intervalAdd",
-                        "lvlUpText": "+{% Speed % +} Mins",
+                        "lvlUpText": "+{% Speed & +} Mins",
                         "skillIndex": 273,
                         "activeData": <ActiveTalentModel>{
                             "name": "Strafe",
@@ -5520,6 +5520,19 @@ export const initTalentTreeRepo = () => {
                         "funcY": "txt",
                         "lvlUpText": "+{% Chance",
                         "skillIndex": 651,
+                        "activeData": undefined
+                    },
+                    "Stat Overload": <TalentModel>{
+                        "name": "Stat Overload",
+                        "description": "+{ total STR, AGI, WIS, and LUK. Total means this bonus is not affected by +% ALL STAT.",
+                        "x1": 1,
+                        "x2": 0,
+                        "funcX": "add",
+                        "y1": 0,
+                        "y2": 0,
+                        "funcY": "txt",
+                        "lvlUpText": "+{ All Stat",
+                        "skillIndex": 652,
                         "activeData": undefined
                     }
                 }
