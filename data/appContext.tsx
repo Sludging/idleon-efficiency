@@ -39,8 +39,9 @@ Known paths:
 
 
 export const AppProvider: React.FC<{ appLoading: boolean, data: { data: Map<string, any>, charNames: string[] } | undefined, domain: string, children?: React.ReactNode }> = ({ appLoading, data, domain, children }) => {
+  // This section is called multiple times so I used memos, is that .. an issue?
   const allItems = useMemo(() => initAllItems(), []);
-  const baseAccountData = initAccountDataKeys(allItems);
+  const baseAccountData = useMemo(() => initAccountDataKeys(allItems), []);
 
   const [idleonData, setData] = useState<IdleonData>(new IdleonData(baseAccountData, new Date()));
   const [appStatus, setAppStatus] = useState<AppStatus>(AppStatus.Loading);

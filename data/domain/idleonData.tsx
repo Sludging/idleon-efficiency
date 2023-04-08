@@ -88,7 +88,6 @@ export class IdleonData {
 }
 
 export const initAccountDataKeys = (allItems: Item[]) => {
-    //const charCount = accountData.get("charCount");
     const accountData = new Map<string, any>();
     accountData.set("stamps", initStamps(allItems));
     accountData.set("traps", initTraps(0));
