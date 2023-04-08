@@ -151,7 +151,7 @@ export const initItemDetailRepo = () => {
                 "Effect": "Ore",
                 "Trigger": "0",
                 "Amount": 2,
-                "Cooldown": 100
+                "Cooldown": 50
             }),
         new CommonItemBase("Iron", <ConsumableItemModel>{
                 "internalID": "Iron",
@@ -172,7 +172,7 @@ export const initItemDetailRepo = () => {
                 "Effect": "Ore",
                 "Trigger": "0",
                 "Amount": 4,
-                "Cooldown": 400
+                "Cooldown": 150
             }),
         new CommonItemBase("Gold", <ConsumableItemModel>{
                 "internalID": "Gold",
@@ -193,7 +193,7 @@ export const initItemDetailRepo = () => {
                 "Effect": "Ore",
                 "Trigger": "0",
                 "Amount": 7,
-                "Cooldown": 1000
+                "Cooldown": 350
             }),
         new CommonItemBase("Plat", <ConsumableItemModel>{
                 "internalID": "Plat",
@@ -214,7 +214,7 @@ export const initItemDetailRepo = () => {
                 "Effect": "Ore",
                 "Trigger": "0",
                 "Amount": 16,
-                "Cooldown": 2200
+                "Cooldown": 1000
             }),
         new CommonItemBase("Dementia", <ConsumableItemModel>{
                 "internalID": "Dementia",
@@ -235,7 +235,7 @@ export const initItemDetailRepo = () => {
                 "Effect": "Ore",
                 "Trigger": "0",
                 "Amount": 40,
-                "Cooldown": 3500
+                "Cooldown": 1500
             }),
         new CommonItemBase("Void", <ConsumableItemModel>{
                 "internalID": "Void",
@@ -256,7 +256,7 @@ export const initItemDetailRepo = () => {
                 "Effect": "Ore",
                 "Trigger": "0",
                 "Amount": 100,
-                "Cooldown": 6000
+                "Cooldown": 2500
             }),
         new CommonItemBase("Lustre", <ConsumableItemModel>{
                 "internalID": "Lustre",
@@ -277,7 +277,7 @@ export const initItemDetailRepo = () => {
                 "Effect": "Ore",
                 "Trigger": "0",
                 "Amount": 250,
-                "Cooldown": 12500
+                "Cooldown": 5000
             }),
         new CommonItemBase("Starfire", <ConsumableItemModel>{
                 "internalID": "Starfire",
@@ -298,7 +298,7 @@ export const initItemDetailRepo = () => {
                 "Effect": "Ore",
                 "Trigger": "0",
                 "Amount": 500,
-                "Cooldown": 25000
+                "Cooldown": 10000
             }),
         new CommonItemBase("Dreadlo", <ConsumableItemModel>{
                 "internalID": "Dreadlo",
@@ -319,7 +319,7 @@ export const initItemDetailRepo = () => {
                 "Effect": "Ore",
                 "Trigger": "0",
                 "Amount": 1000,
-                "Cooldown": 50000
+                "Cooldown": 20000
             }),
         new CommonItemBase("Godshard", <ConsumableItemModel>{
                 "internalID": "Godshard",
@@ -340,7 +340,7 @@ export const initItemDetailRepo = () => {
                 "Effect": "Ore",
                 "Trigger": "0",
                 "Amount": 5000,
-                "Cooldown": 100
+                "Cooldown": 60000
             }),
         new CommonItemBase("CopperBar", <CommonItemModel>{
                 "internalID": "CopperBar",
@@ -14070,7 +14070,7 @@ export const initItemDetailRepo = () => {
             }),
         new CommonItemBase("Pearl5", <QuestItemModel>{
                 "internalID": "Pearl5",
-                "displayName": "White Pearl",
+                "displayName": "Holy Pearl",
                 "sellPrice": 100,
                 "typeGen": TypeGenEnum.dQuest,
                 "ID": 0,

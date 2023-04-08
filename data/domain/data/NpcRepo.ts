@@ -1039,7 +1039,7 @@ export const initNpcRepo = () => {
                     },
                     "Champion of the Grasslands": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Go make me the 3 Blunderhill Tokens of Completion and you can have my Blunder Hero Trophy! Here's the token recipes. You'll find all their ingredients just from doing everything that this World has to offer!",
+                        "DialogueText": "Go make me the 3 Blunderhill Tokens of Completion and you can have my Blunder Hero Trophy! Here's the token recipes. You'll find all their ingredients just from doing everything that this World has to offer! <br> QUEST: Get the tokens and get given the Trophy!",
                         "NextIndex": 49,
                         "Name": "Champion of the Grasslands",
                         "ConsumeItems": true,
@@ -1365,7 +1365,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Go make me the 3 Blunderhill Tokens of Completion and you can have my Blunder Hero Trophy! Here's the token recipes. You'll find all their ingredients just from doing everything that this World has to offer!",
+                        "DialogueText": "Go make me the 3 Blunderhill Tokens of Completion and you can have my Blunder Hero Trophy! Here's the token recipes. You'll find all their ingredients just from doing everything that this World has to offer! <br> QUEST: Get the tokens and get given the Trophy!",
                         "NextIndex": 49,
                         "Name": "Champion of the Grasslands"
                     },
@@ -3556,7 +3556,7 @@ export const initNpcRepo = () => {
                 "dialogue": [
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Hallo! Welcome to tha Jungle. I am pleased to make your aquaintance! <br> QUEST:Go complete Scripticus' quests until he asks you for Foreign Aid... ok this isn't really a quest but Stiltzcho wont wanna talk to you until you do that!",
+                        "DialogueText": "Hallo! Welcome to tha Jungle. I am pleased to make your aquaintance! QUEST:Go complete Scripticus' quests until he asks you for Foreign Aid... ok this isn't really a quest but Stiltzcho wont wanna talk to you until you do that!",
                         "NextIndex": 0,
                         "Name": ""
                     },
@@ -4025,7 +4025,9 @@ export const initNpcRepo = () => {
                         "Rewards": [<ComponentModel>{"item": "StampC1", "quantity": 1}, <ExpRewardModel>{"item": "Experience0", "quantity": 7500}],
                         "QuestName": "Tiki Chief2",
                         "Difficulty": 3,
-                        "note": <NoteModel>{"note": "Drop the quest item in front of [[Krunk]], [[Funguy]] and [[Mr Pigibank]]"},
+                        "note": <NoteModel>{
+                            "note": "Drop the quest item in front of [[Krunk]], [[Funguy]] and [[Mr Pigibank]]{{Sources/datarow|Item=Forest Villas Flyer Thingy|Link=Tiki Chief{{!}}Three Strikes, you're Out!}}"
+                        },
                         "CustomType": "Tiki Chief2",
                         "CustomArray": [
                             <CustomReqModel>{"desc": "Rich Guy Invited:", "finalV": 1, "type": "GreaterEqual", "startV": 0},
@@ -8771,15 +8773,11 @@ export const initNpcRepo = () => {
                         "ConsumeItems": true,
                         "InventorySpacesNeeded": 3,
                         "NoSpaceIndex": 3,
-                        "Rewards": [
-                            <ComponentModel>{"item": "Quest40", "quantity": 15},
-                            <ComponentModel>{"item": "PremiumGem", "quantity": 10},
-                            <ComponentModel>{"item": "Timecandy1", "quantity": 1}
-                        ],
+                        "Rewards": [<ComponentModel>{"item": "Quest40", "quantity": 7}, <ComponentModel>{"item": "Timecandy1", "quantity": 1}],
                         "QuestName": "Loveulyte1",
                         "Difficulty": 2,
                         "note": <NoteModel>{"note": "All enemies can drop the letters. Daily quest"},
-                        "ItemReq": [<ComponentModel>{"item": "Quest39", "quantity": 25}]
+                        "ItemReq": [<ComponentModel>{"item": "Quest39", "quantity": 3}]
                     },
                     "Heartbreaker": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
@@ -8789,7 +8787,7 @@ export const initNpcRepo = () => {
                         "ConsumeItems": false,
                         "InventorySpacesNeeded": 2,
                         "NoSpaceIndex": 6,
-                        "Rewards": [<ComponentModel>{"item": "Quest40", "quantity": 15}, <ComponentModel>{"item": "PremiumGem", "quantity": 10}],
+                        "Rewards": [<ComponentModel>{"item": "Quest40", "quantity": 8}, <ComponentModel>{"item": "Timecandy2", "quantity": 1}],
                         "QuestName": "Loveulyte2",
                         "Difficulty": 4,
                         "note": <NoteModel>{
@@ -8808,7 +8806,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "From now until March 8th I'll be around so try to get some goodies before I can't be found!",
+                        "DialogueText": "From now until Feb 24th I'll be around so try to get some goodies before I can't be found!",
                         "NextIndex": 2,
                         "Name": ""
                     },
@@ -12912,7 +12910,7 @@ export const initNpcRepo = () => {
                         "NextIndex": 4,
                         "Name": "Task Requirement Affirmative",
                         "ConsumeItems": true,
-                        "InventorySpacesNeeded": 1,
+                        "InventorySpacesNeeded": 3,
                         "NoSpaceIndex": 3,
                         "Rewards": [
                             <ComponentModel>{"item": "Ladle", "quantity": 48},
@@ -13449,7 +13447,7 @@ export const initNpcRepo = () => {
                     },
                     "Speak from the heart not the mind": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Mmm... perhaps a greater voice from you will suit us both better... <br> QUEST:Wow la de da ya friggin piglet. Level up divinity more but I'd totally understand if you just wanna stop talking to this guy.",
+                        "DialogueText": "Mmm... perhaps a greater voice from you will suit us both better... QUEST:Wow la de da ya friggin piglet. He's telling you to level up divinity more but I'd totally understand if you just wanna stop talking to this guy.",
                         "NextIndex": 6,
                         "Name": "Speak from the heart not the mind",
                         "ConsumeItems": false,
@@ -13513,7 +13511,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Mmm... perhaps a greater voice from you will suit us both better... <br> QUEST:Wow la de da ya friggin piglet. Level up divinity more but I'd totally understand if you just wanna stop talking to this guy.",
+                        "DialogueText": "Mmm... perhaps a greater voice from you will suit us both better... QUEST:Wow la de da ya friggin piglet. He's telling you to level up divinity more but I'd totally understand if you just wanna stop talking to this guy.",
                         "NextIndex": 6,
                         "Name": "Speak from the heart not the mind"
                     },
@@ -13684,6 +13682,71 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Daaang you've got skills!! Now get out there and teach everyone else how it's done! Literally! So I don't have to do it myself anymore! ...no? Eh fine just go have fun then and leave me to it!",
+                        "NextIndex": -1,
+                        "Name": ""
+                    }
+                ]
+            }),
+        new NpcBase("Lava Larry", <NpcModel>{
+                "head": <NpcHeadModel>{
+                    "location": "Magma Rivertown",
+                    "world": "Smolderin' Plateau",
+                    "noQuest": 1,
+                    "repeatable": "Unknown",
+                    "type": "Unknown",
+                    "birthWeight": 1.57,
+                    "starSign": "Taurus",
+                    "mothersMaidenName": "Shaffer",
+                    "notes": " "
+                },
+                "quests": {
+                    "W5 Task Req Check": <ItemQuestModel>{
+                        "Type": QuestTypeEnum.ItemsAndSpaceRequired,
+                        "DialogueText": "So yea I'm the taskmaster the pastor if you will. But you can't step to me until you kill your fill. <br> QUEST:Kills some mobs and gather monster parts to show you're ready for the World 5 tasks!",
+                        "NextIndex": 4,
+                        "Name": "W5 Task Req Check",
+                        "ConsumeItems": true,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 3,
+                        "Rewards": [<ComponentModel>{"item": "Quest72", "quantity": 4}, <ComponentModel>{"item": "Quest73", "quantity": 3}],
+                        "QuestName": "Lava Larry1",
+                        "Difficulty": 4,
+                        "note": <NoteModel>{"note": " "},
+                        "ItemReq": [
+                            <ComponentModel>{"item": "LavaA1", "quantity": 2500},
+                            <ComponentModel>{"item": "LavaA2", "quantity": 1000},
+                            <ComponentModel>{"item": "LavaA3", "quantity": 500}
+                        ]
+                    }
+                },
+                "dialogue": [
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Hows it flowin' 'n goin' my guy? This pipin' hot heat out here making you and I very dry.",
+                        "NextIndex": 1,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Yo don't mind me and my spittin' I'm emcee Larry and I got dope tasks most fittin'",
+                        "NextIndex": 2,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.ItemsAndSpaceRequired,
+                        "DialogueText": "So yea I'm the taskmaster the pastor if you will. But you can't step to me until you kill your fill. <br> QUEST:Kills some mobs and gather monster parts to show you're ready for the World 5 tasks!",
+                        "NextIndex": 4,
+                        "Name": "W5 Task Req Check"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Eyo bro you ain't got the inventory space sort that out and save some face!",
+                        "NextIndex": 2,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Ayyyy that's how it's done! I'll give you access to my tasks have fun!",
                         "NextIndex": -1,
                         "Name": ""
                     }

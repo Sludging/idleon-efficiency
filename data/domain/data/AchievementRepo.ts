@@ -1043,7 +1043,7 @@ export const initAchievementRepo = () => {
                 "world": "Frostbite Tundra"
             }),
         new AchievementBase(148, <AchievementModel>{
-                "name": "To Cute To Live",
+                "name": "Too Cute To Live",
                 "qty": 1,
                 "desc": "You're gonna kill all them lil' poofs? You monster... well, at least make it quick, like 20s or less after entering the map.",
                 "rewards": "*5% Total Multikill &on all monsters",
@@ -1627,7 +1627,7 @@ export const initAchievementRepo = () => {
                 "name": "Good Plate",
                 "qty": 1,
                 "desc": "Upgrade a meal at the Dinner Menu to the point where it gets a diamond plate!",
-                "rewards": "*RNG item unlock",
+                "rewards": "*RNG item unlock &*W4 Shops EZ-Access",
                 "world": "Hyperion Nebula"
             }),
         new AchievementBase(232, <AchievementModel>{
@@ -1680,24 +1680,24 @@ export const initAchievementRepo = () => {
                 "world": "Hyperion Nebula"
             }),
         new AchievementBase(239, <AchievementModel>{
-                "name": "FILLERZZZ ACH",
-                "qty": 20,
-                "desc": "-",
-                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "name": "The True King",
+                "qty": 1000000,
+                "desc": "Reach a total of 1 million Orb Kills.",
+                "rewards": "10 Tab 4 Talent Pts",
                 "world": "Hyperion Nebula"
             }),
         new AchievementBase(240, <AchievementModel>{
-                "name": "FILLERZZZ ACH",
-                "qty": 20,
-                "desc": "-",
-                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "name": "The True Pirate",
+                "qty": 1000000,
+                "desc": "Reach a total of 1 million Plunderous Kills. This one is the true challenge of the three.",
+                "rewards": "15 Tab 4 Talent Pts &1% Total Dmg",
                 "world": "Hyperion Nebula"
             }),
         new AchievementBase(241, <AchievementModel>{
-                "name": "FILLERZZZ ACH",
-                "qty": 20,
-                "desc": "-",
-                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "name": "The True Emperor",
+                "qty": 1000000,
+                "desc": "Reach a total of 1 million Wormhole Kills.",
+                "rewards": "12 Tab 4 Talent Pts",
                 "world": "Hyperion Nebula"
             }),
         new AchievementBase(242, <AchievementModel>{
@@ -1965,6 +1965,496 @@ export const initAchievementRepo = () => {
                 "desc": "-",
                 "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
                 "world": "Hyperion Nebula"
+            }),
+        new AchievementBase(280, <AchievementModel>{
+                "name": "Maple Logger",
+                "qty": 1,
+                "desc": "Have a stack of exactly 200,000 Maple Logs in your Storage Chest.",
+                "rewards": "1% Damage for all &characters",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(281, <AchievementModel>{
+                "name": "Vitamin D-licious",
+                "qty": 1,
+                "desc": "Have a stack of exactly 5,000,000 Orange Slices in your Storage Chest.",
+                "rewards": "50% Forge Ore &Capacity",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(282, <AchievementModel>{
+                "name": "Wurm Wumbo",
+                "qty": 1,
+                "desc": "Have a stack of exactly 100,000,000 Mongo Worm Slices in your Storage Chest.",
+                "rewards": "*Wurm Catacombs BG",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(283, <AchievementModel>{
+                "name": "Supernatural Gamer",
+                "qty": 1,
+                "desc": "Reach level 300 on any character! My oh my! This would have been inconceivable just a few years ago!",
+                "rewards": "10% All Skill EXP",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(284, <AchievementModel>{
+                "name": "Smokin' Stars",
+                "qty": 1,
+                "desc": "Complete all constellations in the Smolderin' Plateau. You can check you progress within the Telescope.",
+                "rewards": "20% All Skill EXP",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(285, <AchievementModel>{
+                "name": "The Plateauourist",
+                "qty": 1,
+                "desc": "Reach World 5, a personal favorite world of mine! Look, I like lava what can I say.",
+                "rewards": "4 Daily Crystal Mob &Spawn Guarantee",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(286, <AchievementModel>{
+                "name": "No Krakens? ):",
+                "qty": 1,
+                "desc": "Reach Wave 50 of Citric Conflict tower defence without placing a single Kraken Towers. Not even one.",
+                "rewards": "25% Class EXP",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(287, <AchievementModel>{
+                "name": "Artifact Finder",
+                "qty": 1,
+                "desc": "Collect 15 Artifacts from Sailing",
+                "rewards": "*1 Extra Chest Slot in &Sailing Loot Pile",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(288, <AchievementModel>{
+                "name": "Artifact Enjoyer",
+                "qty": 1,
+                "desc": "Collect all 30 Artifacts from Sailing",
+                "rewards": "*Magma Rivertown BG",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(289, <AchievementModel>{
+                "name": "Artifact Jones",
+                "qty": 1,
+                "desc": "Collect all 30 ANCIENT Artifacts from Sailing. All that glitters is not gold, but it sure is shiny!",
+                "rewards": "20 Star Talent Pts",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(290, <AchievementModel>{
+                "name": "Gilded Vessel",
+                "qty": 1,
+                "desc": "Upgrade a boat to Lv 100 in Sailing. It'll turn gold to reflect its power!",
+                "rewards": "*1 Extra Chest Slot in &Sailing Loot Pile",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(291, <AchievementModel>{
+                "name": "Maroon Warship",
+                "qty": 1,
+                "desc": "Upgrade a boat to Lv 300 in Sailing. This is the pinnacle of naval prowess, it doesn't get fancier than this!",
+                "rewards": "1 Lv to all Talents &for all characters",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(292, <AchievementModel>{
+                "name": "Glory To Nobisect",
+                "qty": 1,
+                "desc": "Unlock the 3rd Divinity God.",
+                "rewards": "10 'Tab 4' Talent Pts",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(293, <AchievementModel>{
+                "name": "All Hail Purrmep",
+                "qty": 1,
+                "desc": "Unlock the 7th Divinity God.",
+                "rewards": "10 Alternate Particle &Alchemy Upgrades Per &Day",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(294, <AchievementModel>{
+                "name": "Long Live Bagur",
+                "qty": 1,
+                "desc": "Unlock the 10th and final Divinity God.",
+                "rewards": "10% All Skill EXP",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(295, <AchievementModel>{
+                "name": "POiNG Champion",
+                "qty": 1,
+                "desc": "Get a POiNG score of 25,000 or more! My personal highscore is 38",
+                "rewards": "323 at the time of coding this!",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(296, <AchievementModel>{
+                "name": "Lucky Harvest",
+                "qty": 1,
+                "desc": "Harvest a plant with a Bit worth who's first 3 digits are 777. For example, 77.7K Bits would count, or 777M Bits too!",
+                "rewards": "*1.05x Bit Gain in &Gaming",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(297, <AchievementModel>{
+                "name": "Chemical Collector",
+                "qty": 1000,
+                "desc": "Harvest a total of 1000 Chemical-type Plants in Gaming.",
+                "rewards": "3% Damage for all &characters",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(298, <AchievementModel>{
+                "name": "Voraci Vantasia",
+                "qty": 500,
+                "desc": "Harvest a total of 500 Voraci-type Plants in Gaming.",
+                "rewards": "10% Divinity Points &Gained",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(299, <AchievementModel>{
+                "name": "Bonsai Bonanza",
+                "qty": 100,
+                "desc": "Harvest a total of 100 Bonsai-type Plants in Gaming.",
+                "rewards": "*W5 Shop EZ-Access",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(300, <AchievementModel>{
+                "name": "Perfect Trade Deal",
+                "qty": 1,
+                "desc": "Make a trade with Blobby G worth a gold bar amount that starts with 777, like 777K or 7.77M for example. PS 776 and 778 work too lol",
+                "rewards": "1 additional Treasure &Per Chest for Sailing",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(301, <AchievementModel>{
+                "name": "True Naval Captain",
+                "qty": 1,
+                "desc": "Buy all 20 Boats in Sailing. Uh, yea, there is a scroll bar below the boats, you can buy more than 5 boats #",
+                "rewards": "20% Captain EXP &for sailing",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(302, <AchievementModel>{
+                "name": "Legendary Orb",
+                "qty": 1,
+                "desc": "On your Divine Knight, get an Orb Score of 400 or more on OJ Bay. This is the number above your Orb!",
+                "rewards": "*Smoggy Basin BG",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(303, <AchievementModel>{
+                "name": "Legendary Flag",
+                "qty": 1,
+                "desc": "On your Siege Breaker, get a Flag Score of 150 or more on Erruption River. This is the number above your Flag!",
+                "rewards": "2% Damage for all &characters",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(304, <AchievementModel>{
+                "name": "Legendary Wormhole",
+                "qty": 1,
+                "desc": "On your Elemental Sorcerer, get a Wormhole Score of 83 or more on Niagrilled Falls. This is the number above your Wormhole!",
+                "rewards": "10% Divinity Points &Gained",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(305, <AchievementModel>{
+                "name": "Utter DISRESPECT",
+                "qty": 1,
+                "desc": "SECRET ACHIEVEMENT ------------------------ Why did you even hire the poor fella in the first place???",
+                "rewards": "20 Star Talent Pts",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(306, <AchievementModel>{
+                "name": "Sneaky Stealing",
+                "qty": 1,
+                "desc": "SECRET ACHIEVEMENT ------------------------ Walk to a uh... weird location? Well it's not that weird, but it's just like, what ya doin' back there?",
+                "rewards": "25% Shop Capacity &for all Town Shops",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(307, <AchievementModel>{
+                "name": "Broken Controller",
+                "qty": 1,
+                "desc": "SECRET ACHIEVEMENT ------------------------ You got... zero? Literally zero?? Jeez, Im sorry but I think you need to uninstall ^",
+                "rewards": "*1.05x Bit Gain in &Gaming",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(308, <AchievementModel>{
+                "name": "Lavathian Skulls",
+                "qty": 1,
+                "desc": "Get a Lava Skull or higher on every Smolderin' Plateau monster in the Deathnote. Yea, the 100M Kill Skull. This is gonna take a while.",
+                "rewards": "2% Faster Monster &Respawn Time for &All World 5 mobs",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(309, <AchievementModel>{
+                "name": "Seaworthy Captain",
+                "qty": 1,
+                "desc": "Level up a Sailing Captain to Lv 15. Few captains in the universe can rival their ability to plunder!",
+                "rewards": "1% ALL STAT for &all characters",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(310, <AchievementModel>{
+                "name": "Grand Captain",
+                "qty": 1,
+                "desc": "Level up a Sailing Captain to Lv 10. They shall sail the seas with confidence!",
+                "rewards": "20% Captain EXP &for sailing",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(311, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(312, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(313, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(314, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(315, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(316, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(317, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(318, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(319, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(320, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(321, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(322, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(323, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(324, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(325, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(326, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(327, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(328, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(329, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(330, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(331, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(332, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(333, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(334, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(335, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(336, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(337, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(338, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(339, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(340, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(341, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(342, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(343, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(344, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(345, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(346, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(347, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(348, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(349, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Smolderin' Plateau"
             })    
 ]
 }
