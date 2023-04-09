@@ -200,25 +200,25 @@ export const initMapDataRepo = () => {
                 "portalRequirements": [0]
             }),
         new MapDataBase(32, <MapDataModel>{
-                "enemy": "map32",
+                "enemy": "Z",
                 "world": "Blunder Hills",
-                "map": <MapNameModel>{"intName": "MininggF", "name": "MininggF", "id": 32},
+                "map": <MapNameModel>{"intName": "MininggF", "name": "Tunnel Closed", "id": 32},
                 "portalRequirements": [0]
             }),
         new MapDataBase(33, <MapDataModel>{
-                "enemy": "map33",
+                "enemy": "Z",
                 "world": "Blunder Hills",
                 "map": <MapNameModel>{"intName": "NOTHINGLOL", "name": "How Did u get here", "id": 33},
                 "portalRequirements": [0]
             }),
         new MapDataBase(34, <MapDataModel>{
-                "enemy": "map34",
+                "enemy": "Z",
                 "world": "Blunder Hills",
                 "map": <MapNameModel>{"intName": "Miningg1", "name": "Miningg1", "id": 34},
                 "portalRequirements": [0]
             }),
         new MapDataBase(35, <MapDataModel>{
-                "enemy": "map35",
+                "enemy": "Z",
                 "world": "Blunder Hills",
                 "map": <MapNameModel>{"intName": "Miningg2", "name": "Miningg2", "id": 35},
                 "portalRequirements": [0]
@@ -1007,7 +1007,7 @@ export const initMapDataRepo = () => {
                 "enemy": "Z",
                 "world": "Hyperion Nebula",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 166},
-                "portalRequirements": [0]
+                "portalRequirements": [100]
             }),
         new MapDataBase(167, <MapDataModel>{
                 "enemy": "Z",

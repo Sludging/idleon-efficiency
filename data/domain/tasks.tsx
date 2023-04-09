@@ -132,6 +132,10 @@ export class Merit {
         return `${toReplace} ${this.descLine2 != "Descline2" ? this.descLine2 : ""}`
     }
 
+    getBonus = () => {
+        return this.level * this.bonusPerLevel;
+    }
+
     getImageData = (): ImageData => {
         return {
             location: this.icon,

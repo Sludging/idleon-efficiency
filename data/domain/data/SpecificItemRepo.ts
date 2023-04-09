@@ -41,7 +41,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 3,
                 "typeGen": TypeGenEnum.bOre,
                 "Type": "Ore",
-                "description": "Smelt down 2 Ores into 1 Bar at the Forge. Smelting will take 100 Seconds per Bar using Forge Slot 1. "
+                "description": "Smelt down 2 Ores into 1 Bar at the Forge. Smelting will take 50 Seconds per Bar using Forge Slot 1. "
             }),
         new BaseItemBase("Iron", <OreItemModel>{
                 "internalName": "Iron",
@@ -49,7 +49,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 7,
                 "typeGen": TypeGenEnum.bOre,
                 "Type": "Ore",
-                "description": "Smelt down 4 Ores into 1 Bar at the Forge. Smelting will take 400 Seconds per Bar using Forge Slot 1. "
+                "description": "Smelt down 4 Ores into 1 Bar at the Forge. Smelting will take 150 Seconds per Bar using Forge Slot 1. "
             }),
         new BaseItemBase("Gold", <OreItemModel>{
                 "internalName": "Gold",
@@ -57,7 +57,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 13,
                 "typeGen": TypeGenEnum.bOre,
                 "Type": "Ore",
-                "description": "Smelt down 7 Ores into 1 Bar at the Forge. Smelting will take 1000 Seconds per Bar using Forge Slot 1. "
+                "description": "Smelt down 7 Ores into 1 Bar at the Forge. Smelting will take 350 Seconds per Bar using Forge Slot 1. "
             }),
         new BaseItemBase("Plat", <OreItemModel>{
                 "internalName": "Plat",
@@ -65,7 +65,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 20,
                 "typeGen": TypeGenEnum.bOre,
                 "Type": "Ore",
-                "description": "Smelt down 16 Ores into 1 Bar at the Forge. Smelting will take 2200 Seconds per Bar using Forge Slot 1. "
+                "description": "Smelt down 16 Ores into 1 Bar at the Forge. Smelting will take 1000 Seconds per Bar using Forge Slot 1. "
             }),
         new BaseItemBase("Dementia", <OreItemModel>{
                 "internalName": "Dementia",
@@ -73,7 +73,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 35,
                 "typeGen": TypeGenEnum.bOre,
                 "Type": "Ore",
-                "description": "Smelt down 40 Ores into 1 Bar at the Forge. Smelting will take 3500 Seconds per Bar using Forge Slot 1. "
+                "description": "Smelt down 40 Ores into 1 Bar at the Forge. Smelting will take 1500 Seconds per Bar using Forge Slot 1. "
             }),
         new BaseItemBase("Void", <OreItemModel>{
                 "internalName": "Void",
@@ -81,7 +81,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 48,
                 "typeGen": TypeGenEnum.bOre,
                 "Type": "Ore",
-                "description": "Smelt down 100 Ores into 1 Bar at the Forge. Smelting will take 6000 Seconds per Bar using Forge Slot 1. "
+                "description": "Smelt down 100 Ores into 1 Bar at the Forge. Smelting will take 2500 Seconds per Bar using Forge Slot 1. "
             }),
         new BaseItemBase("Lustre", <OreItemModel>{
                 "internalName": "Lustre",
@@ -89,7 +89,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 60,
                 "typeGen": TypeGenEnum.bOre,
                 "Type": "Ore",
-                "description": "Smelt down 250 Ores into 1 Bar at the Forge. Smelting will take 12500 Seconds per Bar using Forge Slot 1. "
+                "description": "Smelt down 250 Ores into 1 Bar at the Forge. Smelting will take 5000 Seconds per Bar using Forge Slot 1. "
             }),
         new BaseItemBase("Starfire", <OreItemModel>{
                 "internalName": "Starfire",
@@ -97,7 +97,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 100,
                 "typeGen": TypeGenEnum.bOre,
                 "Type": "Ore",
-                "description": "Smelt down 500 Ores into 1 Bar at the Forge. Smelting will take 25000 Seconds per Bar using Forge Slot 1. "
+                "description": "Smelt down 500 Ores into 1 Bar at the Forge. Smelting will take 10000 Seconds per Bar using Forge Slot 1. "
             }),
         new BaseItemBase("Dreadlo", <OreItemModel>{
                 "internalName": "Dreadlo",
@@ -105,7 +105,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 130,
                 "typeGen": TypeGenEnum.bOre,
                 "Type": "Ore",
-                "description": "Smelt down 1000 Ores into 1 Bar at the Forge. Smelting will take 50000 Seconds per Bar using Forge Slot 1. "
+                "description": "Smelt down 1000 Ores into 1 Bar at the Forge. Smelting will take 20000 Seconds per Bar using Forge Slot 1. "
             }),
         new BaseItemBase("Godshard", <OreItemModel>{
                 "internalName": "Godshard",
@@ -113,7 +113,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 250,
                 "typeGen": TypeGenEnum.bOre,
                 "Type": "Ore",
-                "description": "Smelt down 5000 Ores into 1 Bar at the Forge. Smelting will take 100 Seconds per Bar using Forge Slot 1. "
+                "description": "Smelt down 5000 Ores into 1 Bar at the Forge. Smelting will take 60000 Seconds per Bar using Forge Slot 1. "
             }),
         new BaseItemBase("CopperBar", <BaseItemModel>{
                 "internalName": "CopperBar",
@@ -10386,7 +10386,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("Pearl5", <DescItemModel>{
                 "internalName": "Pearl5",
-                "displayName": "White Pearl",
+                "displayName": "Holy Pearl",
                 "sellPrice": 100,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Usable",

@@ -658,7 +658,7 @@ export const initTalentNameRepo = () => {
         new TalentNameBase(649, <TalentNameModel>{"name": "", "id": 649}),
         new TalentNameBase(650, <TalentNameModel>{"name": "", "id": 650}),
         new TalentNameBase(651, <TalentNameModel>{"name": "Spice Spillage", "id": 651}),
-        new TalentNameBase(652, <TalentNameModel>{"name": "", "id": 652}),
+        new TalentNameBase(652, <TalentNameModel>{"name": "Stat Overload", "id": 652}),
         new TalentNameBase(653, <TalentNameModel>{"name": "", "id": 653}),
         new TalentNameBase(654, <TalentNameModel>{"name": "Special40", "id": 654}),
         new TalentNameBase(655, <TalentNameModel>{"name": "", "id": 655}),

@@ -1849,13 +1849,16 @@ export const initRandoListRepo = () => {
                     "155",
                     "156",
                     "157",
-                    "159"
+                    "159",
+                    "161"
                 ]
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "7th_Weekly_Update_v177",
-                    "*See_Discord.gg/idleon_for_Weeks_1-6_patch_notes_@___@_New_Stuff_in_Week_7_Update_-----------------------_@_*Elemental_Sorcerer_elite_class_is_OUT_NOW!_10_new_talents,_5_attacks_and_5_utilty!_@_*As_Elemental_Sorcerer,_you_can_spawn_Wormholes_an_endless_invasion_of_increasingly_difficult_mobs_with_boosted_EXP_and_Drop_rate!_@_*Rack_up_1000s_of_Wormhole_kills_to_boost_the_damage_of_all_your_characters_with_the_Wormhole_Emperor_talent!_@_*Added_8_Storage_Chest_Slots_to_everyone,_FOR_FREE!_Thats_right,_I'm_out_here_giving_the_best_game_community_the_best_updates!_Lets_go!!_@_*Plunderous_Mobs_now_have_a_2%_Spawn_Rate_in_the_Siege_Breaker_class,_instead_of_the_previous_1%_chance._@_*Fixed_3_other_bugs._@_*Hope_you_like_Elemental_Sorcerer,_which_you_can_unlock_in_the_4th_map_of_World_4_if_you_didn't_know!_See_you_next_week_with_some_new_updates,_enjoy!"
+                    "9th_Weekly_Update_v179",
+                    "*See_Discord.gg/idleon_for_Weeks_1-8_patch_notes_@___@_New_Stuff_in_Week_9_Update_-----------------------_@_*World_5_now_has_TASKS,_MERIT_SHOP,_and_ACHIEVEMENTS!_Unlock_them_by_completing_Lava_Larry's_quest,_you_can_find_them_in_World_5_Town!_@_*3_new_achievements_added_to_World_4,_as_well_as_1_new_Merit_Purchase_added_to_World_4._@_*You_can_now_buy_additional_Chest_Sluggos_from_the_Gem_Shop!_@_*Added_Map_Info_when_selecting_maps_to_teleport_to._This_is_AWESOME,_go_check_it_out!_@_*Gave_everyone_a_permanent_+5_DAILY_Teleports_to_celebrate_how_freakin'_sweet_IdleOn_is!_@_*You_can_now_toggle_'Points_Per_Tap'_to_xMAX_for_Talents,_tap_the_green_flag_and_spend_those_talent_points!",
+                    "*_Voir_Discord.gg/idleon_pour_les_notes_de_mise_à_jour_des_semaines_1_à_8_@___@_Nouveaux_éléments_dans_la_mise_à_jour_de_la_semaine_9_-----------------------_@_*_World_5_maintenant_a_des_TÂCHES,_une_BOUTIQUE_DE_MÉRITE_et_des_RÉALISATIONS_!_Débloquez-les_en_complétant_la_quête_de_Lava_Larry,_vous_pouvez_les_trouver_dans_World_5_Town_!_@_*3_nouvelles_réalisations_ajoutées_au_Monde_4,_ainsi_qu'un_nouvel_achat_au_mérite_ajouté_au_Monde_4._@_*Vous_pouvez_désormais_acheter_des_Sluggos_de_coffre_supplémentaires_dans_la_boutique_aux_gemmes_!_@_*Ajout_d'informations_sur_la_carte_lors_de_la_sélection_des_cartes_vers_lesquelles_se_téléporter._C'est_IMPRESSIONNANT,_allez_voir_ça_!_@_*_A_donné_à_tout_le_monde_un_téléport_quotidien_+5_permanent_pour_célébrer_à_quel_point_IdleOn_est_super_cool_!_@_*Vous_pouvez_désormais_basculer_les_points_par_pression_sur_xMAX_pour_les_talents,_appuyez_sur_le_drapeau_vert_et_dépensez_ces_points_de_talent_!",
+                    "*Siehe_Discord.gg/idleon_für_die_Patchnotizen_der_Wochen_1-8_@___@_Neues_im_Woche-9-Update_-----------------------_@_*Welt_5_jetzt_hat_AUFGABEN,_MERIT_SHOP_und_ERFOLGE!_Schalte_sie_frei,_indem_du_Lava_Larrys_Quest_abschließt,_du_findest_sie_in_World_5_Town!_@_*3_neue_Errungenschaften_zu_Welt_4_hinzugefügt,_sowie_1_neuer_Verdienstkauf_zu_Welt_4_hinzugefügt._@_*Sie_können_jetzt_zusätzliche_Truhen-Sluggos_im_Edelsteinshop_kaufen!_@_*Karteninfo_hinzugefügt,_wenn_Karten_ausgewählt_werden,_zu_denen_teleportiert_werden_soll._Das_ist_SUPER,_schau_es_dir_an!_@_*Hat_jedem_dauerhaft_+5_TÄGLICHE_Teleportationen_gegeben,_um_zu_feiern,_wie_verdammt_süß_IdleOn_ist!_@_*Du_kannst_jetzt_'Punkte_pro_Tap'_für_Talente_auf_xMAX_umschalten,_auf_die_grüne_Flagge_tippen_und_diese_Talentpunkte_ausgeben!"
                 ]
             }),
         new RandoListBase(62, <RandoListModel>{
@@ -2139,13 +2142,43 @@ export const initRandoListRepo = () => {
                     "330"
                 ]
             }),
-        new RandoListBase(79, <RandoListModel>{"elements": ["Slargon", "Pirate_Porkchop", "Muhmuguh", "Poigu"]}),
-        new RandoListBase(80, <RandoListModel>{"elements": ["Slargon", "Pirate_Porkchop", "Muhmuguh", "Poigu"]}),
+        new RandoListBase(79, <RandoListModel>{"elements": ["Slargon", "Pirate_Porkchop", "Muhmuguh", "Poigu", "Lava_Larry"]}),
+        new RandoListBase(80, <RandoListModel>{"elements": ["Slargon", "Pirate_Porkchop", "Muhmuguh", "Poigu", "Lava_Larry"]}),
         new RandoListBase(81, <RandoListModel>{"elements": ["Meteor", "rocky", "iceknight", "snakeZ", "frogGR"]}),
         new RandoListBase(82, <RandoListModel>{"elements": ["EquipmentHats78", "EquipmentRingsChat10"]}),
         new RandoListBase(83, <RandoListModel>{"elements": ["EquipmentToolsHatchet11"]}),
         new RandoListBase(84, <RandoListModel>{"elements": ["EquipmentHats79", "ObolKnight"]}),
         new RandoListBase(85, <RandoListModel>{"elements": ["EquipmentTools13"]}),
-        new RandoListBase(86, <RandoListModel>{"elements": ["ObolFrog"]})    
+        new RandoListBase(86, <RandoListModel>{"elements": ["ObolFrog"]}),
+        new RandoListBase(87, <RandoListModel>{
+                "elements": [
+                    "w5a1",
+                    "w5a2",
+                    "w5a3",
+                    "w5a4",
+                    "w5a5",
+                    "w5b1",
+                    "w5b2",
+                    "w5b3",
+                    "w5b4",
+                    "w5b5",
+                    "w5b6",
+                    "w5c1",
+                    "w5c2",
+                    "Copper",
+                    "Iron",
+                    "Gold",
+                    "Plat",
+                    "Dementia",
+                    "Void",
+                    "Lustre",
+                    "Starfire",
+                    "Dreadlo",
+                    "Godshard",
+                    "FishSmall",
+                    "FishMed",
+                    "Bug2"
+                ]
+            })    
 ]
 }
