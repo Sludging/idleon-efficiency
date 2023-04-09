@@ -14,6 +14,7 @@ import { ClassIndex } from './talents';
 import { SkillsIndex } from './SkillsIndex';
 import { Artifact } from './sailing/artifacts';
 import { Sailing } from './sailing';
+import { TaskBoard } from './tasks';
 
 export enum CauldronIndex {
     Power = 0,
@@ -556,6 +557,7 @@ export function updateAlchemy(data: Map<string, any>) {
     const cooking = data.get("cooking") as Cooking;
     const players = data.get("players") as Player[];
     const sailing = data.get("sailing") as Sailing;
+    const taskboard = data.get("taskboard") as TaskBoard;
 
     if (lab.bonuses.find(bonus => bonus.name == "My 1st Chemistry Set")?.active ?? false) {
         alchemy.vials.forEach(vial => vial.bonusMulitplier = 2)
@@ -567,6 +569,7 @@ export function updateAlchemy(data: Map<string, any>) {
             bubblesToUpgrade += 1;
         }
         bubblesToUpgrade += sailing.artifacts[12].getBonus(); //Amberite Artifact
+        bubblesToUpgrade += taskboard.merits.find(merit => merit.descLine1.includes("Bubbles upgraded by"))?.getBonus() ?? 0;
         
         const sortedBubbles = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles.slice(0, 15).filter(bubble => bubble.level > 5)).sort((bubble1, bubble2) => {
             // If same level, then go with higher cauldron index + higher bubble index.
