@@ -17,6 +17,8 @@ import { Player } from "./player";
 import { Family } from "./family";
 import { ClassIndex } from "./talents";
 import { range } from "../utility";
+import { TaskBoard } from "./tasks";
+import { Achievement } from "./achievements";
 
 // "Captains": [
 //     [0,0,-1,3,6.75,2,0],
@@ -318,11 +320,20 @@ export const updateSailing = (data: Map<string, any>) => {
     const alchemy = data.get("alchemy") as Alchemy;
     const gemStore = data.get("gems") as GemStore;
     const players = data.get("players") as Player[];
+    const taskboard = data.get("taskboard") as TaskBoard;
+    const achievements = data.get("achievements") as Achievement[];
 
-    // Max chests (requires artifacts info)
-    const chestPurchases = gemStore.purchases.find(upgrade => upgrade.index == 130)?.pucrhased ?? 0;
+    const chestPurchases = gemStore.purchases.find(upgrade => upgrade.no == 129)?.pucrhased ?? 0;
     const artifactBoost = sailing.artifacts[19].getBonus();
-    sailing.maxChests = Math.min(Math.round(5 + chestPurchases + artifactBoost), 19);
+    sailing.maxChests = Math.min(
+        Math.round(
+            5 + chestPurchases + 
+            Math.min(4, artifactBoost) + 
+            (taskboard.merits.find(merit => merit.descLine1.includes("Loot Pile Capacity"))?.getBonus() ?? 0) +
+            (achievements[287].completed ? 1 : 0) +
+            (achievements[290].completed ? 1 : 0) 
+            )
+        ,30);
 
     // Speed base math
     const purrmepPlayer = divinity.gods[6].linkedPlayers.at(0); // purrmep is limited to only 1 player linked.
