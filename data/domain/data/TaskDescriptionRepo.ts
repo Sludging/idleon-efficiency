@@ -103,7 +103,7 @@ export const initTaskDescriptionRepo = () => {
             }),
         new TaskDescriptionBase(5, <TaskDescriptionModel>{
                 "name": "Stamp Coolection",
-                "description": "Upgrade your stamps a total of { times. Dont let them lil piggies steal 'em back!",
+                "description": "Upgrade your stamps a total of { times. Dont let them piggies steal 'em back!",
                 "extraStr": "Blank420q",
                 "number1": 5,
                 "descLine2": "2|0|Wow that's a dope collection, you could impress people IRL with it I'm sure!",
@@ -1819,6 +1819,196 @@ export const initTaskDescriptionRepo = () => {
                 "descLine2": "0",
                 "numbers": [
                     1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                ]
+            }),
+        new TaskDescriptionBase(96, <TaskDescriptionModel>{
+                "name": "Sailin' Round Town",
+                "description": "Travel a total of {m in sailing.",
+                "extraStr": "Blank420q",
+                "number1": 10,
+                "descLine2": "1|0|Now do you understand, that the singular piece isn't fake???",
+                "numbers": [
+                    100,
+                    1000,
+                    5000,
+                    50000,
+                    500000,
+                    2500000,
+                    20000000,
+                    100000000,
+                    400000000,
+                    2000000000
+                ]
+            }),
+        new TaskDescriptionBase(97, <TaskDescriptionModel>{
+                "name": "Decked out Decks",
+                "description": "Upgrade your boats { times. In other words, the Lv of all your boats combined.",
+                "extraStr": "Blank420q",
+                "number1": 10,
+                "descLine2": "1|0|Thems some fiiiine lookin' boats! I guess you really are the captian now!",
+                "numbers": [
+                    20,
+                    160,
+                    360,
+                    640,
+                    1000,
+                    1440,
+                    2000,
+                    2750,
+                    3600,
+                    5000
+                ]
+            }),
+        new TaskDescriptionBase(98, <TaskDescriptionModel>{
+                "name": "Divinilicious Licks",
+                "description": "Have the total Divinity LV of all your characters add up to {",
+                "extraStr": "Blank420q",
+                "number1": 10,
+                "descLine2": "1|0|If Idleoneers could draw, they'd draw their gods in their image.",
+                "numbers": [
+                    25,
+                    60,
+                    100,
+                    150,
+                    225,
+                    300,
+                    450,
+                    600,
+                    750,
+                    900
+                ]
+            }),
+        new TaskDescriptionBase(99, <TaskDescriptionModel>{
+                "name": "Truly Riveting Gaming",
+                "description": "Pick a total of { plants in gaming.",
+                "extraStr": "Blank420q",
+                "number1": 10,
+                "descLine2": "2|0|Wow! You should go wishlist IdleOn Gardening Deluxe, my next spinoff game! Haha jk, unless...?",
+                "numbers": [
+                    25,
+                    100,
+                    200,
+                    500,
+                    2000,
+                    7500,
+                    15000,
+                    25000,
+                    75000,
+                    200000
+                ]
+            }),
+        new TaskDescriptionBase(100, <TaskDescriptionModel>{
+                "name": "Now I Aint Sayin You A...",
+                "description": "Get A Gold Nugget Multi of at least {x.",
+                "extraStr": "Blank420q",
+                "number1": 10,
+                "descLine2": "2|0|You're quite the Digger mate! But u don't hang 'round no broken spade...",
+                "numbers": [
+                    10,
+                    100,
+                    500,
+                    2500,
+                    10000,
+                    25000,
+                    50000,
+                    100000,
+                    200000,
+                    999999
+                ]
+            }),
+        new TaskDescriptionBase(101, <TaskDescriptionModel>{
+                "name": "Slab of Legend",
+                "description": "Find a total of { items in the Slab.",
+                "extraStr": "Blank420q",
+                "number1": 10,
+                "descLine2": "2|0|You found EVERYTHING! Well, everything until I add more hehe!",
+                "numbers": [
+                    500,
+                    600,
+                    700,
+                    800,
+                    900,
+                    1000,
+                    1100,
+                    1200,
+                    1300,
+                    1405
+                ]
+            }),
+        new TaskDescriptionBase(102, <TaskDescriptionModel>{
+                "name": "Cracking The Kruk!",
+                "description": "}",
+                "extraStr": "Wait for the evil Kattlekruk boss to open his volcano door...|Succeed at 20 of the Troll's mindgames, aka when he lets you hit him|Defeat the Massive Troll without failing a single Mindgame. He heals when you fail one.|Defeat the Troll on 5 players, in order, starting with the 1st|Kill the Chaotic Massive Troll, or CMT for short, or Chaotical Massiveie Trolle for long|Kill Chaotic Massive Troll on 6 players, starting with the 1st.|Kill Chaotic Massive Troll within the first 10 mindgames|Defeat the Nightmare Massive Troll, or Nightmare Massive T for short|Defeat Nightmare Troll on 10 players, in order from the 1st|Defeat Nightmare Troll within 5 mindgames, equipping the red boxing gloves",
+                "number1": 10,
+                "descLine2": "2|1|The troll obviously isn't dying despite insisting he is... very suspicious...",
+                "numbers": [
+                    1,
+                    20,
+                    1,
+                    5,
+                    1,
+                    6,
+                    1,
+                    1,
+                    10,
+                    1
+                ]
+            }),
+        new TaskDescriptionBase(103, <TaskDescriptionModel>{
+                "name": "Achievement Promethean",
+                "description": "Complete { Smolderin Plateau achieves, accessed with that button in the top left!",
+                "extraStr": "Blank420q",
+                "number1": 10,
+                "descLine2": "2|0|Filler haha",
+                "numbers": [
+                    5,
+                    10,
+                    15,
+                    20,
+                    25,
+                    30,
+                    40,
+                    50,
+                    60,
+                    70
+                ]
+            }),
+        new TaskDescriptionBase(104, <TaskDescriptionModel>{
+                "name": "Nope",
+                "description": "You have enough daily stuff already. Go do the other world's daily task!",
+                "extraStr": "Blank420q",
+                "number1": 6,
+                "descLine2": "0",
+                "numbers": [
+                    69420,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                ]
+            }),
+        new TaskDescriptionBase(105, <TaskDescriptionModel>{
+                "name": "Nuh uh",
+                "description": "Seriously, you don't need more daily stuff to do. I wont let you.",
+                "extraStr": "Blank420q",
+                "number1": 4,
+                "descLine2": "0",
+                "numbers": [
+                    69420,
                     -1,
                     -1,
                     -1,

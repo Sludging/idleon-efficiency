@@ -283,6 +283,7 @@ export const initQuestNameRepo = () => {
         new QuestNameBase("Poigu7", <QuestNameModel>{"name": "Learn the Language of the Universe", "difficulty": 8}),
         new QuestNameBase("Muhmuguh2", <QuestNameModel>{"name": "Wave after wave slowly Sailing", "difficulty": 1}),
         new QuestNameBase("Muhmuguh6", <QuestNameModel>{"name": "Rising up and Growing as a Gamer", "difficulty": 1}),
-        new QuestNameBase("Muhmuguh10", <QuestNameModel>{"name": "Learn the Language of the Universe", "difficulty": 2})    
+        new QuestNameBase("Muhmuguh10", <QuestNameModel>{"name": "Learn the Language of the Universe", "difficulty": 2}),
+        new QuestNameBase("Lava Larry2", <QuestNameModel>{"name": "W5 Task Req Check", "difficulty": 4})    
 ]
 }

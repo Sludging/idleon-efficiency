@@ -5,6 +5,7 @@ import { AtomColliderModel } from './model/atomColliderModel';
 import { Alchemy } from './alchemy';
 import { ImageData } from './imageData';
 import { nFormatter, range } from '../utility';
+import { TaskBoard } from './tasks';
 
 export class Atom {
     level: number = 0;
@@ -13,6 +14,7 @@ export class Atom {
     nenoBonus: number = 0;
     colliderBuildingLevel: number = 0;
     bubbleBonus: number = 0; // Y5
+    meritBonus: number = 0;
 
     constructor(public index: number, public data: AtomColliderModel) { }
 
@@ -25,7 +27,7 @@ export class Atom {
     }
 
     getCost = (level: number = this.level): number => {
-        const bonusMath = (1 / (1 + (this.nenoBonus + this.bubbleBonus + (this.colliderBuildingLevel / 10)) / 100));
+        const bonusMath = (1 / (1 + (this.nenoBonus + this.bubbleBonus + (this.colliderBuildingLevel / 10) + this.meritBonus) / 100));
         const baseMath = this.data.baseCost + (level * this.data.growthFactor);
         const exponentMath = Math.pow(this.data.baseExponent, level);
         return Math.floor(bonusMath * baseMath * exponentMath);
@@ -151,6 +153,7 @@ export function updateAtomCollider(data: Map<string, any>) {
     const cooking = data.get("cooking") as Cooking;
     const construction = data.get("construction") as Construction;
     const alchemy = data.get("alchemy") as Alchemy;
+    const taskBoard = data.get("taskboard") as TaskBoard;
 
     (collider.atoms[0] as HydrogenAtom).daysSinceUpgrade = optLacc[134];
     (collider.atoms[5] as CarbonAtom).wizardTowersOver50 = construction.buildings.slice(9, 18).reduce((sum, tower) => sum += Math.max(0, tower.level - 50), 0);
@@ -159,11 +162,14 @@ export function updateAtomCollider(data: Map<string, any>) {
     const colliderBuildingLevel = construction.buildings.find(building => building.name == "Atom Collider")?.level ?? 0;
     const nenoBonus = collider.atoms[9].getBonus();
     const bubbleBonusY5 = alchemy.getBubbleBonusForKey("Y5");
+    // Not using getBonus here since Lava says the bonus is 5 but it's really 7.
+    const meritBonus = (taskBoard.merits.find(merit => merit.descLine1.includes("reduction in Atom Upgrade Costs"))?.level ?? 0) * 7;
 
     collider.atoms.forEach(atom => {
         atom.bubbleBonus = bubbleBonusY5;
         atom.colliderBuildingLevel = colliderBuildingLevel;
         atom.nenoBonus = nenoBonus;
+        atom.meritBonus = meritBonus;
     })
 
     return collider;
