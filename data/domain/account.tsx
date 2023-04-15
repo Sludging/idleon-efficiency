@@ -125,8 +125,24 @@ export class Account {
     };
 }
 
-export const initAccount = () => {
-    return new Account();
+const isBossKeyRegex = () => { return /Key(\d+)/g };
+
+
+export const initAccount = (allItems: Item[]) => {
+    const account = new Account();
+    account.miniBosses.push(new Miniboss("mini3a", 0));
+    account.miniBosses.push(new Miniboss("mini4a", 0));
+
+    allItems.filter(item => isBossKeyRegex().exec(item.internalName)).forEach((keyItem) => {
+        const newKey = new Key(keyItem.duplicate());
+        console.log(newKey);
+        account.keys.push(newKey);
+    })
+
+    const coloItem = (allItems.find(item => item.internalName == "TixCol") as Item).duplicate();
+    account.coloTickets = coloItem;
+
+    return account;
 }
 
 export const parseAccount = (doc: Cloudsave, allItems: Item[]) => {

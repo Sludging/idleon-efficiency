@@ -22,7 +22,7 @@ const isPlayerAlert = (x: Alert): x is PlayerAlert => "player" in x
 
 function KeyDisplay({ toShow }: { toShow: Key }) {
     return (
-        <Box>
+        <Box style={{opacity: toShow.item.count == 0 ? 0.3 : 1}}>
             <TipDisplay
                 visibility={toShow.amountPerDay == 0 ? 'none' : ''}
                 heading={`${toShow.item.displayName} (${toShow.keysAvailableForPickup()} available to pickup)`}
@@ -213,7 +213,7 @@ function Dashboard() {
                     >
                         <DashboardWidget direction="row" heading="Account wide items" wrap gridArea="accountItems">
                             {
-                                accountData.keys.filter(key => key.item.count > 0).map((key, index) => (
+                                accountData.keys.map((key, index) => (
                                     <KeyDisplay key={index} toShow={key} />
                                 ))
                             }
