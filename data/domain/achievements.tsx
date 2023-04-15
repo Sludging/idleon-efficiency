@@ -548,6 +548,9 @@ export const initAchievements = () => {
         if (reminder == 3) {
             letter = 'D';
         }
+        if (reminder == 4) {
+            letter = 'E';
+        }
         achievement.arrayIndex = index + 1;
         achievement.visualIndex = achievOrdering[reminder].indexOf(index - (70 * reminder));
         achievement.worldLetter = letter;
