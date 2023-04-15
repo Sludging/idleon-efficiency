@@ -1,6 +1,8 @@
 import { Alchemy } from "./alchemy";
+import { Cloudsave } from "./cloudsave";
 import { initRefineryCostRepo } from "./data/RefineryCostRepo";
 import { Family } from "./family";
+import { IParser, safeJsonParse } from "./idleonData";
 import { Item } from "./items";
 import { Lab } from "./lab";
 import { ComponentModel } from "./model/componentModel";
@@ -154,35 +156,32 @@ export const initRefinery = () => {
 }
 
 
-export default function parseRefinery(rawData: any[][]) {
-    const toReturn = new Refinery();
-    if (rawData.length > 0) {
-        const unlockedSalts = rawData[0][0];
+const parseRefinery: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const refinery = data.get("refinery") as Refinery;
+    const refineryData = safeJsonParse(raw, "Refinery", []) as any[][];
+    
+    if (refineryData.length > 0) {
+        const unlockedSalts = refineryData[0][0];
 
-        // Init cycle time as max time (900), will be updated in post processing to match reduced values.
-        toReturn.cycleInfo["Combustion"] = new CycleInfo("Combustion", 900, rawData[0][1]);
-        toReturn.cycleInfo["Synthesis"] = new CycleInfo("Synthesis", 900, rawData[0][2]);
-        rawData[1].forEach((salt, index) => {
+        refinery.cycleInfo["Combustion"].timePast = refineryData[0][1];
+        refinery.cycleInfo["Synthesis"].timePast = refineryData[0][2];
+        refineryData[1].forEach((salt, index) => {
             if (salt != "Blank") {
-                toReturn.storage.push(new RefineryStorage(salt, rawData[2][index]));
+                refinery.storage.push(new RefineryStorage(salt, refineryData[2][index]));
             }
         });
 
         [...Array(unlockedSalts)].forEach((_, i) => {
-            const newSaltStatus = new SaltStatus()
             const saltIndex = i + 3;
-            if (i > costRepo.length) {
+            if (i > Object.keys(refinery.salts).length) {
                 return;
             }
-            newSaltStatus.rank = rawData[saltIndex][1];
-            newSaltStatus.progress = rawData[saltIndex][0];
-            newSaltStatus.autoRefine = rawData[saltIndex][4];
-            newSaltStatus.active = rawData[saltIndex][3] as boolean;
-            newSaltStatus.baseCost = costRepo[i].data.cost.map(component => component as ComponentModel);
-            toReturn.salts[`Refinery${i + 1}`] = newSaltStatus;
+            refinery.salts[`Refinery${i + 1}`].rank = refineryData[saltIndex][1];
+            refinery.salts[`Refinery${i + 1}`].progress = refineryData[saltIndex][0];
+            refinery.salts[`Refinery${i + 1}`].autoRefine = refineryData[saltIndex][4];
+            refinery.salts[`Refinery${i + 1}`].active = refineryData[saltIndex][3] as boolean;
         })
     }
-    return toReturn;
 }
 
 // Nothing depends on this, can be last.
@@ -215,3 +214,5 @@ export function updateRefinery(data: Map<string, any>) {
 
     return refinery;
 }
+
+export default parseRefinery;

@@ -1,9 +1,11 @@
-import { inclusiveRange, lavaFunc, range } from '../utility'
+import { lavaFunc, range } from '../utility'
 import { Account } from './account';
 import { Alchemy } from './alchemy';
 import { AtomCollider } from './atomCollider';
 import { Bribe, BribeConst, BribeStatus } from './bribes';
 import { Capacity } from './capacity';
+import { Cloudsave } from './cloudsave';
+import { IParser } from './idleonData';
 import { ImageData } from './imageData';
 import { Item } from './items';
 import { Lab } from './lab';
@@ -240,6 +242,8 @@ export const initStamps = (allItems: Item[]): Stamp[][] => {
     const skills_stamp = allStamps.filter(stamp => stamp.type == "Skills Stamp");
     const misc_stamp = allStamps.filter(stamp => stamp.type == "Misc Stamp");
 
+    convertToItemClass([combat_stamp, skills_stamp, misc_stamp], allItems);
+
     return [combat_stamp, skills_stamp, misc_stamp]
 }
 
@@ -250,15 +254,18 @@ const convertToItemClass = (stamps: Stamp[][], allItems: Item[]) => {
     });
 }
 
-export default function parseStamps(rawData: Array<any>, maxData: Array<any>, allItems: Item[]) {
-    const stampData = initStamps(allItems); // Initialize stamp array with all pre-populated data
-    if (rawData) {
-        rawData.forEach((tab, index) => { // for each tab in the cloud save
+const parseStamps: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const stamps = data.get("stamps");
+    const stampLevels = raw.get("StampLv") as any[];
+    const stampMaxLevels = raw.get("StampLvM") as any[];
+    
+    if (stampLevels) {
+        stampLevels.forEach((tab, index) => { // for each tab in the cloud save
             Object.entries(tab).map(([key, value]) => { // for each stamp in the current tab
                 if (key.toLowerCase() !== "length") {  // ignore length at the end
                     try {
-                        stampData[index][parseInt(key)].level = Number(value); // update our pre-populated data with the stamp level
-                        stampData[index][parseInt(key)].maxLevel = Number(maxData[index][key]);
+                        stamps[index][parseInt(key)].level = Number(value); // update our pre-populated data with the stamp level
+                        stamps[index][parseInt(key)].maxLevel = Number(stampMaxLevels[index][key]);
                     }
                     catch (e) {
                         console.debug("Unable to set level for stamp", key);
@@ -267,9 +274,6 @@ export default function parseStamps(rawData: Array<any>, maxData: Array<any>, al
             })
         })
     }
-    convertToItemClass(stampData, allItems);
-
-    return stampData;
 }
 
 export function updateStamps(data: Map<string, any>) {
@@ -366,3 +370,5 @@ export function updateStampMaxCarry(data: Map<string, any>) {
 
     return stamps;
 }
+
+export default parseStamps;

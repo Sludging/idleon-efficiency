@@ -196,7 +196,7 @@ function RefineryDisplay() {
                     });
                     const refineryCycle = Math.floor(index / 3) == 0 ? refineryData.cycleInfo["Combustion"] : refineryData.cycleInfo["Synthesis"];
                     const secondsSinceUpdate = (new Date().getTime() - (lastUpdated?.getTime() ?? 0)) / 1000;
-                    const fuelTime = info.getFuelTime(storageItems, [], index <= saltMeritLevel) * refineryCycle.cycleTime - secondsSinceUpdate;
+                    const fuelTime = Math.max(0, info.getFuelTime(storageItems, [], index <= saltMeritLevel) * refineryCycle.cycleTime - secondsSinceUpdate);
                     const timeToNextRank = info.getTimeToNextRank(refineryCycle.cycleTime) - secondsSinceUpdate;
 
                     if (saltItem) {
@@ -221,7 +221,7 @@ function RefineryDisplay() {
                                                     <Box>
                                                         <Text color="accent-2" size="small">Rank up in</Text>
                                                         <Box>
-                                                            {fuelTime > 0 && (info.active ?
+                                                            {fuelTime >= 0 && (info.active ?
                                                                 <TimeDown size={size == "medium" ? TimeDisplaySize.Medium : TimeDisplaySize.Large} addSeconds={squirePowha ? squireTimeSave[index] : timeToNextRank} />
                                                                 : <StaticTime size={size == "medium" ? TimeDisplaySize.Medium : TimeDisplaySize.Large} fromSeconds={squirePowha ? squireTimeSave[index] : timeToNextRank} color='accent-1' />
                                                             )}

@@ -55,6 +55,10 @@ export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T
     return emptyValue;
 }
 
+export interface IParser {
+    (raw: Cloudsave, data: Map<string, any>): void
+}
+
 export class IdleonData {
     private data: Map<string, any>
     private lastUpdated: Date
@@ -121,7 +125,7 @@ export const initAccountDataKeys = (allItems: Item[]) => {
     accountData.set("lab", initLab());
     accountData.set("breeding", initBreeding());
     accountData.set("sigils", initSigils());
-    accountData.set("account", initAccount());
+    accountData.set("account", initAccount(allItems));
     accountData.set("divinity", initDivinity());
     accountData.set("sailing", initSailing());
     accountData.set("gaming", initGaming());
@@ -134,10 +138,13 @@ export const initAccountDataKeys = (allItems: Item[]) => {
     return accountData;
 }
 
+const parseFunctions: IParser[] = [
+    parseRefinery,
+    parseStamps,
+    parseTraps
+]
 
 const keyFunctionMap: Record<string, Function> = {
-    "stamps": (doc: Cloudsave, allItems: Item[], charCount: number) => parseStamps(doc.get("StampLv"), doc.get("StampLvM"), allItems),
-    "traps": (doc: Cloudsave, charCount: number) => parseTraps([...Array(charCount)].map((_, i) => { return doc.get(`PldTraps_${i}`) })),
     "statues": (doc: Cloudsave, charCount: number) => parseStatues([...Array(charCount)].map((_, i) => safeJsonParse(doc, `StatueLevels_${i}`, [])), safeJsonParse(doc, `StuG`, [])),
     "anvil": (doc: Cloudsave, allItems: Item[], charCount: number) => parseAnvil(
         [...Array(charCount)].map((_, i) => doc.get(`AnvilPA_${i}`)),
@@ -235,10 +242,8 @@ const postPostProcessingMap: Record<string, Function> = {
     "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
 }
 
-export const updateIdleonData = async (data: Cloudsave, charNames: string[], companions: number[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
-    let accountData = new Map();
+export const updateIdleonData = async (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: number[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
     accountData.set("playerNames", charNames);
-    accountData.set("itemsData", allItems);
     accountData.set("servervars", serverVars);
     accountData.set("OptLacc", data.get("OptLacc"));
     accountData.set("rawData", data.toJSON())
@@ -254,28 +259,16 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], com
 
     const validCharCount = [...Array(charNames.length)].map((_, i) => data.get(`Lv0_${i}`) as number[]).filter(notUndefined).length;
     accountData.set("charCount", validCharCount);
-    //initAccountDataKeys(accountData);
-    Object.entries(keyFunctionMap).forEach(([key, toExecute]) => {
+
+    parseFunctions.forEach(dataParser => {
         try {
-            if (key == "players" || key == "storage" || key == "quests") {
-                accountData.set(key, toExecute(data, accountData, allItems, validCharCount));
-            }
-            else if (key == "worship") {
-                accountData.set(key, toExecute(data, accountData, validCharCount));
-            }
-            else if (key == "obols" || key == "alchemy" || key == "forge" || key == "stamps" || key == "anvil" || key == "account" || key == "slab") {
-                accountData.set(key, toExecute(data, allItems, validCharCount));
-            }
-            else {
-                accountData.set(key, toExecute(data, validCharCount));
-            }
+            dataParser(data, accountData);
         }
         catch (e) {
             console.debug(e);
-            console.log(`Failed parsing ${key}`);
-            accountData.set(key, undefined);
+            console.log(`Failed parsing ${dataParser.name}`);
         }
-    })
+    });
 
     // Do post parse processing
     Object.entries(postProcessingMap).forEach(([key, toExecute]) => {
@@ -302,8 +295,8 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], com
     })
     
     // I sometimes forget that sorting has implication, fix sorting in the end incase I screwed something up in the post processing functions.
-    const players = accountData.get("players") as Player[];
-    players.sort((playera, playerb) => playera.playerID > playerb.playerID ? 1 : -1);
+    // const players = accountData.get("players") as Player[];
+    // players.sort((playera, playerb) => playera.playerID > playerb.playerID ? 1 : -1);
 
     const newData = new IdleonData(accountData, lastUpdated);
 

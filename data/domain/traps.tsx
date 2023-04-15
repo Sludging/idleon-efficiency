@@ -1,3 +1,5 @@
+import { Cloudsave } from "./cloudsave";
+import { IParser } from "./idleonData";
 import { ImageData } from "./imageData";
 import { Item } from "./items";
 
@@ -126,13 +128,15 @@ export const initTraps = (charCount: number) => {
 }
 
 
-export default function parseTraps(allTraps: Array<any>) {
+const parseTraps: IParser = function(raw: Cloudsave, data: Map<string, any>) {
+    const traps = data.get("traps") as Trap[][];
+    const charCount = data.get("charCount") as number;
 
-    const parsedData = allTraps.map((playerArray, pIndex) => {
+    [...Array(charCount)].map((_, i) => { return raw.get(`PldTraps_${i}`) })
+    .map((playerArray, pIndex) => {
         try {
             const parsedPlayerData: Array<any> = JSON.parse(playerArray);
-            const filteredTraps = parsedPlayerData//.filter(trapData => trapData[0] != -1);
-            return filteredTraps.map(trapData => {
+            traps[pIndex] = parsedPlayerData.map(trapData => {
                 return new Trap(pIndex, trapData)
             });
         }
@@ -140,5 +144,6 @@ export default function parseTraps(allTraps: Array<any>) {
             return [];
         }
     });
-    return parsedData;
 }
+
+export default parseTraps;

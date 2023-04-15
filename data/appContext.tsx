@@ -52,7 +52,7 @@ export const AppProvider: React.FC<{ appLoading: boolean, data: { data: Map<stri
   const handleStaticData = useCallback(async (profile: string, data: { data: Map<string, any>, charNames: string[] }) => {
     setAppStatus(AppStatus.Loading);
     const cloudsave = Cloudsave.fromJSON(data.data)
-    const newData = await updateIdleonData(cloudsave, data.charNames, [], allItems, {}, true);
+    const newData = await updateIdleonData(idleonData.getData(), cloudsave, data.charNames, [], allItems, {}, true);
     setData(newData);
     sendEvent({
       action: "handle_static",
@@ -63,13 +63,10 @@ export const AppProvider: React.FC<{ appLoading: boolean, data: { data: Map<stri
     setAppStatus(AppStatus.StaticData);
   }, []);
 
-  const handleLiveData = useCallback(async (cloudsave: Cloudsave, charNames: string[], companions: number[], serverVars: Record<string, any>) => {
-    // console.log("LiveData", appStatus, idleonData.getData().size);
-    // if (appStatus != AppStatus.LiveData) {
-    //   setAppStatus(AppStatus.Loading);
-    // }
-    //const newData = await updateIdleonData(cloudsave, charNames, companions, allItems, serverVars, false);
-    //setData(newData);
+  const handleLiveData = useCallback(async (cloudsave: Cloudsave, charNames: string[], serverVars: Record<string, any>) => {
+    // TODO: FIX COMPANIONS
+    const newData = await updateIdleonData(idleonData.getData(), cloudsave, charNames, [], allItems, serverVars, false);
+    setData(newData);
     sendEvent({
       action: "handle_snapshot",
       category: "engagement",
