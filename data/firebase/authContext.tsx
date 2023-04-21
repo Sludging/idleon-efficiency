@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { getAuth, User } from 'firebase/auth';
+import { getAuth, getRedirectResult, signInWithRedirect, User } from 'firebase/auth';
 import app from "./config";
 import { GoogleAuthProvider, signInWithPopup, signInWithCredential, signOut, EmailAuthProvider, OAuthProvider } from "firebase/auth";
 
@@ -74,15 +74,18 @@ export const AuthProvider: React.FC<{appLoading: boolean, data: {data: Map<strin
             });
     }, [])
 
-    const loginThroughApple = useCallback((callback?: Function) => {
+    const loginThroughApple = useCallback(async (callback?: Function) => {
         const auth = getAuth(app);
         const provider = new OAuthProvider('apple.com');
         
-        signInWithPopup(auth, provider)
+        if (callback) {
+            getRedirectResult(auth)
             .then((result) => {
-                setUser(result.user);
-                setAuthStatus(AuthStatus.Valid);
-                router.push("/world-1/stamps");
+                if (result) {
+                    setUser(result.user);
+                    setAuthStatus(AuthStatus.Valid);
+                    router.push("/world-1/stamps");
+                }
             }).catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
@@ -91,6 +94,10 @@ export const AuthProvider: React.FC<{appLoading: boolean, data: {data: Map<strin
                 }
                 console.debug(errorCode, errorMessage);
             });
+        }
+        else {
+            await signInWithRedirect(auth, provider);
+        }
     }, [])
 
     const logout = useCallback(() => {
