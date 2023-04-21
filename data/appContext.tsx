@@ -12,22 +12,29 @@ import { Cloudsave } from './domain/cloudsave';
 import { IdleonData, initAccountDataKeys, updateIdleonData } from './domain/idleonData';
 
 export enum AppStatus {
+  Init,
+  InvalidProfile,
+  Ready
+}
+
+export enum DataStatus {
+  NoData,
+  Loading,
   LiveData,
   StaticData,
-  InvalidProfile,
-  Loading,
-  NoData
 }
 
 export interface AppState {
   data: IdleonData,
   status: AppStatus,
+  dataStatus: DataStatus,
   profile: string
 }
 
 export const AppContext = React.createContext<AppState>({
   data: new IdleonData(new Map(), new Date()),
-  status: AppStatus.Loading,
+  status: AppStatus.Init,
+  dataStatus: DataStatus.NoData,
   profile: ""
 });
 
@@ -44,13 +51,14 @@ export const AppProvider: React.FC<{ appLoading: boolean, data: { data: Map<stri
   const baseAccountData = useMemo(() => initAccountDataKeys(allItems), []);
 
   const [idleonData, setData] = useState<IdleonData>(new IdleonData(baseAccountData, new Date()));
-  const [appStatus, setAppStatus] = useState<AppStatus>(AppStatus.Loading);
+  const [appStatus, setAppStatus] = useState<AppStatus>(AppStatus.Ready);
+  const [dataStatus, setDataStatus] = useState<DataStatus>(DataStatus.NoData);
   const [fireStore, setFireStore] = useState<FirestoreData | undefined>(undefined);
   const authContext = useContext(AuthContext);
   const user = authContext?.user;
 
   const handleStaticData = useCallback(async (profile: string, data: { data: Map<string, any>, charNames: string[] }) => {
-    setAppStatus(AppStatus.Loading);
+    setDataStatus(DataStatus.Loading);
     const cloudsave = Cloudsave.fromJSON(data.data)
     const newData = await updateIdleonData(idleonData.getData(), cloudsave, data.charNames, [], allItems, {}, true);
     setData(newData);
@@ -60,11 +68,12 @@ export const AppProvider: React.FC<{ appLoading: boolean, data: { data: Map<stri
       label: profile,
       value: 1,
     });
-    setAppStatus(AppStatus.StaticData);
-  }, []);
+    setDataStatus(DataStatus.StaticData);
+  }, [appStatus, dataStatus]);
 
   const handleLiveData = useCallback(async (cloudsave: Cloudsave, charNames: string[], serverVars: Record<string, any>) => {
     // TODO: FIX COMPANIONS
+    setDataStatus(DataStatus.Loading);
     const newData = await updateIdleonData(idleonData.getData(), cloudsave, charNames, [], allItems, serverVars, false);
     setData(newData);
     sendEvent({
@@ -73,8 +82,8 @@ export const AppProvider: React.FC<{ appLoading: boolean, data: { data: Map<stri
       label: user?.uid,
       value: 1,
     });
-    setAppStatus(AppStatus.LiveData);
-  }, [appStatus]);
+    setDataStatus(DataStatus.LiveData);
+  }, [appStatus, dataStatus]);
 
   useEffect(() => {
     // Don't do anything while the auth is still being figured out.
@@ -88,7 +97,7 @@ export const AppProvider: React.FC<{ appLoading: boolean, data: { data: Map<stri
       setFireStore(new FirestoreData(user.uid, app, handleLiveData));
     }
     // Domain has been provided, it's valid and the profile data hasn't been parsed yet.
-    else if (domain && domain != "" && appStatus != AppStatus.StaticData) {
+    else if (domain && domain != "" && dataStatus != DataStatus.StaticData) {
       // If there's no data, it's an invalid profile
       if (!data || data.data.size == 0) {
         setAppStatus(AppStatus.InvalidProfile);
@@ -99,15 +108,16 @@ export const AppProvider: React.FC<{ appLoading: boolean, data: { data: Map<stri
     }
     // No domain and no logged in user, we have no data.
     if (!domain && authContext?.authStatus == AuthStatus.NoUser) {
-      setAppStatus(AppStatus.NoData);
+      setDataStatus(DataStatus.NoData);
     }
   }, [domain, user, authContext, data, appLoading]);
 
   const contextValue = useMemo(() => ({
     data: idleonData,
     status: appStatus,
+    dataStatus: dataStatus,
     profile: domain
-  }), [idleonData, appStatus, domain]);
+  }), [idleonData, appStatus, dataStatus, domain]);
 
   return (
     <AppContext.Provider value={contextValue}>

@@ -19,7 +19,7 @@ import { Breeding } from "./breeding";
 import { Dungeons, PassiveType } from "./dungeons";
 import { Stamp, StampConsts, StampTab } from "./stamps";
 import { Achievement, AchievementConst } from "./achievements";
-import { safeJsonParse } from "./idleonData";
+import { IParser, safeJsonParse } from "./idleonData";
 import { Arcade } from "./arcade";
 import { ObolsData, ObolStats } from "./obols";
 import { ImageData } from "./imageData";
@@ -186,7 +186,7 @@ export class Player {
             default: return '';
         }
     }
-    
+
     getClassImageData = (): ImageData => {
         return {
             location: `ClassIcons${this.classId.valueOf()}`,
@@ -584,21 +584,27 @@ const parseEquipment = (
 }
 
 export const initPlayers = (charCount: number, playerNames: string[]) => {
-    return Array(charCount).map(pIndex => new Player(pIndex, playerNames[pIndex]));
+    return [...Array(charCount)].map((_, pIndex) => new Player(pIndex, playerNames[pIndex]));
 }
 
-export default function parsePlayers(doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], validCharCount: number) {
-    const playerNames = accountData.get("playerNames") as string[];
-    let parsedData = playerNames.slice(0, validCharCount).map((playerName, index) => {
-        let player = new Player(index, playerName);
+//  "players": => parsePlayers(doc, accountData, allItems, charCount),
 
+
+const parsePlayers: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const playerNames = data.get("playerNames") as string[];
+    const charCount = data.get("charCount") as number;
+    const allItems = data.get("itemsData") as Item[];
+
+    const players = initPlayers(charCount, playerNames);
+
+    players.map(player => {
         Object.entries(keyFunctionMap).forEach(([key, toExecute]) => {
             try {
                 if (key == "equipment") {
-                    toExecute(doc, player, allItems);
+                    toExecute(raw, player, allItems);
                 }
                 else {
-                    toExecute(doc, player);
+                    toExecute(raw, player);
                 }
             }
             catch (e) {
@@ -606,15 +612,13 @@ export default function parsePlayers(doc: Cloudsave, accountData: Map<string, an
                 console.debug(e);
             }
         });
-
-        return player;
     });
 
     // identify player ranking in each skill
     const allSkillsMap: Map<SkillsIndex, Array<number>> = new Map<SkillsIndex, Array<number>>();
 
     // record skill levels across all players in a map
-    parsedData.forEach((player) => {
+    players.forEach((player) => {
         player.skills.forEach((skill, skillIndex) => {
             if (!allSkillsMap.has(skillIndex)) {
                 allSkillsMap.set(skillIndex, []);
@@ -622,7 +626,8 @@ export default function parsePlayers(doc: Cloudsave, accountData: Map<string, an
             allSkillsMap.get(skillIndex)?.push(skill.level);
         });
     });
-    parsedData.forEach((player) => {
+
+    players.forEach((player) => {
         if (player) {
             for (const [skillIndex, skill] of player.skills) {
                 const sortedList = allSkillsMap.get(skillIndex)?.sort((a, b) => b - a);
@@ -634,7 +639,34 @@ export default function parsePlayers(doc: Cloudsave, accountData: Map<string, an
         }
     })
 
-    return parsedData;
+    data.set("players", players);
+}
+
+export const updatePlayerStarSigns = (data: Map<string, any>) => {
+    const players = data.get("players") as Player[];
+    const rift = data.get("rift") as Rift;
+
+    const infiniteBonus = rift.bonuses.find(bonus => bonus.name == "Infinite Stars") as InfiniteStarsBonus;
+    const infiniteStars = infiniteBonus.getBonus();
+
+    Object.entries(StarSignMap).slice(0, infiniteStars).forEach(([_, starSign]) => {
+        players.forEach(player => {
+            // If player isn't manually aligned to this sign, add it
+            if (!player.starSigns.find(sign => sign.name == starSign.name)) {
+                player.starSigns.push(starSign.duplicate(true));
+            }
+        })
+    })
+}
+
+export const updatePlayerDeathnote = (data: Map<string, any>) => {
+    const players = data.get("players") as Player[];
+    const deathnote = data.get("deathnote") as Deathnote;
+
+    // Track player deathnote data on the player object as well.
+    players.forEach(player => {
+        player.killInfo = deathnote.playerKillsByMap.get(player.playerID)!;
+    })
 }
 
 export const updatePlayerStarSigns = (data: Map<string, any>) => {
@@ -686,6 +718,13 @@ export const updatePlayers = (data: Map<string, any>) => {
         }
     })
 
+    // Track player deathnote data on the player object as well.
+    players.forEach(player => {
+        if (deathnote.playerKillsByMap.has(player.playerID)) {
+            player.killInfo = deathnote.playerKillsByMap.get(player.playerID)!;
+        }
+    })
+
     // Update player obols info so we can use it in maths
     players.forEach(player => {
         obols.playerStats[player.playerID]?.stats.filter(stat => stat.getValue() > 0).forEach(stat => {
@@ -712,12 +751,12 @@ export const updatePlayers = (data: Map<string, any>) => {
     bearGod.linkedPlayers.forEach(linkedPlayer => {
         const bearBonus = Math.ceil(bearGod.getMinorLinkBonus(linkedPlayer));
         linkedPlayer.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
-        .forEach(talent => {
-            talent.level += talent.level > 0 ? bearBonus : 0;
-            talent.maxLevel += bearBonus;
-        });
+            .forEach(talent => {
+                talent.level += talent.level > 0 ? bearBonus : 0;
+                talent.maxLevel += bearBonus;
+            });
         linkedPlayer.extraLevelsFromBear = bearBonus;
-    })    
+    })
 
     // I dunno why I have to sort it now, I never had to before. Need to think about it further.
     return players;
@@ -781,10 +820,10 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
     players.forEach(player => {
         const esBonus = Math.floor(family.classBonus.get(ClassIndex.Elemental_Sorcerer)?.getBonus(player) ?? 0);
         player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
-        .forEach(talent => {
-            talent.level += talent.level > 0 ? esBonus : 0;
-            talent.maxLevel += esBonus;
-        });
+            .forEach(talent => {
+                talent.level += talent.level > 0 ? esBonus : 0;
+                talent.maxLevel += esBonus;
+            });
         player.extraLevelsFromES = esBonus;
     })
 }
@@ -931,3 +970,5 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
 //         vm = null != d.CardDropz ? Rm.getReserved("CardDropz") : Rm.h.CardDropz;
 //     return 1.2 + ((rm + (um + cm + (pm + (hm + (bm + (fm + parsenum(vm))))))) / 100) * (1 + t._customBlock_GetTalentNumber(1, 628) / 100);
 // }
+
+export default parsePlayers;

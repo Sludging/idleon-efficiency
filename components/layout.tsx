@@ -15,18 +15,21 @@ import {
     ResponsiveContext,
     Menu,
     Avatar,
-    DropButton
+    DropButton,
+    ThemeType
 } from "grommet"
 import { useContext, useState, useEffect } from 'react'
-import { AppContext, AppStatus } from '../data/appContext'
+import { AppContext, AppStatus, DataStatus } from '../data/appContext'
 import { AuthContext, AuthStatus } from '../data/firebase/authContext'
 import { useRouter } from 'next/dist/client/router';
 
-import { CaretDownFill, FormDown, Menu as MenuIcon, User } from 'grommet-icons';
+import { CaretDownFill, FormDown, Menu as MenuIcon } from 'grommet-icons';
 import TextAndLabel from './base/TextAndLabel';
 import Icon from './leaderboards/icon';
 import Discord from '../lib/discord';
 import IconLink from './base/IconLink';
+import { ArrowsClockwise, Spinner, User } from '@phosphor-icons/react';
+import { normalizeColor } from 'grommet/utils';
 
 declare const window: Window &
     typeof globalThis & {
@@ -137,14 +140,16 @@ export default function Layout({
 }: {
     children: React.ReactNode
 }) {
+    const [profileDropDownOpen, setProfileDropDownOpen] = useState<boolean>(false);
+
+    const theme = useContext<ThemeType>(ThemeContext);
     const authData = useContext(AuthContext);
     const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
     const router = useRouter();
 
-    const [validState, setValidState] = useState<boolean>(false);
-    const [lastUpdated, setLastUpdated] = useState<string>("");
-    const [profileDropDownOpen, setProfileDropDownOpen] = useState<boolean>(false);
+    const validState = appContext.status == AppStatus.Ready;
+    const lastUpdated = appContext.data.getLastUpdated() as string;
 
     const navItems = [
         {
@@ -222,19 +227,10 @@ export default function Layout({
         }
     }
 
-    useEffect(() => {
-        if (appContext.status == AppStatus.LiveData || appContext.status == AppStatus.StaticData || appContext.status == AppStatus.NoData) {
-            setValidState(true);
-        }
-        else {
-            setValidState(false);
-        }
-        setLastUpdated(appContext.data.getLastUpdated() as string)
-    }, [authData, appContext])
-
-    if (authData?.authStatus == AuthStatus.NoUser && appContext.status == AppStatus.NoData && router.pathname != "/") {
+    if (authData?.authStatus == AuthStatus.NoUser && appContext.status == AppStatus.Ready && appContext.dataStatus == DataStatus.NoData && router.pathname != "/") {
         router.push('/');
     }
+
 
     return (
         <Box
@@ -251,18 +247,22 @@ export default function Layout({
                     </Link>
                     {validState &&
                         <Box direction="row" gap="xlarge" pad="medium">
+                            <Text>{appContext.dataStatus.toString()}</Text>
                             {
-                                appContext.status != AppStatus.NoData && <TextAndLabel textColor='accent-3' textSize='xsmall' labelSize='xsmall' label='Last Updated' text={lastUpdated} />
+                                appContext.dataStatus == DataStatus.Loading && <Box align="center" justify='center' animation={'rotateRight'}><ArrowsClockwise color={normalizeColor("green-2", theme)} size={24} /></Box>
+                            }
+                            {
+                                appContext.dataStatus != DataStatus.NoData && <TextAndLabel textColor='accent-3' textSize='xsmall' labelSize='xsmall' label='Last Updated' text={lastUpdated} />
                             }
 
                             {
-                                appContext.status == AppStatus.LiveData &&
+                                appContext.dataStatus == DataStatus.LiveData &&
                                 <Box direction="row">
                                     <DropButton
                                         plain={true}
                                         label={
                                             <Avatar direction='row'>
-                                                <User color="accent-3" />
+                                                <User color={normalizeColor("accent-3", theme)} size={24}/>
                                                 <CaretDownFill size="small" />
                                             </Avatar>
                                         }
@@ -295,7 +295,7 @@ export default function Layout({
                                 </Box>
                             }
                             {
-                                appContext.status == AppStatus.StaticData &&
+                                appContext.dataStatus == DataStatus.StaticData &&
                                 <TextAndLabel textColor='accent-3' textSize='xsmall' labelSize='xsmall' label="Public Profile" text={appContext.profile} />
                             }
                         </Box>
@@ -308,7 +308,7 @@ export default function Layout({
                         <Text size="large">Loading Data</Text>
                     </Box>)
                 }
-                {validState && appContext.status != AppStatus.NoData && (size === 'small' ?
+                {validState && appContext.dataStatus != DataStatus.NoData && (size === 'small' ?
                     <Box justify="end">
                         <Menu
                             a11yTitle="Navigation Menu"
@@ -362,7 +362,6 @@ export default function Layout({
                     </Box>
                     <Box justify="end" direction="row" gap="medium">
                         <Anchor href="https://www.buymeacoffee.com/sludger" target="_blank"><Image src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me A Coffee" height="40px" width="150px" unoptimized /></Anchor>
-                        
                     </Box>
                 </Box>
             </Footer>

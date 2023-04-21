@@ -241,8 +241,6 @@ function Cooking() {
         )
     }
 
-    console.log(cooking.meals);
-
     return (
         <Box>
             <NextSeo title="Cooking" />

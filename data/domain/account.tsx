@@ -135,7 +135,6 @@ export const initAccount = (allItems: Item[]) => {
 
     allItems.filter(item => isBossKeyRegex().exec(item.internalName)).forEach((keyItem) => {
         const newKey = new Key(keyItem.duplicate());
-        console.log(newKey);
         account.keys.push(newKey);
     })
 

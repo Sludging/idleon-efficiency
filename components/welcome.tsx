@@ -18,7 +18,7 @@ import ShadowBox from './base/ShadowBox';
 import { MouseEventHandler } from 'hoist-non-react-statics/node_modules/@types/react';
 import { NextSeo } from 'next-seo';
 import GoogleLogin from './login/googleLogin';
-import { AppContext, AppStatus } from '../data/appContext';
+import { AppContext, AppStatus, DataStatus } from '../data/appContext';
 
 const VerticalLine = styled.hr`
     border: 0;
@@ -42,13 +42,15 @@ function SpecialButton({ isActive, text, clickHandler, step }: { isActive: boole
 export default function Welcome() {
     const authData = useContext(AuthContext);
     const appContext = useContext(AppContext);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showLayer, setShowLayer] = useState(false);
     const [error, setError] = useState<string>('');
 
     const size = useContext(ResponsiveContext);
+
+    const isLoading = authData?.authStatus == AuthStatus.Loading ?? true;
+
 
     const onButtonClick = (toCall: Function | undefined, value?: string, value2?: string) => {
         try {
@@ -87,10 +89,6 @@ export default function Welcome() {
         }
     }
 
-
-    useEffect(() => {
-        setIsLoading(authData?.authStatus == AuthStatus.Loading ?? true);
-    }, [authData]);
     return (
         <Box>
             <NextSeo title="Boost your efficiency in Legends of Idleon!" />
@@ -105,7 +103,7 @@ export default function Welcome() {
                     </Grid>
                 </Box>
                 <Box width={{ max: '1440px' }} pad="large" fill margin={{ left: 'auto', right: 'auto' }} style={{ position: 'relative', top: '150px' }} >
-                    {!isLoading && !authData?.user && appContext.status != AppStatus.StaticData &&
+                    {!isLoading && !authData?.user && appContext.dataStatus != DataStatus.StaticData &&
                         <ShadowBox pad="large" background="dark-2" fill margin={{ left: 'auto', right: 'auto' }} flex={false}>
                             <Box>
                                 <Grid columns={size == "small" ? ["100%"] : ["45%", "10%", "45%"]} pad={{ left: "large"}}>
@@ -151,7 +149,7 @@ export default function Welcome() {
                         </ShadowBox>
                     }
                     {
-                        appContext.status == AppStatus.StaticData && 
+                        appContext.dataStatus == DataStatus.StaticData && 
                         <ShadowBox pad="large" background="dark-2" fill margin={{ left: 'auto', right: 'auto' }} flex={false} align='center'>
                             <Box gap="medium">
                                 <Box direction="row" gap='xsmall'>

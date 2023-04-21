@@ -141,21 +141,17 @@ export const initAccountDataKeys = (allItems: Item[]) => {
 const parseFunctions: IParser[] = [
     parseRefinery,
     parseStamps,
-    parseTraps
+    parseTraps,
+    parseStatues,
+    parsePlayers,
+    parseAnvil,
 ]
 
 const keyFunctionMap: Record<string, Function> = {
-    "statues": (doc: Cloudsave, charCount: number) => parseStatues([...Array(charCount)].map((_, i) => safeJsonParse(doc, `StatueLevels_${i}`, [])), safeJsonParse(doc, `StuG`, [])),
-    "anvil": (doc: Cloudsave, allItems: Item[], charCount: number) => parseAnvil(
-        [...Array(charCount)].map((_, i) => doc.get(`AnvilPA_${i}`)),
-        [...Array(charCount)].map((_, i) => doc.get(`AnvilPAstats_${i}`)),
-        [...Array(charCount)].map((_, i) => doc.get(`AnvilPAselect_${i}`)),
-        allItems),
     "timeAway": (doc: Cloudsave, charCount: number) => JSON.parse(doc.get('TimeAway')),
     "cauldronBubbles": (doc: Cloudsave, charCount: number) => doc.get('CauldronBubbles'),
     "prayers": (doc: Cloudsave, charCount: number) => parsePrayers(safeJsonParse(doc, "PrayOwned", [])),
     "cards": (doc: Cloudsave, charCount: number) => parseCards(safeJsonParse(doc, 'Cards0', {})),
-    "players": (doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], charCount: number) => parsePlayers(doc, accountData, allItems, charCount),
     "alchemy": (doc: Cloudsave, allItems: Item[], charCount: number) => parseAlchemy(doc.get("CauldronInfo"), doc.get("CauldUpgLVs"), allItems),
     "bribes": (doc: Cloudsave, charCount: number) => parseBribes(doc.get("BribeStatus")),
     "guild": (doc: Cloudsave, charCount: number) => parseGuild(safeJsonParse(doc, "Guild", []),),

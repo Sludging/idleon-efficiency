@@ -1,5 +1,7 @@
 import { round } from '../utility';
+import { Cloudsave } from './cloudsave';
 import { initStatueRepo, StatueDataBase } from './data/StatueRepo';
+import { IParser, safeJsonParse } from './idleonData';
 import { ImageData } from './imageData';
 import { StatueDataModel } from './model/statueDataModel';
 import { Player } from './player';
@@ -112,13 +114,20 @@ export class PlayerStatues {
 }
 
 export const initStatues = (charCount: number) => {
-    return Array(charCount).map(pIndex => new PlayerStatues(pIndex));
+    return [...Array(charCount)].map((_, pIndex) => new PlayerStatues(pIndex));
 }
 
-export default function parseStatues(allStatues: Array<Array<Array<number>>>, goldStatues: Array<boolean>) {
-    const parsedData = [...Array(allStatues.length)].map((_, pIndex) => { // for each player we have data for
-        const playerStatues = new PlayerStatues(pIndex);
-        playerStatues.statues.forEach((statue, statueIndex) => {
+const parseStatues: IParser = function(raw: Cloudsave, data: Map<string, any>) {
+    const charCount = data.get("charCount") as number;
+    const statues = initStatues(charCount);
+
+    const allStatues = [...Array(charCount)].map((_, i) => safeJsonParse(raw, `StatueLevels_${i}`, [])) as number[][][];
+    const goldStatues = safeJsonParse(raw, `StuG`, []) as boolean[];
+    
+    statues.map(player => { // for each player we have data for
+        const pIndex = player.playerID;
+
+        player.statues.forEach((statue, statueIndex) => {
             if (allStatues[pIndex].length > statueIndex) {
                 statue.level = allStatues[pIndex][statueIndex][StatueConst.LevelIndex];
                 statue.progress = allStatues[pIndex][statueIndex][StatueConst.ProgressIndex];
@@ -126,9 +135,10 @@ export default function parseStatues(allStatues: Array<Array<Array<number>>>, go
                     statue.isGold = goldStatues[statueIndex];
                 }
             }
-        })
-
-        return playerStatues;
+        });
     });
-    return parsedData;
+
+    data.set("statues", statues);
 }
+
+export default parseStatues;

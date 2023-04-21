@@ -163,7 +163,7 @@ export class Alerts {
     generalAlerts: Alert[] = [];
 
     getPlayerAlertsOfType = (playerID: number, alertType: string): Alert[] => {
-        return this.playerAlerts[playerID].filter(alert => alert.type == alertType);
+        return this.playerAlerts[playerID]?.filter(alert => alert.type == alertType) ?? [];
     }
 }
 

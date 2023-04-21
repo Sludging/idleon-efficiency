@@ -19,6 +19,8 @@ import { Sigils } from './sigils';
 import { Skilling } from './skilling';
 import { ClassIndex } from './talents';
 import { Capacity, CapacityConst } from './capacity';
+import { IParser } from './idleonData';
+import { Cloudsave } from './cloudsave';
 import { Divinity } from './divinity';
 import { Rift, SkillMastery } from './rift';
 import { Breeding } from './breeding';
@@ -207,18 +209,27 @@ export class AnvilWrapper {
 
 export const initAnvil = (charCount: number) => {
     const wrapper = new AnvilWrapper();
-    Array(charCount).forEach(pIndex => {
-        wrapper.playerAnvils[pIndex] = new Anvil();
+   [...Array(charCount)].forEach((_, pIndex) => {
+        const playerAnvil = new Anvil();
+        playerAnvil.playerID = pIndex;
+        wrapper.playerAnvils[pIndex] = playerAnvil;
     })
 
     return wrapper;
 }
 
-export const parseAnvil = (anvilProduction: number[][][], anvilStats: number[][], anvilSelected: number[][], allItems: Item[]) => {
-    const wrapper = new AnvilWrapper();
+export const parseAnvil: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const charCount = data.get("charCount") as number;
+    const allItems = data.get("itemsData") as Item[];
+    const wrapper = initAnvil(charCount);
 
-    anvilProduction.forEach((_, pIndex) => {
-        const anvil = new Anvil();
+    const anvilProduction = [...Array(charCount)].map((_, i) => raw.get(`AnvilPA_${i}`)) as number[][][];
+    const anvilStats = [...Array(charCount)].map((_, i) => raw.get(`AnvilPAstats_${i}`)) as number[][];
+    const anvilSelected = [...Array(charCount)].map((_, i) => raw.get(`AnvilPAselect_${i}`)) as number[][];
+
+    Object.entries(wrapper.playerAnvils).forEach(([_, anvil]) => {
+        const pIndex = anvil.playerID;
+
         anvil.production.forEach((item, index) => {
             item.currentAmount = anvilProduction[pIndex][index][0];
             item.currentXP = anvilProduction[pIndex][index][1];
@@ -236,11 +247,9 @@ export const parseAnvil = (anvilProduction: number[][][], anvilStats: number[][]
         anvil.capPoints = anvilStats[pIndex][5];
 
         anvil.currentlySelect = anvilSelected[pIndex];
-        anvil.playerID = pIndex;
-        wrapper.playerAnvils[pIndex] = anvil;
     })
 
-    return wrapper;
+    data.set("anvil", wrapper);
 }
 
 export const updateAnvil = (data: Map<string, any>) => {
