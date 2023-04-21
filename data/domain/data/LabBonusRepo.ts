@@ -124,7 +124,7 @@ export const initLabBonusRepo = () => {
                 "bonusOn": 0,
                 "bonusOff": 2,
                 "name": "Unadulterated Banking Fury",
-                "description": "+2% Total Damage for each 'greened' stack of resources in your bank. A 'greened' stack is one with 10 million or more items. @ - @ Total Bonus: {%"
+                "description": "+2% Total Damage for each 'green stack' of resources in your bank. A 'green stack' is a stack in your Storage Chest with 10 million or more items, since the number turns Green after 10M! @ - @ Total Bonus: {%"
             }),
         new LabBonusBase(12, <LabBonusModel>{
                 "no": 12,

@@ -7,5 +7,7 @@ export interface ArtifactModel {
     qtyBonus: number,
     bonus: string,
     ancientBonus: string,
-    ancientBonusQty: number
+    ancientBonusQty: number,
+    eldritchBonus?: string,
+    eldritchBonusQty?: number
 }

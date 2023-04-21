@@ -83,201 +83,6 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.bCraft,
                 "type": "Material"
             }),
-        new UsesBase("Grasslands1", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "TestObj1",
-                        "name": "Wooden Spear Recipe",
-                        "amount": 10,
-                        "type": "recipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "TestObj1",
-                        "name": "Wooden Spear Detailed Recipe",
-                        "amount": 10,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentBows1",
-                        "name": "Wooden Bow Recipe",
-                        "amount": 10,
-                        "type": "recipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentBows1",
-                        "name": "Wooden Bow Detailed Recipe",
-                        "amount": 10,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentWands1",
-                        "name": "Gnarled Wand Recipe",
-                        "amount": 10,
-                        "type": "recipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentWands1",
-                        "name": "Gnarled Wand Detailed Recipe",
-                        "amount": 10,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats1",
-                        "name": "Farmer Brim Recipe",
-                        "amount": 4,
-                        "type": "recipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats1",
-                        "name": "Farmer Brim Detailed Recipe",
-                        "amount": 4,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts1",
-                        "name": "Orange Tee Recipe",
-                        "amount": 6,
-                        "type": "recipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts1",
-                        "name": "Orange Tee Detailed Recipe",
-                        "amount": 6,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts2",
-                        "name": "Blue Tee Recipe",
-                        "amount": 25,
-                        "type": "recipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts2",
-                        "name": "Blue Tee Detailed Recipe",
-                        "amount": 31,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentPendant10",
-                        "name": "Sleek Shank Detailed Recipe",
-                        "amount": 40,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "InvBag102",
-                        "name": "Blunderbag Recipe",
-                        "amount": 150,
-                        "type": "recipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "InvBag102",
-                        "name": "Blunderbag Detailed Recipe",
-                        "amount": 150,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts25",
-                        "name": "Purple Tee Detailed Recipe",
-                        "amount": 6,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts24",
-                        "name": "Green Tee Detailed Recipe",
-                        "amount": 6,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts3",
-                        "name": "Black Tee Detailed Recipe",
-                        "amount": 116,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentPendant16",
-                        "name": "Strung Bludgeon Detailed Recipe",
-                        "amount": 40,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentPendant26",
-                        "name": "Polished Bludgeon Detailed Recipe",
-                        "amount": 40,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "BubbleRepo",
-                        "key": "Power Cauldron@Warriors Rule",
-                        "name": "Power Cauldron: Warriors Rule Bubble",
-                        "amount": "Lots",
-                        "type": "bubble"
-                    },
-                    <UseModel>{
-                        "repoSource": "BubbleRepo",
-                        "key": "Quicc Cauldron@Archer Or Bust",
-                        "name": "Quicc Cauldron: Archer Or Bust Bubble",
-                        "amount": "Lots",
-                        "type": "bubble"
-                    },
-                    <UseModel>{
-                        "repoSource": "BubbleRepo",
-                        "key": "High-IQ Cauldron@Mage Is Best",
-                        "name": "High-IQ Cauldron: Mage Is Best Bubble",
-                        "amount": "Lots",
-                        "type": "bubble"
-                    },
-                    <UseModel>{
-                        "repoSource": "BubbleRepo",
-                        "key": "Vials@Mushroom Soup",
-                        "name": "Vials: Mushroom Soup",
-                        "amount": "Lots",
-                        "type": "vial"
-                    },
-                    <UseModel>{
-                        "repoSource": "ItemRepo",
-                        "key": "StampA1",
-                        "name": "Sword Stamp Material",
-                        "amount": "Lots",
-                        "type": "stamp"
-                    },
-                    <UseModel>{
-                        "repoSource": "ItemRepo",
-                        "key": "StampC19",
-                        "name": "Multikill Stamp Material",
-                        "amount": "Lots",
-                        "type": "stamp"
-                    },
-                    <UseModel>{
-                        "repoSource": "PostOfficeRepo",
-                        "key": "Dudes Next Door",
-                        "name": "Dudes Next Door Order",
-                        "amount": "Lots",
-                        "type": "poBox"
-                    }
-                ],
-                "typeGen": TypeGenEnum.bCraft,
-                "type": "Monster Drop"
-            }),
         new UsesBase("CopperBar", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -312,28 +117,14 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentTools2",
                         "name": "Copper Pickaxe Recipe",
-                        "amount": 5,
+                        "amount": 10,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentTools2",
                         "name": "Copper Pickaxe Detailed Recipe",
-                        "amount": 5,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentToolsHatchet3",
-                        "name": "Copper Chopper Recipe",
-                        "amount": 5,
-                        "type": "recipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentToolsHatchet3",
-                        "name": "Copper Chopper Detailed Recipe",
-                        "amount": 5,
+                        "amount": 10,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -886,165 +677,172 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.bBar,
                 "type": "Bar"
             }),
-        new UsesBase("CraftMat1", <UsesModel>{
+        new UsesBase("Grasslands1", <UsesModel>{
                 "uses": [
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows1",
                         "name": "Wooden Bow Recipe",
-                        "amount": 15,
+                        "amount": 10,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows1",
                         "name": "Wooden Bow Detailed Recipe",
-                        "amount": 15,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentToolsHatchet3",
-                        "name": "Copper Chopper Recipe",
-                        "amount": 5,
-                        "type": "recipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentToolsHatchet3",
-                        "name": "Copper Chopper Detailed Recipe",
-                        "amount": 5,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats15",
-                        "name": "Leather Cap Recipe",
-                        "amount": 10,
-                        "type": "recipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats15",
-                        "name": "Leather Cap Detailed Recipe",
                         "amount": 10,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats3",
-                        "name": "Thief Hood Recipe",
-                        "amount": 40,
+                        "key": "EquipmentHats1",
+                        "name": "Farmer Brim Recipe",
+                        "amount": 4,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats3",
-                        "name": "Thief Hood Detailed Recipe",
-                        "amount": 40,
+                        "key": "EquipmentHats1",
+                        "name": "Farmer Brim Detailed Recipe",
+                        "amount": 4,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentPendant10",
-                        "name": "Sleek Shank Recipe",
-                        "amount": 300,
+                        "key": "EquipmentShirts1",
+                        "name": "Orange Tee Recipe",
+                        "amount": 6,
                         "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts1",
+                        "name": "Orange Tee Detailed Recipe",
+                        "amount": 6,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts2",
+                        "name": "Blue Tee Recipe",
+                        "amount": 25,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts2",
+                        "name": "Blue Tee Detailed Recipe",
+                        "amount": 31,
+                        "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPendant10",
                         "name": "Sleek Shank Detailed Recipe",
-                        "amount": 315,
+                        "amount": 10,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts24",
-                        "name": "Green Tee Recipe",
+                        "key": "InvBag102",
+                        "name": "Blunderbag Recipe",
                         "amount": 150,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
+                        "key": "InvBag102",
+                        "name": "Blunderbag Detailed Recipe",
+                        "amount": 150,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts25",
+                        "name": "Purple Tee Detailed Recipe",
+                        "amount": 6,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
                         "key": "EquipmentShirts24",
                         "name": "Green Tee Detailed Recipe",
-                        "amount": 150,
+                        "amount": 6,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShirts3",
                         "name": "Black Tee Detailed Recipe",
-                        "amount": 300,
+                        "amount": 116,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPendant16",
                         "name": "Strung Bludgeon Detailed Recipe",
-                        "amount": 315,
+                        "amount": 10,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPendant26",
                         "name": "Polished Bludgeon Detailed Recipe",
-                        "amount": 315,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats41",
-                        "name": "Sleek Coif Detailed Recipe",
-                        "amount": 40,
+                        "amount": 10,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "BubbleRepo",
-                        "key": "Kazam Cauldron@Lotto Skills",
-                        "name": "Kazam Cauldron: Lotto Skills Bubble",
+                        "key": "Power Cauldron@Warriors Rule",
+                        "name": "Power Cauldron: Warriors Rule Bubble",
                         "amount": "Lots",
                         "type": "bubble"
                     },
                     <UseModel>{
                         "repoSource": "BubbleRepo",
-                        "key": "Vials@Spool Sprite",
-                        "name": "Vials: Spool Sprite",
+                        "key": "Quicc Cauldron@Archer Or Bust",
+                        "name": "Quicc Cauldron: Archer Or Bust Bubble",
+                        "amount": "Lots",
+                        "type": "bubble"
+                    },
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "High-IQ Cauldron@Mage Is Best",
+                        "name": "High-IQ Cauldron: Mage Is Best Bubble",
+                        "amount": "Lots",
+                        "type": "bubble"
+                    },
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Vials@Mushroom Soup",
+                        "name": "Vials: Mushroom Soup",
                         "amount": "Lots",
                         "type": "vial"
                     },
                     <UseModel>{
                         "repoSource": "ItemRepo",
-                        "key": "StampA5",
-                        "name": "Target Stamp Material",
+                        "key": "StampA1",
+                        "name": "Sword Stamp Material",
                         "amount": "Lots",
                         "type": "stamp"
                     },
                     <UseModel>{
                         "repoSource": "ItemRepo",
-                        "key": "StampB2",
-                        "name": "Hatchet Stamp Material",
+                        "key": "StampC19",
+                        "name": "Multikill Stamp Material",
                         "amount": "Lots",
                         "type": "stamp"
                     },
                     <UseModel>{
-                        "repoSource": "NpcRepo",
-                        "key": "Krunk@King of the Cavern",
-                        "name": "King of the Cavern Requirements",
-                        "amount": 600,
-                        "type": "quest"
-                    },
-                    <UseModel>{
                         "repoSource": "PostOfficeRepo",
-                        "key": "Simple Shippin",
-                        "name": "Simple Shippin Order",
+                        "key": "Dudes Next Door",
+                        "name": "Dudes Next Door Order",
                         "amount": "Lots",
                         "type": "poBox"
                     }
                 ],
                 "typeGen": TypeGenEnum.bCraft,
-                "type": "Material"
+                "type": "Monster Drop"
             }),
         new UsesBase("OakTree", <UsesModel>{
                 "uses": [
@@ -1080,14 +878,14 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentToolsHatchet3",
                         "name": "Copper Chopper Recipe",
-                        "amount": 10,
+                        "amount": 25,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentToolsHatchet3",
                         "name": "Copper Chopper Detailed Recipe",
-                        "amount": 10,
+                        "amount": 25,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -1629,20 +1427,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentTools2",
-                        "name": "Copper Pickaxe Recipe",
-                        "amount": 10,
-                        "type": "recipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentTools2",
-                        "name": "Copper Pickaxe Detailed Recipe",
-                        "amount": 10,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentHats15",
                         "name": "Leather Cap Recipe",
                         "amount": 15,
@@ -1978,6 +1762,152 @@ export const initUsesRepo = () => {
                 ],
                 "typeGen": TypeGenEnum.bLeaf,
                 "type": "Leaf"
+            }),
+        new UsesBase("CraftMat1", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet3",
+                        "name": "Copper Chopper Recipe",
+                        "amount": 5,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet3",
+                        "name": "Copper Chopper Detailed Recipe",
+                        "amount": 5,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats15",
+                        "name": "Leather Cap Recipe",
+                        "amount": 10,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats15",
+                        "name": "Leather Cap Detailed Recipe",
+                        "amount": 10,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats3",
+                        "name": "Thief Hood Recipe",
+                        "amount": 40,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats3",
+                        "name": "Thief Hood Detailed Recipe",
+                        "amount": 40,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPendant10",
+                        "name": "Sleek Shank Recipe",
+                        "amount": 300,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPendant10",
+                        "name": "Sleek Shank Detailed Recipe",
+                        "amount": 300,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts24",
+                        "name": "Green Tee Recipe",
+                        "amount": 150,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts24",
+                        "name": "Green Tee Detailed Recipe",
+                        "amount": 150,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts3",
+                        "name": "Black Tee Detailed Recipe",
+                        "amount": 300,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPendant16",
+                        "name": "Strung Bludgeon Detailed Recipe",
+                        "amount": 300,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPendant26",
+                        "name": "Polished Bludgeon Detailed Recipe",
+                        "amount": 300,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats41",
+                        "name": "Sleek Coif Detailed Recipe",
+                        "amount": 40,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Kazam Cauldron@Lotto Skills",
+                        "name": "Kazam Cauldron: Lotto Skills Bubble",
+                        "amount": "Lots",
+                        "type": "bubble"
+                    },
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Vials@Spool Sprite",
+                        "name": "Vials: Spool Sprite",
+                        "amount": "Lots",
+                        "type": "vial"
+                    },
+                    <UseModel>{
+                        "repoSource": "ItemRepo",
+                        "key": "StampA5",
+                        "name": "Target Stamp Material",
+                        "amount": "Lots",
+                        "type": "stamp"
+                    },
+                    <UseModel>{
+                        "repoSource": "ItemRepo",
+                        "key": "StampB2",
+                        "name": "Hatchet Stamp Material",
+                        "amount": "Lots",
+                        "type": "stamp"
+                    },
+                    <UseModel>{
+                        "repoSource": "NpcRepo",
+                        "key": "Krunk@King of the Cavern",
+                        "name": "King of the Cavern Requirements",
+                        "amount": 600,
+                        "type": "quest"
+                    },
+                    <UseModel>{
+                        "repoSource": "PostOfficeRepo",
+                        "key": "Simple Shippin",
+                        "name": "Simple Shippin Order",
+                        "amount": "Lots",
+                        "type": "poBox"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bCraft,
+                "type": "Material"
             }),
         new UsesBase("CraftMat5", <UsesModel>{
                 "uses": [
@@ -21428,6 +21358,13 @@ export const initUsesRepo = () => {
                         "type": "quest"
                     },
                     <UseModel>{
+                        "repoSource": "NpcRepo",
+                        "key": "Rift Ripper@Entering The Rift...",
+                        "name": "Entering The Rift... Requirements",
+                        "amount": 878,
+                        "type": "quest"
+                    },
+                    <UseModel>{
                         "repoSource": "BuildingRepo",
                         "key": "Poisonic Elder",
                         "name": "Poisonic Elder Requirements",
@@ -22274,6 +22211,13 @@ export const initUsesRepo = () => {
                         "name": "Ergonomic DNA Splicer Detailed Recipe",
                         "amount": 200,
                         "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "NpcRepo",
+                        "key": "Rift Ripper@Entering The Rift...",
+                        "name": "Entering The Rift... Requirements",
+                        "amount": 5,
+                        "type": "quest"
                     },
                     <UseModel>{
                         "repoSource": "PostOfficeRepo",
@@ -26582,6 +26526,19 @@ export const initUsesRepo = () => {
                         "key": "Lava Larry@W5 Task Req Check",
                         "name": "W5 Task Req Check Requirements",
                         "amount": 1000,
+                        "type": "quest"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bCraft,
+                "type": "Monster Drop"
+            }),
+        new UsesBase("GalaxyB2", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "NpcRepo",
+                        "key": "Rift Ripper@Entering The Rift...",
+                        "name": "Entering The Rift... Requirements",
+                        "amount": 592,
                         "type": "quest"
                     }
                 ],

@@ -759,6 +759,203 @@ export const initEnemyRepo = () => {
                 "navigation": undefined,
                 "bossData": undefined
             }),
+        new EnemyBase("riftAll", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "The Rift",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 75,
+                    "MonsterOffsetX": 38,
+                    "MonsterOffsetY": 43,
+                    "HeightOfMonster": 60,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 9,
+                    "RespawnTime": 40,
+                    "DeathFrame": 23,
+                    "MonsterHPTotal": 1000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 100,
+                    "ExpType": 0,
+                    "Defence": 2,
+                    "MoveSPEED": 4,
+                    "Damages": [1, 1],
+                    "DefFor0": 0
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 6000, "chance": 0, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Quest74", "quantity": 1, "chance": 1e-09, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "riftAll",
+                    "world": "Hyperion Nebula",
+                    "map": <MapNameModel>{"intName": "xSpaceRift", "name": "The Rift", "id": 166},
+                    "portalRequirements": [100]
+                },
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("rift1", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Rift Spooker",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 14,
+                    "MonsterOffsetX": 38,
+                    "MonsterOffsetY": 43,
+                    "HeightOfMonster": 71,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 6,
+                    "RespawnTime": 40,
+                    "DeathFrame": 19,
+                    "MonsterHPTotal": 1000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 100,
+                    "ExpType": 0,
+                    "Defence": 2,
+                    "MoveSPEED": 4,
+                    "Damages": [1, 1],
+                    "DefFor0": 0
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 6000, "chance": 0, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Quest74", "quantity": 1, "chance": 1e-09, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("rift2", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Rift Slug",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 14,
+                    "MonsterOffsetX": 38,
+                    "MonsterOffsetY": 43,
+                    "HeightOfMonster": 74,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 9,
+                    "RespawnTime": 40,
+                    "DeathFrame": 23,
+                    "MonsterHPTotal": 1000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 100,
+                    "ExpType": 0,
+                    "Defence": 2,
+                    "MoveSPEED": 4,
+                    "Damages": [1, 1],
+                    "DefFor0": 0
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 6000, "chance": 0, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Quest74", "quantity": 1, "chance": 1e-09, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("rift3", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Rift Jocund",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 14,
+                    "MonsterOffsetX": 38,
+                    "MonsterOffsetY": 43,
+                    "HeightOfMonster": 65,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 8,
+                    "RespawnTime": 40,
+                    "DeathFrame": 19,
+                    "MonsterHPTotal": 1000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 100,
+                    "ExpType": 0,
+                    "Defence": 2,
+                    "MoveSPEED": 4,
+                    "Damages": [1, 1],
+                    "DefFor0": 0
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 6000, "chance": 0, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Quest74", "quantity": 1, "chance": 1e-09, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("rift4", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Rift Hivemind",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 14,
+                    "MonsterOffsetX": 38,
+                    "MonsterOffsetY": 43,
+                    "HeightOfMonster": 68,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 14,
+                    "RespawnTime": 40,
+                    "DeathFrame": 28,
+                    "MonsterHPTotal": 1000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 100,
+                    "ExpType": 0,
+                    "Defence": 2,
+                    "MoveSPEED": 4,
+                    "Damages": [1, 1],
+                    "DefFor0": 0
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 6000, "chance": 0, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Quest74", "quantity": 1, "chance": 1e-09, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("rift5", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Rift Stalker",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 14,
+                    "MonsterOffsetX": 38,
+                    "MonsterOffsetY": 43,
+                    "HeightOfMonster": 76,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 10,
+                    "RespawnTime": 40,
+                    "DeathFrame": 27,
+                    "MonsterHPTotal": 1000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 100,
+                    "ExpType": 0,
+                    "Defence": 2,
+                    "MoveSPEED": 4,
+                    "Damages": [1, 1],
+                    "DefFor0": 0
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 6000, "chance": 0, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Quest74", "quantity": 1, "chance": 1e-09, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
         new EnemyBase("frogP", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
                     "Name": "Poisonic Frog",
@@ -7001,7 +7198,7 @@ export const initEnemyRepo = () => {
                     "MonsterMoving": 1,
                     "MovingFrame": 8,
                     "RespawnTime": 40,
-                    "DeathFrame": 7,
+                    "DeathFrame": 17,
                     "MonsterHPTotal": 14000,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",

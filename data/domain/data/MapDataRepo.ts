@@ -1004,9 +1004,9 @@ export const initMapDataRepo = () => {
                 "portalRequirements": [700]
             }),
         new MapDataBase(166, <MapDataModel>{
-                "enemy": "Z",
+                "enemy": "riftAll",
                 "world": "Hyperion Nebula",
-                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 166},
+                "map": <MapNameModel>{"intName": "xSpaceRift", "name": "The Rift", "id": 166},
                 "portalRequirements": [100]
             }),
         new MapDataBase(167, <MapDataModel>{
