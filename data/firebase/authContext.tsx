@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { getAuth, User } from 'firebase/auth';
 import app from "./config";
-import { GoogleAuthProvider, signInWithPopup, signInWithCredential, signOut, EmailAuthProvider } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup, signInWithCredential, signOut, EmailAuthProvider, OAuthProvider } from "firebase/auth";
 
 import { sendEvent, loginEvent } from '../../lib/gtag';
 import { useRouter } from "next/dist/client/router";
@@ -18,6 +18,7 @@ interface AuthData {
     logoutFunction: Function
     tokenFunction: Function
     emailLoginFunction: Function
+    appleFunction: Function
 }
 
 export const AuthContext = React.createContext<AuthData | null>(null);
@@ -61,6 +62,25 @@ export const AuthProvider: React.FC<{appLoading: boolean, data: {data: Map<strin
             .then((result) => {
                 setUser(result.user);
                 loginEvent("EMAIL");
+                setAuthStatus(AuthStatus.Valid);
+                router.push("/world-1/stamps");
+            }).catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                if (callback) {
+                    callback(errorCode);
+                }
+                console.debug(errorCode, errorMessage);
+            });
+    }, [])
+
+    const loginThroughApple = useCallback((callback?: Function) => {
+        const auth = getAuth(app);
+        const provider = new OAuthProvider('apple.com');
+        
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                setUser(result.user);
                 setAuthStatus(AuthStatus.Valid);
                 router.push("/world-1/stamps");
             }).catch((error) => {
@@ -122,6 +142,7 @@ export const AuthProvider: React.FC<{appLoading: boolean, data: {data: Map<strin
             emailLoginFunction: loginThroughEmailPassword,
             logoutFunction: logout,
             tokenFunction: loginThroughToken,
+            appleFunction: loginThroughApple,
         }}>
             {children}
         </AuthContext.Provider>

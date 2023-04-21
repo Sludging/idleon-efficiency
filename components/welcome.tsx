@@ -136,6 +136,7 @@ export default function Welcome() {
                                             onChange={event => setPassword(event.target.value)}
                                         />
                                         <Button primary color="brand" label="Login" onClick={() => onButtonClick(authData?.emailLoginFunction, email, password)} />
+                                        <Button primary color="brand" label="Apple" onClick={() => onButtonClick(authData?.appleFunction)} />
                                     </Box>
                                 </Grid>
                                 {
