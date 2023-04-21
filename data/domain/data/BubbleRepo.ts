@@ -815,7 +815,7 @@ export const initBubbleRepo = () => {
                 "x1": 1,
                 "x2": 0,
                 "func": "add",
-                "description": "Increases the Max Lv of the 'Toilet Paper Postage' Talent to {. You can unlock this talent by typing 'More like Poopy Pete' near Pete.",
+                "description": "Increases the Max Lv of the 'Toilet Paper Postage' Talent to {. You unlock this talent by typing 'More like Poopy Pete' near Pete.",
                 "requirements": [<ComponentModel>{"item": "Bug2", "quantity": 65}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 4}],
                 "bonusKey": "TPpostage"
             }),
@@ -952,10 +952,10 @@ export const initBubbleRepo = () => {
         new BubbleBase("Petting The Rift", <BubbleModel>{
                 "cauldron": "Kazam Cauldron",
                 "name": "Petting The Rift",
-                "x1": 1.5,
-                "x2": 60,
-                "func": "decayMulti",
-                "description": "{x New Pet Chance for every gap you traverse in the SpaceTime Rift. The Rift entrance is deep in World 4, far above the 8 armed octodars.",
+                "x1": 15,
+                "x2": 50,
+                "func": "decay",
+                "description": "+{% Shiny Pet Chance for every new Rift level you reach. Go find the Rift Ripper, above the Octodars in World 4.",
                 "requirements": [<ComponentModel>{"item": "Critter10", "quantity": 100}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
                 "bonusKey": "NewPetRift"
             }),
@@ -1295,7 +1295,7 @@ export const initBubbleRepo = () => {
                 "x1": 3,
                 "x2": 0,
                 "func": "add",
-                "description": "Eagle Eye Trap-O-Vision gives +{% more critters. It will always give less than if you manually collected the traps though.",
+                "description": "Eagle Eye Trap-O-Vision gives +{% more critters.",
                 "requirements": [<ComponentModel>{"item": "Critter1A", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "2", "quantity": -1}],
                 "bonusKey": "TrapOvision"
             }),
@@ -1415,7 +1415,7 @@ export const initBubbleRepo = () => {
                 "x1": 1,
                 "x2": 0,
                 "func": "add",
-                "description": "+{ base critter per trap. This is a sHONKingly good bonus, the only one of its kind!",
+                "description": "+{ base critter per trap. This is a sHONKingly good bonus, the aren't many other of it's kind!",
                 "requirements": [<ComponentModel>{"item": "Critter9", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "3", "quantity": -1}],
                 "bonusKey": "CritterBASED"
             }),

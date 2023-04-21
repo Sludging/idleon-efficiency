@@ -307,7 +307,7 @@ export const initMealRepo = () => {
                 "cookingReq": 40000000,
                 "bonusQty": 6,
                 "bonusText": "+{% Cooking EXP",
-                "description": "This nutritious meal reminds me of the Mashed Potato monster from IdleOn, the video game!",
+                "description": "This nutritious meal reminds me of the potato monster from that IdleOn video game!",
                 "bonusKey": "CookExp"
             }),
         new MealBase(38, <MealModel>{
@@ -411,7 +411,7 @@ export const initMealRepo = () => {
                 "cookingReq": 14000000000,
                 "bonusQty": 2,
                 "bonusText": "+{% Liquid Cap for liquids 3 and 4",
-                "description": "Is there a reason these are so hard to cook? Are you just like... cutting it in half?",
+                "description": "Is there a reason these are so hard to cook? Aren't you just like... cutting it in half?",
                 "bonusKey": "Liquid34"
             }),
         new MealBase(51, <MealModel>{
