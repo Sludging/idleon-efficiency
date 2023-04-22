@@ -271,7 +271,7 @@ export class Vial {
     getBonus = (round: boolean = false): number => {
         return lavaFunc(this.func, this.level, this.x1, this.x2, round) 
         * this.bonusMulitplier
-        * (1 + (2 * this.maxedVials));
+        * (1 + (2 * this.maxedVials) / 100);
     }
 
     getBonusText = (bonus: number = this.getBonus(true)): string => {
