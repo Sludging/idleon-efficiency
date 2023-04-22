@@ -41,7 +41,8 @@ import { updateArtifacts } from './sailing/artifacts';
 import parseConstellations from './constellations';
 import parseSlab from './slab';
 import parseCapacity, { updateCapacity } from './capacity';
-import parseDeathnote from './deathnote';
+import parseDeathnote, { updateDeathnote } from './deathnote';
+import parseRift from './rift';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     try {
@@ -139,6 +140,7 @@ const keyFunctionMap: Record<string, Function> = {
     "collider": (doc: Cloudsave, charCount: number) => parseAtomCollider(doc.get("Atoms") as number[] || [], doc.get("Divinity") as number[] || []),
     "capacity": (doc: Cloudsave, charCount: number) => parseCapacity([...Array(charCount)].map((_, index) => new Map(Object.entries(safeJsonParse(doc,`MaxCarryCap_${index}`, new Map()))))),
     "deathnote": (doc: Cloudsave, charCount: number) => parseDeathnote([...Array(charCount)].map((_, i) => { return doc.get(`KLA_${i}`) })),
+    "rift": (doc: Cloudsave, charCount: number) => parseRift(doc.get("Rift") as number[]),
 }
 
 // ORDER IS IMPORTANT, the keys are not relevant as data doesn't get persisted.
@@ -163,7 +165,8 @@ const postProcessingMap: Record<string, Function> = {
     "worship": (doc: Cloudsave, accountData: Map<string, any>) => updateWorship(accountData),
     "arcade": (doc: Cloudsave, accountData: Map<string, any>) => updateArcade(accountData),
     "account": (doc: Cloudsave, accountData: Map<string, any>) => updateAccount(accountData),
-    "construction": (doc: Cloudsave, accountData: Map<string, any>) => updateConstruction(accountData),    
+    "construction": (doc: Cloudsave, accountData: Map<string, any>) => updateConstruction(accountData),
+    "deathnote": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnote(accountData),
 }
 
 // I really really hate this.
