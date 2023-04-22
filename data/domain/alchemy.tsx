@@ -12,9 +12,9 @@ import { SpiceComponentModel } from './model/spiceComponentModel';
 import { Player } from './player';
 import { ClassIndex } from './talents';
 import { SkillsIndex } from './SkillsIndex';
-import { Artifact } from './sailing/artifacts';
 import { Sailing } from './sailing';
 import { TaskBoard } from './tasks';
+import { Rift } from './rift';
 
 export enum CauldronIndex {
     Power = 0,
@@ -253,6 +253,7 @@ export class Vial {
 
     level: number = 0;
     bonusMulitplier: number = 1;
+    maxedVials: number = 0;
 
     constructor(id: string, public data: BubbleModel, public vialIndex: number) {
         this.name = id;
@@ -268,7 +269,9 @@ export class Vial {
     }
 
     getBonus = (round: boolean = false): number => {
-        return lavaFunc(this.func, this.level, this.x1, this.x2, round) * this.bonusMulitplier;
+        return lavaFunc(this.func, this.level, this.x1, this.x2, round) 
+        * this.bonusMulitplier
+        * (1 + (2 * this.maxedVials));
     }
 
     getBonusText = (bonus: number = this.getBonus(true)): string => {
@@ -558,9 +561,16 @@ export function updateAlchemy(data: Map<string, any>) {
     const players = data.get("players") as Player[];
     const sailing = data.get("sailing") as Sailing;
     const taskboard = data.get("taskboard") as TaskBoard;
+    const rift = data.get("rift") as Rift;
 
     if (lab.bonuses.find(bonus => bonus.name == "My 1st Chemistry Set")?.active ?? false) {
         alchemy.vials.forEach(vial => vial.bonusMulitplier = 2)
+    }
+
+    const riftVialMastery = rift.bonuses.find(bonus => bonus.name == "Vial Mastery");
+    if (riftVialMastery?.active ?? false) {
+        const maxVials = alchemy.vials.reduce((sum, vial) => sum += vial.level == 13 ? 1 : 0, 0);
+        alchemy.vials.forEach(vial => vial.maxedVials = maxVials);        
     }
 
     if (lab.bonuses.find(bonus => bonus.name == "No Bubble Left Behind")?.active) {
