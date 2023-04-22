@@ -15,7 +15,7 @@ const moduleExports = {
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     domains: ['cdn.buymeacoffee.com', 'cdn.idleonefficiency.com'],
-    minimumCacheTTL: 14400,
+    minimumCacheTTL: 604800,
     unoptimized: true,
   },
   sentry: {
