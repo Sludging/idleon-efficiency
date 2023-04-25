@@ -1,6 +1,20 @@
+import { Breeding } from "./breeding";
+
 export class RiftBonus {
     active: boolean = false;
     constructor(public name: string, public unlockAt: number, public description: string) {}
+
+    getBonus = () => {
+        return 0;
+    }
+}
+
+export class InfiniteStarsBonus extends RiftBonus {
+    shinyBonus: number = 0;
+
+    override getBonus = () => {
+        return 5 + this.shinyBonus;
+    }
 }
 
 export class Rift {
@@ -17,7 +31,7 @@ export default function parseRift(riftData: number[]) {
     rift.taskProgress = riftData[1];
 
     rift.bonuses.push(new RiftBonus("Trap Box Vacuum", 6, "The trapper drone in World 3 will automatically collect traps every 24 hours, and will deposit the critters into your Storage Chest if there is space. @ The EXP from the Traps goes to the one who placed the traps."))
-    rift.bonuses.push(new RiftBonus("Infinite Stars", 11, "Permanently transforms Star Signs into Infinite Star Signs, which always give their bonus AND don't give the negatives. Infinite Star Signs are indicated by a little infinity icon, and are transformed in a specific order, so you don't get to choose. Get more from Shiny Pets in Breeding..."))
+    rift.bonuses.push(new InfiniteStarsBonus("Infinite Stars", 11, "Permanently transforms Star Signs into Infinite Star Signs, which always give their bonus AND don't give the negatives. Infinite Star Signs are indicated by a little infinity icon, and are transformed in a specific order, so you don't get to choose. Get more from Shiny Pets in Breeding..."))
     rift.bonuses.push(new RiftBonus("Skill Mastery", 16, "Lava didn't bother with a description for this one. Get bonuses based on total level of your skills across all characters."))
     rift.bonuses.push(new RiftBonus("Eclipse Skulls", 21, "You can now get Eclipse Skulls in Deathnote, unlocked at 1,000,000,000 kills. Eclipse Skulls are worth 20 points, and you also get +5% Multiplicative Damage."))
     rift.bonuses.push(new RiftBonus("Stamp Mastery", 26, "Every 100 total levels of all your stamps, you get a 1% chance to get a 'Gilded Stamp' 95% Reduction in Stamp Upgrade costs. This chance happens every day you log in, and they stack for whenever you want to use them!"))

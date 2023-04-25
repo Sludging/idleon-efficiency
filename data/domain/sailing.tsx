@@ -238,6 +238,8 @@ export class Sailing {
     captainsUnlocked = 1;
     boatsUnlocked = 1;
 
+    shinyMinSpeedBonus: number = 0;
+
     nextCaptainCost = () => {
         return (60 * this.captainsUnlocked + 15 * Math.pow(this.captainsUnlocked, 2.2)) * Math.pow(1.52, this.captainsUnlocked) * .6;
     }
@@ -360,14 +362,14 @@ export const updateSailing = (data: Map<string, any>) => {
     return sailing;
 }
 
-export const updateFamilyImpact = (data: Map<string, any>) => {
+export const updateMinTravelTime = (data: Map<string, any>) => {
     const sailing = data.get("sailing") as Sailing;
     const family = data.get("family") as Family;
 
     // Minimum travel time
     const siegeBonus = family.classBonus.get(ClassIndex.Siege_Breaker)?.getBonus() ?? 0;
     sailing.boats.forEach(boat => {
-        boat.minTravelTime = 120 / (1 + siegeBonus / 100);
+        boat.minTravelTime = 120 / (1 + ((siegeBonus + sailing.shinyMinSpeedBonus) / 100));
     });
 
     return sailing;

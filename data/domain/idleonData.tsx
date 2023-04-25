@@ -1,7 +1,7 @@
 import parseTraps from './traps';
 import parseStamps, { updateStampMaxCarry, updateStamps } from './stamps';
 import parseStatues from './statues';
-import parsePlayers, { Player, playerExtraCalculations, updatePlayers } from './player';
+import parsePlayers, { Player, playerExtraCalculations, updatePlayerStarSigns, updatePlayers, updateStarSigns } from './player';
 import parseAlchemy, { updateAlchemy } from './alchemy';
 import parseBribes from './bribes';
 import parseGuild from './guild';
@@ -27,14 +27,14 @@ import { parseDungeons } from './dungeons';
 import { parseForge, updateForge } from './forge';
 import { parseCooking, updateCooking } from './cooking';
 import { parseLab, updateLab } from './lab';
-import { parseBreeding, updateBreeding } from './breeding';
+import { parseBreeding, updateAllShinyEffects, updateBreeding } from './breeding';
 import { notUndefined } from '../utility';
 import parseSigils, { updateSigils } from './sigils';
 import { parseAnvil, updateAnvil } from './anvil';
 import { updateAlerts } from './alerts';
 import { parseAccount, updateAccount } from './account';
 import parseDivinity, { updateDivinity } from './divinity';
-import parseSailing, { updateFamilyImpact, updateSailing } from './sailing';
+import parseSailing, { updateMinTravelTime, updateSailing } from './sailing';
 import parseGaming from './gaming';
 import parseAtomCollider, { updateAtomCollider } from './atomCollider';
 import { updateArtifacts } from './sailing/artifacts';
@@ -146,6 +146,8 @@ const keyFunctionMap: Record<string, Function> = {
 // ORDER IS IMPORTANT, the keys are not relevant as data doesn't get persisted.
 // This allows for multiple calls that touch the same data to happen in the same map (artifacts + sailing for example)
 const postProcessingMap: Record<string, Function> = {
+    "updateAllShinies": (doc: Cloudsave, accountData: Map<string, any>) => updateAllShinyEffects(accountData),
+    "playerStarSigns": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerStarSigns(accountData),
     "collider": (doc: Cloudsave, accountData: Map<string, any>) => updateAtomCollider(accountData),
     "artifacts": (doc: Cloudsave, accountData: Map<string, any>) => updateArtifacts(accountData),
     "sigils": (doc: Cloudsave, accountData: Map<string, any>) => updateSigils(accountData),
@@ -176,7 +178,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "playersExtraMaths": (doc: Cloudsave, accountData: Map<string, any>) => playerExtraCalculations(accountData),
     "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),
     "refinery": (doc: Cloudsave, accountData: Map<string, any>) => updateRefinery(accountData),
-    "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateFamilyImpact(accountData),
+    "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateMinTravelTime(accountData),
     "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
 }
 

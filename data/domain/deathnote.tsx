@@ -33,7 +33,7 @@ export class Deathnote {
             case killCount > 1000000 && killCount < 5000000: return 5;
             case killCount > 5000000 && killCount < 100000000: return 7;
             case killCount > 100000000 && killCount < 1000000000: return 10;
-            case killCount > 1000000000: return this.hasRiftBonus ? 15 : 10;
+            case killCount > 1000000000: return this.hasRiftBonus ? 20 : 10;
             default: return 0;
         }
     }
@@ -97,6 +97,5 @@ export const updateDeathnote = (data: Map<string, any>) => {
     const deathNote = data.get("deathnote") as Deathnote;
     const rift = data.get("rift") as Rift;
 
-    console.log("Deathnote - Rift - Bonus", rift, rift.bonuses.find(bonus => bonus.name == "Eclipse Skulls"));
     deathNote.hasRiftBonus = rift.bonuses.find(bonus => bonus.name == "Eclipse Skulls")?.active ?? false;
 }
