@@ -294,7 +294,12 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                             Portal Requirement: {nFormatter(player.killInfo.get(player.currentMapId) ?? 0)} / [{MapInfo[player.currentMapId].data.portalRequirements.map(req => nFormatter(req)).join(' | ')}]
                         </Text>
                     }
-                    <Text size="small">{player.starSigns.length} Active Star Signs</Text>
+                    {
+                       player.starSigns.filter(sign => sign.aligned == true).map((sign, index) => (
+                        <Text key={`sign_${index}`} size="small">Sign {index}: {sign.getText()}</Text>
+                       )) 
+                    }
+                    
                     <Box direction="row" gap="xsmall">
                         <Text size="small">Away Since =</Text>
                         {player.afkFor < 100 ? "Active" : <TimeUp addSeconds={player.afkFor + secondsSinceUpdate} />}

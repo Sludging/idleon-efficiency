@@ -8,6 +8,7 @@ interface StarBonus {
 
 export class StarSign {
     hasChip: boolean = false;
+    aligned: boolean = false;
     constructor(public name: string, public bonuses: StarBonus[]) { }
 
     getText = () => {
