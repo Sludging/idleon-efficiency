@@ -1,7 +1,7 @@
 import parseTraps from './traps';
 import parseStamps, { updateStampMaxCarry, updateStamps } from './stamps';
 import parseStatues from './statues';
-import parsePlayers, { Player, playerExtraCalculations, updatePlayerStarSigns, updatePlayers, updateStarSigns } from './player';
+import parsePlayers, { Player, playerExtraCalculations, updatePlayerStarSigns, updatePlayers } from './player';
 import parseAlchemy, { updateAlchemy } from './alchemy';
 import parseBribes from './bribes';
 import parseGuild from './guild';
