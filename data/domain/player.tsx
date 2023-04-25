@@ -508,7 +508,7 @@ const parseStarSigns = (starSigns: string, player: Player) => {
         return;
     }
     player.starSigns = starSigns.split(',').map((sign) => {
-        if (sign) {
+        if (sign && Object.keys(StarSignMap).includes(sign)) {
             const matchingSign = StarSignMap[Number(sign)].duplicate();
             matchingSign.aligned = true;
             return matchingSign;
