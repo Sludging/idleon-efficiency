@@ -287,7 +287,7 @@ export class Lab {
         return 0.9604339 * Math.max(Math.abs(x1 - x2), Math.abs(y1 - y2)) + 0.397824735 * Math.min(Math.abs(x1 - x2), Math.abs(y1 - y2));
     }
 
-    getPlayerLinewidth = (player: Player, pxMealBonus: number, linePctMealBonus: number, passiveCardBonus: number, petArenaBonus: number, inGemTube: boolean, buboBoost: number) => {
+    getPlayerLinewidth = (player: Player, pxMealBonus: number, linePctMealBonus: number, passiveCardBonus: number, petArenaBonus: number, inGemTube: boolean, buboBoost: number, shinyBonus: number) => {
         const labSkillLevel = player.skills.get(SkillsIndex.Intellect)?.level ?? 0;
         let baseWidth = 50 + (2 * labSkillLevel);
 
@@ -301,7 +301,7 @@ export class Lab {
         const playerChipBonus = player.labInfo.chips.filter(slot => slot.chip && slot.chip.data.name == "Conductive Motherboard").reduce((sum, slot) => sum += slot.chip?.getBonus() ?? 0, 0);
         const bonusWidth = inGemTube ? 30 : 0;
         return Math.floor((baseWidth + (pxMealBonus + Math.min(passiveCardBonus, 50)))
-            * (1 + ((buboBoost + linePctMealBonus + playerChipBonus + (20 * petArenaBonus) + bonusWidth) / 100))
+            * (1 + ((buboBoost + linePctMealBonus + playerChipBonus + (20 * petArenaBonus) + bonusWidth + shinyBonus) / 100))
         )
     }
 }
@@ -350,10 +350,11 @@ const _calculatePlayersLineWidth = (lab: Lab, cooking: Cooking, breeding: Breedi
         const linePctMealBonus = cooking?.meals.filter(meal => meal.bonusKey == "LinePct").reduce((sum, meal) => sum += meal.getBonus(false, mealBonus), 0) ?? 0;
         const passiveCardBonus = cards?.filter(card => card.data.effect.includes("Line Width")).reduce((sum, card) => sum += card.getBonus(), 0) ?? 0;
         const petArenaBonus = breeding.hasBonus(13) ? 1 : 0;
+        const shinyBonus = breeding.shinyBonuses.find(bonus => bonus.data.index == 19)?.getBonus() ?? 0;
         const gemTubes = (gemStore?.purchases.find(purchase => purchase.no == 123)?.pucrhased ?? 0) * 2;
         lab.playersInTubes.forEach((player, index) => {
             const rightOfBubo = lab.playerCords[player.playerID].x >= lab.playerCords[lab.bestBuboPlayerID].x;
-            player.labInfo.lineWidth = lab?.getPlayerLinewidth(player, pxMealBonus, linePctMealBonus, passiveCardBonus, petArenaBonus, index < gemTubes, rightOfBubo ? buboBoost : 0);
+            player.labInfo.lineWidth = lab?.getPlayerLinewidth(player, pxMealBonus, linePctMealBonus, passiveCardBonus, petArenaBonus, index < gemTubes, rightOfBubo ? buboBoost : 0, shinyBonus);
             player.labInfo.supped = index < gemTubes;
         });
     }

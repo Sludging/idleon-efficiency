@@ -58,6 +58,7 @@ export class Meal {
     chanceDiscoveryChance: number = 0;
 
     mainframeBonus: number = 0;
+    shinyBonus: number = 0;
 
     // Active cooking values
     cookingContribution: number = 0;
@@ -103,7 +104,7 @@ export class Meal {
             return roundResult ? round(finalMath) : finalMath;
         }
 
-        const finalMath = (1 + mainFrameBonus / 100) * level * this.bonusQty;
+        const finalMath = (1 + ((mainFrameBonus +  this.shinyBonus) / 100)) * level * this.bonusQty;
         return roundResult ? round(finalMath) : finalMath;
     }
 

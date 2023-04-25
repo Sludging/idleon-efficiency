@@ -23,6 +23,15 @@ export class StarSign {
         }
         return 0;
     }
+
+    duplicate(noDownside: boolean = false) {
+        let bonuses = this.bonuses;
+        if (noDownside) {
+            bonuses = bonuses.filter(bonus => bonus.bonus > 0);
+        }
+
+        return new StarSign(this.name, bonuses);
+    }
 }
 
 export const StarSignMap: Record<number, StarSign> = {
