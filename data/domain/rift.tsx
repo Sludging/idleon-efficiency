@@ -39,7 +39,7 @@ export default function parseRift(riftData: number[]) {
     rift.bonuses.push(new RiftBonus("Vial Mastery", 36, "Each Gold Crown Vial you have, which is the 13th and final vial you upgrade to for 1 Billion Resource, now gives you a 1.02x boost to ALL Vial Bonuses!"))
 
     rift.bonuses.forEach(bonus => {
-        bonus.active = rift.level >= bonus.unlockAt;
+        bonus.active = rift.level >= (bonus.unlockAt - 1);
     })
 
     return rift;
