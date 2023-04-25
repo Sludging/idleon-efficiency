@@ -436,7 +436,7 @@ export const updateLab = (data: Map<string, any>) => {
         }
         // Same ugly handling for starsign doubler.
         if (chips.filter(chip => chip.data.name == "Silkrode Nanochip").length > 0) {
-            playerData[index].starSigns.forEach(sign => sign.hasChip = true);
+            playerData[index].starSigns.filter(sign => sign.aligned).forEach(sign => sign.hasChip = true);
         }
     })
 
