@@ -140,7 +140,7 @@ const keyFunctionMap: Record<string, Function> = {
     "collider": (doc: Cloudsave, charCount: number) => parseAtomCollider(doc.get("Atoms") as number[] || [], doc.get("Divinity") as number[] || []),
     "capacity": (doc: Cloudsave, charCount: number) => parseCapacity([...Array(charCount)].map((_, index) => new Map(Object.entries(safeJsonParse(doc,`MaxCarryCap_${index}`, new Map()))))),
     "deathnote": (doc: Cloudsave, charCount: number) => parseDeathnote([...Array(charCount)].map((_, i) => { return doc.get(`KLA_${i}`) })),
-    "rift": (doc: Cloudsave, charCount: number) => parseRift(doc.get("Rift") as number[]),
+    "rift": (doc: Cloudsave, charCount: number) => parseRift(doc.get("Rift") as number[], [...Array(charCount)].map((_, i) => { return doc.get(`Lv0_${i}`) })),
 }
 
 // ORDER IS IMPORTANT, the keys are not relevant as data doesn't get persisted.
