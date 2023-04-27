@@ -1,8 +1,34 @@
-import { Breeding } from "./breeding";
+import { SkillsIndex } from "./SkillsIndex";
+
+
+const defaultBonuses = [
+    '+25%_{_EXP_GAIN',
+    '+10%_{_EFFICIENCY',
+    '+5%_TOTAL_DAMAGE',
+    '+10%_ALL_SKILL_EXP',
+    '+5%_ALL_SKILL_EFFICIENCY',
+    '+1%_PRINTER_OUTPUT',
+    '+25%_ALL_SKILL_EXP',
+  ];
+  
+  const specialBonuses: Map<SkillsIndex, string> = new Map([
+    [SkillsIndex.Mining, 'ALL_MINING_CARDS_ARE_NOW_PASSIVE'],
+    [SkillsIndex.Fishing, 'ALL_FISHING_CARDS_ARE_NOW_PASSIVE'],
+    [SkillsIndex.Chopping, 'ALL_CHOPPING_CARDS_ARE_NOW_PASSIVE'],
+    [SkillsIndex.Catching, 'ALL_CATCHING_CARDS_ARE_NOW_PASSIVE'],
+    [SkillsIndex.Trapping, 'ALL_TRAPPING_CARDS_ARE_NOW_PASSIVE'],
+    [SkillsIndex.Smithing, "+25%_FORGE_ORE_CAPACITY"],
+    [SkillsIndex.Alchemy, "+5%_ALL_LIQUID_CAP"],
+    [SkillsIndex.Construction, "+15%_SHRINE_LV_UP_RATE"],
+    [SkillsIndex.Breeding, "+15%_EGG_INCUBATION_SPEED"],
+    [SkillsIndex.Sailing, "+15%_BOAT_SAILING_SPEED"],
+    [SkillsIndex.Divinity, "+15%_DIVINITY_PTS_GAINED"],
+    [SkillsIndex.Gaming, "1.15X_GAMING_BITS_GAINED"],
+  ]);
 
 export class RiftBonus {
     active: boolean = false;
-    constructor(public name: string, public unlockAt: number, public description: string) {}
+    constructor(public name: string, public unlockAt: number, public description: string) { }
 
     getBonus = () => {
         return 0;
@@ -17,6 +43,102 @@ export class InfiniteStarsBonus extends RiftBonus {
     }
 }
 
+export class SkillMastery extends RiftBonus {
+    skillLevels: Record<SkillsIndex, number> = {
+        [SkillsIndex.Mining]: 0,
+        [SkillsIndex.Smithing]: 0,
+        [SkillsIndex.Chopping]: 0,
+        [SkillsIndex.Fishing]: 0,
+        [SkillsIndex.Alchemy]: 0,
+        [SkillsIndex.Catching]: 0,
+        [SkillsIndex.Trapping]: 0,
+        [SkillsIndex.Construction]: 0,
+        [SkillsIndex.Worship]: 0,
+        [SkillsIndex.Cooking]: 0,
+        [SkillsIndex.Breeding]: 0,
+        [SkillsIndex.Intellect]: 0,
+        [SkillsIndex.Sailing]: 0,
+        [SkillsIndex.Divinity]: 0,
+        [SkillsIndex.Gaming]: 0,
+    };
+
+    getSkillRank = (skill: SkillsIndex) => {
+        const level = this.skillLevels[skill];
+        switch(true) {
+            case level < 150: return 0;
+            case level < 200: return 1;
+            case level < 300: return 2;
+            case level < 400: return 3;
+            case level < 500: return 4;
+            case level < 750: return 5;
+            case level < 1000: return 6;
+            case level > 1000: return 7;
+            default: return -1;
+        }
+    }
+
+    getBonusText = (skill: SkillsIndex, bonusIndex: number) => {
+        // If it's the 2nd bonus and we have an override for that skill, get the special text.
+        if (bonusIndex == 1 && specialBonuses.has(skill)) {
+            return specialBonuses.get(skill)!.replace(/_/g, " ");
+        }
+
+        return defaultBonuses[bonusIndex].replace(/_/g, " ").replace(/{/, SkillsIndex[skill]);
+    }
+
+    getSkillBonus = (skill: SkillsIndex, bonusIndex: number) => {
+        if (!this.active) { 
+            return 0;
+        }
+
+        // Can be less duplicated/smarter but I prefer it readable.
+        switch(true) {
+            case bonusIndex == 0: return this.getSkillRank(skill) > bonusIndex ? 25 : 0;
+            case bonusIndex == 2: return this.getSkillRank(skill) > bonusIndex ? 5 : 0;
+            case bonusIndex == 3: return this.getSkillRank(skill) > bonusIndex ? 10 : 0;
+            case bonusIndex == 4: return this.getSkillRank(skill) > bonusIndex ? 5 : 0;
+            case bonusIndex == 5: return this.getSkillRank(skill) > bonusIndex ? 1 : 0;
+            case bonusIndex == 6: return this.getSkillRank(skill) > bonusIndex ? 25 : 0;
+            case bonusIndex == 1 && skill == SkillsIndex.Smithing: return this.getSkillRank(skill) > bonusIndex ? 25 : 0;
+            case bonusIndex == 1 && skill == SkillsIndex.Alchemy: return this.getSkillRank(skill) > bonusIndex ? 5 : 0;
+            case bonusIndex == 1 && skill == SkillsIndex.Construction: return this.getSkillRank(skill) > bonusIndex ? 15 : 0;
+            case bonusIndex == 1 && skill == SkillsIndex.Breeding: return this.getSkillRank(skill) > bonusIndex ? 15 : 0;
+            case bonusIndex == 1 && skill == SkillsIndex.Sailing: return this.getSkillRank(skill) > bonusIndex ? 15 : 0;
+            case bonusIndex == 1 && skill == SkillsIndex.Divinity: return this.getSkillRank(skill) > bonusIndex ? 15 : 0;
+            case bonusIndex == 1 && skill == SkillsIndex.Gaming: return this.getSkillRank(skill) > bonusIndex ? 15 : 0;
+            // This is basically a boolean for the passive cards, 1 = active. Likely won't be used in code but just safer to handle.
+            case bonusIndex == 1 && specialBonuses.has(skill): return this.getSkillRank(skill) > bonusIndex ? 1 : 0; 
+            // Only thing left should be the skill efficiency, so 10%.
+            default: return this.getSkillRank(skill) > bonusIndex ? 10 : 0; 
+        }
+    }
+
+    // RiftSkillETC function is used for:
+    // 0 -> which translates to 2 -> which is dmg which I don't care about yet.
+    // 2 -> which translates to 4 -> which is all skill eff which I don't care about yet.
+    // 1,4 -> which translate to 3,6 -> which is all skill xp which I do care about.
+    // 3 -> which translates to 5 -> which is printer output which I care about
+    //
+    // All of the above give a baseline of 7 (even if you haven't unlocked rift), and then sum up their respective bonuses across all skills
+    //
+    // All other bonuses should just give their respective skill bonus based on their text
+    getTotalBonusByIndex = (bonusIndex: number) => {
+        // The first 2 bonuses don't make sense as totals, so just for sanity sake return 0 here.
+        if ([0, 1].includes(bonusIndex)) {
+            return 0;
+        }
+        
+        const baseBonus = [2,3,4,5,6].includes(bonusIndex) ? 7 : 0;
+
+        // Yes we get a base bonus of 7 on some things even if rift isn't active
+        if (!this.active) {
+            return baseBonus;
+        }
+
+        return Object.entries(SkillsIndex).reduce((sum, [_, skill]) => sum += this.getSkillBonus(skill as SkillsIndex, bonusIndex), baseBonus);
+    }
+}
+
 export class Rift {
     level: number = 0;
     taskProgress: number = 0;
@@ -24,7 +146,7 @@ export class Rift {
     bonuses: RiftBonus[] = [];
 }
 
-export default function parseRift(riftData: number[]) {
+export default function parseRift(riftData: number[], playerSkillLevels: number[][]) {
     const rift = new Rift();
 
     rift.level = riftData[0];
@@ -32,7 +154,7 @@ export default function parseRift(riftData: number[]) {
 
     rift.bonuses.push(new RiftBonus("Trap Box Vacuum", 6, "The trapper drone in World 3 will automatically collect traps every 24 hours, and will deposit the critters into your Storage Chest if there is space. @ The EXP from the Traps goes to the one who placed the traps."))
     rift.bonuses.push(new InfiniteStarsBonus("Infinite Stars", 11, "Permanently transforms Star Signs into Infinite Star Signs, which always give their bonus AND don't give the negatives. Infinite Star Signs are indicated by a little infinity icon, and are transformed in a specific order, so you don't get to choose. Get more from Shiny Pets in Breeding..."))
-    rift.bonuses.push(new RiftBonus("Skill Mastery", 16, "Lava didn't bother with a description for this one. Get bonuses based on total level of your skills across all characters."))
+    rift.bonuses.push(new SkillMastery("Skill Mastery", 16, "Lava didn't bother with a description for this one. Get bonuses based on total level of your skills across all characters."))
     rift.bonuses.push(new RiftBonus("Eclipse Skulls", 21, "You can now get Eclipse Skulls in Deathnote, unlocked at 1,000,000,000 kills. Eclipse Skulls are worth 20 points, and you also get +5% Multiplicative Damage."))
     rift.bonuses.push(new RiftBonus("Stamp Mastery", 26, "Every 100 total levels of all your stamps, you get a 1% chance to get a 'Gilded Stamp' 95% Reduction in Stamp Upgrade costs. This chance happens every day you log in, and they stack for whenever you want to use them!"))
     rift.bonuses.push(new RiftBonus("Eldritch Artifact", 31, "You can now get Eldritch Artifacts from sailing, but only if you've found the Ancient form first."))
@@ -41,6 +163,16 @@ export default function parseRift(riftData: number[]) {
     rift.bonuses.forEach(bonus => {
         bonus.active = rift.level >= (bonus.unlockAt - 1);
     })
+
+    const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
+    playerSkillLevels.forEach(playerSkills => {
+        playerSkills.forEach((skillLevel, skillIndex) => {
+            // Only get the indexes we care about
+            if (skillIndex in SkillsIndex) {
+                skillMastery.skillLevels[skillIndex as SkillsIndex] += skillLevel;
+            }
+        })
+    });
 
     return rift;
 }
