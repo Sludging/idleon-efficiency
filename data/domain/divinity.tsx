@@ -35,6 +35,10 @@ export class DivinityGod {
     }
 
     getMinorLinkBonus = (player: Player) => {
+        // If not linked to this god, return 0.
+        if (!this.linkedPlayers.find(linked => linked.playerID == player.playerID)) {
+            return 0;
+        }
         const divinityLevel = player.skills.get(SkillsIndex.Divinity)?.level ?? 0
         const hasActiveBubble = player.activeBubbles.filter(bubble => bubble.data.bonusKey == "Y2ACTIVE").length > 0;
 
