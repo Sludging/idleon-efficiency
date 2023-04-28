@@ -286,7 +286,6 @@ export const updateAnvil = (data: Map<string, any>) => {
         const mmanBonus = players.find(player => player.classId == ClassIndex.Maestro)?.talents.find(talent => talent.skillIndex == 42)?.getBonus() ?? 0;
         const riftBonus = skillMastery.getSkillBonus(SkillsIndex.Smithing, 1);
         const xpMulti = playerAnvil.getXPMulti(player, allSkillXP, mmanBonus, riftBonus);
-        console.log("Anvil - XP Multi", player.playerName, xpMulti, riftBonus);
         playerAnvil.setXP(xpMulti);
 
         // Capacity
