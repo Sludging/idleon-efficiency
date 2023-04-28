@@ -6,7 +6,7 @@ import { AnvilProduceBase, initAnvilRepo } from './data/AnvilRepo';
 import { AnvilProduceModel } from './model/anvilProduceModel';
 import { Item } from './items';
 import { Alchemy, AlchemyConst, CauldronIndex } from './alchemy';
-import { Stamp } from './stamps';
+import { Stamp, getStampBonusForKey } from './stamps';
 import { SkillsIndex } from './SkillsIndex';
 import { PlayerStatues, StatueConst } from './statues';
 import { Shrine, ShrineConstants } from './shrines';
@@ -22,6 +22,9 @@ import { GemStore } from './gemPurchases';
 import { Bribe, BribeStatus } from './bribes';
 import { Guild } from './guild';
 import { Capacity, CapacityConst } from './capacity';
+import { Divinity } from './divinity';
+import { Rift, SkillMastery } from './rift';
+import { Breeding } from './breeding';
 
 
 // if ("Costs2TypeAnvilPA" == t) {}
@@ -92,11 +95,11 @@ export class Anvil {
         this.anvilSpeed = 3600 * (1 + (stampBonus + (2 * this.speedPoints)) / 100) * boxAndStatueMath * (1 + (hammerHammerBonus / 100)) * agilityBonus * (1 + (starSignTownSpeed + talentTownSpeed) / 100);
     };
 
-    getXPMulti = (player: Player, allSkillsXP: number, mmanBonus: number) => {
+    getXPMulti = (player: Player, allSkillsXP: number, mmanBonus: number, riftBonus: number) => {
         const focusedSoulBonus = player.talents.find(talent => talent.skillIndex == 265)?.getBonus() ?? 0;
         const stampBonus = 0; // TODO: Real look up, but currently stamp isn't obtainable.
         const happyDudeBonus = player.talents.find(talent => talent.skillIndex == 75)?.getBonus() ?? 0;
-        const math1 = 1 + ((focusedSoulBonus + stampBonus + happyDudeBonus) / 100);
+        const math1 = 1 + ((focusedSoulBonus + stampBonus + happyDudeBonus + riftBonus) / 100);
         const smithingCardBonus = 1 + Card.GetTotalBonusForId(player.cardInfo?.equippedCards ?? [], 49) / 100;
         const blackSmithBox = player.postOffice[PostOfficeConst.BlacksmithBoxIndex];
         const postOfficeBonus = blackSmithBox.level > 0 ? blackSmithBox.bonuses[0].getBonus(blackSmithBox.level, 0) : 0;
@@ -107,7 +110,8 @@ export class Anvil {
     setXP = (xpMulti: number) => {
         const baseMath = (1 + (3 * (this.xpPoints / 100))) * xpMulti;
         if (baseMath < 20) {
-            return baseMath;
+            this.anvilXP = baseMath;
+            return;
         }
 
         const finalMath = Math.min(20 + ((baseMath - 20) / (baseMath - 20 + 70) * 50), 75);
@@ -247,7 +251,12 @@ export const updateAnvil = (data: Map<string, any>) => {
     const achievementsInfo = data.get("achievements") as Achievement[];
     const dungeonsData = data.get("dungeons") as Dungeons;
     const sigils = data.get("sigils") as Sigils;
+    const divinity = data.get("divinity") as Divinity;
+    const cards = data.get("cards") as Card[];
+    const rift = data.get("rift") as Rift;
+    const breeding = data.get("breeding") as Breeding;
 
+    const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
     // Cap stuff
     const capacity = data.get("capacity") as Capacity;
 
@@ -271,12 +280,12 @@ export const updateAnvil = (data: Map<string, any>) => {
         // XP Math
         const saltLickBonus = saltLick.getBonus(3);
         const dungeonBonus = (dungeonsData.passives.get(PassiveType.Flurbo) ?? [])[2]?.getBonus() ?? 0; // Lava is looking at the wrong bonus.
-        const goldFoodStampBonus = stampData.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC7")?.getBonus() ?? 0;
-        const goldFoodAchievement = achievementsInfo[AchievementConst.GoldFood].completed;
+        const goldFoodStampBonus = getStampBonusForKey(stampData, "GFood");
         const goldFoodBubble = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 18);
-        const allSkillXP = Skilling.getAllSkillXP(player, shrines, statues[player.playerID], prayers, saltLickBonus, dungeonBonus, family, goldFoodStampBonus, goldFoodAchievement, sigils.sigils[14].getBonus(), goldFoodBubble);
+        const allSkillXP = Skilling.getAllSkillXP(player, shrines, statues[player.playerID], prayers, saltLickBonus, dungeonBonus, family, goldFoodStampBonus, sigils.sigils[14].getBonus(), goldFoodBubble, divinity, cards, achievementsInfo, skillMastery, breeding);
         const mmanBonus = players.find(player => player.classId == ClassIndex.Maestro)?.talents.find(talent => talent.skillIndex == 42)?.getBonus() ?? 0;
-        const xpMulti = playerAnvil.getXPMulti(player, allSkillXP, mmanBonus);
+        const riftBonus = skillMastery.getSkillBonus(SkillsIndex.Smithing, 1);
+        const xpMulti = playerAnvil.getXPMulti(player, allSkillXP, mmanBonus, riftBonus);
         playerAnvil.setXP(xpMulti);
 
         // Capacity

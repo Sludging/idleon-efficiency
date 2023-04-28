@@ -1,6 +1,6 @@
 import { ImageData } from "./imageData";
 import { MapInfo } from "./maps";
-import { Player } from "./player";
+import { Rift } from "./rift";
 
 const deathNoteMobOrder = [
     "mushG mushR frogG beanG slimeG snakeG carrotO goblinG plank frogBIG poopSmall ratB branch acorn mushW".split(" "),
@@ -13,6 +13,7 @@ const deathNoteMobOrder = [
 export class Deathnote {
     mobKillCount: Map<string, number[]> = new Map()
     playerKillsByMap: Map<number, Map<number, number>> = new Map();
+    hasRiftBonus: boolean = false;
 
     constructor() {
         deathNoteMobOrder.forEach((world) => {
@@ -31,7 +32,8 @@ export class Deathnote {
             case killCount > 500000 && killCount < 1000000: return 4;
             case killCount > 1000000 && killCount < 5000000: return 5;
             case killCount > 5000000 && killCount < 100000000: return 7;
-            case killCount > 100000000: return 10;
+            case killCount > 100000000 && killCount < 1000000000: return 10;
+            case killCount > 1000000000: return this.hasRiftBonus ? 20 : 10;
             default: return 0;
         }
     }
@@ -45,6 +47,7 @@ export class Deathnote {
             case 4: return 1000000;
             case 5: return 5000000;
             case 7: return 100000000;
+            case 10:  return this.hasRiftBonus ? 1000000000 : 0;
             default: return 0;
         }
     }
@@ -88,4 +91,11 @@ export default function parseDeathnote(klaData: string[]) {
         });
     })           
     return deathNote;
+}
+
+export const updateDeathnote = (data: Map<string, any>) => {
+    const deathNote = data.get("deathnote") as Deathnote;
+    const rift = data.get("rift") as Rift;
+
+    deathNote.hasRiftBonus = rift.bonuses.find(bonus => bonus.name == "Eclipse Skulls")?.active ?? false;
 }

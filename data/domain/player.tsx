@@ -29,6 +29,7 @@ import { AFKTypeEnum } from './enum/aFKTypeEnum';
 import { Shrine, ShrineConstants } from './shrines';
 import { Divinity } from './divinity';
 import { Deathnote } from './deathnote';
+import { InfiniteStarsBonus, Rift } from './rift';
 
 export class PlayerStats {
     strength: number = 0;
@@ -507,8 +508,10 @@ const parseStarSigns = (starSigns: string, player: Player) => {
         return;
     }
     player.starSigns = starSigns.split(',').map((sign) => {
-        if (sign) {
-            return StarSignMap[Number(sign)];
+        if (sign && Object.keys(StarSignMap).includes(sign)) {
+            const matchingSign = StarSignMap[Number(sign)].duplicate();
+            matchingSign.aligned = true;
+            return matchingSign;
         }
     }).filter(notUndefined);
 }
@@ -627,6 +630,23 @@ export default function parsePlayers(doc: Cloudsave, accountData: Map<string, an
     })
 
     return parsedData;
+}
+
+export const updatePlayerStarSigns = (data: Map<string, any>) => {
+    const players = data.get("players") as Player[];
+    const rift = data.get("rift") as Rift;
+
+    const infiniteBonus = rift.bonuses.find(bonus => bonus.name == "Infinite Stars") as InfiniteStarsBonus;
+    const infiniteStars = infiniteBonus.getBonus();
+
+    Object.entries(StarSignMap).slice(0, infiniteStars).forEach(([_, starSign]) => {
+        players.forEach(player => {
+            // If player isn't manually aligned to this sign, add it
+            if (!player.starSigns.find(sign => sign.name == starSign.name)) {
+                player.starSigns.push(starSign.duplicate(true));
+            }
+        })
+    })
 }
 
 export const updatePlayers = (data: Map<string, any>) => {
