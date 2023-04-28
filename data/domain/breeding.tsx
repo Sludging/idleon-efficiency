@@ -16,7 +16,7 @@ import { initPetStatRepo, PetStatBase } from "./data/PetStatRepo";
 import { PetStatModel } from "./model/petStatModel";
 import { initRandoListRepo } from "./data/RandoListRepo";
 import { GroupByFunction, range } from "../utility";
-import { InfiniteStarsBonus, Rift } from "./rift";
+import { InfiniteStarsBonus, Rift, SkillMastery } from "./rift";
 import { Refinery } from "./refinery";
 import { Sailing } from "./sailing";
 
@@ -367,8 +367,8 @@ export class Breeding {
         return this.arenaWave >= waveReqs[bonusNumber];
     }
 
-    setTimeForEgg = (labBonus: number, mealBonus: number, alchemyBonus: number, achivementBonus: number) => {
-        this.totalEggTime = 7200 / (1 + (labBonus + (mealBonus + alchemyBonus + achivementBonus)) / 100);
+    setTimeForEgg = (labBonus: number, mealBonus: number, alchemyBonus: number, achivementBonus: number, skillMasteryBonus: number) => {
+        this.totalEggTime = 7200 / (1 + (labBonus + (mealBonus + alchemyBonus + achivementBonus + skillMasteryBonus)) / 100);
     }
 
     getStatRange = () => {
@@ -515,12 +515,16 @@ export const updateBreeding = (data: Map<string, any>) => {
     const cooking = data.get("cooking") as Cooking;
     const players = data.get("players") as Player[];
     const achievements = data.get("achievements") as Achievement[];
+    const rift = data.get("rift") as Rift;
+
+    const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
 
     const alchemyEggTimeBonus = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).find(bubble => bubble.name == "Egg Ink")?.getBonus() ?? 0;
     const mealEggTimeBonus = cooking.meals.filter(meal => meal.bonusKey == "TimeEgg").reduce((sum, meal) => sum += meal.getBonus(), 0);
     const mainframeBonus = lab.jewels.find(jewel => jewel.active && jewel.data.description == "Reduces egg incubation time")?.getBonus() ?? 0;
     const achivementEggBonus = achievements[220].completed ? 10 : 0;
-    breeding.setTimeForEgg(mainframeBonus, mealEggTimeBonus, alchemyEggTimeBonus, achivementEggBonus);
+    const skillMasteryEggBonus = skillMastery.getSkillBonus(SkillsIndex.Breeding, 1);
+    breeding.setTimeForEgg(mainframeBonus, mealEggTimeBonus, alchemyEggTimeBonus, achivementEggBonus, skillMasteryEggBonus);
 
     // Breeding level is universal, so just get it from the first player.
     breeding.skillLevel = players[0].skills.get(SkillsIndex.Breeding)?.level ?? 0;

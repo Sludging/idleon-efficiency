@@ -103,7 +103,8 @@ export class SkillMastery extends RiftBonus {
             case bonusIndex == 1 && skill == SkillsIndex.Alchemy: return this.getSkillRank(skill) > bonusIndex ? 5 : 0;
             case bonusIndex == 1 && skill == SkillsIndex.Construction: return this.getSkillRank(skill) > bonusIndex ? 15 : 0;
             case bonusIndex == 1 && skill == SkillsIndex.Breeding: return this.getSkillRank(skill) > bonusIndex ? 15 : 0;
-            case bonusIndex == 1 && skill == SkillsIndex.Sailing: return this.getSkillRank(skill) > bonusIndex ? 15 : 0;
+            // Lava says 15 but he gives 17
+            case bonusIndex == 1 && skill == SkillsIndex.Sailing: return this.getSkillRank(skill) > bonusIndex ? 17 : 0;
             case bonusIndex == 1 && skill == SkillsIndex.Divinity: return this.getSkillRank(skill) > bonusIndex ? 15 : 0;
             case bonusIndex == 1 && skill == SkillsIndex.Gaming: return this.getSkillRank(skill) > bonusIndex ? 15 : 0;
             // This is basically a boolean for the passive cards, 1 = active. Likely won't be used in code but just safer to handle.

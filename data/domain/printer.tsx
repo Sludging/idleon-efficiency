@@ -3,8 +3,8 @@ import { Divinity } from "./divinity";
 import { GemStore } from "./gemPurchases";
 import { Lab } from "./lab";
 import { Player } from "./player";
+import { Rift, SkillMastery } from "./rift";
 import { Sailing } from "./sailing";
-import { Artifact } from "./sailing/artifacts";
 import { ClassIndex } from "./talents";
 
 export class Sample {
@@ -12,6 +12,7 @@ export class Sample {
     harriep: boolean = false;
     artifactBoost: number = 0;
     divineKnightBoost: number = 0;
+    skillMasteryBoost: number = 0;
     // Number of slots printing this sample.
     printing: number = 0;
 
@@ -29,7 +30,7 @@ export class Sample {
         let baseQuantity = this.printingQuantity;
         baseQuantity *= this.inLab ? 2 : 1;
         baseQuantity *= this.harriep ? 3 : 1;
-        return baseQuantity * (1 + (this.artifactBoost + this.divineKnightBoost) / 100);
+        return baseQuantity * (1 + (this.artifactBoost + this.divineKnightBoost) / 100) * (1 + this.skillMasteryBoost / 100);
     }
 
     isOutdatedPrint = () => {
@@ -111,7 +112,11 @@ export const updatePrinter = (data: Map<string, any>) => {
     const sailing = data.get("sailing") as Sailing;
     const players = data.get("players") as Player[];
     const gemStore = data.get("gems") as GemStore;
+    const rift = data.get("rift") as Rift;
     const optLacc = data.get("OptLacc");
+
+
+    const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
 
     // if double printer
     if (lab.bonuses[1].active) {
@@ -127,6 +132,7 @@ export const updatePrinter = (data: Map<string, any>) => {
     const daysSinceLastPrint = optLacc[125];
     printer.samples.flatMap(player => player).forEach(sample => {
         sample.artifactBoost = sailing.artifacts[4].getBonus() * daysSinceLastPrint
+        sample.skillMasteryBoost = skillMastery.getTotalBonusByIndex(5);
     });
 
     const bestDivineKnight = players.filter(player => player.classId == ClassIndex.Divine_Knight).sort((player1, player2) => player1.getTalentBonus(178) > player2.getTalentBonus(178) ? 1 : -1).pop()
