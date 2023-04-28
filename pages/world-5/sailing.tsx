@@ -277,13 +277,23 @@ function ArtifactDisplay() {
                                     textSize='12px'
                                     text={artifact.getBonusText()}
                                 />
-                                <TextAndLabel
-                                    label="ANCIENT BONUS"
-                                    labelSize='xsmall'
-                                    textSize='12px'
-                                    textColor={artifact.status == ArtifactStatus.Ancient ? 'green-1' : 'grey-3'}
-                                    text={artifact.data.ancientBonus}
-                                />
+                                <Box>
+                                    <TextAndLabel
+                                        label="ANCIENT BONUS"
+                                        labelSize='xsmall'
+                                        textSize='12px'
+                                        textColor={[ArtifactStatus.Ancient, ArtifactStatus.Eldritch].includes(artifact.status) ? 'green-1' : 'grey-3'}
+                                        text={artifact.data.ancientBonus}
+                                        margin={{bottom: 'small'}}
+                                    />
+                                    <TextAndLabel
+                                        label="ELDRITCH BONUS"
+                                        labelSize='xsmall'
+                                        textSize='12px'
+                                        textColor={[ArtifactStatus.Eldritch].includes(artifact.status) ? 'green-1' : 'grey-3'}
+                                        text={artifact.data.eldritchBonus!}
+                                    />
+                                </Box>
                             </Box>
                         </ShadowBox>
                     ))

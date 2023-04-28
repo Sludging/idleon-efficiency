@@ -295,10 +295,11 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                         </Text>
                     }
                     {
-                        player.starSigns.map((sign, index) => {
-                            return <Text size="small" key={`sign-${index}`}>Sign {index} = {sign.getText()}</Text>
-                        })
+                       player.starSigns.filter(sign => sign.aligned == true).map((sign, index) => (
+                        <Text key={`sign_${index}`} size="small">Sign {index}: {sign.getText()}</Text>
+                       )) 
                     }
+                    
                     <Box direction="row" gap="xsmall">
                         <Text size="small">Away Since =</Text>
                         {player.afkFor < 100 ? "Active" : <TimeUp addSeconds={player.afkFor + secondsSinceUpdate} />}

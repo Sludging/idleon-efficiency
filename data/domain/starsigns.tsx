@@ -8,6 +8,7 @@ interface StarBonus {
 
 export class StarSign {
     hasChip: boolean = false;
+    aligned: boolean = false;
     constructor(public name: string, public bonuses: StarBonus[]) { }
 
     getText = () => {
@@ -22,6 +23,15 @@ export class StarSign {
             return this.hasChip ? bonus.bonus * 2 : bonus.bonus;
         }
         return 0;
+    }
+
+    duplicate(noDownside: boolean = false) {
+        let bonuses = this.bonuses;
+        if (noDownside) {
+            bonuses = bonuses.filter(bonus => bonus.bonus > 0);
+        }
+
+        return new StarSign(this.name, bonuses);
     }
 }
 

@@ -1283,6 +1283,42 @@ export const initEnemyTableRepo = () => {
                     <SubTableDropModel>{"item": "DropTable27", "quantity": 2, "chance": 1, "questLink": "N/A"}
                 ]
             }),
+        new EnemyTableBase("riftAll", <EnemyTableModel>{
+                "drops": [
+                    <CoinDropModel>{"item": "COIN", "quantity": 6000, "chance": 0, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "Quest74", "quantity": 1, "chance": 1e-09, "questLink": "N/A"}
+                ]
+            }),
+        new EnemyTableBase("rift1", <EnemyTableModel>{
+                "drops": [
+                    <CoinDropModel>{"item": "COIN", "quantity": 6000, "chance": 0, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "Quest74", "quantity": 1, "chance": 1e-09, "questLink": "N/A"}
+                ]
+            }),
+        new EnemyTableBase("rift2", <EnemyTableModel>{
+                "drops": [
+                    <CoinDropModel>{"item": "COIN", "quantity": 6000, "chance": 0, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "Quest74", "quantity": 1, "chance": 1e-09, "questLink": "N/A"}
+                ]
+            }),
+        new EnemyTableBase("rift3", <EnemyTableModel>{
+                "drops": [
+                    <CoinDropModel>{"item": "COIN", "quantity": 6000, "chance": 0, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "Quest74", "quantity": 1, "chance": 1e-09, "questLink": "N/A"}
+                ]
+            }),
+        new EnemyTableBase("rift4", <EnemyTableModel>{
+                "drops": [
+                    <CoinDropModel>{"item": "COIN", "quantity": 6000, "chance": 0, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "Quest74", "quantity": 1, "chance": 1e-09, "questLink": "N/A"}
+                ]
+            }),
+        new EnemyTableBase("rift5", <EnemyTableModel>{
+                "drops": [
+                    <CoinDropModel>{"item": "COIN", "quantity": 6000, "chance": 0, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "Quest74", "quantity": 1, "chance": 1e-09, "questLink": "N/A"}
+                ]
+            }),
         new EnemyTableBase("ChestA1", <EnemyTableModel>{
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 100, "chance": 1, "questLink": "N/A"},

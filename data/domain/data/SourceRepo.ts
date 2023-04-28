@@ -3130,6 +3130,12 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Kattlecruk]]", "txtName": "Kattlecruk"},
                     <SourceModel>{"wikiName": "[[Chaotic Kattlecruk]]", "txtName": "Chaotic Kattlecruk"},
                     <SourceModel>{"wikiName": "[[Sacrilegious Kattlecruk]]", "txtName": "Sacrilegious Kattlecruk"},
+                    <SourceModel>{"wikiName": "[[The Rift]]", "txtName": "The Rift"},
+                    <SourceModel>{"wikiName": "[[Rift Spooker]]", "txtName": "Rift Spooker"},
+                    <SourceModel>{"wikiName": "[[Rift Slug]]", "txtName": "Rift Slug"},
+                    <SourceModel>{"wikiName": "[[Rift Jocund]]", "txtName": "Rift Jocund"},
+                    <SourceModel>{"wikiName": "[[Rift Hivemind]]", "txtName": "Rift Hivemind"},
+                    <SourceModel>{"wikiName": "[[Rift Stalker]]", "txtName": "Rift Stalker"},
                     <SourceModel>{
                         "wikiName": "[[Colosseum/Dewdrop#Bronze Chest|Dewdrop Bronze Chest]]",
                         "txtName": "Colosseum: Dewdrop Bronze Chest"
@@ -6195,6 +6201,18 @@ export const initSourceRepo = () => {
             }),
         new SourcesBase("CardsZ20", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Sacrilegious Kattlecruk]]", "txtName": "Sacrilegious Kattlecruk"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Quest74", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[The Rift]]", "txtName": "The Rift"},
+                    <SourceModel>{"wikiName": "[[Rift Spooker]]", "txtName": "Rift Spooker"},
+                    <SourceModel>{"wikiName": "[[Rift Slug]]", "txtName": "Rift Slug"},
+                    <SourceModel>{"wikiName": "[[Rift Jocund]]", "txtName": "Rift Jocund"},
+                    <SourceModel>{"wikiName": "[[Rift Hivemind]]", "txtName": "Rift Hivemind"},
+                    <SourceModel>{"wikiName": "[[Rift Stalker]]", "txtName": "Rift Stalker"}
+                ],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -11468,6 +11486,10 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Carpenter Cardinal#Restoring Power, once again, to a Portal|Restoring Power, once again, to a Portal]]",
                         "txtName": "Carpenter Cardinal: Restoring Power, once again, to a Portal"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Rift Ripper#Entering The Rift...|Entering The Rift...]]",
+                        "txtName": "Rift Ripper: Entering The Rift..."
                     }
                 ],
                 "recipeFrom": [],
@@ -11900,6 +11922,26 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Poigu#Speak from the heart not the mind|Speak from the heart not the mind]]",
                         "txtName": "Poigu: Speak from the heart not the mind"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Quest70", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Rift Ripper#Entering The Rift...|Entering The Rift...]]",
+                        "txtName": "Rift Ripper: Entering The Rift..."
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Quest71", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Rift Ripper#Entering The Rift...|Entering The Rift...]]",
+                        "txtName": "Rift Ripper: Entering The Rift..."
                     }
                 ],
                 "recipeFrom": [],

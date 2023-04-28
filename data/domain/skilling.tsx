@@ -8,6 +8,10 @@ import { ShrineConstants, Shrine } from "./shrines";
 import { PlayerStatues, StatueConst } from "./statues";
 import { ClassIndex } from "./talents";
 import { ImageData } from "./imageData";
+import { Divinity } from "./divinity";
+import { Achievement, AchievementConst } from "./achievements";
+import { SkillMastery } from "./rift";
+import { Breeding } from "./breeding";
 
 export class Skilling {
     static getXPReq = (skill: SkillsIndex, level: number) => {
@@ -27,8 +31,26 @@ export class Skilling {
     }
 
     // if ("AllSkillxpz" == t) {
-    static getAllSkillXP = (player: Player, shrines: Shrine[], playerStatues: PlayerStatues, prayers: Prayer[], saltLickBonus: number = 0, dungeonBonus: number = 0, family: Family, goldFoodStampBonus: number = 0, goldFoodAchievement: boolean = false, sigilBonus: number = 0, bubbleBonus: number) => {
+    static getAllSkillXP = (
+            player: Player, 
+            shrines: Shrine[], 
+            playerStatues: PlayerStatues, 
+            prayers: Prayer[], 
+            saltLickBonus: number = 0, 
+            dungeonBonus: number = 0, 
+            family: Family, 
+            goldFoodStampBonus: number = 0, 
+            sigilBonus: number = 0, 
+            bubbleBonus: number, 
+            divinity: Divinity,
+            cards: Card[],
+            achievements: Achievement[],
+            skillMastery: SkillMastery,
+            breeding: Breeding
+        ) => {
         const skillingCardBonus = Card.GetTotalBonusForId(player.cardInfo?.equippedCards ?? [], 50);
+
+        const goldFoodAchievement = achievements[AchievementConst.GoldFood].completed;
         const goldenFoodBonus = player.gear.food.filter(food => food && food.goldenFood != undefined && food.description.includes("Skill EXP"))
             .reduce((sum, food) => sum += (food as Food).goldFoodBonus(food?.count ?? 0, player.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus(player) ?? 0, goldFoodStampBonus, goldFoodAchievement, sigilBonus, bubbleBonus)), 0);
         const cardSetBonus = player.cardInfo?.getBonusForId(3) ?? 0;
@@ -40,10 +62,19 @@ export class Skilling {
         const equipmentBonus = player.gear.equipment.reduce((sum, item) => sum += item?.getMiscBonus("Skill Exp") ?? 0, 0);
         const starSignBonus = player.starSigns.reduce((sum, sign) => sum += sign.getBonus("Skill EXP gain"), 0);
 
+        const divinityBonus = divinity.gods[7].getMinorLinkBonus(player);
+        const w5crystalCardBonus = cards.find(card => card.id == "w5a4")?.getBonus() ?? 0;
+        const achieveBonuses = (10 * (achievements[283].completed ? 1 : 0)) + 
+        (25 * (achievements[284].completed ? 1 : 0)) +
+        (10 * (achievements[294].completed ? 1 : 0))
+
+        const riftBonus = skillMastery.getTotalBonusByIndex(3) + skillMastery.getTotalBonusByIndex(6)
+        const shinyBonus = breeding.shinyBonuses.find(bonus => bonus.data.index == 2)?.getBonus() ?? 0;
+
         const myriadBox = player.postOffice.find(box => box.index == 20)
         const poBonus = myriadBox?.bonuses[2].getBonus(myriadBox.level, 2) ?? 0;
 
-        return starSignBonus + (skillingCardBonus + goldenFoodBonus) + (cardSetBonus + shrineBonus + statueBonus + (prayerIncrease - prayerDecrease + (equipmentBonus + (masteroBuff + (saltLickBonus + dungeonBonus + poBonus)))));
+        return starSignBonus + (skillingCardBonus + goldenFoodBonus) + (cardSetBonus + w5crystalCardBonus + shrineBonus + statueBonus + (prayerIncrease - prayerDecrease + (equipmentBonus + (masteroBuff + (saltLickBonus + dungeonBonus + poBonus + divinityBonus + achieveBonuses + riftBonus + shinyBonus)))));
     }
 
     static getSkillImageData = (skill: SkillsIndex): ImageData => {

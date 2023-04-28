@@ -49,5 +49,6 @@ export enum TypeGenEnum {
     aError = "aError",
     aKeychain = "aKeychain",
     aCape = "aCape",
-    aDNAgun = "aDNAgun"
+    aDNAgun = "aDNAgun",
+    aNametag = "aNametag"
 }

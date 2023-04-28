@@ -50,7 +50,7 @@ export default function Welcome() {
 
     const size = useContext(ResponsiveContext);
 
-    const onButtonClick = (toCall: Function | undefined, value?: string, value2?: string) => {
+    const onButtonClick = (toCall: Function | undefined, value?: string, value2?: string, fake?: boolean) => {
         try {
             if (toCall) {
                 if (value2) {
@@ -59,6 +59,9 @@ export default function Welcome() {
                 else if (value) {
                     toCall(value, handleError);
                 }
+                else if (fake) {
+                    toCall(() => { console.log("hello")});
+                } 
                 else {
                     toCall();
                 }
@@ -136,6 +139,7 @@ export default function Welcome() {
                                             onChange={event => setPassword(event.target.value)}
                                         />
                                         <Button primary color="brand" label="Login" onClick={() => onButtonClick(authData?.emailLoginFunction, email, password)} />
+
                                     </Box>
                                 </Grid>
                                 {

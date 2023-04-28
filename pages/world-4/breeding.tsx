@@ -17,14 +17,78 @@ import TabButton from '../../components/base/TabButton';
 import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import { StaticTime, TimeDisplaySize, TimeDown } from '../../components/base/TimeDisplay';
 import { AppContext } from '../../data/appContext';
-import { Breeding as BreedingDomain, petArenaBonuses, territoryNiceNames, waveReqs } from '../../data/domain/breeding';
+import { Breeding as BreedingDomain, Pet, petArenaBonuses, territoryNiceNames, waveReqs } from '../../data/domain/breeding';
 import { Cooking } from '../../data/domain/cooking';
 import { EnemyInfo } from '../../data/domain/enemies';
 import { GemStore } from '../../data/domain/gemPurchases';
 import { Player } from '../../data/domain/player';
 import { ClassIndex, Talent } from '../../data/domain/talents';
 import { TaskBoard } from '../../data/domain/tasks';
-import { nFormatter } from '../../data/utility';
+import { GroupBy, GroupByFunction, nFormatter } from '../../data/utility';
+
+function PetDisplay() {
+    const [breeding, setBreeding] = useState<BreedingDomain>();
+    const appContext = useContext(AppContext);
+    const size = useContext(ResponsiveContext);
+
+    useEffect(() => {
+        if (appContext) {
+            const theData = appContext.data.getData();
+            setBreeding(theData.get("breeding"));
+        }
+    }, [appContext]);
+
+    if (!breeding) {
+        return (
+            <Box>
+                Still loading
+            </Box>
+        )
+    }
+
+    return (
+        <Box>
+            <Text>Pets</Text>
+            <Box>
+                {
+                    Array.from(GroupByFunction(breeding.basePets, (pet: Pet) => pet.data.world)).
+                        map(([_, worldPets], wIndex) => (
+                            <Box key={`world_${wIndex}`}>
+                                <Text>World {wIndex + 1}</Text>
+                                <Box direction="row" wrap>
+                                    {
+                                        worldPets.map((pet, pIndex) => {
+                                            const enemy = EnemyInfo.find(enemy => enemy.id == pet.data.petId);
+                                            if (!enemy) {
+                                                return null;
+                                            }
+                                            return (
+                                                <ShadowBox key={`pet_${pIndex}`} direction="row" gap="small" align="center" margin={{ right: 'small', bottom: 'small' }} background="dark-1">
+                                                    {
+                                                        <Box>
+                                                            <Stack anchor='top-left'>
+                                                                <IconImage data={{ location: enemy?.id.toLowerCase() ?? "Unknown", width: 67, height: 67 }} style={{ paddingBottom: '15px' }} />
+                                                                <Box title={pet.gene.data.name}>
+                                                                    <IconImage data={pet.gene.getImageData()} scale={0.5} />
+                                                                </Box>
+                                                            </Stack>
+                                                            <Text>{pet.getShinyText()}</Text>
+                                                            <Text>{pet.shinyLevel}</Text>
+                                                        </Box>
+                                                    }
+                                                </ShadowBox>
+                                            )
+                                        })
+                                    }
+                                </Box>
+                            </Box>
+
+                        ))
+                }
+            </Box>
+        </Box>
+    )
+}
 
 function TerritoryDisplay() {
     const [breeding, setBreeding] = useState<BreedingDomain>();
@@ -73,7 +137,7 @@ function TerritoryDisplay() {
                             <Box direction="row" wrap>
                                 {
                                     territory.pets.map((pet, pIndex) => {
-                                        const enemy = EnemyInfo.find(enemy => enemy.id == pet.name);
+                                        const enemy = EnemyInfo.find(enemy => enemy.id == pet.data.petId);
                                         return (
                                             <Box key={`pet_${pIndex}`} direction="row" gap="small" align="center">
                                                 {
@@ -353,6 +417,7 @@ function Breeding() {
             {activeTab == "Arena" && <ArenaBonusDisplay />}
             {activeTab == "Upgrades" && <PetUpgradeDisplay />}
             {activeTab == "Territory" && <TerritoryDisplay />}
+            {/* {activeTab == "Pets" && <PetDisplay />} */}
         </Box>
     )
 }

@@ -86,5 +86,15 @@ export enum RandoListDescriptionsEnum {
     dk5 = "dk5",
     dk6 = "dk6",
     dk7 = "dk7",
-    dk8 = "dk8"
+    dk8 = "dk8",
+    dk9 = "dk9",
+    dk10 = "dk10",
+    dk11 = "dk11",
+    dk12 = "dk12",
+    dk13 = "dk13",
+    dk14 = "dk14",
+    dk15 = "dk15",
+    dk16 = "dk16",
+    dk17 = "dk17",
+    dk18 = "dk18"
 }

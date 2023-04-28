@@ -19,6 +19,8 @@ import { ClassIndex } from "./talents";
 import { range } from "../utility";
 import { TaskBoard } from "./tasks";
 import { Achievement } from "./achievements";
+import { Rift, SkillMastery } from "./rift";
+import { SkillsIndex } from "./SkillsIndex";
 
 // "Captains": [
 //     [0,0,-1,3,6.75,2,0],
@@ -238,6 +240,8 @@ export class Sailing {
     captainsUnlocked = 1;
     boatsUnlocked = 1;
 
+    shinyMinSpeedBonus: number = 0;
+
     nextCaptainCost = () => {
         return (60 * this.captainsUnlocked + 15 * Math.pow(this.captainsUnlocked, 2.2)) * Math.pow(1.52, this.captainsUnlocked) * .6;
     }
@@ -322,6 +326,9 @@ export const updateSailing = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const taskboard = data.get("taskboard") as TaskBoard;
     const achievements = data.get("achievements") as Achievement[];
+    const rift = data.get("rift") as Rift;
+
+    const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
 
     const chestPurchases = gemStore.purchases.find(upgrade => upgrade.no == 129)?.pucrhased ?? 0;
     const artifactBoost = sailing.artifacts[19].getBonus();
@@ -341,9 +348,10 @@ export const updateSailing = (data: Map<string, any>) => {
     const divinityMinorBonus = purrmepPlayer ? divinity.gods[6].getMinorLinkBonus(purrmepPlayer) : 0;
     const stampBonus = stamps.flatMap(tab => tab).reduce((sum, stamp) => sum += stamp.data.effect == "SailSpd" ? stamp.getBonus() : 0, 0);
     const mealBonus = cooking.getMealBonusForKey("Sailing");
+    const skillMasteryBonus = skillMastery.getSkillBonus(SkillsIndex.Sailing, 1);
     const firstMath = (1 + (divinityMinorBonus + cardBonus + alchemy.getBubbleBonusForKey("Y1")) / 125) * (1 + divinity.gods[4].getBlessingBonus() / 100);
     const speedBaseMath = firstMath * (1 + divinity.gods[6].getBlessingBonus() / 100)
-        * (1 + (divinity.gods[9].getBlessingBonus() + sailing.artifacts[10].getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd")) / 125);
+        * (1 + (divinity.gods[9].getBlessingBonus() + sailing.artifacts[10].getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus) / 125);
 
     //Unending Loot Search
     const highestLevelUnendingSearch = players.slice().sort((player1, player2) => player1.getTalentBonus(325) > player2.getTalentBonus(325) ? -1 : 1)[0];
@@ -360,14 +368,14 @@ export const updateSailing = (data: Map<string, any>) => {
     return sailing;
 }
 
-export const updateFamilyImpact = (data: Map<string, any>) => {
+export const updateMinTravelTime = (data: Map<string, any>) => {
     const sailing = data.get("sailing") as Sailing;
     const family = data.get("family") as Family;
 
     // Minimum travel time
     const siegeBonus = family.classBonus.get(ClassIndex.Siege_Breaker)?.getBonus() ?? 0;
     sailing.boats.forEach(boat => {
-        boat.minTravelTime = 120 / (1 + siegeBonus / 100);
+        boat.minTravelTime = 120 / (1 + ((siegeBonus + sailing.shinyMinSpeedBonus) / 100));
     });
 
     return sailing;
