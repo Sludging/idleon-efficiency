@@ -3491,45 +3491,6 @@ export const initRecipeRepo = () => {
                     ]
                 }
             }),
-        new RecipeBase("EquipmentShoes17", <RecipeModel>{
-                "intID": "EquipmentShoes17",
-                "recipe": [
-                    <ComponentModel>{"item": "EquipmentShoes3", "quantity": 1},
-                    <ComponentModel>{"item": "PureWater", "quantity": 9},
-                    <ComponentModel>{"item": "JungleTree", "quantity": 1600},
-                    <ComponentModel>{"item": "ForestTree", "quantity": 1000}
-                ],
-                "levelReqToCraft": 22,
-                "expGiven": 5000,
-                "no": 55,
-                "tab": 2,
-                "sellPrice": 99775,
-                "recipeFrom": [],
-                "detailedRecipe": <DetailedRecipeModel>{
-                    "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShoes3", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentShoes15", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentShoes1", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "CopperBar", "quantity": 75},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "CraftMat5", "quantity": 500},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "IronBar", "quantity": 125},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "GoldBar", "quantity": 600},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "PureWater", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "PureWater", "quantity": 9},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "JungleTree", "quantity": 1600},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "ForestTree", "quantity": 1000}
-                    ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "PureWater", "quantity": 13},
-                        <ComponentModel>{"item": "JungleTree", "quantity": 1600},
-                        <ComponentModel>{"item": "ForestTree", "quantity": 1000},
-                        <ComponentModel>{"item": "GoldBar", "quantity": 600},
-                        <ComponentModel>{"item": "CraftMat5", "quantity": 500},
-                        <ComponentModel>{"item": "IronBar", "quantity": 125},
-                        <ComponentModel>{"item": "CopperBar", "quantity": 75}
-                    ]
-                }
-            }),
         new RecipeBase("EquipmentShoes19", <RecipeModel>{
                 "intID": "EquipmentShoes19",
                 "recipe": [
@@ -3538,9 +3499,9 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "Bug1", "quantity": 2000},
                     <ComponentModel>{"item": "Bug2", "quantity": 1250}
                 ],
-                "levelReqToCraft": 24,
-                "expGiven": 6500,
-                "no": 56,
+                "levelReqToCraft": 22,
+                "expGiven": 5000,
+                "no": 55,
                 "tab": 2,
                 "sellPrice": 97425,
                 "recipeFrom": [],
@@ -3562,6 +3523,45 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "PureWater", "quantity": 13},
                         <ComponentModel>{"item": "Bug1", "quantity": 2000},
                         <ComponentModel>{"item": "Bug2", "quantity": 1250},
+                        <ComponentModel>{"item": "GoldBar", "quantity": 600},
+                        <ComponentModel>{"item": "CraftMat5", "quantity": 500},
+                        <ComponentModel>{"item": "IronBar", "quantity": 125},
+                        <ComponentModel>{"item": "CopperBar", "quantity": 75}
+                    ]
+                }
+            }),
+        new RecipeBase("EquipmentShoes17", <RecipeModel>{
+                "intID": "EquipmentShoes17",
+                "recipe": [
+                    <ComponentModel>{"item": "EquipmentShoes3", "quantity": 1},
+                    <ComponentModel>{"item": "PureWater", "quantity": 9},
+                    <ComponentModel>{"item": "JungleTree", "quantity": 1600},
+                    <ComponentModel>{"item": "ForestTree", "quantity": 1000}
+                ],
+                "levelReqToCraft": 24,
+                "expGiven": 6500,
+                "no": 56,
+                "tab": 2,
+                "sellPrice": 99775,
+                "recipeFrom": [],
+                "detailedRecipe": <DetailedRecipeModel>{
+                    "detRecipe": [
+                        <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShoes3", "quantity": 1},
+                        <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentShoes15", "quantity": 1},
+                        <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentShoes1", "quantity": 1},
+                        <DetRecipeComponentModel>{"indent": 3, "item": "CopperBar", "quantity": 75},
+                        <DetRecipeComponentModel>{"indent": 2, "item": "CraftMat5", "quantity": 500},
+                        <DetRecipeComponentModel>{"indent": 2, "item": "IronBar", "quantity": 125},
+                        <DetRecipeComponentModel>{"indent": 1, "item": "GoldBar", "quantity": 600},
+                        <DetRecipeComponentModel>{"indent": 1, "item": "PureWater", "quantity": 4},
+                        <DetRecipeComponentModel>{"indent": 0, "item": "PureWater", "quantity": 9},
+                        <DetRecipeComponentModel>{"indent": 0, "item": "JungleTree", "quantity": 1600},
+                        <DetRecipeComponentModel>{"indent": 0, "item": "ForestTree", "quantity": 1000}
+                    ],
+                    "detRecipeTotals": [
+                        <ComponentModel>{"item": "PureWater", "quantity": 13},
+                        <ComponentModel>{"item": "JungleTree", "quantity": 1600},
+                        <ComponentModel>{"item": "ForestTree", "quantity": 1000},
                         <ComponentModel>{"item": "GoldBar", "quantity": 600},
                         <ComponentModel>{"item": "CraftMat5", "quantity": 500},
                         <ComponentModel>{"item": "IronBar", "quantity": 125},

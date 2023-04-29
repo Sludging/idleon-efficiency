@@ -479,15 +479,15 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes17",
-                        "name": "Logger Heels Detailed Recipe",
+                        "key": "EquipmentShoes19",
+                        "name": "Bandito Boots Detailed Recipe",
                         "amount": 75,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes19",
-                        "name": "Bandito Boots Detailed Recipe",
+                        "key": "EquipmentShoes17",
+                        "name": "Logger Heels Detailed Recipe",
                         "amount": 75,
                         "type": "detRecipe"
                     },
@@ -2074,15 +2074,15 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes17",
-                        "name": "Logger Heels Detailed Recipe",
+                        "key": "EquipmentShoes19",
+                        "name": "Bandito Boots Detailed Recipe",
                         "amount": 500,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes19",
-                        "name": "Bandito Boots Detailed Recipe",
+                        "key": "EquipmentShoes17",
+                        "name": "Logger Heels Detailed Recipe",
                         "amount": 500,
                         "type": "detRecipe"
                     },
@@ -3070,15 +3070,15 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes17",
-                        "name": "Logger Heels Detailed Recipe",
+                        "key": "EquipmentShoes19",
+                        "name": "Bandito Boots Detailed Recipe",
                         "amount": 125,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes19",
-                        "name": "Bandito Boots Detailed Recipe",
+                        "key": "EquipmentShoes17",
+                        "name": "Logger Heels Detailed Recipe",
                         "amount": 125,
                         "type": "detRecipe"
                     },
@@ -5796,15 +5796,15 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes17",
-                        "name": "Logger Heels Detailed Recipe",
+                        "key": "EquipmentShoes19",
+                        "name": "Bandito Boots Detailed Recipe",
                         "amount": 600,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes19",
-                        "name": "Bandito Boots Detailed Recipe",
+                        "key": "EquipmentShoes17",
+                        "name": "Logger Heels Detailed Recipe",
                         "amount": 600,
                         "type": "detRecipe"
                     },
@@ -8366,20 +8366,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes17",
-                        "name": "Logger Heels Recipe",
-                        "amount": 9,
-                        "type": "recipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes17",
-                        "name": "Logger Heels Detailed Recipe",
-                        "amount": 13,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes19",
                         "name": "Bandito Boots Recipe",
                         "amount": 9,
@@ -8389,6 +8375,20 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes19",
                         "name": "Bandito Boots Detailed Recipe",
+                        "amount": 13,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes17",
+                        "name": "Logger Heels Recipe",
+                        "amount": 9,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes17",
+                        "name": "Logger Heels Detailed Recipe",
                         "amount": 13,
                         "type": "detRecipe"
                     },
@@ -11970,15 +11970,15 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes17",
-                        "name": "Logger Heels Recipe",
+                        "key": "EquipmentShoes19",
+                        "name": "Bandito Boots Recipe",
                         "amount": 1,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes19",
-                        "name": "Bandito Boots Recipe",
+                        "key": "EquipmentShoes17",
+                        "name": "Logger Heels Recipe",
                         "amount": 1,
                         "type": "recipe"
                     },

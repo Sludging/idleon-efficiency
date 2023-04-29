@@ -501,490 +501,490 @@ export const initAchievementRepo = () => {
                 "qty": 1,
                 "desc": "Reach world 2!",
                 "rewards": "*STEAM EXCLUSIVE &*18 gems",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(71, <AchievementModel>{
                 "name": "Elite Player",
                 "qty": 1,
                 "desc": "Reach level 60 on any character",
                 "rewards": "*STEAM EXCLUSIVE &*16 gems",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(72, <AchievementModel>{
                 "name": "Retirement Fund",
                 "qty": 1,
                 "desc": "Save up 1,000,000 coins, also known as 1 Platinum coin!",
                 "rewards": "*STEAM EXCLUSIVE &*15 gems",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(73, <AchievementModel>{
                 "name": "More and More Me!",
                 "qty": 1,
                 "desc": "Create your 4th character, who will never appreciate the struggle your first 3 characters had.",
                 "rewards": "*STEAM EXCLUSIVE &*16 gems",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(74, <AchievementModel>{
                 "name": "Golden Fly",
                 "qty": 1,
                 "desc": "Pass through the small golden hoop in the Catching Minigame. It's worth 3 points!",
                 "rewards": "**5% Catching &Efficiency",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(75, <AchievementModel>{
                 "name": "Hammer Bub",
                 "qty": 1,
                 "desc": "Level up the 'Hammer Hammer' Alchemy bubble to Lv. 10",
                 "rewards": "*RNG item unlock",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(76, <AchievementModel>{
                 "name": "Wassup Yo!",
                 "qty": 1,
                 "desc": "Say 'Hi' to 100 unique people without closing the game or changing Servers.",
                 "rewards": "*2 'Tab 2' Talent Pts &*2% Arcade balls/hr",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(77, <AchievementModel>{
                 "name": "Gold School",
                 "qty": 1,
                 "desc": "Have a stack of exactly 1500 Goldfish in your Storage Chest.",
                 "rewards": "*1% Arcade balls/hr",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(78, <AchievementModel>{
                 "name": "Buzz Buzz",
                 "qty": 1,
                 "desc": "Have a stack of exactly 2500 Flies in your Storage Chest.",
                 "rewards": "*3 'Tab 2' Talent Pts",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(79, <AchievementModel>{
                 "name": "Careful, it's Sharp!",
                 "qty": 1,
                 "desc": "Have a stack of exactly 15 Glass Shards in your Storage Chest.",
                 "rewards": "*RNG item unlock",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(80, <AchievementModel>{
                 "name": "Hybernation",
                 "qty": 1,
                 "desc": "Leave one of your players AFK for an entire week, which is 168 hours! Anything more counts too!",
                 "rewards": "*3% Arcade balls/hr &*Good nights sleep",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(81, <AchievementModel>{
                 "name": "Vial Noob",
                 "qty": 1,
                 "desc": "Get 3 vials to Lv. 4, which are the green ones",
                 "rewards": "*RNG item unlock",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(82, <AchievementModel>{
                 "name": "Specializational!",
                 "qty": 2,
                 "desc": "Choose a subclass for two of your characters.",
                 "rewards": "*RNG item unlock",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(83, <AchievementModel>{
                 "name": "Obols Oh Boy!",
                 "qty": 1,
                 "desc": "Have 10 Silver Obols equipped at once. The Family tab counts here!",
                 "rewards": "2% Arcade balls/hr",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(84, <AchievementModel>{
                 "name": "Well Learned",
                 "qty": 1,
                 "desc": "Get a lv 92 or higher Star Book from Alchemy! The 1st one, specifically.",
                 "rewards": "*RNG item unlock",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(85, <AchievementModel>{
                 "name": "B-o-B to Help",
                 "qty": 1,
                 "desc": "Complete 75 unique quests on a single character. I'm not sure what B-o-B stands for either...",
                 "rewards": "*STEAM EXCLUSIVE &*16 gems",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(86, <AchievementModel>{
                 "name": "Card Enthusiast",
                 "qty": 1,
                 "desc": "Collect 30 unique cards. If u wanna trade, I got some spare Amarok cards!",
                 "rewards": "*STEAM EXCLUSIVE &*16 gems",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(87, <AchievementModel>{
                 "name": "Efaunt Trumped",
                 "qty": 1,
                 "desc": "Defeat Efaunt, the Mummified Elephant God. He will remember you doing this.",
                 "rewards": "*RNG item unlock",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(88, <AchievementModel>{
                 "name": "Fishing Finesse",
                 "qty": 1,
                 "desc": "Get a score of 67+ in the Fishing Minigame, beating the developers highscore!",
                 "rewards": "*STEAM EXCLUSIVE &*25 gems &*2 '4hr time candy'",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(89, <AchievementModel>{
                 "name": "Catching Coronation",
                 "qty": 1,
                 "desc": "Get a score of 128+ in the Catching Minigame, beating the developers highscore!",
                 "rewards": "*STEAM EXCLUSIVE &*25 gems &*4hr time candy",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(90, <AchievementModel>{
                 "name": "Crystal Superslam",
                 "qty": 1,
                 "desc": "Defeat 100 Crystal Mobs. This could go a couple rounds...",
                 "rewards": "*STEAM EXCLUSIVE &*20 gems &*2 '2hr time candy'",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(91, <AchievementModel>{
                 "name": "Slumbering Gamer",
                 "qty": 1,
                 "desc": "Claim 2000+ hours of AFK progress across all characters. So lazy!",
                 "rewards": "*STEAM EXCLUSIVE &*12 gems &*'12hr time candy'",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(92, <AchievementModel>{
                 "name": "My First Trophy!",
                 "qty": 1,
                 "desc": "Equip any trophy, other than the limited edition ones which don't count lol.",
                 "rewards": "*STEAM EXCLUSIVE &*25 gems &*'4hr time candy'",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(93, <AchievementModel>{
                 "name": "A Fish Too Far",
                 "qty": 1000,
                 "desc": "Catch a total of 1000 fish across all Fishing Minigame plays.",
                 "rewards": "*Beach Background &for Title Screen",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(94, <AchievementModel>{
                 "name": "Rat-a-tat-tat",
                 "qty": 1,
                 "desc": "Level up the 'FMJ' Alchemy bubble to Lv. 30",
                 "rewards": "*RNG item unlock",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(95, <AchievementModel>{
                 "name": "Pillars of Sand",
                 "qty": 1,
                 "desc": "Defeat 250,000 Sandy Pots combined across all characters. Forget the Pillars of Salt though.",
                 "rewards": "*Desert Oasis BG &for Title Screen",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(96, <AchievementModel>{
                 "name": "Vial Connoisseur",
                 "qty": 1,
                 "desc": "Get 6 vials to Lv. 7, which are the pink ones",
                 "rewards": "*RNG item unlock",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(97, <AchievementModel>{
                 "name": "Coarse Cards",
                 "qty": 1,
                 "desc": "Level up cards for Mafioso, Sandcastle, Pincermin, and Mashed Potato, all up to 1 star.",
                 "rewards": "*Coarse Mountains BG &for Title Screen",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(98, <AchievementModel>{
                 "name": "Trial by Time",
                 "qty": 1,
                 "desc": "Run from Town to Efaunt's Tomb in under 2 minutes, with less than 132% move speed. No teleporting.",
                 "rewards": "*2% Arcade balls/hr",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(99, <AchievementModel>{
                 "name": "Golden Obolden!",
                 "qty": 1,
                 "desc": "Have 15 Golden Obols equipped at once. The Family tab counts here!",
                 "rewards": "20% Obol Fragments &gained when trashing &obols",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(100, <AchievementModel>{
                 "name": "Monocle No More",
                 "qty": 1,
                 "desc": "Defeat 160 Sand Giants within 10 minutes of entering the map. Auto must be off.",
                 "rewards": "*Twilight Desert BG &for Title Screen",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(101, <AchievementModel>{
                 "name": "Jellyfish Jelly",
                 "qty": 1,
                 "desc": "Have a stack of exactly 6000 Jellyfish in your Storage Chest. I heard their Jelly goes good with burgers btw.",
                 "rewards": "*RNG item unlock",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(102, <AchievementModel>{
                 "name": "Super Cereal",
                 "qty": 1,
                 "desc": "Have a stack of exactly 50,000 Sentient Cereal in your Storage Chest.",
                 "rewards": "*W2 Colosseum EZ-Access &*W2 Shops EZ-Access",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(103, <AchievementModel>{
                 "name": "Sweet Victory",
                 "qty": 1,
                 "desc": "Get a Score of 200,000 or more in the Sandstone Colosseum",
                 "rewards": "*2% Arcade balls/hr",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(104, <AchievementModel>{
                 "name": "Ink Blot",
                 "qty": 101,
                 "desc": "Use 101 silver pens in the Post Office",
                 "rewards": "20% chance to keep &silver pens after &using one",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(105, <AchievementModel>{
                 "name": "Demon Demolisher",
                 "qty": 1,
                 "desc": "Defeat the big hourglass and the toilet paper guy!",
                 "rewards": "*STEAM EXCLUSIVE &*25 gems",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(106, <AchievementModel>{
                 "name": "Dumbo Destroyer",
                 "qty": 1,
                 "desc": "Defeat Chaotic Efaunt. Look out for the kick, kapow!",
                 "rewards": "*STEAM EXCLUSIVE &*35 gems &*2 '2hr time candy'",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(107, <AchievementModel>{
                 "name": "Threadin' the Needle",
                 "qty": 1,
                 "desc": "Pass through the teenie tiny Lava hoop in the Catching Minigame. It only appears if you go through 20 hoops in a row!",
                 "rewards": "5% catching EXP for &all characters",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(108, <AchievementModel>{
                 "name": "S-M-R-T",
                 "qty": 1,
                 "desc": "Level up the 'Smarty Boi' Alchemy bubble to Lv. 50",
                 "rewards": "-10% Bubble upgrading &costs",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(109, <AchievementModel>{
                 "name": "Two Desserts!",
                 "qty": 2,
                 "desc": "Have the YumYum Sheriff trophy equipped, while also having another in your inventory.",
                 "rewards": "5% faster respawn for &YumYum Desert Monsters",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(110, <AchievementModel>{
                 "name": "Nuget Nightmare",
                 "qty": 1,
                 "desc": "Kill Crabbycakes manually, without Auto on, until one drops a Nuget Cake. Good luck...",
                 "rewards": "*Nuget Cake Hat Recipe",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(111, <AchievementModel>{
                 "name": "Bigtime Bloacher",
                 "qty": 1,
                 "desc": "Have a stack of exactly 100,000 Bloaches in your Storage Chest.",
                 "rewards": "*RNG item unlock",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(112, <AchievementModel>{
                 "name": "Vial Junkee",
                 "qty": 1,
                 "desc": "Get 10 vials to Lv. 9, which are the hyperlight Orange ones. Stop focusing so much on vials, it's not healthy!",
                 "rewards": "20% Sigil Charging &Speed",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(113, <AchievementModel>{
                 "name": "Fruit Salad",
                 "qty": 1,
                 "desc": "Have a stack of exactly 1,000,000 Fruit Flies in your Storage Chest.",
                 "rewards": "5% catching speed &for all characters",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(114, <AchievementModel>{
                 "name": "Your Skin, My Skin",
                 "qty": 1,
                 "desc": "Wear the Efaunt helmet, Ribcage, Hipillium, and Ankles. Also have 1 Efaunt Obol equipped.",
                 "rewards": "*Djonnuttown Teleport",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(115, <AchievementModel>{
                 "name": "WAAAAAAAHH!",
                 "qty": 1,
                 "desc": "SECRET ACHIEVEMENT ------------------------ Complete all available Treasure Hunts! You can find them on Youtube, just search for it!",
                 "rewards": "*3% Arcade balls/hr",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(116, <AchievementModel>{
                 "name": "Bobjoepicklejar",
                 "qty": 1,
                 "desc": "SECRET ACHIEVEMENT ------------------------ Pickles belong in containers, after all!",
                 "rewards": "*1% Arcade balls/hr",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(117, <AchievementModel>{
                 "name": "Fish Aint Biting",
                 "qty": 1,
                 "desc": "SECRET ACHIEVEMENT ------------------------ I'm tellin' ya, the fish ain't bitin' today gosh darn it!",
                 "rewards": "5% Fishing Exp for &all characters",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(118, <AchievementModel>{
                 "name": "Skill Master",
                 "qty": 1,
                 "desc": "SECRET ACHIEVEMENT ------------------------ Goldric's bag of peanuts may be nearly empty, but even just one peanut is enough for some...",
                 "rewards": "*W2 Boss Key EZ-Access",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(119, <AchievementModel>{
                 "name": "Tomb Raider",
                 "qty": 1,
                 "desc": "Defeat Snakenhotep on his 1st Difficulty.",
                 "rewards": "*2% Total DMG for all &characters outside &of dungeons",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(120, <AchievementModel>{
                 "name": "Tomb Defiler",
                 "qty": 1,
                 "desc": "Defeat Snakenhotep on his 2nd Difficulty.",
                 "rewards": "*3% Total DMG for all &characters outside &of dungeons",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(121, <AchievementModel>{
                 "name": "Tomb Completionist",
                 "qty": 1,
                 "desc": "Defeat Snakenhotep on his 3rd Difficulty.",
                 "rewards": "*5% Total DMG for all &characters outside &of dungeons",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(122, <AchievementModel>{
                 "name": "Wazzzzam!",
                 "qty": 125,
                 "desc": "Wazam 125 rooms in Snakenhotep's Dungeon by performing exceptionally well in a room.",
                 "rewards": "*6% Multikill bonus &for all characters",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(123, <AchievementModel>{
                 "name": "Just Passing By",
                 "qty": 30,
                 "desc": "Pass 30 rooms in Snakenhotep's Dungeon by doing the thingy the room says to do.",
                 "rewards": "*2% Multikill bonus &for all characters",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(124, <AchievementModel>{
                 "name": "Dungeon Slap",
                 "qty": 1,
                 "desc": "Deal 1000 or more damage in a single hit within any Dungeon.",
                 "rewards": "*2% Class EXP bonus &for all characters",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(125, <AchievementModel>{
                 "name": "FILLERZZZ ACH",
                 "qty": 20,
                 "desc": "-",
                 "rewards": "*STEAM EXCLUSIVE &*30 gems &*Item3",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(126, <AchievementModel>{
                 "name": "FILLERZZZ ACH",
                 "qty": 20,
                 "desc": "-",
                 "rewards": "*STEAM EXCLUSIVE &*30 gems &*Item3",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(127, <AchievementModel>{
                 "name": "FILLERZZZ ACH",
                 "qty": 20,
                 "desc": "-",
                 "rewards": "*STEAM EXCLUSIVE &*30 gems &*Item3",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(128, <AchievementModel>{
                 "name": "FILLERZZZ ACH",
                 "qty": 20,
                 "desc": "-",
                 "rewards": "*STEAM EXCLUSIVE &*30 gems &*Item3",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(129, <AchievementModel>{
                 "name": "FILLERZZZ ACH",
                 "qty": 20,
                 "desc": "-",
                 "rewards": "*STEAM EXCLUSIVE &*30 gems &*Item3",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(130, <AchievementModel>{
                 "name": "FILLERZZZ ACH",
                 "qty": 20,
                 "desc": "-",
                 "rewards": "*STEAM EXCLUSIVE &*30 gems &*Item3",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(131, <AchievementModel>{
                 "name": "FILLERZZZ ACH",
                 "qty": 20,
                 "desc": "-",
                 "rewards": "*STEAM EXCLUSIVE &*30 gems &*Item3",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(132, <AchievementModel>{
                 "name": "FILLERZZZ ACH",
                 "qty": 20,
                 "desc": "-",
                 "rewards": "*STEAM EXCLUSIVE &*30 gems &*Item3",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(133, <AchievementModel>{
                 "name": "FILLERZZZ ACH",
                 "qty": 20,
                 "desc": "-",
                 "rewards": "*STEAM EXCLUSIVE &*30 gems &*Item3",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(134, <AchievementModel>{
                 "name": "FILLERZZZ ACH",
                 "qty": 20,
                 "desc": "-",
                 "rewards": "*STEAM EXCLUSIVE &*30 gems &*Item3",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(135, <AchievementModel>{
                 "name": "FILLERZZZ ACH",
                 "qty": 20,
                 "desc": "-",
                 "rewards": "*STEAM EXCLUSIVE &*30 gems &*Item3",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(136, <AchievementModel>{
                 "name": "FILLERZZZ ACH",
                 "qty": 20,
                 "desc": "-",
                 "rewards": "*STEAM EXCLUSIVE &*30 gems &*Item3",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(137, <AchievementModel>{
                 "name": "FILLERZZZ ACH",
                 "qty": 20,
                 "desc": "-",
                 "rewards": "*STEAM EXCLUSIVE &*30 gems &*Item3",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(138, <AchievementModel>{
                 "name": "FILLERZZZ ACH",
                 "qty": 20,
                 "desc": "-",
                 "rewards": "*STEAM EXCLUSIVE &*30 gems &*Item3",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(139, <AchievementModel>{
                 "name": "FILLERZZZ ACH",
                 "qty": 20,
                 "desc": "-",
                 "rewards": "*STEAM EXCLUSIVE &*30 gems &*Item3",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new AchievementBase(140, <AchievementModel>{
                 "name": "Snowy Wonderland",
