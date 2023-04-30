@@ -3,12 +3,14 @@ import { CardDataBase, initCardRepo } from "./data/CardRepo";
 import { EnemyInfo } from "./enemies";
 import { ImageData } from "./imageData";
 import { CardDataModel } from "./model/cardDataModel";
+import { Rift } from "./rift";
 
 export class Card {
     count: number = 0;
     displayName: string;
 
     chipBoost: number = 1
+    fivestar: boolean = false;
 
     constructor(public index: number, public id: string, public data: CardDataModel) {
         this.displayName = EnemyInfo.find(enemy => enemy.id == id)?.details.Name || "New Monster?";
@@ -23,6 +25,12 @@ export class Card {
     }
 
     getStars = (): number => {
+        // cchiz is .. special? .. who knows why.
+        if (this.id == "Boss3B" && this.fivestar && this.count > this.data.perTier * 36) {
+            return 5;
+        }
+        if (this.fivestar && this.count > this.data.perTier * 484)
+            return 5;
         if (this.count > this.data.perTier * 25)
             return 4;
         if (this.count > this.data.perTier * 9)
@@ -120,4 +128,15 @@ export default function parseCards(cardData: Record<string, number>) {
     })
 
     return cards;
+}
+
+export const updateCards = (data: Map<string, any>) => {
+    const cards = data.get("cards") as Card[];
+    const rift = data.get("rift") as Rift;
+
+    if (rift.bonuses.find(bonus => bonus.name == "Ruby Cards")?.active) {
+        cards.forEach(card => {
+            card.fivestar = true;
+        })
+    }
 }
