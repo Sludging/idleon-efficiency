@@ -65,7 +65,19 @@ export const dateToText = (date: Date): string => {
     return Intl.DateTimeFormat(resolvedFormat.locale, options).format(date)
 } 
 
-const bitsFormatter = (num: number) => {
+const getBitIndex = (num: number) => {
+    let modifiedValue = num;
+    let bitIndex = 0;
+    for (; bitIndex < 4 ; bitIndex++) {
+        if (modifiedValue > 1e18) {
+            modifiedValue /= 1e18;
+        }
+    }
+
+    return bitIndex;
+}
+
+export const bitsFormatter = (num: number) => {
     let modifiedValue = num;
     let bitIndex = 0;
     for (; bitIndex < 4 ; bitIndex++) {
@@ -291,4 +303,9 @@ export function secondsSinceUpdate(globalTime: number) {
 
 export function randomFloatBetween(e: number, t: number) {
     return e <= t ? e + Math.random() * (t - e) : t + Math.random() * (e - t)
+}
+
+export const letterToNumber = (char: string) => {
+    // Lava's unicode map doesn't have tilda (`) so, bit odd but it works.
+    return char.charCodeAt(0) == 95 ? 0 : char.charCodeAt(0) - 96;
 }
