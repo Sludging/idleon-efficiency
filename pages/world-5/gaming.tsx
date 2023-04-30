@@ -77,30 +77,6 @@ function Gaming() {
                     </ShadowBox>
                 }
             </Box>
-            <Grid columns={{ count: 6, size: 'auto' }}>
-                {
-                    gaming.superbits.map((superbit, index) => (
-                        <ShadowBox key={index} background="dark-1" margin={{ right: 'small', bottom: 'small' }} style={{ opacity: superbit.unlocked ? 1 : 0.5 }} pad="medium">
-                            <TextAndLabel label="Name" text={superbit.data.name} />
-                            <TextAndLabel label="Cost" text={bitsFormatter(superbit.getCost())} />
-                        </ShadowBox>
-                    ))
-                }
-            </Grid>
-            <Box>
-                {
-                    Object.entries(TotalizerBonus).map(([bonus, _], index) => {
-                        if (isNaN(parseInt(bonus))) {
-                            return null;
-                        }
-                        return (
-                            <Box key={index}>
-                                <Text>{gaming.totalizer.getBonus(parseInt(bonus))}</Text>
-                            </Box>
-                        )
-                    })
-                }
-            </Box>
         </Box>
     )
 }
