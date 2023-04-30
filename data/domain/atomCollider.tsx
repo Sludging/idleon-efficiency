@@ -16,10 +16,13 @@ export class Atom {
     bubbleBonus: number = 0; // Y5
     meritBonus: number = 0;
 
+    gamingMaxLevelBoost: number = 0;
+    gamingDiscount: number = 0;
+
     constructor(public index: number, public data: AtomColliderModel) { }
 
     getMaxLevel = () => {
-        return 20;
+        return 20 + this.gamingMaxLevelBoost;
     }
 
     getBonus = (): number => {
@@ -27,7 +30,7 @@ export class Atom {
     }
 
     getCost = (level: number = this.level): number => {
-        const bonusMath = (1 / (1 + (this.nenoBonus + this.bubbleBonus + (this.colliderBuildingLevel / 10) + this.meritBonus) / 100));
+        const bonusMath = (1 / (1 + (this.nenoBonus + this.gamingDiscount + this.bubbleBonus + (this.colliderBuildingLevel / 10) + this.meritBonus) / 100));
         const baseMath = this.data.baseCost + (level * this.data.growthFactor);
         const exponentMath = Math.pow(this.data.baseExponent, level);
         return Math.floor(bonusMath * baseMath * exponentMath);

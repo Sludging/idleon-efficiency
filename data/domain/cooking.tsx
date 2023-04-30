@@ -5,6 +5,7 @@ import { AtomCollider } from "./atomCollider";
 import { Breeding } from "./breeding";
 import { Card } from "./cards";
 import { initMealRepo, MealBase } from "./data/MealRepo";
+import { Gaming, TotalizerBonus } from "./gaming";
 import { GemStore } from "./gemPurchases";
 import { ImageData } from "./imageData";
 import { Lab } from "./lab";
@@ -189,8 +190,8 @@ export class Kitchen {
 
     constructor(public index: number) { }
 
-    getMealSpeed = (vialBonus: number, stampBonus: number, mealCookBonus: number, jewel0Bonus: number, cardBonus: number, kitchenEffBonus: number, jewel14Bonus: number, diamonChef: number, achieve225: boolean, achieve224: boolean, atom8Bonus: number, artifact13Bonus: number) => {
-        const baseMath = 10 * (1 + (this.richelin ? 2 : 0)) * Math.max(1, diamonChef) * Math.max(1, atom8Bonus);
+    getMealSpeed = (vialBonus: number, stampBonus: number, mealCookBonus: number, jewel0Bonus: number, cardBonus: number, kitchenEffBonus: number, jewel14Bonus: number, diamonChef: number, achieve225: boolean, achieve224: boolean, atom8Bonus: number, artifact13Bonus: number, gamingBonus: number) => {
+        const baseMath = 10 * (1 + (this.richelin ? 2 : 0)) * Math.max(1, diamonChef) * Math.max(1, atom8Bonus) * (1 + gamingBonus / 100);
         const moreMath = (1 + (this.mealLevels / 10)) * (1 + (artifact13Bonus / 100)); 
         const bonusMath = (1 + (stampBonus + Math.max(0, jewel14Bonus)) / 100) * (1 + mealCookBonus / 100) * Math.max(1, jewel0Bonus);
         const cardAndAchiImpact = 1 + Math.min(cardBonus + (20 * (achieve225 ? 1 : 0)) + (10 * (achieve224 ? 1 : 0)), 100) / 100;
@@ -202,8 +203,8 @@ export class Kitchen {
             (1 + (kitchenEffBonus * Math.floor((this.mealLevels + (this.recipeLevels + this.luckLevels)) / 10)) / 100);
     }
 
-    getFireSpeed = (vialBonus: number, stampBonus: number, mealBonus: number, cardBonus: number, kitchenEffBonus: number, diamonChef: number, atom8Bonus: number) => {
-        const baseMath = 5 * (1 + (this.richelin ? 1 : 0)) * Math.max(1, diamonChef) * Math.max(1, atom8Bonus);
+    getFireSpeed = (vialBonus: number, stampBonus: number, mealBonus: number, cardBonus: number, kitchenEffBonus: number, diamonChef: number, atom8Bonus: number, gamingBonus: number) => {
+        const baseMath = 5 * (1 + (this.richelin ? 1 : 0)) * Math.max(1, diamonChef) * Math.max(1, atom8Bonus) * (1 + gamingBonus / 100);
         const stampMath = 1 + stampBonus / 100;
         const mealMath = 1 + mealBonus / 100;
         const cardImpact = 1 + Math.min(cardBonus, 50) / 100;
@@ -417,6 +418,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const sailing = data.get("sailing") as Sailing;
     const collider = data.get("collider") as AtomCollider;
+    const gaming = data.get("gaming") as Gaming;
 
     const bestLadleSkillLevel = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 148)?.maxLevel ?? 0)));
     if (bestLadleSkillLevel > 0) {
@@ -446,6 +448,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const cardBonus = cards.find(card => card.id == "Boss4A")?.getBonus() ?? 0;
     const artifactBonus = sailing.artifacts[13].getBonus();
     const atomBonus = collider.atoms[8].getBonus();
+    const gamingBonus = gaming.totalizer.getBonus(TotalizerBonus.Cooking);
 
     // Fire speed
     const fireVialBonus = alchemy.getVialBonusForKey("RecCook");
@@ -459,8 +462,8 @@ export const updateCooking = (data: Map<string, any>) => {
 
     let totalContribution = 0;
     cooking.kitchens.forEach(kitchen => {
-        kitchen.mealSpeed = kitchen.getMealSpeed(vialBonus, stampBonus, mealSpeedBonus, jewel0Bonus, cardBonus, kitchenEfficientBonus, jewel14Bonus, diamonChef, achievements[225].completed, achievements[224].completed, atomBonus, artifactBonus);
-        kitchen.fireSpeed = kitchen.getFireSpeed(fireVialBonus, fireStampBonus, fireSpeedMealBonus, cardBonus, kitchenEfficientBonus, diamonChef, atomBonus);
+        kitchen.mealSpeed = kitchen.getMealSpeed(vialBonus, stampBonus, mealSpeedBonus, jewel0Bonus, cardBonus, kitchenEfficientBonus, jewel14Bonus, diamonChef, achievements[225].completed, achievements[224].completed, atomBonus, artifactBonus, gamingBonus);
+        kitchen.fireSpeed = kitchen.getFireSpeed(fireVialBonus, fireStampBonus, fireSpeedMealBonus, cardBonus, kitchenEfficientBonus, diamonChef, atomBonus, gamingBonus);
         kitchen.recipeLuck = kitchen.getLuck();
 
         kitchen.speedUpgradeCost = kitchen.getSpiceUpgradeCost(kitchenCosts, mealKitchenCosts, arenaBonusActive, UpgradeType.Speed, sigils.sigils[18].getBonus());
