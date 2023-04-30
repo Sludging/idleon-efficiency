@@ -9,22 +9,20 @@ import { Alchemy, AlchemyConst, CauldronIndex } from './alchemy';
 import { Stamp, getStampBonusForKey } from './stamps';
 import { SkillsIndex } from './SkillsIndex';
 import { PlayerStatues, StatueConst } from './statues';
-import { Shrine, ShrineConstants } from './shrines';
+import { Shrine } from './shrines';
 import { Prayer } from './prayers';
 import { SaltLick } from './saltLick';
 import { Family } from './family';
-import { Achievement, AchievementConst } from './achievements';
+import { Achievement } from './achievements';
 import { Dungeons, PassiveType } from './dungeons';
 import { Sigils } from './sigils';
 import { Skilling } from './skilling';
 import { ClassIndex } from './talents';
-import { GemStore } from './gemPurchases';
-import { Bribe, BribeStatus } from './bribes';
-import { Guild } from './guild';
 import { Capacity, CapacityConst } from './capacity';
 import { Divinity } from './divinity';
 import { Rift, SkillMastery } from './rift';
 import { Breeding } from './breeding';
+import { Gaming } from './gaming';
 
 
 // if ("Costs2TypeAnvilPA" == t) {}
@@ -255,6 +253,7 @@ export const updateAnvil = (data: Map<string, any>) => {
     const cards = data.get("cards") as Card[];
     const rift = data.get("rift") as Rift;
     const breeding = data.get("breeding") as Breeding;
+    const gaming = data.get("gaming") as Gaming;
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
     // Cap stuff
@@ -282,7 +281,7 @@ export const updateAnvil = (data: Map<string, any>) => {
         const dungeonBonus = (dungeonsData.passives.get(PassiveType.Flurbo) ?? [])[2]?.getBonus() ?? 0; // Lava is looking at the wrong bonus.
         const goldFoodStampBonus = getStampBonusForKey(stampData, "GFood");
         const goldFoodBubble = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 18);
-        const allSkillXP = Skilling.getAllSkillXP(player, shrines, statues[player.playerID], prayers, saltLickBonus, dungeonBonus, family, goldFoodStampBonus, sigils.sigils[14].getBonus(), goldFoodBubble, divinity, cards, achievementsInfo, skillMastery, breeding);
+        const allSkillXP = Skilling.getAllSkillXP(player, shrines, statues[player.playerID], prayers, saltLickBonus, dungeonBonus, family, goldFoodStampBonus, sigils.sigils[14].getBonus(), goldFoodBubble, divinity, cards, achievementsInfo, skillMastery, breeding, gaming);
         const mmanBonus = players.find(player => player.classId == ClassIndex.Maestro)?.talents.find(talent => talent.skillIndex == 42)?.getBonus() ?? 0;
         const riftBonus = skillMastery.getSkillBonus(SkillsIndex.Smithing, 1);
         const xpMulti = playerAnvil.getXPMulti(player, allSkillXP, mmanBonus, riftBonus);

@@ -1,4 +1,5 @@
 import { SkillsIndex } from "./SkillsIndex";
+import { initBuildingRepo } from "./data/BuildingRepo";
 
 
 const defaultBonuses = [
@@ -140,6 +141,56 @@ export class SkillMastery extends RiftBonus {
     }
 }
 
+export class ConstructionMastery extends RiftBonus {
+    bonuseText = [
+        "+1%_REFINERY_SPD_PER_10_TOT_LV",
+        "+35_MAX_LV_FOR_TRAPPER_DRONE",
+        "+2%_DMG_PER_10_TOT_LV_OVER_750",
+        "+100_MAX_LV_FOR_TALENT_LIBRARY",
+        "+5%_BUILD_SPD_PER_TOT_LV_OVER_1250",
+        "+100_MAX_LV_FOR_ALL_SHRINES",
+        "+30_MAX_LV_FOR_ALL_WIZARD_TOWERS"
+    ]
+
+    buildingLevels: number = 0;
+    getRank = () => {
+        switch(true) {
+            case this.buildingLevels < 250: return 0;
+            case this.buildingLevels < 500: return 1;
+            case this.buildingLevels < 750: return 2;
+            case this.buildingLevels < 1000: return 3;
+            case this.buildingLevels < 1250: return 4;
+            case this.buildingLevels < 1500: return 5;
+            case this.buildingLevels < 2500: return 6;
+            default: return -1;
+        }
+    }
+
+    getBonusText = (bonusIndex: number) => {
+        return defaultBonuses[bonusIndex].replace(/_/g, " ");
+    }
+
+    getBonusByIndex = (bonusIndex: number) => {
+        if (!this.active) { 
+            return 0;
+        }
+
+        // Can be less duplicated/smarter but I prefer it readable.
+        // This also doesn't align with Lava's code because he uses different indexes for different bonuses
+        switch(true) {
+            case bonusIndex == 0: return this.getRank() > bonusIndex ? Math.floor(this.buildingLevels / 10) : 0;
+            case bonusIndex == 1: return this.getRank() > bonusIndex ? 35 : 0;
+            case bonusIndex == 2: return this.getRank() > bonusIndex ? 2 * ((this.buildingLevels - 750) / 10) : 0;
+            case bonusIndex == 3: return this.getRank() > bonusIndex ? 100 : 0;
+            case bonusIndex == 4: return this.getRank() > bonusIndex ? 5 * ((this.buildingLevels - 1250) / 10) : 0;
+            case bonusIndex == 5: return this.getRank() > bonusIndex ? 100 : 0;
+            case bonusIndex == 5: return this.getRank() > bonusIndex ? 30 : 0;
+            default: return 0;
+        }
+    }
+}
+
+
 export class Rift {
     level: number = 0;
     taskProgress: number = 0;
@@ -147,7 +198,7 @@ export class Rift {
     bonuses: RiftBonus[] = [];
 }
 
-export default function parseRift(riftData: number[], playerSkillLevels: number[][]) {
+export default function parseRift(riftData: number[], playerSkillLevels: number[][], towerData: number[]) {
     const rift = new Rift();
 
     rift.level = riftData[0];
@@ -160,6 +211,8 @@ export default function parseRift(riftData: number[], playerSkillLevels: number[
     rift.bonuses.push(new RiftBonus("Stamp Mastery", 26, "Every 100 total levels of all your stamps, you get a 1% chance to get a 'Gilded Stamp' 95% Reduction in Stamp Upgrade costs. This chance happens every day you log in, and they stack for whenever you want to use them!"))
     rift.bonuses.push(new RiftBonus("Eldritch Artifact", 31, "You can now get Eldritch Artifacts from sailing, but only if you've found the Ancient form first."))
     rift.bonuses.push(new RiftBonus("Vial Mastery", 36, "Each Gold Crown Vial you have, which is the 13th and final vial you upgrade to for 1 Billion Resource, now gives you a 1.02x boost to ALL Vial Bonuses!"))
+    rift.bonuses.push(new ConstructionMastery("Construct Mastery", 41, "Lava didn't bother with a description for this one. Get bonuses based on total level of your buildings in construction."))
+    rift.bonuses.push(new RiftBonus("Ruby Cards", 46, "You can now level up your cards to Lv 6. Yea, you'd think it would be Lv 5 but remember, 0 stars is actually Lv 1. So yea, Ruby Cards are 5 star cards, which means they are technically lv 6!"))
 
     rift.bonuses.forEach(bonus => {
         bonus.active = rift.level >= (bonus.unlockAt - 1);
@@ -174,6 +227,10 @@ export default function parseRift(riftData: number[], playerSkillLevels: number[
             }
         })
     });
+
+    const allBuildings = initBuildingRepo();
+    const constMastery = rift.bonuses.find(bonus => bonus.name == "Construct Mastery") as ConstructionMastery;
+    constMastery.buildingLevels = towerData.slice(0, allBuildings.length).reduce((sum, building) => sum += building, 0);
 
     return rift;
 }

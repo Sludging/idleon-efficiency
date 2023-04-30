@@ -58,7 +58,7 @@ export const initArtifactRepo = () => {
                 "bonus": "All 3d printer samples grow by +1% per day for 40 days. Resets when taking a sample. Bonus shown in 3d Printer.",
                 "ancientBonus": "Samples grow by 1.5% for 60 days instead!",
                 "ancientBonusQty": 0.5,
-                "eldritchBonus": "Samples grow by 2% for 60 days instead!",
+                "eldritchBonus": "Samples grow by 2% for 80 days instead!",
                 "eldritchBonusQty": 1
             }),
         new ArtifactBase(5, <ArtifactModel>{

@@ -172,7 +172,7 @@ export const initDungItemRepo = () => {
                 "baseValue": 50,
                 "maxLevel": 10,
                 "achieve": "Rat-a-tat-tat",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new DungItemBase(14, <DungItemModel>{
                 "name": "Grey Grumblo",
@@ -244,7 +244,7 @@ export const initDungItemRepo = () => {
                 "baseValue": 5,
                 "maxLevel": 30,
                 "achieve": "Specializational!",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new DungItemBase(20, <DungItemModel>{
                 "name": "Sucker Punch",
@@ -316,7 +316,7 @@ export const initDungItemRepo = () => {
                 "baseValue": 25,
                 "maxLevel": 8,
                 "achieve": "Careful, it's Sharp!",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new DungItemBase(26, <DungItemModel>{
                 "name": "Can of Varnish",
@@ -328,7 +328,7 @@ export const initDungItemRepo = () => {
                 "baseValue": 30,
                 "maxLevel": 6,
                 "achieve": "Bigtime Bloacher",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new DungItemBase(27, <DungItemModel>{
                 "name": "Spare Change",
@@ -352,7 +352,7 @@ export const initDungItemRepo = () => {
                 "baseValue": 10,
                 "maxLevel": 5,
                 "achieve": "Well Learned",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new DungItemBase(29, <DungItemModel>{
                 "name": "Ninja Smoke",
@@ -364,7 +364,7 @@ export const initDungItemRepo = () => {
                 "baseValue": 2,
                 "maxLevel": 10,
                 "achieve": "Hammer Bub",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new DungItemBase(30, <DungItemModel>{
                 "name": "Tortoise Shell",
@@ -376,7 +376,7 @@ export const initDungItemRepo = () => {
                 "baseValue": 6,
                 "maxLevel": 5,
                 "achieve": "Jellyfish Jelly",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new DungItemBase(31, <DungItemModel>{
                 "name": "Vampire Fangs",
@@ -436,7 +436,7 @@ export const initDungItemRepo = () => {
                 "baseValue": 6,
                 "maxLevel": 5,
                 "achieve": "Vial Noob",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new DungItemBase(36, <DungItemModel>{
                 "name": "RNG Voucher",
@@ -520,7 +520,7 @@ export const initDungItemRepo = () => {
                 "baseValue": 25,
                 "maxLevel": 5,
                 "achieve": "Efaunt Trumped",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new DungItemBase(43, <DungItemModel>{
                 "name": "Transmogrifier Box",
@@ -532,7 +532,7 @@ export const initDungItemRepo = () => {
                 "baseValue": 1,
                 "maxLevel": 5,
                 "achieve": "Vial Connoisseur",
-                "world": "Yum Yum Desert"
+                "world": "Yum-Yum Desert"
             }),
         new DungItemBase(44, <DungItemModel>{
                 "name": "Coin Flip",

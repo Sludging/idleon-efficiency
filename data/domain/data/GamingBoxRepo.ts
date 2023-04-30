@@ -119,20 +119,20 @@ export const initGamingBoxRepo = () => {
                 "backgroundY": 178
             }),
         new GamingBoxBase(7, <GamingBoxModel>{
-                "name": "Empty Box",
-                "costA": 99,
-                "costB": 40,
+                "name": "Tall Slimy Package",
+                "costA": 611,
+                "costB": 27,
                 "drawX": 274,
                 "drawY": 84,
-                "clickWidth": 91,
-                "clickHeight": 58,
+                "clickWidth": 120,
+                "clickHeight": 120,
                 "clipboardWidth": 350,
                 "clipboardHeight": 74,
-                "desc": "Contains something invisible with no weight... Yea there's nothing in here.",
-                "itemX": 20,
-                "itemY": 1,
-                "backgroundX": 280,
-                "backgroundY": 80
+                "desc": "Contains a most vile, slimy, infuriatingly random creature...",
+                "itemX": 285,
+                "itemY": 128,
+                "backgroundX": 292,
+                "backgroundY": 174
             }),
         new GamingBoxBase(8, <GamingBoxModel>{
                 "name": "Empty Box",

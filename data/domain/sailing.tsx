@@ -21,6 +21,7 @@ import { TaskBoard } from "./tasks";
 import { Achievement } from "./achievements";
 import { Rift, SkillMastery } from "./rift";
 import { SkillsIndex } from "./SkillsIndex";
+import { Gaming, TotalizerBonus } from "./gaming";
 
 // "Captains": [
 //     [0,0,-1,3,6.75,2,0],
@@ -327,6 +328,7 @@ export const updateSailing = (data: Map<string, any>) => {
     const taskboard = data.get("taskboard") as TaskBoard;
     const achievements = data.get("achievements") as Achievement[];
     const rift = data.get("rift") as Rift;
+    const gaming = data.get("gaming") as Gaming;
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
 
@@ -349,9 +351,10 @@ export const updateSailing = (data: Map<string, any>) => {
     const stampBonus = stamps.flatMap(tab => tab).reduce((sum, stamp) => sum += stamp.data.effect == "SailSpd" ? stamp.getBonus() : 0, 0);
     const mealBonus = cooking.getMealBonusForKey("Sailing");
     const skillMasteryBonus = skillMastery.getSkillBonus(SkillsIndex.Sailing, 1);
+    const gamingBonus = gaming.totalizer.getBonus(TotalizerBonus.BoatSpeed);
     const firstMath = (1 + (divinityMinorBonus + cardBonus + alchemy.getBubbleBonusForKey("Y1")) / 125) * (1 + divinity.gods[4].getBlessingBonus() / 100);
     const speedBaseMath = firstMath * (1 + divinity.gods[6].getBlessingBonus() / 100)
-        * (1 + (divinity.gods[9].getBlessingBonus() + sailing.artifacts[10].getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus) / 125);
+        * (1 + (divinity.gods[9].getBlessingBonus() + sailing.artifacts[10].getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus + gamingBonus) / 125);
 
     //Unending Loot Search
     const highestLevelUnendingSearch = players.slice().sort((player1, player2) => player1.getTalentBonus(325) > player2.getTalentBonus(325) ? -1 : 1)[0];

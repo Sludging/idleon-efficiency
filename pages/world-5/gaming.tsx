@@ -1,5 +1,6 @@
 import {
     Box,
+    Grid,
     Heading,
     Text,
 } from 'grommet'
@@ -9,8 +10,8 @@ import ShadowBox from '../../components/base/ShadowBox';
 import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import { TimeDown } from '../../components/base/TimeDisplay';
 import { AppContext } from '../../data/appContext';
-import { Gaming as GamingDomain } from '../../data/domain/gaming';
-import { nFormatter } from '../../data/utility';
+import { Gaming as GamingDomain, TotalizerBonus } from '../../data/domain/gaming';
+import { nFormatter, bitsFormatter } from '../../data/utility';
 
 // Gaming[0] = current bits
 // Gaming[6] = Unlocked imports?
@@ -47,7 +48,7 @@ function Gaming() {
             <NextSeo title="Gaming" />
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Gaming</Heading>
             <Text size="xsmall">* This is a work in progress, there could some bugs and minor inaccuracies. THE UI ISN&apos;T FINAL!</Text>
-            <Box direction="row" margin={{top: 'small'}}>
+            <Box direction="row" margin={{ top: 'small' }}>
                 {
                     gaming.importBoxes[0].level > 0 &&
                     <ShadowBox width="medium" margin={{ right: 'large', bottom: 'small' }} background="dark-1" gap="xsmall" pad="medium" align="center">
