@@ -90,7 +90,7 @@ export const initPrayerRepo = () => {
                 "bonus": "+{% Total Accuracy",
                 "curse": "-{% Total Damage",
                 "x1": 30,
-                "x2": 15,
+                "x2": 5,
                 "soul": "Soul2",
                 "costMult": 250,
                 "unlockZone": "Wakawaka War",

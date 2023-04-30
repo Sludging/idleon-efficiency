@@ -15,17 +15,17 @@ export const initBuildingRepo = () => {
                 "maxLvl": 10,
                 "costInc": 1,
                 "bonusInc": [1, 30],
-                "misc": 0
+                "misc": 10
             }),
         new BuildingBase(1, <BuildingModel>{
                 "name": "Talent Book Library",
                 "description": "Relive your youth by checking out books, and further relive your youth by never returning them! Instead, use them to boost your talent max levels. ",
                 "bonus": " +{% Checkout Refresh Speed",
                 "lvlUpReq": [<ComponentModel>{"item": "Refinery1", "quantity": 6}, <ComponentModel>{"item": "Critter1", "quantity": 100}],
-                "maxLvl": 100,
-                "costInc": 1.34,
+                "maxLvl": 101,
+                "costInc": 1.18,
                 "bonusInc": [5, 30],
-                "misc": 0
+                "misc": 201
             }),
         new BuildingBase(2, <BuildingModel>{
                 "name": "Death Note",
@@ -35,7 +35,7 @@ export const initBuildingRepo = () => {
                 "maxLvl": 51,
                 "costInc": 1.23,
                 "bonusInc": [2, 50],
-                "misc": 0
+                "misc": 51
             }),
         new BuildingBase(3, <BuildingModel>{
                 "name": "Salt Lick",
@@ -45,7 +45,7 @@ export const initBuildingRepo = () => {
                 "maxLvl": 10,
                 "costInc": 2,
                 "bonusInc": [1, 30],
-                "misc": 0
+                "misc": 10
             }),
         new BuildingBase(4, <BuildingModel>{
                 "name": "Chest Space",
@@ -55,7 +55,7 @@ export const initBuildingRepo = () => {
                 "maxLvl": 25,
                 "costInc": 1.27,
                 "bonusInc": [2, 30],
-                "misc": 0
+                "misc": 25
             }),
         new BuildingBase(5, <BuildingModel>{
                 "name": "Cost Cruncher",
@@ -65,17 +65,17 @@ export const initBuildingRepo = () => {
                 "maxLvl": 60,
                 "costInc": 1.106,
                 "bonusInc": [1, 30],
-                "misc": 0
+                "misc": 60
             }),
         new BuildingBase(6, <BuildingModel>{
                 "name": "Trapper Drone",
                 "description": "Remotely deploy AND collect traps to and from any discovered critter location! Collect-all is based on Hunter's Eagle Eye Talent. ",
                 "bonus": " +{% Extra critters from all traps",
                 "lvlUpReq": [<ComponentModel>{"item": "Refinery3", "quantity": 30}, <ComponentModel>{"item": "Critter3A", "quantity": 5}],
-                "maxLvl": 10,
-                "costInc": 3,
+                "maxLvl": 15,
+                "costInc": 1.95,
                 "bonusInc": [10, 1],
-                "misc": 0
+                "misc": 50
             }),
         new BuildingBase(7, <BuildingModel>{
                 "name": "Automation Arm",
@@ -85,7 +85,7 @@ export const initBuildingRepo = () => {
                 "maxLvl": 5,
                 "costInc": 4,
                 "bonusInc": [1, 1],
-                "misc": 0
+                "misc": 5
             }),
         new BuildingBase(8, <BuildingModel>{
                 "name": "Atom Collider",
@@ -95,7 +95,7 @@ export const initBuildingRepo = () => {
                 "maxLvl": 200,
                 "costInc": 1.14,
                 "bonusInc": [0.1, 0.1],
-                "misc": 0
+                "misc": 200
             }),
         new BuildingBase(9, <BuildingModel>{
                 "name": "Pulse Mage",
@@ -105,7 +105,7 @@ export const initBuildingRepo = () => {
                 "maxLvl": 50,
                 "costInc": 1.365,
                 "bonusInc": [15, 1.4],
-                "misc": 0
+                "misc": 130
             }),
         new BuildingBase(10, <BuildingModel>{
                 "name": "Fireball Lobber",
@@ -115,7 +115,7 @@ export const initBuildingRepo = () => {
                 "maxLvl": 50,
                 "costInc": 1.33,
                 "bonusInc": [20, 1.5],
-                "misc": 0
+                "misc": 130
             }),
         new BuildingBase(11, <BuildingModel>{
                 "name": "Boulder Roller",
@@ -125,7 +125,7 @@ export const initBuildingRepo = () => {
                 "maxLvl": 50,
                 "costInc": 1.276,
                 "bonusInc": [25, 1.6],
-                "misc": 0
+                "misc": 130
             }),
         new BuildingBase(12, <BuildingModel>{
                 "name": "Frozone Malone",
@@ -135,7 +135,7 @@ export const initBuildingRepo = () => {
                 "maxLvl": 50,
                 "costInc": 1.246,
                 "bonusInc": [1.5, 1.6],
-                "misc": 0
+                "misc": 130
             }),
         new BuildingBase(13, <BuildingModel>{
                 "name": "Stormcaller",
@@ -145,7 +145,7 @@ export const initBuildingRepo = () => {
                 "maxLvl": 50,
                 "costInc": 1.23,
                 "bonusInc": [30, 1.7],
-                "misc": 0
+                "misc": 130
             }),
         new BuildingBase(14, <BuildingModel>{
                 "name": "Party Starter",
@@ -155,7 +155,7 @@ export const initBuildingRepo = () => {
                 "maxLvl": 50,
                 "costInc": 1.222,
                 "bonusInc": [4, 1.7],
-                "misc": 0
+                "misc": 130
             }),
         new BuildingBase(15, <BuildingModel>{
                 "name": "Kraken Cosplayer",
@@ -165,7 +165,7 @@ export const initBuildingRepo = () => {
                 "maxLvl": 50,
                 "costInc": 1.22,
                 "bonusInc": [3, 1.6],
-                "misc": 0
+                "misc": 130
             }),
         new BuildingBase(16, <BuildingModel>{
                 "name": "Poisonic Elder",
@@ -175,7 +175,7 @@ export const initBuildingRepo = () => {
                 "maxLvl": 50,
                 "costInc": 1.21,
                 "bonusInc": [15, 1.6],
-                "misc": 0
+                "misc": 130
             }),
         new BuildingBase(17, <BuildingModel>{
                 "name": "Voidinator",
@@ -185,7 +185,7 @@ export const initBuildingRepo = () => {
                 "maxLvl": 50,
                 "costInc": 1.4,
                 "bonusInc": [0.7, 0.8],
-                "misc": 0
+                "misc": 130
             }),
         new BuildingBase(18, <BuildingModel>{
                 "name": "Woodular Shrine",
@@ -195,7 +195,7 @@ export const initBuildingRepo = () => {
                 "maxLvl": 100,
                 "costInc": 1.16,
                 "bonusInc": [10, 30],
-                "misc": 0
+                "misc": 200
             }),
         new BuildingBase(19, <BuildingModel>{
                 "name": "Isaccian Shrine",
@@ -205,7 +205,7 @@ export const initBuildingRepo = () => {
                 "maxLvl": 100,
                 "costInc": 1.15,
                 "bonusInc": [10, 30],
-                "misc": 0
+                "misc": 200
             }),
         new BuildingBase(20, <BuildingModel>{
                 "name": "Crystal Shrine",
@@ -215,7 +215,7 @@ export const initBuildingRepo = () => {
                 "maxLvl": 100,
                 "costInc": 1.13,
                 "bonusInc": [10, 30],
-                "misc": 0
+                "misc": 200
             }),
         new BuildingBase(21, <BuildingModel>{
                 "name": "Pantheon Shrine",
@@ -225,7 +225,7 @@ export const initBuildingRepo = () => {
                 "maxLvl": 100,
                 "costInc": 1.115,
                 "bonusInc": [10, 30],
-                "misc": 0
+                "misc": 200
             }),
         new BuildingBase(22, <BuildingModel>{
                 "name": "Clover Shrine",
@@ -235,7 +235,7 @@ export const initBuildingRepo = () => {
                 "maxLvl": 100,
                 "costInc": 1.11,
                 "bonusInc": [10, 30],
-                "misc": 0
+                "misc": 200
             }),
         new BuildingBase(23, <BuildingModel>{
                 "name": "Summereading Shrine",
@@ -245,7 +245,7 @@ export const initBuildingRepo = () => {
                 "maxLvl": 100,
                 "costInc": 1.106,
                 "bonusInc": [10, 30],
-                "misc": 0
+                "misc": 200
             }),
         new BuildingBase(24, <BuildingModel>{
                 "name": "Crescent Shrine",
@@ -255,7 +255,7 @@ export const initBuildingRepo = () => {
                 "maxLvl": 100,
                 "costInc": 1.106,
                 "bonusInc": [10, 30],
-                "misc": 0
+                "misc": 200
             }),
         new BuildingBase(25, <BuildingModel>{
                 "name": "Undead Shrine",
@@ -265,7 +265,7 @@ export const initBuildingRepo = () => {
                 "maxLvl": 100,
                 "costInc": 1.1,
                 "bonusInc": [10, 30],
-                "misc": 0
+                "misc": 200
             }),
         new BuildingBase(26, <BuildingModel>{
                 "name": "Primordial Shrine",
@@ -275,7 +275,7 @@ export const initBuildingRepo = () => {
                 "maxLvl": 100,
                 "costInc": 1.09,
                 "bonusInc": [10, 30],
-                "misc": 0
+                "misc": 200
             })    
 ]
 }

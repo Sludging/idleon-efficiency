@@ -309,301 +309,301 @@ export const initMapDataRepo = () => {
             }),
         new MapDataBase(50, <MapDataModel>{
                 "enemy": "Nothing",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zDesertaTown", "name": "YumYum Grotto", "id": 50},
                 "portalRequirements": [1, 0, 0]
             }),
         new MapDataBase(51, <MapDataModel>{
                 "enemy": "jarSand",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zDesertCalmA", "name": "Jar Bridge", "id": 51},
                 "portalRequirements": [250]
             }),
         new MapDataBase(52, <MapDataModel>{
                 "enemy": "mimicA",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zDesertCalmB", "name": "The Mimic Hole", "id": 52},
                 "portalRequirements": [600, 1000]
             }),
         new MapDataBase(53, <MapDataModel>{
                 "enemy": "crabcake",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zDesertCalmC", "name": "Dessert Dunes", "id": 53},
                 "portalRequirements": [1000]
             }),
         new MapDataBase(54, <MapDataModel>{
                 "enemy": "FishSmall",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zFishingA", "name": "Salty Shores", "id": 54},
                 "portalRequirements": [15]
             }),
         new MapDataBase(55, <MapDataModel>{
                 "enemy": "FishSmall",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zFishingB", "name": "Faraway Piers", "id": 55},
                 "portalRequirements": [30]
             }),
         new MapDataBase(56, <MapDataModel>{
                 "enemy": "Filler",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Filler", "name": "Filler", "id": 56},
                 "portalRequirements": [30]
             }),
         new MapDataBase(57, <MapDataModel>{
                 "enemy": "coconut",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zDesertMildA", "name": "The Grandioso Canyon", "id": 57},
                 "portalRequirements": [1200]
             }),
         new MapDataBase(58, <MapDataModel>{
                 "enemy": "sandcastle",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zDesertMildB", "name": "Shifty Sandbox", "id": 58},
                 "portalRequirements": [1600]
             }),
         new MapDataBase(59, <MapDataModel>{
                 "enemy": "pincermin",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zDesertMildC", "name": "Pincer Plateau", "id": 59},
                 "portalRequirements": [2000]
             }),
         new MapDataBase(60, <MapDataModel>{
                 "enemy": "potato",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zDesertMildD", "name": "Slamabam Straightaway", "id": 60},
                 "portalRequirements": [2500, 0]
             }),
         new MapDataBase(61, <MapDataModel>{
                 "enemy": "FishMed",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zFishingC", "name": "Deepwater Docks", "id": 61},
                 "portalRequirements": [30]
             }),
         new MapDataBase(62, <MapDataModel>{
                 "enemy": "steak",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zDesertNightA", "name": "The Ring", "id": 62},
                 "portalRequirements": [3000]
             }),
         new MapDataBase(63, <MapDataModel>{
                 "enemy": "moonman",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zDesertNightB", "name": "Up Up Down Down", "id": 63},
                 "portalRequirements": [4000]
             }),
         new MapDataBase(64, <MapDataModel>{
                 "enemy": "sandgiant",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zDesertNightC", "name": "Sands of Time", "id": 64},
                 "portalRequirements": [5000]
             }),
         new MapDataBase(65, <MapDataModel>{
                 "enemy": "snailZ",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zDesertNightD", "name": "Djonnuttown", "id": 65},
                 "portalRequirements": [1]
             }),
         new MapDataBase(66, <MapDataModel>{
                 "enemy": "snailZ",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zDesertNightZboss", "name": "Efaunt's Tomb", "id": 66},
                 "portalRequirements": [0]
             }),
         new MapDataBase(67, <MapDataModel>{
                 "enemy": "Bug2",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zDesertCavernA", "name": "Bandit Bob's Hideout", "id": 67},
                 "portalRequirements": [0]
             }),
         new MapDataBase(68, <MapDataModel>{
                 "enemy": "mimicA",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "ColosseumB", "name": "Sandstone Colosseum", "id": 68},
                 "portalRequirements": [0]
             }),
         new MapDataBase(69, <MapDataModel>{
                 "enemy": "sandgiant",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zDesertMummy", "name": "Mummy Memorial", "id": 69},
                 "portalRequirements": [0]
             }),
         new MapDataBase(70, <MapDataModel>{
                 "enemy": "mimicA",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zDesertCavernB", "name": "Heaty Hole", "id": 70},
                 "portalRequirements": [0]
             }),
         new MapDataBase(71, <MapDataModel>{
                 "enemy": "mimicA",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Dungeon2", "name": "Gravel Tomb", "id": 71},
                 "portalRequirements": [0]
             }),
         new MapDataBase(72, <MapDataModel>{
                 "enemy": "mimicA",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 72},
                 "portalRequirements": [0]
             }),
         new MapDataBase(73, <MapDataModel>{
                 "enemy": "mimicA",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 73},
                 "portalRequirements": [0]
             }),
         new MapDataBase(74, <MapDataModel>{
                 "enemy": "mimicA",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 74},
                 "portalRequirements": [0]
             }),
         new MapDataBase(75, <MapDataModel>{
                 "enemy": "Z",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 75},
                 "portalRequirements": [0]
             }),
         new MapDataBase(76, <MapDataModel>{
                 "enemy": "Z",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 76},
                 "portalRequirements": [0]
             }),
         new MapDataBase(77, <MapDataModel>{
                 "enemy": "Z",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 77},
                 "portalRequirements": [0]
             }),
         new MapDataBase(78, <MapDataModel>{
                 "enemy": "Z",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 78},
                 "portalRequirements": [0]
             }),
         new MapDataBase(79, <MapDataModel>{
                 "enemy": "Z",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 79},
                 "portalRequirements": [0]
             }),
         new MapDataBase(80, <MapDataModel>{
                 "enemy": "Z",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 80},
                 "portalRequirements": [0]
             }),
         new MapDataBase(81, <MapDataModel>{
                 "enemy": "Z",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 81},
                 "portalRequirements": [0]
             }),
         new MapDataBase(82, <MapDataModel>{
                 "enemy": "Z",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 82},
                 "portalRequirements": [0]
             }),
         new MapDataBase(83, <MapDataModel>{
                 "enemy": "Z",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 83},
                 "portalRequirements": [0]
             }),
         new MapDataBase(84, <MapDataModel>{
                 "enemy": "Z",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 84},
                 "portalRequirements": [0]
             }),
         new MapDataBase(85, <MapDataModel>{
                 "enemy": "Z",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 85},
                 "portalRequirements": [0]
             }),
         new MapDataBase(86, <MapDataModel>{
                 "enemy": "Z",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 86},
                 "portalRequirements": [0]
             }),
         new MapDataBase(87, <MapDataModel>{
                 "enemy": "Z",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 87},
                 "portalRequirements": [0]
             }),
         new MapDataBase(88, <MapDataModel>{
                 "enemy": "Z",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 88},
                 "portalRequirements": [0]
             }),
         new MapDataBase(89, <MapDataModel>{
                 "enemy": "Z",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 89},
                 "portalRequirements": [0]
             }),
         new MapDataBase(90, <MapDataModel>{
                 "enemy": "Z",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 90},
                 "portalRequirements": [0]
             }),
         new MapDataBase(91, <MapDataModel>{
                 "enemy": "Z",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 91},
                 "portalRequirements": [0]
             }),
         new MapDataBase(92, <MapDataModel>{
                 "enemy": "Z",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 92},
                 "portalRequirements": [0]
             }),
         new MapDataBase(93, <MapDataModel>{
                 "enemy": "Z",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 93},
                 "portalRequirements": [0]
             }),
         new MapDataBase(94, <MapDataModel>{
                 "enemy": "Z",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 94},
                 "portalRequirements": [0]
             }),
         new MapDataBase(95, <MapDataModel>{
                 "enemy": "Z",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 95},
                 "portalRequirements": [0]
             }),
         new MapDataBase(96, <MapDataModel>{
                 "enemy": "Z",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 96},
                 "portalRequirements": [0]
             }),
         new MapDataBase(97, <MapDataModel>{
                 "enemy": "Z",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 97},
                 "portalRequirements": [0]
             }),
         new MapDataBase(98, <MapDataModel>{
                 "enemy": "Z",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 98},
                 "portalRequirements": [0]
             }),
         new MapDataBase(99, <MapDataModel>{
                 "enemy": "Z",
-                "world": "Yum Yum Desert",
+                "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 99},
                 "portalRequirements": [0]
             }),

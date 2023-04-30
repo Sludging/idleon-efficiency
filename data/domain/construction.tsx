@@ -16,6 +16,8 @@ export class Library {
     secondsToNextCheckout: number = -1;
     secondsToMaxCheckout: number = -1;
 
+    gamingCheckoutBoost: number = 0;
+
     getTimeTillNextCheckout = (currentBooks: number = this.currentBooks) => {
         return Math.round(this.libCheckoutSpeed * (1 + 10 * Math.pow(currentBooks, 1.4) / 100));
     }
@@ -111,7 +113,8 @@ export const updateConstruction = (data: Map<string, any>) => {
             (1 + mealBonus / 100) *
             (1 + colliderBonus / 100) *
             (1 + (5 * construction.buildings[1].level + alchemyBonus + vialBonus + (
-                stampBonus + Math.min(30, Math.max(0, 30 * (achievements[145].completed ? 1 : 0))))) / 100)));
+                stampBonus + Math.min(30, Math.max(0, 30 * (achievements[145].completed ? 1 : 0))))
+            + construction.library.gamingCheckoutBoost) / 100)));
     
     // Figure out how long since library was checked.
     let timeSinceCheck = timeAway["BookLib"];

@@ -3,12 +3,15 @@ import { CardDataBase, initCardRepo } from "./data/CardRepo";
 import { EnemyInfo } from "./enemies";
 import { ImageData } from "./imageData";
 import { CardDataModel } from "./model/cardDataModel";
+import { Player } from "./player";
+import { Rift } from "./rift";
 
 export class Card {
     count: number = 0;
     displayName: string;
 
     chipBoost: number = 1
+    fivestar: boolean = false;
 
     constructor(public index: number, public id: string, public data: CardDataModel) {
         this.displayName = EnemyInfo.find(enemy => enemy.id == id)?.details.Name || "New Monster?";
@@ -22,17 +25,17 @@ export class Card {
         }
     }
 
-    getStars = (): number => {
-        if (this.count > this.data.perTier * 25)
-            return 4;
-        if (this.count > this.data.perTier * 9)
-            return 3;
-        if (this.count > this.data.perTier * 4)
-            return 2;
-        if (this.count > this.data.perTier)
-            return 1;
-
-        return 0;
+    getStars = (): number => { 
+        switch (true) {
+            // cchiz is .. special? .. who knows why.
+            case this.id == "Boss3B" && this.fivestar && this.count > this.data.perTier * 36: return 5;
+            case this.fivestar && this.count > this.data.perTier * 484: return 5;
+            case this.count > this.data.perTier * 25: return 4;
+            case this.count > this.data.perTier * 9: return 3;
+            case this.count > this.data.perTier * 4: return 2;
+            case this.count > this.data.perTier: return 1;
+            default: return 0;
+        }
     }
 
     getBonus = (): number => {
@@ -120,4 +123,37 @@ export default function parseCards(cardData: Record<string, number>) {
     })
 
     return cards;
+}
+
+export const updateCards = (data: Map<string, any>) => {
+    const cards = data.get("cards") as Card[];
+    const rift = data.get("rift") as Rift;
+    const players = data.get("players") as Player[];
+    const optLacc = data.get("OptLacc");
+
+    if (rift.bonuses.find(bonus => bonus.name == "Ruby Cards")?.active) {
+        cards.forEach(card => {
+            card.fivestar = true;
+        })
+        // I should probably not duplicate cards at some point, but for now ...
+        players.flatMap(player => player.cardInfo?.cards ?? []).forEach(card => {
+            card.fivestar = true;
+        })
+    }
+    else {
+        const cardifiedFiveStarCards = (optLacc[155] as string).split(",");
+        cardifiedFiveStarCards.forEach(cardId => {
+            cards.forEach(card => {
+                if (card.id == cardId) {
+                    card.fivestar = true;
+                }
+            })
+            // I should probably not duplicate cards at some point, but for now ...
+            players.flatMap(player => player.cardInfo?.cards ?? []).forEach(card => {
+                if (card.id == cardId) {
+                    card.fivestar = true;
+                }
+            })
+        })
+    }
 }

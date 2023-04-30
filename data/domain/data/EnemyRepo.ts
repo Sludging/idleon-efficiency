@@ -2837,7 +2837,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "jarSand",
-                    "world": "Yum Yum Desert",
+                    "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zDesertCalmA", "name": "Jar Bridge", "id": 51},
                     "portalRequirements": [250]
                 },
@@ -2885,7 +2885,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "mimicA",
-                    "world": "Yum Yum Desert",
+                    "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zDesertCalmB", "name": "The Mimic Hole", "id": 52},
                     "portalRequirements": [600, 1000]
                 },
@@ -2932,7 +2932,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "crabcake",
-                    "world": "Yum Yum Desert",
+                    "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zDesertCalmC", "name": "Dessert Dunes", "id": 53},
                     "portalRequirements": [1000]
                 },
@@ -2979,7 +2979,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "coconut",
-                    "world": "Yum Yum Desert",
+                    "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zDesertMildA", "name": "The Grandioso Canyon", "id": 57},
                     "portalRequirements": [1200]
                 },
@@ -3025,7 +3025,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "sandcastle",
-                    "world": "Yum Yum Desert",
+                    "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zDesertMildB", "name": "Shifty Sandbox", "id": 58},
                     "portalRequirements": [1600]
                 },
@@ -3076,7 +3076,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "pincermin",
-                    "world": "Yum Yum Desert",
+                    "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zDesertMildC", "name": "Pincer Plateau", "id": 59},
                     "portalRequirements": [2000]
                 },
@@ -3121,7 +3121,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "potato",
-                    "world": "Yum Yum Desert",
+                    "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zDesertMildD", "name": "Slamabam Straightaway", "id": 60},
                     "portalRequirements": [2500, 0]
                 },
@@ -3166,7 +3166,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "steak",
-                    "world": "Yum Yum Desert",
+                    "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zDesertNightA", "name": "The Ring", "id": 62},
                     "portalRequirements": [3000]
                 },
@@ -3214,7 +3214,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "moonman",
-                    "world": "Yum Yum Desert",
+                    "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zDesertNightB", "name": "Up Up Down Down", "id": 63},
                     "portalRequirements": [4000]
                 },
@@ -3260,7 +3260,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "sandgiant",
-                    "world": "Yum Yum Desert",
+                    "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zDesertNightC", "name": "Sands of Time", "id": 64},
                     "portalRequirements": [5000]
                 },
@@ -3306,7 +3306,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "snailZ",
-                    "world": "Yum Yum Desert",
+                    "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zDesertNightD", "name": "Djonnuttown", "id": 65},
                     "portalRequirements": [1]
                 },
@@ -8189,7 +8189,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "FishSmall",
-                    "world": "Yum Yum Desert",
+                    "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zFishingA", "name": "Salty Shores", "id": 54},
                     "portalRequirements": [15]
                 },
@@ -8226,7 +8226,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "FishMed",
-                    "world": "Yum Yum Desert",
+                    "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zFishingC", "name": "Deepwater Docks", "id": 61},
                     "portalRequirements": [30]
                 },
@@ -8874,7 +8874,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "Bug2",
-                    "world": "Yum Yum Desert",
+                    "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zDesertCavernA", "name": "Bandit Bob's Hideout", "id": 67},
                     "portalRequirements": [0]
                 },
