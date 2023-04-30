@@ -232,7 +232,5 @@ export default function parseRift(riftData: number[], playerSkillLevels: number[
     const constMastery = rift.bonuses.find(bonus => bonus.name == "Construct Mastery") as ConstructionMastery;
     constMastery.buildingLevels = towerData.slice(0, allBuildings.length).reduce((sum, building) => sum += building, 0);
 
-    console.log(constMastery);
-
     return rift;
 }
