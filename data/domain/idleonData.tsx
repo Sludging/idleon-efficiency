@@ -19,7 +19,7 @@ import parseTaskboard from './tasks';
 import { Cloudsave } from './cloudsave';
 import parseWorship, { updateWorship } from './worship';
 import parseConstruction, { updateConstruction } from './construction';
-import parseCards from './cards';
+import parseCards, { updateCards } from './cards';
 import parseArcade, { updateArcade } from './arcade';
 import parseObols from './obols';
 import { calculateFamily } from './family';
@@ -35,7 +35,7 @@ import { updateAlerts } from './alerts';
 import { parseAccount, updateAccount } from './account';
 import parseDivinity, { updateDivinity } from './divinity';
 import parseSailing, { updateMinTravelTime, updateSailing } from './sailing';
-import parseGaming from './gaming';
+import parseGaming, { updateGaming, updateSuperbitImpacts } from './gaming';
 import parseAtomCollider, { updateAtomCollider } from './atomCollider';
 import { updateArtifacts } from './sailing/artifacts';
 import parseConstellations from './constellations';
@@ -136,18 +136,21 @@ const keyFunctionMap: Record<string, Function> = {
     "account": (doc: Cloudsave, allItems: Item[], charCount: number) => parseAccount(doc, allItems),
     "divinity": (doc: Cloudsave, charCount: number) => parseDivinity(charCount, doc.get("Divinity") as number[] || [], [...Array(charCount)].map((_, index) => doc.get(`AFKtarget_${index}`)), [...Array(charCount)].map((_, index) => doc.get(`SL_${index}`))),
     "sailing": (doc: Cloudsave, charCount: number) => parseSailing(safeJsonParse(doc, "Sailing", []), safeJsonParse(doc, "Boats", []), safeJsonParse(doc, "Captains", [])),
-    "gaming": (doc: Cloudsave, charCount: number) => parseGaming(doc.get("Gaming") as any[] || [], safeJsonParse(doc, "GamingSprout", [])),
+    "gaming": (doc: Cloudsave, charCount: number) => parseGaming(doc.get("Gaming") as any[] || [], safeJsonParse(doc, "GamingSprout", []),[...Array(charCount)].map((_, i) => { return doc.get(`Lv0_${i}`) })),
     "collider": (doc: Cloudsave, charCount: number) => parseAtomCollider(doc.get("Atoms") as number[] || [], doc.get("Divinity") as number[] || []),
     "capacity": (doc: Cloudsave, charCount: number) => parseCapacity([...Array(charCount)].map((_, index) => new Map(Object.entries(safeJsonParse(doc,`MaxCarryCap_${index}`, new Map()))))),
     "deathnote": (doc: Cloudsave, charCount: number) => parseDeathnote([...Array(charCount)].map((_, i) => { return doc.get(`KLA_${i}`) })),
-    "rift": (doc: Cloudsave, charCount: number) => parseRift(doc.get("Rift") as number[], [...Array(charCount)].map((_, i) => { return doc.get(`Lv0_${i}`) })),
+    "rift": (doc: Cloudsave, charCount: number) => parseRift(doc.get("Rift") as number[], [...Array(charCount)].map((_, i) => { return doc.get(`Lv0_${i}`) }), safeJsonParse(doc, "Tower", [])),
 }
 
 // ORDER IS IMPORTANT, the keys are not relevant as data doesn't get persisted.
 // This allows for multiple calls that touch the same data to happen in the same map (artifacts + sailing for example)
 const postProcessingMap: Record<string, Function> = {
     "updateAllShinies": (doc: Cloudsave, accountData: Map<string, any>) => updateAllShinyEffects(accountData),
+    "updateSuperbitImpcats": (doc: Cloudsave, accountData: Map<string, any>) => updateSuperbitImpacts(accountData),
     "playerStarSigns": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerStarSigns(accountData),
+    "cards": (doc: Cloudsave, accountData: Map<string, any>) => updateCards(accountData),
+    "gaming": (doc: Cloudsave, accountData: Map<string, any>) => updateGaming(accountData),
     "collider": (doc: Cloudsave, accountData: Map<string, any>) => updateAtomCollider(accountData),
     "artifacts": (doc: Cloudsave, accountData: Map<string, any>) => updateArtifacts(accountData),
     "sigils": (doc: Cloudsave, accountData: Map<string, any>) => updateSigils(accountData),
