@@ -89,41 +89,56 @@ export const AuthProvider: React.FC<{ appLoading: boolean, data: { data: Map<str
         const auth = getAuth(app);
         const provider = new OAuthProvider('apple.com');
 
-        const appleCodeRes = await getAppleCode();
-        console.log(appleCodeRes);
+        // const appleCodeRes = await getAppleCode();
+        // console.log(appleCodeRes);
 
-        const params = new URLSearchParams({
-            client_id: "com.lavaflame.idleon.service.signin",
-            nonce: appleCodeRes.h_nonce,
-            redirect_uri: "https://us-central1-idlemmo.cloudfunctions.net/xapsi",
-            response_mode: "form_post",
-            response_type: "code id_token",
-            scope: "email",
-            code: appleCodeRes.device_code,
-            state: appleCodeRes.statusToken
-        })
-        window.open(`https://appleid.apple.com/auth/authorize?${params.toString()}`, '_blank', 'popup');
+        // const params = new URLSearchParams({
+        //     client_id: "com.lavaflame.idleon.service.signin",
+        //     nonce: appleCodeRes.h_nonce,
+        //     redirect_uri: "https://us-central1-idlemmo.cloudfunctions.net/xapsi",
+        //     response_mode: "form_post",
+        //     response_type: "code id_token",
+        //     scope: "email",
+        //     code: appleCodeRes.device_code,
+        //     state: appleCodeRes.statusToken
+        // })
+        // window.open(`https://appleid.apple.com/auth/authorize?${params.toString()}`, '_blank', 'popup');
 
-        if (callback) {
-            getRedirectResult(auth)
-                .then((result) => {
-                    if (result) {
-                        setUser(result.user);
-                        setAuthStatus(AuthStatus.Valid);
-                        router.push("/world-1/stamps");
-                    }
-                }).catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    if (callback) {
-                        callback(errorCode);
-                    }
-                    console.debug(errorCode, errorMessage);
-                });
-        }
+        // if (callback) {
+        //     getRedirectResult(auth)
+        //         .then((result) => {
+        //             if (result) {
+        //                 setUser(result.user);
+        //                 setAuthStatus(AuthStatus.Valid);
+        //                 router.push("/world-1/stamps");
+        //             }
+        //         }).catch((error) => {
+        //             const errorCode = error.code;
+        //             const errorMessage = error.message;
+        //             if (callback) {
+        //                 callback(errorCode);
+        //             }
+        //             console.debug(errorCode, errorMessage);
+        //         });
+        // }
         // else {
         //     await signInWithRedirect(auth, provider);
         // }
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                console.log("Apple Login: ", result);
+                setUser(result.user);
+                // loginEvent("APPLE");
+                setAuthStatus(AuthStatus.Valid);
+                router.push("/world-1/stamps");
+            }).catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                if (callback) {
+                    callback(errorCode);
+                }
+                console.debug(errorCode, errorMessage);
+            });
     }, [])
 
     const logout = useCallback(() => {
