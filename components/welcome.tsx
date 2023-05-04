@@ -112,10 +112,10 @@ export default function Welcome() {
                             <Box>
                                 <Grid columns={size == "small" ? ["100%"] : ["45%", "10%", "45%"]} pad={{ left: "large"}}>
                                     <Box gap="medium" alignSelf="center" pad={{ left: 'medium', right: 'medium', bottom: size == "small" ? 'xlarge' : undefined}} border={size == "small" ? {size: '2px', color: 'grey-1', side: 'bottom'} : undefined}>
-                                        <Text size="24px">Sign in with token</Text>
-                                        <Text size="xsmall">Use this if you signed into Legends of Idleon using google</Text>
+                                        <Text size="24px">Sign in with social</Text>
+                                        <Text size="xsmall">Use this if you signed into Legends of Idleon using Google or Apple</Text>
                                         <Button style={{ color: "white" }} primary color="accent-1" label="Google Login" onClick={() => setShowLayer(true)} />
-                                        <Button style={{ color: "white" }} primary color="accent-1" label="Apple Login" onClick={() =>onButtonClick(authData?.appleFunction) } />
+                                        <Button style={{ color: "white" }} primary color="brand" label="Apple Login" onClick={() =>onButtonClick(authData?.appleFunction) } />
                                     </Box>
                                     {size != "small" && <Box align="center">
                                         <VerticalLine />
