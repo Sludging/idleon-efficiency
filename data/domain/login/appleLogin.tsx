@@ -20,7 +20,7 @@ export class AppleLogin {
         if (window.AppleID !== 'undefined') {
             window.AppleID.auth.init({
                 clientId : 'com.lavaflame.idleon.service.signin',
-                redirectURI : 'https://preview.idleonefficiency.com',
+                redirectURI : 'https://www.idleonefficiency.com',
                 usePopup : true,
             });
         }
