@@ -24,34 +24,20 @@ export class AppleLogin {
                 usePopup : true,
             });
         }
-
-        document.addEventListener("AppleIDSignInOnSuccess", (event) => {
-            console.log(event);
-        });
-        
-        document.addEventListener("AppleIDSignInOnFailure", (event) => {
-             console.log(event);
-        });
     }
 
-    static signIn = async () => {
+    static signIn = async (): Promise<string> => {
         if (window.AppleID !== 'undefined') {
             try {
                 const signInResult = await window.AppleID.auth.signIn();
                 console.log(signInResult);
+                return signInResult.authorization.id_token as string;
             } catch (e) {
                 console.error(e);
+                throw e
             }
         }
 
-        // const params = new URLSearchParams({
-        //     client_id: "com.lavaflame.idleon.service.signin",
-        //     redirect_uri: "https://us-central1-idlemmo.cloudfunctions.net/xapsi",
-        //     response_mode: "fragment",
-        //     response_type: "code id_token",
-        //   })
-        // const windowRes = window.open(`https://appleid.apple.com/auth/authorize?${params.toString()}`, '_blank', 'popup');
-        // console.log(windowRes);
-        // console.log(windowRes?.location);
+        throw Error("Missing Apple script, login failed.");
     }
 }

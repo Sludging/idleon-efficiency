@@ -75,23 +75,34 @@ export const AuthProvider: React.FC<{ appLoading: boolean, data: { data: Map<str
             });
     }, [])
 
-    const getAppleCode = async () => {
-        const url = encodeURIComponent(`https://us-central1-idlemmo.cloudfunctions.net/tspa`);
-        const codeRes = await fetch(`https://api.allorigins.win/raw?url=${url}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        })
-        return await codeRes.json();
-    }
-
     const loginThroughApple = useCallback(async (callback?: Function) => {
         const auth = getAuth(app);
         const provider = new OAuthProvider('apple.com');
 
         AppleLogin.initAuth();
-        await AppleLogin.signIn();
+        try {
+            const idToken = await AppleLogin.signIn();
+            const credential = provider.credential({ idToken: idToken });
+            signInWithCredential(auth, credential)
+            .then((result) => {
+                setUser(result.user);
+                //loginEvent("APPLE");
+                setAuthStatus(AuthStatus.Valid);
+                router.push("/world-1/stamps");
+            }).catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                if (callback) {
+                    callback(errorCode);
+                }
+                console.debug(errorCode, errorMessage);
+            });
+        } catch (e) {
+            console.log("Something went wrong, contact me")
+            if (callback) {
+                callback(e);
+            }
+        }
     }, [])
 
     const logout = useCallback(() => {
