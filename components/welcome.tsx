@@ -115,7 +115,7 @@ export default function Welcome() {
                                         <Text size="24px">Sign in with social</Text>
                                         <Text size="xsmall">Use this if you signed into Legends of Idleon using Google or Apple</Text>
                                         <Button style={{ color: "white" }} primary color="accent-1" label="Google Login" onClick={() => setShowLayer(true)} />
-                                        {/* <Button style={{ color: "white" }} primary color="brand" label="Apple Login" onClick={() =>onButtonClick(authData?.appleFunction) } /> */}
+                                        <Button style={{ color: "white" }} primary color="brand" label="Apple Login" onClick={() =>onButtonClick(authData?.appleFunction) } />
                                     </Box>
                                     {size != "small" && <Box align="center">
                                         <VerticalLine />
