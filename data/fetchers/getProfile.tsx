@@ -3,7 +3,7 @@ import { ProfileDownloader } from "../storage/profiles";
 export const fetcher = async (windowLocation: string, oldDomain: string): Promise<{ data: Map<string, any> | undefined, charNames: string[] | undefined, domain: string }> => {
     let urlDomain = windowLocation != "" ? windowLocation.split('.')[0] : "";
 
-    if (urlDomain != oldDomain && urlDomain != "" && ["www", "preview"].includes(urlDomain)) {
+    if (urlDomain != oldDomain && urlDomain != "" && !["www", "preview"].includes(urlDomain)) {
         if (process.env.NEXT_PUBLIC_APP_STAGE == "dev") {
             try {
                 const res = await fetch(`/api/publicProfile?profile=${urlDomain}`);
