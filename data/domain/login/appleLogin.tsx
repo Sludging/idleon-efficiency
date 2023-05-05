@@ -20,7 +20,7 @@ export class AppleLogin {
         if (window.AppleID !== 'undefined') {
             window.AppleID.auth.init({
                 clientId : 'com.lavaflame.idleon.service.signin',
-                redirectURI : 'https://preview.idleonefficiency.com',
+                redirectURI : `https://${process.env.NEXT_PUBLIC_ROOT_URL}`,
                 usePopup : true,
             });
         }
@@ -30,11 +30,9 @@ export class AppleLogin {
         if (window.AppleID !== 'undefined') {
             try {
                 const signInResult = await window.AppleID.auth.signIn();
-                console.log(signInResult);
                 return signInResult.authorization.id_token as string;
             } catch (e) {
-                console.error(e);
-                throw e
+                throw e;
             }
         }
 

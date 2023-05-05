@@ -86,7 +86,7 @@ export const AuthProvider: React.FC<{ appLoading: boolean, data: { data: Map<str
             signInWithCredential(auth, credential)
             .then((result) => {
                 setUser(result.user);
-                //loginEvent("APPLE");
+                loginEvent("APPLE");
                 setAuthStatus(AuthStatus.Valid);
                 router.push("/world-1/stamps");
             }).catch((error) => {

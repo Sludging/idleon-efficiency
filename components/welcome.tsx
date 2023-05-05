@@ -50,7 +50,7 @@ export default function Welcome() {
 
     const size = useContext(ResponsiveContext);
 
-    const onButtonClick = (toCall: Function | undefined, value?: string, value2?: string, fake?: boolean) => {
+    const onButtonClick = (toCall: Function | undefined, value?: string, value2?: string) => {
         try {
             if (toCall) {
                 if (value2) {
@@ -59,11 +59,8 @@ export default function Welcome() {
                 else if (value) {
                     toCall(value, handleError);
                 }
-                else if (fake) {
-                    toCall(() => { console.log("hello")});
-                } 
                 else {
-                    toCall();
+                    toCall(handleError);
                 }
             }
         }
@@ -85,6 +82,7 @@ export default function Welcome() {
                 break;
             default:
                 setError("Something went wrong, please try again");
+                console.error(code);
                 break;
         }
     }
