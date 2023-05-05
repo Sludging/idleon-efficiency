@@ -5,6 +5,7 @@ import { GoogleAuthProvider, signInWithPopup, signInWithCredential, signOut, Ema
 
 import { sendEvent, loginEvent } from '../../lib/gtag';
 import { useRouter } from "next/dist/client/router";
+import { AppleLogin } from "../domain/login/appleLogin";
 
 export enum AuthStatus {
     Loading,
@@ -74,61 +75,18 @@ export const AuthProvider: React.FC<{ appLoading: boolean, data: { data: Map<str
             });
     }, [])
 
-    const getAppleCode = async () => {
-        const url = encodeURIComponent(`https://us-central1-idlemmo.cloudfunctions.net/tspa`);
-        const codeRes = await fetch(`https://api.allorigins.win/raw?url=${url}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        })
-        return await codeRes.json();
-    }
-
     const loginThroughApple = useCallback(async (callback?: Function) => {
         const auth = getAuth(app);
         const provider = new OAuthProvider('apple.com');
 
-        // const appleCodeRes = await getAppleCode();
-        // console.log(appleCodeRes);
-
-        // const params = new URLSearchParams({
-        //     client_id: "com.lavaflame.idleon.service.signin",
-        //     nonce: appleCodeRes.h_nonce,
-        //     redirect_uri: "https://us-central1-idlemmo.cloudfunctions.net/xapsi",
-        //     response_mode: "form_post",
-        //     response_type: "code id_token",
-        //     scope: "email",
-        //     code: appleCodeRes.device_code,
-        //     state: appleCodeRes.statusToken
-        // })
-        // window.open(`https://appleid.apple.com/auth/authorize?${params.toString()}`, '_blank', 'popup');
-
-        // if (callback) {
-        //     getRedirectResult(auth)
-        //         .then((result) => {
-        //             if (result) {
-        //                 setUser(result.user);
-        //                 setAuthStatus(AuthStatus.Valid);
-        //                 router.push("/world-1/stamps");
-        //             }
-        //         }).catch((error) => {
-        //             const errorCode = error.code;
-        //             const errorMessage = error.message;
-        //             if (callback) {
-        //                 callback(errorCode);
-        //             }
-        //             console.debug(errorCode, errorMessage);
-        //         });
-        // }
-        // else {
-        //     await signInWithRedirect(auth, provider);
-        // }
-        signInWithPopup(auth, provider)
+        AppleLogin.initAuth();
+        try {
+            const idToken = await AppleLogin.signIn();
+            const credential = provider.credential({ idToken: idToken });
+            signInWithCredential(auth, credential)
             .then((result) => {
-                console.log("Apple Login: ", result);
                 setUser(result.user);
-                // loginEvent("APPLE");
+                loginEvent("APPLE");
                 setAuthStatus(AuthStatus.Valid);
                 router.push("/world-1/stamps");
             }).catch((error) => {
@@ -139,6 +97,12 @@ export const AuthProvider: React.FC<{ appLoading: boolean, data: { data: Map<str
                 }
                 console.debug(errorCode, errorMessage);
             });
+        } catch (e) {
+            console.log("Something went wrong, contact me")
+            if (callback) {
+                callback(e);
+            }
+        }
     }, [])
 
     const logout = useCallback(() => {

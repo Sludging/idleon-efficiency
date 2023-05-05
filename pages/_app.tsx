@@ -197,6 +197,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         src={`https://www.googletagmanager.com/gtag/js?id=G-RDM3GQEGMB`}
       />
       <Script
+        strategy="afterInteractive"
+        src={`https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js`}
+      />
+      <Script
         id="gtag-init"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
