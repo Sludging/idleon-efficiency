@@ -151,8 +151,8 @@ export class ArcadeFullAlert extends GlobalAlert {
 }
 
 export class ConstructionAlert extends GlobalAlert {
-    constructor(public building: Building) {
-        super(`${building.name} is finished building in construction, go claim.`, AlertType.Construction, building.getImageData())
+    constructor(public count: number) {
+        super(`${count} buildings finished in construction, go claim.`, AlertType.Construction, Construction.sawImageData())
     }
 }
 
@@ -262,11 +262,10 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], 
     }
 
     // Construction
-    construction.buildings.map((building) => {
-        if (building.nextLevelUnlocked) {
-            globalAlerts.push(new ConstructionAlert(building));
-        }
-    })
+    const finishedBuildingsCount = construction.buildings.flatMap(building => building).reduce((sum, building) => sum += building.finishedUpgrade ? 1 : 0, 0);
+    if (finishedBuildingsCount > 0){
+        globalAlerts.push(new ConstructionAlert(finishedBuildingsCount));
+    }
 
     return globalAlerts;
 }

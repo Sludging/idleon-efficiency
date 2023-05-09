@@ -19,6 +19,7 @@ export class Building {
 
     level: number = 0;
     nextLevelUnlocked: boolean = false;
+    finishedUpgrade: boolean = false;
     currentXP: number = 0;
 
     constructor(public index: number, data: BuildingModel) {
