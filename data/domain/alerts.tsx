@@ -1,5 +1,6 @@
 import { AnvilWrapper } from "./anvil";
 import { Arcade } from "./arcade";
+import { Breeding } from "./breeding";
 import { Building } from "./buildings";
 import { Construction } from "./construction";
 import { ImageData } from "./imageData";
@@ -25,7 +26,8 @@ export enum AlertType {
     Traps = "Traps",
     ArcadeFull = "Arcade Full",
     Prayer = "Prayer",
-    Construction = "Construction"
+    Construction = "Construction",
+    Breeding = "Breeding"
 }
 
 export abstract class Alert {
@@ -152,7 +154,19 @@ export class ArcadeFullAlert extends GlobalAlert {
 
 export class ConstructionAlert extends GlobalAlert {
     constructor(public count: number) {
-        super(`${count} buildings finished in construction, go claim.`, AlertType.Construction, Construction.sawImageData())
+        super(`${count} buildings finished in construction, go claim.`, AlertType.Construction, Skilling.getSkillImageData(SkillsIndex.Construction));
+    
+        (this.icon as ImageData).width = 50;
+        (this.icon as ImageData).height = 50;
+    }
+}
+
+export class IncubatorFullAlert extends GlobalAlert {
+    constructor() {
+        super(`Breeding egg incubator full!`, AlertType.Breeding, Skilling.getSkillImageData(SkillsIndex.Breeding));
+        
+        (this.icon as ImageData).width = 50;
+        (this.icon as ImageData).height = 50;
     }
 }
 
@@ -232,7 +246,7 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
     return alerts;
 }
 
-const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], arcade: Arcade, construction: Construction): Alert[] => {
+const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], arcade: Arcade, construction: Construction, breeding: Breeding): Alert[] => {
     const globalAlerts: Alert[] = [];
 
     // Worship
@@ -267,6 +281,12 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], 
         globalAlerts.push(new ConstructionAlert(finishedBuildingsCount));
     }
 
+    // Breeding
+    if (breeding.eggsUnclaimed >= breeding.eggCapacity){
+        globalAlerts.push(new IncubatorFullAlert());
+    }
+    // debugger;
+
     return globalAlerts;
 }
 
@@ -281,6 +301,7 @@ export const updateAlerts = (data: Map<string, any>) => {
     const arcade = data.get("arcade") as Arcade;
     const prayers = data.get("prayers") as Prayer[];
     const construction = data.get("construction") as Construction;
+    const breeding = data.get("breeding") as Breeding;
 
     players.forEach(player => {
         alerts.playerAlerts[player.playerID] = []
@@ -288,6 +309,6 @@ export const updateAlerts = (data: Map<string, any>) => {
     })
 
     // Global Alerts
-    alerts.generalAlerts = getGlobalAlerts(worship, refinery, traps, arcade, construction);
+    alerts.generalAlerts = getGlobalAlerts(worship, refinery, traps, arcade, construction, breeding);
     return alerts;
 }

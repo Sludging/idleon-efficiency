@@ -56,14 +56,6 @@ export class Construction {
     constructor() {
         this.buildings = Building.fromBase(initBuildingRepo());
     }
-
-    static sawImageData = (): ImageData => {
-        return {
-            location: `ClassIcons49`,
-            height: 50,
-            width: 50
-        }
-    }
 }
 
 export default function parseConstruction(towerData: number[], optionsList: any[]) {
