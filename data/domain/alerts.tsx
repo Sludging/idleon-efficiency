@@ -1,5 +1,7 @@
 import { AnvilWrapper } from "./anvil";
 import { Arcade } from "./arcade";
+import { Building } from "./buildings";
+import { Construction } from "./construction";
 import { ImageData } from "./imageData";
 import { Item } from "./items";
 import { ObolsData, Obol } from "./obols";
@@ -22,7 +24,8 @@ export enum AlertType {
     CDReady = "Cooldown Ready",
     Traps = "Traps",
     ArcadeFull = "Arcade Full",
-    Prayer = "Prayer"
+    Prayer = "Prayer",
+    Construction = "Construction"
 }
 
 export abstract class Alert {
@@ -147,6 +150,12 @@ export class ArcadeFullAlert extends GlobalAlert {
     }
 }
 
+export class ConstructionAlert extends GlobalAlert {
+    constructor(public count: number) {
+        super(`${count} buildings finished in construction, go claim.`, AlertType.Construction, Construction.sawImageData())
+    }
+}
+
 export class Alerts {
     playerAlerts: Record<number, Alert[]> = {};
     generalAlerts: Alert[] = [];
@@ -223,7 +232,7 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
     return alerts;
 }
 
-const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], arcade: Arcade): Alert[] => {
+const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], arcade: Arcade, construction: Construction): Alert[] => {
     const globalAlerts: Alert[] = [];
 
     // Worship
@@ -252,6 +261,12 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], 
         globalAlerts.push(new ArcadeFullAlert())
     }
 
+    // Construction
+    const finishedBuildingsCount = construction.buildings.flatMap(building => building).reduce((sum, building) => sum += building.finishedUpgrade ? 1 : 0, 0);
+    if (finishedBuildingsCount > 0){
+        globalAlerts.push(new ConstructionAlert(finishedBuildingsCount));
+    }
+
     return globalAlerts;
 }
 
@@ -265,6 +280,7 @@ export const updateAlerts = (data: Map<string, any>) => {
     const traps = data.get("traps") as Trap[][];
     const arcade = data.get("arcade") as Arcade;
     const prayers = data.get("prayers") as Prayer[];
+    const construction = data.get("construction") as Construction;
 
     players.forEach(player => {
         alerts.playerAlerts[player.playerID] = []
@@ -272,6 +288,6 @@ export const updateAlerts = (data: Map<string, any>) => {
     })
 
     // Global Alerts
-    alerts.generalAlerts = getGlobalAlerts(worship, refinery, traps, arcade);
+    alerts.generalAlerts = getGlobalAlerts(worship, refinery, traps, arcade, construction);
     return alerts;
 }
