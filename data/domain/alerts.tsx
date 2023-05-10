@@ -285,7 +285,6 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], 
     if (breeding.eggsUnclaimed >= breeding.eggCapacity){
         globalAlerts.push(new IncubatorFullAlert());
     }
-    // debugger;
 
     return globalAlerts;
 }
