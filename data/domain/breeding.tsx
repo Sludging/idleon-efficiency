@@ -19,6 +19,8 @@ import { GroupByFunction, range } from "../utility";
 import { InfiniteStarsBonus, Rift, SkillMastery } from "./rift";
 import { Refinery } from "./refinery";
 import { Sailing } from "./sailing";
+import { GemStore } from "./gemPurchases";
+import { TaskBoard } from "./tasks";
 
 export const waveReqs = "2 5 8 12 15 20 25 35 50 65 80 100 125 150 175 200".split(" ").map(value => parseInt(value));
 
@@ -342,6 +344,8 @@ export class Breeding {
     upgrade: PetUpgrade[];
     genes: PetGene[];
     eggs: Egg[] = [];
+    eggCapacity: number = 0;
+    eggsUnclaimed: number = 0;
     timeTillEgg: number = 0;
     totalEggTime: number = 0;
 
@@ -516,6 +520,8 @@ export const updateBreeding = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const achievements = data.get("achievements") as Achievement[];
     const rift = data.get("rift") as Rift;
+    const gemStore = data.get("gems") as GemStore;
+    const taskBoard = data.get("taskboard") as TaskBoard;
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
 
@@ -544,6 +550,12 @@ export const updateBreeding = (data: Map<string, any>) => {
             breeding.upgrade[6].getBonus() / 100
         )
     })
+
+    const eggCapacityUpgrade = gemStore.purchases.find(purchase => purchase.no == 119)?.pucrhased ?? 0;
+    const breedingUpgradeLevel = breeding?.upgrade.find(upgrade => upgrade.data.upgradeName == "Egg Capacity")?.level ?? 0;
+    const eggMerit = taskBoard.merits.find(merit => merit.descLine1.includes("egg capacity in the Nest"));
+    breeding.eggCapacity = 3 + eggCapacityUpgrade + breedingUpgradeLevel + (eggMerit ? eggMerit.level * eggMerit.bonusPerLevel : 0);
+    breeding.eggsUnclaimed = breeding.eggs.filter(egg => egg.rarity > 0).length;
 
     return breeding;
 }
