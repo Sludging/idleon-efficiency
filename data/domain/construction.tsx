@@ -56,16 +56,29 @@ export class Construction {
     constructor() {
         this.buildings = Building.fromBase(initBuildingRepo());
     }
+
+    static sawImageData = (): ImageData => {
+        return {
+            location: `ClassIcons49`,
+            height: 50,
+            width: 50
+        }
+    }
 }
 
 export default function parseConstruction(towerData: number[], optionsList: any[]) {
     const construction = new Construction();
     construction.buildings.forEach((building) => {
         building.level = towerData[building.index];
+        
         // Next level is unlocked if the next index for this building is +1.
         building.nextLevelUnlocked = (building.level + 1) == towerData[building.index + construction.buildings.length];
+
         // Current XP is the last set of indexes, with 12 in the middle of misc info.
         building.currentXP = towerData[building.index + 12 + construction.buildings.length * 2];
+
+        building.finishedUpgrade = building.currentXP > building.getBuildCost();
+        
     });
     // 55 = building slot 1 = tower number
     // 56 = building slot 2 = -1 if empty
