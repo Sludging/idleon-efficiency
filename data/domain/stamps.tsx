@@ -1,4 +1,5 @@
 import { inclusiveRange, lavaFunc, range } from '../utility'
+import { Account } from './account';
 import { Alchemy } from './alchemy';
 import { AtomCollider } from './atomCollider';
 import { Bribe, BribeConst, BribeStatus } from './bribes';
@@ -11,6 +12,7 @@ import { StampDataModel } from './model/stampDataModel';
 import { StampItemModel } from './model/stampItemModel';
 import { Player } from './player';
 import { Sigils } from './sigils';
+import { Storage } from './storage';
 
 export enum StampTab {
     Combat = 0,
@@ -41,6 +43,9 @@ export class Stamp {
     hasBribe: boolean = false;
     vialDiscount: number = 0;
     atomDiscount: number = 0;
+
+    canUpgradeWithCoins: boolean = false;
+    canUpgradeWithMats: boolean = false;
 
     // Max upgrades (key is the stamp level that will the costs in the value)
     maxCarryInfo: Record<number, {
@@ -289,6 +294,9 @@ export function updateStampMaxCarry(data: Map<string, any>) {
     const stamps = data.get("stamps") as Stamp[][];
     const capacity = data.get("capacity") as Capacity;
     const collider = data.get("collider") as AtomCollider;
+    const storage = data.get("storage") as Storage;
+    const account = data.get("account") as Account;
+    const allItems = data.get("itemsData") as Item[];
 
     const dailyAtomDiscountIncrease = collider.atoms[0].level * collider.atoms[0].data.bonusPerLv;
     stamps.flatMap(tab => tab).forEach(stamp => {
@@ -306,6 +314,15 @@ export function updateStampMaxCarry(data: Map<string, any>) {
         }
         stamp.setMaxLevelForCarryCap();
         stamp.calculateCostForNextTiers(dailyAtomDiscountIncrease);
+    
+        const matInStorage = storage?.amountInStorage(stamp.materialItem?.internalName ?? "");
+        const cheapestUpgrade = stamp.maxCarryInfo[Number(Object.keys(stamp.maxCarryInfo).sort().reverse()[0])]
+        const minMatRequired = cheapestUpgrade.costToLevel;
+        const stampItem = allItems.find(item => item.internalName == stamp.raw_name);
+        if (stampItem && stampItem.sources.sources && stampItem.sources.sources.length > 0) {
+            stamp.canUpgradeWithMats = stamp.isMaxLevel() && stamp.maxCarryAmount >= minMatRequired && matInStorage >= minMatRequired;
+            stamp.canUpgradeWithCoins = stamp.getBonusText() != "Unobtainable" && !stamp.isMaxLevel() && account.totalMoney >= cheapestUpgrade.goldCostToLevel;
+        }
     })
 
     return stamps;
