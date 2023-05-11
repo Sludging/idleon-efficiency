@@ -138,7 +138,6 @@ function StampDisplay({ stamp, index, storageAmount = 0 }: { stamp: Stamp, index
             </Box>
         )
     }
-
     return (
         <Box pad="small" border={{ color: 'grey-1' }} key={`stamp_${index}_${stamp.raw_name}`}>
             <TipDisplay
@@ -150,7 +149,9 @@ function StampDisplay({ stamp, index, storageAmount = 0 }: { stamp: Stamp, index
                 size="small"
                 visibility={stamp.name == "Blank" || stamp.name == "FILLER" ? 'none' : undefined}
             >
-                <Box direction="row" align="center" gap="xsmall" style={{ opacity: stamp.level > 0 ? 1 : 0.2 }}>
+                <Box direction="row" align="center" gap="xsmall" style={{ 
+                        opacity: stamp.level > 0 ? 1 : 0.2, 
+                        backgroundColor: stamp.canUpgradeWithCoins ? "green" : (stamp.canUpgradeWithMats ? "green" : "")}}>
                     <IconImage data={stamp.getImageData()} scale={0.4} />
                     <Text size="small">{stamp.level}</Text>
                 </Box>
