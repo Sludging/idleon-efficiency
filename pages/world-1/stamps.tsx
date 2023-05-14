@@ -27,6 +27,7 @@ import IconImage from "../../components/base/IconImage";
 import TextAndLabel, { ComponentAndLabel } from "../../components/base/TextAndLabel";
 import { AtomCollider } from "../../data/domain/atomCollider";
 import { Storage } from "../../data/domain/storage";
+import { CircleInformation } from "grommet-icons";
 
 const ShadowBox = styled(Box)`
     box-shadow: -7px 8px 16px 0 rgba(0,0,0,0.17)
@@ -251,11 +252,25 @@ function Stamps() {
                 <TextAndLabel label="Total Levels" text={totalLevels?.toString()} margin={{ bottom: 'small' }} />
                 {hydrogen && hydrogen.level > 0 && <TextAndLabel label="Atom Discount" text={`${stampData[0][0].atomDiscount}% (+${hydrogen.level * hydrogen.data.bonusPerLv}%/day)`} margin={{ bottom: 'small' }} />}
             </Box>
-            <CheckBox
-                checked={highlightUpgradable}
-                label="Show Upgradable"
-                onChange={(event) => setHighlightUpgradable(event.target.checked)}
-            />
+            <Box direction="row" align="center" style={{justifyContent: "left"}}>
+                <CheckBox
+                    checked={highlightUpgradable}
+                    label="Show Upgradable"
+                    onChange={(event) => setHighlightUpgradable(event.target.checked)}
+                />
+                <TipDisplay
+                    heading="Show Upgradable"
+                    body={
+                        <Box gap="xsmall">
+                            <Text size="small">Enable this check to see what you can upgrade right now!</Text>
+                            <Text size="small" ><span style={{color: "#e67300"}}>⬤</span> A stamp can be upgraded with materials.</Text>
+                            <Text size="small" ><span style={{color: "green"}}>⬤</span> A stamp can be upgraded with coins.</Text>
+                        </Box>
+                    }
+                >
+                    <CircleInformation size="small" />
+                </TipDisplay>
+            </Box>
             <ShadowBox flex={false} background="dark-1" pad="small">
                 <Grid columns={{ size: '300px' }} gap="none">
                     {
