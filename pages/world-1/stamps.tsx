@@ -9,7 +9,8 @@ import {
     Table,
     TableBody,
     TableRow,
-    TableFooter
+    TableFooter,
+    CheckBox
 } from "grommet"
 
 import { Stamp } from '../../data/domain/stamps';
@@ -31,7 +32,7 @@ const ShadowBox = styled(Box)`
     box-shadow: -7px 8px 16px 0 rgba(0,0,0,0.17)
 `
 
-function StampDisplay({ stamp, index, storageAmount = 0 }: { stamp: Stamp, index: number, storageAmount?: number }) {
+function StampDisplay({ stamp, index, highlightUpgradable, storageAmount = 0 }: { stamp: Stamp, index: number, highlightUpgradable: Boolean, storageAmount?: number }) {
     const size = useContext(ResponsiveContext)
     const appContext = useContext(AppContext);
     const theData = appContext.data.getData();
@@ -151,7 +152,7 @@ function StampDisplay({ stamp, index, storageAmount = 0 }: { stamp: Stamp, index
             >
                 <Box direction="row" align="center" gap="xsmall" style={{ 
                         opacity: stamp.level > 0 ? 1 : 0.2, 
-                        backgroundColor: stamp.canUpgradeWithCoins ? "green" : (stamp.canUpgradeWithMats ? "green" : "")}}>
+                        backgroundColor: highlightUpgradable ? (stamp.canUpgradeWithCoins ? "green" : (stamp.canUpgradeWithMats ? "green" : "")) : ""}}>
                     <IconImage data={stamp.getImageData()} scale={0.4} />
                     <Text size="small">{stamp.level}</Text>
                 </Box>
@@ -166,7 +167,7 @@ const HoverBox = styled(Box)`
     }
 `
 
-function StampTab({ tab, index }: { tab: Stamp[], index: number }) {
+function StampTab({ tab, index, highlightUpgradable }: { tab: Stamp[], index: number, highlightUpgradable: Boolean}) {
     const [storage, setStorage] = useState<Storage>();
     const appContext = useContext(AppContext);
     const theData = appContext.data.getData();
@@ -188,7 +189,7 @@ function StampTab({ tab, index }: { tab: Stamp[], index: number }) {
                             if (stamp != undefined) {
                                 return (
                                     <HoverBox key={`tab_${index}_${stamp.raw_name}`}>
-                                        <StampDisplay  stamp={stamp} index={index} storageAmount={stamp.materialItem ? storage?.amountInStorage(stamp.materialItem.internalName) : 0} />
+                                        <StampDisplay  stamp={stamp} index={index} highlightUpgradable={highlightUpgradable} storageAmount={stamp.materialItem ? storage?.amountInStorage(stamp.materialItem.internalName) : 0} />
                                     </HoverBox>
                                 )
                             }
@@ -203,6 +204,7 @@ function StampTab({ tab, index }: { tab: Stamp[], index: number }) {
 function Stamps() {
     const [stampData, setStampData] = useState<Stamp[][]>();
     const appContext = useContext(AppContext);
+    const [highlightUpgradable, setHighlightUpgradable] = useState(Boolean);
 
     const hydrogen = useMemo(() => {
         if (appContext.data.getData().size > 0) {
@@ -248,11 +250,17 @@ function Stamps() {
                 <TextAndLabel label="Total Levels" text={totalLevels?.toString()} margin={{ bottom: 'small' }} />
                 {hydrogen && hydrogen.level > 0 && <TextAndLabel label="Atom Discount" text={`${stampData[0][0].atomDiscount}% (+${hydrogen.level * hydrogen.data.bonusPerLv}%/day)`} margin={{ bottom: 'small' }} />}
             </Box>
+            <CheckBox
+                checked={highlightUpgradable}
+                label="Show Upgradable"
+                onChange={(event) => setHighlightUpgradable(event.target.checked)}
+            />
+            
             <ShadowBox flex={false} background="dark-1" pad="small">
                 <Grid columns={{ size: '300px' }} gap="none">
                     {
                         stampData && stampData.map((tab, index) => {
-                            return (<StampTab key={`tab_${index}`} tab={tab} index={index} />)
+                            return (<StampTab key={`tab_${index}`} tab={tab} index={index} highlightUpgradable={highlightUpgradable} />)
                         })
                     }
                 </Grid>
