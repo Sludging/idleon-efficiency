@@ -175,6 +175,7 @@ export default function Layout({
                 { subLink: "/cooking", label: "Cooking" },
                 { subLink: "/lab", label: "Lab" },
                 { subLink: "/breeding", label: "Breeding" },
+                { subLink: "/rift", label: "Rift" },
             ]
         },
         {
