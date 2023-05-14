@@ -319,7 +319,8 @@ export function updateStampMaxCarry(data: Map<string, any>) {
         const cheapestUpgrade = stamp.maxCarryInfo[Number(Object.keys(stamp.maxCarryInfo).sort().reverse()[0])]
         const minMatRequired = cheapestUpgrade.costToLevel;
         const stampItem = allItems.find(item => item.internalName == stamp.raw_name);
-        if (stampItem && stampItem.sources.sources && stampItem.sources.sources.length > 0) {
+        if (stampItem && stampItem.sources.sources && stampItem.sources.sources.length > 0 //if stamp is obtainable in the game
+            && stamp.level > 0) { //if stamp is actually unlocked
             stamp.canUpgradeWithMats = stamp.isMaxLevel() && stamp.maxCarryAmount >= minMatRequired && matInStorage >= minMatRequired;
             stamp.canUpgradeWithCoins = stamp.getBonusText() != "Unobtainable" && !stamp.isMaxLevel() && account.totalMoney >= cheapestUpgrade.goldCostToLevel;
         }
