@@ -140,7 +140,7 @@ export const updateCards = (data: Map<string, any>) => {
             card.fivestar = true;
         })
     }
-    else {
+    else if (optLacc.length > 155 && optLacc[155] != 0) {
         const cardifiedFiveStarCards = (optLacc[155] as string).split(",");
         cardifiedFiveStarCards.forEach(cardId => {
             cards.forEach(card => {
