@@ -140,7 +140,8 @@ function StampDisplay({ stamp, index, highlightUpgradable, storageAmount = 0 }: 
         )
     }
     return (
-        <Box pad="small" border={{ color: 'grey-1' }} key={`stamp_${index}_${stamp.raw_name}`}>
+        <Box pad="small" border={{ color: 'grey-1' }} key={`stamp_${index}_${stamp.raw_name}`} 
+            style={{backgroundColor: highlightUpgradable ? (stamp.canUpgradeWithCoins ? "green" : (stamp.canUpgradeWithMats ? "green" : "")) : ""}}>
             <TipDisplay
                 body={
                     <TipContent stamp={stamp} />
@@ -152,7 +153,7 @@ function StampDisplay({ stamp, index, highlightUpgradable, storageAmount = 0 }: 
             >
                 <Box direction="row" align="center" gap="xsmall" style={{ 
                         opacity: stamp.level > 0 ? 1 : 0.2, 
-                        backgroundColor: highlightUpgradable ? (stamp.canUpgradeWithCoins ? "green" : (stamp.canUpgradeWithMats ? "green" : "")) : ""}}>
+                        }}>
                     <IconImage data={stamp.getImageData()} scale={0.4} />
                     <Text size="small">{stamp.level}</Text>
                 </Box>
@@ -255,7 +256,6 @@ function Stamps() {
                 label="Show Upgradable"
                 onChange={(event) => setHighlightUpgradable(event.target.checked)}
             />
-            
             <ShadowBox flex={false} background="dark-1" pad="small">
                 <Grid columns={{ size: '300px' }} gap="none">
                     {
