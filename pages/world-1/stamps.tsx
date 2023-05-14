@@ -141,7 +141,7 @@ function StampDisplay({ stamp, index, highlightUpgradable, storageAmount = 0 }: 
     }
     return (
         <Box pad="small" border={{ color: 'grey-1' }} key={`stamp_${index}_${stamp.raw_name}`} 
-            style={{backgroundColor: highlightUpgradable ? (stamp.canUpgradeWithCoins ? "green" : (stamp.canUpgradeWithMats ? "green" : "")) : ""}}>
+            style={{backgroundColor: highlightUpgradable ? (stamp.canUpgradeWithCoins ? "green" : (stamp.canUpgradeWithMats ? "#e67300" : "")) : ""}}>
             <TipDisplay
                 body={
                     <TipContent stamp={stamp} />
