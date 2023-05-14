@@ -161,15 +161,6 @@ export class ConstructionAlert extends GlobalAlert {
     }
 }
 
-export class IncubatorFullAlert extends GlobalAlert {
-    constructor() {
-        super(`Breeding egg incubator full!`, AlertType.Breeding, Skilling.getSkillImageData(SkillsIndex.Breeding));
-        
-        (this.icon as ImageData).width = 50;
-        (this.icon as ImageData).height = 50;
-    }
-}
-
 export class Alerts {
     playerAlerts: Record<number, Alert[]> = {};
     generalAlerts: Alert[] = [];
@@ -279,11 +270,6 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], 
     const finishedBuildingsCount = construction.buildings.flatMap(building => building).reduce((sum, building) => sum += building.finishedUpgrade ? 1 : 0, 0);
     if (finishedBuildingsCount > 0){
         globalAlerts.push(new ConstructionAlert(finishedBuildingsCount));
-    }
-
-    // Breeding
-    if (breeding.eggsUnclaimed >= breeding.eggCapacity){
-        globalAlerts.push(new IncubatorFullAlert());
     }
 
     return globalAlerts;
