@@ -1,6 +1,5 @@
 import { AnvilWrapper } from "./anvil";
 import { Arcade } from "./arcade";
-import { Building } from "./buildings";
 import { Construction } from "./construction";
 import { ImageData } from "./imageData";
 import { Item } from "./items";
@@ -152,7 +151,10 @@ export class ArcadeFullAlert extends GlobalAlert {
 
 export class ConstructionAlert extends GlobalAlert {
     constructor(public count: number) {
-        super(`${count} buildings finished in construction, go claim.`, AlertType.Construction, Construction.sawImageData())
+        super(`${count} buildings finished in construction, go claim.`, AlertType.Construction, Skilling.getSkillImageData(SkillsIndex.Construction));
+    
+        (this.icon as ImageData).width = 50;
+        (this.icon as ImageData).height = 50;
     }
 }
 
