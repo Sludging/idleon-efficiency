@@ -26,8 +26,7 @@ export enum AlertType {
     Traps = "Traps",
     ArcadeFull = "Arcade Full",
     Prayer = "Prayer",
-    Construction = "Construction",
-    Breeding = "Breeding"
+    Construction = "Construction"
 }
 
 export abstract class Alert {
@@ -237,7 +236,7 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
     return alerts;
 }
 
-const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], arcade: Arcade, construction: Construction, breeding: Breeding): Alert[] => {
+const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], arcade: Arcade, construction: Construction): Alert[] => {
     const globalAlerts: Alert[] = [];
 
     // Worship
@@ -286,7 +285,6 @@ export const updateAlerts = (data: Map<string, any>) => {
     const arcade = data.get("arcade") as Arcade;
     const prayers = data.get("prayers") as Prayer[];
     const construction = data.get("construction") as Construction;
-    const breeding = data.get("breeding") as Breeding;
 
     players.forEach(player => {
         alerts.playerAlerts[player.playerID] = []
@@ -294,6 +292,6 @@ export const updateAlerts = (data: Map<string, any>) => {
     })
 
     // Global Alerts
-    alerts.generalAlerts = getGlobalAlerts(worship, refinery, traps, arcade, construction, breeding);
+    alerts.generalAlerts = getGlobalAlerts(worship, refinery, traps, arcade, construction);
     return alerts;
 }
