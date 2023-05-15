@@ -320,20 +320,6 @@ function EggDisplay() {
     const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
 
-    const capacity = useMemo(() => {
-        const theData = appContext.data.getData();
-        const gemStore = theData.get("gems") as GemStore;
-        const taskBoard = theData.get("taskboard") as TaskBoard;
-
-        if (gemStore && breeding) {
-            const eggCapacityUpgrade = gemStore.purchases.find(purchase => purchase.no == 119)?.pucrhased ?? 0;
-            const breedingUpgradeLevel = breeding?.upgrade.find(upgrade => upgrade.data.upgradeName == "Egg Capacity")?.level ?? 0;
-            const eggMerit = taskBoard.merits.find(merit => merit.descLine1.includes("egg capacity in the Nest"));
-            return 3 + eggCapacityUpgrade + breedingUpgradeLevel + (eggMerit ? eggMerit.level * eggMerit.bonusPerLevel : 0);
-        }
-        return 0;
-    }, [breeding, appContext]);
-
     useEffect(() => {
         if (appContext) {
             const theData = appContext.data.getData();
@@ -359,7 +345,7 @@ function EggDisplay() {
             <Box direction="row" gap="medium" wrap>
                 <Box direction="row" align="center" wrap>
                     {
-                        [...Array(capacity)].map((_, index) => {
+                        [...Array(breeding.eggCapacity)].map((_, index) => {
                             if (breeding.eggs.length < index) {
                                 return;
                             }
