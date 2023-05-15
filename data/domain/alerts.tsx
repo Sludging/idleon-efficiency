@@ -264,7 +264,7 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], 
     }
 
     // Construction
-    const finishedBuildingsCount = construction.buildings.flatMap(building => building).reduce((sum, building) => sum += building.finishedUpgrade ? 1 : 0, 0);
+    const finishedBuildingsCount = construction.buildings.flatMap(building => building).reduce((sum, building) => sum += building.finishedUpgrade && construction.buildingSlots.includes(building.index) ? 1 : 0, 0);
     if (finishedBuildingsCount > 0){
         globalAlerts.push(new ConstructionAlert(finishedBuildingsCount));
     }
