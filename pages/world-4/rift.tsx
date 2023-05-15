@@ -45,7 +45,10 @@ function ConstructMasteryDisplay() {
     const constMastery = rift.bonuses.find(bonus => bonus.name == "Construct Mastery") as ConstructionMastery;
     const construction = theData.get("construction") as Construction;
 
-    const leastBuildRate = construction.buildings.slice().sort((building1, building2) => building1.getBuildCost() > building2.getBuildCost() ? 1 : -1)[0];
+    const leastBuildRate = construction.buildings.slice()
+    .filter(building => building.level != building.maxLvl) // ignore max level
+    .sort((building1, building2) => building1.getBuildCost() > building2.getBuildCost() ? 1 : -1) // sort by build cost
+    [0];
 
     const nextMilestone = skillMilestones.find(milestone => milestone > constMastery.buildingLevels);
 

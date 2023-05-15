@@ -42,6 +42,10 @@ export class Building {
     }
 
     getBuildCost = (level: number = this.level) => {
+        if (level == this.maxLvl) {
+            return 0;
+        }
+        
         if (this.index == 0) {
             const math1 = Math.pow(level + 1, 2);
             return 20 * math1 * Math.pow(1.6, level + 1);
