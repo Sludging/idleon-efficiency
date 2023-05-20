@@ -157,7 +157,7 @@ function ShowSkills(props: SkillProps) {
                 }
             </Grid >
             {
-                props.player.classId == ClassIndex.Maestro &&
+                [ClassIndex.Maestro, ClassIndex.Virtuoso].includes(props.player.classId) &&
                 <Box gap="small">
                     <Text>Current crystal countdown reductions: (max is {nFormatter(ccdMax, "Smaller")}%)</Text>
                     <Box direction="row" wrap>
