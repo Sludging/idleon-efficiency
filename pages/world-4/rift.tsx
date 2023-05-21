@@ -70,7 +70,7 @@ function ConstructMasteryDisplay() {
                 <BonusBlock label="Fastest to Level" text={leastBuildRate.name} icon={leastBuildRate.getImageData()} textSize='medium' />
                 {constMastery.getRank() > 0 && <BonusBlock label="Refinery Speed" text={`${constMastery.getBonusByIndex(0)}%`} />}
                 {constMastery.getRank() > 2 && <BonusBlock label="Damage" text={`${constMastery.getBonusByIndex(2)}%`} />}
-                {constMastery.getRank() > 4 && <BonusBlock label="Damage" text={`${constMastery.getBonusByIndex(4)}%`} />}
+                {constMastery.getRank() > 4 && <BonusBlock label="Build Speed" text={`${constMastery.getBonusByIndex(4)}%`} />}
             </Box>
             <ShadowBox width={{ min: '300px', max: '300px' }} background="dark-1" margin={{ bottom: 'medium', right: 'small' }} pad="small">
                 <Box>
