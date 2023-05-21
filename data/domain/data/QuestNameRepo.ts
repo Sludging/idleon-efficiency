@@ -285,6 +285,10 @@ export const initQuestNameRepo = () => {
         new QuestNameBase("Muhmuguh6", <QuestNameModel>{"name": "Rising up and Growing as a Gamer", "difficulty": 1}),
         new QuestNameBase("Muhmuguh10", <QuestNameModel>{"name": "Learn the Language of the Universe", "difficulty": 2}),
         new QuestNameBase("Lava Larry2", <QuestNameModel>{"name": "W5 Task Req Check", "difficulty": 4}),
-        new QuestNameBase("Rift Ripper4", <QuestNameModel>{"name": "Entering The Rift...", "difficulty": 3})    
+        new QuestNameBase("Rift Ripper4", <QuestNameModel>{"name": "Entering The Rift...", "difficulty": 3}),
+        new QuestNameBase("Nebulyte3", <QuestNameModel>{"name": "Species Slayer", "difficulty": 7}),
+        new QuestNameBase("Nebulyte6", <QuestNameModel>{"name": "Chizoar Slayer", "difficulty": 7}),
+        new QuestNameBase("Nebulyte9", <QuestNameModel>{"name": "Oh Geez Lets Not Think About This One...", "difficulty": 7}),
+        new QuestNameBase("Nebulyte12", <QuestNameModel>{"name": "VMAN ACHIEVED!", "difficulty": 1})    
 ]
 }

@@ -125,7 +125,7 @@ export const initBubbleRepo = () => {
                 "x1": 25,
                 "x2": 2.5,
                 "func": "bigBase",
-                "description": "+{% Construction EXP Gain. Also gives +50% Bug-Fixing speed if your username is LavaFlame2. Actually, better make that +500%...",
+                "description": "+{% Construction EXP Gain. Also gives +50% Bug-Fixing speed if your username is LavaFlame2.",
                 "requirements": [<ComponentModel>{"item": "SnowA3", "quantity": 120}, <LiquidComponentModel>{"liquidNo": "2", "quantity": 3}],
                 "bonusKey": "conEXPACTIVE"
             }),

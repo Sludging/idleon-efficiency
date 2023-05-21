@@ -2320,7 +2320,7 @@ export const initUsesRepo = () => {
                         "repoSource": "NpcRepo",
                         "key": "Picnic Stowaway@The Hungry Stowaway",
                         "name": "The Hungry Stowaway Requirements",
-                        "amount": 30,
+                        "amount": 20,
                         "type": "quest"
                     }
                 ],

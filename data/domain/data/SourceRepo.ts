@@ -9727,7 +9727,13 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("Timecandy6", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[DropTable13]]", "txtName": "DropTable13"}],
+                "sources": [
+                    <SourceModel>{"wikiName": "[[DropTable13]]", "txtName": "DropTable13"},
+                    <SourceModel>{
+                        "wikiName": "[[Nebulyte#Species Slayer|Species Slayer]]",
+                        "txtName": "Nebulyte: Species Slayer"
+                    }
+                ],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -11491,6 +11497,10 @@ export const initSourceRepo = () => {
                         "wikiName": "[[Rift Ripper#Entering The Rift...|Entering The Rift...]]",
                         "txtName": "Rift Ripper: Entering The Rift..."
                     },
+                    <SourceModel>{
+                        "wikiName": "[[Nebulyte#Oh Geez Lets Not Think About This One...|Oh Geez Lets Not Think About This One...]]",
+                        "txtName": "Nebulyte: Oh Geez Lets Not Think About This One..."
+                    },
                     <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
                 ],
                 "recipeFrom": [],
@@ -11942,6 +11952,42 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Rift Ripper#Entering The Rift...|Entering The Rift...]]",
                         "txtName": "Rift Ripper: Entering The Rift..."
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Nebulyte#Chizoar Slayer|Chizoar Slayer]]",
+                        "txtName": "Nebulyte: Chizoar Slayer"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("CardPack5", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Nebulyte#Chizoar Slayer|Chizoar Slayer]]",
+                        "txtName": "Nebulyte: Chizoar Slayer"
+                    },
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("CardPack6", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Nebulyte#Oh Geez Lets Not Think About This One...|Oh Geez Lets Not Think About This One...]]",
+                        "txtName": "Nebulyte: Oh Geez Lets Not Think About This One..."
+                    },
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentNametag4", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Nebulyte#VMAN ACHIEVED!|VMAN ACHIEVED!]]",
+                        "txtName": "Nebulyte: VMAN ACHIEVED!"
                     }
                 ],
                 "recipeFrom": [],
@@ -12062,17 +12108,7 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("CardPack5", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
         new SourcesBase("GemQ17", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("CardPack6", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
