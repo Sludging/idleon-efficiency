@@ -88,8 +88,8 @@ export class SkillMastery extends RiftBonus {
     }
 
     getBonusText = (skill: SkillsIndex, bonusIndex: number) => {
-        // If it's the 2nd bonus and we have an override for that skill, get the special text.
-        if (bonusIndex == 1 && specialBonuses.has(skill)) {
+        // If it's the 3nd bonus and we have an override for that skill, get the special text.
+        if (bonusIndex == 2 && specialBonuses.has(skill)) {
             return specialBonuses.get(skill)!.replace(/_/g, " ");
         }
 
