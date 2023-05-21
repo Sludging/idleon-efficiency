@@ -98,7 +98,7 @@ export const FamilyBonusRelations: Record<ClassIndex, ClassIndex[]> = {
     [ClassIndex.Beginner]: [],
     [ClassIndex.Journeyman]: [],
     [ClassIndex.Maestro]: [ClassIndex.Journeyman],
-    [ClassIndex.Virtuoso]: [],
+    [ClassIndex.Voidwalker]: [],
     [ClassIndex.Infinilyte]: [],
     [ClassIndex.Warrior]: [],
     [ClassIndex.Barbarian]: [ClassIndex.Warrior],

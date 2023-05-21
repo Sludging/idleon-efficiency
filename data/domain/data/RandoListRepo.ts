@@ -1812,7 +1812,8 @@ export const initRandoListRepo = () => {
                     "Blobbo",
                     "Nebula_Neddy",
                     "Eliteus",
-                    "Rift_Ripper"
+                    "Rift_Ripper",
+                    "Nebulyte"
                 ]
             }),
         new RandoListBase(59, <RandoListModel>{
@@ -1852,15 +1853,16 @@ export const initRandoListRepo = () => {
                     "157",
                     "159",
                     "161",
-                    "164"
+                    "164",
+                    "165"
                 ]
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "More_Rift_n'_Gaming_v1.81",
-                    "*The_Rift_got_two_more_bonuses,_unlocked_at_rift_41_and_46._These_include_Construction_Mastery,_and_Ruby_Cards._@_*You_can_find_The_Rift_in_World_4,_deep_in_the_Octodar_squid_map._@_*Added_Elite_Class_Swap_tokens,_which_you_can_buy_from_the_Gem_Shop_Limited_section!_@_*Added_the_Superbits_section_to_Gaming!_Spend_bits_to_unlock_special_bonuses!_@_*Added_the_Immortal_Snail_to_Imports_section_of_Gaming!_Level_that_baddie_up!_@_*Added_the_MSA_Totalizer,_which_is_unlocked_in_the_Superbits_section_of_Gaming!_You'll_see_this_makes_your_Tower_Defence_highscores_matter_even_more!_@_*Vee_you_next_time!_Oops_I_mean_SEE_you_next_time,_mb_thats_a_typo_dog_you_know_how_typing_is_sometimes.",
-                    "*La_faille_a_obtenu_deux_bonus_supplémentaires,_débloqués_aux_failles_41_et_46._Celles-ci_incluent_la_maîtrise_de_la_construction_et_les_cartes_rubis._@_*Vous_pouvez_trouver_The_Rift_dans_le_monde_4,_au_plus_profond_de_la_carte_des_calmars_d'Octodar._@_*Ajout_de_jetons_Elite_Class_Swap,_que_vous_pouvez_acheter_dans_la_section_Gem_Shop_Limited!_@_*Ajout_de_la_section_Superbits_à_Gaming_!_Dépensez_des_bits_pour_débloquer_des_bonus_spéciaux_!_@_*Ajout_de_l'Immortal_Snail_à_la_section_Imports_de_Gaming_!_Nivelez_ce_méchant_!_@_*Ajout_du_totalisateur_MSA,_qui_est_déverrouillé_dans_la_section_Superbits_de_Gaming_!_Vous_verrez_que_cela_rend_vos_meilleurs_scores_Tower_Defense_encore_plus_importants_!",
-                    "*Der_Riss_hat_zwei_weitere_Boni_erhalten,_die_bei_Riss_41_und_46_freigeschaltet_werden._Dazu_gehören_Konstruktionsbeherrschung_und_Rubinkarten._@_*Sie_finden_The_Rift_in_Welt_4,_tief_in_der_Octodar-Tintenfischkarte._@_*Elite-Klassentausch-Token_hinzugefügt,_die_Sie_im_Bereich_Gem_Shop_Limited_kaufen_können!_@_*Superbits-Bereich_zu_Gaming_hinzugefügt!_Gib_Bits_aus,_um_spezielle_Boni_freizuschalten!_@_*Die_unsterbliche_Schnecke_wurde_zum_Importbereich_von_Gaming_hinzugefügt!_Levele_diesen_Bösewicht_hoch!_@_*Der_MSA-Totalisator_wurde_hinzugefügt,_der_im_Superbits-Bereich_von_Gaming_freigeschaltet_wird!_Sie_werden_sehen,_dass_Ihre_Tower_Defense-Highscores_dadurch_noch_wichtiger_werden!_@_*Bis_zum_nächsten_Mal!_Ups,_ich_meine,_bis_zum_nächsten_Mal,_mb,_das_ist_ein_Typo-Hund,_du_weißt,_wie_Tippen_manchmal_ist."
+                    "Very_Vibey_Vpdate_v1.82",
+                    "*Paging_all_Mmen_to_World_4,_I_repeat,_all_Mmen_to_world_4._@_*You_can_now_place_traps_for_other_characters_at_the_trapper_drone,_so_all_traps_can_come_from_your_best_trapper._@_*You_can_now_see_other_players_fighting._@_*Fixed_multiple_issues,_like_Wave_130_TD_not_giving_points,_cardset_bonuses_not_updating_unless_re-equipped,_Talent_Infographics_being_wonky_if_viewing_Player_Stats,_and_more._@_*Slightly_buffed_the_effect_LUK_has_on_boosting_Class_EXP._@_*Added_5_Star_Cardset_functionality,_i.e._Ruby_Card_Sets._@_*New_free_event_coming_next_week!_Lots_of_free_Gems_and_Candies_to_be_earned,_as_well_as_event_exclusives!",
+                    "*Paging_tous_les_Mmen_vers_le_monde_4,_je_répète,_tous_les_Mmen_vers_le_monde_4._@_*Vous_pouvez_maintenant_placer_des_pièges_pour_d'autres_personnages_au_niveau_du_drone_trappeur,_afin_que_tous_les_pièges_puissent_provenir_de_votre_meilleur_trappeur._@_*Vous_pouvez_maintenant_voir_d'autres_@_*Correction_de_plusieurs_problèmes,_comme_la_vague_130_TD_ne_donnant_pas_de_points,_les_bonus_de_jeu_de_cartes_ne_se_mettant_pas_à_jour_à_moins_d'être_rééquipés,_l'infographie_des_talents_étant_bancale_si_vous_visualisez_les_statistiques_des_joueurs,_et_plus_encore._@_*Légèrement_amélioré_l'effet_de_LUK_sur_l'augmentation_de_l'EXP_de_classe_._@_*Ajout_de_la_fonctionnalité_5_Star_Cardset,_c'est-à-dire_les_ensembles_de_cartes_Ruby._@_*Nouvel_événement_gratuit_à_venir_la_semaine_prochaine_!_Beaucoup_de_gemmes_et_de_bonbons_gratuits_à_gagner,_ainsi_que_des_événements_exclusifs_!",
+                    "*Page_alle_Mmen_zu_Welt_4,_ich_wiederhole,_alle_Mmen_zu_Welt_4._@_*Sie_können_jetzt_Fallen_für_andere_Charaktere_an_der_Trapper-Drohne_platzieren,_sodass_alle_Fallen_von_Ihrem_besten_Trapper_stammen_können._@_*Sie_können_jetzt_andere_sehen_Spieler_kämpfen._@_*Mehrere_Probleme_wurden_behoben,_z._B._dass_der_Wave_130_TD_keine_Punkte_vergibt,_Kartenset-Boni_nicht_aktualisiert_werden,_wenn_sie_nicht_neu_ausgerüstet_werden,_Talent-Infografiken_wackeln_beim_Anzeigen_von_Spielerstatistiken_und_mehr._@_*Der_Effekt,_den_LUK_auf_die_Steigerung_der_Klassen-EP_hat,_wurde_leicht_verbessert"
                 ]
             }),
         new RandoListBase(62, <RandoListModel>{
@@ -2441,6 +2443,21 @@ export const initRandoListRepo = () => {
                     "1",
                     "1",
                     "1"
+                ]
+            }),
+        new RandoListBase(93, <RandoListModel>{"elements": ["test2;test2", "Copy;dez;Beach;testi;testorama;des;Beach2"]}),
+        new RandoListBase(94, <RandoListModel>{
+                "elements": [
+                    "42",
+                    "318",
+                    "497",
+                    "79",
+                    "146",
+                    "362",
+                    "43",
+                    "536",
+                    "165",
+                    "35"
                 ]
             })    
 ]

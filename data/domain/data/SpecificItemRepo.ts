@@ -9578,7 +9578,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 110,
                 "typeGen": TypeGenEnum.dStone,
                 "Type": "Upgrade",
-                "description": "Drag onto any Tool to apply. +1 Weapon Power, +1 Random Stat. Success Chance; 100% Uses up 1 slots only if Successful ",
+                "description": "Drag onto any Tool to apply. +1 Tool Skill Power, +1 Random Stat. Success Chance; 100% Uses up 1 slots only if Successful ",
                 "tier": "I"
             }),
         new BaseItemBase("StoneT1e", <StoneItemModel>{
@@ -9605,7 +9605,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 1250,
                 "typeGen": TypeGenEnum.dStone,
                 "Type": "Upgrade",
-                "description": "Drag onto any Tool to apply. +2 Weapon Power, +2 Random Stat. Success Chance; 80% Uses up 1 slots only if Successful ",
+                "description": "Drag onto any Tool to apply. +2 Tool Skill Power, +2 Random Stat. Success Chance; 80% Uses up 1 slots only if Successful ",
                 "tier": "II"
             }),
         new BaseItemBase("StoneT3", <StoneItemModel>{
@@ -9614,7 +9614,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 20000,
                 "typeGen": TypeGenEnum.dStone,
                 "Type": "Upgrade",
-                "description": "Drag onto any Tool to apply. +3 Weapon Power, +4 Random Stat. Success Chance; 50% Uses up 1 slots only if Successful ",
+                "description": "Drag onto any Tool to apply. +3 Tool Skill Power, +4 Random Stat. Success Chance; 50% Uses up 1 slots only if Successful ",
                 "tier": "III"
             }),
         new BaseItemBase("StoneT4", <StoneItemModel>{
@@ -9623,7 +9623,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 550000,
                 "typeGen": TypeGenEnum.dStone,
                 "Type": "Upgrade",
-                "description": "Drag onto any Tool to apply. +5 Weapon Power, +4 Main Stat. Success Chance; 20% Uses up 1 slots only if Successful ",
+                "description": "Drag onto any Tool to apply. +5 Tool Skill Power, +4 Main Stat. Success Chance; 20% Uses up 1 slots only if Successful ",
                 "tier": "IV"
             }),
         new BaseItemBase("StoneT5", <StoneItemModel>{
@@ -9632,7 +9632,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 4000000,
                 "typeGen": TypeGenEnum.dStone,
                 "Type": "Upgrade",
-                "description": "Drag onto any Tool to apply. +6 Weapon Power, +6 Main Stat. Success Chance; 30% Uses up 1 slots only if Successful ",
+                "description": "Drag onto any Tool to apply. +6 Tool Skill Power, +6 Main Stat. Success Chance; 30% Uses up 1 slots only if Successful ",
                 "tier": "V"
             }),
         new BaseItemBase("StoneHelm1", <StoneItemModel>{
@@ -16016,6 +16016,27 @@ export const initSpecificItemRepo = () => {
                 "LUK": 5,
                 "Defence": 20,
                 "miscUp1": "40% Drop Chance",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentNametag4", <ArmourItemModel>{
+                "internalName": "EquipmentNametag4",
+                "displayName": "Vman Nametag",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aNametag,
+                "Type": "Nametag",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.Beginner,
+                "Weapon_Power": 1,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 30,
+                "Defence": 0,
+                "miscUp1": "10% Multikill Per Tier",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
