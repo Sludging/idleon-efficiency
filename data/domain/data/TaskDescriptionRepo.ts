@@ -1662,7 +1662,7 @@ export const initTaskDescriptionRepo = () => {
         new TaskDescriptionBase(87, <TaskDescriptionModel>{
                 "name": "Dishin' Out Some Meals",
                 "description": "Upgrade Meal } to Lv. { within the Dinner Menu!",
-                "extraStr": "Turkey a la Thank|Salad|Garlic Bread|Cabbage|Sawdust|Bunt Cake|Mutton|Massive Fig|Anomaly|BillJackPepper",
+                "extraStr": "Turkey a la Thank|Salad|Garlic Bread|Cabbage|Sawdust|Bunt Cake|Mutton|Massive Fig|Giant Tomato|BillJackPepper",
                 "number1": 10,
                 "descLine2": "1|1|All that meal prep and it's still RAW! PATHETIC!",
                 "numbers": [

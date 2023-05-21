@@ -893,7 +893,7 @@ export const initNpcRepo = () => {
                             "note": "Map 2 is the third Grasslands zone, [[Worlds#G3 - Froggy Fields|Froggy Fields]]."
                         },
                         "CustomType": "Scripticus4",
-                        "CustomArray": [<CustomReqModel>{"desc": "Discover map 2:", "finalV": 1, "type": "GreaterEqual", "startV": 0}]
+                        "CustomArray": [<CustomReqModel>{"desc": "Reach map 2:", "finalV": 1, "type": "GreaterEqual", "startV": 0}]
                     },
                     "The Choice is Yours!": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
@@ -958,7 +958,7 @@ export const initNpcRepo = () => {
                     },
                     "The Unoccupied Picnic": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "I went for a Picnic the other day out in the Frog Fields and I forgot to bring home the basket! There wasn't much in there other than a jar of Golden Jam that I need back!  <br> MAIN QUEST:Retrieve the Golden Jam",
+                        "DialogueText": "You see I has a picnic and I forget the darn basket! There wasn't in it other than a jar of Golden Jam that I need back!  <br> MAIN QUEST:Retrieve the Golden Jam from the Picnic in Froggy Fields",
                         "NextIndex": 27,
                         "Name": "The Unoccupied Picnic",
                         "ConsumeItems": true,
@@ -978,7 +978,7 @@ export const initNpcRepo = () => {
                     },
                     "Stiltzcho, the Leaf Scout": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Anyway he's our best bet at finding out who stole the Town Gem! <br> QUEST:Get a scouting report from Stiltzcho the Leaf NPC in the slime map after beans!",
+                        "DialogueText": "Get past the Frogs and Beans and talk to the Leaf NPC they might know who stole the Town Gem! <br> QUEST:Get a scouting report from Stiltzcho the Leaf NPC in the slime map after beans!",
                         "NextIndex": 35,
                         "Name": "Stiltzcho, the Leaf Scout",
                         "ConsumeItems": true,
@@ -996,7 +996,7 @@ export const initNpcRepo = () => {
                     },
                     "What Lies at the Heart of the Forest": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "But you've come a long way since that epic fall from gamer grace so why don't you go check it out for yourself? Come back when you know more about the place! <br> MAIN QUEST:Reach the Forest Camp past the Carrotmen and Glublins!",
+                        "DialogueText": "But you've come a long way since that epic fall from gamer grace so why don't you go check it out for yourself? Come back when you know more about the place! <br> MAIN QUEST:Reach the Boss Room located in the Forest Camp past the Carrotmen and Glublin maps!",
                         "NextIndex": 41,
                         "Name": "What Lies at the Heart of the Forest",
                         "ConsumeItems": false,
@@ -1011,11 +1011,11 @@ export const initNpcRepo = () => {
                         "Difficulty": 2,
                         "note": <NoteModel>{"note": " "},
                         "CustomType": "Scripticus10",
-                        "CustomArray": [<CustomReqModel>{"desc": "Forest Camp Found:", "finalV": 1, "type": "GreaterEqual", "startV": 0}]
+                        "CustomArray": [<CustomReqModel>{"desc": "Boss Room Found:", "finalV": 1, "type": "GreaterEqual", "startV": 0}]
                     },
                     "The Bigger they are, the Bigger they Fall!": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Well it's all up to you now! Go defeat that thief and take back our Town Crystal! <br> MAIN QUEST: Defeat Amarok the wolf golem who awaits you in the map to the right of the tiki villagers.",
+                        "DialogueText": "Well it's all up to you now! Go defeat that thief and take back our Town Crystal! <br> MAIN QUEST: Defeat Amarok the boss of World 1. You'll need to do the Quest from Dog Bone the tiki ghost to get Boss Keys...",
                         "NextIndex": 44,
                         "Name": "The Bigger they are, the Bigger they Fall!",
                         "ConsumeItems": false,
@@ -1033,7 +1033,7 @@ export const initNpcRepo = () => {
                         },
                         "CustomType": "Scripticus11",
                         "CustomArray": [
-                            <CustomReqModel>{"desc": "Wolf Golem Defeated:", "finalV": 1, "type": "GreaterEqual", "startV": 0},
+                            <CustomReqModel>{"desc": "Amarok Boss Defeated:", "finalV": 1, "type": "GreaterEqual", "startV": 0},
                             <CustomReqModel>{"desc": "Town Gem Recovered:", "finalV": 1, "type": "GreaterEqual", "startV": 0}
                         ]
                     },
@@ -1233,7 +1233,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "I went for a Picnic the other day out in the Frog Fields and I forgot to bring home the basket! There wasn't much in there other than a jar of Golden Jam that I need back!  <br> MAIN QUEST:Retrieve the Golden Jam",
+                        "DialogueText": "You see I has a picnic and I forget the darn basket! There wasn't in it other than a jar of Golden Jam that I need back!  <br> MAIN QUEST:Retrieve the Golden Jam from the Picnic in Froggy Fields",
                         "NextIndex": 27,
                         "Name": "The Unoccupied Picnic"
                     },
@@ -1281,7 +1281,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Anyway he's our best bet at finding out who stole the Town Gem! <br> QUEST:Get a scouting report from Stiltzcho the Leaf NPC in the slime map after beans!",
+                        "DialogueText": "Get past the Frogs and Beans and talk to the Leaf NPC they might know who stole the Town Gem! <br> QUEST:Get a scouting report from Stiltzcho the Leaf NPC in the slime map after beans!",
                         "NextIndex": 35,
                         "Name": "Stiltzcho, the Leaf Scout"
                     },
@@ -1317,7 +1317,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "But you've come a long way since that epic fall from gamer grace so why don't you go check it out for yourself? Come back when you know more about the place! <br> MAIN QUEST:Reach the Forest Camp past the Carrotmen and Glublins!",
+                        "DialogueText": "But you've come a long way since that epic fall from gamer grace so why don't you go check it out for yourself? Come back when you know more about the place! <br> MAIN QUEST:Reach the Boss Room located in the Forest Camp past the Carrotmen and Glublin maps!",
                         "NextIndex": 41,
                         "Name": "What Lies at the Heart of the Forest"
                     },
@@ -1335,7 +1335,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Well it's all up to you now! Go defeat that thief and take back our Town Crystal! <br> MAIN QUEST: Defeat Amarok the wolf golem who awaits you in the map to the right of the tiki villagers.",
+                        "DialogueText": "Well it's all up to you now! Go defeat that thief and take back our Town Crystal! <br> MAIN QUEST: Defeat Amarok the boss of World 1. You'll need to do the Quest from Dog Bone the tiki ghost to get Boss Keys...",
                         "NextIndex": 44,
                         "Name": "The Bigger they are, the Bigger they Fall!"
                     },
@@ -1871,7 +1871,7 @@ export const initNpcRepo = () => {
                 "quests": {
                     "The Hungry Stowaway": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Well come on now I aint gonna give you part of my stash here for nothin'. This is a picnic basket not a charity house! Bring me something and maybe we can fix up a deal... <br> QUEST:Buy and bring 30 Nomwiches from the Town Shop.",
+                        "DialogueText": "Well come on now I aint gonna give you part of my stash here for nothin'. This is a picnic basket not a charity house! Bring me something and maybe we can fix up a deal... <br> QUEST:Buy and bring 20 Nomwiches from the Town Shop.",
                         "NextIndex": 7,
                         "Name": "The Hungry Stowaway",
                         "ConsumeItems": true,
@@ -1885,11 +1885,11 @@ export const initNpcRepo = () => {
                         "QuestName": "Picnic Stowaway1",
                         "Difficulty": 2,
                         "note": <NoteModel>{"note": ""},
-                        "ItemReq": [<ComponentModel>{"item": "FoodHealth1", "quantity": 30}]
+                        "ItemReq": [<ComponentModel>{"item": "FoodHealth1", "quantity": 20}]
                     },
                     "Beating Up Frogs for some Sauce": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Why don't you go 'ask' the frogs around here for some Condiments. Those Fists of yours seem like persuasive talkers! I'll hold onto these nomwiches in the meantime... for safe keeping you know? <br> QUEST:Kill frogs for condiments! Use your blue time candies to speed it up.",
+                        "DialogueText": "Why don't you go 'ask' the frogs around here for some Condiments? Those FISTS of yours seem persuasive hehe!! <br> QUEST:Kill frogs for condiments! USE your blue time candy to speed it up!",
                         "NextIndex": 10,
                         "Name": "Beating Up Frogs for some Sauce",
                         "ConsumeItems": true,
@@ -2126,7 +2126,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Well come on now I aint gonna give you part of my stash here for nothin'. This is a picnic basket not a charity house! Bring me something and maybe we can fix up a deal... <br> QUEST:Buy and bring 30 Nomwiches from the Town Shop.",
+                        "DialogueText": "Well come on now I aint gonna give you part of my stash here for nothin'. This is a picnic basket not a charity house! Bring me something and maybe we can fix up a deal... <br> QUEST:Buy and bring 20 Nomwiches from the Town Shop.",
                         "NextIndex": 7,
                         "Name": "The Hungry Stowaway"
                     },
@@ -2144,7 +2144,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Why don't you go 'ask' the frogs around here for some Condiments. Those Fists of yours seem like persuasive talkers! I'll hold onto these nomwiches in the meantime... for safe keeping you know? <br> QUEST:Kill frogs for condiments! Use your blue time candies to speed it up.",
+                        "DialogueText": "Why don't you go 'ask' the frogs around here for some Condiments? Those FISTS of yours seem persuasive hehe!! <br> QUEST:Kill frogs for condiments! USE your blue time candy to speed it up!",
                         "NextIndex": 10,
                         "Name": "Beating Up Frogs for some Sauce"
                     },
@@ -13837,6 +13837,181 @@ export const initNpcRepo = () => {
                     }
                 ]
             }),
+        new NpcBase("Nebulyte", <NpcModel>{
+                "head": <NpcHeadModel>{
+                    "location": "Outer World Town",
+                    "world": "Hyperion Nebula",
+                    "noQuest": 0,
+                    "repeatable": "Unknown",
+                    "type": "Unknown",
+                    "birthWeight": 9.23,
+                    "starSign": "Virgo",
+                    "mothersMaidenName": "Hoffman",
+                    "notes": " "
+                },
+                "quests": {
+                    "Species Slayer": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "FIRST YOU MUST BE KILLER! BIG TIME!! TRUST TRUST YOU WILL NEED THIS... <br> QUEST:Get 1M deathnote kills on all monsters in World 1 2 and 3. Remember Deathnote Kills are account-wide this is NOT kills just on your Maestro.",
+                        "NextIndex": 5,
+                        "Name": "Species Slayer",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 1,
+                        "NoSpaceIndex": 4,
+                        "Rewards": [<ComponentModel>{"item": "Timecandy6", "quantity": 1}],
+                        "QuestName": "Nebulyte1",
+                        "Difficulty": 7,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Nebulyte1",
+                        "CustomArray": [
+                            <CustomReqModel>{"desc": "Deathnote 1M Kills:", "finalV": 40, "type": "GreaterEqual", "startV": 0},
+                            <CustomReqModel>{"desc": "Visit Deathnote:", "finalV": 1, "type": "GreaterEqual", "startV": 0}
+                        ]
+                    },
+                    "Chizoar Slayer": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "NEXT CHAOTIC CHIZOAR MUST DIE BY YOUR HAND! <br> QUEST:Defeat Chizoar on Chaotic Difficulty.",
+                        "NextIndex": 8,
+                        "Name": "Chizoar Slayer",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 7,
+                        "Rewards": [<ComponentModel>{"item": "Quest71", "quantity": 15}, <ComponentModel>{"item": "CardPack5", "quantity": 1}],
+                        "QuestName": "Nebulyte2",
+                        "Difficulty": 7,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Nebulyte2",
+                        "CustomArray": [<CustomReqModel>{
+                            "desc": "Defeat Chaotic Chizoar:",
+                            "finalV": 1,
+                            "type": "GreaterEqual",
+                            "startV": 0
+                        }]
+                    },
+                    "Oh Geez Lets Not Think About This One...": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "DEFEAT 12 MILLION GREEN MUSHROOMS...AHAHAH! THIS IS IT GO GET THEM!! <br> QUEST:Defeat 12 million green mushrooms by yourself. Check Monster Card to see your personal killcount.",
+                        "NextIndex": 11,
+                        "Name": "Oh Geez Lets Not Think About This One...",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 11,
+                        "Rewards": [<ComponentModel>{"item": "CardPack6", "quantity": 1}, <ComponentModel>{"item": "Timecandy9", "quantity": 3}],
+                        "QuestName": "Nebulyte3",
+                        "Difficulty": 7,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Nebulyte3",
+                        "CustomArray": [<CustomReqModel>{"desc": "Mushroom kills:", "finalV": 12000000, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "VMAN ACHIEVED!": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "",
+                        "NextIndex": 14,
+                        "Name": "VMAN ACHIEVED!",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 1,
+                        "NoSpaceIndex": 13,
+                        "Rewards": [<ComponentModel>{"item": "EquipmentNametag4", "quantity": 1}],
+                        "QuestName": "Nebulyte4",
+                        "Difficulty": 1,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Nebulyte4",
+                        "CustomArray": [<CustomReqModel>{"desc": "Become a Voidwalker:", "finalV": 1, "type": "GreaterEqual", "startV": 0}]
+                    }
+                },
+                "dialogue": [
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "OoooOooo HOW LONG I HAVE WAITED FOR YOU TO SHOW YOURSELF! AND NOW YOU ARE HERE!!",
+                        "NextIndex": 1,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "YEE I HAVE HEARD MUCH OF YOU FROM THE OTHER MEMBERS!! YES YOU FROM THEM! INDEED!!!",
+                        "NextIndex": 2,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "YOU ARE MAESTRO MEMBER SO YOU KNOW THERE IS TEST YOU MUST PASS TO BE MY RANK! THIS IS HOW WE DO IT AFTER ALL!!",
+                        "NextIndex": 3,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "FIRST YOU MUST BE KILLER! BIG TIME!! TRUST TRUST YOU WILL NEED THIS... <br> QUEST:Get 1M deathnote kills on all monsters in World 1 2 and 3. Remember Deathnote Kills are account-wide this is NOT kills just on your Maestro.",
+                        "NextIndex": 5,
+                        "Name": "Species Slayer"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "YOU HAVE TO SPACE!! AAAAH CLEAR SOME PLSPLS!",
+                        "NextIndex": 3,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "YOYOYO! YO! THEY DEAD OUT HERE EASY! BUT THAT IS ACCOUNT WIDE NOT REAL LIFE SO TEST THAT NEXT!",
+                        "NextIndex": 6,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "NEXT CHAOTIC CHIZOAR MUST DIE BY YOUR HAND! <br> QUEST:Defeat Chizoar on Chaotic Difficulty.",
+                        "NextIndex": 8,
+                        "Name": "Chizoar Slayer"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "YOU HAVE TO SPACE!! AAAAH CLEAR SOME PLSPLS!",
+                        "NextIndex": 6,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "YOU KILL GOOOOOD... BUT CAN YOU KILL MANY MANY??",
+                        "NextIndex": 9,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "DEFEAT 12 MILLION GREEN MUSHROOMS...AHAHAH! THIS IS IT GO GET THEM!! <br> QUEST:Defeat 12 million green mushrooms by yourself. Check Monster Card to see your personal killcount.",
+                        "NextIndex": 11,
+                        "Name": "Oh Geez Lets Not Think About This One..."
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "YOU HAVE TO SPACE!! AAAAH CLEAR SOME PLSPLS!",
+                        "NextIndex": 9,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "HOLEY MOLEY!! YOW WOW WOW! ZOW! ZOW! YOU DID IT ALL THE ROLE IS YOURS! YOU ARE A MAESTRO NO MORE THAT WAS THEN VMAN IS NOW!",
+                        "NextIndex": 12,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "",
+                        "NextIndex": 14,
+                        "Name": "VMAN ACHIEVED!"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "YOU HAVE TO SPACE!! AAAAH CLEAR SOME PLSPLS!",
+                        "NextIndex": 12,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "ONE OF US! ONE OF US!",
+                        "NextIndex": 14,
+                        "Name": ""
+                    }
+                ]
+            }),
         new NpcBase("Fillerz", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
@@ -13854,18 +14029,6 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Hows it flowin' 'n goin' my guy? This pipin' hot heat out here making you and I very dry.",
-                        "NextIndex": 1,
-                        "Name": ""
-                    },
-                    <DialogueLineModel>{
-                        "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Yo don't mind me and my spittin' I'm emcee Larry and I got dope tasks most fittin'",
-                        "NextIndex": 2,
-                        "Name": ""
-                    },
-                    <DialogueLineModel>{
-                        "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Ayyyy that's how it's done! I'll give you access to my tasks have fun!",
                         "NextIndex": -1,
                         "Name": ""
                     }

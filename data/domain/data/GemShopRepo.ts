@@ -1583,7 +1583,7 @@ export const initGemShopRepo = () => {
                 "name": "GemP26",
                 "mtxName": "Ancient Artifact",
                 "itemDisplayName": "",
-                "desc": "Upgrades a random artifact you own to its ANCIENT form! 100% Success chance, no foolin! This item restocks every week. See Guild GP claim for when that happens.",
+                "desc": "Upgrades a random artifact you own to its ANCIENT form! 100% Success chance, no foolin! This item restocks every week. See Guild GP claim for when that happens. You must own a normal artifact to buy this.",
                 "cost": 790,
                 "no": 134,
                 "maxPurchases": 2,

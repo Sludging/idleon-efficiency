@@ -139,7 +139,7 @@ export class Player {
             case ClassIndex.Beginner:
             case ClassIndex.Journeyman:
             case ClassIndex.Maestro:
-            case ClassIndex.Virtuoso:
+            case ClassIndex.Voidwalker:
             case ClassIndex.Infinilyte:
                 return ClassIndex.Beginner;
             case ClassIndex.Warrior:

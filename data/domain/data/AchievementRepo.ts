@@ -1701,10 +1701,10 @@ export const initAchievementRepo = () => {
                 "world": "Hyperion Nebula"
             }),
         new AchievementBase(242, <AchievementModel>{
-                "name": "FILLERZZZ ACH",
-                "qty": 20,
-                "desc": "-",
-                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "name": "Veritable Master",
+                "qty": 1,
+                "desc": "SECRET ACHIEVEMENT ------------------------ Destruction comes to all who cross your path, no matter how many times you cross paths.",
+                "rewards": "1 Void Talent Pt",
                 "world": "Hyperion Nebula"
             }),
         new AchievementBase(243, <AchievementModel>{
