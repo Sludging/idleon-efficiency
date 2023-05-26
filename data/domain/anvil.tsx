@@ -282,7 +282,7 @@ export const updateAnvil = (data: Map<string, any>) => {
         const goldFoodStampBonus = getStampBonusForKey(stampData, "GFood");
         const goldFoodBubble = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 18);
         const allSkillXP = Skilling.getAllSkillXP(player, shrines, statues[player.playerID], prayers, saltLickBonus, dungeonBonus, family, goldFoodStampBonus, sigils.sigils[14].getBonus(), goldFoodBubble, divinity, cards, achievementsInfo, skillMastery, breeding, gaming);
-        const mmanBonus = players.find(player => player.classId == ClassIndex.Maestro)?.talents.find(talent => talent.skillIndex == 42)?.getBonus() ?? 0;
+        const mmanBonus = players.find(player => [ClassIndex.Maestro, ClassIndex.Voidwalker].includes(player.classId))?.talents.find(talent => talent.skillIndex == 42)?.getBonus() ?? 0;
         const riftBonus = skillMastery.getSkillBonus(SkillsIndex.Smithing, 1);
         const xpMulti = playerAnvil.getXPMulti(player, allSkillXP, mmanBonus, riftBonus);
         playerAnvil.setXP(xpMulti);
