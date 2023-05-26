@@ -16042,6 +16042,27 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentNametag5", <ArmourItemModel>{
+                "internalName": "EquipmentNametag5",
+                "displayName": "Spring Flowers Nametag",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aNametag,
+                "Type": "Nametag",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 4,
+                "AGI": 4,
+                "WIS": 4,
+                "LUK": 4,
+                "Defence": 0,
+                "miscUp1": "15% Skill Exp",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentKeychain0", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain0",
                 "displayName": "Simple Key Chain",
@@ -19887,6 +19908,14 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Dungeon Evaporate",
                 "description": "You shouldn't be reading this... unless it's like on the Wiki or something, then yea I ain't pointin' no fingers or nothing. "
+            }),
+        new BaseItemBase("Quest75", <DescItemModel>{
+                "internalName": "Quest75",
+                "displayName": "Spring Baggie",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Event Box",
+                "description": "Hold to open! Contains a random Spring Event goodie, from event cards to foods! ALSO, if you open a total of 500 Baggies, you'll get a limited edition Spring event NAMETAG! "
             }),
         new BaseItemBase("EquipmentSmithingTabs2", <DescItemModel>{
                 "internalName": "EquipmentSmithingTabs2",
@@ -24719,7 +24748,7 @@ export const initSpecificItemRepo = () => {
                     "cardID": "C16",
                     "category": "Easy Resources",
                     "perTier": 10,
-                    "effect": "+{% Smithing EXP",
+                    "effect": "+{% Smithing EXP (Passive)",
                     "bonus": 4,
                     "order": 4
                 },
@@ -24929,7 +24958,7 @@ export const initSpecificItemRepo = () => {
                     "cardID": "D16",
                     "category": "Medium Resources",
                     "perTier": 10,
-                    "effect": "+{% Smithing EXP",
+                    "effect": "+{% Smithing EXP (Passive)",
                     "bonus": 7,
                     "order": 4
                 },
@@ -26590,7 +26619,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 3,
                     "order": 3
                 },
-                "dropChance": 0.05
+                "dropChance": 0
             }),
         new BaseItemBase("CardsY3", <CardItemModel>{
                 "internalName": "CardsY3",
@@ -26797,6 +26826,38 @@ export const initSpecificItemRepo = () => {
                     "effect": "+{% EXP from monsters",
                     "bonus": 3,
                     "order": 7
+                },
+                "dropChance": 1
+            }),
+        new BaseItemBase("CardsY16", <CardItemModel>{
+                "internalName": "CardsY16",
+                "displayName": "Bubbulyte Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "Y16",
+                    "category": "Event",
+                    "perTier": 1,
+                    "effect": "+{% Class EXP (Passive)",
+                    "bonus": 2,
+                    "order": 17
+                },
+                "dropChance": 1
+            }),
+        new BaseItemBase("CardsY17", <CardItemModel>{
+                "internalName": "CardsY17",
+                "displayName": "Spring Splendor Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "Y17",
+                    "category": "Event",
+                    "perTier": 1,
+                    "effect": "+{% All Skill EXP (Passive)",
+                    "bonus": 2,
+                    "order": 18
                 },
                 "dropChance": 1
             }),
