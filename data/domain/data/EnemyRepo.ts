@@ -6778,6 +6778,80 @@ export const initEnemyRepo = () => {
                 "navigation": undefined,
                 "bossData": undefined
             }),
+        new EnemyBase("springEvent1", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Bubbulyte",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 4,
+                    "MonsterOffsetX": 42,
+                    "MonsterOffsetY": 28,
+                    "HeightOfMonster": 85,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 4,
+                    "RespawnTime": 86400,
+                    "DeathFrame": 13,
+                    "MonsterHPTotal": 750000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "a",
+                    "ExpGiven": 12000,
+                    "ExpType": 0,
+                    "Defence": 600,
+                    "MoveSPEED": 3,
+                    "Damages": [1000, 1],
+                    "DefFor0": 1223.26
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsY2", "quantity": 1, "chance": 0, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Quest71", "quantity": 1, "chance": 1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "CardPack6", "quantity": 1, "chance": 1, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("springEvent2", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Spring Splendor",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 4,
+                    "MonsterOffsetX": 42,
+                    "MonsterOffsetY": 28,
+                    "HeightOfMonster": 85,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 4,
+                    "RespawnTime": 86400,
+                    "DeathFrame": 13,
+                    "MonsterHPTotal": 750000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "a",
+                    "ExpGiven": 12000,
+                    "ExpType": 0,
+                    "Defence": 600,
+                    "MoveSPEED": 3,
+                    "Damages": [1000, 1],
+                    "DefFor0": 1223.26
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsY2", "quantity": 1, "chance": 0, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.2, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Timecandy1", "quantity": 1, "chance": 0.2, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats38", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats32", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats56", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "ClassSwap", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "ResetBox", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "ResetCompletedS", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
         new EnemyBase("Blank0ramaFiller", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
                     "Name": "Nightmare Amarok",
