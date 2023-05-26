@@ -423,7 +423,7 @@ function PrinterDisplay() {
     }, [appContext]);
 
     const masteroInfo = useMemo(() => {
-        const masteroes = playerData?.filter(player => player.classId == ClassIndex.Maestro);
+        const masteroes = playerData?.filter(player => [ClassIndex.Maestro, ClassIndex.Voidwalker].includes(player.classId));
         return masteroes;
     }, [playerData])
 

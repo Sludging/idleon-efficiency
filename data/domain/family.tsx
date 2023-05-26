@@ -9,9 +9,9 @@ export const familyBonusMapping = [
     "NO_FAMILY_BONUS 0 0 add _ _ txt".split(" "),
     "+{_TOTAL_LUK 1 5 intervalAdd _ _ txt".split(" "),
     "+{%_PRINTER|SAMPLE_SIZE 6 100 decay _ _ txt".split(" "),
-    "VIRTUOSO 1 0 add _ _ txt".split(" "),
+    "+{%_FIGHTING|AFK_GAINS 5 250 decay _ _ txt".split(" "),
     "INFINILYTE 1 0 add _ _ txt".split(" "),
-    "NO_FAMILY_BONUS 73 2 bigBase _ _ txt".split(" "),
+    "NO_FAMILY_BONUS 5 250 decay _ _ txt".split(" "),
     "+{_TOTAL_STR 1 5 intervalAdd _ _ txt".split(" "),
     "+{_WEAPON_POWER 25 100 decay _ _ txt".split(" "),
     "+{%_TOTAL_HP 40 100 decay _ _ txt".split(" "),
@@ -98,7 +98,7 @@ export const FamilyBonusRelations: Record<ClassIndex, ClassIndex[]> = {
     [ClassIndex.Beginner]: [],
     [ClassIndex.Journeyman]: [],
     [ClassIndex.Maestro]: [ClassIndex.Journeyman],
-    [ClassIndex.Voidwalker]: [],
+    [ClassIndex.Voidwalker]: [ClassIndex.Journeyman, ClassIndex.Maestro],
     [ClassIndex.Infinilyte]: [],
     [ClassIndex.Warrior]: [],
     [ClassIndex.Barbarian]: [ClassIndex.Warrior],
@@ -136,7 +136,7 @@ export class FamilyBonus {
         if (player && player.classId == this.classIndex && player.playerID == this.playerID) {
             familyManBoost += player.getTalentBonus(144) / 100;
         }
-        
+
         return rounding ? round(this.value * familyManBoost) : this.value * familyManBoost;
     }
 }
