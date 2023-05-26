@@ -100,7 +100,7 @@ export const initGamingSuperbitsRepo = () => {
                 "description": "+10 Max HP for Worship Totem during Tower Defence summon battle",
                 "x1": 4,
                 "x2": 31,
-                "name": "Worshop Totem HPr"
+                "name": "Worship Totem HPr"
             }),
         new GamingSuperbitBase(16, <GamingSuperbitModel>{
                 "description": "MSA now gives +1% bonus Skill Exp per 10 total Waves",

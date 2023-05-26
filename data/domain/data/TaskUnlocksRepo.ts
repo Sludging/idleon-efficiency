@@ -147,11 +147,11 @@ export const initTaskUnlocksRepo = () => {
                         <TaskUnlockModel>{"item": "PremiumGem", "tabNo": 25, "recipNo": 0}
                     ],
                     [
-                        <TaskUnlockModel>{"item": "EquipmentShoes17", "tabNo": 1, "recipNo": 54},
+                        <TaskUnlockModel>{"item": "EquipmentShoes19", "tabNo": 1, "recipNo": 54},
                         <TaskUnlockModel>{"item": "PremiumGem", "tabNo": 25, "recipNo": 0}
                     ],
                     [
-                        <TaskUnlockModel>{"item": "EquipmentShoes19", "tabNo": 1, "recipNo": 55},
+                        <TaskUnlockModel>{"item": "EquipmentShoes17", "tabNo": 1, "recipNo": 55},
                         <TaskUnlockModel>{"item": "PremiumGem", "tabNo": 25, "recipNo": 0}
                     ],
                     [
