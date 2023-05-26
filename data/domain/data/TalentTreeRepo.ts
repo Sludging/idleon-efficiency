@@ -899,9 +899,9 @@ export const initTalentTreeRepo = () => {
                     },
                     "Blood Marrow": <TalentModel>{
                         "name": "Blood Marrow",
-                        "description": "+{% Meal Cooking Spd per total LV of all Meals upgraded on the Dinner Table Menu",
-                        "x1": 10,
-                        "x2": 250,
+                        "description": "+{% Multiplicative Meal Cooking Spd per total LV of all Meals upgraded on the Dinner Table Menu",
+                        "x1": 2.1,
+                        "x2": 220,
                         "funcX": "decay",
                         "y1": 0,
                         "y2": 0,

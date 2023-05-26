@@ -1458,6 +1458,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"},
                     <SourceModel>{"wikiName": "[[Biggie Hours|Recipe from Biggie Hours]]", "txtName": "Biggie Hours"},
                     <SourceModel>{"wikiName": "[[Efaunt|Recipe from Efaunt]]", "txtName": "Efaunt"},
+                    <SourceModel>{"wikiName": "[[Spring Splendor]]", "txtName": "Spring Splendor"},
                     <SourceModel>{
                         "wikiName": "[[Builder Bird#Restoring Power to the Portal|Restoring Power to the Portal]]",
                         "txtName": "Builder Bird: Restoring Power to the Portal"
@@ -3211,6 +3212,8 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Egg Capsule]]", "txtName": "Egg Capsule"},
                     <SourceModel>{"wikiName": "[[Mr Blueberry]]", "txtName": "Mr Blueberry"},
                     <SourceModel>{"wikiName": "[[Plasti Doug]]", "txtName": "Plasti Doug"},
+                    <SourceModel>{"wikiName": "[[Bubbulyte]]", "txtName": "Bubbulyte"},
+                    <SourceModel>{"wikiName": "[[Spring Splendor]]", "txtName": "Spring Splendor"},
                     <SourceModel>{"wikiName": "[[Copper]]", "txtName": "Copper"},
                     <SourceModel>{"wikiName": "[[Iron]]", "txtName": "Iron"},
                     <SourceModel>{"wikiName": "[[Gold]]", "txtName": "Gold"},
@@ -4891,6 +4894,7 @@ export const initSourceRepo = () => {
                         "txtName": "Colosseum: Astro Golden Chest"
                     },
                     <SourceModel>{"wikiName": "[[Egg Capsule]]", "txtName": "Egg Capsule"},
+                    <SourceModel>{"wikiName": "[[Spring Splendor]]", "txtName": "Spring Splendor"},
                     <SourceModel>{
                         "wikiName": "[[Post Office#Simple Shippin|Simple Shippin]]",
                         "txtName": "Post Office: Simple Shippin"
@@ -7220,6 +7224,7 @@ export const initSourceRepo = () => {
                 "sources": [
                     <SourceModel>{"wikiName": "[[Floofie]]", "txtName": "Floofie"},
                     <SourceModel>{"wikiName": "[[Shell Snake]]", "txtName": "Shell Snake"},
+                    <SourceModel>{"wikiName": "[[Spring Splendor]]", "txtName": "Spring Splendor"},
                     <SourceModel>{"wikiName": "[[DropTable13]]", "txtName": "DropTable13"},
                     <SourceModel>{
                         "wikiName": "[[Scripticus#The Choice is Yours!|The Choice is Yours!]]",
@@ -7517,6 +7522,95 @@ export const initSourceRepo = () => {
             }),
         new SourcesBase("CardsY13", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Plasti Doug]]", "txtName": "Plasti Doug"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("CardsY2", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Bubbulyte]]", "txtName": "Bubbulyte"},
+                    <SourceModel>{"wikiName": "[[Spring Splendor]]", "txtName": "Spring Splendor"},
+                    <SourceModel>{"wikiName": "[[2021 Giftmas Box]]", "txtName": "2021 Giftmas Box"},
+                    <SourceModel>{"wikiName": "[[Choco Box]]", "txtName": "Choco Box"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Quest71", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Bubbulyte]]", "txtName": "Bubbulyte"},
+                    <SourceModel>{
+                        "wikiName": "[[Rift Ripper#Entering The Rift...|Entering The Rift...]]",
+                        "txtName": "Rift Ripper: Entering The Rift..."
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Nebulyte#Chizoar Slayer|Chizoar Slayer]]",
+                        "txtName": "Nebulyte: Chizoar Slayer"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Bubbulyte#Spring Splendor|Spring Splendor]]",
+                        "txtName": "Bubbulyte: Spring Splendor"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("CardPack6", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Bubbulyte]]", "txtName": "Bubbulyte"},
+                    <SourceModel>{
+                        "wikiName": "[[Nebulyte#Oh Geez Lets Not Think About This One...|Oh Geez Lets Not Think About This One...]]",
+                        "txtName": "Nebulyte: Oh Geez Lets Not Think About This One..."
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Bubbulyte#Spring Splendor|Spring Splendor]]",
+                        "txtName": "Bubbulyte: Spring Splendor"
+                    },
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentHats38", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Spring Splendor]]", "txtName": "Spring Splendor"},
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentHats32", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Spring Splendor]]", "txtName": "Spring Splendor"},
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentHats56", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Spring Splendor]]", "txtName": "Spring Splendor"},
+                    <SourceModel>{"wikiName": "Easter Event", "txtName": "Easter Event"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("ClassSwap", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Spring Splendor]]", "txtName": "Spring Splendor"},
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("ResetBox", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Spring Splendor]]", "txtName": "Spring Splendor"},
+                    <SourceModel>{
+                        "wikiName": "[[Lord of the Hunt#Untitled Quest|Untitled Quest]]",
+                        "txtName": "Lord of the Hunt: Untitled Quest"
+                    },
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                ],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -11516,17 +11610,6 @@ export const initSourceRepo = () => {
                     }
                 ]
             }),
-        new SourcesBase("ResetBox", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Lord of the Hunt#Untitled Quest|Untitled Quest]]",
-                        "txtName": "Lord of the Hunt: Untitled Quest"
-                    },
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
         new SourcesBase("Trophy10", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
@@ -11947,36 +12030,11 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("Quest71", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Rift Ripper#Entering The Rift...|Entering The Rift...]]",
-                        "txtName": "Rift Ripper: Entering The Rift..."
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Nebulyte#Chizoar Slayer|Chizoar Slayer]]",
-                        "txtName": "Nebulyte: Chizoar Slayer"
-                    }
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
         new SourcesBase("CardPack5", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
                         "wikiName": "[[Nebulyte#Chizoar Slayer|Chizoar Slayer]]",
                         "txtName": "Nebulyte: Chizoar Slayer"
-                    },
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("CardPack6", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Nebulyte#Oh Geez Lets Not Think About This One...|Oh Geez Lets Not Think About This One...]]",
-                        "txtName": "Nebulyte: Oh Geez Lets Not Think About This One..."
                     },
                     <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
                 ],
@@ -12024,11 +12082,6 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("EquipmentHats35", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("EquipmentHats38", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
@@ -12089,11 +12142,6 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("GemQ9", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("ClassSwap", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
@@ -13853,14 +13901,6 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("CardsY2", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{"wikiName": "[[2021 Giftmas Box]]", "txtName": "2021 Giftmas Box"},
-                    <SourceModel>{"wikiName": "[[Choco Box]]", "txtName": "Choco Box"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
         new SourcesBase("CardsX0", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
@@ -14206,11 +14246,6 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentHats56", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "Easter Event", "txtName": "Easter Event"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
         new SourcesBase("EquipmentHats63", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "Summer Break Event", "txtName": "Summer Break Event"}],
                 "recipeFrom": [],
@@ -14357,11 +14392,6 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("EquipmentHats31", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("EquipmentHats32", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []

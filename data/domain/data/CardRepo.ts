@@ -248,7 +248,7 @@ export const initCardRepo = () => {
             }),
         new CardDataBase("Blank", <CardDataModel>{
                 "cardID": "A0",
-                "category": "Bosses",
+                "category": "Event",
                 "perTier": 10,
                 "effect": "+{% Base HP",
                 "bonus": 3,
@@ -282,7 +282,7 @@ export const initCardRepo = () => {
                 "cardID": "C16",
                 "category": "Easy Resources",
                 "perTier": 10,
-                "effect": "+{% Smithing EXP",
+                "effect": "+{% Smithing EXP (Passive)",
                 "bonus": 4,
                 "order": 4
             }),
@@ -386,7 +386,7 @@ export const initCardRepo = () => {
                 "cardID": "D16",
                 "category": "Medium Resources",
                 "perTier": 10,
-                "effect": "+{% Smithing EXP",
+                "effect": "+{% Smithing EXP (Passive)",
                 "bonus": 7,
                 "order": 4
             }),
@@ -1557,6 +1557,22 @@ export const initCardRepo = () => {
                 "effect": "+{% Defence from Equipment",
                 "bonus": 3,
                 "order": 16
+            }),
+        new CardDataBase("springEvent1", <CardDataModel>{
+                "cardID": "Y16",
+                "category": "Event",
+                "perTier": 1,
+                "effect": "+{% Class EXP (Passive)",
+                "bonus": 2,
+                "order": 17
+            }),
+        new CardDataBase("springEvent2", <CardDataModel>{
+                "cardID": "Y17",
+                "category": "Event",
+                "perTier": 1,
+                "effect": "+{% All Skill EXP (Passive)",
+                "bonus": 2,
+                "order": 18
             })    
 ]
 }
