@@ -105,7 +105,7 @@ export class Meal {
             return roundResult ? round(finalMath) : finalMath;
         }
 
-        const finalMath = (1 + ((mainFrameBonus +  this.shinyBonus) / 100)) * level * this.bonusQty;
+        const finalMath = (1 + ((mainFrameBonus + this.shinyBonus) / 100)) * level * this.bonusQty;
         return roundResult ? round(finalMath) : finalMath;
     }
 
@@ -192,7 +192,7 @@ export class Kitchen {
 
     getMealSpeed = (vialBonus: number, stampBonus: number, mealCookBonus: number, jewel0Bonus: number, cardBonus: number, kitchenEffBonus: number, jewel14Bonus: number, diamonChef: number, achieve225: boolean, achieve224: boolean, atom8Bonus: number, artifact13Bonus: number, gamingBonus: number, bloodMarrowBonus: number) => {
         const baseMath = 10 * (1 + (this.richelin ? 2 : 0)) * Math.max(1, diamonChef) * Math.max(1, atom8Bonus) * (1 + gamingBonus / 100);
-        const moreMath = (1 + (this.mealLevels / 10)) * (1 + (artifact13Bonus / 100)); 
+        const moreMath = (1 + (this.mealLevels / 10)) * (1 + (artifact13Bonus / 100));
         const bonusMath = (1 + (stampBonus + Math.max(0, jewel14Bonus)) / 100) * (1 + mealCookBonus / 100) * Math.max(1, jewel0Bonus);
         const cardAndAchiImpact = 1 + Math.min(cardBonus + (20 * (achieve225 ? 1 : 0)) + (10 * (achieve224 ? 1 : 0)), 100) / 100;
         return baseMath *
@@ -201,7 +201,7 @@ export class Kitchen {
             bonusMath *
             cardAndAchiImpact *
             (1 + (kitchenEffBonus * Math.floor((this.mealLevels + (this.recipeLevels + this.luckLevels)) / 10)) / 100) *
-            (bloodMarrowBonus /100); // lavacode for some reason divides this by 100
+            (1 + bloodMarrowBonus / 100); // lavacode for some reason divides this by 100
     }
 
     getFireSpeed = (vialBonus: number, stampBonus: number, mealBonus: number, cardBonus: number, kitchenEffBonus: number, diamonChef: number, atom8Bonus: number, gamingBonus: number) => {
@@ -450,11 +450,10 @@ export const updateCooking = (data: Map<string, any>) => {
     const artifactBonus = sailing.artifacts[13].getBonus();
     const atomBonus = collider.atoms[8].getBonus();
     const gamingBonus = gaming.totalizer.getBonus(TotalizerBonus.Cooking);
-    
-    const bloodMarrowTalent = players.find(player => player.class == "Voidwalker")?.talents.find(talent => talent.name == "Blood Marrow");
-    const totalMeals = cooking?.meals.reduce((sum, meal) => sum += meal.level, 0)
-    const bloodMarrowBasePercent = bloodMarrowTalent?.getBonus() ?? 0;
-    const bloodMarrowBonus = (1 + (bloodMarrowBasePercent/100)) ** totalMeals;
+
+    const bestbloodMarrowBonus = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 59)?.getBonus() ?? 0)));
+    const totalMeals = cooking.meals.reduce((sum, meal) => sum += meal.level, 0)
+    const bloodMarrowBonus = Math.pow(Math.min(1.012, 1 + (bestbloodMarrowBonus / 100)), totalMeals);
 
     // Fire speed
     const fireVialBonus = alchemy.getVialBonusForKey("RecCook");
@@ -488,7 +487,7 @@ export const updateCooking = (data: Map<string, any>) => {
     cooking.meals.forEach(meal => {
         const cookingSpeed = meal.cookingContribution > 0 ? meal.cookingContribution : totalContribution;
         meal.maxLevel += artifactMaxMealLevel;
-        
+
         // No need to do any maths for max level meals.
         if (meal.level == meal.maxLevel) {
             return;
