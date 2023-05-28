@@ -14,6 +14,7 @@ import { Player } from "./player";
 import { Sailing } from "./sailing";
 import { Sigils } from "./sigils";
 import { Stamp } from "./stamps";
+import { ClassIndex } from "./talents";
 
 const spiceValues: number[] = "0 3 5 8 10 13 15 19 20 23 27 31 33 37 41 45 48 50 53 56".split(" ").map(value => parseInt(value));
 const mealLuckValues: number[] = "1 .20 .10 .05 .02 .01 .004 .001 .0005 .0003".split(" ").map(value => parseFloat(value));
@@ -190,7 +191,7 @@ export class Kitchen {
 
     constructor(public index: number) { }
 
-    getMealSpeed = (vialBonus: number, stampBonus: number, mealCookBonus: number, jewel0Bonus: number, cardBonus: number, kitchenEffBonus: number, jewel14Bonus: number, diamonChef: number, achieve225: boolean, achieve224: boolean, atom8Bonus: number, artifact13Bonus: number, gamingBonus: number, bloodMarrowBonus: number) => {
+    getMealSpeed = (vialBonus: number, stampBonus: number, mealCookBonus: number, jewel0Bonus: number, cardBonus: number, kitchenEffBonus: number, jewel14Bonus: number, diamonChef: number, achieve225: boolean, achieve224: boolean, atom8Bonus: number, artifact13Bonus: number, gamingBonus: number, bloodMarrowBonus: number, superChowBonus: number) => {
         const baseMath = 10 * (1 + (this.richelin ? 2 : 0)) * Math.max(1, diamonChef) * Math.max(1, atom8Bonus) * (1 + gamingBonus / 100);
         const moreMath = (1 + (this.mealLevels / 10)) * (1 + (artifact13Bonus / 100));
         const bonusMath = (1 + (stampBonus + Math.max(0, jewel14Bonus)) / 100) * (1 + mealCookBonus / 100) * Math.max(1, jewel0Bonus);
@@ -201,7 +202,8 @@ export class Kitchen {
             bonusMath *
             cardAndAchiImpact *
             (1 + (kitchenEffBonus * Math.floor((this.mealLevels + (this.recipeLevels + this.luckLevels)) / 10)) / 100) *
-            (1 + bloodMarrowBonus / 100); // lavacode for some reason divides this by 100
+            (1 + bloodMarrowBonus / 100) * // lavacode for some reason divides this by 100
+            Math.max(1, superChowBonus);
     }
 
     getFireSpeed = (vialBonus: number, stampBonus: number, mealBonus: number, cardBonus: number, kitchenEffBonus: number, diamonChef: number, atom8Bonus: number, gamingBonus: number) => {
@@ -455,6 +457,15 @@ export const updateCooking = (data: Map<string, any>) => {
     const totalMeals = cooking.meals.reduce((sum, meal) => sum += meal.level, 0)
     const bloodMarrowBonus = Math.pow(Math.min(1.012, 1 + (bestbloodMarrowBonus / 100)), totalMeals);
 
+    const lastIndexBloodBerserker = players.filter(player => player.classId == ClassIndex.Blood_Berserker).sort((player1, player2) => player1.playerID > player2.playerID ? 1 : -1)[0] ?? undefined;
+    const enhancementLevel = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 49)?.level ?? 0)));
+    let superChowBonus = 0;
+    // If we have a blood berserker and the voidwalker enhancement level is at least 125, we get a super chow bonus
+    if (lastIndexBloodBerserker && enhancementLevel >= 125) {
+        const killsOver100M = Object.entries(lastIndexBloodBerserker.killInfo).reduce((sum, [_, value]) => sum += value > 1e8 ? 1 : 0, 0);
+        superChowBonus = Math.pow(1.1, killsOver100M);
+    }
+
     // Fire speed
     const fireVialBonus = alchemy.getVialBonusForKey("RecCook");
     const fireStampBonus = stamps.flatMap(tab => tab).filter(stamp => stamp.bonus.includes("New Recipe Cooking Speed")).reduce((sum, stamp) => sum += stamp.getBonus(), 0);
@@ -467,7 +478,7 @@ export const updateCooking = (data: Map<string, any>) => {
 
     let totalContribution = 0;
     cooking.kitchens.forEach(kitchen => {
-        kitchen.mealSpeed = kitchen.getMealSpeed(vialBonus, stampBonus, mealSpeedBonus, jewel0Bonus, cardBonus, kitchenEfficientBonus, jewel14Bonus, diamonChef, achievements[225].completed, achievements[224].completed, atomBonus, artifactBonus, gamingBonus, bloodMarrowBonus);
+        kitchen.mealSpeed = kitchen.getMealSpeed(vialBonus, stampBonus, mealSpeedBonus, jewel0Bonus, cardBonus, kitchenEfficientBonus, jewel14Bonus, diamonChef, achievements[225].completed, achievements[224].completed, atomBonus, artifactBonus, gamingBonus, bloodMarrowBonus, superChowBonus);
         kitchen.fireSpeed = kitchen.getFireSpeed(fireVialBonus, fireStampBonus, fireSpeedMealBonus, cardBonus, kitchenEfficientBonus, diamonChef, atomBonus, gamingBonus);
         kitchen.recipeLuck = kitchen.getLuck();
 
