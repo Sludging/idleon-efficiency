@@ -649,12 +649,21 @@ export const updatePlayerStarSigns = (data: Map<string, any>) => {
     })
 }
 
+export const updatePlayerDeathnote = (data: Map<string, any>) => {
+    const players = data.get("players") as Player[];
+    const deathnote = data.get("deathnote") as Deathnote;
+
+    // Track player deathnote data on the player object as well.
+    players.forEach(player => {
+        player.killInfo = deathnote.playerKillsByMap.get(player.playerID)!;
+    })
+}
+
 export const updatePlayers = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const obols = data.get("obols") as ObolsData;
     const alchemy = data.get("alchemy") as Alchemy;
     const divinity = data.get("divinity") as Divinity;
-    const deathnote = data.get("deathnote") as Deathnote;
 
     // Set player active bubble array, easier to work with.
     players.forEach(player => {
@@ -667,11 +676,6 @@ export const updatePlayers = (data: Map<string, any>) => {
             }).filter(notUndefined);
             player.activeBubbles = bubbleArray;
         }
-    })
-
-    // Track player deathnote data on the player object as well.
-    players.forEach(player => {
-        player.killInfo = deathnote.playerKillsByMap.get(player.playerID)!;
     })
 
     // Update player obols info so we can use it in maths
