@@ -457,7 +457,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const totalMeals = cooking.meals.reduce((sum, meal) => sum += meal.level, 0)
     const bloodMarrowBonus = Math.pow(Math.min(1.012, 1 + (bestbloodMarrowBonus / 100)), totalMeals);
 
-    const lastIndexBloodBerserker = players.filter(player => player.classId == ClassIndex.Blood_Berserker).sort((player1, player2) => player1.playerID > player2.playerID ? 1 : -1)[0] ?? undefined;
+    const lastIndexBloodBerserker = players.filter(player => player.classId == ClassIndex.Blood_Berserker).sort((player1, player2) => player1.playerID - player2.playerID)[0] ?? undefined;
     const enhancementLevel = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 49)?.level ?? 0)));
     let superChowBonus = 0;
     // If we have a blood berserker and the voidwalker enhancement level is at least 125, we get a super chow bonus
