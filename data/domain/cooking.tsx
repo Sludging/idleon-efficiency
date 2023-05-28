@@ -462,9 +462,10 @@ export const updateCooking = (data: Map<string, any>) => {
     let superChowBonus = 0;
     // If we have a blood berserker and the voidwalker enhancement level is at least 125, we get a super chow bonus
     if (lastIndexBloodBerserker && enhancementLevel >= 125) {
-        const killsOver100M = Object.entries(lastIndexBloodBerserker.killInfo).reduce((sum, [_, value]) => sum += value > 1e8 ? 1 : 0, 0);
+        const killsOver100M = Array.from(lastIndexBloodBerserker.killInfo.entries()).reduce((sum, [_, value]) => sum += value >= 1e8 ? 1 : 0, 0);
         superChowBonus = Math.pow(1.1, killsOver100M);
     }
+
 
     // Fire speed
     const fireVialBonus = alchemy.getVialBonusForKey("RecCook");
