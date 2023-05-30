@@ -315,6 +315,52 @@ function ArenaBonusDisplay() {
     )
 }
 
+function ShinyDisplay() {
+
+    const [breeding, setBreeding] = useState<BreedingDomain>();
+    const appContext = useContext(AppContext);
+    const size = useContext(ResponsiveContext);
+
+    useEffect(() => {
+        if (appContext) {
+            const theData = appContext.data.getData();
+            setBreeding(theData.get("breeding"));
+        }
+    }, [appContext]);
+
+    if (!breeding) {
+        return (
+            <Box>
+                Still loading
+            </Box>
+        )
+    }
+    return (
+        <Box>
+            <Text>Shiny Bonuses</Text>
+            <Grid columns={size =="small" ? ["1"] : ["1/3", "1/3", "1/3"]} fill>
+                {
+                    breeding.basePets.filter(pet => pet.data.petId != "_").map((pet, pIndex) => {
+                        const enemy = EnemyInfo.find(enemy => enemy.id == pet.data.petId);
+                        return (
+                            <ShadowBox background="dark-1" key={pIndex} direction="row" gap="medium" margin={{ bottom: 'medium', right: 'small'}} align="center" pad="small" style={{opacity: pet.shinyLevel > 0? 1 : .5}}>
+                                <IconImage data={{ location: enemy?.id.toLowerCase() ?? "Unknown", width: 67, height: 67 }} style={{ paddingBottom: '15px'}} />
+                                <Grid columns={["50%", "50%"]} fill align="center">
+                                    <Box>
+                                        <Text size="16px">Lvl: {pet.shinyLevel}</Text>
+                                        <Text size="16px">{Math.floor(pet.shinyProgress)}/{pet.getNextShinyGoal()} days</Text>
+                                    </Box>
+                                    <Text size="16px">{pet.getShinyText()}</Text>
+                                </Grid>
+                            </ShadowBox>
+                        )
+                    })
+                }
+            </Grid>
+        </Box>
+    )
+}
+
 function EggDisplay() {
     const [breeding, setBreeding] = useState<BreedingDomain>();
     const appContext = useContext(AppContext);
@@ -395,7 +441,7 @@ function Breeding() {
                 <EggDisplay />
             </Box>
             <Box align="center" direction="row" justify="center" gap="small">
-                {["Territory", "Upgrades", "Arena"].map((tabName, index) => (
+                {["Territory", "Upgrades", "Arena", "Shiny"].map((tabName, index) => (
                     <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
                 ))
                 }
@@ -403,6 +449,7 @@ function Breeding() {
             {activeTab == "Arena" && <ArenaBonusDisplay />}
             {activeTab == "Upgrades" && <PetUpgradeDisplay />}
             {activeTab == "Territory" && <TerritoryDisplay />}
+            {activeTab == "Shiny" && <ShinyDisplay />}
             {/* {activeTab == "Pets" && <PetDisplay />} */}
         </Box>
     )
