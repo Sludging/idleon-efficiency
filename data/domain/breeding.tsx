@@ -228,6 +228,11 @@ export class Pet {
         return this.shinyBonus.text.replace(/{/g, this.getShinyBonus().toString());
     }
 
+    getNextShinyGoal = () => {
+        if (this.shinyLevel == 0) return 0;
+        return Math.floor((1 + Math.pow(this.shinyLevel, 1.6)) * Math.pow(1.7, this.shinyLevel));
+    }
+
     static fromBase(data: PetStatBase[], genes: PetGene[]): Pet[] {
         const randoList = initRandoListRepo();
         return data.map(pet => {
