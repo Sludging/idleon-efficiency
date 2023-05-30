@@ -341,7 +341,6 @@ function ShinyDisplay() {
             <Grid columns={size =="small" ? ["1"] : ["1/3", "1/3", "1/3"]} fill>
                 {
                     breeding.basePets.filter(pet => pet.data.petId != "_").map((pet, pIndex) => {
-                        console.log(size);
                         const enemy = EnemyInfo.find(enemy => enemy.id == pet.data.petId);
                         return (
                             <ShadowBox background="dark-1" key={pIndex} direction="row" gap="medium" margin={{ bottom: 'medium', right: 'small'}} align="center" pad="small" style={{opacity: pet.shinyLevel > 0? 1 : .5}}>
