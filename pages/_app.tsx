@@ -94,6 +94,10 @@ const customTheme = deepMerge(dark, {
       "blue-2": "#283F70",
       "blue-3": "#6dcdff",
       "gold-1": "#ffc142",
+      "stamp-positive-1": "#137547",
+      "stamp-positive-2": "#054a29",
+      "stamp-negative-1": "#d62839",
+      "stamp-negative-2": "#780000",
     }
   },
   notification: {

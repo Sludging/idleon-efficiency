@@ -9,8 +9,8 @@ import {
     Table,
     TableBody,
     TableRow,
-    TableFooter,
-    CheckBox
+    CheckBox,
+    ThemeContext
 } from "grommet"
 
 import { Stamp } from '../../data/domain/stamps';
@@ -28,12 +28,26 @@ import TextAndLabel, { ComponentAndLabel } from "../../components/base/TextAndLa
 import { AtomCollider } from "../../data/domain/atomCollider";
 import { Storage } from "../../data/domain/storage";
 import { CircleInformation } from "grommet-icons";
+import { normalizeColor } from "grommet/utils";
 
 const ShadowBox = styled(Box)`
     box-shadow: -7px 8px 16px 0 rgba(0,0,0,0.17)
 `
 
-function StampDisplay({ stamp, index, highlightUpgradable, storageAmount = 0 }: { stamp: Stamp, index: number, highlightUpgradable: Boolean, storageAmount?: number }) {
+function highlightColor(stamp: Stamp, highlight: boolean) { 
+    const theme = useContext(ThemeContext);
+    if (!highlight) {
+        return;
+    }
+    switch(true) {
+        case stamp.canUpgradeWithCoins: return normalizeColor("stamp-positive-2", theme);
+        case stamp.canUpgradeWithMats: return normalizeColor("stamp-positive-1", theme);
+        case stamp.cantCarry: return normalizeColor("stamp-negative-2", theme)
+        case stamp.lowOnResources: return normalizeColor("stamp-negative-1", theme)
+    }
+}
+
+function StampDisplay({ stamp, index, highlight, storageAmount = 0 }: { stamp: Stamp, index: number, highlight: boolean, storageAmount?: number }) {
     const size = useContext(ResponsiveContext)
     const appContext = useContext(AppContext);
     const theData = appContext.data.getData();
@@ -145,9 +159,10 @@ function StampDisplay({ stamp, index, highlightUpgradable, storageAmount = 0 }: 
             </Box>
         )
     }
+
     return (
         <Box pad="small" border={{ color: 'grey-1' }} key={`stamp_${index}_${stamp.raw_name}`}
-            style={{ backgroundColor: highlightUpgradable ? (stamp.canUpgradeWithCoins ? "green" : (stamp.canUpgradeWithMats ? "#e67300" : "")) : "" }}>
+            style={{ backgroundColor: highlightColor(stamp, highlight) }}>
             <TipDisplay
                 body={
                     <TipContent stamp={stamp} />
@@ -174,7 +189,7 @@ const HoverBox = styled(Box)`
     }
 `
 
-function StampTab({ tab, index, highlightUpgradable }: { tab: Stamp[], index: number, highlightUpgradable: Boolean }) {
+function StampTab({ tab, index, highlight }: { tab: Stamp[], index: number, highlight: boolean }) {
     const [storage, setStorage] = useState<Storage>();
     const appContext = useContext(AppContext);
     const theData = appContext.data.getData();
@@ -196,7 +211,7 @@ function StampTab({ tab, index, highlightUpgradable }: { tab: Stamp[], index: nu
                             if (stamp != undefined) {
                                 return (
                                     <HoverBox key={`tab_${index}_${stamp.raw_name}`}>
-                                        <StampDisplay stamp={stamp} index={index} highlightUpgradable={highlightUpgradable} storageAmount={stamp.materialItem ? storage?.amountInStorage(stamp.materialItem.internalName) : 0} />
+                                        <StampDisplay stamp={stamp} index={index} highlight={highlight} storageAmount={stamp.materialItem ? storage?.amountInStorage(stamp.materialItem.internalName) : 0} />
                                     </HoverBox>
                                 )
                             }
@@ -211,7 +226,8 @@ function StampTab({ tab, index, highlightUpgradable }: { tab: Stamp[], index: nu
 function Stamps() {
     const [stampData, setStampData] = useState<Stamp[][]>();
     const appContext = useContext(AppContext);
-    const [highlightUpgradable, setHighlightUpgradable] = useState(Boolean);
+    const theme = useContext(ThemeContext);
+    const [highlight, sethighlight] = useState(false);
 
     const hydrogen = useMemo(() => {
         if (appContext.data.getData().size > 0) {
@@ -258,17 +274,19 @@ function Stamps() {
                 {hydrogen && hydrogen.level > 0 && <TextAndLabel label="Atom Discount" text={`${stampData[0][0].atomDiscount}% (+${hydrogen.level * hydrogen.data.bonusPerLv}%/day)`} margin={{ bottom: 'small' }} />}
                 <Box direction="row" align="center" style={{ justifyContent: "left" }} gap="xsmall">
                     <CheckBox
-                        checked={highlightUpgradable}
-                        label="Show Upgradable"
-                        onChange={(event) => setHighlightUpgradable(event.target.checked)}
+                        checked={highlight}
+                        label="Highlight Stamps"
+                        onChange={(event) => sethighlight(event.target.checked)}
                     />
                     <TipDisplay
-                        heading="Show Upgradable"
+                        heading="Highlight Stamps"
                         body={
                             <Box gap="xsmall">
-                                <Text size="small">Enable this check to see what you can upgrade right now!</Text>
-                                <Text size="small" ><span style={{ color: "#e67300" }}>⬤</span> A stamp can be upgraded with materials.</Text>
-                                <Text size="small" ><span style={{ color: "green" }}>⬤</span> A stamp can be upgraded with coins.</Text>
+                                <Text size="small">Enable this check to highlight stamps based on certain conditions:</Text>
+                                <Text><span style={{ color: normalizeColor("stamp-positive-1", theme) }}>⬤</span> Can be upgraded with materials.</Text>
+                                <Text><span style={{ color: normalizeColor("stamp-positive-2", theme) }}>⬤</span> Can be upgraded with coins.</Text>
+                                <Text><span style={{ color: normalizeColor("stamp-negative-1", theme) }}>⬤</span> Missing materials or money.</Text>
+                                <Text><span style={{ color: normalizeColor("stamp-negative-2", theme) }}>⬤</span> Not enough carry cap.</Text>
                             </Box>
                         }
                     >
@@ -280,7 +298,7 @@ function Stamps() {
                 <Grid columns={{ size: '300px' }} gap="none">
                     {
                         stampData && stampData.map((tab, index) => {
-                            return (<StampTab key={`tab_${index}`} tab={tab} index={index} highlightUpgradable={highlightUpgradable} />)
+                            return (<StampTab key={`tab_${index}`} tab={tab} index={index} highlight={highlight} />)
                         })
                     }
                 </Grid>
