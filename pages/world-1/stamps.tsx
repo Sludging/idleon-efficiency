@@ -74,7 +74,12 @@ function StampDisplay({ stamp, index, highlightUpgradable, storageAmount = 0 }: 
                                 Object.entries(stamp.maxCarryInfo).map(([maxLevel, costInfo], index) => (
                                     <TableRow key={`${stamp.name}_${maxLevel}`}>
                                         <TableCell>{maxLevel}</TableCell>
-                                        <TableCell><Box direction="row" align="center"><Text>{nFormatter(costInfo.costToLevel)}</Text><IconImage data={(stamp.materialItem as Item).getImageData()} scale={0.7} /></Box></TableCell>
+                                        <TableCell>
+                                            <Box direction="row" align="center">
+                                                <Text color={stamp.maxCarryAmount > costInfo.costToLevel ? "" : "accent-1"} size={stamp.maxCarryAmount > costInfo.costToLevel ? "small" : ""} >{nFormatter(costInfo.costToLevel)}</Text>
+                                                <IconImage data={(stamp.materialItem as Item).getImageData()} scale={0.7} />
+                                            </Box>
+                                        </TableCell>
                                         <TableCell><CoinsDisplay coinScale={0.8} coinMap={getCoinsArray(costInfo.goldCostToLevel)} maxCoins={3} /></TableCell>
                                         <TableCell>{`${costInfo.colliderDiscount}%`}</TableCell>
                                     </TableRow>
@@ -100,7 +105,7 @@ function StampDisplay({ stamp, index, highlightUpgradable, storageAmount = 0 }: 
                                     Object.entries(stamp.maxCarryInfo).slice(0, -1).map(([maxLevel, costInfo], index) => (
                                         <TableRow key={`${stamp.name}_${maxLevel}`}>
                                             <TableCell>{maxLevel}</TableCell>
-                                            <TableCell>{ costInfo.costToLevel > 0 && <Box direction="row" align="center"><Text size="small">{nFormatter(costInfo.costToLevel)}{costInfo.currentDiscount ? " *" : ""}</Text><IconImage data={(stamp.materialItem as Item).getImageData()} scale={0.7} /></Box>}</TableCell>
+                                            <TableCell>{costInfo.costToLevel > 0 && <Box direction="row" align="center"><Text size="small">{nFormatter(costInfo.costToLevel)}{costInfo.currentDiscount ? " *" : ""}</Text><IconImage data={(stamp.materialItem as Item).getImageData()} scale={0.7} /></Box>}</TableCell>
                                             <TableCell><CoinsDisplay coinScale={0.8} coinMap={getCoinsArray(costInfo.goldCostToLevel)} maxCoins={3} /></TableCell>
                                             <TableCell>{`${costInfo.colliderDiscount}%`}</TableCell>
                                         </TableRow>
@@ -141,20 +146,20 @@ function StampDisplay({ stamp, index, highlightUpgradable, storageAmount = 0 }: 
         )
     }
     return (
-        <Box pad="small" border={{ color: 'grey-1' }} key={`stamp_${index}_${stamp.raw_name}`} 
-            style={{backgroundColor: highlightUpgradable ? (stamp.canUpgradeWithCoins ? "green" : (stamp.canUpgradeWithMats ? "#e67300" : "")) : ""}}>
+        <Box pad="small" border={{ color: 'grey-1' }} key={`stamp_${index}_${stamp.raw_name}`}
+            style={{ backgroundColor: highlightUpgradable ? (stamp.canUpgradeWithCoins ? "green" : (stamp.canUpgradeWithMats ? "#e67300" : "")) : "" }}>
             <TipDisplay
                 body={
                     <TipContent stamp={stamp} />
                 }
                 heading={`${stamp.name} (${stamp.level}/${stamp.maxLevel})`}
-                direction={ Number(/Stamp[ABC](\d+)/g.exec(stamp.raw_name)?.[1]) > 28 ? TipDirection.Up : TipDirection.Down}
+                direction={Number(/Stamp[ABC](\d+)/g.exec(stamp.raw_name)?.[1]) > 28 ? TipDirection.Up : TipDirection.Down}
                 size="small"
                 visibility={stamp.name == "Blank" || stamp.name == "FILLER" ? 'none' : undefined}
             >
-                <Box direction="row" align="center" gap="xsmall" style={{ 
-                        opacity: stamp.level > 0 ? 1 : 0.2, 
-                        }}>
+                <Box direction="row" align="center" gap="xsmall" style={{
+                    opacity: stamp.level > 0 ? 1 : 0.2,
+                }}>
                     <IconImage data={stamp.getImageData()} scale={0.4} />
                     <Text size="small">{stamp.level}</Text>
                 </Box>
@@ -169,7 +174,7 @@ const HoverBox = styled(Box)`
     }
 `
 
-function StampTab({ tab, index, highlightUpgradable }: { tab: Stamp[], index: number, highlightUpgradable: Boolean}) {
+function StampTab({ tab, index, highlightUpgradable }: { tab: Stamp[], index: number, highlightUpgradable: Boolean }) {
     const [storage, setStorage] = useState<Storage>();
     const appContext = useContext(AppContext);
     const theData = appContext.data.getData();
@@ -191,7 +196,7 @@ function StampTab({ tab, index, highlightUpgradable }: { tab: Stamp[], index: nu
                             if (stamp != undefined) {
                                 return (
                                     <HoverBox key={`tab_${index}_${stamp.raw_name}`}>
-                                        <StampDisplay  stamp={stamp} index={index} highlightUpgradable={highlightUpgradable} storageAmount={stamp.materialItem ? storage?.amountInStorage(stamp.materialItem.internalName) : 0} />
+                                        <StampDisplay stamp={stamp} index={index} highlightUpgradable={highlightUpgradable} storageAmount={stamp.materialItem ? storage?.amountInStorage(stamp.materialItem.internalName) : 0} />
                                     </HoverBox>
                                 )
                             }
@@ -251,25 +256,25 @@ function Stamps() {
             <Box direction="row" gap="medium">
                 <TextAndLabel label="Total Levels" text={totalLevels?.toString()} margin={{ bottom: 'small' }} />
                 {hydrogen && hydrogen.level > 0 && <TextAndLabel label="Atom Discount" text={`${stampData[0][0].atomDiscount}% (+${hydrogen.level * hydrogen.data.bonusPerLv}%/day)`} margin={{ bottom: 'small' }} />}
-            </Box>
-            <Box direction="row" align="center" style={{justifyContent: "left"}}>
-                <CheckBox
-                    checked={highlightUpgradable}
-                    label="Show Upgradable"
-                    onChange={(event) => setHighlightUpgradable(event.target.checked)}
-                />
-                <TipDisplay
-                    heading="Show Upgradable"
-                    body={
-                        <Box gap="xsmall">
-                            <Text size="small">Enable this check to see what you can upgrade right now!</Text>
-                            <Text size="small" ><span style={{color: "#e67300"}}>⬤</span> A stamp can be upgraded with materials.</Text>
-                            <Text size="small" ><span style={{color: "green"}}>⬤</span> A stamp can be upgraded with coins.</Text>
-                        </Box>
-                    }
-                >
-                    <CircleInformation size="small" />
-                </TipDisplay>
+                <Box direction="row" align="center" style={{ justifyContent: "left" }} gap="xsmall">
+                    <CheckBox
+                        checked={highlightUpgradable}
+                        label="Show Upgradable"
+                        onChange={(event) => setHighlightUpgradable(event.target.checked)}
+                    />
+                    <TipDisplay
+                        heading="Show Upgradable"
+                        body={
+                            <Box gap="xsmall">
+                                <Text size="small">Enable this check to see what you can upgrade right now!</Text>
+                                <Text size="small" ><span style={{ color: "#e67300" }}>⬤</span> A stamp can be upgraded with materials.</Text>
+                                <Text size="small" ><span style={{ color: "green" }}>⬤</span> A stamp can be upgraded with coins.</Text>
+                            </Box>
+                        }
+                    >
+                        <CircleInformation size="small" />
+                    </TipDisplay>
+                </Box>
             </Box>
             <ShadowBox flex={false} background="dark-1" pad="small">
                 <Grid columns={{ size: '300px' }} gap="none">
