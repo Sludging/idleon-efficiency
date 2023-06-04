@@ -34,25 +34,13 @@ const ShadowBox = styled(Box)`
     box-shadow: -7px 8px 16px 0 rgba(0,0,0,0.17)
 `
 
-function highlightColor(stamp: Stamp, highlight: boolean) { 
-    const theme = useContext(ThemeContext);
-    if (!highlight) {
-        return;
-    }
-    switch(true) {
-        case stamp.canUpgradeWithCoins: return normalizeColor("stamp-positive-2", theme);
-        case stamp.canUpgradeWithMats: return normalizeColor("stamp-positive-1", theme);
-        case stamp.cantCarry: return normalizeColor("stamp-negative-2", theme)
-        case stamp.lowOnResources: return normalizeColor("stamp-negative-1", theme)
-    }
-}
-
 function StampDisplay({ stamp, index, highlight, storageAmount = 0 }: { stamp: Stamp, index: number, highlight: boolean, storageAmount?: number }) {
     const size = useContext(ResponsiveContext)
     const appContext = useContext(AppContext);
     const theData = appContext.data.getData();
     const allItems = theData.get("itemsData") as Item[];
     const stampItem = allItems.find(item => item.internalName == stamp.raw_name);
+    const theme = useContext(ThemeContext);
 
     function TipContent({ stamp }: { stamp: Stamp }) {
         if (stamp.level == 0) {
@@ -160,9 +148,21 @@ function StampDisplay({ stamp, index, highlight, storageAmount = 0 }: { stamp: S
         )
     }
 
+    function highlightColor() { 
+        if (!highlight) {
+            return;
+        }
+        switch(true) {
+            case stamp.canUpgradeWithCoins: return normalizeColor("stamp-positive-2", theme);
+            case stamp.canUpgradeWithMats: return normalizeColor("stamp-positive-1", theme);
+            case stamp.cantCarry: return normalizeColor("stamp-negative-2", theme)
+            case stamp.lowOnResources: return normalizeColor("stamp-negative-1", theme)
+        }
+    }
+
     return (
         <Box pad="small" border={{ color: 'grey-1' }} key={`stamp_${index}_${stamp.raw_name}`}
-            style={{ backgroundColor: highlightColor(stamp, highlight) }}>
+            style={{ backgroundColor: highlightColor() }}>
             <TipDisplay
                 body={
                     <TipContent stamp={stamp} />
