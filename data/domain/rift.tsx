@@ -193,7 +193,7 @@ export class ConstructionMastery extends RiftBonus {
             case bonusIndex == 3: return this.getRank() > bonusIndex ? 100 : 0;
             case bonusIndex == 4: return this.getRank() > bonusIndex ? 5 * ((this.buildingLevels - 1250) / 10) : 0;
             case bonusIndex == 5: return this.getRank() > bonusIndex ? 100 : 0;
-            case bonusIndex == 5: return this.getRank() > bonusIndex ? 30 : 0;
+            case bonusIndex == 6: return this.getRank() > bonusIndex ? 30 : 0;
             default: return 0;
         }
     }
