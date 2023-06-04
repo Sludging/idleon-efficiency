@@ -42,8 +42,7 @@ export class Building {
     }
 
     getBuildCost = (level: number = this.level) => {
-        //misc stores the max possible level after all upgrades (just how wikibot does it)
-        if (level == Math.max(this.maxLvl, this.misc)) {
+        if (level == this.maxLvl) {
             return 0;
         }
         
