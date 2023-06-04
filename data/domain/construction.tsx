@@ -1,11 +1,12 @@
 import { range, secondsSinceUpdate } from "../utility";
 import { Achievement } from "./achievements";
 import { Alchemy } from "./alchemy";
-import { AtomCollider } from "./atomCollider";
+import { AtomCollider, CarbonAtom } from "./atomCollider";
 import { Building } from "./buildings";
 import { Cooking } from "./cooking";
 import { initBuildingRepo } from "./data/BuildingRepo";
 import { ImageData } from "./imageData";
+import { ConstructionMastery, Rift } from "./rift";
 import { Stamp } from "./stamps";
 
 const BOOKS_FOR_MAX_CHECKOUT = 20;
@@ -67,10 +68,7 @@ export default function parseConstruction(towerData: number[], optionsList: any[
         building.nextLevelUnlocked = (building.level + 1) == towerData[building.index + construction.buildings.length];
 
         // Current XP is the last set of indexes, with 12 in the middle of misc info.
-        building.currentXP = towerData[building.index + 12 + construction.buildings.length * 2];
-
-        building.finishedUpgrade = building.currentXP > building.getBuildCost();
-        
+        building.currentXP = towerData[building.index + 12 + construction.buildings.length * 2];        
     });
     // 55 = building slot 1 = tower number
     // 56 = building slot 2 = -1 if empty
@@ -105,6 +103,51 @@ export const updateConstruction = (data: Map<string, any>) => {
     const cooking = data.get("cooking") as Cooking;
     const timeAway = JSON.parse((data.get("rawData") as { [k: string]: any })["TimeAway"]);
     const collider = data.get("collider") as AtomCollider;
+    const rift = data.get("rift") as Rift;
+
+    // Figure out max building levels
+    const constMastery = rift.bonuses.find(bonus => bonus.name == "Construct Mastery") as ConstructionMastery;
+    construction.buildings.forEach(building => {
+        switch(building.index) {
+            // Library
+            case 1: 
+                building.maxLvl += constMastery.getBonusByIndex(3);
+                break;
+            // Drone
+            case 6: 
+                building.maxLvl += constMastery.getBonusByIndex(1);
+                break;
+            // Wizard Towers
+            case 9:
+            case 10:
+            case 11:                
+            case 12:
+            case 13:
+            case 14:
+            case 15:
+            case 16:
+            case 17:
+                const carbonAtom = collider.atoms[5] as CarbonAtom
+                building.maxLvl += constMastery.getBonusByIndex(6) + carbonAtom.getExtraLevels();
+                break;
+            // Shrines
+            case 18:
+            case 19:
+            case 20:                
+            case 21:
+            case 22:
+            case 23:
+            case 24:
+            case 25:
+            case 26:
+                building.maxLvl += constMastery.getBonusByIndex(5);
+                break;
+        }
+
+
+        building.finishedUpgrade = building.currentXP >= building.getBuildCost();
+    })
+    
 
     // Lib checkout speed
     const mealBonus = cooking.getMealBonusForKey("Lib");
