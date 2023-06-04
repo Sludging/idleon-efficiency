@@ -82,7 +82,8 @@ export class Stamp {
     getMaterialCost = (level: number = this.level): number => {
         const matDiscount = Math.max(0.1, 1 - this.atomDiscount / 100) * (1 / (1 + (this.sigilDiscount / 100)));
         const baseCost = this.data.startV * matDiscount * Math.pow(this.data.mCostExp, Math.pow(Math.round(level / this.data.upgradeInterval) - 1, 0.8));
-        return Math.floor(Math.floor(baseCost) * Math.max(0.1, 1 - this.vialDiscount / 100));
+        const finalCost = Math.floor(Math.floor(baseCost) * Math.max(0.1, 1 - this.vialDiscount / 100));
+        return Math.max(1 ,finalCost) // Cost can never be 0;
     }
 
     // Some stamps max cap isn't realistic, not showing their caps is more realistic.
@@ -298,7 +299,6 @@ export function updateStampMaxCarry(data: Map<string, any>) {
     const collider = data.get("collider") as AtomCollider;
     const storage = data.get("storage") as Storage;
     const account = data.get("account") as Account;
-    const allItems = data.get("itemsData") as Item[];
 
     const dailyAtomDiscountIncrease = collider.atoms[0].level * collider.atoms[0].data.bonusPerLv;
     stamps.flatMap(tab => tab).forEach(stamp => {
@@ -317,14 +317,19 @@ export function updateStampMaxCarry(data: Map<string, any>) {
         stamp.setMaxLevelForCarryCap(collider.atoms[0].level > 0);
         stamp.calculateCostForNextTiers(dailyAtomDiscountIncrease);
     
-        const matInStorage = storage?.amountInStorage(stamp.materialItem?.internalName ?? "");
-        const cheapestUpgrade = stamp.maxCarryInfo[Number(Object.keys(stamp.maxCarryInfo).sort().reverse()[0])]
-        const minMatRequired = cheapestUpgrade.costToLevel;
-        const stampItem = allItems.find(item => item.internalName == stamp.raw_name);
-        if (stampItem && stampItem.sources.sources && stampItem.sources.sources.length > 0 //if stamp is obtainable in the game
-            && stamp.level > 0) { //if stamp is actually unlocked
-            stamp.canUpgradeWithMats = stamp.isMaxLevel() && stamp.maxCarryAmount >= minMatRequired && matInStorage >= minMatRequired;
-            stamp.canUpgradeWithCoins = stamp.getBonusText() != "Unobtainable" && !stamp.isMaxLevel() && account.totalMoney >= cheapestUpgrade.goldCostToLevel;
+        if (stamp.level > 0 && stampMatBagType != undefined) { // if stamp is actually unlocked and material used fits the carry cap maths.
+            // If max level, we need to upgrade with mats
+            if (stamp.isMaxLevel()) {
+                const nextTier = stamp.maxCarryInfo[stamp.maxLevel + stamp.data.upgradeInterval];
+                const matInStorage = storage?.amountInStorage(stamp.materialItem?.internalName ?? "");
+                
+                stamp.canUpgradeWithMats = stamp.isMaxLevel() && stamp.maxCarryAmount >= nextTier.costToLevel && matInStorage >= nextTier.costToLevel;
+            }
+            // else we need to use coins to max it out first.
+            else {
+                const nextTier = stamp.maxCarryInfo[stamp.maxLevel];
+                stamp.canUpgradeWithCoins =  account.totalMoney >= nextTier.goldCostToLevel;
+            }
         }
     })
 
