@@ -290,7 +290,7 @@ function Stamps() {
                             </Box>
                         }
                     >
-                        <CircleInformation size="small" />
+                        <CircleInformation color='accent-3' size="16px" />
                     </TipDisplay>
                 </Box>
             </Box>
