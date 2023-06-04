@@ -46,6 +46,8 @@ export class Stamp {
 
     canUpgradeWithCoins: boolean = false;
     canUpgradeWithMats: boolean = false;
+    lowOnResources: boolean = false;
+    cantCarry: boolean = false;
 
     // Max upgrades (key is the stamp level that will the costs in the value)
     maxCarryInfo: Record<number, {
@@ -83,7 +85,7 @@ export class Stamp {
         const matDiscount = Math.max(0.1, 1 - this.atomDiscount / 100) * (1 / (1 + (this.sigilDiscount / 100)));
         const baseCost = this.data.startV * matDiscount * Math.pow(this.data.mCostExp, Math.pow(Math.round(level / this.data.upgradeInterval) - 1, 0.8));
         const finalCost = Math.floor(Math.floor(baseCost) * Math.max(0.1, 1 - this.vialDiscount / 100));
-        return Math.max(1 ,finalCost) // Cost can never be 0;
+        return Math.max(1, finalCost) // Cost can never be 0;
     }
 
     // Some stamps max cap isn't realistic, not showing their caps is more realistic.
@@ -123,7 +125,7 @@ export class Stamp {
     // 2. The cost to unlock the next 3 "tiers" (both material and money)
     // The cost will be the total cost to reach that "max", not the cost to unlock that max.
     calculateCostForNextTiers = (discountIncrement: number) => {
-         // We currently should only have one key and that's the max carry level with max possible discount (0 if not unlocked or 90% if unlocked).
+        // We currently should only have one key and that's the max carry level with max possible discount (0 if not unlocked or 90% if unlocked).
         const maxCarryLevel = Number(Object.keys(this.maxCarryInfo)[0]);
         const nextTier = this.maxLevel + this.data.upgradeInterval;
         // If we are already at our max carry level, show the next tier cost at current discount
@@ -141,9 +143,9 @@ export class Stamp {
         const upperLimit = Math.min(maxCarryLevel, nextTier + this.data.upgradeInterval * 2); // Show at most 3 tiers + max carry level
 
         // Calculate the next 2 tiers (using for loop so can break early).
-        for (var tier = nextTier ; tier <= upperLimit; tier += this.data.upgradeInterval) {
+        for (var tier = nextTier; tier <= upperLimit; tier += this.data.upgradeInterval) {
             // Start from 0 discount, find the minimum discount required to level this tier
-            for (var atomDiscount = (tier == nextTier ? currentAtomDiscount : 0) ; atomDiscount <= 90; atomDiscount += discountIncrement) {
+            for (var atomDiscount = (tier == nextTier ? currentAtomDiscount : 0); atomDiscount <= 90; atomDiscount = Math.min(90, atomDiscount + discountIncrement)) {
                 this.atomDiscount = atomDiscount;
                 const tierCost = this.getMaterialCost(tier - this.data.upgradeInterval) // to reach this level, we only need to unlock the previous tier.
                 if (tierCost < this.maxCarryAmount) { // If we can carry this amount, we found the minimum required to reach this tier
@@ -312,23 +314,39 @@ export function updateStampMaxCarry(data: Map<string, any>) {
         }
         else {
             stamp.maxCarryAmount = ["dStone", "dQuest"].includes((stamp.materialItem as Item).typeGen) ? 999999 : 80;
-            
+
         }
         stamp.setMaxLevelForCarryCap(collider.atoms[0].level > 0);
         stamp.calculateCostForNextTiers(dailyAtomDiscountIncrease);
-    
+
         if (stamp.level > 0 && stampMatBagType != undefined) { // if stamp is actually unlocked and material used fits the carry cap maths.
             // If max level, we need to upgrade with mats
             if (stamp.isMaxLevel()) {
                 const nextTier = stamp.maxCarryInfo[stamp.maxLevel + stamp.data.upgradeInterval];
                 const matInStorage = storage?.amountInStorage(stamp.materialItem?.internalName ?? "");
-                
-                stamp.canUpgradeWithMats = stamp.isMaxLevel() && stamp.maxCarryAmount >= nextTier.costToLevel && matInStorage >= nextTier.costToLevel;
+                switch (true) {
+                    case stamp.maxCarryAmount >= nextTier.costToLevel && matInStorage >= nextTier.costToLevel:
+                        stamp.canUpgradeWithMats = true;
+                        break;
+                    case stamp.maxCarryAmount < nextTier.costToLevel:
+                        stamp.cantCarry = true;
+                        break;
+                    case matInStorage < nextTier.costToLevel:
+                        stamp.lowOnResources = true;
+                        break;
+                }
             }
             // else we need to use coins to max it out first.
             else {
                 const nextTier = stamp.maxCarryInfo[stamp.maxLevel];
-                stamp.canUpgradeWithCoins =  account.totalMoney >= nextTier.goldCostToLevel;
+                if (account.totalMoney >= nextTier.goldCostToLevel) {
+                    stamp.canUpgradeWithCoins = true;
+                }
+                else {
+                    stamp.lowOnResources = true;
+                }
+                
+
             }
         }
     })
