@@ -148,11 +148,11 @@ function StampDisplay({ stamp, index, highlight, storageAmount = 0 }: { stamp: S
         )
     }
 
-    function highlightColor() { 
+    function highlightColor() {
         if (!highlight) {
             return;
         }
-        switch(true) {
+        switch (true) {
             case stamp.canUpgradeWithCoins: return normalizeColor("stamp-positive-2", theme);
             case stamp.canUpgradeWithMats: return normalizeColor("stamp-positive-1", theme);
             case stamp.cantCarry: return normalizeColor("stamp-negative-2", theme)
@@ -238,6 +238,13 @@ function Stamps() {
         return undefined;
     }, [appContext])
 
+    const gildedCount = useMemo(() => {
+        if (stampData) {
+            return stampData[0][0].gildedCount;
+        }
+        return 0;
+    }, [stampData]);
+
     useEffect(() => {
         if (appContext.data.getData().size > 0) {
             const theData = appContext.data.getData();
@@ -272,6 +279,7 @@ function Stamps() {
             <Box direction="row" gap="medium">
                 <TextAndLabel label="Total Levels" text={totalLevels?.toString()} margin={{ bottom: 'small' }} />
                 {hydrogen && hydrogen.level > 0 && <TextAndLabel label="Atom Discount" text={`${stampData[0][0].atomDiscount}% (+${hydrogen.level * hydrogen.data.bonusPerLv}%/day)`} margin={{ bottom: 'small' }} />}
+                {stampData[0][0].gildedAvailable && <TextAndLabel label="Gilded Stamps" text={`${gildedCount}`} margin={{ bottom: 'small' }} />}
                 <Box direction="row" align="center" style={{ justifyContent: "left" }} gap="xsmall">
                     <CheckBox
                         checked={highlight}
