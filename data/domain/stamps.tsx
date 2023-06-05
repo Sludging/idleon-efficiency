@@ -11,6 +11,7 @@ import { BaseItemModel } from './model/baseItemModel';
 import { StampDataModel } from './model/stampDataModel';
 import { StampItemModel } from './model/stampItemModel';
 import { Player } from './player';
+import { Rift } from './rift';
 import { Sigils } from './sigils';
 import { Storage } from './storage';
 
@@ -43,6 +44,8 @@ export class Stamp {
     hasBribe: boolean = false;
     vialDiscount: number = 0;
     atomDiscount: number = 0;
+    gildedAvailable: boolean = false;
+    gildedCount: number = 0;
 
     canUpgradeWithCoins: boolean = false;
     canUpgradeWithMats: boolean = false;
@@ -84,7 +87,9 @@ export class Stamp {
     getMaterialCost = (level: number = this.level): number => {
         const matDiscount = Math.max(0.1, 1 - this.atomDiscount / 100) * (1 / (1 + (this.sigilDiscount / 100)));
         const baseCost = this.data.startV * matDiscount * Math.pow(this.data.mCostExp, Math.pow(Math.round(level / this.data.upgradeInterval) - 1, 0.8));
-        const finalCost = Math.floor(Math.floor(baseCost) * Math.max(0.1, 1 - this.vialDiscount / 100));
+        const discountedCost = Math.floor(Math.floor(baseCost) * Math.max(0.1, 1 - this.vialDiscount / 100));
+        // Gilded Stamp
+        const finalCost = this.gildedAvailable && this.gildedCount > 0 ? discountedCost * 0.05 : discountedCost;
         return Math.max(1, finalCost) // Cost can never be 0;
     }
 
@@ -274,7 +279,13 @@ export function updateStamps(data: Map<string, any>) {
     const bribes = data.get("bribes") as Bribe[];
     const alchemy = data.get("alchemy") as Alchemy;
     const collider = data.get("collider") as AtomCollider;
+    const rift = data.get("rift") as Rift;
 
+    // Update gilded stamps (this can totally be done in parse if needed)
+    const optLacc = data.get("OptLacc"); 
+    const gildedStampCount = parseInt(optLacc[154]);
+    const stampMastery = rift.bonuses.find(bonus => bonus.name == "Stamp Mastery");
+    
     if (lab.bonuses.find(bonus => bonus.name == "Certified Stamp Book")?.active ?? false) {
         const allButMisc = stamps.flatMap(tab => tab).filter(stamp => stamp.type != "Misc Stamp");
         allButMisc.forEach(stamp => {
@@ -289,6 +300,8 @@ export function updateStamps(data: Map<string, any>) {
         stamp.atomDiscount = collider.atoms[0].getBonus();
         stamp.vialDiscount = vialDiscount;
         stamp.hasBribe = discountBribe.status == BribeStatus.Purchased;
+        stamp.gildedAvailable = stampMastery?.active ?? false;
+        stamp.gildedCount = gildedStampCount;
     })
 
     return stamps;
@@ -325,7 +338,7 @@ export function updateStampMaxCarry(data: Map<string, any>) {
                 const nextTier = stamp.maxCarryInfo[stamp.maxLevel + stamp.data.upgradeInterval];
                 const matInStorage = storage?.amountInStorage(stamp.materialItem?.internalName ?? "");
                 switch (true) {
-                    case stamp.maxCarryAmount >= nextTier.costToLevel && matInStorage >= nextTier.costToLevel:
+                    case stamp.maxCarryAmount >= nextTier.costToLevel && matInStorage >= nextTier.costToLevel && nextTier.colliderDiscount == stamp.atomDiscount:
                         stamp.canUpgradeWithMats = true;
                         break;
                     case stamp.maxCarryAmount < nextTier.costToLevel:
