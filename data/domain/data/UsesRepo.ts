@@ -402,13 +402,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF3",
-                        "name": "Average Food Pouch Detailed Recipe",
-                        "amount": 30,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes4",
                         "name": "Platinum Boots Detailed Recipe",
                         "amount": 75,
@@ -426,13 +419,6 @@ export const initUsesRepo = () => {
                         "key": "EquipmentWands6",
                         "name": "Crows Nest Detailed Recipe",
                         "amount": 100,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF4",
-                        "name": "Sizable Food Pouch Detailed Recipe",
-                        "amount": 60,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -507,13 +493,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes5",
-                        "name": "Dementia Boots Detailed Recipe",
-                        "amount": 75,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentPunching4",
                         "name": "Uninflated Glove Detailed Recipe",
                         "amount": 120,
@@ -528,20 +507,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF5",
-                        "name": "Big Food Pouch Detailed Recipe",
-                        "amount": 120,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes22",
-                        "name": "Void Imperium Kicks Detailed Recipe",
-                        "amount": 75,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentWands7",
                         "name": "Grey Gatsby Detailed Recipe",
                         "amount": 100,
@@ -549,30 +514,9 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF6",
-                        "name": "Large Food Pouch Detailed Recipe",
-                        "amount": 120,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentShirts31",
                         "name": "Member Hoodie Detailed Recipe",
                         "amount": 240,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes23",
-                        "name": "Chizoar Walkers Detailed Recipe",
-                        "amount": 75,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes24",
-                        "name": "Lustre Shieldshoe Detailed Recipe",
-                        "amount": 75,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -586,48 +530,27 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes26",
                         "name": "Rough Rockers Detailed Recipe",
-                        "amount": 150,
+                        "amount": 75,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes27",
                         "name": "Fiberous Footings Detailed Recipe",
-                        "amount": 150,
+                        "amount": 75,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes28",
                         "name": "Deep Sea Galoshes Detailed Recipe",
-                        "amount": 150,
+                        "amount": 75,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes29",
                         "name": "Spaggy Westerados Detailed Recipe",
-                        "amount": 150,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes31",
-                        "name": "Chef Hat Shoes Detailed Recipe",
-                        "amount": 75,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes33",
-                        "name": "Sheek Scrubs Detailed Recipe",
-                        "amount": 75,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes25",
-                        "name": "Diabolical Toe Tips Detailed Recipe",
                         "amount": 75,
                         "type": "detRecipe"
                     },
@@ -1009,13 +932,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagT3",
-                        "name": "Average Choppin Pouch Detailed Recipe",
-                        "amount": 300,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentPendant16",
                         "name": "Strung Bludgeon Detailed Recipe",
                         "amount": 15,
@@ -1023,30 +939,9 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF3",
-                        "name": "Average Food Pouch Detailed Recipe",
-                        "amount": 120,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentPendant26",
                         "name": "Polished Bludgeon Detailed Recipe",
                         "amount": 15,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagT4",
-                        "name": "Sizable Choppin Pouch Detailed Recipe",
-                        "amount": 300,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF4",
-                        "name": "Sizable Food Pouch Detailed Recipe",
-                        "amount": 240,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -1068,34 +963,6 @@ export const initUsesRepo = () => {
                         "key": "EquipmentPunching4",
                         "name": "Uninflated Glove Detailed Recipe",
                         "amount": 450,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagT5",
-                        "name": "Big Choppin Pouch Detailed Recipe",
-                        "amount": 600,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF5",
-                        "name": "Big Food Pouch Detailed Recipe",
-                        "amount": 480,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagT6",
-                        "name": "Large Choppin Pouch Detailed Recipe",
-                        "amount": 1200,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF6",
-                        "name": "Large Food Pouch Detailed Recipe",
-                        "amount": 480,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -1267,20 +1134,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBag3",
-                        "name": "Average Mining Pouch Detailed Recipe",
-                        "amount": 240,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBag4",
-                        "name": "Sizable Mining Pouch Detailed Recipe",
-                        "amount": 240,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "TestObj13",
                         "name": "Viking Cap Detailed Recipe",
                         "amount": 80,
@@ -1298,20 +1151,6 @@ export const initUsesRepo = () => {
                         "key": "EquipmentShoes16",
                         "name": "Cavern Trekkers Detailed Recipe",
                         "amount": 1500,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBag5",
-                        "name": "Big Mining Pouch Detailed Recipe",
-                        "amount": 480,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagMi6",
-                        "name": "Large Mining Pouch Detailed Recipe",
-                        "amount": 960,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -1482,34 +1321,6 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM4",
-                        "name": "Average Material Pouch Detailed Recipe",
-                        "amount": 80,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM5",
-                        "name": "Sizable Materials Pouch Detailed Recipe",
-                        "amount": 160,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM6",
-                        "name": "Big Materials Pouch Detailed Recipe",
-                        "amount": 320,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM7",
-                        "name": "Large Materials Pouch Detailed Recipe",
-                        "amount": 320,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
                         "repoSource": "ItemRepo",
                         "key": "StampC13",
                         "name": "Talent I Stamp Material",
@@ -1615,20 +1426,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM4",
-                        "name": "Average Material Pouch Detailed Recipe",
-                        "amount": 60,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM5",
-                        "name": "Sizable Materials Pouch Detailed Recipe",
-                        "amount": 120,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "TestObj13",
                         "name": "Viking Cap Detailed Recipe",
                         "amount": 40,
@@ -1646,20 +1443,6 @@ export const initUsesRepo = () => {
                         "key": "EquipmentHats26",
                         "name": "Witch Hat Detailed Recipe",
                         "amount": 40,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM6",
-                        "name": "Big Materials Pouch Detailed Recipe",
-                        "amount": 240,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM7",
-                        "name": "Large Materials Pouch Detailed Recipe",
-                        "amount": 240,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -2018,37 +1801,9 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagT3",
-                        "name": "Average Choppin Pouch Detailed Recipe",
-                        "amount": 60,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM4",
-                        "name": "Average Material Pouch Detailed Recipe",
-                        "amount": 160,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes4",
                         "name": "Platinum Boots Detailed Recipe",
                         "amount": 500,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagT4",
-                        "name": "Sizable Choppin Pouch Detailed Recipe",
-                        "amount": 60,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM5",
-                        "name": "Sizable Materials Pouch Detailed Recipe",
-                        "amount": 320,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -2102,51 +1857,9 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes5",
-                        "name": "Dementia Boots Detailed Recipe",
-                        "amount": 500,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentPunching4",
                         "name": "Uninflated Glove Detailed Recipe",
                         "amount": 120,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagT5",
-                        "name": "Big Choppin Pouch Detailed Recipe",
-                        "amount": 120,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM6",
-                        "name": "Big Materials Pouch Detailed Recipe",
-                        "amount": 640,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes22",
-                        "name": "Void Imperium Kicks Detailed Recipe",
-                        "amount": 500,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagT6",
-                        "name": "Large Choppin Pouch Detailed Recipe",
-                        "amount": 240,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM7",
-                        "name": "Large Materials Pouch Detailed Recipe",
-                        "amount": 640,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -2158,64 +1871,29 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes23",
-                        "name": "Chizoar Walkers Detailed Recipe",
-                        "amount": 500,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes24",
-                        "name": "Lustre Shieldshoe Detailed Recipe",
-                        "amount": 500,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes26",
                         "name": "Rough Rockers Detailed Recipe",
-                        "amount": 1000,
+                        "amount": 500,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes27",
                         "name": "Fiberous Footings Detailed Recipe",
-                        "amount": 1000,
+                        "amount": 500,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes28",
                         "name": "Deep Sea Galoshes Detailed Recipe",
-                        "amount": 1000,
+                        "amount": 500,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes29",
                         "name": "Spaggy Westerados Detailed Recipe",
-                        "amount": 1000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes31",
-                        "name": "Chef Hat Shoes Detailed Recipe",
-                        "amount": 500,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes33",
-                        "name": "Sheek Scrubs Detailed Recipe",
-                        "amount": 500,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes25",
-                        "name": "Diabolical Toe Tips Detailed Recipe",
                         "amount": 500,
                         "type": "detRecipe"
                     },
@@ -2289,34 +1967,6 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF3",
-                        "name": "Average Food Pouch Detailed Recipe",
-                        "amount": 150,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF4",
-                        "name": "Sizable Food Pouch Detailed Recipe",
-                        "amount": 300,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF5",
-                        "name": "Big Food Pouch Detailed Recipe",
-                        "amount": 600,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF6",
-                        "name": "Large Food Pouch Detailed Recipe",
-                        "amount": 600,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
                         "repoSource": "NpcRepo",
                         "key": "Picnic Stowaway@The Hungry Stowaway",
                         "name": "The Hungry Stowaway Requirements",
@@ -2369,34 +2019,6 @@ export const initUsesRepo = () => {
                         "key": "BadgeG3",
                         "name": "Blunderhills Misc Completion Token Detailed Recipe",
                         "amount": 6000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF3",
-                        "name": "Average Food Pouch Detailed Recipe",
-                        "amount": 50,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF4",
-                        "name": "Sizable Food Pouch Detailed Recipe",
-                        "amount": 100,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF5",
-                        "name": "Big Food Pouch Detailed Recipe",
-                        "amount": 200,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF6",
-                        "name": "Large Food Pouch Detailed Recipe",
-                        "amount": 200,
                         "type": "detRecipe"
                     }
                 ],
@@ -2561,23 +2183,9 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagT3",
-                        "name": "Average Choppin Pouch Detailed Recipe",
-                        "amount": 800,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentBows6",
                         "name": "Pharaoh Bow Detailed Recipe",
                         "amount": 250,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagT4",
-                        "name": "Sizable Choppin Pouch Detailed Recipe",
-                        "amount": 800,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -2603,23 +2211,9 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagT5",
-                        "name": "Big Choppin Pouch Detailed Recipe",
-                        "amount": 1600,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentBows8",
                         "name": "Blackhole Bow Detailed Recipe",
                         "amount": 250,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagT6",
-                        "name": "Large Choppin Pouch Detailed Recipe",
-                        "amount": 3200,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -3091,34 +2685,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats53",
-                        "name": "Dementia Helmet Detailed Recipe",
-                        "amount": 125,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts15",
-                        "name": "Dementia Body Detailed Recipe",
-                        "amount": 150,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentPants6",
-                        "name": "Dementia Shins Detailed Recipe",
-                        "amount": 170,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes5",
-                        "name": "Dementia Boots Detailed Recipe",
-                        "amount": 125,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentTools7",
                         "name": "Dementia Pickaxe Detailed Recipe",
                         "amount": 70,
@@ -3129,34 +2695,6 @@ export const initUsesRepo = () => {
                         "key": "FishingRod6",
                         "name": "Dementia Rod for Fishing Detailed Recipe",
                         "amount": 300,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats54",
-                        "name": "Void Imperium Helmet Detailed Recipe",
-                        "amount": 125,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts27",
-                        "name": "Void Imperium Platebody Detailed Recipe",
-                        "amount": 150,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentPants21",
-                        "name": "Void Imperium Shardshins Detailed Recipe",
-                        "amount": 170,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes22",
-                        "name": "Void Imperium Kicks Detailed Recipe",
-                        "amount": 125,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -3175,69 +2713,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats61",
-                        "name": "Mark of Member Detailed Recipe",
-                        "amount": 125,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats58",
-                        "name": "Murmillo Helm Detailed Recipe",
-                        "amount": 125,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats59",
-                        "name": "Conquistador Plume Detailed Recipe",
-                        "amount": 125,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats60",
-                        "name": "Adornment of the High Priest Detailed Recipe",
-                        "amount": 125,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts31",
-                        "name": "Member Hoodie Detailed Recipe",
-                        "amount": 150,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts28",
-                        "name": "Damascus Plates Detailed Recipe",
-                        "amount": 150,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts29",
-                        "name": "Evergreen Wraps Detailed Recipe",
-                        "amount": 150,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts30",
-                        "name": "Elegantine Robes Detailed Recipe",
-                        "amount": 150,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "BadgeI3",
-                        "name": "Tundra Misc Completion Token Detailed Recipe",
-                        "amount": 125,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "Quest68",
                         "name": "Bucket of Slush Recipe",
                         "amount": 5,
@@ -3248,62 +2723,6 @@ export const initUsesRepo = () => {
                         "key": "Quest68",
                         "name": "Bucket of Slush Detailed Recipe",
                         "amount": 5,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats68",
-                        "name": "Chizoar Helmet Detailed Recipe",
-                        "amount": 125,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts6",
-                        "name": "Chizoar Bodyplate Detailed Recipe",
-                        "amount": 150,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentPants9",
-                        "name": "Chizoar Scaled Leggings Detailed Recipe",
-                        "amount": 170,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes23",
-                        "name": "Chizoar Walkers Detailed Recipe",
-                        "amount": 125,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats70",
-                        "name": "Lustre Veil Detailed Recipe",
-                        "amount": 125,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts32",
-                        "name": "Lustre Chestplate Detailed Recipe",
-                        "amount": 150,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentPants24",
-                        "name": "Lustre Scales Detailed Recipe",
-                        "amount": 170,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes24",
-                        "name": "Lustre Shieldshoe Detailed Recipe",
-                        "amount": 125,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -3324,69 +2743,27 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes26",
                         "name": "Rough Rockers Detailed Recipe",
-                        "amount": 250,
+                        "amount": 125,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes27",
                         "name": "Fiberous Footings Detailed Recipe",
-                        "amount": 250,
+                        "amount": 125,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes28",
                         "name": "Deep Sea Galoshes Detailed Recipe",
-                        "amount": 250,
+                        "amount": 125,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes29",
                         "name": "Spaggy Westerados Detailed Recipe",
-                        "amount": 250,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes31",
-                        "name": "Chef Hat Shoes Detailed Recipe",
-                        "amount": 125,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes33",
-                        "name": "Sheek Scrubs Detailed Recipe",
-                        "amount": 125,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats71",
-                        "name": "Diabolical Headcase Detailed Recipe",
-                        "amount": 125,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts33",
-                        "name": "Diabolical Abdomen Detailed Recipe",
-                        "amount": 150,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentPants25",
-                        "name": "Diabolical Trimed Leg Guards Detailed Recipe",
-                        "amount": 170,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes25",
-                        "name": "Diabolical Toe Tips Detailed Recipe",
                         "amount": 125,
                         "type": "detRecipe"
                     },
@@ -3838,13 +3215,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentPants6",
-                        "name": "Dementia Shins Detailed Recipe",
-                        "amount": 225,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentSword2",
                         "name": "The Ice Breaker Detailed Recipe",
                         "amount": 125,
@@ -3855,13 +3225,6 @@ export const initUsesRepo = () => {
                         "key": "EquipmentToolsHatchet5",
                         "name": "Dementia Dicer Detailed Recipe",
                         "amount": 100,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentPants21",
-                        "name": "Void Imperium Shardshins Detailed Recipe",
-                        "amount": 225,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -3880,20 +3243,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentPants9",
-                        "name": "Chizoar Scaled Leggings Detailed Recipe",
-                        "amount": 225,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentPants24",
-                        "name": "Lustre Scales Detailed Recipe",
-                        "amount": 225,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentSword4",
                         "name": "Slimsharp Fin Detailed Recipe",
                         "amount": 125,
@@ -3904,13 +3253,6 @@ export const initUsesRepo = () => {
                         "key": "EquipmentToolsHatchet6",
                         "name": "Lustre Logger Detailed Recipe",
                         "amount": 100,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentPants25",
-                        "name": "Diabolical Trimed Leg Guards Detailed Recipe",
-                        "amount": 225,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -4123,30 +3465,9 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBag3",
-                        "name": "Average Mining Pouch Detailed Recipe",
-                        "amount": 700,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "MaxCapBagF3",
                         "name": "Average Food Pouch Detailed Recipe",
                         "amount": 3500,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBag4",
-                        "name": "Sizable Mining Pouch Detailed Recipe",
-                        "amount": 700,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF4",
-                        "name": "Sizable Food Pouch Detailed Recipe",
-                        "amount": 7000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -4161,34 +3482,6 @@ export const initUsesRepo = () => {
                         "key": "EquipmentShoes16",
                         "name": "Cavern Trekkers Detailed Recipe",
                         "amount": 1200,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBag5",
-                        "name": "Big Mining Pouch Detailed Recipe",
-                        "amount": 1400,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF5",
-                        "name": "Big Food Pouch Detailed Recipe",
-                        "amount": 14000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagMi6",
-                        "name": "Large Mining Pouch Detailed Recipe",
-                        "amount": 2800,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF6",
-                        "name": "Large Food Pouch Detailed Recipe",
-                        "amount": 14000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -4339,13 +3632,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF4",
-                        "name": "Sizable Food Pouch Detailed Recipe",
-                        "amount": 8400,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes17",
                         "name": "Logger Heels Recipe",
                         "amount": 1600,
@@ -4360,13 +3646,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts15",
-                        "name": "Dementia Body Detailed Recipe",
-                        "amount": 600,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentToolsHatchet5",
                         "name": "Dementia Dicer Detailed Recipe",
                         "amount": 200,
@@ -4374,72 +3653,9 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF5",
-                        "name": "Big Food Pouch Detailed Recipe",
-                        "amount": 16800,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts27",
-                        "name": "Void Imperium Platebody Detailed Recipe",
-                        "amount": 600,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentToolsHatchet7",
                         "name": "Void Imperium Axe Detailed Recipe",
                         "amount": 200,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF6",
-                        "name": "Large Food Pouch Detailed Recipe",
-                        "amount": 16800,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts31",
-                        "name": "Member Hoodie Detailed Recipe",
-                        "amount": 600,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts28",
-                        "name": "Damascus Plates Detailed Recipe",
-                        "amount": 600,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts29",
-                        "name": "Evergreen Wraps Detailed Recipe",
-                        "amount": 600,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts30",
-                        "name": "Elegantine Robes Detailed Recipe",
-                        "amount": 600,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts6",
-                        "name": "Chizoar Bodyplate Detailed Recipe",
-                        "amount": 600,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts32",
-                        "name": "Lustre Chestplate Detailed Recipe",
-                        "amount": 600,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -4454,13 +3670,6 @@ export const initUsesRepo = () => {
                         "key": "EquipmentShoes27",
                         "name": "Fiberous Footings Detailed Recipe",
                         "amount": 1600,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts33",
-                        "name": "Diabolical Abdomen Detailed Recipe",
-                        "amount": 600,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -4558,76 +3767,6 @@ export const initUsesRepo = () => {
                         "key": "EquipmentShirts23",
                         "name": "Feral Leathering Detailed Recipe",
                         "amount": 500,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats53",
-                        "name": "Dementia Helmet Detailed Recipe",
-                        "amount": 300,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats54",
-                        "name": "Void Imperium Helmet Detailed Recipe",
-                        "amount": 300,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats61",
-                        "name": "Mark of Member Detailed Recipe",
-                        "amount": 300,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats58",
-                        "name": "Murmillo Helm Detailed Recipe",
-                        "amount": 300,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats59",
-                        "name": "Conquistador Plume Detailed Recipe",
-                        "amount": 300,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats60",
-                        "name": "Adornment of the High Priest Detailed Recipe",
-                        "amount": 300,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "BadgeI3",
-                        "name": "Tundra Misc Completion Token Detailed Recipe",
-                        "amount": 300,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats68",
-                        "name": "Chizoar Helmet Detailed Recipe",
-                        "amount": 300,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats70",
-                        "name": "Lustre Veil Detailed Recipe",
-                        "amount": 300,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats71",
-                        "name": "Diabolical Headcase Detailed Recipe",
-                        "amount": 300,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -4736,13 +3875,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM5",
-                        "name": "Sizable Materials Pouch Detailed Recipe",
-                        "amount": 3400,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentWands3",
                         "name": "Spriggly Storm Detailed Recipe",
                         "amount": 1000,
@@ -4757,13 +3889,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM6",
-                        "name": "Big Materials Pouch Detailed Recipe",
-                        "amount": 6800,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentWands7",
                         "name": "Grey Gatsby Detailed Recipe",
                         "amount": 1000,
@@ -4774,13 +3899,6 @@ export const initUsesRepo = () => {
                         "key": "EquipmentToolsHatchet7",
                         "name": "Void Imperium Axe Detailed Recipe",
                         "amount": 5000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM7",
-                        "name": "Large Materials Pouch Detailed Recipe",
-                        "amount": 6800,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -4905,14 +4023,14 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "MaxCapBagT3",
                         "name": "Average Choppin Pouch Recipe",
-                        "amount": 2100,
+                        "amount": 2000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "MaxCapBagT3",
                         "name": "Average Choppin Pouch Detailed Recipe",
-                        "amount": 2100,
+                        "amount": 2000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -4927,13 +4045,6 @@ export const initUsesRepo = () => {
                         "key": "EquipmentSword1",
                         "name": "Enforced Slasher Detailed Recipe",
                         "amount": 1250,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagT4",
-                        "name": "Sizable Choppin Pouch Detailed Recipe",
-                        "amount": 2100,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -4987,13 +4098,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagT5",
-                        "name": "Big Choppin Pouch Detailed Recipe",
-                        "amount": 4200,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "CatchingNet6",
                         "name": "Dementia Net Detailed Recipe",
                         "amount": 800,
@@ -5004,13 +4108,6 @@ export const initUsesRepo = () => {
                         "key": "EquipmentSword3",
                         "name": "Deuscythe Detailed Recipe",
                         "amount": 1250,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagT6",
-                        "name": "Large Choppin Pouch Detailed Recipe",
-                        "amount": 8400,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -5335,27 +4432,6 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF4",
-                        "name": "Sizable Food Pouch Detailed Recipe",
-                        "amount": 2800,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF5",
-                        "name": "Big Food Pouch Detailed Recipe",
-                        "amount": 5600,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF6",
-                        "name": "Large Food Pouch Detailed Recipe",
-                        "amount": 5600,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
                         "repoSource": "NpcRepo",
                         "key": "Krunk@A Plot to be Perfect",
                         "name": "A Plot to be Perfect Requirements",
@@ -5387,27 +4463,6 @@ export const initUsesRepo = () => {
                         "key": "MaxCapBagF3",
                         "name": "Average Food Pouch Detailed Recipe",
                         "amount": 2100,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF4",
-                        "name": "Sizable Food Pouch Detailed Recipe",
-                        "amount": 4200,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF5",
-                        "name": "Big Food Pouch Detailed Recipe",
-                        "amount": 8400,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF6",
-                        "name": "Large Food Pouch Detailed Recipe",
-                        "amount": 8400,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -5665,42 +4720,42 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentHats28",
                         "name": "Gold Helmet Recipe",
-                        "amount": 250,
+                        "amount": 200,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentHats28",
                         "name": "Gold Helmet Detailed Recipe",
-                        "amount": 250,
+                        "amount": 200,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShirts13",
                         "name": "Gold Platebody Recipe",
-                        "amount": 350,
+                        "amount": 250,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShirts13",
                         "name": "Gold Platebody Detailed Recipe",
-                        "amount": 350,
+                        "amount": 250,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants4",
                         "name": "Gold Platelegs Recipe",
-                        "amount": 475,
+                        "amount": 300,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants4",
                         "name": "Gold Platelegs Detailed Recipe",
-                        "amount": 475,
+                        "amount": 300,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -5735,14 +4790,14 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentTools5",
                         "name": "Gold Pickaxe Recipe",
-                        "amount": 800,
+                        "amount": 400,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentTools5",
                         "name": "Gold Pickaxe Detailed Recipe",
-                        "amount": 800,
+                        "amount": 400,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -5763,7 +4818,7 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentTools6",
                         "name": "Platinum Pickaxe Detailed Recipe",
-                        "amount": 800,
+                        "amount": 400,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -5852,13 +4907,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes5",
-                        "name": "Dementia Boots Detailed Recipe",
-                        "amount": 600,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentBows7",
                         "name": "Blizzard Bow Detailed Recipe",
                         "amount": 250,
@@ -5868,14 +4916,7 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentTools7",
                         "name": "Dementia Pickaxe Detailed Recipe",
-                        "amount": 800,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes22",
-                        "name": "Void Imperium Kicks Detailed Recipe",
-                        "amount": 600,
+                        "amount": 400,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -5896,21 +4937,7 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentTools11",
                         "name": "Void Imperium Pik Detailed Recipe",
-                        "amount": 800,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes23",
-                        "name": "Chizoar Walkers Detailed Recipe",
-                        "amount": 600,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes24",
-                        "name": "Lustre Shieldshoe Detailed Recipe",
-                        "amount": 600,
+                        "amount": 400,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -5931,55 +4958,34 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentTools8",
                         "name": "Lustre Pickaxe Detailed Recipe",
-                        "amount": 800,
+                        "amount": 400,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes26",
                         "name": "Rough Rockers Detailed Recipe",
-                        "amount": 1200,
+                        "amount": 600,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes27",
                         "name": "Fiberous Footings Detailed Recipe",
-                        "amount": 1200,
+                        "amount": 600,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes28",
                         "name": "Deep Sea Galoshes Detailed Recipe",
-                        "amount": 1200,
+                        "amount": 600,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes29",
                         "name": "Spaggy Westerados Detailed Recipe",
-                        "amount": 1200,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes31",
-                        "name": "Chef Hat Shoes Detailed Recipe",
-                        "amount": 600,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes33",
-                        "name": "Sheek Scrubs Detailed Recipe",
-                        "amount": 600,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes25",
-                        "name": "Diabolical Toe Tips Detailed Recipe",
                         "amount": 600,
                         "type": "detRecipe"
                     },
@@ -6001,7 +5007,7 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentTools12",
                         "name": "Starfire Pickaxe Detailed Recipe",
-                        "amount": 800,
+                        "amount": 400,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -6022,7 +5028,7 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentTools9",
                         "name": "Dreadlo Pickolo Detailed Recipe",
-                        "amount": 800,
+                        "amount": 400,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -6676,27 +5682,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats53",
-                        "name": "Dementia Helmet Detailed Recipe",
-                        "amount": 750,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts15",
-                        "name": "Dementia Body Detailed Recipe",
-                        "amount": 1000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentPants6",
-                        "name": "Dementia Shins Detailed Recipe",
-                        "amount": 1250,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentTools7",
                         "name": "Dementia Pickaxe Detailed Recipe",
                         "amount": 800,
@@ -6707,27 +5692,6 @@ export const initUsesRepo = () => {
                         "key": "FishingRod6",
                         "name": "Dementia Rod for Fishing Detailed Recipe",
                         "amount": 800,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats54",
-                        "name": "Void Imperium Helmet Detailed Recipe",
-                        "amount": 750,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts27",
-                        "name": "Void Imperium Platebody Detailed Recipe",
-                        "amount": 1000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentPants21",
-                        "name": "Void Imperium Shardshins Detailed Recipe",
-                        "amount": 1250,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -6746,111 +5710,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats61",
-                        "name": "Mark of Member Detailed Recipe",
-                        "amount": 750,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats58",
-                        "name": "Murmillo Helm Detailed Recipe",
-                        "amount": 750,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats59",
-                        "name": "Conquistador Plume Detailed Recipe",
-                        "amount": 750,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats60",
-                        "name": "Adornment of the High Priest Detailed Recipe",
-                        "amount": 750,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts31",
-                        "name": "Member Hoodie Detailed Recipe",
-                        "amount": 1000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts28",
-                        "name": "Damascus Plates Detailed Recipe",
-                        "amount": 1000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts29",
-                        "name": "Evergreen Wraps Detailed Recipe",
-                        "amount": 1000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts30",
-                        "name": "Elegantine Robes Detailed Recipe",
-                        "amount": 1000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "BadgeI3",
-                        "name": "Tundra Misc Completion Token Detailed Recipe",
-                        "amount": 750,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats68",
-                        "name": "Chizoar Helmet Detailed Recipe",
-                        "amount": 750,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts6",
-                        "name": "Chizoar Bodyplate Detailed Recipe",
-                        "amount": 1000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentPants9",
-                        "name": "Chizoar Scaled Leggings Detailed Recipe",
-                        "amount": 1250,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats70",
-                        "name": "Lustre Veil Detailed Recipe",
-                        "amount": 750,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts32",
-                        "name": "Lustre Chestplate Detailed Recipe",
-                        "amount": 1000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentPants24",
-                        "name": "Lustre Scales Detailed Recipe",
-                        "amount": 1250,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentTools8",
                         "name": "Lustre Pickaxe Detailed Recipe",
                         "amount": 800,
@@ -6861,27 +5720,6 @@ export const initUsesRepo = () => {
                         "key": "FishingRod8",
                         "name": "Lustre Rod Detailed Recipe",
                         "amount": 800,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats71",
-                        "name": "Diabolical Headcase Detailed Recipe",
-                        "amount": 750,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts33",
-                        "name": "Diabolical Abdomen Detailed Recipe",
-                        "amount": 1000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentPants25",
-                        "name": "Diabolical Trimed Leg Guards Detailed Recipe",
-                        "amount": 1250,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -7163,23 +6001,9 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM6",
-                        "name": "Big Materials Pouch Detailed Recipe",
-                        "amount": 8,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentBows8",
                         "name": "Blackhole Bow Detailed Recipe",
                         "amount": 3,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM7",
-                        "name": "Large Materials Pouch Detailed Recipe",
-                        "amount": 8,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -7356,23 +6180,9 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM6",
-                        "name": "Big Materials Pouch Detailed Recipe",
-                        "amount": 6,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentWands7",
                         "name": "Grey Gatsby Detailed Recipe",
                         "amount": 3,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM7",
-                        "name": "Large Materials Pouch Detailed Recipe",
-                        "amount": 6,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -7629,13 +6439,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagFi3",
-                        "name": "Average Fish Pouch Detailed Recipe",
-                        "amount": 360,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentRings11",
                         "name": "Defenders Dignity Recipe",
                         "amount": 10000,
@@ -7659,7 +6462,7 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "MaxCapBagFi4",
                         "name": "Sizable Fish Pouch Detailed Recipe",
-                        "amount": 5360,
+                        "amount": 5000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -7681,20 +6484,6 @@ export const initUsesRepo = () => {
                         "key": "EquipmentRings27",
                         "name": "Protectors Pride Detailed Recipe",
                         "amount": 10000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagFi5",
-                        "name": "Big Fish Pouch Detailed Recipe",
-                        "amount": 10720,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagFi6",
-                        "name": "Large Fish Pouch Detailed Recipe",
-                        "amount": 21440,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -7858,20 +6647,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagB3",
-                        "name": "Average Bug Pouch Detailed Recipe",
-                        "amount": 360,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagB4",
-                        "name": "Sizable Bug Pouch Detailed Recipe",
-                        "amount": 360,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "Bullet",
                         "name": "Bullet Recipe",
                         "amount": 10,
@@ -7903,20 +6678,6 @@ export const initUsesRepo = () => {
                         "key": "EquipmentShoes19",
                         "name": "Bandito Boots Detailed Recipe",
                         "amount": 2000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagB5",
-                        "name": "Big Bug Pouch Detailed Recipe",
-                        "amount": 720,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagB6",
-                        "name": "Large Bug Pouch Detailed Recipe",
-                        "amount": 1440,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -8177,23 +6938,9 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagFi3",
-                        "name": "Average Fish Pouch Detailed Recipe",
-                        "amount": 2,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "CatchingNet4",
                         "name": "Golden Net Detailed Recipe",
                         "amount": 3,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagB3",
-                        "name": "Average Bug Pouch Detailed Recipe",
-                        "amount": 2,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -8275,23 +7022,9 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagFi4",
-                        "name": "Sizable Fish Pouch Detailed Recipe",
-                        "amount": 2,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "CatchingNet5",
                         "name": "Platinet Detailed Recipe",
                         "amount": 3,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagB4",
-                        "name": "Sizable Bug Pouch Detailed Recipe",
-                        "amount": 2,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -8478,13 +7211,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes5",
-                        "name": "Dementia Boots Detailed Recipe",
-                        "amount": 4,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentSword2",
                         "name": "The Ice Breaker Detailed Recipe",
                         "amount": 8,
@@ -8513,30 +7239,9 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagFi5",
-                        "name": "Big Fish Pouch Detailed Recipe",
-                        "amount": 4,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "CatchingNet6",
                         "name": "Dementia Net Detailed Recipe",
                         "amount": 3,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagB5",
-                        "name": "Big Bug Pouch Detailed Recipe",
-                        "amount": 4,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes22",
-                        "name": "Void Imperium Kicks Detailed Recipe",
-                        "amount": 4,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -8569,23 +7274,9 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagFi6",
-                        "name": "Large Fish Pouch Detailed Recipe",
-                        "amount": 8,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "CatchingNet7",
                         "name": "Void Imperium Net Detailed Recipe",
                         "amount": 3,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagB6",
-                        "name": "Large Bug Pouch Detailed Recipe",
-                        "amount": 8,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -8621,20 +7312,6 @@ export const initUsesRepo = () => {
                         "key": "FoodWorship1",
                         "name": "Soulble Gum Detailed Recipe",
                         "amount": 1,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes23",
-                        "name": "Chizoar Walkers Detailed Recipe",
-                        "amount": 4,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes24",
-                        "name": "Lustre Shieldshoe Detailed Recipe",
-                        "amount": 4,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -8676,49 +7353,28 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes26",
                         "name": "Rough Rockers Detailed Recipe",
-                        "amount": 17,
+                        "amount": 13,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes27",
                         "name": "Fiberous Footings Detailed Recipe",
-                        "amount": 17,
+                        "amount": 13,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes28",
                         "name": "Deep Sea Galoshes Detailed Recipe",
-                        "amount": 17,
+                        "amount": 13,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes29",
                         "name": "Spaggy Westerados Detailed Recipe",
-                        "amount": 17,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes31",
-                        "name": "Chef Hat Shoes Detailed Recipe",
-                        "amount": 4,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes33",
-                        "name": "Sheek Scrubs Detailed Recipe",
-                        "amount": 4,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes25",
-                        "name": "Diabolical Toe Tips Detailed Recipe",
-                        "amount": 4,
+                        "amount": 13,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -8850,7 +7506,7 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "MaxCapBagFi3",
                         "name": "Average Fish Pouch Detailed Recipe",
-                        "amount": 2425,
+                        "amount": 2000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -8858,13 +7514,6 @@ export const initUsesRepo = () => {
                         "key": "FishingRod5",
                         "name": "Plat Fishing Rod Detailed Recipe",
                         "amount": 3150,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagFi4",
-                        "name": "Sizable Fish Pouch Detailed Recipe",
-                        "amount": 2425,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -8918,13 +7567,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagFi5",
-                        "name": "Big Fish Pouch Detailed Recipe",
-                        "amount": 4850,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "MaxCapBagF5",
                         "name": "Big Food Pouch Detailed Recipe",
                         "amount": 7500,
@@ -8935,20 +7577,6 @@ export const initUsesRepo = () => {
                         "key": "FishingRod7",
                         "name": "Void Imperium Rod Detailed Recipe",
                         "amount": 3150,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagFi6",
-                        "name": "Large Fish Pouch Detailed Recipe",
-                        "amount": 9700,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF6",
-                        "name": "Large Food Pouch Detailed Recipe",
-                        "amount": 7500,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -9066,14 +7694,14 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "MaxCapBagB3",
                         "name": "Average Bug Pouch Recipe",
-                        "amount": 2100,
+                        "amount": 2000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "MaxCapBagB3",
                         "name": "Average Bug Pouch Detailed Recipe",
-                        "amount": 2525,
+                        "amount": 2000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -9081,13 +7709,6 @@ export const initUsesRepo = () => {
                         "key": "CatchingNet5",
                         "name": "Platinet Detailed Recipe",
                         "amount": 3350,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagB4",
-                        "name": "Sizable Bug Pouch Detailed Recipe",
-                        "amount": 2525,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -9127,13 +7748,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagB5",
-                        "name": "Big Bug Pouch Detailed Recipe",
-                        "amount": 5050,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "MaxCapBagF5",
                         "name": "Big Food Pouch Detailed Recipe",
                         "amount": 7500,
@@ -9144,20 +7758,6 @@ export const initUsesRepo = () => {
                         "key": "CatchingNet7",
                         "name": "Void Imperium Net Detailed Recipe",
                         "amount": 3350,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagB6",
-                        "name": "Large Bug Pouch Detailed Recipe",
-                        "amount": 10100,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF6",
-                        "name": "Large Food Pouch Detailed Recipe",
-                        "amount": 7500,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -9566,13 +8166,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagTr4",
-                        "name": "Big Critter Pouch Detailed Recipe",
-                        "amount": 30,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "WorshipSkull4",
                         "name": "Prickle Skull Recipe",
                         "amount": 50,
@@ -9583,13 +8176,6 @@ export const initUsesRepo = () => {
                         "key": "WorshipSkull4",
                         "name": "Prickle Skull Detailed Recipe",
                         "amount": 75,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagS4",
-                        "name": "Big Soul Pouch Detailed Recipe",
-                        "amount": 40,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -9629,13 +8215,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagFi6",
-                        "name": "Large Fish Pouch Detailed Recipe",
-                        "amount": 100,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "CatchingNet7",
                         "name": "Void Imperium Net Detailed Recipe",
                         "amount": 50,
@@ -9650,23 +8229,9 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagTr5",
-                        "name": "Large Critter Pouch Detailed Recipe",
-                        "amount": 60,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "WorshipSkull5",
                         "name": "Manifested Skull Detailed Recipe",
                         "amount": 75,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagS5",
-                        "name": "Large Soul Pouch Detailed Recipe",
-                        "amount": 80,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -10629,32 +9194,6 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.bCraft,
                 "type": "Monster Drop"
             }),
-        new UsesBase("MaxCapBag1", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBag3",
-                        "name": "Average Mining Pouch Recipe",
-                        "amount": 2,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
-            }),
-        new UsesBase("MaxCapBag2", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBag3",
-                        "name": "Average Mining Pouch Recipe",
-                        "amount": 1,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
-            }),
         new UsesBase("Gold", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -10673,13 +9212,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBag4",
-                        "name": "Sizable Mining Pouch Detailed Recipe",
-                        "amount": 2000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "BulletB",
                         "name": "FMJ Bullet Recipe",
                         "amount": 15,
@@ -10690,20 +9222,6 @@ export const initUsesRepo = () => {
                         "key": "BulletB",
                         "name": "FMJ Bullet Detailed Recipe",
                         "amount": 15,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBag5",
-                        "name": "Big Mining Pouch Detailed Recipe",
-                        "amount": 4000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagMi6",
-                        "name": "Large Mining Pouch Detailed Recipe",
-                        "amount": 8000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -10994,32 +9512,6 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.bCraft,
                 "type": "Monster Drop"
             }),
-        new UsesBase("MaxCapBag7", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagT3",
-                        "name": "Average Choppin Pouch Recipe",
-                        "amount": 2,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
-            }),
-        new UsesBase("MaxCapBag9", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagT3",
-                        "name": "Average Choppin Pouch Recipe",
-                        "amount": 1,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
-            }),
         new UsesBase("CraftMat9", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -11172,32 +9664,6 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.aFishingRod,
                 "type": "Fishing Rod"
             }),
-        new UsesBase("MaxCapBagFi1", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagFi3",
-                        "name": "Average Fish Pouch Recipe",
-                        "amount": 2,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
-            }),
-        new UsesBase("MaxCapBagFi2", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagFi3",
-                        "name": "Average Fish Pouch Recipe",
-                        "amount": 1,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
-            }),
         new UsesBase("CatchingNet3", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -11210,32 +9676,6 @@ export const initUsesRepo = () => {
                 ],
                 "typeGen": TypeGenEnum.aBugNet,
                 "type": "Bug Catching Net"
-            }),
-        new UsesBase("MaxCapBagB1", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagB3",
-                        "name": "Average Bug Pouch Recipe",
-                        "amount": 2,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
-            }),
-        new UsesBase("MaxCapBagB2", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagB3",
-                        "name": "Average Bug Pouch Recipe",
-                        "amount": 1,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
             }),
         new UsesBase("EquipmentPendant10", <UsesModel>{
                 "uses": [
@@ -11289,13 +9729,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM5",
-                        "name": "Sizable Materials Pouch Detailed Recipe",
-                        "amount": 2,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "TestObj13",
                         "name": "Viking Cap Recipe",
                         "amount": 2,
@@ -11337,20 +9770,6 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM6",
-                        "name": "Big Materials Pouch Detailed Recipe",
-                        "amount": 4,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM7",
-                        "name": "Large Materials Pouch Detailed Recipe",
-                        "amount": 4,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
                         "repoSource": "ItemRepo",
                         "key": "StampC2",
                         "name": "Mason Jar Stamp Material",
@@ -11375,19 +9794,6 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.bCraft,
                 "type": "Monster Drop"
             }),
-        new UsesBase("MaxCapBag8", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF3",
-                        "name": "Average Food Pouch Recipe",
-                        "amount": 2,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
-            }),
         new UsesBase("FoodHealth7", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -11402,27 +9808,6 @@ export const initUsesRepo = () => {
                         "key": "MaxCapBagF3",
                         "name": "Average Food Pouch Detailed Recipe",
                         "amount": 400,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF4",
-                        "name": "Sizable Food Pouch Detailed Recipe",
-                        "amount": 800,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF5",
-                        "name": "Big Food Pouch Detailed Recipe",
-                        "amount": 1600,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF6",
-                        "name": "Large Food Pouch Detailed Recipe",
-                        "amount": 1600,
                         "type": "detRecipe"
                     }
                 ],
@@ -11468,26 +9853,6 @@ export const initUsesRepo = () => {
                 ],
                 "typeGen": TypeGenEnum.cFood,
                 "type": "Boost Food"
-            }),
-        new UsesBase("MaxCapBagM2", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM4",
-                        "name": "Average Material Pouch Recipe",
-                        "amount": 2,
-                        "type": "recipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "ItemRepo",
-                        "key": "StampB8",
-                        "name": "Matty Bag Stamp Material",
-                        "amount": "Lots",
-                        "type": "stamp"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
             }),
         new UsesBase("EquipmentHats18", <UsesModel>{
                 "uses": [
@@ -11550,153 +9915,6 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes21",
                         "name": "Efaunts Broken Ankles Detailed Recipe",
-                        "amount": 3000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats53",
-                        "name": "Dementia Helmet Detailed Recipe",
-                        "amount": 2250,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes5",
-                        "name": "Dementia Boots Detailed Recipe",
-                        "amount": 3000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats54",
-                        "name": "Void Imperium Helmet Detailed Recipe",
-                        "amount": 2250,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes22",
-                        "name": "Void Imperium Kicks Detailed Recipe",
-                        "amount": 3000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats61",
-                        "name": "Mark of Member Detailed Recipe",
-                        "amount": 2250,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats58",
-                        "name": "Murmillo Helm Detailed Recipe",
-                        "amount": 2250,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats59",
-                        "name": "Conquistador Plume Detailed Recipe",
-                        "amount": 2250,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats60",
-                        "name": "Adornment of the High Priest Detailed Recipe",
-                        "amount": 2250,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "BadgeI3",
-                        "name": "Tundra Misc Completion Token Detailed Recipe",
-                        "amount": 2250,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats68",
-                        "name": "Chizoar Helmet Detailed Recipe",
-                        "amount": 2250,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes23",
-                        "name": "Chizoar Walkers Detailed Recipe",
-                        "amount": 3000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats70",
-                        "name": "Lustre Veil Detailed Recipe",
-                        "amount": 2250,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes24",
-                        "name": "Lustre Shieldshoe Detailed Recipe",
-                        "amount": 3000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes26",
-                        "name": "Rough Rockers Detailed Recipe",
-                        "amount": 3000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes27",
-                        "name": "Fiberous Footings Detailed Recipe",
-                        "amount": 3000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes28",
-                        "name": "Deep Sea Galoshes Detailed Recipe",
-                        "amount": 3000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes29",
-                        "name": "Spaggy Westerados Detailed Recipe",
-                        "amount": 3000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes31",
-                        "name": "Chef Hat Shoes Detailed Recipe",
-                        "amount": 3000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes33",
-                        "name": "Sheek Scrubs Detailed Recipe",
-                        "amount": 3000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats71",
-                        "name": "Diabolical Headcase Detailed Recipe",
-                        "amount": 2250,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes25",
-                        "name": "Diabolical Toe Tips Detailed Recipe",
                         "amount": 3000,
                         "type": "detRecipe"
                     },
@@ -11776,69 +9994,6 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts15",
-                        "name": "Dementia Body Detailed Recipe",
-                        "amount": 5000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts27",
-                        "name": "Void Imperium Platebody Detailed Recipe",
-                        "amount": 5000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts31",
-                        "name": "Member Hoodie Detailed Recipe",
-                        "amount": 5000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts28",
-                        "name": "Damascus Plates Detailed Recipe",
-                        "amount": 5000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts29",
-                        "name": "Evergreen Wraps Detailed Recipe",
-                        "amount": 5000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts30",
-                        "name": "Elegantine Robes Detailed Recipe",
-                        "amount": 5000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts6",
-                        "name": "Chizoar Bodyplate Detailed Recipe",
-                        "amount": 5000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts32",
-                        "name": "Lustre Chestplate Detailed Recipe",
-                        "amount": 5000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts33",
-                        "name": "Diabolical Abdomen Detailed Recipe",
-                        "amount": 5000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
                         "repoSource": "PostOfficeRepo",
                         "key": "Dudes Next Door",
                         "name": "Dudes Next Door Order",
@@ -11875,41 +10030,6 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants5",
                         "name": "Platinum Shins Detailed Recipe",
-                        "amount": 5000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentPants6",
-                        "name": "Dementia Shins Detailed Recipe",
-                        "amount": 5000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentPants21",
-                        "name": "Void Imperium Shardshins Detailed Recipe",
-                        "amount": 5000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentPants9",
-                        "name": "Chizoar Scaled Leggings Detailed Recipe",
-                        "amount": 5000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentPants24",
-                        "name": "Lustre Scales Detailed Recipe",
-                        "amount": 5000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentPants25",
-                        "name": "Diabolical Trimed Leg Guards Detailed Recipe",
                         "amount": 5000,
                         "type": "detRecipe"
                     },
@@ -12060,30 +10180,9 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes5",
-                        "name": "Dementia Boots Detailed Recipe",
-                        "amount": 7000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentToolsHatchet5",
                         "name": "Dementia Dicer Detailed Recipe",
                         "amount": 6500,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagT5",
-                        "name": "Big Choppin Pouch Detailed Recipe",
-                        "amount": 15000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes22",
-                        "name": "Void Imperium Kicks Detailed Recipe",
-                        "amount": 7000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -12095,79 +10194,9 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagT6",
-                        "name": "Large Choppin Pouch Detailed Recipe",
-                        "amount": 30000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes23",
-                        "name": "Chizoar Walkers Detailed Recipe",
-                        "amount": 7000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes24",
-                        "name": "Lustre Shieldshoe Detailed Recipe",
-                        "amount": 7000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentToolsHatchet6",
                         "name": "Lustre Logger Detailed Recipe",
                         "amount": 6500,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes26",
-                        "name": "Rough Rockers Detailed Recipe",
-                        "amount": 7000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes27",
-                        "name": "Fiberous Footings Detailed Recipe",
-                        "amount": 7000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes28",
-                        "name": "Deep Sea Galoshes Detailed Recipe",
-                        "amount": 7000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes29",
-                        "name": "Spaggy Westerados Detailed Recipe",
-                        "amount": 7000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes31",
-                        "name": "Chef Hat Shoes Detailed Recipe",
-                        "amount": 7000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes33",
-                        "name": "Sheek Scrubs Detailed Recipe",
-                        "amount": 7000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes25",
-                        "name": "Diabolical Toe Tips Detailed Recipe",
-                        "amount": 7000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -12317,23 +10346,9 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF5",
-                        "name": "Big Food Pouch Detailed Recipe",
-                        "amount": 8,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentSword3",
                         "name": "Deuscythe Detailed Recipe",
                         "amount": 3,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF6",
-                        "name": "Large Food Pouch Detailed Recipe",
-                        "amount": 8,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -12510,13 +10525,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagFi5",
-                        "name": "Big Fish Pouch Detailed Recipe",
-                        "amount": 5000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentBows8",
                         "name": "Blackhole Bow Detailed Recipe",
                         "amount": 1400,
@@ -12533,14 +10541,14 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "MaxCapBagFi6",
                         "name": "Large Fish Pouch Recipe",
-                        "amount": 50000,
+                        "amount": 40000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "MaxCapBagFi6",
                         "name": "Large Fish Pouch Detailed Recipe",
-                        "amount": 60000,
+                        "amount": 40000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -12718,13 +10726,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagB5",
-                        "name": "Big Bug Pouch Detailed Recipe",
-                        "amount": 15000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentWands7",
                         "name": "Grey Gatsby Detailed Recipe",
                         "amount": 4000,
@@ -12735,13 +10736,6 @@ export const initUsesRepo = () => {
                         "key": "CatchingNet7",
                         "name": "Void Imperium Net Detailed Recipe",
                         "amount": 7000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagB6",
-                        "name": "Large Bug Pouch Detailed Recipe",
-                        "amount": 30000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -12932,23 +10926,9 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBag5",
-                        "name": "Big Mining Pouch Detailed Recipe",
-                        "amount": 15000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "CatchingNet6",
                         "name": "Dementia Net Detailed Recipe",
                         "amount": 3000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagMi6",
-                        "name": "Large Mining Pouch Detailed Recipe",
-                        "amount": 30000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -13004,19 +10984,6 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.bOre,
                 "type": "Ore"
             }),
-        new UsesBase("MaxCapBag3", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBag4",
-                        "name": "Sizable Mining Pouch Recipe",
-                        "amount": 1,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
-            }),
         new UsesBase("EquipmentToolsHatchet2", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -13029,19 +10996,6 @@ export const initUsesRepo = () => {
                 ],
                 "typeGen": TypeGenEnum.aHatchet,
                 "type": "Hatchet"
-            }),
-        new UsesBase("MaxCapBagT3", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagT4",
-                        "name": "Sizable Choppin Pouch Recipe",
-                        "amount": 1,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
             }),
         new UsesBase("FishingRod4", <UsesModel>{
                 "uses": [
@@ -13063,19 +11017,6 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.aFishingRod,
                 "type": "Fishing Rod"
             }),
-        new UsesBase("MaxCapBagFi3", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagFi4",
-                        "name": "Sizable Fish Pouch Recipe",
-                        "amount": 1,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
-            }),
         new UsesBase("CatchingNet4", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -13096,19 +11037,6 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.aBugNet,
                 "type": "Bug Catching Net"
             }),
-        new UsesBase("MaxCapBagB3", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagB4",
-                        "name": "Sizable Bug Pouch Recipe",
-                        "amount": 1,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
-            }),
         new UsesBase("FoodG3", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -13124,50 +11052,10 @@ export const initUsesRepo = () => {
                         "name": "Sizable Food Pouch Detailed Recipe",
                         "amount": 9,
                         "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF5",
-                        "name": "Big Food Pouch Detailed Recipe",
-                        "amount": 18,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF6",
-                        "name": "Large Food Pouch Detailed Recipe",
-                        "amount": 18,
-                        "type": "detRecipe"
                     }
                 ],
                 "typeGen": TypeGenEnum.cFood,
                 "type": "Golden Food"
-            }),
-        new UsesBase("MaxCapBagF3", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF4",
-                        "name": "Sizable Food Pouch Recipe",
-                        "amount": 2,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
-            }),
-        new UsesBase("MaxCapBagM4", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM5",
-                        "name": "Sizable Materials Pouch Recipe",
-                        "amount": 2,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
             }),
         new UsesBase("DesertC1", <UsesModel>{
                 "uses": [
@@ -13434,13 +11322,6 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF6",
-                        "name": "Large Food Pouch Detailed Recipe",
-                        "amount": 3000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
                         "repoSource": "NpcRepo",
                         "key": "Funguy@Mushroom Munchies",
                         "name": "Mushroom Munchies Requirements",
@@ -13471,13 +11352,6 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "MaxCapBagF5",
                         "name": "Big Food Pouch Detailed Recipe",
-                        "amount": 1500,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF6",
-                        "name": "Large Food Pouch Detailed Recipe",
                         "amount": 1500,
                         "type": "detRecipe"
                     },
@@ -13948,13 +11822,6 @@ export const initUsesRepo = () => {
                         "type": "recipe"
                     },
                     <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShoes5",
-                        "name": "Dementia Boots Recipe",
-                        "amount": 1,
-                        "type": "recipe"
-                    },
-                    <UseModel>{
                         "repoSource": "PostOfficeRepo",
                         "key": "Plan-it Express",
                         "name": "Plan-it Express Order",
@@ -14152,20 +12019,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagTr4",
-                        "name": "Big Critter Pouch Detailed Recipe",
-                        "amount": 2000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagTr5",
-                        "name": "Large Critter Pouch Detailed Recipe",
-                        "amount": 4000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "MaxCapBagF6",
                         "name": "Large Food Pouch Detailed Recipe",
                         "amount": 3000,
@@ -14263,23 +12116,9 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagS4",
-                        "name": "Big Soul Pouch Detailed Recipe",
-                        "amount": 3000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "WorshipSkull5",
                         "name": "Manifested Skull Detailed Recipe",
                         "amount": 1200,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagS5",
-                        "name": "Large Soul Pouch Detailed Recipe",
-                        "amount": 6000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -15457,19 +13296,6 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.dQuest,
                 "type": "Fragment"
             }),
-        new UsesBase("EquipmentHats19", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats53",
-                        "name": "Dementia Helmet Recipe",
-                        "amount": 1,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aHelmet,
-                "type": "Helmet"
-            }),
         new UsesBase("DementiaBar", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -15840,39 +13666,6 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.bBar,
                 "type": "Bar"
             }),
-        new UsesBase("EquipmentShirts14", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts15",
-                        "name": "Dementia Body Recipe",
-                        "amount": 1,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aShirt,
-                "type": "Shirt"
-            }),
-        new UsesBase("EquipmentPants5", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentPants6",
-                        "name": "Dementia Shins Recipe",
-                        "amount": 1,
-                        "type": "recipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "PostOfficeRepo",
-                        "key": "Plan-it Express",
-                        "name": "Plan-it Express Order",
-                        "amount": "Lots",
-                        "type": "poBox"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aPants,
-                "type": "Pants"
-            }),
         new UsesBase("SnowA1", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -16153,13 +13946,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagT6",
-                        "name": "Large Choppin Pouch Detailed Recipe",
-                        "amount": 40000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentWands8",
                         "name": "Skullslip Hallow Detailed Recipe",
                         "amount": 10000,
@@ -16313,21 +14099,14 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "MaxCapBag5",
                         "name": "Big Mining Pouch Recipe",
-                        "amount": 17500,
+                        "amount": 15000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "MaxCapBag5",
                         "name": "Big Mining Pouch Detailed Recipe",
-                        "amount": 17500,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagMi6",
-                        "name": "Large Mining Pouch Detailed Recipe",
-                        "amount": 35000,
+                        "amount": 15000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -16355,19 +14134,6 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.bOre,
                 "type": "Ore"
             }),
-        new UsesBase("MaxCapBag4", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBag5",
-                        "name": "Big Mining Pouch Recipe",
-                        "amount": 2,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
-            }),
         new UsesBase("EquipmentToolsHatchet4", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -16387,19 +14153,6 @@ export const initUsesRepo = () => {
                 ],
                 "typeGen": TypeGenEnum.aHatchet,
                 "type": "Hatchet"
-            }),
-        new UsesBase("MaxCapBagT4", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagT5",
-                        "name": "Big Choppin Pouch Recipe",
-                        "amount": 2,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
             }),
         new UsesBase("FishingRod5", <UsesModel>{
                 "uses": [
@@ -16438,13 +14191,6 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagFi6",
-                        "name": "Large Fish Pouch Detailed Recipe",
-                        "amount": 8,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
                         "repoSource": "NpcRepo",
                         "key": "Lord of the Hunt@Small Stingers, Big Owie",
                         "name": "Small Stingers, Big Owie Requirements",
@@ -16475,19 +14221,6 @@ export const initUsesRepo = () => {
                 ],
                 "typeGen": TypeGenEnum.dCritters,
                 "type": "Critter"
-            }),
-        new UsesBase("MaxCapBagFi4", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagFi5",
-                        "name": "Big Fish Pouch Recipe",
-                        "amount": 2,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
             }),
         new UsesBase("Bug5", <UsesModel>{
                 "uses": [
@@ -16524,13 +14257,6 @@ export const initUsesRepo = () => {
                         "key": "CatchingNet7",
                         "name": "Void Imperium Net Detailed Recipe",
                         "amount": 15000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagB6",
-                        "name": "Large Bug Pouch Detailed Recipe",
-                        "amount": 20000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -16613,19 +14339,6 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.aBugNet,
                 "type": "Bug Catching Net"
             }),
-        new UsesBase("MaxCapBagB4", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagB5",
-                        "name": "Big Bug Pouch Recipe",
-                        "amount": 2,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
-            }),
         new UsesBase("Critter4A", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -16700,21 +14413,14 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "MaxCapBagTr4",
                         "name": "Big Critter Pouch Recipe",
-                        "amount": 10000,
+                        "amount": 15000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "MaxCapBagTr4",
                         "name": "Big Critter Pouch Detailed Recipe",
-                        "amount": 10000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagTr5",
-                        "name": "Large Critter Pouch Detailed Recipe",
-                        "amount": 20000,
+                        "amount": 15000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -16756,19 +14462,6 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.dCritters,
                 "type": "Critter"
             }),
-        new UsesBase("MaxCapBagTr3", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagTr4",
-                        "name": "Big Critter Pouch Recipe",
-                        "amount": 2,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
-            }),
         new UsesBase("Soul3", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -16789,14 +14482,14 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "MaxCapBagS4",
                         "name": "Big Soul Pouch Recipe",
-                        "amount": 8000,
+                        "amount": 10000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "MaxCapBagS4",
                         "name": "Big Soul Pouch Detailed Recipe",
-                        "amount": 8000,
+                        "amount": 10000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -16817,7 +14510,7 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "MaxCapBagS5",
                         "name": "Large Soul Pouch Detailed Recipe",
-                        "amount": 46000,
+                        "amount": 30000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -16906,19 +14599,6 @@ export const initUsesRepo = () => {
                 ],
                 "typeGen": TypeGenEnum.aSkull,
                 "type": "Worship Skull"
-            }),
-        new UsesBase("MaxCapBagS3", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagS4",
-                        "name": "Big Soul Pouch Recipe",
-                        "amount": 2,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
             }),
         new UsesBase("EquipmentRings13", <UsesModel>{
                 "uses": [
@@ -17266,30 +14946,10 @@ export const initUsesRepo = () => {
                         "name": "Big Food Pouch Detailed Recipe",
                         "amount": 10000,
                         "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF6",
-                        "name": "Large Food Pouch Detailed Recipe",
-                        "amount": 10000,
-                        "type": "detRecipe"
                     }
                 ],
                 "typeGen": TypeGenEnum.cFood,
                 "type": "Health Food"
-            }),
-        new UsesBase("MaxCapBagF4", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF5",
-                        "name": "Big Food Pouch Recipe",
-                        "amount": 2,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
             }),
         new UsesBase("SnowB1", <UsesModel>{
                 "uses": [
@@ -17304,13 +14964,6 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "MaxCapBagM6",
                         "name": "Big Materials Pouch Detailed Recipe",
-                        "amount": 15000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM7",
-                        "name": "Large Materials Pouch Detailed Recipe",
                         "amount": 15000,
                         "type": "detRecipe"
                     },
@@ -17352,13 +15005,6 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "MaxCapBagM6",
                         "name": "Big Materials Pouch Detailed Recipe",
-                        "amount": 3,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM7",
-                        "name": "Large Materials Pouch Detailed Recipe",
                         "amount": 3,
                         "type": "detRecipe"
                     },
@@ -17414,19 +15060,6 @@ export const initUsesRepo = () => {
                 ],
                 "typeGen": TypeGenEnum.bCraft,
                 "type": "Monster Drop"
-            }),
-        new UsesBase("MaxCapBagM5", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM6",
-                        "name": "Big Materials Pouch Recipe",
-                        "amount": 2,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
             }),
         new UsesBase("EquipmentHats53", <UsesModel>{
                 "uses": [
@@ -18008,14 +15641,14 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "MaxCapBagB6",
                         "name": "Large Bug Pouch Recipe",
-                        "amount": 35000,
+                        "amount": 30000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "MaxCapBagB6",
                         "name": "Large Bug Pouch Detailed Recipe",
-                        "amount": 35000,
+                        "amount": 30000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -18775,14 +16408,14 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "MaxCapBagMi6",
                         "name": "Large Mining Pouch Recipe",
-                        "amount": 25000,
+                        "amount": 40000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "MaxCapBagMi6",
                         "name": "Large Mining Pouch Detailed Recipe",
-                        "amount": 25000,
+                        "amount": 40000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -18810,19 +16443,6 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.bOre,
                 "type": "Ore"
             }),
-        new UsesBase("MaxCapBag5", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagMi6",
-                        "name": "Large Mining Pouch Recipe",
-                        "amount": 2,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
-            }),
         new UsesBase("EquipmentToolsHatchet5", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -18835,19 +16455,6 @@ export const initUsesRepo = () => {
                 ],
                 "typeGen": TypeGenEnum.aHatchet,
                 "type": "Hatchet"
-            }),
-        new UsesBase("MaxCapBagT5", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagT6",
-                        "name": "Large Choppin Pouch Recipe",
-                        "amount": 2,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
             }),
         new UsesBase("FishingRod6", <UsesModel>{
                 "uses": [
@@ -18862,19 +16469,6 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.aFishingRod,
                 "type": "Fishing Rod"
             }),
-        new UsesBase("MaxCapBagFi5", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagFi6",
-                        "name": "Large Fish Pouch Recipe",
-                        "amount": 2,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
-            }),
         new UsesBase("CatchingNet6", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -18887,19 +16481,6 @@ export const initUsesRepo = () => {
                 ],
                 "typeGen": TypeGenEnum.aBugNet,
                 "type": "Bug Catching Net"
-            }),
-        new UsesBase("MaxCapBagB5", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagB6",
-                        "name": "Large Bug Pouch Recipe",
-                        "amount": 2,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
             }),
         new UsesBase("TrapBoxSet4", <UsesModel>{
                 "uses": [
@@ -18955,19 +16536,6 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.dCritters,
                 "type": "Critter"
             }),
-        new UsesBase("MaxCapBagTr4", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagTr5",
-                        "name": "Large Critter Pouch Recipe",
-                        "amount": 2,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
-            }),
         new UsesBase("WorshipSkull4", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -18980,19 +16548,6 @@ export const initUsesRepo = () => {
                 ],
                 "typeGen": TypeGenEnum.aSkull,
                 "type": "Worship Skull"
-            }),
-        new UsesBase("MaxCapBagS4", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagS5",
-                        "name": "Large Soul Pouch Recipe",
-                        "amount": 2,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
             }),
         new UsesBase("FoodG5", <UsesModel>{
                 "uses": [
@@ -19039,32 +16594,6 @@ export const initUsesRepo = () => {
                 ],
                 "typeGen": TypeGenEnum.cFood,
                 "type": "Boost Food"
-            }),
-        new UsesBase("MaxCapBagF5", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagF6",
-                        "name": "Large Food Pouch Recipe",
-                        "amount": 1,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
-            }),
-        new UsesBase("MaxCapBagM6", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "MaxCapBagM7",
-                        "name": "Large Materials Pouch Recipe",
-                        "amount": 1,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aCarryBag,
-                "type": "Carry Bag"
             }),
         new UsesBase("EquipmentHats39", <UsesModel>{
                 "uses": [
@@ -21648,15 +19177,8 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentToolsHatchet9",
-                        "name": "Dreadlo Eviscerator Recipe",
-                        "amount": 110000,
-                        "type": "recipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentToolsHatchet9",
                         "name": "Dreadlo Eviscerator Detailed Recipe",
-                        "amount": 220000,
+                        "amount": 110000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -23171,14 +20693,14 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentToolsHatchet8",
                         "name": "Starfire Hatchet Recipe",
-                        "amount": 40,
+                        "amount": 20,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentToolsHatchet8",
                         "name": "Starfire Hatchet Detailed Recipe",
-                        "amount": 40,
+                        "amount": 20,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -23199,28 +20721,28 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "FishingRod9",
                         "name": "Starfire Rod Recipe",
-                        "amount": 60,
+                        "amount": 20,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "FishingRod9",
                         "name": "Starfire Rod Detailed Recipe",
-                        "amount": 60,
+                        "amount": 20,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "CatchingNet9",
                         "name": "Starfire Trim Netting Recipe",
-                        "amount": 80,
+                        "amount": 20,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "CatchingNet9",
                         "name": "Starfire Trim Netting Detailed Recipe",
-                        "amount": 80,
+                        "amount": 20,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -23283,21 +20805,21 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentToolsHatchet9",
                         "name": "Dreadlo Eviscerator Detailed Recipe",
-                        "amount": 40,
+                        "amount": 20,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "FishingRod10",
                         "name": "Dreadlo Rod Detailed Recipe",
-                        "amount": 60,
+                        "amount": 20,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "CatchingNet10",
                         "name": "Dreadlo Matted Netting Detailed Recipe",
-                        "amount": 80,
+                        "amount": 20,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -24294,6 +21816,20 @@ export const initUsesRepo = () => {
             }),
         new UsesBase("Tree9", <UsesModel>{
                 "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet9",
+                        "name": "Dreadlo Eviscerator Recipe",
+                        "amount": 250000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet9",
+                        "name": "Dreadlo Eviscerator Detailed Recipe",
+                        "amount": 250000,
+                        "type": "detRecipe"
+                    },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "MaxCapBagT9",
@@ -25419,6 +22955,19 @@ export const initUsesRepo = () => {
                 ],
                 "typeGen": TypeGenEnum.bOre,
                 "type": "Ore"
+            }),
+        new UsesBase("MaxCapBagM2", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "ItemRepo",
+                        "key": "StampB8",
+                        "name": "Matty Bag Stamp Material",
+                        "amount": "Lots",
+                        "type": "stamp"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aCarryBag,
+                "type": "Carry Bag"
             }),
         new UsesBase("EquipmentTools2", <UsesModel>{
                 "uses": [
@@ -26629,6 +24178,19 @@ export const initUsesRepo = () => {
                 ],
                 "typeGen": TypeGenEnum.aShirt,
                 "type": "Shirt"
+            }),
+        new UsesBase("EquipmentPants5", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "PostOfficeRepo",
+                        "key": "Plan-it Express",
+                        "name": "Plan-it Express Order",
+                        "amount": "Lots",
+                        "type": "poBox"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aPants,
+                "type": "Pants"
             }),
         new UsesBase("GalaxyC1", <UsesModel>{
                 "uses": [

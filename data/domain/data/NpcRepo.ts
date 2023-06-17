@@ -255,9 +255,9 @@ export const initNpcRepo = () => {
                     "world": "Unknown",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 4.14,
-                    "starSign": "Scorpio",
-                    "mothersMaidenName": "Solberg",
+                    "birthWeight": 6.01,
+                    "starSign": "Sagittarius",
+                    "mothersMaidenName": "Van Zandt",
                     "notes": " "
                 },
                 "quests": {},
@@ -276,9 +276,9 @@ export const initNpcRepo = () => {
                     "world": "Unknown",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 1.81,
-                    "starSign": "Scorpio",
-                    "mothersMaidenName": "Tiernan",
+                    "birthWeight": 2.42,
+                    "starSign": "Aries",
+                    "mothersMaidenName": "Quinn",
                     "notes": " "
                 },
                 "quests": {},
@@ -13760,12 +13760,12 @@ export const initNpcRepo = () => {
                 "head": <NpcHeadModel>{
                     "location": "Outer World Town",
                     "world": "Hyperion Nebula",
-                    "noQuest": 0,
-                    "type": "Unknown",
-                    "birthWeight": 6.25,
-                    "starSign": "Sagittarius",
-                    "mothersMaidenName": "Trebil",
-                    "notes": " "
+                    "noQuest": 3,
+                    "type": "Secret",
+                    "birthWeight": 8.72,
+                    "starSign": "Scorpio",
+                    "mothersMaidenName": "Root",
+                    "notes": "Nebulyte's quest line requires a level 150 [[Maestro]] to start. Until then, his name appears as Agent L150 while he taunts you for being a low level noob."
                 },
                 "quests": {
                     "Species Slayer": <CustomQuestModel>{
@@ -13992,9 +13992,9 @@ export const initNpcRepo = () => {
                     "world": "Unknown",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 1.61,
-                    "starSign": "Scorpio",
-                    "mothersMaidenName": "Soulis",
+                    "birthWeight": 1.55,
+                    "starSign": "Gemini",
+                    "mothersMaidenName": "Hancock",
                     "notes": " "
                 },
                 "quests": {},
