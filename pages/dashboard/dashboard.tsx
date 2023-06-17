@@ -58,7 +58,7 @@ function KeyDisplay({ toShow }: { toShow: Key }) {
                         <Text size="small">{nFormatter(toShow.item.count)}</Text>
                         {
                             toShow.amountPerDay > 0 &&
-                            <Text color={toShow.daysSincePickup > 3 ? 'red' : ''} size="xsmall">{toShow.keysAvailableForPickup()}</Text>
+                            <Text color={toShow.daysSincePickup >= 3 ? 'red' : ''} size="xsmall">{toShow.keysAvailableForPickup()}</Text>
                         }
                     </Box>
                 </Box>

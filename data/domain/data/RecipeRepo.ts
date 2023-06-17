@@ -1870,13 +1870,13 @@ export const initRecipeRepo = () => {
                 "recipe": [
                     <ComponentModel>{"item": "EquipmentHats17", "quantity": 1},
                     <ComponentModel>{"item": "Bug1", "quantity": 2000},
-                    <ComponentModel>{"item": "GoldBar", "quantity": 250}
+                    <ComponentModel>{"item": "GoldBar", "quantity": 200}
                 ],
                 "levelReqToCraft": 15,
                 "expGiven": 900,
                 "no": 1,
                 "tab": 2,
-                "sellPrice": 35170,
+                "sellPrice": 29420,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -1884,11 +1884,11 @@ export const initRecipeRepo = () => {
                         <DetRecipeComponentModel>{"indent": 1, "item": "CopperBar", "quantity": 20},
                         <DetRecipeComponentModel>{"indent": 1, "item": "Grasslands3", "quantity": 40},
                         <DetRecipeComponentModel>{"indent": 0, "item": "Bug1", "quantity": 2000},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "GoldBar", "quantity": 250}
+                        <DetRecipeComponentModel>{"indent": 0, "item": "GoldBar", "quantity": 200}
                     ],
                     "detRecipeTotals": [
                         <ComponentModel>{"item": "Bug1", "quantity": 2000},
-                        <ComponentModel>{"item": "GoldBar", "quantity": 250},
+                        <ComponentModel>{"item": "GoldBar", "quantity": 200},
                         <ComponentModel>{"item": "CopperBar", "quantity": 20},
                         <ComponentModel>{"item": "Grasslands3", "quantity": 40}
                     ]
@@ -1899,13 +1899,13 @@ export const initRecipeRepo = () => {
                 "recipe": [
                     <ComponentModel>{"item": "EquipmentShirts11", "quantity": 1},
                     <ComponentModel>{"item": "DesertA1", "quantity": 1500},
-                    <ComponentModel>{"item": "GoldBar", "quantity": 350}
+                    <ComponentModel>{"item": "GoldBar", "quantity": 250}
                 ],
                 "levelReqToCraft": 16,
                 "expGiven": 1400,
                 "no": 2,
                 "tab": 2,
-                "sellPrice": 131865,
+                "sellPrice": 120365,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -1913,11 +1913,11 @@ export const initRecipeRepo = () => {
                         <DetRecipeComponentModel>{"indent": 1, "item": "CopperBar", "quantity": 25},
                         <DetRecipeComponentModel>{"indent": 1, "item": "CraftMat5", "quantity": 120},
                         <DetRecipeComponentModel>{"indent": 0, "item": "DesertA1", "quantity": 1500},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "GoldBar", "quantity": 350}
+                        <DetRecipeComponentModel>{"indent": 0, "item": "GoldBar", "quantity": 250}
                     ],
                     "detRecipeTotals": [
                         <ComponentModel>{"item": "DesertA1", "quantity": 1500},
-                        <ComponentModel>{"item": "GoldBar", "quantity": 350},
+                        <ComponentModel>{"item": "GoldBar", "quantity": 250},
                         <ComponentModel>{"item": "CopperBar", "quantity": 25},
                         <ComponentModel>{"item": "CraftMat5", "quantity": 120}
                     ]
@@ -1928,13 +1928,13 @@ export const initRecipeRepo = () => {
                 "recipe": [
                     <ComponentModel>{"item": "EquipmentPants2", "quantity": 1},
                     <ComponentModel>{"item": "Fish1", "quantity": 500},
-                    <ComponentModel>{"item": "GoldBar", "quantity": 475}
+                    <ComponentModel>{"item": "GoldBar", "quantity": 300}
                 ],
                 "levelReqToCraft": 18,
                 "expGiven": 2500,
                 "no": 3,
                 "tab": 2,
-                "sellPrice": 57285,
+                "sellPrice": 37160,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -1942,11 +1942,11 @@ export const initRecipeRepo = () => {
                         <DetRecipeComponentModel>{"indent": 1, "item": "CopperBar", "quantity": 30},
                         <DetRecipeComponentModel>{"indent": 1, "item": "BirchTree", "quantity": 150},
                         <DetRecipeComponentModel>{"indent": 0, "item": "Fish1", "quantity": 500},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "GoldBar", "quantity": 475}
+                        <DetRecipeComponentModel>{"indent": 0, "item": "GoldBar", "quantity": 300}
                     ],
                     "detRecipeTotals": [
                         <ComponentModel>{"item": "Fish1", "quantity": 500},
-                        <ComponentModel>{"item": "GoldBar", "quantity": 475},
+                        <ComponentModel>{"item": "GoldBar", "quantity": 300},
                         <ComponentModel>{"item": "CopperBar", "quantity": 30},
                         <ComponentModel>{"item": "BirchTree", "quantity": 150}
                     ]
@@ -2107,13 +2107,13 @@ export const initRecipeRepo = () => {
                 "recipe": [
                     <ComponentModel>{"item": "EquipmentTools3", "quantity": 1},
                     <ComponentModel>{"item": "DesertA2", "quantity": 2500},
-                    <ComponentModel>{"item": "GoldBar", "quantity": 800}
+                    <ComponentModel>{"item": "GoldBar", "quantity": 400}
                 ],
                 "levelReqToCraft": 20,
                 "expGiven": 4400,
                 "no": 9,
                 "tab": 2,
-                "sellPrice": 271490,
+                "sellPrice": 225490,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -2121,11 +2121,11 @@ export const initRecipeRepo = () => {
                         <DetRecipeComponentModel>{"indent": 1, "item": "IronBar", "quantity": 70},
                         <DetRecipeComponentModel>{"indent": 1, "item": "Jungle3", "quantity": 150},
                         <DetRecipeComponentModel>{"indent": 0, "item": "DesertA2", "quantity": 2500},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "GoldBar", "quantity": 800}
+                        <DetRecipeComponentModel>{"indent": 0, "item": "GoldBar", "quantity": 400}
                     ],
                     "detRecipeTotals": [
                         <ComponentModel>{"item": "DesertA2", "quantity": 2500},
-                        <ComponentModel>{"item": "GoldBar", "quantity": 800},
+                        <ComponentModel>{"item": "GoldBar", "quantity": 400},
                         <ComponentModel>{"item": "IronBar", "quantity": 70},
                         <ComponentModel>{"item": "Jungle3", "quantity": 150}
                     ]
@@ -2133,30 +2133,16 @@ export const initRecipeRepo = () => {
             }),
         new RecipeBase("MaxCapBag3", <RecipeModel>{
                 "intID": "MaxCapBag3",
-                "recipe": [
-                    <ComponentModel>{"item": "MaxCapBag1", "quantity": 2},
-                    <ComponentModel>{"item": "MaxCapBag2", "quantity": 1},
-                    <ComponentModel>{"item": "Gold", "quantity": 2000}
-                ],
+                "recipe": [<ComponentModel>{"item": "Gold", "quantity": 2000}],
                 "levelReqToCraft": 15,
                 "expGiven": 1200,
                 "no": 10,
                 "tab": 2,
-                "sellPrice": 31620,
+                "sellPrice": 26000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
-                    "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBag1", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Copper", "quantity": 240},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBag2", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Iron", "quantity": 700},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "Gold", "quantity": 2000}
-                    ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "Gold", "quantity": 2000},
-                        <ComponentModel>{"item": "Copper", "quantity": 240},
-                        <ComponentModel>{"item": "Iron", "quantity": 700}
-                    ]
+                    "detRecipe": [<DetRecipeComponentModel>{"indent": 0, "item": "Gold", "quantity": 2000}],
+                    "detRecipeTotals": [<ComponentModel>{"item": "Gold", "quantity": 2000}]
                 }
             }),
         new RecipeBase("EquipmentToolsHatchet2", <RecipeModel>{
@@ -2190,32 +2176,16 @@ export const initRecipeRepo = () => {
             }),
         new RecipeBase("MaxCapBagT3", <RecipeModel>{
                 "intID": "MaxCapBagT3",
-                "recipe": [
-                    <ComponentModel>{"item": "MaxCapBag7", "quantity": 2},
-                    <ComponentModel>{"item": "MaxCapBag9", "quantity": 1},
-                    <ComponentModel>{"item": "ForestTree", "quantity": 2100}
-                ],
+                "recipe": [<ComponentModel>{"item": "ForestTree", "quantity": 2000}],
                 "levelReqToCraft": 15,
                 "expGiven": 1200,
                 "no": 12,
                 "tab": 2,
-                "sellPrice": 24720,
+                "sellPrice": 20000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
-                    "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBag7", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "OakTree", "quantity": 300},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "CraftMat5", "quantity": 60},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBag9", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "BirchTree", "quantity": 800},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "ForestTree", "quantity": 2100}
-                    ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "ForestTree", "quantity": 2100},
-                        <ComponentModel>{"item": "OakTree", "quantity": 300},
-                        <ComponentModel>{"item": "CraftMat5", "quantity": 60},
-                        <ComponentModel>{"item": "BirchTree", "quantity": 800}
-                    ]
+                    "detRecipe": [<DetRecipeComponentModel>{"indent": 0, "item": "ForestTree", "quantity": 2000}],
+                    "detRecipeTotals": [<ComponentModel>{"item": "ForestTree", "quantity": 2000}]
                 }
             }),
         new RecipeBase("FishingRod4", <RecipeModel>{
@@ -2250,31 +2220,16 @@ export const initRecipeRepo = () => {
             }),
         new RecipeBase("MaxCapBagFi3", <RecipeModel>{
                 "intID": "MaxCapBagFi3",
-                "recipe": [
-                    <ComponentModel>{"item": "MaxCapBagFi1", "quantity": 2},
-                    <ComponentModel>{"item": "MaxCapBagFi2", "quantity": 1},
-                    <ComponentModel>{"item": "Fish2", "quantity": 2000}
-                ],
+                "recipe": [<ComponentModel>{"item": "Fish2", "quantity": 2000}],
                 "levelReqToCraft": 17,
                 "expGiven": 1850,
                 "no": 14,
                 "tab": 2,
-                "sellPrice": 28215,
+                "sellPrice": 22000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
-                    "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBagFi1", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Fish1", "quantity": 360},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBagFi2", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Fish2", "quantity": 425},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "PureWater", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "Fish2", "quantity": 2000}
-                    ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "Fish2", "quantity": 2425},
-                        <ComponentModel>{"item": "Fish1", "quantity": 360},
-                        <ComponentModel>{"item": "PureWater", "quantity": 2}
-                    ]
+                    "detRecipe": [<DetRecipeComponentModel>{"indent": 0, "item": "Fish2", "quantity": 2000}],
+                    "detRecipeTotals": [<ComponentModel>{"item": "Fish2", "quantity": 2000}]
                 }
             }),
         new RecipeBase("CatchingNet4", <RecipeModel>{
@@ -2309,31 +2264,16 @@ export const initRecipeRepo = () => {
             }),
         new RecipeBase("MaxCapBagB3", <RecipeModel>{
                 "intID": "MaxCapBagB3",
-                "recipe": [
-                    <ComponentModel>{"item": "MaxCapBagB1", "quantity": 2},
-                    <ComponentModel>{"item": "MaxCapBagB2", "quantity": 1},
-                    <ComponentModel>{"item": "Bug2", "quantity": 2100}
-                ],
+                "recipe": [<ComponentModel>{"item": "Bug2", "quantity": 2000}],
                 "levelReqToCraft": 17,
                 "expGiven": 1850,
                 "no": 16,
                 "tab": 2,
-                "sellPrice": 23905,
+                "sellPrice": 18000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
-                    "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBagB1", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Bug1", "quantity": 360},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBagB2", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Bug2", "quantity": 425},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "PureWater", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "Bug2", "quantity": 2100}
-                    ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "Bug2", "quantity": 2525},
-                        <ComponentModel>{"item": "Bug1", "quantity": 360},
-                        <ComponentModel>{"item": "PureWater", "quantity": 2}
-                    ]
+                    "detRecipe": [<DetRecipeComponentModel>{"indent": 0, "item": "Bug2", "quantity": 2000}],
+                    "detRecipeTotals": [<ComponentModel>{"item": "Bug2", "quantity": 2000}]
                 }
             }),
         new RecipeBase("EquipmentRings11", <RecipeModel>{
@@ -2401,7 +2341,6 @@ export const initRecipeRepo = () => {
         new RecipeBase("MaxCapBagF3", <RecipeModel>{
                 "intID": "MaxCapBagF3",
                 "recipe": [
-                    <ComponentModel>{"item": "MaxCapBag8", "quantity": 2},
                     <ComponentModel>{"item": "FoodHealth7", "quantity": 400},
                     <ComponentModel>{"item": "FoodMining1", "quantity": 700},
                     <ComponentModel>{"item": "FoodChoppin1", "quantity": 700}
@@ -2410,15 +2349,10 @@ export const initRecipeRepo = () => {
                 "expGiven": 2400,
                 "no": 19,
                 "tab": 2,
-                "sellPrice": 98200,
+                "sellPrice": 97100,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBag8", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "FoodHealth1", "quantity": 150},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "FoodHealth3", "quantity": 50},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "OakTree", "quantity": 120},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "CopperBar", "quantity": 30},
                         <DetRecipeComponentModel>{"indent": 0, "item": "FoodHealth7", "quantity": 400},
                         <DetRecipeComponentModel>{"indent": 0, "item": "FoodMining1", "quantity": 700},
                         <DetRecipeComponentModel>{"indent": 1, "item": "Iron", "quantity": 3500},
@@ -2429,10 +2363,6 @@ export const initRecipeRepo = () => {
                     ],
                     "detRecipeTotals": [
                         <ComponentModel>{"item": "FoodHealth7", "quantity": 400},
-                        <ComponentModel>{"item": "FoodHealth1", "quantity": 150},
-                        <ComponentModel>{"item": "FoodHealth3", "quantity": 50},
-                        <ComponentModel>{"item": "OakTree", "quantity": 120},
-                        <ComponentModel>{"item": "CopperBar", "quantity": 30},
                         <ComponentModel>{"item": "Iron", "quantity": 3500},
                         <ComponentModel>{"item": "FoodPotMana1", "quantity": 1400},
                         <ComponentModel>{"item": "JungleTree", "quantity": 4200},
@@ -2442,33 +2372,19 @@ export const initRecipeRepo = () => {
             }),
         new RecipeBase("MaxCapBagM4", <RecipeModel>{
                 "intID": "MaxCapBagM4",
-                "recipe": [
-                    <ComponentModel>{"item": "MaxCapBagM2", "quantity": 2},
-                    <ComponentModel>{"item": "DesertA1b", "quantity": 1},
-                    <ComponentModel>{"item": "CraftMat7", "quantity": 1700}
-                ],
+                "recipe": [<ComponentModel>{"item": "DesertA1b", "quantity": 1}, <ComponentModel>{"item": "CraftMat7", "quantity": 1700}],
                 "levelReqToCraft": 18,
                 "expGiven": 2400,
                 "no": 20,
                 "tab": 2,
-                "sellPrice": 70800,
+                "sellPrice": 68060,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBagM2", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "CraftMat5", "quantity": 160},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Grasslands2", "quantity": 80},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Grasslands3", "quantity": 60},
                         <DetRecipeComponentModel>{"indent": 0, "item": "DesertA1b", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 0, "item": "CraftMat7", "quantity": 1700}
                     ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "DesertA1b", "quantity": 1},
-                        <ComponentModel>{"item": "CraftMat7", "quantity": 1700},
-                        <ComponentModel>{"item": "CraftMat5", "quantity": 160},
-                        <ComponentModel>{"item": "Grasslands2", "quantity": 80},
-                        <ComponentModel>{"item": "Grasslands3", "quantity": 60}
-                    ]
+                    "detRecipeTotals": [<ComponentModel>{"item": "DesertA1b", "quantity": 1}, <ComponentModel>{"item": "CraftMat7", "quantity": 1700}]
                 }
             }),
         new RecipeBase("EquipmentHats19", <RecipeModel>{
@@ -2742,7 +2658,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 16000,
                 "no": 29,
                 "tab": 2,
-                "sellPrice": 1899490,
+                "sellPrice": 1853490,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -2751,7 +2667,7 @@ export const initRecipeRepo = () => {
                         <DetRecipeComponentModel>{"indent": 2, "item": "IronBar", "quantity": 70},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Jungle3", "quantity": 150},
                         <DetRecipeComponentModel>{"indent": 1, "item": "DesertA2", "quantity": 2500},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "GoldBar", "quantity": 800},
+                        <DetRecipeComponentModel>{"indent": 1, "item": "GoldBar", "quantity": 400},
                         <DetRecipeComponentModel>{"indent": 0, "item": "PlatBar", "quantity": 800},
                         <DetRecipeComponentModel>{"indent": 0, "item": "DesertB3", "quantity": 10500}
                     ],
@@ -2759,7 +2675,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "PlatBar", "quantity": 800},
                         <ComponentModel>{"item": "DesertB3", "quantity": 10500},
                         <ComponentModel>{"item": "DesertA2", "quantity": 2500},
-                        <ComponentModel>{"item": "GoldBar", "quantity": 800},
+                        <ComponentModel>{"item": "GoldBar", "quantity": 400},
                         <ComponentModel>{"item": "IronBar", "quantity": 70},
                         <ComponentModel>{"item": "Jungle3", "quantity": 150}
                     ]
@@ -2767,29 +2683,16 @@ export const initRecipeRepo = () => {
             }),
         new RecipeBase("MaxCapBag4", <RecipeModel>{
                 "intID": "MaxCapBag4",
-                "recipe": [<ComponentModel>{"item": "Plat", "quantity": 7500}, <ComponentModel>{"item": "MaxCapBag3", "quantity": 1}],
+                "recipe": [<ComponentModel>{"item": "Plat", "quantity": 7500}],
                 "levelReqToCraft": 24,
                 "expGiven": 9000,
                 "no": 30,
                 "tab": 2,
-                "sellPrice": 181620,
+                "sellPrice": 150000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
-                    "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "Plat", "quantity": 7500},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBag3", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "MaxCapBag1", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Copper", "quantity": 240},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "MaxCapBag2", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Iron", "quantity": 700},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Gold", "quantity": 2000}
-                    ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "Plat", "quantity": 7500},
-                        <ComponentModel>{"item": "Gold", "quantity": 2000},
-                        <ComponentModel>{"item": "Copper", "quantity": 240},
-                        <ComponentModel>{"item": "Iron", "quantity": 700}
-                    ]
+                    "detRecipe": [<DetRecipeComponentModel>{"indent": 0, "item": "Plat", "quantity": 7500}],
+                    "detRecipeTotals": [<ComponentModel>{"item": "Plat", "quantity": 7500}]
                 }
             }),
         new RecipeBase("EquipmentToolsHatchet4", <RecipeModel>{
@@ -2828,31 +2731,16 @@ export const initRecipeRepo = () => {
             }),
         new RecipeBase("MaxCapBagT4", <RecipeModel>{
                 "intID": "MaxCapBagT4",
-                "recipe": [<ComponentModel>{"item": "PalmTree", "quantity": 7500}, <ComponentModel>{"item": "MaxCapBagT3", "quantity": 1}],
+                "recipe": [<ComponentModel>{"item": "PalmTree", "quantity": 7500}],
                 "levelReqToCraft": 24,
                 "expGiven": 9000,
                 "no": 32,
                 "tab": 2,
-                "sellPrice": 174720,
+                "sellPrice": 150000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
-                    "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "PalmTree", "quantity": 7500},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBagT3", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "MaxCapBag7", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "OakTree", "quantity": 300},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "CraftMat5", "quantity": 60},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "MaxCapBag9", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "BirchTree", "quantity": 800},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "ForestTree", "quantity": 2100}
-                    ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "PalmTree", "quantity": 7500},
-                        <ComponentModel>{"item": "ForestTree", "quantity": 2100},
-                        <ComponentModel>{"item": "OakTree", "quantity": 300},
-                        <ComponentModel>{"item": "CraftMat5", "quantity": 60},
-                        <ComponentModel>{"item": "BirchTree", "quantity": 800}
-                    ]
+                    "detRecipe": [<DetRecipeComponentModel>{"indent": 0, "item": "PalmTree", "quantity": 7500}],
+                    "detRecipeTotals": [<ComponentModel>{"item": "PalmTree", "quantity": 7500}]
                 }
             }),
         new RecipeBase("FishingRod5", <RecipeModel>{
@@ -2892,35 +2780,19 @@ export const initRecipeRepo = () => {
             }),
         new RecipeBase("MaxCapBagFi4", <RecipeModel>{
                 "intID": "MaxCapBagFi4",
-                "recipe": [
-                    <ComponentModel>{"item": "Fish4", "quantity": 2500},
-                    <ComponentModel>{"item": "Fish1", "quantity": 5000},
-                    <ComponentModel>{"item": "MaxCapBagFi3", "quantity": 1}
-                ],
+                "recipe": [<ComponentModel>{"item": "Fish4", "quantity": 2500}, <ComponentModel>{"item": "Fish1", "quantity": 5000}],
                 "levelReqToCraft": 27,
                 "expGiven": 17000,
                 "no": 34,
                 "tab": 2,
-                "sellPrice": 93215,
+                "sellPrice": 65000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "Fish4", "quantity": 2500},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "Fish1", "quantity": 5000},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBagFi3", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "MaxCapBagFi1", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Fish1", "quantity": 360},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "MaxCapBagFi2", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Fish2", "quantity": 425},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "PureWater", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Fish2", "quantity": 2000}
+                        <DetRecipeComponentModel>{"indent": 0, "item": "Fish1", "quantity": 5000}
                     ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "Fish4", "quantity": 2500},
-                        <ComponentModel>{"item": "Fish1", "quantity": 5360},
-                        <ComponentModel>{"item": "Fish2", "quantity": 2425},
-                        <ComponentModel>{"item": "PureWater", "quantity": 2}
-                    ]
+                    "detRecipeTotals": [<ComponentModel>{"item": "Fish4", "quantity": 2500}, <ComponentModel>{"item": "Fish1", "quantity": 5000}]
                 }
             }),
         new RecipeBase("CatchingNet5", <RecipeModel>{
@@ -2960,112 +2832,50 @@ export const initRecipeRepo = () => {
             }),
         new RecipeBase("MaxCapBagB4", <RecipeModel>{
                 "intID": "MaxCapBagB4",
-                "recipe": [<ComponentModel>{"item": "Bug4", "quantity": 7500}, <ComponentModel>{"item": "MaxCapBagB3", "quantity": 1}],
+                "recipe": [<ComponentModel>{"item": "Bug4", "quantity": 7500}],
                 "levelReqToCraft": 27,
                 "expGiven": 17000,
                 "no": 36,
                 "tab": 2,
-                "sellPrice": 173905,
+                "sellPrice": 150000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
-                    "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "Bug4", "quantity": 7500},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBagB3", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "MaxCapBagB1", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Bug1", "quantity": 360},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "MaxCapBagB2", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Bug2", "quantity": 425},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "PureWater", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Bug2", "quantity": 2100}
-                    ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "Bug4", "quantity": 7500},
-                        <ComponentModel>{"item": "Bug2", "quantity": 2525},
-                        <ComponentModel>{"item": "Bug1", "quantity": 360},
-                        <ComponentModel>{"item": "PureWater", "quantity": 2}
-                    ]
+                    "detRecipe": [<DetRecipeComponentModel>{"indent": 0, "item": "Bug4", "quantity": 7500}],
+                    "detRecipeTotals": [<ComponentModel>{"item": "Bug4", "quantity": 7500}]
                 }
             }),
         new RecipeBase("MaxCapBagF4", <RecipeModel>{
                 "intID": "MaxCapBagF4",
-                "recipe": [
-                    <ComponentModel>{"item": "FoodG3", "quantity": 9},
-                    <ComponentModel>{"item": "DesertA3b", "quantity": 4},
-                    <ComponentModel>{"item": "MaxCapBagF3", "quantity": 2}
-                ],
+                "recipe": [<ComponentModel>{"item": "FoodG3", "quantity": 9}, <ComponentModel>{"item": "DesertA3b", "quantity": 4}],
                 "levelReqToCraft": 28,
                 "expGiven": 28000,
                 "no": 37,
                 "tab": 2,
-                "sellPrice": 199870,
+                "sellPrice": 3470,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "FoodG3", "quantity": 9},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "DesertA3b", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBagF3", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "MaxCapBag8", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "FoodHealth1", "quantity": 300},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "FoodHealth3", "quantity": 100},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "OakTree", "quantity": 240},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "CopperBar", "quantity": 60},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "FoodHealth7", "quantity": 800},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "FoodMining1", "quantity": 1400},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Iron", "quantity": 7000},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "FoodPotMana1", "quantity": 2800},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "FoodChoppin1", "quantity": 1400},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "JungleTree", "quantity": 8400},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "FoodPotRe1", "quantity": 4200}
+                        <DetRecipeComponentModel>{"indent": 0, "item": "DesertA3b", "quantity": 4}
                     ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "FoodG3", "quantity": 9},
-                        <ComponentModel>{"item": "DesertA3b", "quantity": 4},
-                        <ComponentModel>{"item": "FoodHealth7", "quantity": 800},
-                        <ComponentModel>{"item": "FoodHealth1", "quantity": 300},
-                        <ComponentModel>{"item": "FoodHealth3", "quantity": 100},
-                        <ComponentModel>{"item": "OakTree", "quantity": 240},
-                        <ComponentModel>{"item": "CopperBar", "quantity": 60},
-                        <ComponentModel>{"item": "Iron", "quantity": 7000},
-                        <ComponentModel>{"item": "FoodPotMana1", "quantity": 2800},
-                        <ComponentModel>{"item": "JungleTree", "quantity": 8400},
-                        <ComponentModel>{"item": "FoodPotRe1", "quantity": 4200}
-                    ]
+                    "detRecipeTotals": [<ComponentModel>{"item": "FoodG3", "quantity": 9}, <ComponentModel>{"item": "DesertA3b", "quantity": 4}]
                 }
             }),
         new RecipeBase("MaxCapBagM5", <RecipeModel>{
                 "intID": "MaxCapBagM5",
-                "recipe": [
-                    <ComponentModel>{"item": "Sewers1b", "quantity": 3},
-                    <ComponentModel>{"item": "TreeInterior1b", "quantity": 4},
-                    <ComponentModel>{"item": "MaxCapBagM4", "quantity": 2}
-                ],
+                "recipe": [<ComponentModel>{"item": "Sewers1b", "quantity": 3}, <ComponentModel>{"item": "TreeInterior1b", "quantity": 4}],
                 "levelReqToCraft": 30,
                 "expGiven": 41000,
                 "no": 38,
                 "tab": 2,
-                "sellPrice": 143460,
+                "sellPrice": 1860,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "Sewers1b", "quantity": 3},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "TreeInterior1b", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBagM4", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "MaxCapBagM2", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "CraftMat5", "quantity": 320},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Grasslands2", "quantity": 160},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Grasslands3", "quantity": 120},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "DesertA1b", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "CraftMat7", "quantity": 3400}
+                        <DetRecipeComponentModel>{"indent": 0, "item": "TreeInterior1b", "quantity": 4}
                     ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "Sewers1b", "quantity": 3},
-                        <ComponentModel>{"item": "TreeInterior1b", "quantity": 4},
-                        <ComponentModel>{"item": "DesertA1b", "quantity": 2},
-                        <ComponentModel>{"item": "CraftMat7", "quantity": 3400},
-                        <ComponentModel>{"item": "CraftMat5", "quantity": 320},
-                        <ComponentModel>{"item": "Grasslands2", "quantity": 160},
-                        <ComponentModel>{"item": "Grasslands3", "quantity": 120}
-                    ]
+                    "detRecipeTotals": [<ComponentModel>{"item": "Sewers1b", "quantity": 3}, <ComponentModel>{"item": "TreeInterior1b", "quantity": 4}]
                 }
             }),
         new RecipeBase("EquipmentSmithingTabs3", <RecipeModel>{
@@ -4169,146 +3979,70 @@ export const initRecipeRepo = () => {
             }),
         new RecipeBase("EquipmentHats53", <RecipeModel>{
                 "intID": "EquipmentHats53",
-                "recipe": [
-                    <ComponentModel>{"item": "EquipmentHats19", "quantity": 1},
-                    <ComponentModel>{"item": "Critter1", "quantity": 5000},
-                    <ComponentModel>{"item": "DementiaBar", "quantity": 300}
-                ],
+                "recipe": [<ComponentModel>{"item": "Critter1", "quantity": 5000}, <ComponentModel>{"item": "DementiaBar", "quantity": 300}],
                 "levelReqToCraft": 36,
                 "expGiven": 100000,
                 "no": 1,
                 "tab": 3,
-                "sellPrice": 851500,
+                "sellPrice": 465000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentHats19", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentHats18", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "IronBar", "quantity": 125},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Forest1", "quantity": 300},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Fish3", "quantity": 2250},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "PlatBar", "quantity": 750},
                         <DetRecipeComponentModel>{"indent": 0, "item": "Critter1", "quantity": 5000},
                         <DetRecipeComponentModel>{"indent": 0, "item": "DementiaBar", "quantity": 300}
                     ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "Critter1", "quantity": 5000},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 300},
-                        <ComponentModel>{"item": "Fish3", "quantity": 2250},
-                        <ComponentModel>{"item": "PlatBar", "quantity": 750},
-                        <ComponentModel>{"item": "IronBar", "quantity": 125},
-                        <ComponentModel>{"item": "Forest1", "quantity": 300}
-                    ]
+                    "detRecipeTotals": [<ComponentModel>{"item": "Critter1", "quantity": 5000}, <ComponentModel>{"item": "DementiaBar", "quantity": 300}]
                 }
             }),
         new RecipeBase("EquipmentShirts15", <RecipeModel>{
                 "intID": "EquipmentShirts15",
-                "recipe": [
-                    <ComponentModel>{"item": "EquipmentShirts14", "quantity": 1},
-                    <ComponentModel>{"item": "Soul1", "quantity": 1000},
-                    <ComponentModel>{"item": "DementiaBar", "quantity": 350}
-                ],
+                "recipe": [<ComponentModel>{"item": "Soul1", "quantity": 1000}, <ComponentModel>{"item": "DementiaBar", "quantity": 350}],
                 "levelReqToCraft": 37,
                 "expGiven": 120000,
                 "no": 2,
                 "tab": 3,
-                "sellPrice": 1661400,
+                "sellPrice": 528000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShirts14", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentShirts12", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "IronBar", "quantity": 150},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "JungleTree", "quantity": 600},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "DesertB4", "quantity": 5000},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "PlatBar", "quantity": 1000},
                         <DetRecipeComponentModel>{"indent": 0, "item": "Soul1", "quantity": 1000},
                         <DetRecipeComponentModel>{"indent": 0, "item": "DementiaBar", "quantity": 350}
                     ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "Soul1", "quantity": 1000},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 350},
-                        <ComponentModel>{"item": "DesertB4", "quantity": 5000},
-                        <ComponentModel>{"item": "PlatBar", "quantity": 1000},
-                        <ComponentModel>{"item": "IronBar", "quantity": 150},
-                        <ComponentModel>{"item": "JungleTree", "quantity": 600}
-                    ]
+                    "detRecipeTotals": [<ComponentModel>{"item": "Soul1", "quantity": 1000}, <ComponentModel>{"item": "DementiaBar", "quantity": 350}]
                 }
             }),
         new RecipeBase("EquipmentPants6", <RecipeModel>{
                 "intID": "EquipmentPants6",
-                "recipe": [
-                    <ComponentModel>{"item": "EquipmentPants5", "quantity": 1},
-                    <ComponentModel>{"item": "SnowA1", "quantity": 8000},
-                    <ComponentModel>{"item": "DementiaBar", "quantity": 400}
-                ],
+                "recipe": [<ComponentModel>{"item": "SnowA1", "quantity": 8000}, <ComponentModel>{"item": "DementiaBar", "quantity": 400}],
                 "levelReqToCraft": 38,
                 "expGiven": 150000,
                 "no": 3,
                 "tab": 3,
-                "sellPrice": 2861065,
+                "sellPrice": 2200000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentPants5", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentPants3", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "IronBar", "quantity": 170},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "CraftMat6", "quantity": 225},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Bug3", "quantity": 5000},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "PlatBar", "quantity": 1250},
                         <DetRecipeComponentModel>{"indent": 0, "item": "SnowA1", "quantity": 8000},
                         <DetRecipeComponentModel>{"indent": 0, "item": "DementiaBar", "quantity": 400}
                     ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "SnowA1", "quantity": 8000},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 400},
-                        <ComponentModel>{"item": "Bug3", "quantity": 5000},
-                        <ComponentModel>{"item": "PlatBar", "quantity": 1250},
-                        <ComponentModel>{"item": "IronBar", "quantity": 170},
-                        <ComponentModel>{"item": "CraftMat6", "quantity": 225}
-                    ]
+                    "detRecipeTotals": [<ComponentModel>{"item": "SnowA1", "quantity": 8000}, <ComponentModel>{"item": "DementiaBar", "quantity": 400}]
                 }
             }),
         new RecipeBase("EquipmentShoes5", <RecipeModel>{
                 "intID": "EquipmentShoes5",
-                "recipe": [
-                    <ComponentModel>{"item": "EquipmentShoes4", "quantity": 1},
-                    <ComponentModel>{"item": "Critter1A", "quantity": 3},
-                    <ComponentModel>{"item": "DementiaBar", "quantity": 500}
-                ],
+                "recipe": [<ComponentModel>{"item": "Critter1A", "quantity": 3}, <ComponentModel>{"item": "DementiaBar", "quantity": 500}],
                 "levelReqToCraft": 39,
                 "expGiven": 200000,
                 "no": 4,
                 "tab": 3,
-                "sellPrice": 1012025,
+                "sellPrice": 750300,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShoes4", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentShoes3", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentShoes15", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentShoes1", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "CopperBar", "quantity": 75},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "CraftMat5", "quantity": 500},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "IronBar", "quantity": 125},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "GoldBar", "quantity": 600},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "PureWater", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "PalmTree", "quantity": 7000},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Fish3", "quantity": 3000},
                         <DetRecipeComponentModel>{"indent": 0, "item": "Critter1A", "quantity": 3},
                         <DetRecipeComponentModel>{"indent": 0, "item": "DementiaBar", "quantity": 500}
                     ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "Critter1A", "quantity": 3},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 500},
-                        <ComponentModel>{"item": "PalmTree", "quantity": 7000},
-                        <ComponentModel>{"item": "Fish3", "quantity": 3000},
-                        <ComponentModel>{"item": "GoldBar", "quantity": 600},
-                        <ComponentModel>{"item": "PureWater", "quantity": 4},
-                        <ComponentModel>{"item": "CraftMat5", "quantity": 500},
-                        <ComponentModel>{"item": "IronBar", "quantity": 125},
-                        <ComponentModel>{"item": "CopperBar", "quantity": 75}
-                    ]
+                    "detRecipeTotals": [<ComponentModel>{"item": "Critter1A", "quantity": 3}, <ComponentModel>{"item": "DementiaBar", "quantity": 500}]
                 }
             }),
         new RecipeBase("EquipmentPunching4", <RecipeModel>{
@@ -4469,7 +4203,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 150000,
                 "no": 9,
                 "tab": 3,
-                "sellPrice": 6061990,
+                "sellPrice": 6015990,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -4479,7 +4213,7 @@ export const initRecipeRepo = () => {
                         <DetRecipeComponentModel>{"indent": 3, "item": "IronBar", "quantity": 70},
                         <DetRecipeComponentModel>{"indent": 3, "item": "Jungle3", "quantity": 150},
                         <DetRecipeComponentModel>{"indent": 2, "item": "DesertA2", "quantity": 2500},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "GoldBar", "quantity": 800},
+                        <DetRecipeComponentModel>{"indent": 2, "item": "GoldBar", "quantity": 400},
                         <DetRecipeComponentModel>{"indent": 1, "item": "PlatBar", "quantity": 800},
                         <DetRecipeComponentModel>{"indent": 1, "item": "DesertB3", "quantity": 10500},
                         <DetRecipeComponentModel>{"indent": 0, "item": "DementiaBar", "quantity": 275},
@@ -4491,7 +4225,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "PlatBar", "quantity": 800},
                         <ComponentModel>{"item": "DesertB3", "quantity": 10500},
                         <ComponentModel>{"item": "DesertA2", "quantity": 2500},
-                        <ComponentModel>{"item": "GoldBar", "quantity": 800},
+                        <ComponentModel>{"item": "GoldBar", "quantity": 400},
                         <ComponentModel>{"item": "IronBar", "quantity": 70},
                         <ComponentModel>{"item": "Jungle3", "quantity": 150}
                     ]
@@ -4499,32 +4233,16 @@ export const initRecipeRepo = () => {
             }),
         new RecipeBase("MaxCapBag5", <RecipeModel>{
                 "intID": "MaxCapBag5",
-                "recipe": [<ComponentModel>{"item": "Dementia", "quantity": 17500}, <ComponentModel>{"item": "MaxCapBag4", "quantity": 2}],
+                "recipe": [<ComponentModel>{"item": "Dementia", "quantity": 15000}],
                 "levelReqToCraft": 35,
                 "expGiven": 65000,
                 "no": 10,
                 "tab": 3,
-                "sellPrice": 975740,
+                "sellPrice": 525000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
-                    "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "Dementia", "quantity": 17500},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBag4", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Plat", "quantity": 15000},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "MaxCapBag3", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "MaxCapBag1", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "Copper", "quantity": 480},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "MaxCapBag2", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "Iron", "quantity": 1400},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Gold", "quantity": 4000}
-                    ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "Dementia", "quantity": 17500},
-                        <ComponentModel>{"item": "Plat", "quantity": 15000},
-                        <ComponentModel>{"item": "Gold", "quantity": 4000},
-                        <ComponentModel>{"item": "Copper", "quantity": 480},
-                        <ComponentModel>{"item": "Iron", "quantity": 1400}
-                    ]
+                    "detRecipe": [<DetRecipeComponentModel>{"indent": 0, "item": "Dementia", "quantity": 15000}],
+                    "detRecipeTotals": [<ComponentModel>{"item": "Dementia", "quantity": 15000}]
                 }
             }),
         new RecipeBase("EquipmentToolsHatchet5", <RecipeModel>{
@@ -4568,34 +4286,16 @@ export const initRecipeRepo = () => {
             }),
         new RecipeBase("MaxCapBagT5", <RecipeModel>{
                 "intID": "MaxCapBagT5",
-                "recipe": [<ComponentModel>{"item": "SaharanFoal", "quantity": 20000}, <ComponentModel>{"item": "MaxCapBagT4", "quantity": 2}],
+                "recipe": [<ComponentModel>{"item": "SaharanFoal", "quantity": 20000}],
                 "levelReqToCraft": 35,
                 "expGiven": 65000,
                 "no": 12,
                 "tab": 3,
-                "sellPrice": 949440,
+                "sellPrice": 600000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
-                    "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "SaharanFoal", "quantity": 20000},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBagT4", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "PalmTree", "quantity": 15000},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "MaxCapBagT3", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "MaxCapBag7", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "OakTree", "quantity": 600},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "CraftMat5", "quantity": 120},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "MaxCapBag9", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "BirchTree", "quantity": 1600},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "ForestTree", "quantity": 4200}
-                    ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "SaharanFoal", "quantity": 20000},
-                        <ComponentModel>{"item": "PalmTree", "quantity": 15000},
-                        <ComponentModel>{"item": "ForestTree", "quantity": 4200},
-                        <ComponentModel>{"item": "OakTree", "quantity": 600},
-                        <ComponentModel>{"item": "CraftMat5", "quantity": 120},
-                        <ComponentModel>{"item": "BirchTree", "quantity": 1600}
-                    ]
+                    "detRecipe": [<DetRecipeComponentModel>{"indent": 0, "item": "SaharanFoal", "quantity": 20000}],
+                    "detRecipeTotals": [<ComponentModel>{"item": "SaharanFoal", "quantity": 20000}]
                 }
             }),
         new RecipeBase("FishingRod6", <RecipeModel>{
@@ -4640,40 +4340,19 @@ export const initRecipeRepo = () => {
             }),
         new RecipeBase("MaxCapBagFi5", <RecipeModel>{
                 "intID": "MaxCapBagFi5",
-                "recipe": [
-                    <ComponentModel>{"item": "Critter3A", "quantity": 4},
-                    <ComponentModel>{"item": "Refinery1", "quantity": 50},
-                    <ComponentModel>{"item": "MaxCapBagFi4", "quantity": 2}
-                ],
+                "recipe": [<ComponentModel>{"item": "Critter3A", "quantity": 4}, <ComponentModel>{"item": "Refinery1", "quantity": 50}],
                 "levelReqToCraft": 35,
                 "expGiven": 65000,
                 "no": 14,
                 "tab": 3,
-                "sellPrice": 191470,
+                "sellPrice": 5040,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "Critter3A", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "Refinery1", "quantity": 50},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBagFi4", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Fish4", "quantity": 5000},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Fish1", "quantity": 10000},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "MaxCapBagFi3", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "MaxCapBagFi1", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "Fish1", "quantity": 720},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "MaxCapBagFi2", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "Fish2", "quantity": 850},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "PureWater", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Fish2", "quantity": 4000}
+                        <DetRecipeComponentModel>{"indent": 0, "item": "Refinery1", "quantity": 50}
                     ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "Critter3A", "quantity": 4},
-                        <ComponentModel>{"item": "Refinery1", "quantity": 50},
-                        <ComponentModel>{"item": "Fish4", "quantity": 5000},
-                        <ComponentModel>{"item": "Fish1", "quantity": 10720},
-                        <ComponentModel>{"item": "Fish2", "quantity": 4850},
-                        <ComponentModel>{"item": "PureWater", "quantity": 4}
-                    ]
+                    "detRecipeTotals": [<ComponentModel>{"item": "Critter3A", "quantity": 4}, <ComponentModel>{"item": "Refinery1", "quantity": 50}]
                 }
             }),
         new RecipeBase("CatchingNet6", <RecipeModel>{
@@ -4718,33 +4397,16 @@ export const initRecipeRepo = () => {
             }),
         new RecipeBase("MaxCapBagB5", <RecipeModel>{
                 "intID": "MaxCapBagB5",
-                "recipe": [<ComponentModel>{"item": "Bug5", "quantity": 10000}, <ComponentModel>{"item": "MaxCapBagB4", "quantity": 2}],
+                "recipe": [<ComponentModel>{"item": "Bug5", "quantity": 10000}],
                 "levelReqToCraft": 35,
                 "expGiven": 65000,
                 "no": 16,
                 "tab": 3,
-                "sellPrice": 667810,
+                "sellPrice": 320000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
-                    "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "Bug5", "quantity": 10000},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBagB4", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Bug4", "quantity": 15000},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "MaxCapBagB3", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "MaxCapBagB1", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "Bug1", "quantity": 720},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "MaxCapBagB2", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "Bug2", "quantity": 850},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "PureWater", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Bug2", "quantity": 4200}
-                    ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "Bug5", "quantity": 10000},
-                        <ComponentModel>{"item": "Bug4", "quantity": 15000},
-                        <ComponentModel>{"item": "Bug2", "quantity": 5050},
-                        <ComponentModel>{"item": "Bug1", "quantity": 720},
-                        <ComponentModel>{"item": "PureWater", "quantity": 4}
-                    ]
+                    "detRecipe": [<DetRecipeComponentModel>{"indent": 0, "item": "Bug5", "quantity": 10000}],
+                    "detRecipeTotals": [<ComponentModel>{"item": "Bug5", "quantity": 10000}]
                 }
             }),
         new RecipeBase("TrapBoxSet4", <RecipeModel>{
@@ -4777,25 +4439,16 @@ export const initRecipeRepo = () => {
             }),
         new RecipeBase("MaxCapBagTr4", <RecipeModel>{
                 "intID": "MaxCapBagTr4",
-                "recipe": [<ComponentModel>{"item": "Critter4", "quantity": 10000}, <ComponentModel>{"item": "MaxCapBagTr3", "quantity": 2}],
+                "recipe": [<ComponentModel>{"item": "Critter4", "quantity": 15000}],
                 "levelReqToCraft": 37,
                 "expGiven": 80000,
                 "no": 18,
                 "tab": 3,
-                "sellPrice": 163000,
+                "sellPrice": 225000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
-                    "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "Critter4", "quantity": 10000},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBagTr3", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Critter2", "quantity": 2000},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Refinery1", "quantity": 30}
-                    ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "Critter4", "quantity": 10000},
-                        <ComponentModel>{"item": "Critter2", "quantity": 2000},
-                        <ComponentModel>{"item": "Refinery1", "quantity": 30}
-                    ]
+                    "detRecipe": [<DetRecipeComponentModel>{"indent": 0, "item": "Critter4", "quantity": 15000}],
+                    "detRecipeTotals": [<ComponentModel>{"item": "Critter4", "quantity": 15000}]
                 }
             }),
         new RecipeBase("WorshipSkull4", <RecipeModel>{
@@ -4828,25 +4481,16 @@ export const initRecipeRepo = () => {
             }),
         new RecipeBase("MaxCapBagS4", <RecipeModel>{
                 "intID": "MaxCapBagS4",
-                "recipe": [<ComponentModel>{"item": "Soul3", "quantity": 8000}, <ComponentModel>{"item": "MaxCapBagS3", "quantity": 2}],
+                "recipe": [<ComponentModel>{"item": "Soul3", "quantity": 10000}],
                 "levelReqToCraft": 37,
                 "expGiven": 80000,
                 "no": 20,
                 "tab": 3,
-                "sellPrice": 191000,
+                "sellPrice": 200000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
-                    "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "Soul3", "quantity": 8000},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBagS3", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Soul2", "quantity": 3000},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Refinery1", "quantity": 40}
-                    ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "Soul3", "quantity": 8000},
-                        <ComponentModel>{"item": "Soul2", "quantity": 3000},
-                        <ComponentModel>{"item": "Refinery1", "quantity": 40}
-                    ]
+                    "detRecipe": [<DetRecipeComponentModel>{"indent": 0, "item": "Soul3", "quantity": 10000}],
+                    "detRecipeTotals": [<ComponentModel>{"item": "Soul3", "quantity": 10000}]
                 }
             }),
         new RecipeBase("EquipmentRings28", <RecipeModel>{
@@ -4912,14 +4556,13 @@ export const initRecipeRepo = () => {
                 "recipe": [
                     <ComponentModel>{"item": "FoodFish1", "quantity": 1500},
                     <ComponentModel>{"item": "FoodCatch1", "quantity": 1500},
-                    <ComponentModel>{"item": "FoodHealth9", "quantity": 10000},
-                    <ComponentModel>{"item": "MaxCapBagF4", "quantity": 2}
+                    <ComponentModel>{"item": "FoodHealth9", "quantity": 10000}
                 ],
                 "levelReqToCraft": 39,
                 "expGiven": 100000,
                 "no": 23,
                 "tab": 3,
-                "sellPrice": 2596740,
+                "sellPrice": 2197000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -4929,83 +4572,32 @@ export const initRecipeRepo = () => {
                         <DetRecipeComponentModel>{"indent": 0, "item": "FoodCatch1", "quantity": 1500},
                         <DetRecipeComponentModel>{"indent": 1, "item": "Bug2", "quantity": 7500},
                         <DetRecipeComponentModel>{"indent": 1, "item": "FoodHealth6", "quantity": 1500},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "FoodHealth9", "quantity": 10000},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBagF4", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "FoodG3", "quantity": 18},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "DesertA3b", "quantity": 8},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "MaxCapBagF3", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "MaxCapBag8", "quantity": 8},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "FoodHealth1", "quantity": 600},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "FoodHealth3", "quantity": 200},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "OakTree", "quantity": 480},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "CopperBar", "quantity": 120},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "FoodHealth7", "quantity": 1600},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "FoodMining1", "quantity": 2800},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "Iron", "quantity": 14000},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "FoodPotMana1", "quantity": 5600},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "FoodChoppin1", "quantity": 2800},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "JungleTree", "quantity": 16800},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "FoodPotRe1", "quantity": 8400}
+                        <DetRecipeComponentModel>{"indent": 0, "item": "FoodHealth9", "quantity": 10000}
                     ],
                     "detRecipeTotals": [
                         <ComponentModel>{"item": "FoodHealth9", "quantity": 10000},
                         <ComponentModel>{"item": "Fish2", "quantity": 7500},
                         <ComponentModel>{"item": "FoodPotOr2", "quantity": 3000},
                         <ComponentModel>{"item": "Bug2", "quantity": 7500},
-                        <ComponentModel>{"item": "FoodHealth6", "quantity": 1500},
-                        <ComponentModel>{"item": "FoodG3", "quantity": 18},
-                        <ComponentModel>{"item": "DesertA3b", "quantity": 8},
-                        <ComponentModel>{"item": "FoodHealth7", "quantity": 1600},
-                        <ComponentModel>{"item": "FoodHealth1", "quantity": 600},
-                        <ComponentModel>{"item": "FoodHealth3", "quantity": 200},
-                        <ComponentModel>{"item": "OakTree", "quantity": 480},
-                        <ComponentModel>{"item": "CopperBar", "quantity": 120},
-                        <ComponentModel>{"item": "Iron", "quantity": 14000},
-                        <ComponentModel>{"item": "FoodPotMana1", "quantity": 5600},
-                        <ComponentModel>{"item": "JungleTree", "quantity": 16800},
-                        <ComponentModel>{"item": "FoodPotRe1", "quantity": 8400}
+                        <ComponentModel>{"item": "FoodHealth6", "quantity": 1500}
                     ]
                 }
             }),
         new RecipeBase("MaxCapBagM6", <RecipeModel>{
                 "intID": "MaxCapBagM6",
-                "recipe": [
-                    <ComponentModel>{"item": "SnowB1", "quantity": 15000},
-                    <ComponentModel>{"item": "SnowB2a", "quantity": 3},
-                    <ComponentModel>{"item": "MaxCapBagM5", "quantity": 2}
-                ],
+                "recipe": [<ComponentModel>{"item": "SnowB1", "quantity": 15000}, <ComponentModel>{"item": "SnowB2a", "quantity": 3}],
                 "levelReqToCraft": 39,
                 "expGiven": 100000,
                 "no": 24,
                 "tab": 3,
-                "sellPrice": 4346370,
+                "sellPrice": 4059450,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "SnowB1", "quantity": 15000},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "SnowB2a", "quantity": 3},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBagM5", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Sewers1b", "quantity": 6},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "TreeInterior1b", "quantity": 8},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "MaxCapBagM4", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "MaxCapBagM2", "quantity": 8},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "CraftMat5", "quantity": 640},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "Grasslands2", "quantity": 320},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "Grasslands3", "quantity": 240},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "DesertA1b", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "CraftMat7", "quantity": 6800}
+                        <DetRecipeComponentModel>{"indent": 0, "item": "SnowB2a", "quantity": 3}
                     ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "SnowB1", "quantity": 15000},
-                        <ComponentModel>{"item": "SnowB2a", "quantity": 3},
-                        <ComponentModel>{"item": "Sewers1b", "quantity": 6},
-                        <ComponentModel>{"item": "TreeInterior1b", "quantity": 8},
-                        <ComponentModel>{"item": "DesertA1b", "quantity": 4},
-                        <ComponentModel>{"item": "CraftMat7", "quantity": 6800},
-                        <ComponentModel>{"item": "CraftMat5", "quantity": 640},
-                        <ComponentModel>{"item": "Grasslands2", "quantity": 320},
-                        <ComponentModel>{"item": "Grasslands3", "quantity": 240}
-                    ]
+                    "detRecipeTotals": [<ComponentModel>{"item": "SnowB1", "quantity": 15000}, <ComponentModel>{"item": "SnowB2a", "quantity": 3}]
                 }
             }),
         new RecipeBase("EquipmentHats54", <RecipeModel>{
@@ -5020,17 +4612,11 @@ export const initRecipeRepo = () => {
                 "expGiven": 275000,
                 "no": 25,
                 "tab": 3,
-                "sellPrice": 7101750,
+                "sellPrice": 6715250,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentHats53", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentHats19", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentHats18", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "IronBar", "quantity": 125},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "Forest1", "quantity": 300},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Fish3", "quantity": 2250},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "PlatBar", "quantity": 750},
                         <DetRecipeComponentModel>{"indent": 1, "item": "Critter1", "quantity": 5000},
                         <DetRecipeComponentModel>{"indent": 1, "item": "DementiaBar", "quantity": 300},
                         <DetRecipeComponentModel>{"indent": 0, "item": "Refinery3", "quantity": 500},
@@ -5042,11 +4628,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "VoidBar", "quantity": 1000},
                         <ComponentModel>{"item": "PureWater2", "quantity": 5},
                         <ComponentModel>{"item": "Critter1", "quantity": 5000},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 300},
-                        <ComponentModel>{"item": "Fish3", "quantity": 2250},
-                        <ComponentModel>{"item": "PlatBar", "quantity": 750},
-                        <ComponentModel>{"item": "IronBar", "quantity": 125},
-                        <ComponentModel>{"item": "Forest1", "quantity": 300}
+                        <ComponentModel>{"item": "DementiaBar", "quantity": 300}
                     ]
                 }
             }),
@@ -5062,17 +4644,11 @@ export const initRecipeRepo = () => {
                 "expGiven": 300000,
                 "no": 26,
                 "tab": 3,
-                "sellPrice": 36636600,
+                "sellPrice": 35503200,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShirts15", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentShirts14", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentShirts12", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "IronBar", "quantity": 150},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "JungleTree", "quantity": 600},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "DesertB4", "quantity": 5000},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "PlatBar", "quantity": 1000},
                         <DetRecipeComponentModel>{"indent": 1, "item": "Soul1", "quantity": 1000},
                         <DetRecipeComponentModel>{"indent": 1, "item": "DementiaBar", "quantity": 350},
                         <DetRecipeComponentModel>{"indent": 0, "item": "SnowC3", "quantity": 75000},
@@ -5084,11 +4660,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "VoidBar", "quantity": 500},
                         <ComponentModel>{"item": "PureWater2", "quantity": 4},
                         <ComponentModel>{"item": "Soul1", "quantity": 1000},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 350},
-                        <ComponentModel>{"item": "DesertB4", "quantity": 5000},
-                        <ComponentModel>{"item": "PlatBar", "quantity": 1000},
-                        <ComponentModel>{"item": "IronBar", "quantity": 150},
-                        <ComponentModel>{"item": "JungleTree", "quantity": 600}
+                        <ComponentModel>{"item": "DementiaBar", "quantity": 350}
                     ]
                 }
             }),
@@ -5104,17 +4676,11 @@ export const initRecipeRepo = () => {
                 "expGiven": 370000,
                 "no": 27,
                 "tab": 3,
-                "sellPrice": 9891265,
+                "sellPrice": 9230200,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentPants6", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentPants5", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentPants3", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "IronBar", "quantity": 170},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "CraftMat6", "quantity": 225},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Bug3", "quantity": 5000},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "PlatBar", "quantity": 1250},
                         <DetRecipeComponentModel>{"indent": 1, "item": "SnowA1", "quantity": 8000},
                         <DetRecipeComponentModel>{"indent": 1, "item": "DementiaBar", "quantity": 400},
                         <DetRecipeComponentModel>{"indent": 0, "item": "Tree7", "quantity": 75000},
@@ -5126,11 +4692,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "VoidBar", "quantity": 650},
                         <ComponentModel>{"item": "PureWater2", "quantity": 4},
                         <ComponentModel>{"item": "SnowA1", "quantity": 8000},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 400},
-                        <ComponentModel>{"item": "Bug3", "quantity": 5000},
-                        <ComponentModel>{"item": "PlatBar", "quantity": 1250},
-                        <ComponentModel>{"item": "IronBar", "quantity": 170},
-                        <ComponentModel>{"item": "CraftMat6", "quantity": 225}
+                        <ComponentModel>{"item": "DementiaBar", "quantity": 400}
                     ]
                 }
             }),
@@ -5146,22 +4708,11 @@ export const initRecipeRepo = () => {
                 "expGiven": 500000,
                 "no": 28,
                 "tab": 3,
-                "sellPrice": 7907225,
+                "sellPrice": 7645500,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShoes5", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentShoes4", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentShoes3", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentShoes15", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "EquipmentShoes1", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "CopperBar", "quantity": 75},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "CraftMat5", "quantity": 500},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "IronBar", "quantity": 125},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "GoldBar", "quantity": 600},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "PureWater", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "PalmTree", "quantity": 7000},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Fish3", "quantity": 3000},
                         <DetRecipeComponentModel>{"indent": 1, "item": "Critter1A", "quantity": 3},
                         <DetRecipeComponentModel>{"indent": 1, "item": "DementiaBar", "quantity": 500},
                         <DetRecipeComponentModel>{"indent": 0, "item": "Bug6", "quantity": 60000},
@@ -5173,14 +4724,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "VoidBar", "quantity": 725},
                         <ComponentModel>{"item": "PureWater2", "quantity": 4},
                         <ComponentModel>{"item": "Critter1A", "quantity": 3},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 500},
-                        <ComponentModel>{"item": "PalmTree", "quantity": 7000},
-                        <ComponentModel>{"item": "Fish3", "quantity": 3000},
-                        <ComponentModel>{"item": "GoldBar", "quantity": 600},
-                        <ComponentModel>{"item": "PureWater", "quantity": 4},
-                        <ComponentModel>{"item": "CraftMat5", "quantity": 500},
-                        <ComponentModel>{"item": "IronBar", "quantity": 125},
-                        <ComponentModel>{"item": "CopperBar", "quantity": 75}
+                        <ComponentModel>{"item": "DementiaBar", "quantity": 500}
                     ]
                 }
             }),
@@ -5370,7 +4914,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 400000,
                 "no": 33,
                 "tab": 3,
-                "sellPrice": 8542240,
+                "sellPrice": 8496240,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -5381,7 +4925,7 @@ export const initRecipeRepo = () => {
                         <DetRecipeComponentModel>{"indent": 4, "item": "IronBar", "quantity": 70},
                         <DetRecipeComponentModel>{"indent": 4, "item": "Jungle3", "quantity": 150},
                         <DetRecipeComponentModel>{"indent": 3, "item": "DesertA2", "quantity": 2500},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "GoldBar", "quantity": 800},
+                        <DetRecipeComponentModel>{"indent": 3, "item": "GoldBar", "quantity": 400},
                         <DetRecipeComponentModel>{"indent": 2, "item": "PlatBar", "quantity": 800},
                         <DetRecipeComponentModel>{"indent": 2, "item": "DesertB3", "quantity": 10500},
                         <DetRecipeComponentModel>{"indent": 1, "item": "DementiaBar", "quantity": 275},
@@ -5397,7 +4941,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "PlatBar", "quantity": 800},
                         <ComponentModel>{"item": "DesertB3", "quantity": 10500},
                         <ComponentModel>{"item": "DesertA2", "quantity": 2500},
-                        <ComponentModel>{"item": "GoldBar", "quantity": 800},
+                        <ComponentModel>{"item": "GoldBar", "quantity": 400},
                         <ComponentModel>{"item": "IronBar", "quantity": 70},
                         <ComponentModel>{"item": "Jungle3", "quantity": 150}
                     ]
@@ -5405,35 +4949,16 @@ export const initRecipeRepo = () => {
             }),
         new RecipeBase("MaxCapBagMi6", <RecipeModel>{
                 "intID": "MaxCapBagMi6",
-                "recipe": [<ComponentModel>{"item": "Void", "quantity": 25000}, <ComponentModel>{"item": "MaxCapBag5", "quantity": 2}],
+                "recipe": [<ComponentModel>{"item": "Void", "quantity": 40000}],
                 "levelReqToCraft": 43,
                 "expGiven": 200000,
                 "no": 34,
                 "tab": 3,
-                "sellPrice": 3151480,
+                "sellPrice": 1920000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
-                    "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "Void", "quantity": 25000},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBag5", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Dementia", "quantity": 35000},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "MaxCapBag4", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Plat", "quantity": 30000},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "MaxCapBag3", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "MaxCapBag1", "quantity": 8},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "Copper", "quantity": 960},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "MaxCapBag2", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "Iron", "quantity": 2800},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "Gold", "quantity": 8000}
-                    ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "Void", "quantity": 25000},
-                        <ComponentModel>{"item": "Dementia", "quantity": 35000},
-                        <ComponentModel>{"item": "Plat", "quantity": 30000},
-                        <ComponentModel>{"item": "Gold", "quantity": 8000},
-                        <ComponentModel>{"item": "Copper", "quantity": 960},
-                        <ComponentModel>{"item": "Iron", "quantity": 2800}
-                    ]
+                    "detRecipe": [<DetRecipeComponentModel>{"indent": 0, "item": "Void", "quantity": 40000}],
+                    "detRecipeTotals": [<ComponentModel>{"item": "Void", "quantity": 40000}]
                 }
             }),
         new RecipeBase("EquipmentToolsHatchet7", <RecipeModel>{
@@ -5482,37 +5007,16 @@ export const initRecipeRepo = () => {
             }),
         new RecipeBase("MaxCapBagT6", <RecipeModel>{
                 "intID": "MaxCapBagT6",
-                "recipe": [<ComponentModel>{"item": "Tree7", "quantity": 30000}, <ComponentModel>{"item": "MaxCapBagT5", "quantity": 2}],
+                "recipe": [<ComponentModel>{"item": "Tree7", "quantity": 30000}],
                 "levelReqToCraft": 43,
                 "expGiven": 200000,
                 "no": 36,
                 "tab": 3,
-                "sellPrice": 3098880,
+                "sellPrice": 1200000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
-                    "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "Tree7", "quantity": 30000},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBagT5", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "SaharanFoal", "quantity": 40000},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "MaxCapBagT4", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "PalmTree", "quantity": 30000},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "MaxCapBagT3", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "MaxCapBag7", "quantity": 8},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "OakTree", "quantity": 1200},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "CraftMat5", "quantity": 240},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "MaxCapBag9", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "BirchTree", "quantity": 3200},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "ForestTree", "quantity": 8400}
-                    ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "Tree7", "quantity": 30000},
-                        <ComponentModel>{"item": "SaharanFoal", "quantity": 40000},
-                        <ComponentModel>{"item": "PalmTree", "quantity": 30000},
-                        <ComponentModel>{"item": "ForestTree", "quantity": 8400},
-                        <ComponentModel>{"item": "OakTree", "quantity": 1200},
-                        <ComponentModel>{"item": "CraftMat5", "quantity": 240},
-                        <ComponentModel>{"item": "BirchTree", "quantity": 3200}
-                    ]
+                    "detRecipe": [<DetRecipeComponentModel>{"indent": 0, "item": "Tree7", "quantity": 30000}],
+                    "detRecipeTotals": [<ComponentModel>{"item": "Tree7", "quantity": 30000}]
                 }
             }),
         new RecipeBase("FishingRod7", <RecipeModel>{
@@ -5565,38 +5069,16 @@ export const initRecipeRepo = () => {
             }),
         new RecipeBase("MaxCapBagFi6", <RecipeModel>{
                 "intID": "MaxCapBagFi6",
-                "recipe": [<ComponentModel>{"item": "Fish4", "quantity": 50000}, <ComponentModel>{"item": "MaxCapBagFi5", "quantity": 2}],
+                "recipe": [<ComponentModel>{"item": "Fish4", "quantity": 40000}],
                 "levelReqToCraft": 43,
                 "expGiven": 200000,
                 "no": 38,
                 "tab": 3,
-                "sellPrice": 1282940,
+                "sellPrice": 720000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
-                    "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "Fish4", "quantity": 50000},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBagFi5", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Critter3A", "quantity": 8},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Refinery1", "quantity": 100},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "MaxCapBagFi4", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Fish4", "quantity": 10000},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Fish1", "quantity": 20000},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "MaxCapBagFi3", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "MaxCapBagFi1", "quantity": 8},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "Fish1", "quantity": 1440},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "MaxCapBagFi2", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "Fish2", "quantity": 1700},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "PureWater", "quantity": 8},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "Fish2", "quantity": 8000}
-                    ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "Fish4", "quantity": 60000},
-                        <ComponentModel>{"item": "Critter3A", "quantity": 8},
-                        <ComponentModel>{"item": "Refinery1", "quantity": 100},
-                        <ComponentModel>{"item": "Fish1", "quantity": 21440},
-                        <ComponentModel>{"item": "Fish2", "quantity": 9700},
-                        <ComponentModel>{"item": "PureWater", "quantity": 8}
-                    ]
+                    "detRecipe": [<DetRecipeComponentModel>{"indent": 0, "item": "Fish4", "quantity": 40000}],
+                    "detRecipeTotals": [<ComponentModel>{"item": "Fish4", "quantity": 40000}]
                 }
             }),
         new RecipeBase("CatchingNet7", <RecipeModel>{
@@ -5646,36 +5128,16 @@ export const initRecipeRepo = () => {
             }),
         new RecipeBase("MaxCapBagB6", <RecipeModel>{
                 "intID": "MaxCapBagB6",
-                "recipe": [<ComponentModel>{"item": "Bug6", "quantity": 35000}, <ComponentModel>{"item": "MaxCapBagB5", "quantity": 2}],
+                "recipe": [<ComponentModel>{"item": "Bug6", "quantity": 30000}],
                 "levelReqToCraft": 43,
                 "expGiven": 200000,
                 "no": 40,
                 "tab": 3,
-                "sellPrice": 2735620,
+                "sellPrice": 1200000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
-                    "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "Bug6", "quantity": 35000},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBagB5", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Bug5", "quantity": 20000},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "MaxCapBagB4", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Bug4", "quantity": 30000},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "MaxCapBagB3", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "MaxCapBagB1", "quantity": 8},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "Bug1", "quantity": 1440},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "MaxCapBagB2", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "Bug2", "quantity": 1700},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "PureWater", "quantity": 8},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "Bug2", "quantity": 8400}
-                    ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "Bug6", "quantity": 35000},
-                        <ComponentModel>{"item": "Bug5", "quantity": 20000},
-                        <ComponentModel>{"item": "Bug4", "quantity": 30000},
-                        <ComponentModel>{"item": "Bug2", "quantity": 10100},
-                        <ComponentModel>{"item": "Bug1", "quantity": 1440},
-                        <ComponentModel>{"item": "PureWater", "quantity": 8}
-                    ]
+                    "detRecipe": [<DetRecipeComponentModel>{"indent": 0, "item": "Bug6", "quantity": 30000}],
+                    "detRecipeTotals": [<ComponentModel>{"item": "Bug6", "quantity": 30000}]
                 }
             }),
         new RecipeBase("TrapBoxSet5", <RecipeModel>{
@@ -5713,28 +5175,16 @@ export const initRecipeRepo = () => {
             }),
         new RecipeBase("MaxCapBagTr5", <RecipeModel>{
                 "intID": "MaxCapBagTr5",
-                "recipe": [<ComponentModel>{"item": "Critter6", "quantity": 30000}, <ComponentModel>{"item": "MaxCapBagTr4", "quantity": 2}],
+                "recipe": [<ComponentModel>{"item": "Critter6", "quantity": 30000}],
                 "levelReqToCraft": 44,
                 "expGiven": 250000,
                 "no": 42,
                 "tab": 3,
-                "sellPrice": 1376000,
+                "sellPrice": 1050000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
-                    "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "Critter6", "quantity": 30000},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBagTr4", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Critter4", "quantity": 20000},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "MaxCapBagTr3", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Critter2", "quantity": 4000},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Refinery1", "quantity": 60}
-                    ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "Critter6", "quantity": 30000},
-                        <ComponentModel>{"item": "Critter4", "quantity": 20000},
-                        <ComponentModel>{"item": "Critter2", "quantity": 4000},
-                        <ComponentModel>{"item": "Refinery1", "quantity": 60}
-                    ]
+                    "detRecipe": [<DetRecipeComponentModel>{"indent": 0, "item": "Critter6", "quantity": 30000}],
+                    "detRecipeTotals": [<ComponentModel>{"item": "Critter6", "quantity": 30000}]
                 }
             }),
         new RecipeBase("WorshipSkull5", <RecipeModel>{
@@ -5772,27 +5222,16 @@ export const initRecipeRepo = () => {
             }),
         new RecipeBase("MaxCapBagS5", <RecipeModel>{
                 "intID": "MaxCapBagS5",
-                "recipe": [<ComponentModel>{"item": "Soul3", "quantity": 30000}, <ComponentModel>{"item": "MaxCapBagS4", "quantity": 2}],
+                "recipe": [<ComponentModel>{"item": "Soul3", "quantity": 30000}],
                 "levelReqToCraft": 44,
                 "expGiven": 250000,
                 "no": 44,
                 "tab": 3,
-                "sellPrice": 982000,
+                "sellPrice": 600000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
-                    "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "Soul3", "quantity": 30000},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBagS4", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Soul3", "quantity": 16000},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "MaxCapBagS3", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Soul2", "quantity": 6000},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Refinery1", "quantity": 80}
-                    ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "Soul3", "quantity": 46000},
-                        <ComponentModel>{"item": "Soul2", "quantity": 6000},
-                        <ComponentModel>{"item": "Refinery1", "quantity": 80}
-                    ]
+                    "detRecipe": [<DetRecipeComponentModel>{"indent": 0, "item": "Soul3", "quantity": 30000}],
+                    "detRecipeTotals": [<ComponentModel>{"item": "Soul3", "quantity": 30000}]
                 }
             }),
         new RecipeBase("MaxCapBagF6", <RecipeModel>{
@@ -5800,14 +5239,13 @@ export const initRecipeRepo = () => {
                 "recipe": [
                     <ComponentModel>{"item": "FoodG5", "quantity": 10},
                     <ComponentModel>{"item": "FoodTrapping1", "quantity": 30},
-                    <ComponentModel>{"item": "FoodWorship1", "quantity": 30},
-                    <ComponentModel>{"item": "MaxCapBagF5", "quantity": 1}
+                    <ComponentModel>{"item": "FoodWorship1", "quantity": 30}
                 ],
                 "levelReqToCraft": 44,
                 "expGiven": 250000,
                 "no": 45,
                 "tab": 3,
-                "sellPrice": 2634640,
+                "sellPrice": 37900,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -5817,100 +5255,31 @@ export const initRecipeRepo = () => {
                         <DetRecipeComponentModel>{"indent": 1, "item": "PureWater", "quantity": 30},
                         <DetRecipeComponentModel>{"indent": 0, "item": "FoodWorship1", "quantity": 30},
                         <DetRecipeComponentModel>{"indent": 1, "item": "Soul2", "quantity": 2100},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "PureWater", "quantity": 30},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBagF5", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "FoodFish1", "quantity": 1500},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Fish2", "quantity": 7500},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "FoodPotOr2", "quantity": 3000},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "FoodCatch1", "quantity": 1500},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Bug2", "quantity": 7500},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "FoodHealth6", "quantity": 1500},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "FoodHealth9", "quantity": 10000},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "MaxCapBagF4", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "FoodG3", "quantity": 18},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "DesertA3b", "quantity": 8},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "MaxCapBagF3", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "MaxCapBag8", "quantity": 8},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "FoodHealth1", "quantity": 600},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "FoodHealth3", "quantity": 200},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "OakTree", "quantity": 480},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "CopperBar", "quantity": 120},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "FoodHealth7", "quantity": 1600},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "FoodMining1", "quantity": 2800},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "Iron", "quantity": 14000},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "FoodPotMana1", "quantity": 5600},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "FoodChoppin1", "quantity": 2800},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "JungleTree", "quantity": 16800},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "FoodPotRe1", "quantity": 8400}
+                        <DetRecipeComponentModel>{"indent": 1, "item": "PureWater", "quantity": 30}
                     ],
                     "detRecipeTotals": [
                         <ComponentModel>{"item": "FoodG5", "quantity": 10},
                         <ComponentModel>{"item": "Critter2", "quantity": 3000},
                         <ComponentModel>{"item": "PureWater", "quantity": 60},
-                        <ComponentModel>{"item": "Soul2", "quantity": 2100},
-                        <ComponentModel>{"item": "FoodHealth9", "quantity": 10000},
-                        <ComponentModel>{"item": "Fish2", "quantity": 7500},
-                        <ComponentModel>{"item": "FoodPotOr2", "quantity": 3000},
-                        <ComponentModel>{"item": "Bug2", "quantity": 7500},
-                        <ComponentModel>{"item": "FoodHealth6", "quantity": 1500},
-                        <ComponentModel>{"item": "FoodG3", "quantity": 18},
-                        <ComponentModel>{"item": "DesertA3b", "quantity": 8},
-                        <ComponentModel>{"item": "FoodHealth7", "quantity": 1600},
-                        <ComponentModel>{"item": "FoodHealth1", "quantity": 600},
-                        <ComponentModel>{"item": "FoodHealth3", "quantity": 200},
-                        <ComponentModel>{"item": "OakTree", "quantity": 480},
-                        <ComponentModel>{"item": "CopperBar", "quantity": 120},
-                        <ComponentModel>{"item": "Iron", "quantity": 14000},
-                        <ComponentModel>{"item": "FoodPotMana1", "quantity": 5600},
-                        <ComponentModel>{"item": "JungleTree", "quantity": 16800},
-                        <ComponentModel>{"item": "FoodPotRe1", "quantity": 8400}
+                        <ComponentModel>{"item": "Soul2", "quantity": 2100}
                     ]
                 }
             }),
         new RecipeBase("MaxCapBagM7", <RecipeModel>{
                 "intID": "MaxCapBagM7",
-                "recipe": [
-                    <ComponentModel>{"item": "SnowC3", "quantity": 60000},
-                    <ComponentModel>{"item": "SnowC4a", "quantity": 3},
-                    <ComponentModel>{"item": "MaxCapBagM6", "quantity": 1}
-                ],
+                "recipe": [<ComponentModel>{"item": "SnowC3", "quantity": 60000}, <ComponentModel>{"item": "SnowC4a", "quantity": 3}],
                 "levelReqToCraft": 44,
                 "expGiven": 250000,
                 "no": 46,
                 "tab": 3,
-                "sellPrice": 29876370,
+                "sellPrice": 25530000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "SnowC3", "quantity": 60000},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "SnowC4a", "quantity": 3},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "MaxCapBagM6", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "SnowB1", "quantity": 15000},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "SnowB2a", "quantity": 3},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "MaxCapBagM5", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Sewers1b", "quantity": 6},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "TreeInterior1b", "quantity": 8},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "MaxCapBagM4", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "MaxCapBagM2", "quantity": 8},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "CraftMat5", "quantity": 640},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "Grasslands2", "quantity": 320},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "Grasslands3", "quantity": 240},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "DesertA1b", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "CraftMat7", "quantity": 6800}
+                        <DetRecipeComponentModel>{"indent": 0, "item": "SnowC4a", "quantity": 3}
                     ],
-                    "detRecipeTotals": [
-                        <ComponentModel>{"item": "SnowC3", "quantity": 60000},
-                        <ComponentModel>{"item": "SnowC4a", "quantity": 3},
-                        <ComponentModel>{"item": "SnowB1", "quantity": 15000},
-                        <ComponentModel>{"item": "SnowB2a", "quantity": 3},
-                        <ComponentModel>{"item": "Sewers1b", "quantity": 6},
-                        <ComponentModel>{"item": "TreeInterior1b", "quantity": 8},
-                        <ComponentModel>{"item": "DesertA1b", "quantity": 4},
-                        <ComponentModel>{"item": "CraftMat7", "quantity": 6800},
-                        <ComponentModel>{"item": "CraftMat5", "quantity": 640},
-                        <ComponentModel>{"item": "Grasslands2", "quantity": 320},
-                        <ComponentModel>{"item": "Grasslands3", "quantity": 240}
-                    ]
+                    "detRecipeTotals": [<ComponentModel>{"item": "SnowC3", "quantity": 60000}, <ComponentModel>{"item": "SnowC4a", "quantity": 3}]
                 }
             }),
         new RecipeBase("EquipmentSmithingTabs4", <RecipeModel>{
@@ -5953,19 +5322,13 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 49,
                 "tab": 3,
-                "sellPrice": 7143250,
+                "sellPrice": 6756750,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentHats39", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentHats54", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentHats53", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentHats19", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentHats18", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "IronBar", "quantity": 125},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "Forest1", "quantity": 300},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "Fish3", "quantity": 2250},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "PlatBar", "quantity": 750},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Critter1", "quantity": 5000},
                         <DetRecipeComponentModel>{"indent": 2, "item": "DementiaBar", "quantity": 300},
                         <DetRecipeComponentModel>{"indent": 1, "item": "Refinery3", "quantity": 500},
@@ -5980,11 +5343,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "VoidBar", "quantity": 1000},
                         <ComponentModel>{"item": "PureWater2", "quantity": 5},
                         <ComponentModel>{"item": "Critter1", "quantity": 5000},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 300},
-                        <ComponentModel>{"item": "Fish3", "quantity": 2250},
-                        <ComponentModel>{"item": "PlatBar", "quantity": 750},
-                        <ComponentModel>{"item": "IronBar", "quantity": 125},
-                        <ComponentModel>{"item": "Forest1", "quantity": 300}
+                        <ComponentModel>{"item": "DementiaBar", "quantity": 300}
                     ]
                 }
             }),
@@ -5995,18 +5354,12 @@ export const initRecipeRepo = () => {
                 "expGiven": 750000,
                 "no": 50,
                 "tab": 3,
-                "sellPrice": 7116750,
+                "sellPrice": 6730250,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentHats54", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentHats53", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentHats19", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentHats18", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "IronBar", "quantity": 125},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "Forest1", "quantity": 300},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "Fish3", "quantity": 2250},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "PlatBar", "quantity": 750},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Critter1", "quantity": 5000},
                         <DetRecipeComponentModel>{"indent": 2, "item": "DementiaBar", "quantity": 300},
                         <DetRecipeComponentModel>{"indent": 1, "item": "Refinery3", "quantity": 500},
@@ -6020,11 +5373,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "VoidBar", "quantity": 1000},
                         <ComponentModel>{"item": "PureWater2", "quantity": 5},
                         <ComponentModel>{"item": "Critter1", "quantity": 5000},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 300},
-                        <ComponentModel>{"item": "Fish3", "quantity": 2250},
-                        <ComponentModel>{"item": "PlatBar", "quantity": 750},
-                        <ComponentModel>{"item": "IronBar", "quantity": 125},
-                        <ComponentModel>{"item": "Forest1", "quantity": 300}
+                        <ComponentModel>{"item": "DementiaBar", "quantity": 300}
                     ]
                 }
             }),
@@ -6035,18 +5384,12 @@ export const initRecipeRepo = () => {
                 "expGiven": 750000,
                 "no": 51,
                 "tab": 3,
-                "sellPrice": 7116750,
+                "sellPrice": 6730250,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentHats54", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentHats53", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentHats19", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentHats18", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "IronBar", "quantity": 125},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "Forest1", "quantity": 300},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "Fish3", "quantity": 2250},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "PlatBar", "quantity": 750},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Critter1", "quantity": 5000},
                         <DetRecipeComponentModel>{"indent": 2, "item": "DementiaBar", "quantity": 300},
                         <DetRecipeComponentModel>{"indent": 1, "item": "Refinery3", "quantity": 500},
@@ -6060,11 +5403,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "VoidBar", "quantity": 1000},
                         <ComponentModel>{"item": "PureWater2", "quantity": 5},
                         <ComponentModel>{"item": "Critter1", "quantity": 5000},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 300},
-                        <ComponentModel>{"item": "Fish3", "quantity": 2250},
-                        <ComponentModel>{"item": "PlatBar", "quantity": 750},
-                        <ComponentModel>{"item": "IronBar", "quantity": 125},
-                        <ComponentModel>{"item": "Forest1", "quantity": 300}
+                        <ComponentModel>{"item": "DementiaBar", "quantity": 300}
                     ]
                 }
             }),
@@ -6075,18 +5414,12 @@ export const initRecipeRepo = () => {
                 "expGiven": 750000,
                 "no": 52,
                 "tab": 3,
-                "sellPrice": 7116750,
+                "sellPrice": 6730250,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentHats54", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentHats53", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentHats19", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentHats18", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "IronBar", "quantity": 125},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "Forest1", "quantity": 300},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "Fish3", "quantity": 2250},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "PlatBar", "quantity": 750},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Critter1", "quantity": 5000},
                         <DetRecipeComponentModel>{"indent": 2, "item": "DementiaBar", "quantity": 300},
                         <DetRecipeComponentModel>{"indent": 1, "item": "Refinery3", "quantity": 500},
@@ -6100,11 +5433,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "VoidBar", "quantity": 1000},
                         <ComponentModel>{"item": "PureWater2", "quantity": 5},
                         <ComponentModel>{"item": "Critter1", "quantity": 5000},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 300},
-                        <ComponentModel>{"item": "Fish3", "quantity": 2250},
-                        <ComponentModel>{"item": "PlatBar", "quantity": 750},
-                        <ComponentModel>{"item": "IronBar", "quantity": 125},
-                        <ComponentModel>{"item": "Forest1", "quantity": 300}
+                        <ComponentModel>{"item": "DementiaBar", "quantity": 300}
                     ]
                 }
             }),
@@ -6119,7 +5448,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 1200000,
                 "no": 53,
                 "tab": 3,
-                "sellPrice": 66962960,
+                "sellPrice": 65829560,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -6134,12 +5463,6 @@ export const initRecipeRepo = () => {
                         <DetRecipeComponentModel>{"indent": 1, "item": "SnowA2", "quantity": 140000},
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShirts27", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentShirts15", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentShirts14", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentShirts12", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "IronBar", "quantity": 150},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "JungleTree", "quantity": 600},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "DesertB4", "quantity": 5000},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "PlatBar", "quantity": 1000},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Soul1", "quantity": 1000},
                         <DetRecipeComponentModel>{"indent": 2, "item": "DementiaBar", "quantity": 350},
                         <DetRecipeComponentModel>{"indent": 1, "item": "SnowC3", "quantity": 75000},
@@ -6159,11 +5482,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "DementiaBar", "quantity": 350},
                         <ComponentModel>{"item": "CopperBar", "quantity": 240},
                         <ComponentModel>{"item": "OakTree", "quantity": 900},
-                        <ComponentModel>{"item": "CraftMat5", "quantity": 240},
-                        <ComponentModel>{"item": "DesertB4", "quantity": 5000},
-                        <ComponentModel>{"item": "PlatBar", "quantity": 1000},
-                        <ComponentModel>{"item": "IronBar", "quantity": 150},
-                        <ComponentModel>{"item": "JungleTree", "quantity": 600}
+                        <ComponentModel>{"item": "CraftMat5", "quantity": 240}
                     ]
                 }
             }),
@@ -6174,18 +5493,12 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 54,
                 "tab": 3,
-                "sellPrice": 36661600,
+                "sellPrice": 35528200,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShirts27", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentShirts15", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentShirts14", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentShirts12", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "IronBar", "quantity": 150},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "JungleTree", "quantity": 600},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "DesertB4", "quantity": 5000},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "PlatBar", "quantity": 1000},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Soul1", "quantity": 1000},
                         <DetRecipeComponentModel>{"indent": 2, "item": "DementiaBar", "quantity": 350},
                         <DetRecipeComponentModel>{"indent": 1, "item": "SnowC3", "quantity": 75000},
@@ -6199,11 +5512,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "VoidBar", "quantity": 500},
                         <ComponentModel>{"item": "PureWater2", "quantity": 4},
                         <ComponentModel>{"item": "Soul1", "quantity": 1000},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 350},
-                        <ComponentModel>{"item": "DesertB4", "quantity": 5000},
-                        <ComponentModel>{"item": "PlatBar", "quantity": 1000},
-                        <ComponentModel>{"item": "IronBar", "quantity": 150},
-                        <ComponentModel>{"item": "JungleTree", "quantity": 600}
+                        <ComponentModel>{"item": "DementiaBar", "quantity": 350}
                     ]
                 }
             }),
@@ -6214,18 +5523,12 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 55,
                 "tab": 3,
-                "sellPrice": 36661600,
+                "sellPrice": 35528200,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShirts27", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentShirts15", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentShirts14", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentShirts12", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "IronBar", "quantity": 150},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "JungleTree", "quantity": 600},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "DesertB4", "quantity": 5000},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "PlatBar", "quantity": 1000},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Soul1", "quantity": 1000},
                         <DetRecipeComponentModel>{"indent": 2, "item": "DementiaBar", "quantity": 350},
                         <DetRecipeComponentModel>{"indent": 1, "item": "SnowC3", "quantity": 75000},
@@ -6239,11 +5542,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "VoidBar", "quantity": 500},
                         <ComponentModel>{"item": "PureWater2", "quantity": 4},
                         <ComponentModel>{"item": "Soul1", "quantity": 1000},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 350},
-                        <ComponentModel>{"item": "DesertB4", "quantity": 5000},
-                        <ComponentModel>{"item": "PlatBar", "quantity": 1000},
-                        <ComponentModel>{"item": "IronBar", "quantity": 150},
-                        <ComponentModel>{"item": "JungleTree", "quantity": 600}
+                        <ComponentModel>{"item": "DementiaBar", "quantity": 350}
                     ]
                 }
             }),
@@ -6254,18 +5553,12 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 56,
                 "tab": 3,
-                "sellPrice": 36661600,
+                "sellPrice": 35528200,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShirts27", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentShirts15", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentShirts14", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentShirts12", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "IronBar", "quantity": 150},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "JungleTree", "quantity": 600},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "DesertB4", "quantity": 5000},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "PlatBar", "quantity": 1000},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Soul1", "quantity": 1000},
                         <DetRecipeComponentModel>{"indent": 2, "item": "DementiaBar", "quantity": 350},
                         <DetRecipeComponentModel>{"indent": 1, "item": "SnowC3", "quantity": 75000},
@@ -6279,11 +5572,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "VoidBar", "quantity": 500},
                         <ComponentModel>{"item": "PureWater2", "quantity": 4},
                         <ComponentModel>{"item": "Soul1", "quantity": 1000},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 350},
-                        <ComponentModel>{"item": "DesertB4", "quantity": 5000},
-                        <ComponentModel>{"item": "PlatBar", "quantity": 1000},
-                        <ComponentModel>{"item": "IronBar", "quantity": 150},
-                        <ComponentModel>{"item": "JungleTree", "quantity": 600}
+                        <ComponentModel>{"item": "DementiaBar", "quantity": 350}
                     ]
                 }
             }),
@@ -6450,19 +5739,13 @@ export const initRecipeRepo = () => {
                 "expGiven": 2,
                 "no": 63,
                 "tab": 3,
-                "sellPrice": 8412776,
+                "sellPrice": 8026276,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentHats68", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentHats54", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentHats53", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentHats19", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "EquipmentHats18", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "IronBar", "quantity": 125},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "Forest1", "quantity": 300},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "Fish3", "quantity": 2250},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "PlatBar", "quantity": 750},
                         <DetRecipeComponentModel>{"indent": 3, "item": "Critter1", "quantity": 5000},
                         <DetRecipeComponentModel>{"indent": 3, "item": "DementiaBar", "quantity": 300},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Refinery3", "quantity": 500},
@@ -6486,11 +5769,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "VoidBar", "quantity": 1000},
                         <ComponentModel>{"item": "PureWater2", "quantity": 5},
                         <ComponentModel>{"item": "Critter1", "quantity": 5000},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 300},
-                        <ComponentModel>{"item": "Fish3", "quantity": 2250},
-                        <ComponentModel>{"item": "PlatBar", "quantity": 750},
-                        <ComponentModel>{"item": "IronBar", "quantity": 125},
-                        <ComponentModel>{"item": "Forest1", "quantity": 300}
+                        <ComponentModel>{"item": "DementiaBar", "quantity": 300}
                     ]
                 }
             }),
@@ -6627,18 +5906,12 @@ export const initRecipeRepo = () => {
                 "expGiven": 2,
                 "no": 69,
                 "tab": 3,
-                "sellPrice": 7811775,
+                "sellPrice": 7425275,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentHats54", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentHats53", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentHats19", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentHats18", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "IronBar", "quantity": 125},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "Forest1", "quantity": 300},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "Fish3", "quantity": 2250},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "PlatBar", "quantity": 750},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Critter1", "quantity": 5000},
                         <DetRecipeComponentModel>{"indent": 2, "item": "DementiaBar", "quantity": 300},
                         <DetRecipeComponentModel>{"indent": 1, "item": "Refinery3", "quantity": 500},
@@ -6656,11 +5929,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "VoidBar", "quantity": 1000},
                         <ComponentModel>{"item": "PureWater2", "quantity": 5},
                         <ComponentModel>{"item": "Critter1", "quantity": 5000},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 300},
-                        <ComponentModel>{"item": "Fish3", "quantity": 2250},
-                        <ComponentModel>{"item": "PlatBar", "quantity": 750},
-                        <ComponentModel>{"item": "IronBar", "quantity": 125},
-                        <ComponentModel>{"item": "Forest1", "quantity": 300}
+                        <ComponentModel>{"item": "DementiaBar", "quantity": 300}
                     ]
                 }
             }),
@@ -6676,18 +5945,12 @@ export const initRecipeRepo = () => {
                 "expGiven": 5,
                 "no": 70,
                 "tab": 3,
-                "sellPrice": 86641618,
+                "sellPrice": 85508218,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShirts27", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentShirts15", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentShirts14", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentShirts12", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "IronBar", "quantity": 150},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "JungleTree", "quantity": 600},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "DesertB4", "quantity": 5000},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "PlatBar", "quantity": 1000},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Soul1", "quantity": 1000},
                         <DetRecipeComponentModel>{"indent": 2, "item": "DementiaBar", "quantity": 350},
                         <DetRecipeComponentModel>{"indent": 1, "item": "SnowC3", "quantity": 75000},
@@ -6705,11 +5968,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "VoidBar", "quantity": 500},
                         <ComponentModel>{"item": "PureWater2", "quantity": 4},
                         <ComponentModel>{"item": "Soul1", "quantity": 1000},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 350},
-                        <ComponentModel>{"item": "DesertB4", "quantity": 5000},
-                        <ComponentModel>{"item": "PlatBar", "quantity": 1000},
-                        <ComponentModel>{"item": "IronBar", "quantity": 150},
-                        <ComponentModel>{"item": "JungleTree", "quantity": 600}
+                        <ComponentModel>{"item": "DementiaBar", "quantity": 350}
                     ]
                 }
             }),
@@ -6725,18 +5984,12 @@ export const initRecipeRepo = () => {
                 "expGiven": 2,
                 "no": 71,
                 "tab": 3,
-                "sellPrice": 9996275,
+                "sellPrice": 9335210,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentPants21", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentPants6", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentPants5", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentPants3", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "IronBar", "quantity": 170},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "CraftMat6", "quantity": 225},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "Bug3", "quantity": 5000},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "PlatBar", "quantity": 1250},
                         <DetRecipeComponentModel>{"indent": 2, "item": "SnowA1", "quantity": 8000},
                         <DetRecipeComponentModel>{"indent": 2, "item": "DementiaBar", "quantity": 400},
                         <DetRecipeComponentModel>{"indent": 1, "item": "Tree7", "quantity": 75000},
@@ -6754,11 +6007,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "VoidBar", "quantity": 650},
                         <ComponentModel>{"item": "PureWater2", "quantity": 4},
                         <ComponentModel>{"item": "SnowA1", "quantity": 8000},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 400},
-                        <ComponentModel>{"item": "Bug3", "quantity": 5000},
-                        <ComponentModel>{"item": "PlatBar", "quantity": 1250},
-                        <ComponentModel>{"item": "IronBar", "quantity": 170},
-                        <ComponentModel>{"item": "CraftMat6", "quantity": 225}
+                        <ComponentModel>{"item": "DementiaBar", "quantity": 400}
                     ]
                 }
             }),
@@ -6774,23 +6023,12 @@ export const initRecipeRepo = () => {
                 "expGiven": 5,
                 "no": 72,
                 "tab": 3,
-                "sellPrice": 7948731,
+                "sellPrice": 7687006,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShoes22", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentShoes5", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentShoes4", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentShoes3", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "EquipmentShoes15", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "EquipmentShoes1", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 6, "item": "CopperBar", "quantity": 75},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "CraftMat5", "quantity": 500},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "IronBar", "quantity": 125},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "GoldBar", "quantity": 600},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "PureWater", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "PalmTree", "quantity": 7000},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "Fish3", "quantity": 3000},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Critter1A", "quantity": 3},
                         <DetRecipeComponentModel>{"indent": 2, "item": "DementiaBar", "quantity": 500},
                         <DetRecipeComponentModel>{"indent": 1, "item": "Bug6", "quantity": 60000},
@@ -6808,14 +6046,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "VoidBar", "quantity": 725},
                         <ComponentModel>{"item": "PureWater2", "quantity": 4},
                         <ComponentModel>{"item": "Critter1A", "quantity": 3},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 500},
-                        <ComponentModel>{"item": "PalmTree", "quantity": 7000},
-                        <ComponentModel>{"item": "Fish3", "quantity": 3000},
-                        <ComponentModel>{"item": "GoldBar", "quantity": 600},
-                        <ComponentModel>{"item": "PureWater", "quantity": 4},
-                        <ComponentModel>{"item": "CraftMat5", "quantity": 500},
-                        <ComponentModel>{"item": "IronBar", "quantity": 125},
-                        <ComponentModel>{"item": "CopperBar", "quantity": 75}
+                        <ComponentModel>{"item": "DementiaBar", "quantity": 500}
                     ]
                 }
             }),
@@ -6830,18 +6061,12 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 1,
                 "tab": 4,
-                "sellPrice": 38751750,
+                "sellPrice": 38365250,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentHats54", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentHats53", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentHats19", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentHats18", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "IronBar", "quantity": 125},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "Forest1", "quantity": 300},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "Fish3", "quantity": 2250},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "PlatBar", "quantity": 750},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Critter1", "quantity": 5000},
                         <DetRecipeComponentModel>{"indent": 2, "item": "DementiaBar", "quantity": 300},
                         <DetRecipeComponentModel>{"indent": 1, "item": "Refinery3", "quantity": 500},
@@ -6857,11 +6082,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "VoidBar", "quantity": 1000},
                         <ComponentModel>{"item": "PureWater2", "quantity": 5},
                         <ComponentModel>{"item": "Critter1", "quantity": 5000},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 300},
-                        <ComponentModel>{"item": "Fish3", "quantity": 2250},
-                        <ComponentModel>{"item": "PlatBar", "quantity": 750},
-                        <ComponentModel>{"item": "IronBar", "quantity": 125},
-                        <ComponentModel>{"item": "Forest1", "quantity": 300}
+                        <ComponentModel>{"item": "DementiaBar", "quantity": 300}
                     ]
                 }
             }),
@@ -6876,18 +6097,12 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 2,
                 "tab": 4,
-                "sellPrice": 61636600,
+                "sellPrice": 60503200,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShirts27", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentShirts15", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentShirts14", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentShirts12", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "IronBar", "quantity": 150},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "JungleTree", "quantity": 600},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "DesertB4", "quantity": 5000},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "PlatBar", "quantity": 1000},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Soul1", "quantity": 1000},
                         <DetRecipeComponentModel>{"indent": 2, "item": "DementiaBar", "quantity": 350},
                         <DetRecipeComponentModel>{"indent": 1, "item": "SnowC3", "quantity": 75000},
@@ -6903,11 +6118,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "VoidBar", "quantity": 500},
                         <ComponentModel>{"item": "PureWater2", "quantity": 4},
                         <ComponentModel>{"item": "Soul1", "quantity": 1000},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 350},
-                        <ComponentModel>{"item": "DesertB4", "quantity": 5000},
-                        <ComponentModel>{"item": "PlatBar", "quantity": 1000},
-                        <ComponentModel>{"item": "IronBar", "quantity": 150},
-                        <ComponentModel>{"item": "JungleTree", "quantity": 600}
+                        <ComponentModel>{"item": "DementiaBar", "quantity": 350}
                     ]
                 }
             }),
@@ -6922,18 +6133,12 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 3,
                 "tab": 4,
-                "sellPrice": 37091265,
+                "sellPrice": 36430200,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentPants21", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentPants6", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentPants5", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentPants3", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "IronBar", "quantity": 170},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "CraftMat6", "quantity": 225},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "Bug3", "quantity": 5000},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "PlatBar", "quantity": 1250},
                         <DetRecipeComponentModel>{"indent": 2, "item": "SnowA1", "quantity": 8000},
                         <DetRecipeComponentModel>{"indent": 2, "item": "DementiaBar", "quantity": 400},
                         <DetRecipeComponentModel>{"indent": 1, "item": "Tree7", "quantity": 75000},
@@ -6949,11 +6154,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "VoidBar", "quantity": 650},
                         <ComponentModel>{"item": "PureWater2", "quantity": 4},
                         <ComponentModel>{"item": "SnowA1", "quantity": 8000},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 400},
-                        <ComponentModel>{"item": "Bug3", "quantity": 5000},
-                        <ComponentModel>{"item": "PlatBar", "quantity": 1250},
-                        <ComponentModel>{"item": "IronBar", "quantity": 170},
-                        <ComponentModel>{"item": "CraftMat6", "quantity": 225}
+                        <ComponentModel>{"item": "DementiaBar", "quantity": 400}
                     ]
                 }
             }),
@@ -6968,23 +6169,12 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 4,
                 "tab": 4,
-                "sellPrice": 47307225,
+                "sellPrice": 47045500,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShoes22", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentShoes5", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentShoes4", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentShoes3", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "EquipmentShoes15", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "EquipmentShoes1", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 6, "item": "CopperBar", "quantity": 75},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "CraftMat5", "quantity": 500},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "IronBar", "quantity": 125},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "GoldBar", "quantity": 600},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "PureWater", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "PalmTree", "quantity": 7000},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "Fish3", "quantity": 3000},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Critter1A", "quantity": 3},
                         <DetRecipeComponentModel>{"indent": 2, "item": "DementiaBar", "quantity": 500},
                         <DetRecipeComponentModel>{"indent": 1, "item": "Bug6", "quantity": 60000},
@@ -7000,14 +6190,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "VoidBar", "quantity": 725},
                         <ComponentModel>{"item": "PureWater2", "quantity": 4},
                         <ComponentModel>{"item": "Critter1A", "quantity": 3},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 500},
-                        <ComponentModel>{"item": "PalmTree", "quantity": 7000},
-                        <ComponentModel>{"item": "Fish3", "quantity": 3000},
-                        <ComponentModel>{"item": "GoldBar", "quantity": 600},
-                        <ComponentModel>{"item": "PureWater", "quantity": 4},
-                        <ComponentModel>{"item": "CraftMat5", "quantity": 500},
-                        <ComponentModel>{"item": "IronBar", "quantity": 125},
-                        <ComponentModel>{"item": "CopperBar", "quantity": 75}
+                        <ComponentModel>{"item": "DementiaBar", "quantity": 500}
                     ]
                 }
             }),
@@ -7213,7 +6396,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 9,
                 "tab": 4,
-                "sellPrice": 21102240,
+                "sellPrice": 21056240,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -7225,7 +6408,7 @@ export const initRecipeRepo = () => {
                         <DetRecipeComponentModel>{"indent": 5, "item": "IronBar", "quantity": 70},
                         <DetRecipeComponentModel>{"indent": 5, "item": "Jungle3", "quantity": 150},
                         <DetRecipeComponentModel>{"indent": 4, "item": "DesertA2", "quantity": 2500},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "GoldBar", "quantity": 800},
+                        <DetRecipeComponentModel>{"indent": 4, "item": "GoldBar", "quantity": 400},
                         <DetRecipeComponentModel>{"indent": 3, "item": "PlatBar", "quantity": 800},
                         <DetRecipeComponentModel>{"indent": 3, "item": "DesertB3", "quantity": 10500},
                         <DetRecipeComponentModel>{"indent": 2, "item": "DementiaBar", "quantity": 275},
@@ -7245,7 +6428,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "PlatBar", "quantity": 800},
                         <ComponentModel>{"item": "DesertB3", "quantity": 10500},
                         <ComponentModel>{"item": "DesertA2", "quantity": 2500},
-                        <ComponentModel>{"item": "GoldBar", "quantity": 800},
+                        <ComponentModel>{"item": "GoldBar", "quantity": 400},
                         <ComponentModel>{"item": "IronBar", "quantity": 70},
                         <ComponentModel>{"item": "Jungle3", "quantity": 150}
                     ]
@@ -7590,7 +6773,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 21,
                 "tab": 4,
-                "sellPrice": 48300300,
+                "sellPrice": 48038575,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -7609,17 +6792,6 @@ export const initRecipeRepo = () => {
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShoes24", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentShoes22", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentShoes5", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentShoes4", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "EquipmentShoes3", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "EquipmentShoes15", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 6, "item": "EquipmentShoes1", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 7, "item": "CopperBar", "quantity": 75},
-                        <DetRecipeComponentModel>{"indent": 6, "item": "CraftMat5", "quantity": 500},
-                        <DetRecipeComponentModel>{"indent": 6, "item": "IronBar", "quantity": 125},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "GoldBar", "quantity": 600},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "PureWater", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "PalmTree", "quantity": 7000},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "Fish3", "quantity": 3000},
                         <DetRecipeComponentModel>{"indent": 3, "item": "Critter1A", "quantity": 3},
                         <DetRecipeComponentModel>{"indent": 3, "item": "DementiaBar", "quantity": 500},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Bug6", "quantity": 60000},
@@ -7631,21 +6803,19 @@ export const initRecipeRepo = () => {
                     ],
                     "detRecipeTotals": [
                         <ComponentModel>{"item": "Copper", "quantity": 301500},
-                        <ComponentModel>{"item": "PureWater", "quantity": 17},
+                        <ComponentModel>{"item": "PureWater", "quantity": 13},
                         <ComponentModel>{"item": "Iron", "quantity": 1200},
                         <ComponentModel>{"item": "GalaxyA2", "quantity": 120000},
                         <ComponentModel>{"item": "LustreBar", "quantity": 2000},
-                        <ComponentModel>{"item": "GoldBar", "quantity": 1200},
+                        <ComponentModel>{"item": "GoldBar", "quantity": 600},
                         <ComponentModel>{"item": "Bug6", "quantity": 60000},
                         <ComponentModel>{"item": "VoidBar", "quantity": 725},
                         <ComponentModel>{"item": "PureWater2", "quantity": 4},
-                        <ComponentModel>{"item": "CraftMat5", "quantity": 1000},
-                        <ComponentModel>{"item": "IronBar", "quantity": 250},
+                        <ComponentModel>{"item": "CraftMat5", "quantity": 500},
+                        <ComponentModel>{"item": "IronBar", "quantity": 125},
                         <ComponentModel>{"item": "Critter1A", "quantity": 3},
                         <ComponentModel>{"item": "DementiaBar", "quantity": 500},
-                        <ComponentModel>{"item": "CopperBar", "quantity": 150},
-                        <ComponentModel>{"item": "PalmTree", "quantity": 7000},
-                        <ComponentModel>{"item": "Fish3", "quantity": 3000}
+                        <ComponentModel>{"item": "CopperBar", "quantity": 75}
                     ]
                 }
             }),
@@ -7660,7 +6830,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 22,
                 "tab": 4,
-                "sellPrice": 48007000,
+                "sellPrice": 47745275,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -7679,17 +6849,6 @@ export const initRecipeRepo = () => {
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShoes24", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentShoes22", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentShoes5", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentShoes4", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "EquipmentShoes3", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "EquipmentShoes15", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 6, "item": "EquipmentShoes1", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 7, "item": "CopperBar", "quantity": 75},
-                        <DetRecipeComponentModel>{"indent": 6, "item": "CraftMat5", "quantity": 500},
-                        <DetRecipeComponentModel>{"indent": 6, "item": "IronBar", "quantity": 125},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "GoldBar", "quantity": 600},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "PureWater", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "PalmTree", "quantity": 7000},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "Fish3", "quantity": 3000},
                         <DetRecipeComponentModel>{"indent": 3, "item": "Critter1A", "quantity": 3},
                         <DetRecipeComponentModel>{"indent": 3, "item": "DementiaBar", "quantity": 500},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Bug6", "quantity": 60000},
@@ -7701,22 +6860,20 @@ export const initRecipeRepo = () => {
                     ],
                     "detRecipeTotals": [
                         <ComponentModel>{"item": "OakTree", "quantity": 300000},
-                        <ComponentModel>{"item": "PureWater", "quantity": 17},
+                        <ComponentModel>{"item": "PureWater", "quantity": 13},
                         <ComponentModel>{"item": "JungleTree", "quantity": 1600},
                         <ComponentModel>{"item": "ForestTree", "quantity": 1000},
                         <ComponentModel>{"item": "GalaxyA2", "quantity": 120000},
                         <ComponentModel>{"item": "LustreBar", "quantity": 2000},
-                        <ComponentModel>{"item": "GoldBar", "quantity": 1200},
+                        <ComponentModel>{"item": "GoldBar", "quantity": 600},
                         <ComponentModel>{"item": "Bug6", "quantity": 60000},
                         <ComponentModel>{"item": "VoidBar", "quantity": 725},
                         <ComponentModel>{"item": "PureWater2", "quantity": 4},
-                        <ComponentModel>{"item": "CraftMat5", "quantity": 1000},
-                        <ComponentModel>{"item": "IronBar", "quantity": 250},
+                        <ComponentModel>{"item": "CraftMat5", "quantity": 500},
+                        <ComponentModel>{"item": "IronBar", "quantity": 125},
                         <ComponentModel>{"item": "Critter1A", "quantity": 3},
                         <ComponentModel>{"item": "DementiaBar", "quantity": 500},
-                        <ComponentModel>{"item": "CopperBar", "quantity": 150},
-                        <ComponentModel>{"item": "PalmTree", "quantity": 7000},
-                        <ComponentModel>{"item": "Fish3", "quantity": 3000}
+                        <ComponentModel>{"item": "CopperBar", "quantity": 75}
                     ]
                 }
             }),
@@ -7731,7 +6888,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 23,
                 "tab": 4,
-                "sellPrice": 48603400,
+                "sellPrice": 48341675,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -7750,17 +6907,6 @@ export const initRecipeRepo = () => {
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShoes24", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentShoes22", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentShoes5", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentShoes4", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "EquipmentShoes3", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "EquipmentShoes15", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 6, "item": "EquipmentShoes1", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 7, "item": "CopperBar", "quantity": 75},
-                        <DetRecipeComponentModel>{"indent": 6, "item": "CraftMat5", "quantity": 500},
-                        <DetRecipeComponentModel>{"indent": 6, "item": "IronBar", "quantity": 125},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "GoldBar", "quantity": 600},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "PureWater", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "PalmTree", "quantity": 7000},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "Fish3", "quantity": 3000},
                         <DetRecipeComponentModel>{"indent": 3, "item": "Critter1A", "quantity": 3},
                         <DetRecipeComponentModel>{"indent": 3, "item": "DementiaBar", "quantity": 500},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Bug6", "quantity": 60000},
@@ -7772,21 +6918,19 @@ export const initRecipeRepo = () => {
                     ],
                     "detRecipeTotals": [
                         <ComponentModel>{"item": "Fish1", "quantity": 301250},
-                        <ComponentModel>{"item": "PureWater", "quantity": 17},
+                        <ComponentModel>{"item": "PureWater", "quantity": 13},
                         <ComponentModel>{"item": "Fish2", "quantity": 1000},
                         <ComponentModel>{"item": "GalaxyA2", "quantity": 120000},
                         <ComponentModel>{"item": "LustreBar", "quantity": 2000},
-                        <ComponentModel>{"item": "GoldBar", "quantity": 1200},
+                        <ComponentModel>{"item": "GoldBar", "quantity": 600},
                         <ComponentModel>{"item": "Bug6", "quantity": 60000},
                         <ComponentModel>{"item": "VoidBar", "quantity": 725},
                         <ComponentModel>{"item": "PureWater2", "quantity": 4},
-                        <ComponentModel>{"item": "CraftMat5", "quantity": 1000},
-                        <ComponentModel>{"item": "IronBar", "quantity": 250},
+                        <ComponentModel>{"item": "CraftMat5", "quantity": 500},
+                        <ComponentModel>{"item": "IronBar", "quantity": 125},
                         <ComponentModel>{"item": "Critter1A", "quantity": 3},
                         <ComponentModel>{"item": "DementiaBar", "quantity": 500},
-                        <ComponentModel>{"item": "CopperBar", "quantity": 150},
-                        <ComponentModel>{"item": "PalmTree", "quantity": 7000},
-                        <ComponentModel>{"item": "Fish3", "quantity": 3000}
+                        <ComponentModel>{"item": "CopperBar", "quantity": 75}
                     ]
                 }
             }),
@@ -7801,7 +6945,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 24,
                 "tab": 4,
-                "sellPrice": 48304650,
+                "sellPrice": 48042925,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -7820,17 +6964,6 @@ export const initRecipeRepo = () => {
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShoes24", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentShoes22", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentShoes5", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentShoes4", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "EquipmentShoes3", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "EquipmentShoes15", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 6, "item": "EquipmentShoes1", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 7, "item": "CopperBar", "quantity": 75},
-                        <DetRecipeComponentModel>{"indent": 6, "item": "CraftMat5", "quantity": 500},
-                        <DetRecipeComponentModel>{"indent": 6, "item": "IronBar", "quantity": 125},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "GoldBar", "quantity": 600},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "PureWater", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "PalmTree", "quantity": 7000},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "Fish3", "quantity": 3000},
                         <DetRecipeComponentModel>{"indent": 3, "item": "Critter1A", "quantity": 3},
                         <DetRecipeComponentModel>{"indent": 3, "item": "DementiaBar", "quantity": 500},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Bug6", "quantity": 60000},
@@ -7842,21 +6975,19 @@ export const initRecipeRepo = () => {
                     ],
                     "detRecipeTotals": [
                         <ComponentModel>{"item": "Bug1", "quantity": 302000},
-                        <ComponentModel>{"item": "PureWater", "quantity": 17},
+                        <ComponentModel>{"item": "PureWater", "quantity": 13},
                         <ComponentModel>{"item": "Bug2", "quantity": 1250},
                         <ComponentModel>{"item": "GalaxyA2", "quantity": 120000},
                         <ComponentModel>{"item": "LustreBar", "quantity": 2000},
-                        <ComponentModel>{"item": "GoldBar", "quantity": 1200},
+                        <ComponentModel>{"item": "GoldBar", "quantity": 600},
                         <ComponentModel>{"item": "Bug6", "quantity": 60000},
                         <ComponentModel>{"item": "VoidBar", "quantity": 725},
                         <ComponentModel>{"item": "PureWater2", "quantity": 4},
-                        <ComponentModel>{"item": "CraftMat5", "quantity": 1000},
-                        <ComponentModel>{"item": "IronBar", "quantity": 250},
+                        <ComponentModel>{"item": "CraftMat5", "quantity": 500},
+                        <ComponentModel>{"item": "IronBar", "quantity": 125},
                         <ComponentModel>{"item": "Critter1A", "quantity": 3},
                         <ComponentModel>{"item": "DementiaBar", "quantity": 500},
-                        <ComponentModel>{"item": "CopperBar", "quantity": 150},
-                        <ComponentModel>{"item": "PalmTree", "quantity": 7000},
-                        <ComponentModel>{"item": "Fish3", "quantity": 3000}
+                        <ComponentModel>{"item": "CopperBar", "quantity": 75}
                     ]
                 }
             }),
@@ -7870,7 +7001,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 25,
                 "tab": 4,
-                "sellPrice": 47319225,
+                "sellPrice": 47057500,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -7878,17 +7009,6 @@ export const initRecipeRepo = () => {
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShoes24", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentShoes22", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentShoes5", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentShoes4", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "EquipmentShoes3", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "EquipmentShoes15", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 6, "item": "EquipmentShoes1", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 7, "item": "CopperBar", "quantity": 75},
-                        <DetRecipeComponentModel>{"indent": 6, "item": "CraftMat5", "quantity": 500},
-                        <DetRecipeComponentModel>{"indent": 6, "item": "IronBar", "quantity": 125},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "GoldBar", "quantity": 600},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "PureWater", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "PalmTree", "quantity": 7000},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "Fish3", "quantity": 3000},
                         <DetRecipeComponentModel>{"indent": 3, "item": "Critter1A", "quantity": 3},
                         <DetRecipeComponentModel>{"indent": 3, "item": "DementiaBar", "quantity": 500},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Bug6", "quantity": 60000},
@@ -7905,14 +7025,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "VoidBar", "quantity": 725},
                         <ComponentModel>{"item": "PureWater2", "quantity": 4},
                         <ComponentModel>{"item": "Critter1A", "quantity": 3},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 500},
-                        <ComponentModel>{"item": "PalmTree", "quantity": 7000},
-                        <ComponentModel>{"item": "Fish3", "quantity": 3000},
-                        <ComponentModel>{"item": "GoldBar", "quantity": 600},
-                        <ComponentModel>{"item": "PureWater", "quantity": 4},
-                        <ComponentModel>{"item": "CraftMat5", "quantity": 500},
-                        <ComponentModel>{"item": "IronBar", "quantity": 125},
-                        <ComponentModel>{"item": "CopperBar", "quantity": 75}
+                        <ComponentModel>{"item": "DementiaBar", "quantity": 500}
                     ]
                 }
             }),
@@ -7926,7 +7039,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 26,
                 "tab": 4,
-                "sellPrice": 47319225,
+                "sellPrice": 47057500,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -7934,17 +7047,6 @@ export const initRecipeRepo = () => {
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShoes24", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentShoes22", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentShoes5", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentShoes4", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "EquipmentShoes3", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "EquipmentShoes15", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 6, "item": "EquipmentShoes1", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 7, "item": "CopperBar", "quantity": 75},
-                        <DetRecipeComponentModel>{"indent": 6, "item": "CraftMat5", "quantity": 500},
-                        <DetRecipeComponentModel>{"indent": 6, "item": "IronBar", "quantity": 125},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "GoldBar", "quantity": 600},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "PureWater", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "PalmTree", "quantity": 7000},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "Fish3", "quantity": 3000},
                         <DetRecipeComponentModel>{"indent": 3, "item": "Critter1A", "quantity": 3},
                         <DetRecipeComponentModel>{"indent": 3, "item": "DementiaBar", "quantity": 500},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Bug6", "quantity": 60000},
@@ -7961,14 +7063,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "VoidBar", "quantity": 725},
                         <ComponentModel>{"item": "PureWater2", "quantity": 4},
                         <ComponentModel>{"item": "Critter1A", "quantity": 3},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 500},
-                        <ComponentModel>{"item": "PalmTree", "quantity": 7000},
-                        <ComponentModel>{"item": "Fish3", "quantity": 3000},
-                        <ComponentModel>{"item": "GoldBar", "quantity": 600},
-                        <ComponentModel>{"item": "PureWater", "quantity": 4},
-                        <ComponentModel>{"item": "CraftMat5", "quantity": 500},
-                        <ComponentModel>{"item": "IronBar", "quantity": 125},
-                        <ComponentModel>{"item": "CopperBar", "quantity": 75}
+                        <ComponentModel>{"item": "DementiaBar", "quantity": 500}
                     ]
                 }
             }),
@@ -8039,19 +7134,13 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 29,
                 "tab": 4,
-                "sellPrice": 86841750,
+                "sellPrice": 86455250,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentHats70", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentHats54", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentHats53", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentHats19", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "EquipmentHats18", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "IronBar", "quantity": 125},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "Forest1", "quantity": 300},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "Fish3", "quantity": 2250},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "PlatBar", "quantity": 750},
                         <DetRecipeComponentModel>{"indent": 3, "item": "Critter1", "quantity": 5000},
                         <DetRecipeComponentModel>{"indent": 3, "item": "DementiaBar", "quantity": 300},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Refinery3", "quantity": 500},
@@ -8073,11 +7162,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "VoidBar", "quantity": 1000},
                         <ComponentModel>{"item": "PureWater2", "quantity": 5},
                         <ComponentModel>{"item": "Critter1", "quantity": 5000},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 300},
-                        <ComponentModel>{"item": "Fish3", "quantity": 2250},
-                        <ComponentModel>{"item": "PlatBar", "quantity": 750},
-                        <ComponentModel>{"item": "IronBar", "quantity": 125},
-                        <ComponentModel>{"item": "Forest1", "quantity": 300}
+                        <ComponentModel>{"item": "DementiaBar", "quantity": 300}
                     ]
                 }
             }),
@@ -8093,19 +7178,13 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 30,
                 "tab": 4,
-                "sellPrice": 93679100,
+                "sellPrice": 92545700,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShirts32", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentShirts27", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentShirts15", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentShirts14", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "EquipmentShirts12", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "IronBar", "quantity": 150},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "JungleTree", "quantity": 600},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "DesertB4", "quantity": 5000},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "PlatBar", "quantity": 1000},
                         <DetRecipeComponentModel>{"indent": 3, "item": "Soul1", "quantity": 1000},
                         <DetRecipeComponentModel>{"indent": 3, "item": "DementiaBar", "quantity": 350},
                         <DetRecipeComponentModel>{"indent": 2, "item": "SnowC3", "quantity": 75000},
@@ -8127,11 +7206,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "VoidBar", "quantity": 500},
                         <ComponentModel>{"item": "PureWater2", "quantity": 4},
                         <ComponentModel>{"item": "Soul1", "quantity": 1000},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 350},
-                        <ComponentModel>{"item": "DesertB4", "quantity": 5000},
-                        <ComponentModel>{"item": "PlatBar", "quantity": 1000},
-                        <ComponentModel>{"item": "IronBar", "quantity": 150},
-                        <ComponentModel>{"item": "JungleTree", "quantity": 600}
+                        <ComponentModel>{"item": "DementiaBar", "quantity": 350}
                     ]
                 }
             }),
@@ -8147,19 +7222,13 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 31,
                 "tab": 4,
-                "sellPrice": 91155265,
+                "sellPrice": 90494200,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentPants24", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentPants21", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentPants6", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentPants5", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "EquipmentPants3", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "IronBar", "quantity": 170},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "CraftMat6", "quantity": 225},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "Bug3", "quantity": 5000},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "PlatBar", "quantity": 1250},
                         <DetRecipeComponentModel>{"indent": 3, "item": "SnowA1", "quantity": 8000},
                         <DetRecipeComponentModel>{"indent": 3, "item": "DementiaBar", "quantity": 400},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Tree7", "quantity": 75000},
@@ -8181,11 +7250,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "VoidBar", "quantity": 650},
                         <ComponentModel>{"item": "PureWater2", "quantity": 4},
                         <ComponentModel>{"item": "SnowA1", "quantity": 8000},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 400},
-                        <ComponentModel>{"item": "Bug3", "quantity": 5000},
-                        <ComponentModel>{"item": "PlatBar", "quantity": 1250},
-                        <ComponentModel>{"item": "IronBar", "quantity": 170},
-                        <ComponentModel>{"item": "CraftMat6", "quantity": 225}
+                        <ComponentModel>{"item": "DementiaBar", "quantity": 400}
                     ]
                 }
             }),
@@ -8201,24 +7266,13 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 32,
                 "tab": 4,
-                "sellPrice": 49882225,
+                "sellPrice": 49620500,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShoes24", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentShoes22", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 2, "item": "EquipmentShoes5", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 3, "item": "EquipmentShoes4", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "EquipmentShoes3", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "EquipmentShoes15", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 6, "item": "EquipmentShoes1", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 7, "item": "CopperBar", "quantity": 75},
-                        <DetRecipeComponentModel>{"indent": 6, "item": "CraftMat5", "quantity": 500},
-                        <DetRecipeComponentModel>{"indent": 6, "item": "IronBar", "quantity": 125},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "GoldBar", "quantity": 600},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "PureWater", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "PalmTree", "quantity": 7000},
-                        <DetRecipeComponentModel>{"indent": 4, "item": "Fish3", "quantity": 3000},
                         <DetRecipeComponentModel>{"indent": 3, "item": "Critter1A", "quantity": 3},
                         <DetRecipeComponentModel>{"indent": 3, "item": "DementiaBar", "quantity": 500},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Bug6", "quantity": 60000},
@@ -8240,14 +7294,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "VoidBar", "quantity": 725},
                         <ComponentModel>{"item": "PureWater2", "quantity": 4},
                         <ComponentModel>{"item": "Critter1A", "quantity": 3},
-                        <ComponentModel>{"item": "DementiaBar", "quantity": 500},
-                        <ComponentModel>{"item": "PalmTree", "quantity": 7000},
-                        <ComponentModel>{"item": "Fish3", "quantity": 3000},
-                        <ComponentModel>{"item": "GoldBar", "quantity": 600},
-                        <ComponentModel>{"item": "PureWater", "quantity": 4},
-                        <ComponentModel>{"item": "CraftMat5", "quantity": 500},
-                        <ComponentModel>{"item": "IronBar", "quantity": 125},
-                        <ComponentModel>{"item": "CopperBar", "quantity": 75}
+                        <ComponentModel>{"item": "DementiaBar", "quantity": 500}
                     ]
                 }
             }),
@@ -8482,7 +7529,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 37,
                 "tab": 4,
-                "sellPrice": 83662240,
+                "sellPrice": 83616240,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -8495,7 +7542,7 @@ export const initRecipeRepo = () => {
                         <DetRecipeComponentModel>{"indent": 6, "item": "IronBar", "quantity": 70},
                         <DetRecipeComponentModel>{"indent": 6, "item": "Jungle3", "quantity": 150},
                         <DetRecipeComponentModel>{"indent": 5, "item": "DesertA2", "quantity": 2500},
-                        <DetRecipeComponentModel>{"indent": 5, "item": "GoldBar", "quantity": 800},
+                        <DetRecipeComponentModel>{"indent": 5, "item": "GoldBar", "quantity": 400},
                         <DetRecipeComponentModel>{"indent": 4, "item": "PlatBar", "quantity": 800},
                         <DetRecipeComponentModel>{"indent": 4, "item": "DesertB3", "quantity": 10500},
                         <DetRecipeComponentModel>{"indent": 3, "item": "DementiaBar", "quantity": 275},
@@ -8518,7 +7565,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "PlatBar", "quantity": 800},
                         <ComponentModel>{"item": "DesertB3", "quantity": 10500},
                         <ComponentModel>{"item": "DesertA2", "quantity": 2500},
-                        <ComponentModel>{"item": "GoldBar", "quantity": 800},
+                        <ComponentModel>{"item": "GoldBar", "quantity": 400},
                         <ComponentModel>{"item": "IronBar", "quantity": 70},
                         <ComponentModel>{"item": "Jungle3", "quantity": 150}
                     ]
@@ -8555,13 +7602,13 @@ export const initRecipeRepo = () => {
                 "recipe": [
                     <ComponentModel>{"item": "EquipmentToolsHatchet6", "quantity": 1},
                     <ComponentModel>{"item": "Tree8", "quantity": 100000},
-                    <ComponentModel>{"item": "GalaxyC1b", "quantity": 40}
+                    <ComponentModel>{"item": "GalaxyC1b", "quantity": 20}
                 ],
                 "levelReqToCraft": 60,
                 "expGiven": 1000000,
                 "no": 39,
                 "tab": 4,
-                "sellPrice": 17196450,
+                "sellPrice": 17136450,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -8584,11 +7631,11 @@ export const initRecipeRepo = () => {
                         <DetRecipeComponentModel>{"indent": 1, "item": "AlienTree", "quantity": 110000},
                         <DetRecipeComponentModel>{"indent": 1, "item": "Refinery4", "quantity": 600},
                         <DetRecipeComponentModel>{"indent": 0, "item": "Tree8", "quantity": 100000},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "GalaxyC1b", "quantity": 40}
+                        <DetRecipeComponentModel>{"indent": 0, "item": "GalaxyC1b", "quantity": 20}
                     ],
                     "detRecipeTotals": [
                         <ComponentModel>{"item": "Tree8", "quantity": 100000},
-                        <ComponentModel>{"item": "GalaxyC1b", "quantity": 40},
+                        <ComponentModel>{"item": "GalaxyC1b", "quantity": 20},
                         <ComponentModel>{"item": "AlienTree", "quantity": 110000},
                         <ComponentModel>{"item": "Refinery4", "quantity": 600},
                         <ComponentModel>{"item": "Tree7", "quantity": 50000},
@@ -8634,19 +7681,19 @@ export const initRecipeRepo = () => {
                 "intID": "FishingRod9",
                 "recipe": [
                     <ComponentModel>{"item": "Fish7", "quantity": 40000},
-                    <ComponentModel>{"item": "GalaxyC1b", "quantity": 60},
+                    <ComponentModel>{"item": "GalaxyC1b", "quantity": 20},
                     <ComponentModel>{"item": "FishingRod8", "quantity": 1}
                 ],
                 "levelReqToCraft": 61,
                 "expGiven": 1000000,
                 "no": 41,
                 "tab": 4,
-                "sellPrice": 1888659,
+                "sellPrice": 1768659,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "Fish7", "quantity": 40000},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "GalaxyC1b", "quantity": 60},
+                        <DetRecipeComponentModel>{"indent": 0, "item": "GalaxyC1b", "quantity": 20},
                         <DetRecipeComponentModel>{"indent": 0, "item": "FishingRod8", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "Fish5", "quantity": 90000},
                         <DetRecipeComponentModel>{"indent": 1, "item": "FishingRod7", "quantity": 1},
@@ -8670,7 +7717,7 @@ export const initRecipeRepo = () => {
                     ],
                     "detRecipeTotals": [
                         <ComponentModel>{"item": "Fish7", "quantity": 40000},
-                        <ComponentModel>{"item": "GalaxyC1b", "quantity": 60},
+                        <ComponentModel>{"item": "GalaxyC1b", "quantity": 20},
                         <ComponentModel>{"item": "Fish5", "quantity": 90000},
                         <ComponentModel>{"item": "Refinery4", "quantity": 750},
                         <ComponentModel>{"item": "Refinery3", "quantity": 200},
@@ -8708,19 +7755,19 @@ export const initRecipeRepo = () => {
                 "intID": "CatchingNet9",
                 "recipe": [
                     <ComponentModel>{"item": "Bug8", "quantity": 100000},
-                    <ComponentModel>{"item": "GalaxyC1b", "quantity": 80},
+                    <ComponentModel>{"item": "GalaxyC1b", "quantity": 20},
                     <ComponentModel>{"item": "CatchingNet8", "quantity": 1}
                 ],
                 "levelReqToCraft": 61,
                 "expGiven": 1000000,
                 "no": 43,
                 "tab": 4,
-                "sellPrice": 24156050,
+                "sellPrice": 23976050,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "Bug8", "quantity": 100000},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "GalaxyC1b", "quantity": 80},
+                        <DetRecipeComponentModel>{"indent": 0, "item": "GalaxyC1b", "quantity": 20},
                         <DetRecipeComponentModel>{"indent": 0, "item": "CatchingNet8", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "Bug7", "quantity": 130000},
                         <DetRecipeComponentModel>{"indent": 1, "item": "CatchingNet7", "quantity": 1},
@@ -8743,7 +7790,7 @@ export const initRecipeRepo = () => {
                     ],
                     "detRecipeTotals": [
                         <ComponentModel>{"item": "Bug8", "quantity": 100000},
-                        <ComponentModel>{"item": "GalaxyC1b", "quantity": 80},
+                        <ComponentModel>{"item": "GalaxyC1b", "quantity": 20},
                         <ComponentModel>{"item": "Bug7", "quantity": 130000},
                         <ComponentModel>{"item": "Refinery4", "quantity": 750},
                         <ComponentModel>{"item": "Bug6", "quantity": 50000},
@@ -9580,7 +8627,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 9,
                 "tab": 5,
-                "sellPrice": 83672240,
+                "sellPrice": 83626240,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -9594,7 +8641,7 @@ export const initRecipeRepo = () => {
                         <DetRecipeComponentModel>{"indent": 7, "item": "IronBar", "quantity": 70},
                         <DetRecipeComponentModel>{"indent": 7, "item": "Jungle3", "quantity": 150},
                         <DetRecipeComponentModel>{"indent": 6, "item": "DesertA2", "quantity": 2500},
-                        <DetRecipeComponentModel>{"indent": 6, "item": "GoldBar", "quantity": 800},
+                        <DetRecipeComponentModel>{"indent": 6, "item": "GoldBar", "quantity": 400},
                         <DetRecipeComponentModel>{"indent": 5, "item": "PlatBar", "quantity": 800},
                         <DetRecipeComponentModel>{"indent": 5, "item": "DesertB3", "quantity": 10500},
                         <DetRecipeComponentModel>{"indent": 4, "item": "DementiaBar", "quantity": 275},
@@ -9619,7 +8666,7 @@ export const initRecipeRepo = () => {
                         <ComponentModel>{"item": "PlatBar", "quantity": 800},
                         <ComponentModel>{"item": "DesertB3", "quantity": 10500},
                         <ComponentModel>{"item": "DesertA2", "quantity": 2500},
-                        <ComponentModel>{"item": "GoldBar", "quantity": 800},
+                        <ComponentModel>{"item": "GoldBar", "quantity": 400},
                         <ComponentModel>{"item": "IronBar", "quantity": 70},
                         <ComponentModel>{"item": "Jungle3", "quantity": 150}
                     ]
@@ -9643,13 +8690,13 @@ export const initRecipeRepo = () => {
                 "intID": "EquipmentToolsHatchet9",
                 "recipe": [
                     <ComponentModel>{"item": "EquipmentToolsHatchet8", "quantity": 1},
-                    <ComponentModel>{"item": "AlienTree", "quantity": 110000}
+                    <ComponentModel>{"item": "Tree9", "quantity": 250000}
                 ],
                 "levelReqToCraft": 70,
                 "expGiven": 1000000,
                 "no": 11,
                 "tab": 5,
-                "sellPrice": 23246450,
+                "sellPrice": 54636450,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -9673,13 +8720,14 @@ export const initRecipeRepo = () => {
                         <DetRecipeComponentModel>{"indent": 2, "item": "AlienTree", "quantity": 110000},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Refinery4", "quantity": 600},
                         <DetRecipeComponentModel>{"indent": 1, "item": "Tree8", "quantity": 100000},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "GalaxyC1b", "quantity": 40},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "AlienTree", "quantity": 110000}
+                        <DetRecipeComponentModel>{"indent": 1, "item": "GalaxyC1b", "quantity": 20},
+                        <DetRecipeComponentModel>{"indent": 0, "item": "Tree9", "quantity": 250000}
                     ],
                     "detRecipeTotals": [
-                        <ComponentModel>{"item": "AlienTree", "quantity": 220000},
+                        <ComponentModel>{"item": "Tree9", "quantity": 250000},
                         <ComponentModel>{"item": "Tree8", "quantity": 100000},
-                        <ComponentModel>{"item": "GalaxyC1b", "quantity": 40},
+                        <ComponentModel>{"item": "GalaxyC1b", "quantity": 20},
+                        <ComponentModel>{"item": "AlienTree", "quantity": 110000},
                         <ComponentModel>{"item": "Refinery4", "quantity": 600},
                         <ComponentModel>{"item": "Tree7", "quantity": 50000},
                         <ComponentModel>{"item": "PureWater2", "quantity": 5},
@@ -9715,13 +8763,13 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 13,
                 "tab": 5,
-                "sellPrice": 3138659,
+                "sellPrice": 3018659,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "FishingRod9", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "Fish7", "quantity": 40000},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "GalaxyC1b", "quantity": 60},
+                        <DetRecipeComponentModel>{"indent": 1, "item": "GalaxyC1b", "quantity": 20},
                         <DetRecipeComponentModel>{"indent": 1, "item": "FishingRod8", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Fish5", "quantity": 90000},
                         <DetRecipeComponentModel>{"indent": 2, "item": "FishingRod7", "quantity": 1},
@@ -9747,7 +8795,7 @@ export const initRecipeRepo = () => {
                     "detRecipeTotals": [
                         <ComponentModel>{"item": "Fish8", "quantity": 250000},
                         <ComponentModel>{"item": "Fish7", "quantity": 40000},
-                        <ComponentModel>{"item": "GalaxyC1b", "quantity": 60},
+                        <ComponentModel>{"item": "GalaxyC1b", "quantity": 20},
                         <ComponentModel>{"item": "Fish5", "quantity": 90000},
                         <ComponentModel>{"item": "Refinery4", "quantity": 750},
                         <ComponentModel>{"item": "Refinery3", "quantity": 200},
@@ -9785,13 +8833,13 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 15,
                 "tab": 5,
-                "sellPrice": 74156050,
+                "sellPrice": 73976050,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "CatchingNet9", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 1, "item": "Bug8", "quantity": 100000},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "GalaxyC1b", "quantity": 80},
+                        <DetRecipeComponentModel>{"indent": 1, "item": "GalaxyC1b", "quantity": 20},
                         <DetRecipeComponentModel>{"indent": 1, "item": "CatchingNet8", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 2, "item": "Bug7", "quantity": 130000},
                         <DetRecipeComponentModel>{"indent": 2, "item": "CatchingNet7", "quantity": 1},
@@ -9816,7 +8864,7 @@ export const initRecipeRepo = () => {
                     "detRecipeTotals": [
                         <ComponentModel>{"item": "Bug9", "quantity": 250000},
                         <ComponentModel>{"item": "Bug8", "quantity": 100000},
-                        <ComponentModel>{"item": "GalaxyC1b", "quantity": 80},
+                        <ComponentModel>{"item": "GalaxyC1b", "quantity": 20},
                         <ComponentModel>{"item": "Bug7", "quantity": 130000},
                         <ComponentModel>{"item": "Refinery4", "quantity": 750},
                         <ComponentModel>{"item": "Bug6", "quantity": 50000},
