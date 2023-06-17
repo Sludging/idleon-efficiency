@@ -52,7 +52,10 @@ export class Artifact {
                 case 8:
                     return new FunHippoeteArtifact(artifact.index, artifact.data);
                 case 4:
-                    return new GoldRelicArtifact(artifact.index, artifact.data);
+                    const goldRelic = new GoldRelicArtifact(artifact.index, artifact.data);
+                    // Lava didn't update the artifact values properly, so hardcoding values.
+                    goldRelic.data.qtyBonus = 2;
+                    return goldRelic;
                 default: return new Artifact(artifact.index, artifact.data)
             }
         });
