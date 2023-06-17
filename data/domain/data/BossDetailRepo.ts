@@ -9,14 +9,14 @@ export const initBossDetailRepo = () => {
     return [    
         new BossDetailsBase("wolfA", <BossDetailsModel>{
                 "health": 25000,
-                "defence": 105,
+                "defence": 40,
                 "exp": 4000,
                 "keys": 1,
                 "attacks": [
-                    <BossAttackModel>{"name": "Fireball", "damage": 50},
+                    <BossAttackModel>{"name": "Fireball", "damage": 40},
                     <BossAttackModel>{"name": "Stomp", "damage": 120},
-                    <BossAttackModel>{"name": "Rock Spikes", "damage": 70},
-                    <BossAttackModel>{"name": "Spike Traps", "damage": 68},
+                    <BossAttackModel>{"name": "Rock Spikes", "damage": 50},
+                    <BossAttackModel>{"name": "Spike Traps", "damage": 48},
                     <BossAttackModel>{"name": "Sword Swing", "damage": 100},
                     <BossAttackModel>{"name": "Uppercut", "damage": 200},
                     <BossAttackModel>{"name": "Rocketfist", "damage": 100}
@@ -54,7 +54,7 @@ export const initBossDetailRepo = () => {
             }),
         new BossDetailsBase("Boss2A", <BossDetailsModel>{
                 "health": 1000000,
-                "defence": 550,
+                "defence": 350,
                 "exp": 100000,
                 "keys": 1,
                 "attacks": [

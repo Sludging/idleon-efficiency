@@ -144,8 +144,11 @@ export const updateConstruction = (data: Map<string, any>) => {
                 break;
         }
 
-
-        building.finishedUpgrade = building.currentXP >= building.getBuildCost();
+        building.maxed = building.level == building.maxLvl;
+        // If we aren't already max level, check if our current build xp is higher then required.
+        if (!building.maxed) {
+            building.finishedUpgrade = building.currentXP >= building.getBuildCost();
+        }
     })
     
 

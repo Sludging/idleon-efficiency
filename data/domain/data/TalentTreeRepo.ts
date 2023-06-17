@@ -1633,7 +1633,7 @@ export const initTalentTreeRepo = () => {
                         "skillIndex": 120,
                         "activeData": <ActiveTalentModel>{
                             "name": "Shockwave Slash",
-                            "K": 1,
+                            "K": 1.2,
                             "D": 1.4,
                             "s": 1,
                             "cooldown": 14,

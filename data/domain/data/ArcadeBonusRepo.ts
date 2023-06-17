@@ -149,6 +149,86 @@ export const initArcadeBonusRepo = () => {
                 "func": "add",
                 "type": "",
                 "lvlUpText": "+{ Wep POW"
+            }),
+        new ArcadeBonusBase(18, <ArcadeBonusModel>{
+                "effect": "+{% Skill EXP gain",
+                "x1": 20,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% EXP"
+            }),
+        new ArcadeBonusBase(19, <ArcadeBonusModel>{
+                "effect": "+{ Base STR",
+                "x1": 1,
+                "x2": 0,
+                "func": "add",
+                "type": "",
+                "lvlUpText": "+{ STR"
+            }),
+        new ArcadeBonusBase(20, <ArcadeBonusModel>{
+                "effect": "+{ Base AGI",
+                "x1": 1,
+                "x2": 0,
+                "func": "add",
+                "type": "",
+                "lvlUpText": "+{ AGI"
+            }),
+        new ArcadeBonusBase(21, <ArcadeBonusModel>{
+                "effect": "+{ Base WIS",
+                "x1": 1,
+                "x2": 0,
+                "func": "add",
+                "type": "",
+                "lvlUpText": "+{ WIS"
+            }),
+        new ArcadeBonusBase(22, <ArcadeBonusModel>{
+                "effect": "+{ Base LUK",
+                "x1": 1,
+                "x2": 0,
+                "func": "add",
+                "type": "",
+                "lvlUpText": "+{ LUK"
+            }),
+        new ArcadeBonusBase(23, <ArcadeBonusModel>{
+                "effect": "+{% Trapping Critters",
+                "x1": 30,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% Critters"
+            }),
+        new ArcadeBonusBase(24, <ArcadeBonusModel>{
+                "effect": "+{% Worship Souls",
+                "x1": 30,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% Souls"
+            }),
+        new ArcadeBonusBase(25, <ArcadeBonusModel>{
+                "effect": "+{% Refinery Speed",
+                "x1": 30,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% Speed"
+            }),
+        new ArcadeBonusBase(26, <ArcadeBonusModel>{
+                "effect": "+{% Forge Capacity",
+                "x1": 100,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% Cap"
+            }),
+        new ArcadeBonusBase(27, <ArcadeBonusModel>{
+                "effect": "+{% Drop Rate",
+                "x1": 30,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% Drop"
             })    
 ]
 }
