@@ -21,8 +21,28 @@ export class FirestoreData {
         this.realDB = getDatabase(app);
         this.getServerVars();
         this.getCharNames();
+        this.getCompanions();
         this.subscribeToAccountData();
         this.onUpdateFunction = onUpdate;
+    }
+
+    getCompanions = async () => {
+        if (!this.realDB) {
+            this.realDB = getDatabase(this.app);
+        }
+        goOnline(this.realDB);
+        const dbRef = ref(this.realDB);
+        try {
+            const compSnapshot = await get(child(dbRef, `_comp/${this.uid}`))
+            if (compSnapshot && compSnapshot.exists()) {
+                console.log("Companions response", compSnapshot.val());
+            } else {
+                console.log("No data available");
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
 
     getCharNames = async () => {
