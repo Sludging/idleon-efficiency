@@ -72,7 +72,7 @@ const Leaderboards = ({ leaderboards }: { leaderboards: LeaderboardsData }) => {
                 <Box width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} fill="horizontal">
                     <Box pad={{ right: 'large', left: 'large', bottom: 'medium' }}>
                         <Box fill align="center" margin={{ bottom: 'small' }}>
-                            <Heading margin={{ bottom: 'small' }} level="1">Leaderboards</Heading>
+                            <Heading margin={{ bottom: 'small' }} level="1">Cheaterboards</Heading>
                         </Box>
                         {leaderboards.metadata &&
                             <Box pad={{ horizontal: "medium" }} fill direction="row" justify="between" gap="small">
