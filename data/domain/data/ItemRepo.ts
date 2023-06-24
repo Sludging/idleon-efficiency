@@ -18325,6 +18325,36 @@ export const initItemRepo = () => {
                 "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "Boss5C", "quantity": 1, "chance": 0.0003}]},
                 "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentCape13"}, "order": 438}
             }),
+        new ItemBase("EquipmentCape12", <ItemModel>{
+                "item": <ArmourItemModel>{
+                    "internalName": "EquipmentCape12",
+                    "displayName": "Blooming Vine",
+                    "sellPrice": 1,
+                    "typeGen": TypeGenEnum.aCape,
+                    "Type": "Cape",
+                    "lvReqToCraft": 55,
+                    "lvReqToEquip": 1,
+                    "Class": ClassTypeEnum.All,
+                    "Weapon_Power": 15,
+                    "STR": 12,
+                    "AGI": 12,
+                    "WIS": 12,
+                    "LUK": 12,
+                    "Defence": 30,
+                    "miscUp1": "50% Xp From Monsters",
+                    "miscUp2": "50% Skill Exp",
+                    "Upgrade_Slots_Left": 0,
+                    "Skill": "",
+                    "Skill_Power": 0
+                },
+                "sources": undefined,
+                "notes": undefined,
+                "recipe": undefined,
+                "vendors": undefined,
+                "anvilProduction": undefined,
+                "detDrops": undefined,
+                "slabSort": undefined
+            }),
         new ItemBase("StampA1", <ItemModel>{
                 "item": <StampItemModel>{
                     "internalName": "StampA1",
