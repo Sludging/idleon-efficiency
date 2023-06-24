@@ -146,6 +146,9 @@ export default function parseRefinery(rawData: any[][]) {
         [...Array(unlockedSalts)].forEach((_, i) => {
             const newSaltStatus = new SaltStatus()
             const saltIndex = i + 3;
+            if (saltIndex > costRepo.length) {
+                return;
+            }
             newSaltStatus.rank = rawData[saltIndex][1];
             newSaltStatus.progress = rawData[saltIndex][0];
             newSaltStatus.autoRefine = rawData[saltIndex][4];
