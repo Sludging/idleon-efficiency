@@ -290,6 +290,9 @@ export const initQuestNameRepo = () => {
         new QuestNameBase("Nebulyte6", <QuestNameModel>{"name": "Chizoar Slayer", "difficulty": 7}),
         new QuestNameBase("Nebulyte9", <QuestNameModel>{"name": "Oh Geez Lets Not Think About This One...", "difficulty": 7}),
         new QuestNameBase("Nebulyte12", <QuestNameModel>{"name": "VMAN ACHIEVED!", "difficulty": 1}),
-        new QuestNameBase("Bubbulyte2", <QuestNameModel>{"name": "Spring Splendor", "difficulty": 5})    
+        new QuestNameBase("Bubbulyte2", <QuestNameModel>{"name": "Spring Splendor", "difficulty": 5}),
+        new QuestNameBase("Tired Mole2", <QuestNameModel>{"name": "Establishing Order among Molekind", "difficulty": 3}),
+        new QuestNameBase("Tired Mole5", <QuestNameModel>{"name": "Like taking Keys from a Crawler", "difficulty": 5}),
+        new QuestNameBase("Tired Mole8", <QuestNameModel>{"name": "Divine Endeavor", "difficulty": 1})    
 ]
 }

@@ -142,21 +142,66 @@ export const initBossDetailRepo = () => {
                 "defence": 2500,
                 "exp": 750000,
                 "keys": 1,
-                "attacks": [<BossAttackModel>{"name": "filler", "damage": 400}]
+                "attacks": [<BossAttackModel>{"name": "Talk no Jutsu", "damage": 1000}, <BossAttackModel>{"name": "filler", "damage": 400}]
             }),
         new BossDetailsBase("Boss4B", <BossDetailsModel>{
                 "health": 350000000,
                 "defence": 5,
-                "exp": 200000,
+                "exp": 30000000,
                 "keys": 5,
-                "attacks": [<BossAttackModel>{"name": "filler", "damage": 3300}]
+                "attacks": [<BossAttackModel>{"name": "Talk no Jutsu", "damage": 1800}, <BossAttackModel>{"name": "filler", "damage": 3300}]
             }),
         new BossDetailsBase("Boss4C", <BossDetailsModel>{
                 "health": 2000000000,
                 "defence": 25,
-                "exp": 1000000,
+                "exp": 1000000000,
                 "keys": 60,
-                "attacks": [<BossAttackModel>{"name": "filler", "damage": 33000}]
+                "attacks": [<BossAttackModel>{"name": "Talk no Jutsu", "damage": 18000}, <BossAttackModel>{"name": "filler", "damage": 33000}]
+            }),
+        new BossDetailsBase("Boss5A", <BossDetailsModel>{
+                "health": 1000000000,
+                "defence": 2500,
+                "exp": 20000000,
+                "keys": 1,
+                "attacks": [
+                    <BossAttackModel>{"name": "Attack1", "damage": 1000},
+                    <BossAttackModel>{"name": "Attack2", "damage": 1500},
+                    <BossAttackModel>{"name": "Attack3", "damage": 800},
+                    <BossAttackModel>{"name": "Attack4", "damage": 450},
+                    <BossAttackModel>{"name": "Attack5", "damage": 5000},
+                    <BossAttackModel>{"name": "Attack6", "damage": 10000},
+                    <BossAttackModel>{"name": "Attack7", "damage": 400}
+                ]
+            }),
+        new BossDetailsBase("Boss5B", <BossDetailsModel>{
+                "health": 1000000000,
+                "defence": 5,
+                "exp": 700000000,
+                "keys": 5,
+                "attacks": [
+                    <BossAttackModel>{"name": "Attack1", "damage": 1800},
+                    <BossAttackModel>{"name": "Attack2", "damage": 4000},
+                    <BossAttackModel>{"name": "Attack3", "damage": 2000},
+                    <BossAttackModel>{"name": "Attack4", "damage": 1500},
+                    <BossAttackModel>{"name": "Attack5", "damage": 2500},
+                    <BossAttackModel>{"name": "Attack6", "damage": 5000},
+                    <BossAttackModel>{"name": "Attack7", "damage": 3300}
+                ]
+            }),
+        new BossDetailsBase("Boss5C", <BossDetailsModel>{
+                "health": 1000000000,
+                "defence": 25,
+                "exp": 2000000000,
+                "keys": 70,
+                "attacks": [
+                    <BossAttackModel>{"name": "Attack1", "damage": 18000},
+                    <BossAttackModel>{"name": "Attack2", "damage": 40000},
+                    <BossAttackModel>{"name": "Attack3", "damage": 20000},
+                    <BossAttackModel>{"name": "Attack4", "damage": 15000},
+                    <BossAttackModel>{"name": "Attack5", "damage": 25000},
+                    <BossAttackModel>{"name": "Attack6", "damage": 50000},
+                    <BossAttackModel>{"name": "Attack7", "damage": 33000}
+                ]
             })    
 ]
 }

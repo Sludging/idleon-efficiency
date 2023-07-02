@@ -220,7 +220,7 @@ export const initMapPortalsRepo = () => {
         new MapInfoBase(211, <MapInfoModel>{"id": 211, "portalRequirements": [6000000]}),
         new MapInfoBase(212, <MapInfoModel>{"id": 212, "portalRequirements": [10000000]}),
         new MapInfoBase(213, <MapInfoModel>{"id": 213, "portalRequirements": [60000]}),
-        new MapInfoBase(214, <MapInfoModel>{"id": 214, "portalRequirements": [0]}),
+        new MapInfoBase(214, <MapInfoModel>{"id": 214, "portalRequirements": [100]}),
         new MapInfoBase(215, <MapInfoModel>{"id": 215, "portalRequirements": [0]}),
         new MapInfoBase(216, <MapInfoModel>{"id": 216, "portalRequirements": [0]}),
         new MapInfoBase(217, <MapInfoModel>{"id": 217, "portalRequirements": [0]}),
