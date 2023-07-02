@@ -10,6 +10,7 @@ export class FirestoreData {
     realDB: Database;
 
     charNames: string[] = [];
+    companions: number[] = [];
     serverVars: Record<string, any> = {};
 
     onUpdateFunction: Function
@@ -35,13 +36,11 @@ export class FirestoreData {
         try {
             const compSnapshot = await get(child(dbRef, `_comp/${this.uid}`))
             if (compSnapshot && compSnapshot.exists()) {
-                console.log("Companions response", compSnapshot.val());
-            } else {
-                console.log("No data available");
+                this.companions = (compSnapshot.val()["l"] as string[]).map(comp => parseInt(comp.split(",")[0]))
             }
         }
         catch (error) {
-            console.log(error);
+            console.log("Failed getting companion data", error);
         }
     }
 
@@ -56,7 +55,7 @@ export class FirestoreData {
             if (charSnapshot && charSnapshot.exists()) {
                 this.charNames = charSnapshot.val() as string[];
             } else {
-                console.log("No data available");
+                console.log("No character name data available, wrong account?");
             }
         }
         catch (error) {
@@ -74,7 +73,7 @@ export class FirestoreData {
             { includeMetadataChanges: true }, (doc) => {
                 if (doc.exists()) {
                     const cloudsave = doc.data();
-                    this.onUpdateFunction(cloudsave, this.charNames, this.serverVars);
+                    this.onUpdateFunction(cloudsave, this.charNames, this.companions, this.serverVars);
                 }
             });
     }
