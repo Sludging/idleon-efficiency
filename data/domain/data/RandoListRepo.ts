@@ -859,7 +859,9 @@ export const initRandoListRepo = () => {
                     "ObolFrag_x1.png",
                     "PremiumGem_x1.png",
                     "PachAcc.png",
-                    "Libz.png"
+                    "Libz.png",
+                    "Blank.png",
+                    "Key5_x1.png"
                 ]
             }),
         new RandoListBase(26, <RandoListModel>{
@@ -1861,10 +1863,10 @@ export const initRandoListRepo = () => {
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "BIG_TIME_Quality_v1.83",
-                    "*Split_Stacking_within_Storage_Chest_now_lets_you_withdraw_that_exact_amount_AT_ONCE!_Seriously,_give_split_stacking_a_try!_@_*Added_32_more_Filter_Slots,_FOR_FREE!_Holy_cow,_you'd_think_those_would_cost_gems!_@_*Added_a_Deposit_All_option_for_Statues._@_*You_can_now_Hold_Down_to_mass_buy_Anvil_Points,_and_added_a_Max_LV_display._@_*You_can_withdraw_and_deposit_coins_to_your_Storage_Chest_in_Quickref._Worldwide_finance_is_a_Big_W._@_*Added_a_'return_captain'_functionality,_just_press_the_Trash_icon_on_any_captain_who_is_out_sailing._@_*Added_a_'Storage_Access'_button_when_upgrade_Stamps,_making_getting_resources_easier._@_*Buffed_Gold_Relic_artifact_to_give_1%_higher_bonus_to_3d_Printer_per_day_than_before._@_*The_Skull_in_Monster_Cards_descriptions_now_shows_Deathnote_Rank_for_your_Account._@_*You_can_now_change_which_Production_items_youre_making_in_the_anvil_through_Quickref.",
-                    "*L'empilement_fractionné_dans_le_coffre_de_stockage_vous_permet_désormais_de_retirer_ce_montant_exact_EN_UNE_SEULE_FOIS_!_Sérieusement,_essayez_le_split_stacking_!_@_*Ajout_de_32_emplacements_de_filtre_supplémentaires,_GRATUITEMENT_!_Vache_sacrée,_on_pourrait_penser_que_cela_coûterait_des_pierres_précieuses_!_@_*Ajout_d'une_option_Tout_déposer_pour_les_statues._@_*Vous_pouvez_maintenant_maintenir_enfoncé_pour_acheter_en_masse_des_points_d'enclume_et_ajouter_un_affichage_Max_LV._@_*Vous_pouvez_retirer_et_déposer_des_pièces_dans_votre_coffre_de_stockage_dans_Quickref._La_finance_mondiale_est_un_grand_W._@_*Ajout_d'une_fonctionnalité_de_retour_du_capitaine,_appuyez_simplement_sur_l'icône_de_la_corbeille_sur_n'importe_quel_capitaine_qui_navigue._@_*Ajout_d'un_bouton_Accès_au_stockage_lors_de_la_mise_à_niveau_des_tampons,_ce_qui_facilite_l'obtention_de_ressources.",
-                    "*Mit_der_geteilten_Stapelung_innerhalb_der_Lagertruhe_können_Sie_jetzt_genau_diesen_Betrag_AUF_EINMAL_abheben!_Im_Ernst,_probieren_Sie_Split-Stacking_aus!_@_*32_weitere_Filterplätze_hinzugefügt,_KOSTENLOS!_Heilige_Kuh,_man_könnte_meinen,_das_würde_Edelsteine_​​kosten!_@_*Für_Statuen_wurde_die_Option_'Alles_einzahlen'_hinzugefügt._@_*Sie_können_jetzt_'Gedrückt_halten'_verwenden,_um_Anvil-Punkte_massenhaft_zu_kaufen,_und_es_wurde_eine_Max-LV-Anzeige_hinzugefügt._@_*Sie_können_in_Quickref_Münzen_abheben_und_in_Ihre_Lagertruhe_einzahlen._Weltweite_Finanzen_sind_ein_großes_W._@_*Eine_Funktion_zum_Zurückkehren_des_Kapitäns_wurde_hinzugefügt._Drücken_Sie_einfach_das_Papierkorbsymbol_bei_jedem_Kapitän,_der_gerade_unterwegs_ist._@_*Beim_Upgrade_von_Stempeln_wurde_eine_Schaltfläche_'Speicherzugriff'_hinzugefügt,_um_den_Zugriff_auf_Ressourcen_zu_erleichtern."
+                    "Kattlekruk_Boss_v1.86",
+                    "*Kattlekruk's_Volcano_at_the_end_of_World_5_has_been_opened!_Enter_using_the_Boss_Keys_added_to_drop_tables_of_Biggole_Moles,_Crawlers,_and_Tremor_Wurms!_@_*Craft_4_new_Kattlekruk_Weapons,_the_'Cracked_Skull_Destroyer',_'Skull_Lance',_'Spine_Tingler_Sniper',_and_'Staff_of_the_Undead_Plague'_recipes_are_unlocked_though_W5_Merit_Shop_in_Tasks_@_*Craft_4_new_Kattlekruk_Boss_Armor,_recipes_unlocked_though_W5_Merit_Shop_in_Tasks._@_*Added_3_new_boss_exclusive_items_to_Kattlekruk's_Drop_Table,_including_a_new_Obol,_new_Pendant,_and_new_Cape_@_*A_new_Trophy_has_been_added_for_completing_all_of_the_new_'Tired_Mole'_NPC_quests._@_*King_Doot_companion_is_now_guaranteed_if_not_found_within_200_treats._This_works_retroactively_for_those_this_would_have_previously_applied_to!_@_*Blood_Berserker's_Combustion_attack_no_longer_ends_the_Inflame_Status,_and_had_its_cooldown_reduced_from_40s_to_20s",
+                    "*Le_volcan_de_Kattlekruk_à_la_fin_du_monde_5_a_été_ouvert_!_Entrez_en_utilisant_les_clés_de_boss_ajoutées_aux_tables_de_butin_de_Biggole_Moles,_Crawlers_et_Tremor_Wurms_!_@_*Craft_4_nouvelles_armes_Kattlekruk,_le_'Cracked_Skull_Destroyer',_Les_recettes_Lance',_'Spine_Tingler_Sniper'_et_'Staff_of_the_Undead_Plague'_sont_déverrouillées_via_W5_Merit_Shop_in_Tasks_@_*Craft_4_new_Kattlekruk_Boss_Armor,_recettes_déverrouillées_via_W5_Merit_Shop_in_Tasks_@_*Ajout_de_3_nouveaux_boss_des_objets_exclusifs_à_la_Drop_Table_de_Kattlekruk,_y_compris_un_nouvel_obole,_un_nouveau_pendentif_et_une_nouvelle_cape_@_*_Un_nouveau_trophée_a_été_ajouté_pour_avoir_terminé_toutes_les_nouvelles_quêtes_de_PNJ_'Taupe_fatiguée'._@_*_Le_compagnon_King_Doot_est_désormais_garanti_s'il_n'est_pas_trouvé_dans_les_200_friandises._Cela_fonctionne_rétroactivement_pour_ceux_auxquels_cela_s'appliquerait_auparavant_!_@_*_L'attaque_de_combustion_du_Berserker_sanguinaire_ne_met_plus_fin_au_statut_d'inflammation_et_son_temps_de_recharge_a_été_réduit_de_40_s_à_20_s",
+                    "*Kattlekruks_Vulkan_am_Ende_von_Welt_5_wurde_geöffnet!_Betreten_Sie_ihn_mit_den_Boss-Schlüsseln,_die_zu_den_Drop-Tischen_von_Biggole_Moles,_Crawlers_und_Tremor_Wurms_hinzugefügt_wurden!_@_*Stellen_Sie_4_neue_Kattlekruk-Waffen_her,_den__'Cracked_Skull_Destroyer_',_den__'Totenkopf_'._Die_Rezepte__'Lance_',__'Spine_Tingler_Sniper_'_und__'Stab_der_Undead_Plague_'_werden_im_W5-Merit-Shop_in_den_Aufgaben_freigeschaltet._@_*Stellen_Sie_4_neue_Kattlekruk-Boss-Rüstung_her._Die_Rezepte_sind_im_W5-Merit-Shop_in_den_Aufgaben_freigeschaltet._@_*3_neue_Bosse_hinzugefügt_Exklusive_Gegenstände_für_Kattlekruks_Drop-Tisch,_darunter_ein_neuer_Obol,_ein_neuer_Anhänger_und_ein_neuer_Umhang_@_*Für_den_Abschluss_aller_neuen__'Müder_Maulwurf_'-NPC-Quests_wurde_eine_neue_Trophäe_hinzugefügt._@_*Der_Begleiter_von_King_Doot_ist_jetzt_garantiert,_wenn_er_nicht_gefunden_wird_innerhalb_von_200_Leckereien._Dies_funktioniert_rückwirkend_für_diejenigen,_auf_die_dies_zuvor_zugetroffen_hätte!_@_*Der_Verbrennungsangriff_des_Blutberserkers_beendet_nicht_mehr_den_Inflame-Status_und_seine_Abklingzeit_wurde_von_40_auf_20_Sek._verringert"
                 ]
             }),
         new RandoListBase(62, <RandoListModel>{
@@ -2149,8 +2151,26 @@ export const initRandoListRepo = () => {
                     "330"
                 ]
             }),
-        new RandoListBase(79, <RandoListModel>{"elements": ["Slargon", "Pirate_Porkchop", "Muhmuguh", "Poigu", "Lava_Larry"]}),
-        new RandoListBase(80, <RandoListModel>{"elements": ["Slargon", "Pirate_Porkchop", "Muhmuguh", "Poigu", "Lava_Larry"]}),
+        new RandoListBase(79, <RandoListModel>{
+                "elements": [
+                    "Slargon",
+                    "Pirate_Porkchop",
+                    "Muhmuguh",
+                    "Poigu",
+                    "Lava_Larry",
+                    "Tired_Mole"
+                ]
+            }),
+        new RandoListBase(80, <RandoListModel>{
+                "elements": [
+                    "Slargon",
+                    "Pirate_Porkchop",
+                    "Muhmuguh",
+                    "Poigu",
+                    "Lava_Larry",
+                    "Tired_Mole"
+                ]
+            }),
         new RandoListBase(81, <RandoListModel>{"elements": ["Meteor", "rocky", "iceknight", "snakeZ", "frogGR"]}),
         new RandoListBase(82, <RandoListModel>{"elements": ["EquipmentHats78", "EquipmentRingsChat10"]}),
         new RandoListBase(83, <RandoListModel>{"elements": ["EquipmentToolsHatchet11"]}),
