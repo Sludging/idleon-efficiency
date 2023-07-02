@@ -1947,20 +1947,20 @@ export const initTaskDescriptionRepo = () => {
         new TaskDescriptionBase(102, <TaskDescriptionModel>{
                 "name": "Cracking The Kruk!",
                 "description": "}",
-                "extraStr": "Wait for the evil Kattlekruk boss to open his volcano door...|Succeed at 20 of the Troll's mindgames, aka when he lets you hit him|Defeat the Massive Troll without failing a single Mindgame. He heals when you fail one.|Defeat the Troll on 5 players, in order, starting with the 1st|Kill the Chaotic Massive Troll, or CMT for short, or Chaotical Massiveie Trolle for long|Kill Chaotic Massive Troll on 6 players, starting with the 1st.|Kill Chaotic Massive Troll within the first 10 mindgames|Defeat the Nightmare Massive Troll, or Nightmare Massive T for short|Defeat Nightmare Troll on 10 players, in order from the 1st|Defeat Nightmare Troll within 5 mindgames, equipping the red boxing gloves",
+                "extraStr": "Defeat the evil KattleKruk Divinity from within his Volcano|Defeat Kattlekruk without letting moles heal him more than 5 times|Defeat Kattlekruk on 6 players, in order, starting with the 1st|Kill Chaotic Kattlekruk.|Kill Chaotic Kattlekruk without letting moles heal more than 3 times.|Defeat Chaotic Kattlekruk within 30 seconds of entering.|Defeat Chaotic Kattlekruk on 7 players, in order from the 1st|Defeat Nightmare Kattlekruk, the scariest boss of all time.|Defeat Nightmare Kattlekruk before he heals even once from moles|Defeat Nightmare Kattlekruk on 10 players, in order from the 1st",
                 "number1": 10,
-                "descLine2": "2|1|The troll obviously isn't dying despite insisting he is... very suspicious...",
+                "descLine2": "2|1|Kattlekruk's demeanor gives you the feeling there are powers greater than the Gods",
                 "numbers": [
                     1,
-                    20,
-                    1,
-                    5,
                     1,
                     6,
                     1,
                     1,
-                    10,
-                    1
+                    1,
+                    7,
+                    1,
+                    1,
+                    10
                 ]
             }),
         new TaskDescriptionBase(103, <TaskDescriptionModel>{

@@ -11204,7 +11204,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Great thats twenty five thousand less pingys for those poachers to get their hands on! Wait we're the poachers huh.",
+                        "DialogueText": "Great thats twenty five hundred less pingys for those poachers to get their hands on! Wait we're the poachers huh.",
                         "NextIndex": 25,
                         "Name": ""
                     },
@@ -13934,12 +13934,12 @@ export const initNpcRepo = () => {
                 "head": <NpcHeadModel>{
                     "location": "Blunder Hills",
                     "world": "Blunder Hills",
-                    "noQuest": 0,
+                    "noQuest": 1,
                     "type": "Event",
-                    "birthWeight": 3.65,
-                    "starSign": "Libra",
-                    "mothersMaidenName": "Davidson",
-                    "notes": " "
+                    "birthWeight": 3.29,
+                    "starSign": "Pisces",
+                    "mothersMaidenName": "Trussel",
+                    "notes": ""
                 },
                 "quests": {
                     "Spring Splendor": <CustomQuestModel>{
@@ -13981,7 +13981,152 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Spring spring spring!! Yippie!! Nice nametag its so poggers!",
+                        "NextIndex": -1,
+                        "Name": ""
+                    }
+                ]
+            }),
+        new NpcBase("Tired Mole", <NpcModel>{
+                "head": <NpcHeadModel>{
+                    "location": "Unknown",
+                    "world": "Smolderin' Plateau",
+                    "noQuest": 0,
+                    "type": "Unknown",
+                    "birthWeight": 7.07,
+                    "starSign": "Aquarius",
+                    "mothersMaidenName": "Ulrich",
+                    "notes": " "
+                },
+                "quests": {
+                    "Establishing Order among Molekind": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "How about you help me? I need to get back in to the boss's volcano but I lost the keys. <br> QUEST:Defeat Biggole Moles to acquire Boss Keys. AFK kills count.",
                         "NextIndex": 4,
+                        "Name": "Establishing Order among Molekind",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 3,
+                        "Rewards": [<ComponentModel>{"item": "Key5", "quantity": 10}, <ComponentModel>{"item": "Pearl6", "quantity": 2}],
+                        "QuestName": "Tired Mole1",
+                        "Difficulty": 3,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Tired Mole1",
+                        "CustomArray": [<CustomReqModel>{
+                            "desc": "Defeat Biggole Moles:",
+                            "finalV": 6000000,
+                            "type": "GreaterEqual",
+                            "startV": 0
+                        }]
+                    },
+                    "Like taking Keys from a Crawler": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Ok so I got some of my keys back but I'm still missing a lot... where could they have gone? <br> QUEST:Defeat Crawlers within the cave to get more Boss Keys. AFK kills count.",
+                        "NextIndex": 7,
+                        "Name": "Like taking Keys from a Crawler",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 6,
+                        "Rewards": [<ComponentModel>{"item": "Key5", "quantity": 25}, <ComponentModel>{"item": "Pearl5", "quantity": 5}],
+                        "QuestName": "Tired Mole2",
+                        "Difficulty": 5,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Tired Mole2",
+                        "CustomArray": [<CustomReqModel>{
+                            "desc": "Defeat Crawlers:",
+                            "finalV": 10000000,
+                            "type": "GreaterEqual",
+                            "startV": 0
+                        }]
+                    },
+                    "Divine Endeavor": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "I honestly don't think I can rest easy until I know for certain the boss wont be breathing down my neck every time I stop working! <br> QUEST:Get Kattlekruk to drop his cape on Nightmare to prove your capability at taking down the Divine Gods themselves.",
+                        "NextIndex": 10,
+                        "Name": "Divine Endeavor",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 9,
+                        "Rewards": [<ComponentModel>{"item": "Trophy17", "quantity": 1}],
+                        "QuestName": "Tired Mole3",
+                        "Difficulty": 1,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Tired Mole3",
+                        "CustomArray": [
+                            <CustomReqModel>{
+                                "desc": "Equip the Divine Scarf:",
+                                "finalV": 1,
+                                "type": "GreaterEqual",
+                                "startV": 0
+                            },
+                            <CustomReqModel>{"desc": "Get Kattlekruk Cape:", "finalV": 1, "type": "GreaterEqual", "startV": 0}
+                        ]
+                    }
+                },
+                "dialogue": [
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "The boss wants more but I just cant... that accursed ambition of mine to be the official skull carrier has really come to haunt me.",
+                        "NextIndex": 1,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Those lowly lava moles don't know how lucky they got it... <br> ... <br> uhhh hi there? You're a funny looking mole what department do you work in?",
+                        "NextIndex": 2,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "How about you help me? I need to get back in to the boss's volcano but I lost the keys. <br> QUEST:Defeat Biggole Moles to acquire Boss Keys. AFK kills count.",
+                        "NextIndex": 4,
+                        "Name": "Establishing Order among Molekind"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!!",
+                        "NextIndex": 2,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Those pesky lava moles stole my keys? Well I'll have a word with them later I am their superior after all!",
+                        "NextIndex": 5,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Ok so I got some of my keys back but I'm still missing a lot... where could they have gone? <br> QUEST:Defeat Crawlers within the cave to get more Boss Keys. AFK kills count.",
+                        "NextIndex": 7,
+                        "Name": "Like taking Keys from a Crawler"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!!",
+                        "NextIndex": 5,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "The rest are in the cave?? Sheesh I'll have to get those after I take a quick nap and recover my strength. But at this rate with how the Boss has been lately well...",
+                        "NextIndex": 8,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "I honestly don't think I can rest easy until I know for certain the boss wont be breathing down my neck every time I stop working! <br> QUEST:Get Kattlekruk to drop his cape on Nightmare to prove your capability at taking down the Divine Gods themselves.",
+                        "NextIndex": 10,
+                        "Name": "Divine Endeavor"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!!",
+                        "NextIndex": 8,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "You absolute legend! You made this tired mole very happy I really never thought I'd see the day that someone stood up to the boss!",
+                        "NextIndex": 10,
                         "Name": ""
                     }
                 ]

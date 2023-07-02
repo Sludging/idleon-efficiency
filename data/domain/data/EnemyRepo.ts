@@ -5055,6 +5055,7 @@ export const initEnemyRepo = () => {
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 29000, "chance": 0.5, "questLink": "N/A"},
                         <ItemDropModel>{"item": "LavaB6", "quantity": 1, "chance": 0.16, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Key5", "quantity": 1, "chance": 1.33333e-05, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsH11", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
                         <RecipeDropModel>{"item": "SmithingRecipes5", "quantity": 22, "chance": 5e-07, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable26", "quantity": 1, "chance": 0.0035, "questLink": "N/A"}
@@ -5101,6 +5102,7 @@ export const initEnemyRepo = () => {
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 36000, "chance": 0.5, "questLink": "N/A"},
                         <ItemDropModel>{"item": "LavaC1", "quantity": 1, "chance": 0.16, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Key5", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsH12", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable27", "quantity": 1, "chance": 0.0028, "questLink": "N/A"}
                     ]
@@ -5146,6 +5148,7 @@ export const initEnemyRepo = () => {
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 50000, "chance": 0.5, "questLink": "N/A"},
                         <ItemDropModel>{"item": "LavaC2", "quantity": 1, "chance": 0.16, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Key5", "quantity": 1, "chance": 4e-05, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsH13", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
                         <ItemDropModel>{"item": "StampA37", "quantity": 1, "chance": 1e-06, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable27", "quantity": 1, "chance": 0.0035, "questLink": "N/A"}
@@ -5909,7 +5912,7 @@ export const initEnemyRepo = () => {
                     "defence": 2500,
                     "exp": 750000,
                     "keys": 1,
-                    "attacks": [<BossAttackModel>{"name": "filler", "damage": 400}]
+                    "attacks": [<BossAttackModel>{"name": "Talk no Jutsu", "damage": 1000}, <BossAttackModel>{"name": "filler", "damage": 400}]
                 }
             }),
         new EnemyBase("Boss4B", <EnemyModel>{
@@ -5956,9 +5959,9 @@ export const initEnemyRepo = () => {
                 "bossData": <BossDetailsModel>{
                     "health": 350000000,
                     "defence": 5,
-                    "exp": 200000,
+                    "exp": 30000000,
                     "keys": 5,
-                    "attacks": [<BossAttackModel>{"name": "filler", "damage": 3300}]
+                    "attacks": [<BossAttackModel>{"name": "Talk no Jutsu", "damage": 1800}, <BossAttackModel>{"name": "filler", "damage": 3300}]
                 }
             }),
         new EnemyBase("Boss4C", <EnemyModel>{
@@ -6007,9 +6010,9 @@ export const initEnemyRepo = () => {
                 "bossData": <BossDetailsModel>{
                     "health": 2000000000,
                     "defence": 25,
-                    "exp": 1000000,
+                    "exp": 1000000000,
                     "keys": 60,
-                    "attacks": [<BossAttackModel>{"name": "filler", "damage": 33000}]
+                    "attacks": [<BossAttackModel>{"name": "Talk no Jutsu", "damage": 18000}, <BossAttackModel>{"name": "filler", "damage": 33000}]
                 }
             }),
         new EnemyBase("Boss5A", <EnemyModel>{
@@ -6024,7 +6027,7 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 4,
                     "RespawnTime": 86400,
                     "DeathFrame": 13,
-                    "MonsterHPTotal": 1500000000,
+                    "MonsterHPTotal": 1e+11,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "a",
                     "ExpGiven": 12000,
@@ -6037,7 +6040,11 @@ export const initEnemyRepo = () => {
                 "drops": <EnemyTableModel>{
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 1000000, "chance": 1, "questLink": "N/A"},
-                        <CardDropModel>{"item": "CardsZ18", "quantity": 1, "chance": 0.004, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "KrukPart", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsZ18", "quantity": 1, "chance": 0.0008, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentPendant29", "quantity": 1, "chance": 1e-05, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "ObolKruk", "quantity": 1, "chance": 5e-05, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "StoneA6", "quantity": 3, "chance": 0.05, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable25", "quantity": 2, "chance": 1, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable26", "quantity": 2, "chance": 1, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable27", "quantity": 2, "chance": 1, "questLink": "N/A"}
@@ -6051,7 +6058,21 @@ export const initEnemyRepo = () => {
                     "crystalName": undefined,
                     "hasCard": true
                 },
-                "bossData": undefined
+                "bossData": <BossDetailsModel>{
+                    "health": 1000000000,
+                    "defence": 2500,
+                    "exp": 20000000,
+                    "keys": 1,
+                    "attacks": [
+                        <BossAttackModel>{"name": "Attack1", "damage": 1000},
+                        <BossAttackModel>{"name": "Attack2", "damage": 1500},
+                        <BossAttackModel>{"name": "Attack3", "damage": 800},
+                        <BossAttackModel>{"name": "Attack4", "damage": 450},
+                        <BossAttackModel>{"name": "Attack5", "damage": 5000},
+                        <BossAttackModel>{"name": "Attack6", "damage": 10000},
+                        <BossAttackModel>{"name": "Attack7", "damage": 400}
+                    ]
+                }
             }),
         new EnemyBase("Boss5B", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
@@ -6065,7 +6086,7 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 4,
                     "RespawnTime": 86400,
                     "DeathFrame": 13,
-                    "MonsterHPTotal": 4e+10,
+                    "MonsterHPTotal": 2.5e+12,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "a",
                     "ExpGiven": 12000,
@@ -6078,7 +6099,12 @@ export const initEnemyRepo = () => {
                 "drops": <EnemyTableModel>{
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 5000000, "chance": 1, "questLink": "N/A"},
-                        <CardDropModel>{"item": "CardsZ19", "quantity": 1, "chance": 0.002, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "KrukPart", "quantity": 1, "chance": 0.1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "KrukPart2", "quantity": 1, "chance": 0.01, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentPendant29", "quantity": 1, "chance": 3.5e-05, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "ObolKruk", "quantity": 1, "chance": 0.00022, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "StoneT6", "quantity": 2, "chance": 0.05, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsZ19", "quantity": 1, "chance": 0.0008, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable25", "quantity": 2, "chance": 1, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable26", "quantity": 2, "chance": 1, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable27", "quantity": 2, "chance": 1, "questLink": "N/A"}
@@ -6092,7 +6118,21 @@ export const initEnemyRepo = () => {
                     "crystalName": undefined,
                     "hasCard": true
                 },
-                "bossData": undefined
+                "bossData": <BossDetailsModel>{
+                    "health": 1000000000,
+                    "defence": 5,
+                    "exp": 700000000,
+                    "keys": 5,
+                    "attacks": [
+                        <BossAttackModel>{"name": "Attack1", "damage": 1800},
+                        <BossAttackModel>{"name": "Attack2", "damage": 4000},
+                        <BossAttackModel>{"name": "Attack3", "damage": 2000},
+                        <BossAttackModel>{"name": "Attack4", "damage": 1500},
+                        <BossAttackModel>{"name": "Attack5", "damage": 2500},
+                        <BossAttackModel>{"name": "Attack6", "damage": 5000},
+                        <BossAttackModel>{"name": "Attack7", "damage": 3300}
+                    ]
+                }
             }),
         new EnemyBase("Boss5C", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
@@ -6106,7 +6146,7 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 4,
                     "RespawnTime": 86400,
                     "DeathFrame": 13,
-                    "MonsterHPTotal": 2.5e+11,
+                    "MonsterHPTotal": 1e+15,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "a",
                     "ExpGiven": 12000,
@@ -6119,10 +6159,15 @@ export const initEnemyRepo = () => {
                 "drops": <EnemyTableModel>{
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 20000000, "chance": 1, "questLink": "N/A"},
-                        <CardDropModel>{"item": "CardsZ20", "quantity": 1, "chance": 0.003, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable25", "quantity": 2, "chance": 1, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable26", "quantity": 2, "chance": 1, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable27", "quantity": 2, "chance": 1, "questLink": "N/A"}
+                        <ItemDropModel>{"item": "KrukPart", "quantity": 2, "chance": 0.4, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "KrukPart2", "quantity": 1, "chance": 0.08, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentPendant29", "quantity": 1, "chance": 0.0004, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "ObolKruk", "quantity": 1, "chance": 0.0014, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "StoneW7", "quantity": 2, "chance": 0.05, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "StoneHelm7", "quantity": 1, "chance": 0.05, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsZ20", "quantity": 1, "chance": 0.0008, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentCape13", "quantity": 1, "chance": 0.0003, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable25", "quantity": 2, "chance": 1, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,
@@ -6133,7 +6178,21 @@ export const initEnemyRepo = () => {
                     "crystalName": undefined,
                     "hasCard": true
                 },
-                "bossData": undefined
+                "bossData": <BossDetailsModel>{
+                    "health": 1000000000,
+                    "defence": 25,
+                    "exp": 2000000000,
+                    "keys": 70,
+                    "attacks": [
+                        <BossAttackModel>{"name": "Attack1", "damage": 18000},
+                        <BossAttackModel>{"name": "Attack2", "damage": 40000},
+                        <BossAttackModel>{"name": "Attack3", "damage": 20000},
+                        <BossAttackModel>{"name": "Attack4", "damage": 15000},
+                        <BossAttackModel>{"name": "Attack5", "damage": 25000},
+                        <BossAttackModel>{"name": "Attack6", "damage": 50000},
+                        <BossAttackModel>{"name": "Attack7", "damage": 33000}
+                    ]
+                }
             }),
         new EnemyBase("poopBig", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
