@@ -43,6 +43,7 @@ import parseSlab from './slab';
 import parseCapacity, { updateCapacity } from './capacity';
 import parseDeathnote, { updateDeathnote } from './deathnote';
 import parseRift from './rift';
+import parseCompanions from './companions';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     try {
@@ -186,12 +187,15 @@ const postPostProcessingMap: Record<string, Function> = {
     "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
 }
 
-export const updateIdleonData = async (data: Cloudsave, charNames: string[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
+export const updateIdleonData = async (data: Cloudsave, charNames: string[], companions: number[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
     let accountData = new Map();
     accountData.set("playerNames", charNames);
     accountData.set("itemsData", allItems);
     accountData.set("servervars", serverVars);
     accountData.set("OptLacc", data.get("OptLacc"));
+
+    // Handle Companions
+    accountData.set("companions", parseCompanions(companions));
 
     // Do some time math, useful for adjusting AFK timers if needed.
     const saveGlobalTime = JSON.parse(data.get("TimeAway"))["GlobalTime"] as number;
