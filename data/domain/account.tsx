@@ -130,8 +130,8 @@ export const parseAccount = (doc: Cloudsave, allItems: Item[]) => {
     const accountOptions = doc.get("OptLacc") as string | number[];
     const keyData = doc.get("CYKeysAll") as number[];
     keyData.forEach((keyCount, keyIndex) => {
-        if (keyCount > 0) {
-            const keyItem = (allItems.find(item => item.internalName == `Key${keyIndex + 1}`) as Item).duplicate();
+        const keyItem = (allItems.find(item => item.internalName == `Key${keyIndex + 1}`) as Item)?.duplicate();
+        if (keyCount > 0 && keyItem) {
             keyItem.count = keyCount;
             const newKey = new Key(keyItem);
             account.keys.push(newKey);
