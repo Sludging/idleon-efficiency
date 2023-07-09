@@ -43,7 +43,7 @@ import parseSlab from './slab';
 import parseCapacity, { updateCapacity } from './capacity';
 import parseDeathnote, { updateDeathnote } from './deathnote';
 import parseRift from './rift';
-import parseCompanions from './companions';
+import parseCompanions, { updateCompanionImpact } from './companions';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     try {
@@ -147,6 +147,7 @@ const keyFunctionMap: Record<string, Function> = {
 // ORDER IS IMPORTANT, the keys are not relevant as data doesn't get persisted.
 // This allows for multiple calls that touch the same data to happen in the same map (artifacts + sailing for example)
 const postProcessingMap: Record<string, Function> = {
+    "updateCompanionImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateCompanionImpact(accountData),
     "updatePlayerDeathnote": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerDeathnote(accountData),
     "updateAllShinies": (doc: Cloudsave, accountData: Map<string, any>) => updateAllShinyEffects(accountData),
     "updateSuperbitImpcats": (doc: Cloudsave, accountData: Map<string, any>) => updateSuperbitImpacts(accountData),

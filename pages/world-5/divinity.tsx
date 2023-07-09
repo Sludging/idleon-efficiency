@@ -66,13 +66,13 @@ function AlignmentDisplay() {
                                     />
                                 }
                                 {
-                                    divinity.playerInfo[player.playerID]?.god &&
+                                     divinity.playerInfo[player.playerID].gods.length == 1 &&
                                     <ComponentAndLabel
                                         label="God"
                                         component={
                                             <Box direction="row" gap="xsmall" align="center">
-                                                <IconImage data={divinity.playerInfo[player.playerID].god!.getImageData()} scale={0.3} />
-                                                <Text>{divinity.playerInfo[player.playerID].god!.data.name}</Text>
+                                                <IconImage data={divinity.playerInfo[player.playerID].gods[0].getImageData()} scale={0.3} />
+                                                <Text>{divinity.playerInfo[player.playerID].gods[0].data.name}</Text>
                                             </Box>
                                         }
                                         margin={{ bottom: 'small', right: 'small' }}
