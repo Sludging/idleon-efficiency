@@ -2,19 +2,62 @@ import {
     Box,
     Text,
     Heading,
-    Grid
+    Grid,
+    CheckBox,
+    Button
 } from "grommet"
-import { useContext } from 'react';
+import { ChangeEvent, useCallback, useContext, useState } from 'react';
 import { AppContext } from '../../data/appContext';
 import { NextSeo } from 'next-seo';
 import ShadowBox from "../../components/base/ShadowBox";
 import IconImage from "../../components/base/IconImage";
 import { Companion } from "../../data/domain/companions";
+import TipDisplay, { TipDirection } from "../../components/base/TipDisplay";
+import { CircleInformation } from "grommet-icons";
+
+const CompanionBox = ({ companion, editable = false }: { companion: Companion, editable: boolean }) => {
+    const [checked, setChecked] = useState<boolean>(companion.owned);
+
+    const handleChecked = useCallback((changeEvent: ChangeEvent<HTMLInputElement>): void => {
+        // You can't uncheck an owned companion.
+        if (companion.real) {
+            return;
+        }
+
+        setChecked(changeEvent.target.checked);
+        companion.owned = changeEvent.target.checked;
+    }, []);
+
+    return (
+        <ShadowBox background="dark-1" style={{ opacity: companion.owned ? 1 : 0.5 }} gap="small" pad="medium">
+            <Box direction="row" gap="small" align="center">
+                <CheckBox
+                    disabled={companion.real ? true : !editable}
+                    checked={checked}
+                    onChange={handleChecked}
+                />
+                <IconImage data={companion.imageData} />
+            </Box>
+            <Text>{companion.getBonus()}</Text>
+        </ShadowBox>
+    )
+}
 
 function CompanionDisplay() {
+    const [allowEditing, setAllowEditing] = useState<boolean>(false);
     const appContext = useContext(AppContext);
     const theData = appContext.data.getData();
     const companions = theData.get("companions") as Companion[];
+
+    const editCompanions = () => {
+        setAllowEditing(true);
+    }
+
+    const saveEdits = () => {
+        setAllowEditing(false);
+
+        localStorage.setItem("companions", JSON.stringify(companions));
+    }
 
     if (!companions) {
         return null;
@@ -24,18 +67,29 @@ function CompanionDisplay() {
         <Box gap="medium">
             <NextSeo title="Storage" />
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Companions</Heading>
-            <Grid columns={{ size: 'auto', count: 4}} gap="medium">
+            <Box width="medium" direction="row" gap="small">
+                {!allowEditing && <Button style={{ color: "white" }} primary color="brand" label="Edit Companions" onClick={() => editCompanions()} />}
+                {allowEditing && <Button style={{ color: "white" }} primary color="brand" label="Save edits" onClick={() => saveEdits()} />}
+                <TipDisplay
+                    body={<Box gap="xsmall">
+                        <Text size="small">Want to experiment with how your account will look with certain companions?</Text>
+                        <Text></Text>
+                        <Text size="small">Click 'Edit Companions' and tick the checkboxes of the companions you want to unlock.</Text>
+                        <Text></Text>
+                        <Text size="small">You can then click 'Save edits' and reload the page and the effect will be active.</Text>
+                        <Text size="small">You can edit again to turn them off at any time. (You can't deactivate owned companions.)</Text>
+                    </Box>}
+                    size="medium"
+                    heading='Companion Editing'
+                    maxWidth='large'
+                    direction={TipDirection.Down}
+                >
+                    <CircleInformation size="small" />
+                </TipDisplay>
+            </Box>
+            <Grid columns={{ size: 'auto', count: 4 }} gap="medium">
                 {
-                    companions.map((companion, index) => {
-                        return (
-                            <ShadowBox background="dark-1" style={{ opacity: companion.owned ? 1 : 0.5 }} key={index} gap="small" pad="medium">
-                                <Box direction="row" gap="small" align="center">
-                                    <IconImage data={companion.imageData} />
-                                </Box>
-                                <Text>{companion.getBonus()}</Text>
-                            </ShadowBox>
-                        )
-                    })
+                    companions.map((companion, index) => <CompanionBox key={index} companion={companion} editable={allowEditing} />)
                 }
             </Grid>
         </Box>

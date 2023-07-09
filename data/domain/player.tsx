@@ -126,6 +126,7 @@ export class Player {
     extraLevelsFromTalent: number = 0;
     extraLevelsFromBear: number = 0;
     extraLevelsFromES: number = 0;
+    extraLevelsFromSlug: number = 0;
 
     constructor(playerID: number, playerName: string) {
         this.playerID = playerID;
@@ -674,7 +675,10 @@ export const updatePlayers = (data: Map<string, any>) => {
                     return activeBubble;
                 }
             }).filter(notUndefined);
-            player.activeBubbles = bubbleArray;
+            // Companions can set all your active bubbles to active so if we handled it already ignore the string.
+            if (player.activeBubbles.length == 0) {
+                player.activeBubbles = bubbleArray;
+            }
         }
     })
 

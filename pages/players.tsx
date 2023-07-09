@@ -1165,15 +1165,8 @@ function PlayerTab({ player }: PlayerTabProps) {
             if (statues) {
                 setPlayerStatues(statues[player.playerID]);
             }
-            const alchemy = theData.get("alchemy") as Alchemy;
-            if (player.activeBubblesString.length > 0) {
-                const bubbleArray: Bubble[] = player.activeBubblesString.map((bubbleString, _) => {
-                    const activeBubble = alchemy.getActiveBubble(bubbleString);
-                    if (activeBubble) {
-                        return activeBubble;
-                    }
-                }).filter(notUndefined);
-                setActiveBubbles(bubbleArray);
+            if (player.activeBubbles.length > 0) {
+                setActiveBubbles(player.activeBubbles);
             }
             setPoExtra(theData.get("POExtra"));
         }

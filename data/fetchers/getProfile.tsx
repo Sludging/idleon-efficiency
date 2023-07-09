@@ -4,7 +4,7 @@ export const fetcher = async ({ windowLocation, oldDomain }: { windowLocation: s
     let urlDomain = windowLocation != "" ? windowLocation.split('.')[0] : "";
     
     if (urlDomain != oldDomain && urlDomain != "" && !["localhost:3000", "www", "preview"].includes(urlDomain)) {
-        if (process.env.NEXT_PUBLIC_APP_STAGE == "dev") {
+        if (process.env.NEXT_PUBLIC_APP_STAGE == "local") {
             try {
                 const res = await fetch(`/api/publicProfile?profile=${urlDomain}`);
                 if (res.ok) {
