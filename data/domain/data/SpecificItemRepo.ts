@@ -402,7 +402,7 @@ export const initSpecificItemRepo = () => {
         new BaseItemBase("Fish5", <DescItemModel>{
                 "internalName": "Fish5",
                 "displayName": "Skelefish",
-                "sellPrice": 5,
+                "sellPrice": 25,
                 "typeGen": TypeGenEnum.dFish,
                 "Type": "Fish",
                 "description": "Wow! Tapping on it's ribs really does make a xylophone noise! "
@@ -410,7 +410,7 @@ export const initSpecificItemRepo = () => {
         new BaseItemBase("Fish6", <DescItemModel>{
                 "internalName": "Fish6",
                 "displayName": "Sand Shark",
-                "sellPrice": 5,
+                "sellPrice": 35,
                 "typeGen": TypeGenEnum.dFish,
                 "Type": "Fish",
                 "description": "It's not actually made of sand, not even in this universe. "
@@ -418,7 +418,7 @@ export const initSpecificItemRepo = () => {
         new BaseItemBase("Fish7", <DescItemModel>{
                 "internalName": "Fish7",
                 "displayName": "Manta Ray",
-                "sellPrice": 5,
+                "sellPrice": 45,
                 "typeGen": TypeGenEnum.dFish,
                 "Type": "Fish",
                 "description": "Watch out for that stinger! It's called a 'stinger', but it will leave more of a deathy feeling than a stinging one. "
@@ -426,10 +426,42 @@ export const initSpecificItemRepo = () => {
         new BaseItemBase("Fish8", <DescItemModel>{
                 "internalName": "Fish8",
                 "displayName": "Kraken",
-                "sellPrice": 5,
+                "sellPrice": 65,
                 "typeGen": TypeGenEnum.dFish,
                 "Type": "Fish",
                 "description": "The tentacles writhe around as it plots it's next move toward bringing an end to this plane of existence. "
+            }),
+        new BaseItemBase("Fish9", <DescItemModel>{
+                "internalName": "Fish9",
+                "displayName": "Icefish",
+                "sellPrice": 125,
+                "typeGen": TypeGenEnum.dFish,
+                "Type": "Fish",
+                "description": "Scaled and icy, this coldblooded predator often travels out of the briney Seasalt shores to the Deepwater Docks to prey on Sand Sharks... "
+            }),
+        new BaseItemBase("Fish10", <DescItemModel>{
+                "internalName": "Fish10",
+                "displayName": "Shellfish",
+                "sellPrice": 205,
+                "typeGen": TypeGenEnum.dFish,
+                "Type": "Fish",
+                "description": "This gooey creature evolved from a common ancestor of the Dedotated Ram, hence the curled shell horns. "
+            }),
+        new BaseItemBase("Fish11", <DescItemModel>{
+                "internalName": "Fish11",
+                "displayName": "Jumbo Shrimp",
+                "sellPrice": 555,
+                "typeGen": TypeGenEnum.dFish,
+                "Type": "Fish",
+                "description": "Woah momma thats a big shrimp... "
+            }),
+        new BaseItemBase("Fish12", <DescItemModel>{
+                "internalName": "Fish12",
+                "displayName": "Caulifish",
+                "sellPrice": 1255,
+                "typeGen": TypeGenEnum.dFish,
+                "Type": "Fish",
+                "description": "Astonishingly, despite its unthreatening exterior of cauliflower and bread, this creature sits atop the food chain according to leading IdleOn Oceanographers. At least, based on currently explored seas... "
             }),
         new BaseItemBase("Bug1", <DescItemModel>{
                 "internalName": "Bug1",
@@ -6041,7 +6073,7 @@ export const initSpecificItemRepo = () => {
                 "lvReqToCraft": 55,
                 "lvReqToEquip": 9,
                 "Class": ClassTypeEnum.All,
-                "Weapon_Power": 3,
+                "Weapon_Power": 4,
                 "STR": 6,
                 "AGI": 2,
                 "WIS": 0,
@@ -6062,9 +6094,9 @@ export const initSpecificItemRepo = () => {
                 "lvReqToCraft": 55,
                 "lvReqToEquip": 9,
                 "Class": ClassTypeEnum.All,
-                "Weapon_Power": 3,
-                "STR": 6,
-                "AGI": 2,
+                "Weapon_Power": 8,
+                "STR": 9,
+                "AGI": 3,
                 "WIS": 0,
                 "LUK": 0,
                 "Defence": 0,
@@ -6083,9 +6115,9 @@ export const initSpecificItemRepo = () => {
                 "lvReqToCraft": 55,
                 "lvReqToEquip": 9,
                 "Class": ClassTypeEnum.All,
-                "Weapon_Power": 3,
-                "STR": 6,
-                "AGI": 2,
+                "Weapon_Power": 14,
+                "STR": 12,
+                "AGI": 4,
                 "WIS": 0,
                 "LUK": 0,
                 "Defence": 0,
@@ -7921,7 +7953,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("StampA37", <StampItemModel>{
                 "internalName": "StampA37",
-                "displayName": "Dementia Sword",
+                "displayName": "Dementia Sword Stamp",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aStamp,
                 "Type": "Combat Stamp",
@@ -7941,6 +7973,56 @@ export const initSpecificItemRepo = () => {
                     "cCostExp": 1.43,
                     "i10": 0,
                     "upgradeText": "{}% Total Damage",
+                    "i12": 0
+                }
+            }),
+        new BaseItemBase("StampA38", <StampItemModel>{
+                "internalName": "StampA38",
+                "displayName": "Golden Sixes Stamp",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aStamp,
+                "Type": "Combat Stamp",
+                "description": "",
+                "bonus": "+{% Drop Rate",
+                "ID": 38,
+                "stampData": <StampDataModel>{
+                    "effect": "DropRate",
+                    "function": "decay",
+                    "x1": 20,
+                    "x2": 80,
+                    "upgradeInterval": 10,
+                    "material": <QtylessComponentModel>{"item": "Fish8"},
+                    "startV": 250,
+                    "mCostExp": 10,
+                    "startingCost": 10000000,
+                    "cCostExp": 1.43,
+                    "i10": 0,
+                    "upgradeText": "{}% Drop Rate",
+                    "i12": 0
+                }
+            }),
+        new BaseItemBase("StampA39", <StampItemModel>{
+                "internalName": "StampA39",
+                "displayName": "Stat Wallstreet Stamp",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aStamp,
+                "Type": "Combat Stamp",
+                "description": "",
+                "bonus": "+{ All Stats.",
+                "ID": 39,
+                "stampData": <StampDataModel>{
+                    "effect": "BaseAllStat",
+                    "function": "add",
+                    "x1": 2,
+                    "x2": 0,
+                    "upgradeInterval": 2,
+                    "material": <QtylessComponentModel>{"item": "StoneZ2"},
+                    "startV": 5,
+                    "mCostExp": 2,
+                    "startingCost": 25000000,
+                    "cCostExp": 1.36,
+                    "i10": 0,
+                    "upgradeText": "{} All Stats",
                     "i12": 0
                 }
             }),
@@ -8735,10 +8817,10 @@ export const initSpecificItemRepo = () => {
                     "x2": 30,
                     "upgradeInterval": 4,
                     "material": <QtylessComponentModel>{"item": "Bug5"},
-                    "startV": 200,
-                    "mCostExp": 11,
-                    "startingCost": 25000,
-                    "cCostExp": 1.3,
+                    "startV": 2500,
+                    "mCostExp": 12,
+                    "startingCost": 50000,
+                    "cCostExp": 1.5,
                     "i10": 0,
                     "upgradeText": "{}% Sample Size",
                     "i12": 0
@@ -9091,6 +9173,31 @@ export const initSpecificItemRepo = () => {
                     "cCostExp": 1.35,
                     "i10": 0,
                     "upgradeText": "{} All Efficiency",
+                    "i12": 0
+                }
+            }),
+        new BaseItemBase("StampB47", <StampItemModel>{
+                "internalName": "StampB47",
+                "displayName": "Skelefish Stamp",
+                "sellPrice": 4000,
+                "typeGen": TypeGenEnum.aStamp,
+                "Type": "Skills Stamp",
+                "description": "",
+                "bonus": "+{% Fishing Efficiency per Fishing Lv",
+                "ID": 47,
+                "stampData": <StampDataModel>{
+                    "effect": "FishEffPerLv",
+                    "function": "decay",
+                    "x1": 0.2,
+                    "x2": 20,
+                    "upgradeInterval": 2,
+                    "material": <QtylessComponentModel>{"item": "Fish5"},
+                    "startV": 250,
+                    "mCostExp": 10,
+                    "startingCost": 800000000,
+                    "cCostExp": 1.35,
+                    "i10": 0,
+                    "upgradeText": "{}% Fishing Eff Per Fishing Lv",
                     "i12": 0
                 }
             }),
@@ -16398,6 +16505,48 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentNametag6b", <ArmourItemModel>{
+                "internalName": "EquipmentNametag6b",
+                "displayName": "Trash Tuna Nametag",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aNametag,
+                "Type": "Nametag",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 30,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "200% Fishing Xp Gain",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentNametag7", <ArmourItemModel>{
+                "internalName": "EquipmentNametag7",
+                "displayName": "Island Adventurer Nametag",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aNametag,
+                "Type": "Nametag",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 12,
+                "STR": 12,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 12,
+                "Defence": 0,
+                "miscUp1": "10% Fight Afk Gain",
+                "miscUp2": "5% Fishin Efficincy",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentKeychain0", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain0",
                 "displayName": "Simple Key Chain",
@@ -17302,6 +17451,27 @@ export const initSpecificItemRepo = () => {
                 "Defence": 0,
                 "miscUp1": "42% Drop Chance",
                 "miscUp2": "35% Total Damage",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("Trophy18", <ArmourItemModel>{
+                "internalName": "Trophy18",
+                "displayName": "Master of Nothing",
+                "sellPrice": 69,
+                "typeGen": TypeGenEnum.aTrophy,
+                "Type": "Trophy",
+                "lvReqToCraft": 1,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 5,
+                "STR": 26,
+                "AGI": 26,
+                "WIS": 26,
+                "LUK": 26,
+                "Defence": 0,
+                "miscUp1": "10% All Afk Gain",
+                "miscUp2": "70% Skill Exp",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
                 "Skill_Power": 0
@@ -20578,6 +20748,22 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.bCraft,
                 "Type": "Material",
                 "description": "It's like a bowl of oatmeal, but double the thiccness and hold the oats. "
+            }),
+        new BaseItemBase("Island0", <DescItemModel>{
+                "internalName": "Island0",
+                "displayName": "Garbage",
+                "sellPrice": 50,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "You shouldnt be reading this... "
+            }),
+        new BaseItemBase("Island1", <DescItemModel>{
+                "internalName": "Island1",
+                "displayName": "Bottle",
+                "sellPrice": 50,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "You shouldnt be reading this... "
             }),
         new BaseItemBase("FoodHealth1d", <ACItemModel>{
                 "internalName": "FoodHealth1d",
@@ -26112,6 +26298,70 @@ export const initSpecificItemRepo = () => {
                     "order": 3
                 },
                 "dropChance": 3e-05
+            }),
+        new BaseItemBase("CardsF30", <CardItemModel>{
+                "internalName": "CardsF30",
+                "displayName": "Icefish Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "F30",
+                    "category": "Hard Resources",
+                    "perTier": 15,
+                    "effect": "+{% Fishing EXP",
+                    "bonus": 15,
+                    "order": 31
+                },
+                "dropChance": 0.001
+            }),
+        new BaseItemBase("CardsF31", <CardItemModel>{
+                "internalName": "CardsF31",
+                "displayName": "Shellfish Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "F31",
+                    "category": "Hard Resources",
+                    "perTier": 18,
+                    "effect": "+{% Total Fishing Efficiency",
+                    "bonus": 12,
+                    "order": 32
+                },
+                "dropChance": 0.0004
+            }),
+        new BaseItemBase("CardsF32", <CardItemModel>{
+                "internalName": "CardsF32",
+                "displayName": "Jumbo Shrimp Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "F32",
+                    "category": "Hard Resources",
+                    "perTier": 24,
+                    "effect": "+{% Fishing Away Gains",
+                    "bonus": 3.5,
+                    "order": 33
+                },
+                "dropChance": 0.0001
+            }),
+        new BaseItemBase("CardsF33", <CardItemModel>{
+                "internalName": "CardsF33",
+                "displayName": "Caulifish Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "F33",
+                    "category": "Hard Resources",
+                    "perTier": 30,
+                    "effect": "+{% Fishing Speed",
+                    "bonus": 7,
+                    "order": 34
+                },
+                "dropChance": 2.5e-05
             }),
         new BaseItemBase("CardsG1", <CardItemModel>{
                 "internalName": "CardsG1",

@@ -6061,7 +6061,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 1,
                 "tab": 4,
-                "sellPrice": 38365250,
+                "sellPrice": 39965250,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -6294,7 +6294,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 7,
                 "tab": 4,
-                "sellPrice": 767970,
+                "sellPrice": 2967970,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -6528,7 +6528,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 13,
                 "tab": 4,
-                "sellPrice": 1508659,
+                "sellPrice": 3308659,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -6576,7 +6576,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 14,
                 "tab": 4,
-                "sellPrice": 650000,
+                "sellPrice": 3050000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -7134,7 +7134,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 29,
                 "tab": 4,
-                "sellPrice": 86455250,
+                "sellPrice": 88055250,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -7266,7 +7266,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 32,
                 "tab": 4,
-                "sellPrice": 49620500,
+                "sellPrice": 69620500,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -7353,7 +7353,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 34,
                 "tab": 4,
-                "sellPrice": 11735910,
+                "sellPrice": 23735910,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -7412,7 +7412,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 35,
                 "tab": 4,
-                "sellPrice": 846000,
+                "sellPrice": 3046000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -7688,7 +7688,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 41,
                 "tab": 4,
-                "sellPrice": 1768659,
+                "sellPrice": 5168659,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -7741,7 +7741,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 42,
                 "tab": 4,
-                "sellPrice": 1560000,
+                "sellPrice": 13560000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -8023,7 +8023,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 53,
                 "tab": 4,
-                "sellPrice": 2800000,
+                "sellPrice": 3100000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -8439,7 +8439,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 6,
                 "tab": 5,
-                "sellPrice": 186735910,
+                "sellPrice": 198735910,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -8502,7 +8502,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 7,
                 "tab": 5,
-                "sellPrice": 175846000,
+                "sellPrice": 178046000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -8763,7 +8763,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 13,
                 "tab": 5,
-                "sellPrice": 3018659,
+                "sellPrice": 21418659,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -8819,7 +8819,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 14,
                 "tab": 5,
-                "sellPrice": 4500000,
+                "sellPrice": 58500000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [<DetRecipeComponentModel>{"indent": 0, "item": "Fish8", "quantity": 900000}],
@@ -9324,7 +9324,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 30,
                 "tab": 5,
-                "sellPrice": 330186769910,
+                "sellPrice": 330198769910,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
@@ -9395,7 +9395,7 @@ export const initRecipeRepo = () => {
                 "expGiven": 1000000,
                 "no": 31,
                 "tab": 5,
-                "sellPrice": 360175880000,
+                "sellPrice": 360178080000,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
