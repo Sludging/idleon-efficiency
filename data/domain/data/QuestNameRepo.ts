@@ -293,6 +293,12 @@ export const initQuestNameRepo = () => {
         new QuestNameBase("Bubbulyte2", <QuestNameModel>{"name": "Spring Splendor", "difficulty": 5}),
         new QuestNameBase("Tired Mole2", <QuestNameModel>{"name": "Establishing Order among Molekind", "difficulty": 3}),
         new QuestNameBase("Tired Mole5", <QuestNameModel>{"name": "Like taking Keys from a Crawler", "difficulty": 5}),
-        new QuestNameBase("Tired Mole8", <QuestNameModel>{"name": "Divine Endeavor", "difficulty": 1})    
+        new QuestNameBase("Tired Mole8", <QuestNameModel>{"name": "Divine Endeavor", "difficulty": 1}),
+        new QuestNameBase("Omar Da Ogar2", <QuestNameModel>{"name": "Helping Omar", "difficulty": 2}),
+        new QuestNameBase("Omar Da Ogar5", <QuestNameModel>{"name": "Helping Omar Again", "difficulty": 3}),
+        new QuestNameBase("Omar Da Ogar8", <QuestNameModel>{"name": "Helping Omar A 3rd Time", "difficulty": 4}),
+        new QuestNameBase("Omar Da Ogar11", <QuestNameModel>{"name": "Helping Omar Some More", "difficulty": 5}),
+        new QuestNameBase("Omar Da Ogar14", <QuestNameModel>{"name": "Helping Omar Yet Again Deja Vu", "difficulty": 6}),
+        new QuestNameBase("Omar Da Ogar17", <QuestNameModel>{"name": "Helping Omar For the Final Time", "difficulty": 7})    
 ]
 }

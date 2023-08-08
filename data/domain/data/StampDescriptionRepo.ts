@@ -44,7 +44,9 @@ export const initStampDescriptionRepo = () => {
                     "+{ AGI",
                     "+{ WIS",
                     "+{ LUK",
-                    "+{% Total Damage"
+                    "+{% Total Damage",
+                    "+{% Drop Rate",
+                    "+{ All Stats."
                 ]
             }),
         new StampDescriptionBase("Skills Stamp", <StampDescriptionModel>{
@@ -94,7 +96,8 @@ export const initStampDescriptionRepo = () => {
                     "+{% Sailing Speed",
                     "+{% Gaming EXP Gain",
                     "+{% Divinity EXP Gain",
-                    "+{ All Skill Efficiency"
+                    "+{ All Skill Efficiency",
+                    "+{% Fishing Efficiency per Fishing Lv"
                 ]
             }),
         new StampDescriptionBase("Misc Stamp", <StampDescriptionModel>{
