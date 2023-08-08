@@ -5340,7 +5340,7 @@ export const initTalentTreeRepo = () => {
                     },
                     "Tick Tock": <TalentModel>{
                         "name": "Tick Tock",
-                        "description": "+{% Away Gains Rate for both Fighting and Skills",
+                        "description": "+{% AFK Gains Rate for both Fighting and Skills",
                         "x1": 8,
                         "x2": 50,
                         "funcX": "decay",
@@ -5731,6 +5731,32 @@ export const initTalentTreeRepo = () => {
                         "skillIndex": 645,
                         "activeData": undefined
                     },
+                    "Filthy Damage": <TalentModel>{
+                        "name": "Filthy Damage",
+                        "description": "+{% damage for every power of 10 Garbage you have",
+                        "x1": 20,
+                        "x2": 100,
+                        "funcX": "decay",
+                        "y1": 0,
+                        "y2": 0,
+                        "funcY": "txt",
+                        "lvlUpText": "+{% Dmg Per Pow 10 Garbo",
+                        "skillIndex": 649,
+                        "activeData": undefined
+                    },
+                    "Rando Event Looty": <TalentModel>{
+                        "name": "Rando Event Looty",
+                        "description": "+{% AFK Gains Rate per Random Event Rare Item found",
+                        "x1": 0.75,
+                        "x2": 100,
+                        "funcX": "decay",
+                        "y1": 0,
+                        "y2": 0,
+                        "funcY": "txt",
+                        "lvlUpText": "+{% Afk Per Rare",
+                        "skillIndex": 650,
+                        "activeData": undefined
+                    },
                     "Spice Spillage": <TalentModel>{
                         "name": "Spice Spillage",
                         "description": "+{% chance to claim all pet spices when claiming 1hr+ AFK gains.",
@@ -5755,6 +5781,19 @@ export const initTalentTreeRepo = () => {
                         "funcY": "txt",
                         "lvlUpText": "+{ All Stat",
                         "skillIndex": 652,
+                        "activeData": undefined
+                    },
+                    "Dummy Thicc Stats": <TalentModel>{
+                        "name": "Dummy Thicc Stats",
+                        "description": "+{% All Stat per POW 10 best DPS ever on the Target Dummy",
+                        "x1": 0.35,
+                        "x2": 50,
+                        "funcX": "decay",
+                        "y1": 0,
+                        "y2": 0,
+                        "funcY": "txt",
+                        "lvlUpText": "+{% All Stat",
+                        "skillIndex": 653,
                         "activeData": undefined
                     }
                 }

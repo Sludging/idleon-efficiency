@@ -440,9 +440,9 @@ export const initMapDataRepo = () => {
                 "portalRequirements": [0]
             }),
         new MapDataBase(72, <MapDataModel>{
-                "enemy": "mimicA",
+                "enemy": "FishMed",
                 "world": "Yum-Yum Desert",
-                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 72},
+                "map": <MapNameModel>{"intName": "zFishingD", "name": "YumYum Islands", "id": 72},
                 "portalRequirements": [0]
             }),
         new MapDataBase(73, <MapDataModel>{
@@ -458,7 +458,7 @@ export const initMapDataRepo = () => {
                 "portalRequirements": [0]
             }),
         new MapDataBase(75, <MapDataModel>{
-                "enemy": "Z",
+                "enemy": "mimicA",
                 "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 75},
                 "portalRequirements": [0]

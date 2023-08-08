@@ -846,6 +846,38 @@ export const initCardRepo = () => {
                 "bonus": 10,
                 "order": 30
             }),
+        new CardDataBase("Fish9", <CardDataModel>{
+                "cardID": "F30",
+                "category": "Hard Resources",
+                "perTier": 15,
+                "effect": "+{% Fishing EXP",
+                "bonus": 15,
+                "order": 31
+            }),
+        new CardDataBase("Fish10", <CardDataModel>{
+                "cardID": "F31",
+                "category": "Hard Resources",
+                "perTier": 18,
+                "effect": "+{% Total Fishing Efficiency",
+                "bonus": 12,
+                "order": 32
+            }),
+        new CardDataBase("Fish11", <CardDataModel>{
+                "cardID": "F32",
+                "category": "Hard Resources",
+                "perTier": 24,
+                "effect": "+{% Fishing Away Gains",
+                "bonus": 3.5,
+                "order": 33
+            }),
+        new CardDataBase("Fish12", <CardDataModel>{
+                "cardID": "F33",
+                "category": "Hard Resources",
+                "perTier": 30,
+                "effect": "+{% Fishing Speed",
+                "bonus": 7,
+                "order": 34
+            }),
         new CardDataBase("mushP", <CardDataModel>{
                 "cardID": "G1",
                 "category": "Hyperion Nebula",

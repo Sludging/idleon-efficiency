@@ -216,7 +216,63 @@ export const initBribeRepo = () => {
             }),
         new BribeBase("The Art of the Bail", <BribeModel>{
                 "name": "The Art of the Bail",
-                "desc": "Look, I'm in a bit of a situation right now and need time to clean it up... come back later.",
+                "desc": "You must unlock the next Bribe Set from the Garbage Tuna on Trash Island in World 2.",
+                "cost": 99999999,
+                "type": "fish",
+                "intName": "BribeExpansion",
+                "amount": -1
+            }),
+        new BribeBase("Random Garbage", <BribeModel>{
+                "name": "Random Garbage",
+                "desc": "All random event bosses now drop Garbage Piles to give to the Garbage Tuna.",
+                "cost": 8000000000000,
+                "type": "fish",
+                "intName": "RandoGarbo",
+                "amount": 1
+            }),
+        new BribeBase("Godlier Creation", <BribeModel>{
+                "name": "Godlier Creation",
+                "desc": "The Godly Creation talent now gives up to +12 Stat bonus, instead of up to +4",
+                "cost": 1.21212e+13,
+                "type": "smithing",
+                "intName": "GodlyCreation",
+                "amount": 1
+            }),
+        new BribeBase("Fishermaster", <BribeModel>{
+                "name": "Fishermaster",
+                "desc": "+25% Fishing EXP, and +15% Fishing Efficiency, now and forever.",
+                "cost": 2.515e+11,
+                "type": "fish",
+                "intName": "FishingStats",
+                "amount": 1
+            }),
+        new BribeBase("Muscles on Muscles", <BribeModel>{
+                "name": "Muscles on Muscles",
+                "desc": "Boosts Total Damage by +2%",
+                "cost": 2e+16,
+                "type": "pigbank",
+                "intName": "TotalDmgB",
+                "amount": 2
+            }),
+        new BribeBase("Bottle Service", <BribeModel>{
+                "name": "Bottle Service",
+                "desc": "Bottles, used to buy maps to new islands, wash up at the docks +10% more often.",
+                "cost": 4e+13,
+                "type": "fish",
+                "intName": "BottleMore",
+                "amount": 10
+            }),
+        new BribeBase("Star Scraper", <BribeModel>{
+                "name": "Star Scraper",
+                "desc": "Get +33 Star Talent points, right now, for all characters, no questions asked.",
+                "cost": 3.3e+15,
+                "type": "pigbank",
+                "intName": "StarTalz",
+                "amount": 33
+            }),
+        new BribeBase("The Art of the Grail", <BribeModel>{
+                "name": "The Art of the Grail",
+                "desc": "Look buddy, I ain't got no more bribes, maybe an associate of mine will sort it out later...",
                 "cost": 99999999,
                 "type": "pigbank",
                 "intName": "BribeExpansion",

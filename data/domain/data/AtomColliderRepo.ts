@@ -85,6 +85,14 @@ export const initAtomColliderRepo = () => {
                 "baseCost": 40000,
                 "bonusPerLv": 1,
                 "desc": "Increases your total damage by +{%. Also, reduces the cost of all atom upgrades by {% too."
+            }),
+        new AtomColliderBase(10, <AtomColliderModel>{
+                "name": "Sodium - Snail Kryptonite",
+                "growthFactor": 50000,
+                "baseExponent": 2,
+                "baseCost": 50000,
+                "bonusPerLv": 5,
+                "desc": "When you fail a snail upgrade, it's LV gets reset to the nearest 5 (Up to Lv {) instead of back to 0, like failing at Lv 7 will reset to Lv 5."
             })    
 ]
 }
