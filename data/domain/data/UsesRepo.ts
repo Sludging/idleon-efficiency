@@ -1689,6 +1689,13 @@ export const initUsesRepo = () => {
                         "type": "quest"
                     },
                     <UseModel>{
+                        "repoSource": "NpcRepo",
+                        "key": "Omar Da Ogar@Helping Omar",
+                        "name": "Helping Omar Requirements",
+                        "amount": 20000,
+                        "type": "quest"
+                    },
+                    <UseModel>{
                         "repoSource": "PostOfficeRepo",
                         "key": "Simple Shippin",
                         "name": "Simple Shippin Order",
@@ -10956,6 +10963,13 @@ export const initUsesRepo = () => {
                         "type": "stamp"
                     },
                     <UseModel>{
+                        "repoSource": "NpcRepo",
+                        "key": "Omar Da Ogar@Helping Omar Yet Again Deja Vu",
+                        "name": "Helping Omar Yet Again Deja Vu Requirements",
+                        "amount": 250000,
+                        "type": "quest"
+                    },
+                    <UseModel>{
                         "repoSource": "BuildingRepo",
                         "key": "Cost Cruncher",
                         "name": "Cost Cruncher Requirements",
@@ -19036,6 +19050,13 @@ export const initUsesRepo = () => {
                         "type": "stamp"
                     },
                     <UseModel>{
+                        "repoSource": "ItemRepo",
+                        "key": "StampB47",
+                        "name": "Skelefish Stamp Material",
+                        "amount": "Lots",
+                        "type": "stamp"
+                    },
+                    <UseModel>{
                         "repoSource": "PostOfficeRepo",
                         "key": "Cosmic Carrier",
                         "name": "Cosmic Carrier Order",
@@ -19830,6 +19851,13 @@ export const initUsesRepo = () => {
                         "name": "DNA Stamp Material",
                         "amount": "Lots",
                         "type": "stamp"
+                    },
+                    <UseModel>{
+                        "repoSource": "NpcRepo",
+                        "key": "Omar Da Ogar@Helping Omar Yet Again Deja Vu",
+                        "name": "Helping Omar Yet Again Deja Vu Requirements",
+                        "amount": 75000,
+                        "type": "quest"
                     },
                     <UseModel>{
                         "repoSource": "PostOfficeRepo",
@@ -20939,6 +20967,20 @@ export const initUsesRepo = () => {
                         "name": "Vials: Krakenade",
                         "amount": "Lots",
                         "type": "vial"
+                    },
+                    <UseModel>{
+                        "repoSource": "ItemRepo",
+                        "key": "StampA38",
+                        "name": "Golden Sixes Stamp Material",
+                        "amount": "Lots",
+                        "type": "stamp"
+                    },
+                    <UseModel>{
+                        "repoSource": "NpcRepo",
+                        "key": "Omar Da Ogar@Helping Omar Some More",
+                        "name": "Helping Omar Some More Requirements",
+                        "amount": 250000,
+                        "type": "quest"
                     }
                 ],
                 "typeGen": TypeGenEnum.dFish,
@@ -21561,6 +21603,13 @@ export const initUsesRepo = () => {
                         "name": "Ladle Stamp Material",
                         "amount": "Lots",
                         "type": "stamp"
+                    },
+                    <UseModel>{
+                        "repoSource": "NpcRepo",
+                        "key": "Omar Da Ogar@Helping Omar A 3rd Time",
+                        "name": "Helping Omar A 3rd Time Requirements",
+                        "amount": 40000,
+                        "type": "quest"
                     }
                 ],
                 "typeGen": TypeGenEnum.dFish,
@@ -23849,6 +23898,27 @@ export const initUsesRepo = () => {
                         "name": "Bad Kitty, get off that altar! Requirements",
                         "amount": 1,
                         "type": "quest"
+                    },
+                    <UseModel>{
+                        "repoSource": "NpcRepo",
+                        "key": "Omar Da Ogar@Helping Omar A 3rd Time",
+                        "name": "Helping Omar A 3rd Time Requirements",
+                        "amount": 1,
+                        "type": "quest"
+                    },
+                    <UseModel>{
+                        "repoSource": "NpcRepo",
+                        "key": "Omar Da Ogar@Helping Omar Some More",
+                        "name": "Helping Omar Some More Requirements",
+                        "amount": 1,
+                        "type": "quest"
+                    },
+                    <UseModel>{
+                        "repoSource": "NpcRepo",
+                        "key": "Omar Da Ogar@Helping Omar Yet Again Deja Vu",
+                        "name": "Helping Omar Yet Again Deja Vu Requirements",
+                        "amount": 2,
+                        "type": "quest"
                     }
                 ],
                 "typeGen": TypeGenEnum.dQuest,
@@ -24026,13 +24096,26 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "ItemRepo",
                         "key": "StampA37",
-                        "name": "Dementia Sword Material",
+                        "name": "Dementia Sword Stamp Material",
                         "amount": "Lots",
                         "type": "stamp"
                     }
                 ],
                 "typeGen": TypeGenEnum.bOre,
                 "type": "Ore"
+            }),
+        new UsesBase("StoneZ2", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "ItemRepo",
+                        "key": "StampA39",
+                        "name": "Stat Wallstreet Stamp Material",
+                        "amount": "Lots",
+                        "type": "stamp"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dStone,
+                "type": "Upgrade"
             }),
         new UsesBase("MaxCapBagM2", <UsesModel>{
                 "uses": [
@@ -24767,6 +24850,72 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.dQuest,
                 "type": "Quest Item"
             }),
+        new UsesBase("Timecandy1", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "NpcRepo",
+                        "key": "Omar Da Ogar@Helping Omar Again",
+                        "name": "Helping Omar Again Requirements",
+                        "amount": 24,
+                        "type": "quest"
+                    },
+                    <UseModel>{
+                        "repoSource": "NpcRepo",
+                        "key": "Bill Brr@Have a Candy",
+                        "name": "Have a Candy Requirements",
+                        "amount": 5,
+                        "type": "quest"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dTimeCandy,
+                "type": "Time Candy"
+            }),
+        new UsesBase("Timecandy2", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "NpcRepo",
+                        "key": "Omar Da Ogar@Helping Omar Again",
+                        "name": "Helping Omar Again Requirements",
+                        "amount": 10,
+                        "type": "quest"
+                    },
+                    <UseModel>{
+                        "repoSource": "NpcRepo",
+                        "key": "Bill Brr@Have a Candy",
+                        "name": "Have a Candy Requirements",
+                        "amount": 2,
+                        "type": "quest"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dTimeCandy,
+                "type": "Time Candy"
+            }),
+        new UsesBase("Timecandy3", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "NpcRepo",
+                        "key": "Omar Da Ogar@Helping Omar Again",
+                        "name": "Helping Omar Again Requirements",
+                        "amount": 5,
+                        "type": "quest"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dTimeCandy,
+                "type": "Time Candy"
+            }),
+        new UsesBase("Fish10", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "NpcRepo",
+                        "key": "Omar Da Ogar@Helping Omar For the Final Time",
+                        "name": "Helping Omar For the Final Time Requirements",
+                        "amount": 1000,
+                        "type": "quest"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dFish,
+                "type": "Fish"
+            }),
         new UsesBase("Sewers3", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -25034,32 +25183,6 @@ export const initUsesRepo = () => {
                 ],
                 "typeGen": TypeGenEnum.dQuest,
                 "type": "Quest Item"
-            }),
-        new UsesBase("Timecandy1", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "NpcRepo",
-                        "key": "Bill Brr@Have a Candy",
-                        "name": "Have a Candy Requirements",
-                        "amount": 5,
-                        "type": "quest"
-                    }
-                ],
-                "typeGen": TypeGenEnum.dTimeCandy,
-                "type": "Time Candy"
-            }),
-        new UsesBase("Timecandy2", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "NpcRepo",
-                        "key": "Bill Brr@Have a Candy",
-                        "name": "Have a Candy Requirements",
-                        "amount": 2,
-                        "type": "quest"
-                    }
-                ],
-                "typeGen": TypeGenEnum.dTimeCandy,
-                "type": "Time Candy"
             }),
         new UsesBase("Quest62", <UsesModel>{
                 "uses": [

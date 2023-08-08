@@ -2,7 +2,7 @@ import { Box } from "grommet";
 import Image, { ImageLoaderProps } from "next/image"
 import { ImageData } from "../../data/domain/imageData"
 
-const BASE_URL = "https://cdn.idleonefficiency.com/images"
+const BASE_URL = "https://cdn2.idleonefficiency.com/images"
 
 const cdnLoader = ({ src, width, quality } : ImageLoaderProps): string => {
     return `${BASE_URL}/${src}.png`;

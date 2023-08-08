@@ -1,6 +1,7 @@
 import { AnvilProduceModel } from './anvilProduceModel';
 import { BaseItemModel } from './baseItemModel';
 import { DetDropsModel } from './detDropsModel';
+import { ItemSetModel } from './itemSetModel';
 import { ItemVendorsModel } from './itemVendorsModel';
 import { NoteModel } from './noteModel';
 import { RecipeModel } from './recipeModel';
@@ -15,5 +16,6 @@ export interface ItemModel {
     vendors?: ItemVendorsModel,
     anvilProduction?: AnvilProduceModel,
     detDrops?: DetDropsModel,
-    slabSort?: SlabItemSortModel
+    slabSort?: SlabItemSortModel,
+    itemSet?: ItemSetModel
 }

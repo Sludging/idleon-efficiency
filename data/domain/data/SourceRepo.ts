@@ -3284,6 +3284,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Dandelioli Tree]]", "txtName": "Dandelioli Tree"},
                     <SourceModel>{"wikiName": "[[Small Fish]]", "txtName": "Small Fish"},
                     <SourceModel>{"wikiName": "[[Medium Fish]]", "txtName": "Medium Fish"},
+                    <SourceModel>{"wikiName": "[[Large Fish]]", "txtName": "Large Fish"},
                     <SourceModel>{"wikiName": "[[Goldfish]]", "txtName": "Goldfish"},
                     <SourceModel>{"wikiName": "[[Hermit Can]]", "txtName": "Hermit Can"},
                     <SourceModel>{"wikiName": "[[Jellyfish]]", "txtName": "Jellyfish"},
@@ -3292,6 +3293,10 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Shark]]", "txtName": "Shark"},
                     <SourceModel>{"wikiName": "[[Manta Ray]]", "txtName": "Manta Ray"},
                     <SourceModel>{"wikiName": "[[Kraken]]", "txtName": "Kraken"},
+                    <SourceModel>{"wikiName": "[[Icefish]]", "txtName": "Icefish"},
+                    <SourceModel>{"wikiName": "[[Shellfish]]", "txtName": "Shellfish"},
+                    <SourceModel>{"wikiName": "[[Jumbo Shrimp]]", "txtName": "Jumbo Shrimp"},
+                    <SourceModel>{"wikiName": "[[Caulifish]]", "txtName": "Caulifish"},
                     <SourceModel>{"wikiName": "[[Fly Nest]]", "txtName": "Fly Nest"},
                     <SourceModel>{"wikiName": "[[Butterfly Bar]]", "txtName": "Butterfly Bar"},
                     <SourceModel>{"wikiName": "[[Sentient Bowl]]", "txtName": "Sentient Bowl"},
@@ -3628,6 +3633,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Crystal Crabal]]", "txtName": "Crystal Crabal"},
                     <SourceModel>{"wikiName": "[[Small Fish]]", "txtName": "Small Fish"},
                     <SourceModel>{"wikiName": "[[Medium Fish]]", "txtName": "Medium Fish"},
+                    <SourceModel>{"wikiName": "[[Large Fish]]", "txtName": "Large Fish"},
                     <SourceModel>{"wikiName": "[[Goldfish]]", "txtName": "Goldfish"},
                     <SourceModel>{"wikiName": "[[Hermit Can]]", "txtName": "Hermit Can"},
                     <SourceModel>{"wikiName": "[[Jellyfish]]", "txtName": "Jellyfish"},
@@ -3635,7 +3641,11 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Skelefish]]", "txtName": "Skelefish"},
                     <SourceModel>{"wikiName": "[[Shark]]", "txtName": "Shark"},
                     <SourceModel>{"wikiName": "[[Manta Ray]]", "txtName": "Manta Ray"},
-                    <SourceModel>{"wikiName": "[[Kraken]]", "txtName": "Kraken"}
+                    <SourceModel>{"wikiName": "[[Kraken]]", "txtName": "Kraken"},
+                    <SourceModel>{"wikiName": "[[Icefish]]", "txtName": "Icefish"},
+                    <SourceModel>{"wikiName": "[[Shellfish]]", "txtName": "Shellfish"},
+                    <SourceModel>{"wikiName": "[[Jumbo Shrimp]]", "txtName": "Jumbo Shrimp"},
+                    <SourceModel>{"wikiName": "[[Caulifish]]", "txtName": "Caulifish"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -3851,7 +3861,13 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("Grasslands1", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Green Mushroom]]", "txtName": "Green Mushroom"}],
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Green Mushroom]]", "txtName": "Green Mushroom"},
+                    <SourceModel>{
+                        "wikiName": "[[Omar Da Ogar#Helping Omar For the Final Time|Helping Omar For the Final Time]]",
+                        "txtName": "Omar Da Ogar: Helping Omar For the Final Time"
+                    }
+                ],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -3982,7 +3998,11 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Bee Hive]]", "txtName": "Bee Hive"},
                     <SourceModel>{"wikiName": "[[Fairy Hovel]]", "txtName": "Fairy Hovel"},
                     <SourceModel>{"wikiName": "[[Scarab Nest]]", "txtName": "Scarab Nest"},
-                    <SourceModel>{"wikiName": "[[Mote Hovel]]", "txtName": "Mote Hovel"}
+                    <SourceModel>{"wikiName": "[[Mote Hovel]]", "txtName": "Mote Hovel"},
+                    <SourceModel>{
+                        "wikiName": "[[Omar Da Ogar#Helping Omar|Helping Omar]]",
+                        "txtName": "Omar Da Ogar: Helping Omar"
+                    }
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -4037,7 +4057,13 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("Grasslands3", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Bored Bean]]", "txtName": "Bored Bean"}],
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Bored Bean]]", "txtName": "Bored Bean"},
+                    <SourceModel>{
+                        "wikiName": "[[Omar Da Ogar#Helping Omar A 3rd Time|Helping Omar A 3rd Time]]",
+                        "txtName": "Omar Da Ogar: Helping Omar A 3rd Time"
+                    }
+                ],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -4116,7 +4142,13 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("Jungle2", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Baby Boa]]", "txtName": "Baby Boa"}],
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Baby Boa]]", "txtName": "Baby Boa"},
+                    <SourceModel>{
+                        "wikiName": "[[Omar Da Ogar#Helping Omar Yet Again Deja Vu|Helping Omar Yet Again Deja Vu]]",
+                        "txtName": "Omar Da Ogar: Helping Omar Yet Again Deja Vu"
+                    }
+                ],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -4163,7 +4195,13 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("Jungle3", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Carrotman]]", "txtName": "Carrotman"}],
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Carrotman]]", "txtName": "Carrotman"},
+                    <SourceModel>{
+                        "wikiName": "[[Omar Da Ogar#Helping Omar Some More|Helping Omar Some More]]",
+                        "txtName": "Omar Da Ogar: Helping Omar Some More"
+                    }
+                ],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -4178,7 +4216,13 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("Forest1", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Glublin]]", "txtName": "Glublin"}],
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Glublin]]", "txtName": "Glublin"},
+                    <SourceModel>{
+                        "wikiName": "[[Omar Da Ogar#Helping Omar Again|Helping Omar Again]]",
+                        "txtName": "Omar Da Ogar: Helping Omar Again"
+                    }
+                ],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -8883,6 +8927,10 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Vendors#YumYum Grotto|YumYum Grotto Vendors]]",
                         "txtName": "YumYum Grotto Vendor"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Omar Da Ogar#Helping Omar|Helping Omar]]",
+                        "txtName": "Omar Da Ogar: Helping Omar"
                     }
                 ],
                 "recipeFrom": [],
@@ -8890,6 +8938,18 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Obol Altar#Bad Kitty, get off that altar!|Bad Kitty, get off that altar!]]",
                         "txtName": "Obol Altar: Bad Kitty, get off that altar!"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Omar Da Ogar#Helping Omar A 3rd Time|Helping Omar A 3rd Time]]",
+                        "txtName": "Omar Da Ogar: Helping Omar A 3rd Time"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Omar Da Ogar#Helping Omar Some More|Helping Omar Some More]]",
+                        "txtName": "Omar Da Ogar: Helping Omar Some More"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Omar Da Ogar#Helping Omar Yet Again Deja Vu|Helping Omar Yet Again Deja Vu]]",
+                        "txtName": "Omar Da Ogar: Helping Omar Yet Again Deja Vu"
                     }
                 ]
             }),
@@ -10701,6 +10761,10 @@ export const initSourceRepo = () => {
                         "txtName": "Cactolyte: Peanut De-Aging"
                     },
                     <SourceModel>{
+                        "wikiName": "[[Omar Da Ogar#Helping Omar A 3rd Time|Helping Omar A 3rd Time]]",
+                        "txtName": "Omar Da Ogar: Helping Omar A 3rd Time"
+                    },
+                    <SourceModel>{
                         "wikiName": "[[Wellington#Puzzles and Math, a Winning Combination!|Puzzles and Math, a Winning Combination!]]",
                         "txtName": "Wellington: Puzzles and Math, a Winning Combination!"
                     },
@@ -11118,6 +11182,63 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Goldric#Dont lay a finger on my Sheepies!!!|Dont lay a finger on my Sheepies!!!]]",
                         "txtName": "Goldric: Dont lay a finger on my Sheepies!!!"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentRingsFishing1", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Omar Da Ogar#Helping Omar Again|Helping Omar Again]]",
+                        "txtName": "Omar Da Ogar: Helping Omar Again"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentRingsFishing2", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Omar Da Ogar#Helping Omar Some More|Helping Omar Some More]]",
+                        "txtName": "Omar Da Ogar: Helping Omar Some More"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Pearl1", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Omar Da Ogar#Helping Omar Yet Again Deja Vu|Helping Omar Yet Again Deja Vu]]",
+                        "txtName": "Omar Da Ogar: Helping Omar Yet Again Deja Vu"
+                    },
+                    <SourceModel>{"wikiName": "[[Beach Oyster]]", "txtName": "Beach Oyster"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Pearl5", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Omar Da Ogar#Helping Omar Yet Again Deja Vu|Helping Omar Yet Again Deja Vu]]",
+                        "txtName": "Omar Da Ogar: Helping Omar Yet Again Deja Vu"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Tired Mole#Like taking Keys from a Crawler|Like taking Keys from a Crawler]]",
+                        "txtName": "Tired Mole: Like taking Keys from a Crawler"
+                    },
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"},
+                    <SourceModel>{"wikiName": "[[Skull Shop]]", "txtName": "Killroy Shop"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentRingsFishing3", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Omar Da Ogar#Helping Omar For the Final Time|Helping Omar For the Final Time]]",
+                        "txtName": "Omar Da Ogar: Helping Omar For the Final Time"
                     }
                 ],
                 "recipeFrom": [],
@@ -11713,8 +11834,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Nebulyte#Oh Geez Lets Not Think About This One...|Oh Geez Lets Not Think About This One...]]",
                         "txtName": "Nebulyte: Oh Geez Lets Not Think About This One..."
-                    },
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                    }
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -12174,17 +12294,6 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("Pearl5", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Tired Mole#Like taking Keys from a Crawler|Like taking Keys from a Crawler]]",
-                        "txtName": "Tired Mole: Like taking Keys from a Crawler"
-                    },
-                    <SourceModel>{"wikiName": "[[Skull Shop]]", "txtName": "Killroy Shop"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
         new SourcesBase("Trophy17", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
@@ -12361,29 +12470,22 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentRings32", <SourcesModel>{
+        new SourcesBase("Island1", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentKeychain22", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"},
-                    <SourceModel>{"wikiName": "[[Dungeons#Flurbo Shop|Flurbo Shop]]", "txtName": "Dungeons: Flurbo Shop"},
-                    <SourceModel>{
-                        "wikiName": "[[Dungeons#Loot Rolls|Dungeon Loot Rolls]]",
-                        "txtName": "Dungeons: Flurbo Shop"
-                    }
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("GemP25", <SourcesModel>{
+        new SourcesBase("EquipmentRings31", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentHats81", <SourcesModel>{
+        new SourcesBase("EquipmentHats82", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentPendant28", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
@@ -12602,6 +12704,26 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("Fish8", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Fishing]]", "txtName": "Fishing"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Fish9", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Fishing]]", "txtName": "Fishing"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Fish10", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Fishing]]", "txtName": "Fishing"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Fish11", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Fishing]]", "txtName": "Fishing"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Fish12", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Fishing]]", "txtName": "Fishing"}],
                 "recipeFrom": [],
                 "questAss": []
@@ -13115,6 +13237,17 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("EquipmentKeychain21", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Dungeons#Flurbo Shop|Flurbo Shop]]", "txtName": "Dungeons: Flurbo Shop"},
+                    <SourceModel>{
+                        "wikiName": "[[Dungeons#Loot Rolls|Dungeon Loot Rolls]]",
+                        "txtName": "Dungeons: Flurbo Shop"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentKeychain22", <SourcesModel>{
                 "sources": [
                     <SourceModel>{"wikiName": "[[Dungeons#Flurbo Shop|Flurbo Shop]]", "txtName": "Dungeons: Flurbo Shop"},
                     <SourceModel>{
@@ -15300,11 +15433,6 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("Pearl2", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Beach Oyster]]", "txtName": "Beach Oyster"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Pearl1", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Beach Oyster]]", "txtName": "Beach Oyster"}],
                 "recipeFrom": [],
                 "questAss": []

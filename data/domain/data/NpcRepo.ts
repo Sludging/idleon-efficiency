@@ -6474,7 +6474,113 @@ export const initNpcRepo = () => {
                     "mothersMaidenName": "Duffman",
                     "notes": ""
                 },
-                "quests": {},
+                "quests": {
+                    "Helping Omar": <ItemQuestModel>{
+                        "Type": QuestTypeEnum.ItemsAndSpaceRequired,
+                        "DialogueText": "If you help me I think more bottles will show up! 10% More to be exact! But what me need help with... <br> QUEST:Bring Omar some thread to help him fix his Anchor Rope.",
+                        "NextIndex": 4,
+                        "Name": "Helping Omar",
+                        "ConsumeItems": true,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 3,
+                        "Rewards": [<ComponentModel>{"item": "BobJoePickle", "quantity": 1}, <ComponentModel>{"item": "Grasslands2", "quantity": 4}],
+                        "QuestName": "Omar Da Ogar1",
+                        "Difficulty": 2,
+                        "note": <NoteModel>{"note": " "},
+                        "ItemReq": [<ComponentModel>{"item": "CraftMat1", "quantity": 20000}]
+                    },
+                    "Helping Omar Again": <ItemQuestModel>{
+                        "Type": QuestTypeEnum.ItemsAndSpaceRequired,
+                        "DialogueText": "If you help me I think more bottles will show up! 20% More to be exact! But what me need help with... <br> QUEST:Bring Omar some time candy so he can get some fishing gains!",
+                        "NextIndex": 7,
+                        "Name": "Helping Omar Again",
+                        "ConsumeItems": true,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 6,
+                        "Rewards": [
+                            <ComponentModel>{"item": "EquipmentRingsFishing1", "quantity": 1},
+                            <ComponentModel>{"item": "Forest1", "quantity": 3}
+                        ],
+                        "QuestName": "Omar Da Ogar2",
+                        "Difficulty": 3,
+                        "note": <NoteModel>{"note": " "},
+                        "ItemReq": [
+                            <ComponentModel>{"item": "Timecandy1", "quantity": 24},
+                            <ComponentModel>{"item": "Timecandy2", "quantity": 10},
+                            <ComponentModel>{"item": "Timecandy3", "quantity": 5}
+                        ]
+                    },
+                    "Helping Omar A 3rd Time": <ItemQuestModel>{
+                        "Type": QuestTypeEnum.ItemsAndSpaceRequired,
+                        "DialogueText": "If you help me I think more bottles will show up! 30% More to be exact! But what me need help with... <br> QUEST:Bring Omar some Sharks and a bobjoepickle so he can use them as bait to catch legendary fish on Saltwater Island!",
+                        "NextIndex": 10,
+                        "Name": "Helping Omar A 3rd Time",
+                        "ConsumeItems": true,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 9,
+                        "Rewards": [<ComponentModel>{"item": "ExpBalloon3", "quantity": 5}, <ComponentModel>{"item": "Grasslands3", "quantity": 5}],
+                        "QuestName": "Omar Da Ogar3",
+                        "Difficulty": 4,
+                        "note": <NoteModel>{"note": " "},
+                        "ItemReq": [<ComponentModel>{"item": "Fish6", "quantity": 40000}, <ComponentModel>{"item": "BobJoePickle", "quantity": 1}]
+                    },
+                    "Helping Omar Some More": <ItemQuestModel>{
+                        "Type": QuestTypeEnum.ItemsAndSpaceRequired,
+                        "DialogueText": "If you help me I think more bottles will show up! 40% More to be exact! But what me need help with... <br> QUEST:Bring Omar some Kraken and some bobjoepickles so he can use them as bait to catch more legendary fish on Saltwater Island!",
+                        "NextIndex": 13,
+                        "Name": "Helping Omar Some More",
+                        "ConsumeItems": true,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 12,
+                        "Rewards": [
+                            <ComponentModel>{"item": "EquipmentRingsFishing2", "quantity": 1},
+                            <ComponentModel>{"item": "Jungle3", "quantity": 4}
+                        ],
+                        "QuestName": "Omar Da Ogar4",
+                        "Difficulty": 5,
+                        "note": <NoteModel>{"note": " "},
+                        "ItemReq": [<ComponentModel>{"item": "Fish8", "quantity": 250000}, <ComponentModel>{"item": "BobJoePickle", "quantity": 1}]
+                    },
+                    "Helping Omar Yet Again Deja Vu": <ItemQuestModel>{
+                        "Type": QuestTypeEnum.ItemsAndSpaceRequired,
+                        "DialogueText": "If you help me I think more bottles will show up! 50% More to be exact! But what me need help with... <br> QUEST:Bring Omar some new bait I think he wants bugs...? Oh and some more bobjoepickles of course!",
+                        "NextIndex": 16,
+                        "Name": "Helping Omar Yet Again Deja Vu",
+                        "ConsumeItems": true,
+                        "InventorySpacesNeeded": 3,
+                        "NoSpaceIndex": 15,
+                        "Rewards": [
+                            <ComponentModel>{"item": "Pearl1", "quantity": 100},
+                            <ComponentModel>{"item": "Pearl5", "quantity": 2},
+                            <ComponentModel>{"item": "Jungle2", "quantity": 5}
+                        ],
+                        "QuestName": "Omar Da Ogar5",
+                        "Difficulty": 6,
+                        "note": <NoteModel>{"note": " "},
+                        "ItemReq": [
+                            <ComponentModel>{"item": "Bug4", "quantity": 250000},
+                            <ComponentModel>{"item": "Bug7", "quantity": 75000},
+                            <ComponentModel>{"item": "BobJoePickle", "quantity": 2}
+                        ]
+                    },
+                    "Helping Omar For the Final Time": <ItemQuestModel>{
+                        "Type": QuestTypeEnum.ItemsAndSpaceRequired,
+                        "DialogueText": "If you help me I think more bottles will show up! 60% More to be exact! But what me need help with... <br> QUEST:Bring Omar some of the legendary fish turns out he couldn't actually catch any...",
+                        "NextIndex": 19,
+                        "Name": "Helping Omar For the Final Time",
+                        "ConsumeItems": true,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 18,
+                        "Rewards": [
+                            <ComponentModel>{"item": "EquipmentRingsFishing3", "quantity": 1},
+                            <ComponentModel>{"item": "Grasslands1", "quantity": 6}
+                        ],
+                        "QuestName": "Omar Da Ogar6",
+                        "Difficulty": 7,
+                        "note": <NoteModel>{"note": " "},
+                        "ItemReq": [<ComponentModel>{"item": "Fish10", "quantity": 1000}]
+                    }
+                },
                 "dialogue": [
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
@@ -6484,7 +6590,115 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "''Omar looks back over his shoulder and at the anchor he is holding...'' <br> Me have no sail boat... <br> Dev Note: ISLAND EXPEDITIONS ARE COMING IN A FUTURE UPDATE. Enjoy the sunset in the meantime!",
+                        "DialogueText": "But me need bottles to find places to make boat go to! Bottle was up on dock every day you pick up!",
+                        "NextIndex": 2,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.ItemsAndSpaceRequired,
+                        "DialogueText": "If you help me I think more bottles will show up! 10% More to be exact! But what me need help with... <br> QUEST:Bring Omar some thread to help him fix his Anchor Rope.",
+                        "NextIndex": 4,
+                        "Name": "Helping Omar"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "No inventory space!! I cannot give I cannot give!",
+                        "NextIndex": 2,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.LevelReq,
+                        "DialogueText": "Ok me need more help but only from experienced fishermen... Are you fishing pro? <br> Return at Fishing Lv. 35",
+                        "NextIndex": 5,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.ItemsAndSpaceRequired,
+                        "DialogueText": "If you help me I think more bottles will show up! 20% More to be exact! But what me need help with... <br> QUEST:Bring Omar some time candy so he can get some fishing gains!",
+                        "NextIndex": 7,
+                        "Name": "Helping Omar Again"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "No inventory space!! I cannot give I cannot give!",
+                        "NextIndex": 5,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.LevelReq,
+                        "DialogueText": "Ok me need more help but only from experienced fishermen... Are you fishing pro? <br> Return at Fishing Lv. 40",
+                        "NextIndex": 8,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.ItemsAndSpaceRequired,
+                        "DialogueText": "If you help me I think more bottles will show up! 30% More to be exact! But what me need help with... <br> QUEST:Bring Omar some Sharks and a bobjoepickle so he can use them as bait to catch legendary fish on Saltwater Island!",
+                        "NextIndex": 10,
+                        "Name": "Helping Omar A 3rd Time"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "No inventory space!! I cannot give I cannot give!",
+                        "NextIndex": 8,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.LevelReq,
+                        "DialogueText": "Ok me need more help but only from experienced fishermen... Are you fishing pro? <br> Return at Fishing Lv. 50",
+                        "NextIndex": 11,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.ItemsAndSpaceRequired,
+                        "DialogueText": "If you help me I think more bottles will show up! 40% More to be exact! But what me need help with... <br> QUEST:Bring Omar some Kraken and some bobjoepickles so he can use them as bait to catch more legendary fish on Saltwater Island!",
+                        "NextIndex": 13,
+                        "Name": "Helping Omar Some More"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "No inventory space!! I cannot give I cannot give!",
+                        "NextIndex": 11,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.LevelReq,
+                        "DialogueText": "Ok me need more help but only from experienced fishermen... Are you fishing pro? <br> Return at Fishing Lv. 70",
+                        "NextIndex": 14,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.ItemsAndSpaceRequired,
+                        "DialogueText": "If you help me I think more bottles will show up! 50% More to be exact! But what me need help with... <br> QUEST:Bring Omar some new bait I think he wants bugs...? Oh and some more bobjoepickles of course!",
+                        "NextIndex": 16,
+                        "Name": "Helping Omar Yet Again Deja Vu"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "No inventory space!! I cannot give I cannot give!",
+                        "NextIndex": 14,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.LevelReq,
+                        "DialogueText": "Ok me need more help but only from experienced fishermen... Are you fishing pro? <br> Return at Fishing Lv. 90",
+                        "NextIndex": 17,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.ItemsAndSpaceRequired,
+                        "DialogueText": "If you help me I think more bottles will show up! 60% More to be exact! But what me need help with... <br> QUEST:Bring Omar some of the legendary fish turns out he couldn't actually catch any...",
+                        "NextIndex": 19,
+                        "Name": "Helping Omar For the Final Time"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "No inventory space!! I cannot give I cannot give!",
+                        "NextIndex": 17,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Ok you help me all you can! Me need no more me hope you sail far and good!",
                         "NextIndex": -1,
                         "Name": ""
                     }
