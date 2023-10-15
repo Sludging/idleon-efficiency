@@ -1984,7 +1984,7 @@ export const initUsesRepo = () => {
                         "repoSource": "NpcRepo",
                         "key": "Picnic Stowaway@The Hungry Stowaway",
                         "name": "The Hungry Stowaway Requirements",
-                        "amount": 20,
+                        "amount": 1,
                         "type": "quest"
                     }
                 ],
@@ -15388,14 +15388,14 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSmithingTabs4",
                         "name": "Anvil Tab 4 Recipe",
-                        "amount": 1200,
+                        "amount": 1000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSmithingTabs4",
                         "name": "Anvil Tab 4 Detailed Recipe",
-                        "amount": 1200,
+                        "amount": 1000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -16536,14 +16536,14 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSmithingTabs4",
                         "name": "Anvil Tab 4 Recipe",
-                        "amount": 7500,
+                        "amount": 2500,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSmithingTabs4",
                         "name": "Anvil Tab 4 Detailed Recipe",
-                        "amount": 7500,
+                        "amount": 2500,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -16881,6 +16881,40 @@ export const initUsesRepo = () => {
                 ],
                 "typeGen": TypeGenEnum.cFood,
                 "type": "Boost Food"
+            }),
+        new UsesBase("Trophy2", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "Trophy20",
+                        "name": "Luckier Lad Recipe",
+                        "amount": 75,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "Trophy20",
+                        "name": "Luckier Lad Detailed Recipe",
+                        "amount": 75,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPendant30",
+                        "name": "The Divine Scarf Recipe",
+                        "amount": 2,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPendant30",
+                        "name": "The Divine Scarf Detailed Recipe",
+                        "amount": 2,
+                        "type": "detRecipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aTrophy,
+                "type": "Trophy"
             }),
         new UsesBase("EquipmentHats39", <UsesModel>{
                 "uses": [
@@ -23325,26 +23359,6 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.aPendant,
                 "type": "Pendant"
             }),
-        new UsesBase("Trophy2", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentPendant30",
-                        "name": "The Divine Scarf Recipe",
-                        "amount": 2,
-                        "type": "recipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentPendant30",
-                        "name": "The Divine Scarf Detailed Recipe",
-                        "amount": 2,
-                        "type": "detRecipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aTrophy,
-                "type": "Trophy"
-            }),
         new UsesBase("DesertB2", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -24058,6 +24072,58 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.bCraft,
                 "type": "Monster Drop"
             }),
+        new UsesBase("Marble", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Vials@Marble Mocha",
+                        "name": "Vials: Marble Mocha",
+                        "amount": "Lots",
+                        "type": "vial"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bOre,
+                "type": "Ore"
+            }),
+        new UsesBase("Tree11", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Vials@Willow Sippy",
+                        "name": "Vials: Willow Sippy",
+                        "amount": "Lots",
+                        "type": "vial"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bLog,
+                "type": "Log"
+            }),
+        new UsesBase("Fish13", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Vials@Shinyfin Stew",
+                        "name": "Vials: Shinyfin Stew",
+                        "amount": "Lots",
+                        "type": "vial"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dFish,
+                "type": "Fish"
+            }),
+        new UsesBase("Bug11", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Vials@Dreamy Drink",
+                        "name": "Vials: Dreamy Drink",
+                        "amount": "Lots",
+                        "type": "vial"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dBugs,
+                "type": "Bug"
+            }),
         new UsesBase("EquipmentToolsHatchet3", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -24452,6 +24518,13 @@ export const initUsesRepo = () => {
                         "key": "Krunk@The Scientific Method, According to a Rock",
                         "name": "The Scientific Method, According to a Rock Requirements",
                         "amount": 20,
+                        "type": "quest"
+                    },
+                    <UseModel>{
+                        "repoSource": "NpcRepo",
+                        "key": "Monolith@Onyx Statue Crafting",
+                        "name": "Onyx Statue Crafting Requirements",
+                        "amount": 20000,
                         "type": "quest"
                     }
                 ],
@@ -25289,6 +25362,13 @@ export const initUsesRepo = () => {
                         "key": "Rift Ripper@Entering The Rift...",
                         "name": "Entering The Rift... Requirements",
                         "amount": 592,
+                        "type": "quest"
+                    },
+                    <UseModel>{
+                        "repoSource": "NpcRepo",
+                        "key": "Royal Worm@A Royal Gift",
+                        "name": "A Royal Gift Requirements",
+                        "amount": 10000000,
                         "type": "quest"
                     }
                 ],

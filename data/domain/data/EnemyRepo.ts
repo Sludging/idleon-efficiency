@@ -2039,7 +2039,7 @@ export const initEnemyRepo = () => {
                     "enemy": "mushG",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "GrasslandsA", "name": "Spore Meadows", "id": 1},
-                    "portalRequirements": [11]
+                    "portalRequirements": [21]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": undefined,
@@ -2089,7 +2089,7 @@ export const initEnemyRepo = () => {
                     "enemy": "frogG",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "GrasslandsB", "name": "Froggy Fields", "id": 2},
-                    "portalRequirements": [15]
+                    "portalRequirements": [30]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "mushR",
@@ -5317,7 +5317,8 @@ export const initEnemyRepo = () => {
                 "drops": <EnemyTableModel>{
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 800, "chance": 0.5, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "SnowC5", "quantity": 1, "chance": 0.01, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "SnowC5", "quantity": 1, "chance": 0.05, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Quest78", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsE13", "quantity": 1, "chance": 0.0001, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable16", "quantity": 1, "chance": 0.005, "questLink": "N/A"}
                     ]
@@ -5383,8 +5384,8 @@ export const initEnemyRepo = () => {
                 },
                 "bossData": <BossDetailsModel>{
                     "health": 25000,
-                    "defence": 40,
-                    "exp": 4000,
+                    "defence": 10,
+                    "exp": 10000,
                     "keys": 1,
                     "attacks": [
                         <BossAttackModel>{"name": "Fireball", "damage": 40},
@@ -5443,7 +5444,7 @@ export const initEnemyRepo = () => {
                 },
                 "bossData": <BossDetailsModel>{
                     "health": 8000000,
-                    "defence": 1750,
+                    "defence": 1350,
                     "exp": 400000,
                     "keys": 5,
                     "attacks": [
@@ -5564,7 +5565,7 @@ export const initEnemyRepo = () => {
                 },
                 "bossData": <BossDetailsModel>{
                     "health": 1000000,
-                    "defence": 350,
+                    "defence": 150,
                     "exp": 100000,
                     "keys": 1,
                     "attacks": [
@@ -5623,7 +5624,7 @@ export const initEnemyRepo = () => {
                 },
                 "bossData": <BossDetailsModel>{
                     "health": 30000000,
-                    "defence": 3500,
+                    "defence": 3000,
                     "exp": 2000000,
                     "keys": 5,
                     "attacks": [
@@ -5740,7 +5741,7 @@ export const initEnemyRepo = () => {
                 },
                 "bossData": <BossDetailsModel>{
                     "health": 20000000,
-                    "defence": 2250,
+                    "defence": 1250,
                     "exp": 750000,
                     "keys": 1,
                     "attacks": [
@@ -7112,7 +7113,6 @@ export const initEnemyRepo = () => {
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsY10", "quantity": 1, "chance": 0.03, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Quest49", "quantity": 1, "chance": 0.4, "questLink": "N/A"},
                         <ItemDropModel>{"item": "StoneT1eb", "quantity": 3, "chance": 0.012, "questLink": "N/A"},
                         <ItemDropModel>{"item": "StoneAeB", "quantity": 3, "chance": 0.02, "questLink": "N/A"},
                         <ItemDropModel>{"item": "StoneWeb", "quantity": 2, "chance": 0.01, "questLink": "N/A"}
@@ -7148,7 +7148,6 @@ export const initEnemyRepo = () => {
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsY13", "quantity": 1, "chance": 0.03, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Quest49", "quantity": 1, "chance": 0.4, "questLink": "N/A"},
                         <ItemDropModel>{"item": "StoneT1eb", "quantity": 3, "chance": 0.012, "questLink": "N/A"},
                         <ItemDropModel>{"item": "StoneAeB", "quantity": 3, "chance": 0.02, "questLink": "N/A"},
                         <ItemDropModel>{"item": "StoneWeb", "quantity": 2, "chance": 0.01, "questLink": "N/A"}
@@ -7863,6 +7862,39 @@ export const initEnemyRepo = () => {
                 "navigation": undefined,
                 "bossData": undefined
             }),
+        new EnemyBase("Marble", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Marble",
+                    "AFKtype": AFKTypeEnum.Mining,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 22,
+                    "MonsterOffsetY": 38,
+                    "HeightOfMonster": 30,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 0,
+                    "RespawnTime": 600,
+                    "DeathFrame": 1,
+                    "MonsterHPTotal": 5,
+                    "Type": EnemyTypeEnum.oreType,
+                    "SpecialType": "",
+                    "ExpGiven": 800,
+                    "ExpType": 1,
+                    "Defence": 2000000,
+                    "MoveSPEED": 0,
+                    "Damages": [0, 1],
+                    "DefFor0": 0.22
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsF29", "quantity": 1, "chance": 1e-08, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable4", "quantity": 2, "chance": 0.013, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
         new EnemyBase("OakTree", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
                     "Name": "Oak Tree",
@@ -8292,6 +8324,39 @@ export const initEnemyRepo = () => {
                 "navigation": undefined,
                 "bossData": undefined
             }),
+        new EnemyBase("Tree11", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Equinox Willow",
+                    "AFKtype": AFKTypeEnum.Choppin,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 32,
+                    "MonsterOffsetY": 0,
+                    "HeightOfMonster": 100,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 5,
+                    "RespawnTime": 0,
+                    "DeathFrame": 13,
+                    "MonsterHPTotal": 5,
+                    "Type": EnemyTypeEnum.treeType,
+                    "SpecialType": "",
+                    "ExpGiven": 6000,
+                    "ExpType": 3,
+                    "Defence": 1500000,
+                    "MoveSPEED": 0,
+                    "Damages": [0, 1],
+                    "DefFor0": 0.22
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsF25", "quantity": 1, "chance": 1e-08, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable28", "quantity": 1, "chance": 0.0089, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
         new EnemyBase("FishSmall", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
                     "Name": "Small Fish",
@@ -8384,6 +8449,38 @@ export const initEnemyRepo = () => {
                     "ExpGiven": 1750,
                     "ExpType": 4,
                     "Defence": 2000000,
+                    "MoveSPEED": 0,
+                    "Damages": [6, 1],
+                    "DefFor0": 2.67
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable9", "quantity": 1, "chance": 0.012, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("FishEquinox", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Equinox Fish",
+                    "AFKtype": AFKTypeEnum.Fishing,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 32,
+                    "MonsterOffsetY": 50,
+                    "HeightOfMonster": 100,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 1,
+                    "RespawnTime": 0,
+                    "DeathFrame": 2,
+                    "MonsterHPTotal": 5,
+                    "Type": EnemyTypeEnum.fishType,
+                    "SpecialType": "",
+                    "ExpGiven": 1750,
+                    "ExpType": 4,
+                    "Defence": 1000000,
                     "MoveSPEED": 0,
                     "Damages": [6, 1],
                     "DefFor0": 2.67
@@ -8782,6 +8879,38 @@ export const initEnemyRepo = () => {
                 "navigation": undefined,
                 "bossData": undefined
             }),
+        new EnemyBase("Fish13", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Equinox Fish",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 4,
+                    "MonsterOffsetX": 42,
+                    "MonsterOffsetY": 28,
+                    "HeightOfMonster": 48,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 4,
+                    "RespawnTime": 86400,
+                    "DeathFrame": 11,
+                    "MonsterHPTotal": 750000,
+                    "Type": EnemyTypeEnum.fishType,
+                    "SpecialType": "a",
+                    "ExpGiven": 12000,
+                    "ExpType": 0,
+                    "Defence": 600,
+                    "MoveSPEED": 3,
+                    "Damages": [1000, 1],
+                    "DefFor0": 1223.26
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable9", "quantity": 1, "chance": 0.012, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
         new EnemyBase("BugNest1", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
                     "Name": "Fly Nest",
@@ -8792,7 +8921,7 @@ export const initEnemyRepo = () => {
                     "HeightOfMonster": 100,
                     "MonsterMoving": 0,
                     "MovingFrame": 51,
-                    "RespawnTime": 86400,
+                    "RespawnTime": 8640000,
                     "DeathFrame": 0,
                     "MonsterHPTotal": 999999999,
                     "Type": EnemyTypeEnum.monsterType,
@@ -8824,7 +8953,7 @@ export const initEnemyRepo = () => {
                     "HeightOfMonster": 100,
                     "MonsterMoving": 0,
                     "MovingFrame": 67,
-                    "RespawnTime": 86400,
+                    "RespawnTime": 8640000,
                     "DeathFrame": 1,
                     "MonsterHPTotal": 999999999,
                     "Type": EnemyTypeEnum.monsterType,
@@ -8856,7 +8985,7 @@ export const initEnemyRepo = () => {
                     "HeightOfMonster": 100,
                     "MonsterMoving": 0,
                     "MovingFrame": 59,
-                    "RespawnTime": 86400,
+                    "RespawnTime": 8640000,
                     "DeathFrame": 2,
                     "MonsterHPTotal": 999999999,
                     "Type": EnemyTypeEnum.monsterType,
@@ -8888,7 +9017,7 @@ export const initEnemyRepo = () => {
                     "HeightOfMonster": 100,
                     "MonsterMoving": 0,
                     "MovingFrame": 63,
-                    "RespawnTime": 86400,
+                    "RespawnTime": 8640000,
                     "DeathFrame": 3,
                     "MonsterHPTotal": 999999999,
                     "Type": EnemyTypeEnum.monsterType,
@@ -8920,7 +9049,7 @@ export const initEnemyRepo = () => {
                     "HeightOfMonster": 100,
                     "MonsterMoving": 0,
                     "MovingFrame": 106,
-                    "RespawnTime": 86400,
+                    "RespawnTime": 8640000,
                     "DeathFrame": 4,
                     "MonsterHPTotal": 999999999,
                     "Type": EnemyTypeEnum.monsterType,
@@ -8952,7 +9081,7 @@ export const initEnemyRepo = () => {
                     "HeightOfMonster": 100,
                     "MonsterMoving": 0,
                     "MovingFrame": 112,
-                    "RespawnTime": 86400,
+                    "RespawnTime": 8640000,
                     "DeathFrame": 5,
                     "MonsterHPTotal": 999999999,
                     "Type": EnemyTypeEnum.monsterType,
@@ -8984,7 +9113,7 @@ export const initEnemyRepo = () => {
                     "HeightOfMonster": 100,
                     "MonsterMoving": 0,
                     "MovingFrame": 157,
-                    "RespawnTime": 86400,
+                    "RespawnTime": 8640000,
                     "DeathFrame": 6,
                     "MonsterHPTotal": 999999999,
                     "Type": EnemyTypeEnum.monsterType,
@@ -9016,7 +9145,7 @@ export const initEnemyRepo = () => {
                     "HeightOfMonster": 100,
                     "MonsterMoving": 0,
                     "MovingFrame": 112,
-                    "RespawnTime": 86400,
+                    "RespawnTime": 8640000,
                     "DeathFrame": 7,
                     "MonsterHPTotal": 999999999,
                     "Type": EnemyTypeEnum.monsterType,
@@ -9048,7 +9177,7 @@ export const initEnemyRepo = () => {
                     "HeightOfMonster": 100,
                     "MonsterMoving": 0,
                     "MovingFrame": 205,
-                    "RespawnTime": 86400,
+                    "RespawnTime": 8640000,
                     "DeathFrame": 8,
                     "MonsterHPTotal": 999999999,
                     "Type": EnemyTypeEnum.monsterType,
@@ -9080,7 +9209,7 @@ export const initEnemyRepo = () => {
                     "HeightOfMonster": 100,
                     "MonsterMoving": 0,
                     "MovingFrame": 207,
-                    "RespawnTime": 86400,
+                    "RespawnTime": 8640000,
                     "DeathFrame": 9,
                     "MonsterHPTotal": 999999999,
                     "Type": EnemyTypeEnum.monsterType,
@@ -9432,6 +9561,39 @@ export const initEnemyRepo = () => {
                         <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsF27", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable26", "quantity": 1, "chance": 0.015, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("Bug11", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Dream Particulate",
+                    "AFKtype": AFKTypeEnum.Catching,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 32,
+                    "MonsterOffsetY": 50,
+                    "HeightOfMonster": 100,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 1,
+                    "RespawnTime": 0,
+                    "DeathFrame": 10,
+                    "MonsterHPTotal": 5,
+                    "Type": EnemyTypeEnum.bugType,
+                    "SpecialType": "",
+                    "ExpGiven": 3500,
+                    "ExpType": 6,
+                    "Defence": 1100000,
+                    "MoveSPEED": 0,
+                    "Damages": [6, 1],
+                    "DefFor0": 2.67
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsF27", "quantity": 1, "chance": 1e-08, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable26", "quantity": 1, "chance": 1e-08, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,
