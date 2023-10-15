@@ -1,5 +1,6 @@
 export enum PoolTypeEnum {
     FishSmall = "FishSmall",
     FishMed = "FishMed",
-    FishBig = "FishBig"
+    FishBig = "FishBig",
+    FishEquinox = "FishEquinox"
 }

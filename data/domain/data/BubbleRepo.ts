@@ -1609,6 +1609,46 @@ export const initBubbleRepo = () => {
                 "requirements": [<ComponentModel>{"item": "LavaC2", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "3", "quantity": -1}],
                 "bonusKey": "MatCostStamp"
             }),
+        new BubbleBase("Marble Mocha", <BubbleModel>{
+                "cauldron": "Vials",
+                "name": "Marble Mocha",
+                "x1": 5,
+                "x2": 0,
+                "func": "add",
+                "description": "+{% Faster Equinox Bar Fill Rate",
+                "requirements": [<ComponentModel>{"item": "Marble", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "3", "quantity": -1}],
+                "bonusKey": "EqBar"
+            }),
+        new BubbleBase("Willow Sippy", <BubbleModel>{
+                "cauldron": "Vials",
+                "name": "Willow Sippy",
+                "x1": 4,
+                "x2": 0,
+                "func": "add",
+                "description": "+{% Faster Sigil Charge Rate",
+                "requirements": [<ComponentModel>{"item": "Tree11", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "3", "quantity": -1}],
+                "bonusKey": "SigSpd"
+            }),
+        new BubbleBase("Shinyfin Stew", <BubbleModel>{
+                "cauldron": "Vials",
+                "name": "Shinyfin Stew",
+                "x1": 7,
+                "x2": 0,
+                "func": "add",
+                "description": "+{% Construction Build Rate, so you can hit all those boosted max levels you keep unlocking",
+                "requirements": [<ComponentModel>{"item": "Fish13", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "3", "quantity": -1}],
+                "bonusKey": "Contspd"
+            }),
+        new BubbleBase("Dreamy Drink", <BubbleModel>{
+                "cauldron": "Vials",
+                "name": "Dreamy Drink",
+                "x1": 3.5,
+                "x2": 0,
+                "func": "add",
+                "description": "Shrines charge +{% faster, so this way they charge faster, compared to like if bonus this wasn't oven you of out hot eat the food.",
+                "requirements": [<ComponentModel>{"item": "Bug11", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "3", "quantity": -1}],
+                "bonusKey": "ShrineSpd"
+            }),
         new BubbleBase("Mediocre Obols", <BubbleModel>{
                 "cauldron": "Liquid Shop",
                 "name": "Mediocre Obols",

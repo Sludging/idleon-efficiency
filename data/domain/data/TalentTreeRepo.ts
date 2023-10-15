@@ -64,7 +64,7 @@ export const initTalentTreeRepo = () => {
                     },
                     "Sharpened Axe": <TalentModel>{
                         "name": "Sharpened Axe",
-                        "description": "Increases Base Weapon Power by {. This contributes to your total damage.",
+                        "description": "Increases Base Weapon Power by {. This increases damage!!",
                         "x1": 0.25,
                         "x2": 0,
                         "funcX": "add",
@@ -969,7 +969,7 @@ export const initTalentTreeRepo = () => {
                     },
                     "Sharpened Axe": <TalentModel>{
                         "name": "Sharpened Axe",
-                        "description": "Increases Base Weapon Power by {. This contributes to your total damage.",
+                        "description": "Increases Base Weapon Power by {. This increases damage!!",
                         "x1": 0.25,
                         "x2": 0,
                         "funcX": "add",
@@ -2418,7 +2418,7 @@ export const initTalentTreeRepo = () => {
                     },
                     "Sharpened Axe": <TalentModel>{
                         "name": "Sharpened Axe",
-                        "description": "Increases Base Weapon Power by {. This contributes to your total damage.",
+                        "description": "Increases Base Weapon Power by {. This increases damage!!",
                         "x1": 0.25,
                         "x2": 0,
                         "funcX": "add",
@@ -3854,7 +3854,7 @@ export const initTalentTreeRepo = () => {
                     },
                     "Sharpened Axe": <TalentModel>{
                         "name": "Sharpened Axe",
-                        "description": "Increases Base Weapon Power by {. This contributes to your total damage.",
+                        "description": "Increases Base Weapon Power by {. This increases damage!!",
                         "x1": 0.25,
                         "x2": 0,
                         "funcX": "add",
@@ -5288,14 +5288,14 @@ export const initTalentTreeRepo = () => {
                     },
                     "Studious Quester": <TalentModel>{
                         "name": "Studious Quester",
-                        "description": "Quests give +{% more exp than normal",
-                        "x1": 120,
-                        "x2": 40,
-                        "funcX": "decay",
+                        "description": "Each Completed Quest gives +0.10% All Skill efficiency. Total bonus caps at +{%",
+                        "x1": 0.4,
+                        "x2": 0,
+                        "funcX": "add",
                         "y1": 0,
                         "y2": 0,
                         "funcY": "txt",
-                        "lvlUpText": "+{% Quest Exp",
+                        "lvlUpText": "+{% Skill Eff",
                         "skillIndex": 617,
                         "activeData": undefined
                     },
@@ -5798,7 +5798,49 @@ export const initTalentTreeRepo = () => {
                     }
                 }
             }),
-        new TalentTreeBase("Special Talent 4", <TalentTreeModel>{"talents": {}}),
+        new TalentTreeBase("Special Talent 4", <TalentTreeModel>{
+                "talents": {
+                    "Monolithialism": <TalentModel>{
+                        "name": "Monolithialism",
+                        "description": "+{% MultiKill per unique Onyx Statue you have",
+                        "x1": 30,
+                        "x2": 100,
+                        "funcX": "decay",
+                        "y1": 0,
+                        "y2": 0,
+                        "funcY": "txt",
+                        "lvlUpText": "+{% Multikill Per Onyx",
+                        "skillIndex": 654,
+                        "activeData": undefined
+                    },
+                    "Boss Battle Spillover": <TalentModel>{
+                        "name": "Boss Battle Spillover",
+                        "description": "+{% Drop Rate for each difficulty of weekly boss battle defeated.",
+                        "x1": 25,
+                        "x2": 100,
+                        "funcX": "decay",
+                        "y1": 0,
+                        "y2": 0,
+                        "funcY": "txt",
+                        "lvlUpText": "+{% Drop Rate Per Diff",
+                        "skillIndex": 655,
+                        "activeData": undefined
+                    },
+                    "Dreamer Damage": <TalentModel>{
+                        "name": "Dreamer Damage",
+                        "description": "+{% Damage per Equinox Dream cloud completed",
+                        "x1": 5,
+                        "x2": 100,
+                        "funcX": "decay",
+                        "y1": 0,
+                        "y2": 0,
+                        "funcY": "txt",
+                        "lvlUpText": "+{% Dmg Per Dream Complete",
+                        "skillIndex": 656,
+                        "activeData": undefined
+                    }
+                }
+            }),
         new TalentTreeBase("Special Talent 5", <TalentTreeModel>{"talents": {}})    
 ]
 }

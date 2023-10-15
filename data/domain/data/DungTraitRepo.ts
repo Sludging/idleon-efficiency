@@ -79,10 +79,14 @@ export const initDungTraitRepo = () => {
                 "rankReq": 50,
                 "name": "Endothelium Traits",
                 "traits": [
-                    <DungTraitModel>{"name": "Max Hp is 1, but you start with 10 RNG items."},
-                    <DungTraitModel>{"name": "Max HP is 1, but +10,000% Mana regen and -50% atk cooldown"},
-                    <DungTraitModel>{"name": "Max HP is 1, but you have +300% basic attack spd and start with 5"},
-                    <DungTraitModel>{"name": "Hmm.. I'll get back to you on this one"}
+                    <DungTraitModel>{"name": "Max HP is 2, mobs deal 1 dmg, but you start with 5 Blue RNG items."},
+                    <DungTraitModel>{"name": "Buying RNG items from shop gives 2 instead of 1, but only 40% of the time."},
+                    <DungTraitModel>{
+                        "name": "Max MP is 1. Also +150% basic attack spd and start with 1 purple RNG item of 4 choices"
+                    },
+                    <DungTraitModel>{
+                        "name": "Each RNG item gives +1% Dungeon Credits (Other Endothelium Traits give this bonus too!)"
+                    }
                 ]
             })    
 ]

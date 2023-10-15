@@ -20,6 +20,7 @@ export const initItemSetRepo = () => {
         new ItemSetBase("EquipmentHats70", <ItemSetModel>{"set": "Lustre"}),
         new ItemSetBase("EquipmentHats71", <ItemSetModel>{"set": "Diabolical"}),
         new ItemSetBase("EquipmentHats77", <ItemSetModel>{"set": "Magma"}),
+        new ItemSetBase("EquipmentHats84", <ItemSetModel>{"set": "The"}),
         new ItemSetBase("EquipmentHats2", <ItemSetModel>{"set": "Royal"}),
         new ItemSetBase("EquipmentHats51", <ItemSetModel>{"set": "Big"}),
         new ItemSetBase("EquipmentPunching1", <ItemSetModel>{"set": "Boxing"}),

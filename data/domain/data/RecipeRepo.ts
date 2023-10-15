@@ -5282,11 +5282,25 @@ export const initRecipeRepo = () => {
                     "detRecipeTotals": [<ComponentModel>{"item": "SnowC3", "quantity": 60000}, <ComponentModel>{"item": "SnowC4a", "quantity": 3}]
                 }
             }),
+        new RecipeBase("Trophy20", <RecipeModel>{
+                "intID": "Trophy20",
+                "recipe": [<ComponentModel>{"item": "Trophy2", "quantity": 75}],
+                "levelReqToCraft": 1,
+                "expGiven": 1,
+                "no": 47,
+                "tab": 3,
+                "sellPrice": 58275,
+                "recipeFrom": [],
+                "detailedRecipe": <DetailedRecipeModel>{
+                    "detRecipe": [<DetRecipeComponentModel>{"indent": 0, "item": "Trophy2", "quantity": 75}],
+                    "detRecipeTotals": [<ComponentModel>{"item": "Trophy2", "quantity": 75}]
+                }
+            }),
         new RecipeBase("EquipmentSmithingTabs4", <RecipeModel>{
                 "intID": "EquipmentSmithingTabs4",
                 "recipe": [
-                    <ComponentModel>{"item": "VoidBar", "quantity": 1200},
-                    <ComponentModel>{"item": "Soul4", "quantity": 7500},
+                    <ComponentModel>{"item": "VoidBar", "quantity": 1000},
+                    <ComponentModel>{"item": "Soul4", "quantity": 2500},
                     <ComponentModel>{"item": "Critter6A", "quantity": 10},
                     <ComponentModel>{"item": "Refinery3", "quantity": 400}
                 ],
@@ -5294,18 +5308,18 @@ export const initRecipeRepo = () => {
                 "expGiven": 1500000,
                 "no": 48,
                 "tab": 3,
-                "sellPrice": 7742530,
+                "sellPrice": 6327530,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "VoidBar", "quantity": 1200},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "Soul4", "quantity": 7500},
+                        <DetRecipeComponentModel>{"indent": 0, "item": "VoidBar", "quantity": 1000},
+                        <DetRecipeComponentModel>{"indent": 0, "item": "Soul4", "quantity": 2500},
                         <DetRecipeComponentModel>{"indent": 0, "item": "Critter6A", "quantity": 10},
                         <DetRecipeComponentModel>{"indent": 0, "item": "Refinery3", "quantity": 400}
                     ],
                     "detRecipeTotals": [
-                        <ComponentModel>{"item": "VoidBar", "quantity": 1200},
-                        <ComponentModel>{"item": "Soul4", "quantity": 7500},
+                        <ComponentModel>{"item": "VoidBar", "quantity": 1000},
+                        <ComponentModel>{"item": "Soul4", "quantity": 2500},
                         <ComponentModel>{"item": "Critter6A", "quantity": 10},
                         <ComponentModel>{"item": "Refinery3", "quantity": 400}
                     ]

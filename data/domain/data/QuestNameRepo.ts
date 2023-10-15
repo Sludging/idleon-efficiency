@@ -299,6 +299,18 @@ export const initQuestNameRepo = () => {
         new QuestNameBase("Omar Da Ogar8", <QuestNameModel>{"name": "Helping Omar A 3rd Time", "difficulty": 4}),
         new QuestNameBase("Omar Da Ogar11", <QuestNameModel>{"name": "Helping Omar Some More", "difficulty": 5}),
         new QuestNameBase("Omar Da Ogar14", <QuestNameModel>{"name": "Helping Omar Yet Again Deja Vu", "difficulty": 6}),
-        new QuestNameBase("Omar Da Ogar17", <QuestNameModel>{"name": "Helping Omar For the Final Time", "difficulty": 7})    
+        new QuestNameBase("Omar Da Ogar17", <QuestNameModel>{"name": "Helping Omar For the Final Time", "difficulty": 7}),
+        new QuestNameBase("Monolith1", <QuestNameModel>{"name": "Surface Level Jealousy", "difficulty": 2}),
+        new QuestNameBase("Monolith4", <QuestNameModel>{"name": "Onyx Statue Crafting", "difficulty": 6}),
+        new QuestNameBase("Monolith7", <QuestNameModel>{"name": "A Lack of Modesty", "difficulty": 9}),
+        new QuestNameBase("Royal Worm4", <QuestNameModel>{"name": "Let the Tails Hit the Floor", "difficulty": 2}),
+        new QuestNameBase("Royal Worm7", <QuestNameModel>{"name": "Bothering Mutants", "difficulty": 4}),
+        new QuestNameBase("Royal Worm10", <QuestNameModel>{"name": "Royal Score", "difficulty": 5}),
+        new QuestNameBase("Royal Worm13", <QuestNameModel>{"name": "Downfall of the Hammer Things", "difficulty": 4}),
+        new QuestNameBase("Royal Worm16", <QuestNameModel>{"name": "Kickin' the Can", "difficulty": 6}),
+        new QuestNameBase("Royal Worm19", <QuestNameModel>{"name": "A Royal Gift", "difficulty": 7}),
+        new QuestNameBase("Royal Worm22", <QuestNameModel>{"name": "Bossin' the Boss", "difficulty": 8}),
+        new QuestNameBase("Royal Worm28", <QuestNameModel>{"name": "Normie Bidding", "difficulty": 7}),
+        new QuestNameBase("Royal Worm32", <QuestNameModel>{"name": "Royal Bidding", "difficulty": 1})    
 ]
 }

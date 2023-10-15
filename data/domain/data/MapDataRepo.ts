@@ -17,13 +17,13 @@ export const initMapDataRepo = () => {
                 "enemy": "mushG",
                 "world": "Blunder Hills",
                 "map": <MapNameModel>{"intName": "GrasslandsA", "name": "Spore Meadows", "id": 1},
-                "portalRequirements": [11]
+                "portalRequirements": [21]
             }),
         new MapDataBase(2, <MapDataModel>{
                 "enemy": "frogG",
                 "world": "Blunder Hills",
                 "map": <MapNameModel>{"intName": "GrasslandsB", "name": "Froggy Fields", "id": 2},
-                "portalRequirements": [15]
+                "portalRequirements": [30]
             }),
         new MapDataBase(3, <MapDataModel>{
                 "enemy": "JungleZ",
@@ -728,9 +728,9 @@ export const initMapDataRepo = () => {
                 "portalRequirements": [0]
             }),
         new MapDataBase(120, <MapDataModel>{
-                "enemy": "Z",
+                "enemy": "ram",
                 "world": "Frostbite Tundra",
-                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 120},
+                "map": <MapNameModel>{"intName": "ySnowD3", "name": "Equinox Valley", "id": 120},
                 "portalRequirements": [0]
             }),
         new MapDataBase(121, <MapDataModel>{

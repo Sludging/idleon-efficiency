@@ -1330,10 +1330,10 @@ export const initAchievementRepo = () => {
                 "world": "Frostbite Tundra"
             }),
         new AchievementBase(189, <AchievementModel>{
-                "name": "FILLERZZZ ACH",
-                "qty": 20,
-                "desc": "Reach level on any character",
-                "rewards": "*STEAM EXCLUSIVE &*30 gems",
+                "name": "Equinox Visitor",
+                "qty": 1,
+                "desc": "Find the Equinox Mirror drop from Bloodbones, a 1 in 1000 drop, and use it to visit the Equinox Valley.",
+                "rewards": "*4% Total DMG for all &characters",
                 "world": "Frostbite Tundra"
             }),
         new AchievementBase(190, <AchievementModel>{
