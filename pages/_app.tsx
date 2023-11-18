@@ -1,5 +1,6 @@
 import type { AppProps, NextWebVitalsMetric } from 'next/app'
 import { css } from 'styled-components';
+import { Rubik } from 'next/font/google';
 
 import { useEffect, useState } from 'react';
 import { dark, Grommet } from 'grommet';
@@ -50,10 +51,13 @@ import SEO from '../next-seo.config';
 import useSWR from 'swr';
 import { fetcher } from '../data/fetchers/getProfile';
 
+const rubik = Rubik({ subsets: ['latin'] })
+
+
 const customTheme = deepMerge(dark, {
   global: {
     font: {
-      family: "Rubik",
+      family: rubik.style.fontFamily,
       size: "14px",
     },
     elevation: {
@@ -219,10 +223,6 @@ function MyApp({ Component, pageProps }: AppProps) {
             `,
         }}
       />
-      <Head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-      </Head>
       <Grommet theme={customTheme} full>
         <AuthProvider appLoading={loading} data={publicData} domain={domain}>
           <AppProvider appLoading={loading} data={publicData} domain={domain}>
