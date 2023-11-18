@@ -249,7 +249,7 @@ function Cooking() {
                 <Text>Spices</Text>
                 <Box direction="row" wrap>
                     {
-                        cooking.spices.map((spice, index) => (
+                        cooking.spices.filter(spice => spice != -1).map((spice, index) => (
                             <Box key={index} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} align="center">
                                 <TipDisplay
                                     size='medium'
