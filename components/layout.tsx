@@ -240,7 +240,7 @@ export default function Layout({
                 <Box width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} direction="row" justify='between' align="center" pad="small" fill>
                     <Link passHref href={"/"} legacyBehavior>
                         <Box>
-                            <PointerImage alt="Logo" src="/logo.svg" height="21px" width="171px" />
+                            <PointerImage alt="Logo" src="/logo.svg" height={21} width={171} />
                         </Box>
                     </Link>
                     {validState &&
@@ -353,10 +353,9 @@ export default function Layout({
                             <Image
                                 alt="Logo"
                                 src="/logo.svg"
-                                style={{
-                                    width: "171px",
-                                    height: "21px"
-                                }} />
+                                width={171}
+                                height={21}
+                            />
                         </Box>
                         <IconLink icon={Icon} href="https://www.idleonefficiency.com/leaderboards" text="Leaderboards" />
                         <Box align="center" pad="small">
@@ -368,12 +367,10 @@ export default function Layout({
                         <Anchor href="https://www.buymeacoffee.com/sludger" target="_blank"><Image
                             src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png"
                             alt="Buy Me A Coffee"
-
+                            height={40}
+                            width={150}
                             unoptimized
-                            style={{
-                                height: "40px",
-                                width: "150px"
-                            }} /></Anchor>
+                        /></Anchor>
                     </Box>
                 </Box>
             </Footer>

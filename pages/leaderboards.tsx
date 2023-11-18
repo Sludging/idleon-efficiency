@@ -19,7 +19,7 @@ const Leaderboards = () => {
                 <Box width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} direction="row" justify='between' align="center" pad="small" fill>
                     <Link passHref href={"/"} legacyBehavior>
                         <Box>
-                            <PointerImage alt="Logo" src="/logo.svg" height="21px" width="171px" />
+                            <PointerImage alt="Logo" src="/logo.svg" height={21} width={171} />
                         </Box>
                     </Link>
                 </Box>
@@ -43,26 +43,23 @@ const Leaderboards = () => {
                     <Image
                         alt="Logo"
                         src="/logo.svg"
-                        style={{
-                            height: "21px",
-                            width: "171px"
-                        }} />
+                        height={21}
+                        width={171}
+                    />
                     <Box justify="end" direction="row" gap="medium">
                         <Anchor href="https://www.buymeacoffee.com/sludger" target="_blank"><Image
                             src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png"
                             alt="Buy Me A Coffee"
-                            style={{
-                                height: "40px",
-                                width: "150px"
-                            }} /></Anchor>
+                            height={40}
+                            width={150}
+                        /></Anchor>
                         <Box direction="row" gap="small" pad="small" justify="end">
                             <Image
                                 alt="discord_logo"
                                 src={"/discord-logo.svg"}
-                                style={{
-                                    height: "21px",
-                                    width: "21px"
-                                }} />
+                                height={21}
+                                width={21}
+                            />
                             <Anchor color="white" target="_blank" href="https://discord.gg/AfsyBkSd2q">Idleon Efficiency</Anchor>
                         </Box>
                     </Box>
