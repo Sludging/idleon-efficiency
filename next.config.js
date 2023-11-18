@@ -7,9 +7,13 @@ const { withSentryConfig } = require('@sentry/nextjs');
 
 const moduleExports = {
   reactStrictMode: true,
+  swcMinify: true,
   compiler: {
     // ssr and displayName are configured by default
     styledComponents: true,
+  },
+  experimental: {
+    optimizePackageImports: ['styled-components', 'grommet', 'grommet-icons', 'firebase', 'firebaseui'],
   },
   images: {
     dangerouslyAllowSVG: true,
