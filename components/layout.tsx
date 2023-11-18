@@ -245,7 +245,6 @@ export default function Layout({
                     </Link>
                     {validState &&
                         <Box direction="row" gap="xlarge" pad="medium">
-                            <Text>{appContext.dataStatus.toString()}</Text>
                             {
                                 appContext.dataStatus == DataStatus.Loading && <Box align="center" justify='center' animation={'rotateRight'}><ArrowsClockwise color={normalizeColor("green-2", theme)} size={24} /></Box>
                             }
@@ -254,13 +253,13 @@ export default function Layout({
                             }
 
                             {
-                                appContext.dataStatus == DataStatus.LiveData &&
+                                authData?.authStatus == AuthStatus.Valid &&
                                 <Box direction="row">
                                     <DropButton
                                         plain={true}
                                         label={
                                             <Avatar direction='row'>
-                                                <User color={normalizeColor("accent-3", theme)} size={24}/>
+                                                <User color={normalizeColor("accent-3", theme)} size={24} />
                                                 <CaretDownFill size="small" />
                                             </Avatar>
                                         }
@@ -278,12 +277,13 @@ export default function Layout({
                                         onClick={() => setProfileDropDownOpen(true)}
                                         dropContent={
                                             <Box width="small" border={{ color: 'grey-1' }} round="small">
-                                                <Link href={'/profile/upload'} legacyBehavior>
+                                                { appContext.dataStatus == DataStatus.LiveData && <Link href={'/profile/upload'} legacyBehavior>
                                                     <Button onClick={() => setProfileDropDownOpen(false)} hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2">
                                                         <Box pad="small">Public Profile</Box>
                                                     </Button>
                                                 </Link>
-                                                <Box border={{ color: 'grey-1' }} fill />
+                                                }
+                                                < Box border={{ color: 'grey-1' }} fill />
                                                 <Button hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2" onClick={() => { onButtonClick(authData?.logoutFunction); setProfileDropDownOpen(false) }}>
                                                     <Box pad="small">Sign Out</Box>
                                                 </Button>
@@ -336,7 +336,7 @@ export default function Layout({
                             </ThemeContext.Extend>
                         </Box>
                     </Box>
-                    )
+                )
                 }
                 {validState &&
                     <Box width={{ max: (!specialRoutes.includes(router.pathname) && router.pathname != '/') ? '1440px' : '' }} margin={{ left: 'auto', right: 'auto' }} fill="horizontal">
@@ -349,7 +349,7 @@ export default function Layout({
             <Footer height={{ min: "82px" }} background="dark-1">
                 <Box width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} direction="row" justify='between' fill="horizontal" align="center" pad="small">
                     <Box direction="row" gap="medium" align="center">
-                        <Box margin={{right: 'medium'}}>
+                        <Box margin={{ right: 'medium' }}>
                             <Image
                                 alt="Logo"
                                 src="/logo.svg"

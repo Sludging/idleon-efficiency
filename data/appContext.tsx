@@ -22,6 +22,7 @@ export enum DataStatus {
   Loading,
   LiveData,
   StaticData,
+  MissingData,
 }
 
 export interface AppState {
@@ -109,6 +110,10 @@ export const AppProvider: React.FC<{ appLoading: boolean, data: { data: Map<stri
     // No domain and no logged in user, we have no data.
     if (!domain && authContext?.authStatus == AuthStatus.NoUser) {
       setDataStatus(DataStatus.NoData);
+    }
+    // No domain, there's a valid user but we have no actual data. Probably wrong account?
+    if (!domain && authContext?.authStatus == AuthStatus.Valid && dataStatus == DataStatus.NoData) {
+      setDataStatus(DataStatus.MissingData);
     }
   }, [domain, user, authContext, data, appLoading]);
 
