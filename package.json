@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_OPTIONS='--inspect' NODE_EXTRA_CA_CERTS=\"$(cat ./certs/.capath)\" node scripts/create-local-server.js",
+    "dev": "next dev --experimental-https",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
