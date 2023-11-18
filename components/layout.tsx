@@ -129,9 +129,7 @@ function OnHoverNav({ link, label, subLinks }: { link: string, label: string, su
         )
     }
 
-    return (
-        <Link key={`link_${label}`} href={link}><NavButton className={router.pathname == link ? 'active' : ''} color="accent-2">{label}</NavButton></Link>
-    )
+    return <Link key={`link_${label}`} href={link} legacyBehavior><NavButton className={router.pathname == link ? 'active' : ''} color="accent-2">{label}</NavButton></Link>;
 }
 
 
@@ -240,7 +238,7 @@ export default function Layout({
         >
             <Header background="dark-1" height="56px" border={{ color: "white-1", side: "bottom" }}>
                 <Box width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} direction="row" justify='between' align="center" pad="small" fill>
-                    <Link passHref href={"/"}>
+                    <Link passHref href={"/"} legacyBehavior>
                         <Box>
                             <PointerImage alt="Logo" src="/logo.svg" height="21px" width="171px" />
                         </Box>
@@ -280,7 +278,7 @@ export default function Layout({
                                         onClick={() => setProfileDropDownOpen(true)}
                                         dropContent={
                                             <Box width="small" border={{ color: 'grey-1' }} round="small">
-                                                <Link href={'/profile/upload'}>
+                                                <Link href={'/profile/upload'} legacyBehavior>
                                                     <Button onClick={() => setProfileDropDownOpen(false)} hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2">
                                                         <Box pad="small">Public Profile</Box>
                                                     </Button>

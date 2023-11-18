@@ -9,10 +9,10 @@ const Custom404 = () => {
     <Box pad="large" align="center" fill>
       <Heading level='1'>404 - Page Not Found</Heading>
       <Link href="/">
-        <a>Home Page</a>
+        Home Page
       </Link>
     </Box>
-  )
+  );
 }
 
 export default Custom404;

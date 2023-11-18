@@ -17,7 +17,7 @@ const Leaderboards = () => {
         >
             <Header background="dark-1" height="56px" border={{ color: "white-1", side: "bottom" }}>
                 <Box width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} direction="row" justify='between' align="center" pad="small" fill>
-                    <Link passHref href={"/"}>
+                    <Link passHref href={"/"} legacyBehavior>
                         <Box>
                             <PointerImage alt="Logo" src="/logo.svg" height="21px" width="171px" />
                         </Box>
