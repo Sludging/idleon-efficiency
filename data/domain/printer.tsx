@@ -2,7 +2,7 @@ import { lavaLog, range } from "../utility";
 import { Cloudsave } from "./cloudsave";
 import { Divinity } from "./divinity";
 import { GemStore } from "./gemPurchases";
-import { IParser } from "./idleonData";
+import { IParser, safeJsonParse } from "./idleonData";
 import { Lab } from "./lab";
 import { Player } from "./player";
 import { Rift, SkillMastery } from "./rift";
@@ -67,8 +67,8 @@ const parsePrinter: IParser = function (raw: Cloudsave, data: Map<string, any>) 
     const printer = data.get("printer") as Printer;
     const charCount = data.get("charCount") as number;
 
-    const printerData = raw.get("Print") as any[];
-    const extraPrinterData = raw.get("PrinterXtra") as any[];
+    const printerData = safeJsonParse(raw, "Print", []) as any[];
+    const extraPrinterData = safeJsonParse(raw, "PrinterXtra", []) as any[];
 
     if (printerData) {
         range(0, charCount).forEach((_, playerIndex) => {

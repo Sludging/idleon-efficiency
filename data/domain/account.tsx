@@ -152,25 +152,24 @@ const parseAccount: IParser = function (raw: Cloudsave, data: Map<string, any>) 
     const keyData = raw.get("CYKeysAll") as number[];
 
     keyData.forEach((keyCount, keyIndex) => {
-        const keyItem = (allItems.find(item => item.internalName == `Key${keyIndex + 1}`) as Item)?.duplicate();
+        const keyItem = account.keys.find(key => key.item.internalName == `Key${keyIndex + 1}`)
         if (keyCount > 0 && keyItem) {
-            keyItem.count = keyCount;
-            const newKey = new Key(keyItem);
-            account.keys.push(newKey);
+            keyItem.item.count = keyCount;
         }
     })
 
-    const coloItem = allItems.find(item => item.internalName == "TixCol") as Item;
-    coloItem.count = raw.get("CYColosseumTickets") as number;
-    account.coloTickets = coloItem;
+    account.coloTickets.count = raw.get("CYColosseumTickets") as number;
 
-    // W3 Mini Boss
-    const daysSinceW3mini = optionList[96] as number || 0;
-    account.miniBosses.push(new Miniboss("mini3a", daysSinceW3mini));
-
-    // W4 Mini Boss
-    const daysSinceW4mini = optionList[98] as number || 0;
-    account.miniBosses.push(new Miniboss("mini4a", daysSinceW4mini));
+    account.miniBosses.forEach(boss => {
+        // W3 Mini Boss
+        if (boss.bossInternalName == "mini3a") {
+            boss.currentCount = optionList[96] as number || 0;
+        } 
+        // W4 Mini Boss
+        if (boss.bossInternalName == "mini4a") {
+            boss.currentCount = optionList[98] as number || 0;
+        } 
+    })
 
     data.set("account", account);
 }
