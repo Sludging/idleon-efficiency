@@ -1,5 +1,5 @@
 import { Anchor, Box, Footer, Header, Heading, Main, Text } from "grommet"
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -40,18 +40,36 @@ const Leaderboards = () => {
             </Main>
             <Footer height={{ min: "82px" }} background="dark-1">
                 <Box width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} direction="row" justify='between' fill="horizontal" align="center" pad="small">
-                    <Image alt="Logo" src="/logo.svg" height="21px" width="171px" />
+                    <Image
+                        alt="Logo"
+                        src="/logo.svg"
+                        style={{
+                            height: "21px",
+                            width: "171px"
+                        }} />
                     <Box justify="end" direction="row" gap="medium">
-                        <Anchor href="https://www.buymeacoffee.com/sludger" target="_blank"><Image src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me A Coffee" height="40px" width="150px" /></Anchor>
+                        <Anchor href="https://www.buymeacoffee.com/sludger" target="_blank"><Image
+                            src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png"
+                            alt="Buy Me A Coffee"
+                            style={{
+                                height: "40px",
+                                width: "150px"
+                            }} /></Anchor>
                         <Box direction="row" gap="small" pad="small" justify="end">
-                            <Image alt="discord_logo" src={"/discord-logo.svg"} height="21px" width="21px" />
+                            <Image
+                                alt="discord_logo"
+                                src={"/discord-logo.svg"}
+                                style={{
+                                    height: "21px",
+                                    width: "21px"
+                                }} />
                             <Anchor color="white" target="_blank" href="https://discord.gg/AfsyBkSd2q">Idleon Efficiency</Anchor>
                         </Box>
                     </Box>
                 </Box>
             </Footer>
         </Box>
-    )
+    );
 }
 
 export default Leaderboards;

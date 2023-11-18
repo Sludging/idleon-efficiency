@@ -1,5 +1,5 @@
 import { Box } from "grommet";
-import Image, { ImageLoaderProps } from "next/legacy/image"
+import Image, { ImageLoaderProps } from "next/image"
 import { ImageData } from "../../data/domain/imageData"
 
 const BASE_URL = "https://cdn2.idleonefficiency.com/images"
@@ -18,15 +18,16 @@ const IconImage = ({ data, scale = 1, style }: { data: ImageData, scale?: number
         <Box style={style} height={`${data.height * scale}px`} width={`${data.width * scale}px`}>
             <Image
                 src={data.location}
+                alt={data.location}
                 loader={cdnLoader}
                 height={data.height * scale}
                 width={data.width * scale}
-                layout='fixed'
-                objectFit='contain'
                 loading='eager'
-            />
+                style={{
+                    objectFit: "contain"
+                }} />
         </Box>
-    )
+    );
 }
 
 export default IconImage;

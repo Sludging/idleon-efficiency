@@ -1,5 +1,5 @@
 import React from 'react'
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from 'next/link';
 import styled from 'styled-components'
 import {
@@ -352,7 +352,13 @@ export default function Layout({
                 <Box width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} direction="row" justify='between' fill="horizontal" align="center" pad="small">
                     <Box direction="row" gap="medium" align="center">
                         <Box margin={{right: 'medium'}}>
-                            <Image alt="Logo" src="/logo.svg" height="21px" width="171px" />
+                            <Image
+                                alt="Logo"
+                                src="/logo.svg"
+                                style={{
+                                    width: "171px",
+                                    height: "21px"
+                                }} />
                         </Box>
                         <IconLink icon={Icon} href="https://www.idleonefficiency.com/leaderboards" text="Leaderboards" />
                         <Box align="center" pad="small">
@@ -361,10 +367,18 @@ export default function Layout({
                         <IconLink icon={Discord} href="https://discord.gg/AfsyBkSd2q" text="Idleon Efficiency" />
                     </Box>
                     <Box justify="end" direction="row" gap="medium">
-                        <Anchor href="https://www.buymeacoffee.com/sludger" target="_blank"><Image src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me A Coffee" height="40px" width="150px" unoptimized /></Anchor>
+                        <Anchor href="https://www.buymeacoffee.com/sludger" target="_blank"><Image
+                            src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png"
+                            alt="Buy Me A Coffee"
+
+                            unoptimized
+                            style={{
+                                height: "40px",
+                                width: "150px"
+                            }} /></Anchor>
                     </Box>
                 </Box>
             </Footer>
         </Box>
-    )
+    );
 }
