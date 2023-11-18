@@ -1,6 +1,8 @@
 import { Achievement } from "./achievements";
+import { Cloudsave } from "./cloudsave";
 import { initSigilRepo, SigilBase } from "./data/SigilRepo";
 import { GemStore } from "./gemPurchases";
+import { IParser, safeJsonParse } from "./idleonData";
 import { ImageData } from "./imageData";
 import { SigilModel } from "./model/sigilModel";
 import { Sailing } from "./sailing";
@@ -58,8 +60,10 @@ export const initSigils = () => {
     return new Sigils();
 }
 
-export default function parseSigils(cauldronP2w: number[][], cauldronJobs1: number[]) {
-    const sigils = new Sigils();
+const parseSigils: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const sigils = data.get("sigils") as Sigils;
+    const cauldronP2w = safeJsonParse(raw, "CauldronP2W", []) as number[][];
+    const cauldronJobs1 = safeJsonParse(raw, "CauldronJobs1", []) as number[];  
 
     sigils.sigils.forEach(sigil => {
         sigil.boostLevel = cauldronP2w[4][1 + 2 * sigil.index]
@@ -74,7 +78,7 @@ export default function parseSigils(cauldronP2w: number[][], cauldronJobs1: numb
         }
     })
 
-    return sigils;
+    data.set("sigils", sigils);
 }
 
 // Currently only requires artifact to be post processed, can be below it.
@@ -95,3 +99,5 @@ export const updateSigils = (data: Map<string, any>) => {
     sigils.setSigilSpeed(sigilAchiev, sigilGemBonus);
     return sigils;
 }
+
+export default parseSigils;

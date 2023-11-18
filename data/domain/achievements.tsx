@@ -1,5 +1,7 @@
 import { ImageData } from "./imageData";
 import { initAchievementRepo, AchievementBase } from './data/AchievementRepo';
+import { IParser } from "./idleonData";
+import { Cloudsave } from "./cloudsave";
 export const AchievementConst = {
     SmartBoiIndex: 108,
     GoldFood: 37
@@ -561,29 +563,13 @@ export const initAchievements = () => {
     return achievements
 }
 
-export default function parseAchievements(achiData: number[], steamData: number[]) {
-    let toReturn = Achievement.fromBase(initAchievementRepo());
-    toReturn.forEach((achievement, index) => {
-        const reminder = Math.floor(index / 70);
-        let letter = 'A';
-        if (reminder == 1) {
-            letter = 'B';
-        }
-        if (reminder == 2) {
-            letter = 'C';
-        }
-        if (reminder == 3) {
-            letter = 'D';
-        }
-        if (reminder == 4) {
-            letter = 'E';
-        }
-        achievement.completed = achiData[index] == -1;
-        achievement.arrayIndex = index + 1;
-        achievement.visualIndex = achievOrdering[reminder].indexOf(index - (70 * reminder));
-        achievement.worldLetter = letter;
+const parseAchievements: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const achievements = data.get("achievements") as Achievement[];
+    const achiData = raw.get("AchieveReg") as number[];
+    const steamData = raw.get("SteamAchieve") as number[];
 
-        achievement.baseName = `TaskAch${achievement.worldLetter}${achievement.arrayIndex - (70 * reminder)}`
+    achievements.forEach((achievement, index) => {
+        achievement.completed = achiData[index] == -1;
 
         if (!achievement.completed) {
             const steamIndex = AchSteam2Reg.indexOf(achievement.index);
@@ -595,5 +581,8 @@ export default function parseAchievements(achiData: number[], steamData: number[
             }
         }
     })
-    return toReturn;
+
+    data.set("achievements", achievements);
 }
+
+export default parseAchievements;

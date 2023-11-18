@@ -1,5 +1,7 @@
 import { lavaFunc, range } from "../utility";
+import { Cloudsave } from "./cloudsave";
 import { GemStore } from "./gemPurchases";
+import { IParser } from "./idleonData";
 import { Item } from "./items";
 
 const getDescRegex = () => { return /Smelt down (?<ores>\d+) Ores into 1 Bar at the Forge. Smelting will take (?<cooldown>\d+) Seconds per Bar using Forge Slot 1./g };
@@ -158,8 +160,13 @@ export const initForge = () => {
     return new Forge();
 }
 
-export const parseForge = (forgeItemQuantity: number[], forgeProgress: number[], forgeItemOrder: string[], forgeLevels: number[], allItems: Item[]) => {
-    const forge = new Forge();
+const parseForge: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const forge = data.get("forge") as Forge;
+    const forgeItemQuantity = raw.get("ForgeItemQty") as number[];
+    const forgeProgress = raw.get("ForgeIntProg") as number[];
+    const forgeItemOrder = raw.get("ForgeItemOrder") as string[];
+    const forgeLevels = raw.get("ForgeLV") as number[];
+    const allItems = data.get("itemsData") as Item[];
 
     forgeLevels.forEach((level, index) => {
         if (index < forge.upgrades.length) {
@@ -182,7 +189,7 @@ export const parseForge = (forgeItemQuantity: number[], forgeProgress: number[],
         index += 3;
     }
 
-    return forge;
+    data.set("forge", forge);
 }
 
 export const updateForge = (forge: Forge, gemStore: GemStore) => {
@@ -194,3 +201,5 @@ export const updateForge = (forge: Forge, gemStore: GemStore) => {
 
     return forge;
 }
+
+export default parseForge;

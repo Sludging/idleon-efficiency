@@ -701,6 +701,7 @@ export const updatePlayers = (data: Map<string, any>) => {
     const obols = data.get("obols") as ObolsData;
     const alchemy = data.get("alchemy") as Alchemy;
     const divinity = data.get("divinity") as Divinity;
+    const deathnote = data.get("deathnote") as Deathnote;
 
     // Set player active bubble array, easier to work with.
     players.forEach(player => {

@@ -3,8 +3,10 @@ import { Achievement } from "./achievements";
 import { Alchemy } from "./alchemy";
 import { AtomCollider, CarbonAtom } from "./atomCollider";
 import { Building } from "./buildings";
+import { Cloudsave } from "./cloudsave";
 import { Cooking } from "./cooking";
 import { initBuildingRepo } from "./data/BuildingRepo";
+import { IParser, safeJsonParse } from "./idleonData";
 import { ImageData } from "./imageData";
 import { ConstructionMastery, Rift } from "./rift";
 import { Stamp } from "./stamps";
@@ -63,8 +65,11 @@ export const initConstruction = () => {
     return new Construction();
 }
 
-export default function parseConstruction(towerData: number[], optionsList: any[]) {
-    const construction = new Construction();
+const parseConstruction: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const construction = data.get("construction") as Construction;
+    const towerData = safeJsonParse(raw, "Tower", []) as number[];
+    const optionsList = raw.get("OptLacc");
+
     construction.buildings.forEach((building) => {
         building.level = towerData[building.index];
         
@@ -96,7 +101,7 @@ export default function parseConstruction(towerData: number[], optionsList: any[
     // current book count;
     construction.library.currentBooks = optionsList[55] as number || 0;
 
-    return construction;
+    data.set("construction", construction);
 }
 
 export const updateConstruction = (data: Map<string, any>) => {
@@ -189,3 +194,5 @@ export const updateConstruction = (data: Map<string, any>) => {
 
     return construction;
 }
+
+export default parseConstruction;

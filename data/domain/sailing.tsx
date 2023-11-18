@@ -22,6 +22,8 @@ import { Achievement } from "./achievements";
 import { Rift, SkillMastery } from "./rift";
 import { SkillsIndex } from "./SkillsIndex";
 import { Gaming, TotalizerBonus } from "./gaming";
+import { IParser, safeJsonParse } from "./idleonData";
+import { Cloudsave } from "./cloudsave";
 
 // "Captains": [
 //     [0,0,-1,3,6.75,2,0],
@@ -273,11 +275,14 @@ export const initSailing = () => {
     return new Sailing();
 }
 
-export default function parseSailing(sailingData: number[][], boatData: number[][], captainData: number[][]) {
-    const sailing = new Sailing();
+const parseSailing: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const sailing = data.get("sailing") as Sailing;
+    const sailingData = safeJsonParse(raw, "Sailing", []) as number[][];
+    const boatData =  safeJsonParse(raw, "Boats", []) as number[][];
+    const captainData = safeJsonParse(raw, "Captains", []) as number[][];
 
     if (sailingData.length == 0) {
-        return sailing;
+        return;
     }
 
     sailing.loot = sailingData[1];
@@ -315,7 +320,7 @@ export default function parseSailing(sailingData: number[][], boatData: number[]
         }
     })
 
-    return sailing;
+    data.set("sailing", sailing);
 }
 
 export const updateSailing = (data: Map<string, any>) => {
@@ -387,3 +392,5 @@ export const updateMinTravelTime = (data: Map<string, any>) => {
 
     return sailing;
 }
+
+export default parseSailing;

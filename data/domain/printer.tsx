@@ -1,6 +1,8 @@
 import { lavaLog, range } from "../utility";
+import { Cloudsave } from "./cloudsave";
 import { Divinity } from "./divinity";
 import { GemStore } from "./gemPurchases";
+import { IParser } from "./idleonData";
 import { Lab } from "./lab";
 import { Player } from "./player";
 import { Rift, SkillMastery } from "./rift";
@@ -61,11 +63,17 @@ export const initPrinter = () => {
     return new Printer();
 }
 
-export default function parsePrinter(printerData: any[], extraPrinterData: any[], charCount: number) {
-    const toReturn = new Printer();
+const parsePrinter: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const printer = data.get("printer") as Printer;
+    const charCount = data.get("charCount") as number;
+
+    const printerData = raw.get("Print") as any[];
+    const extraPrinterData = raw.get("PrinterXtra") as any[];
+
     if (printerData) {
-        [...Array(charCount)].forEach((_, playerIndex) => {
+        range(0, charCount).forEach((_, playerIndex) => {
             const samples: Sample[] = [];
+
             // First 5 sample slots
             range(0, 5).forEach(sampleIndex => {
                 const arrayIndex = 5 + (sampleIndex * 2) + (playerIndex * 14);
@@ -78,7 +86,7 @@ export default function parsePrinter(printerData: any[], extraPrinterData: any[]
                 samples.push(new Sample(extraPrinterData[arrayIndex], extraPrinterData[arrayIndex + 1]));
             });
 
-            
+            // Active printing slots
             range(0,2).forEach(activeIndex => {
                 const printingItem = printerData[5 + 10 + (activeIndex * 2) + (playerIndex * 14)];
                 // If there's no printing item, exit early.
@@ -103,10 +111,11 @@ export default function parsePrinter(printerData: any[], extraPrinterData: any[]
                 }
             })
 
-            toReturn.samples[playerIndex] = samples;
+            printer.samples[playerIndex] = samples;
         })
     }
-    return toReturn;
+
+    data.set("printer", printer);
 }
 
 export const updatePrinter = (data: Map<string, any>) => {
@@ -154,3 +163,5 @@ export const updatePrinter = (data: Map<string, any>) => {
 
     return printer;
 }
+
+export default parsePrinter;

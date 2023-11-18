@@ -8,6 +8,8 @@ import { NpcModel } from "./model/npcModel";
 import { QuestTypeEnum } from "./enum/questTypeEnum";
 import { CustomReqModel } from "./model/customReqModel";
 import { ImageData } from "./imageData";
+import { IParser } from "./idleonData";
+import { range } from "../utility";
 
 // This is a terrible solution but I'm too lazy to think of a proper one.
 export class QuestInformation {
@@ -107,42 +109,16 @@ export const initQuests = (allItems: Item[]) => {
     return questsData;
 }
 
-export default function parseQuests(doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], validCharCount: number) {
-    const questsData = new Quests();
+const parseQuests: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const questsData = data.get("quests") as Quests;
+    const charCount = data.get("charCount") as number;
 
-    // Foreach NPC
-    Object.entries(questsData.npcData).forEach(([_, npc]) => {
-        // For each quest under this NPC
-        Object.entries(npc.data.quests).forEach(([_, quest]) => {
-            // init the array.
-            npc.convertedItemReqs[quest.Name!] = [];
-            npc.convertedRewards[quest.Name!] = [];
-
-            if (isItemQuestModel(quest)) {
-                quest.ItemReq.forEach((item) => {
-                    const theItem = allItems.find((parsedItem) => parsedItem.internalName == item.item)?.duplicate();
-                    if (theItem) {
-                        theItem.count = item.quantity;
-                        npc.convertedItemReqs[quest.Name!].push(theItem);
-                    }
-                })
-            }
-    
-            quest.Rewards.forEach((item) => {
-                const theItem = allItems.find((parsedItem) => parsedItem.internalName == item.item)?.duplicate();
-                if (theItem) {
-                    theItem.count = item.quantity;
-                    npc.convertedRewards[quest.Name!].push(theItem);
-                }
-            })
-        });
+    range(0, charCount).forEach((_, index) => {
+        questsData.playerData[index] = JSON.parse(raw.get(`QuestComplete_${index}`)) as Record<string, number>
+        questsData.dialogData[index] = JSON.parse(raw.get(`NPCdialogue_${index}`)) as Record<string, number>
     });
 
-    const playerNames = accountData.get("playerNames") as string[];
-    playerNames.slice(0, validCharCount).forEach((_, index) => {
-        questsData.playerData[index] = JSON.parse(doc.get(`QuestComplete_${index}`)) as Record<string, number>
-        questsData.dialogData[index] = JSON.parse(doc.get(`NPCdialogue_${index}`)) as Record<string, number>
-    });
-
-    return questsData;
+    data.set("quests", questsData);
 }
+
+export default parseQuests;

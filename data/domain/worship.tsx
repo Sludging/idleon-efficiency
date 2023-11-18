@@ -1,6 +1,8 @@
 import { notUndefined, round } from "../utility";
 import { Alchemy, AlchemyConst, Bubble, CauldronIndex } from "./alchemy";
+import { Cloudsave } from "./cloudsave";
 import { MapDataBase } from "./data/MapDataRepo";
+import { IParser, safeJsonParse } from "./idleonData";
 import { MapInfo } from "./maps";
 import { SkullItemModel } from "./model/skullItemModel";
 import { Player } from "./player";
@@ -124,19 +126,18 @@ export const initWorship = () => {
     return worship;
 }
 
-export default function parseWorship(totemInfo: number[][]) {
-    const worship = new Worship();
+const parseWorship: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const worship = data.get("worship") as Worship;
+    const totemInfo = safeJsonParse(raw, "TotemInfo", []) as number[][];
 
-    if (totemInfo.length > 0) {
-        // hard coded info, maybe better way?
-        worship.totemInfo.push(new Totem(totemNames[0].replace(/_/g, " "), MapInfo[totemMapIds[0]], totemInfo[0][0], 0));
-        worship.totemInfo.push(new Totem(totemNames[1].replace(/_/g, " "), MapInfo[totemMapIds[1]], totemInfo[0][1], 1));
-        worship.totemInfo.push(new Totem(totemNames[2].replace(/_/g, " "), MapInfo[totemMapIds[2]], totemInfo[0][2], 2));
-        worship.totemInfo.push(new Totem(totemNames[3].replace(/_/g, " "), MapInfo[totemMapIds[3]], totemInfo[0][3], 3));
-        worship.totemInfo.push(new Totem(totemNames[4].replace(/_/g, " "), MapInfo[totemMapIds[4]], totemInfo[0][4], 4));
-        worship.totemInfo.push(new Totem(totemNames[5].replace(/_/g, " "), MapInfo[totemMapIds[5]], totemInfo[0][5], 5));
-    }
-    return worship;
+    const waveInfo = totemInfo[0];
+    worship.totemInfo.forEach(totem => {
+        if (waveInfo.length > totem.index) {
+            totem.maxWave = waveInfo[totem.index];
+        }
+    });
+
+    data.set("worship", worship);
 }
 
 export const updateWorship = (data: Map<string, any>) => {
@@ -190,3 +191,5 @@ export const updateWorship = (data: Map<string, any>) => {
 
     return worship;
 }
+
+export default parseWorship;

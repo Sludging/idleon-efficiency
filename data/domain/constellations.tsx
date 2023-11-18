@@ -1,4 +1,6 @@
+import { Cloudsave } from "./cloudsave";
 import { ConstellationBase, initConstellationsRepo } from "./data/ConstellationsRepo";
+import { IParser } from "./idleonData";
 import { ConstellationModel } from "./model/constellationModel";
 import { Player } from "./player";
 
@@ -17,8 +19,9 @@ export const initConstellations = () => {
     return Constellation.fromBase(initConstellationsRepo());
 }
 
-export default function parseConstellations(constellationData: any[][]) {
-    const constellations: Constellation[] = Constellation.fromBase(initConstellationsRepo());
+const parseConstellations: IParser = function (raw: Cloudsave, data: Map<string, any>) { 
+    const constellations = data.get("constellations") as Constellation[];
+    const constellationData = raw.get("SSprog") as any[][];
 
     function playerLetterToIndex(letter: any){
         switch(letter){
@@ -41,6 +44,6 @@ export default function parseConstellations(constellationData: any[][]) {
             constellation.completedByPlayerIndex = constellationData[constellation.index][0].split("").map((playerLetter: any) => {return playerLetterToIndex(playerLetter)});
         }
     })
-
-    return constellations;
 }
+
+export default parseConstellations;

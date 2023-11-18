@@ -1,5 +1,7 @@
 import { round } from '../utility';
+import { Cloudsave } from './cloudsave';
 import { initSaltLickRepo, SaltLickBase } from './data/SaltLickRepo';
+import { IParser, safeJsonParse } from './idleonData';
 import { SaltLickModel } from './model/saltLickModel';
 
 const range = (start: number, end: number) => {
@@ -60,14 +62,17 @@ export const initSaltLick = () => {
     return new SaltLick();
 }
 
-export default function parseSaltLick(rawData: number[]) {
-    const saltLick = new SaltLick();
-    if (rawData) {
-        rawData.forEach((bonus, index) => { // for each prayer
-            if (index < saltLick.bonuses.length) { // ignore unknown values.
-                saltLick.bonuses[index].level = bonus;
-            }
-        });
-    }
-    return saltLick;
+const parseSaltLick: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const saltLick = data.get("saltLick") as SaltLick;
+    const rawData = safeJsonParse(raw, "SaltLick", []) as number[];
+
+    rawData.forEach((bonus, index) => { // for each salt lick bonus
+        if (index < saltLick.bonuses.length) { // ignore unknown values.
+            saltLick.bonuses[index].level = bonus;
+        }
+    });
+
+    data.set("saltLick", saltLick);
 }
+
+export default parseSaltLick;

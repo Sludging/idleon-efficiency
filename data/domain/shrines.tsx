@@ -1,6 +1,8 @@
 import { round } from '../utility';
 import { Card } from './cards';
+import { Cloudsave } from './cloudsave';
 import { initShrineRepo, ShrineBase } from './data/ShrineRepo';
+import { IParser, safeJsonParse } from './idleonData';
 import { ImageData } from './imageData';
 import { Lab } from './lab';
 import { Sailing } from './sailing';
@@ -82,16 +84,17 @@ export const initShrines = () => {
     return Shrine.fromBase(initShrineRepo());
 }
 
-export default function parseShrines(rawData: Array<Array<number>>) {
-    const shrineData = Shrine.fromBase(initShrineRepo());
-    if (rawData) {
-        rawData.forEach((shrine, index) => { // for each shrine
-            shrineData[index].currentMap = shrine[0];
-            shrineData[index].level = shrine[3];
-            shrineData[index].accumulatedHours = shrine[4];
-        });
-    }
-    return shrineData;
+const parseShrines: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const shrineData = data.get("shrines") as Shrine[];
+    const rawData = safeJsonParse(raw, "Shrine", []) as number[][];
+
+    rawData.forEach((shrine, index) => { // for each shrine
+        shrineData[index].currentMap = shrine[0];
+        shrineData[index].level = shrine[3];
+        shrineData[index].accumulatedHours = shrine[4];
+    });
+
+    data.set("shrines", shrineData);
 }
 
 // shrine math: https://discord.com/channels/912156088873418792/912156088873418795/1068153373817327646
@@ -113,3 +116,5 @@ export const updateShrines = (data: Map<string, any>) => {
     
     return shrines;
 }
+
+export default parseShrines;

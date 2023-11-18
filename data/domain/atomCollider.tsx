@@ -6,6 +6,8 @@ import { Alchemy } from './alchemy';
 import { ImageData } from './imageData';
 import { nFormatter, range } from '../utility';
 import { TaskBoard } from './tasks';
+import { IParser } from './idleonData';
+import { Cloudsave } from './cloudsave';
 
 export class Atom {
     level: number = 0;
@@ -141,8 +143,10 @@ export const initAtomCollider = () => {
     return new AtomCollider();
 }
 
-export default function parseAtomCollider(atomsData: number[], divinityData: number[]) {
-    const collider = new AtomCollider();
+const parseAtomCollider: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const collider = data.get("collider") as AtomCollider;
+    const atomsData = raw.get("Atoms") as number[] || [];
+    const divinityData = raw.get("Divinity") as number[] || [];
 
     collider.atoms.forEach(atom => {
         atom.level = atomsData[atom.index] ?? 0;
@@ -150,7 +154,7 @@ export default function parseAtomCollider(atomsData: number[], divinityData: num
 
     collider.particles = divinityData[39];
 
-    return collider;
+    data.set("collider", collider);
 }
 
 // Currently all data only requires parsing, can be very high on post processing list.
@@ -181,3 +185,5 @@ export function updateAtomCollider(data: Map<string, any>) {
 
     return collider;
 }
+
+export default parseAtomCollider;

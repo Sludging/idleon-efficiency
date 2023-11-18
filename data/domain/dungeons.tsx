@@ -5,6 +5,8 @@ import { DungSetBase, initDungTraitRepo } from "./data/DungTraitRepo"
 import { DungItemModel } from "./model/dungItemModel"
 import { ImageData } from "./imageData"
 import { DungPassiveModel } from "./model/dungPassiveModel"
+import { IParser, safeJsonParse } from "./idleonData"
+import { Cloudsave } from "./cloudsave"
 
 export enum PassiveType {
     Dungeon = "Dungeon",
@@ -251,23 +253,16 @@ export const initDungeons = () => {
     return new Dungeons();
 }
 
-export const parseDungeons = (upgrades: number[][], optList: number[]) => {
-    const dungeons = new Dungeons();
-
-    // [
-    //     [0,5,0,0,0,0,0,0,0,0,0,7,3,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,0,-1,0,0,-1,0,0,-1], // items
-    //     [17,10,22,16,8,7,8,34], // dungeon upgrades
-    //     [1,3,6,-1,-1,-1,-1,-1,-1],
-    //     [6,6,6,6,3,3,2,2,2,-1],
-    //     [3,3,3,6],
-    //     [2,0,0,0,0,0,0,14], // flurbo upgrades
-    //     [1,1,0,0,0,1,1,0,0,0]
-    // ]
+const parseDungeons: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const dungeons = data.get("dungeons") as Dungeons;
+    const upgrades = safeJsonParse(raw, "DungUpg", []) as number[][];
+    const optionList = data.get("OptLacc") as number[];
 
     // handle bad data, TODO better way.
     if (upgrades.length < 2) {
-        return dungeons;
+        return;
     }
+    
     dungeons.items.forEach((item, index) => {
         if (index < upgrades[0].length) {
             item.level = upgrades[0][index];
@@ -290,16 +285,19 @@ export const parseDungeons = (upgrades: number[][], optList: number[]) => {
     });
 
 
-    dungeons.xp = optList[71]
+    dungeons.xp = optionList[71]
     dungeons.rank = Number(dungeonLevels.reduce((rank, req, index, _) => {
-        if (optList[71] > Number(req)) {
+        if (optionList[71] > Number(req)) {
             rank = index.toString()
         }
         return rank;
     }, "0")) + 1;
 
-    dungeons.flurbos = optList[73];
-    dungeons.credits = optList[72];
-    dungeons.boostedcount = optList[76] - 1; // -1 because Lava.
-    return dungeons;
+    dungeons.flurbos = optionList[73];
+    dungeons.credits = optionList[72];
+    dungeons.boostedcount = optionList[76] - 1; // -1 because Lava.
+
+    data.set("dungeons", dungeons);
 }
+
+export default parseDungeons;

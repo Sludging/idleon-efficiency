@@ -113,14 +113,14 @@ export class CooldownAlert extends PlayerAlert {
 export class PrayerAlert extends PlayerAlert {
     constructor(player: Player, prayer: Prayer) {
         super(player, AlertType.Prayer);
-            switch(prayer.data.name) {
-                case "Unending Energy":
-                    this.title = "AFK for too long (>10 hours) with Unending Energy Prayer";
-                    break;
-                default:
-                    this.title = `Prayer issue with ${prayer.data.name}`;
-                    break;
-            }
+        switch (prayer.data.name) {
+            case "Unending Energy":
+                this.title = "AFK for too long (>10 hours) with Unending Energy Prayer";
+                break;
+            default:
+                this.title = `Prayer issue with ${prayer.data.name}`;
+                break;
+        }
         this.icon = prayer.getImageData();
 
         // Override default size
@@ -152,7 +152,7 @@ export class ArcadeFullAlert extends GlobalAlert {
 export class ConstructionAlert extends GlobalAlert {
     constructor(public count: number) {
         super(`${count} buildings finished in construction, go claim.`, AlertType.Construction, Skilling.getSkillImageData(SkillsIndex.Construction));
-    
+
         (this.icon as ImageData).width = 50;
         (this.icon as ImageData).height = 50;
     }
@@ -199,13 +199,15 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
     })
 
     if (anvil.playerAnvils[player.playerID].currentlySelect.indexOf(-1) > -1) {
-        alerts.push(new AnvilAlert(player, "Unused hammer, losing out on production!",{ location: 'UIquickref1', height: 36, width: 36}))
+        alerts.push(new AnvilAlert(player, "Unused hammer, losing out on production!", { location: 'UIquickref1', height: 36, width: 36 }))
     }
 
     // Obol Alerts
-    const emptyObolSlots = playerObols.filter(obol => obol.item.internalName == "Blank").length;
-    if (emptyObolSlots > 0) {
-        alerts.push(new ObolEmptyAlert(player, emptyObolSlots));
+    if (playerObols) {
+        const emptyObolSlots = playerObols.filter(obol => obol.item.internalName == "Blank").length;
+        if (emptyObolSlots > 0) {
+            alerts.push(new ObolEmptyAlert(player, emptyObolSlots));
+        }
     }
 
     // Worship Alerts
@@ -265,7 +267,7 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], 
 
     // Construction
     const finishedBuildingsCount = construction.buildings.flatMap(building => building).reduce((sum, building) => sum += building.finishedUpgrade ? 1 : 0, 0);
-    if (finishedBuildingsCount > 0){
+    if (finishedBuildingsCount > 0) {
         globalAlerts.push(new ConstructionAlert(finishedBuildingsCount));
     }
 

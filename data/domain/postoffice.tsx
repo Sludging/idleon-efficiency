@@ -1,5 +1,7 @@
 import { lavaFunc } from '../utility'
+import { Cloudsave } from './cloudsave';
 import { initPostOfficeUpgradesRepo, PostOfficeUpgradesBase } from './data/PostOfficeUpgradesRepo';
+import { IParser } from './idleonData';
 import { ImageData } from './imageData';
 import { PostOfficeUpgradeModel } from './model/postOfficeUpgradeModel';
 
@@ -58,3 +60,15 @@ export class Box {
 }
 
 export const initPostOffice = () => Box.fromBase(initPostOfficeUpgradesRepo());
+
+const parsePostOfficeExtra: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const extra = data.get("POExtra") as PostOfficeExtra;
+    
+    extra.streak = raw.get("CYDeliveryBoxStreak") as number;
+    extra.complete = raw.get("CYDeliveryBoxComplete") as number;
+    extra.misc = raw.get("CYDeliveryBoxMisc") as number;
+
+    data.set("POExtra", extra);
+}
+
+export default parsePostOfficeExtra;

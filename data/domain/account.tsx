@@ -3,6 +3,7 @@ import { Arcade } from "./arcade";
 import { Cloudsave } from "./cloudsave";
 import { Construction, Library } from "./construction";
 import { AFKTypeEnum } from "./enum/aFKTypeEnum";
+import { IParser } from "./idleonData";
 import { Item } from "./items";
 import { Activity, Player } from "./player";
 import { Quests } from "./quests";
@@ -144,10 +145,12 @@ export const initAccount = (allItems: Item[]) => {
     return account;
 }
 
-export const parseAccount = (doc: Cloudsave, allItems: Item[]) => {
-    const account = new Account();
-    const accountOptions = doc.get("OptLacc") as string | number[];
-    const keyData = doc.get("CYKeysAll") as number[];
+const parseAccount: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const account = data.get("account") as Account;
+    const allItems = data.get("itemsData") as Item[];
+    const optionList = data.get("OptLacc") as number[];
+    const keyData = raw.get("CYKeysAll") as number[];
+
     keyData.forEach((keyCount, keyIndex) => {
         const keyItem = (allItems.find(item => item.internalName == `Key${keyIndex + 1}`) as Item)?.duplicate();
         if (keyCount > 0 && keyItem) {
@@ -158,17 +161,18 @@ export const parseAccount = (doc: Cloudsave, allItems: Item[]) => {
     })
 
     const coloItem = allItems.find(item => item.internalName == "TixCol") as Item;
-    coloItem.count = doc.get("CYColosseumTickets") as number;
+    coloItem.count = raw.get("CYColosseumTickets") as number;
     account.coloTickets = coloItem;
 
     // W3 Mini Boss
-    const daysSinceW3mini = accountOptions[96] as number || 0;
+    const daysSinceW3mini = optionList[96] as number || 0;
     account.miniBosses.push(new Miniboss("mini3a", daysSinceW3mini));
 
     // W4 Mini Boss
-    const daysSinceW4mini = accountOptions[98] as number || 0;
+    const daysSinceW4mini = optionList[98] as number || 0;
     account.miniBosses.push(new Miniboss("mini4a", daysSinceW4mini));
-    return account;
+
+    data.set("account", account);
 }
 
 export const updateAccount = (data: Map<string, any>) => {
@@ -213,3 +217,5 @@ export const updateAccount = (data: Map<string, any>) => {
     
     return account;
 }
+
+export default parseAccount;

@@ -1,10 +1,12 @@
-import { letterToNumber } from "../utility";
+import { letterToNumber, range } from "../utility";
 import { SkillsIndex } from "./SkillsIndex";
 import { AtomCollider } from "./atomCollider";
+import { Cloudsave } from "./cloudsave";
 import { Construction } from "./construction";
 import { GamingBoxBase, initGamingBoxRepo } from "./data/GamingBoxRepo";
 import { GamingSuperbitBase, initGamingSuperbitsRepo } from "./data/GamingSuperbitsRepo";
 import { GamingUpgradeBase, initGamingUpgradeRepo } from "./data/GamingUpgradeRepo";
+import { IParser, safeJsonParse } from "./idleonData";
 import { GamingBoxModel } from "./model/gamingBoxModel";
 import { GamingSuperbitModel } from "./model/gamingSuperbitModel";
 import { GamingUpgradeModel } from "./model/gamingUpgradeModel";
@@ -131,11 +133,15 @@ export const initGaming = () => {
     return new Gaming();
 }
 
-export default function parseGaming(gamingData: any[], gamingSproutData: number[][], playerSkillLevels: number[][]) {
-    const gaming = new Gaming();
+const parseGaming: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const gaming = data.get("gaming") as Gaming;
+    const charCount = data.get("charCount") as number;
+    const gamingData = raw.get("Gaming") as any[] || [];
+    const gamingSproutData = safeJsonParse(raw, "GamingSprout", []) as number[][];
+    const playerSkillLevels = range(0, charCount).map((_, i) => { return raw.get(`Lv0_${i}`) }) as number[][];
 
     if (gamingData.length == 0) {
-        return gaming;
+        return;
     }
     
     gaming.rawGamingData = gamingData;
@@ -152,8 +158,6 @@ export default function parseGaming(gamingData: any[], gamingSproutData: number[
             gaming.superbits[bitIndex].unlocked = true;
         }
     })
-    
-    return gaming;    
 }
 
 export const updateGaming = (data: Map<string, any>) => {
@@ -205,3 +209,5 @@ export const updateSuperbitImpacts = (data: Map<string, any>) => {
         atomCollider.atoms.forEach(atom => atom.gamingMaxLevelBoost = 10);
     }
 }
+
+export default parseGaming;

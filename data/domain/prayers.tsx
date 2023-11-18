@@ -1,5 +1,7 @@
 import { range } from "../utility";
+import { Cloudsave } from "./cloudsave";
 import { initPrayerRepo, PrayerBase } from "./data/PrayerRepo";
+import { IParser, safeJsonParse } from "./idleonData";
 import { ImageData } from "./imageData";
 import { PrayerModel } from "./model/prayerModel";
 
@@ -66,14 +68,16 @@ export const initPrayers = () => {
     return Prayer.fromBase(initPrayerRepo());
 }
 
-export default function parsePrayers(rawData: number[]) {
-    const prayerData = Prayer.fromBase(initPrayerRepo());
-    if (rawData) {
-        rawData.forEach((prayer, index) => { // for each prayer
-            if (index < prayerData.length) { // ignore unknown prayers.
-                prayerData[index].level = prayer;
-            }
-        });
-    }
-    return prayerData;
+const parsePrayers: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const prayerData = data.get("prayers");
+    const rawData = safeJsonParse(raw, "PrayOwned", []) as number[];
+    rawData.forEach((prayer, index) => { // for each prayer
+        if (index < prayerData.length) { // ignore unknown prayers.
+            prayerData[index].level = prayer;
+        }
+    });
+
+    data.set("prayers", prayerData);
 }
+
+export default parsePrayers;

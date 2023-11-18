@@ -1,5 +1,6 @@
 import { Breeding } from "./breeding"
 import { Card, CardInfo } from "./cards"
+import { Cloudsave } from "./cloudsave"
 import { Cooking } from "./cooking"
 import { ChipBase, initChipRepo } from "./data/ChipRepo"
 import { initJewelRepo, JewelBase } from "./data/JewelRepo"
@@ -7,6 +8,7 @@ import { initLabBonusRepo, LabBonusBase } from "./data/LabBonusRepo"
 import { Deathnote } from "./deathnote"
 import { Divinity } from "./divinity"
 import { GemStore } from "./gemPurchases"
+import { IParser, safeJsonParse } from "./idleonData"
 import { ImageData } from "./imageData"
 import { ChipModel } from "./model/chipModel"
 import { JewelModel } from "./model/jewelModel"
@@ -310,11 +312,13 @@ export const initLab = () => {
     return new Lab();
 }
 
-export const parseLab = (labData: number[][], charCount: number) => {
-    const lab = new Lab();
+const parseLab: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const lab = data.get("lab") as Lab;
+    const labData = safeJsonParse(raw, "Lab", []) as number[][];
+    const charCount = data.get("charCount") as number;
 
     if (labData.length == 0) {
-        return lab;
+        return;
     }
     let cordIndex = 0;
     while (cordIndex < labData[0].length) {
@@ -341,7 +345,7 @@ export const parseLab = (labData: number[][], charCount: number) => {
         }
     })
 
-    return lab;
+    data.set("lab", lab);
 }
 
 const _calculatePlayersLineWidth = (lab: Lab, cooking: Cooking, breeding: Breeding, cards: Card[], gemStore: GemStore, buboBoost: number) => {
@@ -357,9 +361,12 @@ const _calculatePlayersLineWidth = (lab: Lab, cooking: Cooking, breeding: Breedi
         const shinyBonus = breeding.shinyBonuses.find(bonus => bonus.data.index == 19)?.getBonus() ?? 0;
         const gemTubes = (gemStore?.purchases.find(purchase => purchase.no == 123)?.pucrhased ?? 0) * 2;
         lab.playersInTubes.forEach((player, index) => {
-            const rightOfBubo = lab.playerCords[player.playerID].x >= lab.playerCords[lab.bestBuboPlayerID].x;
-            player.labInfo.lineWidth = lab?.getPlayerLinewidth(player, pxMealBonus, linePctMealBonus, passiveCardBonus, petArenaBonus, index < gemTubes, rightOfBubo ? buboBoost : 0, shinyBonus);
-            player.labInfo.supped = index < gemTubes;
+            // Make sure we have info about the player and bubo, otherwise this math is pointless.
+            if (lab.playerCords[player.playerID] && lab.playerCords[lab.bestBuboPlayerID]) {
+                const rightOfBubo = lab.playerCords[player.playerID].x >= lab.playerCords[lab.bestBuboPlayerID].x;
+                player.labInfo.lineWidth = lab?.getPlayerLinewidth(player, pxMealBonus, linePctMealBonus, passiveCardBonus, petArenaBonus, index < gemTubes, rightOfBubo ? buboBoost : 0, shinyBonus);
+                player.labInfo.supped = index < gemTubes;
+            }
         });
     }
 }
@@ -368,8 +375,11 @@ const _findPrismSource = (lab: Lab) => {
     for (let playerIndex = 0; playerIndex < lab.playersInTubes.length; playerIndex++) {
         const player = lab.playersInTubes[playerIndex];
         const playerCords = lab.playerCords[player.playerID];
-        if (lab.getDistance(43, 229, playerCords.x, playerCords.y) < player.labInfo.lineWidth) {
-            return player
+        
+        if (playerCords) {
+            if (lab.getDistance(43, 229, playerCords.x, playerCords.y) < player.labInfo.lineWidth) {
+                return player
+            }
         }
     }
     return undefined;
@@ -452,7 +462,7 @@ export const updateLab = (data: Map<string, any>) => {
     // 5. Bubo purple for extra line width.
 
     // Figure out which players are in lab first and sort by player id.
-    const playersInLab = [...playerData].filter(player => player.currentMonster?.id == "Laboratory" || divinity.playerInfo[player.playerID].isLinkedToGod(1)).sort((player1, player2) => player1.playerID > player2.playerID ? 1 : -1);
+    const playersInLab = [...playerData].filter(player => player.currentMonster?.id == "Laboratory" || (divinity.playerInfo[player.playerID]?.isLinkedToGod(1) ?? false)).sort((player1, player2) => player1.playerID > player2.playerID ? 1 : -1);
 
     lab.playersInTubes = playersInLab;
 
@@ -541,3 +551,5 @@ export const updateLab = (data: Map<string, any>) => {
 
     return lab;
 }
+
+export default parseLab;

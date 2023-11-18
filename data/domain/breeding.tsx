@@ -21,6 +21,8 @@ import { Refinery } from "./refinery";
 import { Sailing } from "./sailing";
 import { GemStore } from "./gemPurchases";
 import { TaskBoard } from "./tasks";
+import { IParser, safeJsonParse } from "./idleonData";
+import { Cloudsave } from "./cloudsave";
 
 export const waveReqs = "2 5 8 12 15 20 25 35 50 65 80 100 125 150 175 200".split(" ").map(value => parseInt(value));
 
@@ -208,8 +210,8 @@ export class Pet {
         if (this.shinyProgress == 0) {
             return 0;
         }
-        
-        for (let shinyLevel = 0 ; shinyLevel < 19 ; shinyLevel++) {
+
+        for (let shinyLevel = 0; shinyLevel < 19; shinyLevel++) {
             const levelReq = Math.floor((1 + Math.pow(shinyLevel + 1, 1.6)) * Math.pow(1.7, shinyLevel + 1));
             if (this.shinyProgress < levelReq) {
                 return shinyLevel + 1;
@@ -384,7 +386,7 @@ export class Breeding {
         if (this.skillLevel == 0) {
             return [0, 0];
         }
-        
+
         let baseMath = Math.pow(4 * this.skillLevel + Math.pow(this.skillLevel / 2, 3), 0.85);
         const eggRarity = Math.min(1, Math.max(...this.eggs.map(egg => egg.rarity)));
         const maxRange = Math.max(0.1, 1 - ((eggRarity + 4) / 12) * 0.9);
@@ -453,14 +455,20 @@ export const initBreeding = () => {
     return new Breeding();
 }
 
-export const parseBreeding = (petsStored: any[][], pets: any[][], optionsList: any[], territory: any[][], breedingData: number[][]) => {
-    const breeding = new Breeding();
+const parseBreeding: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const breeding = data.get("breeding") as Breeding;
+    const petsStored = safeJsonParse(raw, "PetsStored", []) as any[][];
+    const pets = safeJsonParse(raw, "Pets", []) as any[][];
+    const optionList = data.get("OptLacc") as number[];
+    const territory = safeJsonParse(raw, "Territory", []) as any[][];
+    const breedingData = safeJsonParse(raw, "Breeding", []) as number[][];
+
     if (petsStored.length == 0 || pets.length == 0 || territory.length == 0 || breedingData.length == 0) {
-        return breeding;
+        return;
     }
 
-    breeding.timeTillEgg = parseFloat(optionsList[87] as string);
-    breeding.arenaWave = parseInt(optionsList[89] as string);
+    breeding.timeTillEgg = optionList[87];
+    breeding.arenaWave = optionList[89];
 
     breedingData[0].forEach(egg => {
         breeding.eggs.push(new Egg(egg));
@@ -472,7 +480,7 @@ export const parseBreeding = (petsStored: any[][], pets: any[][], optionsList: a
         breeding.upgrade[index].level = upgrade;
     })
 
-    const territoryFightsWon = parseInt(optionsList[85] as string);
+    const territoryFightsWon = optionList[85];
 
     territory.forEach((territory, index) => {
         // Lava does some weird math to skip territory 14 in some scenarios.
@@ -522,7 +530,7 @@ export const parseBreeding = (petsStored: any[][], pets: any[][], optionsList: a
         breeding.shinyBonuses.push(new ShinyBonus(shinyPets[0].shinyBonus, totalLevels, shinyPets));
     })
 
-    return breeding;
+    data.set("breeding", breeding);
 }
 
 export const updateBreeding = (data: Map<string, any>) => {
@@ -597,3 +605,5 @@ export const updateAllShinyEffects = (data: Map<string, any>) => {
         meal.shinyBonus = breeding.shinyBonuses.find(bonus => bonus.data.index == 20)?.getBonus() ?? 0;;
     });
 }
+
+export default parseBreeding;

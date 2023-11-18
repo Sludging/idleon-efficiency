@@ -1,6 +1,9 @@
+import { range } from "../utility";
 import { Alchemy } from "./alchemy";
+import { Cloudsave } from "./cloudsave";
 import { initDivinityStyleRepo } from "./data/DivinityStyleRepo";
 import { GodInfoBase, initGodInfoRepo } from "./data/GodInfoRepo";
+import { IParser } from "./idleonData";
 import { ImageData } from "./imageData";
 import { DivinityStyleModel } from "./model/divinityStyleModel";
 import { GodInfoModel } from "./model/godInfoModel";
@@ -106,12 +109,17 @@ export const initDivinity = () => {
     return new Divinity();
 }
 
-export default function parseDivinity(playerCount: number, divinityData: number[], afkTarget: string[], talentLevels: string[]) {
-    const divinity = new Divinity();
+const parseDivinity: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const divinity = data.get("divinity") as Divinity;
+    const charCount = data.get("charCount") as number;
+    const divinityData = raw.get("Divinity") as number[] || [];
+    const afkTarget = range(0,charCount).map((_, index) => raw.get(`AFKtarget_${index}`)) as string[];
+    const talentLevels = range(0,charCount).map((_, index) => raw.get(`SL_${index}`)) as string[];
 
     if (divinityData.length == 0) {
-        return divinity;
+        return;
     }
+
     // Index 25 = Number of gods unlocked?
     const numberOfUnlockedGods = divinityData[25];
 
@@ -127,7 +135,7 @@ export default function parseDivinity(playerCount: number, divinityData: number[
 
     const mantraInfo = initDivinityStyleRepo();
     // Read player data.
-    [...Array(playerCount)].forEach((_, playerIndex) => {
+    range(0,charCount).forEach((_, playerIndex) => {
         const playerMantra = divinityData[playerIndex];
         const linkedGodIndex = divinityData[playerIndex + 12];
         const playerLinkedGod = linkedGodIndex != -1 && linkedGodIndex < divinity.gods.length ? divinity.gods[linkedGodIndex] : undefined;
@@ -151,9 +159,6 @@ export default function parseDivinity(playerCount: number, divinityData: number[
     // Index 27 = Odds of second offering
     divinity.offerings.push(new GodOffering(0, divinityData[26]));
     divinity.offerings.push(new GodOffering(1, divinityData[27]));
-
-
-    return divinity;
 }
 
 export const updateDivinity = (data: Map<string, any>) => {
@@ -183,3 +188,5 @@ export const updateDivinity = (data: Map<string, any>) => {
 
     return divinity;
 }
+
+export default parseDivinity;

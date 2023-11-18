@@ -1,3 +1,6 @@
+import { range } from "../utility";
+import { Cloudsave } from "./cloudsave";
+import { IParser } from "./idleonData";
 import { ImageData } from "./imageData";
 import { MapInfo } from "./maps";
 import { Rift } from "./rift";
@@ -73,11 +76,10 @@ export const initDeathnote = () => {
     return new Deathnote();
 }
 
-export default function parseDeathnote(klaData: string[]) {
-    const deathNote = new Deathnote();
-    // const doc = new Map<string, any>(Object.entries(accountData.get("rawData")));
-    // const playerData = accountData.get("players") as Player[];
-    // const charCount = playerData.length;
+const parseDeathnote: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const deathNote = data.get("deathnote") as Deathnote;
+    const charCount = data.get("charCount") as number;
+    const klaData = range(0, charCount).map((_, i) => { return raw.get(`KLA_${i}`) }) as string[];
 
     klaData.forEach((playerKillData, pIndex) => {
         deathNote.playerKillsByMap.set(pIndex, new Map());
@@ -94,7 +96,8 @@ export default function parseDeathnote(klaData: string[]) {
             }
         });
     })           
-    return deathNote;
+
+    data.set("deathnote", deathNote);
 }
 
 export const updateDeathnote = (data: Map<string, any>) => {
@@ -103,3 +106,5 @@ export const updateDeathnote = (data: Map<string, any>) => {
 
     deathNote.hasRiftBonus = rift.bonuses.find(bonus => bonus.name == "Eclipse Skulls")?.active ?? false;
 }
+
+export default parseDeathnote;

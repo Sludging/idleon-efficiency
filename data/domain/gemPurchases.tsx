@@ -1,4 +1,6 @@
+import { Cloudsave } from "./cloudsave"
 import { GemShopItemBase, initGemShopRepo } from "./data/GemShopRepo"
+import { IParser, safeJsonParse } from "./idleonData"
 import { GemShopItemModel } from "./model/gemShopItemModel"
 
 export class GemPurchase {
@@ -41,8 +43,9 @@ export const initGems = () => {
     return new GemStore();
 }
 
-export default function parseGems(gemData: number[]) {
-    const gems = new GemStore();
+const parseGems: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const gems = data.get("gems") as GemStore;
+    const gemData = safeJsonParse(raw, "GemItemsPurchased", []) as number[];
 
     gemData.forEach((data, index) => {
         if (data > 0) {
@@ -53,5 +56,7 @@ export default function parseGems(gemData: number[]) {
         }
     })
 
-    return gems;
+    data.set("gems", gems);
 }
+
+export default parseGems;

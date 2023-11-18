@@ -15,6 +15,8 @@ import { SkillsIndex } from './SkillsIndex';
 import { Sailing } from './sailing';
 import { TaskBoard } from './tasks';
 import { Rift } from './rift';
+import { IParser } from './idleonData';
+import { Cloudsave } from './cloudsave';
 
 export enum CauldronIndex {
     Power = 0,
@@ -544,8 +546,11 @@ export const initAlchemy = (allItems: Item[]) => {
     return alchemy;
 }
 
-export default function parseAlchemy(alchemyData: Array<Map<string, number>>, boostLevels: Array<number>) {
-    var alchemy = Alchemy.fromBase(initBubbleRepo());
+const parseAlchemy: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const alchemy = data.get("alchemy") as Alchemy;
+    const alchemyData = raw.get("CauldronInfo") as Map<string, number>[];
+    const boostLevels = raw.get("CauldUpgLVs") as number[];
+
     alchemyData.forEach((indexData, index) => {
         // Handle cauldrons if the first 4 arrays of data
         if (index in CauldronIndex) {
@@ -557,7 +562,7 @@ export default function parseAlchemy(alchemyData: Array<Map<string, number>>, bo
         }
     })
 
-    return alchemy;
+    data.set("alchemy", alchemy);
 }
 
 export function updateAlchemy(data: Map<string, any>) {
@@ -613,3 +618,5 @@ export function updateAlchemy(data: Map<string, any>) {
 
     return alchemy;
 }
+
+export default parseAlchemy;

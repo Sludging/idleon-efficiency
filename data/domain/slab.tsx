@@ -1,4 +1,6 @@
+import { Cloudsave } from './cloudsave';
 import { initSlabItemSortRepo } from './data/SlabItemSortRepo';
+import { IParser, safeJsonParse } from './idleonData';
 import { Item } from './items'
 
 export class Slab {
@@ -98,8 +100,9 @@ export const initSlab = (allItems: Item[]) => {
     return new Slab(allItems);
 }
 
-export default function parseSlab(rawItems: string[], allItems: Item[]) {
-    let slab = new Slab(allItems);
+const parseSlab: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const slab = data.get("slab") as Slab;
+    const rawItems = safeJsonParse(raw, "Cards1", []) as string[];
 
     // Clean up items that shouldn't be here, happens on older profiles.
     const lootedInfo = rawItems.filter(item =>
@@ -109,13 +112,11 @@ export default function parseSlab(rawItems: string[], allItems: Item[]) {
         item.indexOf("Spice") == -1
     )
 
-    slab.obtainableItems = allItems.filter(item => item.data.slabSort != undefined);
-
     slab.obtainableItems.forEach(item => {
         item.obtained = lootedInfo.includes(item.internalName);
     })
 
-    // All Items doesn't contain certain things that don't naturally (refinery books / anvil recipes etc). So add them in as fake items
+    // All Items doesn't contain certain things that don't naturally drop (refinery books / anvil recipes etc). So add them in as fake items
     lootedInfo.forEach(looted => {
         if (slab.obtainableItems.findIndex(item => item.internalName == looted) == -1 && slabItems.map(item => item.item).includes(looted)) {
             const fakeItem = Item.emptyItem(looted);
@@ -124,17 +125,11 @@ export default function parseSlab(rawItems: string[], allItems: Item[]) {
         }
     })
 
-    // Sort all items based on slab sort to match up the game better.
-    slab.obtainableItems.sort((item1, item2) => {
-        const item1Order = slabItems.find(item => item.item == item1.internalName)?.order ?? 0;
-        const item2Order = slabItems.find(item => item.item == item2.internalName)?.order ?? 0;
-        return item1Order > item2Order ? 1 : -1;
-    });
-
-
     // Keep track of raw data for easy access in the UI and maths.
     slab.rawObtainedCount = lootedInfo.length;
     slab.obtainableCount = slabItems.length;
 
-    return slab;
+    data.set("slab", slab);
 }
+
+export default parseSlab;

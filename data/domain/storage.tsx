@@ -1,5 +1,6 @@
+import { range } from "../utility";
 import { Cloudsave } from "./cloudsave";
-import { safeJsonParse } from "./idleonData";
+import { IParser, safeJsonParse } from "./idleonData";
 import { Item, StoneProps } from "./items";
 import { Refinery, RefineryStorage } from "./refinery";
 
@@ -25,22 +26,26 @@ export const initStorage = () => {
     return new Storage();
 }
 
-export default function parseStorage(doc: Cloudsave, playerNames: string[], allItems: Item[], storageInvUsed: Record<string, number>) {
-    const chestOrder: string[] = doc.get("ChestOrder");
-    const chestQuantity: number[] = doc.get("ChestQuantity");
-    
-    const storage = new Storage();
+const parseStorage: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const storage = data.get("storage") as Storage;
+    const allItems = data.get("itemsData") as Item[];
+    const charCount = data.get("charCount") as number;
+
+    const chestOrder = raw.get("ChestOrder") as string[];
+    const chestQuantity = raw.get("ChestQuantity") as number[];
+    const storageInvUsed = raw.get("InvStorageUsed") as Record<string, number>;
+
     chestOrder.forEach((item, index) => {
         const itemData = allItems.find(x => x.internalName == item)?.duplicate() ?? Item.emptyItem(item);
         itemData.count = chestQuantity[index];
         storage.chest.push(itemData);
     });
 
-    playerNames.forEach((_, index) => {
+    range(0, charCount).forEach((_, index) => {
         let playerInventory: Item[] = [];
-        const inventoryOrder: string[] = doc.get(`InventoryOrder_${index}`);
-        const inventoryQuantity: number[] = doc.get(`ItemQTY_${index}`);
-        const stoneData: Record<number,StoneProps> = safeJsonParse(doc, `IMm_${index}`, {}); 
+        const inventoryOrder: string[] = raw.get(`InventoryOrder_${index}`);
+        const inventoryQuantity: number[] = raw.get(`ItemQTY_${index}`);
+        const stoneData: Record<number,StoneProps> = safeJsonParse(raw, `IMm_${index}`, {}); 
         inventoryOrder.forEach((item, index) => {
             const itemData = allItems.find(x => x.internalName == item)?.duplicate() ?? Item.emptyItem(item);
             itemData.count = inventoryQuantity[index];
@@ -53,11 +58,12 @@ export default function parseStorage(doc: Cloudsave, playerNames: string[], allI
         });
 
         storage.playerStorage.push(playerInventory);
-    });
+    })
 
     storage.storageChestsUsed = storageInvUsed;
-    storage.money = doc.get("MoneyBANK");
-    return storage;
+    storage.money = raw.get("MoneyBANK");
+
+    data.set("storage", storage);
 }
 
 export const updateStorage = (data: Map<string, any>) => {
@@ -68,3 +74,5 @@ export const updateStorage = (data: Map<string, any>) => {
 
     return storage;
 }
+
+export default parseStorage;

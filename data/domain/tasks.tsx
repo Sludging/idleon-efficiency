@@ -6,8 +6,10 @@
 // (b.engine.getGameAttribute("Tasks")[5] = D.getLoadJsonList("TaskZZ5"));
 
 import { GroupBy, nFormatter } from "../utility"
+import { Cloudsave } from "./cloudsave"
 import { initTaskDescriptionRepo, TaskDescriptionBase } from "./data/TaskDescriptionRepo"
 import { initTaskShopDescRepo, TaskShopDescBase } from "./data/TaskShopDescRepo"
+import { IParser, safeJsonParse } from "./idleonData"
 import { ImageData } from "./imageData"
 import { TaskDescriptionModel } from "./model/taskDescriptionModel"
 import { TaskShopDescModel } from "./model/taskShopDescModel"
@@ -163,8 +165,15 @@ export const initTaskboard = () => {
     return new TaskBoard();
 }
 
-export default function parseTaskboard(taskInfo0: number[][], taskInfo1: number[][], taskInfo2: number[][], taskInfo3: number[][], taskInfo4: number[], taskInfo5: number[]) {
-    const taskBoard = new TaskBoard()
+const parseTaskboard: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const taskBoard = data.get("taskboard") as TaskBoard;
+    const taskInfo0 = safeJsonParse(raw, `TaskZZ0`, []) as number[][];
+    const taskInfo1 = safeJsonParse(raw, `TaskZZ1`, []) as number[][]; 
+    const taskInfo2 = safeJsonParse(raw, `TaskZZ2`, []) as number[][];
+    // Currently not in use.
+    //const taskInfo3 = safeJsonParse(raw, `TaskZZ3`, []) as number[][];
+    //const taskInfo4 = safeJsonParse(raw, `TaskZZ4`, []) as number[];
+    //const taskInfo5 = safeJsonParse(raw, `TaskZZ5`, []) as number[];
 
     const tasksByWorld = GroupBy(taskBoard.tasks, "world");
     const meritsByWorld = GroupBy(taskBoard.merits, "world");
@@ -187,5 +196,8 @@ export default function parseTaskboard(taskInfo0: number[][], taskInfo1: number[
             })
         })
     }
-    return taskBoard;
+
+    data.set("taskboard", taskBoard);
 }
+
+export default parseTaskboard;

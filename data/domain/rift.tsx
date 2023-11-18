@@ -1,5 +1,8 @@
+import { range } from "../utility";
 import { SkillsIndex } from "./SkillsIndex";
+import { Cloudsave } from "./cloudsave";
 import { initBuildingRepo } from "./data/BuildingRepo";
+import { IParser, safeJsonParse } from "./idleonData";
 import { ImageData } from "./imageData";
 
 
@@ -204,24 +207,36 @@ export class Rift {
     level: number = 0;
     taskProgress: number = 0;
 
-    bonuses: RiftBonus[] = [];
+    bonuses: RiftBonus[];
+
+    public constructor() {
+        this.bonuses = [];
+        this.bonuses.push(new RiftBonus(0, "Trap Box Vacuum", 6, "The trapper drone in World 3 will automatically collect traps every 24 hours, and will deposit the critters into your Storage Chest if there is space. @ The EXP from the Traps goes to the one who placed the traps."))
+        this.bonuses.push(new InfiniteStarsBonus(1, "Infinite Stars", 11, "Permanently transforms Star Signs into Infinite Star Signs, which always give their bonus AND don't give the negatives. Infinite Star Signs are indicated by a little infinity icon, and are transformed in a specific order, so you don't get to choose. Get more from Shiny Pets in Breeding..."))
+        this.bonuses.push(new SkillMastery(2, "Skill Mastery", 16, "Lava didn't bother with a description for this one. Get bonuses based on total level of your skills across all characters."))
+        this.bonuses.push(new RiftBonus(3, "Eclipse Skulls", 21, "You can now get Eclipse Skulls in Deathnote, unlocked at 1,000,000,000 kills. Eclipse Skulls are worth 20 points, and you also get +5% Multiplicative Damage."))
+        this.bonuses.push(new RiftBonus(4, "Stamp Mastery", 26, "Every 100 total levels of all your stamps, you get a 1% chance to get a 'Gilded Stamp' 95% Reduction in Stamp Upgrade costs. This chance happens every day you log in, and they stack for whenever you want to use them!"))
+        this.bonuses.push(new RiftBonus(5, "Eldritch Artifact", 31, "You can now get Eldritch Artifacts from sailing, but only if you've found the Ancient form first."))
+        this.bonuses.push(new RiftBonus(6, "Vial Mastery", 36, "Each Gold Crown Vial you have, which is the 13th and final vial you upgrade to for 1 Billion Resource, now gives you a 1.02x boost to ALL Vial Bonuses!"))
+        this.bonuses.push(new ConstructionMastery(7, "Construct Mastery", 41, "Lava didn't bother with a description for this one. Get bonuses based on total level of your buildings in construction."))
+        this.bonuses.push(new RiftBonus(8, "Ruby Cards", 46, "You can now level up your cards to Lv 6. Yea, you'd think it would be Lv 5 but remember, 0 stars is actually Lv 1. So yea, Ruby Cards are 5 star cards, which means they are technically lv 6!"))
+    }
 }
 
-export default function parseRift(riftData: number[], playerSkillLevels: number[][], towerData: number[]) {
-    const rift = new Rift();
+export const initRift = () => {
+    return new Rift();
+}
+
+const parseRift: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const rift = data.get("rift") as Rift;
+    const charCount = data.get("charCount") as number;
+
+    const riftData = raw.get("Rift") as number[];
+    const playerSkillLevels = range(0, charCount).map((_, i) => { return raw.get(`Lv0_${i}`) }) as number[][];
+    const towerData = safeJsonParse(raw, "Tower", []) as number[];
 
     rift.level = riftData[0];
     rift.taskProgress = riftData[1];
-
-    rift.bonuses.push(new RiftBonus(0, "Trap Box Vacuum", 6, "The trapper drone in World 3 will automatically collect traps every 24 hours, and will deposit the critters into your Storage Chest if there is space. @ The EXP from the Traps goes to the one who placed the traps."))
-    rift.bonuses.push(new InfiniteStarsBonus(1, "Infinite Stars", 11, "Permanently transforms Star Signs into Infinite Star Signs, which always give their bonus AND don't give the negatives. Infinite Star Signs are indicated by a little infinity icon, and are transformed in a specific order, so you don't get to choose. Get more from Shiny Pets in Breeding..."))
-    rift.bonuses.push(new SkillMastery(2, "Skill Mastery", 16, "Lava didn't bother with a description for this one. Get bonuses based on total level of your skills across all characters."))
-    rift.bonuses.push(new RiftBonus(3, "Eclipse Skulls", 21, "You can now get Eclipse Skulls in Deathnote, unlocked at 1,000,000,000 kills. Eclipse Skulls are worth 20 points, and you also get +5% Multiplicative Damage."))
-    rift.bonuses.push(new RiftBonus(4, "Stamp Mastery", 26, "Every 100 total levels of all your stamps, you get a 1% chance to get a 'Gilded Stamp' 95% Reduction in Stamp Upgrade costs. This chance happens every day you log in, and they stack for whenever you want to use them!"))
-    rift.bonuses.push(new RiftBonus(5, "Eldritch Artifact", 31, "You can now get Eldritch Artifacts from sailing, but only if you've found the Ancient form first."))
-    rift.bonuses.push(new RiftBonus(6, "Vial Mastery", 36, "Each Gold Crown Vial you have, which is the 13th and final vial you upgrade to for 1 Billion Resource, now gives you a 1.02x boost to ALL Vial Bonuses!"))
-    rift.bonuses.push(new ConstructionMastery(7, "Construct Mastery", 41, "Lava didn't bother with a description for this one. Get bonuses based on total level of your buildings in construction."))
-    rift.bonuses.push(new RiftBonus(8, "Ruby Cards", 46, "You can now level up your cards to Lv 6. Yea, you'd think it would be Lv 5 but remember, 0 stars is actually Lv 1. So yea, Ruby Cards are 5 star cards, which means they are technically lv 6!"))
 
     rift.bonuses.forEach(bonus => {
         bonus.active = rift.level >= (bonus.unlockAt - 1);
@@ -241,5 +256,7 @@ export default function parseRift(riftData: number[], playerSkillLevels: number[
     const constMastery = rift.bonuses.find(bonus => bonus.name == "Construct Mastery") as ConstructionMastery;
     constMastery.buildingLevels = towerData.slice(0, allBuildings.length).reduce((sum, building) => sum += building, 0);
 
-    return rift;
+    data.set("rift", rift);
 }
+
+export default parseRift;

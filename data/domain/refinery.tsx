@@ -182,6 +182,8 @@ const parseRefinery: IParser = function (raw: Cloudsave, data: Map<string, any>)
             refinery.salts[`Refinery${i + 1}`].active = refineryData[saltIndex][3] as boolean;
         })
     }
+
+    data.set("refinery", refinery);
 }
 
 // Nothing depends on this, can be last.

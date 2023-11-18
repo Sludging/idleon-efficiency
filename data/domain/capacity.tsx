@@ -98,9 +98,12 @@
 //         : 2;
 // }),
 
+import { range } from "../utility";
 import { Bribe, BribeStatus } from "./bribes";
+import { Cloudsave } from "./cloudsave";
 import { GemStore } from "./gemPurchases";
 import { Guild } from "./guild";
+import { IParser, safeJsonParse } from "./idleonData";
 import { ImageData } from "./imageData";
 import { Player } from "./player";
 import { Prayer } from "./prayers";
@@ -324,8 +327,8 @@ interface CarryData {
 const CarryInfo: Record<string, CarryData> = {
     "bCraft": { skillIndex: SkillsIndex.Smithing, displayName: "Materials", stampName: "StampB8" },
     "Foods": { displayName: "Food" },
-    "Mining": { skillIndex: SkillsIndex.Mining, displayName: "Mining", stampName: "StampB4"},
-    "Chopping": { skillIndex: SkillsIndex.Chopping, displayName: "Chopping", stampName: "StampB6"},
+    "Mining": { skillIndex: SkillsIndex.Mining, displayName: "Mining", stampName: "StampB4" },
+    "Chopping": { skillIndex: SkillsIndex.Chopping, displayName: "Chopping", stampName: "StampB6" },
     "Fishing": { skillIndex: SkillsIndex.Fishing, displayName: "Fishing", stampName: "StampB21" },
     "Bugs": { skillIndex: SkillsIndex.Catching, displayName: "Bugs", stampName: "StampB23" },
     "Critters": { skillIndex: SkillsIndex.Trapping, displayName: "Critters" },
@@ -443,14 +446,17 @@ export const initCapacity = () => {
     return new Capacity();
 }
 
-// Accepts an array of `MaxCarryCap_<x>` data from each player.
-export default function parseCapacity(maxCapacities: Map<string, number>[]) {
-    const capacity = new Capacity();
+const parseCapacity: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const capacity = data.get("capacity") as Capacity;
+    const charCount = data.get("charCount") as number;
+    // Array of `MaxCarryCap_<x>` data from each player.
+    const maxCapacities = range(0,charCount).map((_, index) => new Map(Object.entries(safeJsonParse(raw,`MaxCarryCap_${index}`, new Map()))))
+    
     maxCapacities.forEach((playerCapacity, index) => {
         capacity.players.push(new PlayerCapacity(index, playerCapacity));
     })
 
-    return capacity;
+    data.set("capacity", capacity);
 }
 
 export function updateCapacity(data: Map<string, any>) {
@@ -477,49 +483,53 @@ export function updateCapacity(data: Map<string, any>) {
         // All Cap Math
         const currentPlayerInfo = capacity.players[player.playerID];
 
-        const telekineticStorageBonus = player.getTalentBonus(CapacityConst.TelekineticStorageSkillIndex);
-        const extraBagsTalentBonus = player.getTalentBonus(CapacityConst.ExtraBagsSkillIndex);
-        const starSignExtraCap = player.starSigns.reduce((sum, sign) => sum += sign.getBonus("Carry Cap"), 0);
+        if (currentPlayerInfo) {
+            const telekineticStorageBonus = player.getTalentBonus(CapacityConst.TelekineticStorageSkillIndex);
+            const extraBagsTalentBonus = player.getTalentBonus(CapacityConst.ExtraBagsSkillIndex);
+            const starSignExtraCap = player.starSigns.reduce((sum, sign) => sum += sign.getBonus("Carry Cap"), 0);
 
-        const carryCapShrineBonus = shrines[ShrineConstants.CarryShrine].getBonus(player.currentMapId);
-        const zergPrayerBonus = player.activePrayers.includes(4) ? zergPrayer.getCurse() : 0;
-        const ruckSackPrayerBonus = player.activePrayers.includes(12) ? ruckSackPrayer.getBonus() : 0;
+            const carryCapShrineBonus = shrines[ShrineConstants.CarryShrine].getBonus(player.currentMapId);
+            const zergPrayerBonus = player.activePrayers.includes(4) ? zergPrayer.getCurse() : 0;
+            const ruckSackPrayerBonus = player.activePrayers.includes(12) ? ruckSackPrayer.getBonus() : 0;
 
-        currentPlayerInfo.setAllCapsBonus(guildCarryBonus, telekineticStorageBonus, carryCapShrineBonus, zergPrayerBonus, ruckSackPrayerBonus, bribeCapBonus);
+            currentPlayerInfo.setAllCapsBonus(guildCarryBonus, telekineticStorageBonus, carryCapShrineBonus, zergPrayerBonus, ruckSackPrayerBonus, bribeCapBonus);
 
-        // Set max inventory slots.
-        currentPlayerInfo.totalInventorySlots = storage.playerStorage[player.playerID].filter((item) => item.internalName != "LockedInvSpace").length;
+            // Set max inventory slots.
+            currentPlayerInfo.totalInventorySlots = storage.playerStorage[player.playerID].filter((item) => item.internalName != "LockedInvSpace").length;
 
-        // Update individual bag carry caps.
-        Object.keys(CarryInfo).forEach(carryType => {
-            const playerBag = currentPlayerInfo.bags.find(bag => bag.name == carryType);
-            // This shouldn't happen but, handling it to be safe and to make TS happy.
-            if (!playerBag) {
-                return;
-            }
-            let stampBonus = 0;
-            if (playerBag.stampName) {
-                const skillLevel = playerBag.skill && player.skills.get(playerBag.skill)?.level
-                stampBonus = stamps.find(stamp => stamp.raw_name == playerBag.stampName)?.getBonus(skillLevel) ?? 0;
-            }
+            // Update individual bag carry caps.
+            Object.keys(CarryInfo).forEach(carryType => {
+                const playerBag = currentPlayerInfo.bags.find(bag => bag.name == carryType);
+                // This shouldn't happen but, handling it to be safe and to make TS happy.
+                if (!playerBag) {
+                    return;
+                }
+                let stampBonus = 0;
+                if (playerBag.stampName) {
+                    const skillLevel = playerBag.skill && player.skills.get(playerBag.skill)?.level
+                    stampBonus = stamps.find(stamp => stamp.raw_name == playerBag.stampName)?.getBonus(skillLevel) ?? 0;
+                }
 
-            playerBag.setCapacity({
-                allCapBonuses: currentPlayerInfo.allCapBonus,
-                stampMatCapBonus: stampBonus,
-                gemsCapacityBought: gemCapacityBonus,
-                stampAllCapBonus: allCapStampBonus,
-                extraBagsLevel: extraBagsTalentBonus,
-                starSignExtraCap: starSignExtraCap
+                playerBag.setCapacity({
+                    allCapBonuses: currentPlayerInfo.allCapBonus,
+                    stampMatCapBonus: stampBonus,
+                    gemsCapacityBought: gemCapacityBonus,
+                    stampAllCapBonus: allCapStampBonus,
+                    extraBagsLevel: extraBagsTalentBonus,
+                    starSignExtraCap: starSignExtraCap
+                })
+
+                // Keep track of highest carry cap player per type.
+                if (playerBag.maxCarry > capacity.maxCapacityByType[carryType].maxCapacity) {
+                    capacity.maxCapacityByType[carryType].maxCapacity = playerBag.maxCarry;
+                    capacity.maxCapacityByType[carryType].player = player;
+                    capacity.maxCapacityByType[carryType].inventorySlots = currentPlayerInfo.totalInventorySlots;
+                }
             })
-
-            // Keep track of highest carry cap player per type.
-            if (playerBag.maxCarry > capacity.maxCapacityByType[carryType].maxCapacity) {
-                capacity.maxCapacityByType[carryType].maxCapacity = playerBag.maxCarry;
-                capacity.maxCapacityByType[carryType].player = player;
-                capacity.maxCapacityByType[carryType].inventorySlots = currentPlayerInfo.totalInventorySlots; 
-            }
-        })
+        }
     })
-    
+
     return capacity;
 }
+
+export default parseCapacity;

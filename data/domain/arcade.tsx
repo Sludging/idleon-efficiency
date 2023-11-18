@@ -2,7 +2,9 @@ import { lavaFunc, range } from "../utility"
 import { Achievement } from "./achievements";
 import { Alchemy } from "./alchemy";
 import { Bribe } from "./bribes";
+import { Cloudsave } from "./cloudsave";
 import { ArcadeBonusBase, initArcadeBonusRepo } from "./data/ArcadeBonusRepo";
+import { IParser, safeJsonParse } from "./idleonData";
 import { ImageData } from "./imageData";
 import { ArcadeBonusModel } from "./model/arcadeBonusModel";
 import { Stamp, getStampBonusForKey } from "./stamps";
@@ -140,8 +142,10 @@ export const initArcade = () => {
     return Arcade.fromBase(initArcadeBonusRepo());
 }
 
-export default function parseArcade(bonusArray: number[], optionList: number[]) {
-    const arcade = Arcade.fromBase(initArcadeBonusRepo());
+const parseArcade: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const arcade = data.get("arcade") as Arcade;
+    const bonusArray = safeJsonParse(raw, "ArcadeUpg", []) as number[];
+    const optionList = data.get("OptLacc") as number[];
 
     bonusArray.forEach((level, index) => {
         if (index < arcade.bonuses.length) {
@@ -152,7 +156,7 @@ export default function parseArcade(bonusArray: number[], optionList: number[]) 
     arcade.balls = optionList[74] as number || 0;
     arcade.goldBalls = optionList[75] as number || 0;
 
-    return arcade;
+    data.set("arcade", arcade);
 }
 
 export const updateArcade = (data: Map<string, any>) => {
@@ -194,3 +198,5 @@ export const updateArcade = (data: Map<string, any>) => {
     arcade.maxBalls = Math.floor(arcade.maxClaimTime / arcade.secondsPerBall);
     return arcade;
 }
+
+export default parseArcade;

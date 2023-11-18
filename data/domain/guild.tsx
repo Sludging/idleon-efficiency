@@ -1,5 +1,7 @@
 import { lavaFunc } from "../utility"
+import { Cloudsave } from "./cloudsave"
 import { GuildBonusBase, initGuildBonusRepo } from "./data/GuildBonusRepo"
+import { IParser, safeJsonParse } from "./idleonData"
 import { GuildBonusModel } from "./model/guildBonusModel"
 
 export const GuildConstants = {
@@ -55,8 +57,9 @@ export const initGuild = () => {
     return new Guild();
 }
 
-export default function parseGuild(guildInfo: number[][]) {
-    const guild = new Guild();
+const parseGuild: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const guild = data.get("guild") as Guild;
+    const guildInfo = safeJsonParse(raw, "Guild", []) as number[][];
 
     if (guildInfo.length > 0) {
         const bonuses = guildInfo[GuildConstants.BonusIndex]
@@ -67,5 +70,7 @@ export default function parseGuild(guildInfo: number[][]) {
         })
     }
 
-    return guild;
+    data.set("guild", guild);
 }
+
+export default parseGuild;

@@ -307,7 +307,7 @@ export const updateAnvil = (data: Map<string, any>) => {
 
         // Capacity
         const playerCapacity = capacity.players[player.playerID];
-        playerAnvil.setCapacity(playerCapacity.bags.find(x => x.name == "bCraft")?.maxCarry ?? 0);
+        playerAnvil.setCapacity(playerCapacity?.bags.find(x => x.name == "bCraft")?.maxCarry ?? 0);
 
         playerAnvil.production.forEach(anvilProduct => {
             anvilProduct.futureProduction = Math.min(Math.round(anvilProduct.currentAmount + ((anvilProduct.currentProgress + (player.afkFor * playerAnvil.anvilSpeed / 3600)) / anvilProduct.data.time) * (anvilProduct.hammers ?? 0)), playerAnvil.productCapacity);

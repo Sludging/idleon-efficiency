@@ -16,6 +16,8 @@ import { Sailing } from "./sailing";
 import { Sigils } from "./sigils";
 import { Stamp } from "./stamps";
 import { ClassIndex } from "./talents";
+import { IParser, safeJsonParse } from "./idleonData";
+import { Cloudsave } from "./cloudsave";
 
 const spiceValues: number[] = "0 3 5 8 10 13 15 19 20 23 27 31 33 37 41 45 48 50 53 56".split(" ").map(value => parseInt(value));
 const mealLuckValues: number[] = "1 .20 .10 .05 .02 .01 .004 .001 .0005 .0003".split(" ").map(value => parseFloat(value));
@@ -388,11 +390,13 @@ export const initCooking = () => {
     return cooking;
 }
 
-export const parseCooking = (cookingData: number[][], mealsData: number[][]) => {
-    const cooking = new Cooking();
+const parseCooking: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const cooking = data.get("cooking") as Cooking;
+    const cookingData = safeJsonParse(raw, "Cooking", []) as number[][];
+    const mealsData = safeJsonParse(raw, "Meals", []) as number[][];
 
     if (cookingData.length == 0 || mealsData.length == 0) {
-        return cooking;
+        return;
     }
 
     if (mealsData.length) {
@@ -415,7 +419,8 @@ export const parseCooking = (cookingData: number[][], mealsData: number[][]) => 
         cooking.kitchens[index].activeMeal = kitchen[1];
         cooking.kitchens[index].activeRecipe = kitchen.slice(2, 6).filter(number => number != -1);
     })
-    return cooking;
+
+    data.set("cooking", cooking);
 }
 
 export const updateCooking = (data: Map<string, any>) => {
@@ -553,3 +558,5 @@ export const updateCooking = (data: Map<string, any>) => {
 
     return cooking;
 }
+
+export default parseCooking;

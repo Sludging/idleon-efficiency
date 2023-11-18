@@ -1,5 +1,6 @@
+import { range } from "../utility";
 import { Cloudsave } from "./cloudsave";
-import { safeJsonParse } from "./idleonData";
+import { IParser, safeJsonParse } from "./idleonData";
 import { Item, ItemStat, StoneProps } from "./items";
 
 
@@ -133,12 +134,14 @@ export const initObols = () => {
     return new ObolsData();
 }
 
-export default function parseObols(doc: Cloudsave, charCount: number, allItems: Item[]) {
-    const toReturn = new ObolsData();
+const parseObols: IParser = function (raw: Cloudsave, data: Map<string, any>) {
+    const obols = data.get("obols") as ObolsData;
+    const charCount = data.get("charCount") as number;
+    const allItems = data.get("itemsData") as Item[];
 
-    [...Array(charCount)].forEach((_, playerIndex) => {
-        const playerObols = doc.get(`ObolEqO0_${playerIndex}`) as string[];
-        const playerObolsMods = safeJsonParse(doc, `ObolEqMAP_${playerIndex}`, {}) as Record<number, StoneProps>;
+    range(0, charCount).forEach((_, playerIndex) => {
+        const playerObols = raw.get(`ObolEqO0_${playerIndex}`) as string[];
+        const playerObolsMods = safeJsonParse(raw, `ObolEqMAP_${playerIndex}`, {}) as Record<number, StoneProps>;
         const playerObolArray: Obol[] = [];
         const playerStats = new ObolStats();
         playerObols.forEach((obol, obolIndex) => {
@@ -152,27 +155,27 @@ export default function parseObols(doc: Cloudsave, charCount: number, allItems: 
             })
 
         });
-        toReturn.playerObols.push(playerObolArray);
-        toReturn.playerStats.push(playerStats);
+        obols.playerObols.push(playerObolArray);
+        obols.playerStats.push(playerStats);
     })
 
-    const familyObols = doc.get(`ObolEqO1`) as string[];
-    const familyObolsMods = safeJsonParse(doc, 'ObolEqMAPz1', {}) as Record<number, StoneProps>;
+    const familyObols = raw.get(`ObolEqO1`) as string[];
+    const familyObolsMods = safeJsonParse(raw, 'ObolEqMAPz1', {}) as Record<number, StoneProps>;
     familyObols.forEach((obol, obolIndex) => {
         let itemInfo = allItems.find(item => item.internalName == obol)?.duplicate() ?? Item.emptyItem(obol);
         if (!obol.includes("Locked") && obol != "Blank" && Object.keys(familyObolsMods).includes(obolIndex.toString())) {
             itemInfo.addStone(familyObolsMods[obolIndex]);
         }
-        toReturn.familyObols.push(new Obol(itemInfo, obolIndex, false))
+        obols.familyObols.push(new Obol(itemInfo, obolIndex, false))
         itemInfo.itemStats.forEach(stat => {
-            toReturn.familyStats.addStat(stat);
+            obols.familyStats.addStat(stat);
         })
     });
 
-    const inventory = doc.get(`ObolInvOr`) as Record<string, string>[];
+    const inventory = raw.get(`ObolInvOr`) as Record<string, string>[];
     inventory.forEach((typeInventory, index) => {
-        const tabModifications = safeJsonParse(doc, `ObolInvMAP_${index}`, {}) as Record<string, string>[];
-        toReturn.inventory.set(index as ObolType, []);
+        const tabModifications = safeJsonParse(raw, `ObolInvMAP_${index}`, {}) as Record<string, string>[];
+        obols.inventory.set(index as ObolType, []);
         [...Object.entries(typeInventory)].forEach(([key, obol], obolIndex) => {
             if (key == "length") {  // ignore the length key, we don't care.
                 return;
@@ -181,8 +184,12 @@ export default function parseObols(doc: Cloudsave, charCount: number, allItems: 
             if (!obol.includes("Locked") && obol != "Blank" && Object.keys(tabModifications).includes(obolIndex.toString())) {
                 itemInfo.addStone(tabModifications[obolIndex]);
             }
-            toReturn.inventory.get(index)?.push(new Obol(itemInfo, -1, false, index as ObolType));
+            obols.inventory.get(index)?.push(new Obol(itemInfo, -1, false, index as ObolType));
         })
     });
-    return toReturn;
+
+    data.set("obols", obols);
+    
 }
+
+export default parseObols;
