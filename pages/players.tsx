@@ -14,7 +14,7 @@ import {
     Meter,
     CheckBox
 } from 'grommet'
-import { useState, useEffect, useContext, useMemo } from 'react';
+import { useState, useEffect, useContext, useMemo, MouseEventHandler } from 'react';
 import { AppContext } from '../data/appContext'
 import { GemStore } from '../data/domain/gemPurchases';
 
@@ -35,7 +35,6 @@ import ShadowBox from '../components/base/ShadowBox';
 import TipDisplay, { TipDirection } from '../components/base/TipDisplay';
 import { Alert, CircleInformation, Next } from 'grommet-icons';
 import { NextSeo } from 'next-seo';
-import { MouseEventHandler } from 'hoist-non-react-statics/node_modules/@types/react';
 import { Item, ItemStat, Food, DropSource } from '../data/domain/items';
 import { Storage } from '../data/domain/storage';
 import { Prayer } from '../data/domain/prayers';

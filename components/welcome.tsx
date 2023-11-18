@@ -12,10 +12,9 @@ import {
     Heading
 } from 'grommet'
 import styled from 'styled-components'
-import { useEffect, useContext, useState } from 'react';
+import { useEffect, useContext, useState, MouseEventHandler } from 'react';
 import { AuthContext, AuthStatus } from '../data/firebase/authContext'
 import ShadowBox from './base/ShadowBox';
-import { MouseEventHandler } from 'hoist-non-react-statics/node_modules/@types/react';
 import { NextSeo } from 'next-seo';
 import GoogleLogin from './login/googleLogin';
 import { AppContext, AppStatus, DataStatus } from '../data/appContext';

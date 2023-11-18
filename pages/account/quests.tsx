@@ -7,14 +7,13 @@ import {
     ResponsiveContext,
 } from "grommet"
 
-import { useEffect, useState, useContext, useMemo } from 'react';
+import { useEffect, useState, useContext, useMemo, MouseEventHandler } from 'react';
 import ShadowBox from "../../components/base/ShadowBox";
 import { AppContext } from '../../data/appContext';
 import { NextSeo } from 'next-seo';
 import { Player } from "../../data/domain/player";
 import { NPC, QuestInformation as SpecialQuestInfo, Quests as QuestInfo } from "../../data/domain/quests";
 import { Next } from 'grommet-icons';
-import { MouseEventHandler } from "hoist-non-react-statics/node_modules/@types/react";
 import TipDisplay, { TipDirection } from "../../components/base/TipDisplay";
 import CoinsDisplay from "../../components/coinsDisplay";
 import { getCoinsArray } from "../../data/utility";
