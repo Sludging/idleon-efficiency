@@ -36,7 +36,7 @@ export class NPC {
             location: this.name.replace(/ /g, "_").toLowerCase(),
             height: 50,
             width: 50
-        }
+        };
     }
 
     getQuestInformation = (questName: string): QuestInformation => {

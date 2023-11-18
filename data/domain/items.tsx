@@ -104,7 +104,7 @@ export class ItemStat {
     getDisplay = () => {
         // This is probably, misc? 
         if (this.extra != '') {
-            return `${this.displayName}: ${this.getValue()}${this.extra.replace(/_/g, ' ')}${this.stone != 0 ? ` (${this.stone})` : ''}`
+            return `${this.displayName}: ${this.getValue()}${this.extra.replace(/_/g, ' ')}${this.stone != 0 ? ` (${this.stone})` : ''}`;
         }
         return `${this.displayName}: ${this.getValue()}${this.stone != 0 ? ` (${this.stone})` : ''}`
     }
@@ -114,11 +114,11 @@ export class ItemStat {
     }
 }
 
-const getMiscStatRegex = () => { return /(\d+)(.*)/g };
-const getRegex = () => { return /Cards(\w)(\d+)/g };
-const getEnhancerRegex = () => { return /DungEnhancer(\d+)/g };
-const getDungRNGRegex = () => { return /DungRNG(\d+)/g };
-const liquidRegex = () => { return /Liquid(\d+)/g };
+const getMiscStatRegex = () => { return /(\d+)(.*)/g; };
+const getRegex = () => { return /Cards(\w)(\d+)/g; };
+const getEnhancerRegex = () => { return /DungEnhancer(\d+)/g; };
+const getDungRNGRegex = () => { return /DungRNG(\d+)/g; };
+const liquidRegex = () => { return /Liquid(\d+)/g; };
 
 // Should move this to a common library for typeguards.
 const isStatModel = (x: BaseItemModel): x is StatItemModel => "Upgrade_Slots_Left" in x

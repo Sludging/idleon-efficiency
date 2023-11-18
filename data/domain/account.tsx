@@ -126,7 +126,7 @@ export class Account {
     };
 }
 
-const isBossKeyRegex = () => { return /Key(\d+)/g };
+const isBossKeyRegex = () => { return /Key(\d+)/g; };
 
 
 export const initAccount = (allItems: Item[]) => {

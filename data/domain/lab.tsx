@@ -79,7 +79,7 @@ export class MainframeBonus {
 export class AnimalFarmBonus extends MainframeBonus {
     totalSpecies: number = 0;
     override getBonusText = () => {
-        return this.description.replace(/{/g, this.getBonus().toString())
+        return this.description.replace(/{/g, this.getBonus().toString());
     }
 
     override getBonus = () => {
@@ -91,7 +91,7 @@ export class FungiFingerBonus extends MainframeBonus {
     greenMushroomKilled: number = 0;
     jewelBoost: number = 0;
     override getBonusText = () => {
-        return this.description.replace(/{/g, this.getBonus().toString())
+        return this.description.replace(/{/g, this.getBonus().toString());
     }
 
     override getBonus = () => {
@@ -102,7 +102,7 @@ export class FungiFingerBonus extends MainframeBonus {
 export class UnadulteratedBankingBonus extends MainframeBonus {
     greenStacks: number = 0;
     override getBonusText = () => {
-        return this.description.replace(/{/g, this.getBonus().toString())
+        return this.description.replace(/{/g, this.getBonus().toString());
     }
 
     override getBonus = () => {

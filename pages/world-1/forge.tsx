@@ -52,7 +52,7 @@ function Forge() {
 
     const firstSlotToEmpty = useMemo(() => {
         const forgeSpeed = forge?.upgrades[2].getStat() ?? 0;
-        return [...forge?.slots ?? []].sort((slot1, slot2) => slot1.getTimeTillEmpty(forgeSpeed) < slot2.getTimeTillEmpty(forgeSpeed) ? -1 : 1)[0];
+        return [...(forge?.slots ?? [])].sort((slot1, slot2) => slot1.getTimeTillEmpty(forgeSpeed) < slot2.getTimeTillEmpty(forgeSpeed) ? -1 : 1)[0];
     }, [forge])
 
     const totalCost = useMemo(() => {

@@ -125,7 +125,7 @@ export class PetUpgrade {
     }
 
     getBonusText = () => {
-        return this.data.boostEffect.replace(/}/g, this.getBonus().toString())
+        return this.data.boostEffect.replace(/}/g, this.getBonus().toString());
     }
 
     static fromBase(data: PetUpgradeBase[]): PetUpgrade[] {

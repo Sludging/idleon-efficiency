@@ -854,7 +854,7 @@ function TalentDisplay({ player }: { player: Player }) {
                 })
             }
         </Box>
-    )
+    );
 }
 
 function PostOfficeDisplay({ player, extra }: { player: Player, extra: PostOfficeExtra }) {

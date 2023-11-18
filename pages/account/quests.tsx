@@ -183,7 +183,7 @@ function NPCQuests({ npc, playerInfo, playerQuestData }: { npc: NPC, playerInfo:
                 }
             </Box>
         </Box>
-    )
+    );
 }
 
 function Quests() {

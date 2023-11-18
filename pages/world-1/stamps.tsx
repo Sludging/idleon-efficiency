@@ -180,7 +180,7 @@ function StampDisplay({ stamp, index, highlight, storageAmount = 0 }: { stamp: S
                 </Box>
             </TipDisplay>
         </Box>
-    )
+    );
 }
 
 const HoverBox = styled(Box)`
