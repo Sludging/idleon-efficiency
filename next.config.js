@@ -18,9 +18,18 @@ const moduleExports = {
   images: {
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    domains: ['cdn.buymeacoffee.com', 'cdn.idleonefficiency.com', 'cdn2.idleonefficiency.com'],
     minimumCacheTTL: 604800,
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '*.idleonefficiency.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.buymeacoffee.com',
+      },
+    ],
   },
   sentry: {
     hideSourceMaps: true,
