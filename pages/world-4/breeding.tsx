@@ -27,7 +27,6 @@ import { TaskBoard } from '../../data/domain/tasks';
 import { GroupBy, GroupByFunction, nFormatter } from '../../data/utility';
 
 function PetDisplay() {
-    const [breeding, setBreeding] = useState<BreedingDomain>();
     const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
 
