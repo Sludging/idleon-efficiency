@@ -139,6 +139,8 @@ export default function Layout({
     children: React.ReactNode
 }) {
     const [profileDropDownOpen, setProfileDropDownOpen] = useState<boolean>(false);
+    const [lastUpdated, setLastUpdated] = useState<string>("Loading");
+    const [validState, setValidState] = useState<boolean>(false);
 
     const theme = useContext<ThemeType>(ThemeContext);
     const authData = useContext(AuthContext);
@@ -146,8 +148,10 @@ export default function Layout({
     const size = useContext(ResponsiveContext);
     const router = useRouter();
 
-    const validState = appContext.status == AppStatus.Ready;
-    const lastUpdated = appContext.data.getLastUpdated() as string;
+    useEffect(() => {
+        setValidState(appContext.status == AppStatus.Ready);
+        setLastUpdated(appContext.data.getLastUpdated() as string);
+    }, [appContext]);
 
     const navItems = [
         {
@@ -246,10 +250,10 @@ export default function Layout({
                     {validState &&
                         <Box direction="row" gap="xlarge" pad="medium">
                             {
-                                appContext.dataStatus == DataStatus.Loading && <Box align="center" justify='center' animation={'rotateRight'}><ArrowsClockwise color={normalizeColor("green-2", theme)} size={24} /></Box>
+                                [DataStatus.Init, DataStatus.Loading].includes(appContext.dataStatus) && <Box align="center" justify='center' animation={'rotateRight'}><ArrowsClockwise color={normalizeColor("green-2", theme)} size={24} /></Box>
                             }
                             {
-                                appContext.dataStatus != DataStatus.NoData && <TextAndLabel textColor='accent-3' textSize='xsmall' labelSize='xsmall' label='Last Updated' text={lastUpdated} />
+                                [DataStatus.LiveData, DataStatus.StaticData].includes(appContext.dataStatus) && <TextAndLabel textColor='accent-3' textSize='xsmall' labelSize='xsmall' label='Last Updated' text={lastUpdated} />
                             }
 
                             {
@@ -277,7 +281,7 @@ export default function Layout({
                                         onClick={() => setProfileDropDownOpen(true)}
                                         dropContent={
                                             <Box width="small" border={{ color: 'grey-1' }} round="small">
-                                                { appContext.dataStatus == DataStatus.LiveData && <Link href={'/profile/upload'} legacyBehavior>
+                                                {appContext.dataStatus == DataStatus.LiveData && <Link href={'/profile/upload'} legacyBehavior>
                                                     <Button onClick={() => setProfileDropDownOpen(false)} hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2">
                                                         <Box pad="small">Public Profile</Box>
                                                     </Button>

@@ -18,9 +18,10 @@ export enum AppStatus {
 }
 
 export enum DataStatus {
-  NoData,
+  Init,
   Loading,
   LiveData,
+  NoData,
   StaticData,
   MissingData,
 }
@@ -35,7 +36,7 @@ export interface AppState {
 export const AppContext = React.createContext<AppState>({
   data: new IdleonData(new Map(), new Date()),
   status: AppStatus.Init,
-  dataStatus: DataStatus.NoData,
+  dataStatus: DataStatus.Init,
   profile: ""
 });
 
@@ -53,7 +54,7 @@ export const AppProvider: React.FC<{ appLoading: boolean, data: { data: Map<stri
 
   const [idleonData, setData] = useState<IdleonData>(new IdleonData(baseAccountData, new Date()));
   const [appStatus, setAppStatus] = useState<AppStatus>(AppStatus.Ready);
-  const [dataStatus, setDataStatus] = useState<DataStatus>(DataStatus.NoData);
+  const [dataStatus, setDataStatus] = useState<DataStatus>(DataStatus.Init);
   const [fireStore, setFireStore] = useState<FirestoreData | undefined>(undefined);
   const authContext = useContext(AuthContext);
   const user = authContext?.user;
@@ -72,7 +73,7 @@ export const AppProvider: React.FC<{ appLoading: boolean, data: { data: Map<stri
     setDataStatus(DataStatus.StaticData);
   }, [appStatus, dataStatus]);
 
-  const handleLiveData = useCallback(async (cloudsave: Cloudsave, charNames: string[], serverVars: Record<string, any>) => {
+  const handleLiveData = async (cloudsave: Cloudsave, charNames: string[], serverVars: Record<string, any>) => {
     // TODO: FIX COMPANIONS
     setDataStatus(DataStatus.Loading);
     const newData = await updateIdleonData(idleonData.getData(), cloudsave, charNames, [], allItems, serverVars, false);
@@ -84,7 +85,7 @@ export const AppProvider: React.FC<{ appLoading: boolean, data: { data: Map<stri
       value: 1,
     });
     setDataStatus(DataStatus.LiveData);
-  }, [appStatus, dataStatus]);
+  };
 
   useEffect(() => {
     // Don't do anything while the auth is still being figured out.
