@@ -1,6 +1,6 @@
 import { Cloudsave } from "./cloudsave";
 import { ConstellationBase, initConstellationsRepo } from "./data/ConstellationsRepo";
-import { IParser } from "./idleonData";
+import { IParser, safeJsonParse } from "./idleonData";
 import { ConstellationModel } from "./model/constellationModel";
 import { Player } from "./player";
 
@@ -21,7 +21,7 @@ export const initConstellations = () => {
 
 const parseConstellations: IParser = function (raw: Cloudsave, data: Map<string, any>) { 
     const constellations = data.get("constellations") as Constellation[];
-    const constellationData = raw.get("SSprog") as any[][];
+    const constellationData = safeJsonParse(raw, "SSprog", []) as any[][];
 
     function playerLetterToIndex(letter: any){
         switch(letter){

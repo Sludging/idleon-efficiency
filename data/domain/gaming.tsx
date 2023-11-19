@@ -136,7 +136,7 @@ export const initGaming = () => {
 const parseGaming: IParser = function (raw: Cloudsave, data: Map<string, any>) {
     const gaming = data.get("gaming") as Gaming;
     const charCount = data.get("charCount") as number;
-    const gamingData = raw.get("Gaming") as any[] || [];
+    const gamingData = safeJsonParse(raw, "Gaming", []) as any[] || [];
     const gamingSproutData = safeJsonParse(raw, "GamingSprout", []) as number[][];
     const playerSkillLevels = range(0, charCount).map((_, i) => { return raw.get(`Lv0_${i}`) }) as number[][];
 

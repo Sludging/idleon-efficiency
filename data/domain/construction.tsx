@@ -68,7 +68,7 @@ export const initConstruction = () => {
 const parseConstruction: IParser = function (raw: Cloudsave, data: Map<string, any>) {
     const construction = data.get("construction") as Construction;
     const towerData = safeJsonParse(raw, "Tower", []) as number[];
-    const optionsList = raw.get("OptLacc");
+    const optionsList = data.get("OptLacc") as number[];
 
     construction.buildings.forEach((building) => {
         building.level = towerData[building.index];

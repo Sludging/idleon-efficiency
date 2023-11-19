@@ -140,7 +140,7 @@ const parseObols: IParser = function (raw: Cloudsave, data: Map<string, any>) {
     const allItems = data.get("itemsData") as Item[];
 
     range(0, charCount).forEach((_, playerIndex) => {
-        const playerObols = raw.get(`ObolEqO0_${playerIndex}`) as string[];
+        const playerObols = safeJsonParse(raw, `ObolEqO0_${playerIndex}`, []) as string[];
         const playerObolsMods = safeJsonParse(raw, `ObolEqMAP_${playerIndex}`, {}) as Record<number, StoneProps>;
         const playerObolArray: Obol[] = [];
         const playerStats = new ObolStats();
@@ -159,7 +159,7 @@ const parseObols: IParser = function (raw: Cloudsave, data: Map<string, any>) {
         obols.playerStats.push(playerStats);
     })
 
-    const familyObols = raw.get(`ObolEqO1`) as string[];
+    const familyObols = safeJsonParse(raw, `ObolEqO1`, []) as string[];
     const familyObolsMods = safeJsonParse(raw, 'ObolEqMAPz1', {}) as Record<number, StoneProps>;
     familyObols.forEach((obol, obolIndex) => {
         let itemInfo = allItems.find(item => item.internalName == obol)?.duplicate() ?? Item.emptyItem(obol);
@@ -172,7 +172,7 @@ const parseObols: IParser = function (raw: Cloudsave, data: Map<string, any>) {
         })
     });
 
-    const inventory = raw.get(`ObolInvOr`) as Record<string, string>[];
+    const inventory = safeJsonParse(raw, `ObolInvOr`, {}) as Record<string, string>[];
     inventory.forEach((typeInventory, index) => {
         const tabModifications = safeJsonParse(raw, `ObolInvMAP_${index}`, {}) as Record<string, string>[];
         obols.inventory.set(index as ObolType, []);

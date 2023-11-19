@@ -15,7 +15,7 @@ import { SkillsIndex } from './SkillsIndex';
 import { Sailing } from './sailing';
 import { TaskBoard } from './tasks';
 import { Rift } from './rift';
-import { IParser } from './idleonData';
+import { IParser, safeJsonParse } from './idleonData';
 import { Cloudsave } from './cloudsave';
 
 export enum CauldronIndex {
@@ -548,8 +548,9 @@ export const initAlchemy = (allItems: Item[]) => {
 
 const parseAlchemy: IParser = function (raw: Cloudsave, data: Map<string, any>) {
     const alchemy = data.get("alchemy") as Alchemy;
-    const alchemyData = raw.get("CauldronInfo") as Map<string, number>[];
-    const boostLevels = raw.get("CauldUpgLVs") as number[];
+    // Must stay as raw
+    const alchemyData = safeJsonParse(raw, "CauldronInfo", {}) as Map<string, number>[];
+    const boostLevels = safeJsonParse(raw, "CauldUpgLVs", []) as number[];
 
     alchemyData.forEach((indexData, index) => {
         // Handle cauldrons if the first 4 arrays of data

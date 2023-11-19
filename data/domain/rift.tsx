@@ -231,7 +231,7 @@ const parseRift: IParser = function (raw: Cloudsave, data: Map<string, any>) {
     const rift = data.get("rift") as Rift;
     const charCount = data.get("charCount") as number;
 
-    const riftData = raw.get("Rift") as number[];
+    const riftData = safeJsonParse(raw, "Rift", []) as number[];
     const playerSkillLevels = range(0, charCount).map((_, i) => { return raw.get(`Lv0_${i}`) }) as number[][];
     const towerData = safeJsonParse(raw, "Tower", []) as number[];
 

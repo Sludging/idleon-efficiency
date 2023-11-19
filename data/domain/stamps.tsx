@@ -5,7 +5,7 @@ import { AtomCollider } from './atomCollider';
 import { Bribe, BribeConst, BribeStatus } from './bribes';
 import { Capacity } from './capacity';
 import { Cloudsave } from './cloudsave';
-import { IParser } from './idleonData';
+import { IParser, safeJsonParse } from './idleonData';
 import { ImageData } from './imageData';
 import { Item } from './items';
 import { Lab } from './lab';
@@ -256,8 +256,8 @@ const convertToItemClass = (stamps: Stamp[][], allItems: Item[]) => {
 
 const parseStamps: IParser = function (raw: Cloudsave, data: Map<string, any>) {
     const stamps = data.get("stamps");
-    const stampLevels = raw.get("StampLv") as any[];
-    const stampMaxLevels = raw.get("StampLvM") as any[];
+    const stampLevels = safeJsonParse(raw, "StampLv", []) as any[];
+    const stampMaxLevels = safeJsonParse(raw, "StampLvM", []) as any[];
     
     if (stampLevels) {
         stampLevels.forEach((tab, index) => { // for each tab in the cloud save

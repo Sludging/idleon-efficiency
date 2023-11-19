@@ -31,9 +31,9 @@ const parseStorage: IParser = function (raw: Cloudsave, data: Map<string, any>) 
     const allItems = data.get("itemsData") as Item[];
     const charCount = data.get("charCount") as number;
 
-    const chestOrder = raw.get("ChestOrder") as string[];
-    const chestQuantity = raw.get("ChestQuantity") as number[];
-    const storageInvUsed = raw.get("InvStorageUsed") as Record<string, number>;
+    const chestOrder = safeJsonParse(raw, "ChestOrder", []) as string[];
+    const chestQuantity = safeJsonParse(raw, "ChestQuantity", []) as number[];
+    const storageInvUsed = safeJsonParse(raw, "InvStorageUsed", {}) as Record<string, number>;
 
     chestOrder.forEach((item, index) => {
         const itemData = allItems.find(x => x.internalName == item)?.duplicate() ?? Item.emptyItem(item);
@@ -43,8 +43,8 @@ const parseStorage: IParser = function (raw: Cloudsave, data: Map<string, any>) 
 
     range(0, charCount).forEach((_, index) => {
         let playerInventory: Item[] = [];
-        const inventoryOrder: string[] = raw.get(`InventoryOrder_${index}`);
-        const inventoryQuantity: number[] = raw.get(`ItemQTY_${index}`);
+        const inventoryOrder: string[] = safeJsonParse(raw, `InventoryOrder_${index}`, []);
+        const inventoryQuantity: number[] = safeJsonParse(raw, `ItemQTY_${index}`, []);
         const stoneData: Record<number,StoneProps> = safeJsonParse(raw, `IMm_${index}`, {}); 
         inventoryOrder.forEach((item, index) => {
             const itemData = allItems.find(x => x.internalName == item)?.duplicate() ?? Item.emptyItem(item);
@@ -61,7 +61,7 @@ const parseStorage: IParser = function (raw: Cloudsave, data: Map<string, any>) 
     })
 
     storage.storageChestsUsed = storageInvUsed;
-    storage.money = raw.get("MoneyBANK");
+    storage.money = safeJsonParse(raw, "MoneyBANK", 0);
 
     data.set("storage", storage);
 }

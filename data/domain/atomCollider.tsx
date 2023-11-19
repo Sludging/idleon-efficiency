@@ -6,7 +6,7 @@ import { Alchemy } from './alchemy';
 import { ImageData } from './imageData';
 import { nFormatter, range } from '../utility';
 import { TaskBoard } from './tasks';
-import { IParser } from './idleonData';
+import { IParser, safeJsonParse } from './idleonData';
 import { Cloudsave } from './cloudsave';
 
 export class Atom {
@@ -145,8 +145,8 @@ export const initAtomCollider = () => {
 
 const parseAtomCollider: IParser = function (raw: Cloudsave, data: Map<string, any>) {
     const collider = data.get("collider") as AtomCollider;
-    const atomsData = raw.get("Atoms") as number[] || [];
-    const divinityData = raw.get("Divinity") as number[] || [];
+    const atomsData = safeJsonParse(raw, "Atoms", []) as number[] || [];
+    const divinityData = safeJsonParse(raw, "Divinity", []) as number[] || [];
 
     collider.atoms.forEach(atom => {
         atom.level = atomsData[atom.index] ?? 0;

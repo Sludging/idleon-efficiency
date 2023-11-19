@@ -47,11 +47,15 @@ import parseCompanions, { updateCompanionImpact } from './companions';
 import parsePostOfficeExtra from './postoffice';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
+    const data = doc.get(key);
     try {
-        return JSON.parse(doc.get(key))
+        if (typeof(data) === "string") {
+            return JSON.parse(doc.get(key))
+        }
+        return data;
     }
     catch (e) {
-        //console.debug(key, doc.get(key), e)
+        console.debug(key, doc.get(key), e)
     }
     return emptyValue;
 }

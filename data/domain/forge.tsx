@@ -1,7 +1,7 @@
 import { lavaFunc, range } from "../utility";
 import { Cloudsave } from "./cloudsave";
 import { GemStore } from "./gemPurchases";
-import { IParser } from "./idleonData";
+import { IParser, safeJsonParse } from "./idleonData";
 import { Item } from "./items";
 
 const getDescRegex = () => { return /Smelt down (?<ores>\d+) Ores into 1 Bar at the Forge. Smelting will take (?<cooldown>\d+) Seconds per Bar using Forge Slot 1./g; };
@@ -162,10 +162,10 @@ export const initForge = () => {
 
 const parseForge: IParser = function (raw: Cloudsave, data: Map<string, any>) {
     const forge = data.get("forge") as Forge;
-    const forgeItemQuantity = raw.get("ForgeItemQty") as number[];
-    const forgeProgress = raw.get("ForgeIntProg") as number[];
-    const forgeItemOrder = raw.get("ForgeItemOrder") as string[];
-    const forgeLevels = raw.get("ForgeLV") as number[];
+    const forgeItemQuantity = safeJsonParse(raw, "ForgeItemQty", []) as number[];
+    const forgeProgress = safeJsonParse(raw, "ForgeIntProg", []) as number[];
+    const forgeItemOrder = safeJsonParse(raw, "ForgeItemOrder", []) as string[];
+    const forgeLevels = safeJsonParse(raw, "ForgeLV", []) as number[];
     const allItems = data.get("itemsData") as Item[];
 
     forgeLevels.forEach((level, index) => {

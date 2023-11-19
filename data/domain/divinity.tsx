@@ -3,7 +3,7 @@ import { Alchemy } from "./alchemy";
 import { Cloudsave } from "./cloudsave";
 import { initDivinityStyleRepo } from "./data/DivinityStyleRepo";
 import { GodInfoBase, initGodInfoRepo } from "./data/GodInfoRepo";
-import { IParser } from "./idleonData";
+import { IParser, safeJsonParse } from "./idleonData";
 import { ImageData } from "./imageData";
 import { DivinityStyleModel } from "./model/divinityStyleModel";
 import { GodInfoModel } from "./model/godInfoModel";
@@ -112,7 +112,7 @@ export const initDivinity = () => {
 const parseDivinity: IParser = function (raw: Cloudsave, data: Map<string, any>) {
     const divinity = data.get("divinity") as Divinity;
     const charCount = data.get("charCount") as number;
-    const divinityData = raw.get("Divinity") as number[] || [];
+    const divinityData = safeJsonParse(raw, "Divinity", []) as number[] || [];
     const afkTarget = range(0,charCount).map((_, index) => raw.get(`AFKtarget_${index}`)) as string[];
     const talentLevels = range(0,charCount).map((_, index) => raw.get(`SL_${index}`)) as string[];
 

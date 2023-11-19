@@ -3,7 +3,7 @@ import { Arcade } from "./arcade";
 import { Cloudsave } from "./cloudsave";
 import { Construction, Library } from "./construction";
 import { AFKTypeEnum } from "./enum/aFKTypeEnum";
-import { IParser } from "./idleonData";
+import { IParser, safeJsonParse } from "./idleonData";
 import { Item } from "./items";
 import { Activity, Player } from "./player";
 import { Quests } from "./quests";
@@ -55,6 +55,12 @@ export class Miniboss {
     currentCount: number = 0;
     daysToNext: number = 0;
     constructor(public bossInternalName: string, public daysSinceLastKill: number) {
+        this.currentCount = this.getCurrentCount();
+        this.daysToNext = this.getDaysToNext();
+    }
+
+    setDaysSinceLastKill = (daysSinceKill: number) => {
+        this.daysSinceLastKill = daysSinceKill;
         this.currentCount = this.getCurrentCount();
         this.daysToNext = this.getDaysToNext();
     }
@@ -149,7 +155,7 @@ const parseAccount: IParser = function (raw: Cloudsave, data: Map<string, any>) 
     const account = data.get("account") as Account;
     const allItems = data.get("itemsData") as Item[];
     const optionList = data.get("OptLacc") as number[];
-    const keyData = raw.get("CYKeysAll") as number[];
+    const keyData = safeJsonParse(raw, "CYKeysAll", []) as number[];
 
     keyData.forEach((keyCount, keyIndex) => {
         const keyItem = account.keys.find(key => key.item.internalName == `Key${keyIndex + 1}`)
@@ -158,16 +164,16 @@ const parseAccount: IParser = function (raw: Cloudsave, data: Map<string, any>) 
         }
     })
 
-    account.coloTickets.count = raw.get("CYColosseumTickets") as number;
+    account.coloTickets.count = safeJsonParse(raw, "CYColosseumTickets", 0) as number;
 
     account.miniBosses.forEach(boss => {
         // W3 Mini Boss
         if (boss.bossInternalName == "mini3a") {
-            boss.currentCount = optionList[96] as number || 0;
+            boss.setDaysSinceLastKill(optionList[96] as number || 0);
         } 
         // W4 Mini Boss
         if (boss.bossInternalName == "mini4a") {
-            boss.currentCount = optionList[98] as number || 0;
+            boss.setDaysSinceLastKill(optionList[98] as number || 0);
         } 
     })
 

@@ -2,7 +2,7 @@ import { IDforCardBonus, IDforCardSETbonus } from "../maps";
 import { Cloudsave } from "./cloudsave";
 import { CardDataBase, initCardRepo } from "./data/CardRepo";
 import { EnemyInfo } from "./enemies";
-import { IParser } from "./idleonData";
+import { IParser, safeJsonParse } from "./idleonData";
 import { ImageData } from "./imageData";
 import { CardDataModel } from "./model/cardDataModel";
 import { Player } from "./player";
@@ -122,7 +122,7 @@ export const initCards = () => {
 }
 
 const parseCards: IParser = function (raw: Cloudsave, data: Map<string, any>) {
-    const cardData = raw.get("Cards0") as Record<string, number>;
+    const cardData = safeJsonParse(raw, "Cards0", {}) as Record<string, number>;
     const cards = data.get("cards") as Card[];
 
     cards.forEach(card => {

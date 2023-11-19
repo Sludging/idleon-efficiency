@@ -1,6 +1,6 @@
 import { ImageData } from "./imageData";
 import { initAchievementRepo, AchievementBase } from './data/AchievementRepo';
-import { IParser } from "./idleonData";
+import { IParser, safeJsonParse } from "./idleonData";
 import { Cloudsave } from "./cloudsave";
 export const AchievementConst = {
     SmartBoiIndex: 108,
@@ -565,8 +565,8 @@ export const initAchievements = () => {
 
 const parseAchievements: IParser = function (raw: Cloudsave, data: Map<string, any>) {
     const achievements = data.get("achievements") as Achievement[];
-    const achiData = raw.get("AchieveReg") as number[];
-    const steamData = raw.get("SteamAchieve") as number[];
+    const achiData = safeJsonParse(raw, "AchieveReg", []) as number[];
+    const steamData = safeJsonParse(raw, "SteamAchieve", []) as number[];
 
     achievements.forEach((achievement, index) => {
         achievement.completed = achiData[index] == -1;

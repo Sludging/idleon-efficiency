@@ -1,6 +1,6 @@
 import { Cloudsave } from "./cloudsave";
 import { BribeBase, initBribeRepo } from "./data/BribeRepo";
-import { IParser } from "./idleonData";
+import { IParser, safeJsonParse } from "./idleonData";
 
 export const BribeConst = {
     StampBribe: 0
@@ -36,7 +36,7 @@ export const initBribes = () => {
 
 const parseBribes: IParser = function (raw: Cloudsave, data: Map<string, any>) {
     const bribes = data.get("bribes") as Bribe[];
-    const bribesData = raw.get("BribeStatus") as number[];
+    const bribesData = safeJsonParse(raw, "BribeStatus", []) as number[];
 
     bribesData.forEach((bribe, index) => {
         if (index < bribes.length) { // ignore future values
