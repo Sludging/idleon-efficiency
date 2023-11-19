@@ -214,9 +214,9 @@ function PrayerDisplay() {
     return (
         <Box gap="medium">
             {
-                Array.from(GroupByFunction(prayers.filter(prayer => prayer.data.name != "Some Prayer Name0"), function (base: PrayerBase) { return base.data.unlockZone }).entries()).map(([tower, prayers], index) => (
+                Array.from(GroupByFunction(prayers.filter(prayer => prayer.data.name != "Some Prayer Name0"), function (base: PrayerBase) { return base.data.unlockZone }).entries()).map(([_, prayers], index) => (
                     <Box key={index} gap="small">
-                        <Text>{tower.data.unlockZone}</Text>
+                        <Text>{prayers[0].data.unlockZone}</Text>
                         {
                             prayers.map((prayer, index) => {
                                 const amountInStorage = storage?.amountInStorage(prayer.data.soul) ?? 0;
