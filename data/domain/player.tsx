@@ -669,33 +669,6 @@ export const updatePlayerDeathnote = (data: Map<string, any>) => {
     })
 }
 
-export const updatePlayerStarSigns = (data: Map<string, any>) => {
-    const players = data.get("players") as Player[];
-    const rift = data.get("rift") as Rift;
-
-    const infiniteBonus = rift.bonuses.find(bonus => bonus.name == "Infinite Stars") as InfiniteStarsBonus;
-    const infiniteStars = infiniteBonus.getBonus();
-
-    Object.entries(StarSignMap).slice(0, infiniteStars).forEach(([_, starSign]) => {
-        players.forEach(player => {
-            // If player isn't manually aligned to this sign, add it
-            if (!player.starSigns.find(sign => sign.name == starSign.name)) {
-                player.starSigns.push(starSign.duplicate(true));
-            }
-        })
-    })
-}
-
-export const updatePlayerDeathnote = (data: Map<string, any>) => {
-    const players = data.get("players") as Player[];
-    const deathnote = data.get("deathnote") as Deathnote;
-
-    // Track player deathnote data on the player object as well.
-    players.forEach(player => {
-        player.killInfo = deathnote.playerKillsByMap.get(player.playerID)!;
-    })
-}
-
 export const updatePlayers = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const obols = data.get("obols") as ObolsData;
