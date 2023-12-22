@@ -122,7 +122,7 @@ function SkillMasteryDisplay() {
                                         {
                                             players.map((player, index) => (
                                                 <Box key={index} margin={{ bottom: 'xsmall' }}>
-                                                    <Text size="small">{player.playerName}: Lv {player.skills.get(skillIndex)!.level}</Text>
+                                                    <Text size="small">{player.playerName}: Lv {player.skills.get(skillIndex)?.level ?? 0}</Text>
                                                 </Box>
                                             ))
                                         }

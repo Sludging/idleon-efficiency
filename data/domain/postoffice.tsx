@@ -1,8 +1,8 @@
 import { lavaFunc } from '../utility'
-import { Cloudsave } from './cloudsave';
+import { Domain, RawData } from './base/domain';
 import { initPostOfficeUpgradesRepo, PostOfficeUpgradesBase } from './data/PostOfficeUpgradesRepo';
-import { IParser, safeJsonParse } from './idleonData';
 import { ImageData } from './imageData';
+import { Item } from './items';
 import { PostOfficeUpgradeModel } from './model/postOfficeUpgradeModel';
 
 // PostOfficeInfo0 - The current deliverables
@@ -15,12 +15,6 @@ export const PostOfficeConst = {
     BlacksmithBoxIndex: 5,
     MaxBoxLevel: 400,
     NonPredatoryBoxIndex: 11
-}
-
-export interface PostOfficeExtra {
-    complete: number,
-    misc: number,
-    streak: number
 }
 
 export class BoxBonus {
@@ -59,16 +53,32 @@ export class Box {
     }
 }
 
-export const initPostOffice = () => Box.fromBase(initPostOfficeUpgradesRepo());
+export class POExtra extends Domain {
+    complete: number = 0;
+    streak: number = 0;
+    misc: number = 0;
 
-const parsePostOfficeExtra: IParser = function (raw: Cloudsave, data: Map<string, any>) {
-    const extra = data.get("POExtra") as PostOfficeExtra;
-    
-    extra.streak = safeJsonParse(raw, "CYDeliveryBoxStreak", 0) as number;
-    extra.complete = safeJsonParse(raw, "CYDeliveryBoxComplete", 0) as number;
-    extra.misc = safeJsonParse(raw, "CYDeliveryBoxMisc", 0) as number;
+    getRawKeys(): RawData[] {
+        return [
+            {key: "CYDeliveryBoxStreak", perPlayer: false, default: 0},
+            {key: "CYDeliveryBoxComplete", perPlayer: false, default: 0},
+            {key: "CYDeliveryBoxMisc", perPlayer: false, default: 0},
+        ]
+    }
 
-    data.set("POExtra", extra);
+    init(allItems: Item[], charCount: number) {
+        return this;
+    }
+
+    parse(data: Map<string, any>): void {
+        const poextra = data.get(this.getDataKey()) as POExtra;
+        
+        poextra.streak = data.get("CYDeliveryBoxStreak") as number;
+        poextra.complete = data.get("CYDeliveryBoxComplete") as number;
+        poextra.misc = data.get("CYDeliveryBoxMisc") as number;
+
+        data.set("POExtra", poextra);
+    }
 }
 
-export default parsePostOfficeExtra;
+export const initPostOffice = () => Box.fromBase(initPostOfficeUpgradesRepo());

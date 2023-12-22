@@ -1,10 +1,9 @@
 import { range } from "../utility";
-import { Cloudsave } from "./cloudsave";
-import { IParser, safeJsonParse } from "./idleonData";
+import { Domain, RawData } from "./base/domain";
 import { Item, StoneProps } from "./items";
 import { Refinery, RefineryStorage } from "./refinery";
 
-export class Storage {
+export class Storage extends Domain {
     chest: Item[] = []
     playerStorage: Item[][] = [];
     refinery: RefineryStorage[] = []
@@ -15,55 +14,69 @@ export class Storage {
         let finalCount = 0;
 
         finalCount += this.chest.reduce((sum, item) => sum += item.internalName == itemName ? item.count : 0, 0);
-        finalCount += this.playerStorage.reduce((sum, player) => sum += player.reduce((sum,item) => sum += item.internalName == itemName ? item.count : 0, 0), 0);
+        finalCount += this.playerStorage.reduce((sum, player) => sum += player.reduce((sum, item) => sum += item.internalName == itemName ? item.count : 0, 0), 0);
         finalCount += this.refinery.find(item => item.name == itemName)?.quantity ?? 0;
 
         return finalCount;
     }
-}
 
-export const initStorage = () => {
-    return new Storage();
-}
+    getRawKeys(): RawData[] {
+        return [
+            { key: "ChestOrder", perPlayer: false, default: [] },
+            { key: "ChestQuantity", perPlayer: false, default: [] },
+            { key: "InvStorageUsed", perPlayer: false, default: {} },
+            { key: "MoneyBANK", perPlayer: false, default: 0 },
+            { key: "InventoryOrder_", perPlayer: true, default: [] },
+            { key: "ItemQTY_", perPlayer: true, default: [] },
+            { key: "IMm_", perPlayer: true, default: {} },
+        ]
+    }
 
-const parseStorage: IParser = function (raw: Cloudsave, data: Map<string, any>) {
-    const storage = data.get("storage") as Storage;
-    const allItems = data.get("itemsData") as Item[];
-    const charCount = data.get("charCount") as number;
+    init(allItems: Item[], charCount: number) {
+        return this;
+    }
 
-    const chestOrder = safeJsonParse(raw, "ChestOrder", []) as string[];
-    const chestQuantity = safeJsonParse(raw, "ChestQuantity", []) as number[];
-    const storageInvUsed = safeJsonParse(raw, "InvStorageUsed", {}) as Record<string, number>;
+    parse(data: Map<string, any>): void {
+        const storage = data.get(this.getDataKey()) as Storage;
+        const allItems = data.get("itemsData") as Item[];
+        const charCount = data.get("charCount") as number;
 
-    chestOrder.forEach((item, index) => {
-        const itemData = allItems.find(x => x.internalName == item)?.duplicate() ?? Item.emptyItem(item);
-        itemData.count = chestQuantity[index];
-        storage.chest.push(itemData);
-    });
+        const chestOrder = data.get("ChestOrder") as string[];
+        const chestQuantity = data.get("ChestQuantity") as number[];
+        const storageInvUsed = data.get("InvStorageUsed") as Record<string, number>;
 
-    range(0, charCount).forEach((_, index) => {
-        let playerInventory: Item[] = [];
-        const inventoryOrder: string[] = safeJsonParse(raw, `InventoryOrder_${index}`, []);
-        const inventoryQuantity: number[] = safeJsonParse(raw, `ItemQTY_${index}`, []);
-        const stoneData: Record<number,StoneProps> = safeJsonParse(raw, `IMm_${index}`, {}); 
-        inventoryOrder.forEach((item, index) => {
+        // Chest data has no "persistence", so we reset the previous data.
+        storage.chest = [];
+        chestOrder.forEach((item, index) => {
             const itemData = allItems.find(x => x.internalName == item)?.duplicate() ?? Item.emptyItem(item);
-            itemData.count = inventoryQuantity[index];
-            playerInventory.push(itemData);
+            itemData.count = chestQuantity[index];
+            storage.chest.push(itemData);
         });
 
-        Object.entries(stoneData).forEach(([location, data]) => {
-            const asNumber = Number(location);
-            playerInventory[asNumber].addStone(data);
-        });
+        // Player storage data has no "persistence", so we reset the previous data.
+        storage.playerStorage = [];
+        range(0, charCount).forEach((_, index) => {
+            let playerInventory: Item[] = [];
+            const inventoryOrder: string[] = data.get(`InventoryOrder_${index}`);
+            const inventoryQuantity: number[] = data.get(`ItemQTY_${index}`);
+            const stoneData: Record<number, StoneProps> = data.get(`IMm_${index}`);
+            inventoryOrder.forEach((item, index) => {
+                const itemData = allItems.find(x => x.internalName == item)?.duplicate() ?? Item.emptyItem(item);
+                itemData.count = inventoryQuantity[index];
+                playerInventory.push(itemData);
+            });
 
-        storage.playerStorage.push(playerInventory);
-    })
+            Object.entries(stoneData).forEach(([location, data]) => {
+                const asNumber = Number(location);
+                playerInventory[asNumber].addStone(data);
+            });
 
-    storage.storageChestsUsed = storageInvUsed;
-    storage.money = safeJsonParse(raw, "MoneyBANK", 0);
+            storage.playerStorage.push(playerInventory);
+        })
 
-    data.set("storage", storage);
+        storage.storageChestsUsed = storageInvUsed;
+        storage.money = data.get("MoneyBANK");
+    }
 }
 
 export const updateStorage = (data: Map<string, any>) => {
@@ -74,5 +87,3 @@ export const updateStorage = (data: Map<string, any>) => {
 
     return storage;
 }
-
-export default parseStorage;

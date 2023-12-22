@@ -2,10 +2,9 @@ import { lavaFunc, range } from '../utility'
 import { Account } from './account';
 import { Alchemy } from './alchemy';
 import { AtomCollider } from './atomCollider';
+import { Domain, RawData } from './base/domain';
 import { Bribe, BribeConst, BribeStatus } from './bribes';
 import { Capacity } from './capacity';
-import { Cloudsave } from './cloudsave';
-import { IParser, safeJsonParse } from './idleonData';
 import { ImageData } from './imageData';
 import { Item } from './items';
 import { Lab } from './lab';
@@ -229,51 +228,64 @@ export class Stamp {
     }
 }
 
+export class Stamps extends Domain {
+    constructor(public dataKey: string) {
+        super(dataKey);
+    }
+    
+    init = (allItems: Item[]) => {
+        const stampItems = allItems.filter(item => isStampItem(item.data.item));
+        const allStamps = Stamp.fromBase(stampItems);
+        const combat_stamp = allStamps.filter(stamp => stamp.type == "Combat Stamp");
+        const skills_stamp = allStamps.filter(stamp => stamp.type == "Skills Stamp");
+        const misc_stamp = allStamps.filter(stamp => stamp.type == "Misc Stamp");
+    
+        convertToItemClass([combat_stamp, skills_stamp, misc_stamp], allItems);
+
+        return [combat_stamp, skills_stamp, misc_stamp];
+    }
+
+    parse = (data: Map<string, any>) => {
+        const stamps = data.get(this.getDataKey());
+        const stampLevels = data.get("StampLv") as any[] // safeJsonParse(raw, "StampLv", []) as any[];
+        const stampMaxLevels = data.get("StampLvM") as any[] // safeJsonParse(raw, "StampLvM", []) as any[];
+        
+        if (stampLevels) {
+            stampLevels.forEach((tab, index) => { // for each tab in the cloud save
+                Object.entries(tab).map(([key, value]) => { // for each stamp in the current tab
+                    if (key.toLowerCase() !== "length") {  // ignore length at the end
+                        try {
+                            stamps[index][parseInt(key)].level = Number(value); // update our pre-populated data with the stamp level
+                            stamps[index][parseInt(key)].maxLevel = Number(stampMaxLevels[index][key]);
+                        }
+                        catch (e) {
+                            console.debug("Unable to set level for stamp", key);
+                        }
+                    }
+                })
+            })
+        }
+    }
+
+    getRawKeys(): RawData[] {
+        return [
+            { key: "StampLv", default: [], perPlayer: false},
+            { key: "StampLvM", default: [], perPlayer: false},
+        ]
+    }
+}
+
 export const getStampBonusForKey = (stamps: Stamp[][], key: string) => {
     return stamps.flatMap(tab => tab).filter(stamp => stamp.data.effect == key).reduce((sum, stamp) => sum += stamp.getBonus(), 0);
 }
 
 const isStampItem = (x: BaseItemModel): x is StampItemModel => "stampData" in x
 
-export const initStamps = (allItems: Item[]): Stamp[][] => {
-    const stampItems = allItems.filter(item => isStampItem(item.data.item));
-    const allStamps = Stamp.fromBase(stampItems);
-    const combat_stamp = allStamps.filter(stamp => stamp.type == "Combat Stamp");
-    const skills_stamp = allStamps.filter(stamp => stamp.type == "Skills Stamp");
-    const misc_stamp = allStamps.filter(stamp => stamp.type == "Misc Stamp");
-
-    convertToItemClass([combat_stamp, skills_stamp, misc_stamp], allItems);
-
-    return [combat_stamp, skills_stamp, misc_stamp]
-}
-
 const convertToItemClass = (stamps: Stamp[][], allItems: Item[]) => {
     stamps.flatMap(tab => tab).forEach(stamp => {
         const matItem = allItems.find(item => item.internalName == stamp.data.material.item)?.duplicate() ?? Item.emptyItem(stamp.data.material.item);
         stamp.materialItem = matItem;
     });
-}
-
-const parseStamps: IParser = function (raw: Cloudsave, data: Map<string, any>) {
-    const stamps = data.get("stamps");
-    const stampLevels = safeJsonParse(raw, "StampLv", []) as any[];
-    const stampMaxLevels = safeJsonParse(raw, "StampLvM", []) as any[];
-    
-    if (stampLevels) {
-        stampLevels.forEach((tab, index) => { // for each tab in the cloud save
-            Object.entries(tab).map(([key, value]) => { // for each stamp in the current tab
-                if (key.toLowerCase() !== "length") {  // ignore length at the end
-                    try {
-                        stamps[index][parseInt(key)].level = Number(value); // update our pre-populated data with the stamp level
-                        stamps[index][parseInt(key)].maxLevel = Number(stampMaxLevels[index][key]);
-                    }
-                    catch (e) {
-                        console.debug("Unable to set level for stamp", key);
-                    }
-                }
-            })
-        })
-    }
 }
 
 export function updateStamps(data: Map<string, any>) {
@@ -370,5 +382,3 @@ export function updateStampMaxCarry(data: Map<string, any>) {
 
     return stamps;
 }
-
-export default parseStamps;

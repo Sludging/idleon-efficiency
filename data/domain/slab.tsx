@@ -1,16 +1,21 @@
-import { Cloudsave } from './cloudsave';
+import { Domain, RawData } from './base/domain';
 import { initSlabItemSortRepo } from './data/SlabItemSortRepo';
-import { IParser, safeJsonParse } from './idleonData';
 import { Item } from './items'
 
-export class Slab {
-    obtainableItems: Item[];
+export class Slab extends Domain {
+    obtainableItems: Item[] = [];
     // Keeping track of the raw number from cloudsave because it has fake items and therefore doesn't match up with our "realistic" obtainableItems array.
     rawObtainedCount: number = 0;
     // Keeping track of the max possible slab items to make it easy to display.
     obtainableCount: number = 0;
 
-    constructor(allItems: Item[]) {
+    getRawKeys(): RawData[] {
+        return [
+            {key: "Cards1", perPlayer: false, default: []}
+        ]
+    }
+
+    init(allItems: Item[], charCount: number) {
         this.obtainableItems = allItems.filter(item => item.data.slabSort != undefined);
 
         // Sort all items based on slab sort to match up the game better.
@@ -19,6 +24,38 @@ export class Slab {
             const item2Order = slabItems.find(item => item.item == item2.internalName)?.order ?? 0;
             return item1Order > item2Order ? 1 : -1;
         });
+
+        return this;
+    }
+
+    parse(data: Map<string, any>): void {
+        const slab = data.get(this.getDataKey()) as Slab;
+        const rawItems = data.get("Cards1") as string[];
+
+        // Clean up items that shouldn't be here, happens on older profiles.
+        const lootedInfo = rawItems.filter(item =>
+            item.indexOf("Cards") == -1 &&
+            item.indexOf("SailTr") == -1 &&
+            item != "Bits" &&
+            item.indexOf("Spice") == -1
+        )
+
+        slab.obtainableItems.forEach(item => {
+            item.obtained = lootedInfo.includes(item.internalName);
+        })
+
+        // All Items doesn't contain certain things that don't naturally drop (refinery books / anvil recipes etc). So add them in as fake items
+        lootedInfo.forEach(looted => {
+            if (slab.obtainableItems.findIndex(item => item.internalName == looted) == -1 && slabItems.map(item => item.item).includes(looted)) {
+                const fakeItem = Item.emptyItem(looted);
+                fakeItem.obtained = true;
+                slab.obtainableItems.push(fakeItem);
+            }
+        })
+
+        // Keep track of raw data for easy access in the UI and maths.
+        slab.rawObtainedCount = lootedInfo.length;
+        slab.obtainableCount = slabItems.length;
     }
 }
 
@@ -95,41 +132,3 @@ export const customHandCraftedListOfUnobtainableItems = [
     "EquipmentCape7",
     "Trophy7",
 ];
-
-export const initSlab = (allItems: Item[]) => {
-    return new Slab(allItems);
-}
-
-const parseSlab: IParser = function (raw: Cloudsave, data: Map<string, any>) {
-    const slab = data.get("slab") as Slab;
-    const rawItems = safeJsonParse(raw, "Cards1", []) as string[];
-
-    // Clean up items that shouldn't be here, happens on older profiles.
-    const lootedInfo = rawItems.filter(item =>
-        item.indexOf("Cards") == -1 &&
-        item.indexOf("SailTr") == -1 &&
-        item != "Bits" &&
-        item.indexOf("Spice") == -1
-    )
-
-    slab.obtainableItems.forEach(item => {
-        item.obtained = lootedInfo.includes(item.internalName);
-    })
-
-    // All Items doesn't contain certain things that don't naturally drop (refinery books / anvil recipes etc). So add them in as fake items
-    lootedInfo.forEach(looted => {
-        if (slab.obtainableItems.findIndex(item => item.internalName == looted) == -1 && slabItems.map(item => item.item).includes(looted)) {
-            const fakeItem = Item.emptyItem(looted);
-            fakeItem.obtained = true;
-            slab.obtainableItems.push(fakeItem);
-        }
-    })
-
-    // Keep track of raw data for easy access in the UI and maths.
-    slab.rawObtainedCount = lootedInfo.length;
-    slab.obtainableCount = slabItems.length;
-
-    data.set("slab", slab);
-}
-
-export default parseSlab;

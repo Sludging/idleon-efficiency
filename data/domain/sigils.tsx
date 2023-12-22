@@ -1,12 +1,11 @@
 import { Achievement } from "./achievements";
-import { Cloudsave } from "./cloudsave";
+import { Domain, RawData } from "./base/domain";
 import { initSigilRepo, SigilBase } from "./data/SigilRepo";
 import { GemStore } from "./gemPurchases";
-import { IParser, safeJsonParse } from "./idleonData";
 import { ImageData } from "./imageData";
+import { Item } from "./items";
 import { SigilModel } from "./model/sigilModel";
 import { Sailing } from "./sailing";
-import { Artifact } from "./sailing/artifacts";
 
 export class Sigil {
     progress: number = 0
@@ -16,7 +15,7 @@ export class Sigil {
 
     artifactBoost: number = 0;
 
-    constructor(public index: number, public data: SigilModel) {}
+    constructor(public index: number, public data: SigilModel) { }
 
     getImageData = (): ImageData => {
 
@@ -42,43 +41,46 @@ export class Sigil {
 }
 
 
-export class Sigils {
-    sigils: Sigil[];
+export class Sigils extends Domain {
+    sigils: Sigil[] = [];
 
     chargeSpeed: number = 0;
 
-    setSigilSpeed = (achievBonus112: number, gemStoreBonus110: number, ) => {
+    setSigilSpeed = (achievBonus112: number, gemStoreBonus110: number,) => {
         this.chargeSpeed = 1 + (achievBonus112 + (this.sigils[12].getBonus() + gemStoreBonus110)) / 100;
     }
 
-    constructor() {
-        this.sigils = Sigil.fromBase(initSigilRepo());
+    getRawKeys(): RawData[] {
+        return [
+            {key: "CauldronP2W", perPlayer: false, default: []},
+            {key: "CauldronJobs1", perPlayer: false, default: []},
+        ]
     }
-}
 
-export const initSigils = () => {
-    return new Sigils();
-}
+    init(allItems: Item[], charCount: number) {
+        this.sigils = Sigil.fromBase(initSigilRepo());
 
-const parseSigils: IParser = function (raw: Cloudsave, data: Map<string, any>) {
-    const sigils = data.get("sigils") as Sigils;
-    const cauldronP2w = safeJsonParse(raw, "CauldronP2W", []) as number[][];
-    const cauldronJobs1 = safeJsonParse(raw, "CauldronJobs1", []) as number[];  
+        return this;
+    }
 
-    sigils.sigils.forEach(sigil => {
-        sigil.boostLevel = cauldronP2w[4][1 + 2 * sigil.index]
-        sigil.progress = cauldronP2w[4][2 * sigil.index]
-    })
+    parse(data: Map<string, any>): void {
+        const sigils = data.get(this.getDataKey()) as Sigils;
+        const cauldronP2w = data.get("CauldronP2W") as number[][];
+        const cauldronJobs1 = data.get("CauldronJobs1") as number[];
 
-    const jobsThatMatter = cauldronJobs1.slice(0, 10); // TODO: Change this to 11 when Lava fixes the bug that player 10 isn't helpful.
-    jobsThatMatter.forEach((job, playerIndex) => {
-        const sigilIndex = Math.round(job) - 100;
-        if (sigilIndex > 0) {
-            sigils.sigils[sigilIndex].activePlayers += 1;
-        }
-    })
+        sigils.sigils.forEach(sigil => {
+            sigil.boostLevel = cauldronP2w[4][1 + 2 * sigil.index]
+            sigil.progress = cauldronP2w[4][2 * sigil.index]
+        })
 
-    data.set("sigils", sigils);
+        const jobsThatMatter = cauldronJobs1.slice(0, 10); // TODO: Change this to 11 when Lava fixes the bug that player 10 isn't helpful.
+        jobsThatMatter.forEach((job, playerIndex) => {
+            const sigilIndex = Math.round(job) - 100;
+            if (sigilIndex > 0) {
+                sigils.sigils[sigilIndex].activePlayers += 1;
+            }
+        })
+    }
 }
 
 // Currently only requires artifact to be post processed, can be below it.
@@ -99,5 +101,3 @@ export const updateSigils = (data: Map<string, any>) => {
     sigils.setSigilSpeed(sigilAchiev, sigilGemBonus);
     return sigils;
 }
-
-export default parseSigils;

@@ -1,8 +1,7 @@
 import { Alchemy } from "./alchemy";
-import { Cloudsave } from "./cloudsave";
+import { Domain, RawData } from "./base/domain";
 import { initRefineryCostRepo } from "./data/RefineryCostRepo";
 import { Family } from "./family";
-import { IParser, safeJsonParse } from "./idleonData";
 import { Item } from "./items";
 import { Lab } from "./lab";
 import { ComponentModel } from "./model/componentModel";
@@ -112,7 +111,7 @@ export class SaltStatus {
 
     getCostMulti = (salt: boolean, taskBought: boolean = false) => {
         // For unranked salts, just show base costs.
-        if (this.rank == 0) { 
+        if (this.rank == 0) {
             return 1;
         }
 
@@ -131,59 +130,62 @@ export class CycleInfo {
     constructor(public name: string, public cycleTime: number, public timePast: number) { }
 }
 
-export class Refinery {
+export class Refinery extends Domain {
     salts: Record<string, SaltStatus> = {}
     storage: RefineryStorage[] = []
     cycleInfo: Record<string, CycleInfo> = {}
 
     shinyBonusSpeed: number = 0;
-}
 
-export const initRefinery = () => {
-    const refinery = new Refinery();
-    const costRepo = initRefineryCostRepo();
-
-    costRepo.forEach((salt, index) => {
-        // Init cycle time as max time (900), will be updated in post processing to match reduced values.
-        refinery.cycleInfo["Combustion"] = new CycleInfo("Combustion", 900, 0);
-        refinery.cycleInfo["Synthesis"] = new CycleInfo("Synthesis", 900, 0);
-
-        const newSaltStatus = new SaltStatus()
-        newSaltStatus.baseCost = salt.data.cost.map(component => component as ComponentModel);
-        refinery.salts[`Refinery${index + 1}`] = newSaltStatus;
-    })
-    return refinery;
-}
-
-
-const parseRefinery: IParser = function (raw: Cloudsave, data: Map<string, any>) {
-    const refinery = data.get("refinery") as Refinery;
-    const refineryData = safeJsonParse(raw, "Refinery", []) as any[][];
-    
-    if (refineryData.length > 0) {
-        const unlockedSalts = refineryData[0][0];
-
-        refinery.cycleInfo["Combustion"].timePast = refineryData[0][1];
-        refinery.cycleInfo["Synthesis"].timePast = refineryData[0][2];
-        refineryData[1].forEach((salt, index) => {
-            if (salt != "Blank") {
-                refinery.storage.push(new RefineryStorage(salt, refineryData[2][index]));
-            }
-        });
-
-        [...Array(unlockedSalts)].forEach((_, i) => {
-            const saltIndex = i + 3;
-            if (i > Object.keys(refinery.salts).length) {
-                return;
-            }
-            refinery.salts[`Refinery${i + 1}`].rank = refineryData[saltIndex][1];
-            refinery.salts[`Refinery${i + 1}`].progress = refineryData[saltIndex][0];
-            refinery.salts[`Refinery${i + 1}`].autoRefine = refineryData[saltIndex][4];
-            refinery.salts[`Refinery${i + 1}`].active = refineryData[saltIndex][3] as boolean;
-        })
+    getRawKeys(): RawData[] {
+        return [
+            {key: "Refinery", perPlayer: false, default: []}
+        ]
     }
 
-    data.set("refinery", refinery);
+    init(allItems: Item[], charCount: number) {
+        const costRepo = initRefineryCostRepo();
+
+        costRepo.forEach((salt, index) => {
+            // Init cycle time as max time (900), will be updated in post processing to match reduced values.
+            this.cycleInfo["Combustion"] = new CycleInfo("Combustion", 900, 0);
+            this.cycleInfo["Synthesis"] = new CycleInfo("Synthesis", 900, 0);
+
+            const newSaltStatus = new SaltStatus()
+            newSaltStatus.baseCost = salt.data.cost.map(component => component as ComponentModel);
+            this.salts[`Refinery${index + 1}`] = newSaltStatus;
+        })
+
+        return this;
+    }
+    
+    parse(data: Map<string, any>): void {
+        const refinery = data.get(this.getDataKey()) as Refinery;
+        const refineryData = data.get("Refinery") as any[][];
+
+        if (refineryData.length > 0) {
+            const unlockedSalts = refineryData[0][0];
+
+            refinery.cycleInfo["Combustion"].timePast = refineryData[0][1];
+            refinery.cycleInfo["Synthesis"].timePast = refineryData[0][2];
+            refineryData[1].forEach((salt, index) => {
+                if (salt != "Blank") {
+                    refinery.storage.push(new RefineryStorage(salt, refineryData[2][index]));
+                }
+            });
+
+            [...Array(unlockedSalts)].forEach((_, i) => {
+                const saltIndex = i + 3;
+                if (i > Object.keys(refinery.salts).length) {
+                    return;
+                }
+                refinery.salts[`Refinery${i + 1}`].rank = refineryData[saltIndex][1];
+                refinery.salts[`Refinery${i + 1}`].progress = refineryData[saltIndex][0];
+                refinery.salts[`Refinery${i + 1}`].autoRefine = refineryData[saltIndex][4];
+                refinery.salts[`Refinery${i + 1}`].active = refineryData[saltIndex][3] as boolean;
+            })
+        }
+    }
 }
 
 // Nothing depends on this, can be last.
@@ -216,5 +218,3 @@ export function updateRefinery(data: Map<string, any>) {
 
     return refinery;
 }
-
-export default parseRefinery;

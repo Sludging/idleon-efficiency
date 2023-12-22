@@ -1,5 +1,6 @@
 import { AnvilWrapper } from "./anvil";
 import { Arcade } from "./arcade";
+import { Domain, RawData } from "./base/domain";
 import { Construction } from "./construction";
 import { ImageData } from "./imageData";
 import { Item } from "./items";
@@ -158,12 +159,24 @@ export class ConstructionAlert extends GlobalAlert {
     }
 }
 
-export class Alerts {
+export class Alerts extends Domain {
     playerAlerts: Record<number, Alert[]> = {};
     generalAlerts: Alert[] = [];
 
     getPlayerAlertsOfType = (playerID: number, alertType: string): Alert[] => {
         return this.playerAlerts[playerID]?.filter(alert => alert.type == alertType) ?? [];
+    }
+
+    getRawKeys(): RawData[] {
+        return []
+    }
+
+    init(allItems: Item[], charCount: number) {
+        return this;
+    }
+
+    parse(data: Map<string, any>): void {
+        return;
     }
 }
 
@@ -274,12 +287,8 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], 
     return globalAlerts;
 }
 
-export const initAlerts = () => {
-    return new Alerts();
-}
-
 export const updateAlerts = (data: Map<string, any>) => {
-    const alerts = new Alerts();
+    const alerts = data.get("alerts") as Alerts;
     const players = data.get("players") as Player[];
     const anvil = data.get("anvil") as AnvilWrapper;
     const obols = data.get("obols") as ObolsData;

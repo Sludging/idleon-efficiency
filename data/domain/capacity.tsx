@@ -99,12 +99,12 @@
 // }),
 
 import { range } from "../utility";
+import { Domain, RawData } from "./base/domain";
 import { Bribe, BribeStatus } from "./bribes";
-import { Cloudsave } from "./cloudsave";
 import { GemStore } from "./gemPurchases";
 import { Guild } from "./guild";
-import { IParser, safeJsonParse } from "./idleonData";
 import { ImageData } from "./imageData";
+import { Item } from "./items";
 import { Player } from "./player";
 import { Prayer } from "./prayers";
 import { Shrine, ShrineConstants } from "./shrines";
@@ -428,7 +428,7 @@ interface BestCapacityPlayer {
     player?: Player
 }
 
-export class Capacity {
+export class Capacity extends Domain {
     players: PlayerCapacity[] = [];
     maxCapacityByType: Record<string, BestCapacityPlayer> = {
         "bCraft": { maxCapacity: 0, inventorySlots: 0 },
@@ -440,23 +440,29 @@ export class Capacity {
         "Critters": { maxCapacity: 0, inventorySlots: 0 },
         "Souls": { maxCapacity: 0, inventorySlots: 0 },
     }
-}
 
-export const initCapacity = () => {
-    return new Capacity();
-}
+    getRawKeys(): RawData[] {
+        return [
+            {key: "MaxCarryCap_", perPlayer: true, default: new Map()}
+        ]
+    }
 
-const parseCapacity: IParser = function (raw: Cloudsave, data: Map<string, any>) {
-    const capacity = data.get("capacity") as Capacity;
-    const charCount = data.get("charCount") as number;
-    // Array of `MaxCarryCap_<x>` data from each player.
-    const maxCapacities = range(0,charCount).map((_, index) => new Map(Object.entries(safeJsonParse(raw,`MaxCarryCap_${index}`, new Map()))))
-    
-    maxCapacities.forEach((playerCapacity, index) => {
-        capacity.players.push(new PlayerCapacity(index, playerCapacity));
-    })
+    init(allItems: Item[], charCount: number) {
+        return this;
+    }
 
-    data.set("capacity", capacity);
+    parse(data: Map<string, any>): void {
+        const capacity = data.get(this.getDataKey()) as Capacity;
+        const charCount = data.get("charCount") as number;
+        // Array of `MaxCarryCap_<x>` data from each player.
+        const maxCapacities = range(0, charCount).map((_, index) => new Map(Object.entries(data.get(`MaxCarryCap_${index}`))))
+
+        // Capacity data has no "persistence", so we reset the previous data.
+        capacity.players = [];
+        maxCapacities.forEach((playerCapacity, index) => {
+            capacity.players.push(new PlayerCapacity(index, playerCapacity as Map<string, number>));
+        })
+    }
 }
 
 export function updateCapacity(data: Map<string, any>) {
@@ -531,5 +537,3 @@ export function updateCapacity(data: Map<string, any>) {
 
     return capacity;
 }
-
-export default parseCapacity;

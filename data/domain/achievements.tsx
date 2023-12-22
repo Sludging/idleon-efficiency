@@ -1,7 +1,7 @@
 import { ImageData } from "./imageData";
 import { initAchievementRepo, AchievementBase } from './data/AchievementRepo';
-import { IParser, safeJsonParse } from "./idleonData";
-import { Cloudsave } from "./cloudsave";
+import { Domain, RawData } from "./base/domain";
+import { Item } from "./items";
 export const AchievementConst = {
     SmartBoiIndex: 108,
     GoldFood: 37
@@ -535,54 +535,57 @@ const achievOrdering = [
     ]
 ];
 
-export const initAchievements = () => {
-    const achievements = Achievement.fromBase(initAchievementRepo());
+export class Achievements extends Domain {
+    getRawKeys(): RawData[] {
+        return [
+            { key: "AchieveReg", perPlayer: false, default: [] },
+            { key: "SteamAchieve", perPlayer: false, default: [] },
+        ]
+    }
+    init(allItems: Item[], charCount: number) {
+        const achievements = Achievement.fromBase(initAchievementRepo());
 
-    achievements.forEach((achievement, index) => {
-        const reminder = Math.floor(index / 70);
-        let letter = 'A';
-        if (reminder == 1) {
-            letter = 'B';
-        }
-        if (reminder == 2) {
-            letter = 'C';
-        }
-        if (reminder == 3) {
-            letter = 'D';
-        }
-        if (reminder == 4) {
-            letter = 'E';
-        }
-        achievement.arrayIndex = index + 1;
-        achievement.visualIndex = achievOrdering[reminder].indexOf(index - (70 * reminder));
-        achievement.worldLetter = letter;
-
-        achievement.baseName = `TaskAch${achievement.worldLetter}${achievement.arrayIndex - (70 * reminder)}`
-    })
-
-    return achievements
-}
-
-const parseAchievements: IParser = function (raw: Cloudsave, data: Map<string, any>) {
-    const achievements = data.get("achievements") as Achievement[];
-    const achiData = safeJsonParse(raw, "AchieveReg", []) as number[];
-    const steamData = safeJsonParse(raw, "SteamAchieve", []) as number[];
-
-    achievements.forEach((achievement, index) => {
-        achievement.completed = achiData[index] == -1;
-
-        if (!achievement.completed) {
-            const steamIndex = AchSteam2Reg.indexOf(achievement.index);
-            if (steamIndex > -1) {
-                achievement.currentCount = Math.max(achiData[index], steamData[steamIndex]);
+        achievements.forEach((achievement, index) => {
+            const reminder = Math.floor(index / 70);
+            let letter = 'A';
+            if (reminder == 1) {
+                letter = 'B';
             }
-            else {
-                achievement.currentCount = achiData[index];
+            if (reminder == 2) {
+                letter = 'C';
             }
-        }
-    })
+            if (reminder == 3) {
+                letter = 'D';
+            }
+            if (reminder == 4) {
+                letter = 'E';
+            }
+            achievement.arrayIndex = index + 1;
+            achievement.visualIndex = achievOrdering[reminder].indexOf(index - (70 * reminder));
+            achievement.worldLetter = letter;
 
-    data.set("achievements", achievements);
+            achievement.baseName = `TaskAch${achievement.worldLetter}${achievement.arrayIndex - (70 * reminder)}`
+        })
+
+        return achievements
+    }
+    parse(data: Map<string, any>): void {
+        const achievements = data.get(this.getDataKey()) as Achievement[];
+        const achiData = data.get("AchieveReg") as number[];
+        const steamData = data.get("SteamAchieve") as number[];
+
+        achievements.forEach((achievement, index) => {
+            achievement.completed = achiData[index] == -1;
+
+            if (!achievement.completed) {
+                const steamIndex = AchSteam2Reg.indexOf(achievement.index);
+                if (steamIndex > -1) {
+                    achievement.currentCount = Math.max(achiData[index], steamData[steamIndex]);
+                }
+                else {
+                    achievement.currentCount = achiData[index];
+                }
+            }
+        })
+    }
 }
-
-export default parseAchievements;

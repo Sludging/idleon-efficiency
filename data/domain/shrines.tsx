@@ -1,9 +1,9 @@
 import { round } from '../utility';
+import { Domain, RawData } from './base/domain';
 import { Card } from './cards';
-import { Cloudsave } from './cloudsave';
 import { initShrineRepo, ShrineBase } from './data/ShrineRepo';
-import { IParser, safeJsonParse } from './idleonData';
 import { ImageData } from './imageData';
+import { Item } from './items';
 import { Lab } from './lab';
 import { Sailing } from './sailing';
 import { ArtifactStatus } from './sailing/artifacts';
@@ -80,21 +80,29 @@ export class Shrine {
     }
 }
 
-export const initShrines = () => {
-    return Shrine.fromBase(initShrineRepo());
-}
+export class Shrines extends Domain {
+    getRawKeys(): RawData[] {
+        return [
+            { key: "Shrine", perPlayer: false, default: [] }
+        ]
+    }
 
-const parseShrines: IParser = function (raw: Cloudsave, data: Map<string, any>) {
-    const shrineData = data.get("shrines") as Shrine[];
-    const rawData = safeJsonParse(raw, "Shrine", []) as number[][];
+    init(allItems: Item[], charCount: number) {
+        return Shrine.fromBase(initShrineRepo());
+    }
 
-    rawData.forEach((shrine, index) => { // for each shrine
-        shrineData[index].currentMap = shrine[0];
-        shrineData[index].level = shrine[3];
-        shrineData[index].accumulatedHours = shrine[4];
-    });
+    parse(data: Map<string, any>): void {
+        const shrineData = data.get(this.getDataKey()) as Shrine[];
+        const rawData = data.get("Shrine") as number[][];
 
-    data.set("shrines", shrineData);
+        rawData.forEach((shrine, index) => { // for each shrine
+            shrineData[index].currentMap = shrine[0];
+            shrineData[index].level = shrine[3];
+            shrineData[index].accumulatedHours = shrine[4];
+        });
+
+    }
+
 }
 
 // shrine math: https://discord.com/channels/912156088873418792/912156088873418795/1068153373817327646
@@ -113,8 +121,6 @@ export const updateShrines = (data: Map<string, any>) => {
         shrine.artifactAcquired = shrineArtifact.status != ArtifactStatus.Unobtained;
         shrine.cchizBonus = cchizBonus;
     });
-    
+
     return shrines;
 }
-
-export default parseShrines;

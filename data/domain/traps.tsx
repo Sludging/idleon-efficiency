@@ -1,5 +1,5 @@
-import { Cloudsave } from "./cloudsave";
-import { IParser } from "./idleonData";
+import { range } from "../utility";
+import { Domain, RawData } from "./base/domain";
 import { ImageData } from "./imageData";
 import { Item } from "./items";
 
@@ -122,28 +122,29 @@ export class Trap {
     }
 }
 
-export const initTraps = (charCount: number) => {
-    // Empty init for now.
-    return Array(charCount) as Trap[][];
-}
-
-
-const parseTraps: IParser = function(raw: Cloudsave, data: Map<string, any>) {
-    const traps = data.get("traps") as Trap[][];
-    const charCount = data.get("charCount") as number;
-
-    [...Array(charCount)].map((_, i) => { return raw.get(`PldTraps_${i}`) })
-    .map((playerArray, pIndex) => {
-        try {
-            const parsedPlayerData: Array<any> = JSON.parse(playerArray);
-            traps[pIndex] = parsedPlayerData.map(trapData => {
-                return new Trap(pIndex, trapData)
+export class Traps extends Domain {
+    getRawKeys(): RawData[] {
+        return [
+            {key: "PldTraps_", default: [], perPlayer: true}
+        ]
+    }
+    init(_: Item[], charCount: number) {
+        // Empty init for now.
+        return Array(charCount) as Trap[][];
+    }
+    parse(data: Map<string, any>): void {
+        const traps = data.get(this.getDataKey()) as Trap[][];
+        const charCount = data.get("charCount") as number;
+        range(0, charCount).forEach((_, playerIndex) => {
+            // If this is the first time handling this player, init.
+            if (traps.length <= playerIndex) {
+                traps.push([]);
+            }
+            const playerTraps = data.get(`PldTraps_${playerIndex}`) as any[];
+            traps[playerIndex] = playerTraps.map(trapData => {
+                return new Trap(playerIndex, trapData)
             });
-        }
-        catch {
-            return [];
-        }
-    });
+        })
+    }
+    
 }
-
-export default parseTraps;

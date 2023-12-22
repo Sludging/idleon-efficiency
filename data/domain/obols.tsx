@@ -1,6 +1,5 @@
 import { range } from "../utility";
-import { Cloudsave } from "./cloudsave";
-import { IParser, safeJsonParse } from "./idleonData";
+import { Domain, RawData } from "./base/domain";
 import { Item, ItemStat, StoneProps } from "./items";
 
 
@@ -121,75 +120,87 @@ export class ObolStats {
     }
 }
 
-export class ObolsData {
+export class ObolsData extends Domain {
     playerObols: Obol[][] = [];
     playerStats: ObolStats[] = [];
     familyObols: Obol[] = [];
     familyStats: ObolStats = new ObolStats();
     upgradeTab: Obol[] = [];
-    inventory: Map<ObolType,Obol[]> = new Map();
-}
+    inventory: Map<ObolType, Obol[]> = new Map();
 
-export const initObols = () => {
-    return new ObolsData();
-}
+    getRawKeys(): RawData[] {
+        return [
+            {key: "ObolEqO0_", perPlayer: true, default: []},
+            {key: "ObolEqMAP_", perPlayer: true, default: []},
+            {key: "ObolEqO1", perPlayer: false, default: []},
+            {key: "ObolEqMAPz1", perPlayer: false, default: {}},
+            {key: "ObolInvOr", perPlayer: false, default: {}},
+            {key: "ObolInvMAP_", perPlayer: true, default: {}},
+        ]
+    }
 
-const parseObols: IParser = function (raw: Cloudsave, data: Map<string, any>) {
-    const obols = data.get("obols") as ObolsData;
-    const charCount = data.get("charCount") as number;
-    const allItems = data.get("itemsData") as Item[];
+    init(allItems: Item[], charCount: number) {
+        return this;
+    }
 
-    range(0, charCount).forEach((_, playerIndex) => {
-        const playerObols = safeJsonParse(raw, `ObolEqO0_${playerIndex}`, []) as string[];
-        const playerObolsMods = safeJsonParse(raw, `ObolEqMAP_${playerIndex}`, {}) as Record<number, StoneProps>;
-        const playerObolArray: Obol[] = [];
-        const playerStats = new ObolStats();
-        playerObols.forEach((obol, obolIndex) => {
+    parse(data: Map<string, any>): void {
+        const obols = data.get(this.getDataKey()) as ObolsData;
+        const charCount = data.get("charCount") as number;
+        const allItems = data.get("itemsData") as Item[];
+
+        // Some obol data has no "persistence", so we reset the previous data.
+        obols.playerObols = [];
+        obols.playerStats = [];
+        obols.familyObols = [];
+        obols.familyStats = new ObolStats();
+
+        range(0, charCount).forEach((_, playerIndex) => {
+            const playerObols = data.get(`ObolEqO0_${playerIndex}`) as string[];
+            const playerObolsMods = data.get(`ObolEqMAP_${playerIndex}`) as Record<number, StoneProps>;
+            const playerObolArray: Obol[] = [];
+            const playerStats = new ObolStats();
+            playerObols.forEach((obol, obolIndex) => {
+                let itemInfo = allItems.find(item => item.internalName == obol)?.duplicate() ?? Item.emptyItem(obol);
+                if (!obol.includes("Locked") && obol != "Blank" && Object.keys(playerObolsMods).includes(obolIndex.toString())) {
+                    itemInfo.addStone(playerObolsMods[obolIndex]);
+                }
+                playerObolArray.push(new Obol(itemInfo, obolIndex, true));
+                itemInfo.itemStats.forEach(stat => {
+                    playerStats.addStat(stat);
+                })
+
+            });
+            obols.playerObols.push(playerObolArray);
+            obols.playerStats.push(playerStats);
+        })
+
+        const familyObols = data.get(`ObolEqO1`) as string[];
+        const familyObolsMods = data.get('ObolEqMAPz1') as Record<number, StoneProps>;
+        familyObols.forEach((obol, obolIndex) => {
             let itemInfo = allItems.find(item => item.internalName == obol)?.duplicate() ?? Item.emptyItem(obol);
-            if (!obol.includes("Locked") && obol != "Blank" && Object.keys(playerObolsMods).includes(obolIndex.toString())) {
-                itemInfo.addStone(playerObolsMods[obolIndex]);
+            if (!obol.includes("Locked") && obol != "Blank" && Object.keys(familyObolsMods).includes(obolIndex.toString())) {
+                itemInfo.addStone(familyObolsMods[obolIndex]);
             }
-            playerObolArray.push(new Obol(itemInfo, obolIndex, true));
+            obols.familyObols.push(new Obol(itemInfo, obolIndex, false))
             itemInfo.itemStats.forEach(stat => {
-                playerStats.addStat(stat);
+                obols.familyStats.addStat(stat);
             })
-
         });
-        obols.playerObols.push(playerObolArray);
-        obols.playerStats.push(playerStats);
-    })
 
-    const familyObols = safeJsonParse(raw, `ObolEqO1`, []) as string[];
-    const familyObolsMods = safeJsonParse(raw, 'ObolEqMAPz1', {}) as Record<number, StoneProps>;
-    familyObols.forEach((obol, obolIndex) => {
-        let itemInfo = allItems.find(item => item.internalName == obol)?.duplicate() ?? Item.emptyItem(obol);
-        if (!obol.includes("Locked") && obol != "Blank" && Object.keys(familyObolsMods).includes(obolIndex.toString())) {
-            itemInfo.addStone(familyObolsMods[obolIndex]);
-        }
-        obols.familyObols.push(new Obol(itemInfo, obolIndex, false))
-        itemInfo.itemStats.forEach(stat => {
-            obols.familyStats.addStat(stat);
-        })
-    });
-
-    const inventory = safeJsonParse(raw, `ObolInvOr`, {}) as Record<string, string>[];
-    inventory.forEach((typeInventory, index) => {
-        const tabModifications = safeJsonParse(raw, `ObolInvMAP_${index}`, {}) as Record<string, string>[];
-        obols.inventory.set(index as ObolType, []);
-        [...Object.entries(typeInventory)].forEach(([key, obol], obolIndex) => {
-            if (key == "length") {  // ignore the length key, we don't care.
-                return;
-            }
-            let itemInfo = allItems.find(item => item.internalName == obol)?.duplicate() ?? Item.emptyItem(obol);
-            if (!obol.includes("Locked") && obol != "Blank" && Object.keys(tabModifications).includes(obolIndex.toString())) {
-                itemInfo.addStone(tabModifications[obolIndex]);
-            }
-            obols.inventory.get(index)?.push(new Obol(itemInfo, -1, false, index as ObolType));
-        })
-    });
-
-    data.set("obols", obols);
-    
+        const inventory = data.get(`ObolInvOr`) as Record<string, string>[];
+        inventory.forEach((typeInventory, index) => {
+            const tabModifications = data.get(`ObolInvMAP_${index}`) as Record<string, string>[];
+            obols.inventory.set(index as ObolType, []);
+            [...Object.entries(typeInventory)].forEach(([key, obol], obolIndex) => {
+                if (key == "length") {  // ignore the length key, we don't care.
+                    return;
+                }
+                let itemInfo = allItems.find(item => item.internalName == obol)?.duplicate() ?? Item.emptyItem(obol);
+                if (!obol.includes("Locked") && obol != "Blank" && Object.keys(tabModifications).includes(obolIndex.toString())) {
+                    itemInfo.addStone(tabModifications[obolIndex]);
+                }
+                obols.inventory.get(index)?.push(new Obol(itemInfo, -1, false, index as ObolType));
+            })
+        });
+    }
 }
-
-export default parseObols;

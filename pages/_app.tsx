@@ -159,6 +159,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [domain, setDomain] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [publicData, setPublicData] = useState<{ data: Map<string, any>, charNames: string[] } | undefined>(undefined);
+  const accountData = new Map();
   const router = useRouter()
 
   const { data, error } = useSWR(publicData == undefined ? { windowLocation: typeof window !== "undefined" ? window.location.host : "", oldDomain: domain } : null, fetcher, {
@@ -225,7 +226,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       />
       <Grommet theme={customTheme} full>
         <AuthProvider appLoading={loading} data={publicData} domain={domain}>
-          <AppProvider appLoading={loading} data={publicData} domain={domain}>
+          <AppProvider appLoading={loading} data={publicData} domain={domain} accountData={accountData}>
             <DefaultSeo {...SEO} />
             {
               router.pathname.includes("leaderboards") ?

@@ -1,4 +1,6 @@
 import { GroupBy, lavaFunc, round } from "../utility";
+import { Domain, RawData } from "./base/domain";
+import { Item } from "./items";
 import { Player } from "./player";
 import { ClassIndex } from "./talents";
 
@@ -141,16 +143,25 @@ export class FamilyBonus {
     }
 }
 
-export class Family {
+export class Family extends Domain {
     classBonus: Map<ClassIndex, FamilyBonus> = new Map()
+
+    getRawKeys(): RawData[] {
+        return [];
+    }
+
+    init(allItems: Item[], charCount: number) {
+        return this;
+    }
+
+    parse(data: Map<string, any>): void {
+        return;
+    }
 }
 
-export const initFamily = () => {
-    return new Family();
-}
-
-export const calculateFamily = (players: Player[]) => {
-    const family = new Family();
+export const calculateFamily = (data: Map<string, any>) => {
+    const family = data.get("family") as Family;
+    const players = data.get("players") as Player[];
 
     const highestFamilyGuy = players.slice().sort((player1, player2) => player1.getTalentBonus(144) > player2.getTalentBonus(144) ? -1 : 1)[0];
 

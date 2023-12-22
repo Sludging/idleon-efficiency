@@ -1,55 +1,56 @@
-import parseTraps, { initTraps } from './traps';
-import parseStamps, { initStamps, updateStampMaxCarry, updateStamps } from './stamps';
-import parseStatues, { initStatues } from './statues';
-import parsePlayers, { Player, initPlayers, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayers } from './player';
-import parseAlchemy, { initAlchemy, updateAlchemy } from './alchemy';
-import parseBribes, { initBribes } from './bribes';
-import parseGuild, { initGuild } from './guild';
-import parseGems, { initGems } from './gemPurchases';
-import parseAchievements, { initAchievements } from './achievements';
-import parseShrines, { initShrines, updateShrines } from './shrines';
+import { Traps } from './traps';
+import { Stamps, updateStampMaxCarry, updateStamps } from './stamps';
+import { Statues } from './statues';
+import { Player, Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayers } from './player';
+import { Alchemy, updateAlchemy } from './alchemy';
+import { Bribes } from './bribes';
+import { GemStore } from './gemPurchases';
+import { Achievements } from './achievements';
+import { Shrines, updateShrines } from './shrines';
 import { Item } from './items';
-import parseStorage, { initStorage, updateStorage } from './storage';
-import parseQuests, { initQuests } from './quests';
-import parsePrayers, { initPrayers } from './prayers';
-import parseRefinery, { initRefinery, updateRefinery } from './refinery';
-import parseSaltLick, { initSaltLick } from './saltLick';
-import parsePrinter, { initPrinter, updatePrinter } from './printer';
-import parseTaskboard, { initTaskboard } from './tasks';
+import { Storage, updateStorage } from './storage';
+import { Quests } from './quests';
+import { Prayers } from './prayers';
+import { Refinery, updateRefinery } from './refinery';
+import { SaltLick } from './saltLick';
+import { Printer, updatePrinter } from './printer';
+import { TaskBoard } from './tasks';
 import { Cloudsave } from './cloudsave';
-import parseWorship, { initWorship, updateWorship } from './worship';
-import parseConstruction, { initConstruction, updateConstruction } from './construction';
-import parseCards, { updateCards, initCards } from './cards';
-import parseArcade, { initArcade, updateArcade } from './arcade';
-import parseObols, { initObols } from './obols';
-import { calculateFamily, initFamily } from './family';
-import parseDungeons, { initDungeons } from './dungeons';
-import parseForge, { initForge, updateForge } from './forge';
-import parseCooking, { initCooking, updateCooking } from './cooking';
-import parseLab, { initLab, updateLab } from './lab';
-import parseBreeding, { initBreeding, updateAllShinyEffects, updateBreeding } from './breeding';
+import { Worship, updateWorship } from './worship';
+import { Construction, updateConstruction } from './construction';
+import { updateCards, Cards } from './cards';
+import { Arcade, updateArcade } from './arcade';
+import { ObolsData } from './obols';
+import { Family, calculateFamily } from './family';
+import { Dungeons } from './dungeons';
+import { Forge, updateForge } from './forge';
+import { Cooking, updateCooking } from './cooking';
+import { Lab, updateLab } from './lab';
+import { Breeding, updateAllShinyEffects, updateBreeding } from './breeding';
 import { notUndefined } from '../utility';
-import parseSigils, { initSigils, updateSigils } from './sigils';
-import { initAnvil, parseAnvil, updateAnvil } from './anvil';
-import { initAlerts, updateAlerts } from './alerts';
-import parseAccount, { initAccount, updateAccount } from './account';
-import parseDivinity, { initDivinity, updateDivinity } from './divinity';
-import parseSailing, { initSailing, updateMinTravelTime, updateSailing } from './sailing';
-import parseGaming, { updateGaming, updateSuperbitImpacts, initGaming } from './gaming';
-import parseAtomCollider, { initAtomCollider, updateAtomCollider } from './atomCollider';
+import { Sigils, updateSigils } from './sigils';
+import { AnvilWrapper, updateAnvil } from './anvil';
+import { Alerts, updateAlerts } from './alerts';
+import { Account, updateAccount } from './account';
+import { Divinity, updateDivinity } from './divinity';
+import { Sailing, updateMinTravelTime, updateSailing } from './sailing';
+import { Gaming, updateGaming, updateSuperbitImpacts } from './gaming';
+import { AtomCollider, updateAtomCollider } from './atomCollider';
 import { updateArtifacts } from './sailing/artifacts';
-import parseConstellations, { initConstellations } from './constellations';
-import parseSlab, { initSlab } from './slab';
-import parseCapacity, { initCapacity, updateCapacity } from './capacity';
-import parseDeathnote, { updateDeathnote, initDeathnote } from './deathnote';
-import parseRift, { initRift } from './rift';
+import { Constellations } from './constellations';
+import { Slab } from './slab';
+import { Capacity, updateCapacity } from './capacity';
+import { Deathnote, updateDeathnote } from './deathnote';
 import parseCompanions, { updateCompanionImpact } from './companions';
-import parsePostOfficeExtra from './postoffice';
+import { Domain, HandleRawDataKey } from './base/domain';
+import { Guild } from './guild';
+import { Rift } from './rift';
+import { POExtra } from './postoffice';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
     try {
-        if (typeof(data) === "string") {
+        if (typeof (data) === "string") {
             return JSON.parse(doc.get(key))
         }
         return data;
@@ -63,6 +64,56 @@ export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T
 export interface IParser {
     (raw: Cloudsave, data: Map<string, any>): void
 }
+
+// The full list of data domains that we initilize and parse.
+// The string passed to the constructor is the "data key" that the front-end components
+// will use to read that information, it should only be defined here and init / parse / update functions should use 
+// the 'getDataKey' function instead.
+const domainList: Domain[] = [
+    new Stamps("stamps"),
+    new Traps("traps"),
+    new Statues("statues"),
+    new AnvilWrapper("anvil"),
+    new Prayers("prayers"),
+    new Cards("cards"),
+    new Players("players"),
+    new Alchemy("alchemy"),
+    new Bribes("bribes"),
+    new Guild("guild"),
+    new GemStore("gems"),
+    new Achievements("achievements"),
+    new Slab("slab"),
+    new Shrines("shrines"),
+    new Storage("storage"),
+    new Constellations("constellations"),
+    // TODO: Confirm quests work, it had a special JSON parsing inside which I didn't keep when converting.
+    new Quests("quests"),
+    new Refinery("refinery"),
+    new SaltLick("saltLick"),
+    new Printer("printer"),
+    new TaskBoard("taskboard"),
+    new Worship("worship"),
+    new Construction("construction"),
+    new Arcade("arcade"),
+    new ObolsData("obols"),
+    new Dungeons("dungeons"),
+    new Forge("forge"),
+    new Cooking("cooking"),
+    new Lab("lab"),
+    new Breeding("breeding"),
+    new Sigils("sigils"),
+    new Account("account"),
+    new Divinity("divinity"),
+    new Sailing("sailing"),
+    new Gaming("gaming"),
+    new AtomCollider("collider"),
+    new Capacity("capacity"),
+    new Deathnote("deathnote"),
+    new Family("family"),
+    new Alerts("alerts"),
+    new Rift("rift"),
+    new POExtra("POExtra"),
+]
 
 export class IdleonData {
     private data: Map<string, any>
@@ -96,96 +147,26 @@ export class IdleonData {
     }
 }
 
-export const initAccountDataKeys = (allItems: Item[]) => {
-    const accountData = new Map<string, any>();
-    accountData.set("stamps", initStamps(allItems));
-    accountData.set("traps", initTraps(0));
-    accountData.set("statues", initStatues(0));
-    accountData.set("anvil", initAnvil(0));
-    accountData.set("prayers", initPrayers());
-    accountData.set("cards", initCards());
-    accountData.set("players", initPlayers(0, accountData.get("playerNames")));
-    accountData.set("alchemy", initAlchemy(allItems));
-    accountData.set("bribes", initBribes());
-    accountData.set("guild", initGuild());
-    accountData.set("gems", initGems());
-    accountData.set("achievements", initAchievements());
-    accountData.set("slab", initSlab(allItems));
-    accountData.set("POExtra", { streak: 0, complete: 0, misc: 0 });
-    accountData.set("shrines", initShrines());
-    accountData.set("storage", initStorage());
-    accountData.set("constellations", initConstellations());
-    accountData.set("quests", initQuests(allItems));
-    accountData.set("refinery", initRefinery());
-    accountData.set("saltLick", initSaltLick());
-    accountData.set("printer", initPrinter());
-    accountData.set("taskboard", initTaskboard());
-    accountData.set("worship", initWorship());
-    accountData.set("construction", initConstruction());
-    accountData.set("arcade", initArcade());
-    accountData.set("obols", initObols());
-    accountData.set("dungeons", initDungeons());
-    accountData.set("forge", initForge());
-    accountData.set("cooking", initCooking());
-    accountData.set("lab", initLab());
-    accountData.set("breeding", initBreeding());
-    accountData.set("sigils", initSigils());
-    accountData.set("account", initAccount(allItems));
-    accountData.set("divinity", initDivinity());
-    accountData.set("sailing", initSailing());
-    accountData.set("gaming", initGaming());
-    accountData.set("collider", initAtomCollider());
-    accountData.set("capacity", initCapacity());
-    accountData.set("deathnote", initDeathnote());
-    accountData.set("family", initFamily());
-    accountData.set("alerts", initAlerts());
-    accountData.set("rift", initRift());
+export const initAccountDataKeys = (accountData: Map<string, any>, allItems: Item[]) => {
     accountData.set("itemsData", allItems);
+    domainList.forEach(dataDomain => {
+        if (!dataDomain.initialized) {
+            const key = dataDomain.getDataKey();
+            const domainData = dataDomain.init(allItems, 0);
+            // This is to protect from mistakes of forgetting to return a value from init.
+            if (!domainData) {
+                console.error("forgot to return data for init, key:", key);
+            }
+            else {
+                accountData.set(key, domainData);
+                dataDomain.markInitialized();
+            }
+        }
+    })
+
     return accountData;
 }
 
-const parseFunctions: IParser[] = [
-    parseRefinery,
-    parseStamps,
-    parseTraps,
-    parseStatues,
-    parsePlayers,
-    parseAnvil,
-    parseCards,
-    parsePrayers,
-    parseAlchemy,
-    parseBribes,
-    parseGuild,
-    parseGems,
-    parseAchievements,
-    parseSlab,
-    parsePostOfficeExtra,
-    parseShrines,
-    parseStorage,
-    parseConstellations,
-    parseQuests,
-    parseSaltLick,
-    parsePrinter,
-    parseTaskboard,
-    parseWorship,
-    parseConstruction,
-    parseArcade,
-    parseObols,
-    parseDungeons,
-    parseForge,
-    parseCooking,
-    parseLab,
-    parseBreeding,
-    parseSigils,
-    parseAccount,
-    parseDivinity,
-    parseSailing,
-    parseGaming,
-    parseAtomCollider,
-    parseCapacity,
-    parseDeathnote,
-    parseRift,
-]
 
 // ORDER IS IMPORTANT, the keys are not relevant as data doesn't get persisted.
 // This allows for multiple calls that touch the same data to happen in the same map (artifacts + sailing for example)
@@ -223,7 +204,7 @@ const postProcessingMap: Record<string, Function> = {
 // I really really hate this.
 const postPostProcessingMap: Record<string, Function> = {
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStampMaxCarry(accountData),
-    "family": (doc: Cloudsave, accountData: Map<string, any>) => calculateFamily(accountData.get("players") as Player[]),
+    "family": (doc: Cloudsave, accountData: Map<string, any>) => calculateFamily(accountData),
     "playersExtraMaths": (doc: Cloudsave, accountData: Map<string, any>) => playerExtraCalculations(accountData),
     "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),
     "refinery": (doc: Cloudsave, accountData: Map<string, any>) => updateRefinery(accountData),
@@ -249,14 +230,32 @@ export const updateIdleonData = async (accountData: Map<string, any>, data: Clou
     const validCharCount = [...Array(charNames.length)].map((_, i) => data.get(`Lv0_${i}`) as number[]).filter(notUndefined).length;
     accountData.set("charCount", validCharCount);
 
-    parseFunctions.forEach(dataParser => {
-        try {
-            dataParser(data, accountData);
-        }
-        catch (e) {
-            console.debug(e);
-            console.log(`Failed parsing ${dataParser.name}`);
-        }
+    // Foreach of our data domains
+    domainList.forEach(dataDomain => {
+        // Get the raw keys
+        const rawKeys = dataDomain.getRawKeys();
+
+        // Safely parse the json from the cloudsave data and store in the map
+        const parseData = new Map<string, any>();
+        rawKeys.forEach(raw => {
+            HandleRawDataKey(raw, parseData, data, validCharCount);
+        });
+
+        // Add the data from the init into the map to be used in the parse.
+        parseData.set(dataDomain.getDataKey(), accountData.get(dataDomain.getDataKey()));
+
+        // Add commonly used data pieces
+        parseData.set("charCount", validCharCount);
+        parseData.set("OptLacc", accountData.get("OptLacc"));
+        parseData.set("lastUpdated", accountData.get("lastUpdated"));
+        parseData.set("itemsData", allItems);
+        parseData.set("playerNames", charNames);
+        // TODO: Get rid of this. It's only used for players since it's a very unique one.
+        parseData.set("rawData", data.toJSON())
+
+
+        // Execute the parse function.
+        dataDomain.parse(parseData);
     });
 
     // Do post parse processing
@@ -282,7 +281,7 @@ export const updateIdleonData = async (accountData: Map<string, any>, data: Clou
             //accountData.set(key, undefined);
         }
     })
-    
+
     // I sometimes forget that sorting has implication, fix sorting in the end incase I screwed something up in the post processing functions.
     // const players = accountData.get("players") as Player[];
     // players.sort((playera, playerb) => playera.playerID > playerb.playerID ? 1 : -1);

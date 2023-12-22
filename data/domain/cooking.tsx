@@ -6,7 +6,6 @@ import { Breeding, territoryNiceNames } from "./breeding";
 import { Card } from "./cards";
 import { initMealRepo, MealBase } from "./data/MealRepo";
 import { Gaming, TotalizerBonus } from "./gaming";
-import { initTerritoryFightRepo } from "./data/TerritoryFightRepo";
 import { GemStore } from "./gemPurchases";
 import { ImageData } from "./imageData";
 import { Lab } from "./lab";
@@ -16,8 +15,8 @@ import { Sailing } from "./sailing";
 import { Sigils } from "./sigils";
 import { Stamp } from "./stamps";
 import { ClassIndex } from "./talents";
-import { IParser, safeJsonParse } from "./idleonData";
-import { Cloudsave } from "./cloudsave";
+import { Domain, RawData } from "./base/domain";
+import { Item } from "./items";
 
 const spiceValues: number[] = "0 3 5 8 10 13 15 19 20 23 27 31 33 37 41 45 48 50 53 56".split(" ").map(value => parseInt(value));
 const mealLuckValues: number[] = "1 .20 .10 .05 .02 .01 .004 .001 .0005 .0003".split(" ").map(value => parseFloat(value));
@@ -254,8 +253,8 @@ export class Kitchen {
     }
 }
 
-export class Cooking {
-    meals: Meal[]
+export class Cooking extends Domain {
+    meals: Meal[] = [];
     spices: number[] = [];
     kitchens: Kitchen[] = [...Array(10)].map((_, index) => { return new Kitchen(index) });
 
@@ -265,11 +264,6 @@ export class Cooking {
     mealsDiscovered: number = 0;
     mealsAtVoid: number = 0;
     mealsAtDiamond: number = 0;
-
-    constructor() {
-        this.meals = Meal.fromBase(initMealRepo());
-        this.spices = [...Array(territoryNiceNames.length-1)].map(index => 0); 
-    }
 
     getMaxMeals = () => {
         // Lava is using 'Turkey a la Thank' as filler name in the end, remove all of those meals and add 1 for the first meal which is real.
@@ -334,6 +328,51 @@ export class Cooking {
         return this.meals.filter(meal => meal.bonusKey == bonusKey).reduce((sum, meal) => sum += meal.getBonus(), 0);
     }
 
+    getRawKeys(): RawData[] {
+        return [
+            {key: "Cooking", perPlayer: false, default: []},
+            {key: "Meals", perPlayer: false, default: []},
+        ]
+    }
+
+    init(allItems: Item[], charCount: number) {
+        this.meals = Meal.fromBase(initMealRepo());
+        this.spices = [...Array(territoryNiceNames.length - 1)].map(index => 0);
+
+        populateDiscovery(this);
+        return this;
+    }
+
+    parse(data: Map<string, any>): void {
+        const cooking = data.get(this.getDataKey()) as Cooking;
+        const cookingData = data.get("Cooking") as number[][];
+        const mealsData = data.get("Meals") as number[][];
+
+        if (cookingData.length == 0 || mealsData.length == 0) {
+            return;
+        }
+
+        if (mealsData.length) {
+            mealsData[0].forEach((mealLevel, index) => {
+                cooking.meals[index].level = mealLevel;
+                cooking.meals[index].count = mealsData[2][index];
+            })
+        }
+
+        cooking.spices = mealsData[3];
+        cookingData.forEach((kitchen, index) => {
+            if (index > cooking.kitchens.length) {
+                return;
+            }
+            cooking.kitchens[index].status = kitchen[0];
+            cooking.kitchens[index].mealLevels = kitchen[6];
+            cooking.kitchens[index].recipeLevels = kitchen[7];
+            cooking.kitchens[index].luckLevels = kitchen[8];
+            cooking.kitchens[index].progress = kitchen[10];
+            cooking.kitchens[index].activeMeal = kitchen[1];
+            cooking.kitchens[index].activeRecipe = kitchen.slice(2, 6).filter(number => number != -1);
+        })
+    }
 }
 
 const populateDiscovery = (cooking: Cooking) => {
@@ -380,47 +419,6 @@ const populateDiscovery = (cooking: Cooking) => {
             })
         }
     }
-}
-
-export const initCooking = () => {
-    const cooking = new Cooking();
-
-    populateDiscovery(cooking);
-
-    return cooking;
-}
-
-const parseCooking: IParser = function (raw: Cloudsave, data: Map<string, any>) {
-    const cooking = data.get("cooking") as Cooking;
-    const cookingData = safeJsonParse(raw, "Cooking", []) as number[][];
-    const mealsData = safeJsonParse(raw, "Meals", []) as number[][];
-
-    if (cookingData.length == 0 || mealsData.length == 0) {
-        return;
-    }
-
-    if (mealsData.length) {
-        mealsData[0].forEach((mealLevel, index) => {
-            cooking.meals[index].level = mealLevel;
-            cooking.meals[index].count = mealsData[2][index];
-        })
-    }
-
-    cooking.spices = mealsData[3];
-    cookingData.forEach((kitchen, index) => {
-        if (index > cooking.kitchens.length) {
-            return;
-        }
-        cooking.kitchens[index].status = kitchen[0];
-        cooking.kitchens[index].mealLevels = kitchen[6];
-        cooking.kitchens[index].recipeLevels = kitchen[7];
-        cooking.kitchens[index].luckLevels = kitchen[8];
-        cooking.kitchens[index].progress = kitchen[10];
-        cooking.kitchens[index].activeMeal = kitchen[1];
-        cooking.kitchens[index].activeRecipe = kitchen.slice(2, 6).filter(number => number != -1);
-    })
-
-    data.set("cooking", cooking);
 }
 
 export const updateCooking = (data: Map<string, any>) => {
@@ -558,5 +556,3 @@ export const updateCooking = (data: Map<string, any>) => {
 
     return cooking;
 }
-
-export default parseCooking;

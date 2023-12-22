@@ -1,8 +1,8 @@
 import { notUndefined, round } from "../utility";
 import { Alchemy, AlchemyConst, Bubble, CauldronIndex } from "./alchemy";
-import { Cloudsave } from "./cloudsave";
+import { Domain, RawData } from "./base/domain";
 import { MapDataBase } from "./data/MapDataRepo";
-import { IParser, safeJsonParse } from "./idleonData";
+import { Item } from "./items";
 import { MapInfo } from "./maps";
 import { SkullItemModel } from "./model/skullItemModel";
 import { Player } from "./player";
@@ -79,7 +79,7 @@ interface TotalWorshipData {
     overFlowTime: number
 }
 
-export class Worship {
+export class Worship extends Domain {
     playerData: PlayerWorshipData[] = [];
     totalData: TotalWorshipData = {
         currentCharge: 0,
@@ -89,8 +89,6 @@ export class Worship {
     };
     bestWizardPlayerID: number = -1;
     totemInfo: Totem[] = [];
-    constructor() { }
-
 
     static getEstimatedCharge = (currentCharge: number, chargeRate: number, maxCharge: number, timeAwayInSeconds: number) => {
         return Math.min(currentCharge + chargeRate * (timeAwayInSeconds / 3600), maxCharge);
@@ -114,30 +112,35 @@ export class Worship {
         const base = buffBonus + (stampBonus + alchemyBonus * Math.floor(worshipLevel / 10));
         return Math.floor(Math.max(50, cardBonus + postofficeBonus + (base + skullMaxCharge * Math.max(popeRate, 1))));
     }
-}
 
-export const initWorship = () => {
-    const worship = new Worship();
+    getRawKeys(): RawData[] {
+        return [
+            {key: "TotemInfo", perPlayer: false, default: []},
+        ]
+    }
 
-    [...Array(6)].forEach((_, index) => {
-        worship.totemInfo.push(new Totem(totemNames[index].replace(/_/g, " "), MapInfo[totemMapIds[index]], 0, index));
-    });
+    init(allItems: Item[], charCount: number) {
+        [...Array(6)].forEach((_, index) => {
+            this.totemInfo.push(new Totem(totemNames[index].replace(/_/g, " "), MapInfo[totemMapIds[index]], 0, index));
+        });
 
-    return worship;
-}
+        return this;
+    }
 
-const parseWorship: IParser = function (raw: Cloudsave, data: Map<string, any>) {
-    const worship = data.get("worship") as Worship;
-    const totemInfo = safeJsonParse(raw, "TotemInfo", []) as number[][];
+    parse(data: Map<string, any>): void {
+        const worship = data.get(this.getDataKey()) as Worship;
+        const totemInfo = data.get("TotemInfo") as number[][];
 
-    const waveInfo = totemInfo[0];
-    worship.totemInfo.forEach(totem => {
-        if (waveInfo.length > totem.index) {
-            totem.maxWave = waveInfo[totem.index];
-        }
-    });
+        const waveInfo = totemInfo[0];
+        worship.totemInfo.forEach(totem => {
+            if (waveInfo.length > totem.index) {
+                totem.maxWave = waveInfo[totem.index];
+            }
+        });
 
-    data.set("worship", worship);
+        // Some worship data has no "persistence", so we reset the previous data.
+        worship.playerData = [];
+    }
 }
 
 export const updateWorship = (data: Map<string, any>) => {
@@ -191,5 +194,3 @@ export const updateWorship = (data: Map<string, any>) => {
 
     return worship;
 }
-
-export default parseWorship;

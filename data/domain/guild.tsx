@@ -1,7 +1,7 @@
 import { lavaFunc } from "../utility"
-import { Cloudsave } from "./cloudsave"
+import { Domain, RawData } from "./base/domain"
 import { GuildBonusBase, initGuildBonusRepo } from "./data/GuildBonusRepo"
-import { IParser, safeJsonParse } from "./idleonData"
+import { Item } from "./items"
 import { GuildBonusModel } from "./model/guildBonusModel"
 
 export const GuildConstants = {
@@ -45,32 +45,29 @@ export class GuildBonus {
 }
 
 
-export class Guild {
-    guildBonuses: GuildBonus[];
+export class Guild extends Domain {
+    guildBonuses: GuildBonus[] = [];
 
-    constructor() {
+    getRawKeys(): RawData[] {
+        return [
+            { key: "Guild", perPlayer: false, default: [] }
+        ]
+    }
+    init(allItems: Item[], charCount: number) {
         this.guildBonuses = GuildBonus.fromBase(initGuildBonusRepo());
+        return this;
+    }
+    parse(data: Map<string, any>): void {
+        const guild = data.get(this.getDataKey()) as Guild;
+        const guildInfo = data.get("Guild") as number[][];
+
+        if (guildInfo.length > 0) {
+            const bonuses = guildInfo[GuildConstants.BonusIndex]
+            bonuses.forEach((bonusLevel, index) => {
+                if (index < guild.guildBonuses.length) {
+                    guild.guildBonuses[index].level = bonusLevel;
+                }
+            })
+        }
     }
 }
-
-export const initGuild = () => {
-    return new Guild();
-}
-
-const parseGuild: IParser = function (raw: Cloudsave, data: Map<string, any>) {
-    const guild = data.get("guild") as Guild;
-    const guildInfo = safeJsonParse(raw, "Guild", []) as number[][];
-
-    if (guildInfo.length > 0) {
-        const bonuses = guildInfo[GuildConstants.BonusIndex]
-        bonuses.forEach((bonusLevel, index) => {
-            if (index < guild.guildBonuses.length) {
-                guild.guildBonuses[index].level = bonusLevel;
-            }
-        })
-    }
-
-    data.set("guild", guild);
-}
-
-export default parseGuild;

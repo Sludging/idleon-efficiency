@@ -1,11 +1,11 @@
 import { GroupByFunction, range } from "../utility";
 import { Arcade } from "./arcade";
-import { Cloudsave } from "./cloudsave";
+import { Domain, RawData } from "./base/domain";
 import { Construction, Library } from "./construction";
 import { AFKTypeEnum } from "./enum/aFKTypeEnum";
-import { IParser, safeJsonParse } from "./idleonData";
+import { safeJsonParse } from "./idleonData";
 import { Item } from "./items";
-import { Activity, Player } from "./player";
+import { Player } from "./player";
 import { Quests } from "./quests";
 import { Storage } from "./storage";
 
@@ -66,14 +66,14 @@ export class Miniboss {
     }
 
     getCurrentCount = (daysSinceKill: number = this.daysSinceLastKill) => {
-        if (daysSinceKill < 3) { 
+        if (daysSinceKill < 3) {
             return 0;
         }
-        
-        switch(this.bossInternalName) {
-            case "mini3a": 
+
+        switch (this.bossInternalName) {
+            case "mini3a":
                 return Math.min(10, Math.floor(Math.pow(daysSinceKill - 3, .55)));
-            case "mini4a": 
+            case "mini4a":
                 return Math.min(8, Math.floor(Math.pow(daysSinceKill - 3, .5)));
             default:
                 return -1;
@@ -81,10 +81,10 @@ export class Miniboss {
     }
 
     getMaxCount = () => {
-        switch(this.bossInternalName) {
-            case "mini3a": 
+        switch (this.bossInternalName) {
+            case "mini3a":
                 return 10;
-            case "mini4a": 
+            case "mini4a":
                 return 8;
             default:
                 return -1;
@@ -107,13 +107,13 @@ export class Miniboss {
     }
 }
 
-export class Account {
+export class Account extends Domain {
     keys: Key[] = [];
     coloTickets: Item = Item.emptyItem("Colo Tickets");
     library: Library = new Library();
     miniBosses: Miniboss[] = [];
     totalMoney: number = 0;
-    
+
     // Arcade
     arcadeMaxBalls: number = 0;
     arcadeBallsToClaim: number = 0;
@@ -130,55 +130,58 @@ export class Account {
         [AFKTypeEnum.Divinity]: 0,
         [AFKTypeEnum.Nothing]: 0,
     };
+
+    getRawKeys(): RawData[] {
+        return [
+            {key: "CYKeysAll", perPlayer: false, default: []},
+            {key: "CYColosseumTickets", perPlayer: false, default: 0},
+        ]
+    }
+
+    init(allItems: Item[], charCount: number) {
+        console.log("Accout init", this.miniBosses);
+        this.miniBosses.push(new Miniboss("mini3a", 0));
+        this.miniBosses.push(new Miniboss("mini4a", 0));
+
+        allItems.filter(item => isBossKeyRegex().exec(item.internalName)).forEach((keyItem) => {
+            const newKey = new Key(keyItem.duplicate());
+            this.keys.push(newKey);
+        })
+
+        const coloItem = (allItems.find(item => item.internalName == "TixCol") as Item).duplicate();
+        this.coloTickets = coloItem;
+
+        return this;
+    }
+
+    parse(data: Map<string, any>): void {
+        const account = data.get(this.getDataKey()) as Account;
+        const optionList = data.get("OptLacc") as number[];
+        const keyData = data.get("CYKeysAll") as number[];
+
+        keyData.forEach((keyCount, keyIndex) => {
+            const keyItem = account.keys.find(key => key.item.internalName == `Key${keyIndex + 1}`)
+            if (keyCount > 0 && keyItem) {
+                keyItem.item.count = keyCount;
+            }
+        })
+
+        account.coloTickets.count = data.get("CYColosseumTickets") as number;
+
+        account.miniBosses.forEach(boss => {
+            // W3 Mini Boss
+            if (boss.bossInternalName == "mini3a") {
+                boss.setDaysSinceLastKill(optionList[96] as number || 0);
+            }
+            // W4 Mini Boss
+            if (boss.bossInternalName == "mini4a") {
+                boss.setDaysSinceLastKill(optionList[98] as number || 0);
+            }
+        })
+    }
 }
 
 const isBossKeyRegex = () => { return /Key(\d+)/g; };
-
-
-export const initAccount = (allItems: Item[]) => {
-    const account = new Account();
-    account.miniBosses.push(new Miniboss("mini3a", 0));
-    account.miniBosses.push(new Miniboss("mini4a", 0));
-
-    allItems.filter(item => isBossKeyRegex().exec(item.internalName)).forEach((keyItem) => {
-        const newKey = new Key(keyItem.duplicate());
-        account.keys.push(newKey);
-    })
-
-    const coloItem = (allItems.find(item => item.internalName == "TixCol") as Item).duplicate();
-    account.coloTickets = coloItem;
-
-    return account;
-}
-
-const parseAccount: IParser = function (raw: Cloudsave, data: Map<string, any>) {
-    const account = data.get("account") as Account;
-    const allItems = data.get("itemsData") as Item[];
-    const optionList = data.get("OptLacc") as number[];
-    const keyData = safeJsonParse(raw, "CYKeysAll", []) as number[];
-
-    keyData.forEach((keyCount, keyIndex) => {
-        const keyItem = account.keys.find(key => key.item.internalName == `Key${keyIndex + 1}`)
-        if (keyCount > 0 && keyItem) {
-            keyItem.item.count = keyCount;
-        }
-    })
-
-    account.coloTickets.count = safeJsonParse(raw, "CYColosseumTickets", 0) as number;
-
-    account.miniBosses.forEach(boss => {
-        // W3 Mini Boss
-        if (boss.bossInternalName == "mini3a") {
-            boss.setDaysSinceLastKill(optionList[96] as number || 0);
-        } 
-        // W4 Mini Boss
-        if (boss.bossInternalName == "mini4a") {
-            boss.setDaysSinceLastKill(optionList[98] as number || 0);
-        } 
-    })
-
-    data.set("account", account);
-}
 
 export const updateAccount = (data: Map<string, any>) => {
     const account = data.get("account") as Account;
@@ -199,16 +202,16 @@ export const updateAccount = (data: Map<string, any>) => {
 
 
     // Check how many players are in each activity type.
-    GroupByFunction(players, function(player: Player) { return player.currentMonster && player.currentMonster.details ? player.currentMonster.details.AFKtype : undefined})
-    .forEach(players => {
-        const firstPlayer = players[0] ?? undefined;
-        if (firstPlayer && firstPlayer.currentMonster && firstPlayer.currentMonster.details) {
-            account.activity[firstPlayer.currentMonster.details.AFKtype] = players.length;
-        }
-        else {
-            account.activity[AFKTypeEnum.Error] += players.length;
-        }
-    })
+    GroupByFunction(players, function (player: Player) { return player.currentMonster && player.currentMonster.details ? player.currentMonster.details.AFKtype : undefined })
+        .forEach(players => {
+            const firstPlayer = players[0] ?? undefined;
+            if (firstPlayer && firstPlayer.currentMonster && firstPlayer.currentMonster.details) {
+                account.activity[firstPlayer.currentMonster.details.AFKtype] = players.length;
+            }
+            else {
+                account.activity[AFKTypeEnum.Error] += players.length;
+            }
+        })
 
     // Copy library (or well, reference)
     account.library = construction.library;
@@ -219,8 +222,6 @@ export const updateAccount = (data: Map<string, any>) => {
     // Arcade
     account.arcadeMaxBalls = arcade.maxBalls;
     account.arcadeBallsToClaim = arcade.ballsToClaim;
-    
+
     return account;
 }
-
-export default parseAccount;

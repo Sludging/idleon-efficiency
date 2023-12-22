@@ -1,7 +1,7 @@
 import { round } from '../utility';
-import { Cloudsave } from './cloudsave';
+import { Domain, RawData } from './base/domain';
 import { initSaltLickRepo, SaltLickBase } from './data/SaltLickRepo';
-import { IParser, safeJsonParse } from './idleonData';
+import { Item } from './items';
 import { SaltLickModel } from './model/saltLickModel';
 
 const range = (start: number, end: number) => {
@@ -19,11 +19,27 @@ export class SaltLickBonus {
     }
 }
 
-export class SaltLick {
-    bonuses: SaltLickBonus[];
+export class SaltLick extends Domain {
+    bonuses: SaltLickBonus[] = [];
 
-    constructor() {
+    getRawKeys(): RawData[] {
+        return [
+            {key: "SaltLick", perPlayer: false, default: []}
+        ]
+    }
+    init(allItems: Item[], charCount: number) {
         this.bonuses = SaltLickBonus.fromBase(initSaltLickRepo());
+        return this;
+    }
+    parse(data: Map<string, any>): void {
+        const saltLick = data.get(this.getDataKey()) as SaltLick;
+        const rawData = data.get("SaltLick") as number[];
+    
+        rawData.forEach((bonus, index) => { // for each salt lick bonus
+            if (index < saltLick.bonuses.length) { // ignore unknown values.
+                saltLick.bonuses[index].level = bonus;
+            }
+        });
     }
 
     getBonus = (bonusIndex: number, roundResult: boolean = false) => {
@@ -57,22 +73,3 @@ export class SaltLick {
         return bonus.data.desc.replace("{", this.getBonus(bonusIndex, true).toString());
     }
 }
-
-export const initSaltLick = () => {
-    return new SaltLick();
-}
-
-const parseSaltLick: IParser = function (raw: Cloudsave, data: Map<string, any>) {
-    const saltLick = data.get("saltLick") as SaltLick;
-    const rawData = safeJsonParse(raw, "SaltLick", []) as number[];
-
-    rawData.forEach((bonus, index) => { // for each salt lick bonus
-        if (index < saltLick.bonuses.length) { // ignore unknown values.
-            saltLick.bonuses[index].level = bonus;
-        }
-    });
-
-    data.set("saltLick", saltLick);
-}
-
-export default parseSaltLick;

@@ -26,7 +26,6 @@ import { Alchemy, Bubble, CauldronIndex } from "../data/domain/alchemy";
 import { Stamp } from '../data/domain/stamps';
 import { Shrine, ShrineConstants } from '../data/domain/shrines';
 import { PlayerStatues } from '../data/domain/statues';
-import { PostOfficeConst, PostOfficeExtra } from '../data/domain/postoffice'
 
 import { getCoinsArray, lavaFunc, notUndefined, nFormatter } from '../data/utility';
 import CoinsDisplay from '../components/coinsDisplay';
@@ -55,6 +54,7 @@ import { Sigils } from '../data/domain/sigils';
 import { Chip } from '../data/domain/lab';
 import { AnvilWrapper } from '../data/domain/anvil';
 import { Alerts, CardSetAlert } from '../data/domain/alerts';
+import { POExtra } from '../data/domain/postoffice';
 
 
 function ItemSourcesDisplay({ sources, dropInfo }: { sources: SourcesModel, dropInfo: DropSource[] }) {
@@ -856,7 +856,7 @@ function TalentDisplay({ player }: { player: Player }) {
     );
 }
 
-function PostOfficeDisplay({ player, extra }: { player: Player, extra: PostOfficeExtra }) {
+function PostOfficeDisplay({ player, extra }: { player: Player, extra: POExtra }) {
     const size = useContext(ResponsiveContext);
 
     const unSpentPoints = useMemo(() => {
@@ -1148,13 +1148,10 @@ function PlayerTab({ player }: PlayerTabProps) {
     const [playerStatues, setPlayerStatues] = useState<PlayerStatues | undefined>(undefined);
     const [index, setIndex] = useState<number>(1);
     const [activeBubbles, setActiveBubbles] = useState<Bubble[]>([]);
-    const [poExtra, setPoExtra] = useState<PostOfficeExtra>({
-        misc: 0,
-        complete: 0,
-        streak: 0
-    });
 
     const appContext = useContext(AppContext);
+    const theData = appContext.data.getData();
+    const poExtra = theData.get("POExtra");
     const onActive = (nextIndex: number) => setIndex(nextIndex);
 
     useEffect(() => {
@@ -1167,7 +1164,6 @@ function PlayerTab({ player }: PlayerTabProps) {
             if (player.activeBubbles.length > 0) {
                 setActiveBubbles(player.activeBubbles);
             }
-            setPoExtra(theData.get("POExtra"));
         }
         if ((player.classId != ClassIndex.Barbarian && player.classId != ClassIndex.Blood_Berserker) && index == 11) {
             setIndex(1);

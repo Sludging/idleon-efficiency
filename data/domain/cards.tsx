@@ -1,9 +1,9 @@
 import { IDforCardBonus, IDforCardSETbonus } from "../maps";
-import { Cloudsave } from "./cloudsave";
+import { Domain, RawData } from "./base/domain";
 import { CardDataBase, initCardRepo } from "./data/CardRepo";
 import { EnemyInfo } from "./enemies";
-import { IParser, safeJsonParse } from "./idleonData";
 import { ImageData } from "./imageData";
+import { Item } from "./items";
 import { CardDataModel } from "./model/cardDataModel";
 import { Player } from "./player";
 import { Rift } from "./rift";
@@ -27,7 +27,7 @@ export class Card {
         }
     }
 
-    getStars = (): number => { 
+    getStars = (): number => {
         switch (true) {
             // cchiz is .. special? .. who knows why.
             case this.id == "Boss3B" && this.fivestar && this.count > this.data.perTier * 36: return 5;
@@ -117,19 +117,29 @@ export class CardInfo {
     }
 }
 
-export const initCards = () => {
-    return Card.fromBase(initCardRepo());
+export class Cards extends Domain {
+    getRawKeys(): RawData[] {
+        return [
+            { key: "Cards0", default: {}, perPlayer: false }
+        ]
+    }
+
+    init(allItems: Item[], charCount: number) {
+        return Card.fromBase(initCardRepo());
+    }
+
+    parse(data: Map<string, any>): void {
+        const cardData = data.get("Cards0") as Record<string, number>;
+        const cards = data.get(this.getDataKey()) as Card[];
+
+        cards.forEach(card => {
+            card.count = cardData[card.id] ?? 0;
+        })
+    }
 }
 
-const parseCards: IParser = function (raw: Cloudsave, data: Map<string, any>) {
-    const cardData = safeJsonParse(raw, "Cards0", {}) as Record<string, number>;
-    const cards = data.get("cards") as Card[];
-
-    cards.forEach(card => {
-        card.count = cardData[card.id] ?? 0;
-    })
-
-    data.set("cards", cards)
+export const initCards = () => {
+    return Card.fromBase(initCardRepo());
 }
 
 export const updateCards = (data: Map<string, any>) => {
@@ -164,5 +174,3 @@ export const updateCards = (data: Map<string, any>) => {
         })
     }
 }
-
-export default parseCards;

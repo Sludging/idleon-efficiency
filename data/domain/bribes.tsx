@@ -1,6 +1,6 @@
-import { Cloudsave } from "./cloudsave";
+import { Domain, RawData } from "./base/domain";
 import { BribeBase, initBribeRepo } from "./data/BribeRepo";
-import { IParser, safeJsonParse } from "./idleonData";
+import { Item } from "./items";
 
 export const BribeConst = {
     StampBribe: 0
@@ -30,21 +30,24 @@ export class Bribe {
     }
 }
 
-export const initBribes = () => {
-    return Bribe.fromBase(initBribeRepo());
+export class Bribes extends Domain {
+    getRawKeys(): RawData[] {
+        return [
+            { key: "BribeStatus", perPlayer: false, default: [] }
+        ]
+    }
+    init(allItems: Item[], charCount: number) {
+        return Bribe.fromBase(initBribeRepo());
+    }
+    parse(data: Map<string, any>): void {
+        const bribes = data.get(this.getDataKey()) as Bribe[];
+        const bribesData = data.get("BribeStatus") as number[];
+    
+        bribesData.forEach((bribe, index) => {
+            if (index < bribes.length) { // ignore future values
+                bribes[index].status = bribe as BribeStatus;
+            }
+        })
+    }
+
 }
-
-const parseBribes: IParser = function (raw: Cloudsave, data: Map<string, any>) {
-    const bribes = data.get("bribes") as Bribe[];
-    const bribesData = safeJsonParse(raw, "BribeStatus", []) as number[];
-
-    bribesData.forEach((bribe, index) => {
-        if (index < bribes.length) { // ignore future values
-            bribes[index].status = bribe as BribeStatus;
-        }
-    })
-
-    data.set("bribes", bribes);
-}
-
-export default parseBribes;

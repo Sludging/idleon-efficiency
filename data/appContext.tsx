@@ -47,12 +47,12 @@ Known paths:
 
 
 
-export const AppProvider: React.FC<{ appLoading: boolean, data: { data: Map<string, any>, charNames: string[] } | undefined, domain: string, children?: React.ReactNode }> = ({ appLoading, data, domain, children }) => {
+export const AppProvider: React.FC<{ appLoading: boolean, data: { data: Map<string, any>, charNames: string[] } | undefined, domain: string, accountData: Map<string, any>, children?: React.ReactNode }> = ({ appLoading, data, domain, accountData, children }) => {
   // This section is called multiple times so I used memos, is that .. an issue?
   const allItems = useMemo(() => initAllItems(), []);
-  const baseAccountData = useMemo(() => initAccountDataKeys(allItems), []);
+  useMemo(() => initAccountDataKeys(accountData, allItems), []);
 
-  const [idleonData, setData] = useState<IdleonData>(new IdleonData(baseAccountData, new Date()));
+  const [idleonData, setData] = useState<IdleonData>(new IdleonData(accountData, new Date()));
   const [appStatus, setAppStatus] = useState<AppStatus>(AppStatus.Ready);
   const [dataStatus, setDataStatus] = useState<DataStatus>(DataStatus.Init);
   const [fireStore, setFireStore] = useState<FirestoreData | undefined>(undefined);

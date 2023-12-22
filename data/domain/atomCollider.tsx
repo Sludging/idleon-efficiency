@@ -6,8 +6,8 @@ import { Alchemy } from './alchemy';
 import { ImageData } from './imageData';
 import { nFormatter, range } from '../utility';
 import { TaskBoard } from './tasks';
-import { IParser, safeJsonParse } from './idleonData';
-import { Cloudsave } from './cloudsave';
+import { Domain, RawData } from './base/domain';
+import { Item } from './items';
 
 export class Atom {
     level: number = 0;
@@ -100,7 +100,7 @@ export class CarbonAtom extends Atom {
 
     override getBonusText = () => {
         return this.data.desc.replace(/{/g, (this.level * this.data.bonusPerLv).toString())
-        .replace(/}/, this.getBonus().toString());
+            .replace(/}/, this.getBonus().toString());
     }
 }
 
@@ -115,18 +115,18 @@ export class FluorideAtom extends Atom {
 
     override getBonusText = () => {
         return this.data.desc.replace(/{/g, (this.level * this.data.bonusPerLv).toString())
-        .replace(/>/, nFormatter(Math.max(0, 100 * (this.getBonus() - 1)), "Big"));
+            .replace(/>/, nFormatter(Math.max(0, 100 * (this.getBonus() - 1)), "Big"));
     }
 }
 
 export class OxygenAtom extends Atom {
     override getBonusText = () => {
         return this.data.desc.replace(/{/g, (this.level * this.data.bonusPerLv).toString())
-        .replace(/</, this.level.toString());
+            .replace(/</, this.level.toString());
     }
 }
 
-export class AtomCollider {
+export class AtomCollider extends Domain {
     particles: number = 0;
     atoms: Atom[] = Atom.fromBase(initAtomColliderRepo())
 
@@ -137,24 +137,29 @@ export class AtomCollider {
             width: 29
         }
     }
-}
 
-export const initAtomCollider = () => {
-    return new AtomCollider();
-}
+    getRawKeys(): RawData[] {
+        return [
+            {key: "Atoms", perPlayer: false, default: []},
+            {key: "Divinity", perPlayer: false, default: []},
+        ]
+    }
 
-const parseAtomCollider: IParser = function (raw: Cloudsave, data: Map<string, any>) {
-    const collider = data.get("collider") as AtomCollider;
-    const atomsData = safeJsonParse(raw, "Atoms", []) as number[] || [];
-    const divinityData = safeJsonParse(raw, "Divinity", []) as number[] || [];
+    init(allItems: Item[], charCount: number) {
+        return this;
+    }
 
-    collider.atoms.forEach(atom => {
-        atom.level = atomsData[atom.index] ?? 0;
-    });
+    parse(data: Map<string, any>): void {
+        const collider = data.get(this.getDataKey()) as AtomCollider;
+        const atomsData = data.get("Atoms") as number[] || [];
+        const divinityData = data.get("Divinity") as number[] || [];
 
-    collider.particles = divinityData[39];
+        collider.atoms.forEach(atom => {
+            atom.level = atomsData[atom.index] ?? 0;
+        });
 
-    data.set("collider", collider);
+        collider.particles = divinityData[39];
+    }
 }
 
 // Currently all data only requires parsing, can be very high on post processing list.
@@ -185,5 +190,3 @@ export function updateAtomCollider(data: Map<string, any>) {
 
     return collider;
 }
-
-export default parseAtomCollider;

@@ -1,8 +1,8 @@
 import { range } from "../utility";
-import { Cloudsave } from "./cloudsave";
+import { Domain, RawData } from "./base/domain";
 import { initPrayerRepo, PrayerBase } from "./data/PrayerRepo";
-import { IParser, safeJsonParse } from "./idleonData";
 import { ImageData } from "./imageData";
+import { Item } from "./items";
 import { PrayerModel } from "./model/prayerModel";
 
 export class Prayer {
@@ -64,20 +64,23 @@ export class Prayer {
     }
 }
 
-export const initPrayers = () => {
-    return Prayer.fromBase(initPrayerRepo());
+export class Prayers extends Domain {
+    getRawKeys(): RawData[] {
+        return [
+            { key: "PrayOwned", default: [], perPlayer: false},
+        ]
+    }
+    init(allItems: Item[], charCount: number) {
+        return Prayer.fromBase(initPrayerRepo());
+    }
+    parse(data: Map<string, any>): void {
+        const prayerData = data.get(this.getDataKey());
+        const rawData = data.get("PrayOwned") as number[];
+        rawData.forEach((prayer, index) => { // for each prayer
+            if (index < prayerData.length) { // ignore unknown prayers.
+                prayerData[index].level = prayer;
+            }
+        });
+    }
+
 }
-
-const parsePrayers: IParser = function (raw: Cloudsave, data: Map<string, any>) {
-    const prayerData = data.get("prayers");
-    const rawData = safeJsonParse(raw, "PrayOwned", []) as number[];
-    rawData.forEach((prayer, index) => { // for each prayer
-        if (index < prayerData.length) { // ignore unknown prayers.
-            prayerData[index].level = prayer;
-        }
-    });
-
-    data.set("prayers", prayerData);
-}
-
-export default parsePrayers;
