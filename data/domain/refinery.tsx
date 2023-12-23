@@ -163,6 +163,9 @@ export class Refinery extends Domain {
         const refinery = data.get(this.getDataKey()) as Refinery;
         const refineryData = data.get("Refinery") as any[][];
 
+        // Reset some data before every parse;
+        refinery.storage = [];
+
         if (refineryData.length > 0) {
             const unlockedSalts = refineryData[0][0];
 

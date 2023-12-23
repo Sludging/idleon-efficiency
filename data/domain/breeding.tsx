@@ -313,7 +313,7 @@ export class Territory {
     }
 
     static fromBase = (data: TerritoryFightBase[]) => {
-        return data.map(territory => {
+        return data.filter(territory => territory.data.battleName != "Filler Filler").map(territory => {
             const toReturn = new Territory(territory.index, { ...territory.data });
             // If index is over 14 (after arena territory index), the territory req is the one from the index before.
             if (toReturn.index > 14) {

@@ -73,7 +73,10 @@ export class Sigils extends Domain {
             sigil.progress = cauldronP2w[4][2 * sigil.index]
         })
 
-        const jobsThatMatter = cauldronJobs1.slice(0, 10); // TODO: Change this to 11 when Lava fixes the bug that player 10 isn't helpful.
+        // Reset active players to 0 before parse.
+        sigils.sigils.forEach(sigil => sigil.activePlayers = 0);
+        
+        const jobsThatMatter = cauldronJobs1.slice(0, 11); // TODO: Change this to 11 when Lava fixes the bug that player 10 isn't helpful.
         jobsThatMatter.forEach((job, playerIndex) => {
             const sigilIndex = Math.round(job) - 100;
             if (sigilIndex > 0) {
