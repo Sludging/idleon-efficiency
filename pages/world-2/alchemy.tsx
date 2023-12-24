@@ -125,6 +125,7 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
                                 } />
                         }
                     </Box>
+                    <Text size="small">Upgraded: {bubble.getPercentUpgraded()}%</Text>
                 </Box>
             </Box>
         )

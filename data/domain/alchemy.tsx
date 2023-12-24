@@ -163,6 +163,28 @@ export class Bubble {
         return handleToolBubbles(titleText, this.name);
     }
 
+    // returns -1 if the bubble can't approach 100% (scales linearly)
+    getPercentUpgraded = (): number => {
+        // debugger;
+        if (this.func == "add" || this.func == "bigBase") {
+            return -1;
+        }
+        
+        //these bubbles have max caps of usefullness
+        switch(this.name){
+            case "Wyoming Blood":
+            case "Sploosh Sploosh":
+            case "Bug²":
+            case "Molto Loggo":
+                return Math.min(100, 100 * (this.x1 + this.level * this.x2) / 300)
+            case "Prowesessary":
+                return Math.min(100, (100 * this.x1 * this.level) / (this.level + this.x2))
+        }
+
+        //default bubble behaivor
+        return (100 * this.level) / (this.level + this.x2);
+    }
+
 }
 
 export class DiamonChefBubble extends Bubble {
