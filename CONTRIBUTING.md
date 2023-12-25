@@ -21,5 +21,4 @@ Every PR should fail saying it wasn't able to deploy to Vercel. This is expected
 ## What's wrong with the data flow
 
 * `init` - My recent refactor broke this down to it's own phase and I think it works semi-well. The issue comes with how I try to do the init phase only once and it means the `parse` function often ends up double adding information and it needs to reset certain information to avoid double handling.
- * This can potentially be resolved by essentially tying the `init` and `parse` phases to a specific `lastUpdatedTime`. I'll experiment with that shortly. At that point we will init/parse once per incoming cloud save. This might not be super efficient but it's less likely to caused bugs.
 * `calculate phase` - This currently has to happen in a very strict order, or you end up with wrong results. This is very manual and likely to cause mistakes in the future. Any improvements to how order is determined or potentially switching this to some event based approach would go a long way.
