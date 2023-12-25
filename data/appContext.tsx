@@ -73,10 +73,9 @@ export const AppProvider: React.FC<{ appLoading: boolean, data: { data: Map<stri
     setDataStatus(DataStatus.StaticData);
   }, [appStatus, dataStatus]);
 
-  const handleLiveData = async (cloudsave: Cloudsave, charNames: string[], serverVars: Record<string, any>) => {
-    // TODO: FIX COMPANIONS
+  const handleLiveData = async (cloudsave: Cloudsave, charNames: string[], serverVars: Record<string, any>, companions: number[]) => {
     setDataStatus(DataStatus.Loading);
-    const newData = await updateIdleonData(idleonData.getData(), cloudsave, charNames, [], allItems, serverVars, false);
+    const newData = await updateIdleonData(idleonData.getData(), cloudsave, charNames, companions, allItems, serverVars, false);
     setData(newData);
     sendEvent({
       action: "handle_snapshot",
