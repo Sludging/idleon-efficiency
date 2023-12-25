@@ -607,6 +607,13 @@ export class Players extends Domain {
 
         const players = data.get(this.getDataKey()) as Player[];
 
+        // Due to the issue with calling parse multiple times on the same init, it's easier to just start fresh every time.
+        range(0, charCount).forEach(() => {
+            if (players.length > 0) {
+                players.pop();
+            }
+        })
+        
         // Make sure we init all the players properly.
         range(0, charCount).forEach((_, playerIndex) => {
             // If this is the first time handling this player, init.
