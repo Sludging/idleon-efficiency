@@ -182,6 +182,8 @@ export const updateDivinity = (data: Map<string, any>) => {
     const activeBubblePassiveDivinityBonus = alchemy.getBubbleBonusForKey("Y2ACTIVE")
     divinity.gods.forEach(god => {
         god.activeBubblePassiveBonus = activeBubblePassiveDivinityBonus;
+        // Reset previous info as it will be calculated again in the next section.
+        god.linkedPlayers = [];
     })
 
     // Update the linked player to each god by iterating on each player's data.

@@ -137,9 +137,6 @@ export class Worship extends Domain {
                 totem.maxWave = waveInfo[totem.index];
             }
         });
-
-        // Some worship data has no "persistence", so we reset the previous data.
-        worship.playerData = [];
     }
 }
 
@@ -149,6 +146,9 @@ export const updateWorship = (data: Map<string, any>) => {
     const alchemy = data.get("alchemy") as Alchemy;
     const stamps = data.get("stamps") as Stamp[][];
 
+    // Reset the data since it will all be calculated in the next section.
+    worship.playerData = [];
+    
     if (worship.totemInfo.length > 0) {
         players.forEach(player => {
             const worshipLevel = player.skills.get(SkillsIndex.Worship)?.level;
@@ -172,6 +172,7 @@ export const updateWorship = (data: Map<string, any>) => {
             const talentBonus = chargeSpeedTalent?.getBonus() ?? 0;
             const chargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "SoulCard5")?.getBonus() ?? 0;
             const chargeRate = playerSkull ? Worship.getChargeRate(playerSkull.Speed, worshipLevel, popeBonus, chargeCardBonus, flowinStamp.getBonus(worshipLevel), talentBonus) : 0;
+
             worship.playerData.push({
                 maxCharge: maxCharge,
                 chargeRate: chargeRate,

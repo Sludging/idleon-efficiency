@@ -179,6 +179,9 @@ export class Forge extends Domain {
             }
         });
 
+        // Reset any previous info, next section will re-calculate it if needed.
+        forge.slots = [];
+
         let index = 0;
         while (index < forgeItemQuantity.length) {
             const oreItem = allItems.find(item => item.internalName == forgeItemOrder[index])?.duplicate() ?? Item.emptyItem(forgeItemOrder[index]);

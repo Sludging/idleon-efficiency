@@ -65,12 +65,16 @@ export const updateCompanionImpact = (data: Map<string, any>) => {
     // Rift Slug
     if (companions.find(c => c.id === 1)?.owned) {
         players.forEach(player => {
-            player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
-                .forEach(talent => {
-                    talent.level += talent.level > 0 ? 25 : 0;
-                    talent.maxLevel += 25;
-                });
-            player.extraLevelsFromSlug = 25;
+            // avoid double handling.
+            if (player.extraLevelsFromSlug != 25) {
+                player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
+                    .forEach(talent => {
+                        talent.level += talent.level > 0 ? 25 : 0;
+                        talent.maxLevel += 25;
+                    });
+                player.extraLevelsFromSlug = 25;
+            }
+
         })
     }
 

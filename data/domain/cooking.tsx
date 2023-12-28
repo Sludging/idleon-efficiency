@@ -451,6 +451,10 @@ export const updateCooking = (data: Map<string, any>) => {
     cooking.meals.forEach(meal => {
         meal.mainframeBonus = jewelMealBonus
         meal.reducedCostToUpgrade = voidPlateAchiev;
+
+        // Reset any previously calculated info, the next section should re-populate this.
+        meal.cookingContribution = 0;
+        meal.maxLevel = 30;
     });
 
     // Meal speed

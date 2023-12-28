@@ -139,7 +139,6 @@ export class Account extends Domain {
     }
 
     init(allItems: Item[], charCount: number) {
-        console.log("Accout init", this.miniBosses);
         this.miniBosses.push(new Miniboss("mini3a", 0));
         this.miniBosses.push(new Miniboss("mini4a", 0));
 
@@ -201,6 +200,8 @@ export const updateAccount = (data: Map<string, any>) => {
     });
 
 
+    // Reset previous info.
+    account.activity[AFKTypeEnum.Error] = 0;
     // Check how many players are in each activity type.
     GroupByFunction(players, function (player: Player) { return player.currentMonster && player.currentMonster.details ? player.currentMonster.details.AFKtype : undefined })
         .forEach(players => {

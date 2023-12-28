@@ -177,11 +177,13 @@ export const updateGaming = (data: Map<string, any>) => {
 }
 
 export const updateSuperbitImpacts = (data: Map<string, any>) => {
-    const gaming = data.get("gaming") as Gaming;
-
+    const gaming = data.get("gaming") as Gaming;    
     //TODO: Do obols
 
     // Totalizer stuff.
+    // Reset info, next section will calculate it.
+    gaming.totalizer.unlockedBonuses = [];
+    
     if (gaming.superbits[7].unlocked) {
         gaming.totalizer.unlockedBonuses.push(TotalizerBonus.Damage);
     }
