@@ -242,6 +242,9 @@ export class Player {
         const lazyCrateBox = this.postOffice.find(box => box.name == "Lazzzy Lootcrate");
         const boxBonus = lazyCrateBox?.bonuses[0].getBonus(lazyCrateBox.level, 0) ?? 0;
 
+        // Reset any existing data, since next section should include all the required info.
+        this.doubleClaimChance.sources = [];
+
         this.doubleClaimChance.value = Math.min(75, bubbleBonus + bribeBonus + guildBonus + Math.min(cardBonus, 20) + boxBonus);
         this.doubleClaimChance.sources.push({ name: "Card", value: cardBonus });
         this.doubleClaimChance.sources.push({ name: "Post Office", value: boxBonus });
@@ -279,6 +282,9 @@ export class Player {
                 (this.talents.find(talent => talent.skillIndex == 643)?.getBonus() ?? 0) +
                 americaTipper +
                 goldenFoodBonus) / 100);
+
+        // Reset any existing data, since next section should include all the required info.
+        this.monsterCash.sources = [];
 
         this.monsterCash.sources.push({ name: "Prayer (*)", value: prayerBonus });
         this.monsterCash.sources.push({ name: "Alchemy Bubbles (STR/AGI/WIS) (*)", value: bubbleAtrributeMath });
@@ -319,6 +325,9 @@ export class Player {
             (1 + cardBonus / 100);
 
         this.crystalChance.value = Math.floor(1 / spawnChance);
+
+        // Reset any existing data, since next section should include all the required info.
+        this.crystalChance.sources = [];
 
         this.crystalChance.sources.push({ name: "Shrine", value: shrineBonus });
         this.crystalChance.sources.push({ name: "Cards", value: cardBonus });
@@ -726,6 +735,9 @@ export const updatePlayers = (data: Map<string, any>) => {
         }
     })
 
+    // Reset data, next section will calculate it.
+    players.forEach(player => player.obolStats = []);
+    
     // Update player obols info so we can use it in maths
     players.forEach(player => {
         obols.playerStats[player.playerID]?.stats.filter(stat => stat.getValue() > 0).forEach(stat => {

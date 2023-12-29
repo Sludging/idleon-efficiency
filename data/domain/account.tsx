@@ -199,9 +199,12 @@ export const updateAccount = (data: Map<string, any>) => {
         key.amountPerDay = Object.entries(quests.dialogData).reduce((sum, [_, playerDialogs]) => sum += playerDialogs[npcName] > dialogReq ? 1 : 0, 0)
     });
 
-
+    const enumKeys = Object.keys(AFKTypeEnum).filter((v) => isNaN(Number(v)))
     // Reset previous info.
-    account.activity[AFKTypeEnum.Error] = 0;
+    for (const key of enumKeys) {
+        account.activity[key as keyof typeof AFKTypeEnum] = 0;
+    }
+    
     // Check how many players are in each activity type.
     GroupByFunction(players, function (player: Player) { return player.currentMonster && player.currentMonster.details ? player.currentMonster.details.AFKtype : undefined })
         .forEach(players => {
