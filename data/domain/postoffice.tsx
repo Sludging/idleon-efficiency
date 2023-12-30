@@ -1,6 +1,8 @@
 import { lavaFunc } from '../utility'
+import { Domain, RawData } from './base/domain';
 import { initPostOfficeUpgradesRepo, PostOfficeUpgradesBase } from './data/PostOfficeUpgradesRepo';
 import { ImageData } from './imageData';
+import { Item } from './items';
 import { PostOfficeUpgradeModel } from './model/postOfficeUpgradeModel';
 
 // PostOfficeInfo0 - The current deliverables
@@ -13,12 +15,6 @@ export const PostOfficeConst = {
     BlacksmithBoxIndex: 5,
     MaxBoxLevel: 400,
     NonPredatoryBoxIndex: 11
-}
-
-export interface PostOfficeExtra {
-    complete: number,
-    misc: number,
-    streak: number
 }
 
 export class BoxBonus {
@@ -54,6 +50,34 @@ export class Box {
 
     static fromBase = (data: PostOfficeUpgradesBase[]) => {
         return data.filter(box => box.data.name != "Filler").map((box, index) => new Box(index, box.id, box.data.bonuses.map(bonus => new BoxBonus(bonus)), box.data.maxLevel));
+    }
+}
+
+export class POExtra extends Domain {
+    complete: number = 0;
+    streak: number = 0;
+    misc: number = 0;
+
+    getRawKeys(): RawData[] {
+        return [
+            {key: "CYDeliveryBoxStreak", perPlayer: false, default: 0},
+            {key: "CYDeliveryBoxComplete", perPlayer: false, default: 0},
+            {key: "CYDeliveryBoxMisc", perPlayer: false, default: 0},
+        ]
+    }
+
+    init(allItems: Item[], charCount: number) {
+        return this;
+    }
+
+    parse(data: Map<string, any>): void {
+        const poextra = data.get(this.getDataKey()) as POExtra;
+        
+        poextra.streak = data.get("CYDeliveryBoxStreak") as number;
+        poextra.complete = data.get("CYDeliveryBoxComplete") as number;
+        poextra.misc = data.get("CYDeliveryBoxMisc") as number;
+
+        data.set("POExtra", poextra);
     }
 }
 

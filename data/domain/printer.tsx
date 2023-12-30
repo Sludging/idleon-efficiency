@@ -1,6 +1,8 @@
 import { lavaLog, range } from "../utility";
+import { Domain, RawData } from "./base/domain";
 import { Divinity } from "./divinity";
 import { GemStore } from "./gemPurchases";
+import { Item } from "./items";
 import { Lab } from "./lab";
 import { Player } from "./player";
 import { Rift, SkillMastery } from "./rift";
@@ -18,7 +20,7 @@ export class Sample {
 
     printingQuantity: number = 0;
 
-    constructor(public item: string, public quantity: number) {}
+    constructor(public item: string, public quantity: number) { }
 
     getSampleQuantity = (base: boolean = true) => {
         // If we want base amount, or if the sample isn't actively printing. Just return the raw sample number.
@@ -39,10 +41,10 @@ export class Sample {
 }
 
 export class PlayerInfo {
-    constructor(public samples: Sample[]) {}
+    constructor(public samples: Sample[]) { }
 }
 
-export class Printer {
+export class Printer extends Domain {
     // 2d array of players and their 5 samples.
     samples: Sample[][] = [];
     bestDivineKnightPlayerId: number = -1;
@@ -52,57 +54,76 @@ export class Printer {
 
     GetTotalActive = (itemName: string): number => {
         return this.samples.flatMap(sample => sample)
-        .filter(sample => sample.item == itemName && sample.printing)
-        .reduce((total, sample) => total += sample.getSampleQuantity(false) * sample.printing, 0);
+            .filter(sample => sample.item == itemName && sample.printing)
+            .reduce((total, sample) => total += sample.getSampleQuantity(false) * sample.printing, 0);
     }
-}
 
-export default function parsePrinter(printerData: any[], extraPrinterData: any[], charCount: number) {
-    const toReturn = new Printer();
-    if (printerData) {
-        [...Array(charCount)].forEach((_, playerIndex) => {
-            const samples: Sample[] = [];
-            // First 5 sample slots
-            range(0, 5).forEach(sampleIndex => {
-                const arrayIndex = 5 + (sampleIndex * 2) + (playerIndex * 14);
-                samples.push(new Sample(printerData[arrayIndex], printerData[arrayIndex + 1]));
-            });
+    getRawKeys(): RawData[] {
+        return [
+            {key: "Print", perPlayer: false, default: []},
+            {key: "PrinterXtra", perPlayer: false, default: []},
+        ]
+    }
 
-            // Second set of 5 sample slots
-            range(0, 5).forEach(sampleIndex => {
-                const arrayIndex = (sampleIndex * 2) + (playerIndex * 10);
-                samples.push(new Sample(extraPrinterData[arrayIndex], extraPrinterData[arrayIndex + 1]));
-            });
+    init(allItems: Item[], charCount: number) {
+        return this;
+    }
 
-            
-            range(0,2).forEach(activeIndex => {
-                const printingItem = printerData[5 + 10 + (activeIndex * 2) + (playerIndex * 14)];
-                // If there's no printing item, exit early.
-                if (printingItem == "Blank") {
-                    return;
-                }
+    parse(data: Map<string, any>): void {
+        const printer = data.get(this.getDataKey()) as Printer;
+        const charCount = data.get("charCount") as number;
 
-                const matchingSample = samples.find(sample => sample.item == printingItem);
-                // Old print, without an active sample.
-                const printingQuantity = printerData[6 + 10 + (activeIndex * 2) + (playerIndex * 14)]
+        const printerData = data.get("Print") as any[];
+        const extraPrinterData = data.get("PrinterXtra") as any[];
 
-                // If we have an old print, without an active sample.
-                if (!matchingSample) {
-                    const newSample = new Sample(printingItem, 0);
-                    newSample.printingQuantity = printingQuantity;
-                    newSample.printing += 1;
-                    samples.push(newSample);
-                }
-                else {
-                    matchingSample.printingQuantity = printingQuantity;
-                    matchingSample.printing += 1;
-                }
+        // Some printer data has no "persistence", so we reset the previous data.
+        printer.samples = [];
+
+        if (printerData) {
+            range(0, charCount).forEach((_, playerIndex) => {
+                const samples: Sample[] = [];
+
+                // First 5 sample slots
+                range(0, 5).forEach(sampleIndex => {
+                    const arrayIndex = 5 + (sampleIndex * 2) + (playerIndex * 14);
+                    samples.push(new Sample(printerData[arrayIndex], printerData[arrayIndex + 1]));
+                });
+
+                // Second set of 5 sample slots
+                range(0, 5).forEach(sampleIndex => {
+                    const arrayIndex = (sampleIndex * 2) + (playerIndex * 10);
+                    samples.push(new Sample(extraPrinterData[arrayIndex], extraPrinterData[arrayIndex + 1]));
+                });
+
+                // Active printing slots
+                range(0, 2).forEach(activeIndex => {
+                    const printingItem = printerData[5 + 10 + (activeIndex * 2) + (playerIndex * 14)];
+                    // If there's no printing item, exit early.
+                    if (printingItem == "Blank") {
+                        return;
+                    }
+
+                    const matchingSample = samples.find(sample => sample.item == printingItem);
+                    // Old print, without an active sample.
+                    const printingQuantity = printerData[6 + 10 + (activeIndex * 2) + (playerIndex * 14)]
+
+                    // If we have an old print, without an active sample.
+                    if (!matchingSample) {
+                        const newSample = new Sample(printingItem, 0);
+                        newSample.printingQuantity = printingQuantity;
+                        newSample.printing += 1;
+                        samples.push(newSample);
+                    }
+                    else {
+                        matchingSample.printingQuantity = printingQuantity;
+                        matchingSample.printing += 1;
+                    }
+                })
+
+                printer.samples[playerIndex] = samples;
             })
-
-            toReturn.samples[playerIndex] = samples;
-        })
+        }
     }
-    return toReturn;
 }
 
 export const updatePrinter = (data: Map<string, any>) => {

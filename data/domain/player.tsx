@@ -3,7 +3,7 @@ import { Box, initPostOffice, PostOfficeConst } from './postoffice';
 import { ClassIndex, Talent, ClassTalentMap, GetTalentArray, TalentConst } from './talents';
 import { Card, CardInfo } from "./cards";
 import { Item, Food, Tool, StoneProps } from "./items";
-import { notUndefined } from '../utility';
+import { notUndefined, range } from '../utility';
 import { Cloudsave } from "./cloudsave";
 import { EnemyData, EnemyInfo } from "./enemies";
 import { MapInfo } from "./maps";
@@ -30,6 +30,7 @@ import { Shrine, ShrineConstants } from './shrines';
 import { Divinity } from './divinity';
 import { Deathnote } from './deathnote';
 import { InfiniteStarsBonus, Rift } from './rift';
+import { Domain, RawData } from './base/domain';
 
 export class PlayerStats {
     strength: number = 0;
@@ -186,7 +187,7 @@ export class Player {
             default: return '';
         }
     }
-    
+
     getClassImageData = (): ImageData => {
         return {
             location: `ClassIcons${this.classId.valueOf()}`,
@@ -241,6 +242,9 @@ export class Player {
         const lazyCrateBox = this.postOffice.find(box => box.name == "Lazzzy Lootcrate");
         const boxBonus = lazyCrateBox?.bonuses[0].getBonus(lazyCrateBox.level, 0) ?? 0;
 
+        // Reset any existing data, since next section should include all the required info.
+        this.doubleClaimChance.sources = [];
+
         this.doubleClaimChance.value = Math.min(75, bubbleBonus + bribeBonus + guildBonus + Math.min(cardBonus, 20) + boxBonus);
         this.doubleClaimChance.sources.push({ name: "Card", value: cardBonus });
         this.doubleClaimChance.sources.push({ name: "Post Office", value: boxBonus });
@@ -278,6 +282,9 @@ export class Player {
                 (this.talents.find(talent => talent.skillIndex == 643)?.getBonus() ?? 0) +
                 americaTipper +
                 goldenFoodBonus) / 100);
+
+        // Reset any existing data, since next section should include all the required info.
+        this.monsterCash.sources = [];
 
         this.monsterCash.sources.push({ name: "Prayer (*)", value: prayerBonus });
         this.monsterCash.sources.push({ name: "Alchemy Bubbles (STR/AGI/WIS) (*)", value: bubbleAtrributeMath });
@@ -318,6 +325,9 @@ export class Player {
             (1 + cardBonus / 100);
 
         this.crystalChance.value = Math.floor(1 / spawnChance);
+
+        // Reset any existing data, since next section should include all the required info.
+        this.crystalChance.sources = [];
 
         this.crystalChance.sources.push({ name: "Shrine", value: shrineBonus });
         this.crystalChance.sources.push({ name: "Cards", value: cardBonus });
@@ -474,24 +484,32 @@ const parseTalents = (talentLevels: string, talentMaxLevels: string, player: Pla
     const jsonTalents = JSON.parse(talentLevels);
     const jsonMaxTalents = JSON.parse(talentMaxLevels);
 
-    const talentPageNames: string[] = ClassTalentMap[player.classId].concat(Array(5).fill("Blank").map((_, i) => `Special Talent ${i + 1}`))
-    talentPageNames.forEach((page: string) => {
-        player.talents = player.talents.concat(GetTalentArray(page));
-    })
+    if (player.talents.length == 0) {
+        const talentPageNames: string[] = ClassTalentMap[player.classId].concat(Array(5).fill("Blank").map((_, i) => `Special Talent ${i + 1}`))
+        talentPageNames.forEach((page: string) => {
+            player.talents = player.talents.concat(GetTalentArray(page));
+        })
+    }
 
     player.talents.forEach((talent) => {
         talent.level = jsonTalents[talent.skillIndex] ?? 0;
         talent.maxLevel = jsonMaxTalents[talent.skillIndex] ?? 0;
     })
+    player.extraLevelsFromBear = 0;
+    player.extraLevelsFromES = 0;
+    player.extraLevelsFromTalent = 0;
 
     // Update players talents levels due to elite class level increase talents.
     const extraLevels = Math.floor(player.talents.filter(talent => [149, 374, 539].includes(talent.skillIndex)).reduce((sum, value) => sum += value.getBonus(), 0))
-    player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
-        .forEach(talent => {
-            talent.level += talent.level > 0 ? extraLevels : 0;
-            talent.maxLevel += extraLevels;
-        });
-    player.extraLevelsFromTalent = extraLevels;
+    // Only update if different.
+    if (player.extraLevelsFromTalent == 0 || player.extraLevelsFromTalent != extraLevels) {
+        player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
+            .forEach(talent => {
+                talent.level += talent.level > 0 ? extraLevels : 0;
+                talent.maxLevel += extraLevels;
+            });
+        player.extraLevelsFromTalent = extraLevels;
+    }
 }
 
 const parseSkills = (skills: Array<number>, skillXP: Array<number>, skillXPReqs: Array<number>, player: Player) => {
@@ -583,54 +601,81 @@ const parseEquipment = (
     player.gear = playerEquipment;
 }
 
-export default function parsePlayers(doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], validCharCount: number) {
-    const playerNames = accountData.get("playerNames") as string[];
-    let parsedData = playerNames.slice(0, validCharCount).map((playerName, index) => {
-        let player = new Player(index, playerName);
+export class Players extends Domain {
+    getRawKeys(): RawData[] {
+        // Update this to cover all the sub-functions.
+        return [];
+    }
+    init(allItems: Item[], charCount: number) {
+        return [...Array(charCount)].map((_, pIndex) => new Player(pIndex, `Player_${pIndex}`));
+    }
+    parse(data: Map<string, any>): void {
+        const playerNames = data.get("playerNames") as string[];
+        const charCount = data.get("charCount") as number;
+        const allItems = data.get("itemsData") as Item[];
 
-        Object.entries(keyFunctionMap).forEach(([key, toExecute]) => {
-            try {
-                if (key == "equipment") {
-                    toExecute(doc, player, allItems);
-                }
-                else {
-                    toExecute(doc, player);
-                }
+        const players = data.get(this.getDataKey()) as Player[];
+
+        // Due to the issue with calling parse multiple times on the same init, it's easier to just start fresh every time.
+        range(0, charCount).forEach(() => {
+            if (players.length > 0) {
+                players.pop();
             }
-            catch (e) {
-                console.log(`Something went wrong parsing ${key}`);
-                console.debug(e);
+        })
+        
+        // Make sure we init all the players properly.
+        range(0, charCount).forEach((_, playerIndex) => {
+            // If this is the first time handling this player, init.
+            if (players.length <= playerIndex) {
+                players.push(new Player(playerIndex, playerNames[playerIndex]));
             }
         });
 
-        return player;
-    });
+        // Get rid of this once I convert all the key function maps to work based on the parsed data map instead.
+        const raw = Cloudsave.fromJSON(data.get("rawData"))
 
-    // identify player ranking in each skill
-    const allSkillsMap: Map<SkillsIndex, Array<number>> = new Map<SkillsIndex, Array<number>>();
-
-    // record skill levels across all players in a map
-    parsedData.forEach((player) => {
-        player.skills.forEach((skill, skillIndex) => {
-            if (!allSkillsMap.has(skillIndex)) {
-                allSkillsMap.set(skillIndex, []);
-            }
-            allSkillsMap.get(skillIndex)?.push(skill.level);
+        players.map(player => {
+            Object.entries(keyFunctionMap).forEach(([key, toExecute]) => {
+                try {
+                    if (key == "equipment") {
+                        toExecute(raw, player, allItems);
+                    }
+                    else {
+                        toExecute(raw, player);
+                    }
+                }
+                catch (e) {
+                    console.log(`Something went wrong parsing ${key}`);
+                    console.debug(e);
+                }
+            });
         });
-    });
-    parsedData.forEach((player) => {
-        if (player) {
-            for (const [skillIndex, skill] of player.skills) {
-                const sortedList = allSkillsMap.get(skillIndex)?.sort((a, b) => b - a);
-                if (sortedList) {
-                    const skillRank = sortedList.indexOf(skill.level);
-                    player.skillsRank.set(skillIndex, skillRank);
+
+        // identify player ranking in each skill
+        const allSkillsMap: Map<SkillsIndex, Array<number>> = new Map<SkillsIndex, Array<number>>();
+
+        // record skill levels across all players in a map
+        players.forEach((player) => {
+            player.skills.forEach((skill, skillIndex) => {
+                if (!allSkillsMap.has(skillIndex)) {
+                    allSkillsMap.set(skillIndex, []);
+                }
+                allSkillsMap.get(skillIndex)?.push(skill.level);
+            });
+        });
+
+        players.forEach((player) => {
+            if (player) {
+                for (const [skillIndex, skill] of player.skills) {
+                    const sortedList = allSkillsMap.get(skillIndex)?.sort((a, b) => b - a);
+                    if (sortedList) {
+                        const skillRank = sortedList.indexOf(skill.level);
+                        player.skillsRank.set(skillIndex, skillRank);
+                    }
                 }
             }
-        }
-    })
-
-    return parsedData;
+        })
+    }
 }
 
 export const updatePlayerStarSigns = (data: Map<string, any>) => {
@@ -665,6 +710,7 @@ export const updatePlayers = (data: Map<string, any>) => {
     const obols = data.get("obols") as ObolsData;
     const alchemy = data.get("alchemy") as Alchemy;
     const divinity = data.get("divinity") as Divinity;
+    const deathnote = data.get("deathnote") as Deathnote;
 
     // Set player active bubble array, easier to work with.
     players.forEach(player => {
@@ -682,6 +728,16 @@ export const updatePlayers = (data: Map<string, any>) => {
         }
     })
 
+    // Track player deathnote data on the player object as well.
+    players.forEach(player => {
+        if (deathnote.playerKillsByMap.has(player.playerID)) {
+            player.killInfo = deathnote.playerKillsByMap.get(player.playerID)!;
+        }
+    })
+
+    // Reset data, next section will calculate it.
+    players.forEach(player => player.obolStats = []);
+    
     // Update player obols info so we can use it in maths
     players.forEach(player => {
         obols.playerStats[player.playerID]?.stats.filter(stat => stat.getValue() > 0).forEach(stat => {
@@ -707,13 +763,16 @@ export const updatePlayers = (data: Map<string, any>) => {
     const bearGod = divinity.gods[1];
     bearGod.linkedPlayers.forEach(linkedPlayer => {
         const bearBonus = Math.ceil(bearGod.getMinorLinkBonus(linkedPlayer));
-        linkedPlayer.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
-        .forEach(talent => {
-            talent.level += talent.level > 0 ? bearBonus : 0;
-            talent.maxLevel += bearBonus;
-        });
-        linkedPlayer.extraLevelsFromBear = bearBonus;
-    })    
+        // Only update if different.
+        if (linkedPlayer.extraLevelsFromBear == 0 || linkedPlayer.extraLevelsFromBear != bearBonus) {
+            linkedPlayer.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
+                .forEach(talent => {
+                    talent.level += talent.level > 0 ? bearBonus : 0;
+                    talent.maxLevel += bearBonus;
+                });
+            linkedPlayer.extraLevelsFromBear = bearBonus;
+        }
+    })
 
     // I dunno why I have to sort it now, I never had to before. Need to think about it further.
     return players;
@@ -776,12 +835,15 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
     // Max talent level from Elemental Sorcerer
     players.forEach(player => {
         const esBonus = Math.floor(family.classBonus.get(ClassIndex.Elemental_Sorcerer)?.getBonus(player) ?? 0);
-        player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
-        .forEach(talent => {
-            talent.level += talent.level > 0 ? esBonus : 0;
-            talent.maxLevel += esBonus;
-        });
-        player.extraLevelsFromES = esBonus;
+        // Only update if different.
+        if (player.extraLevelsFromES == 0 || player.extraLevelsFromES != esBonus) {
+            player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
+                .forEach(talent => {
+                    talent.level += talent.level > 0 ? esBonus : 0;
+                    talent.maxLevel += esBonus;
+                });
+            player.extraLevelsFromES = esBonus;
+        }
     })
 }
 

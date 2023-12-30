@@ -1,65 +1,125 @@
-import parseTraps from './traps';
-import parseStamps, { updateStampMaxCarry, updateStamps } from './stamps';
-import parseStatues from './statues';
-import parsePlayers, { Player, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayers } from './player';
-import parseAlchemy, { updateAlchemy } from './alchemy';
-import parseBribes from './bribes';
-import parseGuild from './guild';
-import parseGems from './gemPurchases';
-import parseAchievements from './achievements';
-import parseShrines, { updateShrines } from './shrines';
+import { Traps } from './traps';
+import { Stamps, updateStampMaxCarry, updateStamps } from './stamps';
+import { Statues } from './statues';
+import { Player, Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayers } from './player';
+import { Alchemy, updateAlchemy } from './alchemy';
+import { Bribes } from './bribes';
+import { GemStore } from './gemPurchases';
+import { Achievements } from './achievements';
+import { Shrines, updateShrines } from './shrines';
 import { Item } from './items';
-import parseStorage, { updateStorage } from './storage';
-import parseQuests from './quests';
-import parsePrayers from './prayers';
-import parseRefinery, { updateRefinery } from './refinery';
-import parseSaltLick from './saltLick';
-import parsePrinter, { updatePrinter } from './printer';
-import parseTaskboard from './tasks';
+import { Storage, updateStorage } from './storage';
+import { Quests } from './quests';
+import { Prayers } from './prayers';
+import { Refinery, updateRefinery } from './refinery';
+import { SaltLick } from './saltLick';
+import { Printer, updatePrinter } from './printer';
+import { TaskBoard } from './tasks';
 import { Cloudsave } from './cloudsave';
-import parseWorship, { updateWorship } from './worship';
-import parseConstruction, { updateConstruction } from './construction';
-import parseCards, { updateCards } from './cards';
-import parseArcade, { updateArcade } from './arcade';
-import parseObols from './obols';
-import { calculateFamily } from './family';
-import { parseDungeons } from './dungeons';
-import { parseForge, updateForge } from './forge';
-import { parseCooking, updateCooking } from './cooking';
-import { parseLab, updateLab } from './lab';
-import { parseBreeding, updateAllShinyEffects, updateBreeding } from './breeding';
+import { Worship, updateWorship } from './worship';
+import { Construction, updateConstruction } from './construction';
+import { updateCards, Cards } from './cards';
+import { Arcade, updateArcade } from './arcade';
+import { ObolsData } from './obols';
+import { Family, calculateFamily } from './family';
+import { Dungeons } from './dungeons';
+import { Forge, updateForge } from './forge';
+import { Cooking, updateCooking } from './cooking';
+import { Lab, updateLab } from './lab';
+import { Breeding, updateAllShinyEffects, updateBreeding } from './breeding';
 import { notUndefined } from '../utility';
-import parseSigils, { updateSigils } from './sigils';
-import { parseAnvil, updateAnvil } from './anvil';
-import { updateAlerts } from './alerts';
-import { parseAccount, updateAccount } from './account';
-import parseDivinity, { updateDivinity } from './divinity';
-import parseSailing, { updateMinTravelTime, updateSailing } from './sailing';
-import parseGaming, { updateGaming, updateSuperbitImpacts } from './gaming';
-import parseAtomCollider, { updateAtomCollider } from './atomCollider';
+import { Sigils, updateSigils } from './sigils';
+import { AnvilWrapper, updateAnvil } from './anvil';
+import { Alerts, updateAlerts } from './alerts';
+import { Account, updateAccount } from './account';
+import { Divinity, updateDivinity } from './divinity';
+import { Sailing, updateMinTravelTime, updateSailing } from './sailing';
+import { Gaming, updateGaming, updateSuperbitImpacts } from './gaming';
+import { AtomCollider, updateAtomCollider } from './atomCollider';
 import { updateArtifacts } from './sailing/artifacts';
-import parseConstellations from './constellations';
-import parseSlab from './slab';
-import parseCapacity, { updateCapacity } from './capacity';
-import parseDeathnote, { updateDeathnote } from './deathnote';
-import parseRift from './rift';
+import { Constellations } from './constellations';
+import { Slab } from './slab';
+import { Capacity, updateCapacity } from './capacity';
+import { Deathnote, updateDeathnote } from './deathnote';
 import parseCompanions, { updateCompanionImpact } from './companions';
+import { Domain, HandleRawDataKey } from './base/domain';
+import { Guild } from './guild';
+import { Rift } from './rift';
+import { POExtra } from './postoffice';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
+    const data = doc.get(key);
     try {
-        return JSON.parse(doc.get(key))
+        if (typeof (data) === "string") {
+            return JSON.parse(doc.get(key))
+        }
+        return data;
     }
     catch (e) {
-        //console.debug(key, doc.get(key), e)
+        console.debug(key, doc.get(key), e)
     }
     return emptyValue;
 }
 
+export interface IParser {
+    (raw: Cloudsave, data: Map<string, any>): void
+}
+
+// The full list of data domains that we initilize and parse.
+// The string passed to the constructor is the "data key" that the front-end components
+// will use to read that information, it should only be defined here and init / parse / update functions should use 
+// the 'getDataKey' function instead.
+const domainList: Domain[] = [
+    new Stamps("stamps"),
+    new Traps("traps"),
+    new Statues("statues"),
+    new AnvilWrapper("anvil"),
+    new Prayers("prayers"),
+    new Cards("cards"),
+    new Players("players"),
+    new Alchemy("alchemy"),
+    new Bribes("bribes"),
+    new Guild("guild"),
+    new GemStore("gems"),
+    new Achievements("achievements"),
+    new Slab("slab"),
+    new Shrines("shrines"),
+    new Storage("storage"),
+    new Constellations("constellations"),
+    // TODO: Confirm quests work, it had a special JSON parsing inside which I didn't keep when converting.
+    new Quests("quests"),
+    new Refinery("refinery"),
+    new SaltLick("saltLick"),
+    new Printer("printer"),
+    new TaskBoard("taskboard"),
+    new Worship("worship"),
+    new Construction("construction"),
+    new Arcade("arcade"),
+    new ObolsData("obols"),
+    new Dungeons("dungeons"),
+    new Forge("forge"),
+    new Cooking("cooking"),
+    new Lab("lab"),
+    new Breeding("breeding"),
+    new Sigils("sigils"),
+    new Account("account"),
+    new Divinity("divinity"),
+    new Sailing("sailing"),
+    new Gaming("gaming"),
+    new AtomCollider("collider"),
+    new Capacity("capacity"),
+    new Deathnote("deathnote"),
+    new Family("family"),
+    new Alerts("alerts"),
+    new Rift("rift"),
+    new POExtra("POExtra"),
+]
+
 export class IdleonData {
     private data: Map<string, any>
-    private lastUpdated?: Date
+    private lastUpdated: Date
 
-    constructor(data: Map<string, any>, lastUpdated?: Date) {
+    constructor(data: Map<string, any>, lastUpdated: Date) {
         this.data = data;
         this.lastUpdated = lastUpdated;
     }
@@ -87,62 +147,26 @@ export class IdleonData {
     }
 }
 
-
-const keyFunctionMap: Record<string, Function> = {
-    "stamps": (doc: Cloudsave, allItems: Item[], charCount: number) => parseStamps(doc.get("StampLv"), doc.get("StampLvM"), allItems),
-    "traps": (doc: Cloudsave, charCount: number) => parseTraps([...Array(charCount)].map((_, i) => { return doc.get(`PldTraps_${i}`) })),
-    "statues": (doc: Cloudsave, charCount: number) => parseStatues([...Array(charCount)].map((_, i) => safeJsonParse(doc, `StatueLevels_${i}`, [])), safeJsonParse(doc, `StuG`, [])),
-    "anvil": (doc: Cloudsave, allItems: Item[], charCount: number) => parseAnvil(
-        [...Array(charCount)].map((_, i) => doc.get(`AnvilPA_${i}`)),
-        [...Array(charCount)].map((_, i) => doc.get(`AnvilPAstats_${i}`)),
-        [...Array(charCount)].map((_, i) => doc.get(`AnvilPAselect_${i}`)),
-        allItems),
-    "timeAway": (doc: Cloudsave, charCount: number) => JSON.parse(doc.get('TimeAway')),
-    "cauldronBubbles": (doc: Cloudsave, charCount: number) => doc.get('CauldronBubbles'),
-    "prayers": (doc: Cloudsave, charCount: number) => parsePrayers(safeJsonParse(doc, "PrayOwned", [])),
-    "cards": (doc: Cloudsave, charCount: number) => parseCards(safeJsonParse(doc, 'Cards0', {})),
-    "players": (doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], charCount: number) => parsePlayers(doc, accountData, allItems, charCount),
-    "alchemy": (doc: Cloudsave, allItems: Item[], charCount: number) => parseAlchemy(doc.get("CauldronInfo"), doc.get("CauldUpgLVs"), allItems),
-    "bribes": (doc: Cloudsave, charCount: number) => parseBribes(doc.get("BribeStatus")),
-    "guild": (doc: Cloudsave, charCount: number) => parseGuild(safeJsonParse(doc, "Guild", []),),
-    "gems": (doc: Cloudsave, charCount: number) => parseGems(safeJsonParse(doc, 'GemItemsPurchased', [])),
-    "achievements": (doc: Cloudsave, charCount: number) => parseAchievements(safeJsonParse(doc, 'AchieveReg', []), safeJsonParse(doc, 'SteamAchieve', [])),
-    "slab": (doc: Cloudsave, allItems: Item[], charCount: number) => parseSlab(safeJsonParse(doc, "Cards1", []), allItems),
-    "rawData": (doc: Cloudsave, charCount: number) => doc.toJSON(),
-    "POExtra": (doc: Cloudsave, charCount: number) => {
-        return {
-            streak: doc.get("CYDeliveryBoxStreak"),
-            complete: doc.get("CYDeliveryBoxComplete"),
-            misc: doc.get("CYDeliveryBoxMisc"),
+export const initAccountDataKeys = (accountData: Map<string, any>, allItems: Item[]) => {
+    accountData.set("itemsData", allItems);
+    domainList.forEach(dataDomain => {
+        if (!dataDomain.initialized) {
+            const key = dataDomain.getDataKey();
+            const domainData = dataDomain.init(allItems, 0);
+            // This is to protect from mistakes of forgetting to return a value from init.
+            if (!domainData) {
+                console.error("forgot to return data for init, key:", key);
+            }
+            else {
+                accountData.set(key, domainData);
+                dataDomain.markInitialized();
+            }
         }
-    },
-    "shrines": (doc: Cloudsave, charCount: number) => parseShrines(safeJsonParse(doc, "Shrine", [])),
-    "storage": (doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], charCount: number) => parseStorage(doc, accountData.get("playerNames"), allItems, JSON.parse(doc.get("InvStorageUsed"))),
-    "constellations": (doc: Cloudsave, charCount: number) => parseConstellations(safeJsonParse(doc, "SSprog", [])),
-    "quests": (doc: Cloudsave, accountData: Map<string, any>, allItems: Item[], charCount: number) => parseQuests(doc, accountData, allItems, charCount),
-    "refinery": (doc: Cloudsave, charCount: number) => parseRefinery(safeJsonParse(doc, "Refinery", [])),
-    "saltLick": (doc: Cloudsave, charCount: number) => parseSaltLick(safeJsonParse(doc, "SaltLick", [])),
-    "printer": (doc: Cloudsave, charCount: number) => parsePrinter(safeJsonParse(doc, "Print", []), doc.get("PrinterXtra") as any[], charCount),
-    "taskboard": (doc: Cloudsave, charCount: number) => parseTaskboard(safeJsonParse(doc, `TaskZZ0`, []), safeJsonParse(doc, `TaskZZ1`, []), safeJsonParse(doc, `TaskZZ2`, []), safeJsonParse(doc, `TaskZZ3`, []), safeJsonParse(doc, `TaskZZ4`, []), safeJsonParse(doc, `TaskZZ5`, [])),
-    "worship": (doc: Cloudsave, accountData: Map<string, any>, charCount: number) => parseWorship(safeJsonParse(doc, "TotemInfo", [])),
-    "construction": (doc: Cloudsave, charCount: number) => parseConstruction(safeJsonParse(doc, "Tower", []), doc.get("OptLacc")),
-    "arcade": (doc: Cloudsave, charCount: number) => parseArcade(safeJsonParse(doc, "ArcadeUpg", []), doc.get("OptLacc")),
-    "obols": (doc: Cloudsave, allItems: Item[], charCount: number) => parseObols(doc, charCount, allItems),
-    "dungeons": (doc: Cloudsave, charCount: number) => parseDungeons(safeJsonParse(doc, "DungUpg", []), doc.get("OptLacc")),
-    "forge": (doc: Cloudsave, allItems: Item[], charCount: number) => parseForge(doc.get("ForgeItemQty"), doc.get("ForgeIntProg"), doc.get("ForgeItemOrder"), doc.get("ForgeLV"), allItems),
-    "cooking": (doc: Cloudsave, charCount: number) => parseCooking(safeJsonParse(doc, "Cooking", []), safeJsonParse(doc, "Meals", [])),
-    "lab": (doc: Cloudsave, charCount: number) => parseLab(safeJsonParse(doc, "Lab", []), charCount),
-    "breeding": (doc: Cloudsave, charCount: number) => parseBreeding(safeJsonParse(doc, "PetsStored", []), safeJsonParse(doc, "Pets", []), doc.get("OptLacc"), safeJsonParse(doc, "Territory", []), safeJsonParse(doc, "Breeding", [])),
-    "sigils": (doc: Cloudsave, charCount: number) => parseSigils(safeJsonParse(doc, "CauldronP2W", []), safeJsonParse(doc, "CauldronJobs1", [])),
-    "account": (doc: Cloudsave, allItems: Item[], charCount: number) => parseAccount(doc, allItems),
-    "divinity": (doc: Cloudsave, charCount: number) => parseDivinity(charCount, doc.get("Divinity") as number[] || [], [...Array(charCount)].map((_, index) => doc.get(`AFKtarget_${index}`)), [...Array(charCount)].map((_, index) => doc.get(`SL_${index}`))),
-    "sailing": (doc: Cloudsave, charCount: number) => parseSailing(safeJsonParse(doc, "Sailing", []), safeJsonParse(doc, "Boats", []), safeJsonParse(doc, "Captains", [])),
-    "gaming": (doc: Cloudsave, charCount: number) => parseGaming(doc.get("Gaming") as any[] || [], safeJsonParse(doc, "GamingSprout", []),[...Array(charCount)].map((_, i) => { return doc.get(`Lv0_${i}`) })),
-    "collider": (doc: Cloudsave, charCount: number) => parseAtomCollider(doc.get("Atoms") as number[] || [], doc.get("Divinity") as number[] || []),
-    "capacity": (doc: Cloudsave, charCount: number) => parseCapacity([...Array(charCount)].map((_, index) => new Map(Object.entries(safeJsonParse(doc,`MaxCarryCap_${index}`, new Map()))))),
-    "deathnote": (doc: Cloudsave, charCount: number) => parseDeathnote([...Array(charCount)].map((_, i) => { return doc.get(`KLA_${i}`) })),
-    "rift": (doc: Cloudsave, charCount: number) => parseRift(doc.get("Rift") as number[], [...Array(charCount)].map((_, i) => { return doc.get(`Lv0_${i}`) }), safeJsonParse(doc, "Tower", [])),
+    })
+
+    return accountData;
 }
+
 
 // ORDER IS IMPORTANT, the keys are not relevant as data doesn't get persisted.
 // This allows for multiple calls that touch the same data to happen in the same map (artifacts + sailing for example)
@@ -180,7 +204,7 @@ const postProcessingMap: Record<string, Function> = {
 // I really really hate this.
 const postPostProcessingMap: Record<string, Function> = {
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStampMaxCarry(accountData),
-    "family": (doc: Cloudsave, accountData: Map<string, any>) => calculateFamily(accountData.get("players") as Player[]),
+    "family": (doc: Cloudsave, accountData: Map<string, any>) => calculateFamily(accountData),
     "playersExtraMaths": (doc: Cloudsave, accountData: Map<string, any>) => playerExtraCalculations(accountData),
     "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),
     "refinery": (doc: Cloudsave, accountData: Map<string, any>) => updateRefinery(accountData),
@@ -188,12 +212,12 @@ const postPostProcessingMap: Record<string, Function> = {
     "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
 }
 
-export const updateIdleonData = async (data: Cloudsave, charNames: string[], companions: number[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
-    let accountData = new Map();
+export const updateIdleonData = async (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: number[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
     accountData.set("playerNames", charNames);
-    accountData.set("itemsData", allItems);
     accountData.set("servervars", serverVars);
     accountData.set("OptLacc", data.get("OptLacc"));
+    accountData.set("rawData", data.toJSON())
+    accountData.set("timeAway", JSON.parse(data.get('TimeAway')));
 
     // Handle Companions
     accountData.set("companions", parseCompanions(companions));
@@ -204,27 +228,35 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], com
     accountData.set("lastUpdated", lastUpdated);
 
     const validCharCount = [...Array(charNames.length)].map((_, i) => data.get(`Lv0_${i}`) as number[]).filter(notUndefined).length;
-    Object.entries(keyFunctionMap).forEach(([key, toExecute]) => {
-        try {
-            if (key == "players" || key == "storage" || key == "quests") {
-                accountData.set(key, toExecute(data, accountData, allItems, validCharCount));
-            }
-            else if (key == "worship") {
-                accountData.set(key, toExecute(data, accountData, validCharCount));
-            }
-            else if (key == "obols" || key == "alchemy" || key == "forge" || key == "stamps" || key == "anvil" || key == "account" || key == "slab") {
-                accountData.set(key, toExecute(data, allItems, validCharCount));
-            }
-            else {
-                accountData.set(key, toExecute(data, validCharCount));
-            }
-        }
-        catch (e) {
-            console.debug(e);
-            console.log(`Failed parsing ${key}`);
-            accountData.set(key, undefined);
-        }
-    })
+    accountData.set("charCount", validCharCount);
+
+    // Foreach of our data domains
+    domainList.forEach(dataDomain => {
+        // Get the raw keys
+        const rawKeys = dataDomain.getRawKeys();
+
+        // Safely parse the json from the cloudsave data and store in the map
+        const parseData = new Map<string, any>();
+        rawKeys.forEach(raw => {
+            HandleRawDataKey(raw, parseData, data, validCharCount);
+        });
+
+        // Add the data from the init into the map to be used in the parse.
+        parseData.set(dataDomain.getDataKey(), accountData.get(dataDomain.getDataKey()));
+
+        // Add commonly used data pieces
+        parseData.set("charCount", validCharCount);
+        parseData.set("OptLacc", accountData.get("OptLacc"));
+        parseData.set("lastUpdated", accountData.get("lastUpdated"));
+        parseData.set("itemsData", allItems);
+        parseData.set("playerNames", charNames);
+        // TODO: Get rid of this. It's only used for players since it's a very unique one.
+        parseData.set("rawData", data.toJSON())
+
+
+        // Execute the parse function.
+        dataDomain.parse(parseData);
+    });
 
     // Do post parse processing
     Object.entries(postProcessingMap).forEach(([key, toExecute]) => {
@@ -249,10 +281,10 @@ export const updateIdleonData = async (data: Cloudsave, charNames: string[], com
             //accountData.set(key, undefined);
         }
     })
-    
+
     // I sometimes forget that sorting has implication, fix sorting in the end incase I screwed something up in the post processing functions.
-    const players = accountData.get("players") as Player[];
-    players.sort((playera, playerb) => playera.playerID > playerb.playerID ? 1 : -1);
+    // const players = accountData.get("players") as Player[];
+    // players.sort((playera, playerb) => playera.playerID > playerb.playerID ? 1 : -1);
 
     const newData = new IdleonData(accountData, lastUpdated);
 

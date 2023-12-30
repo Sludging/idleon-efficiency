@@ -14,7 +14,7 @@ import {
     Meter,
     CheckBox
 } from 'grommet'
-import { useState, useEffect, useContext, useMemo } from 'react';
+import { useState, useEffect, useContext, useMemo, MouseEventHandler } from 'react';
 import { AppContext } from '../data/appContext'
 import { GemStore } from '../data/domain/gemPurchases';
 
@@ -26,7 +26,6 @@ import { Alchemy, Bubble, CauldronIndex } from "../data/domain/alchemy";
 import { Stamp } from '../data/domain/stamps';
 import { Shrine, ShrineConstants } from '../data/domain/shrines';
 import { PlayerStatues } from '../data/domain/statues';
-import { PostOfficeConst, PostOfficeExtra } from '../data/domain/postoffice'
 
 import { getCoinsArray, lavaFunc, notUndefined, nFormatter } from '../data/utility';
 import CoinsDisplay from '../components/coinsDisplay';
@@ -35,7 +34,6 @@ import ShadowBox from '../components/base/ShadowBox';
 import TipDisplay, { TipDirection } from '../components/base/TipDisplay';
 import { Alert, CircleInformation, Next } from 'grommet-icons';
 import { NextSeo } from 'next-seo';
-import { MouseEventHandler } from 'hoist-non-react-statics/node_modules/@types/react';
 import { Item, ItemStat, Food, DropSource } from '../data/domain/items';
 import { Storage } from '../data/domain/storage';
 import { Prayer } from '../data/domain/prayers';
@@ -56,6 +54,7 @@ import { Sigils } from '../data/domain/sigils';
 import { Chip } from '../data/domain/lab';
 import { AnvilWrapper } from '../data/domain/anvil';
 import { Alerts, CardSetAlert } from '../data/domain/alerts';
+import { POExtra } from '../data/domain/postoffice';
 
 
 function ItemSourcesDisplay({ sources, dropInfo }: { sources: SourcesModel, dropInfo: DropSource[] }) {
@@ -854,10 +853,10 @@ function TalentDisplay({ player }: { player: Player }) {
                 })
             }
         </Box>
-    )
+    );
 }
 
-function PostOfficeDisplay({ player, extra }: { player: Player, extra: PostOfficeExtra }) {
+function PostOfficeDisplay({ player, extra }: { player: Player, extra: POExtra }) {
     const size = useContext(ResponsiveContext);
 
     const unSpentPoints = useMemo(() => {
@@ -1149,13 +1148,10 @@ function PlayerTab({ player }: PlayerTabProps) {
     const [playerStatues, setPlayerStatues] = useState<PlayerStatues | undefined>(undefined);
     const [index, setIndex] = useState<number>(1);
     const [activeBubbles, setActiveBubbles] = useState<Bubble[]>([]);
-    const [poExtra, setPoExtra] = useState<PostOfficeExtra>({
-        misc: 0,
-        complete: 0,
-        streak: 0
-    });
 
     const appContext = useContext(AppContext);
+    const theData = appContext.data.getData();
+    const poExtra = theData.get("POExtra");
     const onActive = (nextIndex: number) => setIndex(nextIndex);
 
     useEffect(() => {
@@ -1168,7 +1164,6 @@ function PlayerTab({ player }: PlayerTabProps) {
             if (player.activeBubbles.length > 0) {
                 setActiveBubbles(player.activeBubbles);
             }
-            setPoExtra(theData.get("POExtra"));
         }
         if ((player.classId != ClassIndex.Barbarian && player.classId != ClassIndex.Blood_Berserker) && index == 11) {
             setIndex(1);
@@ -1280,6 +1275,10 @@ function Players() {
             }
         }
     }, [appContext, activePlayer, playerData]);
+
+    if (!playerData || playerData.length == 0) {
+        return <Box>Nothing to see here.</Box>
+    }
     return (
         <Box>
             <NextSeo title="Players" />

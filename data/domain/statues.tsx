@@ -1,6 +1,8 @@
-import { round } from '../utility';
+import { range, round } from '../utility';
+import { Domain, RawData } from './base/domain';
 import { initStatueRepo, StatueDataBase } from './data/StatueRepo';
 import { ImageData } from './imageData';
+import { Item } from './items';
 import { StatueDataModel } from './model/statueDataModel';
 import { Player } from './player';
 
@@ -111,20 +113,40 @@ export class PlayerStatues {
     }
 }
 
-export default function parseStatues(allStatues: Array<Array<Array<number>>>, goldStatues: Array<boolean>) {
-    const parsedData = [...Array(allStatues.length)].map((_, pIndex) => { // for each player we have data for
-        const playerStatues = new PlayerStatues(pIndex);
-        playerStatues.statues.forEach((statue, statueIndex) => {
-            if (allStatues[pIndex].length > statueIndex) {
-                statue.level = allStatues[pIndex][statueIndex][StatueConst.LevelIndex];
-                statue.progress = allStatues[pIndex][statueIndex][StatueConst.ProgressIndex];
-                if (goldStatues.length > statueIndex) {
-                    statue.isGold = goldStatues[statueIndex];
-                }
-            }
-        })
+export class Statues extends Domain {
+    getRawKeys(): RawData[] {
+        return [
+            { key: `StatueLevels_`, perPlayer: true, default: []},
+            { key: `StuG`, perPlayer: false, default: []},
+        ]
+    }
+    init(allItems: Item[], charCount: number) {
+        return [...Array(charCount)].map((_, pIndex) => new PlayerStatues(pIndex));
+    }
+    parse(data: Map<string, any>): void {
+        const charCount = data.get("charCount") as number;
+        const statues = data.get(this.getDataKey()) as PlayerStatues[];
 
-        return playerStatues;
-    });
-    return parsedData;
+        const allStatues = [...Array(charCount)].map((_, i) => data.get(`StatueLevels_${i}`)) as number[][][];
+        const goldStatues = data.get(`StuG`) as boolean[];
+    
+
+        range(0, charCount).forEach((_, pIndex) => {
+            // If this is the first time handling this player, init.
+            if (statues.length <= pIndex) {
+                statues.push(new PlayerStatues(pIndex))
+            }
+            
+            statues[pIndex].statues.forEach((statue, statueIndex) => {
+                if (allStatues[pIndex].length > statueIndex) {
+                    statue.level = allStatues[pIndex][statueIndex][StatueConst.LevelIndex];
+                    statue.progress = allStatues[pIndex][statueIndex][StatueConst.ProgressIndex];
+                    if (goldStatues.length > statueIndex) {
+                        statue.isGold = goldStatues[statueIndex];
+                    }
+                }
+            });
+        });
+    }
+    
 }

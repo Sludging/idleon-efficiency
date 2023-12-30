@@ -1,6 +1,9 @@
+import { range } from "../utility";
 import { SkillsIndex } from "./SkillsIndex";
+import { Domain, RawData } from "./base/domain";
 import { initBuildingRepo } from "./data/BuildingRepo";
 import { ImageData } from "./imageData";
+import { Item } from "./items";
 
 
 const defaultBonuses = [
@@ -11,9 +14,9 @@ const defaultBonuses = [
     '+5%_ALL_SKILL_EFFICIENCY',
     '+1%_PRINTER_OUTPUT',
     '+25%_ALL_SKILL_EXP',
-  ];
-  
-  const specialBonuses: Map<SkillsIndex, string> = new Map([
+];
+
+const specialBonuses: Map<SkillsIndex, string> = new Map([
     [SkillsIndex.Mining, 'ALL_MINING_CARDS_ARE_NOW_PASSIVE'],
     [SkillsIndex.Fishing, 'ALL_FISHING_CARDS_ARE_NOW_PASSIVE'],
     [SkillsIndex.Chopping, 'ALL_CHOPPING_CARDS_ARE_NOW_PASSIVE'],
@@ -26,7 +29,7 @@ const defaultBonuses = [
     [SkillsIndex.Sailing, "+15%_BOAT_SAILING_SPEED"],
     [SkillsIndex.Divinity, "+15%_DIVINITY_PTS_GAINED"],
     [SkillsIndex.Gaming, "1.15X_GAMING_BITS_GAINED"],
-  ]);
+]);
 
 export class RiftBonus {
     active: boolean = false;
@@ -74,7 +77,7 @@ export class SkillMastery extends RiftBonus {
 
     getSkillRank = (skill: SkillsIndex) => {
         const level = this.skillLevels[skill];
-        switch(true) {
+        switch (true) {
             case level < 150: return 0;
             case level < 200: return 1;
             case level < 300: return 2;
@@ -97,12 +100,12 @@ export class SkillMastery extends RiftBonus {
     }
 
     getSkillBonus = (skill: SkillsIndex, bonusIndex: number) => {
-        if (!this.active) { 
+        if (!this.active) {
             return 0;
         }
 
         // Can be less duplicated/smarter but I prefer it readable.
-        switch(true) {
+        switch (true) {
             case bonusIndex == 0: return this.getSkillRank(skill) > bonusIndex ? 25 : 0;
             case bonusIndex == 2: return this.getSkillRank(skill) > bonusIndex ? 5 : 0;
             case bonusIndex == 3: return this.getSkillRank(skill) > bonusIndex ? 10 : 0;
@@ -118,9 +121,9 @@ export class SkillMastery extends RiftBonus {
             case bonusIndex == 1 && skill == SkillsIndex.Divinity: return this.getSkillRank(skill) > bonusIndex ? 15 : 0;
             case bonusIndex == 1 && skill == SkillsIndex.Gaming: return this.getSkillRank(skill) > bonusIndex ? 15 : 0;
             // This is basically a boolean for the passive cards, 1 = active. Likely won't be used in code but just safer to handle.
-            case bonusIndex == 1 && specialBonuses.has(skill): return this.getSkillRank(skill) > bonusIndex ? 1 : 0; 
+            case bonusIndex == 1 && specialBonuses.has(skill): return this.getSkillRank(skill) > bonusIndex ? 1 : 0;
             // Only thing left should be the skill efficiency, so 10%.
-            default: return this.getSkillRank(skill) > bonusIndex ? 10 : 0; 
+            default: return this.getSkillRank(skill) > bonusIndex ? 10 : 0;
         }
     }
 
@@ -138,8 +141,8 @@ export class SkillMastery extends RiftBonus {
         if ([0, 1].includes(bonusIndex)) {
             return 0;
         }
-        
-        const baseBonus = [2,3,4,5,6].includes(bonusIndex) ? 7 : 0;
+
+        const baseBonus = [2, 3, 4, 5, 6].includes(bonusIndex) ? 7 : 0;
 
         // Yes we get a base bonus of 7 on some things even if rift isn't active
         if (!this.active) {
@@ -163,7 +166,7 @@ export class ConstructionMastery extends RiftBonus {
 
     buildingLevels: number = 0;
     getRank = () => {
-        switch(true) {
+        switch (true) {
             case this.buildingLevels < 250: return 0;
             case this.buildingLevels < 500: return 1;
             case this.buildingLevels < 750: return 2;
@@ -180,13 +183,13 @@ export class ConstructionMastery extends RiftBonus {
     }
 
     getBonusByIndex = (bonusIndex: number) => {
-        if (!this.active) { 
+        if (!this.active) {
             return 0;
         }
 
         // Can be less duplicated/smarter but I prefer it readable.
         // This also doesn't align with Lava's code because he uses different indexes for different bonuses
-        switch(true) {
+        switch (true) {
             case bonusIndex == 0: return this.getRank() > bonusIndex ? Math.floor(this.buildingLevels / 10) : 0;
             case bonusIndex == 1: return this.getRank() > bonusIndex ? 35 : 0;
             case bonusIndex == 2: return this.getRank() > bonusIndex ? 2 * ((this.buildingLevels - 750) / 10) : 0;
@@ -200,46 +203,68 @@ export class ConstructionMastery extends RiftBonus {
 }
 
 
-export class Rift {
+export class Rift extends Domain {
     level: number = 0;
     taskProgress: number = 0;
 
     bonuses: RiftBonus[] = [];
-}
 
-export default function parseRift(riftData: number[], playerSkillLevels: number[][], towerData: number[]) {
-    const rift = new Rift();
+    getRawKeys(): RawData[] {
+        return [
+            {key: "Rift", perPlayer: false, default: []},
+            {key: "Tower", perPlayer: false, default: []},
+            {key: "Lv0_", perPlayer: true, default: []},
+        ]
+    }
 
-    rift.level = riftData[0];
-    rift.taskProgress = riftData[1];
+    init(allItems: Item[], charCount: number) {
+        this.bonuses = [];
+        this.bonuses.push(new RiftBonus(0, "Trap Box Vacuum", 6, "The trapper drone in World 3 will automatically collect traps every 24 hours, and will deposit the critters into your Storage Chest if there is space. @ The EXP from the Traps goes to the one who placed the traps."))
+        this.bonuses.push(new InfiniteStarsBonus(1, "Infinite Stars", 11, "Permanently transforms Star Signs into Infinite Star Signs, which always give their bonus AND don't give the negatives. Infinite Star Signs are indicated by a little infinity icon, and are transformed in a specific order, so you don't get to choose. Get more from Shiny Pets in Breeding..."))
+        this.bonuses.push(new SkillMastery(2, "Skill Mastery", 16, "Lava didn't bother with a description for this one. Get bonuses based on total level of your skills across all characters."))
+        this.bonuses.push(new RiftBonus(3, "Eclipse Skulls", 21, "You can now get Eclipse Skulls in Deathnote, unlocked at 1,000,000,000 kills. Eclipse Skulls are worth 20 points, and you also get +5% Multiplicative Damage."))
+        this.bonuses.push(new RiftBonus(4, "Stamp Mastery", 26, "Every 100 total levels of all your stamps, you get a 1% chance to get a 'Gilded Stamp' 95% Reduction in Stamp Upgrade costs. This chance happens every day you log in, and they stack for whenever you want to use them!"))
+        this.bonuses.push(new RiftBonus(5, "Eldritch Artifact", 31, "You can now get Eldritch Artifacts from sailing, but only if you've found the Ancient form first."))
+        this.bonuses.push(new RiftBonus(6, "Vial Mastery", 36, "Each Gold Crown Vial you have, which is the 13th and final vial you upgrade to for 1 Billion Resource, now gives you a 1.02x boost to ALL Vial Bonuses!"))
+        this.bonuses.push(new ConstructionMastery(7, "Construct Mastery", 41, "Lava didn't bother with a description for this one. Get bonuses based on total level of your buildings in construction."))
+        this.bonuses.push(new RiftBonus(8, "Ruby Cards", 46, "You can now level up your cards to Lv 6. Yea, you'd think it would be Lv 5 but remember, 0 stars is actually Lv 1. So yea, Ruby Cards are 5 star cards, which means they are technically lv 6!"))
 
-    rift.bonuses.push(new RiftBonus(0, "Trap Box Vacuum", 6, "The trapper drone in World 3 will automatically collect traps every 24 hours, and will deposit the critters into your Storage Chest if there is space. @ The EXP from the Traps goes to the one who placed the traps."))
-    rift.bonuses.push(new InfiniteStarsBonus(1, "Infinite Stars", 11, "Permanently transforms Star Signs into Infinite Star Signs, which always give their bonus AND don't give the negatives. Infinite Star Signs are indicated by a little infinity icon, and are transformed in a specific order, so you don't get to choose. Get more from Shiny Pets in Breeding..."))
-    rift.bonuses.push(new SkillMastery(2, "Skill Mastery", 16, "Lava didn't bother with a description for this one. Get bonuses based on total level of your skills across all characters."))
-    rift.bonuses.push(new RiftBonus(3, "Eclipse Skulls", 21, "You can now get Eclipse Skulls in Deathnote, unlocked at 1,000,000,000 kills. Eclipse Skulls are worth 20 points, and you also get +5% Multiplicative Damage."))
-    rift.bonuses.push(new RiftBonus(4, "Stamp Mastery", 26, "Every 100 total levels of all your stamps, you get a 1% chance to get a 'Gilded Stamp' 95% Reduction in Stamp Upgrade costs. This chance happens every day you log in, and they stack for whenever you want to use them!"))
-    rift.bonuses.push(new RiftBonus(5, "Eldritch Artifact", 31, "You can now get Eldritch Artifacts from sailing, but only if you've found the Ancient form first."))
-    rift.bonuses.push(new RiftBonus(6, "Vial Mastery", 36, "Each Gold Crown Vial you have, which is the 13th and final vial you upgrade to for 1 Billion Resource, now gives you a 1.02x boost to ALL Vial Bonuses!"))
-    rift.bonuses.push(new ConstructionMastery(7, "Construct Mastery", 41, "Lava didn't bother with a description for this one. Get bonuses based on total level of your buildings in construction."))
-    rift.bonuses.push(new RiftBonus(8, "Ruby Cards", 46, "You can now level up your cards to Lv 6. Yea, you'd think it would be Lv 5 but remember, 0 stars is actually Lv 1. So yea, Ruby Cards are 5 star cards, which means they are technically lv 6!"))
+        return this;
+    }
 
-    rift.bonuses.forEach(bonus => {
-        bonus.active = rift.level >= (bonus.unlockAt - 1);
-    })
+    parse(data: Map<string, any>): void {
+        const rift = data.get(this.getDataKey()) as Rift;
 
-    const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
-    playerSkillLevels.forEach(playerSkills => {
-        playerSkills.forEach((skillLevel, skillIndex) => {
-            // Only get the indexes we care about
-            if (skillIndex in SkillsIndex) {
-                skillMastery.skillLevels[skillIndex as SkillsIndex] += skillLevel;
-            }
+        // init again to reset the data set;
+        // TODO: This is very ugly, need to do better.
+        rift.init([], 0);
+
+        const charCount = data.get("charCount") as number;
+
+        const riftData = data.get("Rift") as number[];
+        const playerSkillLevels = range(0, charCount).map((_, i) => { return data.get(`Lv0_${i}`) }) as number[][];
+        const towerData = data.get("Tower") as number[];
+
+        rift.level = riftData[0];
+        rift.taskProgress = riftData[1];
+
+        rift.bonuses.forEach(bonus => {
+            bonus.active = rift.level >= (bonus.unlockAt - 1);
         })
-    });
 
-    const allBuildings = initBuildingRepo();
-    const constMastery = rift.bonuses.find(bonus => bonus.name == "Construct Mastery") as ConstructionMastery;
-    constMastery.buildingLevels = towerData.slice(0, allBuildings.length).reduce((sum, building) => sum += building, 0);
+        const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
 
-    return rift;
+        playerSkillLevels.forEach(playerSkills => {
+            playerSkills.forEach((skillLevel, skillIndex) => {
+                // Only get the indexes we care about
+                if (skillIndex in SkillsIndex) {
+                    skillMastery.skillLevels[skillIndex as SkillsIndex] += skillLevel;
+                }
+            })
+        });
+
+        const allBuildings = initBuildingRepo();
+        const constMastery = rift.bonuses.find(bonus => bonus.name == "Construct Mastery") as ConstructionMastery;
+        constMastery.buildingLevels = towerData.slice(0, allBuildings.length).reduce((sum, building) => sum += building, 0);
+    }
 }

@@ -21,6 +21,8 @@ import { Refinery } from "./refinery";
 import { Sailing } from "./sailing";
 import { GemStore } from "./gemPurchases";
 import { TaskBoard } from "./tasks";
+import { Domain, RawData } from "./base/domain";
+import { Item } from "./items";
 
 export const waveReqs = "2 5 8 12 15 20 25 35 50 65 80 100 125 150 175 200".split(" ").map(value => parseInt(value));
 
@@ -123,7 +125,7 @@ export class PetUpgrade {
     }
 
     getBonusText = () => {
-        return this.data.boostEffect.replace(/}/g, this.getBonus().toString())
+        return this.data.boostEffect.replace(/}/g, this.getBonus().toString());
     }
 
     static fromBase(data: PetUpgradeBase[]): PetUpgrade[] {
@@ -208,8 +210,8 @@ export class Pet {
         if (this.shinyProgress == 0) {
             return 0;
         }
-        
-        for (let shinyLevel = 0 ; shinyLevel < 19 ; shinyLevel++) {
+
+        for (let shinyLevel = 0; shinyLevel < 19; shinyLevel++) {
             const levelReq = Math.floor((1 + Math.pow(shinyLevel + 1, 1.6)) * Math.pow(1.7, shinyLevel + 1));
             if (this.shinyProgress < levelReq) {
                 return shinyLevel + 1;
@@ -311,7 +313,7 @@ export class Territory {
     }
 
     static fromBase = (data: TerritoryFightBase[]) => {
-        return data.map(territory => {
+        return data.filter(territory => territory.data.battleName != "Filler Filler").map(territory => {
             const toReturn = new Territory(territory.index, { ...territory.data });
             // If index is over 14 (after arena territory index), the territory req is the one from the index before.
             if (toReturn.index > 14) {
@@ -343,31 +345,23 @@ export class ShinyBonus {
     }
 }
 
-export class Breeding {
+export class Breeding extends Domain {
     arenaWave: number = 0;
-    territory: Territory[];
-    upgrade: PetUpgrade[];
-    genes: PetGene[];
+    territory: Territory[] = [];
+    upgrade: PetUpgrade[] = [];
+    genes: PetGene[] = [];
     eggs: Egg[] = [];
     eggCapacity: number = 0;
     eggsUnclaimed: number = 0;
     timeTillEgg: number = 0;
     totalEggTime: number = 0;
 
-    basePets: Pet[];
+    basePets: Pet[] = [];
     shinyBonuses: ShinyBonus[] = [];
 
     speciesUnlocks: number[] = [];
     skillLevel: number = 0;
     deadCells: number = 0;
-
-    constructor() {
-        this.territory = Territory.fromBase(initTerritoryFightRepo());
-        this.upgrade = PetUpgrade.fromBase(initPetUpgradeRepo());
-        this.genes = PetGene.fromBase(initPetGeneRepo());
-
-        this.basePets = Pet.fromBase(initPetStatRepo(), this.genes);
-    }
 
     hasBonus = (bonusNumber: number) => {
         if (bonusNumber > waveReqs.length) {
@@ -381,6 +375,10 @@ export class Breeding {
     }
 
     getStatRange = () => {
+        if (this.skillLevel == 0) {
+            return [0, 0];
+        }
+
         let baseMath = Math.pow(4 * this.skillLevel + Math.pow(this.skillLevel / 2, 3), 0.85);
         const eggRarity = Math.min(1, Math.max(...this.eggs.map(egg => egg.rarity)));
         const maxRange = Math.max(0.1, 1 - ((eggRarity + 4) / 12) * 0.9);
@@ -388,6 +386,107 @@ export class Breeding {
         const maxStat = baseMath * (Math.min(1.2 + this.skillLevel / 12, 4) * Math.pow(2.71828, -10 * 0) + 1);
         const minStat = baseMath * (Math.min(1.2 + this.skillLevel / 12, 4) * Math.pow(2.71828, -10 * maxRange) + 1);
         return [minStat, maxStat];
+    }
+
+    getRawKeys(): RawData[] {
+        return [
+            {key: "Territory", perPlayer: false, default: []},
+            {key: "Breeding", perPlayer: false, default: []},
+            {key: "Pets", perPlayer: false, default: []},
+            {key: "PetsStored", perPlayer: false, default: []},
+        ]
+    }
+
+    init(allItems: Item[], charCount: number) {
+        this.territory = Territory.fromBase(initTerritoryFightRepo());
+        this.upgrade = PetUpgrade.fromBase(initPetUpgradeRepo());
+        this.genes = PetGene.fromBase(initPetGeneRepo());
+        this.basePets = Pet.fromBase(initPetStatRepo(), this.genes);
+
+        return this;
+    }
+
+    parse(data: Map<string, any>): void {
+        const breeding = data.get(this.getDataKey()) as Breeding;
+        const optionList = data.get("OptLacc") as number[];
+
+        const petsStored = data.get("PetsStored") as any[][];
+        const pets = data.get("Pets") as any[][];
+        const territory = data.get("Territory") as any[][];
+        const breedingData = data.get("Breeding") as number[][];
+
+        if (petsStored.length == 0 || pets.length == 0 || territory.length == 0 || breedingData.length == 0) {
+            return;
+        }
+
+        // Some breeding data has no "persistence", so we reset the previous data.
+        breeding.eggs = [];
+        breeding.territory.forEach(territory => territory.pets = []);
+        breeding.shinyBonuses = [];
+
+
+        breeding.timeTillEgg = optionList[87];
+        breeding.arenaWave = optionList[89];
+
+        breedingData[0].forEach(egg => {
+            breeding.eggs.push(new Egg(egg));
+        });
+
+        breeding.speciesUnlocks = breedingData[1];
+
+        breedingData[2].forEach((upgrade, index) => {
+            breeding.upgrade[index].level = upgrade;
+        })
+
+        const territoryFightsWon = optionList[85];
+
+        territory.forEach((territory, index) => {
+            // Lava does some weird math to skip territory 14 in some scenarios.
+            const tIndex = Math.round(index + Math.floor((index + 86.1) / 100))
+            if (tIndex < breeding.territory.length) {
+                breeding.territory[tIndex].unlocked = index < territoryFightsWon;
+                breeding.territory[tIndex].currentProgress = territory[0];
+                breeding.territory[tIndex].currentForagingRound = territory[1]; // number of foraging rounds passed
+
+                // Check index 3, 5, and 7. If not blank,
+                // then get the name from that index and the current spice count from the next index.
+                breeding.territory[tIndex].spiceRewards = [3, 5, 7]
+                    .filter(i => territory[i] && territory[i] != 'Blank')
+                    .map(i => ({ type: territory[i], count: territory[i + 1] }));
+
+                const territoryPets = pets.slice(27 + (4 * index), 27 + (4 * index) + 4);
+
+                territoryPets.forEach(pet => {
+                    if (pet[0] == "none") {
+                        return;
+                    }
+                    // If getting unknown gene, just default to the first gene as a fallback.
+                    const petGene = breeding.genes[pet[1] as number] ?? breeding.genes[0];
+                    const basePet = breeding.basePets.find(basePet => basePet.data.petId == pet[0] as string);
+                    if (basePet) {
+                        breeding.territory[tIndex].pets.push(new Pet(basePet.index, basePet.data, petGene, basePet.shinyBonus, pet[2] as number));
+                    } else {
+                        console.log("Failed to find base pet", pet[0] as string)
+                    }
+                })
+            }
+        })
+
+        breeding.deadCells = breedingData[3][8];
+
+        // Calculate pet shiny levels.
+        GroupByFunction(breeding.basePets, (pet: Pet) => pet.data.world).forEach((worldPets, _) => {
+            worldPets.forEach((pet, pIndex) => {
+                pet.shinyProgress = breedingData[22 + pet.data.world][pIndex]
+                pet.shinyLevel = pet.calculateShinyLevel();
+            })
+        });
+
+        // Calculate shiny total bonuses.
+        GroupByFunction(breeding.basePets, (pet: Pet) => pet.shinyBonus.index).forEach((shinyPets, _) => {
+            const totalLevels = shinyPets.reduce((sum, pet) => sum += pet.shinyLevel, 0);
+            breeding.shinyBonuses.push(new ShinyBonus(shinyPets[0].shinyBonus, totalLevels, shinyPets));
+        })
     }
 }
 
@@ -444,78 +543,6 @@ export const petArenaBonuses = [
 //     [0],
 //     [0]
 // ]
-
-export const parseBreeding = (petsStored: any[][], pets: any[][], optionsList: any[], territory: any[][], breedingData: number[][]) => {
-    const breeding = new Breeding();
-    if (petsStored.length == 0 || pets.length == 0 || territory.length == 0 || breedingData.length == 0) {
-        return breeding;
-    }
-
-    breeding.timeTillEgg = parseFloat(optionsList[87] as string);
-    breeding.arenaWave = parseInt(optionsList[89] as string);
-
-    breedingData[0].forEach(egg => {
-        breeding.eggs.push(new Egg(egg));
-    });
-
-    breeding.speciesUnlocks = breedingData[1];
-
-    breedingData[2].forEach((upgrade, index) => {
-        breeding.upgrade[index].level = upgrade;
-    })
-
-    const territoryFightsWon = parseInt(optionsList[85] as string);
-
-    territory.forEach((territory, index) => {
-        // Lava does some weird math to skip territory 14 in some scenarios.
-        const tIndex = Math.round(index + Math.floor((index + 86.1) / 100))
-        if (tIndex < breeding.territory.length) {
-            breeding.territory[tIndex].unlocked = index < territoryFightsWon;
-            breeding.territory[tIndex].currentProgress = territory[0];
-            breeding.territory[tIndex].currentForagingRound = territory[1]; // number of foraging rounds passed
-
-            // Check index 3, 5, and 7. If not blank,
-            // then get the name from that index and the current spice count from the next index.
-            breeding.territory[tIndex].spiceRewards = [3, 5, 7]
-                .filter(i => territory[i] && territory[i] != 'Blank')
-                .map(i => ({ type: territory[i], count: territory[i + 1] }));
-
-            const territoryPets = pets.slice(27 + (4 * index), 27 + (4 * index) + 4);
-
-            territoryPets.forEach(pet => {
-                if (pet[0] == "none") {
-                    return;
-                }
-                // If getting unknown gene, just default to the first gene as a fallback.
-                const petGene = breeding.genes[pet[1] as number] ?? breeding.genes[0];
-                const basePet = breeding.basePets.find(basePet => basePet.data.petId == pet[0] as string);
-                if (basePet) {
-                    breeding.territory[tIndex].pets.push(new Pet(basePet.index, basePet.data, petGene, basePet.shinyBonus, pet[2] as number));
-                } else {
-                    console.log("Failed to find base pet", pet[0] as string)
-                }
-            })
-        }
-    })
-
-    breeding.deadCells = breedingData[3][8];
-
-    // Calculate pet shiny levels.
-    GroupByFunction(breeding.basePets, (pet: Pet) => pet.data.world).forEach((worldPets, _) => {
-        worldPets.forEach((pet, pIndex) => {
-            pet.shinyProgress = breedingData[22 + pet.data.world][pIndex]
-            pet.shinyLevel = pet.calculateShinyLevel();
-        })
-    });
-
-    // Calculate shiny total bonuses.
-    GroupByFunction(breeding.basePets, (pet: Pet) => pet.shinyBonus.index).forEach((shinyPets, _) => {
-        const totalLevels = shinyPets.reduce((sum, pet) => sum += pet.shinyLevel, 0);
-        breeding.shinyBonuses.push(new ShinyBonus(shinyPets[0].shinyBonus, totalLevels, shinyPets));
-    })
-
-    return breeding;
-}
 
 export const updateBreeding = (data: Map<string, any>) => {
     const breeding = data.get("breeding") as Breeding;

@@ -160,10 +160,12 @@ function KitchensDisplay() {
 }
 
 function Cooking() {
-    const [cooking, setCooking] = useState<CookingDomain>();
     const [sort, setSort] = useState<string>('');
     const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
+
+    const theData = appContext.data.getData();
+    const cooking = theData.get("cooking") as CookingDomain;
 
     const hasColliderBonus = useMemo(() => {
         if (appContext) {
@@ -175,15 +177,9 @@ function Cooking() {
         return false;
     }, [appContext]);
 
-    useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setCooking(theData.get("cooking"));
-        }
-    }, [appContext]);
 
     const mealsToShow = useMemo(() => {
-        return cooking?.meals.filter(meal => (meal.level > 0 || meal.timeOptimalSpices.length > 0))
+        return cooking.meals.filter(meal => meal.timeOptimalSpices.length > 0)
             .sort((meal1, meal2) => {
                 const indexSort = meal1.mealIndex > meal2.mealIndex ? 1 : -1;
 
@@ -253,7 +249,7 @@ function Cooking() {
                 <Text>Spices</Text>
                 <Box direction="row" wrap>
                     {
-                        cooking?.spices.filter(spice => spice > -1).map((spice, index) => (
+                        cooking.spices.filter(spice => spice != -1).map((spice, index) => (
                             <Box key={index} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} align="center">
                                 <TipDisplay
                                     size='medium'
@@ -276,10 +272,10 @@ function Cooking() {
                 </Box>
             </Box>
             <Box direction="row" margin={{ top: 'small', bottom: 'small' }}>
-                <TextAndLabel label="Total Cooking Speed" text={nFormatter(cooking?.totalCookingSpeed ?? 0)} margin={{right: 'medium'}} />
-                { cooking.mealsDiscovered < cooking.getMaxMeals() && <TextAndLabel label="Meals Discovered" text={`${cooking.mealsDiscovered}/${cooking.getMaxMeals()}`} margin={{right: 'medium'}} /> }
-                { cooking.mealsAtDiamond > 0 && cooking.mealsAtDiamond < cooking.getMaxMeals() && <TextAndLabel label="Lv 11+ Meals" text={`${cooking.mealsAtDiamond}/${cooking.getMaxMeals()}`} margin={{right: 'medium'}} /> }
-                { hasColliderBonus && cooking.mealsAtVoid > 0 && <TextAndLabel label="Lv 30+ Meals" text={`${cooking.mealsAtVoid}/${cooking.getMaxMeals()}`} margin={{right: 'medium'}} /> }
+                <TextAndLabel label="Total Cooking Speed" text={nFormatter(cooking?.totalCookingSpeed ?? 0)} margin={{ right: 'medium' }} />
+                {cooking.mealsDiscovered < cooking.getMaxMeals() && <TextAndLabel label="Meals Discovered" text={`${cooking.mealsDiscovered}/${cooking.getMaxMeals()}`} margin={{ right: 'medium' }} />}
+                {cooking.mealsAtDiamond > 0 && cooking.mealsAtDiamond < cooking.getMaxMeals() && <TextAndLabel label="Lv 11+ Meals" text={`${cooking.mealsAtDiamond}/${cooking.getMaxMeals()}`} margin={{ right: 'medium' }} />}
+                {hasColliderBonus && cooking.mealsAtVoid > 0 && <TextAndLabel label="Lv 30+ Meals" text={`${cooking.mealsAtVoid}/${cooking.getMaxMeals()}`} margin={{ right: 'medium' }} />}
             </Box>
             <Box margin={{ bottom: 'medium' }} gap="small">
                 <Text>Meals</Text>
@@ -366,13 +362,14 @@ function Cooking() {
                                             direction={TipDirection.Down}
                                             size='small'
                                         >
-                                            {
-                                                meal.level > 0 ?
-                                                    <Box direction="row" justify="between" align="center" pad={{ top: 'small' }}>
-                                                        <Text margin={{ right: 'small' }} size="xsmall">{meal.getBonusText()}</Text>
-                                                        <Text color={meal.count > meal.getMealLevelCost() ? 'green-1' : 'accent-1'} margin={{ right: 'small' }} size="xsmall">{`${nFormatter(Math.floor(meal.count))}/${nFormatter(Math.ceil(meal.getMealLevelCost()))}`}</Text>
-                                                    </Box> :
-                                                    <Box direction="row">
+
+
+                                            <Box direction="row" justify="between" align="center" pad={{ top: 'small' }}>
+                                                <Text style={{opacity: meal.level == 0 ? 0.3 : 1}} margin={{ right: 'small' }} size="xsmall">{meal.getBonusText()}</Text>
+                                                {meal.level > 0 ?
+                                                    <Text color={meal.count > meal.getMealLevelCost() ? 'green-1' : 'accent-1'} margin={{ right: 'small' }} size="xsmall">{`${nFormatter(Math.floor(meal.count))}/${nFormatter(Math.ceil(meal.getMealLevelCost()))}`}</Text>
+                                                    :
+                                                    <Box direction="row" gap="xsmall">
                                                         {
                                                             meal.timeOptimalSpices.map((spice, index) => (
                                                                 <IconImage key={index} data={{
@@ -383,7 +380,8 @@ function Cooking() {
                                                             ))
                                                         }
                                                     </Box>
-                                            }
+                                                }
+                                            </Box>
 
                                         </TipDisplay>
                                         <Text size="xsmall" color="grey-2">{getMealExtraText(meal)}</Text>

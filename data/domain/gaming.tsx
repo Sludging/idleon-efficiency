@@ -1,17 +1,19 @@
-import { letterToNumber } from "../utility";
+import { letterToNumber, range } from "../utility";
 import { SkillsIndex } from "./SkillsIndex";
 import { AtomCollider } from "./atomCollider";
+import { Domain, RawData } from "./base/domain";
 import { Construction } from "./construction";
 import { GamingBoxBase, initGamingBoxRepo } from "./data/GamingBoxRepo";
 import { GamingSuperbitBase, initGamingSuperbitsRepo } from "./data/GamingSuperbitsRepo";
 import { GamingUpgradeBase, initGamingUpgradeRepo } from "./data/GamingUpgradeRepo";
+import { Item } from "./items";
 import { GamingBoxModel } from "./model/gamingBoxModel";
 import { GamingSuperbitModel } from "./model/gamingSuperbitModel";
 import { GamingUpgradeModel } from "./model/gamingUpgradeModel";
 import { Worship } from "./worship";
 
 export class GamingUpgrade {
-    constructor(public index: number, public data: GamingUpgradeModel) {}
+    constructor(public index: number, public data: GamingUpgradeModel) { }
 
     static fromBase = (data: GamingUpgradeBase[]): GamingUpgrade[] => {
         return data.map(box => new GamingUpgrade(box.index, box.data))
@@ -20,13 +22,13 @@ export class GamingUpgrade {
 
 export class Superbits {
     unlocked: boolean = false;
-    constructor(public index: number, public data: GamingSuperbitModel) {}
+    constructor(public index: number, public data: GamingSuperbitModel) { }
 
     static fromBase = (data: GamingSuperbitBase[]): Superbits[] => {
         return data.map(superbit => new Superbits(superbit.index, superbit.data))
     }
 
-    
+
     getCost = () => {
         return this.data.x1 * Math.pow(10, this.data.x2);
     }
@@ -34,10 +36,10 @@ export class Superbits {
 
 export class ImportBox {
     level: number = 0;
-    constructor(public index: number, public data: GamingBoxModel) {}
+    constructor(public index: number, public data: GamingBoxModel) { }
 
     getBonus = () => {
-        switch(this.index) {
+        switch (this.index) {
             case 1:
                 return Math.floor(10 * (1 + Math.pow(60 * this.level / (250 + this.level), 1.7))) / 10;
             case 2:
@@ -73,8 +75,8 @@ export class Totalizer {
             return 0;
         }
 
-        switch(bonus) {
-            case TotalizerBonus.Damage: 
+        switch (bonus) {
+            case TotalizerBonus.Damage:
             case TotalizerBonus.BoatSpeed:
             case TotalizerBonus.ExpMulti:
             case TotalizerBonus.SkillExp:
@@ -86,7 +88,7 @@ export class Totalizer {
     }
 }
 
-export class Gaming {
+export class Gaming extends Domain {
     level: number = 0;
 
     importBoxes: ImportBox[] = ImportBox.fromBase(initGamingBoxRepo());
@@ -103,7 +105,7 @@ export class Gaming {
 
     getNextWaterTime = (): number => {
         // Math in seconds.
-        const absoluteTimeToNextWater = Math.pow(this.getCurrentWater() + 1, 4/3) * 3600;
+        const absoluteTimeToNextWater = Math.pow(this.getCurrentWater() + 1, 4 / 3) * 3600;
 
         return absoluteTimeToNextWater - this.rawSproutData[25][1];
     }
@@ -114,7 +116,7 @@ export class Gaming {
 
     getNextShovelTime = (): number => {
         // Math in seconds.
-        const absoluteTimeToNextShovel = Math.pow(this.getShovelCount() + 1, 25/11) * 3600;
+        const absoluteTimeToNextShovel = Math.pow(this.getShovelCount() + 1, 25 / 11) * 3600;
 
         return absoluteTimeToNextShovel - this.rawSproutData[26][1];
     }
@@ -125,31 +127,45 @@ export class Gaming {
         const minStat = boxUpgrade * (1 / Math.pow(1, .64));
         return [minStat, maxStat];
     }
-}
 
-export default function parseGaming(gamingData: any[], gamingSproutData: number[][], playerSkillLevels: number[][]) {
-    const gaming = new Gaming();
-
-    if (gamingData.length == 0) {
-        return gaming;
+    getRawKeys(): RawData[] {
+        return [
+            {key: "Gaming", perPlayer: false, default: []},
+            {key: "GamingSprout", perPlayer: false, default: []},
+            {key: "Lv0_", perPlayer: true, default: []},
+        ]
     }
-    
-    gaming.rawGamingData = gamingData;
-    gaming.rawSproutData = gamingSproutData;
 
-    gaming.level = playerSkillLevels.reduce((max, player) => max = Math.max(max, player[SkillsIndex.Gaming]), 0);
+    init(allItems: Item[], charCount: number) {
+        return this;
+    }
 
-    gaming.importBoxes[0].level = gamingSproutData[25][0];
-    gaming.importBoxes[1].level = gamingSproutData[26][0];
+    parse(data: Map<string, any>): void {
+        const gaming = data.get(this.getDataKey()) as Gaming;
+        const charCount = data.get("charCount") as number;
+        const gamingData = data.get("Gaming") as any[] || [];
+        const gamingSproutData = data.get("GamingSprout") as number[][];
+        const playerSkillLevels = range(0, charCount).map((_, i) => { return data.get(`Lv0_${i}`) }) as number[][];
 
-    [...(gamingData[12] as string)].forEach(char => {
-        const bitIndex = letterToNumber(char);
-        if (bitIndex >= 0 && bitIndex < gaming.superbits.length) { // This should never not be the case but .. you know.
-            gaming.superbits[bitIndex].unlocked = true;
+        if (gamingData.length == 0) {
+            return;
         }
-    })
-    
-    return gaming;    
+
+        gaming.rawGamingData = gamingData;
+        gaming.rawSproutData = gamingSproutData;
+
+        gaming.level = playerSkillLevels.reduce((max, player) => max = Math.max(max, player[SkillsIndex.Gaming]), 0);
+
+        gaming.importBoxes[0].level = gamingSproutData[25][0];
+        gaming.importBoxes[1].level = gamingSproutData[26][0];
+
+        [...(gamingData[12] as string)].forEach(char => {
+            const bitIndex = letterToNumber(char);
+            if (bitIndex >= 0 && bitIndex < gaming.superbits.length) { // This should never not be the case but .. you know.
+                gaming.superbits[bitIndex].unlocked = true;
+            }
+        })
+    }
 }
 
 export const updateGaming = (data: Map<string, any>) => {
@@ -161,11 +177,13 @@ export const updateGaming = (data: Map<string, any>) => {
 }
 
 export const updateSuperbitImpacts = (data: Map<string, any>) => {
-    const gaming = data.get("gaming") as Gaming;
-
+    const gaming = data.get("gaming") as Gaming;    
     //TODO: Do obols
 
     // Totalizer stuff.
+    // Reset info, next section will calculate it.
+    gaming.totalizer.unlockedBonuses = [];
+    
     if (gaming.superbits[7].unlocked) {
         gaming.totalizer.unlockedBonuses.push(TotalizerBonus.Damage);
     }

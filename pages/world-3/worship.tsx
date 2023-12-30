@@ -23,27 +23,14 @@ import { Prayer } from '../../data/domain/prayers';
 import { GroupBy, GroupByFunction, nFormatter } from '../../data/utility';
 import IconImage from '../../components/base/IconImage';
 import { PrayerBase } from '../../data/domain/data/PrayerRepo';
+import { connectFirestoreEmulator } from 'firebase/firestore';
 
 function ChargeDisplay() {
-    const [playerData, setPlayerData] = useState<Player[]>();
-    const [worship, setWorshipData] = useState<WorshipDomain>();
     const appContext = useContext(AppContext);
 
-    useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setPlayerData(theData.get("players"));
-            setWorshipData(theData.get("worship"))
-        }
-    }, [appContext]);
-
-    if (!playerData || !worship || worship.playerData.filter(player => player.currentCharge > 0).length == 0) {
-        return (
-            <Box align="center" pad="medium">
-                <Heading level='3'>Come back when you unlocked this!</Heading>
-            </Box>
-        )
-    }
+    const theData = appContext.data.getData();
+    const playerData = theData.get("players") as Player[];
+    const worship = theData.get("worship") as WorshipDomain;
 
     return (
         <Box gap="medium" align="center">
@@ -165,29 +152,13 @@ function ChargeDisplay() {
 }
 
 function TotemDisplay() {
-    const [playerData, setPlayerData] = useState<Player[]>();
     const [efficiency, setEfficiency] = useState<number>(0);
     const [effFoodBonus, setEffFoodBonus] = useState<number>(0);
-    const [worship, setWorshipData] = useState<WorshipDomain>();
     const appContext = useContext(AppContext);
-
     const size = useContext(ResponsiveContext);
 
-    useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setPlayerData(theData.get("players"));
-            setWorshipData(theData.get("worship"))
-        }
-    }, [appContext]);
-
-    if (!playerData || !worship || worship.totemInfo.filter(totem => totem.maxWave > 0).length == 0) {
-        return (
-            <Box align="center" pad="medium">
-                <Heading level='3'>Come back when you unlocked this!</Heading>
-            </Box>
-        )
-    }
+    const theData = appContext.data.getData();
+    const worship = theData.get("worship") as WorshipDomain;
 
     return (
         <Box gap="medium">
@@ -211,7 +182,7 @@ function TotemDisplay() {
             </Box>
             <Box>
                 <Text size="xsmall">* Base XP is assuming multiplier of 1x.</Text>
-                <Text size="xsmall">* You need a minimum efficiency of 60, 250, 1000, 3000, and 8000 on the respective totems to get bonus souls.</Text>
+                <Text size="xsmall">* You need a minimum efficiency of 60, 250, 1000, 3000, 8000, and 25000 on the respective totems to get bonus souls.</Text>
             </Box>
             <Grid columns={{ count: size == "small" ? 1 : 2, size: 'auto' }}>
                 {
@@ -234,41 +205,25 @@ function TotemDisplay() {
 }
 
 function PrayerDisplay() {
-    const [prayers, setPrayers] = useState<Prayer[]>([]);
-    const [storage, setStorage] = useState<Storage>();
     const appContext = useContext(AppContext);
 
-    const size = useContext(ResponsiveContext);
-
-    useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setPrayers(theData.get("prayers"));
-            setStorage(theData.get("storage"));
-        }
-    }, [appContext]);
-
-    if (prayers.length == 0) {
-        return (
-            <Box align="center" pad="medium">
-                <Heading level='3'>Come back when you unlocked this!</Heading>
-            </Box>
-        )
-    }
+    const theData = appContext.data.getData();
+    const prayers = theData.get("prayers") as Prayer[];
+    const storage = theData.get("storage") as Storage;
 
     return (
         <Box gap="medium">
             {
-                Array.from(GroupByFunction(prayers.filter(prayer => prayer.data.name != "Some Prayer Name0"), function (base: PrayerBase) { return base.data.unlockZone }).entries()).map(([tower, prayers], index) => (
+                Array.from(GroupByFunction(prayers.filter(prayer => prayer.data.name != "Some Prayer Name0"), function (base: PrayerBase) { return base.data.unlockZone }).entries()).map(([_, prayers], index) => (
                     <Box key={index} gap="small">
-                        <Text>{tower}</Text>
+                        <Text>{prayers[0].data.unlockZone}</Text>
                         {
                             prayers.map((prayer, index) => {
                                 const amountInStorage = storage?.amountInStorage(prayer.data.soul) ?? 0;
                                 const costToNextLevel = prayer.getLevelCosts();
                                 const costToMax = prayer.getCostToMax();
                                 return (
-                                    <ShadowBox key={`prayer_${index}`} background="dark-1" pad="medium" align="start" margin={{ right: 'large', bottom: 'small' }}>
+                                    <ShadowBox key={`prayer_${index}`} background="dark-1" pad="medium" align="start" margin={{ right: 'large', bottom: 'small' }} style={{opacity: prayer.level == 0 ? 0.5 : 1}}>
                                         <Grid columns={{ count: 7, size: 'auto' }} gap={{ column: 'medium' }} fill>
                                             <IconImage data={prayer.getImageData()} />
                                             <TextAndLabel textSize='small' text={prayer.data.name} label="Name" />

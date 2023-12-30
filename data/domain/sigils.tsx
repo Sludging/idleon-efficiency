@@ -1,10 +1,11 @@
 import { Achievement } from "./achievements";
+import { Domain, RawData } from "./base/domain";
 import { initSigilRepo, SigilBase } from "./data/SigilRepo";
 import { GemStore } from "./gemPurchases";
 import { ImageData } from "./imageData";
+import { Item } from "./items";
 import { SigilModel } from "./model/sigilModel";
 import { Sailing } from "./sailing";
-import { Artifact } from "./sailing/artifacts";
 
 export class Sigil {
     progress: number = 0
@@ -14,7 +15,7 @@ export class Sigil {
 
     artifactBoost: number = 0;
 
-    constructor(public index: number, public data: SigilModel) {}
+    constructor(public index: number, public data: SigilModel) { }
 
     getImageData = (): ImageData => {
 
@@ -40,37 +41,49 @@ export class Sigil {
 }
 
 
-export class Sigils {
-    sigils: Sigil[];
+export class Sigils extends Domain {
+    sigils: Sigil[] = [];
 
     chargeSpeed: number = 0;
 
-    setSigilSpeed = (achievBonus112: number, gemStoreBonus110: number, ) => {
+    setSigilSpeed = (achievBonus112: number, gemStoreBonus110: number,) => {
         this.chargeSpeed = 1 + (achievBonus112 + (this.sigils[12].getBonus() + gemStoreBonus110)) / 100;
     }
 
-    constructor() {
-        this.sigils = Sigil.fromBase(initSigilRepo());
+    getRawKeys(): RawData[] {
+        return [
+            {key: "CauldronP2W", perPlayer: false, default: []},
+            {key: "CauldronJobs1", perPlayer: false, default: []},
+        ]
     }
-}
 
-export default function parseSigils(cauldronP2w: number[][], cauldronJobs1: number[]) {
-    const sigils = new Sigils();
+    init(allItems: Item[], charCount: number) {
+        this.sigils = Sigil.fromBase(initSigilRepo());
 
-    sigils.sigils.forEach(sigil => {
-        sigil.boostLevel = cauldronP2w[4][1 + 2 * sigil.index]
-        sigil.progress = cauldronP2w[4][2 * sigil.index]
-    })
+        return this;
+    }
 
-    const jobsThatMatter = cauldronJobs1.slice(0, 10); // TODO: Change this to 11 when Lava fixes the bug that player 10 isn't helpful.
-    jobsThatMatter.forEach((job, playerIndex) => {
-        const sigilIndex = Math.round(job) - 100;
-        if (sigilIndex > 0) {
-            sigils.sigils[sigilIndex].activePlayers += 1;
-        }
-    })
+    parse(data: Map<string, any>): void {
+        const sigils = data.get(this.getDataKey()) as Sigils;
+        const cauldronP2w = data.get("CauldronP2W") as number[][];
+        const cauldronJobs1 = data.get("CauldronJobs1") as number[];
 
-    return sigils;
+        sigils.sigils.forEach(sigil => {
+            sigil.boostLevel = cauldronP2w[4][1 + 2 * sigil.index]
+            sigil.progress = cauldronP2w[4][2 * sigil.index]
+        })
+
+        // Reset active players to 0 before parse.
+        sigils.sigils.forEach(sigil => sigil.activePlayers = 0);
+        
+        const jobsThatMatter = cauldronJobs1.slice(0, 11); // TODO: Change this to 11 when Lava fixes the bug that player 10 isn't helpful.
+        jobsThatMatter.forEach((job, playerIndex) => {
+            const sigilIndex = Math.round(job) - 100;
+            if (sigilIndex > 0) {
+                sigils.sigils[sigilIndex].activePlayers += 1;
+            }
+        })
+    }
 }
 
 // Currently only requires artifact to be post processed, can be below it.

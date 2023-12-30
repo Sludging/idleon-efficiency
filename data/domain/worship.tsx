@@ -1,6 +1,8 @@
 import { notUndefined, round } from "../utility";
 import { Alchemy, AlchemyConst, Bubble, CauldronIndex } from "./alchemy";
+import { Domain, RawData } from "./base/domain";
 import { MapDataBase } from "./data/MapDataRepo";
+import { Item } from "./items";
 import { MapInfo } from "./maps";
 import { SkullItemModel } from "./model/skullItemModel";
 import { Player } from "./player";
@@ -77,7 +79,7 @@ interface TotalWorshipData {
     overFlowTime: number
 }
 
-export class Worship {
+export class Worship extends Domain {
     playerData: PlayerWorshipData[] = [];
     totalData: TotalWorshipData = {
         currentCharge: 0,
@@ -87,8 +89,6 @@ export class Worship {
     };
     bestWizardPlayerID: number = -1;
     totemInfo: Totem[] = [];
-    constructor() { }
-
 
     static getEstimatedCharge = (currentCharge: number, chargeRate: number, maxCharge: number, timeAwayInSeconds: number) => {
         return Math.min(currentCharge + chargeRate * (timeAwayInSeconds / 3600), maxCharge);
@@ -112,21 +112,32 @@ export class Worship {
         const base = buffBonus + (stampBonus + alchemyBonus * Math.floor(worshipLevel / 10));
         return Math.floor(Math.max(50, cardBonus + postofficeBonus + (base + skullMaxCharge * Math.max(popeRate, 1))));
     }
-}
 
-export default function parseWorship(totemInfo: number[][]) {
-    const worship = new Worship();
-
-    if (totemInfo.length > 0) {
-        // hard coded info, maybe better way?
-        worship.totemInfo.push(new Totem(totemNames[0].replace(/_/g, " "), MapInfo[totemMapIds[0]], totemInfo[0][0], 0));
-        worship.totemInfo.push(new Totem(totemNames[1].replace(/_/g, " "), MapInfo[totemMapIds[1]], totemInfo[0][1], 1));
-        worship.totemInfo.push(new Totem(totemNames[2].replace(/_/g, " "), MapInfo[totemMapIds[2]], totemInfo[0][2], 2));
-        worship.totemInfo.push(new Totem(totemNames[3].replace(/_/g, " "), MapInfo[totemMapIds[3]], totemInfo[0][3], 3));
-        worship.totemInfo.push(new Totem(totemNames[4].replace(/_/g, " "), MapInfo[totemMapIds[4]], totemInfo[0][4], 4));
-        worship.totemInfo.push(new Totem(totemNames[5].replace(/_/g, " "), MapInfo[totemMapIds[5]], totemInfo[0][5], 5));
+    getRawKeys(): RawData[] {
+        return [
+            {key: "TotemInfo", perPlayer: false, default: []},
+        ]
     }
-    return worship;
+
+    init(allItems: Item[], charCount: number) {
+        [...Array(6)].forEach((_, index) => {
+            this.totemInfo.push(new Totem(totemNames[index].replace(/_/g, " "), MapInfo[totemMapIds[index]], 0, index));
+        });
+
+        return this;
+    }
+
+    parse(data: Map<string, any>): void {
+        const worship = data.get(this.getDataKey()) as Worship;
+        const totemInfo = data.get("TotemInfo") as number[][];
+
+        const waveInfo = totemInfo[0];
+        worship.totemInfo.forEach(totem => {
+            if (waveInfo.length > totem.index) {
+                totem.maxWave = waveInfo[totem.index];
+            }
+        });
+    }
 }
 
 export const updateWorship = (data: Map<string, any>) => {
@@ -135,6 +146,9 @@ export const updateWorship = (data: Map<string, any>) => {
     const alchemy = data.get("alchemy") as Alchemy;
     const stamps = data.get("stamps") as Stamp[][];
 
+    // Reset the data since it will all be calculated in the next section.
+    worship.playerData = [];
+    
     if (worship.totemInfo.length > 0) {
         players.forEach(player => {
             const worshipLevel = player.skills.get(SkillsIndex.Worship)?.level;
@@ -158,6 +172,7 @@ export const updateWorship = (data: Map<string, any>) => {
             const talentBonus = chargeSpeedTalent?.getBonus() ?? 0;
             const chargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "SoulCard5")?.getBonus() ?? 0;
             const chargeRate = playerSkull ? Worship.getChargeRate(playerSkull.Speed, worshipLevel, popeBonus, chargeCardBonus, flowinStamp.getBonus(worshipLevel), talentBonus) : 0;
+
             worship.playerData.push({
                 maxCharge: maxCharge,
                 chargeRate: chargeRate,

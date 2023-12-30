@@ -1,4 +1,6 @@
+import { Domain, RawData } from "./base/domain";
 import { BribeBase, initBribeRepo } from "./data/BribeRepo";
+import { Item } from "./items";
 
 export const BribeConst = {
     StampBribe: 0
@@ -28,12 +30,24 @@ export class Bribe {
     }
 }
 
-export default function parseBribes(bribesData: number[]) {
-    let bribeArray = Bribe.fromBase(initBribeRepo());
-    bribesData.forEach((bribe, index) => {
-        if (index < bribeArray.length) { // ignore future values
-            bribeArray[index].status = bribe as BribeStatus;
-        }
-    })
-    return bribeArray;
+export class Bribes extends Domain {
+    getRawKeys(): RawData[] {
+        return [
+            { key: "BribeStatus", perPlayer: false, default: [] }
+        ]
+    }
+    init(allItems: Item[], charCount: number) {
+        return Bribe.fromBase(initBribeRepo());
+    }
+    parse(data: Map<string, any>): void {
+        const bribes = data.get(this.getDataKey()) as Bribe[];
+        const bribesData = data.get("BribeStatus") as number[];
+    
+        bribesData.forEach((bribe, index) => {
+            if (index < bribes.length) { // ignore future values
+                bribes[index].status = bribe as BribeStatus;
+            }
+        })
+    }
+
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import Image from 'next/image';
+import Image from "next/image";
 import Link from 'next/link';
 import styled from 'styled-components'
 import {
@@ -15,18 +15,21 @@ import {
     ResponsiveContext,
     Menu,
     Avatar,
-    DropButton
+    DropButton,
+    ThemeType
 } from "grommet"
 import { useContext, useState, useEffect } from 'react'
-import { AppContext, AppStatus } from '../data/appContext'
+import { AppContext, AppStatus, DataStatus } from '../data/appContext'
 import { AuthContext, AuthStatus } from '../data/firebase/authContext'
 import { useRouter } from 'next/dist/client/router';
 
-import { CaretDownFill, FormDown, Menu as MenuIcon, User } from 'grommet-icons';
+import { CaretDownFill, FormDown, Menu as MenuIcon } from 'grommet-icons';
 import TextAndLabel from './base/TextAndLabel';
 import Icon from './leaderboards/icon';
 import Discord from '../lib/discord';
 import IconLink from './base/IconLink';
+import { ArrowsClockwise, Spinner, User } from '@phosphor-icons/react';
+import { normalizeColor } from 'grommet/utils';
 
 declare const window: Window &
     typeof globalThis & {
@@ -126,9 +129,7 @@ function OnHoverNav({ link, label, subLinks }: { link: string, label: string, su
         )
     }
 
-    return (
-        <Link key={`link_${label}`} href={link}><NavButton className={router.pathname == link ? 'active' : ''} color="accent-2">{label}</NavButton></Link>
-    )
+    return <Link key={`link_${label}`} href={link} legacyBehavior><NavButton className={router.pathname == link ? 'active' : ''} color="accent-2">{label}</NavButton></Link>;
 }
 
 
@@ -137,14 +138,20 @@ export default function Layout({
 }: {
     children: React.ReactNode
 }) {
+    const [profileDropDownOpen, setProfileDropDownOpen] = useState<boolean>(false);
+    const [lastUpdated, setLastUpdated] = useState<string>("Loading");
+    const [validState, setValidState] = useState<boolean>(false);
+
+    const theme = useContext<ThemeType>(ThemeContext);
     const authData = useContext(AuthContext);
     const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
     const router = useRouter();
 
-    const [validState, setValidState] = useState<boolean>(false);
-    const [lastUpdated, setLastUpdated] = useState<string>("");
-    const [profileDropDownOpen, setProfileDropDownOpen] = useState<boolean>(false);
+    useEffect(() => {
+        setValidState(appContext.status == AppStatus.Ready);
+        setLastUpdated(appContext.data.getLastUpdated() as string);
+    }, [appContext]);
 
     const navItems = [
         {
@@ -222,19 +229,10 @@ export default function Layout({
         }
     }
 
-    useEffect(() => {
-        if (appContext.status == AppStatus.LiveData || appContext.status == AppStatus.StaticData || appContext.status == AppStatus.NoData) {
-            setValidState(true);
-        }
-        else {
-            setValidState(false);
-        }
-        setLastUpdated(appContext.data.getLastUpdated() as string)
-    }, [authData, appContext])
-
-    if (authData?.authStatus == AuthStatus.NoUser && appContext.status == AppStatus.NoData && router.pathname != "/") {
+    if (authData?.authStatus == AuthStatus.NoUser && appContext.status == AppStatus.Ready && appContext.dataStatus == DataStatus.NoData && router.pathname != "/") {
         router.push('/');
     }
+
 
     return (
         <Box
@@ -244,25 +242,28 @@ export default function Layout({
         >
             <Header background="dark-1" height="56px" border={{ color: "white-1", side: "bottom" }}>
                 <Box width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} direction="row" justify='between' align="center" pad="small" fill>
-                    <Link passHref href={"/"}>
+                    <Link passHref href={"/"} legacyBehavior>
                         <Box>
-                            <PointerImage alt="Logo" src="/logo.svg" height="21px" width="171px" />
+                            <PointerImage alt="Logo" src="/logo.svg" height={21} width={171} />
                         </Box>
                     </Link>
                     {validState &&
                         <Box direction="row" gap="xlarge" pad="medium">
                             {
-                                appContext.status != AppStatus.NoData && <TextAndLabel textColor='accent-3' textSize='xsmall' labelSize='xsmall' label='Last Updated' text={lastUpdated} />
+                                [DataStatus.Init, DataStatus.Loading].includes(appContext.dataStatus) && <Box align="center" justify='center' animation={'rotateRight'}><ArrowsClockwise color={normalizeColor("green-2", theme)} size={24} /></Box>
+                            }
+                            {
+                                [DataStatus.LiveData, DataStatus.StaticData].includes(appContext.dataStatus) && <TextAndLabel textColor='accent-3' textSize='xsmall' labelSize='xsmall' label='Last Updated' text={lastUpdated} />
                             }
 
                             {
-                                appContext.status == AppStatus.LiveData &&
+                                authData?.authStatus == AuthStatus.Valid &&
                                 <Box direction="row">
                                     <DropButton
                                         plain={true}
                                         label={
                                             <Avatar direction='row'>
-                                                <User color="accent-3" />
+                                                <User color={normalizeColor("accent-3", theme)} size={24} />
                                                 <CaretDownFill size="small" />
                                             </Avatar>
                                         }
@@ -280,12 +281,13 @@ export default function Layout({
                                         onClick={() => setProfileDropDownOpen(true)}
                                         dropContent={
                                             <Box width="small" border={{ color: 'grey-1' }} round="small">
-                                                <Link href={'/profile/upload'}>
+                                                {appContext.dataStatus == DataStatus.LiveData && <Link href={'/profile/upload'} legacyBehavior>
                                                     <Button onClick={() => setProfileDropDownOpen(false)} hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2">
                                                         <Box pad="small">Public Profile</Box>
                                                     </Button>
                                                 </Link>
-                                                <Box border={{ color: 'grey-1' }} fill />
+                                                }
+                                                < Box border={{ color: 'grey-1' }} fill />
                                                 <Button hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2" onClick={() => { onButtonClick(authData?.logoutFunction); setProfileDropDownOpen(false) }}>
                                                     <Box pad="small">Sign Out</Box>
                                                 </Button>
@@ -295,7 +297,7 @@ export default function Layout({
                                 </Box>
                             }
                             {
-                                appContext.status == AppStatus.StaticData &&
+                                appContext.dataStatus == DataStatus.StaticData &&
                                 <TextAndLabel textColor='accent-3' textSize='xsmall' labelSize='xsmall' label="Public Profile" text={appContext.profile} />
                             }
                         </Box>
@@ -308,7 +310,7 @@ export default function Layout({
                         <Text size="large">Loading Data</Text>
                     </Box>)
                 }
-                {validState && appContext.status != AppStatus.NoData && (size === 'small' ?
+                {validState && appContext.dataStatus != DataStatus.NoData && (size === 'small' ?
                     <Box justify="end">
                         <Menu
                             a11yTitle="Navigation Menu"
@@ -338,7 +340,7 @@ export default function Layout({
                             </ThemeContext.Extend>
                         </Box>
                     </Box>
-                    )
+                )
                 }
                 {validState &&
                     <Box width={{ max: (!specialRoutes.includes(router.pathname) && router.pathname != '/') ? '1440px' : '' }} margin={{ left: 'auto', right: 'auto' }} fill="horizontal">
@@ -351,8 +353,13 @@ export default function Layout({
             <Footer height={{ min: "82px" }} background="dark-1">
                 <Box width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} direction="row" justify='between' fill="horizontal" align="center" pad="small">
                     <Box direction="row" gap="medium" align="center">
-                        <Box margin={{right: 'medium'}}>
-                            <Image alt="Logo" src="/logo.svg" height="21px" width="171px" />
+                        <Box margin={{ right: 'medium' }}>
+                            <Image
+                                alt="Logo"
+                                src="/logo.svg"
+                                width={171}
+                                height={21}
+                            />
                         </Box>
                         <IconLink icon={Icon} href="https://www.idleonefficiency.com/leaderboards" text="Leaderboards" />
                         <Box align="center" pad="small">
@@ -361,11 +368,16 @@ export default function Layout({
                         <IconLink icon={Discord} href="https://discord.gg/AfsyBkSd2q" text="Idleon Efficiency" />
                     </Box>
                     <Box justify="end" direction="row" gap="medium">
-                        <Anchor href="https://www.buymeacoffee.com/sludger" target="_blank"><Image src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me A Coffee" height="40px" width="150px" unoptimized /></Anchor>
-                        
+                        <Anchor href="https://www.buymeacoffee.com/sludger" target="_blank"><Image
+                            src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png"
+                            alt="Buy Me A Coffee"
+                            height={40}
+                            width={150}
+                            unoptimized
+                        /></Anchor>
                     </Box>
                 </Box>
             </Footer>
         </Box>
-    )
+    );
 }

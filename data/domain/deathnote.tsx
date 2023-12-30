@@ -1,4 +1,9 @@
+import { range } from "../utility";
+import { Domain, RawData } from "./base/domain";
+import { Cloudsave } from "./cloudsave";
+import { IParser } from "./idleonData";
 import { ImageData } from "./imageData";
+import { Item } from "./items";
 import { MapInfo } from "./maps";
 import { Rift } from "./rift";
 
@@ -10,18 +15,10 @@ const deathNoteMobOrder = [
     "w5a1 w5a2 w5a3 w5a4 w5a5 w5b1 w5b2 w5b3 w5b4 w5b5 w5b6 w5c1 w5c2".split(" "),
 ];
 
-export class Deathnote {
+export class Deathnote extends Domain {
     mobKillCount: Map<string, number[]> = new Map()
     playerKillsByMap: Map<number, Map<number, number>> = new Map();
     hasRiftBonus: boolean = false;
-
-    constructor() {
-        deathNoteMobOrder.forEach((world) => {
-            world.forEach((monster) => {
-                this.mobKillCount.set(monster, []);
-            })
-        })
-    }
 
     getDeathnoteRank = (killCount: number) => {
         switch (true) {
@@ -47,13 +44,13 @@ export class Deathnote {
             case 4: return 1000000;
             case 5: return 5000000;
             case 7: return 100000000;
-            case 10:  return this.hasRiftBonus ? 1000000000 : 0;
+            case 10: return this.hasRiftBonus ? 1000000000 : 0;
             default: return 0;
         }
     }
 
     getRankImageData = (rank: number): ImageData => {
-        if (rank == 0) { 
+        if (rank == 0) {
             return {
                 location: 'Blank',
                 height: 25,
@@ -67,30 +64,48 @@ export class Deathnote {
             width: 20
         };
     }
-}
 
-export default function parseDeathnote(klaData: string[]) {
-    const deathNote = new Deathnote();
-    // const doc = new Map<string, any>(Object.entries(accountData.get("rawData")));
-    // const playerData = accountData.get("players") as Player[];
-    // const charCount = playerData.length;
+    getRawKeys(): RawData[] {
+        return [
+            {key: "KLA_", perPlayer: true, default: []}
+        ]
+    }
 
-    klaData.forEach((playerKillData, pIndex) => {
-        deathNote.playerKillsByMap.set(pIndex, new Map());
-        const jsonData = JSON.parse(playerKillData) as number[][]
-        jsonData.forEach((mapInfo, mapIndex) => {
-            if (mapIndex < MapInfo.length) {
-                const mapData = MapInfo[mapIndex];
-                const killCount = mapData.data.portalRequirements[0] - mapInfo[0];
-                if (deathNote.mobKillCount.has(mapData.data.enemy)) {
-                    deathNote.mobKillCount.get(mapData.data.enemy)?.push(killCount); //do we really only care about 0?
+    init(allItems: Item[], charCount: number) {
+        deathNoteMobOrder.forEach((world) => {
+            world.forEach((monster) => {
+                this.mobKillCount.set(monster, []);
+            })
+        })
+
+        return this;
+    }
+
+    parse(data: Map<string, any>): void {
+        const deathNote = data.get(this.getDataKey()) as Deathnote;
+
+        // init again to reset the data set;
+        // TODO: This is very ugly, need to do better.
+        deathNote.init([], 0);
+        
+        const charCount = data.get("charCount") as number;
+        const klaData = range(0, charCount).map((_, i) => { return data.get(`KLA_${i}`) }) as number[][][];
+
+        klaData.forEach((playerKillData, pIndex) => {
+            deathNote.playerKillsByMap.set(pIndex, new Map());
+            playerKillData.forEach((mapInfo, mapIndex) => {
+                if (mapIndex < MapInfo.length) {
+                    const mapData = MapInfo[mapIndex];
+                    const killCount = mapData.data.portalRequirements[0] - mapInfo[0];
+                    if (deathNote.mobKillCount.has(mapData.data.enemy)) {
+                        deathNote.mobKillCount.get(mapData.data.enemy)?.push(killCount); //do we really only care about 0?
+                    }
+
+                    deathNote.playerKillsByMap.get(pIndex)?.set(mapIndex, killCount);
                 }
-
-                deathNote.playerKillsByMap.get(pIndex)?.set(mapIndex, killCount);
-            }
-        });
-    })           
-    return deathNote;
+            });
+        })
+    }
 }
 
 export const updateDeathnote = (data: Map<string, any>) => {

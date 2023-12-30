@@ -1,7 +1,9 @@
 import { IDforCardBonus, IDforCardSETbonus } from "../maps";
+import { Domain, RawData } from "./base/domain";
 import { CardDataBase, initCardRepo } from "./data/CardRepo";
 import { EnemyInfo } from "./enemies";
 import { ImageData } from "./imageData";
+import { Item } from "./items";
 import { CardDataModel } from "./model/cardDataModel";
 import { Player } from "./player";
 import { Rift } from "./rift";
@@ -25,7 +27,7 @@ export class Card {
         }
     }
 
-    getStars = (): number => { 
+    getStars = (): number => {
         switch (true) {
             // cchiz is .. special? .. who knows why.
             case this.id == "Boss3B" && this.fivestar && this.count > this.data.perTier * 36: return 5;
@@ -115,14 +117,29 @@ export class CardInfo {
     }
 }
 
-export default function parseCards(cardData: Record<string, number>) {
-    const cards = Card.fromBase(initCardRepo());
+export class Cards extends Domain {
+    getRawKeys(): RawData[] {
+        return [
+            { key: "Cards0", default: {}, perPlayer: false }
+        ]
+    }
 
-    cards.forEach(card => {
-        card.count = cardData[card.id] ?? 0;
-    })
+    init(allItems: Item[], charCount: number) {
+        return Card.fromBase(initCardRepo());
+    }
 
-    return cards;
+    parse(data: Map<string, any>): void {
+        const cardData = data.get("Cards0") as Record<string, number>;
+        const cards = data.get(this.getDataKey()) as Card[];
+
+        cards.forEach(card => {
+            card.count = cardData[card.id] ?? 0;
+        })
+    }
+}
+
+export const initCards = () => {
+    return Card.fromBase(initCardRepo());
 }
 
 export const updateCards = (data: Map<string, any>) => {

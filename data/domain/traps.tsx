@@ -1,3 +1,5 @@
+import { range } from "../utility";
+import { Domain, RawData } from "./base/domain";
 import { ImageData } from "./imageData";
 import { Item } from "./items";
 
@@ -120,20 +122,29 @@ export class Trap {
     }
 }
 
-
-export default function parseTraps(allTraps: Array<any>) {
-
-    const parsedData = allTraps.map((playerArray, pIndex) => {
-        try {
-            const parsedPlayerData: Array<any> = JSON.parse(playerArray);
-            const filteredTraps = parsedPlayerData//.filter(trapData => trapData[0] != -1);
-            return filteredTraps.map(trapData => {
-                return new Trap(pIndex, trapData)
+export class Traps extends Domain {
+    getRawKeys(): RawData[] {
+        return [
+            {key: "PldTraps_", default: [], perPlayer: true}
+        ]
+    }
+    init(_: Item[], charCount: number) {
+        // Empty init for now.
+        return Array(charCount) as Trap[][];
+    }
+    parse(data: Map<string, any>): void {
+        const traps = data.get(this.getDataKey()) as Trap[][];
+        const charCount = data.get("charCount") as number;
+        range(0, charCount).forEach((_, playerIndex) => {
+            // If this is the first time handling this player, init.
+            if (traps.length <= playerIndex) {
+                traps.push([]);
+            }
+            const playerTraps = data.get(`PldTraps_${playerIndex}`) as any[];
+            traps[playerIndex] = playerTraps.map(trapData => {
+                return new Trap(playerIndex, trapData)
             });
-        }
-        catch {
-            return [];
-        }
-    });
-    return parsedData;
+        })
+    }
+    
 }

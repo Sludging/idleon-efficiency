@@ -5,6 +5,8 @@ import { DungSetBase, initDungTraitRepo } from "./data/DungTraitRepo"
 import { DungItemModel } from "./model/dungItemModel"
 import { ImageData } from "./imageData"
 import { DungPassiveModel } from "./model/dungPassiveModel"
+import { Domain, RawData } from "./base/domain"
+import { Item } from "./items"
 
 export enum PassiveType {
     Dungeon = "Dungeon",
@@ -211,21 +213,15 @@ export class DungeonTrait {
     }
 }
 
-export class Dungeons {
-    items: DungeonItem[];
-    passives: Map<PassiveType, DungeonPassive[]>;
-    traits: DungeonTrait[];
+export class Dungeons extends Domain {
+    items: DungeonItem[] = [];
+    passives: Map<PassiveType, DungeonPassive[]> = new Map<PassiveType, DungeonPassive[]>();
+    traits: DungeonTrait[] = [];
     xp: number = 0;
     rank: number = 0;
     boostedcount: number = 0;
     credits: number = 0;
     flurbos: number = 0;
-
-    constructor() {
-        this.items = DungeonItem.fromBase(initDungItemRepo());
-        this.passives =  GroupBy(DungeonPassive.fromBase(initDungPassivesRepo()), "passiveType");
-        this.traits = DungeonTrait.fromBase(initDungTraitRepo());
-    }
 
     public static getDungeonRank = (dungeonXP: number) => {
         const rank = Number(dungeonLevels.reduce((rank, req, index, _) => {
@@ -245,57 +241,63 @@ export class Dungeons {
             width: 16
         }
     }
-}
 
-export const parseDungeons = (upgrades: number[][], optList: number[]) => {
-    const dungeons = new Dungeons();
-
-    // [
-    //     [0,5,0,0,0,0,0,0,0,0,0,7,3,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,0,-1,0,0,-1,0,0,-1], // items
-    //     [17,10,22,16,8,7,8,34], // dungeon upgrades
-    //     [1,3,6,-1,-1,-1,-1,-1,-1],
-    //     [6,6,6,6,3,3,2,2,2,-1],
-    //     [3,3,3,6],
-    //     [2,0,0,0,0,0,0,14], // flurbo upgrades
-    //     [1,1,0,0,0,1,1,0,0,0]
-    // ]
-
-    // handle bad data, TODO better way.
-    if (upgrades.length < 2) {
-        return dungeons;
+    getRawKeys(): RawData[] {
+        return [
+            {key: "DungUpg", perPlayer: false, default: []},
+        ]
     }
-    dungeons.items.forEach((item, index) => {
-        if (index < upgrades[0].length) {
-            item.level = upgrades[0][index];
+
+    init(allItems: Item[], charCount: number) {
+        this.items = DungeonItem.fromBase(initDungItemRepo());
+        this.passives = GroupBy(DungeonPassive.fromBase(initDungPassivesRepo()), "passiveType");
+        this.traits = DungeonTrait.fromBase(initDungTraitRepo());
+
+        return this;
+    }
+
+    parse(data: Map<string, any>): void {
+        const dungeons = data.get(this.getDataKey()) as Dungeons;
+        const upgrades = data.get("DungUpg") as number[][];
+        const optionList = data.get("OptLacc") as number[];
+
+        // handle bad data, TODO better way.
+        if (upgrades.length < 2) {
+            return;
         }
-    })
 
-    dungeons.passives.get(PassiveType.Dungeon)?.forEach(passive => {
-        passive.level = upgrades[1][passive.index];
-    });
+        dungeons.items.forEach((item, index) => {
+            if (index < upgrades[0].length) {
+                item.level = upgrades[0][index];
+            }
+        })
 
-    dungeons.passives.get(PassiveType.Flurbo)?.forEach(passive => {
-        passive.level = upgrades[5][passive.index];
-    });
+        dungeons.passives.get(PassiveType.Dungeon)?.forEach(passive => {
+            passive.level = upgrades[1][passive.index];
+        });
 
-    upgrades[2].forEach(index => {
-        const trait = dungeons.traits.find(trait => trait.index == index)
-        if (trait) {
-            trait.active = true;
-        }
-    });
+        dungeons.passives.get(PassiveType.Flurbo)?.forEach(passive => {
+            passive.level = upgrades[5][passive.index];
+        });
+
+        upgrades[2].forEach(index => {
+            const trait = dungeons.traits.find(trait => trait.index == index)
+            if (trait) {
+                trait.active = true;
+            }
+        });
 
 
-    dungeons.xp = optList[71]
-    dungeons.rank = Number(dungeonLevels.reduce((rank, req, index, _) => {
-        if (optList[71] > Number(req)) {
-            rank = index.toString()
-        }
-        return rank;
-    }, "0")) + 1;
+        dungeons.xp = optionList[71]
+        dungeons.rank = Number(dungeonLevels.reduce((rank, req, index, _) => {
+            if (optionList[71] > Number(req)) {
+                rank = index.toString()
+            }
+            return rank;
+        }, "0")) + 1;
 
-    dungeons.flurbos = optList[73];
-    dungeons.credits = optList[72];
-    dungeons.boostedcount = optList[76] - 1; // -1 because Lava.
-    return dungeons;
+        dungeons.flurbos = optionList[73];
+        dungeons.credits = optionList[72];
+        dungeons.boostedcount = optionList[76] - 1; // -1 because Lava.
+    }
 }

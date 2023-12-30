@@ -1,3 +1,4 @@
+import { Domain, RawData } from "./base/domain"
 import { Breeding } from "./breeding"
 import { Card, CardInfo } from "./cards"
 import { Cooking } from "./cooking"
@@ -8,6 +9,7 @@ import { Deathnote } from "./deathnote"
 import { Divinity } from "./divinity"
 import { GemStore } from "./gemPurchases"
 import { ImageData } from "./imageData"
+import { Item } from "./items"
 import { ChipModel } from "./model/chipModel"
 import { JewelModel } from "./model/jewelModel"
 import { LabBonusModel } from "./model/labBonusModel"
@@ -60,8 +62,7 @@ export class MainframeBonus {
     }
 
     static fromBase(data: LabBonusBase[]): MainframeBonus[] {
-        return data.map(bonus => 
-        {
+        return data.map(bonus => {
             switch (bonus.index) {
                 case 0: return new AnimalFarmBonus(bonus.index, bonus.data);
                 case 8: return new SpelunkerObolBonus(bonus.index, bonus.data);
@@ -77,7 +78,7 @@ export class MainframeBonus {
 export class AnimalFarmBonus extends MainframeBonus {
     totalSpecies: number = 0;
     override getBonusText = () => {
-        return this.description.replace(/{/g, this.getBonus().toString())
+        return this.description.replace(/{/g, this.getBonus().toString());
     }
 
     override getBonus = () => {
@@ -89,7 +90,7 @@ export class FungiFingerBonus extends MainframeBonus {
     greenMushroomKilled: number = 0;
     jewelBoost: number = 0;
     override getBonusText = () => {
-        return this.description.replace(/{/g, this.getBonus().toString())
+        return this.description.replace(/{/g, this.getBonus().toString());
     }
 
     override getBonus = () => {
@@ -100,7 +101,7 @@ export class FungiFingerBonus extends MainframeBonus {
 export class UnadulteratedBankingBonus extends MainframeBonus {
     greenStacks: number = 0;
     override getBonusText = () => {
-        return this.description.replace(/{/g, this.getBonus().toString())
+        return this.description.replace(/{/g, this.getBonus().toString());
     }
 
     override getBonus = () => {
@@ -140,7 +141,7 @@ export class Jewel {
         if (!this.active) {
             return 0;
         }
-        
+
         return this.data.bonusGiven * bonusMultiplier;
     }
 
@@ -153,8 +154,7 @@ export class Jewel {
     }
 
     static fromBase(data: JewelBase[]): Jewel[] {
-        return data.map(jewel => 
-        {
+        return data.map(jewel => {
             switch (jewel.index) {
                 case 0: return new AmethystRhinestoneJewel(jewel.index, jewel.data);
                 case 5: return new SapphireRhombolJewel(jewel.index, jewel.data);
@@ -171,7 +171,7 @@ export class Jewel {
 export class SapphireRhombolJewel extends Jewel {
     // Need to make this smarter in the future if I even want to care about breeding EXP.
     // Right now it returns even if the jewel isn't active (which it shouldn't for breeding)
-    override getBonus = (bonusMultiplier: number = this.bonusMultiplier) => {     
+    override getBonus = (bonusMultiplier: number = this.bonusMultiplier) => {
         return this.data.bonusGiven * bonusMultiplier;
     }
 }
@@ -266,22 +266,16 @@ export interface Point {
     y: number
 }
 
-export class Lab {
-    bonuses: MainframeBonus[];
-    jewels: Jewel[];
-    chips: Chip[];
+export class Lab extends Domain {
+    bonuses: MainframeBonus[] = [];
+    jewels: Jewel[] = [];
+    chips: Chip[] = [];
     playerCords: Record<number, Point> = {};
     playerChips: Record<number, Chip[]> = {};
     playersInTubes: Player[] = [];
     playersInChain: Player[] = [];
 
     bestBuboPlayerID: number = -1;
-
-    constructor() {
-        this.bonuses = MainframeBonus.fromBase(initLabBonusRepo())
-        this.jewels = Jewel.fromBase(initJewelRepo());
-        this.chips = Chip.fromBase(initChipRepo());
-    }
 
     getDistance = (x1: number, y1: number, x2: number, y2: number) => {
         return 0.9604339 * Math.max(Math.abs(x1 - x2), Math.abs(y1 - y2)) + 0.397824735 * Math.min(Math.abs(x1 - x2), Math.abs(y1 - y2));
@@ -304,40 +298,54 @@ export class Lab {
             * (1 + ((buboBoost + linePctMealBonus + playerChipBonus + (20 * petArenaBonus) + bonusWidth + shinyBonus) / 100))
         )
     }
-}
 
-export const parseLab = (labData: number[][], charCount: number) => {
-    const lab = new Lab();
-
-    if (labData.length == 0) {
-        return lab;
-    }
-    let cordIndex = 0;
-    while (cordIndex < labData[0].length) {
-        lab.playerCords[cordIndex / 2] = { x: labData[0][cordIndex], y: labData[0][cordIndex + 1] };
-        cordIndex += 2;
+    getRawKeys(): RawData[] {
+        return [
+            {key: "Lab", perPlayer: false, default: []},
+        ]
     }
 
-    labData[14].forEach((value, index) => {
-        if (value == 1) {
-            lab.jewels[index].available = true;
+    init(allItems: Item[], charCount: number) {
+        this.bonuses = MainframeBonus.fromBase(initLabBonusRepo())
+        this.jewels = Jewel.fromBase(initJewelRepo());
+        this.chips = Chip.fromBase(initChipRepo());
+
+        return this;
+    }
+
+    parse(data: Map<string, any>): void {
+        const lab = data.get(this.getDataKey()) as Lab;
+        const labData = data.get("Lab") as number[][];
+        const charCount = data.get("charCount") as number;
+
+        if (labData.length == 0) {
+            return;
         }
-    })
-
-    // Figure out what chips players have.
-    labData.slice(1, 1 + charCount).forEach((playerChips, index) => {
-        lab.playerChips[index] = playerChips.filter(chip => chip != -1).map(chip => lab.chips[chip]);
-    });
-
-    labData[15].forEach((chipCount, index) => {
-        if (index < lab.chips.length) {
-            lab.chips[index].count = chipCount;
-            const usedCount = Object.values(lab.playerChips).flatMap(chips => chips).reduce((sum, chip) => sum += (chip.index == lab.chips[index].index) ? 1 : 0, 0);
-            lab.chips[index].count -= usedCount;
+        let cordIndex = 0;
+        while (cordIndex < labData[0].length) {
+            lab.playerCords[cordIndex / 2] = { x: labData[0][cordIndex], y: labData[0][cordIndex + 1] };
+            cordIndex += 2;
         }
-    })
 
-    return lab;
+        labData[14].forEach((value, index) => {
+            if (value == 1) {
+                lab.jewels[index].available = true;
+            }
+        })
+
+        // Figure out what chips players have.
+        labData.slice(1, 1 + charCount).forEach((playerChips, index) => {
+            lab.playerChips[index] = playerChips.filter(chip => chip != -1).map(chip => lab.chips[chip]);
+        });
+
+        labData[15].forEach((chipCount, index) => {
+            if (index < lab.chips.length) {
+                lab.chips[index].count = chipCount;
+                const usedCount = Object.values(lab.playerChips).flatMap(chips => chips).reduce((sum, chip) => sum += (chip.index == lab.chips[index].index) ? 1 : 0, 0);
+                lab.chips[index].count -= usedCount;
+            }
+        })
+    }
 }
 
 const _calculatePlayersLineWidth = (lab: Lab, cooking: Cooking, breeding: Breeding, cards: Card[], gemStore: GemStore, buboBoost: number) => {
@@ -353,9 +361,12 @@ const _calculatePlayersLineWidth = (lab: Lab, cooking: Cooking, breeding: Breedi
         const shinyBonus = breeding.shinyBonuses.find(bonus => bonus.data.index == 19)?.getBonus() ?? 0;
         const gemTubes = (gemStore?.purchases.find(purchase => purchase.no == 123)?.pucrhased ?? 0) * 2;
         lab.playersInTubes.forEach((player, index) => {
-            const rightOfBubo = lab.playerCords[player.playerID].x >= lab.playerCords[lab.bestBuboPlayerID].x;
-            player.labInfo.lineWidth = lab?.getPlayerLinewidth(player, pxMealBonus, linePctMealBonus, passiveCardBonus, petArenaBonus, index < gemTubes, rightOfBubo ? buboBoost : 0, shinyBonus);
-            player.labInfo.supped = index < gemTubes;
+            // Make sure we have info about the player and bubo, otherwise this math is pointless.
+            if (lab.playerCords[player.playerID] && lab.playerCords[lab.bestBuboPlayerID]) {
+                const rightOfBubo = lab.playerCords[player.playerID].x >= lab.playerCords[lab.bestBuboPlayerID].x;
+                player.labInfo.lineWidth = lab?.getPlayerLinewidth(player, pxMealBonus, linePctMealBonus, passiveCardBonus, petArenaBonus, index < gemTubes, rightOfBubo ? buboBoost : 0, shinyBonus);
+                player.labInfo.supped = index < gemTubes;
+            }
         });
     }
 }
@@ -364,8 +375,11 @@ const _findPrismSource = (lab: Lab) => {
     for (let playerIndex = 0; playerIndex < lab.playersInTubes.length; playerIndex++) {
         const player = lab.playersInTubes[playerIndex];
         const playerCords = lab.playerCords[player.playerID];
-        if (lab.getDistance(43, 229, playerCords.x, playerCords.y) < player.labInfo.lineWidth) {
-            return player
+
+        if (playerCords) {
+            if (lab.getDistance(43, 229, playerCords.x, playerCords.y) < player.labInfo.lineWidth) {
+                return player
+            }
         }
     }
     return undefined;
@@ -448,7 +462,7 @@ export const updateLab = (data: Map<string, any>) => {
     // 5. Bubo purple for extra line width.
 
     // Figure out which players are in lab first and sort by player id.
-    const playersInLab = [...playerData].filter(player => player.currentMonster?.id == "Laboratory" || divinity.playerInfo[player.playerID].isLinkedToGod(1)).sort((player1, player2) => player1.playerID > player2.playerID ? 1 : -1);
+    const playersInLab = [...playerData].filter(player => player.currentMonster?.id == "Laboratory" || (divinity.playerInfo[player.playerID]?.isLinkedToGod(1) ?? false)).sort((player1, player2) => player1.playerID > player2.playerID ? 1 : -1);
 
     lab.playersInTubes = playersInLab;
 
@@ -525,15 +539,15 @@ export const updateLab = (data: Map<string, any>) => {
 
     // Special Bonus handling
     (lab.bonuses[0] as AnimalFarmBonus).totalSpecies = breeding.speciesUnlocks.reduce((sum, world) => sum += world, 0);
-    
+
     (lab.bonuses[9] as FungiFingerBonus).greenMushroomKilled = deathnote.mobKillCount.get("mushG")?.reduce((sum, killCount) => sum += Math.round(killCount), 0) ?? 0;
     // Emerald Rhombol
     if (lab.jewels[13].active) {
         (lab.bonuses[9] as FungiFingerBonus).jewelBoost = lab.jewels[13].getBonus()
-    
+
     }
     (lab.bonuses[11] as UnadulteratedBankingBonus).greenStacks = [...new Set(storage.chest.filter(item => item.count >= 1e7).map(item => item.internalName))].length;
-    
+
 
     return lab;
 }

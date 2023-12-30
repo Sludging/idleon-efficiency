@@ -1,4 +1,6 @@
+import { Domain, RawData } from "./base/domain"
 import { GemShopItemBase, initGemShopRepo } from "./data/GemShopRepo"
+import { Item } from "./items"
 import { GemShopItemModel } from "./model/gemShopItemModel"
 
 export class GemPurchase {
@@ -29,23 +31,29 @@ export class GemPurchase {
     }
 }
 
-export class GemStore {
-    purchases: GemPurchase[];
+export class GemStore extends Domain {
+    purchases: GemPurchase[] = [];
 
-    constructor(rawData: number[]) {
+    getRawKeys(): RawData[] {
+        return [
+            { key: "GemItemsPurchased", perPlayer: false, default: [] }
+        ]
+    }
+    init(allItems: Item[], charCount: number) {
         this.purchases = GemPurchase.fromBase(initGemShopRepo());
-        
-        rawData.forEach((data, index) => {
+        return this;
+    }
+    parse(data: Map<string, any>): void {
+        const gems = data.get(this.getDataKey()) as GemStore;
+        const gemData = data.get("GemItemsPurchased") as number[];
+
+        gemData.forEach((data, index) => {
             if (data > 0) {
-                let purchase = this.purchases.find(x => x.no == index);
+                let purchase = gems.purchases.find(x => x.no == index);
                 if (purchase) {
                     purchase.pucrhased = data;
                 }
             }
         })
     }
-}
-
-export default function parseGems(gemData: number[]) {
-    return new GemStore(gemData);
 }

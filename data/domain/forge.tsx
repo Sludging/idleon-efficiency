@@ -1,9 +1,10 @@
 import { lavaFunc, range } from "../utility";
+import { Domain, RawData } from "./base/domain";
 import { GemStore } from "./gemPurchases";
 import { Item } from "./items";
 
-const getDescRegex = () => { return /Smelt down (?<ores>\d+) Ores into 1 Bar at the Forge. Smelting will take (?<cooldown>\d+) Seconds per Bar using Forge Slot 1./g };
-const getOilRegex = () => { return /Increases (?<effect>.*) by (?<amount>\d+)% for (.*) it's in. (?<chance>\d+)% chance to be consumed when a bar is forged./g };
+const getDescRegex = () => { return /Smelt down (?<ores>\d+) Ores into 1 Bar at the Forge. Smelting will take (?<cooldown>\d+) Seconds per Bar using Forge Slot 1./g; };
+const getOilRegex = () => { return /Increases (?<effect>.*) by (?<amount>\d+)% for (.*) it's in. (?<chance>\d+)% chance to be consumed when a bar is forged./g; };
 
 export class ForgeSlot {
     brimestone: boolean = false
@@ -105,11 +106,20 @@ export class ForgeUpgrade {
     }
 }
 
-export class Forge {
+export class Forge extends Domain {
     upgrades: ForgeUpgrade[] = [];
     slots: ForgeSlot[] = [];
 
-    constructor() {
+    getRawKeys(): RawData[] {
+        return [
+            {key: "ForgeItemQty", perPlayer: false, default: []},
+            {key: "ForgeIntProg", perPlayer: false, default: []},
+            {key: "ForgeItemOrder", perPlayer: false, default: []},
+            {key: "ForgeLV", perPlayer: false, default: []},
+        ]
+    }
+
+    init(allItems: Item[], charCount: number) {
         this.upgrades.push(new ForgeUpgrade(
             "New Forge Slot",
             16,
@@ -151,34 +161,43 @@ export class Forge {
             "+{% for a card drop while afk.",
             1.33
         ))
+
+        return this;
     }
-}
 
-export const parseForge = (forgeItemQuantity: number[], forgeProgress: number[], forgeItemOrder: string[], forgeLevels: number[], allItems: Item[]) => {
-    const forge = new Forge();
+    parse(data: Map<string, any>): void {
+        const forge = data.get(this.getDataKey()) as Forge;
+        const forgeItemQuantity = data.get("ForgeItemQty") as number[];
+        const forgeProgress = data.get("ForgeIntProg") as number[];
+        const forgeItemOrder = data.get("ForgeItemOrder") as string[];
+        const forgeLevels = data.get("ForgeLV") as number[];
+        const allItems = data.get("itemsData") as Item[];
 
-    forgeLevels.forEach((level, index) => {
-        if (index < forge.upgrades.length) {
-            forge.upgrades[index].level = level;
+        forgeLevels.forEach((level, index) => {
+            if (index < forge.upgrades.length) {
+                forge.upgrades[index].level = level;
+            }
+        });
+
+        // Reset any previous info, next section will re-calculate it if needed.
+        forge.slots = [];
+
+        let index = 0;
+        while (index < forgeItemQuantity.length) {
+            const oreItem = allItems.find(item => item.internalName == forgeItemOrder[index])?.duplicate() ?? Item.emptyItem(forgeItemOrder[index]);
+            oreItem.count = forgeItemQuantity[index];
+
+            const oilItem = allItems.find(item => item.internalName == forgeItemOrder[index + 1])?.duplicate() ?? Item.emptyItem(forgeItemOrder[index + 1]);
+            oilItem.count = forgeItemQuantity[index + 1];
+
+            const barItem = allItems.find(item => item.internalName == forgeItemOrder[index + 2])?.duplicate() ?? Item.emptyItem(forgeItemOrder[index + 2]);
+            barItem.count = forgeItemQuantity[index + 2];
+
+            forge.slots.push(new ForgeSlot(oreItem, oilItem, barItem, forgeProgress[index / 3]));
+            index += 3;
         }
-    });
 
-    let index = 0;
-    while (index < forgeItemQuantity.length) {
-        const oreItem = allItems.find(item => item.internalName == forgeItemOrder[index])?.duplicate() ?? Item.emptyItem(forgeItemOrder[index]);
-        oreItem.count = forgeItemQuantity[index];
-
-        const oilItem = allItems.find(item => item.internalName == forgeItemOrder[index + 1])?.duplicate() ?? Item.emptyItem(forgeItemOrder[index + 1]);
-        oilItem.count = forgeItemQuantity[index + 1];
-
-        const barItem = allItems.find(item => item.internalName == forgeItemOrder[index + 2])?.duplicate() ?? Item.emptyItem(forgeItemOrder[index + 2]);
-        barItem.count = forgeItemQuantity[index + 2];
-
-        forge.slots.push(new ForgeSlot(oreItem, oilItem, barItem, forgeProgress[index / 3]));
-        index += 3;
     }
-
-    return forge;
 }
 
 export const updateForge = (forge: Forge, gemStore: GemStore) => {

@@ -7,16 +7,29 @@ const { withSentryConfig } = require('@sentry/nextjs');
 
 const moduleExports = {
   reactStrictMode: true,
+  swcMinify: true,
   compiler: {
     // ssr and displayName are configured by default
     styledComponents: true,
   },
+  experimental: {
+    optimizePackageImports: ['styled-components', 'grommet', 'grommet-icons', 'firebase', 'firebaseui'],
+  },
   images: {
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    domains: ['cdn.buymeacoffee.com', 'cdn.idleonefficiency.com', 'cdn2.idleonefficiency.com'],
     minimumCacheTTL: 604800,
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '*.idleonefficiency.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.buymeacoffee.com',
+      },
+    ],
   },
   sentry: {
     hideSourceMaps: true,

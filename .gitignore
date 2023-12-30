@@ -65,8 +65,12 @@ Z_*.js
 N_*.js
 profiles/*
 *.rar
-*.md
 some icons for w5
 profile_local/*
 apk/**
 base.apk
+
+
+## Temporary 
+codex.tsx
+certificates

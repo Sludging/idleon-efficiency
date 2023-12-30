@@ -12,7 +12,7 @@ import {
 import styled from 'styled-components'
 
 import { Alchemy as AlchemyData, Cauldron, Bubble, CauldronBoostIndex, Vial } from '../../data/domain/alchemy';
-import { AchievementConst } from '../../data/domain/achievements'
+import { Achievement, AchievementConst } from '../../data/domain/achievements'
 import { useEffect, useState, useContext, useMemo } from 'react';
 import { AppContext } from '../../data/appContext'
 import { nFormatter, round } from '../../data/utility'
@@ -194,21 +194,16 @@ function VialTipInfo({ vial }: { vial: Vial }) {
 }
 
 function VialsDisplay() {
-    const [alchemyData, setAlchemyData] = useState<AlchemyData>();
     const appContext = useContext(AppContext);
+    const theData = appContext.data.getData();
 
-    useEffect(() => {
-        if (appContext.data.getData().size > 0) {
-            const theData = appContext.data.getData();
-            setAlchemyData(theData.get("alchemy"));
-        }
-    }, [appContext]);
+    const alchemyData = theData.get("alchemy") as AlchemyData;
 
     return (
         <ShadowBox background="dark-1" pad="medium">
             <Box direction="row" wrap>
                 {
-                    alchemyData?.vials.map((vial, index) => (
+                    alchemyData.vials.map((vial, index) => (
                         <Box key={index} width={{ max: '104px', min: '104px' }} height={{ max: '120px', min: '120px' }}>
                             <TipDisplay
                                 body={<VialTipInfo vial={vial} />}
@@ -217,10 +212,10 @@ function VialsDisplay() {
                                 size="medium"
                             >
                                 <Stack anchor='center' margin={{ right: 'small' }}>
-                                    <Box>
+                                    <Box style={{opacity: vial.level == 0 ? 0.3 : 1}}>
                                         <IconImage data={vial.getBackgroundImageData()} />
                                     </Box>
-                                    <Box>
+                                    <Box style={{opacity: vial.level == 0 ? 0.6 : 1}}>
                                         <IconImage data={vial.getImageData()} scale={1.3} />
                                     </Box>
                                 </Stack>
@@ -280,24 +275,23 @@ function SigilsDisplay() {
 }
 
 function BubblesDisplay() {
-    const [alchemyData, setAlchemyData] = useState<AlchemyData>();
-    const [hasAlchemyAchievement, setHasAlchemyAchievement] = useState<boolean>(false);
     const [discountLevel, setDiscountLevel] = useState<string>('0');
     const [classMulti, setClassMulti] = useState(false);
-    const [undevelopedCostsBubbleLevel, setUndevelopedCostsBubbleLevel] = useState<number>(0);
-    const [barleyBrewVialLevel, setBarleyBrewVialLevel] = useState<number>(0);
-    const [vialMultiplier, setVialMulitplier] = useState<number>(1);
 
     const appContext = useContext(AppContext);
+    const theData = appContext.data.getData();
 
-    const particles = useMemo(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            const collider = theData.get("collider") as AtomCollider;
-            return collider.particles;
-        }
-        return 0;
-    }, [appContext])
+    const alchemyData = theData.get("alchemy") as AlchemyData;
+    const achievementsInfo = theData.get("achievements") as Achievement[];
+    // get undeveloped costs bubble level
+    const undevelopedCostsBubbleLevel = alchemyData.getUndevelopedCostsBubbleLevel();
+    const barleyBrewVialLevel = alchemyData.getBarleyBrewVialLevel();
+    const vialMultiplier = alchemyData.vials[0].bonusMulitplier
+    const hasAlchemyAchievement = achievementsInfo[AchievementConst.SmartBoiIndex].completed;
+    
+
+    const collider = theData.get("collider") as AtomCollider;
+    const particles = collider.particles
 
     const bargainOptions = [
         {
@@ -337,29 +331,6 @@ function BubblesDisplay() {
             value: '8',
         },
     ];
-
-    useEffect(() => {
-        if (appContext.data.getData().size > 0) {
-            const theData = appContext.data.getData();
-            setAlchemyData(theData.get("alchemy"));
-            const achievementsInfo = theData.get("achievements");
-            // get undeveloped costs bubble level
-            setUndevelopedCostsBubbleLevel(alchemyData?.getUndevelopedCostsBubbleLevel() ?? 0);
-            setBarleyBrewVialLevel(alchemyData?.getBarleyBrewVialLevel() ?? 0);
-            setVialMulitplier(alchemyData?.vials[0].bonusMulitplier ?? 1);
-            if (achievementsInfo) {
-                setHasAlchemyAchievement(achievementsInfo[AchievementConst.SmartBoiIndex].completed ?? false);
-            }
-        }
-    }, [appContext, alchemyData, hasAlchemyAchievement])
-
-    if (alchemyData && alchemyData.cauldrons.flatMap(cauldron => cauldron.bubbles).filter(bubble => bubble.level > 0).length == 0) {
-        return (
-            <Box align="center" pad="medium">
-                <Heading level='3'>Come back when you unlocked this!</Heading>
-            </Box>
-        )
-    }
 
     return (
         <ShadowBox background="dark-1" flex={false} pad={{ bottom: 'small' }}>

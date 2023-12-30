@@ -27,24 +27,11 @@ import { TaskBoard } from '../../data/domain/tasks';
 import { GroupBy, GroupByFunction, nFormatter } from '../../data/utility';
 
 function PetDisplay() {
-    const [breeding, setBreeding] = useState<BreedingDomain>();
     const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
 
-    useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setBreeding(theData.get("breeding"));
-        }
-    }, [appContext]);
-
-    if (!breeding) {
-        return (
-            <Box>
-                Still loading
-            </Box>
-        )
-    }
+    const theData = appContext.data.getData();
+    const breeding = theData.get("breeding") as BreedingDomain;
 
     return (
         <Box>
@@ -91,31 +78,18 @@ function PetDisplay() {
 }
 
 function TerritoryDisplay() {
-    const [breeding, setBreeding] = useState<BreedingDomain>();
     const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
 
-    useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setBreeding(theData.get("breeding"));
-        }
-    }, [appContext]);
-
-    if (!breeding) {
-        return (
-            <Box>
-                Still loading
-            </Box>
-        )
-    }
+    const theData = appContext.data.getData();
+    const breeding = theData.get("breeding") as BreedingDomain;
 
     return (
         <Box>
             <Text>Territory</Text>
             {
-                breeding.territory.filter(territory => territory.unlocked && territory.index != 14).map((territory, tIndex) => (
-                    <ShadowBox background="dark-1" key={tIndex} direction="row" gap="medium" margin={{ bottom: 'medium' }} align="center" pad="small">
+                breeding.territory.filter(territory => territory.index != 14).map((territory, tIndex) => (
+                    <ShadowBox background="dark-1" key={tIndex} direction="row" gap="medium" margin={{ bottom: 'medium' }} align="center" pad="small" style={{opacity: territory.unlocked ? 1 : 0.4}}>
                         <Grid columns={["20%", "15%", "20%", "20%", "25%"]} fill>
                             <TextAndLabel textSize='small' label="Name" text={territoryNiceNames[territory.index]} />
                             {
@@ -214,7 +188,7 @@ function PetUpgradeDisplay() {
         <Text>Upgrades</Text>
         {
             breeding.upgrade.filter(upgrade => upgrade.data.upgradeName != "Filler").map((upgrade, index) => (
-                <ShadowBox key={index} background="dark-1" margin={{ bottom: 'medium' }} align="center" pad="small">
+                <ShadowBox key={index} background="dark-1" margin={{ bottom: 'medium' }} align="center" pad="small" style={{opacity: upgrade.level == 0 ? 0.5 : 1}}>
                     <Grid columns={{ size: 'auto', count: 5 }} fill>
                         <IconImage data={upgrade.getImageData()} scale={0.7} />
                         <TextAndLabel textSize='xsmall' label="Name" text={upgrade.data.upgradeName} />
@@ -316,7 +290,6 @@ function ArenaBonusDisplay() {
 }
 
 function ShinyDisplay() {
-
     const [breeding, setBreeding] = useState<BreedingDomain>();
     const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
@@ -361,17 +334,26 @@ function ShinyDisplay() {
     )
 }
 
+
 function EggDisplay() {
-    const [breeding, setBreeding] = useState<BreedingDomain>();
     const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
+    const theData = appContext.data.getData();
+    const breeding = theData.get("breeding") as BreedingDomain;
 
-    useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setBreeding(theData.get("breeding"));
+    const capacity = useMemo(() => {
+        const theData = appContext.data.getData();
+        const gemStore = theData.get("gems") as GemStore;
+        const taskBoard = theData.get("taskboard") as TaskBoard;
+
+        if (gemStore && breeding) {
+            const eggCapacityUpgrade = gemStore.purchases.find(purchase => purchase.no == 119)?.pucrhased ?? 0;
+            const breedingUpgradeLevel = breeding?.upgrade.find(upgrade => upgrade.data.upgradeName == "Egg Capacity")?.level ?? 0;
+            const eggMerit = taskBoard.merits.find(merit => merit.descLine1.includes("egg capacity in the Nest"));
+            return 3 + eggCapacityUpgrade + breedingUpgradeLevel + (eggMerit ? eggMerit.level * eggMerit.bonusPerLevel : 0);
         }
-    }, [appContext]);
+        return 0;
+    }, [breeding, appContext]);
 
     if (!breeding) {
         return (

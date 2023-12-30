@@ -15,6 +15,7 @@ import { SkillsIndex } from './SkillsIndex';
 import { Sailing } from './sailing';
 import { TaskBoard } from './tasks';
 import { Rift } from './rift';
+import { Domain, RawData } from './base/domain';
 
 export enum CauldronIndex {
     Power = 0,
@@ -131,7 +132,7 @@ export class Bubble {
         this.bubbleIndex = bubbleIndex;
         this.iconPrefix = iconPrefix;
         this.cauldronIndex = cauldronIndex[data.cauldron];
-        
+
     }
 
     getImageData = (): ImageData => {
@@ -206,7 +207,7 @@ export class DailyDripBubble extends Bubble {
         const alchemyBonus = bonus * Math.max(Math.pow(this.totalAlchemyLevel / 25, .3), 0);
         return roundResult ? round(alchemyBonus) : alchemyBonus;
     }
-    
+
     override getBonusText = (bonus: number = this.getBonus(true)): string => {
         return this.description.replace(/\$/g, bonus.toString());
     }
@@ -228,10 +229,10 @@ export class Cauldron {
         const toReturn = new Cauldron(data[0].data.cauldron, iconPrefix);
         data.forEach((bubble, index) => {
             if (iconPrefix == "Y" && index == 17) {
-                toReturn.bubbles.push(DiamonChefBubble.fromBase(bubble.id, bubble.data, iconPrefix, index));    
+                toReturn.bubbles.push(DiamonChefBubble.fromBase(bubble.id, bubble.data, iconPrefix, index));
             }
             else if (bubble.data.name == "Da Daily Drip") {
-                toReturn.bubbles.push(DailyDripBubble.fromBase(bubble.id, bubble.data, iconPrefix, index));    
+                toReturn.bubbles.push(DailyDripBubble.fromBase(bubble.id, bubble.data, iconPrefix, index));
             }
             else {
                 toReturn.bubbles.push(Bubble.fromBase(bubble.id, bubble.data, iconPrefix, index));
@@ -269,9 +270,9 @@ export class Vial {
     }
 
     getBonus = (round: boolean = false): number => {
-        return lavaFunc(this.func, this.level, this.x1, this.x2, round) 
-        * this.bonusMulitplier
-        * (1 + (2 * this.maxedVials) / 100);
+        return lavaFunc(this.func, this.level, this.x1, this.x2, round)
+            * this.bonusMulitplier
+            * (1 + (2 * this.maxedVials) / 100);
     }
 
     getBonusText = (bonus: number = this.getBonus(true)): string => {
@@ -293,7 +294,7 @@ export class Vial {
 
     getBackgroundImageData = (): ImageData => {
         return {
-            location: `aVials${this.level}`,
+            location: `aVials${Math.max(this.level, 1)}`,
             width: 104,
             height: 120
         };
@@ -317,7 +318,7 @@ export class Vial {
     }
 }
 
-export class Alchemy {
+export class Alchemy extends Domain {
     cauldrons: Array<Cauldron> = [];
     vials: Array<Vial> = [];
 
@@ -360,15 +361,15 @@ export class Alchemy {
 
     _shouldBoostBubble = (bubble: number, cauldron: CauldronIndex) => {
         if (cauldron == CauldronIndex.Power) {
-            return [0,2,4,7,14].includes(bubble);
+            return [0, 2, 4, 7, 14].includes(bubble);
         }
 
         if (cauldron == CauldronIndex.Quicc) {
-            return [0,6,9,12,14].includes(bubble);
+            return [0, 6, 9, 12, 14].includes(bubble);
         }
 
         if (cauldron == CauldronIndex.HighIQ) {
-            return [0,2,6,12,14].includes(bubble);
+            return [0, 2, 6, 12, 14].includes(bubble);
         }
 
         return false
@@ -432,24 +433,51 @@ export class Alchemy {
         }
     }
 
-    static fromBase = (data: BubbleBase[]) => {
-        const toReturn = new Alchemy();
-        // Create groups based on the cauldron
-        GroupByFunction(data, function(base: BubbleBase) { return base.data.cauldron }).forEach(bubbles => {
+    getRawKeys(): RawData[] {
+        return [
+            { key: "CauldronInfo", default: {}, perPlayer: false },
+            { key: "CauldUpgLVs", default: [], perPlayer: false },
+        ];
+    }
+
+    init(allItems: Item[], charCount: number) {
+        const data = initBubbleRepo();
+
+        GroupByFunction(data, function (base: BubbleBase) { return base.data.cauldron }).forEach(bubbles => {
             const cauldronName = bubbles[0].data.cauldron;
             // If one of the cauldrons
             if (["Power Cauldron", "Quicc Cauldron", "High-IQ Cauldron", "Kazam Cauldron"].includes(cauldronName)) {
-                toReturn.cauldrons.push(Cauldron.fromBase(bubbles))
-            }         
+                this.cauldrons.push(Cauldron.fromBase(bubbles))
+            }
             // If vials
             if (cauldronName == "Vials") {
                 bubbles.forEach((vial, index) => {
-                    toReturn.vials.push(Vial.fromBase(vial.id, vial.data, index));
+                    this.vials.push(Vial.fromBase(vial.id, vial.data, index));
                 })
             }
         })
-        
-        return toReturn;
+
+        convertToItemClass(this, allItems);
+
+        return this;
+    }
+
+    parse(data: Map<string, any>): void {
+        const alchemy = data.get(this.getDataKey()) as Alchemy;
+        // Must stay as raw
+        const alchemyData = data.get("CauldronInfo") as Map<string, number>[];
+        const boostLevels = data.get("CauldUpgLVs") as number[];
+
+        alchemyData.forEach((indexData, index) => {
+            // Handle cauldrons if the first 4 arrays of data
+            if (index in CauldronIndex) {
+                handleCauldron(indexData, index, alchemy, boostLevels)
+            }
+            // Handle vials if 5th array of data
+            if (index == AlchemyConst.VialIndex) {
+                handleVial(indexData, alchemy);
+            }
+        })
     }
 }
 
@@ -488,9 +516,9 @@ const handleVial = (vialData: Map<string, number>, alchemy: Alchemy) => {
 }
 
 // Should move this to a common library for typeguards.
-const isLiquidComponent = (x: ComponentBaseModel): x is LiquidComponentModel => "liquidNo" in x 
-const isComponent = (x: ComponentBaseModel): x is ComponentModel => "item" in x 
-const isSpiceComponent = (x: ComponentBaseModel): x is SpiceComponentModel => "spiceNo" in x 
+const isLiquidComponent = (x: ComponentBaseModel): x is LiquidComponentModel => "liquidNo" in x
+const isComponent = (x: ComponentBaseModel): x is ComponentModel => "item" in x
+const isSpiceComponent = (x: ComponentBaseModel): x is SpiceComponentModel => "spiceNo" in x
 
 const convertToItemClass = (alchemy: Alchemy, allItems: Item[]) => {
     alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).forEach(bubble => {
@@ -501,7 +529,7 @@ const convertToItemClass = (alchemy: Alchemy, allItems: Item[]) => {
                 reqItem.count = req.quantity;
                 bubble.requirements.push(reqItem);
             }
-            
+
             if (isComponent(req)) {
                 const itemName = req.item;
                 const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
@@ -526,7 +554,7 @@ const convertToItemClass = (alchemy: Alchemy, allItems: Item[]) => {
                 reqItem.count = req.quantity;
                 vial.requirements.push(reqItem);
             }
-            
+
             if (isComponent(req)) {
                 const itemName = req.item;
                 const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
@@ -535,23 +563,6 @@ const convertToItemClass = (alchemy: Alchemy, allItems: Item[]) => {
             }
         })
     })
-}
-
-export default function parseAlchemy(alchemyData: Array<Map<string, number>>, boostLevels: Array<number>, allItems: Item[]) {
-    var alchemy = Alchemy.fromBase(initBubbleRepo());
-    alchemyData.forEach((indexData, index) => {
-        // Handle cauldrons if the first 4 arrays of data
-        if (index in CauldronIndex) {
-            handleCauldron(indexData, index, alchemy, boostLevels)
-        }
-        // Handle vials if 5th array of data
-        if (index == AlchemyConst.VialIndex) {
-            handleVial(indexData, alchemy);
-        }
-    })
-
-    convertToItemClass(alchemy, allItems);
-    return alchemy;
 }
 
 export function updateAlchemy(data: Map<string, any>) {
@@ -570,7 +581,7 @@ export function updateAlchemy(data: Map<string, any>) {
     const riftVialMastery = rift.bonuses.find(bonus => bonus.name == "Vial Mastery");
     if (riftVialMastery?.active ?? false) {
         const maxVials = alchemy.vials.reduce((sum, vial) => sum += vial.level == 13 ? 1 : 0, 0);
-        alchemy.vials.forEach(vial => vial.maxedVials = maxVials);        
+        alchemy.vials.forEach(vial => vial.maxedVials = maxVials);
     }
 
     if (lab.bonuses.find(bonus => bonus.name == "No Bubble Left Behind")?.active) {
@@ -580,7 +591,7 @@ export function updateAlchemy(data: Map<string, any>) {
         }
         bubblesToUpgrade += sailing.artifacts[12].getBonus(); //Amberite Artifact
         bubblesToUpgrade += taskboard.merits.find(merit => merit.descLine1.includes("Bubbles upgraded by"))?.getBonus() ?? 0;
-        
+
         const sortedBubbles = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles.slice(0, 15).filter(bubble => bubble.level > 5)).sort((bubble1, bubble2) => {
             // If same level, then go with higher cauldron index + higher bubble index.
             if (bubble1.level == bubble2.level) {

@@ -1,7 +1,9 @@
 import { round } from '../utility';
+import { Domain, RawData } from './base/domain';
 import { Card } from './cards';
 import { initShrineRepo, ShrineBase } from './data/ShrineRepo';
 import { ImageData } from './imageData';
+import { Item } from './items';
 import { Lab } from './lab';
 import { Sailing } from './sailing';
 import { ArtifactStatus } from './sailing/artifacts';
@@ -61,7 +63,8 @@ export class Shrine {
     }
 
     getHourRequirement = () => {
-        return Math.floor(20 * (this.level - 1) + 6 * this.level * Math.pow(1.63, this.level - 1))
+        const shrineLevel = Math.max(this.level, 1);
+        return Math.floor(20 * (shrineLevel - 1) + 6 * shrineLevel * Math.pow(1.63, shrineLevel - 1))
     }
 
     getImageData = (): ImageData => {
@@ -77,16 +80,29 @@ export class Shrine {
     }
 }
 
-export default function parseShrines(rawData: Array<Array<number>>) {
-    const shrineData = Shrine.fromBase(initShrineRepo());
-    if (rawData) {
+export class Shrines extends Domain {
+    getRawKeys(): RawData[] {
+        return [
+            { key: "Shrine", perPlayer: false, default: [] }
+        ]
+    }
+
+    init(allItems: Item[], charCount: number) {
+        return Shrine.fromBase(initShrineRepo());
+    }
+
+    parse(data: Map<string, any>): void {
+        const shrineData = data.get(this.getDataKey()) as Shrine[];
+        const rawData = data.get("Shrine") as number[][];
+
         rawData.forEach((shrine, index) => { // for each shrine
             shrineData[index].currentMap = shrine[0];
             shrineData[index].level = shrine[3];
             shrineData[index].accumulatedHours = shrine[4];
         });
+
     }
-    return shrineData;
+
 }
 
 // shrine math: https://discord.com/channels/912156088873418792/912156088873418795/1068153373817327646
@@ -105,6 +121,6 @@ export const updateShrines = (data: Map<string, any>) => {
         shrine.artifactAcquired = shrineArtifact.status != ArtifactStatus.Unobtained;
         shrine.cchizBonus = cchizBonus;
     });
-    
+
     return shrines;
 }

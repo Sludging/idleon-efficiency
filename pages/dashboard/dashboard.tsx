@@ -6,7 +6,7 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import IconImage from "../../components/base/IconImage";
 import ShadowBox from "../../components/base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../../components/base/TextAndLabel";
-import { AppContext, AppStatus } from "../../data/appContext";
+import { AppContext, AppStatus, DataStatus } from "../../data/appContext";
 import { Account, Key } from "../../data/domain/account";
 import { Alerts, AlertType, PlayerAlert, Alert } from "../../data/domain/alerts";
 import { EnemyInfo } from "../../data/domain/enemies";
@@ -22,7 +22,7 @@ const isPlayerAlert = (x: Alert): x is PlayerAlert => "player" in x
 
 function KeyDisplay({ toShow }: { toShow: Key }) {
     return (
-        <Box>
+        <Box style={{opacity: toShow.item.count == 0 ? 0.3 : 1}}>
             <TipDisplay
                 visibility={toShow.amountPerDay == 0 ? 'none' : ''}
                 heading={`${toShow.item.displayName} (${toShow.keysAvailableForPickup()} available to pickup)`}
@@ -148,24 +148,17 @@ function Dashboard() {
     const size = useContext(ResponsiveContext);
     const theData = appContext.data.getData();
 
-    const [accountData, setAccountData] = useState<Account>(theData.get("account") as Account);
-    const [alertData, setAlertData] = useState<Alerts>(theData.get("alerts") as Alerts);
-
-    useEffect(() => {
-        if (appContext && theData) {
-            setAccountData(theData.get("account") as Account);
-            setAlertData(theData.get("alerts") as Alerts);
-        }
-    }, [appContext]);
+    const accountData = theData.get("account") as Account;
+    const alertData = theData.get("alerts") as Alerts;
 
     const playerAlerts = useMemo(() => {
         return Object.entries(alertData.playerAlerts).filter(([_, alerts]) => alerts.length > 0)
     }, [alertData]);
 
     // We have a single column layout if it's a public profile, small screen, or not player alerts. Else 2 columns.
-    const mainColumns = appContext.status == AppStatus.StaticData || size == "small" || playerAlerts.length == 0 ? ["100%"] : ["75%", "25%"];
+    const mainColumns = appContext.dataStatus == DataStatus.StaticData || size == "small" || playerAlerts.length == 0 ? ["100%"] : ["75%", "25%"];
     // If single column, use a different grid layout.
-    const dashboardGridArea = appContext.status == AppStatus.StaticData || playerAlerts.length == 0 ?
+    const dashboardGridArea = appContext.dataStatus == DataStatus.StaticData || playerAlerts.length == 0 ?
         [
             { name: 'accountItems', start: [0, 0], end: [2, 0] },
             { name: 'money', start: [0, 1], end: [1, 1] },
@@ -213,7 +206,7 @@ function Dashboard() {
                     >
                         <DashboardWidget direction="row" heading="Account wide items" wrap gridArea="accountItems">
                             {
-                                accountData.keys.filter(key => key.item.count > 0).map((key, index) => (
+                                accountData.keys.map((key, index) => (
                                     <KeyDisplay key={index} toShow={key} />
                                 ))
                             }
@@ -300,7 +293,7 @@ function Dashboard() {
                             }
                         </DashboardWidget>
                         {
-                            alertData.generalAlerts.length > 0 && appContext.status != AppStatus.StaticData &&
+                            alertData.generalAlerts.length > 0 && appContext.dataStatus != DataStatus.StaticData &&
                             <DashboardWidget heading="Global Alerts" gridArea="globalAlerts">
                                 {
                                     alertData.generalAlerts.map((alert, index) => (
@@ -314,7 +307,7 @@ function Dashboard() {
                     </Grid>
                 </Box>
                 {
-                    appContext.status != AppStatus.StaticData && playerAlerts.length > 0 &&
+                    appContext.dataStatus != DataStatus.StaticData && playerAlerts.length > 0 &&
                     <Box background="dark-1" pad={{ left: 'medium', right: 'medium' }}>
                         <Heading level="3" size="medium" style={{ fontWeight: 'normal' }}>Alerts</Heading>
                         <Box>

@@ -6,9 +6,11 @@
 // (b.engine.getGameAttribute("Tasks")[5] = D.getLoadJsonList("TaskZZ5"));
 
 import { GroupBy, nFormatter } from "../utility"
+import { Domain, RawData } from "./base/domain"
 import { initTaskDescriptionRepo, TaskDescriptionBase } from "./data/TaskDescriptionRepo"
 import { initTaskShopDescRepo, TaskShopDescBase } from "./data/TaskShopDescRepo"
 import { ImageData } from "./imageData"
+import { Item } from "./items"
 import { TaskDescriptionModel } from "./model/taskDescriptionModel"
 import { TaskShopDescModel } from "./model/taskShopDescModel"
 
@@ -149,39 +151,54 @@ export class Merit {
     }
 }
 
-export class TaskBoard {
-    tasks: Task[];
-    merits: Merit[];
+export class TaskBoard extends Domain {
+    tasks: Task[] = [];
+    merits: Merit[] = [];
 
-    constructor() {
+    getRawKeys(): RawData[] {
+        return [
+            {key: "TaskZZ0", perPlayer: false, default: []},
+            {key: "TaskZZ1", perPlayer: false, default: []},
+            {key: "TaskZZ2", perPlayer: false, default: []},
+            // Currently not in use.
+            // {key: "TaskZZ3", perPlayer: false, default: []},
+            // {key: "TaskZZ4", perPlayer: false, default: []},
+            // {key: "TaskZZ5", perPlayer: false, default: []},
+        ]
+    }
+
+    init(allItems: Item[], charCount: number) {
         this.tasks = Task.fromBase(initTaskDescriptionRepo());
         this.merits = Merit.fromBase(initTaskShopDescRepo());
+        return this;
     }
-}
 
-export default function parseTaskboard(taskInfo0: number[][], taskInfo1: number[][], taskInfo2: number[][], taskInfo3: number[][], taskInfo4: number[], taskInfo5: number[]) {
-    const taskBoard = new TaskBoard()
+    parse(data: Map<string, any>): void {
+        const taskBoard = data.get(this.getDataKey()) as TaskBoard;
+        const taskInfo0 = data.get(`TaskZZ0`) as number[][];
+        const taskInfo1 = data.get(`TaskZZ1`) as number[][];
+        const taskInfo2 = data.get(`TaskZZ2`) as number[][];
 
-    const tasksByWorld = GroupBy(taskBoard.tasks, "world");
-    const meritsByWorld = GroupBy(taskBoard.merits, "world");
+        const tasksByWorld = GroupBy(taskBoard.tasks, "world");
+        const meritsByWorld = GroupBy(taskBoard.merits, "world");
 
-    if (taskInfo0.length >= tasksByWorld.size && taskInfo1.length >= tasksByWorld.size) {
-        tasksByWorld.forEach((world, worldIndex) => {
-            world.forEach((task, taskIndex) => {
-                if (!task.isDaily()) {
-                    task.count = taskInfo0[worldIndex - 1][taskIndex];
-                    task.level = taskInfo1[worldIndex - 1][taskIndex];
-                }
+        if (taskInfo0.length >= tasksByWorld.size && taskInfo1.length >= tasksByWorld.size) {
+            tasksByWorld.forEach((world, worldIndex) => {
+                world.forEach((task, taskIndex) => {
+                    if (!task.isDaily()) {
+                        task.count = taskInfo0[worldIndex - 1][taskIndex];
+                        task.level = taskInfo1[worldIndex - 1][taskIndex];
+                    }
+                })
             })
-        })
-    }
+        }
 
-    if (taskInfo2.length >= meritsByWorld.size) {
-        meritsByWorld.forEach((world, worldIndex) => {
-            world.forEach((merit, meritIndex) => {
-                merit.level = taskInfo2[worldIndex - 1][meritIndex];
+        if (taskInfo2.length >= meritsByWorld.size) {
+            meritsByWorld.forEach((world, worldIndex) => {
+                world.forEach((merit, meritIndex) => {
+                    merit.level = taskInfo2[worldIndex - 1][meritIndex];
+                })
             })
-        })
+        }
     }
-    return taskBoard;
 }

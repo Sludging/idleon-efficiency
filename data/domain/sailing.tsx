@@ -22,6 +22,8 @@ import { Achievement } from "./achievements";
 import { Rift, SkillMastery } from "./rift";
 import { SkillsIndex } from "./SkillsIndex";
 import { Gaming, TotalizerBonus } from "./gaming";
+import { Domain, RawData } from "./base/domain";
+import { Item } from "./items";
 
 // "Captains": [
 //     [0,0,-1,3,6.75,2,0],
@@ -230,7 +232,7 @@ export class Ship {
 //    [1,1,2,1,1,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]
 
 
-export class Sailing {
+export class Sailing extends Domain {
     artifacts: Artifact[] = Artifact.fromBase(initArtifactRepo());
     islands: Island[] = Island.fromBase(initIslandInfoRepo());
     boats: Boat[] = [];
@@ -251,14 +253,6 @@ export class Sailing {
         return (60 * this.boatsUnlocked + 15 * Math.pow(this.boatsUnlocked, 2.25)) * Math.pow(1.55, this.boatsUnlocked);
     }
 
-    constructor() {
-        // Map artifacts to islands to make display easier.
-        let artifactIndex = 0;
-        this.islands.forEach(island => {
-            island.artifacts = this.artifacts.slice(artifactIndex, artifactIndex + island.data.artifactsPerIsland);
-            artifactIndex += island.data.artifactsPerIsland;
-        })
-    }
     // if ("NewCaptBoatSlot" == e) return 0 == s ? (60 * r + 15 * Math.pow(r, 2)) * Math.pow(1.43, r) * .6 : (60 * r + 15 * Math.pow(r, 2)) * Math.pow(1.43, r);
     static getLootImageData = (lootIndex: number): ImageData => {
         return {
@@ -267,51 +261,75 @@ export class Sailing {
             width: 22
         };
     }
-}
 
-export default function parseSailing(sailingData: number[][], boatData: number[][], captainData: number[][]) {
-    const sailing = new Sailing();
-
-    if (sailingData.length == 0) {
-        return sailing;
+    getRawKeys(): RawData[] {
+        return [
+            {key: "Sailing", perPlayer: false, default: []},
+            {key: "Boats", perPlayer: false, default: []},
+            {key: "Captains", perPlayer: false, default: []},
+        ]
     }
 
-    sailing.loot = sailingData[1];
+    init(allItems: Item[], charCount: number) {
+        // Map artifacts to islands to make display easier.
+        let artifactIndex = 0;
+        this.islands.forEach(island => {
+            island.artifacts = this.artifacts.slice(artifactIndex, artifactIndex + island.data.artifactsPerIsland);
+            artifactIndex += island.data.artifactsPerIsland;
+        })
 
-    // Sailing index 3 = array of artifacts found or not.
-    sailingData[3].forEach((artifact, index) => {
-        sailing.artifacts[index].updateStatus(artifact);
-    })
+        return this;
+    }
 
-    sailing.islands.forEach(island => {
-        if (sailingData[0][island.index] == -1) {
-            island.status = IslandStatus.Discoverd;
+    parse(data: Map<string, any>): void {
+        const sailing = data.get(this.getDataKey()) as Sailing;
+        const sailingData = data.get("Sailing") as number[][];
+        const boatData = data.get("Boats") as number[][];
+        const captainData = data.get("Captains") as number[][];
+
+        if (sailingData.length == 0) {
+            return;
         }
-        else {
-            island.discoverProgress = sailingData[0][island.index];
-        }
-    });
 
-    sailing.captainsUnlocked = Math.round(sailingData[2][0] + 1);
-    sailing.boatsUnlocked = Math.round(sailingData[2][1] + 1);
+        // Some sailing data has no "persistence", so we reset the previous data.
+        sailing.boats = [];
+        sailing.captains = [];
 
-    captainData.forEach((captain, cIndex) => {
-        if (cIndex < sailing.captainsUnlocked && captain[0] != -1) {
-            sailing.captains.push(new Captain(cIndex, captain[3], captain[4], [[captain[1], captain[5]], [captain[2], captain[6]]]));
-        }
-    })
+        sailing.loot = sailingData[1];
 
-    // [1,4,1,14,1827.7902880492559,17],
-    // [2,4,1,14,1290.5608459374048,23]
-    boatData.forEach((boat, bIndex) => {
-        if (bIndex < sailing.boatsUnlocked && (boat[3] + boat[5]) != 0) {
-            const boatCaptain = sailing.captains.find(captain => captain.index == boat[0]);
-            const targetIsland = boat[1] != -1 && boat[1] < sailing.islands.length ? sailing.islands[boat[1]] : undefined;
-            sailing.boats.push(new Boat(bIndex, targetIsland, boat[4], boat[3], boat[5], boatCaptain));
-        }
-    })
+        // Sailing index 3 = array of artifacts found or not.
+        sailingData[3].forEach((artifact, index) => {
+            sailing.artifacts[index].updateStatus(artifact);
+        })
 
-    return sailing;
+        sailing.islands.forEach(island => {
+            if (sailingData[0][island.index] == -1) {
+                island.status = IslandStatus.Discoverd;
+            }
+            else {
+                island.discoverProgress = sailingData[0][island.index];
+            }
+        });
+
+        sailing.captainsUnlocked = Math.round(sailingData[2][0] + 1);
+        sailing.boatsUnlocked = Math.round(sailingData[2][1] + 1);
+
+        captainData.forEach((captain, cIndex) => {
+            if (cIndex < sailing.captainsUnlocked && captain[0] != -1) {
+                sailing.captains.push(new Captain(cIndex, captain[3], captain[4], [[captain[1], captain[5]], [captain[2], captain[6]]]));
+            }
+        })
+
+        // [1,4,1,14,1827.7902880492559,17],
+        // [2,4,1,14,1290.5608459374048,23]
+        boatData.forEach((boat, bIndex) => {
+            if (bIndex < sailing.boatsUnlocked && (boat[3] + boat[5]) != 0) {
+                const boatCaptain = sailing.captains.find(captain => captain.index == boat[0]);
+                const targetIsland = boat[1] != -1 && boat[1] < sailing.islands.length ? sailing.islands[boat[1]] : undefined;
+                sailing.boats.push(new Boat(bIndex, targetIsland, boat[4], boat[3], boat[5], boatCaptain));
+            }
+        })
+    }
 }
 
 export const updateSailing = (data: Map<string, any>) => {
@@ -336,13 +354,13 @@ export const updateSailing = (data: Map<string, any>) => {
     const artifactBoost = sailing.artifacts[19].getBonus();
     sailing.maxChests = Math.min(
         Math.round(
-            5 + chestPurchases + 
-            Math.min(4, artifactBoost) + 
+            5 + chestPurchases +
+            Math.min(4, artifactBoost) +
             (taskboard.merits.find(merit => merit.descLine1.includes("Loot Pile Capacity"))?.getBonus() ?? 0) +
             (achievements[287].completed ? 1 : 0) +
-            (achievements[290].completed ? 1 : 0) 
-            )
-        ,30);
+            (achievements[290].completed ? 1 : 0)
+        )
+        , 30);
 
     // Speed base math
     const purrmepPlayer = divinity.gods[6].linkedPlayers.at(0); // purrmep is limited to only 1 player linked.

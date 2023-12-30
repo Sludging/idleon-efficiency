@@ -73,7 +73,7 @@ export class FirestoreData {
             { includeMetadataChanges: true }, (doc) => {
                 if (doc.exists()) {
                     const cloudsave = doc.data();
-                    this.onUpdateFunction(cloudsave, this.charNames, this.companions, this.serverVars);
+                    this.onUpdateFunction(cloudsave, this.charNames, this.serverVars, this.companions);
                 }
             });
     }

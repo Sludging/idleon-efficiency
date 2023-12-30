@@ -19,10 +19,13 @@ import { Sigils } from './sigils';
 import { Skilling } from './skilling';
 import { ClassIndex } from './talents';
 import { Capacity, CapacityConst } from './capacity';
+import { IParser } from './idleonData';
+import { Cloudsave } from './cloudsave';
 import { Divinity } from './divinity';
 import { Rift, SkillMastery } from './rift';
 import { Breeding } from './breeding';
 import { Gaming } from './gaming';
+import { Domain, RawData } from './base/domain';
 
 
 // if ("Costs2TypeAnvilPA" == t) {}
@@ -71,7 +74,6 @@ export class Anvil {
     capPoints: number = 0;
     production: AnvilProduct[];
     currentlySelect: number[] = [];
-    playerID: number = -1;
 
     // Calculated
     costDiscount: number = 0;
@@ -79,7 +81,7 @@ export class Anvil {
     anvilXP: number = 0;
     productCapacity: number = 0;
 
-    constructor() {
+    constructor(public playerID: number) {
         this.production = AnvilProduct.fromBase(initAnvilRepo());
     }
 
@@ -133,7 +135,7 @@ export class Anvil {
     };
 
     getCoinCostToMax = (pointsBought: number = this.pointsFromCoins) => {
-        return range(pointsBought, 600).reduce((sum, level) => sum += this.getCoinCost(level) ,0)
+        return range(pointsBought, 600).reduce((sum, level) => sum += this.getCoinCost(level), 0)
     }
 
     getMonsterMat = (pointsBought: number = this.pointsFromMats) => {
@@ -195,43 +197,69 @@ export class Anvil {
     }
 }
 
-export class AnvilWrapper {
-    playerAnvils: Record<number, Anvil> = {};
-    production: AnvilProduct[];
-
-    constructor() {
-        this.production = AnvilProduct.fromBase(initAnvilRepo());
+export class AnvilWrapper extends Domain {
+    getRawKeys(): RawData[] {
+        return [
+            { key: "AnvilPA_", perPlayer: true, default: [] },
+            { key: "AnvilPAstats_", perPlayer: true, default: [] },
+            { key: "AnvilPAselect_", perPlayer: true, default: [] },
+        ]
     }
-
-}
-
-export const parseAnvil = (anvilProduction: number[][][], anvilStats: number[][], anvilSelected: number[][], allItems: Item[]) => {
-    const wrapper = new AnvilWrapper();
-
-    anvilProduction.forEach((_, pIndex) => {
-        const anvil = new Anvil();
-        anvil.production.forEach((item, index) => {
-            item.currentAmount = anvilProduction[pIndex][index][0];
-            item.currentXP = anvilProduction[pIndex][index][1];
-            item.currentProgress = anvilProduction[pIndex][index][2];
-            item.totalProduced = anvilProduction[pIndex][index][3];
-            item.hammers = anvilSelected[pIndex].filter(x => x == index).length;
-            item.displayName = allItems.find(fullItem => fullItem.internalName == item.data.item)?.displayName ?? "Unknown";
+    init(allItems: Item[], charCount: number) {
+        this.production = AnvilProduct.fromBase(initAnvilRepo());
+        [...Array(charCount)].forEach((_, pIndex) => {
+            const playerAnvil = new Anvil(pIndex);
+            playerAnvil.playerID = pIndex;
+            this.playerAnvils[pIndex] = playerAnvil;
         })
 
-        anvil.availablePoints = anvilStats[pIndex][0];
-        anvil.pointsFromCoins = anvilStats[pIndex][1];
-        anvil.pointsFromMats = anvilStats[pIndex][2];
-        anvil.xpPoints = anvilStats[pIndex][3];
-        anvil.speedPoints = anvilStats[pIndex][4];
-        anvil.capPoints = anvilStats[pIndex][5];
+        return this;
+    }
 
-        anvil.currentlySelect = anvilSelected[pIndex];
-        anvil.playerID = pIndex;
-        wrapper.playerAnvils[pIndex] = anvil;
-    })
+    parse(data: Map<string, any>): void {
+        const charCount = data.get("charCount") as number;
+        const allItems = data.get("itemsData") as Item[];
+        const wrapper = data.get(this.getDataKey()) as AnvilWrapper;
 
-    return wrapper;
+        const anvilProduction = [...Array(charCount)].map((_, i) => data.get(`AnvilPA_${i}`)) as number[][][];
+        const anvilStats = [...Array(charCount)].map((_, i) => data.get(`AnvilPAstats_${i}`)) as number[][];
+        const anvilSelected = [...Array(charCount)].map((_, i) => data.get(`AnvilPAselect_${i}`)) as number[][];
+
+        range(0, charCount).forEach((_, pIndex) => {
+            // If this is the first time handling this player, init.
+            if (Object.values(wrapper.playerAnvils).length <= pIndex) {
+                wrapper.playerAnvils[pIndex] = new Anvil(pIndex);
+            }
+
+            const anvil = wrapper.playerAnvils[pIndex];
+
+            anvil.production.forEach((item, index) => {
+                item.currentAmount = anvilProduction[pIndex][index][0];
+                item.currentXP = anvilProduction[pIndex][index][1];
+                item.currentProgress = anvilProduction[pIndex][index][2];
+                item.totalProduced = anvilProduction[pIndex][index][3];
+                item.hammers = anvilSelected[pIndex].filter(x => x == index).length;
+                item.displayName = allItems.find(fullItem => fullItem.internalName == item.data.item)?.displayName ?? "Unknown";
+            })
+
+            anvil.availablePoints = anvilStats[pIndex][0];
+            anvil.pointsFromCoins = anvilStats[pIndex][1];
+            anvil.pointsFromMats = anvilStats[pIndex][2];
+            anvil.xpPoints = anvilStats[pIndex][3];
+            anvil.speedPoints = anvilStats[pIndex][4];
+            anvil.capPoints = anvilStats[pIndex][5];
+
+            anvil.currentlySelect = anvilSelected[pIndex];
+        })
+    }
+
+    playerAnvils: Record<number, Anvil> = {};
+    production: AnvilProduct[] = [];
+
+    constructor(public dataKey: string) {
+        super(dataKey)
+    }
+
 }
 
 export const updateAnvil = (data: Map<string, any>) => {
@@ -289,7 +317,7 @@ export const updateAnvil = (data: Map<string, any>) => {
 
         // Capacity
         const playerCapacity = capacity.players[player.playerID];
-        playerAnvil.setCapacity(playerCapacity.bags.find(x => x.name == "bCraft")?.maxCarry ?? 0);
+        playerAnvil.setCapacity(playerCapacity?.bags.find(x => x.name == "bCraft")?.maxCarry ?? 0);
 
         playerAnvil.production.forEach(anvilProduct => {
             anvilProduct.futureProduction = Math.min(Math.round(anvilProduct.currentAmount + ((anvilProduct.currentProgress + (player.afkFor * playerAnvil.anvilSpeed / 3600)) / anvilProduct.data.time) * (anvilProduct.hammers ?? 0)), playerAnvil.productCapacity);
@@ -300,9 +328,9 @@ export const updateAnvil = (data: Map<string, any>) => {
 
     anvilWrapper.production.forEach((anvilProduct, index) => {
         anvilProduct.totalProduced = Object.entries(anvilWrapper.playerAnvils).reduce((sum, [_, anvil]) => sum += anvil.production[index].totalProduced, 0);
-        anvilProduct.totalSpeed = Object.entries(anvilWrapper.playerAnvils).reduce((sum, [_, anvil]) => 
+        anvilProduct.totalSpeed = Object.entries(anvilWrapper.playerAnvils).reduce((sum, [_, anvil]) =>
             sum += anvil.production[index].hammers > 0 ? anvil.anvilSpeed * anvil.production[index].hammers : 0
-        , 0);
+            , 0);
     })
 
     return anvilWrapper;
