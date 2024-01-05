@@ -191,6 +191,8 @@ export const updateAccount = (data: Map<string, any>) => {
     const construction = data.get("construction") as Construction;
     const arcade = data.get("arcade") as Arcade;
 
+    const test = "";
+
     account.keys.forEach(key => {
         key.daysSincePickup = accountOptions[daysSincePickupBossIndexMap[key.item.internalName]] as number ?? 0;
 
