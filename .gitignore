@@ -51,6 +51,7 @@ sprites
 get_id_token.js
 yarn.lock
 .vscode
+.vs
 model_generation
 quest
 monster
