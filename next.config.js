@@ -4,6 +4,12 @@
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
 const { withSentryConfig } = require('@sentry/nextjs');
+const nextBuildId = require('next-build-id')
+
+const isProd = process.env.NODE_ENV === 'production'
+// I use this to prefix the next.js files uploaded to the S3 bucket. 
+// This will allow me to clean it up periodically without fear of deleting latest code.
+const currentPatch = "1.9.2"
 
 const moduleExports = {
   reactStrictMode: true,
@@ -35,6 +41,11 @@ const moduleExports = {
     hideSourceMaps: true,
     disableServerWebpackPlugin: true,
   },
+  generateBuildId: () => nextBuildId({ dir: __dirname }),
+  // Use the CDN in production and unchanged for local and preview.
+  assetPrefix: isProd ? `https://cdn2.idleonefficiency.com/${currentPatch}/` : undefined,
+  // uncomment below if you want to test locally using 'serve' -> npx serve@latest out
+  //output: "export",
 };
 
 const sentryWebpackPluginOptions = {
