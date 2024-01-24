@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --experimental-https",
-    "build": "next build && ./build-and-upload.sh",
+    "build": "next build && ./upload-static-assets.sh",
     "start": "next start",
     "lint": "next lint",
     "ssl:setup": "node scripts/create-ssl-certs.js"

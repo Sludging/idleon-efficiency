@@ -6,7 +6,7 @@
 const { withSentryConfig } = require('@sentry/nextjs');
 const nextBuildId = require('next-build-id')
 
-const isProd = process.env.NODE_ENV === 'production'
+const useCDN = ["production", "preview"].includes(process.env.NODE_ENV)
 // I use this to prefix the next.js files uploaded to the S3 bucket. 
 // This will allow me to clean it up periodically without fear of deleting latest code.
 const currentPatch = "1.9.2"
@@ -43,7 +43,7 @@ const moduleExports = {
   },
   generateBuildId: () => nextBuildId({ dir: __dirname }),
   // Use the CDN in production and unchanged for local and preview.
-  assetPrefix: isProd ? `https://cdn2.idleonefficiency.com/${currentPatch}/` : undefined,
+  assetPrefix: useCDN ? `https://cdn2.idleonefficiency.com/${currentPatch}/` : undefined,
   // uncomment below if you want to test locally using 'serve' -> npx serve@latest out
   //output: "export",
 };
