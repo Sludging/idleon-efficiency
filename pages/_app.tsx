@@ -51,8 +51,7 @@ import SEO from '../next-seo.config';
 import useSWR from 'swr';
 import { fetcher } from '../data/fetchers/getProfile';
 
-const rubik = Rubik({ subsets: ['latin'] })
-
+const rubik = Rubik({ subsets: ['latin'], weight: ["400", "500", "700"], display: "swap" })
 
 const customTheme = deepMerge(dark, {
   global: {
