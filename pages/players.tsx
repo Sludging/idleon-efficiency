@@ -295,7 +295,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     }
                     {
                        player.starSigns.filter(sign => sign.aligned == true).map((sign, index) => (
-                        <Text key={`sign_${index}`} size="small">Sign {index}: {sign.getText()}</Text>
+                        <Text key={`sign_${index}`} size="small">Sign {index + 1}: {sign.getText()}</Text>
                        )) 
                     }
                     
