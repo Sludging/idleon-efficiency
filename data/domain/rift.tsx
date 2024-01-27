@@ -25,6 +25,7 @@ const specialBonuses: Map<SkillsIndex, string> = new Map([
     [SkillsIndex.Smithing, "+25%_FORGE_ORE_CAPACITY"],
     [SkillsIndex.Alchemy, "+5%_ALL_LIQUID_CAP"],
     [SkillsIndex.Construction, "+15%_SHRINE_LV_UP_RATE"],
+    [SkillsIndex.Worship, "ALL_WORSHIP_CARDS_ARE_NOW_PASSIVE"],
     [SkillsIndex.Breeding, "+15%_EGG_INCUBATION_SPEED"],
     [SkillsIndex.Sailing, "+15%_BOAT_SAILING_SPEED"],
     [SkillsIndex.Divinity, "+15%_DIVINITY_PTS_GAINED"],
@@ -91,12 +92,22 @@ export class SkillMastery extends RiftBonus {
     }
 
     getBonusText = (skill: SkillsIndex, bonusIndex: number) => {
-        // If it's the 3nd bonus and we have an override for that skill, get the special text.
-        if (bonusIndex == 2 && specialBonuses.has(skill)) {
+        // Some skills override the 2nd bonus, the others the third one.
+        const specialIndex = [
+            SkillsIndex.Smithing, 
+            SkillsIndex.Alchemy, 
+            SkillsIndex.Construction, 
+            SkillsIndex.Breeding, 
+            SkillsIndex.Sailing, 
+            SkillsIndex.Divinity, 
+            SkillsIndex.Gaming
+        ].includes(skill) ? 1 : 2;
+        // If it's the special bonus and we have an override for that skill, get the special text.
+        if (bonusIndex == specialIndex && specialBonuses.has(skill)) {
             return specialBonuses.get(skill)!.replace(/_/g, " ");
         }
 
-        return defaultBonuses[bonusIndex].replace(/_/g, " ").replace(/{/, SkillsIndex[skill]);
+        return defaultBonuses[bonusIndex].replace(/_/g, " ").replace(/{/, skill == SkillsIndex.Intellect ? "Laboratory" : SkillsIndex[skill]);
     }
 
     getSkillBonus = (skill: SkillsIndex, bonusIndex: number) => {
