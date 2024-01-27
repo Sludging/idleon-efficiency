@@ -24,7 +24,11 @@ function RawData() {
     useEffect(() => {
         if (appContext) {
             const theData = appContext.data.getData();
-            setRawData(theData.get("rawData"));
+            const cleanRaw = JSON.parse(JSON.stringify(theData.get("rawData")));
+            if (cleanRaw) {
+                cleanRaw["playerNames"] = theData.get("playerNames");
+            }
+            setRawData(cleanRaw);
         }
     }, [appContext]);
     return (
