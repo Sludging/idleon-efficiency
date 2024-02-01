@@ -1723,6 +1723,20 @@ export const initEnemyTableRepo = () => {
                     <ItemDropModel>{"item": "ResetCompletedS", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
                 ]
             }),
+        new EnemyTableBase("fallEvent1", <EnemyTableModel>{
+                "drops": [
+                    <CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"},
+                    <CardDropModel>{"item": "CardsY2", "quantity": 1, "chance": 0, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.2, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "Timecandy8", "quantity": 1, "chance": 0.1, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentHats85", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentHats86", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentHats87", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentHats88", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentHats31", "quantity": 1, "chance": 0.0007, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentHats32", "quantity": 1, "chance": 0.0007, "questLink": "N/A"}
+                ]
+            }),
         new EnemyTableBase("Copper", <EnemyTableModel>{
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},

@@ -3276,6 +3276,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Plasti Doug]]", "txtName": "Plasti Doug"},
                     <SourceModel>{"wikiName": "[[Bubbulyte]]", "txtName": "Bubbulyte"},
                     <SourceModel>{"wikiName": "[[Spring Splendor]]", "txtName": "Spring Splendor"},
+                    <SourceModel>{"wikiName": "[[Falloween Pumpkin]]", "txtName": "Falloween Pumpkin"},
                     <SourceModel>{"wikiName": "[[Copper]]", "txtName": "Copper"},
                     <SourceModel>{"wikiName": "[[Iron]]", "txtName": "Iron"},
                     <SourceModel>{"wikiName": "[[Gold]]", "txtName": "Gold"},
@@ -5017,6 +5018,7 @@ export const initSourceRepo = () => {
                     },
                     <SourceModel>{"wikiName": "[[Egg Capsule]]", "txtName": "Egg Capsule"},
                     <SourceModel>{"wikiName": "[[Spring Splendor]]", "txtName": "Spring Splendor"},
+                    <SourceModel>{"wikiName": "[[Falloween Pumpkin]]", "txtName": "Falloween Pumpkin"},
                     <SourceModel>{
                         "wikiName": "[[Post Office#Simple Shippin|Simple Shippin]]",
                         "txtName": "Post Office: Simple Shippin"
@@ -5235,26 +5237,6 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Lord of the Hunt#Noot Noot!|Noot Noot!]]",
                         "txtName": "Lord of the Hunt: Noot Noot!"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Falloween Pumpkin#The Spookyness|The Spookyness]]",
-                        "txtName": "Falloween Pumpkin: The Spookyness"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Falloween Pumpkin#The Scaryness|The Scaryness]]",
-                        "txtName": "Falloween Pumpkin: The Scaryness"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Falloween Pumpkin#The Horroriness|The Horroriness]]",
-                        "txtName": "Falloween Pumpkin: The Horroriness"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Falloween Pumpkin#The Booeyness|The Booeyness]]",
-                        "txtName": "Falloween Pumpkin: The Booeyness"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Falloween Pumpkin#The Afterparty|The Afterparty]]",
-                        "txtName": "Falloween Pumpkin: The Afterparty"
                     },
                     <SourceModel>{
                         "wikiName": "[[Alchemy#Level up Gift|Level up Gift]]",
@@ -7731,6 +7713,7 @@ export const initSourceRepo = () => {
                 "sources": [
                     <SourceModel>{"wikiName": "[[Bubbulyte]]", "txtName": "Bubbulyte"},
                     <SourceModel>{"wikiName": "[[Spring Splendor]]", "txtName": "Spring Splendor"},
+                    <SourceModel>{"wikiName": "[[Falloween Pumpkin]]", "txtName": "Falloween Pumpkin"},
                     <SourceModel>{"wikiName": "[[2021 Giftmas Box]]", "txtName": "2021 Giftmas Box"},
                     <SourceModel>{"wikiName": "[[Choco Box]]", "txtName": "Choco Box"}
                 ],
@@ -7783,6 +7766,7 @@ export const initSourceRepo = () => {
         new SourcesBase("EquipmentHats32", <SourcesModel>{
                 "sources": [
                     <SourceModel>{"wikiName": "[[Spring Splendor]]", "txtName": "Spring Splendor"},
+                    <SourceModel>{"wikiName": "[[Falloween Pumpkin]]", "txtName": "Falloween Pumpkin"},
                     <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
                 ],
                 "recipeFrom": [],
@@ -7811,6 +7795,61 @@ export const initSourceRepo = () => {
                         "wikiName": "[[Lord of the Hunt#Untitled Quest|Untitled Quest]]",
                         "txtName": "Lord of the Hunt: Untitled Quest"
                     },
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Timecandy8", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Falloween Pumpkin]]", "txtName": "Falloween Pumpkin"},
+                    <SourceModel>{
+                        "wikiName": "[[Falloween Pumpkin#The Spookyness|The Spookyness]]",
+                        "txtName": "Falloween Pumpkin: The Spookyness"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Falloween Pumpkin#The Scaryness|The Scaryness]]",
+                        "txtName": "Falloween Pumpkin: The Scaryness"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Falloween Pumpkin#The Horroriness|The Horroriness]]",
+                        "txtName": "Falloween Pumpkin: The Horroriness"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Falloween Pumpkin#The Booeyness|The Booeyness]]",
+                        "txtName": "Falloween Pumpkin: The Booeyness"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Falloween Pumpkin#The Afterparty|The Afterparty]]",
+                        "txtName": "Falloween Pumpkin: The Afterparty"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentHats85", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Falloween Pumpkin]]", "txtName": "Falloween Pumpkin"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentHats86", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Falloween Pumpkin]]", "txtName": "Falloween Pumpkin"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentHats87", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Falloween Pumpkin]]", "txtName": "Falloween Pumpkin"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentHats88", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Falloween Pumpkin]]", "txtName": "Falloween Pumpkin"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentHats31", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Falloween Pumpkin]]", "txtName": "Falloween Pumpkin"},
                     <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
                 ],
                 "recipeFrom": [],
@@ -10843,7 +10882,6 @@ export const initSourceRepo = () => {
                         "wikiName": "[[Lord of the Hunt#Small Stingers, Big Owie|Small Stingers, Big Owie]]",
                         "txtName": "Lord of the Hunt: Small Stingers, Big Owie"
                     },
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"},
                     <SourceModel>{"wikiName": "[[Guild Giftbox]]", "txtName": "Guild Giftbox"}
                 ],
                 "recipeFrom": [],
@@ -11929,8 +11967,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Royal Worm#Bossin' the Boss|Bossin' the Boss]]",
                         "txtName": "Royal Worm: Bossin' the Boss"
-                    },
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                    }
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -12105,7 +12142,7 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("Timecandy8", <SourcesModel>{
+        new SourcesBase("Quest79", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
                         "wikiName": "[[Falloween Pumpkin#The Spookyness|The Spookyness]]",
@@ -12126,7 +12163,8 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Falloween Pumpkin#The Afterparty|The Afterparty]]",
                         "txtName": "Falloween Pumpkin: The Afterparty"
-                    }
+                    },
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -12637,17 +12675,17 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("GemP25", <SourcesModel>{
+        new SourcesBase("EquipmentHats89", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentCape0", <SourcesModel>{
+        new SourcesBase("Quest77", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("ClassSwapB", <SourcesModel>{
+        new SourcesBase("Quest76", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
@@ -14852,11 +14890,6 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("InvStorage42", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("EquipmentHats31", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
