@@ -31,6 +31,7 @@ import { Divinity } from './divinity';
 import { Deathnote } from './deathnote';
 import { InfiniteStarsBonus, Rift } from './rift';
 import { Domain, RawData } from './base/domain';
+import { Equinox } from './equinox';
 
 export class PlayerStats {
     strength: number = 0;
@@ -128,6 +129,7 @@ export class Player {
     extraLevelsFromBear: number = 0;
     extraLevelsFromES: number = 0;
     extraLevelsFromSlug: number = 0;
+    extraLevelsFromEquinox: number = 0;
 
     constructor(playerID: number, playerName: string) {
         this.playerID = playerID;
@@ -622,7 +624,7 @@ export class Players extends Domain {
                 players.pop();
             }
         })
-        
+
         // Make sure we init all the players properly.
         range(0, charCount).forEach((_, playerIndex) => {
             // If this is the first time handling this player, init.
@@ -737,7 +739,7 @@ export const updatePlayers = (data: Map<string, any>) => {
 
     // Reset data, next section will calculate it.
     players.forEach(player => player.obolStats = []);
-    
+
     // Update player obols info so we can use it in maths
     players.forEach(player => {
         obols.playerStats[player.playerID]?.stats.filter(stat => stat.getValue() > 0).forEach(stat => {
@@ -792,6 +794,7 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
     const arcade = data.get("arcade") as Arcade;
     const sigils = data.get("sigils") as Sigils;
     const shrines = data.get("shrines") as Shrine[];
+    const equinox = data.get("equinox") as Equinox;
 
     // Double claim chance.
     const doubleChanceGuildBonus = guild.guildBonuses.find(bonus => bonus.name == "Anotha One")?.getBonus() ?? 0;
@@ -845,6 +848,33 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
             player.extraLevelsFromES = esBonus;
         }
     })
+
+    // Max talent level from Equinox
+    players.forEach(player => {
+        const equinoxBonus = equinox.upgrades[10].getBonus();
+        // Only update if different.
+        if (player.extraLevelsFromEquinox == 0 || player.extraLevelsFromEquinox != equinoxBonus) {
+            player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
+                .forEach(talent => {
+                    talent.level += talent.level > 0 ? equinoxBonus : 0;
+                    talent.maxLevel += equinoxBonus;
+                });
+            player.extraLevelsFromEquinox = equinoxBonus;
+        }
+    })
+
+
+    // Bonus talent level from achievement
+    const totalTalentFromAchievments = [achievementsInfo[291]].reduce((sum, achiev) => sum += achiev.completed ? 1 : 0, 0);
+    if (totalTalentFromAchievments > 0) {
+        players.forEach(player => {
+            player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
+                .forEach(talent => {
+                    talent.level += talent.level > 0 ? totalTalentFromAchievments : 0;
+                    talent.maxLevel += totalTalentFromAchievments;
+                });
+        })
+    }
 }
 
 

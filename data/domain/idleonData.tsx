@@ -1,6 +1,6 @@
 import { Traps } from './traps';
 import { Stamps, updateStampMaxCarry, updateStamps } from './stamps';
-import { Statues } from './statues';
+import { Statues, updateStatueBonuses } from './statues';
 import { Player, Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayers } from './player';
 import { Alchemy, updateAlchemy } from './alchemy';
 import { Bribes } from './bribes';
@@ -45,6 +45,7 @@ import parseCompanions, { updateCompanionImpact } from './companions';
 import { Domain, HandleRawDataKey } from './base/domain';
 import { Guild } from './guild';
 import { Rift } from './rift';
+import { Equinox, updateEquinoxBar } from './equinox';
 import { POExtra } from './postoffice';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
@@ -113,6 +114,7 @@ const domainList: Domain[] = [
     new Alerts("alerts"),
     new Rift("rift"),
     new POExtra("POExtra"),
+    new Equinox("equinox"),
 ]
 
 export class IdleonData {
@@ -199,6 +201,7 @@ const postProcessingMap: Record<string, Function> = {
     "account": (doc: Cloudsave, accountData: Map<string, any>) => updateAccount(accountData),
     "construction": (doc: Cloudsave, accountData: Map<string, any>) => updateConstruction(accountData),
     "deathnote": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnote(accountData),
+    "equinox": (doc: Cloudsave, accountData: Map<string, any>) => updateEquinoxBar(accountData),
 }
 
 // I really really hate this.
@@ -210,6 +213,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "refinery": (doc: Cloudsave, accountData: Map<string, any>) => updateRefinery(accountData),
     "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateMinTravelTime(accountData),
     "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
+    "statueBuffs": (doc: Cloudsave, accountData: Map<string, any>) => updateStatueBonuses(accountData),
 }
 
 export const updateIdleonData = async (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: number[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
