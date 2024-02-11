@@ -12,94 +12,19 @@ import {
     Stack,
     Meter
 } from 'grommet'
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import { AppContext } from '../../data/appContext'
 import { NextSeo } from 'next-seo';
 
-import { Trap, TrapSet } from '../../data/domain/traps';
 import ShadowBox from '../../components/base/ShadowBox';
-import { Player } from '../../data/domain/player';
-import { SkillsIndex } from "../../data/domain/SkillsIndex";
-import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
-import IconImage from '../../components/base/IconImage';
-import { Equinox } from '../../data/domain/equinox';
 
-interface PlayerTrapProps {
-    traps: Array<Trap>
-    maxTraps: number
-}
-
-function PlayerTraps(props: PlayerTrapProps) {
-    const size = useContext(ResponsiveContext)
-    const formatTime = (input: number) => {
-        const formatter = new Intl.RelativeTimeFormat('en');
-        const ranges: Record<string, number> = {
-            years: 3600 * 24 * 365,
-            months: 3600 * 24 * 30,
-            weeks: 3600 * 24 * 7,
-            days: 3600 * 24,
-            hours: 3600,
-            minutes: 60,
-            seconds: 1
-        };
-        for (let key in ranges) {
-            if (ranges[key] < Math.abs(input)) {
-                const delta = input / ranges[key];
-                return formatter.format(Math.round(delta), key as Intl.RelativeTimeFormatUnit);
-            }
-        }
-    }
-
-    return (
-        <Grid columns={{ count: 9, size: ["50px", "12.5%"] }} gap="small" justify="start">
-            {
-                props.traps.map((trap, index) => {
-                    if (!trap.placed && index >= props.maxTraps) {
-                        return null
-                    }
-                    return (
-                        <Box key={index} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} height={{ min: '82px', max: '82px' }}>
-                            {!trap.placed ?
-                                <Box border={{ color: 'orange-1' }} align="center" width={{ max: '100px', min: '100px' }} height={{ min: '82px', max: '82px' }} justify='center'>
-                                    <Text size="xsmall" color="accent-3">Empty</Text>
-                                </Box> :
-                                <Box key={`trap_${index}`} style={{ background: trap.isReady() ? 'red' : 'none' }} align="center" fill>
-                                    <TipDisplay
-                                        body={
-                                            <Box>
-                                                <Text>Trap Type: {TrapSet[trap.trapType]}</Text>
-                                                <Text>Original Duration: {formatTime(trap.trapDuration)?.replace("in ", "") ?? ""}</Text>
-                                                {
-                                                    trap.getBenefits().map((bonus, index) => (
-                                                        <Box key={`bonus_${index}`}>
-                                                            <Text>{bonus}</Text>
-                                                        </Box>
-                                                    ))
-                                                }
-
-                                            </Box>
-                                        }
-                                        size='medium'
-                                        direction={TipDirection.Down}
-                                        heading='Trap Info'>
-                                        <IconImage data={trap.getCritterImageData()} />
-                                    </TipDisplay>
-                                    <Text textAlign='center' size="xsmall">{formatTime(trap.trapDuration - trap.timeSincePut)}</Text>
-                                </Box>
-                            }
-                        </Box>
-                    )
-                })
-            }
-        </Grid>
-    )
-}
+import { Equinox as EquinoxDomain } from '../../data/domain/equinox';
 
 function Equinox() {
     const appContext = useContext(AppContext);
 
     const theData = appContext.data.getData();
-    const equinox = theData.get("equinox") as Equinox;
+    const equinox = theData.get("equinox") as EquinoxDomain;
 
     if (!equinox) {
         return <></>
