@@ -21,7 +21,7 @@ import ShadowBox from '../../components/base/ShadowBox';
 import { Equinox as EquinoxDomain, isFoodLust } from '../../data/domain/equinox';
 
 import { TimeDown } from "../../components/base/TimeDisplay";
-import { ComponentAndLabel } from '../../components/base/TextAndLabel';
+import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
 
 function Equinox() {
     const appContext = useContext(AppContext);
@@ -37,33 +37,45 @@ function Equinox() {
         <Box>
             <NextSeo title="Equinox" />
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Equinox</Heading>
-            <Box direction="row" gap="small">
-                <Stack>
-                    <Meter
-                        size="small"
-                        type="bar"
-                        background="accent-3"
-                        color="brand"
-                        values={[
-                            {
-                                value: equinox.bar.current,
-                                label: 'current',
-                                color: 'brand'
-                            }
-                        ]}
-                        max={equinox.bar.max} />
-                    <Box align="center" pad="xxsmall">
-                        <Text size="small">{Math.floor(equinox.bar.current).toString()} ({equinox.bar.percentageOfCap}%)</Text>
-                    </Box>
-                </Stack>
-                <Text size="xsmall">{equinox.bar.max}</Text>
-                <Text size="small">Fill rate: {equinox.bar.rate}/hr</Text>
-                <ComponentAndLabel
-                    label={"Time till full"}
-                    component={
-                        <TimeDown addSeconds={equinox.bar.timeToFull} />
-                    }
-                />
+            <Box pad="large" gap="small">
+                <Text size="large">Bar</Text>
+                <Box direction="row" gap="medium">
+                    <ComponentAndLabel
+                        label={"Progress"}
+                        component={
+                            <Box direction="row" gap="small">
+                                <Stack>
+                                    <Meter
+                                        size="small"
+                                        type="bar"
+                                        background="accent-3"
+                                        color="brand"
+                                        values={[
+                                            {
+                                                value: equinox.bar.current,
+                                                label: 'current',
+                                                color: 'brand'
+                                            }
+                                        ]}
+                                        max={equinox.bar.max} />
+                                    <Box align="center" pad="xxsmall">
+                                        <Text size="small">{Math.floor(equinox.bar.current).toString()}/{Math.floor(equinox.bar.max).toString()} ({equinox.bar.percentageOfCap}%)</Text>
+                                    </Box>
+                                </Stack>
+                            </Box>
+                        }
+                    />
+                    <TextAndLabel
+                        label='Fill Rate'
+                        text={`${equinox.bar.rate}/hr`}
+                    />
+                    <ComponentAndLabel
+                        label={"Time till full"}
+                        component={
+                            <TimeDown addSeconds={equinox.bar.timeToFull} />
+                        }
+                    />
+                </Box>
             </Box>
             <Box pad="large" gap="small">
                 {
@@ -90,9 +102,9 @@ function Equinox() {
                             {
                                 equinox.upgrades.map((upgrade, index) => {
                                     const foodLust = isFoodLust(upgrade);
-                                    const border = foodLust ? { color: 'green-1', size: '1px'} : undefined
+                                    const border = foodLust ? { color: 'green-1', size: '1px' } : undefined
                                     return (
-                                        <ShadowBox border={border} style={{ opacity: upgrade.unlocked ? 1 : 0.5}} key={index} background="dark-1" margin={{ right: 'small', bottom: 'small' }} pad="medium" gap="medium">
+                                        <ShadowBox border={border} style={{ opacity: upgrade.unlocked ? 1 : 0.5 }} key={index} background="dark-1" margin={{ right: 'small', bottom: 'small' }} pad="medium" gap="medium">
                                             <Text>{upgrade.data.name} ({upgrade.level}/{upgrade.maxLevel})</Text>
                                             <Text size="xsmall">{upgrade.getDescription()}</Text>
                                             {upgrade.getBonus() != -1 && <Text size="xsmall">{upgrade.getBonusText()}</Text>}
