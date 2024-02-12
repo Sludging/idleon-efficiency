@@ -20,6 +20,9 @@ import ShadowBox from '../../components/base/ShadowBox';
 
 import { Equinox as EquinoxDomain, isFoodLust } from '../../data/domain/equinox';
 
+import { TimeDown } from "../../components/base/TimeDisplay";
+import { ComponentAndLabel } from '../../components/base/TextAndLabel';
+
 function Equinox() {
     const appContext = useContext(AppContext);
 
@@ -55,6 +58,12 @@ function Equinox() {
                 </Stack>
                 <Text size="xsmall">{equinox.bar.max}</Text>
                 <Text size="small">Fill rate: {equinox.bar.rate}/hr</Text>
+                <ComponentAndLabel
+                    label={"Time till full"}
+                    component={
+                        <TimeDown addSeconds={equinox.bar.timeToFull} />
+                    }
+                />
             </Box>
             <Box pad="large" gap="small">
                 {
