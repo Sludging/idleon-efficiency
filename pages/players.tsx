@@ -807,11 +807,11 @@ function TalentDisplay({ player }: { player: Player }) {
                 }
             </Box>
             {
-                ClassTalentMap[ClassIndex[player.class.replace(/ /g, "_") as keyof typeof ClassIndex]].concat(["Special Talent 1", "Special Talent 2", "Special Talent 3"]).map((talentPage, _) => {
+                ClassTalentMap[ClassIndex[player.class.replace(/ /g, "_") as keyof typeof ClassIndex]].concat(["Special Talent 1", "Special Talent 2", "Special Talent 3", "Special Talent 4"]).map((talentPage, _) => {
                     return (
                         <Box key={`player_${player.playerID}_talents_${talentPage}`} align="center" gap="medium">
                             <Text>{talentPage}</Text>
-                            <Grid columns={{ count: 'fit', size: "20%" }} fill>
+                            <Grid columns={{ count: 5, size: "20%" }} fill>
                                 {
                                     GetTalentArray(talentPage).map((originalTalent, index) => {
                                         const talent = player.talents.find(x => x.skillIndex == originalTalent.skillIndex);
@@ -822,7 +822,7 @@ function TalentDisplay({ player }: { player: Player }) {
                                                     <Tip
                                                         plain
                                                         content={
-                                                            <Box pad="small" gap="small" background="white" style={{ display: talent.level > 0 ? 'normal' : 'none' }}>
+                                                            <Box pad="small" gap="small" background="white">
                                                                 <Text size={size == "small" ? 'small' : ''} weight="bold">{talent.name} ({talent.level}/{maxLeveLToShow})</Text>
                                                                 <hr style={{ width: "100%" }} />
                                                                 <Text>{talent.getBonusText()}</Text>

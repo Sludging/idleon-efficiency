@@ -4001,7 +4001,7 @@ export const initTalentTreeRepo = () => {
                 "talents": {
                     "Energy Bolt": <TalentModel>{
                         "name": "Energy Bolt",
-                        "description": "Your next basic attack strikes the Targeted Enemy for {% Damage",
+                        "description": "Your next basic attack strikes the Targeted Enemy for {% Damage. You MUST have a wand equipped to cast.",
                         "x1": 160,
                         "x2": 2,
                         "funcX": "bigBase",
@@ -4791,7 +4791,7 @@ export const initTalentTreeRepo = () => {
                     },
                     "Lightning Barrage": <TalentModel>{
                         "name": "Lightning Barrage",
-                        "description": "Your next attack casts a lightning strike, dealing {% dmg to up to } mobs",
+                        "description": "Your next attack casts a lightning strike, dealing {% dmg to up to } mobs. You MUST have a wand equipped to cast.",
                         "x1": 700,
                         "x2": 8,
                         "funcX": "bigBase",
@@ -5815,7 +5815,7 @@ export const initTalentTreeRepo = () => {
                     },
                     "Boss Battle Spillover": <TalentModel>{
                         "name": "Boss Battle Spillover",
-                        "description": "+{% Drop Rate for each difficulty of weekly boss battle defeated.",
+                        "description": "+{% Drop Rate for each difficulty of weekly boss battle defeated this week.",
                         "x1": 25,
                         "x2": 100,
                         "funcX": "decay",

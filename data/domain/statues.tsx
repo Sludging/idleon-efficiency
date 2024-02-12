@@ -13,12 +13,20 @@ export const StatueConst = {
     SkillXpIndex: 17
 }
 
+export enum StatusType {
+    Basic,
+    Gold,
+    Onyx
+}
+
 export class Statue {
-    public isGold: boolean = false;
+    public type: StatusType = StatusType.Basic;
     public level: number = 0;
     public progress: number = 0;
 
     public statueNumber: number = 0;
+
+    voodooStatuficationBonus: number = 1;
 
     constructor(public index: number, public displayName: string, public internalName: string, public bonus: string, public statueData: StatueDataModel) {
         const StatueNumberRegex = /EquipmentStatues(\d+)/gm;
@@ -81,7 +89,7 @@ export class Statue {
                 default: talentBonus = 1;
             }
         }
-        return this.level * this.statueData.bonus * talentBonus;
+        return this.level * this.statueData.bonus * talentBonus * this.voodooStatuficationBonus * (this.type == StatusType.Onyx ? 2 : 1);
     }
 
     getBonusText = (player: Player | undefined = undefined) => {
@@ -93,22 +101,33 @@ export class Statue {
     }
 
     getImageData = (): ImageData => {
+        let extraChar = "";
+        switch (this.type) {
+            case StatusType.Gold: {
+                extraChar = "G"
+                break;
+            }
+            case StatusType.Onyx: {
+                extraChar = "O";
+                break;
+            }
+        }
         return {
-            location: `Statue${this.isGold ? "G" : ""}${this.statueNumber}`,
+            location: `Statue${extraChar}${this.statueNumber}`,
             height: 50,
             width: 41
         }
     }
 
     static fromBase = (data: StatueDataBase[]) => {
-        return data.map(statue => new Statue(statue.index, `${statue.data.name} Statue`, `EquipmentStatues${statue.index+1}`, statue.data.effect, statue.data));
+        return data.map(statue => new Statue(statue.index, `${statue.data.name} Statue`, `EquipmentStatues${statue.index + 1}`, statue.data.effect, statue.data));
     }
 }
 
 export class PlayerStatues {
     statues: Statue[];
 
-    constructor(public playerID: number) { 
+    constructor(public playerID: number) {
         this.statues = Statue.fromBase(initStatueRepo());
     }
 }
@@ -116,8 +135,8 @@ export class PlayerStatues {
 export class Statues extends Domain {
     getRawKeys(): RawData[] {
         return [
-            { key: `StatueLevels_`, perPlayer: true, default: []},
-            { key: `StuG`, perPlayer: false, default: []},
+            { key: `StatueLevels_`, perPlayer: true, default: [] },
+            { key: `StuG`, perPlayer: false, default: [] },
         ]
     }
     init(allItems: Item[], charCount: number) {
@@ -128,25 +147,45 @@ export class Statues extends Domain {
         const statues = data.get(this.getDataKey()) as PlayerStatues[];
 
         const allStatues = [...Array(charCount)].map((_, i) => data.get(`StatueLevels_${i}`)) as number[][][];
-        const goldStatues = data.get(`StuG`) as boolean[];
-    
+        const goldStatues = data.get(`StuG`) as number[];
+
 
         range(0, charCount).forEach((_, pIndex) => {
             // If this is the first time handling this player, init.
             if (statues.length <= pIndex) {
                 statues.push(new PlayerStatues(pIndex))
             }
-            
+
             statues[pIndex].statues.forEach((statue, statueIndex) => {
                 if (allStatues[pIndex].length > statueIndex) {
                     statue.level = allStatues[pIndex][statueIndex][StatueConst.LevelIndex];
                     statue.progress = allStatues[pIndex][statueIndex][StatueConst.ProgressIndex];
                     if (goldStatues.length > statueIndex) {
-                        statue.isGold = goldStatues[statueIndex];
+                        switch (goldStatues[statueIndex]) {
+                            case 1: {
+                                statue.type = StatusType.Gold
+                                break;
+                            }
+                            case 2: {
+                                statue.type = StatusType.Onyx
+                                break;
+                            }
+                        }
                     }
                 }
             });
         });
     }
-    
+}
+
+export const updateStatueBonuses = (data: Map<string, any>) => {
+    const statues = data.get("statues") as PlayerStatues[];
+    const playerData = data.get("players") as Player[];
+
+    const bestVoidMan = playerData.reduce((final, player) => final = (player.talents.find(talent => talent.skillIndex == 56)?.level ?? 0) > 0 && player.playerID > final.playerID ? player : final, playerData[0]);
+    if (bestVoidMan) {
+        statues.flatMap(player => player.statues).forEach(statue => {
+            statue.voodooStatuficationBonus = (1 + (bestVoidMan.talents.find(talent => talent.skillIndex == 56)?.getBonus() ?? 0) / 100);
+        })
+    }
 }

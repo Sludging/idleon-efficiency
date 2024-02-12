@@ -7,6 +7,7 @@ import { initJewelRepo, JewelBase } from "./data/JewelRepo"
 import { initLabBonusRepo, LabBonusBase } from "./data/LabBonusRepo"
 import { Deathnote } from "./deathnote"
 import { Divinity } from "./divinity"
+import { Equinox } from "./equinox"
 import { GemStore } from "./gemPurchases"
 import { ImageData } from "./imageData"
 import { Item } from "./items"
@@ -57,8 +58,8 @@ export class MainframeBonus {
         return this.active ? this.bonusOn : this.bonusOff;
     }
 
-    getRange = (connectionBonus: number, meritConnectionBonus: number) => {
-        return Math.floor((80 * (1 + connectionBonus / 100)) + meritConnectionBonus);
+    getRange = (connectionBonus: number, extraPxFromBonuses: number) => {
+        return Math.floor((80 * (1 + connectionBonus / 100)) + extraPxFromBonuses);
     }
 
     static fromBase(data: LabBonusBase[]): MainframeBonus[] {
@@ -149,8 +150,8 @@ export class Jewel {
         return `${this.data.effect.replace(/}/g, this.getBonus().toString())}${this.bonusMultiplier > 1 ? ` (${this.bonusMultiplier}x multiplier from mainframe bonus)` : ""}`;
     }
 
-    getRange = (connectionBonus: number, meritConnectionBonus: number) => {
-        return Math.floor((80 * (1 + connectionBonus / 100)) + meritConnectionBonus);
+    getRange = (connectionBonus: number, extraPxFromBonuses: number) => {
+        return Math.floor((80 * (1 + connectionBonus / 100)) + extraPxFromBonuses);
     }
 
     static fromBase(data: JewelBase[]): Jewel[] {
@@ -385,7 +386,7 @@ const _findPrismSource = (lab: Lab) => {
     return undefined;
 }
 
-const _calculatePlayerImpact = (connectedPlayers: Player[], chainIndex: number, lab: Lab, meritConnectionBonus: number) => {
+const _calculatePlayerImpact = (connectedPlayers: Player[], chainIndex: number, lab: Lab, extraPxFromBonuses: number) => {
     const jewelMultiplier = lab.bonuses[8].getBonus();
     const jewelconnectionRangeBonus = lab.jewels.filter(jewel => jewel.active && jewel.index == 9).reduce((sum, jewel) => sum += jewel.getBonus(jewelMultiplier), 0)
     const bonusConnectionRangeBonus = lab.bonuses[13].getBonus();
@@ -405,7 +406,7 @@ const _calculatePlayerImpact = (connectedPlayers: Player[], chainIndex: number, 
     })
 
     lab.bonuses.filter(bonus => !bonus.active).forEach(bonus => {
-        const inRange = lab.getDistance(playerCords.x, playerCords.y, bonus.x, bonus.y) < bonus.getRange(connectionRangeBonus, meritConnectionBonus);
+        const inRange = lab.getDistance(playerCords.x, playerCords.y, bonus.x, bonus.y) < bonus.getRange(connectionRangeBonus, extraPxFromBonuses);
         if (inRange) {
             bonus.active = true;
             hasImpact = true;
@@ -413,7 +414,7 @@ const _calculatePlayerImpact = (connectedPlayers: Player[], chainIndex: number, 
     });
 
     lab.jewels.filter(jewel => jewel.available && !jewel.active).forEach(jewel => {
-        const inRange = lab.getDistance(playerCords.x, playerCords.y, jewel.data.x, jewel.data.y) < jewel.getRange(connectionRangeBonus, meritConnectionBonus);
+        const inRange = lab.getDistance(playerCords.x, playerCords.y, jewel.data.x, jewel.data.y) < jewel.getRange(connectionRangeBonus, extraPxFromBonuses);
         if (inRange) {
             jewel.active = true;
             hasImpact = true;
@@ -434,6 +435,7 @@ export const updateLab = (data: Map<string, any>) => {
     const storage = data.get("storage") as Storage;
     const taskBoard = data.get("taskboard") as TaskBoard;
     const divinity = data.get("divinity") as Divinity;
+    const equinox = data.get("equinox") as Equinox; // only care about parse data, i.e. upgrade level.
 
     // Append chip info to the players.
     Object.entries(lab.playerChips).forEach(([playerIndex, chips]) => {
@@ -468,10 +470,11 @@ export const updateLab = (data: Map<string, any>) => {
 
     // figure out w4 merit extra connection range;
     const connectionMerit = taskBoard.merits.find(merit => merit.descLine1.includes("connection range in the Lab"));
-    let meritConnectionBonus = 0;
+    let extraPxFromBonuses = 0;
     if (connectionMerit) {
-        meritConnectionBonus = connectionMerit.bonusPerLevel * connectionMerit.level;
+        extraPxFromBonuses = connectionMerit.bonusPerLevel * connectionMerit.level;
     }
+    extraPxFromBonuses += equinox.upgrades[6].getBonus()
 
     // Figure out best bubo (for purple) and his bonus.
     const bestBubo = playerData.reduce((final, player) => final = (player.talents.find(talent => talent.skillIndex == 535)?.level ?? 0) > 0 && player.playerID > final.playerID ? player : final, playerData[0]);
@@ -496,7 +499,7 @@ export const updateLab = (data: Map<string, any>) => {
         // Loop the things
         for (let chainIndex = 0; chainIndex < lab.playersInTubes.length; chainIndex++) {
             if (connectedPlayers.length > chainIndex) {
-                loopAgain = _calculatePlayerImpact(connectedPlayers, chainIndex, lab, meritConnectionBonus);
+                loopAgain = _calculatePlayerImpact(connectedPlayers, chainIndex, lab, extraPxFromBonuses);
             }
         }
     }
@@ -520,7 +523,7 @@ export const updateLab = (data: Map<string, any>) => {
         // Loop the things
         for (let chainIndex = 0; chainIndex < lab.playersInTubes.length; chainIndex++) {
             if (connectedPlayers.length > chainIndex) {
-                loopAgain = _calculatePlayerImpact(connectedPlayers, chainIndex, lab, meritConnectionBonus);
+                loopAgain = _calculatePlayerImpact(connectedPlayers, chainIndex, lab, extraPxFromBonuses);
             }
         }
 
@@ -550,4 +553,8 @@ export const updateLab = (data: Map<string, any>) => {
 
 
     return lab;
+}
+
+export const connectionRangeFromEquinox = (data: Map<string, any>) => {
+
 }
