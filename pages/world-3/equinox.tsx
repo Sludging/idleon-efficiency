@@ -18,7 +18,7 @@ import { NextSeo } from 'next-seo';
 
 import ShadowBox from '../../components/base/ShadowBox';
 
-import { Equinox as EquinoxDomain } from '../../data/domain/equinox';
+import { Equinox as EquinoxDomain, isFoodLust } from '../../data/domain/equinox';
 
 function Equinox() {
     const appContext = useContext(AppContext);
@@ -59,7 +59,7 @@ function Equinox() {
             <Box pad="large" gap="small">
                 {
                     equinox.activeChallenges.length > 0 &&
-                    <Box margin={{bottom: 'medium'}} gap="medium">
+                    <Box margin={{ bottom: 'medium' }} gap="medium">
                         <Text size="large">Active Challenges</Text>
 
                         <Box direction="row" wrap>
@@ -79,13 +79,19 @@ function Equinox() {
                     <Box direction="row" wrap margin={{ top: 'large' }}>
                         <Grid columns={{ size: 'auto', count: 4 }} fill>
                             {
-                                equinox.upgrades.map((upgrade, index) => (
-                                    <ShadowBox style={{ opacity: upgrade.unlocked ? 1 : 0.5 }} key={index} background="dark-1" margin={{ right: 'small', bottom: 'small' }} pad="medium" gap="medium">
-                                        <Text>{upgrade.data.name} ({upgrade.level}/{upgrade.maxLevel})</Text>
-                                        <Text size="xsmall">{upgrade.getDescription()}</Text>
-                                        {upgrade.getBonus() != -1 && <Text size="xsmall">{upgrade.getBonusText()}</Text>}
-                                    </ShadowBox>
-                                ))
+                                equinox.upgrades.map((upgrade, index) => {
+                                    const foodLust = isFoodLust(upgrade);
+                                    const border = foodLust ? { color: 'green-1', size: '1px'} : undefined
+                                    console.log(foodLust, border, upgrade);
+                                    return (
+                                        <ShadowBox border={border} style={{ opacity: upgrade.unlocked ? 1 : 0.5}} key={index} background="dark-1" margin={{ right: 'small', bottom: 'small' }} pad="medium" gap="medium">
+                                            <Text>{upgrade.data.name} ({upgrade.level}/{upgrade.maxLevel})</Text>
+                                            <Text size="xsmall">{upgrade.getDescription()}</Text>
+                                            {upgrade.getBonus() != -1 && <Text size="xsmall">{upgrade.getBonusText()}</Text>}
+                                        </ShadowBox>
+                                    )
+                                })
+
                             }
                         </Grid>
                     </Box>

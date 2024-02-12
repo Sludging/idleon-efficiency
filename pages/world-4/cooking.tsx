@@ -285,7 +285,7 @@ function Cooking() {
                 {cooking.mealsDiscovered < cooking.getMaxMeals() && <TextAndLabel label="Meals Discovered" text={`${cooking.mealsDiscovered}/${cooking.getMaxMeals()}`} margin={{ right: 'medium' }} />}
                 {cooking.mealsAtDiamond > 0 && cooking.mealsAtDiamond < cooking.getMaxMeals() && <TextAndLabel label="Lv 11+ Meals" text={`${cooking.mealsAtDiamond}/${cooking.getMaxMeals()}`} margin={{ right: 'medium' }} />}
                 {hasColliderBonus && cooking.mealsAtVoid > 0 && <TextAndLabel label="Lv 30+ Meals" text={`${cooking.mealsAtVoid}/${cooking.getMaxMeals()}`} margin={{ right: 'medium' }} />}
-                <TextAndLabel label="Meal Costs after Food Lust" text={`${nFormatter(mealCostAfterFoodLust * 100)}%`} margin={{ right: 'medium' }} />
+                <TextAndLabel textColor={cooking.foodLustDiscountCapped ? 'accent-1' : undefined} label="Meal Costs after Food Lust" text={`${nFormatter(mealCostAfterFoodLust * 100)}%`} margin={{ right: 'medium' }} />
             </Box>
             <Box margin={{ bottom: 'medium' }} gap="small">
                 <Text>Meals</Text>

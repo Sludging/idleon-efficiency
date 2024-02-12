@@ -121,7 +121,9 @@ class Upgrade {
     }
 }
 
-class FoodLust extends Upgrade {
+export const isFoodLust = (x: Upgrade): x is FoodLust => "bossesKilled" in x
+
+export class FoodLust extends Upgrade {
     bossesKilled: number = 0; // Stored at optionslist [193]
 
     override getBonus = () => {
@@ -131,10 +133,14 @@ class FoodLust extends Upgrade {
         return Math.max(0.01, Math.pow(0.8, Math.min(this.bossesKilled, this.level)))
     }
 
+    isCapped = () => {
+        return this.bossesKilled >= this.level;
+    }
+
     override getBonusText = () => {
         const bonusValue = this.getBonus();
-
-        return `Meal Cost: ${nFormatter(bonusValue * 100)}%`
+        const extraText = this.isCapped() ? `Max discount` : `${this.bossesKilled} bosses killed`;
+        return `Meal Cost: ${nFormatter(bonusValue * 100)}% (${extraText})`
     }
 }
 
