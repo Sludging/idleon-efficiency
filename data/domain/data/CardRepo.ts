@@ -1605,6 +1605,14 @@ export const initCardRepo = () => {
                 "effect": "+{% All Skill EXP (Passive)",
                 "bonus": 2,
                 "order": 18
+            }),
+        new CardDataBase("fallEvent1", <CardDataModel>{
+                "cardID": "Y18",
+                "category": "Event",
+                "perTier": 3,
+                "effect": "+{ Star Talent Pts (Passive)",
+                "bonus": 4,
+                "order": 19
             })    
 ]
 }

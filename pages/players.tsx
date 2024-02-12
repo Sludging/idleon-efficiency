@@ -295,7 +295,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     }
                     {
                        player.starSigns.filter(sign => sign.aligned == true).map((sign, index) => (
-                        <Text key={`sign_${index}`} size="small">Sign {index}: {sign.getText()}</Text>
+                        <Text key={`sign_${index}`} size="small">Sign {index + 1}: {sign.getText()}</Text>
                        )) 
                     }
                     
@@ -807,11 +807,11 @@ function TalentDisplay({ player }: { player: Player }) {
                 }
             </Box>
             {
-                ClassTalentMap[ClassIndex[player.class.replace(/ /g, "_") as keyof typeof ClassIndex]].concat(["Special Talent 1", "Special Talent 2", "Special Talent 3"]).map((talentPage, _) => {
+                ClassTalentMap[ClassIndex[player.class.replace(/ /g, "_") as keyof typeof ClassIndex]].concat(["Special Talent 1", "Special Talent 2", "Special Talent 3", "Special Talent 4"]).map((talentPage, _) => {
                     return (
                         <Box key={`player_${player.playerID}_talents_${talentPage}`} align="center" gap="medium">
                             <Text>{talentPage}</Text>
-                            <Grid columns={{ count: 'fit', size: "20%" }} fill>
+                            <Grid columns={{ count: 5, size: "20%" }} fill>
                                 {
                                     GetTalentArray(talentPage).map((originalTalent, index) => {
                                         const talent = player.talents.find(x => x.skillIndex == originalTalent.skillIndex);
@@ -822,7 +822,7 @@ function TalentDisplay({ player }: { player: Player }) {
                                                     <Tip
                                                         plain
                                                         content={
-                                                            <Box pad="small" gap="small" background="white" style={{ display: talent.level > 0 ? 'normal' : 'none' }}>
+                                                            <Box pad="small" gap="small" background="white">
                                                                 <Text size={size == "small" ? 'small' : ''} weight="bold">{talent.name} ({talent.level}/{maxLeveLToShow})</Text>
                                                                 <hr style={{ width: "100%" }} />
                                                                 <Text>{talent.getBonusText()}</Text>
@@ -1018,7 +1018,7 @@ function ZowInfo({ player }: { player: Player }) {
             "Spike Surprise", "YumYum Grotto", "Salty Shores", "Faraway Piers", "Filler", "Deepwater Docks", "Bandit Bob's Hideout", "Frostbite Towndra",
             "Tunnels Entrance", "Trappers Folley", "Freefall Caverns", "The Ol' Straightaway", "Slip Slidy Ledges", "Echoing Egress",
             "Blunder Hills", "JungleZ", "PlayerSelect", "Efaunt's Tomb", "The Roots", "Mummy Memorial", "Gravel Tomb", "Heaty Hole", "End Of The Road", "Z", "Eycicles's Nest", "The Office", "Enclave a la Troll",
-            "Magma Rivertown"].includes(area)) {
+            "Magma Rivertown", "YumYum Islands", "Equinox Valley", "Chizoar's Cavern", "Tunnel Closed"].includes(area)) {
             return true;
         }
         return false;

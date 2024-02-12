@@ -17,6 +17,7 @@ import { Stamp } from "./stamps";
 import { ClassIndex } from "./talents";
 import { Domain, RawData } from "./base/domain";
 import { Item } from "./items";
+import { Equinox, FoodLust } from "./equinox";
 
 const spiceValues: number[] = "0 3 5 8 10 13 15 19 20 23 27 31 33 37 41 45 48 50 53 56".split(" ").map(value => parseInt(value));
 const mealLuckValues: number[] = "1 .20 .10 .05 .02 .01 .004 .001 .0005 .0003".split(" ").map(value => parseFloat(value));
@@ -75,6 +76,9 @@ export class Meal {
     // Void plate achivement
     reducedCostToUpgrade: boolean = false;
 
+    // Equinox bonus
+    foodLustDiscount: number = 1; 
+
     // Ladles
     ladlesToLevel: number = -1;
     zerkerLadlesToLevel: number = -1;
@@ -119,7 +123,7 @@ export class Meal {
     getMealLevelCost = (level: number = this.level) => {
         const reductionMultipier = this.reducedCostToUpgrade ? 1 / 1.1 : 1;
         const baseMath = reductionMultipier * (10 + (level + Math.pow(level, 2)));
-        return baseMath * Math.pow(1.2 + 0.05 * level, level);
+        return (baseMath * Math.pow(1.2 + 0.05 * level, level)) * this.foodLustDiscount;
     }
 
     getCostsTillDiamond = () => {
@@ -264,6 +268,8 @@ export class Cooking extends Domain {
     mealsDiscovered: number = 0;
     mealsAtVoid: number = 0;
     mealsAtDiamond: number = 0;
+
+    foodLustDiscountCapped: boolean = false;
 
     getMaxMeals = () => {
         // Lava is using 'Turkey a la Thank' as filler name in the end, remove all of those meals and add 1 for the first meal which is real.
@@ -435,6 +441,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const sailing = data.get("sailing") as Sailing;
     const collider = data.get("collider") as AtomCollider;
     const gaming = data.get("gaming") as Gaming;
+    const equinox = data.get("equinox") as Equinox;
 
     const bestLadleSkillLevel = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 148)?.maxLevel ?? 0)));
     if (bestLadleSkillLevel > 0) {
@@ -448,14 +455,18 @@ export const updateCooking = (data: Map<string, any>) => {
 
     const jewelMealBonus = mainframe.jewels[16].active ? mainframe.jewels[16].getBonus() : 0; // TODO: Remove hardcoding
     const voidPlateAchiev = achievements[233].completed;
+    const foodLust = (equinox.upgrades[9] as FoodLust);
     cooking.meals.forEach(meal => {
         meal.mainframeBonus = jewelMealBonus
         meal.reducedCostToUpgrade = voidPlateAchiev;
+        meal.foodLustDiscount = foodLust.getBonus();
 
         // Reset any previously calculated info, the next section should re-populate this.
         meal.cookingContribution = 0;
         meal.maxLevel = 30;
     });
+
+    cooking.foodLustDiscountCapped = foodLust.isCapped();
 
     // Meal speed
     const vialBonus = alchemy.getVialBonusForKey("MealCook");

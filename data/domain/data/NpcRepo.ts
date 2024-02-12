@@ -738,7 +738,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Hmm you've got a full inventory! Clear up 2 spaces so I can reward you!",
+                        "DialogueText": "Hmm you've got a full inventory! Use your storage chest to clear up some space!",
                         "NextIndex": 2,
                         "Name": ""
                     },
@@ -824,7 +824,7 @@ export const initNpcRepo = () => {
                 "quests": {
                     "Hardcore Gamer Status, Here I Come!": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Speaking of quests I'm the main quest giver and here comes your first mission! <br> MAIN QUEST:Go to the right and defeat 5 green spores.",
+                        "DialogueText": "Here's your first quest! <br> MAIN QUEST:Go to the right and defeat 5 green spores.",
                         "NextIndex": 8,
                         "Name": "Hardcore Gamer Status, Here I Come!",
                         "ConsumeItems": false,
@@ -862,12 +862,12 @@ export const initNpcRepo = () => {
                         "CustomType": "Scripticus3",
                         "CustomArray": [
                             <CustomReqModel>{"desc": "Craft Boxing Gloves:", "finalV": 1, "type": "GreaterEqual", "startV": 0},
-                            <CustomReqModel>{"desc": "Buy Tape from Shop:", "finalV": 5, "type": "GreaterEqual", "startV": 0}
+                            <CustomReqModel>{"desc": "Buy Tape from Shop:", "finalV": 1, "type": "GreaterEqual", "startV": 0}
                         ]
                     },
                     "Mr. Worldwide": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Now lets find you some tougher monsters! Defeat enough spores to unlock the next map. Can't have a promising player like you stuck in one place! <br> MAIN QUEST:Reach map 2",
+                        "DialogueText": "Now lets find you some tougher monsters! <br> MAIN QUEST:Defeat Green Mushrooms and reach the next map!",
                         "NextIndex": 15,
                         "Name": "Mr. Worldwide",
                         "ConsumeItems": false,
@@ -888,7 +888,7 @@ export const initNpcRepo = () => {
                     },
                     "The Choice is Yours!": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Did you get all of that? I'll add a Hint to your codex about Talent Points if you ever forget. Now go spend those points! <br> MAIN QUEST:Spend 5 Talent Points",
+                        "DialogueText": "I'll add a Hint to your codex if you want more info. Now go spend those pts! <br> MAIN QUEST:Spend 5 Talent Points",
                         "NextIndex": 19,
                         "Name": "The Choice is Yours!",
                         "ConsumeItems": false,
@@ -907,7 +907,7 @@ export const initNpcRepo = () => {
                     },
                     "Certified Swinger, of Pickaxes of course!": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Go check out that portal on the left. There's a cheerful goblin who will show you some new gameplay! I haven't actually seen him in a while but I bet he is as happy as I remember!  <br> MAIN QUEST:Get Glumlee's Certification. He's in the Left Portal!",
+                        "DialogueText": "You need some ores to make better equiment...  <br> MAIN QUEST:Go through the LEFT portal to start mining and do Glumlee's quests to get the Certificate!",
                         "NextIndex": 22,
                         "Name": "Certified Swinger, of Pickaxes of course!",
                         "ConsumeItems": true,
@@ -925,7 +925,7 @@ export const initNpcRepo = () => {
                     },
                     "The Smithing Grind": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Now then use what you learned to get the materials needed to craft some new Equipment at the Anvil! Go do that while I go get this certificate framed... or maybe I should get it laminated...  <br> MAIN QUEST:Craft Farmer Brim and Orange Tee",
+                        "DialogueText": "Now use those ores to craft better equipment! You'll also need some logs from the tree in the Mushroom map... <br> MAIN QUEST:Craft Farmer Brim and Orange Tee",
                         "NextIndex": 51,
                         "Name": "The Smithing Grind",
                         "ConsumeItems": false,
@@ -1050,7 +1050,7 @@ export const initNpcRepo = () => {
                     },
                     "Can't somebody else do it?": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "No real gamer does everything for themself! Go create a 2nd character! QUEST:Reach Lv 5 then create a 2nd character! Use them to gather materials for you while you play on your main character!!",
+                        "DialogueText": "No real gamer does everything themself! <br> QUEST:Reach Lv 5 then create a 2nd character! They gather resources WHILE you play on your 1st character!!",
                         "NextIndex": 54,
                         "Name": "Can't somebody else do it?",
                         "ConsumeItems": false,
@@ -1066,7 +1066,7 @@ export const initNpcRepo = () => {
                         "note": <NoteModel>{"note": ""},
                         "CustomType": "Scripticus13",
                         "CustomArray": [
-                            <CustomReqModel>{"desc": "Swap to 2nd Character:", "finalV": 1, "type": "GreaterEqual", "startV": 0},
+                            <CustomReqModel>{"desc": "Claim AFK on 2nd Char:", "finalV": 1, "type": "GreaterEqual", "startV": 0},
                             <CustomReqModel>{"desc": "Storage Chest Used:", "finalV": 1, "type": "GreaterEqual", "startV": 0}
                         ]
                     }
@@ -1087,7 +1087,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You're the latest entry in the list of Nooby Gamers!",
-                        "NextIndex": 3,
+                        "NextIndex": 4,
                         "Name": ""
                     },
                     <DialogueLineModel>{
@@ -1104,13 +1104,13 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Hahaha I had to do it to ya! <br> There's no shortcut back to the top. You're gonna have to level up craft armor master Skills fight bosses and complete hundreds of quests before you become a legend again!",
+                        "DialogueText": "Nope didn't work... skill issue! <br> There's no shortcut back to the top. So lets start with the basics!",
                         "NextIndex": 6,
                         "Name": ""
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Speaking of quests I'm the main quest giver and here comes your first mission! <br> MAIN QUEST:Go to the right and defeat 5 green spores.",
+                        "DialogueText": "Here's your first quest! <br> MAIN QUEST:Go to the right and defeat 5 green spores.",
                         "NextIndex": 8,
                         "Name": "Hardcore Gamer Status, Here I Come!"
                     },
@@ -1140,8 +1140,8 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Drag those gloves to the grey sword outline to equip them! I also gave you a stylin' headband which you can also equip onto the helmet slot.",
-                        "NextIndex": 12,
+                        "DialogueText": "Equip that Red Headband reward it'll give you more power!",
+                        "NextIndex": 13,
                         "Name": ""
                     },
                     <DialogueLineModel>{
@@ -1152,7 +1152,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Now lets find you some tougher monsters! Defeat enough spores to unlock the next map. Can't have a promising player like you stuck in one place! <br> MAIN QUEST:Reach map 2",
+                        "DialogueText": "Now lets find you some tougher monsters! <br> MAIN QUEST:Defeat Green Mushrooms and reach the next map!",
                         "NextIndex": 15,
                         "Name": "Mr. Worldwide"
                     },
@@ -1164,25 +1164,25 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "You seem a bit beat up! I forgot to tell you monsters get real tough real quick around here -- lemme show you something that might help.",
+                        "DialogueText": "You seem a bit beat up! Try spending some Talent Points if you haven't already!",
                         "NextIndex": 16,
                         "Name": ""
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "You get 3 talent points every time you level up your Class Level. You also get 1 talent point every time you level up a skill that you specialize in. There are also special STAR talents to collect which use separate talent points!",
+                        "DialogueText": "You get 3 talent points every time you level up!",
                         "NextIndex": 17,
                         "Name": ""
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Did you get all of that? I'll add a Hint to your codex about Talent Points if you ever forget. Now go spend those points! <br> MAIN QUEST:Spend 5 Talent Points",
+                        "DialogueText": "I'll add a Hint to your codex if you want more info. Now go spend those pts! <br> MAIN QUEST:Spend 5 Talent Points",
                         "NextIndex": 19,
                         "Name": "The Choice is Yours!"
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "You've got a full inventory and you're gonna want to make room for this book I'm about to give you!",
+                        "DialogueText": "You've got a full inventory use the storage chest to clear up some space!",
                         "NextIndex": 17,
                         "Name": ""
                     },
@@ -1194,7 +1194,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Go check out that portal on the left. There's a cheerful goblin who will show you some new gameplay! I haven't actually seen him in a while but I bet he is as happy as I remember!  <br> MAIN QUEST:Get Glumlee's Certification. He's in the Left Portal!",
+                        "DialogueText": "You need some ores to make better equiment...  <br> MAIN QUEST:Go through the LEFT portal to start mining and do Glumlee's quests to get the Certificate!",
                         "NextIndex": 22,
                         "Name": "Certified Swinger, of Pickaxes of course!"
                     },
@@ -1212,7 +1212,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Now then use what you learned to get the materials needed to craft some new Equipment at the Anvil! Go do that while I go get this certificate framed... or maybe I should get it laminated...  <br> MAIN QUEST:Craft Farmer Brim and Orange Tee",
+                        "DialogueText": "Now use those ores to craft better equipment! You'll also need some logs from the tree in the Mushroom map... <br> MAIN QUEST:Craft Farmer Brim and Orange Tee",
                         "NextIndex": 51,
                         "Name": "The Smithing Grind"
                     },
@@ -1230,7 +1230,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "You've got a full inventory player sort out 2 spaces so I can give you your reward!",
+                        "DialogueText": "You've got a full inventory player use the storage chest to clear up some space!",
                         "NextIndex": 23,
                         "Name": ""
                     },
@@ -1374,7 +1374,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "You've got a full inventory player sort out 2 spaces so I can give you your reward!",
+                        "DialogueText": "You've got a full inventory player use the storage chest to clear up some space!",
                         "NextIndex": 25,
                         "Name": ""
                     },
@@ -1386,7 +1386,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "No real gamer does everything for themself! Go create a 2nd character! QUEST:Reach Lv 5 then create a 2nd character! Use them to gather materials for you while you play on your main character!!",
+                        "DialogueText": "No real gamer does everything themself! <br> QUEST:Reach Lv 5 then create a 2nd character! They gather resources WHILE you play on your 1st character!!",
                         "NextIndex": 54,
                         "Name": "Can't somebody else do it?"
                     },
@@ -1501,7 +1501,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "You've got a full inventory clear some space so I can give you the byproduct of my failed creation!",
+                        "DialogueText": "You've got a full inventory use the storage chest to clear up some space!",
                         "NextIndex": 1,
                         "Name": ""
                     },
@@ -1631,7 +1631,7 @@ export const initNpcRepo = () => {
                     },
                     "Literally Burning your Money": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Final task now. Go to the forge click the Yellow Arrow tab in the top right and buy some Upgrades. These are Permanent and are shared between all your characters.  <br> QUEST: Upgrade the forge 3 times",
+                        "DialogueText": "Final task now. Go to the forge and but some permanent upgrades using your coins!  <br> QUEST: Upgrade the forge 2 times",
                         "NextIndex": 11,
                         "Name": "Literally Burning your Money",
                         "ConsumeItems": false,
@@ -1707,7 +1707,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "We aren't even one step through my mining clas and you've already got a full inventory. Please clear up some space.",
+                        "DialogueText": "We aren't even one step through my mining clas and you've already got a full inventory. Use the storage chest in town to clear up some space!",
                         "NextIndex": 3,
                         "Name": ""
                     },
@@ -1737,13 +1737,13 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Final task now. Go to the forge click the Yellow Arrow tab in the top right and buy some Upgrades. These are Permanent and are shared between all your characters.  <br> QUEST: Upgrade the forge 3 times",
+                        "DialogueText": "Final task now. Go to the forge and but some permanent upgrades using your coins!  <br> QUEST: Upgrade the forge 2 times",
                         "NextIndex": 11,
                         "Name": "Literally Burning your Money"
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "You have no inventory space for the certificate. Clear up some space so you can get this worthless piece of paper!",
+                        "DialogueText": "You have a full inventory! Put some stuff in the Storage Chest in town to clear space!",
                         "NextIndex": 9,
                         "Name": ""
                     },
@@ -2595,7 +2595,7 @@ export const initNpcRepo = () => {
                 "quests": {
                     "A Pig and his Stamps": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Find who stole my Stamps and I can do business with you! <br> QUEST:Find out who stole the Stamp Collection they're in the Frog map...",
+                        "DialogueText": "Find who stole my Stamps and I can do business with you! <br> QUEST:Buy a stamp from the town shop",
                         "NextIndex": 6,
                         "Name": "A Pig and his Stamps",
                         "ConsumeItems": false,
@@ -2606,7 +2606,7 @@ export const initNpcRepo = () => {
                         "Difficulty": 2,
                         "note": <NoteModel>{"note": "The Stamp Thief is Hamish found at the bottom right of the frogs area"},
                         "CustomType": "Mr Pigibank1",
-                        "CustomArray": [<CustomReqModel>{"desc": "Stamp Thief Found:", "finalV": 1, "type": "GreaterEqual", "startV": 0}]
+                        "CustomArray": [<CustomReqModel>{"desc": "Buy Stamp from Shop:", "finalV": 1, "type": "GreaterEqual", "startV": 0}]
                     }
                 },
                 "dialogue": [
@@ -2618,8 +2618,8 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Ha! Don't worry lad I'm just messin' with you. The name's Preston Pigibank used to run a chain of highly successful banks from here to the Snowy Mountains if you can believe that!",
-                        "NextIndex": 2,
+                        "DialogueText": "Ha! Don't worry lad I'm just messin' with you. Say have you seen any of my stamps? I used to have quite the collection you know...",
+                        "NextIndex": 5,
                         "Name": ""
                     },
                     <DialogueLineModel>{
@@ -2642,14 +2642,14 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Find who stole my Stamps and I can do business with you! <br> QUEST:Find out who stole the Stamp Collection they're in the Frog map...",
+                        "DialogueText": "Find who stole my Stamps and I can do business with you! <br> QUEST:Buy a stamp from the town shop",
                         "NextIndex": 6,
                         "Name": "A Pig and his Stamps"
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Ah looks like you have some news! So who was the wretched monster that stole my stamps? ...what? You didn't get a clear look of them? Oh well it was probably just an old business rival of mine.",
-                        "NextIndex": 7,
+                        "NextIndex": 11,
                         "Name": ""
                     },
                     <DialogueLineModel>{
@@ -2698,7 +2698,7 @@ export const initNpcRepo = () => {
                 "quests": {
                     "I'm Ready, Promotion!": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Good thing for that too because it looks like you could use a promotion what with you being a Beginner and all that! Come talk to me once you're level 10.",
+                        "DialogueText": "Hang on you aren't ready for a promotion. Come talk to me once you're level 10.",
                         "NextIndex": 3,
                         "Name": "I'm Ready, Promotion!",
                         "ConsumeItems": false,
@@ -2784,13 +2784,13 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Good thing for that too because it looks like you could use a promotion what with you being a Beginner and all that! Come talk to me once you're level 10.",
+                        "DialogueText": "Hang on you aren't ready for a promotion. Come talk to me once you're level 10.",
                         "NextIndex": 3,
                         "Name": "I'm Ready, Promotion!"
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Great now listen carefully. After I'm done talking here you'll get the option to choose 1 of 3 Classes. This is a Permanent Decision.",
+                        "DialogueText": "Great now listen carefully.",
                         "NextIndex": 4,
                         "Name": ""
                     },
@@ -2826,7 +2826,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "You will create dozens of characters so you'll eventually get to play as ALL the different classes! So just pick the class you think you will enjoy first and know that you'll get to play the other ones later!",
+                        "DialogueText": "You will create LOTS of characters so you'll get to play EVERY class! Just pick the class you think you will enjoy first since you'll get to play the other ones later!",
                         "NextIndex": 10,
                         "Name": ""
                     },
@@ -12246,13 +12246,13 @@ export const initNpcRepo = () => {
                 "quests": {
                     "The Spookyness": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Falloween is meant to be scary and what's scarier than death right? Go kill some monsters! <br> QUEST:Defeat monsters without having AUTO turned on.",
+                        "DialogueText": "Falloween is meant to be scary and what's scarier than death right? Go kill some monsters! <br> QUEST:Defeat monsters AFK gains don't count.",
                         "NextIndex": 5,
                         "Name": "The Spookyness",
                         "ConsumeItems": false,
                         "InventorySpacesNeeded": 2,
                         "NoSpaceIndex": 4,
-                        "Rewards": [<ComponentModel>{"item": "PremiumGem", "quantity": 40}, <ComponentModel>{"item": "Timecandy8", "quantity": 4}],
+                        "Rewards": [<ComponentModel>{"item": "Quest79", "quantity": 10}, <ComponentModel>{"item": "Timecandy8", "quantity": 4}],
                         "QuestName": "Falloween Pumpkin1",
                         "Difficulty": 1,
                         "note": <NoteModel>{"note": ""},
@@ -12267,7 +12267,7 @@ export const initNpcRepo = () => {
                         "ConsumeItems": false,
                         "InventorySpacesNeeded": 2,
                         "NoSpaceIndex": 7,
-                        "Rewards": [<ComponentModel>{"item": "PremiumGem", "quantity": 50}, <ComponentModel>{"item": "Timecandy8", "quantity": 5}],
+                        "Rewards": [<ComponentModel>{"item": "Quest79", "quantity": 10}, <ComponentModel>{"item": "Timecandy8", "quantity": 5}],
                         "QuestName": "Falloween Pumpkin2",
                         "Difficulty": 3,
                         "note": <NoteModel>{"note": ""},
@@ -12284,13 +12284,13 @@ export const initNpcRepo = () => {
                     },
                     "The Horroriness": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Hmm still not scared eh? Well let's see if you can stomach the sheer terror of a RECYCLED QUEST! <br> QUEST:Defeat monsters without having AUTO turned on.",
+                        "DialogueText": "Hmm still not scared eh? Well let's see if you can stomach the sheer terror of a RECYCLED QUEST! <br> QUEST:Defeat monsters AFK gains don't count.",
                         "NextIndex": 11,
                         "Name": "The Horroriness",
                         "ConsumeItems": false,
                         "InventorySpacesNeeded": 2,
                         "NoSpaceIndex": 10,
-                        "Rewards": [<ComponentModel>{"item": "PremiumGem", "quantity": 50}, <ComponentModel>{"item": "Timecandy8", "quantity": 5}],
+                        "Rewards": [<ComponentModel>{"item": "Quest79", "quantity": 10}, <ComponentModel>{"item": "Timecandy8", "quantity": 5}],
                         "QuestName": "Falloween Pumpkin3",
                         "Difficulty": 5,
                         "note": <NoteModel>{"note": ""},
@@ -12305,14 +12305,14 @@ export const initNpcRepo = () => {
                         "ConsumeItems": false,
                         "InventorySpacesNeeded": 2,
                         "NoSpaceIndex": 13,
-                        "Rewards": [<ComponentModel>{"item": "PremiumGem", "quantity": 60}, <ComponentModel>{"item": "Timecandy8", "quantity": 6}],
+                        "Rewards": [<ComponentModel>{"item": "Quest79", "quantity": 10}, <ComponentModel>{"item": "Timecandy8", "quantity": 6}],
                         "QuestName": "Falloween Pumpkin4",
                         "Difficulty": 7,
                         "note": <NoteModel>{"note": ""},
                         "CustomType": "Falloween Pumpkin4",
                         "CustomArray": [<CustomReqModel>{
                             "desc": "Say 'Boo' to People:",
-                            "finalV": 200,
+                            "finalV": 120,
                             "type": "GreaterEqual",
                             "startV": 0
                         }]
@@ -12325,7 +12325,7 @@ export const initNpcRepo = () => {
                         "ConsumeItems": false,
                         "InventorySpacesNeeded": 2,
                         "NoSpaceIndex": 16,
-                        "Rewards": [<ComponentModel>{"item": "PremiumGem", "quantity": 80}, <ComponentModel>{"item": "Timecandy8", "quantity": 6}],
+                        "Rewards": [<ComponentModel>{"item": "Quest79", "quantity": 10}, <ComponentModel>{"item": "Timecandy8", "quantity": 6}],
                         "QuestName": "Falloween Pumpkin5",
                         "Difficulty": 7,
                         "note": <NoteModel>{"note": "The event ended without this quest being completable."},
@@ -12347,7 +12347,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "A jackolantern in November bet you weren't expecting that! Probably scared you right out of your chair or toilet for you phone users.",
+                        "DialogueText": "A jackolantern that can talk bet you weren't expecting that! Probably scared you off your chair or toilet maybe!",
                         "NextIndex": 2,
                         "Name": ""
                     },
@@ -12359,7 +12359,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Falloween is meant to be scary and what's scarier than death right? Go kill some monsters! <br> QUEST:Defeat monsters without having AUTO turned on.",
+                        "DialogueText": "Falloween is meant to be scary and what's scarier than death right? Go kill some monsters! <br> QUEST:Defeat monsters AFK gains don't count.",
                         "NextIndex": 5,
                         "Name": "The Spookyness"
                     },
@@ -12395,7 +12395,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Hmm still not scared eh? Well let's see if you can stomach the sheer terror of a RECYCLED QUEST! <br> QUEST:Defeat monsters without having AUTO turned on.",
+                        "DialogueText": "Hmm still not scared eh? Well let's see if you can stomach the sheer terror of a RECYCLED QUEST! <br> QUEST:Defeat monsters AFK gains don't count.",
                         "NextIndex": 11,
                         "Name": "The Horroriness"
                     },

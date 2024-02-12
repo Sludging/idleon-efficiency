@@ -175,6 +175,7 @@ export default function Layout({
                 { subLink: "/construction", label: "Construction" },
                 { subLink: "/worship", label: "Worship" },
                 { subLink: "/trapping", label: "Trapping" },
+                { subLink: "/equinox", label: "Equinox" },
             ]
         },
         {

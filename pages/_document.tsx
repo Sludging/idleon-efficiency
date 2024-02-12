@@ -30,10 +30,9 @@ class MyDocument extends Document {
     render() {
         return (
             <Html>
-                <Head>
-                    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet" />
-                </Head>
+                <Head/>
                 <body>
+                    <script>0</script>
                     <Main />
                     <NextScript />
                 </body>

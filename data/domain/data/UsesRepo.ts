@@ -34,14 +34,14 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPunching1",
                         "name": "Boxing Gloves Recipe",
-                        "amount": 5,
+                        "amount": 1,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPunching1",
                         "name": "Boxing Gloves Detailed Recipe",
-                        "amount": 5,
+                        "amount": 1,
                         "type": "detRecipe"
                     },
                     <UseModel>{

@@ -1860,7 +1860,8 @@ export const initRandoListRepo = () => {
                     "164",
                     "165",
                     "166",
-                    "167"
+                    "167",
+                    "168"
                 ]
             }),
         new RandoListBase(61, <RandoListModel>{
