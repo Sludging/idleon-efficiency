@@ -128,13 +128,21 @@ export class FoodLust extends Upgrade {
 
     override getBonus = () => {
         if (this.level == 0 || this.bossesKilled == 0) { 
-            return 0;
+            return 1;
         }
         return Math.max(0.01, Math.pow(0.8, Math.min(this.bossesKilled, this.level)))
     }
 
     isCapped = () => {
+        if (this.level == 0 || this.bossesKilled == 0) { 
+            return false;
+        }
+        
         return this.bossesKilled >= this.level;
+    }
+
+    override getDescription = () => {
+        return this.data.upgrade.split("@")[0].replace("Stacks up to  times", `Stacks up to ${this.level} times`);
     }
 
     override getBonusText = () => {
