@@ -1,5 +1,5 @@
-import { Card } from "./cards";
-import { ImageData } from "./imageData";
+import { Card } from './cards';
+import { ImageData } from './imageData';
 import { CardSetBase, initCardSetRepo } from './data/CardSetRepo';
 
 export class CardSet {
