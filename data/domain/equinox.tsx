@@ -244,6 +244,6 @@ export function updateEquinoxBar(data: Map<string, any>) {
     // calculate how much bar would have filled based on last updated time.
     const futureFilled = hoursSinceUpdate * equinox.bar.rate;
     equinox.bar.current = Math.min(equinox.bar.max, equinox.bar.current + futureFilled);
-    equinox.bar.percentageOfCap = Math.round(equinox.bar.max / equinox.bar.current * 100);
+    equinox.bar.percentageOfCap = Math.round((equinox.bar.current * 100) / equinox.bar.max);
     equinox.bar.timeToFull = (equinox.bar.max - equinox.bar.current) / (equinox.bar.rate / 3600);
 }
