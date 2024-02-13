@@ -19,7 +19,7 @@ import { initCardSetRepo } from '../../data/domain/data/CardSetRepo';
 const CardBox = ({ card }: { card: Card}) => {
     return (
         <ShadowBox background='dark-1' style={{ opacity: card.count > 0 ? 1 : 0.5 }} gap='small' pad='medium'>
-            <Box direction='row' gap='small' align='center'>
+            <Box direction='row' gap='small' align='left'>
                 <Stack>
                     <Box>
                         <IconImage data={card.getImageData()} />
@@ -28,7 +28,10 @@ const CardBox = ({ card }: { card: Card}) => {
                         <IconImage data={card.getBorderImageData()} />
                     </Box>
                 </Stack>
-                <Text>{card.displayName}</Text>
+                <Box direction='column' gap='none' align='left'>
+                    <Text size='medium'>{card.displayName}</Text>
+                    <Text size='small'>{card.getBonusText()}</Text>
+                </Box>
             </Box>            
         </ShadowBox>
     )
@@ -36,22 +39,29 @@ const CardBox = ({ card }: { card: Card}) => {
 
 const CardSetBox = ({ cardSet }: {cardSet: CardSet}) => {
     return (
-        <ShadowBox background='dark-1' style={{ opacity: cardSet.cards?.reduce((sum, card) => {return sum+card.count;}, 0) > 0 ? 1 : 0.5 }} gap='small' pad='medium'>
+        <ShadowBox background='dark-1' style={{ opacity: cardSet.cards?.reduce((sum, card) => { return sum + card.count; }, 0) > 0 ? 1 : 0.5 }} gap='small' pad='medium'>
             <Box direction='column' gap='small' align='center'>
-                <Stack>
-                    <Box>
-                        <IconImage data={cardSet.getImageData()} />
+                <Box direction='row' gap='medium' align='center'>
+                    <Stack>
+                        <Box>
+                            <IconImage data={cardSet.getImageData()} />
+                        </Box>
+                        <Box>
+                            <IconImage data={cardSet.getBorderImageData()} />
+                        </Box>
+                    </Stack>
+                    <Box direction='column' gap='none' align='left'>
+                        <Text size='large' style={{ fontWeight: 'bolder' }}>{cardSet.data.data.displayName}</Text>
+                        <Text size='small' color={cardSet.getBonus() == 0 ? 'grey' : ''}>{cardSet.getBonusText()}</Text>
                     </Box>
-                    <Box>
-                        <IconImage data={cardSet.getBorderImageData()} />
-                    </Box>
-                </Stack>
-                <Text>{cardSet.getBonus()}</Text>
-                <Grid columns={{ size: 'auto', count: 4 }} gap='medium'>
-                {
-                    cardSet.cards?.map((card, index) => <CardBox key={index} card={card}/>)
-                }
-            </Grid>
+                </Box>                
+                <Box direction='row' gap='small' align='center'>
+                    <Grid columns={{ size: 'auto', count: 5 }} gap='small'>
+                        {
+                            cardSet.cards?.map((card, index) => <CardBox key={index} card={card} />)
+                        }
+                    </Grid>
+                </Box>
             </Box>            
         </ShadowBox>
     )
