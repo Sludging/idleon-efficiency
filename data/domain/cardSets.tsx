@@ -19,7 +19,7 @@ export class CardSet {
         this.displayName = cardSetMap[this.setID]?.displayName;
         this.cardSetName = cardSetMap[this.setID]?.cardSetName;
         this.setImage = cardSetMap[this.setID]?.image;
-        this.cards = setCards?.filter(card => card.data.category == this.cardSetName);
+        this.cards = setCards?.filter(card => card.data.category == this.cardSetName && card.displayName != "New Monster?");
     }
 
     getImageData = (): ImageData => {
@@ -39,37 +39,42 @@ export class CardSet {
         }
     }
 
-    getStars = (): number => {
+    getLevel = (): number => {
         if(this.cards.length == 0) {
             return 0;
         }
 
+        const cardsTotalStars = this.getCardsTotalStars();
+
         switch (true) {
-            case this.cards.reduce((sum, card) => {return sum+card.getStars();}, 0) >= this.cards.length * 6: return 6;
-            case this.cards.reduce((sum, card) => {return sum+card.getStars();}, 0) >= this.cards.length * 5: return 5;
-            case this.cards.reduce((sum, card) => {return sum+card.getStars();}, 0) >= this.cards.length * 4: return 4;
-            case this.cards.reduce((sum, card) => {return sum+card.getStars();}, 0) >= this.cards.length * 3: return 3;
-            case this.cards.reduce((sum, card) => {return sum+card.getStars();}, 0) >= this.cards.length * 2: return 2;
-            case this.cards.reduce((sum, card) => {return sum+card.getStars();}, 0) >= this.cards.length: return 1;
+            case cardsTotalStars >= this.cards.length * 6: return 5;
+            case cardsTotalStars >= this.cards.length * 5: return 4;
+            case cardsTotalStars >= this.cards.length * 4: return 3;
+            case cardsTotalStars >= this.cards.length * 3: return 2;
+            case cardsTotalStars >= this.cards.length * 2: return 1;
             default: return 0;
         }
     }
 
-    getBonus = (): number => {
-        if (this.cards.reduce((sum, card) => {return sum+card.getStars();}, 0) < this.cards.length) {
-            return 0;
-        }
-        const stars = this.getStars();
-        return this.baseBonusValue * (stars);
+    getCardsTotalStars = (): number => {
+        return this.cards?.reduce((sum, card) => {return sum+(card.count > 0 ? card.getStars()+1 : 0);}, 0)
+    }
+
+    getBonus = (level: number): number => {
+        return this.baseBonusValue * level;
     }
 
     getBonusText = (): string => {
-        return this.bonusText.replace(/{/, this.getBonus().toString());
+        return this.bonusText.replace(/{/, this.getBonus(this.getLevel()).toString());
+    }
+
+    getEmulatedBonusText = (level: number): string => {
+        return this.bonusText.replace(/{/, this.getBonus(level).toString());
     }
 
     getBorderImageData = (): ImageData => {
         return {
-            location: `CardsBorder${this.getStars()+1}`,
+            location: `CardsBorder${this.getLevel()+1}`,
             width: 31,
             height: 43
         }
