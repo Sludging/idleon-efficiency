@@ -86,7 +86,7 @@ export class SkillMastery extends RiftBonus {
             case level < 500: return 4;
             case level < 750: return 5;
             case level < 1000: return 6;
-            case level > 1000: return 7;
+            case level >= 1000: return 7;
             default: return -1;
         }
     }
