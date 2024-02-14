@@ -160,6 +160,24 @@ const IDforCardBonus: NumberMap = {
         95: "+{%_All_Skill_EXP_(Passive)"
 }
 
+const SkillsforIDCardPassiveBonus: { [key: number]: number[]; } = {
+    1: [24,25,33,34], // mining
+    2: [], // smithing
+    3: [27,28,36,37], // chopping
+    4: [30,31,39,45], // fishing
+    5: [], // alchemy
+    6: [32,40,41,75], // catching
+    7: [53,57,58], // trapping
+    8: [], // construction
+    9: [52,54,55], // worship
+    10: [], // cooking
+    11: [], // breeding
+    12: [], // intellect/laboratory
+    13: [], // sailing
+    14: [], // divinity
+    15: [] // gaming
+}
+
 const IDforCardSETbonus: NumberMap = {
         0: "{%_EXP_if_below_Lv_50",
         1: "{%_All_Food_Effect",
@@ -745,6 +763,12 @@ const skillIndexMap = {
     7: "trapping",
     8: "construction",
     9: "worship",
+    10: "cooking",
+    11: "breeding",
+    12: "intellect",
+    13: "sailing",
+    14: "divinity",
+    15: "gaming",
 };
 
 const anvilProductionItems = {
