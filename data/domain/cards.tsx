@@ -1,4 +1,5 @@
-import { IDforCardBonus, IDforCardSETbonus } from "../maps";
+import { IDforCardBonus, IDforCardSETbonus, SkillsforIDCardPassiveBonus } from "../maps";
+import { SkillsIndex } from "./SkillsIndex";
 import { Domain, RawData } from "./base/domain";
 import { CardDataBase, initCardRepo } from "./data/CardRepo";
 import { EnemyInfo } from "./enemies";
@@ -6,7 +7,7 @@ import { ImageData } from "./imageData";
 import { Item } from "./items";
 import { CardDataModel } from "./model/cardDataModel";
 import { Player } from "./player";
-import { Rift } from "./rift";
+import { Rift, SkillMastery } from "./rift";
 
 export class Card {
     count: number = 0;
@@ -14,9 +15,13 @@ export class Card {
 
     chipBoost: number = 1
     fivestar: boolean = false;
+    passive: boolean = false;
 
     constructor(public index: number, public id: string, public data: CardDataModel) {
         this.displayName = EnemyInfo.find(enemy => enemy.id == id)?.details.Name || "New Monster?";
+        if (data.effect.endsWith("(Passive)")) {
+            this.passive = true;
+        }
     }
 
     getImageData = (): ImageData => {
@@ -58,6 +63,15 @@ export class Card {
             width: 31,
             height: 43
         }
+    }
+
+    getBonusID = (): number => {
+        Object.entries(IDforCardBonus).map(([bonusID, bonusText], index) => {
+            if (bonusText == this.data.effect) {
+                return bonusID;
+            }
+        })
+        return 0;
     }
 
     static GetTotalBonusForId = (cards: Card[], id: number) => {
@@ -147,6 +161,27 @@ export const updateCards = (data: Map<string, any>) => {
     const rift = data.get("rift") as Rift;
     const players = data.get("players") as Player[];
     const optLacc = data.get("OptLacc");
+    
+    if (rift.bonuses.find(bonus => bonus.name == "Skill Mastery")?.active) {
+        const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
+
+        Object.entries(skillMastery.skillLevels).map(([skillAsString, skillLevel], index) => {
+            const skillName = SkillsIndex[parseInt(skillAsString)];
+            const skillIndex = SkillsIndex[skillName as keyof typeof SkillsIndex];
+            if (skillLevel >= 3 && SkillsforIDCardPassiveBonus[skillIndex].length > 0) {
+                cards.forEach(card => {
+                    if (SkillsforIDCardPassiveBonus[skillIndex].find(bonusID => bonusID == card.getBonusID())) {
+                        card.passive = true;
+                    }
+                })
+                players.flatMap(player => player.cardInfo?.cards ?? []).forEach(card => {
+                    if (SkillsforIDCardPassiveBonus[skillIndex].find(bonusID => bonusID == card.getBonusID())) {
+                        card.passive = true;
+                    }
+                })
+            }
+        })
+    }
 
     if (rift.bonuses.find(bonus => bonus.name == "Ruby Cards")?.active) {
         cards.forEach(card => {
