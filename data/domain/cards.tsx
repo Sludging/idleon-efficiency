@@ -67,10 +67,10 @@ export class Card {
 
     getBonusID = (): number => {
         var ID = 0 as number;
-        Object.entries(IDforCardBonus).map(([bonusID, bonusText], index) => {
+        Object.entries(IDforCardBonus).some(([bonusID, bonusText], index) => {
             if (ID == 0 && bonusText == this.data.effect.replaceAll(' ', '_')) {
                 ID = parseInt(bonusID, 10);
-                return;
+                return true;
             }
         })
         return ID;
