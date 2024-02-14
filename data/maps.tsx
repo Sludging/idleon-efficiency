@@ -483,6 +483,8 @@ const cardSetMap = {
     "{%_Skill_AFK_Gain_Rate": { name: "Hard_Resources", rawName: 'CardSet5', base: 4 },
     "{%_Dmg,_Drop,_and_EXP": { name: "Bosses_n_Nightmares", rawName: 'CardSet26', base: 6 },
     "{%_Drop_Rate": { name: "Events", rawName: 'CardSet25', base: 5 },
+    "{%_Crit_Chance": { name: "Hyperion_Nebula", rawName: 'CardSet6', base: 5 },
+    "{%_Fight_AFK_Gain_Rate": { name: "Smolderin'_Plateau", rawName: 'CardSet8', base: 5 },
 };
 
 const cardEquipMap = {
