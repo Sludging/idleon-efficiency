@@ -1,18 +1,39 @@
-import { Card } from './cards';
+import { Card } from "./cards";
 import { NumberMap } from "../maps";
-import { ImageData } from './imageData';
-import { CardSetBase } from './data/CardSetRepo';
+import { ImageData } from "./imageData";
+import { CardSetBase } from "./data/CardSetRepo";
 
 export class CardSet {
     cards: Card[];
+    displayName: string = ""; // Name to display on UI
+    cardSetName: string = ""; // Name of the set in the cards data (differ from display names sometimes)
+    baseBonusValue: number = 0;
+    bonusText: string = "";
+    setImage: string = "";
+    setID: number = 0;
 
-    constructor(public index: number, public data: CardSetBase, public setCards: Card[] = []) {
-        this.cards = setCards;
+    constructor(public index: number, data: CardSetBase, setCards: Card[] = []) {
+        this.baseBonusValue = data.data.scaling;
+        this.bonusText = data.data.bonus;
+        this.setID = CardSet.getSetID(this.bonusText);
+        this.displayName = cardSetMap[this.setID]?.displayName;
+        this.cardSetName = cardSetMap[this.setID]?.cardSetName;
+        this.setImage = cardSetMap[this.setID]?.image;
+        this.cards = setCards?.filter(card => card.data.category == this.cardSetName);
     }
 
     getImageData = (): ImageData => {
         return {
-            location: `${this.data.data.image.replace(".png", "")}`,
+            location: `${this.setImage}`,
+            width: 28,
+            height: 36
+        }
+    }
+
+    // TODO : When banners are up, change the width and height to better match the images original sizes
+    getBannerImageData = (): ImageData => {
+        return {
+            location: `Cardbanner_${this.cardSetName.replaceAll(' ', '_')}`,
             width: 28,
             height: 36
         }
@@ -39,11 +60,11 @@ export class CardSet {
             return 0;
         }
         const stars = this.getStars();
-        return this.data.data.scaling * (stars);
+        return this.baseBonusValue * (stars);
     }
 
     getBonusText = (): string => {
-        return this.data.data.bonus.replace(/{/, this.getBonus().toString());
+        return this.bonusText.replace(/{/, this.getBonus().toString());
     }
 
     getBorderImageData = (): ImageData => {
@@ -55,7 +76,19 @@ export class CardSet {
     }
 
     static fromBase = (data: CardSetBase[], cards: Card[] = []) => {
-        return data.map((cardSet, index) => new CardSet(index, cardSet, (cards) ? cards.filter(card => card.data.category == cardSet.data.displayName) : []))
+        return data.map((cardSet, index) => new CardSet(index, cardSet, cards))
+    }
+
+    static getSetID = (bonus: string): number => {
+        var ID = 0 as number;
+        // Find the set ID corresponding to the bonus effect of the set
+        Object.entries(IDforCardSETbonus).some(([setID, setText], index) => {
+            if (ID == 0 && setText == bonus.replaceAll(' ', '_')) {
+                ID = parseInt(setID, 10);
+                return true;
+            }
+        })
+        return ID;
     }
 }
 
