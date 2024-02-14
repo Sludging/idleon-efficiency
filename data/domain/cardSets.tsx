@@ -19,11 +19,12 @@ export class CardSet {
 
     getStars = (): number => {
         switch (true) {
-            case this.cards.reduce((sum, card) => {return sum+card.getStars();}, 0) >= this.cards.length * 5: return 5;
-            case this.cards.reduce((sum, card) => {return sum+card.getStars();}, 0) >= this.cards.length * 4: return 4;
-            case this.cards.reduce((sum, card) => {return sum+card.getStars();}, 0) >= this.cards.length * 3: return 3;
-            case this.cards.reduce((sum, card) => {return sum+card.getStars();}, 0) >= this.cards.length * 2: return 2;
-            case this.cards.reduce((sum, card) => {return sum+card.getStars();}, 0) >= this.cards.length: return 1;
+            case this.cards.reduce((sum, card) => {return sum+card.getStars()+1;}, 0) >= this.cards.length * 6: return 6;
+            case this.cards.reduce((sum, card) => {return sum+card.getStars()+1;}, 0) >= this.cards.length * 5: return 5;
+            case this.cards.reduce((sum, card) => {return sum+card.getStars()+1;}, 0) >= this.cards.length * 4: return 4;
+            case this.cards.reduce((sum, card) => {return sum+card.getStars()+1;}, 0) >= this.cards.length * 3: return 3;
+            case this.cards.reduce((sum, card) => {return sum+card.getStars()+1;}, 0) >= this.cards.length * 2: return 2;
+            case this.cards.reduce((sum, card) => {return sum+card.getStars()+1;}, 0) >= this.cards.length: return 1;
             default: return 0;
         }
     }
@@ -33,7 +34,7 @@ export class CardSet {
             return 0;
         }
         const stars = this.getStars();
-        return this.data.data.scaling * (stars+1);
+        return this.data.data.scaling * (stars);
     }
 
     getBonusText = (): string => {
