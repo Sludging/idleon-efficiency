@@ -137,7 +137,29 @@ const IDforCardBonus: NumberMap = {
         72: "+{%_Total_Dungeon_Dmg",
         73: "+{%_Dungeon_MP_regen",
         74: "+{%_Dungeon_Drop_Rate",
-    }
+        75: "+{%_Catching_Speed",
+        76: "+{%_Breeding_EXP_(Passive)",
+        77: "+{%_Kitchen_Speed_(Passive)",
+        78: "+{_Star_Talent_Pts_(Passive)",
+        79: "+{%_Lab_EXP_gain",
+        80: "+{%_Multikill_per_tier",
+        81: "+{%_Critical_Chance_(Passive)",
+        82: "+{%_All_Stat",
+        83: "+{px_Line_Width_(Passive)",
+        84: "+{%_All_Skill_Efficiency",
+        85: "+{%_Cooking_EXP_gain",
+        86: "+{%_Dungeon_Move_Speed",
+        87: "+{%_Sailing_Speed_(Passive)",
+        88: "+{%_Skill_EXP_(Passive)",
+        89: "+{%_Divinity_EXP_(Passive)",
+        90: "+{%_Money_from_mobs_(Passive)",
+        91: "+{_Weapon_Power_(Passive)",
+        92: "+{%_Sailing_Speed_(Passive)",
+        93: "+{%_Skill_Efficncy_(Passive)",
+        94: "+{%_Class_EXP_(Passive)",
+        95: "+{%_All_Skill_EXP_(Passive)"
+}
+
 const IDforCardSETbonus: NumberMap = {
         0: "{%_EXP_if_below_Lv_50",
         1: "{%_All_Food_Effect",
