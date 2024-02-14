@@ -10,6 +10,7 @@ import { ImageData } from "./imageData";
 import { Item } from "./items";
 import { ConstructionMastery, Rift } from "./rift";
 import { Stamp } from "./stamps";
+import { Storage } from "./storage";
 
 const BOOKS_FOR_MAX_CHECKOUT = 20;
 
@@ -78,15 +79,7 @@ export class Construction extends Domain {
         const towerData = data.get("Tower") as number[];
         const optionsList = data.get("OptLacc") as number[];
 
-        construction.buildings.forEach((building) => {
-            building.level = towerData[building.index];
 
-            // Next level is unlocked if the next index for this building is +1.
-            building.nextLevelUnlocked = (building.level + 1) == towerData[building.index + construction.buildings.length];
-
-            // Current XP is the last set of indexes, with 12 in the middle of misc info.
-            building.currentXP = towerData[building.index + 12 + construction.buildings.length * 2];
-        });
         // 55 = building slot 1 = tower number
         // 56 = building slot 2 = -1 if empty
         // 57 = building slot 3 = -1 if empty
@@ -97,14 +90,27 @@ export class Construction extends Domain {
         // 62 = building slot 8 = -1 if empty
         towerData.slice(54, 62).forEach((buildingSlot, index) => {
             construction.buildingSlots[index] = buildingSlot;
-        })
+        });
+
         // 63 = Progress on nooby cogs
         // 64 = Progress on decent cogs
         // 65 = Progress on superb cogs
         // 66 = Progress on ultimate cogs
         towerData.slice(62, 66).forEach((cogProgress, index) => {
             construction.cogProgress[index].progress = cogProgress;
-        })
+        });
+
+        construction.buildings.forEach((building) => {
+            building.level = towerData[building.index];
+
+            // Next level is unlocked if the next index for this building is +1.
+            building.nextLevelUnlocked = (building.level + 1) == towerData[building.index + construction.buildings.length];
+
+            // Current XP is the last set of indexes, with 12 in the middle of misc info.
+            building.currentXP = towerData[building.index + 12 + construction.buildings.length * 2];
+
+            building.currentlyBuilding = construction.buildingSlots.includes(building.index);
+        });
 
         // current book count;
         construction.library.currentBooks = optionsList[55] as number || 0;
@@ -120,6 +126,8 @@ export const updateConstruction = (data: Map<string, any>) => {
     const timeAway = JSON.parse((data.get("rawData") as { [k: string]: any })["TimeAway"]);
     const collider = data.get("collider") as AtomCollider;
     const rift = data.get("rift") as Rift;
+    const storage = data.get("storage") as Storage;
+    const costCruncher = construction?.buildings.find(building => building.index == 5) as Building;
 
     // Figure out max building levels
     const constMastery = rift.bonuses.find(bonus => bonus.name == "Construct Mastery") as ConstructionMastery;
@@ -165,6 +173,15 @@ export const updateConstruction = (data: Map<string, any>) => {
         if (!building.maxed) {
             building.finishedUpgrade = building.currentXP >= building.getBuildCost();
         }
+
+        building.buildPercentage = Math.round((building.currentXP * 100) / building.getBuildCost());
+
+        building.upgradable = building.getLevelCosts(building.level, costCruncher).filter((costData, index) => {
+            const amountInStorage = storage?.amountInStorage(costData.item) ?? 0;
+            if (amountInStorage >= costData.quantity) {
+                return true;
+            }
+        }).length == 2 && building.nextLevelUnlocked;
     })
 
 

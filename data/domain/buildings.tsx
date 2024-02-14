@@ -22,6 +22,9 @@ export class Building {
     finishedUpgrade: boolean = false;
     maxed: boolean = false;
     currentXP: number = 0;
+    currentlyBuilding: boolean = false;
+    buildPercentage: number = 0;
+    upgradable: boolean = false;
 
     constructor(public index: number, data: BuildingModel) {
         this.description = data.description;

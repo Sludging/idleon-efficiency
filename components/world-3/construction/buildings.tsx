@@ -1,4 +1,4 @@
-import { Box, CheckBox, Grid, Heading, ResponsiveContext, Text } from "grommet";
+import { Box, CheckBox, Grid, Heading, Meter, ResponsiveContext, Text, Stack } from "grommet";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { AppContext } from "../../../data/appContext";
 import { Building } from "../../../data/domain/buildings";
@@ -9,9 +9,11 @@ import { nFormatter } from "../../../data/utility";
 import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
+import { BorderType } from "grommet/utils";
 
 export function BuildingsDisplay() {
     const [hideMaxed, setHideMaxed] = useState(true);
+    const [onlyCurrentlyBuilding, setOnlyCurrentlyBuilding] = useState(false);
     const appContext = useContext(AppContext);
 
     const theData = appContext.data.getData();
@@ -24,12 +26,18 @@ export function BuildingsDisplay() {
             return [];
         }
 
+        let buildingsData = constructionData.buildings;
+
         if (hideMaxed) {
-            return constructionData.buildings.filter(building => building.level != building.maxLvl);
+            buildingsData = buildingsData.filter(building => !building.maxed);
         }
 
-        return constructionData.buildings;
-    }, [constructionData, hideMaxed])
+        if (onlyCurrentlyBuilding) {
+            buildingsData = buildingsData.filter(building => building.currentlyBuilding);
+        }
+
+        return buildingsData;
+    }, [constructionData, hideMaxed, onlyCurrentlyBuilding])
 
     const costCruncher = useMemo(() => {
         return constructionData?.buildings.find(building => building.index == 5) as Building;
@@ -43,16 +51,25 @@ export function BuildingsDisplay() {
                     text={constructionData.buildings.reduce((sum, building) => sum += building.level, 0).toString()}
                     margin={{ right: 'medium' }}
                 />
-                <CheckBox
-                    checked={hideMaxed}
-                    label="Hide max level buildings"
-                    onChange={(event) => setHideMaxed(event.target.checked)}
-                />
+                <Box direction="row" gap="small">
+                    <CheckBox
+                        checked={hideMaxed}
+                        label="Hide max level buildings"
+                        onChange={(event) => setHideMaxed(event.target.checked)}
+                    />
+                    <CheckBox
+                        checked={onlyCurrentlyBuilding}
+                        label="Show only in progress buildings"
+                        onChange={(event) => setOnlyCurrentlyBuilding(event.target.checked)}
+                    />
+                </Box>
             </Box>
             <Box wrap direction="row">
                 {buildingsToShow.map((building, index) => {
+                    let currentlyBuildingBorderProp: BorderType = building.currentlyBuilding && {size: '2px', style: 'solid', color: 'green'};
+
                     return (
-                        <ShadowBox style={{ opacity: building.level > 0 ? 1 : 0.5 }} key={index} align="start" background="dark-1" pad="medium" justify="between" margin={{ bottom: 'small', right: 'small' }} direction="row" width="large">
+                        <ShadowBox style={{ opacity: building.level > 0 ? 1 : 0.5 }} key={index} align="start" background="dark-1" pad="medium" justify="between" margin={{ bottom: 'small', right: 'small' }} direction="row" width="large" border={currentlyBuildingBorderProp}>
                             <Box justify="center" margin={{ right: 'medium' }} gap="small">
                                 <Text size="xsmall">{building.name}</Text>
                                 <Box margin={{ right: 'small' }}>
@@ -66,19 +83,34 @@ export function BuildingsDisplay() {
                                 text={`${building.level.toString()}/${building.maxLvl.toString()}`}
                                 margin={{ right: 'large' }}
                             />
-                            {building.nextLevelUnlocked || building.level == building.maxLvl || building.currentXP > building.getBuildCost() ?
-                                <TextAndLabel
-                                    label="Build Req"
-                                    textSize="small"
-                                    text={"Maxed"}
-                                    margin={{ right: 'large' }}
-                                /> :
-                                <TextAndLabel
-                                    label="Build Req"
-                                    textSize="small"
-                                    text={`${nFormatter(building.currentXP)}/${nFormatter(building.getBuildCost())}`}
-                                    margin={{ right: 'large' }}
-                                />}
+                            <Box justify="center" margin={{ right: 'medium' }} gap="small">
+                                {(!building.maxed && !building.nextLevelUnlocked) &&
+                                    <ComponentAndLabel
+                                        label="Progress"
+                                        component={
+                                            <Stack>
+                                                <Meter
+                                                    size="small"
+                                                    type="bar"
+                                                    background="accent-3"
+                                                    color="brand"
+                                                    values={[
+                                                        {
+                                                            value: building.currentXP,
+                                                            label: 'current',
+                                                            color: 'brand'
+                                                        }
+                                                    ]}
+                                                    max={building.getBuildCost()} />
+                                                <Box align="center" pad="xxsmall">
+                                                    <Text size="small">{nFormatter(Math.floor(Math.min(building.currentXP, building.getBuildCost())))}/{nFormatter(Math.floor(building.getBuildCost()))} ({Math.min(building.buildPercentage, 100)}%)</Text>
+                                                </Box>
+                                            </Stack>
+                                        }
+                                    />}
+                                {building.nextLevelUnlocked && building.upgradable && <Text color={'green'}>Ready to Upgrade</Text>}
+                                {building.nextLevelUnlocked && !building.upgradable && <Text color={'yellow'}>Missing materials</Text>}
+                            </Box>
                             {building.level != building.maxLvl &&
                                 <Box direction="row">
                                     <ComponentAndLabel
