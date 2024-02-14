@@ -30,6 +30,7 @@ export const SkillsforIDCardPassiveBonus: Record<SkillsIndex, number[]> = {
 export class Card {
     count: number = 0;
     displayName: string;
+    bonusID: number = 0;
 
     chipBoost: number = 1
     fivestar: boolean = false;
@@ -40,6 +41,7 @@ export class Card {
         if (data.effect.endsWith("(Passive)")) {
             this.passive = true;
         }
+        this.bonusID = this.getBonusID();
     }
 
     getImageData = (): ImageData => {
@@ -85,6 +87,7 @@ export class Card {
 
     getBonusID = (): number => {
         var ID = 0 as number;
+        // Find the bonus ID corresponding to the bonus effect of the card
         Object.entries(IDforCardBonus).some(([bonusID, bonusText], index) => {
             if (ID == 0 && bonusText == this.data.effect.replaceAll(' ', '_')) {
                 ID = parseInt(bonusID, 10);
@@ -182,25 +185,23 @@ export const updateCards = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const optLacc = data.get("OptLacc");
 
-    if (rift.bonuses.find(bonus => bonus.name == "Skill Mastery")?.active) {
+    const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
 
-        const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
-
+    if (skillMastery?.active) {
         Object.entries(skillMastery.skillLevels).map(([skillAsString, skillLevel], index) => {
             const skillName = SkillsIndex[parseInt(skillAsString)];
             const skillIndex = SkillsIndex[skillName as keyof typeof SkillsIndex];
 
-            if (skillMastery.getSkillRank(skillIndex) >= 3 && SkillsforIDCardPassiveBonus[skillIndex].length > 0) {
-                cards.forEach(card => {
-                    if (SkillsforIDCardPassiveBonus[skillIndex].find(bonusID => bonusID == card.getBonusID())) {
+            if (SkillsforIDCardPassiveBonus[skillIndex].length > 0 && skillMastery.getSkillRank(skillIndex) >= 3) {
+
+                SkillsforIDCardPassiveBonus[skillIndex].forEach(bonusID => {
+                    ((cards) ? cards.filter(card => card.bonusID == bonusID) : []).forEach(card => {
                         card.passive = true;
-                    }
-                })
-                players.flatMap(player => player.cardInfo?.cards ?? []).forEach(card => {
-                    if (SkillsforIDCardPassiveBonus[skillIndex].find(bonusID => bonusID == card.getBonusID())) {
+                    })
+                    players.flatMap(player => player.cardInfo?.cards ?? []).filter(card => card.bonusID == bonusID).forEach(card => {
                         card.passive = true;
-                    }
-                })
+                    })
+                })                
             }
         })
     }
