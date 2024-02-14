@@ -73,16 +73,24 @@ export const IDforCardSETbonus: NumberMap = {
     10: "{%_Fight_AFK_Gain_Rate",
 }
 
-export const cardSetMap = {
-    None: "None",
-    "{%_EXP_if_below_Lv_50": { name: "Blunder_Hills", rawName: 'CardSet0', base: 8 },
-    "{%_All_Food_Effect": { name: "Yum-Yum_Desert", rawName: 'CardSet1', base: 10 },
-    "{%_Skill_Efficiency": { name: "Easy_Resources", rawName: 'CardSet2', base: 8 },
-    "{%_Skill_EXP_Gain": { name: "Medium_Resources", rawName: 'CardSet3', base: 5 },
-    "{%_DEF_and_ACC": { name: "Frostbite_Tundra", rawName: 'CardSet4', base: 5 },
-    "{%_Skill_AFK_Gain_Rate": { name: "Hard_Resources", rawName: 'CardSet5', base: 4 },
-    "{%_Dmg,_Drop,_and_EXP": { name: "Bosses_n_Nightmares", rawName: 'CardSet26', base: 6 },
-    "{%_Drop_Rate": { name: "Events", rawName: 'CardSet25', base: 5 },
-    "{%_Crit_Chance": { name: "Hyperion_Nebula", rawName: 'CardSet6', base: 5 },
-    "{%_Fight_AFK_Gain_Rate": { name: "Smolderin'_Plateau", rawName: 'CardSet8', base: 5 },
+interface cardSetInfo {
+    displayName: string,
+    cardSetName: string,
+    image: string,
+}
+
+// The IDs correspond to IDforCardSETbonus IDs
+// In case you want to get those infos from data in CardSetRepo you'll need to find the right ID using CardSet.getSetID() for example
+export const cardSetMap: Record<number, cardSetInfo> = {
+    0: { displayName: "Blunder Hills", cardSetName: "Blunder Hills", image: "CardSet0"},
+    1: { displayName: "Yum-Yum Desert", cardSetName: "Yum Yum Desert", image: "CardSet1"},
+    2: { displayName: "Easy Resources", cardSetName: "Easy Resources", image: "CardSet2"},
+    3: { displayName: "Medium Resources", cardSetName: "Medium Resources", image: "CardSet3"},
+    4: { displayName: "Frostbite Tundra", cardSetName: "Frostbite Tundra", image: "CardSet4"},
+    5: { displayName: "Bosses n Nightmares", cardSetName: "Bosses", image: "CardSet26"},
+    6: { displayName: "Events", cardSetName: "Event", image: "CardSet25"},
+    7: { displayName: "Hard Resources", cardSetName: "Hard Resources", image: "CardSet5"},
+    8: { displayName: "Dungeons", cardSetName: "Dungeons", image: "CardSet7"},
+    9: { displayName: "Hyperion Nebula", cardSetName: "Hyperion Nebula", image: "CardSet6"},
+    10: { displayName: "Smolderin' Plateau", cardSetName: "Smolderin' Plateau", image: "CardSet8"},
 };
