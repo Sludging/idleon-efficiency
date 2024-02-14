@@ -1,4 +1,5 @@
 import { IDforCardBonus, IDforCardSETbonus } from "../maps";
+import { SkillsIndex } from "./SkillsIndex";
 import { Domain, RawData } from "./base/domain";
 import { CardDataBase, initCardRepo } from "./data/CardRepo";
 import { EnemyInfo } from "./enemies";
@@ -6,17 +7,41 @@ import { ImageData } from "./imageData";
 import { Item } from "./items";
 import { CardDataModel } from "./model/cardDataModel";
 import { Player } from "./player";
-import { Rift } from "./rift";
+import { Rift, SkillMastery } from "./rift";
+
+export const SkillsforIDCardPassiveBonus: Record<SkillsIndex, number[]> = {
+    [SkillsIndex.Mining]: [24, 25, 33, 34],
+    [SkillsIndex.Smithing]: [],
+    [SkillsIndex.Chopping]: [27, 28, 36, 37],
+    [SkillsIndex.Fishing]: [30, 31, 39, 45],
+    [SkillsIndex.Alchemy]: [],
+    [SkillsIndex.Catching]: [32, 40, 41, 75],
+    [SkillsIndex.Trapping]: [53, 57, 58],
+    [SkillsIndex.Construction]: [],
+    [SkillsIndex.Worship]: [52, 54, 55],
+    [SkillsIndex.Cooking]: [],
+    [SkillsIndex.Breeding]: [],
+    [SkillsIndex.Intellect]: [],
+    [SkillsIndex.Sailing]: [],
+    [SkillsIndex.Divinity]: [],
+    [SkillsIndex.Gaming]: []
+}
 
 export class Card {
     count: number = 0;
     displayName: string;
+    bonusID: number = 0;
 
     chipBoost: number = 1
     fivestar: boolean = false;
+    passive: boolean = false;
 
     constructor(public index: number, public id: string, public data: CardDataModel) {
         this.displayName = EnemyInfo.find(enemy => enemy.id == id)?.details.Name || "New Monster?";
+        if (data.effect.endsWith("(Passive)")) {
+            this.passive = true;
+        }
+        this.bonusID = this.getBonusID();
     }
 
     getImageData = (): ImageData => {
@@ -58,6 +83,18 @@ export class Card {
             width: 31,
             height: 43
         }
+    }
+
+    getBonusID = (): number => {
+        var ID = 0 as number;
+        // Find the bonus ID corresponding to the bonus effect of the card
+        Object.entries(IDforCardBonus).some(([bonusID, bonusText], index) => {
+            if (ID == 0 && bonusText == this.data.effect.replaceAll(' ', '_')) {
+                ID = parseInt(bonusID, 10);
+                return true;
+            }
+        })
+        return ID;
     }
 
     static GetTotalBonusForId = (cards: Card[], id: number) => {
@@ -147,6 +184,27 @@ export const updateCards = (data: Map<string, any>) => {
     const rift = data.get("rift") as Rift;
     const players = data.get("players") as Player[];
     const optLacc = data.get("OptLacc");
+
+    const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
+
+    if (skillMastery?.active) {
+        Object.entries(skillMastery.skillLevels).map(([skillAsString, skillLevel], index) => {
+            const skillName = SkillsIndex[parseInt(skillAsString)];
+            const skillIndex = SkillsIndex[skillName as keyof typeof SkillsIndex];
+
+            if (SkillsforIDCardPassiveBonus[skillIndex].length > 0 && skillMastery.getSkillRank(skillIndex) >= 3) {
+
+                SkillsforIDCardPassiveBonus[skillIndex].forEach(bonusID => {
+                    ((cards) ? cards.filter(card => card.bonusID == bonusID) : []).forEach(card => {
+                        card.passive = true;
+                    })
+                    players.flatMap(player => player.cardInfo?.cards ?? []).filter(card => card.bonusID == bonusID).forEach(card => {
+                        card.passive = true;
+                    })
+                })                
+            }
+        })
+    }
 
     if (rift.bonuses.find(bonus => bonus.name == "Ruby Cards")?.active) {
         cards.forEach(card => {
