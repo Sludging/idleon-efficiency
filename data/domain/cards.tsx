@@ -67,8 +67,9 @@ export class Card {
 
     getBonusID = (): number => {
         Object.entries(IDforCardBonus).map(([bonusID, bonusText], index) => {
-            if (bonusText == this.data.effect) {
-                return bonusID;
+            if (bonusText == this.data.effect.replaceAll(' ', '_')) {
+                console.log(parseInt(bonusID, 10));
+                return parseInt(bonusID, 10);
             }
         })
         return 0;
@@ -161,22 +162,29 @@ export const updateCards = (data: Map<string, any>) => {
     const rift = data.get("rift") as Rift;
     const players = data.get("players") as Player[];
     const optLacc = data.get("OptLacc");
-    
+
+    console.log("UpdateCards");
+
     if (rift.bonuses.find(bonus => bonus.name == "Skill Mastery")?.active) {
+
         const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
 
         Object.entries(skillMastery.skillLevels).map(([skillAsString, skillLevel], index) => {
             const skillName = SkillsIndex[parseInt(skillAsString)];
             const skillIndex = SkillsIndex[skillName as keyof typeof SkillsIndex];
-            if (skillLevel >= 3 && SkillsforIDCardPassiveBonus[skillIndex].length > 0) {
+
+            if (skillMastery.getSkillRank(skillIndex) >= 3 && SkillsforIDCardPassiveBonus[skillIndex].length > 0) {
                 cards.forEach(card => {
                     if (SkillsforIDCardPassiveBonus[skillIndex].find(bonusID => bonusID == card.getBonusID())) {
                         card.passive = true;
+                        console.log("card " + card.displayName + " is now passive");
                     }
                 })
                 players.flatMap(player => player.cardInfo?.cards ?? []).forEach(card => {
+                    console.log("card " + card.displayName + " : " + card.getBonusID());
                     if (SkillsforIDCardPassiveBonus[skillIndex].find(bonusID => bonusID == card.getBonusID())) {
                         card.passive = true;
+                        console.log("card " + card.displayName + " is now passive");
                     }
                 })
             }
