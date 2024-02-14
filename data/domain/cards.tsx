@@ -66,13 +66,14 @@ export class Card {
     }
 
     getBonusID = (): number => {
+        var ID = 0 as number;
         Object.entries(IDforCardBonus).map(([bonusID, bonusText], index) => {
-            if (bonusText == this.data.effect.replaceAll(' ', '_')) {
-                console.log(parseInt(bonusID, 10));
-                return parseInt(bonusID, 10);
+            if (ID == 0 && bonusText == this.data.effect.replaceAll(' ', '_')) {
+                ID = parseInt(bonusID, 10);
+                return;
             }
         })
-        return 0;
+        return ID;
     }
 
     static GetTotalBonusForId = (cards: Card[], id: number) => {
@@ -163,8 +164,6 @@ export const updateCards = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const optLacc = data.get("OptLacc");
 
-    console.log("UpdateCards");
-
     if (rift.bonuses.find(bonus => bonus.name == "Skill Mastery")?.active) {
 
         const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
@@ -177,14 +176,11 @@ export const updateCards = (data: Map<string, any>) => {
                 cards.forEach(card => {
                     if (SkillsforIDCardPassiveBonus[skillIndex].find(bonusID => bonusID == card.getBonusID())) {
                         card.passive = true;
-                        console.log("card " + card.displayName + " is now passive");
                     }
                 })
                 players.flatMap(player => player.cardInfo?.cards ?? []).forEach(card => {
-                    console.log("card " + card.displayName + " : " + card.getBonusID());
                     if (SkillsforIDCardPassiveBonus[skillIndex].find(bonusID => bonusID == card.getBonusID())) {
                         card.passive = true;
-                        console.log("card " + card.displayName + " is now passive");
                     }
                 })
             }
