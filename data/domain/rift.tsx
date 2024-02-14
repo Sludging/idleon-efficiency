@@ -86,7 +86,7 @@ export class SkillMastery extends RiftBonus {
             case level < 500: return 4;
             case level < 750: return 5;
             case level < 1000: return 6;
-            case level > 1000: return 7;
+            case level >= 1000: return 7;
             default: return -1;
         }
     }
@@ -170,7 +170,7 @@ export class ConstructionMastery extends RiftBonus {
         "+35_MAX_LV_FOR_TRAPPER_DRONE",
         "+2%_DMG_PER_10_TOT_LV_OVER_750",
         "+100_MAX_LV_FOR_TALENT_LIBRARY",
-        "+5%_BUILD_SPD_PER_TOT_LV_OVER_1250",
+        "+5%_BUILD_SPD_PER_10_TOT_LV_OVER_1250",
         "+100_MAX_LV_FOR_ALL_SHRINES",
         "+30_MAX_LV_FOR_ALL_WIZARD_TOWERS"
     ]
