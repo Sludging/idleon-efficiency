@@ -1,4 +1,4 @@
-import { IDforCardBonus, IDforCardSETbonus, SkillsforIDCardPassiveBonus } from "../maps";
+import { IDforCardBonus, IDforCardSETbonus } from "../maps";
 import { SkillsIndex } from "./SkillsIndex";
 import { Domain, RawData } from "./base/domain";
 import { CardDataBase, initCardRepo } from "./data/CardRepo";
@@ -8,6 +8,24 @@ import { Item } from "./items";
 import { CardDataModel } from "./model/cardDataModel";
 import { Player } from "./player";
 import { Rift, SkillMastery } from "./rift";
+
+export const SkillsforIDCardPassiveBonus: Record<SkillsIndex, number[]> = {
+    [SkillsIndex.Mining]: [24, 25, 33, 34],
+    [SkillsIndex.Smithing]: [],
+    [SkillsIndex.Chopping]: [27, 28, 36, 37],
+    [SkillsIndex.Fishing]: [30, 31, 39, 45],
+    [SkillsIndex.Alchemy]: [],
+    [SkillsIndex.Catching]: [32, 40, 41, 75],
+    [SkillsIndex.Trapping]: [53, 57, 58],
+    [SkillsIndex.Construction]: [],
+    [SkillsIndex.Worship]: [52, 54, 55],
+    [SkillsIndex.Cooking]: [],
+    [SkillsIndex.Breeding]: [],
+    [SkillsIndex.Intellect]: [],
+    [SkillsIndex.Sailing]: [],
+    [SkillsIndex.Divinity]: [],
+    [SkillsIndex.Gaming]: []
+}
 
 export class Card {
     count: number = 0;

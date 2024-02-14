@@ -162,24 +162,6 @@ const IDforCardBonus: NumberMap = {
         95: "+{%_All_Skill_EXP_(Passive)"
 }
 
-const SkillsforIDCardPassiveBonus: Record<SkillsIndex, number[]> = {
-        [SkillsIndex.Mining]: [24, 25, 33, 34],
-        [SkillsIndex.Smithing]: [],
-        [SkillsIndex.Chopping]: [27, 28, 36, 37],
-        [SkillsIndex.Fishing]: [30, 31, 39, 45],
-        [SkillsIndex.Alchemy]: [],
-        [SkillsIndex.Catching]: [32, 40, 41, 75],
-        [SkillsIndex.Trapping]: [53, 57, 58],
-        [SkillsIndex.Construction]: [],
-        [SkillsIndex.Worship]: [52, 54, 55],
-        [SkillsIndex.Cooking]: [],
-        [SkillsIndex.Breeding]: [],
-        [SkillsIndex.Intellect]: [],
-        [SkillsIndex.Sailing]: [],
-        [SkillsIndex.Divinity]: [],
-        [SkillsIndex.Gaming]: []
-}
-
 const IDforCardSETbonus: NumberMap = {
         0: "{%_EXP_if_below_Lv_50",
         1: "{%_All_Food_Effect",
@@ -8665,6 +8647,5 @@ export {
     statuesMap,
     IDforETCbonus,
     IDforCardBonus,
-    IDforCardSETbonus,
-    SkillsforIDCardPassiveBonus
+    IDforCardSETbonus
 };
