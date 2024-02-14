@@ -18,19 +18,21 @@ import { initCardSetRepo } from '../../data/domain/data/CardSetRepo';
 
 const CardBox = ({ card }: { card: Card}) => {
     return (
-        <ShadowBox background='dark-1' style={{ opacity: card.count > 0 ? 1 : 0.5 }} gap='small' pad='medium'>
+        <ShadowBox background='dark-1' style={{ opacity: card.count > 0 ? 1 : 0.5 }} gap='small' pad='medium' align='left'>
             <Box direction='row' gap='small' align='left'>
-                <Stack>
-                    <Box>
-                        <IconImage data={card.getImageData()} />
-                    </Box>
-                    <Box>
-                        <IconImage data={card.getBorderImageData()} />
-                    </Box>
-                </Stack>
+                <Box direction='column' gap='small' align='center'>
+                    <Stack>
+                        <Box>
+                            <IconImage data={card.getImageData()} />
+                        </Box>
+                        <Box>
+                            <IconImage data={card.getBorderImageData()} />
+                        </Box>
+                    </Stack>
+                </Box>
                 <Box direction='column' gap='none' align='left'>
                     <Text size='medium'>{card.displayName}</Text>
-                    <Text size='small'>{card.getBonusText()}</Text>
+                    <Text size='small'>{card.getBonusText()+((card.passive && !card.data.effect.endsWith('(Passive)')) ? ' (Passive)' : '')}</Text>
                 </Box>
             </Box>            
         </ShadowBox>
@@ -51,7 +53,7 @@ const CardSetBox = ({ cardSet }: {cardSet: CardSet}) => {
                         </Box>
                     </Stack>
                     <Box direction='column' gap='none' align='left'>
-                        <Text size='large' style={{ fontWeight: 'bolder' }}>{cardSet.data.data.displayName}</Text>
+                        <Text size='large' style={{ fontWeight: 'bolder' }}>{cardSet.displayName}</Text>
                         <Text size='small' color={cardSet.getBonus() == 0 ? 'grey' : ''}>{cardSet.getBonusText()}</Text>
                     </Box>
                 </Box>                
@@ -76,7 +78,7 @@ function CardsDisplay() {
         if (appContext) {
             const theData = appContext.data.getData();
             setCardsData(theData.get("cards"));
-            cardSets.forEach(cardSet => {cardSet.cards = (cards) ? cards.filter(card => card.data.category == cardSet.data.data.displayName) : []});
+            cardSets.forEach(cardSet => {cardSet.cards = (cards) ? cards.filter(card => card.data.category == cardSet.cardSetName) : []});
         }
     }, [appContext, cardSets, cards])
 
