@@ -37,27 +37,40 @@ export class Card {
 
     getStars = (): number => {
         switch (true) {
-            // cchiz is .. special? .. who knows why.
-            case this.id == "Boss3B" && this.fivestar && this.count > this.data.perTier * 36: return 5;
-            case this.fivestar && this.count > this.data.perTier * 484: return 5;
-            case this.count > this.data.perTier * 25: return 4;
-            case this.count > this.data.perTier * 9: return 3;
-            case this.count > this.data.perTier * 4: return 2;
-            case this.count > this.data.perTier: return 1;
+            case this.fivestar && this.count >= this.getCardsForStar(5): return 5;
+            case this.count >= this.getCardsForStar(4): return 4;
+            case this.count >= this.getCardsForStar(3): return 3;
+            case this.count >= this.getCardsForStar(2): return 2;
+            case this.count >= this.getCardsForStar(1): return 1;
             default: return 0;
         }
     }
 
-    getBonus = (): number => {
+    getCardsForStar = (star: number): number => {
+        switch (star) {
+            // cchiz is .. special? .. who knows why...
+            case 5: return (this.id == "Boss3B") ? (this.data.perTier * 36)+1 : (this.data.perTier * 484)+1;
+            case 4: return (this.data.perTier * 25)+1;
+            case 3: return (this.data.perTier * 9)+1;
+            case 2: return (this.data.perTier * 4)+1;
+            case 1: return this.data.perTier+1;
+            default: return 0;
+        }
+    }
+
+    getBonus = (star: number): number => {
         if (this.count == 0) {
             return 0;
         }
-        const stars = this.getStars();
-        return this.data.bonus * (stars + 1) * this.chipBoost;
+        return this.data.bonus * (star + 1) * this.chipBoost;
     }
 
     getBonusText = (): string => {
-        return this.data.effect.replace(/{/, this.getBonus().toString());
+        return this.data.effect.replace(/{/, this.getBonus(this.getStars()).toString());
+    }
+
+    getEmulatedBonusText = (star: number): string => {
+        return this.data.effect.replace(/{/, this.getBonus(star).toString());
     }
 
     getBorderImageData = (): ImageData => {
@@ -81,7 +94,7 @@ export class Card {
     }
 
     static GetTotalBonusForId = (cards: Card[], id: number) => {
-        return cards.filter(card => card.data.effect == IDforCardBonus[id].replace(/_/g, ' ')).reduce((sum, card) => sum += card.getBonus(), 0);
+        return cards.filter(card => card.data.effect == IDforCardBonus[id].replace(/_/g, ' ')).reduce((sum, card) => sum += card.getBonus(card.getStars()), 0);
     }
 
     static fromBase = (data: CardDataBase[]) => {
