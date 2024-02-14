@@ -1,3 +1,5 @@
+import { SkillsIndex } from "./domain/SkillsIndex";
+
 interface NumberMap { [key: number]: string; }
 
 const IDforETCbonus: NumberMap = {
@@ -160,22 +162,22 @@ const IDforCardBonus: NumberMap = {
         95: "+{%_All_Skill_EXP_(Passive)"
 }
 
-const SkillsforIDCardPassiveBonus: { [key: number]: number[]; } = {
-    1: [24,25,33,34], // mining
-    2: [], // smithing
-    3: [27,28,36,37], // chopping
-    4: [30,31,39,45], // fishing
-    5: [], // alchemy
-    6: [32,40,41,75], // catching
-    7: [53,57,58], // trapping
-    8: [], // construction
-    9: [52,54,55], // worship
-    10: [], // cooking
-    11: [], // breeding
-    12: [], // intellect/laboratory
-    13: [], // sailing
-    14: [], // divinity
-    15: [] // gaming
+const SkillsforIDCardPassiveBonus: Record<SkillsIndex, number[]> = {
+        [SkillsIndex.Mining]: [24, 25, 33, 34],
+        [SkillsIndex.Smithing]: [],
+        [SkillsIndex.Chopping]: [27, 28, 36, 37],
+        [SkillsIndex.Fishing]: [30, 31, 39, 45],
+        [SkillsIndex.Alchemy]: [],
+        [SkillsIndex.Catching]: [32, 40, 41, 75],
+        [SkillsIndex.Trapping]: [53, 57, 58],
+        [SkillsIndex.Construction]: [],
+        [SkillsIndex.Worship]: [52, 54, 55],
+        [SkillsIndex.Cooking]: [],
+        [SkillsIndex.Breeding]: [],
+        [SkillsIndex.Intellect]: [],
+        [SkillsIndex.Sailing]: [],
+        [SkillsIndex.Divinity]: [],
+        [SkillsIndex.Gaming]: []
 }
 
 const IDforCardSETbonus: NumberMap = {
@@ -8663,5 +8665,6 @@ export {
     statuesMap,
     IDforETCbonus,
     IDforCardBonus,
-    IDforCardSETbonus
+    IDforCardSETbonus,
+    SkillsforIDCardPassiveBonus
 };
