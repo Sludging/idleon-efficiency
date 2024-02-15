@@ -37,11 +37,11 @@ export class Card {
 
     getStars = (): number => {
         switch (true) {
-            case this.fivestar && this.count >= this.getCardsForStar(5): return 5;
-            case this.count >= this.getCardsForStar(4): return 4;
-            case this.count >= this.getCardsForStar(3): return 3;
-            case this.count >= this.getCardsForStar(2): return 2;
-            case this.count >= this.getCardsForStar(1): return 1;
+            case this.fivestar && this.count >= Math.floor(this.getCardsForStar(5)): return 5;
+            case this.count >= Math.floor(this.getCardsForStar(4)): return 4;
+            case this.count >= Math.floor(this.getCardsForStar(3)): return 3;
+            case this.count >= Math.floor(this.getCardsForStar(2)): return 2;
+            case this.count >= Math.floor(this.getCardsForStar(1)): return 1;
             default: return 0;
         }
     }
@@ -54,7 +54,7 @@ export class Card {
             case 3: return (this.data.perTier * 9)+1;
             case 2: return (this.data.perTier * 4)+1;
             case 1: return this.data.perTier+1;
-            default: return 0;
+            default: return 1;
         }
     }
 
