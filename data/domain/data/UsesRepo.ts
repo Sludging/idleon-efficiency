@@ -78,6 +78,13 @@ export const initUsesRepo = () => {
                         "name": "Member Hoodie Detailed Recipe",
                         "amount": 20000,
                         "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "ItemRepo",
+                        "key": "StampC11",
+                        "name": "Vendor Stamp Material",
+                        "amount": "Lots",
+                        "type": "stamp"
                     }
                 ],
                 "typeGen": TypeGenEnum.bCraft,
@@ -571,6 +578,20 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands11",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 100,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands12",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 100,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
                         "name": "Staff of the Undead Plague Detailed Recipe",
                         "amount": 100,
                         "type": "detRecipe"
@@ -1206,27 +1227,6 @@ export const initUsesRepo = () => {
                         "repoSource": "ItemRepo",
                         "key": "StampC4",
                         "name": "Arcade Ball Stamp Material",
-                        "amount": "Lots",
-                        "type": "stamp"
-                    },
-                    <UseModel>{
-                        "repoSource": "ItemRepo",
-                        "key": "StampC10",
-                        "name": "Blank Material",
-                        "amount": "Lots",
-                        "type": "stamp"
-                    },
-                    <UseModel>{
-                        "repoSource": "ItemRepo",
-                        "key": "StampC11",
-                        "name": "Blank Material",
-                        "amount": "Lots",
-                        "type": "stamp"
-                    },
-                    <UseModel>{
-                        "repoSource": "ItemRepo",
-                        "key": "StampC12",
-                        "name": "Blank Material",
                         "amount": "Lots",
                         "type": "stamp"
                     },
@@ -2259,6 +2259,20 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows13",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 250,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 250,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "BubbleRepo",
                         "key": "High-IQ Cauldron@Stable Jenius",
                         "name": "High-IQ Cauldron: Stable Jenius Bubble",
@@ -2817,6 +2831,34 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools14",
+                        "name": "Marbiglass Pickaxe Detailed Recipe",
+                        "amount": 70,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod11",
+                        "name": "Marbiglass Rod Detailed Recipe",
+                        "amount": 300,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools15",
+                        "name": "Destroyer of the Mollo Gomme Detailed Recipe",
+                        "amount": 70,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod12",
+                        "name": "Angler of the Iliunne Detailed Recipe",
+                        "amount": 300,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "BubbleRepo",
                         "key": "High-IQ Cauldron@Molto Loggo",
                         "name": "High-IQ Cauldron: Molto Loggo Bubble",
@@ -3131,6 +3173,48 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword8",
+                        "name": "Elegant Spear Detailed Recipe",
+                        "amount": 125,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows13",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 125,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands12",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 125,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Detailed Recipe",
+                        "amount": 125,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 125,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 125,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "BubbleRepo",
                         "key": "Quicc Cauldron@Sanic Tools",
                         "name": "Quicc Cauldron: Sanic Tools Bubble",
@@ -3321,7 +3405,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentToolsHatchet9",
-                        "name": "Dreadlo Eviscerator Detailed Recipe",
+                        "name": "Dreadlo Hatchet Detailed Recipe",
                         "amount": 100,
                         "type": "detRecipe"
                     },
@@ -3330,6 +3414,34 @@ export const initUsesRepo = () => {
                         "key": "EquipmentSword7",
                         "name": "Skull Lance Detailed Recipe",
                         "amount": 125,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword8",
+                        "name": "Elegant Spear Detailed Recipe",
+                        "amount": 125,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet12",
+                        "name": "Marbiglass Hatchet Detailed Recipe",
+                        "amount": 100,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Detailed Recipe",
+                        "amount": 125,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet10",
+                        "name": "Annihilator of the Yggdrasil Detailed Recipe",
+                        "amount": 100,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -3419,6 +3531,20 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentTools9",
                         "name": "Dreadlo Pickolo Detailed Recipe",
+                        "amount": 150,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools14",
+                        "name": "Marbiglass Pickaxe Detailed Recipe",
+                        "amount": 150,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools15",
+                        "name": "Destroyer of the Mollo Gomme Detailed Recipe",
                         "amount": 150,
                         "type": "detRecipe"
                     },
@@ -3731,7 +3857,21 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentToolsHatchet9",
-                        "name": "Dreadlo Eviscerator Detailed Recipe",
+                        "name": "Dreadlo Hatchet Detailed Recipe",
+                        "amount": 200,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet12",
+                        "name": "Marbiglass Hatchet Detailed Recipe",
+                        "amount": 200,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet10",
+                        "name": "Annihilator of the Yggdrasil Detailed Recipe",
                         "amount": 200,
                         "type": "detRecipe"
                     },
@@ -3988,7 +4128,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentToolsHatchet9",
-                        "name": "Dreadlo Eviscerator Detailed Recipe",
+                        "name": "Dreadlo Hatchet Detailed Recipe",
                         "amount": 5000,
                         "type": "detRecipe"
                     },
@@ -3997,6 +4137,34 @@ export const initUsesRepo = () => {
                         "key": "EquipmentWands11",
                         "name": "Staff of the Undead Plague Detailed Recipe",
                         "amount": 1000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands12",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 1000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet12",
+                        "name": "Marbiglass Hatchet Detailed Recipe",
+                        "amount": 5000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 1000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet10",
+                        "name": "Annihilator of the Yggdrasil Detailed Recipe",
+                        "amount": 5000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -4227,6 +4395,34 @@ export const initUsesRepo = () => {
                         "key": "EquipmentSword7",
                         "name": "Skull Lance Detailed Recipe",
                         "amount": 1250,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword8",
+                        "name": "Elegant Spear Detailed Recipe",
+                        "amount": 1250,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet11",
+                        "name": "Marbiglass Netting Detailed Recipe",
+                        "amount": 800,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Detailed Recipe",
+                        "amount": 1250,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet12",
+                        "name": "Wrangler of the Qoxzul Detailed Recipe",
+                        "amount": 800,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -5109,6 +5305,48 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching10",
+                        "name": "Pentastud Slapper Detailed Recipe",
+                        "amount": 800,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows13",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 250,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools14",
+                        "name": "Marbiglass Pickaxe Detailed Recipe",
+                        "amount": 400,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching11",
+                        "name": "Mittens of the Gods Detailed Recipe",
+                        "amount": 800,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 250,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools15",
+                        "name": "Destroyer of the Mollo Gomme Detailed Recipe",
+                        "amount": 400,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "ItemRepo",
                         "key": "StampA24",
                         "name": "Arcane Stamp Material",
@@ -5828,6 +6066,34 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools14",
+                        "name": "Marbiglass Pickaxe Detailed Recipe",
+                        "amount": 800,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod11",
+                        "name": "Marbiglass Rod Detailed Recipe",
+                        "amount": 800,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools15",
+                        "name": "Destroyer of the Mollo Gomme Detailed Recipe",
+                        "amount": 800,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod12",
+                        "name": "Angler of the Iliunne Detailed Recipe",
+                        "amount": 800,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "ItemRepo",
                         "key": "StampA21",
                         "name": "Buckler Stamp Material",
@@ -6112,6 +6378,20 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows13",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 3,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 3,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "NpcRepo",
                         "key": "Dazey@Literally Physics",
                         "name": "Literally Physics Requirements",
@@ -6293,6 +6573,20 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands11",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 3,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands12",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 3,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
                         "name": "Staff of the Undead Plague Detailed Recipe",
                         "amount": 3,
                         "type": "detRecipe"
@@ -6842,30 +7136,23 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentSmithingTabs6",
-                        "name": "Anvil Tab 6 Recipe",
+                        "key": "EquipmentSmithingTabs7",
+                        "name": "Anvil Tab 7 Recipe",
                         "amount": 1,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentSmithingTabs6",
-                        "name": "Anvil Tab 6 Recipe",
+                        "key": "EquipmentSmithingTabs7",
+                        "name": "Anvil Tab 7 Recipe",
                         "amount": 1,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentSmithingTabs6",
-                        "name": "Anvil Tab 6 Recipe",
-                        "amount": 1,
-                        "type": "recipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentSmithingTabs6",
-                        "name": "Anvil Tab 6 Detailed Recipe",
-                        "amount": 3,
+                        "key": "EquipmentSmithingTabs7",
+                        "name": "Anvil Tab 7 Detailed Recipe",
+                        "amount": 2,
                         "type": "detRecipe"
                     }
                 ],
@@ -7558,6 +7845,76 @@ export const initUsesRepo = () => {
                         "name": "Staff of the Undead Plague Detailed Recipe",
                         "amount": 8,
                         "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword8",
+                        "name": "Elegant Spear Detailed Recipe",
+                        "amount": 8,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows13",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 8,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands12",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 8,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod11",
+                        "name": "Marbiglass Rod Detailed Recipe",
+                        "amount": 3,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet11",
+                        "name": "Marbiglass Netting Detailed Recipe",
+                        "amount": 3,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Detailed Recipe",
+                        "amount": 8,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 8,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 8,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod12",
+                        "name": "Angler of the Iliunne Detailed Recipe",
+                        "amount": 3,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet12",
+                        "name": "Wrangler of the Qoxzul Detailed Recipe",
+                        "amount": 3,
+                        "type": "detRecipe"
                     }
                 ],
                 "typeGen": TypeGenEnum.bCraft,
@@ -7716,6 +8073,20 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "FishingRod10",
                         "name": "Dreadlo Rod Detailed Recipe",
+                        "amount": 3150,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod11",
+                        "name": "Marbiglass Rod Detailed Recipe",
+                        "amount": 3150,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod12",
+                        "name": "Angler of the Iliunne Detailed Recipe",
                         "amount": 3150,
                         "type": "detRecipe"
                     },
@@ -7897,6 +8268,20 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "CatchingNet10",
                         "name": "Dreadlo Matted Netting Detailed Recipe",
+                        "amount": 3350,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet11",
+                        "name": "Marbiglass Netting Detailed Recipe",
+                        "amount": 3350,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet12",
+                        "name": "Wrangler of the Qoxzul Detailed Recipe",
                         "amount": 3350,
                         "type": "detRecipe"
                     },
@@ -8482,7 +8867,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentToolsHatchet9",
-                        "name": "Dreadlo Eviscerator Detailed Recipe",
+                        "name": "Dreadlo Hatchet Detailed Recipe",
                         "amount": 50,
                         "type": "detRecipe"
                     },
@@ -8503,7 +8888,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "TrapBoxSet8",
-                        "name": "Egalitarian Royal Traps Detailed Recipe",
+                        "name": "Egalitarian Traps Detailed Recipe",
                         "amount": 70,
                         "type": "detRecipe"
                     },
@@ -8533,6 +8918,118 @@ export const initUsesRepo = () => {
                         "key": "EquipmentWands11",
                         "name": "Staff of the Undead Plague Detailed Recipe",
                         "amount": 150,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword8",
+                        "name": "Elegant Spear Detailed Recipe",
+                        "amount": 150,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows13",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 150,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands12",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 150,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet12",
+                        "name": "Marbiglass Hatchet Detailed Recipe",
+                        "amount": 50,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod11",
+                        "name": "Marbiglass Rod Detailed Recipe",
+                        "amount": 50,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet11",
+                        "name": "Marbiglass Netting Detailed Recipe",
+                        "amount": 50,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet9",
+                        "name": "Forbidden Traps Detailed Recipe",
+                        "amount": 70,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull10",
+                        "name": "Cultist Skull Detailed Recipe",
+                        "amount": 75,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Detailed Recipe",
+                        "amount": 150,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 150,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 150,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet10",
+                        "name": "Annihilator of the Yggdrasil Detailed Recipe",
+                        "amount": 50,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod12",
+                        "name": "Angler of the Iliunne Detailed Recipe",
+                        "amount": 50,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet12",
+                        "name": "Wrangler of the Qoxzul Detailed Recipe",
+                        "amount": 50,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet10",
+                        "name": "Containment of the Zrgyios Detailed Recipe",
+                        "amount": 70,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull11",
+                        "name": "Crystal Skull of Esquire Vnoze Detailed Recipe",
+                        "amount": 75,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -8893,6 +9390,20 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows12",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 7000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows13",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 7000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
                         "name": "Spine Tingler Sniper Detailed Recipe",
                         "amount": 7000,
                         "type": "detRecipe"
@@ -9303,6 +9814,20 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools14",
+                        "name": "Marbiglass Pickaxe Detailed Recipe",
+                        "amount": 2500,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools15",
+                        "name": "Destroyer of the Mollo Gomme Detailed Recipe",
+                        "amount": 2500,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "BubbleRepo",
                         "key": "Vials@Mimicraught",
                         "name": "Vials: Mimicraught",
@@ -9533,7 +10058,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentToolsHatchet9",
-                        "name": "Dreadlo Eviscerator Detailed Recipe",
+                        "name": "Dreadlo Hatchet Detailed Recipe",
                         "amount": 5,
                         "type": "detRecipe"
                     },
@@ -9541,6 +10066,34 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "CatchingNet10",
                         "name": "Dreadlo Matted Netting Detailed Recipe",
+                        "amount": 5,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet12",
+                        "name": "Marbiglass Hatchet Detailed Recipe",
+                        "amount": 5,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet11",
+                        "name": "Marbiglass Netting Detailed Recipe",
+                        "amount": 5,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet10",
+                        "name": "Annihilator of the Yggdrasil Detailed Recipe",
+                        "amount": 5,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet12",
+                        "name": "Wrangler of the Qoxzul Detailed Recipe",
                         "amount": 5,
                         "type": "detRecipe"
                     },
@@ -9616,7 +10169,21 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentToolsHatchet9",
-                        "name": "Dreadlo Eviscerator Detailed Recipe",
+                        "name": "Dreadlo Hatchet Detailed Recipe",
+                        "amount": 2000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet12",
+                        "name": "Marbiglass Hatchet Detailed Recipe",
+                        "amount": 2000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet10",
+                        "name": "Annihilator of the Yggdrasil Detailed Recipe",
                         "amount": 2000,
                         "type": "detRecipe"
                     },
@@ -9778,6 +10345,34 @@ export const initUsesRepo = () => {
                         "key": "EquipmentSword7",
                         "name": "Skull Lance Detailed Recipe",
                         "amount": 2500,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword8",
+                        "name": "Elegant Spear Detailed Recipe",
+                        "amount": 2500,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod11",
+                        "name": "Marbiglass Rod Detailed Recipe",
+                        "amount": 1000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Detailed Recipe",
+                        "amount": 2500,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod12",
+                        "name": "Angler of the Iliunne Detailed Recipe",
+                        "amount": 1000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -10356,7 +10951,21 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentToolsHatchet9",
-                        "name": "Dreadlo Eviscerator Detailed Recipe",
+                        "name": "Dreadlo Hatchet Detailed Recipe",
+                        "amount": 6500,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet12",
+                        "name": "Marbiglass Hatchet Detailed Recipe",
+                        "amount": 6500,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet10",
+                        "name": "Annihilator of the Yggdrasil Detailed Recipe",
                         "amount": 6500,
                         "type": "detRecipe"
                     },
@@ -10523,6 +11132,20 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword7",
                         "name": "Skull Lance Detailed Recipe",
+                        "amount": 3,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword8",
+                        "name": "Elegant Spear Detailed Recipe",
+                        "amount": 3,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Detailed Recipe",
                         "amount": 3,
                         "type": "detRecipe"
                     },
@@ -10755,6 +11378,34 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows13",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 1400,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod11",
+                        "name": "Marbiglass Rod Detailed Recipe",
+                        "amount": 2000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 1400,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod12",
+                        "name": "Angler of the Iliunne Detailed Recipe",
+                        "amount": 2000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "BubbleRepo",
                         "key": "Quicc Cauldron@Shaquracy",
                         "name": "Quicc Cauldron: Shaquracy Bubble",
@@ -10949,6 +11600,34 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands12",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 4000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet11",
+                        "name": "Marbiglass Netting Detailed Recipe",
+                        "amount": 7000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 4000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet12",
+                        "name": "Wrangler of the Qoxzul Detailed Recipe",
+                        "amount": 7000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "BubbleRepo",
                         "key": "Power Cauldron@Fmj",
                         "name": "Power Cauldron: Fmj Bubble",
@@ -11052,6 +11731,20 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools14",
+                        "name": "Marbiglass Pickaxe Detailed Recipe",
+                        "amount": 10500,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools15",
+                        "name": "Destroyer of the Mollo Gomme Detailed Recipe",
+                        "amount": 10500,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "ItemRepo",
                         "key": "StampC14",
                         "name": "Talent II Stamp Material",
@@ -11131,6 +11824,20 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "CatchingNet10",
                         "name": "Dreadlo Matted Netting Detailed Recipe",
+                        "amount": 3000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet11",
+                        "name": "Marbiglass Netting Detailed Recipe",
+                        "amount": 3000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet12",
+                        "name": "Wrangler of the Qoxzul Detailed Recipe",
                         "amount": 3000,
                         "type": "detRecipe"
                     },
@@ -11612,6 +12319,20 @@ export const initUsesRepo = () => {
                         "name": "Crackled Skull Destroyer Detailed Recipe",
                         "amount": 10,
                         "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching10",
+                        "name": "Pentastud Slapper Detailed Recipe",
+                        "amount": 10,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching11",
+                        "name": "Mittens of the Gods Detailed Recipe",
+                        "amount": 10,
+                        "type": "detRecipe"
                     }
                 ],
                 "typeGen": TypeGenEnum.dQuest,
@@ -11714,6 +12435,20 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPunching9",
                         "name": "Crackled Skull Destroyer Detailed Recipe",
+                        "amount": 50,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching10",
+                        "name": "Pentastud Slapper Detailed Recipe",
+                        "amount": 50,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching11",
+                        "name": "Mittens of the Gods Detailed Recipe",
                         "amount": 50,
                         "type": "detRecipe"
                     },
@@ -12175,8 +12910,29 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "TrapBoxSet8",
-                        "name": "Egalitarian Royal Traps Detailed Recipe",
+                        "name": "Egalitarian Traps Detailed Recipe",
                         "amount": 2,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet9",
+                        "name": "Forbidden Traps Detailed Recipe",
+                        "amount": 2,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet10",
+                        "name": "Containment of the Zrgyios Recipe",
+                        "amount": 25000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet10",
+                        "name": "Containment of the Zrgyios Detailed Recipe",
+                        "amount": 25002,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -12349,6 +13105,20 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "WorshipSkull9",
                         "name": "Dreadnaught Skull Detailed Recipe",
+                        "amount": 1200,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull10",
+                        "name": "Cultist Skull Detailed Recipe",
+                        "amount": 1200,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull11",
+                        "name": "Crystal Skull of Esquire Vnoze Detailed Recipe",
                         "amount": 1200,
                         "type": "detRecipe"
                     },
@@ -13396,7 +14166,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentToolsHatchet9",
-                        "name": "Dreadlo Eviscerator Detailed Recipe",
+                        "name": "Dreadlo Hatchet Detailed Recipe",
                         "amount": 5,
                         "type": "detRecipe"
                     },
@@ -13417,7 +14187,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "TrapBoxSet8",
-                        "name": "Egalitarian Royal Traps Detailed Recipe",
+                        "name": "Egalitarian Traps Detailed Recipe",
                         "amount": 5,
                         "type": "detRecipe"
                     },
@@ -13454,6 +14224,146 @@ export const initUsesRepo = () => {
                         "key": "EquipmentWands11",
                         "name": "Staff of the Undead Plague Detailed Recipe",
                         "amount": 7,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching10",
+                        "name": "Pentastud Slapper Detailed Recipe",
+                        "amount": 15,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword8",
+                        "name": "Elegant Spear Detailed Recipe",
+                        "amount": 7,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows13",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 7,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands12",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 7,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools14",
+                        "name": "Marbiglass Pickaxe Detailed Recipe",
+                        "amount": 5,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet12",
+                        "name": "Marbiglass Hatchet Detailed Recipe",
+                        "amount": 5,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod11",
+                        "name": "Marbiglass Rod Detailed Recipe",
+                        "amount": 5,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet11",
+                        "name": "Marbiglass Netting Detailed Recipe",
+                        "amount": 5,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet9",
+                        "name": "Forbidden Traps Detailed Recipe",
+                        "amount": 5,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull10",
+                        "name": "Cultist Skull Detailed Recipe",
+                        "amount": 5,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching11",
+                        "name": "Mittens of the Gods Detailed Recipe",
+                        "amount": 15,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Detailed Recipe",
+                        "amount": 7,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 7,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 7,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools15",
+                        "name": "Destroyer of the Mollo Gomme Detailed Recipe",
+                        "amount": 5,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet10",
+                        "name": "Annihilator of the Yggdrasil Detailed Recipe",
+                        "amount": 5,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod12",
+                        "name": "Angler of the Iliunne Detailed Recipe",
+                        "amount": 5,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet12",
+                        "name": "Wrangler of the Qoxzul Detailed Recipe",
+                        "amount": 5,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet10",
+                        "name": "Containment of the Zrgyios Detailed Recipe",
+                        "amount": 5,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull11",
+                        "name": "Crystal Skull of Esquire Vnoze Detailed Recipe",
+                        "amount": 5,
                         "type": "detRecipe"
                     }
                 ],
@@ -13873,6 +14783,34 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools14",
+                        "name": "Marbiglass Pickaxe Detailed Recipe",
+                        "amount": 275,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod11",
+                        "name": "Marbiglass Rod Detailed Recipe",
+                        "amount": 300,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools15",
+                        "name": "Destroyer of the Mollo Gomme Detailed Recipe",
+                        "amount": 275,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod12",
+                        "name": "Angler of the Iliunne Detailed Recipe",
+                        "amount": 300,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "ItemRepo",
                         "key": "StampB31",
                         "name": "Saw Stamp Material",
@@ -14053,6 +14991,20 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword8",
+                        "name": "Elegant Spear Detailed Recipe",
+                        "amount": 25000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Detailed Recipe",
+                        "amount": 25000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "BubbleRepo",
                         "key": "Kazam Cauldron@Cogs For Hands",
                         "name": "Kazam Cauldron: Cogs For Hands Bubble",
@@ -14206,7 +15158,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentToolsHatchet9",
-                        "name": "Dreadlo Eviscerator Detailed Recipe",
+                        "name": "Dreadlo Hatchet Detailed Recipe",
                         "amount": 15000,
                         "type": "detRecipe"
                     },
@@ -14215,6 +15167,34 @@ export const initUsesRepo = () => {
                         "key": "EquipmentWands11",
                         "name": "Staff of the Undead Plague Detailed Recipe",
                         "amount": 10000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands12",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 10000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet12",
+                        "name": "Marbiglass Hatchet Detailed Recipe",
+                        "amount": 15000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 10000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet10",
+                        "name": "Annihilator of the Yggdrasil Detailed Recipe",
+                        "amount": 15000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -14303,6 +15283,20 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentTools9",
                         "name": "Dreadlo Pickolo Detailed Recipe",
+                        "amount": 15000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools14",
+                        "name": "Marbiglass Pickaxe Detailed Recipe",
+                        "amount": 15000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools15",
+                        "name": "Destroyer of the Mollo Gomme Detailed Recipe",
                         "amount": 15000,
                         "type": "detRecipe"
                     },
@@ -14512,6 +15506,20 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet11",
+                        "name": "Marbiglass Netting Detailed Recipe",
+                        "amount": 15000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet12",
+                        "name": "Wrangler of the Qoxzul Detailed Recipe",
+                        "amount": 15000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "BubbleRepo",
                         "key": "Quicc Cauldron@Cheap Shot",
                         "name": "Quicc Cauldron: Cheap Shot Bubble",
@@ -14610,7 +15618,21 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "TrapBoxSet8",
-                        "name": "Egalitarian Royal Traps Detailed Recipe",
+                        "name": "Egalitarian Traps Detailed Recipe",
+                        "amount": 5,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet9",
+                        "name": "Forbidden Traps Detailed Recipe",
+                        "amount": 5,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet10",
+                        "name": "Containment of the Zrgyios Detailed Recipe",
                         "amount": 5,
                         "type": "detRecipe"
                     },
@@ -14762,6 +15784,20 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "WorshipSkull9",
                         "name": "Dreadnaught Skull Detailed Recipe",
+                        "amount": 7000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull10",
+                        "name": "Cultist Skull Detailed Recipe",
+                        "amount": 7000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull11",
+                        "name": "Crystal Skull of Esquire Vnoze Detailed Recipe",
                         "amount": 7000,
                         "type": "detRecipe"
                     },
@@ -15054,6 +16090,83 @@ export const initUsesRepo = () => {
                         "key": "EquipmentBows12",
                         "name": "Spine Tingler Sniper Detailed Recipe",
                         "amount": 350,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows13",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 350,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod11",
+                        "name": "Marbiglass Rod Detailed Recipe",
+                        "amount": 200,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull10",
+                        "name": "Cultist Skull Recipe",
+                        "amount": 125000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull10",
+                        "name": "Cultist Skull Detailed Recipe",
+                        "amount": 125000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagS9",
+                        "name": "Gargantuan Soul Pouch Recipe",
+                        "amount": 125000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagS9",
+                        "name": "Gargantuan Soul Pouch Detailed Recipe",
+                        "amount": 125000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching11",
+                        "name": "Mittens of the Gods Recipe",
+                        "amount": 1000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching11",
+                        "name": "Mittens of the Gods Detailed Recipe",
+                        "amount": 1000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 350,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod12",
+                        "name": "Angler of the Iliunne Detailed Recipe",
+                        "amount": 200,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull11",
+                        "name": "Crystal Skull of Esquire Vnoze Detailed Recipe",
+                        "amount": 125000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -15607,6 +16720,20 @@ export const initUsesRepo = () => {
                         "name": "Dreadlo Pickolo Detailed Recipe",
                         "amount": 400,
                         "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools14",
+                        "name": "Marbiglass Pickaxe Detailed Recipe",
+                        "amount": 400,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools15",
+                        "name": "Destroyer of the Mollo Gomme Detailed Recipe",
+                        "amount": 400,
+                        "type": "detRecipe"
                     }
                 ],
                 "typeGen": TypeGenEnum.bBar,
@@ -15810,7 +16937,21 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentToolsHatchet9",
-                        "name": "Dreadlo Eviscerator Detailed Recipe",
+                        "name": "Dreadlo Hatchet Detailed Recipe",
+                        "amount": 50000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet12",
+                        "name": "Marbiglass Hatchet Detailed Recipe",
+                        "amount": 50000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet10",
+                        "name": "Annihilator of the Yggdrasil Detailed Recipe",
                         "amount": 50000,
                         "type": "detRecipe"
                     },
@@ -15974,6 +17115,20 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet11",
+                        "name": "Marbiglass Netting Detailed Recipe",
+                        "amount": 50000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet12",
+                        "name": "Wrangler of the Qoxzul Detailed Recipe",
+                        "amount": 50000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "BubbleRepo",
                         "key": "Quicc Cauldron@Fast Boi Talent",
                         "name": "Quicc Cauldron: Fast Boi Talent Bubble",
@@ -16046,6 +17201,20 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPunching9",
                         "name": "Crackled Skull Destroyer Detailed Recipe",
+                        "amount": 100,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching10",
+                        "name": "Pentastud Slapper Detailed Recipe",
+                        "amount": 100,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching11",
+                        "name": "Mittens of the Gods Detailed Recipe",
                         "amount": 100,
                         "type": "detRecipe"
                     },
@@ -16137,6 +17306,55 @@ export const initUsesRepo = () => {
                         "key": "EquipmentPunching9",
                         "name": "Crackled Skull Destroyer Detailed Recipe",
                         "amount": 50,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching10",
+                        "name": "Pentastud Slapper Detailed Recipe",
+                        "amount": 50,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod11",
+                        "name": "Marbiglass Rod Detailed Recipe",
+                        "amount": 3,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet9",
+                        "name": "Forbidden Traps Recipe",
+                        "amount": 1000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet9",
+                        "name": "Forbidden Traps Detailed Recipe",
+                        "amount": 1000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching11",
+                        "name": "Mittens of the Gods Detailed Recipe",
+                        "amount": 50,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod12",
+                        "name": "Angler of the Iliunne Detailed Recipe",
+                        "amount": 3,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet10",
+                        "name": "Containment of the Zrgyios Detailed Recipe",
+                        "amount": 1000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -16334,6 +17552,48 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword8",
+                        "name": "Elegant Spear Detailed Recipe",
+                        "amount": 10,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows13",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 4,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands12",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 4,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Detailed Recipe",
+                        "amount": 10,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 4,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 4,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "NpcRepo",
                         "key": "Bellows@Optometric Hoarder",
                         "name": "Optometric Hoarder Requirements",
@@ -16440,7 +17700,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "TrapBoxSet8",
-                        "name": "Egalitarian Royal Traps Detailed Recipe",
+                        "name": "Egalitarian Traps Detailed Recipe",
                         "amount": 6,
                         "type": "detRecipe"
                     },
@@ -16449,6 +17709,34 @@ export const initUsesRepo = () => {
                         "key": "EquipmentSword7",
                         "name": "Skull Lance Detailed Recipe",
                         "amount": 15,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword8",
+                        "name": "Elegant Spear Detailed Recipe",
+                        "amount": 15,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet9",
+                        "name": "Forbidden Traps Detailed Recipe",
+                        "amount": 6,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Detailed Recipe",
+                        "amount": 15,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet10",
+                        "name": "Containment of the Zrgyios Detailed Recipe",
+                        "amount": 6,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -16628,6 +17916,34 @@ export const initUsesRepo = () => {
                         "key": "EquipmentWands11",
                         "name": "Staff of the Undead Plague Detailed Recipe",
                         "amount": 5000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands12",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 5000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull10",
+                        "name": "Cultist Skull Detailed Recipe",
+                        "amount": 48000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 5000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull11",
+                        "name": "Crystal Skull of Esquire Vnoze Detailed Recipe",
+                        "amount": 48000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -17486,7 +18802,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentToolsHatchet9",
-                        "name": "Dreadlo Eviscerator Detailed Recipe",
+                        "name": "Dreadlo Hatchet Detailed Recipe",
                         "amount": 600,
                         "type": "detRecipe"
                     },
@@ -17507,7 +18823,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "TrapBoxSet8",
-                        "name": "Egalitarian Royal Traps Detailed Recipe",
+                        "name": "Egalitarian Traps Detailed Recipe",
                         "amount": 1000,
                         "type": "detRecipe"
                     },
@@ -17572,6 +18888,146 @@ export const initUsesRepo = () => {
                         "key": "EquipmentWands11",
                         "name": "Staff of the Undead Plague Detailed Recipe",
                         "amount": 500,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching10",
+                        "name": "Pentastud Slapper Detailed Recipe",
+                        "amount": 2000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword8",
+                        "name": "Elegant Spear Detailed Recipe",
+                        "amount": 500,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows13",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 500,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands12",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 500,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools14",
+                        "name": "Marbiglass Pickaxe Detailed Recipe",
+                        "amount": 600,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet12",
+                        "name": "Marbiglass Hatchet Detailed Recipe",
+                        "amount": 600,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod11",
+                        "name": "Marbiglass Rod Detailed Recipe",
+                        "amount": 750,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet11",
+                        "name": "Marbiglass Netting Detailed Recipe",
+                        "amount": 750,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet9",
+                        "name": "Forbidden Traps Detailed Recipe",
+                        "amount": 1000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull10",
+                        "name": "Cultist Skull Detailed Recipe",
+                        "amount": 1000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching11",
+                        "name": "Mittens of the Gods Detailed Recipe",
+                        "amount": 2000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Detailed Recipe",
+                        "amount": 500,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 500,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 500,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools15",
+                        "name": "Destroyer of the Mollo Gomme Detailed Recipe",
+                        "amount": 600,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet10",
+                        "name": "Annihilator of the Yggdrasil Detailed Recipe",
+                        "amount": 600,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod12",
+                        "name": "Angler of the Iliunne Detailed Recipe",
+                        "amount": 750,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet12",
+                        "name": "Wrangler of the Qoxzul Detailed Recipe",
+                        "amount": 750,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet10",
+                        "name": "Containment of the Zrgyios Detailed Recipe",
+                        "amount": 1000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull11",
+                        "name": "Crystal Skull of Esquire Vnoze Detailed Recipe",
+                        "amount": 1000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -17715,6 +19171,20 @@ export const initUsesRepo = () => {
                         "key": "MaxCapBagTr6",
                         "name": "Massive Critter Pouch Detailed Recipe",
                         "amount": 100000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagTr9",
+                        "name": "Gargantuan Critta Pouch Recipe",
+                        "amount": 1500000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagTr9",
+                        "name": "Gargantuan Critta Pouch Detailed Recipe",
+                        "amount": 1500000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -18071,7 +19541,21 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "TrapBoxSet8",
-                        "name": "Egalitarian Royal Traps Detailed Recipe",
+                        "name": "Egalitarian Traps Detailed Recipe",
+                        "amount": 10,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet9",
+                        "name": "Forbidden Traps Detailed Recipe",
+                        "amount": 10,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet10",
+                        "name": "Containment of the Zrgyios Detailed Recipe",
                         "amount": 10,
                         "type": "detRecipe"
                     },
@@ -18487,14 +19971,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "TrapBoxSet8",
-                        "name": "Egalitarian Royal Traps Recipe",
+                        "name": "Egalitarian Traps Recipe",
                         "amount": 10000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "TrapBoxSet8",
-                        "name": "Egalitarian Royal Traps Detailed Recipe",
+                        "name": "Egalitarian Traps Detailed Recipe",
                         "amount": 10000,
                         "type": "detRecipe"
                     },
@@ -18566,6 +20050,146 @@ export const initUsesRepo = () => {
                         "key": "EquipmentWands11",
                         "name": "Staff of the Undead Plague Detailed Recipe",
                         "amount": 800,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats105",
+                        "name": "Marbiglass Headdress Detailed Recipe",
+                        "amount": 4000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts37",
+                        "name": "Marbiglass Tunic Detailed Recipe",
+                        "amount": 2800,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPants29",
+                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "amount": 1600,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes37",
+                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "amount": 750,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching10",
+                        "name": "Pentastud Slapper Detailed Recipe",
+                        "amount": 5000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword8",
+                        "name": "Elegant Spear Detailed Recipe",
+                        "amount": 750,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows13",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 750,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands12",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 800,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet9",
+                        "name": "Forbidden Traps Detailed Recipe",
+                        "amount": 10000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull10",
+                        "name": "Cultist Skull Detailed Recipe",
+                        "amount": 10000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats106",
+                        "name": "Crown of the Gods Detailed Recipe",
+                        "amount": 4000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts38",
+                        "name": "Robe of the Gods Detailed Recipe",
+                        "amount": 2800,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPants30",
+                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "amount": 1600,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes38",
+                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "amount": 750,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching11",
+                        "name": "Mittens of the Gods Detailed Recipe",
+                        "amount": 5000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Detailed Recipe",
+                        "amount": 750,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 750,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 800,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet10",
+                        "name": "Containment of the Zrgyios Detailed Recipe",
+                        "amount": 10000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull11",
+                        "name": "Crystal Skull of Esquire Vnoze Detailed Recipe",
+                        "amount": 10000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -18902,7 +20526,7 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.bCraft,
                 "type": "Monster Drop"
             }),
-        new UsesBase("SnowA4", <UsesModel>{
+        new UsesBase("SnowC2", <UsesModel>{
                 "uses": [
                     <UseModel>{
                         "repoSource": "RecipeRepo",
@@ -18917,6 +20541,13 @@ export const initUsesRepo = () => {
                         "name": "Chizoar Bodyplate Detailed Recipe",
                         "amount": 100000,
                         "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "BuildingRepo",
+                        "key": "Automation Arm",
+                        "name": "Automation Arm Requirements",
+                        "amount": "Lots",
+                        "type": "building"
                     },
                     <UseModel>{
                         "repoSource": "PostOfficeRepo",
@@ -19067,6 +20698,34 @@ export const initUsesRepo = () => {
                         "key": "EquipmentBows12",
                         "name": "Spine Tingler Sniper Detailed Recipe",
                         "amount": 110000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows13",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 110000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod11",
+                        "name": "Marbiglass Rod Detailed Recipe",
+                        "amount": 90000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 110000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod12",
+                        "name": "Angler of the Iliunne Detailed Recipe",
+                        "amount": 90000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -19261,6 +20920,20 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentTools9",
                         "name": "Dreadlo Pickolo Detailed Recipe",
+                        "amount": 6000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools14",
+                        "name": "Marbiglass Pickaxe Detailed Recipe",
+                        "amount": 6000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools15",
+                        "name": "Destroyer of the Mollo Gomme Detailed Recipe",
                         "amount": 6000,
                         "type": "detRecipe"
                     }
@@ -19519,6 +21192,20 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching10",
+                        "name": "Pentastud Slapper Detailed Recipe",
+                        "amount": 50000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching11",
+                        "name": "Mittens of the Gods Detailed Recipe",
+                        "amount": 50000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "ItemRepo",
                         "key": "StampA29",
                         "name": "Gilded Axe Stamp Material",
@@ -19624,7 +21311,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentToolsHatchet9",
-                        "name": "Dreadlo Eviscerator Detailed Recipe",
+                        "name": "Dreadlo Hatchet Detailed Recipe",
                         "amount": 110000,
                         "type": "detRecipe"
                     },
@@ -19633,6 +21320,34 @@ export const initUsesRepo = () => {
                         "key": "EquipmentSword7",
                         "name": "Skull Lance Detailed Recipe",
                         "amount": 90000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword8",
+                        "name": "Elegant Spear Detailed Recipe",
+                        "amount": 90000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet12",
+                        "name": "Marbiglass Hatchet Detailed Recipe",
+                        "amount": 110000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Detailed Recipe",
+                        "amount": 90000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet10",
+                        "name": "Annihilator of the Yggdrasil Detailed Recipe",
+                        "amount": 110000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -19719,6 +21434,20 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands11",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 50000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands12",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 50000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
                         "name": "Staff of the Undead Plague Detailed Recipe",
                         "amount": 50000,
                         "type": "detRecipe"
@@ -19869,6 +21598,20 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "CatchingNet10",
                         "name": "Dreadlo Matted Netting Detailed Recipe",
+                        "amount": 130000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet11",
+                        "name": "Marbiglass Netting Detailed Recipe",
+                        "amount": 130000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet12",
+                        "name": "Wrangler of the Qoxzul Detailed Recipe",
                         "amount": 130000,
                         "type": "detRecipe"
                     },
@@ -20093,6 +21836,20 @@ export const initUsesRepo = () => {
                         "name": "Devious Slippers of the Divine Detailed Recipe",
                         "amount": 8,
                         "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes37",
+                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "amount": 8,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes38",
+                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "amount": 8,
+                        "type": "detRecipe"
                     }
                 ],
                 "typeGen": TypeGenEnum.aShoes,
@@ -20307,7 +22064,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "TrapBoxSet8",
-                        "name": "Egalitarian Royal Traps Detailed Recipe",
+                        "name": "Egalitarian Traps Detailed Recipe",
                         "amount": 100000,
                         "type": "detRecipe"
                     },
@@ -20323,6 +22080,20 @@ export const initUsesRepo = () => {
                         "key": "MaxCapBagTr8",
                         "name": "Colossal Critta Pouch Detailed Recipe",
                         "amount": 900000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet9",
+                        "name": "Forbidden Traps Detailed Recipe",
+                        "amount": 100000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet10",
+                        "name": "Containment of the Zrgyios Detailed Recipe",
+                        "amount": 100000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -20652,6 +22423,132 @@ export const initUsesRepo = () => {
                         "name": "Staff of the Undead Plague Detailed Recipe",
                         "amount": 3000,
                         "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats105",
+                        "name": "Marbiglass Headdress Detailed Recipe",
+                        "amount": 20000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts37",
+                        "name": "Marbiglass Tunic Detailed Recipe",
+                        "amount": 10000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPants29",
+                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "amount": 5000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes37",
+                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "amount": 3000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching10",
+                        "name": "Pentastud Slapper Detailed Recipe",
+                        "amount": 50000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword8",
+                        "name": "Elegant Spear Detailed Recipe",
+                        "amount": 3000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows13",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 3000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands12",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 3000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools14",
+                        "name": "Marbiglass Pickaxe Detailed Recipe",
+                        "amount": 10000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats106",
+                        "name": "Crown of the Gods Detailed Recipe",
+                        "amount": 20000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts38",
+                        "name": "Robe of the Gods Detailed Recipe",
+                        "amount": 10000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPants30",
+                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "amount": 5000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes38",
+                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "amount": 3000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching11",
+                        "name": "Mittens of the Gods Detailed Recipe",
+                        "amount": 50000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Detailed Recipe",
+                        "amount": 3000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 3000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 3000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools15",
+                        "name": "Destroyer of the Mollo Gomme Detailed Recipe",
+                        "amount": 10000,
+                        "type": "detRecipe"
                     }
                 ],
                 "typeGen": TypeGenEnum.bBar,
@@ -20731,7 +22628,21 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentToolsHatchet9",
-                        "name": "Dreadlo Eviscerator Detailed Recipe",
+                        "name": "Dreadlo Hatchet Detailed Recipe",
+                        "amount": 100000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet12",
+                        "name": "Marbiglass Hatchet Detailed Recipe",
+                        "amount": 100000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet10",
+                        "name": "Annihilator of the Yggdrasil Detailed Recipe",
                         "amount": 100000,
                         "type": "detRecipe"
                     },
@@ -20832,6 +22743,20 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet11",
+                        "name": "Marbiglass Netting Detailed Recipe",
+                        "amount": 100000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet12",
+                        "name": "Wrangler of the Qoxzul Detailed Recipe",
+                        "amount": 100000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "BubbleRepo",
                         "key": "Quicc Cauldron@Afk Expexp",
                         "name": "Quicc Cauldron: Afk Expexp Bubble",
@@ -20897,6 +22822,20 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "FishingRod10",
                         "name": "Dreadlo Rod Detailed Recipe",
+                        "amount": 40000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod11",
+                        "name": "Marbiglass Rod Detailed Recipe",
+                        "amount": 40000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod12",
+                        "name": "Angler of the Iliunne Detailed Recipe",
                         "amount": 40000,
                         "type": "detRecipe"
                     },
@@ -20996,6 +22935,34 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword8",
+                        "name": "Elegant Spear Detailed Recipe",
+                        "amount": 200000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod11",
+                        "name": "Marbiglass Rod Detailed Recipe",
+                        "amount": 250000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Detailed Recipe",
+                        "amount": 200000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod12",
+                        "name": "Angler of the Iliunne Detailed Recipe",
+                        "amount": 250000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "BubbleRepo",
                         "key": "Vials@Krakenade",
                         "name": "Vials: Krakenade",
@@ -21059,14 +23026,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "TrapBoxSet8",
-                        "name": "Egalitarian Royal Traps Recipe",
+                        "name": "Egalitarian Traps Recipe",
                         "amount": 100,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "TrapBoxSet8",
-                        "name": "Egalitarian Royal Traps Detailed Recipe",
+                        "name": "Egalitarian Traps Detailed Recipe",
                         "amount": 100,
                         "type": "detRecipe"
                     },
@@ -21075,6 +23042,34 @@ export const initUsesRepo = () => {
                         "key": "EquipmentBows12",
                         "name": "Spine Tingler Sniper Detailed Recipe",
                         "amount": 10,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows13",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 10,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet9",
+                        "name": "Forbidden Traps Detailed Recipe",
+                        "amount": 100,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 10,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet10",
+                        "name": "Containment of the Zrgyios Detailed Recipe",
+                        "amount": 100,
                         "type": "detRecipe"
                     }
                 ],
@@ -21171,6 +23166,34 @@ export const initUsesRepo = () => {
                         "key": "EquipmentWands11",
                         "name": "Staff of the Undead Plague Detailed Recipe",
                         "amount": 15000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands12",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 15000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull10",
+                        "name": "Cultist Skull Detailed Recipe",
+                        "amount": 60000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 15000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull11",
+                        "name": "Crystal Skull of Esquire Vnoze Detailed Recipe",
+                        "amount": 60000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -21370,7 +23393,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentToolsHatchet9",
-                        "name": "Dreadlo Eviscerator Detailed Recipe",
+                        "name": "Dreadlo Hatchet Detailed Recipe",
                         "amount": 20,
                         "type": "detRecipe"
                     },
@@ -21393,6 +23416,76 @@ export const initUsesRepo = () => {
                         "key": "EquipmentShirts36",
                         "name": "Serrated Chest of the Divine Detailed Recipe",
                         "amount": 25,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts37",
+                        "name": "Marbiglass Tunic Detailed Recipe",
+                        "amount": 25,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools14",
+                        "name": "Marbiglass Pickaxe Detailed Recipe",
+                        "amount": 20,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet12",
+                        "name": "Marbiglass Hatchet Detailed Recipe",
+                        "amount": 20,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod11",
+                        "name": "Marbiglass Rod Detailed Recipe",
+                        "amount": 20,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet11",
+                        "name": "Marbiglass Netting Detailed Recipe",
+                        "amount": 20,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts38",
+                        "name": "Robe of the Gods Detailed Recipe",
+                        "amount": 25,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools15",
+                        "name": "Destroyer of the Mollo Gomme Detailed Recipe",
+                        "amount": 20,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet10",
+                        "name": "Annihilator of the Yggdrasil Detailed Recipe",
+                        "amount": 20,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod12",
+                        "name": "Angler of the Iliunne Detailed Recipe",
+                        "amount": 20,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet12",
+                        "name": "Wrangler of the Qoxzul Detailed Recipe",
+                        "amount": 20,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -21579,6 +23672,20 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants27",
+                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "amount": 333333,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPants29",
+                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "amount": 333333,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPants30",
                         "name": "Spiked Leggings of the Divine Detailed Recipe",
                         "amount": 333333,
                         "type": "detRecipe"
@@ -21862,6 +23969,62 @@ export const initUsesRepo = () => {
                         "name": "Devious Slippers of the Divine Detailed Recipe",
                         "amount": 10,
                         "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats105",
+                        "name": "Marbiglass Headdress Detailed Recipe",
+                        "amount": 50,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts37",
+                        "name": "Marbiglass Tunic Detailed Recipe",
+                        "amount": 25,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPants29",
+                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "amount": 15,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes37",
+                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "amount": 10,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats106",
+                        "name": "Crown of the Gods Detailed Recipe",
+                        "amount": 50,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts38",
+                        "name": "Robe of the Gods Detailed Recipe",
+                        "amount": 25,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPants30",
+                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "amount": 15,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes38",
+                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "amount": 10,
+                        "type": "detRecipe"
                     }
                 ],
                 "typeGen": TypeGenEnum.bCraft,
@@ -21894,6 +24057,20 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentHats83",
                         "name": "Skulled Helmet of the Divine Detailed Recipe",
+                        "amount": 3,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats105",
+                        "name": "Marbiglass Headdress Detailed Recipe",
+                        "amount": 3,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats106",
+                        "name": "Crown of the Gods Detailed Recipe",
                         "amount": 3,
                         "type": "detRecipe"
                     }
@@ -21948,6 +24125,20 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentHats83",
                         "name": "Skulled Helmet of the Divine Detailed Recipe",
+                        "amount": 80000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats105",
+                        "name": "Marbiglass Headdress Detailed Recipe",
+                        "amount": 80000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats106",
+                        "name": "Crown of the Gods Detailed Recipe",
                         "amount": 80000,
                         "type": "detRecipe"
                     },
@@ -22036,6 +24227,20 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
+                        "key": "EquipmentSmithingTabs6",
+                        "name": "Anvil Tab 6 Recipe",
+                        "amount": 8500,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSmithingTabs6",
+                        "name": "Anvil Tab 6 Detailed Recipe",
+                        "amount": 8500,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
                         "key": "EquipmentHats83",
                         "name": "Skulled Helmet of the Divine Detailed Recipe",
                         "amount": 2500,
@@ -22058,6 +24263,62 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes36",
+                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "amount": 2000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats105",
+                        "name": "Marbiglass Headdress Detailed Recipe",
+                        "amount": 2500,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts37",
+                        "name": "Marbiglass Tunic Detailed Recipe",
+                        "amount": 1200,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPants29",
+                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "amount": 1600,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes37",
+                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "amount": 2000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats106",
+                        "name": "Crown of the Gods Detailed Recipe",
+                        "amount": 2500,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts38",
+                        "name": "Robe of the Gods Detailed Recipe",
+                        "amount": 1200,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPants30",
+                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "amount": 1600,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes38",
                         "name": "Devious Slippers of the Divine Detailed Recipe",
                         "amount": 2000,
                         "type": "detRecipe"
@@ -22110,6 +24371,20 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts37",
+                        "name": "Marbiglass Tunic Detailed Recipe",
+                        "amount": 900000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts38",
+                        "name": "Robe of the Gods Detailed Recipe",
+                        "amount": 900000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "NpcRepo",
                         "key": "Lava Larry@W5 Task Req Check",
                         "name": "W5 Task Req Check Requirements",
@@ -22157,6 +24432,20 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPants29",
+                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "amount": 1000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPants30",
+                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "amount": 1000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "ItemRepo",
                         "key": "StampC22",
                         "name": "Refinery Stamp Material",
@@ -22199,6 +24488,20 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes36",
+                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "amount": 1200000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes37",
+                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "amount": 1200000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes38",
                         "name": "Devious Slippers of the Divine Detailed Recipe",
                         "amount": 1200000,
                         "type": "detRecipe"
@@ -22268,6 +24571,20 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPunching9",
                         "name": "Crackled Skull Destroyer Detailed Recipe",
+                        "amount": 1000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching10",
+                        "name": "Pentastud Slapper Detailed Recipe",
+                        "amount": 1000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching11",
+                        "name": "Mittens of the Gods Detailed Recipe",
                         "amount": 1000,
                         "type": "detRecipe"
                     }
@@ -22376,6 +24693,62 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching10",
+                        "name": "Pentastud Slapper Detailed Recipe",
+                        "amount": 500,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword8",
+                        "name": "Elegant Spear Detailed Recipe",
+                        "amount": 100,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows13",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 100,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands12",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 100,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching11",
+                        "name": "Mittens of the Gods Detailed Recipe",
+                        "amount": 500,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Detailed Recipe",
+                        "amount": 100,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 100,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 100,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "BubbleRepo",
                         "key": "Vials@Hampter Drippy",
                         "name": "Vials: Hampter Drippy",
@@ -22459,6 +24832,20 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
+                        "key": "EquipmentSmithingTabs6",
+                        "name": "Anvil Tab 6 Recipe",
+                        "amount": 2000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSmithingTabs6",
+                        "name": "Anvil Tab 6 Detailed Recipe",
+                        "amount": 2000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
                         "key": "EquipmentSword7",
                         "name": "Skull Lance Detailed Recipe",
                         "amount": 500000,
@@ -22474,6 +24861,48 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands11",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 500000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword8",
+                        "name": "Elegant Spear Detailed Recipe",
+                        "amount": 500000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows13",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 500000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands12",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 500000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Detailed Recipe",
+                        "amount": 500000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 500000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
                         "name": "Staff of the Undead Plague Detailed Recipe",
                         "amount": 500000,
                         "type": "detRecipe"
@@ -22540,7 +24969,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentToolsHatchet9",
-                        "name": "Dreadlo Eviscerator Recipe",
+                        "name": "Dreadlo Hatchet Recipe",
                         "amount": 1,
                         "type": "recipe"
                     }
@@ -22553,14 +24982,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentToolsHatchet9",
-                        "name": "Dreadlo Eviscerator Recipe",
+                        "name": "Dreadlo Hatchet Recipe",
                         "amount": 250000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentToolsHatchet9",
-                        "name": "Dreadlo Eviscerator Detailed Recipe",
+                        "name": "Dreadlo Hatchet Detailed Recipe",
                         "amount": 250000,
                         "type": "detRecipe"
                     },
@@ -22576,6 +25005,20 @@ export const initUsesRepo = () => {
                         "key": "MaxCapBagT9",
                         "name": "Colossal Chopping Pouch Detailed Recipe",
                         "amount": 900000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet12",
+                        "name": "Marbiglass Hatchet Detailed Recipe",
+                        "amount": 250000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet10",
+                        "name": "Annihilator of the Yggdrasil Detailed Recipe",
+                        "amount": 250000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -22660,6 +25103,34 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSmithingTabs6",
+                        "name": "Anvil Tab 6 Recipe",
+                        "amount": 1000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSmithingTabs6",
+                        "name": "Anvil Tab 6 Detailed Recipe",
+                        "amount": 1000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet11",
+                        "name": "Marbiglass Netting Detailed Recipe",
+                        "amount": 250000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet12",
+                        "name": "Wrangler of the Qoxzul Detailed Recipe",
+                        "amount": 250000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "BubbleRepo",
                         "key": "High-IQ Cauldron@Slabe Logsoul",
                         "name": "High-IQ Cauldron: Slabe Logsoul Bubble",
@@ -22682,13 +25153,60 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "TrapBoxSet8",
-                        "name": "Egalitarian Royal Traps Recipe",
+                        "name": "Egalitarian Traps Recipe",
                         "amount": 1,
                         "type": "recipe"
                     }
                 ],
                 "typeGen": TypeGenEnum.aTrap,
                 "type": "Trap Box Set"
+            }),
+        new UsesBase("WorshipSkull8", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull9",
+                        "name": "Dreadnaught Skull Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull9",
+                        "name": "Dreadnaught Skull Detailed Recipe",
+                        "amount": 1,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull10",
+                        "name": "Cultist Skull Detailed Recipe",
+                        "amount": 1,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull11",
+                        "name": "Crystal Skull of Esquire Vnoze Detailed Recipe",
+                        "amount": 1,
+                        "type": "detRecipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aSkull,
+                "type": "Worship Skull"
+            }),
+        new UsesBase("WorshipSkull7", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull9",
+                        "name": "Dreadnaught Skull Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aSkull,
+                "type": "Worship Skull"
             }),
         new UsesBase("Soul6", <UsesModel>{
                 "uses": [
@@ -22721,6 +25239,41 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull10",
+                        "name": "Cultist Skull Recipe",
+                        "amount": 3000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull10",
+                        "name": "Cultist Skull Detailed Recipe",
+                        "amount": 3125000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagS9",
+                        "name": "Gargantuan Soul Pouch Recipe",
+                        "amount": 2000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagS9",
+                        "name": "Gargantuan Soul Pouch Detailed Recipe",
+                        "amount": 2000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull11",
+                        "name": "Crystal Skull of Esquire Vnoze Detailed Recipe",
+                        "amount": 3125000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "BubbleRepo",
                         "key": "Power Cauldron@Slabi Orefish",
                         "name": "Power Cauldron: Slabi Orefish Bubble",
@@ -22744,39 +25297,6 @@ export const initUsesRepo = () => {
                 ],
                 "typeGen": TypeGenEnum.dSouls,
                 "type": "Soul"
-            }),
-        new UsesBase("WorshipSkull8", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "WorshipSkull9",
-                        "name": "Dreadnaught Skull Recipe",
-                        "amount": 1,
-                        "type": "recipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "WorshipSkull9",
-                        "name": "Dreadnaught Skull Detailed Recipe",
-                        "amount": 1,
-                        "type": "detRecipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aSkull,
-                "type": "Worship Skull"
-            }),
-        new UsesBase("WorshipSkull7", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "WorshipSkull9",
-                        "name": "Dreadnaught Skull Recipe",
-                        "amount": 1,
-                        "type": "recipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.aSkull,
-                "type": "Worship Skull"
             }),
         new UsesBase("FoodHealth15", <UsesModel>{
                 "uses": [
@@ -22900,6 +25420,180 @@ export const initUsesRepo = () => {
                         "key": "Bullet3",
                         "name": "Coldseeker Bullet Detailed Recipe",
                         "amount": 500,
+                        "type": "detRecipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bCraft,
+                "type": "Monster Drop"
+            }),
+        new UsesBase("KrukPart2", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSmithingTabs6",
+                        "name": "Anvil Tab 6 Recipe",
+                        "amount": 10,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSmithingTabs6",
+                        "name": "Anvil Tab 6 Detailed Recipe",
+                        "amount": 10,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats83",
+                        "name": "Skulled Helmet of the Divine Recipe",
+                        "amount": 2,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats83",
+                        "name": "Skulled Helmet of the Divine Detailed Recipe",
+                        "amount": 2,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching9",
+                        "name": "Crackled Skull Destroyer Recipe",
+                        "amount": 4,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching9",
+                        "name": "Crackled Skull Destroyer Detailed Recipe",
+                        "amount": 4,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword7",
+                        "name": "Skull Lance Recipe",
+                        "amount": 4,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword7",
+                        "name": "Skull Lance Detailed Recipe",
+                        "amount": 4,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows12",
+                        "name": "Spine Tingler Sniper Recipe",
+                        "amount": 4,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows12",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 4,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands11",
+                        "name": "Staff of the Undead Plague Recipe",
+                        "amount": 4,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands11",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 4,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPendant30",
+                        "name": "The Divine Scarf Recipe",
+                        "amount": 10,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPendant30",
+                        "name": "The Divine Scarf Detailed Recipe",
+                        "amount": 10,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats105",
+                        "name": "Marbiglass Headdress Detailed Recipe",
+                        "amount": 2,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching10",
+                        "name": "Pentastud Slapper Detailed Recipe",
+                        "amount": 4,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword8",
+                        "name": "Elegant Spear Detailed Recipe",
+                        "amount": 4,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows13",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 4,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands12",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 4,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats106",
+                        "name": "Crown of the Gods Detailed Recipe",
+                        "amount": 2,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching11",
+                        "name": "Mittens of the Gods Detailed Recipe",
+                        "amount": 4,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Detailed Recipe",
+                        "amount": 4,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 4,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 4,
                         "type": "detRecipe"
                     }
                 ],
@@ -23032,95 +25726,117 @@ export const initUsesRepo = () => {
                         "name": "Staff of the Undead Plague Detailed Recipe",
                         "amount": 30,
                         "type": "detRecipe"
-                    }
-                ],
-                "typeGen": TypeGenEnum.bCraft,
-                "type": "Monster Drop"
-            }),
-        new UsesBase("KrukPart2", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats83",
-                        "name": "Skulled Helmet of the Divine Recipe",
-                        "amount": 2,
-                        "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats83",
-                        "name": "Skulled Helmet of the Divine Detailed Recipe",
-                        "amount": 2,
+                        "key": "EquipmentHats105",
+                        "name": "Marbiglass Headdress Detailed Recipe",
+                        "amount": 50,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentPunching9",
-                        "name": "Crackled Skull Destroyer Recipe",
-                        "amount": 4,
-                        "type": "recipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentPunching9",
-                        "name": "Crackled Skull Destroyer Detailed Recipe",
-                        "amount": 4,
+                        "key": "EquipmentShirts37",
+                        "name": "Marbiglass Tunic Detailed Recipe",
+                        "amount": 30,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentSword7",
-                        "name": "Skull Lance Recipe",
-                        "amount": 4,
-                        "type": "recipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentSword7",
-                        "name": "Skull Lance Detailed Recipe",
-                        "amount": 4,
+                        "key": "EquipmentPants29",
+                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "amount": 20,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentBows12",
-                        "name": "Spine Tingler Sniper Recipe",
-                        "amount": 4,
-                        "type": "recipe"
+                        "key": "EquipmentShoes37",
+                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "amount": 10,
+                        "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentBows12",
+                        "key": "EquipmentPunching10",
+                        "name": "Pentastud Slapper Detailed Recipe",
+                        "amount": 100,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword8",
+                        "name": "Elegant Spear Detailed Recipe",
+                        "amount": 30,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows13",
                         "name": "Spine Tingler Sniper Detailed Recipe",
-                        "amount": 4,
+                        "amount": 30,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentWands11",
-                        "name": "Staff of the Undead Plague Recipe",
-                        "amount": 4,
-                        "type": "recipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentWands11",
+                        "key": "EquipmentWands12",
                         "name": "Staff of the Undead Plague Detailed Recipe",
-                        "amount": 4,
+                        "amount": 30,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentPendant30",
-                        "name": "The Divine Scarf Recipe",
-                        "amount": 10,
-                        "type": "recipe"
+                        "key": "EquipmentHats106",
+                        "name": "Crown of the Gods Detailed Recipe",
+                        "amount": 50,
+                        "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentPendant30",
-                        "name": "The Divine Scarf Detailed Recipe",
+                        "key": "EquipmentShirts38",
+                        "name": "Robe of the Gods Detailed Recipe",
+                        "amount": 30,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPants30",
+                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "amount": 20,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes38",
+                        "name": "Devious Slippers of the Divine Detailed Recipe",
                         "amount": 10,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching11",
+                        "name": "Mittens of the Gods Detailed Recipe",
+                        "amount": 100,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Detailed Recipe",
+                        "amount": 30,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 30,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 30,
                         "type": "detRecipe"
                     }
                 ],
@@ -23196,6 +25912,20 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching10",
+                        "name": "Pentastud Slapper Detailed Recipe",
+                        "amount": 20000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching11",
+                        "name": "Mittens of the Gods Detailed Recipe",
+                        "amount": 20000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "BubbleRepo",
                         "key": "Kazam Cauldron@Atom Split",
                         "name": "Kazam Cauldron: Atom Split Bubble",
@@ -23243,6 +25973,20 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword8",
+                        "name": "Elegant Spear Detailed Recipe",
+                        "amount": 3000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Detailed Recipe",
+                        "amount": 3000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "BubbleRepo",
                         "key": "High-IQ Cauldron@Slabe Wisdom",
                         "name": "High-IQ Cauldron: Slabe Wisdom Bubble",
@@ -23278,6 +26022,20 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows12",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 4000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows13",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 4000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
                         "name": "Spine Tingler Sniper Detailed Recipe",
                         "amount": 4000000,
                         "type": "detRecipe"
@@ -23321,6 +26079,20 @@ export const initUsesRepo = () => {
                         "name": "Staff of the Undead Plague Detailed Recipe",
                         "amount": 5000000,
                         "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands12",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 5000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 5000000,
+                        "type": "detRecipe"
                     }
                 ],
                 "typeGen": TypeGenEnum.bCraft,
@@ -23359,48 +26131,899 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.aPendant,
                 "type": "Pendant"
             }),
-        new UsesBase("DesertB2", <UsesModel>{
+        new UsesBase("EquipmentHats83", <UsesModel>{
                 "uses": [
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats105",
+                        "name": "Marbiglass Headdress Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aHelmet,
+                "type": "Helmet"
+            }),
+        new UsesBase("Tree11", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats105",
+                        "name": "Marbiglass Headdress Recipe",
+                        "amount": 3000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats105",
+                        "name": "Marbiglass Headdress Detailed Recipe",
+                        "amount": 3000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet12",
+                        "name": "Marbiglass Hatchet Recipe",
+                        "amount": 3000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet12",
+                        "name": "Marbiglass Hatchet Detailed Recipe",
+                        "amount": 3000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats106",
+                        "name": "Crown of the Gods Detailed Recipe",
+                        "amount": 3000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet10",
+                        "name": "Annihilator of the Yggdrasil Detailed Recipe",
+                        "amount": 3000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "BubbleRepo",
-                        "key": "Power Cauldron@Big Meaty Claws",
-                        "name": "Power Cauldron: Big Meaty Claws Bubble",
+                        "key": "Vials@Willow Sippy",
+                        "name": "Vials: Willow Sippy",
                         "amount": "Lots",
-                        "type": "bubble"
+                        "type": "vial"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bLog,
+                "type": "Log"
+            }),
+        new UsesBase("MarbleBar", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats105",
+                        "name": "Marbiglass Headdress Recipe",
+                        "amount": 15000,
+                        "type": "recipe"
                     },
                     <UseModel>{
-                        "repoSource": "ItemRepo",
-                        "key": "StampC9",
-                        "name": "Card Stamp Material",
-                        "amount": "Lots",
-                        "type": "stamp"
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats105",
+                        "name": "Marbiglass Headdress Detailed Recipe",
+                        "amount": 15000,
+                        "type": "detRecipe"
                     },
                     <UseModel>{
-                        "repoSource": "PostOfficeRepo",
-                        "key": "Dudes Next Door",
-                        "name": "Dudes Next Door Order",
-                        "amount": "Lots",
-                        "type": "poBox"
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts37",
+                        "name": "Marbiglass Tunic Recipe",
+                        "amount": 10000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts37",
+                        "name": "Marbiglass Tunic Detailed Recipe",
+                        "amount": 10000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPants29",
+                        "name": "Spiked Leggings of the Divine Recipe",
+                        "amount": 10000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPants29",
+                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "amount": 10000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes37",
+                        "name": "Devious Slippers of the Divine Recipe",
+                        "amount": 10000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes37",
+                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "amount": 10000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools14",
+                        "name": "Marbiglass Pickaxe Recipe",
+                        "amount": 7500,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools14",
+                        "name": "Marbiglass Pickaxe Detailed Recipe",
+                        "amount": 7500,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats106",
+                        "name": "Crown of the Gods Detailed Recipe",
+                        "amount": 15000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts38",
+                        "name": "Robe of the Gods Detailed Recipe",
+                        "amount": 10000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPants30",
+                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "amount": 10000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes38",
+                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "amount": 10000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools15",
+                        "name": "Destroyer of the Mollo Gomme Detailed Recipe",
+                        "amount": 7500,
+                        "type": "detRecipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bBar,
+                "type": "Bar"
+            }),
+        new UsesBase("EquipmentShirts36", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts37",
+                        "name": "Marbiglass Tunic Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aShirt,
+                "type": "Shirt"
+            }),
+        new UsesBase("Fish10", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts37",
+                        "name": "Marbiglass Tunic Recipe",
+                        "amount": 2000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts37",
+                        "name": "Marbiglass Tunic Detailed Recipe",
+                        "amount": 2000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagFi10",
+                        "name": "Gargantuan Fish Pouch Recipe",
+                        "amount": 2000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagFi10",
+                        "name": "Gargantuan Fish Pouch Detailed Recipe",
+                        "amount": 2000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts38",
+                        "name": "Robe of the Gods Detailed Recipe",
+                        "amount": 2000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "NpcRepo",
+                        "key": "Omar Da Ogar@Helping Omar For the Final Time",
+                        "name": "Helping Omar For the Final Time Requirements",
+                        "amount": 1000,
+                        "type": "quest"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dFish,
+                "type": "Fish"
+            }),
+        new UsesBase("EquipmentPants27", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPants29",
+                        "name": "Spiked Leggings of the Divine Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aPants,
+                "type": "Pants"
+            }),
+        new UsesBase("SpiA1", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPants29",
+                        "name": "Spiked Leggings of the Divine Recipe",
+                        "amount": 5000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPants29",
+                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "amount": 5000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagM11",
+                        "name": "Gargantuan Matty Pouch Recipe",
+                        "amount": 3000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagM11",
+                        "name": "Gargantuan Matty Pouch Detailed Recipe",
+                        "amount": 3000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPants30",
+                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "amount": 5000000,
+                        "type": "detRecipe"
                     }
                 ],
                 "typeGen": TypeGenEnum.bCraft,
                 "type": "Monster Drop"
             }),
-        new UsesBase("CraftMat8", <UsesModel>{
+        new UsesBase("EquipmentShoes36", <UsesModel>{
                 "uses": [
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes37",
+                        "name": "Devious Slippers of the Divine Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aShoes,
+                "type": "Shoes"
+            }),
+        new UsesBase("Tree12", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes37",
+                        "name": "Devious Slippers of the Divine Recipe",
+                        "amount": 2500000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes37",
+                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "amount": 2500000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagT10",
+                        "name": "Gargantuan Chopping Pouch Recipe",
+                        "amount": 2000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagT10",
+                        "name": "Gargantuan Chopping Pouch Detailed Recipe",
+                        "amount": 2000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes38",
+                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "amount": 2500000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "ItemRepo",
+                        "key": "StampA41",
+                        "name": "Void Axe Stamp Material",
+                        "amount": "Lots",
+                        "type": "stamp"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bLog,
+                "type": "Log"
+            }),
+        new UsesBase("EquipmentPunching9", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching10",
+                        "name": "Pentastud Slapper Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aWeapon,
+                "type": "Fisticuff"
+            }),
+        new UsesBase("Bug11", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching10",
+                        "name": "Pentastud Slapper Recipe",
+                        "amount": 10000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching10",
+                        "name": "Pentastud Slapper Detailed Recipe",
+                        "amount": 10000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet11",
+                        "name": "Marbiglass Netting Recipe",
+                        "amount": 2000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet11",
+                        "name": "Marbiglass Netting Detailed Recipe",
+                        "amount": 2000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagB10",
+                        "name": "Gargantuan Bug Pouch Recipe",
+                        "amount": 2000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagB10",
+                        "name": "Gargantuan Bug Pouch Detailed Recipe",
+                        "amount": 2000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching11",
+                        "name": "Mittens of the Gods Detailed Recipe",
+                        "amount": 10000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet12",
+                        "name": "Wrangler of the Qoxzul Detailed Recipe",
+                        "amount": 2000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "BubbleRepo",
-                        "key": "Power Cauldron@Bappity Boopity",
-                        "name": "Power Cauldron: Bappity Boopity Bubble",
+                        "key": "Vials@Dreamy Drink",
+                        "name": "Vials: Dreamy Drink",
+                        "amount": "Lots",
+                        "type": "vial"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dBugs,
+                "type": "Bug"
+            }),
+        new UsesBase("SpiA2b", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching10",
+                        "name": "Pentastud Slapper Recipe",
+                        "amount": 10000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching10",
+                        "name": "Pentastud Slapper Detailed Recipe",
+                        "amount": 10000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagM11",
+                        "name": "Gargantuan Matty Pouch Recipe",
+                        "amount": 1000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagM11",
+                        "name": "Gargantuan Matty Pouch Detailed Recipe",
+                        "amount": 1000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching11",
+                        "name": "Mittens of the Gods Detailed Recipe",
+                        "amount": 10000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Power Cauldron@Endgame Eff I",
+                        "name": "Power Cauldron: Endgame Eff I Bubble",
                         "amount": "Lots",
                         "type": "bubble"
                     }
                 ],
                 "typeGen": TypeGenEnum.bCraft,
-                "type": "Material"
+                "type": "Monster Drop"
+            }),
+        new UsesBase("EquipmentSword7", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword8",
+                        "name": "Elegant Spear Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aWeapon,
+                "type": "Spear"
+            }),
+        new UsesBase("Bug12", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword8",
+                        "name": "Elegant Spear Recipe",
+                        "amount": 1000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword8",
+                        "name": "Elegant Spear Detailed Recipe",
+                        "amount": 1000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows13",
+                        "name": "Spine Tingler Sniper Recipe",
+                        "amount": 1000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows13",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 1000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands12",
+                        "name": "Staff of the Undead Plague Recipe",
+                        "amount": 1000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands12",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 1000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Detailed Recipe",
+                        "amount": 1000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 1000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 1000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Kazam Cauldron@Essence Boost",
+                        "name": "Kazam Cauldron: Essence Boost Bubble",
+                        "amount": "Lots",
+                        "type": "bubble"
+                    },
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Vials@Ladybug Serum",
+                        "name": "Vials: Ladybug Serum",
+                        "amount": "Lots",
+                        "type": "vial"
+                    },
+                    <UseModel>{
+                        "repoSource": "ItemRepo",
+                        "key": "StampB52",
+                        "name": "White Essence Stamp Material",
+                        "amount": "Lots",
+                        "type": "stamp"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dBugs,
+                "type": "Bug"
+            }),
+        new UsesBase("SpiA3", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword8",
+                        "name": "Elegant Spear Recipe",
+                        "amount": 4000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword8",
+                        "name": "Elegant Spear Detailed Recipe",
+                        "amount": 4000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagM11",
+                        "name": "Gargantuan Matty Pouch Recipe",
+                        "amount": 1200000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagM11",
+                        "name": "Gargantuan Matty Pouch Detailed Recipe",
+                        "amount": 1200000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Detailed Recipe",
+                        "amount": 4000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "ItemRepo",
+                        "key": "StampC23",
+                        "name": "Atomic Stamp Material",
+                        "amount": "Lots",
+                        "type": "stamp"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bCraft,
+                "type": "Monster Drop"
+            }),
+        new UsesBase("EquipmentBows12", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows13",
+                        "name": "Spine Tingler Sniper Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aWeapon,
+                "type": "Bow"
+            }),
+        new UsesBase("SpiA4", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows13",
+                        "name": "Spine Tingler Sniper Recipe",
+                        "amount": 4000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows13",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 4000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 4000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "ItemRepo",
+                        "key": "StampB49",
+                        "name": "Sneaky Peeky Stamp Material",
+                        "amount": "Lots",
+                        "type": "stamp"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bCraft,
+                "type": "Monster Drop"
+            }),
+        new UsesBase("EquipmentWands11", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands12",
+                        "name": "Staff of the Undead Plague Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aWeapon,
+                "type": "Wand"
+            }),
+        new UsesBase("SpiA5", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands12",
+                        "name": "Staff of the Undead Plague Recipe",
+                        "amount": 4000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands12",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 4000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 4000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Kazam Cauldron@Cropius Mapper",
+                        "name": "Kazam Cauldron: Cropius Mapper Bubble",
+                        "amount": "Lots",
+                        "type": "bubble"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bCraft,
+                "type": "Monster Drop"
+            }),
+        new UsesBase("EquipmentTools9", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools14",
+                        "name": "Marbiglass Pickaxe Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aPick,
+                "type": "Pickaxe"
+            }),
+        new UsesBase("Marble", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagMi10",
+                        "name": "Gargantuan Mining Pouch Recipe",
+                        "amount": 2000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagMi10",
+                        "name": "Gargantuan Mining Pouch Detailed Recipe",
+                        "amount": 2000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Vials@Marble Mocha",
+                        "name": "Vials: Marble Mocha",
+                        "amount": "Lots",
+                        "type": "vial"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bOre,
+                "type": "Ore"
+            }),
+        new UsesBase("EquipmentToolsHatchet9", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet12",
+                        "name": "Marbiglass Hatchet Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aHatchet,
+                "type": "Hatchet"
+            }),
+        new UsesBase("FishingRod10", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod11",
+                        "name": "Marbiglass Rod Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aFishingRod,
+                "type": "Fishing Rod"
+            }),
+        new UsesBase("Fish9", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod11",
+                        "name": "Marbiglass Rod Recipe",
+                        "amount": 2000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod11",
+                        "name": "Marbiglass Rod Detailed Recipe",
+                        "amount": 2000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod12",
+                        "name": "Angler of the Iliunne Detailed Recipe",
+                        "amount": 2000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "ItemRepo",
+                        "key": "StampB48",
+                        "name": "Crop Evo Stamp Material",
+                        "amount": "Lots",
+                        "type": "stamp"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dFish,
+                "type": "Fish"
+            }),
+        new UsesBase("CatchingNet10", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet11",
+                        "name": "Marbiglass Netting Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aBugNet,
+                "type": "Bug Catching Net"
+            }),
+        new UsesBase("TrapBoxSet8", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet9",
+                        "name": "Forbidden Traps Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aTrap,
+                "type": "Trap Box Set"
             }),
         new UsesBase("Refinery2", <UsesModel>{
                 "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet9",
+                        "name": "Forbidden Traps Recipe",
+                        "amount": 250000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet9",
+                        "name": "Forbidden Traps Detailed Recipe",
+                        "amount": 250000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagTr9",
+                        "name": "Gargantuan Critta Pouch Recipe",
+                        "amount": 300000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagTr9",
+                        "name": "Gargantuan Critta Pouch Detailed Recipe",
+                        "amount": 300000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet10",
+                        "name": "Containment of the Zrgyios Detailed Recipe",
+                        "amount": 250000,
+                        "type": "detRecipe"
+                    },
                     <UseModel>{
                         "repoSource": "BubbleRepo",
                         "key": "Power Cauldron@Carpenter",
@@ -23481,6 +27104,1043 @@ export const initUsesRepo = () => {
                 ],
                 "typeGen": TypeGenEnum.bCraft,
                 "type": "Refinery Salts"
+            }),
+        new UsesBase("WorshipSkull9", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull10",
+                        "name": "Cultist Skull Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aSkull,
+                "type": "Worship Skull"
+            }),
+        new UsesBase("FoodHealth17", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagF10",
+                        "name": "Gargantuan Food Pouch Recipe",
+                        "amount": 2000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagF10",
+                        "name": "Gargantuan Food Pouch Detailed Recipe",
+                        "amount": 2000000,
+                        "type": "detRecipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.cFood,
+                "type": "Health Food"
+            }),
+        new UsesBase("FoodG12", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagF10",
+                        "name": "Gargantuan Food Pouch Recipe",
+                        "amount": 500,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagF10",
+                        "name": "Gargantuan Food Pouch Detailed Recipe",
+                        "amount": 500,
+                        "type": "detRecipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.cFood,
+                "type": "Golden Food"
+            }),
+        new UsesBase("EquipmentHats105", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats106",
+                        "name": "Crown of the Gods Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aHelmet,
+                "type": "Helmet"
+            }),
+        new UsesBase("Fish12", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats106",
+                        "name": "Crown of the Gods Recipe",
+                        "amount": 10000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats106",
+                        "name": "Crown of the Gods Detailed Recipe",
+                        "amount": 10000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagFi11",
+                        "name": "Herculean Fish Pouch Recipe",
+                        "amount": 5000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagFi11",
+                        "name": "Herculean Fish Pouch Detailed Recipe",
+                        "amount": 5000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Vials@Flavorgil",
+                        "name": "Vials: Flavorgil",
+                        "amount": "Lots",
+                        "type": "vial"
+                    },
+                    <UseModel>{
+                        "repoSource": "ItemRepo",
+                        "key": "StampB53",
+                        "name": "Triad Essence Stamp Material",
+                        "amount": "Lots",
+                        "type": "stamp"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dFish,
+                "type": "Fish"
+            }),
+        new UsesBase("SpiD2", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats106",
+                        "name": "Crown of the Gods Recipe",
+                        "amount": 10000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats106",
+                        "name": "Crown of the Gods Detailed Recipe",
+                        "amount": 10000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet10",
+                        "name": "Annihilator of the Yggdrasil Recipe",
+                        "amount": 10000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet10",
+                        "name": "Annihilator of the Yggdrasil Detailed Recipe",
+                        "amount": 10000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagM12",
+                        "name": "Herculean Matty Pouch Recipe",
+                        "amount": 3000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagM12",
+                        "name": "Herculean Matty Pouch Detailed Recipe",
+                        "amount": 3000000,
+                        "type": "detRecipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bCraft,
+                "type": "Monster Drop"
+            }),
+        new UsesBase("GodshardBar", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats106",
+                        "name": "Crown of the Gods Recipe",
+                        "amount": 150000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats106",
+                        "name": "Crown of the Gods Detailed Recipe",
+                        "amount": 150000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts38",
+                        "name": "Robe of the Gods Recipe",
+                        "amount": 120000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts38",
+                        "name": "Robe of the Gods Detailed Recipe",
+                        "amount": 120000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPants30",
+                        "name": "Spiked Leggings of the Divine Recipe",
+                        "amount": 100000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPants30",
+                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "amount": 100000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes38",
+                        "name": "Devious Slippers of the Divine Recipe",
+                        "amount": 100000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes38",
+                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "amount": 100000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching11",
+                        "name": "Mittens of the Gods Recipe",
+                        "amount": 1000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching11",
+                        "name": "Mittens of the Gods Detailed Recipe",
+                        "amount": 1000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Recipe",
+                        "amount": 150000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Detailed Recipe",
+                        "amount": 150000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
+                        "name": "Spine Tingler Sniper Recipe",
+                        "amount": 150000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 150000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
+                        "name": "Staff of the Undead Plague Recipe",
+                        "amount": 150000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 150000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools15",
+                        "name": "Destroyer of the Mollo Gomme Recipe",
+                        "amount": 10000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools15",
+                        "name": "Destroyer of the Mollo Gomme Detailed Recipe",
+                        "amount": 10000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet10",
+                        "name": "Annihilator of the Yggdrasil Recipe",
+                        "amount": 30000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet10",
+                        "name": "Annihilator of the Yggdrasil Detailed Recipe",
+                        "amount": 30000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod12",
+                        "name": "Angler of the Iliunne Recipe",
+                        "amount": 30000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod12",
+                        "name": "Angler of the Iliunne Detailed Recipe",
+                        "amount": 30000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet12",
+                        "name": "Wrangler of the Qoxzul Recipe",
+                        "amount": 40000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet12",
+                        "name": "Wrangler of the Qoxzul Detailed Recipe",
+                        "amount": 40000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet10",
+                        "name": "Containment of the Zrgyios Recipe",
+                        "amount": 50000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet10",
+                        "name": "Containment of the Zrgyios Detailed Recipe",
+                        "amount": 50000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull11",
+                        "name": "Crystal Skull of Esquire Vnoze Recipe",
+                        "amount": 50000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull11",
+                        "name": "Crystal Skull of Esquire Vnoze Detailed Recipe",
+                        "amount": 50000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Vials@Dabar Special",
+                        "name": "Vials: Dabar Special",
+                        "amount": "Lots",
+                        "type": "vial"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bBar,
+                "type": "Bar"
+            }),
+        new UsesBase("EquipmentShirts37", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts38",
+                        "name": "Robe of the Gods Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aShirt,
+                "type": "Shirt"
+            }),
+        new UsesBase("Tree13", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts38",
+                        "name": "Robe of the Gods Recipe",
+                        "amount": 10000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts38",
+                        "name": "Robe of the Gods Detailed Recipe",
+                        "amount": 10000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Recipe",
+                        "amount": 10000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Detailed Recipe",
+                        "amount": 10000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
+                        "name": "Spine Tingler Sniper Recipe",
+                        "amount": 10000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
+                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "amount": 10000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
+                        "name": "Staff of the Undead Plague Recipe",
+                        "amount": 10000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
+                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "amount": 10000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet10",
+                        "name": "Annihilator of the Yggdrasil Recipe",
+                        "amount": 10000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet10",
+                        "name": "Annihilator of the Yggdrasil Detailed Recipe",
+                        "amount": 10000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagT11",
+                        "name": "Herculean Chopping Pouch Recipe",
+                        "amount": 5000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagT11",
+                        "name": "Herculean Chopping Pouch Detailed Recipe",
+                        "amount": 5000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Vials@Ded Sap",
+                        "name": "Vials: Ded Sap",
+                        "amount": "Lots",
+                        "type": "vial"
+                    },
+                    <UseModel>{
+                        "repoSource": "ItemRepo",
+                        "key": "StampB54",
+                        "name": "Dark Triad Essence Stamp Material",
+                        "amount": "Lots",
+                        "type": "stamp"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bLog,
+                "type": "Log"
+            }),
+        new UsesBase("SpiC1", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts38",
+                        "name": "Robe of the Gods Recipe",
+                        "amount": 10000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts38",
+                        "name": "Robe of the Gods Detailed Recipe",
+                        "amount": 10000000,
+                        "type": "detRecipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bCraft,
+                "type": "Monster Drop"
+            }),
+        new UsesBase("EquipmentPants29", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPants30",
+                        "name": "Spiked Leggings of the Divine Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aPants,
+                "type": "Pants"
+            }),
+        new UsesBase("Soul7", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPants30",
+                        "name": "Spiked Leggings of the Divine Recipe",
+                        "amount": 10000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPants30",
+                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "amount": 10000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull11",
+                        "name": "Crystal Skull of Esquire Vnoze Recipe",
+                        "amount": 5000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull11",
+                        "name": "Crystal Skull of Esquire Vnoze Detailed Recipe",
+                        "amount": 5000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagS10",
+                        "name": "Herculean Soul Pouch Recipe",
+                        "amount": 5000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagS10",
+                        "name": "Herculean Soul Pouch Detailed Recipe",
+                        "amount": 5000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Vials@Refreshment",
+                        "name": "Vials: Refreshment",
+                        "amount": "Lots",
+                        "type": "vial"
+                    },
+                    <UseModel>{
+                        "repoSource": "ItemRepo",
+                        "key": "StampB51",
+                        "name": "Summoner Stone Stamp Material",
+                        "amount": "Lots",
+                        "type": "stamp"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dSouls,
+                "type": "Soul"
+            }),
+        new UsesBase("SpiB4", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPants30",
+                        "name": "Spiked Leggings of the Divine Recipe",
+                        "amount": 10000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPants30",
+                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "amount": 10000000,
+                        "type": "detRecipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bCraft,
+                "type": "Monster Drop"
+            }),
+        new UsesBase("EquipmentShoes37", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes38",
+                        "name": "Devious Slippers of the Divine Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aShoes,
+                "type": "Shoes"
+            }),
+        new UsesBase("Bug13", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes38",
+                        "name": "Devious Slippers of the Divine Recipe",
+                        "amount": 10000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes38",
+                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "amount": 10000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet12",
+                        "name": "Wrangler of the Qoxzul Recipe",
+                        "amount": 5000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet12",
+                        "name": "Wrangler of the Qoxzul Detailed Recipe",
+                        "amount": 5000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagB11",
+                        "name": "Herculean Bug Pouch Recipe",
+                        "amount": 5000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagB11",
+                        "name": "Herculean Bug Pouch Detailed Recipe",
+                        "amount": 5000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Quicc Cauldron@Tome Agility",
+                        "name": "Quicc Cauldron: Tome Agility Bubble",
+                        "amount": "Lots",
+                        "type": "bubble"
+                    },
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Vials@Firefly Grog",
+                        "name": "Vials: Firefly Grog",
+                        "amount": "Lots",
+                        "type": "vial"
+                    },
+                    <UseModel>{
+                        "repoSource": "ItemRepo",
+                        "key": "StampA42",
+                        "name": "Captalist Stats Stamp Material",
+                        "amount": "Lots",
+                        "type": "stamp"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dBugs,
+                "type": "Bug"
+            }),
+        new UsesBase("SpiB3", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes38",
+                        "name": "Devious Slippers of the Divine Recipe",
+                        "amount": 10000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes38",
+                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "amount": 10000000,
+                        "type": "detRecipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bCraft,
+                "type": "Monster Drop"
+            }),
+        new UsesBase("EquipmentPunching10", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching11",
+                        "name": "Mittens of the Gods Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aWeapon,
+                "type": "Fisticuff"
+            }),
+        new UsesBase("SpiB2b", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching11",
+                        "name": "Mittens of the Gods Recipe",
+                        "amount": 1000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentPunching11",
+                        "name": "Mittens of the Gods Detailed Recipe",
+                        "amount": 1000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagM12",
+                        "name": "Herculean Matty Pouch Recipe",
+                        "amount": 5000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagM12",
+                        "name": "Herculean Matty Pouch Detailed Recipe",
+                        "amount": 5000,
+                        "type": "detRecipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bCraft,
+                "type": "Monster Drop"
+            }),
+        new UsesBase("EquipmentSword8", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSword9",
+                        "name": "Godbreaker Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aWeapon,
+                "type": "Spear"
+            }),
+        new UsesBase("EquipmentBows13", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentBows14",
+                        "name": "Spine Tingler Sniper Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aWeapon,
+                "type": "Bow"
+            }),
+        new UsesBase("EquipmentWands12", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentWands13",
+                        "name": "Staff of the Undead Plague Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aWeapon,
+                "type": "Wand"
+            }),
+        new UsesBase("EquipmentTools14", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools15",
+                        "name": "Destroyer of the Mollo Gomme Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aPick,
+                "type": "Pickaxe"
+            }),
+        new UsesBase("SpiD1", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools15",
+                        "name": "Destroyer of the Mollo Gomme Recipe",
+                        "amount": 5000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentTools15",
+                        "name": "Destroyer of the Mollo Gomme Detailed Recipe",
+                        "amount": 5000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagM12",
+                        "name": "Herculean Matty Pouch Recipe",
+                        "amount": 1000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagM12",
+                        "name": "Herculean Matty Pouch Detailed Recipe",
+                        "amount": 1000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Kazam Cauldron@Lo Cost Mo Jade",
+                        "name": "Kazam Cauldron: Lo Cost Mo Jade Bubble",
+                        "amount": "Lots",
+                        "type": "bubble"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bCraft,
+                "type": "Monster Drop"
+            }),
+        new UsesBase("Godshard", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagMi11",
+                        "name": "Herculean Mining Pouch Recipe",
+                        "amount": 5000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagMi11",
+                        "name": "Herculean Mining Pouch Detailed Recipe",
+                        "amount": 5000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "ItemRepo",
+                        "key": "StampC10",
+                        "name": "Forge Stamp Material",
+                        "amount": "Lots",
+                        "type": "stamp"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bOre,
+                "type": "Ore"
+            }),
+        new UsesBase("EquipmentToolsHatchet12", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentToolsHatchet10",
+                        "name": "Annihilator of the Yggdrasil Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aHatchet,
+                "type": "Hatchet"
+            }),
+        new UsesBase("FishingRod11", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod12",
+                        "name": "Angler of the Iliunne Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aFishingRod,
+                "type": "Fishing Rod"
+            }),
+        new UsesBase("Fish11", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod12",
+                        "name": "Angler of the Iliunne Recipe",
+                        "amount": 5000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FishingRod12",
+                        "name": "Angler of the Iliunne Detailed Recipe",
+                        "amount": 5000000,
+                        "type": "detRecipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dFish,
+                "type": "Fish"
+            }),
+        new UsesBase("CatchingNet11", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "CatchingNet12",
+                        "name": "Wrangler of the Qoxzul Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aBugNet,
+                "type": "Bug Catching Net"
+            }),
+        new UsesBase("TrapBoxSet9", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "TrapBoxSet10",
+                        "name": "Containment of the Zrgyios Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aTrap,
+                "type": "Trap Box Set"
+            }),
+        new UsesBase("WorshipSkull10", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "WorshipSkull11",
+                        "name": "Crystal Skull of Esquire Vnoze Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aSkull,
+                "type": "Worship Skull"
+            }),
+        new UsesBase("FoodHealth16", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagF11",
+                        "name": "Herculean Food Pouch Recipe",
+                        "amount": 10000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagF11",
+                        "name": "Herculean Food Pouch Detailed Recipe",
+                        "amount": 10000000,
+                        "type": "detRecipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.cFood,
+                "type": "Health Food"
+            }),
+        new UsesBase("FoodG11", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagF11",
+                        "name": "Herculean Food Pouch Recipe",
+                        "amount": 30000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagF11",
+                        "name": "Herculean Food Pouch Detailed Recipe",
+                        "amount": 30000,
+                        "type": "detRecipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.cFood,
+                "type": "Golden Food"
+            }),
+        new UsesBase("DesertB2", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Power Cauldron@Big Meaty Claws",
+                        "name": "Power Cauldron: Big Meaty Claws Bubble",
+                        "amount": "Lots",
+                        "type": "bubble"
+                    },
+                    <UseModel>{
+                        "repoSource": "ItemRepo",
+                        "key": "StampC9",
+                        "name": "Card Stamp Material",
+                        "amount": "Lots",
+                        "type": "stamp"
+                    },
+                    <UseModel>{
+                        "repoSource": "PostOfficeRepo",
+                        "key": "Dudes Next Door",
+                        "name": "Dudes Next Door Order",
+                        "amount": "Lots",
+                        "type": "poBox"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bCraft,
+                "type": "Monster Drop"
+            }),
+        new UsesBase("CraftMat8", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Power Cauldron@Bappity Boopity",
+                        "name": "Power Cauldron: Bappity Boopity Bubble",
+                        "amount": "Lots",
+                        "type": "bubble"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bCraft,
+                "type": "Material"
             }),
         new UsesBase("GalaxyA3", <UsesModel>{
                 "uses": [
@@ -23636,6 +28296,45 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.dQuest,
                 "type": "Sail Treasure"
             }),
+        new UsesBase("W6item1", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Power Cauldron@Farquad Force",
+                        "name": "Power Cauldron: Farquad Force Bubble",
+                        "amount": "Lots",
+                        "type": "bubble"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dQuest,
+                "type": "Sail Treasure"
+            }),
+        new UsesBase("W6item8", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Power Cauldron@Tome Strength",
+                        "name": "Power Cauldron: Tome Strength Bubble",
+                        "amount": "Lots",
+                        "type": "bubble"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dQuest,
+                "type": "Sail Treasure"
+            }),
+        new UsesBase("W6item10", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Power Cauldron@Crop Chapter",
+                        "name": "Power Cauldron: Crop Chapter Bubble",
+                        "amount": "Lots",
+                        "type": "bubble"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dQuest,
+                "type": "Sail Treasure"
+            }),
         new UsesBase("DesertB1", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -23743,6 +28442,52 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.dQuest,
                 "type": "Sail Treasure"
             }),
+        new UsesBase("W6item0", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Quicc Cauldron@Quickdraw Quiver",
+                        "name": "Quicc Cauldron: Quickdraw Quiver Bubble",
+                        "amount": "Lots",
+                        "type": "bubble"
+                    },
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "High-IQ Cauldron@Essence Chapter",
+                        "name": "High-IQ Cauldron: Essence Chapter Bubble",
+                        "amount": "Lots",
+                        "type": "bubble"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dQuest,
+                "type": "Sail Treasure"
+            }),
+        new UsesBase("W6item3", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Quicc Cauldron@Endgame Eff Ii",
+                        "name": "Quicc Cauldron: Endgame Eff Ii Bubble",
+                        "amount": "Lots",
+                        "type": "bubble"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dQuest,
+                "type": "Sail Treasure"
+            }),
+        new UsesBase("W6item5", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Quicc Cauldron@Stealth Chapter",
+                        "name": "Quicc Cauldron: Stealth Chapter Bubble",
+                        "amount": "Lots",
+                        "type": "bubble"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dQuest,
+                "type": "Sail Treasure"
+            }),
         new UsesBase("SnowC1", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -23796,6 +28541,45 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.dQuest,
                 "type": "Sail Treasure"
             }),
+        new UsesBase("W6item6", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "High-IQ Cauldron@Smarter Spells",
+                        "name": "High-IQ Cauldron: Smarter Spells Bubble",
+                        "amount": "Lots",
+                        "type": "bubble"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dQuest,
+                "type": "Sail Treasure"
+            }),
+        new UsesBase("W6item7", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "High-IQ Cauldron@Endgame Eff Iii",
+                        "name": "High-IQ Cauldron: Endgame Eff Iii Bubble",
+                        "amount": "Lots",
+                        "type": "bubble"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dQuest,
+                "type": "Sail Treasure"
+            }),
+        new UsesBase("W6item4", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "High-IQ Cauldron@Tome Wisdom",
+                        "name": "High-IQ Cauldron: Tome Wisdom Bubble",
+                        "amount": "Lots",
+                        "type": "bubble"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dQuest,
+                "type": "Sail Treasure"
+            }),
         new UsesBase("Critter3", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -23836,6 +28620,32 @@ export const initUsesRepo = () => {
                         "repoSource": "BubbleRepo",
                         "key": "Kazam Cauldron@Big P",
                         "name": "Kazam Cauldron: Big P Bubble",
+                        "amount": "Lots",
+                        "type": "bubble"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dQuest,
+                "type": "Sail Treasure"
+            }),
+        new UsesBase("W6item2", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Kazam Cauldron@Hinge Buster",
+                        "name": "Kazam Cauldron: Hinge Buster Bubble",
+                        "amount": "Lots",
+                        "type": "bubble"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dQuest,
+                "type": "Sail Treasure"
+            }),
+        new UsesBase("W6item9", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Kazam Cauldron@Ninja Looter",
+                        "name": "Kazam Cauldron: Ninja Looter Bubble",
                         "amount": "Lots",
                         "type": "bubble"
                     }
@@ -24072,32 +28882,6 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.bCraft,
                 "type": "Monster Drop"
             }),
-        new UsesBase("Marble", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "BubbleRepo",
-                        "key": "Vials@Marble Mocha",
-                        "name": "Vials: Marble Mocha",
-                        "amount": "Lots",
-                        "type": "vial"
-                    }
-                ],
-                "typeGen": TypeGenEnum.bOre,
-                "type": "Ore"
-            }),
-        new UsesBase("Tree11", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "BubbleRepo",
-                        "key": "Vials@Willow Sippy",
-                        "name": "Vials: Willow Sippy",
-                        "amount": "Lots",
-                        "type": "vial"
-                    }
-                ],
-                "typeGen": TypeGenEnum.bLog,
-                "type": "Log"
-            }),
         new UsesBase("Fish13", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -24111,18 +28895,64 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.dFish,
                 "type": "Fish"
             }),
-        new UsesBase("Bug11", <UsesModel>{
+        new UsesBase("SpiA2", <UsesModel>{
                 "uses": [
                     <UseModel>{
                         "repoSource": "BubbleRepo",
-                        "key": "Vials@Dreamy Drink",
-                        "name": "Vials: Dreamy Drink",
+                        "key": "Vials@Ricecakorade",
+                        "name": "Vials: Ricecakorade",
+                        "amount": "Lots",
+                        "type": "vial"
+                    },
+                    <UseModel>{
+                        "repoSource": "ItemRepo",
+                        "key": "StampA40",
+                        "name": "Void Sword Stamp Material",
+                        "amount": "Lots",
+                        "type": "stamp"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bCraft,
+                "type": "Monster Drop"
+            }),
+        new UsesBase("SpiB1", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Vials@Greenleaf Tea",
+                        "name": "Vials: Greenleaf Tea",
                         "amount": "Lots",
                         "type": "vial"
                     }
                 ],
-                "typeGen": TypeGenEnum.dBugs,
-                "type": "Bug"
+                "typeGen": TypeGenEnum.bCraft,
+                "type": "Monster Drop"
+            }),
+        new UsesBase("SpiC2", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Vials@Gibbed Drink",
+                        "name": "Vials: Gibbed Drink",
+                        "amount": "Lots",
+                        "type": "vial"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bCraft,
+                "type": "Monster Drop"
+            }),
+        new UsesBase("SpiD3", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Vials@Royale Cola",
+                        "name": "Vials: Royale Cola",
+                        "amount": "Lots",
+                        "type": "vial"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bCraft,
+                "type": "Monster Drop"
             }),
         new UsesBase("EquipmentToolsHatchet3", <UsesModel>{
                 "uses": [
@@ -24274,6 +29104,26 @@ export const initUsesRepo = () => {
                 ],
                 "typeGen": TypeGenEnum.cFood,
                 "type": "Golden Food"
+            }),
+        new UsesBase("SnowA4", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "ItemRepo",
+                        "key": "StampC12",
+                        "name": "Sigil Stamp Material",
+                        "amount": "Lots",
+                        "type": "stamp"
+                    },
+                    <UseModel>{
+                        "repoSource": "PostOfficeRepo",
+                        "key": "Alpine Suppliers",
+                        "name": "Alpine Suppliers Order",
+                        "amount": "Lots",
+                        "type": "poBox"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bCraft,
+                "type": "Monster Drop"
             }),
         new UsesBase("Leaf3", <UsesModel>{
                 "uses": [
@@ -24976,19 +29826,6 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.dTimeCandy,
                 "type": "Time Candy"
             }),
-        new UsesBase("Fish10", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "NpcRepo",
-                        "key": "Omar Da Ogar@Helping Omar For the Final Time",
-                        "name": "Helping Omar For the Final Time Requirements",
-                        "amount": 1000,
-                        "type": "quest"
-                    }
-                ],
-                "typeGen": TypeGenEnum.dFish,
-                "type": "Fish"
-            }),
         new UsesBase("Sewers3", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -25370,26 +30207,6 @@ export const initUsesRepo = () => {
                         "name": "A Royal Gift Requirements",
                         "amount": 10000000,
                         "type": "quest"
-                    }
-                ],
-                "typeGen": TypeGenEnum.bCraft,
-                "type": "Monster Drop"
-            }),
-        new UsesBase("SnowC2", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "BuildingRepo",
-                        "key": "Automation Arm",
-                        "name": "Automation Arm Requirements",
-                        "amount": "Lots",
-                        "type": "building"
-                    },
-                    <UseModel>{
-                        "repoSource": "PostOfficeRepo",
-                        "key": "Alpine Suppliers",
-                        "name": "Alpine Suppliers Order",
-                        "amount": "Lots",
-                        "type": "poBox"
                     }
                 ],
                 "typeGen": TypeGenEnum.bCraft,

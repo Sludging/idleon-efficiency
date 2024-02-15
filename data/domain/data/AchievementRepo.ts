@@ -695,7 +695,7 @@ export const initAchievementRepo = () => {
         new AchievementBase(98, <AchievementModel>{
                 "name": "Trial by Time",
                 "qty": 1,
-                "desc": "Run from Town to Efaunt's Tomb in under 2 minutes, with less than 132% move speed. No teleporting.",
+                "desc": "Run from Town to Efaunt's Tomb in under 2 minutes. No teleporting using the World Map.",
                 "rewards": "*2% Arcade balls/hr",
                 "world": "Yum-Yum Desert"
             }),
@@ -1108,7 +1108,7 @@ export const initAchievementRepo = () => {
         new AchievementBase(157, <AchievementModel>{
                 "name": "Giant Slayer",
                 "qty": 25,
-                "desc": "Defeat 5 Giant Mobs of each type Bloque, Mamooth, Snowman, Penguin, & Thermister. Do it in that monster order.",
+                "desc": "Defeat 5 Giant Mobs of each type Bloque, Mamooth, Snowman, Penguin, Thermister. Do it in that monster order.",
                 "rewards": "*Tundra Outback BG &for Title Screen",
                 "world": "Frostbite Tundra"
             }),

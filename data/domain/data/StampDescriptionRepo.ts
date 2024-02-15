@@ -46,7 +46,10 @@ export const initStampDescriptionRepo = () => {
                     "+{ LUK",
                     "+{% Total Damage",
                     "+{% Drop Rate",
-                    "+{ All Stats."
+                    "+{ All Stats.",
+                    "+{ Base Damage",
+                    "+{% Total Damage",
+                    "+{% All Stats"
                 ]
             }),
         new StampDescriptionBase("Skills Stamp", <StampDescriptionModel>{
@@ -97,7 +100,14 @@ export const initStampDescriptionRepo = () => {
                     "+{% Gaming EXP Gain",
                     "+{% Divinity EXP Gain",
                     "+{ All Skill Efficiency",
-                    "+{% Fishing Efficiency per Fishing Lv"
+                    "+{% Fishing Efficiency per Fishing Lv",
+                    "+{% Crop Evolution Chance",
+                    "+{% Sneaking EXP Gain",
+                    "+{% Jade Coin Gain",
+                    "+{% Summoning EXP Gain",
+                    "+{% White Essence Gain",
+                    "+{% G, Y, B Essence Gain",
+                    "+{% P, R, C Essence Gain"
                 ]
             }),
         new StampDescriptionBase("Misc Stamp", <StampDescriptionModel>{
@@ -111,9 +121,9 @@ export const initStampDescriptionRepo = () => {
                     "+{% Effect from Golden Food. Sparkle sparkle!",
                     "+{hr Arcade Ball claim max time",
                     "+{% Card Drop Rate. Go get them cards boy-o!",
-                    "+{",
-                    "+{",
-                    "+{",
+                    "+{% Forge Max Capacity",
+                    "+{% Shop Stock Quantity",
+                    "+{% Sigil Charge rate",
                     "+{ Talent Points for Tab 1",
                     "+{ Talent Points for Tab 2",
                     "+{ Talent Points for Tab 3",
@@ -123,7 +133,8 @@ export const initStampDescriptionRepo = () => {
                     "+{% Base Multikill Rate, for all worlds.",
                     "+{% Talent Book Library Refresh Speed",
                     "+{% DNA gained from Splicing",
-                    "+{% Faster refinery cycles"
+                    "+{% Faster refinery cycles",
+                    "+{% Lower Atom Upgrade Costs"
                 ]
             })    
 ]

@@ -52,6 +52,7 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Starfire", "quantity": 2, "chance": 0},
                     <DetDropModel>{"source": "Dreadlo", "quantity": 2, "chance": 0},
                     <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 0},
+                    <DetDropModel>{"source": "Godshard", "quantity": 2, "chance": 0},
                     <DetDropModel>{"source": "Crystal0", "quantity": 1, "chance": 0},
                     <DetDropModel>{"source": "OakTree", "quantity": 1, "chance": 0},
                     <DetDropModel>{"source": "BirchTree", "quantity": 1, "chance": 0},
@@ -102,6 +103,7 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Starfire", "quantity": 2, "chance": 0},
                     <DetDropModel>{"source": "Dreadlo", "quantity": 2, "chance": 0},
                     <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 0},
+                    <DetDropModel>{"source": "Godshard", "quantity": 2, "chance": 0},
                     <DetDropModel>{"source": "Crystal0", "quantity": 1, "chance": 0},
                     <DetDropModel>{"source": "OakTree", "quantity": 1, "chance": 0},
                     <DetDropModel>{"source": "BirchTree", "quantity": 1, "chance": 0},
@@ -372,6 +374,8 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Crystal4", "quantity": 1, "chance": 0},
                     <DetDropModel>{"source": "Tree10", "quantity": 1, "chance": 0},
                     <DetDropModel>{"source": "Tree11", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "Tree12", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "Tree13", "quantity": 1, "chance": 0},
                     <DetDropModel>{"source": "Crystal4", "quantity": 1, "chance": 0},
                     <DetDropModel>{"source": "w5a1", "quantity": 1, "chance": 0},
                     <DetDropModel>{"source": "w5a2", "quantity": 1, "chance": 0},
@@ -401,6 +405,48 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Crystal4", "quantity": 1, "chance": 0},
                     <DetDropModel>{"source": "Tree10", "quantity": 1, "chance": 0},
                     <DetDropModel>{"source": "Tree11", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "Tree12", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "Tree13", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6a1", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6a2", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6a3", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6a4", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6a5", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "Bug12", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6b1", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6b2", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6b3", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6b4", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "Bug13", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6c1", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6c2", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6d1", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6d2", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6d3", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6a1", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6a2", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6a3", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6a4", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6a5", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "Bug12", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6b1", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6b2", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6b3", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6b4", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "Bug13", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6c1", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6c2", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6d1", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6d2", "quantity": 1, "chance": 0},
+                    <DetDropModel>{"source": "w6d3", "quantity": 1, "chance": 0},
                     <DetDropModel>{"source": "frogGG", "quantity": 25000, "chance": 1},
                     <DetDropModel>{"source": "frogGR2", "quantity": 25000, "chance": 1},
                     <DetDropModel>{"source": "frogGR3", "quantity": 25000, "chance": 1},
@@ -419,6 +465,7 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Crystal2", "quantity": 1, "chance": 0.5},
                     <DetDropModel>{"source": "Crystal3", "quantity": 1, "chance": 0.5},
                     <DetDropModel>{"source": "Crystal4", "quantity": 1, "chance": 0.5},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 0.5},
                     <DetDropModel>{"source": "mushG", "quantity": 1, "chance": 0.5},
                     <DetDropModel>{"source": "mushR", "quantity": 6, "chance": 0.5},
                     <DetDropModel>{"source": "mushW", "quantity": 40, "chance": 0.5},
@@ -517,6 +564,23 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "rift3", "quantity": 6000, "chance": 0},
                     <DetDropModel>{"source": "rift4", "quantity": 6000, "chance": 0},
                     <DetDropModel>{"source": "rift5", "quantity": 6000, "chance": 0},
+                    <DetDropModel>{"source": "w6a1", "quantity": 65000, "chance": 0.5},
+                    <DetDropModel>{"source": "w6a2", "quantity": 72000, "chance": 0.5},
+                    <DetDropModel>{"source": "w6a3", "quantity": 80000, "chance": 0.5},
+                    <DetDropModel>{"source": "w6a4", "quantity": 89000, "chance": 0.5},
+                    <DetDropModel>{"source": "w6a5", "quantity": 98500, "chance": 0.5},
+                    <DetDropModel>{"source": "w6b1", "quantity": 130000, "chance": 0.5},
+                    <DetDropModel>{"source": "w6b2", "quantity": 145000, "chance": 0.5},
+                    <DetDropModel>{"source": "w6b3", "quantity": 160000, "chance": 0.5},
+                    <DetDropModel>{"source": "w6b4", "quantity": 175000, "chance": 0.5},
+                    <DetDropModel>{"source": "w6c1", "quantity": 200000, "chance": 0.5},
+                    <DetDropModel>{"source": "w6c2", "quantity": 230000, "chance": 0.5},
+                    <DetDropModel>{"source": "w6d1", "quantity": 350000, "chance": 0.5},
+                    <DetDropModel>{"source": "w6d2", "quantity": 400000, "chance": 0.5},
+                    <DetDropModel>{"source": "w6d3", "quantity": 500000, "chance": 0.5},
+                    <DetDropModel>{"source": "Boss6A", "quantity": 1000000, "chance": 1},
+                    <DetDropModel>{"source": "Boss6B", "quantity": 5000000, "chance": 1},
+                    <DetDropModel>{"source": "Boss6C", "quantity": 20000000, "chance": 1},
                     <DetDropModel>{"source": "ChestA1", "quantity": 100, "chance": 1},
                     <DetDropModel>{"source": "ChestB1", "quantity": 400, "chance": 1},
                     <DetDropModel>{"source": "ChestC1", "quantity": 1250, "chance": 1},
@@ -572,6 +636,8 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Tree9", "quantity": 0, "chance": 0},
                     <DetDropModel>{"source": "Tree10", "quantity": 0, "chance": 0},
                     <DetDropModel>{"source": "Tree11", "quantity": 0, "chance": 0},
+                    <DetDropModel>{"source": "Tree12", "quantity": 0, "chance": 0},
+                    <DetDropModel>{"source": "Tree13", "quantity": 0, "chance": 0},
                     <DetDropModel>{"source": "FishSmall", "quantity": 0, "chance": 0},
                     <DetDropModel>{"source": "FishMed", "quantity": 0, "chance": 0},
                     <DetDropModel>{"source": "FishBig", "quantity": 0, "chance": 0},
@@ -599,6 +665,9 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "BugNest8", "quantity": 0, "chance": 0},
                     <DetDropModel>{"source": "BugNest9", "quantity": 0, "chance": 0},
                     <DetDropModel>{"source": "BugNest10", "quantity": 0, "chance": 0},
+                    <DetDropModel>{"source": "BugNest11", "quantity": 0, "chance": 0},
+                    <DetDropModel>{"source": "BugNest12", "quantity": 0, "chance": 0},
+                    <DetDropModel>{"source": "BugNest13", "quantity": 0, "chance": 0},
                     <DetDropModel>{"source": "Bug1", "quantity": 0, "chance": 0},
                     <DetDropModel>{"source": "Bug2", "quantity": 0, "chance": 0},
                     <DetDropModel>{"source": "Bug3", "quantity": 0, "chance": 0},
@@ -610,6 +679,9 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Bug9", "quantity": 0, "chance": 0},
                     <DetDropModel>{"source": "Bug10", "quantity": 0, "chance": 0},
                     <DetDropModel>{"source": "Bug11", "quantity": 0, "chance": 0},
+                    <DetDropModel>{"source": "Bug12", "quantity": 0, "chance": 0},
+                    <DetDropModel>{"source": "Bug13", "quantity": 0, "chance": 0},
+                    <DetDropModel>{"source": "SoulCard7", "quantity": 0, "chance": 0},
                     <DetDropModel>{"source": "CritterCard10", "quantity": 0, "chance": 0}
                 ]
             }),
@@ -854,7 +926,27 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "w5c1", "quantity": 8, "chance": 0.0014},
                     <DetDropModel>{"source": "w5c2", "quantity": 8, "chance": 0.00175},
                     <DetDropModel>{"source": "Boss5A", "quantity": 16, "chance": 0.5},
-                    <DetDropModel>{"source": "Boss5B", "quantity": 16, "chance": 0.5}
+                    <DetDropModel>{"source": "Boss5B", "quantity": 16, "chance": 0.5},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 8, "chance": 0.15},
+                    <DetDropModel>{"source": "w6a1", "quantity": 8, "chance": 0.00125},
+                    <DetDropModel>{"source": "w6a2", "quantity": 8, "chance": 0.0014},
+                    <DetDropModel>{"source": "w6a3", "quantity": 8, "chance": 0.00155},
+                    <DetDropModel>{"source": "w6a4", "quantity": 8, "chance": 0.0017},
+                    <DetDropModel>{"source": "w6a5", "quantity": 8, "chance": 0.00185},
+                    <DetDropModel>{"source": "Bug12", "quantity": 8, "chance": 0.0075},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 8, "chance": 0.1},
+                    <DetDropModel>{"source": "w6b1", "quantity": 8, "chance": 0.00125},
+                    <DetDropModel>{"source": "w6b2", "quantity": 8, "chance": 0.00125},
+                    <DetDropModel>{"source": "w6b3", "quantity": 8, "chance": 0.00145},
+                    <DetDropModel>{"source": "w6b4", "quantity": 8, "chance": 0.00155},
+                    <DetDropModel>{"source": "Bug13", "quantity": 8, "chance": 0.0075},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 8, "chance": 0.085},
+                    <DetDropModel>{"source": "w6c1", "quantity": 8, "chance": 0.00165},
+                    <DetDropModel>{"source": "w6c2", "quantity": 8, "chance": 0.00175},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 8, "chance": 0.085},
+                    <DetDropModel>{"source": "w6d1", "quantity": 8, "chance": 0.0014},
+                    <DetDropModel>{"source": "w6d2", "quantity": 8, "chance": 0.00175},
+                    <DetDropModel>{"source": "w6d3", "quantity": 8, "chance": 0.00175}
                 ]
             }),
         new DetDropsBase("ObolBronze0", <DetDropsModel>{
@@ -914,7 +1006,8 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Lustre", "quantity": 2, "chance": 5.7e-05},
                     <DetDropModel>{"source": "Starfire", "quantity": 2, "chance": 6.6e-05},
                     <DetDropModel>{"source": "Dreadlo", "quantity": 2, "chance": 7.8e-05},
-                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 7.8e-05},
+                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 8.4e-05},
+                    <DetDropModel>{"source": "Godshard", "quantity": 2, "chance": 9e-05},
                     <DetDropModel>{"source": "Crystal0", "quantity": 1, "chance": 0.003},
                     <DetDropModel>{"source": "OakTree", "quantity": 1, "chance": 4.8e-05},
                     <DetDropModel>{"source": "BirchTree", "quantity": 1, "chance": 5.1e-05},
@@ -968,7 +1061,8 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Lustre", "quantity": 10, "chance": 0.0019},
                     <DetDropModel>{"source": "Starfire", "quantity": 10, "chance": 0.0022},
                     <DetDropModel>{"source": "Dreadlo", "quantity": 10, "chance": 0.0026},
-                    <DetDropModel>{"source": "Marble", "quantity": 10, "chance": 0.0026}
+                    <DetDropModel>{"source": "Marble", "quantity": 10, "chance": 0.0028},
+                    <DetDropModel>{"source": "Godshard", "quantity": 10, "chance": 0.003}
                 ]
             }),
         new DetDropsBase("FoodPotOr2", <DetDropsModel>{
@@ -1171,7 +1265,8 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Lustre", "quantity": 2, "chance": 0.000285},
                     <DetDropModel>{"source": "Starfire", "quantity": 2, "chance": 0.00033},
                     <DetDropModel>{"source": "Dreadlo", "quantity": 2, "chance": 0.00039},
-                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 0.00039},
+                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 0.00042},
+                    <DetDropModel>{"source": "Godshard", "quantity": 2, "chance": 0.00045},
                     <DetDropModel>{"source": "ChestA1", "quantity": 1, "chance": 0.09}
                 ]
             }),
@@ -1187,7 +1282,8 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Lustre", "quantity": 2, "chance": 0.000285},
                     <DetDropModel>{"source": "Starfire", "quantity": 2, "chance": 0.00033},
                     <DetDropModel>{"source": "Dreadlo", "quantity": 2, "chance": 0.00039},
-                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 0.00039},
+                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 0.00042},
+                    <DetDropModel>{"source": "Godshard", "quantity": 2, "chance": 0.00045},
                     <DetDropModel>{"source": "Crystal0", "quantity": 1, "chance": 0.015},
                     <DetDropModel>{"source": "OakTree", "quantity": 1, "chance": 0.00024},
                     <DetDropModel>{"source": "BirchTree", "quantity": 1, "chance": 0.000255},
@@ -1215,7 +1311,8 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Lustre", "quantity": 2, "chance": 0.002565},
                     <DetDropModel>{"source": "Starfire", "quantity": 2, "chance": 0.00297},
                     <DetDropModel>{"source": "Dreadlo", "quantity": 2, "chance": 0.00351},
-                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 0.00351}
+                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 0.00378},
+                    <DetDropModel>{"source": "Godshard", "quantity": 2, "chance": 0.00405}
                 ]
             }),
         new DetDropsBase("StampB11", <DetDropsModel>{
@@ -1230,7 +1327,8 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Lustre", "quantity": 2, "chance": 8.55e-06},
                     <DetDropModel>{"source": "Starfire", "quantity": 2, "chance": 9.9e-06},
                     <DetDropModel>{"source": "Dreadlo", "quantity": 2, "chance": 1.17e-05},
-                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 1.17e-05}
+                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 1.26e-05},
+                    <DetDropModel>{"source": "Godshard", "quantity": 2, "chance": 1.35e-05}
                 ]
             }),
         new DetDropsBase("StampA13", <DetDropsModel>{
@@ -1245,7 +1343,8 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Lustre", "quantity": 2, "chance": 1.425e-06},
                     <DetDropModel>{"source": "Starfire", "quantity": 2, "chance": 1.65e-06},
                     <DetDropModel>{"source": "Dreadlo", "quantity": 2, "chance": 1.95e-06},
-                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 1.95e-06}
+                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 2.1e-06},
+                    <DetDropModel>{"source": "Godshard", "quantity": 2, "chance": 2.25e-06}
                 ]
             }),
         new DetDropsBase("ObolBronze3", <DetDropsModel>{
@@ -1260,7 +1359,8 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Lustre", "quantity": 2, "chance": 1.09725e-05},
                     <DetDropModel>{"source": "Starfire", "quantity": 2, "chance": 1.2705e-05},
                     <DetDropModel>{"source": "Dreadlo", "quantity": 2, "chance": 1.5015e-05},
-                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 1.5015e-05}
+                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 1.617e-05},
+                    <DetDropModel>{"source": "Godshard", "quantity": 2, "chance": 1.7325e-05}
                 ]
             }),
         new DetDropsBase("Leaf1", <DetDropsModel>{
@@ -1380,7 +1480,8 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Lustre", "quantity": 2, "chance": 1.71e-08},
                     <DetDropModel>{"source": "Starfire", "quantity": 2, "chance": 1.98e-08},
                     <DetDropModel>{"source": "Dreadlo", "quantity": 2, "chance": 2.34e-08},
-                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 2.34e-08},
+                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 2.52e-08},
+                    <DetDropModel>{"source": "Godshard", "quantity": 2, "chance": 2.7e-08},
                     <DetDropModel>{"source": "Crystal0", "quantity": 1, "chance": 9e-07},
                     <DetDropModel>{"source": "OakTree", "quantity": 1, "chance": 1.44e-08},
                     <DetDropModel>{"source": "BirchTree", "quantity": 1, "chance": 1.53e-08},
@@ -1531,7 +1632,29 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Boss5B", "quantity": 2, "chance": 1.5e-06},
                     <DetDropModel>{"source": "Crystal4", "quantity": 1, "chance": 3.06e-07},
                     <DetDropModel>{"source": "Tree10", "quantity": 1, "chance": 1.602e-08},
-                    <DetDropModel>{"source": "Tree11", "quantity": 1, "chance": 1.602e-08}
+                    <DetDropModel>{"source": "Tree11", "quantity": 1, "chance": 1.602e-08},
+                    <DetDropModel>{"source": "Tree12", "quantity": 1, "chance": 1.602e-08},
+                    <DetDropModel>{"source": "Tree13", "quantity": 1, "chance": 1.602e-08},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 4.5e-07},
+                    <DetDropModel>{"source": "w6a1", "quantity": 1, "chance": 3.75e-09},
+                    <DetDropModel>{"source": "w6a2", "quantity": 1, "chance": 4.2e-09},
+                    <DetDropModel>{"source": "w6a3", "quantity": 1, "chance": 4.65e-09},
+                    <DetDropModel>{"source": "w6a4", "quantity": 1, "chance": 5.1e-09},
+                    <DetDropModel>{"source": "w6a5", "quantity": 1, "chance": 5.55e-09},
+                    <DetDropModel>{"source": "Bug12", "quantity": 1, "chance": 2.25e-08},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 3e-07},
+                    <DetDropModel>{"source": "w6b1", "quantity": 1, "chance": 3.75e-09},
+                    <DetDropModel>{"source": "w6b2", "quantity": 1, "chance": 3.75e-09},
+                    <DetDropModel>{"source": "w6b3", "quantity": 1, "chance": 4.35e-09},
+                    <DetDropModel>{"source": "w6b4", "quantity": 1, "chance": 4.65e-09},
+                    <DetDropModel>{"source": "Bug13", "quantity": 1, "chance": 2.25e-08},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 2.55e-07},
+                    <DetDropModel>{"source": "w6c1", "quantity": 1, "chance": 4.95e-09},
+                    <DetDropModel>{"source": "w6c2", "quantity": 1, "chance": 5.25e-09},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 2.55e-07},
+                    <DetDropModel>{"source": "w6d1", "quantity": 1, "chance": 4.2e-09},
+                    <DetDropModel>{"source": "w6d2", "quantity": 1, "chance": 5.25e-09},
+                    <DetDropModel>{"source": "w6d3", "quantity": 1, "chance": 5.25e-09}
                 ]
             }),
         new DetDropsBase("SilverPen", <DetDropsModel>{
@@ -1578,7 +1701,8 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Lustre", "quantity": 2, "chance": 3.99e-06},
                     <DetDropModel>{"source": "Starfire", "quantity": 2, "chance": 4.62e-06},
                     <DetDropModel>{"source": "Dreadlo", "quantity": 2, "chance": 5.46e-06},
-                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 5.46e-06},
+                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 5.88e-06},
+                    <DetDropModel>{"source": "Godshard", "quantity": 2, "chance": 6.3e-06},
                     <DetDropModel>{"source": "Crystal0", "quantity": 1, "chance": 0.00021},
                     <DetDropModel>{"source": "OakTree", "quantity": 1, "chance": 3.36e-06},
                     <DetDropModel>{"source": "BirchTree", "quantity": 1, "chance": 3.57e-06},
@@ -1729,7 +1853,9 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Boss5B", "quantity": 2, "chance": 0.00045},
                     <DetDropModel>{"source": "Crystal4", "quantity": 1, "chance": 9.18e-05},
                     <DetDropModel>{"source": "Tree10", "quantity": 1, "chance": 4.806e-06},
-                    <DetDropModel>{"source": "Tree11", "quantity": 1, "chance": 4.806e-06}
+                    <DetDropModel>{"source": "Tree11", "quantity": 1, "chance": 4.806e-06},
+                    <DetDropModel>{"source": "Tree12", "quantity": 1, "chance": 4.806e-06},
+                    <DetDropModel>{"source": "Tree13", "quantity": 1, "chance": 4.806e-06}
                 ]
             }),
         new DetDropsBase("TalentBook1", <DetDropsModel>{
@@ -1755,7 +1881,7 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "goblinG", "quantity": 3623100, "chance": 2e-06},
                     <DetDropModel>{"source": "plank", "quantity": 3623100, "chance": 2.25e-06},
                     <DetDropModel>{"source": "frogBIG", "quantity": 3623100, "chance": 2.5e-06},
-                    <DetDropModel>{"source": "babayaga", "quantity": 1.81155e+06, "chance": 0.0005},
+                    <DetDropModel>{"source": "babayaga", "quantity": 1811550, "chance": 0.0005},
                     <DetDropModel>{"source": "poopBig", "quantity": 7246200, "chance": 0.0005},
                     <DetDropModel>{"source": "wolfA", "quantity": 7246200, "chance": 0.0005},
                     <DetDropModel>{"source": "wolfB", "quantity": 14492400, "chance": 0.0005},
@@ -1776,7 +1902,8 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Lustre", "quantity": 7246200, "chance": 5.7e-06},
                     <DetDropModel>{"source": "Starfire", "quantity": 7246200, "chance": 6.6e-06},
                     <DetDropModel>{"source": "Dreadlo", "quantity": 7246200, "chance": 7.8e-06},
-                    <DetDropModel>{"source": "Marble", "quantity": 7246200, "chance": 7.8e-06},
+                    <DetDropModel>{"source": "Marble", "quantity": 7246200, "chance": 8.4e-06},
+                    <DetDropModel>{"source": "Godshard", "quantity": 7246200, "chance": 9e-06},
                     <DetDropModel>{"source": "Crystal0", "quantity": 3623100, "chance": 0.0003},
                     <DetDropModel>{"source": "OakTree", "quantity": 3623100, "chance": 4.8e-06},
                     <DetDropModel>{"source": "BirchTree", "quantity": 3623100, "chance": 5.1e-06},
@@ -1826,7 +1953,8 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Lustre", "quantity": 724900, "chance": 5.7e-06},
                     <DetDropModel>{"source": "Starfire", "quantity": 724900, "chance": 6.6e-06},
                     <DetDropModel>{"source": "Dreadlo", "quantity": 724900, "chance": 7.8e-06},
-                    <DetDropModel>{"source": "Marble", "quantity": 724900, "chance": 7.8e-06},
+                    <DetDropModel>{"source": "Marble", "quantity": 724900, "chance": 8.4e-06},
+                    <DetDropModel>{"source": "Godshard", "quantity": 724900, "chance": 9e-06},
                     <DetDropModel>{"source": "Crystal0", "quantity": 362450, "chance": 0.0003},
                     <DetDropModel>{"source": "OakTree", "quantity": 362450, "chance": 4.8e-06},
                     <DetDropModel>{"source": "BirchTree", "quantity": 362450, "chance": 5.1e-06},
@@ -1884,7 +2012,8 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Lustre", "quantity": 2, "chance": 5.7e-06},
                     <DetDropModel>{"source": "Starfire", "quantity": 2, "chance": 6.6e-06},
                     <DetDropModel>{"source": "Dreadlo", "quantity": 2, "chance": 7.8e-06},
-                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 7.8e-06},
+                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 8.4e-06},
+                    <DetDropModel>{"source": "Godshard", "quantity": 2, "chance": 9e-06},
                     <DetDropModel>{"source": "Crystal0", "quantity": 1, "chance": 0.0003},
                     <DetDropModel>{"source": "OakTree", "quantity": 1, "chance": 4.8e-06},
                     <DetDropModel>{"source": "BirchTree", "quantity": 1, "chance": 5.1e-06},
@@ -2035,7 +2164,9 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Boss5B", "quantity": 2, "chance": 0.00075},
                     <DetDropModel>{"source": "Crystal4", "quantity": 1, "chance": 0.000153},
                     <DetDropModel>{"source": "Tree10", "quantity": 1, "chance": 8.01e-06},
-                    <DetDropModel>{"source": "Tree11", "quantity": 1, "chance": 8.01e-06}
+                    <DetDropModel>{"source": "Tree11", "quantity": 1, "chance": 8.01e-06},
+                    <DetDropModel>{"source": "Tree12", "quantity": 1, "chance": 8.01e-06},
+                    <DetDropModel>{"source": "Tree13", "quantity": 1, "chance": 8.01e-06}
                 ]
             }),
         new DetDropsBase("FoodG4", <DetDropsModel>{
@@ -2082,7 +2213,8 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Lustre", "quantity": 2, "chance": 2.85e-05},
                     <DetDropModel>{"source": "Starfire", "quantity": 2, "chance": 3.3e-05},
                     <DetDropModel>{"source": "Dreadlo", "quantity": 2, "chance": 3.9e-05},
-                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 3.9e-05},
+                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 4.2e-05},
+                    <DetDropModel>{"source": "Godshard", "quantity": 2, "chance": 4.5e-05},
                     <DetDropModel>{"source": "Crystal0", "quantity": 1, "chance": 0.0015},
                     <DetDropModel>{"source": "OakTree", "quantity": 1, "chance": 2.4e-05},
                     <DetDropModel>{"source": "BirchTree", "quantity": 1, "chance": 2.55e-05},
@@ -2137,7 +2269,8 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Lustre", "quantity": 2, "chance": 1.7955e-06},
                     <DetDropModel>{"source": "Starfire", "quantity": 2, "chance": 2.079e-06},
                     <DetDropModel>{"source": "Dreadlo", "quantity": 2, "chance": 2.457e-06},
-                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 2.457e-06},
+                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 2.646e-06},
+                    <DetDropModel>{"source": "Godshard", "quantity": 2, "chance": 2.835e-06},
                     <DetDropModel>{"source": "Crystal0", "quantity": 1, "chance": 9.45e-05},
                     <DetDropModel>{"source": "OakTree", "quantity": 1, "chance": 1.512e-06},
                     <DetDropModel>{"source": "BirchTree", "quantity": 1, "chance": 1.6065e-06},
@@ -2191,7 +2324,8 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Lustre", "quantity": 2, "chance": 1.85535e-06},
                     <DetDropModel>{"source": "Starfire", "quantity": 2, "chance": 2.1483e-06},
                     <DetDropModel>{"source": "Dreadlo", "quantity": 2, "chance": 2.5389e-06},
-                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 2.5389e-06},
+                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 2.7342e-06},
+                    <DetDropModel>{"source": "Godshard", "quantity": 2, "chance": 2.9295e-06},
                     <DetDropModel>{"source": "Crystal0", "quantity": 1, "chance": 9.765e-05},
                     <DetDropModel>{"source": "OakTree", "quantity": 1, "chance": 1.5624e-06},
                     <DetDropModel>{"source": "BirchTree", "quantity": 1, "chance": 1.66005e-06},
@@ -2245,7 +2379,8 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Lustre", "quantity": 2, "chance": 1.73565e-06},
                     <DetDropModel>{"source": "Starfire", "quantity": 2, "chance": 2.0097e-06},
                     <DetDropModel>{"source": "Dreadlo", "quantity": 2, "chance": 2.3751e-06},
-                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 2.3751e-06},
+                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 2.5578e-06},
+                    <DetDropModel>{"source": "Godshard", "quantity": 2, "chance": 2.7405e-06},
                     <DetDropModel>{"source": "Crystal0", "quantity": 1, "chance": 9.135e-05},
                     <DetDropModel>{"source": "OakTree", "quantity": 1, "chance": 1.4616e-06},
                     <DetDropModel>{"source": "BirchTree", "quantity": 1, "chance": 1.55295e-06},
@@ -2299,7 +2434,8 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Lustre", "quantity": 4, "chance": 4.845e-05},
                     <DetDropModel>{"source": "Starfire", "quantity": 4, "chance": 5.61e-05},
                     <DetDropModel>{"source": "Dreadlo", "quantity": 4, "chance": 6.63e-05},
-                    <DetDropModel>{"source": "Marble", "quantity": 4, "chance": 6.63e-05},
+                    <DetDropModel>{"source": "Marble", "quantity": 4, "chance": 7.14e-05},
+                    <DetDropModel>{"source": "Godshard", "quantity": 4, "chance": 7.65e-05},
                     <DetDropModel>{"source": "Crystal0", "quantity": 2, "chance": 0.00255},
                     <DetDropModel>{"source": "OakTree", "quantity": 2, "chance": 4.08e-05},
                     <DetDropModel>{"source": "BirchTree", "quantity": 2, "chance": 4.335e-05},
@@ -3325,6 +3461,26 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "w5c2", "quantity": 3, "chance": 0.0007},
                     <DetDropModel>{"source": "Boss5A", "quantity": 6, "chance": 0.2},
                     <DetDropModel>{"source": "Boss5B", "quantity": 6, "chance": 0.2},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 3, "chance": 0.06},
+                    <DetDropModel>{"source": "w6a1", "quantity": 3, "chance": 0.0005},
+                    <DetDropModel>{"source": "w6a2", "quantity": 3, "chance": 0.00056},
+                    <DetDropModel>{"source": "w6a3", "quantity": 3, "chance": 0.00062},
+                    <DetDropModel>{"source": "w6a4", "quantity": 3, "chance": 0.00068},
+                    <DetDropModel>{"source": "w6a5", "quantity": 3, "chance": 0.00074},
+                    <DetDropModel>{"source": "Bug12", "quantity": 3, "chance": 0.003},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 3, "chance": 0.04},
+                    <DetDropModel>{"source": "w6b1", "quantity": 3, "chance": 0.0005},
+                    <DetDropModel>{"source": "w6b2", "quantity": 3, "chance": 0.0005},
+                    <DetDropModel>{"source": "w6b3", "quantity": 3, "chance": 0.00058},
+                    <DetDropModel>{"source": "w6b4", "quantity": 3, "chance": 0.00062},
+                    <DetDropModel>{"source": "Bug13", "quantity": 3, "chance": 0.003},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 3, "chance": 0.034},
+                    <DetDropModel>{"source": "w6c1", "quantity": 3, "chance": 0.00066},
+                    <DetDropModel>{"source": "w6c2", "quantity": 3, "chance": 0.0007},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 3, "chance": 0.034},
+                    <DetDropModel>{"source": "w6d1", "quantity": 3, "chance": 0.00056},
+                    <DetDropModel>{"source": "w6d2", "quantity": 3, "chance": 0.0007},
+                    <DetDropModel>{"source": "w6d3", "quantity": 3, "chance": 0.0007},
                     <DetDropModel>{"source": "poopSmall", "quantity": 1, "chance": 0.23},
                     <DetDropModel>{"source": "poopSmall", "quantity": 1, "chance": 0.23},
                     <DetDropModel>{"source": "poopSmall", "quantity": 1, "chance": 0.23}
@@ -4085,7 +4241,9 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Boss5B", "quantity": 2, "chance": 0.005},
                     <DetDropModel>{"source": "Crystal4", "quantity": 1, "chance": 0.00102},
                     <DetDropModel>{"source": "Tree10", "quantity": 1, "chance": 5.34e-05},
-                    <DetDropModel>{"source": "Tree11", "quantity": 1, "chance": 5.34e-05}
+                    <DetDropModel>{"source": "Tree11", "quantity": 1, "chance": 5.34e-05},
+                    <DetDropModel>{"source": "Tree12", "quantity": 1, "chance": 5.34e-05},
+                    <DetDropModel>{"source": "Tree13", "quantity": 1, "chance": 5.34e-05}
                 ]
             }),
         new DetDropsBase("EquipmentStatues25", <DetDropsModel>{
@@ -4164,7 +4322,9 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Boss5B", "quantity": 2, "chance": 0.0025},
                     <DetDropModel>{"source": "Crystal4", "quantity": 1, "chance": 0.00051},
                     <DetDropModel>{"source": "Tree10", "quantity": 1, "chance": 2.67e-05},
-                    <DetDropModel>{"source": "Tree11", "quantity": 1, "chance": 2.67e-05}
+                    <DetDropModel>{"source": "Tree11", "quantity": 1, "chance": 2.67e-05},
+                    <DetDropModel>{"source": "Tree12", "quantity": 1, "chance": 2.67e-05},
+                    <DetDropModel>{"source": "Tree13", "quantity": 1, "chance": 2.67e-05}
                 ]
             }),
         new DetDropsBase("InvStorage25", <DetDropsModel>{
@@ -4205,6 +4365,8 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Crystal4", "quantity": 3, "chance": 0.085},
                     <DetDropModel>{"source": "Tree10", "quantity": 3, "chance": 0.00445},
                     <DetDropModel>{"source": "Tree11", "quantity": 3, "chance": 0.00445},
+                    <DetDropModel>{"source": "Tree12", "quantity": 3, "chance": 0.00445},
+                    <DetDropModel>{"source": "Tree13", "quantity": 3, "chance": 0.00445},
                     <DetDropModel>{"source": "Tree9", "quantity": 1, "chance": 0.0049}
                 ]
             }),
@@ -4212,7 +4374,9 @@ export const initDetDropsRepo = () => {
                 "sources": [
                     <DetDropModel>{"source": "Crystal4", "quantity": 1, "chance": 0.000136},
                     <DetDropModel>{"source": "Tree10", "quantity": 1, "chance": 7.12e-06},
-                    <DetDropModel>{"source": "Tree11", "quantity": 1, "chance": 7.12e-06}
+                    <DetDropModel>{"source": "Tree11", "quantity": 1, "chance": 7.12e-06},
+                    <DetDropModel>{"source": "Tree12", "quantity": 1, "chance": 7.12e-06},
+                    <DetDropModel>{"source": "Tree13", "quantity": 1, "chance": 7.12e-06}
                 ]
             }),
         new DetDropsBase("StoneZ3", <DetDropsModel>{
@@ -4245,7 +4409,157 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Boss5B", "quantity": 2, "chance": 0.00125},
                     <DetDropModel>{"source": "Crystal4", "quantity": 1, "chance": 0.000255},
                     <DetDropModel>{"source": "Tree10", "quantity": 1, "chance": 1.335e-05},
-                    <DetDropModel>{"source": "Tree11", "quantity": 1, "chance": 1.335e-05}
+                    <DetDropModel>{"source": "Tree11", "quantity": 1, "chance": 1.335e-05},
+                    <DetDropModel>{"source": "Tree12", "quantity": 1, "chance": 1.335e-05},
+                    <DetDropModel>{"source": "Tree13", "quantity": 1, "chance": 1.335e-05}
+                ]
+            }),
+        new DetDropsBase("FoodG12", <DetDropsModel>{
+                "sources": [
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 0.0012},
+                    <DetDropModel>{"source": "w6a1", "quantity": 1, "chance": 1e-05},
+                    <DetDropModel>{"source": "w6a2", "quantity": 1, "chance": 1.12e-05},
+                    <DetDropModel>{"source": "w6a3", "quantity": 1, "chance": 1.24e-05},
+                    <DetDropModel>{"source": "w6a4", "quantity": 1, "chance": 1.36e-05},
+                    <DetDropModel>{"source": "w6a5", "quantity": 1, "chance": 1.48e-05},
+                    <DetDropModel>{"source": "Bug12", "quantity": 1, "chance": 6e-05},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 0.001105},
+                    <DetDropModel>{"source": "w6d1", "quantity": 1, "chance": 1.82e-05},
+                    <DetDropModel>{"source": "w6d2", "quantity": 1, "chance": 2.275e-05},
+                    <DetDropModel>{"source": "w6d3", "quantity": 1, "chance": 2.275e-05}
+                ]
+            }),
+        new DetDropsBase("StampB52", <DetDropsModel>{
+                "sources": [
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 3.9e-05},
+                    <DetDropModel>{"source": "w6a1", "quantity": 1, "chance": 3.25e-07},
+                    <DetDropModel>{"source": "w6a2", "quantity": 1, "chance": 3.64e-07},
+                    <DetDropModel>{"source": "w6a3", "quantity": 1, "chance": 4.03e-07},
+                    <DetDropModel>{"source": "w6a4", "quantity": 1, "chance": 4.42e-07},
+                    <DetDropModel>{"source": "w6a5", "quantity": 1, "chance": 4.81e-07},
+                    <DetDropModel>{"source": "Bug12", "quantity": 1, "chance": 1.95e-06}
+                ]
+            }),
+        new DetDropsBase("EquipmentStatues26", <DetDropsModel>{
+                "sources": [
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 0.003},
+                    <DetDropModel>{"source": "w6a1", "quantity": 1, "chance": 2.5e-05},
+                    <DetDropModel>{"source": "w6a2", "quantity": 1, "chance": 2.8e-05},
+                    <DetDropModel>{"source": "w6a3", "quantity": 1, "chance": 3.1e-05},
+                    <DetDropModel>{"source": "w6a4", "quantity": 1, "chance": 3.4e-05},
+                    <DetDropModel>{"source": "w6a5", "quantity": 1, "chance": 3.7e-05},
+                    <DetDropModel>{"source": "Bug12", "quantity": 1, "chance": 0.00015}
+                ]
+            }),
+        new DetDropsBase("StampB50", <DetDropsModel>{
+                "sources": [
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 7.5e-05},
+                    <DetDropModel>{"source": "w6a1", "quantity": 1, "chance": 6.25e-07},
+                    <DetDropModel>{"source": "w6a2", "quantity": 1, "chance": 7e-07},
+                    <DetDropModel>{"source": "w6a3", "quantity": 1, "chance": 7.75e-07},
+                    <DetDropModel>{"source": "w6a4", "quantity": 1, "chance": 8.5e-07},
+                    <DetDropModel>{"source": "w6a5", "quantity": 1, "chance": 9.25e-07},
+                    <DetDropModel>{"source": "Bug12", "quantity": 1, "chance": 3.75e-06}
+                ]
+            }),
+        new DetDropsBase("SuperDropTable6", <DetDropsModel>{
+                "sources": [
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 0.0015},
+                    <DetDropModel>{"source": "w6a1", "quantity": 1, "chance": 1.25e-05},
+                    <DetDropModel>{"source": "w6a2", "quantity": 1, "chance": 1.4e-05},
+                    <DetDropModel>{"source": "w6a3", "quantity": 1, "chance": 1.55e-05},
+                    <DetDropModel>{"source": "w6a4", "quantity": 1, "chance": 1.7e-05},
+                    <DetDropModel>{"source": "w6a5", "quantity": 1, "chance": 1.85e-05},
+                    <DetDropModel>{"source": "Bug12", "quantity": 1, "chance": 7.5e-05},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 0.001},
+                    <DetDropModel>{"source": "w6b1", "quantity": 1, "chance": 1.25e-05},
+                    <DetDropModel>{"source": "w6b2", "quantity": 1, "chance": 1.25e-05},
+                    <DetDropModel>{"source": "w6b3", "quantity": 1, "chance": 1.45e-05},
+                    <DetDropModel>{"source": "w6b4", "quantity": 1, "chance": 1.55e-05},
+                    <DetDropModel>{"source": "Bug13", "quantity": 1, "chance": 7.5e-05},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 0.00085},
+                    <DetDropModel>{"source": "w6c1", "quantity": 1, "chance": 1.65e-05},
+                    <DetDropModel>{"source": "w6c2", "quantity": 1, "chance": 1.75e-05},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 0.00085},
+                    <DetDropModel>{"source": "w6d1", "quantity": 1, "chance": 1.4e-05},
+                    <DetDropModel>{"source": "w6d2", "quantity": 1, "chance": 1.75e-05},
+                    <DetDropModel>{"source": "w6d3", "quantity": 1, "chance": 1.75e-05}
+                ]
+            }),
+        new DetDropsBase("EquipmentStatues27", <DetDropsModel>{
+                "sources": [
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 0.0016},
+                    <DetDropModel>{"source": "w6b1", "quantity": 1, "chance": 2e-05},
+                    <DetDropModel>{"source": "w6b2", "quantity": 1, "chance": 2e-05},
+                    <DetDropModel>{"source": "w6b3", "quantity": 1, "chance": 2.32e-05},
+                    <DetDropModel>{"source": "w6b4", "quantity": 1, "chance": 2.48e-05},
+                    <DetDropModel>{"source": "Bug13", "quantity": 1, "chance": 0.00012}
+                ]
+            }),
+        new DetDropsBase("FoodG11", <DetDropsModel>{
+                "sources": [
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 0.00126},
+                    <DetDropModel>{"source": "w6b1", "quantity": 1, "chance": 1.575e-05},
+                    <DetDropModel>{"source": "w6b2", "quantity": 1, "chance": 1.575e-05},
+                    <DetDropModel>{"source": "w6b3", "quantity": 1, "chance": 1.827e-05},
+                    <DetDropModel>{"source": "w6b4", "quantity": 1, "chance": 1.953e-05},
+                    <DetDropModel>{"source": "Bug13", "quantity": 1, "chance": 9.45e-05}
+                ]
+            }),
+        new DetDropsBase("StampB49", <DetDropsModel>{
+                "sources": [
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 3.4e-05},
+                    <DetDropModel>{"source": "w6b1", "quantity": 1, "chance": 4.25e-07},
+                    <DetDropModel>{"source": "w6b2", "quantity": 1, "chance": 4.25e-07},
+                    <DetDropModel>{"source": "w6b3", "quantity": 1, "chance": 4.93e-07},
+                    <DetDropModel>{"source": "w6b4", "quantity": 1, "chance": 5.27e-07},
+                    <DetDropModel>{"source": "Bug13", "quantity": 1, "chance": 2.55e-06}
+                ]
+            }),
+        new DetDropsBase("EquipmentStatues28", <DetDropsModel>{
+                "sources": [
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 0.00119},
+                    <DetDropModel>{"source": "w6c1", "quantity": 1, "chance": 2.31e-05},
+                    <DetDropModel>{"source": "w6c2", "quantity": 1, "chance": 2.45e-05}
+                ]
+            }),
+        new DetDropsBase("StampA42", <DetDropsModel>{
+                "sources": [
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 2.04e-05},
+                    <DetDropModel>{"source": "w6c1", "quantity": 1, "chance": 3.96e-07},
+                    <DetDropModel>{"source": "w6c2", "quantity": 1, "chance": 4.2e-07}
+                ]
+            }),
+        new DetDropsBase("StampB54", <DetDropsModel>{
+                "sources": [
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 1.36e-05},
+                    <DetDropModel>{"source": "w6d1", "quantity": 1, "chance": 2.24e-07},
+                    <DetDropModel>{"source": "w6d2", "quantity": 1, "chance": 2.8e-07},
+                    <DetDropModel>{"source": "w6d3", "quantity": 1, "chance": 2.8e-07}
+                ]
+            }),
+        new DetDropsBase("StampC23", <DetDropsModel>{
+                "sources": [
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 7.5e-06},
+                    <DetDropModel>{"source": "w6a1", "quantity": 1, "chance": 6.25e-08},
+                    <DetDropModel>{"source": "w6a2", "quantity": 1, "chance": 7e-08},
+                    <DetDropModel>{"source": "w6a3", "quantity": 1, "chance": 7.75e-08},
+                    <DetDropModel>{"source": "w6a4", "quantity": 1, "chance": 8.5e-08},
+                    <DetDropModel>{"source": "w6a5", "quantity": 1, "chance": 9.25e-08},
+                    <DetDropModel>{"source": "Bug12", "quantity": 1, "chance": 3.75e-07},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 5e-06},
+                    <DetDropModel>{"source": "w6b1", "quantity": 1, "chance": 6.25e-08},
+                    <DetDropModel>{"source": "w6b2", "quantity": 1, "chance": 6.25e-08},
+                    <DetDropModel>{"source": "w6b3", "quantity": 1, "chance": 7.25e-08},
+                    <DetDropModel>{"source": "w6b4", "quantity": 1, "chance": 7.75e-08},
+                    <DetDropModel>{"source": "Bug13", "quantity": 1, "chance": 3.75e-07},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 4.25e-06},
+                    <DetDropModel>{"source": "w6c1", "quantity": 1, "chance": 8.25e-08},
+                    <DetDropModel>{"source": "w6c2", "quantity": 1, "chance": 8.75e-08},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 4.25e-06},
+                    <DetDropModel>{"source": "w6d1", "quantity": 1, "chance": 7e-08},
+                    <DetDropModel>{"source": "w6d2", "quantity": 1, "chance": 8.75e-08},
+                    <DetDropModel>{"source": "w6d3", "quantity": 1, "chance": 8.75e-08}
                 ]
             }),
         new DetDropsBase("DungCredits1", <DetDropsModel>{
@@ -4290,7 +4604,8 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Crystal1", "quantity": 1, "chance": 0.1},
                     <DetDropModel>{"source": "Crystal2", "quantity": 1, "chance": 0.1},
                     <DetDropModel>{"source": "Crystal3", "quantity": 1, "chance": 0.1},
-                    <DetDropModel>{"source": "Crystal4", "quantity": 1, "chance": 0.1}
+                    <DetDropModel>{"source": "Crystal4", "quantity": 1, "chance": 0.1},
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 0.1}
                 ]
             }),
         new DetDropsBase("DropTable1", <DetDropsModel>{
@@ -4344,7 +4659,8 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Lustre", "quantity": 2, "chance": 0.0095},
                     <DetDropModel>{"source": "Starfire", "quantity": 2, "chance": 0.011},
                     <DetDropModel>{"source": "Dreadlo", "quantity": 2, "chance": 0.013},
-                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 0.013}
+                    <DetDropModel>{"source": "Marble", "quantity": 2, "chance": 0.014},
+                    <DetDropModel>{"source": "Godshard", "quantity": 2, "chance": 0.015}
                 ]
             }),
         new DetDropsBase("DropTable5", <DetDropsModel>{
@@ -4534,7 +4850,7 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Tree8", "quantity": 1, "chance": 0.0089}
                 ]
             }),
-        new DetDropsBase("CardsH14", <DetDropsModel>{"sources": [<DetDropModel>{"source": "Crystal4", "quantity": 1, "chance": 0.008}]}),
+        new DetDropsBase("CardsH14", <DetDropsModel>{"sources": [<DetDropModel>{"source": "Crystal4", "quantity": 1, "chance": 0.006}]}),
         new DetDropsBase("DropTable25", <DetDropsModel>{
                 "sources": [
                     <DetDropModel>{"source": "Crystal4", "quantity": 1, "chance": 0.3},
@@ -4577,7 +4893,46 @@ export const initDetDropsRepo = () => {
                 "sources": [
                     <DetDropModel>{"source": "Crystal4", "quantity": 1, "chance": 0.17},
                     <DetDropModel>{"source": "Tree10", "quantity": 1, "chance": 0.0089},
-                    <DetDropModel>{"source": "Tree11", "quantity": 1, "chance": 0.0089}
+                    <DetDropModel>{"source": "Tree11", "quantity": 1, "chance": 0.0089},
+                    <DetDropModel>{"source": "Tree12", "quantity": 1, "chance": 0.0089},
+                    <DetDropModel>{"source": "Tree13", "quantity": 1, "chance": 0.0089}
+                ]
+            }),
+        new DetDropsBase("CardsI15", <DetDropsModel>{"sources": [<DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 0.002}]}),
+        new DetDropsBase("DropTable29", <DetDropsModel>{
+                "sources": [
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 0.3},
+                    <DetDropModel>{"source": "w6a1", "quantity": 1, "chance": 0.0025},
+                    <DetDropModel>{"source": "w6a2", "quantity": 1, "chance": 0.0028},
+                    <DetDropModel>{"source": "w6a3", "quantity": 1, "chance": 0.0031},
+                    <DetDropModel>{"source": "w6a4", "quantity": 1, "chance": 0.0034},
+                    <DetDropModel>{"source": "w6a5", "quantity": 1, "chance": 0.0037},
+                    <DetDropModel>{"source": "Bug12", "quantity": 1, "chance": 0.015}
+                ]
+            }),
+        new DetDropsBase("DropTable30", <DetDropsModel>{
+                "sources": [
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 0.2},
+                    <DetDropModel>{"source": "w6b1", "quantity": 1, "chance": 0.0025},
+                    <DetDropModel>{"source": "w6b2", "quantity": 1, "chance": 0.0025},
+                    <DetDropModel>{"source": "w6b3", "quantity": 1, "chance": 0.0029},
+                    <DetDropModel>{"source": "w6b4", "quantity": 1, "chance": 0.0031},
+                    <DetDropModel>{"source": "Bug13", "quantity": 1, "chance": 0.015}
+                ]
+            }),
+        new DetDropsBase("DropTable31", <DetDropsModel>{
+                "sources": [
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 0.17},
+                    <DetDropModel>{"source": "w6c1", "quantity": 1, "chance": 0.0033},
+                    <DetDropModel>{"source": "w6c2", "quantity": 1, "chance": 0.0035}
+                ]
+            }),
+        new DetDropsBase("DropTable32", <DetDropsModel>{
+                "sources": [
+                    <DetDropModel>{"source": "Crystal5", "quantity": 1, "chance": 0.17},
+                    <DetDropModel>{"source": "w6d1", "quantity": 1, "chance": 0.0028},
+                    <DetDropModel>{"source": "w6d2", "quantity": 1, "chance": 0.0035},
+                    <DetDropModel>{"source": "w6d3", "quantity": 1, "chance": 0.0035}
                 ]
             }),
         new DetDropsBase("Grasslands1", <DetDropsModel>{"sources": [<DetDropModel>{"source": "mushG", "quantity": 1, "chance": 0.22}]}),
@@ -4604,7 +4959,6 @@ export const initDetDropsRepo = () => {
         new DetDropsBase("Grasslands2", <DetDropsModel>{
                 "sources": [
                     <DetDropModel>{"source": "frogG", "quantity": 1, "chance": 0.21},
-                    <DetDropModel>{"source": "Godshard", "quantity": 2, "chance": 0.4},
                     <DetDropModel>{"source": "BugNest1", "quantity": 2, "chance": 0},
                     <DetDropModel>{"source": "BugNest2", "quantity": 2, "chance": 0},
                     <DetDropModel>{"source": "BugNest3", "quantity": 2, "chance": 0},
@@ -4614,7 +4968,10 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "BugNest7", "quantity": 2, "chance": 0},
                     <DetDropModel>{"source": "BugNest8", "quantity": 2, "chance": 0},
                     <DetDropModel>{"source": "BugNest9", "quantity": 2, "chance": 0},
-                    <DetDropModel>{"source": "BugNest10", "quantity": 2, "chance": 0}
+                    <DetDropModel>{"source": "BugNest10", "quantity": 2, "chance": 0},
+                    <DetDropModel>{"source": "BugNest11", "quantity": 2, "chance": 0},
+                    <DetDropModel>{"source": "BugNest12", "quantity": 2, "chance": 0},
+                    <DetDropModel>{"source": "BugNest13", "quantity": 2, "chance": 0}
                 ]
             }),
         new DetDropsBase("CardsA2", <DetDropsModel>{"sources": [<DetDropModel>{"source": "frogG", "quantity": 1, "chance": 0.0001}]}),
@@ -5095,15 +5452,26 @@ export const initDetDropsRepo = () => {
                 "sources": [
                     <DetDropModel>{"source": "Boss5A", "quantity": 1, "chance": 0.04},
                     <DetDropModel>{"source": "Boss5B", "quantity": 1, "chance": 0.1},
-                    <DetDropModel>{"source": "Boss5C", "quantity": 2, "chance": 0.4}
+                    <DetDropModel>{"source": "Boss5C", "quantity": 2, "chance": 0.4},
+                    <DetDropModel>{"source": "Boss6A", "quantity": 1, "chance": 0.04},
+                    <DetDropModel>{"source": "Boss6B", "quantity": 1, "chance": 0.1},
+                    <DetDropModel>{"source": "Boss6C", "quantity": 2, "chance": 0.4}
                 ]
             }),
-        new DetDropsBase("CardsZ18", <DetDropsModel>{"sources": [<DetDropModel>{"source": "Boss5A", "quantity": 1, "chance": 0.0008}]}),
+        new DetDropsBase("CardsZ18", <DetDropsModel>{
+                "sources": [
+                    <DetDropModel>{"source": "Boss5A", "quantity": 1, "chance": 0.0008},
+                    <DetDropModel>{"source": "Boss6A", "quantity": 1, "chance": 0.0008}
+                ]
+            }),
         new DetDropsBase("EquipmentPendant29", <DetDropsModel>{
                 "sources": [
                     <DetDropModel>{"source": "Boss5A", "quantity": 1, "chance": 1e-05},
                     <DetDropModel>{"source": "Boss5B", "quantity": 1, "chance": 3.5e-05},
-                    <DetDropModel>{"source": "Boss5C", "quantity": 1, "chance": 0.0004}
+                    <DetDropModel>{"source": "Boss5C", "quantity": 1, "chance": 0.0004},
+                    <DetDropModel>{"source": "Boss6A", "quantity": 1, "chance": 1e-05},
+                    <DetDropModel>{"source": "Boss6B", "quantity": 1, "chance": 3.5e-05},
+                    <DetDropModel>{"source": "Boss6C", "quantity": 1, "chance": 0.0004}
                 ]
             }),
         new DetDropsBase("ObolKruk", <DetDropsModel>{
@@ -5117,7 +5485,9 @@ export const initDetDropsRepo = () => {
         new DetDropsBase("KrukPart2", <DetDropsModel>{
                 "sources": [
                     <DetDropModel>{"source": "Boss5B", "quantity": 1, "chance": 0.01},
-                    <DetDropModel>{"source": "Boss5C", "quantity": 1, "chance": 0.08}
+                    <DetDropModel>{"source": "Boss5C", "quantity": 1, "chance": 0.08},
+                    <DetDropModel>{"source": "Boss6B", "quantity": 1, "chance": 0.01},
+                    <DetDropModel>{"source": "Boss6C", "quantity": 1, "chance": 0.08}
                 ]
             }),
         new DetDropsBase("StoneT6", <DetDropsModel>{"sources": [<DetDropModel>{"source": "Boss5B", "quantity": 2, "chance": 0.05}]}),
@@ -5136,6 +5506,55 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "rift5", "quantity": 1, "chance": 1e-09}
                 ]
             }),
+        new DetDropsBase("SpiA1", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6a1", "quantity": 1, "chance": 0.16}]}),
+        new DetDropsBase("CardsI1", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6a1", "quantity": 1, "chance": 2.5e-05}]}),
+        new DetDropsBase("SmithingRecipes6", <DetDropsModel>{
+                "sources": [
+                    <DetDropModel>{"source": "w6a1", "quantity": 4, "chance": 2e-08},
+                    <DetDropModel>{"source": "w6a2", "quantity": 5, "chance": 6e-07},
+                    <DetDropModel>{"source": "w6a3", "quantity": 6, "chance": 5e-07},
+                    <DetDropModel>{"source": "w6a4", "quantity": 7, "chance": 4e-07},
+                    <DetDropModel>{"source": "w6b2", "quantity": 28, "chance": 5e-09},
+                    <DetDropModel>{"source": "w6b3", "quantity": 27, "chance": 3.4e-07},
+                    <DetDropModel>{"source": "w6b4", "quantity": 26, "chance": 2.5e-07},
+                    <DetDropModel>{"source": "w6c1", "quantity": 25, "chance": 2.5e-07},
+                    <DetDropModel>{"source": "w6c2", "quantity": 29, "chance": 2.5e-07},
+                    <DetDropModel>{"source": "w6c2", "quantity": 30, "chance": 2.5e-07},
+                    <DetDropModel>{"source": "w6c2", "quantity": 31, "chance": 2.5e-07},
+                    <DetDropModel>{"source": "w6d2", "quantity": 24, "chance": 1e-07}
+                ]
+            }),
+        new DetDropsBase("SpiA2", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6a2", "quantity": 1, "chance": 0.15}]}),
+        new DetDropsBase("SpiA2b", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6a2", "quantity": 1, "chance": 1e-05}]}),
+        new DetDropsBase("CardsI2", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6a2", "quantity": 1, "chance": 2e-05}]}),
+        new DetDropsBase("SpiA3", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6a3", "quantity": 1, "chance": 0.15}]}),
+        new DetDropsBase("CardsI3", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6a3", "quantity": 1, "chance": 1.5e-05}]}),
+        new DetDropsBase("SpiA4", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6a4", "quantity": 1, "chance": 0.14}]}),
+        new DetDropsBase("CardsI4", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6a4", "quantity": 1, "chance": 1e-05}]}),
+        new DetDropsBase("SpiA5", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6a5", "quantity": 1, "chance": 0.14}]}),
+        new DetDropsBase("InvStorageD", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6a5", "quantity": 1, "chance": 5e-07}]}),
+        new DetDropsBase("CardsI5", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6a5", "quantity": 1, "chance": 8e-06}]}),
+        new DetDropsBase("SpiB1", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6b1", "quantity": 1, "chance": 0.14}]}),
+        new DetDropsBase("CardsI6", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6b1", "quantity": 1, "chance": 6e-06}]}),
+        new DetDropsBase("SpiB2", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6b2", "quantity": 1, "chance": 0.14}]}),
+        new DetDropsBase("SpiB2b", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6b2", "quantity": 1, "chance": 1e-05}]}),
+        new DetDropsBase("CardsI7", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6b2", "quantity": 1, "chance": 5e-06}]}),
+        new DetDropsBase("SpiB3", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6b3", "quantity": 1, "chance": 0.13}]}),
+        new DetDropsBase("CardsI8", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6b3", "quantity": 1, "chance": 3e-06}]}),
+        new DetDropsBase("SpiB4", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6b4", "quantity": 1, "chance": 0.13}]}),
+        new DetDropsBase("CardsI9", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6b4", "quantity": 1, "chance": 2e-06}]}),
+        new DetDropsBase("SpiC1", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6c1", "quantity": 1, "chance": 0.12}]}),
+        new DetDropsBase("CardsI10", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6c1", "quantity": 1, "chance": 1e-06}]}),
+        new DetDropsBase("SpiC2", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6c2", "quantity": 1, "chance": 0.12}]}),
+        new DetDropsBase("CardsI11", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6c2", "quantity": 1, "chance": 8e-07}]}),
+        new DetDropsBase("Line9", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6c2", "quantity": 1, "chance": 9.999e-08}]}),
+        new DetDropsBase("SpiD1", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6d1", "quantity": 1, "chance": 0.11}]}),
+        new DetDropsBase("CardsI12", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6d1", "quantity": 1, "chance": 6e-07}]}),
+        new DetDropsBase("SpiD2", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6d2", "quantity": 1, "chance": 0.11}]}),
+        new DetDropsBase("CardsI13", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6d2", "quantity": 1, "chance": 5e-07}]}),
+        new DetDropsBase("SpiD3", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6d3", "quantity": 1, "chance": 0.1}]}),
+        new DetDropsBase("CardsI14", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6d3", "quantity": 1, "chance": 4e-07}]}),
+        new DetDropsBase("Line14", <DetDropsModel>{"sources": [<DetDropModel>{"source": "w6d3", "quantity": 1, "chance": 3.3e-09}]}),
         new DetDropsBase("OakTree", <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestA1", "quantity": 40, "chance": 0.6}]}),
         new DetDropsBase("Copper", <DetDropsModel>{"sources": [<DetDropModel>{"source": "ChestA1", "quantity": 30, "chance": 0.6}]}),
         new DetDropsBase("CopperBar", <DetDropsModel>{
@@ -5420,6 +5839,7 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Marble", "quantity": 1, "chance": 1e-08}
                 ]
             }),
+        new DetDropsBase("CardsF39", <DetDropsModel>{"sources": [<DetDropModel>{"source": "Godshard", "quantity": 1, "chance": 2e-06}]}),
         new DetDropsBase("CardsC4", <DetDropsModel>{"sources": [<DetDropModel>{"source": "OakTree", "quantity": 1, "chance": 0.0004}]}),
         new DetDropsBase("CardsC5", <DetDropsModel>{"sources": [<DetDropModel>{"source": "BirchTree", "quantity": 1, "chance": 0.00029}]}),
         new DetDropsBase("CardsC6", <DetDropsModel>{"sources": [<DetDropModel>{"source": "JungleTree", "quantity": 1, "chance": 0.00021}]}),
@@ -5435,7 +5855,9 @@ export const initDetDropsRepo = () => {
         new DetDropsBase("CardsF25", <DetDropsModel>{
                 "sources": [
                     <DetDropModel>{"source": "Tree10", "quantity": 1, "chance": 5e-06},
-                    <DetDropModel>{"source": "Tree11", "quantity": 1, "chance": 1e-08}
+                    <DetDropModel>{"source": "Tree11", "quantity": 1, "chance": 1e-08},
+                    <DetDropModel>{"source": "Tree12", "quantity": 1, "chance": 1e-08},
+                    <DetDropModel>{"source": "Tree13", "quantity": 1, "chance": 1e-08}
                 ]
             }),
         new DetDropsBase("CardsC11", <DetDropsModel>{"sources": [<DetDropModel>{"source": "Bug1", "quantity": 1, "chance": 0.00042}]}),
@@ -5455,7 +5877,12 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "CritterCard10", "quantity": 1, "chance": 0.00014}
                 ]
             }),
-        new DetDropsBase("CardsD9", <DetDropsModel>{"sources": [<DetDropModel>{"source": "Bug4", "quantity": 1, "chance": 0.00025}]}),
+        new DetDropsBase("CardsD9", <DetDropsModel>{
+                "sources": [
+                    <DetDropModel>{"source": "Bug4", "quantity": 1, "chance": 0.00025},
+                    <DetDropModel>{"source": "SoulCard7", "quantity": 1, "chance": 0.00014}
+                ]
+            }),
         new DetDropsBase("CardsF8", <DetDropsModel>{"sources": [<DetDropModel>{"source": "Bug5", "quantity": 1, "chance": 0.00025}]}),
         new DetDropsBase("CardsF9", <DetDropsModel>{"sources": [<DetDropModel>{"source": "Bug6", "quantity": 1, "chance": 0.00025}]}),
         new DetDropsBase("CardsF14", <DetDropsModel>{"sources": [<DetDropModel>{"source": "Bug7", "quantity": 1, "chance": 5e-05}]}),
@@ -5471,6 +5898,16 @@ export const initDetDropsRepo = () => {
                 "sources": [
                     <DetDropModel>{"source": "Bug10", "quantity": 1, "chance": 2e-05},
                     <DetDropModel>{"source": "Bug11", "quantity": 1, "chance": 1e-08}
+                ]
+            }),
+        new DetDropsBase("CardsF37", <DetDropsModel>{"sources": [<DetDropModel>{"source": "Bug12", "quantity": 1, "chance": 5e-06}]}),
+        new DetDropsBase("CardsF38", <DetDropsModel>{"sources": [<DetDropModel>{"source": "Bug13", "quantity": 1, "chance": 1e-06}]}),
+        new DetDropsBase("Soul7", <DetDropsModel>{
+                "sources": [
+                    <DetDropModel>{"source": "SoulCard7", "quantity": 1, "chance": 1},
+                    <DetDropModel>{"source": "SoulCard7", "quantity": 1, "chance": 1},
+                    <DetDropModel>{"source": "SoulCard7", "quantity": 1, "chance": 1},
+                    <DetDropModel>{"source": "SoulCard7", "quantity": 1, "chance": 1}
                 ]
             }),
         new DetDropsBase("Critter10", <DetDropsModel>{"sources": [<DetDropModel>{"source": "CritterCard10", "quantity": 1, "chance": 0.015}]})    

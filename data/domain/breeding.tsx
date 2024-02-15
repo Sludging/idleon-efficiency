@@ -47,7 +47,11 @@ export const territoryNiceNames = [
     "Shores Of Eternity",
     "Molten Bay",
     "Smokey Lake",
-    "Wurm Catacombs"
+    "Wurm Catacombs",
+    "w61",
+    "w62",
+    "w63",
+    "w64",
 ]
 
 

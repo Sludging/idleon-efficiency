@@ -145,8 +145,8 @@ export const initGamingBoxRepo = () => {
                 "clipboardWidth": 114,
                 "clipboardHeight": 243,
                 "desc": "Contains something invisible with no weight... Yea there's nothing in here.",
-                "itemX": 20,
-                "itemY": 1,
+                "itemX": 416,
+                "itemY": 325,
                 "backgroundX": 280,
                 "backgroundY": 80
             }),

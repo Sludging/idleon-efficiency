@@ -1,4 +1,4 @@
-import { nFormatter, round } from "../utility"
+import { nFormatter, notUndefined, round } from "../utility"
 import { Achievement } from "./achievements";
 import { Alchemy } from "./alchemy";
 import { AtomCollider } from "./atomCollider";
@@ -19,7 +19,7 @@ import { Domain, RawData } from "./base/domain";
 import { Item } from "./items";
 import { Equinox, FoodLust } from "./equinox";
 
-const spiceValues: number[] = "0 3 5 8 10 13 15 19 20 23 27 31 33 37 41 45 48 50 53 56".split(" ").map(value => parseInt(value));
+const spiceValues: number[] = "0 3 5 8 10 13 15 19 20 23 27 31 33 37 41 45 48 50 53 56 58 60 63 66".split(" ").map(value => parseInt(value));
 const mealLuckValues: number[] = "1 .20 .10 .05 .02 .01 .004 .001 .0005 .0003".split(" ").map(value => parseFloat(value));
 
 
@@ -77,7 +77,7 @@ export class Meal {
     reducedCostToUpgrade: boolean = false;
 
     // Equinox bonus
-    foodLustDiscount: number = 1; 
+    foodLustDiscount: number = 1;
 
     // Ladles
     ladlesToLevel: number = -1;
@@ -299,8 +299,8 @@ export class Cooking extends Domain {
             possibleMeals.push(sum + 1);
         }
 
-        // remove all outcomes that are larger than 59 and return sorted by lowest meal to highest.
-        return possibleMeals.filter(meal => meal < 60).sort((meal1, meal2) => meal1 < meal2 ? -1 : 1);
+        // remove all outcomes that are larger than 66 and return sorted by lowest meal to highest.
+        return possibleMeals.filter(meal => meal < 66).sort((meal1, meal2) => meal1 < meal2 ? -1 : 1);
     }
 
     spicesToValues = (spices: number[]) => {
@@ -336,8 +336,8 @@ export class Cooking extends Domain {
 
     getRawKeys(): RawData[] {
         return [
-            {key: "Cooking", perPlayer: false, default: []},
-            {key: "Meals", perPlayer: false, default: []},
+            { key: "Cooking", perPlayer: false, default: [] },
+            { key: "Meals", perPlayer: false, default: [] },
         ]
     }
 
@@ -386,9 +386,9 @@ export class Cooking extends Domain {
 
 const populateDiscovery = (cooking: Cooking) => {
     // Lava is using 'Turkey a la Thank' as filler name in the end, remove all of those meals and add 1 for the first meal which is real.
-    const mealsThatCanBeDiscovered = cooking.meals.filter(meal => meal.name != "Turkey a la Thank").length + 1;
+    const mealsThatCanBeDiscovered = cooking.meals.length //.filter(meal => meal.name != "Turkey a la Thank").length + 1;
 
-    const availableValues = cooking.spicesToValues(cooking.spices.map((spice, index) => spice != -1 ? index : -1).filter(value => value != -1));
+    const availableValues = cooking.spicesToValues(cooking.spices.map((spice, index) => index)).filter(value => value != -1).filter(notUndefined);
     const outputlucktime = [...Array(mealsThatCanBeDiscovered)].map((_, index) => 5000000000 * 2 / .004)
     const outputLuck = [...Array(mealsThatCanBeDiscovered)].map((_, index) => 0)
     for (let len of range(0, 3)) {
@@ -428,6 +428,7 @@ const populateDiscovery = (cooking: Cooking) => {
             })
         }
     }
+    console.log(cooking.meals);
 }
 
 export const updateCooking = (data: Map<string, any>) => {

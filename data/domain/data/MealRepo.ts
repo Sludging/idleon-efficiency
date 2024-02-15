@@ -11,7 +11,7 @@ export const initMealRepo = () => {
                 "cookingReq": 10,
                 "bonusQty": 2,
                 "bonusText": "+{% Total Damage",
-                "description": "Do I smell gratitude? Oh, no that's colonialization...",
+                "description": "Do I smell gratitude? Oh, no, that's colonialization...",
                 "bonusKey": "TotDmg"
             }),
         new MealBase(1, <MealModel>{
@@ -235,7 +235,7 @@ export const initMealRepo = () => {
                 "cookingReq": 750000,
                 "bonusQty": 1,
                 "bonusText": "+{% Basic Atk Speed",
-                "description": "The white part is called Curd. Welp, time to recategorize this as an educational game!",
+                "description": "The white part is called Curd! Hmm, time to recategorize this as an educational game!",
                 "bonusKey": "AtkSpd"
             }),
         new MealBase(29, <MealModel>{
@@ -399,7 +399,7 @@ export const initMealRepo = () => {
                 "bonusKey": "TotDmg"
             }),
         new MealBase(49, <MealModel>{
-                "name": "Head Chef Bread",
+                "name": "Head Chef Geustloaf",
                 "cookingReq": 10000000000,
                 "bonusQty": 4,
                 "bonusText": "+{% Bits Gained in Gaming",
@@ -459,32 +459,88 @@ export const initMealRepo = () => {
                 "cookingReq": 225000000000,
                 "bonusQty": 6,
                 "bonusText": "+{% Bits Gained in Gaming",
-                "description": "Plump innit! Would go great with some mommy milk!",
+                "description": "Plump innit! Would go great with some momey milk!",
                 "bonusKey": "GamingBits"
             }),
         new MealBase(57, <MealModel>{
-                "name": "Turkey a la Thank",
-                "cookingReq": 50000000000,
-                "bonusQty": 2,
-                "bonusText": "+{% EXP from World 1 Mobs",
-                "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.",
-                "bonusKey": "non"
+                "name": "Seasoned Marrow",
+                "cookingReq": 350000000000,
+                "bonusQty": 3,
+                "bonusText": "+{% Farming EXP",
+                "description": "You ate all the edible stuff around the bone? Why not try the stuff inside the bone!",
+                "bonusKey": "zFarmExp"
             }),
         new MealBase(58, <MealModel>{
-                "name": "Turkey a la Thank",
-                "cookingReq": 50000000000,
-                "bonusQty": 2,
-                "bonusText": "+{% EXP from World 1 Mobs",
-                "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.",
-                "bonusKey": "non"
+                "name": "Sticky Bun",
+                "cookingReq": 700000000000,
+                "bonusQty": 5,
+                "bonusText": "+{% All Summoning Essence Gain",
+                "description": "This frosting better be made of superglue or I'm suing for false advertising.",
+                "bonusKey": "zSumEss"
             }),
         new MealBase(59, <MealModel>{
-                "name": "Turkey a la Thank",
-                "cookingReq": 50000000000,
+                "name": "Frazzleberry",
+                "cookingReq": 1000000000000,
                 "bonusQty": 2,
-                "bonusText": "+{% EXP from World 1 Mobs",
-                "description": "Do I smell forgiveness? Oh, no that's just fake gratitude.",
-                "bonusKey": "non"
+                "bonusText": "+{% Sneaking EXP",
+                "description": "Big. Blue. Beautiful. Boing. Boat. Broom. Balls. Backgammon. Bort.",
+                "bonusKey": "zSneakExp"
+            }),
+        new MealBase(60, <MealModel>{
+                "name": "Misterloin Steak",
+                "cookingReq": 1700000000000,
+                "bonusQty": 6,
+                "bonusText": "+{% Jade gain from Sneaking",
+                "description": "Make sure to paint on the grill marks to really give it that extra taste!",
+                "bonusKey": "zJade"
+            }),
+        new MealBase(61, <MealModel>{
+                "name": "Large Pohayoh",
+                "cookingReq": 6000000000000,
+                "bonusQty": 2,
+                "bonusText": "+{% Summoning EXP",
+                "description": "Aye lad if thah ain't tha larjes' fookin' poh'ay'oh eyev evah seen wih me own eyes!",
+                "bonusKey": "zSummonExp"
+            }),
+        new MealBase(62, <MealModel>{
+                "name": "Bill Jack Pepper",
+                "cookingReq": 35000000000000,
+                "bonusQty": 5,
+                "bonusText": "+{% Crop Evolution Chance",
+                "description": "It's Him.",
+                "bonusKey": "zCropEvo"
+            }),
+        new MealBase(63, <MealModel>{
+                "name": "Burned Marshmallow",
+                "cookingReq": 90000000000000,
+                "bonusQty": 10,
+                "bonusText": "+{% Meal Cooking Speed",
+                "description": "IMPORTANT, this bonus DOUBLES at Farming Lv 50. Triples at Farming Lv 100, and so on!",
+                "bonusKey": "zMealFarm"
+            }),
+        new MealBase(64, <MealModel>{
+                "name": "Yumi Peachring",
+                "cookingReq": 800000000000000,
+                "bonusQty": 2,
+                "bonusText": "+{% All Golden Food bonus",
+                "description": "Don't disrespect the ring. All hail the ring.",
+                "bonusKey": "zGoldFood"
+            }),
+        new MealBase(65, <MealModel>{
+                "name": "Plumpcakes",
+                "cookingReq": 6000000000000000,
+                "bonusQty": 6,
+                "bonusText": "+{% Total Damage",
+                "description": "Ohhh, they're called 'plump'cakes because they're dummy thicc can I get an amen!",
+                "bonusKey": "TotDmg"
+            }),
+        new MealBase(66, <MealModel>{
+                "name": "Nyanborgir",
+                "cookingReq": 50000000000000000,
+                "bonusQty": 7,
+                "bonusText": "+{% Crop Evolution Chance",
+                "description": "It's the greatest meal ever! Bonus DOUBLES at Summoning Lv 50, Triples at 100, etc",
+                "bonusKey": "zCropEvoSumm"
             })    
 ]
 }

@@ -311,6 +311,12 @@ export const initQuestNameRepo = () => {
         new QuestNameBase("Royal Worm19", <QuestNameModel>{"name": "A Royal Gift", "difficulty": 7}),
         new QuestNameBase("Royal Worm22", <QuestNameModel>{"name": "Bossin' the Boss", "difficulty": 8}),
         new QuestNameBase("Royal Worm28", <QuestNameModel>{"name": "Normie Bidding", "difficulty": 7}),
-        new QuestNameBase("Royal Worm32", <QuestNameModel>{"name": "Royal Bidding", "difficulty": 1})    
+        new QuestNameBase("Royal Worm32", <QuestNameModel>{"name": "Royal Bidding", "difficulty": 1}),
+        new QuestNameBase("Lafu Shi2", <QuestNameModel>{"name": "Seed Planting", "difficulty": 1}),
+        new QuestNameBase("Lafu Shi5", <QuestNameModel>{"name": "Visiting the Farmer's Market", "difficulty": 1}),
+        new QuestNameBase("Lafu Shi8", <QuestNameModel>{"name": "Climbing the Ninja Hotel", "difficulty": 1}),
+        new QuestNameBase("Lafu Shi11", <QuestNameModel>{"name": "Emporium Investing", "difficulty": 1}),
+        new QuestNameBase("Lafu Shi14", <QuestNameModel>{"name": "Summoning Debut", "difficulty": 1}),
+        new QuestNameBase("Lafu Shi17", <QuestNameModel>{"name": "Essence Juicing", "difficulty": 1})    
 ]
 }

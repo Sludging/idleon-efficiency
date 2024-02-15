@@ -67,7 +67,7 @@ export const initWeeklyBossRepo = () => {
                 "name": "Mutalius Cuboid",
                 "possibleTasks": [
                     <WeeklyTaskModel>{
-                        "desc": "Perhaps a bone could be dislodged by engrossing it with the end of your net...",
+                        "desc": "Perhaps a bone could be dislodged by entangling it with the end of your net...",
                         "reqFor50": 50,
                         "requirement": "Catching LV of",
                         "icon": "f"

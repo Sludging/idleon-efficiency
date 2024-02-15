@@ -69,9 +69,9 @@ export const initStorageOrderRepo = () => {
         new StorageOrderBase("InvStorage23", <StorageOrderModel>{"order": 22, "obtainable": true, "bag": "InvStorage23"}),
         new StorageOrderBase("InvStorage24", <StorageOrderModel>{"order": 23, "obtainable": true, "bag": "InvStorage24"}),
         new StorageOrderBase("InvStorage25", <StorageOrderModel>{"order": 24, "obtainable": true, "bag": "InvStorage25"}),
-        new StorageOrderBase("InvStorage26", <StorageOrderModel>{"order": 25, "obtainable": false, "bag": "InvStorage26"}),
-        new StorageOrderBase("InvStorage27", <StorageOrderModel>{"order": 26, "obtainable": false, "bag": "InvStorage27"}),
-        new StorageOrderBase("InvStorage28", <StorageOrderModel>{"order": 27, "obtainable": false, "bag": "InvStorage28"}),
+        new StorageOrderBase("InvStorage26", <StorageOrderModel>{"order": 25, "obtainable": true, "bag": "InvStorage26"}),
+        new StorageOrderBase("InvStorage27", <StorageOrderModel>{"order": 26, "obtainable": true, "bag": "InvStorage27"}),
+        new StorageOrderBase("InvStorage28", <StorageOrderModel>{"order": 27, "obtainable": true, "bag": "InvStorage28"}),
         new StorageOrderBase("InvStorage29", <StorageOrderModel>{"order": 28, "obtainable": false, "bag": "InvStorage29"}),
         new StorageOrderBase("InvStorage30", <StorageOrderModel>{"order": 29, "obtainable": false, "bag": "InvStorage30"}),
         new StorageOrderBase("InvStorage31", <StorageOrderModel>{"order": 30, "obtainable": true, "bag": "InvStorage31"}),
@@ -88,6 +88,7 @@ export const initStorageOrderRepo = () => {
         new StorageOrderBase("InvStorage42", <StorageOrderModel>{"order": 41, "obtainable": true, "bag": "InvStorage42"}),
         new StorageOrderBase("InvStorageF", <StorageOrderModel>{"order": 100, "obtainable": true, "bag": "InvStorageF"}),
         new StorageOrderBase("InvStorageS", <StorageOrderModel>{"order": 101, "obtainable": true, "bag": "InvStorageS"}),
-        new StorageOrderBase("InvStorageC", <StorageOrderModel>{"order": 102, "obtainable": true, "bag": "InvStorageC"})    
+        new StorageOrderBase("InvStorageC", <StorageOrderModel>{"order": 102, "obtainable": true, "bag": "InvStorageC"}),
+        new StorageOrderBase("InvStorageD", <StorageOrderModel>{"order": 103, "obtainable": true, "bag": "InvStorageD"})    
 ]
 }

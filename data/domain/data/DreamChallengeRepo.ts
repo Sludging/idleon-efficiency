@@ -37,7 +37,7 @@ export const initDreamChallengeRepo = () => {
                 "filler": "Filler"
             }),
         new DreamChallengeBase(5, <DreamChallengeModel>{
-                "challenge": "Reach wave 50 on all 6 Tower Defence Worship Summons",
+                "challenge": "Reach wave 50 on first 6 Tower Defence Worship Summons",
                 "req": 6,
                 "reward": "Unlock next Equinox upgrade",
                 "filler": "Filler"
@@ -169,7 +169,7 @@ export const initDreamChallengeRepo = () => {
                 "filler": "Filler"
             }),
         new DreamChallengeBase(27, <DreamChallengeModel>{
-                "challenge": "Reach wave 121 on all 6 Tower Defence Worship Summons",
+                "challenge": "Reach wave 121 on first 6 Tower Defence Worship Summons",
                 "req": 6,
                 "reward": "+200 Starting Points in Worship TD",
                 "filler": "Filler"

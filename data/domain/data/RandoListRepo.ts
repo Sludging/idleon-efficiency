@@ -252,7 +252,8 @@ export const initRandoListRepo = () => {
                     "Acorn_Assault",
                     "Frosty_Firefight",
                     "Clash_of_Cans",
-                    "Tower_Defence_6"
+                    "Tower_Defence_6",
+                    "Tower_Defence_7"
                 ]
             }),
         new RandoListBase(11, <RandoListModel>{"elements": ["0", "14", "39", "69"]}),
@@ -1507,7 +1508,11 @@ export const initRandoListRepo = () => {
                     "48",
                     "50",
                     "53",
-                    "56"
+                    "56",
+                    "58",
+                    "60",
+                    "63",
+                    "66"
                 ]
             }),
         new RandoListBase(50, <RandoListModel>{
@@ -1541,7 +1546,10 @@ export const initRandoListRepo = () => {
                     "BarLab.png",
                     "BarB2.png",
                     "BarDiv.png",
-                    "BarR2.png"
+                    "BarR2.png",
+                    "BarB5.png",
+                    "BarB2.png",
+                    "BarB4.png"
                 ]
             }),
         new RandoListBase(52, <RandoListModel>{
@@ -2324,8 +2332,8 @@ export const initRandoListRepo = () => {
                     "38",
                     "48",
                     "54",
-                    "60",
-                    "60"
+                    "62",
+                    "62"
                 ]
             }),
         new RandoListBase(64, <RandoListModel>{
@@ -2389,7 +2397,10 @@ export const initRandoListRepo = () => {
                     "LABORATORY",
                     "SAILING",
                     "DIVINITY",
-                    "GAMING"
+                    "GAMING",
+                    "FARMING",
+                    "",
+                    ""
                 ]
             }),
         new RandoListBase(67, <RandoListModel>{
@@ -2421,7 +2432,10 @@ export const initRandoListRepo = () => {
                     "LABORATORY",
                     "SAILING",
                     "DIVINITY",
-                    "GAMING"
+                    "GAMING",
+                    "FARMING",
+                    "",
+                    ""
                 ]
             }),
         new RandoListBase(68, <RandoListModel>{
@@ -2592,12 +2606,13 @@ export const initRandoListRepo = () => {
             }),
         new RandoListBase(80, <RandoListModel>{
                 "elements": [
-                    "Slargon",
-                    "Pirate_Porkchop",
-                    "Muhmuguh",
-                    "Poigu",
-                    "Lava_Larry",
-                    "Tired_Mole"
+                    "Lafu_Shi",
+                    "Hoov",
+                    "Woodlin_Elder",
+                    "Tribal_Shaman",
+                    "Legumulyte",
+                    "Potti",
+                    "Snouteinne"
                 ]
             }),
         new RandoListBase(81, <RandoListModel>{"elements": ["Meteor", "rocky", "iceknight", "snakeZ", "frogGR"]}),
@@ -2634,7 +2649,21 @@ export const initRandoListRepo = () => {
                     "FishSmall",
                     "FishMed",
                     "Bug2",
-                    "FishBig"
+                    "FishBig",
+                    "w6a1",
+                    "w6a2",
+                    "w6a3",
+                    "w6a4",
+                    "w6a5",
+                    "w6b1",
+                    "w6b2",
+                    "w6b3",
+                    "w6b4",
+                    "w6c1",
+                    "w6c2",
+                    "w6d1",
+                    "w6d2",
+                    "w6d3"
                 ]
             }),
         new RandoListBase(88, <RandoListModel>{
@@ -2697,7 +2726,21 @@ export const initRandoListRepo = () => {
                     "0",
                     "-2",
                     "5",
-                    "2"
+                    "2",
+                    "5",
+                    "6",
+                    "6",
+                    "12",
+                    "3",
+                    "10",
+                    "0",
+                    "0",
+                    "4",
+                    "8",
+                    "2",
+                    "1",
+                    "3",
+                    "9"
                 ]
             }),
         new RandoListBase(89, <RandoListModel>{
@@ -2760,7 +2803,21 @@ export const initRandoListRepo = () => {
                     "-6",
                     "-2",
                     "-3",
-                    "-5"
+                    "-5",
+                    "6",
+                    "0",
+                    "0",
+                    "9",
+                    "3",
+                    "9",
+                    "0",
+                    "0",
+                    "9",
+                    "8",
+                    "-4",
+                    "4",
+                    "2",
+                    "11"
                 ]
             }),
         new RandoListBase(90, <RandoListModel>{
@@ -2863,8 +2920,8 @@ export const initRandoListRepo = () => {
                     "+{%_Higher_Artifact_Find_Chance",
                     "+{_Base_Efficiency_for_All_Skills",
                     "+{_Base_Critters_per_Trap",
-                    "World_6...?",
-                    "World_6...?"
+                    "+{%_Farming_EXP_gain",
+                    "+{%_Summoning_EXP_gain"
                 ]
             }),
         new RandoListBase(92, <RandoListModel>{
@@ -2970,6 +3027,19 @@ export const initRandoListRepo = () => {
                     "43",
                     "204",
                     "228"
+                ]
+            }),
+        new RandoListBase(97, <RandoListModel>{
+                "elements": [
+                    "9999999",
+                    "172800",
+                    "86400",
+                    "57600",
+                    "43200",
+                    "28800",
+                    "14400",
+                    "7200",
+                    "3600"
                 ]
             })    
 ]

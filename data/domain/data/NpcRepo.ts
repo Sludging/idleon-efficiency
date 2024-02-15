@@ -595,8 +595,8 @@ export const initNpcRepo = () => {
             }),
         new NpcBase("Obol Altar", <NpcModel>{
                 "head": <NpcHeadModel>{
-                    "location": "Encroaching Forest Villas, YumYum Grotto",
-                    "world": "Blunder Hills, Yum-Yum Desert",
+                    "location": "ncroaching Forest Villas, YumYum Grotto",
+                    "world": "Yum-Yum Desert",
                     "noQuest": 1,
                     "type": "",
                     "birthWeight": 9.07,
@@ -3754,7 +3754,7 @@ export const initNpcRepo = () => {
             }),
         new NpcBase("Funguy", <NpcModel>{
                 "head": <NpcHeadModel>{
-                    "location": "Winding Willows",
+                    "location": "inding Willows",
                     "world": "Blunder Hills",
                     "noQuest": 5,
                     "type": "",
@@ -3968,7 +3968,7 @@ export const initNpcRepo = () => {
             }),
         new NpcBase("Tiki Chief", <NpcModel>{
                 "head": <NpcHeadModel>{
-                    "location": "Encroaching Forest Villas",
+                    "location": "ncroaching Forest Villas",
                     "world": "Blunder Hills",
                     "noQuest": 4,
                     "type": "",
@@ -4172,7 +4172,7 @@ export const initNpcRepo = () => {
             }),
         new NpcBase("Dog Bone (NPC)", <NpcModel>{
                 "head": <NpcHeadModel>{
-                    "location": "Encroaching Forest Villas",
+                    "location": "ncroaching Forest Villas",
                     "world": "Blunder Hills",
                     "noQuest": 2,
                     "type": "",
@@ -8694,7 +8694,7 @@ export const initNpcRepo = () => {
                     "location": "Blunder Hills",
                     "world": "Blunder Hills",
                     "noQuest": 2,
-                    "type": "Event",
+                    "type": "vent",
                     "birthWeight": 2.4,
                     "starSign": "Capricorn",
                     "mothersMaidenName": "Taylor",
@@ -8919,7 +8919,7 @@ export const initNpcRepo = () => {
                     "location": "Blunder Hills",
                     "world": "Blunder Hills",
                     "noQuest": 2,
-                    "type": "Event",
+                    "type": "vent",
                     "birthWeight": 9.37,
                     "starSign": "Cancer",
                     "mothersMaidenName": "illiams",
@@ -9020,7 +9020,7 @@ export const initNpcRepo = () => {
                     "location": "Blunder Hills",
                     "world": "Blunder Hills",
                     "noQuest": 2,
-                    "type": "Event",
+                    "type": "vent",
                     "birthWeight": 5.65,
                     "starSign": "Pisces",
                     "mothersMaidenName": "Sanchez",
@@ -10529,7 +10529,7 @@ export const initNpcRepo = () => {
             }),
         new NpcBase("Worldo", <NpcModel>{
                 "head": <NpcHeadModel>{
-                    "location": "Inside the Igloo",
+                    "location": "nside the Igloo",
                     "world": "Frostbite Tundra",
                     "noQuest": 2,
                     "type": "",
@@ -11701,7 +11701,7 @@ export const initNpcRepo = () => {
                     "location": "Blunder Hills",
                     "world": "Blunder Hills",
                     "noQuest": 2,
-                    "type": "Event",
+                    "type": "vent",
                     "birthWeight": 6.99,
                     "starSign": "Pisces",
                     "mothersMaidenName": "Bateman",
@@ -12237,7 +12237,7 @@ export const initNpcRepo = () => {
                     "location": "Blunder Hills",
                     "world": "Blunder Hills",
                     "noQuest": 5,
-                    "type": "Event",
+                    "type": "vent",
                     "birthWeight": 4.14,
                     "starSign": "Pisces",
                     "mothersMaidenName": "agner",
@@ -13093,7 +13093,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "This is.... acceptable. You may proceed to the Task TV behind me.",
-                        "NextIndex": 9999,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -13186,7 +13186,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Bruh what even ARE you...? Ain't never saw that class you got there is that even legit?",
-                        "NextIndex": 6,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -13367,7 +13367,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "I hate this. I wish things could just fix themself naturally and come to a conclusion but I guess things are never gonna change ^",
-                        "NextIndex": 15,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -13543,7 +13543,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Well done laddy! I take my cap off to ye that was some fine sailin' ye must have done!",
-                        "NextIndex": 14,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -13676,7 +13676,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Ah now I understand you perfectly... yes it is wonderful weather we're having.",
-                        "NextIndex": 9,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -13815,7 +13815,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Daaang you've got skills!! Now get out there and teach everyone else how it's done! Literally! So I don't have to do it myself anymore! ...no? Eh fine just go have fun then and leave me to it!",
-                        "NextIndex": 9999,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -13879,7 +13879,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Ayyyy that's how it's done! I'll give you access to my tasks have fun!",
-                        "NextIndex": 9999,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -13965,7 +13965,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You can access the rift from the World Map... <br> <br> I wonder when those Null Nightmares are gonna join me for brunch they're 5 decades late! Eh any year now I'm sure they'll show up...",
-                        "NextIndex": 7,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -14139,7 +14139,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "ONE OF US! ONE OF US!",
-                        "NextIndex": 14,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -14149,7 +14149,7 @@ export const initNpcRepo = () => {
                     "location": "Blunder Hills",
                     "world": "Blunder Hills",
                     "noQuest": 1,
-                    "type": "Event",
+                    "type": "vent",
                     "birthWeight": 3.29,
                     "starSign": "Pisces",
                     "mothersMaidenName": "Trussel",
@@ -14195,7 +14195,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Spring spring spring!! Yippie!! Nice nametag its so poggers!",
-                        "NextIndex": 4,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -14340,7 +14340,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You absolute legend! You made this tired mole very happy I really never thought I'd see the day that someone stood up to the boss!",
-                        "NextIndex": 10,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -14476,7 +14476,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Magnificent... and to think that my brilliance that irradiates from the surface of my being was ever called into question bluhahugue!",
-                        "NextIndex": 9,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -14873,7 +14873,384 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You're definitely royal. I don't know where you were born but that was a royal quantity of effort no doubt. I mean I could totally see MYSELF putting in that amount of effort! I-i-if I ever needed to of course!",
-                        "NextIndex": 34,
+                        "NextIndex": -1,
+                        "Name": ""
+                    }
+                ]
+            }),
+        new NpcBase("Lafu Shi", <NpcModel>{
+                "head": <NpcHeadModel>{
+                    "location": "Unknown",
+                    "world": "Unknown",
+                    "noQuest": 0,
+                    "type": "Unknown",
+                    "birthWeight": 9.84,
+                    "starSign": "Sagittarius",
+                    "mothersMaidenName": "Schiebel",
+                    "notes": " "
+                },
+                "quests": {
+                    "Seed Planting": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Lets begin with farming! Start by planting a seed. <br> MAIN QUEST:Go to the compost bag select a seed then click the empty land plot.",
+                        "NextIndex": 4,
+                        "Name": "Seed Planting",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 1,
+                        "NoSpaceIndex": 3,
+                        "Rewards": [<ComponentModel>{"item": "Quest81", "quantity": 3}],
+                        "QuestName": "Lafu Shi1",
+                        "Difficulty": 1,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Lafu Shi1",
+                        "CustomArray": [<CustomReqModel>{"desc": "Seed planted:", "finalV": 1, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "Visiting the Farmer's Market": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Wait for the seed to grow or use the Compost I just gave you and then collect the crops that grow and spend them at the market! <br> MAIN QUEST:Grow apples pick apples spend apples to buy more land!",
+                        "NextIndex": 7,
+                        "Name": "Visiting the Farmer's Market",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 6,
+                        "Rewards": [<ComponentModel>{"item": "Quest81", "quantity": 4}, <ComponentModel>{"item": "GemP30", "quantity": 2}],
+                        "QuestName": "Lafu Shi2",
+                        "Difficulty": 1,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Lafu Shi2",
+                        "CustomArray": [
+                            <CustomReqModel>{"desc": "Apples Picked:", "finalV": 2, "type": "GreaterEqual", "startV": 0},
+                            <CustomReqModel>{"desc": "Land Plots Purchased:", "finalV": 1, "type": "GreaterEqual", "startV": 0}
+                        ]
+                    },
+                    "Climbing the Ninja Hotel": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "We do a bit of Sneaking at the abandoned hotel go check it out to the right! <br> MAIN QUEST:Embrace Sneaking culture and Sneak your way up the hotel!",
+                        "NextIndex": 10,
+                        "Name": "Climbing the Ninja Hotel",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 9,
+                        "Rewards": [<ComponentModel>{"item": "Quest81", "quantity": 2}, <ComponentModel>{"item": "GemP30", "quantity": 3}],
+                        "QuestName": "Lafu Shi3",
+                        "Difficulty": 1,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Lafu Shi3",
+                        "CustomArray": [
+                            <CustomReqModel>{"desc": "Find Jade Coins:", "finalV": 100, "type": "GreaterEqual", "startV": 0},
+                            <CustomReqModel>{"desc": "Upg Looting Ambition:", "finalV": 1, "type": "GreaterEqual", "startV": 0},
+                            <CustomReqModel>{"desc": "Find n Equip Nunchaku:", "finalV": 1, "type": "GreaterEqual", "startV": 0}
+                        ]
+                    },
+                    "Emporium Investing": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Now to put that Jade to good use! MAIN QUEST:Purchase something from the Jade Emporium. These bonuses are MAJOR big time awesome!!",
+                        "NextIndex": 13,
+                        "Name": "Emporium Investing",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 1,
+                        "NoSpaceIndex": 12,
+                        "Rewards": [<ComponentModel>{"item": "Quest81", "quantity": 3}, <ComponentModel>{"item": "GemP30", "quantity": 2}],
+                        "QuestName": "Lafu Shi4",
+                        "Difficulty": 1,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Lafu Shi4",
+                        "CustomArray": [<CustomReqModel>{"desc": "Emporium Purchases:", "finalV": 1, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "Summoning Debut": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "See that table to the right? Go there and find an opponent! <br> MAIN QUEST:Win a Summoning Match. Your slime army should come out victorious if you place them correctly!",
+                        "NextIndex": 16,
+                        "Name": "Summoning Debut",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 1,
+                        "NoSpaceIndex": 15,
+                        "Rewards": [<ComponentModel>{"item": "Quest82", "quantity": 2}],
+                        "QuestName": "Lafu Shi5",
+                        "Difficulty": 1,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Lafu Shi5",
+                        "CustomArray": [
+                            <CustomReqModel>{
+                                "desc": "Open Summoner's Table:",
+                                "finalV": 1,
+                                "type": "GreaterEqual",
+                                "startV": 0
+                            },
+                            <CustomReqModel>{"desc": "Win a Match:", "finalV": 1, "type": "GreaterEqual", "startV": 0}
+                        ]
+                    },
+                    "Essence Juicing": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Now the final task... upgrading your Summoning Slime Army! <br> MAIN QUEST:Click the white Summoning Stone on the pillar and spend your essence.",
+                        "NextIndex": 19,
+                        "Name": "Essence Juicing",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 1,
+                        "NoSpaceIndex": 18,
+                        "Rewards": [
+                            <ComponentModel>{"item": "Quest81", "quantity": 2},
+                            <ComponentModel>{"item": "GemP30", "quantity": 1},
+                            <ComponentModel>{"item": "Quest82", "quantity": 2}
+                        ],
+                        "QuestName": "Lafu Shi6",
+                        "Difficulty": 1,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Lafu Shi6",
+                        "CustomArray": [
+                            <CustomReqModel>{"desc": "Buy Summon Upgrades:", "finalV": 3, "type": "GreaterEqual", "startV": 0},
+                            <CustomReqModel>{"desc": "Win 2nd Match:", "finalV": 1, "type": "GreaterEqual", "startV": 0}
+                        ]
+                    }
+                },
+                "dialogue": [
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Hi! You've come a long way to get here I can tell... welcome to the Spirited Valley faceless traveler!",
+                        "NextIndex": 1,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Being a foreigner I insist you learn our customs and activities before continuing your journey... specifically our ways of Farming Sneaking and Summoning.",
+                        "NextIndex": 2,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Lets begin with farming! Start by planting a seed. <br> MAIN QUEST:Go to the compost bag select a seed then click the empty land plot.",
+                        "NextIndex": 4,
+                        "Name": "Seed Planting"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 2,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "You plant good... very good indeed... but there is more to it than just planting.",
+                        "NextIndex": 5,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Wait for the seed to grow or use the Compost I just gave you and then collect the crops that grow and spend them at the market! <br> MAIN QUEST:Grow apples pick apples spend apples to buy more land!",
+                        "NextIndex": 7,
+                        "Name": "Visiting the Farmer's Market"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 5,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Impressive you successfully cultivated 1 out of over 100 crops! Strangely that actually makes you the best farmer in the valley I didn't even know what an apple was before you came along! <br> Moving on...",
+                        "NextIndex": 8,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "We do a bit of Sneaking at the abandoned hotel go check it out to the right! <br> MAIN QUEST:Embrace Sneaking culture and Sneak your way up the hotel!",
+                        "NextIndex": 10,
+                        "Name": "Climbing the Ninja Hotel"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 8,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "What are ninja twins you ask? Well over time we found that the hotel was just too scary to do ourselves so we created a temporal field that duplicates one's soul into a twin to control!",
+                        "NextIndex": 11,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Now to put that Jade to good use! MAIN QUEST:Purchase something from the Jade Emporium. These bonuses are MAJOR big time awesome!!",
+                        "NextIndex": 13,
+                        "Name": "Emporium Investing"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 11,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "The final activity you must understand is Summoning!",
+                        "NextIndex": 14,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "See that table to the right? Go there and find an opponent! <br> MAIN QUEST:Win a Summoning Match. Your slime army should come out victorious if you place them correctly!",
+                        "NextIndex": 16,
+                        "Name": "Summoning Debut"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 14,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "That was a strong debut very sophisticated moves you made. Although clicking on those cards thinking you could select them was a bit of a blunder if you ask me...",
+                        "NextIndex": 17,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Now the final task... upgrading your Summoning Slime Army! <br> MAIN QUEST:Click the white Summoning Stone on the pillar and spend your essence.",
+                        "NextIndex": 19,
+                        "Name": "Essence Juicing"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 17,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "I can tell you have cultivated a respect for our way of life out here in the Spirited Valley. Go now venture off to wherever your spirit yearns for.",
+                        "NextIndex": -1,
+                        "Name": ""
+                    }
+                ]
+            }),
+        new NpcBase("Hoov", <NpcModel>{
+                "head": <NpcHeadModel>{
+                    "location": "Unknown",
+                    "world": "Unknown",
+                    "noQuest": 0,
+                    "type": "Unknown",
+                    "birthWeight": 2,
+                    "starSign": "Taurus",
+                    "mothersMaidenName": "Ingram",
+                    "notes": " "
+                },
+                "quests": {},
+                "dialogue": [
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "H to the Hungry V to the Voracious fo muchin' on brunchin' used to eat until I couldn't...",
+                        "NextIndex": 1,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "... oh hi care to join me? I was just having a bite to eat before I got back to work!",
+                        "NextIndex": -1,
+                        "Name": ""
+                    }
+                ]
+            }),
+        new NpcBase("Woodlin Elder", <NpcModel>{
+                "head": <NpcHeadModel>{
+                    "location": "Unknown",
+                    "world": "Unknown",
+                    "noQuest": 0,
+                    "type": "Unknown",
+                    "birthWeight": 9.33,
+                    "starSign": "Taurus",
+                    "mothersMaidenName": "Duffman",
+                    "notes": " "
+                },
+                "quests": {},
+                "dialogue": [
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "H to the Hungry V to the Voracious fo muchin' on brunchin' used to eat until I couldn't...",
+                        "NextIndex": 1,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "... oh hi care to join me? I was just having a bite to eat before I got back to work!",
+                        "NextIndex": 1,
+                        "Name": ""
+                    }
+                ]
+            }),
+        new NpcBase("Tribal Shaman", <NpcModel>{
+                "head": <NpcHeadModel>{
+                    "location": "Unknown",
+                    "world": "Unknown",
+                    "noQuest": 0,
+                    "type": "Unknown",
+                    "birthWeight": 4.1,
+                    "starSign": "Pisces",
+                    "mothersMaidenName": "Vail",
+                    "notes": " "
+                },
+                "quests": {},
+                "dialogue": [
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Hi! You've come a long way to get here I can tell... welcome to the Spirited Valley faceless traveler!",
+                        "NextIndex": -1,
+                        "Name": ""
+                    }
+                ]
+            }),
+        new NpcBase("Legumulyte", <NpcModel>{
+                "head": <NpcHeadModel>{
+                    "location": "Unknown",
+                    "world": "Unknown",
+                    "noQuest": 0,
+                    "type": "Unknown",
+                    "birthWeight": 4.03,
+                    "starSign": "Cancer",
+                    "mothersMaidenName": "Ventotla",
+                    "notes": " "
+                },
+                "quests": {},
+                "dialogue": [
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "... <br> Basket looks less full crops missing?",
+                        "NextIndex": 1,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Pls giv crop transfer ticket. I give magic beans you become better farmer grow more crop... give me more next time yeees...",
+                        "NextIndex": 1,
+                        "Name": ""
+                    }
+                ]
+            }),
+        new NpcBase("Potti", <NpcModel>{
+                "head": <NpcHeadModel>{
+                    "location": "Unknown",
+                    "world": "Unknown",
+                    "noQuest": 0,
+                    "type": "Unknown",
+                    "birthWeight": 3.38,
+                    "starSign": "Scorpio",
+                    "mothersMaidenName": "Yates",
+                    "notes": " "
+                },
+                "quests": {},
+                "dialogue": [
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "'The happy pot hops up and down...'",
+                        "NextIndex": 1,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "... a permanent smile molded to her face.'",
+                        "NextIndex": 1,
                         "Name": ""
                     }
                 ]

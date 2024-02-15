@@ -214,13 +214,13 @@ export const initSigilRepo = () => {
                 "desc": "Boosts Divinity EXP gain by +{%"
             }),
         new SigilBase(23, <SigilModel>{
-                "name": "World 6",
+                "name": "Cool Coin",
                 "unlockCost": 30000,
                 "boostCost": 250000,
-                "unlockBonus": 10,
-                "boostBonus": 25,
+                "unlockBonus": 20,
+                "boostBonus": 50,
                 "filler": "filler",
-                "desc": "This bonus will affect world 6. Feel free to lv it up early!"
+                "desc": "Boosts Jade Coin gain in Sneaking by +{%"
             })    
 ]
 }

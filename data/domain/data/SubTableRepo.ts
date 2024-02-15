@@ -61,7 +61,8 @@ export const initSubTableRepo = () => {
                     <SubTableModel>{"name": "Lustre", "chance": 0.0095, "quantity": 2},
                     <SubTableModel>{"name": "Starfire", "chance": 0.011, "quantity": 2},
                     <SubTableModel>{"name": "Dreadlo", "chance": 0.013, "quantity": 2},
-                    <SubTableModel>{"name": "Marble", "chance": 0.013, "quantity": 2}
+                    <SubTableModel>{"name": "Marble", "chance": 0.014, "quantity": 2},
+                    <SubTableModel>{"name": "Godshard", "chance": 0.015, "quantity": 2}
                 ]
             }),
         new SubTablesBase("DropTable5", <SubTablesModel>{
@@ -290,7 +291,45 @@ export const initSubTableRepo = () => {
                 "sources": [
                     <SubTableModel>{"name": "Crystal4", "chance": 0.17, "quantity": 1},
                     <SubTableModel>{"name": "Tree10", "chance": 0.0089, "quantity": 1},
-                    <SubTableModel>{"name": "Tree11", "chance": 0.0089, "quantity": 1}
+                    <SubTableModel>{"name": "Tree11", "chance": 0.0089, "quantity": 1},
+                    <SubTableModel>{"name": "Tree12", "chance": 0.0089, "quantity": 1},
+                    <SubTableModel>{"name": "Tree13", "chance": 0.0089, "quantity": 1}
+                ]
+            }),
+        new SubTablesBase("DropTable29", <SubTablesModel>{
+                "sources": [
+                    <SubTableModel>{"name": "Crystal5", "chance": 0.3, "quantity": 1},
+                    <SubTableModel>{"name": "w6a1", "chance": 0.0025, "quantity": 1},
+                    <SubTableModel>{"name": "w6a2", "chance": 0.0028, "quantity": 1},
+                    <SubTableModel>{"name": "w6a3", "chance": 0.0031, "quantity": 1},
+                    <SubTableModel>{"name": "w6a4", "chance": 0.0034, "quantity": 1},
+                    <SubTableModel>{"name": "w6a5", "chance": 0.0037, "quantity": 1},
+                    <SubTableModel>{"name": "Bug12", "chance": 0.015, "quantity": 1}
+                ]
+            }),
+        new SubTablesBase("DropTable30", <SubTablesModel>{
+                "sources": [
+                    <SubTableModel>{"name": "Crystal5", "chance": 0.2, "quantity": 1},
+                    <SubTableModel>{"name": "w6b1", "chance": 0.0025, "quantity": 1},
+                    <SubTableModel>{"name": "w6b2", "chance": 0.0025, "quantity": 1},
+                    <SubTableModel>{"name": "w6b3", "chance": 0.0029, "quantity": 1},
+                    <SubTableModel>{"name": "w6b4", "chance": 0.0031, "quantity": 1},
+                    <SubTableModel>{"name": "Bug13", "chance": 0.015, "quantity": 1}
+                ]
+            }),
+        new SubTablesBase("DropTable31", <SubTablesModel>{
+                "sources": [
+                    <SubTableModel>{"name": "Crystal5", "chance": 0.17, "quantity": 1},
+                    <SubTableModel>{"name": "w6c1", "chance": 0.0033, "quantity": 1},
+                    <SubTableModel>{"name": "w6c2", "chance": 0.0035, "quantity": 1}
+                ]
+            }),
+        new SubTablesBase("DropTable32", <SubTablesModel>{
+                "sources": [
+                    <SubTableModel>{"name": "Crystal5", "chance": 0.17, "quantity": 1},
+                    <SubTableModel>{"name": "w6d1", "chance": 0.0028, "quantity": 1},
+                    <SubTableModel>{"name": "w6d2", "chance": 0.0035, "quantity": 1},
+                    <SubTableModel>{"name": "w6d3", "chance": 0.0035, "quantity": 1}
                 ]
             }),
         new SubTablesBase("DropTable3c", <SubTablesModel>{
@@ -376,7 +415,8 @@ export const initSubTableRepo = () => {
                     <SubTableModel>{"name": "Lustre", "chance": 5.7e-05, "quantity": 2},
                     <SubTableModel>{"name": "Starfire", "chance": 6.6e-05, "quantity": 2},
                     <SubTableModel>{"name": "Dreadlo", "chance": 7.8e-05, "quantity": 2},
-                    <SubTableModel>{"name": "Marble", "chance": 7.8e-05, "quantity": 2},
+                    <SubTableModel>{"name": "Marble", "chance": 8.4e-05, "quantity": 2},
+                    <SubTableModel>{"name": "Godshard", "chance": 9e-05, "quantity": 2},
                     <SubTableModel>{"name": "Crystal0", "chance": 0.003, "quantity": 1},
                     <SubTableModel>{"name": "OakTree", "chance": 4.8e-05, "quantity": 1},
                     <SubTableModel>{"name": "BirchTree", "chance": 5.1e-05, "quantity": 1},
@@ -543,7 +583,33 @@ export const initSubTableRepo = () => {
                     <SubTableModel>{"name": "Boss5B", "chance": 0.005, "quantity": 2},
                     <SubTableModel>{"name": "Crystal4", "chance": 0.00102, "quantity": 1},
                     <SubTableModel>{"name": "Tree10", "chance": 5.34e-05, "quantity": 1},
-                    <SubTableModel>{"name": "Tree11", "chance": 5.34e-05, "quantity": 1}
+                    <SubTableModel>{"name": "Tree11", "chance": 5.34e-05, "quantity": 1},
+                    <SubTableModel>{"name": "Tree12", "chance": 5.34e-05, "quantity": 1},
+                    <SubTableModel>{"name": "Tree13", "chance": 5.34e-05, "quantity": 1}
+                ]
+            }),
+        new SubTablesBase("SuperDropTable6", <SubTablesModel>{
+                "sources": [
+                    <SubTableModel>{"name": "Crystal5", "chance": 0.0015, "quantity": 1},
+                    <SubTableModel>{"name": "w6a1", "chance": 1.25e-05, "quantity": 1},
+                    <SubTableModel>{"name": "w6a2", "chance": 1.4e-05, "quantity": 1},
+                    <SubTableModel>{"name": "w6a3", "chance": 1.55e-05, "quantity": 1},
+                    <SubTableModel>{"name": "w6a4", "chance": 1.7e-05, "quantity": 1},
+                    <SubTableModel>{"name": "w6a5", "chance": 1.85e-05, "quantity": 1},
+                    <SubTableModel>{"name": "Bug12", "chance": 7.5e-05, "quantity": 1},
+                    <SubTableModel>{"name": "Crystal5", "chance": 0.001, "quantity": 1},
+                    <SubTableModel>{"name": "w6b1", "chance": 1.25e-05, "quantity": 1},
+                    <SubTableModel>{"name": "w6b2", "chance": 1.25e-05, "quantity": 1},
+                    <SubTableModel>{"name": "w6b3", "chance": 1.45e-05, "quantity": 1},
+                    <SubTableModel>{"name": "w6b4", "chance": 1.55e-05, "quantity": 1},
+                    <SubTableModel>{"name": "Bug13", "chance": 7.5e-05, "quantity": 1},
+                    <SubTableModel>{"name": "Crystal5", "chance": 0.00085, "quantity": 1},
+                    <SubTableModel>{"name": "w6c1", "chance": 1.65e-05, "quantity": 1},
+                    <SubTableModel>{"name": "w6c2", "chance": 1.75e-05, "quantity": 1},
+                    <SubTableModel>{"name": "Crystal5", "chance": 0.00085, "quantity": 1},
+                    <SubTableModel>{"name": "w6d1", "chance": 1.4e-05, "quantity": 1},
+                    <SubTableModel>{"name": "w6d2", "chance": 1.75e-05, "quantity": 1},
+                    <SubTableModel>{"name": "w6d3", "chance": 1.75e-05, "quantity": 1}
                 ]
             })    
 ]

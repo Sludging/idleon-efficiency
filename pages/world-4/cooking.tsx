@@ -188,7 +188,7 @@ function Cooking() {
 
 
     const mealsToShow = useMemo(() => {
-        return cooking.meals.filter(meal => meal.timeOptimalSpices.length > 0)
+        return cooking.meals
             .sort((meal1, meal2) => {
                 const indexSort = meal1.mealIndex > meal2.mealIndex ? 1 : -1;
 
