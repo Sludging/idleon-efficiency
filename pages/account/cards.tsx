@@ -25,8 +25,11 @@ const CardBox = ({ card }: { card: Card}) => {
             <TipDisplay
                     heading={card.displayName+" Card"}
                     body={
-                        <Box margin={{ bottom: 'xsmall' }} direction='column' gap='small'>
-                            <Text size="small">Cards collected : {card.count}</Text>
+                        <Box margin={{ bottom: 'xsmall' }} width='auto' direction='column' gap='small'>
+                            <Box direction='row' gap='large'>
+                                <Text size="small">Cards collected : {card.count}</Text>
+                                <Text size="small">Base drop rate : {card.getBaseDropRateText()}</Text>
+                            </Box>
                             <Box>
                                 <Text size="small">0* : {card.getEmulatedBonusText(0)} ({Math.floor(card.getCardsForStar(0))} cards)</Text>
                                 <Text size="small">1* : {card.getEmulatedBonusText(1)} ({Math.floor(card.getCardsForStar(1))} cards)</Text>
@@ -57,7 +60,7 @@ const CardBox = ({ card }: { card: Card}) => {
                     </Box>
                     <Box direction='column' gap='none' align='left'>
                         <Text size='medium'>{card.displayName}</Text>
-                        <Text size='small'>{card.getBonusText()+((card.passive && !card.data.effect.endsWith('(Passive)')) ? ' (Passive)' : '')}</Text>
+                        <Text size='small' color={card.passive ? 'rgb(50,168,121)' : ''}>{card.getBonusText()+((card.passive && !card.data.effect.endsWith('(Passive)')) ? ' (Passive)' : '')}</Text>
                         {(currentCardLevel < 5) && <Text size="xsmall" color={'grey'}>{card.count} / {(card.getCardsForStar(5))}</Text>}
                     </Box>
                 </Box>    
