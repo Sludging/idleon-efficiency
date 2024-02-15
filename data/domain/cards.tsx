@@ -10,6 +10,7 @@ import { CardDataModel } from "./model/cardDataModel";
 import { Player } from "./player";
 import { Rift, SkillMastery } from "./rift";
 import { initCardDropChanceRepo, CardDropChanceBase } from './data/CardDropChanceRepo';
+import { nFormatter } from '../utility';
 
 export class Card {
     count: number = 0;
@@ -59,7 +60,7 @@ export class Card {
     }
 
     getBaseDropRateText = (): string => {
-        return "1 in "+Math.round(1/this.baseDropChance);
+        return (this.baseDropChance > 0) ? "1 in "+nFormatter(Math.round(1/this.baseDropChance)) : "Not Found";
     }
 
     getCardsForStar = (star: number): number => {
