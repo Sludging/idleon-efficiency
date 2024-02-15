@@ -360,8 +360,11 @@ export class Cooking extends Domain {
 
         if (mealsData.length) {
             mealsData[0].forEach((mealLevel, index) => {
-                cooking.meals[index].level = mealLevel;
-                cooking.meals[index].count = mealsData[2][index];
+                // defend against future meals.
+                if (index < cooking.meals.length) {
+                    cooking.meals[index].level = mealLevel;
+                    cooking.meals[index].count = mealsData[2][index];
+                }
             })
         }
 
