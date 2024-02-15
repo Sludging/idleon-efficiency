@@ -174,14 +174,14 @@ export const updateConstruction = (data: Map<string, any>) => {
             building.finishedUpgrade = building.currentXP >= building.getBuildCost();
         }
 
-        building.buildPercentage = Math.round((building.currentXP * 100) / building.getBuildCost());
+        building.buildPercentage = Math.min(Math.round((building.currentXP * 100) / building.getBuildCost()), 100);
 
         building.upgradable = building.getLevelCosts(building.level, costCruncher).filter((costData, index) => {
             const amountInStorage = storage?.amountInStorage(costData.item) ?? 0;
             if (amountInStorage >= costData.quantity) {
                 return true;
             }
-        }).length == 2 && building.nextLevelUnlocked;
+        }).length == 2 && (building.buildPercentage === 100 || building.nextLevelUnlocked);
     })
 
 

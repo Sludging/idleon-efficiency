@@ -84,7 +84,7 @@ export function BuildingsDisplay() {
                                 margin={{ right: 'large' }}
                             />
                             <Box justify="center" margin={{ right: 'medium' }} gap="small">
-                                {(!building.maxed && !building.nextLevelUnlocked) &&
+                                {(!building.maxed && !building.upgradable && !building.nextLevelUnlocked) &&
                                     <ComponentAndLabel
                                         label="Progress"
                                         component={
@@ -103,12 +103,12 @@ export function BuildingsDisplay() {
                                                     ]}
                                                     max={building.getBuildCost()} />
                                                 <Box align="center" pad="xxsmall">
-                                                    <Text size="small">{nFormatter(Math.floor(Math.min(building.currentXP, building.getBuildCost())))}/{nFormatter(Math.floor(building.getBuildCost()))} ({Math.min(building.buildPercentage, 100)}%)</Text>
+                                                    <Text size="small">{nFormatter(Math.floor(Math.min(building.currentXP, building.getBuildCost())))}/{nFormatter(Math.floor(building.getBuildCost()))} ({building.buildPercentage}%)</Text>
                                                 </Box>
                                             </Stack>
                                         }
                                     />}
-                                {building.nextLevelUnlocked && building.upgradable && <Text color={'green'}>Ready to Upgrade</Text>}
+                                {building.upgradable && <Text color={'green'}>Ready to Upgrade</Text>}
                                 {building.nextLevelUnlocked && !building.upgradable && <Text color={'yellow'}>Missing materials</Text>}
                             </Box>
                             {building.level != building.maxLvl &&
