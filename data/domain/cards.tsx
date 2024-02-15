@@ -25,6 +25,14 @@ export class Card {
             this.passive = true;
         }
         this.bonusID = this.getBonusID();
+        // I noticed some cards (namely w4 crystal mob for now) don't have the { in the bonus text, so I force it into it to at least show it somehow when displaying the bonus effect
+        if(this.data.effect.indexOf('{') == -1) {
+            if(this.data.effect.startsWith('+')) {
+                this.data.effect=this.data.effect.slice(0,1)+'{'+this.data.effect.slice(1);
+            } else {
+                this.data.effect='{'+this.data.effect;
+            }            
+        }
     }
 
     getImageData = (): ImageData => {
