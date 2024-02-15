@@ -9,6 +9,7 @@ import { IDforCardSETbonus } from "./cardSets";
 import { CardDataModel } from "./model/cardDataModel";
 import { Player } from "./player";
 import { Rift, SkillMastery } from "./rift";
+import { initCardDropChanceRepo, CardDropChanceBase } from './data/CardDropChanceRepo';
 
 export class Card {
     count: number = 0;
@@ -19,12 +20,15 @@ export class Card {
     fivestar: boolean = false;
     passive: boolean = false;
 
+    baseDropChance: number;
+
     constructor(public index: number, public id: string, public data: CardDataModel) {
         this.displayName = EnemyInfo.find(enemy => enemy.id == id)?.details.Name || "New Monster?";
         if (data.effect.endsWith("(Passive)")) {
             this.passive = true;
         }
         this.bonusID = this.getBonusID();
+        this.baseDropChance = initCardDropChanceRepo()?.find(cardRate => cardRate.id == "Cards"+this.data.cardID)?.data.dropChance || 0;
         // I noticed some cards (namely w4 crystal mob for now) don't have the { in the bonus text, so I force it into it to at least show it somehow when displaying the bonus effect
         if(this.data.effect.indexOf('{') == -1) {
             if(this.data.effect.startsWith('+')) {
@@ -52,6 +56,10 @@ export class Card {
             case this.count >= Math.floor(this.getCardsForStar(1)): return 1;
             default: return 0;
         }
+    }
+
+    getBaseDropRateText = (): string => {
+        return "1 in "+Math.round(1/this.baseDropChance);
     }
 
     getCardsForStar = (star: number): number => {
