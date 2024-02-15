@@ -75,7 +75,7 @@ export class Card {
         }
     }
 
-    getBonus = (star: number): number => {
+    getBonus = (star: number = this.getStars()): number => {
         if (this.count == 0) {
             return 0;
         }

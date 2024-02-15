@@ -102,7 +102,7 @@ const CardSetBox = ({ cardSet }: {cardSet: CardSet}) => {
                         </Stack>
                         <Box direction='column' gap='none' align='left'>
                             <Text size='large' style={{ fontWeight: 'bolder' }}>{cardSet.displayName}</Text>
-                            <Text size='small' color={cardSet.getBonus(currentLevel) == 0 ? 'grey' : ''}>{cardSet.getBonusText()}</Text>
+                            <Text size='small' color={cardSet.getBonus() == 0 ? 'grey' : ''}>{cardSet.getBonusText()}</Text>
                         </Box>
                     </Box>                
                 </TipDisplay>
