@@ -82,11 +82,7 @@ export class Card {
         return this.data.bonus * (star + 1) * this.chipBoost;
     }
 
-    getBonusText = (): string => {
-        return this.data.effect.replace(/{/, this.getBonus(this.getStars()).toString());
-    }
-
-    getEmulatedBonusText = (star: number): string => {
+    getBonusText = (star: number = this.getStars()): string => {
         return this.data.effect.replace(/{/, this.getBonus(star).toString());
     }
 

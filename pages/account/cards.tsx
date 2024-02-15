@@ -31,12 +31,12 @@ const CardBox = ({ card }: { card: Card}) => {
                                 <Text size="small">Base drop rate : {card.getBaseDropRateText()}</Text>
                             </Box>
                             <Box>
-                                <Text size="small">0* : {card.getEmulatedBonusText(0)} ({Math.floor(card.getCardsForStar(0))} cards)</Text>
-                                <Text size="small">1* : {card.getEmulatedBonusText(1)} ({Math.floor(card.getCardsForStar(1))} cards)</Text>
-                                <Text size="small">2* : {card.getEmulatedBonusText(2)} ({Math.floor(card.getCardsForStar(2))} cards)</Text>
-                                <Text size="small">3* : {card.getEmulatedBonusText(3)} ({Math.floor(card.getCardsForStar(3))} cards)</Text>
-                                <Text size="small">4* : {card.getEmulatedBonusText(4)} ({Math.floor(card.getCardsForStar(4))} cards)</Text>
-                                <Text size="small">5* : {card.getEmulatedBonusText(5)} ({Math.floor(card.getCardsForStar(5))} cards)</Text>
+                                <Text size="small">0* : {card.getBonusText(0)} ({Math.floor(card.getCardsForStar(0))} cards)</Text>
+                                <Text size="small">1* : {card.getBonusText(1)} ({Math.floor(card.getCardsForStar(1))} cards)</Text>
+                                <Text size="small">2* : {card.getBonusText(2)} ({Math.floor(card.getCardsForStar(2))} cards)</Text>
+                                <Text size="small">3* : {card.getBonusText(3)} ({Math.floor(card.getCardsForStar(3))} cards)</Text>
+                                <Text size="small">4* : {card.getBonusText(4)} ({Math.floor(card.getCardsForStar(4))} cards)</Text>
+                                <Text size="small">5* : {card.getBonusText(5)} ({Math.floor(card.getCardsForStar(5))} cards)</Text>
                             </Box>
                             {(currentCardLevel < 5) && 
                                 <Box>
@@ -85,7 +85,7 @@ const CardSetBox = ({ cardSet }: {cardSet: CardSet}) => {
                                 {(currentLevel < 5) && 
                                     <Box direction='column' gap='xsmall'>
                                         <Text size="small">Next bonus level in {(cardSet.cards?.length * (nextLevel+1))-totalCardLevels} card levels :</Text>
-                                        <Text size="small">{cardSet.getEmulatedBonusText(nextLevel)}</Text>
+                                        <Text size="small">{cardSet.getBonusText(nextLevel)}</Text>
                                     </Box>                                
                                 }
                             </Box>

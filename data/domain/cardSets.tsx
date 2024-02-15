@@ -64,11 +64,7 @@ export class CardSet {
         return this.baseBonusValue * level;
     }
 
-    getBonusText = (): string => {
-        return this.bonusText.replace(/{/, this.getBonus(this.getLevel()).toString());
-    }
-
-    getEmulatedBonusText = (level: number): string => {
+    getBonusText = (level: number = this.getLevel()): string => {
         return this.bonusText.replace(/{/, this.getBonus(level).toString());
     }
 
