@@ -14,8 +14,9 @@ import { AppContext } from '../../data/appContext';
 import { Chip, Lab as LabDomain } from '../../data/domain/lab';
 import { Player } from '../../data/domain/player';
 import { SkillsIndex } from "../../data/domain/SkillsIndex";
+import { CharacterBox } from '../../components/base/CharacterBox';
 
-function CharacterBox({ player, lineWidth, supped = false }: { player: Player, lineWidth: string, supped?: boolean }) {
+function CharacterBoxOld({ player, lineWidth, supped = false }: { player: Player, lineWidth: string, supped?: boolean }) {
     const theBox = (
         <Box background="dark-2" align="center" pad={{ top: "xsmall", bottom: "xsmall", left: "small", right: "small" }} gap="xsmall" direction="row" border={{ size: '1px', color: supped ? 'green-1' : 'grey-1' }}>
             <IconImage data={player.getClassImageData()} scale={0.6} />
@@ -25,7 +26,7 @@ function CharacterBox({ player, lineWidth, supped = false }: { player: Player, l
             <Box direction="row">
                 <Box pad={{ right: 'small' }} margin={{ right: 'small' }} direction="row" border={{ side: 'right', color: 'grey-1' }} align="center">
                     <Box width={{ max: '15px' }} margin={{ right: 'xsmall' }}>
-                        <IconImage data={{location: 'ClassIcons53', height: 36, width: 38}} scale={0.4} />
+                        <IconImage data={{ location: 'ClassIcons53', height: 36, width: 38 }} scale={0.4} />
                     </Box>
                     <Text size="small" truncate={true}>{player.skills.get(SkillsIndex.Intellect)?.level}</Text>
                 </Box>
@@ -86,7 +87,22 @@ function MainframeDisplay() {
                     {
                         lab?.playersInTubes?.map((player, index) => (
                             <Box key={index} margin={{ right: 'small', bottom: 'small' }}>
-                                <CharacterBox player={player} lineWidth={player.labInfo.lineWidth.toString()} supped={player.labInfo.supped} />
+                                <CharacterBox
+                                    player={player}
+                                    borderColor={player.labInfo.supped ? 'green-1' : 'grey-1'}
+                                    children={
+                                        <Box direction="row" margin={{top: 'xsmall'}}>
+                                            <Box pad={{ right: 'small' }} margin={{ right: 'small' }} direction="row" border={{ side: 'right', color: 'grey-1' }} align="center">
+                                                <Box width={{ max: '15px' }} margin={{ right: 'xsmall' }}>
+                                                    <IconImage data={{ location: 'ClassIcons53', height: 36, width: 38 }} scale={0.4} />
+                                                </Box>
+                                                <Text size="small" truncate={true}>{player.skills.get(SkillsIndex.Intellect)?.level}</Text>
+                                            </Box>
+                                            <Box>
+                                                <Text size="small" truncate={true}>{player.labInfo.lineWidth.toString()}px</Text>
+                                            </Box>
+                                        </Box>
+                                    } />
                             </Box>
                         ))
                     }
