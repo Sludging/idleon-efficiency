@@ -27,12 +27,12 @@ const CardBox = ({ card }: { card: Card}) => {
                         <Box margin={{ bottom: 'xsmall' }} direction='column' gap='small'>
                             <Text size="small">Cards collected : {card.count}</Text>
                             <Box>
-                                <Text size="small">0* : {card.getEmulatedBonusText(0)}</Text>
-                                <Text size="small">1* : {card.getEmulatedBonusText(1)}</Text>
-                                <Text size="small">2* : {card.getEmulatedBonusText(2)}</Text>
-                                <Text size="small">3* : {card.getEmulatedBonusText(3)}</Text>
-                                <Text size="small">4* : {card.getEmulatedBonusText(4)}</Text>
-                                <Text size="small">5* : {card.getEmulatedBonusText(5)}</Text>
+                                <Text size="small">0* : {card.getEmulatedBonusText(0)} ({Math.floor(card.getCardsForStar(0))} cards)</Text>
+                                <Text size="small">1* : {card.getEmulatedBonusText(1)} ({Math.floor(card.getCardsForStar(1))} cards)</Text>
+                                <Text size="small">2* : {card.getEmulatedBonusText(2)} ({Math.floor(card.getCardsForStar(2))} cards)</Text>
+                                <Text size="small">3* : {card.getEmulatedBonusText(3)} ({Math.floor(card.getCardsForStar(3))} cards)</Text>
+                                <Text size="small">4* : {card.getEmulatedBonusText(4)} ({Math.floor(card.getCardsForStar(4))} cards)</Text>
+                                <Text size="small">5* : {card.getEmulatedBonusText(5)} ({Math.floor(card.getCardsForStar(5))} cards)</Text>
                             </Box>
                             {(currentCardLevel < 5) && <Text size="small">Next card level in {card.count > 0 ? (card.getCardsForStar(currentCardLevel+1)-card.count) : 1} cards</Text>}
                         </Box>
