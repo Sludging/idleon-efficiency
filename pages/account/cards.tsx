@@ -18,6 +18,7 @@ import { initCardSetRepo } from '../../data/domain/data/CardSetRepo';
 
 const CardBox = ({ card }: { card: Card}) => {
     const currentCardLevel = card.getStars();
+    const cardsToNextLevel = card.count > 0 ? (card.getCardsForStar(currentCardLevel+1)-card.count) : 1;
 
     return (
         <ShadowBox background='dark-1' style={{ opacity: card.count > 0 ? 1 : 0.5 }} gap='small' pad='medium' align='left'>
@@ -34,7 +35,12 @@ const CardBox = ({ card }: { card: Card}) => {
                                 <Text size="small">4* : {card.getEmulatedBonusText(4)} ({Math.floor(card.getCardsForStar(4))} cards)</Text>
                                 <Text size="small">5* : {card.getEmulatedBonusText(5)} ({Math.floor(card.getCardsForStar(5))} cards)</Text>
                             </Box>
-                            {(currentCardLevel < 5) && <Text size="small">Next card level in {card.count > 0 ? (card.getCardsForStar(currentCardLevel+1)-card.count) : 1} cards</Text>}
+                            {(currentCardLevel < 5) && 
+                                <Box>
+                                    <Text size="small">Next card level in {Math.floor(cardsToNextLevel)} cards</Text>
+                                    {cardsToNextLevel != Math.floor(cardsToNextLevel) && <Text size="small">/!\ In-game will say {Math.ceil(cardsToNextLevel)} but it's technically {Math.floor(cardsToNextLevel)} due to rounding shenanigans</Text>}
+                                </Box>
+                            }
                         </Box>
                     }
                 >
@@ -52,7 +58,7 @@ const CardBox = ({ card }: { card: Card}) => {
                     <Box direction='column' gap='none' align='left'>
                         <Text size='medium'>{card.displayName}</Text>
                         <Text size='small'>{card.getBonusText()+((card.passive && !card.data.effect.endsWith('(Passive)')) ? ' (Passive)' : '')}</Text>
-                        {(currentCardLevel < 5) && <Text size="xsmall" color={'grey'}>{card.count} / {(card.getCardsForStar(5))} cards</Text>}
+                        {(currentCardLevel < 5) && <Text size="xsmall" color={'grey'}>{card.count} / {(card.getCardsForStar(5))}</Text>}
                     </Box>
                 </Box>    
             </TipDisplay>        
