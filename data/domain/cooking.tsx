@@ -272,12 +272,11 @@ export class Cooking extends Domain {
     foodLustDiscountCapped: boolean = false;
 
     getMaxMeals = () => {
-        // Lava is using 'Turkey a la Thank' as filler name in the end, remove all of those meals and add 1 for the first meal which is real.
-        return this.meals.filter(meal => meal.name != "Turkey a la Thank").length + 1;
+        return this.meals.length;
     }
 
     getMealsFromSpiceValues = (valueOfSpices: number[]): number[] => {
-        const possibleMeals: number[] = [];
+        let possibleMeals: number[] = [];
         // Each spice value is also a possible meal.
         valueOfSpices.forEach(value => {
             if (!possibleMeals.includes(value)) {
@@ -285,7 +284,15 @@ export class Cooking extends Domain {
             }
         });
         // the sum of spice indexes is a possible meal.
-        const sum = valueOfSpices.reduce((sum, value) => sum += spiceValues.indexOf(value), 0);
+        let sum = valueOfSpices.reduce((sum, value) => sum += spiceValues.indexOf(value), 0);
+        // New W6 meals require at least one W6 spice, so filter those out if we don't have at least one w6 spice
+        // This exact number of -14 and min of 55 is stolen from the code. So .. it works :shrug:
+        if (sum > 71) {
+            sum = sum - 14;
+        }
+        else {
+            sum = Math.min(55, sum);
+        }
         if (!spiceValues.includes(sum)) {
             possibleMeals.push(sum);
         }
@@ -299,8 +306,8 @@ export class Cooking extends Domain {
             possibleMeals.push(sum + 1);
         }
 
-        // remove all outcomes that are larger than 66 and return sorted by lowest meal to highest.
-        return possibleMeals.filter(meal => meal < 66).sort((meal1, meal2) => meal1 < meal2 ? -1 : 1);
+        // remove all outcomes that are larger than the current number of available meals in the game and return sorted by lowest meal to highest.
+        return possibleMeals.filter(meal => meal < this.meals.length).sort((meal1, meal2) => meal1 < meal2 ? -1 : 1);
     }
 
     spicesToValues = (spices: number[]) => {
@@ -312,7 +319,8 @@ export class Cooking extends Domain {
         if (lastMeal < this.meals.length) {
             return 2 * this.meals[lastMeal].cookReq
         }
-        return 2 * 5000000000
+        // I forgot what this code does, so no idea why we have this weird default. I'm going to set it to the last meal cooking req
+        return 2 * 50000000000000000
     }
 
     getNextKitchenCost = () => {
@@ -345,7 +353,7 @@ export class Cooking extends Domain {
         this.meals = Meal.fromBase(initMealRepo());
         this.spices = [...Array(territoryNiceNames.length - 1)].map(index => 0);
 
-        populateDiscovery(this);
+        populateDiscovery(this, true);
         return this;
     }
 
@@ -384,12 +392,15 @@ export class Cooking extends Domain {
     }
 }
 
-const populateDiscovery = (cooking: Cooking) => {
-    // Lava is using 'Turkey a la Thank' as filler name in the end, remove all of those meals and add 1 for the first meal which is real.
-    const mealsThatCanBeDiscovered = cooking.meals.length //.filter(meal => meal.name != "Turkey a la Thank").length + 1;
+const populateDiscovery = (cooking: Cooking, hidew6: boolean = false) => {
+    const mealsThatCanBeDiscovered = cooking.meals.length;
 
-    const availableValues = cooking.spicesToValues(cooking.spices.map((spice, index) => index)).filter(value => value != -1).filter(notUndefined);
-    const outputlucktime = [...Array(mealsThatCanBeDiscovered)].map((_, index) => 5000000000 * 2 / .004)
+    let availableValues = cooking.spicesToValues(cooking.spices.map((spice, index) => spice != -1 ? index : -1).filter(value => value != -1));
+    // Lava wants w6 meals to be hidden for a while, so we hide them on init to avoid fake discovery values.
+    if (hidew6) {
+        availableValues = availableValues.filter(spice => spice <= 56);
+    }
+    const outputlucktime = [...Array(mealsThatCanBeDiscovered)].map((_, index) => 50000000000000000 * 2 / .004)
     const outputLuck = [...Array(mealsThatCanBeDiscovered)].map((_, index) => 0)
     for (let len of range(0, 3)) {
         const possibleCombinations = combinations(availableValues, len + 1);
@@ -428,7 +439,6 @@ const populateDiscovery = (cooking: Cooking) => {
             })
         }
     }
-    console.log(cooking.meals);
 }
 
 export const updateCooking = (data: Map<string, any>) => {

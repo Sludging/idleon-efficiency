@@ -188,7 +188,7 @@ function Cooking() {
 
 
     const mealsToShow = useMemo(() => {
-        return cooking.meals
+        return cooking.meals.filter(meal => meal.timeOptimalSpices.length > 0)
             .sort((meal1, meal2) => {
                 const indexSort = meal1.mealIndex > meal2.mealIndex ? 1 : -1;
 
@@ -228,7 +228,7 @@ function Cooking() {
                         return indexSort;
                 }
             })
-    }, [cooking, sort])
+    }, [appContext, cooking, sort])
 
     function getMealExtraText(meal: Meal) {
         if (meal.level == 0) return "" //undiscovered meals
