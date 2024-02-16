@@ -226,6 +226,7 @@ function Quests() {
                     <TabButton isActive={activeWorld == "Frostbite Tundra"} text="World 3" clickHandler={() => { setActiveWorld("Frostbite Tundra"); onActive(1) }} />
                     <TabButton isActive={activeWorld == "Hyperion Nebula"} text="World 4" clickHandler={() => { setActiveWorld("Hyperion Nebula"); onActive(1) }} />
                     <TabButton isActive={activeWorld == "Smolderin' Plateau"} text="World 5" clickHandler={() => { setActiveWorld("Smolderin' Plateau"); onActive(1) }} />
+                    <TabButton isActive={activeWorld == "Spirited Valley"} text="World 6" clickHandler={() => { setActiveWorld("Spirited Valley"); onActive(1) }} />
                     <TabButton isActive={activeWorld == "Events"} text="Events" clickHandler={() => { setActiveWorld("Events"); onActive(1) }} />
                 </Box>
                 <Box pad={{ horizontal: "large", top: "small" }}>
