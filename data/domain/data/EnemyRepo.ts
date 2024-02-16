@@ -237,13 +237,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "CritterCard10",
-                    "next": "SoulCard4",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("SoulCard4", <EnemyModel>{
@@ -279,13 +273,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "SoulCard3",
-                    "next": "SoulCard5",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("SoulCard5", <EnemyModel>{
@@ -321,13 +309,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "SoulCard4",
-                    "next": "SoulCard6",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("SoulCard6", <EnemyModel>{
@@ -363,13 +345,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "SoulCard5",
-                    "next": "SoulCard7",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("SoulCard7", <EnemyModel>{
@@ -405,13 +381,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "SoulCard6",
-                    "next": "Fish9",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("CritterCard1", <EnemyModel>{
@@ -543,13 +513,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "Bug13",
-                    "next": "CritterCard5",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("CritterCard5", <EnemyModel>{
@@ -582,13 +546,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "CritterCard4",
-                    "next": "CritterCard6",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("CritterCard6", <EnemyModel>{
@@ -621,13 +579,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "CritterCard5",
-                    "next": "CritterCard7",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("CritterCard7", <EnemyModel>{
@@ -660,13 +612,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "CritterCard6",
-                    "next": "CritterCard8",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("CritterCard8", <EnemyModel>{
@@ -699,13 +645,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "CritterCard7",
-                    "next": "CritterCard9",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("CritterCard9", <EnemyModel>{
@@ -738,13 +678,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "CritterCard8",
-                    "next": "CritterCard10",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("CritterCard10", <EnemyModel>{
@@ -777,13 +711,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "CritterCard9",
-                    "next": "SoulCard3",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("Cooking", <EnemyModel>{
@@ -2057,7 +1985,13 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "w4c4",
+                    "next": "Blank",
+                    "hasCrystal": false,
+                    "crystalName": "Crystal3",
+                    "hasCard": true
+                },
                 "bossData": undefined
             }),
         new EnemyBase("Crystal4", <EnemyModel>{
@@ -2098,7 +2032,7 @@ export const initEnemyRepo = () => {
                     "prev": "w5c2",
                     "next": "Blank",
                     "hasCrystal": false,
-                    "crystalName": "Crystal3",
+                    "crystalName": "Crystal4",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -2141,7 +2075,7 @@ export const initEnemyRepo = () => {
                     "prev": "w6d3",
                     "next": "Blank",
                     "hasCrystal": false,
-                    "crystalName": "Crystal4",
+                    "crystalName": "Crystal5",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -4144,7 +4078,13 @@ export const initEnemyRepo = () => {
                     "map": <MapNameModel>{"intName": "xSpaceA1", "name": "Spaceway Raceway", "id": 151},
                     "portalRequirements": [5000]
                 },
-                "navigation": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": undefined,
+                    "next": "w4a2",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal3",
+                    "hasCard": true
+                },
                 "bossData": undefined
             }),
         new EnemyBase("w4a2", <EnemyModel>{
@@ -4186,7 +4126,13 @@ export const initEnemyRepo = () => {
                     "map": <MapNameModel>{"intName": "xSpaceA2", "name": "TV Outpost", "id": 152},
                     "portalRequirements": [12000]
                 },
-                "navigation": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "mushP",
+                    "next": "w4a3",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal3",
+                    "hasCard": true
+                },
                 "bossData": undefined
             }),
         new EnemyBase("w4a3", <EnemyModel>{
@@ -4226,7 +4172,13 @@ export const initEnemyRepo = () => {
                     "map": <MapNameModel>{"intName": "xSpaceA3", "name": "Donut Drive-In", "id": 153},
                     "portalRequirements": [18000]
                 },
-                "navigation": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "w4a2",
+                    "next": "demonP",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal3",
+                    "hasCard": true
+                },
                 "bossData": undefined
             }),
         new EnemyBase("demonP", <EnemyModel>{
@@ -4266,7 +4218,13 @@ export const initEnemyRepo = () => {
                     "map": <MapNameModel>{"intName": "xSpaceA4", "name": "Outskirts of Fallstar Isle", "id": 154},
                     "portalRequirements": [25000]
                 },
-                "navigation": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "w4a3",
+                    "next": "w4b2",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal3",
+                    "hasCard": true
+                },
                 "bossData": undefined
             }),
         new EnemyBase("w4b2", <EnemyModel>{
@@ -4306,7 +4264,13 @@ export const initEnemyRepo = () => {
                     "map": <MapNameModel>{"intName": "xSpaceB1", "name": "Mountainous Deugh", "id": 155},
                     "portalRequirements": [40000]
                 },
-                "navigation": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "demonP",
+                    "next": "w4b1",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal3",
+                    "hasCard": true
+                },
                 "bossData": undefined
             }),
         new EnemyBase("w4b1", <EnemyModel>{
@@ -4346,7 +4310,13 @@ export const initEnemyRepo = () => {
                     "map": <MapNameModel>{"intName": "xSpaceB2", "name": "Wurm Highway", "id": 156},
                     "portalRequirements": [60000]
                 },
-                "navigation": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "w4b2",
+                    "next": "w4b3",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal3",
+                    "hasCard": true
+                },
                 "bossData": undefined
             }),
         new EnemyBase("w4b3", <EnemyModel>{
@@ -4387,7 +4357,13 @@ export const initEnemyRepo = () => {
                     "map": <MapNameModel>{"intName": "xSpaceB3", "name": "Jelly Cube Bridge", "id": 157},
                     "portalRequirements": [90000]
                 },
-                "navigation": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "w4b1",
+                    "next": "w4b4",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal3",
+                    "hasCard": true
+                },
                 "bossData": undefined
             }),
         new EnemyBase("w4b4", <EnemyModel>{
@@ -4427,7 +4403,13 @@ export const initEnemyRepo = () => {
                     "map": <MapNameModel>{"intName": "xSpaceB4", "name": "Cocoa Tunnel", "id": 158},
                     "portalRequirements": [120000]
                 },
-                "navigation": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "w4b3",
+                    "next": "w4b5",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal3",
+                    "hasCard": true
+                },
                 "bossData": undefined
             }),
         new EnemyBase("w4b5", <EnemyModel>{
@@ -4467,7 +4449,13 @@ export const initEnemyRepo = () => {
                     "map": <MapNameModel>{"intName": "xSpaceB5", "name": "Standstill Plains", "id": 159},
                     "portalRequirements": [150000]
                 },
-                "navigation": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "w4b4",
+                    "next": "w4c1",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal3",
+                    "hasCard": true
+                },
                 "bossData": undefined
             }),
         new EnemyBase("w4c1", <EnemyModel>{
@@ -4507,7 +4495,13 @@ export const initEnemyRepo = () => {
                     "map": <MapNameModel>{"intName": "xSpaceC1", "name": "Shelled Shores", "id": 160},
                     "portalRequirements": [190000]
                 },
-                "navigation": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "w4b5",
+                    "next": "w4c2",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal3",
+                    "hasCard": true
+                },
                 "bossData": undefined
             }),
         new EnemyBase("w4c2", <EnemyModel>{
@@ -4547,7 +4541,13 @@ export const initEnemyRepo = () => {
                     "map": <MapNameModel>{"intName": "xSpaceC2", "name": "The Untraveled Octopath", "id": 161},
                     "portalRequirements": [250000]
                 },
-                "navigation": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "w4c1",
+                    "next": "w4c3",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal3",
+                    "hasCard": true
+                },
                 "bossData": undefined
             }),
         new EnemyBase("w4c3", <EnemyModel>{
@@ -4587,7 +4587,13 @@ export const initEnemyRepo = () => {
                     "map": <MapNameModel>{"intName": "xSpaceC3", "name": "Flamboyant Bayou", "id": 162},
                     "portalRequirements": [300000]
                 },
-                "navigation": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "w4c2",
+                    "next": "w4c4",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal3",
+                    "hasCard": true
+                },
                 "bossData": undefined
             }),
         new EnemyBase("w4c4", <EnemyModel>{
@@ -4627,7 +4633,13 @@ export const initEnemyRepo = () => {
                     "map": <MapNameModel>{"intName": "xSpaceC4", "name": "Enclave of Eyes", "id": 163},
                     "portalRequirements": [350000]
                 },
-                "navigation": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "w4c3",
+                    "next": "Crystal3",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal3",
+                    "hasCard": true
+                },
                 "bossData": undefined
             }),
         new EnemyBase("w5a1", <EnemyModel>{
@@ -4672,7 +4684,7 @@ export const initEnemyRepo = () => {
                     "prev": undefined,
                     "next": "w5a2",
                     "hasCrystal": true,
-                    "crystalName": "Crystal3",
+                    "crystalName": "Crystal4",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -4719,7 +4731,7 @@ export const initEnemyRepo = () => {
                     "prev": "w5a1",
                     "next": "w5a3",
                     "hasCrystal": true,
-                    "crystalName": "Crystal3",
+                    "crystalName": "Crystal4",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -4765,7 +4777,7 @@ export const initEnemyRepo = () => {
                     "prev": "w5a2",
                     "next": "w5a4",
                     "hasCrystal": true,
-                    "crystalName": "Crystal3",
+                    "crystalName": "Crystal4",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -4812,7 +4824,7 @@ export const initEnemyRepo = () => {
                     "prev": "w5a3",
                     "next": "w5a5",
                     "hasCrystal": true,
-                    "crystalName": "Crystal3",
+                    "crystalName": "Crystal4",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -4859,7 +4871,7 @@ export const initEnemyRepo = () => {
                     "prev": "w5a4",
                     "next": "w5b1",
                     "hasCrystal": true,
-                    "crystalName": "Crystal3",
+                    "crystalName": "Crystal4",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -4905,7 +4917,7 @@ export const initEnemyRepo = () => {
                     "prev": "w5a5",
                     "next": "w5b2",
                     "hasCrystal": true,
-                    "crystalName": "Crystal3",
+                    "crystalName": "Crystal4",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -4951,7 +4963,7 @@ export const initEnemyRepo = () => {
                     "prev": "w5b1",
                     "next": "w5b3",
                     "hasCrystal": true,
-                    "crystalName": "Crystal3",
+                    "crystalName": "Crystal4",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -4998,7 +5010,7 @@ export const initEnemyRepo = () => {
                     "prev": "w5b2",
                     "next": "w5b4",
                     "hasCrystal": true,
-                    "crystalName": "Crystal3",
+                    "crystalName": "Crystal4",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -5045,7 +5057,7 @@ export const initEnemyRepo = () => {
                     "prev": "w5b3",
                     "next": "w5b5",
                     "hasCrystal": true,
-                    "crystalName": "Crystal3",
+                    "crystalName": "Crystal4",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -5091,7 +5103,7 @@ export const initEnemyRepo = () => {
                     "prev": "w5b4",
                     "next": "w5b6",
                     "hasCrystal": true,
-                    "crystalName": "Crystal3",
+                    "crystalName": "Crystal4",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -5138,7 +5150,7 @@ export const initEnemyRepo = () => {
                     "prev": "w5b5",
                     "next": "w5c1",
                     "hasCrystal": true,
-                    "crystalName": "Crystal3",
+                    "crystalName": "Crystal4",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -5184,7 +5196,7 @@ export const initEnemyRepo = () => {
                     "prev": "w5b6",
                     "next": "w5c2",
                     "hasCrystal": true,
-                    "crystalName": "Crystal3",
+                    "crystalName": "Crystal4",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -5231,7 +5243,7 @@ export const initEnemyRepo = () => {
                     "prev": "w5c1",
                     "next": "Crystal4",
                     "hasCrystal": true,
-                    "crystalName": "Crystal3",
+                    "crystalName": "Crystal4",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -5269,7 +5281,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "w6a1",
-                    "world": "World6",
+                    "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritA1", "name": "Gooble Goop Creek", "id": 251},
                     "portalRequirements": [30000]
                 },
@@ -5277,7 +5289,7 @@ export const initEnemyRepo = () => {
                     "prev": undefined,
                     "next": "w6a2",
                     "hasCrystal": true,
-                    "crystalName": "Crystal4",
+                    "crystalName": "Crystal5",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -5316,7 +5328,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "w6a2",
-                    "world": "World6",
+                    "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritA2", "name": "Picnic Bridgeways", "id": 252},
                     "portalRequirements": [50000]
                 },
@@ -5324,7 +5336,7 @@ export const initEnemyRepo = () => {
                     "prev": "w6a1",
                     "next": "w6a3",
                     "hasCrystal": true,
-                    "crystalName": "Crystal4",
+                    "crystalName": "Crystal5",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -5362,7 +5374,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "w6a3",
-                    "world": "World6",
+                    "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritA3", "name": "Irrigation Station", "id": 253},
                     "portalRequirements": [100000]
                 },
@@ -5370,7 +5382,7 @@ export const initEnemyRepo = () => {
                     "prev": "w6a2",
                     "next": "w6a4",
                     "hasCrystal": true,
-                    "crystalName": "Crystal4",
+                    "crystalName": "Crystal5",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -5408,7 +5420,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "w6a4",
-                    "world": "World6",
+                    "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritA4", "name": "Troll Playground", "id": 254},
                     "portalRequirements": [250000]
                 },
@@ -5416,7 +5428,7 @@ export const initEnemyRepo = () => {
                     "prev": "w6a3",
                     "next": "w6a5",
                     "hasCrystal": true,
-                    "crystalName": "Crystal4",
+                    "crystalName": "Crystal5",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -5454,7 +5466,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "w6a5",
-                    "world": "World6",
+                    "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritA5", "name": "Edge of the Valley", "id": 255},
                     "portalRequirements": [400000]
                 },
@@ -5462,7 +5474,7 @@ export const initEnemyRepo = () => {
                     "prev": "w6a4",
                     "next": "w6b1",
                     "hasCrystal": true,
-                    "crystalName": "Crystal4",
+                    "crystalName": "Crystal5",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -5499,7 +5511,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "w6b1",
-                    "world": "World6",
+                    "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritB1", "name": "Bamboo Laboredge", "id": 256},
                     "portalRequirements": [1100000]
                 },
@@ -5507,7 +5519,7 @@ export const initEnemyRepo = () => {
                     "prev": "w6a5",
                     "next": "w6b2",
                     "hasCrystal": true,
-                    "crystalName": "Crystal4",
+                    "crystalName": "Crystal5",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -5546,7 +5558,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "w6b2",
-                    "world": "World6",
+                    "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritB2", "name": "Lightway Path", "id": 257},
                     "portalRequirements": [3200000]
                 },
@@ -5554,7 +5566,7 @@ export const initEnemyRepo = () => {
                     "prev": "w6b1",
                     "next": "w6b3",
                     "hasCrystal": true,
-                    "crystalName": "Crystal4",
+                    "crystalName": "Crystal5",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -5592,7 +5604,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "w6b3",
-                    "world": "World6",
+                    "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritB3", "name": "Troll Broodnest", "id": 258},
                     "portalRequirements": [8000000]
                 },
@@ -5600,7 +5612,7 @@ export const initEnemyRepo = () => {
                     "prev": "w6b2",
                     "next": "w6b4",
                     "hasCrystal": true,
-                    "crystalName": "Crystal4",
+                    "crystalName": "Crystal5",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -5638,7 +5650,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "w6b4",
-                    "world": "World6",
+                    "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritB4", "name": "Above the Clouds", "id": 259},
                     "portalRequirements": [12000000]
                 },
@@ -5646,7 +5658,7 @@ export const initEnemyRepo = () => {
                     "prev": "w6b3",
                     "next": "w6c1",
                     "hasCrystal": true,
-                    "crystalName": "Crystal4",
+                    "crystalName": "Crystal5",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -5684,7 +5696,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "w6c1",
-                    "world": "World6",
+                    "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritC1", "name": "Sleepy Skyline", "id": 260},
                     "portalRequirements": [25000000]
                 },
@@ -5692,7 +5704,7 @@ export const initEnemyRepo = () => {
                     "prev": "w6b4",
                     "next": "w6c2",
                     "hasCrystal": true,
-                    "crystalName": "Crystal4",
+                    "crystalName": "Crystal5",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -5733,7 +5745,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "w6c2",
-                    "world": "World6",
+                    "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritC2", "name": "Dozey Dogpark", "id": 261},
                     "portalRequirements": [70000000]
                 },
@@ -5741,7 +5753,7 @@ export const initEnemyRepo = () => {
                     "prev": "w6c1",
                     "next": "w6d1",
                     "hasCrystal": true,
-                    "crystalName": "Crystal4",
+                    "crystalName": "Crystal5",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -5778,7 +5790,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "w6d1",
-                    "world": "World6",
+                    "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritD1", "name": "Yolkrock Basin", "id": 262},
                     "portalRequirements": [100000000]
                 },
@@ -5786,7 +5798,7 @@ export const initEnemyRepo = () => {
                     "prev": "w6c2",
                     "next": "w6d2",
                     "hasCrystal": true,
-                    "crystalName": "Crystal4",
+                    "crystalName": "Crystal5",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -5824,7 +5836,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "w6d2",
-                    "world": "World6",
+                    "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritD2", "name": "Chieftain Stairway", "id": 263},
                     "portalRequirements": [150000000]
                 },
@@ -5832,7 +5844,7 @@ export const initEnemyRepo = () => {
                     "prev": "w6d1",
                     "next": "w6d3",
                     "hasCrystal": true,
-                    "crystalName": "Crystal4",
+                    "crystalName": "Crystal5",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -5870,7 +5882,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": <MapDataModel>{
                     "enemy": "w6d3",
-                    "world": "World6",
+                    "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritD3", "name": "Emperor's Castle Doorstep", "id": 264},
                     "portalRequirements": [100]
                 },
@@ -5878,7 +5890,7 @@ export const initEnemyRepo = () => {
                     "prev": "w6d2",
                     "next": "Crystal5",
                     "hasCrystal": true,
-                    "crystalName": "Crystal4",
+                    "crystalName": "Crystal5",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -8630,13 +8642,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": undefined,
-                    "next": "Starfire",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("Starfire", <EnemyModel>{
@@ -8674,13 +8680,7 @@ export const initEnemyRepo = () => {
                     "map": <MapNameModel>{"intName": "MininggE", "name": "Slip Slidy Ledges", "id": 12},
                     "portalRequirements": [60]
                 },
-                "navigation": <EnemyNavModel>{
-                    "prev": "Lustre",
-                    "next": "Dreadlo",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("Dreadlo", <EnemyModel>{
@@ -8713,13 +8713,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "Starfire",
-                    "next": "Godshard",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("Godshard", <EnemyModel>{
@@ -8757,13 +8751,7 @@ export const initEnemyRepo = () => {
                     "map": <MapNameModel>{"intName": "MininggF", "name": "Motherlode Pit", "id": 32},
                     "portalRequirements": [0]
                 },
-                "navigation": <EnemyNavModel>{
-                    "prev": "Dreadlo",
-                    "next": "SaharanFoal",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("Marble", <EnemyModel>{
@@ -9060,13 +9048,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "Godshard",
-                    "next": "Tree7",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("Tree7", <EnemyModel>{
@@ -9099,13 +9081,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "SaharanFoal",
-                    "next": "AlienTree",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("AlienTree", <EnemyModel>{
@@ -9138,13 +9114,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "Tree7",
-                    "next": "Tree8",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("Tree8", <EnemyModel>{
@@ -9177,13 +9147,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "AlienTree",
-                    "next": "Tree9",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("Tree9", <EnemyModel>{
@@ -9216,13 +9180,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "Tree8",
-                    "next": "Tree10",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("Tree10", <EnemyModel>{
@@ -9255,13 +9213,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "Tree9",
-                    "next": "Tree12",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("Tree11", <EnemyModel>{
@@ -9327,13 +9279,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "Tree10",
-                    "next": "Tree13",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("Tree13", <EnemyModel>{
@@ -9366,13 +9312,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "Tree12",
-                    "next": "Fish5",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("FishSmall", <EnemyModel>{
@@ -9670,13 +9610,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "Tree13",
-                    "next": "Fish6",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("Fish6", <EnemyModel>{
@@ -9708,13 +9642,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "Fish5",
-                    "next": "Fish7",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("Fish7", <EnemyModel>{
@@ -9746,13 +9674,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "Fish6",
-                    "next": "Fish8",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("Fish8", <EnemyModel>{
@@ -9784,13 +9706,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "Fish7",
-                    "next": "Bug5",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("Fish9", <EnemyModel>{
@@ -9822,13 +9738,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "SoulCard7",
-                    "next": "Fish10",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("Fish10", <EnemyModel>{
@@ -9860,13 +9770,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "Fish9",
-                    "next": "Fish11",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("Fish11", <EnemyModel>{
@@ -9898,13 +9802,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "Fish10",
-                    "next": "Fish12",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("Fish12", <EnemyModel>{
@@ -9936,13 +9834,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "Fish11",
-                    "next": undefined,
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("Fish13", <EnemyModel>{
@@ -10561,13 +10453,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "Fish8",
-                    "next": "Bug6",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("Bug6", <EnemyModel>{
@@ -10600,13 +10486,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "Bug5",
-                    "next": "Bug7",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("Bug7", <EnemyModel>{
@@ -10639,13 +10519,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "Bug6",
-                    "next": "Bug8",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("Bug8", <EnemyModel>{
@@ -10678,13 +10552,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "Bug7",
-                    "next": "Bug9",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("Bug9", <EnemyModel>{
@@ -10717,13 +10585,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "Bug8",
-                    "next": "Bug10",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("Bug10", <EnemyModel>{
@@ -10756,13 +10618,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "Bug9",
-                    "next": "Bug12",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("Bug11", <EnemyModel>{
@@ -10828,13 +10684,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "Bug10",
-                    "next": "Bug13",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("Bug13", <EnemyModel>{
@@ -10867,13 +10717,7 @@ export const initEnemyRepo = () => {
                     ]
                 },
                 "mapData": undefined,
-                "navigation": <EnemyNavModel>{
-                    "prev": "Bug12",
-                    "next": "CritterCard4",
-                    "hasCrystal": true,
-                    "crystalName": undefined,
-                    "hasCard": true
-                },
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("ChestA1", <EnemyModel>{

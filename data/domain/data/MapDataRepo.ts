@@ -1509,289 +1509,289 @@ export const initMapDataRepo = () => {
             }),
         new MapDataBase(250, <MapDataModel>{
                 "enemy": "Nothing",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "vSpiritaTown", "name": "Spirit Village", "id": 250},
                 "portalRequirements": [1, 0]
             }),
         new MapDataBase(251, <MapDataModel>{
                 "enemy": "w6a1",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "vSpiritA1", "name": "Gooble Goop Creek", "id": 251},
                 "portalRequirements": [30000]
             }),
         new MapDataBase(252, <MapDataModel>{
                 "enemy": "w6a2",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "vSpiritA2", "name": "Picnic Bridgeways", "id": 252},
                 "portalRequirements": [50000]
             }),
         new MapDataBase(253, <MapDataModel>{
                 "enemy": "w6a3",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "vSpiritA3", "name": "Irrigation Station", "id": 253},
                 "portalRequirements": [100000]
             }),
         new MapDataBase(254, <MapDataModel>{
                 "enemy": "w6a4",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "vSpiritA4", "name": "Troll Playground", "id": 254},
                 "portalRequirements": [250000]
             }),
         new MapDataBase(255, <MapDataModel>{
                 "enemy": "w6a5",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "vSpiritA5", "name": "Edge of the Valley", "id": 255},
                 "portalRequirements": [400000]
             }),
         new MapDataBase(256, <MapDataModel>{
                 "enemy": "w6b1",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "vSpiritB1", "name": "Bamboo Laboredge", "id": 256},
                 "portalRequirements": [1100000]
             }),
         new MapDataBase(257, <MapDataModel>{
                 "enemy": "w6b2",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "vSpiritB2", "name": "Lightway Path", "id": 257},
                 "portalRequirements": [3200000]
             }),
         new MapDataBase(258, <MapDataModel>{
                 "enemy": "w6b3",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "vSpiritB3", "name": "Troll Broodnest", "id": 258},
                 "portalRequirements": [8000000]
             }),
         new MapDataBase(259, <MapDataModel>{
                 "enemy": "w6b4",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "vSpiritB4", "name": "Above the Clouds", "id": 259},
                 "portalRequirements": [12000000]
             }),
         new MapDataBase(260, <MapDataModel>{
                 "enemy": "w6c1",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "vSpiritC1", "name": "Sleepy Skyline", "id": 260},
                 "portalRequirements": [25000000]
             }),
         new MapDataBase(261, <MapDataModel>{
                 "enemy": "w6c2",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "vSpiritC2", "name": "Dozey Dogpark", "id": 261},
                 "portalRequirements": [70000000]
             }),
         new MapDataBase(262, <MapDataModel>{
                 "enemy": "w6d1",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "vSpiritD1", "name": "Yolkrock Basin", "id": 262},
                 "portalRequirements": [100000000]
             }),
         new MapDataBase(263, <MapDataModel>{
                 "enemy": "w6d2",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "vSpiritD2", "name": "Chieftain Stairway", "id": 263},
                 "portalRequirements": [150000000]
             }),
         new MapDataBase(264, <MapDataModel>{
                 "enemy": "w6d3",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "vSpiritD3", "name": "Emperor's Castle Doorstep", "id": 264},
                 "portalRequirements": [100]
             }),
         new MapDataBase(265, <MapDataModel>{
                 "enemy": "w6d3",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "vSpiritCBOSS", "name": "Castle Interior", "id": 265},
                 "portalRequirements": [0]
             }),
         new MapDataBase(266, <MapDataModel>{
                 "enemy": "w6d3",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 266},
                 "portalRequirements": [0]
             }),
         new MapDataBase(267, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 267},
                 "portalRequirements": [0]
             }),
         new MapDataBase(268, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 268},
                 "portalRequirements": [0]
             }),
         new MapDataBase(269, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 269},
                 "portalRequirements": [0]
             }),
         new MapDataBase(270, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 270},
                 "portalRequirements": [0]
             }),
         new MapDataBase(271, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 271},
                 "portalRequirements": [0]
             }),
         new MapDataBase(272, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 272},
                 "portalRequirements": [0]
             }),
         new MapDataBase(273, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 273},
                 "portalRequirements": [0]
             }),
         new MapDataBase(274, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 274},
                 "portalRequirements": [0]
             }),
         new MapDataBase(275, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 275},
                 "portalRequirements": [0]
             }),
         new MapDataBase(276, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 276},
                 "portalRequirements": [0]
             }),
         new MapDataBase(277, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 277},
                 "portalRequirements": [0]
             }),
         new MapDataBase(278, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 278},
                 "portalRequirements": [0]
             }),
         new MapDataBase(279, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 279},
                 "portalRequirements": [0]
             }),
         new MapDataBase(280, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 280},
                 "portalRequirements": [0]
             }),
         new MapDataBase(281, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 281},
                 "portalRequirements": [0]
             }),
         new MapDataBase(282, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 282},
                 "portalRequirements": [0]
             }),
         new MapDataBase(283, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 283},
                 "portalRequirements": [0]
             }),
         new MapDataBase(284, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 284},
                 "portalRequirements": [0]
             }),
         new MapDataBase(285, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 285},
                 "portalRequirements": [0]
             }),
         new MapDataBase(286, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 286},
                 "portalRequirements": [0]
             }),
         new MapDataBase(287, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 287},
                 "portalRequirements": [0]
             }),
         new MapDataBase(288, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 288},
                 "portalRequirements": [0]
             }),
         new MapDataBase(289, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 289},
                 "portalRequirements": [0]
             }),
         new MapDataBase(290, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 290},
                 "portalRequirements": [0]
             }),
         new MapDataBase(291, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 291},
                 "portalRequirements": [0]
             }),
         new MapDataBase(292, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 292},
                 "portalRequirements": [0]
             }),
         new MapDataBase(293, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 293},
                 "portalRequirements": [0]
             }),
         new MapDataBase(294, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 294},
                 "portalRequirements": [0]
             }),
         new MapDataBase(295, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 295},
                 "portalRequirements": [0]
             }),
         new MapDataBase(296, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 296},
                 "portalRequirements": [0]
             }),
         new MapDataBase(297, <MapDataModel>{
                 "enemy": "Z",
-                "world": "World6",
+                "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 297},
                 "portalRequirements": [0]
             })    

@@ -74904,7 +74904,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "D4",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 10,
                         "effect": "+{% Mining Speed",
                         "bonus": 5,
@@ -75024,7 +75024,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "D8",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 10,
                         "effect": "+{% Choppin Away Gains",
                         "bonus": 2.5,
@@ -75849,7 +75849,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F2",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 10,
                         "effect": "+{% Choppin Speed",
                         "bonus": 6,
@@ -75879,7 +75879,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F3",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 3,
                         "effect": "+{ Starting Pts in Worship",
                         "bonus": 6,
@@ -75905,7 +75905,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F4",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 4,
                         "effect": "+{% Shiny Critter Chance",
                         "bonus": 5,
@@ -75931,7 +75931,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F5",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 4,
                         "effect": "+{% EXP from monsters",
                         "bonus": 1.25,
@@ -75957,7 +75957,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F6",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 5,
                         "effect": "+{% Shiny Critter Chance",
                         "bonus": 6,
@@ -75983,7 +75983,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F7",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 6,
                         "effect": "+{% Skill AFK gain rate",
                         "bonus": 1,
@@ -76009,7 +76009,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F8",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 10,
                         "effect": "+{% Total Catching Efficiency",
                         "bonus": 7,
@@ -76039,7 +76039,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F9",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 10,
                         "effect": "+{% Catching Away Gains",
                         "bonus": 2.5,
@@ -76069,7 +76069,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F10",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 4,
                         "effect": "+{% Max Charge",
                         "bonus": 7,
@@ -76095,7 +76095,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F11",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 5,
                         "effect": "+{% Charge Rate",
                         "bonus": 5,
@@ -76121,7 +76121,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F12",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 10,
                         "effect": "+{% Choppin Speed",
                         "bonus": 7,
@@ -76151,7 +76151,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F13",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 10,
                         "effect": "+{% Total Choppin Efficiency",
                         "bonus": 8,
@@ -76181,7 +76181,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F14",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 10,
                         "effect": "+{% Total Catching Efficiency",
                         "bonus": 8,
@@ -76211,7 +76211,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F15",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 10,
                         "effect": "+{% Catching Speed",
                         "bonus": 4,
@@ -76241,7 +76241,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F16",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 12,
                         "effect": "+{% Mining EXP",
                         "bonus": 8,
@@ -76271,7 +76271,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F17",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 7,
                         "effect": "+{% Trapping Efficiency",
                         "bonus": 7,
@@ -76297,7 +76297,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F18",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 9,
                         "effect": "+{% Trapping EXP",
                         "bonus": 8,
@@ -76323,7 +76323,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F19",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 12,
                         "effect": "+{% Shiny Critter Chance",
                         "bonus": 8,
@@ -76349,7 +76349,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F20",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 8,
                         "effect": "+{% Total Fishing Efficiency",
                         "bonus": 8,
@@ -76375,7 +76375,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F21",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 10,
                         "effect": "+{% Fishing Speed",
                         "bonus": 4,
@@ -76401,7 +76401,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F22",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 10,
                         "effect": "+{% Fishing EXP",
                         "bonus": 10,
@@ -76427,7 +76427,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F23",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 10,
                         "effect": "+{% Fishing Away Gains",
                         "bonus": 3,
@@ -76453,7 +76453,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F24",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 12,
                         "effect": "+{% Choppin Away Gains",
                         "bonus": 3,
@@ -76483,7 +76483,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F25",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 15,
                         "effect": "+{% Choppin Speed",
                         "bonus": 8,
@@ -76525,7 +76525,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F26",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 12,
                         "effect": "+{% Total Catching Efficiency",
                         "bonus": 10,
@@ -76555,7 +76555,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F27",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 15,
                         "effect": "+{% Catching Away Gains",
                         "bonus": 3,
@@ -76593,7 +76593,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F28",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 7,
                         "effect": "+{% Max Charge",
                         "bonus": 10,
@@ -76619,7 +76619,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F29",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 15,
                         "effect": "+{% Mining Away Gains",
                         "bonus": 3,
@@ -76657,7 +76657,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F30",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 15,
                         "effect": "+{% Fishing EXP",
                         "bonus": 15,
@@ -76683,7 +76683,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F31",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 18,
                         "effect": "+{% Total Fishing Efficiency",
                         "bonus": 12,
@@ -76709,7 +76709,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F32",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 24,
                         "effect": "+{% Fishing Away Gains",
                         "bonus": 3.5,
@@ -76735,7 +76735,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F33",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 30,
                         "effect": "+{% Fishing Speed",
                         "bonus": 7,
@@ -76761,7 +76761,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F34",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 15,
                         "effect": "+{% Total Choppin Efficiency",
                         "bonus": 10,
@@ -76787,7 +76787,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F35",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 15,
                         "effect": "+{% Choppin Away Gains",
                         "bonus": 4,
@@ -76813,7 +76813,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F36",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 7,
                         "effect": "+{% Charge Rate",
                         "bonus": 7,
@@ -76839,7 +76839,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F37",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 15,
                         "effect": "+{% Total Catching Efficiency",
                         "bonus": 5,
@@ -76869,7 +76869,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F38",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 15,
                         "effect": "+{% Catching Speed",
                         "bonus": 5,
@@ -76899,7 +76899,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "F39",
-                        "category": "World6",
+                        "category": "Hard Resources",
                         "perTier": 400,
                         "effect": "+{% Forge Cap and SPD (Passive)",
                         "bonus": 30,
@@ -76929,7 +76929,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "G1",
-                        "category": "Hard Resources",
+                        "category": "Hyperion Nebula",
                         "perTier": 15,
                         "effect": "+{% Money from Monsters",
                         "bonus": 8,
@@ -76959,7 +76959,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "G2",
-                        "category": "Hard Resources",
+                        "category": "Hyperion Nebula",
                         "perTier": 17,
                         "effect": "+{% Breeding EXP (Passive)",
                         "bonus": 5,
@@ -76989,7 +76989,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "G3",
-                        "category": "Hard Resources",
+                        "category": "Hyperion Nebula",
                         "perTier": 18,
                         "effect": "+{% Defence from Equipment",
                         "bonus": 4,
@@ -77019,7 +77019,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "G4",
-                        "category": "Hard Resources",
+                        "category": "Hyperion Nebula",
                         "perTier": 19,
                         "effect": "+{% Crystal Mob Spawn Chance",
                         "bonus": 15,
@@ -77049,7 +77049,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "G5",
-                        "category": "Hard Resources",
+                        "category": "Hyperion Nebula",
                         "perTier": 21,
                         "effect": "+{ Base WIS",
                         "bonus": 12,
@@ -77079,7 +77079,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "G6",
-                        "category": "Hard Resources",
+                        "category": "Hyperion Nebula",
                         "perTier": 20,
                         "effect": "+{ Star Talent Pts (Passive)",
                         "bonus": 5,
@@ -77109,7 +77109,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "G7",
-                        "category": "Hard Resources",
+                        "category": "Hyperion Nebula",
                         "perTier": 22,
                         "effect": "+{% Lab EXP gain",
                         "bonus": 4,
@@ -77139,7 +77139,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "G8",
-                        "category": "Hard Resources",
+                        "category": "Hyperion Nebula",
                         "perTier": 23,
                         "effect": "+{ Weapon Power",
                         "bonus": 2.5,
@@ -77169,7 +77169,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "G9",
-                        "category": "Hard Resources",
+                        "category": "Hyperion Nebula",
                         "perTier": 24,
                         "effect": "+{ Base AGI",
                         "bonus": 12,
@@ -77199,7 +77199,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "G10",
-                        "category": "Hard Resources",
+                        "category": "Hyperion Nebula",
                         "perTier": 26,
                         "effect": "+{% Multikill per tier",
                         "bonus": 1.5,
@@ -77229,7 +77229,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "G11",
-                        "category": "Hard Resources",
+                        "category": "Hyperion Nebula",
                         "perTier": 27,
                         "effect": "+{ Base STR",
                         "bonus": 12,
@@ -77259,7 +77259,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "G12",
-                        "category": "Hard Resources",
+                        "category": "Hyperion Nebula",
                         "perTier": 28,
                         "effect": "+{% Critical Chance (Passive)",
                         "bonus": 1.5,
@@ -77289,7 +77289,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "G13",
-                        "category": "Hard Resources",
+                        "category": "Hyperion Nebula",
                         "perTier": 30,
                         "effect": "+{% All Stat",
                         "bonus": 0.5,
@@ -77319,7 +77319,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "G14",
-                        "category": "Hard Resources",
+                        "category": "Hyperion Nebula",
                         "perTier": 10,
                         "effect": "+px Line Width (Passive)",
                         "bonus": 2,
@@ -77349,7 +77349,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "H1",
-                        "category": "Hyperion Nebula",
+                        "category": "Smolderin' Plateau",
                         "perTier": 25,
                         "effect": "+{% Multikill per tier",
                         "bonus": 2,
@@ -77379,7 +77379,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "H2",
-                        "category": "Hyperion Nebula",
+                        "category": "Smolderin' Plateau",
                         "perTier": 28,
                         "effect": "+{% Defence from Equipment",
                         "bonus": 5,
@@ -77409,7 +77409,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "H3",
-                        "category": "Hyperion Nebula",
+                        "category": "Smolderin' Plateau",
                         "perTier": 32,
                         "effect": "+{% Total Drop Rate",
                         "bonus": 6,
@@ -77439,7 +77439,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "H4",
-                        "category": "Hyperion Nebula",
+                        "category": "Smolderin' Plateau",
                         "perTier": 35,
                         "effect": "+{% Skill EXP (Passive)",
                         "bonus": 5,
@@ -77469,7 +77469,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "H5",
-                        "category": "Hyperion Nebula",
+                        "category": "Smolderin' Plateau",
                         "perTier": 45,
                         "effect": "+{% Divinity EXP (Passive)",
                         "bonus": 6,
@@ -77499,7 +77499,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "H6",
-                        "category": "Hyperion Nebula",
+                        "category": "Smolderin' Plateau",
                         "perTier": 48,
                         "effect": "+{% Money from mobs (Passive)",
                         "bonus": 7,
@@ -77529,7 +77529,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "H7",
-                        "category": "Hyperion Nebula",
+                        "category": "Smolderin' Plateau",
                         "perTier": 52,
                         "effect": "+{ Weapon Power (Passive)",
                         "bonus": 1,
@@ -77559,7 +77559,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "H8",
-                        "category": "Hyperion Nebula",
+                        "category": "Smolderin' Plateau",
                         "perTier": 60,
                         "effect": "+{% Total Damage",
                         "bonus": 4.5,
@@ -77589,7 +77589,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "H9",
-                        "category": "Hyperion Nebula",
+                        "category": "Smolderin' Plateau",
                         "perTier": 65,
                         "effect": "+{% EXP from monsters",
                         "bonus": 4,
@@ -77619,7 +77619,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "H10",
-                        "category": "Hyperion Nebula",
+                        "category": "Smolderin' Plateau",
                         "perTier": 70,
                         "effect": "+{ Base LUK",
                         "bonus": 15,
@@ -77649,7 +77649,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "H11",
-                        "category": "Hyperion Nebula",
+                        "category": "Smolderin' Plateau",
                         "perTier": 75,
                         "effect": "+{% Mining Speed",
                         "bonus": 6,
@@ -77679,7 +77679,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "H12",
-                        "category": "Hyperion Nebula",
+                        "category": "Smolderin' Plateau",
                         "perTier": 80,
                         "effect": "+{% Sailing Speed (Passive)",
                         "bonus": 4,
@@ -77709,7 +77709,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "H13",
-                        "category": "Hyperion Nebula",
+                        "category": "Smolderin' Plateau",
                         "perTier": 100,
                         "effect": "+{% All Stat",
                         "bonus": 1,
@@ -77739,7 +77739,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "H14",
-                        "category": "Hyperion Nebula",
+                        "category": "Smolderin' Plateau",
                         "perTier": 15,
                         "effect": "+{% Skill Efficncy (Passive)",
                         "bonus": 3,
@@ -77769,7 +77769,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "I1",
-                        "category": "Smolderin' Plateau",
+                        "category": "Spirited Valley",
                         "perTier": 50,
                         "effect": "+{% Total Damage",
                         "bonus": 5,
@@ -77799,7 +77799,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "I2",
-                        "category": "Smolderin' Plateau",
+                        "category": "Spirited Valley",
                         "perTier": 60,
                         "effect": "+{% DEF from Equips (Passive)",
                         "bonus": 3,
@@ -77829,7 +77829,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "I3",
-                        "category": "Smolderin' Plateau",
+                        "category": "Spirited Valley",
                         "perTier": 75,
                         "effect": "+{% All Stat",
                         "bonus": 1.5,
@@ -77859,7 +77859,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "I4",
-                        "category": "Smolderin' Plateau",
+                        "category": "Spirited Valley",
                         "perTier": 85,
                         "effect": "+{% Sneaking EXP (Passive)",
                         "bonus": 3,
@@ -77889,7 +77889,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "I5",
-                        "category": "Smolderin' Plateau",
+                        "category": "Spirited Valley",
                         "perTier": 100,
                         "effect": "+{% Multikill per tier",
                         "bonus": 3,
@@ -77919,7 +77919,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "I6",
-                        "category": "Smolderin' Plateau",
+                        "category": "Spirited Valley",
                         "perTier": 150,
                         "effect": "+{% Summoning EXP (Passive)",
                         "bonus": 3,
@@ -77949,7 +77949,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "I7",
-                        "category": "Smolderin' Plateau",
+                        "category": "Spirited Valley",
                         "perTier": 170,
                         "effect": "+{% Farming EXP (Passive)",
                         "bonus": 2,
@@ -77979,7 +77979,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "I8",
-                        "category": "Smolderin' Plateau",
+                        "category": "Spirited Valley",
                         "perTier": 200,
                         "effect": "+{% Skill AFK gain rate",
                         "bonus": 2,
@@ -78009,7 +78009,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "I9",
-                        "category": "Smolderin' Plateau",
+                        "category": "Spirited Valley",
                         "perTier": 250,
                         "effect": "+{% Jade Coin gain (Passive)",
                         "bonus": 4,
@@ -78039,7 +78039,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "I10",
-                        "category": "Smolderin' Plateau",
+                        "category": "Spirited Valley",
                         "perTier": 400,
                         "effect": "+{% Cooking Spd Multi (Passive)",
                         "bonus": 5,
@@ -78069,7 +78069,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "I11",
-                        "category": "Smolderin' Plateau",
+                        "category": "Spirited Valley",
                         "perTier": 500,
                         "effect": "+{ Base LUK",
                         "bonus": 20,
@@ -78099,7 +78099,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "I12",
-                        "category": "Smolderin' Plateau",
+                        "category": "Spirited Valley",
                         "perTier": 900,
                         "effect": "+{% Fighting AFK (Passive)",
                         "bonus": 1,
@@ -78129,7 +78129,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "I13",
-                        "category": "Smolderin' Plateau",
+                        "category": "Spirited Valley",
                         "perTier": 1300,
                         "effect": "+{% Total Drop Rate",
                         "bonus": 8,
@@ -78159,7 +78159,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "I14",
-                        "category": "Smolderin' Plateau",
+                        "category": "Spirited Valley",
                         "perTier": 2500,
                         "effect": "+{% All AFK Gains(Passive)",
                         "bonus": 1.5,
@@ -78189,7 +78189,7 @@ export const initItemRepo = () => {
                     "Type": "Card",
                     "cardData": <CardDataModel>{
                         "cardID": "I15",
-                        "category": "Smolderin' Plateau",
+                        "category": "Spirited Valley",
                         "perTier": 5000,
                         "effect": "+{% Sneaking Stealth (Passive)",
                         "bonus": 4,
