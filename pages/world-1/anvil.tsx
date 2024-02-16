@@ -147,7 +147,9 @@ function PointsDisplay() {
                                             const playerNumber = parseInt(playerID);
                                             return (
                                                 <Box margin={{ right: 'small', bottom: 'small' }} key={playerNumber}>
-                                                    <CharacterBox player={players[playerNumber]} children={<Box align="end"><Text size="small">{nFormatter(playerCost)}</Text></Box>} borderColor="grey-1" />
+                                                    <CharacterBox player={players[playerNumber]} borderColor="grey-1">
+                                                        <Box align="end"><Text size="small">{nFormatter(playerCost)}</Text></Box>
+                                                    </CharacterBox>
                                                 </Box>
                                             )
                                         })
@@ -199,19 +201,19 @@ function AnvilProductionDisplay() {
                 </ShadowBox>
                 {unusedHammers > 0 &&
                     <ShadowBox background="dark-1" pad="medium" margin={{ bottom: 'medium' }} direction="row" gap="small">
-                        <Box width={{max: '150px'}}>
+                        <Box width={{ max: '150px' }}>
                             <TextAndLabel
                                 label={"Characters with unused hammers"}
                                 text={nFormatter(unusedHammers)}
                             />
                         </Box>
                         <Box direction="row" wrap gap="xsmall">
-                        {
-                            Object.entries(anvilWrapper.playerAnvils).filter(([_, playerAnvil]) => playerAnvil.currentlySelect.indexOf(-1) > -1)
-                                .map(([_, playerAnvil]) => (
-                                    <CharacterBox key={playerAnvil.playerID} player={players[playerAnvil.playerID]} />
-                                ))
-                        }
+                            {
+                                Object.entries(anvilWrapper.playerAnvils).filter(([_, playerAnvil]) => playerAnvil.currentlySelect.indexOf(-1) > -1)
+                                    .map(([_, playerAnvil]) => (
+                                        <CharacterBox key={playerAnvil.playerID} player={players[playerAnvil.playerID]} />
+                                    ))
+                            }
                         </Box>
                     </ShadowBox>
                 }

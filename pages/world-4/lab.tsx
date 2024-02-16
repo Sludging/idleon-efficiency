@@ -89,20 +89,19 @@ function MainframeDisplay() {
                             <Box key={index} margin={{ right: 'small', bottom: 'small' }}>
                                 <CharacterBox
                                     player={player}
-                                    borderColor={player.labInfo.supped ? 'green-1' : 'grey-1'}
-                                    children={
-                                        <Box direction="row" margin={{top: 'xsmall'}}>
-                                            <Box pad={{ right: 'small' }} margin={{ right: 'small' }} direction="row" border={{ side: 'right', color: 'grey-1' }} align="center">
-                                                <Box width={{ max: '15px' }} margin={{ right: 'xsmall' }}>
-                                                    <IconImage data={{ location: 'ClassIcons53', height: 36, width: 38 }} scale={0.4} />
-                                                </Box>
-                                                <Text size="small" truncate={true}>{player.skills.get(SkillsIndex.Intellect)?.level}</Text>
+                                    borderColor={player.labInfo.supped ? 'green-1' : 'grey-1'}>
+                                    <Box direction="row" margin={{ top: 'xsmall' }}>
+                                        <Box pad={{ right: 'small' }} margin={{ right: 'small' }} direction="row" border={{ side: 'right', color: 'grey-1' }} align="center">
+                                            <Box width={{ max: '15px' }} margin={{ right: 'xsmall' }}>
+                                                <IconImage data={{ location: 'ClassIcons53', height: 36, width: 38 }} scale={0.4} />
                                             </Box>
-                                            <Box>
-                                                <Text size="small" truncate={true}>{player.labInfo.lineWidth.toString()}px</Text>
-                                            </Box>
+                                            <Text size="small" truncate={true}>{player.skills.get(SkillsIndex.Intellect)?.level}</Text>
                                         </Box>
-                                    } />
+                                        <Box>
+                                            <Text size="small" truncate={true}>{player.labInfo.lineWidth.toString()}px</Text>
+                                        </Box>
+                                    </Box>
+                                </CharacterBox>
                             </Box>
                         ))
                     }
