@@ -205,6 +205,7 @@ export default function Layout({
                 { subLink: "/obols", label: "Obols" },
                 { subLink: "/dungeons", label: "Dungeons" },
                 { subLink: "/companions", label: "Companions" },
+                { subLink: "/cards", label: "Cards" },
             ]
         },
         { link: "/raw-data", label: "Raw Data" },
