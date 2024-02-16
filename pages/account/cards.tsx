@@ -109,7 +109,7 @@ const CardSetBox = ({ cardSet }: {cardSet: CardSet}) => {
                 <Box direction='row' gap='small' align='center'>
                     <Grid columns={{ size: 'auto', count: 5 }} gap='small'>
                         {
-                            cardSet.cards?.map((card, index) => <CardBox key={index} card={card} />)
+                            cardSet.cards?.sort((a, b) => a.data.order - b.data.order).map((card, index) => <CardBox key={index} card={card} />)
                         }
                     </Grid>
                 </Box>
