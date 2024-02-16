@@ -3,6 +3,7 @@ import { NinjaItemTypeEnum } from '../enum/ninjaItemTypeEnum';
 import { NinjaPristineCharmModel } from '../model/ninjaPristineCharmModel';
 import { NinjaTrinketModel } from '../model/ninjaTrinketModel';
 import { NinjaWeaponModel } from '../model/ninjaWeaponModel';
+import { BaseNinjaItemModel } from '../model/baseNinjaItemModel';
 
 export class BaseNinjaItemBase { constructor(public index: number, public data: BaseNinjaItemModel) { } }
 
