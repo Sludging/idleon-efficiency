@@ -203,7 +203,8 @@ function VialsDisplay() {
         <ShadowBox background="dark-1" pad="medium">
             <Box direction="row" wrap>
                 {
-                    alchemyData.vials.map((vial, index) => (
+                    // Remove filter once we stop hiding w6 stuff.
+                    alchemyData.vials.filter(vial => vial.data.bonusKey.includes("6") ? vial.level > 0 : true).map((vial, index) => (
                         <Box key={index} width={{ max: '104px', min: '104px' }} height={{ max: '120px', min: '120px' }}>
                             <TipDisplay
                                 body={<VialTipInfo vial={vial} />}
