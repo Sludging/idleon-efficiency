@@ -1152,7 +1152,7 @@ export const initCardRepo = () => {
             }),
         new CardDataBase("w6a1", <CardDataModel>{
                 "cardID": "I1",
-                "category": "Smolderin' Plateau",
+                "category": "Spirited Valley",
                 "perTier": 50,
                 "effect": "+{% Total Damage",
                 "bonus": 5,
@@ -1160,7 +1160,7 @@ export const initCardRepo = () => {
             }),
         new CardDataBase("w6a2", <CardDataModel>{
                 "cardID": "I2",
-                "category": "Smolderin' Plateau",
+                "category": "Spirited Valley",
                 "perTier": 60,
                 "effect": "+{% DEF from Equips (Passive)",
                 "bonus": 3,
@@ -1168,7 +1168,7 @@ export const initCardRepo = () => {
             }),
         new CardDataBase("w6a3", <CardDataModel>{
                 "cardID": "I3",
-                "category": "Smolderin' Plateau",
+                "category": "Spirited Valley",
                 "perTier": 75,
                 "effect": "+{% All Stat",
                 "bonus": 1.5,
@@ -1176,7 +1176,7 @@ export const initCardRepo = () => {
             }),
         new CardDataBase("w6a4", <CardDataModel>{
                 "cardID": "I4",
-                "category": "Smolderin' Plateau",
+                "category": "Spirited Valley",
                 "perTier": 85,
                 "effect": "+{% Sneaking EXP (Passive)",
                 "bonus": 3,
@@ -1184,7 +1184,7 @@ export const initCardRepo = () => {
             }),
         new CardDataBase("w6a5", <CardDataModel>{
                 "cardID": "I5",
-                "category": "Smolderin' Plateau",
+                "category": "Spirited Valley",
                 "perTier": 100,
                 "effect": "+{% Multikill per tier",
                 "bonus": 3,
@@ -1192,7 +1192,7 @@ export const initCardRepo = () => {
             }),
         new CardDataBase("w6b1", <CardDataModel>{
                 "cardID": "I6",
-                "category": "Smolderin' Plateau",
+                "category": "Spirited Valley",
                 "perTier": 150,
                 "effect": "+{% Summoning EXP (Passive)",
                 "bonus": 3,
@@ -1200,7 +1200,7 @@ export const initCardRepo = () => {
             }),
         new CardDataBase("w6b2", <CardDataModel>{
                 "cardID": "I7",
-                "category": "Smolderin' Plateau",
+                "category": "Spirited Valley",
                 "perTier": 170,
                 "effect": "+{% Farming EXP (Passive)",
                 "bonus": 2,
@@ -1208,7 +1208,7 @@ export const initCardRepo = () => {
             }),
         new CardDataBase("w6b3", <CardDataModel>{
                 "cardID": "I8",
-                "category": "Smolderin' Plateau",
+                "category": "Spirited Valley",
                 "perTier": 200,
                 "effect": "+{% Skill AFK gain rate",
                 "bonus": 2,
@@ -1216,7 +1216,7 @@ export const initCardRepo = () => {
             }),
         new CardDataBase("w6b4", <CardDataModel>{
                 "cardID": "I9",
-                "category": "Smolderin' Plateau",
+                "category": "Spirited Valley",
                 "perTier": 250,
                 "effect": "+{% Jade Coin gain (Passive)",
                 "bonus": 4,
@@ -1224,7 +1224,7 @@ export const initCardRepo = () => {
             }),
         new CardDataBase("w6c1", <CardDataModel>{
                 "cardID": "I10",
-                "category": "Smolderin' Plateau",
+                "category": "Spirited Valley",
                 "perTier": 400,
                 "effect": "+{% Cooking Spd Multi (Passive)",
                 "bonus": 5,
@@ -1232,7 +1232,7 @@ export const initCardRepo = () => {
             }),
         new CardDataBase("w6c2", <CardDataModel>{
                 "cardID": "I11",
-                "category": "Smolderin' Plateau",
+                "category": "Spirited Valley",
                 "perTier": 500,
                 "effect": "+{ Base LUK",
                 "bonus": 20,
@@ -1240,7 +1240,7 @@ export const initCardRepo = () => {
             }),
         new CardDataBase("w6d1", <CardDataModel>{
                 "cardID": "I12",
-                "category": "Smolderin' Plateau",
+                "category": "Spirited Valley",
                 "perTier": 900,
                 "effect": "+{% Fighting AFK (Passive)",
                 "bonus": 1,
@@ -1248,7 +1248,7 @@ export const initCardRepo = () => {
             }),
         new CardDataBase("w6d2", <CardDataModel>{
                 "cardID": "I13",
-                "category": "Smolderin' Plateau",
+                "category": "Spirited Valley",
                 "perTier": 1300,
                 "effect": "+{% Total Drop Rate",
                 "bonus": 8,
@@ -1256,7 +1256,7 @@ export const initCardRepo = () => {
             }),
         new CardDataBase("w6d3", <CardDataModel>{
                 "cardID": "I14",
-                "category": "Smolderin' Plateau",
+                "category": "Spirited Valley",
                 "perTier": 2500,
                 "effect": "+{% All AFK Gains(Passive)",
                 "bonus": 1.5,
@@ -1264,7 +1264,7 @@ export const initCardRepo = () => {
             }),
         new CardDataBase("Crystal5", <CardDataModel>{
                 "cardID": "I15",
-                "category": "Smolderin' Plateau",
+                "category": "Spirited Valley",
                 "perTier": 5000,
                 "effect": "+{% Sneaking Stealth (Passive)",
                 "bonus": 4,

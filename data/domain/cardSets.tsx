@@ -2,6 +2,7 @@ import { Card } from "./cards";
 import { NumberMap } from "../maps";
 import { ImageData } from "./imageData";
 import { CardSetBase } from "./data/CardSetRepo";
+import { initCardSetBonusRepo } from "./data/CardSetBonusRepo";
 
 export class CardSet {
     cards: Card[];
@@ -83,8 +84,8 @@ export class CardSet {
     static getSetID = (bonus: string): number => {
         var ID = 0 as number;
         // Find the set ID corresponding to the bonus effect of the set
-        Object.entries(IDforCardSETbonus).some(([setID, setText], index) => {
-            if (ID == 0 && setText == bonus.replaceAll(' ', '_')) {
+        Object.entries(IDforCardSETbonus).some(([setID, setData], index) => {
+            if (ID == 0 && setData.data.bonus == bonus.replaceAll(' ', '_')) {
                 ID = parseInt(setID, 10);
                 return true;
             }
@@ -93,19 +94,21 @@ export class CardSet {
     }
 }
 
-export const IDforCardSETbonus: NumberMap = {
-    0: "{%_EXP_if_below_Lv_50",
-    1: "{%_All_Food_Effect",
-    2: "{%_Skill_Efficiency",
-    3: "{%_Skill_EXP_Gain",
-    4: "{%_DEF_and_ACC",
-    5: "{%_Dmg,_Drop,_and_EXP",
-    6: "{%_Drop_Rate",
-    7: "{%_Skill_AFK_Gain_Rate",
-    8: "{%_more_Dungeon_Credits",
-    9: "{%_Crit_Chance",
-    10: "{%_Fight_AFK_Gain_Rate",
-}
+// export const IDforCardSETbonus: NumberMap = {
+//     0: "{%_EXP_if_below_Lv_50",
+//     1: "{%_All_Food_Effect",
+//     2: "{%_Skill_Efficiency",
+//     3: "{%_Skill_EXP_Gain",
+//     4: "{%_DEF_and_ACC",
+//     5: "{%_Dmg,_Drop,_and_EXP",
+//     6: "{%_Drop_Rate",
+//     7: "{%_Skill_AFK_Gain_Rate",
+//     8: "{%_more_Dungeon_Credits",
+//     9: "{%_Crit_Chance",
+//     10: "{%_Fight_AFK_Gain_Rate",
+// }
+
+export const IDforCardSETbonus = initCardSetBonusRepo();
 
 interface cardSetInfo {
     displayName: string,
@@ -127,4 +130,5 @@ export const cardSetMap: Record<number, cardSetInfo> = {
     8: { displayName: "Dungeons", cardSetName: "Dungeons", image: "CardSet7"},
     9: { displayName: "Hyperion Nebula", cardSetName: "Hyperion Nebula", image: "CardSet6"},
     10: { displayName: "Smolderin' Plateau", cardSetName: "Smolderin' Plateau", image: "CardSet8"},
+    11: { displayName: "Spirited Valley", cardSetName: "Spirited Valley", image: "CardSet9"},
 };
