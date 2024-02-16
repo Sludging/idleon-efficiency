@@ -595,8 +595,8 @@ export const initNpcRepo = () => {
             }),
         new NpcBase("Obol Altar", <NpcModel>{
                 "head": <NpcHeadModel>{
-                    "location": "ncroaching Forest Villas, YumYum Grotto",
-                    "world": "Yum-Yum Desert",
+                    "location": "Encroaching Forest Villas, YumYum Grotto",
+                    "world": "Blunder Hills, Yum-Yum Desert",
                     "noQuest": 1,
                     "type": "",
                     "birthWeight": 9.07,
@@ -3754,7 +3754,7 @@ export const initNpcRepo = () => {
             }),
         new NpcBase("Funguy", <NpcModel>{
                 "head": <NpcHeadModel>{
-                    "location": "inding Willows",
+                    "location": "Winding Willows",
                     "world": "Blunder Hills",
                     "noQuest": 5,
                     "type": "",
@@ -3968,7 +3968,7 @@ export const initNpcRepo = () => {
             }),
         new NpcBase("Tiki Chief", <NpcModel>{
                 "head": <NpcHeadModel>{
-                    "location": "ncroaching Forest Villas",
+                    "location": "Encroaching Forest Villas",
                     "world": "Blunder Hills",
                     "noQuest": 4,
                     "type": "",
@@ -4172,7 +4172,7 @@ export const initNpcRepo = () => {
             }),
         new NpcBase("Dog Bone (NPC)", <NpcModel>{
                 "head": <NpcHeadModel>{
-                    "location": "ncroaching Forest Villas",
+                    "location": "Encroaching Forest Villas",
                     "world": "Blunder Hills",
                     "noQuest": 2,
                     "type": "",
@@ -8694,7 +8694,7 @@ export const initNpcRepo = () => {
                     "location": "Blunder Hills",
                     "world": "Blunder Hills",
                     "noQuest": 2,
-                    "type": "vent",
+                    "type": "Event",
                     "birthWeight": 2.4,
                     "starSign": "Capricorn",
                     "mothersMaidenName": "Taylor",
@@ -8919,7 +8919,7 @@ export const initNpcRepo = () => {
                     "location": "Blunder Hills",
                     "world": "Blunder Hills",
                     "noQuest": 2,
-                    "type": "vent",
+                    "type": "Event",
                     "birthWeight": 9.37,
                     "starSign": "Cancer",
                     "mothersMaidenName": "illiams",
@@ -9020,7 +9020,7 @@ export const initNpcRepo = () => {
                     "location": "Blunder Hills",
                     "world": "Blunder Hills",
                     "noQuest": 2,
-                    "type": "vent",
+                    "type": "Event",
                     "birthWeight": 5.65,
                     "starSign": "Pisces",
                     "mothersMaidenName": "Sanchez",
@@ -10529,7 +10529,7 @@ export const initNpcRepo = () => {
             }),
         new NpcBase("Worldo", <NpcModel>{
                 "head": <NpcHeadModel>{
-                    "location": "nside the Igloo",
+                    "location": "Inside the Igloo",
                     "world": "Frostbite Tundra",
                     "noQuest": 2,
                     "type": "",
@@ -11701,7 +11701,7 @@ export const initNpcRepo = () => {
                     "location": "Blunder Hills",
                     "world": "Blunder Hills",
                     "noQuest": 2,
-                    "type": "vent",
+                    "type": "Event",
                     "birthWeight": 6.99,
                     "starSign": "Pisces",
                     "mothersMaidenName": "Bateman",
@@ -12237,7 +12237,7 @@ export const initNpcRepo = () => {
                     "location": "Blunder Hills",
                     "world": "Blunder Hills",
                     "noQuest": 5,
-                    "type": "vent",
+                    "type": "Event",
                     "birthWeight": 4.14,
                     "starSign": "Pisces",
                     "mothersMaidenName": "agner",
@@ -14149,7 +14149,7 @@ export const initNpcRepo = () => {
                     "location": "Blunder Hills",
                     "world": "Blunder Hills",
                     "noQuest": 1,
-                    "type": "vent",
+                    "type": "Event",
                     "birthWeight": 3.29,
                     "starSign": "Pisces",
                     "mothersMaidenName": "Trussel",
@@ -14881,7 +14881,7 @@ export const initNpcRepo = () => {
         new NpcBase("Lafu Shi", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
                     "birthWeight": 9.84,
@@ -15129,7 +15129,7 @@ export const initNpcRepo = () => {
         new NpcBase("Hoov", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
                     "birthWeight": 2,
@@ -15156,7 +15156,7 @@ export const initNpcRepo = () => {
         new NpcBase("Woodlin Elder", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
                     "birthWeight": 9.33,
@@ -15183,7 +15183,7 @@ export const initNpcRepo = () => {
         new NpcBase("Tribal Shaman", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
                     "birthWeight": 4.1,
@@ -15204,7 +15204,7 @@ export const initNpcRepo = () => {
         new NpcBase("Legumulyte", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
                     "birthWeight": 4.03,
@@ -15231,7 +15231,7 @@ export const initNpcRepo = () => {
         new NpcBase("Potti", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
                     "birthWeight": 3.38,
