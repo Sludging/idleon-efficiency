@@ -137,7 +137,9 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
             </Box>
             <Box>
                 {
-                    Object.entries(cauldron.bubbles).map(([_, bubble], index) => {
+                    cauldron.bubbles
+                    .filter(bubble => bubble.bubbleIndex > 24 ? bubble.level > 0 : true)
+                    .map((bubble, index) => {
                         return (
                             <Box key={`cauldron_${index}_${bubble.name}`}>
                                 <Tip
@@ -356,7 +358,9 @@ function BubblesDisplay() {
             </Box>
             <Grid columns="1/4">
                 {
-                    alchemyData && Object.entries(alchemyData.cauldrons).map(([_, cauldron], index) => {
+                    alchemyData && alchemyData.cauldrons
+                    .toSorted((cauldron1, cauldron2) => cauldron1.bubbles[0].cauldronIndex > cauldron2.bubbles[0].cauldronIndex ? 1 : -1) 
+                    .map((cauldron, index) => {
                         return (<CauldronDisplay key={`tab_${index}`} cauldron={cauldron} undevelopedCostsBubbleLevel={undevelopedCostsBubbleLevel} barleyBrewVialLevel={barleyBrewVialLevel} hasAchievement={hasAlchemyAchievement} discountLevel={parseInt(discountLevel)} classMultiBonus={classMulti} vialMultiplier={vialMultiplier} particles={particles} />)
                     })
                 }

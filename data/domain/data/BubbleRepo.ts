@@ -290,14 +290,14 @@ export const initBubbleRepo = () => {
                 "bonusKey": "W8"
             }),
         new BubbleBase("Essence Boost", <BubbleModel>{
-                "cauldron": "Kazam Cauldron",
+                "cauldron": "Power Cauldron",
                 "name": "Essence Boost",
                 "x1": 50,
                 "x2": 60,
                 "func": "decay",
-                "description": "+{% Yellow Essence Gain. This bonus doesn't increase based on anything!",
-                "requirements": [<ComponentModel>{"item": "Bug12", "quantity": 1500}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
-                "bonusKey": "Y7"
+                "description": "+{% Red Essence Gain, this bonus increases based on the total level of ALL your warriors!",
+                "requirements": [<ComponentModel>{"item": "Tree13", "quantity": 200}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                "bonusKey": "W9AllCharz"
             }),
         new BubbleBase("Crop Chapter", <BubbleModel>{
                 "cauldron": "Power Cauldron",
@@ -569,9 +569,19 @@ export const initBubbleRepo = () => {
                 "requirements": [<ComponentModel>{"item": "W6item0", "quantity": 25000}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
                 "bonusKey": "A6"
             }),
-        new BubbleBase("Endgame Eff Ii", <BubbleModel>{
+        new BubbleBase("Essence Boost", <BubbleModel>{
                 "cauldron": "Quicc Cauldron",
-                "name": "Endgame Eff Ii",
+                "name": "Essence Boost",
+                "x1": 50,
+                "x2": 60,
+                "func": "decay",
+                "description": "+{% Green Essence Gain, this bonus increases based on the total level of ALL your archers!",
+                "requirements": [<ComponentModel>{"item": "Tree12", "quantity": 500}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
+                "bonusKey": "A7AllCharz"
+            }),
+        new BubbleBase("Endgame Eff II", <BubbleModel>{
+                "cauldron": "Quicc Cauldron",
+                "name": "Endgame Eff II",
                 "x1": 3,
                 "x2": 60,
                 "func": "decay",
@@ -859,15 +869,25 @@ export const initBubbleRepo = () => {
                 "requirements": [<ComponentModel>{"item": "W6item6", "quantity": 500}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
                 "bonusKey": "M6"
             }),
-        new BubbleBase("Endgame Eff Iii", <BubbleModel>{
+        new BubbleBase("Endgame Eff III", <BubbleModel>{
                 "cauldron": "High-IQ Cauldron",
-                "name": "Endgame Eff Iii",
+                "name": "Endgame Eff III",
                 "x1": 3,
                 "x2": 60,
                 "func": "decay",
                 "description": "+{ Choppin and Worship Power. This bonus increases based on every 10 Class LVs you are above 500.",
                 "requirements": [<ComponentModel>{"item": "W6item7", "quantity": 950}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
                 "bonusKey": "M7"
+            }),
+        new BubbleBase("Essence Boost", <BubbleModel>{
+                "cauldron": "High-IQ Cauldron",
+                "name": "Essence Boost",
+                "x1": 50,
+                "x2": 60,
+                "func": "decay",
+                "description": "+{% Purple Essence Gain, this bonus increases based on the total level of ALL your mages!",
+                "requirements": [<ComponentModel>{"item": "Soul7", "quantity": 250}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                "bonusKey": "M8AllCharz"
             }),
         new BubbleBase("Tome Wisdom", <BubbleModel>{
                 "cauldron": "High-IQ Cauldron",
@@ -1148,6 +1168,16 @@ export const initBubbleRepo = () => {
                 "description": "+{% Crop Evolution chance for EVERY map you unlock in world 6, across all characters! Total bonus: $",
                 "requirements": [<ComponentModel>{"item": "SpiA5", "quantity": 1000}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
                 "bonusKey": "Y6"
+            }),
+        new BubbleBase("Essence Boost", <BubbleModel>{
+                "cauldron": "Kazam Cauldron",
+                "name": "Essence Boost",
+                "x1": 50,
+                "x2": 60,
+                "func": "decay",
+                "description": "+{% Yellow Essence Gain. This bonus doesn't increase based on anything!",
+                "requirements": [<ComponentModel>{"item": "Bug12", "quantity": 1500}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
+                "bonusKey": "M8AllCharz"
             }),
         new BubbleBase("Hinge Buster", <BubbleModel>{
                 "cauldron": "Kazam Cauldron",
