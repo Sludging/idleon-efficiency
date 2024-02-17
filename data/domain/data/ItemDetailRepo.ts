@@ -2730,7 +2730,7 @@ export const initItemDetailRepo = () => {
                 "UQ1txt": "% ALL STATS",
                 "UQ1val": 12,
                 "UQ2txt": "% MONEY",
-                "UQ2val": 30,
+                "UQ2val": 35,
                 "Upgrade_Slots_Left": 10
             }),
         new CommonItemBase("EquipmentHats106", <EquipItemModel>{
@@ -2754,7 +2754,7 @@ export const initItemDetailRepo = () => {
                 "UQ1txt": "% DROP CHANCE",
                 "UQ1val": 15,
                 "UQ2txt": "% MULTIKILL PER TIER",
-                "UQ2val": 15,
+                "UQ2val": 22,
                 "Upgrade_Slots_Left": 11
             }),
         new CommonItemBase("EquipmentHats84", <EquipItemModel>{
@@ -4103,7 +4103,7 @@ export const initItemDetailRepo = () => {
             }),
         new CommonItemBase("EquipmentSword9", <EquipItemModel>{
                 "internalID": "EquipmentSword9",
-                "displayName": "Godbreaker",
+                "displayName": "Massive Godbreaker",
                 "sellPrice": 26000,
                 "typeGen": TypeGenEnum.aWeapon,
                 "ID": 15,
@@ -4559,7 +4559,7 @@ export const initItemDetailRepo = () => {
             }),
         new CommonItemBase("EquipmentBows13", <EquipItemModel>{
                 "internalID": "EquipmentBows13",
-                "displayName": "Spine Tingler Sniper",
+                "displayName": "Pristine Longbow",
                 "sellPrice": 15000,
                 "typeGen": TypeGenEnum.aWeapon,
                 "ID": 12,
@@ -4583,7 +4583,7 @@ export const initItemDetailRepo = () => {
             }),
         new CommonItemBase("EquipmentBows14", <EquipItemModel>{
                 "internalID": "EquipmentBows14",
-                "displayName": "Spine Tingler Sniper",
+                "displayName": "Doublestring Godshooter",
                 "sellPrice": 15000,
                 "typeGen": TypeGenEnum.aWeapon,
                 "ID": 13,
@@ -4847,7 +4847,7 @@ export const initItemDetailRepo = () => {
             }),
         new CommonItemBase("EquipmentWands12", <EquipItemModel>{
                 "internalID": "EquipmentWands12",
-                "displayName": "Staff of the Undead Plague",
+                "displayName": "Sparky Marble Staff",
                 "sellPrice": 200,
                 "typeGen": TypeGenEnum.aWeapon,
                 "ID": 11,
@@ -4871,7 +4871,7 @@ export const initItemDetailRepo = () => {
             }),
         new CommonItemBase("EquipmentWands13", <EquipItemModel>{
                 "internalID": "EquipmentWands13",
-                "displayName": "Staff of the Undead Plague",
+                "displayName": "Magnifique Godcaster",
                 "sellPrice": 200,
                 "typeGen": TypeGenEnum.aWeapon,
                 "ID": 12,
@@ -4880,7 +4880,7 @@ export const initItemDetailRepo = () => {
                 "lvReqToEquip": 525,
                 "Class": ClassTypeEnum.Mage,
                 "Speed": 9,
-                "Reach": 330,
+                "Reach": 80,
                 "Weapon_Power": 125,
                 "STR": 0,
                 "AGI": 40,
@@ -5776,7 +5776,7 @@ export const initItemDetailRepo = () => {
                 "LUK": 40,
                 "Defence": 120,
                 "UQ1txt": "% MOB RESPAWN",
-                "UQ1val": 12,
+                "UQ1val": 8,
                 "UQ2txt": "% TOTAL DAMAGE",
                 "UQ2val": 6,
                 "Upgrade_Slots_Left": 9
@@ -5802,7 +5802,7 @@ export const initItemDetailRepo = () => {
                 "UQ1txt": "% ALL STATS",
                 "UQ1val": 8,
                 "UQ2txt": "% MONEY",
-                "UQ2val": 20,
+                "UQ2val": 26,
                 "Upgrade_Slots_Left": 9
             }),
         new CommonItemBase("EquipmentShirts38", <EquipItemModel>{
@@ -5826,7 +5826,7 @@ export const initItemDetailRepo = () => {
                 "UQ1txt": "% DROP CHANCE",
                 "UQ1val": 30,
                 "UQ2txt": "% MULTIKILL PER TIER",
-                "UQ2val": 10,
+                "UQ2val": 16,
                 "Upgrade_Slots_Left": 10
             }),
         new CommonItemBase("EquipmentPants1", <EquipItemModel>{
@@ -6472,14 +6472,14 @@ export const initItemDetailRepo = () => {
                 "LUK": 45,
                 "Defence": 112,
                 "UQ1txt": "% MOB RESPAWN",
-                "UQ1val": 6,
+                "UQ1val": 4,
                 "UQ2txt": "% TOTAL DAMAGE",
                 "UQ2val": 6,
                 "Upgrade_Slots_Left": 9
             }),
         new CommonItemBase("EquipmentPants29", <EquipItemModel>{
                 "internalID": "EquipmentPants29",
-                "displayName": "Spiked Leggings of the Divine",
+                "displayName": "Marbiglass Legplates",
                 "sellPrice": 200,
                 "typeGen": TypeGenEnum.aPants,
                 "ID": 3,
@@ -6498,12 +6498,12 @@ export const initItemDetailRepo = () => {
                 "UQ1txt": "% ALL STATS",
                 "UQ1val": 7,
                 "UQ2txt": "% MONEY",
-                "UQ2val": 15,
+                "UQ2val": 22,
                 "Upgrade_Slots_Left": 9
             }),
         new CommonItemBase("EquipmentPants30", <EquipItemModel>{
                 "internalID": "EquipmentPants30",
-                "displayName": "Spiked Leggings of the Divine",
+                "displayName": "Tatters of the Gods",
                 "sellPrice": 200,
                 "typeGen": TypeGenEnum.aPants,
                 "ID": 3,
@@ -6522,7 +6522,7 @@ export const initItemDetailRepo = () => {
                 "UQ1txt": "% DROP CHANCE",
                 "UQ1val": 25,
                 "UQ2txt": "% MULTIKILL PER TIER",
-                "UQ2val": 8,
+                "UQ2val": 14,
                 "Upgrade_Slots_Left": 10
             }),
         new CommonItemBase("EquipmentShoes1", <EquipItemModel>{
@@ -7391,7 +7391,7 @@ export const initItemDetailRepo = () => {
             }),
         new CommonItemBase("EquipmentShoes37", <EquipItemModel>{
                 "internalID": "EquipmentShoes37",
-                "displayName": "Devious Slippers of the Divine",
+                "displayName": "Marbiglass Soles",
                 "sellPrice": 200,
                 "typeGen": TypeGenEnum.aShoes,
                 "ID": 3,
@@ -7410,12 +7410,12 @@ export const initItemDetailRepo = () => {
                 "UQ1txt": "% ALL STATS",
                 "UQ1val": 7,
                 "UQ2txt": "% MONEY",
-                "UQ2val": 20,
+                "UQ2val": 25,
                 "Upgrade_Slots_Left": 8
             }),
         new CommonItemBase("EquipmentShoes38", <EquipItemModel>{
                 "internalID": "EquipmentShoes38",
-                "displayName": "Devious Slippers of the Divine",
+                "displayName": "Drip of the Gods",
                 "sellPrice": 200,
                 "typeGen": TypeGenEnum.aShoes,
                 "ID": 3,
@@ -7434,7 +7434,7 @@ export const initItemDetailRepo = () => {
                 "UQ1txt": "% DROP CHANCE",
                 "UQ1val": 30,
                 "UQ2txt": "% MULTIKILL PER TIER",
-                "UQ2val": 7,
+                "UQ2val": 12,
                 "Upgrade_Slots_Left": 9
             }),
         new CommonItemBase("EquipmentPendant1", <EquipItemModel>{
@@ -8104,7 +8104,7 @@ export const initItemDetailRepo = () => {
                 "LUK": 10,
                 "Defence": 10,
                 "UQ1txt": "% XP FROM MONSTERS",
-                "UQ1val": 35,
+                "UQ1val": 42,
                 "UQ2txt": "% MOB RESPAWN",
                 "UQ2val": 5,
                 "Upgrade_Slots_Left": 0
@@ -8997,6 +8997,30 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
+        new CommonItemBase("EquipmentRings34", <EquipItemModel>{
+                "internalID": "EquipmentRings34",
+                "displayName": "Magma Killer Ring",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aRing,
+                "ID": 3,
+                "Type": "Ring",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Speed": 0,
+                "Reach": 0,
+                "Weapon_Power": 5,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 3,
+                "UQ1txt": "% KILLS IN WORLD 5",
+                "UQ1val": 30,
+                "UQ2txt": "0",
+                "UQ2val": 0,
+                "Upgrade_Slots_Left": 0
+            }),
         new CommonItemBase("EquipmentRingsChat1", <EquipItemModel>{
                 "internalID": "EquipmentRingsChat1",
                 "displayName": "Love Ring",
@@ -9571,6 +9595,30 @@ export const initItemDetailRepo = () => {
                 "UQ1val": 40,
                 "UQ2txt": "% ALL AFK GAIN",
                 "UQ2val": 3,
+                "Upgrade_Slots_Left": 0
+            }),
+        new CommonItemBase("EquipmentCape14", <EquipItemModel>{
+                "internalID": "EquipmentCape14",
+                "displayName": "Phoenix Wings",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aCape,
+                "ID": 15,
+                "Type": "Cape",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Speed": 0,
+                "Reach": 0,
+                "Weapon_Power": 30,
+                "STR": 40,
+                "AGI": 40,
+                "WIS": 40,
+                "LUK": 40,
+                "Defence": 0,
+                "UQ1txt": "% DAMAGE MULTI",
+                "UQ1val": 50,
+                "UQ2txt": "% MONEY",
+                "UQ2val": 60,
                 "Upgrade_Slots_Left": 0
             }),
         new CommonItemBase("StampA1", <QuestItemModel>{
@@ -11128,7 +11176,7 @@ export const initItemDetailRepo = () => {
                 "ID": 1049,
                 "Type": "Stamp",
                 "lvReqToCraft": 0,
-                "desc_line1": "JadeCoin,add,0.5,0,10,Spi2b,15,7,20000000000.0,1.37,0,{}% Jade Coin gain,0",
+                "desc_line1": "JadeCoin,add,0.5,0,10,SpiA2b,15,7,20000000000.0,1.37,0,{}% Jade Coin gain,0",
                 "desc_line2": "Filler",
                 "desc_line3": "Filler",
                 "desc_line4": "Filler",
@@ -12412,7 +12460,7 @@ export const initItemDetailRepo = () => {
                 "desc_line8": "Filler",
                 "Effect": "Mystery Stat,4",
                 "Trigger": "1",
-                "Amount": 50,
+                "Amount": 60,
                 "Cooldown": 0
             }),
         new CommonItemBase("StoneZ3", <ConsumableItemModel>{
@@ -12431,9 +12479,30 @@ export const initItemDetailRepo = () => {
                 "desc_line6": "Filler",
                 "desc_line7": "Filler",
                 "desc_line8": "Filler",
-                "Effect": "Mystery Stat,8",
+                "Effect": "Mystery Stat,10",
                 "Trigger": "1",
-                "Amount": 30,
+                "Amount": 50,
+                "Cooldown": 0
+            }),
+        new CommonItemBase("StoneZ4", <ConsumableItemModel>{
+                "internalID": "StoneZ4",
+                "displayName": "Mystery Upgrade Stone IV",
+                "sellPrice": 777,
+                "typeGen": TypeGenEnum.dStone,
+                "ID": 5,
+                "Type": "Upgrade",
+                "lvReqToCraft": 3,
+                "desc_line1": "Drag onto any Equip to apply.",
+                "desc_line2": "Success Chance; *%",
+                "desc_line3": "Uses up # slots only if Successful.",
+                "desc_line4": "WARNING:Mystery Stat has a chance",
+                "desc_line5": "to be Negative, and reduce stats!",
+                "desc_line6": "Filler",
+                "desc_line7": "Filler",
+                "desc_line8": "Filler",
+                "Effect": "Mystery Stat,20",
+                "Trigger": "1",
+                "Amount": 40,
                 "Cooldown": 0
             }),
         new CommonItemBase("StonePremSTR", <ConsumableItemModel>{
@@ -14466,6 +14535,30 @@ export const initItemDetailRepo = () => {
                 "ID": 103,
                 "Type": "Storage",
                 "lvReqToCraft": 4,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Speed": 0,
+                "Reach": 10,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "UQ1txt": "0",
+                "UQ1val": 0,
+                "UQ2txt": "0",
+                "UQ2val": 0,
+                "Upgrade_Slots_Left": 0
+            }),
+        new CommonItemBase("InvStorageN", <EquipItemModel>{
+                "internalID": "InvStorageN",
+                "displayName": "Woodlin Chest",
+                "sellPrice": 1000,
+                "typeGen": TypeGenEnum.aStorageChest,
+                "ID": 104,
+                "Type": "Storage",
+                "lvReqToCraft": 3,
                 "lvReqToEquip": 1,
                 "Class": ClassTypeEnum.All,
                 "Speed": 0,
@@ -16780,6 +16873,23 @@ export const initItemDetailRepo = () => {
         new CommonItemBase("CardPack6", <QuestItemModel>{
                 "internalID": "CardPack6",
                 "displayName": "Smolderin Card Pack",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCardPack,
+                "ID": 0,
+                "Type": "Card Pack",
+                "lvReqToCraft": 2,
+                "desc_line1": "Hold down to open the pack! The cards drop on the ground, make sure to pick them up!!",
+                "desc_line2": "Filler",
+                "desc_line3": "Filler",
+                "desc_line4": "Filler",
+                "desc_line5": "Filler",
+                "desc_line6": "Filler",
+                "desc_line7": "Filler",
+                "desc_line8": "Filler"
+            }),
+        new CommonItemBase("CardPack7", <QuestItemModel>{
+                "internalID": "CardPack7",
+                "displayName": "Spirit Card Pack",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.dCardPack,
                 "ID": 0,
@@ -25816,8 +25926,8 @@ export const initItemDetailRepo = () => {
                 "Defence": 30,
                 "UQ1txt": "% MINING EFFICINCY",
                 "UQ1val": 25,
-                "UQ2txt": "0",
-                "UQ2val": 0,
+                "UQ2txt": "% MONEY",
+                "UQ2val": 10,
                 "Upgrade_Slots_Left": 6
             }),
         new CommonItemBase("EquipmentTools15", <EquipItemModel>{
@@ -26176,8 +26286,8 @@ export const initItemDetailRepo = () => {
                 "Defence": 0,
                 "UQ1txt": "% CHOP EFFICIENCY",
                 "UQ1val": 5,
-                "UQ2txt": "0",
-                "UQ2val": 0,
+                "UQ2txt": "% MONEY",
+                "UQ2val": 10,
                 "Upgrade_Slots_Left": 6
             }),
         new CommonItemBase("EquipmentToolsHatchet10", <EquipItemModel>{
@@ -26488,8 +26598,8 @@ export const initItemDetailRepo = () => {
                 "Defence": 0,
                 "UQ1txt": "% FISHIN EFFICINCY",
                 "UQ1val": 5,
-                "UQ2txt": "0",
-                "UQ2val": 0,
+                "UQ2txt": "% MONEY",
+                "UQ2val": 10,
                 "Upgrade_Slots_Left": 6
             }),
         new CommonItemBase("FishingRod12", <EquipItemModel>{
@@ -41268,7 +41378,7 @@ export const initItemDetailRepo = () => {
                 "ID": 0,
                 "Type": "Card",
                 "lvReqToCraft": 2,
-                "desc_line1": "Boss6C",
+                "desc_line1": "Boss6A",
                 "desc_line2": "Filler",
                 "desc_line3": "Filler",
                 "desc_line4": "Filler",
@@ -41285,7 +41395,7 @@ export const initItemDetailRepo = () => {
                 "ID": 0,
                 "Type": "Card",
                 "lvReqToCraft": 2,
-                "desc_line1": "Boss6C",
+                "desc_line1": "Boss6B",
                 "desc_line2": "Filler",
                 "desc_line3": "Filler",
                 "desc_line4": "Filler",

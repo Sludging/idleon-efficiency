@@ -15,7 +15,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "Jonesy and his Lil Mushies",
                 "bonusId": 1,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 1, "bonus": "<x Total DMG"},
-                "x8": 10,
+                "x8": 15,
                 "x9": 4
             }),
         new SummonEnemyBase(1, <SummonEnemyModel>{
@@ -114,7 +114,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "Bongo and his Lazy Beans",
                 "bonusId": 1,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 1, "bonus": "<x Total DMG"},
-                "x8": 12,
+                "x8": 16,
                 "x9": 8
             }),
         new SummonEnemyBase(10, <SummonEnemyModel>{
@@ -224,7 +224,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "Kip and his Lil Fungi",
                 "bonusId": 1,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 1, "bonus": "<x Total DMG"},
-                "x8": 15,
+                "x8": 19,
                 "x9": 50
             }),
         new SummonEnemyBase(20, <SummonEnemyModel>{
@@ -356,7 +356,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "Shelby and her Shelled Snelbies",
                 "bonusId": 1,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 1, "bonus": "<x Total DMG"},
-                "x8": 18,
+                "x8": 25,
                 "x9": 60
             }),
         new SummonEnemyBase(32, <SummonEnemyModel>{
@@ -400,7 +400,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "Gibby and his Bloque Offensive",
                 "bonusId": 1,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 1, "bonus": "<x Total DMG"},
-                "x8": 20,
+                "x8": 30,
                 "x9": 29
             }),
         new SummonEnemyBase(36, <SummonEnemyModel>{
@@ -543,7 +543,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "Homer and his Epic Donuts",
                 "bonusId": 1,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 1, "bonus": "<x Total DMG"},
-                "x8": 25,
+                "x8": 35,
                 "x9": 37
             }),
         new SummonEnemyBase(49, <SummonEnemyModel>{
@@ -609,7 +609,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "Werm's Stepsister and her Worms",
                 "bonusId": 1,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 1, "bonus": "<x Total DMG"},
-                "x8": 10,
+                "x8": 50,
                 "x9": 61
             }),
         new SummonEnemyBase(55, <SummonEnemyModel>{
@@ -686,7 +686,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "Brandon and his Iconic Brightsides",
                 "bonusId": 1,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 1, "bonus": "<x Total DMG"},
-                "x8": 30,
+                "x8": 75,
                 "x9": 53
             }),
         new SummonEnemyBase(62, <SummonEnemyModel>{
@@ -873,7 +873,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "Lumi and her Bright Lights",
                 "bonusId": 1,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 1, "bonus": "<x Total DMG"},
-                "x8": 35,
+                "x8": 80,
                 "x9": 76
             }),
         new SummonEnemyBase(79, <SummonEnemyModel>{
@@ -961,7 +961,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "Pablo and his Plump Piggies",
                 "bonusId": 1,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 1, "bonus": "<x Total DMG"},
-                "x8": 5,
+                "x8": 8,
                 "x9": 0
             }),
         new SummonEnemyBase(87, <SummonEnemyModel>{
@@ -1027,7 +1027,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "MoveFan84 and his Famous Nacho Batallion",
                 "bonusId": 1,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 1, "bonus": "<x Total DMG"},
-                "x8": 8,
+                "x8": 12,
                 "x9": 13
             }),
         new SummonEnemyBase(93, <SummonEnemyModel>{

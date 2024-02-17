@@ -534,8 +534,10 @@ export const initDropTableRepo = () => {
         new DropTableBase("SuperDropTable6", <DropTableModel>{
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0, "questLink": "N/A"},
-                    <ItemDropModel>{"item": "StampC23", "quantity": 1, "chance": 0.005, "questLink": "N/A"},
-                    <ItemDropModel>{"item": "Trophy2", "quantity": 1, "chance": 0.0003, "questLink": "N/A"}
+                    <ItemDropModel>{"item": "SilverPen", "quantity": 1, "chance": 0.09, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "StampC23", "quantity": 1, "chance": 0.0009, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "Trophy2", "quantity": 1, "chance": 0.0003, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "StoneZ4", "quantity": 1, "chance": 0.015, "questLink": "N/A"}
                 ],
                 "subTable": "SuperDropTable6"
             })    

@@ -100,6 +100,7 @@ export const initCardBonusRepo = () => {
         new BonusMapBase(91, <BonusMapModel>{"id": 92, "bonus": "+{%_Sailing_Speed_(Passive)"}),
         new BonusMapBase(92, <BonusMapModel>{"id": 93, "bonus": "+{%_Skill_Efficncy_(Passive)"}),
         new BonusMapBase(93, <BonusMapModel>{"id": 94, "bonus": "+{%_Class_EXP_(Passive)"}),
-        new BonusMapBase(94, <BonusMapModel>{"id": 95, "bonus": "+{%_All_Skill_EXP_(Passive)"})    
+        new BonusMapBase(94, <BonusMapModel>{"id": 95, "bonus": "+{%_All_Skill_EXP_(Passive)"}),
+        new BonusMapBase(95, <BonusMapModel>{"id": 96, "bonus": "+{%_Total_Damage_Multi"})    
 ]
 }

@@ -585,14 +585,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands12",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Sparky Marble Staff Detailed Recipe",
                         "amount": 100,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Magnifique Godcaster Detailed Recipe",
                         "amount": 100,
                         "type": "detRecipe"
                     },
@@ -2261,14 +2261,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows13",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Pristine Longbow Detailed Recipe",
                         "amount": 250,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Doublestring Godshooter Detailed Recipe",
                         "amount": 250,
                         "type": "detRecipe"
                     },
@@ -3182,35 +3182,35 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows13",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Pristine Longbow Detailed Recipe",
                         "amount": 125,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands12",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Sparky Marble Staff Detailed Recipe",
                         "amount": 125,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Detailed Recipe",
+                        "name": "Massive Godbreaker Detailed Recipe",
                         "amount": 125,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Doublestring Godshooter Detailed Recipe",
                         "amount": 125,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Magnifique Godcaster Detailed Recipe",
                         "amount": 125,
                         "type": "detRecipe"
                     },
@@ -3433,7 +3433,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Detailed Recipe",
+                        "name": "Massive Godbreaker Detailed Recipe",
                         "amount": 125,
                         "type": "detRecipe"
                     },
@@ -4142,7 +4142,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands12",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Sparky Marble Staff Detailed Recipe",
                         "amount": 1000,
                         "type": "detRecipe"
                     },
@@ -4156,7 +4156,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Magnifique Godcaster Detailed Recipe",
                         "amount": 1000,
                         "type": "detRecipe"
                     },
@@ -4414,7 +4414,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Detailed Recipe",
+                        "name": "Massive Godbreaker Detailed Recipe",
                         "amount": 1250,
                         "type": "detRecipe"
                     },
@@ -5314,7 +5314,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows13",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Pristine Longbow Detailed Recipe",
                         "amount": 250,
                         "type": "detRecipe"
                     },
@@ -5335,7 +5335,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Doublestring Godshooter Detailed Recipe",
                         "amount": 250,
                         "type": "detRecipe"
                     },
@@ -6380,14 +6380,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows13",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Pristine Longbow Detailed Recipe",
                         "amount": 3,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Doublestring Godshooter Detailed Recipe",
                         "amount": 3,
                         "type": "detRecipe"
                     },
@@ -6580,14 +6580,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands12",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Sparky Marble Staff Detailed Recipe",
                         "amount": 3,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Magnifique Godcaster Detailed Recipe",
                         "amount": 3,
                         "type": "detRecipe"
                     },
@@ -7856,14 +7856,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows13",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Pristine Longbow Detailed Recipe",
                         "amount": 8,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands12",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Sparky Marble Staff Detailed Recipe",
                         "amount": 8,
                         "type": "detRecipe"
                     },
@@ -7884,21 +7884,21 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Detailed Recipe",
+                        "name": "Massive Godbreaker Detailed Recipe",
                         "amount": 8,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Doublestring Godshooter Detailed Recipe",
                         "amount": 8,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Magnifique Godcaster Detailed Recipe",
                         "amount": 8,
                         "type": "detRecipe"
                     },
@@ -8930,14 +8930,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows13",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Pristine Longbow Detailed Recipe",
                         "amount": 150,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands12",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Sparky Marble Staff Detailed Recipe",
                         "amount": 150,
                         "type": "detRecipe"
                     },
@@ -8979,21 +8979,21 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Detailed Recipe",
+                        "name": "Massive Godbreaker Detailed Recipe",
                         "amount": 150,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Doublestring Godshooter Detailed Recipe",
                         "amount": 150,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Magnifique Godcaster Detailed Recipe",
                         "amount": 150,
                         "type": "detRecipe"
                     },
@@ -9397,14 +9397,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows13",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Pristine Longbow Detailed Recipe",
                         "amount": 7000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Doublestring Godshooter Detailed Recipe",
                         "amount": 7000,
                         "type": "detRecipe"
                     },
@@ -10364,7 +10364,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Detailed Recipe",
+                        "name": "Massive Godbreaker Detailed Recipe",
                         "amount": 2500,
                         "type": "detRecipe"
                     },
@@ -11145,7 +11145,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Detailed Recipe",
+                        "name": "Massive Godbreaker Detailed Recipe",
                         "amount": 3,
                         "type": "detRecipe"
                     },
@@ -11380,7 +11380,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows13",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Pristine Longbow Detailed Recipe",
                         "amount": 1400,
                         "type": "detRecipe"
                     },
@@ -11394,7 +11394,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Doublestring Godshooter Detailed Recipe",
                         "amount": 1400,
                         "type": "detRecipe"
                     },
@@ -11602,7 +11602,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands12",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Sparky Marble Staff Detailed Recipe",
                         "amount": 4000,
                         "type": "detRecipe"
                     },
@@ -11616,7 +11616,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Magnifique Godcaster Detailed Recipe",
                         "amount": 4000,
                         "type": "detRecipe"
                     },
@@ -14243,14 +14243,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows13",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Pristine Longbow Detailed Recipe",
                         "amount": 7,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands12",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Sparky Marble Staff Detailed Recipe",
                         "amount": 7,
                         "type": "detRecipe"
                     },
@@ -14306,21 +14306,21 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Detailed Recipe",
+                        "name": "Massive Godbreaker Detailed Recipe",
                         "amount": 7,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Doublestring Godshooter Detailed Recipe",
                         "amount": 7,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Magnifique Godcaster Detailed Recipe",
                         "amount": 7,
                         "type": "detRecipe"
                     },
@@ -15000,7 +15000,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Detailed Recipe",
+                        "name": "Massive Godbreaker Detailed Recipe",
                         "amount": 25000,
                         "type": "detRecipe"
                     },
@@ -15172,7 +15172,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands12",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Sparky Marble Staff Detailed Recipe",
                         "amount": 10000,
                         "type": "detRecipe"
                     },
@@ -15186,7 +15186,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Magnifique Godcaster Detailed Recipe",
                         "amount": 10000,
                         "type": "detRecipe"
                     },
@@ -16095,7 +16095,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows13",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Pristine Longbow Detailed Recipe",
                         "amount": 350,
                         "type": "detRecipe"
                     },
@@ -16151,7 +16151,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Doublestring Godshooter Detailed Recipe",
                         "amount": 350,
                         "type": "detRecipe"
                     },
@@ -17561,35 +17561,35 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows13",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Pristine Longbow Detailed Recipe",
                         "amount": 4,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands12",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Sparky Marble Staff Detailed Recipe",
                         "amount": 4,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Detailed Recipe",
+                        "name": "Massive Godbreaker Detailed Recipe",
                         "amount": 10,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Doublestring Godshooter Detailed Recipe",
                         "amount": 4,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Magnifique Godcaster Detailed Recipe",
                         "amount": 4,
                         "type": "detRecipe"
                     },
@@ -17728,7 +17728,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Detailed Recipe",
+                        "name": "Massive Godbreaker Detailed Recipe",
                         "amount": 15,
                         "type": "detRecipe"
                     },
@@ -17921,7 +17921,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands12",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Sparky Marble Staff Detailed Recipe",
                         "amount": 5000,
                         "type": "detRecipe"
                     },
@@ -17935,7 +17935,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Magnifique Godcaster Detailed Recipe",
                         "amount": 5000,
                         "type": "detRecipe"
                     },
@@ -18907,14 +18907,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows13",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Pristine Longbow Detailed Recipe",
                         "amount": 500,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands12",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Sparky Marble Staff Detailed Recipe",
                         "amount": 500,
                         "type": "detRecipe"
                     },
@@ -18970,21 +18970,21 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Detailed Recipe",
+                        "name": "Massive Godbreaker Detailed Recipe",
                         "amount": 500,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Doublestring Godshooter Detailed Recipe",
                         "amount": 500,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Magnifique Godcaster Detailed Recipe",
                         "amount": 500,
                         "type": "detRecipe"
                     },
@@ -20069,14 +20069,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants29",
-                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "name": "Marbiglass Legplates Detailed Recipe",
                         "amount": 1600,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes37",
-                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "name": "Marbiglass Soles Detailed Recipe",
                         "amount": 750,
                         "type": "detRecipe"
                     },
@@ -20097,14 +20097,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows13",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Pristine Longbow Detailed Recipe",
                         "amount": 750,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands12",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Sparky Marble Staff Detailed Recipe",
                         "amount": 800,
                         "type": "detRecipe"
                     },
@@ -20139,14 +20139,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants30",
-                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "name": "Tatters of the Gods Detailed Recipe",
                         "amount": 1600,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes38",
-                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "name": "Drip of the Gods Detailed Recipe",
                         "amount": 750,
                         "type": "detRecipe"
                     },
@@ -20160,21 +20160,21 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Detailed Recipe",
+                        "name": "Massive Godbreaker Detailed Recipe",
                         "amount": 750,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Doublestring Godshooter Detailed Recipe",
                         "amount": 750,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Magnifique Godcaster Detailed Recipe",
                         "amount": 800,
                         "type": "detRecipe"
                     },
@@ -20703,7 +20703,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows13",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Pristine Longbow Detailed Recipe",
                         "amount": 110000,
                         "type": "detRecipe"
                     },
@@ -20717,7 +20717,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Doublestring Godshooter Detailed Recipe",
                         "amount": 110000,
                         "type": "detRecipe"
                     },
@@ -21339,7 +21339,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Detailed Recipe",
+                        "name": "Massive Godbreaker Detailed Recipe",
                         "amount": 90000,
                         "type": "detRecipe"
                     },
@@ -21441,14 +21441,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands12",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Sparky Marble Staff Detailed Recipe",
                         "amount": 50000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Magnifique Godcaster Detailed Recipe",
                         "amount": 50000,
                         "type": "detRecipe"
                     },
@@ -21840,14 +21840,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes37",
-                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "name": "Marbiglass Soles Detailed Recipe",
                         "amount": 8,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes38",
-                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "name": "Drip of the Gods Detailed Recipe",
                         "amount": 8,
                         "type": "detRecipe"
                     }
@@ -22441,14 +22441,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants29",
-                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "name": "Marbiglass Legplates Detailed Recipe",
                         "amount": 5000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes37",
-                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "name": "Marbiglass Soles Detailed Recipe",
                         "amount": 3000,
                         "type": "detRecipe"
                     },
@@ -22469,14 +22469,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows13",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Pristine Longbow Detailed Recipe",
                         "amount": 3000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands12",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Sparky Marble Staff Detailed Recipe",
                         "amount": 3000,
                         "type": "detRecipe"
                     },
@@ -22504,14 +22504,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants30",
-                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "name": "Tatters of the Gods Detailed Recipe",
                         "amount": 5000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes38",
-                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "name": "Drip of the Gods Detailed Recipe",
                         "amount": 3000,
                         "type": "detRecipe"
                     },
@@ -22525,21 +22525,21 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Detailed Recipe",
+                        "name": "Massive Godbreaker Detailed Recipe",
                         "amount": 3000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Doublestring Godshooter Detailed Recipe",
                         "amount": 3000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Magnifique Godcaster Detailed Recipe",
                         "amount": 3000,
                         "type": "detRecipe"
                     },
@@ -22951,7 +22951,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Detailed Recipe",
+                        "name": "Massive Godbreaker Detailed Recipe",
                         "amount": 200000,
                         "type": "detRecipe"
                     },
@@ -23047,7 +23047,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows13",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Pristine Longbow Detailed Recipe",
                         "amount": 10,
                         "type": "detRecipe"
                     },
@@ -23061,7 +23061,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Doublestring Godshooter Detailed Recipe",
                         "amount": 10,
                         "type": "detRecipe"
                     },
@@ -23171,7 +23171,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands12",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Sparky Marble Staff Detailed Recipe",
                         "amount": 15000,
                         "type": "detRecipe"
                     },
@@ -23185,7 +23185,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Magnifique Godcaster Detailed Recipe",
                         "amount": 15000,
                         "type": "detRecipe"
                     },
@@ -23679,14 +23679,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants29",
-                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "name": "Marbiglass Legplates Detailed Recipe",
                         "amount": 333333,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants30",
-                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "name": "Tatters of the Gods Detailed Recipe",
                         "amount": 333333,
                         "type": "detRecipe"
                     },
@@ -23987,14 +23987,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants29",
-                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "name": "Marbiglass Legplates Detailed Recipe",
                         "amount": 15,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes37",
-                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "name": "Marbiglass Soles Detailed Recipe",
                         "amount": 10,
                         "type": "detRecipe"
                     },
@@ -24015,14 +24015,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants30",
-                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "name": "Tatters of the Gods Detailed Recipe",
                         "amount": 15,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes38",
-                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "name": "Drip of the Gods Detailed Recipe",
                         "amount": 10,
                         "type": "detRecipe"
                     }
@@ -24119,6 +24119,20 @@ export const initUsesRepo = () => {
                         "key": "Bullet3",
                         "name": "Coldseeker Bullet Detailed Recipe",
                         "amount": 100,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSmithingTabs6",
+                        "name": "Anvil Tab 6 Recipe",
+                        "amount": 1000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentSmithingTabs6",
+                        "name": "Anvil Tab 6 Detailed Recipe",
+                        "amount": 1000000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -24284,14 +24298,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants29",
-                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "name": "Marbiglass Legplates Detailed Recipe",
                         "amount": 1600,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes37",
-                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "name": "Marbiglass Soles Detailed Recipe",
                         "amount": 2000,
                         "type": "detRecipe"
                     },
@@ -24312,14 +24326,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants30",
-                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "name": "Tatters of the Gods Detailed Recipe",
                         "amount": 1600,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes38",
-                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "name": "Drip of the Gods Detailed Recipe",
                         "amount": 2000,
                         "type": "detRecipe"
                     },
@@ -24434,14 +24448,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants29",
-                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "name": "Marbiglass Legplates Detailed Recipe",
                         "amount": 1000000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants30",
-                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "name": "Tatters of the Gods Detailed Recipe",
                         "amount": 1000000,
                         "type": "detRecipe"
                     },
@@ -24495,14 +24509,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes37",
-                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "name": "Marbiglass Soles Detailed Recipe",
                         "amount": 1200000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes38",
-                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "name": "Drip of the Gods Detailed Recipe",
                         "amount": 1200000,
                         "type": "detRecipe"
                     },
@@ -24709,14 +24723,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows13",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Pristine Longbow Detailed Recipe",
                         "amount": 100,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands12",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Sparky Marble Staff Detailed Recipe",
                         "amount": 100,
                         "type": "detRecipe"
                     },
@@ -24730,21 +24744,21 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Detailed Recipe",
+                        "name": "Massive Godbreaker Detailed Recipe",
                         "amount": 100,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Doublestring Godshooter Detailed Recipe",
                         "amount": 100,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Magnifique Godcaster Detailed Recipe",
                         "amount": 100,
                         "type": "detRecipe"
                     },
@@ -24875,35 +24889,35 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows13",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Pristine Longbow Detailed Recipe",
                         "amount": 500000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands12",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Sparky Marble Staff Detailed Recipe",
                         "amount": 500000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Detailed Recipe",
+                        "name": "Massive Godbreaker Detailed Recipe",
                         "amount": 500000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Doublestring Godshooter Detailed Recipe",
                         "amount": 500000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Magnifique Godcaster Detailed Recipe",
                         "amount": 500000,
                         "type": "detRecipe"
                     },
@@ -25100,20 +25114,6 @@ export const initUsesRepo = () => {
                         "key": "MaxCapBagB9",
                         "name": "Colossal Bug Pouch Detailed Recipe",
                         "amount": 900000,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentSmithingTabs6",
-                        "name": "Anvil Tab 6 Recipe",
-                        "amount": 1000000,
-                        "type": "recipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentSmithingTabs6",
-                        "name": "Anvil Tab 6 Detailed Recipe",
-                        "amount": 1000000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -25550,14 +25550,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows13",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Pristine Longbow Detailed Recipe",
                         "amount": 4,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands12",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Sparky Marble Staff Detailed Recipe",
                         "amount": 4,
                         "type": "detRecipe"
                     },
@@ -25578,21 +25578,21 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Detailed Recipe",
+                        "name": "Massive Godbreaker Detailed Recipe",
                         "amount": 4,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Doublestring Godshooter Detailed Recipe",
                         "amount": 4,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Magnifique Godcaster Detailed Recipe",
                         "amount": 4,
                         "type": "detRecipe"
                     }
@@ -25744,14 +25744,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants29",
-                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "name": "Marbiglass Legplates Detailed Recipe",
                         "amount": 20,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes37",
-                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "name": "Marbiglass Soles Detailed Recipe",
                         "amount": 10,
                         "type": "detRecipe"
                     },
@@ -25772,14 +25772,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows13",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Pristine Longbow Detailed Recipe",
                         "amount": 30,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands12",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Sparky Marble Staff Detailed Recipe",
                         "amount": 30,
                         "type": "detRecipe"
                     },
@@ -25800,14 +25800,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants30",
-                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "name": "Tatters of the Gods Detailed Recipe",
                         "amount": 20,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes38",
-                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "name": "Drip of the Gods Detailed Recipe",
                         "amount": 10,
                         "type": "detRecipe"
                     },
@@ -25821,21 +25821,21 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Detailed Recipe",
+                        "name": "Massive Godbreaker Detailed Recipe",
                         "amount": 30,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Doublestring Godshooter Detailed Recipe",
                         "amount": 30,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Magnifique Godcaster Detailed Recipe",
                         "amount": 30,
                         "type": "detRecipe"
                     }
@@ -25982,7 +25982,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Detailed Recipe",
+                        "name": "Massive Godbreaker Detailed Recipe",
                         "amount": 3000000,
                         "type": "detRecipe"
                     },
@@ -26029,14 +26029,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows13",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Pristine Longbow Detailed Recipe",
                         "amount": 4000000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Doublestring Godshooter Detailed Recipe",
                         "amount": 4000000,
                         "type": "detRecipe"
                     },
@@ -26083,14 +26083,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands12",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Sparky Marble Staff Detailed Recipe",
                         "amount": 5000000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Magnifique Godcaster Detailed Recipe",
                         "amount": 5000000,
                         "type": "detRecipe"
                     }
@@ -26232,28 +26232,28 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants29",
-                        "name": "Spiked Leggings of the Divine Recipe",
+                        "name": "Marbiglass Legplates Recipe",
                         "amount": 10000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants29",
-                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "name": "Marbiglass Legplates Detailed Recipe",
                         "amount": 10000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes37",
-                        "name": "Devious Slippers of the Divine Recipe",
+                        "name": "Marbiglass Soles Recipe",
                         "amount": 10000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes37",
-                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "name": "Marbiglass Soles Detailed Recipe",
                         "amount": 10000,
                         "type": "detRecipe"
                     },
@@ -26288,14 +26288,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants30",
-                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "name": "Tatters of the Gods Detailed Recipe",
                         "amount": 10000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes38",
-                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "name": "Drip of the Gods Detailed Recipe",
                         "amount": 10000,
                         "type": "detRecipe"
                     },
@@ -26376,7 +26376,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants29",
-                        "name": "Spiked Leggings of the Divine Recipe",
+                        "name": "Marbiglass Legplates Recipe",
                         "amount": 1,
                         "type": "recipe"
                     }
@@ -26389,14 +26389,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants29",
-                        "name": "Spiked Leggings of the Divine Recipe",
+                        "name": "Marbiglass Legplates Recipe",
                         "amount": 5000000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants29",
-                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "name": "Marbiglass Legplates Detailed Recipe",
                         "amount": 5000000,
                         "type": "detRecipe"
                     },
@@ -26417,7 +26417,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants30",
-                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "name": "Tatters of the Gods Detailed Recipe",
                         "amount": 5000000,
                         "type": "detRecipe"
                     }
@@ -26430,7 +26430,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes37",
-                        "name": "Devious Slippers of the Divine Recipe",
+                        "name": "Marbiglass Soles Recipe",
                         "amount": 1,
                         "type": "recipe"
                     }
@@ -26443,14 +26443,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes37",
-                        "name": "Devious Slippers of the Divine Recipe",
+                        "name": "Marbiglass Soles Recipe",
                         "amount": 2500000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes37",
-                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "name": "Marbiglass Soles Detailed Recipe",
                         "amount": 2500000,
                         "type": "detRecipe"
                     },
@@ -26471,7 +26471,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes38",
-                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "name": "Drip of the Gods Detailed Recipe",
                         "amount": 2500000,
                         "type": "detRecipe"
                     },
@@ -26574,14 +26574,14 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPunching10",
                         "name": "Pentastud Slapper Recipe",
-                        "amount": 10000,
+                        "amount": 5000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPunching10",
                         "name": "Pentastud Slapper Detailed Recipe",
-                        "amount": 10000,
+                        "amount": 5000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -26602,7 +26602,7 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPunching11",
                         "name": "Mittens of the Gods Detailed Recipe",
-                        "amount": 10000,
+                        "amount": 5000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -26611,6 +26611,13 @@ export const initUsesRepo = () => {
                         "name": "Power Cauldron: Endgame Eff I Bubble",
                         "amount": "Lots",
                         "type": "bubble"
+                    },
+                    <UseModel>{
+                        "repoSource": "ItemRepo",
+                        "key": "StampB50",
+                        "name": "Jade Mint Stamp Material",
+                        "amount": "Lots",
+                        "type": "stamp"
                     }
                 ],
                 "typeGen": TypeGenEnum.bCraft,
@@ -26648,49 +26655,49 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows13",
-                        "name": "Spine Tingler Sniper Recipe",
+                        "name": "Pristine Longbow Recipe",
                         "amount": 1000000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows13",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Pristine Longbow Detailed Recipe",
                         "amount": 1000000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands12",
-                        "name": "Staff of the Undead Plague Recipe",
+                        "name": "Sparky Marble Staff Recipe",
                         "amount": 1000000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands12",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Sparky Marble Staff Detailed Recipe",
                         "amount": 1000000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Detailed Recipe",
+                        "name": "Massive Godbreaker Detailed Recipe",
                         "amount": 1000000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Doublestring Godshooter Detailed Recipe",
                         "amount": 1000000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Magnifique Godcaster Detailed Recipe",
                         "amount": 1000000,
                         "type": "detRecipe"
                     },
@@ -26752,7 +26759,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Detailed Recipe",
+                        "name": "Massive Godbreaker Detailed Recipe",
                         "amount": 4000000,
                         "type": "detRecipe"
                     },
@@ -26772,7 +26779,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows13",
-                        "name": "Spine Tingler Sniper Recipe",
+                        "name": "Pristine Longbow Recipe",
                         "amount": 1,
                         "type": "recipe"
                     }
@@ -26785,21 +26792,21 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows13",
-                        "name": "Spine Tingler Sniper Recipe",
+                        "name": "Pristine Longbow Recipe",
                         "amount": 4000000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows13",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Pristine Longbow Detailed Recipe",
                         "amount": 4000000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Doublestring Godshooter Detailed Recipe",
                         "amount": 4000000,
                         "type": "detRecipe"
                     },
@@ -26819,7 +26826,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands12",
-                        "name": "Staff of the Undead Plague Recipe",
+                        "name": "Sparky Marble Staff Recipe",
                         "amount": 1,
                         "type": "recipe"
                     }
@@ -26832,21 +26839,21 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands12",
-                        "name": "Staff of the Undead Plague Recipe",
+                        "name": "Sparky Marble Staff Recipe",
                         "amount": 4000000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands12",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Sparky Marble Staff Detailed Recipe",
                         "amount": 4000000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Magnifique Godcaster Detailed Recipe",
                         "amount": 4000000,
                         "type": "detRecipe"
                     },
@@ -27300,28 +27307,28 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants30",
-                        "name": "Spiked Leggings of the Divine Recipe",
+                        "name": "Tatters of the Gods Recipe",
                         "amount": 100000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants30",
-                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "name": "Tatters of the Gods Detailed Recipe",
                         "amount": 100000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes38",
-                        "name": "Devious Slippers of the Divine Recipe",
+                        "name": "Drip of the Gods Recipe",
                         "amount": 100000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes38",
-                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "name": "Drip of the Gods Detailed Recipe",
                         "amount": 100000,
                         "type": "detRecipe"
                     },
@@ -27342,42 +27349,42 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Recipe",
+                        "name": "Massive Godbreaker Recipe",
                         "amount": 150000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Detailed Recipe",
+                        "name": "Massive Godbreaker Detailed Recipe",
                         "amount": 150000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Recipe",
+                        "name": "Doublestring Godshooter Recipe",
                         "amount": 150000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Doublestring Godshooter Detailed Recipe",
                         "amount": 150000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Recipe",
+                        "name": "Magnifique Godcaster Recipe",
                         "amount": 150000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Magnifique Godcaster Detailed Recipe",
                         "amount": 150000,
                         "type": "detRecipe"
                     },
@@ -27508,42 +27515,42 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Recipe",
+                        "name": "Massive Godbreaker Recipe",
                         "amount": 10000000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Detailed Recipe",
+                        "name": "Massive Godbreaker Detailed Recipe",
                         "amount": 10000000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Recipe",
+                        "name": "Doublestring Godshooter Recipe",
                         "amount": 10000000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Detailed Recipe",
+                        "name": "Doublestring Godshooter Detailed Recipe",
                         "amount": 10000000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Recipe",
+                        "name": "Magnifique Godcaster Recipe",
                         "amount": 10000000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Detailed Recipe",
+                        "name": "Magnifique Godcaster Detailed Recipe",
                         "amount": 10000000,
                         "type": "detRecipe"
                     },
@@ -27618,7 +27625,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants30",
-                        "name": "Spiked Leggings of the Divine Recipe",
+                        "name": "Tatters of the Gods Recipe",
                         "amount": 1,
                         "type": "recipe"
                     }
@@ -27631,14 +27638,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants30",
-                        "name": "Spiked Leggings of the Divine Recipe",
+                        "name": "Tatters of the Gods Recipe",
                         "amount": 10000000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants30",
-                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "name": "Tatters of the Gods Detailed Recipe",
                         "amount": 10000000,
                         "type": "detRecipe"
                     },
@@ -27693,14 +27700,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants30",
-                        "name": "Spiked Leggings of the Divine Recipe",
+                        "name": "Tatters of the Gods Recipe",
                         "amount": 10000000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPants30",
-                        "name": "Spiked Leggings of the Divine Detailed Recipe",
+                        "name": "Tatters of the Gods Detailed Recipe",
                         "amount": 10000000,
                         "type": "detRecipe"
                     }
@@ -27713,7 +27720,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes38",
-                        "name": "Devious Slippers of the Divine Recipe",
+                        "name": "Drip of the Gods Recipe",
                         "amount": 1,
                         "type": "recipe"
                     }
@@ -27726,14 +27733,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes38",
-                        "name": "Devious Slippers of the Divine Recipe",
+                        "name": "Drip of the Gods Recipe",
                         "amount": 10000000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes38",
-                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "name": "Drip of the Gods Detailed Recipe",
                         "amount": 10000000,
                         "type": "detRecipe"
                     },
@@ -27795,14 +27802,14 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes38",
-                        "name": "Devious Slippers of the Divine Recipe",
+                        "name": "Drip of the Gods Recipe",
                         "amount": 10000000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes38",
-                        "name": "Devious Slippers of the Divine Detailed Recipe",
+                        "name": "Drip of the Gods Detailed Recipe",
                         "amount": 10000000,
                         "type": "detRecipe"
                     }
@@ -27829,14 +27836,14 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPunching11",
                         "name": "Mittens of the Gods Recipe",
-                        "amount": 1000000,
+                        "amount": 100000,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPunching11",
                         "name": "Mittens of the Gods Detailed Recipe",
-                        "amount": 1000000,
+                        "amount": 100000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -27862,7 +27869,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentSword9",
-                        "name": "Godbreaker Recipe",
+                        "name": "Massive Godbreaker Recipe",
                         "amount": 1,
                         "type": "recipe"
                     }
@@ -27875,7 +27882,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentBows14",
-                        "name": "Spine Tingler Sniper Recipe",
+                        "name": "Doublestring Godshooter Recipe",
                         "amount": 1,
                         "type": "recipe"
                     }
@@ -27888,7 +27895,7 @@ export const initUsesRepo = () => {
                     <UseModel>{
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentWands13",
-                        "name": "Staff of the Undead Plague Recipe",
+                        "name": "Magnifique Godcaster Recipe",
                         "amount": 1,
                         "type": "recipe"
                     }
@@ -28048,6 +28055,47 @@ export const initUsesRepo = () => {
                 ],
                 "typeGen": TypeGenEnum.aTrap,
                 "type": "Trap Box Set"
+            }),
+        new UsesBase("Critter5", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagTr10",
+                        "name": "Herculean Critta Pouch Recipe",
+                        "amount": 5555555,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "MaxCapBagTr10",
+                        "name": "Herculean Critta Pouch Detailed Recipe",
+                        "amount": 5555555,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Quicc Cauldron@Green Bargain",
+                        "name": "Quicc Cauldron: Green Bargain Bubble",
+                        "amount": "Lots",
+                        "type": "bubble"
+                    },
+                    <UseModel>{
+                        "repoSource": "ItemRepo",
+                        "key": "StampB28",
+                        "name": "Shiny Crab Stamp Material",
+                        "amount": "Lots",
+                        "type": "stamp"
+                    },
+                    <UseModel>{
+                        "repoSource": "NpcRepo",
+                        "key": "Lord of the Hunt@Happy Tree Friend",
+                        "name": "Happy Tree Friend Requirements",
+                        "amount": 1500,
+                        "type": "quest"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dCritters,
+                "type": "Critter"
             }),
         new UsesBase("WorshipSkull10", <UsesModel>{
                 "uses": [
@@ -28368,33 +28416,6 @@ export const initUsesRepo = () => {
                 ],
                 "typeGen": TypeGenEnum.bCraft,
                 "type": "Monster Drop"
-            }),
-        new UsesBase("Critter5", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "BubbleRepo",
-                        "key": "Quicc Cauldron@Green Bargain",
-                        "name": "Quicc Cauldron: Green Bargain Bubble",
-                        "amount": "Lots",
-                        "type": "bubble"
-                    },
-                    <UseModel>{
-                        "repoSource": "ItemRepo",
-                        "key": "StampB28",
-                        "name": "Shiny Crab Stamp Material",
-                        "amount": "Lots",
-                        "type": "stamp"
-                    },
-                    <UseModel>{
-                        "repoSource": "NpcRepo",
-                        "key": "Lord of the Hunt@Happy Tree Friend",
-                        "name": "Happy Tree Friend Requirements",
-                        "amount": 1500,
-                        "type": "quest"
-                    }
-                ],
-                "typeGen": TypeGenEnum.dCritters,
-                "type": "Critter"
             }),
         new UsesBase("Critter8", <UsesModel>{
                 "uses": [

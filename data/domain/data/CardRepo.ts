@@ -1642,8 +1642,8 @@ export const initCardRepo = () => {
                 "cardID": "Z22",
                 "category": "Bosses",
                 "perTier": 9,
-                "effect": "+{% Total Damage (Passive)",
-                "bonus": 5,
+                "effect": "+{% Total Damage Multi",
+                "bonus": 8,
                 "order": 24
             }),
         new CardDataBase("Boss6C", <CardDataModel>{
@@ -1651,7 +1651,7 @@ export const initCardRepo = () => {
                 "category": "Bosses",
                 "perTier": 13,
                 "effect": "+{% Multikill per tier",
-                "bonus": 12,
+                "bonus": 20,
                 "order": 25
             }),
         new CardDataBase("ghost", <CardDataModel>{

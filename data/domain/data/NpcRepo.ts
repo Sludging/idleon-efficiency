@@ -14884,9 +14884,9 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 6.11,
-                    "starSign": "Taurus",
-                    "mothersMaidenName": "Quinn",
+                    "birthWeight": 6.25,
+                    "starSign": "Cancer",
+                    "mothersMaidenName": "Doran",
                     "notes": " "
                 },
                 "quests": {
@@ -15132,22 +15132,172 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 2.2,
-                    "starSign": "Libra",
-                    "mothersMaidenName": "Dugelman",
+                    "birthWeight": 7.13,
+                    "starSign": "Virgo",
+                    "mothersMaidenName": "Reyes",
                     "notes": " "
                 },
-                "quests": {},
+                "quests": {
+                    "Sneak Dropout": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "So yeh I'm thinkin' infiltratin' that old abandoned Ninja Castle in town is the play but like shiee I ain't doin' that myself ya feel? <br> QUEST:Reach Lv 10 in your Sneaking Skill",
+                        "NextIndex": 4,
+                        "Name": "Sneak Dropout",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 3,
+                        "Rewards": [<ComponentModel>{"item": "StampB48", "quantity": 1}, <ComponentModel>{"item": "GemP30", "quantity": 1}],
+                        "QuestName": "Hoov1",
+                        "Difficulty": 1,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Hoov1",
+                        "CustomArray": [<CustomReqModel>{"desc": "Sneaking LV:", "finalV": 10, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "Stealth Check 1 2 3": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Look man I'll totally join you just lemme peep those stats see if you good enough for my caliber. <br> QUEST:Have a total Stealth of 10420 on you Ninja Twin. Check Skill Info to see your ninja twin's Stealth amount.",
+                        "NextIndex": 7,
+                        "Name": "Stealth Check 1 2 3",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 6,
+                        "Rewards": [<ComponentModel>{"item": "StampA40", "quantity": 1}, <ComponentModel>{"item": "Gfoodcoupon", "quantity": 300}],
+                        "QuestName": "Hoov2",
+                        "Difficulty": 3,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Hoov2",
+                        "CustomArray": [<CustomReqModel>{
+                            "desc": "Ninja Twin Stealth:",
+                            "finalV": 10420,
+                            "type": "GreaterEqual",
+                            "startV": 0
+                        }]
+                    },
+                    "Sneak Registration": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Now where'd I put them last time I used them... while I look for my charms how 'bout you go level a bit yea?. <br> QUEST:Reach Sneaking Lv 40",
+                        "NextIndex": 10,
+                        "Name": "Sneak Registration",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 9,
+                        "Rewards": [<ComponentModel>{"item": "GemP30", "quantity": 1}, <ComponentModel>{"item": "Gfoodcoupon", "quantity": 1000}],
+                        "QuestName": "Hoov3",
+                        "Difficulty": 5,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Hoov3",
+                        "CustomArray": [<CustomReqModel>{"desc": "Sneaking LV:", "finalV": 40, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "Sneak Graduate": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Lemme just finish this last bite I'll be right with you. <br> QUEST:He won't be right with you he's obviously ducking. Just go reach Sneaking Lv 80 continue without him you already got his stamps lmao",
+                        "NextIndex": 13,
+                        "Name": "Sneak Graduate",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 12,
+                        "Rewards": [<ComponentModel>{"item": "InvStorageN", "quantity": 1}, <ComponentModel>{"item": "Gfoodcoupon", "quantity": 1500}],
+                        "QuestName": "Hoov4",
+                        "Difficulty": 8,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Hoov4",
+                        "CustomArray": [<CustomReqModel>{"desc": "Sneaking LV:", "finalV": 80, "type": "GreaterEqual", "startV": 0}]
+                    }
+                },
                 "dialogue": [
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "H to the Hungry V to the Voracious fo muchin' on brunchin' used to eat until I couldn't...",
+                        "DialogueText": "H to the Hungry V to the Vicious fo muchin' on brunchin' I used to eat all things delicious...",
                         "NextIndex": 1,
                         "Name": ""
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "... oh hi care to join me? I was just having a bite to eat before I got back to work!",
+                        "DialogueText": "... oh yo whats good care to join me? I was just having a bite to eat before I got back to it.",
+                        "NextIndex": 2,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "So yeh I'm thinkin' infiltratin' that old abandoned Ninja Castle in town is the play but like shiee I ain't doin' that myself ya feel? <br> QUEST:Reach Lv 10 in your Sneaking Skill",
+                        "NextIndex": 4,
+                        "Name": "Sneak Dropout"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 2,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Eyo was good you get in there? Dang what'd you find? A weird wood baby and a candle what?",
+                        "NextIndex": 5,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Look man I'll totally join you just lemme peep those stats see if you good enough for my caliber. <br> QUEST:Have a total Stealth of 10420 on you Ninja Twin. Check Skill Info to see your ninja twin's Stealth amount.",
+                        "NextIndex": 7,
+                        "Name": "Stealth Check 1 2 3"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 5,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Aight aight that's whats up fr lemme go grab my Charms and we gonna climb our way to the top floor.",
+                        "NextIndex": 8,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Now where'd I put them last time I used them... while I look for my charms how 'bout you go level a bit yea?. <br> QUEST:Reach Sneaking Lv 40",
+                        "NextIndex": 10,
+                        "Name": "Sneak Registration"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 8,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Eyo what up... oh it's you uh yea nah I must've accidentally trashed my charms we seriously need some QoL ya feel? Prevent that crap from happening...",
+                        "NextIndex": 11,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Lemme just finish this last bite I'll be right with you. <br> QUEST:He won't be right with you he's obviously ducking. Just go reach Sneaking Lv 80 continue without him you already got his stamps lmao",
+                        "NextIndex": 13,
+                        "Name": "Sneak Graduate"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 11,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Dang bruh I saw that speech bubble fr I would've joined you but like I ain't puttin up with that disrespect. You makin' me feel a certain kinda way hater lucky I don't drop some bars on ya.",
+                        "NextIndex": 14,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "There ain't no love in the hole of the donut... ain't no love in the hole of... bagel..? No that sounds dumb what about...",
+                        "NextIndex": 15,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "You better lose the toast not the ice cream the frosting the cherry you better eat it 'till it's gone...? Nah that ain't it either how About...",
                         "NextIndex": -1,
                         "Name": ""
                     }
@@ -15159,23 +15309,188 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 7.01,
-                    "starSign": "Pisces",
-                    "mothersMaidenName": "Reardon",
+                    "birthWeight": 1.23,
+                    "starSign": "Virgo",
+                    "mothersMaidenName": "Leisinger",
                     "notes": " "
                 },
-                "quests": {},
+                "quests": {
+                    "Portal Issues": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Go ahead and try it won't matter. QUEST:Defeat 400000 Woodlin Spirits to open the portal business as usual forget this Elder chump!",
+                        "NextIndex": 4,
+                        "Name": "Portal Issues",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 3,
+                        "Rewards": [<ComponentModel>{"item": "Gfoodcoupon", "quantity": 800}],
+                        "QuestName": "Woodlin Elder1",
+                        "Difficulty": 2,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Woodlin Elder1",
+                        "CustomArray": [<CustomReqModel>{"desc": "Woodlin Kills:", "finalV": 400000, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "Big Lock Picking": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "However. Do this again and your worth will be proven. <br> QUEST:Defeat 400000 Woodlin Spirits on a 2nd character that must be what the big lock is all about!",
+                        "NextIndex": 7,
+                        "Name": "Big Lock Picking",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 3,
+                        "NoSpaceIndex": 6,
+                        "Rewards": [
+                            <ComponentModel>{"item": "ExpBalloon3", "quantity": 6},
+                            <ComponentModel>{"item": "GemP30", "quantity": 3},
+                            <ComponentModel>{"item": "Quest81", "quantity": 4}
+                        ],
+                        "QuestName": "Woodlin Elder2",
+                        "Difficulty": 3,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Woodlin Elder2",
+                        "CustomArray": [<CustomReqModel>{"desc": "2nd Char Unlock:", "finalV": 1, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "Fiddy": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Enough portal talk. Let's test your dedication further. <br> QUEST:Defeat exactly 50 Woodlin Spirits. Stand on the top right platform to lock in your killcount. Killcount resets if incorrect.",
+                        "NextIndex": 10,
+                        "Name": "Fiddy",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 9,
+                        "Rewards": [<ComponentModel>{"item": "Gfoodcoupon", "quantity": 1500}],
+                        "QuestName": "Woodlin Elder3",
+                        "Difficulty": 1,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Woodlin Elder3",
+                        "CustomArray": [<CustomReqModel>{"desc": "50 Exactly:", "finalV": 1, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "Hunned Fiddy": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Let's test your dedication even further. <br> QUEST:Defeat exactly 150 Woodlin Spirits. Stand on the top right platform to lock in your killcount. Killcount resets if incorrect.",
+                        "NextIndex": 13,
+                        "Name": "Hunned Fiddy",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 12,
+                        "Rewards": [<ComponentModel>{"item": "Gfoodcoupon", "quantity": 2500}],
+                        "QuestName": "Woodlin Elder4",
+                        "Difficulty": 4,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Woodlin Elder4",
+                        "CustomArray": [<CustomReqModel>{"desc": "150 Exactly:", "finalV": 1, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "Triple Tre": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "One final test. Third time's the charm. <br> QUEST:Defeat exactly 333 Woodlin Spirits. Stand on the top right platform to lock in your killcount. Killcount resets if incorrect.",
+                        "NextIndex": 16,
+                        "Name": "Triple Tre",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 15,
+                        "Rewards": [<ComponentModel>{"item": "Gfoodcoupon", "quantity": 4000}],
+                        "QuestName": "Woodlin Elder5",
+                        "Difficulty": 7,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Woodlin Elder5",
+                        "CustomArray": [<CustomReqModel>{"desc": "333 Exactly:", "finalV": 1, "type": "GreaterEqual", "startV": 0}]
+                    }
+                },
                 "dialogue": [
+                    <DialogueLineModel>{"Type": QuestTypeEnum.NoQuest, "DialogueText": "Halt.", "NextIndex": 1, "Name": ""},
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "H to the Hungry V to the Voracious fo muchin' on brunchin' used to eat until I couldn't...",
-                        "NextIndex": 1,
+                        "DialogueText": "You are not a worthy traveler. Passage to the Bamboo Forest is thus prohibited.",
+                        "NextIndex": 2,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Go ahead and try it won't matter. QUEST:Defeat 400000 Woodlin Spirits to open the portal business as usual forget this Elder chump!",
+                        "NextIndex": 4,
+                        "Name": "Portal Issues"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 2,
                         "Name": ""
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "... oh hi care to join me? I was just having a bite to eat before I got back to work!",
-                        "NextIndex": 1,
+                        "DialogueText": "Wow. Incredible. I have observed your efforts and am impressed. The portal is still closed though.",
+                        "NextIndex": 5,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "However. Do this again and your worth will be proven. <br> QUEST:Defeat 400000 Woodlin Spirits on a 2nd character that must be what the big lock is all about!",
+                        "NextIndex": 7,
+                        "Name": "Big Lock Picking"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 5,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Well done. Dedication was shown the portal has been unlocked. You are worthy for now.",
+                        "NextIndex": 8,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Enough portal talk. Let's test your dedication further. <br> QUEST:Defeat exactly 50 Woodlin Spirits. Stand on the top right platform to lock in your killcount. Killcount resets if incorrect.",
+                        "NextIndex": 10,
+                        "Name": "Fiddy"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 8,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Impressive. You counted to 50.",
+                        "NextIndex": 11,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Let's test your dedication even further. <br> QUEST:Defeat exactly 150 Woodlin Spirits. Stand on the top right platform to lock in your killcount. Killcount resets if incorrect.",
+                        "NextIndex": 13,
+                        "Name": "Hunned Fiddy"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 11,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Impressive. You counted to 50 three times.",
+                        "NextIndex": 14,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "One final test. Third time's the charm. <br> QUEST:Defeat exactly 333 Woodlin Spirits. Stand on the top right platform to lock in your killcount. Killcount resets if incorrect.",
+                        "NextIndex": 16,
+                        "Name": "Triple Tre"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 14,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "'The Elder nods his head slowly in acknowledgement of your counting abilities'",
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -15186,16 +15501,183 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 4.26,
-                    "starSign": "Leo",
-                    "mothersMaidenName": "Orwig",
+                    "birthWeight": 6.28,
+                    "starSign": "Gemini",
+                    "mothersMaidenName": "Cannon",
                     "notes": " "
                 },
                 "quests": {},
                 "dialogue": [
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Hi! You've come a long way to get here I can tell... welcome to the Spirited Valley faceless traveler!",
+                        "DialogueText": "Hark a fellow summoner! Don't think I couldn't tell I can see it in the way you walk the way you talk...",
+                        "NextIndex": 1,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "... the way you critiqued other player's strategies despite only having a few Total Career Wins yourself...",
+                        "NextIndex": 2,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Well as a bonafied Summoner I'm sure you've noticed these Summoning Stones littered around the place and I'm sure you'd like to interact with them. You do right?",
+                        "NextIndex": 3,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Of course you do! Well that's to bad. Knowing how to interact with them makes me feel special and telling you would diminish that feeling. <br> Come back later to learn the ways of the Summoning Stones",
+                        "NextIndex": -1,
+                        "Name": ""
+                    }
+                ]
+            }),
+        new NpcBase("Sussy Gene", <NpcModel>{
+                "head": <NpcHeadModel>{
+                    "location": "Unknown",
+                    "world": "Unknown",
+                    "noQuest": 0,
+                    "type": "Unknown",
+                    "birthWeight": 9.4,
+                    "starSign": "Libra",
+                    "mothersMaidenName": "Sellon",
+                    "notes": " "
+                },
+                "quests": {
+                    "Goofin' Around": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Three things tough stuff gonna freak you out maybe... <br> QUEST:Have a Summoning Match last 2 minutes or more Spawn 10 bloomies in a single match and Spawn 1000 slimes across all matches.",
+                        "NextIndex": 5,
+                        "Name": "Goofin' Around",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 4,
+                        "Rewards": [<ComponentModel>{"item": "StampB53", "quantity": 1}, <ComponentModel>{"item": "Gfoodcoupon", "quantity": 1500}],
+                        "QuestName": "Sussy Gene1",
+                        "Difficulty": 3,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Sussy Gene1",
+                        "CustomArray": [
+                            <CustomReqModel>{"desc": "1st Thing:", "finalV": 1, "type": "GreaterEqual", "startV": 0},
+                            <CustomReqModel>{"desc": "2nd Thing:", "finalV": 1, "type": "GreaterEqual", "startV": 0},
+                            <CustomReqModel>{"desc": "3rd Thing:", "finalV": 1000, "type": "GreaterEqual", "startV": 0}
+                        ]
+                    },
+                    "Messin' Around": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Ok like do these things now. <br> QUEST:Have 1000 mana in a Summoning Match at once get you and your opponent down to just 1 hp each and spawn 8 Vrumbies from a single card.",
+                        "NextIndex": 8,
+                        "Name": "Messin' Around",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 7,
+                        "Rewards": [<ComponentModel>{"item": "StampB51", "quantity": 1}, <ComponentModel>{"item": "Gfoodcoupon", "quantity": 2500}],
+                        "QuestName": "Sussy Gene2",
+                        "Difficulty": 5,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Sussy Gene2",
+                        "CustomArray": [
+                            <CustomReqModel>{"desc": "1st Thing:", "finalV": 1, "type": "GreaterEqual", "startV": 0},
+                            <CustomReqModel>{"desc": "2nd Thing:", "finalV": 1, "type": "GreaterEqual", "startV": 0},
+                            <CustomReqModel>{"desc": "3rd Thing:", "finalV": 1, "type": "GreaterEqual", "startV": 0}
+                        ]
+                    },
+                    "Loiterin' Around": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Last things listen up. <br> QUEST:Have a Regalis familiar in your sanctuary play 7 special units in a row (non grey slimes) have a summoning match last 5 minutes or more.",
+                        "NextIndex": 11,
+                        "Name": "Loiterin' Around",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 10,
+                        "Rewards": [
+                            <ComponentModel>{"item": "StampA41", "quantity": 1},
+                            <ComponentModel>{"item": "SpiA2b", "quantity": 2500},
+                            <ComponentModel>{"item": "Gfoodcoupon", "quantity": 3000}
+                        ],
+                        "QuestName": "Sussy Gene3",
+                        "Difficulty": 8,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Sussy Gene3",
+                        "CustomArray": [
+                            <CustomReqModel>{"desc": "1st Thing:", "finalV": 1, "type": "GreaterEqual", "startV": 0},
+                            <CustomReqModel>{"desc": "2nd Thing:", "finalV": 1, "type": "GreaterEqual", "startV": 0},
+                            <CustomReqModel>{"desc": "3rd Thing:", "finalV": 1, "type": "GreaterEqual", "startV": 0}
+                        ]
+                    }
+                },
+                "dialogue": [
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Hey stop squirming down there bro cmon someone's gonna... <br> Oh hello greetings sir.",
+                        "NextIndex": 1,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "You ever wonder what the genus of a pig is? Don't look into it trust me I wish my parents hadn't when they were thinking of names for me...",
+                        "NextIndex": 2,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Vincent Adultwho? Never heard of them. But here have a listen to this crazy quest of mine...",
+                        "NextIndex": 3,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Three things tough stuff gonna freak you out maybe... <br> QUEST:Have a Summoning Match last 2 minutes or more Spawn 10 bloomies in a single match and Spawn 1000 slimes across all matches.",
+                        "NextIndex": 5,
+                        "Name": "Goofin' Around"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 3,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Hehe no way they actually did it dude!! <br> Mrfmff!! 'You hear the sound of an excited squeal coming from the pigs stomach' <br> Please excuse my idiot stomach I had a big lunch.'",
+                        "NextIndex": 6,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Ok like do these things now. <br> QUEST:Have 1000 mana in a Summoning Match at once get you and your opponent down to just 1 hp each and spawn 8 Vrumbies from a single card.",
+                        "NextIndex": 8,
+                        "Name": "Messin' Around"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 6,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Haha awesome. Ok one more one more!",
+                        "NextIndex": 9,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Last things listen up. <br> QUEST:Have a Regalis familiar in your sanctuary play 7 special units in a row (non grey slimes) have a summoning match last 5 minutes or more.",
+                        "NextIndex": 11,
+                        "Name": "Loiterin' Around"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 9,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "I can't believe you did all that! I'll need to think of more things for later!",
                         "NextIndex": -1,
                         "Name": ""
                     }
@@ -15207,9 +15689,9 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 3.93,
-                    "starSign": "Aries",
-                    "mothersMaidenName": "Kaskel",
+                    "birthWeight": 8.49,
+                    "starSign": "Aquarius",
+                    "mothersMaidenName": "Ferry",
                     "notes": " "
                 },
                 "quests": {},
@@ -15223,7 +15705,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Pls giv crop transfer ticket. I give magic beans you become better farmer grow more crop... give me more next time yeees...",
-                        "NextIndex": 1,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -15234,9 +15716,9 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 5.28,
-                    "starSign": "Gemini",
-                    "mothersMaidenName": "Aikin",
+                    "birthWeight": 7.33,
+                    "starSign": "Leo",
+                    "mothersMaidenName": "Schwager",
                     "notes": " "
                 },
                 "quests": {},
@@ -15250,7 +15732,13 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "... a permanent smile molded to her face.'",
-                        "NextIndex": 1,
+                        "NextIndex": 2,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Her forced expression is one of true happiness. She would scream if only she knew how. <br> This is not a good time to talk to her... maybe later?",
+                        "NextIndex": 2,
                         "Name": ""
                     }
                 ]

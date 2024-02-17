@@ -631,6 +631,14 @@ export const initSourceRepo = () => {
         new SourcesBase("FillerMaterial", <SourcesModel>{
                 "sources": [
                     <SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"},
+                    <SourceModel>{"wikiName": "[[Emperor]]", "txtName": "Emperor"},
+                    <SourceModel>{"wikiName": "[[Emperor]]", "txtName": "Emperor"},
+                    <SourceModel>{"wikiName": "[[Chaotic Emperor]]", "txtName": "Chaotic Emperor"},
+                    <SourceModel>{"wikiName": "[[Chaotic Emperor]]", "txtName": "Chaotic Emperor"},
+                    <SourceModel>{"wikiName": "[[Chaotic Emperor]]", "txtName": "Chaotic Emperor"},
+                    <SourceModel>{"wikiName": "[[Sovereign Emperor]]", "txtName": "Sovereign Emperor"},
+                    <SourceModel>{"wikiName": "[[Sovereign Emperor]]", "txtName": "Sovereign Emperor"},
+                    <SourceModel>{"wikiName": "[[Sovereign Emperor]]", "txtName": "Sovereign Emperor"},
                     <SourceModel>{"wikiName": "[[Fishing]]", "txtName": "Fishing"}
                 ],
                 "recipeFrom": [],
@@ -3330,7 +3338,7 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("MaxCapBagM12", <SourcesModel>{
+        new SourcesBase("MaxCapBagTr10", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"}],
                 "recipeFrom": [],
                 "questAss": []
@@ -3346,6 +3354,11 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("MaxCapBagF11", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("MaxCapBagM12", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"}],
                 "recipeFrom": [],
                 "questAss": []
@@ -4199,9 +4212,7 @@ export const initSourceRepo = () => {
                 "sources": [
                     <SourceModel>{"wikiName": "[[Crystal Capybara]]", "txtName": "Crystal Capybara"},
                     <SourceModel>{"wikiName": "[[Dandelioli Tree]]", "txtName": "Dandelioli Tree"},
-                    <SourceModel>{"wikiName": "[[Equinox Willow]]", "txtName": "Equinox Willow"},
-                    <SourceModel>{"wikiName": "[[Bamboo]]", "txtName": "Bamboo"},
-                    <SourceModel>{"wikiName": "[[Effervescent Eucalyptus]]", "txtName": "Effervescent Eucalyptus"}
+                    <SourceModel>{"wikiName": "[[Equinox Willow]]", "txtName": "Equinox Willow"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -4219,6 +4230,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[River Spirit]]", "txtName": "River Spirit"},
                     <SourceModel>{"wikiName": "[[Baby Troll]]", "txtName": "Baby Troll"},
                     <SourceModel>{"wikiName": "[[Woodlin Spirit]]", "txtName": "Woodlin Spirit"},
+                    <SourceModel>{"wikiName": "[[Bamboo]]", "txtName": "Bamboo"},
                     <SourceModel>{"wikiName": "[[Ladybug]]", "txtName": "Ladybug"}
                 ],
                 "recipeFrom": [],
@@ -4240,7 +4252,8 @@ export const initSourceRepo = () => {
                 "sources": [
                     <SourceModel>{"wikiName": "[[Crystal Brighton]]", "txtName": "Crystal Brighton"},
                     <SourceModel>{"wikiName": "[[Ceramic Spirit]]", "txtName": "Ceramic Spirit"},
-                    <SourceModel>{"wikiName": "[[Skydoggie Spirit]]", "txtName": "Skydoggie Spirit"}
+                    <SourceModel>{"wikiName": "[[Skydoggie Spirit]]", "txtName": "Skydoggie Spirit"},
+                    <SourceModel>{"wikiName": "[[Effervescent Eucalyptus]]", "txtName": "Effervescent Eucalyptus"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -6702,10 +6715,7 @@ export const initSourceRepo = () => {
                 "sources": [
                     <SourceModel>{"wikiName": "[[Kattlekruk]]", "txtName": "Kattlekruk"},
                     <SourceModel>{"wikiName": "[[Chaotic Kattlekruk]]", "txtName": "Chaotic Kattlekruk"},
-                    <SourceModel>{"wikiName": "[[Sacrilegious Kattlekruk]]", "txtName": "Sacrilegious Kattlekruk"},
-                    <SourceModel>{"wikiName": "[[Emperor]]", "txtName": "Emperor"},
-                    <SourceModel>{"wikiName": "[[Chaotic Emperor]]", "txtName": "Chaotic Emperor"},
-                    <SourceModel>{"wikiName": "[[Sovereign Emperor]]", "txtName": "Sovereign Emperor"}
+                    <SourceModel>{"wikiName": "[[Sacrilegious Kattlekruk]]", "txtName": "Sacrilegious Kattlekruk"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -6722,10 +6732,7 @@ export const initSourceRepo = () => {
                 "sources": [
                     <SourceModel>{"wikiName": "[[Kattlekruk]]", "txtName": "Kattlekruk"},
                     <SourceModel>{"wikiName": "[[Chaotic Kattlekruk]]", "txtName": "Chaotic Kattlekruk"},
-                    <SourceModel>{"wikiName": "[[Sacrilegious Kattlekruk]]", "txtName": "Sacrilegious Kattlekruk"},
-                    <SourceModel>{"wikiName": "[[Emperor]]", "txtName": "Emperor"},
-                    <SourceModel>{"wikiName": "[[Chaotic Emperor]]", "txtName": "Chaotic Emperor"},
-                    <SourceModel>{"wikiName": "[[Sovereign Emperor]]", "txtName": "Sovereign Emperor"}
+                    <SourceModel>{"wikiName": "[[Sacrilegious Kattlekruk]]", "txtName": "Sacrilegious Kattlekruk"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -6747,9 +6754,7 @@ export const initSourceRepo = () => {
         new SourcesBase("KrukPart2", <SourcesModel>{
                 "sources": [
                     <SourceModel>{"wikiName": "[[Chaotic Kattlekruk]]", "txtName": "Chaotic Kattlekruk"},
-                    <SourceModel>{"wikiName": "[[Sacrilegious Kattlekruk]]", "txtName": "Sacrilegious Kattlekruk"},
-                    <SourceModel>{"wikiName": "[[Chaotic Emperor]]", "txtName": "Chaotic Emperor"},
-                    <SourceModel>{"wikiName": "[[Sovereign Emperor]]", "txtName": "Sovereign Emperor"}
+                    <SourceModel>{"wikiName": "[[Sacrilegious Kattlekruk]]", "txtName": "Sacrilegious Kattlekruk"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -6812,7 +6817,13 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("SpiA2b", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Ricecake]]", "txtName": "Ricecake"}],
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Ricecake]]", "txtName": "Ricecake"},
+                    <SourceModel>{
+                        "wikiName": "[[Sussy Gene#Loiterin' Around|Loiterin' Around]]",
+                        "txtName": "Sussy Gene: Loiterin' Around"
+                    }
+                ],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -6923,6 +6934,28 @@ export const initSourceRepo = () => {
             }),
         new SourcesBase("Line9", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Skydoggie Spirit]]", "txtName": "Skydoggie Spirit"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("FoodPotGr4", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Skydoggie Spirit]]", "txtName": "Skydoggie Spirit"},
+                    <SourceModel>{
+                        "wikiName": "[[Vendors#Outer World Town|Outer World Town Vendors]]",
+                        "txtName": "Outer World Town Vendor"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("FoodHealth17", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Skydoggie Spirit]]", "txtName": "Skydoggie Spirit"},
+                    <SourceModel>{
+                        "wikiName": "[[Vendors#Spirit Village|Spirit Village Vendors]]",
+                        "txtName": "Spirit Village Vendor"
+                    }
+                ],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -10010,16 +10043,6 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("FoodPotGr4", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Vendors#Outer World Town|Outer World Town Vendors]]",
-                        "txtName": "Outer World Town Vendor"
-                    }
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
         new SourcesBase("FoodPotRe4", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
@@ -10171,16 +10194,6 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("FoodHealth16", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Vendors#Spirit Village|Spirit Village Vendors]]",
-                        "txtName": "Spirit Village Vendor"
-                    }
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("FoodHealth17", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
                         "wikiName": "[[Vendors#Spirit Village|Spirit Village Vendors]]",
@@ -10487,7 +10500,8 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[SuperDropTable2]]", "txtName": "SuperDropTable2"},
                     <SourceModel>{"wikiName": "[[SuperDropTable3]]", "txtName": "SuperDropTable3"},
                     <SourceModel>{"wikiName": "[[SuperDropTable4]]", "txtName": "SuperDropTable4"},
-                    <SourceModel>{"wikiName": "[[SuperDropTable5]]", "txtName": "SuperDropTable5"}
+                    <SourceModel>{"wikiName": "[[SuperDropTable5]]", "txtName": "SuperDropTable5"},
+                    <SourceModel>{"wikiName": "[[SuperDropTable6]]", "txtName": "SuperDropTable6"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -11198,6 +11212,11 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("StoneZ4", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[SuperDropTable6]]", "txtName": "SuperDropTable6"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("Secretstone", <SourcesModel>{
                 "sources": [],
                 "recipeFrom": [],
@@ -11672,6 +11691,10 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Lord of the Hunt#Small Stingers, Big Owie|Small Stingers, Big Owie]]",
                         "txtName": "Lord of the Hunt: Small Stingers, Big Owie"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Woodlin Elder#Big Lock Picking|Big Lock Picking]]",
+                        "txtName": "Woodlin Elder: Big Lock Picking"
                     },
                     <SourceModel>{"wikiName": "[[Guild Giftbox]]", "txtName": "Guild Giftbox"}
                 ],
@@ -12715,8 +12738,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Worldo#Can't Guard if you're Dead!|Can't Guard if you're Dead!]]",
                         "txtName": "Worldo: Can't Guard if you're Dead!"
-                    },
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                    }
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -12758,7 +12780,8 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Royal Worm#Bossin' the Boss|Bossin' the Boss]]",
                         "txtName": "Royal Worm: Bossin' the Boss"
-                    }
+                    },
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -12954,8 +12977,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Falloween Pumpkin#The Afterparty|The Afterparty]]",
                         "txtName": "Falloween Pumpkin: The Afterparty"
-                    },
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                    }
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -13295,6 +13317,43 @@ export const initSourceRepo = () => {
                         "wikiName": "[[Royal Worm#Royal Bidding|Royal Bidding]]",
                         "txtName": "Royal Worm: Royal Bidding"
                     },
+                    <SourceModel>{
+                        "wikiName": "[[Hoov#Stealth Check 1 2 3|Stealth Check 1 2 3]]",
+                        "txtName": "Hoov: Stealth Check 1 2 3"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Hoov#Sneak Registration|Sneak Registration]]",
+                        "txtName": "Hoov: Sneak Registration"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Hoov#Sneak Graduate|Sneak Graduate]]",
+                        "txtName": "Hoov: Sneak Graduate"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Woodlin Elder#Portal Issues|Portal Issues]]",
+                        "txtName": "Woodlin Elder: Portal Issues"
+                    },
+                    <SourceModel>{"wikiName": "[[Woodlin Elder#Fiddy|Fiddy]]", "txtName": "Woodlin Elder: Fiddy"},
+                    <SourceModel>{
+                        "wikiName": "[[Woodlin Elder#Hunned Fiddy|Hunned Fiddy]]",
+                        "txtName": "Woodlin Elder: Hunned Fiddy"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Woodlin Elder#Triple Tre|Triple Tre]]",
+                        "txtName": "Woodlin Elder: Triple Tre"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Sussy Gene#Goofin' Around|Goofin' Around]]",
+                        "txtName": "Sussy Gene: Goofin' Around"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Sussy Gene#Messin' Around|Messin' Around]]",
+                        "txtName": "Sussy Gene: Messin' Around"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Sussy Gene#Loiterin' Around|Loiterin' Around]]",
+                        "txtName": "Sussy Gene: Loiterin' Around"
+                    },
                     <SourceModel>{"wikiName": "[[Arcade]]", "txtName": "Arcade"}
                 ],
                 "recipeFrom": [],
@@ -13322,6 +13381,10 @@ export const initSourceRepo = () => {
                         "wikiName": "[[Lafu Shi#Essence Juicing|Essence Juicing]]",
                         "txtName": "Lafu Shi: Essence Juicing"
                     },
+                    <SourceModel>{
+                        "wikiName": "[[Woodlin Elder#Big Lock Picking|Big Lock Picking]]",
+                        "txtName": "Woodlin Elder: Big Lock Picking"
+                    },
                     <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
                 ],
                 "recipeFrom": [],
@@ -13345,6 +13408,15 @@ export const initSourceRepo = () => {
                         "wikiName": "[[Lafu Shi#Essence Juicing|Essence Juicing]]",
                         "txtName": "Lafu Shi: Essence Juicing"
                     },
+                    <SourceModel>{"wikiName": "[[Hoov#Sneak Dropout|Sneak Dropout]]", "txtName": "Hoov: Sneak Dropout"},
+                    <SourceModel>{
+                        "wikiName": "[[Hoov#Sneak Registration|Sneak Registration]]",
+                        "txtName": "Hoov: Sneak Registration"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Woodlin Elder#Big Lock Picking|Big Lock Picking]]",
+                        "txtName": "Woodlin Elder: Big Lock Picking"
+                    },
                     <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
                 ],
                 "recipeFrom": [],
@@ -13361,6 +13433,59 @@ export const initSourceRepo = () => {
                         "txtName": "Lafu Shi: Essence Juicing"
                     },
                     <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("StampB48", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Hoov#Sneak Dropout|Sneak Dropout]]", "txtName": "Hoov: Sneak Dropout"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("StampA40", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Hoov#Stealth Check 1 2 3|Stealth Check 1 2 3]]",
+                        "txtName": "Hoov: Stealth Check 1 2 3"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("InvStorageN", <SourcesModel>{
+                "sources": [<SourceModel>{
+                    "wikiName": "[[Hoov#Sneak Graduate|Sneak Graduate]]",
+                    "txtName": "Hoov: Sneak Graduate"
+                }],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("StampB53", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Sussy Gene#Goofin' Around|Goofin' Around]]",
+                        "txtName": "Sussy Gene: Goofin' Around"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("StampB51", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Sussy Gene#Messin' Around|Messin' Around]]",
+                        "txtName": "Sussy Gene: Messin' Around"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("StampA41", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Sussy Gene#Loiterin' Around|Loiterin' Around]]",
+                        "txtName": "Sussy Gene: Loiterin' Around"
+                    }
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -13475,6 +13600,11 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("CardPack7", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("GemP11", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
@@ -13531,17 +13661,32 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentHats89", <SourcesModel>{
+        new SourcesBase("EquipmentRings34", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("Quest77", <SourcesModel>{
+        new SourcesBase("EquipmentRings32", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("Quest76", <SourcesModel>{
+        new SourcesBase("EquipmentRings31", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentRings33", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("GemP25", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentPendant28", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []

@@ -1530,7 +1530,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 58,
                 "Defence": 175,
                 "miscUp1": "12% All Stats",
-                "miscUp2": "30% Money",
+                "miscUp2": "35% Money",
                 "Upgrade_Slots_Left": 10,
                 "Skill": "",
                 "Skill_Power": 0
@@ -1551,7 +1551,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 65,
                 "Defence": 210,
                 "miscUp1": "15% Drop Chance",
-                "miscUp2": "15% Multikill Per Tier",
+                "miscUp2": "22% Multikill Per Tier",
                 "Upgrade_Slots_Left": 11,
                 "Skill": "",
                 "Skill_Power": 0
@@ -2734,7 +2734,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("EquipmentSword9", <WeaponItemModel>{
                 "internalName": "EquipmentSword9",
-                "displayName": "Godbreaker",
+                "displayName": "Massive Godbreaker",
                 "sellPrice": 26000,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -3133,7 +3133,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("EquipmentBows13", <WeaponItemModel>{
                 "internalName": "EquipmentBows13",
-                "displayName": "Spine Tingler Sniper",
+                "displayName": "Pristine Longbow",
                 "sellPrice": 15000,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -3154,7 +3154,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("EquipmentBows14", <WeaponItemModel>{
                 "internalName": "EquipmentBows14",
-                "displayName": "Spine Tingler Sniper",
+                "displayName": "Doublestring Godshooter",
                 "sellPrice": 15000,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -3385,7 +3385,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("EquipmentWands12", <WeaponItemModel>{
                 "internalName": "EquipmentWands12",
-                "displayName": "Staff of the Undead Plague",
+                "displayName": "Sparky Marble Staff",
                 "sellPrice": 200,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -3406,7 +3406,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("EquipmentWands13", <WeaponItemModel>{
                 "internalName": "EquipmentWands13",
-                "displayName": "Staff of the Undead Plague",
+                "displayName": "Magnifique Godcaster",
                 "sellPrice": 200,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -3423,7 +3423,7 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "20% Drop Chance",
                 "Upgrade_Slots_Left": 7,
                 "Speed": 9,
-                "Reach": 330
+                "Reach": 80
             }),
         new BaseItemBase("EquipmentWands4", <WeaponItemModel>{
                 "internalName": "EquipmentWands4",
@@ -4196,7 +4196,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 40,
                 "LUK": 40,
                 "Defence": 120,
-                "miscUp1": "12% Mob Respawn",
+                "miscUp1": "8% Mob Respawn",
                 "miscUp2": "6% Total Damage",
                 "Upgrade_Slots_Left": 9,
                 "Skill": "",
@@ -4218,7 +4218,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 45,
                 "Defence": 150,
                 "miscUp1": "8% All Stats",
-                "miscUp2": "20% Money",
+                "miscUp2": "26% Money",
                 "Upgrade_Slots_Left": 9,
                 "Skill": "",
                 "Skill_Power": 0
@@ -4239,7 +4239,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 60,
                 "Defence": 220,
                 "miscUp1": "30% Drop Chance",
-                "miscUp2": "10% Multikill Per Tier",
+                "miscUp2": "16% Multikill Per Tier",
                 "Upgrade_Slots_Left": 10,
                 "Skill": "",
                 "Skill_Power": 0
@@ -4805,7 +4805,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 45,
                 "LUK": 45,
                 "Defence": 112,
-                "miscUp1": "6% Mob Respawn",
+                "miscUp1": "4% Mob Respawn",
                 "miscUp2": "6% Total Damage",
                 "Upgrade_Slots_Left": 9,
                 "Skill": "",
@@ -4813,7 +4813,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("EquipmentPants29", <ArmourItemModel>{
                 "internalName": "EquipmentPants29",
-                "displayName": "Spiked Leggings of the Divine",
+                "displayName": "Marbiglass Legplates",
                 "sellPrice": 200,
                 "typeGen": TypeGenEnum.aPants,
                 "Type": "Pants",
@@ -4827,14 +4827,14 @@ export const initSpecificItemRepo = () => {
                 "LUK": 50,
                 "Defence": 140,
                 "miscUp1": "7% All Stats",
-                "miscUp2": "15% Money",
+                "miscUp2": "22% Money",
                 "Upgrade_Slots_Left": 9,
                 "Skill": "",
                 "Skill_Power": 0
             }),
         new BaseItemBase("EquipmentPants30", <ArmourItemModel>{
                 "internalName": "EquipmentPants30",
-                "displayName": "Spiked Leggings of the Divine",
+                "displayName": "Tatters of the Gods",
                 "sellPrice": 200,
                 "typeGen": TypeGenEnum.aPants,
                 "Type": "Pants",
@@ -4848,7 +4848,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 55,
                 "Defence": 190,
                 "miscUp1": "25% Drop Chance",
-                "miscUp2": "8% Multikill Per Tier",
+                "miscUp2": "14% Multikill Per Tier",
                 "Upgrade_Slots_Left": 10,
                 "Skill": "",
                 "Skill_Power": 0
@@ -5611,7 +5611,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("EquipmentShoes37", <ArmourItemModel>{
                 "internalName": "EquipmentShoes37",
-                "displayName": "Devious Slippers of the Divine",
+                "displayName": "Marbiglass Soles",
                 "sellPrice": 200,
                 "typeGen": TypeGenEnum.aShoes,
                 "Type": "Shoes",
@@ -5625,14 +5625,14 @@ export const initSpecificItemRepo = () => {
                 "LUK": 43,
                 "Defence": 100,
                 "miscUp1": "7% All Stats",
-                "miscUp2": "20% Money",
+                "miscUp2": "25% Money",
                 "Upgrade_Slots_Left": 8,
                 "Skill": "",
                 "Skill_Power": 0
             }),
         new BaseItemBase("EquipmentShoes38", <ArmourItemModel>{
                 "internalName": "EquipmentShoes38",
-                "displayName": "Devious Slippers of the Divine",
+                "displayName": "Drip of the Gods",
                 "sellPrice": 200,
                 "typeGen": TypeGenEnum.aShoes,
                 "Type": "Shoes",
@@ -5646,7 +5646,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 57,
                 "Defence": 100,
                 "miscUp1": "30% Drop Chance",
-                "miscUp2": "7% Multikill Per Tier",
+                "miscUp2": "12% Multikill Per Tier",
                 "Upgrade_Slots_Left": 9,
                 "Skill": "",
                 "Skill_Power": 0
@@ -6233,7 +6233,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 10,
                 "LUK": 10,
                 "Defence": 10,
-                "miscUp1": "35% Xp From Monsters",
+                "miscUp1": "42% Xp From Monsters",
                 "miscUp2": "5% Mob Respawn",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
@@ -7016,6 +7016,27 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentRings34", <ArmourItemModel>{
+                "internalName": "EquipmentRings34",
+                "displayName": "Magma Killer Ring",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aRing,
+                "Type": "Ring",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 5,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 3,
+                "miscUp1": "30% Kills In World 5",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentRingsChat1", <ArmourItemModel>{
                 "internalName": "EquipmentRingsChat1",
                 "displayName": "Love Ring",
@@ -7516,6 +7537,27 @@ export const initSpecificItemRepo = () => {
                 "Defence": 25,
                 "miscUp1": "40% Skill Exp",
                 "miscUp2": "3% All Afk Gain",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentCape14", <ArmourItemModel>{
+                "internalName": "EquipmentCape14",
+                "displayName": "Phoenix Wings",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aCape,
+                "Type": "Cape",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 30,
+                "STR": 40,
+                "AGI": 40,
+                "WIS": 40,
+                "LUK": 40,
+                "Defence": 0,
+                "miscUp1": "50% Damage Multi",
+                "miscUp2": "60% Money",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
                 "Skill_Power": 0
@@ -9810,7 +9852,7 @@ export const initSpecificItemRepo = () => {
                     "x1": 0.5,
                     "x2": 0,
                     "upgradeInterval": 10,
-                    "material": <QtylessComponentModel>{"item": "Spi2b"},
+                    "material": <QtylessComponentModel>{"item": "SpiA2b"},
                     "startV": 15,
                     "mCostExp": 7,
                     "startingCost": 2e+10,
@@ -10843,7 +10885,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 777,
                 "typeGen": TypeGenEnum.dStone,
                 "Type": "Upgrade",
-                "description": "Drag onto any Equip to apply. +4 Mystery Stat. Success Chance; 50% Uses up 1 slots only if Successful. WARNING:Mystery Stat has a chance to be Negative, and reduce stats! ",
+                "description": "Drag onto any Equip to apply. +4 Mystery Stat. Success Chance; 60% Uses up 1 slots only if Successful. WARNING:Mystery Stat has a chance to be Negative, and reduce stats! ",
                 "tier": "II"
             }),
         new BaseItemBase("StoneZ3", <StoneItemModel>{
@@ -10852,8 +10894,17 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 777,
                 "typeGen": TypeGenEnum.dStone,
                 "Type": "Upgrade",
-                "description": "Drag onto any Equip to apply. +8 Mystery Stat. Success Chance; 30% Uses up 1 slots only if Successful. WARNING:Mystery Stat has a chance to be Negative, and reduce stats! ",
+                "description": "Drag onto any Equip to apply. +10 Mystery Stat. Success Chance; 50% Uses up 1 slots only if Successful. WARNING:Mystery Stat has a chance to be Negative, and reduce stats! ",
                 "tier": "III"
+            }),
+        new BaseItemBase("StoneZ4", <StoneItemModel>{
+                "internalName": "StoneZ4",
+                "displayName": "Mystery Upgrade Stone IV",
+                "sellPrice": 777,
+                "typeGen": TypeGenEnum.dStone,
+                "Type": "Upgrade",
+                "description": "Drag onto any Equip to apply. +20 Mystery Stat. Success Chance; 40% Uses up 1 slots only if Successful. WARNING:Mystery Stat has a chance to be Negative, and reduce stats! ",
+                "tier": "IV"
             }),
         new BaseItemBase("StonePremSTR", <StoneItemModel>{
                 "internalName": "StonePremSTR",
@@ -11731,6 +11782,16 @@ export const initSpecificItemRepo = () => {
                 "Type": "Storage",
                 "description": "Hold down to permanently add +4 Slots to your Storage Chest. Can only be used once.",
                 "order": 104,
+                "level": 1
+            }),
+        new BaseItemBase("InvStorageN", <ChestItemModel>{
+                "internalName": "InvStorageN",
+                "displayName": "Woodlin Chest",
+                "sellPrice": 1000,
+                "typeGen": TypeGenEnum.aStorageChest,
+                "Type": "Storage",
+                "description": "Hold down to permanently add +3 Slots to your Storage Chest. Can only be used once.",
+                "order": 105,
                 "level": 1
             }),
         new BaseItemBase("Line1", <FishingTKItemModel>{
@@ -13096,6 +13157,14 @@ export const initSpecificItemRepo = () => {
         new BaseItemBase("CardPack6", <DescItemModel>{
                 "internalName": "CardPack6",
                 "displayName": "Smolderin Card Pack",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCardPack,
+                "Type": "Card Pack",
+                "description": "Hold down to open the pack! The cards drop on the ground, make sure to pick them up!! "
+            }),
+        new BaseItemBase("CardPack7", <DescItemModel>{
+                "internalName": "CardPack7",
+                "displayName": "Spirit Card Pack",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.dCardPack,
                 "Type": "Card Pack",
@@ -18967,7 +19036,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 0,
                 "Defence": 30,
                 "miscUp1": "25% Mining Efficincy",
-                "miscUp2": "00",
+                "miscUp2": "10% Money",
                 "Upgrade_Slots_Left": 6,
                 "Skill": "Mining",
                 "Skill_Power": 51,
@@ -19297,7 +19366,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 5,
                 "Defence": 0,
                 "miscUp1": "5% Chop Efficiency",
-                "miscUp2": "00",
+                "miscUp2": "10% Money",
                 "Upgrade_Slots_Left": 6,
                 "Skill": "Choppin",
                 "Skill_Power": 50,
@@ -19583,7 +19652,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 0,
                 "Defence": 0,
                 "miscUp1": "5% Fishin Efficincy",
-                "miscUp2": "00",
+                "miscUp2": "10% Money",
                 "Upgrade_Slots_Left": 6,
                 "Skill": "Fishing",
                 "Skill_Power": 72,
@@ -30280,8 +30349,8 @@ export const initSpecificItemRepo = () => {
                     "cardID": "Z22",
                     "category": "Bosses",
                     "perTier": 9,
-                    "effect": "+{% Total Damage (Passive)",
-                    "bonus": 5,
+                    "effect": "+{% Total Damage Multi",
+                    "bonus": 8,
                     "order": 24
                 },
                 "dropChance": 1
@@ -30297,7 +30366,7 @@ export const initSpecificItemRepo = () => {
                     "category": "Bosses",
                     "perTier": 13,
                     "effect": "+{% Multikill per tier",
-                    "bonus": 12,
+                    "bonus": 20,
                     "order": 25
                 },
                 "dropChance": 1

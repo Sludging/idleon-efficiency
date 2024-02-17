@@ -407,7 +407,7 @@ export const initSummonUpgradeRepo = () => {
                 "x3": 1.5,
                 "x4": 1,
                 "x5": 0,
-                "x6": 40,
+                "x6": 30,
                 "x7": 27,
                 "filler": "filler",
                 "bonus": "When spawning any unit during competition, +{% chance to also spawn an exact duplicate, free of charge!"

@@ -89,6 +89,7 @@ export const initStorageOrderRepo = () => {
         new StorageOrderBase("InvStorageF", <StorageOrderModel>{"order": 100, "obtainable": true, "bag": "InvStorageF"}),
         new StorageOrderBase("InvStorageS", <StorageOrderModel>{"order": 101, "obtainable": true, "bag": "InvStorageS"}),
         new StorageOrderBase("InvStorageC", <StorageOrderModel>{"order": 102, "obtainable": true, "bag": "InvStorageC"}),
-        new StorageOrderBase("InvStorageD", <StorageOrderModel>{"order": 103, "obtainable": true, "bag": "InvStorageD"})    
+        new StorageOrderBase("InvStorageD", <StorageOrderModel>{"order": 103, "obtainable": true, "bag": "InvStorageD"}),
+        new StorageOrderBase("InvStorageN", <StorageOrderModel>{"order": 104, "obtainable": true, "bag": "InvStorageN"})    
 ]
 }

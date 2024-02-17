@@ -266,7 +266,7 @@ export const initBubbleRepo = () => {
                 "x2": 60,
                 "func": "decay",
                 "description": "The effect STR has on Damage is increased by +{%",
-                "requirements": [<ComponentModel>{"item": "W6item1", "quantity": 10000}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
+                "requirements": [<ComponentModel>{"item": "W6item1", "quantity": 100}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
                 "bonusKey": "W6"
             }),
         new BubbleBase("Endgame Eff I", <BubbleModel>{
@@ -286,7 +286,7 @@ export const initBubbleRepo = () => {
                 "x2": 60,
                 "func": "decay",
                 "description": "+{% STR for every 500 Tome Completion Points above 1000. NOTE: The tome is coming in an upcoming weekly update!",
-                "requirements": [<ComponentModel>{"item": "W6item8", "quantity": 100}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                "requirements": [<ComponentModel>{"item": "W6item8", "quantity": 500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                 "bonusKey": "W8"
             }),
         new BubbleBase("Essence Boost", <BubbleModel>{
@@ -296,7 +296,7 @@ export const initBubbleRepo = () => {
                 "x2": 60,
                 "func": "decay",
                 "description": "+{% Yellow Essence Gain. This bonus doesn't increase based on anything!",
-                "requirements": [<ComponentModel>{"item": "Bug12", "quantity": 50}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
+                "requirements": [<ComponentModel>{"item": "Bug12", "quantity": 1500}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
                 "bonusKey": "Y7"
             }),
         new BubbleBase("Crop Chapter", <BubbleModel>{
@@ -306,7 +306,7 @@ export const initBubbleRepo = () => {
                 "x2": 50,
                 "func": "decay",
                 "description": "+{% Crop Evolution chance for every 500 Tome Completion Points above 1000.",
-                "requirements": [<ComponentModel>{"item": "W6item10", "quantity": 150}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                "requirements": [<ComponentModel>{"item": "W6item10", "quantity": 1500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                 "bonusKey": "W10AllCharz"
             }),
         new BubbleBase("Swift Steppin", <BubbleModel>{
@@ -566,7 +566,7 @@ export const initBubbleRepo = () => {
                 "x2": 60,
                 "func": "decay",
                 "description": "The effect AGI has on Damage is increased by +{%",
-                "requirements": [<ComponentModel>{"item": "W6item0", "quantity": 10000}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
+                "requirements": [<ComponentModel>{"item": "W6item0", "quantity": 25000}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
                 "bonusKey": "A6"
             }),
         new BubbleBase("Endgame Eff Ii", <BubbleModel>{
@@ -576,7 +576,7 @@ export const initBubbleRepo = () => {
                 "x2": 60,
                 "func": "decay",
                 "description": "+{ Catching and Trapping Power. This bonus increases based on every 10 Class LVs you are above 500.",
-                "requirements": [<ComponentModel>{"item": "W6item3", "quantity": 100}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                "requirements": [<ComponentModel>{"item": "W6item3", "quantity": 150}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                 "bonusKey": "A8"
             }),
         new BubbleBase("Tome Agility", <BubbleModel>{
@@ -586,7 +586,7 @@ export const initBubbleRepo = () => {
                 "x2": 60,
                 "func": "decay",
                 "description": "+{% AGI for every 500 Tome Completion Points above 1000. NOTE: The tome is coming in an upcoming weekly update!",
-                "requirements": [<ComponentModel>{"item": "Bug13", "quantity": 250}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                "requirements": [<ComponentModel>{"item": "Bug13", "quantity": 750}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                 "bonusKey": "A9"
             }),
         new BubbleBase("Stealth Chapter", <BubbleModel>{
@@ -596,7 +596,7 @@ export const initBubbleRepo = () => {
                 "x2": 50,
                 "func": "decay",
                 "description": "+{% Stealth (the stat that lowers dedection rate in Sneaking) for every 500 Tome Completion Points above 1000.",
-                "requirements": [<ComponentModel>{"item": "W6item5", "quantity": 150}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                "requirements": [<ComponentModel>{"item": "W6item5", "quantity": 250}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                 "bonusKey": "A10AllCharz"
             }),
         new BubbleBase("Stable Jenius", <BubbleModel>{
@@ -856,7 +856,7 @@ export const initBubbleRepo = () => {
                 "x2": 60,
                 "func": "decay",
                 "description": "The effect WIS has on Damage is increased by +{%",
-                "requirements": [<ComponentModel>{"item": "W6item6", "quantity": 10000}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
+                "requirements": [<ComponentModel>{"item": "W6item6", "quantity": 500}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
                 "bonusKey": "M6"
             }),
         new BubbleBase("Endgame Eff Iii", <BubbleModel>{
@@ -866,7 +866,7 @@ export const initBubbleRepo = () => {
                 "x2": 60,
                 "func": "decay",
                 "description": "+{ Choppin and Worship Power. This bonus increases based on every 10 Class LVs you are above 500.",
-                "requirements": [<ComponentModel>{"item": "W6item7", "quantity": 250}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
+                "requirements": [<ComponentModel>{"item": "W6item7", "quantity": 950}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
                 "bonusKey": "M7"
             }),
         new BubbleBase("Tome Wisdom", <BubbleModel>{
@@ -876,7 +876,7 @@ export const initBubbleRepo = () => {
                 "x2": 60,
                 "func": "decay",
                 "description": "+{% WIS for every 500 Tome Completion Points above 1000. NOTE: The tome is coming in an upcoming weekly update!",
-                "requirements": [<ComponentModel>{"item": "W6item4", "quantity": 200}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                "requirements": [<ComponentModel>{"item": "W6item4", "quantity": 150}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                 "bonusKey": "M9"
             }),
         new BubbleBase("Essence Chapter", <BubbleModel>{
@@ -886,7 +886,7 @@ export const initBubbleRepo = () => {
                 "x2": 50,
                 "func": "decay",
                 "description": "+{% All Essence Gain for every 500 Tome Completion Points above 1000.",
-                "requirements": [<ComponentModel>{"item": "W6item0", "quantity": 200}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                "requirements": [<ComponentModel>{"item": "W6item0", "quantity": 250000}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                 "bonusKey": "M10AllCharz"
             }),
         new BubbleBase("Lotto Skills", <BubbleModel>{
@@ -1146,7 +1146,7 @@ export const initBubbleRepo = () => {
                 "x2": 70,
                 "func": "decay",
                 "description": "+{% Crop Evolution chance for EVERY map you unlock in world 6, across all characters! Total bonus: $",
-                "requirements": [<ComponentModel>{"item": "SpiA5", "quantity": 5000}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
+                "requirements": [<ComponentModel>{"item": "SpiA5", "quantity": 1000}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
                 "bonusKey": "Y6"
             }),
         new BubbleBase("Hinge Buster", <BubbleModel>{
@@ -1156,7 +1156,7 @@ export const initBubbleRepo = () => {
                 "x2": 70,
                 "func": "decay",
                 "description": "Your ninja twins do +{% more damage to doors! Knock knock, let 'em in, let 'em in!",
-                "requirements": [<ComponentModel>{"item": "W6item2", "quantity": 200}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 5}],
+                "requirements": [<ComponentModel>{"item": "W6item2", "quantity": 120}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 5}],
                 "bonusKey": "Y8"
             }),
         new BubbleBase("Ninja Looter", <BubbleModel>{
@@ -1166,7 +1166,7 @@ export const initBubbleRepo = () => {
                 "x2": 60,
                 "func": "decayMulti",
                 "description": "{x Item Find chance for your ninja twin while sneaking!",
-                "requirements": [<ComponentModel>{"item": "W6item9", "quantity": 200}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                "requirements": [<ComponentModel>{"item": "W6item9", "quantity": 1200}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                 "bonusKey": "Y9ACTIVE"
             }),
         new BubbleBase("Lo Cost Mo Jade", <BubbleModel>{
@@ -1176,7 +1176,7 @@ export const initBubbleRepo = () => {
                 "x2": 40,
                 "func": "decay",
                 "description": "The Jade Cost of 'Currency Conduit' scales {% slower, making it cheaper, allowing you to buy it more and get more JADE!",
-                "requirements": [<ComponentModel>{"item": "SpiD1", "quantity": 250}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                "requirements": [<ComponentModel>{"item": "SpiD1", "quantity": 2500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                 "bonusKey": "Y10"
             }),
         new BubbleBase("Copper Corona", <BubbleModel>{

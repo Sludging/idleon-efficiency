@@ -265,7 +265,7 @@ export const initJadeUpgradeRepo = () => {
                 "x3": 28,
                 "filler1": "filler",
                 "filler2": "filler",
-                "bonus": "Adds a new bonus type to your crop scientist's Data Sheet! Specifically '+7% Shiny Pet Lv Up Rate and Breeding Rate' per Crop!"
+                "bonus": "Adds a new bonus type to your crop scientist's Data Sheet! Specifically '+7% Shiny Pet Lv Up Rate and Pet Breeding Rate' per Crop!"
             }),
         new JadeUpgradeBase(29, <JadeUpgradeModel>{
                 "name": "UNDER CONSTRUCTION",

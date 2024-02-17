@@ -513,7 +513,7 @@ export const initMealRepo = () => {
         new MealBase(63, <MealModel>{
                 "name": "Burned Marshmallow",
                 "cookingReq": 90000000000000,
-                "bonusQty": 10,
+                "bonusQty": 40,
                 "bonusText": "+{% Meal Cooking Speed",
                 "description": "IMPORTANT, this bonus DOUBLES at Farming Lv 50. Triples at Farming Lv 100, and so on!",
                 "bonusKey": "zMealFarm"
@@ -537,7 +537,7 @@ export const initMealRepo = () => {
         new MealBase(66, <MealModel>{
                 "name": "Nyanborgir",
                 "cookingReq": 50000000000000000,
-                "bonusQty": 7,
+                "bonusQty": 9,
                 "bonusText": "+{% Crop Evolution Chance",
                 "description": "It's the greatest meal ever! Bonus DOUBLES at Summoning Lv 50, Triples at 100, etc",
                 "bonusKey": "zCropEvoSumm"
