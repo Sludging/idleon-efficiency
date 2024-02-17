@@ -365,6 +365,74 @@ export const initTerritoryFightRepo = () => {
                 ]
             }),
         new TerritoryFightBase(21, <TerritoryFightModel>{
+                "img": "27bg.png",
+                "trekReq": 50000000,
+                "fightPower": 200000,
+                "enemyAttack": 900000,
+                "battleName": "The Dihydrogen Monoxiders",
+                "filler1": "Filler",
+                "filler2": "Filler",
+                "filler3": "Filler",
+                "enemies": [
+                    <TerritoryEnemyModel>{"id": "w6a1", "health": 1e+11, "colour": 0, "size": 200},
+                    <TerritoryEnemyModel>{"id": "w6a1", "health": 5e+10, "colour": 0, "size": 100},
+                    <TerritoryEnemyModel>{"id": "w6a3", "health": 4e+11, "colour": 0, "size": 300},
+                    <TerritoryEnemyModel>{"id": "Mob4", "health": -1, "colour": -1, "size": -1},
+                    <TerritoryEnemyModel>{"id": "Mob5", "health": -1, "colour": -1, "size": -1}
+                ]
+            }),
+        new TerritoryFightBase(22, <TerritoryFightModel>{
+                "img": "28bg.png",
+                "trekReq": 100000000,
+                "fightPower": 400000,
+                "enemyAttack": 1500000,
+                "battleName": "Mama Mia and the Babbies",
+                "filler1": "Filler",
+                "filler2": "Filler",
+                "filler3": "Filler",
+                "enemies": [
+                    <TerritoryEnemyModel>{"id": "w6b3", "health": 2.5e+12, "colour": 0, "size": 400},
+                    <TerritoryEnemyModel>{"id": "w6a4", "health": 1e+12, "colour": 0, "size": 300},
+                    <TerritoryEnemyModel>{"id": "w6a4", "health": 5e+11, "colour": 0, "size": 200},
+                    <TerritoryEnemyModel>{"id": "w6a4", "health": 5e+11, "colour": 0, "size": 200},
+                    <TerritoryEnemyModel>{"id": "w6a4", "health": 1000, "colour": 0, "size": 100}
+                ]
+            }),
+        new TerritoryFightBase(23, <TerritoryFightModel>{
+                "img": "29bg.png",
+                "trekReq": 300000000,
+                "fightPower": 850000,
+                "enemyAttack": 4000000,
+                "battleName": "Mr Johnson's Pottery Class",
+                "filler1": "Filler",
+                "filler2": "Filler",
+                "filler3": "Filler",
+                "enemies": [
+                    <TerritoryEnemyModel>{"id": "w6c1", "health": 7.5e+13, "colour": 0, "size": 500},
+                    <TerritoryEnemyModel>{"id": "w6c1", "health": 1.5e+13, "colour": 40, "size": 200},
+                    <TerritoryEnemyModel>{"id": "w6c1", "health": 5e+12, "colour": 230, "size": 100},
+                    <TerritoryEnemyModel>{"id": "w6c1", "health": 3e+13, "colour": 110, "size": 300},
+                    <TerritoryEnemyModel>{"id": "w6c1", "health": 1.5e+13, "colour": 290, "size": 200}
+                ]
+            }),
+        new TerritoryFightBase(24, <TerritoryFightModel>{
+                "img": "29bg.png",
+                "trekReq": 1000000000,
+                "fightPower": 1500000,
+                "enemyAttack": 10000000,
+                "battleName": "Green Eggs and BLAM",
+                "filler1": "Filler",
+                "filler2": "Filler",
+                "filler3": "Filler",
+                "enemies": [
+                    <TerritoryEnemyModel>{"id": "w6d1", "health": 1e+16, "colour": 65, "size": 600},
+                    <TerritoryEnemyModel>{"id": "w6d1", "health": 5e+13, "colour": 85, "size": 100},
+                    <TerritoryEnemyModel>{"id": "Mob3", "health": -1, "colour": -1, "size": -1},
+                    <TerritoryEnemyModel>{"id": "Mob4", "health": -1, "colour": -1, "size": -1},
+                    <TerritoryEnemyModel>{"id": "Mob5", "health": -1, "colour": -1, "size": -1}
+                ]
+            }),
+        new TerritoryFightBase(25, <TerritoryFightModel>{
                 "img": "3bg.png",
                 "trekReq": 300000000,
                 "fightPower": 2500000,

@@ -20,6 +20,7 @@ import { getCoinsArray } from "../../data/utility";
 import IconImage from "../../components/base/IconImage";
 import { QuestTypeEnum } from "../../data/domain/enum/questTypeEnum";
 import { ImageData } from "../../data/domain/imageData";
+import { CharacterBox } from "../../components/base/CharacterBox";
 
 enum CharacterBoxStatus {
     Complete,
@@ -27,35 +28,22 @@ enum CharacterBoxStatus {
     Disabled
 }
 
-function CharacterBox({ player, status }: { player: Player, status: CharacterBoxStatus }) {
-    const borderColorForStatus = (status: CharacterBoxStatus) => {
-        switch (status) {
-            case CharacterBoxStatus.Complete: return "green-1";
-            case CharacterBoxStatus.Started: return "orange-1";
-            case CharacterBoxStatus.Disabled: return "none";
-            default: return 'none';
-        }
+const borderColorForStatus = (status: CharacterBoxStatus) => {
+    switch (status) {
+        case CharacterBoxStatus.Complete: return "green-1";
+        case CharacterBoxStatus.Started: return "orange-1";
+        case CharacterBoxStatus.Disabled: return "none";
+        default: return 'none';
     }
+}
 
-    const titleForStatus = (status: CharacterBoxStatus) => {
-        switch (status) {
-            case CharacterBoxStatus.Complete: return "Complete";
-            case CharacterBoxStatus.Started: return "Started";
-            case CharacterBoxStatus.Disabled: return "Not Started";
-            default: return 'none';
-        }
+const titleForStatus = (status: CharacterBoxStatus) => {
+    switch (status) {
+        case CharacterBoxStatus.Complete: return "Complete";
+        case CharacterBoxStatus.Started: return "Started";
+        case CharacterBoxStatus.Disabled: return "Not Started";
+        default: return 'none';
     }
-
-    return (
-        <Box title={titleForStatus(status)} background="dark-2" align="center" pad={{ top: "xsmall", bottom: "xsmall", left: "small", right: "small" }} gap="xsmall" direction="row" border={{ size: '1px', color: borderColorForStatus(status) }}>
-            <Box style={{ opacity: status == CharacterBoxStatus.Disabled ? 0.4 : 1 }}>
-                <IconImage data={player.getClassImageData()} scale={0.7} />
-            </Box>
-            <Box>
-                <Text color="grey-2" size="12px" truncate={true}>{player.playerName}</Text>
-            </Box>
-        </Box>
-    )
 }
 
 function SpecialButton({ isActive, text, imageData, clickHandler }: { isActive: boolean, text: string, imageData?: ImageData, clickHandler: MouseEventHandler }) {
@@ -65,7 +53,7 @@ function SpecialButton({ isActive, text, imageData, clickHandler }: { isActive: 
                 <Box direction="row" gap="small" align="center">
                     {
                         imageData &&
-                        <IconImage data={imageData} scale={0.75}/>
+                        <IconImage data={imageData} scale={0.75} />
                     }
                     <Text color='accent-2' size="small" weight={isActive ? 'bold' : 'normal'}>{text}</Text>
                 </Box>
@@ -171,7 +159,12 @@ function NPCQuests({ npc, playerInfo, playerQuestData }: { npc: NPC, playerInfo:
 
                                         }
                                         return (
-                                            <CharacterBox key={index} player={player} status={questStatus} />
+                                            <CharacterBox
+                                                key={index}
+                                                player={player}
+                                                borderColor={borderColorForStatus(questStatus)}
+                                                title={titleForStatus(questStatus)}
+                                                opacity={questStatus == CharacterBoxStatus.Complete ? 1 : 0.4} />
                                         )
                                     })
                                 }
@@ -233,6 +226,7 @@ function Quests() {
                     <TabButton isActive={activeWorld == "Frostbite Tundra"} text="World 3" clickHandler={() => { setActiveWorld("Frostbite Tundra"); onActive(1) }} />
                     <TabButton isActive={activeWorld == "Hyperion Nebula"} text="World 4" clickHandler={() => { setActiveWorld("Hyperion Nebula"); onActive(1) }} />
                     <TabButton isActive={activeWorld == "Smolderin' Plateau"} text="World 5" clickHandler={() => { setActiveWorld("Smolderin' Plateau"); onActive(1) }} />
+                    <TabButton isActive={activeWorld == "Spirited Valley"} text="World 6" clickHandler={() => { setActiveWorld("Spirited Valley"); onActive(1) }} />
                     <TabButton isActive={activeWorld == "Events"} text="Events" clickHandler={() => { setActiveWorld("Events"); onActive(1) }} />
                 </Box>
                 <Box pad={{ horizontal: "large", top: "small" }}>

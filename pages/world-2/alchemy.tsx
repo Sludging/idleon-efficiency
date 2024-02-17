@@ -137,7 +137,9 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
             </Box>
             <Box>
                 {
-                    Object.entries(cauldron.bubbles).map(([_, bubble], index) => {
+                    cauldron.bubbles
+                    .filter(bubble => bubble.bubbleIndex > 24 ? bubble.level > 0 : true)
+                    .map((bubble, index) => {
                         return (
                             <Box key={`cauldron_${index}_${bubble.name}`}>
                                 <Tip
@@ -203,7 +205,8 @@ function VialsDisplay() {
         <ShadowBox background="dark-1" pad="medium">
             <Box direction="row" wrap>
                 {
-                    alchemyData.vials.map((vial, index) => (
+                    // Remove filter once we stop hiding w6 stuff.
+                    alchemyData.vials.filter(vial => vial.data.bonusKey.includes("6") ? vial.level > 0 : true).map((vial, index) => (
                         <Box key={index} width={{ max: '104px', min: '104px' }} height={{ max: '120px', min: '120px' }}>
                             <TipDisplay
                                 body={<VialTipInfo vial={vial} />}
@@ -355,7 +358,9 @@ function BubblesDisplay() {
             </Box>
             <Grid columns="1/4">
                 {
-                    alchemyData && Object.entries(alchemyData.cauldrons).map(([_, cauldron], index) => {
+                    alchemyData && alchemyData.cauldrons
+                    .toSorted((cauldron1, cauldron2) => cauldron1.bubbles[0].cauldronIndex > cauldron2.bubbles[0].cauldronIndex ? 1 : -1) 
+                    .map((cauldron, index) => {
                         return (<CauldronDisplay key={`tab_${index}`} cauldron={cauldron} undevelopedCostsBubbleLevel={undevelopedCostsBubbleLevel} barleyBrewVialLevel={barleyBrewVialLevel} hasAchievement={hasAlchemyAchievement} discountLevel={parseInt(discountLevel)} classMultiBonus={classMulti} vialMultiplier={vialMultiplier} particles={particles} />)
                     })
                 }

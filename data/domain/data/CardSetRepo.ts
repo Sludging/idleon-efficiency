@@ -14,8 +14,9 @@ export const initCardSetRepo = () => {
         new CardSetBase(5, <CardSetModel>{"bonus": "{% Skill AFK Gain Rate", "scaling": 2, "image": "CardSet5.png"}),
         new CardSetBase(6, <CardSetModel>{"bonus": "{% Crit Chance", "scaling": 6, "image": "CardSet6.png"}),
         new CardSetBase(7, <CardSetModel>{"bonus": "{% Fight AFK Gain Rate", "scaling": 2, "image": "CardSet8.png"}),
-        new CardSetBase(8, <CardSetModel>{"bonus": "{% more Dungeon Credits", "scaling": 5, "image": "CardSet7.png"}),
-        new CardSetBase(9, <CardSetModel>{"bonus": "{% Dmg, Drop, and EXP", "scaling": 6, "image": "CardSet26.png"}),
-        new CardSetBase(10, <CardSetModel>{"bonus": "{% Drop Rate", "scaling": 7, "image": "CardSet25.png"}) 
+        new CardSetBase(8, <CardSetModel>{"bonus": "{% Multikill Per Tier", "scaling": 6, "image": "CardSet9.png"}),
+        new CardSetBase(9, <CardSetModel>{"bonus": "{% more Dungeon Credits", "scaling": 5, "image": "CardSet7.png"}),
+        new CardSetBase(10, <CardSetModel>{"bonus": "{% Dmg, Drop, and EXP", "scaling": 6, "image": "CardSet26.png"}),
+        new CardSetBase(11, <CardSetModel>{"bonus": "{% Drop Rate", "scaling": 7, "image": "CardSet25.png"})    
 ]
 }

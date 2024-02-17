@@ -53,13 +53,13 @@ export const initPetGeneRepo = () => {
                 "combatDescription": "When in Fence Yard, increases Breedability Multiplier of this pet species"
             }),
         new PetGeneBase(5, <PetGeneModel>{
-                "name": "Special",
+                "name": "Shiny",
                 "abilityType": AbilityTypeEnum.Unsure,
                 "x2": 15,
                 "lowerLetter": "f",
                 "upperLetter": "F",
-                "description": "Summons shootings stars which double the damage of all attacks they touch.",
-                "combatDescription": "When in Fence Yard, increases Special Passive of this pet species over time"
+                "description": "Thinks very happy thoughts. You can't see this of course, but trust me that lil' guy out there is happy!",
+                "combatDescription": "When in Fence Yard, levels up the Shiny Passive Bonus of this pet species over time"
             }),
         new PetGeneBase(6, <PetGeneModel>{
                 "name": "Mercenary",

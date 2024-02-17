@@ -407,16 +407,23 @@ export const initVendorRepo = () => {
                     },
                     <VendorModel>{
                         "vendor": "YumYum Grotto",
+                        "item": "StampC11",
+                        "quantity": 1,
+                        "no": 18,
+                        "purchasePrice": 400000
+                    },
+                    <VendorModel>{
+                        "vendor": "YumYum Grotto",
                         "item": "rtt0",
                         "quantity": 40,
-                        "no": 18,
+                        "no": 19,
                         "purchasePrice": 200
                     },
                     <VendorModel>{
                         "vendor": "YumYum Grotto",
                         "item": "ResetFrag",
                         "quantity": 2,
-                        "no": 19,
+                        "no": 20,
                         "purchasePrice": 800
                     }
                 ]
@@ -790,6 +797,13 @@ export const initVendorRepo = () => {
                         "quantity": 1,
                         "no": 15,
                         "purchasePrice": 200000000
+                    },
+                    <VendorModel>{
+                        "vendor": "Outer World Town",
+                        "item": "StampC12",
+                        "quantity": 1,
+                        "no": 16,
+                        "purchasePrice": 2800000000
                     }
                 ]
             }),
@@ -844,6 +858,95 @@ export const initVendorRepo = () => {
                         "quantity": 1,
                         "no": 7,
                         "purchasePrice": 120000000
+                    }
+                ]
+            }),
+        new VendorsBase("Spirit Village", <VendorsModel>{
+                "area": "Spirit Village",
+                "items": [
+                    <VendorModel>{
+                        "vendor": "Spirit Village",
+                        "item": "BoneJoePickle",
+                        "quantity": 1,
+                        "no": 1,
+                        "purchasePrice": 16000000000000
+                    },
+                    <VendorModel>{
+                        "vendor": "Spirit Village",
+                        "item": "Quest80",
+                        "quantity": 1,
+                        "no": 2,
+                        "purchasePrice": 400000000000000
+                    },
+                    <VendorModel>{
+                        "vendor": "Spirit Village",
+                        "item": "FoodHealth16",
+                        "quantity": 7500000,
+                        "no": 3,
+                        "purchasePrice": 280000
+                    },
+                    <VendorModel>{
+                        "vendor": "Spirit Village",
+                        "item": "FoodHealth17",
+                        "quantity": 7500000,
+                        "no": 4,
+                        "purchasePrice": 2000000
+                    },
+                    <VendorModel>{
+                        "vendor": "Spirit Village",
+                        "item": "OilBarrel7",
+                        "quantity": 200000,
+                        "no": 5,
+                        "purchasePrice": 8000000000
+                    },
+                    <VendorModel>{
+                        "vendor": "Spirit Village",
+                        "item": "StoneW8",
+                        "quantity": 12,
+                        "no": 6,
+                        "purchasePrice": 2400000000
+                    },
+                    <VendorModel>{
+                        "vendor": "Spirit Village",
+                        "item": "StoneA7",
+                        "quantity": 30,
+                        "no": 7,
+                        "purchasePrice": 180000000
+                    },
+                    <VendorModel>{
+                        "vendor": "Spirit Village",
+                        "item": "StoneT7",
+                        "quantity": 21,
+                        "no": 8,
+                        "purchasePrice": 120000000
+                    },
+                    <VendorModel>{
+                        "vendor": "Spirit Village",
+                        "item": "StampC10",
+                        "quantity": 1,
+                        "no": 9,
+                        "purchasePrice": 4000000000000
+                    },
+                    <VendorModel>{
+                        "vendor": "Spirit Village",
+                        "item": "InvStorage26",
+                        "quantity": 1,
+                        "no": 10,
+                        "purchasePrice": 400000000000000000
+                    },
+                    <VendorModel>{
+                        "vendor": "Spirit Village",
+                        "item": "InvStorage27",
+                        "quantity": 1,
+                        "no": 11,
+                        "purchasePrice": 10000000000000000000
+                    },
+                    <VendorModel>{
+                        "vendor": "Spirit Village",
+                        "item": "InvStorage28",
+                        "quantity": 1,
+                        "no": 12,
+                        "purchasePrice": 28000000000000000000000
                     }
                 ]
             })    

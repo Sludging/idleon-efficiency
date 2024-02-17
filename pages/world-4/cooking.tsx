@@ -228,7 +228,7 @@ function Cooking() {
                         return indexSort;
                 }
             })
-    }, [cooking, sort])
+    }, [appContext, cooking, sort])
 
     function getMealExtraText(meal: Meal) {
         if (meal.level == 0) return "" //undiscovered meals

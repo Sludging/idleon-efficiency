@@ -143,7 +143,7 @@ export const initGodInfoRepo = () => {
                 "blessingPerLevel": 1
             }),
         new GodInfoBase(8, <GodInfoModel>{
-                "name": "Kattlecruk",
+                "name": "Kattlekruk",
                 "majorBonus": "I am not yet prepared to bestow upon you my bonus, give me some time. You may link with me, but nothing will come of it.",
                 "passiveBonus": "Nothing. Be patient mortal.",
                 "passiveMax": 1,

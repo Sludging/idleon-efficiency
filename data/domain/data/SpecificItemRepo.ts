@@ -107,21 +107,21 @@ export const initSpecificItemRepo = () => {
                 "Type": "Ore",
                 "description": "Smelt down 1000 Ores into 1 Bar at the Forge. Smelting will take 20000 Seconds per Bar using Forge Slot 1. "
             }),
-        new BaseItemBase("Godshard", <OreItemModel>{
-                "internalName": "Godshard",
-                "displayName": "Godshard Ore",
-                "sellPrice": 250,
-                "typeGen": TypeGenEnum.bOre,
-                "Type": "Ore",
-                "description": "Smelt down 5000 Ores into 1 Bar at the Forge. Smelting will take 60000 Seconds per Bar using Forge Slot 1. "
-            }),
         new BaseItemBase("Marble", <OreItemModel>{
                 "internalName": "Marble",
                 "displayName": "Marble Ore",
                 "sellPrice": 500,
                 "typeGen": TypeGenEnum.bOre,
                 "Type": "Ore",
-                "description": "Smelt down 10000 Ores into 1 Bar at the Forge. Smelting will take 100000 Seconds per Bar using Forge Slot 1. "
+                "description": "Smelt down 4000 Ores into 1 Bar at the Forge. Smelting will take 30000 Seconds per Bar using Forge Slot 1. "
+            }),
+        new BaseItemBase("Godshard", <OreItemModel>{
+                "internalName": "Godshard",
+                "displayName": "Godshard Ore",
+                "sellPrice": 250,
+                "typeGen": TypeGenEnum.bOre,
+                "Type": "Ore",
+                "description": "Smelt down 15000 Ores into 1 Bar at the Forge. Smelting will take 50000 Seconds per Bar using Forge Slot 1. "
             }),
         new BaseItemBase("CopperBar", <BaseItemModel>{
                 "internalName": "CopperBar",
@@ -248,6 +248,14 @@ export const initSpecificItemRepo = () => {
                 "Type": "Barrel",
                 "description": "Increases Extra Bar chance by 40% for the Slot it's in. 50% chance to be consumed when a bar is forged. "
             }),
+        new BaseItemBase("OilBarrel7", <ACItemModel>{
+                "internalName": "OilBarrel7",
+                "displayName": "Plasma Barrel",
+                "sellPrice": 2000000000,
+                "typeGen": TypeGenEnum.cOil,
+                "Type": "Barrel",
+                "description": "Increases Extra Bar chance by 60% for the Slot it's in. 30% chance to be consumed when a bar is forged. "
+            }),
         new BaseItemBase("OakTree", <BaseItemModel>{
                 "internalName": "OakTree",
                 "displayName": "Oak Logs",
@@ -346,6 +354,20 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.bLog,
                 "Type": "Log"
             }),
+        new BaseItemBase("Tree12", <BaseItemModel>{
+                "internalName": "Tree12",
+                "displayName": "Bamboo Logs",
+                "sellPrice": 500,
+                "typeGen": TypeGenEnum.bLog,
+                "Type": "Log"
+            }),
+        new BaseItemBase("Tree13", <BaseItemModel>{
+                "internalName": "Tree13",
+                "displayName": "Effervescent Logs",
+                "sellPrice": 500,
+                "typeGen": TypeGenEnum.bLog,
+                "Type": "Log"
+            }),
         new BaseItemBase("Leaf1", <BaseItemModel>{
                 "internalName": "Leaf1",
                 "displayName": "Grass Leaf",
@@ -377,6 +399,13 @@ export const initSpecificItemRepo = () => {
         new BaseItemBase("Leaf5", <BaseItemModel>{
                 "internalName": "Leaf5",
                 "displayName": "Magma Leaf",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.bLeaf,
+                "Type": "Leaf"
+            }),
+        new BaseItemBase("Leaf6", <BaseItemModel>{
+                "internalName": "Leaf6",
+                "displayName": "Spirit Leaf",
                 "sellPrice": 100,
                 "typeGen": TypeGenEnum.bLeaf,
                 "Type": "Leaf"
@@ -581,6 +610,22 @@ export const initSpecificItemRepo = () => {
                 "Type": "Bug",
                 "description": "It's a fluttering piece of solid dream. This thing right here could really do some damage if only dreams were real and not made up by the powers that be... "
             }),
+        new BaseItemBase("Bug12", <DescItemModel>{
+                "internalName": "Bug12",
+                "displayName": "Ladybug",
+                "sellPrice": 320,
+                "typeGen": TypeGenEnum.dBugs,
+                "Type": "Bug",
+                "description": "The black polkadot pattern is there to scare away predators. Fortunately for you, you're not scared of black dots! "
+            }),
+        new BaseItemBase("Bug13", <DescItemModel>{
+                "internalName": "Bug13",
+                "displayName": "Firefly",
+                "sellPrice": 320,
+                "typeGen": TypeGenEnum.dBugs,
+                "Type": "Bug",
+                "description": "As you gaze upon the firefly's majesty, you simply CANNOT BELIEVE YOUR EYEEES. "
+            }),
         new BaseItemBase("Critter1", <DescItemModel>{
                 "internalName": "Critter1",
                 "displayName": "Froge",
@@ -779,7 +824,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 50,
                 "typeGen": TypeGenEnum.dSouls,
                 "Type": "Soul",
-                "description": "Don't judge it, you'd be mad too if someone squished YOU into that weirdo lookin' pattern! "
+                "description": "Don't judge their expression, you'd be mad too if someone squished YOU into that weirdo lookin' pattern! "
             }),
         new BaseItemBase("Soul6", <DescItemModel>{
                 "internalName": "Soul6",
@@ -788,6 +833,14 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.dSouls,
                 "Type": "Soul",
                 "description": "He be oozin' and cruisin' and ain't worried 'bout nothin' "
+            }),
+        new BaseItemBase("Soul7", <DescItemModel>{
+                "internalName": "Soul7",
+                "displayName": "Breezy Soul",
+                "sellPrice": 70,
+                "typeGen": TypeGenEnum.dSouls,
+                "Type": "Soul",
+                "description": "Calm thoughts, wavy clouds, he just wanna fly. "
             }),
         new BaseItemBase("EquipmentHats1", <ArmourItemModel>{
                 "internalName": "EquipmentHats1",
@@ -1458,6 +1511,48 @@ export const initSpecificItemRepo = () => {
                 "miscUp1": "30% Total Damage",
                 "miscUp2": "10% Drop Chance",
                 "Upgrade_Slots_Left": 10,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentHats105", <ArmourItemModel>{
+                "internalName": "EquipmentHats105",
+                "displayName": "Marbiglass Headdress",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmet,
+                "Type": "Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 360,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 14,
+                "STR": 58,
+                "AGI": 58,
+                "WIS": 58,
+                "LUK": 58,
+                "Defence": 175,
+                "miscUp1": "12% All Stats",
+                "miscUp2": "35% Money",
+                "Upgrade_Slots_Left": 10,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentHats106", <ArmourItemModel>{
+                "internalName": "EquipmentHats106",
+                "displayName": "Crown of the Gods",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmet,
+                "Type": "Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 510,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 18,
+                "STR": 65,
+                "AGI": 65,
+                "WIS": 65,
+                "LUK": 65,
+                "Defence": 210,
+                "miscUp1": "15% Drop Chance",
+                "miscUp2": "22% Multikill Per Tier",
+                "Upgrade_Slots_Left": 11,
                 "Skill": "",
                 "Skill_Power": 0
             }),
@@ -2364,6 +2459,48 @@ export const initSpecificItemRepo = () => {
                 "Speed": 10,
                 "Reach": 96
             }),
+        new BaseItemBase("EquipmentPunching10", <WeaponItemModel>{
+                "internalName": "EquipmentPunching10",
+                "displayName": "Pentastud Slapper",
+                "sellPrice": 7800,
+                "typeGen": TypeGenEnum.aWeapon,
+                "Type": "Fisticuff",
+                "lvReqToCraft": 10,
+                "lvReqToEquip": 360,
+                "Class": ClassTypeEnum.Beginner,
+                "Weapon_Power": 75,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 65,
+                "Defence": 0,
+                "miscUp1": "25% Total Damage",
+                "miscUp2": "60% Money",
+                "Upgrade_Slots_Left": 6,
+                "Speed": 10,
+                "Reach": 96
+            }),
+        new BaseItemBase("EquipmentPunching11", <WeaponItemModel>{
+                "internalName": "EquipmentPunching11",
+                "displayName": "Mittens of the Gods",
+                "sellPrice": 7800,
+                "typeGen": TypeGenEnum.aWeapon,
+                "Type": "Fisticuff",
+                "lvReqToCraft": 10,
+                "lvReqToEquip": 510,
+                "Class": ClassTypeEnum.Beginner,
+                "Weapon_Power": 90,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 82,
+                "Defence": 0,
+                "miscUp1": "120% Total Damage",
+                "miscUp2": "40% Drop Chance",
+                "Upgrade_Slots_Left": 7,
+                "Speed": 10,
+                "Reach": 96
+            }),
         new BaseItemBase("TestObj1", <WeaponItemModel>{
                 "internalName": "TestObj1",
                 "displayName": "Wooden Spear",
@@ -2573,6 +2710,48 @@ export const initSpecificItemRepo = () => {
                 "Upgrade_Slots_Left": 6,
                 "Speed": 8,
                 "Reach": 116
+            }),
+        new BaseItemBase("EquipmentSword8", <WeaponItemModel>{
+                "internalName": "EquipmentSword8",
+                "displayName": "Elegant Spear",
+                "sellPrice": 26000,
+                "typeGen": TypeGenEnum.aWeapon,
+                "Type": "Spear",
+                "lvReqToCraft": 50,
+                "lvReqToEquip": 375,
+                "Class": ClassTypeEnum.Warrior,
+                "Weapon_Power": 97,
+                "STR": 65,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "25% Total Damage",
+                "miscUp2": "30% Money",
+                "Upgrade_Slots_Left": 6,
+                "Speed": 8,
+                "Reach": 116
+            }),
+        new BaseItemBase("EquipmentSword9", <WeaponItemModel>{
+                "internalName": "EquipmentSword9",
+                "displayName": "Massive Godbreaker",
+                "sellPrice": 26000,
+                "typeGen": TypeGenEnum.aWeapon,
+                "Type": "Spear",
+                "lvReqToCraft": 50,
+                "lvReqToEquip": 525,
+                "Class": ClassTypeEnum.Warrior,
+                "Weapon_Power": 112,
+                "STR": 80,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "60% Total Damage",
+                "miscUp2": "20% Drop Rate",
+                "Upgrade_Slots_Left": 7,
+                "Speed": 9,
+                "Reach": 132
             }),
         new BaseItemBase("TestObj4", <WeaponItemModel>{
                 "internalName": "TestObj4",
@@ -2952,6 +3131,48 @@ export const initSpecificItemRepo = () => {
                 "Speed": 9,
                 "Reach": 340
             }),
+        new BaseItemBase("EquipmentBows13", <WeaponItemModel>{
+                "internalName": "EquipmentBows13",
+                "displayName": "Pristine Longbow",
+                "sellPrice": 15000,
+                "typeGen": TypeGenEnum.aWeapon,
+                "Type": "Bow",
+                "lvReqToCraft": 22,
+                "lvReqToEquip": 375,
+                "Class": ClassTypeEnum.Archer,
+                "Weapon_Power": 95,
+                "STR": 30,
+                "AGI": 52,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "25% Total Damage",
+                "miscUp2": "30% Money",
+                "Upgrade_Slots_Left": 6,
+                "Speed": 9,
+                "Reach": 350
+            }),
+        new BaseItemBase("EquipmentBows14", <WeaponItemModel>{
+                "internalName": "EquipmentBows14",
+                "displayName": "Doublestring Godshooter",
+                "sellPrice": 15000,
+                "typeGen": TypeGenEnum.aWeapon,
+                "Type": "Bow",
+                "lvReqToCraft": 22,
+                "lvReqToEquip": 525,
+                "Class": ClassTypeEnum.Archer,
+                "Weapon_Power": 110,
+                "STR": 37,
+                "AGI": 70,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "60% Total Damage",
+                "miscUp2": "20% Drop Rate",
+                "Upgrade_Slots_Left": 7,
+                "Speed": 10,
+                "Reach": 370
+            }),
         new BaseItemBase("EquipmentWands1", <WeaponItemModel>{
                 "internalName": "EquipmentWands1",
                 "displayName": "Gnarled Wand",
@@ -3152,7 +3373,7 @@ export const initSpecificItemRepo = () => {
                 "Class": ClassTypeEnum.Mage,
                 "Weapon_Power": 94,
                 "STR": 0,
-                "AGI": 6,
+                "AGI": 23,
                 "WIS": 54,
                 "LUK": 0,
                 "Defence": 0,
@@ -3161,6 +3382,48 @@ export const initSpecificItemRepo = () => {
                 "Upgrade_Slots_Left": 6,
                 "Speed": 8,
                 "Reach": 300
+            }),
+        new BaseItemBase("EquipmentWands12", <WeaponItemModel>{
+                "internalName": "EquipmentWands12",
+                "displayName": "Sparky Marble Staff",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aWeapon,
+                "Type": "Wand",
+                "lvReqToCraft": 22,
+                "lvReqToEquip": 375,
+                "Class": ClassTypeEnum.Mage,
+                "Weapon_Power": 108,
+                "STR": 0,
+                "AGI": 30,
+                "WIS": 70,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "25% Total Damage",
+                "miscUp2": "30% Money",
+                "Upgrade_Slots_Left": 6,
+                "Speed": 8,
+                "Reach": 310
+            }),
+        new BaseItemBase("EquipmentWands13", <WeaponItemModel>{
+                "internalName": "EquipmentWands13",
+                "displayName": "Magnifique Godcaster",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aWeapon,
+                "Type": "Wand",
+                "lvReqToCraft": 22,
+                "lvReqToEquip": 525,
+                "Class": ClassTypeEnum.Mage,
+                "Weapon_Power": 125,
+                "STR": 0,
+                "AGI": 40,
+                "WIS": 80,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "60% Total Damage",
+                "miscUp2": "20% Drop Chance",
+                "Upgrade_Slots_Left": 7,
+                "Speed": 9,
+                "Reach": 80
             }),
         new BaseItemBase("EquipmentWands4", <WeaponItemModel>{
                 "internalName": "EquipmentWands4",
@@ -3933,9 +4196,51 @@ export const initSpecificItemRepo = () => {
                 "WIS": 40,
                 "LUK": 40,
                 "Defence": 120,
-                "miscUp1": "12% Mob Respawn",
+                "miscUp1": "8% Mob Respawn",
                 "miscUp2": "6% Total Damage",
                 "Upgrade_Slots_Left": 9,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentShirts37", <ArmourItemModel>{
+                "internalName": "EquipmentShirts37",
+                "displayName": "Marbiglass Tunic",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aShirt,
+                "Type": "Shirt",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 350,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 10,
+                "STR": 45,
+                "AGI": 45,
+                "WIS": 45,
+                "LUK": 45,
+                "Defence": 150,
+                "miscUp1": "8% All Stats",
+                "miscUp2": "26% Money",
+                "Upgrade_Slots_Left": 9,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentShirts38", <ArmourItemModel>{
+                "internalName": "EquipmentShirts38",
+                "displayName": "Robe of the Gods",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aShirt,
+                "Type": "Shirt",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 500,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 15,
+                "STR": 60,
+                "AGI": 60,
+                "WIS": 60,
+                "LUK": 60,
+                "Defence": 220,
+                "miscUp1": "30% Drop Chance",
+                "miscUp2": "16% Multikill Per Tier",
+                "Upgrade_Slots_Left": 10,
                 "Skill": "",
                 "Skill_Power": 0
             }),
@@ -4500,9 +4805,51 @@ export const initSpecificItemRepo = () => {
                 "WIS": 45,
                 "LUK": 45,
                 "Defence": 112,
-                "miscUp1": "6% Mob Respawn",
+                "miscUp1": "4% Mob Respawn",
                 "miscUp2": "6% Total Damage",
                 "Upgrade_Slots_Left": 9,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentPants29", <ArmourItemModel>{
+                "internalName": "EquipmentPants29",
+                "displayName": "Marbiglass Legplates",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aPants,
+                "Type": "Pants",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 350,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 7,
+                "STR": 50,
+                "AGI": 50,
+                "WIS": 50,
+                "LUK": 50,
+                "Defence": 140,
+                "miscUp1": "7% All Stats",
+                "miscUp2": "22% Money",
+                "Upgrade_Slots_Left": 9,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentPants30", <ArmourItemModel>{
+                "internalName": "EquipmentPants30",
+                "displayName": "Tatters of the Gods",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aPants,
+                "Type": "Pants",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 500,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 10,
+                "STR": 55,
+                "AGI": 55,
+                "WIS": 55,
+                "LUK": 55,
+                "Defence": 190,
+                "miscUp1": "25% Drop Chance",
+                "miscUp2": "14% Multikill Per Tier",
+                "Upgrade_Slots_Left": 10,
                 "Skill": "",
                 "Skill_Power": 0
             }),
@@ -5262,6 +5609,48 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentShoes37", <ArmourItemModel>{
+                "internalName": "EquipmentShoes37",
+                "displayName": "Marbiglass Soles",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aShoes,
+                "Type": "Shoes",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 350,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 5,
+                "STR": 43,
+                "AGI": 43,
+                "WIS": 43,
+                "LUK": 43,
+                "Defence": 100,
+                "miscUp1": "7% All Stats",
+                "miscUp2": "25% Money",
+                "Upgrade_Slots_Left": 8,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentShoes38", <ArmourItemModel>{
+                "internalName": "EquipmentShoes38",
+                "displayName": "Drip of the Gods",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aShoes,
+                "Type": "Shoes",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 500,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 5,
+                "STR": 57,
+                "AGI": 57,
+                "WIS": 57,
+                "LUK": 57,
+                "Defence": 100,
+                "miscUp1": "30% Drop Chance",
+                "miscUp2": "12% Multikill Per Tier",
+                "Upgrade_Slots_Left": 9,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentPendant1", <ArmourItemModel>{
                 "internalName": "EquipmentPendant1",
                 "displayName": "Mint Icey",
@@ -5844,7 +6233,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 10,
                 "LUK": 10,
                 "Defence": 10,
-                "miscUp1": "35% Xp From Monsters",
+                "miscUp1": "42% Xp From Monsters",
                 "miscUp2": "5% Mob Respawn",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
@@ -6627,6 +7016,27 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentRings34", <ArmourItemModel>{
+                "internalName": "EquipmentRings34",
+                "displayName": "Magma Killer Ring",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aRing,
+                "Type": "Ring",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 5,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 3,
+                "miscUp1": "30% Kills In World 5",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentRingsChat1", <ArmourItemModel>{
                 "internalName": "EquipmentRingsChat1",
                 "displayName": "Love Ring",
@@ -7127,6 +7537,27 @@ export const initSpecificItemRepo = () => {
                 "Defence": 25,
                 "miscUp1": "40% Skill Exp",
                 "miscUp2": "3% All Afk Gain",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentCape14", <ArmourItemModel>{
+                "internalName": "EquipmentCape14",
+                "displayName": "Phoenix Wings",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aCape,
+                "Type": "Cape",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 30,
+                "STR": 40,
+                "AGI": 40,
+                "WIS": 40,
+                "LUK": 40,
+                "Defence": 0,
+                "miscUp1": "50% Damage Multi",
+                "miscUp2": "60% Money",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
                 "Skill_Power": 0
@@ -8103,6 +8534,81 @@ export const initSpecificItemRepo = () => {
                     "cCostExp": 1.36,
                     "i10": 0,
                     "upgradeText": "{} All Stats",
+                    "i12": 0
+                }
+            }),
+        new BaseItemBase("StampA40", <StampItemModel>{
+                "internalName": "StampA40",
+                "displayName": "Void Sword Stamp",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aStamp,
+                "Type": "Combat Stamp",
+                "description": "",
+                "bonus": "+{ Base Damage",
+                "ID": 40,
+                "stampData": <StampDataModel>{
+                    "effect": "BaseDmg",
+                    "function": "add",
+                    "x1": 12,
+                    "x2": 0,
+                    "upgradeInterval": 10,
+                    "material": <QtylessComponentModel>{"item": "SpiA2"},
+                    "startV": 20000,
+                    "mCostExp": 10,
+                    "startingCost": 2500000000,
+                    "cCostExp": 1.36,
+                    "i10": 0,
+                    "upgradeText": "{} Base Damage",
+                    "i12": 0
+                }
+            }),
+        new BaseItemBase("StampA41", <StampItemModel>{
+                "internalName": "StampA41",
+                "displayName": "Void Axe Stamp",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aStamp,
+                "Type": "Combat Stamp",
+                "description": "",
+                "bonus": "+{% Total Damage",
+                "ID": 41,
+                "stampData": <StampDataModel>{
+                    "effect": "PctDmg",
+                    "function": "decay",
+                    "x1": 35,
+                    "x2": 200,
+                    "upgradeInterval": 15,
+                    "material": <QtylessComponentModel>{"item": "Tree12"},
+                    "startV": 25000,
+                    "mCostExp": 10,
+                    "startingCost": 66000000000,
+                    "cCostExp": 1.36,
+                    "i10": 0,
+                    "upgradeText": "{}% Total Damage",
+                    "i12": 0
+                }
+            }),
+        new BaseItemBase("StampA42", <StampItemModel>{
+                "internalName": "StampA42",
+                "displayName": "Captalist Stats Stamp",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aStamp,
+                "Type": "Combat Stamp",
+                "description": "",
+                "bonus": "+{% All Stats",
+                "ID": 42,
+                "stampData": <StampDataModel>{
+                    "effect": "AllStatPct",
+                    "function": "decay",
+                    "x1": 5,
+                    "x2": 100,
+                    "upgradeInterval": 10,
+                    "material": <QtylessComponentModel>{"item": "Bug13"},
+                    "startV": 40000,
+                    "mCostExp": 10,
+                    "startingCost": 2200000000000,
+                    "cCostExp": 1.36,
+                    "i10": 0,
+                    "upgradeText": "{}% All Stats",
                     "i12": 0
                 }
             }),
@@ -9281,6 +9787,181 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
+        new BaseItemBase("StampB48", <StampItemModel>{
+                "internalName": "StampB48",
+                "displayName": "Crop Evo Stamp",
+                "sellPrice": 4000,
+                "typeGen": TypeGenEnum.aStamp,
+                "Type": "Skills Stamp",
+                "description": "",
+                "bonus": "+{% Crop Evolution Chance",
+                "ID": 48,
+                "stampData": <StampDataModel>{
+                    "effect": "CropEvo",
+                    "function": "add",
+                    "x1": 5,
+                    "x2": 0,
+                    "upgradeInterval": 5,
+                    "material": <QtylessComponentModel>{"item": "Fish9"},
+                    "startV": 12000,
+                    "mCostExp": 10,
+                    "startingCost": 1e+11,
+                    "cCostExp": 1.37,
+                    "i10": 0,
+                    "upgradeText": "{}% Crop Evolution Chance",
+                    "i12": 0
+                }
+            }),
+        new BaseItemBase("StampB49", <StampItemModel>{
+                "internalName": "StampB49",
+                "displayName": "Sneaky Peeky Stamp",
+                "sellPrice": 4000,
+                "typeGen": TypeGenEnum.aStamp,
+                "Type": "Skills Stamp",
+                "description": "",
+                "bonus": "+{% Sneaking EXP Gain",
+                "ID": 49,
+                "stampData": <StampDataModel>{
+                    "effect": "SneakExp",
+                    "function": "decay",
+                    "x1": 50,
+                    "x2": 150,
+                    "upgradeInterval": 8,
+                    "material": <QtylessComponentModel>{"item": "SpiA4"},
+                    "startV": 20000,
+                    "mCostExp": 10,
+                    "startingCost": 5e+10,
+                    "cCostExp": 1.37,
+                    "i10": 0,
+                    "upgradeText": "{}% Sneaking EXP gain",
+                    "i12": 0
+                }
+            }),
+        new BaseItemBase("StampB50", <StampItemModel>{
+                "internalName": "StampB50",
+                "displayName": "Jade Mint Stamp",
+                "sellPrice": 4000,
+                "typeGen": TypeGenEnum.aStamp,
+                "Type": "Skills Stamp",
+                "description": "",
+                "bonus": "+{% Jade Coin Gain",
+                "ID": 50,
+                "stampData": <StampDataModel>{
+                    "effect": "JadeCoin",
+                    "function": "add",
+                    "x1": 0.5,
+                    "x2": 0,
+                    "upgradeInterval": 10,
+                    "material": <QtylessComponentModel>{"item": "SpiA2b"},
+                    "startV": 15,
+                    "mCostExp": 7,
+                    "startingCost": 2e+10,
+                    "cCostExp": 1.37,
+                    "i10": 0,
+                    "upgradeText": "{}% Jade Coin gain",
+                    "i12": 0
+                }
+            }),
+        new BaseItemBase("StampB51", <StampItemModel>{
+                "internalName": "StampB51",
+                "displayName": "Summoner Stone Stamp",
+                "sellPrice": 4000,
+                "typeGen": TypeGenEnum.aStamp,
+                "Type": "Skills Stamp",
+                "description": "",
+                "bonus": "+{% Summoning EXP Gain",
+                "ID": 51,
+                "stampData": <StampDataModel>{
+                    "effect": "SummonExp",
+                    "function": "decay",
+                    "x1": 50,
+                    "x2": 150,
+                    "upgradeInterval": 8,
+                    "material": <QtylessComponentModel>{"item": "Soul7"},
+                    "startV": 8000,
+                    "mCostExp": 10,
+                    "startingCost": 5e+10,
+                    "cCostExp": 1.37,
+                    "i10": 0,
+                    "upgradeText": "{}% Summoning EXP gain",
+                    "i12": 0
+                }
+            }),
+        new BaseItemBase("StampB52", <StampItemModel>{
+                "internalName": "StampB52",
+                "displayName": "White Essence Stamp",
+                "sellPrice": 4000,
+                "typeGen": TypeGenEnum.aStamp,
+                "Type": "Skills Stamp",
+                "description": "",
+                "bonus": "+{% White Essence Gain",
+                "ID": 52,
+                "stampData": <StampDataModel>{
+                    "effect": "WhiteEss",
+                    "function": "add",
+                    "x1": 1,
+                    "x2": 0,
+                    "upgradeInterval": 8,
+                    "material": <QtylessComponentModel>{"item": "Bug12"},
+                    "startV": 15000,
+                    "mCostExp": 10,
+                    "startingCost": 6e+10,
+                    "cCostExp": 1.37,
+                    "i10": 0,
+                    "upgradeText": "{}% White Essence Gain gain",
+                    "i12": 0
+                }
+            }),
+        new BaseItemBase("StampB53", <StampItemModel>{
+                "internalName": "StampB53",
+                "displayName": "Triad Essence Stamp",
+                "sellPrice": 4000,
+                "typeGen": TypeGenEnum.aStamp,
+                "Type": "Skills Stamp",
+                "description": "",
+                "bonus": "+{% G, Y, B Essence Gain",
+                "ID": 53,
+                "stampData": <StampDataModel>{
+                    "effect": "123Ess",
+                    "function": "add",
+                    "x1": 1,
+                    "x2": 0,
+                    "upgradeInterval": 8,
+                    "material": <QtylessComponentModel>{"item": "Fish12"},
+                    "startV": 8000,
+                    "mCostExp": 10,
+                    "startingCost": 8e+11,
+                    "cCostExp": 1.37,
+                    "i10": 0,
+                    "upgradeText": "{}% G Y and B Essence gain",
+                    "i12": 0
+                }
+            }),
+        new BaseItemBase("StampB54", <StampItemModel>{
+                "internalName": "StampB54",
+                "displayName": "Dark Triad Essence Stamp",
+                "sellPrice": 4000,
+                "typeGen": TypeGenEnum.aStamp,
+                "Type": "Skills Stamp",
+                "description": "",
+                "bonus": "+{% P, R, C Essence Gain",
+                "ID": 54,
+                "stampData": <StampDataModel>{
+                    "effect": "456Ess",
+                    "function": "add",
+                    "x1": 1,
+                    "x2": 0,
+                    "upgradeInterval": 8,
+                    "material": <QtylessComponentModel>{"item": "Tree13"},
+                    "startV": 45000,
+                    "mCostExp": 10,
+                    "startingCost": 1.2e+13,
+                    "cCostExp": 1.37,
+                    "i10": 0,
+                    "upgradeText": "{}% P R and C Essence gain",
+                    "i12": 0
+                }
+            }),
         new BaseItemBase("StampC1", <StampItemModel>{
                 "internalName": "StampC1",
                 "displayName": "Questin Stamp",
@@ -9508,77 +10189,77 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("StampC10", <StampItemModel>{
                 "internalName": "StampC10",
-                "displayName": "Blank",
-                "sellPrice": 1,
+                "displayName": "Forge Stamp",
+                "sellPrice": 1000000000000,
                 "typeGen": TypeGenEnum.aStamp,
                 "Type": "Misc Stamp",
                 "description": "",
-                "bonus": "+{",
+                "bonus": "+{% Forge Max Capacity",
                 "ID": 10,
                 "stampData": <StampDataModel>{
-                    "effect": "BaseDmg",
-                    "function": "add",
-                    "x1": 30,
-                    "x2": 0,
+                    "effect": "ForgeCap",
+                    "function": "decay",
+                    "x1": 120,
+                    "x2": 250,
                     "upgradeInterval": 10,
-                    "material": <QtylessComponentModel>{"item": "Copper"},
-                    "startV": 25,
-                    "mCostExp": 6,
-                    "startingCost": 50,
+                    "material": <QtylessComponentModel>{"item": "Godshard"},
+                    "startV": 250,
+                    "mCostExp": 8,
+                    "startingCost": 5000000000000,
                     "cCostExp": 1.3,
                     "i10": 0,
-                    "upgradeText": "{} Base HP",
-                    "i12": 3
+                    "upgradeText": "{}% Forge Capacity",
+                    "i12": 0
                 }
             }),
         new BaseItemBase("StampC11", <StampItemModel>{
                 "internalName": "StampC11",
-                "displayName": "Blank",
-                "sellPrice": 1,
+                "displayName": "Vendor Stamp",
+                "sellPrice": 100000,
                 "typeGen": TypeGenEnum.aStamp,
                 "Type": "Misc Stamp",
                 "description": "",
-                "bonus": "+{",
+                "bonus": "+{% Shop Stock Quantity",
                 "ID": 11,
                 "stampData": <StampDataModel>{
-                    "effect": "BaseDmg",
-                    "function": "add",
-                    "x1": 30,
-                    "x2": 0,
+                    "effect": "ShopQty",
+                    "function": "decay",
+                    "x1": 35,
+                    "x2": 100,
                     "upgradeInterval": 10,
-                    "material": <QtylessComponentModel>{"item": "Copper"},
-                    "startV": 25,
-                    "mCostExp": 6,
-                    "startingCost": 50,
-                    "cCostExp": 1.3,
+                    "material": <QtylessComponentModel>{"item": "CraftMat3"},
+                    "startV": 100,
+                    "mCostExp": 10,
+                    "startingCost": 30000,
+                    "cCostExp": 1.5,
                     "i10": 0,
-                    "upgradeText": "{} Base HP",
+                    "upgradeText": "{}% Higher Shop QTY",
                     "i12": 3
                 }
             }),
         new BaseItemBase("StampC12", <StampItemModel>{
                 "internalName": "StampC12",
-                "displayName": "Blank",
-                "sellPrice": 1,
+                "displayName": "Sigil Stamp",
+                "sellPrice": 700000000,
                 "typeGen": TypeGenEnum.aStamp,
                 "Type": "Misc Stamp",
                 "description": "",
-                "bonus": "+{",
+                "bonus": "+{% Sigil Charge rate",
                 "ID": 12,
                 "stampData": <StampDataModel>{
-                    "effect": "BaseDmg",
-                    "function": "add",
-                    "x1": 30,
-                    "x2": 0,
-                    "upgradeInterval": 10,
-                    "material": <QtylessComponentModel>{"item": "Copper"},
-                    "startV": 25,
+                    "effect": "SigilCharge",
+                    "function": "decay",
+                    "x1": 40,
+                    "x2": 150,
+                    "upgradeInterval": 12,
+                    "material": <QtylessComponentModel>{"item": "SnowA4"},
+                    "startV": 2000,
                     "mCostExp": 6,
-                    "startingCost": 50,
-                    "cCostExp": 1.3,
+                    "startingCost": 1000000,
+                    "cCostExp": 1.32,
                     "i10": 0,
-                    "upgradeText": "{} Base HP",
-                    "i12": 3
+                    "upgradeText": "{}% Sigil Charge rate",
+                    "i12": 0
                 }
             }),
         new BaseItemBase("StampC13", <StampItemModel>{
@@ -9831,6 +10512,31 @@ export const initSpecificItemRepo = () => {
                     "i12": 0
                 }
             }),
+        new BaseItemBase("StampC23", <StampItemModel>{
+                "internalName": "StampC23",
+                "displayName": "Atomic Stamp",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aStamp,
+                "Type": "Misc Stamp",
+                "description": "",
+                "bonus": "+{% Lower Atom Upgrade Costs",
+                "ID": 23,
+                "stampData": <StampDataModel>{
+                    "effect": "AtomCost",
+                    "function": "decay",
+                    "x1": 20,
+                    "x2": 80,
+                    "upgradeInterval": 8,
+                    "material": <QtylessComponentModel>{"item": "SpiA3"},
+                    "startV": 2500,
+                    "mCostExp": 5,
+                    "startingCost": 25000000,
+                    "cCostExp": 1.52,
+                    "i10": 0,
+                    "upgradeText": "{}% lower Atom upgrade costs",
+                    "i12": 0
+                }
+            }),
         new BaseItemBase("StoneWe", <StoneItemModel>{
                 "internalName": "StoneWe",
                 "displayName": "Easter Weapon Stone",
@@ -9920,6 +10626,15 @@ export const initSpecificItemRepo = () => {
                 "Type": "Upgrade",
                 "description": "Drag onto any Weapon to apply. +7 Weapon Power, +6 Main Stat. Success Chance; 60% Uses up 1 item slots. WARNING:Slots are used up even if the Upgrade fails! ",
                 "tier": "SK"
+            }),
+        new BaseItemBase("StoneW8", <StoneItemModel>{
+                "internalName": "StoneW8",
+                "displayName": "Weapon Upgrade Stone VI",
+                "sellPrice": 600000000,
+                "typeGen": TypeGenEnum.dStone,
+                "Type": "Upgrade",
+                "description": "Drag onto any Weapon to apply. +8 Weapon Power, +7 Main Stat. Success Chance; 75% Uses up 1 item slots. WARNING:Slots are used up even if the Upgrade fails! ",
+                "tier": "VI"
             }),
         new BaseItemBase("StoneAe", <StoneItemModel>{
                 "internalName": "StoneAe",
@@ -10020,6 +10735,15 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Armor to apply. +1 Weapon Power, +13 Defence, +8 Main Stat. Success Chance; 60% Uses up 1 item slots. WARNING:Slots are used up even if the Upgrade fails! ",
                 "tier": "SK"
             }),
+        new BaseItemBase("StoneA7", <StoneItemModel>{
+                "internalName": "StoneA7",
+                "displayName": "Armor Upgrade Stone VI",
+                "sellPrice": 45000000,
+                "typeGen": TypeGenEnum.dStone,
+                "Type": "Upgrade",
+                "description": "Drag onto any Armor to apply. +1 Weapon Power, +15 Defence, +10 Main Stat. Success Chance; 75% Uses up 1 item slots. WARNING:Slots are used up even if the Upgrade fails! ",
+                "tier": "VI"
+            }),
         new BaseItemBase("StoneTe", <StoneItemModel>{
                 "internalName": "StoneTe",
                 "displayName": "Easter Tool Upgrade Stone",
@@ -10101,6 +10825,15 @@ export const initSpecificItemRepo = () => {
                 "description": "Drag onto any Tool to apply. +8 Tool Skill Power, +9 Main Stat. Success Chance; 60% Uses up 1 item slots. WARNING:Slots are used up even if the Upgrade fails! ",
                 "tier": "SK"
             }),
+        new BaseItemBase("StoneT7", <StoneItemModel>{
+                "internalName": "StoneT7",
+                "displayName": "Tool Upgrade Stone VI",
+                "sellPrice": 30000000,
+                "typeGen": TypeGenEnum.dStone,
+                "Type": "Upgrade",
+                "description": "Drag onto any Tool to apply. +8 Tool Skill Power, +12 Main Stat. Success Chance; 75% Uses up 1 item slots. WARNING:Slots are used up even if the Upgrade fails! ",
+                "tier": "VI"
+            }),
         new BaseItemBase("StoneHelm1", <StoneItemModel>{
                 "internalName": "StoneHelm1",
                 "displayName": "Helmet Upgrade Stone I",
@@ -10152,7 +10885,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 777,
                 "typeGen": TypeGenEnum.dStone,
                 "Type": "Upgrade",
-                "description": "Drag onto any Equip to apply. +4 Mystery Stat. Success Chance; 50% Uses up 1 slots only if Successful. WARNING:Mystery Stat has a chance to be Negative, and reduce stats! ",
+                "description": "Drag onto any Equip to apply. +4 Mystery Stat. Success Chance; 60% Uses up 1 slots only if Successful. WARNING:Mystery Stat has a chance to be Negative, and reduce stats! ",
                 "tier": "II"
             }),
         new BaseItemBase("StoneZ3", <StoneItemModel>{
@@ -10161,8 +10894,17 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 777,
                 "typeGen": TypeGenEnum.dStone,
                 "Type": "Upgrade",
-                "description": "Drag onto any Equip to apply. +8 Mystery Stat. Success Chance; 30% Uses up 1 slots only if Successful. WARNING:Mystery Stat has a chance to be Negative, and reduce stats! ",
+                "description": "Drag onto any Equip to apply. +10 Mystery Stat. Success Chance; 50% Uses up 1 slots only if Successful. WARNING:Mystery Stat has a chance to be Negative, and reduce stats! ",
                 "tier": "III"
+            }),
+        new BaseItemBase("StoneZ4", <StoneItemModel>{
+                "internalName": "StoneZ4",
+                "displayName": "Mystery Upgrade Stone IV",
+                "sellPrice": 777,
+                "typeGen": TypeGenEnum.dStone,
+                "Type": "Upgrade",
+                "description": "Drag onto any Equip to apply. +20 Mystery Stat. Success Chance; 40% Uses up 1 slots only if Successful. WARNING:Mystery Stat has a chance to be Negative, and reduce stats! ",
+                "tier": "IV"
             }),
         new BaseItemBase("StonePremSTR", <StoneItemModel>{
                 "internalName": "StonePremSTR",
@@ -10852,6 +11594,36 @@ export const initSpecificItemRepo = () => {
                 "order": 25,
                 "level": 1
             }),
+        new BaseItemBase("InvStorage26", <ChestItemModel>{
+                "internalName": "InvStorage26",
+                "displayName": "Storage Chest 26",
+                "sellPrice": 100000000000000000,
+                "typeGen": TypeGenEnum.aStorageChest,
+                "Type": "Storage",
+                "description": "Hold down to permanently add +9 Slots to your Storage Chest. Can only be used once.",
+                "order": 26,
+                "level": 1
+            }),
+        new BaseItemBase("InvStorage27", <ChestItemModel>{
+                "internalName": "InvStorage27",
+                "displayName": "Storage Chest 27",
+                "sellPrice": 2500000000000000000,
+                "typeGen": TypeGenEnum.aStorageChest,
+                "Type": "Storage",
+                "description": "Hold down to permanently add +9 Slots to your Storage Chest. Can only be used once.",
+                "order": 27,
+                "level": 1
+            }),
+        new BaseItemBase("InvStorage28", <ChestItemModel>{
+                "internalName": "InvStorage28",
+                "displayName": "Storage Chest 28",
+                "sellPrice": 7000000000000000000000,
+                "typeGen": TypeGenEnum.aStorageChest,
+                "Type": "Storage",
+                "description": "Hold down to permanently add +10 Slots to your Storage Chest. Can only be used once.",
+                "order": 28,
+                "level": 1
+            }),
         new BaseItemBase("InvStorage31", <ChestItemModel>{
                 "internalName": "InvStorage31",
                 "displayName": "Storage Chest 90",
@@ -11000,6 +11772,26 @@ export const initSpecificItemRepo = () => {
                 "Type": "Storage",
                 "description": "Hold down to permanently add +4 Slots to your Storage Chest. Can only be used once.",
                 "order": 103,
+                "level": 1
+            }),
+        new BaseItemBase("InvStorageD", <ChestItemModel>{
+                "internalName": "InvStorageD",
+                "displayName": "Woodlin Chest",
+                "sellPrice": 1000,
+                "typeGen": TypeGenEnum.aStorageChest,
+                "Type": "Storage",
+                "description": "Hold down to permanently add +4 Slots to your Storage Chest. Can only be used once.",
+                "order": 104,
+                "level": 1
+            }),
+        new BaseItemBase("InvStorageN", <ChestItemModel>{
+                "internalName": "InvStorageN",
+                "displayName": "Woodlin Chest",
+                "sellPrice": 1000,
+                "typeGen": TypeGenEnum.aStorageChest,
+                "Type": "Storage",
+                "description": "Hold down to permanently add +3 Slots to your Storage Chest. Can only be used once.",
+                "order": 105,
                 "level": 1
             }),
         new BaseItemBase("Line1", <FishingTKItemModel>{
@@ -11601,6 +12393,94 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Bits",
                 "description": "Bits "
+            }),
+        new BaseItemBase("W6item0", <DescItemModel>{
+                "internalName": "W6item0",
+                "displayName": "Strung Jewels",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Sail Treasure",
+                "description": "Jade "
+            }),
+        new BaseItemBase("W6item1", <DescItemModel>{
+                "internalName": "W6item1",
+                "displayName": "Strung Jewels",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Sail Treasure",
+                "description": "Sail Treasure "
+            }),
+        new BaseItemBase("W6item2", <DescItemModel>{
+                "internalName": "W6item2",
+                "displayName": "Strung Jewels",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Sail Treasure",
+                "description": "Sail Treasure "
+            }),
+        new BaseItemBase("W6item3", <DescItemModel>{
+                "internalName": "W6item3",
+                "displayName": "Strung Jewels",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Sail Treasure",
+                "description": "Sail Treasure "
+            }),
+        new BaseItemBase("W6item4", <DescItemModel>{
+                "internalName": "W6item4",
+                "displayName": "Strung Jewels",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Sail Treasure",
+                "description": "Sail Treasure "
+            }),
+        new BaseItemBase("W6item5", <DescItemModel>{
+                "internalName": "W6item5",
+                "displayName": "Strung Jewels",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Sail Treasure",
+                "description": "Sail Treasure "
+            }),
+        new BaseItemBase("W6item6", <DescItemModel>{
+                "internalName": "W6item6",
+                "displayName": "Strung Jewels",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Sail Treasure",
+                "description": "Sail Treasure "
+            }),
+        new BaseItemBase("W6item7", <DescItemModel>{
+                "internalName": "W6item7",
+                "displayName": "Strung Jewels",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Sail Treasure",
+                "description": "Sail Treasure "
+            }),
+        new BaseItemBase("W6item8", <DescItemModel>{
+                "internalName": "W6item8",
+                "displayName": "Strung Jewels",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Sail Treasure",
+                "description": "Sail Treasure "
+            }),
+        new BaseItemBase("W6item9", <DescItemModel>{
+                "internalName": "W6item9",
+                "displayName": "Strung Jewels",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Sail Treasure",
+                "description": "Sail Treasure "
+            }),
+        new BaseItemBase("W6item10", <DescItemModel>{
+                "internalName": "W6item10",
+                "displayName": "Strung Jewels",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Sail Treasure",
+                "description": "Sail Treasure "
             }),
         new BaseItemBase("Ladle", <DescItemModel>{
                 "internalName": "Ladle",
@@ -12277,6 +13157,14 @@ export const initSpecificItemRepo = () => {
         new BaseItemBase("CardPack6", <DescItemModel>{
                 "internalName": "CardPack6",
                 "displayName": "Smolderin Card Pack",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCardPack,
+                "Type": "Card Pack",
+                "description": "Hold down to open the pack! The cards drop on the ground, make sure to pick them up!! "
+            }),
+        new BaseItemBase("CardPack7", <DescItemModel>{
+                "internalName": "CardPack7",
+                "displayName": "Spirit Card Pack",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.dCardPack,
                 "Type": "Card Pack",
@@ -13225,6 +14113,134 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.bCraft,
                 "Type": "Monster Drop",
                 "description": "Perfect for an Eating Challenge! "
+            }),
+        new BaseItemBase("SpiA1", <DescItemModel>{
+                "internalName": "SpiA1",
+                "displayName": "Leafy Droplet",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "It's more of a gel than a liquid, but strangely when you pull the leaf out it loses its rigidity. "
+            }),
+        new BaseItemBase("SpiA2", <DescItemModel>{
+                "internalName": "SpiA2",
+                "displayName": "Rice Cake",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "A single slice of a rice cake. Despite seemingly being made of 90 percent air, some people really enjoy these. "
+            }),
+        new BaseItemBase("SpiA2b", <DescItemModel>{
+                "internalName": "SpiA2b",
+                "displayName": "Stacked Rice Cake",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "A single slice of a rice cake, but with another single slice of rice cake attached underneath the first single slice of rice! There's also a single slice of orange sauce, if you can call liquid a slice. Want me to say slice again? "
+            }),
+        new BaseItemBase("SpiA3", <DescItemModel>{
+                "internalName": "SpiA3",
+                "displayName": "Bamboo",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "You stole this from a hard working water spirit... but carrying bamboo is not what water is meant to do, so it had it coming, that silly water! "
+            }),
+        new BaseItemBase("SpiA4", <DescItemModel>{
+                "internalName": "SpiA4",
+                "displayName": "Leafy Horn",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "You took the baby troll's beloved horn, but you didn't even have the decency to ask first? I guess MANNERS isn't a skill in Worlds 1 to 5 huh... "
+            }),
+        new BaseItemBase("SpiA5", <DescItemModel>{
+                "internalName": "SpiA5",
+                "displayName": "Wooden Aortic Mass",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "It sits motionless, unbeating, blood not being pumped. It's made of wood, so this doesn't come as a surprise. "
+            }),
+        new BaseItemBase("SpiB1", <DescItemModel>{
+                "internalName": "SpiB1",
+                "displayName": "Leafy Branch",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "Eleven leaves, one branch. If we had 14 more branches, and took off 3 leaves from each branch, how many seconds in total would be wasted figuring out how many leaves there are? 15, cuz there are 120 leaves. "
+            }),
+        new BaseItemBase("SpiB2", <DescItemModel>{
+                "internalName": "SpiB2",
+                "displayName": "Light Lantern",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "I think it says... OTL? One Time Lucky? But I want to be lucky MORE than once... better wipe out some more lantern spirits! "
+            }),
+        new BaseItemBase("SpiB2b", <DescItemModel>{
+                "internalName": "SpiB2b",
+                "displayName": "Dark Lantern",
+                "sellPrice": 1500000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "Oh NO! I know what THAT means, thats AWFUL!! That puts the light lantern in context, thats for sure... "
+            }),
+        new BaseItemBase("SpiB3", <DescItemModel>{
+                "internalName": "SpiB3",
+                "displayName": "Troll Flower",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "Now I know what you're thinking, and yes it is indeed part of its head and not a hat. "
+            }),
+        new BaseItemBase("SpiB4", <DescItemModel>{
+                "internalName": "SpiB4",
+                "displayName": "Chopped Leek",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "Wow ok this is way more gruesome with context than without... "
+            }),
+        new BaseItemBase("SpiC1", <DescItemModel>{
+                "internalName": "SpiC1",
+                "displayName": "Shattered Ceramic",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "I'm falllling to pieeeeceesssss, yeahhh... "
+            }),
+        new BaseItemBase("SpiC2", <DescItemModel>{
+                "internalName": "SpiC2",
+                "displayName": "Eviscerated Chunk",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "Ouch! I don't think we have a big enough bandaid for the poor fella! "
+            }),
+        new BaseItemBase("SpiD1", <DescItemModel>{
+                "internalName": "SpiD1",
+                "displayName": "Royal Yolk",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "Sometimes it's fun to poke at the yellow outisde and watch the yellow insides ooze out... "
+            }),
+        new BaseItemBase("SpiD2", <DescItemModel>{
+                "internalName": "SpiD2",
+                "displayName": "Royal Fabric",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "Now I know what you're thinking, and yes it is indeed part of its elegant hat and not part of its head. "
+            }),
+        new BaseItemBase("SpiD3", <DescItemModel>{
+                "internalName": "SpiD3",
+                "displayName": "Royal Headpiece",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "It shines bright and true, to signify how dope n' epic ninjas are, heck yea. "
             }),
         new BaseItemBase("ObolHyper0", <ObolItemModel>{
                 "internalName": "ObolHyper0",
@@ -15708,6 +16724,24 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 20000: Ores, Bars, Barrels",
                 "level": 150
             }),
+        new BaseItemBase("MaxCapBagMi10", <CarryBagItemModel>{
+                "internalName": "MaxCapBagMi10",
+                "displayName": "Gargantuan Mining Pouch",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aCarryBag,
+                "Type": "Carry Bag",
+                "description": "Hold down on this bag to increase the Carry Capacity of the following items to 25000: Ores, Bars, Barrels",
+                "level": 350
+            }),
+        new BaseItemBase("MaxCapBagMi11", <CarryBagItemModel>{
+                "internalName": "MaxCapBagMi11",
+                "displayName": "Herculean Mining Pouch",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aCarryBag,
+                "Type": "Carry Bag",
+                "description": "Hold down on this bag to increase the Carry Capacity of the following items to 30000: Ores, Bars, Barrels",
+                "level": 500
+            }),
         new BaseItemBase("MaxCapBagT1", <CarryBagItemModel>{
                 "internalName": "MaxCapBagT1",
                 "displayName": "Miniature Choppin Pouch",
@@ -15797,6 +16831,24 @@ export const initSpecificItemRepo = () => {
                 "Type": "Carry Bag",
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 20000: Logs, Leaves",
                 "level": 150
+            }),
+        new BaseItemBase("MaxCapBagT10", <CarryBagItemModel>{
+                "internalName": "MaxCapBagT10",
+                "displayName": "Gargantuan Chopping Pouch",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aCarryBag,
+                "Type": "Carry Bag",
+                "description": "Hold down on this bag to increase the Carry Capacity of the following items to 25000: Logs, Leaves",
+                "level": 350
+            }),
+        new BaseItemBase("MaxCapBagT11", <CarryBagItemModel>{
+                "internalName": "MaxCapBagT11",
+                "displayName": "Herculean Chopping Pouch",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aCarryBag,
+                "Type": "Carry Bag",
+                "description": "Hold down on this bag to increase the Carry Capacity of the following items to 30000: Logs, Leaves",
+                "level": 500
             }),
         new BaseItemBase("MaxCapBag6", <CarryBagItemModel>{
                 "internalName": "MaxCapBag6",
@@ -15888,6 +16940,24 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 20000: Health Food, Boost Food, Golden Food",
                 "level": 150
             }),
+        new BaseItemBase("MaxCapBagF10", <CarryBagItemModel>{
+                "internalName": "MaxCapBagF10",
+                "displayName": "Gargantuan Food Pouch",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aCarryBag,
+                "Type": "Carry Bag",
+                "description": "Hold down on this bag to increase the Carry Capacity of the following items to 25000: Health Food, Boost Food, Golden Food",
+                "level": 350
+            }),
+        new BaseItemBase("MaxCapBagF11", <CarryBagItemModel>{
+                "internalName": "MaxCapBagF11",
+                "displayName": "Herculean Food Pouch",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aCarryBag,
+                "Type": "Carry Bag",
+                "description": "Hold down on this bag to increase the Carry Capacity of the following items to 30000: Health Food, Boost Food, Golden Food",
+                "level": 500
+            }),
         new BaseItemBase("MaxCapBagM1", <CarryBagItemModel>{
                 "internalName": "MaxCapBagM1",
                 "displayName": "Mini Materials Pouch",
@@ -15977,6 +17047,24 @@ export const initSpecificItemRepo = () => {
                 "Type": "Carry Bag",
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 20000: Monster Parts, Smithing Production Items",
                 "level": 150
+            }),
+        new BaseItemBase("MaxCapBagM11", <CarryBagItemModel>{
+                "internalName": "MaxCapBagM11",
+                "displayName": "Gargantuan Matty Pouch",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aCarryBag,
+                "Type": "Carry Bag",
+                "description": "Hold down on this bag to increase the Carry Capacity of the following items to 25000: Monster Parts, Smithing Production Items",
+                "level": 350
+            }),
+        new BaseItemBase("MaxCapBagM12", <CarryBagItemModel>{
+                "internalName": "MaxCapBagM12",
+                "displayName": "Herculean Matty Pouch",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aCarryBag,
+                "Type": "Carry Bag",
+                "description": "Hold down on this bag to increase the Carry Capacity of the following items to 30000: Monster Parts, Smithing Production Items",
+                "level": 500
             }),
         new BaseItemBase("MaxCapBagFi0", <CarryBagItemModel>{
                 "internalName": "MaxCapBagFi0",
@@ -16068,6 +17156,24 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 20000: Fish",
                 "level": 150
             }),
+        new BaseItemBase("MaxCapBagFi10", <CarryBagItemModel>{
+                "internalName": "MaxCapBagFi10",
+                "displayName": "Gargantuan Fish Pouch",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aCarryBag,
+                "Type": "Carry Bag",
+                "description": "Hold down on this bag to increase the Carry Capacity of the following items to 25000: Fish",
+                "level": 350
+            }),
+        new BaseItemBase("MaxCapBagFi11", <CarryBagItemModel>{
+                "internalName": "MaxCapBagFi11",
+                "displayName": "Herculean Fish Pouch",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aCarryBag,
+                "Type": "Carry Bag",
+                "description": "Hold down on this bag to increase the Carry Capacity of the following items to 30000: Fish",
+                "level": 500
+            }),
         new BaseItemBase("MaxCapBagB0", <CarryBagItemModel>{
                 "internalName": "MaxCapBagB0",
                 "displayName": "Miniature Bug Pouch",
@@ -16158,6 +17264,24 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 20000: Bugs",
                 "level": 150
             }),
+        new BaseItemBase("MaxCapBagB10", <CarryBagItemModel>{
+                "internalName": "MaxCapBagB10",
+                "displayName": "Gargantuan Bug Pouch",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aCarryBag,
+                "Type": "Carry Bag",
+                "description": "Hold down on this bag to increase the Carry Capacity of the following items to 25000: Bugs",
+                "level": 350
+            }),
+        new BaseItemBase("MaxCapBagB11", <CarryBagItemModel>{
+                "internalName": "MaxCapBagB11",
+                "displayName": "Herculean Bug Pouch",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aCarryBag,
+                "Type": "Carry Bag",
+                "description": "Hold down on this bag to increase the Carry Capacity of the following items to 30000: Bugs",
+                "level": 500
+            }),
         new BaseItemBase("MaxCapBagTr0", <CarryBagItemModel>{
                 "internalName": "MaxCapBagTr0",
                 "displayName": "Cramped Critter Pouch",
@@ -16239,6 +17363,24 @@ export const initSpecificItemRepo = () => {
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 20000: Critters",
                 "level": 150
             }),
+        new BaseItemBase("MaxCapBagTr9", <CarryBagItemModel>{
+                "internalName": "MaxCapBagTr9",
+                "displayName": "Gargantuan Critta Pouch",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aCarryBag,
+                "Type": "Carry Bag",
+                "description": "Hold down on this bag to increase the Carry Capacity of the following items to 25000: Critters",
+                "level": 350
+            }),
+        new BaseItemBase("MaxCapBagTr10", <CarryBagItemModel>{
+                "internalName": "MaxCapBagTr10",
+                "displayName": "Herculean Critta Pouch",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aCarryBag,
+                "Type": "Carry Bag",
+                "description": "Hold down on this bag to increase the Carry Capacity of the following items to 30000: Critters",
+                "level": 500
+            }),
         new BaseItemBase("MaxCapBagS0", <CarryBagItemModel>{
                 "internalName": "MaxCapBagS0",
                 "displayName": "Cramped Soul Pouch",
@@ -16319,6 +17461,24 @@ export const initSpecificItemRepo = () => {
                 "Type": "Carry Bag",
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 20000: Souls",
                 "level": 150
+            }),
+        new BaseItemBase("MaxCapBagS9", <CarryBagItemModel>{
+                "internalName": "MaxCapBagS9",
+                "displayName": "Gargantuan Soul Pouch",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aCarryBag,
+                "Type": "Carry Bag",
+                "description": "Hold down on this bag to increase the Carry Capacity of the following items to 25000: Souls",
+                "level": 350
+            }),
+        new BaseItemBase("MaxCapBagS10", <CarryBagItemModel>{
+                "internalName": "MaxCapBagS10",
+                "displayName": "Herculean Soul Pouch",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aCarryBag,
+                "Type": "Carry Bag",
+                "description": "Hold down on this bag to increase the Carry Capacity of the following items to 30000: Souls",
+                "level": 500
             }),
         new BaseItemBase("Key1", <DescItemModel>{
                 "internalName": "Key1",
@@ -17860,6 +19020,50 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 42,
                 "Speed": 7
             }),
+        new BaseItemBase("EquipmentTools14", <ToolItemModel>{
+                "internalName": "EquipmentTools14",
+                "displayName": "Marbiglass Pickaxe",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aPick,
+                "Type": "Pickaxe",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 80,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 42,
+                "AGI": 20,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 30,
+                "miscUp1": "25% Mining Efficincy",
+                "miscUp2": "10% Money",
+                "Upgrade_Slots_Left": 6,
+                "Skill": "Mining",
+                "Skill_Power": 51,
+                "Speed": 7
+            }),
+        new BaseItemBase("EquipmentTools15", <ToolItemModel>{
+                "internalName": "EquipmentTools15",
+                "displayName": "Destroyer of the Mollo Gomme",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aPick,
+                "Type": "Pickaxe",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 100,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 55,
+                "AGI": 25,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 35,
+                "miscUp1": "35% Mining Efficincy",
+                "miscUp2": "10% Drop Chance",
+                "Upgrade_Slots_Left": 7,
+                "Skill": "Mining",
+                "Skill_Power": 62,
+                "Speed": 8
+            }),
         new BaseItemBase("EquipmentTools10", <ToolItemModel>{
                 "internalName": "EquipmentTools10",
                 "displayName": "Poopy Pickaxe",
@@ -18126,7 +19330,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("EquipmentToolsHatchet9", <ToolItemModel>{
                 "internalName": "EquipmentToolsHatchet9",
-                "displayName": "Dreadlo Eviscerator",
+                "displayName": "Dreadlo Hatchet",
                 "sellPrice": 200,
                 "typeGen": TypeGenEnum.aHatchet,
                 "Type": "Hatchet",
@@ -18146,14 +19350,14 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 40,
                 "Speed": 7
             }),
-        new BaseItemBase("EquipmentToolsHatchet10", <ToolItemModel>{
-                "internalName": "EquipmentToolsHatchet10",
-                "displayName": "Annihilator of the Yggdrasil",
+        new BaseItemBase("EquipmentToolsHatchet12", <ToolItemModel>{
+                "internalName": "EquipmentToolsHatchet12",
+                "displayName": "Marbiglass Hatchet",
                 "sellPrice": 200,
                 "typeGen": TypeGenEnum.aHatchet,
                 "Type": "Hatchet",
                 "lvReqToCraft": 15,
-                "lvReqToEquip": 80,
+                "lvReqToEquip": 75,
                 "Class": ClassTypeEnum.All,
                 "Weapon_Power": 0,
                 "STR": 5,
@@ -18161,11 +19365,33 @@ export const initSpecificItemRepo = () => {
                 "WIS": 40,
                 "LUK": 5,
                 "Defence": 0,
-                "miscUp1": "",
-                "miscUp2": "00",
+                "miscUp1": "5% Chop Efficiency",
+                "miscUp2": "10% Money",
                 "Upgrade_Slots_Left": 6,
                 "Skill": "Choppin",
                 "Skill_Power": 50,
+                "Speed": 8
+            }),
+        new BaseItemBase("EquipmentToolsHatchet10", <ToolItemModel>{
+                "internalName": "EquipmentToolsHatchet10",
+                "displayName": "Annihilator of the Yggdrasil",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aHatchet,
+                "Type": "Hatchet",
+                "lvReqToCraft": 15,
+                "lvReqToEquip": 90,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 8,
+                "AGI": 8,
+                "WIS": 50,
+                "LUK": 8,
+                "Defence": 0,
+                "miscUp1": "12% Chop Efficiency",
+                "miscUp2": "10% Drop Chance",
+                "Upgrade_Slots_Left": 7,
+                "Skill": "Choppin",
+                "Skill_Power": 62,
                 "Speed": 8
             }),
         new BaseItemBase("EquipmentToolsHatchet11", <ToolItemModel>{
@@ -18410,6 +19636,50 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 60,
                 "Speed": 7
             }),
+        new BaseItemBase("FishingRod11", <ToolItemModel>{
+                "internalName": "FishingRod11",
+                "displayName": "Marbiglass Rod",
+                "sellPrice": 10000,
+                "typeGen": TypeGenEnum.aFishingRod,
+                "Type": "Fishing Rod",
+                "lvReqToCraft": 15,
+                "lvReqToEquip": 75,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 50,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "5% Fishin Efficincy",
+                "miscUp2": "10% Money",
+                "Upgrade_Slots_Left": 6,
+                "Skill": "Fishing",
+                "Skill_Power": 72,
+                "Speed": 7
+            }),
+        new BaseItemBase("FishingRod12", <ToolItemModel>{
+                "internalName": "FishingRod12",
+                "displayName": "Angler of the Iliunne",
+                "sellPrice": 10000,
+                "typeGen": TypeGenEnum.aFishingRod,
+                "Type": "Fishing Rod",
+                "lvReqToCraft": 15,
+                "lvReqToEquip": 90,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 75,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "12% Fishin Efficincy",
+                "miscUp2": "10% Drop Chance",
+                "Upgrade_Slots_Left": 7,
+                "Skill": "Fishing",
+                "Skill_Power": 85,
+                "Speed": 8
+            }),
         new BaseItemBase("CatchingNet1", <ToolItemModel>{
                 "internalName": "CatchingNet1",
                 "displayName": "Bug Net",
@@ -18630,6 +19900,50 @@ export const initSpecificItemRepo = () => {
                 "Skill_Power": 65,
                 "Speed": 7
             }),
+        new BaseItemBase("CatchingNet11", <ToolItemModel>{
+                "internalName": "CatchingNet11",
+                "displayName": "Marbiglass Netting",
+                "sellPrice": 17000,
+                "typeGen": TypeGenEnum.aBugNet,
+                "Type": "Bug Catching Net",
+                "lvReqToCraft": 1,
+                "lvReqToEquip": 80,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 15,
+                "AGI": 32,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "5% Catch Efficincy",
+                "miscUp2": "15% Money",
+                "Upgrade_Slots_Left": 6,
+                "Skill": "Catching",
+                "Skill_Power": 78,
+                "Speed": 7
+            }),
+        new BaseItemBase("CatchingNet12", <ToolItemModel>{
+                "internalName": "CatchingNet12",
+                "displayName": "Wrangler of the Qoxzul",
+                "sellPrice": 17000,
+                "typeGen": TypeGenEnum.aBugNet,
+                "Type": "Bug Catching Net",
+                "lvReqToCraft": 1,
+                "lvReqToEquip": 95,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 20,
+                "AGI": 45,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "12% Catch Efficincy",
+                "miscUp2": "10% Drop Chance",
+                "Upgrade_Slots_Left": 7,
+                "Skill": "Catching",
+                "Skill_Power": 92,
+                "Speed": 8
+            }),
         new BaseItemBase("TrapBoxSet1", <TrapBoxItemModel>{
                 "internalName": "TrapBoxSet1",
                 "displayName": "Cardboard Traps",
@@ -18846,7 +20160,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("TrapBoxSet8", <TrapBoxItemModel>{
                 "internalName": "TrapBoxSet8",
-                "displayName": "Egalitarian Royal Traps",
+                "displayName": "Egalitarian Traps",
                 "sellPrice": 6,
                 "typeGen": TypeGenEnum.aTrap,
                 "Type": "Trap Box Set",
@@ -18864,6 +20178,70 @@ export const initSpecificItemRepo = () => {
                 "Upgrade_Slots_Left": 4,
                 "Skill": "Trapping",
                 "Skill_Power": 55,
+                "Speed": 4,
+                "trapBoxData": <TrapBoxModel>{
+                    "times": [
+                        <TrapBoxTimeModel>{"time": 1200, "qtyX": 2, "expX": 0, "shinyX": 4},
+                        <TrapBoxTimeModel>{"time": 3600, "qtyX": 4, "expX": 0, "shinyX": 8},
+                        <TrapBoxTimeModel>{"time": 36000, "qtyX": 21, "expX": 0, "shinyX": 38},
+                        <TrapBoxTimeModel>{"time": 144000, "qtyX": 70, "expX": 0, "shinyX": 125},
+                        <TrapBoxTimeModel>{"time": 576000, "qtyX": 250, "expX": 0, "shinyX": 375},
+                        <TrapBoxTimeModel>{"time": 2419000, "qtyX": 550, "expX": 0, "shinyX": 1150}
+                    ]
+                }
+            }),
+        new BaseItemBase("TrapBoxSet9", <TrapBoxItemModel>{
+                "internalName": "TrapBoxSet9",
+                "displayName": "Forbidden Traps",
+                "sellPrice": 6,
+                "typeGen": TypeGenEnum.aTrap,
+                "Type": "Trap Box Set",
+                "lvReqToCraft": 1,
+                "lvReqToEquip": 90,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 56,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "15% Money",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "Trapping",
+                "Skill_Power": 67,
+                "Speed": 4,
+                "trapBoxData": <TrapBoxModel>{
+                    "times": [
+                        <TrapBoxTimeModel>{"time": 1200, "qtyX": 2, "expX": 0, "shinyX": 4},
+                        <TrapBoxTimeModel>{"time": 3600, "qtyX": 4, "expX": 0, "shinyX": 8},
+                        <TrapBoxTimeModel>{"time": 36000, "qtyX": 21, "expX": 0, "shinyX": 38},
+                        <TrapBoxTimeModel>{"time": 144000, "qtyX": 70, "expX": 0, "shinyX": 125},
+                        <TrapBoxTimeModel>{"time": 576000, "qtyX": 250, "expX": 0, "shinyX": 375},
+                        <TrapBoxTimeModel>{"time": 2419000, "qtyX": 550, "expX": 0, "shinyX": 1150}
+                    ]
+                }
+            }),
+        new BaseItemBase("TrapBoxSet10", <TrapBoxItemModel>{
+                "internalName": "TrapBoxSet10",
+                "displayName": "Containment of the Zrgyios",
+                "sellPrice": 6,
+                "typeGen": TypeGenEnum.aTrap,
+                "Type": "Trap Box Set",
+                "lvReqToCraft": 1,
+                "lvReqToEquip": 120,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 80,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "4% All Afk Gain",
+                "miscUp2": "10% Drop Chance",
+                "Upgrade_Slots_Left": 6,
+                "Skill": "Trapping",
+                "Skill_Power": 80,
                 "Speed": 4,
                 "trapBoxData": <TrapBoxModel>{
                     "times": [
@@ -19083,6 +20461,52 @@ export const initSpecificItemRepo = () => {
                 "Speed": 9,
                 "maxCharge": 3000
             }),
+        new BaseItemBase("WorshipSkull10", <SkullItemModel>{
+                "internalName": "WorshipSkull10",
+                "displayName": "Cultist Skull",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.aSkull,
+                "Type": "Worship Skull",
+                "lvReqToCraft": 3000,
+                "lvReqToEquip": 90,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "15% Money",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "Worship",
+                "Skill_Power": 55,
+                "Speed": 9,
+                "maxCharge": 3000
+            }),
+        new BaseItemBase("WorshipSkull11", <SkullItemModel>{
+                "internalName": "WorshipSkull11",
+                "displayName": "Crystal Skull of Esquire Vnoze",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.aSkull,
+                "Type": "Worship Skull",
+                "lvReqToCraft": 3000,
+                "lvReqToEquip": 120,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "4% All Afk Gain",
+                "miscUp2": "10% Drop Chance",
+                "Upgrade_Slots_Left": 6,
+                "Skill": "Worship",
+                "Skill_Power": 55,
+                "Speed": 10,
+                "maxCharge": 3000
+            }),
         new BaseItemBase("DNAgun0", <ToolItemModel>{
                 "internalName": "DNAgun0",
                 "displayName": "Sappy DNA Splicer",
@@ -19282,6 +20706,22 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Health Food",
                 "description": "Auto-Used when your health goes below 50%. Restores 12500 HP. Has a 20 second Cooldown. "
+            }),
+        new BaseItemBase("FoodHealth16", <ACItemModel>{
+                "internalName": "FoodHealth16",
+                "displayName": "Raw Nigiri",
+                "sellPrice": 70000,
+                "typeGen": TypeGenEnum.cFood,
+                "Type": "Health Food",
+                "description": "Auto-Used when your health goes below 50%. Restores 20000 HP. Has a 20 second Cooldown. "
+            }),
+        new BaseItemBase("FoodHealth17", <ACItemModel>{
+                "internalName": "FoodHealth17",
+                "displayName": "Dumpling",
+                "sellPrice": 500000,
+                "typeGen": TypeGenEnum.cFood,
+                "Type": "Health Food",
+                "description": "Auto-Used when your health goes below 50%. Restores 40000 HP. Has a 20 second Cooldown. "
             }),
         new BaseItemBase("FoodHealth5", <ACItemModel>{
                 "internalName": "FoodHealth5",
@@ -19742,6 +21182,24 @@ export const initSpecificItemRepo = () => {
                 "description": "Claiming AFK gives Sailing AFK time [% chance.. Golden foods are never consumed.",
                 "goldenFoodData": <GoldenFoodDataModel>{"effect": "Claiming AFK gives Sailing AFK time [% chance.", "amount": 23}
             }),
+        new BaseItemBase("FoodG11", <GoldenFoodItemModel>{
+                "internalName": "FoodG11",
+                "displayName": "Golden Nigiri",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.cFood,
+                "Type": "Golden Food",
+                "description": "Increases Class EXP gain. Golden foods are never consumed.",
+                "goldenFoodData": <GoldenFoodDataModel>{"effect": "Increases Class EXP gain by [%.", "amount": 40}
+            }),
+        new BaseItemBase("FoodG12", <GoldenFoodItemModel>{
+                "internalName": "FoodG12",
+                "displayName": "Golden Dumpling",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.cFood,
+                "Type": "Golden Food",
+                "description": "Claiming all AFK Gains rate. Golden foods are never consumed.",
+                "goldenFoodData": <GoldenFoodDataModel>{"effect": "Claiming all AFK Gains rate by [%.", "amount": 4}
+            }),
         new BaseItemBase("ButterBar", <GoldenFoodItemModel>{
                 "internalName": "ButterBar",
                 "displayName": "Butter Bar",
@@ -19903,6 +21361,14 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "What have they done to ya BobJoe? "
             }),
+        new BaseItemBase("BoneJoePickle", <DescItemModel>{
+                "internalName": "BoneJoePickle",
+                "displayName": "BoneJoePickle",
+                "sellPrice": 4000000000000,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "He cackles, he spooks, and he... multiplies miniboss HP by 1.10x!? And he STACKS with other BoneJoePickles??! "
+            }),
         new BaseItemBase("Quest1", <DescItemModel>{
                 "internalName": "Quest1",
                 "displayName": "Mining Certificate",
@@ -19942,6 +21408,14 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
                 "description": "Restores power to the Magma Portal in the galaxy town, allowing travel to World 5! "
+            }),
+        new BaseItemBase("Crystal5", <DescItemModel>{
+                "internalName": "Crystal5",
+                "displayName": "Spirit Diamond",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "Restores power to the Spirit Portal in the magma rivertown, allowing travel to World 6! "
             }),
         new BaseItemBase("PeanutS", <DescItemModel>{
                 "internalName": "PeanutS",
@@ -20647,6 +22121,30 @@ export const initSpecificItemRepo = () => {
                 "Type": "Event Box",
                 "description": "Hold to open! Contains a random Falloween Event goodie, including 3 limited time Monster Masks, check Patch Notes in Discord or Steam for info! Also, if you open 500 Treats you'll get the Falloween Event NAMETAG! "
             }),
+        new BaseItemBase("Quest80", <DescItemModel>{
+                "internalName": "Quest80",
+                "displayName": "Crop Transfer Ticket",
+                "sellPrice": 100000000000000,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Usable",
+                "description": "Drop this on the Legumulyte (found deep in Bamboo Forest "
+            }),
+        new BaseItemBase("Quest81", <DescItemModel>{
+                "internalName": "Quest81",
+                "displayName": "Compost Bag",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Farm Compost",
+                "description": "Hold down instantly gain 4 Hours of Farming Progress! "
+            }),
+        new BaseItemBase("Quest82", <DescItemModel>{
+                "internalName": "Quest82",
+                "displayName": "Summoner Stone",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Summoner Stone",
+                "description": "Hold down instantly gain 4 Hours of Summoning Essence Generation! "
+            }),
         new BaseItemBase("EquipmentSmithingTabs2", <DescItemModel>{
                 "internalName": "EquipmentSmithingTabs2",
                 "displayName": "Anvil Tab 2",
@@ -20686,6 +22184,14 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Anvil Expansion",
                 "description": "Unlocks the 6th tab of craftable items for all anvils! "
+            }),
+        new BaseItemBase("EquipmentSmithingTabs7", <DescItemModel>{
+                "internalName": "EquipmentSmithingTabs7",
+                "displayName": "Anvil Tab 7",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Anvil Expansion",
+                "description": "Unlocks the 7th tab of craftable items for all anvils! "
             }),
         new BaseItemBase("EquipmentStatues1", <StatueItemModel>{
                 "internalName": "EquipmentStatues1",
@@ -20933,9 +22439,39 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 10,
                 "typeGen": TypeGenEnum.dStatueStone,
                 "Type": "Statue",
-                "description": "This statue does not actually function as a boat, and will sink as youd expect a large piece of stone would. ",
+                "description": "This statue does not actually function as a boat, and will sink immediately, as youd expect a large piece of stone would. ",
                 "bonus": "%Sailing Spd",
                 "statueData": <StatueDataModel>{"name": "Boat", "effect": "%@Sailing Spd", "dk": 160, "bonus": 0.5}
+            }),
+        new BaseItemBase("EquipmentStatues26", <StatueItemModel>{
+                "internalName": "EquipmentStatues26",
+                "displayName": "Compost Statue",
+                "sellPrice": 10,
+                "typeGen": TypeGenEnum.dStatueStone,
+                "Type": "Statue",
+                "description": "This statue looks exactly like the Compost pot in the Floating Gardens of the Spirit Valley town. ",
+                "bonus": "%Farming Exp",
+                "statueData": <StatueDataModel>{"name": "Compost", "effect": "%@Farming Exp", "dk": 75, "bonus": 0.4}
+            }),
+        new BaseItemBase("EquipmentStatues27", <StatueItemModel>{
+                "internalName": "EquipmentStatues27",
+                "displayName": "Stealth Statue",
+                "sellPrice": 10,
+                "typeGen": TypeGenEnum.dStatueStone,
+                "Type": "Statue",
+                "description": "This statue was crafted in the image and likeness of the legendary Gray Fox. The resemblance to your meager stick figure bodies is purely coincidental. ",
+                "bonus": "%Stealth",
+                "statueData": <StatueDataModel>{"name": "Stealth", "effect": "%@Stealth", "dk": 185, "bonus": 0.3}
+            }),
+        new BaseItemBase("EquipmentStatues28", <StatueItemModel>{
+                "internalName": "EquipmentStatues28",
+                "displayName": "Essence Statue",
+                "sellPrice": 10,
+                "typeGen": TypeGenEnum.dStatueStone,
+                "Type": "Statue",
+                "description": "This statue, despite being a grey brownish colour, actually helps generate white essence. It's weird and quirkly like that... ",
+                "bonus": "%White Ess",
+                "statueData": <StatueDataModel>{"name": "Essence", "effect": "%@White Ess", "dk": 160, "bonus": 0.6}
             }),
         new BaseItemBase("PureWater", <DescItemModel>{
                 "internalName": "PureWater",
@@ -20995,7 +22531,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchA1", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchA1",
-                "displayName": "Boxing Gloves",
+                "displayName": "Boxing Gloves I",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21016,7 +22552,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchA2", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchA2",
-                "displayName": "Boxing Gloves",
+                "displayName": "Boxing Gloves II",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21037,7 +22573,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchA3", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchA3",
-                "displayName": "Boxing Gloves",
+                "displayName": "Boxing Gloves III",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21058,7 +22594,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchA4", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchA4",
-                "displayName": "Boxing Gloves",
+                "displayName": "Boxing Gloves IV",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21079,7 +22615,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchA5", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchA5",
-                "displayName": "Boxing Gloves",
+                "displayName": "Boxing Gloves V",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21100,7 +22636,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchB1", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchB1",
-                "displayName": "The Stingers",
+                "displayName": "The Stingers I",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21121,7 +22657,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchB2", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchB2",
-                "displayName": "The Stingers",
+                "displayName": "The Stingers II",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21142,7 +22678,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchB3", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchB3",
-                "displayName": "The Stingers",
+                "displayName": "The Stingers III",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21163,7 +22699,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchB4", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchB4",
-                "displayName": "The Stingers",
+                "displayName": "The Stingers IV",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21184,7 +22720,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchB5", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchB5",
-                "displayName": "The Stingers",
+                "displayName": "The Stingers V",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21205,7 +22741,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchC1", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchC1",
-                "displayName": "Bandage Wraps",
+                "displayName": "Bandage Wraps I",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21226,7 +22762,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchC2", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchC2",
-                "displayName": "Bandage Wraps",
+                "displayName": "Bandage Wraps II",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21247,7 +22783,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchC3", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchC3",
-                "displayName": "Bandage Wraps",
+                "displayName": "Bandage Wraps III",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21268,7 +22804,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchC4", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchC4",
-                "displayName": "Bandage Wraps",
+                "displayName": "Bandage Wraps IV",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21289,7 +22825,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchC5", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchC5",
-                "displayName": "Bandage Wraps",
+                "displayName": "Bandage Wraps V",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21310,7 +22846,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchD1", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchD1",
-                "displayName": "Uninflated Glove",
+                "displayName": "Uninflated Glove I",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21331,7 +22867,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchD2", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchD2",
-                "displayName": "Uninflated Glove",
+                "displayName": "Uninflated Glove II",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21352,7 +22888,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchD3", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchD3",
-                "displayName": "Uninflated Glove",
+                "displayName": "Uninflated Glove III",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21373,7 +22909,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchD4", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchD4",
-                "displayName": "Uninflated Glove",
+                "displayName": "Uninflated Glove IV",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21394,7 +22930,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchD5", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchD5",
-                "displayName": "Uninflated Glove",
+                "displayName": "Uninflated Glove V",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21415,7 +22951,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchE1", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchE1",
-                "displayName": "Eclectic Ordeal",
+                "displayName": "Eclectic Ordeal I",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21436,7 +22972,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchE2", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchE2",
-                "displayName": "Eclectic Ordeal",
+                "displayName": "Eclectic Ordeal II",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21457,7 +22993,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchE3", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchE3",
-                "displayName": "Eclectic Ordeal",
+                "displayName": "Eclectic Ordeal III",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21478,7 +23014,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchE4", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchE4",
-                "displayName": "Eclectic Ordeal",
+                "displayName": "Eclectic Ordeal IV",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21499,7 +23035,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchE5", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchE5",
-                "displayName": "Eclectic Ordeal",
+                "displayName": "Eclectic Ordeal V",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21520,7 +23056,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchF1", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchF1",
-                "displayName": "Eclectic Ordeal",
+                "displayName": "Eclectic Ordeal I",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21541,7 +23077,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchF2", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchF2",
-                "displayName": "Eclectic Ordeal",
+                "displayName": "Eclectic Ordeal II",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21562,7 +23098,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchF3", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchF3",
-                "displayName": "Eclectic Ordeal",
+                "displayName": "Eclectic Ordeal III",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21583,7 +23119,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchF4", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchF4",
-                "displayName": "Eclectic Ordeal",
+                "displayName": "Eclectic Ordeal IV",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21604,7 +23140,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponPunchF5", <WeaponItemModel>{
                 "internalName": "DungWeaponPunchF5",
-                "displayName": "Eclectic Ordeal",
+                "displayName": "Eclectic Ordeal V",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Fisticuff",
@@ -21625,7 +23161,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordA1", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordA1",
-                "displayName": "Wooden Spear",
+                "displayName": "Wooden Spear I",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -21646,7 +23182,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordA2", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordA2",
-                "displayName": "Wooden Spear",
+                "displayName": "Wooden Spear II",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -21667,7 +23203,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordA3", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordA3",
-                "displayName": "Wooden Spear",
+                "displayName": "Wooden Spear III",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -21688,7 +23224,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordA4", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordA4",
-                "displayName": "Wooden Spear",
+                "displayName": "Wooden Spear IV",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -21709,7 +23245,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordA5", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordA5",
-                "displayName": "Wooden Spear",
+                "displayName": "Wooden Spear V",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -21730,7 +23266,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordB1", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordB1",
-                "displayName": "Steel Axe",
+                "displayName": "Steel Axe I",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -21751,7 +23287,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordB2", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordB2",
-                "displayName": "Steel Axe",
+                "displayName": "Steel Axe II",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -21772,7 +23308,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordB3", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordB3",
-                "displayName": "Steel Axe",
+                "displayName": "Steel Axe III",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -21793,7 +23329,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordB4", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordB4",
-                "displayName": "Steel Axe",
+                "displayName": "Steel Axe IV",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -21814,7 +23350,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordB5", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordB5",
-                "displayName": "Steel Axe",
+                "displayName": "Steel Axe V",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -21835,7 +23371,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordC1", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordC1",
-                "displayName": "Royal Bayonet",
+                "displayName": "Royal Bayonet I",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -21856,7 +23392,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordC2", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordC2",
-                "displayName": "Royal Bayonet",
+                "displayName": "Royal Bayonet II",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -21877,7 +23413,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordC3", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordC3",
-                "displayName": "Royal Bayonet",
+                "displayName": "Royal Bayonet III",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -21898,7 +23434,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordC4", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordC4",
-                "displayName": "Royal Bayonet",
+                "displayName": "Royal Bayonet IV",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -21919,7 +23455,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordC5", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordC5",
-                "displayName": "Royal Bayonet",
+                "displayName": "Royal Bayonet V",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -21940,7 +23476,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordD1", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordD1",
-                "displayName": "Enforced Slasher",
+                "displayName": "Enforced Slasher I",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -21961,7 +23497,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordD2", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordD2",
-                "displayName": "Enforced Slasher",
+                "displayName": "Enforced Slasher II",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -21982,7 +23518,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordD3", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordD3",
-                "displayName": "Enforced Slasher",
+                "displayName": "Enforced Slasher III",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -22003,7 +23539,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordD4", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordD4",
-                "displayName": "Enforced Slasher",
+                "displayName": "Enforced Slasher IV",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -22024,7 +23560,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordD5", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordD5",
-                "displayName": "Enforced Slasher",
+                "displayName": "Enforced Slasher V",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -22045,7 +23581,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordE1", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordE1",
-                "displayName": "The Ice Breaker",
+                "displayName": "The Ice Breaker I",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -22066,7 +23602,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordE2", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordE2",
-                "displayName": "The Ice Breaker",
+                "displayName": "The Ice Breaker II",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -22087,7 +23623,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordE3", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordE3",
-                "displayName": "The Ice Breaker",
+                "displayName": "The Ice Breaker III",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -22108,7 +23644,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordE4", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordE4",
-                "displayName": "The Ice Breaker",
+                "displayName": "The Ice Breaker IV",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -22129,7 +23665,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordE5", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordE5",
-                "displayName": "The Ice Breaker",
+                "displayName": "The Ice Breaker V",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -22150,7 +23686,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordF1", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordF1",
-                "displayName": "Deuscythe",
+                "displayName": "Deuscythe I",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -22171,7 +23707,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordF2", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordF2",
-                "displayName": "Deuscythe",
+                "displayName": "Deuscythe II",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -22192,7 +23728,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordF3", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordF3",
-                "displayName": "Deuscythe",
+                "displayName": "Deuscythe III",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -22213,7 +23749,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordF4", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordF4",
-                "displayName": "Deuscythe",
+                "displayName": "Deuscythe IV",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -22234,7 +23770,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponSwordF5", <WeaponItemModel>{
                 "internalName": "DungWeaponSwordF5",
-                "displayName": "Deuscythe",
+                "displayName": "Deuscythe V",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Spear",
@@ -22255,7 +23791,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowA1", <WeaponItemModel>{
                 "internalName": "DungWeaponBowA1",
-                "displayName": "Wooden Bow",
+                "displayName": "Wooden Bow I",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22276,7 +23812,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowA2", <WeaponItemModel>{
                 "internalName": "DungWeaponBowA2",
-                "displayName": "Wooden Bow",
+                "displayName": "Wooden Bow II",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22297,7 +23833,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowA3", <WeaponItemModel>{
                 "internalName": "DungWeaponBowA3",
-                "displayName": "Wooden Bow",
+                "displayName": "Wooden Bow III",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22318,7 +23854,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowA4", <WeaponItemModel>{
                 "internalName": "DungWeaponBowA4",
-                "displayName": "Wooden Bow",
+                "displayName": "Wooden Bow IV",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22339,7 +23875,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowA5", <WeaponItemModel>{
                 "internalName": "DungWeaponBowA5",
-                "displayName": "Wooden Bow",
+                "displayName": "Wooden Bow V",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22360,7 +23896,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowB1", <WeaponItemModel>{
                 "internalName": "DungWeaponBowB1",
-                "displayName": "Birch Longbow",
+                "displayName": "Birch Longbow I",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22381,7 +23917,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowB2", <WeaponItemModel>{
                 "internalName": "DungWeaponBowB2",
-                "displayName": "Birch Longbow",
+                "displayName": "Birch Longbow II",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22402,7 +23938,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowB3", <WeaponItemModel>{
                 "internalName": "DungWeaponBowB3",
-                "displayName": "Birch Longbow",
+                "displayName": "Birch Longbow III",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22423,7 +23959,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowB4", <WeaponItemModel>{
                 "internalName": "DungWeaponBowB4",
-                "displayName": "Birch Longbow",
+                "displayName": "Birch Longbow IV",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22444,7 +23980,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowB5", <WeaponItemModel>{
                 "internalName": "DungWeaponBowB5",
-                "displayName": "Birch Longbow",
+                "displayName": "Birch Longbow V",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22465,7 +24001,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowC1", <WeaponItemModel>{
                 "internalName": "DungWeaponBowC1",
-                "displayName": "Spiked Menace",
+                "displayName": "Spiked Menace I",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22486,7 +24022,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowC2", <WeaponItemModel>{
                 "internalName": "DungWeaponBowC2",
-                "displayName": "Spiked Menace",
+                "displayName": "Spiked Menace II",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22507,7 +24043,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowC3", <WeaponItemModel>{
                 "internalName": "DungWeaponBowC3",
-                "displayName": "Spiked Menace",
+                "displayName": "Spiked Menace III",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22528,7 +24064,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowC4", <WeaponItemModel>{
                 "internalName": "DungWeaponBowC4",
-                "displayName": "Spiked Menace",
+                "displayName": "Spiked Menace IV",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22549,7 +24085,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowC5", <WeaponItemModel>{
                 "internalName": "DungWeaponBowC5",
-                "displayName": "Spiked Menace",
+                "displayName": "Spiked Menace V",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22570,7 +24106,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowD1", <WeaponItemModel>{
                 "internalName": "DungWeaponBowD1",
-                "displayName": "Pharoah Bow",
+                "displayName": "Pharoah Bow I",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22591,7 +24127,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowD2", <WeaponItemModel>{
                 "internalName": "DungWeaponBowD2",
-                "displayName": "Pharoah Bow",
+                "displayName": "Pharoah Bow II",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22612,7 +24148,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowD3", <WeaponItemModel>{
                 "internalName": "DungWeaponBowD3",
-                "displayName": "Pharoah Bow",
+                "displayName": "Pharoah Bow III",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22633,7 +24169,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowD4", <WeaponItemModel>{
                 "internalName": "DungWeaponBowD4",
-                "displayName": "Pharoah Bow",
+                "displayName": "Pharoah Bow IV",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22654,7 +24190,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowD5", <WeaponItemModel>{
                 "internalName": "DungWeaponBowD5",
-                "displayName": "Pharoah Bow",
+                "displayName": "Pharoah Bow V",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22675,7 +24211,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowE1", <WeaponItemModel>{
                 "internalName": "DungWeaponBowE1",
-                "displayName": "Blizzard Bow",
+                "displayName": "Blizzard Bow I",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22696,7 +24232,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowE2", <WeaponItemModel>{
                 "internalName": "DungWeaponBowE2",
-                "displayName": "Blizzard Bow",
+                "displayName": "Blizzard Bow II",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22717,7 +24253,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowE3", <WeaponItemModel>{
                 "internalName": "DungWeaponBowE3",
-                "displayName": "Blizzard Bow",
+                "displayName": "Blizzard Bow III",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22738,7 +24274,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowE4", <WeaponItemModel>{
                 "internalName": "DungWeaponBowE4",
-                "displayName": "Blizzard Bow",
+                "displayName": "Blizzard Bow IV",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22759,7 +24295,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowE5", <WeaponItemModel>{
                 "internalName": "DungWeaponBowE5",
-                "displayName": "Blizzard Bow",
+                "displayName": "Blizzard Bow V",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22780,7 +24316,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowF1", <WeaponItemModel>{
                 "internalName": "DungWeaponBowF1",
-                "displayName": "Blackhole Bow",
+                "displayName": "Blackhole Bow I",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22801,7 +24337,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowF2", <WeaponItemModel>{
                 "internalName": "DungWeaponBowF2",
-                "displayName": "Blackhole Bow",
+                "displayName": "Blackhole Bow II",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22822,7 +24358,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowF3", <WeaponItemModel>{
                 "internalName": "DungWeaponBowF3",
-                "displayName": "Blackhole Bow",
+                "displayName": "Blackhole Bow III",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22843,7 +24379,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowF4", <WeaponItemModel>{
                 "internalName": "DungWeaponBowF4",
-                "displayName": "Blackhole Bow",
+                "displayName": "Blackhole Bow IV",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22864,7 +24400,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponBowF5", <WeaponItemModel>{
                 "internalName": "DungWeaponBowF5",
-                "displayName": "Blackhole Bow",
+                "displayName": "Blackhole Bow V",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Bow",
@@ -22885,7 +24421,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandA1", <WeaponItemModel>{
                 "internalName": "DungWeaponWandA1",
-                "displayName": "Gnarled Wand",
+                "displayName": "Gnarled Wand I",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -22906,7 +24442,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandA2", <WeaponItemModel>{
                 "internalName": "DungWeaponWandA2",
-                "displayName": "Gnarled Wand",
+                "displayName": "Gnarled Wand II",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -22927,7 +24463,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandA3", <WeaponItemModel>{
                 "internalName": "DungWeaponWandA3",
-                "displayName": "Gnarled Wand",
+                "displayName": "Gnarled Wand III",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -22948,7 +24484,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandA4", <WeaponItemModel>{
                 "internalName": "DungWeaponWandA4",
-                "displayName": "Gnarled Wand",
+                "displayName": "Gnarled Wand IV",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -22969,7 +24505,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandA5", <WeaponItemModel>{
                 "internalName": "DungWeaponWandA5",
-                "displayName": "Gnarled Wand",
+                "displayName": "Gnarled Wand V",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -22990,7 +24526,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandB1", <WeaponItemModel>{
                 "internalName": "DungWeaponWandB1",
-                "displayName": "Quarterstaff",
+                "displayName": "Quarterstaff I",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -23011,7 +24547,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandB2", <WeaponItemModel>{
                 "internalName": "DungWeaponWandB2",
-                "displayName": "Quarterstaff",
+                "displayName": "Quarterstaff II",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -23032,7 +24568,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandB3", <WeaponItemModel>{
                 "internalName": "DungWeaponWandB3",
-                "displayName": "Quarterstaff",
+                "displayName": "Quarterstaff III",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -23053,7 +24589,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandB4", <WeaponItemModel>{
                 "internalName": "DungWeaponWandB4",
-                "displayName": "Quarterstaff",
+                "displayName": "Quarterstaff IV",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -23074,7 +24610,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandB5", <WeaponItemModel>{
                 "internalName": "DungWeaponWandB5",
-                "displayName": "Quarterstaff",
+                "displayName": "Quarterstaff V",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -23095,7 +24631,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandC1", <WeaponItemModel>{
                 "internalName": "DungWeaponWandC1",
-                "displayName": "Starlight",
+                "displayName": "Starlight I",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -23116,7 +24652,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandC2", <WeaponItemModel>{
                 "internalName": "DungWeaponWandC2",
-                "displayName": "Starlight",
+                "displayName": "Starlight II",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -23137,7 +24673,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandC3", <WeaponItemModel>{
                 "internalName": "DungWeaponWandC3",
-                "displayName": "Starlight",
+                "displayName": "Starlight III",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -23158,7 +24694,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandC4", <WeaponItemModel>{
                 "internalName": "DungWeaponWandC4",
-                "displayName": "Starlight",
+                "displayName": "Starlight IV",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -23179,7 +24715,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandC5", <WeaponItemModel>{
                 "internalName": "DungWeaponWandC5",
-                "displayName": "Starlight",
+                "displayName": "Starlight V",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -23200,7 +24736,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandD1", <WeaponItemModel>{
                 "internalName": "DungWeaponWandD1",
-                "displayName": "Crows Nest",
+                "displayName": "Crows Nest I",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -23221,7 +24757,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandD2", <WeaponItemModel>{
                 "internalName": "DungWeaponWandD2",
-                "displayName": "Crows Nest",
+                "displayName": "Crows Nest II",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -23242,7 +24778,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandD3", <WeaponItemModel>{
                 "internalName": "DungWeaponWandD3",
-                "displayName": "Crows Nest",
+                "displayName": "Crows Nest III",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -23263,7 +24799,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandD4", <WeaponItemModel>{
                 "internalName": "DungWeaponWandD4",
-                "displayName": "Crows Nest",
+                "displayName": "Crows Nest IV",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -23284,7 +24820,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandD5", <WeaponItemModel>{
                 "internalName": "DungWeaponWandD5",
-                "displayName": "Crows Nest",
+                "displayName": "Crows Nest V",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -23305,7 +24841,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandE1", <WeaponItemModel>{
                 "internalName": "DungWeaponWandE1",
-                "displayName": "Spriggly Storm",
+                "displayName": "Spriggly Storm I",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -23326,7 +24862,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandE2", <WeaponItemModel>{
                 "internalName": "DungWeaponWandE2",
-                "displayName": "Spriggly Storm",
+                "displayName": "Spriggly Storm II",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -23347,7 +24883,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandE3", <WeaponItemModel>{
                 "internalName": "DungWeaponWandE3",
-                "displayName": "Spriggly Storm",
+                "displayName": "Spriggly Storm III",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -23368,7 +24904,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandE4", <WeaponItemModel>{
                 "internalName": "DungWeaponWandE4",
-                "displayName": "Spriggly Storm",
+                "displayName": "Spriggly Storm IV",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -23389,7 +24925,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandE5", <WeaponItemModel>{
                 "internalName": "DungWeaponWandE5",
-                "displayName": "Spriggly Storm",
+                "displayName": "Spriggly Storm V",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -23410,7 +24946,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandF1", <WeaponItemModel>{
                 "internalName": "DungWeaponWandF1",
-                "displayName": "Grey Gatsby",
+                "displayName": "Grey Gatsby I",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -23431,7 +24967,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandF2", <WeaponItemModel>{
                 "internalName": "DungWeaponWandF2",
-                "displayName": "Grey Gatsby",
+                "displayName": "Grey Gatsby II",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -23452,7 +24988,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandF3", <WeaponItemModel>{
                 "internalName": "DungWeaponWandF3",
-                "displayName": "Grey Gatsby",
+                "displayName": "Grey Gatsby III",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -23473,7 +25009,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandF4", <WeaponItemModel>{
                 "internalName": "DungWeaponWandF4",
-                "displayName": "Grey Gatsby",
+                "displayName": "Grey Gatsby IV",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -23494,7 +25030,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("DungWeaponWandF5", <WeaponItemModel>{
                 "internalName": "DungWeaponWandF5",
-                "displayName": "Grey Gatsby",
+                "displayName": "Grey Gatsby V",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aWeapon,
                 "Type": "Wand",
@@ -24286,6 +25822,14 @@ export const initSpecificItemRepo = () => {
                 "Type": "Obol Stack",
                 "description": "Hold down and 1 hyper obol will drop at your feet! YOU MUST BE IN WORLD 2 TOWN TO USE THIS! This way you can trash other obols incase you're out of space! "
             }),
+        new BaseItemBase("GemP30", <DescItemModel>{
+                "internalName": "GemP30",
+                "displayName": "Sand of Time",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Time Sand",
+                "description": "Hold down instantly gain 6 Hours of Sneaking Progress! Applies to all your ninja twins, so it doesn't matter who uses this. "
+            }),
         new BaseItemBase("EquipmentHats31", <ArmourItemModel>{
                 "internalName": "EquipmentHats31",
                 "displayName": "Smitty's Bubble Blowing Hat",
@@ -24856,6 +26400,321 @@ export const initSpecificItemRepo = () => {
         new BaseItemBase("EquipmentHats89", <ArmourItemModel>{
                 "internalName": "EquipmentHats89",
                 "displayName": "Borzoi Topper",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentHats90", <ArmourItemModel>{
+                "internalName": "EquipmentHats90",
+                "displayName": "Straw Hat",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentHats91", <ArmourItemModel>{
+                "internalName": "EquipmentHats91",
+                "displayName": "Wig Bandana",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentHats92", <ArmourItemModel>{
+                "internalName": "EquipmentHats92",
+                "displayName": "Funky Hat",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentHats93", <ArmourItemModel>{
+                "internalName": "EquipmentHats93",
+                "displayName": "Reinforced Headband",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentHats94", <ArmourItemModel>{
+                "internalName": "EquipmentHats94",
+                "displayName": "Shogun Helmet",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentHats95", <ArmourItemModel>{
+                "internalName": "EquipmentHats95",
+                "displayName": "Gilded Headband",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentHats96", <ArmourItemModel>{
+                "internalName": "EquipmentHats96",
+                "displayName": "Bamboo Hat",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentHats97", <ArmourItemModel>{
+                "internalName": "EquipmentHats97",
+                "displayName": "Festive Beast Mask",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentHats98", <ArmourItemModel>{
+                "internalName": "EquipmentHats98",
+                "displayName": "Heiress Headdress",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentHats99", <ArmourItemModel>{
+                "internalName": "EquipmentHats99",
+                "displayName": "Spirited Mane",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentHats100", <ArmourItemModel>{
+                "internalName": "EquipmentHats100",
+                "displayName": "Fiery Mane",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentHats101", <ArmourItemModel>{
+                "internalName": "EquipmentHats101",
+                "displayName": "Guardian Mane",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentHats102", <ArmourItemModel>{
+                "internalName": "EquipmentHats102",
+                "displayName": "Fanned Blossomage",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentHats103", <ArmourItemModel>{
+                "internalName": "EquipmentHats103",
+                "displayName": "Dainty Brim",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentHats104", <ArmourItemModel>{
+                "internalName": "EquipmentHats104",
+                "displayName": "Charcoal Hat",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aHelmetMTX,
                 "Type": "Premium Helmet",
@@ -25729,7 +27588,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 10,
                     "effect": "+{% Choppin Away Gains",
                     "bonus": 2.5,
-                    "order": 4
+                    "order": 5
                 },
                 "dropChance": 0.0001
             }),
@@ -26172,7 +28031,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 10,
                     "effect": "+{% Choppin Speed",
                     "bonus": 6,
-                    "order": 5
+                    "order": 6
                 },
                 "dropChance": 0.0001
             }),
@@ -26188,7 +28047,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 3,
                     "effect": "+{ Starting Pts in Worship",
                     "bonus": 6,
-                    "order": 27
+                    "order": 32
                 },
                 "dropChance": 1
             }),
@@ -26204,7 +28063,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 4,
                     "effect": "+{% Shiny Critter Chance",
                     "bonus": 5,
-                    "order": 20
+                    "order": 25
                 },
                 "dropChance": 1
             }),
@@ -26220,7 +28079,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 4,
                     "effect": "+{% EXP from monsters",
                     "bonus": 1.25,
-                    "order": 21
+                    "order": 26
                 },
                 "dropChance": 1
             }),
@@ -26236,7 +28095,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 5,
                     "effect": "+{% Shiny Critter Chance",
                     "bonus": 6,
-                    "order": 22
+                    "order": 27
                 },
                 "dropChance": 1
             }),
@@ -26252,7 +28111,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 6,
                     "effect": "+{% Skill AFK gain rate",
                     "bonus": 1,
-                    "order": 23
+                    "order": 28
                 },
                 "dropChance": 1
             }),
@@ -26268,7 +28127,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 10,
                     "effect": "+{% Total Catching Efficiency",
                     "bonus": 7,
-                    "order": 14
+                    "order": 17
                 },
                 "dropChance": 0.00025
             }),
@@ -26284,7 +28143,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 10,
                     "effect": "+{% Catching Away Gains",
                     "bonus": 2.5,
-                    "order": 15
+                    "order": 18
                 },
                 "dropChance": 0.00025
             }),
@@ -26300,7 +28159,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 4,
                     "effect": "+{% Max Charge",
                     "bonus": 7,
-                    "order": 28
+                    "order": 33
                 },
                 "dropChance": 1
             }),
@@ -26316,7 +28175,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 5,
                     "effect": "+{% Charge Rate",
                     "bonus": 5,
-                    "order": 29
+                    "order": 34
                 },
                 "dropChance": 1
             }),
@@ -26332,7 +28191,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 10,
                     "effect": "+{% Choppin Speed",
                     "bonus": 7,
-                    "order": 7
+                    "order": 8
                 },
                 "dropChance": 4e-05
             }),
@@ -26348,7 +28207,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 10,
                     "effect": "+{% Total Choppin Efficiency",
                     "bonus": 8,
-                    "order": 6
+                    "order": 7
                 },
                 "dropChance": 1e-05
             }),
@@ -26364,7 +28223,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 10,
                     "effect": "+{% Total Catching Efficiency",
                     "bonus": 8,
-                    "order": 16
+                    "order": 19
                 },
                 "dropChance": 5e-05
             }),
@@ -26380,7 +28239,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 10,
                     "effect": "+{% Catching Speed",
                     "bonus": 4,
-                    "order": 17
+                    "order": 20
                 },
                 "dropChance": 2e-05
             }),
@@ -26412,7 +28271,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 7,
                     "effect": "+{% Trapping Efficiency",
                     "bonus": 7,
-                    "order": 24
+                    "order": 29
                 },
                 "dropChance": 1
             }),
@@ -26428,7 +28287,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 9,
                     "effect": "+{% Trapping EXP",
                     "bonus": 8,
-                    "order": 25
+                    "order": 30
                 },
                 "dropChance": 1
             }),
@@ -26444,7 +28303,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 12,
                     "effect": "+{% Shiny Critter Chance",
                     "bonus": 8,
-                    "order": 26
+                    "order": 31
                 },
                 "dropChance": 1
             }),
@@ -26460,7 +28319,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 8,
                     "effect": "+{% Total Fishing Efficiency",
                     "bonus": 8,
-                    "order": 10
+                    "order": 13
                 },
                 "dropChance": 0.001
             }),
@@ -26476,7 +28335,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 10,
                     "effect": "+{% Fishing Speed",
                     "bonus": 4,
-                    "order": 11
+                    "order": 14
                 },
                 "dropChance": 0.0004
             }),
@@ -26492,7 +28351,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 10,
                     "effect": "+{% Fishing EXP",
                     "bonus": 10,
-                    "order": 12
+                    "order": 15
                 },
                 "dropChance": 0.0001
             }),
@@ -26508,7 +28367,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 10,
                     "effect": "+{% Fishing Away Gains",
                     "bonus": 3,
-                    "order": 13
+                    "order": 16
                 },
                 "dropChance": 2.5e-05
             }),
@@ -26524,7 +28383,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 12,
                     "effect": "+{% Choppin Away Gains",
                     "bonus": 3,
-                    "order": 8
+                    "order": 9
                 },
                 "dropChance": 1e-05
             }),
@@ -26540,7 +28399,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 15,
                     "effect": "+{% Choppin Speed",
                     "bonus": 8,
-                    "order": 9
+                    "order": 10
                 },
                 "dropChance": 1e-08
             }),
@@ -26556,7 +28415,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 12,
                     "effect": "+{% Total Catching Efficiency",
                     "bonus": 10,
-                    "order": 18
+                    "order": 21
                 },
                 "dropChance": 2e-05
             }),
@@ -26572,7 +28431,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 15,
                     "effect": "+{% Catching Away Gains",
                     "bonus": 3,
-                    "order": 19
+                    "order": 22
                 },
                 "dropChance": 1e-08
             }),
@@ -26588,7 +28447,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 7,
                     "effect": "+{% Max Charge",
                     "bonus": 10,
-                    "order": 30
+                    "order": 35
                 },
                 "dropChance": 1
             }),
@@ -26620,7 +28479,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 15,
                     "effect": "+{% Fishing EXP",
                     "bonus": 15,
-                    "order": 31
+                    "order": 37
                 },
                 "dropChance": 0.001
             }),
@@ -26636,7 +28495,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 18,
                     "effect": "+{% Total Fishing Efficiency",
                     "bonus": 12,
-                    "order": 32
+                    "order": 38
                 },
                 "dropChance": 0.0004
             }),
@@ -26652,7 +28511,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 24,
                     "effect": "+{% Fishing Away Gains",
                     "bonus": 3.5,
-                    "order": 33
+                    "order": 39
                 },
                 "dropChance": 0.0001
             }),
@@ -26668,9 +28527,105 @@ export const initSpecificItemRepo = () => {
                     "perTier": 30,
                     "effect": "+{% Fishing Speed",
                     "bonus": 7,
-                    "order": 34
+                    "order": 40
                 },
                 "dropChance": 2.5e-05
+            }),
+        new BaseItemBase("CardsF34", <CardItemModel>{
+                "internalName": "CardsF34",
+                "displayName": "Bamboo Logs Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "F34",
+                    "category": "Hard Resources",
+                    "perTier": 15,
+                    "effect": "+{% Total Choppin Efficiency",
+                    "bonus": 10,
+                    "order": 11
+                },
+                "dropChance": 1
+            }),
+        new BaseItemBase("CardsF35", <CardItemModel>{
+                "internalName": "CardsF35",
+                "displayName": "Effervescent Logs Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "F35",
+                    "category": "Hard Resources",
+                    "perTier": 15,
+                    "effect": "+{% Choppin Away Gains",
+                    "bonus": 4,
+                    "order": 12
+                },
+                "dropChance": 1
+            }),
+        new BaseItemBase("CardsF36", <CardItemModel>{
+                "internalName": "CardsF36",
+                "displayName": "Breezy Soul Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "F36",
+                    "category": "Hard Resources",
+                    "perTier": 7,
+                    "effect": "+{% Charge Rate",
+                    "bonus": 7,
+                    "order": 36
+                },
+                "dropChance": 1
+            }),
+        new BaseItemBase("CardsF37", <CardItemModel>{
+                "internalName": "CardsF37",
+                "displayName": "Ladybug Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "F37",
+                    "category": "Hard Resources",
+                    "perTier": 15,
+                    "effect": "+{% Total Catching Efficiency",
+                    "bonus": 5,
+                    "order": 23
+                },
+                "dropChance": 5e-06
+            }),
+        new BaseItemBase("CardsF38", <CardItemModel>{
+                "internalName": "CardsF38",
+                "displayName": "Firefly Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "F38",
+                    "category": "Hard Resources",
+                    "perTier": 15,
+                    "effect": "+{% Catching Speed",
+                    "bonus": 5,
+                    "order": 24
+                },
+                "dropChance": 1e-06
+            }),
+        new BaseItemBase("CardsF39", <CardItemModel>{
+                "internalName": "CardsF39",
+                "displayName": "Godshard Ore Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "F39",
+                    "category": "Hard Resources",
+                    "perTier": 400,
+                    "effect": "+{% Forge Cap and SPD (Passive)",
+                    "bonus": 30,
+                    "order": 4
+                },
+                "dropChance": 2e-06
             }),
         new BaseItemBase("CardsG1", <CardItemModel>{
                 "internalName": "CardsG1",
@@ -27118,7 +29073,247 @@ export const initSpecificItemRepo = () => {
                     "bonus": 3,
                     "order": 14
                 },
-                "dropChance": 0.008
+                "dropChance": 0.006
+            }),
+        new BaseItemBase("CardsI1", <CardItemModel>{
+                "internalName": "CardsI1",
+                "displayName": "Sprout Spirit Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "I1",
+                    "category": "Spirited Valley",
+                    "perTier": 50,
+                    "effect": "+{% Total Damage",
+                    "bonus": 5,
+                    "order": 1
+                },
+                "dropChance": 2.5e-05
+            }),
+        new BaseItemBase("CardsI2", <CardItemModel>{
+                "internalName": "CardsI2",
+                "displayName": "Ricecake Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "I2",
+                    "category": "Spirited Valley",
+                    "perTier": 60,
+                    "effect": "+{% DEF from Equips (Passive)",
+                    "bonus": 3,
+                    "order": 2
+                },
+                "dropChance": 2e-05
+            }),
+        new BaseItemBase("CardsI3", <CardItemModel>{
+                "internalName": "CardsI3",
+                "displayName": "River Spirit Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "I3",
+                    "category": "Spirited Valley",
+                    "perTier": 75,
+                    "effect": "+{% All Stat",
+                    "bonus": 1.5,
+                    "order": 3
+                },
+                "dropChance": 1.5e-05
+            }),
+        new BaseItemBase("CardsI4", <CardItemModel>{
+                "internalName": "CardsI4",
+                "displayName": "Baby Troll Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "I4",
+                    "category": "Spirited Valley",
+                    "perTier": 85,
+                    "effect": "+{% Sneaking EXP (Passive)",
+                    "bonus": 3,
+                    "order": 4
+                },
+                "dropChance": 1e-05
+            }),
+        new BaseItemBase("CardsI5", <CardItemModel>{
+                "internalName": "CardsI5",
+                "displayName": "Woodlin Spirit Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "I5",
+                    "category": "Spirited Valley",
+                    "perTier": 100,
+                    "effect": "+{% Multikill per tier",
+                    "bonus": 3,
+                    "order": 5
+                },
+                "dropChance": 8e-06
+            }),
+        new BaseItemBase("CardsI6", <CardItemModel>{
+                "internalName": "CardsI6",
+                "displayName": "Bamboo Spirit Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "I6",
+                    "category": "Spirited Valley",
+                    "perTier": 150,
+                    "effect": "+{% Summoning EXP (Passive)",
+                    "bonus": 3,
+                    "order": 6
+                },
+                "dropChance": 6e-06
+            }),
+        new BaseItemBase("CardsI7", <CardItemModel>{
+                "internalName": "CardsI7",
+                "displayName": "Lantern Spirit Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "I7",
+                    "category": "Spirited Valley",
+                    "perTier": 170,
+                    "effect": "+{% Farming EXP (Passive)",
+                    "bonus": 2,
+                    "order": 7
+                },
+                "dropChance": 5e-06
+            }),
+        new BaseItemBase("CardsI8", <CardItemModel>{
+                "internalName": "CardsI8",
+                "displayName": "Mama Troll Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "I8",
+                    "category": "Spirited Valley",
+                    "perTier": 200,
+                    "effect": "+{% Skill AFK gain rate",
+                    "bonus": 2,
+                    "order": 8
+                },
+                "dropChance": 3e-06
+            }),
+        new BaseItemBase("CardsI9", <CardItemModel>{
+                "internalName": "CardsI9",
+                "displayName": "Leek Spirit Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "I9",
+                    "category": "Spirited Valley",
+                    "perTier": 250,
+                    "effect": "+{% Jade Coin gain (Passive)",
+                    "bonus": 4,
+                    "order": 9
+                },
+                "dropChance": 2e-06
+            }),
+        new BaseItemBase("CardsI10", <CardItemModel>{
+                "internalName": "CardsI10",
+                "displayName": "Ceramic Spirit Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "I10",
+                    "category": "Spirited Valley",
+                    "perTier": 400,
+                    "effect": "+{% Cooking Spd Multi (Passive)",
+                    "bonus": 5,
+                    "order": 10
+                },
+                "dropChance": 1e-06
+            }),
+        new BaseItemBase("CardsI11", <CardItemModel>{
+                "internalName": "CardsI11",
+                "displayName": "Skydoggie Spirit Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "I11",
+                    "category": "Spirited Valley",
+                    "perTier": 500,
+                    "effect": "+{ Base LUK",
+                    "bonus": 20,
+                    "order": 11
+                },
+                "dropChance": 8e-07
+            }),
+        new BaseItemBase("CardsI12", <CardItemModel>{
+                "internalName": "CardsI12",
+                "displayName": "Royal Egg Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "I12",
+                    "category": "Spirited Valley",
+                    "perTier": 900,
+                    "effect": "+{% Fighting AFK (Passive)",
+                    "bonus": 1,
+                    "order": 12
+                },
+                "dropChance": 6e-07
+            }),
+        new BaseItemBase("CardsI13", <CardItemModel>{
+                "internalName": "CardsI13",
+                "displayName": "Minichief Spirit Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "I13",
+                    "category": "Spirited Valley",
+                    "perTier": 1300,
+                    "effect": "+{% Total Drop Rate",
+                    "bonus": 8,
+                    "order": 13
+                },
+                "dropChance": 5e-07
+            }),
+        new BaseItemBase("CardsI14", <CardItemModel>{
+                "internalName": "CardsI14",
+                "displayName": "Samurai Guardian Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "I14",
+                    "category": "Spirited Valley",
+                    "perTier": 2500,
+                    "effect": "+{% All AFK Gains(Passive)",
+                    "bonus": 1.5,
+                    "order": 14
+                },
+                "dropChance": 4e-07
+            }),
+        new BaseItemBase("CardsI15", <CardItemModel>{
+                "internalName": "CardsI15",
+                "displayName": "Spirit Diamond Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "I15",
+                    "category": "Spirited Valley",
+                    "perTier": 5000,
+                    "effect": "+{% Sneaking Stealth (Passive)",
+                    "bonus": 4,
+                    "order": 15
+                },
+                "dropChance": 0.002
             }),
         new BaseItemBase("CardsX0", <CardItemModel>{
                 "internalName": "CardsX0",
@@ -28082,7 +30277,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("CardsZ18", <CardItemModel>{
                 "internalName": "CardsZ18",
-                "displayName": "Kattlecruk Card",
+                "displayName": "Kattlekruk Card",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.dCard,
                 "Type": "Card",
@@ -28098,7 +30293,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("CardsZ19", <CardItemModel>{
                 "internalName": "CardsZ19",
-                "displayName": "Chaotic Kattlecruk Card",
+                "displayName": "Chaotic Kattlekruk Card",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.dCard,
                 "Type": "Card",
@@ -28114,7 +30309,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("CardsZ20", <CardItemModel>{
                 "internalName": "CardsZ20",
-                "displayName": "Sacrilegious Kattlecruk Card",
+                "displayName": "Sacrilegious Kattlekruk Card",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.dCard,
                 "Type": "Card",
@@ -28127,6 +30322,54 @@ export const initSpecificItemRepo = () => {
                     "order": 22
                 },
                 "dropChance": 0.0008
+            }),
+        new BaseItemBase("CardsZ21", <CardItemModel>{
+                "internalName": "CardsZ21",
+                "displayName": "Emperor Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "Z21",
+                    "category": "Bosses",
+                    "perTier": 6,
+                    "effect": "+{% Total Drop Rate",
+                    "bonus": 12,
+                    "order": 23
+                },
+                "dropChance": 1
+            }),
+        new BaseItemBase("CardsZ22", <CardItemModel>{
+                "internalName": "CardsZ22",
+                "displayName": "Chaotic Emperor Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "Z22",
+                    "category": "Bosses",
+                    "perTier": 9,
+                    "effect": "+{% Total Damage Multi",
+                    "bonus": 8,
+                    "order": 24
+                },
+                "dropChance": 1
+            }),
+        new BaseItemBase("CardsZ23", <CardItemModel>{
+                "internalName": "CardsZ23",
+                "displayName": "Sovereign Emperor Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "Z23",
+                    "category": "Bosses",
+                    "perTier": 13,
+                    "effect": "+{% Multikill per tier",
+                    "bonus": 20,
+                    "order": 25
+                },
+                "dropChance": 1
             })    
 ]
 }

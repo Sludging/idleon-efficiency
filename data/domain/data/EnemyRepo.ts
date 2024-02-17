@@ -348,6 +348,42 @@ export const initEnemyRepo = () => {
                 "navigation": undefined,
                 "bossData": undefined
             }),
+        new EnemyBase("SoulCard7", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Breezy Soul",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 4,
+                    "MonsterOffsetX": 42,
+                    "MonsterOffsetY": 28,
+                    "HeightOfMonster": 85,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 4,
+                    "RespawnTime": 86400,
+                    "DeathFrame": 13,
+                    "MonsterHPTotal": 420,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "a",
+                    "ExpGiven": 12000,
+                    "ExpType": 0,
+                    "Defence": 600,
+                    "MoveSPEED": 3,
+                    "Damages": [1000, 1],
+                    "DefFor0": 1223.26
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsD9", "quantity": 1, "chance": 0.00014, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Soul7", "quantity": 1, "chance": 1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Soul7", "quantity": 1, "chance": 1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Soul7", "quantity": 1, "chance": 1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Soul7", "quantity": 1, "chance": 1, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
         new EnemyBase("CritterCard1", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
                     "Name": "Froge",
@@ -1983,7 +2019,7 @@ export const initEnemyRepo = () => {
                 "drops": <EnemyTableModel>{
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0.5, "questLink": "N/A"},
-                        <CardDropModel>{"item": "CardsH14", "quantity": 1, "chance": 0.008, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsH14", "quantity": 1, "chance": 0.006, "questLink": "N/A"},
                         <ItemDropModel>{"item": "StampC3", "quantity": 1, "chance": 0.1, "questLink": "Papua_Piggea2"},
                         <SubTableDropModel>{"item": "DropTable25", "quantity": 1, "chance": 0.3, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable26", "quantity": 1, "chance": 0.2, "questLink": "N/A"},
@@ -1997,6 +2033,49 @@ export const initEnemyRepo = () => {
                     "next": "Blank",
                     "hasCrystal": false,
                     "crystalName": "Crystal4",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("Crystal5", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Crystal Brighton",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 47,
+                    "MonsterOffsetX": 38,
+                    "MonsterOffsetY": 40,
+                    "HeightOfMonster": 54,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 6,
+                    "RespawnTime": 252000,
+                    "DeathFrame": 14,
+                    "MonsterHPTotal": 1000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 210,
+                    "ExpType": 0,
+                    "Defence": 180,
+                    "MoveSPEED": 5,
+                    "Damages": [1, 1],
+                    "DefFor0": 0
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0.5, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsI15", "quantity": 1, "chance": 0.002, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "StampC3", "quantity": 1, "chance": 0.1, "questLink": "Papua_Piggea2"},
+                        <SubTableDropModel>{"item": "DropTable29", "quantity": 1, "chance": 0.3, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable30", "quantity": 1, "chance": 0.2, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable31", "quantity": 1, "chance": 0.17, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable32", "quantity": 1, "chance": 0.17, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "w6d3",
+                    "next": "Blank",
+                    "hasCrystal": false,
+                    "crystalName": "Crystal5",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -4599,7 +4678,7 @@ export const initEnemyRepo = () => {
                     "enemy": "w5a1",
                     "world": "Smolderin' Plateau",
                     "map": <MapNameModel>{"intName": "wLavaA1", "name": "Naut Sake Perimeter", "id": 201},
-                    "portalRequirements": [25000]
+                    "portalRequirements": [15000]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": undefined,
@@ -4646,7 +4725,7 @@ export const initEnemyRepo = () => {
                     "enemy": "w5a2",
                     "world": "Smolderin' Plateau",
                     "map": <MapNameModel>{"intName": "wLavaA2", "name": "Niagrilled Falls", "id": 202},
-                    "portalRequirements": [30000]
+                    "portalRequirements": [25000]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w5a1",
@@ -4692,7 +4771,7 @@ export const initEnemyRepo = () => {
                     "enemy": "w5a3",
                     "world": "Smolderin' Plateau",
                     "map": <MapNameModel>{"intName": "wLavaA3", "name": "The Killer Roundabout", "id": 203},
-                    "portalRequirements": [50000]
+                    "portalRequirements": [40000]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w5a2",
@@ -4739,7 +4818,7 @@ export const initEnemyRepo = () => {
                     "enemy": "w5a4",
                     "world": "Smolderin' Plateau",
                     "map": <MapNameModel>{"intName": "wLavaA4", "name": "Cracker Jack Lake", "id": 204},
-                    "portalRequirements": [75000]
+                    "portalRequirements": [50000]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w5a3",
@@ -4786,7 +4865,7 @@ export const initEnemyRepo = () => {
                     "enemy": "w5a5",
                     "world": "Smolderin' Plateau",
                     "map": <MapNameModel>{"intName": "wLavaA5", "name": "The Great Molehill", "id": 205},
-                    "portalRequirements": [125000]
+                    "portalRequirements": [75000]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w5a4",
@@ -4832,7 +4911,7 @@ export const initEnemyRepo = () => {
                     "enemy": "w5b1",
                     "world": "Smolderin' Plateau",
                     "map": <MapNameModel>{"intName": "wLavaB1", "name": "Erruption River", "id": 206},
-                    "portalRequirements": [300000]
+                    "portalRequirements": [100000]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w5a5",
@@ -4878,7 +4957,7 @@ export const initEnemyRepo = () => {
                     "enemy": "w5b2",
                     "world": "Smolderin' Plateau",
                     "map": <MapNameModel>{"intName": "wLavaB2", "name": "Mount Doomish", "id": 207},
-                    "portalRequirements": [500000]
+                    "portalRequirements": [200000]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w5b1",
@@ -4925,7 +5004,7 @@ export const initEnemyRepo = () => {
                     "enemy": "w5b3",
                     "world": "Smolderin' Plateau",
                     "map": <MapNameModel>{"intName": "wLavaB3", "name": "OJ Bay", "id": 208},
-                    "portalRequirements": [1000000]
+                    "portalRequirements": [300000]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w5b2",
@@ -4972,7 +5051,7 @@ export const initEnemyRepo = () => {
                     "enemy": "w5b4",
                     "world": "Smolderin' Plateau",
                     "map": <MapNameModel>{"intName": "wLavaB4", "name": "Lampar Lake", "id": 209},
-                    "portalRequirements": [2000000]
+                    "portalRequirements": [450000]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w5b3",
@@ -5018,7 +5097,7 @@ export const initEnemyRepo = () => {
                     "enemy": "w5b5",
                     "world": "Smolderin' Plateau",
                     "map": <MapNameModel>{"intName": "wLavaB5", "name": "Spitfire River", "id": 210},
-                    "portalRequirements": [3000000]
+                    "portalRequirements": [600000]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w5b4",
@@ -5065,7 +5144,7 @@ export const initEnemyRepo = () => {
                     "enemy": "w5b6",
                     "world": "Smolderin' Plateau",
                     "map": <MapNameModel>{"intName": "wLavaB6", "name": "Miner Mole Outskirts", "id": 211},
-                    "portalRequirements": [6000000]
+                    "portalRequirements": [1000000]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w5b5",
@@ -5111,7 +5190,7 @@ export const initEnemyRepo = () => {
                     "enemy": "w5c1",
                     "world": "Smolderin' Plateau",
                     "map": <MapNameModel>{"intName": "wLavaC1", "name": "Crawly Catacombs", "id": 212},
-                    "portalRequirements": [10000000]
+                    "portalRequirements": [3000000]
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w5b6",
@@ -5165,6 +5244,655 @@ export const initEnemyRepo = () => {
                     "next": "Crystal4",
                     "hasCrystal": true,
                     "crystalName": "Crystal4",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w6a1", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Sprout Spirit",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 76,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 42,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 6,
+                    "RespawnTime": 65,
+                    "DeathFrame": 14,
+                    "MonsterHPTotal": 3000000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 2400000,
+                    "ExpType": 0,
+                    "Defence": 50000,
+                    "MoveSPEED": 5,
+                    "Damages": [60000, 1],
+                    "DefFor0": 49629.3
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 65000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "SpiA1", "quantity": 1, "chance": 0.16, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsI1", "quantity": 1, "chance": 2.5e-05, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes6", "quantity": 4, "chance": 2e-08, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable29", "quantity": 1, "chance": 0.0025, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w6a1",
+                    "world": "Spirited Valley",
+                    "map": <MapNameModel>{"intName": "vSpiritA1", "name": "Gooble Goop Creek", "id": 251},
+                    "portalRequirements": [30000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": undefined,
+                    "next": "w6a2",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal5",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w6a2", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Ricecake",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 77,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 54,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 7,
+                    "RespawnTime": 63,
+                    "DeathFrame": 18,
+                    "MonsterHPTotal": 4500000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 3400000,
+                    "ExpType": 0,
+                    "Defence": 60000,
+                    "MoveSPEED": 4,
+                    "Damages": [70000, 1],
+                    "DefFor0": 56487.3
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 72000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "SpiA2", "quantity": 1, "chance": 0.15, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "SpiA2b", "quantity": 1, "chance": 1e-05, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes6", "quantity": 5, "chance": 6e-07, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsI2", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable29", "quantity": 1, "chance": 0.0028, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w6a2",
+                    "world": "Spirited Valley",
+                    "map": <MapNameModel>{"intName": "vSpiritA2", "name": "Picnic Bridgeways", "id": 252},
+                    "portalRequirements": [50000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w6a1",
+                    "next": "w6a3",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal5",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w6a3", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "River Spirit",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 78,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 66,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 10,
+                    "RespawnTime": 60,
+                    "DeathFrame": 24,
+                    "MonsterHPTotal": 7000000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 5000000,
+                    "ExpType": 0,
+                    "Defence": 75000,
+                    "MoveSPEED": 4,
+                    "Damages": [90000, 1],
+                    "DefFor0": 69705.8
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 80000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "SpiA3", "quantity": 1, "chance": 0.15, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsI3", "quantity": 1, "chance": 1.5e-05, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes6", "quantity": 6, "chance": 5e-07, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable29", "quantity": 1, "chance": 0.0031, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w6a3",
+                    "world": "Spirited Valley",
+                    "map": <MapNameModel>{"intName": "vSpiritA3", "name": "Irrigation Station", "id": 253},
+                    "portalRequirements": [100000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w6a2",
+                    "next": "w6a4",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal5",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w6a4", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Baby Troll",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 79,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 50,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 9,
+                    "RespawnTime": 58,
+                    "DeathFrame": 20,
+                    "MonsterHPTotal": 2e+10,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 7000000,
+                    "ExpType": 0,
+                    "Defence": 90000,
+                    "MoveSPEED": 6,
+                    "Damages": [100000, 1],
+                    "DefFor0": 76109.7
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 89000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "SpiA4", "quantity": 1, "chance": 0.14, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsI4", "quantity": 1, "chance": 1e-05, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes6", "quantity": 7, "chance": 4e-07, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable29", "quantity": 1, "chance": 0.0034, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w6a4",
+                    "world": "Spirited Valley",
+                    "map": <MapNameModel>{"intName": "vSpiritA4", "name": "Troll Playground", "id": 254},
+                    "portalRequirements": [250000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w6a3",
+                    "next": "w6a5",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal5",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w6a5", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Woodlin Spirit",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 80,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 64,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 7,
+                    "RespawnTime": 57,
+                    "DeathFrame": 15,
+                    "MonsterHPTotal": 42000000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 9200000,
+                    "ExpType": 0,
+                    "Defence": 130000,
+                    "MoveSPEED": 3,
+                    "Damages": [110000, 1],
+                    "DefFor0": 82398
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 98500, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "SpiA5", "quantity": 1, "chance": 0.14, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "InvStorageD", "quantity": 1, "chance": 5e-07, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsI5", "quantity": 1, "chance": 8e-06, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable29", "quantity": 1, "chance": 0.0037, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w6a5",
+                    "world": "Spirited Valley",
+                    "map": <MapNameModel>{"intName": "vSpiritA5", "name": "Edge of the Valley", "id": 255},
+                    "portalRequirements": [400000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w6a4",
+                    "next": "w6b1",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal5",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w6b1", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Bamboo Spirit",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 81,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 74,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 9,
+                    "RespawnTime": 55,
+                    "DeathFrame": 20,
+                    "MonsterHPTotal": 1.3e+11,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 15100000,
+                    "ExpType": 0,
+                    "Defence": 200000,
+                    "MoveSPEED": 5,
+                    "Damages": [125000, 1],
+                    "DefFor0": 91639.1
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 130000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "SpiB1", "quantity": 1, "chance": 0.14, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsI6", "quantity": 1, "chance": 6e-06, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable30", "quantity": 1, "chance": 0.0025, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w6b1",
+                    "world": "Spirited Valley",
+                    "map": <MapNameModel>{"intName": "vSpiritB1", "name": "Bamboo Laboredge", "id": 256},
+                    "portalRequirements": [1100000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w6a5",
+                    "next": "w6b2",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal5",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w6b2", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Lantern Spirit",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 82,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 54,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 6,
+                    "RespawnTime": 54,
+                    "DeathFrame": 15,
+                    "MonsterHPTotal": 2.5e+11,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 19000000,
+                    "ExpType": 0,
+                    "Defence": 300000,
+                    "MoveSPEED": 6,
+                    "Damages": [140000, 1],
+                    "DefFor0": 100678
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 145000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "SpiB2", "quantity": 1, "chance": 0.14, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "SpiB2b", "quantity": 1, "chance": 1e-05, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes6", "quantity": 28, "chance": 5e-09, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsI7", "quantity": 1, "chance": 5e-06, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable30", "quantity": 1, "chance": 0.0025, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w6b2",
+                    "world": "Spirited Valley",
+                    "map": <MapNameModel>{"intName": "vSpiritB2", "name": "Lightway Path", "id": 257},
+                    "portalRequirements": [3200000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w6b1",
+                    "next": "w6b3",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal5",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w6b3", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Mama Troll",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 83,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 62,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 14,
+                    "RespawnTime": 53,
+                    "DeathFrame": 25,
+                    "MonsterHPTotal": 3.7e+11,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 27500000,
+                    "ExpType": 0,
+                    "Defence": 400000,
+                    "MoveSPEED": 5,
+                    "Damages": [160000, 1],
+                    "DefFor0": 112459
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 160000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "SpiB3", "quantity": 1, "chance": 0.13, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsI8", "quantity": 1, "chance": 3e-06, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes6", "quantity": 27, "chance": 3.4e-07, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable30", "quantity": 1, "chance": 0.0029, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w6b3",
+                    "world": "Spirited Valley",
+                    "map": <MapNameModel>{"intName": "vSpiritB3", "name": "Troll Broodnest", "id": 258},
+                    "portalRequirements": [8000000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w6b2",
+                    "next": "w6b4",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal5",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w6b4", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Leek Spirit",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 84,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 66,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 6,
+                    "RespawnTime": 51,
+                    "DeathFrame": 19,
+                    "MonsterHPTotal": 6.1e+11,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 36000000,
+                    "ExpType": 0,
+                    "Defence": 500000,
+                    "MoveSPEED": 3,
+                    "Damages": [180000, 1],
+                    "DefFor0": 123970
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 175000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "SpiB4", "quantity": 1, "chance": 0.13, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsI9", "quantity": 1, "chance": 2e-06, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes6", "quantity": 26, "chance": 2.5e-07, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable30", "quantity": 1, "chance": 0.0031, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w6b4",
+                    "world": "Spirited Valley",
+                    "map": <MapNameModel>{"intName": "vSpiritB4", "name": "Above the Clouds", "id": 259},
+                    "portalRequirements": [12000000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w6b3",
+                    "next": "w6c1",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal5",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w6c1", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Ceramic Spirit",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 85,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 50,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 10,
+                    "RespawnTime": 50,
+                    "DeathFrame": 21,
+                    "MonsterHPTotal": 1.25e+12,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 54000000,
+                    "ExpType": 0,
+                    "Defence": 650000,
+                    "MoveSPEED": 3,
+                    "Damages": [250000, 1],
+                    "DefFor0": 162569
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 200000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "SpiC1", "quantity": 1, "chance": 0.12, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsI10", "quantity": 1, "chance": 1e-06, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes6", "quantity": 25, "chance": 2.5e-07, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable31", "quantity": 1, "chance": 0.0033, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w6c1",
+                    "world": "Spirited Valley",
+                    "map": <MapNameModel>{"intName": "vSpiritC1", "name": "Sleepy Skyline", "id": 260},
+                    "portalRequirements": [25000000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w6b4",
+                    "next": "w6c2",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal5",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w6c2", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Skydoggie Spirit",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 86,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 64,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 10,
+                    "RespawnTime": 49,
+                    "DeathFrame": 19,
+                    "MonsterHPTotal": 1.6e+12,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 75000000,
+                    "ExpType": 0,
+                    "Defence": 800000,
+                    "MoveSPEED": 4,
+                    "Damages": [300000, 1],
+                    "DefFor0": 188882
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 230000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "SpiC2", "quantity": 1, "chance": 0.12, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes6", "quantity": 29, "chance": 2.5e-07, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsI11", "quantity": 1, "chance": 8e-07, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Line9", "quantity": 1, "chance": 9.999e-08, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "FoodPotGr4", "quantity": 3, "chance": 0.001, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes6", "quantity": 30, "chance": 2.5e-07, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "FoodHealth17", "quantity": 5, "chance": 0.0025, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes6", "quantity": 31, "chance": 2.5e-07, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable31", "quantity": 1, "chance": 0.0035, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w6c2",
+                    "world": "Spirited Valley",
+                    "map": <MapNameModel>{"intName": "vSpiritC2", "name": "Dozey Dogpark", "id": 261},
+                    "portalRequirements": [70000000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w6c1",
+                    "next": "w6d1",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal5",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w6d1", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Royal Egg",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 87,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 40,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 10,
+                    "RespawnTime": 48,
+                    "DeathFrame": 18,
+                    "MonsterHPTotal": 3e+12,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 120000000,
+                    "ExpType": 0,
+                    "Defence": 1000000,
+                    "MoveSPEED": 3,
+                    "Damages": [400000, 1],
+                    "DefFor0": 239194
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 350000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "SpiD1", "quantity": 1, "chance": 0.11, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsI12", "quantity": 1, "chance": 6e-07, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable32", "quantity": 1, "chance": 0.0028, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w6d1",
+                    "world": "Spirited Valley",
+                    "map": <MapNameModel>{"intName": "vSpiritD1", "name": "Yolkrock Basin", "id": 262},
+                    "portalRequirements": [100000000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w6c2",
+                    "next": "w6d2",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal5",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w6d2", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Minichief Spirit",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 88,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 49,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 7,
+                    "RespawnTime": 47,
+                    "DeathFrame": 16,
+                    "MonsterHPTotal": 5.5e+12,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 180000000,
+                    "ExpType": 0,
+                    "Defence": 1500000,
+                    "MoveSPEED": 5,
+                    "Damages": [500000, 1],
+                    "DefFor0": 287155
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 400000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "SpiD2", "quantity": 1, "chance": 0.11, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsI13", "quantity": 1, "chance": 5e-07, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes6", "quantity": 24, "chance": 1e-07, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable32", "quantity": 1, "chance": 0.0035, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w6d2",
+                    "world": "Spirited Valley",
+                    "map": <MapNameModel>{"intName": "vSpiritD2", "name": "Chieftain Stairway", "id": 263},
+                    "portalRequirements": [150000000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w6d1",
+                    "next": "w6d3",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal5",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w6d3", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Samurai Guardian",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 89,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 80,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 10,
+                    "RespawnTime": 45,
+                    "DeathFrame": 27,
+                    "MonsterHPTotal": 1e+13,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 250000000,
+                    "ExpType": 0,
+                    "Defence": 2500000,
+                    "MoveSPEED": 3,
+                    "Damages": [600000, 1],
+                    "DefFor0": 333313
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 500000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "SpiD3", "quantity": 1, "chance": 0.1, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsI14", "quantity": 1, "chance": 4e-07, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Line14", "quantity": 1, "chance": 3.3e-09, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable32", "quantity": 1, "chance": 0.0035, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w6d3",
+                    "world": "Spirited Valley",
+                    "map": <MapNameModel>{"intName": "vSpiritD3", "name": "Emperor's Castle Doorstep", "id": 264},
+                    "portalRequirements": [100]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w6d2",
+                    "next": "Crystal5",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal5",
                     "hasCard": true
                 },
                 "bossData": undefined
@@ -6018,7 +6746,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("Boss5A", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Kattlecruk",
+                    "Name": "Kattlekruk",
                     "AFKtype": AFKTypeEnum.Fighting,
                     "MonsterFace": 4,
                     "MonsterOffsetX": 42,
@@ -6077,7 +6805,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("Boss5B", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Chaotic Kattlecruk",
+                    "Name": "Chaotic Kattlekruk",
                     "AFKtype": AFKTypeEnum.Fighting,
                     "MonsterFace": 4,
                     "MonsterOffsetX": 42,
@@ -6137,7 +6865,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("Boss5C", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Sacrilegious Kattlecruk",
+                    "Name": "Sacrilegious Kattlekruk",
                     "AFKtype": AFKTypeEnum.Fighting,
                     "MonsterFace": 4,
                     "MonsterOffsetX": 42,
@@ -6174,7 +6902,7 @@ export const initEnemyRepo = () => {
                 "mapData": undefined,
                 "navigation": <EnemyNavModel>{
                     "prev": "Boss5B",
-                    "next": "Blank",
+                    "next": "Boss6A",
                     "hasCrystal": true,
                     "crystalName": undefined,
                     "hasCard": true
@@ -6194,6 +6922,126 @@ export const initEnemyRepo = () => {
                         <BossAttackModel>{"name": "Attack7", "damage": 33000}
                     ]
                 }
+            }),
+        new EnemyBase("Boss6A", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Emperor",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 4,
+                    "MonsterOffsetX": 42,
+                    "MonsterOffsetY": 28,
+                    "HeightOfMonster": 85,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 4,
+                    "RespawnTime": 86400,
+                    "DeathFrame": 13,
+                    "MonsterHPTotal": 2e+14,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "a",
+                    "ExpGiven": 12000,
+                    "ExpType": 0,
+                    "Defence": 600,
+                    "MoveSPEED": 3,
+                    "Damages": [1000, 1],
+                    "DefFor0": 1223.26
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 1000000, "chance": 1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "FillerMaterial", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsZ18", "quantity": 1, "chance": 0.0008, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "FillerMaterial", "quantity": 1, "chance": 1e-05, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "Boss5C",
+                    "next": "Boss6B",
+                    "hasCrystal": true,
+                    "crystalName": undefined,
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("Boss6B", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Chaotic Emperor",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 4,
+                    "MonsterOffsetX": 42,
+                    "MonsterOffsetY": 28,
+                    "HeightOfMonster": 85,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 4,
+                    "RespawnTime": 86400,
+                    "DeathFrame": 13,
+                    "MonsterHPTotal": 7.5e+16,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "a",
+                    "ExpGiven": 12000,
+                    "ExpType": 0,
+                    "Defence": 600,
+                    "MoveSPEED": 3,
+                    "Damages": [1000, 1],
+                    "DefFor0": 1223.26
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 5000000, "chance": 1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "FillerMaterial", "quantity": 1, "chance": 0.1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "FillerMaterial", "quantity": 1, "chance": 0.01, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "FillerMaterial", "quantity": 1, "chance": 3.5e-05, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "Boss6A",
+                    "next": "Boss6C",
+                    "hasCrystal": true,
+                    "crystalName": undefined,
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("Boss6C", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Sovereign Emperor",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 4,
+                    "MonsterOffsetX": 42,
+                    "MonsterOffsetY": 28,
+                    "HeightOfMonster": 85,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 4,
+                    "RespawnTime": 86400,
+                    "DeathFrame": 13,
+                    "MonsterHPTotal": 5e+21,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "a",
+                    "ExpGiven": 12000,
+                    "ExpType": 0,
+                    "Defence": 600,
+                    "MoveSPEED": 3,
+                    "Damages": [1000, 1],
+                    "DefFor0": 1223.26
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 20000000, "chance": 1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "FillerMaterial", "quantity": 2, "chance": 0.4, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "FillerMaterial", "quantity": 1, "chance": 0.08, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "FillerMaterial", "quantity": 1, "chance": 0.0004, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "Boss6B",
+                    "next": "Blank",
+                    "hasCrystal": true,
+                    "crystalName": undefined,
+                    "hasCard": true
+                },
+                "bossData": undefined
             }),
         new EnemyBase("poopBig", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
@@ -7885,9 +8733,9 @@ export const initEnemyRepo = () => {
                     "MonsterHPTotal": 5,
                     "Type": EnemyTypeEnum.oreType,
                     "SpecialType": "",
-                    "ExpGiven": 1250,
+                    "ExpGiven": 1600,
                     "ExpType": 1,
-                    "Defence": 20000000,
+                    "Defence": 40000000,
                     "MoveSPEED": 0,
                     "Damages": [0, 1],
                     "DefFor0": 0.22
@@ -7895,10 +8743,16 @@ export const initEnemyRepo = () => {
                 "drops": <EnemyTableModel>{
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Grasslands2", "quantity": 2, "chance": 0.4, "questLink": "N/A"}
+                        <CardDropModel>{"item": "CardsF39", "quantity": 1, "chance": 2e-06, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable4", "quantity": 2, "chance": 0.015, "questLink": "N/A"}
                     ]
                 },
-                "mapData": undefined,
+                "mapData": <MapDataModel>{
+                    "enemy": "Godshard",
+                    "world": "Blunder Hills",
+                    "map": <MapNameModel>{"intName": "MininggF", "name": "Motherlode Pit", "id": 32},
+                    "portalRequirements": [0]
+                },
                 "navigation": undefined,
                 "bossData": undefined
             }),
@@ -7928,7 +8782,7 @@ export const initEnemyRepo = () => {
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsF29", "quantity": 1, "chance": 1e-08, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable4", "quantity": 2, "chance": 0.013, "questLink": "N/A"}
+                        <SubTableDropModel>{"item": "DropTable4", "quantity": 2, "chance": 0.014, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,
@@ -8379,9 +9233,9 @@ export const initEnemyRepo = () => {
                     "MonsterHPTotal": 5,
                     "Type": EnemyTypeEnum.treeType,
                     "SpecialType": "",
-                    "ExpGiven": 6000,
+                    "ExpGiven": 8500,
                     "ExpType": 3,
-                    "Defence": 1500000,
+                    "Defence": 4200000,
                     "MoveSPEED": 0,
                     "Damages": [0, 1],
                     "DefFor0": 0.22
@@ -8391,6 +9245,72 @@ export const initEnemyRepo = () => {
                         <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsF25", "quantity": 1, "chance": 1e-08, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable28", "quantity": 1, "chance": 0.0089, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("Tree12", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Bamboo",
+                    "AFKtype": AFKTypeEnum.Choppin,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 32,
+                    "MonsterOffsetY": 0,
+                    "HeightOfMonster": 100,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 5,
+                    "RespawnTime": 0,
+                    "DeathFrame": 14,
+                    "MonsterHPTotal": 5,
+                    "Type": EnemyTypeEnum.treeType,
+                    "SpecialType": "",
+                    "ExpGiven": 15000,
+                    "ExpType": 3,
+                    "Defence": 25000000,
+                    "MoveSPEED": 0,
+                    "Damages": [0, 1],
+                    "DefFor0": 0.22
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsF25", "quantity": 1, "chance": 1e-08, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable29", "quantity": 1, "chance": 0.0089, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("Tree13", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Effervescent Eucalyptus",
+                    "AFKtype": AFKTypeEnum.Choppin,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 32,
+                    "MonsterOffsetY": 0,
+                    "HeightOfMonster": 100,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 5,
+                    "RespawnTime": 0,
+                    "DeathFrame": 15,
+                    "MonsterHPTotal": 5,
+                    "Type": EnemyTypeEnum.treeType,
+                    "SpecialType": "",
+                    "ExpGiven": 32000,
+                    "ExpType": 3,
+                    "Defence": 125000000,
+                    "MoveSPEED": 0,
+                    "Damages": [0, 1],
+                    "DefFor0": 0.22
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsF25", "quantity": 1, "chance": 1e-08, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable31", "quantity": 1, "chance": 0.0089, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,
@@ -9271,6 +10191,102 @@ export const initEnemyRepo = () => {
                 "navigation": undefined,
                 "bossData": undefined
             }),
+        new EnemyBase("BugNest11", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Equinox Nest",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 32,
+                    "MonsterOffsetY": 30,
+                    "HeightOfMonster": 100,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 207,
+                    "RespawnTime": 8640000,
+                    "DeathFrame": 9,
+                    "MonsterHPTotal": 999999999,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 2,
+                    "ExpType": 6,
+                    "Defence": 1,
+                    "MoveSPEED": 0,
+                    "Damages": [6, 1],
+                    "DefFor0": 2.67
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Grasslands2", "quantity": 2, "chance": 0, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("BugNest12", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Ladybug Nest",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 32,
+                    "MonsterOffsetY": 30,
+                    "HeightOfMonster": 100,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 207,
+                    "RespawnTime": 8640000,
+                    "DeathFrame": 10,
+                    "MonsterHPTotal": 999999999,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 2,
+                    "ExpType": 6,
+                    "Defence": 1,
+                    "MoveSPEED": 0,
+                    "Damages": [6, 1],
+                    "DefFor0": 2.67
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Grasslands2", "quantity": 2, "chance": 0, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("BugNest13", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Firefly Nest",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 32,
+                    "MonsterOffsetY": 30,
+                    "HeightOfMonster": 100,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 207,
+                    "RespawnTime": 8640000,
+                    "DeathFrame": 11,
+                    "MonsterHPTotal": 999999999,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 2,
+                    "ExpType": 6,
+                    "Defence": 1,
+                    "MoveSPEED": 0,
+                    "Damages": [6, 1],
+                    "DefFor0": 2.67
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Grasslands2", "quantity": 2, "chance": 0, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
         new EnemyBase("Bug1", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
                     "Name": "Flies",
@@ -9624,7 +10640,7 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 3500,
                     "ExpType": 6,
-                    "Defence": 1100000,
+                    "Defence": 6000000,
                     "MoveSPEED": 0,
                     "Damages": [6, 1],
                     "DefFor0": 2.67
@@ -9634,6 +10650,72 @@ export const initEnemyRepo = () => {
                         <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsF27", "quantity": 1, "chance": 1e-08, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable26", "quantity": 1, "chance": 1e-08, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("Bug12", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Ladybug",
+                    "AFKtype": AFKTypeEnum.Catching,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 32,
+                    "MonsterOffsetY": 50,
+                    "HeightOfMonster": 100,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 1,
+                    "RespawnTime": 0,
+                    "DeathFrame": 10,
+                    "MonsterHPTotal": 5,
+                    "Type": EnemyTypeEnum.bugType,
+                    "SpecialType": "",
+                    "ExpGiven": 7500,
+                    "ExpType": 6,
+                    "Defence": 25000000,
+                    "MoveSPEED": 0,
+                    "Damages": [6, 1],
+                    "DefFor0": 2.67
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsF37", "quantity": 1, "chance": 5e-06, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable29", "quantity": 1, "chance": 0.015, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("Bug13", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Firefly",
+                    "AFKtype": AFKTypeEnum.Catching,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 32,
+                    "MonsterOffsetY": 50,
+                    "HeightOfMonster": 100,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 1,
+                    "RespawnTime": 0,
+                    "DeathFrame": 10,
+                    "MonsterHPTotal": 5,
+                    "Type": EnemyTypeEnum.bugType,
+                    "SpecialType": "",
+                    "ExpGiven": 20000,
+                    "ExpType": 6,
+                    "Defence": 150000000,
+                    "MoveSPEED": 0,
+                    "Damages": [6, 1],
+                    "DefFor0": 2.67
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsF38", "quantity": 1, "chance": 1e-06, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable30", "quantity": 1, "chance": 0.015, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,

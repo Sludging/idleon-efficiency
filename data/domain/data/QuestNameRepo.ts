@@ -311,6 +311,24 @@ export const initQuestNameRepo = () => {
         new QuestNameBase("Royal Worm19", <QuestNameModel>{"name": "A Royal Gift", "difficulty": 7}),
         new QuestNameBase("Royal Worm22", <QuestNameModel>{"name": "Bossin' the Boss", "difficulty": 8}),
         new QuestNameBase("Royal Worm28", <QuestNameModel>{"name": "Normie Bidding", "difficulty": 7}),
-        new QuestNameBase("Royal Worm32", <QuestNameModel>{"name": "Royal Bidding", "difficulty": 1})    
+        new QuestNameBase("Royal Worm32", <QuestNameModel>{"name": "Royal Bidding", "difficulty": 1}),
+        new QuestNameBase("Lafu Shi2", <QuestNameModel>{"name": "Seed Planting", "difficulty": 1}),
+        new QuestNameBase("Lafu Shi5", <QuestNameModel>{"name": "Visiting the Farmer's Market", "difficulty": 1}),
+        new QuestNameBase("Lafu Shi8", <QuestNameModel>{"name": "Climbing the Ninja Hotel", "difficulty": 1}),
+        new QuestNameBase("Lafu Shi11", <QuestNameModel>{"name": "Emporium Investing", "difficulty": 1}),
+        new QuestNameBase("Lafu Shi14", <QuestNameModel>{"name": "Summoning Debut", "difficulty": 1}),
+        new QuestNameBase("Lafu Shi17", <QuestNameModel>{"name": "Essence Juicing", "difficulty": 1}),
+        new QuestNameBase("Hoov2", <QuestNameModel>{"name": "Sneak Dropout", "difficulty": 1}),
+        new QuestNameBase("Hoov5", <QuestNameModel>{"name": "Stealth Check 1 2 3", "difficulty": 3}),
+        new QuestNameBase("Hoov8", <QuestNameModel>{"name": "Sneak Registration", "difficulty": 5}),
+        new QuestNameBase("Hoov11", <QuestNameModel>{"name": "Sneak Graduate", "difficulty": 8}),
+        new QuestNameBase("Woodlin Elder2", <QuestNameModel>{"name": "Portal Issues", "difficulty": 2}),
+        new QuestNameBase("Woodlin Elder5", <QuestNameModel>{"name": "Big Lock Picking", "difficulty": 3}),
+        new QuestNameBase("Woodlin Elder8", <QuestNameModel>{"name": "Fiddy", "difficulty": 1}),
+        new QuestNameBase("Woodlin Elder11", <QuestNameModel>{"name": "Hunned Fiddy", "difficulty": 4}),
+        new QuestNameBase("Woodlin Elder14", <QuestNameModel>{"name": "Triple Tre", "difficulty": 7}),
+        new QuestNameBase("Sussy Gene3", <QuestNameModel>{"name": "Goofin' Around", "difficulty": 3}),
+        new QuestNameBase("Sussy Gene6", <QuestNameModel>{"name": "Messin' Around", "difficulty": 5}),
+        new QuestNameBase("Sussy Gene9", <QuestNameModel>{"name": "Loiterin' Around", "difficulty": 8})    
 ]
 }

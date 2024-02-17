@@ -115,7 +115,7 @@ function OnHoverNav({ link, label, subLinks }: { link: string, label: string, su
             <NavMenu
                 key={`link_${label}`}
                 dropBackground="dark-1"
-                dropProps={{ align: { top: 'bottom' }, elevation: 'navigation' }}
+                dropProps={{ align: { top: 'bottom', left: 'left' }, elevation: 'navigation' }}
                 items={subLinks.map(({ subLink, label }) => (
                     {
                         label: <Text size="small">{label}</Text>,
@@ -158,20 +158,20 @@ export default function Layout({
             link: "/", label: "Dashboard"
         },
         {
-            link: "/world-1", label: "World 1", subLinks: [
+            link: "/world-1", label: "W1", subLinks: [
                 { subLink: "/stamps", label: "Stamps" },
                 { subLink: "/forge", label: "Forge" },
                 { subLink: "/anvil", label: "Anvil" },
             ]
         },
         {
-            link: "/world-2", label: "World 2", subLinks: [
+            link: "/world-2", label: "W2", subLinks: [
                 { subLink: "/alchemy", label: "Alchemy" },
                 { subLink: "/arcade", label: "Arcade" },
             ]
         },
         {
-            link: "/world-3", label: "World 3", subLinks: [
+            link: "/world-3", label: "W3", subLinks: [
                 { subLink: "/construction", label: "Construction" },
                 { subLink: "/worship", label: "Worship" },
                 { subLink: "/trapping", label: "Trapping" },
@@ -179,7 +179,7 @@ export default function Layout({
             ]
         },
         {
-            link: "/world-4", label: "World 4", subLinks: [
+            link: "/world-4", label: "W4", subLinks: [
                 { subLink: "/cooking", label: "Cooking" },
                 { subLink: "/lab", label: "Lab" },
                 { subLink: "/breeding", label: "Breeding" },
@@ -187,10 +187,17 @@ export default function Layout({
             ]
         },
         {
-            link: "/world-5", label: "World 5", subLinks: [
+            link: "/world-5", label: "W5", subLinks: [
                 { subLink: "/divinity", label: "Divinity" },
                 { subLink: "/sailing", label: "Sailing" },
                 { subLink: "/gaming", label: "Gaming" },
+            ]
+        },
+        {
+            link: "/world-6", label: "W6", subLinks: [
+                { subLink: "/sneaking", label: "Sneaking" },
+                { subLink: "/summoning", label: "Summoning" },
+                { subLink: "/farming", label: "Farming" },
             ]
         },
         { link: "/players", label: "Players" },

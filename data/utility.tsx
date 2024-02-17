@@ -50,8 +50,12 @@ export enum Coins {
     Lustre = 7,
     Starfire = 8,
     Dreadlo = 9,
-    Godshard = 10
-
+    Godshard = 10,
+    W6One = 11,
+    W6Two = 12,
+    W6Three = 13,
+    W6Four = 14,
+    W6Five = 15,
 }
 
 export const dateToText = (date: Date): string => {
@@ -164,10 +168,13 @@ export const nFormatter = (num: number, type: string = "Smaller") => {
     }
 }
 
+// I don't remember where this code is from and it doesn't look like the game.
+// I'm totally guessing numbers here so need to fix it one day to look like the game
+// or add many commments about WHY this is correct.
 export const getCoinsArray = (coins: number): Map<Coins, number> => {
     var n = coins;
     var ret = new Map<Coins, number>();
-    var i = 18;
+    var i = 26;
     do {
         var expo = Math.pow(10, i);
         if (n > expo) {

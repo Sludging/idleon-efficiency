@@ -360,7 +360,7 @@ export const initPetRepo = () => {
                     "description": "Drop da bomba...",
                     "combatDescription": "When foraging, the pets in the territory above and below contribute 1.50x Fight Power"
                 },
-                "shinyBonus": <ShinyBonusModel>{"shinyIndex": 24, "shinyBonusDesc": "World 6...?", "bonusPerLvl": 1}
+                "shinyBonus": <ShinyBonusModel>{"shinyIndex": 24, "shinyBonusDesc": "+{% Farming EXP gain", "bonusPerLvl": 1}
             }),
         new PetBase(16, <PetModel>{
                 "stats": <PetStatModel>{
@@ -687,7 +687,7 @@ export const initPetRepo = () => {
                     "description": "Fires a laser, dealing 100% Damage to all enemies every 1 sec. Strangely enough, the laser will continue zapping as long as you dont click anything.",
                     "combatDescription": "When in combat, all pets have their abilities fill up +10% faster"
                 },
-                "shinyBonus": <ShinyBonusModel>{"shinyIndex": 24, "shinyBonusDesc": "World 6...?", "bonusPerLvl": 1}
+                "shinyBonus": <ShinyBonusModel>{"shinyIndex": 24, "shinyBonusDesc": "+{% Farming EXP gain", "bonusPerLvl": 1}
             }),
         new PetBase(31, <PetModel>{
                 "stats": <PetStatModel>{
@@ -754,7 +754,7 @@ export const initPetRepo = () => {
                     "description": "For 10 seconds, every critical hit boosts the block chance of all pets by 1%",
                     "combatDescription": "When in Fence Yard, randomly lays eggs which can be picked up and will appear in your incubator. Egg laying time takes MANY hours, but will stay until you revisit the pet yard personally, you don't need to stand around personally and wait."
                 },
-                "shinyBonus": <ShinyBonusModel>{"shinyIndex": 25, "shinyBonusDesc": "World 6...?", "bonusPerLvl": 1}
+                "shinyBonus": <ShinyBonusModel>{"shinyIndex": 25, "shinyBonusDesc": "+{% Summoning EXP gain", "bonusPerLvl": 1}
             }),
         new PetBase(34, <PetModel>{
                 "stats": <PetStatModel>{
@@ -1077,7 +1077,7 @@ export const initPetRepo = () => {
                     "description": "Fires a laser, dealing 100% Damage to all enemies every 1 sec. Strangely enough, the laser will continue zapping as long as you dont click anything.",
                     "combatDescription": "When in combat, all pets have their abilities fill up +10% faster"
                 },
-                "shinyBonus": <ShinyBonusModel>{"shinyIndex": 24, "shinyBonusDesc": "World 6...?", "bonusPerLvl": 1}
+                "shinyBonus": <ShinyBonusModel>{"shinyIndex": 24, "shinyBonusDesc": "+{% Farming EXP gain", "bonusPerLvl": 1}
             }),
         new PetBase(49, <PetModel>{
                 "stats": <PetStatModel>{
@@ -1119,7 +1119,7 @@ export const initPetRepo = () => {
                     "description": "The next non Basic Attack fired will deal x2.50 Damage.",
                     "combatDescription": "When foraging, this pet contributes 5x Foraging Speed if the pet above this one is also a Targeter"
                 },
-                "shinyBonus": <ShinyBonusModel>{"shinyIndex": 24, "shinyBonusDesc": "World 6...?", "bonusPerLvl": 1}
+                "shinyBonus": <ShinyBonusModel>{"shinyIndex": 24, "shinyBonusDesc": "+{% Farming EXP gain", "bonusPerLvl": 1}
             }),
         new PetBase(51, <PetModel>{
                 "stats": <PetStatModel>{
@@ -1161,7 +1161,7 @@ export const initPetRepo = () => {
                     "description": "Drop da bomba...",
                     "combatDescription": "When foraging, the pets in the territory above and below contribute 1.50x Fight Power"
                 },
-                "shinyBonus": <ShinyBonusModel>{"shinyIndex": 24, "shinyBonusDesc": "World 6...?", "bonusPerLvl": 1}
+                "shinyBonus": <ShinyBonusModel>{"shinyIndex": 24, "shinyBonusDesc": "+{% Farming EXP gain", "bonusPerLvl": 1}
             }),
         new PetBase(53, <PetModel>{
                 "stats": <PetStatModel>{
@@ -1203,7 +1203,7 @@ export const initPetRepo = () => {
                     "description": "Duplicates all friendly attacks instantly, almost like magic!",
                     "combatDescription": "When foraging, all pets contribute 1.50x more Foraging Speed if there are no Combat Pets in team"
                 },
-                "shinyBonus": <ShinyBonusModel>{"shinyIndex": 25, "shinyBonusDesc": "World 6...?", "bonusPerLvl": 1}
+                "shinyBonus": <ShinyBonusModel>{"shinyIndex": 25, "shinyBonusDesc": "+{% Summoning EXP gain", "bonusPerLvl": 1}
             }),
         new PetBase(55, <PetModel>{
                 "stats": <PetStatModel>{

@@ -16,25 +16,7 @@ import { NextSeo } from 'next-seo';
 import { Player } from "../../data/domain/player";
 import IconImage from "../../components/base/IconImage";
 import { Constellation } from "../../data/domain/constellations";
-
-enum CharacterBoxStatus {
-    Complete,
-    Started,
-    Disabled
-}
-
-function CharacterBox({ player, status }: { player: Player, status: CharacterBoxStatus }) {
-    return (
-        <Box background="dark-2" align="center" pad={{ top: "xsmall", bottom: "xsmall", left: "small", right: "small" }} gap="xsmall" direction="row" border={{ size: '2px', color: status == CharacterBoxStatus.Complete ? 'green-1' : 'none' }}>
-            <Box style={{ opacity: status == CharacterBoxStatus.Disabled ? 0.4 : 1 }}>
-                <IconImage data={player.getClassImageData()} scale={0.7} />
-            </Box>
-            <Box>
-                <Text color="grey-2" size="12px" truncate={true}>{player.playerName}</Text>
-            </Box>
-        </Box>
-    )
-}
+import { CharacterBox } from "../../components/base/CharacterBox";
 
 function Constellations() {
     const [playerData, setPlayerData] = useState<Player[]>();
@@ -115,8 +97,9 @@ function Constellations() {
                                                         <Grid columns={{ size: '120px' }} gap="small">
                                                             {
                                                                 playerData?.map((player, index) => {
+                                                                    const isComplete = filteredConstellation.completedByPlayerIndex.includes(index);
                                                                     return (
-                                                                        <CharacterBox key={index} player={player} status={filteredConstellation.completedByPlayerIndex.includes(index) ? CharacterBoxStatus.Complete : CharacterBoxStatus.Disabled} />
+                                                                        <CharacterBox key={index} player={player} borderColor={isComplete ? 'green-1' : 'none'} opacity={isComplete ? 1 : 0.4} title={player.playerName} />
                                                                     )
                                                                 })
                                                             }

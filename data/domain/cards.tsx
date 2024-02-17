@@ -156,7 +156,8 @@ export class CardInfo {
     }
 
     getBonusForId = (id: number) => {
-        if (this.cardSet.text == IDforCardSETbonus[id]) {
+        const matchingSet = IDforCardSETbonus.at(id);
+        if (matchingSet && this.cardSet.text == matchingSet.data.bonus) {
             return this.cardSet.bonus;
         }
         return 0;
