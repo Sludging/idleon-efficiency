@@ -101,8 +101,10 @@ function Equinox() {
                         <Grid columns={{ size: 'auto', count: 4 }} fill>
                             {
                                 equinox.upgrades.map((upgrade, index) => {
-                                    const foodLust = isFoodLust(upgrade);
-                                    const border = foodLust ? { color: 'green-1', size: '1px' } : undefined
+                                    let border = undefined;
+                                    if (isFoodLust(upgrade) && upgrade.isCapped()) {
+                                        border = { color: 'green-1', size: '1px' }
+                                    }
                                     return (
                                         <ShadowBox border={border} style={{ opacity: upgrade.unlocked ? 1 : 0.5 }} key={index} background="dark-1" margin={{ right: 'small', bottom: 'small' }} pad="medium" gap="medium">
                                             <Text>{upgrade.data.name} ({upgrade.level}/{upgrade.maxLevel})</Text>
