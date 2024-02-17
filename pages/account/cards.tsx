@@ -15,12 +15,30 @@ import { CardSet } from '../../data/domain/cardSets';
 import TipDisplay from '../../components/base/TipDisplay';
 import { initCardSetRepo } from '../../data/domain/data/CardSetRepo';
 
+const shouldHideCard = ({ card }: { card: Card }) => {
+    // If you have the card, nothing to hide.
+    if (card.count > 0) {
+        return false;
+    }
+    // If it's W6 and you don't have it, hide.
+    if (card.data.category == "Spirited Valley") {
+        return true;
+    }
+    // If it's W6 boss and you don't have it, hide.
+    if (card.id.includes("Boss6")) {
+        return true;
+    }
+
+    // Show everything else.
+    return false;
+}
+
 const CardBox = ({ card }: { card: Card }) => {
     const currentCardLevel = card.getStars();
     const cardsToNextLevel = card.count > 0 ? (card.getCardsForStar(currentCardLevel + 1) - card.count) : 1;
 
     // Lava asked to hide W6 data for a bit, so hiding it if you don't have it
-    if ((card.data.category == "Spirited Valley" || card.id.includes("Boss6")) && card.count == 0) {
+    if (shouldHideCard({ card })) {
         return (
             <ShadowBox background='dark-1' style={{ opacity: card.count > 0 ? 1 : 0.5 }} gap='small' pad='medium' align='left'>
                 Hidden
