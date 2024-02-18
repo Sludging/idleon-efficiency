@@ -118,6 +118,7 @@ export const AuthProvider: React.FC<{ appLoading: boolean, data: { data: Map<str
                     setUser(null);
                     setAuthStatus(AuthStatus.NoUser);
                     router.push('/');
+                    router.reload()
                 }).catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
