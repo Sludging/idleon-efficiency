@@ -41,6 +41,15 @@ const moduleExports = {
     hideSourceMaps: true,
     disableServerWebpackPlugin: true,
   },
+  async redirects() {
+    return [
+      {
+        source: '/ads.txt',
+        destination: 'https://config.playwire.com/dyn_ads/1025192/74808/ads.txt',
+        permanent: true,
+      },
+    ]
+  },
   generateBuildId: () => nextBuildId({ dir: __dirname }),
   // Use the CDN in production and unchanged for local and preview.
   assetPrefix: useCDN ? `https://cdn2.idleonefficiency.com/${currentPatch}/` : undefined,

@@ -1,10 +1,9 @@
 import { Anchor, Box } from "grommet";
+import Link from "next/link";
 import { ComponentType, createElement, useState } from "react";
 
-const IconLink = ({ icon, href, text }: { icon: ComponentType<any>, href: string, text: string }) => {
+const IconLink = ({ icon, href, text, target = "_blank", rel = "noopener" }: { icon?: ComponentType<any>, href: string, text: string, target?: string, rel?: string }) => {
     const [color, setColor] = useState<string>("#828D99");
-    const Cmp = icon;
-
     const onHover = () => {
         setColor("#0376E3")
     }
@@ -15,13 +14,13 @@ const IconLink = ({ icon, href, text }: { icon: ComponentType<any>, href: string
 
 
     return (
-        <Box onMouseLeave={() => onExit()} onMouseEnter={() => onHover()} direction="row" gap="small" pad="small" justify="end" align="center">
-            { createElement(icon, {
+        <Box onMouseLeave={() => onExit()} onMouseEnter={() => onHover()} direction="row" gap="small" justify="end" align="center">
+            { icon && createElement(icon, {
                 "fill": color,
                 "width": '16px',
                 "height": '16px'
             }) }
-            <Anchor color={color} target="_blank" href={href}>{text}</Anchor>
+            <Link style={{textDecoration: 'none', color: color, fontWeight: 'bold'}} rel={rel} target={target} href={href}>{text}</Link>
         </Box>
     )
 }
