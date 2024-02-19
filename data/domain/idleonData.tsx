@@ -206,6 +206,7 @@ const postProcessingMap: Record<string, Function> = {
 
 // I really really hate this.
 const postPostProcessingMap: Record<string, Function> = {
+    "sigils": (doc: Cloudsave, accountData: Map<string, any>) => updateSigils(accountData),
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStampMaxCarry(accountData),
     "family": (doc: Cloudsave, accountData: Map<string, any>) => calculateFamily(accountData),
     "playersExtraMaths": (doc: Cloudsave, accountData: Map<string, any>) => playerExtraCalculations(accountData),
