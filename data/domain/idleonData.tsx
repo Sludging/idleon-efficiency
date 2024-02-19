@@ -28,7 +28,7 @@ import { Cooking, updateCooking } from './cooking';
 import { Lab, updateLab } from './lab';
 import { Breeding, updateAllShinyEffects, updateBreeding } from './breeding';
 import { notUndefined } from '../utility';
-import { Sigils, updateSigils } from './sigils';
+import { Sigils, updateSigils, updateSigilsChargeSpeed } from './sigils';
 import { AnvilWrapper, updateAnvil } from './anvil';
 import { Alerts, updateAlerts } from './alerts';
 import { Account, updateAccount } from './account';
@@ -206,7 +206,6 @@ const postProcessingMap: Record<string, Function> = {
 
 // I really really hate this.
 const postPostProcessingMap: Record<string, Function> = {
-    "sigils": (doc: Cloudsave, accountData: Map<string, any>) => updateSigils(accountData),
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStampMaxCarry(accountData),
     "family": (doc: Cloudsave, accountData: Map<string, any>) => calculateFamily(accountData),
     "playersExtraMaths": (doc: Cloudsave, accountData: Map<string, any>) => playerExtraCalculations(accountData),
@@ -215,6 +214,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateMinTravelTime(accountData),
     "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
     "statueBuffs": (doc: Cloudsave, accountData: Map<string, any>) => updateStatueBonuses(accountData),
+    "sigilsChargeSpeed": (doc: Cloudsave, accountData: Map<string, any>) => updateSigilsChargeSpeed(accountData),
 }
 
 export const updateIdleonData = async (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: number[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
