@@ -26476,6 +26476,13 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Quicc Cauldron@Essence Boost",
+                        "name": "Quicc Cauldron: Essence Boost Bubble",
+                        "amount": "Lots",
+                        "type": "bubble"
+                    },
+                    <UseModel>{
                         "repoSource": "ItemRepo",
                         "key": "StampA41",
                         "name": "Void Axe Stamp Material",
@@ -27584,6 +27591,13 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "BubbleRepo",
+                        "key": "Power Cauldron@Essence Boost",
+                        "name": "Power Cauldron: Essence Boost Bubble",
+                        "amount": "Lots",
+                        "type": "bubble"
+                    },
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
                         "key": "Vials@Ded Sap",
                         "name": "Vials: Ded Sap",
                         "amount": "Lots",
@@ -27676,6 +27690,13 @@ export const initUsesRepo = () => {
                         "name": "Herculean Soul Pouch Detailed Recipe",
                         "amount": 5000000,
                         "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "High-IQ Cauldron@Essence Boost",
+                        "name": "High-IQ Cauldron: Essence Boost Bubble",
+                        "amount": "Lots",
+                        "type": "bubble"
                     },
                     <UseModel>{
                         "repoSource": "BubbleRepo",

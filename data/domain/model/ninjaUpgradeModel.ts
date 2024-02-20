@@ -3,14 +3,14 @@
 export interface NinjaUpgradeModel {
     screenX: number,
     screenY: number,
-    x1: number,
-    x2: number,
+    width: number,
+    height: number,
     name: string,
-    x3: (number | string),
+    bonusPerLvl: (number | string),
     bonus: string,
-    x6: number,
-    x7: number,
-    x8: number,
-    x9: number,
-    x10: number
+    costBase: number,
+    costExponent: number,
+    unlockId: number,
+    iconX: number,
+    iconY: number
 }

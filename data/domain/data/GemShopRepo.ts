@@ -1639,7 +1639,7 @@ export const initGemShopRepo = () => {
                 "costIncrement": 70
             }),
         new GemShopItemBase(136, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "World 6",
                 "name": "GemP27",
                 "mtxName": "Plot Of Land",
                 "itemDisplayName": "",
@@ -1651,7 +1651,7 @@ export const initGemShopRepo = () => {
                 "costIncrement": 40
             }),
         new GemShopItemBase(137, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "World 6",
                 "name": "GemP28",
                 "mtxName": "Pristine Charm",
                 "itemDisplayName": "",
@@ -1663,7 +1663,7 @@ export const initGemShopRepo = () => {
                 "costIncrement": 0
             }),
         new GemShopItemBase(138, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "World 6",
                 "name": "GemP29",
                 "mtxName": "Shroom Familiar",
                 "itemDisplayName": "",
@@ -1675,7 +1675,7 @@ export const initGemShopRepo = () => {
                 "costIncrement": 70
             }),
         new GemShopItemBase(139, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "World 6",
                 "name": "GemP30",
                 "mtxName": "Sand Of Time",
                 "itemDisplayName": "Sand of Time",
@@ -1687,7 +1687,7 @@ export const initGemShopRepo = () => {
                 "costIncrement": 0
             }),
         new GemShopItemBase(140, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "World 6",
                 "name": "GemP31",
                 "mtxName": "Instagrow Generator",
                 "itemDisplayName": "",
@@ -1699,7 +1699,7 @@ export const initGemShopRepo = () => {
                 "costIncrement": 50
             }),
         new GemShopItemBase(141, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "World 6",
                 "name": "GemP32",
                 "mtxName": "Life Refill",
                 "itemDisplayName": "",
@@ -1711,7 +1711,7 @@ export const initGemShopRepo = () => {
                 "costIncrement": 12
             }),
         new GemShopItemBase(142, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "World 6",
                 "name": "Quest81",
                 "mtxName": "Compost Bag",
                 "itemDisplayName": "Compost Bag",
@@ -1723,7 +1723,7 @@ export const initGemShopRepo = () => {
                 "costIncrement": 0
             }),
         new GemShopItemBase(143, <GemShopItemModel>{
-                "section": "Blank",
+                "section": "World 6",
                 "name": "Quest82",
                 "mtxName": "Summoner Stone",
                 "itemDisplayName": "Summoner Stone",
