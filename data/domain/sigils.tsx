@@ -48,8 +48,8 @@ export class Sigils extends Domain {
 
     chargeSpeed: number = 0;
 
-    setSigilSpeed = (achievBonus112: number, gemStoreBonus110: number, stampStampC12: number, vialBonus63: number) => {
-        this.chargeSpeed = 1 + ((achievBonus112 + stampStampC12 + this.sigils[12].getBonus() + gemStoreBonus110 + vialBonus63) / 100);
+    setSigilSpeed = (achievBonus112: number, gemStoreBonus110: number, stampStampC12: number, vialBonus61: number) => {
+        this.chargeSpeed = 1 + ((achievBonus112 + stampStampC12 + this.sigils[12].getBonus() + gemStoreBonus110 + vialBonus61) / 100);
     }
 
     getRawKeys(): RawData[] {
@@ -112,7 +112,7 @@ export const updateSigilsChargeSpeed = (data: Map<string, any>) => {
     const sigilAchiev = achievements[112].completed ? 20 : 0;
     const sigilGemBonus = (gemStore.purchases.find(purchase => purchase.no == 110)?.pucrhased ?? 0) * 20;
     const stampBonus = stampData[2]?.find(stamp => stamp.raw_name == "StampC12")?.getBonus() || 0;
-    const vialBonus = alchemyData.vials?.find(vial => vial.vialIndex == 63)?.getBonus() || 0;
+    const vialBonus = alchemyData.vials?.find(vial => vial.vialIndex == 61)?.getBonus() || 0;
 
     sigils.setSigilSpeed(sigilAchiev, sigilGemBonus, stampBonus, vialBonus);
 
