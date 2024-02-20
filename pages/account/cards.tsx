@@ -117,7 +117,7 @@ const CardSetBox = ({ cardSet }: { cardSet: CardSet }) => {
                         </Box>
                     }
                 >
-                    <Box direction='row' gap='medium' align='center'>
+                    <Box direction='row' gap='small' align='center'>
                         <Stack>
                             <Box>
                                 <IconImage data={cardSet.getImageData()} />
@@ -132,13 +132,11 @@ const CardSetBox = ({ cardSet }: { cardSet: CardSet }) => {
                         </Box>
                     </Box>
                 </TipDisplay>
-                <Box direction='row' gap='small' align='center'>
-                    <Grid columns={{ size: 'auto', count: 5 }} gap='small'>
-                        {
-                            cardSet.cards?.sort((a, b) => a.data.order - b.data.order).map((card, index) => <CardBox key={index} card={card} />)
-                        }
-                    </Grid>
-                </Box>
+                <Grid width='100%' columns='small' gap='small'>
+                    {
+                        cardSet.cards?.sort((a, b) => a.data.order - b.data.order).map((card, index) => <CardBox key={index} card={card} />)
+                    }
+                </Grid>
             </Box>
         </Box>
     )
