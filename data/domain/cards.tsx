@@ -48,6 +48,14 @@ export class Card {
         }
     }
 
+    getLargeImageData = (): ImageData => {
+        return {
+            location: `2Cards${this.data.cardID}`,
+            width: 56,
+            height: 72
+        }
+    }
+
     getStars = (): number => {
         switch (true) {
             case this.fivestar && this.count >= Math.floor(this.getCardsForStar(5)): return 5;
@@ -91,6 +99,24 @@ export class Card {
             location: `CardsBorder${this.getStars() + 1}`,
             width: 31,
             height: 43
+        }
+    }
+
+    getLargeBorderImageData = (): ImageData => {
+        const stars = this.getStars();
+        if (stars <= 0) {
+            // There is no big border image for 0 star cards, so aas the small border is just no image we use it here too
+            return {
+                location: `CardsBorder1`,
+                width: 68,
+                height: 100
+            }
+        } else {
+            return {
+                location: `CardEquipBorder${stars}`,
+                width: 68,
+                height: 100
+            }
         }
     }
 
