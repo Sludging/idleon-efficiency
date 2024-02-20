@@ -6,6 +6,8 @@ import { ImageData } from "./imageData";
 import { Item } from "./items";
 import { SigilModel } from "./model/sigilModel";
 import { Sailing } from "./sailing";
+import { Stamp } from "./stamps";
+import { Alchemy as AlchemyData } from '../../data/domain/alchemy';
 
 export class Sigil {
     progress: number = 0
@@ -46,8 +48,8 @@ export class Sigils extends Domain {
 
     chargeSpeed: number = 0;
 
-    setSigilSpeed = (achievBonus112: number, gemStoreBonus110: number,) => {
-        this.chargeSpeed = 1 + (achievBonus112 + (this.sigils[12].getBonus() + gemStoreBonus110)) / 100;
+    setSigilSpeed = (achievBonus112: number, gemStoreBonus110: number, stampStampC12: number, vialBonus63: number) => {
+        this.chargeSpeed = 1 + ((achievBonus112 + stampStampC12 + this.sigils[12].getBonus() + gemStoreBonus110 + vialBonus63) / 100);
     }
 
     getRawKeys(): RawData[] {
@@ -89,18 +91,30 @@ export class Sigils extends Domain {
 // Currently only requires artifact to be post processed, can be below it.
 export const updateSigils = (data: Map<string, any>) => {
     const sigils = data.get("sigils") as Sigils;
-    const gemStore = data.get("gems") as GemStore;
-    const achievements = data.get("achievements") as Achievement[];
     const sailing = data.get("sailing") as Sailing;
-
-    const sigilAchiev = achievements[112].completed ? 20 : 0;
-    const sigilGemBonus = (gemStore.purchases.find(purchase => purchase.no == 110)?.pucrhased ?? 0) * 20;
-
+    
     const artifactBonus = sailing.artifacts[16].getBonus();
     sigils.sigils.forEach(sigil => {
         sigil.artifactBoost = artifactBonus;
     })
 
-    sigils.setSigilSpeed(sigilAchiev, sigilGemBonus);
+    return sigils;
+}
+
+export const updateSigilsChargeSpeed = (data: Map<string, any>) => {
+    // TODO : Add the bonus from summoning winner bonuses once there's a way to get it
+    const sigils = data.get("sigils") as Sigils;
+    const gemStore = data.get("gems") as GemStore;
+    const achievements = data.get("achievements") as Achievement[];
+    const stampData = data.get("stamps") as Stamp[][];
+    const alchemyData = data.get("alchemy") as AlchemyData;
+
+    const sigilAchiev = achievements[112].completed ? 20 : 0;
+    const sigilGemBonus = (gemStore.purchases.find(purchase => purchase.no == 110)?.pucrhased ?? 0) * 20;
+    const stampBonus = stampData[2]?.find(stamp => stamp.raw_name == "StampC12")?.getBonus() || 0;
+    const vialBonus = alchemyData.vials?.find(vial => vial.vialIndex == 63)?.getBonus() || 0;
+
+    sigils.setSigilSpeed(sigilAchiev, sigilGemBonus, stampBonus, vialBonus);
+
     return sigils;
 }
