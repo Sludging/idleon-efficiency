@@ -97,7 +97,7 @@ const CardBox = ({ card }: { card: Card }) => {
 
 const CardSetBox = ({ cardSet }: { cardSet: CardSet }) => {
     const currentLevel = cardSet.getLevel();
-    const nextLevel = currentLevel + 1;
+    const nextLevel = currentLevel+1;
     const totalCardLevels = cardSet.getCardsTotalStars()
 
     return (
@@ -108,9 +108,9 @@ const CardSetBox = ({ cardSet }: { cardSet: CardSet }) => {
                     body={
                         <Box margin={{ bottom: 'xsmall' }} direction='column' gap='medium'>
                             <Text size="small">Cards levels : {totalCardLevels} / {cardSet.cards?.length * 6}</Text>
-                            {(currentLevel < 5) &&
+                            {(currentLevel < 6) &&
                                 <Box direction='column' gap='xsmall'>
-                                    <Text size="small">Next bonus level in {(cardSet.cards?.length * (nextLevel + 1)) - totalCardLevels} card levels :</Text>
+                                    <Text size="small">Next bonus level in {(cardSet.cards?.length * (nextLevel)) - totalCardLevels} card levels :</Text>
                                     <Text size="small">{cardSet.getBonusText(nextLevel)}</Text>
                                 </Box>
                             }

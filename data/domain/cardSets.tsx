@@ -30,13 +30,12 @@ export class CardSet {
             height: 36
         }
     }
-
-    // TODO : When banners are up, change the width and height to better match the images original sizes
+    
     getBannerImageData = (): ImageData => {
         return {
-            location: `Cardbanner_${this.cardSetName.replaceAll(' ', '_')}`,
-            width: 28,
-            height: 36
+            location: `Cardsetbg${this.index}`,
+            width: 275,
+            height: 44
         }
     }
 
@@ -48,11 +47,12 @@ export class CardSet {
         const cardsTotalStars = this.getCardsTotalStars();
 
         switch (true) {
-            case cardsTotalStars >= this.cards.length * 6: return 5;
-            case cardsTotalStars >= this.cards.length * 5: return 4;
-            case cardsTotalStars >= this.cards.length * 4: return 3;
-            case cardsTotalStars >= this.cards.length * 3: return 2;
-            case cardsTotalStars >= this.cards.length * 2: return 1;
+            case cardsTotalStars >= this.cards.length * 6: return 6;
+            case cardsTotalStars >= this.cards.length * 5: return 5;
+            case cardsTotalStars >= this.cards.length * 4: return 4;
+            case cardsTotalStars >= this.cards.length * 3: return 3;
+            case cardsTotalStars >= this.cards.length * 2: return 2;
+            case cardsTotalStars >= this.cards.length : return 1;
             default: return 0;
         }
     }
@@ -71,7 +71,7 @@ export class CardSet {
 
     getBorderImageData = (): ImageData => {
         return {
-            location: `CardsBorder${this.getLevel()+1}`,
+            location: `CardsBorder${Math.max(this.getLevel(),1)}`, // prevent to show a text cause no image found if card set is lv.0 (and when page is loading)
             width: 31,
             height: 43
         }
