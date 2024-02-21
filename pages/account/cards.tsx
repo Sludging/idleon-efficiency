@@ -9,8 +9,8 @@ import { useEffect, useContext, useState } from 'react';
 import { AppContext } from '../../data/appContext';
 import { NextSeo } from 'next-seo';
 import ShadowBox from '../../components/base/ShadowBox';
-import IconImage from '../../components/base/IconImage';
-import { Card } from '../../data/domain/cards';
+import { IconImage, AdaptativeIconImage } from '../../components/base/IconImage';
+import { Card, CardsPossibleStars } from '../../data/domain/cards';
 import { CardSet } from '../../data/domain/cardSets';
 import TipDisplay from '../../components/base/TipDisplay';
 import { initCardSetRepo } from '../../data/domain/data/CardSetRepo';
@@ -33,6 +33,15 @@ const shouldHideCard = ({ card }: { card: Card }) => {
     return false;
 }
 
+const CardLevelDetailWithIcon = ({ card, star }: {card: Card, star: number}) => {
+    return (
+        <Box direction='row' justify='start' align='center' gap='xxsmall'>
+            <IconImage data={Card.getStarImageForLevel(star)} />
+            <Text size="small"> : {card.getBonusText(star)} ({Math.floor(card.getCardsForStar(star))} cards)</Text>
+        </Box>
+    )
+}
+
 const CardBox = ({ card }: { card: Card }) => {
     const currentCardLevel = card.getStars();
     const cardsToNextLevel = card.count > 0 ? (card.getCardsForStar(currentCardLevel + 1) - card.count) : 1;
@@ -52,17 +61,14 @@ const CardBox = ({ card }: { card: Card }) => {
                 heading={card.displayName + " Card"}
                 body={
                     <Box margin={{ bottom: 'xsmall' }} width='auto' direction='column' gap='small'>
-                        <Box direction='row' gap='large'>
+                        <Box width='100%' direction='row' gap='none' align='center'>
                             <Text size="small">Cards collected : {card.count}</Text>
                             <Text size="small">Base drop rate : {card.getBaseDropRateText()}</Text>
                         </Box>
-                        <Box>
-                            <Text size="small">0* : {card.getBonusText(0)} ({Math.floor(card.getCardsForStar(0))} cards)</Text>
-                            <Text size="small">1* : {card.getBonusText(1)} ({Math.floor(card.getCardsForStar(1))} cards)</Text>
-                            <Text size="small">2* : {card.getBonusText(2)} ({Math.floor(card.getCardsForStar(2))} cards)</Text>
-                            <Text size="small">3* : {card.getBonusText(3)} ({Math.floor(card.getCardsForStar(3))} cards)</Text>
-                            <Text size="small">4* : {card.getBonusText(4)} ({Math.floor(card.getCardsForStar(4))} cards)</Text>
-                            <Text size="small">5* : {card.getBonusText(5)} ({Math.floor(card.getCardsForStar(5))} cards)</Text>
+                        <Box direction='column'>
+                            {
+                                CardsPossibleStars.toSorted().map((star, index) => <CardLevelDetailWithIcon key={index} star={star} card={card} />)
+                            }
                         </Box>
                         {(currentCardLevel < 5) &&
                             <Box>
@@ -125,11 +131,11 @@ const CardSetBox = ({ cardSet }: { cardSet: CardSet }) => {
                             <Box>
                                 <IconImage data={cardSet.getBorderImageData()} />
                             </Box>
-                        </Stack>
-                        <Box direction='column' gap='none' align='left'>
-                            <Text size='large' style={{ fontWeight: 'bolder' }}>{cardSet.displayName}</Text>
-                            <Text size='small' color={cardSet.getBonus() == 0 ? 'grey' : ''}>{cardSet.getBonusText()}</Text>
-                        </Box>
+                        </Stack>        
+                        <Box direction='column' gap='none'>
+                            <AdaptativeIconImage data={cardSet.getBannerImageData()}/>
+                            <Text size='medium' color={cardSet.getBonus() == 0 ? 'grey' : ''}>{cardSet.getBonusText()}</Text>
+                        </Box>                    
                     </Box>
                 </TipDisplay>
                 <Grid width='100%' columns='small' gap='small'>
