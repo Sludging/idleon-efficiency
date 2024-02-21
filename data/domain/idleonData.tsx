@@ -47,6 +47,7 @@ import { Guild } from './guild';
 import { Rift } from './rift';
 import { Equinox, updateEquinoxBar } from './equinox';
 import { POExtra } from './postoffice';
+import { Sneaking } from './world-6/sneaking';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -115,6 +116,7 @@ const domainList: Domain[] = [
     new Rift("rift"),
     new POExtra("POExtra"),
     new Equinox("equinox"),
+    new Sneaking("sneaking"),
 ]
 
 export class IdleonData {
@@ -255,6 +257,7 @@ export const updateIdleonData = async (accountData: Map<string, any>, data: Clou
         parseData.set("lastUpdated", accountData.get("lastUpdated"));
         parseData.set("itemsData", allItems);
         parseData.set("playerNames", charNames);
+        parseData.set("servervars", serverVars);
         // TODO: Get rid of this. It's only used for players since it's a very unique one.
         parseData.set("rawData", data.toJSON())
 

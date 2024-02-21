@@ -268,7 +268,7 @@ export class Rift extends Domain {
         playerSkillLevels.forEach(playerSkills => {
             playerSkills.forEach((skillLevel, skillIndex) => {
                 // Only get the indexes we care about
-                if (skillIndex in SkillsIndex) {
+                if (skillIndex in skillMastery.skillLevels) {
                     skillMastery.skillLevels[skillIndex as SkillsIndex] += skillLevel;
                 }
             })

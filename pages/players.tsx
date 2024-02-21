@@ -1018,7 +1018,10 @@ function ZowInfo({ player }: { player: Player }) {
             "Spike Surprise", "YumYum Grotto", "Salty Shores", "Faraway Piers", "Filler", "Deepwater Docks", "Bandit Bob's Hideout", "Frostbite Towndra",
             "Tunnels Entrance", "Trappers Folley", "Freefall Caverns", "The Ol' Straightaway", "Slip Slidy Ledges", "Echoing Egress",
             "Blunder Hills", "JungleZ", "PlayerSelect", "Efaunt's Tomb", "The Roots", "Mummy Memorial", "Gravel Tomb", "Heaty Hole", "End Of The Road", "Z", "Eycicles's Nest", "The Office", "Enclave a la Troll",
-            "Magma Rivertown", "YumYum Islands", "Equinox Valley", "Chizoar's Cavern", "Tunnel Closed"].includes(area)) {
+            "Magma Rivertown", "YumYum Islands", "Equinox Valley", "Chizoar's Cavern", "Tunnel Closed",
+            // world 6
+            "Motherlode Pit", "Companion Park", "Spirit Village"
+        ].includes(area)) {
             return true;
         }
         return false;
