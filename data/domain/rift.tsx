@@ -57,8 +57,11 @@ export class InfiniteStarsBonus extends RiftBonus {
     }
 }
 
+// Rift doesn't care about the new w6 skills for now, so exclude them from our index.
+type RiftMasterySkills = Exclude<SkillsIndex, 16 | 17 | 18>
 export class SkillMastery extends RiftBonus {
-    skillLevels: Record<SkillsIndex, number> = {
+    
+    skillLevels: Record<RiftMasterySkills, number> = {
         [SkillsIndex.Mining]: 0,
         [SkillsIndex.Smithing]: 0,
         [SkillsIndex.Chopping]: 0,
@@ -76,7 +79,7 @@ export class SkillMastery extends RiftBonus {
         [SkillsIndex.Gaming]: 0,
     };
 
-    getSkillRank = (skill: SkillsIndex) => {
+    getSkillRank = (skill: RiftMasterySkills) => {
         const level = this.skillLevels[skill];
         switch (true) {
             case level < 150: return 0;
@@ -110,7 +113,7 @@ export class SkillMastery extends RiftBonus {
         return defaultBonuses[bonusIndex].replace(/_/g, " ").replace(/{/, skill == SkillsIndex.Intellect ? "Laboratory" : SkillsIndex[skill]);
     }
 
-    getSkillBonus = (skill: SkillsIndex, bonusIndex: number) => {
+    getSkillBonus = (skill: RiftMasterySkills, bonusIndex: number) => {
         if (!this.active) {
             return 0;
         }
@@ -160,7 +163,7 @@ export class SkillMastery extends RiftBonus {
             return baseBonus;
         }
 
-        return Object.entries(SkillsIndex).reduce((sum, [_, skill]) => sum += this.getSkillBonus(skill as SkillsIndex, bonusIndex), baseBonus);
+        return Object.entries(this.skillLevels).reduce((sum, [_, skill]) => sum += this.getSkillBonus(skill, bonusIndex), baseBonus);
     }
 }
 
@@ -269,7 +272,7 @@ export class Rift extends Domain {
             playerSkills.forEach((skillLevel, skillIndex) => {
                 // Only get the indexes we care about
                 if (skillIndex in skillMastery.skillLevels) {
-                    skillMastery.skillLevels[skillIndex as SkillsIndex] += skillLevel;
+                    skillMastery.skillLevels[skillIndex as RiftMasterySkills] += skillLevel;
                 }
             })
         });
