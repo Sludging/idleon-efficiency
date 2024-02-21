@@ -156,6 +156,44 @@ function Sneaking() {
                     </Grid>
                 </Box>
             </Box>
+            <Box>
+                <Text size="large">Sneaking Upgrades</Text>
+                <Box direction="row" wrap margin={{ top: 'large' }}>
+                    <Grid columns={{ size: 'medium', count: 'fill' }} fill>
+                        {
+                            // Once stop hiding info from people, just get rid of the filter on unlocked, the shouldBeDisplayed filter out useless placeholder bonuses
+                            // For now showing only unlocked ones that are displayed in-game.
+                            sneaking.upgrades
+                                .filter(upgrade => upgrade.shouldBeDisplayed == true && upgrade.unlocked)
+                                .map((upgrade, index) => {
+                                    return (
+                                        <ShadowBox style={{ opacity: upgrade.level > 0 ? 1 : 0.6 }} key={index} background="dark-1" margin={{ right: 'small', bottom: 'small' }} pad="medium" gap="medium">
+                                            <Box direction="column" gap="medium">
+                                                <Box direction="row" gap="medium" align="center">
+                                                    <IconImage data={upgrade.getImageData()} />
+                                                    <Text size="small">{upgrade.name}{upgrade.level > 0 ? " (Lv."+upgrade.level+")" : ""}</Text>
+                                                </Box>
+                                                <TextAndLabel textSize='xsmall' text={upgrade.getBonusText()} label={"Bonus"} />
+                                                {
+                                                    <ComponentAndLabel
+                                                        label={upgrade.level > 0 ? "Next level cost" : "Unlock Cost"}
+                                                        component={
+                                                            <Box gap="xsmall" direction="row">
+                                                                <IconImage data={sneaking.getJadeImageData()} scale={0.5} />
+                                                                <Text size="small">{nFormatter(upgrade.nextLevelCost())}</Text>
+                                                            </Box>
+                                                        }
+                                                    />
+                                                }
+                                            </Box>
+                                        </ShadowBox>
+                                    )
+                                })
+
+                        }
+                    </Grid>
+                </Box>
+            </Box>
         </Box>
     )
 }
