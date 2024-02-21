@@ -31,11 +31,19 @@ export class CardSet {
         }
     }
     
-    getBannerImageData = (): ImageData => {
+    getBannerWithBackgroundImageData = (): ImageData => {
         return {
             location: `Cardsetbg${this.index}`,
             width: 275,
             height: 44
+        }
+    }
+
+    getBannerImageData = (): ImageData => {
+        return {
+            location: `Cardbanner_${this.cardSetName.replaceAll(' ','_')}`,
+            width: 0,
+            height: 35
         }
     }
 
