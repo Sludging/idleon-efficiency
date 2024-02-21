@@ -114,7 +114,7 @@ export class SneakingUpgrade {
 
     getImageData = (): ImageData => {
         return {
-            location: `NjUpgl${this.index}`,
+            location: `NjUpgI${this.index}`,
             height: 62,
             width: 62
         }

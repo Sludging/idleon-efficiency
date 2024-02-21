@@ -166,6 +166,7 @@ function Sneaking() {
                             sneaking.upgrades
                                 .filter(upgrade => upgrade.shouldBeDisplayed == true && upgrade.unlocked)
                                 .map((upgrade, index) => {
+                                    const canAfford = sneaking.jade > upgrade.nextLevelCost();
                                     return (
                                         <ShadowBox style={{ opacity: upgrade.level > 0 ? 1 : 0.6 }} key={index} background="dark-1" margin={{ right: 'small', bottom: 'small' }} pad="medium" gap="medium">
                                             <Box direction="column" gap="medium">
@@ -180,7 +181,7 @@ function Sneaking() {
                                                         component={
                                                             <Box gap="xsmall" direction="row">
                                                                 <IconImage data={sneaking.getJadeImageData()} scale={0.5} />
-                                                                <Text size="small">{nFormatter(upgrade.nextLevelCost())}</Text>
+                                                                <Text color={canAfford ? 'green-1' : ''} size="small">{nFormatter(upgrade.nextLevelCost())}</Text>
                                                             </Box>
                                                         }
                                                     />
