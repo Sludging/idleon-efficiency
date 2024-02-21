@@ -88,7 +88,7 @@ function Sneaking() {
             </Box>
             <Box margin={{ bottom: 'medium' }}>
                 <Text size="large">Player Activity</Text>
-                <Box pad={{ top: "small", bottom: "small" }} fill direction="row" wrap>
+                <Grid columns={{ size: 'small', count: 'fill' }} pad={{ top: "small", bottom: "small" }}>
                     {
                         sneaking.players.map((player, index) => {
                             const playerData = players[player.index]
@@ -108,7 +108,7 @@ function Sneaking() {
                                 </Box>)
                         })
                     }
-                </Box>
+                </Grid>
             </Box>
             <Box>
                 <Text size="large">Jade Upgrades</Text>
