@@ -116,8 +116,6 @@ export class Sneaking extends Domain {
         const ninjaData = data.get("Ninja") as any[];
         const serverVars = data.get("servervars");
 
-        console.log(serverVars);
-
         // reset old data
         sneaking.players = [];
 
@@ -138,7 +136,6 @@ export class Sneaking extends Domain {
         const lettersOfEnabledUpgrades = ninjaData[102][9]
         const purchasedUpgrades: number[] = [];
         for (const upgradeLetter of lettersOfEnabledUpgrades) {
-            console.log(upgradeLetter, letterToNumber(upgradeLetter));
             purchasedUpgrades.push(letterToNumber(upgradeLetter));
         }
         sneaking.jadeUpgrades.forEach(upgrade => {
