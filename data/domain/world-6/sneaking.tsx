@@ -7,6 +7,7 @@ import { NinjaUpgradeBase, initNinjaUpgradeRepo } from "../data/NinjaUpgradeRepo
 import { ImageData } from "../imageData";
 import { Item } from "../items";
 import { JadeUpgradeModel } from "../model/jadeUpgradeModel";
+import { NinjaUpgradeModel } from "../model/ninjaUpgradeModel";
 
 export enum SneakingActivity {
     Sneaking = "Sneaking",
@@ -74,6 +75,58 @@ export class JadeUpgrade {
     }
 }
 
+export class SneakingUpgrade {
+    index: number = 0;
+    unlocked: boolean = false;
+    level: number = 0;
+    name: string = "";
+    bonusPerLvl: number = 0;
+    bonusText: string = "";
+    costBase: number = 0;
+    costExponent: number = 0;
+    unlockId: number = 0; 
+    shouldBeDisplayed: boolean = true;
+
+    constructor(data: NinjaUpgradeBase, level: number = 0) {
+        this.index = data.index;
+        this.level = level;
+        this.name = "";
+        if(typeof(data.data.bonusPerLvl) == "string") {
+            // If it's a string then that means it's an unused upgrade so we don't care about the value
+            this.bonusPerLvl = 0;
+        } else {
+            this.bonusPerLvl = data.data.bonusPerLvl;
+        }
+        this.shouldBeDisplayed = (data.data.name != "Name");
+        this.bonusText = data.data.bonus;
+        this.costBase = data.data.costBase;
+        this.costExponent = data.data.costExponent;
+        this.unlockId = data.data.unlockId; 
+    }
+
+    nextLevelCost = (): number => {
+        return this.costBase * Math.pow(this.level+1,this.costExponent);
+    }
+
+    getBonus = (level: number = this.level): number => {
+        return level * this.bonusPerLvl;
+    }
+
+    getBonusText = (level: number = this.level): string => {
+        return this.bonusText.replace(/{/, this.getBonus(level).toString());
+    }
+
+    static updateUnlockedUpgrades = (upgrades: SneakingUpgrade[]) => {
+        upgrades.forEach(upgrade => {
+            upgrade.unlocked = (upgrades.find(value => value.index == upgrade.unlockId)?.level?.valueOf() || 0) > 0 || false;
+        });
+    }
+
+    static fromBase = (data: NinjaUpgradeBase[]): SneakingUpgrade[] => {
+       return data.map((value) => new SneakingUpgrade(value));
+    }
+}
+
 export class Sneaking extends Domain {
     inventory: SneakingEquipment[] = [];
     players: SneakingPlayer[] = [];
@@ -85,8 +138,7 @@ export class Sneaking extends Domain {
     
     // You have loot: Njloot.png
 
-    // TODO: Convert this to a proper class so we can track level etc.
-    sneakingUpgrades: NinjaUpgradeBase[] = initNinjaUpgradeRepo();
+    upgrades: SneakingUpgrade[] = SneakingUpgrade.fromBase(initNinjaUpgradeRepo());
 
     jadeUpgrades: JadeUpgrade[] = initJadeUpgradeRepo()
         .filter(base => !["idk", "Idk yet"].includes(base.data.bonus))
@@ -108,9 +160,11 @@ export class Sneaking extends Domain {
             {key: "Lv0_", perPlayer: true, default: []},
         ]
     }
+
     init(allItems: Item[], charCount: number) {
         return this;
     }
+
     parse(data: Map<string, any>): void {
         const sneaking = data.get(this.dataKey) as Sneaking;
         const ninjaData = data.get("Ninja") as any[];
@@ -131,6 +185,15 @@ export class Sneaking extends Domain {
             const playerEquipment = ninjaData.slice(startingIndex, startingIndex + 4)
             sneaking.players.push(new SneakingPlayer(index, sneakingLevel, playerInfo, playerEquipment))
         }) 
+
+        const sneakingUpgradesLevels: number[] = ninjaData[103];
+        sneaking.upgrades = SneakingUpgrade.fromBase(initNinjaUpgradeRepo());
+        sneaking.upgrades.forEach(upgrade => {
+            if(upgrade.index < sneakingUpgradesLevels.length) {
+                upgrade.level = sneakingUpgradesLevels[upgrade.index];
+            }
+        });
+        SneakingUpgrade.updateUnlockedUpgrades(sneaking.upgrades);
 
         // Yes, Lava stores the enabled upgrades as letters in a single string, need to take that and convert to indexes.
         const lettersOfEnabledUpgrades = ninjaData[102][9]
