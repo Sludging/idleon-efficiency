@@ -100,12 +100,28 @@ def handleMonsterFaces():
         ("w5b6", "sprite-2-147", 5, 5),
         ("w5c1", "sprite-2-148", 5, 5),
         ("w5c2", "sprite-2-149", 5, 4),
+        # World 6
+        ("w6a1", "sprite-2-158", 6, 5),
+        ("w6a2", "sprite-2-159", 6, 6),
+        ("w6a3", "sprite-2-160", 6, 6),
+        ("w6a4", "sprite-2-161", 6, 6),
+        ("w6a5", "sprite-2-162", 6, 5),
+        ("w6b1", "sprite-2-163", 6, 6),
+        ("w6b2", "sprite-2-164", 6, 6),
+        ("w6b3", "sprite-2-165", 7, 7),
+        ("w6b4", "sprite-2-166", 6, 6),
+        ("w6c1", "sprite-2-167", 6, 6),
+        ("w6c2", "sprite-2-168", 6, 6),
+        ("w6d1", "sprite-2-169", 6, 5),
+        ("w6d2", "sprite-2-170", 5, 5),
+        ("w6d3", "sprite-2-171", 7, 7),
         # Crystals
         ("Crystal0", "sprite-2-59",5 ,5),
         ("Crystal1", "sprite-2-61",6 ,5),
         ("Crystal2", "sprite-2-84",6 ,6),
         ("Crystal3", "sprite-2-128",5 ,5),
         ("Crystal4",  "sprite-2-141", 5, 5),
+        ("Crystal5",  "sprite-2-172", 5, 5),
         # Mini bosses
         ("mini3a", "sprite-2-129",4 ,3),
         ("mini4a", "sprite-2-130",4 ,4),
@@ -145,7 +161,7 @@ def handleMonsterFaces():
             cut_frame = data.crop((left,top,right,bottom))
             # while cut_frame.size[0] < set_size or cut_frame.size[1] < set_size:
             #     cut_frame = cut_frame.resize([math.floor(s * 1.05) for s in cut_frame.size], Image.ANTIALIAS)
-            print("Original size: ", cut_frame.size, name)
+            #print("Original size: ", cut_frame.size, name)
             # while cut_frame.size[0] > set_size or cut_frame.size[1] > set_size:
             #     cut_frame = cut_frame.resize([math.floor(s * 0.95) for s in cut_frame.size], Image.ANTIALIAS)
 
@@ -219,7 +235,7 @@ def handleQuestGivers():
         ("Walupiggy", "sprite-84-70",4 ,4),
         # World 3
         ("Hoggindaz", "sprite-84-55",4 ,4),
-        ("Iceland Irwin", "sprite-84-58",4 ,4),
+        ("Iceland Irwin", "sprite-84-58",2 ,2),
         ("Carpenter Cardinal", "sprite-84-65",3 ,3),
         ("Worldo", "sprite-84-60",5 ,4),
         ("Lord of the Hunt", "sprite-84-66",3 ,2),
@@ -239,6 +255,9 @@ def handleQuestGivers():
         ("Eliteus", "sprite-84-80",4 ,3),
         ("Nebulyte", "sprite-84-87",4 ,3),
         ("Rift Ripper", "sprite-84-86",4 ,4),
+        ("Monolith", "sprite-84-90",1 ,1),
+        ("Nebulyte", "sprite-84-87",4 ,3, 6), # Need 6th frame (0 indexed, i.e. first frame = 0)
+        ("Royal Worm", "sprite-84-91",3 ,2),
         # World 5
         ("Muhmuguh", "sprite-84-84",3 ,3),
         ("Pirate Porkchop", "sprite-84-82",1 ,1),
@@ -246,6 +265,14 @@ def handleQuestGivers():
         ("Slargon", "sprite-84-81",3 ,2),
         ("Lava Larry", "sprite-84-85",2 ,2),
         ("Tired Mole", "sprite-84-89",3 ,3),
+        # World 6
+        ("Lafu Shi", "sprite-84-92",4 ,4),
+        ("Hoov", "sprite-84-93",4 ,4),
+        ("Woodlin Elder", "sprite-84-96",3 ,3),
+        ("Tribal Shaman", "sprite-84-95",3 ,2),
+        ("Sussy Gene", "sprite-84-98",4 ,3),
+        ("Legumulyte", "sprite-84-97",4 ,4),
+        ("Potti", "sprite-84-94",3 ,3),
         # Events
         ("Loveulyte", "sprite-84-57",4 ,3),
         ("Egggulyte", "sprite-84-67",3 ,3),
@@ -255,17 +282,27 @@ def handleQuestGivers():
     ]
     
     set_size = 50
-    for (name, file, columns, rows) in questMap:
+    for (name, file, columns, rows, *frame) in questMap:
+        # Extract the first frame of the sprite
+        targetFrame = 0
+        if len(frame) > 0:
+            targetFrame = frame[0]
+            print(f"Set target frame to {targetFrame} for {name}")
+
         with Image.open(f"data/icons/assets/graphics/1x/{file}.png") as im:
             data = im.getdata()
             w, h = im.size
             image_width = math.floor(w / columns)
             image_height = math.floor(h / rows)
             
-            top = 0
-            left = 0
-            bottom = image_height
-            right = image_width
+
+            top = image_height * (math.floor(targetFrame / columns) % rows)
+            left = image_width * (targetFrame % columns)
+            bottom = top + image_height
+            right = left + image_width
+
+            if targetFrame > 0:
+                print(f"{top} - {left} - {bottom} - {right} - {targetFrame}/{columns}/{rows}/{image_height}/{image_width}")
 
             # if (image_height > set_size or image_width > set_size):
 
