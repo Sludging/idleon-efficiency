@@ -57,14 +57,18 @@ export class Card {
     }
 
     getStars = (): number => {
-        switch (true) {
-            case this.fivestar && this.count >= Math.floor(this.getCardsForStar(5)): return 5;
-            case this.count >= Math.floor(this.getCardsForStar(4)): return 4;
-            case this.count >= Math.floor(this.getCardsForStar(3)): return 3;
-            case this.count >= Math.floor(this.getCardsForStar(2)): return 2;
-            case this.count >= Math.floor(this.getCardsForStar(1)): return 1;
-            default: return 0;
+        for (let i = Card.getMaximumCardStar(); i > 0; i--) {
+            if(i >= 5) {
+                if(this.fivestar && this.count >= Math.floor(this.getCardsForStar(i))) {
+                    return i;
+                }
+            } else {
+                if(this.count >= Math.floor(this.getCardsForStar(i))) {
+                    return i;
+                }
+            }            
         }
+        return 0;
     }
 
     getBaseDropRateText = (): string => {
@@ -138,6 +142,10 @@ export class Card {
 
     static fromBase = (data: CardDataBase[]) => {
         return data.map((card, index) => new Card(index, card.id, card.data))
+    }
+
+    static getMaximumCardStar = (): number => {
+        return CardsPossibleStars.reduce((a, b) => Math.max(a, b),-Infinity);
     }
 }
 
@@ -268,6 +276,8 @@ export const updateCards = (data: Map<string, any>) => {
         })
     }
 }
+
+export const CardsPossibleStars: number[] = [0,1,2,3,4,5];
 
 export const SkillsforIDCardPassiveBonus: Record<SkillsIndex, number[]> = {
     [SkillsIndex.Mining]: [24, 25, 33, 34],

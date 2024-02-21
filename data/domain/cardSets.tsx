@@ -46,15 +46,13 @@ export class CardSet {
 
         const cardsTotalStars = this.getCardsTotalStars();
 
-        switch (true) {
-            case cardsTotalStars >= this.cards.length * 6: return 6;
-            case cardsTotalStars >= this.cards.length * 5: return 5;
-            case cardsTotalStars >= this.cards.length * 4: return 4;
-            case cardsTotalStars >= this.cards.length * 3: return 3;
-            case cardsTotalStars >= this.cards.length * 2: return 2;
-            case cardsTotalStars >= this.cards.length : return 1;
-            default: return 0;
+        // This way the logic don't change if we ever need to change how many set levels there are
+        for (let i = CardSet.getMaximumCardSetLevel(); i > 0; i--) {
+            if(cardsTotalStars >= this.cards.length * i) {
+                return i;
+            }
         }
+        return 0;
     }
 
     getCardsTotalStars = (): number => {
@@ -75,6 +73,10 @@ export class CardSet {
             width: 31,
             height: 43
         }
+    }
+
+    static getMaximumCardSetLevel = (): number => {
+        return CardSetsPossibleLevels.reduce((a, b) => Math.max(a, b),-Infinity);
     }
 
     static fromBase = (data: CardSetBase[], cards: Card[] = []) => {
@@ -115,6 +117,8 @@ interface cardSetInfo {
     cardSetName: string,
     image: string,
 }
+
+export const CardSetsPossibleLevels: number[] = [0,1,2,3,4,5,6,7];
 
 // The IDs correspond to IDforCardSETbonus IDs
 // In case you want to get those infos from data in CardSetRepo you'll need to find the right ID using CardSet.getSetID() for example
