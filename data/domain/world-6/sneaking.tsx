@@ -128,7 +128,7 @@ export class Sneaking extends Domain {
 
     // Store the item source data so we can make decisions based on it.
     baseItems: BaseNinjaItemBase[] = initNinjaItemRepo();
-    upgrades: SneakingUpgrade[] = SneakingUpgrade.fromBase(initNinjaUpgradeRepo());
+    sneakingUpgrades: SneakingUpgrade[] = SneakingUpgrade.fromBase(initNinjaUpgradeRepo());
     jadeUpgrades: JadeUpgrade[] = initJadeUpgradeRepo()
         .filter(base => !["idk", "Idk yet"].includes(base.data.bonus))
         .map(
@@ -139,8 +139,8 @@ export class Sneaking extends Domain {
     // You have loot: Njloot.png
 
     updateUnlockedUpgrades = () => {
-        this.upgrades.forEach(upgrade => {
-            upgrade.unlocked = upgrade.data.unlockId == 0 ? true : (this.upgrades.find(value => value.index == upgrade.data.unlockId)?.level?.valueOf() || 0) > 0 || false;
+        this.sneakingUpgrades.forEach(upgrade => {
+            upgrade.unlocked = upgrade.data.unlockId == 0 ? true : (this.sneakingUpgrades.find(value => value.index == upgrade.data.unlockId)?.level?.valueOf() || 0) > 0 || false;
         });
     }
     
@@ -185,7 +185,7 @@ export class Sneaking extends Domain {
         }) 
 
         const sneakingUpgradesLevels: number[] = ninjaData[103];
-        sneaking.upgrades.forEach(upgrade => {
+        sneaking.sneakingUpgrades.forEach(upgrade => {
             if(upgrade.index < sneakingUpgradesLevels.length) {
                 upgrade.level = sneakingUpgradesLevels[upgrade.index];
             }

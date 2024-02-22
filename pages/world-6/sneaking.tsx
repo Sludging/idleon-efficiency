@@ -78,7 +78,7 @@ function Sneaking() {
                 }
             </Box>
             {activeTab == "Jade Upgrades" && <JadeUpgrades currentJade={sneaking.jade} indexOfBestUpgrade={indexOfBestUpgrade} jadeUpgrades={jadeUpgrades} />}
-            {activeTab == "Sneaking Upgrades" && <SneakingUpgrades currentJade={sneaking.jade} upgrades={sneaking.upgrades} />}
+            {activeTab == "Sneaking Upgrades" && <SneakingUpgrades currentJade={sneaking.jade} upgrades={sneaking.sneakingUpgrades} />}
         </Box>
     )
 }
