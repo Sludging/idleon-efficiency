@@ -19,9 +19,9 @@ export const SneakingUpgrades = ({ upgrades, currentJade } : { upgrades: Sneakin
                                 const canAfford = currentJade > upgrade.nextLevelCost();
                                 return (
                                     <ShadowBox style={{ opacity: upgrade.level > 0 ? 1 : 0.6 }} key={index} background="dark-1" margin={{ right: 'small', bottom: 'small' }} pad="medium" gap="medium">
-                                        <Box direction="column" gap="medium">
-                                            <Box direction="row" gap="medium" align="center">
-                                                <IconImage data={upgrade.getImageData()} />
+                                        <Box direction="column" gap="small">
+                                            <Box direction="row" gap="small" align="center">
+                                                <IconImage data={upgrade.getImageData()} scale={0.5} />
                                                 <Text size="small">{upgrade.name}{upgrade.level > 0 ? " (Lv." + upgrade.level + ")" : ""}</Text>
                                             </Box>
                                             <TextAndLabel textSize='xsmall' text={upgrade.getBonusText()} label={"Bonus"} />
