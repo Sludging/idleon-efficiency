@@ -43,7 +43,8 @@ export const AlchemyConst = {
     GospelLeader: 12,
     CallMePope: 11,
     CauldronCount: 4,
-    CauldronBonusBubbleIndex: 1
+    CauldronBonusBubbleIndex: 1,
+    LoCostMoJade: 29,
 };
 
 const cauldronPrefix: Record<string, string> = {

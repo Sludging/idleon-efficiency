@@ -1,5 +1,6 @@
 import { letterToNumber } from "../../utility";
 import { SkillsIndex } from "../SkillsIndex";
+import { Alchemy, AlchemyConst, CauldronIndex } from "../alchemy";
 import { Domain, RawData } from "../base/domain";
 import { initJadeUpgradeRepo } from "../data/JadeUpgradeRepo";
 import { BaseNinjaItemBase, initNinjaItemRepo } from "../data/NinjaItemRepo";
@@ -203,5 +204,16 @@ export class Sneaking extends Domain {
             upgrade.purchased = purchasedUpgrades.includes(upgrade.index);
             upgrade.costExponent = serverVars["A_empoExpon"];
         })
+    }
+}
+
+export const updateSneaking = (data: Map<string, any>) => {
+    const alchemy = data.get("alchemy") as Alchemy;
+    const sneaking = data.get("sneaking") as Sneaking;
+
+    // The bubble say that the exponent part is reduced, but that's actually just a standard price reduction from what I calculated
+    const currencyConduitUpgrade = sneaking.sneakingUpgrades.find(upgrade => upgrade.index == 8);
+    if (currencyConduitUpgrade) {
+        currencyConduitUpgrade.costMultiplier = 1 - (alchemy.getBonusForBubble(CauldronIndex.Kazam, AlchemyConst.LoCostMoJade)/100);
     }
 }
