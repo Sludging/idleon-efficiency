@@ -274,13 +274,13 @@ export const updateWorship = (data: Map<string, any>) => {
         worship.totalizer.unlockedBonuses.push(TotalizerBonus.SkillExp);
     }
     if (sneaking.jadeUpgrades[12].purchased) {
-        worship.totalizer.unlockedBonuses.push(TotalizerBonus.SkillExp);
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.FarmingExp);
     }
     if (sneaking.jadeUpgrades[13].purchased) {
-        worship.totalizer.unlockedBonuses.push(TotalizerBonus.SkillExp);
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.JadeCoin);
     }
     if (sneaking.jadeUpgrades[14].purchased) {
-        worship.totalizer.unlockedBonuses.push(TotalizerBonus.SkillExp);
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.EssenceGain);
     }
 
     const bestWizard = players.filter(player => [ClassIndex.Wizard, ClassIndex.Elemental_Sorcerer].includes(player.classId)).sort((player1, player2) => player1.getTalentMaxLevel(475) > player2.getTalentMaxLevel(475) ? -1 : 1)[0];
