@@ -128,6 +128,15 @@ export class Skilling {
             case SkillsIndex.Gaming:
                 imageSrc = 'ClassIcons56';
                 break;
+            case SkillsIndex.Farming:
+                imageSrc = 'ClassIcons57';
+                break;
+            case SkillsIndex.Sneaking:
+                imageSrc = 'ClassIcons58';
+                break;
+            case SkillsIndex.Summoning:
+                imageSrc = 'ClassIcons59';
+                break;
             default:
                 imageSrc = '';
                 break;
