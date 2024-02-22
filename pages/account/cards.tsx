@@ -10,7 +10,7 @@ import { AppContext } from '../../data/appContext';
 import { NextSeo } from 'next-seo';
 import ShadowBox from '../../components/base/ShadowBox';
 import IconImage, { AdaptativeIconImage } from '../../components/base/IconImage';
-import { Card, CardsPossibleStars } from '../../data/domain/cards';
+import { Card } from '../../data/domain/cards';
 import { CardSet } from '../../data/domain/cardSets';
 import TipDisplay from '../../components/base/TipDisplay';
 import { initCardSetRepo } from '../../data/domain/data/CardSetRepo';
@@ -31,15 +31,6 @@ const shouldHideCard = ({ card }: { card: Card }) => {
 
     // Show everything else.
     return false;
-}
-
-const CardLevelDetailWithIcon = ({ card, star }: {card: Card, star: number}) => {
-    return (
-        <Box direction='row' justify='start' align='center' gap='xxsmall'>
-            <IconImage data={Card.getStarImageForLevel(star)} />
-            <Text size="small"> : {card.getBonusText(star)} ({Math.floor(card.getCardsForStar(star))} cards)</Text>
-        </Box>
-    )
 }
 
 const CardBox = ({ card }: { card: Card }) => {
@@ -66,9 +57,30 @@ const CardBox = ({ card }: { card: Card }) => {
                             <Text size="small">Base drop rate : {card.getBaseDropRateText()}</Text>
                         </Box>
                         <Box direction='column'>
-                            {
-                                CardsPossibleStars.toSorted().map((star, index) => <CardLevelDetailWithIcon key={index} star={star} card={card} />)
-                            }
+                            <Box direction='row' justify='start' align='center' gap='xxsmall'>
+                                <IconImage data={Card.getStarImageForLevel(0)} />
+                                <Text size="small"> : {card.getBonusText(0)} ({Math.floor(card.getCardsForStar(0))} cards)</Text>
+                            </Box>
+                            <Box direction='row' justify='start' align='center' gap='xxsmall'>
+                                <IconImage data={Card.getStarImageForLevel(1)} />
+                                <Text size="small"> : {card.getBonusText(1)} ({Math.floor(card.getCardsForStar(1))} cards)</Text>
+                            </Box>
+                            <Box direction='row' justify='start' align='center' gap='xxsmall'>
+                                <IconImage data={Card.getStarImageForLevel(2)} />
+                                <Text size="small"> : {card.getBonusText(2)} ({Math.floor(card.getCardsForStar(2))} cards)</Text>
+                            </Box>
+                            <Box direction='row' justify='start' align='center' gap='xxsmall'>
+                                <IconImage data={Card.getStarImageForLevel(3)} />
+                                <Text size="small"> : {card.getBonusText(3)} ({Math.floor(card.getCardsForStar(3))} cards)</Text>
+                            </Box>
+                            <Box direction='row' justify='start' align='center' gap='xxsmall'>
+                                <IconImage data={Card.getStarImageForLevel(4)} />
+                                <Text size="small"> : {card.getBonusText(4)} ({Math.floor(card.getCardsForStar(4))} cards)</Text>
+                            </Box>
+                            <Box direction='row' justify='start' align='center' gap='xxsmall'>
+                                <IconImage data={Card.getStarImageForLevel(5)} />
+                                <Text size="small"> : {card.getBonusText(5)} ({Math.floor(card.getCardsForStar(5))} cards)</Text>
+                            </Box>
                         </Box>
                         {(currentCardLevel < 5) &&
                             <Box>
