@@ -6,9 +6,8 @@ import {
 } from 'grommet'
 import { useContext } from 'react';
 import { AppContext } from '../../../data/appContext'
-import { Worship as WorshipDomain, Totalizer } from '../../../data/domain/worship';
+import { Worship as WorshipDomain } from '../../../data/domain/worship';
 import ShadowBox from "../../base/ShadowBox";
-import IconImage from '../../base/IconImage';
 
 export function TotalizerDisplay() {
     const appContext = useContext(AppContext);
@@ -31,7 +30,6 @@ export function TotalizerDisplay() {
                         worship.totalizer.unlockedBonuses.map((bonus, index) => (
                             <ShadowBox key={index} background="dark-1" pad="medium" margin={{ right: 'large', bottom: 'small' }}>
                                 <Box direction='row' pad="medium">
-                                    <IconImage data={worship.totalizer.getBonusImageData(bonus)} ></IconImage>
                                     <Text>{worship.totalizer.getBonusText(bonus)}</Text>
                                 </Box>
                             </ShadowBox>

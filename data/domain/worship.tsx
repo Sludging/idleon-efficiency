@@ -11,7 +11,7 @@ import { SkillsIndex } from "./SkillsIndex";
 import { Stamp, StampConsts, StampTab } from "./stamps";
 import { ClassIndex, TalentConst } from "./talents";
 import { Sneaking } from "./world-6/sneaking";
-import { ImageData } from "./imageData";
+
 
 const getActiveBubbles = (alchemy: Alchemy, activeBubbleString: string[]): Bubble[] => {
     return activeBubbleString.map((bubbleString, _) => {
@@ -104,14 +104,6 @@ export class Totalizer {
             case TotalizerBonus.Cooking: return 10 * Math.floor(this.totalWaves / 10);
             case TotalizerBonus.BitValue: return 50 * Math.floor(this.totalWaves / 10);
             default: return 0;
-        }
-    }
-
-    getBonusImageData = (bonus: TotalizerBonus): ImageData => {
-        return {
-            location: `test`,
-            height: 25,
-            width: 25,
         }
     }
 
