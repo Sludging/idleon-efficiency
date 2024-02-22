@@ -6,7 +6,7 @@ import { ImageData } from "../../data/domain/imageData"
 
 const BASE_URL = "https://cdn2.idleonefficiency.com/images"
 
-export const IconImage = ({ data, scale = 1, style }: { data: ImageData, scale?: number, style?: React.CSSProperties }) => {
+const IconImage = ({ data, scale = 1, style }: { data: ImageData, scale?: number, style?: React.CSSProperties }) => {
     if (!data.location || data.location == "" || data.location == "Blank") {
         return (
             <Box height={`${data.height * scale}px`} width={`${data.width * scale}px`} />

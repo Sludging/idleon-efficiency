@@ -9,7 +9,7 @@ import { useEffect, useContext, useState } from 'react';
 import { AppContext } from '../../data/appContext';
 import { NextSeo } from 'next-seo';
 import ShadowBox from '../../components/base/ShadowBox';
-import { IconImage, AdaptativeIconImage } from '../../components/base/IconImage';
+import IconImage, { AdaptativeIconImage } from '../../components/base/IconImage';
 import { Card, CardsPossibleStars } from '../../data/domain/cards';
 import { CardSet } from '../../data/domain/cardSets';
 import TipDisplay from '../../components/base/TipDisplay';
