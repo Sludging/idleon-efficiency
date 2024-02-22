@@ -131,12 +131,6 @@ export class SneakingUpgrade {
         }
     }
 
-    static updateUnlockedUpgrades = (upgrades: SneakingUpgrade[]) => {
-        upgrades.forEach(upgrade => {
-            upgrade.unlocked = upgrade.unlockId == 0 ? true : (upgrades.find(value => value.index == upgrade.unlockId)?.level?.valueOf() || 0) > 0 || false;
-        });
-    }
-
     static fromBase = (data: NinjaUpgradeBase[]): SneakingUpgrade[] => {
        return data.map((value) => new SneakingUpgrade(value));
     }
@@ -149,17 +143,21 @@ export class Sneaking extends Domain {
 
     // Store the item source data so we can make decisions based on it.
     baseItems: BaseNinjaItemBase[] = initNinjaItemRepo();
-    // Last index of "Ninja" has boolean flags for pristine charms, need to map the index to the charm name (index is in the end)
-    
-    // You have loot: Njloot.png
-
     upgrades: SneakingUpgrade[] = SneakingUpgrade.fromBase(initNinjaUpgradeRepo());
-
     jadeUpgrades: JadeUpgrade[] = initJadeUpgradeRepo()
         .filter(base => !["idk", "Idk yet"].includes(base.data.bonus))
         .map(
         base => new JadeUpgrade(base.index, base.data, jadeUpgradeDisplayOrder.indexOf(base.index))
     );
+    // Last index of "Ninja" has boolean flags for pristine charms, need to map the index to the charm name (index is in the end)
+    
+    // You have loot: Njloot.png
+
+    updateUnlockedUpgrades = () => {
+        this.upgrades.forEach(upgrade => {
+            upgrade.unlocked = upgrade.unlockId == 0 ? true : (this.upgrades.find(value => value.index == upgrade.unlockId)?.level?.valueOf() || 0) > 0 || false;
+        });
+    }
     
     static getJadeImageData = (): ImageData => {
         return {
@@ -202,13 +200,12 @@ export class Sneaking extends Domain {
         }) 
 
         const sneakingUpgradesLevels: number[] = ninjaData[103];
-        sneaking.upgrades = SneakingUpgrade.fromBase(initNinjaUpgradeRepo());
         sneaking.upgrades.forEach(upgrade => {
             if(upgrade.index < sneakingUpgradesLevels.length) {
                 upgrade.level = sneakingUpgradesLevels[upgrade.index];
             }
         });
-        SneakingUpgrade.updateUnlockedUpgrades(sneaking.upgrades);
+        sneaking.updateUnlockedUpgrades();
 
         // Yes, Lava stores the enabled upgrades as letters in a single string, need to take that and convert to indexes.
         const lettersOfEnabledUpgrades = ninjaData[102][9]
