@@ -11,6 +11,7 @@ import { SkillsIndex } from "./SkillsIndex";
 import { Stamp, StampConsts, StampTab } from "./stamps";
 import { ClassIndex, TalentConst } from "./talents";
 import { Sneaking } from "./world-6/sneaking";
+import { ImageData } from "./imageData";
 
 const getActiveBubbles = (alchemy: Alchemy, activeBubbleString: string[]): Bubble[] => {
     return activeBubbleString.map((bubbleString, _) => {
@@ -67,6 +68,7 @@ export class Totem {
 
 }
 
+
 export enum TotalizerBonus {
     Damage = 0,
     Cooking = 1,
@@ -103,6 +105,33 @@ export class Totalizer {
             case TotalizerBonus.BitValue: return 50 * Math.floor(this.totalWaves / 10);
             default: return 0;
         }
+    }
+
+    getBonusImageData = (bonus: TotalizerBonus): ImageData => {
+        return {
+            location: `test`,
+            height: 25,
+            width: 25,
+        }
+    }
+
+    getText = (bonus: TotalizerBonus): string => {
+        switch (bonus) {
+            case TotalizerBonus.Damage: return "{% bonus Damage";
+            case TotalizerBonus.BoatSpeed: return "{% bonus Sailing Speed";
+            case TotalizerBonus.ExpMulti: return "{% bonus Class EXP";
+            case TotalizerBonus.SkillExp: return "{% bonus Skill EXP";
+            case TotalizerBonus.Cooking: return "{% bonus Meal Cooking speed";
+            case TotalizerBonus.BitValue: return "{% Bits for Gaming";
+            case TotalizerBonus.FarmingExp: return "{% bonus Farming EXP";
+            case TotalizerBonus.JadeCoin: return "{% bonus Jade Coins Gain";
+            case TotalizerBonus.EssenceGain: return "{% All Essence Gain";
+            default: return "";
+        }
+    }
+
+    getBonusText = (bonus: TotalizerBonus): string => {
+        return this.getText(bonus).replace(/{/, this.getBonus(bonus).toString());
     }
 }
 
