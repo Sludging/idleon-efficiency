@@ -22,7 +22,7 @@ export const SneakingUpgrades = ({ upgrades, currentJade } : { upgrades: Sneakin
                                         <Box direction="column" gap="small">
                                             <Box direction="row" gap="small" align="center">
                                                 <IconImage data={upgrade.getImageData()} scale={0.5} />
-                                                <Text size="small">{upgrade.name}{upgrade.level > 0 ? " (Lv." + upgrade.level + ")" : ""}</Text>
+                                                <Text size="small">{upgrade.data.name}{upgrade.level > 0 ? " (Lv." + upgrade.level + ")" : ""}</Text>
                                             </Box>
                                             <TextAndLabel textSize='xsmall' text={upgrade.getBonusText()} label={"Bonus"} />
                                             {
