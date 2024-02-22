@@ -10,6 +10,7 @@ import { Player } from "./player";
 import { SkillsIndex } from "./SkillsIndex";
 import { Stamp, StampConsts, StampTab } from "./stamps";
 import { ClassIndex, TalentConst } from "./talents";
+import { Sneaking } from "./world-6/sneaking";
 
 const getActiveBubbles = (alchemy: Alchemy, activeBubbleString: string[]): Bubble[] => {
     return activeBubbleString.map((bubbleString, _) => {
@@ -73,6 +74,9 @@ export enum TotalizerBonus {
     BitValue = 3,
     ExpMulti = 4,
     SkillExp = 5,
+    FarmingExp = 6,
+    JadeCoin = 7,
+    EssenceGain = 8,
 }
 
 export class Totalizer {
@@ -90,6 +94,10 @@ export class Totalizer {
             case TotalizerBonus.BoatSpeed:
             case TotalizerBonus.ExpMulti:
             case TotalizerBonus.SkillExp:
+            case TotalizerBonus.FarmingExp:
+            // TODO : check if JadeCoin and EssenceGain really are 1% bonus like FarmingExp (haven't unlocked those two myself)
+            case TotalizerBonus.JadeCoin:
+            case TotalizerBonus.EssenceGain:
                 return Math.floor(this.totalWaves / 10);
             case TotalizerBonus.Cooking: return 10 * Math.floor(this.totalWaves / 10);
             case TotalizerBonus.BitValue: return 50 * Math.floor(this.totalWaves / 10);
@@ -182,6 +190,7 @@ export const updateWorship = (data: Map<string, any>) => {
     const alchemy = data.get("alchemy") as Alchemy;
     const stamps = data.get("stamps") as Stamp[][];
     const gaming = data.get("gaming") as Gaming;
+    const sneaking = data.get("sneaking") as Sneaking;
 
     // Reset the data since it will all be calculated in the next section.
     worship.playerData = [];
@@ -241,6 +250,15 @@ export const updateWorship = (data: Map<string, any>) => {
         worship.totalizer.unlockedBonuses.push(TotalizerBonus.ExpMulti);
     }
     if (gaming.superbits[16].unlocked) {
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.SkillExp);
+    }
+    if (sneaking.jadeUpgrades[12].purchased) {
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.SkillExp);
+    }
+    if (sneaking.jadeUpgrades[13].purchased) {
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.SkillExp);
+    }
+    if (sneaking.jadeUpgrades[14].purchased) {
         worship.totalizer.unlockedBonuses.push(TotalizerBonus.SkillExp);
     }
 
