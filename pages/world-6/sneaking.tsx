@@ -5,22 +5,24 @@ import {
     Text,
 } from 'grommet'
 import { NextSeo } from 'next-seo';
-import { useContext, useMemo } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import { AppContext } from '../../data/appContext';
-import { SneakingActivity, Sneaking as SneakingDomain, SneakingPlayer } from '../../data/domain/world-6/sneaking';
+import { Sneaking as SneakingDomain } from '../../data/domain/world-6/sneaking';
 import ShadowBox from '../../components/base/ShadowBox';
 import IconImage from '../../components/base/IconImage';
-import { CharacterBox } from '../../components/base/CharacterBox';
 import { Player } from '../../data/domain/player';
-import { SkillsIndex } from '../../data/domain/SkillsIndex';
 import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import { nFormatter } from '../../data/utility';
-import { ImageData } from '../../data/domain/imageData';
+import { PlayerActivitySection } from '../../components/world-6/sneaking/playerActivitySection';
+import { JadeUpgrades } from '../../components/world-6/sneaking/jadeUpgrades';
+import { SneakingUpgrades } from '../../components/world-6/sneaking/sneakingUpgrades';
+import TabButton from '../../components/base/TabButton';
 
 
 function Sneaking() {
     const appContext = useContext(AppContext);
     const data = appContext.data.getData();
+    const [activeTab, setActiveTab] = useState<string>("Jade Upgrades");
 
     const sneaking = data.get("sneaking") as SneakingDomain;
     const players = data.get("players") as Player[];
@@ -45,26 +47,6 @@ function Sneaking() {
         return jadeUpgrades.length;
     }, [jadeUpgrades])
 
-    const PlayerActivity = ({ player }: { player: SneakingPlayer }) => {
-        const imageData: ImageData = {
-            location: `sneaking_activity_${player.activity.toString().toLowerCase()}`,
-            width: 40,
-            height: 40
-        }
-        let text = <Text size="xsmall">{player.activity.toString()}</Text>;
-        if (player.activity == SneakingActivity.Tied) {
-            text = <Text size="xsmall">Floor {player.floor}</Text>
-        }
-
-        return (
-            <Box direction="row" align="center" pad={{ bottom: 'xsmall' }}>
-                <IconImage data={imageData} scale={0.6} />
-                {/* The image has some blank space on top, so we pad the text a bit to make it more aligned. */}
-                <Box pad={{ top: 'xsmall' }}>{text}</Box>
-            </Box>
-        )
-    }
-
     if (!sneaking) {
         return <>Loading...</>
     }
@@ -79,7 +61,7 @@ function Sneaking() {
                         label='Jade'
                         component={
                             <Box gap="small" direction="row" align="center">
-                                <IconImage data={sneaking.getJadeImageData()} scale={0.7} />
+                                <IconImage data={SneakingDomain.getJadeImageData()} scale={0.7} />
                                 <Text size="small">{nFormatter(sneaking.jade)}</Text>
                             </Box>
                         }
@@ -87,114 +69,16 @@ function Sneaking() {
                 </ShadowBox>
             </Box>
             <Box margin={{ bottom: 'medium' }}>
-                <Text size="large">Player Activity</Text>
-                <Grid columns={{ size: 'small', count: 'fill' }} pad={{ top: "small", bottom: "small" }}>
-                    {
-                        sneaking.players.map((player, index) => {
-                            const playerData = players[player.index]
-                            return (
-                                <Box key={index} margin={{ right: 'small', bottom: 'small' }}>
-                                    <CharacterBox player={playerData} textColor={player.activity == SneakingActivity.Tied ? 'grey-2' : 'white-2'} borderColor={player.activity == SneakingActivity.Tied ? 'grey-1' : 'green-1'}>
-                                        <Box direction="row" margin={{ top: 'xsmall' }}>
-                                            <Box pad={{ right: 'small' }} margin={{ right: 'small' }} direction="row" border={{ side: 'right', color: 'grey-1' }} align="center">
-                                                <Box width={{ max: '15px' }} margin={{ right: 'xsmall' }}>
-                                                    <IconImage data={{ location: 'ClassIcons58', height: 36, width: 38 }} scale={0.4} />
-                                                </Box>
-                                                <Text size="small" truncate={false}>{playerData.skills.get(SkillsIndex.Sneaking)?.level}</Text>
-                                            </Box>
-                                            <PlayerActivity player={player} />
-                                        </Box>
-                                    </CharacterBox>
-                                </Box>)
-                        })
-                    }
-                </Grid>
+                <PlayerActivitySection sneakingPlayers={sneaking.players} players={players} />
             </Box>
-            <Box>
-                <Text size="large">Jade Upgrades</Text>
-                <Box direction="row" wrap margin={{ top: 'large' }}>
-                    <Grid columns={{ size: 'auto', count: 4 }} fill>
-                        {
-                            // Once I stop hiding info from people, just get rid of the filter and the unlock more upgrades to see section.
-                            // For now I'm showing available ones + 3 "hidden" ones.
-                            jadeUpgrades
-                                .filter(upgrade => upgrade.displayOrder <= indexOfBestUpgrade + 6)
-                                .map((upgrade, index) => {
-                                    const canAfford = sneaking.jade > upgrade.unlockCost();
-                                    return (
-                                        <ShadowBox style={{ opacity: upgrade.purchased ? 1 : canAfford ? 0.6 : 0.4 }} key={index} background="dark-1" margin={{ right: 'small', bottom: 'small' }} pad="medium" gap="medium">
-                                            {
-                                                index > indexOfBestUpgrade + 3 ?
-                                                    <Box align='center'>
-                                                        Unlock more upgrades to see.
-                                                    </Box> :
-                                                    <Box gap="small">
-                                                        <Box direction="row" gap="medium" align="center">
-                                                            <IconImage data={upgrade.getImageData()} scale={0.5} />
-                                                            <Text size="small">{upgrade.data.name}</Text>
-                                                        </Box>
-                                                        <TextAndLabel textSize='xsmall' text={upgrade.data.bonus} label={"Bonus"} />
-                                                        {
-                                                            !upgrade.purchased &&
-                                                            <ComponentAndLabel
-                                                                label={"Unlock Cost"}
-                                                                component={
-                                                                    <Box gap="xsmall" direction="row">
-                                                                        <IconImage data={sneaking.getJadeImageData()} scale={0.5} />
-                                                                        <Text color={canAfford ? 'green-1' : ''} size="small">{nFormatter(upgrade.unlockCost())}</Text>
-                                                                    </Box>
-                                                                }
-                                                            />
-                                                        }
-                                                    </Box>
-                                            }
-                                        </ShadowBox>
-                                    )
-                                })
-
-                        }
-                    </Grid>
-                </Box>
+            <Box align="center" direction="row" justify="center" gap="small">
+                {["Jade Upgrades", "Sneaking Upgrades"].map((tabName, index) => (
+                    <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
+                ))
+                }
             </Box>
-            <Box>
-                <Text size="large">Sneaking Upgrades</Text>
-                <Box direction="row" wrap margin={{ top: 'large' }}>
-                    <Grid columns={{ size: 'medium', count: 'fill' }} fill>
-                        {
-                            // Once stop hiding info from people, just get rid of the filter on unlocked, the shouldBeDisplayed filter out useless placeholder bonuses
-                            // For now showing only unlocked ones that are displayed in-game.
-                            sneaking.upgrades
-                                .filter(upgrade => upgrade.shouldBeDisplayed == true && upgrade.unlocked)
-                                .map((upgrade, index) => {
-                                    const canAfford = sneaking.jade > upgrade.nextLevelCost();
-                                    return (
-                                        <ShadowBox style={{ opacity: upgrade.level > 0 ? 1 : 0.6 }} key={index} background="dark-1" margin={{ right: 'small', bottom: 'small' }} pad="medium" gap="medium">
-                                            <Box direction="column" gap="medium">
-                                                <Box direction="row" gap="medium" align="center">
-                                                    <IconImage data={upgrade.getImageData()} />
-                                                    <Text size="small">{upgrade.name}{upgrade.level > 0 ? " (Lv."+upgrade.level+")" : ""}</Text>
-                                                </Box>
-                                                <TextAndLabel textSize='xsmall' text={upgrade.getBonusText()} label={"Bonus"} />
-                                                {
-                                                    <ComponentAndLabel
-                                                        label={upgrade.level > 0 ? "Next level cost" : "Unlock Cost"}
-                                                        component={
-                                                            <Box gap="xsmall" direction="row">
-                                                                <IconImage data={sneaking.getJadeImageData()} scale={0.5} />
-                                                                <Text color={canAfford ? 'green-1' : ''} size="small">{nFormatter(upgrade.nextLevelCost())}</Text>
-                                                            </Box>
-                                                        }
-                                                    />
-                                                }
-                                            </Box>
-                                        </ShadowBox>
-                                    )
-                                })
-
-                        }
-                    </Grid>
-                </Box>
-            </Box>
+            {activeTab == "Jade Upgrades" && <JadeUpgrades currentJade={sneaking.jade} indexOfBestUpgrade={indexOfBestUpgrade} jadeUpgrades={jadeUpgrades} />}
+            {activeTab == "Sneaking Upgrades" && <SneakingUpgrades currentJade={sneaking.jade} upgrades={sneaking.upgrades} />}
         </Box>
     )
 }

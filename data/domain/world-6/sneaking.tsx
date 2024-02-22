@@ -161,7 +161,7 @@ export class Sneaking extends Domain {
         base => new JadeUpgrade(base.index, base.data, jadeUpgradeDisplayOrder.indexOf(base.index))
     );
     
-    getJadeImageData = (): ImageData => {
+    static getJadeImageData = (): ImageData => {
         return {
             location: "W6item0_x1",
             width: 36,
