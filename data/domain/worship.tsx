@@ -2,6 +2,7 @@ import { notUndefined, round } from "../utility";
 import { Alchemy, AlchemyConst, Bubble, CauldronIndex } from "./alchemy";
 import { Domain, RawData } from "./base/domain";
 import { MapDataBase } from "./data/MapDataRepo";
+import { Gaming } from "./gaming";
 import { Item } from "./items";
 import { MapInfo } from "./maps";
 import { SkullItemModel } from "./model/skullItemModel";
@@ -65,6 +66,38 @@ export class Totem {
 
 }
 
+export enum TotalizerBonus {
+    Damage = 0,
+    Cooking = 1,
+    BoatSpeed = 2,
+    BitValue = 3,
+    ExpMulti = 4,
+    SkillExp = 5,
+}
+
+export class Totalizer {
+    totalWaves: number = 0;
+    unlocked: boolean = false;
+    unlockedBonuses: TotalizerBonus[] = [];
+
+    getBonus = (bonus: TotalizerBonus) => {
+        if (!this.unlocked || this.unlockedBonuses.length == 0 || !this.unlockedBonuses.includes(bonus)) {
+            return 0;
+        }
+
+        switch (bonus) {
+            case TotalizerBonus.Damage:
+            case TotalizerBonus.BoatSpeed:
+            case TotalizerBonus.ExpMulti:
+            case TotalizerBonus.SkillExp:
+                return Math.floor(this.totalWaves / 10);
+            case TotalizerBonus.Cooking: return 10 * Math.floor(this.totalWaves / 10);
+            case TotalizerBonus.BitValue: return 50 * Math.floor(this.totalWaves / 10);
+            default: return 0;
+        }
+    }
+}
+
 interface PlayerWorshipData {
     currentCharge: number
     estimatedCharge: number
@@ -90,6 +123,8 @@ export class Worship extends Domain {
     };
     bestWizardPlayerID: number = -1;
     totemInfo: Totem[] = [];
+
+    totalizer: Totalizer = new Totalizer();
 
     static getEstimatedCharge = (currentCharge: number, chargeRate: number, maxCharge: number, timeAwayInSeconds: number) => {
         return Math.min(currentCharge + chargeRate * (timeAwayInSeconds / 3600), maxCharge);
@@ -146,6 +181,7 @@ export const updateWorship = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const alchemy = data.get("alchemy") as Alchemy;
     const stamps = data.get("stamps") as Stamp[][];
+    const gaming = data.get("gaming") as Gaming;
 
     // Reset the data since it will all be calculated in the next section.
     worship.playerData = [];
@@ -182,6 +218,30 @@ export const updateWorship = (data: Map<string, any>) => {
                 playerID: player.playerID
             })
         });
+    }
+
+    worship.totalizer.totalWaves = worship.totemInfo.reduce((sum, totem) => sum += totem.maxWave, 0);
+
+    worship.totalizer.unlockedBonuses = [];
+    
+    if (gaming.superbits[7].unlocked) {
+        worship.totalizer.unlocked = true;
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.Damage);
+    }
+    if (gaming.superbits[13].unlocked) {
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.Cooking);
+    }
+    if (gaming.superbits[3].unlocked) {
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.BoatSpeed);
+    }
+    if (gaming.superbits[20].unlocked) {
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.BitValue);
+    }
+    if (gaming.superbits[11].unlocked) {
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.ExpMulti);
+    }
+    if (gaming.superbits[16].unlocked) {
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.SkillExp);
     }
 
     const bestWizard = players.filter(player => [ClassIndex.Wizard, ClassIndex.Elemental_Sorcerer].includes(player.classId)).sort((player1, player2) => player1.getTalentMaxLevel(475) > player2.getTalentMaxLevel(475) ? -1 : 1)[0];
