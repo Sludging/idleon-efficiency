@@ -76,36 +76,21 @@ export class JadeUpgrade {
 }
 
 export class SneakingUpgrade {
-    index: number = 0;
     unlocked: boolean = false;
     level: number = 0;
-    name: string = "";
     bonusPerLvl: number = 0;
-    bonusText: string = "";
-    costBase: number = 0;
-    costExponent: number = 0;
-    unlockId: number = 0; 
     shouldBeDisplayed: boolean = true;
 
-    constructor(data: NinjaUpgradeBase, level: number = 0) {
-        this.index = data.index;
-        this.level = level;
-        this.name = data.data.name;
-        if(typeof(data.data.bonusPerLvl) == "string") {
-            // If it's a string then that means it's an unused upgrade so we don't care about the value
-            this.bonusPerLvl = 0;
-        } else {
-            this.bonusPerLvl = data.data.bonusPerLvl;
-        }
-        this.shouldBeDisplayed = (data.data.name != "Name");
-        this.bonusText = data.data.bonus;
-        this.costBase = data.data.costBase;
-        this.costExponent = data.data.costExponent;
-        this.unlockId = data.data.unlockId; 
+    constructor(public index: number, public data: NinjaUpgradeModel) {
+        if(Number.isFinite(data.bonusPerLvl)) {
+            // If value is a valid number, use it.
+            this.bonusPerLvl = data.bonusPerLvl as number;
+        } 
+        this.shouldBeDisplayed = (data.name != "Name");
     }
 
     nextLevelCost = (): number => {
-        return this.costBase * Math.pow(this.level+1,this.costExponent);
+        return this.data.costBase * Math.pow(this.level+1,this.data.costExponent);
     }
 
     getBonus = (level: number = this.level): number => {
@@ -125,14 +110,14 @@ export class SneakingUpgrade {
         if (this.index == 14) {
             const bonus = 1 + (this.getBonus(level)/100);
 
-            return this.bonusText.replace(/}/, bonus.toString());
+            return this.data.bonus.replace(/}/, bonus.toString());
         } else {
-            return this.bonusText.replace(/{/, this.getBonus(level).toString());
+            return this.data.bonus.replace(/{/, this.getBonus(level).toString());
         }
     }
 
     static fromBase = (data: NinjaUpgradeBase[]): SneakingUpgrade[] => {
-       return data.map((value) => new SneakingUpgrade(value));
+       return data.map((value) => new SneakingUpgrade(value.index, value.data));
     }
 }
 
@@ -155,7 +140,7 @@ export class Sneaking extends Domain {
 
     updateUnlockedUpgrades = () => {
         this.upgrades.forEach(upgrade => {
-            upgrade.unlocked = upgrade.unlockId == 0 ? true : (this.upgrades.find(value => value.index == upgrade.unlockId)?.level?.valueOf() || 0) > 0 || false;
+            upgrade.unlocked = upgrade.data.unlockId == 0 ? true : (this.upgrades.find(value => value.index == upgrade.data.unlockId)?.level?.valueOf() || 0) > 0 || false;
         });
     }
     
