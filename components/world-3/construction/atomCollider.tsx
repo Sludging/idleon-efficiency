@@ -1,11 +1,7 @@
-import { Box, CheckBox, Grid, Heading, ResponsiveContext, Text } from "grommet";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { Box, CheckBox, Grid, Text } from "grommet";
+import { useContext, useMemo, useState } from "react";
 import { AppContext } from "../../../data/appContext";
 import { AtomCollider } from "../../../data/domain/atomCollider";
-import { Building } from "../../../data/domain/buildings";
-import { Construction } from "../../../data/domain/construction";
-import { Item } from "../../../data/domain/items";
-import { Storage } from "../../../data/domain/storage";
 import { nFormatter } from "../../../data/utility";
 import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
