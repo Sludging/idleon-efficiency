@@ -80,6 +80,7 @@ export class SneakingUpgrade {
     level: number = 0;
     bonusPerLvl: number = 0;
     shouldBeDisplayed: boolean = true;
+    costMultiplier: number = 1;
 
     constructor(public index: number, public data: NinjaUpgradeModel) {
         if(Number.isFinite(data.bonusPerLvl)) {
@@ -90,7 +91,7 @@ export class SneakingUpgrade {
     }
 
     nextLevelCost = (): number => {
-        return this.data.costBase * Math.pow(this.level+1,this.data.costExponent);
+        return (this.data.costBase * Math.pow(this.data.costExponent, this.level)) * this.costMultiplier;
     }
 
     getBonus = (level: number = this.level): number => {
