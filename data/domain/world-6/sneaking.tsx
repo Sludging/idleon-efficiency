@@ -94,9 +94,9 @@ export class SneakingUpgrade {
 
     nextLevelCost = (): number => {
         if (this.index == 8) {
-            return (1 / 1 + this.itemDiscount / 100) *  (1 / 1 + this.bubbleDiscount / 100) * this.data.costBase * Math.pow(this.data.costExponent, this.level);
+            return (1 / (1 + this.itemDiscount / 100)) *  (1 / (1 + this.bubbleDiscount / 100)) * this.data.costBase * Math.pow(this.data.costExponent, this.level);
         } else {
-            return (1 / 1 + this.itemDiscount / 100) * this.data.costBase * Math.pow(this.data.costExponent, this.level);
+            return (1 / (1 + this.itemDiscount / 100)) * this.data.costBase * Math.pow(this.data.costExponent, this.level);
         }
     }
 
