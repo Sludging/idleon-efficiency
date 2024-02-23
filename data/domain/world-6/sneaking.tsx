@@ -81,7 +81,8 @@ export class SneakingUpgrade {
     level: number = 0;
     bonusPerLvl: number = 0;
     shouldBeDisplayed: boolean = true;
-    costMultiplier: number = 1;
+    bubbleDiscount: number = 0;
+    itemDiscount: number = 0;
 
     constructor(public index: number, public data: NinjaUpgradeModel) {
         if(Number.isFinite(data.bonusPerLvl)) {
@@ -92,7 +93,11 @@ export class SneakingUpgrade {
     }
 
     nextLevelCost = (): number => {
-        return (this.data.costBase * Math.pow(this.data.costExponent, this.level)) * this.costMultiplier;
+        if (this.index == 8) {
+            return (1 / 1 + this.itemDiscount / 100) *  (1 / 1 + this.bubbleDiscount / 100) * this.data.costBase * Math.pow(this.data.costExponent, this.level);
+        } else {
+            return (1 / 1 + this.itemDiscount / 100) * this.data.costBase * Math.pow(this.data.costExponent, this.level);
+        }
     }
 
     getBonus = (level: number = this.level): number => {
@@ -186,6 +191,12 @@ export class Sneaking extends Domain {
             sneaking.players.push(new SneakingPlayer(index, sneakingLevel, playerInfo, playerEquipment))
         }) 
 
+        ninjaData.slice(60,99).forEach((equipment: {name: string, level: number}) => {
+            if(equipment.name != "Blank") {
+                sneaking.inventory.push({name: equipment.name, level: equipment.level});
+            }
+        });
+
         const sneakingUpgradesLevels: number[] = ninjaData[103];
         sneaking.sneakingUpgrades.forEach(upgrade => {
             if(upgrade.index < sneakingUpgradesLevels.length) {
@@ -214,6 +225,6 @@ export const updateSneaking = (data: Map<string, any>) => {
     // The bubble say that the exponent part is reduced, but that's actually just a standard price reduction from what I calculated
     const currencyConduitUpgrade = sneaking.sneakingUpgrades.find(upgrade => upgrade.index == 8);
     if (currencyConduitUpgrade) {
-        currencyConduitUpgrade.costMultiplier = 1 - (alchemy.getBonusForBubble(CauldronIndex.Kazam, AlchemyConst.LoCostMoJade)/100);
+        currencyConduitUpgrade.bubbleDiscount = alchemy.getBonusForBubble(CauldronIndex.Kazam, AlchemyConst.LoCostMoJade);
     }
 }
