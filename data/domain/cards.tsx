@@ -136,6 +136,14 @@ export class Card {
         return cards.filter(card => card.data.effect == IDforCardBonus[id].replace(/_/g, ' ')).reduce((sum, card) => sum += card.getBonus(card.getStars()), 0);
     }
 
+    static getStarImageForLevel = (level: number): ImageData => {
+        return {
+            location: `Star${level}`,
+            width: 26,
+            height: 12
+        }
+    }
+
     static fromBase = (data: CardDataBase[]) => {
         return data.map((card, index) => new Card(index, card.id, card.data))
     }

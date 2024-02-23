@@ -31,11 +31,19 @@ export class CardSet {
         }
     }
     
-    getBannerImageData = (): ImageData => {
+    getBannerWithBackgroundImageData = (): ImageData => {
         return {
             location: `Cardsetbg${this.index}`,
             width: 275,
             height: 44
+        }
+    }
+
+    getBannerImageData = (): ImageData => {
+        return {
+            location: `Cardbanner_${this.cardSetName.replaceAll(' ','_')}`,
+            width: 0,
+            height: 35
         }
     }
 
@@ -52,7 +60,7 @@ export class CardSet {
             case cardsTotalStars >= this.cards.length * 4: return 4;
             case cardsTotalStars >= this.cards.length * 3: return 3;
             case cardsTotalStars >= this.cards.length * 2: return 2;
-            case cardsTotalStars >= this.cards.length : return 1;
+            case cardsTotalStars >= this.cards.length: return 1;
             default: return 0;
         }
     }
