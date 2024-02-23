@@ -37,7 +37,7 @@ import { MapInfo } from '../../data/domain/maps';
 import IconImage from '../../components/base/IconImage';
 import { BuildingsDisplay } from '../../components/world-3/construction/buildings';
 import { SaltLickDisplay } from '../../components/world-3/construction/saltLick';
-import { Artifact, ArtifactStatus } from '../../data/domain/sailing/artifacts';
+import { ArtifactStatus } from '../../data/domain/sailing/artifacts';
 import { AtomColliderDisplay } from '../../components/world-3/construction/atomCollider';
 import { Sailing } from '../../data/domain/sailing';
 

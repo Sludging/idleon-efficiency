@@ -1,5 +1,5 @@
-import { Box, CheckBox, Grid, Heading, Meter, ResponsiveContext, Text, Stack } from "grommet";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { Box, CheckBox, Meter, Text, Stack } from "grommet";
+import { useContext, useMemo, useState } from "react";
 import { AppContext } from "../../../data/appContext";
 import { Building } from "../../../data/domain/buildings";
 import { Construction } from "../../../data/domain/construction";

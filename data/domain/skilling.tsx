@@ -12,7 +12,7 @@ import { Divinity } from "./divinity";
 import { Achievement, AchievementConst } from "./achievements";
 import { SkillMastery } from "./rift";
 import { Breeding } from "./breeding";
-import { Gaming, TotalizerBonus } from "./gaming";
+import { Worship, TotalizerBonus } from "./worship";
 
 export class Skilling {
     static getXPReq = (skill: SkillsIndex, level: number) => {
@@ -48,7 +48,7 @@ export class Skilling {
             achievements: Achievement[],
             skillMastery: SkillMastery,
             breeding: Breeding, 
-            gaming: Gaming
+            worship: Worship
         ) => {
         const skillingCardBonus = Card.GetTotalBonusForId(player.cardInfo?.equippedCards ?? [], 50);
 
@@ -72,12 +72,12 @@ export class Skilling {
 
         const riftBonus = skillMastery.getTotalBonusByIndex(3) + skillMastery.getTotalBonusByIndex(6)
         const shinyBonus = breeding.shinyBonuses.find(bonus => bonus.data.index == 2)?.getBonus() ?? 0;
-        const gamingBonus = gaming.totalizer.getBonus(TotalizerBonus.SkillExp);
+        const worshipBonus = worship.totalizer.getBonus(TotalizerBonus.SkillExp);
 
         const myriadBox = player.postOffice.find(box => box.index == 20)
         const poBonus = myriadBox?.bonuses[2].getBonus(myriadBox.level, 2) ?? 0;
 
-        return starSignBonus + (skillingCardBonus + goldenFoodBonus) + (cardSetBonus + w5crystalCardBonus + shrineBonus + statueBonus + (prayerIncrease - prayerDecrease + (equipmentBonus + (masteroBuff + (saltLickBonus + dungeonBonus + poBonus + divinityBonus + achieveBonuses + riftBonus + shinyBonus + gamingBonus)))));
+        return starSignBonus + (skillingCardBonus + goldenFoodBonus) + (cardSetBonus + w5crystalCardBonus + shrineBonus + statueBonus + (prayerIncrease - prayerDecrease + (equipmentBonus + (masteroBuff + (saltLickBonus + dungeonBonus + poBonus + divinityBonus + achieveBonuses + riftBonus + shinyBonus + worshipBonus)))));
     }
 
     static getSkillImageData = (skill: SkillsIndex): ImageData => {
@@ -127,6 +127,15 @@ export class Skilling {
                 break;
             case SkillsIndex.Gaming:
                 imageSrc = 'ClassIcons56';
+                break;
+            case SkillsIndex.Farming:
+                imageSrc = 'ClassIcons57';
+                break;
+            case SkillsIndex.Sneaking:
+                imageSrc = 'ClassIcons58';
+                break;
+            case SkillsIndex.Summoning:
+                imageSrc = 'ClassIcons59';
                 break;
             default:
                 imageSrc = '';

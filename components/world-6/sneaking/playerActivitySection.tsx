@@ -5,6 +5,7 @@ import { SneakingActivity, SneakingPlayer } from "../../../data/domain/world-6/s
 import { ImageData } from "../../../data/domain/imageData";
 import { SkillsIndex } from "../../../data/domain/SkillsIndex";
 import { Player } from "../../../data/domain/player";
+import { Skilling } from "../../../data/domain/skilling";
 
 export const PlayerActivity = ({ player }: { player: SneakingPlayer }) => {
     const imageData: ImageData = {
@@ -40,7 +41,7 @@ export const PlayerActivitySection = ({ sneakingPlayers, players }: { sneakingPl
                                     <Box direction="row" margin={{ top: 'xsmall' }}>
                                         <Box pad={{ right: 'small' }} margin={{ right: 'small' }} direction="row" border={{ side: 'right', color: 'grey-1' }} align="center">
                                             <Box width={{ max: '15px' }} margin={{ right: 'xsmall' }}>
-                                                <IconImage data={{ location: 'ClassIcons58', height: 36, width: 38 }} scale={0.4} />
+                                                <IconImage data={Skilling.getSkillImageData(SkillsIndex.Sneaking)} scale={0.4} />
                                             </Box>
                                             <Text size="small" truncate={false}>{playerData.skills.get(SkillsIndex.Sneaking)?.level}</Text>
                                         </Box>
