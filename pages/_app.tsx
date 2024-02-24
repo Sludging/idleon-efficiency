@@ -9,12 +9,10 @@ import { AuthProvider } from '../data/firebase/authContext';
 import { AppProvider } from '../data/appContext';
 
 import Script from 'next/script'
-import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 import { handleWebVitals } from '../lib/gtag';
 
-import '../public/icons/assets/sheets/spritesheet_constellations.css';
 import '../public/icons/assets/sheets/spritesheet_colosseums.css';
 import Layout from '../components/layout';
 

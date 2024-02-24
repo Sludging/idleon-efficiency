@@ -328,6 +328,95 @@ def handleQuestGivers():
             newImage.save(f"data/icons/assets/data/{name.replace(' ', '_').lower()}.png", "PNG")
 
 
+def handleConstellations2():
+    dimensions = get_image_dimensions("apk/assets/assets/graphics/1x/sprite-54-41.png")
+    tile_width = 36
+    tile_height = 36
+
+    w, h = dimensions
+    numberOfColumns = w / tile_width
+    numberOfRows = h / tile_height
+
+    max_frames_row = 1.0
+    image_count = 0
+    print(numberOfRows, numberOfColumns)
+    prefixes = ["A", "B", "C", "D", "E", "G"]
+
+    with Image.open("apk/assets/assets/graphics/1x/sprite-54-41.png") as im:
+        data = im.getdata()
+        currentRow = 0
+        currentCol = 0
+        complete_version = False
+        currentConstellation = 0
+        prefix = prefixes[0]
+        while (currentRow < numberOfRows):
+            top = tile_height * math.floor(image_count/max_frames_row)
+            left = tile_width * (image_count % max_frames_row)
+            bottom = top + tile_height
+            right = left + tile_width
+        
+            box = (left,top,right,bottom)
+            box = [int(i) for i in box]
+            cut_frame = data.crop((currentCol*tile_width,currentRow*tile_height,currentCol*tile_width + tile_width, currentRow*tile_height + tile_height))
+            if (image_count < 24):
+                prefix = "A"
+            elif (image_count < 46):
+                prefix = "B"
+            elif (image_count < 67):
+                prefix = "C"
+            elif (image_count < 88):
+                prefix = "D"
+            elif (image_count < 108):
+                prefix = "E"
+            else:
+                prefix = "G"
+            
+            if prefix == "A":
+                constNumber = math.floor(1 + image_count / 2)
+            elif prefix == "B":
+                constNumber = math.floor(1 + image_count / 2 - 12) 
+            elif prefix == "C":
+                constNumber = math.floor(1 + image_count / 2 - 23) 
+            elif prefix == "D":
+                 constNumber = math.floor(1 + image_count / 2 - 34)
+            elif prefix == "E":
+                 constNumber = math.floor(1 + image_count / 2 - 44)
+            elif prefix == "G":
+                constNumber = math.floor(1 + image_count / 2 - 54)
+            constName = f"{prefix}_{constNumber}"
+
+            set_size = 36
+            image_width, image_height = cut_frame.size
+            # Center the image
+            x1 = int(math.floor((set_size - image_width) / 2))
+            y1 = int(math.floor((set_size - image_height) / 2))
+            mode = im.mode
+            if len(mode) == 1:  # L, 1
+                new_background = (255)
+            if len(mode) == 3:  # RGB
+                new_background = (255, 255, 255)
+            if len(mode) == 4:  # RGBA, CMYK
+                new_background = (255, 255, 255, 255)
+
+            newImage = Image.new(im.mode, (36, 36))
+            newImage.paste(cut_frame, (x1, y1, x1 + image_width, y1 + image_height))
+            if complete_version:
+                newImage.save(f"data/icons/assets/data/{constName.replace(' ', '_').lower()}_done.png", "PNG")
+            else:
+                newImage.save(f"data/icons/assets/data/{constName.replace(' ', '_').lower()}.png", "PNG")
+            if (complete_version):
+                currentConstellation += 1
+                complete_version = False
+            else:
+                complete_version = True
+            image_count += 1
+            currentCol += 1
+            if (currentCol == numberOfColumns):
+                currentCol = 0
+                currentRow += 1
+
+
+
 def handleConstellations():
     dimensions = get_image_dimensions("apk/assets/assets/graphics/1x/sprite-54-41.png")
     tile_width = 36
@@ -356,7 +445,7 @@ background-position: 0 calc(var(--row) * __PERCENTAGE__%)
 """
     image_count = 0
     print(numberOfRows, numberOfColumns)
-    prefixes = ["A", "B", "C", "D", "E"]
+    prefixes = ["A", "B", "C", "D", "E", "G"]
 
     with Image.open("apk/assets/assets/graphics/1x/sprite-54-41.png") as im:
         data = im.getdata()
@@ -382,8 +471,10 @@ background-position: 0 calc(var(--row) * __PERCENTAGE__%)
                 prefix = "C"
             elif (image_count < 88):
                 prefix = "D"
-            else:
+            elif (image_count < 109):
                 prefix = "E"
+            else:
+                prefix = "G"
             
             if prefix == "A":
                 constNumber = math.floor(1 + image_count / 2)
@@ -395,6 +486,8 @@ background-position: 0 calc(var(--row) * __PERCENTAGE__%)
                  constNumber = math.floor(1 + image_count / 2 - 34)
             elif prefix == "E":
                  constNumber = math.floor(1 + image_count / 2 - 44)
+            elif prefix == "G":
+                constNumber = math.floor(1 + image_count / 2 - 55)
             constName = f"{prefix}-{constNumber}"
             spritesheet.paste(cut_frame, box)
             if (complete_version):
@@ -477,10 +570,10 @@ background-position: 0 calc(var(--row) * __PERCENTAGE__%)
     shutil.copy(f'sprites/spritesheet_colosseums.css', f'public/icons/assets/sheets/spritesheet_colosseums.css')
 
 if __name__ == "__main__":
-    #handleConstellations()
-    handleQuestGivers()
+    handleConstellations2()
+    #handleQuestGivers()
     #handleColo()
-    handleMonsterFaces()
+    #handleMonsterFaces()
     sys.exit(0)
     dimDict = {}
     filesDict = {
