@@ -2039,7 +2039,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("Crystal5", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Crystal Brighton",
+                    "Name": "Crystal Candalight",
                     "AFKtype": AFKTypeEnum.Fighting,
                     "MonsterFace": 47,
                     "MonsterOffsetX": 38,
@@ -2067,7 +2067,8 @@ export const initEnemyRepo = () => {
                         <SubTableDropModel>{"item": "DropTable29", "quantity": 1, "chance": 0.3, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable30", "quantity": 1, "chance": 0.2, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable31", "quantity": 1, "chance": 0.17, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable32", "quantity": 1, "chance": 0.17, "questLink": "N/A"}
+                        <SubTableDropModel>{"item": "DropTable32", "quantity": 1, "chance": 0.17, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable33", "quantity": 1, "chance": 0.17, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,
@@ -4708,8 +4709,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 12000,
                     "MoveSPEED": 4,
-                    "Damages": [14000, 1],
-                    "DefFor0": 14295.2
+                    "Damages": [12000, 1],
+                    "DefFor0": 12490.9
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -4755,8 +4756,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 12000,
                     "MoveSPEED": 4,
-                    "Damages": [14000, 1],
-                    "DefFor0": 14295.2
+                    "Damages": [12000, 1],
+                    "DefFor0": 12490.9
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -4848,8 +4849,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 17000,
                     "MoveSPEED": 3,
-                    "Damages": [23000, 1],
-                    "DefFor0": 21974.5
+                    "Damages": [16000, 1],
+                    "DefFor0": 16058.4
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -4895,8 +4896,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 17000,
                     "MoveSPEED": 3,
-                    "Damages": [23000, 1],
-                    "DefFor0": 21974.5
+                    "Damages": [18000, 1],
+                    "DefFor0": 17785.9
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -4941,8 +4942,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 17000,
                     "MoveSPEED": 3,
-                    "Damages": [30000, 1],
-                    "DefFor0": 27591.3
+                    "Damages": [18000, 1],
+                    "DefFor0": 17785.9
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -4987,8 +4988,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 26000,
                     "MoveSPEED": 3,
-                    "Damages": [30000, 1],
-                    "DefFor0": 27591.3
+                    "Damages": [20000, 1],
+                    "DefFor0": 19482
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -5034,8 +5035,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 26000,
                     "MoveSPEED": 3,
-                    "Damages": [30000, 1],
-                    "DefFor0": 27591.3
+                    "Damages": [20000, 1],
+                    "DefFor0": 19482
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -5081,8 +5082,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 26000,
                     "MoveSPEED": 4,
-                    "Damages": [40000, 1],
-                    "DefFor0": 35242.3
+                    "Damages": [20000, 1],
+                    "DefFor0": 19482
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -5127,8 +5128,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 36000,
                     "MoveSPEED": 3,
-                    "Damages": [40000, 1],
-                    "DefFor0": 35242.3
+                    "Damages": [25000, 1],
+                    "DefFor0": 23605.7
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -5174,8 +5175,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 45000,
                     "MoveSPEED": 4,
-                    "Damages": [40000, 1],
-                    "DefFor0": 35242.3
+                    "Damages": [25000, 1],
+                    "DefFor0": 23605.7
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -5267,8 +5268,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 50000,
                     "MoveSPEED": 5,
-                    "Damages": [60000, 1],
-                    "DefFor0": 49629.3
+                    "Damages": [30000, 1],
+                    "DefFor0": 27591.3
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -5313,8 +5314,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 60000,
                     "MoveSPEED": 4,
-                    "Damages": [70000, 1],
-                    "DefFor0": 56487.3
+                    "Damages": [40000, 1],
+                    "DefFor0": 35242.3
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -5360,8 +5361,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 75000,
                     "MoveSPEED": 4,
-                    "Damages": [90000, 1],
-                    "DefFor0": 69705.8
+                    "Damages": [50000, 1],
+                    "DefFor0": 42563.6
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -5406,8 +5407,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 90000,
                     "MoveSPEED": 6,
-                    "Damages": [100000, 1],
-                    "DefFor0": 76109.7
+                    "Damages": [80000, 1],
+                    "DefFor0": 63171.2
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -5452,8 +5453,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 130000,
                     "MoveSPEED": 3,
-                    "Damages": [110000, 1],
-                    "DefFor0": 82398
+                    "Damages": [90000, 1],
+                    "DefFor0": 69705.8
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -5498,8 +5499,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 200000,
                     "MoveSPEED": 5,
-                    "Damages": [125000, 1],
-                    "DefFor0": 91639.1
+                    "Damages": [100000, 1],
+                    "DefFor0": 76109.7
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -5543,8 +5544,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 300000,
                     "MoveSPEED": 6,
-                    "Damages": [140000, 1],
-                    "DefFor0": 100678
+                    "Damages": [120000, 1],
+                    "DefFor0": 88582.5
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -5590,8 +5591,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 400000,
                     "MoveSPEED": 5,
-                    "Damages": [160000, 1],
-                    "DefFor0": 112459
+                    "Damages": [140000, 1],
+                    "DefFor0": 100678
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -5636,8 +5637,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 500000,
                     "MoveSPEED": 3,
-                    "Damages": [180000, 1],
-                    "DefFor0": 123970
+                    "Damages": [170000, 1],
+                    "DefFor0": 118246
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -9276,8 +9277,8 @@ export const initEnemyRepo = () => {
                 "drops": <EnemyTableModel>{
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
-                        <CardDropModel>{"item": "CardsF25", "quantity": 1, "chance": 1e-08, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable29", "quantity": 1, "chance": 0.0089, "questLink": "N/A"}
+                        <CardDropModel>{"item": "CardsF34", "quantity": 1, "chance": 1e-08, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable33", "quantity": 1, "chance": 0.0089, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,
@@ -9309,8 +9310,8 @@ export const initEnemyRepo = () => {
                 "drops": <EnemyTableModel>{
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
-                        <CardDropModel>{"item": "CardsF25", "quantity": 1, "chance": 1e-08, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable31", "quantity": 1, "chance": 0.0089, "questLink": "N/A"}
+                        <CardDropModel>{"item": "CardsF35", "quantity": 1, "chance": 1e-08, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable33", "quantity": 1, "chance": 0.0089, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,

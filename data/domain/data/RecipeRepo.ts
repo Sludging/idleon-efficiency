@@ -70,36 +70,30 @@ export const initRecipeRepo = () => {
             }),
         new RecipeBase("EquipmentHats1", <RecipeModel>{
                 "intID": "EquipmentHats1",
-                "recipe": [<ComponentModel>{"item": "Grasslands1", "quantity": 4}, <ComponentModel>{"item": "Copper", "quantity": 5}],
+                "recipe": [<ComponentModel>{"item": "Grasslands1", "quantity": 4}],
                 "levelReqToCraft": 1,
                 "expGiven": 6,
                 "no": 5,
                 "tab": 1,
-                "sellPrice": 27,
+                "sellPrice": 12,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
-                    "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "Grasslands1", "quantity": 4},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "Copper", "quantity": 5}
-                    ],
-                    "detRecipeTotals": [<ComponentModel>{"item": "Grasslands1", "quantity": 4}, <ComponentModel>{"item": "Copper", "quantity": 5}]
+                    "detRecipe": [<DetRecipeComponentModel>{"indent": 0, "item": "Grasslands1", "quantity": 4}],
+                    "detRecipeTotals": [<ComponentModel>{"item": "Grasslands1", "quantity": 4}]
                 }
             }),
         new RecipeBase("EquipmentShirts1", <RecipeModel>{
                 "intID": "EquipmentShirts1",
-                "recipe": [<ComponentModel>{"item": "Grasslands1", "quantity": 6}, <ComponentModel>{"item": "OakTree", "quantity": 3}],
+                "recipe": [<ComponentModel>{"item": "Copper", "quantity": 5}],
                 "levelReqToCraft": 1,
                 "expGiven": 8,
                 "no": 6,
                 "tab": 1,
-                "sellPrice": 24,
+                "sellPrice": 15,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
-                    "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "Grasslands1", "quantity": 6},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "OakTree", "quantity": 3}
-                    ],
-                    "detRecipeTotals": [<ComponentModel>{"item": "Grasslands1", "quantity": 6}, <ComponentModel>{"item": "OakTree", "quantity": 3}]
+                    "detRecipe": [<DetRecipeComponentModel>{"indent": 0, "item": "Copper", "quantity": 5}],
+                    "detRecipeTotals": [<ComponentModel>{"item": "Copper", "quantity": 5}]
                 }
             }),
         new RecipeBase("EquipmentPants1", <RecipeModel>{
@@ -698,17 +692,20 @@ export const initRecipeRepo = () => {
                 "expGiven": 15,
                 "no": 37,
                 "tab": 1,
-                "sellPrice": 199,
+                "sellPrice": 190,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShirts1", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Grasslands1", "quantity": 6},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "OakTree", "quantity": 3},
+                        <DetRecipeComponentModel>{"indent": 1, "item": "Copper", "quantity": 5},
                         <DetRecipeComponentModel>{"indent": 0, "item": "Grasslands1", "quantity": 25},
                         <DetRecipeComponentModel>{"indent": 0, "item": "OakTree", "quantity": 50}
                     ],
-                    "detRecipeTotals": [<ComponentModel>{"item": "Grasslands1", "quantity": 31}, <ComponentModel>{"item": "OakTree", "quantity": 53}]
+                    "detRecipeTotals": [
+                        <ComponentModel>{"item": "Grasslands1", "quantity": 25},
+                        <ComponentModel>{"item": "OakTree", "quantity": 50},
+                        <ComponentModel>{"item": "Copper", "quantity": 5}
+                    ]
                 }
             }),
         new RecipeBase("EquipmentPendant10", <RecipeModel>{
@@ -1105,21 +1102,19 @@ export const initRecipeRepo = () => {
                 "expGiven": 30,
                 "no": 54,
                 "tab": 1,
-                "sellPrice": 604,
+                "sellPrice": 595,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShirts1", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Grasslands1", "quantity": 6},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "OakTree", "quantity": 3},
+                        <DetRecipeComponentModel>{"indent": 1, "item": "Copper", "quantity": 5},
                         <DetRecipeComponentModel>{"indent": 0, "item": "Grasslands4", "quantity": 40},
                         <DetRecipeComponentModel>{"indent": 0, "item": "BirchTree", "quantity": 100}
                     ],
                     "detRecipeTotals": [
                         <ComponentModel>{"item": "Grasslands4", "quantity": 40},
                         <ComponentModel>{"item": "BirchTree", "quantity": 100},
-                        <ComponentModel>{"item": "Grasslands1", "quantity": 6},
-                        <ComponentModel>{"item": "OakTree", "quantity": 3}
+                        <ComponentModel>{"item": "Copper", "quantity": 5}
                     ]
                 }
             }),
@@ -1134,21 +1129,19 @@ export const initRecipeRepo = () => {
                 "expGiven": 60,
                 "no": 55,
                 "tab": 1,
-                "sellPrice": 599,
+                "sellPrice": 590,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShirts16", "quantity": 1},
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShirts1", "quantity": 1},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Grasslands1", "quantity": 6},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "OakTree", "quantity": 3},
+                        <DetRecipeComponentModel>{"indent": 1, "item": "Copper", "quantity": 5},
                         <DetRecipeComponentModel>{"indent": 0, "item": "CraftMat1", "quantity": 150}
                     ],
                     "detRecipeTotals": [
                         <ComponentModel>{"item": "EquipmentShirts16", "quantity": 1},
                         <ComponentModel>{"item": "CraftMat1", "quantity": 150},
-                        <ComponentModel>{"item": "Grasslands1", "quantity": 6},
-                        <ComponentModel>{"item": "OakTree", "quantity": 3}
+                        <ComponentModel>{"item": "Copper", "quantity": 5}
                     ]
                 }
             }),
@@ -1164,35 +1157,32 @@ export const initRecipeRepo = () => {
                 "expGiven": 120,
                 "no": 56,
                 "tab": 1,
-                "sellPrice": 2924,
+                "sellPrice": 2825,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShirts1", "quantity": 5},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "Grasslands1", "quantity": 30},
-                        <DetRecipeComponentModel>{"indent": 1, "item": "OakTree", "quantity": 15},
+                        <DetRecipeComponentModel>{"indent": 1, "item": "Copper", "quantity": 25},
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShirts2", "quantity": 2},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentShirts1", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Grasslands1", "quantity": 12},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "OakTree", "quantity": 6},
+                        <DetRecipeComponentModel>{"indent": 2, "item": "Copper", "quantity": 10},
                         <DetRecipeComponentModel>{"indent": 1, "item": "Grasslands1", "quantity": 50},
                         <DetRecipeComponentModel>{"indent": 1, "item": "OakTree", "quantity": 100},
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShirts25", "quantity": 2},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentShirts1", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Grasslands1", "quantity": 12},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "OakTree", "quantity": 6},
+                        <DetRecipeComponentModel>{"indent": 2, "item": "Copper", "quantity": 10},
                         <DetRecipeComponentModel>{"indent": 1, "item": "Grasslands4", "quantity": 80},
                         <DetRecipeComponentModel>{"indent": 1, "item": "BirchTree", "quantity": 200},
                         <DetRecipeComponentModel>{"indent": 0, "item": "EquipmentShirts24", "quantity": 2},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentShirts16", "quantity": 2},
                         <DetRecipeComponentModel>{"indent": 1, "item": "EquipmentShirts1", "quantity": 2},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "Grasslands1", "quantity": 12},
-                        <DetRecipeComponentModel>{"indent": 2, "item": "OakTree", "quantity": 6},
+                        <DetRecipeComponentModel>{"indent": 2, "item": "Copper", "quantity": 10},
                         <DetRecipeComponentModel>{"indent": 1, "item": "CraftMat1", "quantity": 300}
                     ],
                     "detRecipeTotals": [
-                        <ComponentModel>{"item": "Grasslands1", "quantity": 116},
-                        <ComponentModel>{"item": "OakTree", "quantity": 133},
+                        <ComponentModel>{"item": "Copper", "quantity": 55},
+                        <ComponentModel>{"item": "Grasslands1", "quantity": 50},
+                        <ComponentModel>{"item": "OakTree", "quantity": 100},
                         <ComponentModel>{"item": "Grasslands4", "quantity": 80},
                         <ComponentModel>{"item": "BirchTree", "quantity": 200},
                         <ComponentModel>{"item": "EquipmentShirts16", "quantity": 2},
@@ -1609,7 +1599,7 @@ export const initRecipeRepo = () => {
         new RecipeBase("FillerMaterial", <RecipeModel>{
                 "intID": "FillerMaterial",
                 "recipe": [<ComponentModel>{"item": "FillerMaterial", "quantity": 1}, <ComponentModel>{"item": "FillerMaterial", "quantity": 1}],
-                "levelReqToCraft": 78,
+                "levelReqToCraft": 80,
                 "expGiven": 1000000,
                 "no": 47,
                 "tab": 6,
@@ -9587,7 +9577,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "Tree11", "quantity": 3000000},
                     <ComponentModel>{"item": "MarbleBar", "quantity": 15000}
                 ],
-                "levelReqToCraft": 65,
+                "levelReqToCraft": 70,
                 "expGiven": 1000000,
                 "no": 1,
                 "tab": 6,
@@ -9630,7 +9620,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "Fish10", "quantity": 2000000},
                     <ComponentModel>{"item": "MarbleBar", "quantity": 10000}
                 ],
-                "levelReqToCraft": 66,
+                "levelReqToCraft": 71,
                 "expGiven": 1000000,
                 "no": 2,
                 "tab": 6,
@@ -9671,7 +9661,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "SpiA1", "quantity": 5000000},
                     <ComponentModel>{"item": "MarbleBar", "quantity": 10000}
                 ],
-                "levelReqToCraft": 67,
+                "levelReqToCraft": 72,
                 "expGiven": 1000000,
                 "no": 3,
                 "tab": 6,
@@ -9712,7 +9702,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "Tree12", "quantity": 2500000},
                     <ComponentModel>{"item": "MarbleBar", "quantity": 10000}
                 ],
-                "levelReqToCraft": 68,
+                "levelReqToCraft": 73,
                 "expGiven": 1000000,
                 "no": 4,
                 "tab": 6,
@@ -9753,7 +9743,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "Bug11", "quantity": 10000000},
                     <ComponentModel>{"item": "SpiA2b", "quantity": 5000}
                 ],
-                "levelReqToCraft": 70,
+                "levelReqToCraft": 75,
                 "expGiven": 1000000,
                 "no": 5,
                 "tab": 6,
@@ -9813,7 +9803,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "Bug12", "quantity": 1000000},
                     <ComponentModel>{"item": "SpiA3", "quantity": 4000000}
                 ],
-                "levelReqToCraft": 67,
+                "levelReqToCraft": 72,
                 "expGiven": 1000000,
                 "no": 6,
                 "tab": 6,
@@ -9888,7 +9878,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "Bug12", "quantity": 1000000},
                     <ComponentModel>{"item": "SpiA4", "quantity": 4000000}
                 ],
-                "levelReqToCraft": 67,
+                "levelReqToCraft": 72,
                 "expGiven": 1000000,
                 "no": 7,
                 "tab": 6,
@@ -9963,7 +9953,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "Bug12", "quantity": 1000000},
                     <ComponentModel>{"item": "SpiA5", "quantity": 4000000}
                 ],
-                "levelReqToCraft": 67,
+                "levelReqToCraft": 72,
                 "expGiven": 1000000,
                 "no": 8,
                 "tab": 6,
@@ -10034,7 +10024,7 @@ export const initRecipeRepo = () => {
         new RecipeBase("EquipmentTools14", <RecipeModel>{
                 "intID": "EquipmentTools14",
                 "recipe": [<ComponentModel>{"item": "EquipmentTools9", "quantity": 1}, <ComponentModel>{"item": "MarbleBar", "quantity": 7500}],
-                "levelReqToCraft": 70,
+                "levelReqToCraft": 75,
                 "expGiven": 1000000,
                 "no": 9,
                 "tab": 6,
@@ -10089,7 +10079,7 @@ export const initRecipeRepo = () => {
         new RecipeBase("MaxCapBagMi10", <RecipeModel>{
                 "intID": "MaxCapBagMi10",
                 "recipe": [<ComponentModel>{"item": "Marble", "quantity": 2000000}],
-                "levelReqToCraft": 67,
+                "levelReqToCraft": 72,
                 "expGiven": 1000000,
                 "no": 10,
                 "tab": 6,
@@ -10106,7 +10096,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "EquipmentToolsHatchet9", "quantity": 1},
                     <ComponentModel>{"item": "Tree11", "quantity": 3000000}
                 ],
-                "levelReqToCraft": 70,
+                "levelReqToCraft": 75,
                 "expGiven": 1000000,
                 "no": 11,
                 "tab": 6,
@@ -10162,7 +10152,7 @@ export const initRecipeRepo = () => {
         new RecipeBase("MaxCapBagT10", <RecipeModel>{
                 "intID": "MaxCapBagT10",
                 "recipe": [<ComponentModel>{"item": "Tree12", "quantity": 2000000}],
-                "levelReqToCraft": 67,
+                "levelReqToCraft": 72,
                 "expGiven": 1000000,
                 "no": 12,
                 "tab": 6,
@@ -10176,7 +10166,7 @@ export const initRecipeRepo = () => {
         new RecipeBase("FishingRod11", <RecipeModel>{
                 "intID": "FishingRod11",
                 "recipe": [<ComponentModel>{"item": "FishingRod10", "quantity": 1}, <ComponentModel>{"item": "Fish9", "quantity": 2000000}],
-                "levelReqToCraft": 71,
+                "levelReqToCraft": 76,
                 "expGiven": 1000000,
                 "no": 13,
                 "tab": 6,
@@ -10235,7 +10225,7 @@ export const initRecipeRepo = () => {
         new RecipeBase("MaxCapBagFi10", <RecipeModel>{
                 "intID": "MaxCapBagFi10",
                 "recipe": [<ComponentModel>{"item": "Fish10", "quantity": 2000000}],
-                "levelReqToCraft": 68,
+                "levelReqToCraft": 73,
                 "expGiven": 1000000,
                 "no": 14,
                 "tab": 6,
@@ -10249,7 +10239,7 @@ export const initRecipeRepo = () => {
         new RecipeBase("CatchingNet11", <RecipeModel>{
                 "intID": "CatchingNet11",
                 "recipe": [<ComponentModel>{"item": "CatchingNet10", "quantity": 1}, <ComponentModel>{"item": "Bug11", "quantity": 2000000}],
-                "levelReqToCraft": 71,
+                "levelReqToCraft": 76,
                 "expGiven": 1000000,
                 "no": 15,
                 "tab": 6,
@@ -10306,7 +10296,7 @@ export const initRecipeRepo = () => {
         new RecipeBase("MaxCapBagB10", <RecipeModel>{
                 "intID": "MaxCapBagB10",
                 "recipe": [<ComponentModel>{"item": "Bug11", "quantity": 2000000}],
-                "levelReqToCraft": 68,
+                "levelReqToCraft": 73,
                 "expGiven": 1000000,
                 "no": 16,
                 "tab": 6,
@@ -10324,7 +10314,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "Critter5A", "quantity": 1000},
                     <ComponentModel>{"item": "Refinery2", "quantity": 250000}
                 ],
-                "levelReqToCraft": 73,
+                "levelReqToCraft": 78,
                 "expGiven": 1000000,
                 "no": 17,
                 "tab": 6,
@@ -10371,7 +10361,7 @@ export const initRecipeRepo = () => {
         new RecipeBase("MaxCapBagTr9", <RecipeModel>{
                 "intID": "MaxCapBagTr9",
                 "recipe": [<ComponentModel>{"item": "Critter9", "quantity": 1500000}, <ComponentModel>{"item": "Refinery2", "quantity": 300000}],
-                "levelReqToCraft": 69,
+                "levelReqToCraft": 74,
                 "expGiven": 1000000,
                 "no": 18,
                 "tab": 6,
@@ -10392,7 +10382,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "Soul6", "quantity": 3000000},
                     <ComponentModel>{"item": "Refinery3", "quantity": 125000}
                 ],
-                "levelReqToCraft": 73,
+                "levelReqToCraft": 78,
                 "expGiven": 1000000,
                 "no": 19,
                 "tab": 6,
@@ -10439,7 +10429,7 @@ export const initRecipeRepo = () => {
         new RecipeBase("MaxCapBagS9", <RecipeModel>{
                 "intID": "MaxCapBagS9",
                 "recipe": [<ComponentModel>{"item": "Soul6", "quantity": 2000000}, <ComponentModel>{"item": "Refinery3", "quantity": 125000}],
-                "levelReqToCraft": 69,
+                "levelReqToCraft": 74,
                 "expGiven": 1000000,
                 "no": 20,
                 "tab": 6,
@@ -10456,7 +10446,7 @@ export const initRecipeRepo = () => {
         new RecipeBase("MaxCapBagF10", <RecipeModel>{
                 "intID": "MaxCapBagF10",
                 "recipe": [<ComponentModel>{"item": "FoodHealth17", "quantity": 2000000}, <ComponentModel>{"item": "FoodG12", "quantity": 500}],
-                "levelReqToCraft": 68,
+                "levelReqToCraft": 73,
                 "expGiven": 1000000,
                 "no": 21,
                 "tab": 6,
@@ -10477,7 +10467,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "SpiA3", "quantity": 1200000},
                     <ComponentModel>{"item": "SpiA2b", "quantity": 1000}
                 ],
-                "levelReqToCraft": 69,
+                "levelReqToCraft": 74,
                 "expGiven": 1000000,
                 "no": 22,
                 "tab": 6,
@@ -10504,7 +10494,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "SpiD2", "quantity": 10000000},
                     <ComponentModel>{"item": "GodshardBar", "quantity": 150000}
                 ],
-                "levelReqToCraft": 75,
+                "levelReqToCraft": 80,
                 "expGiven": 1000000,
                 "no": 25,
                 "tab": 6,
@@ -10555,7 +10545,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "SpiC1", "quantity": 10000000},
                     <ComponentModel>{"item": "GodshardBar", "quantity": 120000}
                 ],
-                "levelReqToCraft": 74,
+                "levelReqToCraft": 79,
                 "expGiven": 1000000,
                 "no": 26,
                 "tab": 6,
@@ -10604,7 +10594,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "SpiB4", "quantity": 10000000},
                     <ComponentModel>{"item": "GodshardBar", "quantity": 100000}
                 ],
-                "levelReqToCraft": 73,
+                "levelReqToCraft": 78,
                 "expGiven": 1000000,
                 "no": 27,
                 "tab": 6,
@@ -10653,7 +10643,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "SpiB3", "quantity": 10000000},
                     <ComponentModel>{"item": "GodshardBar", "quantity": 100000}
                 ],
-                "levelReqToCraft": 72,
+                "levelReqToCraft": 77,
                 "expGiven": 1000000,
                 "no": 28,
                 "tab": 6,
@@ -10702,7 +10692,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "Refinery3", "quantity": 1000000},
                     <ComponentModel>{"item": "GodshardBar", "quantity": 1000000}
                 ],
-                "levelReqToCraft": 80,
+                "levelReqToCraft": 85,
                 "expGiven": 1000000,
                 "no": 29,
                 "tab": 6,
@@ -10769,7 +10759,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "Tree13", "quantity": 10000000},
                     <ComponentModel>{"item": "GodshardBar", "quantity": 150000}
                 ],
-                "levelReqToCraft": 78,
+                "levelReqToCraft": 83,
                 "expGiven": 1000000,
                 "no": 30,
                 "tab": 6,
@@ -10849,7 +10839,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "Tree13", "quantity": 10000000},
                     <ComponentModel>{"item": "GodshardBar", "quantity": 150000}
                 ],
-                "levelReqToCraft": 78,
+                "levelReqToCraft": 83,
                 "expGiven": 1000000,
                 "no": 31,
                 "tab": 6,
@@ -10929,7 +10919,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "Tree13", "quantity": 10000000},
                     <ComponentModel>{"item": "GodshardBar", "quantity": 150000}
                 ],
-                "levelReqToCraft": 78,
+                "levelReqToCraft": 83,
                 "expGiven": 1000000,
                 "no": 32,
                 "tab": 6,
@@ -11009,7 +10999,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "SpiD1", "quantity": 5000000},
                     <ComponentModel>{"item": "GodshardBar", "quantity": 10000}
                 ],
-                "levelReqToCraft": 73,
+                "levelReqToCraft": 82,
                 "expGiven": 1000000,
                 "no": 33,
                 "tab": 6,
@@ -11069,7 +11059,7 @@ export const initRecipeRepo = () => {
         new RecipeBase("MaxCapBagMi11", <RecipeModel>{
                 "intID": "MaxCapBagMi11",
                 "recipe": [<ComponentModel>{"item": "Godshard", "quantity": 5000000}],
-                "levelReqToCraft": 69,
+                "levelReqToCraft": 80,
                 "expGiven": 1000000,
                 "no": 34,
                 "tab": 6,
@@ -11088,7 +11078,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "Tree13", "quantity": 10000000},
                     <ComponentModel>{"item": "GodshardBar", "quantity": 30000}
                 ],
-                "levelReqToCraft": 73,
+                "levelReqToCraft": 82,
                 "expGiven": 1000000,
                 "no": 35,
                 "tab": 6,
@@ -11151,7 +11141,7 @@ export const initRecipeRepo = () => {
         new RecipeBase("MaxCapBagT11", <RecipeModel>{
                 "intID": "MaxCapBagT11",
                 "recipe": [<ComponentModel>{"item": "Tree13", "quantity": 5000000}],
-                "levelReqToCraft": 69,
+                "levelReqToCraft": 80,
                 "expGiven": 1000000,
                 "no": 36,
                 "tab": 6,
@@ -11169,7 +11159,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "Fish11", "quantity": 5000000},
                     <ComponentModel>{"item": "GodshardBar", "quantity": 30000}
                 ],
-                "levelReqToCraft": 68,
+                "levelReqToCraft": 82,
                 "expGiven": 1000000,
                 "no": 37,
                 "tab": 6,
@@ -11233,7 +11223,7 @@ export const initRecipeRepo = () => {
         new RecipeBase("MaxCapBagFi11", <RecipeModel>{
                 "intID": "MaxCapBagFi11",
                 "recipe": [<ComponentModel>{"item": "Fish12", "quantity": 5000000}],
-                "levelReqToCraft": 69,
+                "levelReqToCraft": 80,
                 "expGiven": 1000000,
                 "no": 38,
                 "tab": 6,
@@ -11251,7 +11241,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "Bug13", "quantity": 5000000},
                     <ComponentModel>{"item": "GodshardBar", "quantity": 40000}
                 ],
-                "levelReqToCraft": 71,
+                "levelReqToCraft": 82,
                 "expGiven": 1000000,
                 "no": 39,
                 "tab": 6,
@@ -11331,7 +11321,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "Critter2A", "quantity": 25000},
                     <ComponentModel>{"item": "GodshardBar", "quantity": 50000}
                 ],
-                "levelReqToCraft": 75,
+                "levelReqToCraft": 80,
                 "expGiven": 1000000,
                 "no": 41,
                 "tab": 6,
@@ -11382,7 +11372,7 @@ export const initRecipeRepo = () => {
         new RecipeBase("MaxCapBagTr10", <RecipeModel>{
                 "intID": "MaxCapBagTr10",
                 "recipe": [<ComponentModel>{"item": "Critter5", "quantity": 5555555}],
-                "levelReqToCraft": 74,
+                "levelReqToCraft": 80,
                 "expGiven": 1000000,
                 "no": 42,
                 "tab": 6,
@@ -11400,7 +11390,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "Soul7", "quantity": 5000000},
                     <ComponentModel>{"item": "GodshardBar", "quantity": 50000}
                 ],
-                "levelReqToCraft": 73,
+                "levelReqToCraft": 80,
                 "expGiven": 1000000,
                 "no": 43,
                 "tab": 6,
@@ -11452,7 +11442,7 @@ export const initRecipeRepo = () => {
         new RecipeBase("MaxCapBagS10", <RecipeModel>{
                 "intID": "MaxCapBagS10",
                 "recipe": [<ComponentModel>{"item": "Soul7", "quantity": 5000000}],
-                "levelReqToCraft": 72,
+                "levelReqToCraft": 80,
                 "expGiven": 1000000,
                 "no": 44,
                 "tab": 6,
@@ -11493,7 +11483,7 @@ export const initRecipeRepo = () => {
                     <ComponentModel>{"item": "SpiD1", "quantity": 1000000},
                     <ComponentModel>{"item": "SpiB2b", "quantity": 5000}
                 ],
-                "levelReqToCraft": 78,
+                "levelReqToCraft": 80,
                 "expGiven": 1000000,
                 "no": 46,
                 "tab": 6,
@@ -11515,7 +11505,7 @@ export const initRecipeRepo = () => {
         new RecipeBase("EquipmentSmithingTabs7", <RecipeModel>{
                 "intID": "EquipmentSmithingTabs7",
                 "recipe": [<ComponentModel>{"item": "FillerMaterial", "quantity": 1}, <ComponentModel>{"item": "FillerMaterial", "quantity": 1}],
-                "levelReqToCraft": 78,
+                "levelReqToCraft": 80,
                 "expGiven": 1000000,
                 "no": 48,
                 "tab": 6,

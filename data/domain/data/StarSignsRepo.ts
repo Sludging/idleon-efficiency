@@ -463,59 +463,299 @@ export const initStarSignsRepo = () => {
                 "cost": 5
             }),
         new StarSignBase(57, <StarSignModel>{
-                "name": "Unknown",
-                "text": "Who's to say...?  ",
+                "name": "Breedabilli",
+                "text": "+35% Breedable Spd +15% Shiny Pet LV spd ",
                 "x": 623,
                 "y": 135,
                 "prevReq": 56,
-                "cost": 999
+                "cost": 4
             }),
         new StarSignBase(58, <StarSignModel>{
-                "name": "Fillerz24",
-                "text": "  ",
+                "name": "Gordonius Major",
+                "text": "+15% Cooking SPD (Multiplicative!) ",
                 "x": 721,
                 "y": 214,
                 "prevReq": 57,
-                "cost": 999
+                "cost": 4
             }),
         new StarSignBase(59, <StarSignModel>{
-                "name": "Fillerz25",
-                "text": "  ",
+                "name": "Power Bowower",
+                "text": "+30% Pet DMG for Breeding Skill ",
                 "x": 748,
                 "y": 271,
                 "prevReq": 58,
-                "cost": 999
+                "cost": 4
             }),
         new StarSignBase(60, <StarSignModel>{
-                "name": "Fillerz26",
-                "text": "  ",
+                "name": "Scienscion",
+                "text": "+20% Lab EXP Gain  ",
                 "x": 685,
                 "y": 297,
                 "prevReq": 58,
-                "cost": 999
+                "cost": 4
             }),
         new StarSignBase(61, <StarSignModel>{
-                "name": "Fillerz27",
-                "text": "  ",
+                "name": "Artifosho",
+                "text": "+15% Artifact Find Chance (Multiplicative)",
                 "x": 523,
                 "y": 285,
                 "prevReq": 60,
-                "cost": 999
+                "cost": 4
             }),
         new StarSignBase(62, <StarSignModel>{
-                "name": "Fillerz28",
-                "text": "  ",
+                "name": "Divividov",
+                "text": "+30% Divinity EXP  ",
                 "x": 349,
                 "y": 208,
-                "prevReq": 62,
-                "cost": 999
+                "prevReq": 61,
+                "cost": 4
             }),
         new StarSignBase(63, <StarSignModel>{
-                "name": "Fillerz29",
-                "text": "  ",
+                "name": "C. Shanti Minor",
+                "text": "+20% Sailing SPD  ",
                 "x": 443,
                 "y": 173,
-                "prevReq": 63,
+                "prevReq": 62,
+                "cost": 4
+            }),
+        new StarSignBase(64, <StarSignModel>{
+                "name": "Muscle Magnus",
+                "text": "+50 STR  ",
+                "x": 459,
+                "y": 392,
+                "prevReq": 0,
+                "cost": 1
+            }),
+        new StarSignBase(65, <StarSignModel>{
+                "name": "Cropiovo Minor",
+                "text": "+3% Crop Evo chance per Farming LV ",
+                "x": 347,
+                "y": 338,
+                "prevReq": 64,
+                "cost": 2
+            }),
+        new StarSignBase(66, <StarSignModel>{
+                "name": "Fabarmi",
+                "text": "+20% Farming EXP  ",
+                "x": 308,
+                "y": 364,
+                "prevReq": 65,
+                "cost": 2
+            }),
+        new StarSignBase(67, <StarSignModel>{
+                "name": "O.G. Signalais",
+                "text": "+15% OG Chance  ",
+                "x": 183,
+                "y": 353,
+                "prevReq": 66,
+                "cost": 2
+            }),
+        new StarSignBase(68, <StarSignModel>{
+                "name": "Lightspeed Frog",
+                "text": "+50 AGI  ",
+                "x": 127,
+                "y": 292,
+                "prevReq": 67,
+                "cost": 3
+            }),
+        new StarSignBase(69, <StarSignModel>{
+                "name": "Beanbie Major",
+                "text": "+20% Golden Food bonuses ",
+                "x": 145,
+                "y": 233,
+                "prevReq": 68,
+                "cost": 3
+            }),
+        new StarSignBase(70, <StarSignModel>{
+                "name": "Damarian Major",
+                "text": "+25% Total Damage  ",
+                "x": 26,
+                "y": 180,
+                "prevReq": 69,
+                "cost": 4
+            }),
+        new StarSignBase(71, <StarSignModel>{
+                "name": "Lotto Larrinald",
+                "text": "+50 LUK  ",
+                "x": 109,
+                "y": 107,
+                "prevReq": 70,
+                "cost": 5
+            }),
+        new StarSignBase(72, <StarSignModel>{
+                "name": "Intellostooge",
+                "text": "+50 WIS  ",
+                "x": 190,
+                "y": 194,
+                "prevReq": 69,
+                "cost": 4
+            }),
+        new StarSignBase(73, <StarSignModel>{
+                "name": "S. Tealio",
+                "text": "+12% Ninja Twin Stealth ",
+                "x": 250,
+                "y": 322,
+                "prevReq": 65,
+                "cost": 3
+            }),
+        new StarSignBase(74, <StarSignModel>{
+                "name": "Sneekee E. X.",
+                "text": "+15% Sneaking EXP  ",
+                "x": 293,
+                "y": 269,
+                "prevReq": 73,
+                "cost": 3
+            }),
+        new StarSignBase(75, <StarSignModel>{
+                "name": "Jadaciussi",
+                "text": "+10% Jade Gain (Multiplicative!) ",
+                "x": 385,
+                "y": 233,
+                "prevReq": 74,
+                "cost": 3
+            }),
+        new StarSignBase(76, <StarSignModel>{
+                "name": "Druipi Major",
+                "text": "+12% Drop Rarity  ",
+                "x": 283,
+                "y": 207,
+                "prevReq": 75,
+                "cost": 4
+            }),
+        new StarSignBase(77, <StarSignModel>{
+                "name": "Sumo Magno",
+                "text": "+20% Summoning EXP  ",
+                "x": 227,
+                "y": 137,
+                "prevReq": 76,
+                "cost": 4
+            }),
+        new StarSignBase(78, <StarSignModel>{
+                "name": "Killian Maximus",
+                "text": "+3% Multikill Per Tier  ",
+                "x": 305,
+                "y": 87,
+                "prevReq": 77,
+                "cost": 5
+            }),
+        new StarSignBase(79, <StarSignModel>{
+                "name": "Seraph Cosmos",
+                "text": "All characters now get 1.10x Star Sign bonuses per 20 Summoning LV",
+                "x": 474,
+                "y": 188,
+                "prevReq": 75,
+                "cost": 11
+            }),
+        new StarSignBase(80, <StarSignModel>{
+                "name": "Glimmer of Beyond",
+                "text": "This star sign is unreachable for now... ",
+                "x": 679,
+                "y": 344,
+                "prevReq": 64,
+                "cost": 999
+            }),
+        new StarSignBase(81, <StarSignModel>{
+                "name": "Fillerz48",
+                "text": "  ",
+                "x": 859,
+                "y": 386,
+                "prevReq": 80,
+                "cost": 999
+            }),
+        new StarSignBase(82, <StarSignModel>{
+                "name": "Fillerz49",
+                "text": "  ",
+                "x": 891,
+                "y": 290,
+                "prevReq": 81,
+                "cost": 999
+            }),
+        new StarSignBase(83, <StarSignModel>{
+                "name": "Fillerz50",
+                "text": "  ",
+                "x": 813,
+                "y": 321,
+                "prevReq": 84,
+                "cost": 999
+            }),
+        new StarSignBase(84, <StarSignModel>{
+                "name": "Fillerz51",
+                "text": "  ",
+                "x": 749,
+                "y": 276,
+                "prevReq": 80,
+                "cost": 999
+            }),
+        new StarSignBase(85, <StarSignModel>{
+                "name": "Fillerz52",
+                "text": "  ",
+                "x": 855,
+                "y": 234,
+                "prevReq": 84,
+                "cost": 999
+            }),
+        new StarSignBase(86, <StarSignModel>{
+                "name": "Fillerz53",
+                "text": "  ",
+                "x": 898,
+                "y": 133,
+                "prevReq": 85,
+                "cost": 999
+            }),
+        new StarSignBase(87, <StarSignModel>{
+                "name": "Fillerz54",
+                "text": "  ",
+                "x": 879,
+                "y": 77,
+                "prevReq": 86,
+                "cost": 999
+            }),
+        new StarSignBase(88, <StarSignModel>{
+                "name": "Fillerz55",
+                "text": "  ",
+                "x": 813,
+                "y": 108,
+                "prevReq": 85,
+                "cost": 999
+            }),
+        new StarSignBase(89, <StarSignModel>{
+                "name": "Fillerz56",
+                "text": "  ",
+                "x": 751,
+                "y": 79,
+                "prevReq": 88,
+                "cost": 999
+            }),
+        new StarSignBase(90, <StarSignModel>{
+                "name": "Fillerz57",
+                "text": "  ",
+                "x": 709,
+                "y": 160,
+                "prevReq": 88,
+                "cost": 999
+            }),
+        new StarSignBase(91, <StarSignModel>{
+                "name": "Fillerz58",
+                "text": "  ",
+                "x": 657,
+                "y": 104,
+                "prevReq": 90,
+                "cost": 999
+            }),
+        new StarSignBase(92, <StarSignModel>{
+                "name": "Fillerz59",
+                "text": "  ",
+                "x": 701,
+                "y": 235,
+                "prevReq": 90,
+                "cost": 999
+            }),
+        new StarSignBase(93, <StarSignModel>{
+                "name": "Fillerz32",
+                "text": "  ",
+                "x": 618,
+                "y": 247,
+                "prevReq": 92,
                 "cost": 999
             })    
 ]

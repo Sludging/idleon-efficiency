@@ -125,7 +125,7 @@ export const initMarketInfoRepo = () => {
                 "costExponent": 1.155,
                 "cropReq": 36,
                 "maxLvl": 500,
-                "bonusPerLvl": 1
+                "bonusPerLvl": 0.3
             }),
         new MarketInfoBase(11, <MarketInfoModel>{
                 "name": "OG FERTILIZER",
@@ -180,7 +180,7 @@ export const initMarketInfoRepo = () => {
                 "costExponent": 1.2,
                 "cropReq": 109,
                 "maxLvl": 50,
-                "bonusPerLvl": 1
+                "bonusPerLvl": 0.5
             })    
 ]
 }

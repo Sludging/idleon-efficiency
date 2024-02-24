@@ -660,20 +660,6 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts1",
-                        "name": "Orange Tee Recipe",
-                        "amount": 6,
-                        "type": "recipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts1",
-                        "name": "Orange Tee Detailed Recipe",
-                        "amount": 6,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentShirts2",
                         "name": "Blue Tee Recipe",
                         "amount": 25,
@@ -683,7 +669,7 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShirts2",
                         "name": "Blue Tee Detailed Recipe",
-                        "amount": 31,
+                        "amount": 25,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -709,23 +695,9 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts25",
-                        "name": "Purple Tee Detailed Recipe",
-                        "amount": 6,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts24",
-                        "name": "Green Tee Detailed Recipe",
-                        "amount": 6,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentShirts3",
                         "name": "Black Tee Detailed Recipe",
-                        "amount": 116,
+                        "amount": 50,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -809,20 +781,6 @@ export const initUsesRepo = () => {
                         "key": "EquipmentWands1",
                         "name": "Gnarled Wand Detailed Recipe",
                         "amount": 15,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts1",
-                        "name": "Orange Tee Recipe",
-                        "amount": 3,
-                        "type": "recipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts1",
-                        "name": "Orange Tee Detailed Recipe",
-                        "amount": 3,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -920,7 +878,7 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShirts2",
                         "name": "Blue Tee Detailed Recipe",
-                        "amount": 53,
+                        "amount": 50,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -932,23 +890,9 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts25",
-                        "name": "Purple Tee Detailed Recipe",
-                        "amount": 3,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
-                        "key": "EquipmentShirts24",
-                        "name": "Green Tee Detailed Recipe",
-                        "amount": 3,
-                        "type": "detRecipe"
-                    },
-                    <UseModel>{
-                        "repoSource": "RecipeRepo",
                         "key": "EquipmentShirts3",
                         "name": "Black Tee Detailed Recipe",
-                        "amount": 133,
+                        "amount": 100,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -1092,15 +1036,15 @@ export const initUsesRepo = () => {
                 "uses": [
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats1",
-                        "name": "Farmer Brim Recipe",
+                        "key": "EquipmentShirts1",
+                        "name": "Orange Tee Recipe",
                         "amount": 5,
                         "type": "recipe"
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
-                        "key": "EquipmentHats1",
-                        "name": "Farmer Brim Detailed Recipe",
+                        "key": "EquipmentShirts1",
+                        "name": "Orange Tee Detailed Recipe",
                         "amount": 5,
                         "type": "detRecipe"
                     },
@@ -1134,6 +1078,13 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts2",
+                        "name": "Blue Tee Detailed Recipe",
+                        "amount": 5,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
                         "key": "Peanut",
                         "name": "Peanut Recipe",
                         "amount": 1,
@@ -1151,6 +1102,27 @@ export const initUsesRepo = () => {
                         "key": "PeanutG",
                         "name": "Golden Peanut Detailed Recipe",
                         "amount": 100,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts25",
+                        "name": "Purple Tee Detailed Recipe",
+                        "amount": 5,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts24",
+                        "name": "Green Tee Detailed Recipe",
+                        "amount": 5,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShirts3",
+                        "name": "Black Tee Detailed Recipe",
+                        "amount": 55,
                         "type": "detRecipe"
                     },
                     <UseModel>{

@@ -1056,7 +1056,7 @@ export const initPetRepo = () => {
                     "description": "For 15 seconds, all basic fist attacks have a 30% chance to turn into the weapon of that pet's ability, but only if their ability is a weapon.",
                     "combatDescription": "When foraging, there is a 50% chance to not reset trekking progress when claiming, essentially giving you FREE SPICE! Multiple converter pets won't stack. @ WARNING: Placing this pet in a territory will reset that territory's trekking progress."
                 },
-                "shinyBonus": <ShinyBonusModel>{"shinyIndex": 8, "shinyBonusDesc": "+{ Base WIS", "bonusPerLvl": 2}
+                "shinyBonus": <ShinyBonusModel>{"shinyIndex": 3, "shinyBonusDesc": "+{ Infinite Star Signs", "bonusPerLvl": 2}
             }),
         new PetBase(48, <PetModel>{
                 "stats": <PetStatModel>{

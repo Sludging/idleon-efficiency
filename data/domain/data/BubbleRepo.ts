@@ -1,7 +1,11 @@
 import { BubbleModel } from '../model/bubbleModel';
 import { CauldronModel } from '../model/cauldronModel';
 import { ComponentModel } from '../model/componentModel';
+import { CropComponentModel } from '../model/cropComponentModel';
+import { JadeComponentModel } from '../model/jadeComponentModel';
 import { LiquidComponentModel } from '../model/liquidComponentModel';
+import { SailTreasureComponentModel } from '../model/sailTreasureComponentModel';
+import { SoulComponentModel } from '../model/soulComponentModel';
 import { SpiceComponentModel } from '../model/spiceComponentModel';
 
 export class CauldronBase { constructor(public id: string, public data: CauldronModel) { } }
@@ -239,7 +243,10 @@ export const initBubbleRepo = () => {
                         "x2": 60,
                         "func": "decay",
                         "description": "When claiming AFK Gains, +{% chance to gain an equal amount of time for Gaming progress!",
-                        "requirements": [<ComponentModel>{"item": "SailTr9", "quantity": 100}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
+                        "requirements": [
+                            <SailTreasureComponentModel>{"sailTreasureNo": "9", "quantity": 100},
+                            <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}
+                        ],
                         "bonusKey": "W3ACTIVE"
                     },
                     <BubbleModel>{
@@ -259,7 +266,10 @@ export const initBubbleRepo = () => {
                         "x2": 50,
                         "func": "decay",
                         "description": "+{% Total Damage per 250 STR, but only for warriors! No triple dipping into AGI and WIS! Also this, but for beginners with LUK!",
-                        "requirements": [<ComponentModel>{"item": "SailTr20", "quantity": 150}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
+                        "requirements": [
+                            <SailTreasureComponentModel>{"sailTreasureNo": "20", "quantity": 150},
+                            <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}
+                        ],
                         "bonusKey": "W5"
                     },
                     <BubbleModel>{
@@ -269,7 +279,7 @@ export const initBubbleRepo = () => {
                         "x2": 60,
                         "func": "decay",
                         "description": "The effect STR has on Damage is increased by +{%",
-                        "requirements": [<ComponentModel>{"item": "W6item1", "quantity": 100}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
+                        "requirements": [<CropComponentModel>{"cropId": "3", "quantity": 100}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
                         "bonusKey": "W6"
                     },
                     <BubbleModel>{
@@ -289,7 +299,7 @@ export const initBubbleRepo = () => {
                         "x2": 60,
                         "func": "decay",
                         "description": "+{% STR for every 500 Tome Completion Points above 1000. NOTE: The tome is coming in an upcoming weekly update!",
-                        "requirements": [<ComponentModel>{"item": "W6item8", "quantity": 500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                        "requirements": [<SoulComponentModel>{"soulId": "0", "quantity": 500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                         "bonusKey": "W8"
                     },
                     <BubbleModel>{
@@ -309,7 +319,7 @@ export const initBubbleRepo = () => {
                         "x2": 50,
                         "func": "decay",
                         "description": "+{% Crop Evolution chance for every 500 Tome Completion Points above 1000.",
-                        "requirements": [<ComponentModel>{"item": "W6item10", "quantity": 1500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                        "requirements": [<SoulComponentModel>{"soulId": "0", "quantity": 1500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                         "bonusKey": "W10AllCharz"
                     }
                 ]
@@ -543,7 +553,10 @@ export const initBubbleRepo = () => {
                         "x2": 60,
                         "func": "decay",
                         "description": "When claiming AFK Gains, +{% chance to gain an equal amount of time for Sailing progress!",
-                        "requirements": [<ComponentModel>{"item": "SailTr11", "quantity": 100}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
+                        "requirements": [
+                            <SailTreasureComponentModel>{"sailTreasureNo": "11", "quantity": 100},
+                            <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}
+                        ],
                         "bonusKey": "A3ACTIVE"
                     },
                     <BubbleModel>{
@@ -563,7 +576,10 @@ export const initBubbleRepo = () => {
                         "x2": 50,
                         "func": "decay",
                         "description": "+{% Total Damage per 250 AGI, but only for archers! No triple dipping into STR and WIS!",
-                        "requirements": [<ComponentModel>{"item": "SailTr24", "quantity": 150}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
+                        "requirements": [
+                            <SailTreasureComponentModel>{"sailTreasureNo": "24", "quantity": 150},
+                            <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}
+                        ],
                         "bonusKey": "A5"
                     },
                     <BubbleModel>{
@@ -573,7 +589,7 @@ export const initBubbleRepo = () => {
                         "x2": 60,
                         "func": "decay",
                         "description": "The effect AGI has on Damage is increased by +{%",
-                        "requirements": [<ComponentModel>{"item": "W6item0", "quantity": 25000}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
+                        "requirements": [<JadeComponentModel>{"quantity": 25000}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
                         "bonusKey": "A6"
                     },
                     <BubbleModel>{
@@ -593,7 +609,7 @@ export const initBubbleRepo = () => {
                         "x2": 60,
                         "func": "decay",
                         "description": "+{ Catching and Trapping Power. This bonus increases based on every 10 Class LVs you are above 500.",
-                        "requirements": [<ComponentModel>{"item": "W6item3", "quantity": 150}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                        "requirements": [<CropComponentModel>{"cropId": "46", "quantity": 150}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                         "bonusKey": "A8"
                     },
                     <BubbleModel>{
@@ -613,7 +629,7 @@ export const initBubbleRepo = () => {
                         "x2": 50,
                         "func": "decay",
                         "description": "+{% Stealth (the stat that lowers dedection rate in Sneaking) for every 500 Tome Completion Points above 1000.",
-                        "requirements": [<ComponentModel>{"item": "W6item5", "quantity": 250}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                        "requirements": [<CropComponentModel>{"cropId": "99", "quantity": 250}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                         "bonusKey": "A10AllCharz"
                     }
                 ]
@@ -847,7 +863,10 @@ export const initBubbleRepo = () => {
                         "x2": 100,
                         "func": "decay",
                         "description": "+{% Divinity EXP Gain",
-                        "requirements": [<ComponentModel>{"item": "SailTr13", "quantity": 15}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
+                        "requirements": [
+                            <SailTreasureComponentModel>{"sailTreasureNo": "13", "quantity": 15},
+                            <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}
+                        ],
                         "bonusKey": "M3ACTIVE"
                     },
                     <BubbleModel>{
@@ -867,7 +886,10 @@ export const initBubbleRepo = () => {
                         "x2": 50,
                         "func": "decay",
                         "description": "+{% Total Damage per 250 WIS, but only for mages! No triple dipping into STR and AGI!",
-                        "requirements": [<ComponentModel>{"item": "SailTr28", "quantity": 200}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}],
+                        "requirements": [
+                            <SailTreasureComponentModel>{"sailTreasureNo": "28", "quantity": 200},
+                            <LiquidComponentModel>{"liquidNo": "3", "quantity": 6}
+                        ],
                         "bonusKey": "M5"
                     },
                     <BubbleModel>{
@@ -877,7 +899,7 @@ export const initBubbleRepo = () => {
                         "x2": 60,
                         "func": "decay",
                         "description": "The effect WIS has on Damage is increased by +{%",
-                        "requirements": [<ComponentModel>{"item": "W6item6", "quantity": 500}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
+                        "requirements": [<SoulComponentModel>{"soulId": "0", "quantity": 500}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
                         "bonusKey": "M6"
                     },
                     <BubbleModel>{
@@ -887,7 +909,7 @@ export const initBubbleRepo = () => {
                         "x2": 60,
                         "func": "decay",
                         "description": "+{ Choppin and Worship Power. This bonus increases based on every 10 Class LVs you are above 500.",
-                        "requirements": [<ComponentModel>{"item": "W6item7", "quantity": 950}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
+                        "requirements": [<SoulComponentModel>{"soulId": "0", "quantity": 950}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
                         "bonusKey": "M7"
                     },
                     <BubbleModel>{
@@ -907,7 +929,7 @@ export const initBubbleRepo = () => {
                         "x2": 60,
                         "func": "decay",
                         "description": "+{% WIS for every 500 Tome Completion Points above 1000. NOTE: The tome is coming in an upcoming weekly update!",
-                        "requirements": [<ComponentModel>{"item": "W6item4", "quantity": 150}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                        "requirements": [<CropComponentModel>{"cropId": "72", "quantity": 150}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                         "bonusKey": "M9"
                     },
                     <BubbleModel>{
@@ -917,7 +939,7 @@ export const initBubbleRepo = () => {
                         "x2": 50,
                         "func": "decay",
                         "description": "+{% All Essence Gain for every 500 Tome Completion Points above 1000.",
-                        "requirements": [<ComponentModel>{"item": "W6item0", "quantity": 250000}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                        "requirements": [<JadeComponentModel>{"quantity": 250000}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                         "bonusKey": "M10AllCharz"
                     }
                 ]
@@ -1141,7 +1163,10 @@ export const initBubbleRepo = () => {
                         "x2": 60,
                         "func": "decayMulti",
                         "description": "{x higher bonus than displayed from the Minor Link bonus of the deity you're linked to in Divinity. AKA bigger god passive!",
-                        "requirements": [<ComponentModel>{"item": "SailTr1", "quantity": 50}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
+                        "requirements": [
+                            <SailTreasureComponentModel>{"sailTreasureNo": "1", "quantity": 50},
+                            <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}
+                        ],
                         "bonusKey": "Y2ACTIVE"
                     },
                     <BubbleModel>{
@@ -1201,7 +1226,7 @@ export const initBubbleRepo = () => {
                         "x2": 70,
                         "func": "decay",
                         "description": "Your ninja twins do +{% more damage to doors! Knock knock, let 'em in, let 'em in!",
-                        "requirements": [<ComponentModel>{"item": "W6item2", "quantity": 120}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 5}],
+                        "requirements": [<CropComponentModel>{"cropId": "60", "quantity": 120}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 5}],
                         "bonusKey": "Y8"
                     },
                     <BubbleModel>{
@@ -1211,7 +1236,7 @@ export const initBubbleRepo = () => {
                         "x2": 60,
                         "func": "decayMulti",
                         "description": "{x Item Find chance for your ninja twin while sneaking!",
-                        "requirements": [<ComponentModel>{"item": "W6item9", "quantity": 1200}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                        "requirements": [<SoulComponentModel>{"soulId": "0", "quantity": 1200}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                         "bonusKey": "Y9ACTIVE"
                     },
                     <BubbleModel>{

@@ -1874,7 +1874,7 @@ export const initRandoListRepo = () => {
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "World_6_v2.00;*World_6_has_arrived,_with_everything_you_could_ever_want!_New_monsters,_new_skills,_new_maps,_new_stamps,_new_bubbles,_new_vials,_new_statues,_new_equipment,_so_much_new_stuff!_@_*You_can_discover_World_6_yourself,_instead,_these_patch_notes_are_for_all_the_changes_in_this_update_not_related_to_World_6._@_*New_Coins_display_added!_Collect_100_Godshard_coins_to_see_what_I_mean!_@_*Trial_by_Time_achievement_now_completable_at_any_movement_speed._@_*Adjusted_bonus_scaling_on_6th_bubble_of_each_colour._Its_a_buff_for_anyone_below_bubble_Lv_300,_otherwise_its_a_nerf._@_*Fixed_the_issue_where_Archers_would_slide_around_when_trying_to_fight_shielded_mobs._@_*Siege_Breaker's_cannon_attacks_now_spawn_behind_him.;*Le",
+                    "Seraph_Starsigns_v2.01;*I've_been_so_happy_to_see_everyone_enjoying_World_6,_what_a_great_launch_we_all_had_together!_But_there's_so_much_more_to_come,_like_this_new_update!_@___@_NEW_UPDATE_PATCH_NOTES_@_*Seraph_Star_Signs_have_been_discovered_at_the_Telescope_feature!_Unlock_58_star_signs_across_Chronus_and_Hydron_to_gain_access!_@_*There_are_16_Seraph_Star_Signs_to_unlock,_including_the_extra_powerful_Seraph_Cosmos_located_in_the_center!_@_*9_new_Constellations_hidden_throughout_World_6,_waiting_to_be_found!_Complete_these_to_earn_points_to_unlock_star_signs_with,_you_know_the_drill!_@_*Skilley_Skillet_Guild_Bonus_added,_with_a_max_LV_of_200!_@_*Added_RECLAIM_function_to_Several_Beginner_questlines_within_the_Completed_Quests_section_of_Codex._@_*Fixed_several_bugs._@_*Added_Stamps_to_the_Quickref_menu,_bye_P.O.;*Le",
                     "Monde",
                     "6",
                     "est",
@@ -2900,7 +2900,7 @@ export const initRandoListRepo = () => {
                     "18",
                     "21",
                     "5",
-                    "8",
+                    "3",
                     "0",
                     "9",
                     "24",

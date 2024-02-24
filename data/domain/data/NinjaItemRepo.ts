@@ -205,7 +205,7 @@ export const initNinjaItemRepo = () => {
                 "itemTypeId": 1,
                 "itemType": NinjaItemTypeEnum.Weapon,
                 "itemId": 2,
-                "name": "Basic Kunai",
+                "name": "Jagged Kunai",
                 "x1": 9,
                 "x2": 0
             }),
@@ -214,7 +214,7 @@ export const initNinjaItemRepo = () => {
                 "itemTypeId": 1,
                 "itemType": NinjaItemTypeEnum.Weapon,
                 "itemId": 2,
-                "name": "Basic Kunai",
+                "name": "Serrated Kunai",
                 "x1": 16,
                 "x2": 0
             }),
@@ -223,7 +223,7 @@ export const initNinjaItemRepo = () => {
                 "itemTypeId": 1,
                 "itemType": NinjaItemTypeEnum.Weapon,
                 "itemId": 2,
-                "name": "Basic Kunai",
+                "name": "Damascus Kunai",
                 "x1": 28,
                 "x2": 0
             }),

@@ -3388,7 +3388,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Crystal Cattle]]", "txtName": "Crystal Cattle"},
                     <SourceModel>{"wikiName": "[[Crystal Custard]]", "txtName": "Crystal Custard"},
                     <SourceModel>{"wikiName": "[[Crystal Capybara]]", "txtName": "Crystal Capybara"},
-                    <SourceModel>{"wikiName": "[[Crystal Brighton]]", "txtName": "Crystal Brighton"},
+                    <SourceModel>{"wikiName": "[[Crystal Candalight]]", "txtName": "Crystal Candalight"},
                     <SourceModel>{"wikiName": "[[Green Mushroom]]", "txtName": "Green Mushroom"},
                     <SourceModel>{"wikiName": "[[Red Mushroom]]", "txtName": "Red Mushroom"},
                     <SourceModel>{"wikiName": "[[Wood Mushroom]]", "txtName": "Wood Mushroom"},
@@ -3775,7 +3775,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Crystal Cattle]]", "txtName": "Crystal Cattle"},
                     <SourceModel>{"wikiName": "[[Crystal Custard]]", "txtName": "Crystal Custard"},
                     <SourceModel>{"wikiName": "[[Crystal Capybara]]", "txtName": "Crystal Capybara"},
-                    <SourceModel>{"wikiName": "[[Crystal Brighton]]", "txtName": "Crystal Brighton"}
+                    <SourceModel>{"wikiName": "[[Crystal Candalight]]", "txtName": "Crystal Candalight"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -4218,19 +4218,18 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("CardsI15", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Crystal Brighton]]", "txtName": "Crystal Brighton"}],
+                "sources": [<SourceModel>{"wikiName": "[[Crystal Candalight]]", "txtName": "Crystal Candalight"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
         new SourcesBase("DropTable29", <SourcesModel>{
                 "sources": [
-                    <SourceModel>{"wikiName": "[[Crystal Brighton]]", "txtName": "Crystal Brighton"},
+                    <SourceModel>{"wikiName": "[[Crystal Candalight]]", "txtName": "Crystal Candalight"},
                     <SourceModel>{"wikiName": "[[Sprout Spirit]]", "txtName": "Sprout Spirit"},
                     <SourceModel>{"wikiName": "[[Ricecake]]", "txtName": "Ricecake"},
                     <SourceModel>{"wikiName": "[[River Spirit]]", "txtName": "River Spirit"},
                     <SourceModel>{"wikiName": "[[Baby Troll]]", "txtName": "Baby Troll"},
                     <SourceModel>{"wikiName": "[[Woodlin Spirit]]", "txtName": "Woodlin Spirit"},
-                    <SourceModel>{"wikiName": "[[Bamboo]]", "txtName": "Bamboo"},
                     <SourceModel>{"wikiName": "[[Ladybug]]", "txtName": "Ladybug"}
                 ],
                 "recipeFrom": [],
@@ -4238,7 +4237,7 @@ export const initSourceRepo = () => {
             }),
         new SourcesBase("DropTable30", <SourcesModel>{
                 "sources": [
-                    <SourceModel>{"wikiName": "[[Crystal Brighton]]", "txtName": "Crystal Brighton"},
+                    <SourceModel>{"wikiName": "[[Crystal Candalight]]", "txtName": "Crystal Candalight"},
                     <SourceModel>{"wikiName": "[[Bamboo Spirit]]", "txtName": "Bamboo Spirit"},
                     <SourceModel>{"wikiName": "[[Lantern Spirit]]", "txtName": "Lantern Spirit"},
                     <SourceModel>{"wikiName": "[[Mama Troll]]", "txtName": "Mama Troll"},
@@ -4250,20 +4249,28 @@ export const initSourceRepo = () => {
             }),
         new SourcesBase("DropTable31", <SourcesModel>{
                 "sources": [
-                    <SourceModel>{"wikiName": "[[Crystal Brighton]]", "txtName": "Crystal Brighton"},
+                    <SourceModel>{"wikiName": "[[Crystal Candalight]]", "txtName": "Crystal Candalight"},
                     <SourceModel>{"wikiName": "[[Ceramic Spirit]]", "txtName": "Ceramic Spirit"},
-                    <SourceModel>{"wikiName": "[[Skydoggie Spirit]]", "txtName": "Skydoggie Spirit"},
-                    <SourceModel>{"wikiName": "[[Effervescent Eucalyptus]]", "txtName": "Effervescent Eucalyptus"}
+                    <SourceModel>{"wikiName": "[[Skydoggie Spirit]]", "txtName": "Skydoggie Spirit"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
             }),
         new SourcesBase("DropTable32", <SourcesModel>{
                 "sources": [
-                    <SourceModel>{"wikiName": "[[Crystal Brighton]]", "txtName": "Crystal Brighton"},
+                    <SourceModel>{"wikiName": "[[Crystal Candalight]]", "txtName": "Crystal Candalight"},
                     <SourceModel>{"wikiName": "[[Royal Egg]]", "txtName": "Royal Egg"},
                     <SourceModel>{"wikiName": "[[Minichief Spirit]]", "txtName": "Minichief Spirit"},
                     <SourceModel>{"wikiName": "[[Samurai Guardian]]", "txtName": "Samurai Guardian"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("DropTable33", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Crystal Candalight]]", "txtName": "Crystal Candalight"},
+                    <SourceModel>{"wikiName": "[[Bamboo]]", "txtName": "Bamboo"},
+                    <SourceModel>{"wikiName": "[[Effervescent Eucalyptus]]", "txtName": "Effervescent Eucalyptus"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -4291,11 +4298,7 @@ export const initSourceRepo = () => {
                         "wikiName": "[[Vendors#Blunder Hills|Blunder Hills Vendors]]",
                         "txtName": "Blunder Hills Vendor"
                     },
-                    <SourceModel>{"wikiName": "[[DropTable1]]", "txtName": "DropTable1"},
-                    <SourceModel>{
-                        "wikiName": "[[Scripticus#Mr. Worldwide|Mr. Worldwide]]",
-                        "txtName": "Scripticus: Mr. Worldwide"
-                    }
+                    <SourceModel>{"wikiName": "[[DropTable1]]", "txtName": "DropTable1"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -8553,10 +8556,18 @@ export const initSourceRepo = () => {
         new SourcesBase("CardsF25", <SourcesModel>{
                 "sources": [
                     <SourceModel>{"wikiName": "[[Dandelioli Tree]]", "txtName": "Dandelioli Tree"},
-                    <SourceModel>{"wikiName": "[[Equinox Willow]]", "txtName": "Equinox Willow"},
-                    <SourceModel>{"wikiName": "[[Bamboo]]", "txtName": "Bamboo"},
-                    <SourceModel>{"wikiName": "[[Effervescent Eucalyptus]]", "txtName": "Effervescent Eucalyptus"}
+                    <SourceModel>{"wikiName": "[[Equinox Willow]]", "txtName": "Equinox Willow"}
                 ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("CardsF34", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Bamboo]]", "txtName": "Bamboo"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("CardsF35", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Effervescent Eucalyptus]]", "txtName": "Effervescent Eucalyptus"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -9429,6 +9440,10 @@ export const initSourceRepo = () => {
                     },
                     <SourceModel>{"wikiName": "[[DropTable2]]", "txtName": "DropTable2"},
                     <SourceModel>{"wikiName": "[[DropTable3]]", "txtName": "DropTable3"},
+                    <SourceModel>{
+                        "wikiName": "[[Scripticus#Gear Up, Gamer!|Gear Up, Gamer!]]",
+                        "txtName": "Scripticus: Gear Up, Gamer!"
+                    },
                     <SourceModel>{
                         "wikiName": "[[Scripticus#What Lies at the Heart of the Forest|What Lies at the Heart of the Forest]]",
                         "txtName": "Scripticus: What Lies at the Heart of the Forest"
@@ -11399,8 +11414,8 @@ export const initSourceRepo = () => {
         new SourcesBase("Quest5", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
-                        "wikiName": "[[Picnic Stowaway#Live-Action Entertainment|Live-Action Entertainment]]",
-                        "txtName": "Picnic Stowaway: Live-Action Entertainment"
+                        "wikiName": "[[Promotheus#Three Right Answers|Three Right Answers]]",
+                        "txtName": "Promotheus: Three Right Answers"
                     }
                 ],
                 "recipeFrom": [],

@@ -318,7 +318,8 @@ export const initEnemyTableRepo = () => {
                     <SubTableDropModel>{"item": "DropTable29", "quantity": 1, "chance": 0.3, "questLink": "N/A"},
                     <SubTableDropModel>{"item": "DropTable30", "quantity": 1, "chance": 0.2, "questLink": "N/A"},
                     <SubTableDropModel>{"item": "DropTable31", "quantity": 1, "chance": 0.17, "questLink": "N/A"},
-                    <SubTableDropModel>{"item": "DropTable32", "quantity": 1, "chance": 0.17, "questLink": "N/A"}
+                    <SubTableDropModel>{"item": "DropTable32", "quantity": 1, "chance": 0.17, "questLink": "N/A"},
+                    <SubTableDropModel>{"item": "DropTable33", "quantity": 1, "chance": 0.17, "questLink": "N/A"}
                 ]
             }),
         new EnemyTableBase("mushG", <EnemyTableModel>{
@@ -2081,15 +2082,15 @@ export const initEnemyTableRepo = () => {
         new EnemyTableBase("Tree12", <EnemyTableModel>{
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
-                    <CardDropModel>{"item": "CardsF25", "quantity": 1, "chance": 1e-08, "questLink": "N/A"},
-                    <SubTableDropModel>{"item": "DropTable29", "quantity": 1, "chance": 0.0089, "questLink": "N/A"}
+                    <CardDropModel>{"item": "CardsF34", "quantity": 1, "chance": 1e-08, "questLink": "N/A"},
+                    <SubTableDropModel>{"item": "DropTable33", "quantity": 1, "chance": 0.0089, "questLink": "N/A"}
                 ]
             }),
         new EnemyTableBase("Tree13", <EnemyTableModel>{
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
-                    <CardDropModel>{"item": "CardsF25", "quantity": 1, "chance": 1e-08, "questLink": "N/A"},
-                    <SubTableDropModel>{"item": "DropTable31", "quantity": 1, "chance": 0.0089, "questLink": "N/A"}
+                    <CardDropModel>{"item": "CardsF35", "quantity": 1, "chance": 1e-08, "questLink": "N/A"},
+                    <SubTableDropModel>{"item": "DropTable33", "quantity": 1, "chance": 0.0089, "questLink": "N/A"}
                 ]
             }),
         new EnemyTableBase("BirchTree2", <EnemyTableModel>{
