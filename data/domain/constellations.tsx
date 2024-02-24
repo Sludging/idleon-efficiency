@@ -1,5 +1,6 @@
 import { Domain, RawData } from "./base/domain";
 import { ConstellationBase, initConstellationsRepo } from "./data/ConstellationsRepo";
+import { ImageData } from "./imageData";
 import { Item } from "./items";
 import { ConstellationModel } from "./model/constellationModel";
 
@@ -11,6 +12,14 @@ export class Constellation {
 
     static fromBase = (data: ConstellationBase[]) => {
         return data.map(constellation => new Constellation(constellation.index, constellation.data))
+    }
+
+    getImageData = (): ImageData => {
+        return {
+            location: `${this.data.name.toLowerCase().replace("-", "_")}${this.isComplete ? "_done" : ""}`,
+            width: 36,
+            height: 36,
+        }
     }
 }
 
@@ -46,9 +55,11 @@ export class Constellations extends Domain {
             }
         }
         constellations.forEach(constellation => {
-            constellation.isComplete = constellationData && constellationData[constellation.index][1] == "1";
-            if (constellationData[constellation.index][0]) { // Add a null check because, somehow it can be null sometimes for no reason.
-                constellation.completedByPlayerIndex = constellationData[constellation.index][0].split("").map((playerLetter: any) => { return playerLetterToIndex(playerLetter) });
+            if (constellation.index < constellationData.length) {
+                constellation.isComplete = constellationData && constellationData[constellation.index][1] == "1";
+                if (constellationData[constellation.index][0]) { // Add a null check because, somehow it can be null sometimes for no reason.
+                    constellation.completedByPlayerIndex = constellationData[constellation.index][0].split("").map((playerLetter: any) => { return playerLetterToIndex(playerLetter) });
+                }
             }
         })
     }

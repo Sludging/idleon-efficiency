@@ -30,7 +30,7 @@ export const initSummonUnitRepo = () => {
             }),
         new SummonUnitBase(2, <SummonUnitModel>{
                 "height": 38,
-                "speed": 2.5,
+                "speed": 1.5,
                 "colRadius": 22,
                 "qtyText": 2,
                 "minQty": 1,

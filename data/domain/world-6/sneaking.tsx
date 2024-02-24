@@ -174,13 +174,19 @@ export class Sneaking extends Domain {
         const sneaking = data.get(this.dataKey) as Sneaking;
         const ninjaData = data.get("Ninja") as any[];
         const serverVars = data.get("servervars");
+        const charCount = data.get("charCount") as number;
+
+        // Old accounts won't have this data, exit early.
+        if (!ninjaData) {
+            return;
+        }
 
         // reset old data
         sneaking.players = [];
 
         sneaking.jade = ninjaData[102][1];
 
-        ninjaData.slice(0, 10).forEach((playerInfo: number[], index) => {
+        ninjaData.slice(0, charCount).forEach((playerInfo: number[], index) => {
             const playerLevel = data.get(`Lv0_${index}`) as number[];
             const sneakingLevel = playerLevel[SkillsIndex.Sneaking];
             // Equipment per player is stored in 4 different indexes, starting from 10.

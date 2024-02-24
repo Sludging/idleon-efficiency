@@ -2748,7 +2748,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 0,
                 "Defence": 0,
                 "miscUp1": "60% Total Damage",
-                "miscUp2": "20% Drop Rate",
+                "miscUp2": "20% Drop Chance",
                 "Upgrade_Slots_Left": 7,
                 "Speed": 9,
                 "Reach": 132
@@ -3168,7 +3168,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 0,
                 "Defence": 0,
                 "miscUp1": "60% Total Damage",
-                "miscUp2": "20% Drop Rate",
+                "miscUp2": "20% Drop Chance",
                 "Upgrade_Slots_Left": 7,
                 "Speed": 10,
                 "Reach": 370
@@ -20467,7 +20467,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 100,
                 "typeGen": TypeGenEnum.aSkull,
                 "Type": "Worship Skull",
-                "lvReqToCraft": 3000,
+                "lvReqToCraft": 3600,
                 "lvReqToEquip": 90,
                 "Class": ClassTypeEnum.All,
                 "Weapon_Power": 0,
@@ -20480,9 +20480,9 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 5,
                 "Skill": "Worship",
-                "Skill_Power": 55,
+                "Skill_Power": 63,
                 "Speed": 9,
-                "maxCharge": 3000
+                "maxCharge": 3600
             }),
         new BaseItemBase("WorshipSkull11", <SkullItemModel>{
                 "internalName": "WorshipSkull11",
@@ -20490,7 +20490,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 100,
                 "typeGen": TypeGenEnum.aSkull,
                 "Type": "Worship Skull",
-                "lvReqToCraft": 3000,
+                "lvReqToCraft": 4200,
                 "lvReqToEquip": 120,
                 "Class": ClassTypeEnum.All,
                 "Weapon_Power": 0,
@@ -20503,9 +20503,9 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "10% Drop Chance",
                 "Upgrade_Slots_Left": 6,
                 "Skill": "Worship",
-                "Skill_Power": 55,
+                "Skill_Power": 70,
                 "Speed": 10,
-                "maxCharge": 3000
+                "maxCharge": 4200
             }),
         new BaseItemBase("DNAgun0", <ToolItemModel>{
                 "internalName": "DNAgun0",
@@ -21197,8 +21197,8 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 100,
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Golden Food",
-                "description": "Claiming all AFK Gains rate. Golden foods are never consumed.",
-                "goldenFoodData": <GoldenFoodDataModel>{"effect": "Claiming all AFK Gains rate by [%.", "amount": 4}
+                "description": "Increases all AFK Gains rate. Golden foods are never consumed.",
+                "goldenFoodData": <GoldenFoodDataModel>{"effect": "Increases all AFK Gains rate by [%.", "amount": 4}
             }),
         new BaseItemBase("ButterBar", <GoldenFoodItemModel>{
                 "internalName": "ButterBar",
@@ -21475,11 +21475,11 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("Quest5", <DescItemModel>{
                 "internalName": "Quest5",
-                "displayName": "Picnic Stowaway's Jam",
+                "displayName": "Class Certificate",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
-                "description": "It's a fake jar filled with springs! The best way to crack a joke with your friends at their expense! "
+                "description": "Proof that you selected a class! You're on your way to the top, this is just the beginning! "
             }),
         new BaseItemBase("Quest6", <DescItemModel>{
                 "internalName": "Quest6",
@@ -22127,7 +22127,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 100000000000000,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Usable",
-                "description": "Drop this on the Legumulyte (found deep in Bamboo Forest "
+                "description": "Drop this on the Legumulyte (found deep in Bamboo Forest) to trade in ALL your crops for magic beans (Crop Scientist progress wont be lost) Or, hold down on ticket to see how many beans you will get (you wont lose anything doing this) "
             }),
         new BaseItemBase("Quest81", <DescItemModel>{
                 "internalName": "Quest81",
@@ -28545,7 +28545,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 10,
                     "order": 11
                 },
-                "dropChance": 1
+                "dropChance": 1e-08
             }),
         new BaseItemBase("CardsF35", <CardItemModel>{
                 "internalName": "CardsF35",
@@ -28561,7 +28561,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 4,
                     "order": 12
                 },
-                "dropChance": 1
+                "dropChance": 1e-08
             }),
         new BaseItemBase("CardsF36", <CardItemModel>{
                 "internalName": "CardsF36",

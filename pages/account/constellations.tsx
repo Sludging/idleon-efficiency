@@ -3,7 +3,6 @@ import {
     Text,
     Heading,
     Grid,
-    Image,
     Tabs,
     Tab,
     ResponsiveContext
@@ -17,6 +16,8 @@ import { Player } from "../../data/domain/player";
 import IconImage from "../../components/base/IconImage";
 import { Constellation } from "../../data/domain/constellations";
 import { CharacterBox } from "../../components/base/CharacterBox";
+import TextAndLabel from "../../components/base/TextAndLabel";
+import { Document, Fireball, Map } from "grommet-icons";
 
 function Constellations() {
     const [playerData, setPlayerData] = useState<Player[]>();
@@ -33,6 +34,7 @@ function Constellations() {
             case 'C': return 'World 3';
             case 'D': return 'World 4';
             case 'E': return 'World 5';
+            case 'G': return 'World 6';
             default: return 'Unknown World';
         }
     }
@@ -50,7 +52,7 @@ function Constellations() {
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Constellations</Heading>
             <ShadowBox background="dark-1" pad="small" gap="small">
                 <Tabs activeIndex={index} onActive={onActive}>
-                    {['A', 'B', 'C', 'D', 'E'].map((letter) => {
+                    {['A', 'B', 'C', 'D', 'E', 'G'].map((letter) => {
                         return (
                             <Tab key={letter} title={LetterToWorldNumber(letter)}>
                                 {
@@ -59,37 +61,20 @@ function Constellations() {
                                             <Box border={{ color: "white-1", side: "bottom" }} key={filteredConstellation.index} gap="medium" pad="large">
                                                 <Grid columns={["10%", "30%", "60%"]}>
                                                     <Box alignSelf="center" width="140px" height="140px" border={{ size: filteredConstellation.isComplete ? '2px' : '', color: filteredConstellation.isComplete ? 'green-1' : "white-1" }} pad="32px">
-                                                        <Box alignSelf="center" width={{ min: "70px", max: "70px" }} height={{ min: "70px", max: "70px" }}>
-                                                            <Box className={`icons-constellations icons-constellation${filteredConstellation.data.name.replace("-", "")}${filteredConstellation.isComplete ? '_done' : ''}`} title={filteredConstellation.data.name} />
-                                                        </Box>
+                                                        <IconImage data={filteredConstellation.getImageData()} scale={2} />
                                                     </Box>
                                                     <Box pad="large" gap="small" border={{ side: 'right', color: "white-1" }}>
                                                         <Box direction="row" gap="small">
-                                                            <Box pad="xsmall">
-                                                                <Image src="../icons/custom/map.svg" alt="Map Icon"/>
-                                                            </Box>
-                                                            <Box>
-                                                                <Text>{filteredConstellation.data.area}</Text>
-                                                                <Text color="grey-2" size="xsmall">Map</Text>
-                                                            </Box>
+                                                            <Map color="brand" size="18px" />
+                                                            <TextAndLabel textSize="small" label={"Map"} text={filteredConstellation.data.area} />
                                                         </Box>
                                                         <Box direction="row" gap="small">
-                                                            <Box pad="xsmall">
-                                                                <Image src="../icons/custom/user.svg" alt="User Icon"/>
-                                                            </Box>
-                                                            <Box>
-                                                                <Text>{filteredConstellation.data.requirement.split("@")[0]}</Text>
-                                                                <Text color="grey-2" size="xsmall">Requirement</Text>
-                                                            </Box>
+                                                            <Document color="brand" size="18px" />
+                                                            <TextAndLabel textSize="small" label={"Requirement"} text={filteredConstellation.data.requirement.split("@")[0]} />
                                                         </Box>
                                                         <Box direction="row" gap="small">
-                                                            <Box pad="xsmall">
-                                                                <Image src="../icons/custom/points.svg" alt="Points Icon"/>
-                                                            </Box>
-                                                            <Box>
-                                                                <Text>{filteredConstellation.data.starChartPoints}</Text>
-                                                                <Text color="grey-2" size="xsmall">Points</Text>
-                                                            </Box>
+                                                            <Fireball color="brand" size="18px"/>
+                                                            <TextAndLabel textSize="small" label={"Points"} text={filteredConstellation.data.starChartPoints.toString()} />
                                                         </Box>
                                                     </Box>
                                                     <Box pad={{ top: "small", bottom: "small", left: "large" }} gap="small">

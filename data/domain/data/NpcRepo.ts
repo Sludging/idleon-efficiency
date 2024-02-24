@@ -255,9 +255,9 @@ export const initNpcRepo = () => {
                     "world": "Unknown",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 4.12,
-                    "starSign": "Aries",
-                    "mothersMaidenName": "Rogers",
+                    "birthWeight": 3,
+                    "starSign": "Cancer",
+                    "mothersMaidenName": "Miller",
                     "notes": " "
                 },
                 "quests": {},
@@ -276,9 +276,9 @@ export const initNpcRepo = () => {
                     "world": "Unknown",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 1.28,
-                    "starSign": "Leo",
-                    "mothersMaidenName": "Doran",
+                    "birthWeight": 4.4,
+                    "starSign": "Pisces",
+                    "mothersMaidenName": "Mills",
                     "notes": " "
                 },
                 "quests": {},
@@ -852,7 +852,7 @@ export const initNpcRepo = () => {
                         "Rewards": [
                             <ComponentModel>{"item": "EquipmentHats7", "quantity": 1},
                             <CoinRewardModel>{"item": "", "quantity": 150},
-                            <ExpRewardModel>{"item": "Experience0", "quantity": 15}
+                            <ComponentModel>{"item": "rtt0", "quantity": 3}
                         ],
                         "QuestName": "Scripticus3",
                         "Difficulty": 1,
@@ -873,11 +873,7 @@ export const initNpcRepo = () => {
                         "ConsumeItems": false,
                         "InventorySpacesNeeded": 3,
                         "NoSpaceIndex": 14,
-                        "Rewards": [
-                            <ComponentModel>{"item": "InvBag1", "quantity": 1},
-                            <ComponentModel>{"item": "FoodHealth1", "quantity": 20},
-                            <ExpRewardModel>{"item": "Experience0", "quantity": 25}
-                        ],
+                        "Rewards": [<ComponentModel>{"item": "InvBag1", "quantity": 1}, <ExpRewardModel>{"item": "Experience0", "quantity": 5}],
                         "QuestName": "Scripticus4",
                         "Difficulty": 3,
                         "note": <NoteModel>{
@@ -894,11 +890,7 @@ export const initNpcRepo = () => {
                         "ConsumeItems": false,
                         "InventorySpacesNeeded": 0,
                         "NoSpaceIndex": 18,
-                        "Rewards": [
-                            <ComponentModel>{"item": "Timecandy1", "quantity": 2},
-                            <CoinRewardModel>{"item": "", "quantity": 280},
-                            <ExpRewardModel>{"item": "Experience0", "quantity": 20}
-                        ],
+                        "Rewards": [<ComponentModel>{"item": "Timecandy1", "quantity": 2}, <CoinRewardModel>{"item": "", "quantity": 280}],
                         "QuestName": "Scripticus5",
                         "Difficulty": 1,
                         "note": <NoteModel>{"note": ""},
@@ -949,7 +941,7 @@ export const initNpcRepo = () => {
                     },
                     "The Unoccupied Picnic": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "You see I has a picnic and I forget the darn basket! There wasn't in it other than a jar of Golden Jam that I need back!  <br> MAIN QUEST:Retrieve the Golden Jam from the Picnic in Froggy Fields",
+                        "DialogueText": "Wait wait you're still a BEGINNER??? <br> MAIN QUEST:Select a new class from Promotheus. He's in the Bean map it's after Frogs...",
                         "NextIndex": 27,
                         "Name": "The Unoccupied Picnic",
                         "ConsumeItems": true,
@@ -1224,7 +1216,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "You see I has a picnic and I forget the darn basket! There wasn't in it other than a jar of Golden Jam that I need back!  <br> MAIN QUEST:Retrieve the Golden Jam from the Picnic in Froggy Fields",
+                        "DialogueText": "Wait wait you're still a BEGINNER??? <br> MAIN QUEST:Select a new class from Promotheus. He's in the Bean map it's after Frogs...",
                         "NextIndex": 27,
                         "Name": "The Unoccupied Picnic"
                     },
@@ -1236,13 +1228,13 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Oh boy I can't wait to have me some of this golden jam!          'Scripticus opens the fake jar filled with springs'             <br> BWAH! WHAT THE WHAT??",
-                        "NextIndex": 28,
+                        "DialogueText": "WOAH look at you all classed up and ready to go! Blue didn't suit you anyway.",
+                        "NextIndex": 29,
                         "Name": ""
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "I guess you could say that jam...                           <br> ...was a scam! Hahahaha! A bad pun is what you get for pullin' that prank. Alright lets just quickly move on and forget that just happened...",
+                        "DialogueText": "So anyway...",
                         "NextIndex": 29,
                         "Name": ""
                     },
@@ -1900,11 +1892,7 @@ export const initNpcRepo = () => {
                         "ConsumeItems": false,
                         "InventorySpacesNeeded": 2,
                         "NoSpaceIndex": 13,
-                        "Rewards": [
-                            <ComponentModel>{"item": "Quest5", "quantity": 1},
-                            <ComponentModel>{"item": "FoodG1", "quantity": 1},
-                            <ExpRewardModel>{"item": "Experience0", "quantity": 150}
-                        ],
+                        "Rewards": [<ComponentModel>{"item": "FoodG1", "quantity": 1}, <ExpRewardModel>{"item": "Experience0", "quantity": 150}],
                         "QuestName": "Picnic Stowaway3",
                         "Difficulty": 3,
                         "note": <NoteModel>{"note": " "},
@@ -2539,7 +2527,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 1.56,
                     "starSign": "Capricorn",
                     "mothersMaidenName": "oo",
-                    "notes": "[[Grasslands Gary]] is the [[Tasks|Taskmaster]] of Blunder Hills. You can find him in [[Worlds#G1 - Blunder Hills|Blunder Hills town]].$$NEWLINE$$$$NEWLINE$$Once you've reached level 14, talk to him to unlock [[Tasks/Blunder Hills|World 1 Tasks]]."
+                    "notes": "[[Grasslands Gary]] is the [[Tasks|Taskmaster]] of Blunder Hills. You can find him in [[Worlds#G1 - Blunder Hills|Blunder Hills town]].$$NEWLINE$$$$NEWLINE$$Once you've reached level 20, talk to him to unlock [[Tasks/Blunder Hills|World 1 Tasks]]."
                 },
                 "quests": {},
                 "dialogue": [
@@ -2590,7 +2578,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 1.09,
                     "starSign": "Cancer",
                     "mothersMaidenName": "Jackson",
-                    "notes": "[[Mr Pigibank]] is found in the [[Worlds#G1 - Blunder Hills|starting town]], located at the top section of the area.$$NEWLINE$$$$NEWLINE$$Upon completing his quest the player is awarded with the ability to deposit and upgrade [[File:Longsword_Stamp.png|36px]] [[Stamps]], as well as purchase [[Stamps#Bribes|Bribes]] for account-wide bonuses.{{Sources/datarow|Item=Sword Stamp}}{{Sources/datarow|Item=Heart Stamp}}{{Sources/datarow|Item=Pickaxe Stamp}}{{Sources/datarow|Item=Hatchet Stamp}}"
+                    "notes": "[[Mr Pigibank]] is found in the [[Worlds#G1 - Blunder Hills|starting town]], located at the top section of the area.$$NEWLINE$$$$NEWLINE$$Upon completing his quest the player is awarded with the ability to deposit and upgrade [[File:Longsword_Stamp.png|36px]] [[Stamps]], as well as purchase  [[File:Bribes_Icon.png|36px]] [[Stamps#Bribes|Bribes]] for account-wide bonuses.{{Sources/datarow|Item=Sword Stamp}}{{Sources/datarow|Item=Heart Stamp}}{{Sources/datarow|Item=Pickaxe Stamp}}{{Sources/datarow|Item=Hatchet Stamp}}"
                 },
                 "quests": {
                     "A Pig and his Stamps": <CustomQuestModel>{
@@ -2717,12 +2705,12 @@ export const initNpcRepo = () => {
                         "NextIndex": 11,
                         "Name": "Three Right Answers",
                         "ConsumeItems": false,
-                        "InventorySpacesNeeded": 2,
+                        "InventorySpacesNeeded": 3,
                         "NoSpaceIndex": 24,
                         "Rewards": [
+                            <ComponentModel>{"item": "Quest5", "quantity": 1},
                             <ComponentModel>{"item": "ResetCompleted", "quantity": 3},
-                            <ComponentModel>{"item": "ResetFrag", "quantity": 9},
-                            <CoinRewardModel>{"item": "", "quantity": 2500}
+                            <ComponentModel>{"item": "ResetFrag", "quantity": 9}
                         ],
                         "QuestName": "Promotheus2",
                         "Difficulty": 1,
@@ -3131,7 +3119,7 @@ export const initNpcRepo = () => {
                         "ConsumeItems": false,
                         "InventorySpacesNeeded": 2,
                         "NoSpaceIndex": 9,
-                        "Rewards": [<ComponentModel>{"item": "Trophy3", "quantity": 1}, <TalentRewardModel>{"item": "TalentBook1", "quantity": 361650}],
+                        "Rewards": [<TalentRewardModel>{"item": "TalentBook1", "quantity": 361650}, <ComponentModel>{"item": "Trophy3", "quantity": 1}],
                         "QuestName": "Rocklyte3",
                         "Difficulty": 1,
                         "note": <NoteModel>{"note": "This quest can only be completed by a beginner (no class chosen)"},
@@ -3461,7 +3449,7 @@ export const initNpcRepo = () => {
                     },
                     "Investigator by Day, Prankster by Night": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Go get me some carrots and logs so I can make a little carrot mannequin for you to prank him with and I'll have the report ready when you return! <br> QUEST:Gather carrots from the Vegetable Grove as well as some logs.",
+                        "DialogueText": "Go get me some carrots and logs so I can make a little carrot mannequin for you to prank him with! <br> QUEST:Gather carrots from the next map after this one as well as some logs from the Beans map.",
                         "NextIndex": 18,
                         "Name": "Investigator by Day, Prankster by Night",
                         "ConsumeItems": true,
@@ -3632,7 +3620,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Go get me some carrots and logs so I can make a little carrot mannequin for you to prank him with and I'll have the report ready when you return! <br> QUEST:Gather carrots from the Vegetable Grove as well as some logs.",
+                        "DialogueText": "Go get me some carrots and logs so I can make a little carrot mannequin for you to prank him with! <br> QUEST:Gather carrots from the next map after this one as well as some logs from the Beans map.",
                         "NextIndex": 18,
                         "Name": "Investigator by Day, Prankster by Night"
                     },
@@ -12241,7 +12229,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 4.14,
                     "starSign": "Pisces",
                     "mothersMaidenName": "agner",
-                    "notes": "''A jackolantern in November bet you weren't expecting that!''$$NEWLINE$$$$NEWLINE$$The [[Falloween Pumpkin]] was an NPC available during the [[Events|Falloween]] Mini-Event (November 1, 2021 - November 15, 2021). Its questline awarded players with {{CraftReq|Gem}}s and {{CraftReq|Spooky Time Candy}}."
+                    "notes": "''A jackolantern in November bet you weren't expecting that!''$$NEWLINE$$$$NEWLINE$$The [[Falloween Pumpkin]] is an NPC available during the [[Events|Falloween]] Event (October 21, 2023 - November 6, 2023). Its questline awarded players with {{CraftReq|Falloween Treat}}s and {{CraftReq|Spooky Time Candy}}."
                 },
                 "quests": {
                     "The Spookyness": <CustomQuestModel>{
@@ -14202,7 +14190,7 @@ export const initNpcRepo = () => {
             }),
         new NpcBase("Tired Mole", <NpcModel>{
                 "head": <NpcHeadModel>{
-                    "location": "Unknown",
+                    "location": "Miner Mole Outskirts",
                     "world": "Smolderin' Plateau",
                     "noQuest": 0,
                     "type": "Unknown",
@@ -14884,9 +14872,9 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 2.87,
-                    "starSign": "Leo",
-                    "mothersMaidenName": "Hydinger",
+                    "birthWeight": 8.71,
+                    "starSign": "Libra",
+                    "mothersMaidenName": "Illingsworth",
                     "notes": " "
                 },
                 "quests": {
@@ -15132,9 +15120,9 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 2.4,
-                    "starSign": "Virgo",
-                    "mothersMaidenName": "McGinnis",
+                    "birthWeight": 5.55,
+                    "starSign": "Sagittarius",
+                    "mothersMaidenName": "Ashwoon",
                     "notes": " "
                 },
                 "quests": {
@@ -15155,7 +15143,7 @@ export const initNpcRepo = () => {
                     },
                     "Stealth Check 1 2 3": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Look man I'll totally join you just lemme peep those stats see if you good enough for my caliber. <br> QUEST:Have a total Stealth of 10420 on you Ninja Twin. Check Skill Info to see your ninja twin's Stealth amount.",
+                        "DialogueText": "Look man I'll totally join you just lemme peep those stats see if you good enough for my caliber. <br> QUEST:Have a total Stealth of 10420 on your Ninja Twin. Check Skill Info to see your ninja twin's Stealth amount.",
                         "NextIndex": 7,
                         "Name": "Stealth Check 1 2 3",
                         "ConsumeItems": false,
@@ -15237,7 +15225,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Look man I'll totally join you just lemme peep those stats see if you good enough for my caliber. <br> QUEST:Have a total Stealth of 10420 on you Ninja Twin. Check Skill Info to see your ninja twin's Stealth amount.",
+                        "DialogueText": "Look man I'll totally join you just lemme peep those stats see if you good enough for my caliber. <br> QUEST:Have a total Stealth of 10420 on your Ninja Twin. Check Skill Info to see your ninja twin's Stealth amount.",
                         "NextIndex": 7,
                         "Name": "Stealth Check 1 2 3"
                     },
@@ -15309,9 +15297,9 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 4.8,
-                    "starSign": "Sagittarius",
-                    "mothersMaidenName": "Vanderpoel",
+                    "birthWeight": 2.81,
+                    "starSign": "Taurus",
+                    "mothersMaidenName": "Hancock",
                     "notes": " "
                 },
                 "quests": {
@@ -15501,9 +15489,9 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 6.49,
-                    "starSign": "Capricorn",
-                    "mothersMaidenName": "Vail",
+                    "birthWeight": 2.54,
+                    "starSign": "Virgo",
+                    "mothersMaidenName": "Soukup",
                     "notes": " "
                 },
                 "quests": {},
@@ -15540,15 +15528,15 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 4.9,
-                    "starSign": "Libra",
-                    "mothersMaidenName": "Upson",
+                    "birthWeight": 6.52,
+                    "starSign": "Gemini",
+                    "mothersMaidenName": "Soloman",
                     "notes": " "
                 },
                 "quests": {
                     "Goofin' Around": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Three things tough stuff gonna freak you out maybe... <br> QUEST:Have a Summoning Match last 2 minutes or more Spawn 10 bloomies in a single match and Spawn 1000 slimes across all matches.",
+                        "DialogueText": "Three things tough stuff gonna freak you out maybe... <br> QUEST:Have a Summoning Match last 2 minutes or more Spawn 5 bloomies in a single match and Spawn 1000 slimes across all matches.",
                         "NextIndex": 5,
                         "Name": "Goofin' Around",
                         "ConsumeItems": false,
@@ -15567,7 +15555,7 @@ export const initNpcRepo = () => {
                     },
                     "Messin' Around": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Ok like do these things now. <br> QUEST:Have 1000 mana in a Summoning Match at once get you and your opponent down to just 1 hp each and spawn 8 Vrumbies from a single card.",
+                        "DialogueText": "Ok like do these things now. <br> QUEST:Have 2500 mana in a Summoning Match at once get you and your opponent down to just 1 hp each and spawn 8 Vrumbies from a single card.",
                         "NextIndex": 8,
                         "Name": "Messin' Around",
                         "ConsumeItems": false,
@@ -15629,7 +15617,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Three things tough stuff gonna freak you out maybe... <br> QUEST:Have a Summoning Match last 2 minutes or more Spawn 10 bloomies in a single match and Spawn 1000 slimes across all matches.",
+                        "DialogueText": "Three things tough stuff gonna freak you out maybe... <br> QUEST:Have a Summoning Match last 2 minutes or more Spawn 5 bloomies in a single match and Spawn 1000 slimes across all matches.",
                         "NextIndex": 5,
                         "Name": "Goofin' Around"
                     },
@@ -15647,7 +15635,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Ok like do these things now. <br> QUEST:Have 1000 mana in a Summoning Match at once get you and your opponent down to just 1 hp each and spawn 8 Vrumbies from a single card.",
+                        "DialogueText": "Ok like do these things now. <br> QUEST:Have 2500 mana in a Summoning Match at once get you and your opponent down to just 1 hp each and spawn 8 Vrumbies from a single card.",
                         "NextIndex": 8,
                         "Name": "Messin' Around"
                     },
@@ -15689,9 +15677,9 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 1.29,
-                    "starSign": "Gemini",
-                    "mothersMaidenName": "Tapia",
+                    "birthWeight": 8.61,
+                    "starSign": "Scorpio",
+                    "mothersMaidenName": "Tiernan",
                     "notes": " "
                 },
                 "quests": {},
@@ -15716,9 +15704,9 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 1.88,
-                    "starSign": "Gemini",
-                    "mothersMaidenName": "Woo",
+                    "birthWeight": 6.14,
+                    "starSign": "Leo",
+                    "mothersMaidenName": "Dugelman",
                     "notes": " "
                 },
                 "quests": {},
@@ -15749,9 +15737,9 @@ export const initNpcRepo = () => {
                     "world": "Unknown",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 2.7,
-                    "starSign": "Scorpio",
-                    "mothersMaidenName": "Ventotla",
+                    "birthWeight": 4.75,
+                    "starSign": "Capricorn",
+                    "mothersMaidenName": "Anderson",
                     "notes": " "
                 },
                 "quests": {},

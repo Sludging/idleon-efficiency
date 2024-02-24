@@ -203,18 +203,18 @@ export const initGuildBonusRepo = () => {
                 "gpIncrease": 90
             }),
         new GuildBonusBase(14, <GuildBonusModel>{
-                "name": "Wait A Minute",
+                "name": "Skilley Skillet",
                 "xPos": 232,
                 "yPos": 137,
-                "bonus": "+{% Nothing Yet",
-                "x1": 1,
-                "x2": 0,
-                "func": "add",
-                "maxLevel": 0,
+                "bonus": "+{% Skill EXP for all skills",
+                "x1": 30,
+                "x2": 120,
+                "func": "decay",
+                "maxLevel": 200,
                 "reqIndex": 13,
                 "reqLevel": 5,
-                "gpBaseCost": 20,
-                "gpIncrease": 80
+                "gpBaseCost": 40,
+                "gpIncrease": 150
             }),
         new GuildBonusBase(15, <GuildBonusModel>{
                 "name": "Craps",
