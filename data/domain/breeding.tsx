@@ -361,6 +361,7 @@ export class Breeding extends Domain {
     totalEggTime: number = 0;
 
     basePets: Pet[] = [];
+    fenceyardPets: Pet[] = [];
     shinyBonuses: ShinyBonus[] = [];
 
     speciesUnlocks: number[] = [];
@@ -426,8 +427,8 @@ export class Breeding extends Domain {
         // Some breeding data has no "persistence", so we reset the previous data.
         breeding.eggs = [];
         breeding.territory.forEach(territory => territory.pets = []);
+        breeding.fenceyardPets = [];
         breeding.shinyBonuses = [];
-
 
         breeding.timeTillEgg = optionList[87];
         breeding.arenaWave = optionList[89];
@@ -440,6 +441,22 @@ export class Breeding extends Domain {
 
         breedingData[2].forEach((upgrade, index) => {
             breeding.upgrade[index].level = upgrade;
+        })
+
+        const fencePets = pets.slice(0, 26);
+
+        fencePets.forEach(pet => {
+            if (pet[0] == "none") {
+                return;
+            }
+            // If getting unknown gene, just default to the first gene as a fallback.
+            const petGene = breeding.genes[pet[1] as number] ?? breeding.genes[0];
+            const basePet = breeding.basePets.find(basePet => basePet.data.petId == pet[0] as string);
+            if (basePet) {
+                breeding.fenceyardPets.push(new Pet(basePet.index, basePet.data, petGene, basePet.shinyBonus, pet[2] as number));
+            } else {
+                console.log("Failed to find base pet", pet[0] as string)
+            }
         })
 
         const territoryFightsWon = optionList[85];
