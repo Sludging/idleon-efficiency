@@ -200,6 +200,11 @@ export class Equinox extends Domain {
         const dreamData = data.get("Dream") as number[];
         const optionList = data.get("OptLacc") as number[];
 
+        // Old accounts won't have these keys, so exit early.
+        if (!weeklyBoss || !dreamData) {
+            return;
+        }
+
         equinox.challenges.forEach((challenge) => {
             challenge.complete = weeklyBoss[`d_${challenge.index}`] == -1;
         })

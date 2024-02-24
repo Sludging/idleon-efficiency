@@ -687,6 +687,7 @@ export const updatePlayerStarSigns = (data: Map<string, any>) => {
     const infiniteBonus = rift.bonuses.find(bonus => bonus.name == "Infinite Stars") as InfiniteStarsBonus;
     const infiniteStars = infiniteBonus.getBonus();
 
+    // TODO: Need to care about what signs are unlocked, which .. I never did before.
     Object.entries(StarSignMap).slice(0, infiniteStars).forEach(([_, starSign]) => {
         players.forEach(player => {
             // If player isn't manually aligned to this sign, add it
