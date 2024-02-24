@@ -10,7 +10,7 @@ import ShadowBox from '../../components/base/ShadowBox';
 import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import { TimeDown } from '../../components/base/TimeDisplay';
 import { AppContext } from '../../data/appContext';
-import { Gaming as GamingDomain, TotalizerBonus } from '../../data/domain/gaming';
+import { Gaming as GamingDomain } from '../../data/domain/gaming';
 import { nFormatter, bitsFormatter } from '../../data/utility';
 
 // Gaming[0] = current bits

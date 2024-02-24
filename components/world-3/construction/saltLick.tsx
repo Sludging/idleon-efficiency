@@ -1,5 +1,5 @@
-import { Box, CheckBox, Grid, Heading, Text } from "grommet";
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import { Box, CheckBox, Grid, Text } from "grommet";
+import React, { useContext, useMemo, useState } from "react";
 import { AppContext } from "../../../data/appContext";
 import { Item } from "../../../data/domain/items";
 import { Refinery } from "../../../data/domain/refinery";

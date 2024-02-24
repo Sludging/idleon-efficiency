@@ -1,6 +1,6 @@
-import { GroupByFunction, lavaFunc, nFormatter, round } from '../utility'
+import { lavaFunc, nFormatter, round } from '../utility'
 import { Cooking } from './cooking';
-import { BubbleBase, initBubbleRepo } from './data/BubbleRepo';
+import { CauldronBase, initBubbleRepo } from './data/BubbleRepo';
 import { ImageData } from './imageData';
 import { Item } from './items';
 import { Lab } from './lab';
@@ -43,7 +43,8 @@ export const AlchemyConst = {
     GospelLeader: 12,
     CallMePope: 11,
     CauldronCount: 4,
-    CauldronBonusBubbleIndex: 1
+    CauldronBonusBubbleIndex: 1,
+    LoCostMoJade: 29,
 };
 
 const cauldronPrefix: Record<string, string> = {
@@ -224,18 +225,18 @@ export class Cauldron {
         this.short_name = short_name;
     }
 
-    static fromBase = (data: BubbleBase[]) => {
-        const iconPrefix = cauldronPrefix[data[0].data.cauldron];
-        const toReturn = new Cauldron(data[0].data.cauldron, iconPrefix);
-        data.forEach((bubble, index) => {
+    static fromBase = (data: CauldronBase) => {
+        const iconPrefix = cauldronPrefix[data.id];
+        const toReturn = new Cauldron(data.id, iconPrefix);
+        data.data.bubbles.forEach((bubble, index) => {
             if (iconPrefix == "Y" && index == 17) {
-                toReturn.bubbles.push(DiamonChefBubble.fromBase(bubble.id, bubble.data, iconPrefix, index));
+                toReturn.bubbles.push(DiamonChefBubble.fromBase(bubble.name, bubble, iconPrefix, index));
             }
-            else if (bubble.data.name == "Da Daily Drip") {
-                toReturn.bubbles.push(DailyDripBubble.fromBase(bubble.id, bubble.data, iconPrefix, index));
+            else if (bubble.name == "Da Daily Drip") {
+                toReturn.bubbles.push(DailyDripBubble.fromBase(bubble.name, bubble, iconPrefix, index));
             }
             else {
-                toReturn.bubbles.push(Bubble.fromBase(bubble.id, bubble.data, iconPrefix, index));
+                toReturn.bubbles.push(Bubble.fromBase(bubble.name, bubble, iconPrefix, index));
             }
         })
 
@@ -443,16 +444,16 @@ export class Alchemy extends Domain {
     init(allItems: Item[], charCount: number) {
         const data = initBubbleRepo();
 
-        GroupByFunction(data, function (base: BubbleBase) { return base.data.cauldron }).forEach(bubbles => {
-            const cauldronName = bubbles[0].data.cauldron;
+        data.forEach(cauldron => {
+            const cauldronName = cauldron.id
             // If one of the cauldrons
             if (["Power Cauldron", "Quicc Cauldron", "High-IQ Cauldron", "Kazam Cauldron"].includes(cauldronName)) {
-                this.cauldrons.push(Cauldron.fromBase(bubbles))
+                this.cauldrons.push(Cauldron.fromBase(cauldron))
             }
             // If vials
             if (cauldronName == "Vials") {
-                bubbles.forEach((vial, index) => {
-                    this.vials.push(Vial.fromBase(vial.id, vial.data, index));
+                cauldron.data.bubbles.forEach((vial, index) => {
+                    this.vials.push(Vial.fromBase(vial.name, vial, index));
                 })
             }
         })

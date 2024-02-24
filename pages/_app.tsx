@@ -60,6 +60,7 @@ const customTheme = deepMerge(dark, {
       "yellow-1": "#ffecc9",
       "background": "#1B1D24",
       "white-1": "#30333A",
+      "white-2": "#efefef",
       "placeholder": "#96979a",
       "Common": "#d5d5d5",
       "Uncommon": "#7be08e",

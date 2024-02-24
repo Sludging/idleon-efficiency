@@ -10,7 +10,6 @@ import { Item } from "./items";
 import { GamingBoxModel } from "./model/gamingBoxModel";
 import { GamingSuperbitModel } from "./model/gamingSuperbitModel";
 import { GamingUpgradeModel } from "./model/gamingUpgradeModel";
-import { Worship } from "./worship";
 
 export class GamingUpgrade {
     constructor(public index: number, public data: GamingUpgradeModel) { }
@@ -56,38 +55,6 @@ export class ImportBox {
     }
 }
 
-export enum TotalizerBonus {
-    Damage = 0,
-    Cooking = 1,
-    BoatSpeed = 2,
-    BitValue = 3,
-    ExpMulti = 4,
-    SkillExp = 5
-}
-
-// Should this be here or .. worship? :shrug:
-export class Totalizer {
-    totalWaves: number = 0;
-    unlockedBonuses: TotalizerBonus[] = [];
-
-    getBonus = (bonus: TotalizerBonus) => {
-        if (this.unlockedBonuses.length == 0 || !this.unlockedBonuses.includes(bonus)) {
-            return 0;
-        }
-
-        switch (bonus) {
-            case TotalizerBonus.Damage:
-            case TotalizerBonus.BoatSpeed:
-            case TotalizerBonus.ExpMulti:
-            case TotalizerBonus.SkillExp:
-                return Math.floor(this.totalWaves / 10);
-            case TotalizerBonus.Cooking: return 10 * Math.floor(this.totalWaves / 10);
-            case TotalizerBonus.BoatSpeed: return Math.floor(this.totalWaves / 10);
-            default: return 0;
-        }
-    }
-}
-
 export class Gaming extends Domain {
     level: number = 0;
 
@@ -96,8 +63,6 @@ export class Gaming extends Domain {
     superbits: Superbits[] = Superbits.fromBase(initGamingSuperbitsRepo());
     rawGamingData: any[] = [];
     rawSproutData: number[][] = [];
-
-    totalizer: Totalizer = new Totalizer();
 
     getCurrentWater = (): number => {
         return Math.floor(Math.pow(this.rawSproutData[25][1] * (1 + this.importBoxes[0].getBonus() / 100) / 3600, .75));
@@ -170,38 +135,13 @@ export class Gaming extends Domain {
 
 export const updateGaming = (data: Map<string, any>) => {
     const gaming = data.get("gaming") as Gaming;
-    const worship = data.get("worship") as Worship;
 
-    gaming.totalizer.totalWaves = worship.totemInfo.reduce((sum, totem) => sum += totem.maxWave, 0);
     return gaming;
 }
 
 export const updateSuperbitImpacts = (data: Map<string, any>) => {
-    const gaming = data.get("gaming") as Gaming;    
+    const gaming = data.get("gaming") as Gaming;   
     //TODO: Do obols
-
-    // Totalizer stuff.
-    // Reset info, next section will calculate it.
-    gaming.totalizer.unlockedBonuses = [];
-    
-    if (gaming.superbits[7].unlocked) {
-        gaming.totalizer.unlockedBonuses.push(TotalizerBonus.Damage);
-    }
-    if (gaming.superbits[13].unlocked) {
-        gaming.totalizer.unlockedBonuses.push(TotalizerBonus.Cooking);
-    }
-    if (gaming.superbits[3].unlocked) {
-        gaming.totalizer.unlockedBonuses.push(TotalizerBonus.BoatSpeed);
-    }
-    if (gaming.superbits[20].unlocked) {
-        gaming.totalizer.unlockedBonuses.push(TotalizerBonus.BitValue);
-    }
-    if (gaming.superbits[11].unlocked) {
-        gaming.totalizer.unlockedBonuses.push(TotalizerBonus.ExpMulti);
-    }
-    if (gaming.superbits[16].unlocked) {
-        gaming.totalizer.unlockedBonuses.push(TotalizerBonus.SkillExp);
-    }
 
     //TODO: Do shrine level up speed
     //TODO: Figure out the prayer thing, it requires some refactoring.

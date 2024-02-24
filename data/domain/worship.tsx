@@ -2,6 +2,7 @@ import { notUndefined, round } from "../utility";
 import { Alchemy, AlchemyConst, Bubble, CauldronIndex } from "./alchemy";
 import { Domain, RawData } from "./base/domain";
 import { MapDataBase } from "./data/MapDataRepo";
+import { Gaming } from "./gaming";
 import { Item } from "./items";
 import { MapInfo } from "./maps";
 import { SkullItemModel } from "./model/skullItemModel";
@@ -9,6 +10,8 @@ import { Player } from "./player";
 import { SkillsIndex } from "./SkillsIndex";
 import { Stamp, StampConsts, StampTab } from "./stamps";
 import { ClassIndex, TalentConst } from "./talents";
+import { Sneaking } from "./world-6/sneaking";
+
 
 const getActiveBubbles = (alchemy: Alchemy, activeBubbleString: string[]): Bubble[] => {
     return activeBubbleString.map((bubbleString, _) => {
@@ -19,15 +22,16 @@ const getActiveBubbles = (alchemy: Alchemy, activeBubbleString: string[]): Bubbl
     }).filter(notUndefined);
 }
 
-const totemNames: string[] = "Goblin_Gorefest Wakawaka_War Acorn_Assault Frosty_Firefight Clash_of_Cans Citric_Conflict".split(" ");
-const totemMapIds: number[] = [26, 63, 30, 107, 155, 208];
+const totemNames: string[] = "Goblin_Gorefest Wakawaka_War Acorn_Assault Frosty_Firefight Clash_of_Cans Citric_Conflict Breezy_Battle".split(" ");
+const totemMapIds: number[] = [26, 63, 30, 107, 155, 208, 259];
 
 const worshipBaseInfo: string[][] = ["3 130 goblinG 0 170 570 25 60 1".split(" "),
 "5 70 moonman 21 42 357 40 250 10".split(" "),
 "9 40 acorn 38 655 200 60 1000 30".split(" "),
 "18 190 snowball 56 42 357 90 3000 40".split(" "),
 "34 300 w4b2 74 2 493 120 8000 50".split(" "),
-"55 45 w5b3 91 158 362 250 25000 60".split(" ")
+"55 45 w5b3 91 158 362 250 25000 60".split(" "),
+"120 65 w6b4 108 53 842 700 250000 80".split(" "),
 ]
 
 export class Totem {
@@ -64,6 +68,65 @@ export class Totem {
 
 }
 
+
+export enum TotalizerBonus {
+    Damage = 0,
+    Cooking = 1,
+    BoatSpeed = 2,
+    BitValue = 3,
+    ExpMulti = 4,
+    SkillExp = 5,
+    FarmingExp = 6,
+    JadeCoin = 7,
+    EssenceGain = 8,
+}
+
+export class Totalizer {
+    totalWaves: number = 0;
+    unlocked: boolean = false;
+    unlockedBonuses: TotalizerBonus[] = [];
+
+    getBonus = (bonus: TotalizerBonus) => {
+        if (!this.unlocked || this.unlockedBonuses.length == 0 || !this.unlockedBonuses.includes(bonus)) {
+            return 0;
+        }
+
+        switch (bonus) {
+            case TotalizerBonus.Damage:
+            case TotalizerBonus.BoatSpeed:
+            case TotalizerBonus.ExpMulti:
+            case TotalizerBonus.SkillExp:
+            case TotalizerBonus.FarmingExp:
+            // TODO : check if JadeCoin and EssenceGain really are 1% bonus like FarmingExp (haven't unlocked those two myself)
+            case TotalizerBonus.JadeCoin:
+            case TotalizerBonus.EssenceGain:
+                return Math.floor(this.totalWaves / 10);
+            case TotalizerBonus.Cooking: return 10 * Math.floor(this.totalWaves / 10);
+            case TotalizerBonus.BitValue: return 50 * Math.floor(this.totalWaves / 10);
+            default: return 0;
+        }
+    }
+
+    getText = (bonus: TotalizerBonus): string => {
+        switch (bonus) {
+            case TotalizerBonus.Damage: return "{% bonus Damage";
+            case TotalizerBonus.BoatSpeed: return "{% bonus Sailing Speed";
+            case TotalizerBonus.ExpMulti: return "{% bonus Class EXP";
+            case TotalizerBonus.SkillExp: return "{% bonus Skill EXP";
+            case TotalizerBonus.Cooking: return "{% bonus Meal Cooking speed";
+            case TotalizerBonus.BitValue: return "{% Bits for Gaming";
+            case TotalizerBonus.FarmingExp: return "{% bonus Farming EXP";
+            case TotalizerBonus.JadeCoin: return "{% bonus Jade Coins Gain";
+            case TotalizerBonus.EssenceGain: return "{% All Essence Gain";
+            default: return "";
+        }
+    }
+
+    getBonusText = (bonus: TotalizerBonus): string => {
+        return this.getText(bonus).replace(/{/, this.getBonus(bonus).toString());
+    }
+}
+
 interface PlayerWorshipData {
     currentCharge: number
     estimatedCharge: number
@@ -89,6 +152,8 @@ export class Worship extends Domain {
     };
     bestWizardPlayerID: number = -1;
     totemInfo: Totem[] = [];
+
+    totalizer: Totalizer = new Totalizer();
 
     static getEstimatedCharge = (currentCharge: number, chargeRate: number, maxCharge: number, timeAwayInSeconds: number) => {
         return Math.min(currentCharge + chargeRate * (timeAwayInSeconds / 3600), maxCharge);
@@ -120,7 +185,7 @@ export class Worship extends Domain {
     }
 
     init(allItems: Item[], charCount: number) {
-        [...Array(6)].forEach((_, index) => {
+        [...Array(7)].forEach((_, index) => {
             this.totemInfo.push(new Totem(totemNames[index].replace(/_/g, " "), MapInfo[totemMapIds[index]], 0, index));
         });
 
@@ -145,6 +210,8 @@ export const updateWorship = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const alchemy = data.get("alchemy") as Alchemy;
     const stamps = data.get("stamps") as Stamp[][];
+    const gaming = data.get("gaming") as Gaming;
+    const sneaking = data.get("sneaking") as Sneaking;
 
     // Reset the data since it will all be calculated in the next section.
     worship.playerData = [];
@@ -181,6 +248,39 @@ export const updateWorship = (data: Map<string, any>) => {
                 playerID: player.playerID
             })
         });
+    }
+
+    worship.totalizer.totalWaves = worship.totemInfo.reduce((sum, totem) => sum += totem.maxWave, 0);
+
+    worship.totalizer.unlockedBonuses = [];
+    
+    if (gaming.superbits[7].unlocked) {
+        worship.totalizer.unlocked = true;
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.Damage);
+    }
+    if (gaming.superbits[13].unlocked) {
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.Cooking);
+    }
+    if (gaming.superbits[3].unlocked) {
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.BoatSpeed);
+    }
+    if (gaming.superbits[20].unlocked) {
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.BitValue);
+    }
+    if (gaming.superbits[11].unlocked) {
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.ExpMulti);
+    }
+    if (gaming.superbits[16].unlocked) {
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.SkillExp);
+    }
+    if (sneaking.jadeUpgrades[12].purchased) {
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.FarmingExp);
+    }
+    if (sneaking.jadeUpgrades[13].purchased) {
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.JadeCoin);
+    }
+    if (sneaking.jadeUpgrades[14].purchased) {
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.EssenceGain);
     }
 
     const bestWizard = players.filter(player => [ClassIndex.Wizard, ClassIndex.Elemental_Sorcerer].includes(player.classId)).sort((player1, player2) => player1.getTalentMaxLevel(475) > player2.getTalentMaxLevel(475) ? -1 : 1)[0];

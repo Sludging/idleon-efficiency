@@ -57,8 +57,15 @@ export class InfiniteStarsBonus extends RiftBonus {
     }
 }
 
+// Use a typeguard to prove a skill index is a valid rift mastery skill
+const isRiftMasterySkill = (x: SkillsIndex): x is RiftMasterySkills => 
+ ![SkillsIndex.Farming, SkillsIndex.Summoning, SkillsIndex.Sneaking].includes(x)
+
+// Rift doesn't care about the new w6 skills for now, so exclude them from our index.
+type RiftMasterySkills = Exclude<SkillsIndex, SkillsIndex.Farming | SkillsIndex.Summoning | SkillsIndex.Sneaking>
 export class SkillMastery extends RiftBonus {
-    skillLevels: Record<SkillsIndex, number> = {
+
+    skillLevels: Record<RiftMasterySkills, number> = {
         [SkillsIndex.Mining]: 0,
         [SkillsIndex.Smithing]: 0,
         [SkillsIndex.Chopping]: 0,
@@ -77,29 +84,33 @@ export class SkillMastery extends RiftBonus {
     };
 
     getSkillRank = (skill: SkillsIndex) => {
-        const level = this.skillLevels[skill];
-        switch (true) {
-            case level < 150: return 0;
-            case level < 200: return 1;
-            case level < 300: return 2;
-            case level < 400: return 3;
-            case level < 500: return 4;
-            case level < 750: return 5;
-            case level < 1000: return 6;
-            case level >= 1000: return 7;
-            default: return -1;
+        if (isRiftMasterySkill(skill)) {
+            const level = this.skillLevels[skill];
+            switch (true) {
+                case level < 150: return 0;
+                case level < 200: return 1;
+                case level < 300: return 2;
+                case level < 400: return 3;
+                case level < 500: return 4;
+                case level < 750: return 5;
+                case level < 1000: return 6;
+                case level >= 1000: return 7;
+                default: return -1;
+            }
         }
+
+        return -1;
     }
 
     getBonusText = (skill: SkillsIndex, bonusIndex: number) => {
         // Some skills override the 2nd bonus, the others the third one.
         const specialIndex = [
-            SkillsIndex.Smithing, 
-            SkillsIndex.Alchemy, 
-            SkillsIndex.Construction, 
-            SkillsIndex.Breeding, 
-            SkillsIndex.Sailing, 
-            SkillsIndex.Divinity, 
+            SkillsIndex.Smithing,
+            SkillsIndex.Alchemy,
+            SkillsIndex.Construction,
+            SkillsIndex.Breeding,
+            SkillsIndex.Sailing,
+            SkillsIndex.Divinity,
             SkillsIndex.Gaming
         ].includes(skill) ? 1 : 2;
         // If it's the special bonus and we have an override for that skill, get the special text.
@@ -160,7 +171,7 @@ export class SkillMastery extends RiftBonus {
             return baseBonus;
         }
 
-        return Object.entries(SkillsIndex).reduce((sum, [_, skill]) => sum += this.getSkillBonus(skill as SkillsIndex, bonusIndex), baseBonus);
+        return Object.entries(this.skillLevels).reduce((sum, [_, skill]) => sum += this.getSkillBonus(skill, bonusIndex), baseBonus);
     }
 }
 
@@ -222,9 +233,9 @@ export class Rift extends Domain {
 
     getRawKeys(): RawData[] {
         return [
-            {key: "Rift", perPlayer: false, default: []},
-            {key: "Tower", perPlayer: false, default: []},
-            {key: "Lv0_", perPlayer: true, default: []},
+            { key: "Rift", perPlayer: false, default: [] },
+            { key: "Tower", perPlayer: false, default: [] },
+            { key: "Lv0_", perPlayer: true, default: [] },
         ]
     }
 
@@ -268,8 +279,8 @@ export class Rift extends Domain {
         playerSkillLevels.forEach(playerSkills => {
             playerSkills.forEach((skillLevel, skillIndex) => {
                 // Only get the indexes we care about
-                if (skillIndex in SkillsIndex) {
-                    skillMastery.skillLevels[skillIndex as SkillsIndex] += skillLevel;
+                if (skillIndex in skillMastery.skillLevels) {
+                    skillMastery.skillLevels[skillIndex as RiftMasterySkills] += skillLevel;
                 }
             })
         });

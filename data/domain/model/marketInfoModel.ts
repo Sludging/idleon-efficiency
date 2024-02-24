@@ -3,11 +3,11 @@
 export interface MarketInfoModel {
     name: string,
     bonus: string,
-    x1: number,
-    x2: number,
-    x3: number,
-    x4: number,
-    x5: number,
-    x6: number,
-    x7: number
+    cropId: number,
+    cropIdIncrement: number,
+    cost: number,
+    costExponent: number,
+    cropReq: number,
+    maxLvl: number,
+    bonusPerLvl: number
 }

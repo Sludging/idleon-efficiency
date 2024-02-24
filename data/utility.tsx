@@ -314,5 +314,5 @@ export function randomFloatBetween(e: number, t: number) {
 
 export const letterToNumber = (char: string) => {
     // Lava's unicode map doesn't have tilda (`) so, bit odd but it works.
-    return char.charCodeAt(0) == 95 ? 0 : char.charCodeAt(0) - 96;
+    return "_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(char)
 }

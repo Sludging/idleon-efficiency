@@ -85,7 +85,7 @@ export class CardSet {
         }
     }
 
-    static fromBase = (data: CardSetBase[], cards: Card[] = []) => {
+    static fromBase = (data: CardSetBase[], cards: Card[] = []): CardSet[] => {
         return data.map((cardSet, index) => new CardSet(index, cardSet, cards))
     }
 

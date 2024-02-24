@@ -3,7 +3,7 @@ import IconImage from "./IconImage";
 import { Player } from "../../data/domain/player";
 import { ReactNode } from "react";
 
-export function CharacterBox({ player, borderColor = "none", title = player.playerName, opacity = 1, children }: { player: Player, title?: string, borderColor?: string, opacity?: number, children?: ReactNode }) {
+export function CharacterBox({ player, borderColor = "none", title = player.playerName, opacity = 1, textColor = "grey-2", children }: { player: Player, title?: string, borderColor?: string, opacity?: number, textColor?: string, children?: ReactNode }) {
     return (
         <Box title={title} background="dark-2" pad={{ top: "xsmall", bottom: "xsmall", left: "small", right: "small" }} border={{ size: '1px', color: borderColor }}>
             <Box gap="xsmall" direction="row" align="center">
@@ -11,7 +11,7 @@ export function CharacterBox({ player, borderColor = "none", title = player.play
                     <IconImage data={player.getClassImageData()} scale={0.7} />
                 </Box>
                 <Box>
-                    <Text color="grey-2" size="12px" truncate={true}>{player.playerName}</Text>
+                    <Text color={textColor} size="12px" truncate={true}>{player.playerName}</Text>
                 </Box>
             </Box>
             {children}

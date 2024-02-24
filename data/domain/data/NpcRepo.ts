@@ -14884,9 +14884,9 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 6.25,
-                    "starSign": "Cancer",
-                    "mothersMaidenName": "Doran",
+                    "birthWeight": 2.87,
+                    "starSign": "Leo",
+                    "mothersMaidenName": "Hydinger",
                     "notes": " "
                 },
                 "quests": {
@@ -15132,9 +15132,9 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 7.13,
+                    "birthWeight": 2.4,
                     "starSign": "Virgo",
-                    "mothersMaidenName": "Reyes",
+                    "mothersMaidenName": "McGinnis",
                     "notes": " "
                 },
                 "quests": {
@@ -15309,9 +15309,9 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 1.23,
-                    "starSign": "Virgo",
-                    "mothersMaidenName": "Leisinger",
+                    "birthWeight": 4.8,
+                    "starSign": "Sagittarius",
+                    "mothersMaidenName": "Vanderpoel",
                     "notes": " "
                 },
                 "quests": {
@@ -15501,9 +15501,9 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 6.28,
-                    "starSign": "Gemini",
-                    "mothersMaidenName": "Cannon",
+                    "birthWeight": 6.49,
+                    "starSign": "Capricorn",
+                    "mothersMaidenName": "Vail",
                     "notes": " "
                 },
                 "quests": {},
@@ -15537,12 +15537,12 @@ export const initNpcRepo = () => {
         new NpcBase("Sussy Gene", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 9.4,
+                    "birthWeight": 4.9,
                     "starSign": "Libra",
-                    "mothersMaidenName": "Sellon",
+                    "mothersMaidenName": "Upson",
                     "notes": " "
                 },
                 "quests": {
@@ -15689,9 +15689,9 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 8.49,
-                    "starSign": "Aquarius",
-                    "mothersMaidenName": "Ferry",
+                    "birthWeight": 1.29,
+                    "starSign": "Gemini",
+                    "mothersMaidenName": "Tapia",
                     "notes": " "
                 },
                 "quests": {},
@@ -15716,9 +15716,9 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 7.33,
-                    "starSign": "Leo",
-                    "mothersMaidenName": "Schwager",
+                    "birthWeight": 1.88,
+                    "starSign": "Gemini",
+                    "mothersMaidenName": "Woo",
                     "notes": " "
                 },
                 "quests": {},
