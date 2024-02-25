@@ -4,10 +4,7 @@ import {
     Heading,
     ResponsiveContext,
     Stack,
-    Tab,
-    Tabs,
     Text,
-    ThemeContext,
 } from 'grommet'
 import { NextSeo } from 'next-seo';
 import { useContext, useEffect, useMemo, useState } from 'react';
@@ -24,7 +21,8 @@ import { GemStore } from '../../data/domain/gemPurchases';
 import { Player } from '../../data/domain/player';
 import { ClassIndex, Talent } from '../../data/domain/talents';
 import { TaskBoard } from '../../data/domain/tasks';
-import { GroupBy, GroupByFunction, nFormatter } from '../../data/utility';
+import { GroupByFunction, nFormatter } from '../../data/utility';
+import { BorderType } from 'grommet/utils';
 
 function PetDisplay() {
     const appContext = useContext(AppContext);
@@ -167,7 +165,7 @@ function PetUpgradeDisplay() {
             });
         }
         return [];
-    }, [breeding])
+    }, [appContext, breeding])
 
     useEffect(() => {
         if (appContext) {
@@ -314,9 +312,12 @@ function ShinyDisplay() {
             <Grid columns={size =="small" ? ["1"] : ["1/3", "1/3", "1/3"]} fill>
                 {
                     breeding.basePets.filter(pet => pet.data.petId != "_").map((pet, pIndex) => {
+                        const petInFenceyard: boolean = breeding.fenceyardPets.some(fenceyardPet => fenceyardPet.data.petId == pet.data.petId && fenceyardPet.gene.index == 5);
+                        const currentlyLevelingShinyBorderProp: BorderType = petInFenceyard && { size: '2px', style: 'solid', color: 'green' };
                         const enemy = EnemyInfo.find(enemy => enemy.id == pet.data.petId);
+
                         return (
-                            <ShadowBox background="dark-1" key={pIndex} direction="row" gap="medium" margin={{ bottom: 'medium', right: 'small'}} align="center" pad="small" style={{opacity: pet.shinyLevel > 0? 1 : .5}}>
+                            <ShadowBox background="dark-1" border={ currentlyLevelingShinyBorderProp } key={pIndex} direction="row" gap="medium" margin={{ bottom: 'medium', right: 'small' }} align="center" pad="small" style={{ opacity: pet.shinyLevel > 0 ? 1 : .5 }}>
                                 <IconImage data={{ location: enemy?.id.toLowerCase() ?? "Unknown", width: 67, height: 67 }} style={{ paddingBottom: '15px'}} />
                                 <Grid columns={["50%", "50%"]} fill align="center">
                                     <Box>
