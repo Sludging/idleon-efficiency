@@ -3,6 +3,7 @@ import {
     Grid,
     Heading,
     ResponsiveContext,
+    Select,
     Stack,
     Text,
 } from 'grommet'
@@ -14,7 +15,7 @@ import TabButton from '../../components/base/TabButton';
 import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import { StaticTime, TimeDisplaySize, TimeDown } from '../../components/base/TimeDisplay';
 import { AppContext } from '../../data/appContext';
-import { Breeding as BreedingDomain, Pet, petArenaBonuses, territoryNiceNames, waveReqs } from '../../data/domain/breeding';
+import { Breeding as BreedingDomain, Pet, ShinyBonus, petArenaBonuses, territoryNiceNames, waveReqs } from '../../data/domain/breeding';
 import { Cooking } from '../../data/domain/cooking';
 import { EnemyInfo } from '../../data/domain/enemies';
 import { GemStore } from '../../data/domain/gemPurchases';
@@ -288,7 +289,9 @@ function ArenaBonusDisplay() {
 }
 
 function ShinyDisplay() {
+    const [sort, setSort] = useState<string>('');
     const [breeding, setBreeding] = useState<BreedingDomain>();
+    const [options, setOptions] = useState<string[]>([]);
     const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
 
@@ -296,9 +299,145 @@ function ShinyDisplay() {
         if (appContext) {
             const theData = appContext.data.getData();
             setBreeding(theData.get("breeding"));
-        }
-    }, [appContext]);
 
+            const newOptions = ["Level", "Least Time to Next Level"];
+            breeding?.shinyBonuses?.forEach(bonus => {
+                const bonusText = bonus.data.text.replaceAll('{', '');
+                if (!newOptions.includes(bonusText)) {
+                    newOptions.push(bonusText);
+                }
+            });
+            setOptions(newOptions);
+        }
+    }, [appContext, breeding?.shinyBonuses]);
+
+    const allPets = useMemo(() => {
+        let pets: Pet[] = [];
+
+        switch (sort) {
+            case "":
+            case "Level":
+            case "Least Time to Next Level":
+                pets = breeding?.basePets.filter(pet => pet.data.petId != "_") ?? [];
+            default:
+                pets = breeding?.basePets.filter(pet => pet.data.petId != "_").filter(pet => pet.shinyBonus.text.replaceAll('{', '') != sort) ?? [];
+        }
+
+        return pets?.sort((pet1, pet2) => {
+            const indexSort = pet1.index > pet2.index ? 1 : -1;
+
+            function moveMaxedToEnd(pet1: Pet, pet2: Pet) {
+                if (pet1.calculateShinyLevel() >= 20) {
+                    return -1;
+                }
+                if (pet2.calculateShinyLevel() >= 20) {
+                    return -1;
+                }
+                return (pet1.getNextShinyGoal() - pet1.shinyProgress) > (pet2.getNextShinyGoal() - pet2.shinyProgress) ? 1 : -1;
+            }
+
+            function sortByBonusThenLevel(pet1: Pet, pet2: Pet) {
+                const bonus1 = pet1.shinyBonus.text.replaceAll('{', '');
+                const bonus2 = pet2.shinyBonus.text.replaceAll('{', '');
+
+                if (bonus1 != sort && bonus2 != sort) {
+                    // If both bonus aren't of the selected bonus, resort to index sorting
+                    return indexSort;
+                } else if (bonus1 == sort && bonus2 == sort) {
+                    // if they both are of the selected bonus, sort by kevel
+                    return sortByLevel(pet1, pet2);
+                } else {
+                    // with previous test, we know that one is equal to the sorting bonus and the other is not
+                    return bonus1 == sort ? -1 : 1;
+                }
+            }
+
+            function sortByLevel(pet1: Pet, pet2: Pet) {
+                if (pet1.calculateShinyLevel() == pet2.calculateShinyLevel()) {
+                    // If level is equal, sort by time until next level
+                    return moveMaxedToEnd(pet1, pet2);
+                } else {
+                    // if level isn't equal, just sort by level
+                    return pet1.calculateShinyLevel() > pet2.calculateShinyLevel() ? -1 : 1;
+                }
+            }
+
+            switch (sort) {
+                case "Level":
+                    return sortByLevel(pet1, pet2);
+                case "Least Time to Next Level":
+                    return moveMaxedToEnd(pet1, pet2);
+                default:
+                    return indexSort;
+            }
+        })
+    }, [breeding, sort])
+
+    const selectedPets = useMemo(() => {
+        let pets: Pet[] = [];
+
+        if (sort != "" && sort != "Level" && sort != "Least Time to Next Level") {
+            pets = breeding?.basePets.filter(pet => pet.data.petId != "_").filter(pet => pet.shinyBonus.text.replaceAll('{', '') == sort) ?? [];
+        }
+
+        return pets?.sort((pet1, pet2) => {
+            const indexSort = pet1.index > pet2.index ? 1 : -1;
+
+            function moveMaxedToEnd(pet1: Pet, pet2: Pet) {
+                if (pet1.calculateShinyLevel() >= 20) {
+                    return -1;
+                }
+                if (pet2.calculateShinyLevel() >= 20) {
+                    return -1;
+                }
+                return (pet1.getNextShinyGoal() - pet1.shinyProgress) > (pet2.getNextShinyGoal() - pet2.shinyProgress) ? 1 : -1;
+            }
+
+            function sortByLevel(pet1: Pet, pet2: Pet) {
+                if (pet1.calculateShinyLevel() == pet2.calculateShinyLevel()) {
+                    // If level is equal, sort by time until next level
+                    return moveMaxedToEnd(pet1, pet2);
+                } else {
+                    // if level isn't equal, just sort by level
+                    return pet1.calculateShinyLevel() > pet2.calculateShinyLevel() ? -1 : 1;
+                }
+            }
+
+            return sortByLevel(pet1, pet2);
+        })
+    }, [breeding, sort])
+
+    function DisplaySelectedShiny() {
+        if (selectedPets.length == 0) {
+            return undefined;
+        } else {
+            return (
+                <Grid columns={size == "small" ? ["1"] : ["1/3", "1/3", "1/3"]} border={{ side: 'bottom', color: 'grey-3', size: '1px' }} fill>
+                    {
+                        selectedPets?.filter(pet => pet.data.petId != "_").map((pet, pIndex) => {
+                            const petInFenceyard: boolean = breeding?.fenceyardPets.some(fenceyardPet => fenceyardPet.data.petId == pet.data.petId && fenceyardPet.gene.index == 5) ?? false;
+                            const currentlyLevelingShinyBorderProp: BorderType = petInFenceyard && { size: '2px', style: 'solid', color: 'green' };
+                            const enemy = EnemyInfo.find(enemy => enemy.id == pet.data.petId);
+
+                            return (
+                                <ShadowBox background="dark-1" border={currentlyLevelingShinyBorderProp} key={pIndex} direction="row" gap="medium" margin={{ bottom: 'medium', right: 'small' }} align="center" pad="small" style={{ opacity: pet.shinyLevel > 0 ? 1 : .5 }}>
+                                    <IconImage data={{ location: enemy?.id.toLowerCase() ?? "Unknown", width: 67, height: 67 }} style={{ paddingBottom: '15px' }} />
+                                    <Grid columns={["50%", "50%"]} fill align="center">
+                                        <Box>
+                                            <Text size="16px">Lvl: {pet.shinyLevel}</Text>
+                                            <Text size="16px">{Math.floor(pet.shinyProgress)}/{pet.getNextShinyGoal()} days</Text>
+                                        </Box>
+                                        <Text size="16px">{pet.getShinyText()}</Text>
+                                    </Grid>
+                                </ShadowBox>
+                            )
+                        })
+                    }
+                </Grid>
+            );
+        }
+    }
+    
     if (!breeding) {
         return (
             <Box>
@@ -307,18 +446,28 @@ function ShinyDisplay() {
         )
     }
     return (
-        <Box>
+        <Box gap="small">
             <Text>Shiny Bonuses</Text>
+            <Box direction="row" gap="medium">
+                <Select size="small"
+                    placeholder="Sort by"
+                    clear
+                    value={sort}
+                    options={options}
+                    onChange={({ value: nextValue }) => { setSort(nextValue); }}
+                />
+            </Box>
+            { DisplaySelectedShiny() }
             <Grid columns={size =="small" ? ["1"] : ["1/3", "1/3", "1/3"]} fill>
                 {
-                    breeding.basePets.filter(pet => pet.data.petId != "_").map((pet, pIndex) => {
+                    allPets?.filter(pet => pet.data.petId != "_").map((pet, pIndex) => {
                         const petInFenceyard: boolean = breeding.fenceyardPets.some(fenceyardPet => fenceyardPet.data.petId == pet.data.petId && fenceyardPet.gene.index == 5);
                         const currentlyLevelingShinyBorderProp: BorderType = petInFenceyard && { size: '2px', style: 'solid', color: 'green' };
                         const enemy = EnemyInfo.find(enemy => enemy.id == pet.data.petId);
 
                         return (
-                            <ShadowBox background="dark-1" border={ currentlyLevelingShinyBorderProp } key={pIndex} direction="row" gap="medium" margin={{ bottom: 'medium', right: 'small' }} align="center" pad="small" style={{ opacity: pet.shinyLevel > 0 ? 1 : .5 }}>
-                                <IconImage data={{ location: enemy?.id.toLowerCase() ?? "Unknown", width: 67, height: 67 }} style={{ paddingBottom: '15px'}} />
+                            <ShadowBox background="dark-1" border={currentlyLevelingShinyBorderProp} key={pIndex} direction="row" gap="medium" margin={{ bottom: 'medium', right: 'small' }} align="center" pad="small" style={{ opacity: pet.shinyLevel > 0 ? 1 : .5 }}>
+                                <IconImage data={{ location: enemy?.id.toLowerCase() ?? "Unknown", width: 67, height: 67 }} style={{ paddingBottom: '15px' }} />
                                 <Grid columns={["50%", "50%"]} fill align="center">
                                     <Box>
                                         <Text size="16px">Lvl: {pet.shinyLevel}</Text>
