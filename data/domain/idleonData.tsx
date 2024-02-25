@@ -48,6 +48,7 @@ import { Rift } from './rift';
 import { Equinox, updateEquinoxBar } from './equinox';
 import { POExtra } from './postoffice';
 import { Sneaking, updateSneaking } from './world-6/sneaking';
+import { Summoning } from './world-6/summoning';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -117,6 +118,7 @@ const domainList: Domain[] = [
     new POExtra("POExtra"),
     new Equinox("equinox"),
     new Sneaking("sneaking"),
+    new Summoning("summoning"),
 ]
 
 export class IdleonData {
