@@ -13,6 +13,7 @@ import { Achievement, AchievementConst } from "./achievements";
 import { SkillMastery } from "./rift";
 import { Breeding } from "./breeding";
 import { Worship, TotalizerBonus } from "./worship";
+import { Guild } from './guild';
 
 export class Skilling {
     static getXPReq = (skill: SkillsIndex, level: number) => {
@@ -48,7 +49,8 @@ export class Skilling {
             achievements: Achievement[],
             skillMastery: SkillMastery,
             breeding: Breeding, 
-            worship: Worship
+            worship: Worship,
+            guild: Guild
         ) => {
         const skillingCardBonus = Card.GetTotalBonusForId(player.cardInfo?.equippedCards ?? [], 50);
 
@@ -74,10 +76,12 @@ export class Skilling {
         const shinyBonus = breeding.shinyBonuses.find(bonus => bonus.data.index == 2)?.getBonus() ?? 0;
         const worshipBonus = worship.totalizer.getBonus(TotalizerBonus.SkillExp);
 
+        const guildBonus = guild.guildBonuses.find(bonus => bonus.index == 14)?.getBonus() ?? 0;
+
         const myriadBox = player.postOffice.find(box => box.index == 20)
         const poBonus = myriadBox?.bonuses[2].getBonus(myriadBox.level, 2) ?? 0;
 
-        return starSignBonus + (skillingCardBonus + goldenFoodBonus) + (cardSetBonus + w5crystalCardBonus + shrineBonus + statueBonus + (prayerIncrease - prayerDecrease + (equipmentBonus + (masteroBuff + (saltLickBonus + dungeonBonus + poBonus + divinityBonus + achieveBonuses + riftBonus + shinyBonus + worshipBonus)))));
+        return starSignBonus + guildBonus + (skillingCardBonus + goldenFoodBonus) + (cardSetBonus + w5crystalCardBonus + shrineBonus + statueBonus + (prayerIncrease - prayerDecrease + (equipmentBonus + (masteroBuff + (saltLickBonus + dungeonBonus + poBonus + divinityBonus + achieveBonuses + riftBonus + shinyBonus + worshipBonus)))));
     }
 
     static getSkillImageData = (skill: SkillsIndex): ImageData => {
