@@ -8,7 +8,7 @@ import { Summoning as SummoningDomain, SummonUpgrade, SummonEssence, SummonEssen
 const ColorSection = ({ upgrades, essence, index }: { upgrades: SummonUpgrade[], essence: SummonEssence, index: number }) => {
     const borderColor = index > 0 ? "grey-1" : "none";
     return (
-        <Grid columns={{ size: 'medium', count: 'fill' }} pad="small" border={{ side: 'top', color: borderColor }} fill>
+        <Grid columns={{ size: 'small', count: 'fill' }} pad="small" border={{ side: 'top', color: borderColor }} fill>
             {
                 upgrades
                 .map((upgrade, index) => {
@@ -25,7 +25,10 @@ const ColorSection = ({ upgrades, essence, index }: { upgrades: SummonUpgrade[],
                                             <IconImage data={upgrade.getImageData()} />
                                         </Box>                                                
                                     </Stack>     
-                                    <Text size="small">{upgrade.data.name}{" (" + upgrade.getLevelDisplay() + ")"}</Text>
+                                    <Box direction="column">
+                                        <Text size="small">{upgrade.data.name}</Text>
+                                        <Text size="small">{upgrade.getLevelDisplay()}</Text>
+                                    </Box>
                                 </Box>
                                 <TextAndLabel textSize='xsmall' text={upgrade.getBonusText()} label={"Bonus"} />
                                 {

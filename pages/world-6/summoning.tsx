@@ -30,7 +30,7 @@ function Summoning() {
             <Box>
                 <NextSeo title="Summoning" />
                 <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Summoning</Heading>
-                <Text size="small">* This is a work in progress, there could some bugs and minor inaccuracies. THE UI ISN&apos;T FINAL!</Text>
+                <Text size="xsmall">* This is a work in progress, there could some bugs and minor inaccuracies. THE UI ISN&apos;T FINAL!</Text>
                 <Text>Summoning Lv: {summoning.summoningLevel}</Text>
                 <Box justify="start" direction='row' gap="small">
                     {
