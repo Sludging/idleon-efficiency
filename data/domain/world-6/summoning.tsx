@@ -9,6 +9,7 @@ import { SummonUpgradeModel } from "../model/summonUpgradeModel";
 import { SkillsIndex } from "../SkillsIndex";
 import { Player } from "../player";
 import { SummonEnemyBonusModel } from "../model/summonEnemyBonusModel";
+import { Sneaking } from "./sneaking";
 
 export enum SummonEssenceColor {
     White = 0,
@@ -119,6 +120,7 @@ export class Summoning extends Domain {
     summonBonuses: SummonBonus[] = [];
     summonEssences: SummonEssence[] = [];
     summoningLevel: number = 0;
+    pristineCharmBonus: number = 0;
 
     updateUnlockedUpgrades = () => {
         this.summonUpgrades.forEach(upgrade => {
@@ -282,11 +284,20 @@ export class Summoning extends Domain {
     }
 }
 
-export const updateSummoning = (data: Map<string, any>) => {
+export const updateSummoningLevelAndBonuses = (data: Map<string, any>) => {
     const summoning = data.get("summoning") as Summoning;
     const players = data.get("players") as Player[];
 
     summoning.summoningLevel = players[0]?.skills.get(SkillsIndex.Summoning)?.level ?? 0;
 
     summoning.updateUpdatesSecondaryBonus();
+}
+
+export const updateSummoningPristineCharm = (data: Map<string, any>) => {
+    const summoning = data.get("summoning") as Summoning;
+    const sneaking = data.get("sneaking") as Sneaking;
+
+    if (sneaking.pristineCharms?.find(charm => charm.data.itemId == 8)?.unlocked ?? false) {
+        summoning.pristineCharmBonus = 1 + (sneaking.pristineCharms.find(charm => charm.data.itemId == 8)?.data.x1 ?? 0) / 100;
+    }
 }
