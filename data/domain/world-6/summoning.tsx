@@ -25,6 +25,7 @@ export class SummonUpgrade {
     unlocked: boolean = false;
     level: number = 0;
     shouldBeDisplayed: boolean = true;
+    secondaryBonus: string = "";
 
     constructor(public index: number, public data: SummonUpgradeModel, level: number = 0) {
         this.shouldBeDisplayed = (data.name != "Name");
@@ -38,8 +39,6 @@ export class SummonUpgrade {
     getBonus = (level: number = this.level): number => {
         return level * this.data.bonusQty
     }
-
-    // TODO : get "secondary" bonus value, most of the time it's the Total bonus % but there are some exceptions
 
     getImageData = (): ImageData => {
         return {
@@ -70,7 +69,12 @@ export class SummonUpgrade {
     }
 
     getBonusText = (level: number = this.level): string => {
-        return this.data.bonus.replace(/{/, this.getBonus(level).toString());
+        // This bonus is special so we make a special case
+        if (this.index == 2) {
+            return this.data.bonus.slice(0, this.data.bonus.indexOf('@')) + "Cost (and level) reset a few days after buying it";
+        } else {
+            return this.data.bonus.replace(/@/, '\r\n').replace(/{/, this.getBonus(level).toString()).replace(/}/, this.secondaryBonus);
+        }
     }
 
     static fromBase = (data: SummonUpgradeBase[]): SummonUpgrade[] => {
@@ -110,6 +114,44 @@ export class Summoning extends Domain {
 
             // if required upgrade to unlock have a level higher than 0, then it's displayed in-game so it's considered unlocked
             upgrade.unlocked = (this.summonUpgrades.find(searchedUpgrade => searchedUpgrade.index == upgrade.data.idReq)?.level ?? 0) > 0;
+        });
+    }
+
+    updateUpdatesSecondaryBonus = () => {
+        this.summonUpgrades.forEach(upgrade => {
+            switch (upgrade.index) {
+                case 0:
+                    // TODO : need to multiply bonus by all color victory
+                    upgrade.secondaryBonus = (upgrade.getBonus() * 0).toString();
+                    break;
+                case 11:
+                    // TODO : need to multiply bonus by green victory
+                    upgrade.secondaryBonus = (upgrade.getBonus() * 0).toString();
+                    break;
+                case 18:
+                    // TODO : need to multiply bonus by yellow victory
+                    upgrade.secondaryBonus = (upgrade.getBonus() * 0).toString();
+                    break;
+                case 27:
+                    // TODO : need to multiply bonus by blue victory
+                    upgrade.secondaryBonus = (upgrade.getBonus() * 0).toString();
+                    break;
+                case 30:
+                case 40:
+                case 65:
+                case 66:
+                case 67:
+                    // Multiply bonus by summoning level
+                    upgrade.secondaryBonus = (upgrade.getBonus() * this.summoningLevel).toString();
+                    break;
+                case 38:
+                    // TODO : need to multiply bonus by blue victory
+                    upgrade.secondaryBonus = (upgrade.getBonus() * 0).toString();
+                    break;
+                default:
+                    upgrade.secondaryBonus = "";
+                    break;
+            }
         });
     }
 
@@ -214,4 +256,6 @@ export const updateSummoning = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
 
     summoning.summoningLevel = players[0]?.skills.get(SkillsIndex.Summoning)?.level ?? 0;
+
+    summoning.updateUpdatesSecondaryBonus();
 }
