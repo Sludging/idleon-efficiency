@@ -8,6 +8,7 @@ import { Item } from "../items";
 import { SummonUpgradeModel } from "../model/summonUpgradeModel";
 import { SkillsIndex } from "../SkillsIndex";
 import { Player } from "../player";
+import { SummonEnemyBonusModel } from "../model/summonEnemyBonusModel";
 
 export enum SummonEssenceColor {
     White = 0,
@@ -82,14 +83,35 @@ export class SummonUpgrade {
     }
 }
 
-export class SummonBonus {
 
+export class SummonBonus {
+    bonusValue: number = 0;
+
+    constructor(public index: number, public data: SummonEnemyBonusModel, bonusValue: number = 0) {
+        this.bonusValue = bonusValue;
+    }
+
+    getBonusText = (): string => {
+        switch (this.data.bonusId) {
+            // Only those bonuses have a '{' to be replaced by the bonus value, others use a '<'
+            case 5:
+            case 10:
+            case 12:
+            case 13:
+            case 19:
+            case 20:
+                return this.data.bonus.replace(/{/, this.bonusValue.toString());
+            default:
+                return this.data.bonus.replace(/</, this.bonusValue.toString());
+        }
+    }
 }
 
 export interface SummonEssence {
     color: SummonEssenceColor,
     quantity: number,
-    display: boolean
+    display: boolean,
+    victories: number
 }
 
 export class Summoning extends Domain {
@@ -121,20 +143,25 @@ export class Summoning extends Domain {
         this.summonUpgrades.forEach(upgrade => {
             switch (upgrade.index) {
                 case 0:
-                    // TODO : need to multiply bonus by all color victory
-                    upgrade.secondaryBonus = (upgrade.getBonus() * 0).toString();
+                    // Multiply bonus by all color victories
+                    const allVictories: number = this.summonEssences.reduce((sum, essence) => sum + essence.victories, 0);
+                    upgrade.secondaryBonus = (upgrade.getBonus() * allVictories).toString();
                     break;
                 case 11:
-                    // TODO : need to multiply bonus by green victory
-                    upgrade.secondaryBonus = (upgrade.getBonus() * 0).toString();
+                    // Multiply bonus by green victory
+                    upgrade.secondaryBonus = (upgrade.getBonus() * (this.summonEssences?.find(essence => essence.color == SummonEssenceColor.Green)?.victories ?? 0)).toString();
                     break;
                 case 18:
-                    // TODO : need to multiply bonus by yellow victory
-                    upgrade.secondaryBonus = (upgrade.getBonus() * 0).toString();
+                    // Multiply bonus by yellow victory
+                    upgrade.secondaryBonus = (upgrade.getBonus() * (this.summonEssences?.find(essence => essence.color == SummonEssenceColor.Yellow)?.victories ?? 0)).toString();
                     break;
                 case 27:
-                    // TODO : need to multiply bonus by blue victory
-                    upgrade.secondaryBonus = (upgrade.getBonus() * 0).toString();
+                    // Multiply bonus by blue victory
+                    upgrade.secondaryBonus = (upgrade.getBonus() * (this.summonEssences?.find(essence => essence.color == SummonEssenceColor.Blue)?.victories ?? 0)).toString();
+                    break;
+                case 38:
+                    // Multiply bonus by purple victory
+                    upgrade.secondaryBonus = (upgrade.getBonus() * (this.summonEssences?.find(essence => essence.color == SummonEssenceColor.Purple)?.victories ?? 0)).toString();
                     break;
                 case 30:
                 case 40:
@@ -143,10 +170,6 @@ export class Summoning extends Domain {
                 case 67:
                     // Multiply bonus by summoning level
                     upgrade.secondaryBonus = (upgrade.getBonus() * this.summoningLevel).toString();
-                    break;
-                case 38:
-                    // TODO : need to multiply bonus by blue victory
-                    upgrade.secondaryBonus = (upgrade.getBonus() * 0).toString();
                     break;
                 default:
                     upgrade.secondaryBonus = "";
@@ -169,6 +192,7 @@ export class Summoning extends Domain {
         const summoning = data.get(this.dataKey) as Summoning;
         const summoningData = data.get("Summon") as any[];
 
+        summoning.summonUpgrades = [];
         summoning.summonUpgrades = initSummonUpgradeRepo()
             .map(
             base => new SummonUpgrade(base.index, base.data, summoningData[0][base.index] ?? 0)
@@ -178,6 +202,8 @@ export class Summoning extends Domain {
         const essences = summoningData[2] as number[];
         essences.forEach((value, index) => {
             let shouldDisplay: boolean = false;
+            // TODO : Get the number of victories for each color
+            let victories: number = 0;
             switch(index) {
                 case SummonEssenceColor.White:
                     shouldDisplay = true;
@@ -205,10 +231,15 @@ export class Summoning extends Domain {
                     shouldDisplay = false;
                     break;
             }
-            summoning.summonEssences.push({ color: index, quantity: value, display: shouldDisplay });
+            summoning.summonEssences.push({ color: index, quantity: value, display: shouldDisplay, victories: victories });
         });
 
         summoning.updateUnlockedUpgrades();
+
+        summoning.summonBonuses = initSummonEnemyBonusRepo()
+        .map(
+            base => new SummonBonus(base.index, base.data)
+        );
 
         // TODO : get SummoningBonuses and level, don't know yet where they are
         // This is the code that return winner bonus, need to read into that to find out I guess
