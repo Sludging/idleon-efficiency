@@ -48,6 +48,8 @@ export class Sigils extends Domain {
 
     chargeSpeed: number = 0;
 
+
+    // TODO : Add bonus from Summoning Winner bonuses
     setSigilSpeed = (achievBonus112: number, gemStoreBonus110: number, stampStampC12: number, vialBonus61: number) => {
         this.chargeSpeed = 1 + ((achievBonus112 + stampStampC12 + this.sigils[12].getBonus() + gemStoreBonus110 + vialBonus61) / 100);
     }
