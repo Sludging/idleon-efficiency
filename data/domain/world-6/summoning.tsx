@@ -7,6 +7,7 @@ import { ImageData } from "../imageData";
 import { Item } from "../items";
 import { SummonUpgradeModel } from "../model/summonUpgradeModel";
 import { SkillsIndex } from "../SkillsIndex";
+import { Player } from "../player";
 
 export enum SummonEssenceColor {
     White = 0,
@@ -14,7 +15,7 @@ export enum SummonEssenceColor {
     Yellow = 2,
     Blue = 3,
     Purple = 4,
-    FutureContent1 = 5,
+    Red = 5,
     FutureContent2 = 6,
     FutureContent3 = 7,
     FutureContent4 = 8
@@ -25,8 +26,9 @@ export class SummonUpgrade {
     level: number = 0;
     shouldBeDisplayed: boolean = true;
 
-    constructor(public index: number, public data: SummonUpgradeModel) {
+    constructor(public index: number, public data: SummonUpgradeModel, level: number = 0) {
         this.shouldBeDisplayed = (data.name != "Name");
+        this.level = level;
     }
 
     nextLevelCost = (): number => {
@@ -36,6 +38,8 @@ export class SummonUpgrade {
     getBonus = (level: number = this.level): number => {
         return level * this.data.bonusQty
     }
+
+    // TODO : get "secondary" bonus value, most of the time it's the Total bonus % but there are some exceptions
 
     getImageData = (): ImageData => {
         return {
@@ -91,17 +95,22 @@ export class Summoning extends Domain {
     summoningLevel: number = 0;
 
     updateUnlockedUpgrades = () => {
-        // TODO : check which upgrade is unlocked using upgrade.data.idReq
+        this.summonUpgrades.forEach(upgrade => {
+            // If filler upgrade, should neither be displayed nor considered unlocked
+            if(!upgrade.shouldBeDisplayed) {
+                upgrade.unlocked = false;
+                return;
+            }
 
-        // TODO : check which essence should be displayed based on unlocked bonuses (to prevent showing essences based on if they're above 0 to prevent case where someone spend exactly all their essences)
-    }
+            // If idReq under 0 that means it's unlocked from the beginning
+            if(upgrade.data.idReq < 0) {
+                upgrade.unlocked = true;
+                return;
+            }
 
-    getEssenceIcon(color: SummonEssenceColor): ImageData {
-        return {
-            location: `SummC${color+1}`,
-            height: 25,
-            width: 25
-        }
+            // if required upgrade to unlock have a level higher than 0, then it's displayed in-game so it's considered unlocked
+            upgrade.unlocked = (this.summonUpgrades.find(searchedUpgrade => searchedUpgrade.index == upgrade.data.idReq)?.level ?? 0) > 0;
+        });
     }
 
     getRawKeys(): RawData[] {
@@ -117,22 +126,92 @@ export class Summoning extends Domain {
     parse(data: Map<string, any>): void {
         const summoning = data.get(this.dataKey) as Summoning;
         const summoningData = data.get("Summon") as any[];
-        const playerLevel = data.get(`Lv0_0`) as number[];
 
-        // TODO : get Summoning skill level
+        summoning.summonUpgrades = initSummonUpgradeRepo()
+            .map(
+            base => new SummonUpgrade(base.index, base.data, summoningData[0][base.index] ?? 0)
+        );
 
         summoning.summonEssences = [];
         const essences = summoningData[2] as number[];
         essences.forEach((value, index) => {
-            summoning.summonEssences.push({ color: index, quantity: value, display: false });
+            let shouldDisplay: boolean = false;
+            switch(index) {
+                case SummonEssenceColor.White:
+                    shouldDisplay = true;
+                    break;
+                case SummonEssenceColor.Green:
+                    shouldDisplay = (this.summonUpgrades?.find(upgrade => upgrade.index == 4)?.level ?? 0) > 0;
+                    break;
+                case SummonEssenceColor.Yellow:
+                    shouldDisplay = (this.summonUpgrades?.find(upgrade => upgrade.index == 13)?.level ?? 0) > 0;
+                    break;
+                case SummonEssenceColor.Blue:
+                    shouldDisplay = (this.summonUpgrades?.find(upgrade => upgrade.index == 23)?.level ?? 0) > 0;
+                    break;
+                case SummonEssenceColor.Purple:
+                    shouldDisplay = (this.summonUpgrades?.find(upgrade => upgrade.index == 33)?.level ?? 0) > 0;
+                    break;
+                // For now you can't get red or later essences, but we already know which upgrade will unlock red essence, but for others will need to do it when available
+                case SummonEssenceColor.Red:
+                    shouldDisplay = (this.summonUpgrades?.find(upgrade => upgrade.index == 44)?.level ?? 0) > 0;
+                    break;
+                case SummonEssenceColor.FutureContent2:
+                case SummonEssenceColor.FutureContent3:
+                case SummonEssenceColor.FutureContent4:
+                default:
+                    shouldDisplay = false;
+                    break;
+            }
+            summoning.summonEssences.push({ color: index, quantity: value, display: shouldDisplay });
         });
 
-        // TODO : get SummoningUpgrades and level, should be summoningData[0]
-
-        this.updateUnlockedUpgrades();
+        summoning.updateUnlockedUpgrades();
 
         // TODO : get SummoningBonuses and level, don't know yet where they are
+        // This is the code that return winner bonus, need to read into that to find out I guess
+        /*if ("WinBonus" == d) {
+            if (-1 != c.getCurrentSceneName().indexOf("Tutorial"))
+                return 0;
+            -1 != b ? (g = a.engine.getGameAttribute("DNSM"),
+            d = !Object.prototype.hasOwnProperty.call(g.h, "SummWinBonus")) : d = !0;
+            if (d) {
+                g = a.engine.getGameAttribute("DNSM");
+                f = [];
+                g.h.SummWinBonus = f;
+                for (d = 0; 20 > d; )
+                    d++,
+                    a.engine.getGameAttribute("DNSM").h.SummWinBonus.push(0);
+                d = 0;
+                for (e = a.engine.getGameAttribute("Summon")[1].length; d < e; )
+                    f = d++,
+                    g = a.engine.getGameAttribute("DNSM"),
+                    f = a.engine.getGameAttribute("CustomLists").h.SummonEnemies[0].indexOf(a.engine.getGameAttribute("Summon")[1][f]),
+                    g.h.SWinBonDN = f,
+                    g = a.engine.getGameAttribute("DNSM"),
+                    f = Math.round(c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonEnemies[5][c.asNumber(a.engine.getGameAttribute("DNSM").h.SWinBonDN) | 0]) - 1),
+                    g.h.SWinBonDN2 = f,
+                    a.engine.getGameAttribute("DNSM").h.SummWinBonus[c.asNumber(a.engine.getGameAttribute("DNSM").h.SWinBonDN2) | 0] = c.asNumber(a.engine.getGameAttribute("DNSM").h.SummWinBonus[c.asNumber(a.engine.getGameAttribute("DNSM").h.SWinBonDN2) | 0]) + c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonEnemies[7][c.asNumber(a.engine.getGameAttribute("DNSM").h.SWinBonDN) | 0]);
+                return -1 == b ? 0 : 3.5 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SummWinBonus[b | 0]) * (1 + q._customBlock_Ninja("PristineBon", 8, 0) / 100)
+            }
+            return 3.5 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SummWinBonus[b | 0]) * (1 + q._customBlock_Ninja("PristineBon", 8, 0) / 100)
+        }*/
 
-        console.log(summoningData);
+        //console.log(summoningData);
     }
+
+    static getEssenceIcon(color: SummonEssenceColor): ImageData {
+        return {
+            location: `SummC${color+1}`,
+            height: 25,
+            width: 25
+        }
+    }
+}
+
+export const updateSummoning = (data: Map<string, any>) => {
+    const summoning = data.get("summoning") as Summoning;
+    const players = data.get("players") as Player[];
+
+    summoning.summoningLevel = players[0]?.skills.get(SkillsIndex.Summoning)?.level ?? 0;
 }
