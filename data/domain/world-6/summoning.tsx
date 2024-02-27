@@ -10,6 +10,7 @@ import { SkillsIndex } from "../SkillsIndex";
 import { Player } from "../player";
 import { SummonEnemyBonusModel } from "../model/summonEnemyBonusModel";
 import { Sneaking } from "./sneaking";
+import { nFormatter } from "../../utility";
 
 export enum SummonEssenceColor {
     White = 0,
@@ -87,9 +88,14 @@ export class SummonUpgrade {
 
 export class SummonBonus {
     bonusValue: number = 0;
+    pristineCharmBonus: number = 1;
 
     constructor(public index: number, public data: SummonEnemyBonusModel, bonusValue: number = 0) {
         this.bonusValue = bonusValue;
+    }
+
+    getBonus = (): number => {
+        return 3.5 * this.bonusValue * this.pristineCharmBonus;
     }
 
     getBonusText = (): string => {
@@ -101,9 +107,9 @@ export class SummonBonus {
             case 13:
             case 19:
             case 20:
-                return this.data.bonus.replace(/{/, this.bonusValue.toString());
+                return this.data.bonus.replace(/{/, nFormatter(this.getBonus()));
             default:
-                return this.data.bonus.replace(/</, this.bonusValue.toString());
+                return this.data.bonus.replace(/</, nFormatter(1 + this.getBonus() / 100));
         }
     }
 }
@@ -120,7 +126,6 @@ export class Summoning extends Domain {
     summonBonuses: SummonBonus[] = [];
     summonEssences: SummonEssence[] = [];
     summoningLevel: number = 0;
-    pristineCharmBonus: number = 0;
 
     updateUnlockedUpgrades = () => {
         this.summonUpgrades.forEach(upgrade => {
@@ -141,7 +146,7 @@ export class Summoning extends Domain {
         });
     }
 
-    updateUpdatesSecondaryBonus = () => {
+    updateSecondaryBonus = () => {
         this.summonUpgrades.forEach(upgrade => {
             switch (upgrade.index) {
                 case 0:
@@ -243,36 +248,17 @@ export class Summoning extends Domain {
             base => new SummonBonus(base.index, base.data)
         );
 
-        // TODO : get SummoningBonuses and level, don't know yet where they are
-        // This is the code that return winner bonus, need to read into that to find out I guess
-        /*if ("WinBonus" == d) {
-            if (-1 != c.getCurrentSceneName().indexOf("Tutorial"))
-                return 0;
-            -1 != b ? (g = a.engine.getGameAttribute("DNSM"),
-            d = !Object.prototype.hasOwnProperty.call(g.h, "SummWinBonus")) : d = !0;
-            if (d) {
-                g = a.engine.getGameAttribute("DNSM");
-                f = [];
-                g.h.SummWinBonus = f;
-                for (d = 0; 20 > d; )
-                    d++,
-                    a.engine.getGameAttribute("DNSM").h.SummWinBonus.push(0);
-                d = 0;
-                for (e = a.engine.getGameAttribute("Summon")[1].length; d < e; )
-                    f = d++,
-                    g = a.engine.getGameAttribute("DNSM"),
-                    f = a.engine.getGameAttribute("CustomLists").h.SummonEnemies[0].indexOf(a.engine.getGameAttribute("Summon")[1][f]),
-                    g.h.SWinBonDN = f,
-                    g = a.engine.getGameAttribute("DNSM"),
-                    f = Math.round(c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonEnemies[5][c.asNumber(a.engine.getGameAttribute("DNSM").h.SWinBonDN) | 0]) - 1),
-                    g.h.SWinBonDN2 = f,
-                    a.engine.getGameAttribute("DNSM").h.SummWinBonus[c.asNumber(a.engine.getGameAttribute("DNSM").h.SWinBonDN2) | 0] = c.asNumber(a.engine.getGameAttribute("DNSM").h.SummWinBonus[c.asNumber(a.engine.getGameAttribute("DNSM").h.SWinBonDN2) | 0]) + c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonEnemies[7][c.asNumber(a.engine.getGameAttribute("DNSM").h.SWinBonDN) | 0]);
-                return -1 == b ? 0 : 3.5 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SummWinBonus[b | 0]) * (1 + q._customBlock_Ninja("PristineBon", 8, 0) / 100)
+        const enemyRepo = initSummonEnemyRepo();
+        const wonBattles = summoningData[1] as string[];
+        wonBattles.forEach((battle) => {
+            const enemyData = enemyRepo.find((enemy) => enemy.data.enemyId == battle);
+            if (enemyData) {
+                const relevantBonus = summoning.summonBonuses.find(bonus => bonus.data.bonusId == enemyData.data.bonusId);
+                if (relevantBonus) {
+                    relevantBonus.bonusValue += enemyData.data.bonusQty as number;
+                }
             }
-            return 3.5 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SummWinBonus[b | 0]) * (1 + q._customBlock_Ninja("PristineBon", 8, 0) / 100)
-        }*/
-
-        //console.log(summoningData);
+        });
     }
 
     static getEssenceIcon(color: SummonEssenceColor): ImageData {
@@ -290,14 +276,16 @@ export const updateSummoningLevelAndBonuses = (data: Map<string, any>) => {
 
     summoning.summoningLevel = players[0]?.skills.get(SkillsIndex.Summoning)?.level ?? 0;
 
-    summoning.updateUpdatesSecondaryBonus();
+    summoning.updateSecondaryBonus();
 }
 
 export const updateSummoningPristineCharm = (data: Map<string, any>) => {
     const summoning = data.get("summoning") as Summoning;
     const sneaking = data.get("sneaking") as Sneaking;
 
-    if (sneaking.pristineCharms?.find(charm => charm.data.itemId == 8)?.unlocked ?? false) {
-        summoning.pristineCharmBonus = 1 + (sneaking.pristineCharms.find(charm => charm.data.itemId == 8)?.data.x1 ?? 0) / 100;
+    const crystalComb = sneaking.pristineCharms?.find(charm => charm.data.itemId == 8);
+    if (crystalComb && crystalComb.unlocked) {
+        const bonusValue = (1 + crystalComb.data.x1 / 100);
+        summoning.summonBonuses.forEach(bonus => bonus.pristineCharmBonus = bonusValue);
     }
 }
