@@ -17,6 +17,7 @@ import { PlayerActivitySection } from '../../components/world-6/sneaking/playerA
 import { JadeUpgrades } from '../../components/world-6/sneaking/jadeUpgrades';
 import { SneakingUpgrades } from '../../components/world-6/sneaking/sneakingUpgrades';
 import TabButton from '../../components/base/TabButton';
+import { PristineCharmSection } from '../../components/world-6/sneaking/pristineCharmsSection';
 
 
 function Sneaking() {
@@ -70,6 +71,9 @@ function Sneaking() {
             </Box>
             <Box margin={{ bottom: 'medium' }}>
                 <PlayerActivitySection sneakingPlayers={sneaking.players} players={players} />
+            </Box>
+            <Box margin={{ bottom: 'medium' }}>
+                <PristineCharmSection charms={sneaking.pristineCharms} />
             </Box>
             <Box align="center" direction="row" justify="center" gap="small">
                 {["Jade Upgrades", "Sneaking Upgrades"].map((tabName, index) => (
