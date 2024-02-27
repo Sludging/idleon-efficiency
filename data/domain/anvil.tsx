@@ -24,7 +24,7 @@ import { Rift, SkillMastery } from './rift';
 import { Breeding } from './breeding';
 import { Domain, RawData } from './base/domain';
 import { Worship } from './worship';
-import { Guild } from './guid';
+import { Guild } from './guild';
 
 
 // if ("Costs2TypeAnvilPA" == t) {}
