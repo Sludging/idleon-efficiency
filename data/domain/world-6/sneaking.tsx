@@ -146,7 +146,11 @@ export class PristineCharm {
     }
 
     getBonusText = (): string => {
-        return this.data.bonus.replace(/{}/, this.data.x1.toString());
+        return this.data.bonus
+            // { Means that the bonus is "flat", we don't need to manipulate it
+            .replace(/{/, this.data.x1.toString())
+            // } Means that to display it we need to calculate the bonus value
+            .replace(/}/, (1 + this.data.x1 / 100).toString());
     }
 }
 
