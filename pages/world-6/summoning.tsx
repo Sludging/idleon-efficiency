@@ -37,7 +37,7 @@ function Summoning() {
                         summoning.summonEssences.filter(essence => essence.display == true).map((essence) => (
                             <ShadowBox width={"xsmall"} key={essence.color.toString()} background="dark-1" gap="xsmall" pad="small" align="left">
                                 <ComponentAndLabel
-                                    label={Object.keys(SummonEssenceColor)[Object.values(SummonEssenceColor).indexOf(essence.color as number as SummonEssenceColor)]}
+                                    label={SummoningDomain.getEssenceColorName(essence.color)}
                                     component={
                                         <Box gap="small" direction="row" align="center">
                                             <IconImage data={SummoningDomain.getEssenceIcon(essence.color)} />

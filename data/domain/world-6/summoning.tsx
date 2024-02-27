@@ -329,6 +329,10 @@ export class Summoning extends Domain {
             width: 25
         }
     }
+
+    static getEssenceColorName = (color: SummonEssenceColor): string => {
+        return Object.keys(SummonEssenceColor)[Object.values(SummonEssenceColor).indexOf(color as number as SummonEssenceColor)];
+    }
 }
 
 export const updateSummoningLevelAndBonuses = (data: Map<string, any>) => {
