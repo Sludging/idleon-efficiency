@@ -72,17 +72,15 @@ function Sneaking() {
             <Box margin={{ bottom: 'medium' }}>
                 <PlayerActivitySection sneakingPlayers={sneaking.players} players={players} />
             </Box>
-            <Box margin={{ bottom: 'medium' }}>
-                <PristineCharmSection charms={sneaking.pristineCharms} />
-            </Box>
             <Box align="center" direction="row" justify="center" gap="small">
-                {["Jade Upgrades", "Sneaking Upgrades"].map((tabName, index) => (
+                {["Jade Upgrades", "Sneaking Upgrades", "Pristine Charms"].map((tabName, index) => (
                     <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
                 ))
                 }
             </Box>
             {activeTab == "Jade Upgrades" && <JadeUpgrades currentJade={sneaking.jade} indexOfBestUpgrade={indexOfBestUpgrade} jadeUpgrades={jadeUpgrades} />}
             {activeTab == "Sneaking Upgrades" && <SneakingUpgrades currentJade={sneaking.jade} upgrades={sneaking.sneakingUpgrades} />}
+            {activeTab == "Pristine Charms" && <PristineCharmSection charms={sneaking.pristineCharms} />}
         </Box>
     )
 }

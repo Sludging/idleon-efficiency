@@ -2,30 +2,33 @@ import { Box, Grid, Text } from "grommet"
 import { PristineCharm } from "../../../data/domain/world-6/sneaking"
 import TipDisplay, { TipDirection } from "../../base/TipDisplay"
 import IconImage from "../../base/IconImage"
+import ShadowBox from "../../base/ShadowBox"
+import TextAndLabel from "../../base/TextAndLabel"
 
 export const PristineCharmSection = ({ charms }: { charms: PristineCharm[] }) => {
     return (
         <Box margin={{ bottom: 'xsmall' }} gap="small">
             <Text size="large">Pristine Charms</Text>
-            <Box direction="row" wrap>
+            <Grid columns={{ size: 'auto', count: 4 }} fill>
                 {
-                    charms.map((charm, index) => (
-                        <Box key={index} style={{ opacity: charm.unlocked == true ? 1 : 0.3 }} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} align="center">
-                            <TipDisplay
-                                size='medium'
-                                heading={charm.data.name}
-                                body={charm.getBonusText()}
-                                direction={TipDirection.Down}
-                            >
-                                <Box direction="row" pad={{ vertical: 'small', horizontal: 'xxsmall' }} align="center" gap='small'>
-                                    <IconImage data={charm.getImageData()} scale={0.5} />
-                                    <Text size="xsmall">{charm.data.name}</Text>
+                    // Once I stop hiding info from people, just get rid of the filter and the unlock more upgrades to see section.
+                    // For now I'm showing available ones + 3 "hidden" ones.
+                    charms.map((charm, index) => {
+                        return (
+                            <ShadowBox style={{ opacity: charm.unlocked ? 1 : 0.3 }} key={index} background="dark-1" margin={{ right: 'small', bottom: 'small' }} pad="medium" gap="medium">
+                                <Box gap="small">
+                                    <Box direction="row" gap="medium" align="center">
+                                        <IconImage data={charm.getImageData()} scale={0.5} />
+                                        <Text size="small">{charm.data.name}</Text>
+                                    </Box>
+                                    <TextAndLabel textSize='xsmall' text={charm.getBonusText()} label={"Bonus"} />
                                 </Box>
-                            </TipDisplay>
-                        </Box>
-                    ))
+                            </ShadowBox>
+                        )
+                    })
+
                 }
-            </Box>
+            </Grid>
         </Box>
     )
 }
