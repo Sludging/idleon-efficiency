@@ -123,7 +123,8 @@ export interface SummonEssence {
     color: SummonEssenceColor,
     quantity: number,
     display: boolean,
-    victories: number
+    victories: number,
+    maxBattles: number
 }
 
 export class Summoning extends Domain {
@@ -272,7 +273,14 @@ export class Summoning extends Domain {
                 colorVictories = victories[index];
             }
 
-            summoning.summonEssences.push({ color: index, quantity: value, display: shouldDisplay, victories: colorVictories});
+            let colorMaxBattles: number = 0;
+            if (index == 0) {
+                colorMaxBattles = WhiteBattleOrder.length;
+            } else if (index-1 < deathNoteMobOrder.length) {
+                colorMaxBattles = deathNoteMobOrder[index-1].length;
+            }
+
+            summoning.summonEssences.push({ color: index, quantity: value, display: shouldDisplay, victories: colorVictories, maxBattles: colorMaxBattles});
         });
 
         summoning.updateUnlockedUpgrades();
