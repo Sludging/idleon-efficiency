@@ -12,6 +12,7 @@ import { SummonEnemyBonusModel } from "../model/summonEnemyBonusModel";
 import { Sneaking } from "./sneaking";
 import { nFormatter } from "../../utility";
 import { Deathnote, deathNoteMobOrder } from '../deathnote';
+import { SummonEnemyModel } from "../model/summonEnemyModel";
 
 const WhiteBattleOrder = [
     "Pet1", "Pet2", "Pet3", "Pet0", "Pet4", "Pet6", "Pet5", "Pet10", "Pet11"
@@ -124,7 +125,7 @@ export interface SummonEssence {
     quantity: number,
     display: boolean,
     victories: number,
-    maxBattles: number
+    battles: SummonEnemyModel[]
 }
 
 export class Summoning extends Domain {
@@ -132,6 +133,10 @@ export class Summoning extends Domain {
     summonBonuses: SummonBonus[] = [];
     summonEssences: SummonEssence[] = [];
     summoningLevel: number = 0;
+    allVictories: number[] = [];
+    allBattles: SummonEnemyModel[][] = [];
+    currentHealth: number = 0;
+    maxHealth: number = 0;
 
     updateUnlockedUpgrades = () => {
         this.summonUpgrades.forEach(upgrade => {
@@ -210,28 +215,49 @@ export class Summoning extends Domain {
             .map(
             base => new SummonUpgrade(base.index, base.data, summoningData[0][base.index] ?? 0)
         );
+
+        summoning.summonBonuses = initSummonEnemyBonusRepo()
+        .map(
+            base => new SummonBonus(base.index, base.data)
+        );
         
-        const victories = [0,0,0,0,0,0,0,0,0] as number[];
+        // Already add values for next essences even if shouldn't use all indexes
+        this.allVictories = [0,0,0,0,0,0,0,0];
         const enemyRepo = initSummonEnemyRepo();
+
+        // Create an array of array that contains all summoning battles in the right order using WhiteBattleOrder then DeathNoteOrder for other colors
+        summoning.allBattles = [[], [], [], [], [], [], [], []];
+        WhiteBattleOrder.forEach(battle => {
+            const enemyData = enemyRepo.find((enemy) => enemy.data.enemyId == battle);
+            if (enemyData) {
+                summoning.allBattles[0].push(enemyData.data);
+            }
+        });
+        for (let i = 0; i < deathNoteMobOrder.length; i++) {
+            deathNoteMobOrder[i].forEach(mob => {
+                const enemyData = enemyRepo.find((enemy) => enemy.data.enemyId == mob);
+                if (enemyData) {
+                    summoning.allBattles[i+1].push(enemyData.data);
+                }
+            })            
+        }
+
         const wonBattles = summoningData[1] as string[];
         wonBattles.forEach((battle) => {
+            // For each win we increment the relevant bonus value and add a victory to the associated color
             const enemyData = enemyRepo.find((enemy) => enemy.data.enemyId == battle);
             if (enemyData) {
                 const relevantBonus = summoning.summonBonuses.find(bonus => bonus.data.bonusId == enemyData.data.bonusId);
                 if (relevantBonus) {
                     relevantBonus.bonusValue += enemyData.data.bonusQty as number;
                 }
-                switch(true) {
-                    case WhiteBattleOrder.includes(battle):
-                        victories[0]++;
-                        break;
-                    default:
-                        for (let i = 0; i < deathNoteMobOrder.length; i++) {
-                            if (deathNoteMobOrder[i].includes(battle)) {
-                                victories[i+1]++;
-                                break;
-                            }
-                        }
+
+                // Add a victory to the corresponding color
+                for (let i = 0; i < this.allBattles.length; i++) {
+                    if (this.allBattles[i].includes(enemyData.data)) {
+                        this.allVictories[i]++;
+                        return;
+                    }
                 }
             }
         });
@@ -269,8 +295,8 @@ export class Summoning extends Domain {
             }
 
             let colorVictories: number = 0;
-            if (index < victories.length) {
-                colorVictories = victories[index];
+            if (index < this.allVictories.length) {
+                colorVictories = this.allVictories[index];
             }
 
             let colorMaxBattles: number = 0;
@@ -280,15 +306,20 @@ export class Summoning extends Domain {
                 colorMaxBattles = deathNoteMobOrder[index-1].length;
             }
 
-            summoning.summonEssences.push({ color: index, quantity: value, display: shouldDisplay, victories: colorVictories, maxBattles: colorMaxBattles});
+            let colorBattles: SummonEnemyModel[] = [];
+            if (index < this.allBattles.length) {
+                colorBattles = this.allBattles[index];
+            }
+
+            summoning.summonEssences.push({ color: index, quantity: value, display: shouldDisplay, victories: colorVictories, battles: colorBattles });
         });
 
         summoning.updateUnlockedUpgrades();
 
-        summoning.summonBonuses = initSummonEnemyBonusRepo()
-        .map(
-            base => new SummonBonus(base.index, base.data)
-        );
+        summoning.currentHealth = summoningData[3][0] ?? 0;
+        summoning.maxHealth = summoningData[3][2] ?? 0;
+
+        console.log(summoning.currentHealth+"/"+summoning.maxHealth);
     }
 
     static getEssenceIcon(color: SummonEssenceColor): ImageData {
