@@ -8,6 +8,7 @@ import { SigilModel } from "./model/sigilModel";
 import { Sailing } from "./sailing";
 import { Stamp } from "./stamps";
 import { Alchemy as AlchemyData } from '../../data/domain/alchemy';
+import { Summoning } from "./world-6/summoning";
 
 export class Sigil {
     progress: number = 0
@@ -48,10 +49,9 @@ export class Sigils extends Domain {
 
     chargeSpeed: number = 0;
 
-
-    // TODO : Add bonus from Summoning Winner bonuses
-    setSigilSpeed = (achievBonus112: number, gemStoreBonus110: number, stampStampC12: number, vialBonus61: number) => {
-        this.chargeSpeed = 1 + ((achievBonus112 + stampStampC12 + this.sigils[12].getBonus() + gemStoreBonus110 + vialBonus61) / 100);
+    // "SigilBonusSpeed" == d
+    setSigilSpeed = (achievBonus112: number, gemStoreBonus110: number, stampStampC12: number, vialBonus61: number, summoningBonus8: number) => {
+        this.chargeSpeed = (1 + ((achievBonus112 + stampStampC12 + this.sigils[12].getBonus() + gemStoreBonus110 + vialBonus61) / 100)) * summoningBonus8;
     }
 
     getRawKeys(): RawData[] {
@@ -104,19 +104,20 @@ export const updateSigils = (data: Map<string, any>) => {
 }
 
 export const updateSigilsChargeSpeed = (data: Map<string, any>) => {
-    // TODO : Add the bonus from summoning winner bonuses once there's a way to get it
     const sigils = data.get("sigils") as Sigils;
     const gemStore = data.get("gems") as GemStore;
     const achievements = data.get("achievements") as Achievement[];
     const stampData = data.get("stamps") as Stamp[][];
-    const alchemyData = data.get("alchemy") as AlchemyData;
+    const alchemy = data.get("alchemy") as AlchemyData;
+    const summoning = data.get("summoning") as Summoning;
 
     const sigilAchiev = achievements[112].completed ? 20 : 0;
     const sigilGemBonus = (gemStore.purchases.find(purchase => purchase.no == 110)?.pucrhased ?? 0) * 20;
     const stampBonus = stampData[2]?.find(stamp => stamp.raw_name == "StampC12")?.getBonus() || 0;
-    const vialBonus = alchemyData.vials?.find(vial => vial.vialIndex == 61)?.getBonus() || 0;
+    const vialBonus = alchemy.vials?.find(vial => vial.vialIndex == 61)?.getBonus() || 0;
+    const summoningBonus = 1 + (summoning.summonBonuses?.find(bonus => bonus.data.bonusId == 8)?.getBonus() ?? 0) / 100;
 
-    sigils.setSigilSpeed(sigilAchiev, sigilGemBonus, stampBonus, vialBonus);
+    sigils.setSigilSpeed(sigilAchiev, sigilGemBonus, stampBonus, vialBonus, summoningBonus);
 
     return sigils;
 }
