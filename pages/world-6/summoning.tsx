@@ -6,7 +6,7 @@ import {
 import { NextSeo } from 'next-seo';
 import { useContext, useState } from 'react';
 import { AppContext } from '../../data/appContext';
-import { SummonEssenceColor, Summoning as SummoningDomain, SummonEssence } from '../../data/domain/world-6/summoning';
+import { SummonEssenceColor, Summoning as SummoningDomain, SummonEssence, BattlesInfo } from '../../data/domain/world-6/summoning';
 import { Player } from '../../data/domain/player';
 import IconImage from '../../components/base/IconImage';
 import ShadowBox from '../../components/base/ShadowBox';
@@ -58,7 +58,7 @@ function Summoning() {
                 </Box>
                 {activeTab == "Winner bonuses" && <SummoningBonuses bonuses={ summoning.summonBonuses } />}
                 {activeTab == "Summoning Upgrades" && <SummoningUpgrades essences={ summoning.summonEssences } upgrades={ summoning.summonUpgrades } />}
-                {activeTab == "Battles" && <SummoningBattles battles={ summoning.allBattles } essences={ summoning.summonEssences } currentHealth={ summoning.currentHealth } maxHealth={ summoning.maxHealth } />}
+                {activeTab == "Battles" && <SummoningBattles battlesInfos={ summoning.summonBattles } essences={ summoning.summonEssences } />}
             </Box>
         )
     }

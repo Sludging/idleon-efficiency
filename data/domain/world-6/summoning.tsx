@@ -25,7 +25,7 @@ export enum SummonEssenceColor {
     Blue = 3,
     Purple = 4,
     Red = 5,
-    FutureContent2 = 6,
+    Cyan = 6,
     FutureContent3 = 7,
     FutureContent4 = 8
 }
@@ -128,15 +128,43 @@ export interface SummonEssence {
     battles: SummonEnemyModel[]
 }
 
+export class BattlesInfo {
+    allVictories: number[] = [];
+    allBattles: SummonEnemyModel[][] = [];
+    currentHealth: number = 0;
+    maxHealth: number = 0;
+    playerUnitsHP: number = 0;
+    playerUnitsAtk: number = 0;
+
+    constructor() {}
+
+    static getBattleBonusText = (battle: SummonEnemyBonusModel | undefined, bonusValue: number): string => {
+        if (battle) {
+            const bonus = 3.5 * bonusValue;
+            switch (battle.bonusId) {
+                // Only those bonuses have a '{' to be replaced by the bonus value, others use a '<'
+                case 5:
+                case 10:
+                case 12:
+                case 13:
+                case 19:
+                case 20:
+                    return battle.bonus.replace(/{/, nFormatter(bonus));
+                default:
+                    return battle.bonus.replace(/</, nFormatter(1 + bonus / 100));
+            }
+        } else {
+            return "";
+        }
+    }
+}
+
 export class Summoning extends Domain {
     summonUpgrades: SummonUpgrade[] = [];
     summonBonuses: SummonBonus[] = [];
     summonEssences: SummonEssence[] = [];
     summoningLevel: number = 0;
-    allVictories: number[] = [];
-    allBattles: SummonEnemyModel[][] = [];
-    currentHealth: number = 0;
-    maxHealth: number = 0;
+    summonBattles: BattlesInfo = new BattlesInfo();
 
     updateUnlockedUpgrades = () => {
         this.summonUpgrades.forEach(upgrade => {
@@ -222,22 +250,22 @@ export class Summoning extends Domain {
         );
         
         // Already add values for next essences even if shouldn't use all indexes
-        this.allVictories = [0,0,0,0,0,0,0,0];
+        summoning.summonBattles.allVictories = [0,0,0,0,0,0,0,0];
         const enemyRepo = initSummonEnemyRepo();
 
         // Create an array of array that contains all summoning battles in the right order using WhiteBattleOrder then DeathNoteOrder for other colors
-        summoning.allBattles = [[], [], [], [], [], [], [], []];
+        summoning.summonBattles.allBattles = [[], [], [], [], [], [], [], []];
         WhiteBattleOrder.forEach(battle => {
             const enemyData = enemyRepo.find((enemy) => enemy.data.enemyId == battle);
             if (enemyData) {
-                summoning.allBattles[0].push(enemyData.data);
+                summoning.summonBattles.allBattles[0].push(enemyData.data);
             }
         });
         for (let i = 0; i < deathNoteMobOrder.length; i++) {
             deathNoteMobOrder[i].forEach(mob => {
                 const enemyData = enemyRepo.find((enemy) => enemy.data.enemyId == mob);
                 if (enemyData) {
-                    summoning.allBattles[i+1].push(enemyData.data);
+                    summoning.summonBattles.allBattles[i+1].push(enemyData.data);
                 }
             })            
         }
@@ -253,9 +281,9 @@ export class Summoning extends Domain {
                 }
 
                 // Add a victory to the corresponding color
-                for (let i = 0; i < this.allBattles.length; i++) {
-                    if (this.allBattles[i].includes(enemyData.data)) {
-                        this.allVictories[i]++;
+                for (let i = 0; i < this.summonBattles.allBattles.length; i++) {
+                    if (this.summonBattles.allBattles[i].includes(enemyData.data)) {
+                        this.summonBattles.allVictories[i]++;
                         return;
                     }
                 }
@@ -286,7 +314,7 @@ export class Summoning extends Domain {
                 case SummonEssenceColor.Red:
                     shouldDisplay = (this.summonUpgrades?.find(upgrade => upgrade.index == 44)?.level ?? 0) > 0;
                     break;
-                case SummonEssenceColor.FutureContent2:
+                case SummonEssenceColor.Cyan:
                 case SummonEssenceColor.FutureContent3:
                 case SummonEssenceColor.FutureContent4:
                 default:
@@ -295,8 +323,8 @@ export class Summoning extends Domain {
             }
 
             let colorVictories: number = 0;
-            if (index < this.allVictories.length) {
-                colorVictories = this.allVictories[index];
+            if (index < this.summonBattles.allVictories.length) {
+                colorVictories = this.summonBattles.allVictories[index];
             }
 
             let colorMaxBattles: number = 0;
@@ -307,19 +335,21 @@ export class Summoning extends Domain {
             }
 
             let colorBattles: SummonEnemyModel[] = [];
-            if (index < this.allBattles.length) {
-                colorBattles = this.allBattles[index];
+            if (index < this.summonBattles.allBattles.length) {
+                colorBattles = this.summonBattles.allBattles[index];
             }
 
             summoning.summonEssences.push({ color: index, quantity: value, display: shouldDisplay, victories: colorVictories, battles: colorBattles });
         });
 
+        summoning.summonBattles.playerUnitsHP = 1 * (1 + ((summoning.summonUpgrades.find(upgrade => upgrade.index == 1)?.getBonus() ?? 0) + ((summoning.summonUpgrades.find(upgrade => upgrade.index == 10)?.getBonus() ?? 0) + ((summoning.summonUpgrades.find(upgrade => upgrade.index == 35)?.getBonus() ?? 0) + (summoning.summonUpgrades.find(upgrade => upgrade.index == 37)?.getBonus() ?? 0))))) * (1 + (summoning.summonUpgrades.find(upgrade => upgrade.index == 20)?.getBonus() ?? 0) / 100)
+
+        summoning.summonBattles.playerUnitsAtk =  1 * (1 + ((summoning.summonUpgrades.find(upgrade => upgrade.index == 3)?.getBonus() ?? 0) + ((summoning.summonUpgrades.find(upgrade => upgrade.index == 12)?.getBonus() ?? 0) + ((summoning.summonUpgrades.find(upgrade => upgrade.index == 21)?.getBonus() ?? 0) + (summoning.summonUpgrades.find(upgrade => upgrade.index == 31)?.getBonus() ?? 0))))) * (1 + (summoning.summonUpgrades.find(upgrade => upgrade.index == 43)?.getBonus() ?? 0) / 100)
+
         summoning.updateUnlockedUpgrades();
 
-        summoning.currentHealth = summoningData[3][0] ?? 0;
-        summoning.maxHealth = summoningData[3][2] ?? 0;
-
-        console.log(summoning.currentHealth+"/"+summoning.maxHealth);
+        summoning.summonBattles.currentHealth = summoningData[3][0] ?? 0;
+        summoning.summonBattles.maxHealth = summoningData[3][2] ?? 0;
     }
 
     static getEssenceIcon(color: SummonEssenceColor): ImageData {
