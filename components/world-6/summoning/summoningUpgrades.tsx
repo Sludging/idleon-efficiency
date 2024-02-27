@@ -11,52 +11,54 @@ const ColorSection = ({ upgrades, essence, index }: { upgrades: SummonUpgrade[],
         <Grid columns={{ size: 'small', count: 'fill' }} pad="small" border={{ side: 'top', color: borderColor }} fill>
             {
                 upgrades
-                .map((upgrade, index) => {
-                    const canAfford = essence.quantity > upgrade.nextLevelCost();
-                    return (
-                        <ShadowBox style={{ opacity: upgrade.level > 0 ? 1 : 0.6 }} key={index} background="dark-1" margin={{ right: 'small', bottom: 'small' }} pad="medium" gap="medium">
-                            <Box direction="column" gap="small">
-                                <Box direction="row" gap="small" align="center">
-                                    <Stack>
-                                        <Box>
-                                            <IconImage data={upgrade.getBorderImageData()} />
+                    .map((upgrade, index) => {
+                        const canAfford = essence.quantity > upgrade.nextLevelCost();
+                        return (
+                            <ShadowBox style={{ opacity: upgrade.level > 0 ? 1 : 0.6 }} key={index} background="dark-1" margin={{ right: 'small', bottom: 'small' }} pad="medium" gap="medium">
+                                <Box gap="small" justify="between" fill>
+                                    <Box gap="small">
+                                        <Box direction="row" gap="small" align="center">
+                                            <Stack>
+                                                <Box>
+                                                    <IconImage data={upgrade.getBorderImageData()} />
+                                                </Box>
+                                                <Box>
+                                                    <IconImage data={upgrade.getImageData()} />
+                                                </Box>
+                                            </Stack>
+                                            <Box>
+                                                <Text size="small">{upgrade.data.name}</Text>
+                                                <Text size="small">{upgrade.getLevelDisplay()}</Text>
+                                            </Box>
                                         </Box>
-                                        <Box>
-                                            <IconImage data={upgrade.getImageData()} />
-                                        </Box>                                                
-                                    </Stack>     
-                                    <Box direction="column">
-                                        <Text size="small">{upgrade.data.name}</Text>
-                                        <Text size="small">{upgrade.getLevelDisplay()}</Text>
+                                        <TextAndLabel textSize='xsmall' text={upgrade.getBonusText()} label={"Bonus"} />
                                     </Box>
+                                    {
+                                        <ComponentAndLabel
+                                            label={upgrade.level > 0 ? "Next level cost" : "Unlock Cost"}
+                                            component={
+                                                upgrade.level < upgrade.data.maxLvl ?
+                                                    <Box gap="xsmall" direction="row" align="center">
+                                                        <IconImage data={SummoningDomain.getEssenceIcon(essence.color)} />
+                                                        <Text color={canAfford ? 'green-1' : ''} size="small">{nFormatter(upgrade.nextLevelCost())}</Text>
+                                                    </Box>
+                                                    :
+                                                    <Box gap="xsmall" direction="row" align="center">
+                                                        <Text size="small">MAXED</Text>
+                                                    </Box>
+                                            }
+                                        />
+                                    }
                                 </Box>
-                                <TextAndLabel textSize='xsmall' text={upgrade.getBonusText()} label={"Bonus"} />
-                                {
-                                    <ComponentAndLabel
-                                        label={upgrade.level > 0 ? "Next level cost" : "Unlock Cost"}
-                                        component={
-                                            upgrade.level < upgrade.data.maxLvl ?
-                                            <Box gap="xsmall" direction="row" align="center">
-                                                <IconImage data={SummoningDomain.getEssenceIcon(essence.color)} />
-                                                <Text color={canAfford ? 'green-1' : ''} size="small">{nFormatter(upgrade.nextLevelCost())}</Text>
-                                            </Box>
-                                            :
-                                            <Box gap="xsmall" direction="row" align="center">
-                                                <Text size="small">MAXED</Text>
-                                            </Box>
-                                        }
-                                    />
-                                }
-                            </Box>
-                        </ShadowBox>
-                    )
-                })
+                            </ShadowBox>
+                        )
+                    })
             }
         </Grid>
     )
 }
 
-export const SummoningUpgrades = ({ upgrades, essences } : { upgrades: SummonUpgrade[], essences: SummonEssence[] } ) => {
+export const SummoningUpgrades = ({ upgrades, essences }: { upgrades: SummonUpgrade[], essences: SummonEssence[] }) => {
     // Once stop hiding info from people, just get rid of the filter on unlocked, the shouldBeDisplayed filter out useless placeholder bonuses
     // For now showing only unlocked ones that are displayed in-game.
     const upgradesToDisplay = upgrades.filter(upgrade => upgrade.shouldBeDisplayed == true && upgrade.unlocked);
@@ -71,7 +73,7 @@ export const SummoningUpgrades = ({ upgrades, essences } : { upgrades: SummonUpg
                             .filter(essence => essence.display == true)
                             .map((essence, index) => (
                                 <ColorSection key={index} index={index} upgrades={upgradesToDisplay.filter(upgrade => upgrade.data.colour == essence.color)} essence={essence} />
-                        ))
+                            ))
                     }
                 </Box>
             </Box>
