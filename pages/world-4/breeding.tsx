@@ -252,19 +252,16 @@ function ShinyDisplay() {
 
     // Get breeding data, if it's not available yet just show placeholder loading.
     const breeding = appContext.data.getData().get("breeding") as BreedingDomain;
-    if (!breeding) {
-        return (
-            <Box>
-                Still loading
-            </Box>
-        )
-    }
 
     // our sort options are fixed, so just statically set them.
     const sortOptions = ["Level", "Least Time to Next Level"];
 
     // Filter options are a bit more complicated to seem to require client side loading, so wrapped in useEffect.
     useEffect(() => {
+        // If we are still loading, do nothing.
+        if (!breeding) {
+            return
+        }
         const filterOptions = breeding.shinyBonuses?.map(bonus => {
             return bonus.data.text.replaceAll('{', '');
         }).filter(uniqueFilter);
@@ -276,6 +273,10 @@ function ShinyDisplay() {
     }, [appContext, breeding]);
 
     const petsToShow = useMemo(() => {
+        // If we are still loading, do nothing.
+        if (!breeding) {
+            return [];
+        }
         // Start with a base list of all pets
         let pets: Pet[] = breeding.basePets.filter(pet => pet.data.petId != "_");
 
@@ -324,6 +325,14 @@ function ShinyDisplay() {
             }
         })
     }, [breeding, sort, filter])
+
+    if (!breeding) {
+        return (
+            <Box>
+                Still loading
+            </Box>
+        )
+    }
 
     return (
         <Box gap="small">
