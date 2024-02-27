@@ -114,9 +114,9 @@ function ShowSkills(props: SkillProps) {
                     ['mining', 'fishing', 'trapping', 'cooking'],
                     ['smithing', 'alchemy', 'construction', 'breeding'],
                     ['chopping', 'catching', 'worship', 'intellect'],
-                    ['sailing', 'empty', 'empty', 'empty'],
-                    ['divinity', 'empty', 'empty', 'empty'],
-                    ['gaming', 'empty', 'empty', 'empty'],
+                    ['sailing', 'farming', 'empty', 'empty'],
+                    ['divinity', 'sneaking', 'empty', 'empty'],
+                    ['gaming', 'summoning', 'empty', 'empty'],
                 ]}
             >
                 {
