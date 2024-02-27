@@ -11,6 +11,11 @@ import { Player } from "../player";
 import { SummonEnemyBonusModel } from "../model/summonEnemyBonusModel";
 import { Sneaking } from "./sneaking";
 import { nFormatter } from "../../utility";
+import { Deathnote, deathNoteMobOrder } from '../deathnote';
+
+const WhiteBattleOrder = [
+    "Pet1", "Pet2", "Pet3", "Pet0", "Pet4", "Pet6", "Pet5", "Pet10", "Pet11"
+]
 
 export enum SummonEssenceColor {
     White = 0,
@@ -204,13 +209,36 @@ export class Summoning extends Domain {
             .map(
             base => new SummonUpgrade(base.index, base.data, summoningData[0][base.index] ?? 0)
         );
+        
+        const victories = [0,0,0,0,0,0,0,0,0] as number[];
+        const enemyRepo = initSummonEnemyRepo();
+        const wonBattles = summoningData[1] as string[];
+        wonBattles.forEach((battle) => {
+            const enemyData = enemyRepo.find((enemy) => enemy.data.enemyId == battle);
+            if (enemyData) {
+                const relevantBonus = summoning.summonBonuses.find(bonus => bonus.data.bonusId == enemyData.data.bonusId);
+                if (relevantBonus) {
+                    relevantBonus.bonusValue += enemyData.data.bonusQty as number;
+                }
+                switch(true) {
+                    case WhiteBattleOrder.includes(battle):
+                        victories[0]++;
+                        break;
+                    default:
+                        for (let i = 0; i < deathNoteMobOrder.length; i++) {
+                            if (deathNoteMobOrder[i].includes(battle)) {
+                                victories[i+1]++;
+                                break;
+                            }
+                        }
+                }
+            }
+        });
 
         summoning.summonEssences = [];
         const essences = summoningData[2] as number[];
         essences.forEach((value, index) => {
             let shouldDisplay: boolean = false;
-            // TODO : Get the number of victories for each color
-            let victories: number = 0;
             switch(index) {
                 case SummonEssenceColor.White:
                     shouldDisplay = true;
@@ -238,7 +266,13 @@ export class Summoning extends Domain {
                     shouldDisplay = false;
                     break;
             }
-            summoning.summonEssences.push({ color: index, quantity: value, display: shouldDisplay, victories: victories });
+
+            let colorVictories: number = 0;
+            if (index < victories.length) {
+                colorVictories = victories[index];
+            }
+
+            summoning.summonEssences.push({ color: index, quantity: value, display: shouldDisplay, victories: colorVictories});
         });
 
         summoning.updateUnlockedUpgrades();
@@ -247,18 +281,6 @@ export class Summoning extends Domain {
         .map(
             base => new SummonBonus(base.index, base.data)
         );
-
-        const enemyRepo = initSummonEnemyRepo();
-        const wonBattles = summoningData[1] as string[];
-        wonBattles.forEach((battle) => {
-            const enemyData = enemyRepo.find((enemy) => enemy.data.enemyId == battle);
-            if (enemyData) {
-                const relevantBonus = summoning.summonBonuses.find(bonus => bonus.data.bonusId == enemyData.data.bonusId);
-                if (relevantBonus) {
-                    relevantBonus.bonusValue += enemyData.data.bonusQty as number;
-                }
-            }
-        });
     }
 
     static getEssenceIcon(color: SummonEssenceColor): ImageData {
