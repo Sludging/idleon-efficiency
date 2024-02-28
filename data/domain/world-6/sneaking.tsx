@@ -55,12 +55,15 @@ const jadeUpgradeDisplayOrder = [0, 12, 5, 8, 22, 27, 18, 1, 17, 24, 19, 25, 13,
 
 export class JadeUpgrade {
     purchased: boolean = false;
+    display: boolean = true;
 
     // This comes from servervars -> A_empoExpon
     // Setting default value to what it was first time I looked at it :shrug:.
     costExponent: number = 2.52;
 
-    constructor(public index: number, public data: JadeUpgradeModel, public displayOrder: number = 0) {}
+    constructor(public index: number, public data: JadeUpgradeModel, public displayOrder: number = 0) {
+
+    }
 
     getImageData = (): ImageData => {
         return {
@@ -165,6 +168,8 @@ export class Sneaking extends Domain {
     sneakingUpgrades: SneakingUpgrade[] = SneakingUpgrade.fromBase(initNinjaUpgradeRepo());
     jadeUpgrades: JadeUpgrade[] = initJadeUpgradeRepo()
         .filter(base => !["idk", "Idk yet"].includes(base.data.bonus))
+        // Will need to remove "Mob Cosplay Craze" once previous bonus are actives
+        .filter(base => !["UNDER CONSTRUCTION", "NAME NEEDED", "Mob Cosplay Craze"].includes(base.data.name))
         .map(
         base => new JadeUpgrade(base.index, base.data, jadeUpgradeDisplayOrder.indexOf(base.index))
     );

@@ -11,10 +11,8 @@ export const SneakingUpgrades = ({ upgrades, currentJade } : { upgrades: Sneakin
             <Box direction="row" wrap margin={{ top: 'large' }}>
                 <Grid columns={{ size: 'medium', count: 'fill' }} fill>
                     {
-                        // Once stop hiding info from people, just get rid of the filter on unlocked, the shouldBeDisplayed filter out useless placeholder bonuses
-                        // For now showing only unlocked ones that are displayed in-game.
                         upgrades
-                            .filter(upgrade => upgrade.shouldBeDisplayed == true && upgrade.unlocked)
+                            .filter(upgrade => upgrade.shouldBeDisplayed == true)
                             .map((upgrade, index) => {
                                 const canAfford = currentJade > upgrade.nextLevelCost();
                                 return (
