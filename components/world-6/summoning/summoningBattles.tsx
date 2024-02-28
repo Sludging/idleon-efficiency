@@ -40,7 +40,7 @@ export const SummoningBattles = ({ battlesInfos, essences }: { battlesInfos: Bat
                                 return (
                                     <ShadowBox width={{ max: '250px' }} background="dark-1" key={index} pad="medium" margin={{ right: 'small', bottom: 'medium' }}>
                                         <Box direction="row" gap="small" pad="small">
-                                            <IconImage data={SummoningDomain.getEssenceIcon(essence.color)} />
+                                            <IconImage data={SummoningDomain.getSummoningStoneIcon(essence.color)} />
                                             <Text>{SummoningDomain.getEssenceColorName(essence.color)} ({essence.victories}/{essence.battles.length})</Text>
                                         </Box>
                                         {

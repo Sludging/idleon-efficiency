@@ -361,9 +361,17 @@ export class Summoning extends Domain {
         summoning.summonBattles.maxHealth = summoningData[3][2] ?? 0;
     }
 
-    static getEssenceIcon(color: SummonEssenceColor): ImageData {
+    static getSummoningStoneIcon(color: SummonEssenceColor): ImageData {
         return {
             location: `SummC${color+1}`,
+            height: 25,
+            width: 25
+        }
+    }
+
+    static getEssenceIcon(color: SummonEssenceColor): ImageData {
+        return {
+            location: `W6item${color + 6}_x1`,
             height: 25,
             width: 25
         }
