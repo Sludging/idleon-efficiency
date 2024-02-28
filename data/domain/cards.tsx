@@ -9,7 +9,7 @@ import { IDforCardSETbonus } from "./cardSets";
 import { CardDataModel } from "./model/cardDataModel";
 import { Player } from "./player";
 import { Rift, SkillMastery } from "./rift";
-import { initCardDropChanceRepo, CardDropChanceBase } from './data/CardDropChanceRepo';
+import { initCardDropChanceRepo } from './data/CardDropChanceRepo';
 import { nFormatter } from '../utility';
 
 export class Card {
