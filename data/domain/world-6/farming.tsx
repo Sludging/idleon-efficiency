@@ -27,15 +27,19 @@ export class Seed {
 export class Plot {
     // -1 means the Plot is empty
     seedIndex: number = -1;
+    // CropId
     cropIndex: number = 0;
     // If true can't evolve, but can still OverGrow
     locked: boolean = false;
-    // Time in seconds since last Collecting or Planting
-    secondesSinceLastInteraction: number = 0;
-
-    toDefine1: number = 0;
-    toDefine2: number = 0;
-    toDefine3: number = 0;
+    // Time in seconds since last Collecting or Planting, it stop incrementing once the plant is fully grown
+    growthTimeInSeconds: number = 0;
+    // Base quantity of crops to be collected 
+    quantityToCollect: number = 0;
+    // Level of Overgrowth 
+    OGlevel: number = 0;
+    // seconds since last cycle have ended, reset to 0 once an overgrow cycle end
+    // Only start incrementing when plant is fully grown
+    overgrowthTimeInSeconds: number = 0;
 
     constructor(public index: number) {}
 }
@@ -46,6 +50,7 @@ export class Farming extends Domain {
     seeds: Seed[] = initSeedInfoRepo().map((seed) => { return new Seed(seed.index, seed.data) });;
     cropDepot: Crop[] = [];
     farmingLevel: number = 0;
+    canOvergrow: boolean = false;
 
     getRawKeys(): RawData[] {
         return [
@@ -87,24 +92,22 @@ export class Farming extends Domain {
         });
         
         farming.farmPlots = [];
-        console.log("Plots :");
         plotsData.forEach((plotInfo, index) => {
-            console.log(index + " : " + plotInfo);
             let plot: Plot = new Plot(index);
             plot.seedIndex = plotInfo[0];
             // If seedIndex = -1 then the plot is empty, so no more information are needed
-            if(plot.seedIndex > -1) {
-                plot.secondesSinceLastInteraction = plotInfo[1];
+            if (plot.seedIndex > -1) {
+                plot.growthTimeInSeconds = plotInfo[1];
                 plot.cropIndex = plotInfo[2] + (farming.seeds.find(seed => seed.index == plot.seedIndex)?.data.cropIdMin ?? 0);
                 plot.locked = (plotInfo[3] == 1);
-
-                // TODO : figure out the last 3 (might be OG, evolution or something like that, will need to wait for my crops to grow to check)
-                plot.toDefine1 = plotInfo[4];
-                plot.toDefine2 = plotInfo[5];
-                plot.toDefine3 = plotInfo[6];
+                plot.quantityToCollect = plotInfo[4];
+                plot.OGlevel = plotInfo[5];
+                plot.overgrowthTimeInSeconds = plotInfo[6];
             }
             farming.farmPlots.push(plot);
         });
+
+        console.log(farming.farmPlots);
     }
 
     getDiscoveredCropsNumber = (): number => {
