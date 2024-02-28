@@ -7,7 +7,7 @@ import { Item } from "./items";
 import { MapInfo } from "./maps";
 import { Rift } from "./rift";
 
-const deathNoteMobOrder = [
+export const deathNoteMobOrder = [
     "mushG mushR frogG beanG slimeG snakeG carrotO goblinG plank frogBIG poopSmall ratB branch acorn mushW".split(" "),
     "jarSand mimicA crabcake coconut sandcastle pincermin potato steak moonman sandgiant snailZ".split(" "),
     "sheep flake stache bloque mamoth snowball penguin thermostat glass snakeB speaker eye ram skele2".split(" "),

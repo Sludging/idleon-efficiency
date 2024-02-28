@@ -5,9 +5,11 @@ import { Domain, RawData } from "../base/domain";
 import { initJadeUpgradeRepo } from "../data/JadeUpgradeRepo";
 import { BaseNinjaItemBase, initNinjaItemRepo } from "../data/NinjaItemRepo";
 import { NinjaUpgradeBase, initNinjaUpgradeRepo } from "../data/NinjaUpgradeRepo";
+import { NinjaItemTypeEnum } from "../enum/ninjaItemTypeEnum";
 import { ImageData } from "../imageData";
 import { Item } from "../items";
 import { JadeUpgradeModel } from "../model/jadeUpgradeModel";
+import { NinjaPristineCharmModel } from "../model/ninjaPristineCharmModel";
 import { NinjaUpgradeModel } from "../model/ninjaUpgradeModel";
 
 export enum SneakingActivity {
@@ -128,9 +130,34 @@ export class SneakingUpgrade {
     }
 }
 
+export class PristineCharm {
+    unlocked: boolean = false;
+
+    constructor(public index: number, public data: NinjaPristineCharmModel, unlocked: boolean = false) {
+        this.unlocked = unlocked;
+    }
+
+    getImageData = (): ImageData => {
+        return {
+            location: `NjTrP${this.data.itemId}`,
+            height: 56,
+            width: 56
+        }
+    }
+
+    getBonusText = (): string => {
+        return this.data.bonus
+            // { Means that the bonus is "flat", we don't need to manipulate it
+            .replace(/{/, this.data.x1.toString())
+            // } Means that to display it we need to calculate the bonus value
+            .replace(/}/, (1 + this.data.x1 / 100).toString());
+    }
+}
+
 export class Sneaking extends Domain {
     inventory: SneakingEquipment[] = [];
     players: SneakingPlayer[] = [];
+    pristineCharms: PristineCharm[] = [];
     jade: number = 0;
 
     // Store the item source data so we can make decisions based on it.
@@ -141,7 +168,6 @@ export class Sneaking extends Domain {
         .map(
         base => new JadeUpgrade(base.index, base.data, jadeUpgradeDisplayOrder.indexOf(base.index))
     );
-    // Last index of "Ninja" has boolean flags for pristine charms, need to map the index to the charm name (index is in the end)
     
     // You have loot: Njloot.png
 
@@ -211,6 +237,19 @@ export class Sneaking extends Domain {
         });
         sneaking.updateUnlockedUpgrades();
 
+        const pristineCharmUnlocking: number[] = ninjaData[107];
+        sneaking.pristineCharms = [];
+        sneaking.baseItems
+            .filter(item => item.data.itemType == NinjaItemTypeEnum.PristineCharm)
+            .toSorted((item1, item2) => item1.data.itemId - item2.data.itemId)
+            .forEach((item, index) => {
+                let unlocked: boolean = false;
+                if (item.data.itemId < pristineCharmUnlocking.length) {
+                    unlocked = (pristineCharmUnlocking[item.data.itemId] == 1);
+                }
+                sneaking.pristineCharms.push(new PristineCharm(item.index, item.data as NinjaPristineCharmModel, unlocked));
+        })
+
         // Yes, Lava stores the enabled upgrades as letters in a single string, need to take that and convert to indexes.
         const lettersOfEnabledUpgrades = ninjaData[102][9]
         const purchasedUpgrades: number[] = [];
@@ -228,7 +267,6 @@ export const updateSneaking = (data: Map<string, any>) => {
     const alchemy = data.get("alchemy") as Alchemy;
     const sneaking = data.get("sneaking") as Sneaking;
 
-    // The bubble say that the exponent part is reduced, but that's actually just a standard price reduction from what I calculated
     const currencyConduitUpgrade = sneaking.sneakingUpgrades.find(upgrade => upgrade.index == 8);
     if (currencyConduitUpgrade) {
         currencyConduitUpgrade.bubbleDiscount = alchemy.getBonusForBubble(CauldronIndex.Kazam, AlchemyConst.LoCostMoJade);
