@@ -359,10 +359,10 @@ function BubblesDisplay() {
             <Grid columns="1/4">
                 {
                     alchemyData && alchemyData.cauldrons
-                    .toSorted((cauldron1, cauldron2) => cauldron1.bubbles[0].cauldronIndex > cauldron2.bubbles[0].cauldronIndex ? 1 : -1) 
-                    .map((cauldron, index) => {
-                        return (<CauldronDisplay key={`tab_${index}`} cauldron={cauldron} undevelopedCostsBubbleLevel={undevelopedCostsBubbleLevel} barleyBrewVialLevel={barleyBrewVialLevel} hasAchievement={hasAlchemyAchievement} discountLevel={parseInt(discountLevel)} classMultiBonus={classMulti} vialMultiplier={vialMultiplier} particles={particles} />)
-                    })
+                        .slice().sort((cauldron1, cauldron2) => cauldron1.bubbles[0].cauldronIndex > cauldron2.bubbles[0].cauldronIndex ? 1 : -1) 
+                        .map((cauldron, index) => {
+                            return (<CauldronDisplay key={`tab_${index}`} cauldron={cauldron} undevelopedCostsBubbleLevel={undevelopedCostsBubbleLevel} barleyBrewVialLevel={barleyBrewVialLevel} hasAchievement={hasAlchemyAchievement} discountLevel={parseInt(discountLevel)} classMultiBonus={classMulti} vialMultiplier={vialMultiplier} particles={particles} />)
+                        })
                 }
                 {
                     !alchemyData && <Text>Not ready yet</Text>

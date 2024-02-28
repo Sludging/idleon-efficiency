@@ -241,13 +241,12 @@ export class Sneaking extends Domain {
         sneaking.pristineCharms = [];
         sneaking.baseItems
             .filter(item => item.data.itemType == NinjaItemTypeEnum.PristineCharm)
-            .toSorted((item1, item2) => item1.data.itemId - item2.data.itemId)
-            .forEach((item, index) => {
-                let unlocked: boolean = false;
-                if (item.data.itemId < pristineCharmUnlocking.length) {
-                    unlocked = (pristineCharmUnlocking[item.data.itemId] == 1);
-                }
-                sneaking.pristineCharms.push(new PristineCharm(item.index, item.data as NinjaPristineCharmModel, unlocked));
+            .slice().sort((item1, item2) => item1.data.itemId - item2.data.itemId).forEach((item, index) => {
+            let unlocked: boolean = false;
+            if (item.data.itemId < pristineCharmUnlocking.length) {
+                unlocked = (pristineCharmUnlocking[item.data.itemId] == 1);
+            }
+            sneaking.pristineCharms.push(new PristineCharm(item.index, item.data as NinjaPristineCharmModel, unlocked));
         })
 
         // Yes, Lava stores the enabled upgrades as letters in a single string, need to take that and convert to indexes.
