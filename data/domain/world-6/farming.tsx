@@ -6,6 +6,7 @@ import { Item } from "../items";
 import { MarketInfoModel } from "../model/marketInfoModel";
 import { SeedInfoModel } from "../model/seedInfoModel";
 import { Player } from "../player";
+import { ImageData } from "../imageData";
 
 export class MarketUpgrade {
     level: number = 0;
@@ -17,11 +18,37 @@ export class Crop {
     discovered: boolean = false;
     quantityOwned: number = 0;
 
-    constructor(public index: number) {}
+    constructor(public index: number) { }
+
+    static getCropIconData = (cropId: number): ImageData => {
+        return {
+            location: `FarmCrop${cropId}`,
+            height: 20,
+            width: 20
+        }
+    }
+
+    static getMagicBeanIconData = (): ImageData => {
+        return {
+            location: `FarmCropBean`,
+            height: 20,
+            width: 20
+        }
+    }
 }
 
 export class Seed {
     constructor(public index: number, public data: SeedInfoModel) {}
+}
+
+enum PlotGrowthStage {
+    Empty = 0,
+    Planted = 1,
+    GrowStage1 = 2,
+    GrowStage2 = 3,
+    GrowStage3 = 4,
+    GrowStage4 = 5,
+    Grown = 6,
 }
 
 export class Plot {
@@ -41,7 +68,31 @@ export class Plot {
     // Only start incrementing when plant is fully grown
     overgrowthTimeInSeconds: number = 0;
 
-    constructor(public index: number) {}
+    constructor(public index: number) { }
+
+    getQuantityToCollect(): number {
+        if (this.OGlevel > 0) {
+            return this.quantityToCollect * (this.OGlevel * 2);
+        } else {
+            return this.quantityToCollect;
+        }
+    }
+
+    static getPlotGrowStage(stage: PlotGrowthStage, seedId: number): ImageData {
+        if (stage == PlotGrowthStage.Empty || seedId < 0) {
+            return {
+                location: `FarmPlant0`,
+                height: 78,
+                width: 86
+            }
+        } else {
+            return {
+                location: `FarmPlant${stage + (5 * seedId)}`,
+                height: 78,
+                width: 86
+            }
+        }
+    }
 }
 
 export class Farming extends Domain {
@@ -112,6 +163,30 @@ export class Farming extends Domain {
 
     getDiscoveredCropsNumber = (): number => {
         return this.cropDepot.filter(crop => crop.discovered == true).length;
+    }
+
+    static getDayMarketImageData = (): ImageData => {
+        return {
+            location: `FarmStT0`,
+            height: 53,
+            width: 60
+        }
+    }
+
+    static getNightMarketImageData = (): ImageData => {
+        return {
+            location: `FarmStT1`,
+            height: 53,
+            width: 60
+        }
+    }
+
+    static getCropDepotImageData = (): ImageData => {
+        return {
+            location: `FarmStT2`,
+            height: 53,
+            width: 60
+        }
     }
 }
 
