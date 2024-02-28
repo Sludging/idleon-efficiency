@@ -6,8 +6,7 @@ import {
 import { NextSeo } from 'next-seo';
 import { useContext, useState } from 'react';
 import { AppContext } from '../../data/appContext';
-import { SummonEssenceColor, Summoning as SummoningDomain, SummonEssence, BattlesInfo } from '../../data/domain/world-6/summoning';
-import { Player } from '../../data/domain/player';
+import { Summoning as SummoningDomain } from '../../data/domain/world-6/summoning';
 import IconImage from '../../components/base/IconImage';
 import ShadowBox from '../../components/base/ShadowBox';
 import { ComponentAndLabel } from '../../components/base/TextAndLabel';
@@ -35,7 +34,7 @@ function Summoning() {
                 <Text>Summoning Lv: {summoning.summoningLevel}</Text>
                 <Box justify="start" direction='row' gap="small">
                     {
-                        summoning.summonEssences.filter(essence => essence.display == true).map((essence) => (
+                        summoning.summonEssences.filter(essence => essence.unlocked == true).map((essence) => (
                             <ShadowBox width={"xsmall"} key={essence.color.toString()} background="dark-1" gap="xsmall" pad="small" align="left">
                                 <ComponentAndLabel
                                     label={SummoningDomain.getEssenceColorName(essence.color)}

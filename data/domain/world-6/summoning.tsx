@@ -124,6 +124,7 @@ export interface SummonEssence {
     color: SummonEssenceColor,
     quantity: number,
     display: boolean,
+    unlocked: boolean,
     victories: number,
     battles: SummonEnemyModel[]
 }
@@ -293,32 +294,40 @@ export class Summoning extends Domain {
         summoning.summonEssences = [];
         const essences = summoningData[2] as number[];
         essences.forEach((value, index) => {
-            let shouldDisplay: boolean = false;
+            let unlocked: boolean = false;
+            let display: boolean = false;
             switch(index) {
                 case SummonEssenceColor.White:
-                    shouldDisplay = true;
+                    unlocked = true;
+                    display = true;
                     break;
                 case SummonEssenceColor.Green:
-                    shouldDisplay = (this.summonUpgrades?.find(upgrade => upgrade.index == 4)?.level ?? 0) > 0;
+                    unlocked = (this.summonUpgrades?.find(upgrade => upgrade.index == 4)?.level ?? 0) > 0;
+                    display = true;
                     break;
                 case SummonEssenceColor.Yellow:
-                    shouldDisplay = (this.summonUpgrades?.find(upgrade => upgrade.index == 13)?.level ?? 0) > 0;
+                    unlocked = (this.summonUpgrades?.find(upgrade => upgrade.index == 13)?.level ?? 0) > 0;
+                    display = true;
                     break;
                 case SummonEssenceColor.Blue:
-                    shouldDisplay = (this.summonUpgrades?.find(upgrade => upgrade.index == 23)?.level ?? 0) > 0;
+                    unlocked = (this.summonUpgrades?.find(upgrade => upgrade.index == 23)?.level ?? 0) > 0;
+                    display = true;
                     break;
                 case SummonEssenceColor.Purple:
-                    shouldDisplay = (this.summonUpgrades?.find(upgrade => upgrade.index == 33)?.level ?? 0) > 0;
+                    unlocked = (this.summonUpgrades?.find(upgrade => upgrade.index == 33)?.level ?? 0) > 0;
+                    display = true;
                     break;
                 // For now you can't get red or later essences, but we already know which upgrade will unlock red essence, but for others will need to do it when available
                 case SummonEssenceColor.Red:
-                    shouldDisplay = (this.summonUpgrades?.find(upgrade => upgrade.index == 44)?.level ?? 0) > 0;
+                    unlocked = (this.summonUpgrades?.find(upgrade => upgrade.index == 44)?.level ?? 0) > 0;
+                    display = true;
                     break;
                 case SummonEssenceColor.Cyan:
                 case SummonEssenceColor.FutureContent3:
                 case SummonEssenceColor.FutureContent4:
                 default:
-                    shouldDisplay = false;
+                    unlocked = false;
+                    display = false;
                     break;
             }
 
@@ -339,7 +348,7 @@ export class Summoning extends Domain {
                 colorBattles = this.summonBattles.allBattles[index];
             }
 
-            summoning.summonEssences.push({ color: index, quantity: value, display: shouldDisplay, victories: colorVictories, battles: colorBattles });
+            summoning.summonEssences.push({ color: index, quantity: value, unlocked: unlocked, display: display, victories: colorVictories, battles: colorBattles });
         });
 
         summoning.summonBattles.playerUnitsHP = 1 * (1 + ((summoning.summonUpgrades.find(upgrade => upgrade.index == 1)?.getBonus() ?? 0) + ((summoning.summonUpgrades.find(upgrade => upgrade.index == 10)?.getBonus() ?? 0) + ((summoning.summonUpgrades.find(upgrade => upgrade.index == 35)?.getBonus() ?? 0) + (summoning.summonUpgrades.find(upgrade => upgrade.index == 37)?.getBonus() ?? 0))))) * (1 + (summoning.summonUpgrades.find(upgrade => upgrade.index == 20)?.getBonus() ?? 0) / 100)

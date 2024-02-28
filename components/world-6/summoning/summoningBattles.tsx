@@ -36,8 +36,7 @@ export const SummoningBattles = ({ battlesInfos, essences }: { battlesInfos: Bat
                     </Box>
                     <Box wrap direction="row" justify="center">
                         {
-                            // When no longer need to hide w6 remove essence.display filter to show all battles
-                            essences.filter(essence => essence.battles.length > 0 && essence.display == true).map((essence, index) => {
+                            essences.filter(essence => essence.battles.length > 0 && essence.victories < essence.battles.length).map((essence, index) => {
                                 return (
                                     <ShadowBox width={{ max: '250px' }} background="dark-1" key={index} pad="medium" margin={{ right: 'small', bottom: 'medium' }}>
                                         <Box direction="row" gap="small" pad="small">
