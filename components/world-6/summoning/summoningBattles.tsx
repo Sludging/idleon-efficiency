@@ -12,7 +12,7 @@ export const SummoningBattles = ({ battlesInfos, essences }: { battlesInfos: Bat
         return <Text>Loading...</Text>
     } else {
         return (
-            <Box>
+            <Box margin={{ top: 'small' }}>
                 <Box direction="row" wrap justify="center">
                     <ShadowBox margin={{ right: 'medium', bottom: 'small' }} background="dark-1" gap="xsmall" pad="medium">
                         <TextAndLabel label="Total Victories" text={allVictories.toString()} />
