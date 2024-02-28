@@ -14,7 +14,10 @@ export class MarketUpgrade {
 }
 
 export class Crop {
-    constructor(public index: number, public quantityOwned: number, public discovered: boolean) {}
+    discovered: boolean = false;
+    quantityOwned: number = 0;
+
+    constructor(public index: number) {}
 }
 
 export class Seed {
@@ -62,22 +65,31 @@ export class Farming extends Domain {
         const plotsData = data.get("FarmPlot") as number[][];
         const upgradesData = data.get("FarmUpg") as number[];
 
-        // TODO : extract owned crops info from this
-        // The number of values <index:quantity> in this is equal to foundCrops
-        //console.log("Crops :");
-        //console.log(cropsData);
+        farming.cropDepot = [];
+        farming.seeds.forEach((seed) => {
+            for (let i = seed.data.cropIdMin; i <= seed.data.cropIdMax; i++) {
+                farming.cropDepot.push(new Crop(i));
+            }
+        })
+        
+        for (const [cropId, qty] of Object.entries(cropsData)) {
+            const crop = farming.cropDepot.find(crop => crop.index == Number(cropId));
+            if (crop) {
+                crop.discovered = true;
+                crop.quantityOwned = Number(qty);
+            }
+        }
 
         farming.marketUpgrades.forEach((upgrade) => {
             if (upgrade.index < upgradesData.length) {
                 upgrade.level = upgradesData[upgrade.index];
             }
         });
-
         
         farming.farmPlots = [];
-        //console.log("Plots :");
+        console.log("Plots :");
         plotsData.forEach((plotInfo, index) => {
-            //console.log(index + " : " + plotInfo);
+            console.log(index + " : " + plotInfo);
             let plot: Plot = new Plot(index);
             plot.seedIndex = plotInfo[0];
             // If seedIndex = -1 then the plot is empty, so no more information are needed
