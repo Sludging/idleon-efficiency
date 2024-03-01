@@ -123,7 +123,21 @@ const customTheme = deepMerge(dark, {
 declare const window: Window &
   typeof globalThis & {
     gtag: any
+    ramp: any
+    _pwGA4PageviewId: string
+    dataLayer: any
   }
+
+// Ad related things
+var pwUnits = [
+  // TODO: Add left/right rails
+  {
+    type: 'bottom_rail'
+  },
+  {
+    type: 'corner_ad_video'
+  }
+]
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [domain, setDomain] = useState<string>("");
@@ -181,18 +195,62 @@ function MyApp({ Component, pageProps }: AppProps) {
         src={`https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js`}
       />
       <Script
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.ramp = window.ramp || {};
+            window.ramp.que = window.ramp.que || [];
+            window.ramp.passiveMode = true;
+          `
+        }}
+      />
+      <Script
         id="gtag-init"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-RDM3GQEGMB', {
-                page_path: window.location.pathname,
-              });
-            `,
+            window._pwGA4PageviewId = ''.concat(Date.now().toString());
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = window.gtag || function () {
+              window.dataLayer.push(arguments);
+            };
+            window.gtag('js', new Date());
+            window.gtag('config', 'G-RDM3GQEGMB', {
+              'send_page_view': false,
+              page_path: window.location.pathname
+            });
+            window.gtag('event', 'ramp_js', {
+              'send_to': 'G-RDM3GQEGMB',
+              'pageview_id': window._pwGA4PageviewId
+            });
+        `}}
+      />
+      <Script
+        id="playwire-init"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            var init = function () {
+              window.ramp
+                // pass in the array 'pwUnits' defined right above
+                .addUnits(pwUnits)
+                .then(() => {
+                  window.ramp.displayUnits()
+                }).catch((e) => {
+                  // catch errors
+                  window.ramp.displayUnits()
+                  console.log(e)
+                })
+            }
+            window.ramp.que.push(init);
+          `
         }}
+      />
+      <Script
+        strategy="afterInteractive"
+        defer
+        async
+        src={`https://cdn.intergient.com/1025192/74808/ramp.js`}
       />
       <Grommet theme={customTheme} full>
         <AuthProvider appLoading={loading} data={publicData} domain={domain}>
@@ -201,10 +259,10 @@ function MyApp({ Component, pageProps }: AppProps) {
             {
               router.pathname.includes("leaderboards") ?
                 <Component {...pageProps} />
-              :
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
+                :
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
             }
           </AppProvider>
         </AuthProvider>
