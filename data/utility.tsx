@@ -316,3 +316,7 @@ export const letterToNumber = (char: string) => {
     // Lava's unicode map doesn't have tilda (`) so, bit odd but it works.
     return "_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(char)
 }
+
+export const uniqueFilter = (value: any, index: number, self: any) => {
+    return self.indexOf(value) === index;
+}
