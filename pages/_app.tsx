@@ -195,6 +195,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         src={`https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js`}
       />
       <Script
+        id="ramp-init"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
