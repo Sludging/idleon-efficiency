@@ -15,6 +15,7 @@ import { Player } from './player';
 import { Rift } from './rift';
 import { Sigils } from './sigils';
 import { Storage } from './storage';
+import { Sneaking } from './world-6/sneaking';
 
 export enum StampTab {
     Combat = 0,
@@ -52,6 +53,8 @@ export class Stamp {
     canUpgradeWithMats: boolean = false;
     lowOnResources: boolean = false;
     cantCarry: boolean = false;
+
+    removeLimitFromUnderLevel: boolean = false;
 
     // Max upgrades (key is the stamp level that will the costs in the value)
     maxCarryInfo: Record<number, {
@@ -200,7 +203,7 @@ export class Stamp {
         const lvlDiff = 3 + (normalLevel - 3) * Math.pow(skillLevel / (normalLevel - 3), 0.75)
         const reducedLevel = Math.floor(lvlDiff * this.data.upgradeInterval / 10);
         // only second tab gets reduced level math and only if the reduced level is lower than stamp level.
-        if (skillLevel > 0 && reducedLevel < this.level && this.data.i10 > 0) {
+        if (this.removeLimitFromUnderLevel == false && skillLevel > 0 && reducedLevel < this.level && this.data.i10 > 0) {
             return lavaFunc(this.data.function, reducedLevel, this.data.x1, this.data.x2, round) * this.multiplier;
         }
         return lavaFunc(this.data.function, this.level, this.data.x1, this.data.x2, round) * this.multiplier;
@@ -296,6 +299,7 @@ export function updateStamps(data: Map<string, any>) {
     const alchemy = data.get("alchemy") as Alchemy;
     const collider = data.get("collider") as AtomCollider;
     const rift = data.get("rift") as Rift;
+    const sneaking = data.get("seanking") as Sneaking;
 
     // Update gilded stamps (this can totally be done in parse if needed)
     const optLacc = data.get("OptLacc"); 
@@ -309,6 +313,7 @@ export function updateStamps(data: Map<string, any>) {
         })
     }
 
+    const limitIsRemoved = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 0)?.purchased ?? false;
     const discountBribe = bribes[BribeConst.StampBribe];
     const vialDiscount = alchemy.getVialBonusForKey("MatCostStamp");
     stamps.flatMap(tab => tab).forEach(stamp => {
@@ -318,6 +323,7 @@ export function updateStamps(data: Map<string, any>) {
         stamp.hasBribe = discountBribe.status == BribeStatus.Purchased;
         stamp.gildedAvailable = stampMastery?.active ?? false;
         stamp.gildedCount = gildedStampCount;
+        stamp.removeLimitFromUnderLevel = limitIsRemoved;
     })
 
     return stamps;
