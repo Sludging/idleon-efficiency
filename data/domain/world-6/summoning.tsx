@@ -238,6 +238,11 @@ export class Summoning extends Domain {
         const summoning = data.get(this.dataKey) as Summoning;
         const summoningData = data.get("Summon") as any[];
 
+        // Defend against old accounts and people without any summoning data.
+        if (summoningData.length == 0) {
+            return;
+        }
+
         summoning.summonUpgrades = [];
         summoning.summonUpgrades = initSummonUpgradeRepo()
             .map(
