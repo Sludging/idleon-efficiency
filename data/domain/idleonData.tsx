@@ -120,7 +120,7 @@ const domainList: Domain[] = [
     new Equinox("equinox"),
     new Sneaking("sneaking"),
     new Summoning("summoning"),
-    new Farming("farming"),
+    new Farming("farming")
 ]
 
 export class IdleonData {
