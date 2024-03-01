@@ -234,7 +234,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             var init = function () {
               window.ramp
                 // pass in the array 'pwUnits' defined right above
-                .addUnits(${pwUnits})
+                .addUnits(${JSON.stringify(pwUnits)})
                 .then(() => {
                   window.ramp.displayUnits()
                 }).catch((e) => {
