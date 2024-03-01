@@ -299,7 +299,7 @@ export function updateStamps(data: Map<string, any>) {
     const alchemy = data.get("alchemy") as Alchemy;
     const collider = data.get("collider") as AtomCollider;
     const rift = data.get("rift") as Rift;
-    const sneaking = data.get("seanking") as Sneaking;
+    const sneaking = data.get("sneaking") as Sneaking;
 
     // Update gilded stamps (this can totally be done in parse if needed)
     const optLacc = data.get("OptLacc"); 
