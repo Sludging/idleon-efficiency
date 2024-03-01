@@ -8,7 +8,6 @@ import { SeedInfoModel } from "../model/seedInfoModel";
 import { Player } from "../player";
 import { ImageData } from "../imageData";
 import { nFormatter } from '../../utility';
-import { BracketsAngle } from "@phosphor-icons/react";
 
 export class MarketUpgrade {
     level: number = 0;
@@ -16,16 +15,21 @@ export class MarketUpgrade {
 
     constructor(public index: number, public data: MarketInfoModel) {}
 
-    // TODO : calculate crop id
     getNextLevelCost = (currentLevel: number = this.level): MarketUpgradeCost => {
         let cropId = 0;
-        if (this.index == 0 && currentLevel == 0) {
-            // cropId = Math.floor((this.data.cropId) + (this.data.cropIdIncrement) * ((a.engine.getGameAttribute("FarmUpg")[2]) + (2 * Math.floor((a.engine.getGameAttribute("FarmUpg")[2]) / 3) + Math.floor((a.engine.getGameAttribute("FarmUpg")[2]) / 4))));
+        if (this.index > 7) {
+            // Means it's night market so no crop cost, only magic beans
+            let cropId = -1;
         } else {
-            // cropId = Math.floor((a.engine.getGameAttribute("CustomLists").h.MarketInfo[Math.round(e + 8 * b)][2]) + (a.engine.getGameAttribute("CustomLists").h.MarketInfo[Math.round(e + 8 * b)][3]) * (a.engine.getGameAttribute("FarmUpg")[Math.round(2 + e + 8 * b)]));
+            if (this.index == 0) {
+                // Special calcul for the first upgrade
+                cropId = Math.floor(this.data.cropId + this.data.cropIdIncrement * (currentLevel + (2 * Math.floor(currentLevel / 3) + Math.floor(currentLevel / 4))));
+            } else {
+                cropId = Math.floor(this.data.cropId + this.data.cropIdIncrement * currentLevel);
+            }
         }
 
-        const cropCost = Math.floor(this.data.cost * Math.pow(this.data.costExponent, Math.max(0,currentLevel-1)));
+        const cropCost = Math.floor(this.data.cost * Math.pow(this.data.costExponent, (currentLevel-1)));
         
         return {cropId: cropId, cropQuantity: cropCost};
     }
@@ -35,7 +39,7 @@ export class Crop {
     discovered: boolean = false;
     quantityOwned: number = 0;
 
-    constructor(public index: number) { }
+    constructor(public index: number, public seedIndex: number) { }
 
     static getCropIconData = (cropId: number): ImageData => {
         return {
@@ -56,10 +60,6 @@ export class Crop {
 
 export class Seed {
     constructor(public index: number, public data: SeedInfoModel) {}
-
-    isCropFromThisSeed = (cropId: number): boolean => {
-        return (cropId >= this.data.cropIdMin && cropId <= this.data.cropIdMax);
-    }
 }
 
 export class Plot {
@@ -79,14 +79,39 @@ export class Plot {
     // Only start incrementing when plant is fully grown
     overgrowthTime: number = 0;
 
+    // Need to be calculate with external bonuses
+    cropEvolutionChance: number = 0;
+    nextOGChance: number = 0;
+    possibleQtyToCollectMin: number = 0;
+    possibleQtyToCollectMax: number = 0;
+
     constructor(public index: number) { }
 
-    getQuantityToCollect(): number {
-        if (this.OGlevel > 0) {
-            return this.quantityToCollect * (this.OGlevel * 2);
+    updatePlotNextCropChance = (seed: Seed | undefined, farmingLevel: number, summoningLevel: number, bonusFromMarketUpgrade4: number, bonusFromMarketUpgrade9: number, bonusFromWinningBonus10: number, bonusFromAlchemyBubbleCropChapter: number, bonusFromAlchemyBubbleCropiusMapper: number, bonusFromVial66: number, bonusFromMeal62: number, bonusFromMeal66: number, bonusFromStampCropEvo: number, bonusFromStarSign65: number, bonusFromRiftFarming1: number) => {
+        let evolutionChance = 0;
+        const seedBaseEvolutionChance = 0.3; // should be seed.data.nextCropChance but Lava seems to use 0.3 for every seed
+        const allBonusesEffect = (1 + bonusFromMarketUpgrade4 / 100) * (1 + bonusFromWinningBonus10 / 100) * (1 + bonusFromAlchemyBubbleCropChapter / 100) * (1 + bonusFromAlchemyBubbleCropiusMapper / 100) * (1 + bonusFromVial66 / 100) * (1 + bonusFromMeal62 / 100) * (1 + bonusFromStampCropEvo / 100) * (1 + bonusFromMeal66 * Math.ceil((summoningLevel + 1) / 50) / 100) * Math.max(1, bonusFromMarketUpgrade9) * (1 + 15 * bonusFromRiftFarming1 / 100) * (1 + bonusFromStarSign65 * farmingLevel / 100);
+        
+        if (seed) {
+            if (farmingLevel < 2 || this.cropIndex == seed.data.cropIdMax || this.locked) {
+                evolutionChance = 0;            
+            } else {                
+                evolutionChance = allBonusesEffect * (seedBaseEvolutionChance) * Math.pow(seed.data.nextCropDecay, (this.cropIndex - seed.data.cropIdMin));
+            }
         } else {
-            return this.quantityToCollect;
+            evolutionChance = allBonusesEffect;
         }
+        
+
+        this.cropEvolutionChance = evolutionChance;
+    }
+
+    updatePlotNextOGchance = (bonusFromMarketUpgrade11: number, bonusFromPristineCharm11: number, bonusFromStarSign67: number) => {
+        this.nextOGChance = Math.pow(0.4, this.OGlevel + 1) * Math.max(1, bonusFromMarketUpgrade11) * (1 + bonusFromPristineCharm11 / 100) * (1 + bonusFromStarSign67 / 100);
+    }
+
+    getQuantityToCollect(): number {
+        return this.quantityToCollect * Math.max(1, this.getOGmultiplyer());
     }
 
     getGrowthTimeRequired = (): number => {
@@ -120,6 +145,7 @@ export class Plot {
 
 export class CropScientistBonus {
     unlocked: boolean = false;
+    bonusValue: number = 0;
 
     constructor(public bonusText: CropScientistBonusText, public bonusPerCrop: number, public jadeUpgradeId: number) {}
 }
@@ -127,8 +153,6 @@ export class CropScientistBonus {
 export class CropScientist {
     unlocked: boolean = false;
     bonuses: CropScientistBonus[] = [];
-    // TODO : get the bonus from lab once it's added to lab
-    bonusFromLabBonus17: number = 0;
 
     constructor() {
         this.bonuses.push(new CropScientistBonus(CropScientistBonusText.TotalDamage, 20, 27));
@@ -139,28 +163,35 @@ export class CropScientist {
         this.bonuses.push(new CropScientistBonus(CropScientistBonusText.ShinyPetLvlUpRate, 7, 28));
     }
 
-    getBonus(bonus: CropScientistBonusText, cropsFound: number): number {
-        const foundBonus = this.bonuses.find(foundBonus => foundBonus.bonusText == bonus && foundBonus.unlocked == true);
-
-        if (foundBonus) {
-            switch (bonus) {
+    // TODO : call this for update
+    updateBonusValues = (cropsFound: number, bonusFromLabBonus17: number) => {
+        this.bonuses.forEach(bonus => {
+            switch (bonus.bonusText) {
                 case CropScientistBonusText.CookingSpeed:
                 case CropScientistBonusText.PlantEvolutionChance:
-                        return Math.pow(foundBonus.bonusPerCrop, cropsFound) * (1 + (this.bonusFromLabBonus17 / 100))
+                    bonus.bonusValue = Math.pow(bonus.bonusPerCrop, cropsFound) * (1 + (bonusFromLabBonus17 / 100))
                 case CropScientistBonusText.ShinyPetLvlUpRate:
                 case CropScientistBonusText.CashBonus:
                 case CropScientistBonusText.JadeCoinGain:
                 case CropScientistBonusText.TotalDamage:
                 default:
-                    return (foundBonus.bonusPerCrop * cropsFound) * (1 + (this.bonusFromLabBonus17 / 100));
+                    bonus.bonusValue = (bonus.bonusPerCrop * cropsFound) * (1 + (bonusFromLabBonus17 / 100));
             }
+        })
+    }
+
+    getBonus(bonus: CropScientistBonusText): number {
+        const foundBonus = this.bonuses.find(foundBonus => foundBonus.bonusText == bonus && foundBonus.unlocked == true);
+
+        if (foundBonus) {
+            return foundBonus.bonusValue;
         } else {
             return 0;
         }
     }
 
     getBonusText(bonus: CropScientistBonusText, cropsFound: number): string {
-        return bonus.replace(/{/, nFormatter(this.getBonus(bonus, cropsFound)));
+        return bonus.replace(/{/, nFormatter(this.getBonus(bonus)));
     }
 }
 
@@ -171,11 +202,13 @@ export class Farming extends Domain {
     cropDepot: Crop[] = [];
     cropScientist: CropScientist = new CropScientist();
 
-    farmingLevel: number = 0;
-    canOvergrow: boolean = false;    
-    magicBeanBonusFromEmporium: number = 1;
+    canOvergrow: boolean = false;
     magicBeansOwned: number = 0;
     instaGrowToolLeft: number = 0;
+    
+    farmingLevel: number = 0;
+    growthRate: number = 0;
+    magicBeansFromDepot: number = 0;
 
     getRawKeys(): RawData[] {
         return [
@@ -202,7 +235,7 @@ export class Farming extends Domain {
         farming.cropDepot = [];
         farming.seeds.forEach((seed) => {
             for (let i = seed.data.cropIdMin; i <= seed.data.cropIdMax; i++) {
-                farming.cropDepot.push(new Crop(i));
+                farming.cropDepot.push(new Crop(i, seed.index));
             }
         })
         
@@ -236,46 +269,58 @@ export class Farming extends Domain {
             farming.farmPlots.push(plot);
         });
     }
-
-    // TODO : calculate this
-    getPlotNextCropChance = (plotIndex: number): number => {
-        // return 2 > (a.engine.getGameAttribute("Lv0")[16]) ? 0 : 99 == b ? (1 + q._customBlock_FarmingStuffs("BasketUpgQTY", 0, 4) / 100) * (1 + q._customBlock_Summoning("WinBonus", 10, 0) / 100) * (1 + (a.engine.getGameAttribute("DNSM").h.AlchBubbles.h.W10AllCharz) / 100) * (1 + (a.engine.getGameAttribute("DNSM").h.AlchBubbles.h.Y6) / 100) * (1 + (a.engine.getGameAttribute("DNSM").h.AlchVials.h["6FarmEvo"]) / 100) * (1 + p._customBlock_MealBonus("zCropEvo") / 100) * (1 + l._customBlock_StampBonusOfTypeX("CropEvo") / 100) * (1 + p._customBlock_MealBonus("zCropEvoSumm") * Math.ceil(((a.engine.getGameAttribute("Lv0")[18]) + 1) / 50) / 100) * Math.max(1, q._customBlock_FarmingStuffs("BasketUpgQTY", 99, 1)) * (1 + 15 * q._customBlock_RiftStuff("RiftSkillBonus,15", 1) / 100) * (1 + (a.engine.getGameAttribute("DNSM").h.StarSigns.h["65"]) * (a.engine.getGameAttribute("Lv0")[16]) / 100) : q._customBlock_FarmingStuffs("CropType", b, 0) == (a.engine.getGameAttribute("CustomLists").h.SeedInfo[(a.engine.getGameAttribute("FarmPlot")[b | 0][0]) | 0][3]) ? 0 : (1 + q._customBlock_FarmingStuffs("BasketUpgQTY", 0, 4) / 100) * (1 + q._customBlock_Summoning("WinBonus", 10, 0) / 100) * (1 + (a.engine.getGameAttribute("DNSM").h.AlchBubbles.h.W10AllCharz) / 100) * (1 + (a.engine.getGameAttribute("DNSM").h.AlchBubbles.h.Y6) / 100) * (1 + (a.engine.getGameAttribute("DNSM").h.AlchVials.h["6FarmEvo"]) / 100) * (1 + p._customBlock_MealBonus("zCropEvo") / 100) * (1 + l._customBlock_StampBonusOfTypeX("CropEvo") / 100) * (1 + p._customBlock_MealBonus("zCropEvoSumm") * Math.ceil(((a.engine.getGameAttribute("Lv0")[18]) + 1) / 50) / 100) * Math.max(1, q._customBlock_FarmingStuffs("BasketUpgQTY", 99, 1)) * (1 + 15 * q._customBlock_RiftStuff("RiftSkillBonus,15", 1) / 100) * (1 + (a.engine.getGameAttribute("DNSM").h.StarSigns.h["65"]) * (a.engine.getGameAttribute("Lv0")[16]) / 100) * (a.engine.getGameAttribute("PixelHelperActor")[24].getValue("ActorEvents_623", "_GenINFO")[68][(a.engine.getGameAttribute("FarmPlot")[b | 0][0]) | 0]) * Math.pow((a.engine.getGameAttribute("CustomLists").h.SeedInfo[(a.engine.getGameAttribute("FarmPlot")[b | 0][0]) | 0][6]), (a.engine.getGameAttribute("FarmPlot")[b | 0][2]));
-        
-        return 0;
-    }
-
-    // TODO : calculate this
-    getPlotNextOGchance = (): number => {
-        // return Math.pow(.4, c.asNumber(a.engine.getGameAttribute("FarmPlot")[b | 0][5]) + 1) * Math.max(1, q._customBlock_FarmingStuffs("BasketUpgQTY", 1, 3)) * (1 + q._customBlock_Ninja("PristineBon", 11, 0) / 100) * (1 + c.asNumber(a.engine.getGameAttribute("DNSM").h.StarSigns.h["67"]) / 100);
-        
-        return 0;
-    }
-
-    getCropsWithStockEqualOrGreaterThan = (stockLimit: number): number => {
-        return this.cropDepot.filter(crop => crop.quantityOwned >= stockLimit).length;
-    }
-
+    
     updateUnlockedMarketBonuses = () => {
         const cropsFound = this.getDiscoveredCropsNumber();
         this.marketUpgrades.forEach(upgrade => {
             upgrade.unlocked = (upgrade.data.cropReq <= cropsFound);
         });
     }
-
-    // TODO : calculate this
-    getGrowthRate = (): number => {
-        // return Math.max(1, q._customBlock_FarmingStuffs("BasketUpgQTY", 99, 2)) * (1 + (q._customBlock_FarmingStuffs("BasketUpgQTY", 0, 2) + (a.engine.getGameAttribute("DNSM").h.AlchVials.h["6FarmSpd"])) / 100) * (1 + q._customBlock_Summoning("WinBonus", 2, 0) / 100);
-
-        return 0;
+    
+    // TODO : call this function for update
+    updateGrowthRate = (bonusFromVial64: number, bonusFromWinnerBonus2: number) => {
+        this.growthRate = Math.max(1, this.getMarketUpgradeBonusValue(10)) * (1 + (this.getMarketUpgradeBonusValue(2) + bonusFromVial64) / 100) * (1 + bonusFromWinnerBonus2 / 100);
+    }
+    
+    // TODO : call this function for update
+    updateBeansFromConvertinCurrentDepot = (jadeUpgradeBonus15: number) => {
+        let fromCrops = 0;
+        
+        this.cropDepot.filter(crop => crop.quantityOwned > 0).forEach(crop => {
+            fromCrops += (crop.quantityOwned * Math.pow(2.5, crop.seedIndex) * Math.pow(1.08, crop.index));
+        });
+        
+        this.magicBeansFromDepot = Math.pow(fromCrops, 0.5) * this.getMarketUpgradeBonusValue(6) * Math.max(1, jadeUpgradeBonus15);
     }
 
-    // TODO : calculate this
-    getMagicBeansFromConvertinCurrentDepot = (): number => {
-        let magicBeans = 0;
+    // TODO : call this function for update
+    updatePlotsOGChance = (bonusFromMarketUpgrade11: number, bonusFromPristineCharm11: number, bonusFromStarSign67: number) => {
+        this.farmPlots.forEach(plot => {
+            plot.updatePlotNextOGchance(bonusFromMarketUpgrade11, bonusFromPristineCharm11, bonusFromStarSign67);
+        });
+    }
+    
+    // TODO : call this function for update
+    updatePlotsEvolutionChance = (summoningLevel: number, bonusFromMarketUpgrade4: number, bonusFromMarketUpgrade9: number, bonusFromWinningBonus10: number, bonusFromAlchemyBubbleCropChapter: number, bonusFromAlchemyBubbleCropiusMapper: number, bonusFromVial66: number, bonusFromMeal62: number, bonusFromMeal66: number, bonusFromStampCropEvo: number, bonusFromStarSign65: number, bonusFromRiftFarming1: number) => {
+        this.farmPlots.forEach(plot => {
+            const seed = this.seeds.find(seed => seed.index == plot.seedIndex);
+            plot.updatePlotNextCropChance(seed, this.farmingLevel, summoningLevel, bonusFromMarketUpgrade4, bonusFromMarketUpgrade9, bonusFromWinningBonus10, bonusFromAlchemyBubbleCropChapter, bonusFromAlchemyBubbleCropiusMapper, bonusFromVial66, bonusFromMeal62, bonusFromMeal66, bonusFromStampCropEvo, bonusFromStarSign65, bonusFromRiftFarming1);
+        });
+    }
 
-        const bonusFromMarket = 0;
+    // TODO : call this function for update
+    updatePossibleQuantityToCollect = (bonusFromMarketUpgrade1: number, bonusFromGemShopBonus139: number) => {
+        const min = Math.floor(1 + (0 + (bonusFromMarketUpgrade1 + 20 * bonusFromGemShopBonus139) / 100));
+        const max = Math.floor(1 + (0.999 + (bonusFromMarketUpgrade1 + 20 * bonusFromGemShopBonus139) / 100));
 
-        return Math.pow(magicBeans, 0.5) * bonusFromMarket * this.magicBeanBonusFromEmporium;
+        this.farmPlots.forEach(plot => {
+            plot.possibleQtyToCollectMin = min;
+            plot.possibleQtyToCollectMax = max;
+        });
+    }
+    
+    getCropsWithStockEqualOrGreaterThan = (stockLimit: number): number => {
+        return this.cropDepot.filter(crop => crop.quantityOwned >= stockLimit).length;
     }
 
     getMarketUpgradeBonusValue = (upgradeId: number): number  => {
@@ -366,7 +411,7 @@ export class Farming extends Domain {
     }
 }
 
-// TODO : Once all calculations have been done, need to make other upgrade function to load bonus from other sources
+// TODO : Once all calculations have been done, need to make other updateFarming functions to load bonus from other sources (functions with TODO : call this function for update)
 export const updateFarmingLevel = (data: Map<string, any>) => {
     const farming = data.get("farming") as Farming;
     const players = data.get("players") as Player[];
