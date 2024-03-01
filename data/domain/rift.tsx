@@ -30,6 +30,9 @@ const specialBonuses: Map<SkillsIndex, string> = new Map([
     [SkillsIndex.Sailing, "+15%_BOAT_SAILING_SPEED"],
     [SkillsIndex.Divinity, "+15%_DIVINITY_PTS_GAINED"],
     [SkillsIndex.Gaming, "1.15X_GAMING_BITS_GAINED"],
+    [SkillsIndex.Farming, "1.15X_CROP_EVO_CHANCE"],
+    [SkillsIndex.Sneaking, "1.10X_JADE_COIN_GAIN"],
+    [SkillsIndex.Summoning, "1.10X_ESSENCE_GAIN"],
 ]);
 
 export class RiftBonus {
@@ -58,11 +61,10 @@ export class InfiniteStarsBonus extends RiftBonus {
 }
 
 // Use a typeguard to prove a skill index is a valid rift mastery skill
-const isRiftMasterySkill = (x: SkillsIndex): x is RiftMasterySkills => 
- ![SkillsIndex.Farming, SkillsIndex.Summoning, SkillsIndex.Sneaking].includes(x)
+const isRiftMasterySkill = (x: SkillsIndex): x is RiftMasterySkills => true;
 
-// Rift doesn't care about the new w6 skills for now, so exclude them from our index.
-type RiftMasterySkills = Exclude<SkillsIndex, SkillsIndex.Farming | SkillsIndex.Summoning | SkillsIndex.Sneaking>
+// Leaving this in case in need of hiding some other skills
+type RiftMasterySkills = SkillsIndex
 export class SkillMastery extends RiftBonus {
 
     skillLevels: Record<RiftMasterySkills, number> = {
@@ -81,6 +83,9 @@ export class SkillMastery extends RiftBonus {
         [SkillsIndex.Sailing]: 0,
         [SkillsIndex.Divinity]: 0,
         [SkillsIndex.Gaming]: 0,
+        [SkillsIndex.Farming]: 0,
+        [SkillsIndex.Sneaking]: 0,
+        [SkillsIndex.Summoning]: 0
     };
 
     getSkillRank = (skill: SkillsIndex) => {
@@ -111,7 +116,10 @@ export class SkillMastery extends RiftBonus {
             SkillsIndex.Breeding,
             SkillsIndex.Sailing,
             SkillsIndex.Divinity,
-            SkillsIndex.Gaming
+            SkillsIndex.Gaming,
+            SkillsIndex.Farming,
+            SkillsIndex.Sneaking,
+            SkillsIndex.Summoning
         ].includes(skill) ? 1 : 2;
         // If it's the special bonus and we have an override for that skill, get the special text.
         if (bonusIndex == specialIndex && specialBonuses.has(skill)) {
@@ -142,6 +150,9 @@ export class SkillMastery extends RiftBonus {
             case bonusIndex == 1 && skill == SkillsIndex.Sailing: return this.getSkillRank(skill) > bonusIndex ? 17 : 0;
             case bonusIndex == 1 && skill == SkillsIndex.Divinity: return this.getSkillRank(skill) > bonusIndex ? 15 : 0;
             case bonusIndex == 1 && skill == SkillsIndex.Gaming: return this.getSkillRank(skill) > bonusIndex ? 15 : 0;
+            case bonusIndex == 1 && skill == SkillsIndex.Farming: return this.getSkillRank(skill) > bonusIndex ? 15 : 0;
+            case bonusIndex == 1 && skill == SkillsIndex.Sneaking: return this.getSkillRank(skill) > bonusIndex ? 10 : 0;
+            case bonusIndex == 1 && skill == SkillsIndex.Summoning: return this.getSkillRank(skill) > bonusIndex ? 10 : 0;
             // This is basically a boolean for the passive cards, 1 = active. Likely won't be used in code but just safer to handle.
             case bonusIndex == 1 && specialBonuses.has(skill): return this.getSkillRank(skill) > bonusIndex ? 1 : 0;
             // Only thing left should be the skill efficiency, so 10%.
