@@ -238,7 +238,7 @@ export default function Layout({
         }
     }
 
-    if (authData?.authStatus == AuthStatus.NoUser && appContext.status == AppStatus.Ready && appContext.dataStatus == DataStatus.NoData && router.pathname != "/") {
+    if (authData?.authStatus == AuthStatus.NoUser && appContext.status == AppStatus.Ready && appContext.dataStatus == DataStatus.NoData && !["/", "/privacy-policy"].includes(router.pathname)) {
         router.push('/');
     }
 
@@ -361,8 +361,8 @@ export default function Layout({
             </Main>
             <Footer height={{ min: "82px" }} background="dark-1">
                 <Box width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} direction="row" justify='between' fill="horizontal" align="center" pad="small">
-                    <Box direction="row" gap="medium" align="center">
-                        <Box margin={{ right: 'medium' }}>
+                    <Box direction="row" gap="small" align="center">
+                        <Box>
                             <Image
                                 alt="Logo"
                                 src="/logo.svg"
@@ -370,7 +370,24 @@ export default function Layout({
                                 height={21}
                             />
                         </Box>
-                        <IconLink icon={Icon} href="https://www.idleonefficiency.com/leaderboards" text="Leaderboards" />
+                        <Box align="center" pad="small">
+                            <Text size="12px" color="grey-2">|</Text>
+                        </Box>
+                        <Box direction="row" align="center" gap="small">
+                            <Box>
+                                <a href="https://www.playwire.com/contact-direct-sales" rel="noopener" target="_blank">
+                                    <img src="https://www.playwire.com/hubfs/Powered-by-Playwire-Badges/Ads-Powered-by-playwire-2021-standalone-small-white-300px.png" alt="Ads-Powered-by-playwire-2021-standalone-small-white-300px" loading="lazy" style={{ width: "150px", height: '40px', display: "block"}}></img>
+                                </a>
+                            </Box>
+                            <Box>
+                                <IconLink href="https://www.playwire.com/contact-direct-sales" text="Advertise on this site." target="_blank" />
+                                {/* <a style={{ textDecoration: 'none', color: "#828D99", fontWeight: 'bold' }} color="#828D99" href="https://www.playwire.com/contact-direct-sales" rel="noopener" target="_blank">Advertise on this site.</a> */}
+                            </Box>
+                        </Box>
+                        <Box align="center" pad="small">
+                            <Text size="12px" color="grey-2">|</Text>
+                        </Box>
+                        <IconLink icon={Icon} href="/privacy-policy" text="Privacy Policy" target="_self" />
                         <Box align="center" pad="small">
                             <Text size="12px" color="grey-2">|</Text>
                         </Box>
