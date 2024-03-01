@@ -1,7 +1,7 @@
 import { SkillsIndex } from "../SkillsIndex";
 import { Domain, RawData } from "../base/domain";
 import { initMarketInfoRepo } from "../data/MarketInfoRepo";
-import { SeedInfoBase, initSeedInfoRepo } from "../data/SeedInfoRepo";
+import { initSeedInfoRepo } from "../data/SeedInfoRepo";
 import { Item } from "../items";
 import { MarketInfoModel } from "../model/marketInfoModel";
 import { SeedInfoModel } from "../model/seedInfoModel";
@@ -12,8 +12,10 @@ import { GemStore } from '../gemPurchases';
 import { Lab } from '../lab';
 import { Summoning } from './summoning';
 import { Stamp } from '../stamps';
-import { Alchemy } from '../alchemy';
+import { Alchemy, AlchemyConst, CauldronIndex } from '../alchemy';
 import { Sneaking } from "./sneaking";
+import { Cooking } from "../cooking";
+import { Rift, SkillMastery } from '../rift';
 
 export class MarketUpgrade {
     level: number = 0;
@@ -439,10 +441,13 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const gemStore = data.get("gems") as GemStore;
     const alchemy = data.get("alchemy") as Alchemy;
     const stamps = data.get("stamps") as Stamp[][];
-    const mainframe = data.get("lab") as Lab;
+    const cooking = data.get("cooking") as Cooking;
     const summoning = data.get("summoning") as Summoning;
     const sneaking = data.get("sneaking") as Sneaking;
     const players = data.get("players") as Player[];
+    const rift = data.get("rift") as Rift;
+
+    const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
 
     // Update Min and Max possible quantity to collect from one fully grown crop 
     const gemInstagrowPurchase = gemStore.purchases.find(purchase => purchase.no == 140)?.pucrhased ?? 0;
@@ -458,16 +463,22 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     farming.updateBeansFromConvertinCurrentDepot(jadeUpgrade15);
 
     // Upgrade each Crops Evolution chance (don't depend on plot so stored in crop)
-    // TODO : call this
-    //farming.updateCropsEvolutionChance();
+    const summoningWinnerBonus10 = summoning.summonBonuses.find(bonus => bonus.index == 10)?.getBonus() ?? 0;
+    const bubbleBonusCropChapter = alchemy.getBonusForBubble(CauldronIndex.Power, AlchemyConst.CropChapter);
+    const bubbleBonusCropiusMapper = alchemy.getBonusForBubble(CauldronIndex.Kazam, AlchemyConst.CropiusMapper);
+    const vialEvolutionChanceBonus = alchemy.getVialBonusForKey("6FarmEvo");
+    const mealBonusZCropEvo = cooking.getMealBonusForKey("zCropEvo");
+    const mealBonusZCropEvoSumm = cooking.getMealBonusForKey("zCropEvoSumm");
+    const stampCropEvolutionChance = stamps.flatMap(tab => tab).reduce((sum, stamp) => sum += stamp.data.effect == "CropEvo" ? stamp.getBonus() : 0, 0);
+    const starSignBonus65 = players[0].starSigns.reduce((sum, sign) => sum += sign.getBonus("Crop Evo chance per Farming LV"), 0);
+    const riftBonusCropEvolutionChance = skillMastery.getSkillBonus(SkillsIndex.Farming, 1);
+    farming.updateCropsEvolutionChance(summoning.summoningLevel, farming.getMarketUpgradeBonusValue(4), farming.getMarketUpgradeBonusValue(9), summoningWinnerBonus10, bubbleBonusCropChapter, bubbleBonusCropiusMapper, vialEvolutionChanceBonus, mealBonusZCropEvo, mealBonusZCropEvoSumm, stampCropEvolutionChance, starSignBonus65, riftBonusCropEvolutionChance);
 
     // Update OG chances for all plots
     const marketBonus11 = farming.getMarketUpgradeBonusValue(11);
     const pristineCharmBonus11 = sneaking.pristineCharms.find(charm => charm.index == 11)?.unlocked ? 50 : 0;
     const starSignBonus67 = players[0].starSigns.reduce((sum, sign) => sum += sign.getBonus("OG Chance"), 0);
-    console.log(players[0].starSigns);
     farming.updatePlotsOGChance(marketBonus11, pristineCharmBonus11, starSignBonus67);
-    console.log("Next OG chance : " + farming.farmPlots[0].nextOGChance);
 }
 
 export interface MarketUpgradeCost {

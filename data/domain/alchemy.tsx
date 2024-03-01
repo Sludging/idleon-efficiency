@@ -45,6 +45,8 @@ export const AlchemyConst = {
     CauldronCount: 4,
     CauldronBonusBubbleIndex: 1,
     LoCostMoJade: 29,
+    CropiusMapper: 25,
+    CropChapter: 29
 };
 
 const cauldronPrefix: Record<string, string> = {
