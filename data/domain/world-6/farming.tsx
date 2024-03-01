@@ -8,6 +8,12 @@ import { SeedInfoModel } from "../model/seedInfoModel";
 import { Player } from "../player";
 import { ImageData } from "../imageData";
 import { nFormatter } from '../../utility';
+import { GemStore } from '../gemPurchases';
+import { Lab } from '../lab';
+import { Summoning } from './summoning';
+import { Stamp } from '../stamps';
+import { Alchemy } from '../alchemy';
+import { Sneaking } from "./sneaking";
 
 export class MarketUpgrade {
     level: number = 0;
@@ -39,7 +45,28 @@ export class Crop {
     discovered: boolean = false;
     quantityOwned: number = 0;
 
+    nextCropChance: number = 0;
+    
     constructor(public index: number, public seedIndex: number) { }
+
+    updateNextCropChance = (seed: Seed | undefined, farmingLevel: number, summoningLevel: number, bonusFromMarketUpgrade4: number, bonusFromMarketUpgrade9: number, bonusFromWinningBonus10: number, bonusFromAlchemyBubbleCropChapter: number, bonusFromAlchemyBubbleCropiusMapper: number, bonusFromVial66: number, bonusFromMeal62: number, bonusFromMeal66: number, bonusFromStampCropEvo: number, bonusFromStarSign65: number, bonusFromRiftFarming1: number) => {
+        let evolutionChance = 0;
+        const seedBaseEvolutionChance = 0.3; // should be seed.data.nextCropChance but Lava seems to use 0.3 for every seed
+        const allBonusesEffect = (1 + bonusFromMarketUpgrade4 / 100) * (1 + bonusFromWinningBonus10 / 100) * (1 + bonusFromAlchemyBubbleCropChapter / 100) * (1 + bonusFromAlchemyBubbleCropiusMapper / 100) * (1 + bonusFromVial66 / 100) * (1 + bonusFromMeal62 / 100) * (1 + bonusFromStampCropEvo / 100) * (1 + bonusFromMeal66 * Math.ceil((summoningLevel + 1) / 50) / 100) * Math.max(1, bonusFromMarketUpgrade9) * (1 + 15 * bonusFromRiftFarming1 / 100) * (1 + bonusFromStarSign65 * farmingLevel / 100);
+        
+        if (seed) {
+            if (farmingLevel < 2 || this.index == seed.data.cropIdMax) {
+                evolutionChance = 0;            
+            } else {                
+                evolutionChance = allBonusesEffect * (seedBaseEvolutionChance) * Math.pow(seed.data.nextCropDecay, (this.index - seed.data.cropIdMin));
+            }
+        } else {
+            evolutionChance = allBonusesEffect;
+        }        
+
+        this.nextCropChance = evolutionChance;
+    }
+
 
     static getCropIconData = (cropId: number): ImageData => {
         return {
@@ -79,32 +106,12 @@ export class Plot {
     // Only start incrementing when plant is fully grown
     overgrowthTime: number = 0;
 
-    // Need to be calculate with external bonuses
     cropEvolutionChance: number = 0;
     nextOGChance: number = 0;
     possibleQtyToCollectMin: number = 0;
     possibleQtyToCollectMax: number = 0;
 
     constructor(public index: number) { }
-
-    updatePlotNextCropChance = (seed: Seed | undefined, farmingLevel: number, summoningLevel: number, bonusFromMarketUpgrade4: number, bonusFromMarketUpgrade9: number, bonusFromWinningBonus10: number, bonusFromAlchemyBubbleCropChapter: number, bonusFromAlchemyBubbleCropiusMapper: number, bonusFromVial66: number, bonusFromMeal62: number, bonusFromMeal66: number, bonusFromStampCropEvo: number, bonusFromStarSign65: number, bonusFromRiftFarming1: number) => {
-        let evolutionChance = 0;
-        const seedBaseEvolutionChance = 0.3; // should be seed.data.nextCropChance but Lava seems to use 0.3 for every seed
-        const allBonusesEffect = (1 + bonusFromMarketUpgrade4 / 100) * (1 + bonusFromWinningBonus10 / 100) * (1 + bonusFromAlchemyBubbleCropChapter / 100) * (1 + bonusFromAlchemyBubbleCropiusMapper / 100) * (1 + bonusFromVial66 / 100) * (1 + bonusFromMeal62 / 100) * (1 + bonusFromStampCropEvo / 100) * (1 + bonusFromMeal66 * Math.ceil((summoningLevel + 1) / 50) / 100) * Math.max(1, bonusFromMarketUpgrade9) * (1 + 15 * bonusFromRiftFarming1 / 100) * (1 + bonusFromStarSign65 * farmingLevel / 100);
-        
-        if (seed) {
-            if (farmingLevel < 2 || this.cropIndex == seed.data.cropIdMax || this.locked) {
-                evolutionChance = 0;            
-            } else {                
-                evolutionChance = allBonusesEffect * (seedBaseEvolutionChance) * Math.pow(seed.data.nextCropDecay, (this.cropIndex - seed.data.cropIdMin));
-            }
-        } else {
-            evolutionChance = allBonusesEffect;
-        }
-        
-
-        this.cropEvolutionChance = evolutionChance;
-    }
 
     updatePlotNextOGchance = (bonusFromMarketUpgrade11: number, bonusFromPristineCharm11: number, bonusFromStarSign67: number) => {
         this.nextOGChance = Math.pow(0.4, this.OGlevel + 1) * Math.max(1, bonusFromMarketUpgrade11) * (1 + bonusFromPristineCharm11 / 100) * (1 + bonusFromStarSign67 / 100);
@@ -114,9 +121,9 @@ export class Plot {
         return this.quantityToCollect * Math.max(1, this.getOGmultiplyer());
     }
 
-    getGrowthTimeRequired = (): number => {
+    getFullCycleGrowthTime = (): number => {
         if (this.seedIndex == -1) {
-            return 0;
+            return 0
         } else {
             return 14400 * Math.pow(1.5, this.seedIndex);
         }
@@ -126,7 +133,7 @@ export class Plot {
         return Math.min(1E9, Math.max(1, Math.pow(2, this.OGlevel)));
     }
 
-    static getPlotGrowStage(stage: PlotGrowthStage, seedId: number): ImageData {
+    static getPlotGrowStageImageData(stage: PlotGrowthStage, seedId: number): ImageData {
         if (stage == PlotGrowthStage.Empty || seedId < 0) {
             return {
                 location: `FarmPlant0`,
@@ -163,23 +170,6 @@ export class CropScientist {
         this.bonuses.push(new CropScientistBonus(CropScientistBonusText.ShinyPetLvlUpRate, 7, 28));
     }
 
-    // TODO : call this for update
-    updateBonusValues = (cropsFound: number, bonusFromLabBonus17: number) => {
-        this.bonuses.forEach(bonus => {
-            switch (bonus.bonusText) {
-                case CropScientistBonusText.CookingSpeed:
-                case CropScientistBonusText.PlantEvolutionChance:
-                    bonus.bonusValue = Math.pow(bonus.bonusPerCrop, cropsFound) * (1 + (bonusFromLabBonus17 / 100))
-                case CropScientistBonusText.ShinyPetLvlUpRate:
-                case CropScientistBonusText.CashBonus:
-                case CropScientistBonusText.JadeCoinGain:
-                case CropScientistBonusText.TotalDamage:
-                default:
-                    bonus.bonusValue = (bonus.bonusPerCrop * cropsFound) * (1 + (bonusFromLabBonus17 / 100));
-            }
-        })
-    }
-
     getBonus(bonus: CropScientistBonusText): number {
         const foundBonus = this.bonuses.find(foundBonus => foundBonus.bonusText == bonus && foundBonus.unlocked == true);
 
@@ -204,11 +194,11 @@ export class Farming extends Domain {
 
     canOvergrow: boolean = false;
     magicBeansOwned: number = 0;
-    instaGrowToolLeft: number = 0;
-    
+    instaGrowToolLeft: number = 0;    
     farmingLevel: number = 0;
     growthRate: number = 0;
     magicBeansFromDepot: number = 0;
+    discoveredCrops: number = 0;
 
     getRawKeys(): RawData[] {
         return [
@@ -227,6 +217,12 @@ export class Farming extends Domain {
         const cropsData = data.get("FarmCrop") as Object;
         const plotsData = data.get("FarmPlot") as number[][];
         const upgradesData = data.get("FarmUpg") as number[];
+        
+        // Old accounts won't have this data, exit early.
+        if (!cropsData || !plotsData || !upgradesData) {
+            return;
+        }
+        
         const upgradesLevels = upgradesData.slice(2, -2);
 
         farming.magicBeansOwned = upgradesData[1];
@@ -236,6 +232,7 @@ export class Farming extends Domain {
         farming.seeds.forEach((seed) => {
             for (let i = seed.data.cropIdMin; i <= seed.data.cropIdMax; i++) {
                 farming.cropDepot.push(new Crop(i, seed.index));
+                farming.discoveredCrops++;
             }
         })
         
@@ -247,11 +244,13 @@ export class Farming extends Domain {
             }
         }
 
+        farming.updateUnlockedMarketBonuses();
         farming.marketUpgrades.forEach((upgrade) => {
             if (upgrade.index < upgradesLevels.length) {
                 upgrade.level = upgradesLevels[upgrade.index];
             }
         });
+        farming.canOvergrow = (farming.getMarketUpgradeBonusValue(8) > 0);
 
         farming.farmPlots = [];
         plotsData.forEach((plotInfo, index) => {
@@ -271,47 +270,58 @@ export class Farming extends Domain {
     }
     
     updateUnlockedMarketBonuses = () => {
-        const cropsFound = this.getDiscoveredCropsNumber();
         this.marketUpgrades.forEach(upgrade => {
-            upgrade.unlocked = (upgrade.data.cropReq <= cropsFound);
+            upgrade.unlocked = (upgrade.data.cropReq <= this.discoveredCrops);
         });
     }
+
+    updateCropScientistBonusValues = (cropsFound: number, bonusFromLabBonus17: number) => {
+        this.cropScientist.bonuses.forEach(bonus => {
+            switch (bonus.bonusText) {
+                case CropScientistBonusText.CookingSpeed:
+                case CropScientistBonusText.PlantEvolutionChance:
+                    bonus.bonusValue = Math.pow(bonus.bonusPerCrop, cropsFound) * (1 + (bonusFromLabBonus17 / 100))
+                case CropScientistBonusText.ShinyPetLvlUpRate:
+                case CropScientistBonusText.CashBonus:
+                case CropScientistBonusText.JadeCoinGain:
+                case CropScientistBonusText.TotalDamage:
+                default:
+                    bonus.bonusValue = (bonus.bonusPerCrop * cropsFound) * (1 + (bonusFromLabBonus17 / 100));
+            }
+        })
+    }
     
-    // TODO : call this function for update
     updateGrowthRate = (bonusFromVial64: number, bonusFromWinnerBonus2: number) => {
         this.growthRate = Math.max(1, this.getMarketUpgradeBonusValue(10)) * (1 + (this.getMarketUpgradeBonusValue(2) + bonusFromVial64) / 100) * (1 + bonusFromWinnerBonus2 / 100);
     }
     
-    // TODO : call this function for update
     updateBeansFromConvertinCurrentDepot = (jadeUpgradeBonus15: number) => {
         let fromCrops = 0;
         
         this.cropDepot.filter(crop => crop.quantityOwned > 0).forEach(crop => {
-            fromCrops += (crop.quantityOwned * Math.pow(2.5, crop.seedIndex) * Math.pow(1.08, crop.index));
+            const seed = this.seeds.find(seed => seed.index == crop.seedIndex);
+            fromCrops += (crop.quantityOwned * Math.pow(2.5, (seed?.index ?? 0)) * Math.pow(1.08, crop.index - (seed?.data.cropIdMin ?? 0)));
         });
         
-        this.magicBeansFromDepot = Math.pow(fromCrops, 0.5) * this.getMarketUpgradeBonusValue(6) * Math.max(1, jadeUpgradeBonus15);
+        this.magicBeansFromDepot = Math.pow(fromCrops, 0.5) * ( 1 + this.getMarketUpgradeBonusValue(6) / 100) * Math.max(1, jadeUpgradeBonus15);
     }
 
-    // TODO : call this function for update
     updatePlotsOGChance = (bonusFromMarketUpgrade11: number, bonusFromPristineCharm11: number, bonusFromStarSign67: number) => {
         this.farmPlots.forEach(plot => {
             plot.updatePlotNextOGchance(bonusFromMarketUpgrade11, bonusFromPristineCharm11, bonusFromStarSign67);
         });
     }
     
-    // TODO : call this function for update
-    updatePlotsEvolutionChance = (summoningLevel: number, bonusFromMarketUpgrade4: number, bonusFromMarketUpgrade9: number, bonusFromWinningBonus10: number, bonusFromAlchemyBubbleCropChapter: number, bonusFromAlchemyBubbleCropiusMapper: number, bonusFromVial66: number, bonusFromMeal62: number, bonusFromMeal66: number, bonusFromStampCropEvo: number, bonusFromStarSign65: number, bonusFromRiftFarming1: number) => {
-        this.farmPlots.forEach(plot => {
-            const seed = this.seeds.find(seed => seed.index == plot.seedIndex);
-            plot.updatePlotNextCropChance(seed, this.farmingLevel, summoningLevel, bonusFromMarketUpgrade4, bonusFromMarketUpgrade9, bonusFromWinningBonus10, bonusFromAlchemyBubbleCropChapter, bonusFromAlchemyBubbleCropiusMapper, bonusFromVial66, bonusFromMeal62, bonusFromMeal66, bonusFromStampCropEvo, bonusFromStarSign65, bonusFromRiftFarming1);
+    updateCropsEvolutionChance = (summoningLevel: number, bonusFromMarketUpgrade4: number, bonusFromMarketUpgrade9: number, bonusFromWinningBonus10: number, bonusFromAlchemyBubbleCropChapter: number, bonusFromAlchemyBubbleCropiusMapper: number, bonusFromVial66: number, bonusFromMeal62: number, bonusFromMeal66: number, bonusFromStampCropEvo: number, bonusFromStarSign65: number, bonusFromRiftFarming1: number) => {
+        this.cropDepot.forEach(crop => {
+            const seed = this.seeds.find(seed => seed.index == crop.seedIndex);
+            crop.updateNextCropChance(seed, this.farmingLevel, summoningLevel, bonusFromMarketUpgrade4, bonusFromMarketUpgrade9, bonusFromWinningBonus10, bonusFromAlchemyBubbleCropChapter, bonusFromAlchemyBubbleCropiusMapper, bonusFromVial66, bonusFromMeal62, bonusFromMeal66, bonusFromStampCropEvo, bonusFromStarSign65, bonusFromRiftFarming1);
         });
     }
 
-    // TODO : call this function for update
-    updatePossibleQuantityToCollect = (bonusFromMarketUpgrade1: number, bonusFromGemShopBonus139: number) => {
-        const min = Math.floor(1 + (0 + (bonusFromMarketUpgrade1 + 20 * bonusFromGemShopBonus139) / 100));
-        const max = Math.floor(1 + (0.999 + (bonusFromMarketUpgrade1 + 20 * bonusFromGemShopBonus139) / 100));
+    updatePossibleQuantityToCollect = (bonusFromMarketUpgrade1: number, purchasesFromGemShopBonus139: number) => {
+        const min = Math.floor(1 + (0 + (bonusFromMarketUpgrade1 + 20 * purchasesFromGemShopBonus139) / 100));
+        const max = Math.floor(1 + (0.999 + (bonusFromMarketUpgrade1 + 20 * purchasesFromGemShopBonus139) / 100));
 
         this.farmPlots.forEach(plot => {
             plot.possibleQtyToCollectMin = min;
@@ -382,10 +392,6 @@ export class Farming extends Domain {
         }
     }
 
-    getDiscoveredCropsNumber = (): number => {
-        return this.cropDepot.filter(crop => crop.discovered == true).length;
-    }
-
     static getDayMarketImageData = (): ImageData => {
         return {
             location: `FarmStT0`,
@@ -411,12 +417,57 @@ export class Farming extends Domain {
     }
 }
 
-// TODO : Once all calculations have been done, need to make other updateFarming functions to load bonus from other sources (functions with TODO : call this function for update)
 export const updateFarmingLevel = (data: Map<string, any>) => {
     const farming = data.get("farming") as Farming;
     const players = data.get("players") as Player[];
 
     farming.farmingLevel = players[0]?.skills.get(SkillsIndex.Farming)?.level ?? 0;
+}
+
+export const updateFarmingCropScientistBonuses = (data: Map<string, any>) => {
+    const farming = data.get("farming") as Farming;
+    const mainframe = data.get("lab") as Lab;
+    
+    // Update all CropScientist bonuses so we can use those values in other pages (cooking for example)
+    const labBonusCropScientist = mainframe.bonuses.find(bonus => bonus.index == 17)?.getBonus() ?? 0;
+    farming.updateCropScientistBonusValues(farming.discoveredCrops, labBonusCropScientist);
+}
+
+// TODO : complete this
+export const updateFarmingDisplayData = (data: Map<string, any>) => {
+    const farming = data.get("farming") as Farming;
+    const gemStore = data.get("gems") as GemStore;
+    const alchemy = data.get("alchemy") as Alchemy;
+    const stamps = data.get("stamps") as Stamp[][];
+    const mainframe = data.get("lab") as Lab;
+    const summoning = data.get("summoning") as Summoning;
+    const sneaking = data.get("sneaking") as Sneaking;
+    const players = data.get("players") as Player[];
+
+    // Update Min and Max possible quantity to collect from one fully grown crop 
+    const gemInstagrowPurchase = gemStore.purchases.find(purchase => purchase.no == 140)?.pucrhased ?? 0;
+    farming.updatePossibleQuantityToCollect(farming.getMarketUpgradeBonusValue(1), gemInstagrowPurchase);
+
+    // Update growth speed for displayng when crops will be ready
+    const vialGrowthSpeedBonus = alchemy.getVialBonusForKey("6FarmSpd");
+    const summoningWinnerBonus2 = summoning.summonBonuses.find(bonus => bonus.index == 2)?.getBonus() ?? 0;
+    farming.updateGrowthRate(vialGrowthSpeedBonus, summoningWinnerBonus2);
+
+    // Update Magic beans collected if collecting now
+    const jadeUpgrade15 = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 15)?.purchased ? 1.25 : 1;
+    farming.updateBeansFromConvertinCurrentDepot(jadeUpgrade15);
+
+    // Upgrade each Crops Evolution chance (don't depend on plot so stored in crop)
+    // TODO : call this
+    //farming.updateCropsEvolutionChance();
+
+    // Update OG chances for all plots
+    const marketBonus11 = farming.getMarketUpgradeBonusValue(11);
+    const pristineCharmBonus11 = sneaking.pristineCharms.find(charm => charm.index == 11)?.unlocked ? 50 : 0;
+    const starSignBonus67 = players[0].starSigns.reduce((sum, sign) => sum += sign.getBonus("OG Chance"), 0);
+    console.log(players[0].starSigns);
+    farming.updatePlotsOGChance(marketBonus11, pristineCharmBonus11, starSignBonus67);
+    console.log("Next OG chance : " + farming.farmPlots[0].nextOGChance);
 }
 
 export interface MarketUpgradeCost {

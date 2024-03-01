@@ -382,7 +382,7 @@ export class Summoning extends Domain {
     }
 }
 
-export const updateSummoningLevelAndBonuses = (data: Map<string, any>) => {
+export const updateSummoningLevelAndBonusesFromIt = (data: Map<string, any>) => {
     const summoning = data.get("summoning") as Summoning;
     const players = data.get("players") as Player[];
 

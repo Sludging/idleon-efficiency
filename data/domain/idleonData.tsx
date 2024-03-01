@@ -48,8 +48,8 @@ import { Rift } from './rift';
 import { Equinox, updateEquinoxBar } from './equinox';
 import { POExtra } from './postoffice';
 import { Sneaking, updateSneaking } from './world-6/sneaking';
-import { Summoning, updateSummoningLevelAndBonuses, updateSummoningPristineCharm } from './world-6/summoning';
-import { Farming, updateFarmingLevel } from './world-6/farming';
+import { Summoning, updateSummoningLevelAndBonusesFromIt, updateSummoningPristineCharm } from './world-6/summoning';
+import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, updateFarmingLevel } from './world-6/farming';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -179,7 +179,7 @@ export const initAccountDataKeys = (accountData: Map<string, any>, allItems: Ite
 // ORDER IS IMPORTANT, the keys are not relevant as data doesn't get persisted.
 // This allows for multiple calls that touch the same data to happen in the same map (artifacts + sailing for example)
 const postProcessingMap: Record<string, Function> = {
-    "summoningLevel": (doc: Cloudsave, accountData: Map<string, any>) => updateSummoningLevelAndBonuses(accountData),
+    "summoningLevel": (doc: Cloudsave, accountData: Map<string, any>) => updateSummoningLevelAndBonusesFromIt(accountData),
     "farmingLevel": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingLevel(accountData),
     "updateCompanionImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateCompanionImpact(accountData),
     "updatePlayerDeathnote": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerDeathnote(accountData),
@@ -193,6 +193,7 @@ const postProcessingMap: Record<string, Function> = {
     "sigils": (doc: Cloudsave, accountData: Map<string, any>) => updateSigils(accountData),
     "storage": (doc: Cloudsave, accountData: Map<string, any>) => updateStorage(accountData),
     "lab": (doc: Cloudsave, accountData: Map<string, any>) => updateLab(accountData),
+    "farmingCropScientist": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingCropScientistBonuses(accountData),
     "alchemy": (doc: Cloudsave, accountData: Map<string, any>) => updateAlchemy(accountData),
     "sneaking": (doc: Cloudsave, accountData: Map<string, any>) => updateSneaking(accountData),
     "summoningPristineCharm": (doc: Cloudsave, accountData: Map<string, any>) => updateSummoningPristineCharm(accountData),
@@ -222,6 +223,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),
     "refinery": (doc: Cloudsave, accountData: Map<string, any>) => updateRefinery(accountData),
     "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateMinTravelTime(accountData),
+    "farming": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingDisplayData(accountData),
     "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
     "statueBuffs": (doc: Cloudsave, accountData: Map<string, any>) => updateStatueBonuses(accountData),
     "sigilsChargeSpeed": (doc: Cloudsave, accountData: Map<string, any>) => updateSigilsChargeSpeed(accountData),
