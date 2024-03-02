@@ -435,7 +435,6 @@ export const updateFarmingCropScientistBonuses = (data: Map<string, any>) => {
     farming.updateCropScientistBonusValues(farming.discoveredCrops, labBonusCropScientist);
 }
 
-// TODO : complete this
 export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const farming = data.get("farming") as Farming;
     const gemStore = data.get("gems") as GemStore;
@@ -479,6 +478,8 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const pristineCharmBonus11 = sneaking.pristineCharms.find(charm => charm.index == 11)?.unlocked ? 50 : 0;
     const starSignBonus67 = players[0].starSigns.reduce((sum, sign) => sum += sign.getBonus("OG Chance"), 0);
     farming.updatePlotsOGChance(marketBonus11, pristineCharmBonus11, starSignBonus67);
+
+    return farming;
 }
 
 export interface MarketUpgradeCost {
