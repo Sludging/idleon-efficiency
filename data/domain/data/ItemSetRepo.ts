@@ -355,7 +355,6 @@ export const initItemSetRepo = () => {
         new ItemSetBase("MaxCapBagS8", <ItemSetModel>{"set": "Colossal"}),
         new ItemSetBase("MaxCapBagS9", <ItemSetModel>{"set": "Gargantuan"}),
         new ItemSetBase("MaxCapBagS10", <ItemSetModel>{"set": "Herculean"}),
-        new ItemSetBase("EquipmentNametag3", <ItemSetModel>{"set": "Golden"}),
         new ItemSetBase("EquipmentKeychain17", <ItemSetModel>{"set": "Gilded"}),
         new ItemSetBase("EquipmentTools2", <ItemSetModel>{"set": "Copper"}),
         new ItemSetBase("EquipmentTools3", <ItemSetModel>{"set": "Iron"}),

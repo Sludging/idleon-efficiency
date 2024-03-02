@@ -7,5 +7,7 @@ export interface SigilModel {
     unlockBonus: number,
     boostBonus: number,
     filler: string,
-    desc: string
+    desc: string,
+    x1?: number,
+    x2?: number
 }

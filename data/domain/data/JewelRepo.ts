@@ -260,6 +260,48 @@ export const initJewelRepo = () => {
                 ],
                 "name": "Black Diamond Ulthurite",
                 "bonusGiven": 1
+            }),
+        new JewelBase(18, <JewelModel>{
+                "x": 1619,
+                "y": 203,
+                "range": 90,
+                "effect": "'Slab Sovereignty' gives an additional }% boost to all Slab Bonuses!",
+                "description": "Bolsters 'Slab Sovereignty'",
+                "requirements": [
+                    <ComponentModel>{"item": "SpiA1", "quantity": 3000000},
+                    <MealComponentModel>{"mealNo": "53", "quantity": 1000000},
+                    <SpiceComponentModel>{"spiceNo": "20", "quantity": 10000}
+                ],
+                "name": "Pure Opal Rhinestone",
+                "bonusGiven": 20
+            }),
+        new JewelBase(19, <JewelModel>{
+                "x": 1846,
+                "y": 410,
+                "range": 80,
+                "effect": "+}% higher effects from all active bonuses and jewels within the Mainframe, except for Spelunker Obol. @ This is a multiplier, so +10% would be 1.10x, ya feel me? @ This bonus always has a 80px connection range no matter what!",
+                "description": "Boosts entire Lab",
+                "requirements": [
+                    <ComponentModel>{"item": "SpiB2b", "quantity": 1000},
+                    <MealComponentModel>{"mealNo": "58", "quantity": 10000000},
+                    <SpiceComponentModel>{"spiceNo": "21", "quantity": 10000}
+                ],
+                "name": "Pure Opal Navette",
+                "bonusGiven": 10
+            }),
+        new JewelBase(20, <JewelModel>{
+                "x": 2040,
+                "y": 96,
+                "range": 90,
+                "effect": "'Depot Studies PhD' gives an additional }% boost to all Crop Depot bonuses!",
+                "description": "Bolsters 'Depot Studies PhD'",
+                "requirements": [
+                    <ComponentModel>{"item": "Critter11A", "quantity": 5000},
+                    <MealComponentModel>{"mealNo": "62", "quantity": 100000000},
+                    <SpiceComponentModel>{"spiceNo": "22", "quantity": 10000}
+                ],
+                "name": "Pure Opal Rhombol",
+                "bonusGiven": 10
             })    
 ]
 }

@@ -49,7 +49,7 @@ export const initJadeUpgradeRepo = () => {
                 "imageId": 4,
                 "filler1": "filler",
                 "filler2": "filler",
-                "bonus": "Certain monsters in World 6 will now have a rare chance to drop Ninja Hats, but only the hats that your Ninja Twins have equipped."
+                "bonus": "Certain monsters in World 6 will now have a rare chance to drop Ninja Hats, but only the ones you've found already from the Ninja Castle!"
             }),
         new JadeUpgradeBase(5, <JadeUpgradeModel>{
                 "name": "Level Exemption",
@@ -268,58 +268,58 @@ export const initJadeUpgradeRepo = () => {
                 "bonus": "Adds a new bonus type to your crop scientist's Data Sheet! Specifically '+7% Shiny Pet Lv Up Rate and Pet Breeding Rate' per Crop!"
             }),
         new JadeUpgradeBase(29, <JadeUpgradeModel>{
-                "name": "UNDER CONSTRUCTION",
+                "name": "Science Paintbrush",
                 "costA": 500,
                 "costB": 1,
                 "imageId": 29,
                 "filler1": "filler",
                 "filler2": "filler",
-                "bonus": "This bonus isn't out yet, so you cant buy it! Please come back in a few updates there'll be more floors to sneak up to as well!"
+                "bonus": "Adds a new bonus type to your crop scientist's Data Sheet! Specifically '+0.1 Base Critter caught in Trapping' per Crop!"
             }),
         new JadeUpgradeBase(30, <JadeUpgradeModel>{
-                "name": "UNDER CONSTRUCTION",
+                "name": "New Critter",
                 "costA": 500,
                 "costB": 1,
                 "imageId": 30,
                 "filler1": "filler",
                 "filler2": "filler",
-                "bonus": "This bonus isn't out yet, so you cant buy it! Please come back in a few updates, specifically the sneaking related updates!"
+                "bonus": "Unlocks a new critter type to capture! These have their own very special vial in Alchemy."
             }),
         new JadeUpgradeBase(31, <JadeUpgradeModel>{
-                "name": "UNDER CONSTRUCTION",
+                "name": "Ionized Sigils",
                 "costA": 500,
                 "costB": 1,
                 "imageId": 31,
                 "filler1": "filler",
                 "filler2": "filler",
-                "bonus": "This bonus isn't out yet, so you cant buy it! Please come back in a few updates, I made myself clear before!"
+                "bonus": "Sigils can now be upgraded a 3rd time. Push past lame ol' yellow, and further increasing those sigil boosts!"
             }),
         new JadeUpgradeBase(32, <JadeUpgradeModel>{
-                "name": "UNDER CONSTRUCTION",
+                "name": "The Endercaptain",
                 "costA": 500,
                 "costB": 1,
                 "imageId": 32,
                 "filler1": "filler",
                 "filler2": "filler",
-                "bonus": "This bonus isn't out yet, so you cant buy it! Please come back in a few updates!"
+                "bonus": "Adds the Endercaptain to Recruitment pool. They're very rare, and have a hidden account-wide +25% Loot Multi and Artifact Find."
             }),
         new JadeUpgradeBase(33, <JadeUpgradeModel>{
-                "name": "NAME NEEDED",
+                "name": "True Godly Blessings",
                 "costA": 500,
                 "costB": 1,
                 "imageId": 33,
                 "filler1": "filler",
                 "filler2": "filler",
-                "bonus": "All Divinity Gods give 1.05x higher Blessing bonus (the passive bonus that affects all characters always) per God Rank."
+                "bonus": "All Divinity Gods give 1.05x higher Blessing bonus per God Rank. Whats a Blessing bonus? Select a god, it's the one on the bottom, go look."
             }),
         new JadeUpgradeBase(34, <JadeUpgradeModel>{
-                "name": "NAME NEEDED",
+                "name": "Brighter Lighthouse Bulb",
                 "costA": 500,
                 "costB": 1,
                 "imageId": 34,
                 "filler1": "filler",
                 "filler2": "filler",
-                "bonus": "idk"
+                "bonus": "You can now find 3 additional Artifacts from The Edge island."
             }),
         new JadeUpgradeBase(35, <JadeUpgradeModel>{
                 "name": "Sovereign Artifacts",
@@ -328,25 +328,25 @@ export const initJadeUpgradeRepo = () => {
                 "imageId": 35,
                 "filler1": "filler",
                 "filler2": "filler",
-                "bonus": "idk"
+                "bonus": "You can now find Sovereign Artifacts from sailing, but only if you've found the Eldritch form first."
             }),
         new JadeUpgradeBase(36, <JadeUpgradeModel>{
-                "name": "INSERT SUMMONING 3",
+                "name": "New Bribes",
                 "costA": 500,
                 "costB": 1,
                 "imageId": 36,
                 "filler1": "filler",
                 "filler2": "filler",
-                "bonus": "Idk yet"
+                "bonus": "Mr. Pigibank is up to no good once again, and he's looking to get some funding from his favorite patron... you. Well, your wallet specifically."
             }),
         new JadeUpgradeBase(37, <JadeUpgradeModel>{
-                "name": "INSERT SUMMONING 4",
+                "name": "Laboratory Bling",
                 "costA": 500,
                 "costB": 1,
                 "imageId": 37,
                 "filler1": "filler",
                 "filler2": "filler",
-                "bonus": "Idk yet"
+                "bonus": "Adds 3 new Jewels to unlock at the Jewel Spinner in W4 Town. Or, get one for free every 700 total Lab LV as shown in Rift Skill Mastery."
             }),
         new JadeUpgradeBase(38, <JadeUpgradeModel>{
                 "name": "IDK YET",
@@ -358,6 +358,96 @@ export const initJadeUpgradeRepo = () => {
                 "bonus": "Idk yet"
             }),
         new JadeUpgradeBase(39, <JadeUpgradeModel>{
+                "name": "UNDER CONSTRUCTION",
+                "costA": 500,
+                "costB": 1,
+                "imageId": 39,
+                "filler1": "filler",
+                "filler2": "filler",
+                "bonus": "This bonus isn't out yet, so you cant buy it! Please come back in a few updates there'll be more floors to sneak up to as well!"
+            }),
+        new JadeUpgradeBase(40, <JadeUpgradeModel>{
+                "name": "UNDER CONSTRUCTION",
+                "costA": 500,
+                "costB": 1,
+                "imageId": 39,
+                "filler1": "filler",
+                "filler2": "filler",
+                "bonus": "This bonus isn't out yet, so you cant buy it! Please come back in a few updates, specifically the sneaking related updates!"
+            }),
+        new JadeUpgradeBase(41, <JadeUpgradeModel>{
+                "name": "UNDER CONSTRUCTION",
+                "costA": 500,
+                "costB": 1,
+                "imageId": 39,
+                "filler1": "filler",
+                "filler2": "filler",
+                "bonus": "This bonus isn't out yet, so you cant buy it! Please come back in a few updates, I made myself clear before!"
+            }),
+        new JadeUpgradeBase(42, <JadeUpgradeModel>{
+                "name": "UNDER CONSTRUCTION",
+                "costA": 500,
+                "costB": 1,
+                "imageId": 39,
+                "filler1": "filler",
+                "filler2": "filler",
+                "bonus": "This bonus isn't out yet. 'nuff said."
+            }),
+        new JadeUpgradeBase(43, <JadeUpgradeModel>{
+                "name": "IDK YET",
+                "costA": 500,
+                "costB": 1,
+                "imageId": 39,
+                "filler1": "filler",
+                "filler2": "filler",
+                "bonus": "Idk yet"
+            }),
+        new JadeUpgradeBase(44, <JadeUpgradeModel>{
+                "name": "IDK YET",
+                "costA": 500,
+                "costB": 1,
+                "imageId": 39,
+                "filler1": "filler",
+                "filler2": "filler",
+                "bonus": "Idk yet"
+            }),
+        new JadeUpgradeBase(45, <JadeUpgradeModel>{
+                "name": "IDK YET",
+                "costA": 500,
+                "costB": 1,
+                "imageId": 39,
+                "filler1": "filler",
+                "filler2": "filler",
+                "bonus": "Idk yet"
+            }),
+        new JadeUpgradeBase(46, <JadeUpgradeModel>{
+                "name": "IDK YET",
+                "costA": 500,
+                "costB": 1,
+                "imageId": 39,
+                "filler1": "filler",
+                "filler2": "filler",
+                "bonus": "Idk yet"
+            }),
+        new JadeUpgradeBase(47, <JadeUpgradeModel>{
+                "name": "IDK YET",
+                "costA": 500,
+                "costB": 1,
+                "imageId": 39,
+                "filler1": "filler",
+                "filler2": "filler",
+                "bonus": "Idk yet"
+            }),
+        new JadeUpgradeBase(48, <JadeUpgradeModel>{
+                "name": "IDK YET",
+                "costA": 500,
+                "costB": 1,
+                "imageId": 39,
+                "filler1": "filler",
+                "filler2": "filler",
+                "bonus": "Idk yet"
+            }),
+        new JadeUpgradeBase(49, <JadeUpgradeModel>{
                 "name": "IDK YET",
                 "costA": 500,
                 "costB": 1,

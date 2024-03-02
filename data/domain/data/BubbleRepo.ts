@@ -5,8 +5,8 @@ import { CropComponentModel } from '../model/cropComponentModel';
 import { JadeComponentModel } from '../model/jadeComponentModel';
 import { LiquidComponentModel } from '../model/liquidComponentModel';
 import { SailTreasureComponentModel } from '../model/sailTreasureComponentModel';
-import { SoulComponentModel } from '../model/soulComponentModel';
 import { SpiceComponentModel } from '../model/spiceComponentModel';
+import { SummonComponentModel } from '../model/summonComponentModel';
 
 export class CauldronBase { constructor(public id: string, public data: CauldronModel) { } }
 
@@ -299,7 +299,7 @@ export const initBubbleRepo = () => {
                         "x2": 60,
                         "func": "decay",
                         "description": "+{% STR for every 500 Tome Completion Points above 1000. NOTE: The tome is coming in an upcoming weekly update!",
-                        "requirements": [<SoulComponentModel>{"soulId": "0", "quantity": 500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                        "requirements": [<SummonComponentModel>{"summonId": "0", "quantity": 500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                         "bonusKey": "W8"
                     },
                     <BubbleModel>{
@@ -319,7 +319,7 @@ export const initBubbleRepo = () => {
                         "x2": 50,
                         "func": "decay",
                         "description": "+{% Crop Evolution chance for every 500 Tome Completion Points above 1000.",
-                        "requirements": [<SoulComponentModel>{"soulId": "0", "quantity": 1500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                        "requirements": [<SummonComponentModel>{"summonId": "0", "quantity": 1500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                         "bonusKey": "W10AllCharz"
                     }
                 ]
@@ -899,7 +899,7 @@ export const initBubbleRepo = () => {
                         "x2": 60,
                         "func": "decay",
                         "description": "The effect WIS has on Damage is increased by +{%",
-                        "requirements": [<SoulComponentModel>{"soulId": "0", "quantity": 500}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
+                        "requirements": [<SummonComponentModel>{"summonId": "0", "quantity": 500}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
                         "bonusKey": "M6"
                     },
                     <BubbleModel>{
@@ -909,7 +909,7 @@ export const initBubbleRepo = () => {
                         "x2": 60,
                         "func": "decay",
                         "description": "+{ Choppin and Worship Power. This bonus increases based on every 10 Class LVs you are above 500.",
-                        "requirements": [<SoulComponentModel>{"soulId": "0", "quantity": 950}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
+                        "requirements": [<SummonComponentModel>{"summonId": "0", "quantity": 950}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
                         "bonusKey": "M7"
                     },
                     <BubbleModel>{
@@ -1236,7 +1236,7 @@ export const initBubbleRepo = () => {
                         "x2": 60,
                         "func": "decayMulti",
                         "description": "{x Item Find chance for your ninja twin while sneaking!",
-                        "requirements": [<SoulComponentModel>{"soulId": "0", "quantity": 1200}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                        "requirements": [<SummonComponentModel>{"summonId": "0", "quantity": 1200}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                         "bonusKey": "Y9ACTIVE"
                     },
                     <BubbleModel>{
@@ -1900,7 +1900,7 @@ export const initBubbleRepo = () => {
                         "x2": 0,
                         "func": "add",
                         "description": "+{% Farming Speed, so the plants grow faster. Makes sense, plants do get energy from the dumbest things...",
-                        "requirements": [<ComponentModel>{"item": "SpiA2", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "3", "quantity": -1}],
+                        "requirements": [<ComponentModel>{"item": "SpiA2", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
                         "bonusKey": "6FarmSpd"
                     },
                     <BubbleModel>{
@@ -1910,7 +1910,7 @@ export const initBubbleRepo = () => {
                         "x2": 0,
                         "func": "add",
                         "description": "+{% White Essence gain, and before you make an angry rant, male ladybugs were also used to flavor this vial!",
-                        "requirements": [<ComponentModel>{"item": "Bug12", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "3", "quantity": -1}],
+                        "requirements": [<ComponentModel>{"item": "Bug12", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
                         "bonusKey": "6WhiteEss"
                     },
                     <BubbleModel>{
@@ -1920,7 +1920,7 @@ export const initBubbleRepo = () => {
                         "x2": 0,
                         "func": "add",
                         "description": "+{% Farming Crop Evolution chance. I guess like, the fishbits mutate with the crops? Idk I'm not a planterman.",
-                        "requirements": [<ComponentModel>{"item": "Fish12", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "3", "quantity": -1}],
+                        "requirements": [<ComponentModel>{"item": "Fish12", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
                         "bonusKey": "6FarmEvo"
                     },
                     <BubbleModel>{
@@ -1930,7 +1930,7 @@ export const initBubbleRepo = () => {
                         "x2": 0,
                         "func": "add",
                         "description": "+{% Ninja Untying rate. I wonder if bomb diffusers drink tea before going to work?",
-                        "requirements": [<ComponentModel>{"item": "SpiB1", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "3", "quantity": -1}],
+                        "requirements": [<ComponentModel>{"item": "SpiB1", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
                         "bonusKey": "6Untie"
                     },
                     <BubbleModel>{
@@ -1940,7 +1940,7 @@ export const initBubbleRepo = () => {
                         "x2": 0,
                         "func": "add",
                         "description": "+{% Cooking Speed, but multiplicative so it stacks big time with the other 892,314 cooking bonuses you have!",
-                        "requirements": [<ComponentModel>{"item": "Bug13", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "3", "quantity": -1}],
+                        "requirements": [<ComponentModel>{"item": "Bug13", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
                         "bonusKey": "6CookSpd"
                     },
                     <BubbleModel>{
@@ -1950,7 +1950,7 @@ export const initBubbleRepo = () => {
                         "x2": 0,
                         "func": "add",
                         "description": "+{% Total Skill efficiency, but not multiplicative so that it drowns in the sea of bonuses you already have.",
-                        "requirements": [<ComponentModel>{"item": "GodshardBar", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "3", "quantity": -1}],
+                        "requirements": [<ComponentModel>{"item": "GodshardBar", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
                         "bonusKey": "6SkillEff"
                     },
                     <BubbleModel>{
@@ -1960,7 +1960,7 @@ export const initBubbleRepo = () => {
                         "x2": 0,
                         "func": "add",
                         "description": "+{% Sneaking EXP gain. Something about it makes you feel light on your feet, as if u just wanna fly...",
-                        "requirements": [<ComponentModel>{"item": "Soul7", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "3", "quantity": -1}],
+                        "requirements": [<ComponentModel>{"item": "Soul7", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
                         "bonusKey": "6SneakEXP"
                     },
                     <BubbleModel>{
@@ -1970,7 +1970,7 @@ export const initBubbleRepo = () => {
                         "x2": 0,
                         "func": "add",
                         "description": "+{% Summoning EXP gain. No, the horn doesn't contribute to the flavor, just the fleshy bits inside.",
-                        "requirements": [<ComponentModel>{"item": "SpiC2", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "3", "quantity": -1}],
+                        "requirements": [<ComponentModel>{"item": "SpiC2", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
                         "bonusKey": "6SummEXP"
                     },
                     <BubbleModel>{
@@ -1980,7 +1980,7 @@ export const initBubbleRepo = () => {
                         "x2": 0,
                         "func": "add",
                         "description": "+{% Farming EXP gain, but dont drink too much since Eucalyptus oil is toxic IRL no joke fr fr search it or just take my word.",
-                        "requirements": [<ComponentModel>{"item": "Tree13", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "3", "quantity": -1}],
+                        "requirements": [<ComponentModel>{"item": "Tree13", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
                         "bonusKey": "6FarmEXP"
                     },
                     <BubbleModel>{
@@ -1990,8 +1990,18 @@ export const initBubbleRepo = () => {
                         "x2": 0,
                         "func": "add",
                         "description": "+{% Jade Gain in Sneaking. Congratulations btw on trekking through World 6 like that what a journey!",
-                        "requirements": [<ComponentModel>{"item": "SpiD3", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "3", "quantity": -1}],
+                        "requirements": [<ComponentModel>{"item": "SpiD3", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
                         "bonusKey": "6Jade"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Vials",
+                        "name": "Turtle Tisane",
+                        "x1": 4,
+                        "x2": 0,
+                        "func": "add",
+                        "description": "+{% Artifact find chance, Sigil SPD, Cooking SPD, and Construction Build rate. All MULTIPLICATIVE! A very special vial indeed...",
+                        "requirements": [<ComponentModel>{"item": "Critter11", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
+                        "bonusKey": "6turtle"
                     }
                 ]
             }),

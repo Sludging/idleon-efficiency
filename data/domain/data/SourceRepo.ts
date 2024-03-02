@@ -10858,7 +10858,8 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Royal Worm#Normie Bidding|Normie Bidding]]",
                         "txtName": "Royal Worm: Normie Bidding"
-                    }
+                    },
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -12795,8 +12796,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Royal Worm#Bossin' the Boss|Bossin' the Boss]]",
                         "txtName": "Royal Worm: Bossin' the Boss"
-                    },
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                    }
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -13676,32 +13676,17 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentRings34", <SourcesModel>{
+        new SourcesBase("EquipmentCape0", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentRings32", <SourcesModel>{
+        new SourcesBase("EquipmentNametag3", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentRings31", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("EquipmentRings33", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("GemP25", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("EquipmentPendant28", <SourcesModel>{
+        new SourcesBase("Quest77", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
@@ -14075,6 +14060,16 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("Critter10A", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Trapping]]", "txtName": "Trapping"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Critter11", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Trapping]]", "txtName": "Trapping"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Critter11A", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Trapping]]", "txtName": "Trapping"}],
                 "recipeFrom": [],
                 "questAss": []
