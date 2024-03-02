@@ -69,7 +69,6 @@ export class Crop {
         this.nextCropChance = evolutionChance;
     }
 
-
     static getCropIconData = (cropId: number): ImageData => {
         return {
             location: `FarmCrop${cropId}`,
@@ -81,6 +80,14 @@ export class Crop {
     static getMagicBeanIconData = (): ImageData => {
         return {
             location: `FarmCropBean`,
+            height: 20,
+            width: 20
+        }
+    }
+
+    static getCropTransferTicketIconData = (): ImageData => {
+        return {
+            location: `Quest80_x1`,
             height: 20,
             width: 20
         }
@@ -170,6 +177,7 @@ export class CropScientist {
         this.bonuses.push(new CropScientistBonus(CropScientistBonusText.CookingSpeed, 1.10, 26));
         this.bonuses.push(new CropScientistBonus(CropScientistBonusText.CashBonus, 15, 23));
         this.bonuses.push(new CropScientistBonus(CropScientistBonusText.ShinyPetLvlUpRate, 7, 28));
+        this.bonuses.push(new CropScientistBonus(CropScientistBonusText.BaseCritterPerTrap, 0.1, 29));
     }
 
     getBonus(bonus: CropScientistBonusText): number {
@@ -201,6 +209,13 @@ export class Farming extends Domain {
     growthRate: number = 0;
     magicBeansFromDepot: number = 0;
     discoveredCrops: number = 0;
+
+    cropNames = ["Apple", "Orange", "Lemon", "Pear", "Strawberry", "Bananas", "Blueberry", "Red Grapes", "Red Pear", "Pineapple", "Lime", "Raspberry", "Fig", "Peach", "Purple Grapes", "Yellow Pear", "Watermelon", "Green Grapes", "Dragon Fruit", "Mango", "Gold Blueberry",
+        "Carrot", "Potato", "Beat", "Tomato", "Artichoke", "Roma Tomato", "Butternut Squash", "Kiwi", "Red Pepper", "Broccoli", "Radish", "Coconut", "Sliced Tomato", "Cashew", "Turnip", "Coffee Bean", "Pumpkin", "Sliced Cucumber", "Eggplant", "Lettuce", "Garlic", "Green Beans", "Bell Pepper", "Corn", "Gold Sliced Tomato",
+        "Daisy", "Flour", "Stargazer Lily", "Rose", "Sunflower", "Blue Daisy", "???", "Tulip", "???", "Cauliflower", "???", "???", "Muffin", "???", "???",
+        "Sake Maki", "Salmon Nigiri", "Temaki", "Hamaguri", "Onigiri", "Ama-ebi", "Cup Ramen", "Dalkon Maki", "???", "???", "Ikura", "???", "???", "???", "Avocado Maki", "Ebi Nigiri", "???", "???", "Tako Nigiri", "Soy Sauce", "???", "Neko Rice", "Shrimp",
+        "Mushroom 1", "Mushroom 2", "Mushroom 3", "Mushroom 4", "Mushroom 5", "Mushroom 6", "Mushroom 7", "Mushroom 8", "Mushroom 9", "Mushroom 10", "Mushroom 11", "Mushroom 12", "Mushroom 13", "Mushroom 14", "Mushroom 15", "Mushroom 16", "Mushroom 17", "Mushroom 18", "Mushroom 19", "Mushroom 20", "Mushroom 21", "Mushroom 22", "Mushroom 23",
+        "Glassy Bananas", "???", "Glassy Mushroom 1", "Glassy Maki", "Glassy Mushroom 2", "Glassy Carrot", "???", "Glassy Watermellon", "Glassy Shrimp", "???", "Glassy Corn", "???", "Glassy Onigiri"];
 
     getRawKeys(): RawData[] {
         return [
@@ -287,6 +302,7 @@ export class Farming extends Domain {
                 case CropScientistBonusText.CashBonus:
                 case CropScientistBonusText.JadeCoinGain:
                 case CropScientistBonusText.TotalDamage:
+                case CropScientistBonusText.BaseCritterPerTrap:
                 default:
                     bonus.bonusValue = (bonus.bonusPerCrop * cropsFound) * (1 + (bonusFromLabBonus17 / 100));
             }
@@ -394,6 +410,14 @@ export class Farming extends Domain {
         }
     }
 
+    getCropName = (cropIndex: number): string => {
+        if (cropIndex < this.cropNames.length) {
+            return this.cropNames[cropIndex];
+        } else {
+            return "";
+        }
+    }
+
     static getDayMarketImageData = (): ImageData => {
         return {
             location: `FarmStT0`,
@@ -415,6 +439,14 @@ export class Farming extends Domain {
             location: `FarmStT2`,
             height: 53,
             width: 60
+        }
+    }
+
+    static getInstaGrowImageData = (): ImageData => {
+        return {
+            location: `GemP31`,
+            height: 20,
+            width: 20
         }
     }
 }
@@ -493,7 +525,8 @@ export enum CropScientistBonusText {
     JadeCoinGain = "+{% Jade Coin Gain",
     CookingSpeed = "{x Cooking Speed (multiplicative)",
     TotalDamage = "+{% Total Damage",
-    ShinyPetLvlUpRate = "+{% Shiny Pet Lv Up Rate and Pet Breeding Rate"
+    ShinyPetLvlUpRate = "+{% Shiny Pet Lv Up Rate and Pet Breeding Rate",
+    BaseCritterPerTrap = "+{ Base Critter caught in Trapping"
 }
 
 export enum PlotGrowthStage {
