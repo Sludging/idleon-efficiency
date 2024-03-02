@@ -12,10 +12,10 @@ import { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import IconImage from '../../components/base/IconImage';
 import { nFormatter } from '../../data/utility';
 import TabButton from '../../components/base/TabButton';
-import { CropScientist } from '../../components/world-6/farming/cropScientist';
-import { Plots } from '../../components/world-6/farming/plots';
 import { MarketUpgradesDisplay } from '../../components/world-6/farming/marketUpgrades';
+import { CropScientistDisplay } from '../../components/world-6/farming/cropScientist';
 import { CropDepotDisplay } from '../../components/world-6/farming/cropDepot';
+import { PlotsDisplay } from '../../components/world-6/farming/plots';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 
 function Farming() {
@@ -97,10 +97,10 @@ function Farming() {
                     }
                 </Box>
                 <Box align="center" margin={{ top: 'small', bottom: 'small' }}>
-                    {activeTab == "Crop Scientist" && <CropScientist />}
-                    {activeTab == "Plots" && <Plots/>}
+                    {activeTab == "Crop Scientist" && <CropScientistDisplay cropScientist={farming.cropScientist} />}
                     {activeTab == "Market Upgrades" && <MarketUpgradesDisplay farming={farming} />}
                     {activeTab == "Crop Depot" && <CropDepotDisplay farming={farming} />}
+                    {activeTab == "Plots" && <PlotsDisplay />}
                 </Box>
             </Box>
         )

@@ -1,6 +1,6 @@
 import { Box, Grid, Text } from "grommet";
 
-export const Plots = () => {
+export const PlotsDisplay = () => {
     return (
         <Text>Plots</Text>
     )
