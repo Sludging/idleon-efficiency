@@ -36,18 +36,6 @@ function Sneaking() {
         return sneaking.jadeUpgrades?.slice().sort((upgrade1, upgrade2) => upgrade1.displayOrder > upgrade2.displayOrder ? 1 : -1);
     }, [appContext, sneaking])
 
-    // Lava shows the next 3 upgrades only at a time, so we need to find the last purchased one and use that info to hide the rest.
-    const indexOfBestUpgrade = useMemo(() => {
-        for (const upgrade of jadeUpgrades) {
-            // Look at purchases in order, find the first one that isn't purchased and return the previous index.
-            if (!upgrade.purchased) {
-                return upgrade.displayOrder - 1;
-            }
-        }
-
-        return jadeUpgrades.length;
-    }, [jadeUpgrades])
-
     if (!sneaking) {
         return <>Loading...</>
     }
@@ -78,7 +66,7 @@ function Sneaking() {
                 ))
                 }
             </Box>
-            {activeTab == "Jade Upgrades" && <JadeUpgrades currentJade={sneaking.jade} indexOfBestUpgrade={indexOfBestUpgrade} jadeUpgrades={jadeUpgrades} />}
+            {activeTab == "Jade Upgrades" && <JadeUpgrades currentJade={sneaking.jade} jadeUpgrades={jadeUpgrades} />}
             {activeTab == "Sneaking Upgrades" && <SneakingUpgrades currentJade={sneaking.jade} upgrades={sneaking.sneakingUpgrades} />}
             {activeTab == "Pristine Charms" && <PristineCharmSection charms={sneaking.pristineCharms} />}
         </Box>

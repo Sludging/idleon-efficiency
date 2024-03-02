@@ -653,7 +653,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "Giuseppe and his Power Tools",
                 "bonusId": 14,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 14, "bonus": "<x Construct SPD"},
-                "bonusQty": 75,
+                "bonusQty": 60,
                 "difficulty": 78
             }),
         new SummonEnemyBase(59, <SummonEnemyModel>{
@@ -664,7 +664,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "Jawz and his Hot Smokin Suggmas",
                 "bonusId": 17,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 17, "bonus": "<x Gaming Bits"},
-                "bonusQty": 2,
+                "bonusQty": 30,
                 "difficulty": 44
             }),
         new SummonEnemyBase(60, <SummonEnemyModel>{
@@ -675,7 +675,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "Macdonald and his Homemade Maccies",
                 "bonusId": 15,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 15, "bonus": "<x Skill Effncy."},
-                "bonusQty": 15,
+                "bonusQty": 10,
                 "difficulty": 48
             }),
         new SummonEnemyBase(61, <SummonEnemyModel>{
@@ -686,7 +686,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "Brandon and his Iconic Brightsides",
                 "bonusId": 1,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 1, "bonus": "<x Total DMG"},
-                "bonusQty": 75,
+                "bonusQty": 40,
                 "difficulty": 53
             }),
         new SummonEnemyBase(62, <SummonEnemyModel>{
@@ -719,7 +719,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "The Don's Molto Bene Moltis",
                 "bonusId": 16,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 16, "bonus": "<x Cooking SPD"},
-                "bonusQty": 100,
+                "bonusQty": 90,
                 "difficulty": 59
             }),
         new SummonEnemyBase(65, <SummonEnemyModel>{
@@ -730,7 +730,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "Smoggy Shaman and their Scary Bones",
                 "bonusId": 7,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 7, "bonus": "<x Sneak EXP"},
-                "bonusQty": 50,
+                "bonusQty": 30,
                 "difficulty": 63
             }),
         new SummonEnemyBase(66, <SummonEnemyModel>{
@@ -741,7 +741,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "Thomas and his Halftime Breakforce",
                 "bonusId": 18,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 18, "bonus": "<x Shiny EXP"},
-                "bonusQty": 30,
+                "bonusQty": 25,
                 "difficulty": 69
             }),
         new SummonEnemyBase(67, <SummonEnemyModel>{
@@ -774,7 +774,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "Briggs and his Mole Workforce",
                 "bonusId": 6,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 6, "bonus": "<x All Essence"},
-                "bonusQty": 40,
+                "bonusQty": 25,
                 "difficulty": 79
             }),
         new SummonEnemyBase(70, <SummonEnemyModel>{
@@ -785,7 +785,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "Krepe and his Crawlies",
                 "bonusId": 4,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 4, "bonus": "<x Artifact Find"},
-                "bonusQty": 25,
+                "bonusQty": 15,
                 "difficulty": 82
             }),
         new SummonEnemyBase(71, <SummonEnemyModel>{
@@ -807,7 +807,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "Spiffy Jr and their Whelming Liquids",
                 "bonusId": 19,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 19, "bonus": "+{% All Stat"},
-                "bonusQty": 250,
+                "bonusQty": 3,
                 "difficulty": 58
             }),
         new SummonEnemyBase(73, <SummonEnemyModel>{
@@ -818,7 +818,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "iFarm and their 0cal Units",
                 "bonusId": 2,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 2, "bonus": "<x Jade Gain"},
-                "bonusQty": 100,
+                "bonusQty": 50,
                 "difficulty": 64
             }),
         new SummonEnemyBase(74, <SummonEnemyModel>{
@@ -840,7 +840,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "Bart and his Trollsquad",
                 "bonusId": 12,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 12, "bonus": "+{% AFK Gains"},
-                "bonusQty": 3,
+                "bonusQty": 2,
                 "difficulty": 68
             }),
         new SummonEnemyBase(76, <SummonEnemyModel>{
@@ -851,7 +851,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "Grunkle and their Rooted Whimsy",
                 "bonusId": 14,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 14, "bonus": "<x Construct SPD"},
-                "bonusQty": 150,
+                "bonusQty": 80,
                 "difficulty": 72
             }),
         new SummonEnemyBase(77, <SummonEnemyModel>{
@@ -862,7 +862,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "Barb and her Overworked Blobs",
                 "bonusId": 13,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 13, "bonus": "+{% Skill EXP"},
-                "bonusQty": 25,
+                "bonusQty": 20,
                 "difficulty": 73
             }),
         new SummonEnemyBase(78, <SummonEnemyModel>{
@@ -873,7 +873,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "Lumi and her Bright Lights",
                 "bonusId": 1,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 1, "bonus": "<x Total DMG"},
-                "bonusQty": 80,
+                "bonusQty": 60,
                 "difficulty": 76
             }),
         new SummonEnemyBase(79, <SummonEnemyModel>{
@@ -884,7 +884,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "Marge and her Troll Patrol",
                 "bonusId": 16,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 16, "bonus": "<x Cooking SPD"},
-                "bonusQty": 250,
+                "bonusQty": 120,
                 "difficulty": 77
             }),
         new SummonEnemyBase(80, <SummonEnemyModel>{
@@ -906,7 +906,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "Seru and their Ceramic Entities",
                 "bonusId": 15,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 15, "bonus": "<x Skill Effncy."},
-                "bonusQty": 25,
+                "bonusQty": 20,
                 "difficulty": 81
             }),
         new SummonEnemyBase(82, <SummonEnemyModel>{
@@ -917,7 +917,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "Mr Walker and his Untiring Doggies",
                 "bonusId": 17,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 17, "bonus": "<x Gaming Bits"},
-                "bonusQty": 3,
+                "bonusQty": 50,
                 "difficulty": 83
             }),
         new SummonEnemyBase(83, <SummonEnemyModel>{
@@ -950,7 +950,7 @@ export const initSummonEnemyRepo = () => {
                 "territoryName": "Shinji and his Inevitable Army",
                 "bonusId": 20,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 20, "bonus": "+{ Library Max"},
-                "bonusQty": 10,
+                "bonusQty": 3,
                 "difficulty": 87
             }),
         new SummonEnemyBase(86, <SummonEnemyModel>{

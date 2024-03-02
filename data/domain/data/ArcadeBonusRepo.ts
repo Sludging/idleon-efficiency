@@ -229,6 +229,86 @@ export const initArcadeBonusRepo = () => {
                 "func": "decay",
                 "type": "%",
                 "lvlUpText": "+{% Drop"
+            }),
+        new ArcadeBonusBase(28, <ArcadeBonusModel>{
+                "effect": "+{% Cook SPD multi",
+                "x1": 40,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% SPD"
+            }),
+        new ArcadeBonusBase(29, <ArcadeBonusModel>{
+                "effect": "+{% Lab EXP gain",
+                "x1": 30,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% EXP"
+            }),
+        new ArcadeBonusBase(30, <ArcadeBonusModel>{
+                "effect": "+{% Breed Pet DMG",
+                "x1": 40,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% DMG"
+            }),
+        new ArcadeBonusBase(31, <ArcadeBonusModel>{
+                "effect": "+{% Nugget Regen",
+                "x1": 30,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% Regen"
+            }),
+        new ArcadeBonusBase(32, <ArcadeBonusModel>{
+                "effect": "+{% Arti Find",
+                "x1": 50,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% Chance"
+            }),
+        new ArcadeBonusBase(33, <ArcadeBonusModel>{
+                "effect": "+{% Sailing Loot",
+                "x1": 30,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% Loot"
+            }),
+        new ArcadeBonusBase(34, <ArcadeBonusModel>{
+                "effect": "+{% W Ess gain",
+                "x1": 40,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% W Ess"
+            }),
+        new ArcadeBonusBase(35, <ArcadeBonusModel>{
+                "effect": "+{% Jade gain",
+                "x1": 50,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% Jade"
+            }),
+        new ArcadeBonusBase(36, <ArcadeBonusModel>{
+                "effect": "+{% Farming EXP",
+                "x1": 30,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% EXP"
+            }),
+        new ArcadeBonusBase(37, <ArcadeBonusModel>{
+                "effect": "+{% Divinity EXP",
+                "x1": 40,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% EXP"
             })    
 ]
 }

@@ -5921,8 +5921,8 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "Tree11", "quantity": 1, "chance": 1e-08}
                 ]
             }),
-        new DetDropsBase("CardsF34", <DetDropsModel>{"sources": [<DetDropModel>{"source": "Tree12", "quantity": 1, "chance": 1e-08}]}),
-        new DetDropsBase("CardsF35", <DetDropsModel>{"sources": [<DetDropModel>{"source": "Tree13", "quantity": 1, "chance": 1e-08}]}),
+        new DetDropsBase("CardsF34", <DetDropsModel>{"sources": [<DetDropModel>{"source": "Tree12", "quantity": 1, "chance": 4e-08}]}),
+        new DetDropsBase("CardsF35", <DetDropsModel>{"sources": [<DetDropModel>{"source": "Tree13", "quantity": 1, "chance": 4e-08}]}),
         new DetDropsBase("CardsC11", <DetDropsModel>{"sources": [<DetDropModel>{"source": "Bug1", "quantity": 1, "chance": 0.00042}]}),
         new DetDropsBase("DropTable12", <DetDropsModel>{
                 "sources": [

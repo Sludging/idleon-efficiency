@@ -111,10 +111,10 @@ export const initMarketInfoRepo = () => {
                 "cropId": 2,
                 "cropIdIncrement": 0.1,
                 "cost": 15,
-                "costExponent": 1.05,
+                "costExponent": 1.08,
                 "cropReq": 25,
                 "maxLvl": 500,
-                "bonusPerLvl": 1
+                "bonusPerLvl": 0.5
             }),
         new MarketInfoBase(10, <MarketInfoModel>{
                 "name": "SPEED GMO",
@@ -133,7 +133,7 @@ export const initMarketInfoRepo = () => {
                 "cropId": 2,
                 "cropIdIncrement": 0.1,
                 "cost": 40,
-                "costExponent": 1.04,
+                "costExponent": 1.06,
                 "cropReq": 50,
                 "maxLvl": 500,
                 "bonusPerLvl": 1

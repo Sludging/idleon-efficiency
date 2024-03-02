@@ -13,7 +13,9 @@ export const initSigilRepo = () => {
                 "unlockBonus": 10,
                 "boostBonus": 20,
                 "filler": "filler",
-                "desc": "Boosts base STR by +{"
+                "desc": "Boosts base STR by +{",
+                "x1": 50000,
+                "x2": 40
             }),
         new SigilBase(1, <SigilModel>{
                 "name": "Pumped Kicks",
@@ -22,7 +24,9 @@ export const initSigilRepo = () => {
                 "unlockBonus": 10,
                 "boostBonus": 20,
                 "filler": "filler",
-                "desc": "Boosts base AGI by +{"
+                "desc": "Boosts base AGI by +{",
+                "x1": 60000,
+                "x2": 40
             }),
         new SigilBase(2, <SigilModel>{
                 "name": "Odd Litearture",
@@ -31,7 +35,9 @@ export const initSigilRepo = () => {
                 "unlockBonus": 10,
                 "boostBonus": 20,
                 "filler": "filler",
-                "desc": "Boosts base WIS by +{"
+                "desc": "Boosts base WIS by +{",
+                "x1": 70000,
+                "x2": 40
             }),
         new SigilBase(3, <SigilModel>{
                 "name": "Good Fortune",
@@ -40,7 +46,9 @@ export const initSigilRepo = () => {
                 "unlockBonus": 10,
                 "boostBonus": 20,
                 "filler": "filler",
-                "desc": "Boosts base LUK by +{"
+                "desc": "Boosts base LUK by +{",
+                "x1": 90000,
+                "x2": 40
             }),
         new SigilBase(4, <SigilModel>{
                 "name": "Plunging Sword",
@@ -49,7 +57,9 @@ export const initSigilRepo = () => {
                 "unlockBonus": 75,
                 "boostBonus": 225,
                 "filler": "filler",
-                "desc": "Boosts base damage by +{"
+                "desc": "Boosts base damage by +{",
+                "x1": 100000,
+                "x2": 1000
             }),
         new SigilBase(5, <SigilModel>{
                 "name": "Wizardly Hat",
@@ -58,7 +68,9 @@ export const initSigilRepo = () => {
                 "unlockBonus": 10,
                 "boostBonus": 20,
                 "filler": "filler",
-                "desc": "Boosts Mana Regeneration by +{% both inside and outside of dungeon"
+                "desc": "Boosts Mana Regeneration by +{% both inside and outside of dungeon",
+                "x1": 130000,
+                "x2": 30
             }),
         new SigilBase(6, <SigilModel>{
                 "name": "Envelope Pile",
@@ -67,7 +79,9 @@ export const initSigilRepo = () => {
                 "unlockBonus": 12,
                 "boostBonus": 25,
                 "filler": "filler",
-                "desc": "Decreases the cost of upgrading stamp MAX LEVELS by -{%"
+                "desc": "Decreases the cost of upgrading stamp MAX LEVELS by -{%",
+                "x1": 160000,
+                "x2": 40
             }),
         new SigilBase(7, <SigilModel>{
                 "name": "Shiny Beacon",
@@ -76,7 +90,9 @@ export const initSigilRepo = () => {
                 "unlockBonus": 1,
                 "boostBonus": 2,
                 "filler": "filler",
-                "desc": "The first { monster kills every day will spawn a Crystal Mob"
+                "desc": "The first { monster kills every day will spawn a Crystal Mob",
+                "x1": 200000,
+                "x2": 5
             }),
         new SigilBase(8, <SigilModel>{
                 "name": "Metal Exterior",
@@ -85,7 +101,9 @@ export const initSigilRepo = () => {
                 "unlockBonus": 6,
                 "boostBonus": 12,
                 "filler": "filler",
-                "desc": "Boosts defence by nothing. Also gives +{% Class EXP"
+                "desc": "Boosts defence by nothing. Also gives +{% Class EXP",
+                "x1": 240000,
+                "x2": 20
             }),
         new SigilBase(9, <SigilModel>{
                 "name": "Two Starz",
@@ -94,7 +112,9 @@ export const initSigilRepo = () => {
                 "unlockBonus": 10,
                 "boostBonus": 25,
                 "filler": "filler",
-                "desc": "Gives +{ Star Talent points to spend as you wish"
+                "desc": "Gives +{ Star Talent points to spend as you wish",
+                "x1": 280000,
+                "x2": 45
             }),
         new SigilBase(10, <SigilModel>{
                 "name": "Pipe Gauge",
@@ -103,7 +123,9 @@ export const initSigilRepo = () => {
                 "unlockBonus": 10,
                 "boostBonus": 20,
                 "filler": "filler",
-                "desc": "Increases the speed of refinery cycles by +{%"
+                "desc": "Increases the speed of refinery cycles by +{%",
+                "x1": 320000,
+                "x2": 30
             }),
         new SigilBase(11, <SigilModel>{
                 "name": "Trove",
@@ -112,7 +134,9 @@ export const initSigilRepo = () => {
                 "unlockBonus": 10,
                 "boostBonus": 20,
                 "filler": "filler",
-                "desc": "Boosts drop rate by +{%"
+                "desc": "Boosts drop rate by +{%",
+                "x1": 400000,
+                "x2": 30
             }),
         new SigilBase(12, <SigilModel>{
                 "name": "Pea Pod",
@@ -121,7 +145,9 @@ export const initSigilRepo = () => {
                 "unlockBonus": 25,
                 "boostBonus": 50,
                 "filler": "filler",
-                "desc": "All sigils charge {% faster than normal"
+                "desc": "All sigils charge {% faster than normal",
+                "x1": 420000,
+                "x2": 100
             }),
         new SigilBase(13, <SigilModel>{
                 "name": "Tuft Of Hair",
@@ -130,7 +156,9 @@ export const initSigilRepo = () => {
                 "unlockBonus": 3,
                 "boostBonus": 6,
                 "filler": "filler",
-                "desc": "Boosts movement speed by +{% if under 175%"
+                "desc": "Boosts movement speed by +{% if under 175%",
+                "x1": 450000,
+                "x2": 10
             }),
         new SigilBase(14, <SigilModel>{
                 "name": "Emoji Veggie",
@@ -139,7 +167,9 @@ export const initSigilRepo = () => {
                 "unlockBonus": 10,
                 "boostBonus": 25,
                 "filler": "filler",
-                "desc": "Boosts the bonus of all golden food by +{%"
+                "desc": "Boosts the bonus of all golden food by +{%",
+                "x1": 480000,
+                "x2": 40
             }),
         new SigilBase(15, <SigilModel>{
                 "name": "Vip Parchment",
@@ -148,7 +178,9 @@ export const initSigilRepo = () => {
                 "unlockBonus": 10,
                 "boostBonus": 25,
                 "filler": "filler",
-                "desc": "Boosts VIP Membership in the library by +{%"
+                "desc": "Boosts VIP Membership in the library by +{%",
+                "x1": 520000,
+                "x2": 50
             }),
         new SigilBase(16, <SigilModel>{
                 "name": "Dream Catcher",
@@ -157,7 +189,9 @@ export const initSigilRepo = () => {
                 "unlockBonus": 1,
                 "boostBonus": 2,
                 "filler": "filler",
-                "desc": "Boosts all Skill AFK gain rates by +{%"
+                "desc": "Boosts all Skill AFK gain rates by +{%",
+                "x1": 560000,
+                "x2": 4
             }),
         new SigilBase(17, <SigilModel>{
                 "name": "Duster Studs",
@@ -166,7 +200,9 @@ export const initSigilRepo = () => {
                 "unlockBonus": 3,
                 "boostBonus": 7,
                 "filler": "filler",
-                "desc": "Boosts weapon power by +{"
+                "desc": "Boosts weapon power by +{",
+                "x1": 600000,
+                "x2": 15
             }),
         new SigilBase(18, <SigilModel>{
                 "name": "Garlic Glove",
@@ -175,7 +211,9 @@ export const initSigilRepo = () => {
                 "unlockBonus": 15,
                 "boostBonus": 35,
                 "filler": "filler",
-                "desc": "Decreases the cost of all kitchen upgrades by -{%"
+                "desc": "Decreases the cost of all kitchen upgrades by -{%",
+                "x1": 650000,
+                "x2": 60
             }),
         new SigilBase(19, <SigilModel>{
                 "name": "Lab Tesstube",
@@ -184,7 +222,9 @@ export const initSigilRepo = () => {
                 "unlockBonus": 8,
                 "boostBonus": 20,
                 "filler": "filler",
-                "desc": "Boosts Lab EXP gain by +{%"
+                "desc": "Boosts Lab EXP gain by +{%",
+                "x1": 700000,
+                "x2": 35
             }),
         new SigilBase(20, <SigilModel>{
                 "name": "Peculiar Vial",
@@ -193,7 +233,9 @@ export const initSigilRepo = () => {
                 "unlockBonus": 15,
                 "boostBonus": 25,
                 "filler": "filler",
-                "desc": "Boosts the regeneration rate of all alchemy liquids by +{%"
+                "desc": "Boosts the regeneration rate of all alchemy liquids by +{%",
+                "x1": 750000,
+                "x2": 35
             }),
         new SigilBase(21, <SigilModel>{
                 "name": "Loot Pile",
@@ -202,7 +244,9 @@ export const initSigilRepo = () => {
                 "unlockBonus": 10,
                 "boostBonus": 20,
                 "filler": "filler",
-                "desc": "All sailing treasure chests give +{% more treasure!"
+                "desc": "All sailing treasure chests give +{% more treasure!",
+                "x1": 900000,
+                "x2": 30
             }),
         new SigilBase(22, <SigilModel>{
                 "name": "Div Spiral",
@@ -211,7 +255,9 @@ export const initSigilRepo = () => {
                 "unlockBonus": 10,
                 "boostBonus": 30,
                 "filler": "filler",
-                "desc": "Boosts Divinity EXP gain by +{%"
+                "desc": "Boosts Divinity EXP gain by +{%",
+                "x1": 1200000,
+                "x2": 50
             }),
         new SigilBase(23, <SigilModel>{
                 "name": "Cool Coin",
@@ -220,7 +266,9 @@ export const initSigilRepo = () => {
                 "unlockBonus": 20,
                 "boostBonus": 50,
                 "filler": "filler",
-                "desc": "Boosts Jade Coin gain in Sneaking by +{%"
+                "desc": "Boosts Jade Coin gain in Sneaking by +{%",
+                "x1": 2000000,
+                "x2": 100
             })    
 ]
 }

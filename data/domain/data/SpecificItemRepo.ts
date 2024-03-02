@@ -786,6 +786,22 @@ export const initSpecificItemRepo = () => {
                 "Type": "Critter",
                 "description": "Yo bro I ain't touchin' that thing ain't no way! "
             }),
+        new BaseItemBase("Critter11", <DescItemModel>{
+                "internalName": "Critter11",
+                "displayName": "Tuttle",
+                "sellPrice": 80,
+                "typeGen": TypeGenEnum.dCritters,
+                "Type": "Critter",
+                "description": "He jammin' to the beat! "
+            }),
+        new BaseItemBase("Critter11A", <DescItemModel>{
+                "internalName": "Critter11A",
+                "displayName": "Tottoise",
+                "sellPrice": 3,
+                "typeGen": TypeGenEnum.dCritters,
+                "Type": "Critter",
+                "description": "He out here livin' his best life! No he doesn't look familiar, you're just being silly. Very silly. "
+            }),
         new BaseItemBase("Soul1", <DescItemModel>{
                 "internalName": "Soul1",
                 "displayName": "Forest Soul",
@@ -11786,7 +11802,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("InvStorageN", <ChestItemModel>{
                 "internalName": "InvStorageN",
-                "displayName": "Woodlin Chest",
+                "displayName": "Ninja Chest",
                 "sellPrice": 1000,
                 "typeGen": TypeGenEnum.aStorageChest,
                 "Type": "Storage",
@@ -17684,19 +17700,19 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("EquipmentNametag3", <ArmourItemModel>{
                 "internalName": "EquipmentNametag3",
-                "displayName": "Golden Nametag",
+                "displayName": "Balling Nametag",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aNametag,
                 "Type": "Nametag",
                 "lvReqToCraft": 55,
                 "lvReqToEquip": 1,
                 "Class": ClassTypeEnum.All,
-                "Weapon_Power": 3,
-                "STR": 5,
-                "AGI": 5,
-                "WIS": 5,
-                "LUK": 5,
-                "Defence": 20,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 40,
+                "Defence": 0,
                 "miscUp1": "40% Drop Chance",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
@@ -28545,7 +28561,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 10,
                     "order": 11
                 },
-                "dropChance": 1e-08
+                "dropChance": 4e-08
             }),
         new BaseItemBase("CardsF35", <CardItemModel>{
                 "internalName": "CardsF35",
@@ -28561,7 +28577,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 4,
                     "order": 12
                 },
-                "dropChance": 1e-08
+                "dropChance": 4e-08
             }),
         new BaseItemBase("CardsF36", <CardItemModel>{
                 "internalName": "CardsF36",

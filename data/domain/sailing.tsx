@@ -299,7 +299,9 @@ export class Sailing extends Domain {
 
         // Sailing index 3 = array of artifacts found or not.
         sailingData[3].forEach((artifact, index) => {
-            sailing.artifacts[index].updateStatus(artifact);
+            if (index < sailing.artifacts.length) {
+                sailing.artifacts[index].updateStatus(artifact);
+            }
         })
 
         sailing.islands.forEach(island => {
