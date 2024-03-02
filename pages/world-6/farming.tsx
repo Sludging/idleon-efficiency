@@ -12,10 +12,10 @@ import { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import IconImage from '../../components/base/IconImage';
 import { nFormatter } from '../../data/utility';
 import TabButton from '../../components/base/TabButton';
-import { MarketUpgrades } from '../../components/world-6/farming/marketUpgrades';
 import { CropScientist } from '../../components/world-6/farming/cropScientist';
 import { CropDepot } from '../../components/world-6/farming/cropDepot';
 import { Plots } from '../../components/world-6/farming/plots';
+import { MarketUpgradesDisplay } from '../../components/world-6/farming/marketUpgrades';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 
 function Farming() {
@@ -69,8 +69,7 @@ function Farming() {
                             component={
                                 <Box gap="xxsmall" direction="row" wrap align="center">
                                     {
-                                        farming.cropDepot.filter(crop => crop.quantityOwned > 0).map((crop, index) => (
-          
+                                        farming.cropDepot.filter(crop => crop.quantityOwned > 0).map((crop, index) => (          
                                             <Box key={index} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '75px', min: '75px' }} align="center">
                                                 <TipDisplay
                                                     size='medium'
@@ -99,9 +98,9 @@ function Farming() {
                 </Box>
                 <Box align="center" margin={{ top: 'small', bottom: 'small' }}>
                     {activeTab == "Crop Scientist" && <CropScientist />}
-                    {activeTab == "Market Upgrades" && <MarketUpgrades />}
                     {activeTab == "Crop Depot" && <CropDepot/>}
                     {activeTab == "Plots" && <Plots/>}
+                    {activeTab == "Market Upgrades" && <MarketUpgradesDisplay farming={farming} />}
                 </Box>
             </Box>
         )
