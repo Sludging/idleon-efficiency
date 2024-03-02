@@ -13,9 +13,9 @@ import IconImage from '../../components/base/IconImage';
 import { nFormatter } from '../../data/utility';
 import TabButton from '../../components/base/TabButton';
 import { CropScientist } from '../../components/world-6/farming/cropScientist';
-import { CropDepot } from '../../components/world-6/farming/cropDepot';
 import { Plots } from '../../components/world-6/farming/plots';
 import { MarketUpgradesDisplay } from '../../components/world-6/farming/marketUpgrades';
+import { CropDepotDisplay } from '../../components/world-6/farming/cropDepot';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 
 function Farming() {
@@ -98,9 +98,9 @@ function Farming() {
                 </Box>
                 <Box align="center" margin={{ top: 'small', bottom: 'small' }}>
                     {activeTab == "Crop Scientist" && <CropScientist />}
-                    {activeTab == "Crop Depot" && <CropDepot/>}
                     {activeTab == "Plots" && <Plots/>}
                     {activeTab == "Market Upgrades" && <MarketUpgradesDisplay farming={farming} />}
+                    {activeTab == "Crop Depot" && <CropDepotDisplay farming={farming} />}
                 </Box>
             </Box>
         )
