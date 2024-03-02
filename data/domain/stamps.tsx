@@ -313,7 +313,7 @@ export function updateStamps(data: Map<string, any>) {
         })
     }
 
-    const limitIsRemoved = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 0)?.purchased ?? false;
+    const limitIsRemoved = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 5)?.purchased ?? false;
     const discountBribe = bribes[BribeConst.StampBribe];
     const vialDiscount = alchemy.getVialBonusForKey("MatCostStamp");
     stamps.flatMap(tab => tab).forEach(stamp => {
