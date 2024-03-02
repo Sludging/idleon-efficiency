@@ -164,7 +164,7 @@ export class Sneaking extends Domain {
     baseItems: BaseNinjaItemBase[] = initNinjaItemRepo();
     sneakingUpgrades: SneakingUpgrade[] = SneakingUpgrade.fromBase(initNinjaUpgradeRepo());
     jadeUpgrades: JadeUpgrade[] = initJadeUpgradeRepo()
-        .filter(base => !["idk", "Idk yet"].includes(base.data.bonus))
+        .filter(base => !["idk", "Idk yet"].includes(base.data.bonus) && !["UNDER CONSTRUCTION"].includes(base.data.name))
         .map(
         base => new JadeUpgrade(base.index, base.data, jadeUpgradeDisplayOrder.indexOf(base.index))
     );
