@@ -22,6 +22,7 @@ const shouldHideCard = ({ card }: { card: Card }) => {
 const CardBox = ({ card }: { card: Card }) => {
     const currentCardLevel = card.getStars();
     const cardsToNextLevel = card.count > 0 ? (card.getCardsForStar(currentCardLevel + 1) - card.count) : 1;
+    const isMaxed: boolean = (card.fivestar ? currentCardLevel == 5 : currentCardLevel == 4);
 
     // Keeping this for next world release or any other reason there might be to hide a card
     if (shouldHideCard({ card })) {
@@ -68,7 +69,7 @@ const CardBox = ({ card }: { card: Card }) => {
                                 <Text size="small"> : {card.getBonusText(5)} ({Math.floor(card.getCardsForStar(5))} cards)</Text>
                             </Box>
                         </Box>
-                        {(currentCardLevel < 5) &&
+                        {(!isMaxed) &&
                             <Box>
                                 <Text size="small">Next card level in {Math.floor(cardsToNextLevel)} cards</Text>
                                 {cardsToNextLevel != Math.floor(cardsToNextLevel) && <Text size="small">/!\ In-game will say {Math.ceil(cardsToNextLevel)} but it's technically {Math.floor(cardsToNextLevel)} due to rounding shenanigans</Text>}
@@ -91,7 +92,7 @@ const CardBox = ({ card }: { card: Card }) => {
                     <Box direction='column' gap='none' align='left'>
                         <Text size='medium'>{card.displayName}</Text>
                         <Text size='small' color={card.passive ? 'rgb(50,168,121)' : ''}>{card.getBonusText() + ((card.passive && !card.data.effect.endsWith('(Passive)')) ? ' (Passive)' : '')}</Text>
-                        {(currentCardLevel < 5) && <Text size="xsmall" color={'grey'}>{card.count} / {(card.getCardsForStar(5))}</Text>}
+                        {(!isMaxed) && <Text size="xsmall" color={'grey'}>{card.count} / {(card.getCardsForStar(5))}</Text>}
                     </Box>
                 </Box>
             </TipDisplay>

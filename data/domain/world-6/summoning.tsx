@@ -239,6 +239,11 @@ export class Summoning extends Domain {
         const summoning = data.get(this.dataKey) as Summoning;
         const summoningData = data.get("Summon") as any[];
 
+        // Defend against old accounts and people without any summoning data.
+        if (summoningData.length == 0) {
+            return;
+        }
+
         summoning.summonUpgrades = [];
         summoning.summonUpgrades = initSummonUpgradeRepo()
             .map(
@@ -278,13 +283,14 @@ export class Summoning extends Domain {
             if (enemyData) {
                 const relevantBonus = summoning.summonBonuses.find(bonus => bonus.data.bonusId == enemyData.data.bonusId);
                 if (relevantBonus) {
-                    relevantBonus.bonusValue += enemyData.data.bonusQty as number;
+                    // Some bonusQty are stored in string, so need to cast it to avoid concatening strings instead of making a sum of bonuses
+                    relevantBonus.bonusValue += Number(enemyData.data.bonusQty);
                 }
 
                 // Add a victory to the corresponding color
-                for (let i = 0; i < this.summonBattles.allBattles.length; i++) {
-                    if (this.summonBattles.allBattles[i].includes(enemyData.data)) {
-                        this.summonBattles.allVictories[i]++;
+                for (let i = 0; i < summoning.summonBattles.allBattles.length; i++) {
+                    if (summoning.summonBattles.allBattles[i].includes(enemyData.data)) {
+                        summoning.summonBattles.allVictories[i]++;
                         return;
                     }
                 }
@@ -332,8 +338,8 @@ export class Summoning extends Domain {
             }
 
             let colorVictories: number = 0;
-            if (index < this.summonBattles.allVictories.length) {
-                colorVictories = this.summonBattles.allVictories[index];
+            if (index < summoning.summonBattles.allVictories.length) {
+                colorVictories = summoning.summonBattles.allVictories[index];
             }
 
             let colorMaxBattles: number = 0;
@@ -344,8 +350,8 @@ export class Summoning extends Domain {
             }
 
             let colorBattles: SummonEnemyModel[] = [];
-            if (index < this.summonBattles.allBattles.length) {
-                colorBattles = this.summonBattles.allBattles[index];
+            if (index < summoning.summonBattles.allBattles.length) {
+                colorBattles = summoning.summonBattles.allBattles[index];
             }
 
             summoning.summonEssences.push({ color: index, quantity: value, unlocked: unlocked, display: display, victories: colorVictories, battles: colorBattles });

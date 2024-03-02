@@ -216,7 +216,7 @@ export const initBribeRepo = () => {
             }),
         new BribeBase("The Art of the Bail", <BribeModel>{
                 "name": "The Art of the Bail",
-                "desc": "You must unlock the next Bribe Set from the Garbage Tuna on Trash Island in World 2.",
+                "desc": "Unlock the next Bribe Set from the Garbage Tuna on Trash Island in World 2 to buy.",
                 "cost": 99999999,
                 "type": "fish",
                 "intName": "BribeExpansion",
@@ -272,6 +272,62 @@ export const initBribeRepo = () => {
             }),
         new BribeBase("The Art of the Grail", <BribeModel>{
                 "name": "The Art of the Grail",
+                "desc": "You must unlock the next Bribe set from the Jade Emporium in World 6 to buy this.",
+                "cost": 99999999,
+                "type": "pigbank",
+                "intName": "BribeExpansion",
+                "amount": -1
+            }),
+        new BribeBase("Artifact Pilfering", <BribeModel>{
+                "name": "Artifact Pilfering",
+                "desc": "Boosts Artifact find chance by a pleasantly large +20%",
+                "cost": 3e+17,
+                "type": "world5",
+                "intName": "New1",
+                "amount": 20
+            }),
+        new BribeBase("Forge Cap Smuggling", <BribeModel>{
+                "name": "Forge Cap Smuggling",
+                "desc": "Boosts Forge Capacity by a smoking hot 1.30x",
+                "cost": 4.4e+18,
+                "type": "smithing",
+                "intName": "New2",
+                "amount": 30
+            }),
+        new BribeBase("Gold from Lead", <BribeModel>{
+                "name": "Gold from Lead",
+                "desc": "Boosts all Golden Food bonuses by +10%",
+                "cost": 7.1e+19,
+                "type": "pigbank",
+                "intName": "New3",
+                "amount": 10
+            }),
+        new BribeBase("Nugget Fabrication", <BribeModel>{
+                "name": "Nugget Fabrication",
+                "desc": "Boosts the rate at which the Shovel generates Nuggets in Gaming by +20%",
+                "cost": 3.5e+20,
+                "type": "world5",
+                "intName": "New4",
+                "amount": 20
+            }),
+        new BribeBase("Divine PTS Miscounting", <BribeModel>{
+                "name": "Divine PTS Miscounting",
+                "desc": "Boosts Divinity PTS gain rate by +30%",
+                "cost": 5e+21,
+                "type": "world5",
+                "intName": "New5",
+                "amount": 30
+            }),
+        new BribeBase("Loot Table Tampering", <BribeModel>{
+                "name": "Loot Table Tampering",
+                "desc": "All items from Random Event Bosses are 1.20x more likely to drop than before.",
+                "cost": 1e+23,
+                "type": "pigbank",
+                "intName": "New6",
+                "amount": 20
+            }),
+        new BribeBase("The Art of the Flail", <BribeModel>{
+                "name": "The Art of the Flail",
                 "desc": "Look buddy, I ain't got no more bribes, maybe an associate of mine will sort it out later...",
                 "cost": 99999999,
                 "type": "pigbank",

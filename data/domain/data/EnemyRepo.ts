@@ -9228,7 +9228,7 @@ export const initEnemyRepo = () => {
                     "MonsterOffsetY": 0,
                     "HeightOfMonster": 100,
                     "MonsterMoving": 0,
-                    "MovingFrame": 5,
+                    "MovingFrame": 1,
                     "RespawnTime": 0,
                     "DeathFrame": 13,
                     "MonsterHPTotal": 5,
@@ -9261,7 +9261,7 @@ export const initEnemyRepo = () => {
                     "MonsterOffsetY": 0,
                     "HeightOfMonster": 100,
                     "MonsterMoving": 0,
-                    "MovingFrame": 5,
+                    "MovingFrame": 6,
                     "RespawnTime": 0,
                     "DeathFrame": 14,
                     "MonsterHPTotal": 5,
@@ -9277,7 +9277,7 @@ export const initEnemyRepo = () => {
                 "drops": <EnemyTableModel>{
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
-                        <CardDropModel>{"item": "CardsF34", "quantity": 1, "chance": 1e-08, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsF34", "quantity": 1, "chance": 4e-08, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable33", "quantity": 1, "chance": 0.0089, "questLink": "N/A"}
                     ]
                 },
@@ -9294,7 +9294,7 @@ export const initEnemyRepo = () => {
                     "MonsterOffsetY": 0,
                     "HeightOfMonster": 100,
                     "MonsterMoving": 0,
-                    "MovingFrame": 5,
+                    "MovingFrame": 6,
                     "RespawnTime": 0,
                     "DeathFrame": 15,
                     "MonsterHPTotal": 5,
@@ -9310,7 +9310,7 @@ export const initEnemyRepo = () => {
                 "drops": <EnemyTableModel>{
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
-                        <CardDropModel>{"item": "CardsF35", "quantity": 1, "chance": 1e-08, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsF35", "quantity": 1, "chance": 4e-08, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable33", "quantity": 1, "chance": 0.0089, "questLink": "N/A"}
                     ]
                 },

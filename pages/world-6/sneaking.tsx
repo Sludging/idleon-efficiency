@@ -32,7 +32,7 @@ function Sneaking() {
             return []
         }
 
-        return sneaking.jadeUpgrades.toSorted((upgrade1, upgrade2) => upgrade1.displayOrder > upgrade2.displayOrder ? 1 : -1);
+        return sneaking.jadeUpgrades?.slice().sort((upgrade1, upgrade2) => upgrade1.displayOrder > upgrade2.displayOrder ? 1 : -1);
     }, [appContext, sneaking])
 
     if (!sneaking) {

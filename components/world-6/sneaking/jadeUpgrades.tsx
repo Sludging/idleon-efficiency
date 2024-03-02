@@ -8,7 +8,7 @@ import { nFormatter } from "../../../data/utility";
 export const JadeUpgrades = ({
     jadeUpgrades,
     currentJade
-} : {
+}: {
     jadeUpgrades: JadeUpgrade[],
     currentJade: number
 }) => {
@@ -22,7 +22,7 @@ export const JadeUpgrades = ({
                                 const canAfford = currentJade > upgrade.unlockCost();
                                 return (
                                     <ShadowBox style={{ opacity: upgrade.purchased ? 1 : canAfford ? 0.6 : 0.4 }} key={index} background="dark-1" margin={{ right: 'small', bottom: 'small' }} pad="medium" gap="medium">
-                                        {                                            
+                                        {
                                             <Box gap="small">
                                                 <Box direction="row" gap="medium" align="center">
                                                     <IconImage data={upgrade.getImageData()} scale={0.5} />

@@ -167,9 +167,7 @@ export class Sneaking extends Domain {
     baseItems: BaseNinjaItemBase[] = initNinjaItemRepo();
     sneakingUpgrades: SneakingUpgrade[] = SneakingUpgrade.fromBase(initNinjaUpgradeRepo());
     jadeUpgrades: JadeUpgrade[] = initJadeUpgradeRepo()
-        .filter(base => !["idk", "Idk yet"].includes(base.data.bonus))
-        // Will need to remove "Mob Cosplay Craze" once previous bonus are actives
-        .filter(base => !["UNDER CONSTRUCTION", "NAME NEEDED", "Mob Cosplay Craze"].includes(base.data.name))
+        .filter(base => !["idk", "Idk yet"].includes(base.data.bonus) && !["UNDER CONSTRUCTION"].includes(base.data.name))
         .map(
         base => new JadeUpgrade(base.index, base.data, jadeUpgradeDisplayOrder.indexOf(base.index))
     );
@@ -246,13 +244,12 @@ export class Sneaking extends Domain {
         sneaking.pristineCharms = [];
         sneaking.baseItems
             .filter(item => item.data.itemType == NinjaItemTypeEnum.PristineCharm)
-            .toSorted((item1, item2) => item1.data.itemId - item2.data.itemId)
-            .forEach((item, index) => {
-                let unlocked: boolean = false;
-                if (item.data.itemId < pristineCharmUnlocking.length) {
-                    unlocked = (pristineCharmUnlocking[item.data.itemId] == 1);
-                }
-                sneaking.pristineCharms.push(new PristineCharm(item.index, item.data as NinjaPristineCharmModel, unlocked));
+            .slice().sort((item1, item2) => item1.data.itemId - item2.data.itemId).forEach((item, index) => {
+            let unlocked: boolean = false;
+            if (item.data.itemId < pristineCharmUnlocking.length) {
+                unlocked = (pristineCharmUnlocking[item.data.itemId] == 1);
+            }
+            sneaking.pristineCharms.push(new PristineCharm(item.index, item.data as NinjaPristineCharmModel, unlocked));
         })
 
         // Yes, Lava stores the enabled upgrades as letters in a single string, need to take that and convert to indexes.

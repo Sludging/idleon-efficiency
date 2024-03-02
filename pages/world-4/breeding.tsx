@@ -3,6 +3,8 @@ import {
     Grid,
     Heading,
     ResponsiveContext,
+    Select,
+    SelectMultiple,
     Stack,
     Text,
 } from 'grommet'
@@ -17,63 +19,10 @@ import { AppContext } from '../../data/appContext';
 import { Breeding as BreedingDomain, Pet, petArenaBonuses, territoryNiceNames, waveReqs } from '../../data/domain/breeding';
 import { Cooking } from '../../data/domain/cooking';
 import { EnemyInfo } from '../../data/domain/enemies';
-import { GemStore } from '../../data/domain/gemPurchases';
 import { Player } from '../../data/domain/player';
 import { ClassIndex, Talent } from '../../data/domain/talents';
-import { TaskBoard } from '../../data/domain/tasks';
-import { GroupByFunction, nFormatter } from '../../data/utility';
+import { nFormatter, uniqueFilter } from '../../data/utility';
 import { BorderType } from 'grommet/utils';
-
-function PetDisplay() {
-    const appContext = useContext(AppContext);
-    const size = useContext(ResponsiveContext);
-
-    const theData = appContext.data.getData();
-    const breeding = theData.get("breeding") as BreedingDomain;
-
-    return (
-        <Box>
-            <Text>Pets</Text>
-            <Box>
-                {
-                    Array.from(GroupByFunction(breeding.basePets, (pet: Pet) => pet.data.world)).
-                        map(([_, worldPets], wIndex) => (
-                            <Box key={`world_${wIndex}`}>
-                                <Text>World {wIndex + 1}</Text>
-                                <Box direction="row" wrap>
-                                    {
-                                        worldPets.map((pet, pIndex) => {
-                                            const enemy = EnemyInfo.find(enemy => enemy.id == pet.data.petId);
-                                            if (!enemy) {
-                                                return null;
-                                            }
-                                            return (
-                                                <ShadowBox key={`pet_${pIndex}`} direction="row" gap="small" align="center" margin={{ right: 'small', bottom: 'small' }} background="dark-1">
-                                                    {
-                                                        <Box>
-                                                            <Stack anchor='top-left'>
-                                                                <IconImage data={{ location: enemy?.id.toLowerCase() ?? "Unknown", width: 67, height: 67 }} style={{ paddingBottom: '15px' }} />
-                                                                <Box title={pet.gene.data.name}>
-                                                                    <IconImage data={pet.gene.getImageData()} scale={0.5} />
-                                                                </Box>
-                                                            </Stack>
-                                                            <Text>{pet.getShinyText()}</Text>
-                                                            <Text>{pet.shinyLevel}</Text>
-                                                        </Box>
-                                                    }
-                                                </ShadowBox>
-                                            )
-                                        })
-                                    }
-                                </Box>
-                            </Box>
-
-                        ))
-                }
-            </Box>
-        </Box>
-    )
-}
 
 function TerritoryDisplay() {
     const appContext = useContext(AppContext);
@@ -82,12 +31,18 @@ function TerritoryDisplay() {
     const theData = appContext.data.getData();
     const breeding = theData.get("breeding") as BreedingDomain;
 
+    if (!breeding) {
+        return <Box>
+            Still loading
+        </Box>
+    }
+
     return (
         <Box>
             <Text>Territory</Text>
             {
                 breeding.territory.filter(territory => territory.index != 14).map((territory, tIndex) => (
-                    <ShadowBox background="dark-1" key={tIndex} direction="row" gap="medium" margin={{ bottom: 'medium' }} align="center" pad="small" style={{opacity: territory.unlocked ? 1 : 0.4}}>
+                    <ShadowBox background="dark-1" key={tIndex} direction="row" gap="medium" margin={{ bottom: 'medium' }} align="center" pad="small" style={{ opacity: territory.unlocked ? 1 : 0.4 }}>
                         <Grid columns={["20%", "15%", "20%", "20%", "25%"]} fill>
                             <TextAndLabel textSize='small' label="Name" text={territoryNiceNames[territory.index]} />
                             {
@@ -186,7 +141,7 @@ function PetUpgradeDisplay() {
         <Text>Upgrades</Text>
         {
             breeding.upgrade.filter(upgrade => upgrade.data.upgradeName != "Filler").map((upgrade, index) => (
-                <ShadowBox key={index} background="dark-1" margin={{ bottom: 'medium' }} align="center" pad="small" style={{opacity: upgrade.level == 0 ? 0.5 : 1}}>
+                <ShadowBox key={index} background="dark-1" margin={{ bottom: 'medium' }} align="center" pad="small" style={{ opacity: upgrade.level == 0 ? 0.5 : 1 }}>
                     <Grid columns={{ size: 'auto', count: 5 }} fill>
                         <IconImage data={upgrade.getImageData()} scale={0.7} />
                         <TextAndLabel textSize='xsmall' label="Name" text={upgrade.data.upgradeName} />
@@ -288,16 +243,88 @@ function ArenaBonusDisplay() {
 }
 
 function ShinyDisplay() {
-    const [breeding, setBreeding] = useState<BreedingDomain>();
+    const [sort, setSort] = useState<string>('');
+    const [filter, setFilter] = useState<string[]>([]);
+    const [allFilterOptions, setAllFilterOptions] = useState<string[]>([]);
+    const [currentFilterOptions, setCurrentFilterOptions] = useState<string[]>([]);
     const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
 
+    // Get breeding data, if it's not available yet just show placeholder loading.
+    const breeding = appContext.data.getData().get("breeding") as BreedingDomain;
+
+    // our sort options are fixed, so just statically set them.
+    const sortOptions = ["Level", "Least Time to Next Level"];
+
+    // Filter options are a bit more complicated to seem to require client side loading, so wrapped in useEffect.
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setBreeding(theData.get("breeding"));
+        // If we are still loading, do nothing.
+        if (!breeding) {
+            return
         }
-    }, [appContext]);
+        const filterOptions = breeding.shinyBonuses?.map(bonus => {
+            return bonus.data.text.replaceAll('{', '');
+        }).filter(uniqueFilter);
+
+        // We keep two set of state, all available filter options and currently available ones.
+        // The reason for the 2nd one is to allow the search to remove filters based on user typing.
+        setAllFilterOptions(filterOptions);
+        setCurrentFilterOptions(filterOptions);
+    }, [appContext, breeding]);
+
+    const petsToShow = useMemo(() => {
+        // If we are still loading, do nothing.
+        if (!breeding) {
+            return [];
+        }
+        // Start with a base list of all pets
+        let pets: Pet[] = breeding.basePets.filter(pet => pet.data.petId != "_");
+
+        // If we have any filters configured, filter them out of the base set
+        if (filter.length != 0) {
+            pets = pets.filter(pet => filter.includes(pet.shinyBonus.text.replaceAll('{', '')));
+        }
+
+        // Now we sort
+        return pets?.sort((pet1, pet2) => {
+            // Base case scenario they are just by index.
+            const indexSort = pet1.index > pet2.index ? 1 : -1;
+
+            // Least time to next level sort function
+            function sortByTime(pet1: Pet, pet2: Pet) {
+                // If pet is max level, move it to the end
+                if (pet1.calculateShinyLevel() >= 20) {
+                    return -1;
+                }
+                // If pet is max level, move it to the end
+                if (pet2.calculateShinyLevel() >= 20) {
+                    return -1;
+                }
+                // Else sort by time till next level.
+                return (pet1.getNextShinyGoal() - pet1.shinyProgress) > (pet2.getNextShinyGoal() - pet2.shinyProgress) ? 1 : -1;
+            }
+
+            // Sort by level sort function
+            function sortByLevel(pet1: Pet, pet2: Pet) {
+                if (pet1.calculateShinyLevel() == pet2.calculateShinyLevel()) {
+                    // If level is equal, sort by time until next level
+                    return sortByTime(pet1, pet2);
+                } else {
+                    // if level isn't equal, just sort by level
+                    return pet1.calculateShinyLevel() > pet2.calculateShinyLevel() ? -1 : 1;
+                }
+            }
+
+            switch (sort) {
+                case "Level":
+                    return sortByLevel(pet1, pet2);
+                case "Least Time to Next Level":
+                    return sortByTime(pet1, pet2);
+                default:
+                    return indexSort;
+            }
+        })
+    }, [breeding, sort, filter])
 
     if (!breeding) {
         return (
@@ -306,19 +333,49 @@ function ShinyDisplay() {
             </Box>
         )
     }
+
     return (
-        <Box>
+        <Box gap="small">
             <Text>Shiny Bonuses</Text>
-            <Grid columns={size =="small" ? ["1"] : ["1/3", "1/3", "1/3"]} fill>
+            <Box direction="row" gap="medium">
+                <Select size="small"
+                    placeholder="Sort by"
+                    clear
+                    value={sort}
+                    options={sortOptions}
+                    onChange={({ value: nextValue }) => { setSort(nextValue); }}
+                />
+                <SelectMultiple
+                    size="small"
+                    placeholder="Filter by"
+                    searchPlaceholder="Search bonuses"
+                    value={filter}
+                    options={currentFilterOptions}
+                    onChange={({ value: nextValue }) => { setFilter(nextValue); }}
+                    onSearch={text => {
+                        // The line below escapes regular expression special characters:
+                        // [ \ ^ $ . | ? * + ( )
+                        const escapedText = text.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
+
+                        // Create the regular expression with modified value which
+                        // handles escaping special characters. Without escaping special
+                        // characters, errors will appear in the console
+                        const exp = new RegExp(escapedText, 'i');
+                        setCurrentFilterOptions(allFilterOptions.filter(o => exp.test(o)));
+                    }}
+                    onClose={() => setCurrentFilterOptions(allFilterOptions)}
+                />
+            </Box>
+            <Grid columns={size == "small" ? ["1"] : ["1/3", "1/3", "1/3"]} fill>
                 {
-                    breeding.basePets.filter(pet => pet.data.petId != "_").map((pet, pIndex) => {
+                    petsToShow?.filter(pet => pet.data.petId != "_").map((pet, pIndex) => {
                         const petInFenceyard: boolean = breeding.fenceyardPets.some(fenceyardPet => fenceyardPet.data.petId == pet.data.petId && fenceyardPet.gene.index == 5);
                         const currentlyLevelingShinyBorderProp: BorderType = petInFenceyard && { size: '2px', style: 'solid', color: 'green' };
                         const enemy = EnemyInfo.find(enemy => enemy.id == pet.data.petId);
 
                         return (
-                            <ShadowBox background="dark-1" border={ currentlyLevelingShinyBorderProp } key={pIndex} direction="row" gap="medium" margin={{ bottom: 'medium', right: 'small' }} align="center" pad="small" style={{ opacity: pet.shinyLevel > 0 ? 1 : .5 }}>
-                                <IconImage data={{ location: enemy?.id.toLowerCase() ?? "Unknown", width: 67, height: 67 }} style={{ paddingBottom: '15px'}} />
+                            <ShadowBox background="dark-1" border={currentlyLevelingShinyBorderProp} key={pIndex} direction="row" gap="medium" margin={{ bottom: 'medium', right: 'small' }} align="center" pad="small" style={{ opacity: pet.shinyLevel > 0 ? 1 : .5 }}>
+                                <IconImage data={{ location: enemy?.id.toLowerCase() ?? "Unknown", width: 67, height: 67 }} style={{ paddingBottom: '15px' }} />
                                 <Grid columns={["50%", "50%"]} fill align="center">
                                     <Box>
                                         <Text size="16px">Lvl: {pet.shinyLevel}</Text>
@@ -341,20 +398,6 @@ function EggDisplay() {
     const size = useContext(ResponsiveContext);
     const theData = appContext.data.getData();
     const breeding = theData.get("breeding") as BreedingDomain;
-
-    const capacity = useMemo(() => {
-        const theData = appContext.data.getData();
-        const gemStore = theData.get("gems") as GemStore;
-        const taskBoard = theData.get("taskboard") as TaskBoard;
-
-        if (gemStore && breeding) {
-            const eggCapacityUpgrade = gemStore.purchases.find(purchase => purchase.no == 119)?.pucrhased ?? 0;
-            const breedingUpgradeLevel = breeding?.upgrade.find(upgrade => upgrade.data.upgradeName == "Egg Capacity")?.level ?? 0;
-            const eggMerit = taskBoard.merits.find(merit => merit.descLine1.includes("egg capacity in the Nest"));
-            return 3 + eggCapacityUpgrade + breedingUpgradeLevel + (eggMerit ? eggMerit.level * eggMerit.bonusPerLevel : 0);
-        }
-        return 0;
-    }, [breeding, appContext]);
 
     if (!breeding) {
         return (
@@ -419,7 +462,6 @@ function Breeding() {
         <Box>
             <NextSeo title="Breeding" />
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Breeding</Heading>
-            <Text size="xsmall">* This is a work in progress, there could some bugs and minor inaccuracies.</Text>
             <Box pad="small">
                 <EggDisplay />
             </Box>
@@ -433,7 +475,6 @@ function Breeding() {
             {activeTab == "Upgrades" && <PetUpgradeDisplay />}
             {activeTab == "Territory" && <TerritoryDisplay />}
             {activeTab == "Shiny" && <ShinyDisplay />}
-            {/* {activeTab == "Pets" && <PetDisplay />} */}
         </Box>
     )
 }

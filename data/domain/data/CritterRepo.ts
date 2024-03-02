@@ -75,6 +75,13 @@ export const initCritterRepo = () => {
                 "baseShinyRate": 3e-05,
                 "shiny": "Critter10A",
                 "effForBonus": 500000
+            }),
+        new CritterBase("Critter11", <CritterModel>{
+                "location": "Bamboo Laboredge",
+                "baseExp": 900,
+                "baseShinyRate": 1e-05,
+                "shiny": "Critter11A",
+                "effForBonus": 10000000
             })    
 ]
 }

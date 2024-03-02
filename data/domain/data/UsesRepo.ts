@@ -28298,19 +28298,6 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.dQuest,
                 "type": "Bits"
             }),
-        new UsesBase("SailTr9", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "BubbleRepo",
-                        "key": "Power Cauldron@Gamer At Heart",
-                        "name": "Power Cauldron: Gamer At Heart Bubble",
-                        "amount": "Lots",
-                        "type": "bubble"
-                    }
-                ],
-                "typeGen": TypeGenEnum.dQuest,
-                "type": "Sail Treasure"
-            }),
         new UsesBase("LavaB3b", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -28323,58 +28310,6 @@ export const initUsesRepo = () => {
                 ],
                 "typeGen": TypeGenEnum.bCraft,
                 "type": "Monster Drop"
-            }),
-        new UsesBase("SailTr20", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "BubbleRepo",
-                        "key": "Power Cauldron@Power Trione",
-                        "name": "Power Cauldron: Power Trione Bubble",
-                        "amount": "Lots",
-                        "type": "bubble"
-                    }
-                ],
-                "typeGen": TypeGenEnum.dQuest,
-                "type": "Sail Treasure"
-            }),
-        new UsesBase("W6item1", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "BubbleRepo",
-                        "key": "Power Cauldron@Farquad Force",
-                        "name": "Power Cauldron: Farquad Force Bubble",
-                        "amount": "Lots",
-                        "type": "bubble"
-                    }
-                ],
-                "typeGen": TypeGenEnum.dQuest,
-                "type": "Sail Treasure"
-            }),
-        new UsesBase("W6item8", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "BubbleRepo",
-                        "key": "Power Cauldron@Tome Strength",
-                        "name": "Power Cauldron: Tome Strength Bubble",
-                        "amount": "Lots",
-                        "type": "bubble"
-                    }
-                ],
-                "typeGen": TypeGenEnum.dQuest,
-                "type": "Sail Treasure"
-            }),
-        new UsesBase("W6item10", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "BubbleRepo",
-                        "key": "Power Cauldron@Crop Chapter",
-                        "name": "Power Cauldron: Crop Chapter Bubble",
-                        "amount": "Lots",
-                        "type": "bubble"
-                    }
-                ],
-                "typeGen": TypeGenEnum.dQuest,
-                "type": "Sail Treasure"
             }),
         new UsesBase("DesertB1", <UsesModel>{
                 "uses": [
@@ -28430,78 +28365,6 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.dCritters,
                 "type": "Critter"
             }),
-        new UsesBase("SailTr11", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "BubbleRepo",
-                        "key": "Quicc Cauldron@Sailor At Heart",
-                        "name": "Quicc Cauldron: Sailor At Heart Bubble",
-                        "amount": "Lots",
-                        "type": "bubble"
-                    }
-                ],
-                "typeGen": TypeGenEnum.dQuest,
-                "type": "Sail Treasure"
-            }),
-        new UsesBase("SailTr24", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "BubbleRepo",
-                        "key": "Quicc Cauldron@Power Tritwo",
-                        "name": "Quicc Cauldron: Power Tritwo Bubble",
-                        "amount": "Lots",
-                        "type": "bubble"
-                    }
-                ],
-                "typeGen": TypeGenEnum.dQuest,
-                "type": "Sail Treasure"
-            }),
-        new UsesBase("W6item0", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "BubbleRepo",
-                        "key": "Quicc Cauldron@Quickdraw Quiver",
-                        "name": "Quicc Cauldron: Quickdraw Quiver Bubble",
-                        "amount": "Lots",
-                        "type": "bubble"
-                    },
-                    <UseModel>{
-                        "repoSource": "BubbleRepo",
-                        "key": "High-IQ Cauldron@Essence Chapter",
-                        "name": "High-IQ Cauldron: Essence Chapter Bubble",
-                        "amount": "Lots",
-                        "type": "bubble"
-                    }
-                ],
-                "typeGen": TypeGenEnum.dQuest,
-                "type": "Sail Treasure"
-            }),
-        new UsesBase("W6item3", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "BubbleRepo",
-                        "key": "Quicc Cauldron@Endgame Eff Ii",
-                        "name": "Quicc Cauldron: Endgame Eff Ii Bubble",
-                        "amount": "Lots",
-                        "type": "bubble"
-                    }
-                ],
-                "typeGen": TypeGenEnum.dQuest,
-                "type": "Sail Treasure"
-            }),
-        new UsesBase("W6item5", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "BubbleRepo",
-                        "key": "Quicc Cauldron@Stealth Chapter",
-                        "name": "Quicc Cauldron: Stealth Chapter Bubble",
-                        "amount": "Lots",
-                        "type": "bubble"
-                    }
-                ],
-                "typeGen": TypeGenEnum.dQuest,
-                "type": "Sail Treasure"
-            }),
         new UsesBase("SnowC1", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -28528,71 +28391,6 @@ export const initUsesRepo = () => {
                 ],
                 "typeGen": TypeGenEnum.bCraft,
                 "type": "Monster Drop"
-            }),
-        new UsesBase("SailTr13", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "BubbleRepo",
-                        "key": "High-IQ Cauldron@Pious At Heart",
-                        "name": "High-IQ Cauldron: Pious At Heart Bubble",
-                        "amount": "Lots",
-                        "type": "bubble"
-                    }
-                ],
-                "typeGen": TypeGenEnum.dQuest,
-                "type": "Sail Treasure"
-            }),
-        new UsesBase("SailTr28", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "BubbleRepo",
-                        "key": "High-IQ Cauldron@Power Trithree",
-                        "name": "High-IQ Cauldron: Power Trithree Bubble",
-                        "amount": "Lots",
-                        "type": "bubble"
-                    }
-                ],
-                "typeGen": TypeGenEnum.dQuest,
-                "type": "Sail Treasure"
-            }),
-        new UsesBase("W6item6", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "BubbleRepo",
-                        "key": "High-IQ Cauldron@Smarter Spells",
-                        "name": "High-IQ Cauldron: Smarter Spells Bubble",
-                        "amount": "Lots",
-                        "type": "bubble"
-                    }
-                ],
-                "typeGen": TypeGenEnum.dQuest,
-                "type": "Sail Treasure"
-            }),
-        new UsesBase("W6item7", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "BubbleRepo",
-                        "key": "High-IQ Cauldron@Endgame Eff Iii",
-                        "name": "High-IQ Cauldron: Endgame Eff Iii Bubble",
-                        "amount": "Lots",
-                        "type": "bubble"
-                    }
-                ],
-                "typeGen": TypeGenEnum.dQuest,
-                "type": "Sail Treasure"
-            }),
-        new UsesBase("W6item4", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "BubbleRepo",
-                        "key": "High-IQ Cauldron@Tome Wisdom",
-                        "name": "High-IQ Cauldron: Tome Wisdom Bubble",
-                        "amount": "Lots",
-                        "type": "bubble"
-                    }
-                ],
-                "typeGen": TypeGenEnum.dQuest,
-                "type": "Sail Treasure"
             }),
         new UsesBase("Critter3", <UsesModel>{
                 "uses": [
@@ -28627,45 +28425,6 @@ export const initUsesRepo = () => {
                 ],
                 "typeGen": TypeGenEnum.dCritters,
                 "type": "Critter"
-            }),
-        new UsesBase("SailTr1", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "BubbleRepo",
-                        "key": "Kazam Cauldron@Big P",
-                        "name": "Kazam Cauldron: Big P Bubble",
-                        "amount": "Lots",
-                        "type": "bubble"
-                    }
-                ],
-                "typeGen": TypeGenEnum.dQuest,
-                "type": "Sail Treasure"
-            }),
-        new UsesBase("W6item2", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "BubbleRepo",
-                        "key": "Kazam Cauldron@Hinge Buster",
-                        "name": "Kazam Cauldron: Hinge Buster Bubble",
-                        "amount": "Lots",
-                        "type": "bubble"
-                    }
-                ],
-                "typeGen": TypeGenEnum.dQuest,
-                "type": "Sail Treasure"
-            }),
-        new UsesBase("W6item9", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "BubbleRepo",
-                        "key": "Kazam Cauldron@Ninja Looter",
-                        "name": "Kazam Cauldron: Ninja Looter Bubble",
-                        "amount": "Lots",
-                        "type": "bubble"
-                    }
-                ],
-                "typeGen": TypeGenEnum.dQuest,
-                "type": "Sail Treasure"
             }),
         new UsesBase("Jungle2", <UsesModel>{
                 "uses": [
@@ -28967,6 +28726,19 @@ export const initUsesRepo = () => {
                 ],
                 "typeGen": TypeGenEnum.bCraft,
                 "type": "Monster Drop"
+            }),
+        new UsesBase("Critter11", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Vials@Turtle Tisane",
+                        "name": "Vials: Turtle Tisane",
+                        "amount": "Lots",
+                        "type": "vial"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dCritters,
+                "type": "Critter"
             }),
         new UsesBase("EquipmentToolsHatchet3", <UsesModel>{
                 "uses": [
