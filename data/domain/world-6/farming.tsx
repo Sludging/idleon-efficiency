@@ -13,7 +13,7 @@ import { Lab } from '../lab';
 import { Summoning } from './summoning';
 import { Stamp } from '../stamps';
 import { Alchemy, AlchemyConst, CauldronIndex } from '../alchemy';
-import { Sneaking } from "./sneaking";
+import { JadeUpgrade, Sneaking } from "./sneaking";
 import { Cooking } from "../cooking";
 import { Rift, SkillMastery } from '../rift';
 
@@ -37,7 +37,7 @@ export class MarketUpgrade {
             }
         }
 
-        const cropCost = Math.floor(this.data.cost * Math.pow(this.data.costExponent, (currentLevel-1)));
+        const cropCost = Math.floor(this.data.cost * Math.pow(this.data.costExponent, (currentLevel)));
         
         return {cropId: cropId, cropQuantity: cropCost};
     }
@@ -95,7 +95,15 @@ export class Crop {
 }
 
 export class Seed {
-    constructor(public index: number, public data: SeedInfoModel) {}
+    constructor(public index: number, public data: SeedInfoModel) { }
+
+    getFullCycleGrowthTime = (): number => {
+        if (this.index == -1) {
+            return 0
+        } else {
+            return 14400 * Math.pow(1.5, this.index);
+        }
+    }
 }
 
 export class Plot {
@@ -130,14 +138,6 @@ export class Plot {
         return this.quantityToCollect * Math.max(1, this.getOGmultiplyer());
     }
 
-    getFullCycleGrowthTime = (): number => {
-        if (this.seedIndex == -1) {
-            return 0
-        } else {
-            return 14400 * Math.pow(1.5, this.seedIndex);
-        }
-    }
-
     getOGmultiplyer = (): number => {
         return Math.min(1E9, Math.max(1, Math.pow(2, this.OGlevel)));
     }
@@ -169,6 +169,8 @@ export class CropScientistBonus {
 export class CropScientist {
     unlocked: boolean = false;
     bonuses: CropScientistBonus[] = [];
+    discoveredCrops: number = 0;
+    jadeUpgradeId = 22;
 
     constructor() {
         this.bonuses.push(new CropScientistBonus(CropScientistBonusText.TotalDamage, 20, 27));
@@ -178,6 +180,37 @@ export class CropScientist {
         this.bonuses.push(new CropScientistBonus(CropScientistBonusText.CashBonus, 15, 23));
         this.bonuses.push(new CropScientistBonus(CropScientistBonusText.ShinyPetLvlUpRate, 7, 28));
         this.bonuses.push(new CropScientistBonus(CropScientistBonusText.BaseCritterPerTrap, 0.1, 29));
+    }
+
+    updateCropScientistBonusValues = (cropsFound: number, bonusFromLabBonus17: number) => {
+        this.discoveredCrops = cropsFound;
+
+        this.bonuses.forEach(bonus => {
+            switch (bonus.bonusText) {
+                case CropScientistBonusText.CookingSpeed:
+                case CropScientistBonusText.PlantEvolutionChance:
+                    bonus.bonusValue = Math.pow(bonus.bonusPerCrop, cropsFound) * (1 + (bonusFromLabBonus17 / 100));
+                    break;
+                case CropScientistBonusText.ShinyPetLvlUpRate:
+                case CropScientistBonusText.CashBonus:
+                case CropScientistBonusText.JadeCoinGain:
+                case CropScientistBonusText.TotalDamage:
+                case CropScientistBonusText.BaseCritterPerTrap:
+                default:
+                    bonus.bonusValue = (bonus.bonusPerCrop * cropsFound) * (1 + (bonusFromLabBonus17 / 100));
+                    break;
+            }
+        })
+    }
+
+    updateUnlockedCropScientist = (jadeUpgrades: JadeUpgrade[]) => {
+        this.unlocked = jadeUpgrades.find(upgrade => upgrade.index == this.jadeUpgradeId)?.purchased ?? false;
+
+        if (this.unlocked) {
+            this.bonuses.forEach(bonus => {
+                bonus.unlocked = jadeUpgrades.find(upgrade => upgrade.index == bonus.jadeUpgradeId)?.purchased ?? false;
+            })
+        }
     }
 
     getBonus(bonus: CropScientistBonusText): number {
@@ -190,7 +223,7 @@ export class CropScientist {
         }
     }
 
-    getBonusText(bonus: CropScientistBonusText, cropsFound: number): string {
+    getBonusText(bonus: CropScientistBonusText): string {
         return bonus.replace(/{/, nFormatter(this.getBonus(bonus)));
     }
 }
@@ -211,11 +244,11 @@ export class Farming extends Domain {
     discoveredCrops: number = 0;
 
     cropNames = ["Apple", "Orange", "Lemon", "Pear", "Strawberry", "Bananas", "Blueberry", "Red Grapes", "Red Pear", "Pineapple", "Lime", "Raspberry", "Fig", "Peach", "Purple Grapes", "Yellow Pear", "Watermelon", "Green Grapes", "Dragon Fruit", "Mango", "Gold Blueberry",
-        "Carrot", "Potato", "Beat", "Tomato", "Artichoke", "Roma Tomato", "Butternut Squash", "Kiwi", "Red Pepper", "Broccoli", "Radish", "Coconut", "Sliced Tomato", "Cashew", "Turnip", "Coffee Bean", "Pumpkin", "Sliced Cucumber", "Eggplant", "Lettuce", "Garlic", "Green Beans", "Bell Pepper", "Corn", "Gold Sliced Tomato",
-        "Daisy", "Flour", "Stargazer Lily", "Rose", "Sunflower", "Blue Daisy", "???", "Tulip", "???", "Cauliflower", "???", "???", "Muffin", "???", "???",
-        "Sake Maki", "Salmon Nigiri", "Temaki", "Hamaguri", "Onigiri", "Ama-ebi", "Cup Ramen", "Dalkon Maki", "???", "???", "Ikura", "???", "???", "???", "Avocado Maki", "Ebi Nigiri", "???", "???", "Tako Nigiri", "Soy Sauce", "???", "Neko Rice", "Shrimp",
+        "Carrot", "Potato", "Beat", "Tomato", "Artichoke", "Roma Tomato", "Butternut Squash", "Avocado", "Red Pepper", "Broccoli", "Beatroot", "Coconut", "Sliced Tomato", "Cashew", "Turnip", "Coffee Bean", "Pumpkin", "Sliced Cucumber", "Eggplant", "Lettuce", "Garlic", "Green Beans", "Bell Pepper", "Corn", "Gold Sliced Tomato",
+        "Daisy", "Flour", "Stargazer Lily", "Rose", "Sunflower", "Blue Daisy", "Pansy", "Tulip", "Pink Daisy", "Cauliflower", "???", "???", "Muffin", "???", "Golden Tulip",
+        "Sake Maki", "Salmon Nigiri", "Temaki", "Hamaguri", "Onigiri", "Ama-ebi", "Cup Ramen", "Daikon Maki", "???", "???", "Ikura", "???", "Miso Soup", "???", "Avocado Maki", "Ebi Nigiri", "Instant Noodles", "Blue Ikura", "Tako Nigiri", "Soy Sauce", "???", "Neko Rice", "Shrimp Tempura",
         "Mushroom 1", "Mushroom 2", "Mushroom 3", "Mushroom 4", "Mushroom 5", "Mushroom 6", "Mushroom 7", "Mushroom 8", "Mushroom 9", "Mushroom 10", "Mushroom 11", "Mushroom 12", "Mushroom 13", "Mushroom 14", "Mushroom 15", "Mushroom 16", "Mushroom 17", "Mushroom 18", "Mushroom 19", "Mushroom 20", "Mushroom 21", "Mushroom 22", "Mushroom 23",
-        "Glassy Bananas", "???", "Glassy Mushroom 1", "Glassy Maki", "Glassy Mushroom 2", "Glassy Carrot", "???", "Glassy Watermellon", "Glassy Shrimp", "???", "Glassy Corn", "???", "Glassy Onigiri"];
+        "Glassy Bananas", "Glassy Mango", "Glassy Mushroom 1", "Glassy Maki", "Glassy Broccoli", "Glassy Carrot", "Glassy Sliced Tomato", "Glassy Watermellon", "Glassy Shrimp Tempura", "Glassy Rose", "Glassy Corn", "Glassy Lettuce", "Glassy Onigiri"];
 
     getRawKeys(): RawData[] {
         return [
@@ -249,15 +282,16 @@ export class Farming extends Domain {
         farming.seeds.forEach((seed) => {
             for (let i = seed.data.cropIdMin; i <= seed.data.cropIdMax; i++) {
                 farming.cropDepot.push(new Crop(i, seed.index));
-                farming.discoveredCrops++;
             }
         })
         
+        farming.discoveredCrops = 0;
         for (const [cropId, qty] of Object.entries(cropsData)) {
             const crop = farming.cropDepot.find(crop => crop.index == Number(cropId));
             if (crop) {
                 crop.discovered = true;
                 crop.quantityOwned = Number(qty);
+                farming.discoveredCrops++;
             }
         }
 
@@ -290,23 +324,6 @@ export class Farming extends Domain {
         this.marketUpgrades.forEach(upgrade => {
             upgrade.unlocked = (upgrade.data.cropReq <= this.discoveredCrops);
         });
-    }
-
-    updateCropScientistBonusValues = (cropsFound: number, bonusFromLabBonus17: number) => {
-        this.cropScientist.bonuses.forEach(bonus => {
-            switch (bonus.bonusText) {
-                case CropScientistBonusText.CookingSpeed:
-                case CropScientistBonusText.PlantEvolutionChance:
-                    bonus.bonusValue = Math.pow(bonus.bonusPerCrop, cropsFound) * (1 + (bonusFromLabBonus17 / 100))
-                case CropScientistBonusText.ShinyPetLvlUpRate:
-                case CropScientistBonusText.CashBonus:
-                case CropScientistBonusText.JadeCoinGain:
-                case CropScientistBonusText.TotalDamage:
-                case CropScientistBonusText.BaseCritterPerTrap:
-                default:
-                    bonus.bonusValue = (bonus.bonusPerCrop * cropsFound) * (1 + (bonusFromLabBonus17 / 100));
-            }
-        })
     }
     
     updateGrowthRate = (bonusFromVial64: number, bonusFromWinnerBonus2: number) => {
@@ -461,10 +478,14 @@ export const updateFarmingLevel = (data: Map<string, any>) => {
 export const updateFarmingCropScientistBonuses = (data: Map<string, any>) => {
     const farming = data.get("farming") as Farming;
     const mainframe = data.get("lab") as Lab;
-    
+    const sneaking = data.get("sneaking") as Sneaking;
+
+    // Set bonus to unlocked if the corresponding Jade Upgrade have been purchased
+    farming.cropScientist.updateUnlockedCropScientist(sneaking.jadeUpgrades);
+
     // Update all CropScientist bonuses so we can use those values in other pages (cooking for example)
     const labBonusCropScientist = mainframe.bonuses.find(bonus => bonus.index == 17)?.getBonus() ?? 0;
-    farming.updateCropScientistBonusValues(farming.discoveredCrops, labBonusCropScientist);
+    farming.cropScientist.updateCropScientistBonusValues(farming.discoveredCrops, labBonusCropScientist);
 }
 
 export const updateFarmingDisplayData = (data: Map<string, any>) => {
