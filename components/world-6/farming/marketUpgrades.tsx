@@ -87,11 +87,21 @@ export const MarketUpgradesDisplay = ({ farming }: { farming: Farming }) => {
                                                             />
                                                         </TipDisplay>
                                                         :
-                                                        <Box gap="xsmall" direction="row" align="center">
-                                                            <Text size="small">MAXED</Text>
-                                                        </Box>
+                                                        <ComponentAndLabel
+                                                            label={label}
+                                                            component={
+                                                                <Box gap="xsmall" direction="row" align="center">
+                                                                    <Text size="small">MAXED</Text>
+                                                                </Box>                                                                       
+                                                            }
+                                                        />                                                        
                                                     :
-                                                    <Box></Box>
+                                                    <ComponentAndLabel
+                                                        label={label}
+                                                        component={
+                                                            <Box/>
+                                                        }
+                                                    /> 
                                             }                                            
                                         </Box>
                                     </ShadowBox>
@@ -110,7 +120,7 @@ export const MarketUpgradesDisplay = ({ farming }: { farming: Farming }) => {
                     {
                         farming.marketUpgrades.slice(8).map((upgrade, index) => {
                             const nextLevelCost = upgrade.getNextLevelCost();
-                            const canAfford = (farming.cropDepot.find(crop => crop.index == nextLevelCost.cropId)?.quantityOwned ?? 0) > nextLevelCost.cropQuantity;
+                            const canAfford = farming.magicBeansOwned > nextLevelCost.cropQuantity;
 
                             let label = "test";
                             if (upgrade.unlocked) {
