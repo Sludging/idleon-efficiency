@@ -37,7 +37,7 @@ export class MarketUpgrade {
             }
         }
 
-        const cropCost = Math.floor(this.data.cost * Math.pow(this.data.costExponent, (currentLevel)));
+        const cropCost = (this.data.maxLvl > currentLevel ? Math.floor(this.data.cost * Math.pow(this.data.costExponent, (currentLevel))) : 0);
         
         return {cropId: cropId, cropQuantity: cropCost};
     }
