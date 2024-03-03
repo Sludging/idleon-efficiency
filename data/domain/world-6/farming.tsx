@@ -128,6 +128,8 @@ export class Plot {
     possibleQtyToCollectMin: number = 0;
     possibleQtyToCollectMax: number = 0;
 
+    readyToCollect: boolean = false;
+
     constructor(public index: number) { }
 
     updatePlotNextOGchance = (bonusFromMarketUpgrade11: number, bonusFromPristineCharm11: number, bonusFromStarSign67: number) => {
@@ -315,6 +317,8 @@ export class Farming extends Domain {
                 plot.quantityToCollect = plotInfo[4];
                 plot.OGlevel = plotInfo[5];
                 plot.overgrowthTime = plotInfo[6];
+
+                plot.readyToCollect = (plot.quantityToCollect > 0)
             }
             farming.farmPlots.push(plot);
         });
