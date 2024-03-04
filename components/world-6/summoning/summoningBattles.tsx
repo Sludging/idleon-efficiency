@@ -8,6 +8,8 @@ import { Summoning as SummoningDomain, SummonEssence, BattlesInfo } from '../../
 export const SummoningBattles = ({ battlesInfos, essences }: { battlesInfos: BattlesInfo, essences: SummonEssence[] }) => {
     const allVictories: number = battlesInfos.allVictories.reduce((allVictories, colorVictories) => allVictories + colorVictories, 0);
 
+    const maxHealth = 3; // Should be battlesInfos.maxHealth but seems like it increase by buyting hearths in gem shop, which don't really increase max health
+
     if (battlesInfos.allBattles.length == 0) {
         return <Text>Loading...</Text>
     } else {
@@ -15,8 +17,8 @@ export const SummoningBattles = ({ battlesInfos, essences }: { battlesInfos: Bat
             <Box margin={{ top: 'small' }}>
                 <Box direction="row" wrap justify="center">
                     <ShadowBox margin={{ right: 'medium', bottom: 'small' }} background="dark-1" gap="xsmall" pad="medium">
-                        <TextAndLabel label="Total Victories" text={allVictories.toString()} />
-                        <TextAndLabel label="Health" text={`${battlesInfos.currentHealth}/${battlesInfos.maxHealth}`} />
+                        <TextAndLabel label="Total Victories" text={allVictories.toString()} />                        
+                        <TextAndLabel label="Health" text={`${battlesInfos.currentHealth}/${maxHealth}`} />
                     </ShadowBox>
                     <ShadowBox margin={{ right: 'medium', bottom: 'small' }} background="dark-1" gap="xsmall" pad="medium" align="center">
                         <ComponentAndLabel
