@@ -220,7 +220,7 @@ export class CropiusMapperBubble extends Bubble {
 
     // Should this live inside the bubble base class? :thinking:
     static fromBase = (id: string, data: BubbleModel, iconPrefix: string, bubbleIndex: number) => {
-        return new DailyDripBubble(id, data, iconPrefix, bubbleIndex);
+        return new CropiusMapperBubble(id, data, iconPrefix, bubbleIndex);
     }
 
     constructor(id: string, data: BubbleModel, iconPrefix: string, bubbleIndex: number) {
@@ -235,7 +235,7 @@ export class CropiusMapperBubble extends Bubble {
     }
 
     override getBonusText = (bonus: number = this.getBonus(true)): string => {
-        return this.description.replace(/{/g, lavaFunc(this.func, this.level, this.x1, this.x2, true).toString()).replace(/\$/g, bonus.toString()+"%");
+        return this.description.replace(/{/g, lavaFunc(this.func, this.level, this.x1, this.x2, true).toString()).replace(/\$/g, this.totalW6PortalsOpened+" portals = "+bonus.toString()+"%");
     }
 }
 
