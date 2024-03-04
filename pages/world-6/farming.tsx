@@ -32,6 +32,7 @@ function Farming() {
                 <NextSeo title="Farming" />
                 <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Farming</Heading>
                 <Text size="xsmall">* This is a work in progress, there could some bugs and minor inaccuracies. THE UI ISN&apos;T FINAL!</Text>
+                <Text>Farming Lv: {farming.farmingLevel}</Text>
                 <Box direction="row" gap="xsmall" margin={{ bottom: 'small' }}  wrap>
                     <ShadowBox background="dark-1" gap="xsmall" pad="small" align="center">
                         <ComponentAndLabel
