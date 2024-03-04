@@ -80,7 +80,7 @@ export class SummonUpgrade {
     getBonusText = (level: number = this.level): string => {
         // This bonus is special so we make a special case
         if (this.index == 2) {
-            return this.data.bonus.slice(0, this.data.bonus.indexOf('@')) + "Cost (and level) reset a few days after buying it";
+            return this.data.bonus.slice(0, this.data.bonus.indexOf('@')) + "Cost (and level) reset by cycle of 4 days (but you keep summoned familiars)";
         } else {
             return this.data.bonus.replace(/@/, '\r\n').replace(/{/, this.getBonus(level).toString()).replace(/}/, this.secondaryBonus);
         }
