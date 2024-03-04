@@ -54,8 +54,8 @@ export class Crop {
     updateNextCropChance = (seed: Seed | undefined, farmingLevel: number, summoningLevel: number, bonusFromMarketUpgrade4: number, bonusFromMarketUpgrade9: number, bonusFromWinningBonus10: number, bonusFromAlchemyBubbleCropChapter: number, bonusFromAlchemyBubbleCropiusMapper: number, bonusFromVial66: number, bonusFromMeal62: number, bonusFromMeal66: number, bonusFromStampCropEvo: number, bonusFromStarSign65: number, bonusFromRiftFarming1: number) => {
         let evolutionChance = 0;
         const seedBaseEvolutionChance = 0.3; // should be seed.data.nextCropChance but Lava seems to use 0.3 for every seed
-        const allBonusesEffect = (1 + bonusFromMarketUpgrade4 / 100) * (1 + bonusFromWinningBonus10 / 100) * (1 + bonusFromAlchemyBubbleCropChapter / 100) * (1 + bonusFromAlchemyBubbleCropiusMapper / 100) * (1 + bonusFromVial66 / 100) * (1 + bonusFromMeal62 / 100) * (1 + bonusFromStampCropEvo / 100) * (1 + bonusFromMeal66 * Math.ceil((summoningLevel + 1) / 50) / 100) * Math.max(1, bonusFromMarketUpgrade9) * (1 + 15 * bonusFromRiftFarming1 / 100) * (1 + bonusFromStarSign65 * farmingLevel / 100);
-        
+        const allBonusesEffect = (1 + bonusFromMarketUpgrade4 / 100) * (1 + bonusFromWinningBonus10 / 100) * (1 + bonusFromAlchemyBubbleCropChapter / 100) * (1 + bonusFromAlchemyBubbleCropiusMapper / 100) * (1 + bonusFromVial66 / 100) * (1 + bonusFromMeal62 / 100) * (1 + bonusFromStampCropEvo / 100) * (1 + bonusFromMeal66 * Math.ceil((summoningLevel + 1) / 50) / 100) * Math.max(1, bonusFromMarketUpgrade9) * (1 + bonusFromRiftFarming1 / 100) * (1 + bonusFromStarSign65 * farmingLevel / 100);
+
         if (seed) {
             if (farmingLevel < 2 || this.index == seed.data?.cropIdMax) {
                 evolutionChance = 0;            
@@ -122,6 +122,8 @@ export class Plot {
     // seconds since last cycle have ended, reset to 0 once an overgrow cycle end
     // Only start incrementing when plant is fully grown
     overgrowthTime: number = 0;
+
+    growthRate: number = 0;
 
     cropEvolutionChance: number = 0;
     nextOGChance: number = 0;
@@ -385,7 +387,12 @@ export class Farming extends Domain {
     }
     
     updateGrowthRate = (bonusFromVial64: number, bonusFromWinnerBonus2: number) => {
-        this.growthRate = Math.max(1, this.getMarketUpgradeBonusValue(10)) * (1 + (this.getMarketUpgradeBonusValue(2) + bonusFromVial64) / 100) * (1 + bonusFromWinnerBonus2 / 100);
+        const growthRate = Math.max(1, this.getMarketUpgradeBonusValue(10)) * (1 + (this.getMarketUpgradeBonusValue(2) + bonusFromVial64) / 100) * (1 + bonusFromWinnerBonus2 / 100);
+        
+        this.growthRate = growthRate;
+        this.farmPlots.forEach(plot => {
+            plot.growthRate = growthRate;
+        })
     }
     
     updateBeansFromConvertinCurrentDepot = (jadeUpgradeBonus15: number) => {
@@ -579,7 +586,8 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
 
     // Upgrade each Crops Evolution chance (don't depend on plot so stored in crop)
     const summoningWinnerBonus10 = summoning.summonBonuses.find(bonus => bonus.index == 10)?.getBonus() ?? 0;
-    const bubbleBonusCropChapter = alchemy.getBonusForBubble(CauldronIndex.Power, AlchemyConst.CropChapter);
+    // TODO : once chapters are integrated into IE, add this bonus
+    const bubbleBonusCropChapter = 0 //alchemy.getBonusForBubble(CauldronIndex.Power, AlchemyConst.CropChapter);
     const bubbleBonusCropiusMapper = alchemy.getBonusForBubble(CauldronIndex.Kazam, AlchemyConst.CropiusMapper);
     const vialEvolutionChanceBonus = alchemy.getVialBonusForKey("6FarmEvo");
     const mealBonusZCropEvo = cooking.getMealBonusForKey("zCropEvo");
@@ -592,7 +600,7 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     // Update OG chances for all plots
     const marketBonus11 = farming.getMarketUpgradeBonusValue(11);
     const pristineCharmBonus11 = sneaking.pristineCharms.find(charm => charm.index == 11)?.unlocked ? 50 : 0;
-    const starSignBonus67 = players[0].starSigns.reduce((sum, sign) => sum += sign.getBonus("OG Chance"), 0);
+    const starSignBonus67 = players[0].starSigns.filter(sign => sign.bonuses.find(bonus => bonus.text == "OG Chance") != undefined).reduce((sum, sign) => sum += sign.getBonus("OG Chance"), 0);
     farming.updatePlotsOGChance(marketBonus11, pristineCharmBonus11, starSignBonus67);
 
     return farming;
