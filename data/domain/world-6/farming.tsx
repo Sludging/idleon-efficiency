@@ -586,9 +586,8 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
 
     // Upgrade each Crops Evolution chance (don't depend on plot so stored in crop)
     const summoningWinnerBonus10 = summoning.summonBonuses.find(bonus => bonus.index == 10)?.getBonus() ?? 0;
-    // TODO : once chapters are integrated into IE, add this bonus
-    const bubbleBonusCropChapter = 0 //alchemy.getBonusForBubble(CauldronIndex.Power, AlchemyConst.CropChapter);
-    const bubbleBonusCropiusMapper = alchemy.getBonusForBubble(CauldronIndex.Kazam, AlchemyConst.CropiusMapper);
+    const bubbleBonusCropChapter = alchemy.getVialBonusForKey("W10AllCharz");
+    const bubbleBonusCropiusMapper = alchemy.getBubbleBonusForKey("Y6");
     const vialEvolutionChanceBonus = alchemy.getVialBonusForKey("6FarmEvo");
     const mealBonusZCropEvo = cooking.getMealBonusForKey("zCropEvo");
     const mealBonusZCropEvoSumm = cooking.getMealBonusForKey("zCropEvoSumm");
