@@ -57,10 +57,10 @@ export class Crop {
         const allBonusesEffect = (1 + bonusFromMarketUpgrade4 / 100) * (1 + bonusFromWinningBonus10 / 100) * (1 + bonusFromAlchemyBubbleCropChapter / 100) * (1 + bonusFromAlchemyBubbleCropiusMapper / 100) * (1 + bonusFromVial66 / 100) * (1 + bonusFromMeal62 / 100) * (1 + bonusFromStampCropEvo / 100) * (1 + bonusFromMeal66 * Math.ceil((summoningLevel + 1) / 50) / 100) * Math.max(1, bonusFromMarketUpgrade9) * (1 + 15 * bonusFromRiftFarming1 / 100) * (1 + bonusFromStarSign65 * farmingLevel / 100);
         
         if (seed) {
-            if (farmingLevel < 2 || this.index == seed.data.cropIdMax) {
+            if (farmingLevel < 2 || this.index == seed.data?.cropIdMax) {
                 evolutionChance = 0;            
             } else {                
-                evolutionChance = allBonusesEffect * (seedBaseEvolutionChance) * Math.pow(seed.data.nextCropDecay, (this.index - seed.data.cropIdMin));
+                evolutionChance = allBonusesEffect * (seedBaseEvolutionChance) * Math.pow(seed.data?.nextCropDecay ?? 0, (this.index - (seed.data?.cropIdMin ?? 0)));
             }
         } else {
             evolutionChance = allBonusesEffect;
@@ -95,7 +95,7 @@ export class Crop {
 }
 
 export class Seed {
-    constructor(public index: number, public data: SeedInfoModel) { }
+    constructor(public index: number = -1, public data: SeedInfoModel | undefined = undefined) { }
 
     getFullCycleGrowthTime = (): number => {
         if (this.index == -1) {
@@ -108,7 +108,7 @@ export class Seed {
 
 export class Plot {
     // -1 means the Plot is empty
-    seedIndex: number = -1;
+    seed: Seed = new Seed();
     // CropId
     cropIndex: number = 0;
     // If true can't evolve, but can still OverGrow
@@ -136,8 +136,23 @@ export class Plot {
         this.nextOGChance = Math.pow(0.4, this.OGlevel + 1) * Math.max(1, bonusFromMarketUpgrade11) * (1 + bonusFromPristineCharm11 / 100) * (1 + bonusFromStarSign67 / 100);
     }
 
-    getQuantityToCollect(): number {
-        return this.quantityToCollect * Math.max(1, this.getOGmultiplyer());
+    getGrowthStage(): PlotGrowthStage {
+        const cycleTime = this.seed.getFullCycleGrowthTime();
+
+        switch (true) {
+            case this.seed.index == -1: return PlotGrowthStage.Empty;
+            case this.readyToCollect == true: return PlotGrowthStage.Grown;
+            case this.growthTime >= (cycleTime * 4/5): return PlotGrowthStage.GrowStage4;
+            case this.growthTime >= (cycleTime * 3/5): return PlotGrowthStage.GrowStage3;
+            case this.growthTime >= (cycleTime * 2/5): return PlotGrowthStage.GrowStage2;
+            case this.growthTime >= (cycleTime * 1/5): return PlotGrowthStage.GrowStage1;
+            case this.growthTime >= 0: return PlotGrowthStage.Planted;
+            default: return PlotGrowthStage.Empty;
+        }
+    }
+
+    getQuantityToCollect(baseQuantity: number = this.quantityToCollect): number {
+        return baseQuantity * Math.max(1, this.getOGmultiplyer());
     }
 
     getOGmultiplyer = (): number => {
@@ -153,7 +168,7 @@ export class Plot {
             }
         } else {
             return {
-                location: `FarmPlant${stage + (5 * seedId)}`,
+                location: `FarmPlant${stage + (6 * seedId)}`,
                 height: 78,
                 width: 86
             }
@@ -282,7 +297,7 @@ export class Farming extends Domain {
 
         farming.cropDepot = [];
         farming.seeds.forEach((seed) => {
-            for (let i = seed.data.cropIdMin; i <= seed.data.cropIdMax; i++) {
+            for (let i = (seed.data?.cropIdMin ?? 0); i <= (seed.data?.cropIdMax ?? 0); i++) {
                 farming.cropDepot.push(new Crop(i, seed.index));
             }
         })
@@ -307,12 +322,12 @@ export class Farming extends Domain {
 
         farming.farmPlots = [];
         plotsData.forEach((plotInfo, index) => {
-            let plot: Plot = new Plot(index);
-            plot.seedIndex = plotInfo[0];
+            let plot: Plot = new Plot(index);            
             // If seedIndex = -1 then the plot is empty, so no more information are needed (all other plotInfo should be at 0 anyway in this case)
-            if (plot.seedIndex > -1) {
+            plot.seed = farming.seeds.find(seed => seed.index == plotInfo[0]) ?? new Seed();
+            if (plot.seed.index > -1) {
                 plot.growthTime = plotInfo[1];
-                plot.cropIndex = plotInfo[2] + (farming.seeds.find(seed => seed.index == plot.seedIndex)?.data.cropIdMin ?? 0);
+                plot.cropIndex = plotInfo[2] + (plot.seed.data?.cropIdMin ?? 0);
                 plot.locked = (plotInfo[3] == 1);
                 plot.quantityToCollect = plotInfo[4];
                 plot.OGlevel = plotInfo[5];
@@ -339,7 +354,7 @@ export class Farming extends Domain {
         
         this.cropDepot.filter(crop => crop.quantityOwned > 0).forEach(crop => {
             const seed = this.seeds.find(seed => seed.index == crop.seedIndex);
-            fromCrops += (crop.quantityOwned * Math.pow(2.5, (seed?.index ?? 0)) * Math.pow(1.08, crop.index - (seed?.data.cropIdMin ?? 0)));
+            fromCrops += (crop.quantityOwned * Math.pow(2.5, (seed?.index ?? 0)) * Math.pow(1.08, crop.index - (seed?.data?.cropIdMin ?? 0)));
         });
         
         this.magicBeansFromDepot = Math.pow(fromCrops, 0.5) * ( 1 + this.getMarketUpgradeBonusValue(6) / 100) * Math.max(1, jadeUpgradeBonus15);
@@ -360,7 +375,7 @@ export class Farming extends Domain {
 
     updatePossibleQuantityToCollect = (bonusFromMarketUpgrade1: number, purchasesFromGemShopBonus139: number) => {
         const min = Math.floor(1 + (0 + (bonusFromMarketUpgrade1 + 20 * purchasesFromGemShopBonus139) / 100));
-        const max = Math.floor(1 + (0.999 + (bonusFromMarketUpgrade1 + 20 * purchasesFromGemShopBonus139) / 100));
+        const max = Math.floor(1 + (0.9999 + (bonusFromMarketUpgrade1 + 20 * purchasesFromGemShopBonus139) / 100));
 
         this.farmPlots.forEach(plot => {
             plot.possibleQtyToCollectMin = min;
@@ -502,11 +517,16 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const sneaking = data.get("sneaking") as Sneaking;
     const players = data.get("players") as Player[];
     const rift = data.get("rift") as Rift;
+    const timeAway = JSON.parse((data.get("rawData") as { [k: string]: any })["TimeAway"]);
+
+    // TODO : Use this gapFromLastSave to update Plots growth stade
+    const time = new Date()
+    const gapFromLastSave = (time.getTime() / 1000) - timeAway['GlobalTime'];
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
 
     // Update Min and Max possible quantity to collect from one fully grown crop 
-    const gemInstagrowPurchase = gemStore.purchases.find(purchase => purchase.no == 140)?.pucrhased ?? 0;
+    const gemInstagrowPurchase = gemStore.purchases.find(purchase => purchase.index == 140)?.pucrhased ?? 0;
     farming.updatePossibleQuantityToCollect(farming.getMarketUpgradeBonusValue(1), gemInstagrowPurchase);
 
     // Update growth speed for displayng when crops will be ready

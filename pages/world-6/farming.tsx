@@ -100,7 +100,7 @@ function Farming() {
                     {activeTab == "Crop Scientist" && <CropScientistDisplay cropScientist={farming.cropScientist} />}
                     {activeTab == "Market Upgrades" && <MarketUpgradesDisplay farming={farming} />}
                     {activeTab == "Crop Depot" && <CropDepotDisplay farming={farming} />}
-                    {activeTab == "Plots" && <PlotsDisplay />}
+                    {activeTab == "Plots" && <PlotsDisplay plots={farming.farmPlots} cropDepot={farming.cropDepot} />}
                 </Box>
             </Box>
         )
