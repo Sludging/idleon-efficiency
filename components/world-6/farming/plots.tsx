@@ -16,9 +16,9 @@ export const PlotsDisplay = ({ plots, cropDepot }: { plots: Plot[], cropDepot: C
                 {
                     plots.map((plot, index) => {
                         return (
-                            <ShadowBox background="dark-1">
-                                <Box key={index} align="center">
-                                    <PlotDisplay key={index} plot={plot} cropDepot={cropDepot} />
+                            <ShadowBox key={index} background="dark-1">
+                                <Box  align="center">
+                                    <PlotDisplay plot={plot} cropDepot={cropDepot} />
                                 </Box>
                             </ShadowBox>
                         )
