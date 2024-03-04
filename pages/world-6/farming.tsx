@@ -4,7 +4,7 @@ import {
     Text,
 } from 'grommet'
 import { NextSeo } from 'next-seo';
-import { Crop, Farming as FarmingDomain } from '../../data/domain/world-6/farming';
+import { Crop, Farming as FarmingDomain, CropScientist } from '../../data/domain/world-6/farming';
 import { useContext, useState } from 'react';
 import { AppContext } from '../../data/appContext';
 import ShadowBox from '../../components/base/ShadowBox';
@@ -13,16 +13,14 @@ import IconImage from '../../components/base/IconImage';
 import { nFormatter } from '../../data/utility';
 import TabButton from '../../components/base/TabButton';
 import { MarketUpgradesDisplay } from '../../components/world-6/farming/marketUpgrades';
-import { CropScientistDisplay } from '../../components/world-6/farming/cropScientist';
 import { CropDepotDisplay } from '../../components/world-6/farming/cropDepot';
 import { PlotsDisplay } from '../../components/world-6/farming/plots';
-import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 
 function Farming() {
     const appContext = useContext(AppContext);
     const data = appContext.data.getData();
     const lastUpdated = appContext.data.getLastUpdated(true) as Date;
-    const [activeTab, setActiveTab] = useState<string>("Crop Scientist");
+    const [activeTab, setActiveTab] = useState<string>("Plots");
 
     const farming = data.get("farming") as FarmingDomain;
 
@@ -34,8 +32,8 @@ function Farming() {
                 <NextSeo title="Farming" />
                 <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Farming</Heading>
                 <Text size="xsmall">* This is a work in progress, there could some bugs and minor inaccuracies. THE UI ISN&apos;T FINAL!</Text>
-                <Box direction="row" gap="xsmall" wrap>
-                    <ShadowBox width={"xsmall"} margin={{ bottom: 'small' }} background="dark-1" gap="xsmall" pad="small" align="center">
+                <Box direction="row" gap="xsmall" margin={{ bottom: 'small' }}  wrap>
+                    <ShadowBox background="dark-1" gap="xsmall" pad="small" align="center">
                         <ComponentAndLabel
                             label='Magic Beans'
                             component={
@@ -52,38 +50,39 @@ function Farming() {
                             }
                         />
                     </ShadowBox>
-                    <ShadowBox width={"xsmall"} margin={{ bottom: 'small' }} background="dark-1" gap="xsmall" pad="small" align="center">
+                    <ShadowBox background="dark-1" gap="xsmall" pad="small" align="center">
                         <ComponentAndLabel
-                            label='Insta grow left'
+                            label='Insta grow'
                             component={
-                                <Box gap="small" direction="row" align="center">
+                                <Box gap="small" direction="row" align="center" margin={{ top: 'xsmall' }}>
                                     <IconImage data={FarmingDomain.getInstaGrowImageData()} />
                                     <Text size="small">{nFormatter(farming.instaGrowToolLeft)}</Text>
                                 </Box>
-                            }
+                            }                            
                         />
                     </ShadowBox>
-                    <ShadowBox width={"auto"} margin={{ bottom: 'small' }} background="dark-1" gap="xsmall" pad="small" align="center">
+                    <ShadowBox background="dark-1" gap="xsmall" pad="small" align="center">
                         <ComponentAndLabel
-                            label='Inventory'
+                            label={`Crop scientist (crop types found : ${farming.cropScientist.discoveredCrops})`}
                             component={
-                                <Box gap="xxsmall" direction="row" wrap align="center">
+                                <Box gap="small" direction="row" margin={{top:"xsmall"}} wrap>
                                     {
-                                        farming.cropDepot.filter(crop => crop.quantityOwned > 0).map((crop, index) => (          
-                                            <Box key={index} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '75px', min: '75px' }} align="center">
-                                                <TipDisplay
-                                                    size='medium'
-                                                    heading={farming.getCropName(crop.index)}
-                                                    body=''
-                                                    direction={TipDirection.Down}
-                                                >
-                                                    <Box direction="row" pad={{ vertical: 'xsmall' }} align="center" gap='xsmall'>
-                                                        <IconImage data={Crop.getCropIconData(crop.index)} />
-                                                        <Text size="xsmall">{nFormatter(Math.floor(crop.quantityOwned))}</Text>
-                                                    </Box>
-                                                </TipDisplay>
-                                            </Box>
-                                        ))
+                                        farming.cropScientist.bonuses.map((bonus, index) => {
+                                            return (
+                                                <Box key={index} border={{ color: 'grey-1' }} background="accent-4">
+                                                    <ShadowBox style={{ opacity: bonus.unlocked ? 1 : 0.5 }} key={index} background="dark-1" pad={"xxsmall"}>                                                    
+                                                        <ComponentAndLabel
+                                                            label={CropScientist.getBonusTitle(bonus.bonusText)}
+                                                            component={
+                                                                <Box gap="small" direction="row" align="center">
+                                                                    <Text size="small">{farming.cropScientist.getShortBonusText(bonus.bonusText)}</Text>
+                                                                </Box>
+                                                            }
+                                                        />                                                        
+                                                    </ShadowBox>
+                                                </Box>
+                                            )
+                                        })
                                     }
                                 </Box>
                             }
@@ -91,16 +90,15 @@ function Farming() {
                     </ShadowBox>
                 </Box>
                 <Box align="center" direction="row" justify="center" gap="small">
-                    {["Crop Scientist", "Market Upgrades", "Crop Depot", "Plots"].map((tabName, index) => (
+                    {["Plots", "Market Upgrades", "Crop Depot"].map((tabName, index) => (
                         <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
                     ))
                     }
                 </Box>
                 <Box align="center" margin={{ top: 'small', bottom: 'small' }}>
-                    {activeTab == "Crop Scientist" && <CropScientistDisplay cropScientist={farming.cropScientist} />}
+                    {activeTab == "Plots" && <PlotsDisplay plots={farming.farmPlots} cropDepot={farming.cropDepot} />}
                     {activeTab == "Market Upgrades" && <MarketUpgradesDisplay farming={farming} />}
                     {activeTab == "Crop Depot" && <CropDepotDisplay farming={farming} />}
-                    {activeTab == "Plots" && <PlotsDisplay plots={farming.farmPlots} cropDepot={farming.cropDepot} />}
                 </Box>
             </Box>
         )
