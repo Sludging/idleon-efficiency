@@ -55,7 +55,7 @@ export const MarketUpgradesDisplay = ({ farming }: { farming: Farming }) => {
                                 return (
                                     <ShadowBox style={{ opacity: upgrade.level > 0 ? 1 : 0.6 }} key={index} background="dark-1" margin={{ right: 'small', bottom: 'small' }} pad="medium" gap="medium">
                                         <Box gap="small" justify="between" fill>
-                                            <TextAndLabel textSize='xsmall' text={farming.getMarketUpgradeBonusText(upgrade.index)} label={`${upgrade.data.name} ${upgrade.level > 0 ? `(Lv. ${upgrade.level})` : ``}`} />
+                                            <TextAndLabel textSize='xsmall' text={farming.getMarketUpgradeBonusText(upgrade.index)} label={`${upgrade.data.name} ${upgrade.level > 0 ? `(Lv. ${upgrade.level}${upgrade.data.maxLvl > upgrade.level ? `/${upgrade.data.maxLvl}` : ``})` : ``}`} />
                                             {
                                                 upgrade.unlocked ?
                                                     upgrade.level < upgrade.data.maxLvl ?
@@ -169,7 +169,7 @@ export const MarketUpgradesDisplay = ({ farming }: { farming: Farming }) => {
                             return (
                                 <ShadowBox style={{ opacity: upgrade.level > 0 ? 1 : 0.6 }} key={index} background="dark-1" margin={{ right: 'small', bottom: 'small' }} pad="medium" gap="medium">
                                     <Box gap="small" justify="between" fill>
-                                        <TextAndLabel textSize='xsmall' text={farming.getMarketUpgradeBonusText(upgrade.index)} label={`${upgrade.data.name} ${upgrade.level > 0 ? `(Lv. ${upgrade.level})` : ``}`} />
+                                        <TextAndLabel textSize='xsmall' text={farming.getMarketUpgradeBonusText(upgrade.index)} label={`${upgrade.data.name} ${upgrade.level > 0 ? `(Lv. ${upgrade.level}${upgrade.data.maxLvl > upgrade.level ? `/${upgrade.data.maxLvl}` : ``})` : ``}`} />
                                         {
                                             upgrade.unlocked ?
                                                 upgrade.level < upgrade.data.maxLvl ?
