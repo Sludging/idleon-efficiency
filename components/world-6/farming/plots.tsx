@@ -3,9 +3,11 @@ import TipDisplay, { TipDirection } from "../../base/TipDisplay";
 import { Crop, Plot, PlotGrowthStage } from "../../../data/domain/world-6/farming";
 import IconImage from "../../base/IconImage";
 import { nFormatter, toTime } from "../../../data/utility";
-import { useContext } from "react";
+import { useContext, useMemo, useState } from "react";
 import { ComponentAndLabel } from "../../base/TextAndLabel";
 import ShadowBox from "../../base/ShadowBox";
+import { Lock, Star } from 'grommet-icons';
+import { StaticTime, TimeDisplaySize, TimeDown, TimeDownWithCallback } from "../../base/TimeDisplay";
 
 export const PlotsDisplay = ({ plots, cropDepot }: { plots: Plot[], cropDepot: Crop[] }) => {
     const size = useContext(ResponsiveContext);
@@ -30,9 +32,12 @@ export const PlotsDisplay = ({ plots, cropDepot }: { plots: Plot[], cropDepot: C
 }
 
 const PlotDisplay = ({ plot, cropDepot }: { plot: Plot, cropDepot: Crop[] }) => {
+    const [readyToCollect, setReadyToCollect] = useState<boolean>(plot.readyToCollect);
+    const [completedOGcycles, setCompletedOGCycles] = useState<number>(plot.overgrowthCycleCompletedSinceLastLoggin);
     const growthStage: PlotGrowthStage = plot.getGrowthStage();
-
     const baseCrop = cropDepot.find(crop => crop.index == plot.cropIndex);
+    // Second test is used to avoid getting a crop if current crop is last crop for its seed
+    const nextCrop = cropDepot.find(crop => crop.index == plot.cropIndex+1 && crop.seedIndex == plot.seed.index);
 
     if (!baseCrop || growthStage == PlotGrowthStage.Empty) {
         return (
@@ -42,8 +47,12 @@ const PlotDisplay = ({ plot, cropDepot }: { plot: Plot, cropDepot: Crop[] }) => 
         )
     }
 
+    // Actualize growth based on time that passed since the parsing of data to avoid a big time gap in case user take a long time to open the farming page and there's no cloud save event
+    plot.updatePlotGrowthSinceLastRefresh();
+
     // To get it to %
     const nextCropChance = baseCrop.nextCropChance * 100;
+    const nextCropIsUndiscovered = (nextCrop?.discovered == false ?? false);
 
     const quantityToDisplay: string = plot.quantityToCollect > 0 ? nFormatter(plot.getQuantityToCollect()) : `${plot.getQuantityToCollect(plot.possibleQtyToCollectMin)} ~ ${plot.getQuantityToCollect(plot.possibleQtyToCollectMax)}`;
     // If quantityToCollect is set then it means growth is done from server side, so no more changes possible for crop
@@ -54,55 +63,95 @@ const PlotDisplay = ({ plot, cropDepot }: { plot: Plot, cropDepot: Crop[] }) => 
 
     return (
         <Box fill>
-            <Box pad="xsmall" gap="xsmall">
-                <ComponentAndLabel
-                    label="Crop"                        
-                    component={
-                        !canEvolve ?
-                            <Box direction="row" gap="xsmall" align="center" justify="start">
+            <Box pad="small" gap="medium">
+                <Box justify="around">
+                {
+                    !canEvolve ?
+                        <Box direction="row" align="center" justify="between">
+                            <Box direction="row"  gap="xsmall" align="center" justify="start">
                                 <Text size="small">{quantityToDisplay}</Text>
                                 <IconImage data={Crop.getCropIconData(plot.cropIndex)} />
-                                {plot.locked && <Text size="xxsmall">(Locked)</Text>}
                             </Box>
-                            :
-                            <Box direction="row" gap="xsmall" justify="start" align="center">
-                                <Text size="small">{plot.possibleQtyToCollectMin} ~ {plot.possibleQtyToCollectMax}</Text>
-                                <Box>
-                                    {!forcedToEvolve && < Box direction="row" gap="xxsmall">
-                                        <IconImage data={Crop.getCropIconData(plot.cropIndex)} />
-                                        <Text size="small">{nFormatter(100 - Math.min(100, nextCropChance))}%</Text>
-                                    </Box>}
-                                    <Box direction="row" gap="xxsmall">
-                                        <IconImage data={Crop.getCropIconData(plot.cropIndex+1)} />
-                                        <Text size="small">{nFormatter(Math.min(100, nextCropChance))}%</Text>
-                                    </Box>
+                            {plot.locked && 
+                                <TipDisplay
+                                    size='small'
+                                    heading="Plot is locked (can't evolve)"
+                                    body=''
+                                    direction={TipDirection.Down}                                
+                                >
+                                    <Lock color='grey-2' size='16px'/>
+                                </TipDisplay>
+                            }
+                        </Box>
+                        :
+                        <Box direction="row" gap="xsmall" justify="start" align="center">
+                            <Text size="small">{plot.possibleQtyToCollectMin} ~ {plot.possibleQtyToCollectMax}</Text>
+                            <Box>
+                                {!forcedToEvolve && < Box direction="row" gap="xxsmall">
+                                    <IconImage data={Crop.getCropIconData(plot.cropIndex)} />
+                                    <Text size="small">{nFormatter(100 - Math.min(100, nextCropChance))}%</Text>
+                                </Box>}
+                                <Box direction="row" gap="xxsmall">
+                                    <IconImage data={Crop.getCropIconData(plot.cropIndex+1)} />
+                                    <Text size="small">{nFormatter(Math.min(100, nextCropChance))}%</Text>
+                                    {nextCropIsUndiscovered && 
+                                        <TipDisplay
+                                            size='small'
+                                            heading="New crop"
+                                            body=''
+                                            direction={TipDirection.Down}                                
+                                        >
+                                            <Star color='grey-2' size='11px'/>
+                                        </TipDisplay>
+                                    }
                                 </Box>
                             </Box>
-                    }
-                />   
-                {!plot.readyToCollect && 
+                        </Box>
+                }
+                </Box>
+                {!readyToCollect && 
                     <ComponentAndLabel
                     label="Fully grown in :"
+                    labelSize="11px"
                     component={
-                        <Text size="small">{toTime((plot.seed.getFullCycleGrowthTime() - plot.growthTime) / plot.growthRate)}</Text>
+                        <TimeDownWithCallback 
+                            addSeconds={(plot.seed.getFullCycleGrowthTime() - plot.growthTime) / plot.growthRate} 
+                            size={TimeDisplaySize.XSmall}
+                            callBack={
+                                () => {setReadyToCollect(true);}
+                            }
+                        />
                     }
                 />}
-                {plot.readyToCollect && <ComponentAndLabel
+                {readyToCollect && <ComponentAndLabel
                     label="OG level :"
+                    labelSize="11px"
                     component={
-                        <Text size="small">{plot.OGlevel} (x{plot.getOGmultiplyer()})</Text>
+                        <Box gap="xsmall">
+                            <Text size="xsmall">{plot.OGlevel} (x{plot.getOGmultiplyer()})</Text>
+                            {completedOGcycles > 0 && <Text size="xsmall">{completedOGcycles} OG cycles since last loggin</Text>}
+                        </Box>
                     }
                 />}
-                {plot.readyToCollect && <ComponentAndLabel
+                {readyToCollect && <ComponentAndLabel
                     label="Next OG cycle end in :"
+                    labelSize="11px"
                     component={
-                        <Text size="small">{toTime((plot.seed.getFullCycleGrowthTime() - plot.overgrowthTime) / plot.growthRate)}</Text>
+                        <TimeDownWithCallback 
+                            addSeconds={(plot.seed.getFullCycleGrowthTime() - plot.overgrowthTime) / plot.growthRate} 
+                            resetToSeconds={plot.seed.getFullCycleGrowthTime() / plot.growthRate} 
+                            size={TimeDisplaySize.XSmall}
+                            callBack={
+                                () => {setCompletedOGCycles(completedOGcycles+1);}
+                            }
+                        />
                     }
                 />}
-                {plot.readyToCollect && <ComponentAndLabel
+                {readyToCollect && <ComponentAndLabel
                     label="Next OG chance :"
+                    labelSize="11px"
                     component={
-                        <Text size="small">{nFormatter(Math.min(100, plot.nextOGChance * 100))}%</Text>
+                        <Text size="xsmall">{nFormatter(Math.min(100, plot.getPlotNextOGChance() * 100))}%</Text>
                     }
                 />}
             </Box>

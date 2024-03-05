@@ -71,7 +71,7 @@ function Farming() {
                                         farming.cropScientist.bonuses.map((bonus, index) => {
                                             return (
                                                 <Box key={index} border={{ color: 'grey-1' }} background="accent-4">
-                                                    <ShadowBox style={{ opacity: bonus.unlocked ? 1 : 0.5 }} key={index} background="dark-1" pad={"xxsmall"}>                                                    
+                                                    <ShadowBox style={{ opacity: bonus.unlocked ? 1 : 0.5 }} key={index} background="dark-1" pad={"xsmall"}>                                                    
                                                         <ComponentAndLabel
                                                             label={CropScientist.getBonusTitle(bonus.bonusText)}
                                                             component={

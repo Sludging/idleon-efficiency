@@ -7,7 +7,7 @@ import { MarketInfoModel } from "../model/marketInfoModel";
 import { SeedInfoModel } from "../model/seedInfoModel";
 import { Player } from "../player";
 import { ImageData } from "../imageData";
-import { nFormatter } from '../../utility';
+import { nFormatter, toTime } from '../../utility';
 import { GemStore } from '../gemPurchases';
 import { Lab } from '../lab';
 import { Summoning } from './summoning';
@@ -126,16 +126,95 @@ export class Plot {
     growthRate: number = 0;
 
     cropEvolutionChance: number = 0;
-    nextOGChance: number = 0;
     possibleQtyToCollectMin: number = 0;
     possibleQtyToCollectMax: number = 0;
+
+    bonusOGChanceFromMarket11: number = 0;
+    bonusOGChanceFromPristine11: number = 0;
+    bonusOGChanceFromStarSign67: number = 0;
+
+    overgrowthCycleCompletedSinceLastLoggin: number = 0;
+    saveTime: number = 0;
+    lastRefresh: number = 0;
 
     readyToCollect: boolean = false;
 
     constructor(public index: number) { }
 
     updatePlotNextOGchance = (bonusFromMarketUpgrade11: number, bonusFromPristineCharm11: number, bonusFromStarSign67: number) => {
-        this.nextOGChance = Math.pow(0.4, this.OGlevel + 1) * Math.max(1, bonusFromMarketUpgrade11) * (1 + bonusFromPristineCharm11 / 100) * (1 + bonusFromStarSign67 / 100);
+        this.bonusOGChanceFromMarket11 = bonusFromMarketUpgrade11;
+        this.bonusOGChanceFromPristine11 = bonusFromPristineCharm11;
+        this.bonusOGChanceFromStarSign67 = bonusFromStarSign67;        
+    }
+
+    updatePlotGrowthSinceSave = () => {
+        const time = new Date();
+        const gapFromLastSave = (time.getTime() / 1000) - this.saveTime;
+        this.lastRefresh = (time.getTime() / 1000);
+
+        let timeLeftToUse = gapFromLastSave * this.growthRate;
+        const cycleDuration = this.seed.getFullCycleGrowthTime();
+
+        if (this.growthTime < cycleDuration) {
+            const timeLeftForCycle = cycleDuration - this.growthTime;
+            if (timeLeftToUse > timeLeftForCycle) {
+                timeLeftToUse -= timeLeftForCycle;
+                this.growthTime += timeLeftForCycle;
+                this.readyToCollect = true;
+            } else {
+                this.growthTime += timeLeftToUse;
+                timeLeftToUse = 0;
+            }
+        }
+
+        while (timeLeftToUse > 0) {
+            const timeLeftForCycle = cycleDuration - this.overgrowthTime;
+            if (timeLeftToUse > timeLeftForCycle) {
+                timeLeftToUse -= timeLeftForCycle;
+                this.overgrowthTime = 0;
+                this.overgrowthCycleCompletedSinceLastLoggin++;
+            } else {
+                this.overgrowthTime += timeLeftToUse;
+                timeLeftToUse = 0;
+            }
+        }
+    }
+
+    updatePlotGrowthSinceLastRefresh = () => {
+        const time = new Date();
+        const gapFromLastRefresh = (time.getTime() / 1000) - this.lastRefresh;
+        this.lastRefresh = (time.getTime() / 1000);
+
+        let timeLeftToUse = gapFromLastRefresh * this.growthRate;
+        const cycleDuration = this.seed.getFullCycleGrowthTime();
+
+        if (this.growthTime < cycleDuration) {
+            const timeLeftForCycle = cycleDuration - this.growthTime;
+            if (timeLeftToUse > timeLeftForCycle) {
+                timeLeftToUse -= timeLeftForCycle;
+                this.growthTime += timeLeftForCycle;
+                this.readyToCollect = true;
+            } else {
+                this.growthTime += timeLeftToUse;
+                timeLeftToUse = 0;
+            }
+        }
+
+        while (timeLeftToUse > 0) {
+            const timeLeftForCycle = cycleDuration - this.overgrowthTime;
+            if (timeLeftToUse > timeLeftForCycle) {
+                timeLeftToUse -= timeLeftForCycle;
+                this.overgrowthTime = 0;
+                this.overgrowthCycleCompletedSinceLastLoggin++;
+            } else {
+                this.overgrowthTime += timeLeftToUse;
+                timeLeftToUse = 0;
+            }
+        }
+    }
+
+    getPlotNextOGChance = (currentOGlevel: number = this.OGlevel) => {
+        return Math.pow(0.4, currentOGlevel + 1) * Math.max(1, this.bonusOGChanceFromMarket11) * (1 + this.bonusOGChanceFromPristine11 / 100) * (1 + this.bonusOGChanceFromStarSign67 / 100);
     }
 
     getGrowthStage(): PlotGrowthStage {
@@ -428,6 +507,13 @@ export class Farming extends Domain {
             plot.possibleQtyToCollectMax = max;
         });
     }
+
+    updatePlotGrowthSinceSave = (saveTime: number) => {
+        this.farmPlots.forEach(plot => {
+            plot.saveTime = saveTime;
+            plot.updatePlotGrowthSinceSave();
+        })
+    }
     
     getCropsWithStockEqualOrGreaterThan = (stockLimit: number): number => {
         return this.cropDepot.filter(crop => crop.quantityOwned >= stockLimit).length;
@@ -565,16 +651,12 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const rift = data.get("rift") as Rift;
     const timeAway = JSON.parse((data.get("rawData") as { [k: string]: any })["TimeAway"]);
 
-    // TODO : Use this gapFromLastSave to update Plots growth stade
-    const time = new Date()
-    const gapFromLastSave = (time.getTime() / 1000) - timeAway['GlobalTime'];
-
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
-
+    
     // Update Min and Max possible quantity to collect from one fully grown crop 
     const gemInstagrowPurchase = gemStore.purchases.find(purchase => purchase.index == 140)?.pucrhased ?? 0;
     farming.updatePossibleQuantityToCollect(farming.getMarketUpgradeBonusValue(1), gemInstagrowPurchase);
-
+    
     // Update growth speed for displayng when crops will be ready
     const vialGrowthSpeedBonus = alchemy.getVialBonusForKey("6FarmSpd");
     const summoningWinnerBonus2 = summoning.summonBonuses.find(bonus => bonus.index == 2)?.getBonus() ?? 0;
@@ -583,7 +665,7 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     // Update Magic beans collected if collecting now
     const jadeUpgrade15 = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 15)?.purchased ? 1.25 : 1;
     farming.updateBeansFromConvertinCurrentDepot(jadeUpgrade15);
-
+    
     // Upgrade each Crops Evolution chance (don't depend on plot so stored in crop)
     const summoningWinnerBonus10 = summoning.summonBonuses.find(bonus => bonus.index == 10)?.getBonus() ?? 0;
     const bubbleBonusCropChapter = alchemy.getVialBonusForKey("W10AllCharz");
@@ -595,12 +677,14 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const starSignBonus65 = players[0].starSigns.reduce((sum, sign) => sum += sign.getBonus("Crop Evo chance per Farming LV"), 0);
     const riftBonusCropEvolutionChance = skillMastery.getSkillBonus(SkillsIndex.Farming, 1);
     farming.updateCropsEvolutionChance(summoning.summoningLevel, farming.getMarketUpgradeBonusValue(4), farming.getMarketUpgradeBonusValue(9), summoningWinnerBonus10, bubbleBonusCropChapter, bubbleBonusCropiusMapper, vialEvolutionChanceBonus, mealBonusZCropEvo, mealBonusZCropEvoSumm, stampCropEvolutionChance, starSignBonus65, riftBonusCropEvolutionChance);
-
+    
     // Update OG chances for all plots
     const marketBonus11 = farming.getMarketUpgradeBonusValue(11);
     const pristineCharmBonus11 = sneaking.pristineCharms.find(charm => charm.index == 11)?.unlocked ? 50 : 0;
     const starSignBonus67 = players[0].starSigns.filter(sign => sign.bonuses.find(bonus => bonus.text == "OG Chance") != undefined).reduce((sum, sign) => sum += sign.getBonus("OG Chance"), 0);
     farming.updatePlotsOGChance(marketBonus11, pristineCharmBonus11, starSignBonus67);
+    
+    farming.updatePlotGrowthSinceSave(timeAway['GlobalTime']);
 
     return farming;
 }
