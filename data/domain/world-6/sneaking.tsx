@@ -394,8 +394,15 @@ export class Sneaking extends Domain {
                 player.activity = SneakingActivity.KnockedOut;
             } else if (player.rawData[1] > 0) {
                 switch (true) {
+                    case ((currentFloorDoor?.maxHP ?? 0) - (currentFloorDoor?.damageDone ?? 0)) > 0 && (player.equipment.weapon?.data.itemId ?? -1) == SneakinWeaponType.Nunchaku:
+                        player.activity = SneakingActivity.Breaching;
+                        break;
+                    case this.players.filter(filterPlayer => filterPlayer.floor == player.floor && (filterPlayer.tie.maxHP - filterPlayer.tie.damageDone)).length > 0 && (player.equipment.weapon?.data.itemId ?? -1) == SneakinWeaponType.Kunai:
+                        player.activity = SneakingActivity.Untying
+                        break;
                     default:
                         player.activity = SneakingActivity.Sneaking;
+                        break;
                 }
             }
         })
