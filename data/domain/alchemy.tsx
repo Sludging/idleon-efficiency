@@ -230,7 +230,6 @@ export class CropiusMapperBubble extends Bubble {
     override getBonus = (roundResult: boolean = false): number => {
         const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, roundResult);
         const cropEvoBonus = bonus * this.totalW6PortalsOpened;
-        console.log(`${cropEvoBonus} = ${bonus} * ${this.totalW6PortalsOpened}`);
         return roundResult ? round(cropEvoBonus) : cropEvoBonus;
     }
 
@@ -422,12 +421,6 @@ export class Alchemy extends Domain {
             let extraBonus = 1;
             if (this._shouldBoostBubble(bubble.bubbleIndex, bubble.cauldronIndex)) {
                 extraBonus *= this.cauldrons[bubble.cauldronIndex].bubbles[16].getBonus();
-            }
-
-            if (bonusKey == "Y6") {
-                console.log("bonus : "+bubble.getBonus());
-                console.log(bubble);
-                console.log(bubble.getBonusText());
             }
 
             sum += bubble.getBonus() * extraBonus;
