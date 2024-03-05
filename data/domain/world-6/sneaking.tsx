@@ -124,7 +124,7 @@ export class SneakingWeapon extends SneakingItem {
     }
 
     override getDisplayText = (): string => {
-        return `Base Damage: ${this.getBaseDamage.toString()}`;
+        return `Base Damage: ${nFormatter(this.getBaseDamage())}`;
     }
 
     getBaseDamage = (): number => {
@@ -138,7 +138,7 @@ export class SneakingTrinket extends SneakingItem {
     }
 
     override getDisplayText = (): string => {
-        if (this.data.bonus.indexOf('{') != undefined) {
+        if (this.data.bonus.indexOf('{') > -1) {
             return this.data.bonus.replace(/{/, nFormatter(this.getBonus()));
         } else {
             return this.data.bonus.replace(/}/, nFormatter(1 + this.getBonus() / 100));
@@ -156,7 +156,7 @@ export class SneakingPristineCharm extends SneakingItem {
     }
 
     override getDisplayText = (): string => {
-        if (this.data.bonus.indexOf('{') != undefined) {
+        if (this.data.bonus.indexOf('{') > -1) {
             return this.data.desc.replace("Click it there to see its bonus.", this.data.bonus.replace(/{/, this.data.x1.toString()));
         } else {
             return this.data.desc.replace("Click it there to see its bonus.", this.data.bonus.replace(/}/, (1 + this.data.x1 / 100).toString()));
@@ -372,6 +372,7 @@ export class Sneaking extends Domain {
             sneaking.players.push(new SneakingPlayer(index, sneakingLevel, playerInfo, new PlayerEquipment(hat, weapon, trinket1, trinket2)));
         }) 
 
+        sneaking.inventory = [];
         ninjaData.slice(60,99).forEach((equipment: [name: string, level: number]) => {
             if (equipment[0] != "Blank") {
                 sneaking.inventory.push(SneakingItem.fromBase(sneaking.baseItems.find(item => item.data.internalId == equipment[0]), equipment[1]));
@@ -431,7 +432,7 @@ export class Sneaking extends Domain {
                     case ((currentFloorDoor?.maxHP ?? 0) - (currentFloorDoor?.damageDone ?? 0)) > 0 && (player.equipment.weapon?.data.itemId ?? -1) == SneakinWeaponType.Nunchaku:
                         player.activity = SneakingActivity.Breaching;
                         break;
-                    case this.players.filter(filterPlayer => filterPlayer.floor == player.floor && (filterPlayer.tie.maxHP - filterPlayer.tie.damageDone)).length > 0 && (player.equipment.weapon?.data.itemId ?? -1) == SneakinWeaponType.Kunai:
+                    case this.players.filter(filterPlayer => filterPlayer.floor == player.floor && (filterPlayer.tie.maxHP - filterPlayer.tie.damageDone) > 0).length > 0 && (player.equipment.weapon?.data.itemId ?? -1) == SneakinWeaponType.Kunai:
                         player.activity = SneakingActivity.Untying
                         break;
                     default:
