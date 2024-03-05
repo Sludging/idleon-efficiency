@@ -51,7 +51,7 @@ export class SneakingPlayer {
     }
 }
 
-const jadeUpgradeDisplayOrder = [0, 12, 5, 8, 22, 27, 18, 1, 17, 24, 19, 25, 13, 16, 26, 7, 9, 23, 14, 20, 28, 2, 3, 15, 10, 11, 6, 21, 29, 30, 31, 32, 38, 39, 34, 36, 4, 33, 35, 37];
+const jadeUpgradeDisplayOrder = [0, 12, 5, 8, 22, 27, 18, 1, 17, 24, 19, 25, 13, 16, 26, 7, 9, 23, 14, 20, 28, 2, 3, 15, 10, 11, 6, 21, 35, 30, 34, 37, 29, 31, 32, 4, 36, 33, 39, 40, 41, 42, 38, 43, 44, 45, 46, 47, 48, 49];
 
 export class JadeUpgrade {
     purchased: boolean = false;
