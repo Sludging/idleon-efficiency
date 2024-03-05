@@ -147,39 +147,6 @@ export class Plot {
         this.bonusOGChanceFromStarSign67 = bonusFromStarSign67;        
     }
 
-    updatePlotGrowthSinceSave = () => {
-        const time = new Date();
-        const gapFromLastSave = (time.getTime() / 1000) - this.saveTime;
-        this.lastRefresh = (time.getTime() / 1000);
-
-        let timeLeftToUse = gapFromLastSave * this.growthRate;
-        const cycleDuration = this.seed.getFullCycleGrowthTime();
-
-        if (this.growthTime < cycleDuration) {
-            const timeLeftForCycle = cycleDuration - this.growthTime;
-            if (timeLeftToUse > timeLeftForCycle) {
-                timeLeftToUse -= timeLeftForCycle;
-                this.growthTime += timeLeftForCycle;
-                this.readyToCollect = true;
-            } else {
-                this.growthTime += timeLeftToUse;
-                timeLeftToUse = 0;
-            }
-        }
-
-        while (timeLeftToUse > 0) {
-            const timeLeftForCycle = cycleDuration - this.overgrowthTime;
-            if (timeLeftToUse > timeLeftForCycle) {
-                timeLeftToUse -= timeLeftForCycle;
-                this.overgrowthTime = 0;
-                this.overgrowthCycleCompletedSinceLastLoggin++;
-            } else {
-                this.overgrowthTime += timeLeftToUse;
-                timeLeftToUse = 0;
-            }
-        }
-    }
-
     updatePlotGrowthSinceLastRefresh = () => {
         const time = new Date();
         const gapFromLastRefresh = (time.getTime() / 1000) - this.lastRefresh;
@@ -510,8 +477,8 @@ export class Farming extends Domain {
 
     updatePlotGrowthSinceSave = (saveTime: number) => {
         this.farmPlots.forEach(plot => {
-            plot.saveTime = saveTime;
-            plot.updatePlotGrowthSinceSave();
+            plot.lastRefresh = saveTime;
+            plot.updatePlotGrowthSinceLastRefresh();
         })
     }
     
