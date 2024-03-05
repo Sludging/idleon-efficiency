@@ -151,6 +151,49 @@ export function TimeDown({ addSeconds, resetToSeconds, color, size }: { addSecon
     )
 }
 
+export function TimeDownWithCallback({ addSeconds, resetToSeconds, color, size, callBack }: { addSeconds: number, resetToSeconds?: number, color?: string, size?: TimeDisplaySize, callBack?: Function }) {
+    function resetTimer(seconds?: number) {
+        if (callBack) {
+            callBack();
+        }
+        if (seconds) {
+            const time = new Date();
+            time.setTime(time.getTime() + (seconds * 1000));
+            setTimeout(() => {
+                restart(time, true);
+            }, 10);
+        }
+    }
+
+    const time = new Date();
+    // figure out how much time has passed since we updated
+    time.setTime(time.getTime() + (addSeconds * 1000));
+
+
+    const {
+        seconds,
+        minutes,
+        hours,
+        days,
+        restart,
+        start,
+        resume
+    } = useTimer({ expiryTimestamp: time, autoStart: true, onExpire: () => resetTimer(resetToSeconds) })
+
+    useEffect(() => {
+        const time = new Date();
+        // figure out how much time has passed since we updated
+        time.setTime(time.getTime() + (addSeconds * 1000));
+        setTimeout(() => {
+            restart(time, true);
+        }, 10);
+    }, [addSeconds, resetToSeconds, color, size])
+
+    return (
+        <TimeDisplay seconds={seconds} minutes={minutes} hours={hours} days={days} color={color} size={size} />
+    )
+}
+
 export function TimeUp({ addSeconds, color, size }: { addSeconds: number, color?: string, size?: TimeDisplaySize }) {
     const time = new Date();
     // figure out how much time has passed since we updated
