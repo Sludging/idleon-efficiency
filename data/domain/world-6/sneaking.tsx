@@ -1,4 +1,4 @@
-import { letterToNumber } from "../../utility";
+import { letterToNumber, nFormatter } from "../../utility";
 import { SkillsIndex } from "../SkillsIndex";
 import { Alchemy, AlchemyConst, CauldronIndex } from "../alchemy";
 import { Domain, RawData } from "../base/domain";
@@ -81,6 +81,10 @@ export class SneakingItem {
         }
     }
 
+    getDisplayText = (): string => {
+        return "";
+    }
+
     static fromBase(baseItem: BaseNinjaItemBase | undefined, level: number = 0): SneakingItem | undefined {
         if (baseItem) {
             if (baseItem.data.internalId == "Blank") {
@@ -108,11 +112,23 @@ export class SneakingHat extends SneakingItem {
     constructor(public index: number, public data: NinjaItemModel) {
         super(index, data);
     }
+
+    override getDisplayText = (): string => {
+        return this.data.desc;
+    }
 }
 
 export class SneakingWeapon extends SneakingItem {
     constructor(public index: number, public data: NinjaWeaponModel, public level: number) {
         super(index, data);
+    }
+
+    override getDisplayText = (): string => {
+        return `Base Damage: ${this.getBaseDamage.toString()}`;
+    }
+
+    getBaseDamage = (): number => {
+        return this.data.x1 * Math.pow(1.23, this.level) * Math.pow(0.92, Math.max(0, this.level - 80)) * Math.pow(0.94, Math.max(0, this.level - 110));
     }
 }
 
@@ -120,11 +136,31 @@ export class SneakingTrinket extends SneakingItem {
     constructor(public index: number, public data: NinjaTrinketModel, public level: number) {
         super(index, data);
     }
+
+    override getDisplayText = (): string => {
+        if (this.data.bonus.indexOf('{') != undefined) {
+            return this.data.bonus.replace(/{/, nFormatter(this.getBonus()));
+        } else {
+            return this.data.bonus.replace(/}/, nFormatter(1 + this.getBonus() / 100));
+        }
+    }
+
+    getBonus = (): number => {
+        return Math.min(this.data.x1 + this.data.x3 * (this.level / (this.level + 50)), this.data.x3)
+    }
 }
 
 export class SneakingPristineCharm extends SneakingItem {
     constructor(public index: number, public data: NinjaPristineCharmModel) {
         super(index, data);
+    }
+
+    override getDisplayText = (): string => {
+        if (this.data.bonus.indexOf('{') != undefined) {
+            return this.data.desc.replace("Click it there to see its bonus.", this.data.bonus.replace(/{/, this.data.x1.toString()));
+        } else {
+            return this.data.desc.replace("Click it there to see its bonus.", this.data.bonus.replace(/}/, (1 + this.data.x1 / 100).toString()));
+        }
     }
 }
 
@@ -167,9 +203,7 @@ export class JadeUpgrade {
     // Setting default value to what it was first time I looked at it :shrug:.
     costExponent: number = 2.52;
 
-    constructor(public index: number, public data: JadeUpgradeModel, public displayOrder: number = 0) {
-
-    }
+    constructor(public index: number, public data: JadeUpgradeModel, public displayOrder: number = 0) {}
 
     getImageData = (): ImageData => {
         return {
