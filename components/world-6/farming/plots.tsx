@@ -14,6 +14,7 @@ export const PlotsDisplay = ({ plots, cropDepot }: { plots: Plot[], cropDepot: C
 
     return (
         <Box width="100%">
+            <Text size="xsmall">* There could be a difference of a few seconds between IE and in-game</Text>
             <Grid columns={{ size: 'auto', count: (size == "small" ? 2 : 9) }} gap={"small"} fill>
                 {
                     plots.map((plot, index) => {
