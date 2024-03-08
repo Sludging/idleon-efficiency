@@ -8,15 +8,17 @@ import { Summoning as SummoningDomain, SummonEssence, BattlesInfo } from '../../
 export const SummoningBattles = ({ battlesInfos, essences }: { battlesInfos: BattlesInfo, essences: SummonEssence[] }) => {
     const allVictories: number = battlesInfos.allVictories.reduce((allVictories, colorVictories) => allVictories + colorVictories, 0);
 
+    const maxHealth = 3; // Should be battlesInfos.maxHealth but seems like it increase by buyting hearths in gem shop, which don't really increase max health
+
     if (battlesInfos.allBattles.length == 0) {
         return <Text>Loading...</Text>
     } else {
         return (
-            <Box>
+            <Box margin={{ top: 'small' }}>
                 <Box direction="row" wrap justify="center">
                     <ShadowBox margin={{ right: 'medium', bottom: 'small' }} background="dark-1" gap="xsmall" pad="medium">
-                        <TextAndLabel label="Total Victories" text={allVictories.toString()} />
-                        <TextAndLabel label="Health" text={`${battlesInfos.currentHealth}/${battlesInfos.maxHealth}`} />
+                        <TextAndLabel label="Total Victories" text={allVictories.toString()} />                        
+                        <TextAndLabel label="Health" text={`${battlesInfos.currentHealth}/${maxHealth}`} />
                     </ShadowBox>
                     <ShadowBox margin={{ right: 'medium', bottom: 'small' }} background="dark-1" gap="xsmall" pad="medium" align="center">
                         <ComponentAndLabel
@@ -36,12 +38,11 @@ export const SummoningBattles = ({ battlesInfos, essences }: { battlesInfos: Bat
                     </Box>
                     <Box wrap direction="row" justify="center">
                         {
-                            // When no longer need to hide w6 remove essence.display filter to show all battles
-                            essences.filter(essence => essence.battles.length > 0 && essence.display == true).map((essence, index) => {
+                            essences.filter(essence => essence.battles.length > 0 && essence.victories < essence.battles.length).map((essence, index) => {
                                 return (
                                     <ShadowBox width={{ max: '250px' }} background="dark-1" key={index} pad="medium" margin={{ right: 'small', bottom: 'medium' }}>
                                         <Box direction="row" gap="small" pad="small">
-                                            <IconImage data={SummoningDomain.getEssenceIcon(essence.color)} />
+                                            <IconImage data={SummoningDomain.getSummoningStoneIcon(essence.color)} />
                                             <Text>{SummoningDomain.getEssenceColorName(essence.color)} ({essence.victories}/{essence.battles.length})</Text>
                                         </Box>
                                         {

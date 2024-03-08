@@ -16,20 +16,6 @@ import TipDisplay from '../../components/base/TipDisplay';
 import { initCardSetRepo } from '../../data/domain/data/CardSetRepo';
 
 const shouldHideCard = ({ card }: { card: Card }) => {
-    // If you have the card, nothing to hide.
-    if (card.count > 0) {
-        return false;
-    }
-    // If it's W6 and you don't have it, hide.
-    if (card.data.category == "Spirited Valley") {
-        return true;
-    }
-    // If it's W6 boss and you don't have it, hide.
-    if (card.id.includes("Boss6")) {
-        return true;
-    }
-
-    // Show everything else.
     return false;
 }
 
@@ -38,7 +24,7 @@ const CardBox = ({ card }: { card: Card }) => {
     const cardsToNextLevel = card.count > 0 ? (card.getCardsForStar(currentCardLevel + 1) - card.count) : 1;
     const isMaxed: boolean = (card.fivestar ? currentCardLevel == 5 : currentCardLevel == 4);
 
-    // Lava asked to hide W6 data for a bit, so hiding it if you don't have it
+    // Keeping this for next world release or any other reason there might be to hide a card
     if (shouldHideCard({ card })) {
         return (
             <ShadowBox background='dark-1' style={{ opacity: card.count > 0 ? 1 : 0.5 }} gap='small' pad='medium' align='left'>
@@ -53,7 +39,7 @@ const CardBox = ({ card }: { card: Card }) => {
                 heading={card.displayName + " Card"}
                 body={
                     <Box margin={{ bottom: 'xsmall' }} width='auto' direction='column' gap='small'>
-                        <Box width='100%' direction='row' gap='none' align='center'>
+                        <Box width='100%' gap='none' align='start'>
                             <Text size="small">Cards collected : {card.count}</Text>
                             <Text size="small">Base drop rate : {card.getBaseDropRateText()}</Text>
                         </Box>

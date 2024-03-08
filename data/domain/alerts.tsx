@@ -13,6 +13,7 @@ import { Skilling } from "./skilling";
 import { SkillsIndex } from "./SkillsIndex";
 import { Talent } from "./talents";
 import { Trap } from "./traps";
+import { Farming } from "./world-6/farming";
 import { Worship } from "./worship";
 
 export enum AlertType {
@@ -27,7 +28,9 @@ export enum AlertType {
     ArcadeFull = "Arcade Full",
     Prayer = "Prayer",
     Construction = "Construction",
-    Cooking = "Cooking"
+    Cooking = "Cooking",
+    Farming = "Farming",
+    Sneaking = "Sneaking"
 }
 
 export abstract class Alert {
@@ -132,6 +135,18 @@ export class PrayerAlert extends PlayerAlert {
     }
 }
 
+export class SneakingLevelReady extends PlayerAlert {
+    constructor(player: Player, talent: Talent) {
+        super(player, AlertType.Sneaking);
+        this.title = "Connect this player to increase Sneaking level";
+        this.icon = Skilling.getSkillImageData(SkillsIndex.Sneaking);
+
+        // Override default size
+        this.icon.height = 36;
+        this.icon.width = 36;
+    }
+}
+
 export class TrapAlerts extends GlobalAlert {
     constructor(public count: number) {
         super(`${count} Traps ready to be collected`, AlertType.Traps, Item.getImageData("TrapBoxSet1"));
@@ -164,6 +179,15 @@ export class ConstructionAlert extends GlobalAlert {
 export class FoodLustAlert extends GlobalAlert {
     constructor() {
         super(`Maximum food lust discount reached, go upgrade a meal`, AlertType.Cooking, Skilling.getSkillImageData(SkillsIndex.Cooking));
+
+        (this.icon as ImageData).width = 50;
+        (this.icon as ImageData).height = 50;
+    }
+}
+
+export class CropReadyAlert extends GlobalAlert {
+    constructor(public count: number, public countOG: number) {
+        super(`${count} farming plots fully grown${countOG > 0 ? ` (${countOG} with OG level)` : ``}, go collect.`, AlertType.Farming, Skilling.getSkillImageData(SkillsIndex.Farming));
 
         (this.icon as ImageData).width = 50;
         (this.icon as ImageData).height = 50;
@@ -260,7 +284,7 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
     return alerts;
 }
 
-const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], arcade: Arcade, construction: Construction, equinox: Equinox): Alert[] => {
+const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], arcade: Arcade, construction: Construction, equinox: Equinox, farming: Farming): Alert[] => {
     const globalAlerts: Alert[] = [];
 
     // Worship
@@ -295,9 +319,17 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], 
         globalAlerts.push(new ConstructionAlert(finishedBuildingsCount));
     }
 
+    // Equinox Food Lust
     const foodLustCapped = (equinox.upgrades[9] as FoodLust).isCapped();
     if (foodLustCapped) {
         globalAlerts.push(new FoodLustAlert());
+    }
+
+    // Farming
+    const farmingCropsReady = farming.farmPlots.filter(plot => plot.readyToCollect).length;
+    const farmingCropsWithOG = farming.farmPlots.filter(plot => plot.readyToCollect && plot.OGlevel > 0).length;
+    if (farmingCropsReady > 0) {
+        globalAlerts.push(new CropReadyAlert(farmingCropsReady, farmingCropsWithOG));
     }
 
     return globalAlerts;
@@ -315,6 +347,7 @@ export const updateAlerts = (data: Map<string, any>) => {
     const prayers = data.get("prayers") as Prayer[];
     const construction = data.get("construction") as Construction;
     const equinox = data.get("equinox") as Equinox;
+    const farming = data.get("farming") as Farming;
 
     players.forEach(player => {
         alerts.playerAlerts[player.playerID] = []
@@ -322,6 +355,6 @@ export const updateAlerts = (data: Map<string, any>) => {
     })
 
     // Global Alerts
-    alerts.generalAlerts = getGlobalAlerts(worship, refinery, traps, arcade, construction, equinox);
+    alerts.generalAlerts = getGlobalAlerts(worship, refinery, traps, arcade, construction, equinox, farming);
     return alerts;
 }

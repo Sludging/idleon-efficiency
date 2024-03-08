@@ -7,8 +7,7 @@ import TextAndLabel from "../../base/TextAndLabel"
 
 export const PristineCharmSection = ({ charms }: { charms: PristineCharm[] }) => {
     return (
-        <Box margin={{ bottom: 'xsmall' }} gap="small">
-            <Text size="large">Pristine Charms</Text>
+        <Box margin={{ top: 'large', bottom: 'xsmall' }} gap="small">
             <Grid columns={{ size: 'auto', count: 4 }} fill>
                 {
                     // Once I stop hiding info from people, just get rid of the filter and the unlock more upgrades to see section.

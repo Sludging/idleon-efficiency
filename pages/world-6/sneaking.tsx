@@ -1,6 +1,5 @@
 import {
     Box,
-    Grid,
     Heading,
     Text,
 } from 'grommet'
@@ -11,13 +10,14 @@ import { Sneaking as SneakingDomain } from '../../data/domain/world-6/sneaking';
 import ShadowBox from '../../components/base/ShadowBox';
 import IconImage from '../../components/base/IconImage';
 import { Player } from '../../data/domain/player';
-import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
+import { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import { nFormatter } from '../../data/utility';
 import { PlayerActivitySection } from '../../components/world-6/sneaking/playerActivitySection';
 import { JadeUpgrades } from '../../components/world-6/sneaking/jadeUpgrades';
 import { SneakingUpgrades } from '../../components/world-6/sneaking/sneakingUpgrades';
 import TabButton from '../../components/base/TabButton';
 import { PristineCharmSection } from '../../components/world-6/sneaking/pristineCharmsSection';
+import { SneakingInventory } from '../../components/world-6/sneaking/sneakingInventory';
 
 
 function Sneaking() {
@@ -61,13 +61,14 @@ function Sneaking() {
                 <PlayerActivitySection sneakingPlayers={sneaking.players} players={players} />
             </Box>
             <Box align="center" direction="row" justify="center" gap="small">
-                {["Jade Upgrades", "Sneaking Upgrades", "Pristine Charms"].map((tabName, index) => (
+                {["Jade Upgrades", "Sneaking Upgrades", "Inventory", "Pristine Charms"].map((tabName, index) => (
                     <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
                 ))
                 }
             </Box>
             {activeTab == "Jade Upgrades" && <JadeUpgrades currentJade={sneaking.jade} jadeUpgrades={jadeUpgrades} />}
             {activeTab == "Sneaking Upgrades" && <SneakingUpgrades currentJade={sneaking.jade} upgrades={sneaking.sneakingUpgrades} />}
+            {activeTab == "Inventory" && <SneakingInventory inventory={sneaking.inventory} />}
             {activeTab == "Pristine Charms" && <PristineCharmSection charms={sneaking.pristineCharms} />}
         </Box>
     )

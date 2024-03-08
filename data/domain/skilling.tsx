@@ -14,6 +14,7 @@ import { SkillMastery } from "./rift";
 import { Breeding } from "./breeding";
 import { Worship, TotalizerBonus } from "./worship";
 import { Summoning } from "./world-6/summoning";
+import { Guild } from './guild';
 
 export class Skilling {
     static getXPReq = (skill: SkillsIndex, level: number) => {
@@ -50,6 +51,7 @@ export class Skilling {
             skillMastery: SkillMastery,
             breeding: Breeding, 
             worship: Worship,
+            guild: Guild,
             summoning: Summoning
         ) => {
         const skillingCardBonus = Card.GetTotalBonusForId(player.cardInfo?.equippedCards ?? [], 50);
@@ -66,6 +68,7 @@ export class Skilling {
         const equipmentBonus = player.gear.equipment.reduce((sum, item) => sum += item?.getMiscBonus("Skill Exp") ?? 0, 0);
         const starSignBonus = player.starSigns.reduce((sum, sign) => sum += sign.getBonus("Skill EXP gain"), 0);
         const summoningBonus = summoning.summonBonuses?.find(bonus => bonus.data.bonusId == 13)?.getBonus() || 0;
+        const guildBonus = guild.guildBonuses.find(bonus => bonus.index == 14)?.getBonus() ?? 0;
 
         const divinityBonus = divinity.gods[7].getMinorLinkBonus(player);
         const w5crystalCardBonus = cards.find(card => card.id == "w5a4")?.getBonus() ?? 0;
@@ -80,7 +83,7 @@ export class Skilling {
         const myriadBox = player.postOffice.find(box => box.index == 20)
         const poBonus = myriadBox?.bonuses[2].getBonus(myriadBox.level, 2) ?? 0;
 
-        return starSignBonus + (skillingCardBonus + goldenFoodBonus) + (cardSetBonus + w5crystalCardBonus + shrineBonus + statueBonus + (prayerIncrease - prayerDecrease + (equipmentBonus + (masteroBuff + (saltLickBonus + dungeonBonus + poBonus + divinityBonus + achieveBonuses + riftBonus + shinyBonus + worshipBonus + summoningBonus)))));
+        return starSignBonus + guildBonus + (skillingCardBonus + goldenFoodBonus) + (cardSetBonus + w5crystalCardBonus + shrineBonus + statueBonus + (prayerIncrease - prayerDecrease + (equipmentBonus + (masteroBuff + (saltLickBonus + dungeonBonus + poBonus + divinityBonus + achieveBonuses + riftBonus + shinyBonus + worshipBonus + summoningBonus)))));
     }
 
     static getSkillImageData = (skill: SkillsIndex): ImageData => {

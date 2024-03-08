@@ -16,6 +16,7 @@ import { Sailing } from './sailing';
 import { TaskBoard } from './tasks';
 import { Rift } from './rift';
 import { Domain, RawData } from './base/domain';
+import { MapInfo } from './maps';
 
 export enum CauldronIndex {
     Power = 0,
@@ -44,7 +45,7 @@ export const AlchemyConst = {
     CallMePope: 11,
     CauldronCount: 4,
     CauldronBonusBubbleIndex: 1,
-    LoCostMoJade: 29,
+    LoCostMoJade: 29
 };
 
 const cauldronPrefix: Record<string, string> = {
@@ -185,8 +186,8 @@ export class DiamonChefBubble extends Bubble {
     }
 
     override getBonusText = (bonus: number = this.getBonus(true)): string => {
-        let titleText = this.description.replace(/{/g, bonus.toString());
-        titleText += ` (${this.diamonMeals} diamond plates)`;
+        let titleText = this.description.replace(/{/g, lavaFunc(this.func, this.level, this.x1, this.x2, true).toString());
+        titleText += ` (${this.diamonMeals} diamond plates = ${bonus.toString()}x faster)`;
         return handleToolBubbles(titleText, this.name);
     }
 }
@@ -214,6 +215,29 @@ export class DailyDripBubble extends Bubble {
     }
 }
 
+export class CropiusMapperBubble extends Bubble {
+    totalW6PortalsOpened: number = 0;
+
+    // Should this live inside the bubble base class? :thinking:
+    static fromBase = (id: string, data: BubbleModel, iconPrefix: string, bubbleIndex: number) => {
+        return new CropiusMapperBubble(id, data, iconPrefix, bubbleIndex);
+    }
+
+    constructor(id: string, data: BubbleModel, iconPrefix: string, bubbleIndex: number) {
+        super(id, data, iconPrefix, bubbleIndex);
+    }
+
+    override getBonus = (roundResult: boolean = false): number => {
+        const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, roundResult);
+        const cropEvoBonus = bonus * this.totalW6PortalsOpened;
+        return roundResult ? round(cropEvoBonus) : cropEvoBonus;
+    }
+
+    override getBonusText = (bonus: number = this.getBonus(true)): string => {
+        return this.description.replace(/{/g, lavaFunc(this.func, this.level, this.x1, this.x2, true).toString()).replace(/\$/g, this.totalW6PortalsOpened+" portals = "+bonus.toString()+"%");
+    }
+}
+
 export class Cauldron {
     name: string;
     short_name: string;
@@ -234,6 +258,9 @@ export class Cauldron {
             }
             else if (bubble.name == "Da Daily Drip") {
                 toReturn.bubbles.push(DailyDripBubble.fromBase(bubble.name, bubble, iconPrefix, index));
+            }
+            else if (bubble.name == "Cropius Mapper") {
+                toReturn.bubbles.push(CropiusMapperBubble.fromBase(bubble.name, bubble, iconPrefix, index));
             }
             else {
                 toReturn.bubbles.push(Bubble.fromBase(bubble.name, bubble, iconPrefix, index));
@@ -617,5 +644,19 @@ export function updateAlchemy(data: Map<string, any>) {
         dailyDripBubble.totalAlchemyLevel = players.reduce((sum, player) => sum += player.skills.get(SkillsIndex.Alchemy)?.level ?? 0, 0);
     }
 
-    return alchemy;
+    let totalW6portalsOpened = 0;
+    players.forEach(player => {
+        for (let i = 0; 13 > i; i++) {
+            const mapId = 251+i;
+            if (mapId < player.killInfo.size || mapId < MapInfo.length) {               
+                MapInfo[mapId].data.portalRequirements.forEach(req => {
+                    totalW6portalsOpened += (player.killInfo.get(mapId) ?? 0) > req ? 1 : 0;
+                });
+            }
+        }
+    })
+    const cropiusMapperBubble = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).find(bubble => bubble.name == "Cropius Mapper") as CropiusMapperBubble;
+    if (cropiusMapperBubble) {
+        cropiusMapperBubble.totalW6PortalsOpened = totalW6portalsOpened;
+    }
 }

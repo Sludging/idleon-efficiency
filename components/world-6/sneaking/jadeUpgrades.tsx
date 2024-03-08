@@ -17,8 +17,6 @@ export const JadeUpgrades = ({
             <Box direction="row" wrap margin={{ top: 'large' }}>
                 <Grid columns={{ size: 'auto', count: 4 }} fill>
                     {
-                        // Once I stop hiding info from people, just get rid of the filter and the unlock more upgrades to see section.
-                        // For now I'm showing available ones + 3 "hidden" ones.
                         jadeUpgrades
                             .map((upgrade, index) => {
                                 const canAfford = currentJade > upgrade.unlockCost();

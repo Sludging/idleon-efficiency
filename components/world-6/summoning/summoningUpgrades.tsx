@@ -4,17 +4,17 @@ import IconImage from "../../base/IconImage";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
 import { nFormatter } from "../../../data/utility";
 import { Summoning as SummoningDomain, SummonUpgrade, SummonEssence, SummonEssenceColor } from '../../../data/domain/world-6/summoning';
+import TabButton from "../../base/TabButton";
+import { useState } from "react";
 
-const ColorSection = ({ colorUpgrades, allUpgrades, essence, index }: { colorUpgrades: SummonUpgrade[], allUpgrades: SummonUpgrade[], essence: SummonEssence, index: number }) => {
-    const borderColor = index > 0 ? "grey-1" : "none";
-    if (colorUpgrades.length == 0) {
+const ColorSection = ({ colorUpgrades, allUpgrades, essence }: { colorUpgrades: SummonUpgrade[], allUpgrades: SummonUpgrade[], essence: SummonEssence | undefined }) => {
+    if (!essence || colorUpgrades.length == 0) {
         return (
-            // Means that there is no upgrades to display, so return an empty box
-            <Box></Box>
+            <Text>Loading...</Text>
         )
     } else {
         return (
-            <Grid columns={{ size: 'small', count: 'fill' }} pad="small" border={{ side: 'top', color: borderColor }} fill>
+            <Grid columns={{ size: 'small', count: 'fill' }} pad="small" fill>
                 {
                     colorUpgrades
                         .map((upgrade, index) => {
@@ -73,21 +73,31 @@ const ColorSection = ({ colorUpgrades, allUpgrades, essence, index }: { colorUpg
 }
 
 export const SummoningUpgrades = ({ upgrades, essences }: { upgrades: SummonUpgrade[], essences: SummonEssence[] }) => {
-    // Once stop hiding info from people, just get rid of the filter on unlocked, the shouldBeDisplayed filter out useless placeholder bonuses
-    // For now showing only unlocked ones that are displayed in-game.
-    const upgradesToDisplay = upgrades.filter(upgrade => upgrade.shouldBeDisplayed == true && upgrade.unlocked);
+    const [activeTab, setActiveTab] = useState<string>("White");
+    const upgradesToDisplay = upgrades.filter(upgrade => upgrade.shouldBeDisplayed == true);
+    const tabsName = essences.filter(essence => essence.display == true).map(essence => {
+        if(upgradesToDisplay.filter(upgrade => upgrade.data.colour == essence.color).length > 0){
+            return SummoningDomain.getEssenceColorName(essence.color);
+        } else {
+            return '';
+        }
+    });
+
+
     if (upgradesToDisplay.length == 0) {
-        return <Text>You should start unlocking upgrade in W6 town first</Text>
+        return <Text>Loading...</Text>
     } else {
         return (
             <Box>
-                <Box direction="column" margin={{ top: 'small' }}>
+                <Box align="center" margin= {{ top: 'small' }} direction="row" justify="center" gap="small">
+                    {tabsName.filter(name => name != '').map((tabName, index) => (
+                        <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
+                    ))
+                    }
+                </Box>
+                <Box margin={{ top: 'small' }}>
                     {
-                        essences
-                            //.filter(essence => essence.display == true)
-                            .map((essence, index) => (
-                                <ColorSection key={index} index={index} colorUpgrades={upgradesToDisplay.filter(upgrade => upgrade.data.colour == essence.color)} allUpgrades={upgradesToDisplay} essence={essence} />
-                            ))
+                        <ColorSection colorUpgrades={upgradesToDisplay.filter(upgrade => SummoningDomain.getEssenceColorName(upgrade.data.colour) == activeTab)} allUpgrades={upgradesToDisplay} essence={essences.find(essence => SummoningDomain.getEssenceColorName(essence.color) == activeTab)} />
                     }
                 </Box>
             </Box>
