@@ -155,6 +155,11 @@ export class Plot {
         let timeLeftToUse = gapFromLastRefresh * this.growthRate;
         const cycleDuration = this.seed.getFullCycleGrowthTime();
 
+        // Nothing to do for empty plots.
+        if (cycleDuration == 0) {
+            return;
+        }
+
         if (this.growthTime < cycleDuration) {
             const timeLeftForCycle = cycleDuration - this.growthTime;
             if (timeLeftToUse > timeLeftForCycle) {
