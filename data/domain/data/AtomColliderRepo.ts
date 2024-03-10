@@ -35,7 +35,7 @@ export const initAtomColliderRepo = () => {
                 "growthFactor": 20,
                 "baseExponent": 1.26,
                 "baseCost": 75,
-                "bonusPerLv": 1,
+                "bonusPerLv": 7,
                 "desc": "Every day, 1 silver pen from your Post Office will instantly convert into 1 PO Box for all characters. This conversion happens { times per day."
             }),
         new AtomColliderBase(4, <AtomColliderModel>{

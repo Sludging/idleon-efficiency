@@ -2,5 +2,6 @@
 
 export interface MapInfoModel {
     id: number,
-    portalRequirements: number[]
+    portalRequirements: number[],
+    maxOnScreen: number
 }

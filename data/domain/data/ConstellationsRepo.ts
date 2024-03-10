@@ -83,11 +83,11 @@ export const initConstellationsRepo = () => {
                 "area": "Winding Willows",
                 "x": 707,
                 "y": 651,
-                "num1": 12,
+                "num1": 2,
                 "num2": 99,
                 "num3": 2,
                 "starChartPoints": 3,
-                "requirement": "AFK here for 12+ hours on 2 players @ Progress:{/}",
+                "requirement": "AFK here for 2+ hours on 2 players @ Progress:{/}",
                 "type": 3
             }),
         new ConstellationBase(7, <ConstellationModel>{
@@ -179,11 +179,11 @@ export const initConstellationsRepo = () => {
                 "area": "The Grandioso Canyon",
                 "x": 1011,
                 "y": 432,
-                "num1": 20,
+                "num1": 4,
                 "num2": 99,
                 "num3": 3,
                 "starChartPoints": 4,
-                "requirement": "AFK here for 20+ hours on 3 players @ Progress:{/}",
+                "requirement": "AFK here for 4+ hours on 3 players @ Progress:{/}",
                 "type": 3
             }),
         new ConstellationBase(15, <ConstellationModel>{
@@ -227,11 +227,11 @@ export const initConstellationsRepo = () => {
                 "area": "Up Up Down Down",
                 "x": 958,
                 "y": 55,
-                "num1": 30,
+                "num1": 8,
                 "num2": 99,
                 "num3": 3,
                 "starChartPoints": 3,
-                "requirement": "AFK here for 30+ hours on 3 players @ Progress:{/}",
+                "requirement": "AFK here for 8+ hours on 3 players @ Progress:{/}",
                 "type": 3
             }),
         new ConstellationBase(19, <ConstellationModel>{
@@ -323,11 +323,11 @@ export const initConstellationsRepo = () => {
                 "area": "Refrigeration Station",
                 "x": 78,
                 "y": 450,
-                "num1": 40,
+                "num1": 16,
                 "num2": 99,
                 "num3": 3,
                 "starChartPoints": 4,
-                "requirement": "AFK for 40+ hrs on 3 players @ Progress:{/}",
+                "requirement": "AFK for 16+ hrs on 3 players @ Progress:{/}",
                 "type": 3
             }),
         new ConstellationBase(27, <ConstellationModel>{
@@ -347,11 +347,11 @@ export const initConstellationsRepo = () => {
                 "area": "Thermonuclear Climb",
                 "x": 843,
                 "y": 1010,
-                "num1": 11,
+                "num1": 10,
                 "num2": 99,
                 "num3": 9,
                 "starChartPoints": 5,
-                "requirement": "AFK for 11+ hrs on 9 players @ Progress:{/}",
+                "requirement": "AFK for 10+ hrs on 9 players @ Progress:{/}",
                 "type": 3
             }),
         new ConstellationBase(29, <ConstellationModel>{
