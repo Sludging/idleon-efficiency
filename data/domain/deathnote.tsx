@@ -6,6 +6,7 @@ import { ImageData } from "./imageData";
 import { Item } from "./items";
 import { MapInfo } from "./maps";
 import { Rift } from "./rift";
+import { Sneaking } from "./world-6/sneaking";
 
 export const deathNoteMobOrder = [
     "mushG mushR frogG beanG slimeG snakeG carrotO goblinG plank frogBIG poopSmall ratB branch acorn mushW".split(" "),
@@ -13,12 +14,16 @@ export const deathNoteMobOrder = [
     "sheep flake stache bloque mamoth snowball penguin thermostat glass snakeB speaker eye ram skele2".split(" "),
     "mushP w4a2 w4a3 demonP w4b2 w4b1 w4b3 w4b4 w4b5 w4c1 w4c2 w4c3 w4c4".split(" "),
     "w5a1 w5a2 w5a3 w5a4 w5a5 w5b1 w5b2 w5b3 w5b4 w5b5 w5b6 w5c1 w5c2".split(" "),
+    "w6a1 w6a2 w6a3 w6a4 w6a5 w6b1 w6b2 w6b3 w6b4 w6c1 w6c2 w6d1 w6d2 w6d3".split(" "),
 ];
+
+export const deathNoteMinibossesOrder = "poopBig babayaga babaHour babaMummy mini3a mini4a".split(" ");
 
 export class Deathnote extends Domain {
     mobKillCount: Map<string, number[]> = new Map()
     playerKillsByMap: Map<number, Map<number, number>> = new Map();
     hasRiftBonus: boolean = false;
+    hasMinibosses: boolean = false;
 
     getDeathnoteRank = (killCount: number) => {
         switch (true) {
@@ -77,6 +82,9 @@ export class Deathnote extends Domain {
                 this.mobKillCount.set(monster, []);
             })
         })
+        deathNoteMinibossesOrder.forEach((monster) => {
+            this.mobKillCount.set(monster, []);
+        })
 
         return this;
     }
@@ -111,6 +119,8 @@ export class Deathnote extends Domain {
 export const updateDeathnote = (data: Map<string, any>) => {
     const deathNote = data.get("deathnote") as Deathnote;
     const rift = data.get("rift") as Rift;
+    const sneaking = data.get("sneaking") as Sneaking;
 
     deathNote.hasRiftBonus = rift.bonuses.find(bonus => bonus.name == "Eclipse Skulls")?.active ?? false;
+    deathNote.hasMinibosses = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 7)?.purchased ?? false;
 }

@@ -27,7 +27,7 @@ import { Printer, Sample } from '../../data/domain/printer';
 import { Player } from '../../data/domain/player';
 import { CircleInformation, Info, Star, StatusWarning, Trash } from 'grommet-icons';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
-import { Deathnote } from '../../data/domain/deathnote';
+import { Deathnote, deathNoteMinibossesOrder } from '../../data/domain/deathnote';
 import { EnemyInfo } from '../../data/domain/enemies';
 import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import { ClassIndex, Talent } from '../../data/domain/talents';
@@ -546,6 +546,14 @@ function DeathnoteDisplay() {
                 }
 
                 toReturn.get(monsterData.mapData.world)?.set(monsterData.details.Name, killCount);
+            } else if (monsterData && deathnoteData.hasMinibosses && deathNoteMinibossesOrder.includes(monsterData?.id ?? "")) {
+                // Need the monster to be loaded, the Jade upgrade purchased and the monster to be part of the miniboss list
+                // If all that then mean it should be displayed on the Minibosses section
+                if (!toReturn.has("Minibosses")) {
+                    toReturn.set("Minibosses", new Map<string, number>());
+                }
+
+                toReturn.get("Minibosses")?.set(monsterData.details.Name, killCount);
             }
         });
         return toReturn;
@@ -584,8 +592,11 @@ function DeathnoteDisplay() {
             {
                 deathNoteByWorld && [...deathNoteByWorld.entries()].map(([worldName, deathnoteMobs], index) => {
                     return (
-                        <ShadowBox width={{ max: '250px' }} background="dark-1" key={index} pad="medium" margin={{ right: 'small', bottom: 'medium' }}>
-                            <Text size="small">{worldName} ({worldTierInfo[index]}%)</Text>
+                        <ShadowBox width={{ max: '200px' }} background="dark-1" key={index} pad="medium" margin={{ right: 'small', bottom: 'medium' }}>
+                            <Box>
+                                <Text size="small">{worldName}</Text>
+                                <Text size="small">({worldTierInfo[index]}%)</Text>
+                            </Box>
                             {
                                 [...deathnoteMobs.entries()].map(([mobName, killCount], mobIndex) => {
                                     const deathnoteRank = deathnoteData.getDeathnoteRank(killCount);
