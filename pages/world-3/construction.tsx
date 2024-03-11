@@ -599,8 +599,9 @@ function DeathnoteDisplay() {
                             </Box>
                             {
                                 [...deathnoteMobs.entries()].map(([mobName, killCount], mobIndex) => {
-                                    const deathnoteRank = deathnoteData.getDeathnoteRank(killCount);
-                                    const hasNextRank = deathnoteData.getNextRankReq(deathnoteRank) > 0;
+                                    const deathnoteRank = ("Minibosses" == worldName ? deathnoteData.getDeathnoteMinibossRank(killCount) : deathnoteData.getDeathnoteRank(killCount));
+                                    const nextRank = ("Minibosses" == worldName ? deathnoteData.getNextMinibossRankReq(deathnoteRank) : deathnoteData.getNextRankReq(deathnoteRank));
+                                    const hasNextRank = (nextRank > 0);
                                     return (
                                         <Box key={mobIndex} pad={{ vertical: 'small' }} margin={{ bottom: 'xsmall' }}>
                                             <Box direction="row" align="center" gap="small">
@@ -625,10 +626,10 @@ function DeathnoteDisplay() {
                                                                 color: 'brand'
                                                             }
                                                         ]}
-                                                        max={hasNextRank ? deathnoteData?.getNextRankReq(deathnoteRank) : killCount} />
+                                                        max={hasNextRank ? nextRank : killCount} />
                                                     <Box direction="row" justify={hasNextRank ? "between" : "center"} align={hasNextRank ? "" : "center"}>
                                                         <Text color='grey-2' size="xsmall">{nFormatter(killCount)}</Text>
-                                                        {hasNextRank && <Text color='grey-2' size="xsmall">{nFormatter(deathnoteData.getNextRankReq(deathnoteRank))}</Text>}
+                                                        {hasNextRank && <Text color='grey-2' size="xsmall">{nFormatter(nextRank)}</Text>}
                                                     </Box>
                                                 </Box>
 

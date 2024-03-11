@@ -40,6 +40,21 @@ export class Deathnote extends Domain {
         }
     }
 
+    getDeathnoteMinibossRank = (killCount: number) => {
+        switch (true) {
+            case killCount < 100: return 0;
+            case killCount > 250 && killCount < 100: return 1;
+            case killCount > 1000 && killCount < 250: return 2;
+            case killCount > 2500 && killCount < 500: return 3;
+            case killCount > 5000 && killCount < 1000: return 4;
+            case killCount > 10000 && killCount < 5000: return 5;
+            case killCount > 50000 && killCount < 100000: return 7;
+            case killCount > 1000000 && killCount < 10000000: return 10;
+            case killCount > 10000000: return this.hasRiftBonus ? 20 : 10;
+            default: return 0;
+        }
+    }
+
     getNextRankReq = (rank: number) => {
         switch (rank) {
             case 0: return 25000;
@@ -50,6 +65,20 @@ export class Deathnote extends Domain {
             case 5: return 5000000;
             case 7: return 100000000;
             case 10: return this.hasRiftBonus ? 1000000000 : 0;
+            default: return 0;
+        }
+    }
+
+    getNextMinibossRankReq = (rank: number) => {
+        switch (rank) {
+            case 0: return 100;
+            case 1: return 250;
+            case 2: return 1000;
+            case 3: return 5000;
+            case 4: return 25000;
+            case 5: return 100000;
+            case 7: return 1000000;
+            case 10: return this.hasRiftBonus ? 10000000 : 0;
             default: return 0;
         }
     }
