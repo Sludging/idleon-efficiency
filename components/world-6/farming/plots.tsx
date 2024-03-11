@@ -9,7 +9,7 @@ import ShadowBox from "../../base/ShadowBox";
 import { Lock, Star } from 'grommet-icons';
 import { StaticTime, TimeDisplaySize, TimeDown, TimeDownWithCallback } from "../../base/TimeDisplay";
 
-export const PlotsDisplay = ({ plots, cropDepot }: { plots: Plot[], cropDepot: Crop[] }) => {
+export const PlotsDisplay = ({ plots, cropDepot, canOvergrow }: { plots: Plot[], cropDepot: Crop[], canOvergrow: boolean }) => {
     const size = useContext(ResponsiveContext);
 
     return (
@@ -21,7 +21,7 @@ export const PlotsDisplay = ({ plots, cropDepot }: { plots: Plot[], cropDepot: C
                         return (
                             <ShadowBox key={index} background="dark-1">
                                 <Box  align="center">
-                                    <PlotDisplay plot={plot} cropDepot={cropDepot} />
+                                    <PlotDisplay plot={plot} cropDepot={cropDepot} canOvergrow={canOvergrow} />
                                 </Box>
                             </ShadowBox>
                         )
@@ -32,8 +32,9 @@ export const PlotsDisplay = ({ plots, cropDepot }: { plots: Plot[], cropDepot: C
     )
 }
 
-const PlotDisplay = ({ plot, cropDepot }: { plot: Plot, cropDepot: Crop[] }) => {
+const PlotDisplay = ({ plot, cropDepot, canOvergrow }: { plot: Plot, cropDepot: Crop[], canOvergrow: boolean }) => {
     const [readyToCollect, setReadyToCollect] = useState<boolean>(plot.readyToCollect);
+    const [plotCanOvergrow, setCanOvergrow] = useState<boolean>(readyToCollect && canOvergrow);
     const [completedOGcycles, setCompletedOGCycles] = useState<number>(plot.overgrowthCycleCompletedSinceLastLoggin);
     const growthStage: PlotGrowthStage = plot.getGrowthStage();
     const baseCrop = cropDepot.find(crop => crop.index == plot.cropIndex);
@@ -53,6 +54,7 @@ const PlotDisplay = ({ plot, cropDepot }: { plot: Plot, cropDepot: Crop[] }) => 
 
     // To get it to %
     const nextCropChance = baseCrop.nextCropChance * 100;
+    const currentCropIsUndiscovered = (baseCrop.discovered == false ?? false);
     const nextCropIsUndiscovered = (nextCrop?.discovered == false ?? false);
 
     const quantityToDisplay: string = plot.quantityToCollect > 0 ? nFormatter(plot.getQuantityToCollect()) : `${plot.getQuantityToCollect(plot.possibleQtyToCollectMin)} ~ ${plot.getQuantityToCollect(plot.possibleQtyToCollectMax)}`;
@@ -72,6 +74,16 @@ const PlotDisplay = ({ plot, cropDepot }: { plot: Plot, cropDepot: Crop[] }) => 
                             <Box direction="row"  gap="xsmall" align="center" justify="start">
                                 <Text size="small">{quantityToDisplay}</Text>
                                 <IconImage data={Crop.getCropIconData(plot.cropIndex)} />
+                                {currentCropIsUndiscovered &&
+                                    <TipDisplay
+                                        size='small'
+                                        heading="New crop"
+                                        body=''
+                                        direction={TipDirection.Down}
+                                    >
+                                        <Star color='grey-2' size='11px' />
+                                    </TipDisplay>
+                                }
                             </Box>
                             {plot.locked && 
                                 <TipDisplay
@@ -119,12 +131,15 @@ const PlotDisplay = ({ plot, cropDepot }: { plot: Plot, cropDepot: Crop[] }) => 
                             addSeconds={(plot.seed.getFullCycleGrowthTime() - plot.growthTime) / plot.growthRate} 
                             size={TimeDisplaySize.XSmall}
                             callBack={
-                                () => {setReadyToCollect(true);}
+                                () => {
+                                    setReadyToCollect(true);
+                                    setCanOvergrow(readyToCollect && canOvergrow);
+                                }
                             }
                         />
                     }
                 />}
-                {readyToCollect && <ComponentAndLabel
+                {plotCanOvergrow && <ComponentAndLabel
                     label="OG level :"
                     labelSize="11px"
                     component={
@@ -134,7 +149,7 @@ const PlotDisplay = ({ plot, cropDepot }: { plot: Plot, cropDepot: Crop[] }) => 
                         </Box>
                     }
                 />}
-                {readyToCollect && <ComponentAndLabel
+                {plotCanOvergrow && <ComponentAndLabel
                     label="Next OG cycle end in :"
                     labelSize="11px"
                     component={
@@ -148,7 +163,7 @@ const PlotDisplay = ({ plot, cropDepot }: { plot: Plot, cropDepot: Crop[] }) => 
                         />
                     }
                 />}
-                {readyToCollect && <ComponentAndLabel
+                {plotCanOvergrow && <ComponentAndLabel
                     label="Next OG chance :"
                     labelSize="11px"
                     component={

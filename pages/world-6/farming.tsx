@@ -5,7 +5,7 @@ import {
 } from 'grommet'
 import { NextSeo } from 'next-seo';
 import { Crop, Farming as FarmingDomain, CropScientist } from '../../data/domain/world-6/farming';
-import { useContext, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import { AppContext } from '../../data/appContext';
 import ShadowBox from '../../components/base/ShadowBox';
 import { ComponentAndLabel } from '../../components/base/TextAndLabel';
@@ -19,10 +19,17 @@ import { PlotsDisplay } from '../../components/world-6/farming/plots';
 function Farming() {
     const appContext = useContext(AppContext);
     const data = appContext.data.getData();
-    const lastUpdated = appContext.data.getLastUpdated(true) as Date;
     const [activeTab, setActiveTab] = useState<string>("Plots");
 
     const farming = data.get("farming") as FarmingDomain;
+
+    const plots = useMemo(() => {
+        if (!farming) {
+            return [];
+        }
+
+        return farming.farmPlots;
+    }, [appContext, farming])
 
     if (!farming) {
         return <>Loading...</>
@@ -97,7 +104,7 @@ function Farming() {
                     }
                 </Box>
                 <Box align="center" margin={{ top: 'small', bottom: 'small' }}>
-                    {activeTab == "Plots" && <PlotsDisplay plots={farming.farmPlots} cropDepot={farming.cropDepot} />}
+                    {activeTab == "Plots" && <PlotsDisplay plots={plots} cropDepot={farming.cropDepot} canOvergrow={farming.canOvergrow} />}
                     {activeTab == "Market Upgrades" && <MarketUpgradesDisplay farming={farming} />}
                     {activeTab == "Crop Depot" && <CropDepotDisplay farming={farming} />}
                 </Box>
