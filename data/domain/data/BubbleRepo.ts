@@ -139,10 +139,10 @@ export const initBubbleRepo = () => {
                     <BubbleModel>{
                         "cauldron": "Power Cauldron",
                         "name": "Carpenter",
-                        "x1": 2,
+                        "x1": 5,
                         "x2": 50,
                         "func": "decay",
-                        "description": "+{% Build Speed per Construction Level.",
+                        "description": "+{% Build Speed per Construction Level. Not affected by 'Warriors Rule' bubble.",
                         "requirements": [<ComponentModel>{"item": "Refinery2", "quantity": 3}, <LiquidComponentModel>{"liquidNo": "2", "quantity": 4}],
                         "bonusKey": "Construction"
                     },

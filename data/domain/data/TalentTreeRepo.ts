@@ -4082,9 +4082,9 @@ export const initTalentTreeRepo = () => {
                             "castTime": 0.5,
                             "manaCost": 5,
                             "inputReq": 0,
-                            "AFKrange": 1,
-                            "AFKtype": "auto",
-                            "AFKactivity": -1
+                            "AFKrange": 480,
+                            "AFKtype": "line",
+                            "AFKactivity": 0
                         }
                     },
                     "You're Next": <TalentModel>{

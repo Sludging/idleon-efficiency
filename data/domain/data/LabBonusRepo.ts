@@ -145,6 +145,46 @@ export const initLabBonusRepo = () => {
                 "bonusOff": 50,
                 "name": "Viral Connection",
                 "description": "All mainframe bonuses and jewels have a 50% larger connection range, unless it states otherwise. @ This bonus always has a 80px connection range no matter what!"
+            }),
+        new LabBonusBase(14, <LabBonusModel>{
+                "no": 14,
+                "x": 1530,
+                "y": 105,
+                "range": 90,
+                "bonusOn": 0,
+                "bonusOff": 50,
+                "name": "Artifact Attraction",
+                "description": "Artifact find chance is 1.5x higher! If you've found all artifacts at max rarity, then this bonus changes to 1,000x artifact find chance!"
+            }),
+        new LabBonusBase(15, <LabBonusModel>{
+                "no": 15,
+                "x": 1630,
+                "y": 365,
+                "range": 90,
+                "bonusOn": 0,
+                "bonusOff": 25,
+                "name": "Slab Sovereignty",
+                "description": "All bonuses given by the Slab are 1.25x higher!"
+            }),
+        new LabBonusBase(16, <LabBonusModel>{
+                "no": 16,
+                "x": 1790,
+                "y": 250,
+                "range": 90,
+                "bonusOn": 0,
+                "bonusOff": 50,
+                "name": "Spiritual Growth",
+                "description": "Boosts EXP multi for all three World 6 skills by +50%!"
+            }),
+        new LabBonusBase(17, <LabBonusModel>{
+                "no": 17,
+                "x": 1950,
+                "y": 195,
+                "range": 90,
+                "bonusOn": 0,
+                "bonusOff": 30,
+                "name": "Depot Studies PhD",
+                "description": "All bonuses given at the Crop Depot are 1.30x higher!"
             })    
 ]
 }

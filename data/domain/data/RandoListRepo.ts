@@ -1869,12 +1869,13 @@ export const initRandoListRepo = () => {
                     "165",
                     "166",
                     "167",
-                    "168"
+                    "168",
+                    "171"
                 ]
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "Sneaking_Expansion_v2.02;NEW_UPDATE_PATCH_NOTES_@_*3_new_sneaking_floors_added,_with_new_creepy_guests_to_avoid_detection_of,_new_loot_tables_to_fill,_new_Ninja_Glove_equipment_type!_@_*10_new_Jade_Emporium_purchases,_with_game_changing_bonuses!_You'll_need_to_reach_the_new_sneaking_floors_if_you_want_a_chance_to_afford_these!_@_*New_SOVEREIGN_Artifacts,_unlocked_via_the_new_Jade_Emporium_purchases!_@_*New_Critter_type,_unlocked_via_the_new_Jade_Emporium_purchases!_@_*New_Sigil_max_level,_unlocked_via_the_new_Jade_Emporium_purchases!._@_*4_new_Pristine_Charms_added,_they_are_a_super_rare_drop_from_any_floor_of_the_Ninja_Castle,_or_purchased_from_the_Gem_Shop._@_*The_other_Jade_Emporium_upgrades_will_be_up_to_you_to_discover!;*Le",
+                    "Quality_Update_v2.03;NEW_UPDATE_PATCH_NOTES_@_*Talent_Presets,_and_Card_Presents,_AND_Inventory_Locking_now_ALL_cloudsave_between_devices!_@_*Craft_from_Storage_deposits_the_item_in_your_storage_if_it's_an_equipment._@_*Added_a_Max_Book_toggle_to_top_left_corner_of_the_Talent_Library_if_the_Automation_Arm_is_fully_upgraded._@_*Added_Loadout_Swapping_to_Personal_Obols,_it's_in_the_top_right_corner._@_*Added_a_new_ALL_QUICK_button_to_the_Mini_Soul_Apparatus_in_World_3_town,_which_uses_all_your_charge_and_deposits_the_souls_ot_your_storage._@_*Harvest_All_in_Gaming_no_longer_harvests_Chemical_plants._@_*Carpenter_alchemy_bubble_no_longer_affected_by_Warriors_Rule_bubble,_but_gives_2.40x_higher_bonus._@_*Beryllium_Atom_now_gives_7x_more_PO_Boxes_at_a_7x_higher_Silver_Pen_cost._@_*23_other_Improvements,_Changes,_and_Bug_Fixes._Check_Discord.gg/idleon_for_full_patch_notes!;*Le",
                     "Monde",
                     "6",
                     "est",
