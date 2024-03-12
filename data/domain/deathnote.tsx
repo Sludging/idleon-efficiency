@@ -2,7 +2,7 @@ import { range } from "../utility";
 import { Domain, RawData } from "./base/domain";
 import { Cloudsave } from "./cloudsave";
 import { IParser } from "./idleonData";
-import { ImageData } from "./imageData";
+import { ImageData } from './imageData';
 import { Item } from "./items";
 import { MapInfo } from "./maps";
 import { Rift } from "./rift";

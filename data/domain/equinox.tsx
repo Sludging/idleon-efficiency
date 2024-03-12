@@ -6,6 +6,7 @@ import { initDreamUpgradeRepo } from "./data/DreamUpgradeRepo";
 import { Item } from "./items";
 import { DreamChallengeModel } from "./model/dreamChallengeModel";
 import { DreamUpgradeModel } from "./model/dreamUpgradeModel";
+import { ImageData } from './imageData';
 
 class Challenge {
     complete: boolean = false;
@@ -228,6 +229,14 @@ export class Equinox extends Domain {
         equinox.activeChallenges = equinox.challenges.filter(challenge => !challenge.complete).slice(0, this.numberOfActiveChallenges);
 
         (equinox.upgrades[9] as FoodLust).bossesKilled = optionList[193];
+    }
+
+    static cloudImageData = (): ImageData => {
+        return {
+            location: 'Dream_Cloud',
+            height: 125,
+            width: 205,
+        }
     }
 }
 

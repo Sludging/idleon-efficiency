@@ -30,7 +30,8 @@ export enum AlertType {
     Construction = "Construction",
     Cooking = "Cooking",
     Farming = "Farming",
-    Sneaking = "Sneaking"
+    Sneaking = "Sneaking",
+    EquinoxFull = "Equinox Full"
 }
 
 export abstract class Alert {
@@ -194,6 +195,15 @@ export class CropReadyAlert extends GlobalAlert {
     }
 }
 
+export class EquinoxBarFull extends GlobalAlert {
+    constructor() {
+        super(`Equinox bar is full, go upgrade a cloud`, AlertType.EquinoxFull, Equinox.cloudImageData());
+
+        (this.icon as ImageData).width = 50;
+        (this.icon as ImageData).height = 50;
+    }
+}
+
 export class Alerts extends Domain {
     playerAlerts: Record<number, Alert[]> = {};
     generalAlerts: Alert[] = [];
@@ -323,6 +333,12 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], 
     const foodLustCapped = (equinox.upgrades[9] as FoodLust).isCapped();
     if (foodLustCapped) {
         globalAlerts.push(new FoodLustAlert());
+    }
+
+    // Equinox Bar Full
+    const equinoxBarFull = (equinox.bar.current == equinox.bar.max);
+    if (equinoxBarFull) {
+        globalAlerts.push(new EquinoxBarFull());
     }
 
     // Farming
