@@ -566,7 +566,7 @@ function DeathnoteDisplay() {
         }
 
         [...deathNoteByWorld.entries()].forEach(([worldName, deathnoteMobs]) => {
-            const worldRankSum = [...deathnoteMobs.values()].reduce((sum, killCount) => sum += deathnoteData?.getDeathnoteRank(killCount) ?? 0, 0);
+            const worldRankSum = [...deathnoteMobs.values()].reduce((sum, killCount) => sum += (worldName == "Minibosses" ? deathnoteData?.getDeathnoteMinibossRank(killCount) : deathnoteData?.getDeathnoteRank(killCount)) ?? 0, 0);
             toReturn.push(worldRankSum);
         })
         return toReturn;
