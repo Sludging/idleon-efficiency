@@ -9,8 +9,16 @@ import ShadowBox from "../../base/ShadowBox";
 import { Lock, Star } from 'grommet-icons';
 import { StaticTime, TimeDisplaySize, TimeDown, TimeDownWithCallback } from "../../base/TimeDisplay";
 
-export const PlotsDisplay = ({ plots, cropDepot, canOvergrow }: { plots: Plot[], cropDepot: Crop[], canOvergrow: boolean }) => {
+export const PlotsDisplay = ({ farmingPlots, cropDepot, canOvergrow }: { farmingPlots: Plot[], cropDepot: Crop[], canOvergrow: boolean }) => {
     const size = useContext(ResponsiveContext);
+
+    const plots = useMemo(() => {
+        if (!farmingPlots) {
+            return [];
+        }
+
+        return farmingPlots;
+    }, [farmingPlots])
 
     return (
         <Box width="100%">
@@ -20,8 +28,8 @@ export const PlotsDisplay = ({ plots, cropDepot, canOvergrow }: { plots: Plot[],
                     plots.map((plot, index) => {
                         return (
                             <ShadowBox key={index} background="dark-1">
-                                <Box  align="center">
-                                    <PlotDisplay plot={plot} cropDepot={cropDepot} canOvergrow={canOvergrow} />
+                                <Box align="center">
+                                    <PlotDisplay farmingPlot={plot} cropDepot={cropDepot} canOvergrow={canOvergrow} />
                                 </Box>
                             </ShadowBox>
                         )
@@ -32,10 +40,19 @@ export const PlotsDisplay = ({ plots, cropDepot, canOvergrow }: { plots: Plot[],
     )
 }
 
-const PlotDisplay = ({ plot, cropDepot, canOvergrow }: { plot: Plot, cropDepot: Crop[], canOvergrow: boolean }) => {
-    const [readyToCollect, setReadyToCollect] = useState<boolean>(plot.readyToCollect);
+const PlotDisplay = ({ farmingPlot, cropDepot, canOvergrow }: { farmingPlot: Plot, cropDepot: Crop[], canOvergrow: boolean }) => {
+    const [readyToCollect, setReadyToCollect] = useState<boolean>(farmingPlot.readyToCollect);
     const [plotCanOvergrow, setCanOvergrow] = useState<boolean>(readyToCollect && canOvergrow);
-    const [completedOGcycles, setCompletedOGCycles] = useState<number>(plot.overgrowthCycleCompletedSinceLastLoggin);
+    const [completedOGcycles, setCompletedOGCycles] = useState<number>(farmingPlot.overgrowthCycleCompletedSinceLastLoggin);
+
+    const plot = useMemo(() => {
+        setReadyToCollect(farmingPlot.readyToCollect);
+        setCanOvergrow(readyToCollect && canOvergrow);
+        setCompletedOGCycles(farmingPlot.overgrowthCycleCompletedSinceLastLoggin);
+
+        return farmingPlot;
+    }, [canOvergrow, farmingPlot, readyToCollect])
+
     const growthStage: PlotGrowthStage = plot.getGrowthStage();
     const baseCrop = cropDepot.find(crop => crop.index == plot.cropIndex);
     // Second test is used to avoid getting a crop if current crop is last crop for its seed
@@ -158,7 +175,7 @@ const PlotDisplay = ({ plot, cropDepot, canOvergrow }: { plot: Plot, cropDepot: 
                             resetToSeconds={plot.seed.getFullCycleGrowthTime() / plot.growthRate} 
                             size={TimeDisplaySize.XSmall}
                             callBack={
-                                () => {setCompletedOGCycles(completedOGcycles+1);}
+                                () => { setCompletedOGCycles(plot.overgrowthCycleCompletedSinceLastLoggin++); }
                             }
                         />
                     }

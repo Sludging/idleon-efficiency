@@ -104,7 +104,7 @@ function Farming() {
                     }
                 </Box>
                 <Box align="center" margin={{ top: 'small', bottom: 'small' }}>
-                    {activeTab == "Plots" && <PlotsDisplay plots={plots} cropDepot={farming.cropDepot} canOvergrow={farming.canOvergrow} />}
+                    {activeTab == "Plots" && <PlotsDisplay farmingPlots={plots} cropDepot={farming.cropDepot} canOvergrow={farming.canOvergrow} />}
                     {activeTab == "Market Upgrades" && <MarketUpgradesDisplay farming={farming} />}
                     {activeTab == "Crop Depot" && <CropDepotDisplay farming={farming} />}
                 </Box>
