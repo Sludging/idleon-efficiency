@@ -304,6 +304,8 @@ export class Sneaking extends Domain {
     doors: SneakingDoor[] = [];
     jade: number = 0;
 
+    minibossKills: number[] = [];
+
     // Store the item source data so we can make decisions based on it.
     baseItems: BaseNinjaItemBase[] = initNinjaItemRepo();
     sneakingUpgrades: SneakingUpgrade[] = SneakingUpgrade.fromBase(initNinjaUpgradeRepo());
@@ -417,6 +419,9 @@ export class Sneaking extends Domain {
         doorsDamage.forEach((damageDone, index) => {
             sneaking.doors.push({damageDone: damageDone, maxHP: ((index < DoorsMaxHP.length) ? DoorsMaxHP[index] : 1E9999999999)});
         });
+
+        sneaking.minibossKills = [];
+        sneaking.minibossKills = ninjaData[105] as number[];
     }
 
     updatePlayersActivity = () => {

@@ -43,12 +43,12 @@ export class Deathnote extends Domain {
     getDeathnoteMinibossRank = (killCount: number) => {
         switch (true) {
             case killCount < 100: return 0;
-            case killCount > 250 && killCount < 100: return 1;
-            case killCount > 1000 && killCount < 250: return 2;
-            case killCount > 2500 && killCount < 500: return 3;
-            case killCount > 5000 && killCount < 1000: return 4;
-            case killCount > 10000 && killCount < 5000: return 5;
-            case killCount > 50000 && killCount < 100000: return 7;
+            case killCount > 100 && killCount < 250: return 1;
+            case killCount > 250 && killCount < 1000: return 2;
+            case killCount > 1000 && killCount < 5000: return 3;
+            case killCount > 5000 && killCount < 25000: return 4;
+            case killCount > 25000 && killCount < 100000: return 5;
+            case killCount > 100000 && killCount < 1000000: return 7;
             case killCount > 1000000 && killCount < 10000000: return 10;
             case killCount > 10000000: return this.hasRiftBonus ? 20 : 10;
             default: return 0;
@@ -106,13 +106,13 @@ export class Deathnote extends Domain {
     }
 
     init(allItems: Item[], charCount: number) {
+        deathNoteMinibossesOrder.forEach((monster) => {
+            this.mobKillCount.set(monster, []);
+        })
         deathNoteMobOrder.forEach((world) => {
             world.forEach((monster) => {
                 this.mobKillCount.set(monster, []);
             })
-        })
-        deathNoteMinibossesOrder.forEach((monster) => {
-            this.mobKillCount.set(monster, []);
         })
 
         return this;
@@ -148,8 +148,21 @@ export class Deathnote extends Domain {
 export const updateDeathnote = (data: Map<string, any>) => {
     const deathNote = data.get("deathnote") as Deathnote;
     const rift = data.get("rift") as Rift;
-    const sneaking = data.get("sneaking") as Sneaking;
 
     deathNote.hasRiftBonus = rift.bonuses.find(bonus => bonus.name == "Eclipse Skulls")?.active ?? false;
+}
+
+export const updateDeathnoteMiniboss = (data: Map<string, any>) => {
+    const deathNote = data.get("deathnote") as Deathnote;
+    const sneaking = data.get("sneaking") as Sneaking;
+
     deathNote.hasMinibosses = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 7)?.purchased ?? false;
+
+    if (deathNote.hasMinibosses) {
+        sneaking.minibossKills.forEach((killCount, index) => {
+            if (index < deathNoteMinibossesOrder.length && deathNote.mobKillCount.has(deathNoteMinibossesOrder[index])) {
+                deathNote.mobKillCount.get(deathNoteMinibossesOrder[index])?.push(killCount);
+            }
+        })
+    }
 }

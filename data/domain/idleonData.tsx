@@ -40,7 +40,7 @@ import { updateArtifacts } from './sailing/artifacts';
 import { Constellations } from './constellations';
 import { Slab } from './slab';
 import { Capacity, updateCapacity } from './capacity';
-import { Deathnote, updateDeathnote } from './deathnote';
+import { Deathnote, updateDeathnote, updateDeathnoteMiniboss } from './deathnote';
 import parseCompanions, { updateCompanionImpact } from './companions';
 import { Domain, HandleRawDataKey } from './base/domain';
 import { Guild } from './guild';
@@ -195,6 +195,7 @@ const postProcessingMap: Record<string, Function> = {
     "lab": (doc: Cloudsave, accountData: Map<string, any>) => updateLab(accountData),
     "alchemy": (doc: Cloudsave, accountData: Map<string, any>) => updateAlchemy(accountData),
     "sneaking": (doc: Cloudsave, accountData: Map<string, any>) => updateSneaking(accountData),
+    "deathnoteMiniboss": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnoteMiniboss(accountData),
     "farmingCropScientist": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingCropScientistBonuses(accountData),
     "summoningPristineCharm": (doc: Cloudsave, accountData: Map<string, any>) => updateSummoningPristineCharm(accountData),
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStamps(accountData),
@@ -211,7 +212,7 @@ const postProcessingMap: Record<string, Function> = {
     "arcade": (doc: Cloudsave, accountData: Map<string, any>) => updateArcade(accountData),
     "account": (doc: Cloudsave, accountData: Map<string, any>) => updateAccount(accountData),
     "construction": (doc: Cloudsave, accountData: Map<string, any>) => updateConstruction(accountData),
-    "deathnote": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnote(accountData),
+    "deathnoteEquinox": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnote(accountData),
     "equinox": (doc: Cloudsave, accountData: Map<string, any>) => updateEquinoxBar(accountData),
 }
 
