@@ -226,6 +226,8 @@ function Cooking() {
                         return sortByTimeAndIndex(meal1.timeToThirty, meal2.timeToThirty);
                     case "Least Time to 60":
                         return sortByTimeAndIndex(meal1.timeToSixty, meal2.timeToSixty);
+                    case "Least Time to 90":
+                        return sortByTimeAndIndex(meal1.timeToNinety, meal2.timeToNinety);
                     default:
                         return indexSort;
                 }
@@ -242,6 +244,7 @@ function Cooking() {
             case "Least Time to Void": return meal.timeToVoid > 0 ? toTime(meal.timeToVoid * 3600) : "Already Void!";
             case "Least Time to 30": return meal.timeToThirty > 0 ? toTime(meal.timeToThirty * 3600) : "Already 30!";
             case "Least Time to 60": return meal.timeToSixty > 0 ? toTime(meal.timeToSixty * 3600) : "Already 60!";
+            case "Least Time to 90": return meal.timeToNinety > 0 ? toTime(meal.timeToNinety * 3600) : "Already 90!";
         }
     }
 
@@ -297,7 +300,7 @@ function Cooking() {
                         placeholder="Sort by"
                         clear
                         value={sort}
-                        options={["Level", "Least Time to Cook Next", "Least Time to Diamond", "Least Time to Purple", "Least Time to Void", "Least Time to 30", "Least Time to 60"]}
+                        options={["Level", "Least Time to Cook Next", "Least Time to Diamond", "Least Time to Purple", "Least Time to Void", "Least Time to 30", "Least Time to 60", "Least Time to 90"]}
                         onChange={({ value: nextValue }) => { setSort(nextValue); }}
                     />
                 </Box>
