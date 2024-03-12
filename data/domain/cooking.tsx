@@ -22,6 +22,7 @@ import { CropScientistBonusText, Farming } from "./world-6/farming";
 import { Summoning } from "./world-6/summoning";
 import { Arcade } from "./arcade";
 import { Sneaking } from "./world-6/sneaking";
+import { StarSigns } from "./starsigns";
 
 const spiceValues: number[] = "0 3 5 8 10 13 15 19 20 23 27 31 33 37 41 45 48 50 53 56 58 60 63 66".split(" ").map(value => parseInt(value));
 const mealLuckValues: number[] = "1 .20 .10 .05 .02 .01 .004 .001 .0005 .0003".split(" ").map(value => parseFloat(value));
@@ -77,7 +78,7 @@ export class Meal {
     timeToVoid: number = 0;
     timeToThirty: number = 0;
     timeToSixty: number = 0;
-    timeToNinety: number = 0;
+    timeToMax: number = 0;
 
     // Void plate achivement
     reducedCostToUpgrade: boolean = false;
@@ -164,17 +165,9 @@ export class Meal {
         return totalCost;
     }
 
-    getCostsTillSixty = () => {
+    getCostsTillMaxLevel= () => {
         let totalCost = 0;
-        for (let level of range(this.level, 59)) {
-            totalCost += this.getMealLevelCost(level);
-        }
-        return totalCost;
-    }
-
-    getCostsTillNinety = () => {
-        let totalCost = 0;
-        for (let level of range(this.level, 89)) {
+        for (let level of range(this.level, this.maxLevel-1)) {
             totalCost += this.getMealLevelCost(level);
         }
         return totalCost;
@@ -389,7 +382,7 @@ export class Cooking extends Domain {
         this.meals = Meal.fromBase(initMealRepo());
         this.spices = [...Array(territoryNiceNames.length - 1)].map(index => 0);
 
-        populateDiscovery(this, true);
+        populateDiscovery(this);
         return this;
     }
 
@@ -428,14 +421,11 @@ export class Cooking extends Domain {
     }
 }
 
-const populateDiscovery = (cooking: Cooking, hidew6: boolean = false) => {
+const populateDiscovery = (cooking: Cooking) => {
     const mealsThatCanBeDiscovered = cooking.meals.length;
 
     let availableValues = cooking.spicesToValues(cooking.spices.map((spice, index) => spice != -1 ? index : -1).filter(value => value != -1));
-    // Lava wants w6 meals to be hidden for a while, so we hide them on init to avoid fake discovery values.
-    if (hidew6) {
-        availableValues = availableValues.filter(spice => spice <= 56);
-    }
+
     const outputlucktime = [...Array(mealsThatCanBeDiscovered)].map((_, index) => 50000000000000000 * 2 / .004)
     const outputLuck = [...Array(mealsThatCanBeDiscovered)].map((_, index) => 0)
     for (let len of range(0, 3)) {
@@ -496,6 +486,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const summoning = data.get("summoning") as Summoning;
     const arcade = data.get("arcade") as Arcade;
     const sneaking = data.get("sneaking") as Sneaking;
+    const starSigns = data.get("starsigns") as StarSigns;
 
     const bestLadleSkillLevel = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 148)?.maxLevel ?? 0)));
     if (bestLadleSkillLevel > 0) {
@@ -538,7 +529,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const artifactBonus = sailing.artifacts[13].getBonus();
     const atomBonus = collider.atoms[8].getBonus();
     const worshipBonus = worship.totalizer.getBonus(TotalizerBonus.Cooking);
-    const starsign58 = players[0].starSigns.reduce((sum, sign) => sum += sign.getBonus("Cooking SPD (Multiplicative!)"), 0);
+    const starsign58 = starSigns.isStarSignUnlocked("Gordonius Major") ? 15 * starSigns.getSeraphCosmosBonus() : 0;
     const cropScientistBonus = farming.cropScientist.getBonus(CropScientistBonusText.CookingSpeed);
     const arcadeBonus = arcade.bonuses.find(bonus => bonus.effect == "+{% Cook SPD multi")?.getBonus() ?? 0;
     const winnerBonus = summoning.summonBonuses.find(bonus => bonus.data.bonusId == 16)?.getBonus() ?? 0;
@@ -606,8 +597,7 @@ export const updateCooking = (data: Map<string, any>) => {
         meal.timeToPurple = Math.max(0, ((meal.getCostsTillPurple() - meal.count) * meal.cookReq) / cookingSpeed);
         meal.timeToVoid = Math.max(0, ((meal.getCostsTillVoid() - meal.count) * meal.cookReq) / cookingSpeed);
         meal.timeToThirty = Math.max(0, ((meal.getCostsTillThirty() - meal.count) * meal.cookReq) / cookingSpeed);
-        meal.timeToSixty = Math.max(0, ((meal.getCostsTillSixty() - meal.count) * meal.cookReq) / cookingSpeed);
-        meal.timeToNinety = Math.max(0, ((meal.getCostsTillNinety() - meal.count) * meal.cookReq) / cookingSpeed);
+        meal.timeToMax = Math.max(0, ((meal.getCostsTillMaxLevel() - meal.count) * meal.cookReq) / cookingSpeed);
 
         meal.timeToNext = Math.max(0, ((meal.getMealLevelCost() - meal.count) * meal.cookReq) / cookingSpeed);
         meal.ladlesToLevel = Math.max(0, Math.ceil((((meal.getMealLevelCost() - meal.count) * meal.cookReq) / cookingSpeed)));
@@ -626,11 +616,8 @@ export const updateCooking = (data: Map<string, any>) => {
         else if (meal.timeToThirty > 0) {
             milestoneCosts = meal.getCostsTillThirty();
         }
-        else if (meal.timeToSixty > 0) {
-            milestoneCosts = meal.getCostsTillSixty();
-        }
-        else if (meal.timeToNinety > 0) {
-            milestoneCosts = meal.getCostsTillNinety();
+        else if (meal.timeToMax > 0) {
+            milestoneCosts = meal.getCostsTillMaxLevel();
         }
         if (milestoneCosts > 0) {
             meal.ladlesToNextMilestone = Math.ceil((((milestoneCosts - meal.count) * meal.cookReq) / cookingSpeed));

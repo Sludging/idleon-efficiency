@@ -1,4 +1,8 @@
 import { ConstellationBase, initConstellationsRepo } from "./data/ConstellationsRepo";
+import { Domain } from './base/domain';
+import { RawData } from './base/domain';
+import { Item } from "./items";
+import { Summoning } from "./world-6/summoning";
 
 interface StarBonus {
     text: string,
@@ -8,6 +12,7 @@ interface StarBonus {
 
 export class StarSign {
     hasChip: boolean = false;
+    seraphCosmosBonus: number = 1;
     aligned: boolean = false;
     constructor(public name: string, public bonuses: StarBonus[]) { }
 
@@ -20,7 +25,7 @@ export class StarSign {
     getBonus = (bonusType: string) => {
         const bonus = this.bonuses.find((bonus) => bonus.text.toLowerCase().includes(bonusType.toLowerCase()));
         if (bonus) {
-            return this.hasChip ? bonus.bonus * 2 : bonus.bonus;
+            return this.hasChip ? bonus.bonus * this.seraphCosmosBonus * 2 : bonus.bonus * this.seraphCosmosBonus;
         }
         return 0;
     }
@@ -33,6 +38,69 @@ export class StarSign {
 
         return new StarSign(this.name, bonuses);
     }
+}
+
+export class StarSigns extends Domain  {
+    unlockedStarSigns: string[] = [];
+    summoningLevel: number = 0;
+
+    getRawKeys(): RawData[] {
+        return [
+            { key: "StarSignsUnlocked", perPlayer: false, default: []},
+        ]
+    }
+
+    init(allItems: Item[], charCount: number) {
+        return this;
+    }
+
+    parse(data: Map<string, any>): void {
+        const starSigns = data.get("starsigns") as StarSigns;      
+        const starSignsUnlockedData = data.get("StarSg") as string;
+
+        console.log(starSignsUnlockedData);
+
+        starSigns.unlockedStarSigns = [];
+        if (starSignsUnlockedData) {
+            /*starSignsUnlockedData.map((key: string, value: string | number) => {
+                if (!starSigns.unlockedStarSigns.includes(key)) {
+                    starSigns.unlockedStarSigns.push(key);
+                }
+            });*/
+    
+            console.log(starSigns.unlockedStarSigns);
+        }    
+    }
+
+    isStarSignUnlocked = (starSignName: string): boolean => {
+        return this.unlockedStarSigns.includes(starSignName.replaceAll(' ', '_'));
+    }
+
+    getSeraphCosmosBonus = (): number => {
+        if (this.isStarSignUnlocked("Seraph Cosmos")) {
+            return Math.min(3, Math.pow(1.1, Math.ceil((this.summoningLevel + 1) / 20)));
+        } else {
+            return 1;
+        }
+    }
+
+    getMaxNumberOfEquipedSigns = (): number => {
+        let count = 1;
+        if (this.isStarSignUnlocked("Chronus Cosmos")) {
+            count++;
+        }
+        if (this.isStarSignUnlocked("Hydron Cosmos")) {
+            count++;
+        }
+        return count;
+    }
+}
+
+export const updateStarSignsUnlocked = (data: Map<string, any>) => {
+    const starSigns = data.get("starsigns") as StarSigns;
+    const summoning = data.get("summoning") as Summoning;
+
+    starSigns.summoningLevel = summoning.summoningLevel;
 }
 
 export const StarSignMap: Record<number, StarSign> = {
