@@ -232,7 +232,7 @@ function Cooking() {
                         return sortByTimeAndIndex(meal1.timeToVoid, meal2.timeToVoid);
                     case "Least Time to 30":
                         return sortByTimeAndIndex(meal1.timeToThirty, meal2.timeToThirty);
-                    case "Least Time to "+mealMaxlevel:
+                    case "Least Time to Max":
                         return sortByTimeAndIndex(meal1.timeToMax, meal2.timeToMax);
                     default:
                         return indexSort;
@@ -249,7 +249,7 @@ function Cooking() {
             case "Least Time to Purple": return meal.timeToPurple > 0 ? toTime(meal.timeToPurple * 3600) : "Already Purple!";
             case "Least Time to Void": return meal.timeToVoid > 0 ? toTime(meal.timeToVoid * 3600) : "Already Void!";
             case "Least Time to 30": return meal.timeToThirty > 0 ? toTime(meal.timeToThirty * 3600) : "Already 30!";
-            case "Least Time to "+mealMaxlevel: return meal.timeToMax > 0 ? toTime(meal.timeToMax * 3600) : `Already ${mealMaxlevel}!`;
+            case "Least Time to Max": return meal.timeToMax > 0 ? toTime(meal.timeToMax * 3600) : `Already max level!`;
         }
     }
 
@@ -305,7 +305,7 @@ function Cooking() {
                         placeholder="Sort by"
                         clear
                         value={sort}
-                        options={["Level", "Least Time to Cook Next", "Least Time to Diamond", "Least Time to Purple", "Least Time to Void", "Least Time to 30", "Least Time to "+mealMaxlevel]}
+                        options={["Level", "Least Time to Cook Next", "Least Time to Diamond", "Least Time to Purple", "Least Time to Void", "Least Time to 30", "Least Time to Max"]}
                         onChange={({ value: nextValue }) => { setSort(nextValue); }}
                     />
                 </Box>
@@ -349,7 +349,7 @@ function Cooking() {
                                                             {meal.timeToDiamond <= 0 && meal.timeToPurple > 0 && <Text>Time to Purple: {toTime(meal.timeToPurple * 3600)}</Text>}
                                                             {meal.timeToPurple <= 0 && meal.timeToVoid > 0 && <Text>Time to Void: {toTime(meal.timeToVoid * 3600)}</Text>}
                                                             {meal.timeToVoid <= 0 && meal.timeToThirty > 0 && <Text>Time to 30: {toTime(meal.timeToThirty * 3600)}</Text>}
-                                                            {meal.timeToThirty <= 0 && meal.timeToMax > 0 && <Text>Time to {mealMaxlevel}: {toTime(meal.timeToMax * 3600)}</Text>}
+                                                            {meal.timeToThirty <= 0 && meal.timeToMax > 0 && <Text>Time to Max: {toTime(meal.timeToMax * 3600)}</Text>}
                                                             {meal.ladlesToNextMilestone > 0 && <Text size="small">{meal.ladlesToNextMilestone} Ladles to next milestone ({meal.zerkerLadlesToNextMilestone} if using {cooking?.bestBerserker?.playerName ?? "zerker"})</Text>}
                                                         </Box>
                                                         <Text size="xsmall">* {meal.cookingContribution > 0 ? "The time is calculated based on your current cooking speed for this meal." : "The time is calculated assuming all kitchens are cooking the same meal."}</Text>
