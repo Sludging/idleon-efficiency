@@ -214,16 +214,14 @@ export class Kitchen {
     richelin: boolean = false;
 
     mealSpeed: number = 1;
+    mealSpeedWithSilkrode: number = 1;
     fireSpeed: number = 1;
     recipeLuck: number = 1;
 
     constructor(public index: number) { }
 
     // "CookingSPEED" == d
-    getMealSpeed = (starsign58bonus: number, dreadloVialBonus: number, fireflyVialBonus: number, turtleVialBonus: number, summoningWinnerBonus: number, stampBonus: number, 
-        meal63Bonus: number, mealCookBonus: number, jewel0Bonus: number, trollCardBonus: number, ceramicCardBonus: number, kitchenEffBonus: number, jewel14Bonus: number, 
-        diamonChef: number, achieve225: boolean, achieve224: boolean, atom8Bonus: number, artifact13Bonus: number, totalizerBonus: number, bloodMarrowBonus: number, 
-        superChowBonus: number, cropScientistBonus: number, farmingLevel: number, arcadeBonus: number) => {
+    getMealSpeed = (starsign58bonus: number, mealCookVialBonus: number, fireflyVialBonus: number, turtleVialBonus: number, summoningWinnerBonus: number, stampBonus: number, meal63Bonus: number, mealCookBonus: number, jewel0Bonus: number, trollCardBonus: number, ceramicCardBonus: number, kitchenEffBonus: number, jewel14Bonus: number, diamonChef: number, achieve225: boolean, achieve224: boolean, atom8Bonus: number, artifact13Bonus: number, totalizerBonus: number, bloodMarrowBonus: number, superChowBonus: number, cropScientistBonus: number, farmingLevel: number, arcadeBonus: number) => {
         return 10 *
             (1 + bloodMarrowBonus / 100) * 
             Math.max(1, cropScientistBonus) * 
@@ -237,15 +235,15 @@ export class Kitchen {
             (1 + artifact13Bonus / 100) * 
             (1 + arcadeBonus / 100) * 
             (1 + turtleVialBonus / 100) * 
-            (1 + dreadloVialBonus / 100) * 
+            (1 + mealCookVialBonus / 100) * 
             (1 + (stampBonus + Math.max(0, jewel14Bonus)) / 100) * 
             (1 + mealCookBonus / 100) * 
             (1 + starsign58bonus / 100) * 
             (1 + summoningWinnerBonus / 100) * 
-            (1 + 5 * ceramicCardBonus / 100) * 
+            (1 + ceramicCardBonus / 100) * 
             (1 + fireflyVialBonus / 100) * 
             Math.max(1, jewel0Bonus) * 
-            (1 + Math.min(6 * trollCardBonus + (20 * (achieve225 ? 1 : 0) + 10 * (achieve224 ? 1 : 0)), 100) / 100) * 
+            (1 + Math.min(trollCardBonus + (20 * (achieve225 ? 1 : 0) + 10 * (achieve224 ? 1 : 0)), 100) / 100) * 
             (1 + (kitchenEffBonus * Math.floor((this.mealLevels + (this.recipeLevels + this.luckLevels)) / 10)) / 100);
     }
 
@@ -525,7 +523,7 @@ export const updateCooking = (data: Map<string, any>) => {
     cooking.foodLustDiscountCapped = foodLust.isCapped();
 
     // Meal speed
-    const dreadloVialBonus = alchemy.getVialBonusForKey("MealCook");
+    const mealCookVialBonus = alchemy.getVialBonusForKey("MealCook");
     const fireflyVialBonus = alchemy.getVialBonusForKey("6CookSpd");
     const turtleVialBonus = alchemy.getVialBonusForKey("6turtle");
     const diamonChef = alchemy.getBubbleBonusForKey("MealSpdz");
@@ -540,7 +538,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const artifactBonus = sailing.artifacts[13].getBonus();
     const atomBonus = collider.atoms[8].getBonus();
     const worshipBonus = worship.totalizer.getBonus(TotalizerBonus.Cooking);
-    const starsign58 = players[0].starSigns.reduce((sum, sign) => sum += sign.getBonus("+15% Cooking SPD (Multiplicative!) "), 0);
+    const starsign58 = players[0].starSigns.reduce((sum, sign) => sum += sign.getBonus("Cooking SPD (Multiplicative!)"), 0);
     const cropScientistBonus = farming.cropScientist.getBonus(CropScientistBonusText.CookingSpeed);
     const arcadeBonus = arcade.bonuses.find(bonus => bonus.effect == "+{% Cook SPD multi")?.getBonus() ?? 0;
     const winnerBonus = summoning.summonBonuses.find(bonus => bonus.data.bonusId == 16)?.getBonus() ?? 0;
@@ -569,14 +567,20 @@ export const updateCooking = (data: Map<string, any>) => {
     const arenaBonusActive = breeding.hasBonus(7);
 
     let totalContribution = 0;
-    cooking.kitchens.forEach(kitchen => {
-        kitchen.mealSpeed = kitchen.getMealSpeed(starsign58, dreadloVialBonus, fireflyVialBonus, turtleVialBonus, winnerBonus, stampBonus, meal63Bonus, mealSpeedBonus, jewel0Bonus, trollCardBonus, ceramicCardBonus, kitchenEfficientBonus, jewel14Bonus, diamonChef, achievements[225].completed, achievements[224].completed, atomBonus, artifactBonus, worshipBonus, bloodMarrowBonus, superChowBonus, cropScientistBonus, farming.farmingLevel, arcadeBonus);
+    cooking.kitchens.forEach((kitchen, index) => {
+
+        kitchen.mealSpeed = kitchen.getMealSpeed(starsign58, mealCookVialBonus, fireflyVialBonus, turtleVialBonus, winnerBonus, stampBonus, meal63Bonus, mealSpeedBonus, jewel0Bonus, trollCardBonus, ceramicCardBonus, kitchenEfficientBonus, jewel14Bonus, diamonChef, achievements[225].completed, achievements[224].completed, atomBonus, artifactBonus, worshipBonus, bloodMarrowBonus, superChowBonus, cropScientistBonus, farming.farmingLevel, arcadeBonus);
+        kitchen.mealSpeedWithSilkrode = kitchen.getMealSpeed(starsign58*2, mealCookVialBonus, fireflyVialBonus, turtleVialBonus, winnerBonus, stampBonus, meal63Bonus, mealSpeedBonus, jewel0Bonus, trollCardBonus, ceramicCardBonus, kitchenEfficientBonus, jewel14Bonus, diamonChef, achievements[225].completed, achievements[224].completed, atomBonus, artifactBonus, worshipBonus, bloodMarrowBonus, superChowBonus, cropScientistBonus, farming.farmingLevel, arcadeBonus);
         kitchen.fireSpeed = kitchen.getFireSpeed(fireVialBonus, fireStampBonus, fireSpeedMealBonus, trollCardBonus, kitchenEfficientBonus, diamonChef, atomBonus, worshipBonus);
         kitchen.recipeLuck = kitchen.getLuck();
 
         kitchen.speedUpgradeCost = kitchen.getSpiceUpgradeCost(kitchenCosts, mealKitchenCosts, arenaBonusActive, UpgradeType.Speed, sigils.sigils[18].getBonus());
         kitchen.fireUpgradeCost = kitchen.getSpiceUpgradeCost(kitchenCosts, mealKitchenCosts, arenaBonusActive, UpgradeType.Fire, sigils.sigils[18].getBonus());
         kitchen.luckUpgradecost = kitchen.getSpiceUpgradeCost(kitchenCosts, mealKitchenCosts, arenaBonusActive, UpgradeType.Luck, sigils.sigils[18].getBonus());
+
+        if (index == 0) {
+            console.log(`Star sign : ${starsign58}`);
+        }
 
         // if actively cooking
         if (kitchen.activeMeal != -1) {
