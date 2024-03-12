@@ -205,13 +205,52 @@ export class Worship extends Domain {
     }
 }
 
+export const updateWorshipTotalizer = (data: Map<string, any>) => {
+    const worship = data.get("worship") as Worship;
+    const gaming = data.get("gaming") as Gaming;
+    const sneaking = data.get("sneaking") as Sneaking;
+
+    worship.totalizer.totalWaves = worship.totemInfo.reduce((sum, totem) => sum += totem.maxWave, 0);
+
+    worship.totalizer.unlockedBonuses = [];
+    
+    if (gaming.superbits[7].unlocked) {
+        worship.totalizer.unlocked = true;
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.Damage);
+    }
+    if (gaming.superbits[13].unlocked) {
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.Cooking);
+    }
+    if (gaming.superbits[3].unlocked) {
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.BoatSpeed);
+    }
+    if (gaming.superbits[20].unlocked) {
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.BitValue);
+    }
+    if (gaming.superbits[11].unlocked) {
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.ExpMulti);
+    }
+    if (gaming.superbits[16].unlocked) {
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.SkillExp);
+    }
+    if (sneaking.jadeUpgrades[12].purchased) {
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.FarmingExp);
+    }
+    if (sneaking.jadeUpgrades[13].purchased) {
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.JadeCoin);
+    }
+    if (sneaking.jadeUpgrades[14].purchased) {
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.EssenceGain);
+    }
+
+    return worship;
+}
+
 export const updateWorship = (data: Map<string, any>) => {
     const worship = data.get("worship") as Worship;
     const players = data.get("players") as Player[];
     const alchemy = data.get("alchemy") as Alchemy;
     const stamps = data.get("stamps") as Stamp[][];
-    const gaming = data.get("gaming") as Gaming;
-    const sneaking = data.get("sneaking") as Sneaking;
 
     // Reset the data since it will all be calculated in the next section.
     worship.playerData = [];
@@ -248,39 +287,6 @@ export const updateWorship = (data: Map<string, any>) => {
                 playerID: player.playerID
             })
         });
-    }
-
-    worship.totalizer.totalWaves = worship.totemInfo.reduce((sum, totem) => sum += totem.maxWave, 0);
-
-    worship.totalizer.unlockedBonuses = [];
-    
-    if (gaming.superbits[7].unlocked) {
-        worship.totalizer.unlocked = true;
-        worship.totalizer.unlockedBonuses.push(TotalizerBonus.Damage);
-    }
-    if (gaming.superbits[13].unlocked) {
-        worship.totalizer.unlockedBonuses.push(TotalizerBonus.Cooking);
-    }
-    if (gaming.superbits[3].unlocked) {
-        worship.totalizer.unlockedBonuses.push(TotalizerBonus.BoatSpeed);
-    }
-    if (gaming.superbits[20].unlocked) {
-        worship.totalizer.unlockedBonuses.push(TotalizerBonus.BitValue);
-    }
-    if (gaming.superbits[11].unlocked) {
-        worship.totalizer.unlockedBonuses.push(TotalizerBonus.ExpMulti);
-    }
-    if (gaming.superbits[16].unlocked) {
-        worship.totalizer.unlockedBonuses.push(TotalizerBonus.SkillExp);
-    }
-    if (sneaking.jadeUpgrades[12].purchased) {
-        worship.totalizer.unlockedBonuses.push(TotalizerBonus.FarmingExp);
-    }
-    if (sneaking.jadeUpgrades[13].purchased) {
-        worship.totalizer.unlockedBonuses.push(TotalizerBonus.JadeCoin);
-    }
-    if (sneaking.jadeUpgrades[14].purchased) {
-        worship.totalizer.unlockedBonuses.push(TotalizerBonus.EssenceGain);
     }
 
     const bestWizard = players.filter(player => [ClassIndex.Wizard, ClassIndex.Elemental_Sorcerer].includes(player.classId)).sort((player1, player2) => player1.getTalentMaxLevel(475) > player2.getTalentMaxLevel(475) ? -1 : 1)[0];

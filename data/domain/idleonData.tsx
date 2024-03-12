@@ -16,7 +16,7 @@ import { SaltLick } from './saltLick';
 import { Printer, updatePrinter } from './printer';
 import { TaskBoard } from './tasks';
 import { Cloudsave } from './cloudsave';
-import { Worship, updateWorship } from './worship';
+import { Worship, updateWorship, updateWorshipTotalizer } from './worship';
 import { Construction, updateConstruction } from './construction';
 import { updateCards, Cards } from './cards';
 import { Arcade, updateArcade } from './arcade';
@@ -201,6 +201,7 @@ const postProcessingMap: Record<string, Function> = {
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStamps(accountData),
     "divinity": (doc: Cloudsave, accountData: Map<string, any>) => updateDivinity(accountData),
     "forge": (doc: Cloudsave, accountData: Map<string, any>) => updateForge(accountData.get("forge"), accountData.get("gems")),
+    "worshipTotalizer": (doc: Cloudsave, accountData: Map<string, any>) => updateWorshipTotalizer(accountData),
     "cooking": (doc: Cloudsave, accountData: Map<string, any>) => updateCooking(accountData),
     "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateSailing(accountData),
     "breeding": (doc: Cloudsave, accountData: Map<string, any>) => updateBreeding(accountData),
